@@ -7,24 +7,17 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * The Artisan commands provided by your application.
-     *
-     * @var array
-     */
+
     protected $commands = [
-        \App\Console\Commands\Inspire::class,
+        \App\Console\Commands\StatsAccess::class,
+        \App\Console\Commands\StatsContent::class,
+        \App\Console\Commands\StatsFlag::class,
+        \App\Console\Commands\StatsFlagDetails::class,
+        \App\Console\Commands\StatsGeneral::class,
+        \App\Console\Commands\StatsMessages::class,
+        \App\Console\Commands\StatsTaxonomy::class,
+        \App\Console\Commands\StatsUsersOld::class,
+        \App\Console\Commands\StatsUsersNew::class,
     ];
 
-    /**
-     * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
-     */
-    protected function schedule(Schedule $schedule)
-    {
-        $schedule->command('inspire')
-                 ->hourly();
-    }
 }
