@@ -10,7 +10,7 @@
 
     <h3><a href="/content/{{ $content->id }}">{{ $content->title }}</a></h3>
     <p>
-        by @include('user.show', ['user' => $content->user])
+        by @include('user.item', ['user' => $content->user])
         at {{ $content->created_at->format('d.m.Y') }}
         ({{ count($content->comments) }},
         latest at {{ $content->updated_at->format('d. m Y') }})

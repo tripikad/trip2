@@ -6,7 +6,7 @@
 
 @section('content')
 
-  <p>@include('user.show', ['user' => $content->user])</p>
+  <p>@include('user.item', ['user' => $content->user])</p>
 
   {!! nl2br($content->body) !!}
 
