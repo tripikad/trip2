@@ -11,7 +11,10 @@ class ConvertMiscs extends ConvertBase
 
         foreach($nodes as $node)
         {
-            $this->convertNode($node, '\App\Content', 'misc');
+
+            $node->title = 'MISC: '. $node->title;
+
+            $this->convertNode($node, '\App\Content', 'forum');
 
             $this->convertNodeDestinations($node);
             $this->convertNodeTopics($node);
@@ -29,7 +32,9 @@ class ConvertMiscs extends ConvertBase
 
         foreach($nodes as $node)
         {
-            $this->convertNode($node, '\App\Content', 'misc');
+            $node->title = 'REISIVEEB: '. $node->title;
+
+            $this->convertNode($node, '\App\Content', 'forum');
 
             $this->convertNodeDestinations($node);
             $this->convertNodeTopics($node);

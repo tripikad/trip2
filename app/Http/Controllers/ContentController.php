@@ -15,7 +15,10 @@ class ContentController extends Controller
             ->latest()
             ->simplePaginate(25);
     
-        return \View::make("content.$type.index", compact('contents'))->render();
+        return \View::make("content.$type.index")
+            ->with('title', config("content.types.$type.title"))
+            ->with('contents', $contents)
+            ->render();
     
     }
 
