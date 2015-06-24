@@ -1,1 +1,1 @@
-by {{ $user->name }}
+{{ $user->name }}

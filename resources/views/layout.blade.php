@@ -8,12 +8,13 @@
             }
             a {
                 color: CadetBlue;
+                text-decoration: none;
             }
             p {
                 line-height: 1.3em;
                 margin-bottom: 0.5em;
             }
-            
+
         </style>
     </head>
     <body>

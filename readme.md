@@ -16,3 +16,4 @@ Experimental sandbox.
 ### Views
 
 - nl2br to models
+- date: partial? model?
