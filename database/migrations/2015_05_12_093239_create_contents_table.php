@@ -13,6 +13,8 @@ class CreateContentsTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->string('type');
+            $table->string('image');
+            $table->string('url');
             $table->timestamps();
         });
     }

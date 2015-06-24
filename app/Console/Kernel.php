@@ -12,6 +12,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ConvertTerms::class,
         \App\Console\Commands\ConvertForums::class,
         \App\Console\Commands\ConvertMiscs::class,
+        \App\Console\Commands\ConvertBlogs::class,
 
         \App\Console\Commands\StatsAccess::class,
         \App\Console\Commands\StatsContent::class,

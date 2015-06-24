@@ -1,16 +1,8 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+get('content/index/{type}', 'ContentController@index')
+    ->where([
+        'type' => config('content.allowed')
+]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+get('content/{id}', 'ContentController@show');

@@ -365,14 +365,13 @@ class ConvertBase extends Command
     public function convertUrl($nid, $url)
     {
 
-        $model = new \App\Url;
+        $model = \App\Content::findOrFail($nid);
 
-        $model->content_id = $nid;
         $model->url = $url;
 
         $model->save();
     
-        // $this->line(str_limit($model->url, 20) . ' ' . $model->id . ' added');    
+        $this->line(str_limit($model->url, 20) . ' ' . $model->id . ' added');    
 
     }
 

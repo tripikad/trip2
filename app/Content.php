@@ -27,7 +27,7 @@ class Content extends Model
         return $this->belongsToMany('App\Topic');
     }
 
-    public function carrier()
+    public function carriers()
     {
         return $this->belongsToMany('App\Carrier');
     }
