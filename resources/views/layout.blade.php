@@ -1,28 +1,22 @@
+<!DOCTYPE html>
 <html>
     <head>
-        <title>@yield('title')</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <style>
             body {
-                font-family: sans-serif;
-                padding: 25px;
             }
-            a {
-                color: CadetBlue;
-                text-decoration: none;
-            }
-            p {
-                line-height: 1.3em;
-                margin-bottom: 0.5em;
-            }
-
         </style>
+        <title>@yield('title')</title>
     </head>
     <body>
-        <h1>Trip2</h1>
+        <div class="container">
+            <h1>Trip2</h1>
 
-        <h2>@yield('title')</h2>
-            
-        @yield('content')
-    
+            <h2>@yield('title')</h2>
+                
+            @yield('content')
+        </div>
     </body>
 </html>
