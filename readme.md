@@ -6,12 +6,15 @@ Experimental sandbox.
 
 ### Convert
 
-- misc -> 500x term
+- misc -> new term
 - filter frontimg tag from blog posts
 - Reisiveeb?
 - /uurimus|küsitlus|uuring term/
 - /töö/
 - paths
+
+- messages
+- subcriptions
 
 ### Routes
 
