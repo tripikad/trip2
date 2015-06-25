@@ -21,10 +21,19 @@ return [
             'latest' => 'created_at',
             'paginate' => '25'
     
-        ]
+        ],
+
+        'travelmate' => [
     
+            'title' => 'Travelmates',
+            'with' => ['user'],
+            'latest' => 'created_at',
+            'paginate' => '24'
+    
+        ]
+
     ],
 
-    'allowed' => '(forum|blog)'
+    'allowed' => '(forum|blog|travelmate)'
 
 ];

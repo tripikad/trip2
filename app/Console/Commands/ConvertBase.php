@@ -339,14 +339,12 @@ class ConvertBase extends Command
         $model->created_at = \Carbon\Carbon::createFromTimeStamp($user->created);  
         $model->updated_at = \Carbon\Carbon::createFromTimeStamp($user->access);  
        
-        if ($user->picture)
-        {
-            $model->image = basename($user->picture);
-            $this->convertImage($user->picture, 'user');
-        }
-        
         $model->save();
 
+        if ($user->picture)
+        {
+            $this->convertImage($user->uid, $user->picture, '\App\User', 'user');
+        }
     }
 
 
@@ -369,15 +367,19 @@ class ConvertBase extends Command
         $model = $modelName::findOrFail($id);
 
         $model->url = $url;
-        $model->updated_at = $model->updated_at;
 
         $model->save();
     
     }
 
-    public function convertImage($image, $type)
+    public function convertImage($id, $image, $modelName, $type)
     {
 
+        $model = $modelName::findOrFail($id);
+
+        $model->image = basename($image);
+
+        $model->save();
 
         $from = 'http://trip.ee/' . $image;
         $to = public_path() . '/images/' . $type . 's/' . basename($image);
