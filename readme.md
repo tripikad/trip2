@@ -35,6 +35,7 @@ Experimental sandbox.
 - nl2br to models
 - date: partial? model?
 - https://laravel-news.com/2014/09/laravel-blade/
+- http://forumsarchive.laravel.io/viewtopic.php?id=13084 (%)
 
 ### Current site
 
