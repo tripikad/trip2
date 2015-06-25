@@ -7,8 +7,8 @@ get('content/index/{type}', 'ContentController@index')
         'type' => config('content.allowed')
 ]);
 
-get('content/{id}', 'ContentController@show');
+//get('content/{id}', 'ContentController@show');
 
 // Users
 
-get('user/{id}', 'UserController@show');
+// get('user/{id}', 'UserController@show');

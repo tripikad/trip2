@@ -339,12 +339,14 @@ class ConvertBase extends Command
         $model->created_at = \Carbon\Carbon::createFromTimeStamp($user->created);  
         $model->updated_at = \Carbon\Carbon::createFromTimeStamp($user->access);  
        
-        $model->save();
-
         if ($user->picture)
         {
-            // $this->convertImage($user->uid, $user->picture, 'user');
+            $model->image = basename($user->picture);
+            $this->convertImage($user->picture, 'user');
         }
+        
+        $model->save();
+
     }
 
 
@@ -355,42 +357,32 @@ class ConvertBase extends Command
             $user = $this->getUser($uid);
             $this->createUser($user);
             
-            // $this->line('User ' . $user->name . ' created');
         }
         
     }
 
     // Fields
 
-    public function convertUrl($nid, $url)
+    public function convertUrl($id, $url, $modelName)
     {
 
-        $model = \App\Content::findOrFail($nid);
+        $model = $modelName::findOrFail($id);
 
         $model->url = $url;
+        $model->updated_at = $model->updated_at;
 
         $model->save();
     
-        $this->line(str_limit($model->url, 20) . ' ' . $model->id . ' added');    
-
     }
 
-    public function convertImage($content_id, $path, $type)
+    public function convertImage($image, $type)
     {
 
-        $model = new \App\Image;
 
-        $model->content_id = $content_id;
-        $model->path = $path;
-
-        $model->save();
-
-        $from = 'http://trip.ee/' . $path;
-        $to = public_path() . '/images/' . $type . 's/' . basename($path);
+        $from = 'http://trip.ee/' . $image;
+        $to = public_path() . '/images/' . $type . 's/' . basename($image);
 
         // $this->copyFile($from, $to);
-
-        //$this->line('Image ' . str_limit($model->path, 20) . ' converted');    
 
     }
 

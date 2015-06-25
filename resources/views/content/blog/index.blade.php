@@ -11,13 +11,13 @@
 
         <div class="row">
 
-            <div class="col-sm-1">
+            <div class="col-sm-2">
                 
                 @include('user.image', ['user' => $content->user])
           
             </div>
             
-            <div class="col-sm-11">
+            <div class="col-sm-10">
                 
                 <h3><a href="/content/{{ $content->id }}">{{ $content->title }}</a></h3>
                 
@@ -29,6 +29,8 @@
                 @include('destination.index', ['destinations' => $content->destinations])
                 @include('topic.index', ['topics' => $content->topics])
                 </p>
+
+                {!! nl2br($content->body) !!}
             
             </div>
 

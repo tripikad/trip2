@@ -12,8 +12,8 @@ class ContentController extends Controller
        
         $contents = \App\Content::whereType($type)
             ->with(config("content.types.$type.with"))
-            ->latest()
-            ->simplePaginate(25);
+            ->latest(config("content.types.$type.latest"))
+            ->simplePaginate(config("content.types.$type.paginate"));
     
         return \View::make("content.$type.index")
             ->with('title', config("content.types.$type.title"))

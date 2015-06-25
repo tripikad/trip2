@@ -6,6 +6,9 @@ Experimental sandbox.
 
 ### Convert
 
+- users: unique name / email ?
+
+- news: convertUrl parameters
 - misc -> new term
 - filter frontimg tag from blog posts
 - Reisiveeb?
@@ -27,9 +30,11 @@ Experimental sandbox.
 
 ### Views
 
+- images
 - blogs
 - nl2br to models
 - date: partial? model?
+- https://laravel-news.com/2014/09/laravel-blade/
 
 ### Current site
 

@@ -21,7 +21,7 @@ class ConvertBlogs extends ConvertBase
 
             if (preg_match_all($pattern, $node->body, $matches))
             {
-                $this->convertUrl($node->nid, $matches[0][0]);
+                $this->convertUrl($node->nid, $matches[0][0], '\App\Content');
             }
 
         }
@@ -37,6 +37,7 @@ class ConvertBlogs extends ConvertBase
 
         foreach($nodes as $node)
         {
+            $node->title = 'FROM FORUM: ' . $node->title;
             $this->convertNode($node, '\App\Content', 'blog');
             
             $this->convertNodeDestinations($node);

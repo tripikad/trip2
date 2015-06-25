@@ -5,7 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <style>
-            body {
+            img {
+                width: 100%;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 0;
             }
         </style>
         <title>@yield('title')</title>
