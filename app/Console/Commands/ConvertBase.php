@@ -481,4 +481,19 @@ class ConvertBase extends Command
 
         return ($this->take / $this->chunk) - 1;
     }
+
+    public function formatTimestamp($timestamp)
+    {
+
+        return \Carbon\Carbon::createFromTimeStamp($timestamp)->toDateTimeString();
+    }
+
+    public function formatDateTime($datetime)
+    {
+        if (! $datetime) return '';
+
+        $el = explode('T', $datetime);
+
+        return \Carbon\Carbon::createFromFormat('Y-m-d', $el[0])->startOfDay()->toDateTimeString();
+    }
 }

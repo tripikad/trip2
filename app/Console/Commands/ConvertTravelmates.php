@@ -21,7 +21,7 @@ class ConvertTravelmates extends ConvertBase
   
             $node->body = join('\n', [
                 $node->body,
-                'STARTS AT: ' . \Carbon\Carbon::createFromTimeStamp($node->field_reisitoimumine_value)->toDateString(),
+                'STARTS AT: ' . $this->formatTimestamp($node->field_reisitoimumine_value),
                 'DURATION: ' . $node->field_reisikestvus_value,  
                 'KIND: ' . $node->field_millistkaaslastsoovidleida_value  
             ]);
