@@ -8,7 +8,7 @@ return [
         'forum' => [
     
             'title' => 'Forum',
-            'with' => ['user', 'comments', 'flags'],
+            'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],
             'latest' => 'updated_at',
             'paginate' => '25'
     
@@ -17,7 +17,7 @@ return [
         'blog' => [
     
             'title' => 'Blogs',
-            'with' => ['user', 'comments'],
+            'with' => ['user', 'comments', 'destinations', 'topics'],
             'latest' => 'created_at',
             'paginate' => '25'
     
@@ -26,7 +26,7 @@ return [
         'travelmate' => [
     
             'title' => 'Travelmates',
-            'with' => ['user'],
+            'with' => ['user', 'destinations', 'topics'],
             'latest' => 'created_at',
             'paginate' => '24'
     
@@ -35,7 +35,7 @@ return [
         'news' => [
     
             'title' => 'News',
-            'with' => [],
+            'with' => ['destinations', 'topics'],
             'latest' => 'created_at',
             'paginate' => '24'
     
@@ -44,13 +44,22 @@ return [
         'flight' => [
     
             'title' => 'Flights',
-            'with' => [],
+            'with' => ['destinations', 'carriers'],
             'latest' => 'created_at',
             'paginate' => '24'
     
+        ],
+
+        'photo' => [
+        
+            'title' => 'Images',
+            'with' => ['user', 'destinations'],
+            'latest' => 'created_at',
+            'paginate' => '24'
+        
         ]
     ],
 
-    'allowed' => '(forum|blog|travelmate|news|flight)'
+    'allowed' => '(forum|blog|travelmate|news|flight|photo)'
 
 ];

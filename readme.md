@@ -15,8 +15,13 @@ Experimental sandbox.
 
 - users: unique name / email ?
 
+- photo
+
+    - type!
+
 - flights:
-    regexp price from the title
+    
+    - regexp price from the title
 
 - misc -> new term
 - expat -> new term
