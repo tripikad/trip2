@@ -8,14 +8,26 @@ class ConvertTravelmates extends ConvertBase
 
     public function convert()
     {
-        $nodes = $this->getNodes('trip_forum_travelmate')->get();
+        $nodes = $this->getNodes('trip_forum_travelmate')
+            ->join('content_field_reisitoimumine', 'content_field_reisitoimumine.nid', '=', 'node.nid')
+            ->join('content_field_reisikestvus', 'content_field_reisikestvus.nid', '=', 'node.nid')
+            ->join('content_field_millistkaaslastsoovidleida', 'content_field_millistkaaslastsoovidleida.nid', '=', 'node.nid')
+            ->get();
 
         foreach($nodes as $node)
         {   
   
+            $node->body = $node->body . join('\n', [
+                '',
+                'STARTS AT: ' . \Carbon\Carbon::createFromTimeStamp($node->field_reisitoimumine_value)->toDateString(),
+                'DURATION: ' . $node->field_reisikestvus_value,  
+                'KIND: ' . $node->field_millistkaaslastsoovidleida_value  
+            ]);
+
             $this->convertNode($node, '\App\Content', 'travelmate');
             
             $this->convertNodeDestinations($node);
+            $this->convertNodeTopics($node);
 
         }
     }
@@ -28,19 +40,12 @@ class ConvertTravelmates extends ConvertBase
 }
 
 /*
-content_field_reisitoimumine:
-field_reisitoimumine_value (timestamp)
 
-content_field_reisikestvus:
-field_reisikestvus_value
-    
-content_field_millistkaaslastsoovidleida:      
-field_millistkaaslastsoovidleida
-|
-Kõik sobib
-Mees
-Naine
-(+ ignore other values)
+field_millistkaaslastsoovidleida_value:
+    Kõik sobib
+    Mees
+    Naine
+    others
 
 Reisistiil vid 5 
 

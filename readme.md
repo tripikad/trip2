@@ -8,6 +8,7 @@ Experimental sandbox.
 
 - users: unique name / email ?
 
+- travelmate: convertTravelmateDetails()
 - news: convertUrl parameters
 - misc -> new term
 - filter frontimg tag from blog posts
@@ -30,12 +31,12 @@ Experimental sandbox.
 
 ### Views
 
-- images
-- blogs
+- travelmate
+    - user image to travelmate show
+    - other metadata
 - nl2br to models
 - date: partial? model?
-- https://laravel-news.com/2014/09/laravel-blade/
-- http://forumsarchive.laravel.io/viewtopic.php?id=13084 (%)
+- https://laravel-news.com/2014/09/laravel-blade/ ?
 
 ### Current site
 

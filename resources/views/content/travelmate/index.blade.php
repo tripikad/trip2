@@ -12,10 +12,13 @@
 
             <div class="col-sm-3">
 
-                @include('user.image', ['user' => $content->user])
+                @include('user.image', ['user' => $content->user, 'nolink' => true])
                 
-                <h4><a href="/content/{{ $content->id }}">{{ $content->title }}</a></h4>
-                            
+                <h4>{{ $content->title }}</h4>
+                
+                @include('destination.index', ['destinations' => $content->destinations])
+                @include('topic.index', ['topics' => $content->topics])
+
             </div>
 
             @if (($index + 1) % 4 == 0) </div><div class="row"> @endif
