@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ConvertBlogs::class,
         \App\Console\Commands\ConvertTravelmates::class,
         \App\Console\Commands\ConvertNews::class,
+        \App\Console\Commands\ConvertFlights::class,
 
         \App\Console\Commands\StatsAccess::class,
         \App\Console\Commands\StatsContent::class,

@@ -39,10 +39,18 @@ return [
             'latest' => 'created_at',
             'paginate' => '24'
     
-        ]
+        ],
 
+        'flight' => [
+    
+            'title' => 'Flights',
+            'with' => [],
+            'latest' => 'created_at',
+            'paginate' => '24'
+    
+        ]
     ],
 
-    'allowed' => '(forum|blog|travelmate|news)'
+    'allowed' => '(forum|blog|travelmate|news|flight)'
 
 ];

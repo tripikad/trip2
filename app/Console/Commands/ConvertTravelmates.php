@@ -1,4 +1,6 @@
-<?php namespace App\Console\Commands;
+<?php
+
+namespace App\Console\Commands;
 
 class ConvertTravelmates extends ConvertBase
 {
@@ -17,8 +19,8 @@ class ConvertTravelmates extends ConvertBase
         foreach($nodes as $node)
         {   
   
-            $node->body = $node->body . join('\n', [
-                '',
+            $node->body = join('\n', [
+                $node->body,
                 'STARTS AT: ' . \Carbon\Carbon::createFromTimeStamp($node->field_reisitoimumine_value)->toDateString(),
                 'DURATION: ' . $node->field_reisikestvus_value,  
                 'KIND: ' . $node->field_millistkaaslastsoovidleida_value  

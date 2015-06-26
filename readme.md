@@ -11,6 +11,9 @@ Experimental sandbox.
 
 - users: unique name / email ?
 
+- flights:
+    regexp price from the title
+    
 - travelmate: convertTravelmateDetails()
 - news: convertUrl parameters
 - misc -> new term
