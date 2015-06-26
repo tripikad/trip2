@@ -29,7 +29,7 @@ class Content extends Model
 
     public function carriers()
     {
-        return $this->belongsToMany('App\Carrier');
+        return $this->belongsToMany('App\Carrier', 'content_carrier');
     }
 
    public function flags()
