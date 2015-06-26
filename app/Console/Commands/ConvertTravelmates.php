@@ -40,15 +40,3 @@ class ConvertTravelmates extends ConvertBase
     }
 
 }
-
-/*
-
-field_millistkaaslastsoovidleida_value:
-    Kõik sobib
-    Mees
-    Naine
-    others
-
-Reisistiil vid 5 
-
-*/

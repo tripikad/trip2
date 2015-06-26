@@ -14,7 +14,7 @@
                 
                 <h4>{{ $content->title }}</h4>
                 
-                {{--@include('carrier.index', ['carrier' => $content->carrier])--}}
+               {{-- @include('carrier.index', ['carriers' => $content->carriers]) --}}
 
                 @include('destination.index', ['destinations' => $content->destinations])
                 @include('topic.index', ['topics' => $content->topics])

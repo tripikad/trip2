@@ -4,32 +4,41 @@ Experimental sandbox.
 
 ## Todo
 
+### Urgent 
+
+- carrier_content !
+
 ### Convert
 
-- convertNode
-    - $node->body = trim($node->body);
+- missing:
+
+    - photos
+    - offers
+    - buysell
+    - editor
 
 - users: unique name / email ?
 
 - flights:
     regexp price from the title
-    
-- travelmate: convertTravelmateDetails()
-- news: convertUrl parameters
+
 - misc -> new term
+- expat -> new term
+- buysell -> new term
+
 - filter frontimg tag from blog posts
 - Reisiveeb?
 - /uurimus|küsitlus|uuring term/
 - /töö/
-- paths
 
+- paths
 - messages
 - subcriptions
 
 ### Routes
 
 - content/index/{type} > content/{type}/all
-- content/{id} > content/{id} // resouce controller?
+- content/{id} > content/{type}/{id} // resouce controller?
 
 ### Controllers
 
@@ -37,12 +46,15 @@ Experimental sandbox.
 
 ### Views
 
+- partials _ vs index vs list vs element ...
 - travelmate
-    - user image to travelmate show
+    - user image links to show
     - other metadata
-- nl2br to models
 - date: partial? model?
-- https://laravel-news.com/2014/09/laravel-blade/ ?
+
+### Models
+
+- nl2br to body
 
 ### Current site
 
