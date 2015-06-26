@@ -11,12 +11,13 @@ class ConvertBase extends Command
 
     protected $connection = 'trip';
 
-    protected $client;
-
-    protected $take = 100;
-    protected $chunk = 100;
-
+    protected $take = 50;
+    protected $chunk = 50;
     protected $skip = 0;
+
+    protected $copyFiles = true;
+
+    protected $client;
 
     public function __construct()
     {
@@ -53,8 +54,8 @@ class ConvertBase extends Command
             $model->id = $node->nid;
             $model->type = $type;
             $model->user_id = $node->uid;
-            $model->title = $node->title;
-            $model->body = $node->body;
+            $model->title = trim($node->title);
+            $model->body = trim($node->body);
             $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);  
             $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment); 
 
@@ -343,7 +344,7 @@ class ConvertBase extends Command
 
         if ($user->picture)
         {
-            $this->convertImage($user->uid, $user->picture, '\App\User', 'user');
+            $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'users');
         }
     }
 
@@ -372,22 +373,45 @@ class ConvertBase extends Command
     
     }
 
-    public function convertImage($id, $image, $modelName, $type)
+    public function convertLocalImage($id, $imagePath, $modelName, $type)
     {
 
         $model = $modelName::findOrFail($id);
 
-        $model->image = basename($image);
+        $model->image = basename($imagePath);
 
         $model->save();
 
-        $from = 'http://trip.ee/' . $image;
-        $to = public_path() . '/images/' . $type . 's/' . basename($image);
+        $from = 'http://trip.ee/' . $imagePath;
+        $to = public_path() . '/images/' . $type . '/' . basename($imagePath);
 
-        // $this->copyFile($from, $to);
+        if ($this->copyFiles) {
 
+            $this->copyFile($from, $to);
+        }
     }
 
+    public function convertRemoteImage($id, $imageUrl, $modelName, $type)
+    {
+
+        $ext = pathinfo($imageUrl)['extension'];
+        $imageFile = $type . '-' . $id . '.' . $ext;
+
+        $model = $modelName::findOrFail($id);
+
+        $model->image = $imageFile;
+
+        $model->save();
+
+        $from = $imageUrl;
+        $to = public_path() . '/images/' . $type . '/' . $imageFile;
+
+        if ($this->copyFiles) {
+        
+            $this->copyFile($from, $to);
+        
+        }
+    }
 
 
     // Flags

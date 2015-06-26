@@ -30,10 +30,19 @@ return [
             'latest' => 'created_at',
             'paginate' => '24'
     
+        ],
+
+        'news' => [
+    
+            'title' => 'News',
+            'with' => [],
+            'latest' => 'created_at',
+            'paginate' => '24'
+    
         ]
 
     ],
 
-    'allowed' => '(forum|blog|travelmate)'
+    'allowed' => '(forum|blog|travelmate|news)'
 
 ];

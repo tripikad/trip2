@@ -10,9 +10,12 @@
   
         @foreach ($contents as $index => $content)
 
-            <div class="col-sm-3">
+            <div class="col-sm-4">
 
-                @include('user.image', ['user' => $content->user, 'nolink' => true])
+                @include('image.item', [
+                    'image' => '/images/news/' . $content->image,
+                    'nolink' => true
+                ])
                 
                 <h4>{{ $content->title }}</h4>
                 
@@ -21,7 +24,7 @@
 
             </div>
 
-            @if (($index + 1) % 4 == 0) </div><div class="row"> @endif
+            @if (($index + 1) % 3 == 0) </div><div class="row"> @endif
 
         @endforeach
 

@@ -6,6 +6,9 @@ Experimental sandbox.
 
 ### Convert
 
+- convertNode
+    - $node->body = trim($node->body);
+
 - users: unique name / email ?
 
 - travelmate: convertTravelmateDetails()
