@@ -12,15 +12,11 @@
 
             <div class="col-sm-4">
 
-                @include('image.item', [
-                    'image' => '/images/photos/' . $content->image,
-                    'nolink' => true
-                ])
-                
+                @include('image.landscape', ['image' => $content->imagePath()])
+
                 <h4>{{ $content->title }}</h4>
                 
                 @include('destination.index', ['destinations' => $content->destinations])
-                @include('topic.index', ['topics' => $content->topics])
 
             </div>
 

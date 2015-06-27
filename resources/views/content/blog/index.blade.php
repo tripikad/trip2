@@ -13,7 +13,9 @@
 
             <div class="col-sm-2">
                 
-                @include('user.image', ['user' => $content->user])
+                <a href="/user/{{ $content->user->id }}">
+                    @include('image.circle', ['image' => $content->user->imagePath()])
+                </a>
           
             </div>
             

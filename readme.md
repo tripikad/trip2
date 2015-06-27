@@ -6,8 +6,11 @@ Experimental sandbox.
 
 ### Convert
 
+- double run on taxonomy relations!
+
 - missing:
 
+    - all
     - offers
     - buysell
     - editor
@@ -48,7 +51,6 @@ Experimental sandbox.
 
 - new image stuff
 
-    - blog
     - photo
     - flight?
 

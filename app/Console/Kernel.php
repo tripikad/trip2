@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ConvertFlights::class,
         \App\Console\Commands\ConvertExpats::class,
         \App\Console\Commands\ConvertPhotos::class,
+        \App\Console\Commands\ConvertBuysells::class,
 
         \App\Console\Commands\StatsAccess::class,
         \App\Console\Commands\StatsContent::class,
