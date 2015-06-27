@@ -15,4 +15,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $fillable = ['name', 'email', 'password'];
 
     protected $hidden = ['password', 'remember_token'];
+
+    public function imagePath()
+    {
+        return $this->image ? '/images/users/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
+    }
+
 }
