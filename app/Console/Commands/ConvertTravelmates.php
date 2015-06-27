@@ -19,11 +19,11 @@ class ConvertTravelmates extends ConvertBase
         foreach($nodes as $node)
         {   
   
-            $node->body = join('\n', [
+            $node->body = join('\r\n', [
+                $node->body,
                 'STARTS AT: ' . $this->formatTimestamp($node->field_reisitoimumine_value),
                 'DURATION: ' . $node->field_reisikestvus_value,  
                 'KIND: ' . $node->field_millistkaaslastsoovidleida_value  
-                $node->body,
             ]);
 
             $this->convertNode($node, '\App\Content', 'travelmate');

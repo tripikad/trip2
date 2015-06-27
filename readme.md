@@ -4,7 +4,7 @@ Experimental sandbox.
 
 ## Todo
 
-### Convert
+### Convert #1
 
 - double run on taxonomy relations!
 
@@ -12,24 +12,22 @@ Experimental sandbox.
 
     - all
     - offers
-    - buysell
     - editor
 
-- users: unique name / email ?
+- filter frontimg tag from blog posts
 
-- photo
+### Convert #2
 
-    - type!
+- photo: Mitte-reisipildid?
 
 - flights:
     
     - regexp price from the title
 
-- misc -> new term
-- expat -> new term
-- buysell -> new term
+- misc -> new term?
+- expat -> new term?
+- buysell -> new term?
 
-- filter frontimg tag from blog posts
 - Reisiveeb?
 - /uurimus|küsitlus|uuring term/
 - /töö/
@@ -37,6 +35,11 @@ Experimental sandbox.
 - paths
 - messages
 - subcriptions
+
+### DB
+
+- users: unique name / email ?
+- foreign keys
 
 ### Routes
 
@@ -49,18 +52,14 @@ Experimental sandbox.
 
 ### Views
 
-- new image stuff
+- user.image
 
-    - photo
-    - flight?
-
-- user
-    - remove image width hack
-    - title
 - partials _ vs index vs list vs element ...
+
 - travelmate
     - user image links to show
     - other metadata
+
 - date: partial? model?
 
 ### Models
