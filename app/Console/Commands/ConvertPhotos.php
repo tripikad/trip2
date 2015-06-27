@@ -23,7 +23,7 @@ class ConvertPhotos extends ConvertBase
 
             if ($node->filepath) {
 
-                $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'photos');
+                $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'photo');
             }
 
         }

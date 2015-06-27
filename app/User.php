@@ -18,7 +18,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function imagePath()
     {
-        return $this->image ? '/images/users/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
+        return $this->image ? '/images/user/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
     }
 
 }

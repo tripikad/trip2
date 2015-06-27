@@ -37,4 +37,8 @@ class Content extends Model
        return $this->morphMany('App\Flag', 'flaggable');
    }
 
+    public function imagePath()
+    {
+        return $this->image ? '/images/' . $this->type . '/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
+    }
 }

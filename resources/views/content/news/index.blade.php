@@ -12,10 +12,7 @@
 
             <div class="col-sm-4">
 
-                @include('image.item', [
-                    'image' => '/images/news/' . $content->image,
-                    'nolink' => true
-                ])
+                @include('image.landscape', ['image' => $content->imagePath()])
                 
                 <h4>{{ $content->title }}</h4>
                 
