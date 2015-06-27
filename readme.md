@@ -45,10 +45,13 @@ Experimental sandbox.
 - cache?
 
 ### Views
-- image
-    - square
-    - portrait
-    - landscape
+
+- new image stuff
+
+    - blog
+    - photo
+    - flight?
+
 - user
     - remove image width hack
     - title

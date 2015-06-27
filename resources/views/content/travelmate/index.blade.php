@@ -12,7 +12,7 @@
 
             <div class="col-sm-3">
 
-                @include('user.image', ['user' => $content->user, 'nolink' => true])
+                @include('image.square', ['image' => $content->user->imagePath()])
                 
                 <h4>{{ $content->title }}</h4>
                 
