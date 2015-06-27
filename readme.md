@@ -8,7 +8,6 @@ Experimental sandbox.
 
 - missing:
 
-    - photos
     - offers
     - buysell
     - editor
@@ -46,7 +45,13 @@ Experimental sandbox.
 - cache?
 
 ### Views
-
+- image
+    - square
+    - portrait
+    - landscape
+- user
+    - remove image width hack
+    - title
 - partials _ vs index vs list vs element ...
 - travelmate
     - user image links to show

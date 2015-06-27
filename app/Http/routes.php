@@ -11,4 +11,4 @@ get('content/index/{type}', 'ContentController@index')
 
 // Users
 
-// get('user/{id}', 'UserController@show');
+get('user/{id}', 'UserController@show');
