@@ -14,7 +14,7 @@ class ConvertMiscs extends ConvertBase
         foreach($nodes as $node)
         {
 
-            $node->title = $node->title . ', vabal teema';
+            $node->title = $node->title . ', vabal teemal';
 
             $this->convertNode($node, '\App\Content', 'forum');
 
