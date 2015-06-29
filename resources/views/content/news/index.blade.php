@@ -12,6 +12,12 @@
 
             <div class="col-sm-4">
 
+                    @include('component.card', [
+                        'image' => $content->imagePath(),
+                        'title' => $content->title,
+                    ])
+
+            {{--
                 <div style="margin: 1em 0;">
                     @include('image.landscape', ['image' => $content->imagePath()])
                 </div>
@@ -22,6 +28,7 @@
                 @include('destination.index', ['destinations' => $content->destinations])
                 @include('topic.index', ['topics' => $content->topics])
                 </p>
+            --}}
 
             </div>
 

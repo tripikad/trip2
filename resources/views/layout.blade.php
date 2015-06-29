@@ -21,7 +21,7 @@
                 margin-top: 0;
                 font-weight: bold;
                 font-family: 'Lato', sans-serif;
-                line-height: 1.4em;
+                line-height: 1.3em;
             }
             h1 {
                 text-transform: uppercase;

@@ -52,6 +52,8 @@ Experimental sandbox.
 
 ### Views
 
+- photos to components?
+
 - user.image
 
 - partials _ vs index vs list vs element ...
@@ -65,6 +67,7 @@ Experimental sandbox.
 ### Models
 
 - nl2br to body
+- image accessor vs fallback
 
 ### Current site
 
