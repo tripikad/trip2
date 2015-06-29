@@ -57,9 +57,19 @@ return [
             'latest' => 'created_at',
             'paginate' => '24'
         
+        ],
+
+        'offer' => [
+        
+            'title' => 'Offers',
+            'with' => ['user', 'destinations'],
+            'latest' => 'created_at',
+            'paginate' => '24'
+        
         ]
+
     ],
 
-    'allowed' => '(forum|blog|travelmate|news|flight|photo)'
+    'allowed' => '(forum|blog|travelmate|news|flight|photo|offer)'
 
 ];

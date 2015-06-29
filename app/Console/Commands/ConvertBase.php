@@ -15,7 +15,7 @@ class ConvertBase extends Command
     protected $chunk = 50;
     protected $skip = 0;
 
-    protected $copyFiles = false;
+    protected $copyFiles = true;
 
     protected $client;
 
@@ -485,15 +485,29 @@ class ConvertBase extends Command
     public function formatTimestamp($timestamp)
     {
 
+        if (! $timestamp) return null;
+
         return \Carbon\Carbon::createFromTimeStamp($timestamp)->toDateTimeString();
     }
 
     public function formatDateTime($datetime)
     {
-        if (! $datetime) return '';
+        if (! $datetime) return null;
 
         $el = explode('T', $datetime);
 
         return \Carbon\Carbon::createFromFormat('Y-m-d', $el[0])->startOfDay()->toDateTimeString();
     }
+
+    public function formatFields($node, $fields)
+    {
+    
+        return  join("\n", array_map(function($field) use ($node) {
+        
+            return '<strong>' . $field . '</strong>: ' . $node->$field;
+    
+        }, $fields));
+    
+    }
+
 }

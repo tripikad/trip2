@@ -1,3 +1,5 @@
+@if (count($comments))
+
 <hr />
 
 <p class="text-center">
@@ -40,3 +42,4 @@
 
 @endforeach
 
+@endif

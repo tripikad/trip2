@@ -72,3 +72,5 @@ Experimental sandbox.
 ### Current site
 
 - watchdog logging (search)?
+
+http://stackoverflow.com/questions/26145711/issue-with-npm-install-after-setting-up-angularjs-project-with-yeoman
