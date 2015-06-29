@@ -27,15 +27,16 @@ class ConvertFlights extends ConvertBase
         foreach($nodes as $node)
         {
 
-            $node->body = join('\r\n', [
-                $node->body,
-                'FLIGHT ORIGIN: ' . $node->field_originatingcities_value,
-                'SALES FROM: ' . $this->formatDateTime($node->field_salesperiod_value),
-                'SALES TO: ' . $this->formatDateTime($node->field_salesperiod_value),
-                'FLIGHT FROM: ' . $this->formatDateTime($node->field_flightperiod_value),
-                'FLIGHT TO: ' . $this->formatDateTime($node->field_flightperiod_value2),
-                'TRIP COMMENT: ' . $node->field_tripeecomment_value,
-            ]);
+            $fields = [
+                'field_salesperiod_value',
+                'field_salesperiod_value2',
+                'field_flightperiod_value',
+                'field_flightperiod_value2',
+                'field_originatingcities_value',
+                'field_tripeecomment_value',
+            ];
+
+            $node->body = $this->formatFields($node, $fields) . "\n\n" . $node->body;
 
             $this->convertNode($node, 'App\Content', 'flight');
 

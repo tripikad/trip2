@@ -12,10 +12,14 @@
 
             <div class="col-sm-4">
 
-                @include('component.card', [
-                    'title' => $content->title,
+                <a href="/content/{{ $content->id }}">
 
-                ])
+                    @include('component.card', [
+                        'title' => $content->title,
+
+                    ])
+                
+                </a>
 
                 {{--
                 @include('carrier.index', ['carriers' => $content->carriers])

@@ -12,19 +12,16 @@
 
             <div class="col-sm-3">
 
-                @include('component.card', [
-                    'image' => $content->user->imagePathOnly(),
-                    'title' => null,
-                    'subtitle' => $content->user->name,
-                    'text' => $content->title,
-                ])
+                <a href="/content/{{ $content->id }}">
 
-                {{--
-                <p>
-                    @include('destination.index', ['destinations' => $content->destinations])
-                    @include('topic.index', ['topics' => $content->topics])
-                </p>
-                --}}
+                    @include('component.card', [
+                        'image' => $content->user->imagePathOnly(),
+                        'title' => null,
+                        'subtitle' => $content->user->name,
+                        'text' => $content->title,
+                    ])
+
+                </a>
 
             </div>
 

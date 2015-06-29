@@ -16,22 +16,7 @@ class ConvertOffers extends ConvertBase
             ->get();
 
         foreach($nodes as $node)
-        {   /*
-            $node->body = join('\n\n', [
-                'field_date_duration_value: ' . $node->field_date_duration_value,
-                'field_date_end_value: ' . $node->field_date_end_value,
-                'field_date_expire_comp_value: ' . $node->field_date_expire_comp_value,
-                'field_price_value' . $node->field_price_value,
-
-              $node->field_description_value,
-              $node->field_text_additional_value,
-              $node->field_text_extras_value,    
-              $node->field_text_included_value,
-              $node->field_text_itinerary_value,
-
-            ]);
-            return 
-            */
+        {   
             
             $locationMap = [
                 1 => 'Eestist',
@@ -90,13 +75,7 @@ class ConvertOffers extends ConvertBase
                 'field_text_itinerary_value',
 
             ];
-/*
-            $fields = join("\n", array_map(function($key) use ($node) {
-                
-                return $key . ': ' . $node->$key;
-            
-            }, $keys));
-*/
+
             $node->body = $this->formatFields($node, $fields) . "\n\n" . $node->body;
             
             $this->convertNode($node, '\App\Content', 'offer');

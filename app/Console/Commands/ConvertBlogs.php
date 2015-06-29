@@ -37,7 +37,7 @@ class ConvertBlogs extends ConvertBase
 
         foreach($nodes as $node)
         {
-            $node->title = 'FROM FORUM: ' . $node->title;
+            $node->title = $node->title . ', foorumist'
             $this->convertNode($node, '\App\Content', 'blog');
             
             $this->convertNodeDestinations($node);
