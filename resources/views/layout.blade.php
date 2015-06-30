@@ -7,7 +7,7 @@
         <link href="{{-- elixir('css/all.css') --}}" rel='stylesheet' type='text/css'>
 
         <link href='http://fonts.googleapis.com/css?family=Lato:900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <style>
@@ -36,13 +36,10 @@
                 margin: 1.5em 0;
             }
             h3 {
-                font-size: 1.6em;
+                font-size: 20px;
             }
             h4 {
-                font-size: 1.4em;
-            }
-            h5 {
-                font-size: 1.2em;
+                font-size: 18px;
             }
                         
         </style>

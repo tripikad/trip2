@@ -14,7 +14,7 @@
                 <a href="/content/{{ $content->id }}">
                     @include('component.card', [
                         'image' => $content->imagePath(),
-                        'title' => $content->id . ' ' . $content->title,
+                        'title' => $content->title,
                     ])
                 </a>
                 {{--

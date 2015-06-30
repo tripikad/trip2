@@ -4,7 +4,7 @@
 
     @foreach ($topics as $topic)
       
-      <em>{{ $topic->name }}</em>
+      <a href="/content/index/forum?topic={{ $topic->id }}">{{ $topic->name }}</a>
 
     @endforeach
 

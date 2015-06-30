@@ -4,7 +4,7 @@
 
     @foreach ($destinations as $destination)
 
-      <em>{{ $destination->name }}</em>
+      <a href="/content/index/forum?destination={{ $destination->id }}">{{ $destination->name }}</a>
 
     @endforeach
 

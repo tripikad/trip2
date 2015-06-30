@@ -30,6 +30,7 @@
         left: 15px;
         bottom: 0;
         padding: 15px;
+        color: #333;
         @if (isset($image))
           color: white;
           letter-spacing: 0.05em;
