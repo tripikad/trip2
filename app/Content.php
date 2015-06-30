@@ -32,13 +32,19 @@ class Content extends Model
         return $this->belongsToMany('App\Carrier', 'content_carrier');
     }
 
-   public function flags()
-   {
+    public function flags()
+    {
+     return $this->morphMany('App\Flag', 'flaggable');
+    }
+
+    public function subscriptions()
+    {
        return $this->morphMany('App\Flag', 'flaggable');
-   }
+    }
 
     public function imagePath()
     {
         return $this->image ? '/images/' . $this->type . '/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
     }
+
 }

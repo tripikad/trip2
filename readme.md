@@ -6,23 +6,17 @@ Experimental sandbox.
 
 ### Convert #1
 
+- Messages:
+    - 7315910 dupes
+    - User +1 ?
+    
 - double run on taxonomy relations!
-
-- missing:
-
-    - all
-    - offers
-    - editor
 
 - filter frontimg tag from blog posts
 
-### Convert #2
-
 - photo: Mitte-reisipildid?
 
-- flights:
-    
-    - regexp price from the title
+- flights: regexp price from the title
 
 - misc -> new term?
 - expat -> new term?
@@ -33,7 +27,6 @@ Experimental sandbox.
 - /töö/
 
 - paths
-- messages
 - subcriptions
 
 ### DB

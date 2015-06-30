@@ -15,34 +15,41 @@ class ConvertMessages extends ConvertBase
     
         return DB::connection($this->connection)
             ->table('pm_message')
-            ->join('pm_index', 'pm_index.mid', '=', 'pm_message.mid')        
-            ->take(10);
+            ->join('pm_index', 'pm_index.mid', '=', 'pm_message.mid')
+            ->latest('timestamp');      
     
     }
     
     public function convertMessages()
     {
-        $nodes = $this->getMessages()->get();
+        $nodes = $this->getMessages()->chunk($this->chunk, function ($nodes) use (&$i) {
+            
+            if ($i++ > $this->chunkLimit()) return false;
 
-        foreach($nodes as $node)
-        {
+            foreach($nodes as $node)
+            {
 
-            $model = new Message;
+                if ($node->author !== $node->uid) {
+        
+                    $model = new Message;
 
-            $model->user_id_from = $node->author;
-            $model->user_id_to = $node->uid;
-            $model->title = $this->scrambleString(trim($node->subject));
-            $model->body = $this->scrambleString(trim($node->body));
-            $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp);  
-            $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp); 
+                    $model->user_id_from = $node->author;
+                    $model->user_id_to = $node->uid;
+                    $model->title = $this->scrambleString(trim($node->subject));
+                    $model->body = $this->scrambleString(trim($node->body));
+                    $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp);  
+                    $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp); 
 
-            $model->save();
+                    $model->save();
 
-            $this->convertUser($node->author);
-            $this->convertUser($node->uid);
+                    $this->convertUser($node->author);
+                    $this->convertUser($node->uid);
+        
+                }
+            }
 
-        }
-
+        });
+    
     }
 
     public function handle()

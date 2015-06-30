@@ -16,6 +16,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $hidden = ['password', 'remember_token'];
 
+    public function messages()
+    {
+        return $this->hasMany('App\Message', 'user_id_to');
+    }
+
+    public function follows()
+    {
+        return $this->hasMany('App\Follow');
+    }
+
     public function imagePath()
     {
         return $this->image ? '/images/user/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';

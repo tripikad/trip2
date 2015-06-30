@@ -1,12 +1,13 @@
 @if (count($comments))
 
+{{--
 <hr />
-
 <p class="text-center">
 
     Topic started at {{ $content->created_at->diffForHumans() }}, has {{ count($comments) }} comments, latest from {{ $comments[count($comments) - 1]->created_at->diffForHumans() }}
 
 </p>
+--}}
 
 @foreach ($comments as $comment)
   

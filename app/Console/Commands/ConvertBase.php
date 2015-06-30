@@ -512,6 +512,7 @@ class ConvertBase extends Command
 
     public function scrambleString($string)
     {
+
         $string = strip_tags($string);
         $output = '';
         for ($i = 0; $i < strlen($string) - 1; $i++) {
@@ -520,6 +521,7 @@ class ConvertBase extends Command
         }
 
         return $output;
+
     }
 
 }

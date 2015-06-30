@@ -34,6 +34,10 @@
         
     </div>
 
+    @include('message.index', ['messages' => $user->messages])
+
+    @include('follows.index', ['follows' => $user->follows])
+
 
 @stop
 
