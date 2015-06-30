@@ -24,6 +24,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ConvertTerms::class,
         \App\Console\Commands\ConvertTravelmates::class,
 
+        \App\Console\Commands\ConvertMessages::class,
+
         \App\Console\Commands\StatsAccess::class,
         \App\Console\Commands\StatsContent::class,
         \App\Console\Commands\StatsFlag::class,

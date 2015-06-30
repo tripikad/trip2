@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 class ConvertMiscs extends ConvertBase
 {
 
-    protected $name = 'convert:miscs';
+    protected $signature = 'convert:miscs';
 
     public function convertMiscNodes()
     {
@@ -44,7 +44,7 @@ class ConvertMiscs extends ConvertBase
         }
     }
 
-    public function fire()
+    public function handle()
     {
         $this->convertMiscNodes();
         $this->convertForumNodes();
