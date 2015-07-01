@@ -1,20 +1,128 @@
-## About
+## TODO
 
-Experimental sandbox.
+- **High priority**
+- Normal priority
+- *Future idea*
 
-## Todo
+### Auth
 
-### Convert #1
+- **Login + legacy passwords**
+- **Register**
+- *Register spam prevention*
+- **Password reminder**
+- **FB login**
+- **Roles**
+- Permissions
+- **Auth Mailers**
+- *Auth tests*
+
+### Security
+
+- **Content sanitization** (input/output)
+
+### Search
+
+- Algolia? $49/m / ES (hosting) / **Zend Search**
+
+### Image
+
+- **Image processing job**
+- **Image URLS**
+- **Image uploads**
+
+### Content
+
+- **Content add/edit/delete forms**
+- **Filtering**
+- Content status: published/unpublished/draft/deleted?
+- Destination and tag autocomplete in filter/edit
+- Previews
+- *Content expiration*
+
+### Movies
+
+- *Movie field on add/edit*
+- *Movie embed*
+
+### Buysell
+
+- Extra fields?
+- Merge with forum?
+
+### Travelmates 
+
+- Extra fields?
+- Expiration
+
+### Flights
+
+- Extra fields?
+- Expiration
+- **Company logos / images**
+
+### Offers
+
+- **Offer display**
+- **Extra fields?**
+- Offer add/edit/delete forms
+- Offer scheduler
+
+### Destinations
+
+- Baum (tree handling)
+
+### Comment
+
+- **Comment add/edit/delete forms**
+- Content status: published/unpublished/draft/deleted?
+
+### Messages
+
+- Message add/edit/delete forms
+- Mailer
+- Message tests with seeds, fix 8991
+- From collections hacks to real SQL
+
+### Follow
+
+- Follow toggle/remove
+- Mailer
+
+### Users
+
+- Commerical users
+
+### Forms
+
+- **Form helper**
+- Date widget
+- Time widget
+- Delete confirmations
+
+### Routes
+
+- complete the routes + auth middleware?
+- content/index/{type} > content/{type}/all
+- content/{id} > content/{type}/{id} // resouce controller?
+
+### Legacy paths
+
+- Redirects
+
+### Ads
+
+- Google DFB / Custom
+- New ad sizes
+
+### Convert
+
+- convert legacy paths
+- convert photo: Mitte-reisipildid?
 
 - limit parameter
 - files parameter
-- Messages:
-    - 8991
-    - seeds
-    - collections -> sql
 - fix double run on taxonomy relations
 - filter frontimg tag from blog posts
-- photo: Mitte-reisipildid?
 - flights: regexp price from the title
 - misc -> new term?
 - expat -> new term?
@@ -23,46 +131,27 @@ Experimental sandbox.
 - /uurimus|küsitlus|uuring term/
 - /töö/
 
-- paths
-
 ### DB
 
 - users: unique name / email ?
 - foreign keys
-
-### Routes
-
-- content/index/{type} > content/{type}/all
-- content/{id} > content/{type}/{id} // resouce controller?
-
-### Controllers
-
-- messages
-- cache?
-
-### Views
-
-- filtering
-- user header 
-- naming: _ vs partials vs index vs list vs element ...
-- date: partial? model?
-- other data on grids
 
 ### Models
 
 - nl2br to body
 - date accessors?
 
-### Packages
+### Views
 
-- Baum
-- Form helper
+- **user header** 
+- naming: _ vs partials vs index vs list vs element ...
+- date: partial? model?
+- other data on grids
+
+### Controllers
+
+- cache
 
 ### npm
 
-- get working
 - bootstap-sass
-
-### Current site
-
-- watchdog logging (search)?
