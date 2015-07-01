@@ -26,8 +26,7 @@ class ConvertMessages extends ConvertBase
             
             if ($i++ > $this->chunkLimit()) return false;
 
-            foreach($nodes as $node)
-            {
+            foreach($nodes as $node) {
 
                 if ($node->author !== $node->uid) {
         

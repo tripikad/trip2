@@ -36,10 +36,10 @@
                 margin: 1.5em 0;
             }
             h3 {
-                font-size: 20px;
+                font-size: 22px;
             }
             h4 {
-                font-size: 18px;
+                font-size: 20px;
             }
                         
         </style>

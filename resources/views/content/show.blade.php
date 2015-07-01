@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-  {{ $content->title }}
+  {{ $title }}
 @stop
 
 @section('content')
@@ -17,8 +17,15 @@
         </div>
 
         <div class="col-sm-10">
-
-            <p>@include('user.item', ['user' => $content->user])</p>
+            
+            <h3><a href="/content/{{ $content->id }}">{{ $content->title }}</a></h3>
+            
+            <p>By
+                <a href="/user/"{{ $content->user->id }}">
+                    {{ $content->user->name }}
+                </a>
+                at {{ $content->updated_at->format('d. m Y H:i:s') }}
+            </p>
 
             <big>{!! nl2br($content->body) !!}</big>
 

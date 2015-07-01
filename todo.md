@@ -7,31 +7,21 @@ Experimental sandbox.
 ### Convert #1
 
 - Messages:
-    - User +1 ?
-    - received: merge convs what only I have sent msg?
+    - 8991
+    - seeds
     - collections -> sql
-
-- Follows
-    - typeMap?
-
-- double run on taxonomy relations!
-
+- fix double run on taxonomy relations
 - filter frontimg tag from blog posts
-
 - photo: Mitte-reisipildid?
-
 - flights: regexp price from the title
-
 - misc -> new term?
 - expat -> new term?
 - buysell -> new term?
-
 - Reisiveeb?
 - /uurimus|küsitlus|uuring term/
 - /töö/
 
 - paths
-- subcriptions
 
 ### DB
 
@@ -45,29 +35,32 @@ Experimental sandbox.
 
 ### Controllers
 
+- messages
 - cache?
 
 ### Views
 
-- photos to components?
-
-- user.image
-
-- partials _ vs index vs list vs element ...
-
-- travelmate
-    - user image links to show
-    - other metadata
-
+- filtering
+- user header 
+- naming: _ vs partials vs index vs list vs element ...
 - date: partial? model?
+- other data on grids
 
 ### Models
 
 - nl2br to body
-- image accessor vs fallback
+- date accessors?
+
+### Packages
+
+- Baum
+- Form helper
+
+### npm
+
+- get working
+- bootstap-sass
 
 ### Current site
 
 - watchdog logging (search)?
-
-http://stackoverflow.com/questions/26145711/issue-with-npm-install-after-setting-up-angularjs-project-with-yeoman

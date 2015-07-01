@@ -34,7 +34,7 @@
         
     </div>
 
-    @include('message.index', ['messages' => $user->messagesReceived()])
+    @include('message.index', ['messages' => $user->messages()])
 
     @include('follow.index', ['follows' => $user->follows])
 

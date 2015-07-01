@@ -42,7 +42,10 @@ class ContentController extends Controller
         $content = \App\Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers')
             ->findorFail($id);
      
-        return \View::make("content.show", compact('content'))->render();
+        return \View::make("content.show")
+            ->with('title', config("content.types.$content->type.title"))
+            ->with('content', $content)
+            ->render();
     }
 
 

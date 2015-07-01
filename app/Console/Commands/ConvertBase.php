@@ -60,8 +60,7 @@ class ConvertBase extends Command
     public function convertNode($node, $modelname, $type)
     {
 
-        if (!$modelname::find($node->nid))
-        {
+        if (!$modelname::find($node->nid)) {
             $model = new $modelname;
 
             $model->id = $node->nid;
@@ -104,8 +103,7 @@ class ConvertBase extends Command
 
     public function createTerm($term, $modelname, $setParent = false)
     {
-        if (!$modelname::find($term->tid))
-        {
+        if (!$modelname::find($term->tid)) {
             $model = new $modelname;
             $model->id = $term->tid;
             $model->name = $term->name;
@@ -169,13 +167,11 @@ class ConvertBase extends Command
     public function processTopic($topic)
     {
         
-        if ($rename = array_get($this->topicMap, $topic->name . '.rename'))
-        {
+        if ($rename = array_get($this->topicMap, $topic->name . '.rename')) {
             $topic->name = $rename;
         }
 
-        if (array_get($this->topicMap, $topic->name . '.move') || array_get($this->topicMap, $topic->name . '.delete'))
-        {
+        if (array_get($this->topicMap, $topic->name . '.move') || array_get($this->topicMap, $topic->name . '.delete')) {
             return false;
         }
 
@@ -187,10 +183,8 @@ class ConvertBase extends Command
 
         $topics = [];
 
-        array_walk($this->topicMap, function($value, $key) use (&$topics)
-        {
-            if (array_key_exists('tid', $value))
-            {   
+        array_walk($this->topicMap, function($value, $key) use (&$topics) {
+            if (array_key_exists('tid', $value)) {   
                 
                 $topics[$key] = array_merge($value, ['name' => $key]);
             
@@ -226,14 +220,12 @@ class ConvertBase extends Command
 
     public function processNodeTopic($topic)
     {
-        if ($move = array_get($this->topicMap, $topic->name . '.move'))
-        {
+        if ($move = array_get($this->topicMap, $topic->name . '.move')) {
             $new = $this->getTermByName($move);
             return $new;
         }
 
-        if (array_get($this->topicMap, $topic->name . '.delete'))
-        {
+        if (array_get($this->topicMap, $topic->name . '.delete')) {
             return false;
         }
 
@@ -245,8 +237,7 @@ class ConvertBase extends Command
     {
         $terms = $this->getNodeTerms($node->nid, 6); // Sihtkohad
 
-        foreach ($terms as $term)
-        {
+        foreach ($terms as $term) {
             $this->insertPivot('content_destination', 'content_id', $node->nid, 'destination_id', $term->tid);
         }
     }
@@ -256,10 +247,8 @@ class ConvertBase extends Command
         
         $terms = $this->getNodeTerms($node->nid, [5, 9]); // Reisistiilid, Rubriigid
 
-        foreach ($terms as $term)
-        {
-            if ($processed_term = $this->processNodeTopic($term))
-            {
+        foreach ($terms as $term) {
+            if ($processed_term = $this->processNodeTopic($term)) {
                 $this->insertPivot('content_topic', 'content_id', $node->nid, 'topic_id', $processed_term->tid);
             }            
         }
@@ -270,14 +259,10 @@ class ConvertBase extends Command
     {
         $topics = $this->getNewTopics();
 
-        foreach ($topics as $topic)
-        {
+        foreach ($topics as $topic) {
 
-            if (preg_match($topic['pattern'], $node->title . $node->body))
-            {
-                // $this->info($topic['name']);
-                // $this->line($node->title . ' http://trip.ee/node/' . $node->nid);
-
+            if (preg_match($topic['pattern'], $node->title . $node->body)) {
+ 
                 $this->insertPivot('content_topic', 'content_id', $node->nid, 'topic_id', $topic['tid']);
             }
 
@@ -290,8 +275,7 @@ class ConvertBase extends Command
     {
         $terms = $this->getNodeTerms($node->nid, 23); // Lennufirmad
 
-        foreach ($terms as $term)
-        {
+        foreach ($terms as $term) {
             $this->insertPivot('content_carrier', 'content_id', $node->nid, 'carrier_id', $term->tid);
         }
     }
@@ -312,8 +296,7 @@ class ConvertBase extends Command
     {
         $comments = $this->getComments($nid)->get();
 
-        foreach($comments as $comment)
-        {
+        foreach($comments as $comment) {
 
             $model = new \App\Comment;
 
@@ -355,8 +338,7 @@ class ConvertBase extends Command
        
         $model->save();
 
-        if ($user->picture)
-        {
+        if ($user->picture) {
             $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user');
         }
     }
@@ -364,8 +346,8 @@ class ConvertBase extends Command
 
     public function convertUser($uid)
     {
-        if (!\App\User::find($uid) && $uid > 0)
-        {
+        if (!\App\User::find($uid) && $uid > 0) {
+
             $user = $this->getUser($uid);
             $this->createUser($user);
             
@@ -469,8 +451,7 @@ class ConvertBase extends Command
 
         $flags = $this->getFlags($id, $type);
             
-        foreach($flags as $flag)
-        {
+        foreach($flags as $flag) {
             $flag->flag_type = $flag_map[$flag->fid];
             $this->createFlag($flag, $modelname);
 
