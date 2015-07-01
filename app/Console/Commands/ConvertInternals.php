@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-class ConvertInternal extends ConvertBase
+class ConvertInternals extends ConvertBase
 {
 
-    protected $signature = 'convert:internal';
+    protected $signature = 'convert:internals';
 
     public function convert()
     {
@@ -13,7 +13,7 @@ class ConvertInternal extends ConvertBase
 
         foreach($nodes as $node)
         {
-            $this->convertNode($node, '\App\Content', 'forum');
+            $this->convertNode($node, '\App\Content', 'internal');
             
             $this->convertNodeDestinations($node);
             $this->convertNodeTopics($node);

@@ -27,19 +27,8 @@
 
         <hr />
 
-        {{--
-
-        by @include('user.item', ['user' => $content->user])
-        at {{ $content->created_at->format('d.m.Y') }}
-        ({{ count($content->comments) }},
-        latest at {{ $content->updated_at->format('d. m Y') }})
-        @include('destination.index', ['destinations' => $content->destinations])
-        @include('topic.index', ['topics' => $content->topics])
-
-        --}}
-
     @endforeach
 
-  {!! $contents->render() !!}
+    {!! $contents->render() !!}
 
 @stop

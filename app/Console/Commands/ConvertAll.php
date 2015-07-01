@@ -17,6 +17,7 @@ class ConvertAll extends ConvertBase
         $this->call('convert:expats');
         $this->call('convert:flights');
         $this->call('convert:forums');
+        $this->call('convert:internal');
         $this->call('convert:miscs');
         $this->call('convert:news');
         $this->call('convert:offers');
@@ -26,7 +27,6 @@ class ConvertAll extends ConvertBase
         $this->call('convert:follows');
         $this->call('convert:messages');
 
-        // $this->call('convert:internal');
    
     }
 

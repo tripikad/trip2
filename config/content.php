@@ -5,33 +5,6 @@ return [
 
     'types' => [
 
-        'forum' => [
-    
-            'title' => 'Forum',
-            'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],
-            'latest' => 'updated_at',
-            'paginate' => '25'
-    
-        ],
-
-        'blog' => [
-    
-            'title' => 'Blogs',
-            'with' => ['user', 'comments', 'destinations', 'topics'],
-            'latest' => 'created_at',
-            'paginate' => '25'
-    
-        ],
-
-        'travelmate' => [
-    
-            'title' => 'Travelmates',
-            'with' => ['user', 'destinations', 'topics'],
-            'latest' => 'created_at',
-            'paginate' => '24'
-    
-        ],
-
         'news' => [
     
             'title' => 'News',
@@ -50,6 +23,24 @@ return [
     
         ],
 
+        'travelmate' => [
+    
+            'title' => 'Travelmates',
+            'with' => ['user', 'destinations', 'topics'],
+            'latest' => 'created_at',
+            'paginate' => '24'
+    
+        ],
+
+        'forum' => [
+    
+            'title' => 'Forum',
+            'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],
+            'latest' => 'updated_at',
+            'paginate' => '25'
+    
+        ],
+
         'photo' => [
         
             'title' => 'Images',
@@ -59,6 +50,15 @@ return [
         
         ],
 
+        'blog' => [
+    
+            'title' => 'Blogs',
+            'with' => ['user', 'comments', 'destinations', 'topics'],
+            'latest' => 'created_at',
+            'paginate' => '25'
+    
+        ],
+
         'offer' => [
         
             'title' => 'Offers',
@@ -66,10 +66,18 @@ return [
             'latest' => 'created_at',
             'paginate' => '24'
         
-        ]
+        ],
 
+        'internal' => [
+        
+            'title' => 'Internal forum',
+            'with' => ['user', 'destinations', 'topics'],
+            'latest' => 'created_at',
+            'paginate' => '25'
+        
+        ]
     ],
 
-    'allowed' => '(forum|blog|travelmate|news|flight|photo|offer)'
+    'allowed' => '(forum|blog|travelmate|news|flight|photo|offer|internal)'
 
 ];
