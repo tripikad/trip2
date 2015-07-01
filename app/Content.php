@@ -37,9 +37,9 @@ class Content extends Model
      return $this->morphMany('App\Flag', 'flaggable');
     }
 
-    public function subscriptions()
+    public function followers()
     {
-       return $this->morphMany('App\Flag', 'flaggable');
+       return $this->morphMany('App\Follow', 'followable');
     }
 
     public function imagePath()

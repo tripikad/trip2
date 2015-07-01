@@ -8,6 +8,8 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+use DB;
+
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
@@ -16,9 +18,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $hidden = ['password', 'remember_token'];
 
-    public function messages()
-    {
-        return $this->hasMany('App\Message', 'user_id_to');
+    public function messagesReceived()
+    {   
+        return $this->hasMany('App\Message', 'user_id_to')
+            ->get()
+            ->sortByDesc('created_at')
+            ->unique('user_id');
+    }
+
+    public function messagesWith($user_id)
+    {   
+        $sent = $this->hasMany('App\Message', 'user_id_from')->where('user_id_to', $user_id)->get();
+        $received = $this->hasMany('App\Message', 'user_id_to')->get();
+
+        return $sent->merge($received)->sortBy('created_at')->all();
+
     }
 
     public function follows()

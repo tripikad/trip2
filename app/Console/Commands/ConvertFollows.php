@@ -28,17 +28,24 @@ class ConvertFollows extends ConvertBase
 
         foreach($follows as $follow)
         {   
-            
-            $model = new Follow;
 
-            $model->user_id = $follow->uid;
-            $model->followable_type = 'App\Content';
-            $model->followable_id = $follow->nid;
+            if ($node = $this->getNode($follow->nid)) {
 
-            $model->save();
+                $model = new Follow;
 
-            $this->convertUser($follow->uid);
-        
+                $model->id = $follow->subscribe_id;
+                $model->user_id = $follow->uid;
+                $model->followable_type = 'App\Content';
+                $model->followable_id = $follow->nid;
+
+                $model->save();
+
+                $this->convertUser($follow->uid);
+              
+                $this->convertNode($node, '\App\Content', 'forum');
+
+            }
+              
         }
     }
 

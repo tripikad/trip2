@@ -8,9 +8,9 @@
   
         <div class="col-xs-2 col-sm-1">
         
-            <a href="/user/{{ $follow->user->id }}">
+            <a href="/user/{{ $follow->followable->user->id }}">
                 
-                @include('image.circle', ['image' => $follow->user->imagePath()])
+                @include('image.circle', ['image' => $follow->followable->user->imagePath()])
      
             </a>
       
@@ -18,11 +18,11 @@
       
         <div class="col-xs-10 col-sm-10">
 
-            <h4>{{ $follow->title }}</h4>
+            <h4>{{ $follow->followable->title }}</h4>
      
             <p>
      
-                By @include('user.item', ['user' => $follow->user])
+                By @include('user.item', ['user' => $follow->followable->user])
      
             </p>
       

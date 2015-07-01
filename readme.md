@@ -7,9 +7,13 @@ Experimental sandbox.
 ### Convert #1
 
 - Messages:
-    - 7315910 dupes
     - User +1 ?
-    
+    - received: merge convs what only I have sent msg?
+    - collections -> sql
+
+- Follows
+    - typeMap?
+
 - double run on taxonomy relations!
 
 - filter frontimg tag from blog posts

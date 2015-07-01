@@ -32,7 +32,8 @@ class ConvertMessages extends ConvertBase
                 if ($node->author !== $node->uid) {
         
                     $model = new Message;
-
+                    
+                    $model->id = $node->mid;
                     $model->user_id_from = $node->author;
                     $model->user_id_to = $node->uid;
                     $model->title = $this->scrambleString(trim($node->subject));

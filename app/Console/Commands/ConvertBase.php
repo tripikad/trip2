@@ -29,6 +29,19 @@ class ConvertBase extends Command
 
     // Nodes
 
+    public function getNode($nid)
+    {
+        $query = \DB::connection($this->connection)
+            ->table('node')
+            ->join('node_revisions', 'node_revisions.nid', '=', 'node.nid')
+            ->where('node.nid', '=', $nid)
+            ->where('node.uid', '>', 0)
+            ->where('node.status', '=', 1)
+            ->first();
+
+        return $query;
+    }
+
     public function getNodes($type)
     {
         $query = \DB::connection($this->connection)
