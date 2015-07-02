@@ -10,7 +10,9 @@ return [
             'title' => 'News',
             'with' => ['destinations', 'topics'],
             'latest' => 'created_at',
-            'paginate' => '24'
+            'paginate' => '24',
+            'front' => true,
+            'frontpaginate' => 3
     
         ],
 
@@ -19,8 +21,9 @@ return [
             'title' => 'Flights',
             'with' => ['destinations', 'carriers'],
             'latest' => 'created_at',
-            'paginate' => '24'
-    
+            'paginate' => '24',
+            'front' => true,
+            'frontpaginate' => 4    
         ],
 
         'travelmate' => [
@@ -28,8 +31,9 @@ return [
             'title' => 'Travelmates',
             'with' => ['user', 'destinations', 'topics'],
             'latest' => 'created_at',
-            'paginate' => '24'
-    
+            'paginate' => '24',
+            'front' => true,
+            'frontpaginate' => 4    
         ],
 
         'forum' => [
@@ -64,8 +68,9 @@ return [
             'title' => 'Offers',
             'with' => ['user', 'destinations'],
             'latest' => 'created_at',
-            'paginate' => '24'
-        
+            'paginate' => '24',
+            'front' => true,
+            'frontpaginate' => 4         
         ],
 
         'internal' => [

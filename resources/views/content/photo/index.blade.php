@@ -18,7 +18,7 @@
   
         @foreach ($contents as $index => $content)
 
-            <div class="col-sm-4" style="margin-bottom: 1.5em;">
+            <div class="col-sm-4" style="margin-bottom: 14px;">
 
                 @include('image.landscape', ['image' => $content->imagePath()])
 

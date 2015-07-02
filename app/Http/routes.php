@@ -12,3 +12,5 @@ get('content/{id}', 'ContentController@show');
 // Users
 
 get('user/{id}', 'UserController@show');
+
+get('/', 'FrontpageController@index');

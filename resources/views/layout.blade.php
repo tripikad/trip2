@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <link href="{{-- elixir('css/all.css') --}}" rel='stylesheet' type='text/css'>
+        <link href="/css/app.css" rel='stylesheet' type='text/css'>
 
         <link href='http://fonts.googleapis.com/css?family=Lato:900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <llink rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <style>
             body {
                 margin: 2em 0 8em 0;
@@ -49,7 +49,7 @@
             <div class="row">
             
                 <div class="col-sm-1 text-center">
-                    <h1>Trip2</h1>
+                    <h1><a href="/">Trip2</a></h1>
                 </div>
             
                 <div class="col-sm-9 text-center">
@@ -73,18 +73,25 @@
             </div>
 
             <hr />
+            
             <div class="row" style="margin: 3em 0;">
+            
                 <div class="col-sm-6 col-sm-push-3 text-center">
                     <h2>@yield('title')</h2>
                 </div>
+            
                 <div class="col-sm-3 col-sm-pull-6">
                     @yield('action.secondary')
                 </div>
+            
                 <div class="col-sm-3">
                     @yield('action.primary')
                 </div>
+            
             </div>
+
             @yield('content')
+
         </div>
     </body>
 </html>

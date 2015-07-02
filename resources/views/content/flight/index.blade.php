@@ -18,12 +18,13 @@
   
         @foreach ($contents as $index => $content)
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
 
                 <a href="/content/{{ $content->id }}">
 
                     @include('component.card', [
-                        'title' => $content->title,
+                        'title' => null,
+                        'subtitle' => $content->title,
 
                     ])
                 
@@ -36,7 +37,7 @@
 
             </div>
 
-            @if (($index + 1) % 3 == 0) </div><div class="row"> @endif
+            @if (($index + 1) % 4 == 0) </div><div class="row"> @endif
 
         @endforeach
 
