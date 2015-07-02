@@ -4,7 +4,7 @@ rm public/images/user/small/*
 for i in $(find public/images/user -name "*.jpg" -or -name "*.png" -or -name "*.gif" -type f)
 do
     file=$(echo $i | cut -d'/' -f4)
-#    convert $i -resize 200x200 public/images/user/small/$file
+    convert $i -resize 200x200 public/images/user/small/$file
 
 done
 
