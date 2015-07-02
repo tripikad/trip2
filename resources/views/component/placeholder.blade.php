@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px dashed #888;
+    border: 1px dashed #aaa;
     margin-bottom: 14px;
     @if (isset($height))
         height: {{ $height }}px;
