@@ -6,18 +6,10 @@
 
 @foreach($fronts as $type => $front) 
 
-    <div class="row" style="margin: 30px 0 10px 0;">
-        
-        <div class="col-md-5">
-        </div>
-        
-        <div class="col-md-2">
-            @include('component.placeholder', ['text' => $front['title']])
-        </div>
-        
-        <div class="col-md-5">
-        </div>
-    
+    <div style="margin: 30px 0 0 0;">
+
+        @include('component.placeholder', ['text' => $front['title']])
+
     </div>
 
     @include("content.$type.front", [
