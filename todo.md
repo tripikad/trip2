@@ -13,13 +13,13 @@ Legend: **High priority** Normal priority *Future idea*
 
 - **Login + legacy passwords**
 - **Register**
-- *Register spam prevention*
 - **Password reminder**
-- **FB login**
 - **Roles**
-- Permissions
 - **Auth Mailers**
-- *Auth tests*
+- **Auth tests*
+- Register spam prevention
+- FB login
+- Permissions
 
 ### Security
 
@@ -61,9 +61,9 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Flights
 
+- Company logos / images
 - Extra fields?
 - Expiration
-- **Company logos / images**
 
 ### Offers
 
