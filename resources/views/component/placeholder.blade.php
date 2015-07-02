@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     border: 1px dashed #888;
-    margin-bottom: 1.5em;
+    margin-bottom: 14px;
     @if (isset($height))
         height: {{ $height }}px;
     @endif

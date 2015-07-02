@@ -31,7 +31,7 @@ return [
             'title' => 'Travelmates',
             'with' => ['user', 'destinations', 'topics'],
             'latest' => 'created_at',
-            'paginate' => '24',
+            'paginate' => 24,
             'front' => true,
             'frontpaginate' => 4    
         ],
@@ -41,8 +41,9 @@ return [
             'title' => 'Forum',
             'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],
             'latest' => 'updated_at',
-            'paginate' => '25'
-    
+            'paginate' => 25,
+            'front' => true,
+            'frontpaginate' => 4       
         ],
 
         'photo' => [
@@ -50,8 +51,9 @@ return [
             'title' => 'Images',
             'with' => ['user', 'destinations'],
             'latest' => 'created_at',
-            'paginate' => '24'
-        
+            'paginate' => '24',
+            'front' => true,
+            'frontpaginate' => 3       
         ],
 
         'blog' => [
@@ -59,8 +61,9 @@ return [
             'title' => 'Blogs',
             'with' => ['user', 'comments', 'destinations', 'topics'],
             'latest' => 'created_at',
-            'paginate' => '25'
-    
+            'paginate' => 25,
+            'front' => true,
+            'frontpaginate' => 6    
         ],
 
         'offer' => [
@@ -78,7 +81,7 @@ return [
             'title' => 'Internal forum',
             'with' => ['user', 'destinations', 'topics'],
             'latest' => 'created_at',
-            'paginate' => '25'
+            'paginate' => 25
         
         ]
     ],

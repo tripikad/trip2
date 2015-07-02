@@ -41,7 +41,9 @@
             </div>
 
         </div>
+
         <hr />
+        
     @endforeach
 
   {!! $contents->render() !!}

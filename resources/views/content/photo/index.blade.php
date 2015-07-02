@@ -18,9 +18,12 @@
   
         @foreach ($contents as $index => $content)
 
-            <div class="col-sm-4" style="margin-bottom: 14px;">
+            <div class="col-sm-4">
 
-                @include('image.landscape', ['image' => $content->imagePath()])
+                @include('component.card', [
+                    'image' => $content->imagePath(),
+                    'title' => null
+                ])
 
             </div>
             
