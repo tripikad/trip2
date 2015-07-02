@@ -16,8 +16,8 @@ Legend: **High priority** Normal priority *Future idea*
 - **Password reminder**
 - **Roles**
 - **Auth Mailers**
-- **Auth tests*
-- Register spam prevention
+- **Auth tests**
+- Registration spam prevention (Mollom?)
 - FB login
 - Permissions
 
