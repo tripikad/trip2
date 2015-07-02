@@ -1,12 +1,11 @@
 ## TODO
 
-- **High priority**
-- Normal priority
-- *Future idea*
+Legend: **High priority** Normal priority *Future idea*
 
 ### Frontpage
-
-- **Frontpage modules**
+- More varied layout
+- Call to actions
+- Destination feature(s)
 - *Carousels*
 - *Active content (based on ranking)*
 
@@ -32,7 +31,7 @@
 
 ### Image
 
-- **Image processing job**
+- **Image processing**
 - **Image URLS**
 - **Image uploads**
 
