@@ -48,11 +48,11 @@
             
             <div class="row">
             
-                <div class="col-xs-2">
+                <div class="col-sm-1 text-center">
                     <h1>Trip2</h1>
                 </div>
             
-                <div class="col-xs-10">
+                <div class="col-sm-9 text-center">
             
                     <ul class="nav nav-pills">
 
@@ -61,7 +61,13 @@
                     @endforeach
 
                     </ul>
+
+                </div>
+
+                <div class="col-sm-2 text-center">
                     
+                    @include('component.placeholder', ['text' => 'Login&nbsp;&nbsp;&nbsp;Search'])
+                
                 </div>
 
             </div>
