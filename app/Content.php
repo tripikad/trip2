@@ -44,7 +44,7 @@ class Content extends Model
 
     public function imagePath()
     {
-        return $this->image ? '/images/' . $this->type . '/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
+        return $this->image ? '/images/' . $this->type . '/small/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
     }
 
 }
