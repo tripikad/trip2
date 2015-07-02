@@ -6,7 +6,7 @@
 
 @foreach($fronts as $type => $front) 
 
-    <div class="row" style="margin-top: 18px;">
+    <div class="row" style="margin: 30px 0 10px 0;">
         
         <div class="col-md-5">
         </div>

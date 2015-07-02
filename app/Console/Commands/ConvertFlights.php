@@ -61,7 +61,7 @@ class ConvertFlights extends ConvertBase
 
         foreach($nodes as $node)
         {
-            $node->title = 'FROM FORUM: ' . $node->title;
+            $node->title = $node->title . ', from forum';
             
             $this->convertNode($node, 'App\Content', 'flight');
 
@@ -76,16 +76,3 @@ class ConvertFlights extends ConvertBase
         $this->convertForumNodes();
     }
 }
-
-
-/*
-content_type_lennufirmade_sooduspakkumine:
-field_salesperiod_value
-field_salesperiod_value2      
-field_originatingcities_value
-
-content_field_flightperiod:
-field_flightperiod_value (datetime)
-field_flightperiod_value2 (datetime)
-delta
-*/

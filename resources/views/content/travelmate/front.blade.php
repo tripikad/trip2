@@ -2,7 +2,7 @@
 
     @foreach ($contents as $content)
 
-        <div class="col-sm-3">
+        <div class="col-xs-6 col-sm-3">
 
             <a href="/content/{{ $content->id }}">
 

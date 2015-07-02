@@ -1,22 +1,32 @@
 <div class="row">
 
-    @foreach ($contents as $content)
+    @foreach ($contents as $index => $content)
 
-        <div class="col-sm-2 text-center">
+        <div class="col-sm-6">
 
-            <div style="padding: 15px;">
-                <a href="/content/{{ $content->id }}">
-                    @include('image.circle', ['image' => $content->user->imagePath()])
-                </a>
+            <div class="row">
+
+                <div class="col-xs-2">
+                    
+                    <a href="/user/{{ $content->user->id }}">
+                        @include('image.circle', ['image' => $content->user->imagePath()])
+                    </a>
+                
+                </div>
+                
+                <div class="col-xs-10">
+                    
+                    <h3><a href="/content/{{ $content->id }}">{{ $content->title }}</a></h3>
+                    
+                    <p>by @include('user.item', ['user' => $content->user])</p>
+                
+                </div>
+
             </div>
 
-            <p style="margin-top: 10px">
-                {{ $content->user->name }}
-            </p>
-
-            <h4 style="margin-top: 10px">{{ str_limit($content->title, 40) }}</h4>
-
         </div>
+
+        @if (($index + 1) % 2 == 0) </div><div class="row"> @endif
 
     @endforeach
 

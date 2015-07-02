@@ -2,10 +2,10 @@
     width: 100%;
     padding-bottom: 66%;
     margin-bottom: 14px;
-    word-break:     break-word;
+    word-break: break-word;
     -webkit-hyphens: auto;
-    -moz-hyphens:    auto;
-    hyphens:         auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
 
     @if (isset($image))
         background-position: center;
@@ -36,6 +36,8 @@
         bottom: 0;
         padding: 15px;
         color: #333;
+        overflow: hidden;
+
         @if (isset($image))
           color: white;
           letter-spacing: 0.05em;

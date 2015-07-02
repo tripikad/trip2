@@ -2,7 +2,7 @@
 
     @foreach ($contents as $content)
 
-        <div class="col-sm-6">
+        <div class="col-xs-6 col-sm-3">
 
             <a href="/content/{{ $content->id }}">
 
@@ -13,8 +13,6 @@
             </a>
 
         </div>
-
-        @if (($index + 1) % 2 == 0) </div><div class="row"> @endif
 
     @endforeach
 

@@ -43,7 +43,7 @@ return [
             'latest' => 'updated_at',
             'paginate' => 25,
             'front' => true,
-            'frontpaginate' => 4       
+            'frontpaginate' => 6       
         ],
 
         'photo' => [
@@ -63,7 +63,7 @@ return [
             'latest' => 'created_at',
             'paginate' => 25,
             'front' => true,
-            'frontpaginate' => 6    
+            'frontpaginate' => 4    
         ],
 
         'offer' => [
