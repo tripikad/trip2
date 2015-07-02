@@ -26,8 +26,8 @@ class FrontpageController extends Controller
             
                 $fronts[$type]['contents'] = Content::whereType($type)
                     ->with($typeConf['with'])
-                //    ->latest($typeConf['latest'])
-                    ->orderBy(DB::raw('RAND()'))
+                    ->latest($typeConf['latest'])
+                //  ->orderBy(DB::raw('RAND()'))
                     ->take($typeConf['frontpaginate'])
                     ->get();
         
