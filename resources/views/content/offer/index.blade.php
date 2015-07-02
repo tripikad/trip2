@@ -4,6 +4,14 @@
 {{ $title }}
 @stop
 
+@section('action.secondary')
+    @include('component.placeholder', ['text' => 'Filters ▾'])
+@stop
+
+@section('action.primary')
+    @include('component.placeholder', ['text' => '＋ Add offer (if company)'])
+@stop
+
 @section('content')
 
     <div class="row">

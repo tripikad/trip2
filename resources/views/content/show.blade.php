@@ -40,5 +40,7 @@
     </div>
 
   @include('comment.index', ['comments' => $content->comments])
+  
+  @include('comment.add')
 
 @stop

@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <style>
             body {
-                margin-top: 2em;
+                margin: 2em 0 8em 0;
                 font-size: 1.4em;
                 line-height: 1.6em;
                 font-family: 'Open Sans', sans-serif;
@@ -32,8 +32,6 @@
             }
             h2 {
                 font-size: 2.1em;
-                text-align: center;
-                margin: 1.5em 0;
             }
             h3 {
                 font-size: 22px;
@@ -69,9 +67,17 @@
             </div>
 
             <hr />
-
-            <h2>@yield('title')</h2>
-
+            <div class="row" style="margin: 3em 0;">
+                <div class="col-sm-6 col-sm-push-3 text-center">
+                    <h2>@yield('title')</h2>
+                </div>
+                <div class="col-sm-3 col-sm-pull-6">
+                    @yield('action.secondary')
+                </div>
+                <div class="col-sm-3">
+                    @yield('action.primary')
+                </div>
+            </div>
             @yield('content')
         </div>
     </body>

@@ -4,6 +4,12 @@
 - Normal priority
 - *Future idea*
 
+### Frontpage
+
+- **Frontpage modules**
+- *Carousels*
+- *Active content (based on ranking)*
+
 ### Auth
 
 - **Login + legacy passwords**
@@ -70,6 +76,7 @@
 ### Destinations
 
 - Baum (tree handling)
+- Destination pages
 
 ### Comment
 
@@ -92,6 +99,18 @@
 
 - Commerical users
 
+### Viewed
+
+- Viewed status on content, comments, **messages**
+
+### Activity
+
+- *Activity tracking*
+
+### Ranking
+
+- *content, comment, user ratings*
+
 ### Forms
 
 - **Form helper**
@@ -107,29 +126,33 @@
 
 ### Legacy paths
 
-- Redirects
+- Redirect
 
 ### Ads
 
 - Google DFB / Custom
-- New ad sizes
+- New ad sizes?
 
 ### Convert
 
 - convert legacy paths
-- convert photo: Mitte-reisipildid?
-
-- limit parameter
-- files parameter
-- fix double run on taxonomy relations
-- filter frontimg tag from blog posts
-- flights: regexp price from the title
-- misc -> new term?
-- expat -> new term?
-- buysell -> new term?
-- Reisiveeb?
-- /uurimus|küsitlus|uuring term/
-- /töö/
+- convert user permissions
+- convert content status
+- convert comment status
+- convert subscription status
+- small fixes:
+    - convert photo: Mitte-reisipildid?
+    - limit parameter
+    - files parameter
+    - fix double run on taxonomy relations
+    - filter frontimg tag from blog posts
+    - flights: regexp price from the title
+    - misc -> new term?
+    - expat -> new term?
+    - buysell -> new term?
+    - Reisiveeb?
+    - /uurimus|küsitlus|uuring term/
+    - /töö/
 
 ### DB
 
@@ -143,7 +166,7 @@
 
 ### Views
 
-- **user header** 
+- user header
 - naming: _ vs partials vs index vs list vs element ...
 - date: partial? model?
 - other data on grids
@@ -152,6 +175,10 @@
 
 - cache
 
-### npm
+### Other
 
-- bootstap-sass
+- sitemap
+- favicon
+- RSS feed
+- GA tracker
+- Other trackers?

@@ -4,6 +4,10 @@
 {{ $title }}
 @stop
 
+@section('action.primary')
+    @include('component.placeholder', ['text' => '＋ Add new post'])
+@stop
+
 @section('content')
 
     @foreach ($contents as $content)

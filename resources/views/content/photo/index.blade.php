@@ -4,6 +4,14 @@
 {{ $title }}
 @stop
 
+@section('action.secondary')
+    @include('component.placeholder', ['text' => 'Filters ▾'])
+@stop
+
+@section('action.primary')
+    @include('component.placeholder', ['text' => '＋ Add new photo'])
+@stop
+
 @section('content')
 
     <div class="row">

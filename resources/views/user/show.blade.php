@@ -2,8 +2,10 @@
 
 @section('title')
 
-    {{-- $user->name --}}
+@stop
 
+@section('action.primary')
+    @include('component.placeholder', ['text' => 'Send private message'])
 @stop
 
 @section('content')

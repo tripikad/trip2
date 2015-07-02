@@ -4,6 +4,10 @@
 {{ $title }}
 @stop
 
+@section('action.primary')
+    @include('component.placeholder', ['text' => '＋ Add new blog post'])
+@stop
+
 @section('content')
 
   
