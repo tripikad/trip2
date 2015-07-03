@@ -17,8 +17,6 @@
         'contents' => $front['contents']
     ])
     
-    <hr />
-    
 @endforeach
 
 </div>
