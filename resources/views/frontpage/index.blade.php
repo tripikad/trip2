@@ -17,6 +17,8 @@
         'contents' => $front['contents']
     ])
     
+    <hr style="margin-top: -10px;" />
+    
 @endforeach
 
 </div>
