@@ -78,7 +78,7 @@ return [
 
         'internal' => [
         
-            'title' => 'Internal forum',
+            'title' => '...',
             'with' => ['user', 'destinations', 'topics'],
             'latest' => 'created_at',
             'paginate' => 25

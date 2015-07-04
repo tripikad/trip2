@@ -1,6 +1,22 @@
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic&subset=latin,latin-ext);
+
 $brand-primary: #00A3CD;
+
 $grid-gutter-width: 14px;
+
+$font-family-sans-serif:  "Noto Sans", sans-serif;
+
+$font-size-base:          14px;
+$line-height-base:        1.6;
+
+$font-size-h1:            25px;
+$font-size-h2:            30px;
+$font-size-h3:            22px;
+
+$font-size-xs-h2:         26px;
+$font-size-xs-h3:         20px;
 
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import "scaffolding";
+@import "typography"; 

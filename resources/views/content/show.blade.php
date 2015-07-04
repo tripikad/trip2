@@ -31,7 +31,7 @@
                 at {{ $content->updated_at->format('d. m Y H:i:s') }}
             </p>
 
-            <big>{!! nl2br($content->body) !!}</big>
+            {!! nl2br($content->body) !!}
 
         </div>
 
