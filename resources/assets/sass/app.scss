@@ -1,4 +1,6 @@
 $brand-primary: #00A3CD;
 $grid-gutter-width: 14px;
 
-@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap"
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "scaffolding";

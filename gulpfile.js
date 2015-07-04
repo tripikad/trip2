@@ -1,8 +1,14 @@
-var elixir = require('laravel-elixir');
+var gulp = require('gulp');
+var sass = require('gulp-sass');
 
-elixir.config.sourcemaps = false;
-
-
-elixir(function(mix) {
-    mix.sass('app.scss');
+gulp.task('sass', function () {
+  gulp.src('./resources/assets/sass/app.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('./public/css'));
 });
+
+gulp.task('watch', function () {
+  gulp.watch('./resources/assets/sass/**/*.scss', ['sass']);
+});
+
+gulp.task('default', ['sass']);

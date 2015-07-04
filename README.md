@@ -4,7 +4,8 @@ Converters convert legacy database records to Laravel models. Execute them by ru
     
     php artisan migrate:refresh
     php artisan convert:all
-
+    ./convert.sh
+    
 which runs all conversions found at ```app/Console/Commands```. You can list all the available conversions by running:
 
     php artisan list convert
