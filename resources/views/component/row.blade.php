@@ -1,4 +1,8 @@
-<div class="row">
+<div class="row" style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">
 
     <div class="col-xs-2 col-sm-1">
 
@@ -14,11 +18,11 @@
 
         @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
         
-        <h4>{{ $heading }}</h4>
+        <h3 style="margin: 0;">{{ $heading }}</h3>
 
         @if (isset($heading_link)) </a> @endif
 
-        <p>{!! $text !!}</p>
+        {!! $text !!}
 
     </div>
 

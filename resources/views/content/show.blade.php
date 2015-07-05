@@ -10,35 +10,33 @@
 
 @section('content')
 
-    <div class="row">
+    <div style="style="margin-bottom: 16px;">
 
-        <div class="col-xs-2 col-sm-1">
+    @include('component.row', [
+        'image' => $content->user->imagePath(),
+        'image_link' => '/user/' . $content->user->id,
+        'heading' => $content->title,
+        'heading_link' => '/content/' . $content->id,
+        'text' => 'By <a href="/user/' . $content->user->id .'">'
+            . $content->user->name
+            . '</a> created at '
+            . $content->created_at->format('d. m Y H:i:s')
+    ])
 
-            <a href="/user/{{ $content->user->id }}">
-                @include('image.circle', ['image' => $content->user->imagePath()])
-            </a>
+    </div>
 
+    <div class="row"">
+
+        <div class="col-sm-1">
         </div>
 
-        <div class="col-xs-9 col-sm-10">
-            
-            <h3><a href="/content/{{ $content->id }}">{{ $content->title }}</a></h3>
-            
-            <p>By
-                <a href="/user/"{{ $content->user->id }}">
-                    {{ $content->user->name }}
-                </a>
-                at {{ $content->updated_at->format('d. m Y H:i:s') }}
-            </p>
+        <div class="col-sm-10">
 
             {!! nl2br($content->body) !!}
 
         </div>
-
-        <div class="col-sm-1">
         
-            <small>@include('flag.show', ['flags' => $content->flags])</small>
-
+        <div class="col-sm-1">
         </div>
 
     </div>

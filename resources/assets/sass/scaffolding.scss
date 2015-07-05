@@ -5,3 +5,16 @@ body {
 img {
     width: 100%;
 }
+
+hr {
+  margin-top: ceil($line-height-computed * 0.8);
+  margin-bottom: ceil($line-height-computed * 0.8);
+}
+
+@media (max-width: $screen-xs-max) {
+
+    hr {
+      margin-top: ceil($line-height-computed * 0.6);
+      margin-bottom: ceil($line-height-computed * 0.6);
+    }
+}

@@ -6,15 +6,19 @@ $grid-gutter-width: 14px;
 
 $font-family-sans-serif:  "Noto Sans", sans-serif;
 
-$font-size-base:          14px;
+$font-size-base:          16px;
+$font-size-xs-base:       15px;
+
 $line-height-base:        1.6;
 
 $font-size-h1:            25px;
 $font-size-h2:            30px;
 $font-size-h3:            22px;
+$font-size-h4:            18px;
 
 $font-size-xs-h2:         26px;
 $font-size-xs-h3:         20px;
+$font-size-xs-h4:         16px;
 
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
