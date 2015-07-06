@@ -48,5 +48,13 @@ class ContentController extends Controller
             ->render();
     }
 
+    public function add($type)
+    {
+
+        return \View::make("content.add")
+            ->with('title', config("content.types.$type.add.title"))
+            ->render();
+
+    }
 
 }

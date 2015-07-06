@@ -1,121 +1,135 @@
-## TODO
+## Functionality TODO
 
 Legend: **High priority** Normal priority *Future idea*
 
 ### Frontpage
+
 - More varied layout
-- Call to actions
-- Destination feature(s)
-- *Carousels*
+- *Call to actions?*
+- *Destination feature / search*
+- *Carousel*
 - *Active content (based on ranking)*
 
-### Auth
+### User
 
-- **Login + legacy passwords**
-- **Register**
-- **Password reminder**
-- **Roles**
-- **Auth Mailers**
-- **Auth tests**
-- Registration spam prevention (Mollom?)
-- FB login
-- Permissions
-
-### Security
-
-- **Content sanitization** (input/output)
-
-### Search
-
-- Algolia? $49/m / ES (hosting) / **Zend Search**
-
-### Image
-
-- **Image processing**
-- **Image URLS**
-- **Image uploads**
+- User history: collection based
+- *User history: activity feed based*
 
 ### Content
 
 - **Content add/edit/delete forms**
 - **Filtering**
-- Content status: published/unpublished/draft/deleted?
-- Destination and tag autocomplete in filter/edit
-- Previews
+- **Content status: published/unpublished/draft/deleted**
+- Destination and tag autocomplete in index / edit
+- Content type conversion for admins
 - *Content expiration*
 
-### Movies
+### News
 
-- *Movie field on add/edit*
-- *Movie embed*
+- Easy image add
+- Preview
+- *WVSIWVG (What Veigo Sees Is What Veigo gests)*
 
 ### Buysell
 
-- Extra fields?
+- What to do with extra fields?
 - Merge with forum?
 
 ### Travelmates 
 
-- Extra fields?
-- Expiration
+- What to do with extra fields?
+- Expiration?
 
-### Flights
+### Flight offers
 
+- What to do with extra fields?
 - Company logos / images
-- Extra fields?
-- Expiration
+- Expiration?
+
+### Videos
+
+- *Video field on content forms (what types?)*
+- *Video embed*
 
 ### Offers
 
-- **Offer display**
+- **Offer filter**
 - **Extra fields?**
 - Offer add/edit/delete forms
 - Offer scheduler
 
-### Destinations
-
-- Baum (tree handling)
-- Destination pages
-
 ### Comment
 
 - **Comment add/edit/delete forms**
-- Content status: published/unpublished/draft/deleted?
+- **Content status: published/unpublished/draft/deleted**
+- Comment moderation tools: quick unpublish
+
+### Destinations
+
+- Destination feature pages
+- Baum (tree handling)
+
+### Tags
+
+- Convert from "topics" to "tags"
+
+### Carriers
+
+- Defined in config?
+
+### Search
+
+- **Destination autocomplete**
+- **Choose Provider:**
+    - local Zend Search
+    - Algolia? $49/m
+    - Self-hosted Elasticsearch $10-$20
+    - Link to Google onsite search
 
 ### Messages
 
-- Message add/edit/delete forms
-- Mailer
-- Message tests with seeds, fix 8991
-- From collections hacks to real SQL
+- **Message add/edit/delete forms**
+- **Mail messages**
+- Create Message tests with seeds
+- From collections hacks to real queries
 
-### Follow
+### Content ranking
 
-- Follow toggle/remove
-- Mailer
+- content, comment, *user* ratings
 
-### Users
+### Following
 
-- Commerical users
+- Enable disable mailing
+- Remove item
 
-### Viewed
+### Activity feeds
 
-- Viewed status on content, comments, **messages**
+- *Create activity feeds*
 
-### Activity
+### Ads
 
-- *Activity tracking*
+- Sample ads for prototyping
+- Google DFB / Custom made
+- New ad sizes?
 
-### Ranking
+## Technology TODO
 
-- *content, comment, user ratings*
+### Auth
 
-### Forms
+- ~Login~
+- ~Register~
+- ~Password reminder~
+- **Auth mailer translation**
+- **Roles**
+- Permissions
+- Legacy Drupal password hasher / mass password renewal?
+- *Registration spam prevention (Mollom?)*
+- *FB login*
 
-- **Form helper**
-- Date widget
-- Time widget
-- Delete confirmations
+### DB
+
+- users: unique name / email ?
+- foreign keys for pivot tables / comments
 
 ### Routes
 
@@ -123,22 +137,57 @@ Legend: **High priority** Normal priority *Future idea*
 - content/index/{type} > content/{type}/all
 - content/{id} > content/{type}/{id} // resouce controller?
 
+### Models
+
+- **sanitize content input**
+- **sanitize content output + nl2br**
+
+### Views
+
+- **Views access control**
+- **View access control tests**
+- Naming: _ vs partials vs index vs list vs element vs component
+- Date formatting: in partial? in model?
+
+### Controllers
+
+- **Cache of popular views**
+- *Full cache pipeline*
+
+### Image pipeline
+
+- **Image processing**
+- **Image URLs**
+- **Image uploads**
+
+### Forms
+
+- **Access control per field**
+- Date widget
+- Time widget
+- Delete confirmations
+
 ### Legacy paths
 
-- Redirect
+- Redirect legacy paths
 
-### Ads
+### Viewed status
 
-- Google DFB / Custom
-- New ad sizes?
+- Viewed status on content, comments, **messages**
+
+### Following
+
+- *Harmonize Following / Subscribing / Bookmarking concepts*
 
 ### Convert
 
+- **convert user permissions**
+- **convert content status**
+- **convert comment status**
 - convert legacy paths
-- convert user permissions
-- convert content status
-- convert comment status
 - convert subscription status
+- convert havebeen / wanttogo?
+- convert commerical users?
 - small fixes:
     - convert photo: Mitte-reisipildid?
     - limit parameter
@@ -153,26 +202,9 @@ Legend: **High priority** Normal priority *Future idea*
     - /uurimus|küsitlus|uuring term/
     - /töö/
 
-### DB
+### Translations
 
-- users: unique name / email ?
-- foreign keys
-
-### Models
-
-- nl2br to body
-- date accessors?
-
-### Views
-
-- user header
-- naming: _ vs partials vs index vs list vs element ...
-- date: partial? model?
-- other data on grids
-
-### Controllers
-
-- cache
+- Add translations
 
 ### Other
 

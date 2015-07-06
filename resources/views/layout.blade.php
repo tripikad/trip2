@@ -41,7 +41,10 @@
             </div>
 
             <hr />
-            
+
+            <h2>@yield('title')</h2>
+
+            {{--
             <div class="row" style="margin: 3em 0;">
             
                 <div class="col-sm-6 col-sm-push-3 text-center">
@@ -57,7 +60,7 @@
                 </div>
             
             </div>
-
+            --}}
             @yield('content')
 
         </div>

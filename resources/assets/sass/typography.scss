@@ -9,10 +9,15 @@ h1 {
     text-transform: uppercase;
 }
 
+h2 {
+    margin: 1.5em 0 1em 0;
+    text-align: center;
+}
+
 @media (max-width: $screen-xs-max) {
 
     body {
-            font-size: $font-size-xs-base;
+        font-size: $font-size-xs-base;
     }
     h2, .h2 {
         font-size: $font-size-xs-h2;

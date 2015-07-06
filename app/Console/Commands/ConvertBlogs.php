@@ -3,7 +3,7 @@
 class ConvertBlogs extends ConvertBase
 {
 
-    protected $name = 'convert:blogs';
+    protected $signature = 'convert:blogs';
 
 
     public function convertBlogNodes()
@@ -44,7 +44,7 @@ class ConvertBlogs extends ConvertBase
         }
     }
 
-    public function fire()
+    public function handle()
     {
         $this->convertBlogNodes();
         $this->convertForumNodes();
