@@ -28,7 +28,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 - Easy image add
 - Preview
-- *WVSIWVG (What Veigo Sees Is What Veigo gests)*
+- *WVSIWVG (What Veigo Sees Is What Veigo gets)*
 
 ### Buysell
 
