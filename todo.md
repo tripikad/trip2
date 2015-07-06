@@ -116,9 +116,9 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Auth
 
-- ~Login~
-- ~Register~
-- ~Password reminder~
+- **Login**
+- **Register**
+- **Password reminder**
 - **Auth mailer translation**
 - **Roles**
 - Permissions
