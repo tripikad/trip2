@@ -148,6 +148,11 @@ Legend: **High priority** Normal priority *Future idea*
 - **View access control tests**
 - Naming: _ vs partials vs index vs list vs element vs component
 - Date formatting: in partial? in model?
+- Does email view work?
+
+### SASS
+
+- Lato @import
 
 ### Controllers
 

@@ -22,6 +22,6 @@ $font-size-xs-h4:         16px;
 
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-@import "scaffolding";
-@import "typography";
-@import "form"; 
+@import "styles/scaffolding";
+@import "styles/typography";
+@import "styles/form"; 
