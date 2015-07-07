@@ -29,7 +29,7 @@ class ContentController extends Controller
 
         $contents = $contents->simplePaginate(config("content.types.$type.paginate"));
 
-        return \View::make("content.$type.index")
+        return \View::make("pages.content.$type.index")
             ->with('title', config("content.types.$type.title"))
             ->with('contents', $contents)
             ->render();
@@ -42,7 +42,7 @@ class ContentController extends Controller
         $content = \App\Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers')
             ->findorFail($id);
      
-        return \View::make("content.show")
+        return \View::make("pages.content.show")
             ->with('title', config("content.types.$content->type.title"))
             ->with('content', $content)
             ->render();
@@ -51,7 +51,7 @@ class ContentController extends Controller
     public function add($type)
     {
 
-        return \View::make("content.add")
+        return \View::make("pages.content.add")
             ->with('title', config("content.types.$type.add.title"))
             ->render();
 

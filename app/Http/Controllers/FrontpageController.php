@@ -35,7 +35,7 @@ class FrontpageController extends Controller
         
         }
         
-            return View::make('frontpage.index')
+            return View::make('pages.frontpage.index')
                 ->with('fronts', $fronts)
                 ->render();
         

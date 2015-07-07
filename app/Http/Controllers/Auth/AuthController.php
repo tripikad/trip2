@@ -21,6 +21,18 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
+    public function getLogin()
+    {
+    
+        return view('pages.auth.login');
+    
+    }
+
+    public function getRegister()
+    {
+        return view('pages.auth.register');
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [

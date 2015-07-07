@@ -11,7 +11,7 @@ class UserController extends Controller
     {
         $user = \App\User::findorFail($id);
      
-        return \View::make('user.show')
+        return \View::make('pages.user.show')
             ->with('user', $user)
             ->render();
     }

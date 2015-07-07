@@ -16,4 +16,19 @@ class PasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function getEmail()
+    {
+        return view('pages.auth.password');
+    }
+
+    public function getReset($token = null)
+    {
+        if (is_null($token)) {
+            throw new NotFoundHttpException;
+        }
+
+        return view('pages.auth.reset')->with('token', $token);
+    }
+
 }
