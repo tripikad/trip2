@@ -1,14 +1,14 @@
-@extends('layouts.main')
+@extends('layouts.user')
 
 @section('title')
-
+    {{ $user->name }}
 @stop
 
 @section('action.primary')
     @include('components.placeholder', ['text' => 'Send private message'])
 @stop
 
-@section('content')
+@section('user')
 
     <div class="row">
 
@@ -35,11 +35,6 @@
         <p>Joined {{ $user->created_at->diffForHumans() }}</p>
         
     </div>
-
-    @include('components.message.index', ['messages' => $user->messages()])
-
-    @include('components.follow.index', ['follows' => $user->follows])
-
 
 @stop
 

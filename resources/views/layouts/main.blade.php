@@ -8,7 +8,7 @@
 
         <link href='http://fonts.googleapis.com/css?family=Lato:900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     
-        <title>@yield('title')</title>
+        <title>@yield('title') | {{ config('site.name') }}</title>
     </head>
     <body>
         <div class="container">
