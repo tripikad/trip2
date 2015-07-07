@@ -4,10 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <link href="/css/app.css" rel='stylesheet' type='text/css'>
+        <link href="/css/main.css" rel='stylesheet' type='text/css'>
 
         <link href='http://fonts.googleapis.com/css?family=Lato:900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     
         <title>@yield('title')</title>
     </head>
