@@ -1,10 +1,10 @@
-@extends('layouts.user')
+@extends('layouts.main')
 
 @section('title')
     {{ $user->name }} follows
 @stop
 
-@section('user')
+@section('content')
 
 @if (count($user->follows))
 
