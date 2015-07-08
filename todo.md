@@ -109,6 +109,18 @@ Legend: **High priority** Normal priority *Future idea*
 ### Ads
 
 - Sample ads for prototyping
+    - sizes
+        - narrow 250x75 / 30%
+        - wide 630x75 / 11.9%
+        - square 250x250 / 100%
+    - combinations
+        - narrow-3x1
+        - narrow-4x1 ?
+        - wide-2x1
+        - wide-1x1
+        - square-1x1 ?
+        - square-2x2 ??
+
 - Google DFB / Custom made
 - New ad sizes?
 
