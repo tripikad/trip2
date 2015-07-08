@@ -1,25 +1,31 @@
 @extends('layouts.main')
 
-@section('title')
-    User
+@section('subheader')
+    
+    <div class="row">
+
+        <div class="col-xs-4 col-sm-5">
+        </div>
+
+        <div class="col-xs-4 col-sm-2">
+
+            <a href="/user/{{ $user->id }}">
+                @include('components.image.circle', ['image' => $user->imagePath()])
+            </a>
+
+        </div>
+
+        <div class="col-xs-4 col-sm-5">
+        </div>
+
+    </div>
+
+    <h2>@yield('title')</h2>
+    
 @stop
 
 @section('content')
 
-<div class="row">
-    
-    <div class="col-sm-1">
-    </div>
-
-    <div class="col-sm-10">
-
-        @yield('user')
-
-    </div>
-
-    <div class="col-sm-1">
-    </div>
-
-</div>
+    @yield('user')
 
 @stop

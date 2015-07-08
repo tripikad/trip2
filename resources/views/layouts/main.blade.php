@@ -13,37 +13,16 @@
     <body>
         <div class="container">
             
-            <div class="row">
-            
-                <div class="col-sm-1 text-center">
-                    <h1><a href="/">Trip2</a></h1>
-                </div>
-            
-                <div class="col-sm-9 text-center">
-            
-                    <ul class="nav nav-pills">
-
-                    @foreach (config('content.types') as $key => $type)
-                        <li><a href="/content/index/{{ $key }}">{{ $type['title'] }}</a></li>
-                    @endforeach
-
-                    </ul>
-
-                </div>
-
-                <div class="col-sm-2 text-center">
-                    
-                    @include('components.placeholder', ['text' => 'Login&nbsp;&nbsp;&nbsp;Search'])
-                
-                </div>
-
-            </div>
+            @include('components.header')
 
             <hr />
 
-            <h2>@yield('title')</h2>
+            @yield('subheader')
 
             {{--
+
+            <h2>@yield('title')</h2>
+
             <div class="row" style="margin: 3em 0;">
             
                 <div class="col-sm-6 col-sm-push-3 text-center">
