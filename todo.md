@@ -58,6 +58,11 @@ Legend: **High priority** Normal priority *Future idea*
 - Offer add/edit/delete forms
 - Offer scheduler
 
+### Polls and surverys
+
+- Poll functionality?
+- Survey functionality?
+
 ### Comment
 
 - **Comment add/edit/delete forms**
@@ -205,6 +210,8 @@ Legend: **High priority** Normal priority *Future idea*
 - convert subscription status
 - convert havebeen / wanttogo?
 - convert commerical users?
+- convert polls?
+- convert subscriptions?
 - small fixes:
     - convert photo: Mitte-reisipildid?
     - limit parameter

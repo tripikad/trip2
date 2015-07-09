@@ -2,8 +2,6 @@
 
 @foreach ($comments as $comment)
 
-    <hr />
-
     @include('components.row', [
         'image' => $comment->user->imagePath(),
         'image_link' => '/user/' . $comment->user->id,
@@ -28,6 +26,8 @@
         </div>
 
     </div>
+
+    <hr />
 
 @endforeach
 

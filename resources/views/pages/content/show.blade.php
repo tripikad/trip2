@@ -1,13 +1,25 @@
 @extends('layouts.main')
 
 @section('title')
-  {{ $title }}
+    {{ $title }}
+@stop
+
+@section('menubar.top')
+    @include('components.ad.show')
+@stop
+
+@section('header.top')
+    @include('components.ad.show')
 @stop
 
 @section('actions.primary')
     @include('components.placeholder', ['text' => 'Follow post'])
 @stop
 
+@section('header.bottom')
+    @include('components.ad.show')
+@stop
+    
 @section('content')
 
     <div style="style="margin-bottom: 16px;">
@@ -41,8 +53,18 @@
 
     </div>
 
-  @include('components.comment.index', ['comments' => $content->comments])
-  
-  @include('components.comment.add')
+    <hr />
+    
+    @include('components.ad.show')
 
+    @include('components.comment.index', ['comments' => $content->comments])
+
+    @include('components.ad.show')
+
+    @include('components.comment.add')
+
+@stop
+
+@section('footer.top')
+    @include('components.ad.show')
 @stop

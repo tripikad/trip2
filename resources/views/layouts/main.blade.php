@@ -12,16 +12,30 @@
     </head>
     <body>
         <div class="container">
+
+            @yield('menubar.top')
             
-            @include('components.header')
+            @include('components.menubar')
 
             <hr />
+
+            @yield('header.top')
             
             <div style="margin: 3em 0;">
-                @yield('hero', view('components.hero.default'))
+                @yield('header', view('components.header.default'))
             </div>
 
+            <hr />
+
+            @yield('header.bottom')
+
             @yield('content')
+
+            <hr />
+
+            @yield('footer.top')
+
+            @include('components.footer')
 
         </div>
     </body>
