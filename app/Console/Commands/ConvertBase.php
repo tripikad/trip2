@@ -318,12 +318,35 @@ class ConvertBase extends Command
 
     // Users
 
+    protected $roleMap = [
+        'authenticated user' => 'regular',
+        'administrator' => 'admin',
+        'editor' => 'admin',
+        'senior editor' => 'admin',
+        'Ärikasutaja' => 'regular',
+        'Tavakasutaja' => 'regular',
+        'Ärikasutaja 2' => 'regular',
+        'superuser' => 'superuser',
+        'viktoriin' => 'regular',
+    ];
+
     public function getUser($uid)
     {
         return \DB::connection($this->connection)
             ->table('users')      
-            ->where('uid', '=', $uid)
+            ->join('users_roles', 'users_roles.uid', '=', 'users.uid')
+            ->where('users.uid', '=', $uid)
             ->first();
+    }
+
+    public function getRole($rid)
+    {
+        $role = \DB::connection($this->connection)
+            ->table('role')      
+            ->whereRid($rid)
+            ->lists('name')[0];
+        
+        return $this->roleMap[$role];
     }
 
     public function createUser($user)
@@ -335,6 +358,8 @@ class ConvertBase extends Command
         $model->email = $user->mail;
 
         $model->password = bcrypt($user->name); // Legacy md5 password: $user->pass
+
+        $model->role = $this->getRole($user->rid);
 
         $model->created_at = \Carbon\Carbon::createFromTimeStamp($user->created);  
         $model->updated_at = \Carbon\Carbon::createFromTimeStamp($user->access);  

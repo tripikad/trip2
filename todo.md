@@ -213,6 +213,7 @@ Legend: **High priority** Normal priority *Future idea*
 - convert polls?
 - convert subscriptions?
 - small fixes:
+    - do not convert content from ?!* users
     - convert photo: Mitte-reisipildid?
     - limit parameter
     - files parameter
