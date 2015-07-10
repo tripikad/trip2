@@ -333,13 +333,18 @@ class ConvertBase extends Command
         $model->id = $user->uid;
         $model->name = $user->name;
         $model->email = $user->mail;
+
+        $model->password = bcrypt($user->name); // Legacy md5 password: $user->pass
+
         $model->created_at = \Carbon\Carbon::createFromTimeStamp($user->created);  
         $model->updated_at = \Carbon\Carbon::createFromTimeStamp($user->access);  
        
         $model->save();
 
         if ($user->picture) {
+
             $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user');
+        
         }
     }
 

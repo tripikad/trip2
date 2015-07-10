@@ -25,13 +25,11 @@
                 @yield('header', view('components.header.default'))
             </div>
 
-            <hr />
-
             @yield('header.bottom')
 
             @yield('content')
 
-            <hr />
+            <hr style="margin-top:6em;">
 
             @yield('footer.top')
 

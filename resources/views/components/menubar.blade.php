@@ -18,7 +18,7 @@
 
     <div class="col-sm-2 text-center">
         
-        @include('components.placeholder', ['text' => 'Login&nbsp;&nbsp;&nbsp;Search'])
+        @include('components.auth.menu')
     
     </div>
 

@@ -9,17 +9,17 @@
     {!! Form::open(array('url' => '/auth/login')) !!}
 
         <div class="form-group">
-            {!! Form::email('email', null, [
+            {!! Form::text('name', null, [
                 'class' => 'form-control input-lg',
-                'placeholder' => 'E-mail'
+                'placeholder' => 'Username'
             ]) !!}
         </div>
 
         <div class="form-group">
             {!! Form::password('password', [
                 'class' => 'form-control input-lg',
-                'placeholder' => 'Password
-            ']) !!}
+                'placeholder' => 'Password'
+            ]) !!}
         </div>
 
         <div class="form-group">

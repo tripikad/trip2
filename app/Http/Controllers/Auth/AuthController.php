@@ -14,7 +14,7 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers;
 
     protected $redirectPath = '/';
-    protected $loginPath = '/login';
+    protected $loginPath = '/auth/login';
 
     public function __construct()
     {
@@ -33,10 +33,15 @@ class AuthController extends Controller
         return view('pages.auth.register');
     }
 
+    public function loginUsername()
+    {
+        return 'name';
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);

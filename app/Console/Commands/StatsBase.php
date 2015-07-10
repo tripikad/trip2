@@ -26,4 +26,10 @@ class StatsBase extends Command
         'trip_forum_other'
     ];
 
+    public function percent($big, $small)
+    {
+
+        return floor(($small * 100) / $big) . '%';
+    }
+
 }
