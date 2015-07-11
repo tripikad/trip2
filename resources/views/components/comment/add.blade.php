@@ -19,12 +19,19 @@
             
             </div>
 
-            <div class="form-group">
-            
-                {!! Form::submit('Add comment', [
-                    'class' => 'btn btn-primary btn-lg btn-block'
-                ]) !!}
-            
+            <div class="row">
+
+                <div class="col-md-8">
+                </div>
+
+                <div class="col-md-4">
+                
+                    {!! Form::submit('Add comment', [
+                        'class' => 'btn btn-primary btn-md btn-block'
+                    ]) !!}
+                    
+                </div>
+
             </div>
 
             {!! Form::close() !!}

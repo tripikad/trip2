@@ -25,9 +25,20 @@
     
         @elseif (in_array($field['type'], ['submit', 'button']))
 
-            {!! Form::submit($field['title'], [
-                'class' => 'btn btn-primary btn-lg btn-block'
-            ]) !!}
+            <div class="row">
+
+                <div class="col-md-8">
+                </div>
+
+                <div class="col-md-4">
+                
+                    {!! Form::submit($field['title'], [
+                        'class' => 'btn btn-primary btn-md btn-block'
+                    ]) !!}
+                    
+                </div>
+
+            </div>
 
         @endif
 
