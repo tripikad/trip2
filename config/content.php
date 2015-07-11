@@ -11,8 +11,33 @@ return [
             'with' => ['destinations', 'topics'],
             'latest' => 'created_at',
             'paginate' => '24',
+            'edit' => [
+                'title' => 'Add news',
+                'fields' => [
+                    'title' => [
+                        'type' => 'text',
+                        'title' => 'Title',
+                    ],
+                    'url' => [
+                        'type' => 'url',
+                        'title' => 'URL',
+                    ],
+                    'image' => [
+                        'type' => 'text',
+                        'title' => 'Image',
+                    ],
+                    'body' => [
+                        'type' => 'textarea',
+                        'title' => 'Body',
+                    ],
+                    'submit' => [
+                        'type' => 'submit',
+                        'title' => 'Add',
+                    ]
+                ]
+            ],
             'front' => true,
-            'frontpaginate' => 3
+            'frontpaginate' => 3,
     
         ],
 
@@ -38,6 +63,23 @@ return [
 
         'forum' => [
     
+            'edit' => [
+                'title' => 'Add forum',
+                'fields' => [
+                    'title' => [
+                        'type' => 'text',
+                        'title' => 'Title',
+                    ],
+                    'body' => [
+                        'type' => 'textarea',
+                        'title' => 'Body',
+                    ],
+                    'submit' => [
+                        'type' => 'submit',
+                        'title' => 'Add',
+                    ]
+                ]
+            ],
             'title' => 'Forum',
             'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],
             'latest' => 'updated_at',

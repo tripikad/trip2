@@ -12,13 +12,21 @@ get('content/index/{type}', 'ContentController@index')
         'type' => config('content.allowed')
 ]);
 
-get('content/{type}/add', 'ContentController@add')
+get('content/{type}/create', 'ContentController@create')
     ->where([
         'type' => config('content.allowed')
 ]);
 
+post('content/{type}', 'ContentController@store')
+    ->where([
+        'type' => config('content.allowed')
+]);
+
+get('content/{id}/edit', 'ContentController@edit');
+
 get('content/{id}', 'ContentController@show');
 
+put('content/{id}', 'ContentController@update');
 
 // Users
 

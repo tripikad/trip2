@@ -48,12 +48,52 @@ class ContentController extends Controller
             ->render();
     }
 
-    public function add($type)
+    public function create($type)
     {
 
-        return \View::make("pages.content.add")
-            ->with('title', config("content.types.$type.add.title"))
+        return \View::make("pages.content.edit")
+            ->with('title', config("content.types.$type.edit.title"))
+            ->with('fields', config("content.types.$type.edit.fields"))
+            ->with('url', 'content/' . $type)
             ->render();
+
+    }
+
+    public function store(Request $request, $type)
+    {
+        $fields = ['user_id' => $request->user()->id, 'type' => $type];
+
+        \App\Content::create(array_merge($request->all(), $fields));
+
+        return redirect('content/index/' . $type );
+
+    }
+
+    public function edit($id)
+    {
+
+        $content = \App\Content::findorFail($id);
+
+        return \View::make("pages.content.edit")
+            ->with('title', config("content.types.$content->type.edit.title"))
+            ->with('fields', config("content.types.$content->type.edit.fields"))
+            ->with('content', $content)
+            ->with('method', 'put')
+            ->with('url', 'content/' . $id)
+            ->render();
+
+    }
+
+    public function update(Request $request, $id)
+    {
+  
+        $content = \App\Content::findorFail($id);
+
+        $fields = ['user_id' => $request->user()->id];
+
+        $content->update(array_merge($request->all(), $fields));
+
+        return redirect('content/' . $id );
 
     }
 
