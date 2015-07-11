@@ -64,17 +64,13 @@ return [
                     'type' => 'text',
                     'title' => 'Title',
                 ],
-                'url' => [
-                    'type' => 'url',
-                    'title' => 'URL',
-                ],
-                'image' => [
-                    'type' => 'text',
-                    'title' => 'Image',
-                ],
                 'body' => [
                     'type' => 'textarea',
                     'title' => 'Body',
+                ],
+                'url' => [
+                    'type' => 'url',
+                    'title' => 'URL',
                 ],
                 'submit' => [
                     'type' => 'submit',
