@@ -9,7 +9,7 @@
 @stop
 
 @section('action.primary')
-    @include('components.placeholder', ['text' => '＋ Add new flight offer'])
+    <a class="btn btn-default btn-block" href="/content/flight/create">＋ Add new flight offer</a>
 @stop
 
 @section('content')

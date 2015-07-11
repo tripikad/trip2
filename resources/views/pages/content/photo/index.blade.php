@@ -9,7 +9,7 @@
 @stop
 
 @section('action.primary')
-    @include('components.placeholder', ['text' => '＋ Add new photo'])
+    <a class="btn btn-default btn-block" href="/content/photo/create">＋ Add photo</a>
 @stop
 
 @section('content')

@@ -28,6 +28,16 @@ get('content/{id}', 'ContentController@show');
 
 put('content/{id}', 'ContentController@update');
 
+
+// Comments
+
+post('content/{id}/comment', 'CommentController@store');
+
+get('comment/{id}/edit', 'CommentController@edit');
+
+put('comment/{id}', 'CommentController@update');
+
+
 // Users
 
 get('user/{id}/messages/{user_id_with}', 'UserController@showMessagesWith');

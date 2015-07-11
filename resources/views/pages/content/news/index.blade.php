@@ -9,7 +9,7 @@
 @stop
 
 @section('action.primary')
-    @include('components.placeholder', ['text' => '＋ Add new news item'])
+    <a class="btn btn-default btn-block" href="/content/news/create">＋ Add news</a>
 @stop
 
 @section('content')

@@ -20,6 +20,16 @@ $font-size-xs-h2:         26px;
 $font-size-xs-h3:         20px;
 $font-size-xs-h4:         16px;
 
+// Buttons
+
+$btn-default-bg:          #ddd;
+$btn-primary-border:      $brand-primary;
+
+
+$btn-border-radius-base:  2px;
+$btn-border-radius-large: 2px;
+$btn-border-radius-small: 2px;
+
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import "styles/scaffolding";

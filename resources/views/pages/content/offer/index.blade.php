@@ -9,7 +9,7 @@
 @stop
 
 @section('action.primary')
-    @include('components.placeholder', ['text' => '＋ Add offer (if company)'])
+    <a class="btn btn-default btn-block" href="/content/offer/create">＋ Add offer</a>
 @stop
 
 @section('content')

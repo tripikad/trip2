@@ -52,8 +52,8 @@ class ContentController extends Controller
     {
 
         return \View::make("pages.content.edit")
-            ->with('title', config("content.types.$type.edit.title"))
-            ->with('fields', config("content.types.$type.edit.fields"))
+            ->with('title', config("content.types.$type.create.title"))
+            ->with('fields', config("content.types.$type.fields"))
             ->with('url', 'content/' . $type)
             ->render();
 
@@ -76,7 +76,7 @@ class ContentController extends Controller
 
         return \View::make("pages.content.edit")
             ->with('title', config("content.types.$content->type.edit.title"))
-            ->with('fields', config("content.types.$content->type.edit.fields"))
+            ->with('fields', config("content.types.$content->type.fields"))
             ->with('content', $content)
             ->with('method', 'put')
             ->with('url', 'content/' . $id)
@@ -89,7 +89,7 @@ class ContentController extends Controller
   
         $content = \App\Content::findorFail($id);
 
-        $fields = ['user_id' => $request->user()->id];
+        $fields = [];
 
         $content->update(array_merge($request->all(), $fields));
 

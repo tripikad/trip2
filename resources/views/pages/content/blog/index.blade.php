@@ -5,7 +5,7 @@
 @stop
 
 @section('action.primary')
-    @include('components.placeholder', ['text' => '＋ Add new blog post'])
+    <a class="btn btn-default btn-block" href="/content/blog/create">＋ Add new blog post</a>
 @stop
 
 @section('content')

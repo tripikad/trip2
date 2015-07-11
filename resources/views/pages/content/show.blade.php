@@ -37,6 +37,9 @@
         </div>
         
         <div class="col-sm-1">
+
+            <a href="/content/{{ $content->id }}/edit">Edit</a>
+
         </div>
 
     </div>

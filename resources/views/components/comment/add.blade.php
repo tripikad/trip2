@@ -1,29 +1,39 @@
 <div class="row">
 
-    <div class="col-xs-2 col-sm-1">
-
-        @include('components.image.circle', ['image' => 'http://trip.ee/files/pictures/picture_none.png'])
-
+    <div class="col-sm-1">
     </div>
 
-    <div class="col-xs-9 col-sm-10">
+    <div class="col-sm-10">
 
-        @include('components.placeholder', ['text' => 'Comment form', 'height' => 200])
+        <div class="form-group">
 
-        <div class="row">
-            <div class="col-sm-6">
-                @include('components.placeholder', ['text' => 'Follow post'])
+            {!! Form::open(array('url' => 'content/' . $content->id . '/comment')) !!}
+
+            <div class="form-group">
+            
+                {!! Form::textarea('body', null, [
+                    'class' => 'form-control input-md',
+                    'placeholder' => 'Comment',
+                    'rows' => 5
+                ]) !!}
+            
             </div>
-            <div class="col-sm-3">
+
+            <div class="form-group">
+            
+                {!! Form::submit('Add comment', [
+                    'class' => 'btn btn-primary btn-lg btn-block'
+                ]) !!}
+            
             </div>
-            <div class="col-sm-3">
-                @include('components.placeholder', ['text' => 'Add comment'])
-            </div>
+
+            {!! Form::close() !!}
+        
         </div>
+    
     </div>
 
     <div class="col-sm-1">
-
     </div>
 
 </div>

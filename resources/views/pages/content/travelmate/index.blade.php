@@ -9,7 +9,7 @@
 @stop
 
 @section('action.primary')
-    @include('components.placeholder', ['text' => '＋ Add new travelmate ad'])
+    <a class="btn btn-default btn-block" href="/content/travelmate/create">＋ Add travelmate ad</a>
 @stop
 
 @section('content')
