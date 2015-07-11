@@ -20,7 +20,7 @@
             {!! Form::$field['type']($key, null, [
                 'class' => 'form-control input-md',
                 'placeholder' => $field['title'],
-                'rows' => isset($field['rows']) ? $field['rows'] : null,
+                'rows' => isset($field['rows']) ? $field['rows'] : 8,
             ]) !!}
     
         @elseif (in_array($field['type'], ['submit', 'button']))

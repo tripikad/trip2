@@ -6,8 +6,6 @@
 
 @section('content')
 
-@include('components.form.error')
-
 <div class="row">
     
     <div class="col-sm-1 col-lg-2">

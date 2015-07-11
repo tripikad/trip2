@@ -19,6 +19,7 @@ return [
             'edit' => [
                 'title' => 'Edit news'
             ],
+            'rules' => ['title' => 'required', 'url' => 'url'],
             'fields' => [
                 'title' => [
                     'type' => 'text',
@@ -57,6 +58,7 @@ return [
             'edit' => [
                 'title' => 'Edit flight offer'
             ],
+            'rules' => ['title' => 'required', 'url' => 'url'],
             'fields' => [
                 'title' => [
                     'type' => 'text',
@@ -95,6 +97,7 @@ return [
             'edit' => [
                 'title' => 'Edit travelmate ad',
             ],              
+            'rules' => ['title' => 'required', 'body' => 'required'],
             'fields' => [
                 'title' => [
                     'type' => 'text',
@@ -125,6 +128,7 @@ return [
             'edit' => [
                 'title' => 'Edit forum post'
             ],
+            'rules' => ['title' => 'required', 'body' => 'required'],
             'fields' => [
                 'title' => [
                     'type' => 'text',
@@ -155,6 +159,7 @@ return [
             'edit' => [
                 'title' => 'Edit photo'
             ],
+            'rules' => ['title' => 'required', 'image' => 'required'],
             'fields' => [
                 'image' => [
                     'type' => 'text',
@@ -186,10 +191,12 @@ return [
             'edit' => [
                 'title' => 'Edit blog post'
             ],
+            'rules' => ['title' => 'required', 'url' => 'url'],
             'fields' => [
                 'title' => [
-                    'type' => 'text',
-                    'title' => 'Title',
+                    'type' => 'textarea',
+                    'title' => 'Offer description',
+                    'rows' => 2
                 ],
                 'url' => [
                     'type' => 'url',
@@ -197,7 +204,7 @@ return [
                 ],
                 'body' => [
                     'type' => 'textarea',
-                    'title' => 'Body',
+                    'title' => 'Details',
                 ],
                 'submit' => [
                     'type' => 'submit',
@@ -220,6 +227,7 @@ return [
             'edit' => [
                 'title' => 'Edit offer'
             ],
+            'rules' => ['title' => 'required', 'url' => 'url'],
             'fields' => [
                 'title' => [
                     'type' => 'text',
@@ -252,6 +260,7 @@ return [
             'edit' => [
                 'title' => 'Edit post'
             ],
+            'rules' => ['title' => 'required', 'body' => 'required'],
             'fields' => [
                 'title' => [
                     'type' => 'text',

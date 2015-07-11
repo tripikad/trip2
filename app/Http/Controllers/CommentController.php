@@ -8,8 +8,14 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
 
+    protected $rules = [
+        'body' => 'required'
+    ];
+
     public function store(Request $request, $id)
     {
+
+        $this->validate($request, $this->rules);
 
         $fields = ['user_id' => $request->user()->id, 'content_id' => $id];
 
@@ -32,7 +38,9 @@ class CommentController extends Controller
 
     public function update(Request $request, $id)
     {
-  
+
+        $this->validate($request, $this->rules);
+
         $comment = \App\Comment::findorFail($id);
 
         $fields = [];

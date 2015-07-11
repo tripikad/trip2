@@ -303,7 +303,7 @@ class ConvertBase extends Command
             $model->id = $comment->cid;
             $model->user_id = $comment->uid;
             $model->content_id = $comment->nid;
-            $model->title = $comment->subject;
+            // $model->title = $comment->subject;
             $model->body = $comment->comment;
             $model->created_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);  
             $model->updated_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp); 

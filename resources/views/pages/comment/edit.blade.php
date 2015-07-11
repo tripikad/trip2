@@ -16,17 +16,24 @@
         {!! Form::textarea('body', null, [
             'class' => 'form-control input-md',
             'placeholder' => 'Comment',
-            'rows' => 5
+            'rows' => 8
         ]) !!}
     
     </div>
 
-    <div class="form-group">
-    
-        {!! Form::submit('Update comment', [
-            'class' => 'btn btn-primary btn-lg btn-block'
-        ]) !!}
-    
+    <div class="row">
+
+        <div class="col-md-8">
+        </div>
+
+        <div class="col-md-4">
+        
+            {!! Form::submit('Update comment', [
+                'class' => 'btn btn-primary btn-md btn-block'
+            ]) !!}
+            
+        </div>
+
     </div>
 
     {!! Form::close() !!}

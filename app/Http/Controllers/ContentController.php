@@ -61,6 +61,9 @@ class ContentController extends Controller
 
     public function store(Request $request, $type)
     {
+
+        $this->validate($request, config("content.types.$type.rules"));
+
         $fields = ['user_id' => $request->user()->id, 'type' => $type];
 
         \App\Content::create(array_merge($request->all(), $fields));
@@ -86,8 +89,10 @@ class ContentController extends Controller
 
     public function update(Request $request, $id)
     {
-  
+
         $content = \App\Content::findorFail($id);
+
+        $this->validate($request, config("content.types.$content->type.rules"));
 
         $fields = [];
 
