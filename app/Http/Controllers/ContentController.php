@@ -66,9 +66,9 @@ class ContentController extends Controller
 
         $fields = ['user_id' => $request->user()->id, 'type' => $type];
 
-        \App\Content::create(array_merge($request->all(), $fields));
+        $content = \App\Content::create(array_merge($request->all(), $fields));
 
-        return redirect('content/index/' . $type );
+        return redirect('content/index/' . $type )->with('status', 'New ' . $content->type . ' ' . $content->title . ' added');
 
     }
 
@@ -98,7 +98,7 @@ class ContentController extends Controller
 
         $content->update(array_merge($request->all(), $fields));
 
-        return redirect('content/' . $id );
+        return redirect('content/' . $id )->with('status', $content->title . ' updated');
 
     }
 

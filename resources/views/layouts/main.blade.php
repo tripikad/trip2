@@ -25,7 +25,8 @@
                 @yield('header', view('components.header.default'))
             </div>
 
-            @include('components.form.error')
+            @include('components.status.success')
+            @include('components.status.error')
 
             @yield('content')
 
