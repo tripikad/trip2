@@ -25,10 +25,6 @@ return [
                     'type' => 'text',
                     'title' => 'Title',
                 ],
-                'url' => [
-                    'type' => 'url',
-                    'title' => 'URL',
-                ],
                 'image' => [
                     'type' => 'text',
                     'title' => 'Image',
@@ -36,6 +32,10 @@ return [
                 'body' => [
                     'type' => 'textarea',
                     'title' => 'Body',
+                ],
+                'url' => [
+                    'type' => 'url',
+                    'title' => 'URL',
                 ],
                 'submit' => [
                     'type' => 'submit',
@@ -194,17 +194,16 @@ return [
             'rules' => ['title' => 'required', 'url' => 'url'],
             'fields' => [
                 'title' => [
-                    'type' => 'textarea',
+                    'type' => 'text',
                     'title' => 'Offer description',
-                    'rows' => 2
-                ],
-                'url' => [
-                    'type' => 'url',
-                    'title' => 'URL',
                 ],
                 'body' => [
                     'type' => 'textarea',
                     'title' => 'Details',
+                ],
+                'url' => [
+                    'type' => 'url',
+                    'title' => 'URL',
                 ],
                 'submit' => [
                     'type' => 'submit',
@@ -230,16 +229,17 @@ return [
             'rules' => ['title' => 'required', 'url' => 'url'],
             'fields' => [
                 'title' => [
-                    'type' => 'text',
-                    'title' => 'Title',
+                    'type' => 'textarea',
+                    'title' => 'Offer description',
+                    'rows' => 2
+                ],
+                'body' => [
+                    'type' => 'textarea',
+                    'title' => 'Details',
                 ],
                 'url' => [
                     'type' => 'url',
                     'title' => 'URL',
-                ],
-                'body' => [
-                    'type' => 'textarea',
-                    'title' => 'Body',
                 ],
                 'submit' => [
                     'type' => 'submit',
