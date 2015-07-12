@@ -1,3 +1,7 @@
+## Latest changes
+
+- convert legacy paths
+
 ## Functionality TODO
 
 Legend: **High priority** Normal priority *Future idea*
@@ -191,7 +195,9 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Legacy paths
 
-- Redirect legacy paths
+- long legacy paths without ".html" ?
+- from content controller to generic alias controller?
+- rename table?
 
 ### Viewed status
 
@@ -206,7 +212,6 @@ Legend: **High priority** Normal priority *Future idea*
 - **convert user permissions**
 - **convert content status**
 - **convert comment status**
-- convert legacy paths
 - convert subscription status
 - convert havebeen / wanttogo?
 - convert commerical users?
