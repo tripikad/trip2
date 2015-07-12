@@ -4,48 +4,36 @@
 
 get('/', 'FrontpageController@index');
 
-// Legacy content
-/*
-get('content/{part3}/{part2}/{part1}.html{suffix?}', 'ContentController@redirect');
-get('content/{part2}/{part1}.html{suffix?}', 'ContentController@redirect');
-get('content/{part1}.html{suffix?}', 'ContentController@redirect');
-*/
+// Legacy paths
 
 get('content/{legacy_path}', 'ContentController@redirect')
-    ->where([
-        'legacy_path' => '(.*)\.html(.*)'
-]);
+    ->where(['legacy_path' => '(.*)\.html(.*)']);
 
-get('content/index/{type}', 'ContentController@index')
-    ->where([
-        'type' => config('content.allowed')
-]);
+// Content
 
-get('content/{type}/create', 'ContentController@create')
-    ->where([
-        'type' => config('content.allowed')
-]);
+Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
+       
+    get('/', ['uses' => 'ContentController@index', 'as' => 'index']);
 
-post('content/{type}', 'ContentController@store')
-    ->where([
-        'type' => config('content.allowed')
-]);
+    get('create', ['uses' => 'ContentController@create', 'as' => 'create']);
 
-get('content/{id}/edit', 'ContentController@edit');
+    post('/', ['uses' => 'ContentController@store', 'as' => 'store']);
 
-get('content/{id}', 'ContentController@show');
+    get('{id}/edit', ['uses' => 'ContentController@edit', 'as' => 'edit']);
 
-put('content/{id}', 'ContentController@update');
+    get('{id}', ['uses' => 'ContentController@show', 'as' => 'show']);
 
+    put('{id}', ['uses' => 'ContentController@update', 'as' => 'updates']);
+
+});
 
 // Comments
 
-post('content/{id}/comment', 'CommentController@store');
+post('content/{id}/comment', ['uses' => 'CommentController@store', 'as' => 'comment.store']);
 
-get('comment/{id}/edit', 'CommentController@edit');
+get('comment/{id}/edit', ['uses' => 'CommentController@edit', 'as' => 'comment.edit']);
 
-put('comment/{id}', 'CommentController@update');
-
+put('comment/{id}', ['uses' => 'CommentController@update', 'as' => 'comment.update']);
 
 // Users
 
@@ -56,6 +44,8 @@ get('user/{id}/messages', 'UserController@showMessages');
 get('user/{id}/follows', 'UserController@showFollows');
 
 get('user/{id}', 'UserController@show');
+
+
 
 
 // Registration

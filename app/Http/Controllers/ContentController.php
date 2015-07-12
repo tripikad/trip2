@@ -37,13 +37,13 @@ class ContentController extends Controller
     }
 
 
-    public function show($id)
+    public function show($type, $id)
     {
         $content = \App\Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers')
             ->findorFail($id);
      
         return \View::make("pages.content.show")
-            ->with('title', config("content.types.$content->type.title"))
+            ->with('title', config("content.types.$type.title"))
             ->with('content', $content)
             ->render();
     }
@@ -72,14 +72,14 @@ class ContentController extends Controller
 
     }
 
-    public function edit($id)
+    public function edit($type, $id)
     {
 
         $content = \App\Content::findorFail($id);
 
         return \View::make("pages.content.edit")
-            ->with('title', config("content.types.$content->type.edit.title"))
-            ->with('fields', config("content.types.$content->type.fields"))
+            ->with('title', config("content.types.$type.edit.title"))
+            ->with('fields', config("content.types.$type.fields"))
             ->with('content', $content)
             ->with('method', 'put')
             ->with('url', 'content/' . $id)
@@ -87,12 +87,12 @@ class ContentController extends Controller
 
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $type, $id)
     {
 
         $content = \App\Content::findorFail($id);
 
-        $this->validate($request, config("content.types.$content->type.rules"));
+        $this->validate($request, config("content.types.$type.rules"));
 
         $fields = [];
 
@@ -108,14 +108,11 @@ class ContentController extends Controller
             ->whereAlias('content/' . $path)
             ->first();
 
-        dump($path);
-        dump('content/' . $path);
-
         if ($alias) {
             return redirect('content/' . $alias->content_id, 301);
         }
 
-        // abort(404);
+        abort(404);
     }
 
 }
