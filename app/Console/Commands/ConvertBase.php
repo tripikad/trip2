@@ -77,6 +77,8 @@ class ConvertBase extends Command
             $this->convertComments($node->nid);
 
             $this->convertFlags($node->nid, $modelname, 'node');
+
+            $this->convertAlias($node->nid, $modelname, 'node');
         
         }
 
@@ -489,6 +491,26 @@ class ConvertBase extends Command
         }   
     }
 
+
+    // Aliases
+
+    public function getAlias($nid)
+    {
+        return \DB::connection($this->connection)
+            ->table('url_alias')
+            ->where('src', '=', 'node/' . $nid)
+            ->first();
+    }
+
+    public function convertAlias($nid)
+    {
+
+        \DB::table('content_alias')
+            ->insert([
+                'content_id' => $nid,
+                'alias' => $this->getAlias($nid)->dst
+            ]);
+    }
 
     // Utils 
     

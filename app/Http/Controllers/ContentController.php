@@ -102,4 +102,20 @@ class ContentController extends Controller
 
     }
 
+    public function redirect($path)
+    {
+        $alias = \DB::table('content_alias')
+            ->whereAlias('content/' . $path)
+            ->first();
+
+        dump($path);
+        dump('content/' . $path);
+
+        if ($alias) {
+            return redirect('content/' . $alias->content_id, 301);
+        }
+
+        // abort(404);
+    }
+
 }

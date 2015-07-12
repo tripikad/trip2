@@ -4,8 +4,17 @@
 
 get('/', 'FrontpageController@index');
 
+// Legacy content
+/*
+get('content/{part3}/{part2}/{part1}.html{suffix?}', 'ContentController@redirect');
+get('content/{part2}/{part1}.html{suffix?}', 'ContentController@redirect');
+get('content/{part1}.html{suffix?}', 'ContentController@redirect');
+*/
 
-// Content
+get('content/{legacy_path}', 'ContentController@redirect')
+    ->where([
+        'legacy_path' => '(.*)\.html(.*)'
+]);
 
 get('content/index/{type}', 'ContentController@index')
     ->where([
