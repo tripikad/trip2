@@ -19,13 +19,14 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
     post('/', ['uses' => 'ContentController@store', 'as' => 'store']);
 
-    get('{id}/edit', ['uses' => 'ContentController@edit', 'as' => 'edit']);
-
     get('{id}', ['uses' => 'ContentController@show', 'as' => 'show']);
 
-    put('{id}', ['uses' => 'ContentController@update', 'as' => 'updates']);
+    get('{id}/edit', ['uses' => 'ContentController@edit', 'as' => 'edit']);
+
+    put('{id}', ['uses' => 'ContentController@update', 'as' => 'update']);
 
 });
+
 
 // Comments
 
@@ -35,15 +36,30 @@ get('comment/{id}/edit', ['uses' => 'CommentController@edit', 'as' => 'comment.e
 
 put('comment/{id}', ['uses' => 'CommentController@update', 'as' => 'comment.update']);
 
+
 // Users
 
-get('user/{id}/messages/{user_id_with}', 'UserController@showMessagesWith');
+Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+       
+    // get('/', ['uses' => 'UserController@index', 'as' => 'index']);
 
-get('user/{id}/messages', 'UserController@showMessages');
+    // get('create', ['uses' => 'UserController@create', 'as' => 'create']);
 
-get('user/{id}/follows', 'UserController@showFollows');
+    // post('/', ['uses' => 'UserController@store', 'as' => 'store']);
 
-get('user/{id}', 'UserController@show');
+    get('{id}', ['uses' => 'UserController@show', 'as' => 'show']);
+
+    // get('{id}/edit', ['uses' => 'UserController@edit', 'as' => 'edit']);
+
+    // put('{id}', ['uses' => 'UserController@update', 'as' => 'update']);
+
+    get('{id}/messages/{user_id_with}', 'UserController@showMessagesWith');
+
+    get('{id}/messages', 'UserController@showMessages');
+
+    get('{id}/follows', 'UserController@showFollows');
+
+});
 
 
 
