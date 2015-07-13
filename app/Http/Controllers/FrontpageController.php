@@ -21,13 +21,10 @@ class FrontpageController extends Controller
         foreach (config('content.types') as $type => $typeConf) {
         
             if (isset($typeConf['front'])) {
-
-                $fronts[$type]['title'] = $typeConf['title'];
             
                 $fronts[$type]['contents'] = Content::whereType($type)
                     ->with($typeConf['with'])
                     ->latest($typeConf['latest'])
-                //  ->orderBy(DB::raw('RAND()'))
                     ->take($typeConf['frontpaginate'])
                     ->get();
         

@@ -5,7 +5,6 @@
 @foreach($fronts as $type => $front) 
 
     @include("components.content.$type.front", [
-        'title' => $front['title'],
         'contents' => $front['contents']
     ])
     
