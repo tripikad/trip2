@@ -8,7 +8,7 @@
 
         @if (isset($image_link)) <a href="{{ $image_link }}"> @endif
 
-        @include('components.image.circle', ['image' => $image])
+        @if (isset($image)) @include('components.image.circle', ['image' => $image]) @endif
          
         @if (isset($image_link)) </a> @endif
 
@@ -18,11 +18,11 @@
 
         @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
         
-        <h3 style="margin: 0;">{{ $heading }}</h3>
+        @if (isset($heading)) <h3 style="margin: 0;">{{ $heading }}</h3> @endif
 
         @if (isset($heading_link)) </a> @endif
 
-        {!! $text !!}
+        @if (isset($text)) {!! $text !!} @endif
 
     </div>
 

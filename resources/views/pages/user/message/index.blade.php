@@ -1,10 +1,10 @@
-@extends('layouts.user')
+@extends('layouts.main')
 
 @section('title')
-    {{ $user->name }} messages
+    {{ trans('user.show.messages.index.title', ['user' => $user->name]) }}
 @stop
 
-@section('user')
+@section('content')
 
 @if (count($user->messages()))    
 
@@ -12,13 +12,13 @@
   
     @include('components.row', [
         'image' => $message->fromUser->imagePath(),
-        'image_link' => '/user/' . $message->fromUser->id,
+        'image_link' => route('user.show', [$message->fromUser]),
         'heading' => $message->title,
-        'heading_link' => '/user/' . $user->id . '/messages/' . $message->fromUser->id,
-        'text' => 'By <a href="/user/' . $message->fromUser->id .'">'
-            . $message->fromUser->name
-            . '</a> at '
-            . $message->created_at->format('d. m Y H:i:s'),
+        'heading_link' => route('user.show.messages.with', [$user, $message->fromUser]),
+        'text' => trans('user.show.messages.index.row.text', [
+            'user' => view('components.user.link', ['user' => $message->fromUser]),
+            'created_at' => $message->created_at->format('d. m Y H:i:s')
+        ])
     ])
 
     <hr />

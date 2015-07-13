@@ -42,7 +42,7 @@ class UserController extends Controller
         $user = \App\User::with('follows')
             ->findorFail($id);
      
-        return \View::make('pages.user.follow')
+        return \View::make('pages.user.follow.index')
             ->with('user', $user)
             ->render();
     }

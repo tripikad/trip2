@@ -24,7 +24,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        //
+        
+        $router->pattern('id', '[0-9]+');
+        $router->pattern('id2', '[0-9]+');
+        $router->pattern('type', config('content.allowed'));
 
         parent::boot($router);
     }

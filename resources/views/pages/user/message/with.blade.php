@@ -1,24 +1,25 @@
-@extends('layouts.user')
+@extends('layouts.main')
 
 @section('title')
 
-    {{ $user->name }} messages with {{ $user_with->name }}
+    {{ trans('user.show.messages.with.title', ['user' => $user->name, 'user_with' => $user_with->name]) }}
 
 @stop
 
-@section('user')
+@section('content')
 
 @if (count($messages))
 
 @foreach ($messages as $message)
 
     @include('components.row', [
-        'heading' => null,
         'image' => $message->fromUser->imagePath(),
-        'text' => 'At ' . $message->created_at->format('d. m Y H:i:s')
+        'text' => trans('user.show.messages.with.row.text', [
+            'created_at' => $message->created_at->format('d. m Y H:i:s')
+        ])
     ])
 
-    {!! $message->body !!}
+    {!! nl2br($message->body) !!}
 
     <hr>
 

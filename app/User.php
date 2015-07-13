@@ -61,10 +61,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function hasRole($role) {
         
-        if ($this->role == 'superuser' || $this->role == $role) {
-            return true;
-        }
+        $roleMap = [
+            'regular' => ['regular', 'admin', 'superuser'],
+            'admin' => ['admin', 'superuser'],
+            'superuser' => ['superuser'],
+        ];
         
+        return in_array($this->role, $roleMap[$role]);
+
     }
 
 }
