@@ -7,7 +7,6 @@ return [
 
         'news' => [
     
-            'title' => 'News',
             'with' => ['destinations', 'topics'],
             'latest' => 'created_at',
             'paginate' => '24',

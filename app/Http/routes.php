@@ -30,7 +30,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
 // Comments
 
-post('content/{id}/comment', ['middleware' => 'role:regular', 'uses' => 'CommentController@store', 'as' => 'comment.store']);
+post('content/{type}/{id}/comment', ['middleware' => 'role:regular', 'uses' => 'CommentController@store', 'as' => 'comment.store']);
 
 get('comment/{id}/edit', ['middleware' => 'role:admin', 'uses' => 'CommentController@edit', 'as' => 'comment.edit']);
 

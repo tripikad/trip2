@@ -1,7 +1,7 @@
 @extends('layouts.medium')
 
 @section('title')
-    {{ trans("content.edit.title") }}
+    {{ $title }}
 @stop
 
 @section('content.medium')

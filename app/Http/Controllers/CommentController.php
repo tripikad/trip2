@@ -12,7 +12,7 @@ class CommentController extends Controller
         'body' => 'required'
     ];
 
-    public function store(Request $request, $id)
+    public function store(Request $request, $type, $id)
     {
 
         $this->validate($request, $this->rules);
@@ -21,7 +21,7 @@ class CommentController extends Controller
 
         $comment = \App\Comment::create(array_merge($request->all(), $fields));
         
-        return redirect('content/' . $id . '#comment-' . $comment->id);
+        return redirect()->route('content.show', [$type, $id, '#comment-' . $comment->id]);
 
     }
 
@@ -47,7 +47,7 @@ class CommentController extends Controller
 
         $comment->update(array_merge($request->all(), $fields));
 
-        return redirect('content/' . $comment->content->id . '#comment-' . $comment->id);
+        return redirect()->route('content.show', [$comment->content->type, $comment->content, '#comment-' . $comment->id]);
 
     }
 

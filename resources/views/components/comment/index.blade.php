@@ -6,11 +6,11 @@
 
         @include('components.row', [
             'image' => $comment->user->imagePath(),
-            'image_link' => '/user/' . $comment->user->id,
-            'heading' => null,
-            'text' => 'By <a href="/user/' . $comment->user->id .'">'
-            . $comment->user->name
-            . '</a>'
+            'image_link' => route('user.show', [$comment->user]),
+            'text' => trans("comment.index.row.text", [
+                'user' => view('components.user.link', ['user' => $comment->user]),
+                'created_at' => $comment->created_at->format('d. m Y H:i:s'),
+            ])
         ])
 
         <div class="row">
@@ -25,7 +25,7 @@
             </div>
 
             <div class="col-sm-1"> 
-                <a href="/comment/{{ $comment->id}}/edit">Edit</a> 
+                <a href="{{ route('comment.edit', [$comment->id]) }}">Edit</a> 
             </div>
 
         </div>

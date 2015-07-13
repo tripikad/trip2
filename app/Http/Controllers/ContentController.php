@@ -30,7 +30,6 @@ class ContentController extends Controller
         $contents = $contents->simplePaginate(config("content.types.$type.paginate"));
 
         return \View::make("pages.content.$type.index")
-            ->with('title', config("content.types.$type.title"))
             ->with('contents', $contents)
             ->with('type', $type)
             ->render();
@@ -44,7 +43,6 @@ class ContentController extends Controller
             ->findorFail($id);
      
         return \View::make("pages.content.show")
-            ->with('title', config("content.types.$type.title"))
             ->with('content', $content)
             ->with('type', $type)
             ->render();
@@ -54,9 +52,9 @@ class ContentController extends Controller
     {
 
         return \View::make("pages.content.edit")
-            ->with('title', config("content.types.$type.create.title"))
             ->with('fields', config("content.types.$type.fields"))
-            ->with('url', 'content/' . $type)
+            ->with('title', trans('content.create.title'))
+            ->with('url', route('content.store', [$type]))
             ->with('type', $type)
             ->render();
 
@@ -82,6 +80,7 @@ class ContentController extends Controller
         $content = \App\Content::findorFail($id);
 
         return \View::make("pages.content.edit")
+            ->with('title', trans('content.create.title'))
             ->with('fields', config("content.types.$type.fields"))
             ->with('content', $content)
             ->with('method', 'put')

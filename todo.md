@@ -17,6 +17,9 @@ Legend: **High priority** Normal priority *Future idea*
 - **Register**
 - **Comment add/edit/delete forms**
 - Add translations
+- **Roles**
+- users: unique name / email ?
+- **auth middleware / controller AC**
 
 
 ## Functionality TODO
@@ -101,7 +104,7 @@ Legend: **High priority** Normal priority *Future idea*
 ### Search
 
 - **Destination autocomplete**
-- **Choose Provider:**
+- Choose Provider:
     - local Zend Search
     - Algolia? $49/m
     - Self-hosted Elasticsearch $10-$20
@@ -136,7 +139,6 @@ Legend: **High priority** Normal priority *Future idea*
 ### Auth
 
 - **Password reminder**
-- **Roles**
 - Permissions
 - Legacy Drupal password hasher / mass password renewal?
 - *Registration spam prevention (Mollom?)*
@@ -146,12 +148,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### DB
 
-- users: unique name / email ?
 - foreign keys for pivot tables / comments
-
-### Routes
-
-- **auth middleware / controller AC **
 
 ### Models
 
@@ -161,7 +158,7 @@ Legend: **High priority** Normal priority *Future idea*
     - limited HTML for body
         a, em, i, strong, b, img, br
     - clear attributes
-- **sanitize content output + nl2br**
+- sanitize content output + nl2br
 
 ### Views
 
@@ -182,6 +179,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 - **Cache of popular views**
 - *Full cache pipeline*
+- CommentController@store: $id? $type
 
 ### Image pipeline
 
@@ -192,7 +190,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Forms
 
-- **Access control per field**
+- Access control per field
 - Date widget
 - Time widget
 - Delete confirmations
@@ -262,3 +260,4 @@ Legend: **High priority** Normal priority *Future idea*
 https://packagist.org/packages/texy/texy
 https://packagist.org/packages/mews/purifier
 https://packagist.org/packages/baum/baum
+

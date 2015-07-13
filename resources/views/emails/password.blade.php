@@ -1,3 +1,1 @@
-Click here to reset your password:
-
-{{ url('password/reset/' . $token) }}
+{{ trans('email.password.body', ['url' => url('password/reset/' . $token]) }}
