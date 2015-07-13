@@ -167,6 +167,10 @@ Legend: **High priority** Normal priority *Future idea*
 - Does email view work?
 - @section('subheading')
 
+### Components
+
+- card title vs subtitle
+
 ### SASS
 
 - Lato @import
@@ -249,3 +253,8 @@ Legend: **High priority** Normal priority *Future idea*
 ### SQL
 
 - Unique user statuses?
+
+### Libraries
+
+https://packagist.org/packages/texy/texy
+https://packagist.org/packages/mews/purifier

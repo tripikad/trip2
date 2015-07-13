@@ -19,20 +19,13 @@
 
             <div class="col-xs-6 col-sm-3">
 
-                <a href="/content/{{ $content->id }}">
+                <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 
                     @include('components.card', [
-                        'title' => null,
-                        'subtitle' => $content->title,
-
+                        'title' => $content->title,
                     ])
                 
                 </a>
-
-                {{--
-                @include('carrier.index', ['carriers' => $content->carriers])
-                @include('destination.index', ['destinations' => $content->destinations])
-                --}}
 
             </div>
 

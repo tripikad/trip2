@@ -32,13 +32,13 @@
 
         <div class="col-sm-10">
 
-            {!! nl2br($content->body) !!}
+            {!! $content->body !!}
 
         </div>
         
         <div class="col-sm-1">
 
-            <a href="/content/{{ $content->id }}/edit">Edit</a>
+            <a href="{{ route('content.edit', ['type' => $content->type, 'id' => $content]) }}">Edit</a>
 
         </div>
 
