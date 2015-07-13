@@ -1,15 +1,14 @@
 @extends('layouts.main')
 
 @section('title')
-{{ $title }}
+    {{ trans("content.$type.index.title") }}
 @stop
 
-@section('action.secondary')
-    @include('components.placeholder', ['text' => 'Filters ▾'])
-@stop
-
-@section('action.primary')
-    <a class="btn btn-default btn-block" href="/content/flight/create">＋ Add new flight offer</a>
+@section('header.right')
+    @include('components.button', [ 
+        'route' => route('content.create', ['type' => $type]),
+        'title' => trans("content.$type.create.title")
+    ])
 @stop
 
 @section('content')

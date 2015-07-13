@@ -1,10 +1,23 @@
-## Latest changes
+Legend: **High priority** Normal priority *Future idea*
+
+## Done
 
 - convert legacy paths
+- **convert user permissions**
+- **Content add/edit/delete forms**
+- Sample ads for prototyping
+    - sizes
+        - narrow 250x75 / 30%
+        - wide 630x75 / 11.9%
+        - square 250x250 / 100%
+- Naming: _ vs partials vs index vs list vs element vs component
+- content/index/{type} > content/{type}/all
+- content/{id} > content/{type}/{id}
+- **Login**
+- **Register**
+
 
 ## Functionality TODO
-
-Legend: **High priority** Normal priority *Future idea*
 
 ### Frontpage
 
@@ -21,8 +34,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Content
 
-- **Content add/edit/delete forms**
-- **Filtering**
+- **Forum siltering**
 - **Content status: published/unpublished/draft/deleted**
 - Destination and tag autocomplete in index / edit
 - Content type conversion for admins
@@ -117,35 +129,19 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Ads
 
-- Sample ads for prototyping
-    - sizes
-        - narrow 250x75 / 30%
-        - wide 630x75 / 11.9%
-        - square 250x250 / 100%
-    - combinations
-        - narrow-3x1
-        - narrow-4x1 ?
-        - wide-2x1
-        - wide-1x1
-        - square-1x1 ?
-        - square-2x2 ??
-
 - Google DFB / Custom made
-- New ad sizes?
 
 ## Technology TODO
 
 ### Auth
 
-- **Login**
-- **Register**
 - **Password reminder**
-- **Auth mailer translation**
 - **Roles**
 - Permissions
 - Legacy Drupal password hasher / mass password renewal?
 - *Registration spam prevention (Mollom?)*
 - *FB login*
+- "Not yet registred?" links
 
 ### DB
 
@@ -154,22 +150,22 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Routes
 
-- complete the routes + auth middleware?
-- content/index/{type} > content/{type}/all
-- content/{id} > content/{type}/{id} // resouce controller?
+- **auth middleware / controller AC **
 
 ### Models
 
 - **sanitize content input**
+    - no HTML in titles
+    - limited HTML for body
+        a, em, i, strong, b, img, br
+    - clear attributes
 - **sanitize content output + nl2br**
 
 ### Views
 
-- **Views access control**
-- **View access control tests**
-- Naming: _ vs partials vs index vs list vs element vs component
 - Date formatting: in partial? in model?
 - Does email view work?
+- @section('subheading')
 
 ### SASS
 
@@ -185,6 +181,7 @@ Legend: **High priority** Normal priority *Future idea*
 - **Image processing**
 - **Image URLs**
 - **Image uploads**
+- fallback image(s) in /public/icons
 
 ### Forms
 
@@ -195,9 +192,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Legacy paths
 
-- long legacy paths without ".html" ?
-- from content controller to generic alias controller?
-- rename table?
+- what to do with long legacy paths without ".html" ?
 
 ### Viewed status
 
@@ -207,9 +202,14 @@ Legend: **High priority** Normal priority *Future idea*
 
 - *Harmonize Following / Subscribing / Bookmarking concepts*
 
+### Stat
+
+- OldUsers: first created nodes and comments
+
 ### Convert
 
-- **convert user permissions**
+- ConvertOldUsers
+- ConvertUnpublishedComments ($latest - 1 month)
 - **convert content status**
 - **convert comment status**
 - convert subscription status
@@ -221,8 +221,8 @@ Legend: **High priority** Normal priority *Future idea*
     - comment titles?
     - do not convert content from ?!* users
     - convert photo: Mitte-reisipildid?
-    - limit parameter
-    - files parameter
+    - limit CLI parameter
+    - files CLI parameter
     - fix double run on taxonomy relations
     - filter frontimg tag from blog posts
     - flights: regexp price from the title
@@ -236,6 +236,7 @@ Legend: **High priority** Normal priority *Future idea*
 ### Translations
 
 - Add translations
+- Carbon translations?
 
 ### Other
 
@@ -244,3 +245,7 @@ Legend: **High priority** Normal priority *Future idea*
 - RSS feed
 - GA tracker
 - Other trackers?
+
+### SQL
+
+- Unique user statuses?

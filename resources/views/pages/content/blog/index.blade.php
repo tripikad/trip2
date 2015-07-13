@@ -1,11 +1,14 @@
 @extends('layouts.main')
 
 @section('title')
-{{ $title }}
+    {{ trans("content.$type.index.title") }}
 @stop
 
-@section('action.primary')
-    <a class="btn btn-default btn-block" href="/content/blog/create">＋ Add new blog post</a>
+@section('header.right')
+    @include('components.button', [ 
+        'route' => route('content.create', ['type' => $type]),
+        'title' => trans("content.$type.create.title")
+    ])
 @stop
 
 @section('content')
@@ -17,7 +20,7 @@
 
             <div class="col-xs-2">
                 
-                <a href="/user/{{ $content->user->id }}">
+                <a href="{{ route('user.show', [$content->user]) }}">
                     @include('components.image.circle', ['image' => $content->user->imagePath()])
                 </a>
           
@@ -25,18 +28,22 @@
             
             <div class="col-xs-10">
                 
-                <h3><a href="/content/{{ $content->id }}">{{ $content->title }}</a></h3>
+                <h3>
+                    <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
+                        {{ $content->title }}
+                    </a>
+                </h3>
                 
                 <p>
-                by {{ $content->user->name }}
-                at {{ $content->created_at->format('d.m.Y') }}
-                ({{ count($content->comments) }},
-                latest at {{ $content->updated_at->format('d. m Y') }})
-                @include('components.destination.list', ['destinations' => $content->destinations])
-                @include('components.topic.list', ['topics' => $content->topics])
+                {!! trans("content.$type.index.row.text", [
+                    'user' => view('components.user.link', ['user' => $content->user]),
+                    'created_at' => $content->created_at->format('d. m Y H:i:s'),
+                    'destinations' => $content->destinations->implode('name', ','),
+                    'tags' => $content->topics->implode('name', ','),
+                ]) !!}
                 </p>
 
-                {!! nl2br($content->body) !!}
+                {!! str_limit($content->body, 500) !!}
             
             </div>
 

@@ -12,8 +12,6 @@
     </head>
     <body>
         <div class="container">
-
-            @yield('menubar.top')
             
             @include('components.menubar')
 
@@ -22,7 +20,7 @@
             @yield('header.top')
             
             <div style="margin: 3em 0;">
-                @yield('header', view('components.header.default'))
+                @yield('header', view('components.header.simple'))
             </div>
 
             @include('components.status.success')

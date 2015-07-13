@@ -8,8 +8,12 @@
 
         <ul class="nav nav-pills">
 
-        @foreach (config('content.types') as $key => $type)
-            <li><a href="/content/index/{{ $key }}">{{ $type['title'] }}</a></li>
+        @foreach (config('content.types') as $type => $data)
+            <li>
+                <a href="{{ route('content.index', ['type' => $type]) }}">
+                    {{ trans("content.$type.index.title") }}
+                </a>
+            </li>
         @endforeach
 
         </ul>

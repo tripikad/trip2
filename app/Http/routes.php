@@ -15,26 +15,26 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
        
     get('/', ['uses' => 'ContentController@index', 'as' => 'index']);
 
-    get('create', ['uses' => 'ContentController@create', 'as' => 'create']);
+    get('create', ['middleware' => 'auth', 'uses' => 'ContentController@create', 'as' => 'create']);
 
-    post('/', ['uses' => 'ContentController@store', 'as' => 'store']);
+    post('/', ['middleware' => 'auth', 'uses' => 'ContentController@store', 'as' => 'store']);
 
     get('{id}', ['uses' => 'ContentController@show', 'as' => 'show']);
 
-    get('{id}/edit', ['uses' => 'ContentController@edit', 'as' => 'edit']);
+    get('{id}/edit', ['middleware' => 'auth', 'uses' => 'ContentController@edit', 'as' => 'edit']);
 
-    put('{id}', ['uses' => 'ContentController@update', 'as' => 'update']);
+    put('{id}', ['middleware' => 'auth', 'uses' => 'ContentController@update', 'as' => 'update']);
 
 });
 
 
 // Comments
 
-post('content/{id}/comment', ['uses' => 'CommentController@store', 'as' => 'comment.store']);
+post('content/{id}/comment', ['middleware' => 'auth', 'uses' => 'CommentController@store', 'as' => 'comment.store']);
 
-get('comment/{id}/edit', ['uses' => 'CommentController@edit', 'as' => 'comment.edit']);
+get('comment/{id}/edit', ['middleware' => 'auth', 'uses' => 'CommentController@edit', 'as' => 'comment.edit']);
 
-put('comment/{id}', ['uses' => 'CommentController@update', 'as' => 'comment.update']);
+put('comment/{id}', ['middleware' => 'auth', 'uses' => 'CommentController@update', 'as' => 'comment.update']);
 
 
 // Users
@@ -43,21 +43,21 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
        
     // get('/', ['uses' => 'UserController@index', 'as' => 'index']);
 
-    // get('create', ['uses' => 'UserController@create', 'as' => 'create']);
+    // get('create', ['middleware' => 'auth', 'uses' => 'UserController@create', 'as' => 'create']);
 
-    // post('/', ['uses' => 'UserController@store', 'as' => 'store']);
+    // post('/', ['middleware' => 'auth', 'uses' => 'UserController@store', 'as' => 'store']);
 
     get('{id}', ['uses' => 'UserController@show', 'as' => 'show']);
 
-    // get('{id}/edit', ['uses' => 'UserController@edit', 'as' => 'edit']);
+    // get('{id}/edit', ['middleware' => 'auth', 'uses' => 'UserController@edit', 'as' => 'edit']);
 
-    // put('{id}', ['uses' => 'UserController@update', 'as' => 'update']);
+    // put('{id}', ['middleware' => 'auth', 'uses' => 'UserController@update', 'as' => 'update']);
 
-    get('{id}/messages/{user_id_with}', 'UserController@showMessagesWith');
+    get('{id}/messages/{user_id_with}', ['middleware' => 'auth', 'uses' => 'UserController@showMessagesWith', 'as' => 'show.messages.with']);
 
-    get('{id}/messages', 'UserController@showMessages');
+    get('{id}/messages', ['middleware' => 'auth', 'uses' => 'UserController@showMessages', 'as' => 'show.messages']);
 
-    get('{id}/follows', 'UserController@showFollows');
+    get('{id}/follows', ['middleware' => 'auth', 'uses' => 'UserController@showFollows', 'as' => 'show.follows']);
 
 });
 

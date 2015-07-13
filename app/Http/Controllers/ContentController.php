@@ -32,6 +32,7 @@ class ContentController extends Controller
         return \View::make("pages.content.$type.index")
             ->with('title', config("content.types.$type.title"))
             ->with('contents', $contents)
+            ->with('type', $type)
             ->render();
     
     }
@@ -45,6 +46,7 @@ class ContentController extends Controller
         return \View::make("pages.content.show")
             ->with('title', config("content.types.$type.title"))
             ->with('content', $content)
+            ->with('type', $type)
             ->render();
     }
 
@@ -61,8 +63,9 @@ class ContentController extends Controller
 
     public function store(Request $request, $type)
     {
-
         $this->validate($request, config("content.types.$type.rules"));
+
+        dd($type);
 
         $fields = ['user_id' => $request->user()->id, 'type' => $type];
 
@@ -78,7 +81,6 @@ class ContentController extends Controller
         $content = \App\Content::findorFail($id);
 
         return \View::make("pages.content.edit")
-            ->with('title', config("content.types.$type.edit.title"))
             ->with('fields', config("content.types.$type.fields"))
             ->with('content', $content)
             ->with('method', 'put')

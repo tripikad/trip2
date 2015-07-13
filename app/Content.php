@@ -49,4 +49,8 @@ class Content extends Model
         return $this->image ? '/images/' . $this->type . '/small/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
     }
 
+    public function getBodyAttribute($value)
+    {
+        return nl2br($value);
+    }
 }
