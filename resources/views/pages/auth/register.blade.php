@@ -1,43 +1,45 @@
-@extends('layouts.form.narrow')
+@extends('layouts.narrow')
 
 @section('title')
-    Register
+    {{ trans('auth.register.title') }}
 @stop
 
-@section('form')
+@section('content.narrow')
 
     {!! Form::open(array('url' => '/auth/register')) !!}
 
         <div class="form-group">
             {!! Form::text('name', null, [
                 'class' => 'form-control input-lg',
-                'placeholder' => 'Name'
+                'placeholder' => trans('auth.register.field.name.title')
             ]) !!}
         </div>
 
         <div class="form-group">
             {!! Form::email('email', null, [
                 'class' => 'form-control input-lg',
-                'placeholder' => 'E-mail'
+                'placeholder' => trans('auth.register.field.email.title')
             ]) !!}
         </div>
 
         <div class="form-group">
             {!! Form::password('password', [
                 'class' => 'form-control input-lg',
-                'placeholder' => 'Password
-            ']) !!}
+                'placeholder' => trans('auth.register.field.password.title')
+            ]) !!}
         </div>
 
         <div class="form-group">
             {!! Form::password('password_confirmation', [
                 'class' => 'form-control input-lg',
-                'placeholder' => 'Confirm Password
-            ']) !!}
+                'placeholder' => trans('auth.register.field.password_confirmation.title')
+            ]) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::submit('Register', ['class' => 'btn btn-primary btn-lg btn-block']) !!}
+            {!! Form::submit(trans('auth.register.submit.title'), [
+                'class' => 'btn btn-primary btn-lg btn-block
+            ']) !!}
         </div>
 
     {!! Form::close() !!}

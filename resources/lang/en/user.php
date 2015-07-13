@@ -2,6 +2,8 @@
 
 return [
 
+    'show.subheader' => 'Joined at :created_at',
+
     'follow.index.title' => ':user follows',
     'follow.index.row.text' => 'By :user at :created_at',
 

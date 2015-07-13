@@ -16,7 +16,7 @@ class Role
     public function handle($request, Closure $next, $role)
     {
 
-        if (! $request->user()->hasRole($role)) {
+        if (! $request->user() || ! $request->user()->hasRole($role)) {
 
             return response('TRANSLATE: No access', 401);
         

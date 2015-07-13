@@ -8,17 +8,22 @@
 
                 <div class="col-xs-2">
                     
-                    <a href="/user/{{ $content->user->id }}">
+                    <a href="{{ route('user.show', [$content->user]) }}">
+                        
                         @include('components.image.circle', ['image' => $content->user->imagePath()])
+                    
                     </a>
                 
                 </div>
                 
                 <div class="col-xs-10">
                     
-                    <h3><a href="/content/{{ $content->id }}">{{ $content->title }}</a></h3>
+                    <h3>
+                        <a href="{{ route('content.show', [$content->type, $content]) }}">{{ $content->title }}
+                        </a>
+                    </h3>
                     
-                    <p>by {{ $content->user->name }}</p>
+                    <p>{{ trans("content.$type.front.row.text", ['user' => $content->user->name]) }}</p>
                 
                 </div>
 

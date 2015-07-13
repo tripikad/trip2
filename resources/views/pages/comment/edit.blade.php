@@ -1,10 +1,10 @@
-@extends('layouts.form.wide')
+@extends('layouts.medium')
 
 @section('title')
-    Edit comment
+    {{ trans('comment.edit.title') }}
 @stop
 
-@section('form')
+@section('content.medium')
     
     {!! Form::model($comment, array(
         'url' => 'comment/' . $comment->id,
@@ -15,7 +15,7 @@
     
         {!! Form::textarea('body', null, [
             'class' => 'form-control input-md',
-            'placeholder' => 'Comment',
+            'placeholder' => trans('comment.edit.body.title'),
             'rows' => 8
         ]) !!}
     
@@ -28,7 +28,7 @@
 
         <div class="col-md-4">
         
-            {!! Form::submit('Update comment', [
+            {!! Form::submit(trans('comment.edit.submit.title'), [
                 'class' => 'btn btn-primary btn-md btn-block'
             ]) !!}
             

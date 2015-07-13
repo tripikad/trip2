@@ -1,36 +1,38 @@
-@extends('layouts.form.narrow')
+@extends('layouts.narrow')
 
 @section('title')
-    Pick a new password
+    {{ trans('auth.reset.title') }}
 @stop
 
-@section('form')
+@section('content.narrow')
 
     {!! Form::open(array('url' => '/password/reset')) !!}
 
         <div class="form-group">
             {!! Form::email('email', null, [
                 'class' => 'form-control input-lg',
-                'placeholder' => 'E-mail'
+                'placeholder' => trans('auth.reset.field.email.title')
             ]) !!}
         </div>
 
         <div class="form-group">
             {!! Form::password('password', [
                 'class' => 'form-control input-lg',
-                'placeholder' => 'Password
-            ']) !!}
+                'placeholder' => trans('auth.reset.field.password.title')
+            ]) !!}
         </div>
 
         <div class="form-group">
             {!! Form::password('password_confirmation', [
                 'class' => 'form-control input-lg',
-                'placeholder' => 'Confirm Password
-            ']) !!}
+                'placeholder' => trans('auth.reset.field.password_confirmation.title')
+            ]) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::submit('Submit', ['class' => 'btn btn-primary btn-lg btn-block']) !!}
+            {!! Form::submit(trans('auth.reset.submit.title'), [
+                'class' => 'btn btn-primary btn-lg btn-bloc
+            ']) !!}
         </div>
 
     {!! Form::close() !!}

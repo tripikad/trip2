@@ -1,9 +1,5 @@
 @extends('layouts.main')
 
-@section('title')
-    Login
-@stop
-
 @section('content')
 
 <div class="row">
@@ -13,7 +9,7 @@
 
     <div class="col-sm-10 col-lg-8">
 
-        @yield('form')
+        @yield('content.medium')
 
     </div>
 

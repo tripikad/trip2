@@ -8,7 +8,7 @@
     @include('components.header.user',[
         'image' => $user->imagePath(),
         'title' => $user->name,
-        'text' => 'Joined ' . $user->created_at->diffForHumans()
+        'text' => trans('user.show.subheader', ['created_at' => $user->created_at->diffForHumans()])
     ])
 @stop
 

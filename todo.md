@@ -142,6 +142,7 @@ Legend: **High priority** Normal priority *Future idea*
 - *Registration spam prevention (Mollom?)*
 - *FB login*
 - "Not yet registred?" links
+- remove hardcoded form urls
 
 ### DB
 
@@ -167,6 +168,7 @@ Legend: **High priority** Normal priority *Future idea*
 - Date formatting: in partial? in model?
 - Does email view work?
 - @section('subheading')
+- comment trans: .field.
 
 ### Components
 
@@ -237,6 +239,7 @@ Legend: **High priority** Normal priority *Future idea*
     - Reisiveeb?
     - /uurimus|küsitlus|uuring term/
     - /töö/
+- sanitization: remove <!--break-->
 
 ### Translations
 

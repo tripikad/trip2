@@ -4,12 +4,11 @@
 
         <div class="col-xs-6 col-sm-3">
 
-            <a href="/content/{{ $content->id }}">
+            <a href="{{ route('content.show', [$content->type, $content]) }}">
 
                 @include('components.card', [
                     'image' => $content->imagePath(),
-                    'title' => null,
-                    'subtitle' => $content->title,
+                    'title' => $content->title,
                 ])
                     
             </a>

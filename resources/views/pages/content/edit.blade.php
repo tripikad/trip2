@@ -1,10 +1,10 @@
-@extends('layouts.form.wide')
+@extends('layouts.medium')
 
 @section('title')
-    {{ trans("content.$type.edit.title") }}
+    {{ trans("content.edit.title") }}
 @stop
 
-@section('form')
+@section('content.medium')
     
     {!! Form::model(isset($content) ? $content : null, array(
         'url' => $url,
