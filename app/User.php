@@ -59,4 +59,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->image ? '/images/user/small/' . $this->image : null;
     }
 
+    public function hasRole($role) {
+        
+        if ($this->role == 'superuser' || $this->role == $role) {
+            return true;
+        }
+        
+    }
+
 }

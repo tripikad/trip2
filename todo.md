@@ -15,6 +15,8 @@ Legend: **High priority** Normal priority *Future idea*
 - content/{id} > content/{type}/{id}
 - **Login**
 - **Register**
+- **Comment add/edit/delete forms**
+- Add translations
 
 
 ## Functionality TODO
@@ -34,7 +36,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Content
 
-- **Forum siltering**
+- **Forum filtering**
 - **Content status: published/unpublished/draft/deleted**
 - Destination and tag autocomplete in index / edit
 - Content type conversion for admins
@@ -54,13 +56,13 @@ Legend: **High priority** Normal priority *Future idea*
 ### Travelmates 
 
 - What to do with extra fields?
-- Expiration?
+- *Expiration?*
 
 ### Flight offers
 
 - What to do with extra fields?
 - Company logos / images
-- Expiration?
+- *Expiration?*
 
 ### Videos
 
@@ -79,16 +81,14 @@ Legend: **High priority** Normal priority *Future idea*
 - Poll functionality?
 - Survey functionality?
 
-### Comment
+### Comments
 
-- **Comment add/edit/delete forms**
-- **Content status: published/unpublished/draft/deleted**
-- Comment moderation tools: quick unpublish
+- **Comment unpublish**
+- **Content status: published/unpublished**
 
 ### Destinations
 
 - Destination feature pages
-- Baum (tree handling)
 
 ### Tags
 
@@ -155,7 +155,8 @@ Legend: **High priority** Normal priority *Future idea*
 ### Models
 
 - **sanitize content input**
-    - no HTML in titles
+    - no HTML in titles (content, user, message, destination, carrier, comment, topic)
+    - no HTML in body (content, message, comment)
     - limited HTML for body
         a, em, i, strong, b, img, br
     - clear attributes
@@ -182,10 +183,10 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Image pipeline
 
+- fallback image(s) in /public/icons
 - **Image processing**
 - **Image URLs**
 - **Image uploads**
-- fallback image(s) in /public/icons
 
 ### Forms
 
@@ -208,7 +209,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Stat
 
-- OldUsers: first created nodes and comments
+- StatOldUsers: first created nodes and comments
 
 ### Convert
 
@@ -239,7 +240,6 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Translations
 
-- Add translations
 - Carbon translations?
 
 ### Other
@@ -258,3 +258,4 @@ Legend: **High priority** Normal priority *Future idea*
 
 https://packagist.org/packages/texy/texy
 https://packagist.org/packages/mews/purifier
+https://packagist.org/packages/baum/baum

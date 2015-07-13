@@ -1,15 +1,20 @@
 @extends('layouts.main')
 
 @section('title')
-{{ $title }}
+    {{ trans("content.$type.index.title") }}
 @stop
 
-@section('action.secondary')
-    @include('components.placeholder', ['text' => 'Filters ▾'])
+@section('header.left')
+    @include('components.placeholder', [
+        'text' => trans('content.index.filter')
+    ])
 @stop
 
-@section('action.primary')
-    <a class="btn btn-default btn-block" href="/content/offer/create">＋ Add offer</a>
+@section('header.right')
+    @include('components.button', [ 
+        'route' => route('content.create', ['type' => $type]),
+        'title' => trans("content.$type.create.title")
+    ])
 @stop
 
 @section('content')
@@ -19,12 +24,14 @@
         @foreach ($contents as $index => $content)
 
             <div class="col-xs-6 col-sm-3">
-                <a href="/content/{{ $content->id }}">
+
+                <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
+                    
                     @include('components.card', [
                         'image' => $content->imagePath(),
-                        'title' => null,
-                        'subtitle' => $content->title,
+                        'title' => $content->title,
                     ])
+                
                 </a>
  
             </div>

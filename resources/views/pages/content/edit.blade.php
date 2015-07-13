@@ -1,7 +1,7 @@
 @extends('layouts.form.wide')
 
 @section('title')
-    {{ $title }}
+    {{ trans("content.$type.edit.title") }}
 @stop
 
 @section('form')

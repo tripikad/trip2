@@ -504,12 +504,15 @@ class ConvertBase extends Command
 
     public function convertAlias($nid)
     {
+        if ($alias = $this->getAlias($nid)) {
 
         \DB::table('content_alias')
             ->insert([
                 'content_id' => $nid,
-                'alias' => $this->getAlias($nid)->dst
+                'alias' => $alias->dst
             ]);
+        }
+    
     }
 
     // Utils 

@@ -1,15 +1,20 @@
 @extends('layouts.main')
 
 @section('title')
-{{ $title }}
+    {{ trans("content.$type.index.title") }}
 @stop
 
-@section('action.secondary')
-    @include('components.placeholder', ['text' => 'Filters ▾'])
+@section('header.left')
+    @include('components.placeholder', [
+        'text' => trans('content.index.filter')
+    ])
 @stop
 
-@section('action.primary')
-    <a class="btn btn-default btn-block" href="/content/news/create">＋ Add news</a>
+@section('header.right')
+    @include('components.button', [ 
+        'route' => route('content.create', ['type' => $type]),
+        'title' => trans("content.$type.create.title")
+    ])
 @stop
 
 @section('content')
@@ -20,7 +25,7 @@
 
             <div class="col-sm-4">
 
-                <a href="/content/{{ $content->id }}">
+                <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 
                     @include('components.card', [
                         'image' => $content->imagePath(),
@@ -40,4 +45,3 @@
     {!! $contents->render() !!}
 
 @stop
-

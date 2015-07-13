@@ -3,7 +3,9 @@
 return [
     
     'index.filter' => 'Filters ▾',
-
+    'store.status' => ':title has been added',
+    'update.status' => ':title has been updated',
+    
     'news.index.title' => 'News',
     'news.create.title' => 'Add post',
 
@@ -28,6 +30,7 @@ return [
     'offer.create.title' => 'Add offer',
 
     'internal.index.title' => '...',
+    'internal.index.row.text' => 'By :user created at :created_at, latest comment at :updated_at, about :destinations, tagged as :tags',
     'internal.create.title' => 'Add post',
 
 ];

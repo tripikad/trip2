@@ -57,6 +57,7 @@ class ContentController extends Controller
             ->with('title', config("content.types.$type.create.title"))
             ->with('fields', config("content.types.$type.fields"))
             ->with('url', 'content/' . $type)
+            ->with('type', $type)
             ->render();
 
     }
@@ -65,13 +66,13 @@ class ContentController extends Controller
     {
         $this->validate($request, config("content.types.$type.rules"));
 
-        dd($type);
-
         $fields = ['user_id' => $request->user()->id, 'type' => $type];
 
         $content = \App\Content::create(array_merge($request->all(), $fields));
 
-        return redirect('content/index/' . $type )->with('status', 'New ' . $content->type . ' ' . $content->title . ' added');
+        return redirect()
+            ->route('content.index', [$type])
+            ->with('status', trans("content.store.status", ['title' => $content->title]));
 
     }
 
@@ -84,7 +85,8 @@ class ContentController extends Controller
             ->with('fields', config("content.types.$type.fields"))
             ->with('content', $content)
             ->with('method', 'put')
-            ->with('url', 'content/' . $id)
+            ->with('url', route('content.update', [$content->type, $content]))
+            ->with('type', $type)
             ->render();
 
     }
@@ -100,7 +102,9 @@ class ContentController extends Controller
 
         $content->update(array_merge($request->all(), $fields));
 
-        return redirect('content/' . $id )->with('status', $content->title . ' updated');
+        return redirect()
+            ->route('content.show', [$type, $content])
+            ->with('status', trans("content.update.status", ['title' => $content->title]));
 
     }
 

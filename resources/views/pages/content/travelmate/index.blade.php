@@ -1,15 +1,20 @@
 @extends('layouts.main')
 
 @section('title')
-{{ $title }}
+    {{ trans("content.$type.index.title") }}
 @stop
 
-@section('action.secondary')
-    @include('components.placeholder', ['text' => 'Filters ▾'])
+@section('header.left')
+    @include('components.placeholder', [
+        'text' => trans('content.index.filter')
+    ])
 @stop
 
-@section('action.primary')
-    <a class="btn btn-default btn-block" href="/content/travelmate/create">＋ Add travelmate ad</a>
+@section('header.right')
+    @include('components.button', [ 
+        'route' => route('content.create', ['type' => $type]),
+        'title' => trans("content.$type.create.title")
+    ])
 @stop
 
 @section('content')
@@ -20,12 +25,11 @@
 
             <div class="col-xs-6 col-sm-3">
 
-                <a href="/content/{{ $content->id }}">
+                <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 
                     @include('components.card', [
                         'image' => $content->user->imagePathOnly(),
-                        'title' => null,
-                        'subtitle' => $content->user->name,
+                        'title' => $content->user->name,
                         'text' => $content->title,
                     ])
 

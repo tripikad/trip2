@@ -29,7 +29,7 @@
             <div class="col-xs-10">
                 
                 <h3>
-                    <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
+                    <a href="{{ route('content.show', [$content->type, $content]) }}">
                         {{ $content->title }}
                     </a>
                 </h3>
@@ -43,7 +43,7 @@
                 ]) !!}
                 </p>
 
-                {!! str_limit($content->body, 500) !!}
+                {!! nl2br(str_limit($content->body, 500)) !!}
             
             </div>
 

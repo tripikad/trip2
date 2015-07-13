@@ -23,14 +23,9 @@
 
         @include('components.row', [
             'image' => $content->user->imagePath(),
-            'image_link' => route('user.show', [
-                'id' => $content->user
-            ]),
+            'image_link' => route('user.show', [$content->user]),
             'heading' => $content->title,
-            'heading_link' => route('content.show', [
-                'id' => $content,
-                'type' => $content->type
-            ]),
+            'heading_link' => route('content.show', [$content->type, $content]),
             'text' => trans("content.$type.index.row.text", [
                 'user' => view('components.user.link', ['user' => $content->user]),
                 'created_at' => $content->created_at->format('d. m Y H:i:s'),
