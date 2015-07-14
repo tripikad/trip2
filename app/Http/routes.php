@@ -25,6 +25,8 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
     put('{id}', ['middleware' => 'role:admin', 'uses' => 'ContentController@update', 'as' => 'update']);
 
+    post('/filter', ['uses' => 'ContentController@filter', 'as' => 'filter']);
+
 });
 
 

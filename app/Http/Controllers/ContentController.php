@@ -29,9 +29,21 @@ class ContentController extends Controller
 
         $contents = $contents->simplePaginate(config("content.types.$type.paginate"));
 
+        $destinations = \App\Destination::orderBy('name')
+            ->lists('name', 'id')
+            ->prepend(trans('content.filter.field.destination.title'));
+
+        $topics = \App\Topic::orderBy('name')
+            ->lists('name', 'id')
+            ->prepend(trans('content.filter.field.topic.title'));
+
         return \View::make("pages.content.$type.index")
             ->with('contents', $contents)
             ->with('type', $type)
+            ->with('destination', $request->destination)
+            ->with('destinations', $destinations)
+            ->with('topic', $request->topic)
+            ->with('topics', $topics)
             ->render();
     
     }
@@ -118,6 +130,19 @@ class ContentController extends Controller
         }
 
         abort(404);
+    }
+
+    public function filter(Request $request, $type)
+    {
+
+        return redirect()->route(
+            'content.index',
+            [$type,
+            'destination' => $request->destination ? $request->destination : null,
+            'topic' => $request->topic ? $request->topic : null,
+            ]
+        );
+
     }
 
 }

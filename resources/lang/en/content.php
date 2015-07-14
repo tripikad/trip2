@@ -6,6 +6,14 @@ return [
 
     'index.filter' => 'Filters ▾',
     
+    'filter.field.destination.title' => 'All',
+
+    'filter.field.topic.title' => 'All',
+
+    'filter.submit.title' => 'Filter',
+
+    'filter.reset.title' => 'Reset',
+
     'show.row.text' => 'By :user created at :created_at, about :destinations, tagged as :tags',
 
     'create.title' => 'Add new',
