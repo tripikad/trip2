@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+    {{ $title }}
+@stop
+
 @section('content')
 
 @foreach($fronts as $type => $front) 
@@ -8,7 +12,7 @@
         'contents' => $front['contents']
     ])
     
-    <hr style="margin-top: 5px;" />
+    <hr />
     
 @endforeach
 

@@ -25,6 +25,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ConvertPhotos::class,
         \App\Console\Commands\ConvertTerms::class,
         \App\Console\Commands\ConvertTravelmates::class,
+
         \App\Console\Commands\ConvertUsers::class,
 
         \App\Console\Commands\StatsAccess::class,

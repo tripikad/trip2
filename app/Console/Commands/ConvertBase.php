@@ -11,7 +11,7 @@ class ConvertBase extends Command
 
     protected $connection = 'trip';
 
-    protected $take = 50;
+    protected $take = 200;
     protected $chunk = 50;
     protected $skip = 0;
 
@@ -68,6 +68,7 @@ class ConvertBase extends Command
             $model->user_id = $node->uid;
             $model->title = trim($node->title);
             $model->body = trim($node->body);
+            $model->status = 1;
             $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);  
             $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment); 
 
@@ -290,13 +291,12 @@ class ConvertBase extends Command
     {
         return \DB::connection($this->connection)
             ->table('comments')
-            ->where('status', '=', 0)
             ->where('nid', '=', $nid);
     }
 
-    public function convertComments($nid)
-    {
-        $comments = $this->getComments($nid)->get();
+    public function convertComments($nid, $status = 0)
+    {            
+        $comments = $this->getComments($nid)->where('status', '=', $status)->get();
 
         foreach($comments as $comment) {
 
@@ -305,8 +305,8 @@ class ConvertBase extends Command
             $model->id = $comment->cid;
             $model->user_id = $comment->uid;
             $model->content_id = $comment->nid;
-            // $model->title = $comment->subject;
             $model->body = $comment->comment;
+            $model->status = 1 - $comment->status;
             $model->created_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);  
             $model->updated_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp); 
 

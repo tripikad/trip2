@@ -40,7 +40,8 @@ Legend: **High priority** Normal priority *Future idea*
 ### Content
 
 - **Forum filtering**
-- **Content status: published/unpublished/draft/deleted**
+- **Content status: published/unpublished**
+- Content delete
 - Destination and tag autocomplete in index / edit
 - Content type conversion for admins
 - *Content expiration*
@@ -74,8 +75,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Offers
 
-- **Offer filter**
-- **Extra fields?**
+- Remake or pull from old site?
 - Offer add/edit/delete forms
 - Offer scheduler
 
@@ -86,12 +86,12 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Comments
 
-- **Comment unpublish**
-- **Content status: published/unpublished**
+- **Comment published/unpublished**
+- Comment delete
 
 ### Destinations
 
-- Destination feature pages
+- **Destination feature pages**
 
 ### Tags
 
@@ -103,7 +103,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Search
 
-- **Destination autocomplete**
+- Destination autocomplete
 - Choose Provider:
     - local Zend Search
     - Algolia? $49/m
@@ -113,7 +113,7 @@ Legend: **High priority** Normal priority *Future idea*
 ### Messages
 
 - **Message add/edit/delete forms**
-- **Mail messages**
+- Mail messages
 - Create Message tests with seeds
 - From collections hacks to real queries
 
@@ -177,7 +177,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Controllers
 
-- **Cache of popular views**
+- Cache of popular views
 - *Full cache pipeline*
 - CommentController@store: $id? $type
 
@@ -215,8 +215,6 @@ Legend: **High priority** Normal priority *Future idea*
 
 - ConvertOldUsers
 - ConvertUnpublishedComments ($latest - 1 month)
-- **convert content status**
-- **convert comment status**
 - convert subscription status
 - convert havebeen / wanttogo?
 - convert commerical users?
