@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ $title }}
+    {{ $title or ''}}
 @stop
 
 @section('content')
