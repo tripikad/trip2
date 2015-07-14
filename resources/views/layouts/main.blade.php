@@ -6,9 +6,8 @@
         
         <link href="/css/main.css" rel='stylesheet' type='text/css'>
 
-        <link href='http://fonts.googleapis.com/css?family=Lato:900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    
         <title>@yield('title') | {{ config('site.name') }}</title>
+    
     </head>
     <body>
         <div class="container">
@@ -33,5 +32,8 @@
             @include('components.footer')
 
         </div>
+
+        <script type="text/javascript" src="/js/main.js"></script>
+
     </body>
 </html>

@@ -6,13 +6,15 @@ return [
 
     'index.filter' => 'Filters ▾',
     
-    'filter.field.destination.title' => 'All',
+    'index.filter.field.destination.title' => 'All',
 
-    'filter.field.topic.title' => 'All',
+    'index.filter.field.topic.title' => 'All',
 
-    'filter.submit.title' => 'Filter',
+    'index.filter.submit.title' => 'Filter',
 
-    'filter.reset.title' => 'Reset',
+    'index.filter.reset.title' => 'Reset',
+
+    'index.filter.destination.title' => 'Check out our :destination page as well',
 
     'show.row.text' => 'By :user created at :created_at, about :destinations, tagged as :tags',
 

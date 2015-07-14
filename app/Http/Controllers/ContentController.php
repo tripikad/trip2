@@ -29,13 +29,20 @@ class ContentController extends Controller
 
         $contents = $contents->simplePaginate(config("content.types.$type.paginate"));
 
-        $destinations = \App\Destination::orderBy('name')
-            ->lists('name', 'id')
-            ->prepend(trans('content.filter.field.destination.title'));
+        $destinations = \App\Destination::whereHas('content', function ($query) use ($type) {
+                $query->whereType($type);
+            })
+            ->select('name', 'id')
+            ->orderBy('name')
+            ->lists('name', 'id');
+      //      ->prepend(['' => trans('content.index.filter.field.destination.title')]);
 
-        $topics = \App\Topic::orderBy('name')
-            ->lists('name', 'id')
-            ->prepend(trans('content.filter.field.topic.title'));
+        $topics = \App\Topic::whereHas('content', function ($query) use ($type) {
+                $query->whereType($type);
+            })
+            ->orderBy('name')
+            ->lists('name', 'id');
+    //        ->prepend(trans('content.index.filter.field.topic.title'));
 
         return \View::make("pages.content.$type.index")
             ->with('contents', $contents)

@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="component-filter text-center">
 
 {!! Form::open([
     'url' => route('content.filter', [$type]),
@@ -9,9 +9,10 @@
 
     {!! Form::select(
         'destination',
-        $destinations, 
-        $destination, 
-        ['class' => 'form-control input-sm']
+        ['' => trans('content.index.filter.field.destination.title')]
+             + $destinations->toArray(),
+        $destination,
+        ['class' => 'field-destination form-control input-sm']
     )!!}
 
 </div>
@@ -20,7 +21,8 @@
 
     {!! Form::select(
         'topic',
-        $topics, 
+        ['' => trans('content.index.filter.field.topic.title')]
+             + $topics->toArray(), 
         $topic, 
         ['class' => 'form-control input-sm']
     )!!}
@@ -30,7 +32,7 @@
 <div class="form-group">
 
 {!! Form::submit(
-    trans('content.filter.submit.title'), 
+    trans('content.index.filter.submit.title'), 
     ['class' => 'btn btn-primary btn-sm btn-block'])
 !!}
 
@@ -43,12 +45,26 @@
     class="btn btn-default btn-sm btn-block"
 >
 
-{{ trans('content.filter.reset.title') }}
+{{ trans('content.index.filter.reset.title') }}
 
 </a>
 
 </div>
 
-</div>
+{!! Form::close() !!}
 
- {!! Form::close() !!}
+@if ($destination)
+    
+    <hr />
+    
+    <h3>
+        {!! trans('content.index.filter.destination.title', [
+            'destination' => 
+                '<a href="' . route('destination.index', [$destination]) . '">'
+                . $destinations[$destination]
+                . '</a>'
+        ]) !!}
+    </h3>
+
+@endif
+</div>

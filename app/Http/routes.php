@@ -92,10 +92,10 @@ post('password/reset', 'Auth\PasswordController@postReset');
 
 // Ad debug
 
-get('ads', ['middleware' => 'role:admin', 'uses' => 'AdController@index']);
+get('ads', ['middleware' => 'role:admin', 'uses' => 'AdController@index', 'as' => 'ads']);
 
 // Destinations
 
-get('destination/{id}', 'DestinationController@index');
+get('destination/{id}', ['uses' => 'DestinationController@index', 'as' => 'destination.index']);
 
 
