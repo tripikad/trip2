@@ -18,12 +18,14 @@ class ContentController extends Controller
         if ($request->destination) {
             $contents = $contents
                 ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
+                ->select('contents.*')
                 ->where('content_destination.destination_id', '=', $request->destination);
         }   
 
         if ($request->topic) {
             $contents = $contents
                 ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
+                ->select('contents.*')
                 ->where('content_topic.topic_id', '=', $request->topic);
         } 
 
