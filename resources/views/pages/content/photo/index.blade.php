@@ -4,12 +4,6 @@
     {{ trans("content.$type.index.title") }}
 @stop
 
-@section('header.left')
-    @include('components.placeholder', [
-        'text' => trans('content.index.filter')
-    ])
-@stop
-
 @section('header.right')
     @include('components.button', [ 
         'route' => route('content.create', ['type' => $type]),
@@ -19,16 +13,21 @@
 
 @section('content')
 
+    @include('components.filter')
+
     <div class="row">
   
         @foreach ($contents as $index => $content)
 
-            <div class="col-sm-4">
+            <div class="col-sm-4" style="margin-bottom: 14px;">
 
-                @include('components.card', [
-                    'image' => $content->imagePath(),
-                    'title' => null
-                ])
+                <a href="{{ route('content.show', [$content->type, $content]) }}">
+                    
+                    @include('components.image.landscape', [
+                        'image' => $content->imagePath(),
+                    ])
+                
+                </a>
 
             </div>
             

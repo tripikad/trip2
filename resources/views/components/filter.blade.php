@@ -1,4 +1,6 @@
-<div class="component-filter text-center">
+<hr />
+
+<div class="text-center">
 
 {!! Form::open([
     'url' => route('content.filter', [$type]),
@@ -42,7 +44,7 @@
 
 <a 
     href="{{ route('content.index', [$type]) }}"
-    class="btn btn-default btn-sm btn-block"
+    class="btn btn-link btn-sm btn-block"
 >
 
 {{ trans('content.index.filter.reset.title') }}
@@ -67,4 +69,7 @@
     </h3>
 
 @endif
+
 </div>
+
+<hr />

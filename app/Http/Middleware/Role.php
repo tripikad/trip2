@@ -18,7 +18,7 @@ class Role
 
         if (! $request->user() || ! $request->user()->hasRole($role)) {
 
-            return response('TRANSLATE: No access', 401);
+            return abort(401);
         
         }
 

@@ -4,12 +4,6 @@
     {{ trans("content.$type.index.title") }}
 @stop
 
-@section('header.left')
-    @include('components.placeholder', [
-        'text' => trans('content.index.filter')
-    ])
-@stop
-
 @section('header.right')
     @include('components.button', [ 
         'route' => route('content.create', ['type' => $type]),

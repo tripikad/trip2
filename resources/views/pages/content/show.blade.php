@@ -10,6 +10,18 @@
 
 @section('content')
 
+    @if($content->imagePath())
+        
+        <div style="margin-bottom: 14px;">
+
+        @include('components.image.landscape', [
+            'image' => $content->imagePath(),
+        ])
+
+        </div>
+
+    @endif
+
     <div style="style="margin-bottom: 16px;">
 
     @include('components.row', [

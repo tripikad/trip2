@@ -13,6 +13,8 @@
 
 @section('content')
 
+    @include('components.filter')
+
     <div class="row">
   
         @foreach ($contents as $index => $content)

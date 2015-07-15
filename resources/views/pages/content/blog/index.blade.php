@@ -12,8 +12,9 @@
 @stop
 
 @section('content')
+    
+    @include('components.filter')
 
-  
     @foreach ($contents as $content)
 
         <div class="row">

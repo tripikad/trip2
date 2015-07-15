@@ -20,52 +20,30 @@ Legend: **High priority** Normal priority *Future idea*
 - **Roles**
 - users: unique name / email ?
 - **auth middleware / controller AC**
+- Forum filtering
+- **Destination feature pages**
 
+## TODO
 
-## Functionality TODO
+### Auth
 
-### Frontpage
-
-- More varied layout
-- *Call to actions?*
-- *Destination feature / search*
-- *Carousel*
-- *Active content (based on ranking)*
-
-### User
-
-- User history: collection based
-- *User history: activity feed based*
+- **Password reminder**
+- Permissions
+- Legacy Drupal password hasher / mass password renewal?
+- "Not yet registred?" links
+- remove hardcoded form urls from views
+- *Registration spam prevention (Mollom?)*
+- *FB login*
 
 ### Content
 
-- **Forum filtering**
+- **Forum filtering fixes: autocomplete, autosubmit**
 - **Content status: published/unpublished**
 - Content delete
 - Destination and tag autocomplete in index / edit
 - Content type conversion for admins
-- *Content expiration*
-
-### News
-
-- Easy image add
-- Preview
-- *WVSIWVG (What Veigo Sees Is What Veigo gets)*
-
-### Buysell
-
-- What to do with extra fields?
-- Merge with forum?
-
-### Travelmates 
-
-- What to do with extra fields?
-- *Expiration?*
-
-### Flight offers
-
-- What to do with extra fields?
-- Company logos / images
+- **What to do with extra fields (buysell, travelmates, flight offers, offers)**
+- *Previews*
 - *Expiration?*
 
 ### Videos
@@ -79,19 +57,14 @@ Legend: **High priority** Normal priority *Future idea*
 - Offer add/edit/delete forms
 - Offer scheduler
 
-### Polls and surverys
-
-- Poll functionality?
-- Survey functionality?
-
 ### Comments
 
 - **Comment published/unpublished**
 - Comment delete
 
-### Destinations
+### Destination
 
-- **Destination feature pages**
+- Generic autocomplete widget + view composer
 
 ### Tags
 
@@ -103,7 +76,6 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Search
 
-- Destination autocomplete
 - Choose Provider:
     - local Zend Search
     - Algolia? $49/m
@@ -132,19 +104,8 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Ads
 
-- Google DFB / Custom made
-
-## Technology TODO
-
-### Auth
-
-- **Password reminder**
-- Permissions
-- Legacy Drupal password hasher / mass password renewal?
-- *Registration spam prevention (Mollom?)*
-- *FB login*
-- "Not yet registred?" links
-- remove hardcoded form urls
+- Google DFB
+- **Custom made**
 
 ### DB
 
@@ -166,19 +127,11 @@ Legend: **High priority** Normal priority *Future idea*
 - Does email view work?
 - @section('subheading')
 - comment trans: .field.
-
-### Components
-
-- card title vs subtitle
-
-### SASS
-
-- Lato @import
+- inline styles to CSS
 
 ### Controllers
 
-- Cache of popular views
-- *Full cache pipeline*
+- **Cache of popular views**
 - CommentController@store: $id? $type
 
 ### Image pipeline
@@ -235,8 +188,10 @@ Legend: **High priority** Normal priority *Future idea*
     - Reisiveeb?
     - /uurimus|küsitlus|uuring term/
     - /töö/
-- sanitization: remove <!--break-->
-
+- sanitization:
+    - remove <!--break-->
+    - remove UPPERASE
+    
 ### Translations
 
 - Carbon translations?

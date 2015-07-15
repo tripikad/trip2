@@ -12,12 +12,9 @@
 @stop
 
 @section('content')
-
-    <hr />
     
     @include('components.filter')
 
-    <hr />
     @foreach ($contents as $content)
 
         @include('components.row', [
