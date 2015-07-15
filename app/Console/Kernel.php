@@ -37,6 +37,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\StatsGeneral::class,
         \App\Console\Commands\StatsMessages::class,
         \App\Console\Commands\StatsPages::class,
+        \App\Console\Commands\StatsProfiles::class,
         \App\Console\Commands\StatsTerms::class,
         \App\Console\Commands\StatsUsersNew::class,
         \App\Console\Commands\StatsUsersOld::class,
