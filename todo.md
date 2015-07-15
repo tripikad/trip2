@@ -191,26 +191,26 @@ Legend: **High priority** Normal priority *Future idea*
 - sanitization:
     - remove <!--break-->
     - remove UPPERASE
-    
-### Translations
-
-- Carbon translations?
-
-### Other
-
-- sitemap
-- favicon
-- RSS feed
-- GA tracker
-- Other trackers?
-
-### SQL
-
-- Unique user statuses?
 
 ### Libraries
 
+- Atom feed for http://trip.ee/index.atom
+https://packagist.org/packages/roumen/feed
+
+- Content sanitizing:
 https://packagist.org/packages/texy/texy
 https://packagist.org/packages/mews/purifier
+
+- Terms:
 https://packagist.org/packages/baum/baum
 
+- Sitemap:
+http://packalyst.com/packages/package/roumen/sitemap
+
+- Carbon localizations:
+https://packagist.org/packages/laravelrus/localized-carbon
+
+### Other
+
+- favicon
+- GA tracker
