@@ -10,7 +10,7 @@
 
 @section('content')
 
-    @if($content->imagePath())
+    @if($content->image)
         
         <div style="margin-bottom: 14px;">
 
@@ -62,6 +62,6 @@
     
     @include('components.comment.index', ['comments' => $content->comments])
 
-    @include('components.comment.add')
+    @include('components.comment.create')
 
 @stop
