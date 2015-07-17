@@ -2,7 +2,21 @@
 
 return [
 
-    'show.subheader' => 'Joined at :created_at',
+    'show.joined' => 'Joined at :created_at',
+
+    'image.create.title' => 'Add profile image',
+    'image.edit.title' => 'Change profile image',
+
+    'edit.title' => 'Edit user',
+    'edit.contact.title' => 'Contact information',
+    'edit.account.title' => 'Account details',
+    'edit.field.name.title' => 'Username',
+    'edit.field.password.title' => 'New password',
+    'edit.field.password_confirmation.title' => 'Confirm new password',
+    'edit.submit' => 'Update',
+
+    'update.image.status' => 'User image has been updated',
+    'update.status' => 'User profile has been updated',
 
     'follow.index.title' => ':user follows',
     'follow.index.row.text' => 'By :user at :created_at',

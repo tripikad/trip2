@@ -16,6 +16,9 @@ class UserController extends Controller
     {
         $user = User::findorFail($id);
      
+//        $contents_forum_count = $user->contents()->whereType('forum')->count();
+//        $comments_count = $user->comments()->count();
+
         return View::make('pages.user.show')
             ->with('user', $user)
             ->render();
@@ -38,8 +41,15 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $user = User::findorFail($id);
+
+        if ($request->get('submit_image')) {
+        
+            return redirect()
+                ->route('user.edit', [$user])
+                ->with('status', trans('user.update.image.status'));
+        
+        }
 
         $this->validate($request, [
             'name' => 'required|unique:users,name,' . $user->id,

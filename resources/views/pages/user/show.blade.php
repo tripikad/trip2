@@ -4,16 +4,24 @@
     {{ $user->name }}
 @stop
 
-@section('header.right')
-    <a href="{{ route('user.edit', [$user]) }}">Edit</a>
-@stop
-
-@section('header')
-    @include('components.header.user',[
+@section('header.top')
+    @include('components.image.circle', [
         'image' => $user->imagePath(),
-        'title' => $user->name,
-        'text' => trans('user.show.subheader', ['created_at' => $user->created_at->diffForHumans()])
+        'width' => '30%'
     ])
 @stop
 
+@section('header.bottom')
+   <p>
+    {{ trans('user.show.joined', [
+        'created_at' => $user->created_at->diffForHumans()
+    ]) }}
+    </p>
+@stop
 
+@section('header.right')
+    @include('components.button', [ 
+        'route' => route('user.edit', [$user]),
+        'title' => trans('user.edit.title')
+    ])
+@stop
