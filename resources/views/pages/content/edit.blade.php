@@ -6,10 +6,10 @@
 
 @section('content.medium')
     
-    {!! Form::model(isset($content) ? $content : null, array(
+    {!! Form::model(isset($content) ? $content : null, [
         'url' => $url,
         'method' => isset($method) ? $method : 'post'
-    )) !!}
+    ]) !!}
 
     @foreach ($fields as $key => $field)
 

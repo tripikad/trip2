@@ -4,6 +4,10 @@
     {{ $user->name }}
 @stop
 
+@section('header.right')
+    <a href="{{ route('user.edit', [$user]) }}">Edit</a>
+@stop
+
 @section('header')
     @include('components.header.user',[
         'image' => $user->imagePath(),

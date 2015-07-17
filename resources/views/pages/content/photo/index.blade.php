@@ -5,7 +5,7 @@
 @stop
 
 @section('header.right')
-    @include('components.button', [ 
+    @include('components.buttonn', [ 
         'route' => route('content.create', ['type' => $type]),
         'title' => trans("content.$type.create.title")
     ])

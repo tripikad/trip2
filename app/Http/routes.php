@@ -51,9 +51,9 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     get('{id}', ['uses' => 'UserController@show', 'as' => 'show']);
 
-    // get('{id}/edit', ['middleware' => 'auth', 'uses' => 'UserController@edit', 'as' => 'edit']);
+    get('{id}/edit', ['middleware' => 'role:regular', 'uses' => 'UserController@edit', 'as' => 'edit']);
 
-    // put('{id}', ['middleware' => 'auth', 'uses' => 'UserController@update', 'as' => 'update']);
+    put('{id}', ['middleware' => 'role:regular', 'uses' => 'UserController@update', 'as' => 'update']);
 
     get('{id}/messages/{id2}', ['middleware' => 'role:admin', 'uses' => 'UserController@showMessagesWith', 'as' => 'show.messages.with']);
 

@@ -16,13 +16,14 @@
 
             <hr />
 
+            @include('components.status.success')
+
             @yield('header.top')
             
             <div style="margin: 3em 0;">
                 @yield('header', view('components.header.simple'))
             </div>
 
-            @include('components.status.success')
             @include('components.status.error')
 
             @yield('content')
