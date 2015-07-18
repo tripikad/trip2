@@ -1,7 +1,7 @@
 $('input[name=image_file]').hide();
 $('input[name=image_submit]').hide();
 
-$('#image_link').click(function(e) {
+$('#image_link').on('click touchstart', function(e) {
     e.preventDefault();
     $('input[name=image_file]').click();
 
