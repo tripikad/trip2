@@ -12,21 +12,14 @@ return [
             'paginate' => '24',
             'front' => true,
             'frontpaginate' => 3,
-            'create' => [
-                'title' => 'Add news'
-            ],
-            'edit' => [
-                'title' => 'Edit news'
-            ],
-            'rules' => ['title' => 'required', 'url' => 'url'],
+            'rules' => ['title' => 'required', 'url' => 'url', 'file' => 'image'],
             'fields' => [
+                'file' => [
+                    'type' => 'file',
+                ],
                 'title' => [
                     'type' => 'text',
                     'title' => 'Title',
-                ],
-                'image' => [
-                    'type' => 'text',
-                    'title' => 'Image',
                 ],
                 'body' => [
                     'type' => 'textarea',

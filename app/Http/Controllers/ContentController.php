@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Imageconv;
+
 class ContentController extends Controller
 {
 
@@ -85,7 +87,31 @@ class ContentController extends Controller
     {
         $this->validate($request, config("content.types.$type.rules"));
 
-        $fields = ['user_id' => $request->user()->id, 'type' => $type];
+        $fields = [];
+
+        if ($request->hasFile('file')) {
+            
+            $file = $request->file('file');
+
+            $fileName = $file->getClientOriginalName();
+
+            $path = public_path() . "/images/$type/";
+            $smallPath = public_path() . "/images/$type/small/";
+            
+            $file->move($path, $fileName);
+
+            Imageconv::make($path . $fileName)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save($smallPath . $fileName);
+
+            $fields['image'] = $fileName;
+
+        }
+
+        $fields['user_id'] = $request->user()->id;
+        $fields['type'] = $type;
 
         $content = \App\Content::create(array_merge($request->all(), $fields));
 

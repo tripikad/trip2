@@ -8,7 +8,8 @@
     
     {!! Form::model(isset($content) ? $content : null, [
         'url' => $url,
-        'method' => isset($method) ? $method : 'post'
+        'method' => isset($method) ? $method : 'post',
+        'files' => true
     ]) !!}
 
     @foreach ($fields as $key => $field)
@@ -23,6 +24,10 @@
                 'rows' => isset($field['rows']) ? $field['rows'] : 8,
             ]) !!}
     
+        @elseif ($field['type'] == 'file')
+
+            {!! Form::$field['type']($key) !!}
+
         @elseif (in_array($field['type'], ['submit', 'button']))
 
             <div class="row">
