@@ -1,12 +1,12 @@
-$('input[name=file]').hide();
-$('input[name=submit_image]').hide();
+$('input[name=image_file]').hide();
+$('input[name=image_submit]').hide();
 
 $('#image_link').click(function(e) {
     e.preventDefault();
-    $('input[name=file]').click();
+    $('input[name=image_file]').click();
 
 });
 
-$('input[name=file]').change(function(){
-    $('input[name=submit_image]').click();
+$('input[name=image_file]').change(function(){
+    $('input[name=image_submit]').click();
 });

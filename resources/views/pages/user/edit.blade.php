@@ -17,11 +17,9 @@
         'files' => true
     ]) !!}
 
-    {!! Form::file('file') !!}
+    {!! Form::file('image_file') !!}
 
-    {!! Form::submit('Submit', [
-        'name' => 'submit_image',
-    ]) !!}
+    {!! Form::submit('Submit', ['name' => 'image_submit']) !!}
 
     <div class="form-group">
 
@@ -36,25 +34,10 @@
         <a href="" id="image_link" class="btn btn-link">
             {{ trans('user.image.edit.title') }}
         </a>
-        
+
         @endif
 
     </div>
-
-{{-- 
-    @if (! $user->image)
-        {!! Form::submit(trans('user.image.create.title'), [
-            'name' => 'submit_image',
-            'class' => 'btn btn-primary btn-lg'
-        ]) !!}
-    @else 
-        {!! Form::submit(trans('user.image.edit.title'), [
-            'name' => 'submit_image',
-            'class' => 'btn btn-link'
-        ]) !!}
-    @endif
---}}
-
 
 @stop
 

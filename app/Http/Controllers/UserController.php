@@ -41,21 +41,21 @@ class UserController extends Controller
     {
         $user = User::findorFail($id);
 
-        if ($request->get('submit_image')) {
+        if ($request->get('image_submit')) {
         
             $this->validate($request, [
-                'file' => 'required|image',
+                'image_file' => 'required|image',
             ]); 
 
             $image = 'picture-'
                 . $user->id
                 . '.'
-                . $request->file('file')->getClientOriginalExtension();
+                . $request->file('image_file')->getClientOriginalExtension();
 
             $imagepath = public_path() . '/images/user/';
             $smallimagepath = public_path() . '/images/user/small/';
             
-            $request->file('file')->move($imagepath, $image);
+            $request->file('image_file')->move($imagepath, $image);
 
             Imageconv::make($imagepath . $image)->fit(200)->save($smallimagepath . $image);
             
@@ -63,6 +63,7 @@ class UserController extends Controller
 
             return redirect()
                 ->route('user.edit', [$user])
+                ->withInput()
                 ->with('status', trans('user.update.image.status'));
         
         }
