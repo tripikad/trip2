@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use View;
 use Illuminate\Http\Request;
+use Imageconv;
 
 use \App\User;
 
@@ -15,10 +16,7 @@ class UserController extends Controller
     public function show($id, $page = null)
     {
         $user = User::findorFail($id);
-     
-//        $contents_forum_count = $user->contents()->whereType('forum')->count();
-//        $comments_count = $user->comments()->count();
-
+  
         return View::make('pages.user.show')
             ->with('user', $user)
             ->render();
@@ -45,6 +43,24 @@ class UserController extends Controller
 
         if ($request->get('submit_image')) {
         
+            $this->validate($request, [
+                'file' => 'required|image',
+            ]); 
+
+            $image = 'picture-'
+                . $user->id
+                . '.'
+                . $request->file('file')->getClientOriginalExtension();
+
+            $imagepath = public_path() . '/images/user/';
+            $smallimagepath = public_path() . '/images/user/small/';
+            
+            $request->file('file')->move($imagepath, $image);
+
+            Imageconv::make($imagepath . $image)->fit(200)->save($smallimagepath . $image);
+            
+            $user->update(['image' => $image]);
+
             return redirect()
                 ->route('user.edit', [$user])
                 ->with('status', trans('user.update.image.status'));

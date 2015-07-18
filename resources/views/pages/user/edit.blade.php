@@ -7,17 +7,41 @@
 @section('header.top')
     
     @include('components.image.circle', [
-        'image' => $user->imagePath(),
+        'image' => $user->imagePath() . '?' . str_random(4),
         'width' => '30%'
     ])
 
     {!! Form::model(isset($user) ? $user : null, [
         'url' => $url,
-        'method' => isset($method) ? $method : 'post'
+        'method' => isset($method) ? $method : 'post',
+        'files' => true
+    ]) !!}
+
+    {!! Form::file('file') !!}
+
+    {!! Form::submit('Submit', [
+        'name' => 'submit_image',
     ]) !!}
 
     <div class="form-group">
 
+        @if (! $user->image)
+
+        <a href="" id="image_link" class="btn btn-primary btn-lg">
+            {{ trans('user.image.create.title') }}
+        </a>
+        
+        @else 
+
+        <a href="" id="image_link" class="btn btn-link">
+            {{ trans('user.image.edit.title') }}
+        </a>
+        
+        @endif
+
+    </div>
+
+{{-- 
     @if (! $user->image)
         {!! Form::submit(trans('user.image.create.title'), [
             'name' => 'submit_image',
@@ -29,8 +53,8 @@
             'class' => 'btn btn-link'
         ]) !!}
     @endif
+--}}
 
-    </div>
 
 @stop
 
