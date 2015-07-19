@@ -17,6 +17,9 @@ class ConvertPhotos extends ConvertBase
             ->whereNotIn('term_node.tid', [646]) // Mitte-reisipilt
             ->get();
 
+        $this->info('Converting photos');
+        $this->output->progressStart(count($nodes));
+
         foreach($nodes as $node) {
             
             $this->convertNode($node, '\App\Content', 'photo');
@@ -28,7 +31,12 @@ class ConvertPhotos extends ConvertBase
                 $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'photo');
             }
 
+            $this->output->progressAdvance();
+
         }
+
+        $this->output->progressFinish();
+        
     }
 
     public function handle()

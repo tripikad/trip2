@@ -19,8 +19,10 @@ class ConvertBuysells extends ConvertBase
             )
             ->get();
 
-        foreach($nodes as $node)
-        {
+        $this->info('Coverting Buysells');
+        $this->output->progressStart(count($nodes));
+
+        foreach($nodes as $node) {
 
             $node->title = $node->title . ', ost-müük';
 
@@ -41,7 +43,12 @@ class ConvertBuysells extends ConvertBase
 
             $this->convertNode($node, '\App\Content', 'forum');
 
+            $this->output->progressAdvance();
+
         }
+
+        $this->output->progressFinish();
+
     }
 
     public function handle()

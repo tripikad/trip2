@@ -11,7 +11,7 @@ class ConvertBase extends Command
 
     protected $connection = 'trip';
 
-    protected $take = 50;
+    protected $take = 100;
     protected $chunk = 50;
     protected $skip = 0;
 

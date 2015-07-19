@@ -24,6 +24,9 @@ class ConvertFlights extends ConvertBase
             )
             ->get();
 
+        $this->info('Converting flight offers');
+        $this->output->progressStart(count($nodes));
+
         foreach($nodes as $node)
         {
 
@@ -48,7 +51,11 @@ class ConvertFlights extends ConvertBase
                 $this->convertUrl($node->nid, $url, 'App\Content');
             }
 
+            $this->output->progressAdvance();
+
         }
+
+        $this->output->progressFinish();
     }
 
     public function convertForumNodes()
@@ -59,6 +66,9 @@ class ConvertFlights extends ConvertBase
             ->where('term_node.tid', '=', 825) // Sooduspakkumised
             ->get();
 
+        $this->info('Converting flight offers from forum');
+        $this->output->progressStart(count($nodes));
+
         foreach($nodes as $node)
         {
             $node->title = $node->title . ', from forum';
@@ -67,7 +77,11 @@ class ConvertFlights extends ConvertBase
 
             $this->convertNodeDestinations($node);
 
+            $this->output->progressAdvance();
+
         }
+
+        $this->output->progressFinish();
     }
 
     public function handle()

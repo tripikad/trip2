@@ -11,8 +11,10 @@ class ConvertMiscs extends ConvertBase
     {
         $nodes = $this->getNodes('trip_forum_other')->get();
 
-        foreach($nodes as $node)
-        {
+        $this->info('Converting misc forum');
+        $this->output->progressStart(count($nodes));
+
+        foreach($nodes as $node) {
 
             $node->title = $node->title . ', vabal teemal';
 
@@ -21,7 +23,13 @@ class ConvertMiscs extends ConvertBase
             $this->convertNodeDestinations($node);
             $this->convertNodeTopics($node);
             $this->newNodeTopics($node);
+
+            $this->output->progressAdvance();
+
         }
+
+        $this->output->progressFinish();
+    
     }
 
     public function convertForumNodes()
@@ -32,8 +40,12 @@ class ConvertMiscs extends ConvertBase
             ->where('term_node.tid', '=', 763) // Reisiveeb
             ->get();
 
-        foreach($nodes as $node)
-        {
+
+        $this->info('Converting misc forum (from general forum)');
+        $this->output->progressStart(count($nodes));
+
+        foreach($nodes as $node) {
+
             $node->title = $node->title . ', reisiveebist';
 
             $this->convertNode($node, '\App\Content', 'forum');
@@ -41,7 +53,13 @@ class ConvertMiscs extends ConvertBase
             $this->convertNodeDestinations($node);
             $this->convertNodeTopics($node);
             $this->newNodeTopics($node);
+            
+            $this->output->progressAdvance();
+
         }
+
+        $this->output->progressFinish();
+    
     }
 
     public function handle()

@@ -14,8 +14,10 @@ class ConvertNews extends ConvertBase
             ->join('content_type_story', 'content_type_story.nid', '=', 'node.nid')
             ->get();
 
-        foreach($nodes as $node)
-        {
+        $this->info('Converting news');
+        $this->output->progressStart(count($nodes));
+
+        foreach($nodes as $node) {
 
             // Fint the image embedded in body
 
@@ -49,7 +51,12 @@ class ConvertNews extends ConvertBase
             $this->convertNodeDestinations($node);
             $this->convertNodeTopics($node);
 
+            $this->output->progressAdvance();
+
         }
+
+        $this->output->progressFinish();
+        
     }
 
     public function handle()

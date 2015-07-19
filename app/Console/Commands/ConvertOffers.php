@@ -7,16 +7,19 @@ class ConvertOffers extends ConvertBase
 
     protected $signature = 'convert:offers';
 
-    public function convert()
-    {
+    public function convert() {
+
         $nodes = $this->getNodes('trip_offer')
             ->join('content_type_trip_offer', 'content_type_trip_offer.nid', '=', 'node.nid')
             ->join('content_field_image', 'content_field_image.nid', '=', 'node.nid')
             ->join('files', 'files.fid', '=', 'content_field_image.field_image_fid')
             ->get();
 
-        foreach($nodes as $node)
-        {   
+
+        $this->info('Converting offers');
+        $this->output->progressStart(count($nodes));
+
+        foreach($nodes as $node) {   
             
             $locationMap = [
                 1 => 'Eestist',
@@ -92,7 +95,12 @@ class ConvertOffers extends ConvertBase
                 $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'offer');
             }
 
+            $this->output->progressAdvance();
+
         }
+
+        $this->output->progressFinish();
+    
     }
 
     public function handle()

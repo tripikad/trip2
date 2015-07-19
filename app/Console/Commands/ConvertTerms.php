@@ -12,6 +12,8 @@ class ConvertTerms extends ConvertBase
     {
         $terms = $this->getTerms(6)->get(); // Sihtkohad
 
+        $this->info('Converting destinations');
+
         foreach($terms as $term)
         {   
             $this->createTerm($term, '\App\Destination', true);        
@@ -22,6 +24,8 @@ class ConvertTerms extends ConvertBase
     public function convertTopics()
     {
         $terms = $this->getTerms([5, 9])->get(); // Reisistiilid, Rubriigid
+
+        $this->info('Converting tags');
 
         foreach($terms as $term)
         {
@@ -39,6 +43,8 @@ class ConvertTerms extends ConvertBase
 
         $terms = $this->getNewTopics();        
 
+        $this->info('Adding new tags');
+
         foreach($terms as $term)
         {   
             
@@ -52,6 +58,8 @@ class ConvertTerms extends ConvertBase
     public function convertCarriers()
     {
         $terms = $this->getTerms(23)->get(); // Lennufirma
+
+        $this->info('Converting carriers');
 
         foreach($terms as $term)
         {

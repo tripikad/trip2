@@ -26,6 +26,9 @@ class ConvertFollows extends ConvertBase
     {
         $follows = $this->getFollows()->get(); 
 
+        $this->info('Converting follows (subscriptions)');
+        $this->output->progressStart(count($follows));
+
         foreach($follows as $follow)
         {   
 
@@ -44,9 +47,14 @@ class ConvertFollows extends ConvertBase
               
                 $this->convertNode($node, '\App\Content', 'forum');
 
+                $this->output->progressAdvance();
+
             }
               
         }
+
+        $this->output->progressFinish();
+
     }
 
     public function handle()

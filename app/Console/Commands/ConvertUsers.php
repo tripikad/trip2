@@ -14,7 +14,6 @@ class ConvertUsers extends ConvertBase
             ->table('users')
             ->join('users_roles', 'users_roles.uid', '=', 'users.uid')
             ->join('role', 'role.rid', '=', 'users_roles.rid')
-   //         ->latest('created')
             ->take(100)
             ->get();
 

@@ -11,8 +11,11 @@ class ConvertBlogs extends ConvertBase
 
         $nodes = $this->getNodes('trip_blog')->get();
 
-        foreach($nodes as $node)
-        {
+        $this->info('Converting blogs');
+        $this->output->progressStart(count($nodes));
+
+        foreach($nodes as $node) {
+
             $this->convertNode($node, '\App\Content', 'blog');
 
             $this->convertNodeDestinations($node);
@@ -24,7 +27,11 @@ class ConvertBlogs extends ConvertBase
                 $this->convertUrl($node->nid, $matches[0][0], '\App\Content');
             }
 
+            $this->output->progressAdvance();
         }
+
+        $this->output->progressFinish();
+
     }
 
     public function convertForumNodes()
@@ -35,13 +42,23 @@ class ConvertBlogs extends ConvertBase
             ->where('term_node.tid', '=', 821) // Reisikirjad
             ->get();
 
-        foreach($nodes as $node)
-        {
+        $this->info('Converting blogs from forum');
+        $this->output->progressStart(count($nodes));
+
+        foreach($nodes as $node) {
+
             $node->title = $node->title . ', foorumist';
+            
             $this->convertNode($node, '\App\Content', 'blog');
             
             $this->convertNodeDestinations($node);
+        
+            $this->output->progressAdvance();
+
         }
+    
+        $this->output->progressFinish();
+
     }
 
     public function handle()

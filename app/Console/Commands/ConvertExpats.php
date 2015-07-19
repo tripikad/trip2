@@ -11,8 +11,10 @@ class ConvertExpats extends ConvertBase
     {
         $nodes = $this->getNodes('trip_forum_expat')->get();
 
-        foreach($nodes as $node)
-        {
+        $this->info('Coverting Expats');
+        $this->output->progressStart(count($nodes));
+
+        foreach($nodes as $node) {
 
             $node->title = $node->title . ', elust välismaal';
 
@@ -21,7 +23,13 @@ class ConvertExpats extends ConvertBase
             $this->convertNodeDestinations($node);
             $this->convertNodeTopics($node);
             $this->newNodeTopics($node);
+
+            $this->output->progressAdvance();
+
         }
+
+        $this->output->progressFinish();
+    
     }
 
     public function handle()

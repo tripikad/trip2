@@ -11,14 +11,22 @@ class ConvertInternals extends ConvertBase
     {
         $nodes = $this->getNodes('trip_forum_editor')->get();
 
-        foreach($nodes as $node)
-        {
+        $this->info('Converting internal forum');
+        $this->output->progressStart(count($nodes));
+
+        foreach($nodes as $node) {
+            
             $this->convertNode($node, '\App\Content', 'internal');
             
             $this->convertNodeDestinations($node);
             $this->convertNodeTopics($node);
 
+            $this->output->progressAdvance();
+
         }
+
+        $this->output->progressFinish();
+
     }
 
     public function handle()

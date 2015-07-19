@@ -16,8 +16,11 @@ class ConvertTravelmates extends ConvertBase
             ->join('content_field_millistkaaslastsoovidleida', 'content_field_millistkaaslastsoovidleida.nid', '=', 'node.nid')
             ->get();
 
-        foreach($nodes as $node)
-        {   
+
+        $this->info('Converting travelmates');
+        $this->output->progressStart(count($nodes));
+
+        foreach($nodes as $node) {   
   
             $node->field_reisitoimumine_value =  $this->formatTimestamp($node->field_reisitoimumine_value);
 
@@ -34,7 +37,12 @@ class ConvertTravelmates extends ConvertBase
             $this->convertNodeDestinations($node);
             $this->convertNodeTopics($node);
 
+            $this->output->progressAdvance();
+
         }
+
+        $this->output->progressFinish();
+        
     }
 
     public function handle()
