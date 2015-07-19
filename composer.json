@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
         "guzzlehttp/guzzle": "~5.3|~6.0",
         "laravelcollective/html": "5.1.*",
-        "intervention/image": "^2.3@dev"
+        "intervention/image": "^2.3@dev",
+        "barryvdh/laravel-debugbar": "^2.0@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

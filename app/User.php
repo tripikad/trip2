@@ -86,4 +86,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return ($this->hasRole($role) || $ownable_user_id == $this->id);
 
     }
+
 }
