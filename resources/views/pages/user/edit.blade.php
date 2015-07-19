@@ -17,7 +17,7 @@
         'files' => true
     ]) !!}
 
-    {!! Form::file('image_file') !!}
+    {!! Form::file('file') !!}
 
     {!! Form::submit('Submit', ['name' => 'image_submit']) !!}
 

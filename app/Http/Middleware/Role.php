@@ -6,14 +6,8 @@ use Closure;
 
 class Role
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
-    public function handle($request, Closure $next, $role)
+
+    public function handle($request, Closure $next, $role, $owner = false)
     {
 
         if (! $request->user() || ! $request->user()->hasRole($role)) {
@@ -24,4 +18,5 @@ class Role
 
         return $next($request);
     }
+
 }

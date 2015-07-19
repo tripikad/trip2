@@ -214,3 +214,7 @@ https://packagist.org/packages/laravelrus/localized-carbon
 
 - favicon
 - GA tracker
+
+- file move() override?
+
+- 

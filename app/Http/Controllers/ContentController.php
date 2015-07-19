@@ -91,22 +91,8 @@ class ContentController extends Controller
 
         if ($request->hasFile('file')) {
             
-            $file = $request->file('file');
-
-            $fileName = $file->getClientOriginalName();
-
-            $path = public_path() . "/images/$type/";
-            $smallPath = public_path() . "/images/$type/small/";
-            
-            $file->move($path, $fileName);
-
-            Imageconv::make($path . $fileName)
-                ->resize(300, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save($smallPath . $fileName);
-
-            $fields['image'] = $fileName;
+            $image = $this->storeImage($request->file('file'), $type);
+            $fields['image'] = $image;
 
         }
 
@@ -119,6 +105,25 @@ class ContentController extends Controller
             ->route('content.index', [$type])
             ->with('status', trans("content.store.status", ['title' => $content->title]));
 
+    }
+
+    public function storeImage($file, $type)
+    {
+
+        $fileName = $file->getClientOriginalName();
+        $path = public_path() . "/images/$type/";
+        $smallPath = public_path() . "/images/$type/small/";
+        
+        $file->move($path, $fileName);
+
+        Imageconv::make($path . $fileName)
+            ->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($smallPath . $fileName);
+        
+        return $fileName;
+    
     }
 
     public function edit($type, $id)
@@ -144,9 +149,14 @@ class ContentController extends Controller
 
         $this->validate($request, config("content.types.$type.rules"));
 
-        $fields = [];
+        if ($request->hasFile('file')) {
+            
+            $image = $this->storeImage($request->file('file'), $type);
+            $fields['image'] = $image;
 
-        $content->update(array_merge($request->all(), $fields));
+        }
+
+        $content->update(array_merge($fields, $request->all()));
 
         return redirect()
             ->route('content.show', [$type, $content])

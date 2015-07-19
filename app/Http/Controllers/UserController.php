@@ -44,20 +44,22 @@ class UserController extends Controller
         if ($request->get('image_submit')) {
         
             $this->validate($request, [
-                'image_file' => 'required|image',
+                'file' => 'required|image',
             ]); 
 
             $image = 'picture-'
                 . $user->id
                 . '.'
-                . $request->file('image_file')->getClientOriginalExtension();
+                . $request->file('file')->getClientOriginalExtension();
 
             $imagepath = public_path() . '/images/user/';
             $smallimagepath = public_path() . '/images/user/small/';
             
-            $request->file('image_file')->move($imagepath, $image);
+            $request->file('file')->move($imagepath, $image);
 
-            Imageconv::make($imagepath . $image)->fit(200)->save($smallimagepath . $image);
+            Imageconv::make($imagepath . $image)
+                ->fit(200)
+                ->save($smallimagepath . $image);
             
             $user->update(['image' => $image]);
 

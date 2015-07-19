@@ -4,6 +4,10 @@ return [
     
     // General
 
+    'field.image.title' => 'Select image',
+
+    'field.image.selected.title' => 'New image selected',
+    
     'index.filter' => 'Filters ▾',
     
     'index.filter.field.destination.title' => 'All',

@@ -26,6 +26,10 @@
     
         @elseif ($field['type'] == 'file')
 
+            @include('components.image.field', [
+                'image' => isset($content) ? $content->imagePath() : null
+            ])
+
             {!! Form::$field['type']($key) !!}
 
         @elseif (in_array($field['type'], ['submit', 'button']))

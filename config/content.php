@@ -147,11 +147,10 @@ return [
             'edit' => [
                 'title' => 'Edit photo'
             ],
-            'rules' => ['title' => 'required', 'image' => 'required'],
+            'rules' => ['title' => 'required', 'file' => 'required|image'],
             'fields' => [
-                'image' => [
-                    'type' => 'text',
-                    'title' => 'Image',
+                'file' => [
+                    'type' => 'file',
                 ],
                 'title' => [
                     'type' => 'textarea',
@@ -216,6 +215,9 @@ return [
             ],
             'rules' => ['title' => 'required', 'url' => 'url'],
             'fields' => [
+                'file' => [
+                    'type' => 'file',
+                ],
                 'title' => [
                     'type' => 'textarea',
                     'title' => 'Offer description',
