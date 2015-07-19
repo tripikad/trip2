@@ -24,8 +24,10 @@
 
             </div>
 
-            <div class="col-sm-1"> 
-                <a href="{{ route('comment.edit', [$comment->id]) }}">Edit</a> 
+            <div class="col-sm-1">
+                @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $comment->user->id))
+                    <a href="{{ route('comment.edit', [$comment->id]) }}">Edit</a>
+                @endif
             </div>
 
         </div>

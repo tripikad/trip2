@@ -52,8 +52,12 @@
         
         <div class="col-sm-1">
 
-            <a href="{{ route('content.edit', ['type' => $content->type, 'id' => $content]) }}">Edit</a>
-
+            @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $content->user->id))
+                
+                <a href="{{ route('content.edit', ['type' => $content->type, 'id' => $content]) }}">Edit</a>
+            
+            @endif
+        
         </div>
 
     </div>

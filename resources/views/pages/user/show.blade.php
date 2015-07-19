@@ -20,8 +20,14 @@
 @stop
 
 @section('header.right')
-    @include('components.button', [ 
-        'route' => route('user.edit', [$user]),
-        'title' => trans('user.edit.title')
-    ])
+
+    @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id))
+
+        @include('components.button', [ 
+            'route' => route('user.edit', [$user]),
+            'title' => trans('user.edit.title')
+        ])
+
+    @endif
+
 @stop

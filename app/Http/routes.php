@@ -21,11 +21,11 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
     get('{id}', ['middleware' => null, 'uses' => 'ContentController@show', 'as' => 'show']);
 
-    get('{id}/edit', ['middleware' => 'role:admin', 'uses' => 'ContentController@edit', 'as' => 'edit']);
+    get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@edit', 'as' => 'edit']);
 
-    put('{id}', ['middleware' => 'role:admin', 'uses' => 'ContentController@update', 'as' => 'update']);
+    put('{id}', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@update', 'as' => 'update']);
 
-    post('/filter', ['uses' => 'ContentController@filter', 'as' => 'filter']);
+    post('/filter', ['middleware' => null, 'uses' => 'ContentController@filter', 'as' => 'filter']);
 
 });
 
@@ -34,9 +34,9 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
 post('content/{type}/{id}/comment', ['middleware' => 'role:regular', 'uses' => 'CommentController@store', 'as' => 'comment.store']);
 
-get('comment/{id}/edit', ['middleware' => 'role:admin', 'uses' => 'CommentController@edit', 'as' => 'comment.edit']);
+get('comment/{id}/edit', ['middleware' => 'role:admin,commentowner', 'uses' => 'CommentController@edit', 'as' => 'comment.edit']);
 
-put('comment/{id}', ['middleware' => 'role:admin', 'uses' => 'CommentController@update', 'as' => 'comment.update']);
+put('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' => 'CommentController@update', 'as' => 'comment.update']);
 
 
 // Users

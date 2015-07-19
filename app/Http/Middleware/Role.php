@@ -10,13 +10,37 @@ class Role
     public function handle($request, Closure $next, $role, $owner = false)
     {
 
-        if (! $request->user() || ! $request->user()->hasRole($role)) {
+        if ($owner == 'contentowner'
+            && $request->user()->hasRoleOrOwner(
+                $role,
+                \App\Content::findOrFail($request->id)->user->id
+            )
+        ) {
 
-            return abort(401);
+            return $next($request);
         
         }
 
-        return $next($request);
+        if ($owner == 'commentowner'
+            && $request->user()->hasRoleOrOwner(
+                $role,
+                \App\Comment::findOrFail($request->id)->user->id
+            )
+        ) {
+
+            return $next($request);
+        
+        }
+
+        if ($request->user() && $request->user()->hasRole($role)) {
+
+            return $next($request);
+        
+        }
+
+        return abort(401);
+
+        
     }
 
 }
