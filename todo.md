@@ -22,6 +22,9 @@ Legend: **High priority** Normal priority *Future idea*
 - **auth middleware / controller AC**
 - Forum filtering
 - **Destination feature pages**
+- **Image processing**
+- **Image URLs**
+- **Image uploads**
 
 ## TODO
 
@@ -41,9 +44,9 @@ Legend: **High priority** Normal priority *Future idea*
 - **Content status: published/unpublished**
 - Content delete
 - Destination and tag autocomplete in index / edit
-- Content type conversion for admins
 - **What to do with extra fields (buysell, travelmates, flight offers, offers)**
-- *Previews*
+- *Content type conversion for admins*
+- *Previews?*
 - *Expiration?*
 
 ### Videos
@@ -104,8 +107,8 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Ads
 
-- Google DFB
-- **Custom made**
+- **Google DFB**
+- Custom made
 
 ### DB
 
@@ -114,12 +117,14 @@ Legend: **High priority** Normal priority *Future idea*
 ### Models
 
 - **sanitize content input**
-    - no HTML in titles (content, user, message, destination, carrier, comment, topic)
-    - no HTML in body (content, message, comment)
-    - limited HTML for body
+
+    - limited HTML for body (content, message, comment)
         a, em, i, strong, b, img, br
     - clear attributes
-- sanitize content output + nl2br
+
+    - no HTML in other fields incl titles (content, user, message, destination, carrier, comment, topic)
+
+    - use middleware sanitizer?
 
 ### Views
 
@@ -137,9 +142,7 @@ Legend: **High priority** Normal priority *Future idea*
 ### Image pipeline
 
 - fallback image(s) in /public/icons
-- **Image processing**
-- **Image URLs**
-- **Image uploads**
+- fix file move() override
 
 ### Forms
 
@@ -155,6 +158,7 @@ Legend: **High priority** Normal priority *Future idea*
 ### Viewed status
 
 - Viewed status on content, comments, **messages**
+https://andrisreinman.com/efektiivne-ip-kaunter/
 
 ### Following
 
@@ -215,6 +219,7 @@ https://packagist.org/packages/laravelrus/localized-carbon
 - favicon
 - GA tracker
 
-- file move() override?
+### Tests
 
-- 
+- User page test
+
