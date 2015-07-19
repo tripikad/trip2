@@ -1,0 +1,38 @@
+.component-card {
+
+    width: 100%;
+    padding-bottom: 66%;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+    border: 1px dashed #888;
+
+    &.-image {
+        background-position: center;
+        background-size: cover;
+        border: none;
+    }
+
+    > .overlay {
+        position: absolute;
+        top: 0;
+        right: 7px;
+        left: 7px;
+        bottom: 14px;
+        background: #000;
+        opacity: 0.5;
+
+    }
+
+    > .content {
+
+        &.-image {
+            color: white;
+            letter-spacing: 0.05em;
+        }
+
+        > .title {}
+        > .text {}
+    }
+}
