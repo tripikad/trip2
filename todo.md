@@ -223,3 +223,7 @@ https://packagist.org/packages/laravelrus/localized-carbon
 
 - User page test
 
+...
+
+- remove carriers
+- components/content/blog/front -> feature

@@ -4,10 +4,6 @@
     {{ trans("content.$type.index.title") }}
 @stop
 
-@section('actions.primary')
-    @include('components.placeholder', ['text' => 'Follow post'])
-@stop
-
 @section('content')
 
     @if($content->image)
@@ -66,6 +62,10 @@
     
     @include('components.comment.index', ['comments' => $content->comments])
 
-    @include('components.comment.create')
+    @if (\Auth::check())
+
+        @include('components.comment.create')
+
+    @endif
 
 @stop

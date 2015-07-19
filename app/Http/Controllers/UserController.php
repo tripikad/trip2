@@ -13,13 +13,17 @@ use \App\User;
 class UserController extends Controller
 {
 
-    public function show($id, $page = null)
+    public function show($id)
     {
+
         $user = User::findorFail($id);
+  
   
         return View::make('pages.user.show')
             ->with('user', $user)
             ->render();
+   
+    
     }
 
     public function edit($id)
