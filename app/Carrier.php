@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carrier extends Model
 {
-	//Test comment
+	
+    // Test comment
+
     public $timestamps = false;
 
 }
