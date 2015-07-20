@@ -432,7 +432,7 @@ class ConvertBase extends Command
 
     public function convertLocalImage($id, $imagePath, $modelName, $type)
     {
-
+/*
         $model = $modelName::findOrFail($id);
 
         $model->image = basename($imagePath);
@@ -444,8 +444,9 @@ class ConvertBase extends Command
 
         if ($this->copyFiles) {
 
-            // $this->copyFile($from, $to);
+            $this->copyFile($from, $to);
         }
+*/    
     }
 
     public function convertRemoteImage($id, $imageUrl, $modelName, $type)
