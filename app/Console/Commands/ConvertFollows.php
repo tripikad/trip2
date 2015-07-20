@@ -32,7 +32,7 @@ class ConvertFollows extends ConvertBase
         foreach($follows as $follow)
         {   
 
-            if ($node = $this->getNode($follow->nid)) {
+            if ($node = $this->getNode($follow->nid) && $this->isUserConvertable($follow->uid)) {
 
                 $model = new Follow;
 

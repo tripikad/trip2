@@ -22,13 +22,19 @@ class ConvertMessages extends ConvertBase
     
     public function convertMessages()
     {
+
+        $count = $this->getMessages()->count();
+
+        $this->info('Converting messages');
+        $this->output->progressStart(($this->take > $count) ? $count : $this->take);
+
         $nodes = $this->getMessages()->chunk($this->chunk, function ($nodes) use (&$i) {
             
             if ($i++ > $this->chunkLimit()) return false;
 
             foreach($nodes as $node) {
 
-                if ($node->author !== $node->uid) {
+                if (($node->author !== $node->uid) && $this->isUserConvertable($node->uid)) {
         
                     $model = new Message;
 
@@ -46,10 +52,15 @@ class ConvertMessages extends ConvertBase
                     $this->convertUser($node->uid);
         
                 }
+
+                $this->output->progressAdvance();
+
             }
 
         });
     
+        $this->output->progressFinish();
+
     }
 
     public function handle()

@@ -11,11 +11,13 @@ class ConvertBase extends Command
 
     protected $connection = 'trip';
 
-    protected $take = 100;
+    // messages ~100000
+
+    protected $take = 50;
     protected $chunk = 50;
     protected $skip = 0;
 
-    protected $copyFiles = false;
+    protected $copyFiles = env('CONVERT_FILES', false);
 
     protected $client;
 
@@ -60,7 +62,9 @@ class ConvertBase extends Command
     public function convertNode($node, $modelname, $type)
     {
 
+//        if (!$modelname::find($node->nid) && $this->isUserConvertable($node->uid)) {
         if (!$modelname::find($node->nid)) {
+
             $model = new $modelname;
 
             $model->id = $node->nid;
@@ -76,9 +80,7 @@ class ConvertBase extends Command
         
             $this->convertUser($node->uid);
             $this->convertComments($node->nid);
-
             $this->convertFlags($node->nid, $modelname, 'node');
-
             $this->convertAlias($node->nid, $modelname, 'node');
         
         }
@@ -299,24 +301,33 @@ class ConvertBase extends Command
         $comments = $this->getComments($nid)->where('status', '=', $status)->get();
 
         foreach($comments as $comment) {
-
-            $model = new \App\Comment;
-
-            $model->id = $comment->cid;
-            $model->user_id = $comment->uid;
-            $model->content_id = $comment->nid;
-            $model->body = $comment->comment;
-            $model->status = 1 - $comment->status;
-            $model->created_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);  
-            $model->updated_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp); 
-
-            $model->save();
-    
-            $this->convertUser($comment->uid);
             
-            $this->convertFlags($comment->cid, 'App\Comment', 'comment');
+            $user_id = ($comment->uid > 0) ? $comment->uid : 1;
+            
+            if ($this->isUserConvertable($user_id)) {
+                
+                $model = new \App\Comment;
+
+                $model->id = $comment->cid;
+                $model->user_id = $user_id;
+                $model->content_id = $comment->nid;
+                $model->body = $comment->comment;
+                $model->status = 1 - $comment->status;
+                $model->created_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);  
+                $model->updated_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp); 
+
+                $model->save();
+        
+                $this->convertUser($user_id);
+                
+                $this->convertFlags($comment->cid, 'App\Comment', 'comment');
+                
+            }
+        
         }
+    
     }
+
 
     // Users
 
@@ -341,6 +352,16 @@ class ConvertBase extends Command
             ->first();
     }
 
+    public function isUserConvertable($uid) {
+
+        $user = $this->getUser($uid);
+
+        // Eliminating mail duplicates using
+        // SELECT uid, mail, COUNT(*) c FROM users GROUP BY mail HAVING c > 1;
+
+        return ($user->status == 1 && ! in_array($user->uid, [7288556, 4694, 3661]));
+    }
+
     public function getRole($rid)
     {
         $role = \DB::connection($this->connection)
@@ -353,26 +374,32 @@ class ConvertBase extends Command
 
     public function createUser($user)
     {
-        $model = new \App\User;
 
-        $model->id = $user->uid;
-        $model->name = $user->name;
-        $model->email = $user->mail;
+        if ($this->isUserConvertable($user->uid)) {
 
-        $model->password = bcrypt($user->name); // Legacy md5 password: $user->pass
+            $model = new \App\User;
 
-        $model->role = $this->getRole($user->rid);
+            $model->id = $user->uid;
+            $model->name = $user->name;
+            $model->email = $user->mail;
 
-        $model->created_at = \Carbon\Carbon::createFromTimeStamp($user->created);  
-        $model->updated_at = \Carbon\Carbon::createFromTimeStamp($user->access);  
-       
-        $model->save();
+            $model->password = bcrypt($user->name); // Legacy md5 password: $user->pass
 
-        if ($user->picture) {
+            $model->role = $this->getRole($user->rid);
 
-            $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user');
-        
+            $model->created_at = \Carbon\Carbon::createFromTimeStamp($user->created);  
+            $model->updated_at = \Carbon\Carbon::createFromTimeStamp($user->access);  
+           
+            $model->save();
+
+            if ($user->picture) {
+
+                $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user');
+            
+            }
+
         }
+    
     }
 
 
@@ -484,10 +511,15 @@ class ConvertBase extends Command
         $flags = $this->getFlags($id, $type);
             
         foreach($flags as $flag) {
-            $flag->flag_type = $flag_map[$flag->fid];
-            $this->createFlag($flag, $modelname);
 
-            $this->convertUser($flag->uid);
+            if ($this->isUserConvertable($flag->uid)) {
+
+                $flag->flag_type = $flag_map[$flag->fid];
+                $this->createFlag($flag, $modelname);
+
+                $this->convertUser($flag->uid);
+
+            }
         }   
     }
 

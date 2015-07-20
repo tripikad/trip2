@@ -3,7 +3,7 @@
 class ConvertBlogs extends ConvertBase
 {
 
-    protected $signature = 'convert:blogs';
+    protected $signature = 'convert:blogs {--take=10}';
 
 
     public function convertBlogNodes()

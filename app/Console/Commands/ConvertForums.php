@@ -22,7 +22,12 @@ class ConvertForums extends ConvertBase
     {
         $i = 0;
 
-        $nodes = $this->getNodes('trip_forum')->chunk($this->chunk, function ($nodes) use (&$i) {
+        $count = $this->getNodes('trip_forum')->count();
+
+        $this->info('Converting forum');
+        $this->output->progressStart(($this->take > $count) ? $count : $this->take);
+
+        $nodes = $this->getNodes('trip_forum')->skip($this->skip)->chunk($this->chunk, function ($nodes) use (&$i) {
             
             if ($i++ > $this->chunkLimit()) return false;
             
@@ -37,10 +42,15 @@ class ConvertForums extends ConvertBase
                     $this->convertNodeDestinations($node);
                     $this->convertNodeTopics($node);
                     $this->newNodeTopics($node);
+
+                    $this->output->progressAdvance();
+
                 } 
             }
         
         });
+
+        $this->output->progressFinish();
 
     }
 
