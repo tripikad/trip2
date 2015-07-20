@@ -24,8 +24,8 @@ class ConvertAll extends ConvertBase
         $this->call('convert:photos');
         $this->call('convert:travelmates');
 
-        $this->call('convert:follows');
-        $this->call('convert:messages');
+        // $this->call('convert:follows');
+        // $this->call('convert:messages');
 
    
     }
