@@ -562,9 +562,9 @@ class ConvertBase extends Command
             ]);
         }
 
-        catch(Exception $e) {
+        catch(\GuzzleHttp\Exception\ConnectException $e) {
 
-            $this->error('Can not download '. $from);
+            // $this->error('Can not download '. $from);
 
             return false;
         }
