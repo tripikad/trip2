@@ -11,13 +11,11 @@ class ConvertBase extends Command
 
     protected $connection = 'trip';
 
-    // messages ~100000
+    protected $take;
+    protected $copyFiles;
 
-    protected $take = 50;
     protected $chunk = 50;
     protected $skip = 0;
-
-    protected $copyFiles;
 
     protected $client;
 
@@ -28,6 +26,9 @@ class ConvertBase extends Command
         $this->client = new \GuzzleHttp\Client();
         Model::unguard();
         
+        // max size: messages ~100000
+
+        $this->take = env('CONVERT_TAKE', '50');
         $this->copyFiles = env('CONVERT_FILES', 'false');
     }
 
