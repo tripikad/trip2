@@ -17,7 +17,7 @@ class ConvertBase extends Command
     protected $chunk = 50;
     protected $skip = 0;
 
-    protected $copyFiles = env('CONVERT_FILES', false);
+    protected $copyFiles = env('CONVERT_FILES', 'false');
 
     protected $client;
 
