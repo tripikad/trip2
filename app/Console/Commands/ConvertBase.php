@@ -554,10 +554,22 @@ class ConvertBase extends Command
     
     public function copyFile($from, $to)
     {
-        $response = $this->client->get($from, [
-            'save_to' => $to,
-            'exceptions' => false
-        ]);
+        try {
+
+            $response = $this->client->get($from, [
+                'save_to' => $to,
+                'exceptions' => false
+            ]);
+        }
+
+        catch(\GuzzleHttp\Exception\ConnectException) {
+
+            $this->error('Can not download '. $from);
+
+            return false;
+        }
+
+        return true;
     }
 
     public function chunkLimit()
