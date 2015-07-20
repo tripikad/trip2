@@ -451,22 +451,26 @@ class ConvertBase extends Command
     public function convertRemoteImage($id, $imageUrl, $modelName, $type)
     {
 
-        $ext = pathinfo($imageUrl)['extension'];
-        $imageFile = $type . '-' . $id . '.' . $ext;
+        if (isset(pathinfo($imageUrl)['extension'])) {
 
-        $model = $modelName::findOrFail($id);
+            $ext = pathinfo($imageUrl)['extension'];
+            $imageFile = $type . '-' . $id . '.' . $ext;
 
-        $model->image = $imageFile;
+            $model = $modelName::findOrFail($id);
 
-        $model->save();
+            $model->image = $imageFile;
 
-        $from = $imageUrl;
-        $to = public_path() . '/images/' . $type . '/' . $imageFile;
+            $model->save();
 
-        if ($this->copyFiles) {
-        
-            $this->copyFile($from, $to);
-        
+            $from = $imageUrl;
+            $to = public_path() . '/images/' . $type . '/' . $imageFile;
+
+            if ($this->copyFiles) {
+            
+                $this->copyFile($from, $to);
+            
+            }
+
         }
     }
 
