@@ -67,7 +67,7 @@ class ConvertBase extends Command
         
         if (!$modelname::find($node->nid)) {
 
-            if ($this->isUserConvertable($node->uid)) {
+        //    if ($this->isUserConvertable($node->uid)) {
 
                 $model = new $modelname;
 
@@ -87,7 +87,7 @@ class ConvertBase extends Command
                 $this->convertFlags($node->nid, $modelname, 'node');
                 $this->convertAlias($node->nid, $modelname, 'node');
             
-            }
+        //    }
 
         }
 
