@@ -444,7 +444,7 @@ class ConvertBase extends Command
 
         if ($this->copyFiles) {
 
-            $this->copyFile($from, $to);
+            // $this->copyFile($from, $to);
         }
     }
 
