@@ -34,7 +34,7 @@ class ConvertMessages extends ConvertBase
 
             foreach($nodes as $node) {
 
-                if (($node->author !== $node->uid) && $this->isUserConvertable($node->uid)) {
+                if ($node->author !== $node->uid) {
         
                     $model = new Message;
 
