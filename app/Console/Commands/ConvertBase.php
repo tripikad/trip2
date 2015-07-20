@@ -64,29 +64,30 @@ class ConvertBase extends Command
 
     public function convertNode($node, $modelname, $type)
     {
-
-//      if (!$modelname::find($node->nid) && $this->isUserConvertable($node->uid)) {
         
         if (!$modelname::find($node->nid)) {
 
-            $model = new $modelname;
+            if ($this->isUserConvertable($node->uid)) {
 
-            $model->id = $node->nid;
-            $model->type = $type;
-            $model->user_id = $node->uid;
-            $model->title = trim($node->title);
-            $model->body = trim($node->body);
-            $model->status = 1;
-            $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);  
-            $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment); 
+                $model = new $modelname;
 
-            $model->save();
-        
-            $this->convertUser($node->uid);
-            $this->convertComments($node->nid);
-            $this->convertFlags($node->nid, $modelname, 'node');
-            $this->convertAlias($node->nid, $modelname, 'node');
-        
+                $model->id = $node->nid;
+                $model->type = $type;
+                $model->user_id = $node->uid;
+                $model->title = trim($node->title);
+                $model->body = trim($node->body);
+                $model->status = 1;
+                $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);  
+                $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment); 
+
+                $model->save();
+            
+                $this->convertUser($node->uid);
+                $this->convertComments($node->nid);
+                $this->convertFlags($node->nid, $modelname, 'node');
+                $this->convertAlias($node->nid, $modelname, 'node');
+            
+            }
 
         }
 
