@@ -611,9 +611,9 @@ class ConvertBase extends Command
 
             }
 
-        } catch (\Intervention\Image\Exception\NotReadableException $e) {
-
-        } 
+        }
+        catch (\Intervention\Image\Exception\NotReadableException $e) {} 
+        catch (\Intervention\Image\Exception\NotSupportedException $e) {} 
 
     }
 
