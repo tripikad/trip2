@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 
-/*
+
 gulp.task('sass', function () {
 
     gulp.src([
@@ -12,21 +12,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./public/css'));
 
 });
-*/
 
-gulp.task('sass', function () {
-
-    gulp.src([
-        './node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss',
-        './resources/assets/sass/variables.scss',
-        './node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
-  //      './resources/assets/sass/styles/**/*.scss',
-        './resources/assets/sass/components/**/*.scss',
-    ])
-    .pipe(sass())
-    .pipe(gulp.dest('./public/css'));
-
-});
 
 gulp.task('js', function() {
  
