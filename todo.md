@@ -225,6 +225,9 @@ https://packagist.org/packages/laravelrus/localized-carbon
 
 ...
 
-- remove carriers
+- remove carriers (?)
 - components/content/blog/front -> feature
 - content by anonymous users?
+
+- isUserConvertable: message, follow
+
