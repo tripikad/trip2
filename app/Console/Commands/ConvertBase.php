@@ -65,10 +65,8 @@ class ConvertBase extends Command
     public function convertNode($node, $modelname, $type)
     {
 
-//      if (!$modelname::find($node->nid) && $this->isUserConvertable($node->uid)) {
+        if (!$modelname::find($node->nid) && $this->isUserConvertable($node->uid)) {
         
-        if (!$modelname::find($node->nid)) {
-
             $model = new $modelname;
 
             $model->id = $node->nid;
@@ -81,13 +79,13 @@ class ConvertBase extends Command
             $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment); 
 
             $model->save();
-        /*
+        
             $this->convertUser($node->uid);
             $this->convertComments($node->nid);
             $this->convertFlags($node->nid, $modelname, 'node');
             $this->convertAlias($node->nid, $modelname, 'node');
-        */
-            
+        
+
         }
 
     }
@@ -522,7 +520,7 @@ class ConvertBase extends Command
             
         foreach($flags as $flag) {
 
-            if ($this->isUserConvertable($flag->uid)) {
+            if ($this->isUserConvertable($flag->uid) && array_key_exists($flag->fid, $flag_map)) {
 
                 $flag->flag_type = $flag_map[$flag->fid];
                 $this->createFlag($flag, $modelname);
