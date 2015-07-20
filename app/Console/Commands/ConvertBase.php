@@ -17,7 +17,7 @@ class ConvertBase extends Command
     protected $chunk = 50;
     protected $skip = 0;
 
-    protected $copyFiles = env('CONVERT_FILES', 'false');
+    protected $copyFiles;
 
     protected $client;
 
@@ -27,6 +27,8 @@ class ConvertBase extends Command
 
         $this->client = new \GuzzleHttp\Client();
         Model::unguard();
+        
+        $this->copyFiles =  = env('CONVERT_FILES', 'false');
     }
 
     // Nodes
