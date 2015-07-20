@@ -397,7 +397,7 @@ class ConvertBase extends Command
 
             if ($user->picture) {
 
-                // $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user');
+                $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user');
             
             }
 
