@@ -28,7 +28,7 @@ class ConvertBase extends Command
         $this->client = new \GuzzleHttp\Client();
         Model::unguard();
         
-        $this->copyFiles =  = env('CONVERT_FILES', 'false');
+        $this->copyFiles = env('CONVERT_FILES', 'false');
     }
 
     // Nodes
