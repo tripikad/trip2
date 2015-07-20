@@ -592,22 +592,28 @@ class ConvertBase extends Command
     public function createThumbnail($from, $to, $preset)
     {
 
-        if ($preset == 'user') {
+        try {
 
-            Imageconv::make($to)
-                ->fit(200)
-                ->save(dirname($to) . '/small/' . basename($to));
-        }
-    
-        if ($preset == 'photo') {
+            if ($preset == 'user') {
+
+                Imageconv::make($to)
+                    ->fit(200)
+                    ->save(dirname($to) . '/small/' . basename($to));
+            } 
         
-            Imageconv::make($to)
-                ->resize(300, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save(dirname($to) . '/small/' . basename($to));
+            if ($preset == 'photo') {
+            
+                Imageconv::make($to)
+                    ->resize(300, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })
+                    ->save(dirname($to) . '/small/' . basename($to));
 
-        }
+            }
+
+        } catch (Intervention\Image\Exception\NotReadableException $e) {
+
+        } 
 
     }
 
