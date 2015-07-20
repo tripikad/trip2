@@ -451,9 +451,7 @@ class ConvertBase extends Command
     public function convertRemoteImage($id, $imageUrl, $modelName, $type)
     {
 
-        dump(pathinfo($imageUrl));
-
-        if (isset(pathinfo($imageUrl)['extension'])) {
+        if (array_key_exists('extension', pathinfo($imageUrl))) {
 
             $ext = pathinfo($imageUrl)['extension'];
             $imageFile = $type . '-' . $id . '.' . $ext;
