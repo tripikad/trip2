@@ -65,8 +65,10 @@ class ConvertBase extends Command
     public function convertNode($node, $modelname, $type)
     {
 
-        if (!$modelname::find($node->nid) && $this->isUserConvertable($node->uid)) {
+//      if (!$modelname::find($node->nid) && $this->isUserConvertable($node->uid)) {
         
+        if (!$modelname::find($node->nid)) {
+
             $model = new $modelname;
 
             $model->id = $node->nid;
