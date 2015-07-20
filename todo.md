@@ -232,3 +232,5 @@ https://packagist.org/packages/laravelrus/localized-carbon
 - isUserConvertable: message, follow
 
 - dupe removal: message, follow
+
+- hbert everywhere? /content/forum/69831
