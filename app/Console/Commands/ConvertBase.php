@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use App;
 
+use Imageconv;
+
 class ConvertBase extends Command
 {
 
@@ -400,7 +402,7 @@ class ConvertBase extends Command
 
             if ($user->picture) {
 
-                $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user');
+                $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user', 'user');
             
             }
 
@@ -433,7 +435,7 @@ class ConvertBase extends Command
     
     }
 
-    public function convertLocalImage($id, $imagePath, $modelName, $type)
+    public function convertLocalImage($id, $imagePath, $modelName, $type, $preset = 'user')
     {
 
         $model = $modelName::findOrFail($id);
@@ -448,11 +450,12 @@ class ConvertBase extends Command
         if ($this->copyFiles) {
 
             $this->copyFile($from, $to);
+            $this->createThumbnail($from, $to, $preset);
         }
     
     }
 
-    public function convertRemoteImage($id, $imageUrl, $modelName, $type)
+    public function convertRemoteImage($id, $imageUrl, $modelName, $type, $preset = 'user')
     {
 
         if (array_key_exists('extension', pathinfo($imageUrl))) {
@@ -472,6 +475,7 @@ class ConvertBase extends Command
             if ($this->copyFiles) {
             
                 $this->copyFile($from, $to);
+                $this->createThumbnail($from, $to, $preset);
             
             }
 
@@ -560,7 +564,7 @@ class ConvertBase extends Command
 
     // Utils 
     
-    public function copyFile($from, $to)
+    public function copyFile($from, $to, $preset = 'user')
     {
         try {
 
@@ -568,6 +572,7 @@ class ConvertBase extends Command
                 'save_to' => $to,
                 'exceptions' => false
             ]);
+        
         }
 
         catch(\GuzzleHttp\Exception\ConnectException $e) {
@@ -580,8 +585,32 @@ class ConvertBase extends Command
             return false;
         }
 
+
         return true;
     }
+
+    public function createThumbnail($from, $to, $preset)
+    {
+
+        if ($preset == 'user') {
+
+            Imageconv::make($to)
+                ->fit(200)
+                ->save(dirname($to) . '/small/' . basename($to));
+        }
+    
+        if ($preset == 'photo') {
+        
+            Imageconv::make($to)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(dirname($to) . '/small/' . basename($to));
+
+        }
+
+    }
+
 
     public function chunkLimit()
     {

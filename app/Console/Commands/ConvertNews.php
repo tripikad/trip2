@@ -36,7 +36,7 @@ class ConvertNews extends ConvertBase
 
             if ($matches && $matches[1]) {
                       
-                $this->convertRemoteImage($node->nid, $matches[1], '\App\Content', 'news');
+                $this->convertRemoteImage($node->nid, $matches[1], '\App\Content', 'news', 'photo');
             
             }
 

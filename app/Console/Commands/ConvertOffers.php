@@ -92,7 +92,7 @@ class ConvertOffers extends ConvertBase
     
             if ($node->filepath) {
 
-                $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'offer');
+                $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'offer', 'photo');
             }
 
             $this->output->progressAdvance();
