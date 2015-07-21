@@ -51,18 +51,23 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     get('{id}', ['uses' => 'UserController@show', 'as' => 'show']);
 
-    get('{id}/edit', ['middleware' => 'role:regular', 'uses' => 'UserController@edit', 'as' => 'edit']);
+    get('{id}/edit', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@edit', 'as' => 'edit']);
 
-    put('{id}', ['middleware' => 'role:regular', 'uses' => 'UserController@update', 'as' => 'update']);
+    put('{id}', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@update', 'as' => 'update']);
 
-    get('{id}/messages/{id2}', ['middleware' => 'role:admin', 'uses' => 'UserController@showMessagesWith', 'as' => 'show.messages.with']);
+    get('{id}/messages/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'UserController@showMessagesWith', 'as' => 'show.messages.with']);
 
-    get('{id}/messages', ['middleware' => 'role:admin', 'uses' => 'UserController@showMessages', 'as' => 'show.messages']);
+    get('{id}/messages', ['middleware' => 'role:superuser,userowner', 'uses' => 'UserController@showMessages', 'as' => 'show.messages']);
 
-    get('{id}/follows', ['middleware' => 'role:admin', 'uses' => 'UserController@showFollows', 'as' => 'show.follows']);
+    get('{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@showFollows', 'as' => 'show.follows']);
 
 });
 
+Route::group(['prefix' => 'message', 'as' => 'message.'], function () {
+
+    post('{id}/to/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@store', 'as' => 'store']);
+
+});
 
 // Registration
 

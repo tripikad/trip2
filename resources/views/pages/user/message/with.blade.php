@@ -12,19 +12,29 @@
 
 @foreach ($messages as $message)
 
+    <div id="message-{{ $message->id }}">
+
     @include('components.row', [
         'image' => $message->fromUser->imagePath(),
         'text' => trans('user.show.messages.with.row.text', [
+            'user' => $message->fromUser->name,
             'created_at' => $message->created_at->format('d. m Y H:i:s')
         ])
     ])
 
     {!! nl2br($message->body) !!}
 
+    </div>
+
     <hr>
 
 @endforeach
 
 @endif
+
+    @include('components.message.create', [
+        'user_from' => $user,
+        'user_to' => $user_with
+    ])
 
 @stop
