@@ -26,6 +26,7 @@ Legend: **High priority** Normal priority *Future idea*
 - **Image uploads**
 - **Password reminder**
 - **Message add/edit/delete forms**
+- **Content status: published/unpublished**
 
 ## TODO
 
@@ -43,7 +44,6 @@ Legend: **High priority** Normal priority *Future idea*
 ### Content
 
 - **Forum filtering fixes: autocomplete, autosubmit**
-- **Content status: published/unpublished**
 - **What to do with extra fields (buysell, travelmates, flight offers, offers)**
 - Content delete
 - Destination and tag autocomplete in index / edit
@@ -165,9 +165,9 @@ Legend: **High priority** Normal priority *Future idea*
 - Viewed status on content, comments, **messages**
 https://andrisreinman.com/efektiivne-ip-kaunter/
 
-### Following
+### Admin
 
-- *Harmonize Following / Subscribing / Bookmarking concepts*
+- **Publish / unpublish content/comment**
 
 ### Stat
 
