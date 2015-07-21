@@ -14,7 +14,6 @@ Legend: **High priority** Normal priority *Future idea*
 - content/index/{type} > content/{type}/all
 - content/{id} > content/{type}/{id}
 - **Login**
-- **Register**
 - **Comment add/edit/delete forms**
 - Add translations
 - **Roles**
@@ -25,26 +24,29 @@ Legend: **High priority** Normal priority *Future idea*
 - **Image processing**
 - **Image URLs**
 - **Image uploads**
+- **Password reminder**
+- **Message add/edit/delete forms**
 
 ## TODO
 
 ### Auth
 
-- **Password reminder**
-- Permissions
+- **Register mails**
+    https://github.com/laracasts/Email-Verification-In-Laravel
 - Legacy Drupal password hasher / mass password renewal?
 - "Not yet registred?" links
 - remove hardcoded form urls from views
 - *Registration spam prevention (Mollom?)*
 - *FB login*
+- *Permissions*
 
 ### Content
 
 - **Forum filtering fixes: autocomplete, autosubmit**
 - **Content status: published/unpublished**
+- **What to do with extra fields (buysell, travelmates, flight offers, offers)**
 - Content delete
 - Destination and tag autocomplete in index / edit
-- **What to do with extra fields (buysell, travelmates, flight offers, offers)**
 - *Content type conversion for admins*
 - *Previews?*
 - *Expiration?*
@@ -87,10 +89,12 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Messages
 
-- **Message add/edit/delete forms**
+- **Message title accessor**
 - Mail messages
 - Create Message tests with seeds
 - From collections hacks to real queries
+- *Message blocking*
+- *Message edit/delete forms?*
 
 ### Content ranking
 
@@ -133,6 +137,7 @@ Legend: **High priority** Normal priority *Future idea*
 - @section('subheading')
 - comment trans: .field.
 - inline styles to CSS
+- components/content/blog/front -> feature
 
 ### Controllers
 
@@ -178,11 +183,12 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 - convert polls?
 - convert subscriptions?
 - small fixes:
+    - hbert everywhere? /content/forum/69831
+    - content by anonymous users?
     - comment titles?
-    - do not convert content from ?!* users
+    - message titles?
+    - do not convert content from ?!* users -> re-enable
     - convert photo: Mitte-reisipildid?
-    - limit CLI parameter
-    - files CLI parameter
     - fix double run on taxonomy relations
     - filter frontimg tag from blog posts
     - flights: regexp price from the title
@@ -193,6 +199,8 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
     - /uurimus|küsitlus|uuring term/
     - /töö/
 - sanitization:
+    - remove html in titles
+    - limit html in body
     - remove <!--break-->
     - remove UPPERASE
 
@@ -222,15 +230,3 @@ https://packagist.org/packages/laravelrus/localized-carbon
 ### Tests
 
 - User page test
-
-...
-
-- remove carriers (?)
-- components/content/blog/front -> feature
-- content by anonymous users?
-
-- isUserConvertable: message, follow
-
-- dupe removal: message, follow
-
-- hbert everywhere? /content/forum/69831
