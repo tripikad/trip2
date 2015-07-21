@@ -1,5 +1,13 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body {
-    margin: 2em 0 1em 0;
+    margin: $default-margin 0;
 }
 
 img {

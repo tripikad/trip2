@@ -10,11 +10,14 @@
     
     </head>
     <body>
+        
         <div class="container">
             
-            @include('components.menubar')
+            
+            @include('components.navbar')
 
-            <hr />
+
+            <hr style="margin-top: 0;" />
 
             @include('components.status.success')
             
@@ -33,4 +36,5 @@
         <script type="text/javascript" src="/js/main.js"></script>
 
     </body>
+
 </html>

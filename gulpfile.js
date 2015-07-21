@@ -18,6 +18,7 @@ gulp.task('js', function() {
  
     gulp.src([
         './node_modules/jquery/dist/jquery.js',
+        './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
         './node_modules/fastclick/lib/fastclick.js',
         './resources/assets/js/**/*.js'
     ])
