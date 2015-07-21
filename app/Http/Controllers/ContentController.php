@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Auth;
 use Imageconv;
+
+use App\Content;
+use App\Destination;
 
 class ContentController extends Controller
 {
@@ -13,7 +17,7 @@ class ContentController extends Controller
     public function index(Request $request, $type)
     {
        
-        $contents = \App\Content::whereType($type)
+        $contents = Content::whereType($type)
             ->with(config("content.types.$type.with"))
             ->latest(config("content.types.$type.latest"));
     
@@ -39,14 +43,12 @@ class ContentController extends Controller
             ->select('name', 'id')
             ->orderBy('name')
             ->lists('name', 'id');
-      //      ->prepend(['' => trans('content.index.filter.field.destination.title')]);
 
         $topics = \App\Topic::whereHas('content', function ($query) use ($type) {
                 $query->whereType($type);
             })
             ->orderBy('name')
             ->lists('name', 'id');
-    //        ->prepend(trans('content.index.filter.field.topic.title'));
 
         return \View::make("pages.content.$type.index")
             ->with('contents', $contents)
@@ -65,8 +67,13 @@ class ContentController extends Controller
         $content = \App\Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers')
             ->findorFail($id);
      
+        $comments = $content->comments->filter(function ($comment) {
+            return $comment->status || (Auth::check() && Auth::user()->hasRole('admin'));
+        });
+
         return \View::make("pages.content.show")
             ->with('content', $content)
+            ->with('comments', $comments)
             ->with('type', $type)
             ->render();
     }

@@ -4,16 +4,10 @@
 
 <div class="row">
     
-    <div class="col-sm-3">
-    </div>
-
-    <div class="col-sm-6">
+    <div class="col-sm-6 col-sm-offset-3">
 
         @yield('content.narrow')
 
-    </div>
-
-    <div class="col-sm-3">
     </div>
 
 </div>

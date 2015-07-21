@@ -17,7 +17,7 @@
             @include('components.navbar')
 
 
-            <hr style="margin-top: 0;" />
+            <hr />
 
             @include('components.status.success')
             

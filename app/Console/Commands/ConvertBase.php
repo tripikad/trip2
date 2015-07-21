@@ -54,7 +54,7 @@ class ConvertBase extends Command
         $query = \DB::connection($this->connection)
             ->table('node')
             ->join('node_revisions', 'node_revisions.nid', '=', 'node.nid')
-            ->select('*.node', 'node_revisions.body')
+            ->select('node.*', 'node_revisions.body')
             ->where('node.uid', '>', 0)
             ->where('node.status', '=', 1)
             ->where('node.type', '=', $type)

@@ -6,6 +6,12 @@
 
 @section('content')
 
+    <div class="
+        @if (! $content->status)
+            utils-unpublished
+        @endif
+    ">
+
     @if($content->image)
         
         <div style="margin-bottom: 14px;">
@@ -17,8 +23,6 @@
         </div>
 
     @endif
-
-    <div style="style="margin-bottom: 16px;">
 
     @include('components.row', [
         'image' => $content->user->imagePath(),
@@ -32,8 +36,6 @@
             'tags' => $content->topics->implode('name', ','),
         ])
     ])
-
-    </div>
 
     <div class="row"">
 
@@ -58,9 +60,11 @@
 
     </div>
 
+    </div>
+
     <hr />
     
-    @include('components.comment.index', ['comments' => $content->comments])
+    @include('components.comment.index', ['comments' => $comments])
 
     @if (\Auth::check())
 

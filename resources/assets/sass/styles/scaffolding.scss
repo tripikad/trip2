@@ -15,8 +15,7 @@ img {
 }
 
 hr {
-  margin-top: ceil($line-height-computed * 0.8);
-  margin-bottom: ceil($line-height-computed * 0.8);
+  margin: $default-margin 0;
 }
 
 @media (max-width: $screen-xs-max) {
