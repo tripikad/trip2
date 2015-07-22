@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <link href="/css/main.css" rel='stylesheet' type='text/css'>
+        <link href="/css/selectize.bootstrap3.css" rel='stylesheet' type='text/css'>
 
         <title>@yield('title') | {{ config('site.name') }}</title>
     

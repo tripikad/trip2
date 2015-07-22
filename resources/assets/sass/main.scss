@@ -19,29 +19,29 @@ $font-size-xs-h2:         26px;
 $font-size-xs-h3:         20px;
 $font-size-xs-h4:         16px;
 
-$btn-primary-border:      $brand-primary;
+$btn-primary-border:                    $brand-primary;
 
-$btn-border-radius-base:  6px;
-$btn-border-radius-large: 6px;
-$btn-border-radius-small: 6px;
+$btn-border-radius-base:                6px;
+$btn-border-radius-large:               6px;
+$btn-border-radius-small:               6px;
 
-$navbar-margin-bottom:                      0;
-$navbar-border-radius:                      0;
-$navbar-default-color:                      black;
-$navbar-default-bg:                         transparent;
+$navbar-margin-bottom:                  0;
+$navbar-border-radius:                  0;
+$navbar-default-color:                  black;
+$navbar-default-bg:                     transparent;
 $navbar-default-border:                     none;
 
-$navbar-default-link-color:                $brand-primary;
-$navbar-default-link-hover-color:          $brand-primary;
-$navbar-default-link-active-color:         $brand-primary;
-$navbar-default-link-active-bg:            $brand-primary;
+$navbar-default-link-color:             $brand-primary;
+$navbar-default-link-hover-color:       $brand-primary;
+$navbar-default-link-active-color:      $brand-primary;
+$navbar-default-link-active-bg:         $brand-primary;
 
-$navbar-default-brand-color:               $brand-primary;
-$navbar-default-brand-hover-color:         $brand-primary;
+$navbar-default-brand-color:            $brand-primary;
+$navbar-default-brand-hover-color:      $brand-primary;
 
-$navbar-default-toggle-hover-bg:           transparent;
-$navbar-default-toggle-icon-bar-bg:        $brand-primary;
-$navbar-default-toggle-border-color:       transparent;
+$navbar-default-toggle-hover-bg:        transparent;
+$navbar-default-toggle-icon-bar-bg:     $brand-primary;
+$navbar-default-toggle-border-color:    transparent;
 
 
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";

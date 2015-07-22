@@ -222,6 +222,9 @@ http://packalyst.com/packages/package/roumen/sitemap
 - Carbon localizations:
 https://packagist.org/packages/laravelrus/localized-carbon
 
+- html5shiv
+- h5f
+
 ### Other
 
 - favicon
