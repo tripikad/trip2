@@ -1,61 +1,51 @@
 <hr />
 
-<div class="text-center">
-
 {!! Form::open([
     'url' => route('content.filter', [$type]),
     'class' => 'form-inline'
 ]) !!}
 
-<div class="form-group">
+<div class="row">
 
-    {!! Form::select(
-        'destination',
-        ['' => trans('content.index.filter.field.destination.title')]
-             + $destinations->toArray(),
-        $destination,
-        [
-            'class' => 'field-destination form-control input-sm',
-            'style' => 'width: 200px;'
-        ]
-    )!!}
+    <div class="col-sm-3 col-sm-offset-3">
 
-</div>
+        {!! Form::select(
+            'destination',
+            ['' => trans('content.index.filter.field.destination.title')]
+                 + $destinations->toArray(),
+            $destination
+        )!!}
 
-<div class="form-group">
+    </div>
 
-    {!! Form::select(
-        'topic',
-        ['' => trans('content.index.filter.field.topic.title')]
-             + $topics->toArray(), 
-        $topic, 
-        [
-            'class' => 'form-control input-sm',
-            'style' => 'width: 200px;'
-        ]
-    )!!}
+    <div class="col-sm-3">
 
-</div>
+        {!! Form::select(
+            'topic',
+            ['' => trans('content.index.filter.field.topic.title')]
+                 + $topics->toArray(), 
+            $topic
+        )!!}
 
-<div class="form-group">
+    </div>
 
-{!! Form::submit(
-    trans('content.index.filter.submit.title'), 
-    ['class' => 'btn btn-primary btn-sm btn-block'])
-!!}
+    <div class="col-sm-1">
 
-</div>
+    {!! Form::submit(
+        trans('content.index.filter.submit.title'), 
+        ['class' => 'btn btn-primary btn-sm btn-block'])
+    !!}
 
-<div class="form-group">
+    <a 
+        href="{{ route('content.index', [$type]) }}"
+        class="btn btn-link"
+    >
 
-<a 
-    href="{{ route('content.index', [$type]) }}"
-    class="btn btn-link btn-sm btn-block"
->
+    {{ trans('content.index.filter.reset.title') }}
 
-{{ trans('content.index.filter.reset.title') }}
+    </a>
 
-</a>
+    </div>
 
 </div>
 
@@ -75,7 +65,5 @@
     </h3>
 
 @endif
-
-</div>
 
 <hr />
