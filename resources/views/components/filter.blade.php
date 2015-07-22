@@ -1,5 +1,7 @@
 <hr />
 
+<div class="text-center">
+
 {!! Form::open([
     'url' => route('content.filter', [$type]),
     'class' => 'form-inline'
@@ -11,7 +13,8 @@
         'destination',
         ['' => trans('content.index.filter.field.destination.title')]
              + $destinations->toArray(),
-        $destination, [
+        $destination,
+        [
             'class' => 'field-destination form-control input-sm',
             'style' => 'width: 200px;'
         ]
@@ -25,7 +28,8 @@
         'topic',
         ['' => trans('content.index.filter.field.topic.title')]
              + $topics->toArray(), 
-        $topic, [
+        $topic, 
+        [
             'class' => 'form-control input-sm',
             'style' => 'width: 200px;'
         ]
@@ -52,6 +56,8 @@
 {{ trans('content.index.filter.reset.title') }}
 
 </a>
+
+</div>
 
 {!! Form::close() !!}
 
