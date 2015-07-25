@@ -14,7 +14,7 @@
             'contents' => $front['contents']
         ])
     
-    </div>>
+    </div>
     
 @endforeach
 
