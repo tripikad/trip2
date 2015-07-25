@@ -14,11 +14,11 @@
         
         <div class="container">
             
+            <div class="utils-border-bottom">          
+                
+                @include('components.navbar')
             
-            @include('components.navbar')
-
-
-            <hr />
+            </div>  
 
             @include('components.status.success')
             

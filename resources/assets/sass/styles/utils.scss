@@ -6,8 +6,16 @@
 
 }
 
-.utils-spacer {
+.utils-padding-bottom {
 
     padding-bottom: $spacer;
+
+}
+
+.utils-border-bottom {
+
+    padding-bottom: $spacer;
+    margin-bottom: $spacer;
+    border-bottom: 1px solid #eee;
 
 }

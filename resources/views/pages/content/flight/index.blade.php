@@ -19,7 +19,7 @@
   
         @foreach ($contents as $index => $content)
 
-            <div class="col-xs-6 col-sm-3">
+            <div class="col-xs-6 col-sm-3 utils-padding-bottom">
 
                 <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 

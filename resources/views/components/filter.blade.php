@@ -29,21 +29,22 @@
 
     </div>
 
-    <div class="col-sm-1 text-center">
+    <div class="col-sm-3">
 
-    {!! Form::submit(
-        trans('content.index.filter.submit.title'), 
-        ['class' => 'btn btn-primary btn-sm btn-block'])
-    !!}
+        {!! Form::submit(
+            trans('content.index.filter.submit.title'), 
+            ['class' => 'btn btn-primary btn-sm'])
+        !!}
 
-    <a 
-        href="{{ route('content.index', [$type]) }}"
-        class="btn btn-link"
-    >
 
-    {{ trans('content.index.filter.reset.title') }}
+        <a 
+            href="{{ route('content.index', [$type]) }}"
+            class="btn btn-link"
+        >
 
-    </a>
+        {{ trans('content.index.filter.reset.title') }}
+
+        </a>
 
     </div>
 
