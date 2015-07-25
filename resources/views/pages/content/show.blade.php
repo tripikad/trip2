@@ -14,7 +14,7 @@
 
     @if($content->image)
         
-        <div style="margin-bottom: 14px;">
+        <div class="utils-padding-bottom">
 
         @include('components.image', [
             'image' => $content->imagePath(),
@@ -37,7 +37,7 @@
         ])
     ])
 
-    <div class="row"">
+    <div class="row utils-border-bottom">
 
         <div class="col-sm-1">
         </div>
@@ -61,8 +61,6 @@
     </div>
 
     </div>
-
-    <hr />
     
     @include('components.comment.index', ['comments' => $comments])
 

@@ -6,11 +6,11 @@
 
     <h2>{{ $ad }}</h2>
 
-    <hr />
+    <div class="utils-border-top utils-border-bottom">
 
     @include("components.ad.$ad")
 
-    <hr />
+    </div>
     
 @endforeach
 

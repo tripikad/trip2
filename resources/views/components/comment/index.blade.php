@@ -4,7 +4,7 @@
 
     <div
         id="comment-{{ $comment->id }}"
-        class="
+        class="utils-border-bottom
         @if (! $comment->status)
             utils-unpublished
         @endif
@@ -37,8 +37,6 @@
 
     </div>
     
-    <hr />
-
 @endforeach
 
 @endif

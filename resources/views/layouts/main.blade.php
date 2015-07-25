@@ -28,9 +28,8 @@
 
             @yield('content')
 
-            <hr style="margin-top:6em;">
-
             @include('components.footer')
+
 
         </div>
 

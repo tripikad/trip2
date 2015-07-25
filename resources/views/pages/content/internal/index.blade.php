@@ -15,6 +15,8 @@
 
     @foreach ($contents as $content)
 
+        <div class="utils-border-bottom">
+
         @include('components.row', [
             'image' => $content->user->imagePath(),
             'image_link' => route('user.show', [$content->user]),
@@ -29,7 +31,7 @@
             ])
         ])
         
-        <hr />
+        </div>
 
     @endforeach
 

@@ -12,7 +12,7 @@
 
 @foreach ($messages as $message)
 
-    <div id="message-{{ $message->id }}">
+    <div id="message-{{ $message->id }}" class="utils-border-bottom">
 
     @include('components.row', [
         'image' => $message->fromUser->imagePath(),
@@ -25,8 +25,6 @@
     {!! nl2br($message->body) !!}
 
     </div>
-
-    <hr>
 
 @endforeach
 

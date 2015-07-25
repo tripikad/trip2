@@ -13,11 +13,15 @@
 
 @section('content')
     
-    @include('components.filter')
+    <div class="utils-border-bottom">
+
+        @include('components.filter')
+
+    </div>
 
     @foreach ($contents as $content)
 
-        <div class="row">
+        <div class="row utils-border-bottom">
 
             <div class="col-xs-2">
                 
@@ -52,8 +56,6 @@
             </div>
 
         </div>
-
-        <hr />
         
     @endforeach
 

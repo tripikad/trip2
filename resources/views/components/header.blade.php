@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row utils-border-bottom">
 
     <div class="col-sm-6 col-sm-push-3 text-center">
         

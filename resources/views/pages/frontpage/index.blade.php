@@ -8,11 +8,13 @@
 
 @foreach($fronts as $type => $front) 
 
-    @include("components.content.$type.front", [
-        'contents' => $front['contents']
-    ])
+    <div class="utils-border-bottom">
+
+        @include("components.content.$type.front", [
+            'contents' => $front['contents']
+        ])
     
-    <hr />
+    </div>>
     
 @endforeach
 

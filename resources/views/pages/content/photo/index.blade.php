@@ -13,13 +13,17 @@
 
 @section('content')
 
-    @include('components.filter')
+    <div class="utils-border-bottom">
+
+        @include('components.filter')
+
+    </div>
 
     <div class="row">
   
         @foreach ($contents as $index => $content)
 
-            <div class="col-sm-4" style="margin-bottom: 14px;">
+            <div class="col-sm-4 utils-padding-bottom">
 
                 <a href="{{ route('content.show', [$content->type, $content]) }}">
                     

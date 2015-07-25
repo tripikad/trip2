@@ -1,5 +1,3 @@
-<hr />
-
 {!! Form::open([
     'url' => route('content.filter', [$type]),
     'class' => 'form-inline'
@@ -53,18 +51,18 @@
 {!! Form::close() !!}
 
 @if ($destination)
-    
-    <hr />
-    
-    <h3>
-        {!! trans('content.index.filter.destination.title', [
-            'destination' => 
-                '<a href="' . route('destination.index', [$destination]) . '">'
-                . $destinations[$destination]
-                . '</a>'
-        ]) !!}
-    </h3>
+
+    <div class="text-center utils-border-top"> 
+
+        <h3>
+            {!! trans('content.index.filter.destination.title', [
+                'destination' => 
+                    '<a href="' . route('destination.index', [$destination]) . '">'
+                    . $destinations[$destination]
+                    . '</a>'
+            ]) !!}
+        </h3>
+
+    </div>
 
 @endif
-
-<hr />

@@ -13,9 +13,15 @@
 
 @section('content')
     
-    @include('components.filter')
+    <div class="utils-border-bottom">
+
+        @include('components.filter')
+
+    </div>
 
     @foreach ($contents as $content)
+
+        <div class="utils-border-bottom">
 
         @include('components.row', [
             'image' => $content->user->imagePath(),
@@ -31,7 +37,7 @@
             ])
         ])
         
-        <hr />
+        </div>
 
     @endforeach
 
