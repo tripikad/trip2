@@ -14,7 +14,13 @@ class ConvertTravelmates extends ConvertBase
             ->join('content_field_reisitoimumine', 'content_field_reisitoimumine.nid', '=', 'node.nid')
             ->join('content_field_reisikestvus', 'content_field_reisikestvus.nid', '=', 'node.nid')
             ->join('content_field_millistkaaslastsoovidleida', 'content_field_millistkaaslastsoovidleida.nid', '=', 'node.nid')
-            ->get();
+            ->select(
+                'node.*',
+                'node_revisions.*',
+                'content_field_reisitoimumine.*',
+                'content_field_reisikestvus.*',
+                'content_field_millistkaaslastsoovidleida.*'
+            )->get();
 
 
         $this->info('Converting travelmates');

@@ -19,14 +19,15 @@
   
         @foreach ($contents as $index => $content)
 
-            <div class="col-xs-6 col-sm-3">
+            <div class="col-xs-6 col-sm-3 utils-spacer">
 
                 <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 
                     @include('components.card', [
-                        'image' => $content->user->imagePathOnly(),
+                        'image' => $content->user->imagePath(),
                         'title' => $content->user->name,
                         'text' => $content->title,
+                        'options' => '-square'
                     ])
 
                 </a>

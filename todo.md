@@ -138,6 +138,7 @@ Legend: **High priority** Normal priority *Future idea*
 - comment trans: .field.
 - inline styles to CSS
 - components/content/blog/front -> feature
+- card to flexbox
 
 ### Controllers
 

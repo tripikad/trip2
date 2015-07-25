@@ -4,8 +4,7 @@
 
         @include('components.ad.ad',[
             'title' => 'Sample square ad',
-            'height' => 36,
-            'padding' => 43 
+            'options' => '-square'
         ])
 
     </div>
@@ -14,8 +13,7 @@
         
         @include('components.ad.ad',[
             'title' => 'Sample square ad',
-            'height' => 36,
-            'padding' => 43 
+            'options' => '-square'
         ])
         
     </div>
@@ -24,8 +22,7 @@
     
         @include('components.ad.ad',[
             'title' => 'Sample square ad',
-            'height' => 36,
-            'padding' => 43 
+            'options' => '-square'
         ])
     
     </div>
@@ -34,8 +31,7 @@
     
         @include('components.ad.ad',[
             'title' => 'Sample square ad',
-            'height' => 36,
-            'padding' => 43 
+            'options' => '-square'
         ])
     
     </div>

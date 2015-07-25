@@ -1,9 +1,6 @@
 <div class="row">
 
-    <div class="col-sm-1">
-    </div>
-
-    <div class="col-sm-10">
+    <div class="col-sm-10 col-sm-offset-1">
 
         <div class="row">
 
@@ -11,7 +8,7 @@
 
                 @include('components.ad.ad',[
                     'title' => 'Sample narrow ad',
-                    'height' => 6
+                    'options' => '-high'
                 ])
 
             </div>
@@ -20,7 +17,7 @@
                 
                 @include('components.ad.ad',[
                     'title' => 'Sample narrow ad',
-                    'height' => 6
+                    'options' => '-high'
                 ])
                 
             </div>
@@ -29,16 +26,13 @@
             
                 @include('components.ad.ad',[
                     'title' => 'Sample narrow ad',
-                    'height' => 6
+                    'options' => '-high'
                 ])
             
             </div>
 
         </div>
 
-    </div>
-
-    <div class="col-sm-1">
     </div>
 
 </div>

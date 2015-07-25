@@ -1,38 +1,41 @@
 .component-card {
-
+    background-position: center;
+    background-size: cover;
     width: 100%;
     padding-bottom: 66%;
-    word-break: break-word;
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
-    hyphens: auto;
-    border: 1px dashed #888;
 
-    &.-image {
-        background-position: center;
-        background-size: cover;
-        border: none;
+    &.-square {
+        padding-bottom: 100%;
     }
 
-    > .overlay {
-        position: absolute;
-        top: 0;
-        right: 7px;
-        left: 7px;
-        bottom: 14px;
-        background: #000;
-        opacity: 0.5;
+    &.-rounded {
+        border-radius: $spacer;
+    }
 
+    &.-circle {
+        border-radius: 50%;
     }
 
     > .content {
-
-        &.-image {
-            color: white;
-            letter-spacing: 0.05em;
-        }
-
-        > .title {}
-        > .text {}
+        position: absolute;
+        color: white;
+        padding: $spacer;
+    
     }
+
+    &.-center > .content {
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        word-break: break-word;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        hyphens: auto;
+        letter-spacing: 0.03em;
+
+    }
+
 }

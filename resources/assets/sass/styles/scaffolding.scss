@@ -7,7 +7,7 @@ html {
 }
 
 body {
-    margin: $default-margin 0;
+    margin: $spacer 0;
 }
 
 img {
@@ -15,13 +15,12 @@ img {
 }
 
 hr {
-  margin: $default-margin 0;
+  margin: $spacer 0;
 }
 
 @media (max-width: $screen-xs-max) {
 
     hr {
-      margin-top: ceil($line-height-computed * 0.6);
-      margin-bottom: ceil($line-height-computed * 0.6);
+      margin:  floor($spacer * 0.5) 0;
     }
 }
