@@ -6,7 +6,7 @@
        
             <a href="{{ route('content.show', [$content->type, $content]) }}">
             
-                @include('components.image.landscape', [
+                @include('components.image', [
                     'image' => $content->imagePath(),
                 ])
         

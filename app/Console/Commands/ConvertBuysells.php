@@ -17,6 +17,11 @@ class ConvertBuysells extends ConvertBase
                 '=',
                 'node.nid'
             )
+            ->select(
+                'node.*',
+                'node_revisions.*',
+                'content_type_trip_forum_buysell.*'
+            )
             ->get();
 
         $this->info('Coverting Buysells');

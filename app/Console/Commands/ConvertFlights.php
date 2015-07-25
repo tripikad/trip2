@@ -22,6 +22,12 @@ class ConvertFlights extends ConvertBase
                 '=',
                 'node.nid'
             )
+            ->select(
+                'node.*',
+                'node_revisions.*',
+                'content_type_lennufirmade_sooduspakkumine.*',
+                'content_field_flightperiod.*'
+            )
             ->get();
 
         $this->info('Converting flight offers');

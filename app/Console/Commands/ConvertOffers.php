@@ -13,6 +13,13 @@ class ConvertOffers extends ConvertBase
             ->join('content_type_trip_offer', 'content_type_trip_offer.nid', '=', 'node.nid')
             ->join('content_field_image', 'content_field_image.nid', '=', 'node.nid')
             ->join('files', 'files.fid', '=', 'content_field_image.field_image_fid')
+            ->select(
+                'node.*',
+                'node_revisions.*',
+                'content_type_trip_offer.*',
+                'content_field_image.*',
+                'files.*'
+            )
             ->get();
 
 

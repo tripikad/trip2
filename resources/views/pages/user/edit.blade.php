@@ -6,8 +6,9 @@
 
 @section('header.top')
     
-    @include('components.image.circle', [
+    @include('components.image', [
         'image' => $user->imagePath() . '?' . str_random(4),
+        'options' => '-circle',
         'width' => '30%'
     ])
 

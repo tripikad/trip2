@@ -12,6 +12,11 @@ class ConvertNews extends ConvertBase
     {
         $nodes = $this->getNodes('story')
             ->join('content_type_story', 'content_type_story.nid', '=', 'node.nid')
+            ->select(
+                'node.*',
+                'node_revisions.*',
+                'content_type_story.*'
+            )
             ->get();
 
         $this->info('Converting news');

@@ -9,7 +9,10 @@
                 <div class="col-xs-2">
                     
                     <a href="{{ route('user.show', [$content->user]) }}">
-                        @include('components.image.circle', ['image' => $content->user->imagePath()])
+                        @include('components.image', [
+                            'image' => $content->user->imagePath(),
+                            'options' => '-circle'
+                        ])
                     </a>
                 
                 </div>

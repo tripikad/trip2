@@ -1,6 +1,8 @@
 <div
     class="component-card {{ $options or ''}}"
-    @include('components.image.background', ['image' => $image])
+    @include('components.image.background', [
+        'image' => isset($image) ? $image : null
+    ])
 >
     <div class="content">
     

@@ -15,6 +15,12 @@ class ConvertPhotos extends ConvertBase
             ->join('files', 'files.fid', '=', 'content_field_image.field_image_fid')
             ->join('term_node', 'term_node.nid', '=', 'node.nid')
             ->whereNotIn('term_node.tid', [646]) // Mitte-reisipilt
+            ->select(
+                'node.*',
+                'node_revisions.*',
+                'files.*',
+                'term_node.*'
+            )
             ->get();
 
         $this->info('Converting photos');

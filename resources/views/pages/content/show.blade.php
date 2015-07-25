@@ -16,7 +16,7 @@
         
         <div style="margin-bottom: 14px;">
 
-        @include('components.image.landscape', [
+        @include('components.image', [
             'image' => $content->imagePath(),
         ])
 

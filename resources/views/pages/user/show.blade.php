@@ -5,8 +5,9 @@
 @stop
 
 @section('header.top')
-    @include('components.image.circle', [
+    @include('components.image', [
         'image' => $user->imagePath(),
+        'options' => '-circle',
         'width' => '30%'
     ])
 @stop
