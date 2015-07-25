@@ -4,6 +4,10 @@
     width: 100%;
     padding-bottom: 66%;
 
+    &.-wide {
+        padding-bottom: 15%;
+    }
+
     &.-square {
         padding-bottom: 100%;
     }
