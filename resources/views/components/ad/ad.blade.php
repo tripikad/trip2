@@ -18,25 +18,3 @@
     <h3>{{ $title }}<h3>
 
 </div>
-
-
-{{--<div style="
-    padding-bottom: {{ $height }}%;
-    width: 100%;
-
-">
-
-    <h3 style="
-        font-weight: normal;
-        font-family: sans-serif;
-        opacity: 0.8;
-        text-align: center;
-        margin: 0;
-        padding-top: {{ isset($padding) ? $padding : ($height * 1.8) }}%;
-        color: white;
-    ">
-    {{ $title or 'Sample ad' }}
-    <h3>
-
-</div>
---}}
