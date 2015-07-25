@@ -13,7 +13,11 @@
 
 @section('content')
 
-    @include('components.filter')
+    <div class="utils-border-bottom">
+
+        @include('components.filter')
+
+    </div>
 
     <div class="row">
   
