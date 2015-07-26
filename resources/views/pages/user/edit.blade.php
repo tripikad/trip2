@@ -44,17 +44,41 @@
 
 @section('content.narrow')
         
-        <h3 style="margin: 1.5em 0 1em 0; text-align:center;">{{ trans('user.edit.contact.title') }}</h3>
+        <div class="form-group text-center">
 
-        @include('components.placeholder', ['text' => 'Facebook link field'])
+            <h3>{{ trans('user.edit.contact.title') }}</h3>
 
-        @include('components.placeholder', ['text' => 'Instagram link field'])
+        </div>
 
-        @include('components.placeholder', ['text' => 'Twitter link field'])
+        <div class="form-group">
 
-        @include('components.placeholder', ['text' => 'Homepage link field?'])
+            @include('components.placeholder', ['text' => 'Facebook link field'])
+        
+        </div>
 
-        <h3 style="margin: 2em 0 1em 0; text-align:center;">{{ trans('user.edit.account.title') }}</h3>
+        <div class="form-group">
+
+            @include('components.placeholder', ['text' => 'Instagram link field'])
+
+        </div>
+
+        <div class="form-group">
+
+            @include('components.placeholder', ['text' => 'Twitter link field'])
+
+        </div>
+
+        <div class="form-group">
+
+            @include('components.placeholder', ['text' => 'Homepage link field?'])
+
+        </div>
+
+        <div class="form-group text-center">
+
+            <h3>{{ trans('user.edit.account.title') }}</h3>
+
+        </div>
 
         <div class="form-group">
             {!! Form::text('name', null, [

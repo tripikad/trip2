@@ -21,7 +21,7 @@
 
         @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
         
-        @if (isset($heading)) <h3 style="margin: 0;">{{ $heading }}</h3> @endif
+        @if (isset($heading)) <h3>{{ $heading }}</h3> @endif
 
         @if (isset($heading_link)) </a> @endif
 
