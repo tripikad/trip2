@@ -7,20 +7,5 @@ html {
 }
 
 body {
-    margin: $spacer 0;
-}
-
-img {
-    width: 100%;
-}
-
-hr {
-  margin: $spacer 0;
-}
-
-@media (max-width: $screen-xs-max) {
-
-    hr {
-      margin:  floor($spacer * 0.5) 0;
-    }
+    margin: $spacer $spacer / 2;
 }
