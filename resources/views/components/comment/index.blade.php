@@ -16,6 +16,10 @@
             'text' => trans("comment.index.row.text", [
                 'user' => view('components.user.link', ['user' => $comment->user]),
                 'created_at' => $comment->created_at->format('d. m Y H:i:s'),
+            ]),
+            'extra' => view('components.flag', [
+                'good' => count($comment->flags->where('flag_type', 'good')),
+                'bad' => count($comment->flags->where('flag_type', 'bad'))
             ])
         ])
 

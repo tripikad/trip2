@@ -34,6 +34,10 @@
             'updated_at' => $content->updated_at->format('d. m Y H:i:s'),
             'destinations' => $content->destinations->implode('name', ','),
             'tags' => $content->topics->implode('name', ','),
+        ]),
+        'extra' => view('components.flag', [
+            'good' => count($content->flags->where('flag_type', 'good')),
+            'bad' => count($content->flags->where('flag_type', 'bad'))
         ])
     ])
 
