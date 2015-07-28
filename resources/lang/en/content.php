@@ -20,7 +20,7 @@ return [
 
     'index.filter.destination.title' => 'Check out our :destination page as well',
 
-    'show.row.text' => 'By :user created at :created_at, about :destinations, tagged as :tags',
+    'show.row.text' => ':user :created_at, :destinations, :tags',
 
     'create.title' => 'Add new',
 
@@ -42,7 +42,7 @@ return [
     'travelmate.create.title' => 'Add ad',
 
     'forum.index.title' => 'Forum',
-    'forum.index.row.text' => 'By :user created at :created_at, latest comment at :updated_at, about :destinations, tagged as :tags',
+    'forum.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :tags',
     'forum.create.title' => 'Add post',
     'forum.front.row.text' => 'By :user',
 
@@ -50,7 +50,7 @@ return [
     'photo.create.title' => 'Add photo',
 
     'blog.index.title' => 'Blogs',
-    'blog.index.row.text' => 'By :user created at :created_at, about :destinations, tagged as :tags',
+    'blog.index.row.text' => ':user :created_at, latest comment at :updated_at',
     'blog.create.title' => 'Add post',
     'blog.front.row.text' => 'By :user',
 
@@ -58,7 +58,7 @@ return [
     'offer.create.title' => 'Add offer',
 
     'internal.index.title' => '...',
-    'internal.index.row.text' => 'By :user created at :created_at, latest comment at :updated_at, about :destinations, tagged as :tags',
+    'internal.index.row.text' => ':user :created_at, latest comment at :updated_at',
     'internal.create.title' => 'Add post',
 
 ];

@@ -15,7 +15,7 @@
             'image_link' => route('user.show', [$comment->user]),
             'text' => trans("comment.index.row.text", [
                 'user' => view('components.user.link', ['user' => $comment->user]),
-                'created_at' => $comment->created_at->format('d. m Y H:i:s'),
+                'created_at' => $comment->created_at->diffForHumans(),
             ]),
             'extra' => view('components.flag', [
                 'good' => count($comment->flags->where('flag_type', 'good')),

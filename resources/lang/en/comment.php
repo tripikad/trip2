@@ -2,7 +2,7 @@
 
 return [
 
-    'index.row.text' => 'By :user at :created_at',
+    'index.row.text' => ':user :created_at',
     'create.field.body.title' => 'Comment',
     'create.submit.title' => 'Add comment',
 

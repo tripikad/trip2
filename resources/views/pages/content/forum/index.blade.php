@@ -30,8 +30,8 @@
             'heading_link' => route('content.show', [$content->type, $content->id]),
             'text' => trans("content.$type.index.row.text", [
                 'user' => view('components.user.link', ['user' => $content->user]),
-                'created_at' => $content->created_at->format('d. m Y H:i:s'),
-                'updated_at' => $content->updated_at->format('d. m Y H:i:s'),
+                'created_at' => $content->created_at->diffForHumans(),
+                'updated_at' => $content->updated_at->diffForHumans(),
                 'destinations' => $content->destinations->implode('name', ','),
                 'tags' => $content->topics->implode('name', ','),
             ])

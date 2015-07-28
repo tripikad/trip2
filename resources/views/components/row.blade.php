@@ -17,7 +17,7 @@
 
     </div>
 
-    <div class="col-xs-10 col-sm-10">
+    <div class="col-xs-7 col-sm-10">
 
         @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
         
@@ -29,7 +29,7 @@
 
     </div>
 
-    <div class="col-sm-1">
+    <div class="col-xs-3 col-sm-1">
 
         @if (isset($extra)) {!! $extra !!} @endif
 
