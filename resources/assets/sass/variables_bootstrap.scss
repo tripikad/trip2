@@ -9,14 +9,20 @@ $font-size-xs-base:       15px;
 
 $line-height-base:        1.6;
 
-$font-size-h1:            25px;
+$font-size-h1:            36px;
 $font-size-h2:            30px;
 $font-size-h3:            22px;
 $font-size-h4:            18px;
 
+$font-size-xs-h1:         30px;
 $font-size-xs-h2:         26px;
 $font-size-xs-h3:         20px;
 $font-size-xs-h4:         16px;
+
+$headings-font-family:    'Lato', sans-serif;
+$headings-font-weight:    bold;
+$headings-line-height:    1.3em;
+$headings-color:          #222;
 
 $btn-primary-border:                    $brand-primary;
 

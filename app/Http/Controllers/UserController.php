@@ -18,9 +18,13 @@ class UserController extends Controller
 
         $user = User::findorFail($id);
   
+        $number_forum = $user->contents()->whereType('forum')->count();
+        $number_comment = $user->comments()->count();
   
         return View::make('pages.user.show')
             ->with('user', $user)
+            ->with('number_forum', $number_forum)
+            ->with('number_comment', $number_comment)
             ->render();
    
     

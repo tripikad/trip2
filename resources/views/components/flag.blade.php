@@ -2,7 +2,7 @@
 
     <div class="good">
 
-        @include('components.number', [
+        @include('components.circle', [
             'number' => $good,
             'options' => '-good' . (! $good ? ' -empty' : '')
         ])
@@ -11,7 +11,7 @@
 
     <div class="bad">
 
-        @include('components.number', [
+        @include('components.circle', [
             'number' => $bad,
             'options' => '-bad' . (! $bad ? ' -empty' : '')
         ])

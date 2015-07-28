@@ -2,6 +2,9 @@
     class="component-image {{ $options or ''}}"
     style="
         background-image: url({{ $image }});
-        width: {{ $width or '100%' }};
+        @if(isset($width))
+            width: {{ $width }};
+            padding-bottom: {{ $width }};
+        @endif
 ">
 </div>

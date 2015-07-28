@@ -32,3 +32,16 @@
     @endif
 
 @stop
+
+@section('content')
+    
+    <div class="utils-border-bottom">
+
+    @include('components.user.number',[
+        'forum' => $number_forum,
+        'comment' => $number_comment
+    ])
+
+    </div>
+    
+@stop
