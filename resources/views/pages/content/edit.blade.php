@@ -26,7 +26,7 @@
     
         @elseif ($field['type'] == 'file')
 
-            @include('components.image.field', [
+            @include('component.image.field', [
                 'image' => isset($content) ? $content->imagePath() : null
             ])
 

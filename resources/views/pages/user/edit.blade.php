@@ -6,7 +6,7 @@
 
 @section('header.top')
     
-    @include('components.image', [
+    @include('component.image', [
         'image' => $user->imagePath() . '?' . str_random(4),
         'options' => '-circle',
         'width' => '30%'
@@ -52,25 +52,25 @@
 
         <div class="form-group">
 
-            @include('components.placeholder', ['text' => 'Facebook link field'])
+            @include('component.placeholder', ['text' => 'Facebook link field'])
         
         </div>
 
         <div class="form-group">
 
-            @include('components.placeholder', ['text' => 'Instagram link field'])
+            @include('component.placeholder', ['text' => 'Instagram link field'])
 
         </div>
 
         <div class="form-group">
 
-            @include('components.placeholder', ['text' => 'Twitter link field'])
+            @include('component.placeholder', ['text' => 'Twitter link field'])
 
         </div>
 
         <div class="form-group">
 
-            @include('components.placeholder', ['text' => 'Homepage link field?'])
+            @include('component.placeholder', ['text' => 'Homepage link field?'])
 
         </div>
 

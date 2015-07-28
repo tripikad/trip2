@@ -5,7 +5,7 @@
 @stop
 
 @section('header.right')
-    @include('components.button', [ 
+    @include('component.button', [ 
         'route' => route('content.create', ['type' => $type]),
         'title' => trans("content.$type.create.title")
     ])
@@ -15,7 +15,7 @@
 
     <div class="utils-border-bottom">
 
-        @include('components.filter')
+        @include('component.filter')
 
     </div>
 
@@ -27,11 +27,11 @@
 
                 <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 
-                    @include('components.card', [
+                    @include('component.card', [
                         'image' => $content->user->imagePath(),
                         'title' => $content->user->name,
                         'text' => $content->title,
-                        'options' => '-square'
+                        'options' => '-square -center'
                     ])
 
                 </a>

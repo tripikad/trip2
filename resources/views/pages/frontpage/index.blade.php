@@ -6,17 +6,16 @@
 
 @section('content')
 
+<div class="utils-border-bottom">
 
 @foreach($fronts as $type => $front) 
 
-    <div class="utils-border-bottom">
-
-        @include("components.content.$type.front", [
+        @include("component.content.$type.front", [
             'contents' => $front['contents']
         ])
     
-    </div>
-    
 @endforeach
+
+</div>
 
 @stop

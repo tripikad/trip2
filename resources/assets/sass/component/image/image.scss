@@ -1,0 +1,19 @@
+.component-image {
+
+    display: inline-block;
+    background-position: center;
+    background-size: cover;
+
+    &.-square {
+        padding-bottom: 100%;
+    }
+
+    &.-rounded {
+        border-radius: $spacer;
+    }
+
+    &.-circle {
+        border-radius: 50%;
+    }
+
+}

@@ -108,7 +108,7 @@ return [
             'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],
             'latest' => 'updated_at',
             'paginate' => 25,
-            'front' => true,
+//            'front' => true,
             'frontpaginate' => 6,
             'create' => [
                 'title' => 'Add forum post'
@@ -170,7 +170,7 @@ return [
             'with' => ['user', 'comments', 'destinations', 'topics'],
             'latest' => 'created_at',
             'paginate' => 25,
-            'front' => true,
+//            'front' => true,
             'frontpaginate' => 4,
             'create' => [
                 'title' => 'Add blog post'

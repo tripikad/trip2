@@ -1,0 +1,90 @@
+.component-card {
+    
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    padding-bottom: 66%;
+    position: relative;
+
+    > .overlay {
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    > .overlay > .content > h3 {
+        color: white;
+    }
+
+    > .overlay > .content > p {
+        color: white;
+    }
+
+    > .overlay > .content {
+        padding: $spacer;
+    }
+
+    &.-wide {
+        padding-bottom: 20%;
+    }
+
+    &.-portrait {
+        padding-bottom: 133%;
+    }
+
+    &.-square {
+        padding-bottom: 100%;
+    }
+
+    &.-rounded {
+        border-radius: $spacer;
+    }
+
+    &.-circle {
+        border-radius: 50%;
+    }
+
+    &.-empty > .overlay {
+        background: none;
+    }
+
+    &.-rounded > .overlay {
+        border-radius: $spacer;
+    }
+    
+    &.-center > .overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &.-center > .overlay > .content {
+        padding: $spacer;
+        text-align: center;
+    }
+
+    &.-yellow > .overlay {
+        background-color: yellow;
+    }
+
+    &.-yellow > .overlay > .content > h3 {
+        color: black;
+    }
+
+    &.-yellow > .overlay > .content > p {
+        color: black;
+    }
+
+    @media (max-width: $screen-sm-max) {
+
+        .overlay > .content > h3 {
+            font-size: $font-size-xs-h4;
+        }
+    }
+
+}

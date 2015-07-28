@@ -5,7 +5,7 @@
 @stop
 
 @section('header.right')
-    @include('components.button', [ 
+    @include('component.button', [ 
         'route' => route('content.create', ['type' => $type]),
         'title' => trans("content.$type.create.title")
     ])
@@ -15,7 +15,7 @@
     
     <div class="utils-border-bottom">
 
-        @include('components.filter')
+        @include('component.filter')
 
     </div>
 
@@ -23,13 +23,13 @@
 
         <div class="utils-border-bottom">
 
-        @include('components.row', [
+        @include('component.row', [
             'image' => $content->user->imagePath(),
             'image_link' => route('user.show', [$content->user]),
             'heading' => $content->title,
             'heading_link' => route('content.show', [$content->type, $content->id]),
             'text' => trans("content.$type.index.row.text", [
-                'user' => view('components.user.link', ['user' => $content->user]),
+                'user' => view('component.user.link', ['user' => $content->user]),
                 'created_at' => $content->created_at->diffForHumans(),
                 'updated_at' => $content->updated_at->diffForHumans(),
                 'destinations' => $content->destinations->implode('name', ','),

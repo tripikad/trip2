@@ -5,7 +5,7 @@
 @stop
 
 @section('header.top')
-    @include('components.image', [
+    @include('component.image', [
         'image' => $user->imagePath(),
         'options' => '-circle',
         'width' => '30%'
@@ -24,7 +24,7 @@
 
     @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id))
 
-        @include('components.button', [ 
+        @include('component.button', [ 
             'route' => route('user.edit', [$user]),
             'title' => trans('user.edit.title')
         ])
@@ -37,7 +37,7 @@
     
     <div class="utils-border-bottom">
 
-    @include('components.user.number',[
+    @include('component.user.number',[
         'forum' => $number_forum,
         'comment' => $number_comment
     ])

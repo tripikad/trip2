@@ -12,7 +12,7 @@
   
     <div class="utils-border-bottom">
 
-        @include('components.row', [
+        @include('component.row', [
             'image' => $follow->followable->user->imagePath(),
             'image_link' => route('user.show', [$follow->followable->user]),
             'heading' => $follow->followable->title,
@@ -21,7 +21,7 @@
                 $follow->followable->user
             ]),
             'text' => trans('user.follow.index.row.text', [
-                'user' => view('components.user.link', ['user' => $follow->followable->user]),
+                'user' => view('component.user.link', ['user' => $follow->followable->user]),
                 'created_at' => $follow->followable->created_at->format('d. m Y H:i:s')
             ])
         ])

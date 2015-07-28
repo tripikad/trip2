@@ -14,7 +14,7 @@
 
     <div id="message-{{ $message->id }}" class="utils-border-bottom">
 
-    @include('components.row', [
+    @include('component.row', [
         'image' => $message->fromUser->imagePath(),
         'text' => trans('user.show.messages.with.row.text', [
             'user' => $message->fromUser->name,
@@ -30,7 +30,7 @@
 
 @endif
 
-    @include('components.message.create', [
+    @include('component.message.create', [
         'user_from' => $user,
         'user_to' => $user_with
     ])

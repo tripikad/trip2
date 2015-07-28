@@ -10,14 +10,14 @@ $font-size-xs-base:       15px;
 $line-height-base:        1.6;
 
 $font-size-h1:            36px;
-$font-size-h2:            30px;
+$font-size-h2:            28px;
 $font-size-h3:            22px;
-$font-size-h4:            18px;
+$font-size-h4:            20px;
 
-$font-size-xs-h1:         30px;
-$font-size-xs-h2:         26px;
+$font-size-xs-h1:         28px;
+$font-size-xs-h2:         22px;
 $font-size-xs-h3:         20px;
-$font-size-xs-h4:         16px;
+$font-size-xs-h4:         18px;
 
 $headings-font-family:    'Lato', sans-serif;
 $headings-font-weight:    bold;
@@ -30,11 +30,12 @@ $btn-border-radius-base:                6px;
 $btn-border-radius-large:               6px;
 $btn-border-radius-small:               6px;
 
+$navbar-height:                         auto;
 $navbar-margin-bottom:                  0;
 $navbar-border-radius:                  0;
 $navbar-default-color:                  black;
 $navbar-default-bg:                     transparent;
-$navbar-default-border:                     none;
+$navbar-default-border:                 none;
 
 $navbar-default-link-color:             $brand-primary;
 $navbar-default-link-hover-color:       $brand-primary;

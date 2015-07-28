@@ -16,19 +16,19 @@
             
             <div class="utils-border-bottom">          
                 
-                @include('components.navbar')
+                @include('component.navbar')
             
             </div>  
 
-            @include('components.status.success')
+            @include('component.status.success')
             
-            @yield('header', view('components.header'))
+            @yield('header', view('component.header'))
 
-            @include('components.status.error')
+            @include('component.status.error')
 
             @yield('content')
 
-            @include('components.footer')
+            @include('component.footer')
 
 
         </div>

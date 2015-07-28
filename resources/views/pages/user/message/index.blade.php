@@ -12,13 +12,13 @@
   
     <div class="utils-border-bottom">
 
-        @include('components.row', [
+        @include('component.row', [
             'image' => $message->fromUser->imagePath(),
             'image_link' => route('user.show', [$message->fromUser]),
             'heading' => $message->title,
             'heading_link' => route('user.show.messages.with', [$user, $message->fromUser]),
             'text' => trans('user.show.messages.index.row.text', [
-                'user' => view('components.user.link', ['user' => $message->fromUser]),
+                'user' => view('component.user.link', ['user' => $message->fromUser]),
                 'created_at' => $message->created_at->format('d. m Y H:i:s')
             ])
         ])

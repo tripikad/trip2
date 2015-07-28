@@ -16,26 +16,27 @@
         
         <div class="utils-padding-bottom">
 
-        @include('components.image', [
+        @include('component.card', [
             'image' => $content->imagePath(),
+            'options' => '-empty'
         ])
 
         </div>
 
     @endif
 
-    @include('components.row', [
+    @include('component.row', [
         'image' => $content->user->imagePath(),
         'image_link' => route('user.show', [$content->user]),
         'heading' => $content->title,
         'text' => trans("content.show.row.text", [
-            'user' => view('components.user.link', ['user' => $content->user]),
+            'user' => view('component.user.link', ['user' => $content->user]),
             'created_at' => $content->created_at->format('d. m Y H:i:s'),
             'updated_at' => $content->updated_at->format('d. m Y H:i:s'),
             'destinations' => $content->destinations->implode('name', ','),
             'tags' => $content->topics->implode('name', ','),
         ]),
-        'extra' => view('components.flag', [
+        'extra' => view('component.flag', [
             'good' => count($content->flags->where('flag_type', 'good')),
             'bad' => count($content->flags->where('flag_type', 'bad'))
         ])
@@ -66,11 +67,11 @@
 
     </div>
     
-    @include('components.comment.index', ['comments' => $comments])
+    @include('component.comment.index', ['comments' => $comments])
 
     @if (\Auth::check())
 
-        @include('components.comment.create')
+        @include('component.comment.create')
 
     @endif
 
