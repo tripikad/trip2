@@ -16,6 +16,16 @@ class DestinationController extends Controller
 
         $destination =  Destination::findOrFail($id);
         
+        /*        
+        $image = $destination->content->where('type', 'photo')->first();
+
+        return View::make('pages.destination.index')
+            ->with('title', $destination->name)
+            ->with('image', $image->imagePath())
+            ->render();
+
+        */
+
         $fronts = [];
 
         foreach (config('content.types') as $type => $typeConf) {

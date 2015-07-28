@@ -8,6 +8,7 @@
             
                 @include('components.image', [
                     'image' => $content->imagePath(),
+                    'options' => '-landscape'
                 ])
         
             </a>

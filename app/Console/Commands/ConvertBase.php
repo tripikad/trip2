@@ -16,7 +16,7 @@ class ConvertBase extends Command
     protected $take;
     protected $copyFiles;
 
-    protected $chunk = 50;
+    protected $chunk = 10;
     protected $skip = 0;
 
     protected $client;
@@ -30,7 +30,7 @@ class ConvertBase extends Command
         
         // max size: messages ~100000
 
-        $this->take = env('CONVERT_TAKE', '50');
+        $this->take = env('CONVERT_TAKE', '10');
         $this->copyFiles = env('CONVERT_FILES', 'false');
     }
 

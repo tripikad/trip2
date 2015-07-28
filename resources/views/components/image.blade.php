@@ -3,6 +3,5 @@
     style="
         background-image: url({{ $image }});
         width: {{ $width or '100%' }};
-        padding-bottom: {{ $width or '100%' }};
 ">
 </div>

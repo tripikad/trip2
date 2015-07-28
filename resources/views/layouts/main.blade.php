@@ -22,7 +22,7 @@
 
             @include('components.status.success')
             
-            @include('components.header')
+            @yield('header', view('components.header'))
 
             @include('components.status.error')
 

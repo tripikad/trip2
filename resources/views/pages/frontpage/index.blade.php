@@ -6,6 +6,7 @@
 
 @section('content')
 
+
 @foreach($fronts as $type => $front) 
 
     <div class="utils-border-bottom">
@@ -17,7 +18,5 @@
     </div>
     
 @endforeach
-
-</div>
 
 @stop

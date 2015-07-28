@@ -3,9 +3,10 @@
     display: inline-block;
     background-position: center;
     background-size: cover;
+    padding-bottom: 100%;
 
-    &.-square {
-        padding-bottom: 100%;
+    &.-landscape {
+        padding-bottom: 66%;
     }
 
     &.-rounded {

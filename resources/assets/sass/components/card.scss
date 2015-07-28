@@ -1,11 +1,12 @@
 .component-card {
+    
     background-position: center;
     background-size: cover;
     width: 100%;
     padding-bottom: 66%;
 
     &.-wide {
-        padding-bottom: 15%;
+        padding-bottom: 20%;
     }
 
     &.-square {
@@ -24,11 +25,9 @@
         position: absolute;
         color: white;
         padding: $spacer;
-    
     }
 
     &.-center > .content {
-
         position: absolute;
         top: 50%;
         left: 50%;
@@ -39,7 +38,5 @@
         -moz-hyphens: auto;
         hyphens: auto;
         letter-spacing: 0.03em;
-
     }
-
 }
