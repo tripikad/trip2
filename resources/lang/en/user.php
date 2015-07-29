@@ -3,11 +3,12 @@
 return [
 
     'show.joined' => 'Joined at :created_at',
+    'show.message.create' => 'Send private message',
 
     'image.create.title' => 'Add profile image',
     'image.edit.title' => 'Change profile image',
 
-    'edit.title' => 'Edit user',
+    'edit.title' => 'Edit profile',
     'edit.contact.title' => 'Contact information',
     'edit.account.title' => 'Account details',
     'edit.field.name.title' => 'Username',

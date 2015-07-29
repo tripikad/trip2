@@ -1,10 +1,10 @@
-@extends('layouts.main')
+@extends('layouts.narrow')
 
 @section('title')
     {{ trans('user.show.messages.index.title', ['user' => $user->name]) }}
 @stop
 
-@section('content')
+@section('content.medium')
 
 @if (count($user->messages()))    
 

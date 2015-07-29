@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.medium')
 
 @section('title')
 
@@ -6,7 +6,7 @@
 
 @stop
 
-@section('content')
+@section('content.medium')
 
 @if (count($messages))
 

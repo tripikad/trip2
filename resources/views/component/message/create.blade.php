@@ -1,4 +1,4 @@
-{!! Form::open(array('url' => route('message.store', [$user_from, $user_to]))) !!}
+{!! Form::open(array('id' => 'message', 'url' => route('message.store', [$user_from, $user_to]))) !!}
 
 <div class="form-group">
 
@@ -12,15 +12,16 @@
 
 <div class="row">
 
-    <div class="col-md-8">
-    </div>
+    <div class="col-md-4 col-md-offset-8">
 
-    <div class="col-md-4">
+        <div class="form-group">
 
         {!! Form::submit(trans('message.create.submit.title'), [
             'class' => 'btn btn-primary btn-md btn-block'
         ]) !!}
-                
+        
+        </div>
+
     </div>
 
 </div>

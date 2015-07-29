@@ -18,9 +18,19 @@
         'created_at' => $user->created_at->diffForHumans()
     ]) }}
     </p>
-@stop
 
-@section('header.right')
+    @if (\Auth::check() && \Auth::user()->id !== $user->id)
+
+        @include('component.button', [ 
+            'route' => route('user.show.messages.with', [
+                \Auth::user(),
+                $user,
+                '#message'
+            ]),
+            'title' => trans('user.show.message.create')
+        ])
+
+    @endif
 
     @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id))
 
@@ -32,6 +42,7 @@
     @endif
 
 @stop
+
 
 @section('content')
     

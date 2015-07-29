@@ -4,7 +4,7 @@
 
 <div class="row">
     
-    <div class="col-sm-10 col-lg-8 col-sm-offset-1 col-lg-offset-2">
+    <div class="col-sm-8 col-lg-6 col-sm-offset-2 col-lg-offset-3">
 
         @yield('content.medium')
 

@@ -1,1 +1,1 @@
-<a href="{{ $route }}" class="btn btn-default">{{ $title }}</a>
+<a href="{{ $route }}" class="btn btn-primary">{{ $title }}</a>
