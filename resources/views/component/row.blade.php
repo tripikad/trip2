@@ -1,4 +1,4 @@
-<div class="component-row row" style="background: yellow;">
+<div class="component-row row">
 
     <div class="col-xs-2 col-sm-1">
 
