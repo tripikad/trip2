@@ -27,6 +27,9 @@ Legend: **High priority** Normal priority *Future idea*
 - **Password reminder**
 - **Message add/edit/delete forms**
 - **Content status: published/unpublished**
+- **Comment published/unpublished**
+- content, comment rating
+- **Forum filtering fixes: autocomplete, autosubmit**
 
 ## TODO
 
@@ -43,7 +46,6 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Content
 
-- **Forum filtering fixes: autocomplete, autosubmit**
 - **What to do with extra fields (buysell, travelmates, flight offers, offers)**
 - Content delete
 - Destination and tag autocomplete in index / edit
@@ -64,7 +66,6 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Comments
 
-- **Comment published/unpublished**
 - Comment delete
 
 ### Destination
@@ -73,7 +74,7 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Tags
 
-- Convert from "topics" to "tags"
+- Rename "topics" to "tags"
 
 ### Carriers
 
@@ -89,16 +90,12 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Messages
 
-- **Message title accessor**
+- Message title accessor?
 - Mail messages
 - Create Message tests with seeds
 - From collections hacks to real queries
 - *Message blocking*
 - *Message edit/delete forms?*
-
-### Content ranking
-
-- content, comment, *user* ratings
 
 ### Following
 
@@ -230,7 +227,3 @@ https://packagist.org/packages/laravelrus/localized-carbon
 
 - favicon
 - GA tracker
-
-### Tests
-
-- User page test
