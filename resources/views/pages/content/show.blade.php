@@ -36,9 +36,21 @@
             'destinations' => $content->destinations->implode('name', ','),
             'tags' => $content->topics->implode('name', ','),
         ]),
-        'extra' => view('component.flag2', [ 'flags' => [
-            'good' => count($content->flags->where('flag_type', 'good')),
-            'bad' => count($content->flags->where('flag_type', 'bad'))
+        'extra' => view('component.flag', [ 'flags' => [
+            'good' => [
+                'value' => count($content->flags->where('flag_type', 'good')),
+                'flaggable' => \Auth::check(),
+                'flaggable_type' => 'content',
+                'flaggable_id' => $content->id,
+                'flag_type' => 'good'
+            ],
+            'bad' => [
+                'value' => count($content->flags->where('flag_type', 'bad')),
+                'flaggable' => \Auth::check(),
+                'flaggable_type' => 'content',
+                'flaggable_id' => $content->id,
+                'flag_type' => 'bad'
+            ]
         ]])
     ])
 
