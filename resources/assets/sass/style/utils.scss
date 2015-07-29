@@ -1,7 +1,8 @@
 .utils-unpublished {
-    background-color: rgba(255,0,0,0.2);
-    opacity: 0.8;
-    padding: $spacer 0;
+    background-color: rgba(255,0,0,0.1);
+    opacity: 0.7;
+    padding: $spacer;
+    border: none !important;
 }
 
 .utils-padding-bottom {
@@ -11,11 +12,11 @@
 .utils-border-top {
     padding-top: $spacer;
     margin-top: $spacer;
-    border-top: 1px solid #dadada;
+    border-top: 1px solid #eee;
 }
 
 .utils-border-bottom {
     padding-bottom: $spacer;
     margin-bottom: $spacer;
-    border-bottom: 1px solid #dadada;
+    border-bottom: 1px solid #eee;
 }

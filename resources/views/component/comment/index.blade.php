@@ -12,6 +12,7 @@
 
         @include('component.row', [
             'image' => $comment->user->imagePath(),
+            'image_width' => '70%',
             'image_link' => route('user.show', [$comment->user]),
             'text' => trans("comment.index.row.text", [
                 'user' => view('component.user.link', ['user' => $comment->user]),

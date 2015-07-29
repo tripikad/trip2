@@ -28,10 +28,13 @@
 
         <div class="col-md-4">
         
-            {!! Form::submit(trans('comment.edit.submit.title'), [
-                'class' => 'btn btn-primary btn-md btn-block'
-            ]) !!}
+            <div class="form-group">
+
+                {!! Form::submit(trans('comment.edit.submit.title'), [
+                    'class' => 'btn btn-primary btn-md btn-block'
+                ]) !!}
             
+            </div>
         </div>
 
     </div>

@@ -1,6 +1,6 @@
 <div class="component-row row">
 
-    <div class="col-xs-2 col-sm-1">
+    <div class="col-xs-2 col-sm-1 text-right">
 
         @if (isset($image_link)) <a href="{{ $image_link }}"> @endif
 
@@ -8,7 +8,8 @@
             
             @include('component.image', [
                 'image' => $image,
-                'options' => '-circle'
+                'options' => '-circle',
+                'width' => isset($image_width) ? $image_width : null
             ])
 
         @endif
