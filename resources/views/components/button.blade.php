@@ -1,1 +1,0 @@
-<a href="{{ $route }}" class="btn btn-default">{{ $title }}</a>

@@ -36,10 +36,10 @@
             'destinations' => $content->destinations->implode('name', ','),
             'tags' => $content->topics->implode('name', ','),
         ]),
-        'extra' => view('component.flag', [
+        'extra' => view('component.flag2', [ 'flags' => [
             'good' => count($content->flags->where('flag_type', 'good')),
             'bad' => count($content->flags->where('flag_type', 'bad'))
-        ])
+        ]])
     ])
 
     <div class="row utils-border-bottom">
