@@ -94,7 +94,10 @@ class ContentController extends Controller
     {
         $this->validate($request, config("content.types.$type.rules"));
 
-        $fields = [];
+        $fields = [
+            'type' => $type,
+            'status' => 1
+        ];
 
         if ($request->hasFile('file')) {
             
@@ -103,10 +106,7 @@ class ContentController extends Controller
 
         }
 
-        $fields['user_id'] = $request->user()->id;
-        $fields['type'] = $type;
-
-        $content = \App\Content::create(array_merge($request->all(), $fields));
+        $content = Auth::user()->contents()->create(array_merge($request->all(), $fields));
 
         return redirect()
             ->route('content.index', [$type])

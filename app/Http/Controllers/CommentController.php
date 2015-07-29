@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Auth;
+
 class CommentController extends Controller
 {
 
@@ -12,16 +14,19 @@ class CommentController extends Controller
         'body' => 'required'
     ];
 
-    public function store(Request $request, $type, $id)
+    public function store(Request $request, $type, $content_id)
     {
 
         $this->validate($request, $this->rules);
 
-        $fields = ['user_id' => $request->user()->id, 'content_id' => $id];
+        $fields = [
+            'content_id' => $content_id,
+            'status' => 1
+        ];
 
-        $comment = \App\Comment::create(array_merge($request->all(), $fields));
+        $comment = Auth::user()->comments()->create(array_merge($request->all(), $fields));
         
-        return redirect()->route('content.show', [$type, $id, '#comment-' . $comment->id]);
+        return redirect()->route('content.show', [$type, $content_id, '#comment-' . $comment->id]);
 
     }
 
@@ -43,7 +48,9 @@ class CommentController extends Controller
 
         $comment = \App\Comment::findorFail($id);
 
-        $fields = [];
+        $fields = [
+            'status' => 1
+        ];
 
         $comment->update(array_merge($request->all(), $fields));
 

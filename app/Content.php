@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Content extends Model
 {
 
-    protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image'];
+    protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image', 'status'];
 
     public function user()
     {
