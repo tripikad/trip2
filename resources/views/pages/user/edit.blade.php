@@ -26,7 +26,7 @@
 
         @if (! $user->image)
 
-        <a href="" id="image_link" class="btn btn-primary btn-lg">
+        <a href="" id="image_link" class="btn btn-primary btn-md">
             {{ trans('user.image.create.title') }}
         </a>
         
@@ -44,36 +44,6 @@
 
 @section('content.narrow')
         
-        <div class="form-group text-center">
-
-            <h3>{{ trans('user.edit.contact.title') }}</h3>
-
-        </div>
-
-        <div class="form-group">
-
-            @include('component.placeholder', ['text' => 'Facebook link field'])
-        
-        </div>
-
-        <div class="form-group">
-
-            @include('component.placeholder', ['text' => 'Instagram link field'])
-
-        </div>
-
-        <div class="form-group">
-
-            @include('component.placeholder', ['text' => 'Twitter link field'])
-
-        </div>
-
-        <div class="form-group">
-
-            @include('component.placeholder', ['text' => 'Homepage link field?'])
-
-        </div>
-
         <div class="form-group text-center">
 
             <h3>{{ trans('user.edit.account.title') }}</h3>
@@ -107,6 +77,37 @@
                 'placeholder' => trans('user.edit.field.password_confirmation.title')
             ]) !!}
         </div>
+
+        <div class="form-group text-center">
+
+            <h3>{{ trans('user.edit.contact.title') }}</h3>
+
+        </div>
+
+        <div class="form-group">
+
+            @include('component.placeholder', ['text' => 'Facebook link field'])
+        
+        </div>
+
+        <div class="form-group">
+
+            @include('component.placeholder', ['text' => 'Instagram link field'])
+
+        </div>
+
+        <div class="form-group">
+
+            @include('component.placeholder', ['text' => 'Twitter link field'])
+
+        </div>
+
+        <div class="form-group">
+
+            @include('component.placeholder', ['text' => 'Homepage link field?'])
+
+        </div>
+
 
         <div class="form-group">
             {!! Form::submit($submit, [

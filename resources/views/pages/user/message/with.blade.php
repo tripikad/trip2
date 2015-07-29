@@ -6,6 +6,16 @@
 
 @stop
 
+@section('header.top')
+
+    @include('component.image', [
+        'image' => $user_with->imagePath(),
+        'options' => '-circle',
+        'width' => '30%'
+    ])
+
+@stop
+
 @section('content.medium')
 
 @if (count($messages))
