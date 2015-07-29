@@ -77,8 +77,10 @@ class ConvertBase extends Command
                 $model->id = $node->nid;
                 $model->type = $type;
                 $model->user_id = $node->uid;
-                $model->title = trim($node->title);
-                $model->body = trim($node->body);
+                $model->title = $this->cleanAll($node->title);
+                $model->body = $this->clean($node->body);
+//              $model->body = $node->body;
+
                 $model->status = 1;
                 $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);  
                 $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment); 
@@ -118,9 +120,10 @@ class ConvertBase extends Command
     public function createTerm($term, $modelname, $setParent = false)
     {
         if (!$modelname::find($term->tid)) {
+            
             $model = new $modelname;
             $model->id = $term->tid;
-            $model->name = $term->name;
+            $model->name = $this->cleanAll($term->name);
 
             if ($setParent)
             {
@@ -128,6 +131,7 @@ class ConvertBase extends Command
             }
             
             $model->save();
+        
         }
     }
 
@@ -182,11 +186,15 @@ class ConvertBase extends Command
     {
         
         if ($rename = array_get($this->topicMap, $topic->name . '.rename')) {
+            
             $topic->name = $rename;
+        
         }
 
         if (array_get($this->topicMap, $topic->name . '.move') || array_get($this->topicMap, $topic->name . '.delete')) {
+        
             return false;
+        
         }
 
         return $topic;
@@ -198,6 +206,7 @@ class ConvertBase extends Command
         $topics = [];
 
         array_walk($this->topicMap, function($value, $key) use (&$topics) {
+            
             if (array_key_exists('tid', $value)) {   
                 
                 $topics[$key] = array_merge($value, ['name' => $key]);
@@ -320,7 +329,7 @@ class ConvertBase extends Command
                 $model->id = $comment->cid;
                 $model->user_id = $user_id;
                 $model->content_id = $comment->nid;
-                $model->body = $comment->comment;
+                $model->body = $this->clean($comment->comment);
                 $model->status = 1 - $comment->status;
                 $model->created_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);  
                 $model->updated_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp); 
@@ -389,8 +398,8 @@ class ConvertBase extends Command
             $model = new \App\User;
 
             $model->id = $user->uid;
-            $model->name = $user->name;
-            $model->email = $user->mail;
+            $model->name = $this->cleanAll($user->name);
+            $model->email = $this->cleanAll($user->mail);
 
             $model->password = bcrypt($user->name); // Legacy md5 password: $user->pass
 
@@ -430,7 +439,7 @@ class ConvertBase extends Command
 
         $model = $modelName::findOrFail($id);
 
-        $model->url = $url;
+        $model->url = $this->cleanAll($url);
 
         $model->save();
     
@@ -438,6 +447,8 @@ class ConvertBase extends Command
 
     public function convertLocalImage($id, $imagePath, $modelName, $type, $preset = 'user')
     {
+
+        $imagePath = $this->cleanAll($imagePath);
 
         $model = $modelName::findOrFail($id);
 
@@ -458,6 +469,8 @@ class ConvertBase extends Command
 
     public function convertRemoteImage($id, $imageUrl, $modelName, $type, $preset = 'user')
     {
+
+        $imageUrl = $this->cleanAll($imageUrl);
 
         if (array_key_exists('extension', pathinfo($imageUrl))) {
 
@@ -557,7 +570,7 @@ class ConvertBase extends Command
         \DB::table('content_alias')
             ->insert([
                 'content_id' => $nid,
-                'alias' => $alias->dst
+                'alias' => $this->cleanAll($alias->dst)
             ]);
         }
     
@@ -658,12 +671,35 @@ class ConvertBase extends Command
 
         $string = strip_tags($string);
         $output = '';
+
         for ($i = 0; $i < strlen($string) - 1; $i++) {
+            
             $char = mb_substr($string, $i, 1);
             $output .= preg_match("/[A-Ya-y]/", $char) ? chr(ord($char) + 1) : $char;
+        
         }
 
         return $output;
+
+    }
+
+    public function clean($string)
+    {
+
+        $string = strip_tags($string, config('site.allowedtags'));
+        $string = trim($string);
+
+        $string = preg_replace("/<!--(.*?)-->/", '', $string);
+        return $string;
+
+    }
+
+    public function cleanAll($string)
+    {
+
+        $string = strip_tags($this->clean($string));
+
+        return $string;
 
     }
 

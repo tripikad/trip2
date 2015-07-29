@@ -30,6 +30,12 @@ Legend: **High priority** Normal priority *Future idea*
 - **Comment published/unpublished**
 - content, comment rating
 - **Forum filtering fixes: autocomplete, autosubmit**
+- **sanitize content input**
+    - limited HTML for body (content, message, comment)
+        a, em, i, strong, b, img, br
+    - clear attributes
+    - no HTML in other fields incl titles (content, user, message, destination, carrier, comment, topic)
+    - use middleware sanitizer?
 
 ## TODO
 
@@ -106,26 +112,9 @@ Legend: **High priority** Normal priority *Future idea*
 
 - *Create activity feeds*
 
-### Ads
-
-- **Google DFB**
-- Custom made
-
 ### DB
 
 - foreign keys for pivot tables / comments
-
-### Models
-
-- **sanitize content input**
-
-    - limited HTML for body (content, message, comment)
-        a, em, i, strong, b, img, br
-    - clear attributes
-
-    - no HTML in other fields incl titles (content, user, message, destination, carrier, comment, topic)
-
-    - use middleware sanitizer?
 
 ### Views
 
@@ -157,6 +146,7 @@ Legend: **High priority** Normal priority *Future idea*
 ### Legacy paths
 
 - what to do with long legacy paths without ".html" ?
+- http://trip.ee/taxonomy/term/540
 
 ### Viewed status
 
@@ -201,6 +191,10 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
     - limit html in body
     - remove <!--break-->
     - remove UPPERASE
+
+- markup change
+    - \n<u>...</u> -> <h4></h4>
+    - \n<strong>...</strong> -> <h4></h4>
 
 ### Libraries
 
