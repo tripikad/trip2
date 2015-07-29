@@ -103,4 +103,6 @@ get('ads', ['middleware' => 'role:admin', 'uses' => 'AdController@index', 'as' =
 
 get('destination/{id}', ['uses' => 'DestinationController@index', 'as' => 'destination.index']);
 
+// Flags
 
+get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
