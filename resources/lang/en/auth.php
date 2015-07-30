@@ -24,14 +24,14 @@ return [
     'login.register.title' => 'Not a member? Register here',
     'login.reset.title' => 'Forgot your password?',
 
-    'email.title' => 'Reset password',
-    'email.field.email.title' => 'E-mail',
-    'email.submit.title' => 'Send password reset link via E-mail',
+    'reset.apply.title' => 'Reset password',
+    'reset.apply.field.email.title' => 'Your E-mail',
+    'reset.apply.submit.title' => 'Send me password reset link',
 
-    'password.title' => 'Pick a new password',
-    'password.field.email.title' => 'E-mail',
-    'password.field.password.title' => 'New password',
-    'password.field.password_confirmation.title' => 'Confirm new password',
-    'password.submit.title' => 'Submit',
+    'reset.password.title' => 'Pick a new password',
+    'reset.password.field.email.title' => 'E-mail',
+    'reset.password.field.password.title' => 'New password',
+    'reset.password.field.password_confirmation.title' => 'Confirm new password',
+    'reset.password.submit.title' => 'Submit',
     
 ];

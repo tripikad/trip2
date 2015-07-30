@@ -10,6 +10,8 @@ class ResetController extends Controller
 
     use ResetsPasswords;
 
+    protected $redirectPath = '/';
+
     protected $redirectTo = '/';
 
     public function __construct()
