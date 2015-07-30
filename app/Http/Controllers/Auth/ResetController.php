@@ -22,7 +22,7 @@ class ResetController extends Controller
         return view('pages.auth.reset.apply');
     }
 
-    public function passworForm($token = null)
+    public function passwordForm($token = null)
     {
         if (is_null($token)) {
             throw new NotFoundHttpException;

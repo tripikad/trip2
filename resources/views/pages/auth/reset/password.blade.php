@@ -8,6 +8,8 @@
 
     {!! Form::open(['route' => 'reset.password.submit']) !!}
 
+        {!! Form::hidden('token', $token) !!}
+
         <div class="form-group">
             {!! Form::email('email', null, [
                 'class' => 'form-control input-lg',
