@@ -36,16 +36,16 @@ Legend: **High priority** Normal priority *Future idea*
     - clear attributes
     - no HTML in other fields incl titles (content, user, message, destination, carrier, comment, topic)
     - use middleware sanitizer?
+- **Register mails**
+    https://github.com/laracasts/Email-Verification-In-Laravel
+- "Not yet registred?" links
+- remove hardcoded form urls from views
 
 ## TODO
 
 ### Auth
 
-- **Register mails**
-    https://github.com/laracasts/Email-Verification-In-Laravel
 - Legacy Drupal password hasher / mass password renewal?
-- "Not yet registred?" links
-- remove hardcoded form urls from views
 - *Registration spam prevention (Mollom?)*
 - *FB login*
 - *Permissions*
