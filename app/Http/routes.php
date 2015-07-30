@@ -2,9 +2,37 @@
 
 // Frontpage
 
-get('/', 'FrontpageController@index');
+get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage']);
 
-// Legacy paths
+// Registration
+
+get('register', ['uses' => 'Auth\RegistrationController@form', 'as' => 'register.form']);
+
+post('register', ['uses' => 'Auth\RegistrationController@submit', 'as' => 'register.submit']);
+
+get('register/confirm/{token}', ['uses' => 'Auth\RegistrationController@confirm', 'as' => 'register.confirm']);
+
+
+// Login and logout
+
+get('login', ['uses' => 'Auth\LoginController@form', 'as' => 'login.form']);
+
+post('login', ['uses' => 'Auth\LoginController@submit', 'as' => 'login.submit']);
+
+get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'login.logout']);
+
+// Password reset
+
+get('reset/apply', ['uses' => 'Auth\ResetController@applyForm', 'as' => 'reset.apply.form']);
+
+post('reset/apply', ['uses' => 'Auth\ResetController@postEmail', 'as' => 'reset.apply.submit']);
+
+get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordForm', 'as' => 'reset.password.form']);
+
+post('reset/password', ['uses' => 'Auth\ResetController@postReset', 'as' => 'reset.password.submit']);
+
+
+// Legacy content paths
 
 get('content/{legacy_path}', 'ContentController@redirect')
     ->where(['legacy_path' => '(.*)\.html(.*)']);
@@ -42,7 +70,7 @@ put('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' => 'Comme
 // Users
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
-       
+
     // get('/', ['uses' => 'UserController@index', 'as' => 'index']);
 
     // get('create', ['middleware' => 'auth', 'uses' => 'UserController@create', 'as' => 'create']);
@@ -69,12 +97,14 @@ Route::group(['prefix' => 'message', 'as' => 'message.'], function () {
 
 });
 
+/*
 // Registration
 
 get('auth/register', 'Auth\AuthController@getRegister');
 
 post('auth/register', 'Auth\AuthController@postRegister');
 
+get('auth/confirm/{token}', 'Auth\AuthController@confirmEmail');
 
 // Authentication
 
@@ -84,16 +114,8 @@ post('auth/login', 'Auth\AuthController@postLogin');
 
 get('auth/logout', 'Auth\AuthController@getLogout');
 
+*/
 
-// Password reset
-
-get('password/email', 'Auth\PasswordController@getEmail');
-
-post('password/email', 'Auth\PasswordController@postEmail');
-
-get('password/reset/{token}', 'Auth\PasswordController@getReset');
-
-post('password/reset', 'Auth\PasswordController@postReset');
 
 // Ad debug
 

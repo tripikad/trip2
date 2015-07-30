@@ -4,9 +4,12 @@
     {{ trans('auth.login.title') }}
 @stop
 
+
+@stop
+
 @section('content.narrow')
 
-    {!! Form::open(array('url' => '/auth/login')) !!}
+    {!! Form::open(['route' => 'login.submit']) !!}
 
         <div class="form-group">
             {!! Form::text('name', null, [
@@ -34,5 +37,29 @@
         </div>
 
     {!! Form::close() !!}
+
+    <div class="row utils-padding-bottom">
+
+        <div class="col-xs-6 text-center">
+
+            @include('component.button', [ 
+                'route' => route('register.form'),
+                'title' => trans('auth.login.register.title'),
+                'type' => 'btn-link'
+            ])
+        
+        </div>
+
+        <div class="col-xs-6 text-center">
+
+            @include('component.button', [ 
+                'route' => route('reset.apply.form'),
+                'title' => trans('auth.login.reset.title'),
+                'type' => 'btn-link'
+            ])
+
+        </div>
+
+    </div>
 
 @stop

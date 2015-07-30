@@ -18,6 +18,34 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $hidden = ['password', 'remember_token'];
 
+    public static function boot()
+    {
+    
+        parent::boot();
+    
+        static::creating(function ($user) {
+
+            $user->registration_token = str_random(30);
+        
+        });
+    }
+
+    public function setPasswordAttribute($password)
+    {
+    
+        $this->attributes['password'] = bcrypt($password);
+    
+    }
+
+    public function confirmEmail()
+    {
+    
+        $this->verified = true;
+        $this->registration_token = null;
+        $this->save();
+    
+    }
+
     public function messages()
     {   
         

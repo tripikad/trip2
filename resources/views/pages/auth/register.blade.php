@@ -6,7 +6,7 @@
 
 @section('content.narrow')
 
-    {!! Form::open(array('url' => '/auth/register')) !!}
+    {!! Form::open(['route' => 'register.submit']) !!}
 
         <div class="form-group">
             {!! Form::text('name', null, [

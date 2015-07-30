@@ -221,3 +221,7 @@ https://packagist.org/packages/laravelrus/localized-carbon
 
 - favicon
 - GA tracker
+
+### Tests
+
+https://github.com/bertramtruong/mailtrap
