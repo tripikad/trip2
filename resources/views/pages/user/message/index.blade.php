@@ -1,4 +1,4 @@
-@extends('layouts.narrow')
+@extends('layouts.medium')
 
 @section('title')
     {{ trans('user.show.messages.index.title', ['user' => $user->name]) }}

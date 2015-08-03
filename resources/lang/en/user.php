@@ -19,6 +19,10 @@ return [
     'update.image.status' => 'User image has been updated',
     'update.status' => 'User profile has been updated',
 
+    'activity.index.title' => ':user latest activity',
+    'activity.index.row.content' => ':user posted :title at :created_at',
+    'activity.index.row.comment' => ':user added a comment :comment_title at the post :title at :created_at',
+
     'follow.index.title' => ':user follows',
     'follow.index.row.text' => 'By :user at :created_at',
 
