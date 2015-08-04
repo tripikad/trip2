@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.medium')
 
 @section('title')
     {{ $user->name }}
@@ -44,15 +44,23 @@
 @stop
 
 
-@section('content')
+@section('content.medium')
     
     <div class="utils-border-bottom">
 
-    @include('component.user.number',[
+    @include('component.user.number', [
         'forum' => $number_forum,
         'comment' => $number_comment
     ])
 
     </div>
-    
+
+    <div class="utils-padding-bottom">
+
+    @include('component.user.activity', [
+        'items' => $items
+    ])
+
+    </div>
+
 @stop

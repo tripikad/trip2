@@ -125,6 +125,7 @@ Legend: **High priority** Normal priority *Future idea*
 - inline styles to CSS
 - components/content/blog/front -> feature
 - card to flexbox
+- row % hacks to http://laravel.com/docs/5.1/collections#method-chunk
 
 ### Controllers
 

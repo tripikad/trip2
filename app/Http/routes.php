@@ -89,8 +89,6 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     get('{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@showFollows', 'as' => 'show.follows']);
 
-    get('{id}/activity', ['middleware' => null, 'uses' => 'ActivityController@index', 'as' => 'activity']);
-
 });
 
 Route::group(['prefix' => 'message', 'as' => 'message.'], function () {
