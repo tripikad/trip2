@@ -43,7 +43,7 @@
                     . $item->content->title
                     . '</a>',
                 'comment_title' => '<a href="'
-                    . route('content.show', [$item->content->type, $item->content->id, '#content-' . $item->id])
+                    . route('content.show', [$item->content->type, $item->content->id, '#comment-' . $item->id])
                     . '">'
                     . $item->title
                     . '</a>',
