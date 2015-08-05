@@ -19,9 +19,9 @@
     @if ($item->activity_type == 'content') 
 
         @include('component.row', [
-            'image' => $item->user->imagePath(),
+            'image' => $user->imagePath(),
             'text' => trans('user.activity.index.row.content', [
-                'user' => $item->user->name,
+                'user' => $user->name,
                 'title' => '<a href="'
                     . route('content.show', [$item->type, $item->id])
                     . '">'
@@ -34,9 +34,9 @@
     @else
 
         @include('component.row', [
-            'image' => $item->user->imagePath(),
+            'image' => $user->imagePath(),
             'text' => trans('user.activity.index.row.comment', [
-                'user' => $item->user->name,
+                'user' => $user->name,
                 'title' => '<a href="'
                     . route('content.show', [$item->content->type, $item->content->id])
                     . '">'

@@ -39,7 +39,7 @@ class UserController extends Controller
         $from = Carbon::now()->subMonths(6)->startOfMonth();
         $to = Carbon::now();
 
-        $content = User::findOrFail($id)
+        $content = $user
             ->contents()
             ->whereStatus(1)
             ->whereIn('type', $types)
@@ -51,8 +51,9 @@ class UserController extends Controller
                 return $item;
             });
 
-        $comments = User::findOrFail($id)
+        $comments = $user
             ->comments()
+            ->with('content')
             ->whereStatus(1)
             ->whereBetween('created_at', [$from, $to])
             ->whereHas('content', function ($query) use ($types) {
