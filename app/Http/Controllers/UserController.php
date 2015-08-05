@@ -26,10 +26,12 @@ class UserController extends Controller
         $from = Carbon::now()->subMonths(3)->startOfMonth();
         $to = Carbon::now();
 
+        $types = ['forum', 'travelmate', 'photo', 'blog'];
+
         $content = User::findOrFail($id)
             ->contents()
             ->whereStatus(1)
-            ->whereIn('type', ['forum', 'travelmate', 'photo', 'blog'])
+            ->whereIn('type', $types)
             ->whereBetween('created_at', [$from, $to])
             ->latest('created_at')
             ->get()
@@ -42,6 +44,9 @@ class UserController extends Controller
             ->comments()
             ->whereStatus(1)
             ->whereBetween('created_at', [$from, $to])
+            ->whereHas('content', function ($query) use ($types) {
+                $query->whereIn('type', $types);
+            })
             ->latest('created_at')
             ->get()
             ->transform(function ($item) {
