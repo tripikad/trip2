@@ -18,15 +18,26 @@ class UserController extends Controller
     public function show($id)
     {
 
+        $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
+
         $user = User::findorFail($id);
   
-        $number_forum = $user->contents()->whereType('forum')->count();
-        $number_comment = $user->comments()->count();
-      
-        $from = Carbon::now()->subMonths(3)->startOfMonth();
-        $to = Carbon::now();
+        $content_count = $user
+            ->contents()
+            ->whereStatus(1)
+            ->whereIn('type', $types)
+            ->count();
 
-        $types = ['forum', 'travelmate', 'photo', 'blog'];
+        $comment_count = $user
+            ->comments()
+            ->whereStatus(1)
+            ->whereHas('content', function ($query) use ($types) {
+                $query->whereIn('type', $types);
+            })
+            ->count();
+      
+        $from = Carbon::now()->subMonths(6)->startOfMonth();
+        $to = Carbon::now();
 
         $content = User::findOrFail($id)
             ->contents()
@@ -54,13 +65,15 @@ class UserController extends Controller
                 return $item;
             });
     
-        $items = $content->merge($comments)->sortByDesc('created_at');
+        $items = $content
+            ->merge($comments)
+            ->sortByDesc('created_at');
 
         return View::make('pages.user.show')
             ->with('user', $user)
-            ->with('number_forum', $number_forum)
-            ->with('number_comment', $number_comment)
             ->with('items', $items)
+            ->with('content_count', $content_count)
+            ->with('comment_count', $comment_count)
             ->render();    
     }
 

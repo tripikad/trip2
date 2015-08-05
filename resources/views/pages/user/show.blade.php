@@ -48,9 +48,9 @@
     
     <div class="utils-border-bottom">
 
-    @include('component.user.number', [
-        'forum' => $number_forum,
-        'comment' => $number_comment
+    @include('component.user.count', [
+        'content_count' => $content_count,
+        'comment_count' => $comment_count
     ])
 
     </div>
