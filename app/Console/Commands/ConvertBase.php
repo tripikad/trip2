@@ -401,13 +401,17 @@ class ConvertBase extends Command
             $model->name = $this->cleanAll($user->name);
             $model->email = $this->cleanAll($user->mail);
 
-            $model->password = bcrypt($user->name); // Legacy md5 password: $user->pass
+            $model->password = $this->cleanAll($user->name); // Legacy md5 password: $user->pass
 
             $model->role = $this->getRole($user->rid);
 
             $model->created_at = \Carbon\Carbon::createFromTimeStamp($user->created);  
             $model->updated_at = \Carbon\Carbon::createFromTimeStamp($user->access);  
            
+            $model->save();
+
+            $model->verified = true;
+            $model->registration_token = null;
             $model->save();
 
             if ($user->picture) {

@@ -58,4 +58,23 @@ class CommentController extends Controller
 
     }
 
+    public function status($id, $status)
+    {
+
+        $comment = \App\Comment::findorFail($id);
+
+        if ($status == 0 || $status == 1) {
+
+            $comment->status = $status;
+            $comment->save();
+
+            return redirect()
+                ->route('content.show', [$comment->content->type, $comment->content, '#comment-' . $comment->id])
+                ->with('status', trans("content.status.$status.status"));
+        }
+        
+        return back();
+
+    }
+
 }

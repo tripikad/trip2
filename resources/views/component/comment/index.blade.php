@@ -47,9 +47,34 @@
             </div>
 
             <div class="col-sm-1">
+                
                 @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $comment->user->id))
+                    
                     <a href="{{ route('comment.edit', [$comment->id]) }}">Edit</a>
+                
                 @endif
+            
+                {{-- @if (\Auth::check() && \Auth::user()->hasRole('admin')) --}}
+                    
+                    <a href="{{ route('comment.status', [
+                        $comment,
+                        (1 - $comment->status)
+                    ]) }}">
+
+                        @if ($comment->status == 1)
+                            
+                            {{ trans('comment.action.unpublish') }}
+                        
+                        @else
+                        
+                            {{ trans('comment.action.publish') }}
+                        
+                        @endif
+
+                    </a>
+
+                {{-- @endif --}}
+
             </div>
 
         </div>

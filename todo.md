@@ -44,7 +44,7 @@ Legend: **High priority** Normal priority *Future idea*
 ## TODO
 
 ### Auth
-
+- **fix double bcrypt on password reset**
 - Legacy Drupal password hasher / mass password renewal?
 - *Registration spam prevention (Mollom?)*
 - *FB login*
@@ -156,7 +156,7 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 
 ### Admin
 
-- **Publish / unpublish content/comment**
+- **Publish / unpublish content/comments**
 
 ### Stat
 

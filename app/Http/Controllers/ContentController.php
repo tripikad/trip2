@@ -171,6 +171,25 @@ class ContentController extends Controller
 
     }
 
+    public function status($type, $id, $status)
+    {
+
+        $content = \App\Content::findorFail($id);
+
+        if ($status == 0 || $status == 1) {
+
+            $content->status = $status;
+            $content->save();
+
+            return redirect()
+                ->route('content.show', [$type, $content])
+                ->with('status', trans("content.status.$status.status"));
+        }
+        
+        return back();
+
+    }
+
     public function redirect($path)
     {
         $alias = \DB::table('content_alias')

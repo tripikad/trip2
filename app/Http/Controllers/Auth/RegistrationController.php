@@ -26,7 +26,9 @@ class RegistrationController extends Controller
             'password' => 'required|confirmed|min:6',
         ]);
 
-        $user = User::create($request->all());
+        $fields = ['role' => 'regular'];
+        
+        $user = User::create(array_merge($request->all(), $fields));
 
         Mail::send('email.auth.register', ['user' => $user], function ($mail) use ($user) {
             

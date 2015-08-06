@@ -72,7 +72,29 @@
                 <a href="{{ route('content.edit', ['type' => $content->type, 'id' => $content]) }}">Edit</a>
             
             @endif
-        
+
+            {{-- @if (\Auth::check() && \Auth::user()->hasRole('admin')) --}}
+                
+                <a href="{{ route('content.status', [
+                    $content->type,
+                    $content,
+                    (1 - $content->status)
+                ]) }}">
+
+                    @if ($content->status == 1)
+                        
+                        {{ trans('content.action.unpublish') }}
+                    
+                    @else
+                    
+                        {{ trans('content.action.publish') }}
+                    
+                    @endif
+
+                </a>
+
+            {{-- @endif --}}
+
         </div>
 
     </div>
