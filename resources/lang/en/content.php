@@ -4,9 +4,13 @@ return [
     
     // General
 
-    'action.publish' => 'Publish',
+    'action.published.title' => 'Unpublish',
 
-    'action.unpublish' => 'Unpublish',
+    'action.unpublished.title' => 'Publish',
+
+    'action.published.status' => ':title has been published',
+
+    'action.unpublished.status' => ':title has been unpublished',
 
     'field.image.title' => 'Select image',
 

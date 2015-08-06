@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="
+    <div class="utils-border-bottom 
         @if (! $content->status)
             utils-unpublished
         @endif
@@ -54,7 +54,7 @@
         ]])
     ])
 
-    <div class="row utils-border-bottom">
+    <div class="row">
 
         <div class="col-sm-1">
         </div>
@@ -81,15 +81,7 @@
                     (1 - $content->status)
                 ]) }}">
 
-                    @if ($content->status == 1)
-                        
-                        {{ trans('content.action.unpublish') }}
-                    
-                    @else
-                    
-                        {{ trans('content.action.publish') }}
-                    
-                    @endif
+                    {{ trans('content.action.' . config("site.statuses.$content->status") . '.title') }}
 
                 </a>
 

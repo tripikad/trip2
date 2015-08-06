@@ -60,16 +60,8 @@
                         $comment,
                         (1 - $comment->status)
                     ]) }}">
-
-                        @if ($comment->status == 1)
-                            
-                            {{ trans('content.action.unpublish') }}
-                        
-                        @else
-                        
-                            {{ trans('content.action.publish') }}
-                        
-                        @endif
+                    
+                        {{ trans('content.action.' . config("site.statuses.$comment->status") . '.title') }}
 
                     </a>
 

@@ -183,7 +183,9 @@ class ContentController extends Controller
 
             return redirect()
                 ->route('content.show', [$type, $content])
-                ->with('status', trans("content.status.$status.status"));
+                ->with('status', trans('content.action.' . config("site.statuses.$status") . '.status', [
+                    'title' => $content->title
+                ]));
         }
         
         return back();

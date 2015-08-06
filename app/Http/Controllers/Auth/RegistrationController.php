@@ -26,7 +26,10 @@ class RegistrationController extends Controller
             'password' => 'required|confirmed|min:6',
         ]);
 
-        $fields = ['role' => 'regular'];
+        $fields = [
+            'role' => 'regular',
+            'password' => bcrypt($request->get('password'))
+        ];
         
         $user = User::create(array_merge($request->all(), $fields));
 

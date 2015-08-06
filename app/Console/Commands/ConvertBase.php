@@ -401,7 +401,7 @@ class ConvertBase extends Command
             $model->name = $this->cleanAll($user->name);
             $model->email = $this->cleanAll($user->mail);
 
-            $model->password = $this->cleanAll($user->name); // Legacy md5 password: $user->pass
+            $model->password = bcrypt($this->cleanAll($user->name)); // Legacy md5 password: $user->pass
 
             $model->role = $this->getRole($user->rid);
 

@@ -70,7 +70,9 @@ class CommentController extends Controller
 
             return redirect()
                 ->route('content.show', [$comment->content->type, $comment->content, '#comment-' . $comment->id])
-                ->with('status', trans("content.status.$status.status"));
+                ->with('status', trans('content.action.' . config("site.statuses.$status") . '.status', [
+                    'title' => $comment->title
+                ]));
         }
         
         return back();
