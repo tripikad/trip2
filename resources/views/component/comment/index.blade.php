@@ -54,7 +54,7 @@
                 
                 @endif
             
-                {{-- @if (\Auth::check() && \Auth::user()->hasRole('admin')) --}}
+                @if (\Auth::check() && \Auth::user()->hasRole('admin'))
                     
                     <a href="{{ route('comment.status', [
                         $comment,
@@ -63,17 +63,17 @@
 
                         @if ($comment->status == 1)
                             
-                            {{ trans('comment.action.unpublish') }}
+                            {{ trans('content.action.unpublish') }}
                         
                         @else
                         
-                            {{ trans('comment.action.publish') }}
+                            {{ trans('content.action.publish') }}
                         
                         @endif
 
                     </a>
 
-                {{-- @endif --}}
+                @endif
 
             </div>
 

@@ -4,6 +4,10 @@ return [
     
     // General
 
+    'action.publish' => 'Publish',
+
+    'action.unpublish' => 'Unpublish',
+
     'field.image.title' => 'Select image',
 
     'field.image.selected.title' => 'New image selected',

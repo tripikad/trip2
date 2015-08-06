@@ -73,7 +73,7 @@
             
             @endif
 
-            {{-- @if (\Auth::check() && \Auth::user()->hasRole('admin')) --}}
+            @if (\Auth::check() && \Auth::user()->hasRole('admin'))
                 
                 <a href="{{ route('content.status', [
                     $content->type,
@@ -93,7 +93,7 @@
 
                 </a>
 
-            {{-- @endif --}}
+            @endif
 
         </div>
 
