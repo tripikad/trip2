@@ -46,6 +46,8 @@ class ConvertUsersOld extends ConvertBase
             ->orderBy('uid')
             ->get();
 
+        $this->info('Converting old users');
+
         $this->output->progressStart($take);
 
         foreach ($users as $u) {

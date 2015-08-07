@@ -42,6 +42,7 @@ Legend: **High priority** Normal priority *Future idea*
 - remove hardcoded form urls from views
 - **Publish / unpublish content/comments**
 - **fix double bcrypt on password reset**
+- ConvertOldUsers
 
 ## TODO
 
@@ -169,7 +170,6 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 
 ### Convert
 
-- ConvertOldUsers
 - ConvertUnpublishedComments ($latest - 1 month)
 - convert subscription status
 - convert havebeen / wanttogo?
