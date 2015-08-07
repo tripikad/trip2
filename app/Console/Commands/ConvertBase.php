@@ -406,7 +406,7 @@ class ConvertBase extends Command
             $model->role = $this->getRole($user->rid);
 
             $model->created_at = \Carbon\Carbon::createFromTimeStamp($user->created);  
-            $model->updated_at = \Carbon\Carbon::createFromTimeStamp($user->access);  
+            $model->updated_at = \Carbon\Carbon::createFromTimeStamp($user->created);  
            
             $model->save();
 
