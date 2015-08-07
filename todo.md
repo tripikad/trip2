@@ -40,12 +40,21 @@ Legend: **High priority** Normal priority *Future idea*
     https://github.com/laracasts/Email-Verification-In-Laravel
 - "Not yet registred?" links
 - remove hardcoded form urls from views
+- **Publish / unpublish content/comments**
+- **fix double bcrypt on password reset**
 
 ## TODO
 
 ### Auth
-- **fix double bcrypt on password reset**
 - Legacy Drupal password hasher / mass password renewal?
+http://www.howtobuildsoftware.com/index.php/how-do/HIs/php-laravel-sha1-laravel-5-extending-laravel-5-using-sha1-instead-of-bcrypt
+
+http://laravel.com/docs/5.1/container#contextual-binding
+
+- App\Http\Controllers\Auth\LoginController
+- Illuminate\Contracts\Hashing\Hasher
+- App\Providers\Hasher
+
 - *Registration spam prevention (Mollom?)*
 - *FB login*
 - *Permissions*
@@ -153,10 +162,6 @@ Legend: **High priority** Normal priority *Future idea*
 
 - Viewed status on content, comments, **messages**
 https://andrisreinman.com/efektiivne-ip-kaunter/
-
-### Admin
-
-- **Publish / unpublish content/comments**
 
 ### Stat
 
