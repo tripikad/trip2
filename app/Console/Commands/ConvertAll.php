@@ -11,7 +11,6 @@ class ConvertAll extends ConvertBase
     {
 
         $this->call('convert:terms');
-        $this->call('convert:users:old');
 
         $this->call('convert:blogs');
         $this->call('convert:buysells');
@@ -24,9 +23,8 @@ class ConvertAll extends ConvertBase
         $this->call('convert:offers');
         $this->call('convert:photos');
         $this->call('convert:travelmates');
-
-        // $this->call('convert:follows');
-        // $this->call('convert:messages');
+        $this->call('convert:follows');
+        $this->call('convert:messages');
 
         $this->call('convert:users');
 

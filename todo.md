@@ -1,53 +1,5 @@
 Legend: **High priority** Normal priority *Future idea*
 
-## Done
-
-- convert legacy paths
-- **convert user permissions**
-- **Content add/edit/delete forms**
-- Sample ads for prototyping
-    - sizes
-        - narrow 250x75 / 30%
-        - wide 630x75 / 11.9%
-        - square 250x250 / 100%
-- Naming: _ vs partials vs index vs list vs element vs component
-- content/index/{type} > content/{type}/all
-- content/{id} > content/{type}/{id}
-- **Login**
-- **Comment add/edit/delete forms**
-- Add translations
-- **Roles**
-- users: unique name / email ?
-- **auth middleware / controller AC**
-- Forum filtering
-- **Destination feature pages**
-- **Image processing**
-- **Image URLs**
-- **Image uploads**
-- **Password reminder**
-- **Message add/edit/delete forms**
-- **Content status: published/unpublished**
-- **Comment published/unpublished**
-- content, comment rating
-- **Forum filtering fixes: autocomplete, autosubmit**
-- **sanitize content input**
-    - limited HTML for body (content, message, comment)
-        a, em, i, strong, b, img, br
-    - clear attributes
-    - no HTML in other fields incl titles (content, user, message, destination, carrier, comment, topic)
-    - use middleware sanitizer?
-- **Register mails**
-    https://github.com/laracasts/Email-Verification-In-Laravel
-- "Not yet registred?" links
-- remove hardcoded form urls from views
-- **Publish / unpublish content/comments**
-- **fix double bcrypt on password reset**
-- ConvertOldUsers
-- hbert everywhere? /content/forum/69831
-- sanitization:
-    - remove html in titles
-    - limit html in body
-
 ## TODO
 
 ### Auth
@@ -58,7 +10,7 @@ http://laravel.com/docs/5.1/container#contextual-binding
 
 - App\Http\Controllers\Auth\LoginController
 - Illuminate\Contracts\Hashing\Hasher
-- App\Providers\Hasher
+- App\Hashers\md5Hasher
 
 - *Registration spam prevention (Mollom?)*
 - *FB login*
@@ -174,11 +126,7 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 
 ### Convert
 
-- Users* 
-    uid < 61
-    uid > 60
-
-- ConvertUnpublishedComments ($latest - 1 month)
+- *ConvertUnpublishedComments ($latest - 1 month)*
 - convert user profiles
 - convert subscription status
 - convert havebeen / wanttogo?
@@ -238,3 +186,54 @@ https://packagist.org/packages/laravelrus/localized-carbon
 ### Tests
 
 https://github.com/bertramtruong/mailtrap
+
+## Done
+
+- convert legacy paths
+- **convert user permissions**
+- **Content add/edit/delete forms**
+- Sample ads for prototyping
+    - sizes
+        - narrow 250x75 / 30%
+        - wide 630x75 / 11.9%
+        - square 250x250 / 100%
+- Naming: _ vs partials vs index vs list vs element vs component
+- content/index/{type} > content/{type}/all
+- content/{id} > content/{type}/{id}
+- **Login**
+- **Comment add/edit/delete forms**
+- Add translations
+- **Roles**
+- users: unique name / email ?
+- **auth middleware / controller AC**
+- Forum filtering
+- **Destination feature pages**
+- **Image processing**
+- **Image URLs**
+- **Image uploads**
+- **Password reminder**
+- **Message add/edit/delete forms**
+- **Content status: published/unpublished**
+- **Comment published/unpublished**
+- content, comment rating
+- **Forum filtering fixes: autocomplete, autosubmit**
+- **sanitize content input**
+    - limited HTML for body (content, message, comment)
+        a, em, i, strong, b, img, br
+    - clear attributes
+    - no HTML in other fields incl titles (content, user, message, destination, carrier, comment, topic)
+    - use middleware sanitizer?
+- **Register mails**
+    https://github.com/laracasts/Email-Verification-In-Laravel
+- "Not yet registred?" links
+- remove hardcoded form urls from views
+- **Publish / unpublish content/comments**
+- **fix double bcrypt on password reset**
+- ConvertOldUsers
+- hbert everywhere? /content/forum/69831
+- sanitization:
+    - remove html in titles
+    - limit html in body
+- Users* 
+    uid < 61
+    uid > 60

@@ -98,11 +98,12 @@ class ConvertUsers extends ConvertBase
             ->where('uid', '>', 60)
             ->where('status', '=', 1)
             ->where('login', '>', $lastLogged)
-            ->orderBy('uid', 'desc');
+            ->orderBy('uid', 'desc')
+            ->take($this->take);
     
         $this->info('Converting other users');
 
-        $this->output->progressStart($users->count());
+        $this->output->progressStart(count($users));
 
         $i = 0;
 
