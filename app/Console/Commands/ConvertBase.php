@@ -21,6 +21,18 @@ class ConvertBase extends Command
 
     protected $client;
 
+    protected $contentTypes = [
+        'story',
+        'trip_blog',
+        'trip_forum',
+        'trip_forum_other',
+        'trip_forum_expat',
+        'trip_forum_buysell',
+        'trip_forum_travelmate',
+        'trip_image',
+        'trip_offer'
+    ];
+    
     public function __construct()
     {
         parent::__construct();

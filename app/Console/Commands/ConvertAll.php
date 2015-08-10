@@ -28,6 +28,8 @@ class ConvertAll extends ConvertBase
         // $this->call('convert:follows');
         // $this->call('convert:messages');
 
+        $this->call('convert:users');
+
     }
 
 }

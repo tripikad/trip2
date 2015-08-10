@@ -43,6 +43,10 @@ Legend: **High priority** Normal priority *Future idea*
 - **Publish / unpublish content/comments**
 - **fix double bcrypt on password reset**
 - ConvertOldUsers
+- hbert everywhere? /content/forum/69831
+- sanitization:
+    - remove html in titles
+    - limit html in body
 
 ## TODO
 
@@ -170,14 +174,15 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 
 ### Convert
 
+- Users* 
+    uid < 61
+    uid > 60
+
 - ConvertUnpublishedComments ($latest - 1 month)
+- convert user profiles
 - convert subscription status
 - convert havebeen / wanttogo?
-- convert commerical users?
-- convert polls?
-- convert subscriptions?
 - small fixes:
-    - hbert everywhere? /content/forum/69831
     - content by anonymous users?
     - comment titles?
     - message titles?
@@ -192,15 +197,15 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
     - Reisiveeb?
     - /uurimus|küsitlus|uuring term/
     - /töö/
-- sanitization:
-    - remove html in titles
-    - limit html in body
     - remove <!--break-->
     - remove UPPERASE
 
 - markup change
     - \n<u>...</u> -> <h4></h4>
     - \n<strong>...</strong> -> <h4></h4>
+- *convert commerical users?*
+- *convert polls?*
+- *convert subscriptions?*
 
 ### Libraries
 
@@ -222,6 +227,8 @@ https://packagist.org/packages/laravelrus/localized-carbon
 
 - html5shiv
 - h5f
+
+- Dropzone.js
 
 ### Other
 
