@@ -17,10 +17,12 @@ class CreateUsersTable extends Migration
             $table->string('name')->unique();
             $table->string('email')->unique();
             $table->string('password', 60);
-            $table->string('image');
+            $table->string('image')->nullable();
 
-            $table->string('contact_homepage');
-            $table->string('contact_email');
+            $table->string('contact_homepage')->nullable();
+            $table->string('contact_facebook')->nullable();
+            $table->string('contact_twitter')->nullable();
+            $table->string('contact_instagram')->nullable();
 
             $table->string('role');
             $table->boolean('verified')->default(false);

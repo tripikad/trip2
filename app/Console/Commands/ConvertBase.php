@@ -397,6 +397,18 @@ class ConvertBase extends Command
             ->first();
     }
 
+    public function getProfileFields($uid)
+    {
+
+        $profile = DB::connection($this->connection)
+            ->table('profile_values')
+            ->where('uid', '=', $uid)
+            ->lists('value', 'fid');
+        
+        return $profile;
+    
+    }
+
     public function isUserConvertable($uid) {
 
         $user = $this->getUser($uid);
@@ -424,9 +436,42 @@ class ConvertBase extends Command
 
             $model = new \App\User;
 
+            $profile = $this->getProfileFields($user->uid);
+
             $model->id = $user->uid;
             $model->name = $this->cleanAll($user->name);
             $model->email = $this->cleanAll($user->mail);
+
+            if (isset($profile) && isset($profile[13])) {
+
+                $homepage = $this->cleanUrl($profile[13]);
+
+                $model->contact_homepage = (
+                    $this->isUrl($homepage)
+                    && ! $this->isFacebookUrl($homepage)
+                    && ! $this->isTwitterUrl($homepage)
+                    && ! $this->isInstagramUrl($homepage)
+                    )
+                    ? $homepage
+                    : null;
+
+                $model->contact_facebook = ($this->isUrl($homepage)
+                    && $this->isFacebookUrl($homepage))
+                    ? $homepage
+                    : null;
+
+                $model->contact_twitter = ($this->isUrl($homepage)
+                    && $this->isTwitterUrl($homepage))
+                    ? $homepage
+                    : null;
+
+                $model->contact_instagram = ($this->isUrl($homepage)
+                    && $this->isInstagramUrl($homepage))
+                    ? $homepage
+                    : null;
+
+
+            }
 
             $model->password = bcrypt($this->cleanAll($user->name)); // Legacy md5 password: $user->pass
 
@@ -470,7 +515,7 @@ class ConvertBase extends Command
 
         $model = $modelName::findOrFail($id);
 
-        $model->url = $this->cleanAll($url);
+        $model->url =  $this->cleanUrl($url);
 
         $model->save();
     
@@ -740,6 +785,13 @@ class ConvertBase extends Command
 
     }
 
+    public function cleanUrl($string)
+    {
+
+        return $this->cleanAll(mb_convert_case($string, MB_CASE_LOWER, 'UTF-8'));
+
+    }
+
     public function removeComments($string)
     {
 
@@ -772,6 +824,34 @@ class ConvertBase extends Command
 
         return $string;
 
+    }
+
+    public function isUrl($url)
+    {
+
+        return filter_var($url, FILTER_VALIDATE_URL);
+    
+    }
+
+    public function isFacebookUrl($url)
+    {
+
+        return preg_match("/(.*)\.facebook\.com(.*)/", $url);
+    
+    }
+
+    public function isInstagramUrl($url)
+    {
+
+        return preg_match("/(.*)\.instagram\.com(.*)/", $url);
+    
+    }
+
+    public function isTwitterUrl($url)
+    {
+
+        return preg_match("/(.*)\.twitter\.com(.*)/", $url);
+    
     }
 
 }
