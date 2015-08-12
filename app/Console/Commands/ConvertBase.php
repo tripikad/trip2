@@ -365,7 +365,7 @@ class ConvertBase extends Command
         
                 $this->convertUser($user_id);
                 
-                $this->convertFlags($comment->cid, 'App\Comment', 'comment');
+                $this->convertFlags($comment->cid, '\App\Comment', 'comment');
                 
             }
         
@@ -492,6 +492,8 @@ class ConvertBase extends Command
             
             }
 
+
+
         }
     
     }
@@ -504,6 +506,7 @@ class ConvertBase extends Command
             $user = $this->getUser($uid);
             $this->createUser($user);
             
+            $this->convertUserDestinationFlags($uid);
         }
         
     }
@@ -575,14 +578,20 @@ class ConvertBase extends Command
 
     // Flags
 
-    public function getFlags($id, $type)
+    public function getFlags($id, $type, $uid = null)
     {
-        return \DB::connection($this->connection)
+        $flags = \DB::connection($this->connection)
            ->table('flag_content')
            ->where('content_id', $id)
            ->where('content_type', $type) // node, comment, term
-           ->orderBy('timestamp', 'desc')
-           ->get();
+           ->orderBy('timestamp', 'desc');
+
+        if (isset($uid)) {
+
+            $flags->where('uid', $uid);
+        }
+
+        return $flags->get();
     }
 
 
@@ -590,7 +599,13 @@ class ConvertBase extends Command
     {
 
         $user_id = ($flag->uid > 0) ? $flag->uid : 1;
+
+        if ($user_id == 1) {
+
+            $user_id = 12;
         
+        }
+
         $model = new \App\Flag;
 
         $model->user_id = $user_id;
@@ -631,6 +646,32 @@ class ConvertBase extends Command
         }   
     }
 
+    public function convertUserDestinationFlags($uid)
+    {
+        $flag_map = array(
+            '6' => 'havebeen',
+            '7' => 'wanttogo',
+         );
+
+        $destinations = \App\Destination::all();
+
+        foreach ($destinations as $destination) {
+        
+            $flags = $this->getFlags($destination->id, 'term', $uid);
+            
+            foreach($flags as $flag) {
+
+                if (array_key_exists($flag->fid, $flag_map)) {
+
+                    $flag->flag_type = $flag_map[$flag->fid];
+                    $this->createFlag($flag, '\App\Destination');
+
+                }
+            }
+    
+        } 
+    
+    }
 
     // Aliases
 

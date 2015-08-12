@@ -73,12 +73,9 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 
 ### Convert
 
-- convert havebeen / wanttogo?
-
 - convert photo: Mitte-reisipildid?
 - flights: regexp price from the title
 - misc,expat,buysell -> new term or /content/forum to multitype
-
 - commercial users?
 
 ### Libraries
@@ -89,7 +86,9 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 
 https://github.com/bertramtruong/mailtrap
 
+### Follow
 
+decide on follow status
 
 
 
@@ -171,3 +170,4 @@ https://github.com/bertramtruong/mailtrap
     - \n<strong>...</strong> -> <h4></h4>
 - convert user profiles
 - convert subscription status
+- convert havebeen / wanttogo
