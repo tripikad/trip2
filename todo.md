@@ -73,15 +73,13 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 
 ### Convert
 
-- convert user profiles
-- convert subscription status
 - convert havebeen / wanttogo?
 
 - convert photo: Mitte-reisipildid?
 - flights: regexp price from the title
 - misc,expat,buysell -> new term or /content/forum to multitype
 
-- ConvertUnpublishedComments ($latest - 1 month)?
+- commercial users?
 
 ### Libraries
 
@@ -171,3 +169,5 @@ https://github.com/bertramtruong/mailtrap
 - markup change
     - \n<u>...</u> -> <h4></h4>
     - \n<strong>...</strong> -> <h4></h4>
+- convert user profiles
+- convert subscription status

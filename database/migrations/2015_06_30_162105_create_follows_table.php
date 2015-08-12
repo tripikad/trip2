@@ -16,6 +16,7 @@ class CreateFollowsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();    
             $table->integer('followable_id')->index();   
+            $table->integer('status');    
             $table->string('followable_type')->index();  
         });
     }
