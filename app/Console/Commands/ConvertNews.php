@@ -24,7 +24,7 @@ class ConvertNews extends ConvertBase
 
         foreach($nodes as $node) {
 
-            // Fint the image embedded in body
+            // Find the image embedded in body
 
             $pattern = "/.*\s*<!--\s*FRONTIMG:\s*(.*)\s*-->.*/";
       

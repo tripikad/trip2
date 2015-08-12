@@ -16,6 +16,15 @@ class ConvertBlogs extends ConvertBase
 
         foreach($nodes as $node) {
 
+            // Find the image embedded in body
+
+            $pattern = "/.*\s*<!--\s*FRONTIMG:\s*(.*)\s*-->.*/";
+            
+            if (preg_match($pattern, $node->body, $matches))
+            {
+                $node->body = preg_replace($pattern, '', $node->body);
+            }
+            
             $this->convertNode($node, '\App\Content', 'blog');
 
             $this->convertNodeDestinations($node);

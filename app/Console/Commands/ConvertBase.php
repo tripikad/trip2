@@ -722,6 +722,7 @@ class ConvertBase extends Command
 
         $string = strip_tags($string, config('site.allowedtags'));
         $string = trim($string);
+        $string = $this->removeBreak($string);
         $string = $this->removeUppercase($string);
 
         $string = preg_replace("/<!--(.*?)-->/", '', $string);
@@ -735,6 +736,13 @@ class ConvertBase extends Command
         $string = strip_tags($this->clean($string));
 
         return $string;
+
+    }
+
+    public function removeBreak($string)
+    {
+
+        return preg_replace('/<!--\s?break\s?-->/', '', $string);
 
     }
 

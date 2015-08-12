@@ -94,7 +94,6 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 - small fixes:
 
     - convert photo: Mitte-reisipildid?
-    - filter frontimg tag from blog posts
     - flights: regexp price from the title
     - misc,expat,buysell -> new term or /content/forum to multitype
     - Reisiveeb?
@@ -190,3 +189,4 @@ https://github.com/bertramtruong/mailtrap
     - /uurimus|küsitlus|uuring term/
     - /töö/
     - remove UPPERASE
+    - filter frontimg tag from blog posts
