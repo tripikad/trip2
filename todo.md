@@ -93,8 +93,7 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 
 - small fixes:
     - content by anonymous users?
-    - comment titles?
-    - message titles?
+
     - convert photo: Mitte-reisipildid?
     - filter frontimg tag from blog posts
     - flights: regexp price from the title
@@ -190,4 +189,6 @@ https://github.com/bertramtruong/mailtrap
 - comment trans: .field.
 - inline styles to CSS
 - card to flexbox
-
+- convert
+    - comment titles?
+    - message titles?

@@ -44,7 +44,6 @@ class ConvertMessages extends ConvertBase
                     $model->id = $node->mid;
                     $model->user_id_from = $node->author;
                     $model->user_id_to = $node->uid;
-                    $model->title = $this->scrambleString(trim($node->subject));
                     $model->body = $this->scrambleString(trim($node->body));
                     $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp);  
                     $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp); 
