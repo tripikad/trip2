@@ -722,10 +722,11 @@ class ConvertBase extends Command
 
         $string = strip_tags($string, config('site.allowedtags'));
         $string = trim($string);
-        $string = $this->removeBreak($string);
+        $string = $this->removeComments($string);
         $string = $this->removeUppercase($string);
+        $string = $this->convertUnderlineHeaders($string);
+        $string = $this->convertStrongHeaders($string);
 
-        $string = preg_replace("/<!--(.*?)-->/", '', $string);
         return $string;
 
     }
@@ -739,10 +740,24 @@ class ConvertBase extends Command
 
     }
 
-    public function removeBreak($string)
+    public function removeComments($string)
     {
 
-        return preg_replace('/<!--\s?break\s?-->/', '', $string);
+        return preg_replace('/<!--(.*?)-->/', '', $string);
+
+    }
+
+    public function convertUnderlineHeaders($string)
+    {
+
+        return preg_replace("/\n<u>(.*)<\/u>/", "\n<h4>$1</h4>", $string);
+
+    }
+
+    public function convertStrongHeaders($string)
+    {
+
+        return preg_replace("/\n<strong>(.*)<\/strong>/", "\n<h4>$1</h4>", $string);
 
     }
 

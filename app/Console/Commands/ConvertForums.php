@@ -33,7 +33,7 @@ class ConvertForums extends ConvertBase
             
             foreach ($nodes as $node)
             {
-                if (!$this->filterTerms($node->nid, [821, 825, 763])) // Reisikirjad, Sooduspakkumised, Reisiveeb
+                if (!$this->filterTerms($node->nid, [821, 825])) // Reisikirjad, Sooduspakkumised
                 {
                     $model = 'App\Content';
                 

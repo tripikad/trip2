@@ -38,26 +38,19 @@ https://packagist.org/packages/baum/baum
 
 ### Finish Messages
 
-Implement viewed status
-
-Implement mailer
-
-Write tests
-
-Sender blocking?
+- Implement viewed status
+- Implement mailer
+- Write tests
+- Sender blocking?
 
 
 ### Finish simple following
 
-Convert follow status
-
-Toggle status
-
-Remove item
-
-Implement mailer
-
-Real queries for messages
+- Convert follow status
+- Toggle status
+- Remove item
+- Implement mailer
+- Real queries for messages
 
 
 ### Legacy SEO
@@ -68,18 +61,11 @@ what to do with long legacy paths without ".html" ?
 
 Add caching for popular views
 
-### Controllers
-
-- CommentController@store: $id? $type
-
-
 ### Forms
 
 - Access control per field
 - Date widget
 - Time widget
-- Delete confirmations
-
 
 ### Viewed status
 
@@ -91,21 +77,11 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 - convert subscription status
 - convert havebeen / wanttogo?
 
-- small fixes:
+- convert photo: Mitte-reisipildid?
+- flights: regexp price from the title
+- misc,expat,buysell -> new term or /content/forum to multitype
 
-    - convert photo: Mitte-reisipildid?
-    - flights: regexp price from the title
-    - misc,expat,buysell -> new term or /content/forum to multitype
-    - Reisiveeb?
-    - remove <!--break-->
-
-- markup change
-    - \n<u>...</u> -> <h4></h4>
-    - \n<strong>...</strong> -> <h4></h4>
-
-- *convert commerical users?*
-- *convert polls?*
-- *ConvertUnpublishedComments ($latest - 1 month)*
+- ConvertUnpublishedComments ($latest - 1 month)
 
 ### Libraries
 
@@ -190,3 +166,8 @@ https://github.com/bertramtruong/mailtrap
     - /töö/
     - remove UPPERASE
     - filter frontimg tag from blog posts
+    - Reisiveeb?
+    - remove <!--break-->
+- markup change
+    - \n<u>...</u> -> <h4></h4>
+    - \n<strong>...</strong> -> <h4></h4>
