@@ -2,19 +2,15 @@ Legend: **High priority** Normal priority *Future idea*
 
 ## TODO
 
-### Auth
-- Legacy Drupal password hasher / mass password renewal?
-http://www.howtobuildsoftware.com/index.php/how-do/HIs/php-laravel-sha1-laravel-5-extending-laravel-5-using-sha1-instead-of-bcrypt
 
-http://laravel.com/docs/5.1/container#contextual-binding
+- Content sanitizing:
+https://packagist.org/packages/texy/texy
+https://packagist.org/packages/mews/purifier
 
-- App\Http\Controllers\Auth\LoginController
-- Illuminate\Contracts\Hashing\Hasher
-- App\Hashers\md5Hasher
+- Terms:
+https://packagist.org/packages/baum/baum
 
-- *Registration spam prevention (Mollom?)*
-- *FB login*
-- *Permissions*
+
 
 ### Content
 
@@ -33,75 +29,49 @@ http://laravel.com/docs/5.1/container#contextual-binding
 ### Offers
 
 - Remake or pull from old site?
-- Offer add/edit/delete forms
-- Offer scheduler
+
 
 ### Comments
 
 - Comment delete
 
-### Destination
 
-- Generic autocomplete widget + view composer
+### Finish Messages
 
-### Tags
+Implement viewed status
 
-- Rename "topics" to "tags"
+Implement mailer
 
-### Carriers
+Write tests
 
-- Defined in config?
+Sender blocking?
 
-### Search
 
-- Choose Provider:
-    - local Zend Search
-    - Algolia? $49/m
-    - Self-hosted Elasticsearch $10-$20
-    - Link to Google onsite search
+### Finish simple following
 
-### Messages
+Convert follow status
 
-- Message title accessor?
-- Mail messages
-- Create Message tests with seeds
-- From collections hacks to real queries
-- *Message blocking*
-- *Message edit/delete forms?*
+Toggle status
 
-### Following
+Remove item
 
-- Enable disable mailing
-- Remove item
+Implement mailer
 
-### Activity feeds
+Real queries for messages
 
-- *Create activity feeds*
 
-### DB
+### Legacy SEO
 
-- foreign keys for pivot tables / comments
+what to do with long legacy paths without ".html" ?
 
-### Views
+### Performance
 
-- Date formatting: in partial? in model?
-- Does email view work?
-- @section('subheading')
-- comment trans: .field.
-- inline styles to CSS
-- components/content/blog/front -> feature
-- card to flexbox
-- row % hacks to http://laravel.com/docs/5.1/collections#method-chunk
+Add caching for popular views
 
 ### Controllers
 
-- **Cache of popular views**
 - CommentController@store: $id? $type
 
-### Image pipeline
-
-- fallback image(s) in /public/icons
-- fix file move() override
 
 ### Forms
 
@@ -110,33 +80,22 @@ http://laravel.com/docs/5.1/container#contextual-binding
 - Time widget
 - Delete confirmations
 
-### Legacy paths
-
-- what to do with long legacy paths without ".html" ?
-- http://trip.ee/taxonomy/term/540
 
 ### Viewed status
 
-- Viewed status on content, comments, **messages**
 https://andrisreinman.com/efektiivne-ip-kaunter/
-
-### Stat
-
-- StatOldUsers: first created nodes and comments
 
 ### Convert
 
-- *ConvertUnpublishedComments ($latest - 1 month)*
 - convert user profiles
 - convert subscription status
 - convert havebeen / wanttogo?
+
 - small fixes:
     - content by anonymous users?
     - comment titles?
     - message titles?
-    - do not convert content from ?!* users -> re-enable
     - convert photo: Mitte-reisipildid?
-    - fix double run on taxonomy relations
     - filter frontimg tag from blog posts
     - flights: regexp price from the title
     - misc -> new term?
@@ -151,41 +110,27 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 - markup change
     - \n<u>...</u> -> <h4></h4>
     - \n<strong>...</strong> -> <h4></h4>
+
 - *convert commerical users?*
 - *convert polls?*
-- *convert subscriptions?*
+- *ConvertUnpublishedComments ($latest - 1 month)*
 
 ### Libraries
 
-- Atom feed for http://trip.ee/index.atom
-https://packagist.org/packages/roumen/feed
-
-- Content sanitizing:
-https://packagist.org/packages/texy/texy
-https://packagist.org/packages/mews/purifier
-
-- Terms:
-https://packagist.org/packages/baum/baum
-
-- Sitemap:
-http://packalyst.com/packages/package/roumen/sitemap
-
-- Carbon localizations:
-https://packagist.org/packages/laravelrus/localized-carbon
-
-- html5shiv
-- h5f
-
 - Dropzone.js
-
-### Other
-
-- favicon
-- GA tracker
 
 ### Tests
 
 https://github.com/bertramtruong/mailtrap
+
+
+
+
+
+
+
+
+
 
 ## Done
 
@@ -234,6 +179,15 @@ https://github.com/bertramtruong/mailtrap
 - sanitization:
     - remove html in titles
     - limit html in body
+- StatOldUsers: first created nodes and comments
 - Users* 
     uid < 61
     uid > 60
+- do not convert content from ?!* users -> re-enable
+- convert: fix double run on taxonomy relations
+- Does email view work?
+- @section('subheading')
+- comment trans: .field.
+- inline styles to CSS
+- card to flexbox
+

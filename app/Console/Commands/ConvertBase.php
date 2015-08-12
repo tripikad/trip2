@@ -6,6 +6,8 @@ use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use App;
 
+use DB;
+
 use Imageconv;
 
 class ConvertBase extends Command
@@ -251,12 +253,15 @@ class ConvertBase extends Command
 
     public function insertPivot($table, $key1, $value1, $key2, $value2)
     {
-        \DB::table($table)->insert(
-                array(
-                    $key1 => $value1, 
-                    $key2 => $value2 
-                )
-            );
+
+        $values = [$key1 => $value1, $key2 => $value2];
+
+        if (! DB::table($table)->where($values)->get()) {
+        
+            DB::table($table)->insert($values);
+
+        }
+
     }
 
     public function processNodeTopic($topic)
