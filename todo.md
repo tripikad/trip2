@@ -92,19 +92,13 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 - convert havebeen / wanttogo?
 
 - small fixes:
-    - content by anonymous users?
 
     - convert photo: Mitte-reisipildid?
     - filter frontimg tag from blog posts
     - flights: regexp price from the title
-    - misc -> new term?
-    - expat -> new term?
-    - buysell -> new term?
+    - misc,expat,buysell -> new term or /content/forum to multitype
     - Reisiveeb?
-    - /uurimus|küsitlus|uuring term/
-    - /töö/
     - remove <!--break-->
-    - remove UPPERASE
 
 - markup change
     - \n<u>...</u> -> <h4></h4>
@@ -192,3 +186,7 @@ https://github.com/bertramtruong/mailtrap
 - convert
     - comment titles?
     - message titles?
+    - content by anonymous users?
+    - /uurimus|küsitlus|uuring term/
+    - /töö/
+    - remove UPPERASE

@@ -29,7 +29,7 @@ class ConvertBuysells extends ConvertBase
 
         foreach($nodes as $node) {
 
-            $node->title = $node->title . ', ost-müük';
+            // $node->title = $node->title . ', ost-müük';
 
             $category = $this->getNodeTerms($node->nid, [25]); // Kategooria
             $type = $this->getNodeTerms($node->nid, [22]); // Kuulutuse tüüp

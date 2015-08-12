@@ -86,11 +86,13 @@ class ConvertBase extends Command
 
             if ($this->isUserConvertable($node->uid)) {
 
+                $user_id = ($node->uid > 0) ? $node->uid : 1;
+
                 $model = new $modelname;
 
                 $model->id = $node->nid;
                 $model->type = $type;
-                $model->user_id = $node->uid;
+                $model->user_id = $user_id;
                 $model->title = $this->cleanAll($node->title);
                 $model->body = $this->clean($node->body);
 //              $model->body = $node->body;
@@ -197,7 +199,9 @@ class ConvertBase extends Command
         'GPS ja kaardid' => ['tid' => 5001, 'pattern' => '/GPS/'],
         'Autorent' => ['tid' => 5002, 'pattern' => '/(autorent|rendia|renti)/i'],
         'Motoreis' => ['tid' => 5003, 'pattern' => '/(mootor|moto)/i'],
-        'Turvalisus' => ['tid' => 5004, 'pattern' => '/(turval|varasta)/i']
+        'Turvalisus' => ['tid' => 5004, 'pattern' => '/(turval|varasta)/i'],
+        'Uuring' => ['tid' => 5005, 'pattern' => '/(uuring|uurimus|küsitlus)/i'],
+        'Töö' => ['tid' => 5006, 'pattern' => '/(töö)/i']
 
     ];
 
@@ -539,9 +543,12 @@ class ConvertBase extends Command
 
     public function createFlag($flag, $modelname)
     {
+
+        $user_id = ($flag->uid > 0) ? $flag->uid : 1;
+        
         $model = new \App\Flag;
 
-        $model->user_id = $flag->uid;
+        $model->user_id = $user_id;
 
         $model->flag_type = $flag->flag_type;
 
@@ -715,6 +722,7 @@ class ConvertBase extends Command
 
         $string = strip_tags($string, config('site.allowedtags'));
         $string = trim($string);
+        $string = $this->removeUppercase($string);
 
         $string = preg_replace("/<!--(.*?)-->/", '', $string);
         return $string;
@@ -725,6 +733,19 @@ class ConvertBase extends Command
     {
 
         $string = strip_tags($this->clean($string));
+
+        return $string;
+
+    }
+
+    public function removeUppercase($string)
+    {
+
+        if ($string == mb_convert_case($string, MB_CASE_UPPER, 'UTF-8')) {
+
+            return mb_convert_case(mb_substr($string, 0, 1), MB_CASE_UPPER, 'UTF-8')
+                . mb_convert_case(mb_substr($string, 1), MB_CASE_LOWER, 'UTF-8');
+        }
 
         return $string;
 
