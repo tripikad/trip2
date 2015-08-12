@@ -18,6 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
             $table->string('image');
+
+            $table->string('contact_homepage');
+            $table->string('contact_email');
+
             $table->string('role');
             $table->boolean('verified')->default(false);
             $table->string('registration_token')->nullable();

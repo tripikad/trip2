@@ -81,7 +81,7 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 - flights: regexp price from the title
 - misc,expat,buysell -> new term or /content/forum to multitype
 
-- ConvertUnpublishedComments ($latest - 1 month)
+- ConvertUnpublishedComments ($latest - 1 month)?
 
 ### Libraries
 
