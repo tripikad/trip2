@@ -4,11 +4,13 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
-use App;
 
 use DB;
 
 use Imageconv;
+
+use App;
+use App\Content;
 
 class ConvertBase extends Command
 {
@@ -518,7 +520,7 @@ class ConvertBase extends Command
 
         $model = $modelName::findOrFail($id);
 
-        $model->url =  $this->cleanUrl($url);
+        $model->url = $this->cleanUrl($url);
 
         $model->save();
     

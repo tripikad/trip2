@@ -28,15 +28,17 @@ class ConvertPhotos extends ConvertBase
 
         foreach($nodes as $node) {
             
-            $this->convertNode($node, '\App\Content', 'photo');
+            if ($this->convertNode($node, '\App\Content', 'photo')) {
 
-            $this->convertNodeDestinations($node);
+                $this->convertNodeDestinations($node);
 
-            if ($node->filepath) {
+                if ($node->filepath) {
 
-                $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'photo', 'photo');
+                    $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'photo', 'photo');
+                }
+
             }
-
+            
             $this->output->progressAdvance();
 
         }

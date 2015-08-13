@@ -35,27 +35,29 @@ class ConvertNews extends ConvertBase
 
             // Convert the content
 
-            $this->convertNode($node, '\App\Content', 'news');
+            if ($this->convertNode($node, '\App\Content', 'news')) {
       
-            // Convert the image
+                // Convert the image
 
-            if ($matches && $matches[1]) {
-                      
-                $this->convertRemoteImage($node->nid, $matches[1], '\App\Content', 'news', 'photo');
-            
-            }
-
-            // Convert the URL
-
-            if ($url = $node->field_lyhiuudislink_url) {
+                if ($matches && $matches[1]) {
+                          
+                    $this->convertRemoteImage($node->nid, $matches[1], '\App\Content', 'news', 'photo');
                 
-                $this->convertUrl($node->nid, $url, '\App\Content');
-            
+                }
+
+                // Convert the URL
+
+                if ($url = $node->field_lyhiuudislink_url) {
+                    
+                    $this->convertUrl($node->nid, $url, '\App\Content');
+                
+                }
+
+                $this->convertNodeDestinations($node);
+                $this->convertNodeTopics($node);
+
             }
-
-            $this->convertNodeDestinations($node);
-            $this->convertNodeTopics($node);
-
+            
             $this->output->progressAdvance();
 
         }

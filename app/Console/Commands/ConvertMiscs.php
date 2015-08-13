@@ -18,11 +18,13 @@ class ConvertMiscs extends ConvertBase
 
             $node->title = $node->title . ', vabal teemal';
 
-            $this->convertNode($node, '\App\Content', 'forum');
+            if ($this->convertNode($node, '\App\Content', 'forum')) {
 
-            $this->convertNodeDestinations($node);
-            $this->convertNodeTopics($node);
-            $this->newNodeTopics($node);
+                $this->convertNodeDestinations($node);
+                $this->convertNodeTopics($node);
+                $this->newNodeTopics($node);
+
+            }
 
             $this->output->progressAdvance();
 

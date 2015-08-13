@@ -37,11 +37,13 @@ class ConvertForums extends ConvertBase
                 {
                     $model = 'App\Content';
                 
-                    $this->convertNode($node, $model, 'forum');
+                    if ($this->convertNode($node, $model, 'forum')) {
 
-                    $this->convertNodeDestinations($node);
-                    $this->convertNodeTopics($node);
-                    $this->newNodeTopics($node);
+                        $this->convertNodeDestinations($node);
+                        $this->convertNodeTopics($node);
+                        $this->newNodeTopics($node);
+
+                    }
 
                     $this->output->progressAdvance();
 

@@ -88,20 +88,22 @@ class ConvertOffers extends ConvertBase
 
             $node->body = $this->formatFields($node, $fields) . "\n\n" . $node->body;
             
-            $this->convertNode($node, '\App\Content', 'offer');
+            if ($this->convertNode($node, '\App\Content', 'offer')) {
             
-            $this->convertNodeDestinations($node);
+                $this->convertNodeDestinations($node);
 
-            if ($url = $node->field_link_url)
-            {
-                $this->convertUrl($node->nid, $url, '\App\Content');
+                if ($url = $node->field_link_url)
+                {
+                    $this->convertUrl($node->nid, $url, '\App\Content');
+                }
+        
+                if ($node->filepath) {
+
+                    $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'offer', 'photo');
+                }
+
             }
-    
-            if ($node->filepath) {
-
-                $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'offer', 'photo');
-            }
-
+            
             $this->output->progressAdvance();
 
         }

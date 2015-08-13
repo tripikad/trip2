@@ -47,16 +47,18 @@ class ConvertFlights extends ConvertBase
 
             $node->body = $this->formatFields($node, $fields) . "\n\n" . $node->body;
 
-            $this->convertNode($node, 'App\Content', 'flight');
+            if ($this->convertNode($node, 'App\Content', 'flight')) {
 
-            $this->convertNodeDestinations($node);
-            $this->convertNodeCarriers($node);
+                $this->convertNodeDestinations($node);
+                $this->convertNodeCarriers($node);
 
-            if ($url = $node->field_linktooffer_url)
-            {   
-                $this->convertUrl($node->nid, $url, 'App\Content');
+                if ($url = $node->field_linktooffer_url)
+                {   
+                    $this->convertUrl($node->nid, $url, 'App\Content');
+                }
+
             }
-
+            
             $this->output->progressAdvance();
 
         }

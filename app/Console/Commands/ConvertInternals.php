@@ -16,10 +16,12 @@ class ConvertInternals extends ConvertBase
 
         foreach($nodes as $node) {
             
-            $this->convertNode($node, '\App\Content', 'internal');
+            if ($this->convertNode($node, '\App\Content', 'internal')) {
             
-            $this->convertNodeDestinations($node);
-            $this->convertNodeTopics($node);
+                $this->convertNodeDestinations($node);
+                $this->convertNodeTopics($node);
+
+            }
 
             $this->output->progressAdvance();
 

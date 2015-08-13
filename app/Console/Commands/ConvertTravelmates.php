@@ -38,11 +38,13 @@ class ConvertTravelmates extends ConvertBase
 
             $node->body = $this->formatFields($node, $fields) . "\n\n" . $node->body;
 
-            $this->convertNode($node, '\App\Content', 'travelmate');
+            if ($this->convertNode($node, '\App\Content', 'travelmate')) {
             
-            $this->convertNodeDestinations($node);
-            $this->convertNodeTopics($node);
+                $this->convertNodeDestinations($node);
+                $this->convertNodeTopics($node);
 
+            }
+            
             $this->output->progressAdvance();
 
         }

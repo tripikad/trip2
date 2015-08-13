@@ -25,15 +25,18 @@ class ConvertBlogs extends ConvertBase
                 $node->body = preg_replace($pattern, '', $node->body);
             }
             
-            $this->convertNode($node, '\App\Content', 'blog');
+            if ($this->convertNode($node, 'App\Content', 'blog')) {
 
-            $this->convertNodeDestinations($node);
+                $this->convertNodeDestinations($node);
 
-            $pattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/";
+                $pattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/";
 
-            if (preg_match_all($pattern, $node->body, $matches))
-            {
-                $this->convertUrl($node->nid, $matches[0][0], '\App\Content');
+                if (preg_match_all($pattern, $node->body, $matches)) {
+
+                    $this->convertUrl($node->nid, $matches[0][0], 'App\Content');
+                
+                }
+
             }
 
             $this->output->progressAdvance();
@@ -58,9 +61,11 @@ class ConvertBlogs extends ConvertBase
 
             $node->title = $node->title . ', foorumist';
             
-            $this->convertNode($node, '\App\Content', 'blog');
+            if ($this->convertNode($node, '\App\Content', 'blog')) {
             
-            $this->convertNodeDestinations($node);
+                $this->convertNodeDestinations($node);
+
+            }
         
             $this->output->progressAdvance();
 
