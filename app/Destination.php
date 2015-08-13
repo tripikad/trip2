@@ -22,13 +22,13 @@ class Destination extends Model
     public function usersHaveBeen()
     {
 
-        return $this->flags->where('flag_type', 'havebeen')->all();
+        return $this->flags->where('flag_type', 'havebeen');
     }
 
     public function usersWantsToGo()
     {
 
-        return $this->flags->where('flag_type', 'wantstogo')->all();
+        return $this->flags->where('flag_type', 'wantstogo');
     }
 
 }

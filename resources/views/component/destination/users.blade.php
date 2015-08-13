@@ -1,13 +1,15 @@
-<div class="row">
+@foreach($users->chunk(6) as $chunk)
 
-    @foreach($users as $index => $flag)
+    <div class="row">
+
+    @foreach($chunk as $user)
 
         <div class="col-xs-2 utils-padding-bottom">
 
-            <a href="{{ route('user.show', [$flag->user]) }}">
+            <a href="{{ route('user.show', [$user->user]) }}">
                 
                 @include('component.image', [
-                    'image' => $flag->user->imagePath(),
+                    'image' => $user->user->imagePath(),
                     'options' => '-circle'
                 ])
             
@@ -15,8 +17,8 @@
 
         </div>
         
-        @if (($index + 1) % 6 == 0) </div><div class="row"> @endif
-
     @endforeach
 
-</div>
+    </div>
+
+@endforeach
