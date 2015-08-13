@@ -5,6 +5,9 @@ return [
     'show.joined' => 'Joined at :created_at',
     'show.message.create' => 'Send private message',
 
+    'show.havebeen.title' => 'Have been in',
+    'show.wantstogo.title' => 'Wants to go to',
+
     'image.create.title' => 'Add profile image',
     'image.edit.title' => 'Change profile image',
 

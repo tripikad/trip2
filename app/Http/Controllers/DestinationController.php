@@ -16,6 +16,10 @@ class DestinationController extends Controller
 
         $destination =  Destination::findOrFail($id);
         
+        return View::make('pages.destination.index')
+            ->with('destination', $destination)
+            ->render();
+
         /*        
         $image = $destination->content->where('type', 'photo')->first();
 
@@ -24,7 +28,7 @@ class DestinationController extends Controller
             ->with('image', $image->imagePath())
             ->render();
 
-        */
+
 
         $fronts = [];
 
@@ -48,6 +52,8 @@ class DestinationController extends Controller
             ->with('title', $destination->name)
             ->with('fronts', $fronts)
             ->render();
+
+        */
 
     }
 

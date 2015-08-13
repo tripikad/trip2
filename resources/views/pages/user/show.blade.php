@@ -1,4 +1,4 @@
-@extends('layouts.medium')
+@extends('layouts.main')
 
 @section('title')
     {{ $user->name }}
@@ -44,7 +44,7 @@
 @stop
 
 
-@section('content.medium')
+@section('content')
     
     <div class="utils-border-bottom">
 
@@ -52,6 +52,26 @@
         'content_count' => $content_count,
         'comment_count' => $comment_count
     ])
+
+    </div>
+
+    <div class="row utils-border-bottom">
+
+        <div class="col-sm-6">
+        
+            <h3>{{ trans('user.show.havebeen.title') }}</h3>
+
+            @include('component.user.havebeen')
+    
+        </div>
+
+        <div class="col-sm-6">
+        
+            <h3>{{ trans('user.show.wantstogo.title') }}</h3>
+
+            @include('component.user.wantstogo')
+    
+        </div>
 
     </div>
 

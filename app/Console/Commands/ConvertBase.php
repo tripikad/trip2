@@ -105,8 +105,8 @@ class ConvertBase extends Command
             
                 $this->convertUser($node->uid);
                 $this->convertComments($node->nid);
-                $this->convertFlags($node->nid, $modelname, 'node');
-                $this->convertAlias($node->nid, $modelname, 'node');
+                $this->convertFlags($node->nid, 'App\Content', 'node');
+                $this->convertAlias($node->nid, 'App\Content', 'node');
 
                 return true;
             
@@ -365,7 +365,7 @@ class ConvertBase extends Command
         
                 $this->convertUser($user_id);
                 
-                $this->convertFlags($comment->cid, '\App\Comment', 'comment');
+                $this->convertFlags($comment->cid, 'App\Comment', 'comment');
                 
             }
         
@@ -650,7 +650,7 @@ class ConvertBase extends Command
     {
         $flag_map = array(
             '6' => 'havebeen',
-            '7' => 'wanttogo',
+            '7' => 'wantstogo',
          );
 
         $destinations = \App\Destination::all();
@@ -664,7 +664,7 @@ class ConvertBase extends Command
                 if (array_key_exists($flag->fid, $flag_map)) {
 
                     $flag->flag_type = $flag_map[$flag->fid];
-                    $this->createFlag($flag, '\App\Destination');
+                    $this->createFlag($flag, 'App\Destination');
 
                 }
             }
