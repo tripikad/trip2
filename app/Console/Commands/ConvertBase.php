@@ -418,7 +418,7 @@ class ConvertBase extends Command
         // Eliminating mail duplicates using
         // SELECT uid, mail, COUNT(*) c FROM users GROUP BY mail HAVING c > 1;
 
-        return ($user->status == 1 && ! in_array($user->uid, [7288556, 4694, 3661]));
+        return ($user && $user->status == 1 && ! in_array($user->uid, [7288556, 4694, 3661]));
     }
 
     public function getRole($rid)
