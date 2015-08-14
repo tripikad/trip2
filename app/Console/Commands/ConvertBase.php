@@ -580,20 +580,28 @@ class ConvertBase extends Command
 
     // Flags
 
-    public function getFlags($id, $type, $uid = null)
+    public function getFlags($id, $type)
     {
-        $flags = \DB::connection($this->connection)
+        return \DB::connection($this->connection)
            ->table('flag_content')
            ->where('content_id', $id)
            ->where('content_type', $type) // node, comment, term
-           ->orderBy('timestamp', 'desc');
+           ->orderBy('timestamp', 'desc')
+           ->get();
 
-        if (isset($uid)) {
+    }
 
-            $flags->where('uid', $uid);
-        }
 
-        return $flags->get();
+    public function getUserDestinationFlags($uid)
+    {
+        return \DB::connection($this->connection)
+           ->table('flag_content')
+           ->where('uid', $uid)
+           ->where('content_type', 'term')
+           ->whereIn('fid', [6, 7])
+           ->orderBy('timestamp', 'desc')
+           ->get();
+
     }
 
 
@@ -650,17 +658,16 @@ class ConvertBase extends Command
 
     public function convertUserDestinationFlags($uid)
     {
+
         $flag_map = array(
             '6' => 'havebeen',
             '7' => 'wantstogo',
          );
 
-        $destinations = \App\Destination::all();
-
-        foreach ($destinations as $destination) {
+        $flags = $this->getUserDestinationFlags($uid);
         
-            $flags = $this->getFlags($destination->id, 'term', $uid);
-            
+        if ($flags) {
+
             foreach($flags as $flag) {
 
                 if (array_key_exists($flag->fid, $flag_map)) {
@@ -670,8 +677,8 @@ class ConvertBase extends Command
 
                 }
             }
-    
-        } 
+
+        }
     
     }
 
