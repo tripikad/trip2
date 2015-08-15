@@ -16,7 +16,7 @@ class DestinationController extends Controller
 
         $destination =  Destination::findOrFail($id);
 
-        $image = $destination->content()->whereType('photo')->first();
+        $image = $destination->content()->whereType('photo')->latest()->first();
         
         return View::make('pages.destination.index')
             ->with('destination', $destination)
