@@ -34,7 +34,8 @@ class ConvertMessages extends ConvertBase
 
             foreach($nodes as $node) {
 
-                if ($node->author !== $node->uid
+                if (! Message::find($node->mid)
+                    && $node->author !== $node->uid
                     && $this->isUserConvertable($node->author)
                     && $this->isUserConvertable($node->uid)
                 ) {
