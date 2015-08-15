@@ -20,7 +20,7 @@ class DestinationController extends Controller
         
         return View::make('pages.destination.index')
             ->with('destination', $destination)
-            ->with('image', $image->imagePath())
+            ->with('image', $image ? $image->imagePath() : null)
             ->render();
 
 

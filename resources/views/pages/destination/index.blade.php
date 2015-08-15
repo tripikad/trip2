@@ -11,9 +11,9 @@
 <div class="utils-border-bottom">
 
     @include('component.card', [
-        'image' => $image,
         'title' => $destination->name,
-        'options' => '-center -empty -wide -large'
+        'options' => '-center -wide -large',
+        'image' => $image,
     ])
 
 </div>
