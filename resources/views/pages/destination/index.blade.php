@@ -29,7 +29,13 @@
         
         @if(count($destination->usersHaveBeen()) > 0)
 
-            <h3 class="utils-padding-bottom">{{ trans('destination.index.user.havebeen.title') }}</h3>
+            <h3 class="utils-padding-bottom">
+            
+                {{ trans('destination.index.user.havebeen.title', [
+                    'count' => count($destination->usersHaveBeen())
+                ]) }}
+            
+            </h3>
     
             @include('component.destination.users',
                 ['users' => $destination->usersHaveBeen()]
@@ -43,8 +49,13 @@
 
         @if(count($destination->usersWantsToGo()) > 0)
 
-            <h3 class="utils-padding-bottom">{{ trans('destination.index.user.wantstogo.title') }}</h3>
-
+        <h3 class="utils-padding-bottom">
+        
+            {{ trans('destination.index.user.wantstogo.title', [
+                'count' => count($destination->usersWantsToGo())
+            ]) }}
+        
+        </h3>
             @include('component.destination.users',
                 ['users' => $destination->usersWantsToGo()]
             )

@@ -2,7 +2,7 @@
 
 return [
 
-    'index.user.havebeen.title' => 'Have been here',
-    'index.user.wantstogo.title' => 'Want to go here',
+    'index.user.havebeen.title' => ':count have been here',
+    'index.user.wantstogo.title' => ':count want to go here',
 
 ];
