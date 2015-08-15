@@ -6,7 +6,22 @@
 
 @stop
 
+@section('header')
+
+<div class="utils-border-bottom">
+
+    @include('component.card', [
+        'image' => $image,
+        'title' => $destination->name,
+        'options' => '-center -empty -wide -large'
+    ])
+
+</div>
+
+@stop
+
 @section('content')
+
 
 <div class="row utils-border-bottom">
 

@@ -30,7 +30,7 @@
     }
 
     &.-wide {
-        padding-bottom: 20%;
+        padding-bottom: 15%;
     }
 
     &.-portrait {
@@ -80,11 +80,16 @@
         color: black;
     }
 
+    &.-large > .overlay > .content > h3 {
+        font-size: $font-size-h2;
+    }
+
     @media (max-width: $screen-sm-max) {
 
         .overlay > .content > h3 {
             font-size: $font-size-xs-h4;
         }
+    
     }
 
 }
