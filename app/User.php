@@ -123,12 +123,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function destinationHaveBeen()
     {
-        return $this->hasMany('App\Flag')->where('flag_type', 'havebeen')->get();
+        return $this->flags->where('flag_type', 'havebeen');
     }
 
     public function destinationWantsToGo()
     {
-        return $this->hasMany('App\Flag')->where('flag_type', 'wantstogo')->get();
+        return $this->flags->where('flag_type', 'wantstogo');
     }
 
 }

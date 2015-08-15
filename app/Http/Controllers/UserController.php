@@ -20,7 +20,7 @@ class UserController extends Controller
 
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
 
-        $user = User::findorFail($id);
+        $user = User::with('flags', 'flags.flaggable')->findorFail($id);
   
         $content_count = $user
             ->contents()
