@@ -103,7 +103,7 @@ class ConvertUsers extends ConvertBase
     
         $this->info('Converting other users');
 
-        $this->output->progressStart(count($users));
+        $this->output->progressStart($users->count());
 
         $i = 0;
 
