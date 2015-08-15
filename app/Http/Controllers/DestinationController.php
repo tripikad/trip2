@@ -14,7 +14,8 @@ class DestinationController extends Controller
     public function index($id)
     {
 
-        $destination =  Destination::findOrFail($id);
+        $destination =  Destination::with('flags', 'flags.user')
+            ->findOrFail($id);
 
         $image = $destination->content()->whereType('photo')->latest()->first();
         
