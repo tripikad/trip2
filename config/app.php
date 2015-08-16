@@ -140,6 +140,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Baum\Providers\BaumServiceProvider::class,
         
         /*
          * Application Service Providers...

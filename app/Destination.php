@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Destination extends Model
+use Baum;
+
+class Destination extends Baum\Node
 {
 
     public $timestamps = false;

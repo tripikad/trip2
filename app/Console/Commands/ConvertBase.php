@@ -130,14 +130,25 @@ class ConvertBase extends Command
         return \DB::connection($this->connection)
             ->table('term_data')
             ->join('term_hierarchy', 'term_data.tid', '=', 'term_hierarchy.tid')        
-            ->whereIn('term_data.vid', (array) $vids);
+            ->whereIn('term_data.vid', (array) $vids)
+            ->orderBy('term_data.tid');
+    }
+
+    public function getTermById($id)
+    {
+        return \DB::connection($this->connection)
+            ->table('term_data')  
+            ->join('term_hierarchy', 'term_data.tid', '=', 'term_hierarchy.tid')        
+            ->where('term_data.tid', '=', $id)
+            ->first();
     }
 
     public function getTermByName($name)
     {
         return \DB::connection($this->connection)
             ->table('term_data')  
-            ->where('name', '=', $name)
+            ->join('term_hierarchy', 'term_data.tid', '=', 'term_hierarchy.tid')        
+            ->where('term_data.name', '=', $name)
             ->first();
     }
 

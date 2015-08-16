@@ -2,11 +2,44 @@
 
 namespace App\Console\Commands;
 
+use App\Destination;
+
 class ConvertTerms extends ConvertBase
 {
 
     protected $signature = 'convert:terms';
 
+    public function createDestination($term)
+    {
+
+        if (! Destination::find($term->tid)) {
+
+            $model = new Destination;
+
+            $model->id = $term->tid;
+            $model->name = $this->cleanAll($term->name);
+            
+            $model->save();
+
+            if ($term->parent) {
+
+                $parent = Destination::find($term->parent);
+                
+                if (! $parent) {
+                
+                    $parent = $this->createDestination($this->getTermById($term->parent));
+
+                }
+                
+                $model->makeChildOf($parent);         
+
+            }
+
+            return $model;
+
+        }
+
+    }
 
     public function convertDestinations()
     {
@@ -16,10 +49,26 @@ class ConvertTerms extends ConvertBase
 
         foreach($terms as $term)
         {   
-            $this->createTerm($term, '\App\Destination', true);        
+            $this->createDestination($term);        
         }
     }
 
+    public function cleanupDestinations()
+    {
+        $destinations = Destination::where('id', '>', 8)->where('id', '!=', 819)->get();
+
+        foreach($destinations as $destination)
+        {   
+            if ($destination->isRoot()) {
+                
+                $parent_id = $this->getTermById($destination->id)->parent;
+                $parent = Destination::find($parent_id);
+
+                $destination->makeChildOf($parent);         
+
+            }     
+        }
+    }
 
     public function convertTopics()
     {
@@ -71,9 +120,10 @@ class ConvertTerms extends ConvertBase
     public function handle()
     {
         $this->convertDestinations();
-        $this->convertTopics();
-        $this->addTopics();
-        $this->convertCarriers();
+        $this->cleanupDestinations();
+        // $this->convertTopics();
+        // $this->addTopics();
+        // $this->convertCarriers();
         
     }
 
