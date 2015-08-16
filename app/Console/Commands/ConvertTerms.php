@@ -9,6 +9,28 @@ class ConvertTerms extends ConvertBase
 
     protected $signature = 'convert:terms';
 
+    public function getDestinationRoots()
+    {
+        return \DB::connection($this->connection)
+            ->table('term_data')
+            ->join('term_hierarchy', 'term_data.tid', '=', 'term_hierarchy.tid')        
+            ->where('term_data.vid', 6)
+            ->where('term_hierarchy.parent', 0)
+            ->select('term_data.tid')
+            ->lists('term_data.tid', null);
+    }
+
+    public function getDestinationChildrens($parents)
+    {
+        return \DB::connection($this->connection)
+            ->table('term_data')
+            ->join('term_hierarchy', 'term_data.tid', '=', 'term_hierarchy.tid')        
+            ->where('term_data.vid', 6)
+            ->whereIn('term_hierarchy.parent', $parents)
+            ->select('term_data.tid')
+            ->lists('term_data.tid', null);
+    }
+
     public function createDestination($term)
     {
 
@@ -24,18 +46,9 @@ class ConvertTerms extends ConvertBase
             if ($term->parent) {
 
                 $parent = Destination::find($term->parent);
-                
-                if (! $parent) {
-                
-                    $parent = $this->createDestination($this->getTermById($term->parent));
-
-                }
-                
                 $model->makeChildOf($parent);         
 
             }
-
-            return $model;
 
         }
 
@@ -48,35 +61,50 @@ class ConvertTerms extends ConvertBase
         $this->info('Converting destinations');
         $this->output->progressStart(count($terms));
 
-        foreach($terms as $term)
-        {   
+        $roots = $this->getDestinationRoots();
+
+        foreach($roots as $root) {
+
+            $term = $this->getTermById($root);
             $this->createDestination($term);
             $this->output->progressAdvance();
       
         }
 
-        Destination::rebuild(true);
+        $firstChildrens = $this->getDestinationChildrens($roots);
+
+        foreach($firstChildrens as $firstChildren) {
+
+            $term = $this->getTermById($firstChildren);
+            $this->createDestination($term);
+            $this->output->progressAdvance();
+        
+        }
+
+        $secondChildrens = $this->getDestinationChildrens($firstChildrens);
+
+        foreach($secondChildrens as $secondChildren) {
+
+            $term = $this->getTermById($secondChildren);
+            $this->createDestination($term);
+            $this->output->progressAdvance();
+        
+        }
+
+        $thirdChildrens = $this->getDestinationChildrens($secondChildrens);
+
+        foreach($thirdChildrens as $thirdChildren) {
+
+            $term = $this->getTermById($thirdChildren);
+            $this->createDestination($term);
+            $this->output->progressAdvance();
+        
+        }
 
         $this->output->progressFinish();
 
     }
 
-    public function cleanupDestinations()
-    {
-        $destinations = Destination::where('id', '>', 8)->where('id', '!=', 819)->get();
-
-        foreach($destinations as $destination) {
-
-            if ($destination->isRoot()) {
-                
-                $parent_id = $this->getTermById($destination->id)->parent;
-                $parent = Destination::find($parent_id);
-
-                $destination->makeChildOf($parent);         
-
-            }     
-        }
-    }
 
     public function convertTopics()
     {
@@ -145,12 +173,12 @@ class ConvertTerms extends ConvertBase
 
     public function handle()
     {
+
         $this->convertDestinations();
-        $this->cleanupDestinations();
         $this->convertTopics();
         $this->addTopics();
         $this->convertCarriers();
-        
+
     }
 
 }

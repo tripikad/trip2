@@ -17,7 +17,7 @@ class ContentController extends Controller
 
     public function index(Request $request, $type)
     {
-       
+
         $contents = Content::whereType($type)
             ->with(config("content.types.$type.with"))
             ->latest(config("content.types.$type.latest"));

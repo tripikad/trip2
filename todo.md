@@ -7,10 +7,6 @@ Legend: **High priority** Normal priority *Future idea*
 https://packagist.org/packages/texy/texy
 https://packagist.org/packages/mews/purifier
 
-- Terms:
-https://packagist.org/packages/baum/baum
-
-
 
 ### Content
 
@@ -77,6 +73,7 @@ https://andrisreinman.com/efektiivne-ip-kaunter/
 - flights: regexp price from the title
 - misc,expat,buysell -> new term or /content/forum to multitype
 - commercial users?
+- ó -> õ
 
 ### Libraries
 
@@ -171,3 +168,5 @@ decide on follow status
 - convert user profiles
 - convert subscription status
 - convert havebeen / wanttogo
+- Terms:
+https://packagist.org/packages/baum/baum
