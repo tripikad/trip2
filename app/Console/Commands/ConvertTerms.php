@@ -121,9 +121,9 @@ class ConvertTerms extends ConvertBase
     {
         $this->convertDestinations();
         $this->cleanupDestinations();
-        // $this->convertTopics();
-        // $this->addTopics();
-        // $this->convertCarriers();
+        $this->convertTopics();
+        $this->addTopics();
+        $this->convertCarriers();
         
     }
 
