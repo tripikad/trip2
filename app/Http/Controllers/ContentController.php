@@ -22,17 +22,24 @@ class ContentController extends Controller
             ->latest(config("content.types.$type.latest"));
     
         if ($request->destination) {
+
+            $descendants = Destination::find($request->destination)
+                ->descendantsAndSelf()
+                ->lists('id');
+
             $contents = $contents
                 ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
                 ->select('contents.*')
-                ->where('content_destination.destination_id', '=', $request->destination);
+                ->whereIn('content_destination.destination_id', $descendants);
         }   
 
         if ($request->topic) {
+
             $contents = $contents
                 ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
                 ->select('contents.*')
                 ->where('content_topic.topic_id', '=', $request->topic);
+        
         } 
 
         $contents = $contents->simplePaginate(config("content.types.$type.paginate"));
