@@ -34,6 +34,9 @@
                 'updated_at' => $content->updated_at->diffForHumans(),
                 'destinations' => $content->destinations->implode('name', ','),
                 'tags' => $content->topics->implode('name', ','),
+            ]),
+            'extra' => view('component.number', [
+                'number' => count($content->comments),
             ])
         ])
         
