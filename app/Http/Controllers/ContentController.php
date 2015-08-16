@@ -45,23 +45,8 @@ class ContentController extends Controller
 
         $contents = $contents->simplePaginate(config("content.types.$type.paginate"));
 
-        $destinations = Destination::whereHas('content', function ($query) use ($type) {
-                $query->whereType($type);
-            })
-            ->select('name', 'id')
-            ->orderBy('name')
-            ->lists('name', 'id')
-            ->transform(function ($item, $key) {
-                $ancestors = Destination::find($key)->ancestorsAndSelf()->lists('name')->toArray();
-                return join(' › ', $ancestors);
-            })
-            ->sort();
-
-        $topics = Topic::whereHas('content', function ($query) use ($type) {
-                $query->whereType($type);
-            })
-            ->orderBy('name')
-            ->lists('name', 'id');
+        $destinations = Destination::getNames($type);
+        $topics = Topic::getNames($type);
 
         return \View::make("pages.content.$type.index")
             ->with('contents', $contents)

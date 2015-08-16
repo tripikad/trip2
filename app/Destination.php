@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+use Cache;
+
 use Baum;
 
 class Destination extends Baum\Node
@@ -31,6 +33,28 @@ class Destination extends Baum\Node
     {
 
         return $this->flags->where('flag_type', 'wantstogo');
+    }
+
+    static function getNames($type)
+    {
+        
+        return Cache::rememberForever("destination.names.$type", function() use ($type) {
+        
+            return Destination::whereHas('content', function ($query) use ($type) {
+                    $query->whereType($type);
+                })
+                ->select('name', 'id')
+                ->lists('name', 'id')
+                ->transform(function ($item, $key) {
+                    
+                    $ancestors = Destination::find($key)->ancestorsAndSelf()->lists('name')->toArray();
+                    return join(' › ', $ancestors);
+                
+                })
+                ->sort();
+        
+        });
+    
     }
 
 }
