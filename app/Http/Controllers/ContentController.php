@@ -10,6 +10,7 @@ use Imageconv;
 
 use App\Content;
 use App\Destination;
+use App\Topic;
 
 class ContentController extends Controller
 {
@@ -44,14 +45,19 @@ class ContentController extends Controller
 
         $contents = $contents->simplePaginate(config("content.types.$type.paginate"));
 
-        $destinations = \App\Destination::whereHas('content', function ($query) use ($type) {
+        $destinations = Destination::whereHas('content', function ($query) use ($type) {
                 $query->whereType($type);
             })
             ->select('name', 'id')
             ->orderBy('name')
-            ->lists('name', 'id');
+            ->lists('name', 'id')
+            ->transform(function ($item, $key) {
+                $ancestors = Destination::find($key)->ancestorsAndSelf()->lists('name')->toArray();
+                return join(' › ', $ancestors);
+            })
+            ->sort();
 
-        $topics = \App\Topic::whereHas('content', function ($query) use ($type) {
+        $topics = Topic::whereHas('content', function ($query) use ($type) {
                 $query->whereType($type);
             })
             ->orderBy('name')
