@@ -67,10 +67,12 @@
                         --}}
 
                     <h3>{{ trans('user.show.havebeen.title') }}</h3>
-
+                    {{ dump($user->destinationHaveBeen()) }}
+               {{--
                     @include('component.user.destination', [
                         'destinations' => $user->destinationHaveBeen() 
                     ])
+                      --}}
 {{--
 
                 @endif
