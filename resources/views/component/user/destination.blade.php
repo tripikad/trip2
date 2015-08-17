@@ -5,7 +5,7 @@
         <li>
 {{-- {{ route('destination.index', [$destination->flaggable]) }} --}}
 
-            <a href=""> {{ dump($destination) }} </a>
+            <a href=""> {{ dump($flag) }} </a>
 
         </li>
 
