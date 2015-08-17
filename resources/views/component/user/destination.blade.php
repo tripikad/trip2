@@ -2,7 +2,7 @@
 
     @foreach ($destinations as $destination)
 
-{{ dump($destination) }}
+{{ dump($destination->flaggable) }}
 
         <li>
 {{-- 
