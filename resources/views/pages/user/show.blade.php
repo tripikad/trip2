@@ -65,12 +65,11 @@
                 @if (count($user->destinationHaveBeen()) > 0)
                 
                     <h3>{{ trans('user.show.havebeen.title') }}</h3>
-{{--
 
                     @include('component.user.destination', [
                         'destinations' => $user->destinationHaveBeen() 
                     ])
---}}
+
                 @endif
         
             </div>
