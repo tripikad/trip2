@@ -67,7 +67,7 @@
                     <h3>{{ trans('user.show.havebeen.title') }}</h3>
 
                     @include('component.user.destination', [
-                        'flags' => $user->destinationHaveBeen() 
+                        'destinations' => $user->destinationHaveBeen() 
                     ])
 
                 @endif
@@ -79,11 +79,11 @@
                 @if (count($user->destinationWantsToGo()) > 0)
 
                     <h3>{{ trans('user.show.wantstogo.title') }}</h3>
-{{--
+
                     @include('component.user.destination', [
                         'destinations' => $user->destinationWantsToGo() 
                     ])
---}}
+
                 @endif
         
             </div>

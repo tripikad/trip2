@@ -1,15 +1,21 @@
-<ul class="list-inlinee">
+<ul class="list-inline">
 
-    @foreach ($flags as $flag)
+    @foreach ($destinations as $destination)
 
-        <li>
-{{-- {{ route('destination.index', [$destination->flaggable]) }} --}}
+        @if(isset($destination->flaggable))
+        
+            <li>
 
-            <a href=""> {{ dump($flag->flaggable) }} </a>
+                <a href="{{ route('destination.index', [$destination->flaggable]) }}">
+                
+                    {{ $destination->flaggable->name }}
+                
+                </a>
 
-        </li>
+            </li>
+
+        @endif
 
     @endforeach
 
 </ul>
-
