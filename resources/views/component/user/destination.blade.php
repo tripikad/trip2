@@ -2,13 +2,11 @@
 
     @foreach ($destinations as $destination)
 
-{{ dump($destination->flaggable) }}
-
         <li>
-{{-- 
+{{-- {{ route('destination.index', [$destination->flaggable]) }} --}}
 
-            <a href="{{ route('destination.index', [$destination->flaggable]) }}"> {{ $destination->flaggable->name }} </a>
---}}
+            <a href=""> {{ $destination->flaggable->name }} </a>
+
         </li>
 
     @endforeach
