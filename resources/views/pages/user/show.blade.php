@@ -61,7 +61,8 @@
         <div class="row utils-border-bottom">
 
             <div class="col-sm-6">
-                
+                {{--
+
                 @if (count($user->destinationHaveBeen()) > 0)
                 
                     <h3>{{ trans('user.show.havebeen.title') }}</h3>
@@ -71,7 +72,8 @@
                     ])
 
                 @endif
-        
+        --}}
+
             </div>
 
             <div class="col-sm-6">
