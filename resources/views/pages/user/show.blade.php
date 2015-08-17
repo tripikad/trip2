@@ -77,7 +77,8 @@
             </div>
 
             <div class="col-sm-6">
-            
+                            {{--
+
                 @if (count($user->destinationWantsToGo()) > 0)
 
                     <h3>{{ trans('user.show.wantstogo.title') }}</h3>
@@ -87,7 +88,8 @@
                     ])
 
                 @endif
-        
+                --}}
+
             </div>
 
         </div>
