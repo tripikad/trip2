@@ -67,7 +67,7 @@
                     <h3>{{ trans('user.show.havebeen.title') }}</h3>
 
                     @include('component.user.destination', [
-                        'destinations' => $user->destinationHaveBeen() 
+                        'flags' => $user->destinationHaveBeen() 
                     ])
 
                 @endif
