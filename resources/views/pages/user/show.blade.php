@@ -57,7 +57,7 @@
 
 {{--
     @if (count($user->destinationHaveBeen()) > 0 || count($user->destinationWantsToGo()) > 0)
-
+--}}
         <div class="row utils-border-bottom">
 
             <div class="col-sm-6">
@@ -89,7 +89,7 @@
             </div>
 
         </div>
-
+{{--
     @endif
     --}}
 
