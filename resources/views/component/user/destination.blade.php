@@ -2,7 +2,7 @@
 
     @foreach ($destinations as $destination)
 
-{{ dump($destinations) }}
+{{ dump($destination) }}
 
         <li>
 {{-- 
