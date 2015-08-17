@@ -1,5 +1,5 @@
 {{ dump($destinations) }}
-
+{{-- 
 <ul class="list-inline">
 
     @foreach ($destinations as $destination)
@@ -14,4 +14,4 @@
 
 </ul>
 
-@endif
+--}}
