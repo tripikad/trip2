@@ -1,4 +1,4 @@
-@isset($destinations)
+{{ dump($destinations) }}
 
 <ul class="list-inline">
 
