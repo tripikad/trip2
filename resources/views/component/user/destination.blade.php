@@ -1,3 +1,5 @@
+@isset($destinations)
+
 <ul class="list-inline">
 
     @foreach ($destinations as $destination)
@@ -11,3 +13,5 @@
     @endforeach
 
 </ul>
+
+@endif
