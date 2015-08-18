@@ -1,10 +1,18 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ $title or ''}}
+    {{ trans('frontpage.index.search.title') }}
 @stop
 
+
 @section('content')
+
+<div class="utils-border-bottom">
+
+    @include('component.frontpage.search')
+
+</div>
+
 
 <div class="utils-border-bottom">
 

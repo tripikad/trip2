@@ -9,6 +9,7 @@ use View;
 use DB;
 
 use App\Content;
+use App\Destination;
 
 class FrontpageController extends Controller
 {
@@ -32,10 +33,21 @@ class FrontpageController extends Controller
         
         }
         
-            return View::make('pages.frontpage.index')
-                ->with('fronts', $fronts)
-                ->render();
+        $destinations = Destination::getNames();
+
+        return View::make('pages.frontpage.index')
+            ->with('destinations', $destinations)
+            ->with('fronts', $fronts)
+            ->render();
         
+    }
+
+    public function search(Request $request)
+    {
+
+        return redirect()
+            ->route('destination.index', [$request->destination]);
+
     }
 
 }

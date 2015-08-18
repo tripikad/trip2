@@ -2,7 +2,9 @@
 
 // Frontpage
 
-get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage']);
+get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
+
+post('/', ['uses' => 'FrontpageController@search', 'as' => 'frontpage.search']);
 
 // Registration
 

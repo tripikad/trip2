@@ -35,13 +35,13 @@ class Destination extends Baum\Node
         return $this->flags->where('flag_type', 'wantstogo');
     }
 
-    static function getNames($type)
+    static function getNames($type = null)
     {
         
         return Cache::rememberForever("destination.names.$type", function() use ($type) {
         
             return Destination::whereHas('content', function ($query) use ($type) {
-                    $query->whereType($type);
+                    if ($type) $query->whereType($type);
                 })
                 ->select('name', 'id')
                 ->lists('name', 'id')
