@@ -24,6 +24,7 @@ class RegistrationController extends Controller
             'name' => 'required|max:64|unique:users',
             'email' => 'required|email|max:64|unique:users',
             'password' => 'required|confirmed|min:6',
+            'eula' => 'required'
         ]);
 
         $fields = [

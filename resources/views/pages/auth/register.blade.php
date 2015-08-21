@@ -37,6 +37,13 @@
         </div>
 
         <div class="form-group">
+            {!! Form::checkbox('eula', false) !!}            
+            {!! trans('auth.register.field.eula.title', [
+                'link' => '<a href="' . route('content.show', ['static', 25151]) . '">' . trans('auth.register.field.eula.title.link'). '</a>'
+            ]) !!}
+        </div>
+
+        <div class="form-group">
             {!! Form::submit(trans('auth.register.submit.title'), [
                 'class' => 'btn btn-primary btn-lg btn-block
             ']) !!}
