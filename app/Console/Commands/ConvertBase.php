@@ -426,10 +426,20 @@ class ConvertBase extends Command
 
         $user = $this->getUser($uid);
 
+        $blockedSender = DB::connection($this->connection)
+            ->table('pm_block_user')
+            ->where('author', '=', $uid)
+            ->get();
+
         // Eliminating mail duplicates using
         // SELECT uid, mail, COUNT(*) c FROM users GROUP BY mail HAVING c > 1;
 
-        return ($user && $user->status == 1 && ! in_array($user->uid, [7288556, 4694, 3661]));
+        return ($user
+            && $user->status == 1
+            && ! $blockedSender
+            && ! in_array($user->uid, [7288556, 4694, 3661])
+        );
+    
     }
 
     public function getRole($rid)

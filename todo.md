@@ -10,10 +10,8 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Convert
 
-- convert private messages from blocked users?
 - convert private message sending setting in profile
 - convert private message read statuses
-- convert follow status
 
 - convert non-forum followed pages?
 - convert photo: Mitte-reisipildid?
@@ -123,3 +121,4 @@ Dropzone.js
 - convert havebeen / wanttogo
 - Terms:
 https://packagist.org/packages/baum/baum
+- convert private messages from blocked users?
