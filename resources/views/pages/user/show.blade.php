@@ -45,13 +45,19 @@
 
 
 @section('content')
-    
+
+    <div class="utils-border-bottom text-center">
+
+        @include('component.user.contact')
+
+    </div>
+
     <div class="utils-border-bottom">
 
-    @include('component.user.count', [
-        'content_count' => $content_count,
-        'comment_count' => $comment_count
-    ])
+        @include('component.user.count', [
+            'content_count' => $content_count,
+            'comment_count' => $comment_count
+        ])
 
     </div>
 

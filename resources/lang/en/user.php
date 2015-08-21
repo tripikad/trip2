@@ -40,6 +40,11 @@ return [
     'follow.index.title' => ':user follows',
     'follow.index.row.text' => 'By :user at :created_at',
 
+    'show.contact_facebook.title' => 'Facebook',
+    'show.contact_twitter.title' => 'Twitter',
+    'show.contact_instagram.title' => 'Instagram',
+    'show.contact_homepage.title' => 'Homepage',
+
     'show.messages.index.title' => ':user messages',
     'show.messages.index.row.text' => 'By :user, last message at :created_at',
 
