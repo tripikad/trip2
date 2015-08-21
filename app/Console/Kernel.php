@@ -23,9 +23,9 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ConvertNews::class,
         \App\Console\Commands\ConvertOffers::class,
         \App\Console\Commands\ConvertPhotos::class,
+        \App\Console\Commands\ConvertStatic::class,
         \App\Console\Commands\ConvertTerms::class,
         \App\Console\Commands\ConvertTravelmates::class,
-
         \App\Console\Commands\ConvertUsers::class,
 
         \App\Console\Commands\StatsAccess::class,

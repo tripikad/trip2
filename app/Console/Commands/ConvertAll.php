@@ -22,7 +22,9 @@ class ConvertAll extends ConvertBase
         $this->call('convert:news');
         $this->call('convert:offers');
         $this->call('convert:photos');
+        $this->call('convert:static');
         $this->call('convert:travelmates');
+        
         $this->call('convert:follows');
         $this->call('convert:messages');
 

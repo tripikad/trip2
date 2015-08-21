@@ -268,6 +268,6 @@ return [
         ],
     ],
 
-    'allowed' => '(forum|blog|travelmate|news|flight|photo|offer|internal)'
+    'allowed' => '(forum|blog|travelmate|news|flight|photo|offer|internal|static)'
 
 ];
