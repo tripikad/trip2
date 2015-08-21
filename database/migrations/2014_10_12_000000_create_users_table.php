@@ -24,6 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('contact_twitter')->nullable();
             $table->string('contact_instagram')->nullable();
 
+            $table->boolean('notify_message')->default(false);
+            $table->boolean('notify_follow')->default(false);
+
             $table->string('role');
             $table->boolean('verified')->default(false);
             $table->string('registration_token')->nullable();

@@ -10,7 +10,6 @@ Legend: **High priority** Normal priority *Future idea*
 
 ### Convert
 
-- convert private message sending setting in profile
 - convert private message read statuses
 
 - convert non-forum followed pages?

@@ -16,6 +16,7 @@ class ConvertFollows extends ConvertBase
         return DB::connection($this->connection)
             ->table('sein_subscribe')
             ->latest('subscribe_id')
+            ->whereActive(1)
             ->skip($this->skip)
             ->take($this->take);
     
@@ -38,7 +39,6 @@ class ConvertFollows extends ConvertBase
 
                     $model->id = $follow->subscribe_id;
                     $model->user_id = $follow->uid;
-                    $model->status = $follow->active;
                     $model->followable_type = 'App\Content';
                     $model->followable_id = $follow->nid;
 

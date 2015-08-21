@@ -452,6 +452,14 @@ class ConvertBase extends Command
         return $this->roleMap[$role];
     }
 
+    public function getUserNotifyMessage($uid) {
+
+        return \DB::connection($this->connection)
+            ->table('pm_email_notify')      
+            ->where('user_id', $uid)
+            ->first();    
+    }
+
     public function createUser($user)
     {
 
@@ -507,6 +515,13 @@ class ConvertBase extends Command
 
             $model->verified = true;
             $model->registration_token = null;
+
+            // if ($notifyMessage = $this->getUserNotifyMessage($user->uid)) {
+            //
+            //    $model->notify_message = 1; 
+            //
+            // }
+
             $model->save();
 
             if ($user->picture) {
@@ -514,8 +529,6 @@ class ConvertBase extends Command
                 $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user', 'user');
             
             }
-
-
 
         }
     
