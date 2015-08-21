@@ -3,91 +3,50 @@ Legend: **High priority** Normal priority *Future idea*
 ## TODO
 
 
-- Content sanitizing:
-https://packagist.org/packages/texy/texy
-https://packagist.org/packages/mews/purifier
-
-
 ### Content
 
 - **What to do with extra fields (buysell, travelmates, flight offers, offers)**
-- Content delete
-- Destination and tag autocomplete in index / edit
-- *Content type conversion for admins*
-- *Previews?*
-- *Expiration?*
 
-### Videos
-
-- *Video field on content forms (what types?)*
-- *Video embed*
-
-### Offers
-
-- Remake or pull from old site?
-
-
-### Comments
-
-- Comment delete
-
-
-### Finish Messages
-
-- Implement viewed status
-- Implement mailer
-- Write tests
-- Sender blocking?
-
-
-### Finish simple following
-
-- Convert follow status
-- Toggle status
-- Remove item
-- Implement mailer
-- Real queries for messages
-
-
-### Legacy SEO
-
-what to do with long legacy paths without ".html" ?
-
-### Performance
-
-Add caching for popular views
-
-### Forms
-
-- Access control per field
-- Date widget
-- Time widget
-
-### Viewed status
-
-https://andrisreinman.com/efektiivne-ip-kaunter/
 
 ### Convert
 
+- convert private messages from blocked users?
+- convert private message sending setting in profile
+- convert private message read statuses
+- convert follow status
+
+- convert static pages
+-- http://trip.ee/node/1534
+-- http://trip.ee/node/972
+-- http://trip.ee/node/25151
+-- http://trip.ee/node/22125
+
+- convert non-forum followed pages?
 - convert photo: Mitte-reisipildid?
 - flights: regexp price from the title
 - misc,expat,buysell -> new term or /content/forum to multitype
 - commercial users?
 - ó -> õ
+- 
 
 ### Libraries
 
-- Dropzone.js
+### Viewed status
+
+https://andrisreinman.com/efektiivne-ip-kaunter/
 
 ### Tests
 
 https://github.com/bertramtruong/mailtrap
 
-### Follow
+### Packages
 
-decide on follow status
+https://packagist.org/packages/texy/texy
+https://packagist.org/packages/mews/purifier
 
+## JS
 
+Dropzone.js
 
 
 

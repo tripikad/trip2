@@ -11,8 +11,9 @@ You need to have [Composer](https://github.com/kristjanjansen/trip2_vagrant/blob
     sudo chmod -R o+w bootstrap/cache/
     sudo chmod -R o+w storage/
     sudo chmod -R o+w public/images/
+    cp .env.example .env
 
-Then copy ```.env.example ``` to ```.env``` and add following parameters:
+Then  add following parameters to ```/.env```:
 
     DB_HOST1=127.0.0.1
     DB_DATABASE1=trip # Old Drupal database
@@ -49,6 +50,6 @@ Note that by default, only the small sample of legacy database is converted. To 
 
 Note that maximum number of items in databases is around 110000.
 
-If you also want to convert images, add follwing to ```.env```:
+If you also want to convert images, add following to ```.env```:
     
     CONVERT_FILES=true
