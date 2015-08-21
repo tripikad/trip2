@@ -2,7 +2,7 @@
 
 return [
 
-    'show.joined' => 'Joined at :created_at',
+    'show.joined' => 'Joined :created_at',
     'show.message.create' => 'Send private message',
 
     'show.havebeen.title' => 'Have been in',
