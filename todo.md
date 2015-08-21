@@ -15,12 +15,6 @@ Legend: **High priority** Normal priority *Future idea*
 - convert private message read statuses
 - convert follow status
 
-- convert static pages
--- http://trip.ee/node/1534
--- http://trip.ee/node/972
--- http://trip.ee/node/25151
--- http://trip.ee/node/22125
-
 - convert non-forum followed pages?
 - convert photo: Mitte-reisipildid?
 - flights: regexp price from the title
