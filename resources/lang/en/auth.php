@@ -7,6 +7,8 @@ return [
     'register.field.email.title' => 'E-mail',
     'register.field.password.title' => 'Password',
     'register.field.password_confirmation.title' => 'Confirm password',
+    'register.field.eula.title' => 'I agree with the :link',
+    'register.field.eula.title.link' => 'End-user license agreement',
     'register.submit.title' => 'Register',
 
     'register.sent.status' => 'A confirmation was sent to your e-mail address',
