@@ -5,6 +5,7 @@ You need to have [Composer](https://github.com/kristjanjansen/trip2_vagrant/blob
     git clone https://github.com/kristjanjansen/trip2.git
     cd trip2
     composer install
+    php artisan key:generate
     npm install
     gulp
     sudo chmod -R o+w bootstrap/cache/
