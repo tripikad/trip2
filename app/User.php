@@ -14,7 +14,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
     use Authenticatable, CanResetPassword;
 
-    protected $fillable = ['name', 'email', 'password', 'image', 'role', 'verified', 'registration_token'];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'image',
+        'role',
+        'verified',
+        'registration_token',
+        'contact_facebook',
+        'contact_twitter',
+        'contact_instagram',
+        'contact_homepage',
+
+        'notify_message',
+        'notify_follow'
+
+    ];
 
     protected $hidden = ['password', 'remember_token'];
 
@@ -30,14 +46,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         });
     }
 
-/*
-    public function setPasswordAttribute($password)
-    {
-    
-        $this->attributes['password'] = bcrypt($password);
-    
-    }
-*/
     public function confirmEmail()
     {
     

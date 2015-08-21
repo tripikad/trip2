@@ -1,4 +1,4 @@
-@extends('layouts.narrow')
+@extends('layouts.main')
 
 @section('title')
     {{ $title }}
@@ -42,78 +42,169 @@
 
 @stop
 
-@section('content.narrow')
+@section('content')
+    
+    <div class="row">
+
+        <div class="col-sm-4 utils-padding-right">
+
+            <div class="form-group text-center">
+
+                <h3>{{ trans('user.edit.account.title') }}</h3>
+
+            </div>
+
+            <div class="form-group">
+                
+                {!! Form::text('name', null, [
+                    'class' => 'form-control input-md',
+                    'placeholder' => trans('user.edit.field.name.title')
+                ]) !!}
+            
+            </div>
+
+            <div class="form-group">
+           
+                {!! Form::email('email', null, [
+                    'class' => 'form-control input-md',
+                    'placeholder' => trans('user.edit.field.email.title')
+                ]) !!}
+           
+            </div>
+
+            <div class="form-group">
+       
+                {!! Form::password('password', [
+                    'class' => 'form-control input-md',
+                    'placeholder' => trans('user.edit.field.password.title')
+                ]) !!}
+       
+            </div>
+
+            <div class="form-group">
+       
+                {!! Form::password('password_confirmation', [
+                    'class' => 'form-control input-md',
+                    'placeholder' => trans('user.edit.field.password_confirmation.title')
+                ]) !!}
+       
+            </div>
+
+        </div>
+
+        <div class="col-sm-4 utils-padding-right">
+
+            <div class="form-group text-center">
+
+                <h3>{{ trans('user.edit.contact.title') }}</h3>
+
+            </div>
+
+            <div class="form-group">
+
+                {!! Form::url('contact_facebook', null, [
+                    'class' => 'form-control input-md',
+                    'placeholder' => trans('user.edit.field.contact_facebook.title')
+                ]) !!}
+            
+            </div>
+
+            <div class="form-group">
+
+                {!! Form::url('contact_twitter', null, [
+                    'class' => 'form-control input-md',
+                    'placeholder' => trans('user.edit.field.contact_twitter.title')
+                ]) !!}
+
+            </div>
+
+            <div class="form-group">
+
+                {!! Form::url('contact_instagram', null, [
+                    'class' => 'form-control input-md',
+                    'placeholder' => trans('user.edit.field.contact_instagram.title')
+                ]) !!}
+
+            </div>
+
+            <div class="form-group">
+
+                {!! Form::url('contact_homepage', null, [
+                    'class' => 'form-control input-md',
+                    'placeholder' => trans('user.edit.field.contact_homepage.title')
+                ]) !!}
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-4">
+
+            <div class="form-group text-center">
+
+                <h3>{{ trans('user.edit.notify.title') }}</h3>
+
+            </div>
+
+            <div class="form-group">
+
+                <div class="row">
+                
+                    <div class="col-xs-1">
+
+                        {!! Form::checkbox('notify_message') !!}
+
+                    </div>
+
+                    <div class="col-xs-11">
+
+                        {!! trans('user.edit.field.notify_message.title') !!}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <div class="row">
+                
+                    <div class="col-xs-1">
+                        
+                        {!! Form::checkbox('notify_follow') !!}
+
+                    </div>
+
+                    <div class="col-xs-11">
+                    
+                        {!! trans('user.edit.field.notify_follow.title') !!}
+                
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
         
-        <div class="form-group text-center">
+        <div class="col-sm-3 col-sm-offset-9">
 
-            <h3>{{ trans('user.edit.account.title') }}</h3>
+            <div class="form-group">
 
-        </div>
-
-        <div class="form-group">
-            {!! Form::text('name', null, [
-                'class' => 'form-control input-lg',
-                'placeholder' => trans('user.edit.field.name.title')
-            ]) !!}
-        </div>
-
-        <div class="form-group">
-            {!! Form::email('email', null, [
-                'class' => 'form-control input-lg',
-                'placeholder' => trans('user.edit.field.email.title')
-            ]) !!}
-        </div>
-
-        <div class="form-group">
-            {!! Form::password('password', [
-                'class' => 'form-control input-lg',
-                'placeholder' => trans('user.edit.field.password.title')
-            ]) !!}
-        </div>
-
-        <div class="form-group">
-            {!! Form::password('password_confirmation', [
-                'class' => 'form-control input-lg',
-                'placeholder' => trans('user.edit.field.password_confirmation.title')
-            ]) !!}
-        </div>
-
-        <div class="form-group text-center">
-
-            <h3>{{ trans('user.edit.contact.title') }}</h3>
-
-        </div>
-
-        <div class="form-group">
-
-            @include('component.placeholder', ['text' => 'Facebook link field'])
-        
-        </div>
-
-        <div class="form-group">
-
-            @include('component.placeholder', ['text' => 'Instagram link field'])
-
-        </div>
-
-        <div class="form-group">
-
-            @include('component.placeholder', ['text' => 'Twitter link field'])
-
-        </div>
-
-        <div class="form-group">
-
-            @include('component.placeholder', ['text' => 'Homepage link field?'])
-
-        </div>
-
-
-        <div class="form-group">
             {!! Form::submit($submit, [
                 'class' => 'btn btn-primary btn-lg btn-block
             ']) !!}
+
+            </div>
+
         </div>
+
+    </div>
 
     {!! Form::close() !!}
 

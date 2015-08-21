@@ -129,6 +129,10 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:users,name,' . $user->id,
             'email' => 'required|unique:users,email,' . $user->id,
+            'contact_facebook' => 'url',
+            'contact_twitter' => 'url',
+            'contact_instagram' => 'url',
+            'contact_homepage' => 'url'
         ]); 
 
         $user->update($request->all());

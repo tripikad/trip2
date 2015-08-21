@@ -14,9 +14,20 @@ return [
     'edit.title' => 'Edit profile',
     'edit.contact.title' => 'Contact information',
     'edit.account.title' => 'Account details',
+    'edit.notify.title' => 'E-mail notifications',
+    
     'edit.field.name.title' => 'Username',
     'edit.field.password.title' => 'New password',
     'edit.field.password_confirmation.title' => 'Confirm new password',
+    
+    'edit.field.contact_facebook.title' => 'Facebook link',
+    'edit.field.contact_twitter.title' => 'Twitter link',
+    'edit.field.contact_instagram.title' => 'Instagram link',
+    'edit.field.contact_homepage.title' => 'Homepage link',
+
+    'edit.field.notify_message.title' => 'Notify me when someone sends me a private message',
+    'edit.field.notify_follow.title' => 'Notify me when someone posts a comment to the content I follow',
+
     'edit.submit' => 'Update',
 
     'update.image.status' => 'User image has been updated',
