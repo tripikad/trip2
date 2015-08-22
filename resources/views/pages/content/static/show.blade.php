@@ -1,32 +1,19 @@
-@extends('layouts.main')
+@extends('layouts.medium')
 
 @section('title')
     {{ trans($content->title) }}
 @stop
 
-@section('content')
+@section('content.medium')
 
-    <div class="utils-border-bottom 
+    <div class="utils-padding-bottom 
         @if (! $content->status)
             utils-unpublished
         @endif
     ">
 
-        <div class="row">
-
-            <div class="col-sm-1">
-            </div>
-
-            <div class="col-sm-10">
-
-                {!! nl2br($content->body) !!}
-
-            </div>
-            
-            
-        </div>
+        {!! nl2br($content->body) !!}
 
     </div>
-    
 
 @stop
