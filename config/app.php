@@ -141,6 +141,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
+        AlfredoRamos\ParsedownExtra\ParsedownExtraServiceProvider::class,
         
         /*
          * Application Service Providers...
@@ -200,6 +201,7 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Imageconv' => Intervention\Image\Facades\Image::class,
+        'Markdown'  => AlfredoRamos\ParsedownExtra\Facades\ParsedownExtra::class,
 
     ],
 

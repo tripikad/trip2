@@ -11,7 +11,8 @@
         "laravelcollective/html": "5.1.*",
         "intervention/image": "^2.3@dev",
         "barryvdh/laravel-debugbar": "^2.0@dev",
-        "baum/baum": "~1.1"
+        "baum/baum": "~1.1",
+        "alfredo-ramos/parsedown-extra-laravel": "^0.3.0@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
