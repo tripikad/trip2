@@ -266,6 +266,35 @@ return [
                 ]
             ],
         ],
+
+        'static' => [
+        
+            'with' => [],
+            'latest' => 'created_at',
+            'paginate' => 25,
+            'create' => [
+                'title' => 'Add post'
+            ],
+            'edit' => [
+                'title' => 'Edit post'
+            ],
+            'rules' => ['title' => 'required', 'body' => 'required'],
+            'fields' => [
+                'title' => [
+                    'type' => 'text',
+                    'title' => 'Title',
+                ],
+                'body' => [
+                    'type' => 'textarea',
+                    'title' => 'Body',
+                ],
+                'submit' => [
+                    'type' => 'submit',
+                    'title' => 'Add',
+                ]
+            ],
+        ],
+
     ],
 
     'allowed' => '(forum|blog|travelmate|news|flight|photo|offer|internal|static)'
