@@ -20,12 +20,10 @@
   
             <ul class="nav navbar-nav">
     
-                @foreach (config('content.types') as $type => $data)
+                @foreach (config('menu.header') as $key => $data)
                 
                     <li>
-                        <a href="{{ route('content.index', ['type' => $type]) }}">
-                            {{ trans("content.$type.index.title") }}
-                        </a>
+                        <a href="{{ $data['url'] }}">{{ trans("menu.header.$key") }}</a>
                     </li>
                 
                 @endforeach
