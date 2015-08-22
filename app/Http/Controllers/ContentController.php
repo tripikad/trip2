@@ -69,7 +69,9 @@ class ContentController extends Controller
             return $comment->status || (Auth::check() && Auth::user()->hasRole('admin'));
         });
 
-        return \View::make("pages.content.show")
+        $view = view()->exists("pages.content.$type.show") ? "pages.content.$type.show" : 'pages.content.show';
+
+        return \View::make($view)
             ->with('content', $content)
             ->with('comments', $comments)
             ->with('type', $type)
