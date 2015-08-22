@@ -44,6 +44,17 @@ class Content extends Model
        return $this->morphMany('App\Follow', 'followable');
     }
 
+    public function followersEmails()
+    {
+       
+        $followerIds = $this->followers->lists('user_id');
+
+        return User::whereIn('id', $followerIds)
+            ->where('notify_follow', 1)
+            ->lists('email', 'id');
+    
+    }
+
     public function imagePath()
     {
         return $this->image ? '/images/' . $this->type . '/small/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';

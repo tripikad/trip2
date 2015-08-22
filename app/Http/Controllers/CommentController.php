@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Auth;
+use Mail;
 
 class CommentController extends Controller
 {
@@ -25,6 +26,26 @@ class CommentController extends Controller
         ];
 
         $comment = Auth::user()->comments()->create(array_merge($request->all(), $fields));
+        
+        if ($followersEmails = $comment
+                ->content
+                ->followersEmails()
+                ->forget(Auth::user()->id)
+                ->toArray()
+        ) {
+
+            dd($followersEmails);
+
+            Mail::send('email.follow.content', ['comment' => $comment], function ($mail) use ($followersEmails, $comment) {
+                
+                $mail->bcc($followersEmails)
+                    ->subject(trans('follow.content.email.subject', [
+                        'title' => $comment->content->title
+                    ]));
+            
+            });
+
+        }
         
         return redirect()->route('content.show', [$type, $content_id, '#comment-' . $comment->id]);
 

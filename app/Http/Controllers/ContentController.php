@@ -64,7 +64,7 @@ class ContentController extends Controller
     {
         $content = \App\Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers')
             ->findorFail($id);
-     
+             
         $comments = $content->comments->filter(function ($comment) {
             return $comment->status || (Auth::check() && Auth::user()->hasRole('admin'));
         });
