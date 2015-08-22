@@ -13,7 +13,7 @@ return [
 
     'footer.trip_ee' => 'What is Trip.ee',
     'footer.contact' => 'Contact',
-    'footer.eula' => 'End-user license agreement',
+    'footer.eula' => 'EULA',
     'footer.advertising' => 'Advertising',
     'footer.facebook' => 'Facebook',
     'footer.twitter' => 'Twitter',
