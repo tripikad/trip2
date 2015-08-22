@@ -22,7 +22,12 @@
 
 @foreach ($messages as $message)
 
-    <div id="message-{{ $message->id }}" class="utils-border-bottom">
+    <div
+
+        id="message-{{ $message->id }}"
+        class="utils-border-bottom @if ($message->read) utils-read @endif"
+
+    >
 
     @include('component.row', [
         'image' => $message->fromUser->imagePath(),

@@ -8,24 +8,24 @@
 
 @if (count($user->messages()))    
 
-@foreach ($user->messages() as $message)
-  
-    <div class="utils-border-bottom">
+    @foreach ($user->messages() as $message)
+      
+        <div class="utils-border-bottom @if ($message->read) utils-read @endif">
 
-        @include('component.row', [
-            'image' => $message->fromUser->imagePath(),
-            'image_link' => route('user.show', [$message->fromUser]),
-            'heading' => $message->title,
-            'heading_link' => route('user.show.messages.with', [$user, $message->fromUser]),
-            'text' => trans('user.show.messages.index.row.text', [
-                'user' => view('component.user.link', ['user' => $message->fromUser]),
-                'created_at' => $message->created_at->format('d. m Y H:i:s')
+            @include('component.row', [
+                'image' => $message->fromUser->imagePath(),
+                'image_link' => route('user.show', [$message->fromUser]),
+                'heading' => $message->title,
+                'heading_link' => route('user.show.messages.with', [$user, $message->fromUser]),
+                'text' => trans('user.show.messages.index.row.text', [
+                    'user' => view('component.user.link', ['user' => $message->fromUser]),
+                    'created_at' => $message->created_at->format('d. m Y H:i:s')
+                ])
             ])
-        ])
 
-    </div>
+        </div>
 
-@endforeach
+    @endforeach
 
 @endif
 

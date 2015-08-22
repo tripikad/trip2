@@ -10,7 +10,8 @@ use Carbon\Carbon;
 
 use Imageconv;
 
-use \App\User;
+use App\User;
+use App\Message;
 
 class UserController extends Controller
 {
@@ -156,10 +157,14 @@ class UserController extends Controller
         $user = User::findorFail($id);
         $user_with = User::findorFail($user_id_with);
      
+        $messageIds = $user->messagesWith($user_id_with)->keyBy('id')->keys()->toArray();
+
+        Message::whereIn('id', $messageIds)->update(['read' => 1]);
+
         return View::make('pages.user.message.with')
             ->with('user', $user)
             ->with('user_with', $user_with)
-            ->with('messages', $user->messagesWith($user_id_with))
+            ->with('messages', $user->messagesWith($user_id_with)->all())
             ->render();
     }
 
