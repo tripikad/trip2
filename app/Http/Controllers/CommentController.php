@@ -34,8 +34,6 @@ class CommentController extends Controller
                 ->toArray()
         ) {
 
-            dd($followersEmails);
-
             Mail::send('email.follow.content', ['comment' => $comment], function ($mail) use ($followersEmails, $comment) {
                 
                 $mail->bcc($followersEmails)
