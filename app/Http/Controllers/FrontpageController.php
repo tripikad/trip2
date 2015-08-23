@@ -19,7 +19,7 @@ class FrontpageController extends Controller
 
         $fronts = [];
 
-        foreach (config('content.typez') as $type) {
+        foreach (config('content.types') as $type) {
         
             if (config("content_$type.frontpage.show")) {
             
