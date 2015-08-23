@@ -297,6 +297,18 @@ return [
 
     ],
 
-    'allowed' => '(forum|blog|travelmate|news|flight|photo|offer|internal|static)'
+    'allowed' => '(forum|blog|travelmate|news|flight|photo|offer|internal|static)',
+
+    'typez' => [
+        'news',
+        'flight',
+        'travelmate',
+        'forum',
+        'photo',
+        'blog',
+        'offer',
+        'internal',
+        'static',
+    ]
 
 ];
