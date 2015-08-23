@@ -19,8 +19,8 @@ class ContentController extends Controller
     {
 
         $contents = Content::whereType($type)
-            ->with(config("content.types.$type.with"))
-            ->latest(config("content.types.$type.latest"));
+            ->with(config("content_$type.index.with"))
+            ->latest(config("content_$type.index.latest"));
     
         if ($request->destination) {
 
@@ -43,7 +43,7 @@ class ContentController extends Controller
         
         } 
 
-        $contents = $contents->simplePaginate(config("content.types.$type.paginate"));
+        $contents = $contents->simplePaginate(config("content_$type.index.paginate"));
 
         $destinations = Destination::getNames($type);
         $topics = Topic::getNames($type);
@@ -82,7 +82,7 @@ class ContentController extends Controller
     {
 
         return \View::make("pages.content.edit")
-            ->with('fields', config("content.types.$type.fields"))
+            ->with('fields', config("content_$type.edit.fields"))
             ->with('title', trans('content.create.title'))
             ->with('url', route('content.store', [$type]))
             ->with('type', $type)
@@ -92,7 +92,7 @@ class ContentController extends Controller
 
     public function store(Request $request, $type)
     {
-        $this->validate($request, config("content.types.$type.rules"));
+        $this->validate($request, config("content_$type.edit.validate"));
 
         $fields = [
             'type' => $type,
@@ -140,7 +140,7 @@ class ContentController extends Controller
 
         return \View::make("pages.content.edit")
             ->with('title', trans('content.create.title'))
-            ->with('fields', config("content.types.$type.fields"))
+            ->with('fields', config("content_$type.edit.fields"))
             ->with('content', $content)
             ->with('method', 'put')
             ->with('url', route('content.update', [$content->type, $content]))
@@ -154,7 +154,7 @@ class ContentController extends Controller
 
         $content = \App\Content::findorFail($id);
 
-        $this->validate($request, config("content.types.$type.rules"));
+        $this->validate($request, config("content_$type.edit.validate"));
 
         if ($request->hasFile('file')) {
             
