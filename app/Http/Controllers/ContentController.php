@@ -116,8 +116,9 @@ class ContentController extends Controller
 
     public function storeImage($file, $type)
     {
+        $random_str = str_random(5);
 
-        $fileName = $file->getClientOriginalName();
+        $fileName = $random_str.'_'.$file->getClientOriginalName();
         $path = public_path() . "/images/$type/";
         $smallPath = public_path() . "/images/$type/small/";
         
