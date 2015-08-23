@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Markdown;
+
 
 class Content extends Model
 {
@@ -58,6 +60,12 @@ class Content extends Model
     public function imagePath()
     {
         return $this->image ? '/images/' . $this->type . '/small/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
+    }
+
+    public function getBodyAttribute($value)
+    {
+        $value = Markdown::parse($value);
+        return $value;
     }
 
 }

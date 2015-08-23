@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Markdown;
 
 class Message extends Model
 {
@@ -24,6 +25,12 @@ class Message extends Model
    public function getTitleAttribute()
    {
        return str_limit($this->attributes['body'], 30);
+   }
+
+   public function getBodyAttribute($value)
+   {
+       $value = Markdown::parse($value);
+       return $value;
    }
 
 }
