@@ -4,8 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0b6f996cbd3a599b2141861b66b8a789",
+    "hash": "33a13f1409420ff31318859e5692d14a",
     "packages": [
+        {
+            "name": "alfredo-ramos/parsedown-extra-laravel",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AlfredoRamos/parsedown-extra-laravel.git",
+                "reference": "aa39597593b5606ed10bf8d6b055532811c01b1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlfredoRamos/parsedown-extra-laravel/zipball/aa39597593b5606ed10bf8d6b055532811c01b1e",
+                "reference": "aa39597593b5606ed10bf8d6b055532811c01b1e",
+                "shasum": ""
+            },
+            "require": {
+                "erusev/parsedown-extra": "~0.7",
+                "heyupdate/emoji": "dev-master",
+                "mews/purifier": "dev-master",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.1"
+            },
+            "type": "package",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AlfredoRamos\\ParsedownExtra\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Alfredo Ramos",
+                    "email": "alfredo.ramos@yandex.com",
+                    "homepage": "https://github.com/AlfredoRamos",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Parsedown Extra package for Laravel 5",
+            "homepage": "https://github.com/AlfredoRamos/parsedown-extra-laravel",
+            "keywords": [
+                "Parsedown Extra",
+                "laravel 5",
+                "markdown extra"
+            ],
+            "time": "2015-07-27 19:53:39"
+        },
         {
             "name": "barryvdh/laravel-debugbar",
             "version": "v2.0.5",
@@ -326,6 +381,133 @@
             "time": "2014-12-20 21:24:13"
         },
         {
+            "name": "erusev/parsedown",
+            "version": "1.5.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "0e89e3714bda18973184d30646306bb0a482bd96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/0e89e3714bda18973184d30646306bb0a482bd96",
+                "reference": "0e89e3714bda18973184d30646306bb0a482bd96",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Parsedown": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "time": "2015-08-03 09:24:05"
+        },
+        {
+            "name": "erusev/parsedown-extra",
+            "version": "0.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown-extra.git",
+                "reference": "11a44e076d02ffcc4021713398a60cd73f78b6f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/erusev/parsedown-extra/zipball/11a44e076d02ffcc4021713398a60cd73f78b6f5",
+                "reference": "11a44e076d02ffcc4021713398a60cd73f78b6f5",
+                "shasum": ""
+            },
+            "require": {
+                "erusev/parsedown": "~1.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ParsedownExtra": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "An extension of Parsedown that adds support for Markdown Extra.",
+            "homepage": "https://github.com/erusev/parsedown-extra",
+            "keywords": [
+                "markdown",
+                "markdown extra",
+                "parsedown",
+                "parser"
+            ],
+            "time": "2015-01-25 14:52:34"
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "6f389f0f25b90d0b495308efcfa073981177f0fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/6f389f0f25b90d0b495308efcfa073981177f0fd",
+                "reference": "6f389f0f25b90d0b495308efcfa073981177f0fd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "time": "2013-11-30 08:25:19"
+        },
+        {
             "name": "guzzlehttp/guzzle",
             "version": "6.0.2",
             "source": {
@@ -497,17 +679,58 @@
             "time": "2015-08-15 19:32:36"
         },
         {
-            "name": "intervention/image",
-            "version": "2.3.1",
+            "name": "heyupdate/emoji",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Intervention/image.git",
-                "reference": "156f9d6f8a186c68b92f0c50084718f02dae1b5f"
+                "url": "https://github.com/heyupdate/emoji.git",
+                "reference": "0bb654d695553c20c6e72c32604086b7fde76e55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/156f9d6f8a186c68b92f0c50084718f02dae1b5f",
-                "reference": "156f9d6f8a186c68b92f0c50084718f02dae1b5f",
+                "url": "https://api.github.com/repos/heyupdate/emoji/zipball/0bb654d695553c20c6e72c32604086b7fde76e55",
+                "reference": "0bb654d695553c20c6e72c32604086b7fde76e55",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "HeyUpdate\\Emoji\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Convert unicode and named (i.e. :smile:) Emoji into images",
+            "keywords": [
+                "emoji"
+            ],
+            "time": "2015-06-06 08:55:07"
+        },
+        {
+            "name": "intervention/image",
+            "version": "2.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "1124ff3c6298f0dcf9edf9156623904d7a5c3428"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/1124ff3c6298f0dcf9edf9156623904d7a5c3428",
+                "reference": "1124ff3c6298f0dcf9edf9156623904d7a5c3428",
                 "shasum": ""
             },
             "require": {
@@ -556,7 +779,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2015-07-10 15:03:58"
+            "time": "2015-08-16 15:31:59"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -1017,6 +1240,65 @@
                 "debug"
             ],
             "time": "2015-02-05 07:51:20"
+        },
+        {
+            "name": "mews/purifier",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mewebstudio/Purifier.git",
+                "reference": "64beb4ee44ffc95238efdc53756cc565b26217a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mewebstudio/Purifier/zipball/64beb4ee44ffc95238efdc53756cc565b26217a6",
+                "reference": "64beb4ee44ffc95238efdc53756cc565b26217a6",
+                "shasum": ""
+            },
+            "require": {
+                "ezyang/htmlpurifier": "4.6.*",
+                "illuminate/config": "~5.0",
+                "illuminate/filesystem": "~5.0",
+                "laravel/framework": "~5.0",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "Mews\\Purifier\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muharrem ERİN",
+                    "email": "me@mewebstudio.com",
+                    "homepage": "https://github.com/mewebstudio",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel 5 HtmlPurifier Package",
+            "homepage": "https://github.com/mewebstudio/purifier",
+            "keywords": [
+                "Purifier",
+                "htmlpurifier",
+                "laravel5 HtmlPurifier",
+                "laravel5 Purifier",
+                "laravel5 Security",
+                "security",
+                "xss"
+            ],
+            "time": "2015-07-29 05:44:11"
         },
         {
             "name": "monolog/monolog",
@@ -2872,16 +3154,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.4",
+            "version": "4.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "55bf1d6092b0e13a1f26bd5eaffeef3d8ad85ea7"
+                "reference": "9b7417edaf28059ea63d86be941e6004dbfcc0cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/55bf1d6092b0e13a1f26bd5eaffeef3d8ad85ea7",
-                "reference": "55bf1d6092b0e13a1f26bd5eaffeef3d8ad85ea7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9b7417edaf28059ea63d86be941e6004dbfcc0cc",
+                "reference": "9b7417edaf28059ea63d86be941e6004dbfcc0cc",
                 "shasum": ""
             },
             "require": {
@@ -2940,24 +3222,24 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-08-15 04:21:23"
+            "time": "2015-08-19 09:20:57"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "2.3.6",
+            "version": "2.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "18dfbcb81d05e2296c0bcddd4db96cade75e6f42"
+                "reference": "5e2645ad49d196e020b85598d7c97e482725786a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/18dfbcb81d05e2296c0bcddd4db96cade75e6f42",
-                "reference": "18dfbcb81d05e2296c0bcddd4db96cade75e6f42",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/5e2645ad49d196e020b85598d7c97e482725786a",
+                "reference": "5e2645ad49d196e020b85598d7c97e482725786a",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "~1.0,>=1.0.2",
+                "doctrine/instantiator": "^1.0.2",
                 "php": ">=5.3.3",
                 "phpunit/php-text-template": "~1.2",
                 "sebastian/exporter": "~1.2"
@@ -2996,7 +3278,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-07-10 06:54:24"
+            "time": "2015-08-19 09:14:08"
         },
         {
             "name": "sebastian/comparator",
@@ -3423,7 +3705,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "intervention/image": 20,
-        "barryvdh/laravel-debugbar": 20
+        "barryvdh/laravel-debugbar": 20,
+        "alfredo-ramos/parsedown-extra-laravel": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
