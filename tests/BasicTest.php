@@ -19,7 +19,17 @@ class BasicTest extends TestCase
     public function test_seeing_content_pages_without_logging_in()
     {
         
-        foreach (config('content.types') as $type => $typeConf) {
+        $types = [
+            'news',
+            'flight',
+            'travelmate',
+            'forum',
+            'photo',
+            'blog',
+            'offer',
+        ];
+
+        foreach ($types as $type) {
 
         $this->visit('/content/' . $type)
             ->see(config('site.name'));
