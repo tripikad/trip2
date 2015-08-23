@@ -36,8 +36,14 @@ post('reset/password', ['uses' => 'Auth\ResetController@postReset', 'as' => 'res
 
 // Legacy content paths
 
-get('content/{legacy_path}', 'ContentController@redirect')
+get('content/{legacy_path}', 'RedirectController@redirectContent')
     ->where(['legacy_path' => '(.*)\.html(.*)']);
+
+get('taxonomy/term/{term_id}', 'RedirectController@redirectTerm')
+    ->where(['term_id' => '(.*)']);
+
+get('node/{node_id}', 'RedirectController@redirectNode')
+    ->where(['node_id' => '(.*)']);
 
 // Content
 
