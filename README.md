@@ -13,15 +13,17 @@ You need to have [Composer](https://github.com/kristjanjansen/trip2_vagrant/blob
     sudo chmod -R o+w public/images/
     cp .env.example .env
 
+Note: If you have problems with ```npm install```, try to run ```npm install --no-bin-links```.
+
 Then  add following parameters to ```/.env```:
 
     DB_HOST1=127.0.0.1
-    DB_DATABASE1=trip # Old Drupal database
+    DB_DATABASE1=trip
     DB_USERNAME1=username
     DB_PASSWORD1=password
 
     DB_HOST2=127.0.0.1
-    DB_DATABASE2=trip2 # New Laravel database
+    DB_DATABASE2=trip2
     DB_USERNAME2=username
     DB_PASSWORD2=password
 
