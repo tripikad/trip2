@@ -853,8 +853,10 @@ class ConvertBase extends Command
         $string = trim($string);
         $string = $this->removeComments($string);
         $string = $this->removeUppercase($string);
+        $string = $this->removeReferrals($string);
         $string = $this->convertUnderlineHeaders($string);
         $string = $this->convertStrongHeaders($string);
+        $string = $this->convertTexyUrls($string);
 
         return $string;
 
@@ -895,6 +897,20 @@ class ConvertBase extends Command
 
         return preg_replace("/\n<strong>(.*)<\/strong>/", "\n<h4>$1</h4>", $string);
 
+    }
+
+    public function convertTexyUrls($string)
+    {
+
+        return preg_replace("/\"(.*)\":(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\\\".,<>?«»“”‘’]))/i", "<a href=\"$2\">$1</a>", $string);
+   
+    }
+
+    public function removeReferrals($string)
+    {
+
+        return preg_replace("/<i>Vaata ka teisi(.*)<\/i>!/i", '', $string);   
+    
     }
 
     public function removeUppercase($string)
