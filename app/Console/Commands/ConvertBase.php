@@ -37,6 +37,14 @@ class ConvertBase extends Command
         'trip_offer'
     ];
 
+
+    protected $forumTypeMap = [
+        'trip_forum' => 'forum',
+        'trip_forum_buysell' => 'forum',
+        'trip_forum_expat' => 'forum',
+        'trip_forum_other' => 'forum'
+    ];
+
     public function __construct()
     {
         parent::__construct();

@@ -24,6 +24,7 @@ class ConvertFollows extends ConvertBase
 
     public function convertFollows()
     {
+
         $follows = $this->getFollows()->get(); 
 
         $this->info('Converting follows (subscriptions)');
@@ -31,9 +32,11 @@ class ConvertFollows extends ConvertBase
 
         foreach($follows as $follow)
         {   
-            if ($this->getNode($follow->nid) && $this->isUserConvertable($follow->uid)) {
+            $node = $this->getNode($follow->nid);
 
-                if ($this->convertNode($this->getNode($follow->nid), '\App\Content', 'forum')) {
+            if ($node && in_array($node->type, array_keys($this->forumTypeMap)) && $this->isUserConvertable($follow->uid)) {
+
+                if ($this->convertNode($node, '\App\Content', $this->forumTypeMap[$node->type])) {
 
                     $model = new Follow;
 
