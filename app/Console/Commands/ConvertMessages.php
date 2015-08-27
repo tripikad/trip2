@@ -48,7 +48,9 @@ class ConvertMessages extends ConvertBase
 
                     $model->read = 1;
 
-                    $model->body = $this->scrambleString(trim($node->body));
+                    $body = $this->clean($node->body);
+
+                    $model->body = $this->scrambleMessages ? $this->scrambleString($body) : $body; 
                     $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp);  
                     $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp); 
 

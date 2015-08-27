@@ -48,6 +48,7 @@ class ConvertBase extends Command
 
         $this->take = env('CONVERT_TAKE', '10');
         $this->copyFiles = env('CONVERT_FILES', 'false');
+        $this->scrambleMessages = env('CONVERT_SCRAMBLE', 'true');
     }
 
     // Nodes
