@@ -857,6 +857,7 @@ class ConvertBase extends Command
         $string = $this->convertUnderlineHeaders($string);
         $string = $this->convertStrongHeaders($string);
         $string = $this->convertTexyUrls($string);
+        $string = $this->convertUmlauts($string);
 
         return $string;
 
@@ -904,6 +905,13 @@ class ConvertBase extends Command
 
         return preg_replace("/\"(.*)\":(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\\\".,<>?«»“”‘’]))/i", "<a href=\"$2\">$1</a>", $string);
    
+    }
+
+    public function convertUmlauts($string)
+    {
+
+        return str_replace('ó', 'õ', $string);
+
     }
 
     public function removeReferrals($string)
