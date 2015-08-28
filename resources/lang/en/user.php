@@ -2,6 +2,10 @@
 
 return [
 
+    'show.menu.activity' => 'Activity',
+    'show.menu.messages' => 'Messages',
+    'show.menu.follows' => 'Follows',
+
     'show.joined' => 'Joined :created_at',
     'show.message.create' => 'Send private message',
 

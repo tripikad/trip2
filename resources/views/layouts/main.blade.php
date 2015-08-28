@@ -13,11 +13,13 @@
         
         <div class="container">
             
-            <div class="utils-border-bottom">          
+            <div class="utils-border-bottom text-center">          
                 
                 @include('component.navbar')
             
             </div>  
+
+            @yield('navbar.bottom')
 
             @include('component.status.success')
             

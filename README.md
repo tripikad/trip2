@@ -7,6 +7,7 @@ You need to have [Composer](https://github.com/kristjanjansen/trip2_vagrant/blob
     composer install
     npm install
     gulp
+    sudo chown -R www-data:www-data /var/www
     sudo chmod -R o+w bootstrap/cache/
     sudo chmod -R o+w storage/
     sudo chmod -R o+w public/images/
@@ -39,11 +40,6 @@ Now you should be able to access the web app and also run console commands.
 and then dump your database dump to the legacy database
 
     mysql -uroot -psecret trip < your_dumpfile.sql
-
-If your dumpfile is compressed, use one of these:
-
-    unzip -p your_dumpfile.zip | mysql -uroot -psecret trip
-    tar -xzOf your_dumpfile.tar.gz | mysql -uroot -psecret trip
 
 ### Converters
 

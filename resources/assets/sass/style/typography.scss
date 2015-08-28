@@ -6,6 +6,12 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
 }
 
+ul {
+    &.list-inline {
+        margin-bottom: 0;
+    }
+}
+
 @media (max-width: $screen-sm-max) {
 
     body {

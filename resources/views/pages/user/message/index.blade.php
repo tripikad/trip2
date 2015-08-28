@@ -4,6 +4,20 @@
     {{ trans('user.show.messages.index.title', ['user' => $user->name]) }}
 @stop
 
+@section('navbar.bottom')
+    
+    @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
+        
+        <div class="utils-border-bottom">
+            
+            @include('component.user.menu', ['user' => $user])
+        
+        </div>
+
+    @endif
+
+@stop
+
 @section('content.medium')
 
 @if (count($user->messages()))    

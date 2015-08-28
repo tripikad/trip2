@@ -4,7 +4,22 @@
     {{ $user->name }}
 @stop
 
+@section('navbar.bottom')
+    
+    @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
+        
+        <div class="utils-border-bottom">
+            
+            @include('component.user.menu', ['user' => $user])
+        
+        </div>
+
+    @endif
+
+@stop
+
 @section('header.top')
+    
     @include('component.image', [
         'image' => $user->imagePath(),
         'options' => '-circle',
