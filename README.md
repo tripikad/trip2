@@ -5,13 +5,13 @@ You need to have [Composer](https://github.com/kristjanjansen/trip2_vagrant/blob
     git clone https://github.com/kristjanjansen/trip2.git
     cd trip2
     composer install
-    php artisan key:generate
     npm install
     gulp
     sudo chmod -R o+w bootstrap/cache/
     sudo chmod -R o+w storage/
     sudo chmod -R o+w public/images/
     cp .env.example .env
+    php artisan key:generate
 
 Note: If you have problems with ```npm install```, try to run ```npm install --no-bin-links```.
 
@@ -19,17 +19,31 @@ Then  add following parameters to ```/.env```:
 
     DB_HOST1=127.0.0.1
     DB_DATABASE1=trip
-    DB_USERNAME1=username
-    DB_PASSWORD1=password
+    DB_USERNAME1=root
+    DB_PASSWORD1=secret
 
     DB_HOST2=127.0.0.1
     DB_DATABASE2=trip2
-    DB_USERNAME2=username
-    DB_PASSWORD2=password
+    DB_USERNAME2=root
+    DB_PASSWORD2=secret
 
     DB_CONNECTION=trip2
 
 Now you should be able to access the web app and also run console commands.
+
+### Set up databases
+
+    mysqladmin -uroot -psecret create trip
+    mysqladmin -uroot -psecret create trip2
+
+and then dump your database dump to the legacy database
+
+    mysql -uroot -psecret trip < your_dumpfile.sql
+
+If your dumpfile is compressed, use one of these:
+
+    unzip -p your_dumpfile.zip | mysql -uroot -psecret trip
+    tar -xzOf your_dumpfile.tar.gz | mysql -uroot -psecret trip
 
 ### Converters
 
