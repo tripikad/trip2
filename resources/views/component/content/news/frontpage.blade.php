@@ -4,7 +4,7 @@
 
         <div class="col-sm-6">
 
-            @if (isset($content[0]))
+            @if (isset($contents[0]))
 
             <a href="{{ route('content.show', [$contents[0]->type, $contents[0]]) }}">
 
@@ -26,7 +26,7 @@
 
                 <div class="col-sm-6 utils-padding-bottom">
                     
-                    @if (isset($content[1]))
+                    @if (isset($contents[1]))
 
                     <a href="{{ route('content.show', [$contents[1]->type, $contents[1]]) }}">
 
@@ -44,7 +44,7 @@
 
                 <div class="col-sm-6 utils-padding-bottom">
 
-                    @if (isset($content[2]))
+                    @if (isset($contents[2]))
 
                     <a href="{{ route('content.show', [$contents[0]->type, $contents[0]]) }}">
 
@@ -66,7 +66,7 @@
 
                 <div class="col-sm-6 utils-padding-bottom">
 
-                    @if (isset($content[3]))
+                    @if (isset($contents[3]))
 
                     <a href="{{ route('content.show', [$contents[1]->type, $contents[1]]) }}">
 
@@ -84,7 +84,7 @@
 
                 <div class="col-sm-6 utils-padding-bottom">
 
-                    @if (isset($content[4]))
+                    @if (isset($contents[4]))
 
                     <a href="{{ route('content.show', [$contents[0]->type, $contents[0]]) }}">
 
