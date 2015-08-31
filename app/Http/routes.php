@@ -1,5 +1,9 @@
 <?php
 
+Route::get('/test', function () {
+    return 'test';
+});
+
 // Frontpage
 
 get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
