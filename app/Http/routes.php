@@ -1,9 +1,5 @@
 <?php
 
-Route::get('/test', function () {
-    return 'test';
-});
-
 // Frontpage
 
 get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
@@ -138,3 +134,21 @@ get('destination/{id}', ['uses' => 'DestinationController@index', 'as' => 'desti
 // Flags
 
 get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
+
+// Testing
+
+Route::get('/test', function () {
+   
+    return 'test';
+
+});
+
+if (env('LOADERIO_URL', false)) {
+    
+    Route::get('/' . env('LOADERIO_URL'), function () {
+   
+        return env('LOADERIO_TOKEN')
+
+    });
+
+}
