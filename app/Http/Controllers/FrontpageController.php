@@ -42,15 +42,11 @@ class FrontpageController extends Controller
         
         }
         
-        return Cache::rememberForever('frontpage.index', function() use ($destinations, $features) {
-
-            return View::make('pages.frontpage.index')
-                ->with('destinations', $destinations)
-                ->with('features', $features)
-                ->render();
+        return View::make('pages.frontpage.index')
+            ->with('destinations', $destinations)
+            ->with('features', $features)
+            ->render();
         
-        });
-
     }
 
     public function search(Request $request)

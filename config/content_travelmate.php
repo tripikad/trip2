@@ -5,7 +5,7 @@ return [
     'frontpage' => [
         
         'show' => true,
-        'with' => [],
+        'with' => ['user'],
         'latest' => 'created_at',
         'take' => 8
     ],
