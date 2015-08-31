@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-group">
-            {!! Form::checkbox('eula', false) !!}            
+            {!! Form::checkbox('eula', 1) !!}            
             {!! trans('auth.register.field.eula.title', [
                 'link' => '<a href="' . route('content.show', ['static', 25151]) . '">' . trans('auth.register.field.eula.title.link'). '</a>'
             ]) !!}
