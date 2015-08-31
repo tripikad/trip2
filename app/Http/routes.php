@@ -142,13 +142,3 @@ Route::get('/test', function () {
     return 'test';
 
 });
-
-if (env('LOADERIO_URL', false)) {
-    
-    Route::get('/' . env('LOADERIO_URL'), function () {
-   
-        return env('LOADERIO_TOKEN')
-
-    });
-
-}
