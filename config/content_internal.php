@@ -2,11 +2,6 @@
 
 return [
 
-    'frontpage' => [
-        
-        'show' => false,
-    ],
-
     'index' => [
     
         'with' => ['user', 'destinations', 'topics'],

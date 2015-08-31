@@ -1,4 +1,8 @@
-<div class="row">
+@if (count($contents) > 0)
+
+<h3 class="utils-padding-bottom">{{ trans('frontpage.index.offer.title') }}</h3>
+
+<div class="row utils-padding-bottom">
 
     @foreach ($contents as $content)
 
@@ -7,8 +11,9 @@
             <a href="{{ route('content.show', [$content->type, $content]) }}">
 
                 @include('component.card', [
-                    'title' => $content->title,
-                    'options' => '-square -center -yellow'
+                    'image' => $content->imagePath(),
+                    'text' => $content->title,
+                    'options' => '-center'
                 ])
                     
             </a>
@@ -18,3 +23,5 @@
     @endforeach
 
 </div>
+
+@endif

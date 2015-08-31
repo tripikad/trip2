@@ -1,4 +1,8 @@
-<div class="row">
+@if (count($contents) > 0)
+
+<h3 class="utils-padding-bottom">{{ trans('frontpage.index.travelmate.title') }}</h3>
+
+<div class="row utils-double-padding-bottom">
 
     @foreach ($contents as $content)
 
@@ -8,8 +12,8 @@
 
                 @include('component.card', [
                     'image' => $content->user->imagePathOnly(),
-                    'title' => $content->title,
-                    'options' => '-square -center'
+                    'text' => $content->title,
+                    'options' => '-center'
 
                 ])
 
@@ -20,3 +24,5 @@
     @endforeach
 
 </div>
+
+@endif

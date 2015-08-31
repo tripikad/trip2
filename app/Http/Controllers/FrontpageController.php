@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use View;
 use DB;
+use Cache;
 
 use App\Content;
 use App\Destination;
@@ -17,29 +18,39 @@ class FrontpageController extends Controller
     public function index()
     {
 
-        $fronts = [];
+        $destinations = Destination::getNames();
 
-        foreach (config('content.types') as $type) {
-        
-            if (config("content_$type.frontpage.show")) {
-            
-                $fronts[$type]['contents'] = Content::whereType($type)
-                    ->with(config("content_$type.index.with"))
-                    ->latest(config("content_$type.index.latest"))
-                    ->take(config("content_$type.frontpage.paginate"))
-                    ->get();
-        
-            }
+        $types = [
+            'news',
+            'flight',
+            'travelmate',
+            'forum',
+            'photo',
+            'blog',
+            'offer',
+        ];
+
+        $features = [];
+
+        foreach ($types as $type) {
+                    
+            $features[$type]['contents'] = Content::whereType($type)
+                ->with(config("content_$type.frontpage.with"))
+                ->latest(config("content_$type.frontpage.latest"))
+                ->take(config("content_$type.frontpage.take"))
+                ->get();
         
         }
         
-        $destinations = Destination::getNames();
+        return Cache::rememberForever('frontpage.index', function() use ($destinations, $features) {
 
-        return View::make('pages.frontpage.index')
-            ->with('destinations', $destinations)
-            ->with('fronts', $fronts)
-            ->render();
+            return View::make('pages.frontpage.index')
+                ->with('destinations', $destinations)
+                ->with('features', $features)
+                ->render();
         
+        });
+
     }
 
     public function search(Request $request)

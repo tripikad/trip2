@@ -5,7 +5,9 @@ return [
     'frontpage' => [
         
         'show' => true,
-        'paginate' => 3
+        'with' => [],
+        'latest' => 'created_at',
+        'take' => 8
     ],
 
     'index' => [

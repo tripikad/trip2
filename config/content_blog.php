@@ -4,7 +4,11 @@ return [
 
     'frontpage' => [
         
-        'show' => false,
+        'show' => true,
+        'with' => [],
+        'latest' => 'created_at',
+        'take' => 1
+
     ],
 
     'index' => [

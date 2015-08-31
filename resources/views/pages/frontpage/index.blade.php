@@ -16,10 +16,10 @@
 
 <div class="utils-border-bottom">
 
-@foreach($fronts as $type => $front) 
+@foreach($features as $type => $feature) 
 
-        @include("component.content.$type.front", [
-            'contents' => $front['contents']
+        @include("component.content.$type.frontpage", [
+            'contents' => $feature['contents']
         ])
     
 @endforeach

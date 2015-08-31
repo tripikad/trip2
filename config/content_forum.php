@@ -4,8 +4,10 @@ return [
 
     'frontpage' => [
         
-        'show' => false,
-        'paginate' => 6
+        'show' => true,
+        'with' => [],
+        'latest' => 'created_at',
+        'take' => 1
     ],
 
     'index' => [

@@ -6,22 +6,20 @@
 
 @stop
 
-@section('header')
-
-<div class="utils-border-bottom">
-
-    @include('component.card', [
-        'title' => $destination->name,
-        'options' => '-center -wide -large',
-        'image' => $image,
-    ])
-
-</div>
-
-@stop
 
 @section('content')
 
+<div class="utils-border-bottom">
+
+    @foreach($features as $type => $feature) 
+
+        @include("component.content.$type.frontpage", [
+            'contents' => $feature['contents']
+        ])
+        
+    @endforeach
+
+</div>
 
 <div class="row utils-border-bottom">
 

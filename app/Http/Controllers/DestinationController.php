@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 
 use View;
+use Cache;
 
 use App\Destination;
 
@@ -17,39 +18,39 @@ class DestinationController extends Controller
         $destination =  Destination::with('flags', 'flags.user')
             ->findOrFail($id);
 
-        $image = $destination->content()->whereType('photo')->latest()->first();
+//        $image = $destination->content()->whereType('photo')->latest()->first();
         
-        return View::make('pages.destination.index')
-            ->with('destination', $destination)
-            ->with('image', $image ? $image->imagePath() : null)
-            ->render();
+        $types = [
+            'news',
+            'flight',
+            'travelmate',
+            'forum',
+            'photo',
+            'blog',
+            'offer',
+        ];
 
+        $features = [];
 
-/*
-        $fronts = [];
-
-        foreach (config('content.types') as $type => $typeConf) {
-        
-            if (isset($typeConf['front'])) {
-
-                $contents =  $destination->content()
-                    ->whereType($type)
-                    ->with($typeConf['with'])
-                    ->latest($typeConf['latest'])
-                    ->take($typeConf['frontpaginate'])
-                    ->get();
-        
-                if ($contents) $fronts[$type]['contents'] = $contents;
-            }
+        foreach ($types as $type) {
+                    
+            $features[$type]['contents'] = $destination->content()
+                ->whereType($type)
+                ->with(config("content_$type.frontpage.with"))
+                ->latest(config("content_$type.frontpage.latest"))
+                ->take(config("content_$type.frontpage.take"))
+                ->get();
         
         }
         
-        return View::make('pages.frontpage.index')
-            ->with('title', $destination->name)
-            ->with('fronts', $fronts)
-            ->render();
+        return Cache::rememberForever("destination.index.$destination->id", function() use ($destination, $features) {
 
-        */
+            return View::make('pages.destination.index')
+                ->with('destination', $destination)
+                ->with('features', $features)
+                ->render();
+        
+        });
 
     }
 
