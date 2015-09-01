@@ -41,7 +41,7 @@ class LoginController extends Controller
         Auth::logout();
 
         return redirect()
-            ->route('frontpage')
+            ->route('frontpage.index')
             ->with('status', trans('auth.login.logout.status'));
     }
 
