@@ -46,7 +46,7 @@ class DestinationController extends Controller
         return response()->view('pages.destination.index', [
             'destination' => $destination,
             'features' => $features
-        ])->header('Cache-Control', 'public, max-age=' . config('destination.cache'));
+        ])->header('Cache-Control', 'public, s-maxage=' . config('destination.cache'));
 
 
     }

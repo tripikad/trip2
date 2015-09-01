@@ -76,7 +76,7 @@ class UserController extends Controller
             'items' => $items,
             'content_count' => $content_count,
             'comment_count' => $comment_count
-        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.user'));
+        ])->header('Cache-Control', 'public, s-maxage=' . config('site.cache.user'));
     
     }
 

@@ -45,7 +45,7 @@ class FrontpageController extends Controller
         return response()->view('pages.frontpage.index', [
             'destinations' => $destinations,
             'features' => $features
-        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.frontpage'));
+        ])->header('Cache-Control', 'public, s-maxage=' . config('site.cache.frontpage'));
     
     }
 

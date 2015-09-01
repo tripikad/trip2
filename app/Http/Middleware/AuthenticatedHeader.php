@@ -11,11 +11,8 @@ class AuthenticatedHeader
     public function handle($request, Closure $next)
     {
 
-        $response = $next($request);
-
-        $response->header('X-Authenticated', Auth::check() ? 'true' : 'false');
-
-        return $response;
+        return $next($request)
+            ->header('X-Authenticated', Auth::check() ? 'true' : 'false');
     
     }
 
