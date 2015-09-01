@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use View;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Auth;
 
 use Imageconv;
 
@@ -76,8 +77,8 @@ class UserController extends Controller
             'items' => $items,
             'content_count' => $content_count,
             'comment_count' => $comment_count
-        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.user'));
-    
+        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.user'))
+        ->header('X-Authenticated', Auth::check() ? 'true' : 'false');
     }
 
     public function edit($id)

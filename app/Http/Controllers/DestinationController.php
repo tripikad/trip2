@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use View;
 use Cache;
+use Auth;
 
 use App\Destination;
 
@@ -46,8 +47,8 @@ class DestinationController extends Controller
         return response()->view('pages.destination.index', [
             'destination' => $destination,
             'features' => $features
-        ])->header('Cache-Control', 'public, max-age=' . config('destination.cache'));
-
+        ])->header('Cache-Control', 'public, max-age=' . config('destination.cache'))
+        ->header('X-Authenticated', Auth::check() ? 'true' : 'false');
 
     }
 

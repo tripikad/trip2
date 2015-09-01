@@ -55,8 +55,8 @@ class ContentController extends Controller
             'destinations' => $destinations,
             'topic' => $request->topic,
             'topics' => $topics,
-        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.content.index'));
-    
+        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.content.index'))
+        ->header('X-Authenticated', Auth::check() ? 'true' : 'false');
     }
 
 
@@ -76,7 +76,8 @@ class ContentController extends Controller
             'content' => $content,
             'comments' => $comments,
             'type' => $type
-        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.content.show'));
+        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.content.show'))
+        ->header('X-Authenticated', Auth::check() ? 'true' : 'false');
     
     }
 
