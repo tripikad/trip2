@@ -48,20 +48,21 @@ class ContentController extends Controller
         $destinations = Destination::getNames($type);
         $topics = Topic::getNames($type);
 
-        return \View::make("pages.content.$type.index")
-            ->with('contents', $contents)
-            ->with('type', $type)
-            ->with('destination', $request->destination)
-            ->with('destinations', $destinations)
-            ->with('topic', $request->topic)
-            ->with('topics', $topics)
-            ->render();
+        return response()->view("pages.content.$type.index", [
+            'contents' => $contents,
+            'type'  => $type,
+            'destination' => $request->destination,
+            'destinations' => $destinations,
+            'topic' => $request->topic,
+            'topics' => $topics,
+        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.content.index'));
     
     }
 
 
     public function show($type, $id)
     {
+        
         $content = \App\Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers')
             ->findorFail($id);
              
@@ -71,11 +72,12 @@ class ContentController extends Controller
 
         $view = view()->exists("pages.content.$type.show") ? "pages.content.$type.show" : 'pages.content.show';
 
-        return \View::make($view)
-            ->with('content', $content)
-            ->with('comments', $comments)
-            ->with('type', $type)
-            ->render();
+        return response()->view($view, [
+            'content' => $content,
+            'comments' => $comments,
+            'type' => $type
+        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.content.show'));
+    
     }
 
     public function create($type)

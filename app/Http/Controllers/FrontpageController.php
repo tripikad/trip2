@@ -42,11 +42,11 @@ class FrontpageController extends Controller
         
         }
         
-        return View::make('pages.frontpage.index')
-            ->with('destinations', $destinations)
-            ->with('features', $features)
-            ->render();
-        
+        return response()->view('pages.frontpage.index', [
+            'destinations' => $destinations,
+            'features' => $features
+        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.frontpage'));
+    
     }
 
     public function search(Request $request)

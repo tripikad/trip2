@@ -71,12 +71,13 @@ class UserController extends Controller
             ->merge($comments)
             ->sortByDesc('created_at');
 
-        return View::make('pages.user.show')
-            ->with('user', $user)
-            ->with('items', $items)
-            ->with('content_count', $content_count)
-            ->with('comment_count', $comment_count)
-            ->render();    
+        return response()->view('pages.user.show', [
+            'user' => $user,
+            'items' => $items,
+            'content_count' => $content_count,
+            'comment_count' => $comment_count
+        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.user'));
+    
     }
 
     public function edit($id)

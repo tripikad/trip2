@@ -43,14 +43,11 @@ class DestinationController extends Controller
         
         }
         
-        return Cache::rememberForever("destination.index.$destination->id", function() use ($destination, $features) {
+        return response()->view('pages.destination.index', [
+            'destination' => $destination,
+            'features' => $features
+        ])->header('Cache-Control', 'public, max-age=' . config('destination.cache'));
 
-            return View::make('pages.destination.index')
-                ->with('destination', $destination)
-                ->with('features', $features)
-                ->render();
-        
-        });
 
     }
 
