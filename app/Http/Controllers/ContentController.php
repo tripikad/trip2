@@ -157,6 +157,8 @@ class ContentController extends Controller
 
         $this->validate($request, config("content_$type.edit.validate"));
 
+        $fields = [];
+        
         if ($request->hasFile('file')) {
             
             $image = $this->storeImage($request->file('file'), $type);
