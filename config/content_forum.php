@@ -23,15 +23,12 @@ return [
 
             'title' => [
                 'type' => 'text',
-                'title' => 'Title',
             ],
             'body' => [
                 'type' => 'textarea',
-                'title' => 'Body',
             ],
             'submit' => [
                 'type' => 'submit',
-                'title' => 'Add',
             ]
         ],
 

@@ -83,8 +83,8 @@ class ContentController extends Controller
     {
 
         return \View::make("pages.content.edit")
+            ->with('mode', 'create')
             ->with('fields', config("content_$type.edit.fields"))
-            ->with('title', trans('content.create.title'))
             ->with('url', route('content.store', [$type]))
             ->with('type', $type)
             ->render();
@@ -140,7 +140,7 @@ class ContentController extends Controller
         $content = \App\Content::findorFail($id);
 
         return \View::make("pages.content.edit")
-            ->with('title', trans('content.create.title'))
+            ->with('mode', 'edit')
             ->with('fields', config("content_$type.edit.fields"))
             ->with('content', $content)
             ->with('method', 'put')

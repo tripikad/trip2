@@ -1,7 +1,7 @@
 @extends('layouts.medium')
 
 @section('title')
-    {{ $title }}
+    {{ trans("content.$mode.title") }}
 @stop
 
 @section('content.medium')
@@ -20,7 +20,7 @@
 
             {!! Form::$field['type']($key, null, [
                 'class' => 'form-control input-md',
-                'placeholder' => $field['title'],
+                'placeholder' => trans("content.$type.edit.field.$key.title"),
                 'rows' => isset($field['rows']) ? $field['rows'] : 8,
             ]) !!}
     
@@ -36,12 +36,9 @@
 
             <div class="row">
 
-                <div class="col-md-8">
-                </div>
-
-                <div class="col-md-4">
+                <div class="col-md-4 col-md-offset-8">
                 
-                    {!! Form::submit($field['title'], [
+                    {!! Form::submit(trans("content.$mode.submit.title"), [
                         'class' => 'btn btn-primary btn-md btn-block'
                     ]) !!}
                     
