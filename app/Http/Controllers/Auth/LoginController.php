@@ -27,7 +27,8 @@ class LoginController extends Controller
         if ($this->signIn($request)) {
 
             return redirect('/')
-                ->with('status', trans('auth.login.login.status'));
+                ->with('status', trans('auth.login.login.status'))
+                ->header('X-Authenticated', true);
         }
 
         return redirect()
