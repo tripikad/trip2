@@ -18,4 +18,8 @@ return [
     'footer.facebook' => 'Facebook',
     'footer.twitter' => 'Twitter',
 
-    ];
+    'forum.forum' => 'General forum',
+    'forum.expat' => 'Expat forum',
+    'forum.buysell' => 'Buying and selling',
+
+];

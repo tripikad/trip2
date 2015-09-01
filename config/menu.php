@@ -50,5 +50,18 @@
 	            'url' => 'https://twitter.com/trip_ee',
 	            'external' => true
 	        ],   	      
-	    ],    
+	    ],  
+
+	    'user' => [
+	    	'forum' => [
+	            'url' => '/content/forum',
+	        ],
+	        'expat' => [
+	            'url' => '/content/expat',
+	        ],
+	        'buysell' => [
+	            'url' => '/content/buysell',
+	        ],  	      
+	    ], 
+
 	];

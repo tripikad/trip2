@@ -4,6 +4,19 @@
     {{ trans("content.$type.index.title") }}
 @stop
 
+@section('navbar.bottom')
+
+    <div class="utils-border-bottom">
+            
+        @include('component.menu', [
+            'menutype' => 'forum',
+            'menu' => config('menu.user')
+        ])
+        
+    </div>
+
+@stop
+
 @section('header.right')
     @include('component.button', [ 
         'route' => route('content.create', ['type' => $type]),
