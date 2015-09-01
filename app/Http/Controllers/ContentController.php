@@ -56,7 +56,6 @@ class ContentController extends Controller
             'topic' => $request->topic,
             'topics' => $topics,
         ])->header('Cache-Control', 'public, s-maxage=' . config('site.cache.content.index'));
-    
     }
 
 

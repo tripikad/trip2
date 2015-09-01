@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use View;
 use DB;
 use Cache;
+use Auth;
 
 use App\Content;
 use App\Destination;
@@ -46,7 +47,6 @@ class FrontpageController extends Controller
             'destinations' => $destinations,
             'features' => $features
         ])->header('Cache-Control', 'public, s-maxage=' . config('site.cache.frontpage'));
-    
     }
 
     public function search(Request $request)

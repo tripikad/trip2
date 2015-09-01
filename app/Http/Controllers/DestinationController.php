@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use View;
 use Cache;
+use Auth;
 
 use App\Destination;
 
@@ -47,7 +48,6 @@ class DestinationController extends Controller
             'destination' => $destination,
             'features' => $features
         ])->header('Cache-Control', 'public, s-maxage=' . config('destination.cache'));
-
 
     }
 
