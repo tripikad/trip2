@@ -26,11 +26,20 @@ class ConvertNews extends ConvertBase
 
             // Find the image embedded in body
 
-            $pattern = "/.*\s*<!--\s*FRONTIMG:\s*(.*)\s*-->.*/";
+            $frontImagePattern = "/.*\s*<!--\s*FRONTIMG:\s*(.*)\s*-->.*/";
       
-            if (preg_match($pattern, $node->body, $matches))
-            {
-                $node->body = preg_replace($pattern, '', $node->body);
+            if (preg_match($frontImagePattern, $node->body)) {
+
+                $node->body = preg_replace($frontImagePattern, '', $node->body);
+            
+            }
+
+            $imagePattern = '/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i';
+
+            if (preg_match_all($imagePattern, $node->body, $imageMatches)) {
+                
+                $image = (isset($imageMatches[0]) && isset($imageMatches[0][0])) ? $imageMatches[0][0] : null;
+
             }
 
             // Convert the content
@@ -39,9 +48,9 @@ class ConvertNews extends ConvertBase
       
                 // Convert the image
 
-                if ($matches && $matches[1]) {
+                if ($image) {
                           
-                    $this->convertRemoteImage($node->nid, $matches[1], '\App\Content', 'news', 'photo');
+                    $this->convertRemoteImage($node->nid, $image, '\App\Content', 'news', 'photo');
                 
                 }
 
