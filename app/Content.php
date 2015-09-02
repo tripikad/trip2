@@ -3,8 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Markdown;
-
 
 class Content extends Model
 {
@@ -12,6 +10,8 @@ class Content extends Model
     protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image', 'status', 'start_at', 'end_at', 'duration', 'price'];
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
+
+    protected $appends = ['body_filtered'];
 
     public function user()
     {
@@ -64,22 +64,28 @@ class Content extends Model
         return $this->image ? '/images/' . $this->type . '/small/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
     }
 
-    public function getBodyAttribute($value)
+    public function filteredBody()
     {
-        // $value = Markdown::parse($value);
-        
-        $pattern = '/\[\[([0-9]+)\]\]/';
 
-        if (preg_match_all($pattern, $value, $matches)) {
+        $pattern = '/\[\[([0-9]+)\]\]/';
+        $filteredBody = $this->body;
+
+        if (preg_match_all($pattern, $filteredBody, $matches)) {
 
             foreach ($matches[1] as $match) {
-                $image = \App\Image::findOrFail($match);
-                $value = str_replace("[[$image->id]]", '<img src="' . $image->preset(). '" />', $value);
+            
+                if ($image = \App\Image::find($match)) {
+                    
+                    $filteredBody = str_replace("[[$image->id]]", '<img src="' . $image->preset(). '" />', $filteredBody);
+                
+                }
+            
             }
 
         }
 
-        return $value;
+        return $filteredBody;
+
     }
 
     public function images()

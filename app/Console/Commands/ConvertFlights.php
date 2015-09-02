@@ -64,6 +64,7 @@ class ConvertFlights extends ConvertBase
             $imagePattern = '/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i';
 
             if (preg_match_all($imagePattern, $node->body, $imageMatches)) {
+                
                 $images = (isset($imageMatches[0])) ? $imageMatches[0] : null;
 
             }
@@ -76,20 +77,32 @@ class ConvertFlights extends ConvertBase
 
                 if ($images && count($images) > 0) {
                     
-                    foreach($images as $image ) {     
+                    $replaceImages = [];
 
-                        dump($image);
+                    foreach($images as $image ) {     
 
                         $newImage = $this->convertRemoteImage($node->nid, $image, '\App\Content', 'flight', 'photo');
                         
                         $escapedImage = str_replace('/', '\/', $image);
                         $escapedImage = str_replace('.', '\.', $escapedImage);
 
-                        $imageMacroPattern = '/<img.*src="?' . $escapedImage . '"?.*\/?>/i';
-                        $flight->update(['body' => preg_replace($imageMacroPattern, "[[$newImage->id]]", $flight->body)]);
-
+                        $replaceImages[] = [
+                            'from' =>'/<img.*src="?' . $escapedImage . '"?.*\/?>/i',
+                            'to' => "[[$newImage->id]]"
+                        ];
 
                     }
+
+                    $body = $node->body;
+
+                    foreach($replaceImages as $replaceImage) {
+                        
+                        $body = preg_replace($replaceImage['from'], $replaceImage['to'], $body);
+                    
+                    }
+                    
+                    $flight->update(['body' => $body]);
+
                 
                 }
 

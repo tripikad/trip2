@@ -34,7 +34,7 @@ class Comment extends Model
 
    public function getBodyAttribute($value)
    {
-       $value = Markdown::parse($value);
+       // $value = Markdown::parse($value);
        return $value;
    }
 

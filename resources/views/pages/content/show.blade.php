@@ -61,7 +61,7 @@
 
         <div class="col-sm-10">
 
-            {!! nl2br($content->body) !!}
+            {!! nl2br($content->filteredBody()) !!}
 
         </div>
         
