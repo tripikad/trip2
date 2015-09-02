@@ -71,19 +71,7 @@
         padding: $spacer;
         text-align: center;
     }
-
-    &.-yellow > .overlay {
-        background-color: yellow;
-    }
-
-    &.-yellow > .overlay > .content > h3 {
-        color: black;
-    }
-
-    &.-yellow > .overlay > .content > p {
-        color: black;
-    }
-
+    
     &.-large > .overlay > .content > h3 {
         font-size: $font-size-h2;
     }
