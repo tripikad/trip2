@@ -31,9 +31,8 @@
 
         {!! Form::submit(
             trans('content.index.filter.submit.title'), 
-            ['class' => 'btn btn-primary btn-sm'])
+            ['class' => 'btn btn-link'])
         !!}
-
 
         <a 
             href="{{ route('content.index', [$type]) }}"

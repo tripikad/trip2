@@ -80,7 +80,7 @@ return [
     // Buysell
 
     'buysell.index.title' => 'Buying and selling',
-    'buysell.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :tags',
+    'buysell.index.row.text' => ':user :created_at',
     'buysell.create.title' => 'Add post',
 
     'buysell.edit.field.title.title' => 'Title',
