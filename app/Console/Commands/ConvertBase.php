@@ -930,7 +930,7 @@ class ConvertBase extends Command
     public function removeReferrals($string)
     {
 
-        return preg_replace("/<i>Vaata ka teisi(.*)<\/i>!/i", '', $string);   
+        return preg_replace("/<i>(.*)<\/i>\s*!\s*$/i", '', $string);   
     
     }
 
