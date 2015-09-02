@@ -31,7 +31,7 @@
                         'image' => $content->user->imagePath(),
                         'title' => $content->user->name,
                         'text' => $content->title,
-                        'options' => '-square -center'
+                        'options' => '-center'
                     ])
 
                 </a>
