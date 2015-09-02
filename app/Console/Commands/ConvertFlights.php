@@ -36,6 +36,8 @@ class ConvertFlights extends ConvertBase
         foreach($nodes as $node)
         {
 
+            /*
+            
             $fields = [
                 'field_salesperiod_value',
                 'field_salesperiod_value2',
@@ -45,7 +47,10 @@ class ConvertFlights extends ConvertBase
                 'field_tripeecomment_value',
             ];
 
-            $node->body = $this->formatFields($node, $fields) . "\n\n" . $node->body;
+            */
+
+            $node->start_at = isset($node->field_salesperiod_value) ? $this->formatDateTime($node->field_salesperiod_value) : null;
+            $node->end_at = isset($node->field_salesperiod_value2) ? $this->formatDateTime($node->field_salesperiod_value2) : null;
 
             if ($this->convertNode($node, 'App\Content', 'flight')) {
 
@@ -95,6 +100,6 @@ class ConvertFlights extends ConvertBase
     public function handle()
     {
         $this->convertFlightNodes();
-        $this->convertForumNodes();
+        // $this->convertForumNodes();
     }
 }

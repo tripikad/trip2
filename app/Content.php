@@ -9,7 +9,9 @@ use Markdown;
 class Content extends Model
 {
 
-    protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image', 'status'];
+    protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image', 'status', 'start_at', 'end_at', 'duration', 'price'];
+
+    protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
     public function user()
     {

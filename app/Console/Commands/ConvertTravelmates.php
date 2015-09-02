@@ -27,17 +27,20 @@ class ConvertTravelmates extends ConvertBase
         $this->output->progressStart(count($nodes));
 
         foreach($nodes as $node) {   
-  
-            $node->field_reisitoimumine_value =  $this->formatTimestamp($node->field_reisitoimumine_value);
+
+            /*
 
             $fields = [
                 'field_reisitoimumine_value',
                 'field_reisikestvus_value',
                 'field_millistkaaslastsoovidleida_value',
             ];
+            
+            */
 
-            $node->body = $this->formatFields($node, $fields) . "\n\n" . $node->body;
-
+            $node->start_at =  $this->formatTimestamp($node->field_reisitoimumine_value);
+            $node->duration =  $this->cleanAll($node->field_reisikestvus_value);
+           
             if ($this->convertNode($node, '\App\Content', 'travelmate')) {
             
                 $this->convertNodeDestinations($node);

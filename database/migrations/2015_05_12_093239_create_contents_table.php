@@ -17,6 +17,12 @@ class CreateContentsTable extends Migration
             $table->string('url');
             $table->integer('status')->required();    
             $table->timestamps();
+
+            $table->dateTime('start_at')->nullable();
+            $table->dateTime('end_at')->nullable();
+            $table->string('duration')->nullable();
+            $table->integer('price')->nullable(); 
+
         });
     }
 

@@ -106,7 +106,11 @@ class ConvertBase extends Command
                 $model->user_id = $user_id;
                 $model->title = $this->cleanAll($node->title);
                 $model->body = $this->clean($node->body);
-//              $model->body = $node->body;
+
+                $model->start_at = isset($node->start_at) ? $node->start_at : null;
+                $model->end_at = isset($node->end_at) ? $node->end_at : null;
+                $model->duration = isset($node->duration) ? $this->cleanAll($node->duration) : null;
+                $model->price = (isset($node->price) && is_int($node->price)) ? $node->price : null;
 
                 $model->status = 1;
                 $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);  
@@ -201,7 +205,7 @@ class ConvertBase extends Command
         'Reisimeditsiin' => ['rename' => 'Tervis'],
         'Jalgrattamatk' => ['move' => 'Matkamine'],
         'Reisifoto' => ['rename' => 'Fotod'],
-        'Lendude soodukad' => ['delete' => true],
+        'Lendude soodukad' => ['move' => 'Lendamine ja lennufirmad'],
         'Kultuurireis' => ['delete' => true],
         'Laevareis' => ['rename' => 'Laevad ja kruiisid'],
         'Hinnad kohapeal' => ['rename' => 'Raha ja hinnad'],
