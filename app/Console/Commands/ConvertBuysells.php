@@ -73,7 +73,11 @@ class ConvertBuysells extends ConvertBase
             
             }
 
-            $node->body = $this->formatFields($node, $fields) . "\n\n" . $node->body;
+            if ($node->field_buysellcontact_value) {
+
+                $node->body = $node->body . "\n\nKontakt: " . $node->field_buysellcontact_value;
+
+            }
 
             $this->convertNode($node, '\App\Content', 'buysell');
 
