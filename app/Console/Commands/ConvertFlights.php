@@ -52,10 +52,10 @@ class ConvertFlights extends ConvertBase
             $node->start_at = isset($node->field_salesperiod_value) ? $this->formatDateTime($node->field_salesperiod_value) : null;
             $node->end_at = isset($node->field_salesperiod_value2) ? $this->formatDateTime($node->field_salesperiod_value2) : null;
 
-            if (preg_match('/.*([0-9]{3,4})€.*/', $node->title, $matches)) {
+            if (preg_match('/(\d+)€/', $node->title, $matches)) {
 
                 $node->price = $matches[1];
-                $node->title = preg_replace('/[al]*\.?\s?[0-9]{3,4}€/', '', $node->title);
+                $node->title = preg_replace('/[al]*\.?\s?(\d+)€/', '', $node->title);
                 
             };
 
