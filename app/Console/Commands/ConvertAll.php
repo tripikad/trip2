@@ -20,7 +20,9 @@ class ConvertAll extends ConvertBase
         $this->call('convert:internal');
         $this->call('convert:miscs');
         $this->call('convert:news');
-        $this->call('convert:offers');
+        
+        // $this->call('convert:offers');
+        
         $this->call('convert:photos');
         $this->call('convert:static');
         $this->call('convert:travelmates');

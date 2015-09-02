@@ -28,7 +28,6 @@ class BasicTest extends TestCase
             'buysell',
             'photo',
             'blog',
-            'offer',
         ];
 
         foreach ($types as $type) {

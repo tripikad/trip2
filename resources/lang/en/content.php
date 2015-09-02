@@ -116,7 +116,7 @@ return [
 
     // Internal
 
-    'internal.index.title' => '...',
+    'internal.index.title' => 'Internal forum',
     'internal.index.row.text' => ':user :created_at, latest comment at :updated_at',
     'internal.create.title' => 'Add post',
 

@@ -22,10 +22,8 @@
 	            'url' => '/content/blog'
 	        ],
 	        'offers' => [
-	            'url' => '/content/offer'
-	        ],
-	        'internal' => [
-	            'url' => '/content/internal'
+	            'url' => 'http://vana.trip.ee/reisipakkumised',
+	            'external' => true
 	        ],
 	    ],
 

@@ -10,7 +10,6 @@ return [
         'buysell',
         'internal',
         'news',
-        'offer',
         'photo',
         'static',
         'travelmate',
