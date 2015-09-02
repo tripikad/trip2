@@ -59,7 +59,39 @@ class ConvertFlights extends ConvertBase
                 
             };
 
-            if ($this->convertNode($node, 'App\Content', 'flight')) {
+            $node->body = str_replace('src="/images', 'src="http://www.trip.ee/images', $node->body);
+
+            $imagePattern = '/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i';
+
+            if (preg_match_all($imagePattern, $node->body, $imageMatches)) {
+                $images = (isset($imageMatches[0])) ? $imageMatches[0] : null;
+
+            }
+
+            // Convert the content
+
+            if ($flight = $this->convertNode($node, '\App\Content', 'flight')) {
+            
+                // Convert the image
+
+                if ($images && count($images) > 0) {
+                    
+                    foreach($images as $image ) {     
+
+                        dump($image);
+
+                        $newImage = $this->convertRemoteImage($node->nid, $image, '\App\Content', 'flight', 'photo');
+                        
+                        $escapedImage = str_replace('/', '\/', $image);
+                        $escapedImage = str_replace('.', '\.', $escapedImage);
+
+                        $imageMacroPattern = '/<img.*src="?' . $escapedImage . '"?.*\/?>/i';
+                        $flight->update(['body' => preg_replace($imageMacroPattern, "[[$newImage->id]]", $flight->body)]);
+
+
+                    }
+                
+                }
 
                 $this->convertNodeDestinations($node);
                 $this->convertNodeCarriers($node);

@@ -5,14 +5,14 @@ return [
     'frontpage' => [
         
         'show' => true,
-        'with' => [],
+        'with' => ['images'],
         'latest' => 'created_at',
         'take' => 8
     ],
 
     'index' => [
     
-        'with' => ['destinations', 'carriers'],
+        'with' => ['images'],
         'latest' => 'created_at',
         'paginate' => 24,
     ],

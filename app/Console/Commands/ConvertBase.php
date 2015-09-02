@@ -57,6 +57,7 @@ class ConvertBase extends Command
         $this->take = env('CONVERT_TAKE', '10');
         $this->copyFiles = env('CONVERT_FILES', 'false');
         $this->scrambleMessages = env('CONVERT_SCRAMBLE', 'true');
+        $this->fileHash = env('CONVERT_FILEHASH', 'false');
     }
 
     // Nodes
@@ -615,7 +616,18 @@ class ConvertBase extends Command
 
             $file = pathinfo($imageUrl)['filename'];
             $ext = pathinfo($imageUrl)['extension'];
-            $filename = $file . '-' . strtolower(str_random(4)) . '.' . $ext;
+
+            if ($this->fileHash) {
+                
+                $filename = $file . '-' . strtolower(str_random(4)) . '.' . $ext;
+            
+            } else {
+
+                $filename = $file . '.' . $ext;
+                
+            }
+
+            $filename = str_replace('%20', '-', $filename);
 
             $model = $modelName::findOrFail($id);
             
