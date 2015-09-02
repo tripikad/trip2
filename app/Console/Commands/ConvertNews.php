@@ -38,7 +38,7 @@ class ConvertNews extends ConvertBase
 
             if (preg_match_all($imagePattern, $node->body, $imageMatches)) {
                 
-                $image = (isset($imageMatches[0]) && isset($imageMatches[0][0])) ? $imageMatches[0][0] : null;
+                $images = (isset($imageMatches[0])) ? $imageMatches[0] : null;
 
             }
 
@@ -48,9 +48,13 @@ class ConvertNews extends ConvertBase
       
                 // Convert the image
 
-                if ($image) {
-                          
-                    $this->convertRemoteImage($node->nid, $image, '\App\Content', 'news', 'photo');
+                if ($images && count($images) > 0) {
+                    
+                    foreach($images as $image ) {     
+                    
+                        $this->convertRemoteImage($node->nid, $image, '\App\Content', 'news', 'photo');
+                    
+                    }
                 
                 }
 

@@ -581,8 +581,17 @@ class ConvertBase extends Command
 
         $model = $modelName::findOrFail($id);
 
-        $image = \App\Image::create(['filename' => $filename]);        
-        $model->images()->attach($image);
+        if (method_exists($model, 'images')) {
+
+            $image = \App\Image::create(['filename' => $filename]);        
+            $model->images()->attach($image);
+
+        } else {
+
+            $model->image = $filename;
+            $model->save();
+        
+        }
 
         $from = 'http://trip.ee/' . $imagePath;
         $to = public_path() . '/images/' . $type . '/' . $filename;
@@ -600,15 +609,25 @@ class ConvertBase extends Command
 
         $imageUrl = $this->cleanAll($imageUrl);
 
-        if (array_key_exists('extension', pathinfo($imageUrl))) {
+        if (array_key_exists('filename', pathinfo($imageUrl)) && array_key_exists('extension', pathinfo($imageUrl))) {
 
+            $file = pathinfo($imageUrl)['filename'];
             $ext = pathinfo($imageUrl)['extension'];
-            $filename = $type . '-' . $id . '.' . $ext;
+            $filename = $file . '-' . strtolower(str_random(4)) . '.' . $ext;
 
             $model = $modelName::findOrFail($id);
             
-            $image = \App\Image::create(['filename' => $filename]);        
-            $model->images()->attach($image);
+            if (method_exists($model, 'images')) {
+
+                $image = \App\Image::create(['filename' => $filename]);        
+                $model->images()->attach($image);
+
+            } else {
+
+                $model->image = $filename;
+                $model->save();
+            
+            }
 
             $from = $imageUrl;
             $to = public_path() . '/images/' . $type . '/' . $filename;
