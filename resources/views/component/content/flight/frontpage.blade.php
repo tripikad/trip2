@@ -11,6 +11,9 @@
             <a href="{{ route('content.show', [$content->type, $content]) }}">
 
                 @include('component.card', [
+                    'title' => $content->price ? trans("content.flight.index.field.price", [
+                        'price' => $content->price
+                    ]) : null,
                     'text' => $content->title,
                     'options' => '-center -yellow'
                 ])

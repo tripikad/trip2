@@ -28,8 +28,11 @@
                 <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 
                     @include('component.card', [
-                        'title' => str_limit($content->title, 45),
-                        'options' => '-square -center -yellow'
+                        'title' => $content->price ? trans("content.flight.index.field.price", [
+                            'price' => $content->price
+                        ]) : null,
+                        'text' => str_limit($content->title, 45),
+                        'options' => '-center -yellow'
                     ])
                 
                 </a>

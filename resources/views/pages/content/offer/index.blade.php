@@ -29,7 +29,7 @@
                     
                     @include('component.card', [
                         'image' => $content->imagePath(),
-                        'title' => $content->title,
+                        'text' => $content->title,
                         'options' => '-square -center'
                     ])
                 

@@ -110,7 +110,7 @@ class ConvertBase extends Command
                 $model->start_at = isset($node->start_at) ? $node->start_at : null;
                 $model->end_at = isset($node->end_at) ? $node->end_at : null;
                 $model->duration = isset($node->duration) ? $this->cleanAll($node->duration) : null;
-                $model->price = (isset($node->price) && is_int($node->price)) ? $node->price : null;
+                $model->price = (isset($node->price) && is_int((int)$node->price)) ? $node->price : null;
 
                 $model->status = 1;
                 $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);  
