@@ -70,4 +70,9 @@ class Content extends Model
         return $value;
     }
 
+    public function images()
+    {
+        return $this->belongsToMany('App\Image', 'content_image');
+    }
+
 }

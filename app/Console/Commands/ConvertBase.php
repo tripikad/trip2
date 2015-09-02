@@ -577,15 +577,15 @@ class ConvertBase extends Command
     {
 
         $imagePath = $this->cleanAll($imagePath);
+        $filename = basename($imagePath);
 
         $model = $modelName::findOrFail($id);
 
-        $model->image = basename($imagePath);
-
-        $model->save();
+        $image = \App\Image::create(['filename' => $filename]);        
+        $model->images()->attach($image);
 
         $from = 'http://trip.ee/' . $imagePath;
-        $to = public_path() . '/images/' . $type . '/' . basename($imagePath);
+        $to = public_path() . '/images/' . $type . '/' . $filename;
 
         if ($this->copyFiles) {
 
@@ -603,16 +603,15 @@ class ConvertBase extends Command
         if (array_key_exists('extension', pathinfo($imageUrl))) {
 
             $ext = pathinfo($imageUrl)['extension'];
-            $imageFile = $type . '-' . $id . '.' . $ext;
+            $filename = $type . '-' . $id . '.' . $ext;
 
             $model = $modelName::findOrFail($id);
-
-            $model->image = $imageFile;
-
-            $model->save();
+            
+            $image = \App\Image::create(['filename' => $filename]);        
+            $model->images()->attach($image);
 
             $from = $imageUrl;
-            $to = public_path() . '/images/' . $type . '/' . $imageFile;
+            $to = public_path() . '/images/' . $type . '/' . $filename;
 
             if ($this->copyFiles) {
             
