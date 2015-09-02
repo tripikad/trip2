@@ -6,7 +6,7 @@ return [
         
         'show' => true,
         'with' => [],
-        'latest' => 'updated_at',
+        'latest' => 'created_at',
         'take' => 1
     ],
 

@@ -48,7 +48,9 @@ class ContentController extends Controller
         $destinations = Destination::getNames($type);
         $topics = Topic::getNames($type);
 
-        return response()->view("pages.content.$type.index", [
+        $view = view()->exists("pages.content.$type.index") ? "pages.content.$type.index" : 'pages.content.index';
+
+        return response()->view($view, [
             'contents' => $contents,
             'type'  => $type,
             'destination' => $request->destination,

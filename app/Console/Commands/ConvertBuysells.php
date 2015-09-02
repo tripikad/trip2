@@ -7,9 +7,18 @@ class ConvertBuysells extends ConvertBase
 
     protected $signature = 'convert:buysells';
 
-
     public function convert()
     {
+
+        $buysellTypeMap = [
+            'Müün' => 'M: ',
+            'Ostan' => 'O: ',
+            'Annan üürile' => '',
+            'Võtan üürile' => '',
+            'Annan ära' => '',
+            'Muu' => ''
+        ];
+
         $nodes = $this->getNodes('trip_forum_buysell')
             ->join(
                 'content_type_trip_forum_buysell',
@@ -29,8 +38,6 @@ class ConvertBuysells extends ConvertBase
 
         foreach($nodes as $node) {
 
-            // $node->title = $node->title . ', ost-müük';
-
             $category = $this->getNodeTerms($node->nid, [25]); // Kategooria
             $type = $this->getNodeTerms($node->nid, [22]); // Kuulutuse tüüp
             
@@ -43,10 +50,32 @@ class ConvertBuysells extends ConvertBase
                 'field_buysellprice_value',
                 'field_buysellcontact_value'
             ];
+            
+            if ($node->type) {
+
+                $node->title = $buysellTypeMap[$node->type] . preg_replace('/^(M|O|Müün|Ostan):/i', '', $node->title);
+                
+            }
+
+            if ($price = $node->field_buysellprice_value) {
+
+                if (is_numeric($price)) {
+
+                    $price = $price . '€';
+
+                } else {
+
+                    $price = mb_convert_case(preg_replace('/( eur|euri|eurot|.-)/i', '€', $price), MB_CASE_LOWER);
+
+                }
+                
+                $node->title = preg_replace('/\s?Kiire\!?\s?/i', '', $node->title) . ', hind ' . $price;
+            
+            }
 
             $node->body = $this->formatFields($node, $fields) . "\n\n" . $node->body;
 
-            $this->convertNode($node, '\App\Content', 'forum');
+            $this->convertNode($node, '\App\Content', 'buysell');
 
             $this->output->progressAdvance();
 

@@ -24,6 +24,8 @@ class BasicTest extends TestCase
             'flight',
             'travelmate',
             'forum',
+            'expat',
+            'buysell',
             'photo',
             'blog',
             'offer',

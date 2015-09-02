@@ -16,9 +16,7 @@ class ConvertExpats extends ConvertBase
 
         foreach($nodes as $node) {
 
-            $node->title = $node->title . ', elust välismaal';
-
-            if ($this->convertNode($node, '\App\Content', 'forum')) {
+            if ($this->convertNode($node, '\App\Content', 'expat')) {
 
                 $this->convertNodeDestinations($node);
                 $this->convertNodeTopics($node);

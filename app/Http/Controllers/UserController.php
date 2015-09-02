@@ -77,13 +77,7 @@ class UserController extends Controller
             'items' => $items,
             'content_count' => $content_count,
             'comment_count' => $comment_count
-<<<<<<< HEAD
         ])->header('Cache-Control', 'public, s-maxage=' . config('site.cache.user'));
-    
-=======
-        ])->header('Cache-Control', 'public, max-age=' . config('site.cache.user'))
-        ->header('X-Authenticated', Auth::check() ? 'true' : 'false');
->>>>>>> f879eccde8b96452cbbe6a5128b49ddeb431474b
     }
 
     public function edit($id)

@@ -61,13 +61,31 @@ return [
 
     // Forum
 
-    'forum.index.title' => 'Forum',
+    'forum.index.title' => 'General forum',
     'forum.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :tags',
     'forum.create.title' => 'Add post',
 
     'forum.edit.field.title.title' => 'Title',
     'forum.edit.field.body.title' => 'Body',
-    
+
+    // Expat
+
+    'expat.index.title' => 'Expat forum',
+    'expat.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :tags',
+    'expat.create.title' => 'Add post',
+
+    'expat.edit.field.title.title' => 'Title',
+    'expat.edit.field.body.title' => 'Body',
+
+    // Buysell
+
+    'buysell.index.title' => 'Buying and selling',
+    'buysell.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :tags',
+    'buysell.create.title' => 'Add post',
+
+    'buysell.edit.field.title.title' => 'Title',
+    'buysell.edit.field.body.title' => 'Body',
+
     // Photo
 
     'photo.index.title' => 'Photos',

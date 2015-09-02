@@ -6,6 +6,8 @@ return [
         'blog',
         'flight',
         'forum',
+        'expat',
+        'buysell',
         'internal',
         'news',
         'offer',
