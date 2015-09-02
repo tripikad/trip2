@@ -12,12 +12,12 @@
         @endif
     ">
 
-    @if($content->image)
+    @if($image = $content->images()->first())
         
         <div class="utils-padding-bottom">
 
         @include('component.card', [
-            'image' => $content->imagePath(),
+            'image' => $image->preset(),
             'options' => '-empty'
         ])
 

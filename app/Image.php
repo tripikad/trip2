@@ -18,4 +18,14 @@ class Image extends Model
     
     }
 
+    public function preset($preset = 'small')
+    {
+        return '/images/' 
+            . $this->content()->first()->type 
+            . '/'
+            . $preset
+            . '/' 
+            . $this->filename;
+    }
+
 }
