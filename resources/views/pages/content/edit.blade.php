@@ -32,6 +32,24 @@
 
             {!! Form::$field['type']($key) !!}
 
+        @elseif ($field['type'] == 'destinations')
+
+            {!! Form::select(
+                $key,
+                $destinations,
+                $destination,
+                ['multiple' => true]
+            )!!}
+
+        @elseif ($field['type'] == 'topics')
+
+            {!! Form::select(
+                $key,
+                $topics,
+                $topic,
+                ['multiple' => true]
+            )!!}
+
         @elseif (in_array($field['type'], ['submit', 'button']))
 
             <div class="row">

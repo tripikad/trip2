@@ -11,3 +11,6 @@ $('select[name=topic]').selectize({
         $('input[type=submit]').click();
     }
 });
+
+$('select[name=destinations]').selectize();
+$('select[name=topics]').selectize();

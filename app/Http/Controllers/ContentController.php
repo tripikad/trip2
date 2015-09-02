@@ -84,11 +84,16 @@ class ContentController extends Controller
     public function create($type)
     {
 
+        $destinations = Destination::getNames($type);
+        $topics = Topic::getNames($type);
+
         return \View::make("pages.content.edit")
             ->with('mode', 'create')
             ->with('fields', config("content_$type.edit.fields"))
             ->with('url', route('content.store', [$type]))
             ->with('type', $type)
+            ->with('destinations', $destinations)
+            ->with('topics', $topics)
             ->render();
 
     }
@@ -141,6 +146,12 @@ class ContentController extends Controller
 
         $content = \App\Content::findorFail($id);
 
+        $destinations = Destination::getNames();
+        $destination = $content->destinations()->select('destinations.id')->lists('id')->toArray();
+
+        $topics = Topic::getNames();
+        $topic = $content->topics()->select('topics.id')->lists('id')->toArray();
+
         return \View::make("pages.content.edit")
             ->with('mode', 'edit')
             ->with('fields', config("content_$type.edit.fields"))
@@ -148,6 +159,10 @@ class ContentController extends Controller
             ->with('method', 'put')
             ->with('url', route('content.update', [$content->type, $content]))
             ->with('type', $type)
+            ->with('destinations', $destinations)
+            ->with('destination', $destination)
+            ->with('topics', $topics)
+            ->with('topic', $topic)
             ->render();
 
     }
@@ -169,6 +184,18 @@ class ContentController extends Controller
         }
 
         $content->update(array_merge($fields, $request->all()));
+
+        if ($request->has('destinations')) {
+            
+            $content->destinations()->sync((array)$request->destinations);
+
+        }
+
+       if ($request->has('topics')) {
+            
+            $content->topics()->sync((array)$request->topics);
+
+        }
 
         return redirect()
             ->route('content.show', [$type, $content])

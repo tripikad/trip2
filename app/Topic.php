@@ -14,15 +14,9 @@ class Topic extends Model
         return $this->belongsToMany('App\Content');
     }
 
-    static function getNames($type)
+    static function getNames($type = null)
     {
-        return Topic::whereHas('content', function ($query) use ($type) {
-            
-            $query->whereType($type);
-        
-        })
-        ->lists('name', 'id')
-        ->sort();
+        return Topic::lists('name', 'id')->sort();
     }
 
 }
