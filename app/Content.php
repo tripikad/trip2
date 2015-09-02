@@ -67,6 +67,18 @@ class Content extends Model
     public function getBodyAttribute($value)
     {
         // $value = Markdown::parse($value);
+        
+        $pattern = '/\[\[([0-9]+)\]\]/';
+
+        if (preg_match_all($pattern, $value, $matches)) {
+
+            foreach ($matches[1] as $match) {
+                $image = \App\Image::findOrFail($match);
+                $value = str_replace("[[$image->id]]", '<img src="' . $image->preset(). '" />', $value);
+            }
+
+        }
+
         return $value;
     }
 

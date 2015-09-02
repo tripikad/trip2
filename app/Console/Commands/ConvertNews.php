@@ -44,7 +44,7 @@ class ConvertNews extends ConvertBase
 
             // Convert the content
 
-            if ($this->convertNode($node, '\App\Content', 'news')) {
+            if ($news = $this->convertNode($node, '\App\Content', 'news')) {
       
                 // Convert the image
 
@@ -52,8 +52,15 @@ class ConvertNews extends ConvertBase
                     
                     foreach($images as $image ) {     
                     
-                        $this->convertRemoteImage($node->nid, $image, '\App\Content', 'news', 'photo');
-                    
+                        $newImage = $this->convertRemoteImage($node->nid, $image, '\App\Content', 'news', 'photo');
+                        
+                        $escapedImage = str_replace('/', '\/', $image);
+                        $escapedImage = str_replace('.', '\.', $escapedImage);
+
+                        $imageMacroPattern = '/<img.*src="?' . $escapedImage . '"?.*\/?>/i';
+                        $news->update(['body' => preg_replace($imageMacroPattern, "[[$newImage->id]]", $news->body)]);
+
+
                     }
                 
                 }

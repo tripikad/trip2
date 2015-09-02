@@ -123,7 +123,7 @@ class ConvertBase extends Command
                 $this->convertFlags($node->nid, 'App\Content', 'node');
                 $this->convertAlias($node->nid, 'App\Content', 'node');
 
-                return true;
+                return $model;
             
             } else {
 
@@ -607,6 +607,8 @@ class ConvertBase extends Command
     public function convertRemoteImage($id, $imageUrl, $modelName, $type, $preset = 'user')
     {
 
+        $newImage = false;
+
         $imageUrl = $this->cleanAll($imageUrl);
 
         if (array_key_exists('filename', pathinfo($imageUrl)) && array_key_exists('extension', pathinfo($imageUrl))) {
@@ -621,6 +623,8 @@ class ConvertBase extends Command
 
                 $image = \App\Image::create(['filename' => $filename]);        
                 $model->images()->attach($image);
+
+                $newImage = $image;
 
             } else {
 
@@ -640,6 +644,9 @@ class ConvertBase extends Command
             }
 
         }
+    
+        return $newImage;
+
     }
 
 
