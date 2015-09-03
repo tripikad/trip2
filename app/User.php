@@ -101,14 +101,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Follow');
     }
 
-    public function imagePath()
+    public function imagePath($preset = 'small')
     {
-        return $this->image ? '/images/user/small/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
+        return $this->image ? '/images/' . $preset . '/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
     }
 
     public function imagePathOnly()
     {
-        return $this->image ? '/images/user/small/' . $this->image : null;
+        return $this->image ? '/images/' . $preset . '/' . $this->image : null;
     }
 
     public function hasRole($role) {

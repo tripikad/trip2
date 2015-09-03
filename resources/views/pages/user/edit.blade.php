@@ -7,7 +7,7 @@
 @section('header.top')
     
     @include('component.image', [
-        'image' => $user->imagePath() . '?' . str_random(4),
+        'image' => $user->preset('small_square') . '?' . str_random(4),
         'options' => '-circle',
         'width' => '30%'
     ])

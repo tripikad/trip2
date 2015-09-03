@@ -28,7 +28,6 @@ class FrontpageController extends Controller
             'forum',
             'photo',
             'blog',
-            'offer',
         ];
 
         $features = [];

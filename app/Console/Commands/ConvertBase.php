@@ -540,7 +540,7 @@ class ConvertBase extends Command
 
             if ($user->picture) {
 
-                $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user', 'user');
+                $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user');
             
             }
 
@@ -574,7 +574,7 @@ class ConvertBase extends Command
     
     }
 
-    public function convertLocalImage($id, $imagePath, $modelName, $type, $preset = 'user')
+    public function convertLocalImage($id, $imagePath, $modelName, $type)
     {
 
         $imagePath = $this->cleanAll($imagePath);
@@ -595,17 +595,17 @@ class ConvertBase extends Command
         }
 
         $from = 'http://trip.ee/' . $imagePath;
-        $to = public_path() . '/images/' . $type . '/' . $filename;
+        $to = public_path() . '/images/original/' . $filename;
 
         if ($this->copyFiles) {
 
             $this->copyFile($from, $to);
-            $this->createThumbnail($from, $to, $preset);
+            $this->createThumbnail($from, $to);
         }
     
     }
 
-    public function convertRemoteImage($id, $imageUrl, $modelName, $type, $preset = 'user')
+    public function convertRemoteImage($id, $imageUrl, $modelName, $type)
     {
 
         $newImage = false;
@@ -646,12 +646,12 @@ class ConvertBase extends Command
             }
 
             $from = $imageUrl;
-            $to = public_path() . '/images/' . $type . '/' . $filename;
+            $to = public_path() . '/images/original/' . $filename;
 
             if ($this->copyFiles) {
             
                 $this->copyFile($from, $to);
-                $this->createThumbnail($from, $to, $preset);
+                $this->createThumbnail($from, $to);
             
             }
 
@@ -791,7 +791,7 @@ class ConvertBase extends Command
 
     // Utils 
     
-    public function copyFile($from, $to, $preset = 'user')
+    public function copyFile($from, $to)
     {
         try {
 
@@ -816,29 +816,39 @@ class ConvertBase extends Command
         return true;
     }
 
-    public function createThumbnail($from, $to, $preset)
+    public function createThumbnail($from, $to)
     {
 
         try {
 
-            if ($preset == 'user') {
-
-                Imageconv::make($to)
-                    ->fit(200)
-                    ->save(dirname($to) . '/small/' . basename($to));
-            } 
+            Imageconv::make($to)
+                ->fit(80)
+                ->save(dirname($to) . '/../xsmall_square/' . basename($to));
+ 
+            Imageconv::make($to)
+                ->fit(180)
+                ->save(dirname($to) . '/../small_square/' . basename($to));
         
-            if ($preset == 'photo') {
-            
-                Imageconv::make($to)
-                    ->resize(300, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })
-                    ->save(dirname($to) . '/small/' . basename($to));
+            Imageconv::make($to)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(dirname($to) . '/../small/' . basename($to));
 
-            }
+            Imageconv::make($to)
+                ->resize(700, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(dirname($to) . '/../medium/' . basename($to));
+
+            Imageconv::make($to)
+                ->resize(900, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save(dirname($to) . '/../large/' . basename($to));
 
         }
+
         catch (\Intervention\Image\Exception\NotReadableException $e) {} 
         catch (\Intervention\Image\Exception\NotSupportedException $e) {} 
         catch (\Symfony\Component\Debug\Exception\FatalErrorException $e) {}

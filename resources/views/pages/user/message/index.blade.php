@@ -27,7 +27,7 @@
         <div class="utils-border-bottom @if ($message->read) utils-read @endif">
 
             @include('component.row', [
-                'image' => $message->fromUser->imagePath(),
+                'image' => $message->fromUser->preset('xsmall_square'),
                 'image_link' => route('user.show', [$message->fromUser]),
                 'heading' => $message->title,
                 'heading_link' => route('user.show.messages.with', [$user, $message->fromUser]),

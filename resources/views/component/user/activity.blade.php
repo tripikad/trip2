@@ -7,7 +7,7 @@
         <div class="utils-padding-bottom">
 
         @include('component.card', [
-            'image' => $item->imagePath(),
+            'image' => $item->preset('xsmall_square'),
             'options' => '-empty -wide'
         ])
 
@@ -19,7 +19,7 @@
     @if ($item->activity_type == 'content') 
 
         @include('component.row', [
-            'image' => $user->imagePath(),
+            'image' => $user->preset('xsmall_square'),
             'text' => trans('user.activity.index.row.content', [
                 'user' => $user->name,
                 'title' => '<a href="'
@@ -34,7 +34,7 @@
     @else
 
         @include('component.row', [
-            'image' => $user->imagePath(),
+            'image' => $user->preset('xsmall_square'),
             'text' => trans('user.activity.index.row.comment', [
                 'user' => $user->name,
                 'title' => '<a href="'

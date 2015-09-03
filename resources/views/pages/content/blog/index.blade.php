@@ -27,7 +27,7 @@
                 
                 <a href="{{ route('user.show', [$content->user]) }}">
                     @include('component.image', [
-                        'image' => $content->user->imagePath(),
+                        'image' => $content->user->preset('small_square'),
                         'options' => '-circle'
                     ])
                 </a>

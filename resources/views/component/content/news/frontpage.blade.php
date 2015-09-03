@@ -9,7 +9,7 @@
             <a href="{{ route('content.show', [$contents[0]->type, $contents[0]]) }}">
 
                 @include('component.card', [
-                    'image' => $contents[0]->imagePath(),
+                    'image' => $contents[0]->images()->first()->preset('medium'),
                     'title' => $contents[0]->title,
                     'options' => '-landscape-padding'
                 ])
@@ -31,7 +31,7 @@
                     <a href="{{ route('content.show', [$contents[1]->type, $contents[1]]) }}">
 
                         @include('component.card', [
-                            'image' => $contents[1]->imagePath(),
+                            'image' => $contents[1]->images()->first()->preset(),
                             'text' => $contents[1]->title,
                             'options' => '-landscape'
                     ])
@@ -49,7 +49,7 @@
                     <a href="{{ route('content.show', [$contents[0]->type, $contents[0]]) }}">
 
                         @include('component.card', [
-                            'image' => $contents[2]->imagePath(),
+                            'image' => $contents[2]->images()->first()->preset(),
                             'text' => $contents[2]->title,
                             'options' => '-landscape'
                     ])
@@ -71,7 +71,7 @@
                     <a href="{{ route('content.show', [$contents[1]->type, $contents[1]]) }}">
 
                         @include('component.card', [
-                            'image' => $contents[3]->imagePath(),
+                            'image' => $contents[3]->images()->first()->preset(),
                             'text' => $contents[3]->title,
                             'options' => '-landscape'
                     ])
@@ -89,7 +89,7 @@
                     <a href="{{ route('content.show', [$contents[0]->type, $contents[0]]) }}">
 
                         @include('component.card', [
-                            'image' => $contents[4]->imagePath(),
+                            'image' => $contents[4]->images()->first()->preset(),
                             'text' => $contents[4]->title,
                             'options' => '-landscape'
                     ])

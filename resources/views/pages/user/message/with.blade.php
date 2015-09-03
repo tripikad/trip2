@@ -23,7 +23,7 @@
 @section('header.top')
 
     @include('component.image', [
-        'image' => $user_with->imagePath(),
+        'image' => $user_with->preset('small_square'),
         'options' => '-circle',
         'width' => '30%'
     ])
@@ -44,7 +44,7 @@
     >
 
     @include('component.row', [
-        'image' => $message->fromUser->imagePath(),
+        'image' => $message->fromUser->preset('xsmall_square'),
         'text' => trans('user.show.messages.with.row.text', [
             'user' => $message->fromUser->name,
             'created_at' => $message->created_at->format('d. m Y H:i:s')

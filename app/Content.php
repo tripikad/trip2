@@ -74,7 +74,7 @@ class Content extends Model
             
                 if ($image = \App\Image::find($match)) {
                     
-                    $filteredBody = str_replace("[[$image->id]]", '<img src="' . $image->preset(). '" />', $filteredBody);
+                    $filteredBody = str_replace("[[$image->id]]", '<img src="' . $image->preset('medium'). '" />', $filteredBody);
                 
                 }
             
