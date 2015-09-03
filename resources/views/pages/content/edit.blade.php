@@ -27,7 +27,9 @@
         @elseif ($field['type'] == 'file')
 
             @include('component.image.field', [
-                'image' => isset($content) ? $content->imagePath() : null
+                'image' => isset($content)
+                    ? $content->images()->first()->preset()
+                    : null
             ])
 
             {!! Form::$field['type']($key) !!}
