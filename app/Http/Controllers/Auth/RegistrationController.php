@@ -41,7 +41,7 @@ class RegistrationController extends Controller
         });
 
         return redirect()
-            ->route('frontpage')
+            ->route('frontpage.index')
             ->with('status', trans('auth.register.sent.status'));
             
     }
