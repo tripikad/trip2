@@ -11,8 +11,6 @@ class Content extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-    protected $appends = ['body_filtered'];
-
     public function user()
     {
         return $this->belongsTo('App\User');

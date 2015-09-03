@@ -187,13 +187,13 @@ class ContentController extends Controller
 
         if ($request->has('destinations')) {
             
-            $content->destinations()->sync((array)$request->destinations);
+            $content->destinations()->sync($request->destinations);
 
         }
 
        if ($request->has('topics')) {
             
-            $content->topics()->sync((array)$request->topics);
+            $content->topics()->sync($request->topics);
 
         }
 

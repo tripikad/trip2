@@ -12,5 +12,5 @@ $('select[name=topic]').selectize({
     }
 });
 
-$('select[name=destinations]').selectize();
-$('select[name=topics]').selectize();
+$('#destinations').selectize();
+$('#topics').selectize();

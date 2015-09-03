@@ -35,19 +35,19 @@
         @elseif ($field['type'] == 'destinations')
 
             {!! Form::select(
-                $key,
+                $key . '[]',
                 $destinations,
                 $destination,
-                ['multiple' => true]
+                ['multiple' => 'true', 'id' => $key]
             )!!}
 
         @elseif ($field['type'] == 'topics')
 
             {!! Form::select(
-                $key,
+                $key . '[]',
                 $topics,
                 $topic,
-                ['multiple' => true]
+                ['multiple' => 'true', 'id' => $key]
             )!!}
 
         @elseif (in_array($field['type'], ['submit', 'button']))
