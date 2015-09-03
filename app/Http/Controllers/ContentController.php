@@ -112,14 +112,14 @@ class ContentController extends Controller
             'status' => 1
         ];
 
+        $content = Auth::user()->contents()->create(array_merge($request->all(), $fields));
+
         if ($request->hasFile('file')) {
             
-            $image = $this->storeImage($request->file('file'), $type);
-            $fields['image'] = $image;
+            $filename = $this->storeImage($request->file('file'), $type);
+            $content->images()->create(['filename' => $filename]);
 
         }
-
-        $content = Auth::user()->contents()->create(array_merge($request->all(), $fields));
 
         if ($request->has('destinations')) {
             
@@ -137,25 +137,6 @@ class ContentController extends Controller
             ->route('content.index', [$type])
             ->with('status', trans("content.store.status", ['title' => $content->title]));
 
-    }
-
-    public function storeImage($file, $type)
-    {
-
-        $fileName = $file->getClientOriginalName();
-        $path = public_path() . "/images/$type/";
-        $smallPath = public_path() . "/images/$type/small/";
-        
-        $file->move($path, $fileName);
-
-        Imageconv::make($path . $fileName)
-            ->resize(300, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })
-            ->save($smallPath . $fileName);
-        
-        return $fileName;
-    
     }
 
     public function edit($type, $id)
@@ -195,8 +176,8 @@ class ContentController extends Controller
         
         if ($request->hasFile('file')) {
             
-            $image = $this->storeImage($request->file('file'), $type);
-            $fields['image'] = $image;
+            $filename = $this->storeImage($request->file('file'), $type);
+            $content->images()->update(['filename' => $filename]);
 
         }
 
@@ -218,6 +199,27 @@ class ContentController extends Controller
             ->route('content.show', [$type, $content])
             ->with('status', trans("content.update.status", ['title' => $content->title]));
 
+    }
+
+
+    public function storeImage($file, $type)
+    {
+
+        $fileName = $file->getClientOriginalName();
+        $fileName = preg_replace('/\s+/', '-', $fileName);
+        $path = public_path() . "/images/$type/";
+        $smallPath = public_path() . "/images/$type/small/";
+        
+        $file->move($path, $fileName);
+
+        Imageconv::make($path . $fileName)
+            ->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($smallPath . $fileName);
+        
+        return $fileName;
+    
     }
 
     public function status($type, $id, $status)
