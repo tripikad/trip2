@@ -26,7 +26,7 @@
     @endif
 
     @include('component.row', [
-        'image' => $content->user->imagePath(),
+        'image' => $content->user->preset('xsmall_square'),
         'image_link' => route('user.show', [$content->user]),
         'heading' => $content->title,
         'text' => trans("content.show.row.text", [
