@@ -84,8 +84,11 @@ class ContentController extends Controller
     public function create($type)
     {
 
-        $destinations = Destination::getNames($type);
-        $topics = Topic::getNames($type);
+        $destinations = Destination::getNames();
+        $destination = [];
+
+        $topics = Topic::getNames();
+        $topic = [];
 
         return \View::make("pages.content.edit")
             ->with('mode', 'create')
@@ -93,7 +96,9 @@ class ContentController extends Controller
             ->with('url', route('content.store', [$type]))
             ->with('type', $type)
             ->with('destinations', $destinations)
+            ->with('destination', $destination)
             ->with('topics', $topics)
+            ->with('topic', $topic)
             ->render();
 
     }
@@ -115,6 +120,18 @@ class ContentController extends Controller
         }
 
         $content = Auth::user()->contents()->create(array_merge($request->all(), $fields));
+
+        if ($request->has('destinations')) {
+            
+            $content->destinations()->sync($request->destinations);
+
+        }
+
+        if ($request->has('topics')) {
+            
+            $content->topics()->sync($request->topics);
+
+        }
 
         return redirect()
             ->route('content.index', [$type])
@@ -191,7 +208,7 @@ class ContentController extends Controller
 
         }
 
-       if ($request->has('topics')) {
+        if ($request->has('topics')) {
             
             $content->topics()->sync($request->topics);
 
