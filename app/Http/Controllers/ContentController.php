@@ -90,6 +90,8 @@ class ContentController extends Controller
         $topics = Topic::getNames();
         $topic = [];
 
+        $now = \Carbon\Carbon::now();
+
         return \View::make("pages.content.edit")
             ->with('mode', 'create')
             ->with('fields', config("content_$type.edit.fields"))
@@ -99,6 +101,7 @@ class ContentController extends Controller
             ->with('destination', $destination)
             ->with('topics', $topics)
             ->with('topic', $topic)
+            ->with('now', $now)
             ->render();
 
     }

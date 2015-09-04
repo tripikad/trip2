@@ -75,7 +75,11 @@
                 'placeholder' => trans("content.$type.edit.field.$key.title"),
             ]) !!}
 
-            <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
+            <div class="help-block">
+
+                {{ trans("content.$type.edit.field.$key.help", ['now' => $now]) }}
+
+            </div>
 
         @elseif ($field['type'] == 'currency')
         

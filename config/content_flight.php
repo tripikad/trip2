@@ -50,9 +50,10 @@ return [
         'validate' => [
         
             'title' => 'required',
+            'body' => 'required',
             'url' => 'url',
-            'start_at' => 'date',
-            'end_at' => 'date',
+            'start_at' => 'date|required',
+            'end_at' => 'date|required',
             'price' => 'integer',
         
         ],

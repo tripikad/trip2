@@ -72,10 +72,10 @@ return [
     'flight.edit.field.destinations.help' => '',
 
     'flight.edit.field.start_at.title' => 'Selling starts at',
-    'flight.edit.field.start_at.help' => '',
+    'flight.edit.field.start_at.help' => 'Example: :now',
     
     'flight.edit.field.end_at.title' => 'Selling ends at',
-    'flight.edit.field.end_at.help' => '',
+    'flight.edit.field.end_at.help' => 'Example: :now',
 
     'flight.edit.field.price.title' => 'Price',
     'flight.edit.field.price.help' => '',
