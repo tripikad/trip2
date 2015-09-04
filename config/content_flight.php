@@ -25,6 +25,7 @@ return [
             ],
             'body' => [
                 'type' => 'textarea',
+                'rows' => 16,
             ],
             'destinations' => [
                 'type' => 'destinations',
