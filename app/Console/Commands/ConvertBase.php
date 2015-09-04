@@ -600,7 +600,12 @@ class ConvertBase extends Command
         if ($this->copyFiles) {
 
             $this->copyFile($from, $to);
-            $this->createThumbnail($from, $to);
+
+            if ($type == 'user') {
+                $this->createUserThumbnail($from, $to);
+            } else {
+                $this->createThumbnail($from, $to);
+            }
         }
     
     }
@@ -816,7 +821,7 @@ class ConvertBase extends Command
         return true;
     }
 
-    public function createThumbnail($from, $to)
+ public function createUserThumbnail($from, $to)
     {
 
         try {
@@ -829,6 +834,18 @@ class ConvertBase extends Command
                 ->fit(180)
                 ->save(dirname($to) . '/../small_square/' . basename($to));
         
+        }
+
+        catch (\Intervention\Image\Exception\NotReadableException $e) {} 
+        catch (\Intervention\Image\Exception\NotSupportedException $e) {} 
+        catch (\Symfony\Component\Debug\Exception\FatalErrorException $e) {}
+    }
+
+    public function createThumbnail($from, $to)
+    {
+
+        try {
+
             Imageconv::make($to)
                 ->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
