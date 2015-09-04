@@ -112,12 +112,12 @@ class ConvertFlights extends ConvertBase
                     
                     }
 
-                    $flight->update(['body' => $body]);
-
-                
+                    $flight->update(['body' => $this->convertLineendings($body)]);
+   
                 }
 
                 $this->convertNodeDestinations($node);
+                
                 $this->convertNodeCarriers($node);
 
                 if ($url = $node->field_linktooffer_url)

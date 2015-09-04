@@ -59,7 +59,7 @@ class ConvertNews extends ConvertBase
                         
                         if ($index < 1) {
 
-                            $imageMacroPattern = '/<img.*src="?' . $escapedImage . '"?.*\/?>/i';
+                            $imageMacroPattern = '/\n{0,2}<img.*src="?' . $escapedImage . '"?.*\/?>\n{0,2}/i';
                             $news->update(['body' => preg_replace($imageMacroPattern, "", $news->body)]);
                       
                         } else {
@@ -73,6 +73,8 @@ class ConvertNews extends ConvertBase
                 
                 }
 
+                $news->update(['body' => $this->convertLineendings($news->body)]);
+
                 // Convert the URL
 
                 if ($url = $node->field_lyhiuudislink_url) {
@@ -83,6 +85,7 @@ class ConvertNews extends ConvertBase
 
                 $this->convertNodeDestinations($node);
                 $this->convertNodeTopics($node);
+                $this->newNodeTopics($node);
 
             }
             

@@ -45,6 +45,7 @@ class ConvertTravelmates extends ConvertBase
             
                 $this->convertNodeDestinations($node);
                 $this->convertNodeTopics($node);
+                $this->newNodeTopics($node);
 
             }
             

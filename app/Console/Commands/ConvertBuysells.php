@@ -84,6 +84,9 @@ class ConvertBuysells extends ConvertBase
             }
 
             $this->convertNode($node, '\App\Content', 'buysell');
+            
+            $this->convertNodeTopics($node);
+            $this->newNodeTopics($node);
 
             $this->output->progressAdvance();
 

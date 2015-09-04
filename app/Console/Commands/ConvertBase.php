@@ -935,6 +935,7 @@ class ConvertBase extends Command
         $string = $this->convertStrongHeaders($string);
         $string = $this->convertTexyUrls($string);
         $string = $this->convertUmlauts($string);
+        $string = $this->convertLineendings($string);
 
         return $string;
 
@@ -974,6 +975,17 @@ class ConvertBase extends Command
     {
 
         return preg_replace("/\n<strong>(.*)<\/strong>/", "\n<h4>$1</h4>", $string);
+
+    }
+
+    public function convertLineendings($string)
+    {
+
+        $string = preg_replace("/^\n/", "", $string);
+        $string = preg_replace("/\r\n/", "\n", $string);
+        $string = preg_replace("/\n{3,}/", "\n\n", $string);
+
+        return $string;
 
     }
 

@@ -18,8 +18,8 @@ class ConvertInternals extends ConvertBase
             
             if ($this->convertNode($node, '\App\Content', 'internal')) {
             
-                $this->convertNodeDestinations($node);
-                $this->convertNodeTopics($node);
+                // $this->convertNodeDestinations($node);
+                // $this->convertNodeTopics($node);
 
             }
 
