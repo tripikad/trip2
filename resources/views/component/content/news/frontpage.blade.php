@@ -46,7 +46,7 @@
 
                     @if (isset($contents[2]))
 
-                    <a href="{{ route('content.show', [$contents[0]->type, $contents[0]]) }}">
+                    <a href="{{ route('content.show', [$contents[2]->type, $contents[2]]) }}">
 
                         @include('component.card', [
                             'image' => $contents[2]->images()->first()->preset(),
@@ -68,7 +68,7 @@
 
                     @if (isset($contents[3]))
 
-                    <a href="{{ route('content.show', [$contents[1]->type, $contents[1]]) }}">
+                    <a href="{{ route('content.show', [$contents[3]->type, $contents[3]]) }}">
 
                         @include('component.card', [
                             'image' => $contents[3]->images()->first()->preset(),
@@ -86,7 +86,7 @@
 
                     @if (isset($contents[4]))
 
-                    <a href="{{ route('content.show', [$contents[0]->type, $contents[0]]) }}">
+                    <a href="{{ route('content.show', [$contents[4]->type, $contents[4]]) }}">
 
                         @include('component.card', [
                             'image' => $contents[4]->images()->first()->preset(),

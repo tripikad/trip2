@@ -11,6 +11,8 @@ class Content extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
+    protected $appends = ['filteredbody'];
+
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -62,7 +64,7 @@ class Content extends Model
         return $this->image ? '/images/' . $this->type . '/small/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
     }
 
-    public function filteredBody()
+    public function getFilteredbodyAttribute()
     {
 
         $pattern = '/\[\[([0-9]+)\]\]/';
@@ -82,7 +84,7 @@ class Content extends Model
 
         }
 
-        return $filteredBody;
+        return nl2br($filteredBody);
 
     }
 
