@@ -33,7 +33,9 @@
                             'price' => $content->price,
                             'symbol' => config('site.currency.symbol')
                         ]) : null,
-                        'text' => str_limit($content->title, 45),
+                        'text' => str_limit($content->title, 45)
+                            . '<br />'
+                            . $content->end_at->diffForHumans(),
                         'options' => '-center'
                     ])
                 

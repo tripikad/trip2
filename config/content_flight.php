@@ -13,7 +13,7 @@ return [
     'index' => [
     
         'with' => ['images'],
-        'latest' => 'created_at',
+        'latest' => 'end_at',
         'paginate' => 24,
     ],
 

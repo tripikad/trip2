@@ -40,22 +40,22 @@
 
     <div class="row utils-padding-bottom">
 
-        <div class="col-xs-6 text-center">
+        <div class="col-sm-6 text-center">
 
             @include('component.button', [ 
                 'route' => route('register.form'),
                 'title' => trans('auth.login.register.title'),
-                'type' => 'btn-link'
+                'buttontype' => 'btn-link'
             ])
         
         </div>
 
-        <div class="col-xs-6 text-center">
+        <div class="col-sm-6 text-center">
 
             @include('component.button', [ 
                 'route' => route('reset.apply.form'),
                 'title' => trans('auth.login.reset.title'),
-                'type' => 'btn-link'
+                'buttontype' => 'btn-link'
             ])
 
         </div>

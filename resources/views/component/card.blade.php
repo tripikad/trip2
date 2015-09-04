@@ -13,7 +13,7 @@
             @endif
 
             @if (isset($text))
-                <p>{{ $text }}</p>
+                <p>{!! $text !!}</p>
             @endif
     
         </div>
