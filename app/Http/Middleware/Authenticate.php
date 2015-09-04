@@ -36,7 +36,7 @@ class Authenticate
     {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
-                return response('TRANSLATE: No access', 401);
+                return response(trans('401.ajax.title'), 401);
             } else {
                 return redirect()->guest('auth/login');
             }
