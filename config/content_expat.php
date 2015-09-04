@@ -27,6 +27,12 @@ return [
             'body' => [
                 'type' => 'textarea',
             ],
+            'destinations' => [
+                'type' => 'destinations',
+            ],
+            'topics' => [
+                'type' => 'topics',
+            ],
             'submit' => [
                 'type' => 'submit',
             ]

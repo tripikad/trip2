@@ -32,6 +32,12 @@ return [
                 'type' => 'textarea',
                 'title' => 'Body',
             ],
+            'destinations' => [
+                'type' => 'destinations',
+            ],
+            'topics' => [
+                'type' => 'topics',
+            ],
             'url' => [
                 'type' => 'url',
                 'title' => 'URL',

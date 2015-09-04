@@ -27,6 +27,9 @@ return [
             'body' => [
                 'type' => 'textarea',
             ],
+            'topics' => [
+                'type' => 'topics',
+            ],
             'submit' => [
                 'type' => 'submit',
             ]

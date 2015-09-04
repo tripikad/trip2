@@ -30,6 +30,9 @@ return [
             'body' => [
                 'type' => 'textarea',
             ],
+            'destinations' => [
+                'type' => 'destinations',
+            ],
             'url' => [
                 'type' => 'url',
             ],

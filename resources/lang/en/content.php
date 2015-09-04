@@ -45,7 +45,7 @@ return [
     // Flight
 
     'flight.index.title' => 'Flights',
-    'flight.index.field.price' => 'From :price€',
+    'flight.index.field.price' => 'From :price:symbol',
 
     'flight.create.title' => 'Add flight offer',
 

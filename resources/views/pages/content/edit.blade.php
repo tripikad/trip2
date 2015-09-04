@@ -16,7 +16,7 @@
 
         <div class="form-group">
 
-        @if (in_array($field['type'], ['text', 'textarea', 'url', 'email']))
+        @if (in_array($field['type'], ['text', 'textarea', 'url', 'email', 'date']))
 
             {!! Form::$field['type']($key, null, [
                 'class' => 'form-control input-md',
@@ -51,6 +51,37 @@
                 $topic,
                 ['multiple' => 'true', 'id' => $key]
             )!!}
+
+        @elseif ($field['type'] == 'datetime')
+
+            {!! Form::text($key, null, [
+                'class' => 'form-control input-md',
+                'placeholder' => trans("content.$type.edit.field.$key.title"),
+            ]) !!}
+
+        @elseif ($field['type'] == 'currency')
+        
+            <div class="row">
+                
+                <div class="col-sm-6">
+            
+                    <div class="input-group">
+
+                        {!! Form::text($key, null, [
+                            'class' => 'form-control input-md',
+                            'placeholder' => trans("content.$type.edit.field.$key.title"),
+                        ]) !!}    
+
+                        <span class="input-group-addon">
+
+                            {{ config('site.currency.symbol') }}
+                        </span>
+                    
+                    </div>
+
+                </div>
+
+            </div>
 
         @elseif (in_array($field['type'], ['submit', 'button']))
 

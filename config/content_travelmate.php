@@ -22,11 +22,21 @@ return [
         'fields' => [
             'title' => [
                 'type' => 'text',
-                'title' => 'Title',
             ],
             'body' => [
                 'type' => 'textarea',
-                'title' => 'Body',
+            ],
+            'destinations' => [
+                'type' => 'destinations',
+            ],
+            'topics' => [
+                'type' => 'topics',
+            ],
+            'start_at' => [
+                'type' => 'datetime',
+            ],
+            'duration' => [
+                'type' => 'text',
             ],
             'submit' => [
                 'type' => 'submit',
@@ -37,7 +47,7 @@ return [
         'validate' => [
         
             'title' => 'required',
-            'body' => 'required',
+            'start_at' => 'date|required',
         
         ],
 

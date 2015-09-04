@@ -28,6 +28,9 @@ return [
                 'title' => 'Description',
                 'rows' => 2
             ],
+            'destinations' => [
+                'type' => 'destinations',
+            ],
             'submit' => [
                 'type' => 'submit',
                 'title' => 'Add',

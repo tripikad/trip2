@@ -26,6 +26,18 @@ return [
             'body' => [
                 'type' => 'textarea',
             ],
+            'destinations' => [
+                'type' => 'destinations',
+            ],
+            'start_at' => [
+                'type' => 'datetime',
+            ],
+            'end_at' => [
+                'type' => 'datetime',
+            ],
+            'price' => [
+                'type' => 'currency',
+            ],
             'url' => [
                 'type' => 'url',
             ],
@@ -38,6 +50,9 @@ return [
         
             'title' => 'required',
             'url' => 'url',
+            'start_at' => 'date',
+            'end_at' => 'date',
+            'price' => 'integer',
         
         ],
 
