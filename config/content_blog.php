@@ -21,9 +21,6 @@ return [
     'edit' => [
 
         'fields' => [
-            'file' => [
-                'type' => 'file',
-            ],
             'title' => [
                 'type' => 'text',
             ],

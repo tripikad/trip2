@@ -24,6 +24,8 @@
                 'rows' => isset($field['rows']) ? $field['rows'] : 8,
             ]) !!}
     
+            <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
+
         @elseif ($field['type'] == 'file')
 
             @include('component.image.field', [
@@ -34,14 +36,22 @@
 
             {!! Form::$field['type']($key) !!}
 
+            <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
+
         @elseif ($field['type'] == 'destinations')
 
             {!! Form::select(
                 $key . '[]',
                 $destinations,
                 $destination,
-                ['multiple' => 'true', 'id' => $key]
+                [
+                    'multiple' => 'true',
+                    'id' => $key,
+                    'placeholder' => trans("content.$type.edit.field.$key.title"),
+                ]
             )!!}
+
+            <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
 
         @elseif ($field['type'] == 'topics')
 
@@ -49,8 +59,14 @@
                 $key . '[]',
                 $topics,
                 $topic,
-                ['multiple' => 'true', 'id' => $key]
+                [
+                    'multiple' => 'true',
+                    'id' => $key,
+                    'placeholder' => trans("content.$type.edit.field.$key.title"),
+                ]
             )!!}
+
+            <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
 
         @elseif ($field['type'] == 'datetime')
 
@@ -58,6 +74,8 @@
                 'class' => 'form-control input-md',
                 'placeholder' => trans("content.$type.edit.field.$key.title"),
             ]) !!}
+
+            <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
 
         @elseif ($field['type'] == 'currency')
         
@@ -82,6 +100,8 @@
                 </div>
 
             </div>
+
+            <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
 
         @elseif (in_array($field['type'], ['submit', 'button']))
 

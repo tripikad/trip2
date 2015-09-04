@@ -34,6 +34,7 @@ return [
             ],
             'start_at' => [
                 'type' => 'datetime',
+                'help' => true
             ],
             'duration' => [
                 'type' => 'text',
