@@ -29,7 +29,7 @@
                     
                     @include('component.card', [
                         'image' => $content->images()->first()->preset(),
-                        'options' => '-empty'
+                        'options' => '-noshade'
                     ])
                 
                 </a>

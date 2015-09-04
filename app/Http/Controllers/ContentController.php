@@ -20,8 +20,9 @@ class ContentController extends Controller
 
         $contents = Content::whereType($type)
             ->with(config("content_$type.index.with"))
-            ->latest(config("content_$type.index.latest"));
-    
+            ->latest(config("content_$type.index.latest"))
+            ->whereStatus(1);
+            
         if ($request->destination) {
 
             $descendants = Destination::find($request->destination)
@@ -112,7 +113,7 @@ class ContentController extends Controller
 
         $fields = [
             'type' => $type,
-            'status' => 1
+            'status' => config("content_$type.store.status", 1)
         ];
 
         $content = Auth::user()->contents()->create(array_merge($request->all(), $fields));
@@ -210,8 +211,11 @@ class ContentController extends Controller
 
         $fileName = $file->getClientOriginalName();
         $fileName = preg_replace('/\s+/', '-', $fileName);
-        $path = public_path() . "/images/$type/";
-        $smallPath = public_path() . "/images/$type/small/";
+        $path = public_path() . "/images/original/";
+        
+        $smallPath = public_path() . "/images/small/";
+        $mediumPath = public_path() . "/images/medium/";
+        $largePath = public_path() . "/images/large/";
         
         $file->move($path, $fileName);
 
@@ -220,7 +224,19 @@ class ContentController extends Controller
                 $constraint->aspectRatio();
             })
             ->save($smallPath . $fileName);
-        
+
+        Imageconv::make($path . $fileName)
+            ->resize(700, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($mediumPath . $fileName);
+
+        Imageconv::make($path . $fileName)
+            ->resize(900, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })
+            ->save($largePath . $fileName);
+
         return $fileName;
     
     }

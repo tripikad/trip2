@@ -18,7 +18,7 @@
 
         @include('component.card', [
             'image' => $image->preset('large'),
-            'options' => '-empty'
+            'options' => '-noshade'
         ])
 
         </div>

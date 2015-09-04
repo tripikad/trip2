@@ -18,6 +18,12 @@ return [
         'paginate' => 24,
     ],
 
+    'store' => [
+
+        'status' => 0
+
+    ],
+
     'edit' => [
 
         'fields' => [

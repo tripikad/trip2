@@ -110,15 +110,20 @@ class UserController extends Controller
                 . '.'
                 . $request->file('file')->getClientOriginalExtension();
 
-            $imagepath = public_path() . '/images/user/';
-            $smallimagepath = public_path() . '/images/user/small/';
+            $imagepath = public_path() . '/images/original/';
+            $small_imagepath = public_path() . '/images/small_square/';
+            $xsmall_imagepath = public_path() . '/images/xsmall_square/';
             
             $request->file('file')->move($imagepath, $image);
 
             Imageconv::make($imagepath . $image)
-                ->fit(200)
-                ->save($smallimagepath . $image);
-            
+                ->fit(180)
+                ->save($small_imagepath . $image);
+
+            Imageconv::make($imagepath . $image)
+                ->fit(80)
+                ->save($xsmall_imagepath . $image);    
+
             $user->update(['image' => $image]);
 
             return redirect()
