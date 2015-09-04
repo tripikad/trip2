@@ -12,19 +12,6 @@
         @endif
     ">
 
-    @if($image = $content->images()->first())
-        
-        <div class="utils-padding-bottom">
-
-        @include('component.card', [
-            'image' => $image->preset('large'),
-            'options' => '-noshade'
-        ])
-
-        </div>
-
-    @endif
-
     @include('component.row', [
         'image' => $content->user->preset('xsmall_square'),
         'image_link' => route('user.show', [$content->user]),
@@ -56,13 +43,16 @@
 
     <div class="row">
 
-        <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
+        <div class="col-sm-1">
+        </div>
+
+        <div class="col-sm-10">
 
             {!! $content->filteredbody !!}
 
         </div>
         
-        <div class="col-sm-1 col-lg-2">
+        <div class="col-sm-1">
 
             @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $content->user->id))
                 
@@ -88,6 +78,19 @@
 
     </div>
 
+    @if($image = $content->images()->first())
+        
+        <div class="utils-padding-bottom">
+
+        @include('component.card', [
+            'image' => $image->preset('large'),
+            'options' => '-noshade'
+        ])
+
+        </div>
+
+    @endif
+    
     </div>
     
     @include('component.comment.index', ['comments' => $comments])

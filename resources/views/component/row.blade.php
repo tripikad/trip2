@@ -1,6 +1,6 @@
 <div class="component-row row">
 
-    <div class="col-xs-2 col-sm-1 text-right">
+    <div class="col-xs-2 col-sm-1 col-lg-offset-1 text-right">
 
         @if (isset($image_link)) <a href="{{ $image_link }}"> @endif
 
@@ -20,11 +20,11 @@
 
     @if (isset($extra))
 
-        <div class="col-xs-7 col-sm-10">
+        <div class="col-xs-7 col-sm-10 col-lg-8">
 
     @else
 
-        <div class="col-xs-10 col-sm-11">
+        <div class="col-xs-10 col-sm-11 col-lg-10">
 
     @endif
 

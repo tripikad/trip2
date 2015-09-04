@@ -1,9 +1,6 @@
 <div class="row">
 
-    <div class="col-sm-1">
-    </div>
-
-    <div class="col-sm-10">
+    <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
 
         <div class="form-group">
 
@@ -21,10 +18,7 @@
 
             <div class="row">
 
-                <div class="col-md-8">
-                </div>
-
-                <div class="col-md-4">
+                <div class="col-md-4 col-md-offset-8">
                 
                     <div class="form-group">
 

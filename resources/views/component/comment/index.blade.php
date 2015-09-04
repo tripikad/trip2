@@ -12,7 +12,7 @@
 
         @include('component.row', [
             'image' => $comment->user->preset('xsmall_square'),
-            'image_width' => '70%',
+            'image_width' => '80%',
             'image_link' => route('user.show', [$comment->user]),
             'text' => trans("comment.index.row.text", [
                 'user' => view('component.user.link', ['user' => $comment->user]),
@@ -40,7 +40,7 @@
 
         <div class="row">
 
-            <div class="col-sm-10 col-sm-offset-1">
+            <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
 
                 {!! nl2br($comment->body) !!}
 
