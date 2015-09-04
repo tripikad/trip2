@@ -1,6 +1,6 @@
 <?php
 
 return [
-	'404.title' => 'Page not found',
-	'404.body' => 'Urror',
+	'404.title' => 'Not all who wander are lost',
+	'404.body' => 'But this time we are. Can not find the page that you are looking for',
 ];

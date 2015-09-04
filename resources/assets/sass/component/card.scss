@@ -15,6 +15,7 @@
         left: 0;
 
         background-color: rgba(0,0,0,0.5);
+
     }
 
     > .overlay > .content > h3 {
@@ -29,8 +30,20 @@
         padding: $spacer;
     }
 
+    &.-invert {
+
+        > .overlay > .content > h3 {
+            color: black;
+        }
+
+        > .overlay > .content > p {
+            color: black;
+        }
+    
+    }
+
     &.-wide {
-        padding-bottom: 15%;
+        padding-bottom: 33%;
     }
 
     &.-portrait {
@@ -53,7 +66,7 @@
         border-radius: 50%;
     }
 
-    &.-empty > .overlay {
+    &.-noshade > .overlay {
         background: none;
     }
 
