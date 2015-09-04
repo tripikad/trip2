@@ -19,8 +19,6 @@ class DestinationController extends Controller
         $destination =  Destination::with('flags', 'flags.user')
             ->findOrFail($id);
 
-//        $image = $destination->content()->whereType('photo')->latest()->first();
-        
         $types = [
             'news',
             'flight',
@@ -28,7 +26,6 @@ class DestinationController extends Controller
             'forum',
             'photo',
             'blog',
-            'offer',
         ];
 
         $features = [];
