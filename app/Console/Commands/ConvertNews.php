@@ -49,17 +49,25 @@ class ConvertNews extends ConvertBase
                 // Convert the image
 
                 if ($images && count($images) > 0) {
-                    
-                    foreach($images as $image ) {     
+
+                    foreach($images as $index => $image) {     
                     
                         $newImage = $this->convertRemoteImage($node->nid, $image, '\App\Content', 'news');
                         
                         $escapedImage = str_replace('/', '\/', $image);
                         $escapedImage = str_replace('.', '\.', $escapedImage);
+                        
+                        if ($index < 1) {
 
-                        $imageMacroPattern = '/<img.*src="?' . $escapedImage . '"?.*\/?>/i';
-                        $news->update(['body' => preg_replace($imageMacroPattern, "[[$newImage->id]]", $news->body)]);
-
+                            $imageMacroPattern = '/<img.*src="?' . $escapedImage . '"?.*\/?>/i';
+                            $news->update(['body' => preg_replace($imageMacroPattern, "", $news->body)]);
+                      
+                        } else {
+                      
+                            $imageMacroPattern = '/<img.*src="?' . $escapedImage . '"?.*\/?>/i';
+                            $news->update(['body' => preg_replace($imageMacroPattern, "[[$newImage->id]]", $news->body)]);
+                      
+                        }
 
                     }
                 
