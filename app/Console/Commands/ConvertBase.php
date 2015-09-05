@@ -58,6 +58,7 @@ class ConvertBase extends Command
         $this->copyFiles = env('CONVERT_FILES', 'false');
         $this->scrambleMessages = env('CONVERT_SCRAMBLE', 'true');
         $this->fileHash = env('CONVERT_FILEHASH', 'false');
+        $this->overwriteFiles = env('CONVERT_OVERWRITE', 'false');
     }
 
     // Nodes
@@ -599,13 +600,24 @@ class ConvertBase extends Command
 
         if ($this->copyFiles) {
 
+            if (file_exists($to) && !$this->overwriteFiles) {
+
+                return false;
+            
+            }
+
             $this->copyFile($from, $to);
 
             if ($type == 'user') {
+
                 $this->createUserThumbnail($from, $to);
+
             } else {
+
                 $this->createThumbnail($from, $to);
+
             }
+
         }
     
     }
@@ -655,6 +667,12 @@ class ConvertBase extends Command
 
             if ($this->copyFiles) {
             
+                if (file_exists($to) && !$this->overwriteFiles) {
+
+                    return false;
+                
+                }
+
                 $this->copyFile($from, $to);
                 $this->createThumbnail($from, $to);
             
