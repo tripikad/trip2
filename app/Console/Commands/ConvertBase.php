@@ -669,7 +669,7 @@ class ConvertBase extends Command
             
                 if (file_exists($to) && !$this->overwriteFiles) {
 
-                    return false;
+                    return $newImage;
                 
                 }
 

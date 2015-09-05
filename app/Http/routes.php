@@ -103,24 +103,12 @@ Route::group(['prefix' => 'message', 'as' => 'message.'], function () {
 
 });
 
-/*
-// Registration
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
-get('auth/register', 'Auth\AuthController@getRegister');
+    get('images', ['uses' => 'ImageController@index', 'as' => 'image.index']);
 
-post('auth/register', 'Auth\AuthController@postRegister');
+});
 
-get('auth/confirm/{token}', 'Auth\AuthController@confirmEmail');
-
-// Authentication
-
-get('auth/login', 'Auth\AuthController@getLogin');
-
-post('auth/login', 'Auth\AuthController@postLogin');
-
-get('auth/logout', 'Auth\AuthController@getLogout');
-
-*/
 
 
 // Ad debug
