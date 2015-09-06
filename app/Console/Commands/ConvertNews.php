@@ -66,7 +66,9 @@ class ConvertNews extends ConvertBase
                                 'to' => ""
                             ];
 
-                        } else {
+                        }
+
+                        if ($index >= 1) {
 
                             $replaceImages[] = [
                                 'from' =>'/<img.*src="?' . $escapedImage . '"?.*\/?>/i',
