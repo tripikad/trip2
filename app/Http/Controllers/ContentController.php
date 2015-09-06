@@ -62,6 +62,19 @@ class ContentController extends Controller
         ])->header('Cache-Control', 'public, s-maxage=' . config('site.cache.content.index'));
     }
 
+    public function unpublishedIndex()
+    {
+
+        $contents = Content::with(['user', 'comments'])
+            ->latest('created_at')
+            ->whereStatus(0)
+            ->simplePaginate(50);
+            
+        return response()->view('pages.admin.unpublished', [
+            'contents' => $contents,
+        ]);
+
+    }
 
     public function show($type, $id)
     {

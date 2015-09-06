@@ -24,4 +24,6 @@ return [
 
     'admin.internal' => 'Internal forum',
     'admin.image' => 'All images',
+    'admin.unpublished' => 'Unpublished content',
+    
 ];

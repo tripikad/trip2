@@ -68,7 +68,10 @@
 	        ],
 	        'image' => [
 	            'url' => '/admin/image',
-	        ],  	      
+	        ],
+	        'unpublished' => [
+	            'url' => '/admin/content/unpublished',
+	        ],    	      
 	    ], 
 
 	];
