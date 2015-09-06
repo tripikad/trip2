@@ -1,7 +1,9 @@
-{{ trans('email.password.body', [
-    'url' => route('reset.password.form', [$token])
-]) }}
+{{!! trans('email.password.body', [
+    'url' => link_to_route('reset.password.form', null, [$token], [])
+]) !!}
 
+
+</br></br>
 ---
-
+</br>
 {{ config('site.name') }}

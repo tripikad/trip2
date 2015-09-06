@@ -13,7 +13,11 @@ return [
 
     'register.sent.status' => 'A confirmation was sent to your e-mail address',
     'register.confirmed.status' => 'Your registration is now confirmed, you can log in',
-    
+       
+    'register.email.subject' => 'Confirm your registration',
+    'register.email.body.intro' => 'Thanks for signing up',
+    'register.email.body.text' => 'We just need you to confirm your email address. Please visit :link',
+
     'login.login.status' => 'You are now logged in',
     'login.logout.status' => 'You are now logged out',
     'login.failed.status' => 'Failed to log you in',

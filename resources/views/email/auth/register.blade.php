@@ -1,7 +1,11 @@
-Thanks for signing up!
+{{ trans('auth.register.email.body.intro') }}!
 
-We just need you to confirm your email address:
-{{ route('register.confirm', [$user->registration_token]) }}
+{!! trans('auth.register.email.body.text', [
+    'link' => link_to_route('register.confirm', null, [$user->registration_token], [])
+]) !!}
 
---
-{{ config('site.name')}}
+
+</br></br>
+---
+</br>
+{{ config('site.name') }}
