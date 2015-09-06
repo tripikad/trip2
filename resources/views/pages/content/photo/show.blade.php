@@ -48,7 +48,7 @@
 
         <div class="col-sm-10">
 
-            {!! $content->filteredbody !!}
+            {!! $content->body_filtered !!}
 
         </div>
         

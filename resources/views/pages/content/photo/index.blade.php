@@ -19,28 +19,65 @@
 
     </div>
 
-    <div class="row">
-  
-        @foreach ($contents as $index => $content)
+    @foreach ($contents as $content)
 
-            <div class="col-sm-4 utils-padding-bottom">
+        <div class="utils-double-border-bottom">
 
-                <a href="{{ route('content.show', [$content->type, $content]) }}">
+            <div class="row utils-padding-bottom">
+
+                <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
+
+                    <div class="utils-padding-bottom">
+
+                    <a href="{{ route('content.show', [$content->type, $content]) }}">
+                        
+                        <img src="{{ $content->images()->first()->preset('large') }}" />
                     
-                    @include('component.card', [
-                        'image' => $content->images()->first()->preset(),
-                        'options' => '-noshade'
-                    ])
-                
-                </a>
+                    </a>
+
+                    </div>
+
+                </div>
 
             </div>
-            
-            @if (($index + 1) % 3 == 0) </div><div class="row"> @endif
 
-        @endforeach
+            <div class="row utils-padding-bottom">
 
-    </div>
+                <div class="col-sm-10 col-sm-offset-1">
+
+            @include('component.row', [
+                'image' => $content->user->preset('xsmall_square'),
+                'image_link' => route('user.show', [$content->user]),
+                'heading' => $content->title,
+                'text' => trans("content.show.row.text", [
+                    'user' => view('component.user.link', ['user' => $content->user]),
+                    'created_at' => $content->created_at->format('d. m Y H:i:s'),
+                    'updated_at' => $content->updated_at->format('d. m Y H:i:s'),
+                    'destinations' => $content->destinations->implode('name', ','),
+                    'tags' => $content->topics->implode('name', ','),
+                ]),
+            ])
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
+
+                {!! $content->body_filtered !!}
+
+                @include('component.comment.index', ['comments' => $content->comments])
+
+                </div>
+
+            </div>
+
+        </div>
+
+    @endforeach
+
 
     {!! $contents->render() !!}
 

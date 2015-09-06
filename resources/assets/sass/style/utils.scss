@@ -32,3 +32,9 @@
     margin-bottom: $spacer;
     border-bottom: 1px solid #eee;
 }
+
+.utils-double-border-bottom {
+    padding-bottom: $spacer * 2;
+    margin-bottom: $spacer * 2;
+    border-bottom: 1px solid #eee;
+}
