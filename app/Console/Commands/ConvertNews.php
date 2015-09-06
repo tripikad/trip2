@@ -51,12 +51,12 @@ class ConvertNews extends ConvertBase
                 if ($images && count($images) > 0) {
 
                     foreach($images as $index => $image) {     
-                    /*
+                    
                         $newImage = $this->convertRemoteImage($node->nid, $image, '\App\Content', 'news');
                         
                         $escapedImage = str_replace('/', '\/', $image);
                         $escapedImage = str_replace('.', '\.', $escapedImage);
-                        
+                    /*    
                         if ($index < 1) {
 
                             $imageMacroPattern = '/\n{0,2}<img.*src="?' . $escapedImage . '"?.*\/?>\n{0,2}/i';
