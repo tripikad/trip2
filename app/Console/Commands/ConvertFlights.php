@@ -94,7 +94,7 @@ class ConvertFlights extends ConvertBase
                             $escapedImage = str_replace('/', '\/', $image);
                             $escapedImage = str_replace('.', '\.', $escapedImage);
                             
-                            if ($index < 1) {
+                            if ($index < 1 || ! $newImage) {
                                 
                                 $replaceImages[] = [
                                     'from' =>'/<img.*src="?' . $escapedImage . '"?.*\/?>\n?/i',
