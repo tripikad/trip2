@@ -21,7 +21,6 @@ class ConvertBase extends Command
     protected $copyFiles;
 
     protected $chunk = 10;
-    protected $skip = 0;
 
     protected $client;
 
@@ -54,6 +53,7 @@ class ConvertBase extends Command
         
         // max size: messages ~100000
 
+        $this->skip = env('CONVERT_SKIP', '10');
         $this->take = env('CONVERT_TAKE', '10');
         $this->copyFiles = env('CONVERT_FILES', 'false');
         $this->scrambleMessages = env('CONVERT_SCRAMBLE', 'true');
