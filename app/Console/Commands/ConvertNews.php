@@ -101,7 +101,6 @@ class ConvertNews extends ConvertBase
 
                 $this->convertNodeDestinations($node);
                 $this->convertNodeTopics($node);
-                $this->newNodeTopics($node);
 
             }
             
