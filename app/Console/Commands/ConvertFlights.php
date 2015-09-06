@@ -9,7 +9,7 @@ class ConvertFlights extends ConvertBase
 
     public function convertFlightNodes()
     {
-        $nodes = $this->getNodes('lennufirmade_sooduspakkumine')
+        $flightNodes = $this->getNodes('lennufirmade_sooduspakkumine')
             ->join(
                 'content_type_lennufirmade_sooduspakkumine',
                 'content_type_lennufirmade_sooduspakkumine.nid',
@@ -27,109 +27,117 @@ class ConvertFlights extends ConvertBase
                 'node_revisions.*',
                 'content_type_lennufirmade_sooduspakkumine.*',
                 'content_field_flightperiod.*'
-            )
-            ->get();
+            );
 
         $this->info('Converting flight offers');
-        $this->output->progressStart(count($nodes));
 
-        foreach($nodes as $node)
-        {
+        $count = $flightNodes->count();
 
-            /*
+        $this->output->progressStart($this->take < $count ? $this->take : $count);
 
-            $fields = [
-                'field_salesperiod_value',
-                'field_salesperiod_value2',
-                'field_flightperiod_value',
-                'field_flightperiod_value2',
-                'field_originatingcities_value',
-                'field_tripeecomment_value',
-            ];
+        $nodes = $flightNodes->skip($this->skip)->chunk($this->chunk, function ($nodes) use (&$i) {
 
-            */
+            if ($i++ > $this->chunkLimit()) return false;
 
-            $node->start_at = isset($node->field_salesperiod_value) ? $this->formatDateTime($node->field_salesperiod_value) : null;
-            $node->end_at = isset($node->field_salesperiod_value2) ? $this->formatDateTime($node->field_salesperiod_value2) : null;
+            foreach($nodes as $node)
+            {
 
-            if (preg_match('/(\d+)€/', $node->title, $matches)) {
+                /*
 
-                $node->price = $matches[1];
-                $node->title = preg_replace('/[al]*\.?\s?(\d+)€/', '', $node->title);
-                
-            };
+                $fields = [
+                    'field_salesperiod_value',
+                    'field_salesperiod_value2',
+                    'field_flightperiod_value',
+                    'field_flightperiod_value2',
+                    'field_originatingcities_value',
+                    'field_tripeecomment_value',
+                ];
 
-            $node->body = str_replace('src="/images', 'src="http://www.trip.ee/images', $node->body);
+                */
 
-            $imagePattern = '/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i';
+                $node->start_at = isset($node->field_salesperiod_value) ? $this->formatDateTime($node->field_salesperiod_value) : null;
+                $node->end_at = isset($node->field_salesperiod_value2) ? $this->formatDateTime($node->field_salesperiod_value2) : null;
 
-            if (preg_match_all($imagePattern, $node->body, $imageMatches)) {
-                
-                $images = (isset($imageMatches[0])) ? $imageMatches[0] : null;
+                if (preg_match('/(\d+)€/', $node->title, $matches)) {
 
-            }
-
-            // Convert the content
-
-            if ($flight = $this->convertNode($node, '\App\Content', 'flight')) {
-            
-                // Convert the image
-
-                if ($images && count($images) > 0) {
+                    $node->price = $matches[1];
+                    $node->title = preg_replace('/[al]*\.?\s?(\d+)€/', '', $node->title);
                     
-                    $replaceImages = [];
+                };
 
-                    foreach($images as $index => $image) {     
+                $node->body = str_replace('src="/images', 'src="http://www.trip.ee/images', $node->body);
 
-                        $newImage = $this->convertRemoteImage($node->nid, $image, '\App\Content', 'flight', 'photo');
+                $imagePattern = '/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i';
+
+                if (preg_match_all($imagePattern, $node->body, $imageMatches)) {
+                    
+                    $images = (isset($imageMatches[0])) ? $imageMatches[0] : null;
+
+                }
+
+                // Convert the content
+
+                if ($flight = $this->convertNode($node, '\App\Content', 'flight')) {
+                
+                    // Convert the image
+
+                    if ($images && count($images) > 0) {
                         
-                        $escapedImage = str_replace('/', '\/', $image);
-                        $escapedImage = str_replace('.', '\.', $escapedImage);
-                        
-                        if ($index < 1) {
+                        $replaceImages = [];
+
+                        foreach($images as $index => $image) {     
+
+                            $newImage = $this->convertRemoteImage($node->nid, $image, '\App\Content', 'flight', 'photo');
                             
-                            $replaceImages[] = [
-                                'from' =>'/<img.*src="?' . $escapedImage . '"?.*\/?>\n?/i',
-                                'to' => ""
-                            ];
+                            $escapedImage = str_replace('/', '\/', $image);
+                            $escapedImage = str_replace('.', '\.', $escapedImage);
+                            
+                            if ($index < 1) {
+                                
+                                $replaceImages[] = [
+                                    'from' =>'/<img.*src="?' . $escapedImage . '"?.*\/?>\n?/i',
+                                    'to' => ""
+                                ];
 
-                        } else {
+                            } else {
 
-                            $replaceImages[] = [
-                                'from' =>'/<img.*src="?' . $escapedImage . '"?.*\/?>/i',
-                                'to' => "[[$newImage->id]]"
-                            ];
+                                $replaceImages[] = [
+                                    'from' =>'/<img.*src="?' . $escapedImage . '"?.*\/?>/i',
+                                    'to' => "[[$newImage->id]]"
+                                ];
+
+                            }
 
                         }
 
-                    }
+                        $body = $flight->body;
 
-                    $body = $flight->body;
-
-                    foreach($replaceImages as $replaceImage) {
+                        foreach($replaceImages as $replaceImage) {
+                            
+                            $body = preg_replace($replaceImage['from'], $replaceImage['to'], $body);
                         
-                        $body = preg_replace($replaceImage['from'], $replaceImage['to'], $body);
-                    
+                        }
+
+                        $flight->update(['body' => $this->convertLineendings($body)]);
+       
                     }
 
-                    $flight->update(['body' => $this->convertLineendings($body)]);
-   
-                }
+                    $this->convertNodeDestinations($node);
+                    
+                    $this->convertNodeCarriers($node);
 
-                $this->convertNodeDestinations($node);
-                
-                $this->convertNodeCarriers($node);
+                    if ($url = $node->field_linktooffer_url)
+                    {   
+                        $this->convertUrl($node->nid, $url, 'App\Content');
+                    }
 
-                if ($url = $node->field_linktooffer_url)
-                {   
-                    $this->convertUrl($node->nid, $url, 'App\Content');
                 }
+            
+                $this->output->progressAdvance();
 
             }
-            
-            $this->output->progressAdvance();
 
-        }
+        });
 
         $this->output->progressFinish();
     }
