@@ -80,6 +80,8 @@ class ConvertNews extends ConvertBase
                 
                 }
                 
+                                    $replaceImages = [];
+
 
                 $body = $news->body;
 
