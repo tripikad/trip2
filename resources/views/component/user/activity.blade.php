@@ -8,7 +8,7 @@
 
         @include('component.card', [
             'image' => $item->image('medium'),
-            'options' => '-empty -wide'
+            'options' => '-noshade -wide'
         ])
 
         </div>
