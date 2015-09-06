@@ -42,6 +42,8 @@ class ConvertFlights extends ConvertBase
             foreach($nodes as $node)
             {
 
+                $images = false;
+
                 /*
 
                 $fields = [
