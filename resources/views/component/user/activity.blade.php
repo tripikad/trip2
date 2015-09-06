@@ -2,20 +2,6 @@
     
     <div class="utils-border-bottom">
 
-    @if ($item->type == 'photo')
-
-        <div class="utils-padding-bottom">
-
-        @include('component.card', [
-            'image' => $item->image('large'),
-            'options' => '-noshade -wide'
-        ])
-
-        </div>
-
-    @endif
-
-
     @if ($item->activity_type == 'content') 
 
         @include('component.row', [
