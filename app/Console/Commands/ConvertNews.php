@@ -56,19 +56,20 @@ class ConvertNews extends ConvertBase
                         
                         $escapedImage = str_replace('/', '\/', $image);
                         $escapedImage = str_replace('.', '\.', $escapedImage);
-                    /*    
+                        
                         if ($index < 1) {
 
                             $imageMacroPattern = '/\n{0,2}<img.*src="?' . $escapedImage . '"?.*\/?>\n{0,2}/i';
-                            $news->update(['body' => preg_replace($imageMacroPattern, "", $news->body)]);
+                         //   $news->update(['body' => preg_replace($imageMacroPattern, "", $news->body)]);
                       
                         } else {
                       
                             $imageMacroPattern = '/<img.*src="?' . $escapedImage . '"?.*\/?>/i';
-                            $news->update(['body' => preg_replace($imageMacroPattern, "[[$newImage->id]]", $news->body)]);
+                         //   $news->update(['body' => preg_replace($imageMacroPattern, "[[$newImage->id]]", $news->body)]);
                       
                         }
-                    */
+                    
+
                     }
                 
                 }
