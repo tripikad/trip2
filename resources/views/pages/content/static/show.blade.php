@@ -12,7 +12,7 @@
         @endif
     ">
 
-        {!! nl2br($content->body) !!}
+        {!! $content->body_filtered !!}
 
     </div>
 

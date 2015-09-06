@@ -11,6 +11,7 @@ use Imageconv;
 use App\Content;
 use App\Destination;
 use App\Topic;
+use App\Image;
 
 class ContentController extends Controller
 {
@@ -125,6 +126,18 @@ class ContentController extends Controller
 
         }
 
+        if ($request->has('image_id')) {
+            
+            $id = str_replace(['[[', ']]'], '', $request->image_id);
+
+            if (is_int($id) && Image::find($id)) {
+            
+                $content->images()->sync($id);
+            
+            }
+
+        }
+
         if ($request->has('destinations')) {
             
             $content->destinations()->sync($request->destinations);
@@ -186,6 +199,18 @@ class ContentController extends Controller
         }
 
         $content->update(array_merge($fields, $request->all()));
+
+        if ($request->has('image_id')) {
+            
+            $id = (int)str_replace(['[[', ']]'], '', $request->image_id);
+
+            if ($id && Image::find($id)) {
+                
+                $content->images()->sync([$id]);
+            
+            }
+
+        }
 
         if ($request->has('destinations')) {
             

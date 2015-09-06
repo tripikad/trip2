@@ -19,7 +19,7 @@
         @if (in_array($field['type'], ['text', 'textarea', 'url', 'email', 'date']))
 
             {!! Form::$field['type']($key, null, [
-                'class' => 'form-control input-md',
+                'class' =>  isset($field['large']) ? 'form-control input-lg' : 'form-control input-md',
                 'placeholder' => trans("content.$type.edit.field.$key.title"),
                 'rows' => isset($field['rows']) ? $field['rows'] : 8,
             ]) !!}
@@ -35,6 +35,15 @@
             ])
 
             {!! Form::$field['type']($key) !!}
+
+            <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
+
+        @elseif ($field['type'] == 'image_id')
+
+            {!! Form::text($key, null, [
+                'class' => 'form-control input-md',
+                'placeholder' => trans("content.$type.edit.field.$key.title"),
+            ]) !!}
 
             <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
 

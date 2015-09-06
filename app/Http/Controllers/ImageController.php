@@ -12,7 +12,7 @@ class ImageController extends Controller
     public function index()
     {
 
-        $images = Image::orderBy('id', 'asc')->simplePaginate(24);
+        $images = Image::orderBy('id', 'asc')->simplePaginate(96);
         
         return view('pages.image.index', [
             'images' => $images

@@ -6,6 +6,19 @@
 
 @stop
 
+@section('navbar.bottom')
+
+    <div class="utils-border-bottom">
+            
+        @include('component.menu', [
+            'menutype' => 'admin',
+            'menu' => config('menu.admin')
+        ])
+        
+    </div>
+
+@stop
+
 @section('content')
 
     <div class="row">

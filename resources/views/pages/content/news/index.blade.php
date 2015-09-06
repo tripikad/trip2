@@ -28,7 +28,7 @@
                 <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 
                     @include('component.card', [
-                      'image' => $content->images()->first()->preset('small'),
+                      'image' => $content->image('small'),
                         'title' => $content->title,
                     ])
 

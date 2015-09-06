@@ -62,4 +62,13 @@
 	        ],  	      
 	    ], 
 
+	    'admin' => [
+	    	'internal' => [
+	            'url' => '/content/internal',
+	        ],
+	        'image' => [
+	            'url' => '/admin/image',
+	        ],  	      
+	    ], 
+
 	];

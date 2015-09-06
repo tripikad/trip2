@@ -11,7 +11,7 @@ class Content extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-    protected $appends = ['filteredbody'];
+    protected $appends = ['body_filtered','image_id'];
 
     public function user()
     {
@@ -64,7 +64,8 @@ class Content extends Model
         return $this->image ? '/images/' . $this->type . '/small/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
     }
 
-    public function getFilteredbodyAttribute()
+//    public function getFilteredbodyAttribute()
+    public function getBodyFilteredAttribute()
     {
 
         $pattern = '/\[\[([0-9]+)\]\]/';
@@ -91,6 +92,31 @@ class Content extends Model
     public function images()
     {
         return $this->belongsToMany('App\Image', 'content_image');
+    }
+
+    public function image($preset)
+    {
+        
+        if ($image = $this->images()->first()) {
+            
+            return $image->preset($preset);
+        
+        }
+
+        return null;
+    
+    }
+
+    public function getImageIdAttribute() {
+
+        if ($image = $this->images()->first()) {
+            
+            return '[[' . $image->id . ']]';
+        
+        }
+
+        return null;
+    
     }
 
 }

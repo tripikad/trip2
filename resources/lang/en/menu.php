@@ -22,4 +22,6 @@ return [
     'forum.expat' => 'Expat forum',
     'forum.buysell' => 'Buying and selling',
 
+    'admin.internal' => 'Internal forum',
+    'admin.image' => 'All images',
 ];

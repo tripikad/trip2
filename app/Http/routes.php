@@ -103,11 +103,9 @@ Route::group(['prefix' => 'message', 'as' => 'message.'], function () {
 
 });
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+// Images
 
-    get('images', ['uses' => 'ImageController@index', 'as' => 'image.index']);
-
-});
+get('admin/image', ['middleware' => 'role:admin', 'uses' => 'ImageController@index', 'as' => 'image.index']);
 
 
 

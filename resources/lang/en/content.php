@@ -38,13 +38,14 @@ return [
     'news.index.title' => 'News',
     'news.create.title' => 'Add post',
 
-    'news.edit.field.file.help' => '',
+    'news.edit.field.image_id.title' => 'Primary image shortcut',
+    'news.edit.field.image_id.help' => 'Example: [[123]]',
 
     'news.edit.field.title.title' => 'Title',
     'news.edit.field.title.help' => '',
 
     'news.edit.field.body.title' => 'Body',
-    'news.edit.field.body.help' => '',
+    'news.edit.field.body.help' => 'You can use image shortcuts here. Example: [[456]]',
 
     'news.edit.field.destinations.title' => 'Select destinations',
     'news.edit.field.destinations.help' => '',

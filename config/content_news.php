@@ -20,19 +20,20 @@ return [
 
     'store' => [
 
-        'status' => 0
+        'status' => 1
 
     ],
 
     'edit' => [
 
         'fields' => [
-            'file' => [
-                'type' => 'file',
-            ],
             'title' => [
                 'type' => 'text',
                 'title' => 'Title',
+                'large' => true
+            ],
+            'image_id' => [
+                'type' => 'image_id',
             ],
             'body' => [
                 'type' => 'textarea',
