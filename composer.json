@@ -12,7 +12,6 @@
         "intervention/image": "^2.3@dev",
         "barryvdh/laravel-debugbar": "^2.0@dev",
         "baum/baum": "~1.1",
-        "alfredo-ramos/parsedown-extra-laravel": "^0.3.0@dev",
         "predis/predis": "~1.0"
     },
     "require-dev": {
