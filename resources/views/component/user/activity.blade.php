@@ -7,7 +7,7 @@
         <div class="utils-padding-bottom">
 
         @include('component.card', [
-            'image' => $item->image('medium'),
+            'image' => $item->image('large'),
             'options' => '-noshade -wide'
         ])
 
