@@ -23,20 +23,20 @@
   
         @foreach ($contents as $index => $content)
 
-            <div class="col-sm-4 utils-padding-bottom">
+            <div class="col-sm-3 utils-padding-bottom">
 
                 <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 
                     @include('component.card', [
-                      'image' => $content->image('small'),
-                        'title' => $content->title,
+                        'image' => $content->image('small'),
+                        'text' => $content->title,
                     ])
 
                 </a>
 
             </div>
 
-            @if (($index + 1) % 3 == 0) </div><div class="row"> @endif
+            @if (($index + 1) % 4 == 0) </div><div class="row"> @endif
 
         @endforeach
 
