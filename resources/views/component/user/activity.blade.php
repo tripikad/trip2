@@ -7,7 +7,7 @@
         <div class="utils-padding-bottom">
 
         @include('component.card', [
-            'image' => $item->image('xsmall_square'),
+            'image' => $item->image('medium'),
             'options' => '-empty -wide'
         ])
 
