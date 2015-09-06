@@ -50,23 +50,29 @@ class ConvertNews extends ConvertBase
                 
                 if ($images && count($images) > 0) {
 
+                    $replaceImages = [];
+
                     foreach($images as $index => $image) {     
                     
                         $newImage = $this->convertRemoteImage($node->nid, $image, '\App\Content', 'news');
                         
                         $escapedImage = str_replace('/', '\/', $image);
                         $escapedImage = str_replace('.', '\.', $escapedImage);
-                        
-                        if ($index < 1) {
 
-                            $imageMacroPattern = '/\n{0,2}<img.*src="?' . $escapedImage . '"?.*\/?>\n{0,2}/i';
-                            $news->update(['body' => preg_replace($imageMacroPattern, "", $news->body)]);
-                      
+                        if ($index < 1) {
+                            
+                            $replaceImages[] = [
+                                'from' =>'/<img.*src="?' . $escapedImage . '"?.*\/?>\n?/i',
+                                'to' => ""
+                            ];
+
                         } else {
-                      
-                            $imageMacroPattern = '/<img.*src="?' . $escapedImage . '"?.*\/?>/i';
-                         //   $news->update(['body' => preg_replace($imageMacroPattern, "[[$newImage->id]]", $news->body)]);
-                      
+
+                            $replaceImages[] = [
+                                'from' =>'/<img.*src="?' . $escapedImage . '"?.*\/?>/i',
+                                'to' => "[[$newImage->id]]"
+                            ];
+
                         }
                     
 
@@ -75,7 +81,15 @@ class ConvertNews extends ConvertBase
                 }
                 
 
-                $news->update(['body' => $this->convertLineendings($news->body)]);
+                $body = $news->body;
+
+                foreach($replaceImages as $replaceImage) {
+                    
+                    $body = preg_replace($replaceImage['from'], $replaceImage['to'], $body);
+                
+                }
+
+                $news->update(['body' => $this->convertLineendings($body)]);
 
                 // Convert the URL
 
