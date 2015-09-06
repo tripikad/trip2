@@ -60,7 +60,7 @@ class ConvertNews extends ConvertBase
                         if ($index < 1) {
 
                             $imageMacroPattern = '/\n{0,2}<img.*src="?' . $escapedImage . '"?.*\/?>\n{0,2}/i';
-                         //   $news->update(['body' => preg_replace($imageMacroPattern, "", $news->body)]);
+                            $news->update(['body' => preg_replace($imageMacroPattern, "", $news->body)]);
                       
                         } else {
                       
