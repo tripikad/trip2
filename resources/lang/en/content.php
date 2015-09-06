@@ -38,14 +38,14 @@ return [
     'news.index.title' => 'News',
     'news.create.title' => 'Add post',
 
-    'news.edit.field.image_id.title' => 'Primary image shortcut',
-    'news.edit.field.image_id.help' => 'Example: [[123]]',
+    'news.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
+    'news.edit.field.image_id.help' => '',
 
     'news.edit.field.title.title' => 'Title',
     'news.edit.field.title.help' => '',
 
     'news.edit.field.body.title' => 'Body',
-    'news.edit.field.body.help' => 'You can use image shortcuts here. Example: [[456]]',
+    'news.edit.field.body.help' => 'You can use image shortcuts, for example: [[456]]',
 
     'news.edit.field.destinations.title' => 'Select destinations',
     'news.edit.field.destinations.help' => '',
@@ -113,17 +113,17 @@ return [
     'forum.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :tags',
     'forum.create.title' => 'Add post',
 
-    'travelmate.edit.field.title.title' => 'Title',
-    'travelmate.edit.field.title.help' => '',
+    'forum.edit.field.title.title' => 'Title',
+    'forum.edit.field.title.help' => '',
 
-    'travelmate.edit.field.body.title' => 'Body',
-    'travelmate.edit.field.body.help' => '',
+    'forum.edit.field.body.title' => 'Body',
+    'forum.edit.field.body.help' => '',
 
-    'travelmate.edit.field.destinations.title' => 'Select destinations',
-    'travelmate.edit.field.destinations.help' => '',
+    'forum.edit.field.destinations.title' => 'Select destinations',
+    'forum.edit.field.destinations.help' => '',
 
-    'travelmate.edit.field.topics.title' => 'Select topics',
-    'travelmate.edit.field.topics.help' => '',
+    'forum.edit.field.topics.title' => 'Select topics',
+    'forum.edit.field.topics.help' => '',
 
     // Expat
 

@@ -23,6 +23,7 @@ return [
 
             'title' => [
                 'type' => 'text',
+                'large' => true
             ],
             'body' => [
                 'type' => 'textarea',

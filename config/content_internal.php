@@ -15,6 +15,7 @@ return [
             'title' => [
                 'type' => 'text',
                 'title' => 'Title',
+                'large' => true
             ],
             'body' => [
                 'type' => 'textarea',

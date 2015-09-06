@@ -5,10 +5,19 @@
             {{ auth()->user()->name }}
         </a>
     </li>
+
+    @if (auth()->user()->hasRole('admin'))
+
+    <li>
+        <a href="{{ route('content.index', ['internal']) }}">Admin</a>
+    </li>
+    
+    @endif
+
     <li>
         <a href="{{ route('login.logout') }}">&times;</a>
     </li>
-    
+
 @else
 
     <li>
