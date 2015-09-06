@@ -58,8 +58,6 @@ class ConvertBlogs extends ConvertBase
         $this->output->progressStart(count($nodes));
 
         foreach($nodes as $node) {
-
-            $node->title = $node->title . ', foorumist';
             
             if ($this->convertNode($node, '\App\Content', 'blog')) {
             
