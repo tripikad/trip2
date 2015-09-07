@@ -22,7 +22,7 @@ class ConvertBase extends Command
 
     protected $chunk = 10;
 
-    protected $imageQuality = 80;
+    protected $imageQuality = 75;
 
     protected $client;
 
@@ -632,7 +632,7 @@ class ConvertBase extends Command
     
     }
 
-    public function convertRemoteImage($id, $imageUrl, $modelName, $type, $ext = null)
+    public function convertRemoteImage($id, $imageUrl, $modelName, $type)
     {
 
         $newImage = false;
@@ -642,7 +642,7 @@ class ConvertBase extends Command
         if (array_key_exists('filename', pathinfo($imageUrl)) && array_key_exists('extension', pathinfo($imageUrl))) {
 
             $file = pathinfo($imageUrl)['filename'];
-            $ext = $ext ? $ext : pathinfo($imageUrl)['extension'];
+            $ext = pathinfo($imageUrl)['extension'];
 
             if ($this->fileHash) {
                 
