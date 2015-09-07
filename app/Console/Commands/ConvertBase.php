@@ -22,6 +22,8 @@ class ConvertBase extends Command
 
     protected $chunk = 10;
 
+    protected $imageQuality = 80;
+
     protected $client;
 
     protected $contentTypes = [
@@ -630,7 +632,7 @@ class ConvertBase extends Command
     
     }
 
-    public function convertRemoteImage($id, $imageUrl, $modelName, $type)
+    public function convertRemoteImage($id, $imageUrl, $modelName, $type, $ext = null)
     {
 
         $newImage = false;
@@ -640,7 +642,7 @@ class ConvertBase extends Command
         if (array_key_exists('filename', pathinfo($imageUrl)) && array_key_exists('extension', pathinfo($imageUrl))) {
 
             $file = pathinfo($imageUrl)['filename'];
-            $ext = pathinfo($imageUrl)['extension'];
+            $ext = $ext ? $ext : pathinfo($imageUrl)['extension'];
 
             if ($this->fileHash) {
                 
@@ -854,11 +856,11 @@ class ConvertBase extends Command
 
             Imageconv::make($to)
                 ->fit(80)
-                ->save(dirname($to) . '/../xsmall_square/' . basename($to));
+                ->save(dirname($to) . '/../xsmall_square/' . basename($to), $this->imageQuality);
  
             Imageconv::make($to)
                 ->fit(180)
-                ->save(dirname($to) . '/../small_square/' . basename($to));
+                ->save(dirname($to) . '/../small_square/' . basename($to), $this->imageQuality);
         
         }
 
@@ -876,19 +878,19 @@ class ConvertBase extends Command
                 ->resize(300, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(dirname($to) . '/../small/' . basename($to));
+                ->save(dirname($to) . '/../small/' . basename($to), $this->imageQuality);
 
             Imageconv::make($to)
                 ->resize(700, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(dirname($to) . '/../medium/' . basename($to));
+                ->save(dirname($to) . '/../medium/' . basename($to), $this->imageQuality);
 
             Imageconv::make($to)
                 ->resize(900, null, function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(dirname($to) . '/../large/' . basename($to));
+                ->save(dirname($to) . '/../large/' . basename($to), $this->imageQuality);
 
         }
 
