@@ -14,7 +14,7 @@ class Topic extends Model
         return $this->belongsToMany('App\Content');
     }
 
-    static function getNames($type = null)
+    static function getNames()
     {
         return Topic::lists('name', 'id')->sort();
     }
