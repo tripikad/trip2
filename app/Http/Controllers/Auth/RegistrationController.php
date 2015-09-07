@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use Mail;
+use Hash;
 
 use App\User;
 
@@ -29,7 +30,7 @@ class RegistrationController extends Controller
 
         $fields = [
             'role' => 'regular',
-            'password' => bcrypt($request->get('password'))
+            'password' => Hash::make($request->get('password'))
         ];
         
         $user = User::create(array_merge($request->all(), $fields));

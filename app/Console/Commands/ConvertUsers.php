@@ -131,11 +131,34 @@ class ConvertUsers extends ConvertBase
     
     }
 
+    public function convertUsersDemo()
+    {  
+        
+        foreach(['regular', 'admin', 'superuser'] as $role) {
+
+            User::create([
+                'name' => 'demo' . $role,
+                'email' => $role . '@example.com' ,
+                'password' => bcrypt('demo' . $role),
+                'role' => $role,
+                'verified' => 1
+            ]);
+
+        };
+
+    }
+
     public function handle()
     {
         
         $this->convertUsersOld();
         $this->convertUsersOther();
+
+        if ($this->demoAccounts) {
+            dump($this->demoAccounts);
+            $this->convertUsersDemo();
+        
+        }
 
     }
 

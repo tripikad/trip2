@@ -53,12 +53,13 @@ class ConvertBase extends Command
         
         // max size: messages ~100000
 
-        $this->skip = env('CONVERT_SKIP', '10');
-        $this->take = env('CONVERT_TAKE', '10');
-        $this->copyFiles = env('CONVERT_FILES', 'false');
-        $this->scrambleMessages = env('CONVERT_SCRAMBLE', 'true');
-        $this->fileHash = env('CONVERT_FILEHASH', 'false');
-        $this->overwriteFiles = env('CONVERT_OVERWRITE', 'false');
+        $this->skip = env('CONVERT_SKIP', 10);
+        $this->take = env('CONVERT_TAKE', 10);
+        $this->copyFiles = env('CONVERT_FILES', false);
+        $this->scrambleMessages = env('CONVERT_SCRAMBLE', true);
+        $this->fileHash = env('CONVERT_FILEHASH', false);
+        $this->overwriteFiles = env('CONVERT_OVERWRITE', false);
+        $this->demoAccounts = env('CONVERT_DEMOACCOUNTS', false);
     }
 
     // Nodes
@@ -519,7 +520,9 @@ class ConvertBase extends Command
 
             }
 
-            $model->password = bcrypt($this->cleanAll($user->name)); // Legacy md5 password: $user->pass
+            // $model->password = bcrypt($this->cleanAll($user->name)); 
+
+            $model->password = $user->pass;
 
             $model->role = $this->getRole($user->rid);
 
