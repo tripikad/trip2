@@ -12,6 +12,19 @@
         @endif
     ">
 
+    @if($image = $content->images()->first())
+        
+        <div class="utils-double-padding-bottom">
+
+        @include('component.card', [
+            'image' => $image->preset('large'),
+            'options' => '-noshade'
+        ])
+
+        </div>
+
+    @endif
+
     @include('component.row', [
         'image' => $content->user->preset('xsmall_square'),
         'image_link' => route('user.show', [$content->user]),
@@ -77,19 +90,6 @@
         </div>
 
     </div>
-
-    @if($image = $content->images()->first())
-        
-        <div class="utils-padding-bottom">
-
-        @include('component.card', [
-            'image' => $image->preset('large'),
-            'options' => '-noshade'
-        ])
-
-        </div>
-
-    @endif
     
     </div>
     

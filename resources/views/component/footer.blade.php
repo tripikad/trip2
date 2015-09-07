@@ -1,25 +1,29 @@
-<ul class="list-inline">
+<div class="component-footer">
 
-	@foreach (config('menu.footer') as $key => $data)
-            
-    <li>
-       		
-    		<a href="{{ $data['url'] }}"
+    <ul class="list-inline">
 
-    			@if (isset($data['external']) && $data['external'])
+    	@foreach (config('menu.footer') as $key => $data)
+                
+        <li>
+           		
+        		<a href="{{ $data['url'] }}"
 
-    				target="_blank"
+        			@if (isset($data['external']) && $data['external'])
 
-    			@endif
+        				target="_blank"
 
-    		>
+        			@endif
 
-    			{{ trans("menu.footer.$key") }}
+        		>
 
-    		</a>
-    	
-    </li>
-            
-    @endforeach
+        			{{ trans("menu.footer.$key") }}
 
-</ul>
+        		</a>
+        	
+        </li>
+                
+        @endforeach
+
+    </ul>
+
+</div>

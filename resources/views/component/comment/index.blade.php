@@ -1,10 +1,15 @@
 @if (count($comments))
 
-@foreach ($comments as $comment)
+@foreach ($comments as $index => $comment)
 
     <div
         id="comment-{{ $comment->id }}"
-        class="utils-border-bottom
+        class="
+        @if (count($comments) == ($index + 1))
+            utils-padding-bottom 
+        @else
+            utils-border-bottom
+        @endif
         @if (! $comment->status)
             utils-unpublished
         @endif
