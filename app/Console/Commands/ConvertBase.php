@@ -222,7 +222,12 @@ class ConvertBase extends Command
         'Reisiöömaja' => ['rename' => 'Majutus ja hotellid'],
         'Reisikiri' => ['delete' => true],
         'Auto-motoreis' => ['rename' => 'Autoreis'],
-        'Reisivideo' => ['delete' => true],
+//      'Reisivideo' => ['delete' => true],
+
+        'Matkavarustus' => ['rename' => 'Varustus'],
+        'Reisikirjandus' => ['rename' => 'Reisiraamatud'],
+        'Reisi-öömaja' => ['rename' => 'Majutus ja hotellid'],
+//      'Voucherid ja piletid' => [],
 
         'Lemmikloom reisil' => ['tid' => 5000, 'pattern' => '/(lemmikloom|koer|\skass)/i'],
         'GPS ja kaardid' => ['tid' => 5001, 'pattern' => '/GPS/'],

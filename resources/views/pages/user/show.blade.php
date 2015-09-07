@@ -21,7 +21,7 @@
 @section('header.top')
     
     @include('component.image', [
-        'image' => $user->preset('small_square'),
+        'image' => $user->imagePreset('small_square'),
         'options' => '-circle',
         'width' => '30%'
     ])

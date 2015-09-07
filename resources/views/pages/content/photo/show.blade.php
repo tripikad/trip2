@@ -17,7 +17,7 @@
         <div class="utils-double-padding-bottom">
 
         @include('component.card', [
-            'image' => $image->preset('large'),
+            'image' => $image->imagePreset('large'),
             'options' => '-noshade'
         ])
 
@@ -26,7 +26,7 @@
     @endif
 
     @include('component.row', [
-        'image' => $content->user->preset('xsmall_square'),
+        'image' => $content->user->imagePreset(),
         'image_link' => route('user.show', [$content->user]),
         'heading' => $content->title,
         'text' => trans("content.show.row.text", [

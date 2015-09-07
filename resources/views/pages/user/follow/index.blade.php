@@ -27,7 +27,7 @@
     <div class="utils-border-bottom">
 
         @include('component.row', [
-            'image' => $follow->followable->user->preset('xsmall_square'),
+            'image' => $follow->followable->user->imagePreset(),
             'image_link' => route('user.show', [$follow->followable->user]),
             'heading' => $follow->followable->title,
             'heading_link' => route('content.show', [

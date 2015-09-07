@@ -31,7 +31,7 @@
 
                     <a href="{{ route('content.show', [$content->type, $content]) }}">
                         
-                        <img src="{{ $content->images()->first()->preset('large') }}" />
+                        <img src="{{ $content->imagePreset('large') }}" />
                     
                     </a>
 
@@ -51,7 +51,7 @@
                 ">
 
                     @include('component.row', [
-                        'image' => $content->user->preset('xsmall_square'),
+                        'image' => $content->user->imagePreset(),
                         'image_link' => route('user.show', [$content->user]),
                         'heading' => $content->title,
                         'text' => trans("content.show.row.text", [

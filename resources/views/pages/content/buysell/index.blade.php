@@ -31,7 +31,7 @@
         <div class="utils-border-bottom">
 
         @include('component.row', [
-            'image' => $content->user->preset('xsmall_square'),
+            'image' => $content->user->imagePreset(),
             'image_link' => route('user.show', [$content->user]),
             'heading' => $content->title,
             'heading_link' => route('content.show', [$content->type, $content->id]),

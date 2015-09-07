@@ -30,7 +30,7 @@
 
             @include('component.image.field', [
                 'image' => isset($content)
-                    ? $content->images()->first()->preset()
+                    ? $content->imagePreset('medium')
                     : null
             ])
 

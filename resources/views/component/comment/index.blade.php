@@ -16,7 +16,7 @@
     ">
 
         @include('component.row', [
-            'image' => $comment->user->preset('xsmall_square'),
+            'image' => $comment->user->imagePreset(),
             'image_width' => '80%',
             'image_link' => route('user.show', [$comment->user]),
             'text' => trans("comment.index.row.text", [

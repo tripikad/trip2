@@ -17,7 +17,7 @@
         <div class="utils-double-padding-bottom">
 
             @include('component.card', [
-                'image' => $image->preset('large'),
+                'image' => $image->imagePreset('large'),
                 'options' => '-center -noshade -wide -large',
                 'title' => $content->title,
             ])
@@ -39,7 +39,7 @@
     <div class="utils-border-bottom">
 
     @include('component.row', [
-        'image' => $content->user->preset('xsmall_square'),
+        'image' => $content->user->imagePreset(),
         'image_link' => route('user.show', [$content->user]),
         'text' => trans("content.show.row.text", [
             'user' => view('component.user.link', ['user' => $content->user]),

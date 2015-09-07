@@ -5,7 +5,7 @@
     @if ($item->activity_type == 'content') 
 
         @include('component.row', [
-            'image' => $user->preset('xsmall_square'),
+            'image' => $user->imagePreset(),
             'text' => trans('user.activity.index.row.content', [
                 'user' => $user->name,
                 'title' => '<a href="'
@@ -20,7 +20,7 @@
     @else
 
         @include('component.row', [
-            'image' => $user->preset('xsmall_square'),
+            'image' => $user->imagePreset(),
             'text' => trans('user.activity.index.row.comment', [
                 'user' => $user->name,
                 'title' => '<a href="'

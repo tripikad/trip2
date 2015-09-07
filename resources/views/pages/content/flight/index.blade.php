@@ -28,7 +28,7 @@
                 <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 
                     @include('component.card', [
-                        'image' => $content->images()->first()->preset(),
+                        'image' => $content->imagePreset(),
                         'title' => $content->price ? trans("content.flight.index.field.price", [
                             'price' => $content->price,
                             'symbol' => config('site.currency.symbol')

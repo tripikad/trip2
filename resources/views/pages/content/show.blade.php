@@ -12,21 +12,8 @@
         @endif
     ">
 
-    @if($image = $content->images()->first())
-        
-        <div class="utils-padding-bottom">
-
-        @include('component.card', [
-            'image' => $image->preset('large'),
-            'options' => '-noshade'
-        ])
-
-        </div>
-
-    @endif
-
     @include('component.row', [
-        'image' => $content->user->preset('xsmall_square'),
+        'image' => $content->user->imagePreset(),
         'image_link' => route('user.show', [$content->user]),
         'heading' => $content->title,
         'text' => trans("content.show.row.text", [

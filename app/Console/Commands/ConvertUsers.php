@@ -155,7 +155,7 @@ class ConvertUsers extends ConvertBase
         $this->convertUsersOther();
 
         if ($this->demoAccounts) {
-            dump($this->demoAccounts);
+
             $this->convertUsersDemo();
         
         }

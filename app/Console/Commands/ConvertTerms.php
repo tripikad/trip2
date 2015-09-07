@@ -108,9 +108,9 @@ class ConvertTerms extends ConvertBase
 
     public function convertTopics()
     {
-        $terms = $this->getTerms([5, 9])->get(); // Reisistiilid, Rubriigid
+        $terms = $this->getTerms([5, 9, 25])->get(); // Reisistiilid, Rubriigid, Kategooria
 
-        $this->info('Converting tags');
+        $this->info('Converting topics');
         $this->output->progressStart(count($terms));
 
         foreach($terms as $term)

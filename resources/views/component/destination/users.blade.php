@@ -9,7 +9,7 @@
             <a href="{{ route('user.show', [$user->user]) }}">
                 
                 @include('component.image', [
-                    'image' => $user->user->preset('xsmall_square'),
+                    'image' => $user->user->imagePreset(),
                     'options' => '-circle'
                 ])
             
