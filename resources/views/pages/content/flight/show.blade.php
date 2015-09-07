@@ -17,7 +17,7 @@
         <div class="utils-double-padding-bottom">
 
             @include('component.card', [
-                'image' => $image->imagePreset('large'),
+                'image' => $content->imagePreset('large'),
                 'options' => '-center -noshade -wide -large',
                 'title' => $content->title,
             ])

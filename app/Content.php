@@ -94,7 +94,7 @@ class Content extends Model
         return $this->belongsToMany('App\Image', 'content_image');
     }
 
-    public function imagePreset($preset)
+    public function imagePreset($preset = 'small')
     {
         
         if ($image = $this->images()->first()) {
