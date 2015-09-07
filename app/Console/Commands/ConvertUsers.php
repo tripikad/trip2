@@ -115,7 +115,11 @@ class ConvertUsers extends ConvertBase
 
                 // Removing homepage link from profile because of spam consideration
 
-                User::find($uid)->update(['contact_homepage' => null]);
+                if ($user = User::find($uid)) {
+                  
+                    $user->update(['contact_homepage' => null]);
+                
+                };
 
                 $i++;
 

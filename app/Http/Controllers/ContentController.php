@@ -172,6 +172,8 @@ class ContentController extends Controller
     public function edit($type, $id)
     {
 
+        $now = \Carbon\Carbon::now();
+
         $content = \App\Content::findorFail($id);
 
         $destinations = Destination::getNames();
@@ -191,6 +193,7 @@ class ContentController extends Controller
             ->with('destination', $destination)
             ->with('topics', $topics)
             ->with('topic', $topic)
+            ->with('now', $now)
             ->render();
 
     }

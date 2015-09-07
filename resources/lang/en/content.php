@@ -66,8 +66,11 @@ return [
     'flight.edit.field.title.title' => 'Title',
     'flight.edit.field.title.help' => '',
 
+    'flight.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
+    'flight.edit.field.image_id.help' => '',
+    
     'flight.edit.field.body.title' => 'Body',
-    'flight.edit.field.body.help' => '',
+    'flight.edit.field.body.help' => 'You can use image shortcuts, for example: [[456]]',
 
     'flight.edit.field.destinations.title' => 'Select destinations',
     'flight.edit.field.destinations.help' => '',

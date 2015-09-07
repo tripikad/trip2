@@ -24,6 +24,9 @@ return [
                 'type' => 'text',
                 'large' => true
             ],
+            'image_id' => [
+                'type' => 'image_id',
+            ],
             'body' => [
                 'type' => 'textarea',
                 'rows' => 16,
