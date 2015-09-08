@@ -318,7 +318,8 @@ class ContentController extends Controller
 
     public function filter(Request $request, $type)
     {
-
+        dump($request->all());
+        
         return redirect()->route(
             'content.index',
             [$type,
