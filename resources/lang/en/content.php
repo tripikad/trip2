@@ -4,10 +4,12 @@ return [
     
     // General
 
-    'action.published.title' => 'Unpublish',
-    'action.unpublished.title' => 'Publish',
-    'action.published.status' => ':title has been published',
-    'action.unpublished.status' => ':title has been unpublished',
+    'action.edit.title' => 'Edit',
+
+    'action.status.1.title' => 'Unpublish',
+    'action.status.0.title' => 'Publish',
+    'action.1.status' => ':title has been published',
+    'action.0.status' => ':title has been unpublished',
 
     'field.image.title' => 'Select image',
     'field.image.selected.title' => 'New image selected',
@@ -36,6 +38,9 @@ return [
     // News
 
     'news.index.title' => 'News',
+
+    'news.show.row.text' => ':user :created_at, :destinations, :tags',
+
     'news.create.title' => 'Add post',
 
     'news.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
@@ -60,6 +65,8 @@ return [
 
     'flight.index.title' => 'Flights',
     'flight.index.field.price' => 'From :price:symbol',
+
+    'flight.show.row.text' => 'Posted at :created_at, :destinations, :tags',
 
     'flight.create.title' => 'Add flight offer',
 

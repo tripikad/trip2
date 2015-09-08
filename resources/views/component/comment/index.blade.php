@@ -23,6 +23,7 @@
                 'user' => view('component.user.link', ['user' => $comment->user]),
                 'created_at' => $comment->created_at->diffForHumans(),
             ]),
+            'actions' => view('component.actions', [ 'actions' => $comment->actions]),
             'extra' => view('component.flag', [ 'flags' => [
                 'good' => [
                     'value' => count($comment->flags->where('flag_type', 'good')),
@@ -48,29 +49,6 @@
             <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
 
                 {!! nl2br($comment->body) !!}
-
-            </div>
-
-            <div class="col-sm-1">
-                
-                @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $comment->user->id))
-                    
-                    <a href="{{ route('comment.edit', [$comment->id]) }}">Edit</a>
-                
-                @endif
-            
-                @if (\Auth::check() && \Auth::user()->hasRole('admin'))
-                    
-                    <a href="{{ route('comment.status', [
-                        $comment,
-                        (1 - $comment->status)
-                    ]) }}">
-                    
-                        {{ trans('content.action.' . config("site.statuses.$comment->status") . '.title') }}
-
-                    </a>
-
-                @endif
 
             </div>
 

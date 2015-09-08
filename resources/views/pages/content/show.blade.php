@@ -23,6 +23,7 @@
             'destinations' => $content->destinations->implode('name', ','),
             'tags' => $content->topics->implode('name', ','),
         ]),
+        'actions' => view('component.actions', [ 'actions' => $content->actions]),
         'extra' => view('component.flag', [ 'flags' => [
             'good' => [
                 'value' => count($content->flags->where('flag_type', 'good')),
@@ -49,35 +50,15 @@
 
         </div>
         
-        <div class="col-sm-1 col-lg-2">
-
-            @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $content->user->id))
-                
-                <a href="{{ route('content.edit', ['type' => $content->type, 'id' => $content]) }}">Edit</a>
-            
-            @endif
-
-            @if (\Auth::check() && \Auth::user()->hasRole('admin'))
-                
-                <a href="{{ route('content.status', [
-                    $content->type,
-                    $content,
-                    (1 - $content->status)
-                ]) }}">
-
-                    {{ trans('content.action.' . config("site.statuses.$content->status") . '.title') }}
-
-                </a>
-
-            @endif
-
-        </div>
-
     </div>
 
     </div>
+
+    <div class="utils-border-bottom">    
     
-    @include('component.comment.index', ['comments' => $comments])
+        @include('component.comment.index', ['comments' => $comments])
+
+    </div>
 
     @if (\Auth::check())
 
