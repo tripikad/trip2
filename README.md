@@ -2,7 +2,7 @@
 
 ### Automatic setup
 
-It's recommended to use our Vagrant machine for development. See https://github.com/kristjanjansen/trip2_vagrant/blob/master/README.md
+It's recommended to use our Vagrant machine for development. See https://github.com/tripikad/trip2_vagrant/blob/master/README.md
 
 ### Manual setup
 
