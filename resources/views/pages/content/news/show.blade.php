@@ -36,7 +36,7 @@
         'extra' => view('component.flags', ['flags' => $content->getFlags()])
     ])
 
-    <div class="row utils-padding-bottom">
+    <div class="row utils-border-bottom">
 
         <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
 
@@ -46,7 +46,11 @@
 
     </div>
 
-    @include('component.comment.index', ['comments' => $comments])
+    <div class="utils-border-bottom">
+
+        @include('component.comment.index', ['comments' => $comments])
+
+    </div>
 
     @if (\Auth::check())
 
