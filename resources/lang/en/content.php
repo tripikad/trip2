@@ -4,6 +4,8 @@ return [
     
     // General
 
+    'row.text.comment' => 'Latest comment :updated_at',
+
     'action.edit.title' => 'Edit',
 
     'action.status.1.title' => 'Unpublish',
@@ -20,8 +22,6 @@ return [
     'index.filter.submit.title' => 'Filter',
     'index.filter.reset.title' => 'Reset',
     'index.filter.destination.title' => 'Check out our :destination page as well',
-
-    'show.row.text' => ':user :created_at, :destinations, :topics',
 
     'create.title' => 'Add',
     'create.submit.title' => 'Add',

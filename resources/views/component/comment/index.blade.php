@@ -19,10 +19,7 @@
             'image' => $comment->user->imagePreset(),
             'image_width' => '80%',
             'image_link' => route('user.show', [$comment->user]),
-            'text' => trans("comment.index.row.text", [
-                'user' => view('component.user.link', ['user' => $comment->user]),
-                'created_at' => $comment->created_at->diffForHumans(),
-            ]),
+            'text' => view('component.comment.text', ['comment' => $comment]),
             'actions' => view('component.actions', ['actions' => $comment->getActions()]),
             'extra' => view('component.flags', ['flags' => $comment->getFlags()])
 
