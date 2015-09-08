@@ -23,25 +23,9 @@
                 'user' => view('component.user.link', ['user' => $comment->user]),
                 'created_at' => $comment->created_at->diffForHumans(),
             ]),
-            'actions' => view('component.actions', [ 'actions' => $comment->actions]),
-            'extra' => view('component.flag', [ 'flags' => [
-                'good' => [
-                    'value' => count($comment->flags->where('flag_type', 'good')),
-                    'flaggable' => \Auth::check(),
-                    'flaggable_type' => 'comment',
-                    'flaggable_id' => $comment->id,
-                    'flag_type' => 'good',
-                    'return' => '#comment-' . $comment->id
-                ],
-                'bad' => [
-                    'value' => count($comment->flags->where('flag_type', 'bad')),
-                    'flaggable' => \Auth::check(),
-                    'flaggable_type' => 'comment',
-                    'flaggable_id' => $comment->id,
-                    'flag_type' => 'bad',
-                    'return' => '#comment-' . $comment->id
-                ]
-            ]])
+            'actions' => view('component.actions', ['actions' => $comment->getActions()]),
+            'extra' => view('component.flags', ['flags' => $comment->getFlags()])
+
         ])
 
         <div class="row">

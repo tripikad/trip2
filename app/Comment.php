@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Auth;
+
 class Comment extends Model
 {
 
@@ -33,7 +35,7 @@ class Comment extends Model
        return str_limit($this->attributes['body'], 30);
    }
 
-   public function getActionsAttribute()
+   public function getActions()
    {
 
        $actions = [];
@@ -58,6 +60,32 @@ class Comment extends Model
        
        return $actions;
    
+   }
+
+
+   public function getFlags() {
+
+       return [
+
+          'good' => [
+              'value' => count($this->flags->where('flag_type', 'good')),
+              'flaggable' => Auth::check(),
+              'flaggable_type' => 'comment',
+              'flaggable_id' => $this->id,
+              'flag_type' => 'good',
+              'return' => '#comment-' . $this->id
+          ],
+          'bad' => [
+              'value' => count($this->flags->where('flag_type', 'bad')),
+              'flaggable' => Auth::check(),
+              'flaggable_type' => 'comment',
+              'flaggable_id' => $this->id,
+              'flag_type' => 'bad',
+              'return' => '#comment-' . $this->id
+          ]
+
+       ];
+
    }
 
 }

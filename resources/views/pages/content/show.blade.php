@@ -23,23 +23,8 @@
             'destinations' => $content->destinations->implode('name', ','),
             'tags' => $content->topics->implode('name', ','),
         ]),
-        'actions' => view('component.actions', [ 'actions' => $content->actions]),
-        'extra' => view('component.flag', [ 'flags' => [
-            'good' => [
-                'value' => count($content->flags->where('flag_type', 'good')),
-                'flaggable' => \Auth::check(),
-                'flaggable_type' => 'content',
-                'flaggable_id' => $content->id,
-                'flag_type' => 'good'
-            ],
-            'bad' => [
-                'value' => count($content->flags->where('flag_type', 'bad')),
-                'flaggable' => \Auth::check(),
-                'flaggable_type' => 'content',
-                'flaggable_id' => $content->id,
-                'flag_type' => 'bad'
-            ]
-        ]])
+        'actions' => view('component.actions', ['actions' => $content->getActions()]),
+        'extra' => view('component.flags', ['flags' => $content->getFlags()])
     ])
 
     <div class="row">

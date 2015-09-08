@@ -45,7 +45,8 @@
             'destinations' => $content->destinations->implode('name', ','),
             'tags' => $content->topics->implode('name', ','),
         ]),
-        'actions' => view('component.actions', [ 'actions' => $content->actions]),
+        'actions' => view('component.actions', ['actions' => $content->getActions()]),
+        'extra' => view('component.flags', ['flags' => $content->getFlags()])
 
     ])
 

@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Auth;
+
 class Content extends Model
 {
 
@@ -11,7 +13,7 @@ class Content extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-    protected $appends = ['body_filtered','image_id', 'actions'];
+    protected $appends = ['body_filtered','image_id'];
 
     public function user()
     {
@@ -119,7 +121,7 @@ class Content extends Model
     
     }
 
-    public function getActionsAttribute()
+    public function getActions()
     {
 
         $actions = [];
@@ -144,6 +146,28 @@ class Content extends Model
         
         return $actions;
     
+    }
+
+    public function getFlags() {
+
+        return [
+
+            'good' => [
+                'value' => count($this->flags->where('flag_type', 'good')),
+                'flaggable' => Auth::check(),
+                'flaggable_type' => 'content',
+                'flaggable_id' => $this->id,
+                'flag_type' => 'good'
+            ],
+            'bad' => [
+                'value' => count($this->flags->where('flag_type', 'bad')),
+                'flaggable' => Auth::check(),
+                'flaggable_type' => 'content',
+                'flaggable_id' => $this->id,
+                'flag_type' => 'bad'
+            ]
+        ];
+
     }
 
 }
