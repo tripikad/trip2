@@ -231,13 +231,15 @@ class ConvertBase extends Command
         'Reisi-öömaja' => ['rename' => 'Majutus ja hotellid'],
 //      'Voucherid ja piletid' => [],
 
-        'Lemmikloom reisil' => ['tid' => 5000, 'pattern' => '/(lemmikloom|koer|\skass)/i'],
-        'GPS ja kaardid' => ['tid' => 5001, 'pattern' => '/GPS/'],
-        'Autorent' => ['tid' => 5002, 'pattern' => '/(autorent|rendia|renti)/i'],
-        'Motoreis' => ['tid' => 5003, 'pattern' => '/(mootor|moto)/i'],
-        'Turvalisus' => ['tid' => 5004, 'pattern' => '/(turval|varasta)/i'],
-        'Uuring' => ['tid' => 5005, 'pattern' => '/(uuring|uurimus|küsitlus)/i'],
-        'Töö' => ['tid' => 5006, 'pattern' => '/(töö)/i']
+        'Vaba teema' => ['tid' => 5000, 'pattern' => '//i'],
+        'Lemmikloom reisil' => ['tid' => 5001, 'pattern' => '/(lemmikloom|koer| kass)/i'],
+        'GPS' => ['tid' => 5002, 'pattern' => '/GPS|navigatsioon/'],
+        'Autorent' => ['tid' => 5003, 'pattern' => '/(autorent|rendia|renti)/i'],
+        'Motoreis' => ['tid' => 5004, 'pattern' => '/(mootor|moto)/i'],
+        'Turvalisus' => ['tid' => 5005, 'pattern' => '/(turval|varasta)/i'],
+        'Uuring' => ['tid' => 5006, 'pattern' => '/(uuring|uurimus|küsitlus)/i'],
+        'Töö' => ['tid' => 5007, 'pattern' => '/(töö leid|töö ots|tööle|töökoh)/i'],
+        'Mobiil' => ['tid' => 5008, 'pattern' => '/(mobiil|nutitelef|mobla|iphone|android|ipad|tablet|sim-|sim kaart|samsung|äpp|rakendus)/i']
 
     ];
 

@@ -36,22 +36,19 @@
             
             <div class="col-xs-10">
                 
-                <h3>
-                    <a href="{{ route('content.show', [$content->type, $content]) }}">
-                        {{ $content->title }}
-                    </a>
-                </h3>
+                <div class="utils-padding-bottom">
                 
-                <p>
-                {!! trans("content.$type.index.row.text", [
-                    'user' => view('component.user.link', ['user' => $content->user]),
-                    'created_at' => $content->created_at->format('d. m Y H:i:s'),
-                    'destinations' => $content->destinations->implode('name', ','),
-                    'tags' => $content->topics->implode('name', ','),
-                ]) !!}
-                </p>
+                    <h3>
+                        <a href="{{ route('content.show', [$content->type, $content]) }}">
+                            {{ $content->title }}
+                        </a>
+                    </h3>
+                    
+                    @include('component.content.text', ['content' => $content])
 
-                {!! nl2br(str_limit($content->body, 500)) !!}
+                </div>
+                
+                {!! $content->body_filtered !!}
             
             </div>
 
