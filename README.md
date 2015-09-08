@@ -6,6 +6,8 @@ It's recommended to use our Vagrant machine for development. See https://github.
 
 ### Manual setup
 
+#### Installing
+
 You need to have LEMP stack, Composer and NodeJS installed. 
 
     git clone https://github.com/tripikad/trip2.git
@@ -38,7 +40,7 @@ Then  add following parameters to ```/.env```:
 
 Now you should be able to access the web app and also run console commands.
 
-### Set up databases
+#### Set up databases
 
     mysqladmin -uroot -psecret create trip
     mysqladmin -uroot -psecret create trip2
