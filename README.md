@@ -6,9 +6,9 @@ It's recommended to use our Vagrant machine for development. See https://github.
 
 ### Manual setup
 
-You need to have LEMP stack, [Composer](https://github.com/kristjanjansen/trip2_vagrant/blob/master/provision.sh#L46) and [NodeJS and Gulp](https://github.com/tripikad/trip2_vagrant/blob/master/provision.sh#L105) installed. 
+You need to have LEMP stack, Composer and NodeJS installed. 
 
-    git clone https://github.com/kristjanjansen/trip2.git
+    git clone https://github.com/tripikad/trip2.git
     cd trip2
     composer install
     npm install
