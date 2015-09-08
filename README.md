@@ -1,6 +1,12 @@
-### Installation
+## Installation
 
-You need to have [Composer](https://github.com/kristjanjansen/trip2_vagrant/blob/master/provision.sh#L46) and [NodeJS and Gulp](https://github.com/kristjanjansen/trip2_vagrant/blob/master/provision.sh#L105) installed. Then:
+### Automatic setup
+
+It's recommended to use our Vagrant machine for development. See https://github.com/kristjanjansen/trip2_vagrant/blob/master/README.md
+
+### Manual setup
+
+You need to have LEMP stack, [Composer](https://github.com/kristjanjansen/trip2_vagrant/blob/master/provision.sh#L46) and [NodeJS and Gulp](https://github.com/kristjanjansen/trip2_vagrant/blob/master/provision.sh#L105) installed. 
 
     git clone https://github.com/kristjanjansen/trip2.git
     cd trip2
@@ -52,16 +58,4 @@ which runs all conversions found at ```app/Console/Commands```. You can list all
 
     php artisan list convert
 
-When running the converter separately its recommended you first run:
-
-    php artisan migrate:terms
-
-Note that by default, only the small sample of legacy database is converted. To overwrite this add following parameter to ```.env```:
-
-    CONVERT_TAKE=how_many_items
-
-Note that maximum number of items in databases is around 110000.
-
-If you also want to convert images, add following to ```.env```:
-    
-    CONVERT_FILES=true
+There are more parameters you can set up for conversion. Refer this: https://github.com/kristjanjansen/trip2/blob/master/app/Console/Commands/ConvertBase.php#L58

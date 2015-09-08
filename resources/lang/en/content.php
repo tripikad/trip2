@@ -21,7 +21,7 @@ return [
     'index.filter.reset.title' => 'Reset',
     'index.filter.destination.title' => 'Check out our :destination page as well',
 
-    'show.row.text' => ':user :created_at, :destinations, :tags',
+    'show.row.text' => ':user :created_at, :destinations, :topics',
 
     'create.title' => 'Add',
     'create.submit.title' => 'Add',
@@ -39,7 +39,7 @@ return [
 
     'news.index.title' => 'News',
 
-    'news.show.row.text' => ':user :created_at, :destinations, :tags',
+    'news.show.row.text' => ':user :created_at, :destinations, :topics',
 
     'news.create.title' => 'Add post',
 
@@ -66,7 +66,7 @@ return [
     'flight.index.title' => 'Flights',
     'flight.index.field.price' => 'From :price:symbol',
 
-    'flight.show.row.text' => 'Posted at :created_at, :destinations, :tags',
+    'flight.show.row.text' => 'Posted at :created_at, :destinations, :topics',
 
     'flight.create.title' => 'Add flight offer',
 
@@ -120,7 +120,7 @@ return [
     // Forum
 
     'forum.index.title' => 'General forum',
-    'forum.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :tags',
+    'forum.index.row.text' => ':user :created_at latest comment at :updated_at:destinations:topics',
     'forum.create.title' => 'Add post',
 
     'forum.edit.field.title.title' => 'Title',
@@ -138,7 +138,7 @@ return [
     // Expat
 
     'expat.index.title' => 'Expat forum',
-    'expat.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :tags',
+    'expat.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :topics',
     'expat.create.title' => 'Add post',
 
     'expat.edit.field.title.title' => 'Title',
