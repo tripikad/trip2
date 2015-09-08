@@ -10,7 +10,7 @@ You need to have LEMP stack, Composer and NodeJS installed.
 
     git clone https://github.com/tripikad/trip2.git
     cd trip2
-    composer install
+    composer install --prefer-source --no-interaction
     npm install
     gulp
     sudo chown -R www-data:www-data /var/www
