@@ -62,4 +62,4 @@ which runs all conversions found at ```app/Console/Commands```. You can list all
 
     php artisan list convert
 
-There are more parameters you can set up for conversion. Refer this: https://github.com/kristjanjansen/trip2/blob/master/app/Console/Commands/ConvertBase.php#L58
+There are more parameters you can set up for conversion. Refer this: https://github.com/tripikad/trip2/blob/master/app/Console/Commands/ConvertBase.php#L58
