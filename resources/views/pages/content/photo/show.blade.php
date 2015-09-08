@@ -14,10 +14,10 @@
 
     @if($image = $content->images()->first())
         
-        <div class="utils-double-padding-bottom">
+        <div class="utils-padding-bottom">
 
         @include('component.card', [
-            'image' => $image->imagePreset('large'),
+            'image' => $content->imagePreset('large'),
             'options' => '-noshade'
         ])
 

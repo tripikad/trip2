@@ -21,7 +21,7 @@
 
     @foreach ($contents as $content)
 
-        <div class="utils-double-border-bottom">
+        <div class="utils-border-bottom">
 
             <div class="row utils-padding-bottom">
 
