@@ -13,7 +13,8 @@
                 @include('component.card', [
                     'image' => $content->imagePreset(),
                     'title' => $content->price ? trans("content.flight.index.field.price", [
-                        'price' => $content->price
+                        'price' => $content->price,
+                        'symbol' => config('site.currency.symbol')
                     ]) : null,
                     'text' => $content->title,
                     'options' => '-center'
