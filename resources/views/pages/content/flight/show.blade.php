@@ -14,7 +14,7 @@
 
     @if($image = $content->images()->first())
         
-        <div class="utils-double-padding-bottom">
+        <div class="utils-padding-bottom">
 
             @include('component.card', [
                 'image' => $content->imagePreset('large'),
@@ -26,7 +26,18 @@
 
     @endif
 
-    <div class="row utils-padding-bottom">
+    @include('component.row', [
+        'text' => trans("content.flight.show.row.text", [
+            'created_at' => $content->created_at->format('d. m Y H:i:s'),
+            'updated_at' => $content->updated_at->format('d. m Y H:i:s'),
+            'destinations' => $content->destinations->implode('name', ','),
+            'tags' => $content->topics->implode('name', ','),
+        ]),
+        'actions' => view('component.actions', ['actions' => $content->getActions()]),
+        'extra' => view('component.flags', ['flags' => $content->getFlags()])
+    ])
+
+    <div class="row utils-border-bottom">
 
         <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
 
@@ -38,21 +49,9 @@
 
     <div class="utils-border-bottom">
 
-    @include('component.row', [
-        'text' => trans("content.flight.show.row.text", [
-            'created_at' => $content->created_at->format('d. m Y H:i:s'),
-            'updated_at' => $content->updated_at->format('d. m Y H:i:s'),
-            'destinations' => $content->destinations->implode('name', ','),
-            'tags' => $content->topics->implode('name', ','),
-        ]),
-        'actions' => view('component.actions', ['actions' => $content->getActions()]),
-        'extra' => view('component.flags', ['flags' => $content->getFlags()])
-
-    ])
+        @include('component.comment.index', ['comments' => $comments])
 
     </div>
-
-    @include('component.comment.index', ['comments' => $comments])
 
     @if (\Auth::check())
 

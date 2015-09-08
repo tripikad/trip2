@@ -12,7 +12,7 @@
         @endif
     ">
         
-    <div class="utils-double-padding-bottom">
+    <div class="utils-padding-bottom">
 
         @include('component.card', [
             'image' => $content->imagePreset('large'),
@@ -21,18 +21,6 @@
         ])
 
     </div>
-
-    <div class="row utils-padding-bottom">
-
-        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-
-            {!! $content->body_filtered !!}
-
-        </div>
-
-    </div>
-
-    <div class="utils-border-bottom">
 
     @include('component.row', [
         'image' => $content->user->imagePreset(),
@@ -47,6 +35,14 @@
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
         'extra' => view('component.flags', ['flags' => $content->getFlags()])
     ])
+
+    <div class="row utils-padding-bottom">
+
+        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+
+            {!! $content->body_filtered !!}
+
+        </div>
 
     </div>
 
