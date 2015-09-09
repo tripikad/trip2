@@ -303,19 +303,6 @@ class ContentController extends Controller
 
     }
 
-    public function redirect($path)
-    {
-        $alias = \DB::table('content_alias')
-            ->whereAlias('content/' . $path)
-            ->first();
-
-        if ($alias) {
-            return redirect('content/' . $alias->content_id, 301);
-        }
-
-        abort(404);
-    }
-
     public function filter(Request $request, $type)
     {
         
