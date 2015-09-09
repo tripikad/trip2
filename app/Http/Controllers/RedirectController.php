@@ -130,13 +130,24 @@ class RedirectController extends Controller
 
         if ($alias) {
 
-            $topic = Topic::find($alias->aliasable_id);
-        
-            return redirect()->route(
-                'content.index', [
-                    'forum',
-                    'topic' => $topic
-                ], 301);
+            if ($destination = Destination::find($alias->aliasable_id)) {
+
+                return redirect()->route(
+                    'destination.index', [
+                        $destination
+                    ], 301);
+            
+            }
+
+            if ($topic = Topic::find($alias->aliasable_id)) {
+
+                return redirect()->route(
+                    'content.index', [
+                        'forum',
+                        'topic' => $topic
+                    ], 301);
+            
+            }
         
         }
 
