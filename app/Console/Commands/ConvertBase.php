@@ -126,7 +126,7 @@ class ConvertBase extends Command
                 $this->convertUser($node->uid);
                 $this->convertComments($node->nid);
                 $this->convertFlags($node->nid, 'App\Content', 'node');
-                $this->convertAlias($node->nid, 'App\Content', 'node');
+                $this->convertNodeAlias($node->nid, 'App\Content', 'node');
 
                 return $model;
             
@@ -803,7 +803,7 @@ class ConvertBase extends Command
 
     // Aliases
 
-    public function getAlias($nid)
+    public function getNodeAlias($nid)
     {
         return \DB::connection($this->connection)
             ->table('url_alias')
@@ -811,16 +811,56 @@ class ConvertBase extends Command
             ->first();
     }
 
-    public function convertAlias($nid)
+   public function getTermAlias($tid)
     {
-        if ($alias = $this->getAlias($nid)) {
+        return \DB::connection($this->connection)
+            ->table('url_alias')
+            ->where('src', '=', 'taxonomy/term/' . $tid)
+            ->first();
+    }
 
-        \DB::table('content_alias')
+    public function convertNodeAlias($nid)
+    {
+        if ($alias = $this->getNodeAlias($nid)) {
+
+        \DB::table('aliases')
             ->insert([
-                'content_id' => $nid,
-                'alias' => $this->cleanAll($alias->dst)
+                'aliasable_id' => $nid,
+                'aliasable_type' => 'content',
+                'path' => $this->cleanAll($alias->dst)
             ]);
         }
+    
+    }
+
+    public function convertTermAlias($tid, $aliasable_type)
+    {
+        if ($alias = $this->getTermAlias($tid)) {
+
+            $term = $this->getTermById($tid);
+
+            if (isset($this->topicMap[$term->name]['delete'])) {
+
+                return;
+
+            }
+
+            if ($renameTermName = isset($this->topicMap[$term->name]) ? $this->topicMap[$term->name]['rename'] : false) {
+
+                if ($renameTerm = $this->getTermByName($renameTermName)) {
+
+                    $tid = $renameTerm->tid;
+                }
+            
+            }
+
+            \DB::table('aliases')
+                ->insert([
+                    'aliasable_id' => $tid,
+                    'aliasable_type' => $aliasable_type,
+                    'path' => $this->cleanAll($alias->dst)
+                ]);
+            }
     
     }
 
