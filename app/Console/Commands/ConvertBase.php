@@ -850,6 +850,7 @@ class ConvertBase extends Command
                 if ($renameTerm = $this->getTermByName($renameTermName)) {
 
                     $tid = $renameTerm->tid;
+                
                 }
             
             }
@@ -860,8 +861,20 @@ class ConvertBase extends Command
                     'aliasable_type' => $aliasable_type,
                     'path' => $this->cleanAll($alias->dst)
                 ]);
-            }
     
+            if ($aliasable_type != 'destination') {
+            
+                \DB::table('aliases')
+                    ->insert([
+                        'aliasable_id' => $tid,
+                        'aliasable_type' => $aliasable_type,
+                        'path' => 'taxonomy/term/' . $tid
+                    ]);
+
+            }
+            
+        }
+
     }
 
     // Utils 

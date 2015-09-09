@@ -1,5 +1,6 @@
 <?php
 
+
 // Frontpage
 
 get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
@@ -32,12 +33,6 @@ post('reset/apply', ['uses' => 'Auth\ResetController@postEmail', 'as' => 'reset.
 get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordForm', 'as' => 'reset.password.form']);
 
 post('reset/password', ['uses' => 'Auth\ResetController@postReset', 'as' => 'reset.password.submit']);
-
-
-// Legacy content paths
-
-get('content/{legacy_path}', 'ContentController@redirect')
-    ->where(['legacy_path' => '(.*)\.html(.*)']);
 
 // Content
 
@@ -109,8 +104,6 @@ Route::group(['prefix' => 'message', 'as' => 'message.'], function () {
 
 get('admin/image', ['middleware' => 'role:admin', 'uses' => 'ImageController@index', 'as' => 'image.index']);
 
-
-
 // Ad debug
 
 get('ads', ['middleware' => 'role:admin', 'uses' => 'AdController@index', 'as' => 'ads']);
@@ -122,3 +115,21 @@ get('destination/{id}', ['uses' => 'DestinationController@index', 'as' => 'desti
 // Flags
 
 get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
+
+// Legacy content paths
+
+get('node/{id}', 'RedirectController@redirectNode');
+
+get('content/{path}', 'RedirectController@redirectContent')
+    ->where(['path' => '(.*)\.html(.*)']);
+
+// Legacy term paths
+
+get('taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
+
+get('sihtkoht/{title}', 'RedirectController@redirectDestination');
+
+get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
+ 
+
+
