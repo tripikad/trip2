@@ -50,7 +50,16 @@
 	        ],   	      
 	    ],  
 
-	    'user' => [
+	    'news' => [
+	    	'news' => [
+	            'url' => '/content/news',
+	        ],
+	        'shortnews' => [
+	            'url' => '/content/shortnews',
+	        ],      
+	    ], 
+
+	    'forum' => [
 	    	'forum' => [
 	            'url' => '/content/forum',
 	        ],

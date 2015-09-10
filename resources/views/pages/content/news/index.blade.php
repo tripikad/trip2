@@ -11,6 +11,19 @@
     ])
 @stop
 
+@section('navbar.bottom')
+
+    <div class="utils-border-bottom">
+            
+        @include('component.menu', [
+            'menu' => 'news',
+            'items' => config('menu.news')
+        ])
+        
+    </div>
+
+@stop
+
 @section('content')
 
     <div class="utils-border-bottom">

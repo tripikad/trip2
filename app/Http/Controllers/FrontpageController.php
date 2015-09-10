@@ -23,6 +23,7 @@ class FrontpageController extends Controller
 
         $types = [
             'news',
+            'shortnews',
             'flight',
             'travelmate',
             'forum',
