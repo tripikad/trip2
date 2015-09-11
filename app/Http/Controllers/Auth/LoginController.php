@@ -27,13 +27,13 @@ class LoginController extends Controller
         if ($this->signIn($request)) {
 
             return redirect('/')
-                ->with('status', trans('auth.login.login.status'))
+                ->with('info', trans('auth.login.login.info'))
                 ->header('X-Authenticated', true);
         }
 
         return redirect()
             ->back()
-            ->with('status', trans('auth.login.failed.status'));
+            ->with('info', trans('auth.login.failed.info'));
 
     }
 
@@ -43,7 +43,7 @@ class LoginController extends Controller
 
         return redirect()
             ->route('frontpage.index')
-            ->with('status', trans('auth.login.logout.status'));
+            ->with('info', trans('auth.login.logout.info'));
     }
 
 

@@ -10,8 +10,9 @@ return [
 
     'action.status.1.title' => 'Unpublish',
     'action.status.0.title' => 'Publish',
-    'action.1.status' => ':title has been published',
-    'action.0.status' => ':title has been unpublished',
+    
+    'action.status.1.info' => 'The post :title has been published',
+    'action.status.0.info' => 'The post :title has been unpublished',
 
     'field.image.title' => 'Select image',
     'field.image.selected.title' => 'New image selected',
@@ -29,10 +30,10 @@ return [
     'edit.title' => 'Edit',
     'edit.submit.title' => 'Update',
     
-    'store.status.1' => ':title has been added',
-    'store.status.0' => ':title has been added but its unpublished for now. Publish it to make it visible to everybody.',
+    'store.status.1.info' => ':title has been added',
+    'store.status.0.info' => ':title has been added but its unpublished for now. Publish it to make it visible to everybody.',
     
-    'update.status' => ':title has been updated',
+    'update.info' => ':title has been updated',
     
     // Content types
 

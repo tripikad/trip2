@@ -73,7 +73,12 @@ class CommentController extends Controller
 
         $comment->update(array_merge($request->all(), $fields));
 
-        return redirect()->route('content.show', [$comment->content->type, $comment->content, '#comment-' . $comment->id]);
+        return redirect()
+            ->route('content.show', [
+                $comment->content->type,
+                $comment->content,
+                '#comment-' . $comment->id
+            ]);
 
     }
 
@@ -88,8 +93,12 @@ class CommentController extends Controller
             $comment->save();
 
             return redirect()
-                ->route('content.show', [$comment->content->type, $comment->content, '#comment-' . $comment->id])
-                ->with('status', trans("content.action.$status.status", [
+                ->route('content.show', [
+                    $comment->content->type,
+                    $comment->content,
+                    '#comment-' . $comment->id
+                ])
+                ->with('info', trans("comment.action.status.$status.info", [
                     'title' => $comment->title
                 ]));
         }

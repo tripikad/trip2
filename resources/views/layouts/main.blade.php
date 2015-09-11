@@ -21,11 +21,11 @@
 
             @yield('navbar.bottom')
 
-            @include('component.status.success')
+            @include('component.info.success')
             
             @yield('header', view('component.header'))
 
-            @include('component.status.error')
+            @include('component.info.error')
 
             @yield('content')
 

@@ -34,8 +34,8 @@ return [
 
     'edit.submit' => 'Update',
 
-    'update.image.status' => 'User image has been updated',
-    'update.status' => 'User profile has been updated',
+    'update.image.info' => 'User image has been updated',
+    'update.info' => 'User profile has been updated',
 
     'activity.index.title' => ':user latest activity',
     'activity.index.row.content' => ':user posted :title at :created_at',

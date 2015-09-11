@@ -146,7 +146,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('user.show', [$user])
-            ->with('status', trans('user.update.status'));
+            ->with('info', trans('user.update.info'));
     }
 
     public function showMessages($id)
