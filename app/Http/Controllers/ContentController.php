@@ -165,7 +165,9 @@ class ContentController extends Controller
 
         return redirect()
             ->route('content.index', [$type])
-            ->with('status', trans("content.store.status", ['title' => $content->title]));
+            ->with('status', trans("content.store.status." . config("content_$type.store.status", 1), [
+                'title' => $content->title
+            ]));
 
     }
 
@@ -294,7 +296,7 @@ class ContentController extends Controller
 
             return redirect()
                 ->route('content.show', [$type, $content])
-                ->with('status', trans('content.action.' . config("site.statuses.$status") . '.status', [
+                ->with('status', trans("content.action.$status.status", [
                     'title' => $content->title
                 ]));
         }

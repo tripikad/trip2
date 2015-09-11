@@ -11,12 +11,7 @@ return [
         'symbol' => '€'
     
     ],
-    
-    'statuses' => [
-        0 => 'unpublished',
-        1 => 'published'
-    ],
-
+ 
     'cache' => [
         'frontpage' => 60 * 10,
         'destination' => 60 * 10,

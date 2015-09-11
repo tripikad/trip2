@@ -29,7 +29,8 @@ return [
     'edit.title' => 'Edit',
     'edit.submit.title' => 'Update',
     
-    'store.status' => ':title has been added',
+    'store.status.1' => ':title has been added',
+    'store.status.0' => ':title has been added but its unpublished for now. Publish it to make it visible to everybody.',
     
     'update.status' => ':title has been updated',
     
