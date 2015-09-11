@@ -22,7 +22,7 @@ class AuthTest extends TestCase
              ->press('Register')
              ->seePageIs('/');
 
-        $this->see(trans('auth.register.sent.status'))
+        $this->see(trans('auth.register.sent.info'))
              ->seeInDatabase('users', ['name' => 'testuser', 'verified' => 0]);
 
         //name already taken
@@ -48,7 +48,7 @@ class AuthTest extends TestCase
              ->type('salasona', 'password')
              ->press('Login')
              ->seePageIs('/login')
-             ->see(trans('login.failed.status'));
+             ->see(trans('login.failed.info'));
              //->see('Failed to log you in');
 
         $this->visit("register/confirm/{$user->registration_token}")
