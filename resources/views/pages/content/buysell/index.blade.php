@@ -9,8 +9,8 @@
     <div class="utils-border-bottom">
             
         @include('component.menu', [
-            'menutype' => 'forum',
-            'menu' => config('menu.user')
+            'menu' => 'forum',
+            'items' => config('menu.forum')
         ])
         
     </div>
