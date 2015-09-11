@@ -41,7 +41,7 @@ return [
 
     'news.show.row.text' => ':user :created_at, :destinations, :topics',
 
-    'news.create.title' => 'Add post',
+    'news.create.title' => 'Add news post',
 
     'news.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
     'news.edit.field.image_id.help' => '',
@@ -60,6 +60,29 @@ return [
 
     'news.edit.field.url.title' => 'URL',
     'news.edit.field.url.help' => '',
+
+    // Shortnews
+
+    'shortnews.index.title' => 'Short news',
+
+    'shortnews.show.row.text' => ':user :created_at, :destinations, :topics',
+
+    'shortnews.create.title' => 'Add short news',
+
+    'shortnews.edit.field.title.title' => 'Title',
+    'shortnews.edit.field.title.help' => '',
+
+    'shortnews.edit.field.body.title' => 'Description',
+    'shortnews.edit.field.body.help' => '',
+
+    'shortnews.edit.field.destinations.title' => 'Select destinations',
+    'shortnews.edit.field.destinations.help' => '',
+
+    'shortnews.edit.field.topics.title' => 'Select topics',
+    'shortnews.edit.field.topics.help' => '',
+
+    'shortnews.edit.field.url.title' => 'URL',
+    'shortnews.edit.field.url.help' => '',
 
     // Flight
 

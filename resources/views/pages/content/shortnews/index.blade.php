@@ -16,8 +16,8 @@
     <div class="utils-border-bottom">
             
         @include('component.menu', [
-            'menu' => 'forum',
-            'items' => config('menu.forum')
+            'menu' => 'news',
+            'items' => config('menu.news')
         ])
         
     </div>
@@ -26,12 +26,6 @@
 
 @section('content')
     
-    <div class="utils-border-bottom">
-
-        @include('component.filter')
-
-    </div>
-
     @foreach ($contents as $content)
 
         <div class="utils-border-bottom">
