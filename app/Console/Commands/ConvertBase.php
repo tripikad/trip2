@@ -461,8 +461,10 @@ class ConvertBase extends Command
 
         return ($user
             && $user->status == 1
-            && ! $blockedSender
             && ! in_array($user->uid, [7288556, 4694, 3661])
+            && ! $blockedSender
+            && $user->rid !== 9 // Ärikasutaja
+            && $user->rid !== 11 // Ärikasutaja 2
         );
     
     }
