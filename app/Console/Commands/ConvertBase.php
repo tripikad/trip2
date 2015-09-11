@@ -528,6 +528,8 @@ class ConvertBase extends Command
                     ? $homepage
                     : null;
 
+                $model->gender = isset($profile[24]) ? $this->convertGender($profile[24]) : null;
+                $model->birthyear = isset($profile[25]) ? $this->convertBirthyear($profile[25]) : null;
 
             }
 
@@ -1135,6 +1137,34 @@ class ConvertBase extends Command
 
         return preg_match("/(.*)\.twitter\.com(.*)/", $url);
     
+    }
+
+    public function convertGender($string)
+    {
+        $genderMap = [
+            'Mees' => 2,
+            'Naine' => 2
+        ];
+
+        if (isset($genderMap[$string])) {
+
+            return $genderMap[$string];
+        
+        }
+
+        return null;
+
+    }
+
+    public function convertBirthyear($string)
+    {
+        if (preg_match('/[12][0-9]{3}/', $string) && intval($string) > 1915 && intval($string) < 2010) {
+
+            return intval($string);
+        
+        }
+
+        return null;
     }
 
 }
