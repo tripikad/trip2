@@ -12,11 +12,8 @@ class MessageTest extends TestCase
     public function test_unlogged_user_can_not_see_messages()
     {
 
-        $user1 = factory(App\User::class)->make();
-        $user2 = factory(App\User::class)->make();
-
-        $user1->save();
-        $user2->save();
+        $user1 = factory(App\User::class)->create();
+        $user2 = factory(App\User::class)->create();
 
         $this->visit("user/$user1->id")
             ->dontSee(trans('user.show.message.create'));
@@ -32,13 +29,9 @@ class MessageTest extends TestCase
     public function test_regular_user_can_not_see_other_user_messages()
     {
 
-        $user1 = factory(App\User::class)->make();
-        $user2 = factory(App\User::class)->make();
-        $user3 = factory(App\User::class)->make();
-
-        $user1->save();
-        $user2->save();
-        $user3->save();
+        $user1 = factory(App\User::class)->create();
+        $user2 = factory(App\User::class)->create();
+        $user3 = factory(App\User::class)->create();
         
         $message = factory(Message::class)->make([
             'user_id_from' => $user1->id,
@@ -64,13 +57,9 @@ class MessageTest extends TestCase
     public function test_regular_user_can_send_and_receive_message()
     {
 
-        $user1 = factory(App\User::class)->make();
-        $user2 = factory(App\User::class)->make();
-        $user3 = factory(App\User::class)->make();
-
-        $user1->save();
-        $user2->save();
-        $user2->save();
+        $user1 = factory(App\User::class)->create();
+        $user2 = factory(App\User::class)->create();
+        $user3 = factory(App\User::class)->create();
 
         // Sending a message
 
