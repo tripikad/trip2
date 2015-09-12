@@ -1,0 +1,128 @@
+<?php
+
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+use App\User;
+use App\Message;
+
+class MessageTest extends TestCase
+{
+    use DatabaseTransactions;
+
+    public function test_unlogged_user_can_not_see_messages()
+    {
+
+        $user1 = factory(App\User::class)->make();
+        $user2 = factory(App\User::class)->make();
+
+        $user1->save();
+        $user2->save();
+
+        $this->visit("user/$user1->id")
+            ->dontSee(trans('user.show.message.create'));
+
+        $response = $this->call('GET', "/user/$user1->id/messages");
+        $this->assertEquals(401, $response->status());
+
+        $response = $this->call('GET', "/user/$user1->id/messages/$user2->id");
+        $this->assertEquals(401, $response->status());
+
+    }
+
+    public function test_regular_user_can_not_see_other_user_messages()
+    {
+
+        $user1 = factory(App\User::class)->make();
+        $user2 = factory(App\User::class)->make();
+        $user3 = factory(App\User::class)->make();
+
+        $user1->save();
+        $user2->save();
+        $user3->save();
+        
+        $message = factory(Message::class)->make([
+            'user_id_from' => $user1->id,
+            'user_id_to' => $user2->id
+        ]);
+
+        $this->actingAs($user3)
+            ->visit("user/$user1->id")
+            ->dontSeeLink(trans('user.show.menu.messages'));
+
+        $response = $this
+            ->actingAs($user3)
+            ->call('GET', "user/$user1->id/messages");
+        $this->assertEquals(401, $response->status());
+
+        $response = $this
+            ->actingAs($user3)
+            ->call('GET', "user/$user1->id/messages/$user2->id");
+        $this->assertEquals(401, $response->status());
+
+    }
+
+    public function test_regular_user_can_send_and_receive_message()
+    {
+
+        $user1 = factory(App\User::class)->make();
+        $user2 = factory(App\User::class)->make();
+        $user3 = factory(App\User::class)->make();
+
+        $user1->save();
+        $user2->save();
+        $user2->save();
+
+        // Sending a message
+
+        $this->actingAs($user1)
+            ->visit("user/$user2->id")
+            ->click(trans('user.show.message.create'))
+            ->seePageIs("user/$user1->id/messages/$user2->id")
+            ->type('Hello', 'body')
+            ->press(trans('message.create.submit.title'))
+            ->seePageIs("user/$user1->id/messages/$user2->id")
+            ->see('Hello');
+    
+        $this->seeInDatabase('messages', [
+            'user_id_from' => $user1->id,
+            'user_id_to' => $user2->id,
+            'body' => 'Hello'
+        ]);
+
+        // Receiving and replying a messages
+
+        $this->actingAs($user2)
+            ->visit("user/$user2->id")
+            ->click(trans('user.show.menu.messages'))
+            ->seePageIs("user/$user2->id/messages")
+            ->seeLink('Hello')
+            ->see($user1->name)
+            ->click('Hello')
+            ->seePageIs("user/$user2->id/messages/$user1->id")
+            ->see('Hello')
+            ->see($user1->name)
+            ->type('World', 'body')
+            ->press(trans('message.create.submit.title'))
+            ->seePageIs("user/$user2->id/messages/$user1->id")
+            ->see('World');
+
+        $this->seeInDatabase('messages', [
+            'user_id_from' => $user2->id,
+            'user_id_to' => $user1->id,
+            'body' => 'World'
+        ]);
+
+        // Receiving reply
+
+        $this->actingAs($user1)
+            ->visit("user/$user1->id/messages")
+            ->seeLink('World')
+            ->see($user2->name)
+            ->click('World')
+            ->seePageIs("user/$user1->id/messages/$user2->id")
+            ->see('World')
+            ->see($user2->name);
+
+    }
+
+}

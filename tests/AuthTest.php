@@ -4,8 +4,6 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 
-error_reporting(E_NOTICE);
-
 class AuthTest extends TestCase
 {
     use DatabaseTransactions;
