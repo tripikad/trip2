@@ -21,6 +21,11 @@ class Message extends Model
         return $this->belongsTo('App\User', 'user_id_to');
     }
 
+    public function withUser()
+    {
+        return $this->belongsTo('App\User', 'user_id_with');
+    }
+
    public function getTitleAttribute()
    {
        return str_limit($this->attributes['body'], 30);

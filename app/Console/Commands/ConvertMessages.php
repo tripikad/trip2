@@ -15,7 +15,6 @@ class ConvertMessages extends ConvertBase
     
         return DB::connection($this->connection)
             ->table('pm_message')
-            ->join('pm_index', 'pm_index.mid', '=', 'pm_message.mid')
             ->latest('timestamp');      
     
     }
@@ -34,17 +33,29 @@ class ConvertMessages extends ConvertBase
 
             foreach($nodes as $node) {
 
+                $index = DB::connection($this->connection)
+                    ->table('pm_index')
+                    ->where('mid', $node->mid)
+                    ->where('deleted', 0);
+
+                // Find first recepient who is not the sender
+
+                $recepient = collect($index->lists('uid'))
+                    ->reject(function ($item) use ($node) {
+                        return $item == $node->author;
+                    })->shift();
+
                 if (! Message::find($node->mid)
-                    && $node->author !== $node->uid
+                    && $recepient
                     && $this->isUserConvertable($node->author)
-                    && $this->isUserConvertable($node->uid)
+                    && $this->isUserConvertable($recepient)
                 ) {
         
                     $model = new Message;
 
                     $model->id = $node->mid;
                     $model->user_id_from = $node->author;
-                    $model->user_id_to = $node->uid;
+                    $model->user_id_to = $recepient;
 
                     $model->read = 1;
 
@@ -57,7 +68,7 @@ class ConvertMessages extends ConvertBase
                     $model->save();
 
                     $this->convertUser($node->author);
-                    $this->convertUser($node->uid);
+                    $this->convertUser($recepient);
         
                 }
 

@@ -158,9 +158,9 @@ class UserController extends Controller
             ->render();
     }
 
-    public function showMessagesWith($id, $user_id_with)
+    public function showMessagesWith($user_id, $user_id_with)
     {
-        $user = User::findorFail($id);
+        $user = User::findorFail($user_id);
         $user_with = User::findorFail($user_id_with);
      
         $messageIds = $user->messagesWith($user_id_with)->keyBy('id')->keys()->toArray();
