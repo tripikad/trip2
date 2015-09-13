@@ -116,9 +116,10 @@ get('destination/{id}', ['uses' => 'DestinationController@index', 'as' => 'desti
 
 get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
 
-<<<<<<< HEAD
+
+// Atom
 get('atom','AtomController@index');
-=======
+
 // Legacy content paths
 
 get('node/{id}', 'RedirectController@redirectNode');
@@ -135,5 +136,3 @@ get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
  
 
-
->>>>>>> master
