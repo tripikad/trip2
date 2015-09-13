@@ -215,4 +215,7 @@ return [
     'static.edit.field.body.title' => 'Body',
     'static.edit.field.body.help' => '',
 
+    // Atom
+    'atom.description' => 'Travel news',
+
 ];

@@ -122,3 +122,5 @@ get('destination/{id}', ['uses' => 'DestinationController@index', 'as' => 'desti
 // Flags
 
 get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
+
+get('atom','AtomController@index');
