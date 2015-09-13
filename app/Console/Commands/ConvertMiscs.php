@@ -16,13 +16,12 @@ class ConvertMiscs extends ConvertBase
 
         foreach($nodes as $node) {
 
-            $node->title = $node->title . ', vabal teemal';
-
             if ($this->convertNode($node, '\App\Content', 'forum')) {
 
                 $this->convertNodeDestinations($node);
                 $this->convertNodeTopics($node);
                 $this->newNodeTopics($node);
+                $this->insertPivot('content_topic', 'content_id', $node->nid, 'topic_id', 5000); // Vaba teema
 
             }
 

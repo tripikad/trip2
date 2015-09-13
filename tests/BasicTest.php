@@ -21,6 +21,7 @@ class BasicTest extends TestCase
         
         $types = [
             'news',
+            'shortnews',
             'flight',
             'travelmate',
             'forum',

@@ -126,7 +126,7 @@ class ConvertBase extends Command
                 $this->convertUser($node->uid);
                 $this->convertComments($node->nid);
                 $this->convertFlags($node->nid, 'App\Content', 'node');
-                $this->convertAlias($node->nid, 'App\Content', 'node');
+                $this->convertNodeAlias($node->nid, 'App\Content', 'node');
 
                 return $model;
             
@@ -231,13 +231,15 @@ class ConvertBase extends Command
         'Reisi-öömaja' => ['rename' => 'Majutus ja hotellid'],
 //      'Voucherid ja piletid' => [],
 
-        'Lemmikloom reisil' => ['tid' => 5000, 'pattern' => '/(lemmikloom|koer|\skass)/i'],
-        'GPS ja kaardid' => ['tid' => 5001, 'pattern' => '/GPS/'],
-        'Autorent' => ['tid' => 5002, 'pattern' => '/(autorent|rendia|renti)/i'],
-        'Motoreis' => ['tid' => 5003, 'pattern' => '/(mootor|moto)/i'],
-        'Turvalisus' => ['tid' => 5004, 'pattern' => '/(turval|varasta)/i'],
-        'Uuring' => ['tid' => 5005, 'pattern' => '/(uuring|uurimus|küsitlus)/i'],
-        'Töö' => ['tid' => 5006, 'pattern' => '/(töö)/i']
+        'Vaba teema' => ['tid' => 5000, 'pattern' => '//i'],
+        'Lemmikloom reisil' => ['tid' => 5001, 'pattern' => '/(lemmikloom|koer| kass)/i'],
+        'GPS' => ['tid' => 5002, 'pattern' => '/GPS|navigatsioon/'],
+        'Autorent' => ['tid' => 5003, 'pattern' => '/(autorent|rendia|renti)/i'],
+        'Motoreis' => ['tid' => 5004, 'pattern' => '/(mootor|moto)/i'],
+        'Turvalisus' => ['tid' => 5005, 'pattern' => '/(turval|varasta)/i'],
+        'Uuring' => ['tid' => 5006, 'pattern' => '/(uuring|uurimus|küsitlus)/i'],
+        'Töö' => ['tid' => 5007, 'pattern' => '/(töö leid|töö ots|tööle|töökoh)/i'],
+        'Mobiil' => ['tid' => 5008, 'pattern' => '/(mobiil|nutitelef|mobla|iphone|android|ipad|tablet|sim-|sim kaart|samsung|äpp|rakendus)/i']
 
     ];
 
@@ -459,8 +461,10 @@ class ConvertBase extends Command
 
         return ($user
             && $user->status == 1
-            && ! $blockedSender
             && ! in_array($user->uid, [7288556, 4694, 3661])
+            && ! $blockedSender
+            && $user->rid !== 9 // Ärikasutaja
+            && $user->rid !== 11 // Ärikasutaja 2
         );
     
     }
@@ -524,6 +528,8 @@ class ConvertBase extends Command
                     ? $homepage
                     : null;
 
+                $model->gender = isset($profile[24]) ? $this->convertGender($profile[24]) : null;
+                $model->birthyear = isset($profile[25]) ? $this->convertBirthyear($profile[25]) : null;
 
             }
 
@@ -801,7 +807,7 @@ class ConvertBase extends Command
 
     // Aliases
 
-    public function getAlias($nid)
+    public function getNodeAlias($nid)
     {
         return \DB::connection($this->connection)
             ->table('url_alias')
@@ -809,17 +815,70 @@ class ConvertBase extends Command
             ->first();
     }
 
-    public function convertAlias($nid)
+   public function getTermAlias($tid)
     {
-        if ($alias = $this->getAlias($nid)) {
+        return \DB::connection($this->connection)
+            ->table('url_alias')
+            ->where('src', '=', 'taxonomy/term/' . $tid)
+            ->first();
+    }
 
-        \DB::table('content_alias')
+    public function convertNodeAlias($nid)
+    {
+        if ($alias = $this->getNodeAlias($nid)) {
+
+        \DB::table('aliases')
             ->insert([
-                'content_id' => $nid,
-                'alias' => $this->cleanAll($alias->dst)
+                'aliasable_id' => $nid,
+                'aliasable_type' => 'content',
+                'path' => $this->cleanAll($alias->dst)
             ]);
         }
     
+    }
+
+    public function convertTermAlias($tid, $aliasable_type)
+    {
+        if ($alias = $this->getTermAlias($tid)) {
+
+            $term = $this->getTermById($tid);
+
+            if (isset($this->topicMap[$term->name]['delete'])) {
+
+                return;
+
+            }
+
+            if ($renameTermName = isset($this->topicMap[$term->name]) ? $this->topicMap[$term->name]['rename'] : false) {
+
+                if ($renameTerm = $this->getTermByName($renameTermName)) {
+
+                    $tid = $renameTerm->tid;
+                
+                }
+            
+            }
+
+            \DB::table('aliases')
+                ->insert([
+                    'aliasable_id' => $tid,
+                    'aliasable_type' => $aliasable_type,
+                    'path' => $this->cleanAll($alias->dst)
+                ]);
+    
+            if ($aliasable_type != 'destination') {
+            
+                \DB::table('aliases')
+                    ->insert([
+                        'aliasable_id' => $tid,
+                        'aliasable_type' => $aliasable_type,
+                        'path' => 'taxonomy/term/' . $tid
+                    ]);
+
+            }
+            
+        }
+
     }
 
     // Utils 
@@ -1078,6 +1137,34 @@ class ConvertBase extends Command
 
         return preg_match("/(.*)\.twitter\.com(.*)/", $url);
     
+    }
+
+    public function convertGender($string)
+    {
+        $genderMap = [
+            'Mees' => 2,
+            'Naine' => 2
+        ];
+
+        if (isset($genderMap[$string])) {
+
+            return $genderMap[$string];
+        
+        }
+
+        return null;
+
+    }
+
+    public function convertBirthyear($string)
+    {
+        if (preg_match('/[12][0-9]{3}/', $string) && intval($string) > 1915 && intval($string) < 2010) {
+
+            return intval($string);
+        
+        }
+
+        return null;
     }
 
 }

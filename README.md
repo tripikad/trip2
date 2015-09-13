@@ -1,10 +1,18 @@
-### Installation
+## Installation
 
-You need to have [Composer](https://github.com/kristjanjansen/trip2_vagrant/blob/master/provision.sh#L46) and [NodeJS and Gulp](https://github.com/kristjanjansen/trip2_vagrant/blob/master/provision.sh#L105) installed. Then:
+### Automatic setup
 
-    git clone https://github.com/kristjanjansen/trip2.git
+It's recommended to use our Vagrant machine for development. See https://github.com/tripikad/trip2_vagrant/blob/master/README.md
+
+### Manual setup
+
+#### Installing
+
+You need to have LEMP stack, Composer and NodeJS installed. 
+
+    git clone https://github.com/tripikad/trip2.git
     cd trip2
-    composer install
+    composer install --prefer-source --no-interaction
     npm install
     gulp
     sudo chown -R www-data:www-data /var/www
@@ -15,6 +23,8 @@ You need to have [Composer](https://github.com/kristjanjansen/trip2_vagrant/blob
     php artisan key:generate
 
 Note: If you have problems with ```npm install```, try to run ```npm install --no-bin-links```.
+
+#### Configuration
 
 Then  add following parameters to ```/.env```:
 
@@ -32,7 +42,7 @@ Then  add following parameters to ```/.env```:
 
 Now you should be able to access the web app and also run console commands.
 
-### Set up databases
+#### Set up databases
 
     mysqladmin -uroot -psecret create trip
     mysqladmin -uroot -psecret create trip2
@@ -52,16 +62,14 @@ which runs all conversions found at ```app/Console/Commands```. You can list all
 
     php artisan list convert
 
-When running the converter separately its recommended you first run:
+There are more parameters you can set up for conversion. Refer this: https://github.com/tripikad/trip2/blob/master/app/Console/Commands/ConvertBase.php#L58
 
-    php artisan migrate:terms
+### Tests
 
-Note that by default, only the small sample of legacy database is converted. To overwrite this add following parameter to ```.env```:
+First, set the following in ```/.env``` file:
 
-    CONVERT_TAKE=how_many_items
+    MAIL_DRIVER=log
 
-Note that maximum number of items in databases is around 110000.
+Then run
 
-If you also want to convert images, add following to ```.env```:
-    
-    CONVERT_FILES=true
+    ./vendor/bin/phpunit

@@ -42,11 +42,21 @@ class ConvertNews extends ConvertBase
 
             }
 
+
+            $type = trim($node->body) == '' ? 'shortnews' : 'news';
+
+            if ($type == 'shortnews') {
+
+                $parts = explode('(', $node->title);
+                $node->title = $parts[0];
+            
+            } 
+
             // Convert the content
 
-            if ($news = $this->convertNode($node, '\App\Content', 'news')) {
+            if ($news = $this->convertNode($node, '\App\Content', $type)) {
       
-                // Convert the image
+                // Convert the images
                 
                 if ($images && count($images) > 0) {
 

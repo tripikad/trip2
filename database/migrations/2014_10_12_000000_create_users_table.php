@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('contact_twitter')->nullable();
             $table->string('contact_instagram')->nullable();
             $table->string('contact_homepage')->nullable();
+
+            $table->integer('gender')->unsigned()->nullable();
+            $table->integer('birthyear')->unsigned()->nullable();
     
             $table->boolean('notify_message')->default(false);
             $table->boolean('notify_follow')->default(false);

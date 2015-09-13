@@ -4,10 +4,15 @@ return [
     
     // General
 
-    'action.published.title' => 'Unpublish',
-    'action.unpublished.title' => 'Publish',
-    'action.published.status' => ':title has been published',
-    'action.unpublished.status' => ':title has been unpublished',
+    'row.text.comment' => 'Latest comment :updated_at',
+
+    'action.edit.title' => 'Edit',
+
+    'action.status.1.title' => 'Unpublish',
+    'action.status.0.title' => 'Publish',
+    
+    'action.status.1.info' => 'The post :title has been published',
+    'action.status.0.info' => 'The post :title has been unpublished',
 
     'field.image.title' => 'Select image',
     'field.image.selected.title' => 'New image selected',
@@ -19,24 +24,26 @@ return [
     'index.filter.reset.title' => 'Reset',
     'index.filter.destination.title' => 'Check out our :destination page as well',
 
-    'show.row.text' => ':user :created_at, :destinations, :tags',
-
     'create.title' => 'Add',
     'create.submit.title' => 'Add',
 
     'edit.title' => 'Edit',
     'edit.submit.title' => 'Update',
     
-    'store.status' => ':title has been added',
+    'store.status.1.info' => ':title has been added',
+    'store.status.0.info' => ':title has been added but its unpublished for now. Publish it to make it visible to everybody.',
     
-    'update.status' => ':title has been updated',
+    'update.info' => ':title has been updated',
     
     // Content types
 
     // News
 
     'news.index.title' => 'News',
-    'news.create.title' => 'Add post',
+
+    'news.show.row.text' => ':user :created_at, :destinations, :topics',
+
+    'news.create.title' => 'Add news post',
 
     'news.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
     'news.edit.field.image_id.help' => '',
@@ -56,10 +63,35 @@ return [
     'news.edit.field.url.title' => 'URL',
     'news.edit.field.url.help' => '',
 
+    // Shortnews
+
+    'shortnews.index.title' => 'Short news',
+
+    'shortnews.show.row.text' => ':user :created_at, :destinations, :topics',
+
+    'shortnews.create.title' => 'Add short news',
+
+    'shortnews.edit.field.title.title' => 'Title',
+    'shortnews.edit.field.title.help' => '',
+
+    'shortnews.edit.field.body.title' => 'Description',
+    'shortnews.edit.field.body.help' => '',
+
+    'shortnews.edit.field.destinations.title' => 'Select destinations',
+    'shortnews.edit.field.destinations.help' => '',
+
+    'shortnews.edit.field.topics.title' => 'Select topics',
+    'shortnews.edit.field.topics.help' => '',
+
+    'shortnews.edit.field.url.title' => 'URL',
+    'shortnews.edit.field.url.help' => '',
+
     // Flight
 
     'flight.index.title' => 'Flights',
     'flight.index.field.price' => 'From :price:symbol',
+
+    'flight.show.row.text' => 'Posted at :created_at, :destinations, :topics',
 
     'flight.create.title' => 'Add flight offer',
 
@@ -113,7 +145,7 @@ return [
     // Forum
 
     'forum.index.title' => 'General forum',
-    'forum.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :tags',
+    'forum.index.row.text' => ':user :created_at latest comment at :updated_at:destinations:topics',
     'forum.create.title' => 'Add post',
 
     'forum.edit.field.title.title' => 'Title',
@@ -131,7 +163,7 @@ return [
     // Expat
 
     'expat.index.title' => 'Expat forum',
-    'expat.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :tags',
+    'expat.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :topics',
     'expat.create.title' => 'Add post',
 
     'expat.edit.field.title.title' => 'Title',

@@ -1,9 +1,9 @@
 <ul class="list-inline text-center">
 
-    @foreach ($menu as $key => $data)
+    @foreach ($items as $key => $item)
     
         <li>
-            <a href="{{ $data['url'] }}">{{ trans("menu.$menutype.$key") }}</a>
+            <a href="{{ $item['url'] }}">{{ trans("menu.$menu.$key") }}</a>
         </li>
     
     @endforeach

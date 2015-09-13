@@ -11,11 +11,41 @@
 |
 */
 
-$factory->define(App\User::class, function ($faker) {
+use App\User;
+use App\Message;
+
+$factory->define(User::class, function ($faker) {
+    
+    $name = $faker->name;
+
     return [
-        'name' => $faker->name,
+        'name' => $name,
         'email' => $faker->email,
-        'password' => str_random(10),
-        'remember_token' => str_random(10),
+        'password' => bcrypt($name),
+        'image' => null,
+        'contact_facebook' => null,
+        'contact_twitter' => null,
+        'contact_instagram' => null,
+        'contact_homepage' => null,
+        'gender' => null,
+        'birthyear' => null,
+        'notify_message' => 0,
+        'notify_follow' => 0,
+        'role' => 'regular',
+        'verified' => 1,
+        'registration_token' => '',
+        'remember_token' => null,
     ];
+
+});
+
+$factory->define(Message::class, function ($faker) {
+    
+    return [
+        'user_id_from' => 1,
+        'user_id_to' => 2,
+        'body' => $faker->paragraph(),
+        'read' => 1,
+    ];
+
 });

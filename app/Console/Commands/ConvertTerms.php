@@ -50,6 +50,8 @@ class ConvertTerms extends ConvertBase
 
             }
 
+            $this->convertTermAlias($term->tid, 'destination');
+
         }
 
     }
@@ -67,6 +69,7 @@ class ConvertTerms extends ConvertBase
 
             $term = $this->getTermById($root);
             $this->createDestination($term);
+
             $this->output->progressAdvance();
       
         }
@@ -77,6 +80,7 @@ class ConvertTerms extends ConvertBase
 
             $term = $this->getTermById($firstChildren);
             $this->createDestination($term);
+
             $this->output->progressAdvance();
         
         }
@@ -87,6 +91,7 @@ class ConvertTerms extends ConvertBase
 
             $term = $this->getTermById($secondChildren);
             $this->createDestination($term);
+
             $this->output->progressAdvance();
         
         }
@@ -97,6 +102,7 @@ class ConvertTerms extends ConvertBase
 
             $term = $this->getTermById($thirdChildren);
             $this->createDestination($term);
+
             $this->output->progressAdvance();
         
         }
@@ -117,7 +123,9 @@ class ConvertTerms extends ConvertBase
         {
             if ($term = $this->processTopic($term))
             {
-                $this->createTerm($term, '\App\Topic');     
+                $this->createTerm($term, '\App\Topic');
+                $this->convertTermAlias($term->tid, 'topic');
+ 
             }
 
             $this->output->progressAdvance();
@@ -161,6 +169,7 @@ class ConvertTerms extends ConvertBase
         foreach($terms as $term)
         {
             $this->createTerm($term, '\App\Carrier');
+            $this->convertTermAlias($term->tid, 'carrier');
 
             $this->output->progressAdvance();
 
@@ -178,6 +187,8 @@ class ConvertTerms extends ConvertBase
         $this->convertTopics();
         $this->addTopics();
         $this->convertCarriers();
+
+        $aliases = \DB::table('aliases')->get();
 
     }
 

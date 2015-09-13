@@ -27,12 +27,12 @@
         <div class="utils-border-bottom @if ($message->read) utils-read @endif">
 
             @include('component.row', [
-                'image' => $message->fromUser->imagePreset(),
-                'image_link' => route('user.show', [$message->fromUser]),
+                'image' => $message->withUser->imagePreset(),
+                'image_link' => route('user.show', [$message->withUser]),
                 'heading' => $message->title,
-                'heading_link' => route('user.show.messages.with', [$user, $message->fromUser]),
+                'heading_link' => route('user.show.messages.with', [$user, $message->withUser]),
                 'text' => trans('user.show.messages.index.row.text', [
-                    'user' => view('component.user.link', ['user' => $message->fromUser]),
+                    'user' => view('component.user.link', ['user' => $message->withUser]),
                     'created_at' => $message->created_at->format('d. m Y H:i:s')
                 ])
             ])

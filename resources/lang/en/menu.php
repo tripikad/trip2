@@ -18,6 +18,9 @@ return [
     'footer.facebook' => 'Facebook',
     'footer.twitter' => 'Twitter',
 
+    'news.news' => 'News',
+    'news.shortnews' => 'Short news',
+
     'forum.forum' => 'General forum',
     'forum.expat' => 'Expat forum',
     'forum.buysell' => 'Buying and selling',

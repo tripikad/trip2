@@ -11,12 +11,12 @@ return [
     'register.field.eula.title.link' => 'End-user license agreement',
     'register.submit.title' => 'Register',
 
-    'register.sent.status' => 'A confirmation was sent to your e-mail address',
-    'register.confirmed.status' => 'Your registration is now confirmed, you can log in',
+    'register.sent.info' => 'A confirmation was sent to your e-mail address',
+    'register.confirmed.info' => 'Your registration is now confirmed, you can log in',
     
-    'login.login.status' => 'You are now logged in',
-    'login.logout.status' => 'You are now logged out',
-    'login.failed.status' => 'Failed to log you in',
+    'login.login.info' => 'You are now logged in',
+    'login.logout.info' => 'You are now logged out',
+    'login.failed.info' => 'Failed to log you in',
 
     'login.title' => 'Login',
     'login.field.name.title' => 'Username',

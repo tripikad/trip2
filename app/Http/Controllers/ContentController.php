@@ -165,7 +165,9 @@ class ContentController extends Controller
 
         return redirect()
             ->route('content.index', [$type])
-            ->with('status', trans("content.store.status", ['title' => $content->title]));
+            ->with('info', trans("content.store.status." . config("content_$type.store.status", 1) . '.info', [
+                'title' => $content->title
+            ]));
 
     }
 
@@ -242,7 +244,7 @@ class ContentController extends Controller
 
         return redirect()
             ->route('content.show', [$type, $content])
-            ->with('status', trans("content.update.status", ['title' => $content->title]));
+            ->with('info', trans("content.update.info", ['title' => $content->title]));
 
     }
 
@@ -294,7 +296,7 @@ class ContentController extends Controller
 
             return redirect()
                 ->route('content.show', [$type, $content])
-                ->with('status', trans('content.action.' . config("site.statuses.$status") . '.status', [
+                ->with('info', trans("content.action.status.$status.info", [
                     'title' => $content->title
                 ]));
         }
@@ -303,22 +305,9 @@ class ContentController extends Controller
 
     }
 
-    public function redirect($path)
-    {
-        $alias = \DB::table('content_alias')
-            ->whereAlias('content/' . $path)
-            ->first();
-
-        if ($alias) {
-            return redirect('content/' . $alias->content_id, 301);
-        }
-
-        abort(404);
-    }
-
     public function filter(Request $request, $type)
     {
-
+        
         return redirect()->route(
             'content.index',
             [$type,

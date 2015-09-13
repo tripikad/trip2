@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContentAliasTable extends Migration
+class CreateAliasesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateContentAliasTable extends Migration
     public function up()
     {
     
-        Schema::create('content_alias', function (Blueprint $table) {
+        Schema::create('aliases', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('content_id')->index();
-            $table->string('alias');
+            $table->integer('aliasable_id')->index();
+            $table->string('aliasable_type');
+            $table->string('path');
         });
     
     }
@@ -28,6 +29,6 @@ class CreateContentAliasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('content_alias');
+        Schema::drop('aliases');
     }
 }

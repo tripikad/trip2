@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Auth;
+
 class Content extends Model
 {
 
@@ -117,6 +119,55 @@ class Content extends Model
 
         return null;
     
+    }
+
+    public function getActions()
+    {
+
+        $actions = [];
+
+        if (auth()->user() && auth()->user()->hasRoleOrOwner('admin', $this->user->id)) {
+            
+            $actions['edit'] = [
+                'title' => trans('content.action.edit.title'),
+                'route' => route('content.edit', ['type' => $this->type, 'id' => $this])
+            ];
+            
+        }
+
+        if (auth()->user() && auth()->user()->hasRole('admin')) {
+            
+            $actions['status'] = [
+                'title' => trans("content.action.status.$this->status.title"),
+                'route' => route('content.status', [$this->type, $this, (1 - $this->status)])
+            ];
+            
+        }
+        
+        return $actions;
+    
+    }
+
+    public function getFlags() {
+
+        return [
+
+            'good' => [
+                'value' => count($this->flags->where('flag_type', 'good')),
+                'flaggable' => Auth::check(),
+                'flaggable_type' => 'content',
+                'flaggable_id' => $this->id,
+                'flag_type' => 'good'
+            ],
+            'bad' => [
+                'value' => count($this->flags->where('flag_type', 'bad')),
+                'flaggable' => Auth::check(),
+                'flaggable_type' => 'content',
+                'flaggable_id' => $this->id,
+                'flag_type' => 'bad'
+            ]
+        ];
+
     }
 
 }

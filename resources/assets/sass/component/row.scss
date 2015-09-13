@@ -2,10 +2,24 @@
 
     > .content {
 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        > .title > h3 {
 
+            display: inline-block;
+        
+        }
+    
+        > .text {
+
+            opacity: 0.7;
+            
+            .permalink {
+
+                color: $text-color;
+            
+            }
+        
+        }
+    
     }
 
 }

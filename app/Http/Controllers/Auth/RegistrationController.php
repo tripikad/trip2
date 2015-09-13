@@ -43,7 +43,7 @@ class RegistrationController extends Controller
 
         return redirect()
             ->route('frontpage.index')
-            ->with('status', trans('auth.register.sent.status'));
+            ->with('info', trans('auth.register.sent.info'));
             
     }
 
@@ -54,7 +54,7 @@ class RegistrationController extends Controller
 
         return redirect()
             ->route('login.form')
-            ->with('status', trans('auth.register.confirmed.status'));
+            ->with('info', trans('auth.register.confirmed.info'));
 
     }
 

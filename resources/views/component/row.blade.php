@@ -28,18 +28,26 @@
 
     @endif
 
-            <div>
+            <div class="title">
 
-            @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
-        
-            @if (isset($heading)) <h3>{{ $heading }}</h3> @endif
+                @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
+            
+                @if (isset($heading)) <h3>{{ $heading }}</h3> @endif
 
-            @if (isset($heading_link)) </a> @endif
+                @if (!isset($heading)) <p /> @endif
 
-            @if (isset($text)) {!! $text !!} @endif
+                @if (isset($heading_link)) </a> @endif
 
             </div>
+
+            <div class="text">
+
+                @if (isset($text)) {!! $text !!} @endif
+
+                {!! $actions or '' !!}
             
+            </div>
+
         </div>
 
     @if (isset($extra))

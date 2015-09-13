@@ -12,7 +12,7 @@
         @endif
     ">
         
-    <div class="utils-double-padding-bottom">
+    <div class="utils-padding-bottom">
 
         @include('component.card', [
             'image' => $content->imagePreset('large'),
@@ -21,6 +21,14 @@
         ])
 
     </div>
+
+    @include('component.row', [
+        'image' => $content->user->imagePreset(),
+        'image_link' => route('user.show', [$content->user]),
+        'text' => view('component.content.text', ['content' => $content]),
+        'actions' => view('component.actions', ['actions' => $content->getActions()]),
+        'extra' => view('component.flags', ['flags' => $content->getFlags()])
+    ])
 
     <div class="row utils-border-bottom">
 
@@ -34,45 +42,9 @@
 
     <div class="utils-border-bottom">
 
-    @include('component.row', [
-        'image' => $content->user->imagePreset(),
-        'image_link' => route('user.show', [$content->user]),
-        'text' => trans("content.show.row.text", [
-            'user' => view('component.user.link', ['user' => $content->user]),
-            'created_at' => $content->created_at->format('d. m Y H:i:s'),
-            'updated_at' => $content->updated_at->format('d. m Y H:i:s'),
-            'destinations' => $content->destinations->implode('name', ','),
-            'tags' => $content->topics->implode('name', ','),
-        ]),
-    ])
+        @include('component.comment.index', ['comments' => $comments])
 
     </div>
-
-    <div class="utils-border-bottom text-center">
-
-    @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $content->user->id))
-        
-        <a href="{{ route('content.edit', ['type' => $content->type, 'id' => $content]) }}">Edit</a>
-    
-    @endif
-
-    @if (\Auth::check() && \Auth::user()->hasRole('admin'))
-        
-        <a href="{{ route('content.status', [
-            $content->type,
-            $content,
-            (1 - $content->status)
-        ]) }}">
-
-            {{ trans('content.action.' . config("site.statuses.$content->status") . '.title') }}
-
-        </a>
-
-    @endif
-
-    </div>
-
-    @include('component.comment.index', ['comments' => $comments])
 
     @if (\Auth::check())
 

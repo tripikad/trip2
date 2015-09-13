@@ -34,8 +34,8 @@ return [
 
     'edit.submit' => 'Update',
 
-    'update.image.status' => 'User image has been updated',
-    'update.status' => 'User profile has been updated',
+    'update.image.info' => 'User image has been updated',
+    'update.info' => 'User profile has been updated',
 
     'activity.index.title' => ':user latest activity',
     'activity.index.row.content' => ':user posted :title at :created_at',
@@ -50,7 +50,7 @@ return [
     'show.contact_homepage.title' => 'Homepage',
 
     'show.messages.index.title' => ':user messages',
-    'show.messages.index.row.text' => 'By :user, last message at :created_at',
+    'show.messages.index.row.text' => 'With :user, last message at :created_at',
 
     'show.messages.with.title' => ':user messages with :user_with',
     'show.messages.with.row.text' => 'By :user at :created_at',

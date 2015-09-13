@@ -16,29 +16,9 @@
         'image' => $content->user->imagePreset(),
         'image_link' => route('user.show', [$content->user]),
         'heading' => $content->title,
-        'text' => trans("content.show.row.text", [
-            'user' => view('component.user.link', ['user' => $content->user]),
-            'created_at' => $content->created_at->format('d. m Y H:i:s'),
-            'updated_at' => $content->updated_at->format('d. m Y H:i:s'),
-            'destinations' => $content->destinations->implode('name', ','),
-            'tags' => $content->topics->implode('name', ','),
-        ]),
-        'extra' => view('component.flag', [ 'flags' => [
-            'good' => [
-                'value' => count($content->flags->where('flag_type', 'good')),
-                'flaggable' => \Auth::check(),
-                'flaggable_type' => 'content',
-                'flaggable_id' => $content->id,
-                'flag_type' => 'good'
-            ],
-            'bad' => [
-                'value' => count($content->flags->where('flag_type', 'bad')),
-                'flaggable' => \Auth::check(),
-                'flaggable_type' => 'content',
-                'flaggable_id' => $content->id,
-                'flag_type' => 'bad'
-            ]
-        ]])
+        'text' => view("component.content.text", ['content' => $content]),
+        'actions' => view('component.actions', ['actions' => $content->getActions()]),
+        'extra' => view('component.flags', ['flags' => $content->getFlags()])
     ])
 
     <div class="row">
@@ -49,35 +29,15 @@
 
         </div>
         
-        <div class="col-sm-1 col-lg-2">
-
-            @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $content->user->id))
-                
-                <a href="{{ route('content.edit', ['type' => $content->type, 'id' => $content]) }}">Edit</a>
-            
-            @endif
-
-            @if (\Auth::check() && \Auth::user()->hasRole('admin'))
-                
-                <a href="{{ route('content.status', [
-                    $content->type,
-                    $content,
-                    (1 - $content->status)
-                ]) }}">
-
-                    {{ trans('content.action.' . config("site.statuses.$content->status") . '.title') }}
-
-                </a>
-
-            @endif
-
-        </div>
-
     </div>
 
     </div>
+
+    <div class="utils-border-bottom">    
     
-    @include('component.comment.index', ['comments' => $comments])
+        @include('component.comment.index', ['comments' => $comments])
+
+    </div>
 
     @if (\Auth::check())
 
