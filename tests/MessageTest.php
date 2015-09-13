@@ -71,14 +71,25 @@ class MessageTest extends TestCase
             ->press(trans('message.create.submit.title'))
             ->seePageIs("user/$user1->id/messages/$user2->id")
             ->see('Hello');
-    
+
         $this->seeInDatabase('messages', [
             'user_id_from' => $user1->id,
             'user_id_to' => $user2->id,
             'body' => 'Hello'
         ]);
 
-        // Receiving and replying a messages
+        // Sender going back to messages page
+
+        $this->actingAs($user1)
+            ->visit("user/$user1->id")
+            ->click(trans('user.show.menu.messages'))
+            ->seePageIs("user/$user1->id/messages")
+            ->seeLink('Hello');
+//          ->see($user2->name)
+//          ->click('Hello')
+//          ->seePageIs("user/$user1->id/messages/$user2->id");
+
+        // Recipient receiving and replying a message
 
         $this->actingAs($user2)
             ->visit("user/$user2->id")
@@ -101,7 +112,7 @@ class MessageTest extends TestCase
             'body' => 'World'
         ]);
 
-        // Receiving reply
+        // Sender receiving a reply
 
         $this->actingAs($user1)
             ->visit("user/$user1->id/messages")
