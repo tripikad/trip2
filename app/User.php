@@ -61,11 +61,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $received = $this->hasMany('App\Message', 'user_id_to')
             ->get()
             ->sortByDesc('created_at')
-            ->unique('user_id');
+            ->unique('user_id')
+            ->transform(function ($item) {
+                $item->attributes['user_id_with'] = $item->attributes['user_id_from'];
+                return $item;
+            });
 
         $sentWithoutReply = $this->hasMany('App\Message', 'user_id_from')
             ->whereNotIn('user_id_to', $received->pluck('user_id_from')->all())
-            ->get();
+            ->get()
+            ->transform(function ($item) {
+                $item->attributes['user_id_with'] = $item->attributes['user_id_to'];
+                return $item;
+            });
+
 
         return $received->merge($sentWithoutReply)->sortBy('created_at')->all();
     

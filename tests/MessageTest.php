@@ -84,10 +84,10 @@ class MessageTest extends TestCase
             ->visit("user/$user1->id")
             ->click(trans('user.show.menu.messages'))
             ->seePageIs("user/$user1->id/messages")
-            ->seeLink('Hello');
-//          ->see($user2->name)
-//          ->click('Hello')
-//          ->seePageIs("user/$user1->id/messages/$user2->id");
+            ->seeLink('Hello')
+            ->seeLink($user2->name)
+            ->click('Hello')
+            ->seePageIs("user/$user1->id/messages/$user2->id");
 
         // Recipient receiving and replying a message
 
