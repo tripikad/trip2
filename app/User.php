@@ -84,7 +84,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {   
         
         $sent = $this->hasMany('App\Message', 'user_id_from')->where('user_id_to', $user_id_with)->get();
-        $received = $this->hasMany('App\Message', 'user_id_to')->get();
+        $received = $this->hasMany('App\Message', 'user_id_to')->where('user_id_from', $user_id_with)->get();
 
         return $sent->merge($received)->sortBy('created_at');
 
