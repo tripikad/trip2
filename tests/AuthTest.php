@@ -8,8 +8,10 @@ class AuthTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_user_can_register()
+    public function test_user_can_register_confirm_and_login()
     {
+
+        // User can register 
 
         $this->visit('/')
             ->see(trans('menu.header.register'))
@@ -24,6 +26,8 @@ class AuthTest extends TestCase
             ->see(trans('auth.register.sent.info'))
             ->seeInDatabase('users', ['name' => 'user', 'verified' => 0]);
 
+        // No-confirmed user can not login
+
         $this->visit('/')
             ->click(trans('menu.header.login'))
             ->type('user', 'name')
@@ -32,7 +36,14 @@ class AuthTest extends TestCase
             ->seePageIs('/login')
             ->see(trans('auth.login.failed.info'));
 
+        // User can confirm
+            
         $this->visit($this->getVerificationLink('user'))
+            ->seeInDatabase('users', [
+                'name' => 'user',
+                'verified' => 1,
+                'registration_token' => null
+            ])
             ->seePageIs('login')
             ->see(trans('auth.register.confirmed.info'));
 
