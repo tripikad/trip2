@@ -2,6 +2,8 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var autoprefixer = require('gulp-autoprefixer');
+var svgstore = require('gulp-svgstore');
+var rename = require('gulp-rename');
 
 gulp.task('sass', function() {
 
@@ -42,6 +44,15 @@ gulp.task('js', function() {
 
 });
 
+gulp.task('svgsprite', function () {
+    return gulp
+        .src('resources/assets/svg/*.svg')
+        .pipe(svgstore())
+        .pipe(rename(function (path) {
+            path.basename = 'main'
+        }))
+        .pipe(gulp.dest('public/svg'));
+});
 
 gulp.task('watch', function () {
 
@@ -49,4 +60,4 @@ gulp.task('watch', function () {
 
 });
 
-gulp.task('default', ['sass', 'js']);
+gulp.task('default', ['sass', 'js', 'svgsprite']);
