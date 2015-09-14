@@ -8,24 +8,24 @@
 
     @if (auth()->user()->hasRole('admin'))
 
-    <li>
-        <a href="{{ route('content.index', ['internal']) }}">Admin</a>
-    </li>
+        <li>
+            <a href="{{ route('content.index', ['internal']) }}">{{ trans('menu.header.admin') }}</a>
+        </li>
     
     @endif
 
     <li>
-        <a href="{{ route('login.logout') }}">&times;</a>
+        <a href="{{ route('login.logout') }}">{{ trans('menu.header.logout') }}</a>
     </li>
 
 @else
 
     <li>
-        <a href="{{ route('register.form') }}">Register</a>
+        <a href="{{ route('register.form') }}">{{ trans('menu.header.register') }}</a>
     </li>
     
     <li>
-        <a href="{{ route('login.form') }}">Login</a>
+        <a href="{{ route('login.form') }}">{{ trans('menu.header.login') }}</a>
     </li>
     
 @endif

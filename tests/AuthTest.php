@@ -8,51 +8,63 @@ class AuthTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function testNewUserRegistration()
+    public function test_user_can_register_confirm_and_login()
     {
 
-        $this->visit('/register')
-             ->type('testuser', 'name')
-             ->type('testuser@example.com', 'email')
-             ->type('password', 'password')
-             ->type('password', 'password_confirmation')
-             ->check('eula')
-             ->press('Register')
-             ->seePageIs('/');
+        // User can register 
 
-        $this->see(trans('auth.register.sent.info'))
-             ->seeInDatabase('users', ['name' => 'testuser', 'verified' => 0]);
+        $this->visit('/')
+            ->see(trans('menu.header.register'))
+            ->click(trans('menu.header.register'))
+            ->type('user', 'name')
+            ->type('user@example.com', 'email')
+            ->type('password', 'password')
+            ->type('password', 'password_confirmation')
+            ->check('eula')
+            ->press(trans('auth.register.submit.title'))
+            ->seePageIs('/')
+            ->see(trans('auth.register.sent.info'))
+            ->seeInDatabase('users', ['name' => 'user', 'verified' => 0]);
 
-        //name already taken
+        // User with unconfirmed account can not login
 
-        $this->visit('/register')
-             ->type('testuser', 'name')
-             ->type('testuser@example.com', 'email')
-             ->type('password', 'password')
-             ->type('password', 'password_confirmation')
-             ->check('eula')
-             ->press('Register')
-             ->seePageIs('/register')
-             ->see(trans('validation.unique',['attribute' => 'name']));
+        $this->visit('/')
+            ->click(trans('menu.header.login'))
+            ->type('user', 'name')
+            ->type('password', 'password')
+            ->press(trans('auth.login.submit.title'))
+            ->seePageIs('/login')
+            ->see(trans('auth.login.failed.info'));
 
+        // User can confirm its account
+            
+        $this->visit($this->getVerificationLink('user'))
+            ->seeInDatabase('users', [
+                'name' => 'user',
+                'verified' => 1,
+                'registration_token' => null
+            ])
+            ->seePageIs('login')
+            ->see(trans('auth.register.confirmed.info'));
 
-        $user = User::whereName('testuser')->first();
+        // User can log in after confirmation
 
-/*
-        // You can't login until you confirm your email address.
-        // FIXME: For some reason does not work
-        $this->visit('/login')
-             ->type('TestKasutaja', 'name')
-             ->type('salasona', 'password')
-             ->press('Login')
-             ->seePageIs('/login')
-             ->see(trans('login.failed.info'));
-             //->see('Failed to log you in');
-
-        $this->visit("register/confirm/{$user->registration_token}")
-             ->seeInDatabase('users', ['name' => 'TestKasutaja', 'verified' => 1]); 
-*/
+        $this->visit('/')
+            ->click(trans('menu.header.login'))
+            ->type('user', 'name')
+            ->type('password', 'password')
+            ->press(trans('auth.login.submit.title'))
+            ->seePageIs('/')
+            ->see(trans('auth.login.login.info'));
 
     }
+
+    public function getVerificationLink($name) {
+
+        $token = User::whereName($name)->first()->registration_token;
+
+        return '/register/confirm/' . $token;
+    }
+
 
 }

@@ -32,7 +32,7 @@ $factory->define(User::class, function ($faker) {
         'notify_message' => 0,
         'notify_follow' => 0,
         'role' => 'regular',
-        'verified' => 1,
+        'verified' => 0,
         'registration_token' => '',
         'remember_token' => null,
     ];
