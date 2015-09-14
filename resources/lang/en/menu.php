@@ -9,7 +9,11 @@ return [
     'header.photos' => 'Photos',
     'header.blogs' => 'Blogs',
     'header.offers' => 'Offers',
-    'header.internal' => '...',
+
+    'header.register' => 'Register',
+    'header.login' => 'Login',
+    'header.admin' => 'Admin',
+    'header.logout' => 'Logout',
 
     'footer.trip_ee' => 'What is Trip.ee',
     'footer.contact' => 'Contact',

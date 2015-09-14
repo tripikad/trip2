@@ -4,9 +4,6 @@
     {{ trans('auth.login.title') }}
 @stop
 
-
-@stop
-
 @section('content.narrow')
 
     {!! Form::open(['route' => 'login.submit']) !!}
