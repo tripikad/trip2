@@ -45,14 +45,21 @@ gulp.task('js', function() {
 
 });
 
-gulp.task('svgsprite', function () {
+gulp.task('svg_sprite', function () {
     return gulp
-        .src('resources/assets/svg/*.svg')
+        .src('resources/assets/svg/sprite/*.svg')
         .pipe(svgmin())
         .pipe(svgstore())
         .pipe(rename(function (path) {
             path.basename = 'main'
         }))
+        .pipe(gulp.dest('public/svg'));
+});
+
+gulp.task('svg_standalone', function () {
+    return gulp
+        .src('resources/assets/svg/standalone/*.svg')
+        .pipe(svgmin())
         .pipe(gulp.dest('public/svg'));
 });
 
@@ -62,4 +69,4 @@ gulp.task('watch', function () {
 
 });
 
-gulp.task('default', ['sass', 'js', 'svgsprite']);
+gulp.task('default', ['sass', 'js', 'svg_sprite', 'svg_standalone']);
