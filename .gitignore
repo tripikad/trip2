@@ -2,5 +2,3 @@
 /node_modules
 .env
 *.lock
-/resources/assets/svg
-/public/svg
