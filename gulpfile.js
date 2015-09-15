@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var autoprefixer = require('gulp-autoprefixer');
 var svgstore = require('gulp-svgstore');
 var rename = require('gulp-rename');
+var svgmin = require('gulp-svgmin');
 
 gulp.task('sass', function() {
 
@@ -47,6 +48,7 @@ gulp.task('js', function() {
 gulp.task('svgsprite', function () {
     return gulp
         .src('resources/assets/svg/*.svg')
+        .pipe(svgmin())
         .pipe(svgstore())
         .pipe(rename(function (path) {
             path.basename = 'main'

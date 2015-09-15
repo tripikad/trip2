@@ -1,0 +1,15 @@
+.component-icon {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    &.-circle {
+        border-radius: 100%;
+        border: 1px solid black;
+    }
+
+}
