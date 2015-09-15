@@ -2,6 +2,9 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var autoprefixer = require('gulp-autoprefixer');
+var svgstore = require('gulp-svgstore');
+var rename = require('gulp-rename');
+var svgmin = require('gulp-svgmin');
 
 gulp.task('sass', function() {
 
@@ -42,11 +45,29 @@ gulp.task('js', function() {
 
 });
 
+gulp.task('svg_sprite', function () {
+    return gulp
+        .src('resources/assets/svg/sprite/*.svg')
+        .pipe(svgmin())
+        .pipe(svgstore())
+        .pipe(rename(function (path) {
+            path.basename = 'main'
+        }))
+        .pipe(gulp.dest('public/svg'));
+});
+
+gulp.task('svg_standalone', function () {
+    return gulp
+        .src('resources/assets/svg/standalone/*.svg')
+        .pipe(svgmin())
+        .pipe(gulp.dest('public/svg'));
+});
 
 gulp.task('watch', function () {
 
   gulp.watch('./resources/assets/sass/**/*.scss', ['sass']);
+  gulp.watch('./resources/assets/svg/**/*.svg', ['svg_sprite', 'svg_standalone']);
 
 });
 
-gulp.task('default', ['sass', 'js']);
+gulp.task('default', ['sass', 'js', 'svg_sprite', 'svg_standalone']);
