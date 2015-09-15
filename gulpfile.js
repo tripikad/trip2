@@ -66,6 +66,7 @@ gulp.task('svg_standalone', function () {
 gulp.task('watch', function () {
 
   gulp.watch('./resources/assets/sass/**/*.scss', ['sass']);
+  gulp.watch('./resources/assets/svg/**/*.svg', ['svg_sprite', 'svg_standalone']);
 
 });
 
