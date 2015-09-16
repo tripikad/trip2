@@ -1,0 +1,17 @@
+.component-styleguide {
+
+    > mark {
+
+        display: inline-block;
+        margin: $spacer 0 $spacer 0;
+    
+    }
+
+    code {
+
+        display: inline-block;
+        margin: $spacer 0 $spacer 0;
+    
+    }
+
+}
