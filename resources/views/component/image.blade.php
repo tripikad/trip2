@@ -1,10 +1,14 @@
-<div
-    class="component-image {{ $options or ''}}"
-    style="
-        background-image: url({{ $image }});
-        @if(isset($width))
-            width: {{ $width }};
-            padding-bottom: {{ $width }};
-        @endif
-">
+<div class="component-image {{ $options or ''}}">
+
+    <img
+        src="{{ $image }}"
+        style="
+            @if(isset($height) && $height == 'small')
+                width:2.9em;
+            @else
+                width:4.3em;
+            @endif
+        "
+    />
+
 </div>

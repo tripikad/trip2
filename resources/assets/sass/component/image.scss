@@ -1,22 +1,9 @@
 .component-image {
 
-    display: inline-block;
-    background-position: center;
-    background-size: cover;
-    width: 100%;
-    padding-bottom: 100%;
-    display: relative;
-    
-    &.-landscape {
-        padding-bottom: 66%;
-    }
+    &.-circle > img {
 
-    &.-rounded {
-        border-radius: $spacer;
-    }
-
-    &.-circle {
         border-radius: 50%;
+
     }
 
 }

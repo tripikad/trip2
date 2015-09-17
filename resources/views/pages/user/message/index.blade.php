@@ -1,4 +1,4 @@
-@extends('layouts.medium')
+@extends('layouts.main')
 
 @section('title')
     {{ trans('user.show.messages.index.title', ['user' => $user->name]) }}
@@ -18,7 +18,7 @@
 
 @stop
 
-@section('content.medium')
+@section('content')
 
 @if (count($user->messages()))    
 
@@ -34,7 +34,8 @@
                 'text' => trans('user.show.messages.index.row.text', [
                     'user' => view('component.user.link', ['user' => $message->withUser]),
                     'created_at' => $message->created_at->format('d. m Y H:i:s')
-                ])
+                ]),
+                'width' => 'small'
             ])
 
         </div>

@@ -42,7 +42,8 @@
             'heading' => $content->title,
             'heading_link' => route('content.show', [$content->type, $content->id]),
             'text' => view("component.content.text", ['content' => $content]),
-            'extra' => view('component.number', ['number' => count($content->comments)])
+            'extra' => view('component.number', ['number' => count($content->comments)]),
+            'width' => 'small'
         ])
         
         </div>

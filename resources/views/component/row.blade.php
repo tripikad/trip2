@@ -1,6 +1,18 @@
-<div class="component-row row">
+<div class="component-row">
 
-    <div class="col-xs-2 col-sm-1 col-lg-offset-1 text-right">
+    <div class="row">
+
+    <div class="
+        @if (isset($width) && $width == 'small')
+            col-xs-2 col-sm-1 col-sm-offset-1 col-lg-offset-2
+        @else 
+            col-xs-2 col-sm-1 col-lg-offset-1
+        @endif
+        text-right
+    "
+        style="height: {{ isset($height) && $height == 'small' ? '2.7em' : '4.3em' }}"
+    
+    >
 
         @if (isset($image_link)) <a href="{{ $image_link }}"> @endif
 
@@ -9,7 +21,7 @@
             @include('component.image', [
                 'image' => $image,
                 'options' => '-circle',
-                'width' => isset($image_width) ? $image_width : null
+                'height' => isset($height) ? $height: null
             ])
 
         @endif
@@ -18,23 +30,25 @@
 
     </div>
 
-    @if (isset($extra))
+    <div class="
+        content
+        @if (isset($width) && $width == 'small')
+            col-xs-7 col-sm-8 col-lg-6
+        @else 
+            col-xs-7 col-sm-10 col-lg-8
+        @endif
+    "
 
-        <div class="content col-xs-7 col-sm-10 col-lg-8">
+        style="height: {{ isset($height) && $height == 'small' ? '2.7em' : '4.3em' }}"
 
-    @else
-
-        <div class="content col-xs-10 col-sm-11 col-lg-10">
-
-    @endif
+    >
+        <div>
 
             <div class="title">
 
                 @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
             
                 @if (isset($heading)) <h3>{{ $heading }}</h3> @endif
-
-                @if (!isset($heading)) <p /> @endif
 
                 @if (isset($heading_link)) </a> @endif
 
@@ -50,13 +64,44 @@
 
         </div>
 
-    @if (isset($extra))
+    </div>
 
-        <div class="col-xs-3 col-sm-1">
+    <div class="
+        content
+        @if (isset($width) && $width == 'small')
+            col-xs-3 col-sm-1 col-lg-1
+        @else 
+            col-xs-3 col-sm-1 col-lg-1
+        @endif
+    "
+    
+        style="height: {{ isset($height) && $height == 'small' ? '2.9em' : '4.3em' }}"
 
-            {!! $extra !!}
+    >
+ 
+        {!! $extra or '' !!}
+
+    </div>
+
+    </div>
+
+    @if (isset($body))
+
+        <div class="row">
+
+            <div class="
+                @if (isset($width) && $width == 'small')
+                    col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3
+                @else 
+                    col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2
+                @endif
+            ">
+
+                {!! $body !!}
 
         </div>
+
+    </div>
 
     @endif
 
