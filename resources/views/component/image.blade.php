@@ -1,14 +1,11 @@
-<div class="component-image {{ $options or ''}}">
+<div class="
+    component-image
+    @if(isset($height) && $height == 'small') 
+        -small
+    @endif
+    {{ $options or ''}}
+">
 
-    <img
-        src="{{ $image }}"
-        style="
-            @if(isset($height) && $height == 'small')
-                width:2.9em;
-            @else
-                width:4.3em;
-            @endif
-        "
-    />
+    <img src="{{ $image }}" />
 
 </div>

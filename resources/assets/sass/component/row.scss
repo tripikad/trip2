@@ -1,6 +1,26 @@
 .component-row {
 
-    .content {
+    > div > div:nth-child(1) {
+
+        background: orange;
+    
+    }
+
+    > div > div:nth-child(2) {
+
+        background: yellow;
+    
+    }
+
+    > div > div:nth-child(3) {
+
+        background: orange;
+    
+    }
+
+    > div > .content {
+
+        height: 4.3em;
 
         display: flex;
         flex-direction: column;
@@ -24,6 +44,16 @@
         
         }
     
+    }
+
+    &.-small {
+
+        > div > .content {
+
+            height: 2.9em;
+        
+        }
+
     }
 
 }

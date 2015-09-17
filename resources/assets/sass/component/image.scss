@@ -1,5 +1,15 @@
 .component-image {
 
+    img {
+        width: 4.3em;
+    }
+
+    &.-small > img {
+        
+        width: 2.9em;
+    
+    }
+
     &.-circle > img {
 
         border-radius: 50%;
