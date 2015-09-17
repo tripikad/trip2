@@ -131,5 +131,8 @@ get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 
 get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
  
+// Styleguide
+
+get('styleguide', 'StyleguideController@index');
 
 
