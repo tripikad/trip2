@@ -39,9 +39,8 @@
             'user' => $message->fromUser->name,
             'created_at' => $message->created_at->format('d. m Y H:i:s')
         ]),
-        'width' => 'small',
-        'height' => 'small',
-        'body' => nl2br($message->body)
+        'body' => nl2br($message->body),
+        'options' => '-narrow -small'
     ])
 
     </div>

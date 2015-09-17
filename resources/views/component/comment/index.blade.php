@@ -16,7 +16,7 @@
     ">
 
         @include('component.row', [
-            'image' => $comment->user->imagePreset(),
+            'image' => $comment->user->imagePreset('xsmall_square'),
             'image_link' => route('user.show', [$comment->user]),
             'text' => view('component.comment.text', ['comment' => $comment]),
             'actions' => view('component.actions', ['actions' => $comment->getActions()]),

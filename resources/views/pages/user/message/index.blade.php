@@ -35,7 +35,7 @@
                     'user' => view('component.user.link', ['user' => $message->withUser]),
                     'created_at' => $message->created_at->format('d. m Y H:i:s')
                 ]),
-                'width' => 'small'
+                'options' => '-narrow'
             ])
 
         </div>

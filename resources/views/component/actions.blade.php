@@ -1,6 +1,6 @@
 @if (count($actions))
 
-<div class="btn-group">
+<div class="component-actions btn-group">
 
     @foreach($actions as $action)
 
