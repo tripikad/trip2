@@ -22,9 +22,9 @@
     
     @include('component.image', [
         'image' => $user->imagePreset('small_square'),
-        'options' => '-circle',
-        'width' => '30%'
+        'options' => '-circle -large',
     ])
+
 @stop
 
 @section('header.bottom')

@@ -1,13 +1,10 @@
-<div class="
-    component-row
-    @if (isset($height) && $height == 'small') -small @endif
-">
+<div class="component-row {{ $options or '' }}">
 
     <div class="row">
 
         <div class="
             text-right
-            @if (isset($width) && $width == 'small')
+            @if (isset($options) && strpos($options, '-small'))
                 col-xs-2 col-sm-1 col-sm-offset-1 col-lg-offset-2
             @else 
                 col-xs-2 col-sm-1 col-lg-offset-1
@@ -20,8 +17,7 @@
                 
                 @include('component.image', [
                     'image' => $image,
-                    'options' => '-circle',
-                    'height' => isset($height) ? $height: null
+                    'options' => isset($options) ? '-circle ' . $options : '-circle',
                 ])
 
             @endif
@@ -31,25 +27,12 @@
         </div>
 
         <div class="
-            
             content
-            
-            @if (isset($width) && $width == 'small')
-            
+            @if (isset($options) && strpos($options, '-small'))
                 col-xs-7 col-sm-8 col-lg-6
-            
             @else 
-            
                 col-xs-7 col-sm-10 col-lg-8
-            
             @endif
-
-            @if (isset($height) && $height == 'small')
-
-                -small
-
-            @endif
-
         ">
             <div>
 
@@ -76,25 +59,12 @@
         </div>
 
         <div class="
-
             content
-            
-            @if (isset($width) && $width == 'small')
-            
+            @if (isset($options) && strpos($options, '-small'))
                 col-xs-3 col-sm-1 col-lg-1
-            
             @else 
-                
                 col-xs-3 col-sm-1 col-lg-1
-            
             @endif
-            
-            @if (isset($height) && $height == 'small')
-
-                -small
-
-            @endif
-        
         ">
      
             {!! $extra or '' !!}

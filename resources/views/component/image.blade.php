@@ -1,10 +1,4 @@
-<div class="
-    component-image
-    @if(isset($height) && $height == 'small') 
-        -small
-    @endif
-    {{ $options or ''}}
-">
+<div class="component-image {{ $options or ''}}">
 
     <img src="{{ $image }}" />
 

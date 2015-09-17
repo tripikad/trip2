@@ -1,12 +1,18 @@
 .component-image {
 
     img {
-        width: 4.3em;
+        width: $spacer * 7;
     }
 
     &.-small > img {
         
-        width: 2.9em;
+        width: $spacer * 4;
+    
+    }
+
+    &.-large > img {
+        
+        width: $spacer * 12;
     
     }
 

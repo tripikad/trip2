@@ -9,7 +9,6 @@
     @include('component.image', [
         'image' => $user->imagePreset('small_square') . '?' . str_random(4),
         'options' => '-circle',
-        'width' => '30%'
     ])
 
     {!! Form::model(isset($user) ? $user : null, [

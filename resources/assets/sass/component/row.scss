@@ -20,7 +20,7 @@
 
     > div > .content {
 
-        height: 4.3em;
+        height: $spacer * 7;
 
         display: flex;
         flex-direction: column;
@@ -50,7 +50,7 @@
 
         > div > .content {
 
-            height: 2.9em;
+            height: $spacer * 4;
         
         }
 
