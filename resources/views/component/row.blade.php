@@ -38,21 +38,22 @@
 
                 <div class="title">
 
-                    @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
+                    @if (isset($preheading)) <span>{!! $preheading !!}</span> @endif
 
-                    @if (isset($preheading)) {!! $preheading !!} @endif
+                    @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
                 
                     @if (isset($heading)) <h3>{{ $heading }}</h3> @endif
 
-                    @if (isset($postheading)) {!! $postheading !!} @endif
-
                     @if (isset($heading_link)) </a> @endif
+
+                    @if (isset($postheading)) <span>{!! $postheading !!}</span> @endif
+
 
                 </div>
 
-                @if (isset($text)) {!! $text !!} @endif
+                @if (isset($text)) <div class="text">{!! $text !!}</div> @endif
 
-                {!! $actions or '' !!}
+                @if (isset($actions)) <div class="actions">{!! $actions !!}</div> @endif
 
             </div>
 

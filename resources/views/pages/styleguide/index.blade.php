@@ -64,33 +64,33 @@ Heading 3 is used in item lists on pages
 
 <mark>Row component</mark>
 
-<p>Row is meant for listings and content headers, it supports (user) image, heading, subheading and extra content</p>
+<p>Row is meant for listings and content headers, it comes with different variations</p>
 
-<br />
+@foreach(['(none)', '-narrow', '-small', '-narrow -small'] as $options) 
+
+<code>{{ $options }}</code>
 
 @include('component.row', [
     'image' => \App\User::orderByRaw('RAND()')->first()->imagePreset(),
     'image_link' => '',
+    'preheading' => 'Preheading',
     'heading' => 'Here comes the heading',
     'heading_link' => '',
+    'postheading' => 'Postheading',
     'actions' => view('component.actions', [
         'actions' => [
-            ['route' => '', 'title' => 'Action'],
+            ['route' => '', 'title' => 'This is action'],
         ]
     ]),
     'text' => 'This is the subheading',
-    'extra' => 'Extra'
+    'extra' => 'Extra',
+    'body' => 'Organic cray beard Tumblr lomo chips fanny pack flannel Austin vegan iPhone, quinoa cornhole. Meh DIY kogi fingerstache squid kitsch.Portland paleo post-ironic, chia cardigan cronut Schlitz. Thundercats cornhole tote bag, cray tousled messenger bag narwhal Austin Bushwick meggings',
+    'options' => $options
 ])
 
-<mark>Number component</mark>
+<br /><br />
 
-<p>...</p>
-
-
-<mark>Circle component</mark>
-
-<p>...</p>
-
+@endforeach
 
 <mark>Card component</mark>
 
