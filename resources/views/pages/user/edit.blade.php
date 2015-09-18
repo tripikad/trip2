@@ -6,7 +6,7 @@
 
 @section('header.top')
     
-    @include('component.image', [
+    @include('component.user.image', [
         'image' => $user->imagePreset('small_square') . '?' . str_random(4),
         'options' => '-circle',
     ])

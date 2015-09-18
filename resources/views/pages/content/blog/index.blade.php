@@ -26,7 +26,7 @@
             <div class="col-xs-2">
                 
                 <a href="{{ route('user.show', [$content->user]) }}">
-                    @include('component.image', [
+                    @include('component.user.image', [
                         'image' => $content->user->imagePreset(),
                         'options' => '-circle'
                     ])

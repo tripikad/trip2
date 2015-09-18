@@ -15,7 +15,7 @@
 
             @if (isset($image))
                 
-                @include('component.image', [
+                @include('component.user.image', [
                     'image' => $image,
                     'options' => isset($options) ? '-circle ' . $options : '-circle',
                 ])
