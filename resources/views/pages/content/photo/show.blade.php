@@ -14,12 +14,13 @@
 
     @if($image = $content->images()->first())
         
-        <div class="utils-padding-bottom">
+        <div class="row utils-padding-bottom">
 
-            @include('component.card', [
-                'image' => $content->imagePreset('large'),
-                'options' => '-noshade'
-            ])
+            <div class="col-md-8 col-md-offset-2">
+
+                <img src="{{ $content->imagePreset('large') }}" />
+
+            </div>
 
         </div>
 
@@ -32,7 +33,8 @@
         'text' => view('component.content.text', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
         'extra' => view('component.flags', ['flags' => $content->getFlags()]),
-        'body' => $content->body_filtered
+        'body' => $content->body_filtered,
+        'options' => '-narrow'
     ])
 
     </div>
