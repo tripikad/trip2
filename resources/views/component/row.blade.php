@@ -1,60 +1,94 @@
-<div class="component-row row">
+<div class="component-row {{ $options or '' }}">
 
-    <div class="col-xs-2 col-sm-1 col-lg-offset-1 text-right">
+    <div class="row">
 
-        @if (isset($image_link)) <a href="{{ $image_link }}"> @endif
+        <div class="
+            text-right
+            @if (isset($options) && strpos($options, '-narrow') !== false) 
+                col-xs-2 col-sm-1 col-sm-offset-1 col-lg-offset-2
+            @else 
+                col-xs-2 col-sm-1 col-lg-offset-1
+            @endif
+        ">
 
-        @if (isset($image))
-            
-            @include('component.image', [
-                'image' => $image,
-                'options' => '-circle',
-                'width' => isset($image_width) ? $image_width : null
-            ])
+            @if (isset($image_link)) <a href="{{ $image_link }}"> @endif
 
-        @endif
-         
-        @if (isset($image_link)) </a> @endif
+            @if (isset($image))
+                
+                @include('component.image', [
+                    'image' => $image,
+                    'options' => isset($options) ? '-circle ' . $options : '-circle',
+                ])
 
-    </div>
+            @endif
+             
+            @if (isset($image_link)) </a> @endif
 
-    @if (isset($extra))
+        </div>
 
-        <div class="content col-xs-7 col-sm-10 col-lg-8">
+        <div class="
+            content
+            @if (isset($options) && strpos($options, '-narrow') !== false) 
+                col-xs-7 col-sm-8 col-lg-6
+            @else 
+                col-xs-7 col-sm-10 col-lg-8
+            @endif
+        ">
+            <div>
 
-    @else
+                <div class="title">
 
-        <div class="content col-xs-10 col-sm-11 col-lg-10">
+                    @if (isset($preheading)) <span>{!! $preheading !!}</span> @endif
 
-    @endif
+                    @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
+                
+                    @if (isset($heading)) <h3>{{ $heading }}</h3> @endif
 
-            <div class="title">
+                    @if (isset($heading_link)) </a> @endif
 
-                @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
-            
-                @if (isset($heading)) <h3>{{ $heading }}</h3> @endif
+                    @if (isset($postheading)) <span>{!! $postheading !!}</span> @endif
 
-                @if (!isset($heading)) <p /> @endif
 
-                @if (isset($heading_link)) </a> @endif
+                </div>
 
-            </div>
+                @if (isset($text)) <div class="text">{!! $text !!}</div> @endif
 
-            <div class="text">
+                @if (isset($actions)) <div class="actions">{!! $actions !!}</div> @endif
 
-                @if (isset($text)) {!! $text !!} @endif
-
-                {!! $actions or '' !!}
-            
             </div>
 
         </div>
 
-    @if (isset($extra))
+        <div class="
+            content
+            @if (isset($options) && strpos($options, '-narrow') !== false) 
+                col-xs-3 col-sm-1 col-lg-1
+            @else 
+                col-xs-3 col-sm-1 col-lg-1
+            @endif
+        ">
+     
+            {!! $extra or '' !!}
 
-        <div class="col-xs-3 col-sm-1">
+        </div>
 
-            {!! $extra !!}
+    </div>
+
+    @if (isset($body))
+
+        <div class="row">
+
+            <div class="
+            @if (isset($options) && strpos($options, '-narrow') !== false) 
+                    col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3
+                @else 
+                    col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2
+                @endif
+            ">
+
+                {!! $body !!}
+
+            </div>
 
         </div>
 

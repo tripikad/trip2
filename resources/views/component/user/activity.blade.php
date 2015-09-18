@@ -14,7 +14,8 @@
                     . $item->title
                     . '</a>',
                 'created_at' => $item->created_at->diffForHumans()
-            ])
+            ]),
+            'options' => '-narrow -small'
         ])
 
     @else
@@ -34,7 +35,8 @@
                     . $item->title
                     . '</a>',
                 'created_at' => $item->created_at->diffForHumans()
-            ])
+            ]),
+            'options' => '-small'
         ])
 
     @endif

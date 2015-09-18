@@ -1,4 +1,4 @@
-@extends('layouts.medium')
+@extends('layouts.main')
 
 @section('title')
 
@@ -20,17 +20,7 @@
 
 @stop
 
-@section('header.top')
-
-    @include('component.image', [
-        'image' => $user_with->imagePreset('small_square'),
-        'options' => '-circle',
-        'width' => '30%'
-    ])
-
-@stop
-
-@section('content.medium')
+@section('content')
 
 @if (count($messages))
 
@@ -48,10 +38,10 @@
         'text' => trans('user.show.messages.with.row.text', [
             'user' => $message->fromUser->name,
             'created_at' => $message->created_at->format('d. m Y H:i:s')
-        ])
+        ]),
+        'body' => nl2br($message->body),
+        'options' => '-narrow -small'
     ])
-
-    {!! nl2br($message->body) !!}
 
     </div>
 

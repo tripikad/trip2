@@ -14,12 +14,13 @@
 
     @if($image = $content->images()->first())
         
-        <div class="utils-padding-bottom">
+        <div class="row utils-padding-bottom">
 
-        @include('component.card', [
-            'image' => $content->imagePreset('large'),
-            'options' => '-noshade'
-        ])
+            <div class="col-md-8 col-md-offset-2">
+
+                <img src="{{ $content->imagePreset('large') }}" />
+
+            </div>
 
         </div>
 
@@ -31,22 +32,11 @@
         'heading' => $content->title,
         'text' => view('component.content.text', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
-        'extra' => view('component.flags', ['flags' => $content->getFlags()])
+        'extra' => view('component.flags', ['flags' => $content->getFlags()]),
+        'body' => $content->body_filtered,
+        'options' => '-narrow'
     ])
 
-    <div class="row">
-
-        <div class="col-sm-1">
-        </div>
-
-        <div class="col-sm-10">
-
-            {!! $content->body_filtered !!}
-
-        </div>
-
-    </div>
-    
     </div>
     
     @include('component.comment.index', ['comments' => $comments])

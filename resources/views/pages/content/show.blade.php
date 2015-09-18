@@ -18,18 +18,9 @@
         'heading' => $content->title,
         'text' => view("component.content.text", ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
-        'extra' => view('component.flags', ['flags' => $content->getFlags()])
+        'extra' => view('component.flags', ['flags' => $content->getFlags()]),
+        'body' => $content->body_filtered,
     ])
-
-    <div class="row">
-
-        <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
-
-            {!! $content->body_filtered !!}
-
-        </div>
-        
-    </div>
 
     </div>
 

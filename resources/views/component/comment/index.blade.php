@@ -16,24 +16,15 @@
     ">
 
         @include('component.row', [
-            'image' => $comment->user->imagePreset(),
-            'image_width' => '80%',
+            'image' => $comment->user->imagePreset('xsmall_square'),
             'image_link' => route('user.show', [$comment->user]),
             'text' => view('component.comment.text', ['comment' => $comment]),
             'actions' => view('component.actions', ['actions' => $comment->getActions()]),
-            'extra' => view('component.flags', ['flags' => $comment->getFlags()])
+            'extra' => view('component.flags', ['flags' => $comment->getFlags()]),
+            'body' => nl2br($comment->body),
+            'options' => isset($options) ? '-small ' . $options : '-small' 
 
         ])
-
-        <div class="row">
-
-            <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
-
-                {!! nl2br($comment->body) !!}
-
-            </div>
-
-        </div>
 
     </div>
     
