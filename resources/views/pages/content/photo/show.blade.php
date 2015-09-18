@@ -16,10 +16,10 @@
         
         <div class="utils-padding-bottom">
 
-        @include('component.card', [
-            'image' => $content->imagePreset('large'),
-            'options' => '-noshade'
-        ])
+            @include('component.card', [
+                'image' => $content->imagePreset('large'),
+                'options' => '-noshade'
+            ])
 
         </div>
 
@@ -31,22 +31,10 @@
         'heading' => $content->title,
         'text' => view('component.content.text', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
-        'extra' => view('component.flags', ['flags' => $content->getFlags()])
+        'extra' => view('component.flags', ['flags' => $content->getFlags()]),
+        'body' => $content->body_filtered
     ])
 
-    <div class="row">
-
-        <div class="col-sm-1">
-        </div>
-
-        <div class="col-sm-10">
-
-            {!! $content->body_filtered !!}
-
-        </div>
-
-    </div>
-    
     </div>
     
     @include('component.comment.index', ['comments' => $comments])

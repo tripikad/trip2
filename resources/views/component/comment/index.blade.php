@@ -22,7 +22,7 @@
             'actions' => view('component.actions', ['actions' => $comment->getActions()]),
             'extra' => view('component.flags', ['flags' => $comment->getFlags()]),
             'body' => nl2br($comment->body),
-            'options' => '-small'
+            'options' => isset($options) ? '-small ' . $options : '-small' 
 
         ])
 

@@ -12,9 +12,9 @@
 
 <mark>Text paragraphs</mark>
 
-<p>Organic cray beard Tumblr lomo. <strong>strong</strong> or <b>b</b> chips fanny pack flannel Austin vegan iPhone, quinoa cornhole. Meh DIY kogi fingerstache squid kitsch.</p>
+<p>This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition, it would have about it that gravity, that profundity, and that impressive incomprehensibility which are so proper to works of that kind, and withal so attractive.</p>
 
-<p>Portland paleo post-ironic, chia cardigan cronut Schlitz. <a href="">Thundercats</a> cornhole tote bag, cray <em>em</em> or <i>i</i> tousled messenger bag narwhal Austin Bushwick meggings.</p>
+<p>Yet notwithstanding it is only a record of a <a href="https://en.wikipedia.org/wiki/Picnic">pic-nic</a>, it has a purpose, which is to suggest to the reader how he would be likely to see Europe and the East if he looked at them with his own eyes instead of the eyes of those who traveled in those countries  <em>before</em> him. I make small pretense of showing anyone how he ought to look at objects of interest beyond the sea — <strong>other books</strong> do that, and therefore, even if I were competent to do it, there is no need.</p>
 
 <mark>Headings</mark>
 
@@ -84,7 +84,7 @@ Heading 3 is used in item lists on pages
     ]),
     'text' => 'This is the subheading',
     'extra' => 'Extra',
-    'body' => 'Organic cray beard Tumblr lomo chips fanny pack flannel Austin vegan iPhone, quinoa cornhole. Meh DIY kogi fingerstache squid kitsch.Portland paleo post-ironic, chia cardigan cronut Schlitz. Thundercats cornhole tote bag, cray tousled messenger bag narwhal Austin Bushwick meggings',
+    'body' => 'This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition, it would have about it that gravity, that profundity, and that impressive incomprehensibility which are so proper to works of that kind, and withal so attractive.',
     'options' => $options
 ])
 
