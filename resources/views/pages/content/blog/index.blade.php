@@ -21,36 +21,16 @@
 
     @foreach ($contents as $content)
 
-        <div class="row utils-border-bottom">
+        <div class="utils-border-bottom">
 
-            <div class="col-xs-2">
-                
-                <a href="{{ route('user.show', [$content->user]) }}">
-                    @include('component.user.image', [
-                        'image' => $content->user->imagePreset(),
-                        'options' => '-circle'
-                    ])
-                </a>
-          
-            </div>
-            
-            <div class="col-xs-10">
-                
-                <div class="utils-padding-bottom">
-                
-                    <h3>
-                        <a href="{{ route('content.show', [$content->type, $content]) }}">
-                            {{ $content->title }}
-                        </a>
-                    </h3>
-                    
-                    @include('component.content.text', ['content' => $content])
-
-                </div>
-                
-                {!! $content->body_filtered !!}
-            
-            </div>
+            @include('component.row', [
+                'image' => $content->user->imagePreset(),
+                'image_link' => route('user.show', [$content->user]),
+                'heading' => $content->title,
+                'heading_link' => route('content.show', [$content->type, $content->id]),
+                'text' => view("component.content.text", ['content' => $content]),
+                'body' => $content->body_filtered,
+            ])
 
         </div>
         
