@@ -19,10 +19,10 @@
 <mark>Headings</mark>
 
 <h2>Heading 2</h2>
-Heading 2 is used in page titles
+<p>Heading 2 is used in page titles</p>
 
 <h3>Heading 3</h3>
-Heading 3 is used in item lists on pages
+<p>Heading 3 is used in item lists on pages</p>
 
 <h4>Heading 4</h4>
 <p>Heading 4 is used for subheadings</p>
@@ -84,12 +84,12 @@ Heading 3 is used in item lists on pages
     'image' => \App\User::orderByRaw('RAND()')->first()->imagePreset(),
     'image_link' => '',
     'preheading' => view('component.label', [
-        'title' => 'Preheading label'
+        'title' => 'Label'
     ]),
-    'heading' => 'Here comes the heading',
+    'heading' => 'This is heading',
     'heading_link' => '',
     'postheading' => view('component.label', [
-        'title' => 'Postheading label'
+        'title' => 'Label'
     ]),
     'actions' => view('component.actions', [
         'actions' => [
