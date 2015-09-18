@@ -48,9 +48,19 @@ Heading 3 is used in item lists on pages
 
 <br />
 
+<mark>Labels</mark>
+
+<p>Set labels on content titles etc.</p>
+
+@include('component.label', [
+    'title' => 'This is label'
+])
+
+<br />
+
 <mark>Actions</mark>
 
-<p>Set of actions on content elements, usually for admins. Keep the labels short!</p>
+<p>Set of actions on content elements, usually for admins. Keep the titles short!</p>
 
 @include('component.actions', [
     'actions' => [
@@ -73,10 +83,14 @@ Heading 3 is used in item lists on pages
 @include('component.row', [
     'image' => \App\User::orderByRaw('RAND()')->first()->imagePreset(),
     'image_link' => '',
-    'preheading' => 'Preheading',
+    'preheading' => view('component.label', [
+        'title' => 'Preheading label'
+    ]),
     'heading' => 'Here comes the heading',
     'heading_link' => '',
-    'postheading' => 'Postheading',
+    'postheading' => view('component.label', [
+        'title' => 'Postheading label'
+    ]),
     'actions' => view('component.actions', [
         'actions' => [
             ['route' => '', 'title' => 'This is action'],
