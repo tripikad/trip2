@@ -48,6 +48,19 @@
 
 <br />
 
+<mark>Numbers</mark>
+
+<div class="row">
+    <div class="col-xs-1">
+
+        @include('component.circle', [
+            'number' => '1',
+            'options' => '-good'
+        ])
+    
+    </div>    
+</div>
+
 <mark>Labels</mark>
 
 <p>Set labels on content titles etc.</p>
