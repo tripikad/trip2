@@ -44,6 +44,7 @@
             ]),
             'extra' => view('component.number', [
                 'number' => count($content->comments),
+                'options' => '-inverted'
             ])
         ])
         

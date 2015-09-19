@@ -57,11 +57,11 @@
 
 <div class="row">
 
-    @foreach(['-good', '-bad', '-empty', '-border'] as $options2) 
+    @foreach(['-good', '-bad', '-neutral', '-inverted'] as $options2) 
 
         <div class="col-xs-2">
 
-            <code>{{ $options2 . ' ' . $options1 }}</code>
+            <code>{{ $options1 }} <br /> {{ $options2 }}</code>
             
             <div class="row">
 
@@ -69,7 +69,7 @@
 
                     @include('component.number', [
                         'number' => '1',
-                        'options' => $options2 . ' ' . $options1
+                        'options' => $options1 . ' ' . $options2
                     ])
                     
                 </div>
