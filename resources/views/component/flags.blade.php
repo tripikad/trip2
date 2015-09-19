@@ -13,7 +13,7 @@
         
         @endif 
 
-        @include('component.circle', [
+        @include('component.number', [
             'number' => $flags['good']['value'],
             'options' => '-good' . (! $flags['good']['value'] ? ' -empty' : '')
         ])
@@ -39,7 +39,7 @@
 
         @endif
 
-        @include('component.circle', [
+        @include('component.number', [
             'number' => $flags['bad']['value'],
             'options' => '-bad' . (! $flags['bad']['value'] ? ' -empty' : '')
         ])

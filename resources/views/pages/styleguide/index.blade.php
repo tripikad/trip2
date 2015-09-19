@@ -53,7 +53,7 @@
 <div class="row">
     <div class="col-xs-1">
 
-        @include('component.circle', [
+        @include('component.number', [
             'number' => '1',
             'options' => '-good'
         ])

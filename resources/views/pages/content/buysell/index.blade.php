@@ -39,7 +39,7 @@
                 'user' => view('component.user.link', ['user' => $content->user]),
                 'created_at' => $content->created_at->diffForHumans(),
             ]),
-            'extra' => view('component.circle', [
+            'extra' => view('component.number', [
                 'number' => count($content->comments),
                 'options' => '-empty'
             ]),
