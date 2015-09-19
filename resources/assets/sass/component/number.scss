@@ -5,7 +5,7 @@
     position: relative;
     line-height: 0;
 
-    .content {
+    > .content {
 
         display: flex;
         justify-content: center;
@@ -19,9 +19,9 @@
         bottom: 0;
         left: 0;
 
-        .number {
+        > .number {
 
-            font-size: $font-size-h4;
+            font-size: $font-size-h3;
             font-family: $headings-font-family;
             font-weight: $headings-font-weight;
             color: white;
@@ -58,6 +58,43 @@
         
         }
 
+    }
+
+    &.-border {
+
+        > .content {
+
+            border: 1px solid gray;
+            background: transparent;
+
+        }
+
+        > .content > .number {
+
+            color: black;
+
+        }
+
+    }
+
+    &.-small {
+
+        > .content > .number {
+
+            font-size: $font-size-h4;
+
+        }
+    
+    }
+
+    &.-large {
+
+        > .content > .number {
+
+            font-size: $font-size-h2;
+
+        }
+    
     }
 
 }
