@@ -31,11 +31,7 @@
 	<hr>
 	<div class="footer">
 		<p>
-			@if(strstr(trans('content.footer.copyright'), '[current_year]'))
-				{{ @str_replace("[current_year]", \Carbon\Carbon::now()->format('Y'), trans("content.footer.copyright")) }}
-			@else
-				{{ trans('content.footer.copyright') }}
-			@endif
+			{{ trans('content.footer.copyright', ['current_year' => \Carbon\Carbon::now()->format('Y')]) }}
 		</p>
 	</div>
 </div>

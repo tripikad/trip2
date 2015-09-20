@@ -249,6 +249,6 @@ return [
 
     // Footer
 
-    'footer.copyright' => '&copy; Copyright 1998-[current_year]. Navigating the rough waters of travelling since 1998'
+    'footer.copyright' => '&copy; Copyright 1998-:current_year. Navigating the rough waters of travelling since 1998'
 
 ];
