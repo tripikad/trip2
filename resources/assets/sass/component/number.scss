@@ -1,4 +1,4 @@
-.component-circle {
+.component-number {
     
     width: 100%;
     padding-bottom: 100%;
@@ -21,10 +21,10 @@
 
         > .number {
 
-            font-size: $font-size-h3;
+            font-size: $font-size-h4;
             font-family: $headings-font-family;
             font-weight: $headings-font-weight;
-            color: white;
+            color: black;
 
         }
     
@@ -37,6 +37,12 @@
             background: green;
         
         }
+
+        .content > .number {
+
+            color: white;
+
+        }
     
     }
 
@@ -46,6 +52,12 @@
 
             background: red;
 
+        }
+
+        .content > .number {
+
+            color: white;
+            
         }
     
     }
@@ -58,33 +70,22 @@
         
         }
 
+        .content > .number {
+
+            color: white;
+            
+        }
+
     }
 
-    &.-inverted {
+    &.-border {
 
         > .content {
 
             border: 1px solid gray;
-            background: transparent;
 
         }
 
-        > .content > .number {
-
-            color: black;
-
-        }
-
-    }
-
-    &.-small {
-
-        > .content > .number {
-
-            font-size: $font-size-h4;
-
-        }
-    
     }
 
     &.-large {
