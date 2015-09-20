@@ -1,0 +1,19 @@
+.component-user-image {
+
+    img {
+        width: 100%;
+    }
+
+    &.-circle > img {
+
+        border-radius: 50%;
+
+    }
+
+    &.-rounded > img {
+
+        border-radius: $spacer;
+
+    }
+
+}

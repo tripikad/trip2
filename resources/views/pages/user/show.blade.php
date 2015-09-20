@@ -20,10 +20,18 @@
 
 @section('header.top')
     
-    @include('component.user.image', [
-        'image' => $user->imagePreset('small_square'),
-        'options' => '-circle -large',
-    ])
+    <div class="row">
+    
+        <div class="col-xs-4 col-sm-offset-4">
+            
+            @include('component.user.image', [
+                'image' => $user->imagePreset('small_square'),
+                'options' => '-circle -large',
+            ])
+        
+        </div>
+
+    </div>
 
 @stop
 

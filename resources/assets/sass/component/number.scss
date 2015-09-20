@@ -80,9 +80,11 @@
 
     &.-border {
 
+        opacity: 0.5;
+        
         > .content {
 
-            border: 1px solid gray;
+            border: 1px solid black;
 
         }
 
