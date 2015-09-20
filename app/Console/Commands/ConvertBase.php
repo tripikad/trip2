@@ -914,12 +914,12 @@ class ConvertBase extends Command
         try {
 
             Imageconv::make($to)
-                ->fit(80)
-                ->save(dirname($to) . '/../xsmall_square/' . basename($to), $this->imageQuality);
- 
+                ->fit(config('imagepresets.xsmall_square.width'))
+                ->save(config('imagepresets.xsmall_square.path') . basename($to), $this->imageQuality);
+
             Imageconv::make($to)
-                ->fit(180)
-                ->save(dirname($to) . '/../small_square/' . basename($to), $this->imageQuality);
+                ->fit(config('imagepresets.small_square.width'))
+                ->save(config('imagepresets.small_square.path') . basename($to), $this->imageQuality);
         
         }
 
@@ -934,22 +934,22 @@ class ConvertBase extends Command
         try {
 
             Imageconv::make($to)
-                ->resize(300, null, function ($constraint) {
+                ->resize(config('imagepresets.small.width'), config('imagepresets.small.height'), function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(dirname($to) . '/../small/' . basename($to), $this->imageQuality);
+                ->save(config('imagepresets.small.path') . basename($to), $this->imageQuality);
 
             Imageconv::make($to)
-                ->resize(700, null, function ($constraint) {
+                ->resize(config('imagepresets.medium.width'), config('imagepresets.medium.height'), function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(dirname($to) . '/../medium/' . basename($to), $this->imageQuality);
+                ->save(config('imagepresets.medium.path') . basename($to), $this->imageQuality);
 
             Imageconv::make($to)
-                ->resize(900, null, function ($constraint) {
+                ->resize(config('imagepresets.large.width'), config('imagepresets.large.height'), function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(dirname($to) . '/../large/' . basename($to), $this->imageQuality);
+                ->save(config('imagepresets.large.path') . basename($to), $this->imageQuality);
 
         }
 

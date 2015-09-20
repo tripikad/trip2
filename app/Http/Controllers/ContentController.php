@@ -254,31 +254,27 @@ class ContentController extends Controller
 
         $fileName = $file->getClientOriginalName();
         $fileName = preg_replace('/\s+/', '-', $fileName);
-        $path = public_path() . "/images/original/";
-        
-        $smallPath = public_path() . "/images/small/";
-        $mediumPath = public_path() . "/images/medium/";
-        $largePath = public_path() . "/images/large/";
+        $path = config('imagepresets.original.path');
         
         $file->move($path, $fileName);
 
         Imageconv::make($path . $fileName)
-            ->resize(300, null, function ($constraint) {
+            ->resize(config('imagepresets.small.width'), config('imagepresets.small.height'), function ($constraint) {
                 $constraint->aspectRatio();
             })
-            ->save($smallPath . $fileName);
+            ->save(config('imagepresets.small.path') . $fileName);
 
         Imageconv::make($path . $fileName)
-            ->resize(700, null, function ($constraint) {
+            ->resize(config('imagepresets.medium.width'), config('imagepresets.medium.height'), function ($constraint) {
                 $constraint->aspectRatio();
             })
-            ->save($mediumPath . $fileName);
+            ->save(config('imagepresets.medium.path') . $fileName);
 
         Imageconv::make($path . $fileName)
-            ->resize(900, null, function ($constraint) {
+            ->resize(config('imagepresets.large.width'), config('imagepresets.large.height'), function ($constraint) {
                 $constraint->aspectRatio();
             })
-            ->save($largePath . $fileName);
+            ->save(config('imagepresets.large.path') . $fileName);
 
         return $fileName;
     
