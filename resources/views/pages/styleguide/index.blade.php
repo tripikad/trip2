@@ -48,6 +48,44 @@
 
 <br />
 
+<mark>Numbers</mark>
+
+<p>Any properties can be combined. Numbers fill proportionally their container width.</p>
+
+
+@foreach(['', '-large'] as $index => $options1) 
+
+<div class="row">
+
+    @foreach(['(none)', '-good', '-bad', '-neutral', '-border'] as $options2) 
+
+        <div class="col-xs-2">
+
+            <code>{{ $options2 }} {{ $options1 }}</code>
+            
+            <div class="row">
+
+                <div class="col-xs-6">
+
+                    @include('component.number', [
+                        'number' => '1',
+                        'options' => $options2 . ' ' . $options1
+                    ])
+                    
+                </div>
+
+            </div>
+
+        </div>    
+
+    @endforeach
+
+</div>
+
+<br />
+
+@endforeach
+
 <mark>Labels</mark>
 
 <p>Set labels on content titles etc.</p>

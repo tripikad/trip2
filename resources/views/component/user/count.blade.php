@@ -1,19 +1,19 @@
 <div class="row">
     
-    <div class="col-xs-2 col-sm-offset-4">
+    <div class="col-xs-3 col-xs-offset-3 col-sm-1 col-sm-offset-5">
     
         @include('component.number', [
             'number' => $content_count,
-            'text' => 'Posts'
+            'options' => '-border'
         ])
 
     </div>
 
-    <div class="col-xs-2">
+    <div class="col-xs-3 col-xs-offset-0 col-sm-1 col-sm-offset-0">
     
         @include('component.number', [
             'number' => $comment_count,
-            'text' => 'Comments'
+            'options' => '-border'
         ])
 
     </div>

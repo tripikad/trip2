@@ -13,9 +13,9 @@
         
         @endif 
 
-        @include('component.circle', [
+        @include('component.number', [
             'number' => $flags['good']['value'],
-            'options' => '-good' . (! $flags['good']['value'] ? ' -empty' : '')
+            'options' => '-small -good' . (! $flags['good']['value'] ? ' -neutral' : '')
         ])
 
         @if ($flags['good']['flaggable'])
@@ -39,9 +39,9 @@
 
         @endif
 
-        @include('component.circle', [
+        @include('component.number', [
             'number' => $flags['bad']['value'],
-            'options' => '-bad' . (! $flags['bad']['value'] ? ' -empty' : '')
+            'options' => '-small -bad' . (! $flags['bad']['value'] ? ' -neutral' : '')
         ])
 
         @if ($flags['bad']['flaggable'])
