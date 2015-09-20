@@ -30,7 +30,7 @@
 @section('header.bottom')
    <p>
     {{ trans('user.show.joined', [
-        'created_at' => $user->created_at->diffForHumans()
+        'created_at' => view('component.date.relative', ['date' => $user->created_at])
     ]) }}
     </p>
 

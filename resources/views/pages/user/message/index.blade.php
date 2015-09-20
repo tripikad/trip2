@@ -33,7 +33,7 @@
                 'heading_link' => route('user.show.messages.with', [$user, $message->withUser]),
                 'text' => trans('user.show.messages.index.row.text', [
                     'user' => view('component.user.link', ['user' => $message->withUser]),
-                    'created_at' => $message->created_at->format('d. m Y H:i:s')
+                    'created_at' => view('component.date.long', ['date' => $message->created_at])
                 ]),
                 'options' => '-narrow'
             ])

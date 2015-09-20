@@ -1,0 +1,1 @@
+@if(isset($date)) {{ $date->format('d. m Y') }}  @endif

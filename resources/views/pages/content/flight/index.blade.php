@@ -35,7 +35,7 @@
                         ]) : null,
                         'text' => str_limit($content->title, 45)
                             . '<br />'
-                            . $content->end_at->diffForHumans(),
+                            . view('component.date.relative', ['date' => $content->end_at]),
                         'options' => '-center'
                     ])
                 

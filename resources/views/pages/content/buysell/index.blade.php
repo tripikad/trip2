@@ -37,7 +37,7 @@
             'heading_link' => route('content.show', [$content->type, $content->id]),
             'text' => trans("content.$type.index.row.text", [
                 'user' => view('component.user.link', ['user' => $content->user]),
-                'created_at' => $content->created_at->diffForHumans(),
+                'created_at' => view('component.date.relative', ['date' => $content->created_at]),
             ]),
             'extra' => view('component.number', [
                 'number' => count($content->comments),

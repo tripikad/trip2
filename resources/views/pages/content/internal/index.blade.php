@@ -37,8 +37,8 @@
             'heading_link' => route('content.show', [$content->type, $content->id]),
             'text' => trans("content.$type.index.row.text", [
                 'user' => view('component.user.link', ['user' => $content->user]),
-                'created_at' => $content->created_at->diffForHumans(),
-                'updated_at' => $content->updated_at->diffForHumans(),
+                'created_at' => view('component.date.relative', ['date' => $content->created_at]),
+                'updated_at' => view('component.date.relative', ['date' => $content->updated_at]),
                 'destinations' => $content->destinations->implode('name', ','),
                 'tags' => $content->topics->implode('name', ','),
             ]),

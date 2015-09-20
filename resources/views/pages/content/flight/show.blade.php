@@ -28,8 +28,8 @@
 
     @include('component.row', [
         'text' => trans("content.flight.show.row.text", [
-            'created_at' => $content->created_at->format('d. m Y H:i:s'),
-            'updated_at' => $content->updated_at->format('d. m Y H:i:s'),
+            'created_at' => view('component.date.long', ['date' => $content->created_at]),
+            'updated_at' => view('component.date.long', ['date' => $content->updated_at]),
             'destinations' => $content->destinations->implode('name', ','),
             'tags' => $content->topics->implode('name', ','),
         ]),

@@ -13,7 +13,7 @@
                     . '">'
                     . $item->title
                     . '</a>',
-                'created_at' => $item->created_at->diffForHumans()
+                'created_at' => view('component.date.relative', ['date' => $item->created_at])
             ]),
             'options' => '-narrow -small'
         ])
@@ -34,7 +34,7 @@
                     . '">'
                     . $item->title
                     . '</a>',
-                'created_at' => $item->created_at->diffForHumans()
+                'created_at' => view('component.date.relative', ['date' => $item->created_at])
             ]),
             'options' => '-small'
         ])
