@@ -41,7 +41,7 @@
             ]),
             'extra' => view('component.number', [
                 'number' => count($content->comments),
-                'options' => '-inverted'
+                'options' => '-border'
             ]),
             'options' => '-small'
         ])

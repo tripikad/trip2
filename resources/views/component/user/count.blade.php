@@ -4,7 +4,7 @@
     
         @include('component.number', [
             'number' => $content_count,
-            'options' => '-inverted'
+            'options' => '-border'
         ])
 
     </div>
@@ -13,7 +13,7 @@
     
         @include('component.number', [
             'number' => $comment_count,
-            'options' => '-inverted'
+            'options' => '-border'
         ])
 
     </div>
