@@ -3,7 +3,6 @@
     <div class="row">
 
         <div class="
-            text-right
             @if (isset($options) && strpos($options, '-narrow') !== false) 
                 col-xs-2 col-sm-1 col-sm-offset-1 col-lg-offset-2
             @else 
@@ -15,10 +14,25 @@
 
             @if (isset($image))
                 
-                @include('component.user.image', [
-                    'image' => $image,
-                    'options' => isset($options) ? '-circle ' . $options : '-circle',
-                ])
+                @if (isset($options) && strpos($options, '-small') !== false) 
+
+                    <div class="row">
+                        <div class="col-sm-9 col-sm-offset-3">
+                        @include('component.user.image', [
+                            'image' => $image,
+                            'options' => '-circle',
+                        ])
+                        </div>
+                    </div>
+        
+                @else 
+
+                    @include('component.user.image', [
+                        'image' => $image,
+                        'options' => '-circle',
+                    ])
+
+                @endif
 
             @endif
              
