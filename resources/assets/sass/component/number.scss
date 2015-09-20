@@ -19,7 +19,7 @@
         bottom: 0;
         left: 0;
 
-        > .number {
+        > div > .number {
 
             font-size: $font-size-h4;
             font-family: $headings-font-family;
@@ -38,7 +38,7 @@
         
         }
 
-        .content > .number {
+        .content > div > .number {
 
             color: white;
 

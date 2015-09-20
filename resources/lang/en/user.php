@@ -9,6 +9,9 @@ return [
     'show.joined' => 'Joined :created_at',
     'show.message.create' => 'Send private message',
 
+    'show.count.content.title' => 'Posts',
+    'show.count.comment.title' => 'Comments',
+
     'show.havebeen.title' => 'Have been in',
     'show.wantstogo.title' => 'Wants to go to',
 
