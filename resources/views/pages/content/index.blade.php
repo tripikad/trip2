@@ -46,7 +46,7 @@
                 'number' => count($content->comments), 
                 'options' => '-border'
             ]),
-            'options' => '-small'
+            'options' => ''
         ])
         
         </div>
