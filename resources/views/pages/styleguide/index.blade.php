@@ -110,6 +110,29 @@
 
 <br />
 
+<mark>User image component</mark>
+
+<div class="row">
+    
+    @foreach(['(none)', '-rounded', '-circle'] as $options) 
+
+        <div class="col-xs-2">
+            
+            <code>{{ $options }}</code>
+
+            @include('component.user.image', [
+                'image' => \App\User::orderByRaw('RAND()')
+                    ->first()
+                    ->imagePreset(),
+                'options' => $options,
+            ])
+
+        </div>
+
+    @endforeach
+
+</div>
+
 <mark>Row component</mark>
 
 <p>Row is meant for listings and content headers, it comes with different variations</p>
