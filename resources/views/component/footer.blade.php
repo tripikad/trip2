@@ -31,7 +31,7 @@
 	<hr>
 	<div class="footer">
 		<p>
-			{{ trans('content.footer.copyright', ['current_year' => \Carbon\Carbon::now()->format('Y')]) }}
+			{{ trans('content.footer.copyright', ['current_year' =>  \Carbon\Carbon::now()->year]) }}
 		</p>
 	</div>
 </div>
