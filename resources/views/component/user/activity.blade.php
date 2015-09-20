@@ -36,7 +36,7 @@
                     . '</a>',
                 'created_at' => view('component.date.relative', ['date' => $item->created_at])
             ]),
-            'options' => '-small'
+            'options' => '-small -narrow'
         ])
 
     @endif
