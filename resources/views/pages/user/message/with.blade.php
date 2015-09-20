@@ -37,7 +37,7 @@
         'image' => $message->fromUser->imagePreset(),
         'text' => trans('user.show.messages.with.row.text', [
             'user' => $message->fromUser->name,
-            'created_at' => $message->created_at->format('d. m Y H:i:s')
+            'created_at' => view('component.date.long', ['date' => $message->created_at])
         ]),
         'body' => nl2br($message->body),
         'options' => '-narrow -small'

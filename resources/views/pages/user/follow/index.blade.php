@@ -36,7 +36,7 @@
             ]),
             'text' => trans('user.follow.index.row.text', [
                 'user' => view('component.user.link', ['user' => $follow->followable->user]),
-                'created_at' => $follow->followable->created_at->format('d. m Y H:i:s')
+                'created_at' => view('component.date.long', ['date' => $follow->followable->created_at])
             ])
         ])
 

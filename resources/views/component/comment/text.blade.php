@@ -13,7 +13,7 @@
             href="#comment-{{ $comment->id }}"
             alt="{{ $comment->created_at }}"
         >
-            {{ $comment->created_at->diffForHumans() }}
+            {{ view('component.date.relative', ['date' => $comment->created_at]) }}
 
         </a>
 

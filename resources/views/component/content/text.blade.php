@@ -8,7 +8,7 @@
 
     </li>
 
-        {{ $content->created_at->diffForHumans() }}
+        {{ view('component.date.relative', ['date' => $content->created_at]) }}
 
     </li>
 
@@ -17,7 +17,7 @@
     <li>
 
         {{ trans('content.row.text.comment', [
-            'updated_at' => $content->updated_at->diffForHumans()
+            'updated_at' => view('component.date.relative', ['date' => $content->updated_at])
         ]) }}
     
     <li>

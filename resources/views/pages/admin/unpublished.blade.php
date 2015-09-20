@@ -30,7 +30,7 @@
             'heading_link' => route('content.show', [$content->type, $content->id]),
             'text' => trans("admin.unpublished.row.text", [
                 'type' => $content->type,
-                'created_at' => $content->created_at->diffForHumans(),
+                'created_at' => view('component.date.relative', ['date' => $content->created_at]),
             ]),
         ])
         
