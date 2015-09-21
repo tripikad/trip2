@@ -69,7 +69,7 @@ class MessageController extends Controller
 
         }
 
-        return redirect()->route('user.show.messages.with', [
+        return redirect()->route('message.index.with', [
             $user_id_from, $user_id_to, '#message-' . $message->id
         ]);
     

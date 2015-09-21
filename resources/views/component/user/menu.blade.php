@@ -7,8 +7,8 @@
     </li>
     
     <li>
-        <a href="{{ route('user.show.messages', [$user]) }}">
-            {{ trans('user.show.menu.messages') }}
+        <a href="{{ route('message.index', [$user]) }}">
+            {{ trans('user.show.menu.message') }}
         </a>
     </li>
     
