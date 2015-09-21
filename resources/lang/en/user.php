@@ -44,9 +44,6 @@ return [
     'activity.index.row.content' => ':user posted :title at :created_at',
     'activity.index.row.comment' => ':user added a comment :comment_title at the post :title at :created_at',
 
-    'follow.index.title' => ':user follows',
-    'follow.index.row.text' => 'By :user at :created_at',
-
     'show.contact_facebook.title' => 'Facebook',
     'show.contact_twitter.title' => 'Twitter',
     'show.contact_instagram.title' => 'Instagram',

@@ -174,14 +174,4 @@ class UserController extends Controller
             ->render();
     }
 
-    public function showFollows($id)
-    {
-        $user = User::with('follows')
-            ->findorFail($id);
-     
-        return View::make('pages.user.follow.index')
-            ->with('user', $user)
-            ->render();
-    }
-
 }

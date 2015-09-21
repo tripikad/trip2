@@ -7,14 +7,14 @@
     </li>
     
     <li>
-        <a href="{{ route('user.show.messages', [$user]) }}">
+        <a href="{{ route('message.index', [$user]) }}">
             {{ trans('user.show.menu.messages') }}
         </a>
     </li>
     
     <li>
-        <a href="{{ route('user.show.follows', [$user]) }}">
-            {{ trans('user.show.menu.follows') }}
+        <a href="{{ route('follow.index', [$user]) }}">
+            {{ trans('user.show.menu.follow') }}
         </a>
     </li>
 

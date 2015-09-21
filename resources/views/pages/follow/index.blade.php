@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ trans('user.follow.index.title', ['user' => $user->name]) }}
+    {{ trans('follow.index.title', ['user' => $user->name]) }}
 @stop
 
 @section('navbar.bottom')
@@ -34,7 +34,7 @@
                 $follow->followable->type,
                 $follow->followable->user
             ]),
-            'text' => trans('user.follow.index.row.text', [
+            'text' => trans('follow.index.row.text', [
                 'user' => view('component.user.link', ['user' => $follow->followable->user]),
                 'created_at' => view('component.date.long', ['date' => $follow->followable->created_at])
             ])
