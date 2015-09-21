@@ -16,6 +16,7 @@
 
 <p>Yet notwithstanding it is only a record of a <a href="https://en.wikipedia.org/wiki/Picnic">pic-nic</a>, it has a purpose, which is to suggest to the reader how he would be likely to see Europe and the East if he looked at them with his own eyes instead of the eyes of those who traveled in those countries  <em>before</em> him. I make small pretense of showing anyone how he ought to look at objects of interest beyond the sea — <strong>other books</strong> do that, and therefore, even if I were competent to do it, there is no need.</p>
 
+
 <mark>Headings</mark>
 
 <h2>Heading 2</h2>
@@ -26,6 +27,33 @@
 
 <h4>Heading 4</h4>
 <p>Heading 4 is used for subheadings</p>
+
+
+<mark>Placeholder and separators</mark>
+
+<p>Placeholder is meant for prototyping components not yet created. It accepts height parameter for specifying component height in pixels.</p>
+
+<p>To seprate components from each other, <code>.utils-padding-bottom</code> and <code>.utils-border-bottom</code> wrapper classes are provided, they set bottom spacing between components.</p>
+
+<div class="utils-padding-bottom">
+
+    @include('component.placeholder', [
+        'text' => 'Placeholder',
+    ])
+
+</div>
+
+<div class="utils-border-bottom">
+
+    @include('component.placeholder', [
+        'text' => 'Placeholder separated with whitespace',
+    ])
+
+</div>
+
+@include('component.placeholder', [
+    'text' => 'Placeholder separated with border',
+])
 
 <mark>Menu</mark>
 
@@ -61,7 +89,7 @@
 
         <div class="col-xs-2">
 
-            <code>{{ $options2 }} {{ $options1 }}</code>
+            <p><code>{{ $options2 }} {{ $options1 }}</code></p>
             
             <div class="row">
 
@@ -118,7 +146,7 @@
 
         <div class="col-xs-2">
             
-            <code>{{ $options }}</code>
+            <p><code>{{ $options }}</code></p>
 
             @include('component.user.image', [
                 'image' => \App\User::orderByRaw('RAND()')
@@ -139,7 +167,7 @@
 
 @foreach(['(none)', '-narrow', '-small', '-narrow -small'] as $options) 
 
-<code>{{ $options }}</code>
+<p><code>{{ $options }}</code></p>
 
 @include('component.row', [
     'image' => \App\User::orderByRaw('RAND()')->first()->imagePreset(),
@@ -177,7 +205,7 @@
 
     <div class="col-sm-3">
         
-        <code>{{ $options }}</code>
+        <p><code>{{ $options }}</code></p>
 
         @include('component.card', [
             'image' => \App\Content::whereType('photo')
@@ -201,7 +229,7 @@
 
     <div class="col-sm-3">
         
-        <code>{{ $options }}</code>
+        <br /><p><code>{{ $options }}</code></p>
 
         @include('component.card', [
             'image' => \App\Content::whereType('photo')
