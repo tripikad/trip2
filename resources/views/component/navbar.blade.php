@@ -20,13 +20,10 @@
   
             <ul class="nav navbar-nav">
     
-                @foreach (config('menu.header') as $key => $data)
-                
-                    <li>
-                        <a href="{{ $data['url'] }}">{{ trans("menu.header.$key") }}</a>
-                    </li>
-                
-                @endforeach
+                @include('component.menu', [
+                    'menu' => 'header',
+                    'items' => config('menu.header')
+                ])
     
             </ul>
 

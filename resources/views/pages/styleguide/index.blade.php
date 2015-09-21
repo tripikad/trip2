@@ -109,13 +109,13 @@
     'menu' => 'styleguide',
     'items' => [
         'first' => [
-            'url' => ''
+            'route' => ''
         ],
         'second' => [
-            'url' => ''
+            'route' => ''
         ],
         'third' => [
-            'url' => ''
+            'route' => ''
         ]
     ]
 ])
