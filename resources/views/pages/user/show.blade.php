@@ -45,7 +45,7 @@
     @if (\Auth::check() && \Auth::user()->id !== $user->id)
 
         @include('component.button', [ 
-            'route' => route('user.show.messages.with', [
+            'route' => route('message.index.with', [
                 \Auth::user(),
                 $user,
                 '#message'

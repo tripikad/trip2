@@ -149,15 +149,25 @@ class UserController extends Controller
             ->with('info', trans('user.update.info'));
     }
 
+<<<<<<< HEAD
     public function showMessages($id)
     {
         $user = User::findorFail($id);
      
         return View::make('pages.user.message.index')
+=======
+    public function showFollows($id)
+    {
+        $user = User::with('follows')
+            ->findorFail($id);
+     
+        return View::make('pages.user.follow.index')
+>>>>>>> master
             ->with('user', $user)
             ->render();
     }
 
+<<<<<<< HEAD
     public function showMessagesWith($user_id, $user_id_with)
     {
         $user = User::findorFail($user_id);
@@ -174,4 +184,6 @@ class UserController extends Controller
             ->render();
     }
 
+=======
+>>>>>>> master
 }

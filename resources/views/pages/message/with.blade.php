@@ -2,7 +2,7 @@
 
 @section('title')
 
-    {{ trans('user.show.messages.with.title', ['user' => $user->name, 'user_with' => $user_with->name]) }}
+    {{ trans('message.index.with.title', ['user' => $user->name, 'user_with' => $user_with->name]) }}
 
 @stop
 
@@ -35,7 +35,7 @@
 
     @include('component.row', [
         'image' => $message->fromUser->imagePreset(),
-        'text' => trans('user.show.messages.with.row.text', [
+        'text' => trans('message.index.with.row.text', [
             'user' => $message->fromUser->name,
             'created_at' => view('component.date.long', ['date' => $message->created_at])
         ]),
