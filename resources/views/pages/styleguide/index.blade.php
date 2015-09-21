@@ -193,11 +193,11 @@
         <div class="col-xs-2">
             
             <p><code>{{ $options }}</code></p>
-
+            
             @include('component.user.image', [
-                'image' => \App\User::orderByRaw('RAND()')
-                    ->first()
-                    ->imagePreset(),
+                'image' => \App\User::orderByRaw('RAND()')->first()
+                    ? \App\User::orderByRaw('RAND()')->first()->imagePreset()
+                    : null,
                 'options' => $options,
             ])
 
@@ -216,7 +216,9 @@
 <p><code>{{ $options }}</code></p>
 
 @include('component.row', [
-    'image' => \App\User::orderByRaw('RAND()')->first()->imagePreset(),
+    'image' => \App\User::orderByRaw('RAND()')->first()
+        ? \App\User::orderByRaw('RAND()')->first()->imagePreset()
+        : null,
     'image_link' => '',
     'preheading' => view('component.label', [
         'title' => 'Label'
@@ -257,7 +259,11 @@
             'image' => \App\Content::whereType('photo')
                 ->orderByRaw('RAND()')
                 ->first()
-                ->imagePreset(),
+            ? \App\Content::whereType('photo')
+                ->orderByRaw('RAND()')
+                ->first()
+                ->imagePreset()
+            : null,
             'title' => 'Here is title',
             'text' => 'Here is subtitle',
             'options' => $options,
@@ -281,7 +287,11 @@
             'image' => \App\Content::whereType('photo')
                 ->orderByRaw('RAND()')
                 ->first()
-                ->imagePreset(),
+            ? \App\Content::whereType('photo')
+                ->orderByRaw('RAND()')
+                ->first()
+                ->imagePreset()
+            : null,
             'title' => 'Here is title',
             'text' => 'Here is subtitle',
             'options' => $options,
