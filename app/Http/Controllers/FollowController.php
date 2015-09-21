@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
+use View;
+
+use App\User;
+
 class FollowController extends Controller
 {
 

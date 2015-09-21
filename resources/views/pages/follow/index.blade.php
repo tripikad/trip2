@@ -32,7 +32,7 @@
             'heading' => $follow->followable->title,
             'heading_link' => route('content.show', [
                 $follow->followable->type,
-                $follow->followable->user
+                $follow->followable
             ]),
             'text' => trans('follow.index.row.text', [
                 'user' => view('component.user.link', ['user' => $follow->followable->user]),
