@@ -55,6 +55,52 @@
     'text' => 'Placeholder separated with border',
 ])
 
+<mark>Grid</mark>
+
+<p>A standard Bootstrap 12-column grid is used. Column spacing is custom, represented as <code>$spacer</code> variable in stylesheets.</p>
+
+<div class="row">
+    
+    @for ($i = 1; $i < 13; $i++)
+
+        <div class="col-sm-1">
+
+            @include('component.placeholder', [
+                'text' => 'Col' . $i,
+            ])
+
+        </div>
+    @endfor
+
+</div>
+
+<br />
+
+<p>When columns contain uneven amount of content, use <code>.utils-equal-height</code> on <code>.row</code> element for equal height columns.</p>
+
+@foreach(['', 'utils-equal-height'] as $options) 
+
+<div class="row {{ $options }}">
+    
+    @for ($i = 1; $i < 13; $i++)
+
+        <div class="col-sm-1" style="background: #eee;">
+        
+            @include('component.placeholder', [
+                'text' => ['Some', 'Some text', 'Some more text'][rand(0,2)],
+            ])
+
+        </div>
+
+    @endfor
+
+</div>
+
+<br />
+
+@endforeach
+
+
 <mark>Menu</mark>
 
 <p>Horizontal menus</p>
