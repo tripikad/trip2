@@ -18,7 +18,7 @@ class MessageController extends Controller
     {
         $user = User::findorFail($user_id);
      
-        return View::make('pages.user.message.index')
+        return View::make('pages.message.index')
             ->with('user', $user)
             ->render();
     }
@@ -32,7 +32,7 @@ class MessageController extends Controller
 
         Message::whereIn('id', $messageIds)->update(['read' => 1]);
 
-        return View::make('pages.user.message.with')
+        return View::make('pages.message.with')
             ->with('user', $user)
             ->with('user_with', $user_with)
             ->with('messages', $user->messagesWith($user_id_with)->all())

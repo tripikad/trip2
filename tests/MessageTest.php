@@ -132,13 +132,13 @@ class MessageTest extends TestCase
         $user2 = factory(App\User::class)->create(['verified' => true]);
         $user3 = factory(App\User::class)->create(['verified' => true]);
         
-        $message1 = factory(Message::class)->create([
+        factory(Message::class)->create([
             'user_id_from' => $user1->id,
             'user_id_to' => $user3->id,
             'body' => 'Hello'
         ]);
 
-        $message2 = factory(Message::class)->create([
+        factory(Message::class)->create([
             'user_id_from' => $user2->id,
             'user_id_to' => $user3->id,
             'body' => 'World'
@@ -146,15 +146,17 @@ class MessageTest extends TestCase
 
         $this->actingAs($user3)
             ->visit("user/$user3->id/messages")
-//          ->seeLink('Hello1')
+            ->seeLink('Hello')
+            ->see($user1->name)
             ->seeLink('World')
             ->see($user2->name)
-            ->click('World')
-            ->seePageIs("user/$user3->id/messages/$user2->id")
-            ->see('World')
-            ->see($user2->name)
-            ->dontSee('Hello')
-            ->dontSee($user1->name);
+            ->click('Hello')
+            ->seePageIs("user/$user3->id/messages/$user1->id")
+            ->see('Hello')
+            ->see($user1->name)
+            ->dontSee('World')
+            ->dontSee($user2->name);
 
     }
+
 }
