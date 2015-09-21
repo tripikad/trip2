@@ -3,7 +3,7 @@
 return [
 
     'show.menu.activity' => 'Activity',
-    'show.menu.messages' => 'Messages',
+    'show.menu.message' => 'Messages',
     'show.menu.follows' => 'Follows',
 
     'show.joined' => 'Joined :created_at',
@@ -51,11 +51,5 @@ return [
     'show.contact_twitter.title' => 'Twitter',
     'show.contact_instagram.title' => 'Instagram',
     'show.contact_homepage.title' => 'Homepage',
-
-    'show.messages.index.title' => ':user messages',
-    'show.messages.index.row.text' => 'With :user, last message at :created_at',
-
-    'show.messages.with.title' => ':user messages with :user_with',
-    'show.messages.with.row.text' => 'By :user at :created_at',
 
 ];

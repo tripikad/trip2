@@ -86,19 +86,18 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     put('{id}', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@update', 'as' => 'update']);
 
-    get('{id}/messages/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'UserController@showMessagesWith', 'as' => 'show.messages.with']);
-
-    get('{id}/messages', ['middleware' => 'role:superuser,userowner', 'uses' => 'UserController@showMessages', 'as' => 'show.messages']);
-
     get('{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@showFollows', 'as' => 'show.follows']);
 
 });
 
-Route::group(['prefix' => 'message', 'as' => 'message.'], function () {
+// Messages
 
-    post('{id}/to/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@store', 'as' => 'store']);
+get('user/{id}/messages', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@index', 'as' => 'message.index']);
 
-});
+get('user/{id}/messages/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@indexWith', 'as' => 'message.index.with']);
+
+post('message/{id}/to/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@store', 'as' => 'message.store']);
+
 
 // Images
 
