@@ -6,12 +6,38 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Mail;
+use View;
 
 use App\Message;
 use App\User;
 
 class MessageController extends Controller
 {
+
+    public function index($user_id)
+    {
+        $user = User::findorFail($user_id);
+     
+        return View::make('pages.user.message.index')
+            ->with('user', $user)
+            ->render();
+    }
+
+    public function indexWith($user_id, $user_id_with)
+    {
+        $user = User::findorFail($user_id);
+        $user_with = User::findorFail($user_id_with);
+     
+        $messageIds = $user->messagesWith($user_id_with)->keyBy('id')->keys()->toArray();
+
+        Message::whereIn('id', $messageIds)->update(['read' => 1]);
+
+        return View::make('pages.user.message.with')
+            ->with('user', $user)
+            ->with('user_with', $user_with)
+            ->with('messages', $user->messagesWith($user_id_with)->all())
+            ->render();
+    }
 
     public function store(Request $request, $user_id_from, $user_id_to)
     {

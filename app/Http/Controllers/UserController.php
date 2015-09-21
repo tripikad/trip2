@@ -149,31 +149,6 @@ class UserController extends Controller
             ->with('info', trans('user.update.info'));
     }
 
-    public function showMessages($id)
-    {
-        $user = User::findorFail($id);
-     
-        return View::make('pages.user.message.index')
-            ->with('user', $user)
-            ->render();
-    }
-
-    public function showMessagesWith($user_id, $user_id_with)
-    {
-        $user = User::findorFail($user_id);
-        $user_with = User::findorFail($user_id_with);
-     
-        $messageIds = $user->messagesWith($user_id_with)->keyBy('id')->keys()->toArray();
-
-        Message::whereIn('id', $messageIds)->update(['read' => 1]);
-
-        return View::make('pages.user.message.with')
-            ->with('user', $user)
-            ->with('user_with', $user_with)
-            ->with('messages', $user->messagesWith($user_id_with)->all())
-            ->render();
-    }
-
     public function showFollows($id)
     {
         $user = User::with('follows')
