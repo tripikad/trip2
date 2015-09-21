@@ -13,29 +13,55 @@ class FollowTest extends TestCase
 
     use DatabaseTransactions;
 
-    public function test_user_can_follow_content()
+    protected $user1;
+    protected $user2;
+
+    protected $content;
+
+    protected $follow;
+
+    public function setUp()
     {
+
+        parent::setUp();
         
-        $user1 = factory(App\User::class)->create(['verified' => true]);
-        $user2 = factory(App\User::class)->create(['verified' => true]);
+        $this->user1 = factory(App\User::class)->create(['verified' => true]);
+        $this->user2 = factory(App\User::class)->create(['verified' => true]);
         
-        $content = factory(Content::class)->create([
-            'user_id' => $user1->id,
+        $this->content = factory(Content::class)->create([
+            'user_id' => $this->user1->id,
             'title' => 'Hello'
         ]);
 
-        $follow = factory(Follow::class)->create([
-            'user_id' => $user2->id,
-            'followable_id' => $content->id
+        $this->follow = factory(Follow::class)->create([
+            'user_id' => $this->user2->id,
+            'followable_id' => $this->content->id
         ]);
 
-        $this->actingAs($user2)
-            ->visit("user/$user2->id")
+    }
+
+    public function test_unlogged_user_can_not_access_follows()
+    {
+
+        $this->visit('user/' . $this->user2->id)
+            ->dontSee(trans('user.show.menu.follow'));
+
+        $response = $this->call('GET', 'user/' . $this->user2->id . '/follows');
+        $this->assertEquals(401, $response->status());
+
+    }
+
+    public function test_registered_user_can_follow_content()
+    {
+
+        $this->actingAs($this->user2)
+            ->visit('user/' . $this->user2->id)
             ->seeLink(trans('user.show.menu.follow'))
             ->click(trans('user.show.menu.follow'))
+            ->seePageIs('user/' . $this->user2->id . '/follows')
             ->see('Hello')
             ->click('Hello')
-            ->seePageIs("content/$content->type/$content->id");
+            ->seePageIs('content/' . $this->content->type . '/' . $this->content->id);
 
     }
 
