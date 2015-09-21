@@ -1,29 +1,33 @@
 .component-row {
 
-    > div > .content {
+    > .row > [class*="col-"] {
 
         display: flex;
         flex-direction: column;
         justify-content: center;
 
-        > div > .title > a > h3,
-        > div > .title > span {
+        > .content {
 
-            display: inline-block;
+            > .title > a > h3,
+            > .title > span {
+
+                display: inline-block;
+            
+            }
         
-        }
-    
-        > div > .text {
+            > .text {
 
-            display: inline-block;
-            opacity: 0.7;
-                    
-        }
+                display: inline-block;
+                opacity: 0.7;
+                        
+            }
 
-        > div > .actions {
+            > .actions {
 
-            display: inline-block;
-        
+                display: inline-block;
+            
+            }
+
         }
     
     }
