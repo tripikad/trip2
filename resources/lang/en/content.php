@@ -247,7 +247,4 @@ return [
     'static.edit.field.body.title' => 'Body',
     'static.edit.field.body.help' => '',
 
-    // Footer
-    'footer.copyright' => '&copy; Copyright 1998-:current_year. Navigating the rough waters of travelling since 1998'
-
 ];

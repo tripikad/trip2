@@ -1,5 +1,7 @@
 <div class="component-footer">
+    
     <div class="menu utils-border-bottom">
+        
         <ul class="list-inline">
 
             @foreach (config('menu.footer') as $key => $data)
@@ -17,8 +19,13 @@
             @endforeach
 
         </ul>
+
     </div>
+
     <div class="copyright">
-        {{ trans('content.footer.copyright', ['current_year' =>  \Carbon\Carbon::now()->year]) }}
+     
+        {{ trans('site.footer.copyright', ['current_year' =>  \Carbon\Carbon::now()->year]) }}
+    
     </div>
+
 </div>
