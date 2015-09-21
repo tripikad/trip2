@@ -8,11 +8,7 @@
     
     <li>
         <a href="{{ route('message.index', [$user]) }}">
-<<<<<<< HEAD
             {{ trans('user.show.menu.messages') }}
-=======
-            {{ trans('user.show.menu.message') }}
->>>>>>> master
         </a>
     </li>
     
