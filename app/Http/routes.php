@@ -86,8 +86,6 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     put('{id}', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@update', 'as' => 'update']);
 
-    get('{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@showFollows', 'as' => 'show.follows']);
-
 });
 
 // Messages
@@ -97,6 +95,11 @@ get('user/{id}/messages', ['middleware' => 'role:superuser,userowner', 'uses' =>
 get('user/{id}/messages/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@indexWith', 'as' => 'message.index.with']);
 
 post('message/{id}/to/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@store', 'as' => 'message.store']);
+
+
+// Follows
+
+get('user/{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'FollowController@index', 'as' => 'follow.index']);
 
 
 // Images

@@ -13,8 +13,8 @@
     </li>
     
     <li>
-        <a href="{{ route('user.show.follows', [$user]) }}">
-            {{ trans('user.show.menu.follows') }}
+        <a href="{{ route('follow.index', [$user]) }}">
+            {{ trans('user.show.menu.follow') }}
         </a>
     </li>
 

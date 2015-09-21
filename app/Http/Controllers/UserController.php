@@ -149,14 +149,4 @@ class UserController extends Controller
             ->with('info', trans('user.update.info'));
     }
 
-    public function showFollows($id)
-    {
-        $user = User::with('follows')
-            ->findorFail($id);
-     
-        return View::make('pages.user.follow.index')
-            ->with('user', $user)
-            ->render();
-    }
-
 }
