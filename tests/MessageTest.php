@@ -33,7 +33,7 @@ class MessageTest extends TestCase
         $user2 = factory(App\User::class)->create();
         $user3 = factory(App\User::class)->create();
         
-        $message = factory(Message::class)->make([
+        $message = factory(Message::class)->create([
             'user_id_from' => $user1->id,
             'user_id_to' => $user2->id
         ]);
@@ -125,4 +125,36 @@ class MessageTest extends TestCase
 
     }
 
+    public function test_regular_user_can_receive_messages_from_different_senders()
+    {
+
+        $user1 = factory(App\User::class)->create(['verified' => true]);
+        $user2 = factory(App\User::class)->create(['verified' => true]);
+        $user3 = factory(App\User::class)->create(['verified' => true]);
+        
+        $message1 = factory(Message::class)->create([
+            'user_id_from' => $user1->id,
+            'user_id_to' => $user3->id,
+            'body' => 'Hello'
+        ]);
+
+        $message2 = factory(Message::class)->create([
+            'user_id_from' => $user2->id,
+            'user_id_to' => $user3->id,
+            'body' => 'World'
+        ]);
+
+        $this->actingAs($user3)
+            ->visit("user/$user3->id/messages")
+//          ->seeLink('Hello1')
+            ->seeLink('World')
+            ->see($user2->name)
+            ->click('World')
+            ->seePageIs("user/$user3->id/messages/$user2->id")
+            ->see('World')
+            ->see($user2->name)
+            ->dontSee('Hello')
+            ->dontSee($user1->name);
+
+    }
 }
