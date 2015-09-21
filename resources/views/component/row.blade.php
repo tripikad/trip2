@@ -1,6 +1,6 @@
 <div class="component-row {{ $options or '' }}">
 
-    <div class="row">
+    <div class="row utils-equal-height">
 
         <div class="
             @if (isset($options) && strpos($options, '-narrow') !== false) 
