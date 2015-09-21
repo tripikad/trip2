@@ -51,6 +51,18 @@ class FollowTest extends TestCase
 
     }
 
+    public function test_user_can_not_access_other_user_follows()
+    {
+
+        $this->actingAs($this->user1)
+            ->visit('user/' . $this->user2->id)
+            ->dontSee(trans('user.show.menu.follow'));
+
+        $response = $this->call('GET', 'user/' . $this->user2->id . '/follows');
+        $this->assertEquals(401, $response->status());
+
+    }
+
     public function test_registered_user_can_follow_content()
     {
 
