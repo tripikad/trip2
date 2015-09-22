@@ -16,7 +16,8 @@
                     'activity' => ['route' => route('user.show', [$user])],
                     'message' => ['route' => route('message.index', [$user])],
                     'follow' => ['route' => route('follow.index', [$user])]
-                ]
+                ],
+                'options' => 'text-center'
             ])
 
         </div>
