@@ -58,7 +58,8 @@ $factory->define(Content::class, function ($faker) {
         'user_id' => 1,
         'title' => $faker->sentence(),
         'body' => $faker->paragraph(),
-        'type' => 'forum'
+        'type' => 'forum',
+        'status' => 1
     ];
 
 });

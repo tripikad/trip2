@@ -31,6 +31,6 @@ return [
 
     'admin.internal' => 'Internal forum',
     'admin.image' => 'All images',
-    'admin.unpublished' => 'Unpublished content',
+    'admin.content' => 'Unpublished content',
     
 ];

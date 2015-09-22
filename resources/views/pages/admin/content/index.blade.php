@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ trans("admin.unpublished.title") }}
+    {{ trans('admin.content.index.title') }}
 @stop
 
 @section('navbar.bottom')
