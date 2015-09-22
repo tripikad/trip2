@@ -102,9 +102,9 @@ post('message/{id}/to/{id2}', ['middleware' => 'role:superuser,userowner', 'uses
 get('user/{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'FollowController@index', 'as' => 'follow.index']);
 
 
-// Images
+// Admin
 
-get('admin/image', ['middleware' => 'role:admin', 'uses' => 'ImageController@index', 'as' => 'image.index']);
+get('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageIndex', 'as' => 'admin.image.index']);
 
 // Ad debug
 
