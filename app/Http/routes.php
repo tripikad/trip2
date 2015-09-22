@@ -56,7 +56,6 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
 });
 
-get('/admin/content/unpublished', ['middleware' => 'role:admin', 'uses' => 'ContentController@unpublishedIndex', 'as' => 'admin.content.unpublished.index']);
 
 
 // Comments
@@ -105,6 +104,8 @@ get('user/{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'Fol
 // Admin
 
 get('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageIndex', 'as' => 'admin.image.index']);
+
+get('admin/content', ['middleware' => 'role:admin', 'uses' => 'AdminController@contentIndex', 'as' => 'admin.content.index']);
 
 // Ad debug
 

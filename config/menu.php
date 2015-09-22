@@ -78,8 +78,8 @@
 	        'image' => [
 	            'route' => '/admin/image',
 	        ],
-	        'unpublished' => [
-	            'route' => '/admin/content/unpublished',
+	        'content' => [
+	            'route' => '/admin/content',
 	        ],    	      
 	    ], 
 

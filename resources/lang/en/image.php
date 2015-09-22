@@ -2,6 +2,4 @@
 
 return [
     
-    'index.title' => 'Images',
-
 ];
