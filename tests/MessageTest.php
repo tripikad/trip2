@@ -40,7 +40,7 @@ class MessageTest extends TestCase
 
         $this->actingAs($user3)
             ->visit("user/$user1->id")
-            ->dontSeeLink(trans('user.show.menu.messages'));
+            ->dontSeeLink(trans('menu.user.message'));
 
         $response = $this
             ->actingAs($user3)
@@ -82,7 +82,7 @@ class MessageTest extends TestCase
 
         $this->actingAs($user1)
             ->visit("user/$user1->id")
-            ->click(trans('user.show.menu.message'))
+            ->click(trans('menu.user.message'))
             ->seePageIs("user/$user1->id/messages")
             ->seeLink('Hello')
             ->seeLink($user2->name)
@@ -93,7 +93,7 @@ class MessageTest extends TestCase
 
         $this->actingAs($user2)
             ->visit("user/$user2->id")
-            ->click(trans('user.show.menu.message'))
+            ->click(trans('menu.user.message'))
             ->seePageIs("user/$user2->id/messages")
             ->seeLink('Hello')
             ->see($user1->name)
