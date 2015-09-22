@@ -401,6 +401,12 @@ class ConvertBase extends Command
 
                 $model->save();
         
+                $node = $this->getNode($nid);
+                
+                \App\Content::findOrFail($nid)->update([
+                    'updated_at' => \Carbon\Carbon::createFromTimeStamp($node->last_comment)
+                ]); 
+
                 $this->convertUser($user_id);
                 
                 $this->convertFlags($comment->cid, 'App\Comment', 'comment');
@@ -587,7 +593,7 @@ class ConvertBase extends Command
 
         $model->url = $this->cleanUrl($url);
 
-        $model->save();
+        $model->save(['timestamps' => false]);
     
     }
 
@@ -607,7 +613,7 @@ class ConvertBase extends Command
         } else {
 
             $model->image = $filename;
-            $model->save();
+            $model->save(['timestamps' => false]);
         
         }
 
@@ -674,7 +680,7 @@ class ConvertBase extends Command
             } else {
 
                 $model->image = $filename;
-                $model->save();
+                $model->save(['timestamps' => false]);
             
             }
 
