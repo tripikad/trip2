@@ -145,7 +145,6 @@ return [
     // Forum
 
     'forum.index.title' => 'General forum',
-    'forum.index.row.text' => ':user :created_at latest comment at :updated_at:destinations:topics',
     'forum.create.title' => 'Add post',
 
     'forum.edit.field.title.title' => 'Title',
@@ -163,7 +162,6 @@ return [
     // Expat
 
     'expat.index.title' => 'Expat forum',
-    'expat.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :topics',
     'expat.create.title' => 'Add post',
 
     'expat.edit.field.title.title' => 'Title',
