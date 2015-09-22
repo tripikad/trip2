@@ -17,7 +17,6 @@ return [
     'field.image.title' => 'Select image',
     'field.image.selected.title' => 'New image selected',
     
-    'index.filter' => 'Filters ▾',
     'index.filter.field.destination.title' => 'All',
     'index.filter.field.topic.title' => 'All',
     'index.filter.submit.title' => 'Filter',
