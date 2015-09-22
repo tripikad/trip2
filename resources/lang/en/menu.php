@@ -29,6 +29,10 @@ return [
     'forum.expat' => 'Expat forum',
     'forum.buysell' => 'Buying and selling',
 
+    'user.activity' => 'Activity',
+    'user.message' => 'Messages',
+    'user.follow' => 'Follows',
+
     'admin.internal' => 'Internal forum',
     'admin.image' => 'All images',
     'admin.content' => 'Unpublished content',
