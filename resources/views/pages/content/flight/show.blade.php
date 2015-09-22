@@ -27,7 +27,7 @@
     @endif
 
     @include('component.row', [
-        'text' => view("component.content.text", ['content' => $content]),
+        'description' => view('component.content.description', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
         'extra' => view('component.flags', ['flags' => $content->getFlags()])
     ])

@@ -41,7 +41,7 @@
             'image_link' => route('user.show', [$content->user]),
             'heading' => $content->title,
             'heading_link' => route('content.show', [$content->type, $content->id]),
-            'text' => view("component.content.text", ['content' => $content]),
+            'description' => view('component.content.description', ['content' => $content]),
             'extra' => view('component.number', [
                 'number' => count($content->comments), 
                 'options' => '-border'

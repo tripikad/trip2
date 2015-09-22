@@ -64,7 +64,7 @@
 
                 </div>
 
-                @if (isset($text)) <div class="text">{!! $text !!}</div> @endif
+                @if (isset($description)) <div class="text">{!! $description !!}</div> @endif
 
                 @if (isset($actions)) <div class="actions">{!! $actions !!}</div> @endif
 

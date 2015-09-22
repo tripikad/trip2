@@ -233,7 +233,7 @@
             ['route' => '', 'title' => 'This is action'],
         ]
     ]),
-    'text' => 'This is the subheading',
+    'description' => 'This is the description',
     'extra' => 'Extra',
     'body' => 'This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition, it would have about it that gravity, that profundity, and that impressive incomprehensibility which are so proper to works of that kind, and withal so attractive.',
     'options' => $options

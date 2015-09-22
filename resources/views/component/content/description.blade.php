@@ -1,4 +1,4 @@
-<ul class="component-text list-inline">
+<ul class="component-content-description list-inline">
 
     <li>
     

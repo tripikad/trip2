@@ -31,7 +31,7 @@
                 'image_link' => route('user.show', [$message->withUser]),
                 'heading' => $message->title,
                 'heading_link' => route('message.index.with', [$user, $message->withUser]),
-                'text' => trans('message.index.row.text', [
+                'description' => trans('message.index.row.description', [
                     'user' => view('component.user.link', ['user' => $message->withUser]),
                     'created_at' => view('component.date.long', ['date' => $message->created_at])
                 ]),

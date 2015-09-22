@@ -28,10 +28,7 @@
             'image_link' => route('user.show', [$content->user]),
             'heading' => $content->title,
             'heading_link' => route('content.show', [$content->type, $content->id]),
-            'text' => trans("admin.unpublished.row.text", [
-                'type' => $content->type,
-                'created_at' => view('component.date.relative', ['date' => $content->created_at]),
-            ]),
+            'description' => view('component.content.description', ['content' => $content])
         ])
         
         </div>

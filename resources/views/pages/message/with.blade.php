@@ -35,7 +35,7 @@
 
     @include('component.row', [
         'image' => $message->fromUser->imagePreset(),
-        'text' => trans('message.index.with.row.text', [
+        'description' => trans('message.index.with.row.description', [
             'user' => $message->fromUser->name,
             'created_at' => view('component.date.long', ['date' => $message->created_at])
         ]),
