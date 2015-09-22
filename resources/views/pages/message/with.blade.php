@@ -12,8 +12,16 @@
         
         <div class="utils-border-bottom">
             
-            @include('component.user.menu', ['user' => $user])
-        
+            @include('component.menu', [
+                'menu' => 'user',
+                'items' => [
+                    'activity' => ['route' => route('user.show', [$user])],
+                    'message' => ['route' => route('message.index', [$user])],
+                    'follow' => ['route' => route('follow.index', [$user])]
+                ],
+                'options' => 'text-center'
+            ])
+                    
         </div>
 
     @endif

@@ -68,8 +68,8 @@ class FollowTest extends TestCase
 
         $this->actingAs($this->user2)
             ->visit('user/' . $this->user2->id)
-            ->seeLink(trans('user.show.menu.follow'))
-            ->click(trans('user.show.menu.follow'))
+            ->seeLink(trans('menu.user.follow'))
+            ->click(trans('menu.user.follow'))
             ->seePageIs('user/' . $this->user2->id . '/follows')
             ->see('Hello')
             ->click('Hello')

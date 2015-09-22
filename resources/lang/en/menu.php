@@ -10,10 +10,10 @@ return [
     'header.blogs' => 'Blogs',
     'header.offers' => 'Offers',
 
-    'header.register' => 'Register',
-    'header.login' => 'Login',
-    'header.admin' => 'Admin',
-    'header.logout' => 'Logout',
+    'auth.register' => 'Register',
+    'auth.login' => 'Login',
+    'auth.admin' => 'Admin',
+    'auth.logout' => 'Logout',
 
     'footer.about' => 'What is Trip.ee',
     'footer.contact' => 'Contact',
@@ -28,6 +28,10 @@ return [
     'forum.forum' => 'General forum',
     'forum.expat' => 'Expat forum',
     'forum.buysell' => 'Buying and selling',
+
+    'user.activity' => 'Activity',
+    'user.message' => 'Messages',
+    'user.follow' => 'Follows',
 
     'admin.internal' => 'Internal forum',
     'admin.image' => 'All images',
