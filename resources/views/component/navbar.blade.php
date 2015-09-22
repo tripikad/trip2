@@ -17,21 +17,52 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-  
+      
             <ul class="nav navbar-nav">
-    
+            
                 @include('component.menu', [
                     'menu' => 'header',
                     'items' => config('menu.header')
                 ])
-    
+            
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-            
-                @include('component.auth.menu')
-            
-            </ul>
+            @if(auth()->user())
+
+                @include('component.menu', [
+                    'menu' => 'auth',
+                    'items' => [
+                        'user' => [
+                            'route' => route('user.show', [auth()->user()]),
+                            'title' =>  auth()->user()->name
+                        ],
+                        'admin' => [
+                            'route' => route('content.index', ['internal'])
+                        ],
+                        'logout' => [
+                            'route' => route('login.logout'),
+                        ],
+
+                    ],
+                    'options' => 'nav navbar-nav navbar-right'
+                ])
+
+            @else
+
+                @include('component.menu', [
+                    'menu' => 'auth',
+                    'items' => [
+                        'register' => [
+                            'route' => route('register.form'),
+                        ],
+                        'login' => [
+                            'route' => route('login.form')
+                        ],
+                    ],
+                    'options' => 'nav navbar-nav navbar-right'
+                ])
+
+            @endif
 
         </div>
 

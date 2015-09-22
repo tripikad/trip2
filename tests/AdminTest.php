@@ -40,8 +40,8 @@ class AdminTest extends TestCase
 
         $this->actingAs($user1)
             ->visit('user/' . $user1->id)
-            ->seeLink(trans('menu.header.admin'))
-            ->click(trans('menu.header.admin'))
+            ->seeLink(trans('menu.auth.admin'))
+            ->click(trans('menu.auth.admin'))
             ->seeLink(trans('menu.admin.image'))
             ->click(trans('menu.admin.image'))
             ->seePageIs('admin/image')
@@ -93,8 +93,8 @@ class AdminTest extends TestCase
 
         $this->actingAs($user1)
             ->visit('user/' . $user1->id)
-            ->seeLink(trans('menu.header.admin'))
-            ->click(trans('menu.header.admin'))
+            ->seeLink(trans('menu.auth.admin'))
+            ->click(trans('menu.auth.admin'))
             ->seeLink(trans('menu.admin.content'))
             ->click(trans('menu.admin.content'))
             ->seePageIs('admin/content')
@@ -148,8 +148,8 @@ class AdminTest extends TestCase
 
         $this->actingAs($user1)
             ->visit('user/' . $user1->id)
-            ->seeLink(trans('menu.header.admin'))
-            ->click(trans('menu.header.admin'))
+            ->seeLink(trans('menu.auth.admin'))
+            ->click(trans('menu.auth.admin'))
             ->seePageIs('content/internal')
             ->see(trans('content.internal.index.title'))
             ->seeLink('Hello internal')
