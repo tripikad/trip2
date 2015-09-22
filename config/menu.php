@@ -28,7 +28,7 @@
 	    ],
 
 	    'footer' => [
-	    	'trip_ee' => [
+	    	'about' => [
 	            'route' => '/content/static/1534',
 	        ],
 	        'contact' => [

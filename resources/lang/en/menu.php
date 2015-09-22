@@ -15,7 +15,7 @@ return [
     'header.admin' => 'Admin',
     'header.logout' => 'Logout',
 
-    'footer.trip_ee' => 'What is Trip.ee',
+    'footer.about' => 'What is Trip.ee',
     'footer.contact' => 'Contact',
     'footer.eula' => 'EULA',
     'footer.advertising' => 'Advertising',
