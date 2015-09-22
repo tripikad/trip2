@@ -112,7 +112,7 @@ class AdminTest extends TestCase
         // Unlogged user
 
         $response = $this->call('GET', 'content/internal');
-        // $this->assertEquals(401, $response->status());
+        $this->assertEquals(401, $response->status());
 
         // Regular user
 
@@ -123,7 +123,7 @@ class AdminTest extends TestCase
 
         $response = $this->actingAs($user1)
             ->call('GET', 'content/internal');
-        // $this->assertEquals(401, $response->status());
+        $this->assertEquals(401, $response->status());
 
     }
 
