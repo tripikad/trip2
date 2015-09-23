@@ -13,40 +13,15 @@ class FollowTest extends TestCase
 
     use DatabaseTransactions;
 
-    protected $user1;
-    protected $user2;
-
-    protected $content;
-
-    protected $follow;
-
-    public function setUp()
-    {
-
-        parent::setUp();
-        
-        $this->user1 = factory(App\User::class)->create(['verified' => true]);
-        $this->user2 = factory(App\User::class)->create(['verified' => true]);
-        
-        $this->content = factory(Content::class)->create([
-            'user_id' => $this->user1->id,
-            'title' => 'Hello'
-        ]);
-
-        $this->follow = factory(Follow::class)->create([
-            'user_id' => $this->user2->id,
-            'followable_id' => $this->content->id
-        ]);
-
-    }
-
     public function test_unlogged_user_can_not_access_follows()
     {
 
-        $this->visit('user/' . $this->user2->id)
+        $user1 = factory(App\User::class)->create(['verified' => true]);
+        
+        $this->visit("user/$user1->id")
             ->dontSee(trans('user.show.menu.follow'));
 
-        $response = $this->call('GET', 'user/' . $this->user2->id . '/follows');
+        $response = $this->call('GET', "user/$user1->id/follows");
         $this->assertEquals(401, $response->status());
 
     }
@@ -54,26 +29,69 @@ class FollowTest extends TestCase
     public function test_user_can_not_access_other_user_follows()
     {
 
-        $this->actingAs($this->user1)
-            ->visit('user/' . $this->user2->id)
+        $user1 = factory(App\User::class)->create(['verified' => true]);
+        $user2 = factory(App\User::class)->create(['verified' => true]);
+
+        $this->actingAs($user2)
+            ->visit("user/$user1->id")
             ->dontSee(trans('user.show.menu.follow'));
 
-        $response = $this->call('GET', 'user/' . $this->user2->id . '/follows');
+        $response = $this->call('GET', "user/$user1->id/follows");
         $this->assertEquals(401, $response->status());
 
     }
 
-    public function test_registered_user_can_follow_content()
+    public function test_registered_user_can_follow_and_unfollow_content()
     {
 
-        $this->actingAs($this->user2)
-            ->visit('user/' . $this->user2->id)
-            ->seeLink(trans('menu.user.follow'))
+        $user1 = factory(App\User::class)->create(['verified' => true]);
+        $user2 = factory(App\User::class)->create(['verified' => true]);
+        
+        $content = factory(Content::class)->create([
+            'user_id' => $user1->id,
+            'title' => 'Hello'
+        ]);
+
+        // Follow a post
+
+        $this->actingAs($user2)
+            ->visit("content/$content->type/$content->id")
+            ->press(trans('content.action.follow.1.title'))
+            ->seePageIs("content/$content->type/$content->id")
+            ->see(trans('content.action.follow.1.info', ['title' => $content->title]))
+            ->seeInDatabase('follows', [
+                'user_id' => $user2->id, 
+                'followable_id' => $content->id,
+                'followable_type' => 'App\Content'
+            ]);
+
+        // See followed post
+
+        $this->actingAs($user2)
+            ->visit("user/$user2->id")
             ->click(trans('menu.user.follow'))
-            ->seePageIs('user/' . $this->user2->id . '/follows')
-            ->see('Hello')
+            ->seePageIs("user/$user2->id/follows")
             ->click('Hello')
-            ->seePageIs('content/' . $this->content->type . '/' . $this->content->id);
+            ->seePageIs("content/$content->type/$content->id");
+
+        // Unfollow post
+
+        $this->actingAs($user2)
+            ->visit("content/$content->type/$content->id")
+            ->press(trans('content.action.follow.0.title'))
+            ->seePageIs("content/$content->type/$content->id")
+            ->see(trans('content.action.follow.0.info', ['title' => $content->title]))
+            ->missingFromDatabase('follows', [
+                'user_id' => $user2->id, 
+                'followable_id' => $content->id,
+                'followable_type' => 'App\Content'
+            ]);
+
+        // Do not see unfollowed post
+
+        $this->actingAs($user2)
+            ->visit("user/$user2->id/follows")
+            ->dontSee('Hello');
 
     }
 
