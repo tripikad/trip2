@@ -98,7 +98,10 @@ post('message/{id}/to/{id2}', ['middleware' => 'role:superuser,userowner', 'uses
 
 // Follows
 
+
 get('user/{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'FollowController@index', 'as' => 'follow.index']);
+
+put('content/{type}/{id}/follow/{status}', ['middleware' => 'role:regular', 'uses' => 'FollowController@followContent', 'as' => 'follow.follow.content']);
 
 
 // Admin
