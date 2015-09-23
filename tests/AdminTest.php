@@ -9,6 +9,28 @@ class AdminTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function test_unlogged_or_regular_user_can_see_admin_menu()
+    {
+
+        $user1 = factory(App\User::class)->create([
+                'verified' => 'true',
+                'role' => 'regular'
+        ]);
+
+        // Unlogged user
+
+        $this->visit('/')
+            ->dontSee(trans('menu.auth.admin'));
+
+        // Regular user
+
+        $this->actingAs($user1)
+            ->visit('/')
+            ->dontSee(trans('menu.auth.admin'));
+
+
+    }
+
     public function test_unlogged_or_regular_user_can_not_see_images()
     {
 

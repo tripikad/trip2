@@ -12,7 +12,7 @@ return [
 
     'auth.register' => 'Register',
     'auth.login' => 'Login',
-    'auth.admin' => 'Admin',
+    'auth.admin' => 'Administer',
     'auth.logout' => 'Logout',
 
     'footer.about' => 'What is Trip.ee',
