@@ -53,7 +53,8 @@ class Comment extends Model
            
            $actions['status'] = [
                'title' => trans("comment.action.status.$this->status.title"),
-               'route' => route('comment.status', [$this, (1 - $this->status)])
+               'route' => route('comment.status', [$this, (1 - $this->status)]),
+               'method' => 'PUT'
            ];
            
        }

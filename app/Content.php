@@ -139,7 +139,8 @@ class Content extends Model
             
             $actions['status'] = [
                 'title' => trans("content.action.status.$this->status.title"),
-                'route' => route('content.status', [$this->type, $this, (1 - $this->status)])
+                'route' => route('content.status', [$this->type, $this, (1 - $this->status)]),
+                'method' => 'put'
             ];
             
         }

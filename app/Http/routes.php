@@ -50,7 +50,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
     put('{id}', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@update', 'as' => 'update']);
 
-    get('{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'ContentController@status', 'as' => 'status']);
+    put('{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'ContentController@status', 'as' => 'status']);
 
     post('/filter', ['middleware' => null, 'uses' => 'ContentController@filter', 'as' => 'filter']);
 
@@ -66,7 +66,7 @@ get('comment/{id}/edit', ['middleware' => 'role:admin,commentowner', 'uses' => '
 
 put('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' => 'CommentController@update', 'as' => 'comment.update']);
 
-get('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
+put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
 
 
 // Users
