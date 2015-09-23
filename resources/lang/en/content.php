@@ -8,6 +8,12 @@ return [
 
     'action.edit.title' => 'Edit',
 
+    'action.follow.1.title' => 'Follow',
+    'action.follow.0.title' => 'Unfollow',
+
+    'action.follow.1.info' => 'You are now following :title.',
+    'action.follow.0.info' => 'You unfollowed :title',
+    
     'action.status.1.title' => 'Unpublish',
     'action.status.0.title' => 'Publish',
     
