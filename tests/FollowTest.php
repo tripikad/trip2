@@ -26,6 +26,8 @@ class FollowTest extends TestCase
         $this->visit("user/$user1->id")
             ->dontSee(trans('user.show.menu.follow'));
 
+        // Return 401
+
         $this->visit("user/$user1->id/follows");
 
     }
@@ -44,6 +46,8 @@ class FollowTest extends TestCase
         $this->actingAs($user2)
             ->visit("user/$user1->id")
             ->dontSee(trans('user.show.menu.follow'));
+
+        // Return 401
 
         $this->visit("user/$user1->id/follows");
 

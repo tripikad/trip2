@@ -23,6 +23,8 @@ class MessageTest extends TestCase
         $this->visit("user/$user1->id")
             ->dontSee(trans('user.show.message.create'));
 
+        // Return 401
+
         $this->visit("user/$user1->id/messages")
             ->visit("user/$user1->id/messages/$user2->id");
 
@@ -48,6 +50,8 @@ class MessageTest extends TestCase
         $this->actingAs($user3)
             ->visit("user/$user1->id")
             ->dontSeeLink(trans('menu.user.message'));
+
+        // Return 401
 
         $this->actingAs($user3)
             ->visit("user/$user1->id/messages")
