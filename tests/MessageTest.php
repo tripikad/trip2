@@ -9,6 +9,11 @@ class MessageTest extends TestCase
 {
     use DatabaseTransactions;
 
+    /**
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Received status code [401]
+     */
+
     public function test_unlogged_user_can_not_see_messages()
     {
 
@@ -18,13 +23,17 @@ class MessageTest extends TestCase
         $this->visit("user/$user1->id")
             ->dontSee(trans('user.show.message.create'));
 
-        $response = $this->call('GET', "/user/$user1->id/messages");
-        $this->assertEquals(401, $response->status());
+        // Return 401
 
-        $response = $this->call('GET', "/user/$user1->id/messages/$user2->id");
-        $this->assertEquals(401, $response->status());
+        $this->visit("user/$user1->id/messages")
+            ->visit("user/$user1->id/messages/$user2->id");
 
     }
+
+    /**
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Received status code [401]
+     */
 
     public function test_regular_user_can_not_see_other_user_messages()
     {
@@ -42,15 +51,11 @@ class MessageTest extends TestCase
             ->visit("user/$user1->id")
             ->dontSeeLink(trans('menu.user.message'));
 
-        $response = $this
-            ->actingAs($user3)
-            ->call('GET', "user/$user1->id/messages");
-        $this->assertEquals(401, $response->status());
+        // Return 401
 
-        $response = $this
-            ->actingAs($user3)
-            ->call('GET', "user/$user1->id/messages/$user2->id");
-        $this->assertEquals(401, $response->status());
+        $this->actingAs($user3)
+            ->visit("user/$user1->id/messages")
+            ->visit("user/$user1->id/messages/$user2->id");
 
     }
 

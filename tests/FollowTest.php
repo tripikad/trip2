@@ -13,6 +13,11 @@ class FollowTest extends TestCase
 
     use DatabaseTransactions;
 
+    /**
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Received status code [401]
+     */
+
     public function test_unlogged_user_can_not_access_follows()
     {
 
@@ -21,10 +26,16 @@ class FollowTest extends TestCase
         $this->visit("user/$user1->id")
             ->dontSee(trans('user.show.menu.follow'));
 
-        $response = $this->call('GET', "user/$user1->id/follows");
-        $this->assertEquals(401, $response->status());
+        // Return 401
+
+        $this->visit("user/$user1->id/follows");
 
     }
+
+    /**
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Received status code [401]
+     */
 
     public function test_user_can_not_access_other_user_follows()
     {
@@ -36,8 +47,9 @@ class FollowTest extends TestCase
             ->visit("user/$user1->id")
             ->dontSee(trans('user.show.menu.follow'));
 
-        $response = $this->call('GET', "user/$user1->id/follows");
-        $this->assertEquals(401, $response->status());
+        // Return 401
+
+        $this->visit("user/$user1->id/follows");
 
     }
 
