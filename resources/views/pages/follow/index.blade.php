@@ -42,10 +42,9 @@
                 $follow->followable->type,
                 $follow->followable
             ]),
-            'text' => trans('follow.index.row.text', [
-                'user' => view('component.user.link', ['user' => $follow->followable->user]),
-                'created_at' => view('component.date.long', ['date' => $follow->followable->created_at])
-            ])
+            'description' => view('component.content.description', ['content' => $follow->followable]),
+            'actions' => view('component.actions', ['actions' => $follow->followable->getActions()]),
+
         ])
 
     </div>
