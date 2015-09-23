@@ -104,7 +104,7 @@ get('user/{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'Fol
 // Admin
 
 get('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageIndex', 'as' => 'admin.image.index']);
-
+post('admin/image', ['middleware' => 'role:admin', 'uses' => 'ImageController@store', 'as' => 'admin.image.store']);
 get('admin/content', ['middleware' => 'role:admin', 'uses' => 'AdminController@contentIndex', 'as' => 'admin.content.index']);
 
 // Ad debug
