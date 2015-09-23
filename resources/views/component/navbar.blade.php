@@ -27,7 +27,24 @@
             
             </ul>
 
-            @if(auth()->user())
+            @if(auth()->user() && ! auth()->user()->hasRole('admin'))
+
+                @include('component.menu', [
+                    'menu' => 'auth',
+                    'items' => [
+                        'user' => [
+                            'route' => route('user.show', [auth()->user()]),
+                            'title' =>  auth()->user()->name
+                        ],
+                        'logout' => [
+                            'route' => route('login.logout'),
+                        ],
+
+                    ],
+                    'options' => 'nav navbar-nav navbar-right'
+                ])
+
+            @elseif(auth()->user() && auth()->user()->hasRole('admin'))
 
                 @include('component.menu', [
                     'menu' => 'auth',
