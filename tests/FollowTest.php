@@ -13,28 +13,6 @@ class FollowTest extends TestCase
 
     use DatabaseTransactions;
 
-/*
-    public function setUp()
-    {
-
-        parent::setUp();
-        
-        $this->user1 = factory(App\User::class)->create(['verified' => true]);
-        $this->user2 = factory(App\User::class)->create(['verified' => true]);
-        
-        $this->content = factory(Content::class)->create([
-            'user_id' => $this->user1->id,
-            'title' => 'Hello'
-        ]);
-
-        $this->follow = factory(Follow::class)->create([
-            'user_id' => $this->user2->id,
-            'followable_id' => $this->content->id
-        ]);
-
-    }
-*/
-
     public function test_unlogged_user_can_not_access_follows()
     {
 
@@ -63,7 +41,7 @@ class FollowTest extends TestCase
 
     }
 
-    public function test_registered_user_can_follow_content()
+    public function test_registered_user_can_follow_and_unfollow_content()
     {
 
         $user1 = factory(App\User::class)->create(['verified' => true]);
@@ -81,7 +59,11 @@ class FollowTest extends TestCase
             ->press(trans('content.action.follow.1.title'))
             ->seePageIs("content/$content->type/$content->id")
             ->see(trans('content.action.follow.1.info', ['title' => $content->title]))
-            ->see(trans('content.action.follow.0.title'));
+            ->seeInDatabase('follows', [
+                'user_id' => $user2->id, 
+                'followable_id' => $content->id,
+                'followable_type' => 'App\Content'
+            ]);
 
         // See followed post
 
@@ -91,6 +73,25 @@ class FollowTest extends TestCase
             ->seePageIs("user/$user2->id/follows")
             ->click('Hello')
             ->seePageIs("content/$content->type/$content->id");
+
+        // Unfollow post
+
+        $this->actingAs($user2)
+            ->visit("content/$content->type/$content->id")
+            ->press(trans('content.action.follow.0.title'))
+            ->seePageIs("content/$content->type/$content->id")
+            ->see(trans('content.action.follow.0.info', ['title' => $content->title]))
+            ->missingFromDatabase('follows', [
+                'user_id' => $user2->id, 
+                'followable_id' => $content->id,
+                'followable_type' => 'App\Content'
+            ]);
+
+        // Do not see unfollowed post
+
+        $this->actingAs($user2)
+            ->visit("user/$user2->id/follows")
+            ->dontSee('Hello');
 
     }
 
