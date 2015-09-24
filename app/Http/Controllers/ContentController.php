@@ -259,20 +259,29 @@ class ContentController extends Controller
         $file->move($path, $fileName);
 
         Imageconv::make($path . $fileName)
-            ->resize(config('imagepresets.small.width'), config('imagepresets.small.height'), function ($constraint) {
-                $constraint->aspectRatio();
+            ->resize(
+                config('imagepresets.small.width'),
+                config('imagepresets.small.height'),
+                function ($constraint) {
+                    $constraint->aspectRatio();
             })
             ->save(config('imagepresets.small.path') . $fileName);
 
         Imageconv::make($path . $fileName)
-            ->resize(config('imagepresets.medium.width'), config('imagepresets.medium.height'), function ($constraint) {
-                $constraint->aspectRatio();
+            ->resize(
+                config('imagepresets.medium.width'),
+                config('imagepresets.medium.height'),
+                function ($constraint) {
+                    $constraint->aspectRatio();
             })
             ->save(config('imagepresets.medium.path') . $fileName);
 
         Imageconv::make($path . $fileName)
-            ->resize(config('imagepresets.large.width'), config('imagepresets.large.height'), function ($constraint) {
-                $constraint->aspectRatio();
+            ->resize(
+                config('imagepresets.large.width'),
+                config('imagepresets.large.height'),
+                function ($constraint) {
+                    $constraint->aspectRatio();
             })
             ->save(config('imagepresets.large.path') . $fileName);
 
