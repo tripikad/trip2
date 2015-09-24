@@ -15,9 +15,15 @@
             'items' => config('menu.admin')
         ])
         
-    </div>
+    </div> 
 
 @stop
+
+
+@section('header.right')
+    @include('component.image.upload')
+@stop
+
 
 @section('content')
 
