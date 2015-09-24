@@ -1,43 +1,35 @@
 .component-row {
 
-    > div > .content {
-
-        min-height: $spacer * 6;
+    > .row > [class*="col-"] {
 
         display: flex;
         flex-direction: column;
         justify-content: center;
 
-        > div > .title > a > h3,
-        > div > .title > span {
+        > .content {
 
-            display: inline-block;
+            > .title > a > h3,
+            > .title > span {
+
+                display: inline-block;
+            
+            }
         
+            > .text {
+
+                display: inline-block;
+                opacity: 0.7;
+                        
+            }
+
+            > .actions {
+
+                display: inline-block;
+            
+            }
+
         }
     
-        > div > .text {
-
-            display: inline-block;
-            opacity: 0.7;
-                    
-        }
-
-        > div > .actions {
-
-            display: inline-block;
-        
-        }
-    
-    }
-
-    &.-small {
-
-        > div > .content {
-
-            min-height: $spacer * 4;
-        
-        }
-
     }
 
 }

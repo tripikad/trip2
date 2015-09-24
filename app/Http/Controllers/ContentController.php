@@ -18,6 +18,12 @@ class ContentController extends Controller
 
     public function index(Request $request, $type)
     {
+        
+        if ($type == 'internal'
+            && (!Auth::check() || (Auth::check() && !Auth::user()->hasRole('admin')))
+        ) {
+            abort(401);
+        }
 
         $contents = Content::whereType($type)
             ->with(config("content_$type.index.with"))
@@ -62,23 +68,16 @@ class ContentController extends Controller
         ])->header('Cache-Control', 'public, s-maxage=' . config('site.cache.content.index'));
     }
 
-    public function unpublishedIndex()
-    {
-
-        $contents = Content::with(['user', 'comments'])
-            ->latest('created_at')
-            ->whereStatus(0)
-            ->simplePaginate(50);
-            
-        return response()->view('pages.admin.unpublished', [
-            'contents' => $contents,
-        ]);
-
-    }
 
     public function show($type, $id)
     {
         
+        if ($type == 'internal'
+            && (!Auth::check() || (Auth::check() && !Auth::user()->hasRole('admin')))
+        ) {
+            abort(401);
+        }
+
         $content = \App\Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers')
             ->findorFail($id);
              

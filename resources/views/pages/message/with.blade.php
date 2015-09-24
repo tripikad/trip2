@@ -2,7 +2,7 @@
 
 @section('title')
 
-    {{ trans('user.show.messages.with.title', ['user' => $user->name, 'user_with' => $user_with->name]) }}
+    {{ trans('message.index.with.title', ['user' => $user->name, 'user_with' => $user_with->name]) }}
 
 @stop
 
@@ -12,8 +12,16 @@
         
         <div class="utils-border-bottom">
             
-            @include('component.user.menu', ['user' => $user])
-        
+            @include('component.menu', [
+                'menu' => 'user',
+                'items' => [
+                    'activity' => ['route' => route('user.show', [$user])],
+                    'message' => ['route' => route('message.index', [$user])],
+                    'follow' => ['route' => route('follow.index', [$user])]
+                ],
+                'options' => 'text-center'
+            ])
+                    
         </div>
 
     @endif
@@ -35,7 +43,7 @@
 
     @include('component.row', [
         'image' => $message->fromUser->imagePreset(),
-        'text' => trans('user.show.messages.with.row.text', [
+        'description' => trans('message.index.with.row.description', [
             'user' => $message->fromUser->name,
             'created_at' => view('component.date.long', ['date' => $message->created_at])
         ]),

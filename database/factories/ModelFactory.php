@@ -13,6 +13,8 @@
 
 use App\User;
 use App\Message;
+use App\Content;
+use App\Follow;
 
 $factory->define(User::class, function ($faker) {
     
@@ -46,6 +48,28 @@ $factory->define(Message::class, function ($faker) {
         'user_id_to' => 2,
         'body' => $faker->paragraph(),
         'read' => 1,
+    ];
+
+});
+
+$factory->define(Content::class, function ($faker) {
+    
+    return [
+        'user_id' => 1,
+        'title' => $faker->sentence(),
+        'body' => $faker->paragraph(),
+        'type' => 'forum',
+        'status' => 1
+    ];
+
+});
+
+$factory->define(Follow::class, function ($faker) {
+    
+    return [
+        'user_id' => 1,
+        'followable_id' => 1,
+        'followable_type' => 'App\Content'
     ];
 
 });

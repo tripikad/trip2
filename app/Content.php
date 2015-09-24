@@ -126,6 +126,21 @@ class Content extends Model
 
         $actions = [];
 
+        if (auth()->user()) {
+            
+            $status = auth()->user()->follows()->where([
+                'followable_id' => $this->id,
+                'followable_type' => 'App\Content'
+            ])->first() ? 0 : 1;
+
+            $actions['follow'] = [
+                'title' => trans("content.action.follow.$status.title"),
+                'route' => route('follow.follow.content', [$this->type, $this, $status]),
+                'method' => 'PUT'
+            ];
+            
+        }
+
         if (auth()->user() && auth()->user()->hasRoleOrOwner('admin', $this->user->id)) {
             
             $actions['edit'] = [
@@ -139,7 +154,8 @@ class Content extends Model
             
             $actions['status'] = [
                 'title' => trans("content.action.status.$this->status.title"),
-                'route' => route('content.status', [$this->type, $this, (1 - $this->status)])
+                'route' => route('content.status', [$this->type, $this, (1 - $this->status)]),
+                'method' => 'PUT'
             ];
             
         }

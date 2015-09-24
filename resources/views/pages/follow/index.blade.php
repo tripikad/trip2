@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ trans('user.follow.index.title', ['user' => $user->name]) }}
+    {{ trans('follow.index.title', ['user' => $user->name]) }}
 @stop
 
 @section('navbar.bottom')
@@ -10,7 +10,15 @@
         
         <div class="utils-border-bottom">
             
-            @include('component.user.menu', ['user' => $user])
+            @include('component.menu', [
+                'menu' => 'user',
+                'items' => [
+                    'activity' => ['route' => route('user.show', [$user])],
+                    'message' => ['route' => route('message.index', [$user])],
+                    'follow' => ['route' => route('follow.index', [$user])]
+                ],
+                'options' => 'text-center'
+            ])
         
         </div>
 
@@ -32,12 +40,11 @@
             'heading' => $follow->followable->title,
             'heading_link' => route('content.show', [
                 $follow->followable->type,
-                $follow->followable->user
+                $follow->followable
             ]),
-            'text' => trans('user.follow.index.row.text', [
-                'user' => view('component.user.link', ['user' => $follow->followable->user]),
-                'created_at' => view('component.date.long', ['date' => $follow->followable->created_at])
-            ])
+            'description' => view('component.content.description', ['content' => $follow->followable]),
+            'actions' => view('component.actions', ['actions' => $follow->followable->getActions()]),
+
         ])
 
     </div>

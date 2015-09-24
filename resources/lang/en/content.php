@@ -8,6 +8,12 @@ return [
 
     'action.edit.title' => 'Edit',
 
+    'action.follow.1.title' => 'Follow',
+    'action.follow.0.title' => 'Unfollow',
+
+    'action.follow.1.info' => 'You are now following :title.',
+    'action.follow.0.info' => 'You unfollowed :title',
+    
     'action.status.1.title' => 'Unpublish',
     'action.status.0.title' => 'Publish',
     
@@ -17,12 +23,11 @@ return [
     'field.image.title' => 'Select image',
     'field.image.selected.title' => 'New image selected',
     
-    'index.filter' => 'Filters ▾',
     'index.filter.field.destination.title' => 'All',
     'index.filter.field.topic.title' => 'All',
     'index.filter.submit.title' => 'Filter',
     'index.filter.reset.title' => 'Reset',
-    'index.filter.destination.title' => 'Check out our :destination page as well',
+    'index.filter.destination.title' => 'Check out our :destination page',
 
     'create.title' => 'Add',
     'create.submit.title' => 'Add',
@@ -40,8 +45,6 @@ return [
     // News
 
     'news.index.title' => 'News',
-
-    'news.show.row.text' => ':user :created_at, :destinations, :topics',
 
     'news.create.title' => 'Add news post',
 
@@ -67,8 +70,6 @@ return [
 
     'shortnews.index.title' => 'Short news',
 
-    'shortnews.show.row.text' => ':user :created_at, :destinations, :topics',
-
     'shortnews.create.title' => 'Add short news',
 
     'shortnews.edit.field.title.title' => 'Title',
@@ -90,8 +91,6 @@ return [
 
     'flight.index.title' => 'Flights',
     'flight.index.field.price' => 'From :price:symbol',
-
-    'flight.show.row.text' => 'Posted at :created_at, :destinations, :topics',
 
     'flight.create.title' => 'Add flight offer',
 
@@ -122,6 +121,7 @@ return [
     // Travelmate
 
     'travelmate.index.title' => 'Travelmates',
+
     'travelmate.create.title' => 'Add listing',
 
     'travelmate.edit.field.title.title' => 'Title',
@@ -145,7 +145,6 @@ return [
     // Forum
 
     'forum.index.title' => 'General forum',
-    'forum.index.row.text' => ':user :created_at latest comment at :updated_at:destinations:topics',
     'forum.create.title' => 'Add post',
 
     'forum.edit.field.title.title' => 'Title',
@@ -163,7 +162,6 @@ return [
     // Expat
 
     'expat.index.title' => 'Expat forum',
-    'expat.index.row.text' => ':user :created_at, latest comment at :updated_at, :destinations, :topics',
     'expat.create.title' => 'Add post',
 
     'expat.edit.field.title.title' => 'Title',
@@ -181,7 +179,7 @@ return [
     // Buysell
 
     'buysell.index.title' => 'Buying and selling',
-    'buysell.index.row.text' => ':user :created_at',
+
     'buysell.create.title' => 'Add post',
 
     'buysell.edit.field.title.title' => 'Title',
@@ -212,7 +210,7 @@ return [
     // Blog
 
     'blog.index.title' => 'Blogs',
-    'blog.index.row.text' => ':user :created_at, latest comment at :updated_at',
+
     'blog.create.title' => 'Add post',
 
     'blog.edit.field.title.title' => 'Title',
@@ -230,7 +228,7 @@ return [
     // Internal
 
     'internal.index.title' => 'Internal forum',
-    'internal.index.row.text' => ':user :created_at, latest comment at :updated_at',
+
     'internal.create.title' => 'Add post',
 
     'internal.edit.field.title.title' => 'Title',

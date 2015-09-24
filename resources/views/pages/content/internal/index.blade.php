@@ -35,13 +35,7 @@
             'image_link' => route('user.show', [$content->user]),
             'heading' => $content->title,
             'heading_link' => route('content.show', [$content->type, $content->id]),
-            'text' => trans("content.$type.index.row.text", [
-                'user' => view('component.user.link', ['user' => $content->user]),
-                'created_at' => view('component.date.relative', ['date' => $content->created_at]),
-                'updated_at' => view('component.date.relative', ['date' => $content->updated_at]),
-                'destinations' => $content->destinations->implode('name', ','),
-                'tags' => $content->topics->implode('name', ','),
-            ]),
+            'description' => view('component.content.description', ['content' => $content]),
             'extra' => view('component.number', [
                 'number' => count($content->comments),
                 'options' => '-border'

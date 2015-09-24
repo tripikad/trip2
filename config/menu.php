@@ -4,82 +4,82 @@
 
 	    'header' => [
 	       'news' => [
-	            'url' => '/content/news'
+	            'route' => '/content/news'
 	        ],
 	       'flights' => [
-	            'url' => '/content/flight'
+	            'route' => '/content/flight'
 	        ],
 	        'travelmates' => [
-	            'url' => '/content/travelmate'
+	            'route' => '/content/travelmate'
 	        ],
 	        'forum' => [
-	            'url' => '/content/forum'
+	            'route' => '/content/forum'
 	        ],
 	        'photos' => [
-	            'url' => '/content/photo'
+	            'route' => '/content/photo'
 	        ],
 	        'blogs' => [
-	            'url' => '/content/blog'
+	            'route' => '/content/blog'
 	        ],
 	        'offers' => [
-	            'url' => 'http://vana.trip.ee/reisipakkumised',
+	            'route' => 'http://vana.trip.ee/reisipakkumised',
 	            'external' => true
 	        ],
 	    ],
 
 	    'footer' => [
-	    	'trip_ee' => [
-	            'url' => '/content/static/1534',
+	    	'about' => [
+	            'route' => '/content/static/1534',
 	        ],
 	        'contact' => [
-	            'url' => '/content/static/972',
+	            'route' => '/content/static/972',
 	        ],
 	        'eula' => [
-	            'url' => '/content/static/25151',
+	            'route' => '/content/static/25151',
 	        ],
 	        'advertising' => [
-	            'url' => '/content/static/22125',
+	            'route' => '/content/static/22125',
 	        ],
 	        'facebook' => [
-	            'url' => 'https://facebook.com/tripeeee',
+	            'route' => 'https://facebook.com/tripeeee',
 	            'external' => true
 	        ],
 	        'twitter' => [
-	            'url' => 'https://twitter.com/trip_ee',
+	            'route' => 'https://twitter.com/trip_ee',
 	            'external' => true
 	        ],   	      
 	    ],  
 
 	    'news' => [
 	    	'news' => [
-	            'url' => '/content/news',
+	            'route' => '/content/news',
 	        ],
 	        'shortnews' => [
-	            'url' => '/content/shortnews',
+	            'route' => '/content/shortnews',
 	        ],      
 	    ], 
 
 	    'forum' => [
 	    	'forum' => [
-	            'url' => '/content/forum',
+	            'route' => '/content/forum',
 	        ],
 	        'expat' => [
-	            'url' => '/content/expat',
+	            'route' => '/content/expat',
 	        ],
 	        'buysell' => [
-	            'url' => '/content/buysell',
+	            'route' => '/content/buysell',
 	        ],  	      
 	    ], 
 
 	    'admin' => [
 	    	'internal' => [
-	            'url' => '/content/internal',
+	            'route' => '/content/internal',
 	        ],
 	        'image' => [
-	            'url' => '/admin/image',
+	            'route' => '/admin/image',
 	        ],
-	        'unpublished' => [
-	            'url' => '/admin/content/unpublished',
+	        'content' => [
+	            'route' => '/admin/content',
 	        ],    	      
 	    ], 
 

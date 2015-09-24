@@ -50,13 +50,12 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
     put('{id}', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@update', 'as' => 'update']);
 
-    get('{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'ContentController@status', 'as' => 'status']);
+    put('{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'ContentController@status', 'as' => 'status']);
 
     post('/filter', ['middleware' => null, 'uses' => 'ContentController@filter', 'as' => 'filter']);
 
 });
 
-get('/admin/content/unpublished', ['middleware' => 'role:admin', 'uses' => 'ContentController@unpublishedIndex', 'as' => 'admin.content.unpublished.index']);
 
 
 // Comments
@@ -67,7 +66,7 @@ get('comment/{id}/edit', ['middleware' => 'role:admin,commentowner', 'uses' => '
 
 put('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' => 'CommentController@update', 'as' => 'comment.update']);
 
-get('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
+put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
 
 
 // Users
@@ -86,23 +85,30 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     put('{id}', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@update', 'as' => 'update']);
 
-    get('{id}/messages/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'UserController@showMessagesWith', 'as' => 'show.messages.with']);
-
-    get('{id}/messages', ['middleware' => 'role:superuser,userowner', 'uses' => 'UserController@showMessages', 'as' => 'show.messages']);
-
-    get('{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@showFollows', 'as' => 'show.follows']);
-
 });
 
-Route::group(['prefix' => 'message', 'as' => 'message.'], function () {
+// Messages
 
-    post('{id}/to/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@store', 'as' => 'store']);
+get('user/{id}/messages', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@index', 'as' => 'message.index']);
 
-});
+get('user/{id}/messages/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@indexWith', 'as' => 'message.index.with']);
 
-// Images
+post('message/{id}/to/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@store', 'as' => 'message.store']);
 
-get('admin/image', ['middleware' => 'role:admin', 'uses' => 'ImageController@index', 'as' => 'image.index']);
+
+// Follows
+
+
+get('user/{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'FollowController@index', 'as' => 'follow.index']);
+
+put('content/{type}/{id}/follow/{status}', ['middleware' => 'role:regular', 'uses' => 'FollowController@followContent', 'as' => 'follow.follow.content']);
+
+
+// Admin
+
+get('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageIndex', 'as' => 'admin.image.index']);
+
+get('admin/content', ['middleware' => 'role:admin', 'uses' => 'AdminController@contentIndex', 'as' => 'admin.content.index']);
 
 // Ad debug
 

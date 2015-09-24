@@ -27,12 +27,7 @@
     @endif
 
     @include('component.row', [
-        'text' => trans("content.flight.show.row.text", [
-            'created_at' => view('component.date.long', ['date' => $content->created_at]),
-            'updated_at' => view('component.date.long', ['date' => $content->updated_at]),
-            'destinations' => $content->destinations->implode('name', ','),
-            'tags' => $content->topics->implode('name', ','),
-        ]),
+        'description' => view('component.content.description', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
         'extra' => view('component.flags', ['flags' => $content->getFlags()])
     ])

@@ -2,7 +2,7 @@
 
 @section('title')
     
-    {{ trans("image.index.title") }}
+    {{ trans('admin.image.index.title') }}
 
 @stop
 

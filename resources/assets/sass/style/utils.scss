@@ -13,6 +13,16 @@
     padding-bottom: $spacer;
 }
 
+.utils-border-bottom {
+    padding-bottom: $spacer;
+    margin-bottom: $spacer;
+    border-bottom: 1px solid #eee;
+}
+
+.utils-equal-height {
+    display: flex;
+}
+
 .utils-padding-right {
     padding-right: $spacer;
 }
@@ -21,12 +31,6 @@
     padding-top: $spacer;
     margin-top: $spacer;
     border-top: 1px solid #eee;
-}
-
-.utils-border-bottom {
-    padding-bottom: $spacer;
-    margin-bottom: $spacer;
-    border-bottom: 1px solid #eee;
 }
 
 .utils-double-border-bottom {

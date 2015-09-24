@@ -30,7 +30,7 @@
         'image' => $content->user->imagePreset(),
         'image_link' => route('user.show', [$content->user]),
         'heading' => $content->title,
-        'text' => view('component.content.text', ['content' => $content]),
+        'description' => view('component.content.description', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
         'extra' => view('component.flags', ['flags' => $content->getFlags()]),
         'body' => $content->body_filtered,

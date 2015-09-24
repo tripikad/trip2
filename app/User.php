@@ -61,7 +61,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $received = $this->hasMany('App\Message', 'user_id_to')
             ->get()
             ->sortByDesc('created_at')
-            ->unique('user_id')
+            ->unique('user_id_from')
             ->transform(function ($item) {
                 $item->attributes['user_id_with'] = $item->attributes['user_id_from'];
                 return $item;

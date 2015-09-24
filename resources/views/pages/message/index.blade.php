@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ trans('user.show.messages.index.title', ['user' => $user->name]) }}
+    {{ trans('message.index.title', ['user' => $user->name]) }}
 @stop
 
 @section('navbar.bottom')
@@ -10,8 +10,16 @@
         
         <div class="utils-border-bottom">
             
-            @include('component.user.menu', ['user' => $user])
-        
+            @include('component.menu', [
+                'menu' => 'user',
+                'items' => [
+                    'activity' => ['route' => route('user.show', [$user])],
+                    'message' => ['route' => route('message.index', [$user])],
+                    'follow' => ['route' => route('follow.index', [$user])]
+                ],
+                'options' => 'text-center'
+            ])
+
         </div>
 
     @endif
@@ -30,8 +38,8 @@
                 'image' => $message->withUser->imagePreset(),
                 'image_link' => route('user.show', [$message->withUser]),
                 'heading' => $message->title,
-                'heading_link' => route('user.show.messages.with', [$user, $message->withUser]),
-                'text' => trans('user.show.messages.index.row.text', [
+                'heading_link' => route('message.index.with', [$user, $message->withUser]),
+                'description' => trans('message.index.row.description', [
                     'user' => view('component.user.link', ['user' => $message->withUser]),
                     'created_at' => view('component.date.long', ['date' => $message->created_at])
                 ]),

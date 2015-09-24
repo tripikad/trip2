@@ -1,29 +1,22 @@
 <div class="component-footer">
+    
+    <div class="menu utils-border-bottom">
+        
+        <ul class="list-inline">
 
-    <ul class="list-inline">
+            @include('component.menu', [
+                'menu' => 'footer',
+                'items' => config('menu.footer')
+            ])
 
-    	@foreach (config('menu.footer') as $key => $data)
-                
-        <li>
-           		
-        		<a href="{{ $data['url'] }}"
+        </ul>
 
-        			@if (isset($data['external']) && $data['external'])
+    </div>
 
-        				target="_blank"
-
-        			@endif
-
-        		>
-
-        			{{ trans("menu.footer.$key") }}
-
-        		</a>
-        	
-        </li>
-                
-        @endforeach
-
-    </ul>
+    <div class="copyright">
+     
+        {{ trans('site.footer.copyright', ['current_year' =>  \Carbon\Carbon::now()->year]) }}
+    
+    </div>
 
 </div>

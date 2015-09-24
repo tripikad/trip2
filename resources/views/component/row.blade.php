@@ -1,6 +1,6 @@
 <div class="component-row {{ $options or '' }}">
 
-    <div class="row">
+    <div class="row utils-equal-height">
 
         <div class="
             @if (isset($options) && strpos($options, '-narrow') !== false) 
@@ -41,14 +41,13 @@
         </div>
 
         <div class="
-            content
             @if (isset($options) && strpos($options, '-narrow') !== false) 
                 col-xs-7 col-sm-8 col-lg-6
             @else 
                 col-xs-7 col-sm-10 col-lg-8
             @endif
         ">
-            <div>
+            <div class="content">
 
                 <div class="title">
 
@@ -65,7 +64,7 @@
 
                 </div>
 
-                @if (isset($text)) <div class="text">{!! $text !!}</div> @endif
+                @if (isset($description)) <div class="text">{!! $description !!}</div> @endif
 
                 @if (isset($actions)) <div class="actions">{!! $actions !!}</div> @endif
 
@@ -74,7 +73,6 @@
         </div>
 
         <div class="
-            content
             @if (isset($options) && strpos($options, '-narrow') !== false) 
                 col-xs-3 col-sm-1 col-lg-1
             @else 

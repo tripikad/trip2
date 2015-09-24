@@ -14,8 +14,8 @@ class AuthTest extends TestCase
         // User can register 
 
         $this->visit('/')
-            ->see(trans('menu.header.register'))
-            ->click(trans('menu.header.register'))
+            ->see(trans('menu.auth.register'))
+            ->click(trans('menu.auth.register'))
             ->type('user', 'name')
             ->type('user@example.com', 'email')
             ->type('password', 'password')
@@ -29,7 +29,7 @@ class AuthTest extends TestCase
         // User with unconfirmed account can not login
 
         $this->visit('/')
-            ->click(trans('menu.header.login'))
+            ->click(trans('menu.auth.login'))
             ->type('user', 'name')
             ->type('password', 'password')
             ->press(trans('auth.login.submit.title'))
@@ -50,7 +50,7 @@ class AuthTest extends TestCase
         // User can log in after confirmation
 
         $this->visit('/')
-            ->click(trans('menu.header.login'))
+            ->click(trans('menu.auth.login'))
             ->type('user', 'name')
             ->type('password', 'password')
             ->press(trans('auth.login.submit.title'))

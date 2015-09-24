@@ -28,7 +28,7 @@
                 'image_link' => route('user.show', [$content->user]),
                 'heading' => $content->title,
                 'heading_link' => route('content.show', [$content->type, $content->id]),
-                'text' => view("component.content.text", ['content' => $content]),
+                'description' => view('component.content.description', ['content' => $content]),
                 'body' => $content->body_filtered,
             ])
 
