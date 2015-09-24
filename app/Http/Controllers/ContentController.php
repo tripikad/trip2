@@ -133,7 +133,7 @@ class ContentController extends Controller
 
         if ($request->hasFile('file')) {
             
-            $filename = $this->storeImage($request->file('file'), $type);
+            $filename = Image::storeImage($request->file('file'));
             $content->images()->create(['filename' => $filename]);
 
         }
@@ -210,7 +210,7 @@ class ContentController extends Controller
         
         if ($request->hasFile('file')) {
             
-            $filename = $this->storeImage($request->file('file'), $type);
+            $filename = Image::storeImage($request->file('file'));
             $content->images()->update(['filename' => $filename]);
 
         }
@@ -247,41 +247,6 @@ class ContentController extends Controller
 
     }
 
-
-    public function storeImage($file, $type)
-    {
-
-        $fileName = $file->getClientOriginalName();
-        $fileName = preg_replace('/\s+/', '-', $fileName);
-        $path = public_path() . "/images/original/";
-        
-        $smallPath = public_path() . "/images/small/";
-        $mediumPath = public_path() . "/images/medium/";
-        $largePath = public_path() . "/images/large/";
-        
-        $file->move($path, $fileName);
-
-        Imageconv::make($path . $fileName)
-            ->resize(300, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })
-            ->save($smallPath . $fileName);
-
-        Imageconv::make($path . $fileName)
-            ->resize(700, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })
-            ->save($mediumPath . $fileName);
-
-        Imageconv::make($path . $fileName)
-            ->resize(900, null, function ($constraint) {
-                $constraint->aspectRatio();
-            })
-            ->save($largePath . $fileName);
-
-        return $fileName;
-    
-    }
 
     public function status($type, $id, $status)
     {

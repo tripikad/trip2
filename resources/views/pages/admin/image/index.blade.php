@@ -21,7 +21,7 @@
 
 
 @section('header.right')
-    @include('component.image.upload')
+    @include('component.image.create')
 @stop
 
 

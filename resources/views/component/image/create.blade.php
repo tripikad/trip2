@@ -5,7 +5,7 @@
         <div class="form-group">
             
         {!! Form::file('image') !!}
-        {!! Form::submit(trans('image.upload.submit.btn.title'), [
+        {!! Form::submit(trans('image.create.submit.title'), [
             'class' => 'btn btn-primary btn-md btn-block'
         ]) !!}
             
