@@ -28,7 +28,7 @@
 
         @elseif ($field['type'] == 'file')
 
-            @include('component.user.image.field', [
+            @include('component.image.field', [
                 'image' => isset($content)
                     ? $content->imagePreset('medium')
                     : null
