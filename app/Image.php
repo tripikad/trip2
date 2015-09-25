@@ -28,7 +28,8 @@ class Image extends Model
             . $this->filename;
     }
 
-    static public function storeImage($file)
+
+    static public function storeImageFile($file)
     {
 
         $fileName = $file->getClientOriginalName();

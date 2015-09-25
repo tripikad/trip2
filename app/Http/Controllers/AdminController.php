@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 use View;
 
@@ -23,6 +24,22 @@ class AdminController extends Controller
 
     }
 
+    public function imageStore(Request $request)
+    {
+
+        $this->validate($request, [
+            'image' => 'required|image'
+        ]);
+
+        $filename = Image::storeImageFile($request->file('image'));
+        Image::create(['filename' => $filename]);
+
+        return back()
+            ->with('info', trans('admin.image.store.info', [
+                    'filename' => $filename
+            ]));
+        
+    }
 
     public function contentIndex()
     {

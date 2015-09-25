@@ -133,7 +133,7 @@ class ContentController extends Controller
 
         if ($request->hasFile('file')) {
             
-            $filename = Image::storeImage($request->file('file'));
+            $filename = Image::storeImageFile($request->file('file'));
             $content->images()->create(['filename' => $filename]);
 
         }
@@ -210,7 +210,7 @@ class ContentController extends Controller
         
         if ($request->hasFile('file')) {
             
-            $filename = Image::storeImage($request->file('file'));
+            $filename = Image::storeImageFile($request->file('file'));
             $content->images()->update(['filename' => $filename]);
 
         }
