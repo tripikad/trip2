@@ -4,6 +4,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 use App\User;
 use App\Content;
+use App\Image;
 
 class AdminTest extends TestCase
 {
@@ -68,6 +69,30 @@ class AdminTest extends TestCase
             ->click(trans('menu.admin.image'))
             ->seePageIs('admin/image')
             ->see(trans('admin.image.index.title'));
+
+    }
+
+    public function test_admin_user_can_post_photos()
+    {
+
+        $user1 = factory(App\User::class)->create(['role' => 'admin']);
+
+        $this->actingAs($user1)
+            ->visit('admin/image')
+            ->attach(storage_path() . '/tests/test.jpg', 'image')
+            ->press(trans('admin.image.create.submit.title'))
+            ->seePageIs('admin/image');
+
+        $filename = $this->getLatestImageFilename($user1->user_id);
+        
+        foreach(['original', 'large', 'medium', 'small'] as $preset) {
+            
+            $filepath = config("imagepresets.$preset")['path'] . $filename;
+            $this->assertTrue(file_exists($filepath));
+
+            unlink($filepath);
+
+        }
 
     }
 
@@ -179,6 +204,12 @@ class AdminTest extends TestCase
             ->seePageIs('content/' . $content1->type . '/'. $content1->id)
             ->see('Hello internal');
 
+    }
+    
+    public function getLatestImageFilename($user_id) {
+
+        return Image::latest('id')->first()->filename;
+        
     }
 
 }
