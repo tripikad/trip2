@@ -19,6 +19,12 @@
 
 @stop
 
+@section('header.right')
+
+    @include('component.image.create')
+
+@stop
+
 @section('content')
 
     <div class="row">
