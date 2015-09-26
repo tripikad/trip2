@@ -111,6 +111,8 @@ class UserController extends Controller
                 . $request->file('file')->getClientOriginalExtension();
 
             $filename = Image::storeImageFile($request->file('file'), $filename);
+
+            $user->images()->delete();
             $user->images()->create(['filename' => $filename]);
 
             return redirect()

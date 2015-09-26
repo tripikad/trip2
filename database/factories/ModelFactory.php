@@ -24,7 +24,6 @@ $factory->define(User::class, function ($faker) {
         'name' => $name,
         'email' => $faker->email,
         'password' => bcrypt($name),
-        'image' => null,
         'contact_facebook' => null,
         'contact_twitter' => null,
         'contact_instagram' => null,
@@ -34,7 +33,7 @@ $factory->define(User::class, function ($faker) {
         'notify_message' => 0,
         'notify_follow' => 0,
         'role' => 'regular',
-        'verified' => 0,
+        'verified' => 1,
         'registration_token' => '',
         'remember_token' => null,
     ];
