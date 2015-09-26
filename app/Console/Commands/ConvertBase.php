@@ -920,12 +920,12 @@ class ConvertBase extends Command
         try {
 
             Imageconv::make($to)
-                ->fit(config('imagepresets.xsmall_square.width'))
-                ->save(config('imagepresets.xsmall_square.path') . basename($to), $this->imageQuality);
+                ->fit(config('imagepresets.presets.xsmall_square.width'))
+                ->save(config('imagepresets.presets.xsmall_square.path') . basename($to), $this->imageQuality);
 
             Imageconv::make($to)
-                ->fit(config('imagepresets.small_square.width'))
-                ->save(config('imagepresets.small_square.path') . basename($to), $this->imageQuality);
+                ->fit(config('imagepresets.presets.small_square.width'))
+                ->save(config('imagepresets.presets.small_square.path') . basename($to), $this->imageQuality);
         
         }
 
@@ -940,22 +940,22 @@ class ConvertBase extends Command
         try {
 
             Imageconv::make($to)
-                ->resize(config('imagepresets.small.width'), config('imagepresets.small.height'), function ($constraint) {
+                ->resize(config('imagepresets.presets.small.width'), config('imagepresets.presets.small.height'), function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(config('imagepresets.small.path') . basename($to), $this->imageQuality);
+                ->save(config('imagepresets.presets.small.path') . basename($to), $this->imageQuality);
 
             Imageconv::make($to)
-                ->resize(config('imagepresets.medium.width'), config('imagepresets.medium.height'), function ($constraint) {
+                ->resize(config('imagepresets.presets.medium.width'), config('imagepresets.presets.medium.height'), function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(config('imagepresets.medium.path') . basename($to), $this->imageQuality);
+                ->save(config('imagepresets.presets.medium.path') . basename($to), $this->imageQuality);
 
             Imageconv::make($to)
-                ->resize(config('imagepresets.large.width'), config('imagepresets.large.height'), function ($constraint) {
+                ->resize(config('imagepresets.presets.large.width'), config('imagepresets.presets.large.height'), function ($constraint) {
                     $constraint->aspectRatio();
                 })
-                ->save(config('imagepresets.large.path') . basename($to), $this->imageQuality);
+                ->save(config('imagepresets.presets.large.path') . basename($to), $this->imageQuality);
 
         }
 
