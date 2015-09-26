@@ -603,17 +603,8 @@ class ConvertBase extends Command
 
         $model = $modelName::findOrFail($id);
 
-        if (method_exists($model, 'images')) {
-
-            $image = \App\Image::create(['filename' => $filename]);        
-            $model->images()->attach($image);
-
-        } else {
-
-            $model->image = $filename;
-            $model->save(['timestamps' => false]);
-        
-        }
+        $image = \App\Image::create(['filename' => $filename]);        
+        $model->images()->attach($image);
 
         $from = 'http://trip.ee/' . $imagePath;
         $to = public_path() . '/images/original/' . $filename;
