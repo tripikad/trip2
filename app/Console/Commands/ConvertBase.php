@@ -22,8 +22,6 @@ class ConvertBase extends Command
 
     protected $chunk = 10;
 
-    protected $imageQuality = 75;
-
     protected $client;
 
     protected $contentTypes = [
@@ -630,15 +628,7 @@ class ConvertBase extends Command
 
             $this->copyFile($from, $to);
 
-            if ($type == 'user') {
-
-                $this->createUserThumbnail($from, $to);
-
-            } else {
-
-                $this->createThumbnail($from, $to);
-
-            }
+            $this->createThumbnail($from, $to);
 
         }
     
@@ -914,54 +904,33 @@ class ConvertBase extends Command
         return true;
     }
 
- public function createUserThumbnail($from, $to)
-    {
-
-        try {
-
-            Imageconv::make($to)
-                ->fit(config('imagepresets.xsmall_square.width'))
-                ->save(config('imagepresets.xsmall_square.path') . basename($to), $this->imageQuality);
-
-            Imageconv::make($to)
-                ->fit(config('imagepresets.small_square.width'))
-                ->save(config('imagepresets.small_square.path') . basename($to), $this->imageQuality);
-        
-        }
-
-        catch (\Intervention\Image\Exception\NotReadableException $e) {} 
-        catch (\Intervention\Image\Exception\NotSupportedException $e) {} 
-        catch (\Symfony\Component\Debug\Exception\FatalErrorException $e) {}
-    }
-
     public function createThumbnail($from, $to)
     {
 
         try {
 
-            Imageconv::make($to)
-                ->resize(config('imagepresets.small.width'), config('imagepresets.small.height'), function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save(config('imagepresets.small.path') . basename($to), $this->imageQuality);
+            foreach(array_keys(config('imagepresets.presets')) as $preset) {
 
-            Imageconv::make($to)
-                ->resize(config('imagepresets.medium.width'), config('imagepresets.medium.height'), function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save(config('imagepresets.medium.path') . basename($to), $this->imageQuality);
+                Imageconv::make($to)
+                    ->{config("imagepresets.presets.$preset.operation")}(
+                        config("imagepresets.presets.$preset.width"),
+                        config("imagepresets.presets.$preset.height"),
+                        function ($constraint) {
+                            $constraint->aspectRatio();
+                    })
+                    ->save(
+                        config("imagepresets.presets.$preset.path") . basename($to),
+                        config("imagepresets.presets.$preset.quality")
+                    );
 
-            Imageconv::make($to)
-                ->resize(config('imagepresets.large.width'), config('imagepresets.large.height'), function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save(config('imagepresets.large.path') . basename($to), $this->imageQuality);
+            }
 
         }
 
         catch (\Intervention\Image\Exception\NotReadableException $e) {} 
         catch (\Intervention\Image\Exception\NotSupportedException $e) {} 
         catch (\Symfony\Component\Debug\Exception\FatalErrorException $e) {}
+    
     }
 
 

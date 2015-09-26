@@ -32,38 +32,26 @@ class Image extends Model
     static public function storeImageFile($file)
     {
 
-        $fileName = $file->getClientOriginalName();
-        $fileName = preg_replace('/\s+/', '-', $fileName);
         $path = config('imagepresets.original.path');
+        $fileName = preg_replace('/\s+/', '-', $file->getClientOriginalName());
         
         $file->move($path, $fileName);
 
-        Imageconv::make($path . $fileName)
-            ->resize(
-                config('imagepresets.small.width'),
-                config('imagepresets.small.height'),
-                function ($constraint) {
-                    $constraint->aspectRatio();
-            })
-            ->save(config('imagepresets.small.path') . $fileName);
+        foreach(array_keys(config('imagepresets.presets')) as $preset) {
 
-        Imageconv::make($path . $fileName)
-            ->resize(
-                config('imagepresets.medium.width'),
-                config('imagepresets.medium.height'),
-                function ($constraint) {
-                    $constraint->aspectRatio();
-            })
-            ->save(config('imagepresets.medium.path') . $fileName);
+            Imageconv::make($path . $fileName)
+                ->{config("imagepresets.presets.$preset.operation")}(
+                    config("imagepresets.presets.$preset.width"),
+                    config("imagepresets.presets.$preset.height"),
+                    function ($constraint) {
+                        $constraint->aspectRatio();
+                })
+                ->save(
+                    config("imagepresets.presets.$preset.path") . $fileName,
+                    config("imagepresets.presets.$preset.quality")
+                );
 
-        Imageconv::make($path . $fileName)
-            ->resize(
-                config('imagepresets.large.width'),
-                config('imagepresets.large.height'),
-                function ($constraint) {
-                    $constraint->aspectRatio();
-            })
-            ->save(config('imagepresets.large.path') . $fileName);
+        }
 
         return $fileName;
     

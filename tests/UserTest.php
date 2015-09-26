@@ -22,12 +22,18 @@ class UserTest extends TestCase
         
         $filename = $this->getImageFilenameByUserId($user1->id);
 
-        foreach(['original', 'small_square', 'xsmall_square'] as $preset) {
+        // Check original file exists
+
+        $filepath = config('imagepresets.original.path') . $filename;
+        $this->assertTrue(file_exists($filepath));
+        unlink($filepath);
+
+        // See thumbnails exist
+
+        foreach(['small_square', 'xsmall_square'] as $preset) {
             
-            $filepath = config("imagepresets.$preset")['path'] . $filename;
-
+            $filepath = config("imagepresets.presets.$preset.path") . $filename;
             $this->assertTrue(file_exists($filepath));
-
             unlink($filepath);
 
         }

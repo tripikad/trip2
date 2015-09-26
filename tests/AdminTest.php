@@ -85,12 +85,19 @@ class AdminTest extends TestCase
 
         $filename = $this->getLatestImageFilename($user1->user_id);
         
-        foreach(['original', 'large', 'medium', 'small'] as $preset) {
-            
-            $filepath = config("imagepresets.$preset")['path'] . $filename;
-            $this->assertTrue(file_exists($filepath));
+        // Check original file exists
 
-            unlink($filepath);
+        $filepath = config('imagepresets.original.path') . $filename;
+        $this->assertTrue(file_exists($filepath));
+        unlink($filepath);
+
+        // See thumbnails exist
+
+        foreach(['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+            
+            $filepath = config("imagepresets.presets.$preset.path") . $filename;
+            $this->assertTrue(file_exists($filepath));
+          //  unlink($filepath);
 
         }
 
