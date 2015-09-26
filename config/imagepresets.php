@@ -16,35 +16,40 @@ return [
             'operation' => 'resize',
             'width' => 900,
             'height' => null,
-            'path' => $prepath . 'large/'
+            'path' => $prepath . 'large/',
+            'quality' => 75
         ],
         
         'medium' => [
             'operation' => 'resize',
             'width' => 700,
             'height' => null,
-            'path' => $prepath . 'medium/'
+            'path' => $prepath . 'medium/',
+            'quality' => 75
         ],
         
         'small' => [
             'operation' => 'resize',
             'width' => 300,
             'height' => null,
-            'path' => $prepath . 'small/'
+            'path' => $prepath . 'small/',
+            'quality' => 75
         ],
         
         'small_square' => [
             'operation' => 'fit',
             'width' => 180,
             'height' => null,
-            'path' => $prepath . 'small_square/'
+            'path' => $prepath . 'small_square/',
+            'quality' => 75
         ],
         
         'xsmall_square' => [
             'operation' => 'fit',
-            'width' => 80,
+            'width' => 75,
             'height' => null,
-            'path' => $prepath . 'xsmall_square/'
+            'path' => $prepath . 'xsmall_square/',
+            'quality' => 75
         ]
 
     ]

@@ -22,8 +22,6 @@ class ConvertBase extends Command
 
     protected $chunk = 10;
 
-    protected $imageQuality = 75;
-
     protected $client;
 
     protected $contentTypes = [
@@ -920,7 +918,10 @@ class ConvertBase extends Command
                         function ($constraint) {
                             $constraint->aspectRatio();
                     })
-                    ->save(config("imagepresets.presets.$preset.path") . basename($to));
+                    ->save(
+                        config("imagepresets.presets.$preset.path") . basename($to),
+                        config("imagepresets.presets.$preset.quality")
+                    );
 
             }
 

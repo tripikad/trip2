@@ -46,7 +46,10 @@ class Image extends Model
                     function ($constraint) {
                         $constraint->aspectRatio();
                 })
-                ->save(config("imagepresets.presets.$preset.path") . $fileName);
+                ->save(
+                    config("imagepresets.presets.$preset.path") . $fileName,
+                    config("imagepresets.presets.$preset.quality")
+                );
 
         }
 
