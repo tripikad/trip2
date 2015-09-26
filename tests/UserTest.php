@@ -7,7 +7,7 @@ use App\Content;
 
 class UserTest extends TestCase
 {
-    // use DatabaseTransactions;
+    use DatabaseTransactions;
 
     public function test_regular_user_can_upload_profile_image()
     {
