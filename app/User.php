@@ -117,7 +117,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function imagePreset($preset = 'small_square')
     {
-        return count($this->images) ? '/images/' . $preset . '/' . $this->images[0]->filename : 'http://trip.ee/files/pictures/picture_none.png';
+        return count($this->images) ? '/images/' . $preset . '/' . $this->images[0]->filename : '/svg/picture_none.svg';
     }
     
     public function hasRole($role) {
