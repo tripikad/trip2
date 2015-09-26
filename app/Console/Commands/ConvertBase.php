@@ -629,16 +629,7 @@ class ConvertBase extends Command
             }
 
             $this->copyFile($from, $to);
-
-            if ($type == 'user') {
-
-                $this->createUserThumbnail($from, $to);
-
-            } else {
-
-                $this->createThumbnail($from, $to);
-
-            }
+            $this->createThumbnail($from, $to);
 
         }
     
@@ -939,23 +930,18 @@ class ConvertBase extends Command
 
         try {
 
-            Imageconv::make($to)
-                ->resize(config('imagepresets.presets.small.width'), config('imagepresets.presets.small.height'), function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save(config('imagepresets.presets.small.path') . basename($to), $this->imageQuality);
+            foreach(array_keys(config('imagepresets.presets')) as $preset) {
 
-            Imageconv::make($to)
-                ->resize(config('imagepresets.presets.medium.width'), config('imagepresets.presets.medium.height'), function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save(config('imagepresets.presets.medium.path') . basename($to), $this->imageQuality);
+                Imageconv::make($to)
+                    ->{config("imagepresets.presets.$preset.operation")}(
+                        config("imagepresets.presets.$preset.width"),
+                        config("imagepresets.presets.$preset.height"),
+                        function ($constraint) {
+                            $constraint->aspectRatio();
+                    })
+                    ->save(config("imagepresets.presets.$preset.path") . basename($to));
 
-            Imageconv::make($to)
-                ->resize(config('imagepresets.presets.large.width'), config('imagepresets.presets.large.height'), function ($constraint) {
-                    $constraint->aspectRatio();
-                })
-                ->save(config('imagepresets.presets.large.path') . basename($to), $this->imageQuality);
+            }
 
         }
 
