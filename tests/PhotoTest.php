@@ -28,11 +28,18 @@ class PhotoTest extends TestCase
 
         $filename = $this->getImageFilenameByTitle('Test image');
         
-        foreach(['original', 'large', 'medium', 'small'] as $preset) {
-            
-            $filepath = config("imagepresets.$preset")['path'] . $filename;
-            $this->assertTrue(file_exists($filepath));
+        // Check original file exists
 
+        $filepath = config('imagepresets.original.path') . $filename;
+        $this->assertTrue(file_exists($filepath));
+        unlink($filepath);
+
+        // See thumbnails exist
+
+        foreach(['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+            
+            $filepath = config("imagepresets.presets.$preset.path") . $filename;
+            $this->assertTrue(file_exists($filepath));
             unlink($filepath);
 
         }

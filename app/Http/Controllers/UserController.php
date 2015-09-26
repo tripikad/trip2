@@ -115,12 +115,12 @@ class UserController extends Controller
             $request->file('file')->move($imagepath, $image);
 
             Imageconv::make($imagepath . $image)
-                ->fit(config('imagepresets.small_square.width'))
-                ->save(config('imagepresets.small_square.path') . $image);
+                ->fit(config('imagepresets.presets.small_square.width'))
+                ->save(config('imagepresets.presets.small_square.path') . $image);
 
             Imageconv::make($imagepath . $image)
-                ->fit(config('imagepresets.xsmall_square.width'))
-                ->save(config('imagepresets.xsmall_square.path') . $image);
+                ->fit(config('imagepresets.presets.xsmall_square.width'))
+                ->save(config('imagepresets.presets.xsmall_square.path') . $image);
 
             $user->update(['image' => $image]);
 
