@@ -629,6 +629,7 @@ class ConvertBase extends Command
             }
 
             $this->copyFile($from, $to);
+
             $this->createThumbnail($from, $to);
 
         }
@@ -905,26 +906,6 @@ class ConvertBase extends Command
         return true;
     }
 
- public function createUserThumbnail($from, $to)
-    {
-
-        try {
-
-            Imageconv::make($to)
-                ->fit(config('imagepresets.presets.xsmall_square.width'))
-                ->save(config('imagepresets.presets.xsmall_square.path') . basename($to), $this->imageQuality);
-
-            Imageconv::make($to)
-                ->fit(config('imagepresets.presets.small_square.width'))
-                ->save(config('imagepresets.presets.small_square.path') . basename($to), $this->imageQuality);
-        
-        }
-
-        catch (\Intervention\Image\Exception\NotReadableException $e) {} 
-        catch (\Intervention\Image\Exception\NotSupportedException $e) {} 
-        catch (\Symfony\Component\Debug\Exception\FatalErrorException $e) {}
-    }
-
     public function createThumbnail($from, $to)
     {
 
@@ -948,6 +929,7 @@ class ConvertBase extends Command
         catch (\Intervention\Image\Exception\NotReadableException $e) {} 
         catch (\Intervention\Image\Exception\NotSupportedException $e) {} 
         catch (\Symfony\Component\Debug\Exception\FatalErrorException $e) {}
+    
     }
 
 
