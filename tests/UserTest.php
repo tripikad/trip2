@@ -7,7 +7,7 @@ use App\Content;
 
 class UserTest extends TestCase
 {
-    use DatabaseTransactions;
+    // use DatabaseTransactions;
 
     public function test_regular_user_can_upload_profile_image()
     {
@@ -42,7 +42,8 @@ class UserTest extends TestCase
 
     public function getImageFilenameByUserId($id) {
 
-        return User::whereId($id)->first()->image;
+        return User::whereId($id)->first()->images[0]->filename;
         
     }
+
 }
