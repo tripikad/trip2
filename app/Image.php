@@ -40,7 +40,7 @@ class Image extends Model
         foreach(array_keys(config('imagepresets.presets')) as $preset) {
 
             Imageconv::make($path . $fileName)
-                ->resize(
+                ->{config("imagepresets.presets.$preset.operation")}(
                     config("imagepresets.presets.$preset.width"),
                     config("imagepresets.presets.$preset.height"),
                     function ($constraint) {

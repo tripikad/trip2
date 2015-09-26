@@ -97,7 +97,7 @@ class AdminTest extends TestCase
             
             $filepath = config("imagepresets.presets.$preset.path") . $filename;
             $this->assertTrue(file_exists($filepath));
-            unlink($filepath);
+          //  unlink($filepath);
 
         }
 
