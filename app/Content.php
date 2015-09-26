@@ -93,7 +93,7 @@ class Content extends Model
 
     public function images()
     {
-        return $this->belongsToMany('App\Image', 'content_image');
+        return $this->morphToMany('App\Image', 'imageable');
     }
 
     public function imagePreset($preset = 'small')
