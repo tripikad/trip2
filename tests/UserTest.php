@@ -30,7 +30,7 @@ class UserTest extends TestCase
 
         // See thumbnails exist
 
-        foreach(['small_square', 'xsmall_square'] as $preset) {
+        foreach(['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
             
             $filepath = config("imagepresets.presets.$preset.path") . $filename;
             $this->assertTrue(file_exists($filepath));
