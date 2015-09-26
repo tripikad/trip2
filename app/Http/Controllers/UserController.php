@@ -12,7 +12,7 @@ use Auth;
 use Imageconv;
 
 use App\User;
-use App\Message;
+use App\Image;
 
 class UserController extends Controller
 {
@@ -105,24 +105,14 @@ class UserController extends Controller
                 'file' => 'required|image',
             ]); 
 
-            $image = 'picture-'
+            $filename = 'picture-'
                 . $user->id
                 . '.'
                 . $request->file('file')->getClientOriginalExtension();
 
-            $imagepath = config('imagepresets.original.path');
-            
-            $request->file('file')->move($imagepath, $image);
+            $filename = Image::storeImageFile($request->file('file'), $filename);
 
-            Imageconv::make($imagepath . $image)
-                ->fit(config('imagepresets.presets.small_square.width'))
-                ->save(config('imagepresets.presets.small_square.path') . $image);
-
-            Imageconv::make($imagepath . $image)
-                ->fit(config('imagepresets.presets.xsmall_square.width'))
-                ->save(config('imagepresets.presets.xsmall_square.path') . $image);
-
-            $user->update(['image' => $image]);
+            $user->update(['image' => $filename]);
 
             return redirect()
                 ->route('user.edit', [$user])

@@ -29,17 +29,17 @@ class Image extends Model
     }
 
 
-    static public function storeImageFile($file)
+    static public function storeImageFile($file, $new_filename = null)
     {
 
         $path = config('imagepresets.original.path');
-        $fileName = preg_replace('/\s+/', '-', $file->getClientOriginalName());
+        $filename = $new_filename ? $new_filename : preg_replace('/\s+/', '-', $file->getClientOriginalName());
         
-        $file->move($path, $fileName);
+        $file->move($path, $filename);
 
         foreach(array_keys(config('imagepresets.presets')) as $preset) {
 
-            Imageconv::make($path . $fileName)
+            Imageconv::make($path . $filename)
                 ->{config("imagepresets.presets.$preset.operation")}(
                     config("imagepresets.presets.$preset.width"),
                     config("imagepresets.presets.$preset.height"),
@@ -47,13 +47,13 @@ class Image extends Model
                         $constraint->aspectRatio();
                 })
                 ->save(
-                    config("imagepresets.presets.$preset.path") . $fileName,
+                    config("imagepresets.presets.$preset.path") . $filename,
                     config("imagepresets.presets.$preset.quality")
                 );
 
         }
 
-        return $fileName;
+        return $filename;
     
     }
 
