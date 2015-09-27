@@ -12,23 +12,23 @@
     <body>
         
         @yield('header.background')
+
+        <div class="container" style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        ">
+
+        @include('component.navbar')
         
+        @yield('navbar.bottom')
+
+        </div>
+
         <div class="container">
             
-            <div class="container" style="
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 1000;
-            ">
-
-            @include('component.navbar')
-
-            </div>
-            
-            @yield('navbar.bottom')
-
             @include('component.info.success')
             
             @yield('header', view('component.header'))

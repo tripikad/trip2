@@ -6,18 +6,14 @@
 
 @section('header.background')
 
-    <div style="width: 100%;">
-
-    @include('component.card', [
+    @include('component.background', [
         'image' => \App\Content::whereType('photo')
             ->orderByRaw('RAND()')
             ->first()
             ->imagePreset('large'),
-        'supertitle' => 'Styleguide',
-        'options' => '-center -wide',
-    ])
+        'title' => 'Styleguide',
 
-    </div>
+    ])
 
 @stop
 
