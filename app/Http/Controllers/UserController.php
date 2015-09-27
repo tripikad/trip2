@@ -112,7 +112,8 @@ class UserController extends Controller
 
             $filename = Image::storeImageFile($request->file('file'), $filename);
 
-            $user->update(['image' => $filename]);
+            $user->images()->delete();
+            $user->images()->create(['filename' => $filename]);
 
             return redirect()
                 ->route('user.edit', [$user])

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContentImageTable extends Migration
+class CreateImageablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateContentImageTable extends Migration
     public function up()
     {
         
-        Schema::create('content_image', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('content_id')->index();
+        Schema::create('imageables', function (Blueprint $table) {
             $table->integer('image_id')->index();
+            $table->integer('imageable_id')->index();
+            $table->string('imageable_type')->index();
         });
 
     }
@@ -29,7 +29,7 @@ class CreateContentImageTable extends Migration
     public function down()
     {
 
-        Schema::drop('content_image');
+        Schema::drop('imageables');
     
     }
 

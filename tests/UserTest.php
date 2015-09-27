@@ -42,7 +42,8 @@ class UserTest extends TestCase
 
     public function getImageFilenameByUserId($id) {
 
-        return User::whereId($id)->first()->image;
+        return User::whereId($id)->first()->images[0]->filename;
         
     }
+
 }

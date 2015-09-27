@@ -16,7 +16,7 @@ class Image extends Model
     public function content()
     {
     
-        return $this->belongsToMany('App\Content');
+        return $this->morphedByMany('App\Content', 'imageable');
     
     }
 
