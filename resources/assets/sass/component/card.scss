@@ -18,6 +18,7 @@
 
     }
 
+    > .overlay > .content > h2,
     > .overlay > .content > h3 {
         color: white;
         text-shadow: 0px 0px 10px rgba(0,0,0,0.2); 
@@ -46,7 +47,7 @@
     }
 
     &.-wide {
-        padding-bottom: 40%;
+        padding-bottom: 20%;
     }
 
     &.-portrait {

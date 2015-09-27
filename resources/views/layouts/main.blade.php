@@ -11,14 +11,22 @@
     </head>
     <body>
         
+        @yield('header.background')
+        
         <div class="container">
             
-            <div class="utils-border-bottom text-center">          
-                
-                @include('component.navbar')
-            
-            </div>  
+            <div class="container" style="
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+            ">
 
+            @include('component.navbar')
+
+            </div>
+            
             @yield('navbar.bottom')
 
             @include('component.info.success')

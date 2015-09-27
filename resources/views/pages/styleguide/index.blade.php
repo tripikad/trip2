@@ -1,8 +1,23 @@
 @extends('layouts.main')
 
 @section('title')
+    
+@stop
 
-    Styleguide
+@section('header.background')
+
+    <div style="width: 100%;">
+
+    @include('component.card', [
+        'image' => \App\Content::whereType('photo')
+            ->orderByRaw('RAND()')
+            ->first()
+            ->imagePreset('large'),
+        'supertitle' => 'Styleguide',
+        'options' => '-center -wide',
+    ])
+
+    </div>
 
 @stop
 

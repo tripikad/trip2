@@ -5,11 +5,7 @@
         <div class="navbar-header">
             
             <button type="button" class="navbar-toggle collapsed btn btn-link" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-    
+            ☰
             </button>
 
             <h1><a href="/">{{ config('site.name') }}</a></h1>
