@@ -14,25 +14,26 @@
 
             @if (isset($image))
                 
+                <div
+                
                 @if (isset($options) && strpos($options, '-small') !== false) 
 
-                    <div class="row">
-                        <div class="col-sm-9 col-sm-offset-3">
-                        @include('component.user.image', [
-                            'image' => $image,
-                            'options' => '-circle',
-                        ])
-                        </div>
-                    </div>
-        
+                    style="width: 60%;"
+
                 @else 
 
+                    style="width: 80%;"
+
+                @endif
+                
+                >
+                
                     @include('component.user.image', [
                         'image' => $image,
                         'options' => '-circle',
                     ])
 
-                @endif
+                </div>
 
             @endif
              
@@ -42,9 +43,9 @@
 
         <div class="
             @if (isset($options) && strpos($options, '-narrow') !== false) 
-                col-xs-7 col-sm-8 col-lg-6
+                col-xs-11 col-sm-12 col-lg-10
             @else 
-                col-xs-7 col-sm-10 col-lg-8
+                col-xs-11 col-sm-14 col-lg-12
             @endif
         ">
             <div class="content">
@@ -92,9 +93,9 @@
 
             <div class="
             @if (isset($options) && strpos($options, '-narrow') !== false) 
-                    col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3
+                    col-sm-12 col-sm-offset-2 col-lg-10 col-lg-offset-3
                 @else 
-                    col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2
+                    col-sm-14 col-sm-offset-1 col-lg-12 col-lg-offset-2
                 @endif
             ">
 

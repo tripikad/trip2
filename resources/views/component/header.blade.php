@@ -1,6 +1,6 @@
 <div class="component-header row utils-border-bottom">
 
-    <div class="col-sm-6 col-sm-push-3 text-center">
+    <div class="col-sm-8 col-sm-push-4 text-center">
         
         @yield('header.top')
         

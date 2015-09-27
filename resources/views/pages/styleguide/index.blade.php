@@ -59,17 +59,16 @@
 
 <p>A standard Bootstrap 12-column grid is used. Column spacing is custom, represented as <code>$spacer</code> variable in stylesheets.</p>
 
-<div class="row">
+<div class="row" style="border-left: 1px solid gray;">
     
-    @for ($i = 1; $i < 13; $i++)
+    @for ($i = 1; $i < 17; $i++)
 
-        <div class="col-sm-1">
+        <div class="col-sm-1 text-center" style="border-right: 1px solid gray;">
 
-            @include('component.placeholder', [
-                'text' => 'Col' . $i,
-            ])
+            Col{{ $i }}
 
         </div>
+
     @endfor
 
 </div>
@@ -80,15 +79,13 @@
 
 @foreach(['', 'utils-equal-height'] as $options) 
 
-<div class="row {{ $options }}">
+<div class="row {{ $options }}" style="border-left: 1px solid gray;">
     
-    @for ($i = 1; $i < 13; $i++)
+    @for ($i = 1; $i < 17; $i++)
 
-        <div class="col-sm-1" style="background: #eee;">
+        <div class="col-sm-1 text-center" style="border-right: 1px solid gray;">
         
-            @include('component.placeholder', [
-                'text' => ['Some', 'Some text', 'Some more text'][rand(0,2)],
-            ])
+            {{ ['Some', 'Some text', 'Some more text'][rand(0,2)] }}
 
         </div>
 
