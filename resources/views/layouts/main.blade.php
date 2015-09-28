@@ -15,6 +15,10 @@
 
             @include('component.header1')
 
+            @include('component.header2')
+
+            @include('component.header3')
+
         </div>
 
         <div class="container">

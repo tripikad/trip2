@@ -1,0 +1,14 @@
+.component-header-2 {
+    
+    background: $orange;
+    width: 100%;
+    height: $spacer * 7;
+
+    > .container {
+
+        padding: $spacer 0 $spacer 0;
+        color: white;
+
+    }
+
+}

@@ -1,15 +1,4 @@
 .component-row {
-    > .row > div:nth-child(1) {
-        background: yellow;
-    }
-
-    > .row > div:nth-child(2) {
-        background: orange;
-    }
-
-    > .row > div:nth-child(3) {
-        background: yellow;
-    }
 
     > .row > [class*="col-"] {
 

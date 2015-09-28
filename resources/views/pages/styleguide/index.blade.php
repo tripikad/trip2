@@ -2,9 +2,17 @@
 
 @section('title')
 
-    Styleguide
+    Header1 title
 
 @stop
+
+@section('header2.left') Header2 left column @stop
+@section('header2.center') Header2 lenter column @stop
+@section('header2.right') Header2 right column @stop
+
+@section('header3.left') Header3 left column @stop
+@section('header3.center') Header3 lenter column @stop
+@section('header3.right') Header3 right column @stop
 
 @section('content')
 
