@@ -44,7 +44,8 @@ class Comment extends Model
            
            $actions['edit'] = [
                'title' => trans('comment.action.edit.title'),
-               'route' => route('comment.edit', [$this])
+               'route' => route('comment.edit', [$this]),
+               'id'    => 'comment_edit_'.$this->id
            ];
            
        }
@@ -52,9 +53,10 @@ class Comment extends Model
        if (auth()->user() && auth()->user()->hasRole('admin')) {
            
            $actions['status'] = [
-               'title' => trans("comment.action.status.$this->status.title"),
-               'route' => route('comment.status', [$this, (1 - $this->status)]),
-               'method' => 'PUT'
+               'title'  => trans("comment.action.status.$this->status.title"),
+               'route'  => route('comment.status', [$this, (1 - $this->status)]),
+               'method' => 'PUT',
+               'id'     =>  'comment_status_'.$this->id
            ];
            
        }

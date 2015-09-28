@@ -10,7 +10,8 @@
         ]) !!}
 
         {!! Form::submit($action['title'], [
-            'class' => 'btn btn-xs btn-default'
+            'class' => 'btn btn-xs btn-default',
+            'id' => isset($action['id']) ? $action['id'] : ''
         ]) !!}
 
         {!! Form::close() !!}
