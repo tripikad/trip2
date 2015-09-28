@@ -4,6 +4,8 @@
     background-size: cover;
     width: 100%;
     height: $spacer * 8;
+    padding-top: $spacer;
+    position: relative;
 
     > .overlay {
 
@@ -11,18 +13,32 @@
         top: 0;
         right: 0;
         left: 0;
-        height: $spacer * 8;
-
+        bottom: 0;        
         background-color: rgba(0,0,0,0.5);
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        > .navbar {
 
-        > .content > h2 {
+            height: $spacer * 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
 
-            color: white;
+        }
 
+        > .content {
+
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            h2 {
+
+                font-size: $font-size-h1;
+                color: white;
+
+            }
+        
         }
 
     }

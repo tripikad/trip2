@@ -1,19 +1,17 @@
 @extends('layouts.main')
 
 @section('title')
-    
+
+    Styleguide
+
 @stop
 
-@section('header.background')
+@section('image')
 
-    @include('component.background', [
-        'image' => \App\Content::whereType('photo')
-            ->orderByRaw('RAND()')
-            ->first()
-            ->imagePreset('large'),
-        'title' => 'Styleguide',
-
-    ])
+    {{ \App\Content::whereType('photo')
+        ->orderByRaw('RAND()')
+        ->first()
+        ->imagePreset('large') }}
 
 @stop
 

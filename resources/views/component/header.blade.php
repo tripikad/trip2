@@ -1,25 +1,39 @@
-<div class="component-header row utils-padding-bottom">
-
-    <div class="col-sm-8 col-sm-push-4 text-center">
-        
-        @yield('header.top')
-        
-        <h2>@yield('title')</h2>
-        
-        @yield('header.bottom')
+<div
+    class="component-background"
+    style="background-image: url(@yield('image'));"
+>
+    <div class="overlay">
     
-    </div>
+        <div class="container">
 
-    <div class="col-sm-3 col-sm-pull-6">
-        
-        @yield('header.left')
-    
-    </div>
+            @include('component.navbar')
 
-    <div class="col-sm-3 text-right">
-        
-        @yield('header.right')
-    
+            <div class="row">
+
+                <div class="col-sm-8 col-sm-push-4 text-center">
+                    
+                    @yield('header.top')
+                    
+                    <h2>@yield('title')</h2>
+                    
+                </div>
+
+                <div class="col-sm-3 col-sm-pull-6">
+                    
+                    @yield('header.left')
+                
+                </div>
+
+                <div class="col-sm-3 text-right">
+                    
+                    @yield('header.right')
+                
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>

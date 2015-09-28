@@ -11,27 +11,14 @@
     </head>
     <body>
         
-        @yield('header.background')
-
-        <div class="container" style="
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        ">
-
-        @include('component.navbar')
+        @include('component.background')
+{{--
         
         @yield('navbar.bottom')
-
-        </div>
-
+--}}
         <div class="container">
             
             @include('component.info.success')
-            
-            @yield('header', view('component.header'))
 
             @include('component.info.error')
 
