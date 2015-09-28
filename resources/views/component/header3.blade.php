@@ -1,3 +1,5 @@
+@if (isset($__env->getSections()['header3.left']) || isset($__env->getSections()['header3.left']) || isset($__env->getSections()['header3.left']))
+
 <div class="component-header-3">
 
     <div class="container">
@@ -27,3 +29,5 @@
     </div>
 
 </div>
+
+@endif

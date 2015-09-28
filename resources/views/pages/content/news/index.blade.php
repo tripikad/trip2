@@ -13,7 +13,7 @@
 
 @section('navbar.bottom')
 
-    <div class="utils-border-bottom">
+    <div class="utils-padding-bottom">
             
         @include('component.menu', [
             'menu' => 'news',
@@ -26,7 +26,7 @@
 
 @section('content')
 
-    <div class="utils-border-bottom">
+    <div class="utils-padding-bottom">
 
         @include('component.filter')
 
@@ -36,7 +36,7 @@
   
         @foreach ($contents as $index => $content)
 
-            <div class="col-sm-3 utils-padding-bottom">
+            <div class="col-sm-4">
 
                 <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 
