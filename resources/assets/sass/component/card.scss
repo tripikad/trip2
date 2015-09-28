@@ -46,14 +46,6 @@
     
     }
 
-    &.-wide {
-        padding-bottom: 20%;
-    }
-
-    &.-portrait {
-        padding-bottom: 133%;
-    }
-
     &.-square {
         padding-bottom: 100%;
     }
@@ -68,10 +60,6 @@
 
     &.-noshade > .overlay {
         background: none;
-    }
-
-    &.-rounded > .overlay {
-        border-radius: $spacer;
     }
     
     &.-center > .overlay {

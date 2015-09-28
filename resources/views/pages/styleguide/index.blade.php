@@ -8,7 +8,19 @@
 
 @section('header2.left')
     @include('component.placeholder', [
-        'text' => 'Placeholder',
+        'text' => 'Header2 left column',
+    ])
+@stop
+
+@section('header2.center')
+    @include('component.placeholder', [
+        'text' => 'Header2 center column',
+    ])
+@stop
+
+@section('header2.right')
+    @include('component.placeholder', [
+        'text' => 'Header2 right column',
     ])
 @stop
 
@@ -29,8 +41,11 @@
 
 <mark>Headings</mark>
 
+<h2>Heading 1</h2>
+<p>Heading 1 is used for large page title</p>
+
 <h2>Heading 2</h2>
-<p>Heading 2 is used in page titles</p>
+<p>Heading 2 is used for smaller page title</p>
 
 <h3>Heading 3</h3>
 <p>Heading 3 is used in item lists on pages</p>
@@ -66,8 +81,6 @@
 ])
 
 <mark>Grid</mark>
-
-<p>A standard Bootstrap 12-column grid is used. Column spacing is custom, represented as <code>$spacer</code> variable in stylesheets.</p>
 
 <div class="row" style="border-left: 1px solid gray;">
     
@@ -110,8 +123,6 @@
 
 <mark>Menu</mark>
 
-<p>Horizontal menus</p>
-
 @include('component.menu', [
     'menu' => 'styleguide',
     'items' => [
@@ -140,13 +151,13 @@
 
     @foreach(['(none)', '-good', '-bad', '-neutral', '-border'] as $options2) 
 
-        <div class="col-xs-2">
+        <div class="col-xs-3">
 
             <p><code>{{ $options2 }} {{ $options1 }}</code></p>
             
             <div class="row">
 
-                <div class="col-xs-6">
+                <div class="col-xs-8">
 
                     @include('component.number', [
                         'number' => '1',
@@ -197,7 +208,7 @@
     
     @foreach(['(none)', '-rounded', '-circle'] as $options) 
 
-        <div class="col-xs-2">
+        <div class="col-xs-2 col-xs-offset-1">
             
             <p><code>{{ $options }}</code></p>
             
@@ -257,9 +268,9 @@
 
 <div class="row">
     
-    @foreach(['(none)', '-center', '-noshade', '-noshade -invert'] as $options) 
+    @foreach(['(none)', '-center', '-noshade', '-noshade -invert', '-square'] as $options) 
 
-    <div class="col-sm-3">
+    <div class="col-sm-3 col-sm-offser-1">
         
         <p><code>{{ $options }}</code></p>
 
@@ -282,35 +293,6 @@
     @endforeach
 
 </div>
-
-<div class="row">
-    
-    @foreach(['-wide', '-square', '-portrait', '-rounded'] as $options) 
-
-    <div class="col-sm-3">
-        
-        <br /><p><code>{{ $options }}</code></p>
-
-        @include('component.card', [
-            'image' => \App\Content::whereType('photo')
-                ->orderByRaw('RAND()')
-                ->first()
-            ? \App\Content::whereType('photo')
-                ->orderByRaw('RAND()')
-                ->first()
-                ->imagePreset()
-            : null,
-            'title' => 'Here is title',
-            'text' => 'Here is subtitle',
-            'options' => $options,
-        ])
-
-    </div>
-
-    @endforeach
-
-</div>
-
 
 <mark>Icons</mark>
 

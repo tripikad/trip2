@@ -18,7 +18,7 @@
 
             </div>
             
-            <div class="col-sm-offset-1 col-sm-3">
+            <div class="col-sm-offset-1 col-sm-4">
                 
                 @yield('header2.right')
 
