@@ -13,7 +13,7 @@
 
 @section('content')
 
-    <div class="utils-border-bottom">
+    <div class="utils-padding-bottom">
 
         @include('component.filter')
 
@@ -23,7 +23,7 @@
 
         <div class="row utils-padding-bottom">
                             
-            <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
+            <div class="col-sm-14 col-sm-offset-1 col-lg-12 col-lg-offset-2">
                     
                 <a href="{{ route('content.show', [$content->type, $content]) }}">
                         
