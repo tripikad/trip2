@@ -6,15 +6,6 @@
 
 @stop
 
-@section('image')
-
-    {{ \App\Content::whereType('photo')
-        ->orderByRaw('RAND()')
-        ->first()
-        ->imagePreset('large') }}
-
-@stop
-
 @section('content')
 
 <div class="component-styleguide">

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="component-navbar row">
 
     <div class="col-sm-12">
             

@@ -1,6 +1,20 @@
 <div
-    class="component-background"
-    style="background-image: url(@yield('image'));"
+    class="component-header-1"
+    style="background-image: url(
+    
+        {{ 
+
+            \App\Content::whereType('photo')
+                ->orderByRaw('RAND()')
+                ->first()
+            ? \App\Content::whereType('photo')
+                ->orderByRaw('RAND()')
+                ->first()
+                ->imagePreset('large')
+            : null
+        }}
+    
+    );"
 >
     <div class="overlay">
 

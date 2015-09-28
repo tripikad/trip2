@@ -11,20 +11,31 @@
     </head>
     <body>
         
-        @include('component.background')
-{{--
-        
-        @yield('navbar.bottom')
---}}
+        <div class="utils-padding-bottom">
+
+            @include('component.header1')
+
+        </div>
+
         <div class="container">
+
+            <div class="text-center">
             
+                @yield('navbar.bottom')
+            
+            </div>
+
             @include('component.info.success')
 
             @include('component.info.error')
 
             @yield('content')
 
-            @include('component.footer')
+            <div class="text-center">
+            
+                @include('component.footer')
+            
+            </div>
 
         </div>
 
