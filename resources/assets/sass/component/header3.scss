@@ -18,14 +18,22 @@
 
             > h3 {
 
-                margin-bottom: $spacer;
+                margin-bottom: $spacer / 2;
                 color: $orange;
             }
+        
         }
 
         > .row > .right {
-
+            
             padding-top: $spacer;
+
+            > h3 {
+
+                margin-bottom: $spacer / 2;
+                color: $orange;
+            
+            }
 
         }
 

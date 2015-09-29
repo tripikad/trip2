@@ -7,28 +7,37 @@
 
         color: white;
 
-        > .subheader
-
-            background: white;
-            
-            height: $spacer;
-            padding-left: $spacer / 2;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center; 
-
-        }
-
         > .row > .left {
 
             margin-bottom: $spacer;
+
+            > .subheader {
+
+                background: white;
+
+                height: $spacer * 2;
+                margin-top: $spacer * -2;
+                padding-left: $spacer;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center; 
+
+                > h3 {
+
+                    color: $orange;
+
+                }
+
+            }
 
         }
 
         > .row > .center {
 
             padding-top: $spacer;
+
+            color: white;
 
         }
 

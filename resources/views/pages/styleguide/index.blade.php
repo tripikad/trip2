@@ -23,15 +23,17 @@
 @stop
 
 @section('header2.center')
-    @include('component.placeholder', [
-        'text' => 'Header2 center column',
-    ])
+
+    <p>This text is in the Header 2 center column. This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...</p>
+
 @stop
 
 @section('header2.right')
+ 
     @include('component.placeholder', [
         'text' => 'Header2 right column',
     ])
+
 @stop
 
 @section('header3.left')
@@ -45,16 +47,18 @@
 
 @section('header3.center')
 
-    <h3>This is subheader</h3>
+    <h3>Subheader in Header 3 center</h3>
 
-    <p>This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...</p>
+    <p>This text is in the Header 3 center column. This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...</p>
 
 @stop
 
 @section('header3.right')
-    @include('component.placeholder', [
-        'text' => 'Header3 right column',
-    ])
+    
+    <h3>SH in Header 3 right</h3>
+
+    <p>This book<br />Is a record<br />Of a pleasure trip</p>
+
 @stop
 
 @section('content')
