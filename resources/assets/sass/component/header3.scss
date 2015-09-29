@@ -16,6 +16,11 @@
 
             padding-top: $spacer;
 
+            > h3 {
+
+                margin-bottom: $spacer;
+                color: $orange;
+            }
         }
 
         > .row > .right {

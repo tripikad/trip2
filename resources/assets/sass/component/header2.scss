@@ -7,6 +7,19 @@
 
         color: white;
 
+        > .subheader
+
+            background: white;
+            
+            height: $spacer;
+            padding-left: $spacer / 2;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+
+        }
+
         > .row > .left {
 
             margin-bottom: $spacer;

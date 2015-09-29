@@ -4,6 +4,12 @@
 
     <div class="container">
 
+        <div class="subheader">
+            
+            <h3>Offers</h3>
+
+        </div>
+        
         <div class="row">
         
             <div class="left col-sm-5 utils-shadow">
