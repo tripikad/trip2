@@ -2,12 +2,27 @@
     
     background: $orange;
     width: 100%;
-    height: $spacer * 5;
 
     > .container {
 
         height: 100%;
         background: white;
+
+        > .row > .left {
+
+        }
+
+        > .row > .center {
+
+            padding-top: $spacer;
+
+        }
+
+        > .row > .right {
+
+            padding-top: $spacer;
+
+        }
 
     }
 

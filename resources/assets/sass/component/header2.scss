@@ -5,14 +5,26 @@
 
     > .container {
 
-        padding: $spacer 0;
         color: white;
 
         > .row > .left {
 
-            background: white;
+            margin-bottom: $spacer;
 
         }
+
+        > .row > .center {
+
+            padding-top: $spacer;
+
+        }
+
+        > .row > .right {
+
+            padding-top: $spacer;
+
+        }
+
     }
 
 }

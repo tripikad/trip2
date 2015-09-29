@@ -35,9 +35,12 @@
 @stop
 
 @section('header3.left')
-    @include('component.placeholder', [
-        'text' => 'Header3 left column',
+
+    @include('component.card', [
+        'image' => $random_image,
+        'text' => 'Ad 1'
     ])
+
 @stop
 
 @section('header3.center')

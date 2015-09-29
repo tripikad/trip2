@@ -6,7 +6,7 @@
 
         <div class="row">
         
-            <div class="left col-sm-5">
+            <div class="left col-sm-5 utils-shadow">
                 
                 @yield('header2.left')
 
