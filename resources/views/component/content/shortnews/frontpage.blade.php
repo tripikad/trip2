@@ -6,13 +6,13 @@
 
     @foreach ($contents as $content)
 
-        <div class="col-xs-6 col-sm-3 utils-padding-bottom">
+        <div class="col-sm-4 utils-padding-bottom">
 
             <a href="{{ route('content.show', [$content->type, $content]) }}">
 
                 @include('component.card', [
                     'text' => $content->title,
-                    'options' => '-square'
+                    'options' => ''
                 ])
                     
             </a>
