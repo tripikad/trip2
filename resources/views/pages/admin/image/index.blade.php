@@ -19,7 +19,7 @@
 
 @stop
 
-@section('header.right')
+@section('header1.right')
 
     @include('component.image.create')
 
@@ -33,7 +33,7 @@
 
             <div class="col-xs-4 col-sm-2 utils-padding-bottom">
                 
-                <div class="utils-padding-bottom">
+                <div class="utils-padding-bottom utils-padding-right">
 
                 @include('component.card', [
                     'image' => $image->preset(),
@@ -54,7 +54,7 @@
 
             </div>
             
-            @if (($index + 1) % 6 == 0) </div><div class="row"> @endif
+            @if (($index + 1) % 8 == 0) </div><div class="row"> @endif
 
         @endforeach
 

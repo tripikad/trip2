@@ -1,10 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
+    
     {{ trans("content.$type.index.title") }}
+
 @stop
 
-@section('header.right')
+@section('header1.right')
     @include('component.button', [ 
         'route' => route('content.create', ['type' => $type]),
         'title' => trans("content.$type.create.title")

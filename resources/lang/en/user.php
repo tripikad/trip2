@@ -31,7 +31,7 @@ return [
     'edit.field.notify_message.title' => 'Notify me when someone sends me a private message',
     'edit.field.notify_follow.title' => 'Notify me when someone posts a comment to the content I follow',
 
-    'edit.submit' => 'Update',
+    'edit.submit' => 'Update profile',
 
     'update.image.info' => 'User image has been updated',
     'update.info' => 'User profile has been updated',

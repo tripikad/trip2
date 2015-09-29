@@ -20,21 +20,23 @@
 
                 <div class="col-sm-8 col-sm-push-4 text-center">
                     
-                    @yield('header.top')
+                    @yield('header1.top')
                     
                     <h2>@yield('title')</h2>
+
+                    @yield('header1.bottom')
                     
                 </div>
 
                 <div class="col-sm-4 col-sm-pull-8">
                     
-                    @yield('header.left')
+                    @yield('header1.left')
                 
                 </div>
 
                 <div class="col-sm-4 text-right">
                     
-                    @yield('header.right')
+                    @yield('header1.right')
                 
                 </div>
 

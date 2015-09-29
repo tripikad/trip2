@@ -120,7 +120,7 @@
 
             <div class="row">
 
-                <div class="col-md-4 col-md-offset-8">
+                <div class="col-md-4 col-md-offset-12">
                 
                     {!! Form::submit(trans("content.$mode.submit.title"), [
                         'class' => 'btn btn-primary btn-md btn-block'

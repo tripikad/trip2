@@ -1,7 +1,9 @@
 @extends('layouts.main')
 
 @section('title')
+
     {{ $user->name }}
+
 @stop
 
 @section('navbar.bottom')
@@ -26,7 +28,7 @@
 
 @stop
 
-@section('header.top')
+@section('header1.top')
     
     <div class="row">
     
@@ -43,7 +45,7 @@
 
 @stop
 
-@section('header.bottom')
+@section('header1.bottom')
    <p>
     {{ trans('user.show.joined', [
         'created_at' => view('component.date.relative', ['date' => $user->created_at])

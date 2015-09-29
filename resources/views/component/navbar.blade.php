@@ -10,7 +10,7 @@
 
     </div>
 
-    <div class="col-sm-12 hidden-xs">
+    <div class="col-sm-11 hidden-xs">
             
         @include('component.menu', [
             'menu' => 'header',
@@ -19,7 +19,7 @@
     
     </div>
 
-    <div class="col-sm-4 text-right hidden-xs">
+    <div class="col-sm-5 text-right hidden-xs">
 
         @if(auth()->user() && ! auth()->user()->hasRole('admin'))
 
