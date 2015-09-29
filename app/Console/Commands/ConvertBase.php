@@ -900,6 +900,8 @@ class ConvertBase extends Command
 
         try {
 
+            if (count(config('imagepresets.presets'))) {
+            
             foreach(array_keys(config('imagepresets.presets')) as $preset) {
 
                 Imageconv::make($to)
@@ -913,6 +915,8 @@ class ConvertBase extends Command
                         config("imagepresets.presets.$preset.path") . basename($to),
                         config("imagepresets.presets.$preset.quality")
                     );
+
+            }
 
             }
 
