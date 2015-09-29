@@ -18,7 +18,7 @@
 
             <div class="row">
 
-                <div class="col-sm-8 col-sm-push-4 text-center">
+                <div class="col-sm-10 col-sm-push-3 text-center">
                     
                     @yield('header1.top')
                     
@@ -28,13 +28,13 @@
                     
                 </div>
 
-                <div class="col-sm-4 col-sm-pull-8">
+                <div class="col-sm-3 col-sm-pull-6">
                     
                     @yield('header1.left')
                 
                 </div>
 
-                <div class="col-sm-4 text-right">
+                <div class="col-sm-3 text-right">
                     
                     @yield('header1.right')
                 
