@@ -35,28 +35,4 @@
 
     {!! Form::close() !!}
 
-    <div class="row utils-padding-bottom">
-
-        <div class="col-sm-6 text-center">
-
-            @include('component.button', [ 
-                'route' => route('register.form'),
-                'title' => trans('auth.login.register.title'),
-                'buttontype' => 'btn-link'
-            ])
-        
-        </div>
-
-        <div class="col-sm-6 text-center">
-
-            @include('component.button', [ 
-                'route' => route('reset.apply.form'),
-                'title' => trans('auth.login.reset.title'),
-                'buttontype' => 'btn-link'
-            ])
-
-        </div>
-
-    </div>
-
 @stop

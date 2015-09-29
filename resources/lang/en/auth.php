@@ -23,8 +23,6 @@ return [
     'login.field.password.title' => 'Password',
     'login.field.remember.title' => 'Remember me',
     'login.submit.title' => 'Login',
-    'login.register.title' => 'Not a member? Register here',
-    'login.reset.title' => 'Forgot your password?',
 
     'reset.apply.title' => 'Reset password',
     'reset.apply.field.email.title' => 'Your E-mail',
