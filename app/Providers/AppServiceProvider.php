@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Content;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +15,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+    
+        $photo = Content::whereType('photo')
+                ->orderByRaw('RAND()')
+                ->first();
+
+        view()->share(
+            'random_image',
+            $photo ? $photo->imagePreset('large') : null
+        );
+    
     }
 
     /**

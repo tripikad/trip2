@@ -1,20 +1,10 @@
 <div
     class="component-header-1"
-    style="background-image: url(
-    
-        {{ 
-
-            \App\Content::whereType('photo')
-                ->orderByRaw('RAND()')
-                ->first()
-            ? \App\Content::whereType('photo')
-                ->orderByRaw('RAND()')
-                ->first()
-                ->imagePreset('large')
-            : null
-        }}
-    
-    );"
+    style="background-image: url({{
+        isset($__env->getSections()['header1.image'])
+        ? $__env->getSections()['header1.image']
+        : $random_image
+    }});"
 >
     <div class="overlay">
 
