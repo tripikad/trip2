@@ -6,6 +6,15 @@
 
 @stop
 
+@section('header1.image')
+
+    @if(isset($features['photo']['contents'][0]))
+
+        {{ $features['photo']['contents'][0]->imagePreset('large') }}
+
+    @endif
+
+@stop
 
 @section('content')
 
@@ -21,46 +30,39 @@
 
 </div>
 
-<div class="row utils-border-bottom">
-
-    <div class="col-sm-5">
+<div class="utils-border-bottom">
         
-        @if(count($destination->usersHaveBeen()) > 0)
-
-            <h3 class="utils-padding-bottom">
-            
-                {{ trans('destination.index.user.havebeen.title', [
-                    'count' => count($destination->usersHaveBeen())
-                ]) }}
-            
-            </h3>
-    
-            @include('component.destination.users',
-                ['users' => $destination->usersHaveBeen()]
-            )
-
-        @endif
-
-    </div>
-
-    <div class="col-sm-5 col-sm-offset-1">
-
-        @if(count($destination->usersWantsToGo()) > 0)
+    @if(count($destination->usersHaveBeen()) > 0)
 
         <h3 class="utils-padding-bottom">
         
-            {{ trans('destination.index.user.wantstogo.title', [
-                'count' => count($destination->usersWantsToGo())
+            {{ trans('destination.index.user.havebeen.title', [
+                'count' => count($destination->usersHaveBeen())
             ]) }}
         
         </h3>
-            @include('component.destination.users',
-                ['users' => $destination->usersWantsToGo()]
-            )
 
-        @endif
+        @include('component.destination.users',
+            ['users' => $destination->usersHaveBeen()]
+        )
 
-    </div>
+    @endif
+
+
+    @if(count($destination->usersWantsToGo()) > 0)
+
+    <h3 class="utils-padding-bottom">
+    
+        {{ trans('destination.index.user.wantstogo.title', [
+            'count' => count($destination->usersWantsToGo())
+        ]) }}
+    
+    </h3>
+        @include('component.destination.users',
+            ['users' => $destination->usersWantsToGo()]
+        )
+
+    @endif
 
 </div>
 
