@@ -23,15 +23,17 @@
 @stop
 
 @section('header2.center')
-    @include('component.placeholder', [
-        'text' => 'Header2 center column',
-    ])
+
+    <p>This text is in the Header 2 center column. This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...</p>
+
 @stop
 
 @section('header2.right')
+ 
     @include('component.placeholder', [
         'text' => 'Header2 right column',
     ])
+
 @stop
 
 @section('header3.left')
@@ -44,15 +46,19 @@
 @stop
 
 @section('header3.center')
-    @include('component.placeholder', [
-        'text' => 'Header3 center column',
-    ])
+
+    <h3>Subheader in Header 3 center</h3>
+
+    <p>This text is in the Header 3 center column. This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...</p>
+
 @stop
 
 @section('header3.right')
-    @include('component.placeholder', [
-        'text' => 'Header3 right column',
-    ])
+    
+    <h3>SH in Header 3 right</h3>
+
+    <p>This book<br />Is a record<br />Of a pleasure trip</p>
+
 @stop
 
 @section('content')
@@ -68,17 +74,20 @@
 
 <mark>Headings</mark>
 
-<h2>Heading 1</h2>
+<h1>Heading 1</h1>
 <p>Heading 1 is used for large page title</p>
 
 <h2>Heading 2</h2>
 <p>Heading 2 is used for smaller page title</p>
 
 <h3>Heading 3</h3>
-<p>Heading 3 is used in item lists on pages</p>
+<p>Heading 4 is used for subheadings on a page</p>
 
 <h4>Heading 4</h4>
-<p>Heading 4 is used for subheadings</p>
+<p>Heading 3 is used in item lists titles on pages</p>
+
+<h5>Heading 5</h5>
+<p>Heading 4 is used for subheadings between text paragraphs</p>
 
 
 <mark>Placeholder and separators</mark>

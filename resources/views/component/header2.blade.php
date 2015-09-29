@@ -3,10 +3,16 @@
 <div class="component-header-2">
 
     <div class="container">
-
+        
         <div class="row">
         
             <div class="left col-sm-5 utils-shadow">
+                
+                <div class="subheader">
+                    
+                    <h3>Offers</h3>
+
+                </div>
                 
                 @yield('header2.left')
 
