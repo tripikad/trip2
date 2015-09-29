@@ -619,7 +619,7 @@ class ConvertBase extends Command
 
             $this->copyFile($from, $to);
 
-            $this->createThumbnail($from, $to);
+            $this->createThumbnail($from, $to, $type);
 
         }
     
@@ -895,12 +895,20 @@ class ConvertBase extends Command
         return true;
     }
 
-    public function createThumbnail($from, $to, $presets = null)
+    public function createThumbnail($from, $to, $type)
     {
 
         try {
 
-            foreach(array_keys(config('imagepresets.presets')) as $preset) {
+            $presets = array_keys(config('imagepresets.presets'));
+
+            if ($type == 'user') {
+
+                $presets = ['small_square', 'xsmall_square'];
+            
+            }
+
+            foreach($presets as $preset) {
 
                 Imageconv::make($to)
                     ->{config("imagepresets.presets.$preset.operation")}(
