@@ -23,8 +23,12 @@
     display: flex;
 }
 
+.utils-padding-left {
+    padding-left: $spacer / 2;
+}
+
 .utils-padding-right {
-    padding-right: $spacer;
+    padding-right: $spacer / 2;
 }
 
 .utils-border-top {
@@ -37,4 +41,8 @@
     padding-bottom: $spacer * 2;
     margin-bottom: $spacer * 2;
     border-bottom: 1px solid #eee;
+}
+
+.utils-shadow {
+    box-shadow: 0px 10px 30px 0px rgba(0,0,0,0.25);
 }

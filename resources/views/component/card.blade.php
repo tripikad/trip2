@@ -8,6 +8,10 @@
     
         <div class="content">
 
+            @if (isset($supertitle))
+                <h2>{{ $supertitle }}</h2>
+            @endif
+
             @if (isset($title))
                 <h3>{{ $title }}</h3>
             @endif

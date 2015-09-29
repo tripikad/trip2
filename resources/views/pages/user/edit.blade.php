@@ -4,12 +4,20 @@
     {{ $title }}
 @stop
 
-@section('header.top')
+@section('header1.top')
     
-    @include('component.user.image', [
-        'image' => $user->imagePreset('small_square') . '?' . str_random(4),
-        'options' => '-circle',
-    ])
+    <div class="row">
+
+        <div class="col-xs-4 col-sm-offset-6 utils-padding-bottom">
+
+        @include('component.user.image', [
+            'image' => $user->imagePreset('small_square') . '?' . str_random(4),
+            'options' => '-circle -large',
+        ])
+
+        </div>
+
+    </div>
 
     {!! Form::model(isset($user) ? $user : null, [
         'url' => $url,
@@ -45,7 +53,7 @@
     
     <div class="row">
 
-        <div class="col-sm-4 utils-padding-right">
+        <div class="col-sm-5 utils-padding-right">
 
             <div class="form-group text-center">
 
@@ -91,7 +99,7 @@
 
         </div>
 
-        <div class="col-sm-4 utils-padding-right">
+        <div class="col-sm-5 utils-padding-right">
 
             <div class="form-group text-center">
 
@@ -137,7 +145,7 @@
 
         </div>
 
-        <div class="col-sm-4">
+        <div class="col-sm-5">
 
             <div class="form-group text-center">
 
@@ -149,13 +157,13 @@
 
                 <div class="row">
                 
-                    <div class="col-xs-1">
+                    <div class="col-xs-1 col-xs-offset-1">
 
                         {!! Form::checkbox('notify_message') !!}
 
                     </div>
 
-                    <div class="col-xs-11">
+                    <div class="col-xs-14">
 
                         {!! trans('user.edit.field.notify_message.title') !!}
 
@@ -169,13 +177,13 @@
 
                 <div class="row">
                 
-                    <div class="col-xs-1">
+                    <div class="col-xs-1 col-xs-offset-1">
                         
                         {!! Form::checkbox('notify_follow') !!}
 
                     </div>
 
-                    <div class="col-xs-11">
+                    <div class="col-xs-14">
                     
                         {!! trans('user.edit.field.notify_follow.title') !!}
                 
@@ -191,7 +199,7 @@
 
     <div class="row">
         
-        <div class="col-sm-3 col-sm-offset-9">
+        <div class="col-sm-3 col-sm-offset-13">
 
             <div class="form-group">
 

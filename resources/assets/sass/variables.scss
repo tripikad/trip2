@@ -1,2 +1,60 @@
-$spacer: $grid-gutter-width;
+// Custom variables
 
+$spacer:                            24px;
+
+$blue:                              #31A1EB;
+$orange:                            #F7BA00;
+
+// Boostrap variable overrides
+
+$brand-primary:                     $blue;
+
+$grid-columns:                      16;
+$grid-gutter-width:                 0;
+
+$font-family-sans-serif:            Karla, sans-serif;
+
+$font-size-base:                    16px;
+$font-size-xs-base:                 15px;
+
+$line-height-base:                  1.6;
+
+$font-size-h1:                      46px;
+$font-size-h2:                      36px;
+$font-size-h3:                      24px;
+$font-size-h4:                      17px;
+
+$font-size-xs-h1:                   28px;
+$font-size-xs-h2:                   22px;
+$font-size-xs-h3:                   20px;
+$font-size-xs-h4:                   18px;
+
+$headings-font-family:              Karla, sans-serif;
+$headings-font-weight:              bold;
+$headings-line-height:              1.3em;
+$headings-color:                    #222;
+
+$btn-primary-border:                $brand-primary;
+
+$btn-border-radius-base:            6px;
+$btn-border-radius-large:           6px;
+$btn-border-radius-small:           6px;
+
+$navbar-height:                     auto;
+$navbar-margin-bottom:              0;
+$navbar-border-radius:              0;
+$navbar-default-color:              black;
+$navbar-default-bg:                 transparent;
+$navbar-default-border:             none;
+
+$navbar-default-link-color:         $brand-primary;
+$navbar-default-link-hover-color:   $brand-primary;
+$navbar-default-link-active-color:  $brand-primary;
+$navbar-default-link-active-bg:     $brand-primary;
+
+$navbar-default-brand-color:        $brand-primary;
+$navbar-default-brand-hover-color:  $brand-primary;
+
+$navbar-default-toggle-hover-bg:    transparent;
+$navbar-default-toggle-icon-bar-bg: $brand-primary;
+$navbar-default-toggle-border-color:transparent;

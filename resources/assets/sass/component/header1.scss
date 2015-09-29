@@ -1,0 +1,47 @@
+.component-header-1 {
+    
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    min-height: $spacer * 12;
+    padding-top: $spacer;
+    position: relative;
+
+    > .overlay {
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;        
+        background-color: rgba(0,0,0,0.55);
+
+        > .navbar {
+
+            height: $spacer * 2;
+            margin-bottom: $spacer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+        }
+
+        > .content {
+
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            h2 {
+
+                font-size: $font-size-h1;
+                color: white;
+
+            }
+        
+        }
+
+    }
+
+}

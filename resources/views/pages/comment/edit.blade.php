@@ -23,10 +23,7 @@
 
     <div class="row">
 
-        <div class="col-md-8">
-        </div>
-
-        <div class="col-md-4">
+        <div class="col-sm-4 col-md-offset-12">
         
             <div class="form-group">
 

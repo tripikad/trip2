@@ -1,19 +1,23 @@
-@foreach($users->chunk(6) as $chunk)
+@foreach($users->chunk(16) as $chunk)
 
     <div class="row">
 
     @foreach($chunk as $user)
 
-        <div class="col-xs-2 utils-padding-bottom">
+        <div class="col-xs-1 utils-padding-bottom">
 
-            <a href="{{ route('user.show', [$user->user]) }}">
+            <div style="width: 80%">
+
+                <a href="{{ route('user.show', [$user->user]) }}">
+                    
+                    @include('component.user.image', [
+                        'image' => $user->user->imagePreset('xsmall_square'),
+                        'options' => '-circle'
+                    ])
                 
-                @include('component.user.image', [
-                    'image' => $user->user->imagePreset(),
-                    'options' => '-circle'
-                ])
-            
-            </a>
+                </a>
+
+            </div>
 
         </div>
         

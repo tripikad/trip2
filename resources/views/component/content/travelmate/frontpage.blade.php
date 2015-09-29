@@ -2,11 +2,11 @@
 
 <h3 class="utils-padding-bottom">{{ trans('frontpage.index.travelmate.title') }}</h3>
 
-<div class="row utils-double-padding-bottom">
+<div class="row utils-padding-bottom">
 
     @foreach ($contents as $content)
 
-        <div class="col-xs-6 col-sm-3 utils-padding-bottom">
+        <div class="col-xs-8 col-sm-4">
 
             <a href="{{ route('content.show', [$content->type, $content]) }}">
 

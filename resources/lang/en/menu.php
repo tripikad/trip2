@@ -2,6 +2,7 @@
 
 return [
 
+    'header.home' => 'Trip.ee',
     'header.news' => 'News',
     'header.flights' => 'Flights',
     'header.travelmates' => 'Travelmates',

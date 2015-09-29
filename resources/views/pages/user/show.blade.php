@@ -1,7 +1,9 @@
 @extends('layouts.main')
 
 @section('title')
+
     {{ $user->name }}
+
 @stop
 
 @section('navbar.bottom')
@@ -26,11 +28,11 @@
 
 @stop
 
-@section('header.top')
+@section('header1.top')
     
     <div class="row">
     
-        <div class="col-xs-4 col-sm-offset-4">
+        <div class="col-xs-offset-6 col-xs-4">
             
             @include('component.user.image', [
                 'image' => $user->imagePreset('small_square'),
@@ -43,7 +45,7 @@
 
 @stop
 
-@section('header.bottom')
+@section('header1.bottom')
    <p>
     {{ trans('user.show.joined', [
         'created_at' => view('component.date.relative', ['date' => $user->created_at])
@@ -95,9 +97,7 @@
 
     @if (count($user->destinationHaveBeen()) > 0 || count($user->destinationWantsToGo()) > 0)
 
-        <div class="row utils-border-bottom">
-
-            <div class="col-sm-6">
+        <div class="utils-border-bottom">
                 
                 @if (count($user->destinationHaveBeen()) > 0)
                 
@@ -109,10 +109,10 @@
 
                 @endif
         
-            </div>
+        </div>
 
-            <div class="col-sm-6">
-            
+        <div class="utils-border-bottom">
+
                 @if (count($user->destinationWantsToGo()) > 0)
 
                     <h3>{{ trans('user.show.wantstogo.title') }}</h3>
@@ -123,8 +123,6 @@
 
                 @endif
         
-            </div>
-
         </div>
 
     @endif

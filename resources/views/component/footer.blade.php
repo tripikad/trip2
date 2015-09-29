@@ -1,15 +1,11 @@
 <div class="component-footer">
     
-    <div class="menu utils-border-bottom">
+    <div class="menu">
         
-        <ul class="list-inline">
-
-            @include('component.menu', [
-                'menu' => 'footer',
-                'items' => config('menu.footer')
-            ])
-
-        </ul>
+        @include('component.menu', [
+            'menu' => 'footer',
+            'items' => config('menu.footer')
+        ])
 
     </div>
 

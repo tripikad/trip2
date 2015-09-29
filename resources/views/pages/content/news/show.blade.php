@@ -1,7 +1,15 @@
 @extends('layouts.main')
 
 @section('title')
+ 
     {{ trans("content.$type.index.title") }}
+
+@stop
+
+@section('header1.image')
+
+    {{ $content->imagePreset('large') }}
+
 @stop
 
 @section('content')
@@ -11,20 +19,11 @@
             utils-unpublished
         @endif
     ">
-        
-    <div class="utils-padding-bottom">
-
-        @include('component.card', [
-            'image' => $content->imagePreset('large'),
-            'options' => '-center -noshade -wide -large',
-            'title' => $content->title,
-        ])
-
-    </div>
 
     @include('component.row', [
         'image' => $content->user->imagePreset(),
         'image_link' => route('user.show', [$content->user]),
+        'heading' => $content->title,
         'description' => view('component.content.description', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
         'extra' => view('component.flags', ['flags' => $content->getFlags()])

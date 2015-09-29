@@ -7,14 +7,14 @@
 
 @section('content')
 
-<div class="utils-border-bottom">
+<div class="utils-padding-bottom">
 
     @include('component.frontpage.search')
 
 </div>
 
 
-<div class="utils-border-bottom">
+<div class="utils-padding-bottom">
 
 @foreach($features as $type => $feature) 
 

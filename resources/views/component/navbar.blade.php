@@ -1,88 +1,77 @@
-<nav class="component-navbar navbar navbar-default">
+<div class="component-navbar row">
 
-    <div class="container-fluid">
+    <div class="col-sm-16 text-right visible-xs-block">
+        
+        <ul class="list-inline">
 
-        <div class="navbar-header">
-            
-            <button type="button" class="navbar-toggle collapsed btn btn-link" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+            <li><a href="">☰</a></li>
     
-            </button>
-
-            <h1><a href="/">{{ config('site.name') }}</a></h1>
-
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
-            <ul class="nav navbar-nav">
-            
-                @include('component.menu', [
-                    'menu' => 'header',
-                    'items' => config('menu.header')
-                ])
-            
-            </ul>
-
-            @if(auth()->user() && ! auth()->user()->hasRole('admin'))
-
-                @include('component.menu', [
-                    'menu' => 'auth',
-                    'items' => [
-                        'user' => [
-                            'route' => route('user.show', [auth()->user()]),
-                            'title' =>  auth()->user()->name
-                        ],
-                        'logout' => [
-                            'route' => route('login.logout'),
-                        ],
-
-                    ],
-                    'options' => 'nav navbar-nav navbar-right'
-                ])
-
-            @elseif(auth()->user() && auth()->user()->hasRole('admin'))
-
-                @include('component.menu', [
-                    'menu' => 'auth',
-                    'items' => [
-                        'user' => [
-                            'route' => route('user.show', [auth()->user()]),
-                            'title' =>  auth()->user()->name
-                        ],
-                        'admin' => [
-                            'route' => route('content.index', ['internal'])
-                        ],
-                        'logout' => [
-                            'route' => route('login.logout'),
-                        ],
-
-                    ],
-                    'options' => 'nav navbar-nav navbar-right'
-                ])
-
-            @else
-
-                @include('component.menu', [
-                    'menu' => 'auth',
-                    'items' => [
-                        'register' => [
-                            'route' => route('register.form'),
-                        ],
-                        'login' => [
-                            'route' => route('login.form')
-                        ],
-                    ],
-                    'options' => 'nav navbar-nav navbar-right'
-                ])
-
-            @endif
-
-        </div>
+        </ul>
 
     </div>
 
-</nav>
+    <div class="col-sm-11 hidden-xs">
+            
+        @include('component.menu', [
+            'menu' => 'header',
+            'items' => config('menu.header')
+        ])
+    
+    </div>
+
+    <div class="col-sm-5 text-right hidden-xs">
+
+        @if(auth()->user() && ! auth()->user()->hasRole('admin'))
+
+            @include('component.menu', [
+                'menu' => 'auth',
+                'items' => [
+                    'user' => [
+                        'route' => route('user.show', [auth()->user()]),
+                        'title' =>  auth()->user()->name
+                    ],
+                    'logout' => [
+                        'route' => route('login.logout'),
+                    ],
+
+                ],
+            ])
+
+        @elseif(auth()->user() && auth()->user()->hasRole('admin'))
+
+            @include('component.menu', [
+                'menu' => 'auth',
+                'items' => [
+                    'user' => [
+                        'route' => route('user.show', [auth()->user()]),
+                        'title' =>  auth()->user()->name
+                    ],
+                    'admin' => [
+                        'route' => route('content.index', ['internal'])
+                    ],
+                    'logout' => [
+                        'route' => route('login.logout'),
+                    ],
+
+                ],
+            ])
+
+        @else
+
+            @include('component.menu', [
+                'menu' => 'auth',
+                'items' => [
+                    'register' => [
+                        'route' => route('register.form'),
+                    ],
+                    'login' => [
+                        'route' => route('login.form')
+                    ],
+                ],
+            ])
+
+        @endif
+
+    </div>
+
+</div>

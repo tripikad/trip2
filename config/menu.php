@@ -3,7 +3,10 @@
 	return [
 
 	    'header' => [
-	       'news' => [
+	       	'home' => [
+	            'route' => '/'
+	        ],
+	        'news' => [
 	            'route' => '/content/news'
 	        ],
 	       'flights' => [

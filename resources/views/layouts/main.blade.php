@@ -11,25 +11,35 @@
     </head>
     <body>
         
-        <div class="container">
-            
-            <div class="utils-border-bottom text-center">          
-                
-                @include('component.navbar')
-            
-            </div>  
+        <div class="utils-padding-bottom">
 
-            @yield('navbar.bottom')
+            @include('component.header1')
+
+            @include('component.header2')
+
+            @include('component.header3')
+
+        </div>
+
+        <div class="container">
+
+            <div class="text-center">
+            
+                @yield('navbar.bottom')
+            
+            </div>
 
             @include('component.info.success')
-            
-            @yield('header', view('component.header'))
 
             @include('component.info.error')
 
             @yield('content')
 
-            @include('component.footer')
+            <div class="text-center">
+            
+                @include('component.footer')
+            
+            </div>
 
         </div>
 

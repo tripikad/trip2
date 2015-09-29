@@ -1,0 +1,29 @@
+.component-header-3 {
+    
+    background: $orange;
+    width: 100%;
+
+    > .container {
+
+        height: 100%;
+        background: white;
+
+        > .row > .left {
+
+        }
+
+        > .row > .center {
+
+            padding-top: $spacer;
+
+        }
+
+        > .row > .right {
+
+            padding-top: $spacer;
+
+        }
+
+    }
+
+}

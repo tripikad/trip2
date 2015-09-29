@@ -1,10 +1,12 @@
 @extends('layouts.main')
 
 @section('title')
+    
     {{ trans("content.$type.index.title") }}
+
 @stop
 
-@section('header.right')
+@section('header1.right')
     @include('component.button', [ 
         'route' => route('content.create', ['type' => $type]),
         'title' => trans("content.$type.create.title")
@@ -13,7 +15,7 @@
 
 @section('content')
 
-    <div class="utils-border-bottom">
+    <div class="utils-padding-bottom">
 
         @include('component.filter')
 
@@ -23,7 +25,7 @@
 
         <div class="row utils-padding-bottom">
                             
-            <div class="col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
+            <div class="col-sm-14 col-sm-offset-1 col-lg-12 col-lg-offset-2">
                     
                 <a href="{{ route('content.show', [$content->type, $content]) }}">
                         

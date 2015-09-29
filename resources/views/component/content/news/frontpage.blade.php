@@ -1,8 +1,8 @@
 @if (count($contents) > 0)
 
-<div class="row utils-double-padding-bottom">
+<div class="row utils-padding-bottom">
 
-        <div class="col-sm-6">
+        <div class="col-sm-8">
 
             @if (isset($contents[0]))
 
@@ -11,7 +11,6 @@
                 @include('component.card', [
                     'image' => $contents[0]->imagePreset('medium'),
                     'title' => $contents[0]->title,
-                    'options' => '-landscape-padding'
                 ])
                     
             </a>
@@ -20,11 +19,11 @@
 
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-8">
 
             <div class="row">
 
-                <div class="col-sm-6 utils-padding-bottom">
+                <div class="col-sm-8">
                     
                     @if (isset($contents[1]))
 
@@ -42,7 +41,7 @@
 
                 </div>
 
-                <div class="col-sm-6 utils-padding-bottom">
+                <div class="col-sm-8">
 
                     @if (isset($contents[2]))
 
@@ -64,7 +63,7 @@
 
             <div class="row">
 
-                <div class="col-sm-6 utils-padding-bottom">
+                <div class="col-sm-8">
 
                     @if (isset($contents[3]))
 
@@ -82,7 +81,7 @@
 
                 </div>
 
-                <div class="col-sm-6 utils-padding-bottom">
+                <div class="col-sm-8">
 
                     @if (isset($contents[4]))
 
