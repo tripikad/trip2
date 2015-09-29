@@ -1,6 +1,16 @@
 <div class="component-navbar row">
 
-    <div class="col-sm-12">
+    <div class="col-sm-16 text-right visible-xs-block">
+        
+        <ul class="list-inline">
+
+            <li><a href="">☰</a></li>
+    
+        </ul>
+
+    </div>
+
+    <div class="col-sm-12 hidden-xs">
             
         @include('component.menu', [
             'menu' => 'header',
@@ -9,7 +19,7 @@
     
     </div>
 
-    <div class="col-sm-4 text-right">
+    <div class="col-sm-4 text-right hidden-xs">
 
         @if(auth()->user() && ! auth()->user()->hasRole('admin'))
 

@@ -30,7 +30,7 @@
     
     <div class="row">
     
-        <div class="col-xs-4 col-sm-offset-4">
+        <div class="col-xs-offset-6 col-xs-4">
             
             @include('component.user.image', [
                 'image' => $user->imagePreset('small_square'),
@@ -95,9 +95,7 @@
 
     @if (count($user->destinationHaveBeen()) > 0 || count($user->destinationWantsToGo()) > 0)
 
-        <div class="row utils-border-bottom">
-
-            <div class="col-sm-6">
+        <div class="utils-border-bottom">
                 
                 @if (count($user->destinationHaveBeen()) > 0)
                 
@@ -109,10 +107,10 @@
 
                 @endif
         
-            </div>
+        </div>
 
-            <div class="col-sm-6">
-            
+        <div class="utils-border-bottom">
+
                 @if (count($user->destinationWantsToGo()) > 0)
 
                     <h3>{{ trans('user.show.wantstogo.title') }}</h3>
@@ -123,8 +121,6 @@
 
                 @endif
         
-            </div>
-
         </div>
 
     @endif
