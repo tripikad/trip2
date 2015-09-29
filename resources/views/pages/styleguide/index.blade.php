@@ -7,9 +7,19 @@
 @stop
 
 @section('header2.left')
-    @include('component.placeholder', [
-        'text' => 'Header2 left column',
+
+    @include('component.card', [
+        'image' => $random_image2,
+        'title' => 'Flightoffer A in Header 2 left column',
+        'options' => '-center -wide',
     ])
+
+    @include('component.card', [
+        'image' => $random_image3,
+        'title' => 'Flightoffer B in Header 2 left column',
+        'options' => '-center -wide',
+    ])
+
 @stop
 
 @section('header2.center')
@@ -24,9 +34,23 @@
     ])
 @stop
 
-@section('header3.left') Header3 left column @stop
-@section('header3.center') Header3 lenter column @stop
-@section('header3.right') Header3 right column @stop
+@section('header3.left')
+    @include('component.placeholder', [
+        'text' => 'Header3 left column',
+    ])
+@stop
+
+@section('header3.center')
+    @include('component.placeholder', [
+        'text' => 'Header3 center column',
+    ])
+@stop
+
+@section('header3.right')
+    @include('component.placeholder', [
+        'text' => 'Header3 right column',
+    ])
+@stop
 
 @section('content')
 
@@ -268,21 +292,14 @@
 
 <div class="row">
     
-    @foreach(['(none)', '-center', '-noshade', '-noshade -invert', '-square'] as $options) 
+    @foreach(['(none)', '-center', '-noshade', '-noshade -invert', '-square', '-wide'] as $options) 
 
-    <div class="col-sm-3 col-sm-offser-1">
+    <div class="col-sm-3 col-sm-offset-1">
         
         <p><code>{{ $options }}</code></p>
 
         @include('component.card', [
-            'image' => \App\Content::whereType('photo')
-                ->orderByRaw('RAND()')
-                ->first()
-            ? \App\Content::whereType('photo')
-                ->orderByRaw('RAND()')
-                ->first()
-                ->imagePreset()
-            : null,
+            'image' => $random_image,
             'title' => 'Here is title',
             'text' => 'Here is subtitle',
             'options' => $options,

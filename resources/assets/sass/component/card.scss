@@ -50,6 +50,10 @@
         padding-bottom: 100%;
     }
 
+    &.-wide {
+        padding-bottom: 40%;
+    }
+
     &.-rounded {
         border-radius: $spacer;
     }
