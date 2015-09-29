@@ -595,7 +595,7 @@ class ConvertBase extends Command
     
     }
 
-    public function convertLocalImage($id, $imagePath, $modelName, $type)
+    public function convertLocalImage($id, $imagePath, $modelName, $type = null)
     {
 
         $imagePath = $this->cleanAll($imagePath);
@@ -625,7 +625,7 @@ class ConvertBase extends Command
     
     }
 
-    public function convertRemoteImage($id, $imageUrl, $modelName, $type)
+    public function convertRemoteImage($id, $imageUrl, $modelName, $type = null)
     {
 
         $newImage = false;
@@ -677,7 +677,7 @@ class ConvertBase extends Command
                 }
 
                 $this->copyFile($from, $to);
-                $this->createThumbnail($from, $to);
+                $this->createThumbnail($from, $to, $type);
             
             }
 
@@ -895,7 +895,7 @@ class ConvertBase extends Command
         return true;
     }
 
-    public function createThumbnail($from, $to, $type)
+    public function createThumbnail($from, $to, $type = null)
     {
 
         try {
