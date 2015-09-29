@@ -10,7 +10,7 @@
 
                 @include('component.card', [
                     'text' => $content->title,
-                    'options' => '-wide'
+                    'options' => '-square'
                 ])
                     
             </a>
