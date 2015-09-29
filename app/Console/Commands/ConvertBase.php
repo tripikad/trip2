@@ -900,7 +900,7 @@ class ConvertBase extends Command
 
         try {
 
-            foreach($presets ? $presets : array_keys(config('imagepresets.presets')) as $preset) {
+            foreach(array_keys(config('imagepresets.presets')) as $preset) {
 
                 Imageconv::make($to)
                     ->{config("imagepresets.presets.$preset.operation")}(
