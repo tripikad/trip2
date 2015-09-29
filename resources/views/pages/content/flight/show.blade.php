@@ -1,7 +1,19 @@
 @extends('layouts.main')
 
 @section('title')
-    {{ trans("content.$type.index.title") }}
+
+    {{ $content->title }}
+
+@stop
+
+@section('header1.image')
+
+    @if($content->images())
+
+        {{ $content->imagePreset('large') }}
+
+    @endif
+
 @stop
 
 @section('content')
@@ -12,21 +24,9 @@
         @endif
     ">
 
-    @if($image = $content->images()->first())
-        
-        <div class="utils-padding-bottom">
-
-            @include('component.card', [
-                'image' => $content->imagePreset('large'),
-                'options' => '-center -noshade -wide -large',
-                'title' => $content->title,
-            ])
-
-        </div>
-
-    @endif
-
     @include('component.row', [
+        'image' => $content->user->imagePreset(),
+        'image_link' => route('user.show', [$content->user]),
         'description' => view('component.content.description', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
         'extra' => view('component.flags', ['flags' => $content->getFlags()])
