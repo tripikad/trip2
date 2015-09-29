@@ -6,6 +6,7 @@ return [
     'index.search.destination.title' => 'Enter a destination',
     'index.search.submit.title' => 'Go',
 
+    'index.shortnews.title' => 'Shortnews',
     'index.flight.title' => 'Flight offers',
     'index.travelmate.title' => 'Travelmates',
     'index.forum.title' => 'Forums',

@@ -1,5 +1,7 @@
 @if (count($contents) > 0)
 
+<h3 class="utils-padding-bottom">{{ trans('frontpage.index.shortnews.title') }}</h3>
+
 <div class="row utils-double-padding-bottom">
 
     @foreach ($contents as $content)
