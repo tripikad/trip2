@@ -895,14 +895,12 @@ class ConvertBase extends Command
         return true;
     }
 
-    public function createThumbnail($from, $to)
+    public function createThumbnail($from, $to, $presets = null)
     {
 
         try {
 
-            if (count(config('imagepresets.presets'))) {
-            
-            foreach(array_keys(config('imagepresets.presets')) as $preset) {
+            foreach($presets ? $presets : array_keys(config('imagepresets.presets')) as $preset) {
 
                 Imageconv::make($to)
                     ->{config("imagepresets.presets.$preset.operation")}(
@@ -915,8 +913,6 @@ class ConvertBase extends Command
                         config("imagepresets.presets.$preset.path") . basename($to),
                         config("imagepresets.presets.$preset.quality")
                     );
-
-            }
 
             }
 
