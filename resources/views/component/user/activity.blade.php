@@ -6,7 +6,7 @@
 
         @include('component.row', [
             'image' => $user->imagePreset(),
-            'text' => trans('user.activity.index.row.content', [
+            'description' => trans('user.activity.index.row.content', [
                 'user' => $user->name,
                 'title' => '<a href="'
                     . route('content.show', [$item->type, $item->id])
@@ -22,7 +22,7 @@
 
         @include('component.row', [
             'image' => $user->imagePreset(),
-            'text' => trans('user.activity.index.row.comment', [
+            'description' => trans('user.activity.index.row.comment', [
                 'user' => $user->name,
                 'title' => '<a href="'
                     . route('content.show', [$item->content->type, $item->content->id])
