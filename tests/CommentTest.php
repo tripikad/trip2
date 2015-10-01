@@ -35,47 +35,6 @@ class CommentTest extends TestCase
 
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessage Received status code [401]
-     */
-
-    public function test_regular_user_cannot_comments_on_private_content()
-    {
-
-        $regular_user = factory(App\User::class)->create();
-
-        foreach($this->privateContentTypes as $type) {
-
-            $content = factory(Content::class)->create([
-                'user_id' => factory(App\User::class)->create()->id,
-                'title' => 'Hello',
-                'type' => $type
-            ]);
-
-            $comment = factory(Comment::class)->create([
-                'user_id' => factory(App\User::class)->create()->id,
-                'content_id' => $content->id,
-                'body' => 'World'
-            ]);
-
-            // Can not add private content comments
-
-            $this->actingAs($regular_user)
-                ->visit("content/$content->type/$content->id")
-                ->post("content/$content->type/$content->id/comment"); // 401
-
-            // Can not edit private content comments
-
-            $this->actingAs($regular_user)
-                ->visit("content/$content->type/$content->id")
-                ->dontSee(trans('comment.action.edit.title'))
-                ->visit("comment/$comment->id/edit"); // 401
-        
-        }
-    
-    }
-
     public function test_regular_user_can_create_and_edit_comment()
     {
 
@@ -126,6 +85,80 @@ class CommentTest extends TestCase
 
         }
 
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Received status code [401]
+     */
+
+    public function test_regular_user_cannot_edit_other_comments()
+    {
+
+        $regular_user = factory(App\User::class)->create();
+
+        foreach($this->publicContentTypes as $type) {
+
+            $content = factory(Content::class)->create([
+                'user_id' => factory(App\User::class)->create()->id,
+                'type' => $type
+            ]);
+
+            $comment = factory(Comment::class)->create([
+                'user_id' => factory(App\User::class)->create()->id,
+                'content_id' => $content->id,
+            ]);
+
+            // Can not edit other users comments
+
+            $this->actingAs($regular_user)
+                ->visit("content/$content->type/$content->id")
+                ->dontSee(trans('comment.action.edit.title'))
+                ->visit("comment/$comment->id/edit"); // 401
+
+        }
+
+    }
+
+    /**
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Received status code [401]
+     */
+
+    public function test_regular_user_cannot_comments_on_private_content()
+    {
+
+        $regular_user = factory(App\User::class)->create();
+
+        foreach($this->privateContentTypes as $type) {
+
+            $content = factory(Content::class)->create([
+                'user_id' => factory(App\User::class)->create()->id,
+                'title' => 'Hello',
+                'type' => $type
+            ]);
+
+            $comment = factory(Comment::class)->create([
+                'user_id' => factory(App\User::class)->create()->id,
+                'content_id' => $content->id,
+                'body' => 'World'
+            ]);
+
+            // Can not add private content comments
+
+            $this->actingAs($regular_user)
+                ->visit("content/$content->type/$content->id")
+                ->post("content/$content->type/$content->id/comment"); // 401
+
+            // Can not edit private content comments
+
+            $this->actingAs($regular_user)
+                ->visit("content/$content->type/$content->id")
+                ->dontSee(trans('comment.action.edit.title'))
+                ->visit("comment/$comment->id/edit"); // 401
+        
+        }
+    
     }
 
 }
