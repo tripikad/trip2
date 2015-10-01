@@ -4,7 +4,7 @@
 
         <div class="form-group">
 
-            {!! Form::open(array('url' => route('comment.store', [$content->type, $content->id]))) !!}
+            {!! Form::open(array('url' => route('comment.store', [$content->type, $content->id]),'id' => "comment_form_{$content->type}")) !!}
 
             <div class="form-group">
             
