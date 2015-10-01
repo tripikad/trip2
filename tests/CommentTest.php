@@ -10,14 +10,31 @@ class CommentTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_regular_user_can_create_comment()
+    public function test_regular_user_can_create_and_edit_comment()
     {
 
         $regular_user = factory(App\User::class)->create();
 
+        $types = [
+            'blog',
+            'flight',
+            'forum',
+            'expat',
+            'buysell',
+//          'internal',
+            'news',
+            'shortnews',
+            'photo',
+//          'static',
+            'travelmate'
+        ];
+
+        foreach($types as $type) {
+
         $content = factory(Content::class)->create([
             'user_id' => factory(App\User::class)->create()->id,
-            'title' => 'Hello'
+            'title' => 'Hello',
+            'type' => $type
         ]);
 
         // Add comment
@@ -54,6 +71,8 @@ class CommentTest extends TestCase
                 'body' => 'Earth',
                 'status' => 1
             ]);
+
+        }
 
     }
 
