@@ -44,7 +44,6 @@ class CommentTest extends TestCase
 
             $content = factory(Content::class)->create([
                 'user_id' => factory(App\User::class)->create()->id,
-                'title' => 'Hello',
                 'type' => $type
             ]);
 
@@ -52,19 +51,19 @@ class CommentTest extends TestCase
 
             $this->actingAs($regular_user)
                 ->visit("content/$content->type/$content->id")
-                ->type('World', 'body')
+                ->type("Hello $content->type", 'body')
                 ->press(trans('comment.create.submit.title'))
                 ->seePageIs("content/$content->type/$content->id")
-                ->see('World')
+                ->see("Hello $content->type")
                 ->see($regular_user->name)
                 ->seeInDatabase('comments', [
                     'user_id' => $regular_user->id,
                     'content_id' => $content->id,
-                    'body' => 'World',
+                    'body' => "Hello $content->type",
                     'status' => 1
                 ]);
 
-            $comment = Comment::whereBody('World')->first();
+            $comment = Comment::whereBody("Hello $content->type")->first();
 
             // Can edit own comment
 
@@ -72,14 +71,14 @@ class CommentTest extends TestCase
                 ->visit("content/$content->type/$content->id")
                 ->press(trans('comment.action.edit.title'))
                 ->seePageIs("comment/$comment->id/edit")
-                ->type('Earth', 'body')
+                ->type("Hola $content->type", 'body')
                 ->press(trans('comment.edit.submit.title'))
                 ->seePageIs("content/$content->type/$content->id")
-                ->see('Earth')
+                ->see("Hola $content->type")
                 ->seeInDatabase('comments', [
                     'user_id' => $regular_user->id,
                     'content_id' => $content->id,
-                    'body' => 'Earth',
+                    'body' => "Hola $content->type",
                     'status' => 1
                 ]);
 
@@ -134,14 +133,12 @@ class CommentTest extends TestCase
 
             $content = factory(Content::class)->create([
                 'user_id' => factory(App\User::class)->create()->id,
-                'title' => 'Hello',
                 'type' => $type
             ]);
 
             $comment = factory(Comment::class)->create([
                 'user_id' => factory(App\User::class)->create()->id,
                 'content_id' => $content->id,
-                'body' => 'World'
             ]);
 
             // Can not add private content comments
