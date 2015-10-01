@@ -14,6 +14,7 @@
 use App\User;
 use App\Message;
 use App\Content;
+use App\Comment;
 use App\Follow;
 
 $factory->define(User::class, function ($faker) {
@@ -58,6 +59,17 @@ $factory->define(Content::class, function ($faker) {
         'title' => $faker->sentence(),
         'body' => $faker->paragraph(),
         'type' => 'forum',
+        'status' => 1
+    ];
+
+});
+
+$factory->define(Comment::class, function ($faker) {
+    
+    return [
+        'user_id' => 1,
+        'content_id' => 1,
+        'body' => $faker->paragraph(),
         'status' => 1
     ];
 
