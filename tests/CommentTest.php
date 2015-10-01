@@ -10,6 +10,31 @@ class CommentTest extends TestCase
 {
     use DatabaseTransactions;
 
+    protected $publicContentTypes;
+
+    public function setUp() {
+
+        parent::setUp();
+
+        $this->publicContentTypes = [
+            'blog',
+            'flight',
+            'forum',
+            'expat',
+            'buysell',
+            'news',
+            'shortnews',
+            'photo',
+            'travelmate'
+        ];
+
+        $this->privateContentTypes = [
+            'internal',
+            'static',
+        ];
+
+    }
+
     /**
      * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessage Received status code [401]
@@ -20,12 +45,7 @@ class CommentTest extends TestCase
 
         $regular_user = factory(App\User::class)->create();
 
-        $types = [
-            'internal',
-            'static',
-        ];
-
-        foreach($types as $type) {
+        foreach($this->privateContentTypes as $type) {
 
             $content = factory(Content::class)->create([
                 'user_id' => factory(App\User::class)->create()->id,
@@ -39,16 +59,17 @@ class CommentTest extends TestCase
                 'body' => 'World'
             ]);
 
-            // Can not comment
+            // Can not add private content comments
 
             $this->actingAs($regular_user)
                 ->visit("content/$content->type/$content->id")
-                ->dontSee(trans('comment.create.submit.title'))
                 ->post("content/$content->type/$content->id/comment"); // 401
 
-            // Can not edit
+            // Can not edit private content comments
 
             $this->actingAs($regular_user)
+                ->visit("content/$content->type/$content->id")
+                ->dontSee(trans('comment.action.edit.title'))
                 ->visit("comment/$comment->id/edit"); // 401
         
         }
@@ -60,19 +81,7 @@ class CommentTest extends TestCase
 
         $regular_user = factory(App\User::class)->create();
 
-        $types = [
-            'blog',
-            'flight',
-            'forum',
-            'expat',
-            'buysell',
-            'news',
-            'shortnews',
-            'photo',
-            'travelmate'
-        ];
-
-        foreach($types as $type) {
+        foreach($this->publicContentTypes as $type) {
 
             $content = factory(Content::class)->create([
                 'user_id' => factory(App\User::class)->create()->id,
@@ -80,7 +89,7 @@ class CommentTest extends TestCase
                 'type' => $type
             ]);
 
-            // Add comment
+            // Can comment
 
             $this->actingAs($regular_user)
                 ->visit("content/$content->type/$content->id")
@@ -98,7 +107,7 @@ class CommentTest extends TestCase
 
             $comment = Comment::whereBody('World')->first();
 
-            // Edit own comment
+            // Can edit own comment
 
             $this->actingAs($regular_user)
                 ->visit("content/$content->type/$content->id")
