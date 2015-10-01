@@ -4,6 +4,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 use App\User;
 use App\Content;
+use App\Comment;
 
 class CommentTest extends TestCase
 {
@@ -35,12 +36,25 @@ class CommentTest extends TestCase
                 'status' => 1
             ]);
 
+        $comment = Comment::whereBody('World')->first();
+
         // Edit own comment
 
         $this->actingAs($regular_user)
             ->visit("content/$content->type/$content->id")
-            ->press(trans('comment.action.edit.title'));
-            
+            ->press(trans('comment.action.edit.title'))
+            ->seePageIs("comment/$comment->id/edit")
+            ->type('Earth', 'body')
+            ->press(trans('comment.edit.submit.title'))
+            ->seePageIs("content/$content->type/$content->id")
+            ->see('Earth')
+            ->seeInDatabase('comments', [
+                'user_id' => $regular_user->id,
+                'content_id' => $content->id,
+                'body' => 'Earth',
+                'status' => 1
+            ]);
+
     }
 
 }
