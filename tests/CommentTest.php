@@ -12,31 +12,35 @@ class CommentTest extends TestCase
     public function test_regular_user_can_create_comment()
     {
 
-        $user1 = factory(App\User::class)->create();
-        $user2 = factory(App\User::class)->create();
+        $regular_user = factory(App\User::class)->create();
 
-        $content1 = factory(Content::class)->create([
-            'user_id' => $user1->id,
+        $content = factory(Content::class)->create([
+            'user_id' => factory(App\User::class)->create()->id,
             'title' => 'Hello'
         ]);
 
         // Add comment
 
-        $this->actingAs($user2)
-            ->visit("content/$content1->type/$content1->id")
+        $this->actingAs($regular_user)
+            ->visit("content/$content->type/$content->id")
             ->type('World', 'body')
             ->press(trans('comment.create.submit.title'))
-            ->seePageIs("content/$content1->type/$content1->id")
+            ->seePageIs("content/$content->type/$content->id")
             ->see('World')
-            ->see($user2->name);
+            ->see($regular_user->name)
+            ->seeInDatabase('comments', [
+                'user_id' => $regular_user->id,
+                'content_id' => $content->id,
+                'body' => 'World',
+                'status' => 1
+            ]);
 
-        $this->seeInDatabase('comments', [
-            'user_id' => $user2->id,
-            'content_id' => $content1->id,
-            'body' => 'World',
-            'status' => 1
-        ]);
+        // Edit own comment
 
+        $this->actingAs($regular_user)
+            ->visit("content/$content->type/$content->id")
+            ->press(trans('comment.action.edit.title'));
+            
     }
 
 }
