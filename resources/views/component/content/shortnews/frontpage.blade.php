@@ -6,7 +6,7 @@
 
     @foreach ($contents as $content)
 
-        <div class="col-sm-4 utils-padding-bottom">
+        <div class="col-sm-3 utils-padding-bottom">
 
             <a href="{{ route('content.show', [$content->type, $content]) }}">
 
