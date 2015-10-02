@@ -33,6 +33,10 @@
         
         @include('component.row', [
             'heading' => $content->title,
+            'heading_link' => route('content.show', [
+                'type' => $content->type,
+                'id' => $content
+            ]),
             'description' => view('component.date.short', [
                 'date' => $content->end_at
             ]),
