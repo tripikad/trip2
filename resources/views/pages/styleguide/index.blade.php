@@ -120,11 +120,11 @@
 
 <div class="row" style="border-left: 1px solid gray;">
     
-    @for ($i = 1; $i < 17; $i++)
+    @for ($i = 1; $i < 25; $i++)
 
         <div class="col-sm-1 text-center" style="border-right: 1px solid gray;">
 
-            Col{{ $i }}
+            {{ $i }}
 
         </div>
 
@@ -134,6 +134,23 @@
 
 <br />
 
+<div class="row" style="border-left: 1px solid gray;">
+    
+    @for ($i = 1; $i < 13; $i++)
+
+        <div class="col-sm-2 text-center" style="border-right: 1px solid gray;">
+
+            {{ $i }}
+
+        </div>
+
+    @endfor
+
+</div>
+
+<br />
+
+{{--
 <p>When columns contain uneven amount of content, use <code>.utils-equal-height</code> on <code>.row</code> element for equal height columns.</p>
 
 @foreach(['', 'utils-equal-height'] as $options) 
@@ -155,7 +172,7 @@
 <br />
 
 @endforeach
-
+--}}
 
 <mark>Menu</mark>
 
@@ -187,7 +204,7 @@
 
     @foreach(['(none)', '-good', '-bad', '-neutral', '-border'] as $options2) 
 
-        <div class="col-xs-3">
+        <div class="col-xs-4">
 
             <p><code>{{ $options2 }} {{ $options1 }}</code></p>
             
@@ -244,7 +261,7 @@
     
     @foreach(['(none)', '-rounded', '-circle'] as $options) 
 
-        <div class="col-xs-2 col-xs-offset-1">
+        <div class="col-xs-2 col-xs-offset-1 col-xs-pull-1">
             
             <p><code>{{ $options }}</code></p>
             
@@ -306,7 +323,7 @@
     
     @foreach(['(none)', '-center', '-noshade', '-noshade -invert', '-square', '-wide'] as $options) 
 
-    <div class="col-sm-3 col-sm-offset-1">
+    <div class="col-sm-4">
         
         <p><code>{{ $options }}</code></p>
 

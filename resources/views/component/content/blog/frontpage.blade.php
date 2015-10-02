@@ -2,7 +2,7 @@
 
 <h3 class="utils-padding-bottom">{{ trans('frontpage.index.blog.title') }}</h3>
 
-<div class="utils-double-padding-bottom">
+<div class="utils-padding-bottom">
 
     @include('component.placeholder', [
         'text' => 'Featured blogs will go here',

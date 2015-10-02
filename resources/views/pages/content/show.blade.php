@@ -1,10 +1,10 @@
-@extends('layouts.main')
+@extends('layouts.twocol')
 
 @section('title')
     {{ trans("content.$type.index.title") }}
 @stop
 
-@section('content')
+@section('content.left')
 
     <div class="utils-border-bottom 
         @if (! $content->status)

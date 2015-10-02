@@ -1,5 +1,17 @@
 .component-row {
 
+    > div > div:nth-child(1) {
+        background: yellow;
+    }
+    
+    > div > div:nth-child(2) {
+        background: orange;
+    }
+
+    > div > div:nth-child(3) {
+        background: yellow;
+    }
+    
     > .row > [class*="col-"] {
 
         display: flex;

@@ -29,6 +29,8 @@
             
             </div>
 
+            @yield('header4')
+
             @include('component.info.success')
 
             @include('component.info.error')

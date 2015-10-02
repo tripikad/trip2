@@ -6,19 +6,19 @@
 
         <div class="row">
         
-            <div class="left col-sm-5">
+            <div class="left col-sm-7">
                 
                 @yield('header3.left')
 
             </div>
 
-            <div class="center col-sm-offset-1 col-sm-5">
+            <div class="center col-sm-offset-1 col-sm-7">
                 
                 @yield('header3.center')
 
             </div>
             
-            <div class="right col-sm-offset-1 col-sm-4">
+            <div class="right col-sm-offset-1 col-sm-7">
                 
                 @yield('header3.right')
 

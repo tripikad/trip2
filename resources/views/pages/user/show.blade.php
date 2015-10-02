@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.medium')
 
 @section('title')
 
@@ -77,7 +77,7 @@
 @stop
 
 
-@section('content')
+@section('content.medium')
 
     <div class="utils-border-bottom text-center">
 

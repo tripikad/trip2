@@ -23,12 +23,20 @@
     display: flex;
 }
 
-.utils-padding-left {
+.utils-half-padding-left {
     padding-left: $spacer / 2;
 }
 
-.utils-padding-right {
+.utils-half-padding-right {
     padding-right: $spacer / 2;
+}
+
+.utils-padding-left {
+    padding-left: $spacer;
+}
+
+.utils-padding-right {
+    padding-right: $spacer;
 }
 
 .utils-border-top {

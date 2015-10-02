@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.twocol')
 
 @section('title')
 
@@ -28,7 +28,7 @@
 
 @stop
 
-@section('content')
+@section('header4')
     
     <div class="utils-border-bottom">
 
@@ -36,9 +36,13 @@
 
     </div>
 
+@stop
+
+@section('content.left')
+
     @foreach ($contents as $content)
 
-        <div class="utils-border-bottom">
+        <div class="utils-padding-bottom">
 
         @include('component.row', [
             'image' => $content->user->imagePreset(),
