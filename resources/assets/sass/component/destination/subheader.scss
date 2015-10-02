@@ -1,0 +1,29 @@
+.component-destination-subheader {
+
+    height: $spacer * 3;
+    padding: 0 $spacer / 2;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+
+    > a {
+
+        color: white;
+
+        > h3 {
+
+            font-size: $font-size-h4;
+            color: white;
+            
+        }
+
+    }
+
+    &.-orange {
+
+        background: $orange;
+    
+    }
+
+}

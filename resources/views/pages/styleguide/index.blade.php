@@ -57,8 +57,8 @@
 @section('header3.center')
 
     @include('component.subheader', [
-        'title' => 'Subheader in Header 3 center',
-        'link_title' => 'More',
+        'title' => 'Header 3 subheader',
+        'link_title' => '',
         'link_route' => '',
         'options' => '-orange',
     ])
@@ -69,7 +69,13 @@
 
 @section('header3.right')
     
-    <h3>Subheader in header 3 right</h3>
+    @include('component.destination.subheader', [
+        'title' => 'Tokyo',
+        'title_route' => '',
+        'text' => 'Jaapan',
+        'text_route' => '',
+        'options' => '-orange'
+    ])
 
     <p>This book<br />Is a record<br />Of a pleasure trip</p>
 

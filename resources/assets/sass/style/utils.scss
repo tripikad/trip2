@@ -28,6 +28,10 @@
 
 // Paddings
 
+.utils-padding {
+    padding: $spacer;
+}
+
 .utils-padding-top {
     padding-bottom: $spacer;
 }

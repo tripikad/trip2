@@ -12,13 +12,13 @@
 
             </div>
 
-            <div class="center col-sm-4 utils-padding-left">       
+            <div class="center col-sm-4 utils-padding">       
 
                 @yield('header2.center')
 
             </div>
             
-            <div class="right col-sm-4 utils-padding-left">       
+            <div class="right col-sm-4 utils-padding">       
 
                 @yield('header2.right')
 
