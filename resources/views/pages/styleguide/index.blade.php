@@ -57,7 +57,7 @@
 
 @section('header3.right')
     
-    <h3>SH in Header 3 right</h3>
+    <h3>Subheader in header 3 right</h3>
 
     <p>This book<br />Is a record<br />Of a pleasure trip</p>
 
@@ -109,7 +109,7 @@
 <div class="utils-border-bottom">
 
     @include('component.placeholder', [
-        'text' => 'Placeholder separated with whitespace',
+        'text' => 'Placeholder separated with spacer',
     ])
 
 </div>
@@ -122,7 +122,7 @@
 
 <div class="row" style="border-left: 1px solid gray;">
     
-    @for ($i = 1; $i < 25; $i++)
+    @for ($i = 1; $i < 13; $i++)
 
         <div class="col-sm-1 text-center" style="border-right: 1px solid gray;">
 
@@ -134,25 +134,8 @@
 
 </div>
 
-<br />
-
-<div class="row" style="border-left: 1px solid gray;">
-    
-    @for ($i = 1; $i < 13; $i++)
-
-        <div class="col-sm-2 text-center" style="border-right: 1px solid gray;">
-
-            {{ $i }}
-
-        </div>
-
-    @endfor
-
-</div>
-
-<br />
-
 {{--
+
 <p>When columns contain uneven amount of content, use <code>.utils-equal-height</code> on <code>.row</code> element for equal height columns.</p>
 
 @foreach(['', 'utils-equal-height'] as $options) 
@@ -200,13 +183,13 @@
 <p>Any properties can be combined. Numbers fill proportionally their container width.</p>
 
 
-@foreach(['', '-large'] as $index => $options1) 
+@foreach(['', '-small'] as $index => $options1) 
 
 <div class="row">
 
-    @foreach(['(none)', '-good', '-bad', '-neutral', '-border'] as $options2) 
+    @foreach(['(none)', '-good', '-bad', '-neutral', '-orange'] as $options2) 
 
-        <div class="col-xs-4">
+        <div class="col-xs-1">
 
             <p><code>{{ $options2 }} {{ $options1 }}</code></p>
             
@@ -261,9 +244,9 @@
 
 <div class="row">
     
-    @foreach(['(none)', '-rounded', '-circle'] as $options) 
+    @foreach(['(none)', '-circle'] as $options) 
 
-        <div class="col-xs-2 col-xs-offset-1 col-xs-pull-1">
+        <div class="col-xs-1">
             
             <p><code>{{ $options }}</code></p>
             
@@ -282,11 +265,7 @@
 
 <mark>Row component</mark>
 
-<p>Row is meant for listings and content headers, it comes with different variations</p>
-
-@foreach(['(none)', '-narrow', '-small', '-narrow -small'] as $options) 
-
-<p><code>{{ $options }}</code></p>
+<p>Row is meant for listings and content headers,</p>
 
 @include('component.row', [
     'image' => \App\User::orderByRaw('RAND()')->first()
@@ -313,9 +292,6 @@
     'options' => $options
 ])
 
-<br /><br />
-
-@endforeach
 
 <mark>Card component</mark>
 
@@ -327,7 +303,7 @@
 
     <div class="col-sm-4">
         
-        <p><code>{{ $options }}</code></p>
+        <br /><code>{{ $options }}</code><p />
 
         @include('component.card', [
             'image' => $random_image,
@@ -359,6 +335,8 @@
 
 <br />
 
+{{--
+
 @foreach(['wide1x1', 'wide2x1', 'narrow3x1', 'square4x1'] as $ad) 
 
     <mark>{{ ucfirst($ad) }} ad</mark>
@@ -366,6 +344,8 @@
     @include("component.ad.$ad")
 
 @endforeach
+
+--}}
 
 </div>
 
