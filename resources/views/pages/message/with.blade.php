@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.medium')
 
 @section('title')
 
@@ -28,7 +28,7 @@
 
 @stop
 
-@section('content')
+@section('content.medium')
 
 @if (count($messages))
 
@@ -37,7 +37,7 @@
     <div
 
         id="message-{{ $message->id }}"
-        class="utils-border-bottom @if ($message->read) utils-read @endif"
+        class="utils-padding-bottom @if ($message->read) utils-read @endif"
 
     >
 

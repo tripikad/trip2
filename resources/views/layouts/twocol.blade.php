@@ -4,13 +4,13 @@
 
 <div class="row">
     
-  <div class="col-sm-8 utils-padding-right">
+  <div class="col-sm-8">
 
         @yield('content.left')
 
     </div>
 
-  <div class="col-sm-4">
+  <div class="col-sm-4 utils-padding-left">
     
     @yield('content.right')
 

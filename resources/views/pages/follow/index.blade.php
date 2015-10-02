@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.medium')
 
 @section('title')
     {{ trans('follow.index.title', ['user' => $user->name]) }}
@@ -26,7 +26,7 @@
 
 @stop
 
-@section('content')
+@section('content.medium')
 
 @if (count($user->follows))
 

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.medium')
 
 @section('title')
     {{ trans('message.index.title', ['user' => $user->name]) }}
@@ -26,13 +26,13 @@
 
 @stop
 
-@section('content')
+@section('content.medium')
 
 @if (count($user->messages()))    
 
     @foreach ($user->messages() as $message)
       
-        <div class="utils-border-bottom @if ($message->read) utils-read @endif">
+        <div class="utils-padding-bottom @if ($message->read) utils-read @endif">
 
             @include('component.row', [
                 'image' => $message->withUser->imagePreset(),

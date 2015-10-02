@@ -78,26 +78,31 @@
 
     }
 
-    &.-border {
+    &.-orange {
 
-        opacity: 0.5;
+        .content {
+
+            background: $orange;
         
-        > .content {
+        }
 
-            border: 1px solid black;
+        .content > .number {
 
+            color: white;
+            
         }
 
     }
 
-    &.-large {
+    &.-small {
 
         > .content > .number {
 
-            font-size: $font-size-h2;
+            font-size: $font-size-h5;
 
         }
     
     }
+
 
 }

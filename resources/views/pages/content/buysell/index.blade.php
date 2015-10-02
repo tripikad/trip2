@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.twocol')
 
 @section('title')
     
@@ -28,7 +28,7 @@
 
 @stop
 
-@section('content')
+@section('content.left')
     
     @foreach ($contents as $content)
 
@@ -40,9 +40,8 @@
             'heading' => $content->title,
             'heading_link' => route('content.show', [$content->type, $content->id]),
             'description' => view('component.content.description', ['content' => $content]),
-            'extra' => view('component.number', [
-                'number' => count($content->comments),
-                'options' => '-border'
+            'extra' => view('component.content.number', [
+                'number' => count($content->comments)
             ]),
             'options' => '-small'
         ])

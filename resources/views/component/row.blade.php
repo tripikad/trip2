@@ -2,7 +2,7 @@
 
     <div class="row utils-equal-height">
 
-        <div class="col-xs-1 utils-half-padding-right">
+        <div class="col-xs-2 col-sm-1 utils-half-padding-right">
 
             @if (isset($image_link)) <a href="{{ $image_link }}"> @endif
 
@@ -19,13 +19,8 @@
 
         </div>
 
-        <div class="
-            @if (isset($options) && strpos($options, '-narrow') !== false) 
-                col-sm-10
-            @else 
-                col-sm-10
-            @endif
-        ">
+        <div class="col-xs-8 col-sm-9">
+
             <div class="content">
 
                 <div class="title">
@@ -51,13 +46,7 @@
 
         </div>
 
-        <div class="
-            @if (isset($options) && strpos($options, '-narrow') !== false) 
-                col-sm-1
-            @else 
-                col-sm-1
-            @endif
-        ">
+        <div class="col-sm-2">
      
             {!! $extra or '' !!}
 
@@ -69,13 +58,7 @@
 
         <div class="row">
 
-            <div class="
-            @if (isset($options) && strpos($options, '-narrow') !== false) 
-                    col-sm-11 col-sm-offset-1
-                @else 
-                    col-sm-11 col-sm-offset-1
-                @endif
-            ">
+            <div class="col-sm-11 col-sm-offset-1">
 
                 {!! $body !!}
 

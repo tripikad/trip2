@@ -2,7 +2,7 @@
 
 <div class="row utils-padding-bottom">
 
-        <div class="col-sm-12">
+        <div class="col-sm-6">
 
             @if (isset($contents[0]))
 
@@ -19,11 +19,11 @@
 
         </div>
 
-        <div class="col-sm-12">
+        <div class="col-sm-6">
 
             <div class="row">
 
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     
                     @if (isset($contents[1]))
 
@@ -41,7 +41,7 @@
 
                 </div>
 
-                <div class="col-sm-12">
+                <div class="col-sm-6">
 
                     @if (isset($contents[2]))
 
@@ -63,7 +63,7 @@
 
             <div class="row">
 
-                <div class="col-sm-12">
+                <div class="col-sm-6">
 
                     @if (isset($contents[3]))
 
@@ -81,7 +81,7 @@
 
                 </div>
 
-                <div class="col-sm-12">
+                <div class="col-sm-6">
 
                     @if (isset($contents[4]))
 

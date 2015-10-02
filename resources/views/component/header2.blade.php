@@ -6,7 +6,11 @@
         
         <div class="row">
         
-            <div class="left col-sm-7 utils-shadow">
+            <div class="
+                left
+                col-sm-4
+                utils-shadow
+            ">
                 
                 <div class="subheader">
                     
@@ -18,14 +22,22 @@
 
             </div>
 
-            <div class="center col-sm-7 col-sm-offset-1">
+            <div class="
+                center
+                col-sm-4
+                utils-padding-left
+            ">
                 
                 @yield('header2.center')
 
             </div>
             
-            <div class="right col-sm-7 col-sm-offset-1">
-                
+            <div class="
+                center
+                col-sm-4
+                utils-padding-left
+            ">       
+
                 @yield('header2.right')
 
             </div>

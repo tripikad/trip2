@@ -32,7 +32,7 @@
     
     <div class="row">
     
-        <div class="col-xs-offset-6 col-xs-4">
+        <div class="col-xs-offset-5 col-xs-2">
             
             @include('component.user.image', [
                 'image' => $user->imagePreset('small_square'),
@@ -79,13 +79,13 @@
 
 @section('content.medium')
 
-    <div class="utils-border-bottom text-center">
+    <div class="utils-padding-bottom text-center">
 
         @include('component.user.contact')
 
     </div>
 
-    <div class="utils-border-bottom">
+    <div class="utils-padding-bottom">
 
         @include('component.user.count', [
             'content_count' => $content_count,

@@ -24,7 +24,9 @@
 
 @section('header2.center')
 
-    <p>This text is in the Header 2 center column. This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...</p>
+    @include('component.placeholder', [
+        'text' => 'Header2 center column',
+    ])
 
 @stop
 
