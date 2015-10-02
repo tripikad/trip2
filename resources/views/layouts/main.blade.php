@@ -17,6 +17,8 @@
 
         @include('component.header3')
 
+        @yield('test_custom', view('component.test'))
+
         <div class="container utils-padding-top">
 
             <div class="text-center">
