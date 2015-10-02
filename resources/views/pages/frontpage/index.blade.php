@@ -5,16 +5,13 @@
 @stop
 
 
-@section('content')
-
-<div class="utils-padding-bottom">
+@section('header1.bottom')
 
     @include('component.frontpage.search')
 
-</div>
+@stop
 
-
-<div class="utils-padding-bottom">
+@section('content')
 
 @foreach($features as $type => $feature) 
 
@@ -23,7 +20,5 @@
         ])
     
 @endforeach
-
-</div>
 
 @stop

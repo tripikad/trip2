@@ -17,6 +17,8 @@
 
             @include('component.header2')
 
+            @include('component.frontpage.header2')
+
             @include('component.header3')
 
         </div>
