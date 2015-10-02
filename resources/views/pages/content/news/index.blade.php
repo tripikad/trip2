@@ -13,26 +13,22 @@
     ])
 @stop
 
-@section('navbar.bottom')
-
-    <div class="utils-padding-bottom">
+@section('header2.content')
             
-        @include('component.menu', [
-            'menu' => 'news',
-            'items' => config('menu.news')
-        ])
-        
-    </div>
+    @include('component.menu', [
+        'menu' => 'news',
+        'items' => config('menu.news')
+    ])
+    
+@stop
+
+@section('header3.content')
+            
+    @include('component.filter')
 
 @stop
 
 @section('content')
-
-    <div class="utils-padding-bottom">
-
-        @include('component.filter')
-
-    </div>
 
     <div class="row">
   

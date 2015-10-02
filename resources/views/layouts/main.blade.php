@@ -11,13 +11,17 @@
     </head>
     <body>
         
-        @yield('header1', view('component.header1'))
+        <div class="utils-padding-bottom">
 
-        @yield('header2')
+            @yield('header1', view('component.header1'))
 
-        @yield('header3')
+            @yield('header2', view('component.header2'))
 
-        <div class="container utils-padding-top">
+            @yield('header3', view('component.header3'))
+
+        </div>
+
+        <div class="container">
 
             <div class="text-center">
             

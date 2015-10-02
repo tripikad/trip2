@@ -1,7 +1,15 @@
 @extends('layouts.main')
 
 @section('title')
+    
     {{ trans('frontpage.index.search.title') }}
+
+@stop
+
+@section('header1.bottom')
+
+    @include('component.frontpage.search')
+
 @stop
 
 @section('header2', view('component.frontpage.header2'))
@@ -71,4 +79,3 @@
 @endforeach
 
 @stop
---}}
