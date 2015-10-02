@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.twocol')
 
 @section('title')
     
@@ -15,43 +15,37 @@
 
 @stop
 
-@section('content')
-
-    <div class="utils-padding-bottom">
+@section('header4')
+    
+    <div class="utils-border-bottom">
 
         @include('component.filter')
 
     </div>
 
-    <div class="row">
-  
-        @foreach ($contents as $index => $content)
+@stop
 
-            <div class="col-xs-8 col-sm-4">
+@section('content.left')
 
-                <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
+    @foreach ($contents as $index => $content)
 
-                    @include('component.card', [
-                        'image' => $content->imagePreset(),
-                        'title' => $content->price ? trans("content.flight.index.field.price", [
-                            'price' => $content->price,
-                            'symbol' => config('site.currency.symbol')
-                        ]) : null,
-                        'text' => str_limit($content->title, 45)
-                            . '<br />'
-                            . view('component.date.relative', ['date' => $content->end_at]),
-                        'options' => '-center'
-                    ])
-                
-                </a>
+        <div class="utils-padding-bottom">
+        
+        @include('component.row', [
+            'heading' => $content->title,
+            'description' => view('component.date.short', [
+                'date' => $content->end_at
+            ]),
+            'extra' => $content->price
+                ? trans("content.flight.index.field.price", [
+                    'price' => $content->price,
+                    'symbol' => config('site.currency.symbol')
+            ]) : null,
+        ])
 
-            </div>
+        </div>
 
-            @if (($index + 1) % 4 == 0) </div><div class="row"> @endif
-
-        @endforeach
-
-    </div>
+    @endforeach
 
     {!! $contents->render() !!}
 

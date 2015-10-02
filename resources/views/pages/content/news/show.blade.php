@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.twocol')
 
 @section('title')
  
@@ -16,7 +16,7 @@
 
 @stop
 
-@section('content')
+@section('content.left')
 
     <div class="utils-border-bottom 
         @if (! $content->status)
@@ -29,24 +29,14 @@
         'image_link' => route('user.show', [$content->user]),
         'description' => view('component.content.description', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
-        'extra' => view('component.flags', ['flags' => $content->getFlags()])
+        'extra' => view('component.flags', ['flags' => $content->getFlags()]),
+        'body' => $content->body_filtered,
+        'options' => '-centered'
     ])
 
-    <div class="row utils-border-bottom">
-
-        <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-
-            {!! $content->body_filtered !!}
-
-        </div>
-
     </div>
 
-    <div class="utils-border-bottom">
-
-        @include('component.comment.index', ['comments' => $comments])
-
-    </div>
+    @include('component.comment.index', ['comments' => $content->comments])
 
     @if (\Auth::check())
 

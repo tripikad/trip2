@@ -1,4 +1,4 @@
-<div class="component-flag">
+<div class="component-flag utils-padding-left">
 
     <div class="good">
 
