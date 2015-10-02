@@ -17,16 +17,17 @@
 
 @section('header4')
     
-    <div class="utils-border-bottom">
 
-        @include('component.filter')
-
-    </div>
 
 @stop
 
 @section('content.left')
 
+    <div class="utils-border-bottom">
+
+        @include('component.filter')
+
+    </div>
     @foreach ($contents as $index => $content)
 
         <div class="utils-padding-bottom">

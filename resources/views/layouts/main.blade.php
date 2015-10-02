@@ -11,19 +11,13 @@
     </head>
     <body>
         
-        <div class="utils-padding-bottom">
+        @include('component.header1')
 
-            @include('component.header1')
+        @include('component.header2')
 
-            @include('component.header2')
+        @include('component.header3')
 
-            @include('component.frontpage.header2')
-
-            @include('component.header3')
-
-        </div>
-
-        <div class="container">
+        <div class="container utils-padding-top">
 
             <div class="text-center">
             

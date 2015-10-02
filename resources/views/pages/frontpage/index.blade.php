@@ -11,6 +11,12 @@
 
 @stop
 
+@section('header4')
+
+    @include('component.frontpage.header4')
+
+@stop
+
 @section('content')
 
 @foreach($features as $type => $feature) 

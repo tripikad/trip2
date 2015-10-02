@@ -12,10 +12,9 @@
     
     }
 
-    &.-padded {
+    &.-padding {
 
         height: $spacer * 2;
-        padding: 0 $spacer / 2;
 
         display: flex;
         flex-direction: column;

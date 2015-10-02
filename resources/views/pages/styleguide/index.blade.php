@@ -12,7 +12,7 @@
         'title' => 'Offers',
         'link_title' => 'More',
         'link_route' => '',
-        'options' => '-padded -orange',
+        'options' => '-padding -orange',
     ])
 
     @include('component.card', [

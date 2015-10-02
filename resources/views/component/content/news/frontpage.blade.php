@@ -1,5 +1,12 @@
 @if (count($contents) > 0)
 
+@include('component.subheader', [
+    'title' => trans('frontpage.index.news.title'),
+    'link_title' => '',
+    'link_route' => '',
+    'options' => '-padding -orange',
+])
+
 <div class="row utils-padding-bottom">
 
         <div class="col-sm-6">

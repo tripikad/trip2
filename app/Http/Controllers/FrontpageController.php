@@ -22,7 +22,6 @@ class FrontpageController extends Controller
         $destinations = Destination::getNames();
 
         $types = [
-            'news',
             'shortnews',
             'flight',
             'travelmate',
