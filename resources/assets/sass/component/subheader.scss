@@ -1,0 +1,24 @@
+.component-subheader {
+    
+    &.-orange {
+
+        > .row > div > h3 {
+
+            color: $orange;
+
+        }
+    
+    }
+
+    &.-padded {
+
+        height: $spacer * 2;
+        padding: 0 $spacer / 2;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+
+    }
+
+}

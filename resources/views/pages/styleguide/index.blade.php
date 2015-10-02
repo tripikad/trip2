@@ -8,6 +8,13 @@
 
 @section('header2.left')
 
+    @include('component.subheader', [
+        'title' => 'Offers',
+        'link_title' => 'More',
+        'link_route' => '',
+        'options' => '-padded -orange',
+    ])
+
     @include('component.card', [
         'image' => $random_image2,
         'title' => 'Flightoffer A in Header 2 left column',
@@ -49,7 +56,12 @@
 
 @section('header3.center')
 
-    <h3>Subheader in Header 3 center</h3>
+    @include('component.subheader', [
+        'title' => 'Subheader in Header 3 center',
+        'link_title' => 'More',
+        'link_route' => '',
+        'options' => '-orange',
+    ])
 
     <p>This text is in the Header 3 center column. This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...</p>
 

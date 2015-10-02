@@ -6,37 +6,19 @@
         
         <div class="row">
         
-            <div class="
-                left
-                col-sm-4
-                utils-shadow
-            ">
-                
-                <div class="subheader">
-                    
-                    <h3>Offers</h3>
-
-                </div>
+            <div class="left col-sm-4 utils-shadow">
                 
                 @yield('header2.left')
 
             </div>
 
-            <div class="
-                center
-                col-sm-4
-                utils-padding-left
-            ">
-                
+            <div class="center col-sm-4 utils-padding-left">       
+
                 @yield('header2.center')
 
             </div>
             
-            <div class="
-                center
-                col-sm-4
-                utils-padding-left
-            ">       
+            <div class="right col-sm-4 utils-padding-left">       
 
                 @yield('header2.right')
 
