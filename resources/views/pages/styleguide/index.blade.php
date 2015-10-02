@@ -6,6 +6,8 @@
 
 @stop
 
+@section('header2', view('component.destination.header2'))
+
 @section('header2.left')
 
     @include('component.subheader', [

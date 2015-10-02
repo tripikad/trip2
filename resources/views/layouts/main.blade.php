@@ -11,13 +11,11 @@
     </head>
     <body>
         
-        @include('component.header1')
+        @yield('header1', view('component.header1'))
 
-        @include('component.header2')
+        @yield('header2')
 
-        @include('component.header3')
-
-        @yield('test_custom', view('component.test'))
+        @yield('header3')
 
         <div class="container utils-padding-top">
 
