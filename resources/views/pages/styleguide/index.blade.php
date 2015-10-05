@@ -102,6 +102,61 @@
 @endforeach
 --}}
 
+<mark>Subheader</mark>
+
+<p>A generic header for section titles, box titles etc. There is also a <code>-padding</code> option for vertical padding.</p>
+
+<div class="row">
+
+@foreach(['-orange', '-cyan'] as $options) 
+
+    <div class="col-md-3 col-md-offset-1 col-md-pull-1">
+
+        <p><code>{{ $options }}</code></p>
+
+        @include('component.subheader', [
+            'title' => 'Subheader',
+            'link_title' => 'More',
+            'link_route' => '',
+            'options' => $options,
+        ])
+
+    </div>
+
+@endforeach
+
+</div>
+
+<mark>Destination subheader</mark>
+
+<p>A subheader for destinations.</p>
+
+<div class="row">
+
+@foreach(['-orange', '-green', '-red'] as $options) 
+
+    <div class="col-md-3 col-md-offset-1 col-md-pull-1">
+
+        <p><code>{{ $options }}</code></p>
+
+        @include('component.destination.subheader', [
+            'title' => $random_destination,
+            'title_route' => '',
+            'text' => $random_destination,
+            'text_route' => '',
+            'options' => $options
+        ])
+
+    </div>
+
+@endforeach
+
+</div>
+
+
+
+
+
 <mark>Menu</mark>
 
 @include('component.menu', [
