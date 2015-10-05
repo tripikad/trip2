@@ -1,12 +1,27 @@
 .component-subheader {
     
+    > .row > div > h3 {
+
+        text-transform: uppercase;
+        font-size: $font-size-h5;
+
+    }
+    
     &.-orange {
 
         > .row > div > h3 {
 
             color: $orange;
-            text-transform: uppercase;
-            font-size: $font-size-h5;
+
+        }
+    
+    }
+
+    &.-cyan {
+
+        > .row > div > h3 {
+
+            color: $cyan;
 
         }
     
