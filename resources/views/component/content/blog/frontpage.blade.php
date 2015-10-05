@@ -1,8 +1,13 @@
 @if (count($contents) > 0)
 
-<h3 class="utils-padding-bottom">{{ trans('frontpage.index.blog.title') }}</h3>
+@include('component.subheader', [
+    'title' => trans('frontpage.index.blog.title'),
+    'link_title' => '',
+    'link_route' => '',
+    'options' => '-padding -orange',
+])
 
-<div class="utils-double-padding-bottom">
+<div class="utils-padding-bottom">
 
     @include('component.placeholder', [
         'text' => 'Featured blogs will go here',

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.twocol')
 
 @section('title')
 
@@ -15,30 +15,26 @@
 
 @stop
 
-@section('navbar.bottom')
-
-    <div class="utils-border-bottom">
+@section('header2.content')
             
-        @include('component.menu', [
-            'menu' => 'forum',
-            'items' => config('menu.forum')
-        ])
+    @include('component.menu', [
+        'menu' => 'forum',
+        'items' => config('menu.forum')
+    ])
         
-    </div>
+@stop
+
+@section('header3.content')
+    
+    @include('component.filter')
 
 @stop
 
-@section('content')
-    
-    <div class="utils-border-bottom">
-
-        @include('component.filter')
-
-    </div>
+@section('content.left')
 
     @foreach ($contents as $content)
 
-        <div class="utils-border-bottom">
+        <div class="utils-padding-bottom">
 
         @include('component.row', [
             'image' => $content->user->imagePreset(),
@@ -46,11 +42,9 @@
             'heading' => $content->title,
             'heading_link' => route('content.show', [$content->type, $content->id]),
             'description' => view('component.content.description', ['content' => $content]),
-            'extra' => view('component.number', [
-                'number' => count($content->comments), 
-                'options' => '-border'
+            'extra' => view('component.content.number', [
+                'number' => count($content->comments)
             ]),
-            'options' => ''
         ])
         
         </div>

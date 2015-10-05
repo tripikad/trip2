@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.twocol')
 
 @section('title')
     
@@ -15,43 +15,37 @@
 
 @stop
 
-@section('content')
+@section('header2.content')
 
-    <div class="utils-padding-bottom">
+    @include('component.filter')
 
-        @include('component.filter')
+@stop
 
-    </div>
+@section('content.left')
 
-    <div class="row">
-  
-        @foreach ($contents as $index => $content)
+    @foreach ($contents as $index => $content)
 
-            <div class="col-xs-8 col-sm-4">
+        <div class="utils-padding-bottom">
+        
+        @include('component.row', [
+            'heading' => $content->title,
+            'heading_link' => route('content.show', [
+                'type' => $content->type,
+                'id' => $content
+            ]),
+            'description' => view('component.date.short', [
+                'date' => $content->end_at
+            ]),
+            'extra' => $content->price
+                ? trans("content.flight.index.field.price", [
+                    'price' => $content->price,
+                    'symbol' => config('site.currency.symbol')
+            ]) : null,
+        ])
 
-                <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
+        </div>
 
-                    @include('component.card', [
-                        'image' => $content->imagePreset(),
-                        'title' => $content->price ? trans("content.flight.index.field.price", [
-                            'price' => $content->price,
-                            'symbol' => config('site.currency.symbol')
-                        ]) : null,
-                        'text' => str_limit($content->title, 45)
-                            . '<br />'
-                            . view('component.date.relative', ['date' => $content->end_at]),
-                        'options' => '-center'
-                    ])
-                
-                </a>
-
-            </div>
-
-            @if (($index + 1) % 4 == 0) </div><div class="row"> @endif
-
-        @endforeach
-
-    </div>
+    @endforeach
 
     {!! $contents->render() !!}
 

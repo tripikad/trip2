@@ -1,0 +1,38 @@
+.component-destination-header-2 {
+    
+    background: $orange;
+    width: 100%;
+
+    > .container {
+
+        color: white;
+
+        > .row > .left {
+
+            margin-top: $spacer * -2;
+            margin-bottom: $spacer;
+            
+            > .component-subheader {
+
+                padding: 0 $spacer;
+                background: white;
+
+            }
+
+        }
+
+        > .row > .center {
+
+            color: white;
+
+        }
+
+        > .row > .right {
+
+            color: white;
+
+        }
+
+    }
+
+}

@@ -1,0 +1,40 @@
+.component-subheader {
+    
+    > .row > div > h3 {
+
+        text-transform: uppercase;
+        font-size: $font-size-h5;
+
+    }
+    
+    &.-orange {
+
+        > .row > div > h3 {
+
+            color: $orange;
+
+        }
+    
+    }
+
+    &.-cyan {
+
+        > .row > div > h3 {
+
+            color: $cyan;
+
+        }
+    
+    }
+
+    &.-padding {
+
+        height: $spacer * 2;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+
+    }
+
+}

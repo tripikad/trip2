@@ -13,32 +13,28 @@
     ])
 @stop
 
-@section('navbar.bottom')
+@section('header2.content')
 
-    <div class="utils-padding-bottom">
-            
-        @include('component.menu', [
-            'menu' => 'news',
-            'items' => config('menu.news')
-        ])
-        
-    </div>
+    @include('component.menu', [
+        'menu' => 'news',
+        'items' => config('menu.news')
+    ])
+
+@stop
+
+@section('header3.content')
+
+    @include('component.filter')
 
 @stop
 
 @section('content')
 
-    <div class="utils-padding-bottom">
-
-        @include('component.filter')
-
-    </div>
-
     <div class="row">
   
         @foreach ($contents as $index => $content)
 
-            <div class="col-sm-4">
+            <div class="col-sm-3">
 
                 <a href="{{ route('content.show', ['type' => $content->type, 'id' => $content]) }}">
 

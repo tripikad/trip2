@@ -5,7 +5,7 @@
 
 <div class="row">
 
-    <div class="col-sm-offset-2 col-sm-5 utils-padding-right">
+    <div class="col-sm-4 utils-half-padding-right">
 
         {!! Form::select(
             'destination',
@@ -16,7 +16,7 @@
 
     </div>
 
-    <div class="col-sm-5 utils-padding-left">
+    <div class="col-sm-4 utils-half-padding-right">
 
         {!! Form::select(
             'topic',
@@ -27,7 +27,7 @@
 
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm-4">
 
         {!! Form::submit(
             trans('content.index.filter.submit.title'), 

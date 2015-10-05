@@ -6,61 +6,6 @@
 
 @stop
 
-@section('header2.left')
-
-    @include('component.card', [
-        'image' => $random_image2,
-        'title' => 'Flightoffer A in Header 2 left column',
-        'options' => '-center -wide',
-    ])
-
-    @include('component.card', [
-        'image' => $random_image3,
-        'title' => 'Flightoffer B in Header 2 left column',
-        'options' => '-center -wide',
-    ])
-
-@stop
-
-@section('header2.center')
-
-    <p>This text is in the Header 2 center column. This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...</p>
-
-@stop
-
-@section('header2.right')
- 
-    @include('component.placeholder', [
-        'text' => 'Header2 right column',
-    ])
-
-@stop
-
-@section('header3.left')
-
-    @include('component.card', [
-        'image' => $random_image,
-        'text' => 'Ad 1'
-    ])
-
-@stop
-
-@section('header3.center')
-
-    <h3>Subheader in Header 3 center</h3>
-
-    <p>This text is in the Header 3 center column. This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...</p>
-
-@stop
-
-@section('header3.right')
-    
-    <h3>SH in Header 3 right</h3>
-
-    <p>This book<br />Is a record<br />Of a pleasure trip</p>
-
-@stop
-
 @section('content')
 
 <div class="component-styleguide">
@@ -71,7 +16,7 @@
 
 <p>Yet notwithstanding it is only a record of a <a href="https://en.wikipedia.org/wiki/Picnic">pic-nic</a>, it has a purpose, which is to suggest to the reader how he would be likely to see Europe and the East if he looked at them with his own eyes instead of the eyes of those who traveled in those countries  <em>before</em> him. I make small pretense of showing anyone how he ought to look at objects of interest beyond the sea — <strong>other books</strong> do that, and therefore, even if I were competent to do it, there is no need.</p>
 
-
+{{--
 <mark>Headings</mark>
 
 <h1>Heading 1</h1>
@@ -81,14 +26,14 @@
 <p>Heading 2 is used for smaller page title</p>
 
 <h3>Heading 3</h3>
-<p>Heading 4 is used for subheadings on a page</p>
+<p>Heading 3 is currently unused</p>
 
 <h4>Heading 4</h4>
 <p>Heading 3 is used in item lists titles on pages</p>
 
 <h5>Heading 5</h5>
 <p>Heading 4 is used for subheadings between text paragraphs</p>
-
+--}}
 
 <mark>Placeholder and separators</mark>
 
@@ -107,7 +52,7 @@
 <div class="utils-border-bottom">
 
     @include('component.placeholder', [
-        'text' => 'Placeholder separated with whitespace',
+        'text' => 'Placeholder separated with spacer',
     ])
 
 </div>
@@ -120,11 +65,11 @@
 
 <div class="row" style="border-left: 1px solid gray;">
     
-    @for ($i = 1; $i < 17; $i++)
+    @for ($i = 1; $i < 13; $i++)
 
         <div class="col-sm-1 text-center" style="border-right: 1px solid gray;">
 
-            Col{{ $i }}
+            {{ $i }}
 
         </div>
 
@@ -132,7 +77,7 @@
 
 </div>
 
-<br />
+{{--
 
 <p>When columns contain uneven amount of content, use <code>.utils-equal-height</code> on <code>.row</code> element for equal height columns.</p>
 
@@ -155,7 +100,7 @@
 <br />
 
 @endforeach
-
+--}}
 
 <mark>Menu</mark>
 
@@ -181,13 +126,13 @@
 <p>Any properties can be combined. Numbers fill proportionally their container width.</p>
 
 
-@foreach(['', '-large'] as $index => $options1) 
+@foreach(['', '-small'] as $index => $options1) 
 
 <div class="row">
 
-    @foreach(['(none)', '-good', '-bad', '-neutral', '-border'] as $options2) 
+    @foreach(['(none)', '-good', '-bad', '-neutral', '-orange'] as $options2) 
 
-        <div class="col-xs-3">
+        <div class="col-xs-1">
 
             <p><code>{{ $options2 }} {{ $options1 }}</code></p>
             
@@ -242,9 +187,9 @@
 
 <div class="row">
     
-    @foreach(['(none)', '-rounded', '-circle'] as $options) 
+    @foreach(['(none)', '-circle'] as $options) 
 
-        <div class="col-xs-2 col-xs-offset-1">
+        <div class="col-xs-1">
             
             <p><code>{{ $options }}</code></p>
             
@@ -263,11 +208,7 @@
 
 <mark>Row component</mark>
 
-<p>Row is meant for listings and content headers, it comes with different variations</p>
-
-@foreach(['(none)', '-narrow', '-small', '-narrow -small'] as $options) 
-
-<p><code>{{ $options }}</code></p>
+<p>Row is meant for listings and content headers,</p>
 
 @include('component.row', [
     'image' => \App\User::orderByRaw('RAND()')->first()
@@ -294,9 +235,6 @@
     'options' => $options
 ])
 
-<br /><br />
-
-@endforeach
 
 <mark>Card component</mark>
 
@@ -306,9 +244,9 @@
     
     @foreach(['(none)', '-center', '-noshade', '-noshade -invert', '-square', '-wide'] as $options) 
 
-    <div class="col-sm-3 col-sm-offset-1">
+    <div class="col-sm-4">
         
-        <p><code>{{ $options }}</code></p>
+        <br /><code>{{ $options }}</code><p />
 
         @include('component.card', [
             'image' => $random_image,
@@ -338,15 +276,6 @@
 
 @endforeach
 
-<br />
-
-@foreach(['wide1x1', 'wide2x1', 'narrow3x1', 'square4x1'] as $ad) 
-
-    <mark>{{ ucfirst($ad) }} ad</mark>
-
-    @include("component.ad.$ad")
-
-@endforeach
 
 </div>
 

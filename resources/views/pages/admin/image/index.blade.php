@@ -6,17 +6,13 @@
 
 @stop
 
-@section('navbar.bottom')
-
-    <div class="utils-border-bottom">
+@section('header2.content')
             
-        @include('component.menu', [
-            'menu' => 'admin',
-            'items' => config('menu.admin')
-        ])
-        
-    </div>
-
+    @include('component.menu', [
+        'menu' => 'admin',
+        'items' => config('menu.admin')
+    ])
+    
 @stop
 
 @section('header1.right')
@@ -31,17 +27,13 @@
   
         @foreach ($images as $index => $image)
 
-            <div class="col-xs-4 col-sm-2 utils-padding-bottom">
+            <div class="col-xs-4 col-sm-2 utils-padding-bottom utils-padding-right">
                 
-                <div class="utils-padding-bottom utils-padding-right">
-
                 @include('component.card', [
-                    'image' => $image->preset(),
+                    'image' => $image->preset('xsmall_square'),
                     'options' => '-noshade'
                 ])
                 
-                </div>
-
                 <div class="form-group">
 
                 {!! Form::text('id', "[[$image->id]]", [
@@ -54,7 +46,7 @@
 
             </div>
             
-            @if (($index + 1) % 8 == 0) </div><div class="row"> @endif
+            @if (($index + 1) % 6 == 0) </div><div class="row"> @endif
 
         @endforeach
 

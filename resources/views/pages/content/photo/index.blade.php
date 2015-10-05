@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.medium')
 
 @section('title')
     
@@ -7,33 +7,31 @@
 @stop
 
 @section('header1.right')
+    
     @include('component.button', [ 
         'route' => route('content.create', ['type' => $type]),
         'title' => trans("content.$type.create.title")
     ])
+
 @stop
 
-@section('content')
+@section('header2.content')
 
-    <div class="utils-padding-bottom">
+    @include('component.filter')
 
-        @include('component.filter')
+@stop
 
-    </div>
+@section('content.medium')
 
     @foreach ($contents as $content)
 
-        <div class="row utils-padding-bottom">
+        <div class="utils-padding-bottom">
                             
-            <div class="col-sm-14 col-sm-offset-1 col-lg-12 col-lg-offset-2">
+            <a href="{{ route('content.show', [$content->type, $content]) }}">
                     
-                <a href="{{ route('content.show', [$content->type, $content]) }}">
-                        
-                    <img src="{{ $content->imagePreset('large') }}" />
-                    
-                </a>
-
-            </div>
+                <img src="{{ $content->imagePreset('large') }}" />
+                
+            </a>
 
         </div>
 
@@ -47,14 +45,12 @@
                 'actions' => view('component.actions', ['actions' => $content->getActions()]),
                 'extra' => view('component.flags', ['flags' => $content->getFlags()]),
                 'body' => $content->body_filtered,
-                'options' => '-narrow'
             ])
 
         </div>
         
         @include('component.comment.index', [
             'comments' => $content->comments,
-            'options' => '-narrow'
         ])
 
     @endforeach

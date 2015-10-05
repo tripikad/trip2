@@ -1,21 +1,8 @@
-@extends('layouts.main')
+@extends('layouts.twocol')
 
 @section('title')
     
     {{ trans("content.$type.index.title") }}
-
-@stop
-
-@section('navbar.bottom')
-
-    <div class="utils-border-bottom">
-            
-        @include('component.menu', [
-            'menu' => 'forum',
-            'items' => config('menu.forum')
-        ])
-        
-    </div>
 
 @stop
 
@@ -28,7 +15,16 @@
 
 @stop
 
-@section('content')
+@section('header2.content')
+            
+    @include('component.menu', [
+        'menu' => 'forum',
+        'items' => config('menu.forum')
+    ])
+        
+@stop
+
+@section('content.left')
     
     @foreach ($contents as $content)
 
@@ -40,9 +36,8 @@
             'heading' => $content->title,
             'heading_link' => route('content.show', [$content->type, $content->id]),
             'description' => view('component.content.description', ['content' => $content]),
-            'extra' => view('component.number', [
-                'number' => count($content->comments),
-                'options' => '-border'
+            'extra' => view('component.content.number', [
+                'number' => count($content->comments)
             ]),
             'options' => '-small'
         ])

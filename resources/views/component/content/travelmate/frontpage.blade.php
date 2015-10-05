@@ -1,12 +1,16 @@
 @if (count($contents) > 0)
 
-<h3 class="utils-padding-bottom">{{ trans('frontpage.index.travelmate.title') }}</h3>
-
+@include('component.subheader', [
+    'title' => trans('frontpage.index.travelmate.title'),
+    'link_title' => '',
+    'link_route' => '',
+    'options' => '-padding -orange',
+])
 <div class="row utils-padding-bottom">
 
     @foreach ($contents as $content)
 
-        <div class="col-xs-8 col-sm-4">
+        <div class="col-sm-3">
 
             <a href="{{ route('content.show', [$content->type, $content]) }}">
 

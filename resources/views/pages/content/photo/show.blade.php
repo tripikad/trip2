@@ -1,10 +1,10 @@
-@extends('layouts.main')
+@extends('layouts.medium')
 
 @section('title')
     {{ trans("content.$type.index.title") }}
 @stop
 
-@section('content')
+@section('content.medium')
 
     <div class="utils-border-bottom 
         @if (! $content->status)
@@ -14,13 +14,9 @@
 
     @if($image = $content->images()->first())
         
-        <div class="row utils-padding-bottom">
+        <div class="utils-padding-bottom">
 
-            <div class="col-md-8 col-md-offset-2">
-
-                <img src="{{ $content->imagePreset('large') }}" />
-
-            </div>
+            <img src="{{ $content->imagePreset('large') }}" />
 
         </div>
 

@@ -2,38 +2,16 @@
 
     <div class="row utils-equal-height">
 
-        <div class="
-            @if (isset($options) && strpos($options, '-narrow') !== false) 
-                col-xs-2 col-sm-1 col-sm-offset-1 col-lg-offset-2
-            @else 
-                col-xs-2 col-sm-1 col-lg-offset-1
-            @endif
-        ">
+        <div class="col-xs-2 col-sm-1 utils-half-padding-right">
 
             @if (isset($image_link)) <a href="{{ $image_link }}"> @endif
 
             @if (isset($image))
                 
-                <div
-                
-                @if (isset($options) && strpos($options, '-small') !== false) 
-
-                    style="width: 60%;"
-
-                @else 
-
-                    style="width: 80%;"
-
-                @endif
-                
-                >
-                
-                    @include('component.user.image', [
-                        'image' => $image,
-                        'options' => '-circle',
-                    ])
-
-                </div>
+                @include('component.user.image', [
+                    'image' => $image,
+                    'options' => '-circle',
+                ])
 
             @endif
              
@@ -41,13 +19,8 @@
 
         </div>
 
-        <div class="
-            @if (isset($options) && strpos($options, '-narrow') !== false) 
-                col-xs-11 col-sm-12 col-lg-10
-            @else 
-                col-xs-11 col-sm-14 col-lg-12
-            @endif
-        ">
+        <div class="col-xs-8 col-sm-9">
+
             <div class="content">
 
                 <div class="title">
@@ -73,13 +46,7 @@
 
         </div>
 
-        <div class="
-            @if (isset($options) && strpos($options, '-narrow') !== false) 
-                col-xs-3 col-sm-1 col-lg-1
-            @else 
-                col-xs-3 col-sm-1 col-lg-1
-            @endif
-        ">
+        <div class="col-sm-2">
      
             {!! $extra or '' !!}
 
@@ -91,13 +58,7 @@
 
         <div class="row">
 
-            <div class="
-            @if (isset($options) && strpos($options, '-narrow') !== false) 
-                    col-sm-12 col-sm-offset-2 col-lg-10 col-lg-offset-3
-                @else 
-                    col-sm-14 col-sm-offset-1 col-lg-12 col-lg-offset-2
-                @endif
-            ">
+            <div class="col-sm-11 col-sm-offset-1">
 
                 {!! $body !!}
 

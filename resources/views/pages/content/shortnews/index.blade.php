@@ -13,17 +13,13 @@
     ])
 @stop
 
-@section('navbar.bottom')
+@section('header2.content')
 
-    <div class="utils-border-bottom">
-            
-        @include('component.menu', [
-            'menu' => 'news',
-            'items' => config('menu.news')
-        ])
+    @include('component.menu', [
+        'menu' => 'news',
+        'items' => config('menu.news')
+    ])
         
-    </div>
-
 @stop
 
 @section('content')

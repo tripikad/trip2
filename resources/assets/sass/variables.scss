@@ -4,12 +4,16 @@ $spacer:                            24px;
 
 $blue:                              #31A1EB;
 $orange:                            #F7BA00;
+$green:                             #78CC5C;
+$red:                               #ED6262;
+$cyan:                              #4AC9E3;
+$purple:                            #8B84D7;
 
 // Boostrap variable overrides
 
 $brand-primary:                     $blue;
 
-$grid-columns:                      16;
+$grid-columns:                      12;
 $grid-gutter-width:                 0;
 
 $font-family-sans-serif:            Karla, sans-serif;
@@ -21,7 +25,7 @@ $line-height-base:                  1.6;
 
 $font-size-h1:                      46px;
 $font-size-h2:                      36px;
-$font-size-h3:                      18px;
+$font-size-h3:                      30px;
 $font-size-h4:                      22px;
 $font-size-h5:                      18px;
 
@@ -32,7 +36,7 @@ $font-size-xs-h4:                   18px;
 
 $headings-font-family:              Karla, sans-serif;
 $headings-font-weight:              bold;
-$headings-line-height:              1.3em;
+$headings-line-height:              1.2em;
 $headings-color:                    #222;
 
 $btn-primary-border:                $brand-primary;

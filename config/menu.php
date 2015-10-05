@@ -43,6 +43,9 @@
 	        'advertising' => [
 	            'route' => '/content/static/22125',
 	        ],
+	        'styleguide' => [
+	            'route' => '/styleguide',
+	        ],
 	        'facebook' => [
 	            'route' => 'https://facebook.com/tripeeee',
 	            'external' => true

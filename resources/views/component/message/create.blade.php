@@ -12,7 +12,7 @@
 
 <div class="row">
 
-    <div class="col-md-5 col-md-offset-7">
+    <div class="col-md-6 col-md-offset-6">
 
         <div class="form-group">
 

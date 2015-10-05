@@ -8,7 +8,7 @@
     
     <div class="row">
 
-        <div class="col-xs-4 col-sm-offset-6 utils-padding-bottom">
+        <div class="col-xs-offset-5 col-xs-2 utils-padding-bottom">
 
         @include('component.user.image', [
             'image' => $user->imagePreset('small_square') . '?' . str_random(4),
@@ -53,11 +53,14 @@
     
     <div class="row">
 
-        <div class="col-sm-5 utils-padding-right">
+        <div class="col-sm-4 utils-padding-right">
 
-            <div class="form-group text-center">
+            <div class="form-group">
 
-                <h3>{{ trans('user.edit.account.title') }}</h3>
+                @include('component.subheader', [
+                    'title' => trans('user.edit.account.title'),
+                    'options' => '-orange'
+                ])
 
             </div>
 
@@ -99,11 +102,14 @@
 
         </div>
 
-        <div class="col-sm-5 utils-padding-right">
+        <div class="col-sm-4 utils-padding-right">
 
-            <div class="form-group text-center">
+            <div class="form-group">
 
-                <h3>{{ trans('user.edit.contact.title') }}</h3>
+                @include('component.subheader', [
+                    'title' => trans('user.edit.contact.title'),
+                    'options' => '-orange'
+                ])
 
             </div>
 
@@ -145,11 +151,14 @@
 
         </div>
 
-        <div class="col-sm-5">
+        <div class="col-sm-4">
 
-            <div class="form-group text-center">
+            <div class="form-group">
 
-                <h3>{{ trans('user.edit.notify.title') }}</h3>
+                @include('component.subheader', [
+                    'title' => trans('user.edit.notify.title'),
+                    'options' => '-orange'
+                ])
 
             </div>
 
@@ -157,13 +166,13 @@
 
                 <div class="row">
                 
-                    <div class="col-xs-1 col-xs-offset-1">
+                    <div class="col-xs-1">
 
                         {!! Form::checkbox('notify_message') !!}
 
                     </div>
 
-                    <div class="col-xs-14">
+                    <div class="col-xs-11">
 
                         {!! trans('user.edit.field.notify_message.title') !!}
 
@@ -177,13 +186,13 @@
 
                 <div class="row">
                 
-                    <div class="col-xs-1 col-xs-offset-1">
+                    <div class="col-xs-1">
                         
                         {!! Form::checkbox('notify_follow') !!}
 
                     </div>
 
-                    <div class="col-xs-14">
+                    <div class="col-xs-11">
                     
                         {!! trans('user.edit.field.notify_follow.title') !!}
                 
@@ -199,7 +208,7 @@
 
     <div class="row">
         
-        <div class="col-sm-3 col-sm-offset-13">
+        <div class="col-sm-3 col-sm-offset-9">
 
             <div class="form-group">
 

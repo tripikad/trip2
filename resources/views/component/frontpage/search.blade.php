@@ -5,7 +5,7 @@
 
 <div class="row">
 
-    <div class="col-sm-7 col-sm-offset-4">
+    <div class="col-sm-5 col-sm-offset-3 utils-half-padding-right">
     
     {!! Form::select(
         'destination',

@@ -4,7 +4,7 @@
 
 <div class="row">
     
-    <div class="col-sm-8 col-sm-offset-4">
+    <div class="col-sm-6 col-sm-offset-3">
 
         @yield('content.narrow')
 

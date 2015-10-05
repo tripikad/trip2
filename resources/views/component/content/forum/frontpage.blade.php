@@ -1,6 +1,11 @@
 @if (count($contents) > 0)
 
-<h3 class="utils-padding-bottom">{{ trans('frontpage.index.forum.title') }}</h3>
+@include('component.subheader', [
+    'title' => trans('frontpage.index.forum.title'),
+    'link_title' => '',
+    'link_route' => '',
+    'options' => '-padding -orange',
+])
 
 <div class="utils-padding-bottom">
 

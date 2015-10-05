@@ -20,6 +20,7 @@ return [
     'footer.contact' => 'Contact',
     'footer.eula' => 'EULA',
     'footer.advertising' => 'Advertising',
+    'footer.styleguide' => 'Styleguide',
     'footer.facebook' => 'Facebook',
     'footer.twitter' => 'Twitter',
 
