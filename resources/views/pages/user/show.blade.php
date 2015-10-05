@@ -6,28 +6,6 @@
 
 @stop
 
-@section('navbar.bottom')
-    
-    @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
-        
-        <div class="utils-border-bottom">
-
-            @include('component.menu', [
-                'menu' => 'user',
-                'items' => [
-                    'activity' => ['route' => route('user.show', [$user])],
-                    'message' => ['route' => route('message.index', [$user])],
-                    'follow' => ['route' => route('follow.index', [$user])]
-                ],
-                'options' => 'text-center'
-            ])
-
-        </div>
-
-    @endif
-
-@stop
-
 @section('header1.top')
     
     <div class="row">
@@ -76,6 +54,23 @@
 
 @stop
 
+@section('header2.content')
+    
+    @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
+        
+        @include('component.menu', [
+            'menu' => 'user',
+            'items' => [
+                'activity' => ['route' => route('user.show', [$user])],
+                'message' => ['route' => route('message.index', [$user])],
+                'follow' => ['route' => route('follow.index', [$user])]
+            ],
+            'options' => 'text-center'
+        ])
+
+    @endif
+
+@stop
 
 @section('content.medium')
 

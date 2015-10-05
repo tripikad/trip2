@@ -4,23 +4,19 @@
     {{ trans('message.index.title', ['user' => $user->name]) }}
 @stop
 
-@section('navbar.bottom')
+@section('header2.content')
     
     @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
-        
-        <div class="utils-border-bottom">
-            
-            @include('component.menu', [
-                'menu' => 'user',
-                'items' => [
-                    'activity' => ['route' => route('user.show', [$user])],
-                    'message' => ['route' => route('message.index', [$user])],
-                    'follow' => ['route' => route('follow.index', [$user])]
-                ],
-                'options' => 'text-center'
-            ])
-
-        </div>
+                    
+        @include('component.menu', [
+            'menu' => 'user',
+            'items' => [
+                'activity' => ['route' => route('user.show', [$user])],
+                'message' => ['route' => route('message.index', [$user])],
+                'follow' => ['route' => route('follow.index', [$user])]
+            ],
+            'options' => 'text-center'
+        ])
 
     @endif
 

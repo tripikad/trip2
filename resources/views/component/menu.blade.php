@@ -1,4 +1,4 @@
-<ul class="list-inline {{ $options or '' }}">
+<ul class="list-inline text-center {{ $options or '' }}">
 
     @foreach ($items as $key => $item)
     

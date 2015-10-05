@@ -4,17 +4,13 @@
     {{ trans('admin.content.index.title') }}
 @stop
 
-@section('navbar.bottom')
+@section('header2.content')
 
-    <div class="utils-border-bottom">
-            
-        @include('component.menu', [
-            'menu' => 'admin',
-            'items' => config('menu.admin')
-        ])
+    @include('component.menu', [
+        'menu' => 'admin',
+        'items' => config('menu.admin')
+    ])
         
-    </div>
-
 @stop
 
 @section('content')

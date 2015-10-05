@@ -1,4 +1,4 @@
-<div class="component-footer">
+<div class="component-footer text-center">
     
     <div class="menu">
         

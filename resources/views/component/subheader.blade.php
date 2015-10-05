@@ -10,7 +10,7 @@
 
         <div class="col-xs-3 text-right">
 
-            @if ($link_title)
+            @if (isset($link_title))
 
                 <a href="{{ $link_route }}">{{ $link_title }} ›</a>
 

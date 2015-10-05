@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.twocol')
 
 @section('title')
     
@@ -15,17 +15,17 @@
 
 @stop
 
-@section('content')
+@section('header2.content')
+
+    @include('component.filter')
+
+@stop
+
+@section('content.left')
     
-    <div class="utils-border-bottom">
-
-        @include('component.filter')
-
-    </div>
-
     @foreach ($contents as $content)
 
-        <div class="utils-border-bottom">
+        <div class="utils-padding-bottom">
 
             @include('component.row', [
                 'image' => $content->user->imagePreset(),

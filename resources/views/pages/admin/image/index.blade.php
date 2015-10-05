@@ -6,17 +6,13 @@
 
 @stop
 
-@section('navbar.bottom')
-
-    <div class="utils-border-bottom">
+@section('header2.content')
             
-        @include('component.menu', [
-            'menu' => 'admin',
-            'items' => config('menu.admin')
-        ])
-        
-    </div>
-
+    @include('component.menu', [
+        'menu' => 'admin',
+        'items' => config('menu.admin')
+    ])
+    
 @stop
 
 @section('header1.right')

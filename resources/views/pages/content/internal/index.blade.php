@@ -6,24 +6,22 @@
 
 @stop
 
-@section('navbar.bottom')
-
-    <div class="utils-border-bottom">
-            
-        @include('component.menu', [
-            'menu' => 'admin',
-            'items' => config('menu.admin')
-        ])
-        
-    </div>
-
-@stop
-
 @section('header1.right')
+
     @include('component.button', [ 
         'route' => route('content.create', ['type' => $type]),
         'title' => trans("content.$type.create.title")
     ])
+
+@stop
+
+@section('header2.content')
+    
+    @include('component.menu', [
+        'menu' => 'admin',
+        'items' => config('menu.admin')
+    ])
+        
 @stop
 
 @section('content.medium')
