@@ -97,7 +97,7 @@
     
     <div class="col-sm-3">
 
-        @include('component.ad.ad',[
+        @include('component.ad',[
             'title' => 'Sample wide ad',
             'options' => '-skyscraper',
         ])
@@ -181,22 +181,12 @@
     
     <div class="col-sm-8 col-sm-offset-2">
         
-        @include('component.ad.ad',[
+        @include('component.ad',[
             'title' => 'Sample wide ad',
         ])
         
     </div>
 
 </div>
-
-{{--
-@foreach($features as $type => $feature) 
-
-        @include("component.content.$type.frontpage", [
-            'contents' => $feature['contents']
-        ])
-    
-@endforeach
---}}
 
 @stop
