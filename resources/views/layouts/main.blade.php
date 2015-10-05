@@ -23,26 +23,14 @@
 
         <div class="container">
 
-            <div class="text-center">
-            
-                @yield('navbar.bottom')
-            
-            </div>
-
-            @yield('header4')
-
             @include('component.info.success')
 
             @include('component.info.error')
 
             @yield('content')
-
-            <div class="text-center">
             
-                @include('component.footer')
+            @include('component.footer')
             
-            </div>
-
         </div>
 
         <script type="text/javascript" src="/js/main.js"></script>

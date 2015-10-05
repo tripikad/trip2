@@ -15,26 +15,18 @@
 
 @stop
 
-@section('navbar.bottom')
-
-    <div class="utils-border-bottom">
+@section('header2.content')
             
-        @include('component.menu', [
-            'menu' => 'forum',
-            'items' => config('menu.forum')
-        ])
+    @include('component.menu', [
+        'menu' => 'forum',
+        'items' => config('menu.forum')
+    ])
         
-    </div>
-
 @stop
 
-@section('header4')
+@section('header3.content')
     
-    <div class="utils-border-bottom">
-
-        @include('component.filter')
-
-    </div>
+    @include('component.filter')
 
 @stop
 

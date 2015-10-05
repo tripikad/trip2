@@ -14,16 +14,16 @@
 @stop
 
 @section('header2.content')
-            
+
     @include('component.menu', [
         'menu' => 'news',
         'items' => config('menu.news')
     ])
-    
+
 @stop
 
 @section('header3.content')
-            
+
     @include('component.filter')
 
 @stop

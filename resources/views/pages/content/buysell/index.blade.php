@@ -6,19 +6,6 @@
 
 @stop
 
-@section('navbar.bottom')
-
-    <div class="utils-border-bottom">
-            
-        @include('component.menu', [
-            'menu' => 'forum',
-            'items' => config('menu.forum')
-        ])
-        
-    </div>
-
-@stop
-
 @section('header1.right')
     
     @include('component.button', [ 
@@ -26,6 +13,15 @@
         'title' => trans("content.$type.create.title")
     ])
 
+@stop
+
+@section('header2.content')
+            
+    @include('component.menu', [
+        'menu' => 'forum',
+        'items' => config('menu.forum')
+    ])
+        
 @stop
 
 @section('content.left')

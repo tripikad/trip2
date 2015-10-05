@@ -15,19 +15,14 @@
 
 @stop
 
-@section('header4')
-    
+@section('header2.content')
 
+    @include('component.filter')
 
 @stop
 
 @section('content.left')
 
-    <div class="utils-border-bottom">
-
-        @include('component.filter')
-
-    </div>
     @foreach ($contents as $index => $content)
 
         <div class="utils-padding-bottom">
