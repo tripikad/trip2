@@ -73,3 +73,50 @@ First, set the following in ```/.env``` file:
 Then run
 
     ./vendor/bin/phpunit
+
+To run particular test, run
+
+    ./vendor/bin/phpunit tests/YourTestName.php
+
+### Frontend architecture
+
+
+#### HTML / Blade templates
+
+Blade templates are organized into following structure:
+
+    resources/views/layout
+    resources/views/page
+    resources/views/component
+
+The entrypoing to the templates are pages. They are called from controllers using ```view('page.pagename')```, they compose the HTML by getting a right layout (using ```@extend(layout.layoutname')```) and filling the page with components (using ```@include(component.componentname)```, passing on data from the controller.
+
+Here is sample component HTML:
+
+    {{-- /resources/views/component/sample.blade.php --}}
+
+    <div class="component-sample">
+        <h3 class="title">{{ $title }}
+        <p class="text">{{ $text }}
+    </div>
+
+#### CSS
+
+CSS tries to follow [RSCSS](https://github.com/rstacruz/rscss/blob/master/Readme.md) naming convention (see the comparision with BEM [here](https://github.com/rstacruz/rscss/blob/master/Readme.md)).
+
+    resources/assets/sass/component
+
+Here are the components, following roughly the HTML directory structure. Here is sample component CSS.
+
+```scss
+
+    // resources/assets/sass/component/sample.scss
+
+    .component-sample {
+
+        > .title {
+            color: $orange;
+        }
+    
+    }
+```
