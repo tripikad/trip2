@@ -1,3 +1,0 @@
-test passes
-
-@yield('testcontent')
