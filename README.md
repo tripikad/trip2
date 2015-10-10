@@ -73,3 +73,77 @@ First, set the following in ```/.env``` file:
 Then run
 
     ./vendor/bin/phpunit
+
+To run particular test, run
+
+    ./vendor/bin/phpunit tests/YourTestName.php
+
+### Frontend architecture
+
+See ```/styleguide``` for visual reference of the frontend setup, below is the technical overview.
+
+#### HTML / Blade templates
+
+Blade templates are organized into following structure:
+
+    /resources/views/page
+    /resources/views/layout
+    /resources/views/component
+
+The entrypoing to the templates are pages. They are called from controllers using ```view('page.pagename')```, they compose the HTML by getting a right layout (using ```@extend(layout.layoutname')```) and filling the page with components (using ```@include(component.componentname)```, passing on data from the controller.
+
+##### Components
+
+Here is a sample component HTML:
+
+```mustache
+
+    {{-- /resources/views/component/sample.blade.php --}}
+
+    <div class="component-sample">
+        <h3 class="title">{{ $title }}
+        <p class="text">{{ $text }}
+    </div>
+
+```
+
+#### SCSS / CSS files
+
+CSS tries to follow [RSCSS](https://github.com/rstacruz/rscss/blob/master/Readme.md) naming convention (see the comparision with BEM [here](https://github.com/rstacruz/rscss/blob/master/Readme.md)).
+
+All the SCSS files that are found in ```/resources/assets/sass/``` subdirectory are automatically included and compiled to CSS in ```/gulpfile.js```, there is no need to explicty include them.
+
+##### Variables
+
+    /resources/assets/sass/variables.scss
+
+##### General styles
+
+    /resources/assets/sass/style/
+
+Here are the site-wide CSS styles for general scaffolding, typography and various util classes with ```.utils-``` prefix.
+
+##### Pages and Layouts
+
+As of time of writing there is no page- or layout-specific CSS. Everything is  layed out via Bootstrap ```.container```, ```.row``` and ```.col-*```  classes and custom ```.utils-``` classes.
+
+##### Components
+
+    /resources/assets/sass/component/
+
+The components follow the HTML template naming conventions. Here is a sample component SCSS file.
+
+```scss
+
+    // /resources/assets/sass/component/sample.scss
+
+    .component-sample {
+
+        > .title {
+            color: $orange;
+        }
+
+    }
+
+```
+
