@@ -1,337 +1,39 @@
 @extends('layouts.main')
 
-@section('title')
-
-    Header1 title
-
-@stop
+@section('title', 'Styleguide')
 
 @section('content')
 
 <div class="component-styleguide">
 
-<mark>Text paragraphs</mark>
+@if (count($components)) 
 
-<p>This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition, it would have about it that gravity, that profundity, and that impressive incomprehensibility which are so proper to works of that kind, and withal so attractive.</p>
+    @foreach($components as $component)
 
-<p>Yet notwithstanding it is only a record of a <a href="https://en.wikipedia.org/wiki/Picnic">pic-nic</a>, it has a purpose, which is to suggest to the reader how he would be likely to see Europe and the East if he looked at them with his own eyes instead of the eyes of those who traveled in those countries  <em>before</em> him. I make small pretense of showing anyone how he ought to look at objects of interest beyond the sea — <strong>other books</strong> do that, and therefore, even if I were competent to do it, there is no need.</p>
+        <mark>{{ $component['title'] }}</mark>
 
-{{--
-<mark>Headings</mark>
+        <div class="row">
 
-<h1>Heading 1</h1>
-<p>Heading 1 is used for large page title</p>
+            <div class="col-md-6">
 
-<h2>Heading 2</h2>
-<p>Heading 2 is used for smaller page title</p>
+                <p>{!! $component['description'] !!}</p>
+                
+                <pre>
+                    {{ str_replace('@', '&#64;', htmlentities($component['code'])) }}
+                </pre>
+                        
+            </div>
 
-<h3>Heading 3</h3>
-<p>Heading 3 is currently unused</p>
+            <div class="col-md-5 col-md-offset-1">
 
-<h4>Heading 4</h4>
-<p>Heading 3 is used in item lists titles on pages</p>
-
-<h5>Heading 5</h5>
-<p>Heading 4 is used for subheadings between text paragraphs</p>
---}}
-
-<mark>Placeholder and separators</mark>
-
-<p>Placeholder is meant for prototyping components not yet created. It accepts height parameter for specifying component height in pixels.</p>
-
-<p>To seprate components from each other, <code>.utils-padding-bottom</code> and <code>.utils-border-bottom</code> wrapper classes are provided, they set bottom spacing between components.</p>
-
-<div class="utils-padding-bottom">
-
-    @include('component.placeholder', [
-        'text' => 'Placeholder',
-    ])
-
-</div>
-
-<div class="utils-border-bottom">
-
-    @include('component.placeholder', [
-        'text' => 'Placeholder separated with spacer',
-    ])
-
-</div>
-
-@include('component.placeholder', [
-    'text' => 'Placeholder separated with border',
-])
-
-<mark>Grid</mark>
-
-<div class="row" style="border-left: 1px solid gray;">
-    
-    @for ($i = 1; $i < 13; $i++)
-
-        <div class="col-sm-1 text-center" style="border-right: 1px solid gray;">
-
-            {{ $i }}
-
-        </div>
-
-    @endfor
-
-</div>
-
-{{--
-
-<p>When columns contain uneven amount of content, use <code>.utils-equal-height</code> on <code>.row</code> element for equal height columns.</p>
-
-@foreach(['', 'utils-equal-height'] as $options) 
-
-<div class="row {{ $options }}" style="border-left: 1px solid gray;">
-    
-    @for ($i = 1; $i < 17; $i++)
-
-        <div class="col-sm-1 text-center" style="border-right: 1px solid gray;">
-        
-            {{ ['Some', 'Some text', 'Some more text'][rand(0,2)] }}
-
-        </div>
-
-    @endfor
-
-</div>
-
-<br />
-
-@endforeach
---}}
-
-<mark>Subheader</mark>
-
-<p>A generic header for section titles, box titles etc. There is also a <code>-padding</code> option for vertical padding.</p>
-
-<div class="row">
-
-@foreach(['-orange', '-cyan'] as $options) 
-
-    <div class="col-md-3 col-md-offset-1 col-md-pull-1">
-
-        <p><code>{{ $options }}</code></p>
-
-        @include('component.subheader', [
-            'title' => 'Subheader',
-            'link_title' => 'More',
-            'link_route' => '',
-            'options' => $options,
-        ])
-
-    </div>
-
-@endforeach
-
-</div>
-
-<mark>Destination subheader</mark>
-
-<p>A subheader for destinations.</p>
-
-<div class="row">
-
-@foreach(['-orange', '-green', '-red'] as $options) 
-
-    <div class="col-md-3 col-md-offset-1 col-md-pull-1">
-
-        <p><code>{{ $options }}</code></p>
-
-        @include('component.destination.subheader', [
-            'title' => $random_destination,
-            'title_route' => '',
-            'text' => $random_destination,
-            'text_route' => '',
-            'options' => $options
-        ])
-
-    </div>
-
-@endforeach
-
-</div>
-
-
-
-
-
-<mark>Menu</mark>
-
-@include('component.menu', [
-    'menu' => 'styleguide',
-    'items' => [
-        'first' => [
-            'route' => ''
-        ],
-        'second' => [
-            'route' => ''
-        ],
-        'third' => [
-            'route' => ''
-        ]
-    ]
-])
-
-<br />
-
-<mark>Numbers</mark>
-
-<p>Any properties can be combined. Numbers fill proportionally their container width.</p>
-
-
-@foreach(['', '-small'] as $index => $options1) 
-
-<div class="row">
-
-    @foreach(['(none)', '-good', '-bad', '-neutral', '-orange'] as $options2) 
-
-        <div class="col-xs-1">
-
-            <p><code>{{ $options2 }} {{ $options1 }}</code></p>
-            
-            <div class="row">
-
-                <div class="col-xs-8">
-
-                    @include('component.number', [
-                        'number' => '1',
-                        'options' => $options2 . ' ' . $options1
-                    ])
-                    
-                </div>
+                {!! $component['rendered_code'] !!}
 
             </div>
 
-        </div>    
-
-    @endforeach
-
-</div>
-
-<br />
-
-@endforeach
-
-<mark>Labels</mark>
-
-<p>Set labels on content titles etc.</p>
-
-@include('component.label', [
-    'title' => 'This is label'
-])
-
-<br />
-
-<mark>Actions</mark>
-
-<p>Set of actions on content elements, usually for admins. Keep the titles short!</p>
-
-@include('component.actions', [
-    'actions' => [
-        ['route' => '', 'title' => 'First'],
-        ['route' => '', 'title' => 'Second'],
-        ['route' => '', 'title' => 'Third']
-    ]
-])
-
-<br />
-
-<mark>User image component</mark>
-
-<div class="row">
-    
-    @foreach(['(none)', '-circle'] as $options) 
-
-        <div class="col-xs-1">
-            
-            <p><code>{{ $options }}</code></p>
-            
-            @include('component.user.image', [
-                'image' => \App\User::orderByRaw('RAND()')->first()
-                    ? \App\User::orderByRaw('RAND()')->first()->imagePreset()
-                    : null,
-                'options' => $options,
-            ])
-
         </div>
 
     @endforeach
 
-</div>
-
-<mark>Row component</mark>
-
-<p>Row is meant for listings and content headers,</p>
-
-@include('component.row', [
-    'image' => \App\User::orderByRaw('RAND()')->first()
-        ? \App\User::orderByRaw('RAND()')->first()->imagePreset()
-        : null,
-    'image_link' => '',
-    'preheading' => view('component.label', [
-        'title' => 'Label'
-    ]),
-    'heading' => 'This is heading',
-    'heading_link' => '',
-    'postheading' => view('component.label', [
-        'title' => 'Label'
-    ]),
-    'actions' => view('component.actions', [
-        'actions' => [
-            ['route' => '', 'title' => 'This is first action'],
-            ['route' => '', 'title' => 'This is second action'],
-        ]
-    ]),
-    'description' => 'This is the description',
-    'extra' => 'Extra',
-    'body' => 'This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition, it would have about it that gravity, that profundity, and that impressive incomprehensibility which are so proper to works of that kind, and withal so attractive.',
-    'options' => $options
-])
-
-
-<mark>Card component</mark>
-
-<p>Any card properties can be combined. Cards fill proportionally their container width.</p>
-
-<div class="row">
-    
-    @foreach(['(none)', '-center', '-noshade', '-noshade -invert', '-square', '-wide'] as $options) 
-
-    <div class="col-sm-4">
-        
-        <br /><code>{{ $options }}</code><p />
-
-        @include('component.card', [
-            'image' => $random_image,
-            'title' => 'Here is title',
-            'text' => 'Here is subtitle',
-            'options' => $options,
-        ])
-
-    </div>
-
-    @endforeach
-
-</div>
-
-<mark>Icons</mark>
-
-<br />
-
-@foreach([
-        'ticket', 'tent', 'sunglasses', 'plane', 'passport', 
-        'mobile', 'lantern', 'compass', 'backpack'
-    ] as $icon) 
-
-    @include('component.icon', [
-        'icon' => $icon,
-    ])
-
-@endforeach
-
-
-</div>
+@endif
 
 @stop

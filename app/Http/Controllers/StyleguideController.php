@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
+use Storage;
+use StringView;
+
 class StyleguideController extends Controller
 {
 
@@ -24,6 +27,11 @@ class StyleguideController extends Controller
                     'title' => basename($filepath),
                     'description' => $header[1],
                     'code' => $header[2],
+                    'rendered_code' => StringView::make([
+                        'template' => $header[2],
+                        'cache_key' => $filepath,
+                        'updated_at' => 0
+                    ])
                 ];
             }
 
