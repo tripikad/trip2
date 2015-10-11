@@ -147,3 +147,26 @@ The components follow the HTML template naming conventions. Here is a sample com
 
 ```
 
+#### SCSS formatting
+
+Avoid too deep nesting in SCSS, use maximum three levels of nesting:
+
+```scss
+
+    .component-first {
+
+        .second {
+
+            .third {
+
+                ...
+            }
+
+            .third > .fourth {
+
+                ...
+            }
+        
+        }
+    
+    }

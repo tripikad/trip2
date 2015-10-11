@@ -1,6 +1,6 @@
 .component-subheader {
     
-    > .row > div > h3 {
+    > .row > [class*="col-"] > .title {
 
         text-transform: uppercase;
         font-size: $font-size-h5;
@@ -9,7 +9,7 @@
     
     &.-orange {
 
-        > .row > div > h3 {
+        > .row > [class*="col-"] > .title {
 
             color: $orange;
 
@@ -19,7 +19,7 @@
 
     &.-cyan {
 
-        > .row > div > h3 {
+        > .row > [class*="col-"] > .title {
 
             color: $cyan;
 
