@@ -1,3 +1,32 @@
+{{--
+
+Row is meant for listings and content headers
+
+@include('component.row', [
+    'image' => $random_image,
+    'image_link' => '',
+    'preheading' => view('component.label', [
+        'title' => 'Label'
+    ]),
+    'heading' => 'This is heading',
+    'heading_link' => '',
+    'postheading' => view('component.label', [
+        'title' => 'Label'
+    ]),
+    'actions' => view('component.actions', [
+        'actions' => [
+            ['route' => '', 'title' => 'This is first action'],
+            ['route' => '', 'title' => 'This is second action'],
+        ]
+    ]),
+    'description' => 'This is the description',
+    'extra' => 'Extra',
+    'body' => 'This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...',
+    'options' => ''
+])
+
+--}}
+
 <div class="component-row {{ $options or '' }}">
 
     <div class="row utils-equal-height">

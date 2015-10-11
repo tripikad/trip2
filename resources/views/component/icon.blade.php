@@ -1,3 +1,11 @@
+{{--
+
+A SVG icon
+
+    @include('component.icon', ['icon' => 'tent'])
+
+--}}
+
 <span class="component-icon {{ $options or '' }}">
 
     <svg width="64" height="64">
