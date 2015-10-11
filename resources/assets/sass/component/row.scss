@@ -1,46 +1,25 @@
 .component-row {
-/*
-
-    // Debug
-
-    > div > div:nth-child(1) {
-        background: yellow;
-    }
-    
-    > div > div:nth-child(2) {
-        background: orange;
-    }
-
-    > div > div:nth-child(3) {
-        background: yellow;
-    }
-
-*/
 
     > .row > [class*="col-"] {
 
-        > .content {
+        > .content > .title > a > h4,
+        > .content > .title > span {
 
-            > .title > a > h4,
-            > .title > span {
-
-                display: inline-block;
+            display: inline-block;
             
-            }
+        }
         
-            > .text {
+        > .content > .text {
 
-                display: inline-block;
-                opacity: 0.7;
+            display: inline-block;
+            opacity: 0.7;
                         
-            }
+        }
 
-            > .actions {
+        > .content > .actions {
 
-                display: inline-block;
+            display: inline-block;
             
-            }
-
         }
     
     }

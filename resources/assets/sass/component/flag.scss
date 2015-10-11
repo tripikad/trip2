@@ -1,11 +1,11 @@
 .component-flag {
 
-    .good {
+    > .good {
         float: left;
         width: 46%;
     }
 
-    .bad {
+    > .bad {
         float: right;
         width: 46%;
     }

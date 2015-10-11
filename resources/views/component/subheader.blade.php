@@ -4,7 +4,7 @@
     
         <div class="col-xs-9">
 
-            <h3>{{ $title }}</h3>
+            <h3 class="title">{{ $title }}</h3>
 
         </div>
 

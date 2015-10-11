@@ -4,6 +4,30 @@
     width: 100%;
     padding-bottom: 15%;
 
+    > .content {
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        > .title {
+        
+            opacity: 0.5;
+            font-weight: normal;
+            font-family: sans-serif;
+            filter: invert(100%);
+        
+        }
+
+    }
+    
+
     &.-high {
 
         padding-bottom: 60%;
@@ -20,18 +44,6 @@
 
         padding-bottom: 100%;
 
-    }
-
-    > h3 {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        opacity: 0.5;
-        font-weight: normal;
-        font-family: sans-serif;
-        filter: invert(100%);
     }
 
 }

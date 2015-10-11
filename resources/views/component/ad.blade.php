@@ -14,7 +14,10 @@
             '#A24936',
         ][rand(0,9)] }};
 ">
-        
-    <h3>{{ $title }}<h3>
+    <div class="content">
+
+        <h3 class="title">{{ $title }}</h3>
+
+    </div>
 
 </div>
