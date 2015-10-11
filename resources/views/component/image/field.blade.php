@@ -1,4 +1,4 @@
-<div class="component-imagefield"
+<div class="component-image-field"
     
     @if (isset($image))
 
