@@ -1,3 +1,14 @@
+{{--
+
+Placeholder is meant for prototyping components not yet created. It accepts <code>height</code> parameter for specifying component height in pixels.
+
+@include('component.placeholder', [
+    'text' => 'Placeholder',
+    'height' => '200',
+])
+
+--}}
+
 <div class="component-placeholder"
 
     @if (isset($height))

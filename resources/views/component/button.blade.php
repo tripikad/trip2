@@ -5,6 +5,7 @@ Button component
 @include('component.button', [
     'title' => 'Button',
     'route' => '',
+    'buttontype' => 'btn-default'
 ])
 
 --}}

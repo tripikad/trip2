@@ -34,8 +34,6 @@ class StyleguideController extends Controller
 
         }
 
-        // dd($components);
-
         return view('pages.styleguide.index', ['components' => $components]);
         
     }
