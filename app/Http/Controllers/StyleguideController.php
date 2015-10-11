@@ -22,20 +22,19 @@ class StyleguideController extends Controller
             $parts = preg_split('/--}/', $file);
             
             if (count($parts) > 1) {
-                $header = preg_split('/\n\n/', str_replace('{{--', '', $parts[0]));
+
+                $header = preg_split('/\n\n/', trim(str_replace('{{--', '', $parts[0])));
                 $components[] = [
                     'title' => basename($filepath),
-                    'description' => $header[1],
-                    'code' => $header[2],
-                    'rendered_code' => StringView::make([
-                        'template' => $header[2],
-                        'cache_key' => $filepath,
-                        'updated_at' => 0
-                    ])
+                    'description' => trim($header[0]),
+                    'code' => trim($header[1])
                 ];
+            
             }
 
         }
+
+        // dd($components);
 
         return view('pages.styleguide.index', ['components' => $components]);
         
