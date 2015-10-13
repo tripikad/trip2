@@ -1,3 +1,16 @@
+{{--
+
+A generic header for section titles, box titles etc. There is also a <code>-padding</code> option for vertical padding.
+
+@include('component.subheader', [
+    'title' => 'Subheader',
+    'link_title' => 'More',
+    'link_route' => '',
+    'options' => '-orange',
+])
+
+--}}
+
 <div class="component-subheader {{ $options or ''}}">
 
     <div class="row">

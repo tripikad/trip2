@@ -1,3 +1,16 @@
+{{--
+
+Any card properties can be combined. Cards fill proportionally their container width
+
+@include('component.card', [
+    'image' => $random_image,
+    'title' => 'Here is title',
+    'text' => 'Here is subtitle',
+    'options' => '',
+])
+
+--}}
+
 <div
     class="component-card {{ $options or ''}}"
     @if (isset($image))

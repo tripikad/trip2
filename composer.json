@@ -12,7 +12,8 @@
         "intervention/image": "^2.3@dev",
         "barryvdh/laravel-debugbar": "^2.0@dev",
         "baum/baum": "~1.1",
-        "predis/predis": "~1.0"
+        "predis/predis": "~1.0",
+        "wpb/string-blade-compiler": "2.*@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

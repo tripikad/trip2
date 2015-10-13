@@ -1,3 +1,13 @@
+{{--
+
+Ad component
+
+@include('component.ad', [
+    'title' => 'Sample ad'
+])
+
+--}}
+
 <div
     class="component-ad {{ $options or ''}}"
     style="

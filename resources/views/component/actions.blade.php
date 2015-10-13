@@ -1,3 +1,17 @@
+{{--
+
+Actions component
+
+@include('component.actions', [
+    'actions' => [
+        ['route' => '', 'title' => 'First'],
+        ['route' => '', 'title' => 'Second'],
+        ['route' => '', 'title' => 'Third']
+    ]
+])
+
+--}}
+
 @if (count($actions))
 
 <div class="component-actions">
