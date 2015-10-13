@@ -2,8 +2,8 @@
 
 A SVG icon
 
-    @include('component.icon', ['icon' => 'tent'])
-
+@include('component.icon', ['icon' => 'iconname'])
+    
 --}}
 
 <span class="component-icon {{ $options or '' }}">

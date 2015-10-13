@@ -34,7 +34,25 @@ class StyleguideController extends Controller
 
         }
 
-        return view('pages.styleguide.index', ['components' => $components]);
+        return view('pages.styleguide.index', [
+            'components' => $components,
+            'icons' => $this->getIcons()
+        ]);
+        
+    }
+
+    public function getIcons()
+    {
+
+        $icons = [];
+
+        foreach(Storage::disk('resources')->files('assets/svg/sprite') as $filepath) {
+
+            $icons[] = pathinfo($filepath)['filename'];
+
+        }
+
+        return $icons;
         
     }
 
