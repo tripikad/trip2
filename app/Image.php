@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 use Imageconv;
+use App\Content;
 
 class Image extends Model
 {
@@ -55,6 +56,16 @@ class Image extends Model
 
         return $filename;
     
+    }
+
+    static public function getRandom() {
+
+        $photo = Content::whereType('photo')
+            ->orderByRaw('RAND()')
+            ->first();
+
+        return $photo ? $photo->imagePreset('large') : null;
+
     }
 
 }
