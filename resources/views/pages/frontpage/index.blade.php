@@ -17,16 +17,16 @@
 @section('header2.left')
 
     @include('component.destination.subheader', [
-        'title' => $random_destination,
+        'title' => 'Shanghai',
         'title_route' => '',
-        'text' => $random_destination,
+        'text' => 'China',
         'text_route' => '',
         'options' => '-orange'
     ])
 
     @include('component.card', [
-        'image' => $random_image,
-        'title' => 'Crazy offer to ' . $random_destination,
+        'image' => \App\Image::getRandom(),
+        'title' => 'Crazy offer',
         'options' => '-center',
     ])
 
@@ -35,16 +35,16 @@
 @section('header2.center')
 
     @include('component.destination.subheader', [
-        'title' => $random_destination2,
+        'title' => 'Koh Lanta',
         'title_route' => '',
-        'text' => $random_destination2,
+        'text' => 'Thailand',
         'text_route' => '',
         'options' => '-green'
     ])
 
     @include('component.card', [
-        'image' => $random_image2,
-        'title' => 'Crazy offer to ' . $random_destination2,
+        'image' => \App\Image::getRandom(),
+        'title' => 'Crazy offer',
         'options' => '-center',
     ])
 
@@ -53,16 +53,16 @@
 @section('header2.right')
 
     @include('component.destination.subheader', [
-        'title' => $random_destination3,
+        'title' => 'Huascarán',
         'title_route' => '',
-        'text' => $random_destination3,
+        'text' => 'Peru',
         'text_route' => '',
         'options' => '-red'
     ])
 
     @include('component.card', [
-        'image' => $random_image3,
-        'title' => 'Crazy offer to ' . $random_destination3,
+        'image' => \App\Image::getRandom(),
+        'title' => 'Crazy offer',
         'options' => '-center',
     ])
 

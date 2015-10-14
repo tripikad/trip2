@@ -25,7 +25,7 @@
     ])
 
     @include('component.card', [
-        'image' => $random_image2,
+        'image' => \App\Image::getRandom(),
         'title' => 'Flightoffer A in Header 2 left column',
         'options' => '-center',
     ])

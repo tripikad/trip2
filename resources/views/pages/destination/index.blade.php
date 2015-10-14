@@ -14,7 +14,7 @@
 
     @else
 
-        {{ $random_image }}
+        {{ \App\Image::getRandom() }}
 
     @endif
 
@@ -33,13 +33,13 @@
     ])
 
     @include('component.card', [
-        'image' => $random_image2,
+        'image' => \App\Image::getRandom(),
         'title' => 'Flightoffer A in Header 2 left column',
         'options' => '-center -wide',
     ])
 
     @include('component.card', [
-        'image' => $random_image3,
+        'image' => \App\Image::getRandom(),
         'title' => 'Flightoffer B in Header 2 left column',
         'options' => '-center -wide',
     ])

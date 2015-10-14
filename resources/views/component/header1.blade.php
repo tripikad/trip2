@@ -3,7 +3,7 @@
     style="background-image: url({{
         isset($__env->getSections()['header1.image'])
         ? $__env->getSections()['header1.image']
-        : $random_image
+        : \App\Image::getRandom()
     }});"
 >
     <div class="overlay">
