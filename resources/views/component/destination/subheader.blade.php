@@ -1,8 +1,14 @@
 {{--
 
-test 
+Destination subheader
 
-test
+@include('component.destination.subheader', [
+    'title' => 'City',
+    'title_route' => '',
+    'text' => 'Country',
+    'text_route' => '',
+    'options' => '-orange'
+])
 
 --}}
 
