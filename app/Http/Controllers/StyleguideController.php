@@ -25,20 +25,16 @@ class StyleguideController extends Controller
             foreach(Storage::disk('resources')->allFiles($dirpath) as $filepath) {
 
                 $file = Storage::disk('resources')->get($filepath);
-            
-                $parts = preg_split('/--}/', $file);
                 
-                if (count($parts) > 1) {
+                if ($header = $this->getHeader($file)) {
 
-                    $header = preg_split('/\n\n/', trim(str_replace('{{--', '', $parts[0])));
-                    $components[] = [
-                        'title' => $filepath,
-                        'description' => trim($header[0]),
-                        'code' => trim($header[1])
-                    ];
-                
+                    $components[] = array_merge(
+                        ['title' => $filepath],
+                        $header
+                    );
+
                 }
-
+                
             }
 
         }
@@ -48,6 +44,26 @@ class StyleguideController extends Controller
             'icons' => $this->getIcons()
         ]);
         
+    }
+
+    public function getHeader($file, $start = '/{{--/', $end = '/--}}/')
+    {
+
+    $parts = preg_split($end, $file);
+    
+        if (count($parts) > 1) {
+
+            $header = preg_split('/\n\n/', trim(preg_replace($start, '', $parts[0])));
+            
+            return [
+                'description' => trim($header[0]),
+                'code' => trim($header[1])
+            ];
+        
+        }
+    
+        return false;
+
     }
 
     public function getIcons()
