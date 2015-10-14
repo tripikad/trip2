@@ -15,18 +15,21 @@ class StyleguideController extends Controller
 
         $components = [];
 
-        $dirpaths = array_merge(
-            ['views/component'], 
-            Storage::disk('resources')->allDirectories('views/component')
-        );
+        $dirpaths = ['views/component'] +  Storage::disk('resources')->allDirectories('views/component');
 
         foreach ($dirpaths as $dirpath) {
 
             foreach(Storage::disk('resources')->allFiles($dirpath) as $filepath) {
-
-                $file = Storage::disk('resources')->get($filepath);
                 
-                if ($header = $this->getHeader($file)) {
+                $start = '/{{--/';
+                $end = '/--}}/';
+
+                if (pathinfo($filepath)['extension'] == 'scss') {
+                    $start = '/\/*/';
+                    $end = '/*\//';
+                }
+
+                if ($header = $this->getHeader($filepath, $start, $end)) {
 
                     $components[] = ['title' => $filepath] + $header;
 
@@ -43,8 +46,10 @@ class StyleguideController extends Controller
         
     }
 
-    public function getHeader($file, $start = '/{{--/', $end = '/--}}/')
+    public function getHeader($filepath, $start, $end)
     {
+
+        $file = Storage::disk('resources')->get($filepath);
 
         $parts = preg_split($end, $file);
     
