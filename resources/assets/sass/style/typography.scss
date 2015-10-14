@@ -12,25 +12,9 @@ ul {
     }
 }
 
-/*
-
-@media (max-width: $screen-sm-max) {
-
-    body {
-        font-size: $font-size-xs-base;
-    }
-
-    h2, .h2 {
-        font-size: $font-size-xs-h2;
-    }
-
-    h3, .h3 {
-        font-size: $font-size-xs-h3;
-    }
-
-    h4, .h4 {
-        font-size: $font-size-xs-h4;
-    }
+pre {
+    padding: (($line-height-computed - 1) / 2.5);
+    font-size: ($font-size-base - 2);
+    overflow: auto;
+    word-wrap: normal;
 }
-
-*/

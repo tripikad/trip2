@@ -24,11 +24,24 @@
 
             <div class="col-md-5 col-md-offset-1">
 
-                {!! \StringView::make([
-                    'template' => $component['code'],
-                    'cache_key' => str_random(10),
-                    'updated_at' => 0
-                ]) !!}
+                @if ($component['title'] == 'icon.blade.php')
+
+                        @foreach($icons as $icon)
+                            <a title="{{ $icon }}">
+                                @include('component.icon', ['icon' => $icon])
+                            </a>
+                        @endforeach
+
+                @else  
+
+                    {!! \StringView::make([
+                        'template' => $component['code'],
+                        'cache_key' => str_random(10),
+                        'updated_at' => 0
+                    ]) !!}
+
+                @endif
+
 
             </div>
 
