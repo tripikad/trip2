@@ -28,10 +28,7 @@ class StyleguideController extends Controller
                 
                 if ($header = $this->getHeader($file)) {
 
-                    $components[] = array_merge(
-                        ['title' => $filepath],
-                        $header
-                    );
+                    $components[] = ['title' => $filepath] + $header;
 
                 }
                 
@@ -49,7 +46,7 @@ class StyleguideController extends Controller
     public function getHeader($file, $start = '/{{--/', $end = '/--}}/')
     {
 
-    $parts = preg_split($end, $file);
+        $parts = preg_split($end, $file);
     
         if (count($parts) > 1) {
 
