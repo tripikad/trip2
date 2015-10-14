@@ -3,7 +3,7 @@
 Any card properties can be combined. Cards fill proportionally their container width
 
 @include('component.card', [
-    'image' => $random_image,
+    'image' => \App\Image::getRandom(),
     'title' => 'Here is title',
     'text' => 'Here is subtitle',
     'options' => '',

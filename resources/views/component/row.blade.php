@@ -3,7 +3,7 @@
 Row is meant for listings and content headers
 
 @include('component.row', [
-    'image' => $random_image,
+    'image' => \App\Image::getRandom(),
     'image_link' => '',
     'preheading' => view('component.label', [
         'title' => 'Label'
