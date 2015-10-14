@@ -24,7 +24,7 @@
 
             <div class="col-md-5 col-md-offset-1">
 
-                @if ($component['title'] == 'icon.blade.php')
+                @if ($component['title'] == 'views/component/icon.blade.php')
 
                         @foreach($icons as $icon)
                             <a title="{{ $icon }}">
