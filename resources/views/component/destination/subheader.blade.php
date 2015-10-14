@@ -1,3 +1,11 @@
+{{--
+
+test 
+
+test
+
+--}}
+
 <div class="component-destination-subheader {{ $options or ''}}">
 
     <a href="{{ $title_route }}">
