@@ -73,7 +73,7 @@ class StyleguideController extends Controller
             return [
                 'description' => isset($header['description']) ? trim($header['description']) : null,
                 'code' => isset($header['code']) ? trim($header['code']) : null,
-                'options' => isset($header['options']) ? ['(none)'] + $header['options'] : null,
+                'options' => isset($header['options']) ? array_merge(['(none)'], $header['options']) : null,
             ];
         
         }

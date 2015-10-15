@@ -8,8 +8,13 @@ code: |
         'title' => 'Subheader',
         'link_title' => 'More',
         'link_route' => '',
-        'options' => '-orange',
+        'options' => $options,
     ])
+
+options:
+
+- orange
+- cyan
 
 --}}
 

@@ -9,8 +9,14 @@ code: |
         'title_route' => '',
         'text' => 'Country',
         'text_route' => '',
-        'options' => '-orange'
+        'options' => $options
     ])
+
+options:
+
+- orange
+- green
+- red
 
 --}}
 
