@@ -1,14 +1,16 @@
 {{--
 
-Actions component
+description: Actions
 
-@include('component.actions', [
-    'actions' => [
-        ['route' => '', 'title' => 'First'],
-        ['route' => '', 'title' => 'Second'],
-        ['route' => '', 'title' => 'Third']
-    ]
-])
+code: |
+    
+    @include('component.actions', [
+        'actions' => [
+            ['route' => '', 'title' => 'First'],
+            ['route' => '', 'title' => 'Second'],
+            ['route' => '', 'title' => 'Third']
+        ]
+    ])
 
 --}}
 

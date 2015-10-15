@@ -1,13 +1,20 @@
 {{--
 
-A generic header for section titles, box titles etc. There is also a <code>-padding</code> option for vertical padding.
+description: A generic header for section titles, box titles etc
 
-@include('component.subheader', [
-    'title' => 'Subheader',
-    'link_title' => 'More',
-    'link_route' => '',
-    'options' => '-orange',
-])
+code: |
+
+    @include('component.subheader', [
+        'title' => 'Subheader',
+        'link_title' => 'More',
+        'link_route' => '',
+        'options' => $options,
+    ])
+
+options:
+
+- orange
+- cyan
 
 --}}
 

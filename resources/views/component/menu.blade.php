@@ -1,21 +1,23 @@
 {{--
 
-A generic menu
+description: A generic menu
 
-@include('component.menu', [
-    'menu' => 'styleguide',
-    'items' => [
-        'first' => [
-            'route' => ''
-        ],
-        'second' => [
-            'route' => ''
-        ],
-        'third' => [
-            'route' => ''
+code: |
+    
+    @include('component.menu', [
+        'menu' => 'styleguide',
+        'items' => [
+            'first' => [
+                'route' => ''
+            ],
+            'second' => [
+                'route' => ''
+            ],
+            'third' => [
+                'route' => ''
+            ]
         ]
-    ]
-])
+    ])
 
 --}}
 

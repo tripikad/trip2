@@ -1,12 +1,14 @@
 {{--
 
-Button component
+description: Button component
 
-@include('component.button', [
-    'title' => 'Button',
-    'route' => '',
-    'buttontype' => 'btn-default'
-])
+code: |
+
+    @include('component.button', [
+        'title' => 'Button',
+        'route' => '',
+        'buttontype' => 'btn-default'
+    ])
 
 --}}
 
