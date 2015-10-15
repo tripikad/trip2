@@ -1,8 +1,10 @@
 {{--
 
-A SVG icon
+description: A SVG icon
 
-@include('component.icon', ['icon' => 'iconname'])
+code: |
+    
+    @include('component.icon', ['icon' => 'iconname'])
     
 --}}
 

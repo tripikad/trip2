@@ -1,18 +1,22 @@
 /*
 
-Various utils
+description: Various utils
 
-<div class="utils-unpublished">
-    @include('component.placeholder', [
-        'text' => 'Unpublished content',
-    ])
-</div>
-<br />
-<div class="utils-shadow">
-    @include('component.placeholder', [
-        'text' => 'Content with shadow',
-    ])
-</div>
+code: |
+
+    <div class="utils-unpublished">
+        @include('component.placeholder', [
+            'text' => 'Unpublished content',
+        ])
+    </div>
+
+    <br />
+    
+    <div class="utils-shadow">
+        @include('component.placeholder', [
+            'text' => 'Content with shadow',
+        ])
+    </div>
 
 */
 

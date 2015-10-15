@@ -1,10 +1,13 @@
 {{--
 
-A generic label
+description: A generic label
 
-@include('component.label', [
-    'title' => 'Label'
-])
+code: |
+
+    @include('component.label', [
+        'title' => 'Label'
+    ])
 
 --}}
+
 <span class="label label-primary">{{ $title }}</span>

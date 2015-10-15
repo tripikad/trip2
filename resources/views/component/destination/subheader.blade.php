@@ -1,14 +1,16 @@
 {{--
 
-Destination subheader
+description: Destination subheader
 
-@include('component.destination.subheader', [
-    'title' => 'City',
-    'title_route' => '',
-    'text' => 'Country',
-    'text_route' => '',
-    'options' => '-orange'
-])
+code: |
+    
+    @include('component.destination.subheader', [
+        'title' => 'City',
+        'title_route' => '',
+        'text' => 'Country',
+        'text_route' => '',
+        'options' => '-orange'
+    ])
 
 --}}
 

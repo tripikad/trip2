@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Symfony\Component\Yaml\Yaml;
 
 use Storage;
 use StringView;
@@ -55,16 +56,24 @@ class StyleguideController extends Controller
                 
         }
 
+        // Get the file contents
+
         $file = Storage::disk('resources')->get($filepath);
+        
+        // Split the file to the header and body
+
         $parts = preg_split($end, $file);
      
+        // Verify we have the header
+
         if (count($parts) > 1) {
 
-            $header = preg_split('/\n\n/', trim(preg_replace($start, '', $parts[0])));
-            
+            $header = Yaml::parse(trim(preg_replace($start, '', $parts[0])));
+
             return [
-                'description' => trim($header[0]),
-                'code' => trim($header[1])
+                'description' => isset($header['description']) ? trim($header['description']) : null,
+                'code' => isset($header['code']) ? trim($header['code']) : null,
+                'options' => isset($header['options']) ? ['(none)'] + $header['options'] : null,
             ];
         
         }

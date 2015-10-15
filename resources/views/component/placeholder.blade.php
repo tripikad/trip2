@@ -1,11 +1,13 @@
 {{--
 
-Placeholder is meant for prototyping components not yet created. It accepts <code>height</code> parameter for specifying component height in pixels.
+description: Placeholder is meant for prototyping components not yet created. It accepts <code>height</code> parameter for specifying component height in pixels.
 
-@include('component.placeholder', [
-    'text' => 'Placeholder',
-    'height' => '200',
-])
+code: |
+    
+    @include('component.placeholder', [
+        'text' => 'Placeholder',
+        'height' => '200',
+    ])
 
 --}}
 

@@ -1,13 +1,24 @@
 {{--
 
-Any card properties can be combined. Cards fill proportionally their container width
+description: Any card properties can be combined. Cards fill proportionally their container width
 
-@include('component.card', [
-    'image' => \App\Image::getRandom(),
-    'title' => 'Here is title',
-    'text' => 'Here is subtitle',
-    'options' => '',
-])
+code: |
+
+    @include('component.card', [
+        'image' => \App\Image::getRandom(),
+        'title' => 'Here is title',
+        'text' => 'Here is subtitle',
+        'options' => $options,
+    ])
+
+options:
+
+- noshade
+- center
+- invert
+- square
+- wide
+- large
 
 --}}
 
