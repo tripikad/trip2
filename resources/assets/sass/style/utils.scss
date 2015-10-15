@@ -7,6 +7,12 @@ Various utils
         'text' => 'Unpublished content',
     ])
 </div>
+<br />
+<div class="utils-shadow">
+    @include('component.placeholder', [
+        'text' => 'Content with shadow',
+    ])
+</div>
 
 */
 
