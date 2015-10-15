@@ -34,7 +34,7 @@ class ContentTest extends TestCase
 
     }
 
-    public function test_regular_user_can_create_content()
+    public function test_regular_user_can_create_and_edit_content()
     {
 
         $regular_user = factory(App\User::class)->create();
@@ -60,6 +60,25 @@ class ContentTest extends TestCase
                     'type' => $type,
                     'status' => 1
                 ]);
+
+                $content = Content::whereTitle("Hello title $type")->first();
+
+                $this->actingAs($regular_user)
+                    ->visit("content/$type/$content->id")
+                    ->press(trans('content.action.edit.title'))
+                    ->seePageIs("content/$type/$content->id/edit")
+                    ->type("Hola titulo $type", 'title')
+                    ->type("Hola cuerpo $type", 'body')
+                    ->press(trans('content.edit.submit.title'))
+                    ->seePageIs("content/$type/$content->id")
+                    ->see("Hola titulo $type")
+                    ->seeInDatabase('contents', [
+                        'user_id' => $regular_user->id,
+                        'title' => "Hola titulo $type",
+                        'body' => "Hola cuerpo $type",
+                        'type' => $type,
+                        'status' => 1
+                    ]);
 
         }
 
