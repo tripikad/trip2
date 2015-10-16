@@ -7,32 +7,29 @@ use App\Message;
 
 class ConvertMessages extends ConvertBase
 {
-
     protected $signature = 'convert:messages';
 
     public function getMessages()
     {
-    
         return DB::connection($this->connection)
             ->table('pm_message')
-            ->latest('timestamp');      
-    
+            ->latest('timestamp');
     }
-    
+
     public function convertMessages()
     {
-
         $count = $this->getMessages()->count();
 
         $this->info('Converting messages');
         $this->output->progressStart(($this->take > $count) ? $count : $this->take);
 
         $nodes = $this->getMessages()->chunk($this->chunk, function ($nodes) use (&$i) {
-            
-            if ($i++ > $this->chunkLimit()) return false;
 
-            foreach($nodes as $node) {
+            if ($i++ > $this->chunkLimit()) {
+                return false;
+            }
 
+            foreach ($nodes as $node) {
                 $index = DB::connection($this->connection)
                     ->table('pm_index')
                     ->where('mid', $node->mid)
@@ -50,7 +47,6 @@ class ConvertMessages extends ConvertBase
                     && $this->isUserConvertable($node->author)
                     && $this->isUserConvertable($recepient)
                 ) {
-        
                     $model = new Message;
 
                     $model->id = $node->mid;
@@ -61,33 +57,26 @@ class ConvertMessages extends ConvertBase
 
                     $body = $this->clean($node->body);
 
-                    $model->body = $this->scrambleMessages ? $this->scrambleString($body) : $body; 
-                    $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp);  
-                    $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp); 
+                    $model->body = $this->scrambleMessages ? $this->scrambleString($body) : $body;
+                    $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp);
+                    $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->timestamp);
 
                     $model->save();
 
                     $this->convertUser($node->author);
                     $this->convertUser($recepient);
-        
                 }
 
                 $this->output->progressAdvance();
-
             }
 
         });
-    
-        $this->output->progressFinish();
 
+        $this->output->progressFinish();
     }
 
     public function handle()
     {
-
         $this->convertMessages();
-
     }
-
-
 }

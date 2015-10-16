@@ -7,7 +7,6 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetController extends Controller
 {
-
     use ResetsPasswords;
 
     protected $redirectPath = '/';
@@ -32,5 +31,4 @@ class ResetController extends Controller
 
         return view('pages.auth.reset.password')->with('token', $token);
     }
-
 }

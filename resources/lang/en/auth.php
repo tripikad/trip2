@@ -13,7 +13,7 @@ return [
 
     'register.sent.info' => 'A confirmation was sent to your e-mail address',
     'register.confirmed.info' => 'Your registration is now confirmed, you can log in',
-    
+
     'login.login.info' => 'You are now logged in',
     'login.logout.info' => 'You are now logged out',
     'login.failed.info' => 'Failed to log you in',
@@ -33,5 +33,5 @@ return [
     'reset.password.field.password.title' => 'New password',
     'reset.password.field.password_confirmation.title' => 'Confirm new password',
     'reset.password.submit.title' => 'Submit',
-    
+
 ];

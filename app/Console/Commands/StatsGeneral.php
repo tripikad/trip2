@@ -1,25 +1,23 @@
-<?php namespace App\Console\Commands;
+<?php
+
+namespace App\Console\Commands;
 
 use DB;
 use Carbon\Carbon;
-use Illuminate\Console\Command;
 
 class StatsGeneral extends StatsBase
 {
-
     protected $signature = 'stats:general {--years=15}';
 
     public function handle()
     {
-
         $newest = DB::connection($this->connection)
             ->table('node')
             ->max('created');
-            
+
         $this->line('Date,Contents,Comments,Anonym.Comments,Users');
 
-        for ($i = 1; $i < $this->option('years') * 12; $i++) { 
-
+        for ($i = 1; $i < $this->option('years') * 12; $i++) {
             $from = Carbon::createFromTimestamp($newest)->subMonths($i)->startOfMonth();
             $to = Carbon::createFromTimestamp($newest)->subMonths($i)->endOfMonth();
 
@@ -50,16 +48,13 @@ class StatsGeneral extends StatsBase
                 ->whereBetween('created', [$from->getTimestamp(), $to->getTimestamp()])
                 ->count();
 
-            $this->line(join(',', [
+            $this->line(implode(',', [
                 $to->format('F Y'),
                 $content,
                 $comments,
                 $comments_anonymous,
-                $users
+                $users,
             ]));
-   
         }
-        
     }
-
 }

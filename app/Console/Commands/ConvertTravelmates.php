@@ -4,9 +4,7 @@ namespace App\Console\Commands;
 
 class ConvertTravelmates extends ConvertBase
 {
-
     protected $signature = 'convert:travelmates';
-
 
     public function convert()
     {
@@ -22,11 +20,10 @@ class ConvertTravelmates extends ConvertBase
                 'content_field_millistkaaslastsoovidleida.*'
             )->get();
 
-
         $this->info('Converting travelmates');
         $this->output->progressStart(count($nodes));
 
-        foreach($nodes as $node) {   
+        foreach ($nodes as $node) {
 
             /*
 
@@ -38,28 +35,23 @@ class ConvertTravelmates extends ConvertBase
             
             */
 
-            $node->start_at =  $this->formatTimestamp($node->field_reisitoimumine_value);
-            $node->duration =  $this->cleanAll($node->field_reisikestvus_value);
-           
+            $node->start_at = $this->formatTimestamp($node->field_reisitoimumine_value);
+            $node->duration = $this->cleanAll($node->field_reisikestvus_value);
+
             if ($this->convertNode($node, '\App\Content', 'travelmate')) {
-            
                 $this->convertNodeDestinations($node);
                 $this->convertNodeTopics($node);
                 $this->newNodeTopics($node);
-
             }
-            
-            $this->output->progressAdvance();
 
+            $this->output->progressAdvance();
         }
 
         $this->output->progressFinish();
-        
     }
 
     public function handle()
     {
         $this->convert();
     }
-
 }
