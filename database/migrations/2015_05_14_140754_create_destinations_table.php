@@ -16,7 +16,7 @@ class CreateDestinationsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('parent_id')->nullable();
-            
+
             $table->integer('lft')->nullable();
             $table->integer('rgt')->nullable();
             $table->integer('depth')->nullable();

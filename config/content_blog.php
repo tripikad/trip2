@@ -3,16 +3,16 @@
 return [
 
     'frontpage' => [
-        
+
         'show' => true,
         'with' => [],
         'latest' => 'created_at',
-        'take' => 1
+        'take' => 1,
 
     ],
 
     'index' => [
-    
+
         'with' => ['user', 'comments', 'destinations', 'topics'],
         'latest' => 'created_at',
         'paginate' => 25,
@@ -23,7 +23,7 @@ return [
         'fields' => [
             'title' => [
                 'type' => 'text',
-                'large' => true
+                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
@@ -36,16 +36,16 @@ return [
             ],
             'submit' => [
                 'type' => 'submit',
-            ]
+            ],
         ],
 
         'validate' => [
-        
+
             'title' => 'required',
             'url' => 'url',
-        
+
         ],
 
-    ]
+    ],
 
 ];

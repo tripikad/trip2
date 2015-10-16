@@ -3,16 +3,16 @@
 return [
 
     'frontpage' => [
-        
+
         'show' => true,
         'with' => [],
         'latest' => 'created_at',
-        'take' => 5
+        'take' => 5,
 
     ],
 
     'index' => [
-    
+
         'with' => ['destinations', 'topics'],
         'latest' => 'created_at',
         'paginate' => 24,
@@ -20,7 +20,7 @@ return [
 
     'store' => [
 
-        'status' => 0
+        'status' => 0,
 
     ],
 
@@ -30,7 +30,7 @@ return [
             'title' => [
                 'type' => 'text',
                 'title' => 'Title',
-                'large' => true
+                'large' => true,
             ],
             'image_id' => [
                 'type' => 'image_id',
@@ -53,17 +53,17 @@ return [
             'submit' => [
                 'type' => 'submit',
                 'title' => 'Add',
-            ]
+            ],
         ],
 
         'validate' => [
-        
+
             'title' => 'required',
             'url' => 'url',
-            'file' => 'image'
-        
+            'file' => 'image',
+
         ],
 
-    ]
+    ],
 
 ];

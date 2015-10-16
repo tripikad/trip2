@@ -3,15 +3,15 @@
 return [
 
     'frontpage' => [
-        
+
         'show' => true,
         'with' => ['images'],
         'latest' => 'created_at',
-        'take' => 8
+        'take' => 8,
     ],
 
     'index' => [
-    
+
         'with' => ['images'],
         'latest' => 'end_at',
         'paginate' => 24,
@@ -22,7 +22,7 @@ return [
         'fields' => [
             'title' => [
                 'type' => 'text',
-                'large' => true
+                'large' => true,
             ],
             'image_id' => [
                 'type' => 'image_id',
@@ -48,20 +48,20 @@ return [
             ],
             'submit' => [
                 'type' => 'submit',
-            ]
+            ],
         ],
 
         'validate' => [
-        
+
             'title' => 'required',
             'body' => 'required',
             'url' => 'url',
             'start_at' => 'date|required',
             'end_at' => 'date|required',
             'price' => 'integer',
-        
+
         ],
 
-    ]
+    ],
 
 ];

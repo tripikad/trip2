@@ -1,7 +1,7 @@
 <?php
 
 return [
-    
+
     // General
 
     'row.text.comment' => 'Latest comment :updated_at',
@@ -13,16 +13,16 @@ return [
 
     'action.follow.1.info' => 'You are now following :title.',
     'action.follow.0.info' => 'You unfollowed :title',
-    
+
     'action.status.1.title' => 'Unpublish',
     'action.status.0.title' => 'Publish',
-    
+
     'action.status.1.info' => 'The post :title has been published',
     'action.status.0.info' => 'The post :title has been unpublished',
 
     'field.image.title' => 'Select image',
     'field.image.selected.title' => 'New image selected',
-    
+
     'index.filter.field.destination.title' => 'All',
     'index.filter.field.topic.title' => 'All',
     'index.filter.submit.title' => 'Filter',
@@ -34,12 +34,12 @@ return [
 
     'edit.title' => 'Edit',
     'edit.submit.title' => 'Update',
-    
+
     'store.status.1.info' => ':title has been added',
     'store.status.0.info' => ':title has been added but its unpublished for now. Publish it to make it visible to everybody.',
-    
+
     'update.info' => ':title has been updated',
-    
+
     // Content types
 
     // News
@@ -99,7 +99,7 @@ return [
 
     'flight.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
     'flight.edit.field.image_id.help' => '',
-    
+
     'flight.edit.field.body.title' => 'Body',
     'flight.edit.field.body.help' => 'You can use image shortcuts, for example: [[456]]',
 
@@ -108,7 +108,7 @@ return [
 
     'flight.edit.field.start_at.title' => 'Selling starts at',
     'flight.edit.field.start_at.help' => 'Example: :now',
-    
+
     'flight.edit.field.end_at.title' => 'Selling ends at',
     'flight.edit.field.end_at.help' => 'Example: :now',
 

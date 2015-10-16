@@ -12,13 +12,11 @@ class CreateImageablesTable extends Migration
      */
     public function up()
     {
-        
         Schema::create('imageables', function (Blueprint $table) {
             $table->integer('image_id')->index();
             $table->integer('imageable_id')->index();
             $table->string('imageable_type')->index();
         });
-
     }
 
     /**
@@ -28,9 +26,6 @@ class CreateImageablesTable extends Migration
      */
     public function down()
     {
-
         Schema::drop('imageables');
-    
     }
-
 }

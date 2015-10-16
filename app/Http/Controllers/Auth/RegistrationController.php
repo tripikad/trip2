@@ -4,20 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
 use Mail;
 use Hash;
-
 use App\User;
 
 class RegistrationController extends Controller
 {
-
     public function form()
     {
         return view('pages.auth.register');
     }
-
 
     public function submit(Request $request)
     {
@@ -25,28 +21,26 @@ class RegistrationController extends Controller
             'name' => 'required|max:64|unique:users',
             'email' => 'required|email|max:64|unique:users',
             'password' => 'required|confirmed|min:6',
-            'eula' => 'required'
+            'eula' => 'required',
         ]);
 
         $fields = [
             'role' => 'regular',
-            'password' => Hash::make($request->get('password'))
+            'password' => Hash::make($request->get('password')),
         ];
-        
+
         $user = User::create(array_merge($request->all(), $fields));
 
         Mail::send('email.auth.register', ['user' => $user], function ($mail) use ($user) {
-            
+
             $mail->to($user->email, $user->name)->subject(trans('auth.register.email.subject'));
-        
+
         });
 
         return redirect()
             ->route('frontpage.index')
             ->with('info', trans('auth.register.sent.info'));
-            
     }
-
 
     public function confirm($token)
     {
@@ -55,7 +49,5 @@ class RegistrationController extends Controller
         return redirect()
             ->route('login.form')
             ->with('info', trans('auth.register.confirmed.info'));
-
     }
-
 }

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Follow extends Model
 {
-
     protected $fillable = ['followable_id', 'followable_type'];
 
     public $timestamps = false;
@@ -15,10 +14,9 @@ class Follow extends Model
     {
         return $this->belongsTo('App\User');
     }
-    
+
     public function followable()
     {
         return $this->morphTo();
     }
-
 }

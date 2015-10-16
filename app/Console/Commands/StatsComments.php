@@ -3,11 +3,9 @@
 namespace App\Console\Commands;
 
 use DB;
-use Illuminate\Console\Command;
 
 class StatsComments extends StatsBase
 {
-
     protected $signature = 'stats:comments';
 
     public function getComments()
@@ -18,7 +16,6 @@ class StatsComments extends StatsBase
 
     public function commentCount()
     {
-
         $this->line('Total,Published,Unpublished,%,Unknown');
 
         $total = $this->getComments()->count();
@@ -26,21 +23,17 @@ class StatsComments extends StatsBase
         $unpublished = $total - $published;
         $unknown = $this->getComments()->whereStatus(2)->count();
 
-        $this->line(join(',', [
+        $this->line(implode(',', [
             $total,
             $published,
             $unpublished,
             $this->percent($total, $unpublished),
-            $unknown
+            $unknown,
         ]));
-    
     }
 
     public function handle()
     {
-
         $this->commentCount();
-    
     }
-
 }

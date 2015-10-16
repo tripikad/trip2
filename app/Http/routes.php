@@ -15,7 +15,6 @@ post('register', ['uses' => 'Auth\RegistrationController@submit', 'as' => 'regis
 
 get('register/confirm/{token}', ['uses' => 'Auth\RegistrationController@confirm', 'as' => 'register.confirm']);
 
-
 // Login and logout
 
 get('login', ['uses' => 'Auth\LoginController@form', 'as' => 'login.form']);
@@ -37,7 +36,7 @@ post('reset/password', ['uses' => 'Auth\ResetController@postReset', 'as' => 'res
 // Content
 
 Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
-       
+
     get('/', ['middleware' => null, 'uses' => 'ContentController@index', 'as' => 'index']);
 
     get('create', ['middleware' => 'role:regular', 'uses' => 'ContentController@create', 'as' => 'create']);
@@ -56,8 +55,6 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
 });
 
-
-
 // Comments
 
 post('content/{type}/{id}/comment', ['middleware' => 'role:regular', 'uses' => 'CommentController@store', 'as' => 'comment.store']);
@@ -67,7 +64,6 @@ get('comment/{id}/edit', ['middleware' => 'role:admin,commentowner', 'uses' => '
 put('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' => 'CommentController@update', 'as' => 'comment.update']);
 
 put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
-
 
 // Users
 
@@ -95,14 +91,11 @@ get('user/{id}/messages/{id2}', ['middleware' => 'role:superuser,userowner', 'us
 
 post('message/{id}/to/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@store', 'as' => 'message.store']);
 
-
 // Follows
-
 
 get('user/{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'FollowController@index', 'as' => 'follow.index']);
 
 put('content/{type}/{id}/follow/{status}', ['middleware' => 'role:regular', 'uses' => 'FollowController@followContent', 'as' => 'follow.follow.content']);
-
 
 // Admin
 
@@ -138,9 +131,7 @@ get('taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
 get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 
 get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
- 
+
 // Styleguide
 
 get('styleguide', 'StyleguideController@index');
-
-

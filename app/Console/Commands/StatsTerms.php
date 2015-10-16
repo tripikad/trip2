@@ -4,11 +4,9 @@ namespace App\Console\Commands;
 
 use DB;
 use Carbon\Carbon;
-use Illuminate\Console\Command;
 
 class StatsTerms extends StatsBase
 {
-
     protected $signature = 'stats:terms {--term=destination} {--years=3}';
 
     public function handle()
@@ -19,8 +17,7 @@ class StatsTerms extends StatsBase
             'style' => 'node.tid_3_1',
         ];
 
-        for ($i = 1; $i < $this->option('years') + 1; $i++) { 
-
+        for ($i = 1; $i < $this->option('years') + 1; $i++) {
             $newest = DB::connection($this->connection)
                 ->table('node')
                 ->max('created');
@@ -28,7 +25,7 @@ class StatsTerms extends StatsBase
             $from = Carbon::createFromTimestamp($newest)->subYears($i)->startOfYear();
             $to = Carbon::createFromTimestamp($newest)->subYears($i)->endOfYear();
 
-            $this->line($from->year . ', ');
+            $this->line($from->year.', ');
 
             $term = $terms[$this->option('term')];
 
@@ -37,38 +34,33 @@ class StatsTerms extends StatsBase
             $results = \DB::connection($this->connection)
                 ->table('node')
                 ->join('term_data', $term, '=', 'term_data.tid')
-                ->select(['term_data.name', Db::raw('COUNT(' . $term . ') AS times')])
+                ->select(['term_data.name', Db::raw('COUNT('.$term.') AS times')])
                 ->groupBy($term)
-                ->orderBy('times','desc')
+                ->orderBy('times', 'desc')
                 ->whereIn('node.type', $this->forumTypes)
                 ->whereBetween('created', [$from->getTimestamp(), $to->getTimestamp()])
                 ->take(20)
                 ->get();
 
-            foreach($results as $result) {
-                $this->line(join(',', [
+            foreach ($results as $result) {
+                $this->line(implode(',', [
                     $result->name ? $result->name : 'Undefined',
-                    $result->times
+                    $result->times,
                 ]));
-            
             }
-                        
+
             $total = \DB::connection($this->connection)
                 ->table('node')
                 ->whereIn('node.type', $this->forumTypes)
                 ->whereBetween('created', [$from->getTimestamp(), $to->getTimestamp()])
                 ->count();
 
-            $this->line(join(',', [
+            $this->line(implode(',', [
                 'Total',
-                $total
+                $total,
             ]));
-            
-
         }
-        
+
         $this->line(',');
-
     }
-
 }
