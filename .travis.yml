@@ -4,8 +4,13 @@ php:
   - 5.6
   - 7.0
 
+env:
+    - DB_CONNECTION=testing
+
 sudo: false
 
-install: composer install --no-interaction --prefer-source
+install:
+    - composer install --no-interaction --prefer-source
+    - php artisan migrate
 
 script: vendor/bin/phpunit

@@ -46,6 +46,11 @@ return [
 
     'connections' => [
 
+        'testing' => [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+        ],
+
         'trip' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST1', 'localhost'),
