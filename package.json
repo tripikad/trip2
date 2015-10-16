@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "bootstrap-sass": "^3.3.5",
+    "breakpoint-sass": "^2.6.1",
     "fastclick": "^1.0.6",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
@@ -12,6 +13,8 @@
     "gulp-svgmin": "^1.2.0",
     "gulp-svgstore": "^5.0.4",
     "jquery": "^2.1.4",
-    "selectize": "^0.12.1"
+    "normalize.css": "^3.0.3",
+    "selectize": "^0.12.1",
+    "susy": "^2.2.6"
   }
 }

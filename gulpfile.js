@@ -9,10 +9,32 @@ var svgmin = require('gulp-svgmin');
 gulp.task('sass', function() {
 
     gulp.src([
+        './node_modules/normalize.css/normalize.css',
+        './node_modules/susy/sass/_susy.scss',
+        './node_modules/breakpoint-sass/stylesheets/_breakpoint.scss',
+        './resources/assets/sass/**/_*.scss',
+
+    ])
+    .pipe(concat('main.scss'))
+    .pipe(sass({includePaths: [
+        './node_modules/susy/sass',
+        './node_modules/breakpoint-sass/stylesheets',
+    ]}))
+    .pipe(autoprefixer({
+        browsers: ['last 2 versions'],
+        cascade: false
+    }))
+    .pipe(gulp.dest('./public/css'));
+
+});
+
+gulp.task('sass_legacy', function() {
+
+    gulp.src([
         './resources/assets/sass/variables.scss',
         './node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
         './node_modules/selectize/dist/css/selectize.bootstrap3.css',
-        './resources/assets/sass/**/*.scss',
+        './resources/assets/sass/**/!(_*).scss',
     ])
     .pipe(concat('main.scss'))
     .pipe(sass({includePaths: [
@@ -61,7 +83,8 @@ gulp.task('svg_standalone', function () {
 
 gulp.task('watch', function () {
 
-  gulp.watch('./resources/assets/sass/**/*.scss', ['sass']);
+  gulp.watch('./resources/assets/sass/**/_*.scss', ['sass']);
+  gulp.watch('./resources/assets/js/**/*.js', ['js']);
   gulp.watch('./resources/assets/svg/**/*.svg', ['svg_sprite', 'svg_standalone']);
 
 });
