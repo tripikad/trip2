@@ -16,9 +16,6 @@ install:
     - cp .env.travis .env
     - chmod -R o+w storage/
     - chmod -R o+w public/images/
-    - chmod -R o+w .env
-    - php artisan key:generate
-    - cat .env
     - mysql -e 'create database IF NOT EXISTS trip2;'
 
 before_script:
@@ -27,4 +24,5 @@ before_script:
 script: phpunit
 
 notifications:
-  email: false
+    email: false
+    slack: tripikad:Rb20AN0r1arWwhxIBl9DNaZ5
