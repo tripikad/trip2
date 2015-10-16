@@ -21,15 +21,15 @@ class ContentTest extends TestCase
         ];
 
         $this->privateContentTypes = [
-            'internal',
-            'static',
+//          'internal',
+//          'static',
             'flight',
             'news',
             'shortnews',
         ];
     }
 
-    public function test_regular_user_can_create_and_edit_content()
+    public function test_regular_user_can_create_and_edit_public_content()
     {
         $regular_user = factory(App\User::class)->create();
 
@@ -74,4 +74,34 @@ class ContentTest extends TestCase
                     ]);
         }
     }
+
+    /**
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Received status code [401]
+     */
+/*
+    public function test_regular_user_can_not_create_private_content()
+    {
+        $regular_user = factory(App\User::class)->create();
+
+        foreach ($this->privateContentTypes as $type) {
+
+            // Acting as unlogged user
+
+            $this->visit("content/$type")
+                ->dontSee(trans("content.$type.create.title"))
+                ->visit("content/$type/create"); // 401
+
+            // Acting as registered user
+
+            $this->actingAs($regular_user)
+                ->visit("content/$type")
+                ->dontSee(trans("content.$type.create.title"))
+                ->visit("content/$type/create"); // 401
+
+        }
+
+    }
+*/
+    
 }
