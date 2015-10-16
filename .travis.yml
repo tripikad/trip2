@@ -2,10 +2,29 @@ language: php
 
 php:
   - 5.6
-  - 7.0
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
 
 sudo: false
 
-install: composer install --no-interaction --prefer-source
+install:
+    - composer self-update
+    - composer install --no-interaction --prefer-source
+    - cp .env.travis .env
+    - chmod -R o+w storage/
+    - chmod -R o+w public/images/
+    - chmod -R o+w .env
+    - php artisan key:generate
+    - cat .env
+    - mysql -e 'create database IF NOT EXISTS trip2;'
 
-script: vendor/bin/phpunit
+before_script:
+    - php artisan migrate:refresh
+
+script: phpunit
+
+notifications:
+  email: false
