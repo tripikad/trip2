@@ -4,12 +4,7 @@ php:
   - 5.6
 
 env:
-    - DB_CONNECTION=testing
-    - APP_ENV=testing
-    - CACHE_DRIVER=array
-    - SESSION_DRIVER=array
-    - QUEUE_DRIVER=sync
-    - MAIL_DRIVER=log
+    - DB_CONNECTION=testing APP_ENV=testing CACHE_DRIVER=array SESSION_DRIVER=array QUEUE_DRIVER=sync MAIL_DRIVER=log
 
 sudo: false
 
