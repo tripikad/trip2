@@ -12,21 +12,27 @@ class PhotoTest extends TestCase
     public function test_regular_user_can_post_photos()
     {
 
-        $user1 = factory(App\User::class)->create();
+        $regular_user = factory(App\User::class)->create();
 
-        $this->actingAs($user1)
+        $this->actingAs($regular_user)
             ->visit('content/photo')
             ->seeLink(trans('content.photo.create.title'))
             ->click(trans('content.photo.create.title'))
             ->seePageIs('content/photo/create')
-            ->type('Test image', 'title')
+            ->type('Hello photo title', 'title')
             ->attach(storage_path() . '/tests/test.jpg', 'file')
             ->press(trans('content.create.submit.title'))
             ->seePageIs('content/photo')
-            ->see(trans('content.store.status.1.info', ['title' => 'Test image']))
-            ->see('Test image');
+            ->see(trans('content.store.status.1.info', ['title' => 'Hello photo title']))
+            ->see('Hello photo title')
+            ->seeInDatabase('contents', [
+                'user_id' => $regular_user->id,
+                'title' => 'Hello photo title',
+                'type' => 'photo',
+                'status' => 1
+            ]);
 
-        $filename = $this->getImageFilenameByTitle('Test image');
+        $filename = $this->getImageFilenameByTitle('Hello photo title');
         
         // Check original file exists
 
