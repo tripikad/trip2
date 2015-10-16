@@ -6,11 +6,14 @@ php:
 sudo: false
 
 install:
+    - composer self-update
     - composer install --no-interaction --prefer-source
     - cp .env.travis .env
     - php artisan key:generate
     - chmod -R o+w storage/
     - chmod -R o+w public/images/
+
+before_script:
     - php artisan migrate
 
 script: vendor/bin/phpunit
