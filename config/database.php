@@ -46,9 +46,10 @@ return [
 
     'connections' => [
 
-        'testing' => [
+        'travis' => [
             'driver'   => 'sqlite',
             'database' => ':memory:',
+            'prefix'    => '',
         ],
 
         'trip' => [

@@ -3,16 +3,14 @@ language: php
 php:
   - 5.6
 
-env:
-    global:
-        - DB_CONNECTION=testing
-
-sudo: false
+sudo: true
 
 install:
     - composer install --no-interaction --prefer-source
-    - php artisan migrate --env="testing"
+    - cp .env.travis .env
+    - php artisan key:generate
     - chmod -R o+w storage/
     - chmod -R o+w public/images/
+    - php artisan migrate
 
 script: vendor/bin/phpunit
