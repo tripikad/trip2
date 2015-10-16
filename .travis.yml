@@ -2,10 +2,14 @@ language: php
 
 php:
   - 5.6
-  - 7.0
 
 env:
     - DB_CONNECTION=testing
+    - APP_ENV=testing
+    - CACHE_DRIVER=array
+    - SESSION_DRIVER=array
+    - QUEUE_DRIVER=sync
+    - MAIL_DRIVER=log
 
 sudo: false
 
