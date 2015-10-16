@@ -11,6 +11,10 @@ return [
     'register.field.eula.title.link' => 'End-user license agreement',
     'register.submit.title' => 'Register',
 
+    'register.email.subject' => 'Confirm your registration',
+    'register.email.body.line1' => 'Thanks for signing up',
+    'register.email.body.line2' => 'We just need you to confirm your email address. Please visit the link below',
+
     'register.sent.info' => 'A confirmation was sent to your e-mail address',
     'register.confirmed.info' => 'Your registration is now confirmed, you can log in',
 
@@ -33,5 +37,9 @@ return [
     'reset.password.field.password.title' => 'New password',
     'reset.password.field.password_confirmation.title' => 'Confirm new password',
     'reset.password.submit.title' => 'Submit',
+
+    'reset.email.subject' => 'Resetting your password',
+    'reset.email.body.line1' => 'Please visit the link below to set your new password',
+    'reset.email.body.line2' => 'Note: if you have not requested the password reset, you can safely ignore this e-mail',
 
 ];
