@@ -1,0 +1,6 @@
+scss:
+    enabled: true
+    config_file: .scss-style.yml
+
+fail_on_violations: true
+
