@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 class ConvertStatic extends ConvertBase
 {
-
     protected $signature = 'convert:static';
 
     public function getStaticNodes()
@@ -22,22 +21,18 @@ class ConvertStatic extends ConvertBase
 
     public function convertStaticNodes()
     {
-
         $nodes = $this->getStaticNodes()->get();
 
         $this->info('Converting static pages');
         $this->output->progressStart(count($nodes));
 
-        foreach($nodes as $node) {
-
+        foreach ($nodes as $node) {
             $node->uid = 1;
             $this->convertNode($node, '\App\Content', 'static');
             $this->output->progressAdvance();
-
         }
 
         $this->output->progressFinish();
-    
     }
 
     public function handle()

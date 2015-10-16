@@ -12,14 +12,12 @@ class CreateAliasesTable extends Migration
      */
     public function up()
     {
-    
         Schema::create('aliases', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('aliasable_id')->index();
             $table->string('aliasable_type');
             $table->string('path');
         });
-    
     }
 
     /**

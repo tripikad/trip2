@@ -1,17 +1,15 @@
-<?php namespace App\Console\Commands;
+<?php
+
+namespace App\Console\Commands;
 
 use DB;
-use Carbon\Carbon;
-use Illuminate\Console\Command;
 
 class StatsProfiles extends StatsBase
 {
-
     protected $signature = 'stats:profiles';
 
     public function handle()
     {
-
         $this->line('User,Homepage,Showterms,Hideterms,Hidecontent,E-mail,Phone,Address,Gender,Birth,Location');
 
         $users = DB::connection($this->connection)
@@ -20,15 +18,14 @@ class StatsProfiles extends StatsBase
             ->take(1000)
             ->latest('created')
             ->get();
-        
-        foreach($users as $user) {
 
+        foreach ($users as $user) {
             $profile = DB::connection($this->connection)
                 ->table('profile_values')
                 ->where('uid', '=', $user->uid)
                 ->lists('value', 'fid');
-            
-            $this->line(join(',', [
+
+            $this->line(implode(',', [
                 $user->name,
                 isset($profile[13]) ? $profile[13] : null, // Homepage
                 isset($profile[18]) ? $profile[18] : null, // Showterms
@@ -41,9 +38,6 @@ class StatsProfiles extends StatsBase
                 isset($profile[25]) ? $profile[25] : null, // Birth
                 isset($profile[26]) ? $profile[26] : null, // Location
             ]));
-
         }
-        
     }
-
 }

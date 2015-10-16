@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
 
             $table->integer('gender')->unsigned()->nullable();
             $table->integer('birthyear')->unsigned()->nullable();
-    
+
             $table->boolean('notify_message')->default(false);
             $table->boolean('notify_follow')->default(false);
 

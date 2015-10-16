@@ -2,28 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-
 use View;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Auth;
-
-use Imageconv;
-
 use App\User;
 use App\Image;
 
 class UserController extends Controller
 {
-
     public function show($id)
     {
-
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
 
         $user = User::with('flags', 'flags.flaggable')->findorFail($id);
-  
+
         $content_count = $user
             ->contents()
             ->whereStatus(1)
@@ -37,7 +29,7 @@ class UserController extends Controller
                 $query->whereIn('type', $types);
             })
             ->count();
-      
+
         $from = Carbon::now()->subMonths(6)->startOfMonth();
         $to = Carbon::now();
 
@@ -50,6 +42,7 @@ class UserController extends Controller
             ->get()
             ->transform(function ($item) {
                 $item['activity_type'] = 'content';
+
                 return $item;
             });
 
@@ -65,9 +58,10 @@ class UserController extends Controller
             ->get()
             ->transform(function ($item) {
                 $item['activity_type'] = 'comment';
+
                 return $item;
             });
-    
+
         $items = $content
             ->merge($comments)
             ->sortByDesc('created_at');
@@ -76,23 +70,21 @@ class UserController extends Controller
             'user' => $user,
             'items' => $items,
             'content_count' => $content_count,
-            'comment_count' => $comment_count
-        ])->header('Cache-Control', 'public, s-maxage=' . config('site.cache.user'));
+            'comment_count' => $comment_count,
+        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
     }
 
     public function edit($id)
     {
-
         $user = User::findorFail($id);
 
-        return View::make("pages.user.edit")
+        return View::make('pages.user.edit')
             ->with('user', $user)
             ->with('title', trans('user.edit.title'))
             ->with('url', route('user.update', [$user]))
             ->with('method', 'put')
             ->with('submit', trans('user.edit.submit'))
             ->render();
-
     }
 
     public function update(Request $request, $id)
@@ -100,15 +92,14 @@ class UserController extends Controller
         $user = User::findorFail($id);
 
         if ($request->get('image_submit')) {
-        
             $this->validate($request, [
                 'file' => 'required|image',
-            ]); 
+            ]);
 
             $filename = 'picture-'
-                . $user->id
-                . '.'
-                . $request->file('file')->getClientOriginalExtension();
+                .$user->id
+                .'.'
+                .$request->file('file')->getClientOriginalExtension();
 
             $filename = Image::storeImageFile($request->file('file'), $filename);
 
@@ -119,17 +110,16 @@ class UserController extends Controller
                 ->route('user.edit', [$user])
                 ->withInput()
                 ->with('status', trans('user.update.image.status'));
-        
         }
 
         $this->validate($request, [
-            'name' => 'required|unique:users,name,' . $user->id,
-            'email' => 'required|unique:users,email,' . $user->id,
+            'name' => 'required|unique:users,name,'.$user->id,
+            'email' => 'required|unique:users,email,'.$user->id,
             'contact_facebook' => 'url',
             'contact_twitter' => 'url',
             'contact_instagram' => 'url',
-            'contact_homepage' => 'url'
-        ]); 
+            'contact_homepage' => 'url',
+        ]);
 
         $user->update($request->all());
 
@@ -137,5 +127,4 @@ class UserController extends Controller
             ->route('user.show', [$user])
             ->with('info', trans('user.update.info'));
     }
-
 }

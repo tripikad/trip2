@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-use App\User;
 use App\Content;
 use App\Comment;
 
@@ -12,8 +10,8 @@ class CommentTest extends TestCase
 
     protected $publicContentTypes;
 
-    public function setUp() {
-
+    public function setUp()
+    {
         parent::setUp();
 
         $this->publicContentTypes = [
@@ -25,26 +23,23 @@ class CommentTest extends TestCase
             'news',
             'shortnews',
             'photo',
-            'travelmate'
+            'travelmate',
         ];
 
         $this->privateContentTypes = [
             'internal',
             'static',
         ];
-
     }
 
     public function test_regular_user_can_create_and_edit_comment()
     {
-
         $regular_user = factory(App\User::class)->create();
 
-        foreach($this->publicContentTypes as $type) {
-
+        foreach ($this->publicContentTypes as $type) {
             $content = factory(Content::class)->create([
                 'user_id' => factory(App\User::class)->create()->id,
-                'type' => $type
+                'type' => $type,
             ]);
 
             // Can comment
@@ -60,7 +55,7 @@ class CommentTest extends TestCase
                     'user_id' => $regular_user->id,
                     'content_id' => $content->id,
                     'body' => "Hello $content->type",
-                    'status' => 1
+                    'status' => 1,
                 ]);
 
             $comment = Comment::whereBody("Hello $content->type")->first();
@@ -79,11 +74,9 @@ class CommentTest extends TestCase
                     'user_id' => $regular_user->id,
                     'content_id' => $content->id,
                     'body' => "Hola $content->type",
-                    'status' => 1
+                    'status' => 1,
                 ]);
-
         }
-
     }
 
     /**
@@ -120,21 +113,19 @@ class CommentTest extends TestCase
 
     }
 */
+
     /**
      * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessage Received status code [401]
      */
-
     public function test_regular_user_cannot_comments_on_private_content()
     {
-
         $regular_user = factory(App\User::class)->create();
 
-        foreach($this->privateContentTypes as $type) {
-
+        foreach ($this->privateContentTypes as $type) {
             $content = factory(Content::class)->create([
                 'user_id' => factory(App\User::class)->create()->id,
-                'type' => $type
+                'type' => $type,
             ]);
 
             $comment = factory(Comment::class)->create([
@@ -154,9 +145,6 @@ class CommentTest extends TestCase
                 ->visit("content/$content->type/$content->id")
                 ->dontSee(trans('comment.action.edit.title'))
                 ->visit("comment/$comment->id/edit"); // 401
-        
         }
-    
     }
-
 }

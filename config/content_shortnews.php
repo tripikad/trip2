@@ -3,16 +3,16 @@
 return [
 
     'frontpage' => [
-        
+
         'show' => false,
         'with' => [],
         'latest' => 'created_at',
-        'take' => 4
+        'take' => 4,
 
     ],
 
     'index' => [
-    
+
         'with' => ['destinations', 'topics'],
         'latest' => 'created_at',
         'paginate' => 24,
@@ -20,7 +20,7 @@ return [
 
     'store' => [
 
-        'status' => 1
+        'status' => 1,
 
     ],
 
@@ -30,7 +30,7 @@ return [
             'title' => [
                 'type' => 'textarea',
                 'rows' => 3,
-                'large' => true
+                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
@@ -49,17 +49,17 @@ return [
             'submit' => [
                 'type' => 'submit',
                 'title' => 'Add',
-            ]
+            ],
         ],
 
         'validate' => [
-        
+
             'title' => 'required',
             'url' => 'url',
-            'file' => 'image'
-        
+            'file' => 'image',
+
         ],
 
-    ]
+    ],
 
 ];

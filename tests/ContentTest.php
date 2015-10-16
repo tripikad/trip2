@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-use App\User;
 use App\Content;
 
 class ContentTest extends TestCase
@@ -11,8 +9,8 @@ class ContentTest extends TestCase
 
     protected $publicContentTypes;
 
-    public function setUp() {
-
+    public function setUp()
+    {
         parent::setUp();
 
         $this->publicContentTypes = [
@@ -29,16 +27,13 @@ class ContentTest extends TestCase
             'news',
             'shortnews',
         ];
-
     }
 
     public function test_regular_user_can_create_and_edit_content()
     {
-
         $regular_user = factory(App\User::class)->create();
 
-        foreach($this->publicContentTypes as $type) {
-
+        foreach ($this->publicContentTypes as $type) {
             $this->actingAs($regular_user)
                 ->visit("content/$type")
                 ->click(trans("content.$type.create.title"))
@@ -47,7 +42,7 @@ class ContentTest extends TestCase
                 ->type("Hello body $type", 'body')
                 ->press(trans('content.create.submit.title'))
                 ->see(trans('content.store.status.1.info', [
-                    'title' => "Hello title $type"
+                    'title' => "Hello title $type",
                 ]))
                 ->see("Hello title $type")
                 ->see($regular_user->name)
@@ -56,12 +51,12 @@ class ContentTest extends TestCase
                     'title' => "Hello title $type",
                     'body' => "Hello body $type",
                     'type' => $type,
-                    'status' => 1
+                    'status' => 1,
                 ]);
 
-                $content = Content::whereTitle("Hello title $type")->first();
+            $content = Content::whereTitle("Hello title $type")->first();
 
-                $this->actingAs($regular_user)
+            $this->actingAs($regular_user)
                     ->visit("content/$type/$content->id")
                     ->press(trans('content.action.edit.title'))
                     ->seePageIs("content/$type/$content->id/edit")
@@ -75,11 +70,8 @@ class ContentTest extends TestCase
                         'title' => "Hola titulo $type",
                         'body' => "Hola cuerpo $type",
                         'type' => $type,
-                        'status' => 1
+                        'status' => 1,
                     ]);
-
         }
-
     }
-
 }

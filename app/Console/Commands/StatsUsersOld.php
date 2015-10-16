@@ -1,15 +1,15 @@
-<?php namespace App\Console\Commands;
+<?php
+
+namespace App\Console\Commands;
 
 use DB;
 use Carbon\Carbon;
-use Illuminate\Console\Command;
 
 class StatsUsersOld extends StatsBase
 {
-
     protected $signature = 'stats:users:old';
 
-    public function getOldestComment($uid) 
+    public function getOldestComment($uid)
     {
         return DB::connection($this->connection)
             ->table('comments')
@@ -17,7 +17,7 @@ class StatsUsersOld extends StatsBase
             ->min('timestamp');
     }
 
-    public function getOldestContent($uid) 
+    public function getOldestContent($uid)
     {
         return DB::connection($this->connection)
             ->table('node')
@@ -26,21 +26,25 @@ class StatsUsersOld extends StatsBase
             ->min('created');
     }
 
-    public function calculateMin($first, $second) 
+    public function calculateMin($first, $second)
     {
-        if ($first < 1) return $second;
-        if ($second < 1) return $first;
+        if ($first < 1) {
+            return $second;
+        }
+        if ($second < 1) {
+            return $first;
+        }
+
         return min($first, $second);
     }
 
-    public function formatDate($timestamp) 
+    public function formatDate($timestamp)
     {
         return ($timestamp > 0) ? Carbon::createFromTimestamp($timestamp)->format('d M Y') : '';
     }
 
     public function handle()
     {
-
         $this->line('Id,Created,Content,Comment,Created,Diff,Content,Comment,Oldest');
 
         $results = DB::connection($this->connection)
@@ -50,14 +54,13 @@ class StatsUsersOld extends StatsBase
             ->where('uid', '>', 0)
             ->take(20)
             ->get();
-        
+
         $prev = 0;
 
-        foreach($results as $result) {
-
+        foreach ($results as $result) {
             $diff = $result->created - $prev;
 
-            $this->line(join(',', [
+            $this->line(implode(',', [
                 $result->uid,
                 $result->created,
                 $this->getOldestContent($result->uid),
@@ -68,16 +71,13 @@ class StatsUsersOld extends StatsBase
                 $this->formatDate($this->getOldestComment($result->uid)),
                 $this->formatDate(
                     $this->calculateMin(
-                        $this->getOldestContent($result->uid), 
+                        $this->getOldestContent($result->uid),
                         $this->getOldestComment($result->uid)
                     )
-                )
+                ),
             ]));
-            
-            $prev = $result->created;
-   
-        }
-        
-    }
 
+            $prev = $result->created;
+        }
+    }
 }

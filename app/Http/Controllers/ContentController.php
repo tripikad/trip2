@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Auth;
-use Imageconv;
-
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -15,12 +11,10 @@ use App\Image;
 
 class ContentController extends Controller
 {
-
     public function index(Request $request, $type)
     {
-        
         if ($type == 'internal'
-            && (!Auth::check() || (Auth::check() && !Auth::user()->hasRole('admin')))
+            && (! Auth::check() || (Auth::check() && ! Auth::user()->hasRole('admin')))
         ) {
             abort(401);
         }
@@ -29,9 +23,8 @@ class ContentController extends Controller
             ->with(config("content_$type.index.with"))
             ->latest(config("content_$type.index.latest"))
             ->whereStatus(1);
-            
-        if ($request->destination) {
 
+        if ($request->destination) {
             $descendants = Destination::find($request->destination)
                 ->descendantsAndSelf()
                 ->lists('id');
@@ -40,16 +33,14 @@ class ContentController extends Controller
                 ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
                 ->select('contents.*')
                 ->whereIn('content_destination.destination_id', $descendants);
-        }   
+        }
 
         if ($request->topic) {
-
             $contents = $contents
                 ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
                 ->select('contents.*')
                 ->where('content_topic.topic_id', '=', $request->topic);
-        
-        } 
+        }
 
         $contents = $contents->simplePaginate(config("content_$type.index.paginate"));
 
@@ -65,22 +56,20 @@ class ContentController extends Controller
             'destinations' => $destinations,
             'topic' => $request->topic,
             'topics' => $topics,
-        ])->header('Cache-Control', 'public, s-maxage=' . config('site.cache.content.index'));
+        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.content.index'));
     }
-
 
     public function show($type, $id)
     {
-        
         if ($type == 'internal'
-            && (!Auth::check() || (Auth::check() && !Auth::user()->hasRole('admin')))
+            && (! Auth::check() || (Auth::check() && ! Auth::user()->hasRole('admin')))
         ) {
             abort(401);
         }
 
         $content = \App\Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers')
             ->findorFail($id);
-             
+
         $comments = $content->comments->filter(function ($comment) {
             return $comment->status || (Auth::check() && Auth::user()->hasRole('admin'));
         });
@@ -90,14 +79,12 @@ class ContentController extends Controller
         return response()->view($view, [
             'content' => $content,
             'comments' => $comments,
-            'type' => $type
-        ])->header('Cache-Control', 'public, s-maxage=' . config('site.cache.content.show'));
-    
+            'type' => $type,
+        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.content.show'));
     }
 
     public function create($type)
     {
-
         $destinations = Destination::getNames();
         $destination = [];
 
@@ -106,7 +93,7 @@ class ContentController extends Controller
 
         $now = \Carbon\Carbon::now();
 
-        return \View::make("pages.content.edit")
+        return \View::make('pages.content.edit')
             ->with('mode', 'create')
             ->with('fields', config("content_$type.edit.fields"))
             ->with('url', route('content.store', [$type]))
@@ -117,7 +104,6 @@ class ContentController extends Controller
             ->with('topic', $topic)
             ->with('now', $now)
             ->render();
-
     }
 
     public function store(Request $request, $type)
@@ -126,53 +112,41 @@ class ContentController extends Controller
 
         $fields = [
             'type' => $type,
-            'status' => config("content_$type.store.status", 1)
+            'status' => config("content_$type.store.status", 1),
         ];
 
         $content = Auth::user()->contents()->create(array_merge($request->all(), $fields));
 
         if ($request->hasFile('file')) {
-            
             $filename = Image::storeImageFile($request->file('file'));
             $content->images()->create(['filename' => $filename]);
-
         }
 
         if ($request->has('image_id')) {
-            
             $id = str_replace(['[[', ']]'], '', $request->image_id);
 
             if (is_int($id) && Image::find($id)) {
-            
                 $content->images()->sync($id);
-            
             }
-
         }
 
         if ($request->has('destinations')) {
-            
             $content->destinations()->sync($request->destinations);
-
         }
 
         if ($request->has('topics')) {
-            
             $content->topics()->sync($request->topics);
-
         }
 
         return redirect()
             ->route('content.index', [$type])
-            ->with('info', trans("content.store.status." . config("content_$type.store.status", 1) . '.info', [
-                'title' => $content->title
+            ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
+                'title' => $content->title,
             ]));
-
     }
 
     public function edit($type, $id)
     {
-
         $now = \Carbon\Carbon::now();
 
         $content = \App\Content::findorFail($id);
@@ -183,7 +157,7 @@ class ContentController extends Controller
         $topics = Topic::getNames();
         $topic = $content->topics()->select('topics.id')->lists('id')->toArray();
 
-        return \View::make("pages.content.edit")
+        return \View::make('pages.content.edit')
             ->with('mode', 'edit')
             ->with('fields', config("content_$type.edit.fields"))
             ->with('content', $content)
@@ -196,81 +170,64 @@ class ContentController extends Controller
             ->with('topic', $topic)
             ->with('now', $now)
             ->render();
-
     }
 
     public function update(Request $request, $type, $id)
     {
-
         $content = \App\Content::findorFail($id);
 
         $this->validate($request, config("content_$type.edit.validate"));
 
         $fields = [];
-        
+
         if ($request->hasFile('file')) {
-            
             $filename = Image::storeImageFile($request->file('file'));
             $content->images()->update(['filename' => $filename]);
-
         }
 
         $content->update(array_merge($fields, $request->all()));
 
         if ($request->has('image_id')) {
-            
-            $id = (int)str_replace(['[[', ']]'], '', $request->image_id);
+            $id = (int) str_replace(['[[', ']]'], '', $request->image_id);
 
             if ($id && Image::find($id)) {
-                
                 $content->images()->sync([$id]);
-            
             }
-
         }
 
         if ($request->has('destinations')) {
-            
             $content->destinations()->sync($request->destinations);
-
         }
 
         if ($request->has('topics')) {
-            
             $content->topics()->sync($request->topics);
-
         }
 
         return redirect()
             ->route('content.show', [$type, $content])
-            ->with('info', trans("content.update.info", ['title' => $content->title]));
-
+            ->with('info', trans('content.update.info', ['title' => $content->title]));
     }
 
     public function status($type, $id, $status)
     {
-
         $content = \App\Content::findorFail($id);
 
         if ($status == 0 || $status == 1) {
-
             $content->status = $status;
             $content->save();
 
             return redirect()
                 ->route('content.show', [$type, $content])
                 ->with('info', trans("content.action.status.$status.info", [
-                    'title' => $content->title
+                    'title' => $content->title,
                 ]));
         }
-        
-        return back();
 
+        return back();
     }
 
     public function filter(Request $request, $type)
     {
-        
         return redirect()->route(
             'content.index',
             [$type,
@@ -278,7 +235,5 @@ class ContentController extends Controller
             'topic' => $request->topic ? $request->topic : null,
             ]
         );
-
     }
-
 }

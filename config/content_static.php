@@ -3,7 +3,7 @@
 return [
 
     'index' => [
-    
+
         'with' => ['destinations', 'topics'],
         'latest' => 'created_at',
         'paginate' => 25,
@@ -15,7 +15,7 @@ return [
             'title' => [
                 'type' => 'text',
                 'title' => 'Title',
-                'large' => true
+                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
@@ -24,16 +24,16 @@ return [
             'submit' => [
                 'type' => 'submit',
                 'title' => 'Add',
-            ]
+            ],
         ],
 
         'validate' => [
-        
+
             'title' => 'required',
             'body' => 'required',
-        
+
         ],
 
-    ]
+    ],
 
 ];

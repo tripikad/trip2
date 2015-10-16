@@ -18,11 +18,11 @@ return [
     'edit.contact.title' => 'Contact information',
     'edit.account.title' => 'Account details',
     'edit.notify.title' => 'E-mail notifications',
-    
+
     'edit.field.name.title' => 'Username',
     'edit.field.password.title' => 'New password',
     'edit.field.password_confirmation.title' => 'Confirm new password',
-    
+
     'edit.field.contact_facebook.title' => 'Facebook link',
     'edit.field.contact_twitter.title' => 'Twitter link',
     'edit.field.contact_instagram.title' => 'Instagram link',
