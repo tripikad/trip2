@@ -3,12 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
 use Auth;
 
 class Content extends Model
 {
-
     protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image', 'status', 'start_at', 'end_at', 'duration', 'price'];
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
@@ -42,53 +40,44 @@ class Content extends Model
 
     public function flags()
     {
-     return $this->morphMany('App\Flag', 'flaggable');
+        return $this->morphMany('App\Flag', 'flaggable');
     }
 
     public function followers()
     {
-       return $this->morphMany('App\Follow', 'followable');
+        return $this->morphMany('App\Follow', 'followable');
     }
 
     public function followersEmails()
     {
-       
         $followerIds = $this->followers->lists('user_id');
 
         return User::whereIn('id', $followerIds)
             ->where('notify_follow', 1)
             ->lists('email', 'id');
-    
     }
 
     public function imagePath()
     {
-        return $this->image ? '/images/' . $this->type . '/small/' . $this->image : 'http://trip.ee/files/pictures/picture_none.png';
+        return $this->image ? '/images/'.$this->type.'/small/'.$this->image : 'http://trip.ee/files/pictures/picture_none.png';
     }
 
 //    public function getFilteredbodyAttribute()
+
     public function getBodyFilteredAttribute()
     {
-
         $pattern = '/\[\[([0-9]+)\]\]/';
         $filteredBody = $this->body;
 
         if (preg_match_all($pattern, $filteredBody, $matches)) {
-
             foreach ($matches[1] as $match) {
-            
                 if ($image = \App\Image::find($match)) {
-                    
-                    $filteredBody = str_replace("[[$image->id]]", '<img src="' . $image->preset('medium'). '" />', $filteredBody);
-                
+                    $filteredBody = str_replace("[[$image->id]]", '<img src="'.$image->preset('medium').'" />', $filteredBody);
                 }
-            
             }
-
         }
 
         return nl2br($filteredBody);
-
     }
 
     public function images()
@@ -98,74 +87,59 @@ class Content extends Model
 
     public function imagePreset($preset = 'small')
     {
-        
         if ($image = $this->images()->first()) {
-            
             return $image->preset($preset);
-        
         }
 
-        return null;
-    
+        return;
     }
 
-    public function getImageIdAttribute() {
-
+    public function getImageIdAttribute()
+    {
         if ($image = $this->images()->first()) {
-            
-            return '[[' . $image->id . ']]';
-        
+            return '[['.$image->id.']]';
         }
 
-        return null;
-    
+        return;
     }
 
     public function getActions()
     {
-
         $actions = [];
 
         if (auth()->user()) {
-            
             $status = auth()->user()->follows()->where([
                 'followable_id' => $this->id,
-                'followable_type' => 'App\Content'
+                'followable_type' => 'App\Content',
             ])->first() ? 0 : 1;
 
             $actions['follow'] = [
                 'title' => trans("content.action.follow.$status.title"),
                 'route' => route('follow.follow.content', [$this->type, $this, $status]),
-                'method' => 'PUT'
+                'method' => 'PUT',
             ];
-            
         }
 
         if (auth()->user() && auth()->user()->hasRoleOrOwner('admin', $this->user->id)) {
-            
             $actions['edit'] = [
                 'title' => trans('content.action.edit.title'),
-                'route' => route('content.edit', ['type' => $this->type, 'id' => $this])
+                'route' => route('content.edit', ['type' => $this->type, 'id' => $this]),
             ];
-            
         }
 
         if (auth()->user() && auth()->user()->hasRole('admin')) {
-            
             $actions['status'] = [
                 'title' => trans("content.action.status.$this->status.title"),
                 'route' => route('content.status', [$this->type, $this, (1 - $this->status)]),
-                'method' => 'PUT'
+                'method' => 'PUT',
             ];
-            
         }
-        
+
         return $actions;
-    
     }
 
-    public function getFlags() {
-
+    public function getFlags()
+    {
         return [
 
             'good' => [
@@ -173,17 +147,15 @@ class Content extends Model
                 'flaggable' => Auth::check(),
                 'flaggable_type' => 'content',
                 'flaggable_id' => $this->id,
-                'flag_type' => 'good'
+                'flag_type' => 'good',
             ],
             'bad' => [
                 'value' => count($this->flags->where('flag_type', 'bad')),
                 'flaggable' => Auth::check(),
                 'flaggable_type' => 'content',
                 'flaggable_id' => $this->id,
-                'flag_type' => 'bad'
-            ]
+                'flag_type' => 'bad',
+            ],
         ];
-
     }
-
 }

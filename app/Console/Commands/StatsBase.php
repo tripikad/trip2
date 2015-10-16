@@ -1,12 +1,11 @@
-<?php namespace App\Console\Commands;
+<?php
 
-use DB;
-use Carbon\Carbon;
+namespace App\Console\Commands;
+
 use Illuminate\Console\Command;
 
 class StatsBase extends Command
 {
-
     protected $connection = 'trip';
 
     protected $contentTypes = [
@@ -18,18 +17,16 @@ class StatsBase extends Command
         'trip_forum_buysell',
         'trip_forum_travelmate',
         'trip_image',
-        'trip_offer'
+        'trip_offer',
     ];
 
     protected $forumTypes = [
         'trip_forum',
-        'trip_forum_other'
+        'trip_forum_other',
     ];
 
     public function percent($big, $small)
     {
-
-        return floor(($small * 100) / $big) . '%';
+        return floor(($small * 100) / $big).'%';
     }
-
 }

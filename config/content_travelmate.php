@@ -3,15 +3,15 @@
 return [
 
     'frontpage' => [
-        
+
         'show' => true,
         'with' => ['user'],
         'latest' => 'created_at',
-        'take' => 8
+        'take' => 8,
     ],
 
     'index' => [
-    
+
         'with' => ['user', 'destinations', 'topics'],
         'latest' => 'created_at',
         'paginate' => 24,
@@ -22,7 +22,7 @@ return [
         'fields' => [
             'title' => [
                 'type' => 'text',
-                'large' => true
+                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
@@ -35,7 +35,7 @@ return [
             ],
             'start_at' => [
                 'type' => 'datetime',
-                'help' => true
+                'help' => true,
             ],
             'duration' => [
                 'type' => 'text',
@@ -43,16 +43,16 @@ return [
             'submit' => [
                 'type' => 'submit',
                 'title' => 'Add',
-            ]
+            ],
         ],
 
         'validate' => [
-        
+
             'title' => 'required',
             'start_at' => 'date|required',
-        
+
         ],
 
-    ]
+    ],
 
 ];

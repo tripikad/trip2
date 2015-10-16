@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 
@@ -11,7 +10,7 @@ class AuthTest extends TestCase
     public function test_user_can_register_confirm_and_login()
     {
 
-        // User can register 
+        // User can register
 
         $this->visit('/')
             ->see(trans('menu.auth.register'))
@@ -37,12 +36,12 @@ class AuthTest extends TestCase
             ->see(trans('auth.login.failed.info'));
 
         // User can confirm its account
-            
+
         $this->visit($this->getVerificationLink('user'))
             ->seeInDatabase('users', [
                 'name' => 'user',
                 'verified' => 1,
-                'registration_token' => null
+                'registration_token' => null,
             ])
             ->seePageIs('login')
             ->see(trans('auth.register.confirmed.info'));
@@ -56,15 +55,12 @@ class AuthTest extends TestCase
             ->press(trans('auth.login.submit.title'))
             ->seePageIs('/')
             ->see(trans('auth.login.login.info'));
-
     }
 
-    public function getVerificationLink($name) {
-
+    public function getVerificationLink($name)
+    {
         $token = User::whereName($name)->first()->registration_token;
 
-        return '/register/confirm/' . $token;
+        return '/register/confirm/'.$token;
     }
-
-
 }

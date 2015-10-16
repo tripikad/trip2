@@ -38,5 +38,5 @@ return [
     'admin.internal' => 'Internal forum',
     'admin.image' => 'All images',
     'admin.content' => 'Unpublished content',
-    
+
 ];

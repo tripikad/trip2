@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 class ConvertFlights extends ConvertBase
 {
-
     protected $signature = 'convert:flights';
 
     public function convertFlightNodes()
@@ -37,11 +36,11 @@ class ConvertFlights extends ConvertBase
 
         $nodes = $flightNodes->skip($this->skip)->chunk($this->chunk, function ($nodes) use (&$i) {
 
-            if ($i++ > $this->chunkLimit()) return false;
+            if ($i++ > $this->chunkLimit()) {
+                return false;
+            }
 
-            foreach($nodes as $node)
-            {
-
+            foreach ($nodes as $node) {
                 $images = false;
 
                 /*
@@ -61,10 +60,8 @@ class ConvertFlights extends ConvertBase
                 $node->end_at = isset($node->field_salesperiod_value2) ? $this->formatDateTime($node->field_salesperiod_value2) : null;
 
                 if (preg_match('/(\d+)€/', $node->title, $matches)) {
-
                     $node->price = $matches[1];
                     $node->title = preg_replace('/[al]*\.?\s?(\d+)€/', '', $node->title);
-                    
                 };
 
                 $node->body = str_replace('src="/images', 'src="http://www.trip.ee/images', $node->body);
@@ -72,71 +69,56 @@ class ConvertFlights extends ConvertBase
                 $imagePattern = '/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i';
 
                 if (preg_match_all($imagePattern, $node->body, $imageMatches)) {
-                    
                     $images = (isset($imageMatches[0])) ? $imageMatches[0] : null;
-
                 }
 
                 // Convert the content
 
                 if ($flight = $this->convertNode($node, '\App\Content', 'flight')) {
-                
+
                     // Convert the image
 
                     if ($images && count($images) > 0) {
-                        
                         $replaceImages = [];
 
-                        foreach($images as $index => $image) {     
-
+                        foreach ($images as $index => $image) {
                             $newImage = $this->convertRemoteImage($node->nid, $image, '\App\Content', 'flight', 'jpg');
-                            
+
                             $escapedImage = str_replace('/', '\/', $image);
                             $escapedImage = str_replace('.', '\.', $escapedImage);
-                            
+
                             if ($index < 1 || ! $newImage) {
-                                
                                 $replaceImages[] = [
-                                    'from' =>'/<img.*src="?' . $escapedImage . '"?.*\/?>\n?/i',
-                                    'to' => ""
+                                    'from' => '/<img.*src="?'.$escapedImage.'"?.*\/?>\n?/i',
+                                    'to' => '',
                                 ];
-
                             } else {
-
                                 $replaceImages[] = [
-                                    'from' =>'/<img.*src="?' . $escapedImage . '"?.*\/?>/i',
-                                    'to' => "[[$newImage->id]]"
+                                    'from' => '/<img.*src="?'.$escapedImage.'"?.*\/?>/i',
+                                    'to' => "[[$newImage->id]]",
                                 ];
-
                             }
-
                         }
 
                         $body = $flight->body;
 
-                        foreach($replaceImages as $replaceImage) {
-                            
+                        foreach ($replaceImages as $replaceImage) {
                             $body = preg_replace($replaceImage['from'], $replaceImage['to'], $body);
-                        
                         }
 
                         $flight->update(['body' => $this->convertLineendings($body)]);
-       
                     }
 
                     $this->convertNodeDestinations($node);
-                    
+
                     $this->convertNodeCarriers($node);
 
-                    if ($url = $node->field_linktooffer_url)
-                    {   
+                    if ($url = $node->field_linktooffer_url) {
                         $this->convertUrl($node->nid, $url, 'App\Content');
                     }
-
                 }
-            
-                $this->output->progressAdvance();
 
+                $this->output->progressAdvance();
             }
 
         });
@@ -146,7 +128,6 @@ class ConvertFlights extends ConvertBase
 
     public function convertForumNodes()
     {
-
         $nodes = $this->getNodes('trip_forum')
             ->join('term_node', 'term_node.nid', '=', 'node.nid')
             ->where('term_node.tid', '=', 825) // Sooduspakkumised
@@ -155,16 +136,14 @@ class ConvertFlights extends ConvertBase
         $this->info('Converting flight offers from forum');
         $this->output->progressStart(count($nodes));
 
-        foreach($nodes as $node)
-        {
-            $node->title = $node->title . ', from forum';
-            
+        foreach ($nodes as $node) {
+            $node->title = $node->title.', from forum';
+
             $this->convertNode($node, 'App\Content', 'flight');
 
             $this->convertNodeDestinations($node);
 
             $this->output->progressAdvance();
-
         }
 
         $this->output->progressFinish();

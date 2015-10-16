@@ -2,12 +2,10 @@
 
 namespace App\Console;
 
-use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-
     protected $commands = [
 
         \App\Console\Commands\ConvertAll::class,
@@ -43,5 +41,4 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\StatsUsersOld::class,
 
     ];
-
 }

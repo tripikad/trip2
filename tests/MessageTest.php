@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 use App\User;
 use App\Message;
 
@@ -13,10 +12,8 @@ class MessageTest extends TestCase
      * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessage Received status code [401]
      */
-
     public function test_unlogged_user_can_not_see_messages()
     {
-
         $user1 = factory(App\User::class)->create();
         $user2 = factory(App\User::class)->create();
 
@@ -27,24 +24,21 @@ class MessageTest extends TestCase
 
         $this->visit("user/$user1->id/messages")
             ->visit("user/$user1->id/messages/$user2->id");
-
     }
 
     /**
      * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessage Received status code [401]
      */
-
     public function test_regular_user_can_not_see_other_user_messages()
     {
-
         $user1 = factory(App\User::class)->create();
         $user2 = factory(App\User::class)->create();
         $user3 = factory(App\User::class)->create();
-        
+
         $message = factory(Message::class)->create([
             'user_id_from' => $user1->id,
-            'user_id_to' => $user2->id
+            'user_id_to' => $user2->id,
         ]);
 
         $this->actingAs($user3)
@@ -56,12 +50,10 @@ class MessageTest extends TestCase
         $this->actingAs($user3)
             ->visit("user/$user1->id/messages")
             ->visit("user/$user1->id/messages/$user2->id");
-
     }
 
     public function test_regular_user_can_send_and_receive_message()
     {
-
         $user1 = factory(App\User::class)->create();
         $user2 = factory(App\User::class)->create();
         $user3 = factory(App\User::class)->create();
@@ -80,7 +72,7 @@ class MessageTest extends TestCase
         $this->seeInDatabase('messages', [
             'user_id_from' => $user1->id,
             'user_id_to' => $user2->id,
-            'body' => 'Hello'
+            'body' => 'Hello',
         ]);
 
         // Sender going back to messages page
@@ -114,7 +106,7 @@ class MessageTest extends TestCase
         $this->seeInDatabase('messages', [
             'user_id_from' => $user2->id,
             'user_id_to' => $user1->id,
-            'body' => 'World'
+            'body' => 'World',
         ]);
 
         // Sender receiving a reply
@@ -127,26 +119,24 @@ class MessageTest extends TestCase
             ->seePageIs("user/$user1->id/messages/$user2->id")
             ->see('World')
             ->see($user2->name);
-
     }
 
     public function test_regular_user_can_receive_messages_from_different_senders()
     {
-
         $user1 = factory(App\User::class)->create(['verified' => true]);
         $user2 = factory(App\User::class)->create(['verified' => true]);
         $user3 = factory(App\User::class)->create(['verified' => true]);
-        
+
         factory(Message::class)->create([
             'user_id_from' => $user1->id,
             'user_id_to' => $user3->id,
-            'body' => 'Hello'
+            'body' => 'Hello',
         ]);
 
         factory(Message::class)->create([
             'user_id_from' => $user2->id,
             'user_id_to' => $user3->id,
-            'body' => 'World'
+            'body' => 'World',
         ]);
 
         $this->actingAs($user3)
@@ -161,7 +151,5 @@ class MessageTest extends TestCase
             ->see($user1->name)
             ->dontSee('World')
             ->dontSee($user2->name);
-
     }
-
 }

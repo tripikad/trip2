@@ -4,11 +4,10 @@ namespace App\Console\Commands;
 
 class ConvertOffers extends ConvertBase
 {
-
     protected $signature = 'convert:offers';
 
-    public function convert() {
-
+    public function convert()
+    {
         $nodes = $this->getNodes('trip_offer')
             ->join('content_type_trip_offer', 'content_type_trip_offer.nid', '=', 'node.nid')
             ->join('content_field_image', 'content_field_image.nid', '=', 'node.nid')
@@ -22,20 +21,18 @@ class ConvertOffers extends ConvertBase
             )
             ->get();
 
-
         $this->info('Converting offers');
         $this->output->progressStart(count($nodes));
 
-        foreach($nodes as $node) {   
-            
+        foreach ($nodes as $node) {
             $locationMap = [
                 1 => 'Eestist',
                 2 => 'Lätist',
                 3 => 'Soomest',
                 4 => 'Rootsist',
-                100 => 'Mujalt'
+                100 => 'Mujalt',
             ];
-            
+
             $typeMap = [
                 1 => 'Nädalalõpureis',
                 2 => 'Eksootikareis',
@@ -69,7 +66,7 @@ class ConvertOffers extends ConvertBase
                 'field_price_value',
                 'field_price_display_value',
                 'field_price_flights_value',
-                
+
                 'field_travel_type_value',
                 'field_start_location_value',
 
@@ -80,46 +77,37 @@ class ConvertOffers extends ConvertBase
 
                 'field_description_value',
                 'field_text_additional_value',
-                'field_text_extras_value',    
+                'field_text_extras_value',
                 'field_text_included_value',
                 'field_text_itinerary_value',
 
             ];
 
-            $node->body = $this->formatFields($node, $fields) . "\n\n" . $node->body;
-            
+            $node->body = $this->formatFields($node, $fields)."\n\n".$node->body;
+
             if ($this->convertNode($node, '\App\Content', 'offer')) {
-            
                 $this->convertNodeDestinations($node);
 
-                if ($url = $node->field_link_url)
-                {
+                if ($url = $node->field_link_url) {
                     $this->convertUrl($node->nid, $url, '\App\Content');
                 }
-        
-                if ($node->filepath) {
 
+                if ($node->filepath) {
                     $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'offer', 'photo');
                 }
-
             }
-            
-            $this->output->progressAdvance();
 
+            $this->output->progressAdvance();
         }
 
         $this->output->progressFinish();
-    
     }
 
     public function handle()
     {
         $this->convert();
     }
-
 }
-
-
 
 /*
 

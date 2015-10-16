@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateContentTopicTable extends Migration
 {
-
     public function up()
     {
         Schema::create('content_topic', function (Blueprint $table) {
