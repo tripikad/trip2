@@ -4,12 +4,15 @@ php:
   - 5.6
 
 env:
-    - DB_CONNECTION=testing APP_ENV=testing CACHE_DRIVER=array SESSION_DRIVER=array QUEUE_DRIVER=sync MAIL_DRIVER=log
+    global:
+        - DB_CONNECTION=testing
 
 sudo: false
 
 install:
     - composer install --no-interaction --prefer-source
-    - php artisan migrate
+    - php artisan migrate --env="testing"
+    - chmod -R o+w storage/
+    - chmod -R o+w public/images/
 
 script: vendor/bin/phpunit
