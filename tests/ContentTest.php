@@ -20,8 +20,6 @@ class ContentTest extends TestCase
             'forum',
             'expat',
             'buysell',
-        //  'travelmate',
-        //  'photo'
         ];
 
         $this->privateContentTypes = [
