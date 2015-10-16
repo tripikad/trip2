@@ -83,18 +83,14 @@ class CommentTest extends TestCase
      * @expectedException PHPUnit_Framework_ExpectationFailedException
      * @expectedExceptionMessage Received status code [401]
      */
-
-/*
     public function test_regular_user_cannot_edit_other_comments()
     {
-
         $regular_user = factory(App\User::class)->create();
 
-        foreach($this->publicContentTypes as $type) {
-
+        foreach ($this->publicContentTypes as $type) {
             $content = factory(Content::class)->create([
                 'user_id' => factory(App\User::class)->create()->id,
-                'type' => $type
+                'type' => $type,
             ]);
 
             $comment = factory(Comment::class)->create([
@@ -108,11 +104,8 @@ class CommentTest extends TestCase
                 ->visit("content/$content->type/$content->id")
                 ->dontSee(trans('comment.action.edit.title'))
                 ->visit("comment/$comment->id/edit"); // 401
-
         }
-
     }
-*/
 
     /**
      * @expectedException PHPUnit_Framework_ExpectationFailedException
