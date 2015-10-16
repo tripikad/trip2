@@ -12,7 +12,8 @@ gulp.task('sass', function() {
         './node_modules/normalize.css/normalize.css',
         './node_modules/susy/sass/_susy.scss',
         './node_modules/breakpoint-sass/stylesheets/_breakpoint.scss',
-        './resources/assets/sass/**/_*.scss',
+        './node_modules/selectize/dist/css/selectize.css',
+        './resources/assets/sass/**/*.scss',
 
     ])
     .pipe(concat('main.scss'))
@@ -31,10 +32,10 @@ gulp.task('sass', function() {
 gulp.task('sass_legacy', function() {
 
     gulp.src([
-        './resources/assets/sass/variables.scss',
+        './resources/assets/sass_legacy/variables.scss',
         './node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
         './node_modules/selectize/dist/css/selectize.bootstrap3.css',
-        './resources/assets/sass/**/!(_*).scss',
+        './resources/assets/sass_legacy/**/*.scss',
     ])
     .pipe(concat('main.scss'))
     .pipe(sass({includePaths: [
