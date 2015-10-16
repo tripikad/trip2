@@ -15,8 +15,9 @@ install:
     - php artisan key:generate
     - chmod -R o+w storage/
     - chmod -R o+w public/images/
+    - mysql -e 'create database IF NOT EXISTS trip2;'
 
 before_script:
-    - php artisan migrate
+    - php artisan migrate:refresh
 
-script: vendor/bin/phpunit
+script: phpunit

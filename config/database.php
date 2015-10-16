@@ -46,12 +46,6 @@ return [
 
     'connections' => [
 
-        'travis' => [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'    => '',
-        ],
-
         'trip' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST1', 'localhost'),
