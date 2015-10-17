@@ -16,7 +16,7 @@ class FeedController extends Controller
 
         if (!$feed->isCached()) {   
             $feed->title = config('site.name');
-            $feed->description = trans('feed.description');
+            $feed->description = trans('site.description');
             $feed->link = route('feed');
             $feed->setShortening(false);
 
