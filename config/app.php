@@ -145,6 +145,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Baum\Providers\BaumServiceProvider::class,
         Wpb\StringBladeCompiler\StringBladeCompilerServiceProvider::class,
+        Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -206,6 +207,7 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Imageconv' => Intervention\Image\Facades\Image::class,
+        'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
 
         'Date'      => Jenssegers\Date\Date::class,
 
