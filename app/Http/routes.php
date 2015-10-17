@@ -132,6 +132,12 @@ get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 
 get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
 
+// Atom feed
+
+get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
+
 // Styleguide
 
 get('styleguide', 'StyleguideController@index');
+
+
