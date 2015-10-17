@@ -154,6 +154,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Jenssegers\Date\DateServiceProvider::class,
+
     ],
 
     /*
@@ -206,6 +208,8 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Imageconv' => Intervention\Image\Facades\Image::class,
         'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
+
+        'Date'      => Jenssegers\Date\Date::class,
 
     ],
 
