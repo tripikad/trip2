@@ -1,1 +1,1 @@
-@if(isset($date)) {{ $date->diffForHumans() }}  @endif
+@if(isset($date)) {{ Date::parse($date)->diffForHumans() }} @endif

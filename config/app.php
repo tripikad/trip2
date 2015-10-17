@@ -153,6 +153,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Jenssegers\Date\DateServiceProvider::class,
+
     ],
 
     /*
@@ -204,6 +206,8 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Imageconv' => Intervention\Image\Facades\Image::class,
+
+        'Date'      => Jenssegers\Date\Date::class,
 
     ],
 
