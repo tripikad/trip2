@@ -9,7 +9,7 @@
         <title>@yield('title') | {{ config('site.name') }}</title>
     
     </head>
-    <body>
+    <body>{{ Analytics::render() }}
         
         <div class="utils-padding-bottom">
 
