@@ -13,7 +13,8 @@
         "barryvdh/laravel-debugbar": "^2.0@dev",
         "baum/baum": "~1.1",
         "predis/predis": "~1.0",
-        "wpb/string-blade-compiler": "2.*@dev"
+        "wpb/string-blade-compiler": "2.*@dev",
+        "jenssegers/date": ">=3.0.9"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
