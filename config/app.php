@@ -146,7 +146,7 @@ return [
         Baum\Providers\BaumServiceProvider::class,
         Wpb\StringBladeCompiler\StringBladeCompilerServiceProvider::class,
         Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
-
+        Roumen\Feed\FeedServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -208,8 +208,8 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Imageconv' => Intervention\Image\Facades\Image::class,
         'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
-
         'Date'      => Jenssegers\Date\Date::class,
+        'Feed'      => Roumen\Feed\Facades\Feed::class,
 
     ],
 
