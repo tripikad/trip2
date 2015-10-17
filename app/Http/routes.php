@@ -139,5 +139,3 @@ get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
 // Styleguide
 
 get('styleguide', 'StyleguideController@index');
-
-

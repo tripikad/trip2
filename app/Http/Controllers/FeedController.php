@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Feed;
 use App\Content;
 
@@ -14,7 +13,7 @@ class FeedController extends Controller
 
         $feed->setCache(config('site.cache.atom'));
 
-        if (!$feed->isCached()) {   
+        if (! $feed->isCached()) {
             $feed->title = config('site.name');
             $feed->description = trans('site.description');
             $feed->link = route('feed');
