@@ -16,13 +16,23 @@ return [
     'auth.admin' => 'Administer',
     'auth.logout' => 'Logout',
 
-    'footer.about' => 'What is Trip.ee',
-    'footer.contact' => 'Contact',
-    'footer.eula' => 'EULA',
-    'footer.advertising' => 'Advertising',
-    'footer.styleguide' => 'Styleguide',
-    'footer.facebook' => 'Facebook',
-    'footer.twitter' => 'Twitter',
+    'footer.news' => 'News',
+    'footer.flights' => 'Flights',
+    'footer.offers' => 'Offers',
+    'footer.travelmates' => 'Travelmates',
+
+    'footer2.forum' => 'Forum',
+    'footer2.expat' => 'Expat',
+    'footer2.buysell' => 'Buysell',
+
+    'footer3.about' => 'What is Trip.ee',
+    'footer3.contact' => 'Contact',
+    'footer3.eula' => 'EULA',
+    'footer3.advertising' => 'Advertising',
+    'footer3.styleguide' => 'Styleguide',
+
+    'footer-social.facebook' => 'Trip.ee in Facebook',
+    'footer-social.twitter' => 'Trip.ee in Twitter',
 
     'news.news' => 'News',
     'news.shortnews' => 'Short news',

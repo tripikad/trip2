@@ -1,0 +1,1 @@
+<a href="{{ $route }}" class="c-link {{ $modifiers or '' }}">{{ $title }}</a>
