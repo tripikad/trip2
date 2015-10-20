@@ -544,7 +544,7 @@ class ConvertBase extends Command
         $model->images()->attach($image);
 
         $from = 'http://trip.ee/'.$imagePath;
-        $to = storage_path() . '/app/images/original/'.$filename;
+        $to = storage_path().'/app/images/original/'.$filename;
 
         if ($this->copyFiles) {
             if (file_exists($to) && ! $this->overwriteFiles) {
