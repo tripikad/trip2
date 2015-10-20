@@ -1,6 +1,6 @@
 <?php
 
-$prepath = public_path().'/images/';
+$prepath = storage_path() . '/app/images/';
 
 return [
 
