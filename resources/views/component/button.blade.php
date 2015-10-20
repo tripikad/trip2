@@ -7,9 +7,14 @@ code: |
     @include('component.button', [
         'title' => 'Button',
         'route' => '',
-        'buttontype' => 'btn-default'
+        'modifiers' => $options
     ])
+
+options:
+
+- m-block
+- m-secondary
 
 --}}
 
-<a href="{{ $route }}" class="btn {{ $buttontype or 'btn-primary' }}">{{ $title }}</a>
+<a href="{{ $route }}" class="c-button {{ $modifiers or '' }}">{{ $title }}</a>

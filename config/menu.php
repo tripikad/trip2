@@ -31,6 +31,34 @@
         ],
 
         'footer' => [
+            'news' => [
+                'route' => '/content/news',
+            ],
+            'flights' => [
+                'route' => '/content/flight',
+            ],
+            'offers' => [
+                'route' => 'http://vana.trip.ee/reisipakkumised',
+                'external' => true,
+            ],
+            'travelmates' => [
+                'route' => '/content/travelmate',
+            ],
+        ],
+
+        'footer2' => [
+            'forum' => [
+                'route' => '/content/forum',
+            ],
+            'expat' => [
+                'route' => '/content/expat',
+            ],
+            'buysell' => [
+                'route' => '/content/buysell',
+            ],
+        ],
+
+        'footer3' => [
             'about' => [
                 'route' => '/content/static/1534',
             ],
@@ -46,13 +74,19 @@
             'styleguide' => [
                 'route' => '/styleguide',
             ],
+        ],
+
+
+        'footer-social' => [
             'facebook' => [
                 'route' => 'https://facebook.com/tripeeee',
                 'external' => true,
+                'modifier' => 'm-facebook'
             ],
             'twitter' => [
                 'route' => 'https://twitter.com/trip_ee',
                 'external' => true,
+                'modifier' => 'm-twitter'
             ],
         ],
 

@@ -19,7 +19,7 @@
                     'image' => $contents[0]->imagePreset('medium'),
                     'title' => $contents[0]->title,
                 ])
-                    
+
             </a>
 
             @endif
@@ -31,7 +31,7 @@
             <div class="row">
 
                 <div class="col-sm-6">
-                    
+
                     @if (isset($contents[1]))
 
                     <a href="{{ route('content.show', [$contents[1]->type, $contents[1]]) }}">
@@ -41,7 +41,7 @@
                             'text' => $contents[1]->title,
                             'options' => '-landscape'
                     ])
-                
+
                     </a>
 
                     @endif
@@ -59,7 +59,7 @@
                             'text' => $contents[2]->title,
                             'options' => '-landscape'
                     ])
-                
+
                     </a>
 
                     @endif
@@ -81,7 +81,7 @@
                             'text' => $contents[3]->title,
                             'options' => '-landscape'
                     ])
-                
+
                     </a>
 
                     @endif
@@ -99,7 +99,7 @@
                             'text' => $contents[4]->title,
                             'options' => '-landscape'
                     ])
-                
+
                     </a>
 
                     @endif

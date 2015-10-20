@@ -1,0 +1,14 @@
+.c-map {
+
+	position: relative;
+}
+
+	.c-map__location {
+
+		position: absolute;
+		display: block;
+		width: 16px;
+		height: 16px;
+		border: 3px solid $color-white;
+		border-radius: 50%;
+	}
