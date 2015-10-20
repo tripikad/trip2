@@ -76,17 +76,16 @@
             ],
         ],
 
-
         'footer-social' => [
             'facebook' => [
                 'route' => 'https://facebook.com/tripeeee',
                 'external' => true,
-                'modifier' => 'm-facebook'
+                'modifier' => 'm-facebook',
             ],
             'twitter' => [
                 'route' => 'https://twitter.com/trip_ee',
                 'external' => true,
-                'modifier' => 'm-twitter'
+                'modifier' => 'm-twitter',
             ],
         ],
 
