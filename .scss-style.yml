@@ -116,7 +116,7 @@ linters:
     enabled: true
     spaces: 0
   StringQuotes:
-    enabled: true
+    enabled: false
     style: double_quotes
   TrailingSemicolon:
     enabled: true
