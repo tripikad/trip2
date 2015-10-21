@@ -134,7 +134,7 @@ linters:
     enabled: false
     properties: []
   VendorPrefixes:
-    enabled: true
+    enabled: false
     identifier_list: bourbon
     include: []
     exclude: []
