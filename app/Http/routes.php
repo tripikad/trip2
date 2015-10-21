@@ -105,10 +105,6 @@ post('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@im
 
 get('admin/content', ['middleware' => 'role:admin', 'uses' => 'AdminController@contentIndex', 'as' => 'admin.content.index']);
 
-// Ad debug
-
-get('ads', ['middleware' => 'role:admin', 'uses' => 'AdController@index', 'as' => 'ads']);
-
 // Destinations
 
 get('destination/{id}', ['uses' => 'DestinationController@index', 'as' => 'destination.index']);
