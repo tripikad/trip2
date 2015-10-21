@@ -134,9 +134,9 @@ linters:
     enabled: false
     properties: []
   VendorPrefixes:
-    enabled: false
-    identifier_list: bourbon
-    include: []
+    enabled: true
+    identifier_list:
+    include: [-webkit-font-smoothing, -moz-osx-font-smoothing]
     exclude: []
   ZeroUnit:
     enabled: true
