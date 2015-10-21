@@ -3,8 +3,6 @@
     background: $color-white;
 }
 
-    // Destinations
-
     .r-home__destinations {
 
         margin-top: -48px;
@@ -22,16 +20,12 @@
                 padding: 24px 0;
             }
 
-    // Ablot
-
     .r-home__about {}
 
         .r-home__about-wrap {
 
             @include wrap('narrow');
         }
-
-    // Forum
 
     .r-home__forum {
 
@@ -81,8 +75,6 @@
                     }
                 }
             }
-
-    // News
 
     .r-home__news {
 
@@ -171,8 +163,6 @@
                         }
                     }
 
-    // Travel
-
     .r-home__travel {
 
         background: $color-fill-neutral-light;
@@ -222,8 +212,6 @@
                 }
             }
 
-    // Gallery
-
     .r-home__gallery {
 
         background: $color-fill-neutral-light;
@@ -239,8 +227,6 @@
 
             @include wrap;
         }
-
-    // Travel mates
 
     .r-home__travel-mates {
 
@@ -267,8 +253,6 @@
                     padding-bottom: 36px;
                 }
             }
-
-    // Footer promo
 
     .r-home__footer-promo {
 
