@@ -51,7 +51,7 @@ linters:
     enabled: true
     allow_non_nested_indentation: false
     character: space
-    width: 2
+    width: 4
   LeadingZero:
     enabled: true
     style: include_zero
@@ -61,7 +61,7 @@ linters:
   NameFormat:
     enabled: true
     allow_leading_underscore: true
-    convention: hyphenated_lowercase
+    convention: hyphenated_BEM
   NestingDepth:
     enabled: true
     max_depth: 4
@@ -117,7 +117,7 @@ linters:
     spaces: 0
   StringQuotes:
     enabled: true
-    style: double_quotes
+    style: single_quotes
   TrailingSemicolon:
     enabled: true
   TrailingZero:
