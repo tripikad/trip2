@@ -8,7 +8,7 @@ code: |
         'modifiers' => $options,
         'route' => '',
         'title' => 'News title',
-        'date' => \Carbon\Carbon::now(),
+        'date' => 'today',
         'image' => \App\Image::getRandom()
     ])
 
@@ -27,7 +27,7 @@ options:
     </h3>
     <div class="c-news__meta">
         <p class="c-news__meta-date">
-            @include('component.date.short', ['date' => $date])
+            {{ $date }}
         </p>
     </div>
 </div>
