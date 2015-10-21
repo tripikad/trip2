@@ -1,0 +1,151 @@
+// Profile
+//
+// Default profile component with image, name and text (interests).
+//
+// Markup:
+//<div class="c-profile {$modifiers}">
+//    <div class="c-profile__image-wrap">
+//	      <img src="assets/img/profile.jpg" class="c-profile__image">
+//    </div>
+//    <div class="c-profile__info">
+//	      <h3 class="c-profile__title"><a class="c-profile__title-link">Name Lastname</a> (22)</h3>
+//	      <p class="c-profile__interests">Malta, Itaalia</p>
+//    </div>
+//</div>
+//
+// default - Default profile
+// .m-center - Center aligned
+//
+// Styleguide 3
+
+// Profile Small
+//
+// Small profile component with image and name.
+//
+// Markup:
+//<div class="c-profile {$modifiers}">
+//    <div class="c-profile__image-wrap">
+//        <img src="assets/img/profile.jpg" class="c-profile__image">
+//    </div>
+//    <div class="c-profile__info">
+//        <h3 class="c-profile__title"><a class="c-profile__title-link">Name Lastname</a> (22)</h3>
+//    </div>
+//</div>
+//
+// .m-small	 - Small profile
+// .m-center - Center aligned
+//
+// Styleguide 3.1
+
+// Profile Mini
+//
+// Mini profile component with just an image.
+//
+// Markup:
+//<div class="c-profile {$modifiers}">
+//    <div class="c-profile__image-wrap">
+//        <img src="assets/img/profile.jpg" class="c-profile__image">
+//    </div>
+//</div>
+//
+// .m-mini	 - Mini profile
+//
+// Styleguide 3.2
+
+
+.c-profile {
+
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+
+	&.m-center {
+
+		justify-content: center;
+	}
+
+	&.m-mini {
+
+		display: block;
+	}
+}
+
+	.c-profile__image-wrap {
+
+		flex: 0 1 72px;
+
+		.c-profile.m-small & {
+
+			flex: 0 1 48px;
+		}
+
+		.c-profile.m-mini & {
+
+			position: relative;
+			display: block;
+			width: 36px;
+		}
+
+		.c-profile.m-micro & {
+
+			display: inline-block;
+			width: 24px;
+		}
+	}
+
+		.c-profile__image {
+
+			display: block;
+			height: 48px;
+			width: 48px;
+			border-radius: 50%;
+
+			.c-profile.m-mini &,
+			.c-profile.m-small & {
+
+				height: 36px;
+				width: 36px;
+			}
+
+			.c-profile.m-micro & {
+
+				height: 24px;
+				width: 24px;
+			}
+		}
+
+	.c-profile__info {
+
+		.c-profile.m-mini &,
+		.c-profile.m-micro & {
+
+			display: none;
+		}
+	}
+
+		.c-profile__title {
+
+			color: $color-text-neutral-dark;
+			font-size: $font-size-normal;
+		}
+
+			.c-profile__title-link {
+
+				color: $color-text-link;
+				text-decoration: none;
+			}
+
+		.c-profile__interests {
+
+			color: $color-text-neutral-dark;
+			font-size: $font-size-small;
+			margin-top: 6px;
+
+			.c-profile.m-mini &,
+			.c-profile.m-small &,
+			.c-profile.m-micro & {
+
+				display: none;
+			}
+		}
+

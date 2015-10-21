@@ -1,0 +1,295 @@
+.r-destination {
+
+	background: $color-fill-neutral-light;
+}
+
+	.r-destination__title-block {
+
+		> * {
+
+			display: inline-block;
+		}
+
+		&.m-distribute {
+
+			display: flex;
+			justify-content: space-between;
+			padding: 20px 24px 14px;
+
+			> * {
+
+				flex: 0 0 auto;
+			}
+		}
+
+		&.m-white {
+
+			background: $color-white;
+		}
+	}
+
+	// Masthead
+
+	.r-destination__masthead {
+
+		position: relative;
+	}
+
+	// About
+
+	.r-destination__about {
+
+		@include background-color-modifiers;
+
+		padding-bottom: 24px;
+
+		@include respond-to(tablet) {
+
+			padding-bottom: 288px;
+		}
+	}
+
+		.r-destination__about-wrap {
+
+			@include wrap;
+
+			position: relative;
+		}
+
+			.r-destination__about-column {
+
+				&.m-first {
+
+					padding-bottom: 48px;
+
+					@include respond-to(tablet) {
+
+						@include span(8 of 28);
+
+						padding-bottom: 0;
+						margin-top: -48px;
+
+						.r-destination__about.m-red & {box-shadow: 0 12px 36px rgba($brand-red-dark, 1);}
+						.r-destination__about.m-blue & {box-shadow: 0 12px 36px rgba($brand-blue-dark, 1);}
+						.r-destination__about.m-green & {box-shadow: 0 12px 36px rgba($brand-green-dark, 1);}
+						.r-destination__about.m-yellow & {box-shadow: 0 12px 36px rgba($brand-yellow-dark, 1);}
+						.r-destination__about.m-orange & {box-shadow: 0 12px 36px rgba($brand-orange-dark, 1);}
+						.r-destination__about.m-purple & {box-shadow: 0 12px 36px rgba($brand-purple-dark, 1);}
+					}
+				}
+
+				&.m-last {
+
+					position: relative;
+					z-index: 3;
+
+					@include respond-to(tablet) {
+
+						@include span(8 of 28 at 3);
+						padding-top: 48px;
+					}
+				}
+			}
+
+			.r-destination__about-map {
+
+				position: absolute;
+				z-index: 2;
+				right: 0;
+				top: -60px;
+				display: none;
+
+				@include respond-to(tablet) {
+
+					display: block;
+				}
+
+				@include respond-to(desktop-large) {
+
+					right: -48px;
+				}
+			}
+
+	// Content
+
+	.r-destination__content {
+
+		padding-bottom: 24px;
+		padding-top: 24px;
+		background: $color-white;
+
+		@include respond-to(tablet) {
+
+			margin-top: -240px;
+			margin-bottom: 96px;
+			padding-top: 0;
+			background: none;
+		}
+	}
+
+		.r-destination__content-wrap {
+
+			@include wrap;
+			background: $color-white;
+		}
+
+			.r-destination__content-title {
+
+				padding-bottom: 24px;
+
+				@include respond-to(tablet) {
+
+					padding-bottom: 36px;
+				}
+			}
+
+			// Content about
+
+			.r-destination__content-about {
+
+				@include clearfix;
+
+				padding-bottom: 24px;
+
+				@include respond-to(tablet) {
+
+					padding-bottom: 48px;
+				}
+			}
+
+				.r-destination__content-about-column {
+
+					padding-bottom: 48px;
+
+					@include respond-to(tablet) {
+
+						padding-bottom: 0;
+					}
+
+					&.m-first {
+
+						@include respond-to(tablet) {
+
+							@include span(8 of 28);
+						}
+					}
+
+					&.m-middle {
+
+						@include respond-to(tablet) {
+
+							@include span(8 of 28 at 3);
+							padding-top: 48px;
+						}
+					}
+
+					&.m-last {
+
+						padding-bottom: 0;
+
+						@include respond-to(tablet) {
+
+							@include span(6 of 28 at 13);
+							padding-top: 48px;
+						}
+					}
+				}
+
+
+			// Content gallery
+
+			.r-destination__content-gallery {
+
+				padding-bottom: 48px;
+
+				@include respond-to(tablet) {
+
+					padding-bottom: 72px;
+				}
+			}
+
+			// Content news
+
+			.r-destination__content-news {
+
+				padding-bottom: 48px;
+			}
+
+				.r-destination__content-news-wrap {
+
+					@include wrap('narrow');
+				}
+
+					.r-destination__content-news-column {
+
+						&.m-first {
+
+							padding-bottom: 24px;
+
+							@include respond-to(tablet) {
+
+								@include span(14 of 24);
+
+								padding-bottom: 0;
+							}
+						}
+
+						&.m-last {
+
+							@include respond-to(tablet) {
+
+								@include span(8 of 24 at 3);
+							}
+						}
+					}
+
+			// Content travel mates
+
+			.r-destination__content-travel-mates {
+
+				padding-bottom: 48px;
+			}
+
+				.r-destination__content-travel-mates-wrap {
+
+					@include wrap('narrow');
+				}
+
+			// Content offers
+
+			.r-destination__content-offers {
+
+				@include respond-to(tablet) {
+
+					position: relative;
+					bottom: -48px;
+				}
+			}
+
+				.r-destination__content-offers-wrap {
+
+					@include wrap('narrow');
+				}
+
+
+	// Footer promo
+
+	.r-destination__footer-promo {
+
+		display: none;
+		margin-bottom: -48px;
+		background: $color-fill-neutral-light;
+
+		@include respond-to(tablet) {
+
+			display: block;
+		}
+	}
+
+		.r-destination__footer-promo-wrap {
+
+			@include wrap('narrow');
+			position: relative;
+			z-index: 2;
+		}
+

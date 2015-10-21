@@ -27,7 +27,7 @@ linters:
     enabled: true
     ignore_single_line_blocks: true
   EmptyRule:
-    enabled: true
+    enabled: false
   FinalNewline:
     enabled: true
     present: true
@@ -48,20 +48,20 @@ linters:
     leading_underscore: false
     filename_extension: false
   Indentation:
-    enabled: true
-    allow_non_nested_indentation: false
+    enabled: false
+    allow_non_nested_indentation: true
     character: space
     width: 4
   LeadingZero:
     enabled: true
     style: include_zero
   MergeableSelector:
-    enabled: true
+    enabled: false
     force_nesting: true
   NameFormat:
-    enabled: true
+    enabled: false
     allow_leading_underscore: true
-    convention: hyphenated_BEM
+    convention: hyphenated_lowercase
   NestingDepth:
     enabled: true
     max_depth: 4
@@ -71,9 +71,9 @@ linters:
   PropertyCount:
     enabled: true
     include_nested: false
-    max_properties: 10
+    max_properties: 12
   PropertySortOrder:
-    enabled: true
+    enabled: false
     ignore_unspecified: false
     severity: warning
     separate_groups: false
@@ -88,13 +88,13 @@ linters:
     severity: warning
   SelectorDepth:
     enabled: true
-    max_depth: 2
+    max_depth: 3
     severity: warning
   SelectorFormat:
     enabled: true
-    convention: hyphenated_lowercase
+    convention: hyphenated_BEM
   Shorthand:
-    enabled: true
+    enabled: false
     severity: warning
   SingleLinePerProperty:
     enabled: true
@@ -135,8 +135,8 @@ linters:
     properties: []
   VendorPrefixes:
     enabled: true
-    identifier_list: bourbon
-    include: []
+    identifier_list:
+    include: [-webkit-font-smoothing, -moz-osx-font-smoothing]
     exclude: []
   ZeroUnit:
     enabled: true

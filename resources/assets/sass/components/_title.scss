@@ -1,0 +1,31 @@
+// Title
+//
+// Title component
+//
+// Markup:
+//<h2 class="c-title {$modifiers}">Tripikad räägivad</h2>
+//
+// .m-yellow - Yellow
+// .m-green - Green
+// .m-red - Red
+// .m-blue - Blue
+// .m-purple - Purple
+// .m-orange - Orange
+//
+// Styleguide 9
+
+.c-title {
+
+    @include color-modifiers;
+
+    font-family: $font-primary;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+
+    &.m-small {
+
+        font-size: $font-size-tiny;
+    }
+}
+
