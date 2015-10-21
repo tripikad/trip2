@@ -11,7 +11,7 @@ linters:
     enabled: true
     severity: warning
     exclude:
-      - "resources/assets/sass/base/**/*.scss"
+      - "resources/assets/sass/base/*.scss"
   ColorVariable:
     enabled: true
   Comment:
