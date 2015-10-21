@@ -6,149 +6,450 @@
 
 @stop
 
-@section('header1.image')
+@section('masthead.nav')
 
-    @if(isset($features['photo']['contents'][0]))
-
-        {{ $features['photo']['contents'][0]->imagePreset('large') }}
-
-    @else
-
-        {{ \App\Image::getRandom() }}
-
-    @endif
-
-@stop
-
-@section('header2', view('component.destination.header2'))
-@section('header3', view('component.destination.header3'))
-
-@section('header2.left')
-
-    @include('component.subheader', [
-        'title' => 'Offers',
-        'link_title' => 'More',
-        'link_route' => '',
-        'options' => '-padding -orange',
-    ])
-
-    @include('component.card', [
-        'image' => \App\Image::getRandom(),
-        'title' => 'Flightoffer A in Header 2 left column',
-        'options' => '-center -wide',
-    ])
-
-    @include('component.card', [
-        'image' => \App\Image::getRandom(),
-        'title' => 'Flightoffer B in Header 2 left column',
-        'options' => '-center -wide',
+    @include('component.mastheadnav', [
+        'nav_previous_title' => 'Itaalia',
+        'nav_previous_route' => '#',
+        'nav_next_title' => 'Ameerika',
+        'nav_next_route' => '#',
+        'modifiers' => 'm-yellow'
     ])
 
 @stop
-
-@section('header2.center')
-
-    @include('component.placeholder', [
-        'text' => 'Header2 center column',
-    ])
-
-@stop
-
-@section('header2.right')
- 
-    @include('component.placeholder', [
-        'text' => 'Header2 right column',
-    ])
-
-@stop
-
-@section('header3.left')
-
-    @include('component.ad',[
-        'title' => 'Sample ad',
-        'options' => '-high',
-    ])
-
-@stop
-
-@section('header3.center')
-
-    @include('component.subheader', [
-        'title' => 'Header 3 subheader',
-        'link_title' => '',
-        'link_route' => '',
-        'options' => '-orange',
-    ])
-
-    <p>This text is in the Header 3 center column. This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...</p>
-
-@stop
-
-@section('header3.right')
-    
-    @include('component.subheader', [
-        'title' => 'Header 3 subheader',
-        'link_title' => '',
-        'link_route' => '',
-        'options' => '-orange',
-    ])
-
-    <p>This book<br />Is a record<br />Of a pleasure trip</p>
-
-@stop
-
 
 @section('content')
 
-<div class="utils-padding-bottom">
+<div class="r-destination">
 
-    @foreach($features as $type => $feature) 
+    <div class="r-destination__masthead">
 
-        @include("component.content.$type.frontpage", [
-            'contents' => $feature['contents']
+        @include('component.masthead', [
+            'logo_modifier' => 'm-small',
+            'subtitle' => 'Aafrika',
+            'subtitle_route' => '#'
         ])
-        
-    @endforeach
 
-</div>
+    </div>
 
-<div class="utils-padding-bottom">
-        
-    @if(count($destination->usersHaveBeen()) > 0)
+    <div class="r-destination__about m-yellow">
 
-        @include('component.subheader', [
-            'title' => trans('destination.index.user.havebeen.title', [
-                'count' => count($destination->usersHaveBeen())
-            ]),
-            'link_title' => '',
-            'link_route' => '',
-            'options' => '-orange -padding',
-        ])
-            
-        @include('component.destination.users',
-            ['users' => $destination->usersHaveBeen()]
-        )
+        <div class="r-destination__about-wrap">
 
-    @endif
+            <div class="r-destination__about-column m-first">
 
+                <div class="r-destination__title-block m-white m-distribute">
 
-    @if(count($destination->usersWantsToGo()) > 0)
+                    @include('component.title', [
+                        'modifiers' => 'm-yellow',
+                        'title' => 'Head pakkumised'
+                    ])
 
-    @include('component.subheader', [
-        'title' => trans('destination.index.user.wantstogo.title', [
-            'count' => count($destination->usersWantsToGo())
-        ]),
-        'link_title' => '',
-        'link_route' => '',
-        'options' => '-orange -padding',
-    ])
+                    @include('component.link', [
+                        'modifiers' => 'm-tiny',
+                        'title' => 'Kõik pakkumised &rsaquo;',
+                        'route' => '#'
+                    ])
 
-        @include('component.destination.users',
-            ['users' => $destination->usersWantsToGo()]
-        )
+                </div>
 
-    @endif
+                @include('component.flight', [
+                    'modifiers' => 'm-yellow m-small',
+                    'route' => '#',
+                    'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
+                    'image' => \App\Image::getRandom(),
+                ])
 
+                @include('component.flight', [
+                    'modifiers' => 'm-yellow m-small',
+                    'route' => '#',
+                    'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
+                    'image' => \App\Image::getRandom(),
+                ])
+
+            </div>
+
+            <div class="r-destination__about-column m-last">
+
+                @include('component.destinationinfo',[
+                    'modifiers' => 'm-yellow',
+                    'text' => 'Malta on tihedalt asustatud saareriik Vahemeres, mis koosneb 3 asustatud ja neljast asustamata saartest',
+                    'wiki_route' => '#',
+                    'definitions' => [
+                        [
+                            'term' => 'Rahvaarv',
+                            'definition' => '417 600 in'
+                        ],
+                        [
+                            'term' => 'Pindala',
+                            'definition' => '316 km²'
+                        ],
+                        [
+                            'term' => 'Valuuta',
+                            'definition' => 'Euro (€, EUR)'
+                        ],
+                        [
+                            'term' => 'Aeg',
+                            'definition' => '10:23(+1h)'
+                        ],
+                    ]
+                ])
+            </div>
+
+            <div class="r-destination__about-map">
+
+                @include('component.map', [
+                    'map_top' => '53%',
+                    'map_left' => '50%'
+                ])
+            </div>
+        </div>
+    </div>
+
+    <div class="r-destination__content">
+
+        <div class="r-destination__content-wrap">
+
+            <div class="r-destination__content-about">
+
+                <div class="r-destination__content-about-column m-first">
+
+                    @include('component.promo', [
+                        'route' => '#',
+                        'image' => \App\Image::getRandom()
+                    ])
+                </div>
+
+                <div class="r-destination__content-about-column m-middle">
+
+                    <div class="r-destination__content-title">
+
+                        @include('component.title', [
+                            'modifiers' => 'm-yellow',
+                            'title' => 'Tripikad räägivad'
+                        ])
+                    </div>
+
+                    @include('component.forum', [
+                        'modifiers' => 'm-compact',
+                        'items' => [
+                            [
+                                'topic' => 'Samui hotellid?',
+                                'route' => '#',
+                                'profile' => [
+                                    'modifiers' => 'm-mini',
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#'
+                                ],
+                                'badge' => [
+                                    'modifiers' => 'm-inverted',
+                                    'count' => 9
+                                ]
+                            ],
+                            [
+                                'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
+                                'route' => '#',
+                                'profile' => [
+                                    'modifiers' => 'm-mini',
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#'
+                                ],
+                                'badge' => [
+                                    'modifiers' => 'm-inverted',
+                                    'count' => 4
+                                ]
+                            ],
+                            [
+                                'topic' => 'Puhkuseosakud Tenerifel',
+                                'route' => '#',
+                                'profile' => [
+                                    'modifiers' => 'm-mini',
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#'
+                                ],
+                                'badge' => [
+                                    'modifiers' => 'm-inverted',
+                                    'count' => 2
+                                ]
+                            ],
+                            [
+                                'topic' => 'Ischgl mäeolud-pilet ja majutus',
+                                'route' => '#',
+                                'profile' => [
+                                    'modifiers' => 'm-mini',
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#'
+                                ],
+                                'badge' => [
+                                    'modifiers' => '',
+                                    'count' => 2
+                                ]
+                            ]
+                        ]
+                    ])
+
+                </div>
+
+                <div class="r-destination__content-about-column m-last">
+
+                    <div class="r-destination__content-title">
+
+                        @include('component.title', [
+                            'modifiers' => 'm-yellow',
+                            'title' => 'Populaarsed sihtkohad'
+                        ])
+                    </div>
+
+                    @include('component.list', [
+                        'modifiers' => 'm-dot m-yellow',
+                        'items' => [
+                            [
+                                'title' => 'Valletta',
+                                'route' => '#'
+                            ],
+                            [
+                                'title' => 'Cottonera',
+                                'route' => '#'
+                            ],
+                            [
+                                'title' => 'Hagar Qim and Mnajdra',
+                                'route' => '#'
+                            ],
+                            [
+                                'title' => 'Mellieha',
+                                'route' => '#'
+                            ],
+                        ]
+                    ])
+
+                </div>
+            </div>
+
+            <div class="r-destination__content-gallery">
+
+                <div class="r-destination__gallery-wrap">
+
+                    @include('component.gallery', [
+                        'items' => [
+                            [
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#',
+                                'alt' => 'Pilt 1'
+                            ],
+                            [
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#',
+                                'alt' => 'Pilt 2'
+                            ],
+                            [
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#',
+                                'alt' => 'Pilt 3'
+                            ],
+                            [
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#',
+                                'alt' => 'Pilt 4'
+                            ],
+                            [
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#',
+                                'alt' => 'Pilt 5'
+                            ],
+                            [
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#',
+                                'alt' => 'Pilt 6'
+                            ],
+                            [
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#',
+                                'alt' => 'Pilt 7'
+                            ],
+                            [
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#',
+                                'alt' => 'Pilt 8'
+                            ],
+                        ]
+                    ])
+
+                </div>
+            </div>
+
+            <div class="r-destination__content-news">
+
+                <div class="r-destination__content-news-wrap">
+
+                    <div class="r-destination__content-news-column m-first">
+
+                        <div class="r-destination__content-title">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-yellow',
+                                'title' => 'Uudised'
+                            ])
+                        </div>
+
+                        @include('component.list', [
+                            'modifiers' => 'm-large',
+                            'items' => [
+                                [
+                                    'title' => 'Air Canada tunnistab veahinnaga pileteid!',
+                                    'route' => '#',
+                                    'text' => '23. oktoober'
+                                ],
+                                [
+                                    'title' => 'Kas ametlikult maailma parim lennufirma on parim ka reisijate arvates?',
+                                    'route' => '#',
+                                    'text' => '19. oktoober'
+                                ],
+                                [
+                                    'title' => 'Reisiidee: maailma suurim hindu tempel Akshardham Delhis',
+                                    'route' => '#',
+                                    'text' => '11. oktoober'
+                                ]
+                            ]
+                        ])
+
+                    </div>
+
+                    <div class="r-destination__content-news-column m-last">
+
+                        <div class="r-destination__content-title">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-yellow',
+                                'title' => 'Reisikirjad'
+                            ])
+                        </div>
+
+                        @include('component.travelletter', [
+                            'title' => 'Minu Aafrika – jutustusi kuuajaselt ringreisilt',
+                            'route' => '#',
+                            'image' => \App\Image::getRandom(),
+                            'profile' => [
+                                'route' => '#profile',
+                                'title' => 'Mari Maasikas',
+                                'image' => \App\Image::getRandom()
+                            ]
+                        ])
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="r-destination__content-travel-mates">
+
+                <div class="r-destination__content-travel-mates-wrap">
+
+                    <div class="r-destination__content-title">
+
+                        @include('component.title', [
+                            'title' => 'Reisikaaslased',
+                            'modifiers' => 'm-yellow'
+                        ])
+                    </div>
+
+                    <div class="c-columns m-4-cols">
+
+                        <div class="c-columns__item">
+
+                            @include('component.profile', [
+                                'title' => 'Jaanus Jaaniuss',
+                                'age' => '22',
+                                'interests' => 'Itaalia',
+                                'route' => '',
+                                'image' => \App\Image::getRandom()
+                            ])
+                        </div>
+
+                        <div class="c-columns__item">
+
+                            @include('component.profile', [
+                                'title' => 'Mari Maasikas',
+                                'age' => '29',
+                                'interests' => 'Itaalia, Kreeka',
+                                'route' => '',
+                                'image' => \App\Image::getRandom()
+                            ])
+                        </div>
+
+                        <div class="c-columns__item">
+
+                            @include('component.profile', [
+                                'title' => 'Inga Ingel',
+                                'age' => '32',
+                                'interests' => 'Kreeka',
+                                'route' => '',
+                                'image' => \App\Image::getRandom()
+                            ])
+                        </div>
+
+                        <div class="c-columns__item">
+
+                            @include('component.profile', [
+                                'title' => 'Silver Siil',
+                                'age' => '19',
+                                'interests' => 'Aasia, Euroopa',
+                                'route' => '',
+                                'image' => \App\Image::getRandom()
+                            ])
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r-destination__content-flights">
+
+                <div class="r-destination__content-flights-wrap">
+
+                    <div class="c-columns m-3-cols">
+
+                        <div class="c-columns__item">
+
+                            @include('component.flight', [
+                                'route' => '#',
+                                'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
+                                'image' => \App\Image::getRandom()
+                            ])
+                        </div>
+
+                        <div class="c-columns__item">
+
+                            @include('component.flight', [
+                                'route' => '#',
+                                'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
+                                'image' => \App\Image::getRandom()
+                            ])
+                        </div>
+
+                        <div class="c-columns__item">
+
+                            @include('component.flight', [
+                                'route' => '#',
+                                'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
+                                'image' => \App\Image::getRandom()
+                            ])
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="r-destination__footer-promo">
+
+        <div class="r-destination__footer-promo-wrap">
+
+            @include('component.promo', [
+                'route' => '#',
+                'image' => \App\Image::getRandom()
+            ])
+        </div>
+    </div>
 </div>
 
 @stop
