@@ -1,21 +1,21 @@
-// Offer
+// flight
 //
-// Offer block
+// flight block
 //
 // Markup:
-//<div class="c-offer {$modifiers}">
-//    <h3 class="c-offer__title">Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €</h3>
-//    <div class="c-offer__image-wrap">
-//        <img src="assets/img/offer.jpg" alt="" class="c-offer__image">
+//<div class="c-flight {$modifiers}">
+//    <h3 class="c-flight__title">Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €</h3>
+//    <div class="c-flight__image-wrap">
+//        <img src="assets/img/flight.jpg" alt="" class="c-flight__image">
 //    </div>
 //</div>
 //
-// default   - An offer.
-//.m-small - Smaller offer
+// default   - An flight.
+//.m-small - Smaller flight
 //
 // Styleguide 5
 
-.c-offer {
+.c-flight {
 
 	@include background-color-dark-modifiers;
 
@@ -31,7 +31,7 @@
 	}
 }
 
-	.c-offer__title {
+	.c-flight__title {
 
 		@include vertical-center;
 
@@ -46,7 +46,7 @@
 		padding: 0 48px;
 	}
 
-	.c-offer__image-wrap {
+	.c-flight__image-wrap {
 
 		position: relative;
 		overflow: hidden;
@@ -65,7 +65,7 @@
 		}
 	}
 
-	.c-offer__image {
+	.c-flight__image {
 
 		position: absolute;
 		left: 50%;

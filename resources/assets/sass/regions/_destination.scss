@@ -240,7 +240,7 @@
 					@include wrap('narrow');
 				}
 
-			.r-destination__content-offers {
+			.r-destination__content-flights {
 
 				@include respond-to(tablet) {
 
@@ -249,7 +249,7 @@
 				}
 			}
 
-				.r-destination__content-offers-wrap {
+				.r-destination__content-flights-wrap {
 
 					@include wrap('narrow');
 				}
