@@ -6,9 +6,9 @@ code: |
 
     @include('component.news', [
         'modifiers' => $options,
-        'route' => '#',
+        'route' => '',
         'title' => 'News title',
-        'date' => '12. october',
+        'date' => \Carbon\Carbon::now(),
         'image' => \App\Image::getRandom()
     ])
 
@@ -26,6 +26,8 @@ options:
         <a href="{{ $route }}" class="c-news__title-link">{{ $title }}</a>
     </h3>
     <div class="c-news__meta">
-        <p class="c-news__meta-date">{{ $date }}</p>
+        <p class="c-news__meta-date">
+            @include('component.date.short', ['date' => $date])
+        </p>
     </div>
 </div>
