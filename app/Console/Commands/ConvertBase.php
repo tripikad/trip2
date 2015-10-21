@@ -588,7 +588,7 @@ class ConvertBase extends Command
             }
 
             $from = $imageUrl;
-            $to = public_path().'/images/original/'.$filename;
+            $to = storage_path().'/app/images/original/'.$filename;
 
             if ($this->copyFiles) {
                 if (file_exists($to) && ! $this->overwriteFiles) {
