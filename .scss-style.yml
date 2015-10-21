@@ -27,7 +27,7 @@ linters:
     enabled: true
     ignore_single_line_blocks: true
   EmptyRule:
-    enabled: true
+    enabled: false
   FinalNewline:
     enabled: true
     present: true
@@ -88,13 +88,13 @@ linters:
     severity: warning
   SelectorDepth:
     enabled: true
-    max_depth: 2
+    max_depth: 3
     severity: warning
   SelectorFormat:
     enabled: true
     convention: hyphenated_BEM
   Shorthand:
-    enabled: true
+    enabled: false
     severity: warning
   SingleLinePerProperty:
     enabled: true

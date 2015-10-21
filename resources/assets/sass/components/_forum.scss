@@ -34,7 +34,7 @@
 			&:nth-child(even) {
 
 				background: $color-fill-neutral-lightest;
-				box-shadow: 0 1px 1px rgba($color-fill-neutral-light, .75);
+				box-shadow: 0 1px 1px rgba($color-fill-neutral-light, 0.75);
 			}
 
 			&:last-child {
