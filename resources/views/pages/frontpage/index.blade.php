@@ -1,190 +1,551 @@
 @extends('layouts.main')
 
-@section('title')
-    
-    {{ trans('frontpage.index.search.title') }}
+@section('masthead.search')
 
-@stop
-
-@section('header1.bottom')
-
-    @include('component.frontpage.search')
-
-@stop
-
-@section('header2', view('component.frontpage.header2'))
-
-@section('header2.left')
-
-    @include('component.destination.subheader', [
-        'title' => 'Shanghai',
-        'title_route' => '',
-        'text' => 'China',
-        'text_route' => '',
-        'options' => '-orange'
-    ])
-
-    @include('component.card', [
-        'image' => \App\Image::getRandom(),
-        'title' => 'Crazy offer',
-        'options' => '-center',
-    ])
-
-@stop
-
-@section('header2.center')
-
-    @include('component.destination.subheader', [
-        'title' => 'Koh Lanta',
-        'title_route' => '',
-        'text' => 'Thailand',
-        'text_route' => '',
-        'options' => '-green'
-    ])
-
-    @include('component.card', [
-        'image' => \App\Image::getRandom(),
-        'title' => 'Crazy offer',
-        'options' => '-center',
-    ])
-
-@stop
-
-@section('header2.right')
-
-    @include('component.destination.subheader', [
-        'title' => 'Huascarán',
-        'title_route' => '',
-        'text' => 'Peru',
-        'text_route' => '',
-        'options' => '-red'
-    ])
-
-    @include('component.card', [
-        'image' => \App\Image::getRandom(),
-        'title' => 'Crazy offer',
-        'options' => '-center',
+    @include('component.search',[
+        'modifiers' => 'm-red',
+        'placeholder' => 'Where do you want to go today?'
     ])
 
 @stop
 
 @section('content')
 
-<div class="row utils-padding-bottom">
-    
-    <div class="col-sm-3">
+<div class="r-home">
 
-        @include('component.placeholder', [
-            'text' => 'About',
-            'height' => '300',
-        ])
+    <div class="r-home__masthead">
 
-
-    </div>
-
-    <div class="col-sm-9 utils-padding-left">
-
-        @include('component.placeholder', [
-            'text' => 'Forum',
-            'height' => '300',
+        @include('component.masthead', [
+            'modifiers' => 'm-search'
         ])
 
     </div>
 
-</div>
+    <div class="r-home__destinations">
 
-<div class="row utils-padding-bottom">
-    
-    <div class="col-sm-3">
+        <div class="r-home__destinations-wrap">
 
-        @include('component.ad',[
-            'title' => 'Sample wide ad',
-            'options' => '-skyscraper',
-        ])
+            <div class="c-columns m-3-cols">
 
-    </div>
+                <div class="c-columns__item">
 
-    <div class="col-sm-9 utils-padding-left">
+                    @include('component.destination', [
+                        'modifiers' => 'm-yellow',
+                        'title' => 'Aafrika',
+                        'title_route' => '/destination/4',
+                        'subtitle' => 'Itaalia',
+                        'subtitle_route' => '#'
+                    ])
 
-        <div class="row utils-padding-bottom">
+                    @include('component.offer', [
+                        'route' => '#',
+                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
+                        'image' => \App\Image::getRandom(),
+                    ])
 
-            <div class="col-sm-8 utils-half-padding-right">
+                </div>
 
-                @include('component.placeholder', [
-                    'text' => 'News1',
-                    'height' => '220',
-                ])
-                
+                <div class="c-columns__item">
+
+                    @include('component.destination', [
+                        'modifiers' => 'm-red',
+                        'title' => 'Põhja-Ameerika',
+                        'title_route' => '/destination/5',
+                        'subtitle' => 'Itaalia',
+                        'subtitle_route' => '#'
+                    ])
+
+                    @include('component.offer', [
+                        'route' => '#',
+                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
+                        'image' => \App\Image::getRandom(),
+                    ])
+
+                </div>
+
+                <div class="c-columns__item">
+
+                    @include('component.destination', [
+                        'modifiers' => 'm-green',
+                        'title' => 'Kesk-Ameerika',
+                        'title_route' => '/destination/6',
+                        'subtitle' => 'Itaalia',
+                        'subtitle_route' => '#'
+                    ])
+
+                    @include('component.offer', [
+                        'route' => '#',
+                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
+                        'image' => \App\Image::getRandom(),
+                    ])
+
+                </div>
             </div>
+        </div>
+    </div>
 
-            <div class="col-sm-4 utils-half-padding-left">
+    <div class="r-home__about">
 
-                @include('component.placeholder', [
-                    'text' => 'News2',
-                    'height' => '220',
-                ])
-                
-            </div>
+        <div class="r-home__about-wrap">
+
+            @include('component.about', [
+                'modifiers' => 'm-wide',
+                'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+                'link' => [
+                    'title' => 'Loe lähemalt Trip.ee-st ›',
+                    'route' => '#',
+                ],
+                'button' => [
+                    'title' => 'Liitu Trip.ee-ga',
+                    'route' => '#',
+                    'modifiers' => 'm-block'
+                ]
+            ])
 
         </div>
-
-        @include('component.placeholder', [
-            'text' => 'News3',
-            'height' => '110',
-        ])
-
     </div>
 
-</div>
+    <div class="r-home__forum">
 
-<div class="row utils-padding-bottom">
-    
-    <div class="col-sm-7 utils-half-padding-right">
+        <div class="r-home__forum-wrap">
 
-        @include('component.placeholder', [
-            'text' => 'Flights',
-            'height' => '220',
-        ])
+            <div class="r-home__forum-title">
 
+                @include('component.title', [
+                    'modifiers' => 'm-red',
+                    'title' => 'Tripikad räägivad'
+                ])
+
+            </div>
+
+            <div class="r-home__forum-column m-first">
+
+                @include('component.link', [
+                    'modifiers' => 'm-large m-block',
+                    'title' => 'Üldfoorum',
+                    'route' => ''
+                ])
+
+                @include('component.link', [
+                    'modifiers' => 'm-large m-block',
+                    'title' => 'Ost-müük',
+                    'route' => ''
+                ])
+
+                @include('component.link', [
+                    'modifiers' => 'm-large m-block',
+                    'title' => 'Vaba teema',
+                    'route' => ''
+                ])
+
+                @include('component.button', [
+                    'modifiers' => 'm-secondary m-block',
+                    'title' => 'Otsi foorumist',
+                    'route' => ''
+                ])
+
+                @include('component.button', [
+                    'modifiers' => 'm-secondary m-block',
+                    'title' => 'Alusta teemat',
+                    'route' => ''
+                ])
+
+            </div>
+
+            <div class="r-home__forum-column m-last">
+
+                @include('component.forum', [
+                    'items' => [
+                        [
+                            'topic' => 'Samui hotellid?',
+                            'route' => '#',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#'
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 9
+                            ],
+                            'tags' => [
+                                [
+                                    'title' => 'Inglismaa',
+                                    'modifiers' => 'm-green',
+                                    'route' => ''
+                                ],
+                                [
+                                    'title' => 'London',
+                                    'modifiers' => 'm-purple',
+                                    'route' => ''
+                                ],
+                            ]
+                        ],
+                        [
+                            'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
+                            'route' => '#',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#'
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 4
+                            ],
+                            'tags' => [
+                                [
+                                    'title' => 'Rongireis',
+                                    'modifiers' => 'm-orange',
+                                    'route' => ''
+                                ]
+                            ]
+                        ],
+                        [
+                            'topic' => 'Puhkuseosakud Tenerifel',
+                            'route' => '#',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#'
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 2
+                            ],
+                            'tags' => [
+                                [
+                                    'title' => 'Tenerife',
+                                    'modifiers' => 'm-red',
+                                    'route' => ''
+                                ]
+                            ]
+                        ],
+                        [
+                            'topic' => 'Ischgl mäeolud-pilet ja majutus',
+                            'route' => '#',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom(),
+                                'route' => '#'
+                            ],
+                            'badge' => [
+                                'modifiers' => '',
+                                'count' => 2
+                            ],
+                            'tags' => [
+                                [
+                                    'title' => 'Tenerife',
+                                    'modifiers' => 'm-red',
+                                    'route' => ''
+                                ],
+                                [
+                                    'title' => 'Rong',
+                                    'modifiers' => 'm-green',
+                                    'route' => ''
+                                ],
+                                [
+                                    'title' => 'Mäed',
+                                    'modifiers' => 'm-blue',
+                                    'route' => ''
+                                ]
+                            ]
+
+                        ]
+                    ]
+                ])
+            </div>
+        </div>
     </div>
 
-    <div class="col-sm-5 utils-half-padding-left">
+    <div class="r-home__news">
 
-        @include('component.placeholder', [
-            'text' => 'Blogs',
-            'height' => '220',
-        ])
+        <div class="r-home__news-wrap">
 
+            <div class="r-home__news-column m-first">
+
+                @include('component.promo', [
+                    'route' => '',
+                    'image' => \App\Image::getRandom()
+                ])
+
+            </div>
+
+            <div class="r-home__news-column m-last">
+
+                <div class="r-home__news-title">
+
+                    @include('component.title', [
+                        'modifiers' => 'm-red',
+                        'title' => 'Uudised'
+                    ])
+
+                </div>
+
+                <div class="r-home__news-block-wrap">
+
+                    <div class="r-home__news-block m-first">
+
+                        @include('component.news', [
+                            'title' => 'Euroopa Kohus otsustas – lennuki tehniline rike ei päästa hüvitise maksmisest',
+                            'route' => '',
+                            'date' => 'Täna 12:31',
+                            'image' => \App\Image::getRandom()
+                        ])
+
+                    </div>
+
+                    <div class="r-home__news-block m-last">
+
+                        @include('component.news', [
+                            'modifiers' => 'm-small',
+                            'title' => 'Suur valuutaülevaade – kuhu tasub just praegu reisida',
+                            'route' => '',
+                            'date' => 'Eile 12:31',
+                            'image' => \App\Image::getRandom()
+                        ])
+
+                    </div>
+                </div>
+
+                @include('component.list', [
+                    'items' => [
+                        [
+                            'title' => 'Air Canada tunnistab veahinnaga pileteid!',
+                            'route' => '#',
+                            'text' => '23. oktoober'
+                        ],
+                        [
+                            'title' => 'Kas ametlikult maailma parim lennufirma on parim ka reisijate arvates?',
+                            'route' => '#',
+                            'text' => '19. oktoober'
+                        ],
+                        [
+                            'title' => 'Reisiidee: maailma suurim hindu tempel Akshardham Delhis',
+                            'route' => '#',
+                            'text' => '11. oktoober'
+                        ],
+                        [
+                            'title' => 'Reisiidee: Longshengi riisiterrassid',
+                            'route' => '#',
+                            'text' => '7. oktoober'
+                        ]
+                    ]
+                ])
+
+                @include('component.link', [
+                    'title' => 'Kõik uudised &rsaquo;',
+                    'route' => ''
+                ])
+
+            </div>
+        </div>
     </div>
 
-</div>
+    <div class="r-home__travel">
 
-<div class="row utils-padding-bottom">
+        <div class="r-home__travel-wrap">
 
-    @include('component.placeholder', [
-        'text' => 'Travelmates',
-        'height' => '100',
-    ])
+            <div class="r-home__travel-column m-first">
 
-</div>
+                <div class="r-home__travel-title">
 
-<div class="row utils-padding-bottom">
+                    @include('component.title', [
+                        'modifiers' => 'm-red',
+                        'title' => 'Lennupakkumised'
+                    ])
 
-    @include('component.placeholder', [
-        'text' => 'Photos',
-        'height' => '100',
-    ])
+                </div>
 
-</div>
+                @include('component.list', [
+                    'modifiers' => 'm-icon',
+                    'items' => [
+                        [
+                            'icon' => 'icon-offer',
+                            'modifiers' => 'm-blue',
+                            'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
+                            'route' => '#',
+                            'text' => 'Jaanuar – veebruar 2016   /   Täna 12:32'
+                        ],
+                        [
+                            'icon' => 'icon-offer',
+                            'modifiers' => 'm-yellow',
+                            'title' => 'Edasi–tagasi riiast või Helsingist Bangkoki al 350 €',
+                            'route' => '#',
+                            'text' => 'Detsember 2015 – jaanuar 2016   /   Täna 9:11'
+                        ],
+                        [
+                            'icon' => 'icon-offer',
+                            'modifiers' => 'm-green',
+                            'title' => 'Reis Brasiilias: Tallinn–Recife/Salvador–Tallinn al 402 €',
+                            'route' => '#',
+                            'text' => 'Jaanuar – veebruar 2016   /   Eile 14:42'
+                        ],
+                        [
+                            'icon' => 'icon-offer',
+                            'title' => 'Lennupiletid Helsingist Singapuri al 456 €',
+                            'route' => '#',
+                            'text' => 'Veebruar 2016   /   Eile 14:42'
+                        ],
+                    ]
+                ])
 
-<div class="row">
-    
-    <div class="col-sm-8 col-sm-offset-2">
-        
-        @include('component.ad',[
-            'title' => 'Sample wide ad',
-        ])
-        
+                @include('component.link', [
+                    'title' => 'Vaata kõiki sooduspakkumisi &rsaquo;',
+                    'route' => ''
+                ])
+
+            </div>
+
+            <div class="r-home__travel-column m-last">
+
+                <div class="r-home__travel-title">
+
+                    @include('component.title', [
+                        'modifiers' => 'm-red',
+                        'title' => 'Reisikirjad'
+                    ])
+
+                </div>
+
+                @include('component.travelletter', [
+                    'title' => 'Minu Aafrika – jutustusi kuuajaselt ringreisilt',
+                    'image' => \App\Image::getRandom(),
+                    'route' => '#',
+                    'profile' => [
+                        'route' => '#',
+                        'title' => 'Mari Maasikas',
+                        'image' => \App\Image::getRandom()
+                    ]
+                ])
+
+            </div>
+        </div>
+    </div>
+
+    <div class="r-home__gallery">
+
+        <div class="r-home__gallery-wrap">
+
+            @include('component.gallery', [
+                'items' => [
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 1'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 2'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 3'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 4'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 5'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 6'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 7'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 8'
+                    ]
+                ]
+            ])
+        </div>
+    </div>
+
+    <div class="r-home__travel-mates">
+
+        <div class="r-home__travel-mates-wrap">
+
+            <div class="r-home__travel-mates-title">
+
+                @include('component.title', [
+                    'title' => 'Reisikaaslased',
+                    'modifiers' => 'm-red'
+                ])
+
+            </div>
+
+            <div class="c-columns m-4-cols">
+
+                <div class="c-columns__item">
+
+                    @include('component.profile', [
+                        'title' => 'Jaanus Jaaniuss',
+                        'age' => '22',
+                        'interests' => 'Itaalia',
+                        'route' => '',
+                        'image' => \App\Image::getRandom()
+                    ])
+                </div>
+
+                <div class="c-columns__item">
+
+                    @include('component.profile', [
+                        'title' => 'Mari Maasikas',
+                        'age' => '29',
+                        'interests' => 'Itaalia, Kreeka',
+                        'route' => '',
+                        'image' => \App\Image::getRandom()
+                    ])
+                </div>
+
+                <div class="c-columns__item">
+
+                    @include('component.profile', [
+                        'title' => 'Inga Ingel',
+                        'age' => '32',
+                        'interests' => 'Kreeka',
+                        'route' => '',
+                        'image' => \App\Image::getRandom()
+                    ])
+                </div>
+
+                <div class="c-columns__item">
+
+                    @include('component.profile', [
+                        'title' => 'Silver Siil',
+                        'age' => '19',
+                        'interests' => 'Aasia, Euroopa',
+                        'route' => '',
+                        'image' => \App\Image::getRandom()
+                    ])
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="r-home__footer-promo">
+
+        <div class="r-home__footer-promo-wrap">
+
+            @include('component.promo', [
+                'route' => '#',
+                'image' => \App\Image::getRandom()
+            ])
+
+        </div>
     </div>
 
 </div>

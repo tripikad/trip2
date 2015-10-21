@@ -1,25 +1,11 @@
-<div class="component-navbar row">
+<nav class="c-nav">
 
-    <div class="col-sm-12 text-right visible-xs-block">
-        
-        <ul class="list-inline">
+    <ul class="c-nav__list">
 
-            <li><a href="">☰</a></li>
-    
-        </ul>
-
-    </div>
-
-    <div class="col-sm-8 hidden-xs">
-            
         @include('component.menu', [
             'menu' => 'header',
             'items' => config('menu.header')
         ])
-    
-    </div>
-
-    <div class="col-sm-4 text-right hidden-xs">
 
         @if(auth()->user() && ! auth()->user()->hasRole('admin'))
 
@@ -72,6 +58,7 @@
 
         @endif
 
-    </div>
+    </ul>
 
-</div>
+</nav>
+
