@@ -5,6 +5,6 @@
     trial.type = 'text/javascript';
     trial.async = true;
     trial.src = protocol + path;
-    var head = document.getElementsByTagName("head")[0];
+    var head = document.getElementsByTagName('head')[0];
     head.appendChild(trial);
 })();
