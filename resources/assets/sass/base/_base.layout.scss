@@ -28,8 +28,7 @@ $susy: (
 			@if $value == 'narrow' {
 
 				padding: 0;
-			}
-			@else {
+			} @else {
 
 				padding: 0 18px;
 			}
@@ -39,8 +38,7 @@ $susy: (
 			@if $value == 'narrow' {
 
 				padding: 0;
-			}
-			@else {
+			} @else {
 
 				padding: 0 24px;
 			}
@@ -52,8 +50,7 @@ $susy: (
 			@if $value == 'narrow' {
 
 				padding: 0 span(2);
-			}
-			@else {
+			} @else {
 
 				padding: 0 12px;
 			}
@@ -66,8 +63,7 @@ $susy: (
 			@if $value == 'narrow' {
 
 				padding: 0 84px;
-			}
-			@else {
+			} @else {
 
 				padding: 0;
 			}
@@ -80,8 +76,7 @@ $susy: (
 			@if $value == 'narrow' {
 
 				padding: 0 90px;
-			}
-			@else {
+			} @else {
 
 				padding: 0;
 			}
@@ -94,8 +89,7 @@ $susy: (
 			@if $value == 'narrow' {
 
 				padding: 0 96px;
-			}
-			@else {
+			} @else {
 
 				padding: 0;
 			}
