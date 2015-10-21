@@ -3,35 +3,23 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
         <link href="/css/main.css" rel='stylesheet' type='text/css'>
 
         <title>@yield('title') | {{ config('site.name') }}</title>
-    
+
     </head>
     <body>{{ Analytics::render() }}
-        
-        <div class="utils-padding-bottom">
 
-            @yield('header1', view('component.header1'))
+        @include('component.header')
 
-            @yield('header2', view('component.header2'))
+        @include('component.info.success')
 
-            @yield('header3', view('component.header3'))
+        @include('component.info.error')
 
-        </div>
+        @yield('content')
 
-        <div class="container">
-
-            @include('component.info.success')
-
-            @include('component.info.error')
-
-            @yield('content')
-            
-            @include('component.footer')
-            
-        </div>
+        @include('component.footer')
 
         <script type="text/javascript" src="/js/main.js"></script>
 
