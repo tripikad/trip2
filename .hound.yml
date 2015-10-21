@@ -1,6 +1,6 @@
 scss:
     enabled: true
-    config_file: .scss-style.yml
+    config_file: .sass-lint.yml
 
 fail_on_violations: true
 
