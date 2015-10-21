@@ -2,5 +2,5 @@ scss:
     enabled: true
     config_file: .scss-lint.yml
 
-fail_on_violations: false
+fail_on_violations: true
 

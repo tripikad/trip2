@@ -10,6 +10,8 @@ linters:
   ColorKeyword:
     enabled: true
     severity: warning
+    exclude:
+      - "resources/assets/sass/base/**/*.scss"
   ColorVariable:
     enabled: true
   Comment:
