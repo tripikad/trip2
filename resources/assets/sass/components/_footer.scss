@@ -1,7 +1,8 @@
 .c-footer {
 
 	padding: 132px 0 48px;
-	background: url('#{$path-images}/footer-bg.jpg') no-repeat top center;
+	background-repeat: no-repeat;
+	background-position: top center;
 	background-size: cover;
 	position: relative;
 
