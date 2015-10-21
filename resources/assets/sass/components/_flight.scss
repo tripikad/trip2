@@ -1,20 +1,3 @@
-// flight
-//
-// flight block
-//
-// Markup:
-//<div class="c-flight {$modifiers}">
-//    <h3 class="c-flight__title">Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €</h3>
-//    <div class="c-flight__image-wrap">
-//        <img src="assets/img/flight.jpg" alt="" class="c-flight__image">
-//    </div>
-//</div>
-//
-// default   - An flight.
-//.m-small - Smaller flight
-//
-// Styleguide 5
-
 .c-flight {
 
 	@include background-color-dark-modifiers;
@@ -75,4 +58,3 @@
 		opacity: 0.8;
 		transform: translate(-50%, -50%);
 	}
-

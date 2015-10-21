@@ -1,32 +1,3 @@
-// Lists
-//
-// List styles
-//
-// Markup:
-//<ul class="c-list {$modifiers}">
-//    <li class="c-list__item">
-//	      <h3 class="c-list__item-title"><a href="#" class="c-list__item-title-link">List item title</a></h3>
-//        <p class="c-list__item-text">List item text</p>
-//    </li>
-//    <li class="c-list__item">
-//	      <h3 class="c-list__item-title"><a href="#" class="c-list__item-title-link">List item title</a></h3>
-//        <p class="c-list__item-text">List item text</p>
-//    </li>
-//</ul>
-//
-// default 			- Default list
-// .m-icon 			- With an icon on the left
-// .m-large 		- List with large text
-// .m-dot.m-yellow 	- Yellow dots
-// .m-dot.m-red 	- Red dots
-// .m-dot.m-blue 	- Blue dots
-// .m-dot.m-purple 	- Purple dots
-// .m-dot.m-green 	- Green dots
-// .m-dot.m-orange 	- Orange dots
-//
-// Styleguide 4
-
-
 .c-list {
 
 	@include clear-list;

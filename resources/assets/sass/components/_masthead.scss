@@ -1,52 +1,8 @@
-// Masthead
-//
-// Default masthead
-//
-// Markup:
-//<div class="c-masthead">
-//    <h1 class="c-masthead__title">Kuhu sa täna tahaksid minna?</h1>
-//    <div class="c-masthead__wrap">
-//        <div class="c-masthead__logo">
-//            <div class="c-logo"></div>
-//        </div>
-//    </div>
-//</div>
-//
-// default   - Default masthead.
-//
-// Styleguide 8
-
-// Destination masthead
-//
-// Destination masthead
-//
-// Markup:
-//<div class="c-masthead">
-//    <div class="c-masthead__wrap">
-//        <div class="c-masthead__destination-nav m-previous">
-//            <a href="#" class="c-link m-yellow">&lsaquo; Kreeka</a>
-//        </div>
-//        <div class="c-masthead__destination-nav m-next">
-//            <a href="#" class="c-link m-yellow">Itaalia &rsaquo;</a>
-//        </div>
-//    </div>
-//    <div class="c-masthead__heading">
-//        <div class="c-masthead__heading-logo"><div class="c-logo m-small"></div></div>
-//        <h1 class="c-masthead__title">Malta</h1>
-//        <h2 class="c-masthead__subtitle"><a href="#" class="c-masthead__subtitle-link">Euroopa &rsaquo;</a></h2>
-//    </div>
-//</div>
-//
-// default   - Destination masthead.
-//
-// Styleguide 8.1
-
 .c-masthead {
 
 	position: relative;
 	width: 100%;
 	height: 240px;
-	//background-image: url('#{$path-images}/cover-bg-default.jpg');
 	background-repeat: no-repeat;
 	background-position: top center;
 	background-size: cover;
@@ -157,4 +113,3 @@
 				}
 			}
 		}
-

@@ -1,58 +1,3 @@
-// Profile
-//
-// Default profile component with image, name and text (interests).
-//
-// Markup:
-//<div class="c-profile {$modifiers}">
-//    <div class="c-profile__image-wrap">
-//	      <img src="assets/img/profile.jpg" class="c-profile__image">
-//    </div>
-//    <div class="c-profile__info">
-//	      <h3 class="c-profile__title"><a class="c-profile__title-link">Name Lastname</a> (22)</h3>
-//	      <p class="c-profile__interests">Malta, Itaalia</p>
-//    </div>
-//</div>
-//
-// default - Default profile
-// .m-center - Center aligned
-//
-// Styleguide 3
-
-// Profile Small
-//
-// Small profile component with image and name.
-//
-// Markup:
-//<div class="c-profile {$modifiers}">
-//    <div class="c-profile__image-wrap">
-//        <img src="assets/img/profile.jpg" class="c-profile__image">
-//    </div>
-//    <div class="c-profile__info">
-//        <h3 class="c-profile__title"><a class="c-profile__title-link">Name Lastname</a> (22)</h3>
-//    </div>
-//</div>
-//
-// .m-small	 - Small profile
-// .m-center - Center aligned
-//
-// Styleguide 3.1
-
-// Profile Mini
-//
-// Mini profile component with just an image.
-//
-// Markup:
-//<div class="c-profile {$modifiers}">
-//    <div class="c-profile__image-wrap">
-//        <img src="assets/img/profile.jpg" class="c-profile__image">
-//    </div>
-//</div>
-//
-// .m-mini	 - Mini profile
-//
-// Styleguide 3.2
-
-
 .c-profile {
 
 	display: flex;
@@ -148,4 +93,3 @@
 				display: none;
 			}
 		}
-

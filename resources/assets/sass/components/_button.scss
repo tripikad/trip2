@@ -1,18 +1,3 @@
-// Button
-//
-// Your standard button suitable for clicking.
-//
-// Markup:
-// <a class="c-button {$modifiers}">This is a button</a>
-//
-// default   - A button.
-// :hover    - Highlights when hovering.
-// .m-big    - A big button.
-// .m-block  - Block level button.
-// .m-secondary    - A secondary button.
-//
-// Styleguide 1
-
 .c-button {
 
 	@include font-smoothing;

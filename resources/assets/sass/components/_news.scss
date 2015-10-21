@@ -1,26 +1,3 @@
-// News
-//
-// News blocks
-//
-// Markup:
-//<div class="c-news {$modifiers}">
-//    <a href="#" class="c-news__image-wrap">
-//        <img src="assets/img/news1.jpg" alt="" class="c-news__image">
-//    </a>
-//    <h3 class="c-news__title">
-//        <a href="#" class="c-news__title-link">Euroopa Kohus otsustas – lennuki tehniline rike ei päästa hüvitise maksmisest</a>
-//    </h3>
-//    <div class="c-news__meta">
-//        <p class="c-news__meta-date">Täna 12:31</p>
-//    </div>
-//</div>
-//
-// default   - A news block.
-// .m-small   - A small news block.
-//
-// Styleguide 6
-
-
 .c-news {
 
 	margin-bottom: 24px;
