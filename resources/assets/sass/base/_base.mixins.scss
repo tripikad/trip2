@@ -1,0 +1,113 @@
+@mixin font-smoothing($value: antialiased) {
+
+	@if $value == antialiased {
+
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+	@else {
+
+		-webkit-font-smoothing: subpixel-antialiased;
+		-moz-osx-font-smoothing: auto;
+	}
+}
+
+@mixin text-rendering($value: optimizeLegibility) {
+
+	text-rendering: $value; // Joseph Pearson also points out that on slower machines (such as mobile devices) it can negatively impact page load when applied to large blocks of text.
+}
+
+@mixin vertical-center {
+
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+@mixin clearfix {
+
+	&:after {
+
+	  content: '';
+	  display: table;
+	  clear: both;
+	}
+}
+
+@mixin hide-text {
+
+	text-indent: -9999px;
+	display: block;
+	overflow: hidden;
+}
+
+@mixin clear-list {
+
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+
+@mixin arrowY($direction, $color) {
+
+	position: relative;
+
+	&:before,
+	&:after {
+
+		content: "";
+		position: absolute;
+		top: 50%;
+		right: 0;
+		height: 5px;
+		width: 2px;
+		margin-top: -3px;
+		background: $color;
+	}
+
+	&:before {
+
+		@if $direction == up { $translateBefore: 1px } @else { $translateBefore: -1px };
+
+		-webkit-transform: translateX($translateBefore) rotate(-45deg);
+		-ms-transform: translateX($translateBefore) rotate(-45deg);
+		transform: translateX($translateBefore) rotate(-45deg);
+	}
+
+	&:after {
+
+		@if $direction == up { $translateAfter: -1px } @else { $translateAfter: 1px };
+
+		-webkit-transform: translateX($translateAfter) rotate(-135deg);
+		-ms-transform: translateX($translateAfter) rotate(-135deg);
+		transform: translateX($translateAfter) rotate(-135deg);
+	}
+}
+
+@mixin triangle($direction, $size: 6px, $color: #222){
+  content: '';
+  display: block;
+  position: absolute;
+  height: 0; width: 0;
+  @if ($direction == 'up'){
+    border-bottom: $size solid $color;
+    border-left: 1/2*$size solid transparent;
+    border-right: 1/2*$size solid transparent;
+  }
+  @else if ($direction == 'down'){
+    border-top: $size solid $color;
+    border-left: 1/2*$size solid transparent;
+    border-right: 1/2*$size solid transparent;
+  }
+  @else if ($direction == 'left'){
+    border-top: 1/2*$size solid transparent;
+    border-bottom: 1/2*$size solid transparent;
+    border-right: $size solid $color;
+  }
+  @else if ($direction == 'right'){
+    border-top: 1/2*$size solid transparent;
+    border-bottom: 1/2*$size solid transparent;
+    border-left: $size solid $color;
+  }
+}

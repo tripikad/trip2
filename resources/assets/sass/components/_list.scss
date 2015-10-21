@@ -1,0 +1,164 @@
+// Lists
+//
+// List styles
+//
+// Markup:
+//<ul class="c-list {$modifiers}">
+//    <li class="c-list__item">
+//	      <h3 class="c-list__item-title"><a href="#" class="c-list__item-title-link">List item title</a></h3>
+//        <p class="c-list__item-text">List item text</p>
+//    </li>
+//    <li class="c-list__item">
+//	      <h3 class="c-list__item-title"><a href="#" class="c-list__item-title-link">List item title</a></h3>
+//        <p class="c-list__item-text">List item text</p>
+//    </li>
+//</ul>
+//
+// default 			- Default list
+// .m-icon 			- With an icon on the left
+// .m-large 		- List with large text
+// .m-dot.m-yellow 	- Yellow dots
+// .m-dot.m-red 	- Red dots
+// .m-dot.m-blue 	- Blue dots
+// .m-dot.m-purple 	- Purple dots
+// .m-dot.m-green 	- Green dots
+// .m-dot.m-orange 	- Orange dots
+//
+// Styleguide 4
+
+
+.c-list {
+
+	@include clear-list;
+
+	font-family: $font-primary;
+	margin-bottom: 24px;
+
+	@include respond-to(tablet) {
+
+		margin: 0 0 30px;
+	}
+}
+
+	.c-list__item {
+
+		margin-bottom: 12px;
+
+		.c-list.m-icon & {
+
+			position: relative;
+			padding-left: 72px;
+			margin-bottom: 24px;
+		}
+
+		.c-list.m-large & {
+
+			margin-bottom: 24px;
+		}
+
+		.c-list.m-dot & {
+
+			font-weight: $font-weight-medium;
+			position: relative;
+			padding-left: 24px;
+
+			&:before {
+
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 3px;
+				width: 7px;
+				height: 7px;
+				border-radius: 50%;
+			}
+		}
+	}
+
+	.c-list.m-dot.m-yellow .c-list__item:before {background-color: $brand-yellow;}
+	.c-list.m-dot.m-red .c-list__item:before {background-color: $brand-red;}
+	.c-list.m-dot.m-green .c-list__item:before {background-color: $brand-green;}
+	.c-list.m-dot.m-blue .c-list__item:before {background-color: $brand-blue;}
+	.c-list.m-dot.m-purple .c-list__item:before {background-color: $brand-purple;}
+	.c-list.m-dot.m-orange .c-list__item:before {background-color: $brand-orange;}
+
+		.c-list__item-icon {
+
+			position: absolute;
+			left: 0;
+			top: 0;
+			display: block;
+			width: 48px;
+			height: 48px;
+
+			svg {
+
+				height: 100%;
+				width: 100%;
+
+				.c-list__item.m-red & {fill: $brand-red;}
+				.c-list__item.m-blue & {fill: $brand-blue;}
+				.c-list__item.m-green & {fill: $brand-green;}
+				.c-list__item.m-orange & {fill: $brand-orange;}
+				.c-list__item.m-yellow & {fill: $brand-yellow;}
+				.c-list__item.m-purple & {fill: $brand-purple;}
+			}
+		}
+
+		.c-list__item-title {
+
+			font-size: $font-size-normal;
+			line-height: 1.5;
+
+			.c-list.m-icon & {
+
+				font-size: $font-size-large;
+				line-height: 1.15;
+			}
+
+			.c-list.m-large & {
+
+				font-size: $font-size-large;
+				font-weight: $font-weight-bold;
+				line-height: 1.15;
+			}
+		}
+
+			.c-list__item-title-link {
+
+				color: $color-text-link;
+				text-decoration: none;
+
+				.c-list.m-dot & {
+
+					color: $color-text-black;
+				}
+
+				&:hover {
+
+					text-decoration: underline;
+				}
+			}
+
+		.c-list__item-text {
+
+			color: $color-text-neutral-dark;
+			font-size: $font-size-small;
+
+			.c-list.m-icon & {
+
+				font-size: $font-size-normal;
+				margin-top: 9px;
+			}
+
+			.c-list.m-large & {
+
+				font-size: $font-size-normal;
+				margin-top: 9px;
+			}
+
+			.c-list.m-dot & {
+
+				display: none;
+			}
+		}
