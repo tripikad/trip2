@@ -59,9 +59,9 @@ linters:
     enabled: true
     force_nesting: true
   NameFormat:
-    enabled: false
+    enabled: true
     allow_leading_underscore: true
-    convention: hyphenated_BEM
+    convention: hyphenated_lowercase
   NestingDepth:
     enabled: true
     max_depth: 4
@@ -92,7 +92,7 @@ linters:
     severity: warning
   SelectorFormat:
     enabled: true
-    convention: hyphenated_lowercase
+    convention: hyphenated_BEM
   Shorthand:
     enabled: true
     severity: warning
