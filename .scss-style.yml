@@ -49,7 +49,7 @@ linters:
     filename_extension: false
   Indentation:
     enabled: true
-    allow_non_nested_indentation: false
+    allow_non_nested_indentation: true
     character: space
     width: 4
   LeadingZero:
