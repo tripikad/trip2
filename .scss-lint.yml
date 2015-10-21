@@ -56,7 +56,7 @@ linters:
     enabled: true
     style: include_zero
   MergeableSelector:
-    enabled: true
+    enabled: false
     force_nesting: true
   NameFormat:
     enabled: false
@@ -71,7 +71,7 @@ linters:
   PropertyCount:
     enabled: true
     include_nested: false
-    max_properties: 10
+    max_properties: 12
   PropertySortOrder:
     enabled: false
     ignore_unspecified: false

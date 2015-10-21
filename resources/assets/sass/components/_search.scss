@@ -140,22 +140,7 @@
 			box-shadow: none;
 		}
 
-		&::-webkit-input-placeholder {
-
-			color: $color-white;
-		}
-
-		&:-moz-placeholder {
-
-			color: $color-white;
-		}
-
-		&::-moz-placeholder {
-
-			color: $color-white;
-		}
-
-		&:-ms-input-placeholder {
+		&::input-placeholder {
 
 			color: $color-white;
 		}
@@ -165,25 +150,11 @@
             color: $color-text-black;
             background: $color-white;
 
-            &::-webkit-input-placeholder {
+            &::input-placeholder {
 
                 color: $color-text-neutral;
             }
-
-            &:-moz-placeholder {
-
-                color: $color-text-neutral;
-            }
-
-            &::-moz-placeholder {
-
-                color: $color-text-neutral;
-            }
-
-            &:-ms-input-placeholder {
-
-                color: $color-text-neutral;
-            }
+            
         }
 	}
 
