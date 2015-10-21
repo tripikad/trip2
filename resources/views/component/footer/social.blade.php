@@ -26,7 +26,12 @@ code: |
 
     @foreach ($items as $key => $item)
 
-    <li class="c-footer__social-item {{ $item['modifier'] or '' }}">
+    <li class="c-footer__social-item">
+
+        @include('component.icon', [
+            'icon' => $item['icon']
+        ])
+
         <a href="{{ $item['route'] }}" class="c-footer__social-item-link">
             {{ isset($item['title']) ? $item['title'] : trans("menu.$menu.$key") }}
         </a>
