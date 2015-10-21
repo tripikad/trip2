@@ -56,7 +56,7 @@
 	&:before,
 	&:after {
 
-		content: "";
+		content: '';
 		position: absolute;
 		top: 50%;
 		right: 0;
@@ -68,19 +68,15 @@
 
 	&:before {
 
-		@if $direction == up { $translateBefore: 1px } @else { $translateBefore: -1px };
+		@if $direction == up { $translateBefore: 1px; } @else { $translateBefore: -1px; };
 
-		-webkit-transform: translateX($translateBefore) rotate(-45deg);
-		-ms-transform: translateX($translateBefore) rotate(-45deg);
 		transform: translateX($translateBefore) rotate(-45deg);
 	}
 
 	&:after {
 
-		@if $direction == up { $translateAfter: -1px } @else { $translateAfter: 1px };
+		@if $direction == up { $translateAfter: -1px; } @else { $translateAfter: 1px; };
 
-		-webkit-transform: translateX($translateAfter) rotate(-135deg);
-		-ms-transform: translateX($translateAfter) rotate(-135deg);
 		transform: translateX($translateAfter) rotate(-135deg);
 	}
 }
@@ -94,18 +90,15 @@
     border-bottom: $size solid $color;
     border-left: 1/2*$size solid transparent;
     border-right: 1/2*$size solid transparent;
-  }
-  @else if ($direction == 'down'){
+  } @else if ($direction == 'down'){
     border-top: $size solid $color;
     border-left: 1/2*$size solid transparent;
     border-right: 1/2*$size solid transparent;
-  }
-  @else if ($direction == 'left'){
+  } @else if ($direction == 'left'){
     border-top: 1/2*$size solid transparent;
     border-bottom: 1/2*$size solid transparent;
     border-right: $size solid $color;
-  }
-  @else if ($direction == 'right'){
+  } @else if ($direction == 'right'){
     border-top: 1/2*$size solid transparent;
     border-bottom: 1/2*$size solid transparent;
     border-left: $size solid $color;
