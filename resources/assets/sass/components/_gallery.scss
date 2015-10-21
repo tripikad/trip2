@@ -1,0 +1,109 @@
+// Gallery
+//
+// Gallery block
+//
+// Markup:
+//<ul class="c-gallery__list m-8-cols">
+//    <li class="c-gallery__list-item">
+//        <a href="#" class="c-gallery__list-item-link">
+//            <img src="assets/img/gallery.jpg" alt="" class="c-gallery__list-item-image">
+//        </a>
+//    </li>
+//    <li class="c-gallery__list-item">
+//        <a href="#" class="c-gallery__list-item-link">
+//            <img src="assets/img/gallery.jpg" alt="" class="c-gallery__list-item-image">
+//        </a>
+//    </li>
+//    <li class="c-gallery__list-item">
+//        <a href="#" class="c-gallery__list-item-link">
+//            <img src="assets/img/gallery.jpg" alt="" class="c-gallery__list-item-image">
+//        </a>
+//    </li>
+//    <li class="c-gallery__list-item">
+//        <a href="#" class="c-gallery__list-item-link">
+//            <img src="assets/img/gallery.jpg" alt="" class="c-gallery__list-item-image">
+//        </a>
+//    </li>
+//    <li class="c-gallery__list-item">
+//        <a href="#" class="c-gallery__list-item-link">
+//            <img src="assets/img/gallery.jpg" alt="" class="c-gallery__list-item-image">
+//        </a>
+//    </li>
+//    <li class="c-gallery__list-item">
+//        <a href="#" class="c-gallery__list-item-link">
+//            <img src="assets/img/gallery.jpg" alt="" class="c-gallery__list-item-image">
+//        </a>
+//    </li>
+//    <li class="c-gallery__list-item">
+//        <a href="#" class="c-gallery__list-item-link">
+//            <img src="assets/img/gallery.jpg" alt="" class="c-gallery__list-item-image">
+//        </a>
+//    </li>
+//    <li class="c-gallery__list-item">
+//        <a href="#" class="c-gallery__list-item-link">
+//            <img src="assets/img/gallery.jpg" alt="" class="c-gallery__list-item-image">
+//        </a>
+//    </li>
+//</ul>
+//
+// default   - A gallery block.
+//
+// Styleguide 7
+
+
+.c-gallery {
+}
+
+// List
+
+.c-gallery__list {
+
+	@include clearfix;
+	@include clear-list;
+
+	display: flex;
+	flex-flow: row wrap;
+
+}
+
+	.c-gallery__list-item {
+
+		.c-gallery__list.m-8-cols & {
+
+			flex: 0 1 50%;
+
+			@include respond-to(tablet-portrait) {
+
+				flex: 0 1 25%;
+			}
+
+			@include respond-to(tablet) {
+
+				flex: 0 1 25%;
+			}
+
+			@include respond-to(desktop) {
+
+				flex: 0 1 12.5%;
+			}
+		}
+	}
+
+		.c-gallery__list-item-link {
+
+			position: relative;
+			overflow: hidden;
+			display: block;
+			height: 0;
+			padding-bottom: 100%;
+		}
+
+		.c-gallery__list-item-image {
+
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			max-width: 200%;
+			height: auto;
+			transform: translate(-50%, -50%);
+		}
