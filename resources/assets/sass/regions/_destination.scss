@@ -69,7 +69,7 @@
 						padding-bottom: 0;
 						margin-top: -48px;
 
-						.r-destination__about.m-red &{box-shadow: 0 12px 36px rgba($brand-red-dark, 1);}
+						.r-destination__about.m-red & {box-shadow: 0 12px 36px rgba($brand-red-dark, 1);}
 						.r-destination__about.m-blue & {box-shadow: 0 12px 36px rgba($brand-blue-dark, 1);}
 						.r-destination__about.m-green & {box-shadow: 0 12px 36px rgba($brand-green-dark, 1);}
 						.r-destination__about.m-yellow & {box-shadow: 0 12px 36px rgba($brand-yellow-dark, 1);}
@@ -116,7 +116,7 @@
 
 		padding-bottom: 24px;
 		padding-top: 24px;
-		background:$color-white;
+		background: $color-white;
 
 		@include respond-to(tablet) {
 
