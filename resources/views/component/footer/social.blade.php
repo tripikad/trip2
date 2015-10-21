@@ -1,26 +1,26 @@
 {{--
 
-description: Footer social list
+description: Footer Social list
 
 code: |
 
-    @include('component.footernav', [
-        'menu' => 'styleguide',
+    @include('component.footer.social', [
+        'menu' => 'footer-social',
         'items' => [
             'first' => [
-                'route' => ''
+                'route' => '',
+                'title' => '',
+                'icon' => 'icon-facebook'
             ],
             'second' => [
-                'route' => ''
-            ],
-            'third' => [
-                'route' => ''
+                'route' => '',
+                'title' => '',
+                'icon' => 'icon-twitter'
             ]
         ]
     ])
 
 --}}
-
 
 <ul class="c-footer__social">
 

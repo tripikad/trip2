@@ -4,7 +4,7 @@ description: Footer Navigation list
 
 code: |
 
-    @include('component.footernav', [
+    @include('component.footer.nav', [
         'menu' => 'styleguide',
         'items' => [
             'first' => [
