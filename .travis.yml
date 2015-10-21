@@ -15,7 +15,6 @@ install:
     - composer install --no-interaction --prefer-source
     - cp .env.travis .env
     - chmod -R o+w storage/
-    - chmod -R o+w public/images/
     - mysql -e 'create database IF NOT EXISTS trip2;'
 
 before_script:
