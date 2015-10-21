@@ -53,14 +53,14 @@
 
                 </div>
 
-                @include('component.offer', [
+                @include('component.flight', [
                     'modifiers' => 'm-yellow m-small',
                     'route' => '#',
                     'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                     'image' => \App\Image::getRandom(),
                 ])
 
-                @include('component.offer', [
+                @include('component.flight', [
                     'modifiers' => 'm-yellow m-small',
                     'route' => '#',
                     'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
@@ -82,7 +82,7 @@
                         ],
                         [
                             'term' => 'Pindala',
-                            'definition' => '316 km&sup2;'
+                            'definition' => '316 km²'
                         ],
                         [
                             'term' => 'Valuuta',
@@ -400,15 +400,15 @@
                 </div>
             </div>
 
-            <div class="r-destination__content-offers">
+            <div class="r-destination__content-flights">
 
-                <div class="r-destination__content-offers-wrap">
+                <div class="r-destination__content-flights-wrap">
 
                     <div class="c-columns m-3-cols">
 
                         <div class="c-columns__item">
 
-                            @include('component.offer', [
+                            @include('component.flight', [
                                 'route' => '#',
                                 'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                                 'image' => \App\Image::getRandom()
@@ -417,7 +417,7 @@
 
                         <div class="c-columns__item">
 
-                            @include('component.offer', [
+                            @include('component.flight', [
                                 'route' => '#',
                                 'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                                 'image' => \App\Image::getRandom()
@@ -426,7 +426,7 @@
 
                         <div class="c-columns__item">
 
-                            @include('component.offer', [
+                            @include('component.flight', [
                                 'route' => '#',
                                 'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                                 'image' => \App\Image::getRandom()

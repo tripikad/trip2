@@ -80,12 +80,12 @@ return [
         'facebook' => [
             'route' => 'https://facebook.com/tripeeee',
             'external' => true,
-            'modifier' => 'm-facebook',
+            'icon' => 'icon-facebook',
         ],
         'twitter' => [
             'route' => 'https://twitter.com/trip_ee',
             'external' => true,
-            'modifier' => 'm-twitter',
+            'icon' => 'icon-twitter',
         ],
     ],
 

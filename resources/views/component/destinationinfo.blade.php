@@ -15,7 +15,7 @@ code: |
             ],
             [
                 'term' => 'Pindala',
-                'definition' => '316 km&sup2;'
+                'definition' => '316 km²;'
             ],
             [
                 'term' => 'Valuuta',

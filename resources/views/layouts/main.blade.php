@@ -13,25 +13,11 @@
 
         @include('component.header')
 
-{{--         @yield('masthead', view('component.masthead'))
+        @include('component.info.success')
 
-        <div class="utils-padding-bottom">
+        @include('component.info.error')
 
-            @yield('header2', view('component.header2'))
-
-            @yield('header3', view('component.header3'))
-
-        </div>
-
-        <div class="container"> --}}
-
-            @include('component.info.success')
-
-            @include('component.info.error')
-
-            @yield('content')
-
-{{--         </div> --}}
+        @yield('content')
 
         @include('component.footer')
 

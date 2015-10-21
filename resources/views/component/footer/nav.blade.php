@@ -1,10 +1,10 @@
 {{--
 
-description: Footer social list
+description: Footer Navigation list
 
 code: |
 
-    @include('component.footernav', [
+    @include('component.footer.nav', [
         'menu' => 'styleguide',
         'items' => [
             'first' => [
@@ -21,13 +21,12 @@ code: |
 
 --}}
 
-
-<ul class="c-footer__social">
+<ul class="c-footer__nav-list">
 
     @foreach ($items as $key => $item)
 
-    <li class="c-footer__social-item {{ $item['modifier'] or '' }}">
-        <a href="{{ $item['route'] }}" class="c-footer__social-item-link">
+    <li class="c-footer__nav-list-item">
+        <a href="{{ $item['route'] }}" class="c-footer__nav-link">
             {{ isset($item['title']) ? $item['title'] : trans("menu.$menu.$key") }}
         </a>
     </li>

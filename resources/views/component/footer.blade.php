@@ -6,24 +6,24 @@
 
 			<a href="#" class="c-footer__nav-logo">Trip.ee</a>
 
-			@include('component.footernav', [
+			@include('component.footer.nav', [
 	            'menu' => 'footer',
 	            'items' => config('menu.footer')
 	        ])
 
-	        @include('component.footernav', [
+	        @include('component.footer.nav', [
 	            'menu' => 'footer2',
 	            'items' => config('menu.footer2')
 	        ])
 
-	        @include('component.footernav', [
+	        @include('component.footer.nav', [
 	            'menu' => 'footer3',
 	            'items' => config('menu.footer3')
 	        ])
 
 		</nav>
 
-		@include('component.footersocial', [
+		@include('component.footer.social', [
             'menu' => 'footer-social',
             'items' => config('menu.footer-social')
         ])

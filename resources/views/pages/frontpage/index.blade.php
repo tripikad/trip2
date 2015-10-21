@@ -37,7 +37,7 @@
                         'subtitle_route' => '#'
                     ])
 
-                    @include('component.offer', [
+                    @include('component.flight', [
                         'route' => '#',
                         'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                         'image' => \App\Image::getRandom(),
@@ -55,7 +55,7 @@
                         'subtitle_route' => '#'
                     ])
 
-                    @include('component.offer', [
+                    @include('component.flight', [
                         'route' => '#',
                         'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                         'image' => \App\Image::getRandom(),
@@ -73,7 +73,7 @@
                         'subtitle_route' => '#'
                     ])
 
-                    @include('component.offer', [
+                    @include('component.flight', [
                         'route' => '#',
                         'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                         'image' => \App\Image::getRandom(),
