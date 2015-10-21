@@ -9,6 +9,8 @@ $breakpoint-desktop-large: 1520px;
 @include add-breakpoint('desktop', $breakpoint-desktop);
 @include add-breakpoint('desktop-medium', $breakpoint-desktop-medium);
 @include add-breakpoint('desktop-large', $breakpoint-desktop-large);
+
+// Vertical breakpoints will be used to target screens wider than tablet($breakpoint-tablet) and height smaller than specified
 @include add-breakpoint('vertical-small', (min-width $breakpoint-tablet) (max-height 640px));
 @include add-breakpoint('vertical-medium', (min-width $breakpoint-tablet) (max-height 700px));
 
