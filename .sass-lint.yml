@@ -12,7 +12,6 @@ linters:
     severity: warning
   ColorVariable:
     enabled: true
-    exclude: resources/assets/sass/base/**/*.scss
   Comment:
     enabled: true
   DebugStatement:
