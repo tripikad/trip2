@@ -1,0 +1,98 @@
+$breakpoint-tablet-portrait: 560px;
+$breakpoint-tablet: 1000px;
+$breakpoint-desktop: 1200px;
+$breakpoint-desktop-medium: 1440px;
+$breakpoint-desktop-large: 1520px;
+
+@include add-breakpoint('tablet-portrait', $breakpoint-tablet-portrait);
+@include add-breakpoint('tablet', $breakpoint-tablet);
+@include add-breakpoint('desktop', $breakpoint-desktop);
+@include add-breakpoint('desktop-medium', $breakpoint-desktop-medium);
+@include add-breakpoint('desktop-large', $breakpoint-desktop-large);
+@include add-breakpoint('vertical-small', (min-width $breakpoint-tablet) (max-height 640px));
+@include add-breakpoint('vertical-medium', (min-width $breakpoint-tablet) (max-height 700px));
+
+$susy: (
+
+	columns: 28,
+	output: isolate,
+	gutters: 0
+);
+
+@mixin wrap($value: 'normal') {
+
+	//.l-container {
+
+		@include container(100%);
+
+			@if $value == 'narrow' {
+
+				padding: 0;
+			} @else {
+
+				padding: 0 18px;
+			}
+
+		@include respond-to(tablet-portrait) {
+
+			@if $value == 'narrow' {
+
+				padding: 0;
+			} @else {
+
+				padding: 0 24px;
+			}
+
+		}
+
+		@include respond-to(tablet) {
+
+			@if $value == 'narrow' {
+
+				padding: 0 span(2);
+			} @else {
+
+				padding: 0 12px;
+			}
+		}
+
+		@include respond-to(desktop) {
+
+			@include container(1152px);
+
+			@if $value == 'narrow' {
+
+				padding: 0 84px;
+			} @else {
+
+				padding: 0;
+			}
+		}
+
+		@include respond-to(desktop-medium) {
+
+			@include container(1248px);
+
+			@if $value == 'narrow' {
+
+				padding: 0 90px;
+			} @else {
+
+				padding: 0;
+			}
+		}
+
+		@include respond-to(desktop-large) {
+
+			@include container(1344px);
+
+			@if $value == 'narrow' {
+
+				padding: 0 96px;
+			} @else {
+
+				padding: 0;
+			}
+		}
+	//}
+}

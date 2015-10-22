@@ -1,0 +1,49 @@
+// Tags
+//
+// Tags component
+//
+// Markup:
+//<ul class="c-tags">
+//<li class="c-tags__item {$modifiers}"><a href="#" class="c-tags__item-link">Tag name</a></li>
+//<li class="c-tags__item {$modifiers}"><a href="#" class="c-tags__item-link">Tag name</a></li>
+//</ul>
+//
+// .m-yellow - Yellow
+// .m-green - Green
+// .m-red - Red
+// .m-blue - Blue
+// .m-purple - Purple
+// .m-orange - Orange
+//
+// Styleguide 10
+
+.c-tags {
+
+    @include clearfix;
+    @include clear-list;
+    @include font-smoothing;
+}
+
+    .c-tags__item {
+
+        @include background-color-modifiers;
+
+        border-radius: 12px;
+        display: inline-block;
+    }
+
+        .c-tags__item-link {
+
+            color: $color-white;
+            display: block;
+            font-family: $font-primary;
+            font-size: $font-size-small;
+            font-weight: $font-weight-medium;
+            height: 22px;
+            line-height: 26px;
+            padding: 0 12px;
+            text-decoration: none;
+        }
+
+
+

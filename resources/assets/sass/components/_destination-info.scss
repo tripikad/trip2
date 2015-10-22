@@ -1,0 +1,54 @@
+.c-destination-info {}
+
+	.c-destination-info__text {
+
+		margin-bottom: 24px;
+		color: $color-white;
+		font-size: 18px; // Exception
+		font-weight: $font-weight-medium;
+		line-height: 1.5;
+
+		a {
+
+			font-size: $font-size-normal;
+			font-weight: $font-weight-bold;
+			text-decoration: none;
+
+			.c-destination-info.m-red & {color: $brand-red-dark;}
+			.c-destination-info.m-blue & {color: $brand-blue-dark;}
+			.c-destination-info.m-green & {color: $brand-green-dark;}
+			.c-destination-info.m-yellow & {color: $brand-yellow-dark;}
+			.c-destination-info.m-purple & {color: $brand-purple-dark;}
+			.c-destination-info.m-orange & {color: $brand-orange-dark;}
+		}
+	}
+
+	.c-destination-info__definition-list {
+
+		@include clearfix;
+
+		font-weight: $font-weight-medium;
+	}
+
+		.c-destination-info__definition-list-term {
+
+			float: left;
+			clear: left;
+			min-width: 30%;
+			margin-bottom: 18px;
+
+			.c-destination-info.m-red & {color: $brand-red-dark;}
+			.c-destination-info.m-blue & {color: $brand-blue-dark;}
+			.c-destination-info.m-green & {color: $brand-green-dark;}
+			.c-destination-info.m-yellow & {color: $brand-yellow-dark;}
+			.c-destination-info.m-purple & {color: $brand-purple-dark;}
+			.c-destination-info.m-orange & {color: $brand-orange-dark;}
+		}
+
+		.c-destination-info__definition-list-definition {
+
+			color: $color-white;
+			float: left;
+			margin-bottom: 18px;
+		}
+

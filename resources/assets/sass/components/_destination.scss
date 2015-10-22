@@ -1,0 +1,58 @@
+// Destination
+//
+// Destination component.
+//
+// Markup:
+// <div class="c-destination {$modifiers}">
+//   <div class="c-destination__header">
+//     <h3 class="c-destination__title"><a href="">Bangkok</a></h3>
+//     <div class="c-destination__subtitle"><a href="#">Tai</a></div>
+//   </div>
+// </div>
+//
+// .m-yellow - Yellow
+// .m-green - Green
+// .m-red - Red
+// .m-blue - Blue
+// .m-purple - Purple
+// .m-orange - Orange
+//
+// Styleguide 2
+.c-destination {
+
+	@include background-color-modifiers;
+	@include font-smoothing;
+
+	font-family: $font-primary;
+	line-height: 1;
+}
+
+	.c-destination__header {
+
+		padding: 21px 24px 20px;
+
+		a {
+
+			color: $color-white;
+			text-decoration: none;
+
+			&:hover {
+
+				text-decoration: none;
+			}
+		}
+	}
+
+	.c-destination__title {
+
+		color: $color-white;
+		font-size: $font-size-larger;
+		font-weight: $font-weight-medium;
+	}
+
+	.c-destination__subtitle {
+
+		font-weight: $font-weight-medium;
+		margin-top: 9px;
+	}
+

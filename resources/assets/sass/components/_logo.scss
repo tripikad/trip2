@@ -1,0 +1,16 @@
+.c-logo {
+
+	display: block;
+	height: 132px;
+	width: 279px;
+	background: url('#{$path-svg}tripee-logo.svg') no-repeat center center;
+
+	&.m-small {
+
+		width: 202px;
+		height: 97px;
+		background-size: 202px 97px;
+	}
+}
+
+
