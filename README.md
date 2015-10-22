@@ -94,15 +94,15 @@ The entrypoing to the templates are pages. They are called from controllers usin
 
 ##### Components
 
-Here is a sample component HTML:
+Here is a sample component HTML, we use BEM convention for class names and ```c-``` prefix for components.
 
 ```mustache
 
     {{-- /resources/views/component/sample.blade.php --}}
 
-    <div class="component-sample">
-        <h3 class="title">{{ $title }}
-        <p class="text">{{ $text }}
+    <div class="c-sample">
+        <h3 class="c-sample__title">{{ $title }}
+        <p class="c-sample__title">{{ $text }}
     </div>
 
 ```
