@@ -4,7 +4,7 @@ description: Destination info
 
 code: |
 
-    @include('component.destinationinfo',[
+    @include('component.destination.info',[
         'modifiers' => $options,
         'text' => 'Malta on tihedalt asustatud saareriik Vahemeres, mis koosneb 3 asustatud ja neljast asustamata saartest',
         'wiki_route' => '#',
