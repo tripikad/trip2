@@ -1,0 +1,115 @@
+.c-masthead {
+
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+
+    @include respond-to(desktop) {
+
+        height: 384px;
+    }
+
+    &:after {
+
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba($color-dark-gray2, 0.4);
+    }
+}
+
+    .c-masthead__body {
+
+        position: absolute;
+        z-index: 3;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        &.m-search {
+
+            @include span(24 of 28);
+
+            z-index: 100;
+            max-width: 768px;
+
+            @include respond-to(tablet) {
+
+                @include span(20 of 28);
+            }
+
+            @include respond-to(desktop) {
+
+                @include span(14 of 28);
+            }
+        }
+    }
+
+        .c-masthead__logo {
+
+            position: absolute;
+            left: -48px;
+            top: -102px;
+
+            &.m-small {
+
+                left: -48px;
+                top: -78px;
+            }
+        }
+
+        .c-masthead__title {
+
+            color: $color-white;
+            font-size: $font-size-huge;
+            text-align: center;
+        }
+
+        .c-masthead__subtitle {
+
+            font-size: $font-size-normal;
+            text-align: right;
+        }
+
+            .c-masthead__subtitle-link {
+
+                color: $color-white;
+                text-decoration: none;
+            }
+
+        .c-masthead__nav {
+
+            @include color-modifiers;
+
+            text-decoration: none;
+            position: absolute;
+            z-index: 3;
+            top: 50%;
+            display: block;
+
+            &.m-previous {
+
+                left: 12px;
+
+                @include respond-to(desktop) {
+
+                    left: 48px;
+                }
+            }
+
+            &.m-next {
+
+                right: 12px;
+
+                @include respond-to(desktop) {
+
+                    right: 48px;
+                }
+            }
+        }

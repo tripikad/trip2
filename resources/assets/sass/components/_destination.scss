@@ -1,0 +1,37 @@
+.c-destination {
+
+    @include color-modifiers(background);
+    @include font-smoothing;
+
+    font-family: $font-primary;
+    line-height: 1;
+}
+
+    .c-destination__header {
+
+        padding: 21px 24px 20px;
+
+        a {
+
+            color: $color-white;
+            text-decoration: none;
+
+            &:hover {
+
+                text-decoration: none;
+            }
+        }
+    }
+
+    .c-destination__title {
+
+        color: $color-white;
+        font-size: $font-size-larger;
+        font-weight: $font-weight-medium;
+    }
+
+    .c-destination__subtitle {
+
+        font-weight: $font-weight-medium;
+        margin-top: 9px;
+    }

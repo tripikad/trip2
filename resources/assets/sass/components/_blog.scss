@@ -1,0 +1,33 @@
+.c-blog {}
+
+    .c-blog__image-link {
+
+        display: block;
+    }
+
+        .c-blog__image {
+
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+    .c-blog__title {
+
+        font-size: $font-size-larger;
+        font-weight: $font-weight-bold;
+        text-align: center;
+        line-height: 1.2;
+        padding: 24px;
+    }
+
+        .c-blog__title-link {
+
+            color: $color-text-black;
+            text-decoration: none;
+        }
+
+    .c-blog__profile {
+
+        justify-content: center;
+    }

@@ -1,0 +1,13 @@
+.c-logo {
+
+    display: block;
+    height: 132px;
+    width: 279px;
+
+    &.m-small {
+
+        width: 202px;
+        height: 97px;
+        background-size: 202px 97px;
+    }
+}

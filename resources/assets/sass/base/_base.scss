@@ -1,0 +1,82 @@
+* {
+	&,
+	&:before,
+	&:after {
+
+		box-sizing: border-box;
+	}
+}
+
+::selection {}
+
+body {
+
+	@include font-smoothing;
+
+	color: $body-font-color;
+	font-family: $font-primary;
+	font-size: $base-font-size;
+	line-height: $base-line-height;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+	font-size: $base-font-size;
+	font-weight: $font-weight-normal;
+	margin: 0;
+}
+
+p {
+
+	margin: 0;
+}
+
+strong,
+b {
+
+	font-weight: $font-weight-bold;
+}
+
+em,
+i {
+
+	font-weight: $font-weight-normal;
+	font-style: italic;
+}
+
+blockquote {
+
+	margin: 0;
+}
+
+input:not([type=checkbox]):not([type=radio]),
+textarea,
+button {
+
+	-webkit-appearance: none;
+	border-radius: 0;
+}
+
+button {
+
+	padding: 0;
+	border: 0;
+	background: none;
+	cursor: pointer;
+}
+
+input,
+select,
+textarea,
+button {
+
+	&:focus {
+
+		outline: none;
+	}
+}

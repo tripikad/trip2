@@ -1,0 +1,50 @@
+.c-header {
+
+    position: absolute;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+    .c-header__search {
+
+        position: absolute;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 80%;
+        margin-top: 18px;
+        margin-left: 12px;
+
+        @include respond-to(tablet-portrait) {
+
+            width: 60%;
+        }
+
+        @include respond-to(tablet) {
+
+            width: auto;
+        }
+
+        @include respond-to(desktop) {
+
+            margin-left: 36px;
+        }
+    }
+
+    .c-header__nav {
+
+        margin-top: 9px;
+        margin-right: 12px;
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        @include respond-to(desktop) {
+
+            margin-right: 36px;
+        }
+    }

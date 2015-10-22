@@ -13,14 +13,21 @@ gulp.task('sass', function() {
         './node_modules/susy/sass/_susy.scss',
         './node_modules/breakpoint-sass/stylesheets/_breakpoint.scss',
         './node_modules/selectize/dist/css/selectize.css',
-        './resources/assets/sass/**/*.scss',
-
+        './resources/assets/sass/base/_base.mixins.scss',
+        './resources/assets/sass/base/_base.colors.scss',
+        './resources/assets/sass/base/_base.layout.scss',
+        './resources/assets/sass/base/_base.typography.scss',
+        './resources/assets/sass/base/_base.scss',
+        './resources/assets/sass/**/_*.scss',
     ])
     .pipe(concat('main.scss'))
-    .pipe(sass({includePaths: [
-        './node_modules/susy/sass',
-        './node_modules/breakpoint-sass/stylesheets',
-    ]}))
+    .pipe(sass({
+        includePaths: [
+            './node_modules/susy/sass',
+            './node_modules/breakpoint-sass/stylesheets',
+        ],
+        errLogToConsole: true
+    }))
     .pipe(autoprefixer({
         browsers: ['last 2 versions'],
         cascade: false

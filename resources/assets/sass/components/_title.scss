@@ -1,0 +1,14 @@
+.c-title {
+
+    @include color-modifiers;
+
+    font-family: $font-primary;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+
+    &.m-small {
+
+        font-size: $font-size-tiny;
+    }
+}
