@@ -34,13 +34,11 @@
         text-decoration: none;
     }
 
-
         .c-card__content {
 
             @include vertically-center-children;
 
             flex-direction: column;
-
             position: relative;
             overflow: hidden;
             height: 100%;
