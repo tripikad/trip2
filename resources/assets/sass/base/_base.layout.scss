@@ -1,8 +1,13 @@
 $breakpoint-tablet-portrait: 560px;
+$container-tablet-portrait: 100%;
 $breakpoint-tablet: 1000px;
+$container-tablet: 100%;
 $breakpoint-desktop: 1200px;
+$container-desktop: 1152px;
 $breakpoint-desktop-medium: 1440px;
+$container-desktop-medium: 1248px;
 $breakpoint-desktop-large: 1520px;
+$container-desktop-large: 1344px;
 
 @include add-breakpoint('tablet-portrait', $breakpoint-tablet-portrait);
 @include add-breakpoint('tablet', $breakpoint-tablet);
@@ -60,11 +65,11 @@ $susy: (
 
 		@include respond-to(desktop) {
 
-			@include container(1152px);
+			@include container($container-desktop);
 
 			@if $value == 'narrow' {
 
-				padding: 0 84px;
+				padding: 0 $container-desktop/28*2;
 			} @else {
 
 				padding: 0;
@@ -73,11 +78,11 @@ $susy: (
 
 		@include respond-to(desktop-medium) {
 
-			@include container(1248px);
+			@include container($container-desktop-medium);
 
 			@if $value == 'narrow' {
 
-				padding: 0 90px;
+				padding: 0 $container-desktop-medium/28*2;
 			} @else {
 
 				padding: 0;
@@ -86,11 +91,11 @@ $susy: (
 
 		@include respond-to(desktop-large) {
 
-			@include container(1344px);
+			@include container($container-desktop-large);
 
 			@if $value == 'narrow' {
 
-				padding: 0 96px;
+				padding: 0 $container-desktop-large/28*2;
 			} @else {
 
 				padding: 0;
