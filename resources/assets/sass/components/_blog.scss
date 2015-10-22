@@ -1,18 +1,18 @@
-.c-travel-letter {}
+.c-blog {}
 
-    .c-travel-letter__image-link {
+    .c-blog__image-link {
 
         display: block;
     }
 
-        .c-travel-letter__image {
+        .c-blog__image {
 
             display: block;
             max-width: 100%;
             height: auto;
         }
 
-    .c-travel-letter__title {
+    .c-blog__title {
 
         font-size: $font-size-larger;
         font-weight: $font-weight-bold;
@@ -21,13 +21,13 @@
         padding: 24px;
     }
 
-        .c-travel-letter__title-link {
+        .c-blog__title-link {
 
             color: $color-text-black;
             text-decoration: none;
         }
 
-    .c-travel-letter__profile {
+    .c-blog__profile {
 
         justify-content: center;
     }
