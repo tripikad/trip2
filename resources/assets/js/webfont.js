@@ -7,4 +7,9 @@
     trial.src = protocol + path;
     var head = document.getElementsByTagName('head')[0];
     head.appendChild(trial);
+    $('#mfPreviewBar').css({
+        'z-index': '100000',
+        'position': 'fixed'
+    });
 })();
+

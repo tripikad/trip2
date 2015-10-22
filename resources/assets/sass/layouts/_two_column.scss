@@ -1,0 +1,26 @@
+.l-two-column {
+    
+    @include wrap('narrow');
+
+    &__left {
+
+        @include respond-to(tablet) {
+
+            @include span(16 of 24);
+    
+        }
+        
+    }
+
+    &__left {
+
+        @include respond-to(tablet) {
+
+            @include span(6 of 24 at 2);
+    
+        }
+        
+    }
+
+}
+

@@ -1,8 +1,8 @@
-@extends('layouts.main')
+@extends('layouts.one_column')
 
 @section('title', 'Styleguide')
 
-@section('content')
+@section('content.content')
 
 <div class="component-styleguide">
 
