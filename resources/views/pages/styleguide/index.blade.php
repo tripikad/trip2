@@ -4,25 +4,27 @@
 
 @section('content.one')
 
-<div class="component-styleguide">
+<div class="c-styleguide">
 
 @if (count($components)) 
 
     @foreach($components as $component)
 
-        <mark>{{ $component['title'] }}</mark>
+        <div class="c-styleguide__component">
 
-        <div class="row">
-
-            <div class="col-md-6">
+            <div class="left">
 
                 <p>{!! $component['description'] !!}</p>
                 
-                <pre>{{ str_replace('@', '&#64;', htmlentities($component['code'])) }}</pre>
+                <pre>// {{ $component['title'] }}
+
+{{ str_replace('@', '&#64;', htmlentities($component['code'])) }}
+
+                </pre>
                         
             </div>
 
-            <div class="col-md-5 col-md-offset-1">
+            <div class="right">
 
                 @if ($component['title'] == 'views/component/icon.blade.php')
 

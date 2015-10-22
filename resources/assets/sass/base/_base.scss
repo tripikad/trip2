@@ -80,3 +80,21 @@ button {
 		outline: none;
 	}
 }
+
+pre {
+
+	padding: $spacer / 2;
+	font-size: $font-size-small;
+	overflow: auto;
+	word-wrap: normal;
+	background: $color-fill-neutral-light;
+	border-radius: $spacer / 4;
+}
+
+code {
+
+	background: $color-fill-neutral-light;
+	border-radius: $spacer / 4;
+
+}
+
