@@ -7,14 +7,10 @@ code: |
     @include('component.row', [
         'image' => \App\Image::getRandom(),
         'image_link' => '',
-        'preheading' => view('component.label', [
-            'title' => 'Label'
-        ]),
+        'preheading' => 'Preheading',
         'heading' => 'This is heading',
         'heading_link' => '',
-        'postheading' => view('component.label', [
-            'title' => 'Label'
-        ]),
+        'postheading' => 'Postheading',
         'actions' => view('component.actions', [
             'actions' => [
                 ['route' => '', 'title' => 'This is first action'],
