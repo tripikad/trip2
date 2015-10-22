@@ -1,5 +1,3 @@
-
-
 <div
     class="c-masthead"
     style="background-image: url({{
@@ -25,3 +23,11 @@
         @yield('masthead.search')
     </div>
 </div>
+
+@yield('header1.left')
+@yield('header1.top')
+@yield('header1.bottom')
+@yield('header1.right')
+
+@yield('header2.content')
+@yield('header3.content')

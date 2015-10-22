@@ -18,13 +18,3 @@
         </nav>
     </div>
 </header>
-
-@yield('title')
-
-@yield('header1.left')
-@yield('header1.top')
-@yield('header1.bottom')
-@yield('header1.right')
-
-@yield('header2.content')
-@yield('header3.content')

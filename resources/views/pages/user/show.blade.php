@@ -1,4 +1,4 @@
-@extends('layouts.medium')
+@extends('layouts.one_column')
 
 @section('title')
 
@@ -72,7 +72,7 @@
 
 @stop
 
-@section('content.medium')
+@section('content.one')
 
     <div class="utils-padding-bottom text-center">
 

@@ -1,0 +1,15 @@
+@extends('layouts.main')
+
+@section('content')
+
+@include('component.masthead', [
+    'modifiers' => 'm-search'
+])
+
+<div class="l-one-column">
+    
+    @yield('content.one')
+
+</div>
+
+@stop

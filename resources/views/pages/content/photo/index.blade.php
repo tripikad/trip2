@@ -1,4 +1,4 @@
-@extends('layouts.medium')
+@extends('layouts.one_column')
 
 @section('title')
     
@@ -21,7 +21,7 @@
 
 @stop
 
-@section('content.medium')
+@section('content.one')
 
     @foreach ($contents as $content)
 

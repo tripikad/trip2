@@ -1,5 +1,3 @@
-// $('input[type=submit]').hide();
-
 $('select[name=destination]').selectize({
     onChange: function(value) {
         $('input[type=submit]').click();

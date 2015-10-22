@@ -1,10 +1,10 @@
-@extends('layouts.medium')
+@extends('layouts.one_column')
 
 @section('title')
     {{ trans("content.$type.index.title") }}
 @stop
 
-@section('content.medium')
+@section('content.one')
 
     <div class="utils-border-bottom 
         @if (! $content->status)

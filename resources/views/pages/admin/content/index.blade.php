@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.one_column')
 
 @section('title')
     {{ trans('admin.content.index.title') }}
@@ -13,7 +13,7 @@
         
 @stop
 
-@section('content')
+@section('content.one')
     
     @foreach ($contents as $content)
 

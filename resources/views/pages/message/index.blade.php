@@ -1,4 +1,4 @@
-@extends('layouts.medium')
+@extends('layouts.one_column')
 
 @section('title')
     {{ trans('message.index.title', ['user' => $user->name]) }}
@@ -22,7 +22,7 @@
 
 @stop
 
-@section('content.medium')
+@section('content.one')
 
 @if (count($user->messages()))    
 
