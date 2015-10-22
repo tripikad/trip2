@@ -1,10 +1,10 @@
-@extends('layouts.medium')
+@extends('layouts.one_column')
 
 @section('title')
     {{ trans('comment.edit.title') }}
 @stop
 
-@section('content.medium')
+@section('content.one')
     
     {!! Form::model($comment, array(
         'url' => 'comment/' . $comment->id,

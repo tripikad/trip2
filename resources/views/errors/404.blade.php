@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.one_column')
 
 @section('title')
 
@@ -6,7 +6,7 @@
 
 @stop
 
-@section('content')
+@section('content.one')
 
 <div class="utils-padding-bottom">
     

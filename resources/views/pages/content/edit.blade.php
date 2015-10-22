@@ -1,10 +1,10 @@
-@extends('layouts.medium')
+@extends('layouts.one_column')
 
 @section('title')
     {{ trans("content.$mode.title") }}
 @stop
 
-@section('content.medium')
+@section('content.one')
     
     {!! Form::model(isset($content) ? $content : null, [
         'url' => $url,

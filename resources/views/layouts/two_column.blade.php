@@ -2,11 +2,13 @@
 
 @section('content')
 
+@include('component.masthead')
+
 <div class="l-two-column">
     
     <div class="l-two-column__left">
 
-        @yield('content.left')
+        @yield('content.one')
 
     </div>
 
@@ -17,7 +19,7 @@
             'height' => 300
         ])
 
-        @yield('content.right')
+        @yield('content.two')
 
   </div>
 

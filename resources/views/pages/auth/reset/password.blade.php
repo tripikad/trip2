@@ -1,10 +1,10 @@
-@extends('layouts.narrow')
+@extends('layouts.one_column')
 
 @section('title')
     {{ trans('auth.reset.password.title') }}
 @stop
 
-@section('content.narrow')
+@section('content.one')
 
     {!! Form::open(['route' => 'reset.password.submit']) !!}
 
