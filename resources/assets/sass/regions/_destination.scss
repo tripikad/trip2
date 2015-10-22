@@ -65,12 +65,11 @@
                         padding-bottom: 0;
                         margin-top: -48px;
 
-                        @each $name, $color, $color-dark in $colors {
+                         @each $name, $color, $color-dark in $colors {
 
                             .r-destination__about.m-#{$name} & {
 
-                                   box-shadow: 0 12px 36px rgba($color-dark, 1);
-                                }
+                                box-shadow: 0 12px 36px $color-dark;
                             }
                         }
                     }
@@ -274,4 +273,3 @@
             position: relative;
             z-index: 2;
         }
-
