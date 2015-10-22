@@ -71,7 +71,7 @@
 
             <div class="r-destination__about-column m-last">
 
-                @include('component.destinationinfo',[
+                @include('component.destination.info',[
                     'modifiers' => 'm-yellow',
                     'text' => 'Malta on tihedalt asustatud saareriik Vahemeres, mis koosneb 3 asustatud ja neljast asustamata saartest',
                     'wiki_route' => '#',
