@@ -22,7 +22,7 @@ options:
 --}}
 
 <h2 class="c-title {{ $modifiers or 'm-yellow' }}">
-    @if (isset($link_route)) <a href="{{ $link_route }" class="c-title__link"> @endif
+    @if (isset($link_route)) <a href="{{ $link_route }}" class="c-title__link"> @endif
     {{ $title }}
     @if (isset($link_route)) </a> @endif
 </h2>
