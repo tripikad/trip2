@@ -27,7 +27,7 @@ options:
     </h3>
     <div class="c-news__meta">
         <p class="c-news__meta-date">
-            {{ $date }}
+            @include('component.date.relative', ['date' => $date])
         </p>
     </div>
 </div>
