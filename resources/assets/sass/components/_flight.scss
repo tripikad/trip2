@@ -1,6 +1,6 @@
 .c-flight {
 
-	@include background-color-dark-modifiers;
+	@include color-modifiers-dark(background);
 
 	position: relative;
 	display: block;

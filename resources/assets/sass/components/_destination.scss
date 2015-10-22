@@ -1,6 +1,6 @@
 .c-destination {
 
-	@include background-color-modifiers;
+	@include color-modifiers(background);
 	@include font-smoothing;
 
 	font-family: $font-primary;

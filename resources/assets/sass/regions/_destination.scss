@@ -1,275 +1,277 @@
 .r-destination {
 
-	background: $color-fill-neutral-light;
+    background: $color-fill-neutral-light;
 }
 
-	.r-destination__title-block {
+    .r-destination__title-block {
 
-		> * {
+        > * {
 
-			display: inline-block;
-		}
+            display: inline-block;
+        }
 
-		&.m-distribute {
+        &.m-distribute {
 
-			display: flex;
-			justify-content: space-between;
-			padding: 20px 24px 14px;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 24px 14px;
 
-			> * {
+            > * {
 
-				flex: 0 0 auto;
-			}
-		}
+                flex: 0 0 auto;
+            }
+        }
 
-		&.m-white {
+        &.m-white {
 
-			background: $color-white;
-		}
-	}
+            background: $color-white;
+        }
+    }
 
-	.r-destination__masthead {
+    .r-destination__masthead {
 
-		position: relative;
-	}
+        position: relative;
+    }
 
-	.r-destination__about {
+    .r-destination__about {
 
-		@include background-color-modifiers;
+        @include color-modifiers(background);
 
-		padding-bottom: 24px;
+        padding-bottom: 24px;
 
-		@include respond-to(tablet) {
+        @include respond-to(tablet) {
 
-			padding-bottom: 288px;
-		}
-	}
+            padding-bottom: 288px;
+        }
+    }
 
-		.r-destination__about-wrap {
+        .r-destination__about-wrap {
 
-			@include wrap;
+            @include wrap;
 
-			position: relative;
-		}
+            position: relative;
+        }
 
-			.r-destination__about-column {
+            .r-destination__about-column {
 
-				&.m-first {
+                &.m-first {
 
-					padding-bottom: 48px;
+                    padding-bottom: 48px;
 
-					@include respond-to(tablet) {
+                    @include respond-to(tablet) {
 
-						@include span(8 of 28);
+                        @include span(8 of 28);
 
-						padding-bottom: 0;
-						margin-top: -48px;
+                        padding-bottom: 0;
+                        margin-top: -48px;
 
-						.r-destination__about.m-red & {box-shadow: 0 12px 36px rgba($brand-red-dark, 1);}
-						.r-destination__about.m-blue & {box-shadow: 0 12px 36px rgba($brand-blue-dark, 1);}
-						.r-destination__about.m-green & {box-shadow: 0 12px 36px rgba($brand-green-dark, 1);}
-						.r-destination__about.m-yellow & {box-shadow: 0 12px 36px rgba($brand-yellow-dark, 1);}
-						.r-destination__about.m-orange & {box-shadow: 0 12px 36px rgba($brand-orange-dark, 1);}
-						.r-destination__about.m-purple & {box-shadow: 0 12px 36px rgba($brand-purple-dark, 1);}
-					}
-				}
+                        @each $name, $color, $color-dark in $colors {
 
-				&.m-last {
+                            .r-destination__about.m-#{$name} & {
 
-					position: relative;
-					z-index: 3;
+                                   box-shadow: 0 12px 36px rgba($color-dark, 1);
+                                }
+                            }
+                        }
+                    }
+                }
 
-					@include respond-to(tablet) {
+                &.m-last {
 
-						@include span(8 of 28 at 3);
-						padding-top: 48px;
-					}
-				}
-			}
+                    position: relative;
+                    z-index: 3;
 
-			.r-destination__about-map {
+                    @include respond-to(tablet) {
 
-				position: absolute;
-				z-index: 2;
-				right: 0;
-				top: -60px;
-				display: none;
+                        @include span(8 of 28 at 3);
+                        padding-top: 48px;
+                    }
+                }
+            }
 
-				@include respond-to(tablet) {
+            .r-destination__about-map {
 
-					display: block;
-				}
+                position: absolute;
+                z-index: 2;
+                right: 0;
+                top: -60px;
+                display: none;
 
-				@include respond-to(desktop-large) {
+                @include respond-to(tablet) {
 
-					right: -48px;
-				}
-			}
+                    display: block;
+                }
 
-	.r-destination__content {
+                @include respond-to(desktop-large) {
 
-		padding-bottom: 24px;
-		padding-top: 24px;
-		background: $color-white;
+                    right: -48px;
+                }
+            }
 
-		@include respond-to(tablet) {
+    .r-destination__content {
 
-			margin-top: -240px;
-			margin-bottom: 96px;
-			padding-top: 0;
-			background: none;
-		}
-	}
+        padding-bottom: 24px;
+        padding-top: 24px;
+        background: $color-white;
 
-		.r-destination__content-wrap {
+        @include respond-to(tablet) {
 
-			@include wrap;
-			background: $color-white;
-		}
+            margin-top: -240px;
+            margin-bottom: 96px;
+            padding-top: 0;
+            background: none;
+        }
+    }
 
-			.r-destination__content-title {
+        .r-destination__content-wrap {
 
-				padding-bottom: 24px;
+            @include wrap;
+            background: $color-white;
+        }
 
-				@include respond-to(tablet) {
+            .r-destination__content-title {
 
-					padding-bottom: 36px;
-				}
-			}
+                padding-bottom: 24px;
 
-			.r-destination__content-about {
+                @include respond-to(tablet) {
 
-				@include clearfix;
+                    padding-bottom: 36px;
+                }
+            }
 
-				padding-bottom: 24px;
+            .r-destination__content-about {
 
-				@include respond-to(tablet) {
+                @include clearfix;
 
-					padding-bottom: 48px;
-				}
-			}
+                padding-bottom: 24px;
 
-				.r-destination__content-about-column {
+                @include respond-to(tablet) {
 
-					padding-bottom: 48px;
+                    padding-bottom: 48px;
+                }
+            }
 
-					@include respond-to(tablet) {
+                .r-destination__content-about-column {
 
-						padding-bottom: 0;
-					}
+                    padding-bottom: 48px;
 
-					&.m-first {
+                    @include respond-to(tablet) {
 
-						@include respond-to(tablet) {
+                        padding-bottom: 0;
+                    }
 
-							@include span(8 of 28);
-						}
-					}
+                    &.m-first {
 
-					&.m-middle {
+                        @include respond-to(tablet) {
 
-						@include respond-to(tablet) {
+                            @include span(8 of 28);
+                        }
+                    }
 
-							@include span(8 of 28 at 3);
-							padding-top: 48px;
-						}
-					}
+                    &.m-middle {
 
-					&.m-last {
+                        @include respond-to(tablet) {
 
-						padding-bottom: 0;
+                            @include span(8 of 28 at 3);
+                            padding-top: 48px;
+                        }
+                    }
 
-						@include respond-to(tablet) {
+                    &.m-last {
 
-							@include span(6 of 28 at 13);
-							padding-top: 48px;
-						}
-					}
-				}
+                        padding-bottom: 0;
 
-			.r-destination__content-gallery {
+                        @include respond-to(tablet) {
 
-				padding-bottom: 48px;
+                            @include span(6 of 28 at 13);
+                            padding-top: 48px;
+                        }
+                    }
+                }
 
-				@include respond-to(tablet) {
+            .r-destination__content-gallery {
 
-					padding-bottom: 72px;
-				}
-			}
+                padding-bottom: 48px;
 
-			.r-destination__content-news {
+                @include respond-to(tablet) {
 
-				padding-bottom: 48px;
-			}
+                    padding-bottom: 72px;
+                }
+            }
 
-				.r-destination__content-news-wrap {
+            .r-destination__content-news {
 
-					@include wrap('narrow');
-				}
+                padding-bottom: 48px;
+            }
 
-					.r-destination__content-news-column {
+                .r-destination__content-news-wrap {
 
-						&.m-first {
+                    @include wrap('narrow');
+                }
 
-							padding-bottom: 24px;
+                    .r-destination__content-news-column {
 
-							@include respond-to(tablet) {
+                        &.m-first {
 
-								@include span(14 of 24);
+                            padding-bottom: 24px;
 
-								padding-bottom: 0;
-							}
-						}
+                            @include respond-to(tablet) {
 
-						&.m-last {
+                                @include span(14 of 24);
 
-							@include respond-to(tablet) {
+                                padding-bottom: 0;
+                            }
+                        }
 
-								@include span(8 of 24 at 3);
-							}
-						}
-					}
+                        &.m-last {
 
-			.r-destination__content-travel-mates {
+                            @include respond-to(tablet) {
 
-				padding-bottom: 48px;
-			}
+                                @include span(8 of 24 at 3);
+                            }
+                        }
+                    }
 
-				.r-destination__content-travel-mates-wrap {
+            .r-destination__content-travel-mates {
 
-					@include wrap('narrow');
-				}
+                padding-bottom: 48px;
+            }
 
-			.r-destination__content-flights {
+                .r-destination__content-travel-mates-wrap {
 
-				@include respond-to(tablet) {
+                    @include wrap('narrow');
+                }
 
-					position: relative;
-					bottom: -48px;
-				}
-			}
+            .r-destination__content-flights {
 
-				.r-destination__content-flights-wrap {
+                @include respond-to(tablet) {
 
-					@include wrap('narrow');
-				}
+                    position: relative;
+                    bottom: -48px;
+                }
+            }
 
-	.r-destination__footer-promo {
+                .r-destination__content-flights-wrap {
 
-		display: none;
-		margin-bottom: -48px;
-		background: $color-fill-neutral-light;
+                    @include wrap('narrow');
+                }
 
-		@include respond-to(tablet) {
+    .r-destination__footer-promo {
 
-			display: block;
-		}
-	}
+        display: none;
+        margin-bottom: -48px;
+        background: $color-fill-neutral-light;
 
-		.r-destination__footer-promo-wrap {
+        @include respond-to(tablet) {
 
-			@include wrap('narrow');
-			position: relative;
-			z-index: 2;
-		}
+            display: block;
+        }
+    }
+
+        .r-destination__footer-promo-wrap {
+
+            @include wrap('narrow');
+            position: relative;
+            z-index: 2;
+        }
 

@@ -7,7 +7,7 @@
 
     .c-tags__item {
 
-        @include background-color-modifiers;
+        @include color-modifiers(background);
 
         border-radius: 12px;
         display: inline-block;

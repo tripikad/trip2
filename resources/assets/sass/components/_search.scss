@@ -64,51 +64,14 @@
         	}
         }
 
-        .c-search.m-active.m-red & {
+        @each $name, $color, $color-dark in $colors {
 
-            svg {
+            .c-search.m-active.m-#{$name} & {
 
-            	fill: $brand-red;
-            }
-        }
+                svg{
 
-        .c-search.m-active.m-blue & {
-
-            svg {
-
-            	fill: $brand-blue;
-            }
-        }
-
-        .c-search.m-active.m-green & {
-
-            svg {
-
-            	fill: $brand-green;
-            }
-        }
-
-        .c-search.m-active.m-orange & {
-
-            svg {
-
-            	fill: $brand-orange;
-            }
-        }
-
-        .c-search.m-active.m-purple & {
-
-            svg {
-
-            	fill: $brand-purple;
-            }
-        }
-
-        .c-search.m-active.m-yellow & {
-
-            svg {
-
-            	fill: $brand-yellow;
+                   fill: $color;
+                }
             }
         }
     }
@@ -224,35 +187,13 @@
 				text-transform: uppercase;
 				position: relative;
 
-				.c-search.m-red & {
+                @each $name, $color, $color-dark in $colors {
 
-					color: $brand-red;
-				}
+                    .c-search.m-#{$name} & {
 
-				.c-search.m-blue & {
-
-					color: $brand-blue;
-				}
-
-				.c-search.m-green & {
-
-					color: $brand-green;
-				}
-
-				.c-search.m-orange & {
-
-					color: $brand-orange;
-				}
-
-				.c-search.m-purple & {
-
-					color: $brand-purple;
-				}
-
-				.c-search.m-yellow & {
-
-					color: $brand-yellow;
-				}
+                       color: $color;
+                    }
+                }
 			}
 
 				.c-search__results-sublist {

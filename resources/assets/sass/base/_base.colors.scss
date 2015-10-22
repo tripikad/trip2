@@ -30,37 +30,49 @@ $colors: ('yellow' $brand-yellow $brand-yellow-dark),
          ('orange' $brand-orange $brand-orange-dark);
 
 
-@mixin background-color-modifiers {
+@mixin color-modifiers($property: color) {
 
 	@each $name, $color, $color-dark in $colors {
 
 		&.m-#{$name} {
 
-			background: $color;
+			#{$property}: $color;
 		}
 	}
 }
 
-@mixin background-color-dark-modifiers {
+@mixin color-modifiers-dark($property: color) {
 
-	@each $name, $color, $color-dark in $colors {
+    @each $name, $color, $color-dark in $colors {
 
-		&.m-#{$name} {
+        &.m-#{$name} {
 
-			background: $color-dark;
-		}
-	}
+            #{$property}: $color-dark;
+        }
+    }
 }
 
-@mixin color-modifiers {
 
-	@each $name, $color, $color-dark in $colors {
+@mixin color-modifiers-and($property: color)  {
 
-		&.m-#{$name} {
+    @each $name, $color, $color-dark in $colors {
 
-			color: $color;
-		}
-	}
+        .m-#{$name} & {
+
+            #{$property}: $color;
+        }
+    }
+}
+
+@mixin color-modifiers-dark-and($property: color)  {
+
+    @each $name, $color, $color-dark in $colors {
+
+        .m-#{$name} & {
+
+            #{$property}: $color-dark;
+        }
+    }
 }
 
 
