@@ -42,9 +42,6 @@
             'heading' => $content->title,
             'heading_link' => route('content.show', [$content->type, $content->id]),
             'description' => view('component.content.description', ['content' => $content]),
-            'extra' => view('component.content.number', [
-                'number' => count($content->comments)
-            ]),
         ])
         
         </div>
