@@ -33,11 +33,7 @@
             'image_link' => route('user.show', [$content->user]),
             'heading' => $content->title,
             'heading_link' => route('content.show', [$content->type, $content->id]),
-            'description' => view('component.content.description', ['content' => $content]),
-            'extra' => view('component.number', [
-                'number' => count($content->comments),
-                'options' => '-border'
-            ])
+            'description' => view('component.content.description', ['content' => $content])
         ])
         
         </div>

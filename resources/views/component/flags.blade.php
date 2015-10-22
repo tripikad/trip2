@@ -13,10 +13,7 @@
         
         @endif 
 
-        @include('component.number', [
-            'number' => $flags['good']['value'],
-            'options' => '-small -good' . (! $flags['good']['value'] ? ' -neutral' : '')
-        ])
+            {{ $flags['good']['value'] }}
 
         @if ($flags['good']['flaggable'])
 
@@ -39,10 +36,7 @@
 
         @endif
 
-        @include('component.number', [
-            'number' => $flags['bad']['value'],
-            'options' => '-small -bad' . (! $flags['bad']['value'] ? ' -neutral' : '')
-        ])
+            {{ $flags['bad']['value'] }}
 
         @if ($flags['bad']['flaggable'])
 

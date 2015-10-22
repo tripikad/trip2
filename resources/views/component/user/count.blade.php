@@ -6,14 +6,8 @@
         utils-padding-right 
         text-center
     ">
-    
-        @include('component.number', [
-            'number' => $content_count,
-            'text' => 'Posts',
-            'options' => '-large -neutral'
-        ])
 
-        <p>{{ trans('user.show.count.content.title') }}</p>
+        <p>{{ $content_count }} {{ trans('user.show.count.content.title') }}</p>
 
     </div>
 
@@ -23,12 +17,7 @@
         text-center
     ">
     
-        @include('component.number', [
-            'number' => $comment_count,
-            'options' => '-large -neutral'
-        ])
-
-        <p>{{ trans('user.show.count.comment.title') }}</p>
+        <p>{{ $comment_count }} {{ trans('user.show.count.comment.title') }}</p>
     
     </div>
 
