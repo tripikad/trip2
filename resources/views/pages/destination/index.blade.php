@@ -53,14 +53,14 @@
 
                 </div>
 
-                @include('component.flight', [
+                @include('component.card', [
                     'modifiers' => 'm-yellow m-small',
                     'route' => '#',
                     'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                     'image' => \App\Image::getRandom(),
                 ])
 
-                @include('component.flight', [
+                @include('component.card', [
                     'modifiers' => 'm-yellow m-small',
                     'route' => '#',
                     'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
@@ -408,7 +408,7 @@
 
                         <div class="c-columns__item">
 
-                            @include('component.flight', [
+                            @include('component.card', [
                                 'route' => '#',
                                 'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                                 'image' => \App\Image::getRandom()
@@ -417,7 +417,7 @@
 
                         <div class="c-columns__item">
 
-                            @include('component.flight', [
+                            @include('component.card', [
                                 'route' => '#',
                                 'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                                 'image' => \App\Image::getRandom()
@@ -426,7 +426,7 @@
 
                         <div class="c-columns__item">
 
-                            @include('component.flight', [
+                            @include('component.card', [
                                 'route' => '#',
                                 'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                                 'image' => \App\Image::getRandom()
