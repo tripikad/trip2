@@ -1,33 +1,33 @@
 .c-travel-letter {}
 
-	.c-travel-letter__image-link {
+    .c-travel-letter__image-link {
 
-		display: block;
-	}
+        display: block;
+    }
 
-		.c-travel-letter__image {
+        .c-travel-letter__image {
 
-			display: block;
-			max-width: 100%;
-			height: auto;
-		}
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
 
-	.c-travel-letter__title {
+    .c-travel-letter__title {
 
-		font-size: $font-size-larger;
-		font-weight: $font-weight-bold;
-		text-align: center;
-		line-height: 1.2;
-		padding: 24px;
-	}
+        font-size: $font-size-larger;
+        font-weight: $font-weight-bold;
+        text-align: center;
+        line-height: 1.2;
+        padding: 24px;
+    }
 
-		.c-travel-letter__title-link {
+        .c-travel-letter__title-link {
 
-			color: $color-text-black;
-			text-decoration: none;
-		}
+            color: $color-text-black;
+            text-decoration: none;
+        }
 
-	.c-travel-letter__profile {
+    .c-travel-letter__profile {
 
-		justify-content: center;
-	}
+        justify-content: center;
+    }

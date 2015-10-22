@@ -1,60 +1,60 @@
 .c-flight {
 
-	@include color-modifiers-dark(background);
+    @include color-modifiers-dark(background);
 
-	position: relative;
-	display: block;
-	height: 192px;
-	width: 100%;
-	background: $color-fill-neutral;
+    position: relative;
+    display: block;
+    height: 192px;
+    width: 100%;
+    background: $color-fill-neutral;
 
-	&.m-small {
+    &.m-small {
 
-		height: 144px;
-	}
+        height: 144px;
+    }
 }
 
-	.c-flight__title {
+    .c-flight__title {
 
-		@include vertical-center;
+        @include vertical-center;
 
-		color: $color-white;
-		font-size: $font-size-large;
-		font-weight: $font-weight-bold;
-		line-height: 1.15;
-		text-align: center;
-		position: absolute;
-		z-index: 2;
-		width: 100%;
-		padding: 0 48px;
-	}
+        color: $color-white;
+        font-size: $font-size-large;
+        font-weight: $font-weight-bold;
+        line-height: 1.15;
+        text-align: center;
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        padding: 0 48px;
+    }
 
-	.c-flight__image-wrap {
+    .c-flight__image-wrap {
 
-		position: relative;
-		overflow: hidden;
-		height: 100%;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
 
-		&:before {
+        &:before {
 
-			content: '';
-			position: absolute;
-			z-index: 1;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: rgba(0, 0, 0, 0.2);
-		}
-	}
+            content: '';
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+    }
 
-	.c-flight__image {
+    .c-flight__image {
 
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		max-width: 100%;
-		min-height: 100%;
-		opacity: 0.8;
-		transform: translate(-50%, -50%);
-	}
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        max-width: 100%;
+        min-height: 100%;
+        opacity: 0.8;
+        transform: translate(-50%, -50%);
+    }

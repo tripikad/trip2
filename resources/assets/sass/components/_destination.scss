@@ -1,37 +1,37 @@
 .c-destination {
 
-	@include color-modifiers(background);
-	@include font-smoothing;
+    @include color-modifiers(background);
+    @include font-smoothing;
 
-	font-family: $font-primary;
-	line-height: 1;
+    font-family: $font-primary;
+    line-height: 1;
 }
 
-	.c-destination__header {
+    .c-destination__header {
 
-		padding: 21px 24px 20px;
+        padding: 21px 24px 20px;
 
-		a {
+        a {
 
-			color: $color-white;
-			text-decoration: none;
+            color: $color-white;
+            text-decoration: none;
 
-			&:hover {
+            &:hover {
 
-				text-decoration: none;
-			}
-		}
-	}
+                text-decoration: none;
+            }
+        }
+    }
 
-	.c-destination__title {
+    .c-destination__title {
 
-		color: $color-white;
-		font-size: $font-size-larger;
-		font-weight: $font-weight-medium;
-	}
+        color: $color-white;
+        font-size: $font-size-larger;
+        font-weight: $font-weight-medium;
+    }
 
-	.c-destination__subtitle {
+    .c-destination__subtitle {
 
-		font-weight: $font-weight-medium;
-		margin-top: 9px;
-	}
+        font-weight: $font-weight-medium;
+        margin-top: 9px;
+    }

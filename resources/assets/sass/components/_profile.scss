@@ -1,95 +1,95 @@
 .c-profile {
 
-	display: flex;
-	flex-flow: row wrap;
-	align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
 
-	&.m-center {
+    &.m-center {
 
-		justify-content: center;
-	}
+        justify-content: center;
+    }
 
-	&.m-mini {
+    &.m-mini {
 
-		display: block;
-	}
+        display: block;
+    }
 }
 
-	.c-profile__image-wrap {
+    .c-profile__image-wrap {
 
-		flex: 0 1 72px;
+        flex: 0 1 72px;
 
-		.c-profile.m-small & {
+        .c-profile.m-small & {
 
-			flex: 0 1 48px;
-		}
+            flex: 0 1 48px;
+        }
 
-		.c-profile.m-mini & {
+        .c-profile.m-mini & {
 
-			position: relative;
-			display: block;
-			width: 36px;
-		}
+            position: relative;
+            display: block;
+            width: 36px;
+        }
 
-		.c-profile.m-micro & {
+        .c-profile.m-micro & {
 
-			display: inline-block;
-			width: 24px;
-		}
-	}
+            display: inline-block;
+            width: 24px;
+        }
+    }
 
-		.c-profile__image {
+        .c-profile__image {
 
-			display: block;
-			height: 48px;
-			width: 48px;
-			border-radius: 50%;
+            display: block;
+            height: 48px;
+            width: 48px;
+            border-radius: 50%;
 
-			.c-profile.m-mini &,
-			.c-profile.m-small & {
+            .c-profile.m-mini &,
+            .c-profile.m-small & {
 
-				height: 36px;
-				width: 36px;
-			}
+                height: 36px;
+                width: 36px;
+            }
 
-			.c-profile.m-micro & {
+            .c-profile.m-micro & {
 
-				height: 24px;
-				width: 24px;
-			}
-		}
+                height: 24px;
+                width: 24px;
+            }
+        }
 
-	.c-profile__info {
+    .c-profile__info {
 
-		.c-profile.m-mini &,
-		.c-profile.m-micro & {
+        .c-profile.m-mini &,
+        .c-profile.m-micro & {
 
-			display: none;
-		}
-	}
+            display: none;
+        }
+    }
 
-		.c-profile__title {
+        .c-profile__title {
 
-			color: $color-text-neutral-dark;
-			font-size: $font-size-normal;
-		}
+            color: $color-text-neutral-dark;
+            font-size: $font-size-normal;
+        }
 
-			.c-profile__title-link {
+            .c-profile__title-link {
 
-				color: $color-text-link;
-				text-decoration: none;
-			}
+                color: $color-text-link;
+                text-decoration: none;
+            }
 
-		.c-profile__interests {
+        .c-profile__interests {
 
-			color: $color-text-neutral-dark;
-			font-size: $font-size-small;
-			margin-top: 6px;
+            color: $color-text-neutral-dark;
+            font-size: $font-size-small;
+            margin-top: 6px;
 
-			.c-profile.m-mini &,
-			.c-profile.m-small &,
-			.c-profile.m-micro & {
+            .c-profile.m-mini &,
+            .c-profile.m-small &,
+            .c-profile.m-micro & {
 
-				display: none;
-			}
-		}
+                display: none;
+            }
+        }

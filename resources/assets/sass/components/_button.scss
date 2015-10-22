@@ -1,36 +1,36 @@
 .c-button {
 
-	@include font-smoothing;
+    @include font-smoothing;
 
-	color: $color-white;
-	font-family: $font-primary;
-	font-weight: $font-weight-medium;
-	text-decoration: none;
-	text-align: center;
-	display: inline-block;
-	padding: 12px 24px;
-	background: $color-fill-success;
-	border-radius: 3px;
+    color: $color-white;
+    font-family: $font-primary;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding: 12px 24px;
+    background: $color-fill-success;
+    border-radius: 3px;
 
-	&:hover {
+    &:hover {
 
-		background: $color-fill-success-dark;
-	}
+        background: $color-fill-success-dark;
+    }
 
-	&.m-secondary {
+    &.m-secondary {
 
-		color: $color-text-link;
-		background: $color-white;
-		box-shadow: 0 1px 1px rgba($color-fill-neutral, 0.75);
-	}
+        color: $color-text-link;
+        background: $color-white;
+        box-shadow: 0 1px 1px rgba($color-fill-neutral, 0.75);
+    }
 
-	&.m-block {
+    &.m-block {
 
-		display: block;
-	}
+        display: block;
+    }
 
-	&.m-big {
+    &.m-big {
 
-		padding: 18px 36px;
-	}
+        padding: 18px 36px;
+    }
 }

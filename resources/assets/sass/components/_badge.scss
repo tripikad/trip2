@@ -1,21 +1,21 @@
 .c-badge {
 
-	color: $brand-yellow;
-	font-size: $font-size-small;
-	line-height: 26px;
-	text-align: center;
-	position: absolute;
-	bottom: -6px;
-	right: -12px;
-	display: inline-block;
-	height: 22px;
-	min-width: 26px;
-	border-radius: 20px;
-	background: $color-white;
+    color: $brand-yellow;
+    font-size: $font-size-small;
+    line-height: 26px;
+    text-align: center;
+    position: absolute;
+    bottom: -6px;
+    right: -12px;
+    display: inline-block;
+    height: 22px;
+    min-width: 26px;
+    border-radius: 20px;
+    background: $color-white;
 
-	&.m-inverted {
+    &.m-inverted {
 
-		color: $color-white;
-		background: $brand-yellow;
-	}
+        color: $color-white;
+        background: $brand-yellow;
+    }
 }

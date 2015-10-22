@@ -1,20 +1,20 @@
 .c-search {
 
-	&.m-small {
+    &.m-small {
 
-		width: 100%;
-		position: relative;
+        width: 100%;
+        position: relative;
 
-		@include respond-to(tablet) {
+        @include respond-to(tablet) {
 
-			width: 412px;
-		}
-	}
+            width: 412px;
+        }
+    }
 }
 
 .c-search__form {
 
-	position: relative;
+    position: relative;
 }
 
     .c-search__form-icon {
@@ -29,39 +29,39 @@
 
         @include respond-to(tablet) {
 
-        	left: 20px;
-	        height: 48px;
-	        width: 48px;
+            left: 20px;
+            height: 48px;
+            width: 48px;
         }
 
         .c-search.m-small & {
 
-        	left: 12px;
-	        height: 24px;
-	        width: 24px;
+            left: 12px;
+            height: 24px;
+            width: 24px;
         }
 
         svg {
 
-			fill: $color-white;
+            fill: $color-white;
 
-			margin: 3px;
-    		width: 18px;
-    		height: 18px;
+            margin: 3px;
+            width: 18px;
+            height: 18px;
 
-			@include respond-to(tablet) {
+            @include respond-to(tablet) {
 
-				margin: 8px;
-	        	width: 32px;
-	        	height: 32px;
-			}
+                margin: 8px;
+                width: 32px;
+                height: 32px;
+            }
 
-        	.c-search.m-small & {
+            .c-search.m-small & {
 
-				margin: 3px;
-        		width: 18px;
-        		height: 18px;
-        	}
+                margin: 3px;
+                width: 18px;
+                height: 18px;
+            }
         }
 
         @each $name, $color, $color-dark in $colors {
@@ -76,35 +76,35 @@
         }
     }
 
-	.c-search__form-input {
+    .c-search__form-input {
 
-		color: $color-white;
-		font-size: $font-size-normal;
-		font-weight: $font-weight-medium;
-		width: 100%;
-		padding: 12px 12px 9px 48px;
-		background: rgba($color-white, 0.2);
-		border: none;
-		box-shadow: 0 18px 48px rgba($shadow-dark, 0.2);
+        color: $color-white;
+        font-size: $font-size-normal;
+        font-weight: $font-weight-medium;
+        width: 100%;
+        padding: 12px 12px 9px 48px;
+        background: rgba($color-white, 0.2);
+        border: none;
+        box-shadow: 0 18px 48px rgba($shadow-dark, 0.2);
 
-		@include respond-to(tablet) {
+        @include respond-to(tablet) {
 
-			font-size: $font-size-larger;
-			padding: 18px 24px 12px 88px;
-		}
+            font-size: $font-size-larger;
+            padding: 18px 24px 12px 88px;
+        }
 
-		.c-search.m-small & {
+        .c-search.m-small & {
 
-			font-size: $font-size-normal;
-			padding: 9px 12px 6px 48px;
-			background: none;
-			box-shadow: none;
-		}
+            font-size: $font-size-normal;
+            padding: 9px 12px 6px 48px;
+            background: none;
+            box-shadow: none;
+        }
 
-		&::input-placeholder {
+        &::input-placeholder {
 
-			color: $color-white;
-		}
+            color: $color-white;
+        }
 
         .c-search.m-active & {
 
@@ -116,76 +116,76 @@
                 color: $color-text-neutral;
             }
         }
-	}
+    }
 
 .c-search__results {
 
-	position: absolute;
-	z-index: 1000;
-	display: none;
-	width: 100%;
-	background: $color-fill-neutral-light;
-	border-top: 1px solid $color-fill-neutral;
-	box-shadow: 0 18px 48px rgba($shadow-dark, 0.2);
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    width: 100%;
+    background: $color-fill-neutral-light;
+    border-top: 1px solid $color-fill-neutral;
+    box-shadow: 0 18px 48px rgba($shadow-dark, 0.2);
 
-	.c-search.m-active & {
+    .c-search.m-active & {
 
-		display: block;
-	}
+        display: block;
+    }
 }
 
-	.c-search__results-content {
+    .c-search__results-content {
 
-		overflow: scroll;
-		height: 384px;
-		padding-bottom: 24px;
-	}
+        overflow: scroll;
+        height: 384px;
+        padding-bottom: 24px;
+    }
 
-		.c-search__results-list {
+        .c-search__results-list {
 
-			@include clear-list;
+            @include clear-list;
 
-			position: relative;
-			margin: 12px 0 0 0;
-			padding: 12px 24px 6px 88px;
-			border-bottom: 1px solid $color-fill-neutral;
+            position: relative;
+            margin: 12px 0 0 0;
+            padding: 12px 24px 6px 88px;
+            border-bottom: 1px solid $color-fill-neutral;
 
-			.c-search.m-small & {
+            .c-search.m-small & {
 
-				margin: 6px 0 0 0;
-				padding: 6px 12px 0 48px;
-			}
+                margin: 6px 0 0 0;
+                padding: 6px 12px 0 48px;
+            }
 
-			&:last-child {
+            &:last-child {
 
-				border: none;
-			}
+                border: none;
+            }
 
-			&:before {
+            &:before {
 
-				content: '';
-				position: absolute;
-		        top: 0;
-		        left: 20px;
-				display: block;
-		        height: 48px;
-		        width: 48px;
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 20px;
+                display: block;
+                height: 48px;
+                width: 48px;
 
-		        .c-search.m-small & {
+                .c-search.m-small & {
 
-					left: 12px;
-		        	height: 24px;
-		        	width: 24px;
-		        }
-			}
-		}
+                    left: 12px;
+                    height: 24px;
+                    width: 24px;
+                }
+            }
+        }
 
-			.c-search__results-list-item {
+            .c-search__results-list-item {
 
-				font-size: $font-size-tiny;
-				font-weight: $font-weight-bold;
-				text-transform: uppercase;
-				position: relative;
+                font-size: $font-size-tiny;
+                font-weight: $font-weight-bold;
+                text-transform: uppercase;
+                position: relative;
 
                 @each $name, $color, $color-dark in $colors {
 
@@ -194,94 +194,94 @@
                        color: $color;
                     }
                 }
-			}
+            }
 
-				.c-search__results-sublist {
+                .c-search__results-sublist {
 
-					@include clear-list;
+                    @include clear-list;
 
-					margin-top: 18px;
+                    margin-top: 18px;
 
-					.c-search.m-small & {
+                    .c-search.m-small & {
 
-						margin-top: 12px;
-					}
-				}
+                        margin-top: 12px;
+                    }
+                }
 
-					.c-search__results-sublist-item {
+                    .c-search__results-sublist-item {
 
-						font-size: $font-size-medium;
-						font-weight: $font-weight-medium;
-						line-height: 1.5;
-						text-transform: none;
-						margin-bottom: 6px;
+                        font-size: $font-size-medium;
+                        font-weight: $font-weight-medium;
+                        line-height: 1.5;
+                        text-transform: none;
+                        margin-bottom: 6px;
 
-						.c-search.m-small & {
+                        .c-search.m-small & {
 
-							font-size: $font-size-normal;
-						}
+                            font-size: $font-size-normal;
+                        }
 
-						.c-search__results-list.m-forum & {
+                        .c-search__results-list.m-forum & {
 
-							margin-bottom: 12px;
-						}
-					}
+                            margin-bottom: 12px;
+                        }
+                    }
 
-						.c-search__results-link {
+                        .c-search__results-link {
 
-							color: $color-text-link;
-							text-decoration: none;
+                            color: $color-text-link;
+                            text-decoration: none;
 
-							.c-search__results-list.m-forum & {
+                            .c-search__results-list.m-forum & {
 
-								color: $color-text-black;
-								display: flex;
-								align-items: center;
-							}
+                                color: $color-text-black;
+                                display: flex;
+                                align-items: center;
+                            }
 
-							&:hover {
+                            &:hover {
 
-								text-decoration: underline;
-							}
-						}
+                                text-decoration: underline;
+                            }
+                        }
 
-							.c-search__results-link-profile {
+                            .c-search__results-link-profile {
 
-								flex: 0 1 60px;
+                                flex: 0 1 60px;
 
-								.c-search.m-small & {
+                                .c-search.m-small & {
 
-									flex: 0 1 36px;
-								}
-							}
+                                    flex: 0 1 36px;
+                                }
+                            }
 
-							.c-search__results-link-text {
+                            .c-search__results-link-text {
 
-								font-weight: $font-weight-normal;
-								flex: 1;
-							}
+                                font-weight: $font-weight-normal;
+                                flex: 1;
+                            }
 
-	.c-search__results-footer {
+    .c-search__results-footer {
 
-		position: relative;
-		padding: 16px 88px;
-		background: $color-white;
+        position: relative;
+        padding: 16px 88px;
+        background: $color-white;
 
-		.c-search.m-small & {
+        .c-search.m-small & {
 
-			padding: 12px 48px;
-		}
+            padding: 12px 48px;
+        }
 
-		&:before {
+        &:before {
 
-			content: '';
-			position: absolute;
-			top: -54px;
-			left: 0;
-			display: block;
-			width: 100%;
-			height: 54px;
-			background-image: linear-gradient(to bottom, rgba($color-white, 0), rgba($color-white, 1));
-			pointer-events: none;
-		}
-	}
+            content: '';
+            position: absolute;
+            top: -54px;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 54px;
+            background-image: linear-gradient(to bottom, rgba($color-white, 0), rgba($color-white, 1));
+            pointer-events: none;
+        }
+    }

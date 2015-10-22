@@ -1,45 +1,45 @@
 .c-about {
 
-	display: flex;
-	flex-flow: row wrap;
-	padding: 48px 0;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 48px 0;
 
-	@include respond-to(desktop) {
+    @include respond-to(desktop) {
 
-		padding: 48px 0;
-	}
+        padding: 48px 0;
+    }
 }
 
-	.c-about__content {
+    .c-about__content {
 
-		.c-about.m-wide & {
+        .c-about.m-wide & {
 
-			@include respond-to(tablet) {
+            @include respond-to(tablet) {
 
-				flex: 0 1 67%;
-				padding: 0 0 0 72px;
-			}
-		}
-	}
+                flex: 0 1 67%;
+                padding: 0 0 0 72px;
+            }
+        }
+    }
 
-		.c-about__title {
+        .c-about__title {
 
-			font-size: $font-size-large;
-			font-weight: $font-weight-bold;
-			line-height: 1.15;
-			margin-bottom: 12px;
-		}
+            font-size: $font-size-large;
+            font-weight: $font-weight-bold;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
 
-	.c-about__action {
+    .c-about__action {
 
-		padding: 24px 0 0;
+        padding: 24px 0 0;
 
-		.c-about.m-wide & {
+        .c-about.m-wide & {
 
-			@include respond-to(tablet) {
+            @include respond-to(tablet) {
 
-				flex: 0 1 33%;
-				padding: 0 48px;
-			}
-		}
-	}
+                flex: 0 1 33%;
+                padding: 0 48px;
+            }
+        }
+    }
