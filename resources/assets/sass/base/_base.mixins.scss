@@ -23,6 +23,13 @@
 	transform: translateY(-50%);
 }
 
+@mixin vertically-center-children {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @mixin clearfix {
 
 	&:after {
