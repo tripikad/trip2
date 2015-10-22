@@ -15,14 +15,18 @@ code: |
                 'route' => '',
                 'profile' => [
                     'route' => '',
-                    'image' => ''
+                    'image' => '',
                 ],
                 'preheading' => '',
                 'postheading' => '',
-                'extra' => ''
+                'extra' => '',
             ],
         ]
     ])
+
+options:
+
+- m-icon
 
 --}}
 
