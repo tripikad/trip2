@@ -2,7 +2,7 @@
 
 @section('title', 'Styleguide')
 
-@section('content.content')
+@section('content.one')
 
 <div class="component-styleguide">
 
