@@ -18,7 +18,12 @@ code: |
 
 modifiers:
 
-- m-dot
+- m-dot m-red
+- m-dot m-blue
+- m-dot m-green
+- m-dot m-orange
+- m-dot m-yellow
+- m-dot m-purple
 - m-large
 - m-red
 - m-blue

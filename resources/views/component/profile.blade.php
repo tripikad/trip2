@@ -28,10 +28,14 @@ modifiers:
 
         @if (isset($badge))
 
+        <div class="c-profile__badge">
+
 			@include('component.badge', [
 				'modifiers' => $badge['modifiers'],
 				'count' => $badge['count'],
             ])
+
+        </div>
 
 		@endif
 
