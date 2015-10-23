@@ -75,7 +75,11 @@ options:
 
         @if (isset($preheading)) <span>{!! $preheading !!}</span> @endif
 
-        <a href="{{ $heading_link or '' }}" class="c-row__title-link">{{ $heading }}</a>
+        @if (isset($heading_link)) <a href="{{ $heading_link or '' }}" class="c-row__title-link"> @endif
+
+        {{ $heading }}
+
+        @if (isset($heading_link)) </a> @endif
 
         @if (isset( $postheading )) <span>{!! $postheading !!}</span> @endif
 
