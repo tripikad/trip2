@@ -1,5 +1,7 @@
 {{--
 
+title: Title
+
 description: A generic title
 
 code: |

@@ -1,6 +1,6 @@
 {{--
 
-description: Destination component
+title: Destination
 
 code: |
 

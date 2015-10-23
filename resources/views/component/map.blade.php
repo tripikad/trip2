@@ -1,6 +1,8 @@
 {{--
 
-description: Background map
+title: Map
+
+description: An SVG background map
 
 code: |
 

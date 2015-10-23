@@ -1,6 +1,6 @@
 {{--
 
-description: Destination info
+title: Destination info
 
 code: |
 

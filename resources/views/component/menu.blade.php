@@ -1,6 +1,6 @@
 {{--
 
-description: A generic menu
+title: Menu
 
 code: |
 

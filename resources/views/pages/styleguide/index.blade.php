@@ -14,7 +14,10 @@
 
             <div class="left">
 
-                <p style="font-size: 1.5em;">{{ $component['title'] }}</p>
+                <p style="font-size: 1.5em; margin-bottom: 0.5em">
+                    {{ $component['title'] }}
+                </p>
+                
                 <p>{!! $component['description'] !!}</p>
                 
                 <pre>// {{ $component['filepath'] }}

@@ -1,6 +1,6 @@
 {{--
 
-description: Footer Navigation list
+title: Footer Navigation List
 
 code: |
 

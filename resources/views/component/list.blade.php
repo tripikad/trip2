@@ -1,6 +1,6 @@
 {{--
 
-description: List component
+title: List
 
 code: |
 
@@ -9,8 +9,8 @@ code: |
         'items' => [
             [
                 'modifiers' => '',
-                'title' => '',
-                'text' => '',
+                'title' => 'Item 1',
+                'text' => 'Text',
                 'route' => ''
             ],
         ]

@@ -1,6 +1,8 @@
 {{--
 
-description: Row is meant for listings and content headers
+title: Row
+
+description: Row is meant for complex listings and content headers
 
 code: |
 

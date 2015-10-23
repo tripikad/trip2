@@ -1,6 +1,6 @@
 {{--
 
-description: Footer Social list
+description: Footer Social List
 
 code: |
 

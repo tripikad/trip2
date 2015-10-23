@@ -1,6 +1,6 @@
 {{--
 
-description: News block
+title: News
 
 code: |
 

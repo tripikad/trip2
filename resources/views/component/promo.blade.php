@@ -1,6 +1,6 @@
 {{--
 
-description: Promo / Ad
+title: Promo / Ad
 
 code: |
 

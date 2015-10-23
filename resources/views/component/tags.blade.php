@@ -1,6 +1,6 @@
 {{--
 
-description: Tags
+title: Tags
 
 code: |
 

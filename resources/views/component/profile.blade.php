@@ -1,6 +1,6 @@
 {{--
 
-description: Profile
+title: Profile
 
 code: |
 
