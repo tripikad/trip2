@@ -41,69 +41,69 @@ options:
 
 --}}
 
-<article class="c-row {{ $item['options'] or '' }}">
+<article class="c-row {{ $options or '' }}">
 
-    @if (isset($item['icon']) && !isset($item['profile']))
+    @if (isset($icon) && !isset($profile))
 
     <div class="c-row__icon">
 
         @include('component.icon', [
-            'icon' => $item['icon']
+            'icon' => $icon
         ])
 
     </div>
 
     @endif
 
-    @if (isset($item['profile']) && !isset($item['icon']))
+    @if (isset($profile) && !isset($icon))
 
     <div class="c-row__profile">
 
         @include('component.profile', [
-            'modifiers' => $item['profile']['modifiers'],
-            'route' => $item['profile']['heading_link'],
-            'image' => $item['image']
+            'modifiers' => $profile['modifiers'],
+            'route' => $heading_link,
+            'image' => $image
         ])
 
     </div>
 
     @endif
 
-    @if (isset($item['heading']))
+    @if (isset($heading))
 
     <h3 class="c-row__title">
 
-        @if (isset($item['preheading'])) <span>{!! $item['preheading'] !!}</span> @endif
+        @if (isset($preheading)) <span>{!! $preheading !!}</span> @endif
 
-        <a href="{{ $item['heading_link'] }}" class="c-row__title-link">{{ $item['heading'] }}</a>
+        <a href="{{ $heading_link }}" class="c-row__title-link">{{ $heading }}</a>
 
-        @if (isset( $item['postheading'] )) <span>{!! $item['postheading'] !!}</span> @endif
+        @if (isset( $postheading )) <span>{!! $postheading !!}</span> @endif
 
     </h3>
 
     @endif
 
-    @if (isset($item['description']))
+    @if (isset($description))
 
-    <p class="c-row__text">{{ $item['description'] }}</p>
-
-    @endif
-
-    @if (isset($item['extra']))
-
-    <p class="c-row__text">{{ $item['extra'] }}</p>
+    <p class="c-row__text">{{ $description }}</p>
 
     @endif
 
-    @if (isset($item['actions']))
+    @if (isset($extra))
 
-    <div class="c-row__actions">{!! $item['actions'] !!}</div>
+    <p class="c-row__text">{{ $extra }}</p>
 
     @endif
 
-    @if (isset($item['body']))
+    @if (isset($actions))
 
-    <div class="c-row__body">{!! $item['body'] !!}</div>
+    <div class="c-row__actions">{!! $actions !!}</div>
+
+    @endif
+
+    @if (isset($body))
+
+    <div class="c-row__body">{!! $body !!}</div>
 
     @endif
 
