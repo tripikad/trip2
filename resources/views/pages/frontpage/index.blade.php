@@ -360,38 +360,38 @@
 
                 </div>
 
-                @include('component.list', [
-                    'modifiers' => 'm-icon',
-                    'items' => [
+                @each('component.row', [
                         [
                             'icon' => 'icon-offer',
-                            'modifiers' => 'm-blue',
+                            'modifiers' => 'm-blue m-icon',
                             'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
                             'route' => '#',
                             'text' => 'Jaanuar – veebruar 2016   /   Täna 12:32'
                         ],
                         [
                             'icon' => 'icon-offer',
-                            'modifiers' => 'm-yellow',
+                            'modifiers' => 'm-yellow m-icon',
                             'title' => 'Edasi–tagasi riiast või Helsingist Bangkoki al 350 €',
                             'route' => '#',
                             'text' => 'Detsember 2015 – jaanuar 2016   /   Täna 9:11'
                         ],
                         [
                             'icon' => 'icon-offer',
-                            'modifiers' => 'm-green',
+                            'modifiers' => 'm-green m-icon',
                             'title' => 'Reis Brasiilias: Tallinn–Recife/Salvador–Tallinn al 402 €',
                             'route' => '#',
                             'text' => 'Jaanuar – veebruar 2016   /   Eile 14:42'
                         ],
                         [
                             'icon' => 'icon-offer',
+                            'modifiers' => 'm-icon m-red',
                             'title' => 'Lennupiletid Helsingist Singapuri al 456 €',
                             'route' => '#',
                             'text' => 'Veebruar 2016   /   Eile 14:42'
                         ],
-                    ]
-                ])
+                    ],
+                    'item'
+                )
 
                 @include('component.link', [
                     'title' => 'Vaata kõiki sooduspakkumisi &rsaquo;',
