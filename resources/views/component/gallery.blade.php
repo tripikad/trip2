@@ -1,6 +1,6 @@
 {{--
 
-description: Gallery component
+title: Gallery component
 
 code: |
 

@@ -1,6 +1,6 @@
 {{--
 
-description: Any card properties can be combined. Cards fill proportionally their container width
+title: Card
 
 code: |
 
@@ -9,10 +9,10 @@ code: |
         'route' => '',
         'title' => 'Here is title',
         'text' => 'Here is subtitle',
-        'options' => $options,
+        'options' => $modifiers,
     ])
 
-options:
+modifiers:
 
 - m-red
 - m-blue

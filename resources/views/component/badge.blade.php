@@ -1,15 +1,15 @@
 {{--
 
-description: Badge
+title: Badge
 
 code: |
 
     @include('component.badge', [
-        'modifiers' => $options,
+        'modifiers' => $modifiers,
         'count' => 4
     ])
 
-options:
+modifiers:
 
 - m-inverted
 

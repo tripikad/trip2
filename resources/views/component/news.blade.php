@@ -1,18 +1,18 @@
 {{--
 
-description: News block
+title: News
 
 code: |
 
     @include('component.news', [
-        'modifiers' => $options,
+        'modifiers' => $modifiers,
         'route' => '',
         'title' => 'News title',
         'date' => 'today',
         'image' => \App\Image::getRandom()
     ])
 
-options:
+modifiers:
 
 - m-small
 

@@ -1,22 +1,22 @@
 {{--
 
-description: List component
+title: List
 
 code: |
 
     @include('component.list', [
-        'modifiers' => $options,
+        'modifiers' => $modifiers,
         'items' => [
             [
                 'modifiers' => '',
-                'title' => '',
-                'text' => '',
+                'title' => 'Item 1',
+                'text' => 'Text',
                 'route' => ''
             ],
         ]
     ])
 
-options:
+modifiers:
 
 - m-dot
 - m-large

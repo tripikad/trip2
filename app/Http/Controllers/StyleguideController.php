@@ -14,13 +14,13 @@ class StyleguideController extends Controller
         $directories = array_merge(
             ['views/component'],
             Storage::disk('resources')->allDirectories('views/component'),
-            ['assets/sass/style']
+            ['assets/sass/base']
         );
 
         foreach ($directories as $directory) {
             foreach (Storage::disk('resources')->files($directory) as $filepath) {
                 if ($header = $this->getHeader($filepath)) {
-                    $components[] = ['title' => $filepath] + $header;
+                    $components[] = ['filepath' => $filepath] + $header;
                 }
             }
         }
@@ -55,9 +55,10 @@ class StyleguideController extends Controller
             $header = Yaml::parse(trim(preg_replace($start, '', $parts[0])));
 
             return [
+                'title' => isset($header['title']) ? trim($header['title']) : null,
                 'description' => isset($header['description']) ? trim($header['description']) : null,
                 'code' => isset($header['code']) ? trim($header['code']) : null,
-                'options' => isset($header['options']) ? array_merge(['(none)'], $header['options']) : null,
+                'modifiers' => isset($header['modifiers']) ? array_merge(['(none)'], $header['modifiers']) : null,
             ];
         }
 

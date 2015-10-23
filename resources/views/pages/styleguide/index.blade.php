@@ -14,9 +14,13 @@
 
             <div class="left">
 
+                <p style="font-size: 1.5em; margin-bottom: 0.5em">
+                    {{ $component['title'] }}
+                </p>
+                
                 <p>{!! $component['description'] !!}</p>
                 
-                <pre>// {{ $component['title'] }}
+                <pre>// {{ $component['filepath'] }}
 
 {{ str_replace('@', '&#64;', htmlentities($component['code'])) }}
 
@@ -26,7 +30,7 @@
 
             <div class="right">
 
-                @if ($component['title'] == 'views/component/icon.blade.php')
+                @if ($component['filepath'] == 'views/component/icon.blade.php')
 
                         @foreach($icons as $icon)
                             <a title="{{ $icon }}">
@@ -34,11 +38,11 @@
                             </a>
                         @endforeach
 
-                @elseif (isset($component['options']))
+                @elseif (isset($component['modifiers']))
 
-                    @foreach($component['options'] as $option)
+                    @foreach($component['modifiers'] as $modifier)
 
-                        <code>-{{ $option }}</code>
+                        <code>{{ $modifier }}</code>
 
                         <br /><br />
 
@@ -46,7 +50,7 @@
                             'template' => $component['code'],
                             'cache_key' => str_random(10),
                             'updated_at' => 0
-                        ], ['options' => "-$option"]) !!}
+                        ], ['modifiers' => $modifier]) !!}
 
                         <br />
 
@@ -54,11 +58,13 @@
 
                 @else  
 
+
                     {!! \StringView::make([
                         'template' => $component['code'],
                         'cache_key' => str_random(10),
                         'updated_at' => 0
                     ]) !!}
+
 
                 @endif
 

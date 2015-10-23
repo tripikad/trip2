@@ -1,16 +1,16 @@
 {{--
 
-description: Button component
+title: Button
 
 code: |
 
     @include('component.button', [
         'title' => 'Button',
         'route' => '',
-        'modifiers' => $options
+        'modifiers' => $modifiers
     ])
 
-options:
+modifiers:
 
 - m-block
 - m-secondary

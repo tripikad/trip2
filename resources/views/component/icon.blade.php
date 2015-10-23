@@ -1,6 +1,8 @@
 {{--
 
-description: A SVG icon
+title: Icon
+
+description: A set of SVG icons
 
 code: |
 

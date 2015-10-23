@@ -1,6 +1,8 @@
 {{--
 
-description: Date.long component. Use date component to print out date or time. Date.long - d. m Y H:i
+title: Long date
+
+description: Date and time in long format
 
 code: |
     @include('component.date.long', ['date' => \Carbon\Carbon::now()])

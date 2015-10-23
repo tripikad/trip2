@@ -9,10 +9,10 @@ code: |
         'title_route' => '',
         'text' => 'Country',
         'text_route' => '',
-        'options' => $options
+        'options' => $modifiers
     ])
 
-options:
+modifiers:
 
 - orange
 - green

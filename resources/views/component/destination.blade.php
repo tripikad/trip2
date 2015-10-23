@@ -1,6 +1,6 @@
 {{--
 
-description: Destination component
+title: Destination
 
 code: |
 
@@ -9,10 +9,10 @@ code: |
         'title_route' => '',
         'subtitle' => 'Here is subtitle',
         'subtitle_route' => '',
-        'modifiers' => $options
+        'modifiers' => $modifiers
     ])
 
-options:
+modifiers:
 
 - m-red
 - m-blue
