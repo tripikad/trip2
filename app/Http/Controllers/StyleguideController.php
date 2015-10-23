@@ -14,7 +14,7 @@ class StyleguideController extends Controller
         $directories = array_merge(
             ['views/component'],
             Storage::disk('resources')->allDirectories('views/component'),
-            ['assets/sass/style']
+            ['assets/sass/base']
         );
 
         foreach ($directories as $directory) {
