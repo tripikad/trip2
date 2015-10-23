@@ -363,31 +363,31 @@
                 @each('component.row', [
                         [
                             'icon' => 'icon-offer',
-                            'modifiers' => 'm-blue m-icon',
-                            'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
-                            'route' => '#',
-                            'text' => 'Jaanuar – veebruar 2016   /   Täna 12:32'
+                            'options' => 'm-blue m-icon',
+                            'heading' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
+                            'heading_link' => '#',
+                            'description' => 'Jaanuar – veebruar 2016   /   Täna 12:32'
                         ],
                         [
                             'icon' => 'icon-offer',
-                            'modifiers' => 'm-yellow m-icon',
-                            'title' => 'Edasi–tagasi riiast või Helsingist Bangkoki al 350 €',
-                            'route' => '#',
-                            'text' => 'Detsember 2015 – jaanuar 2016   /   Täna 9:11'
+                            'options' => 'm-yellow m-icon',
+                            'heading' => 'Edasi–tagasi riiast või Helsingist Bangkoki al 350 €',
+                            'heading_link' => '#',
+                            'description' => 'Detsember 2015 – jaanuar 2016   /   Täna 9:11'
                         ],
                         [
                             'icon' => 'icon-offer',
-                            'modifiers' => 'm-green m-icon',
-                            'title' => 'Reis Brasiilias: Tallinn–Recife/Salvador–Tallinn al 402 €',
-                            'route' => '#',
-                            'text' => 'Jaanuar – veebruar 2016   /   Eile 14:42'
+                            'options' => 'm-green m-icon',
+                            'heading' => 'Reis Brasiilias: Tallinn–Recife/Salvador–Tallinn al 402 €',
+                            'heading_link' => '#',
+                            'description' => 'Jaanuar – veebruar 2016   /   Eile 14:42'
                         ],
                         [
                             'icon' => 'icon-offer',
-                            'modifiers' => 'm-icon m-red',
-                            'title' => 'Lennupiletid Helsingist Singapuri al 456 €',
-                            'route' => '#',
-                            'text' => 'Veebruar 2016   /   Eile 14:42'
+                            'options' => 'm-icon m-red',
+                            'heading' => 'Lennupiletid Helsingist Singapuri al 456 €',
+                            'heading_link' => '#',
+                            'description' => 'Veebruar 2016   /   Eile 14:42'
                         ],
                     ],
                     'item'

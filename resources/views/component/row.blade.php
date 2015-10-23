@@ -5,17 +5,17 @@ description: Row is meant for listings and content headers
 code: |
 
     @include('component.row', [
-        'modifiers' => $options,
+        'options' => $options,
         'icon' => 'icon-offer',
+        'image' => \App\Image::getRandom(),
+        'image_link' => '',
         'profile' => [
             'modifiers' => '',
             'route' => '',
-            'image' => ''
         ],
-        'title' => '',
-        'text' => '',
-        'route' => '',
         'preheading' => 'Preheading',
+        'heading' => '',
+        'heading_link' => '',
         'postheading' => 'Postheading',
         'actions' => view('component.actions', [
             'actions' => [
@@ -23,6 +23,8 @@ code: |
                 ['route' => '', 'title' => 'This is second action'],
             ]
         ]),
+        'description' => '',
+        'extra' => 'Extra',
         'body' => 'This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...',
     ])
 
@@ -39,7 +41,7 @@ options:
 
 --}}
 
-<article class="c-row {{ $item['modifiers'] or '' }}">
+<article class="c-row {{ $item['options'] or '' }}">
 
     @if (isset($item['icon']) && !isset($item['profile']))
 
@@ -59,21 +61,21 @@ options:
 
         @include('component.profile', [
             'modifiers' => $item['profile']['modifiers'],
-            'route' => $item['profile']['route'],
-            'image' => $item['profile']['image']
+            'route' => $item['profile']['heading_link'],
+            'image' => $item['image']
         ])
 
     </div>
 
     @endif
 
-    @if (isset($item['title']))
+    @if (isset($item['heading']))
 
     <h3 class="c-row__title">
 
         @if (isset($item['preheading'])) <span>{!! $item['preheading'] !!}</span> @endif
 
-        <a href="{{ $item['route'] }}" class="c-row__title-link">{{ $item['title'] }}</a>
+        <a href="{{ $item['heading_link'] }}" class="c-row__title-link">{{ $item['heading'] }}</a>
 
         @if (isset( $item['postheading'] )) <span>{!! $item['postheading'] !!}</span> @endif
 
@@ -81,9 +83,15 @@ options:
 
     @endif
 
-    @if (isset($item['text']))
+    @if (isset($item['description']))
 
-    <p class="c-row__text">{{ $item['text'] }}</p>
+    <p class="c-row__text">{{ $item['description'] }}</p>
+
+    @endif
+
+    @if (isset($item['extra']))
+
+    <p class="c-row__text">{{ $item['extra'] }}</p>
 
     @endif
 
