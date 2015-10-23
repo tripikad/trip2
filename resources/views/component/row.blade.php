@@ -61,7 +61,7 @@ options:
 
         @include('component.profile', [
             'modifiers' => $profile['modifiers'],
-            'route' => $heading_link,
+            'route' => '',
             'image' => $image
         ])
 
@@ -75,7 +75,7 @@ options:
 
         @if (isset($preheading)) <span>{!! $preheading !!}</span> @endif
 
-        @if (isset($heading_link)) <a href="{{ $heading_link or '' }}" class="c-row__title-link"> @endif
+        @if (isset($heading_link)) <a href="{{ $heading_link }}" class="c-row__title-link"> @endif
 
         {{ $heading }}
 
