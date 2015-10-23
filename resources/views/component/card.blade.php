@@ -1,6 +1,6 @@
 {{--
 
-description: Any card properties can be combined. Cards fill proportionally their container width
+title: Card
 
 code: |
 

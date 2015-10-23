@@ -1,6 +1,6 @@
 {{--
 
-description: Badge
+title: Badge
 
 code: |
 

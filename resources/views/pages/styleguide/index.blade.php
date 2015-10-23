@@ -14,9 +14,10 @@
 
             <div class="left">
 
+                <p style="font-size: 1.5em;">{{ $component['title'] }}</p>
                 <p>{!! $component['description'] !!}</p>
                 
-                <pre>// {{ $component['title'] }}
+                <pre>// {{ $component['filepath'] }}
 
 {{ str_replace('@', '&#64;', htmlentities($component['code'])) }}
 

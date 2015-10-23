@@ -1,6 +1,6 @@
 {{--
 
-description: Button component
+title: Button
 
 code: |
 
