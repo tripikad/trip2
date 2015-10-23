@@ -13,7 +13,7 @@ linters:
   ColorVariable:
     enabled: false
   Comment:
-    enabled: true
+    enabled: false
   DebugStatement:
     enabled: true
   DeclarationOrder:
