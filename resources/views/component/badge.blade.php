@@ -11,7 +11,18 @@ code: |
 
 modifiers:
 
-- m-inverted
+- m-red
+- m-blue
+- m-green
+- m-orange
+- m-yellow
+- m-purple
+- m-inverted m-red
+- m-inverted m-blue
+- m-inverted m-green
+- m-inverted m-orange
+- m-inverted m-yellow
+- m-inverted m-purple
 
 --}}
 
