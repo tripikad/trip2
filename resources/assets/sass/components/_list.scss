@@ -15,13 +15,6 @@
 
         margin-bottom: 12px;
 
-        .c-list.m-icon & {
-
-            position: relative;
-            padding-left: 72px;
-            margin-bottom: 24px;
-        }
-
         .c-list.m-large & {
 
             margin-bottom: 24px;
@@ -57,34 +50,10 @@
         }
     }
 
-        .c-list__item-icon {
-
-            position: absolute;
-            left: 0;
-            top: 0;
-            display: block;
-            width: 48px;
-            height: 48px;
-
-            svg {
-
-                @include color-modifiers-and(fill);
-
-                height: 100%;
-                width: 100%;
-            }
-        }
-
         .c-list__item-title {
 
             font-size: $font-size-normal;
             line-height: 1.5;
-
-            .c-list.m-icon & {
-
-                font-size: $font-size-large;
-                line-height: 1.15;
-            }
 
             .c-list.m-large & {
 
@@ -95,6 +64,8 @@
         }
 
             .c-list__item-title-link {
+
+                @include color-modifiers-and(color);
 
                 color: $color-text-link;
                 text-decoration: none;
@@ -114,12 +85,6 @@
 
             color: $color-text-neutral-dark;
             font-size: $font-size-small;
-
-            .c-list.m-icon & {
-
-                font-size: $font-size-normal;
-                margin-top: 9px;
-            }
 
             .c-list.m-large & {
 
