@@ -87,15 +87,15 @@ options:
 
     @endif
 
-    @if (isset($description))
+    @if (isset($description) || isset($extra))
 
-    <p class="c-row__text">{{ $description }}</p>
+    <p class="c-row__text">
 
-    @endif
+        {!! $description or '' !!}
 
-    @if (isset($extra))
+        {!! $extra or '' !!}
 
-    <p class="c-row__text">{{ $extra }}</p>
+    </p>
 
     @endif
 
