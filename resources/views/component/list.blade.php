@@ -5,7 +5,7 @@ title: List
 code: |
 
     @include('component.list', [
-        'modifiers' => $options,
+        'modifiers' => $modifiers,
         'items' => [
             [
                 'modifiers' => '',
@@ -16,7 +16,7 @@ code: |
         ]
     ])
 
-options:
+modifiers:
 
 - m-dot
 - m-large

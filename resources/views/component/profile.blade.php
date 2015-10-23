@@ -5,7 +5,7 @@ title: Profile
 code: |
 
     @include('component.profile', [
-        'modifiers' => $options,
+        'modifiers' => $modifiers,
         'route' => '#',
         'title' => 'Name Lastname',
         'age' => 22,
@@ -13,7 +13,7 @@ code: |
         'interests' => 'Itaalia'
     ])
 
-options:
+modifiers:
 
 - m-small
 - m-mini

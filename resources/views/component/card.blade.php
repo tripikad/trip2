@@ -9,10 +9,10 @@ code: |
         'route' => '',
         'title' => 'Here is title',
         'text' => 'Here is subtitle',
-        'options' => $options,
+        'options' => $modifiers,
     ])
 
-options:
+modifiers:
 
 - m-red
 - m-blue

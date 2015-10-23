@@ -5,7 +5,7 @@ title: About
 code: |
 
     @include('component.about', [
-        'modifiers' => $options,
+        'modifiers' => $modifiers,
         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
         'link' => [
             'title' => 'Loe lähemalt Trip.ee-st ›',
@@ -18,7 +18,7 @@ code: |
         ]
     ])
 
-options:
+modifiers:
 
 - m-wide
 

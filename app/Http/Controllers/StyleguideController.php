@@ -58,7 +58,7 @@ class StyleguideController extends Controller
                 'title' => isset($header['title']) ? trim($header['title']) : null,
                 'description' => isset($header['description']) ? trim($header['description']) : null,
                 'code' => isset($header['code']) ? trim($header['code']) : null,
-                'options' => isset($header['options']) ? array_merge(['(none)'], $header['options']) : null,
+                'modifiers' => isset($header['modifiers']) ? array_merge(['(none)'], $header['modifiers']) : null,
             ];
         }
 

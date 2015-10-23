@@ -7,7 +7,7 @@ description: Row is meant for complex listings and content headers
 code: |
 
     @include('component.row', [
-        'options' => $options,
+        'options' => $modifiers,
         'icon' => 'icon-offer',
         'image' => \App\Image::getRandom(),
         'image_link' => '',
@@ -30,7 +30,7 @@ code: |
         'body' => 'This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...',
     ])
 
-options:
+modifiers:
 
 - m-icon
 - m-profile

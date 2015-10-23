@@ -7,14 +7,14 @@ code: |
     @include('component.tags', [
         'items' => [
             [
-                'modifiers' => $options,
+                'modifiers' => $modifiers,
                 'route' => '',
                 'title' => 'Tag name'
             ],
         ]
     ])
 
-options:
+modifiers:
 
 - m-red
 - m-blue

@@ -8,10 +8,10 @@ code: |
         'title' => 'Subheader',
         'link_title' => 'More',
         'link_route' => '',
-        'options' => $options,
+        'options' => $modifiers,
     ])
 
-options:
+modifiers:
 
 - orange
 - cyan

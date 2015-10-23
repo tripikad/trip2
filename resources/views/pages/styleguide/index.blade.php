@@ -30,7 +30,7 @@
 
             <div class="right">
 
-                @if ($component['title'] == 'views/component/icon.blade.php')
+                @if ($component['filepath'] == 'views/component/icon.blade.php')
 
                         @foreach($icons as $icon)
                             <a title="{{ $icon }}">
@@ -38,11 +38,11 @@
                             </a>
                         @endforeach
 
-                @elseif (isset($component['options']))
+                @elseif (isset($component['modifiers']))
 
-                    @foreach($component['options'] as $option)
+                    @foreach($component['modifiers'] as $modifier)
 
-                        <code>{{ $option }}</code>
+                        <code>{{ $modifier }}</code>
 
                         <br /><br />
 
@@ -50,7 +50,7 @@
                             'template' => $component['code'],
                             'cache_key' => str_random(10),
                             'updated_at' => 0
-                        ], ['options' => "$option"]) !!}
+                        ], ['modifiers' => $modifier]) !!}
 
                         <br />
 
@@ -58,11 +58,13 @@
 
                 @else  
 
+
                     {!! \StringView::make([
                         'template' => $component['code'],
                         'cache_key' => str_random(10),
                         'updated_at' => 0
                     ]) !!}
+
 
                 @endif
 

@@ -9,10 +9,10 @@ code: |
     @include('component.title', [
         'title' => 'Title',
         'link_route' => '',
-        'modifiers' => $options,
+        'modifiers' => $modifiers,
     ])
 
-options:
+modifiers:
 
 - m-red
 - m-blue
