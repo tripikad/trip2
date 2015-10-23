@@ -1,10 +1,10 @@
 .c-news {
 
-    margin-bottom: 24px;
+    margin-bottom: $spacer * 2;
 
     @include respond-to(tablet) {
 
-        margin-bottom: 48px;
+        margin-bottom: $spacer * 4;
     }
 }
 
@@ -13,12 +13,12 @@
         position: relative;
         overflow: hidden;
         display: block;
-        height: 192px;
-        margin-bottom: 24px;
+        height: $spacer * 16;
+        margin-bottom: $spacer * 2;
 
         .c-news.m-small & {
 
-            height: 144px;
+            height: $spacer * 12;
         }
     }
 
@@ -38,7 +38,7 @@
         font-size: $font-size-large;
         font-weight: $font-weight-bold;
         line-height: 1.15;
-        margin-bottom: 24px;
+        margin-bottom: $spacer * 2;
 
         .c-news.m-small & {
 
@@ -81,7 +81,7 @@
             position: relative;
             z-index: 1;
             display: inline-block;
-            padding: 0 12px 0 0;
+            padding: 0 $spacer 0 0;
             margin: 0;
             background: $color-white;
         }
