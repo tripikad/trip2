@@ -16,8 +16,8 @@
         top: 0;
         left: 0;
         width: 80%;
-        margin-top: 18px;
-        margin-left: 12px;
+        margin-top: $spacer * 1.5;
+        margin-left: $spacer;
 
         @include respond-to(tablet-portrait) {
 
@@ -31,20 +31,20 @@
 
         @include respond-to(desktop) {
 
-            margin-left: 36px;
+            margin-left: $spacer * 3;
         }
     }
 
     .c-header__nav {
 
-        margin-top: 9px;
-        margin-right: 12px;
+        margin-top: $spacer * 0.75;
+        margin-right: $spacer;
         position: absolute;
         top: 0;
         right: 0;
 
         @include respond-to(desktop) {
 
-            margin-right: 36px;
+            margin-right: $spacer * 3;
         }
     }

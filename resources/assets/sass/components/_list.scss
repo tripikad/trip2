@@ -3,28 +3,28 @@
     @include clear-list;
 
     font-family: $font-primary;
-    margin-bottom: 24px;
+    margin-bottom: $spacer * 2;
 
     @include respond-to(tablet) {
 
-        margin: 0 0 30px;
+        margin: 0 0 $spacer * 2.5;
     }
 }
 
     .c-list__item {
 
-        margin-bottom: 12px;
+        margin-bottom: $spacer;
 
         .c-list.m-large & {
 
-            margin-bottom: 24px;
+            margin-bottom: $spacer * 2;
         }
 
         .c-list.m-dot & {
 
             font-weight: $font-weight-medium;
             position: relative;
-            padding-left: 24px;
+            padding-left: $spacer * 2;
 
             &:before {
 
@@ -89,7 +89,7 @@
             .c-list.m-large & {
 
                 font-size: $font-size-normal;
-                margin-top: 9px;
+                margin-top: $spacer * 0.75;
             }
 
             .c-list.m-dot & {

@@ -8,12 +8,12 @@
 
             @include clear-list;
 
-            margin-bottom: 48px;
+            margin-bottom: $spacer * 4;
         }
 
             .c-forum__nav-list-item {
 
-                margin-bottom: 24px;
+                margin-bottom: $spacer * 2;
             }
 
     .c-forum__list {
@@ -27,8 +27,8 @@
             display: flex;
             flex-flow: row wrap;
             align-items: center;
-            padding: 9px 24px;
-            margin-bottom: 6px;
+            padding: $spacer * 0.75 $spacer * 2;
+            margin-bottom: $spacer / 2;
             border-left: 2px solid $color-fill-neutral;
 
             &:nth-child(even) {
@@ -44,8 +44,8 @@
 
             .c-forum__list.m-compact & {
 
-                padding: 6px 0;
-                margin-bottom: 6px;
+                padding: $spacer / 2 0;
+                margin-bottom: $spacer / 2;
                 border: none;
 
                 &:nth-child(even) {
@@ -82,7 +82,7 @@
             .c-forum__list-item-tags {
 
                 flex: 0 1 100%;
-                padding: 12px 0 0 0;
+                padding: $spacer 0 0 0;
 
                 @include respond-to(tablet) {
 

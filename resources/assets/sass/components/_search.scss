@@ -7,7 +7,7 @@
 
         @include respond-to(tablet) {
 
-            width: 412px;
+            width: $spacer * 33;
         }
     }
 }
@@ -21,46 +21,46 @@
 
         position: absolute;
         top: 50%;
-        left: 12px;
+        left: $spacer;
         display: block;
-        height: 24px;
-        width: 24px;
+        height: $spacer * 2;
+        width: $spacer * 2;
         transform: translateY(-50%);
 
         @include respond-to(tablet) {
 
-            left: 20px;
-            height: 48px;
-            width: 48px;
+            left: $spacer * 1.5;
+            height: $spacer * 4;
+            width: $spacer * 4;
         }
 
         .c-search.m-small & {
 
-            left: 12px;
-            height: 24px;
-            width: 24px;
+            left: $spacer;
+            height: $spacer * 2;
+            width: $spacer * 2;
         }
 
         svg {
 
             fill: $color-white;
 
-            margin: 3px;
-            width: 18px;
-            height: 18px;
+            margin: $spacer / 4;
+            width: $spacer * 1.5;
+            height: $spacer * 1.5;
 
             @include respond-to(tablet) {
 
-                margin: 8px;
-                width: 32px;
-                height: 32px;
+                margin: $spacer * 0.75;
+                width: $spacer * 2.5;
+                height: $spacer * 2.5;
             }
 
             .c-search.m-small & {
 
-                margin: 3px;
-                width: 18px;
-                height: 18px;
+                margin: $spacer / 4;
+                width: $spacer * 1.5;
+                height: $spacer * 1.5;
             }
         }
 
@@ -82,7 +82,7 @@
         font-size: $font-size-normal;
         font-weight: $font-weight-medium;
         width: 100%;
-        padding: 12px 12px 9px 48px;
+        padding: $spacer $spacer $spacer * 0.75 $spacer * 4;
         background: rgba($color-white, 0.2);
         border: none;
         box-shadow: 0 18px 48px rgba($shadow-dark, 0.2);
@@ -90,18 +90,18 @@
         @include respond-to(tablet) {
 
             font-size: $font-size-larger;
-            padding: 18px 24px 12px 88px;
+            padding: $spacer * 1.5 $spacer * 2 $spacer $spacer * 7;
         }
 
         .c-search.m-small & {
 
             font-size: $font-size-normal;
-            padding: 9px 12px 6px 48px;
+            padding: $spacer * 0.75 $spacer $spacer / 2 $spacer * 4;
             background: none;
             box-shadow: none;
         }
 
-        &::input-placeholder {
+        &::-webkit-input-placeholder {
 
             color: $color-white;
         }
@@ -111,7 +111,7 @@
             color: $color-text-black;
             background: $color-white;
 
-            &::input-placeholder {
+            &::-webkit-input-placeholder {
 
                 color: $color-text-neutral;
             }
@@ -137,8 +137,8 @@
     .c-search__results-content {
 
         overflow: scroll;
-        height: 384px;
-        padding-bottom: 24px;
+        height: $spacer * 32;
+        padding-bottom: $spacer * 2;
     }
 
         .c-search__results-list {
@@ -146,14 +146,14 @@
             @include clear-list;
 
             position: relative;
-            margin: 12px 0 0 0;
-            padding: 12px 24px 6px 88px;
+            margin: $spacer 0 0 0;
+            padding: $spacer $spacer * 2 $spacer / 2 $spacer * 7;
             border-bottom: 1px solid $color-fill-neutral;
 
             .c-search.m-small & {
 
-                margin: 6px 0 0 0;
-                padding: 6px 12px 0 48px;
+                margin: $spacer / 2 0 0 0;
+                padding: $spacer / 2 $spacer 0 $spacer * 4;
             }
 
             &:last-child {
@@ -166,16 +166,16 @@
                 content: '';
                 position: absolute;
                 top: 0;
-                left: 20px;
+                left: $spacer * 1.5;
                 display: block;
-                height: 48px;
-                width: 48px;
+                height: $spacer * 4;
+                width: $spacer * 4;
 
                 .c-search.m-small & {
 
-                    left: 12px;
-                    height: 24px;
-                    width: 24px;
+                    left: $spacer;
+                    height: $spacer * 2;
+                    width: $spacer * 2;
                 }
             }
         }
@@ -200,11 +200,11 @@
 
                     @include clear-list;
 
-                    margin-top: 18px;
+                    margin-top: $spacer * 1.5;
 
                     .c-search.m-small & {
 
-                        margin-top: 12px;
+                        margin-top: $spacer;
                     }
                 }
 
@@ -214,7 +214,7 @@
                         font-weight: $font-weight-medium;
                         line-height: 1.5;
                         text-transform: none;
-                        margin-bottom: 6px;
+                        margin-bottom: $spacer / 2;
 
                         .c-search.m-small & {
 
@@ -223,7 +223,7 @@
 
                         .c-search__results-list.m-forum & {
 
-                            margin-bottom: 12px;
+                            margin-bottom: $spacer;
                         }
                     }
 
@@ -247,11 +247,11 @@
 
                             .c-search__results-link-profile {
 
-                                flex: 0 1 60px;
+                                flex: 0 1 $spacer * 5;
 
                                 .c-search.m-small & {
 
-                                    flex: 0 1 36px;
+                                    flex: 0 1 $spacer * 3;
                                 }
                             }
 
@@ -264,23 +264,23 @@
     .c-search__results-footer {
 
         position: relative;
-        padding: 16px 88px;
+        padding: $spacer * 1.5 $spacer * 7;
         background: $color-white;
 
         .c-search.m-small & {
 
-            padding: 12px 48px;
+            padding: $spacer $spacer * 4;
         }
 
         &:before {
 
             content: '';
             position: absolute;
-            top: -54px;
+            top: -$spacer * 4.5;
             left: 0;
             display: block;
             width: 100%;
-            height: 54px;
+            height: $spacer * 4.5;
             background-image: linear-gradient(to bottom, rgba($color-white, 0), rgba($color-white, 1));
             pointer-events: none;
         }

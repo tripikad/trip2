@@ -2,11 +2,11 @@
 
     display: flex;
     flex-flow: row wrap;
-    padding: 48px 0;
+    padding: $spacer * 2 0;
 
     @include respond-to(desktop) {
 
-        padding: 48px 0;
+        padding: $spacer * 4 0;
     }
 }
 
@@ -17,7 +17,7 @@
             @include respond-to(tablet) {
 
                 flex: 0 1 67%;
-                padding: 0 0 0 72px;
+                padding: 0 0 0 $spacer * 6;
             }
         }
     }
@@ -27,19 +27,19 @@
             font-size: $font-size-large;
             font-weight: $font-weight-bold;
             line-height: 1.15;
-            margin-bottom: 12px;
+            margin-bottom: $spacer;
         }
 
     .c-about__action {
 
-        padding: 24px 0 0;
+        padding: $spacer * 4 0 0;
 
         .c-about.m-wide & {
 
             @include respond-to(tablet) {
 
                 flex: 0 1 33%;
-                padding: 0 48px;
+                padding: 0 $spacer * 4;
             }
         }
     }

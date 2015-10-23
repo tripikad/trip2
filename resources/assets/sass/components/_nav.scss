@@ -11,8 +11,8 @@
 
             float: left;
             display: block;
-            margin: 12px;
-            height: 36px;
+            margin: $spacer;
+            height: $spacer * 3;
 
             &.m-has-children {
 
@@ -26,10 +26,10 @@
             .c-nav__list-item-link {
 
                 color: $color-white;
-                line-height: 36px;
+                line-height: $spacer * 3;
                 text-decoration: none;
                 display: block;
-                height: 36px;
+                height: $spacer * 3;
             }
 
             .c-nav__sub-list {
@@ -40,8 +40,8 @@
                 top: 100%;
                 right: 0;
                 display: none;
-                width: 192px;
-                padding: 6px 0;
+                width: $spacer * 16;
+                padding: $spacer / 2 0;
                 background: $brand-red;
                 border-radius: 3px;
                 box-shadow: 0 12px 24px rgba($shadow-dark, 0.3);
@@ -50,8 +50,8 @@
 
                     content: '';
                     position: absolute;
-                    top: -6px;
-                    right: 48px;
+                    top: -$spacer / 2;
+                    right: $spacer * 4;
                     width: 0;
                     height: 0;
                     border-style: solid;
@@ -77,10 +77,10 @@
                         color: $color-white;
                         font-size: $font-size-normal;
                         text-decoration: none;
-                        line-height: 36px;
+                        line-height: $spacer * 3;
                         display: block;
-                        height: 36px;
-                        padding: 0 28px;
+                        height: $spacer * 3;
+                        padding: 0 $spacer * 2;
 
                         &:hover {
 

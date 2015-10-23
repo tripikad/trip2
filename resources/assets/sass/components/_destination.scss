@@ -9,7 +9,7 @@
 
     .c-destination__header {
 
-        padding: 21px 24px 20px;
+        padding: $spacer * 1.5 $spacer * 2 $spacer * 1.5;
 
         a {
 
@@ -33,5 +33,5 @@
     .c-destination__subtitle {
 
         font-weight: $font-weight-medium;
-        margin-top: 9px;
+        margin-top: $spacer;
     }

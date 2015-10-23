@@ -1,6 +1,6 @@
 .c-footer {
 
-    padding: 132px 0 48px;
+    padding: $spacer * 11 0 $spacer * 4;
     background-repeat: no-repeat;
     background-position: top center;
     background-size: cover;
@@ -29,7 +29,7 @@
 
             display: flex;
             flex-flow: row wrap;
-            margin: 0 auto 84px;
+            margin: 0 auto $spacer * 7;
 
             @include respond-to(tablet) {
 
@@ -78,7 +78,7 @@
                         color: $color-white;
                         text-decoration: none;
                         display: block;
-                        padding: 6px 0;
+                        padding: $spacer / 2 0;
 
                         &:hover {
 
@@ -100,7 +100,7 @@
                 font-weight: $font-weight-medium;
                 line-height: 1.2;
                 display: inline-block;
-                margin: 0 24px;
+                margin: 0 $spacer * 2;
             }
 
                 .c-footer__social-item-link {
@@ -108,7 +108,7 @@
                     color: $color-white;
                     text-decoration: none;
                     display: block;
-                    padding: 6px 0;
+                    padding: $spacer / 2 0;
 
                     &:hover {
 

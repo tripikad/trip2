@@ -17,53 +17,53 @@
 
     .c-profile__image-wrap {
 
-        flex: 0 1 72px;
+        flex: 0 1 $spacer * 6;
 
         .c-profile.m-small & {
 
-            flex: 0 1 48px;
+            flex: 0 1 $spacer * 4;
         }
 
         .c-profile.m-mini & {
 
             position: relative;
             display: block;
-            width: 36px;
+            width: $spacer * 3;
         }
 
         .c-profile.m-micro & {
 
             display: inline-block;
-            width: 24px;
+            width: $spacer * 2;
         }
     }
 
         .c-profile__image {
 
             display: block;
-            height: 48px;
-            width: 48px;
+            height: $spacer * 4;
+            width: $spacer * 4;
             border-radius: 50%;
 
             .c-profile.m-mini &,
             .c-profile.m-small & {
 
-                height: 36px;
-                width: 36px;
+                height: $spacer * 3;
+                width: $spacer * 3;
             }
 
             .c-profile.m-micro & {
 
-                height: 24px;
-                width: 24px;
+                height: $spacer * 2;
+                width: $spacer * 2;
             }
         }
 
         .c-profile__badge {
 
             position: absolute;
-            bottom: -6px;
-            right: -12px;
+            bottom: -$spacer / 2;
+            right: -$spacer;
         }
 
     .c-profile__info {
@@ -91,7 +91,7 @@
 
             color: $color-text-neutral-dark;
             font-size: $font-size-small;
-            margin-top: 6px;
+            margin-top: $spacer / 2;
 
             .c-profile.m-mini &,
             .c-profile.m-small &,

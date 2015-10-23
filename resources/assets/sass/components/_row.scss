@@ -1,17 +1,17 @@
 .c-row {
 
-    margin-bottom: 12px;
+    margin-bottom: $spacer;
 
     &.m-icon {
 
         position: relative;
-        padding-left: 72px;
-        margin-bottom: 24px;
+        padding-left: $spacer * 6;
+        margin-bottom: $spacer * 2;
     }
 
     &.m-large {
 
-        margin-bottom: 24px;
+        margin-bottom: $spacer * 2;
     }
 }
 
@@ -21,8 +21,8 @@
         left: 0;
         top: 0;
         display: block;
-        width: 48px;
-        height: 48px;
+        width: $spacer * 4;
+        height: $spacer * 4;
 
         svg {
 
@@ -73,12 +73,12 @@
         .c-row.m-icon & {
 
             font-size: $font-size-normal;
-            margin-top: 9px;
+            margin-top: $spacer * 0.75;
         }
 
         .c-row.m-large & {
 
             font-size: $font-size-normal;
-            margin-top: 9px;
+            margin-top: $spacer * 0.75;
         }
     }

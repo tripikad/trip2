@@ -8,7 +8,7 @@
     text-decoration: none;
     text-align: center;
     display: inline-block;
-    padding: 12px 24px;
+    padding: $spacer $spacer * 2;
     background: $color-fill-success;
     border-radius: 3px;
 
@@ -31,6 +31,6 @@
 
     &.m-big {
 
-        padding: 18px 36px;
+        padding: $spacer * 1.5 $spacer * 3;
     }
 }
