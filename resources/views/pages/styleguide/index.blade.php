@@ -38,7 +38,7 @@
 
                     @foreach($component['options'] as $option)
 
-                        <code>-{{ $option }}</code>
+                        <code>{{ $option }}</code>
 
                         <br /><br />
 
@@ -46,7 +46,7 @@
                             'template' => $component['code'],
                             'cache_key' => str_random(10),
                             'updated_at' => 0
-                        ], ['options' => "-$option"]) !!}
+                        ], ['options' => "$option"]) !!}
 
                         <br />
 
