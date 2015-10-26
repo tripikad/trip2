@@ -292,7 +292,7 @@
                         @include('component.news', [
                             'title' => 'Euroopa Kohus otsustas – lennuki tehniline rike ei päästa hüvitise maksmisest',
                             'route' => '',
-                            'date' => 'Today',
+                            'date' => \Carbon\Carbon::now(),
                             'image' => \App\Image::getRandom()
                         ])
 
@@ -304,7 +304,7 @@
                             'modifiers' => 'm-small',
                             'title' => 'Suur valuutaülevaade – kuhu tasub just praegu reisida',
                             'route' => '',
-                            'date' => 'Eile 12:31',
+                            'date' => \Carbon\Carbon::now(),
                             'image' => \App\Image::getRandom()
                         ])
 
