@@ -57,9 +57,9 @@
 
             <div class="form-group">
 
-                @include('component.subheader', [
+                @include('component.title', [
                     'title' => trans('user.edit.account.title'),
-                    'options' => '-orange'
+                    'modifiers' => 'm-orange'
                 ])
 
             </div>
@@ -106,9 +106,9 @@
 
             <div class="form-group">
 
-                @include('component.subheader', [
+                @include('component.title', [
                     'title' => trans('user.edit.contact.title'),
-                    'options' => '-orange'
+                    'modifiers' => 'm-orange'
                 ])
 
             </div>
@@ -155,9 +155,9 @@
 
             <div class="form-group">
 
-                @include('component.subheader', [
+                @include('component.title', [
                     'title' => trans('user.edit.notify.title'),
-                    'options' => '-orange'
+                    'modifiers' => 'm-orange'
                 ])
 
             </div>
