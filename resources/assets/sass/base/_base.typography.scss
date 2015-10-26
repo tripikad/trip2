@@ -3,15 +3,15 @@
 title: Text styles
 
 code: |
-    
+
     <h1>Header1</h1>
 
     <h2>Header2</h2>
-    
+
     <h3>Header3</h3>
-    
+
     <h4>Header4</h4>
-    
+
     <p>Yet notwithstanding it is only a record of a <a
     href="https://en.wikipedia.org/wiki/Picnic">pic-nic</a>, it has a
     purpose, which is to suggest to the reader how he would be likely to
@@ -20,7 +20,7 @@ code: |
     <em>before</em> him.</p>
 
     <h5>Header 5</h5>
-    
+
     <p>I make small pretense of showing anyone how he
     ought to look at objects of interest beyond the sea — <strong>other
     books</strong> do that, and therefore, even if I were competent to do
@@ -31,9 +31,8 @@ code: |
 $base-font-size: 100%;
 $base-line-height: 1;
 
-$font-primary: 'Sailec Medium', 'Helvetica Neue', helvetica, arial, sans-serif !default;
+$font-primary: 'Sailec', 'Helvetica Neue', helvetica, arial, sans-serif !default;
 
-$font-weight-light: 300;
 $font-weight-normal: 400;
 $font-weight-medium: 600;
 $font-weight-bold: 700;
