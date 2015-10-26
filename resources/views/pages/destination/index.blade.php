@@ -8,7 +8,7 @@
 
 @section('masthead.nav')
 
-    @include('component.mastheadnav', [
+    @include('component.masthead.nav', [
         'nav_previous_title' => 'Itaalia',
         'nav_previous_route' => '#',
         'nav_next_title' => 'Ameerika',
