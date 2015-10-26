@@ -324,7 +324,7 @@
                             ])
                         </div>
 
-                        @include('component.travelletter', [
+                        @include('component.blog', [
                             'title' => 'Minu Aafrika – jutustusi kuuajaselt ringreisilt',
                             'route' => '#',
                             'image' => \App\Image::getRandom(),
