@@ -1,0 +1,23 @@
+.c-alert {
+
+    color: $color-white;
+    padding: $spacer;
+
+    &.m-info {
+
+        border: 1px solid $color-fill-info-dark;
+        background: $color-fill-info;
+    }
+
+    &.m-error {
+
+        border: 1px solid $color-fill-error-dark;
+        background: $color-fill-error;
+    }
+
+    &.m-success {
+
+        border: 1px solid $color-fill-success-dark;
+        background: $color-fill-success;
+    }
+}

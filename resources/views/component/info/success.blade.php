@@ -1,6 +1,6 @@
 @if (session('info'))
-    
-    <div class="alert alert-success">
+
+    <div class="c-alert m-success">
 
         {{ session('info') }}
 
