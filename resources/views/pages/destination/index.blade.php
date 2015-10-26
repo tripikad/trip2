@@ -8,7 +8,7 @@
 
 @section('masthead.nav')
 
-    @include('component.mastheadnav', [
+    @include('component.masthead.nav', [
         'nav_previous_title' => 'Itaalia',
         'nav_previous_route' => '#',
         'nav_next_title' => 'Ameerika',
@@ -324,7 +324,7 @@
                             ])
                         </div>
 
-                        @include('component.travelletter', [
+                        @include('component.blog', [
                             'title' => 'Minu Aafrika – jutustusi kuuajaselt ringreisilt',
                             'route' => '#',
                             'image' => \App\Image::getRandom(),
