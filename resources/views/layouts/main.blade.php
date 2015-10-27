@@ -21,10 +21,6 @@
 
         @include('component.footer')
 
-        <style type="text/css">
-            @import url("//hello.myfonts.net/count/2f82f6");
-        </style>
-
         <script type="text/javascript" src="/js/main.js"></script>
 
     </body>
