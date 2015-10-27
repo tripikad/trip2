@@ -16,6 +16,7 @@ gulp.task('sass', function() {
         './resources/assets/sass/base/_base.mixins.scss',
         './resources/assets/sass/base/_base.colors.scss',
         './resources/assets/sass/base/_base.layout.scss',
+        './resources/assets/sass/base/_base.fonts.scss',
         './resources/assets/sass/base/_base.typography.scss',
         './resources/assets/sass/base/_base.scss',
         './resources/assets/sass/**/_*.scss',
@@ -58,7 +59,7 @@ gulp.task('sass_legacy', function() {
 });
 
 gulp.task('js', function() {
- 
+
     gulp.src([
         './node_modules/jquery/dist/jquery.js',
         './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
