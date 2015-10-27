@@ -13,7 +13,7 @@ code: |
 
 --}}
 
-<div class="component-placeholder"
+<div class="c-placeholder"
 
     @if (isset($height))
         style="height: {{ $height }}px;"
