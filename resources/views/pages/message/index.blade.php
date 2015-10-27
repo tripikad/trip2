@@ -5,10 +5,10 @@
 @stop
 
 @section('header2.content')
-    
+
     @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
-                    
-        @include('component.menu', [
+
+        @include('component.nav', [
             'menu' => 'user',
             'items' => [
                 'activity' => ['route' => route('user.show', [$user])],
@@ -24,10 +24,10 @@
 
 @section('content.one')
 
-@if (count($user->messages()))    
+@if (count($user->messages()))
 
     @foreach ($user->messages() as $message)
-      
+
         <div class="utils-padding-bottom @if ($message->read) utils-read @endif">
 
             @include('component.row', [

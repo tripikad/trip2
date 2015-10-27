@@ -7,16 +7,16 @@
 @stop
 
 @section('header1.top')
-    
+
     <div class="row">
-    
+
         <div class="col-xs-offset-5 col-xs-2">
-            
+
             @include('component.user.image', [
                 'image' => $user->imagePreset('small_square'),
                 'options' => '-circle -large',
             ])
-        
+
         </div>
 
     </div>
@@ -32,7 +32,7 @@
 
     @if (\Auth::check() && \Auth::user()->id !== $user->id)
 
-        @include('component.button', [ 
+        @include('component.button', [
             'route' => route('message.index.with', [
                 \Auth::user(),
                 $user,
@@ -45,7 +45,7 @@
 
     @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id))
 
-        @include('component.button', [ 
+        @include('component.button', [
             'route' => route('user.edit', [$user]),
             'title' => trans('user.edit.title')
         ])
@@ -55,10 +55,10 @@
 @stop
 
 @section('header2.content')
-    
+
     @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
-        
-        @include('component.menu', [
+
+        @include('component.nav', [
             'menu' => 'user',
             'items' => [
                 'activity' => ['route' => route('user.show', [$user])],
@@ -93,17 +93,17 @@
     @if (count($user->destinationHaveBeen()) > 0 || count($user->destinationWantsToGo()) > 0)
 
         <div class="utils-border-bottom">
-                
+
                 @if (count($user->destinationHaveBeen()) > 0)
-                
+
                     <h3>{{ trans('user.show.havebeen.title') }}</h3>
 
                     @include('component.user.destination', [
-                        'destinations' => $user->destinationHaveBeen() 
+                        'destinations' => $user->destinationHaveBeen()
                     ])
 
                 @endif
-        
+
         </div>
 
         <div class="utils-border-bottom">
@@ -113,15 +113,15 @@
                     <h3>{{ trans('user.show.wantstogo.title') }}</h3>
 
                     @include('component.user.destination', [
-                        'destinations' => $user->destinationWantsToGo() 
+                        'destinations' => $user->destinationWantsToGo()
                     ])
 
                 @endif
-        
+
         </div>
 
     @endif
-    
+
 
     <div class="utils-padding-bottom">
 
