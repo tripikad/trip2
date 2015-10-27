@@ -2,14 +2,14 @@
 
     <ul class="c-nav__list">
 
-        @include('component.menu', [
+        @include('component.nav', [
             'menu' => 'header',
             'items' => config('menu.header')
         ])
 
         @if(auth()->user() && ! auth()->user()->hasRole('admin'))
 
-            @include('component.menu', [
+            @include('component.nav', [
                 'menu' => 'auth',
                 'items' => [
                     'user' => [
@@ -25,7 +25,7 @@
 
         @elseif(auth()->user() && auth()->user()->hasRole('admin'))
 
-            @include('component.menu', [
+            @include('component.nav', [
                 'menu' => 'auth',
                 'items' => [
                     'user' => [
@@ -44,7 +44,7 @@
 
         @else
 
-            @include('component.menu', [
+            @include('component.nav', [
                 'menu' => 'auth',
                 'items' => [
                     'register' => [

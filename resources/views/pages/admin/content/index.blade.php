@@ -6,15 +6,15 @@
 
 @section('header2.content')
 
-    @include('component.menu', [
+    @include('component.nav', [
         'menu' => 'admin',
         'items' => config('menu.admin')
     ])
-        
+
 @stop
 
 @section('content.one')
-    
+
     @foreach ($contents as $content)
 
         <div class="utils-border-bottom utils-unpublished">
@@ -26,7 +26,7 @@
             'heading_link' => route('content.show', [$content->type, $content->id]),
             'description' => view('component.content.description', ['content' => $content])
         ])
-        
+
         </div>
 
     @endforeach

@@ -1,13 +1,13 @@
 @extends('layouts.main')
 
 @section('title')
-    
+
     {{ trans("content.$type.index.title") }}
 
 @stop
 
 @section('header1.right')
-    @include('component.button', [ 
+    @include('component.button', [
         'route' => route('content.create', ['type' => $type]),
         'title' => trans("content.$type.create.title")
     ])
@@ -15,7 +15,7 @@
 
 @section('header2.content')
 
-    @include('component.menu', [
+    @include('component.nav', [
         'menu' => 'news',
         'items' => config('menu.news')
     ])
@@ -31,7 +31,7 @@
 @section('content')
 
     <div class="row">
-  
+
         @foreach ($contents as $index => $content)
 
             <div class="col-sm-3">

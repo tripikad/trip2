@@ -7,10 +7,10 @@
 @stop
 
 @section('content2.content')
-    
+
     @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
-                    
-        @include('component.menu', [
+
+        @include('component.nav', [
             'menu' => 'user',
             'items' => [
                 'activity' => ['route' => route('user.show', [$user])],
@@ -19,7 +19,7 @@
             ],
             'options' => 'text-center'
         ])
-                    
+
     @endif
 
 @stop
