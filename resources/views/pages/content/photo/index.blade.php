@@ -38,10 +38,12 @@
         <div class="utils-padding-bottom">
 
             @include('component.row', [
-                'image' => $content->user->imagePreset(),
-                'image_link' => route('user.show', [$content->user]),
-                'heading' => $content->title,
-                'description' => view('component.content.description', ['content' => $content]),
+                'profile' => [
+                    'image' => $content->user->imagePreset(),
+                    'route' => route('user.show', [$content->user])
+                ],
+                'title' => $content->title,
+                'text' => view('component.content.text', ['content' => $content]),
                 'actions' => view('component.actions', ['actions' => $content->getActions()]),
                 'extra' => view('component.flags', ['flags' => $content->getFlags()]),
                 'body' => $content->body_filtered,
@@ -58,4 +60,3 @@
     {!! $contents->render() !!}
 
 @stop
-

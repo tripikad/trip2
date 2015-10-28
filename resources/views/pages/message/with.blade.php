@@ -30,21 +30,18 @@
 
 @foreach ($messages as $message)
 
-    <div
-
-        id="message-{{ $message->id }}"
-        class="utils-padding-bottom @if ($message->read) utils-read @endif"
-
-    >
+    <div id="message-{{ $message->id }}" class="utils-padding-bottom @if ($message->read) utils-read @endif">
 
     @include('component.row', [
-        'image' => $message->fromUser->imagePreset(),
-        'description' => trans('message.index.with.row.description', [
+        'profile' => [
+            'image' => $message->fromUser->imagePreset()
+        ],
+        'text' => trans('message.index.with.row.description', [
             'user' => $message->fromUser->name,
             'created_at' => view('component.date.long', ['date' => $message->created_at])
         ]),
         'body' => nl2br($message->body),
-        'options' => '-narrow -small'
+        'modifiers' => '-narrow -small'
     ])
 
     </div>

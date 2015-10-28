@@ -31,15 +31,17 @@
         <div class="utils-padding-bottom @if ($message->read) utils-read @endif">
 
             @include('component.row', [
-                'image' => $message->withUser->imagePreset(),
-                'image_link' => route('user.show', [$message->withUser]),
-                'heading' => $message->title,
-                'heading_link' => route('message.index.with', [$user, $message->withUser]),
-                'description' => trans('message.index.row.description', [
+                'profile' => [
+                    'image' => $message->withUser->imagePreset(),
+                    'route' => route('user.show', [$message->withUser])
+                ],
+                'title' => $message->title,
+                'route' => route('message.index.with', [$user, $message->withUser]),
+                'text' => trans('message.index.row.description', [
                     'user' => view('component.user.link', ['user' => $message->withUser]),
                     'created_at' => view('component.date.long', ['date' => $message->created_at])
                 ]),
-                'options' => '-narrow'
+                'modifiers' => '-narrow'
             ])
 
         </div>

@@ -7,17 +7,16 @@ description: Row is meant for complex listings and content headers
 code: |
 
     @include('component.row', [
-        'options' => $modifiers,
+        'modifiers' => $modifiers,
         'icon' => 'icon-offer',
-        'image' => \App\Image::getRandom(),
-        'image_link' => '',
         'profile' => [
             'modifiers' => '',
+            'image' => \App\Image::getRandom(),
             'route' => '',
         ],
         'preheading' => 'Preheading',
-        'heading' => '',
-        'heading_link' => '',
+        'title' => '',
+        'route' => '',
         'postheading' => 'Postheading',
         'actions' => view('component.actions', [
             'actions' => [
@@ -25,7 +24,7 @@ code: |
                 ['route' => '', 'title' => 'This is second action'],
             ]
         ]),
-        'description' => '',
+        'text' => '',
         'extra' => 'Extra',
         'body' => 'This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...',
     ])
@@ -43,7 +42,7 @@ modifiers:
 
 --}}
 
-<article class="c-row {{ $options or '' }}">
+<article class="c-row {{ $modifiers or '' }}">
 
     @if (isset($icon) && !isset($profile))
 
@@ -63,25 +62,25 @@ modifiers:
 
         @include('component.profile', [
             'modifiers' => $profile['modifiers'],
-            'route' => '',
-            'image' => $image
+            'route' => $profile['route'],
+            'image' => $profile['image']
         ])
 
     </div>
 
     @endif
 
-    @if (isset($heading))
+    @if (isset($title))
 
     <h3 class="c-row__title">
 
         @if (isset($preheading)) <span>{!! $preheading !!}</span> @endif
 
-        @if (isset($heading_link)) <a href="{{ $heading_link }}" class="c-row__title-link"> @endif
+        @if (isset($route)) <a href="{{ $route }}" class="c-row__title-link"> @endif
 
-        {{ $heading }}
+        {{ $title }}
 
-        @if (isset($heading_link)) </a> @endif
+        @if (isset($route)) </a> @endif
 
         @if (isset( $postheading )) <span>{!! $postheading !!}</span> @endif
 
@@ -89,11 +88,11 @@ modifiers:
 
     @endif
 
-    @if (isset($description) || isset($extra))
+    @if (isset($text) || isset($extra))
 
     <p class="c-row__text">
 
-        {!! $description or '' !!}
+        {!! $text or '' !!}
 
         {!! $extra or '' !!}
 

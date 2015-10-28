@@ -33,14 +33,16 @@
         <div class="utils-padding-bottom">
 
             @include('component.row', [
-                'image' => $follow->followable->user->imagePreset(),
-                'image_link' => route('user.show', [$follow->followable->user]),
-                'heading' => $follow->followable->title,
-                'heading_link' => route('content.show', [
+                'profile' => [
+                    'image' => $follow->followable->user->imagePreset(),
+                    'route' => route('user.show', [$follow->followable->user])
+                ],
+                'title' => $follow->followable->title,
+                'route' => route('content.show', [
                     $follow->followable->type,
                     $follow->followable
                 ]),
-                'description' => view('component.content.description', ['content' => $follow->followable]),
+                'text' => view('component.content.text', ['content' => $follow->followable]),
                 'actions' => view('component.actions', ['actions' => $follow->followable->getActions()]),
 
             ])
