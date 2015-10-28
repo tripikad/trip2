@@ -157,7 +157,7 @@
 
             <div class="r-home__forum-column m-last">
 
-                @include('component.forum', [
+                @include('component.content.forum.list', [
                     'items' => [
                         [
                             'topic' => 'Samui hotellid?',
