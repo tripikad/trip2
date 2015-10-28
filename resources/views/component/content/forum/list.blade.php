@@ -12,8 +12,7 @@ code: |
                 'route' => '#',
                 'profile' => [
                     'modifiers' => 'm-mini',
-                    'image' => \App\Image::getRandom(),
-                    'route' => '#'
+                    'image' => \App\Image::getRandom()
                 ],
                 'badge' => [
                     'modifiers' => 'm-inverted',
@@ -58,7 +57,6 @@ modifiers:
 
     			@include('component.profile', [
     				'modifiers' => $item['profile']['modifiers'],
-                    'route' => $item['profile']['route'],
                     'image' => $item['profile']['image'],
                     'badge' => $item['badge']
                 ])

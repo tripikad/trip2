@@ -138,8 +138,7 @@
                                 'route' => '#',
                                 'profile' => [
                                     'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom(),
-                                    'route' => '#'
+                                    'image' => \App\Image::getRandom()
                                 ],
                                 'badge' => [
                                     'modifiers' => 'm-inverted',
@@ -151,8 +150,7 @@
                                 'route' => '#',
                                 'profile' => [
                                     'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom(),
-                                    'route' => '#'
+                                    'image' => \App\Image::getRandom()
                                 ],
                                 'badge' => [
                                     'modifiers' => 'm-inverted',
@@ -164,8 +162,7 @@
                                 'route' => '#',
                                 'profile' => [
                                     'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom(),
-                                    'route' => '#'
+                                    'image' => \App\Image::getRandom()
                                 ],
                                 'badge' => [
                                     'modifiers' => 'm-inverted',
@@ -177,8 +174,7 @@
                                 'route' => '#',
                                 'profile' => [
                                     'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom(),
-                                    'route' => '#'
+                                    'image' => \App\Image::getRandom()
                                 ],
                                 'badge' => [
                                     'modifiers' => '',
