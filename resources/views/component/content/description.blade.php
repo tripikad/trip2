@@ -1,3 +1,26 @@
+@include('component.inline_list', [
+    'items' => [
+        [
+            'title' => $content->user->name,
+            'route' => route('user.show', [$content->user])
+        ],
+        [
+            'title' => view('component.date.relative', ['date' => $content->created_at])
+        ],
+        [
+            'title' => trans('content.row.text.comment', [
+                                'updated_at' => view('component.date.relative', ['date' => $content->updated_at])
+                            ])
+        ],
+        [
+            'title' => $content->destinations->implode('name', '</li><li>')
+        ],
+        [
+            'title' => $content->topics->implode('name', '</li><li>')
+        ]
+    ]
+])
+
 <ul class="component-content-description list-inline">
 
     <li>
@@ -6,7 +29,7 @@
 
     </li>
 
-    </li>
+    <li>
 
         {{ view('component.date.relative', ['date' => $content->created_at]) }}
 
