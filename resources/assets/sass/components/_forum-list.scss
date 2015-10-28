@@ -1,0 +1,109 @@
+.c-forum-list {
+
+    @include clearfix;
+    @include clear-list;
+}
+
+    .c-forum-list__item {
+
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        padding: $spacer * 0.75 $spacer * 2;
+        margin-bottom: $spacer / 2;
+        border-left: 2px solid $color-fill-neutral;
+
+        &:nth-child(even) {
+
+            background: $color-fill-neutral-lightest;
+            box-shadow: 0 1px 1px rgba($color-fill-neutral-light, 0.75);
+        }
+
+        &:last-child {
+
+            margin-bottom: 0;
+        }
+
+        .c-forum-list.m-compact & {
+
+            padding: 0;
+            margin-bottom: $spacer;
+            border: none;
+
+            &:nth-child(even) {
+
+                background: none;
+                box-shadow: none;
+            }
+        }
+    }
+
+        .c-forum-list__item-link {
+
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            width: 100%;
+
+            @include respond-to(tablet) {
+
+                flex: 2;
+            }
+
+            &:hover {
+
+                text-decoration: underline;
+            }
+        }
+
+        .c-forum-list__item-content {
+
+            display: flex;
+            align-items: center;
+            width: 100%;
+
+            @include respond-to(tablet) {
+
+                flex: 2;
+            }
+        }
+
+            .c-forum-list__item-profile {
+
+                padding-right: $spacer * 2;
+            }
+
+            .c-forum-list__item-topic {
+
+                color: $color-text-black;
+                font-weight: $font-weight-medium;
+                font-size: 18px; // Exception
+                line-height: 1.15;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                flex: 1;
+
+                .c-forum-list.m-compact & {
+
+                    font-size: $font-size-normal;
+                }
+            }
+
+        .c-forum-list__item-tags {
+
+            display: block;
+            padding: $spacer * 1.5 0 0 0;
+
+            @include respond-to(tablet) {
+
+                text-align: right;
+                flex: 1;
+                padding: 0;
+            }
+
+            .c-forum-list.m-compact & {
+
+                display: none;
+            }
+        }

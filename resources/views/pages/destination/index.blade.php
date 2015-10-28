@@ -130,7 +130,7 @@
                         ])
                     </div>
 
-                    @include('component.forum', [
+                    @include('component.content.forum.list', [
                         'modifiers' => 'm-compact',
                         'items' => [
                             [
