@@ -10,7 +10,11 @@ code: |
         'title' => 'Name Lastname',
         'age' => 22,
         'image' => \App\Image::getRandom(),
-        'interests' => 'Itaalia'
+        'interests' => 'Itaalia',
+        'badge' => [
+            'modifiers' => 'm-red m-inverted',
+            'count' => '7'
+        ]
     ])
 
 modifiers:
@@ -21,9 +25,18 @@ modifiers:
 
 --}}
 
+@if (isset($route))
+
+<a class="c-profile {{ $modifiers or '' }}" href="{{ $route }}">
+
+@else
+
 <div class="c-profile {{ $modifiers or '' }}">
 
+@endif
+
     <div class="c-profile__image-wrap">
+
         <img src="{{ $image }}" alt="" class="c-profile__image">
 
         @if (isset($badge))
@@ -46,9 +59,9 @@ modifiers:
     <div class="c-profile__info">
 
         <h3 class="c-profile__title">
-        	<a href="{{ $route }}" class="c-profile__title-link">{{ $title }}</a>
+        	{{ $title }}
 			@if (isset($age))
-				({{ $age }})
+				<span>({{ $age }})</span>
 			@endif
         </h3>
 
@@ -60,4 +73,13 @@ modifiers:
     </div>
 
      @endif
+
+@if (isset($route))
+
+</a>
+
+@else
+
 </div>
+
+@endif

@@ -3,6 +3,7 @@
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    text-decoration: none;
 
     &.m-center {
 
@@ -77,8 +78,14 @@
 
         .c-profile__title {
 
-            color: $color-text-neutral-dark;
+            color: $color-text-link;
             font-size: $font-size-normal;
+            text-decoration: none;
+
+            span {
+
+                color: $color-text-neutral-dark;
+            }
         }
 
             .c-profile__title-link {
