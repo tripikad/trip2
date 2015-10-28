@@ -34,7 +34,9 @@
 
     @include('component.row', [
         'profile' => [
-            'image' => $message->fromUser->imagePreset()
+            'modifiers' => '',
+            'image' => $message->fromUser->imagePreset(),
+            'route' => ''
         ],
         'text' => trans('message.index.with.row.description', [
             'user' => $message->fromUser->name,

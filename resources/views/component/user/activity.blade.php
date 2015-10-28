@@ -6,7 +6,9 @@
 
         @include('component.row', [
             'profile' => [
-                'image' => $user->imagePreset()
+                'modifiers' => '',
+                'image' => $user->imagePreset(),
+                'route' => ''
             ],
             'text' => trans('user.activity.index.row.content', [
                 'user' => $user->name,
@@ -24,7 +26,9 @@
 
         @include('component.row', [
             'profile' => [
-                'image' => $user->imagePreset()
+                'modifiers' => '',
+                'image' => $user->imagePreset(),
+                'route' => ''
             ],
             'text' => trans('user.activity.index.row.comment', [
                 'user' => $user->name,

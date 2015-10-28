@@ -30,8 +30,9 @@
 
         @include('component.row', [
             'profile' => [
+                'modifiers' => '',
                 'image' => $content->user->imagePreset(),
-                'image_link' => route('user.show', [$content->user])
+                'route' => route('user.show', [$content->user])
             ],
             'title' => $content->title,
             'route' => route('content.show', [$content->type, $content->id]),

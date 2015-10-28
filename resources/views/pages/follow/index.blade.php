@@ -34,6 +34,7 @@
 
             @include('component.row', [
                 'profile' => [
+                    'modifiers' => '',
                     'image' => $follow->followable->user->imagePreset(),
                     'route' => route('user.show', [$follow->followable->user])
                 ],
@@ -43,8 +44,7 @@
                     $follow->followable
                 ]),
                 'text' => view('component.content.text', ['content' => $follow->followable]),
-                'actions' => view('component.actions', ['actions' => $follow->followable->getActions()]),
-
+                'actions' => view('component.actions', ['actions' => $follow->followable->getActions()])
             ])
 
         </div>

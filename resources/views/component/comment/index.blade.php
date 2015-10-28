@@ -17,6 +17,7 @@
 
         @include('component.row', [
             'profile' => [
+                'modifiers' => '',
                 'image' => $comment->user->imagePreset('xsmall_square'),
                 'route' => route('user.show', [$comment->user])
             ],

@@ -32,6 +32,7 @@
 
             @include('component.row', [
                 'profile' => [
+                    'modifiers' => '',
                     'image' => $message->withUser->imagePreset(),
                     'route' => route('user.show', [$message->withUser])
                 ],

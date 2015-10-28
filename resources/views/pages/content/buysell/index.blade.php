@@ -32,6 +32,7 @@
 
         @include('component.row', [
             'profile' => [
+                'modifiers' => '',
                 'image' => $content->user->imagePreset(),
                 'route' => route('user.show', [$content->user])
             ],
