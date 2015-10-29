@@ -35,14 +35,14 @@
 
     .c-news__title {
 
-        font-size: $font-size-large;
+        font-size: $font-size-larger;
         font-weight: $font-weight-bold;
         line-height: 1.15;
         margin-bottom: $spacer * 2;
 
         .c-news.m-small & {
 
-            font-size: $font-size-medium;
+            font-size: $font-size-large;
         }
     }
 

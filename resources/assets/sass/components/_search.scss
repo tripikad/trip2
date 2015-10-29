@@ -89,7 +89,7 @@
 
         @include respond-to(tablet) {
 
-            font-size: $font-size-larger;
+            font-size: $font-size-largest;
             padding: $spacer * 1.5 $spacer * 2 $spacer $spacer * 7;
         }
 
@@ -210,7 +210,7 @@
 
                     .c-search__results-sublist-item {
 
-                        font-size: $font-size-medium;
+                        font-size: $font-size-large;
                         font-weight: $font-weight-medium;
                         line-height: 1.5;
                         text-transform: none;
