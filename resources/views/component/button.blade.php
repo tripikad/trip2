@@ -14,6 +14,8 @@ modifiers:
 
 - m-block
 - m-secondary
+- m-large
+- m-loading
 
 --}}
 

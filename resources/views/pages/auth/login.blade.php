@@ -8,28 +8,32 @@
 
     {!! Form::open(['route' => 'login.submit']) !!}
 
-        <div class="form-group">
+        <div class="c-form__group">
+            {!! Form::label('name', trans('auth.login.field.name.title'), [
+                'class' => 'c-form__label'
+            ]) !!}
             {!! Form::text('name', null, [
-                'class' => 'form-control input-lg',
-                'placeholder' => trans('auth.login.field.name.title')
+                'class' => 'c-form__input'
             ]) !!}
         </div>
 
-        <div class="form-group">
+        <div class="c-form__group">
+            {!! Form::label('password', trans('auth.login.field.password.title'), [
+                'class' => 'c-form__label'
+            ]) !!}
             {!! Form::password('password', [
-                'class' => 'form-control input-lg',
-                'placeholder' => trans('auth.login.field.password.title')
+                'class' => 'c-form__input'
             ]) !!}
         </div>
 
-        <div class="form-group">
+        <div class="c-form__group">
             {!! Form::checkbox('remember') !!}
             {!! Form::label('remember', trans('auth.login.field.remember.title')) !!}
         </div>
 
-        <div class="form-group">
+        <div class="c-form__group">
             {!! Form::submit(trans('auth.login.submit.title'), [
-                'class' => 'btn btn-primary btn-lg btn-block'
+                'class' => 'c-button m-large m-block'
             ]) !!}
         </div>
 
