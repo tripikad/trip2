@@ -1,0 +1,96 @@
+.r-flights {}
+
+    .r-flights__content-wrap {
+
+        @include wrap();
+    }
+
+    .r-flights__content {
+
+        @include respond-to(tablet) {
+
+            @include span(16 of 24);
+        }
+    }
+
+    .r-flights__sidebar {
+
+        @include respond-to(tablet) {
+
+            @include span(6 of 24 at 2);
+        }
+    }
+
+        .r-flights__about {
+
+            padding: 0 $spacer * 3;
+            margin-bottom: $spacer * 2.5;
+            background: $color-fill-neutral-light;
+        }
+
+        .r-flights__promo {
+
+            margin-bottom: $spacer * 2.5;
+        }
+
+    .r-flights__forum {
+
+        padding: $spacer * 4 0;
+        background: $color-fill-neutral-light;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 4 0 $spacer * 12;
+        }
+    }
+
+        .r-flights__forum-wrap {
+
+            @include wrap();
+        }
+
+            .r-flights__forum-title {
+
+                padding-bottom: $spacer * 2;
+
+                @include respond-to(tablet) {
+
+                    padding-bottom: $spacer * 3;
+                }
+            }
+
+            .r-flights__forum-column {
+
+                &.m-first {
+
+                    padding-bottom: $spacer * 4;
+
+                    @include respond-to(tablet) {
+
+                        @include span(4 of 24);
+
+                        padding-bottom: 0;
+                    }
+                }
+
+                &.m-last {
+
+                    @include respond-to(tablet) {
+
+                        @include span(18.5 of 24 at 2.5);
+                    }
+                }
+            }
+
+    .r-flights__footer-promo {
+
+        background: $color-fill-neutral-light;
+        margin-bottom: -$spacer * 4;
+    }
+
+        .r-flights__footer-promo-wrap {
+
+            @include wrap('narrow');
+            position: relative;
+            z-index: 2;
+        }
