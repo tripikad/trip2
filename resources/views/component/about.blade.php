@@ -7,9 +7,16 @@ code: |
     @include('component.about', [
         'modifiers' => $modifiers,
         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
-        'link' => [
-            'title' => 'Loe lähemalt Trip.ee-st ›',
-            'route' => '#',
+        'text' => 'Pakkumised võivad aeguda juba paari päevaga. Paremaks orienteerumiseks on vanemad pakkumised eri värvi.',
+        'links' => [
+            [
+                'title' => 'Loe lähemalt Trip.ee-st ›',
+                'route' => '#',
+            ],
+            [
+                'title' => 'Mis on veahind ›',
+                'route' => '#',
+            ]
         ],
         'button' => [
             'title' => 'Liitu Trip.ee-ga',
@@ -30,12 +37,27 @@ modifiers:
 
         <h2 class="c-about__title">{{ $title }}</h2>
 
-        @if (isset($link))
+        @if (isset($text))
 
-            @include('component.link', [
-                'title' => $link['title'],
-                'route' => $link['route']
-            ])
+        <p class="c-about__text">{{ $text }}</p>
+
+        @endif
+
+        @if (isset($links))
+
+        <div class="c-about__links">
+
+            @foreach ($links as $link)
+
+                @include('component.link', [
+                    'modifiers' => 'm-block',
+                    'title' => $link['title'],
+                    'route' => $link['route']
+                ])
+
+            @endforeach
+
+        </div>
 
          @endif
 
