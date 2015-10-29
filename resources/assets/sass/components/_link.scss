@@ -2,6 +2,7 @@
 
     @include clearfix;
     @include color-modifiers;
+    @include font-smoothing;
 
     color: $color-text-link;
     font-size: $font-size-normal;
