@@ -37,6 +37,19 @@
     border: 1px solid $color-fill-neutral;
     border-radius: 3px;
 
+    &.m-medium {
+
+        font-size: $font-size-medium;
+        height: $spacer * 3.5;
+    }
+
+    &.m-small {
+
+        font-size: $font-size-medium;
+        padding: $spacer * 0.75 $spacer;
+        height: $spacer * 3;
+    }
+
     &:hover {
 
         border-color: $color-fill-neutral-dark;
