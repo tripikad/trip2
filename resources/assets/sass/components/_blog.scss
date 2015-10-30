@@ -14,6 +14,8 @@
 
     .c-blog__title {
 
+        @include font-smoothing;
+
         font-size: $font-size-larger;
         font-weight: $font-weight-bold;
         text-align: center;

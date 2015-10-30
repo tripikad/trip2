@@ -59,6 +59,8 @@
 
             .c-card__title {
 
+                @include font-smoothing;
+
                 color: $color-white;
                 font-size: $font-size-large;
                 font-weight: $font-weight-bold;
@@ -70,6 +72,8 @@
             }
 
             .c-card__text {
+
+                @include font-smoothing;
 
                 color: $color-white;
                 font-size: $font-size-normal;
