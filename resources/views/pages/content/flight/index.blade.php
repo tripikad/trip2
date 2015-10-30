@@ -28,12 +28,12 @@
         <div class="utils-padding-bottom">
         
         @include('component.row', [
-            'heading' => $content->title,
-            'heading_link' => route('content.show', [
+            'title' => $content->title,
+            'route' => route('content.show', [
                 'type' => $content->type,
                 'id' => $content
             ]),
-            'description' => view('component.date.short', [
+            'text' => view('component.date.short', [
                 'date' => $content->end_at
             ]),
             'extra' => $content->price
@@ -50,4 +50,3 @@
     {!! $contents->render() !!}
 
 @stop
-

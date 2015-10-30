@@ -5,8 +5,12 @@
     @if ($item->activity_type == 'content') 
 
         @include('component.row', [
-            'image' => $user->imagePreset(),
-            'description' => trans('user.activity.index.row.content', [
+            'profile' => [
+                'modifiers' => '',
+                'image' => $user->imagePreset(),
+                'route' => ''
+            ],
+            'text' => trans('user.activity.index.row.content', [
                 'user' => $user->name,
                 'title' => '<a href="'
                     . route('content.show', [$item->type, $item->id])
@@ -15,14 +19,18 @@
                     . '</a>',
                 'created_at' => view('component.date.relative', ['date' => $item->created_at])
             ]),
-            'options' => '-narrow -small'
+            'modifiers' => '-narrow -small'
         ])
 
     @else
 
         @include('component.row', [
-            'image' => $user->imagePreset(),
-            'description' => trans('user.activity.index.row.comment', [
+            'profile' => [
+                'modifiers' => '',
+                'image' => $user->imagePreset(),
+                'route' => ''
+            ],
+            'text' => trans('user.activity.index.row.comment', [
                 'user' => $user->name,
                 'title' => '<a href="'
                     . route('content.show', [$item->content->type, $item->content->id])
@@ -36,7 +44,7 @@
                     . '</a>',
                 'created_at' => view('component.date.relative', ['date' => $item->created_at])
             ]),
-            'options' => '-small -narrow'
+            'modifiers' => '-small -narrow'
         ])
 
     @endif
