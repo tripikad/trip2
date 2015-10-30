@@ -108,12 +108,17 @@ $shadow-dark: #0e1217;
 
 $color-text-link: #36a1eb;
 
-$color-fill-success: $brand-green;
+$color-fill-success: #49c91f;
 $color-fill-success-dark: $brand-green-dark;
 
-$color-fill-info: $brand-blue;
+$color-fill-notice: $brand-orange;
+$color-fill-notice-dark: $brand-orange-dark;
+
+$color-fill-info-light: #f5fbff;
+$color-fill-info: $color-text-link;
 $color-fill-info-dark: $brand-blue-dark;
 
+$color-fill-error-light: #fff7f7;
 $color-fill-error: $brand-red;
 $color-fill-error-dark: $brand-red-dark;
 
