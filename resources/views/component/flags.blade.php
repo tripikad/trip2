@@ -1,6 +1,6 @@
-<div class="component-flag utils-padding-left">
+<div class="c-flag">
 
-    <div class="good">
+    <div class="m-green">
 
         @if ($flags['good']['flaggable'])
         
@@ -23,7 +23,7 @@
 
     </div>
 
-    <div class="bad">
+    <div class="m-red">
 
         @if ($flags['bad']['flaggable'])
 
