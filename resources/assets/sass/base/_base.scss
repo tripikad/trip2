@@ -11,8 +11,6 @@
 
 body {
 
-	@include font-smoothing;
-
 	color: $body-font-color;
 	font-family: $font-primary;
 	font-size: $base-font-size;
@@ -59,7 +57,6 @@ textarea,
 button {
 
 	-webkit-appearance: none;
-	border-radius: 0;
 }
 
 button {

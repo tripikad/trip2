@@ -14,7 +14,13 @@
 
     .c-blog__title {
 
+<<<<<<< HEAD
         font-size: $font-size-largest;
+=======
+        @include font-smoothing;
+
+        font-size: $font-size-larger;
+>>>>>>> master
         font-weight: $font-weight-bold;
         text-align: center;
         line-height: 1.2;

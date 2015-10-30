@@ -77,8 +77,12 @@
             .c-forum-list__item-topic {
 
                 color: $color-text-black;
+<<<<<<< HEAD
                 font-weight: $font-weight-medium;
                 font-size: $font-size-medium;
+=======
+                font-size: 18px; // Exception
+>>>>>>> master
                 line-height: 1.15;
                 white-space: nowrap;
                 text-overflow: ellipsis;
