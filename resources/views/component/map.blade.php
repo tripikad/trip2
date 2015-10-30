@@ -22,6 +22,6 @@ code: |
 
     @endif
 
-    <?php echo file_get_contents('./svg/map.svg'); ?>
+    <img src="/svg/map.svg" alt="">
 
 </div>
