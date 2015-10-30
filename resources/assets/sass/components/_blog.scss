@@ -14,17 +14,18 @@
 
     .c-blog__title {
 
-<<<<<<< HEAD
-        font-size: $font-size-largest;
-=======
         @include font-smoothing;
 
-        font-size: $font-size-larger;
->>>>>>> master
+        font-size: $font-size-large;
         font-weight: $font-weight-bold;
         text-align: center;
         line-height: 1.2;
         padding: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-largest;
+        }
     }
 
         .c-blog__title-link {

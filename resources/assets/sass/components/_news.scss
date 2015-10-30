@@ -35,13 +35,9 @@
 
     .c-news__title {
 
-<<<<<<< HEAD
-        font-size: $font-size-larger;
-=======
         @include font-smoothing;
 
-        font-size: $font-size-large;
->>>>>>> master
+        font-size: $font-size-larger;
         font-weight: $font-weight-bold;
         line-height: 1.15;
         margin-bottom: $spacer * 2;

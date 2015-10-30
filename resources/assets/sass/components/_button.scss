@@ -41,7 +41,7 @@
 
         // Color variables set in another commit - FIX
 
-        background-image: linear-gradient(-45deg, #e1e7eb 25%, #d1dae0 25%, #d1dae0 50%, #e1e7eb 50%, #e1e7eb 75%, #d1dae0 75%, #d1dae0);
+        background-image: linear-gradient(-45deg, $color-fill-neutral 25%, $color-fill-neutral-dark 25%, $color-fill-neutral-dark 50%, $color-fill-neutral 50%, $color-fill-neutral 75%, $color-fill-neutral-dark 75%, $color-fill-neutral-dark);
         background-size: 50px 50px;
         animation: move 2s linear infinite;
     }
