@@ -2,8 +2,6 @@
 
     .c-destination-info__text {
 
-        @include font-smoothing;
-
         margin-bottom: $spacer * 2;
         color: $color-white;
         font-size: 18px; // Exception
@@ -23,7 +21,6 @@
     .c-destination-info__definition-list {
 
         @include clearfix;
-        @include font-smoothing;
 
         font-weight: $font-weight-medium;
     }

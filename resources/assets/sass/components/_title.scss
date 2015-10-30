@@ -1,7 +1,6 @@
 .c-title {
 
     @include color-modifiers;
-    @include font-smoothing;
 
     font-family: $font-primary;
     font-size: $font-size-small;
