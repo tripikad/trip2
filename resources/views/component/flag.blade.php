@@ -20,9 +20,9 @@ modifiers:
 
 --}}
 
-<div class="c-flag {{ $modifiers or 'm-yellow' }}">
+<div class="c-flag">
 
-    <div class="c-flag__item">
+    <div class="c-flag__item {{ $modifiers or 'm-yellow' }}">
 
         <div class="c-flag__item-text">{{ $number or '0'}}</div>
     </div>

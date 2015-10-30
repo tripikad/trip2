@@ -1,4 +1,4 @@
-<div class="c-flag utils-padding-left">
+<div class="c-flag">
 
     <div class="m-green">
 
