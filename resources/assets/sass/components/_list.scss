@@ -22,7 +22,6 @@
 
         .c-list.m-dot & {
 
-            font-weight: $font-weight-medium;
             position: relative;
             padding-left: $spacer * 2;
 
@@ -31,7 +30,7 @@
                 content: '';
                 position: absolute;
                 left: 0;
-                top: 3px;
+                top: 8px;
                 width: 7px;
                 height: 7px;
                 border-radius: 50%;
@@ -57,9 +56,16 @@
 
             .c-list.m-large & {
 
+                @include font-smoothing;
+
                 font-size: $font-size-large;
                 font-weight: $font-weight-bold;
                 line-height: 1.15;
+            }
+
+            .c-list.m-dot & {
+
+                font-weight: $font-weight-medium;
             }
         }
 
