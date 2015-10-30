@@ -21,7 +21,6 @@
 
 @stop
 
-<<<<<<< HEAD
 @section('content')
 
 <div class="r-flights">
@@ -33,29 +32,6 @@
             @include('component.map', [
                 'modifiers' => 'm-flights'
             ])
-=======
-@section('content.one')
-
-    @foreach ($contents as $index => $content)
-
-        <div class="utils-padding-bottom">
-        
-        @include('component.row', [
-            'title' => $content->title,
-            'route' => route('content.show', [
-                'type' => $content->type,
-                'id' => $content
-            ]),
-            'text' => view('component.date.short', [
-                'date' => $content->end_at
-            ]),
-            'extra' => $content->price
-                ? trans("content.flight.index.field.price", [
-                    'price' => $content->price,
-                    'symbol' => config('site.currency.symbol')
-            ]) : null,
-        ])
->>>>>>> master
 
         </div>
 
@@ -63,7 +39,6 @@
 
     <div class="r-flights__masthead">
 
-<<<<<<< HEAD
         @include('component.masthead')
 
     </div>
@@ -75,14 +50,14 @@
             @foreach ($contents as $index => $content)
 
                 @include('component.row', [
-                    'options' => 'm-icon m-blue',
+                    'modifiers' => 'm-icon m-blue',
                     'icon' => 'icon-offer',
-                    'heading' => $content->title,
-                    'heading_link' => route('content.show', [
+                    'title' => $content->title,
+                    'route' => route('content.show', [
                         'type' => $content->type,
                         'id' => $content
                     ]),
-                    'description' => view('component.date.short', [
+                    'text' => view('component.date.short', [
                         'date' => $content->end_at
                     ]),
                     'extra' => $content->price
@@ -441,6 +416,4 @@
 
 </div>
 
-=======
->>>>>>> master
 @stop
