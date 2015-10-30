@@ -15,11 +15,13 @@
 
         .c-tags__item-link {
 
+            @include font-smoothing;
+
             color: $color-white;
             display: block;
             font-family: $font-primary;
             font-size: $font-size-small;
-            font-weight: $font-weight-medium;
+            font-weight: $font-weight-bold;
             height: 22px;
             line-height: 26px;
             padding: 0 12px;
