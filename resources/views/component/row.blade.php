@@ -43,7 +43,6 @@ modifiers:
 --}}
 
 <article class="c-row {{ $modifiers or '' }}">
-
     @if (isset($icon) && !isset($profile))
 
     <div class="c-row__icon">
@@ -63,7 +62,8 @@ modifiers:
         @include('component.profile', [
             'modifiers' => $profile['modifiers'],
             'route' => $profile['route'],
-            'image' => $profile['image']
+            'image' => $profile['image'],
+            'title' => ''
         ])
 
     </div>
