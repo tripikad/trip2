@@ -65,7 +65,7 @@ modifiers:
 
     		@endif
 
-            <h3 class="c-forum-list__item-topic"><?php echo $item['topic']; ?></h3>
+            <h3 class="c-forum-list__item-topic">{{ $item['topic'] }}</h3>
 
         @if (isset($item['route']))
 

@@ -31,11 +31,14 @@
         <div class="utils-padding-bottom">
 
         @include('component.row', [
-            'image' => $content->user->imagePreset(),
-            'image_link' => route('user.show', [$content->user]),
-            'heading' => $content->title,
-            'heading_link' => route('content.show', [$content->type, $content->id]),
-            'description' => view('component.content.description', [
+            'profile' => [
+                'modifiers' => '',
+                'image' => $content->user->imagePreset(),
+                'route' => route('user.show', [$content->user])
+            ],
+            'title' => $content->title,
+            'route' => route('content.show', [$content->type, $content->id]),
+            'text' => view('component.content.text', [
                 'content' => $content
             ]),
         ])

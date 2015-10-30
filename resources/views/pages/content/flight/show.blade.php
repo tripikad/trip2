@@ -20,9 +20,24 @@
 
 <div class="r-flights m-single">
 
+<<<<<<< HEAD
     <div class="r-flights__masthead">
 
         @include('component.masthead')
+=======
+    @include('component.row', [
+        'profile' => [
+            'modifiers' => '',
+            'image' => $content->user->imagePreset(),
+            'route' => route('user.show', [$content->user])
+        ],
+        'text' => view('component.content.text', ['content' => $content]),
+        'actions' => view('component.actions', ['actions' => $content->getActions()]),
+        'extra' => view('component.flags', ['flags' => $content->getFlags()]),
+        'body' => $content->body_filtered,
+        'modifiers' => '-centered'
+    ])
+>>>>>>> master
 
     </div>
 
