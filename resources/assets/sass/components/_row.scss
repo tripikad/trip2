@@ -40,11 +40,16 @@
 
         .c-row.m-icon & {
 
+            @include font-smoothing;
+
             font-size: $font-size-larger;
+            font-weight: $font-weight-bold;
             line-height: 1.15;
         }
 
         .c-row.m-large & {
+
+            @include font-smoothing;
 
             font-size: $font-size-larger;
             font-weight: $font-weight-bold;

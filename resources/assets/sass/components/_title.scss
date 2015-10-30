@@ -12,6 +12,13 @@
 
         font-size: $font-size-tiny;
     }
+
+    &.m-large {
+
+        font-size: $font-size-large;
+        font-weight: $font-weight-bold;
+        text-transform: none;
+    }
 }
 
     .c-title__link {

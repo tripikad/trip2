@@ -1,0 +1,20 @@
+.c-pager {
+
+    @include clearfix;
+    @include clear-list;
+
+    padding: $spacer * 2 0;
+}
+
+    .c-pager__item {
+
+        &.m-first {
+
+            float: left;
+        }
+
+        &.m-last {
+
+            float: right;
+        }
+    }

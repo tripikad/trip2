@@ -13,6 +13,23 @@
         }
     }
 
+        .r-flights__search {
+
+            padding: $spacer * 2 $spacer * 2 0;
+            margin-bottom: $spacer * 2.5;
+            background: $color-fill-neutral-light;
+        }
+
+            .r-flights__search-title {
+
+                margin-bottom: $spacer;
+            }
+
+            .r-flights__search-body {
+
+                margin-bottom: $spacer * 1.5;
+            }
+
     .r-flights__sidebar {
 
         @include respond-to(tablet) {

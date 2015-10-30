@@ -24,48 +24,77 @@
     }
 }
 
-.c-form__input {
+.c-form__input-wrap {
 
-    color: $color-text-black;
-    font-family: $font-primary;
-    font-size: $font-size-large;
-    font-weight: $font-weight-medium;
-    width: 100%;
-    height: $spacer * 4 + 4;
-    padding: $spacer;
-    background: $color-white;
-    border: 1px solid $color-fill-neutral;
-    border-radius: 3px;
-
-    &.m-medium {
-
-        font-size: $font-size-medium;
-        height: $spacer * 3.5;
-    }
-
-    &.m-small {
-
-        font-size: $font-size-medium;
-        padding: $spacer * 0.75 $spacer;
-        height: $spacer * 3;
-    }
-
-    &:hover {
-
-        border-color: $color-fill-neutral-dark;
-    }
-
-    &:focus {
-
-        background: $color-fill-info-light;
-        border-color: $color-fill-info;
-        box-shadow: 0 0 0 1px $color-fill-info;
-    }
-
-    .c-form__group.m-error & {
-
-        background: $color-fill-error-light;
-        border-color: $color-fill-error;
-        box-shadow: 0 0 0 1px $color-fill-error;
-    }
+    position: relative;
 }
+
+    .c-form__input {
+
+        color: $color-text-black;
+        font-family: $font-primary;
+        font-size: $font-size-large;
+        font-weight: $font-weight-medium;
+        width: 100%;
+        height: $spacer * 4 + 4;
+        padding: $spacer;
+        background: $color-white;
+        border: 1px solid $color-fill-neutral;
+        border-radius: 3px;
+
+        &.m-medium {
+
+            font-size: $font-size-medium;
+            height: $spacer * 3.5;
+        }
+
+        &.m-small {
+
+            font-size: $font-size-normal;
+            padding: $spacer * 0.75 $spacer;
+            height: $spacer * 3;
+
+            &.m-icon {
+
+                padding-left: $spacer * 3;
+            }
+        }
+
+        &:hover {
+
+            border-color: $color-fill-neutral-dark;
+        }
+
+        &:focus {
+
+            background: $color-fill-info-light;
+            border-color: $color-fill-info;
+            box-shadow: 0 0 0 1px $color-fill-info;
+        }
+
+        .c-form__group.m-error & {
+
+            background: $color-fill-error-light;
+            border-color: $color-fill-error;
+            box-shadow: 0 0 0 1px $color-fill-error;
+        }
+    }
+
+    .c-form__input-icon {
+
+        position: absolute;
+        top: 50%;
+        left: $spacer;
+        display: block;
+        height: $spacer * 1.5;
+        width: $spacer * 1.5;
+        margin-top: -$spacer * 0.75;
+
+        svg {
+
+            fill: $color-text-neutral-darker;
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
+    }
