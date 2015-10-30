@@ -1,8 +1,26 @@
 .r-flights {}
 
+    .r-flights__map {
+
+        width: 100%;
+        position: relative;
+    }
+
+        .r-flights__map-inner {
+
+            position: absolute;
+            right: 0;
+            top: $spacer * 20;
+            height: $spacer * 70;
+            width: $spacer * 100;
+        }
+
     .r-flights__content-wrap {
 
         @include wrap();
+
+        position: relative;
+        z-index: 2;
     }
 
     .r-flights__content {
