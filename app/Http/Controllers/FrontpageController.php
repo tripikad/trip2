@@ -61,7 +61,7 @@ class FrontpageController extends Controller
 
         // 4 latest travel mates
         $travelmates = Content::whereType('travelmate')->whereStatus(1)->latest()->take(4)->get();
-        
+
         return response()->view('pages.frontpage.index', [
             'destinations' => $destinations,
             'features' => $features,
