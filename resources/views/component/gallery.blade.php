@@ -5,6 +5,7 @@ title: Gallery component
 code: |
 
     @include('component.gallery', [
+        'container' => 'both',
         'items' => [
             [
                 'image' => \App\Image::getRandom(),
@@ -49,12 +50,22 @@ code: |
         ]
     ])
 
+container:
+
+- both
+- open
+- close
+- none
+
 --}}
 
+@if(!isset($container) || $container == 'open' || $container == 'both')
 
 <div class="c-gallery">
 
     <ul class="c-gallery__list m-8-cols">
+
+@endif
 
         @foreach ($items as $item)
 
@@ -66,5 +77,9 @@ code: |
 
         @endforeach
 
+@if(!isset($container) || $container == 'close' || $container == 'both')
+
     </ul>
 </div>
+
+@endif
