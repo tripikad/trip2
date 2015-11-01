@@ -21,92 +21,59 @@
 
     </div>
 
-    <div class="r-home__destinations">
+    @if(isset($flights1) && !empty($flights1))
+        <div class="r-home__destinations">
 
-        <div class="r-home__destinations-wrap">
+            <div class="r-home__destinations-wrap">
 
-            <div class="c-columns m-3-cols">
+                <div class="c-columns m-3-cols">
+                    @foreach($flights1 as $name => $flight1)
+                        <div class="c-columns__item">
+                            @include('component.destination', [
+                                'modifiers' => $flights1_modifiers[$name],
+                                'title' => 'Aafrika',
+                                'title_route' => '/destination/4',
+                                'subtitle' => 'Itaalia',
+                                'subtitle_route' => '#'
+                            ])
 
-                <div class="c-columns__item">
+                            @include('component.card', [
+                                'modifiers' => $flights1_modifiers[$name],
+                                'route' => route('content.show', ['flight', $flight1->id]),
+                                'title' => $flight1->title.' '.$flight1->price.' '.config('site.currency.symbol'),
+                                'image' => $flight1->imagePreset(),
+                            ])
 
-                    @include('component.destination', [
-                        'modifiers' => 'm-yellow',
-                        'title' => 'Aafrika',
-                        'title_route' => '/destination/4',
-                        'subtitle' => 'Itaalia',
-                        'subtitle_route' => '#'
-                    ])
-
-                    @include('component.card', [
-                        'modifiers' => 'm-yellow',
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                        'image' => \App\Image::getRandom(),
-                    ])
-
-                </div>
-
-                <div class="c-columns__item">
-
-                    @include('component.destination', [
-                        'modifiers' => 'm-red',
-                        'title' => 'Põhja-Ameerika',
-                        'title_route' => '/destination/5',
-                        'subtitle' => 'Itaalia',
-                        'subtitle_route' => '#'
-                    ])
-
-                    @include('component.card', [
-                        'modifiers' => 'm-red',
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                        'image' => \App\Image::getRandom(),
-                    ])
-
-                </div>
-
-                <div class="c-columns__item">
-
-                    @include('component.destination', [
-                        'modifiers' => 'm-green',
-                        'title' => 'Kesk-Ameerika',
-                        'title_route' => '/destination/6',
-                        'subtitle' => 'Itaalia',
-                        'subtitle_route' => '#'
-                    ])
-
-                    @include('component.card', [
-                        'modifiers' => 'm-green',
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast Bangkoki al 350 €',
-                        'image' => \App\Image::getRandom(),
-                    ])
+                        </div>
+                    @endforeach
 
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 
-    <div class="r-home__about">
+    @if(isset($content) && !empty($content))
+        <div class="r-home__about">
 
-        <div class="r-home__about-wrap">
+            <div class="r-home__about-wrap">
 
-            @include('component.about', [
-                'modifiers' => 'm-wide',
-                'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
-                'link' => [
-                    'title' => 'Loe lähemalt Trip.ee-st ›',
-                    'route' => '#',
-                ],
-                'button' => [
-                    'title' => 'Liitu Trip.ee-ga',
-                    'route' => '#',
-                    'modifiers' => 'm-block'
-                ]
-            ])
+                @include('component.about', [
+                    'modifiers' => 'm-wide',
+                    'title' => str_limit($content->body, 300),
+                    'link' => [
+                        'title' => trans('frontpage.index.about.title'),
+                        'route' => route('content.show', ['static', $content->id]),
+                    ],
+                    'button' => [
+                        'title' => trans('frontpage.index.about.register'),
+                        'route' => route('register.form'),
+                        'modifiers' => 'm-block'
+                    ]
+                ])
 
+            </div>
         </div>
-    </div>
+    @endif
 
     <div class="r-home__forum">
 
@@ -116,7 +83,7 @@
 
                 @include('component.title', [
                     'modifiers' => 'm-red',
-                    'title' => 'Tripikad räägivad'
+                    'title' => trans('frontpage.index.forum.title')
                 ])
 
             </div>
@@ -154,106 +121,45 @@
                 ])
 
             </div>
+            @if(isset($forums) && !empty($forums))
+                <div class="r-home__forum-column m-last">
 
-            <div class="r-home__forum-column m-last">
+                    @foreach($forums as $name => $forum)
 
-                @include('component.content.forum.list', [
-                    'items' => [
-                        [
-                            'topic' => 'Samui hotellid?',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
-                                'modifiers' => 'm-inverted',
-                                'count' => 9
-                            ],
-                            'tags' => [
+                        @include('component.content.forum.list', [
+                            'container' => ($name==0&&count($forums)-1!=$name?'open':($name==count($forums)-1&&$name!=0?'close':($name==0?'both':''))),
+                            'items' => [
                                 [
-                                    'title' => 'Inglismaa',
-                                    'modifiers' => 'm-green',
-                                    'route' => ''
-                                ],
-                                [
-                                    'title' => 'London',
-                                    'modifiers' => 'm-purple',
-                                    'route' => ''
-                                ],
-                            ]
-                        ],
-                        [
-                            'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
-                                'modifiers' => 'm-inverted',
-                                'count' => 4
-                            ],
-                            'tags' => [
-                                [
-                                    'title' => 'Rongireis',
-                                    'modifiers' => 'm-orange',
-                                    'route' => ''
+                                    'topic' => str_limit($forum->title, 50),
+                                    'route' => route('content.show', ['forum', $forum->id]),
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => $forum->user->imagePreset()
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted',
+                                        'count' => count($forum->comments)
+                                    ],
+                                    'tags' => [
+                                        [
+                                            'title' => 'Inglismaa',
+                                            'modifiers' => 'm-green',
+                                            'route' => ''
+                                        ],
+                                        [
+                                            'title' => 'London',
+                                            'modifiers' => 'm-purple',
+                                            'route' => ''
+                                        ],
+                                    ]
                                 ]
                             ]
-                        ],
-                        [
-                            'topic' => 'Puhkuseosakud Tenerifel',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
-                                'modifiers' => 'm-inverted',
-                                'count' => 2
-                            ],
-                            'tags' => [
-                                [
-                                    'title' => 'Tenerife',
-                                    'modifiers' => 'm-red',
-                                    'route' => ''
-                                ]
-                            ]
-                        ],
-                        [
-                            'topic' => 'Ischgl mäeolud-pilet ja majutus',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
-                                'modifiers' => '',
-                                'count' => 2
-                            ],
-                            'tags' => [
-                                [
-                                    'title' => 'Tenerife',
-                                    'modifiers' => 'm-red',
-                                    'route' => ''
-                                ],
-                                [
-                                    'title' => 'Rong',
-                                    'modifiers' => 'm-green',
-                                    'route' => ''
-                                ],
-                                [
-                                    'title' => 'Mäed',
-                                    'modifiers' => 'm-blue',
-                                    'route' => ''
-                                ]
-                            ]
+                        ])
 
-                        ]
-                    ]
-                ])
-            </div>
+                    @endforeach
+
+                </div>
+            @endif
         </div>
     </div>
 
@@ -276,65 +182,58 @@
 
                     @include('component.title', [
                         'modifiers' => 'm-red',
-                        'title' => 'Uudised'
+                        'title' => trans('frontpage.index.news.title')
                     ])
 
                 </div>
 
+                @if(isset($news1) && !empty($news1))
+
                 <div class="r-home__news-block-wrap">
 
-                    <div class="r-home__news-block m-first">
+                    @foreach($news1 as $name => $new)
 
-                        @include('component.news', [
-                            'title' => 'Euroopa Kohus otsustas – lennuki tehniline rike ei päästa hüvitise maksmisest',
-                            'route' => '',
-                            'date' => \Carbon\Carbon::now(),
-                            'image' => \App\Image::getRandom()
-                        ])
+                        <div class="r-home__news-block @if($name==0) m-first @else m-last @endif">
 
-                    </div>
+                            @include('component.news', [
+                                'title' => $new->title,
+                                'route' => route('content.show', ['news', $new->id]),
+                                'date' => $new->created_at,
+                                'image' => $new->imagePreset(),
+                                'modifiers' => ($name==0?'':'m-small')
+                            ])
 
-                    <div class="r-home__news-block m-last">
+                        </div>
 
-                        @include('component.news', [
-                            'modifiers' => 'm-small',
-                            'title' => 'Suur valuutaülevaade – kuhu tasub just praegu reisida',
-                            'route' => '',
-                            'date' => \Carbon\Carbon::now(),
-                            'image' => \App\Image::getRandom()
-                        ])
+                    @endforeach
 
-                    </div>
                 </div>
 
-                @include('component.list', [
-                    'items' => [
-                        [
-                            'title' => 'Air Canada tunnistab veahinnaga pileteid!',
-                            'route' => '#',
-                            'text' => '23. oktoober'
-                        ],
-                        [
-                            'title' => 'Kas ametlikult maailma parim lennufirma on parim ka reisijate arvates?',
-                            'route' => '#',
-                            'text' => '19. oktoober'
-                        ],
-                        [
-                            'title' => 'Reisiidee: maailma suurim hindu tempel Akshardham Delhis',
-                            'route' => '#',
-                            'text' => '11. oktoober'
-                        ],
-                        [
-                            'title' => 'Reisiidee: Longshengi riisiterrassid',
-                            'route' => '#',
-                            'text' => '7. oktoober'
-                        ]
-                    ]
-                ])
+                @endif
+
+
+                @if(isset($news2) && !empty($news2))
+
+                    @foreach($news2 as $name => $new)
+
+                        @include('component.list', [
+                            'container' => ($name==0&&count($news2)-1!=$name?'open':($name==count($news2)-1&&$name!=0?'close':($name==0?'both':''))),
+                            'items' => [
+                                [
+                                    'title' => $new->title,
+                                    'route' => route('content.show', ['news', $new->id]),
+                                    'text' => view('component.date.short', ['date' => $new->created_at])
+                                ]
+                            ]
+                        ])
+
+                    @endforeach
+
+                @endif
 
                 @include('component.link', [
-                    'title' => 'Kõik uudised &rsaquo;',
-                    'route' => ''
+                    'title' => trans('frontpage.index.all.news'),
+                    'route' => route('content.show', ['news'])
                 ])
 
             </div>
@@ -351,123 +250,98 @@
 
                     @include('component.title', [
                         'modifiers' => 'm-red',
-                        'title' => 'Lennupakkumised'
+                        'title' => trans('frontpage.index.flight.title')
                     ])
 
                 </div>
 
-                @include('component.row', [
-                    'icon' => 'icon-offer',
-                    'modifiers' => 'm-blue m-icon',
-                    'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
-                    'route' => '#',
-                    'text' => 'Jaanuar – veebruar 2016   /   Täna 12:32'
-                ])
-                @include('component.row', [
-                    'icon' => 'icon-offer',
-                    'modifiers' => 'm-yellow m-icon',
-                    'title' => 'Edasi–tagasi riiast või Helsingist Bangkoki al 350 €',
-                    'route' => '#',
-                    'text' => 'Detsember 2015 – jaanuar 2016   /   Täna 9:11'
-                ])
-                @include('component.row', [
-                    'icon' => 'icon-offer',
-                    'modifiers' => 'm-green m-icon',
-                    'title' => 'Reis Brasiilias: Tallinn–Recife/Salvador–Tallinn al 402 €',
-                    'route' => '#',
-                    'text' => 'Jaanuar – veebruar 2016   /   Eile 14:42'
-                ])
-                @include('component.row', [
-                    'icon' => 'icon-offer',
-                    'modifiers' => 'm-icon m-red',
-                    'title' => 'Lennupiletid Helsingist Singapuri al 456 €',
-                    'route' => '#',
-                    'text' => 'Veebruar 2016   /   Eile 14:42'
-                ])
+                @if(isset($flights2) && !empty($flights2))
+
+                    @foreach($flights2 as $name => $flight2)
+
+                        @include('component.row', [
+                            'icon' => 'icon-offer',
+                            'modifiers' => $flights2_modifiers[$name].' m-icon',
+                            'title' => $flight2->title.' '.$flight2->price.' '.config('site.currency.symbol'),
+                            'route' => route('content.show', ['flight', $flight2->id]),
+                            'text' =>
+                                view('component.date.short', ['date' => $flight2->end_at])
+                                .' / '.
+                                view('component.date.relative', ['date' => $flight2->created_at])
+                        ])
+
+                    @endforeach
+
+                @endif
 
                 @include('component.link', [
-                    'title' => 'Vaata kõiki sooduspakkumisi &rsaquo;',
-                    'route' => ''
+                    'title' => trans('frontpage.index.all.offers'),
+                    'route' => route('content.show', ['flight'])
                 ])
 
             </div>
 
+            @if(isset($travelletters) && !empty($travelletters))
             <div class="r-home__travel-column m-last">
 
                 <div class="r-home__travel-title">
 
                     @include('component.title', [
                         'modifiers' => 'm-red',
-                        'title' => 'Reisikirjad'
+                        'title' => trans('frontpage.index.travelletter.title')
                     ])
 
                 </div>
 
-                @include('component.blog', [
-                    'title' => 'Minu Aafrika – jutustusi kuuajaselt ringreisilt',
-                    'image' => \App\Image::getRandom(),
-                    'route' => '#',
-                    'profile' => [
-                        'route' => '#',
-                        'title' => 'Mari Maasikas',
-                        'image' => \App\Image::getRandom()
-                    ]
-                ])
+                @foreach($travelletters as $travelletter)
+
+                    @include('component.blog', [
+                        'title' => $travelletter->title,
+                        'image' => $travelletter->imagePreset(),
+                        'route' => route('content.show', ['blog', $travelletter->id]),
+                        'profile' => [
+                            'route' => route('user.show', [$travelletter->user]),
+                            'title' => $travelletter->user->name,
+                            'image' => $travelletter->user->imagePreset()
+                        ]
+                    ])
+
+                @endforeach
 
             </div>
+            @endif
         </div>
     </div>
+
+
+    @if(isset($photos) && !empty($photos))
 
     <div class="r-home__gallery">
 
         <div class="r-home__gallery-wrap">
 
-            @include('component.gallery', [
-                'items' => [
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 1'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 2'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 3'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 4'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 5'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 6'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 7'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 8'
+            @foreach($photos as $name => $photo)
+
+                @include('component.gallery', [
+                    'container' => ($name==0&&count($photos)-1!=$name?'open':($name==count($photos)-1&&$name!=0?'close':($name==0?'both':''))),
+                    'items' => [
+                        [
+                            'image' => $photo->imagePreset(),
+                            'route' => route('content.show', ['photo', $photo->id]),
+                            'alt' => $photo->title
+                        ]
                     ]
-                ]
-            ])
+                ])
+
+            @endforeach
+
         </div>
+
     </div>
+
+    @endif
+
+    @if(isset($travelmates) && !empty($travelmates))
 
     <div class="r-home__travel-mates">
 
@@ -476,7 +350,7 @@
             <div class="r-home__travel-mates-title">
 
                 @include('component.title', [
-                    'title' => 'Reisikaaslased',
+                    'title' => trans('frontpage.index.travelmate.title'),
                     'modifiers' => 'm-red'
                 ])
 
@@ -484,52 +358,28 @@
 
             <div class="c-columns m-4-cols">
 
-                <div class="c-columns__item">
+                @foreach($travelmates as $travelmate)
 
-                    @include('component.profile', [
-                        'title' => 'Jaanus Jaaniuss',
-                        'age' => '22',
-                        'interests' => 'Itaalia',
-                        'route' => '',
-                        'image' => \App\Image::getRandom()
-                    ])
-                </div>
+                    <div class="c-columns__item">
 
-                <div class="c-columns__item">
+                        @include('component.profile', [
+                            'title' => $travelmate->user->name,
+                            'age' => $travelmate->user->age,
+                            'interests' => $travelmate->title,
+                            'route' => route('content.show', ['travelmate', $travelmate->id]),
+                            'image' => $travelmate->user->imagePreset()
+                        ])
 
-                    @include('component.profile', [
-                        'title' => 'Mari Maasikas',
-                        'age' => '29',
-                        'interests' => 'Itaalia, Kreeka',
-                        'route' => '',
-                        'image' => \App\Image::getRandom()
-                    ])
-                </div>
+                    </div>
 
-                <div class="c-columns__item">
+                @endforeach
 
-                    @include('component.profile', [
-                        'title' => 'Inga Ingel',
-                        'age' => '32',
-                        'interests' => 'Kreeka',
-                        'route' => '',
-                        'image' => \App\Image::getRandom()
-                    ])
-                </div>
-
-                <div class="c-columns__item">
-
-                    @include('component.profile', [
-                        'title' => 'Silver Siil',
-                        'age' => '19',
-                        'interests' => 'Aasia, Euroopa',
-                        'route' => '',
-                        'image' => \App\Image::getRandom()
-                    ])
-                </div>
             </div>
         </div>
     </div>
+
+    @endif
+
 
     <div class="r-home__footer-promo">
 

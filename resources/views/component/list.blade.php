@@ -6,6 +6,7 @@ code: |
 
     @include('component.list', [
         'modifiers' => $modifiers,
+        'container' => 'both',
         'items' => [
             [
                 'modifiers' => '',
@@ -32,9 +33,20 @@ modifiers:
 - m-yellow
 - m-purple
 
+container:
+
+- both
+- open
+- close
+- none
+
 --}}
 
+@if(!isset($container) || $container == 'open' || $container == 'both')
+
 <ul class="c-list {{ $modifiers or '' }}">
+
+@endif
 
     @foreach ($items as $item)
 
@@ -64,4 +76,8 @@ modifiers:
 
     @endforeach
 
+@if(!isset($container) || $container == 'close' || $container == 'both')
+
 </ul>
+
+@endif
