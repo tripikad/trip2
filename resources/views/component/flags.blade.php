@@ -1,48 +1,56 @@
 <div class="c-flag">
 
-    <div class="m-green">
+    <div class="c-flag__item m-green">
 
-        @if ($flags['good']['flaggable'])
-        
-            <a href="{{ route('flag.toggle', [
-                $flags['good']['flaggable_type'],
-                $flags['good']['flaggable_id'],
-                $flags['good']['flag_type'],
-                isset($flags['good']['return']) ? $flags['good']['return'] : null,
-            ]) }}">
-        
-        @endif 
+        <div class="c-flag__item-text">
+
+            @if ($flags['good']['flaggable'])
+
+                <a href="{{ route('flag.toggle', [
+                    $flags['good']['flaggable_type'],
+                    $flags['good']['flaggable_id'],
+                    $flags['good']['flag_type'],
+                    isset($flags['good']['return']) ? $flags['good']['return'] : null,
+                ]) }}" class="c-flag__item-link">
+
+            @endif
 
             {{ $flags['good']['value'] }}
 
-        @if ($flags['good']['flaggable'])
+            @if ($flags['good']['flaggable'])
 
-            </a>
+                </a>
 
-        @endif 
+            @endif
+
+        </div>
 
     </div>
 
-    <div class="m-red">
+    <div class="c-flag__item m-red">
 
-        @if ($flags['bad']['flaggable'])
+        <div class="c-flag__item-text">
 
-            <a href="{{ route('flag.toggle', [
-                $flags['bad']['flaggable_type'],
-                $flags['bad']['flaggable_id'],
-                $flags['bad']['flag_type'],
-                isset($flags['bad']['return']) ? $flags['bad']['return'] : null,
-            ]) }}">
+            @if ($flags['bad']['flaggable'])
 
-        @endif
+                <a href="{{ route('flag.toggle', [
+                    $flags['bad']['flaggable_type'],
+                    $flags['bad']['flaggable_id'],
+                    $flags['bad']['flag_type'],
+                    isset($flags['bad']['return']) ? $flags['bad']['return'] : null,
+                ]) }}" class="c-flag__item-link">
+
+            @endif
 
             {{ $flags['bad']['value'] }}
 
-        @if ($flags['bad']['flaggable'])
+            @if ($flags['bad']['flaggable'])
 
-            </a>
+                </a>
 
-        @endif
+            @endif
+
+        </div>
 
     </div>
 
