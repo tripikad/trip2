@@ -76,7 +76,7 @@ class FrontpageController extends Controller
             'news2' => $news2,
             'travelletters' => $travelletters,
             'photos' => $photos,
-            'travelmates' => $travelmates
+            'travelmates' => $travelmates,
         ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.frontpage'));
     }
 
