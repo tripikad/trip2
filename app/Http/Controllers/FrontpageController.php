@@ -35,7 +35,7 @@ class FrontpageController extends Controller
 
         // 3 latest flights view
         $flights1 = Content::whereType('flight')->whereStatus(1)->latest()->take(3)->get();
-        $flights1_modifiers = array('m-yellow', 'm-red', 'm-green');
+        $flights1_modifiers = ['m-yellow', 'm-red', 'm-green'];
 
         // about us
         $content = Content::where('id', 1534)->first();
@@ -51,7 +51,7 @@ class FrontpageController extends Controller
 
         // 5 latest flight offers
         $flights2 = Content::whereType('flight')->whereStatus(1)->latest()->skip(3)->take(5)->get();
-        $flights2_modifiers = array('m-blue', 'm-yellow', 'm-green', 'm-red', 'm-purple');
+        $flights2_modifiers = ['m-blue', 'm-yellow', 'm-green', 'm-red', 'm-purple'];
 
         // Latest travel letter from blog
         $travelletters = Content::whereType('blog')->whereStatus(1)->latest()->take(1)->get();
