@@ -87,7 +87,7 @@
 	}
 }
 
-@mixin triangle($direction, $size: 6px, $color: $color-dark-gray3) {
+@mixin triangle($direction, $size: 6px, $color: $color-fill-black) {
   content: '';
   display: block;
   position: absolute;

@@ -1,0 +1,131 @@
+.r-flights {}
+
+    .r-flights__map {
+
+        width: 100%;
+        position: relative;
+    }
+
+        .r-flights__map-inner {
+
+            position: absolute;
+            right: 0;
+            top: $spacer * 20;
+            height: $spacer * 70;
+            width: $spacer * 100;
+        }
+
+    .r-flights__content-wrap {
+
+        @include wrap();
+
+        position: relative;
+        z-index: 2;
+    }
+
+    .r-flights__content {
+
+        @include respond-to(tablet) {
+
+            @include span(16 of 24);
+        }
+    }
+
+        .r-flights__search {
+
+            padding: $spacer * 2 $spacer * 2 0;
+            margin-bottom: $spacer * 2.5;
+            background: $color-fill-neutral-light;
+        }
+
+            .r-flights__search-title {
+
+                margin-bottom: $spacer;
+            }
+
+            .r-flights__search-body {
+
+                margin-bottom: $spacer * 1.5;
+            }
+
+    .r-flights__sidebar {
+
+        @include respond-to(tablet) {
+
+            @include span(6 of 24 at 2);
+        }
+    }
+
+        .r-flights__about {
+
+            padding: 0 $spacer * 3;
+            margin-bottom: $spacer * 2.5;
+            background: $color-fill-neutral-light;
+        }
+
+        .r-flights__promo {
+
+            margin-bottom: $spacer * 2.5;
+        }
+
+    .r-flights__forum {
+
+        padding: $spacer * 4 0;
+        background: $color-fill-neutral-light;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 4 0 $spacer * 12;
+        }
+    }
+
+        .r-flights__forum-wrap {
+
+            @include wrap();
+        }
+
+            .r-flights__forum-title {
+
+                padding-bottom: $spacer * 2;
+
+                @include respond-to(tablet) {
+
+                    padding-bottom: $spacer * 3;
+                }
+            }
+
+            .r-flights__forum-column {
+
+                &.m-first {
+
+                    padding-bottom: $spacer * 4;
+
+                    @include respond-to(tablet) {
+
+                        @include span(4 of 24);
+
+                        padding-bottom: 0;
+                    }
+                }
+
+                &.m-last {
+
+                    @include respond-to(tablet) {
+
+                        @include span(18.5 of 24 at 2.5);
+                    }
+                }
+            }
+
+    .r-flights__footer-promo {
+
+        background: $color-fill-neutral-light;
+        margin-bottom: -$spacer * 4;
+    }
+
+        .r-flights__footer-promo-wrap {
+
+            @include wrap('narrow');
+            position: relative;
+            z-index: 2;
+        }

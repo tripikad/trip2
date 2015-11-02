@@ -7,6 +7,7 @@ description: An SVG background map
 code: |
 
     @include('component.map', [
+        'modifiers' => '',
         'map_top' => 0,
         'map_left' => 0
     ])
@@ -14,9 +15,13 @@ code: |
 --}}
 
 <div class="c-map {{ $modifiers or '' }}">
-    
+
+    @if (isset($map_top) && isset($map_left))
+
     <div class="c-map__location" style="top: {{ $map_top }}; left: {{ $map_left }};"></div>
-    
-    <img src="/svg/map.svg" />
+
+    @endif
+
+    <img src="/svg/map.svg" alt="">
 
 </div>
