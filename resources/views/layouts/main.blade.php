@@ -20,7 +20,7 @@
         @yield('content')
 
         @include('component.footer', [
-            'modifiers' => 'm-bg',
+            'modifiers' => 'm-alternative',
             'image' => \App\Image::getRandom()
         ])
 

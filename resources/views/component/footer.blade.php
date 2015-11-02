@@ -11,7 +11,7 @@ code: |
 
 modifiers:
 
-- m-bg
+- m-alternative
 
 --}}
 

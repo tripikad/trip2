@@ -4,7 +4,7 @@
     padding: $spacer * 11 0 $spacer * 4;
     background-color: $color-white;
 
-    &.m-bg {
+    &.m-alternative {
 
         background-repeat: no-repeat;
         background-position: top center;
@@ -87,7 +87,7 @@
                         display: block;
                         padding: $spacer / 2 0;
 
-                        .c-footer.m-bg & {
+                        .c-footer.m-alternative & {
 
                             color: $color-white;
                         }
@@ -124,7 +124,7 @@
                     display: block;
                     padding: $spacer / 2 0;
 
-                    .c-footer.m-bg & {
+                    .c-footer.m-alternative & {
 
                         color: $color-white;
                     }
@@ -142,7 +142,7 @@
             line-height: 1.5;
             text-align: center;
 
-            .c-footer.m-bg & {
+            .c-footer.m-alternative & {
 
                 color: $color-white;
                 opacity: 0.4;
@@ -152,7 +152,7 @@
 
                 color: $color-text-neutral-dark;
 
-                .c-footer.m-bg & {
+                .c-footer.m-alternative & {
 
                     color: $color-white;
                 }
