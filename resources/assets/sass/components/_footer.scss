@@ -1,20 +1,25 @@
 .c-footer {
 
-    padding: $spacer * 11 0 $spacer * 4;
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-size: cover;
     position: relative;
+    padding: $spacer * 11 0 $spacer * 4;
+    background-color: $color-white;
 
-    &:after {
+    &.m-alternative {
 
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba($color-fill-black-dark, 0.6);
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+
+        &:after {
+
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba($color-fill-black-dark, 0.6);
+        }
     }
 }
 
@@ -77,10 +82,15 @@
 
                     .c-footer__nav-link {
 
-                        color: $color-white;
+                        color: $color-text-neutral-dark;
                         text-decoration: none;
                         display: block;
                         padding: $spacer / 2 0;
+
+                        .c-footer.m-alternative & {
+
+                            color: $color-white;
+                        }
 
                         &:hover {
 
@@ -109,10 +119,15 @@
 
                 .c-footer__social-item-link {
 
-                    color: $color-white;
+                    color: $color-text-neutral-dark;
                     text-decoration: none;
                     display: block;
                     padding: $spacer / 2 0;
+
+                    .c-footer.m-alternative & {
+
+                        color: $color-white;
+                    }
 
                     &:hover {
 
@@ -122,14 +137,24 @@
 
         .c-footer__license {
 
-            color: $color-white;
+            color: $color-text-neutral-dark;
             font-size: $font-size-small;
             line-height: 1.5;
             text-align: center;
-            opacity: 0.4;
+
+            .c-footer.m-alternative & {
+
+                color: $color-white;
+                opacity: 0.4;
+            }
 
             a {
 
-                color: $color-white;
+                color: $color-text-neutral-dark;
+
+                .c-footer.m-alternative & {
+
+                    color: $color-white;
+                }
             }
         }
