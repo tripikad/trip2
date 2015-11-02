@@ -60,9 +60,11 @@
                 @include('component.about', [
                     'modifiers' => 'm-wide',
                     'title' => str_limit($content->body, 300),
-                    'link' => [
-                        'title' => trans('frontpage.index.about.title'),
-                        'route' => route('content.show', ['static', $content->id]),
+                    'links' => [
+                        [
+                            'title' => trans('frontpage.index.about.title'),
+                            'route' => route('content.show', ['static', $content->id]),
+                        ]
                     ],
                     'button' => [
                         'title' => trans('frontpage.index.about.register'),
@@ -127,7 +129,12 @@
                     @foreach($forums as $name => $forum)
 
                         @include('component.content.forum.list', [
-                            'container' => ($name==0&&count($forums)-1!=$name?'open':($name==count($forums)-1&&$name!=0?'close':($name==0?'both':''))),
+                            'container' => ($name==0 && count($forums)-1 != $name ?
+                                'open' :
+                                    ($name == count($forums)-1 && $name != 0 ?
+                                        'close' :
+                                            ($name == 0 ? 'both' : '')
+                                    )),
                             'items' => [
                                 [
                                     'topic' => str_limit($forum->title, 50),
@@ -217,7 +224,12 @@
                     @foreach($news2 as $name => $new)
 
                         @include('component.list', [
-                            'container' => ($name==0&&count($news2)-1!=$name?'open':($name==count($news2)-1&&$name!=0?'close':($name==0?'both':''))),
+                            'container' => ($name==0 && count($news2)-1 != $name ?
+                                'open' :
+                                    ($name == count($news2)-1 && $name != 0 ?
+                                        'close' :
+                                            ($name == 0 ? 'both' : '')
+                                    )),
                             'items' => [
                                 [
                                     'title' => $new->title,
@@ -281,7 +293,7 @@
 
             </div>
 
-            @if(isset($travelletters) && !empty($travelletters))
+            @if(isset($blogs) && !empty($blogs))
             <div class="r-home__travel-column m-last">
 
                 <div class="r-home__travel-title">
@@ -293,16 +305,16 @@
 
                 </div>
 
-                @foreach($travelletters as $travelletter)
+                @foreach($blogs as $blog)
 
                     @include('component.blog', [
-                        'title' => $travelletter->title,
-                        'image' => $travelletter->imagePreset(),
-                        'route' => route('content.show', ['blog', $travelletter->id]),
+                        'title' => $blog->title,
+                        'image' => $blog->imagePreset(),
+                        'route' => route('content.show', ['blog', $blog->id]),
                         'profile' => [
-                            'route' => route('user.show', [$travelletter->user]),
-                            'title' => $travelletter->user->name,
-                            'image' => $travelletter->user->imagePreset()
+                            'route' => route('user.show', [$blog->user]),
+                            'title' => $blog->user->name,
+                            'image' => $blog->user->imagePreset()
                         ]
                     ])
 
@@ -323,7 +335,12 @@
             @foreach($photos as $name => $photo)
 
                 @include('component.gallery', [
-                    'container' => ($name==0&&count($photos)-1!=$name?'open':($name==count($photos)-1&&$name!=0?'close':($name==0?'both':''))),
+                    'container' => ($name==0 && count($photos)-1 != $name ?
+                        'open' :
+                            ($name == count($photos)-1 && $name != 0 ?
+                                'close' :
+                                    ($name == 0 ? 'both' : '')
+                            )),
                     'items' => [
                         [
                             'image' => $photo->imagePreset(),
