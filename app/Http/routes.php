@@ -107,7 +107,7 @@ get('admin/content', ['middleware' => 'role:admin', 'uses' => 'AdminController@c
 
 // Destinations
 
-get('destination/{id}', ['uses' => 'DestinationController@index', 'as' => 'destination.index']);
+get('destination/{id}', ['uses' => 'DestinationController@show', 'as' => 'destination.show']);
 
 // Flags
 
