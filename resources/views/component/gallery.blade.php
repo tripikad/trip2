@@ -5,6 +5,7 @@ title: Gallery component
 code: |
 
     @include('component.gallery', [
+        'container' => 'both',
         'items' => [
             [
                 'image' => \App\Image::getRandom(),
@@ -49,22 +50,36 @@ code: |
         ]
     ])
 
+container:
+
+- both
+- open
+- close
+- none
+
 --}}
 
+@if(!isset($container) || $container == 'open' || $container == 'both')
 
-<div class="c-gallery">
+    <div class="c-gallery">
 
-    <ul class="c-gallery__list m-8-cols">
+        <ul class="c-gallery__list m-8-cols">
 
-        @foreach ($items as $item)
+            @endif
 
-        <li class="c-gallery__list-item">
-            <a href="{{ $item['route'] }}" class="c-gallery__list-item-link">
-                <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
-            </a>
-        </li>
+            @foreach ($items as $item)
 
-        @endforeach
+                <li class="c-gallery__list-item">
+                    <a href="{{ $item['route'] }}" class="c-gallery__list-item-link">
+                        <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
+                    </a>
+                </li>
 
-    </ul>
-</div>
+            @endforeach
+
+            @if(!isset($container) || $container == 'close' || $container == 'both')
+
+        </ul>
+    </div>
+
+@endif

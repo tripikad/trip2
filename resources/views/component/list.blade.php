@@ -6,6 +6,7 @@ code: |
 
     @include('component.list', [
         'modifiers' => $modifiers,
+        'container' => 'both',
         'items' => [
             [
                 'modifiers' => '',
@@ -32,36 +33,51 @@ modifiers:
 - m-yellow
 - m-purple
 
+container:
+
+- both
+- open
+- close
+- none
+
 --}}
 
-<ul class="c-list {{ $modifiers or '' }}">
+@if(!isset($container) || $container == 'open' || $container == 'both')
 
-    @foreach ($items as $item)
-
-    <li class="c-list__item {{ $item['modifiers'] or '' }}">
-
-        <h3 class="c-list__item-title">
-
-            <a href="{{ $item['route'] }}" class="c-list__item-title-link">{{ $item['title'] }}</a>
-
-        </h3>
-
-        @if (isset($item['text']))
-
-        <p class="c-list__item-text">
-
-            @if (isset($item['text']))
-
-            {{ $item['text'] }}
-
-            @endif
-
-        </p>
+    <ul class="c-list {{ $modifiers or '' }}">
 
         @endif
 
-    </li>
+        @foreach ($items as $item)
 
-    @endforeach
+            <li class="c-list__item {{ $item['modifiers'] or '' }}">
 
-</ul>
+                <h3 class="c-list__item-title">
+
+                    <a href="{{ $item['route'] }}" class="c-list__item-title-link">{{ $item['title'] }}</a>
+
+                </h3>
+
+                @if (isset($item['text']))
+
+                    <p class="c-list__item-text">
+
+                        @if (isset($item['text']))
+
+                            {{ $item['text'] }}
+
+                        @endif
+
+                    </p>
+
+                @endif
+
+            </li>
+
+        @endforeach
+
+        @if(!isset($container) || $container == 'close' || $container == 'both')
+
+    </ul>
+
+@endif

@@ -6,6 +6,7 @@ code: |
 
     @include('component.content.forum.list', [
         'modifiers' => $modifiers,
+        'container' => 'both',
         'items' => [
             [
                 'topic' => 'This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition',
@@ -33,64 +34,83 @@ modifiers:
 
 - m-compact
 
+container:
+
+- both
+- open
+- close
+- none
+
 --}}
 
-<ul class="c-forum-list {{ $modifiers or '' }}">
+@if(!isset($container) || $container == 'open' || $container == 'both')
 
-	@foreach ($items as $item)
-
-	<li class="c-forum-list__item">
-
-        @if (isset($item['route']))
-
-        <a href="{{ $item['route'] }}" class="c-forum-list__item-link">
-
-        @else
-
-        <div class="c-forum-list__item-content">
+    <ul class="c-forum-list {{ $modifiers or '' }}">
 
         @endif
 
-    		@if (isset($item['profile']))
+        @if(isset($items))
 
-    		<div class="c-forum-list__item-profile">
+            @foreach ($items as $item)
 
-    			@include('component.profile', [
-    				'modifiers' => $item['profile']['modifiers'],
-                    'image' => $item['profile']['image'],
-                    'badge' => $item['badge']
-                ])
+                <li class="c-forum-list__item">
 
-    		</div>
+                    @if (isset($item['route']))
 
-    		@endif
+                        <a href="{{ $item['route'] }}" class="c-forum-list__item-link">
 
-            <h3 class="c-forum-list__item-topic">{{ $item['topic'] }}</h3>
+                            @else
 
-        @if (isset($item['route']))
+                                <div class="c-forum-list__item-content">
 
-        </a>
+                                    @endif
 
-        @else
+                                    @if (isset($item['profile']))
 
-        </div>
+                                        <div class="c-forum-list__item-profile">
+
+                                            @include('component.profile', [
+                                                'modifiers' => $item['profile']['modifiers'],
+                                                'image' => $item['profile']['image'],
+                                                'badge' => $item['badge']
+                                            ])
+
+                                        </div>
+
+                                    @endif
+
+                                    <h3 class="c-forum-list__item-topic">{{ $item['topic'] }}</h3>
+
+                                @if (isset($item['route']))
+
+                        </a>
+
+                        @else
+
+                        </div>
+
+                    @endif
+
+                    @if (isset($item['tags']))
+
+                        <div class="c-forum-list__item-tags">
+
+                            @include('component.tags', [
+                                'items' => $item['tags']
+                            ])
+
+                        </div>
+
+                    @endif
+
+                </li>
+
+            @endforeach
 
         @endif
 
-		@if (isset($item['tags']))
+        @if(!isset($container) || $container == 'close' || $container == 'both')
 
-		<div class="c-forum-list__item-tags">
+    </ul>
 
-			@include('component.tags', [
-				'items' => $item['tags']
-            ])
-
-		</div>
-
-		@endif
-
-	</li>
-
-	@endforeach
-
-</ul>
+@endif
