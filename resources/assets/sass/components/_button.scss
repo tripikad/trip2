@@ -7,6 +7,7 @@
     font-weight: $font-weight-medium;
     text-decoration: none;
     text-align: center;
+    position: relative;
     display: inline-block;
     padding: $spacer $spacer * 2;
     background-color: $color-fill-success;
@@ -25,6 +26,19 @@
         box-shadow: 0 1px 1px rgba($color-fill-neutral, 0.75);
     }
 
+    &.m-tertiary {
+
+        color: $color-text-neutral-darker;
+        background: $color-fill-neutral-light;
+    }
+
+    &.m-loading {
+
+        background-image: linear-gradient(-45deg, $color-fill-neutral 25%, $color-fill-neutral-dark 25%, $color-fill-neutral-dark 50%, $color-fill-neutral 50%, $color-fill-neutral 75%, $color-fill-neutral-dark 75%, $color-fill-neutral-dark);
+        background-size: 50px 50px;
+        animation: move 2s linear infinite;
+    }
+
     &.m-block {
 
         display: block;
@@ -37,13 +51,52 @@
         padding: $spacer $spacer * 3;
     }
 
-    &.m-loading {
+    &.m-small {
 
-        // Color variables set in another commit - FIX
+        font-size: $font-size-normal;
+        padding: $spacer * 0.75 $spacer * 2;
 
-        background-image: linear-gradient(-45deg, #e1e7eb 25%, #d1dae0 25%, #d1dae0 50%, #e1e7eb 50%, #e1e7eb 75%, #d1dae0 75%, #d1dae0);
-        background-size: 50px 50px;
-        animation: move 2s linear infinite;
+        &.m-icon-pre {
+
+            padding-left: $spacer * 3.5;
+        }
+
+        &.m-icon-post {
+
+            padding-right: $spacer * 3.5;
+        }
+    }
+}
+
+.c-button__icon {
+
+    position: absolute;
+    top: 50%;
+    display: block;
+    height: $spacer * 1.5;
+    width: $spacer * 1.5;
+    margin-top: -$spacer * 0.75;
+
+    .c-button.m-icon-pre & {
+
+        left: $spacer;
+    }
+
+    .c-button.m-icon-post & {
+
+        right: $spacer;
+    }
+
+    svg {
+
+        display: block;
+        height: 100%;
+        width: 100%;
+
+        .c-button.m-tertiary & {
+
+            fill: $color-text-neutral-darker;
+        }
     }
 }
 

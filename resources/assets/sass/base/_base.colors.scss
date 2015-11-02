@@ -78,17 +78,17 @@ $colors: ('yellow' $brand-yellow $brand-yellow-dark),
 
 // Neutrals
 
-$color-white: #fff;
+$color-white: #ffffff;
 
-$color-fill-black: #222;
+$color-fill-black-dark: #111111;
+$color-fill-black: #222222;
 
 $color-fill-neutral-lightest: #fbfcfd;
 $color-fill-neutral-light: #f7f9fa;
 $color-fill-neutral: #e1e7eb;
-$color-fill-neutral-dark: #979da1;
-
-// $color-fill-neutral-darker: #444;
-// $color-fill-neutral-darkest: #222;
+$color-fill-neutral-dark: #d1dae0;
+$color-fill-neutral-darker: #979da1;
+$color-fill-neutral-darkest: #707477;
 
 $color-text-black: #444;
 
@@ -96,8 +96,8 @@ $color-text-neutral-lightest: $color-fill-neutral-lightest;
 $color-text-neutral-light: $color-fill-neutral-light;
 $color-text-neutral: $color-fill-neutral;
 $color-text-neutral-dark: $color-fill-neutral-dark;
-// $color-text-neutral-darker: $color-fill-neutral-darker;
-// $color-text-neutral-darkest: $color-fill-neutral-darkest;
+$color-text-neutral-darker: $color-fill-neutral-darker;
+$color-text-neutral-darkest: $color-fill-neutral-darkest;
 
 
 // Shadow colors
@@ -124,7 +124,4 @@ $color-fill-error-dark: $brand-red-dark;
 
 // New colors
 
-$color-dark-gray: #111;
-$color-dark-gray2: #333;
-$color-dark-gray3: #222;
 $transparent: transparent;

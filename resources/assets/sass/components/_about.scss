@@ -20,21 +20,56 @@
                 padding: 0 0 0 $spacer * 6;
             }
         }
+
+        > :last-child {
+
+            margin-bottom: 0;
+        }
     }
 
         .c-about__title {
 
-            font-size: $font-size-large;
+            font-size: $font-size-medium;
             font-weight: $font-weight-bold;
-            line-height: 1.15;
+            line-height: 1.35;
             margin-bottom: $spacer;
+
+            .c-about.m-wide & {
+
+                font-size: $font-size-larger;
+                line-height: 1.15;
+            }
+        }
+
+        .c-about__text {
+
+            font-size: $font-size-normal;
+            font-weight: $font-weight-normal;
+            line-height: 1.5;
+            margin-bottom: $spacer;
+        }
+
+        .c-about__links {
+
+            a {
+
+                margin-bottom: $spacer;
+            }
+
+            > :last-child {
+
+                margin-bottom: 0;
+            }
         }
 
     .c-about__action {
 
-        padding: $spacer * 4 0 0;
+        width: 100%;
+        padding: $spacer * 2 0 0 0;
 
         .c-about.m-wide & {
+
+            padding: $spacer * 4 0 0;
 
             @include respond-to(tablet) {
 
