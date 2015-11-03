@@ -23,6 +23,14 @@ post('login', ['uses' => 'Auth\LoginController@submit', 'as' => 'login.submit'])
 
 get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'login.logout']);
 
+//Facebook login
+get('redirect/facebook', ['middleware' => null, 'uses' => 'SocialController@facebookRedirect', 'as' => 'facebook.redirect']);
+get('facebook', 'SocialController@facebook');
+
+//Google+ login
+get('redirect/google', ['middleware' => null, 'uses' => 'SocialController@googleRedirect', 'as' => 'google.redirect']);
+get('google', 'SocialController@google');
+
 // Password reset
 
 get('reset/apply', ['uses' => 'Auth\ResetController@applyForm', 'as' => 'reset.apply.form']);

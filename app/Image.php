@@ -24,13 +24,8 @@ class Image extends Model
             .$this->filename;
     }
 
-    public static function storeImageFile($file, $new_filename = null)
+    public static function createImagePresets($path, $filename)
     {
-        $path = config('imagepresets.original.path');
-        $filename = $new_filename ? $new_filename : preg_replace('/\s+/', '-', $file->getClientOriginalName());
-
-        $file->move($path, $filename);
-
         foreach (array_keys(config('imagepresets.presets')) as $preset) {
             Imageconv::make($path.$filename)
                 ->{config("imagepresets.presets.$preset.operation")}(
@@ -44,6 +39,39 @@ class Image extends Model
                     config("imagepresets.presets.$preset.quality")
                 );
         }
+    }
+
+    public static function storeImageFromUrl($url, $filename = null)
+    {
+        $path = config('imagepresets.original.path');
+
+        $info = getimagesize($url);
+        $ext  = image_type_to_extension($info[2]);
+
+        //create random name
+        if(!$filename)
+            $filename = 'image_'.str_random(5).$ext;
+        else $filename = $filename.$ext;          
+
+        try {
+            copy($url,$path.$filename);
+        } catch (Exception $e)  {
+            throw new Exception("Image copy failed: ".$e);                   
+        }    
+
+        self::createImagePresets($path,$filename);
+
+        return $filename;
+    }
+
+    public static function storeImageFile($file, $new_filename = null)
+    {
+        $path = config('imagepresets.original.path');
+        
+        $filename = $new_filename ? $new_filename : preg_replace('/\s+/', '-', $file->getClientOriginalName());
+        $file->move($path, $filename);
+        
+        self::createImagePresets($path,$filename);
 
         return $filename;
     }

@@ -16,7 +16,8 @@
         "wpb/string-blade-compiler": "2.*@dev",
         "jenssegers/date": "3.*@dev",
         "ipunkt/laravel-analytics": "~1.1",
-        "roumen/feed": "~2.9"
+        "roumen/feed": "~2.9",
+        "laravel/socialite" : "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
