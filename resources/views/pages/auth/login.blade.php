@@ -39,4 +39,11 @@
 
     {!! Form::close() !!}
 
+    <div class="c-form__group">
+        @include('component.link', [
+            'title' => trans('auth.reset.apply.title'),
+            'route' => route('reset.apply.form')
+        ])
+    </div>
+
 @stop
