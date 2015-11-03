@@ -58,13 +58,15 @@ code: |
 
         @foreach ($items as $item)
 
-        <li class="c-gallery__list-item">
-            <a href="{{ $item['route'] }}" class="c-gallery__list-item-link">
-                <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
-            </a>
-        </li>
+            <li class="c-gallery__list-item">
+                <a href="{{ $item['route'] }}" class="c-gallery__list-item-link">
+                    <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
+                </a>
+            </li>
 
         @endforeach
 
     </ul>
+
 </div>
+
