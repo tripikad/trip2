@@ -6,6 +6,14 @@
 
 @stop
 
+@section('header')
+
+    @include('component.header',[
+        'modifiers' => 'm-alternative'
+    ])
+
+@stop
+
 @section('header1.image')
 
     @if($content->images())
@@ -23,9 +31,10 @@
     <div class="r-flights__masthead">
 
         @include('component.masthead', [
+            'modifiers' => 'm-alternative',
             'subtitle' => 'Kõik pakkumised',
             'subtitle_route' => '/content/flight',
-            'logo_modifier' => 'm-small'
+            'image' => \App\Image::getRandom()
         ])
 
     </div>

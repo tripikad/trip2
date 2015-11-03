@@ -6,6 +6,14 @@
 
 @stop
 
+@section('header')
+
+    @include('component.header',[
+        'modifiers' => 'm-alternative'
+    ])
+
+@stop
+
 @section('masthead.nav')
 
     @include('component.masthead.nav', [
@@ -25,9 +33,10 @@
     <div class="r-destination__masthead">
 
         @include('component.masthead', [
-            'logo_modifier' => 'm-small',
+            'modifiers' => 'm-alternative',
             'subtitle' => 'Aafrika',
-            'subtitle_route' => '#'
+            'subtitle_route' => '#',
+            'image' => \App\Image::getRandom()
         ])
 
     </div>

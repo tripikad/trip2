@@ -2,9 +2,7 @@
 
 @section('content')
 
-@include('component.masthead',[
-    'logo_modifier' => 'm-small'
-])
+@include('component.masthead')
 
 <div class="l-one-column">
 
