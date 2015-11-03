@@ -8,16 +8,18 @@
 
     {!! Form::open(['route' => 'reset.apply.submit']) !!}
 
-        <div class="form-group">
+        <div class="c-form__group">
+            {!! Form::label('email', trans('auth.reset.apply.field.email.title'), [
+                'class' => 'c-form__label'
+            ]) !!}
             {!! Form::email('email', null, [
-                'class' => 'form-control input-lg',
-                'placeholder' => trans('auth.reset.apply.field.email.title')
+                'class' => 'c-form__input'
             ]) !!}
         </div>
 
-        <div class="form-group">
+        <div class="c-form__group">
             {!! Form::submit(trans('auth.reset.apply.submit.title'), [
-                'class' => 'btn btn-primary btn-lg btn-block'
+                'class' => 'c-button m-large m-block'
             ]) !!}
         </div>
 
