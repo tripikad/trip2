@@ -2,7 +2,7 @@
 
 @section('title')
 
-    {{ $content->title }}
+    {{ trans("content.$type.index.title") }}
 
 @stop
 
@@ -22,13 +22,21 @@
 
     <div class="r-flights__masthead">
 
-        @include('component.masthead')
+        @include('component.masthead', [
+            'subtitle' => 'Kõik pakkumised',
+            'subtitle_route' => '/content/flight',
+            'logo_modifier' => 'm-small'
+        ])
 
     </div>
 
     <div class="r-flights__content-wrap">
 
         <div class="r-flights__content">
+
+
+                {{ $content->title }}
+
 
             <div class="c-body">
 

@@ -11,7 +11,7 @@
 
     <div class="c-masthead__body {{ $modifiers or '' }}">
 
-        <div class="c-masthead__logo {{ $logo_modifier or '' }}"><div class="c-logo {{ $logo_modifier or '' }}"></div></div>
+        <div class="c-masthead__logo {{ $logo_modifier or '' }}"><div class="c-logo {{ $logo_modifier or '' }}"><img src="/svg/tripee-logo.svg" alt=""></div></div>
         <h1 class="c-masthead__title">@yield('title')</h1>
 
         @if (isset($subtitle))
@@ -21,6 +21,12 @@
         @endif
 
         @yield('masthead.search')
+    </div>
+
+    <div class="c-masthead__bottom">
+
+        @yield('masthead.bottom')
+
     </div>
 </div>
 
