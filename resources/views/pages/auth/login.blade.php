@@ -46,4 +46,18 @@
         ])
     </div>
 
+    <div class="c-form__group">
+        @include('component.link', [
+            'title' => trans('auth.login.facebook.title'),
+            'route' => route('facebook.redirect')
+        ])
+    </div>
+
+    <div class="c-form__group">
+        @include('component.link', [
+            'title' => trans('auth.login.google.title'),
+            'route' => route('google.redirect')
+        ])
+    </div>
+
 @stop

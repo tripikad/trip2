@@ -30,7 +30,7 @@ class SocialController extends Controller
         try {
             $user = Socialite::driver('facebook')->user(); 
         } catch (Exception $e) {
-            return redirect()->route('login.form')->with('info', trans('social.facebook.login.service.error'));
+            return redirect()->route('login.form')->with('info', trans('auth.login.facebook.service.error'));
         }
 
         $authUser = $this->findOrCreateUser($user, 'facebook');
@@ -39,7 +39,7 @@ class SocialController extends Controller
             Auth::login($authUser, true);
             return redirect()->route('frontpage.index')->with('info', trans('auth.login.login.info'));
         }
-        else return redirect()->route('register.form')>with('info', trans('social.facebook.login.user.error'));
+        else return redirect()->route('register.form')>with('info', trans('auth.login.facebook.user.error'));
     }
 
     public function google() 
@@ -47,7 +47,7 @@ class SocialController extends Controller
         try {
             $user = Socialite::driver('google')->user(); 
         } catch (Exception $e) {
-            return redirect()->route('login.form')->with('info', trans('social.google.login.service.error'));
+            return redirect()->route('login.form')->with('info', trans('auth.login.google.service.error'));
         }
 
         $authUser = $this->findOrCreateUser($user, 'google');
@@ -56,7 +56,7 @@ class SocialController extends Controller
             Auth::login($authUser, true);
             return redirect()->route('frontpage.index')->with('info', trans('auth.login.login.info'));
         }
-        else return redirect()->route('register.form')>with('info', trans('social.google.login.user.error'));
+        else return redirect()->route('register.form')>with('info', trans('auth.login.google.user.error'));
     }
 
     protected function findOrCreateUser($user, $provider)
