@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 class ResetController extends Controller
 {
     use ResetsPasswords;
