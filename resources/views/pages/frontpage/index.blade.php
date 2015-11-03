@@ -1,5 +1,13 @@
 @extends('layouts.main')
 
+@section('header')
+
+    @include('component.header',[
+        'modifiers' => 'm-alternative'
+    ])
+
+@stop
+
 @section('masthead.search')
 
     @include('component.search',[
@@ -16,7 +24,8 @@
     <div class="r-home__masthead">
 
         @include('component.masthead', [
-            'modifiers' => 'm-search'
+            'modifiers' => 'm-search m-alternative',
+            'image' => \App\Image::getRandom()
         ])
 
     </div>

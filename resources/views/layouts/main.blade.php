@@ -11,7 +11,7 @@
     </head>
     <body>{{ Analytics::render() }}
 
-        @include('component.header')
+        @yield('header', view('component.header'))
 
         @include('component.info.success')
 
