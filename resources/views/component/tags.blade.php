@@ -5,6 +5,7 @@ title: Tags
 code: |
 
     @include('component.tags', [
+        'modifiers' => '',
         'items' => [
             [
                 'modifiers' => $modifiers,
@@ -13,6 +14,10 @@ code: |
             ],
         ]
     ])
+
+parent_modifiers:
+
+- m-small
 
 modifiers:
 
@@ -25,7 +30,7 @@ modifiers:
 
 --}}
 
-<ul class="c-tags">
+<ul class="c-tags {{ $modifiers or '' }}">
 
     @foreach ($items as $item)
 
