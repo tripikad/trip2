@@ -131,7 +131,7 @@ class AuthTest extends TestCase
         $data = [
             'email' => $faker->email,
             'name' => $faker->userName,
-            'password' => $faker->password(10)
+            'password' => $faker->password(10),
         ];
 
         $this->data = $data;
