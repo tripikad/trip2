@@ -43,7 +43,7 @@
 
                                 @include('component.card', [
                                     'modifiers' => $flights1_modifiers[$name],
-                                    'route' => route('content.show', ['flight', $flight1->id]),
+                                    'route' => route('content.show', [$flight1->type, $flight1]),
                                     'title' => $flight1->title.' '.$flight1->price.' '.config('site.currency.symbol'),
                                     'image' => $flight1->imagePreset(),
                                 ])
@@ -70,7 +70,7 @@
                         'links' => [
                             [
                                 'title' => trans('frontpage.index.about.title'),
-                                'route' => route('content.show', ['static', $content->id]),
+                                'route' => route('content.show', [$content->type, $content]),
                             ]
                         ],
                         'button' => [
@@ -135,45 +135,34 @@
                 @if(isset($forums) && !empty($forums))
 
                     <div class="r-home__forum-column m-last">
-
-                        @foreach($forums as $name => $forum)
-
-                            @include('component.content.forum.list', [
-                                'container' => ($name==0 && count($forums)-1 != $name ?
-                                    'open' :
-                                        ($name == count($forums)-1 && $name != 0 ?
-                                            'close' :
-                                                ($name == 0 ? 'both' : '')
-                                        )),
-                                'items' => [
-                                    [
-                                        'topic' => str_limit($forum->title, 50),
-                                        'route' => route('content.show', ['forum', $forum->id]),
-                                        'profile' => [
-                                            'modifiers' => 'm-mini',
-                                            'image' => $forum->user->imagePreset()
+                        @include('component.content.forum.list', [
+                            'items' => $forums->transform(function ($forum) {
+                                return [
+                                    'topic' => str_limit($forum->title, 50),
+                                    'route' => route('content.show', [$forum->type, $forum]),
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => $forum->user->imagePreset()
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted',
+                                        'count' => count($forum->comments)
+                                    ],
+                                    'tags' => [
+                                        [
+                                            'title' => 'Inglismaa',
+                                            'modifiers' => 'm-green',
+                                            'route' => ''
                                         ],
-                                        'badge' => [
-                                            'modifiers' => 'm-inverted',
-                                            'count' => count($forum->comments)
+                                        [
+                                            'title' => 'London',
+                                            'modifiers' => 'm-purple',
+                                            'route' => ''
                                         ],
-                                        'tags' => [
-                                            [
-                                                'title' => 'Inglismaa',
-                                                'modifiers' => 'm-green',
-                                                'route' => ''
-                                            ],
-                                            [
-                                                'title' => 'London',
-                                                'modifiers' => 'm-purple',
-                                                'route' => ''
-                                            ],
-                                        ]
                                     ]
-                                ]
-                            ])
-
-                        @endforeach
+                                ];
+                            })
+                        ])
 
                     </div>
 
@@ -216,7 +205,7 @@
 
                                     @include('component.news', [
                                         'title' => $new->title,
-                                        'route' => route('content.show', ['news', $new->id]),
+                                        'route' => route('content.show', [$new->type, $new]),
                                         'date' => $new->created_at,
                                         'image' => $new->imagePreset(),
                                         'modifiers' => ($name==0?'':'m-small')
@@ -233,25 +222,15 @@
 
                     @if(isset($news2) && !empty($news2))
 
-                        @foreach($news2 as $name => $new)
-
-                            @include('component.list', [
-                                'container' => ($name==0 && count($news2)-1 != $name ?
-                                    'open' :
-                                        ($name == count($news2)-1 && $name != 0 ?
-                                            'close' :
-                                                ($name == 0 ? 'both' : '')
-                                        )),
-                                'items' => [
-                                    [
-                                        'title' => $new->title,
-                                        'route' => route('content.show', ['news', $new->id]),
-                                        'text' => view('component.date.short', ['date' => $new->created_at])
-                                    ]
-                                ]
-                            ])
-
-                        @endforeach
+                        @include('component.list', [
+                            'items' => $news2->transform(function ($new) {
+                                return [
+                                    'title' => $new->title,
+                                    'route' => route('content.show', [$new->type, $new]),
+                                    'text' => view('component.date.short', ['date' => $new->created_at])
+                                ];
+                            })
+                        ])
 
                     @endif
 
@@ -287,7 +266,7 @@
                                 'icon' => 'icon-offer',
                                 'modifiers' => $flights2_modifiers[$name].' m-icon',
                                 'title' => $flight2->title.' '.$flight2->price.' '.config('site.currency.symbol'),
-                                'route' => route('content.show', ['flight', $flight2->id]),
+                                'route' => route('content.show', [$flight2->type, $flight2]),
                                 'text' =>
                                     view('component.date.short', ['date' => $flight2->end_at])
                                     .' / '.
@@ -323,7 +302,7 @@
                             @include('component.blog', [
                                 'title' => $blog->title,
                                 'image' => $blog->imagePreset(),
-                                'route' => route('content.show', ['blog', $blog->id]),
+                                'route' => route('content.show', [$blog->type, $blog]),
                                 'profile' => [
                                     'route' => route('user.show', [$blog->user]),
                                     'title' => $blog->user->name,
@@ -347,25 +326,15 @@
 
                 <div class="r-home__gallery-wrap">
 
-                    @foreach($photos as $name => $photo)
-
-                        @include('component.gallery', [
-                            'container' => ($name==0 && count($photos)-1 != $name ?
-                                'open' :
-                                    ($name == count($photos)-1 && $name != 0 ?
-                                        'close' :
-                                            ($name == 0 ? 'both' : '')
-                                    )),
-                            'items' => [
-                                [
-                                    'image' => $photo->imagePreset(),
-                                    'route' => route('content.show', ['photo', $photo->id]),
-                                    'alt' => $photo->title
-                                ]
-                            ]
-                        ])
-
-                    @endforeach
+                    @include('component.gallery', [
+                        'items' => $photos->transform(function ($photo) {
+                            return [
+                                'image' => $photo->imagePreset(),
+                                'route' => route('content.show', [$photo->type, $photo]),
+                                'alt' => $photo->title
+                            ];
+                        })
+                    ])
 
                 </div>
 
@@ -398,7 +367,7 @@
                                     'title' => $travelmate->user->name,
                                     'age' => $travelmate->user->age,
                                     'interests' => $travelmate->title,
-                                    'route' => route('content.show', ['travelmate', $travelmate->id]),
+                                    'route' => route('content.show', [$travelmate->type, $travelmate]),
                                     'image' => $travelmate->user->imagePreset()
                                 ])
 

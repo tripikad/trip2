@@ -6,7 +6,6 @@ code: |
 
     @include('component.list', [
         'modifiers' => $modifiers,
-        'container' => 'both',
         'items' => [
             [
                 'modifiers' => '',
@@ -33,51 +32,36 @@ modifiers:
 - m-yellow
 - m-purple
 
-container:
-
-- both
-- open
-- close
-- none
-
 --}}
 
-@if(!isset($container) || $container == 'open' || $container == 'both')
+<ul class="c-list {{ $modifiers or '' }}">
 
-    <ul class="c-list {{ $modifiers or '' }}">
+    @foreach ($items as $item)
 
-        @endif
+        <li class="c-list__item {{ $item['modifiers'] or '' }}">
 
-        @foreach ($items as $item)
+            <h3 class="c-list__item-title">
 
-            <li class="c-list__item {{ $item['modifiers'] or '' }}">
+                <a href="{{ $item['route'] }}" class="c-list__item-title-link">{{ $item['title'] }}</a>
 
-                <h3 class="c-list__item-title">
+            </h3>
 
-                    <a href="{{ $item['route'] }}" class="c-list__item-title-link">{{ $item['title'] }}</a>
+            @if (isset($item['text']))
 
-                </h3>
+                <p class="c-list__item-text">
 
-                @if (isset($item['text']))
+                    @if (isset($item['text']))
 
-                    <p class="c-list__item-text">
+                        {{ $item['text'] }}
 
-                        @if (isset($item['text']))
+                    @endif
 
-                            {{ $item['text'] }}
+                </p>
 
-                        @endif
+            @endif
 
-                    </p>
+        </li>
 
-                @endif
+    @endforeach
 
-            </li>
-
-        @endforeach
-
-        @if(!isset($container) || $container == 'close' || $container == 'both')
-
-    </ul>
-
-@endif
+</ul>
