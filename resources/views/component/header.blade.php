@@ -1,4 +1,4 @@
-<header class="c-header">
+<header class="c-header {{ $modifiers or '' }}">
 
     <div class="c-header__search">
 
@@ -11,10 +11,17 @@
 
     <div class="c-header__nav">
 
-        <nav class="c-nav">
+        @if (isset($modifiers) && $modifiers === 'm-alternative')
+
+            @include('component.navbar',[
+                'modifiers' => 'm-alternative'
+            ])
+
+        @else
 
             @include('component.navbar')
 
-        </nav>
+        @endif
+
     </div>
 </header>

@@ -6,6 +6,14 @@
 
 @stop
 
+@section('header')
+
+    @include('component.header',[
+        'modifiers' => 'm-alternative'
+    ])
+
+@stop
+
 @section('masthead.bottom')
 
     @include('component.tags', [
@@ -114,7 +122,8 @@
     <div class="r-flights__masthead">
 
         @include('component.masthead', [
-            'logo_modifier' => 'm-small'
+            'modifiers' => 'm-alternative',
+            'image' => \App\Image::getRandom()
         ])
 
     </div>
