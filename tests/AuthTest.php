@@ -7,7 +7,7 @@ class AuthTest extends TestCase
 {
     use DatabaseTransactions;
 
-    var $data;
+    public $data;
 
     public function test_user_can_register_confirm_and_login()
     {
