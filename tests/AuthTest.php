@@ -11,7 +11,6 @@ class AuthTest extends TestCase
 
     public function test_user_can_register_confirm_and_login()
     {
-
         $this->getFakerData();
 
         // User can register
@@ -64,7 +63,6 @@ class AuthTest extends TestCase
 
     public function test_user_can_reset_password()
     {
-
         $this->getFakerData();
 
         $user1 = factory(App\User::class)->create();
@@ -108,7 +106,7 @@ class AuthTest extends TestCase
             ->seePageIs('/')
             ->notSeeInDatabase('password_resets', [
                 'email' => $user1->email,
-                'token' => $reset_token
+                'token' => $reset_token,
             ]);
     }
 
