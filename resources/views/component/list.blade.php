@@ -38,29 +38,29 @@ modifiers:
 
     @foreach ($items as $item)
 
-    <li class="c-list__item {{ $item['modifiers'] or '' }}">
+        <li class="c-list__item {{ $item['modifiers'] or '' }}">
 
-        <h3 class="c-list__item-title">
+            <h3 class="c-list__item-title">
 
-            <a href="{{ $item['route'] }}" class="c-list__item-title-link">{{ $item['title'] }}</a>
+                <a href="{{ $item['route'] }}" class="c-list__item-title-link">{{ $item['title'] }}</a>
 
-        </h3>
-
-        @if (isset($item['text']))
-
-        <p class="c-list__item-text">
+            </h3>
 
             @if (isset($item['text']))
 
-            {{ $item['text'] }}
+                <p class="c-list__item-text">
+
+                    @if (isset($item['text']))
+
+                        {{ $item['text'] }}
+
+                    @endif
+
+                </p>
 
             @endif
 
-        </p>
-
-        @endif
-
-    </li>
+        </li>
 
     @endforeach
 
