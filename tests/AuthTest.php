@@ -57,10 +57,60 @@ class AuthTest extends TestCase
             ->see(trans('auth.login.login.info'));
     }
 
+    public function test_registrered_user_can_reset_password()
+    {
+        $user = factory(App\User::class)->create();
+
+        // User can request new password
+
+        $this->visit('/')
+            ->click(trans('menu.auth.login'))
+            ->click(trans('auth.reset.apply.title'))
+            ->type($user->email, 'email')
+            ->press(trans('auth.reset.apply.submit.title'))
+            ->seePageIs('/')
+            ->see(trans('passwords.sent'))
+            ->seeInDatabase('password_resets', ['email' => $user->email]);
+
+        // User can confirm new password
+
+        $token = $this->getResetToken($user->email);
+        $password = str_random(10);
+
+        $this->visit('/reset/password/'.$token)
+            ->type($user->email, 'email')
+            ->type($password, 'password')
+            ->type($password, 'password_confirmation')
+            ->press(trans('auth.reset.password.submit.title'))
+            ->seePageIs('/')
+            ->notSeeInDatabase('password_resets', [
+                'email' => $user->email,
+                'token' => $token,
+            ]);
+    }
+
+    public function test_nonregistered_user_can_not_reset_password()
+    {
+        $this->visit('/')
+            ->click(trans('menu.auth.login'))
+            ->click(trans('auth.reset.apply.title'))
+            ->type('user@example.com', 'email')
+            ->press(trans('auth.reset.apply.submit.title'))
+            ->seePageIs('/reset/apply')
+            ->see(trans('passwords.user'));
+    }
+
     public function getVerificationLink($name)
     {
         $token = User::whereName($name)->first()->registration_token;
 
         return '/register/confirm/'.$token;
+    }
+
+    public function getResetToken($email)
+    {
+        $token = DB::table('password_resets')->whereEmail($email)->first()->token;
+
+        return $token;
     }
 }
