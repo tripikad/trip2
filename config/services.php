@@ -37,15 +37,15 @@ return [
 
     //Socialite
     'facebook' => [
-        'client_id' => '1675459002689506',
-        'client_secret' => 'de6f30f98d29f43e254c46723c051c52',
-        'redirect' => 'http://localhost:8000/facebook',
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_SECRET_KEY'),
+        'redirect' => env('FULL_BASE_URL').'facebook',
     ],
 
     'google' => [
-        'client_id' => '748880247677-3tf603jmjia9c75armb2tcf4grqbcrrv.apps.googleusercontent.com',
-        'client_secret' => '8_cqTGja0KCGrx_gAb1wQryq',
-        'redirect' => 'http://localhost:8000/google'
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_SECRET_KEY'),
+        'redirect' => env('FULL_BASE_URL').'google',
     ],
 
 ];
