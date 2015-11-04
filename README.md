@@ -40,6 +40,9 @@ Then  add following parameters to ```/.env```:
 
     DB_CONNECTION=trip2
 
+    #full page path
+    FULL_BASE_URL = 'http://localhost:8000/';
+
 Now you should be able to access the web app and also run console commands.
 
 #### Set up databases

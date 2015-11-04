@@ -35,4 +35,17 @@ return [
         'secret' => '',
     ],
 
+    //Socialite
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_SECRET_KEY'),
+        'redirect' => env('FULL_BASE_URL').'facebook',
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_SECRET_KEY'),
+        'redirect' => env('FULL_BASE_URL').'google',
+    ],
+
 ];

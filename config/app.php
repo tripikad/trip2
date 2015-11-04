@@ -147,6 +147,7 @@ return [
         Wpb\StringBladeCompiler\StringBladeCompilerServiceProvider::class,
         Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
         Roumen\Feed\FeedServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -210,6 +211,7 @@ return [
         'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
         'Date'      => Jenssegers\Date\Date::class,
         'Feed'      => Roumen\Feed\Facades\Feed::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 
