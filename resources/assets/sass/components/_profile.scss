@@ -75,6 +75,13 @@
 
     .c-profile__info {
 
+        flex: 1;
+
+        .c-profile.m-center & {
+
+            flex: inherit;
+        }
+
         .c-profile.m-mini &,
         .c-profile.m-micro & {
 
