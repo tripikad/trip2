@@ -25,11 +25,11 @@ get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'login.logout'])
 
 //Facebook login
 get('redirect/facebook', ['middleware' => null, 'uses' => 'SocialController@facebookRedirect', 'as' => 'facebook.redirect']);
-get('facebook', 'SocialController@facebook');
+get('facebook', ['uses' => 'SocialController@facebook', 'as' => 'facebook']);
 
 //Google+ login
 get('redirect/google', ['middleware' => null, 'uses' => 'SocialController@googleRedirect', 'as' => 'google.redirect']);
-get('google', 'SocialController@google');
+get('google', ['uses' => 'SocialController@google', 'as' => 'google']);
 
 // Password reset
 
