@@ -2,11 +2,15 @@
 
     display: flex;
     flex-flow: row wrap;
-    padding: $spacer * 2 0;
 
-    @include respond-to(desktop) {
+    &.m-wide {
 
-        padding: $spacer * 4 0;
+        padding: $spacer * 2 0;
+
+        @include respond-to(desktop) {
+
+            padding: $spacer * 4 0;
+        }
     }
 }
 
