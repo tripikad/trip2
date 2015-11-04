@@ -84,6 +84,7 @@ modifiers:
                     <div class="c-forum-list__item-tags">
 
                         @include('component.tags', [
+                            'modifiers' => 'm-small',
                             'items' => $item['tags']
                         ])
 

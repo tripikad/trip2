@@ -502,3 +502,12 @@
 </div>
 
 @stop
+
+@section('footer')
+
+    @include('component.footer', [
+        'modifiers' => 'm-alternative',
+        'image' => \App\Image::getRandom()
+    ])
+
+@stop
