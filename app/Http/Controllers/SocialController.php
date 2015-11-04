@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Image;
 use Socialite;
 
