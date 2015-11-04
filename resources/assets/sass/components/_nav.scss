@@ -36,8 +36,9 @@
 
                     color: $color-white;
                 }
+            }
 
-                span {
+                .c-nav__list-item-link-text {
 
                     .c-nav__list-item.m-has-children & {
 
@@ -52,7 +53,6 @@
                         }
                     }
                 }
-            }
 
                 .c-nav__list-item-image {
 
