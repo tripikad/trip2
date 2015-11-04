@@ -14,12 +14,33 @@
                 'items' => [
                     'user' => [
                         'route' => route('user.show', [auth()->user()]),
-                        'title' =>  auth()->user()->name
+                        'title' =>  auth()->user()->name,
+                        'profile' => [
+                            'image' => \App\Image::getRandom(),
+                        ],
+                        'children' => [
+                            [
+                                'title' => 'Profile',
+                                'route' => route('user.show', [auth()->user()]),
+                            ],
+                            [
+                                'title' => 'Messages',
+                                'route' => '#',
+                                'badge' => [
+                                    'modifiers' => 'm-blue',
+                                    'count' => '2'
+                                ]
+                            ],
+                            [
+                                'title' => 'Change profile',
+                                'route' => '#',
+                            ],
+                            [
+                                'title' => 'Logout',
+                                'route' => route('login.logout'),
+                            ],
+                        ]
                     ],
-                    'logout' => [
-                        'route' => route('login.logout'),
-                    ],
-
                 ],
             ])
 
@@ -30,15 +51,18 @@
                 'items' => [
                     'user' => [
                         'route' => route('user.show', [auth()->user()]),
-                        'title' =>  auth()->user()->name
+                        'title' =>  auth()->user()->name,
+                        'children' => [
+                            [
+                                'title' => 'Admin',
+                                'route' => route('content.index', ['internal'])
+                            ],
+                            [
+                                'title' => 'Logout',
+                                'route' => route('login.logout'),
+                            ],
+                        ]
                     ],
-                    'admin' => [
-                        'route' => route('content.index', ['internal'])
-                    ],
-                    'logout' => [
-                        'route' => route('login.logout'),
-                    ],
-
                 ],
             ])
 
