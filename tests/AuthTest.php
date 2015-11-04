@@ -59,7 +59,6 @@ class AuthTest extends TestCase
 
     public function test_registrered_user_can_reset_password()
     {
-
         $user = factory(App\User::class)->create();
 
         // User can request new password
@@ -78,7 +77,7 @@ class AuthTest extends TestCase
         $token = $this->getResetToken($user->email);
         $password = str_random(10);
 
-        $this->visit('/reset/password/' . $token)
+        $this->visit('/reset/password/'.$token)
             ->type($user->email, 'email')
             ->type($password, 'password')
             ->type($password, 'password_confirmation')
@@ -88,12 +87,10 @@ class AuthTest extends TestCase
                 'email' => $user->email,
                 'token' => $token,
             ]);
-        
     }
 
     public function test_nonregistered_user_can_not_reset_password()
     {
-
         $this->visit('/')
             ->click(trans('menu.auth.login'))
             ->click(trans('auth.reset.apply.title'))
@@ -101,7 +98,6 @@ class AuthTest extends TestCase
             ->press(trans('auth.reset.apply.submit.title'))
             ->seePageIs('/reset/apply')
             ->see(trans('passwords.user'));
-
     }
 
     public function getVerificationLink($name)
@@ -117,5 +113,4 @@ class AuthTest extends TestCase
 
         return $token;
     }
-
 }
