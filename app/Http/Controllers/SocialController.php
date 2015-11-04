@@ -34,7 +34,7 @@ class SocialController extends Controller
 
             return redirect()->route('frontpage.index')->with('info', trans('auth.login.login.info'));
         } else {
-            return redirect()->route('register.form') > with('info', trans('auth.login.facebook.user.error'));
+            return redirect()->route('register.form')->with('info', trans('auth.login.facebook.user.error'));
         }
     }
 
@@ -53,7 +53,7 @@ class SocialController extends Controller
 
             return redirect()->route('frontpage.index')->with('info', trans('auth.login.login.info'));
         } else {
-            return redirect()->route('register.form') > with('info', trans('auth.login.google.user.error'));
+            return redirect()->route('register.form')->with('info', trans('auth.login.google.user.error'));
         }
     }
 
