@@ -17,7 +17,7 @@
 
     .r-flights__content-wrap {
 
-        @include wrap();
+        @include wrap('narrow');
 
         position: relative;
         z-index: 2;
@@ -25,9 +25,11 @@
 
     .r-flights__content {
 
+        padding-top: $spacer * 4;
+
         @include respond-to(tablet) {
 
-            @include span(16 of 24);
+            @include span(14 of 24);
         }
     }
 
@@ -48,25 +50,53 @@
                 margin-bottom: $spacer * 1.5;
             }
 
+        .r-flights__content-block {
+
+            margin-bottom: $spacer * 6;
+        }
+
+            .r-flights__content-block-inner {
+
+                padding: $spacer * 3;
+                background: $color-fill-neutral-light;
+            }
+
+        .r-flights__content-title {
+
+            margin-bottom: $spacer * 3
+        }
+
     .r-flights__sidebar {
+
+        padding-top: $spacer * 4;
 
         @include respond-to(tablet) {
 
-            @include span(6 of 24 at 2);
+            @include span(8 of 24 at 3);
+        }
+
+        .r-flights.m-single & {
+
+            padding-top: $spacer * 26;
         }
     }
 
-        .r-flights__about {
-
-            padding: 0 $spacer * 3;
-            margin-bottom: $spacer * 2.5;
-            background: $color-fill-neutral-light;
-        }
-
-        .r-flights__promo {
+        .r-flights__sidebar-block {
 
             margin-bottom: $spacer * 2.5;
         }
+
+            .r-flights__sidebar-block-inner {
+
+                padding: $spacer * 3;
+                background: $color-fill-neutral-light;
+            }
+
+        .r-flights__sidebar-title {
+
+            margin-bottom: $spacer * 1.5;
+        }
+
 
     .r-flights__forum {
 
@@ -128,4 +158,26 @@
             @include wrap('narrow');
             position: relative;
             z-index: 2;
+        }
+
+    .r-flights__offers {
+
+        margin-bottom: -$spacer * 8;
+    }
+
+        .r-flights__offers-wrap {
+
+            @include wrap('narrow');
+        }
+
+    .r-flights__travel-mates {
+
+        padding-bottom: $spacer * 6;
+        padding-top: $spacer * 12;
+        background: $color-fill-neutral-light;
+    }
+
+        .r-flights__travel-mates-wrap {
+
+            @include wrap('narrow');
         }

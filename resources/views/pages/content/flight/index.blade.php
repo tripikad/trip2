@@ -270,26 +270,29 @@
 
         <div class="r-flights__sidebar">
 
-            <div class="r-flights__about">
+            <div class="r-flights__sidebar-block">
 
-                @include('component.about', [
-                    'title' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
-                    'text' => 'Pakkumised võivad aeguda juba paari päevaga. Paremaks orienteerumiseks on vanemad pakkumised eri värvi.',
-                    'links' => [
-                        [
-                            'title' => 'Loe lähemalt Trip.ee-st ›',
-                            'route' => '#'
-                        ],
-                        [
-                            'title' => 'Mis on veahind ›',
-                            'route' => '#',
+                <div class="r-flights__sidebar-block-inner">
+
+                    @include('component.about', [
+                        'title' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
+                        'text' => 'Pakkumised võivad aeguda juba paari päevaga. Paremaks orienteerumiseks on vanemad pakkumised eri värvi.',
+                        'links' => [
+                            [
+                                'title' => 'Loe lähemalt Trip.ee-st ›',
+                                'route' => '#'
+                            ],
+                            [
+                                'title' => 'Mis on veahind ›',
+                                'route' => '#',
+                            ]
                         ]
-                    ]
-                ])
+                    ])
 
+                </div>
             </div>
 
-            <div class="r-flights__promo">
+            <div class="r-flights__sidebar-block">
 
                 @include('component.promo', [
                     'route' => '',
@@ -298,7 +301,7 @@
 
             </div>
 
-            <div class="r-flights__promo">
+            <div class="r-flights__sidebar-block">
 
                 @include('component.promo', [
                     'route' => '',
@@ -307,33 +310,35 @@
 
             </div>
 
-            <div class="r-flights__about">
+            <div class="r-flights__sidebar-block">
 
-                @include('component.about', [
-                    'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
-                    'links' => [
-                        [
-                            'title' => 'Loe lähemalt Trip.ee-st ›',
-                            'route' => '#'
+                <div class="r-flights__sidebar-block-inner">
+
+                    @include('component.about', [
+                        'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+                        'links' => [
+                            [
+                                'title' => 'Loe lähemalt Trip.ee-st ›',
+                                'route' => '#'
+                            ],
+                            [
+                                'title' => 'Trip.ee Facebookis ›',
+                                'route' => '#',
+                            ],
+                            [
+                                'title' => 'Trip.ee Twitteris ›',
+                                'route' => '#',
+                            ]
                         ],
-                        [
-                            'title' => 'Trip.ee Facebookis ›',
+                        'button' => [
+                            'title' => 'Liitu Trip.ee-ga',
                             'route' => '#',
-                        ],
-                        [
-                            'title' => 'Trip.ee Twitteris ›',
-                            'route' => '#',
+                            'modifiers' => 'm-block'
                         ]
-                    ],
-                    'button' => [
-                        'title' => 'Liitu Trip.ee-ga',
-                        'route' => '#',
-                        'modifiers' => 'm-block'
-                    ]
-                ])
+                    ])
 
+                </div>
             </div>
-
         </div>
 
     </div>
