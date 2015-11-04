@@ -19,10 +19,7 @@
 
         @yield('content')
 
-        @include('component.footer', [
-            'modifiers' => 'm-alternative',
-            'image' => \App\Image::getRandom()
-        ])
+        @yield('footer', view('component.footer'))
 
         <script type="text/javascript" src="/js/main.js"></script>
 
