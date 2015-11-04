@@ -46,20 +46,22 @@ class Image extends Model
         $path = config('imagepresets.original.path');
 
         $info = getimagesize($url);
-        $ext  = image_type_to_extension($info[2]);
+        $ext = image_type_to_extension($info[2]);
 
         //create random name
-        if(!$filename)
+        if (! $filename) {
             $filename = 'image_'.str_random(5).$ext;
-        else $filename = $filename.$ext;          
+        } else {
+            $filename = $filename.$ext;
+        }
 
         try {
-            copy($url,$path.$filename);
-        } catch (Exception $e)  {
-            throw new Exception("Image copy failed: ".$e);                   
-        }    
+            copy($url, $path.$filename);
+        } catch (Exception $e) {
+            throw new Exception('Image copy failed: '.$e);
+        }
 
-        self::createImagePresets($path,$filename);
+        self::createImagePresets($path, $filename);
 
         return $filename;
     }
@@ -67,11 +69,11 @@ class Image extends Model
     public static function storeImageFile($file, $new_filename = null)
     {
         $path = config('imagepresets.original.path');
-        
+
         $filename = $new_filename ? $new_filename : preg_replace('/\s+/', '-', $file->getClientOriginalName());
         $file->move($path, $filename);
-        
-        self::createImagePresets($path,$filename);
+
+        self::createImagePresets($path, $filename);
 
         return $filename;
     }
