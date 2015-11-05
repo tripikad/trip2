@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Imageconv;
-use Illuminate\Support\Facades\DB;
 
 class Image extends Model
 {
@@ -90,8 +89,7 @@ class Image extends Model
 
     public static function getAllContentExcept($except)
     {
-        $images = Image::whereIn('id', function($query) use ($except)
-            {
+        $images = self::whereIn('id', function($query) use ($except) {
                 $query->from('imageables')
                     ->select('imageables.image_id')
                     ->join('contents', 'imageables.imageable_id', '=', 'contents.id')
