@@ -2,10 +2,21 @@
 
     <div class="c-header__search">
 
-        @include('component.search',[
-        	'modifiers' => 'm-small m-red',
-        	'placeholder' => 'Search'
-        ])
+        @if (isset($modifiers) && $modifiers === 'm-alternative')
+
+            @include('component.search',[
+            	'modifiers' => 'm-small m-red m-alternative',
+            	'placeholder' => 'Search'
+            ])
+
+        @else
+
+            @include('component.search',[
+                'modifiers' => 'm-small m-red',
+                'placeholder' => 'Search'
+            ])
+
+        @endif
 
     </div>
 
