@@ -1,10 +1,18 @@
 @extends('layouts.main')
 
+@section('header')
+
+    @include('component.header',[
+        'modifiers' => 'm-alternative'
+    ])
+
+@stop
+
 @section('masthead.search')
 
     @include('component.search',[
         'modifiers' => 'm-red',
-        'placeholder' => 'Where do you want to go today?'
+        'placeholder' => trans('frontpage.index.search.title')
     ])
 
 @stop
@@ -15,9 +23,10 @@
 
         <div class="r-home__masthead">
 
-            @include('component.masthead', [
-                'modifiers' => 'm-search'
-            ])
+        @include('component.masthead', [
+            'modifiers' => 'm-search m-alternative',
+            'image' => \App\Image::getRandom()
+        ])
 
         </div>
 
@@ -35,10 +44,10 @@
 
                                 @include('component.destination', [
                                     'modifiers' => $flights1_modifiers[$name],
-                                    'title' => 'Aafrika',
-                                    'title_route' => '/destination/4',
-                                    'subtitle' => 'Itaalia',
-                                    'subtitle_route' => '#'
+                                    'title' => $flight1->destinationMainPreset('name'),
+                                    'title_route' => route('destination.show', $flight1->destinationMainPreset()),
+                                    'subtitle' => $flight1->destinationSubPreset('name'),
+                                    'subtitle_route' => route('destination.show', $flight1->destinationSubPreset())
                                 ])
 
                                 @include('component.card', [
@@ -100,34 +109,36 @@
 
                 <div class="r-home__forum-column m-first">
 
-                    @include('component.link', [
-                        'modifiers' => 'm-large m-block',
-                        'title' => 'Üldfoorum',
-                        'route' => ''
-                    ])
-
-                    @include('component.link', [
-                        'modifiers' => 'm-large m-block',
-                        'title' => 'Ost-müük',
-                        'route' => ''
-                    ])
-
-                    @include('component.link', [
-                        'modifiers' => 'm-large m-block',
-                        'title' => 'Vaba teema',
-                        'route' => ''
-                    ])
-
-                    @include('component.button', [
-                        'modifiers' => 'm-secondary m-block',
-                        'title' => 'Otsi foorumist',
-                        'route' => ''
-                    ])
-
-                    @include('component.button', [
-                        'modifiers' => 'm-secondary m-block',
-                        'title' => 'Alusta teemat',
-                        'route' => ''
+                    @include('component.content.forum.nav', [
+                        'items' => [
+                            [
+                                'title' => trans('frontpage.index.forum.general'),
+                                'route' => route('content.show', 'forum'),
+                                'modifiers' => 'm-large m-block'
+                            ],
+                            [
+                                'title' => trans('frontpage.index.forum.buysell'),
+                                'route' => route('content.show', 'buysell'),
+                                'modifiers' => 'm-large m-block'
+                            ],
+                            [
+                                'title' => trans('frontpage.index.forum.expat'),
+                                'route' => route('content.show', 'expat'),
+                                'modifiers' => 'm-large m-block'
+                            ],
+                            [
+                                'type' => 'button',
+                                'title' => 'Otsi foorumist',
+                                'route' => '#',
+                                'modifiers' => 'm-secondary m-block'
+                            ],
+                            [
+                                'type' => 'button',
+                                'title' => 'Alusta teemat',
+                                'route' => '#',
+                                'modifiers' => 'm-block'
+                            ]
+                        ]
                     ])
 
                 </div>
@@ -395,5 +406,14 @@
         </div>
 
     </div>
+
+@stop
+
+@section('footer')
+
+    @include('component.footer', [
+        'modifiers' => 'm-alternative',
+        'image' => \App\Image::getRandom()
+    ])
 
 @stop
