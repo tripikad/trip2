@@ -55,16 +55,14 @@ class Content extends Model
         if ($this->destinations) {
             $find = ['id', 'parent_id'];
 
-            foreach($find as $values) {
+            foreach ($find as $values) {
                 if (isset($this->destinations->first()->$values)) {
                     $destinationIds[] = $this->destinations->first()->$values;
                 }
             }
         }
 
-
-
-        if(!empty($destinationIds)) {
+        if (! empty($destinationIds)) {
             return Destination::whereIn('id', $destinationIds)
                 ->get();
         } else {
