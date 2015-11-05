@@ -25,7 +25,7 @@
                             ],
                             [
                                 'title' => 'Messages',
-                                'route' => '#',
+                                'route' => route('message.index', [auth()->user()]),
                                 'badge' => [
                                     'modifiers' => 'm-blue',
                                     'count' => '2'
@@ -33,7 +33,7 @@
                             ],
                             [
                                 'title' => 'Change profile',
-                                'route' => '#',
+                                'route' => route('user.edit', [auth()->user()]),
                             ],
                             [
                                 'title' => 'Logout',
@@ -85,4 +85,3 @@
     </ul>
 
 </nav>
-
