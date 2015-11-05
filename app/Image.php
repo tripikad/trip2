@@ -89,7 +89,7 @@ class Image extends Model
 
     public static function getAllContentExcept($except)
     {
-        $images = self::whereIn('id', function($query) use ($except) {
+        $images = self::whereIn('id', function ($query) use ($except) {
                 $query->from('imageables')
                     ->select('imageables.image_id')
                     ->join('contents', 'imageables.imageable_id', '=', 'contents.id')
