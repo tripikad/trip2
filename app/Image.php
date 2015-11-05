@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Imageconv;
+use Illuminate\Support\Facades\DB;
 
 class Image extends Model
 {
@@ -85,5 +86,19 @@ class Image extends Model
             ->first();
 
         return $photo ? $photo->imagePreset('large') : null;
+    }
+
+    public static function getAllContentExcept($except)
+    {
+        $images = Image::whereIn('id', function($query) use ($except)
+            {
+                $query->from('imageables')
+                    ->select('imageables.image_id')
+                    ->join('contents', 'imageables.imageable_id', '=', 'contents.id')
+                    ->where('contents.type', '!=', $except);
+            })
+            ->orderBy('id', 'asc');
+
+        return $images ? $images : null;
     }
 }
