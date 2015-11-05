@@ -5,7 +5,7 @@ return [
     'header.home' => 'Trip.ee',
     'header.news' => 'News',
     'header.flights' => 'Flights',
-    'header.travelmates' => 'Travelmates',
+    'header.travelmates' => 'Travel mates',
     'header.forum' => 'Forum',
     'header.photos' => 'Photos',
     'header.blogs' => 'Blogs',
@@ -16,13 +16,23 @@ return [
     'auth.admin' => 'Administer',
     'auth.logout' => 'Logout',
 
-    'footer.about' => 'What is Trip.ee',
-    'footer.contact' => 'Contact',
-    'footer.eula' => 'EULA',
-    'footer.advertising' => 'Advertising',
-    'footer.styleguide' => 'Styleguide',
-    'footer.facebook' => 'Facebook',
-    'footer.twitter' => 'Twitter',
+    'footer.news' => 'News',
+    'footer.flights' => 'Flights',
+    'footer.offers' => 'Offers',
+    'footer.travelmates' => 'Travel mates',
+
+    'footer2.forum' => 'Forum',
+    'footer2.expat' => 'Expatriate',
+    'footer2.buysell' => 'Buying and selling',
+
+    'footer3.about' => 'What is Trip.ee',
+    'footer3.contact' => 'Contact',
+    'footer3.eula' => 'EULA',
+    'footer3.advertising' => 'Advertising',
+    'footer3.styleguide' => 'Styleguide',
+
+    'footer-social.facebook' => 'Facebook',
+    'footer-social.twitter' => 'Twitter',
 
     'news.news' => 'News',
     'news.shortnews' => 'Short news',
@@ -32,6 +42,8 @@ return [
     'forum.buysell' => 'Buying and selling',
 
     'user.activity' => 'Activity',
+    'user.profile' => 'Profile',
+    'user.edit.profile' => 'Edit profile',
     'user.message' => 'Messages',
     'user.follow' => 'Follows',
 

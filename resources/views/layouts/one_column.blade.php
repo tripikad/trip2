@@ -2,12 +2,10 @@
 
 @section('content')
 
-@include('component.masthead', [
-    'modifiers' => 'm-search'
-])
+@include('component.masthead')
 
 <div class="l-one-column">
-    
+
     @yield('content.one')
 
 </div>

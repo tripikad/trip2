@@ -11,7 +11,7 @@
     </head>
     <body>{{ Analytics::render() }}
 
-        @include('component.header')
+        @yield('header', view('component.header'))
 
         @include('component.info.success')
 
@@ -19,7 +19,7 @@
 
         @yield('content')
 
-        @include('component.footer')
+        @yield('footer', view('component.footer'))
 
         <script type="text/javascript" src="/js/main.js"></script>
 

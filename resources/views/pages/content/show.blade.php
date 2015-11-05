@@ -6,18 +6,13 @@
 
 @section('content.one')
 
-    <div class="utils-border-bottom 
-        @if (! $content->status)
-            utils-unpublished
-        @endif
-    ">
-
     @include('component.row', [
         'profile' => [
             'modifiers' => '',
             'image' => $content->user->imagePreset(),
             'route' => route('user.show', [$content->user])
         ],
+        'modifiers' => 'm-image',
         'title' => $content->title,
         'text' => view('component.content.text', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
@@ -25,13 +20,7 @@
         'body' => $content->body_filtered,
     ])
 
-    </div>
-
-    <div class="utils-border-bottom">    
-    
-        @include('component.comment.index', ['comments' => $comments])
-
-    </div>
+    @include('component.comment.index', ['comments' => $comments])
 
     @if (\Auth::check())
 

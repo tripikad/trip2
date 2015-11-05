@@ -8,7 +8,7 @@ use App\Destination;
 
 class DestinationController extends Controller
 {
-    public function index($id)
+    public function show($id)
     {
         $destination = Destination::with('flags', 'flags.user')
             ->findOrFail($id);
@@ -33,7 +33,7 @@ class DestinationController extends Controller
                 ->get();
         }
 
-        return response()->view('pages.destination.index', [
+        return response()->view('pages.destination.show', [
             'destination' => $destination,
             'features' => $features,
         ])->header('Cache-Control', 'public, s-maxage='.config('destination.cache'));

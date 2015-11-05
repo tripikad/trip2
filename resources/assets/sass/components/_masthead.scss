@@ -3,24 +3,35 @@
     position: relative;
     width: 100%;
     height: $spacer * 20;
-    background-repeat: no-repeat;
-    background-position: top center;
-    background-size: cover;
+    background-color: $color-fill-neutral-light;
+
+    @include respond-to(tablet) {
+
+        height: $spacer * 26;
+    }
 
     @include respond-to(desktop) {
 
         height: $spacer * 32;
     }
 
-    &:after {
+    &.m-alternative {
 
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba($color-fill-black-dark, 0.4);
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+        background-color: none;
+
+        &:after {
+
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba($color-fill-black-dark, 0.4);
+        }
     }
 }
 
@@ -32,7 +43,7 @@
         top: 50%;
         transform: translate(-50%, -50%);
 
-        &.m-search {
+        .c-masthead.m-search & {
 
             @include span(24 of 28);
 
@@ -54,68 +65,106 @@
         .c-masthead__logo {
 
             position: absolute;
-            left: -$spacer * 4;
-            top: -$spacer * 8.5;
-
-            &.m-small {
-
-                left: -$spacer * 4;
-                top: -$spacer * 6.5;
-            }
+            left: -$spacer * 6;
+            top: -$spacer * 9;
+            width: 280px;
+            height: 132px;
         }
 
         .c-masthead__title {
 
             @include font-smoothing;
 
-            color: $color-white;
-            font-size: $font-size-huge;
+            color: $color-text-black;
+            font-size: $font-size-largest;
             font-weight: $font-weight-bold;
             text-align: center;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-huge / 1.5;
+            }
+
+            @include respond-to(desktop) {
+
+                font-size: $font-size-huge;
+            }
+
+            .c-masthead.m-alternative & {
+
+                color: $color-white;
+            }
         }
 
         .c-masthead__subtitle {
 
             @include font-smoothing;
 
+            color: $color-text-black;
             font-size: $font-size-normal;
             font-weight: $font-weight-bold;
             text-align: right;
+
+            .c-masthead.m-alternative & {
+
+                color: $color-white;
+            }
         }
 
             .c-masthead__subtitle-link {
 
-                color: $color-white;
+                color: $color-text-black;
                 text-decoration: none;
-            }
 
-        .c-masthead__nav {
+                .c-masthead.m-alternative & {
 
-            @include color-modifiers;
-
-            text-decoration: none;
-            position: absolute;
-            z-index: 3;
-            top: 50%;
-            display: block;
-
-            &.m-previous {
-
-                left: $spacer;
-
-                @include respond-to(desktop) {
-
-                    left: $spacer * 4;
+                    color: $color-white;
                 }
             }
 
-            &.m-next {
+    .c-masthead__nav {
 
-                right: $spacer;
+        @include color-modifiers;
 
-                @include respond-to(desktop) {
+        text-decoration: none;
+        position: absolute;
+        z-index: 3;
+        top: 50%;
+        display: block;
 
-                    right: $spacer * 4;
-                }
+        &.m-previous {
+
+            left: $spacer;
+
+            @include respond-to(desktop) {
+
+                left: $spacer * 4;
             }
         }
+
+        &.m-next {
+
+            right: $spacer;
+
+            @include respond-to(desktop) {
+
+                right: $spacer * 4;
+            }
+        }
+    }
+
+    .c-masthead__bottom {
+
+        text-align: center;
+        position: absolute;
+        z-index: 10;
+        bottom: $spacer * 3;
+        left: 0;
+        width: 100%;
+        display: none;
+
+        @include respond-to(desktop) {
+
+            display: block;
+        }
+    }

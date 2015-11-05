@@ -26,7 +26,7 @@ Note: If you have problems with ```npm install```, try to run ```npm install --n
 
 #### Configuration
 
-Then  add following parameters to ```/.env```:
+Then add following parameters to ```/.env```:
 
     DB_HOST1=127.0.0.1
     DB_DATABASE1=trip
@@ -39,6 +39,14 @@ Then  add following parameters to ```/.env```:
     DB_PASSWORD2=secret
 
     DB_CONNECTION=trip2
+
+Then change these parameter values properly from ```/.env```:
+
+    FULL_BASE_URL=http://localhost:8000/
+    FACEBOOK_CLIENT_ID=
+    FACEBOOK_SECRET_KEY=
+    GOOGLE_CLIENT_ID=
+    GOOGLE_SECRET_KEY=
 
 Now you should be able to access the web app and also run console commands.
 

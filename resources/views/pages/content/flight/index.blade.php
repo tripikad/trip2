@@ -6,6 +6,88 @@
 
 @stop
 
+@section('header')
+
+    @include('component.header',[
+        'modifiers' => 'm-alternative'
+    ])
+
+@stop
+
+@section('masthead.bottom')
+
+    @include('component.tags', [
+        'items' => [
+            [
+                'modifiers' => 'm-green',
+                'route' => '#',
+                'title' => 'Soojale maale'
+            ],
+            [
+                'modifiers' => 'm-green',
+                'route' => '#',
+                'title' => 'Suurlinn'
+            ],
+            [
+                'modifiers' => 'm-green m-active',
+                'route' => '#',
+                'title' => 'Rannapuhkus'
+            ],
+            [
+                'modifiers' => 'm-green',
+                'route' => '#',
+                'title' => 'Talvepuhkus'
+            ],
+            [
+                'modifiers' => 'm-green',
+                'route' => '#',
+                'title' => 'Koolivaheaeg'
+            ],
+            [
+                'modifiers' => 'm-green',
+                'route' => '#',
+                'title' => 'Eksootiline'
+            ],
+            [
+                'modifiers' => 'm-green',
+                'route' => '#',
+                'title' => 'Aafrika'
+            ],
+        ]
+    ])
+    @include('component.tags', [
+        'items' => [
+            [
+                'modifiers' => 'm-green',
+                'route' => '#',
+                'title' => 'Veahind'
+            ],
+            [
+                'modifiers' => 'm-green',
+                'route' => '#',
+                'title' => 'Aasia'
+            ],
+            [
+                'modifiers' => 'm-green',
+                'route' => '#',
+                'title' => 'Ameerika'
+            ],
+            [
+                'modifiers' => 'm-green m-active',
+                'route' => '#',
+                'title' => 'Perepuhkus'
+            ],
+            [
+                'modifiers' => 'm-green',
+                'route' => '#',
+                'title' => 'Šhopping'
+            ],
+        ]
+    ])
+
+@stop
+
+
 @section('header1.right')
 
     @include('component.button', [
@@ -39,7 +121,10 @@
 
     <div class="r-flights__masthead">
 
-        @include('component.masthead')
+        @include('component.masthead', [
+            'modifiers' => 'm-alternative',
+            'image' => \App\Image::getRandom()
+        ])
 
     </div>
 
@@ -185,26 +270,29 @@
 
         <div class="r-flights__sidebar">
 
-            <div class="r-flights__about">
+            <div class="r-flights__sidebar-block">
 
-                @include('component.about', [
-                    'title' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
-                    'text' => 'Pakkumised võivad aeguda juba paari päevaga. Paremaks orienteerumiseks on vanemad pakkumised eri värvi.',
-                    'links' => [
-                        [
-                            'title' => 'Loe lähemalt Trip.ee-st ›',
-                            'route' => '#'
-                        ],
-                        [
-                            'title' => 'Mis on veahind ›',
-                            'route' => '#',
+                <div class="r-flights__sidebar-block-inner">
+
+                    @include('component.about', [
+                        'title' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
+                        'text' => 'Pakkumised võivad aeguda juba paari päevaga. Paremaks orienteerumiseks on vanemad pakkumised eri värvi.',
+                        'links' => [
+                            [
+                                'title' => 'Loe lähemalt Trip.ee-st ›',
+                                'route' => '#'
+                            ],
+                            [
+                                'title' => 'Mis on veahind ›',
+                                'route' => '#',
+                            ]
                         ]
-                    ]
-                ])
+                    ])
 
+                </div>
             </div>
 
-            <div class="r-flights__promo">
+            <div class="r-flights__sidebar-block">
 
                 @include('component.promo', [
                     'route' => '',
@@ -213,7 +301,7 @@
 
             </div>
 
-            <div class="r-flights__promo">
+            <div class="r-flights__sidebar-block">
 
                 @include('component.promo', [
                     'route' => '',
@@ -222,33 +310,35 @@
 
             </div>
 
-            <div class="r-flights__about">
+            <div class="r-flights__sidebar-block">
 
-                @include('component.about', [
-                    'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
-                    'links' => [
-                        [
-                            'title' => 'Loe lähemalt Trip.ee-st ›',
-                            'route' => '#'
+                <div class="r-flights__sidebar-block-inner">
+
+                    @include('component.about', [
+                        'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+                        'links' => [
+                            [
+                                'title' => 'Loe lähemalt Trip.ee-st ›',
+                                'route' => '#'
+                            ],
+                            [
+                                'title' => 'Trip.ee Facebookis ›',
+                                'route' => '#',
+                            ],
+                            [
+                                'title' => 'Trip.ee Twitteris ›',
+                                'route' => '#',
+                            ]
                         ],
-                        [
-                            'title' => 'Trip.ee Facebookis ›',
+                        'button' => [
+                            'title' => 'Liitu Trip.ee-ga',
                             'route' => '#',
-                        ],
-                        [
-                            'title' => 'Trip.ee Twitteris ›',
-                            'route' => '#',
+                            'modifiers' => 'm-block'
                         ]
-                    ],
-                    'button' => [
-                        'title' => 'Liitu Trip.ee-ga',
-                        'route' => '#',
-                        'modifiers' => 'm-block'
-                    ]
-                ])
+                    ])
 
+                </div>
             </div>
-
         </div>
 
     </div>
@@ -268,34 +358,36 @@
 
             <div class="r-flights__forum-column m-first">
 
-                @include('component.link', [
-                    'modifiers' => 'm-large m-block',
-                    'title' => 'Üldfoorum',
-                    'route' => ''
-                ])
-
-                @include('component.link', [
-                    'modifiers' => 'm-large m-block',
-                    'title' => 'Ost-müük',
-                    'route' => ''
-                ])
-
-                @include('component.link', [
-                    'modifiers' => 'm-large m-block',
-                    'title' => 'Vaba teema',
-                    'route' => ''
-                ])
-
-                @include('component.button', [
-                    'modifiers' => 'm-secondary m-block',
-                    'title' => 'Otsi foorumist',
-                    'route' => ''
-                ])
-
-                @include('component.button', [
-                    'modifiers' => 'm-secondary m-block',
-                    'title' => 'Alusta teemat',
-                    'route' => ''
+                @include('component.content.forum.nav', [
+                    'items' => [
+                        [
+                            'title' => 'Üldfoorum',
+                            'route' => '#',
+                            'modifiers' => 'm-large m-block'
+                        ],
+                        [
+                            'title' => 'Ost-müük',
+                            'route' => '#',
+                            'modifiers' => 'm-large m-block'
+                        ],
+                        [
+                            'title' => 'Vaba teema',
+                            'route' => '#',
+                            'modifiers' => 'm-large m-block'
+                        ],
+                        [
+                            'type' => 'button',
+                            'title' => 'Otsi foorumist',
+                            'route' => '#',
+                            'modifiers' => 'm-secondary m-block'
+                        ],
+                        [
+                            'type' => 'button',
+                            'title' => 'Alusta teemat',
+                            'route' => '#',
+                            'modifiers' => 'm-block'
+                        ]
+                    ]
                 ])
 
             </div>
@@ -415,5 +507,14 @@
     </div>
 
 </div>
+
+@stop
+
+@section('footer')
+
+    @include('component.footer', [
+        'modifiers' => 'm-alternative',
+        'image' => \App\Image::getRandom()
+    ])
 
 @stop

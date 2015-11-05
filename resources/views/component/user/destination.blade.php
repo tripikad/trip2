@@ -6,7 +6,7 @@
         
             <li>
 
-                <a href="{{ route('destination.index', [$destination->flaggable]) }}">
+                <a href="{{ route('destination.show', [$destination->flaggable]) }}">
                 
                     {{ $destination->flaggable->name }}
                 
