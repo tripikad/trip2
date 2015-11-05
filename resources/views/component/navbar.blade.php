@@ -24,7 +24,7 @@
                                 'route' => route('user.show', [auth()->user()]),
                             ],
                             [
-                                'title' => trans('menu.user.message'),
+                                'title' => '- Messages',
                                 'route' => route('message.index', [auth()->user()]),
                                 'badge' => [
                                     'modifiers' => 'm-blue',
