@@ -48,14 +48,15 @@ class Content extends Model
         return $this->morphMany('App\Follow', 'followable');
     }
 
-    public function destinationsPreset() {
+    public function destinationsPreset()
+    {
         $destinationIds = [];
 
-        if($this->destinations) {
+        if ($this->destinations) {
             $find = ['id', 'parent_id'];
 
             foreach($find as $values) {
-                if(isset($this->destinations->first()->$values)) {
+                if (isset($this->destinations->first()->$values)) {
                     $destinationIds[] = $this->destinations->first()->$values;
                 }
             }
@@ -67,24 +68,26 @@ class Content extends Model
             return Destination::whereIn('id', $destinationIds)
                 ->get();
         } else {
-            return null;
+            return;
         }
     }
 
-    public function destinationMainPreset($name = 'id') {
-        if($this->destinationsPreset()) {
+    public function destinationMainPreset($name = 'id')
+    {
+        if ($this->destinationsPreset()) {
             return $this->destinationsPreset()->first()->$name;
         } else {
-            return null;
+            return;
         }
 
     }
 
-    public function destinationSubPreset($name = 'id') {
-        if($this->destinationsPreset()) {
+    public function destinationSubPreset($name = 'id')
+    {
+        if ($this->destinationsPreset()) {
             return $this->destinationsPreset()->last()->$name;
         } else {
-            return null;
+            return;
         }
     }
 
