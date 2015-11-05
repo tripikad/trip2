@@ -77,7 +77,6 @@ class Content extends Model
         } else {
             return;
         }
-
     }
 
     public function destinationSubPreset($name = 'id')
