@@ -8,10 +8,7 @@ class MessageTest extends TestCase
 {
     use DatabaseTransactions;
 
-    /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessage Received status code [401]
-     */
+  
     public function test_unlogged_user_can_not_see_messages()
     {
         $user1 = factory(App\User::class)->create();
@@ -20,16 +17,11 @@ class MessageTest extends TestCase
         $this->visit("user/$user1->id")
             ->dontSee(trans('user.show.message.create'));
 
-        // Return 401
-
         $this->visit("user/$user1->id/messages")
             ->visit("user/$user1->id/messages/$user2->id");
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessage Received status code [401]
-     */
+  
     public function test_regular_user_can_not_see_other_user_messages()
     {
         $user1 = factory(App\User::class)->create();
@@ -43,9 +35,7 @@ class MessageTest extends TestCase
 
         $this->actingAs($user3)
             ->visit("user/$user1->id")
-            ->dontSeeLink(trans('menu.user.message'));
-
-        // Return 401
+            ->dontSeeLink(trans('menu.user.message'), '/user/'.$user1->id.'/messages');
 
         $this->actingAs($user3)
             ->visit("user/$user1->id/messages")
