@@ -358,34 +358,36 @@
 
             <div class="r-flights__forum-column m-first">
 
-                @include('component.link', [
-                    'modifiers' => 'm-large m-block',
-                    'title' => 'Üldfoorum',
-                    'route' => ''
-                ])
-
-                @include('component.link', [
-                    'modifiers' => 'm-large m-block',
-                    'title' => 'Ost-müük',
-                    'route' => ''
-                ])
-
-                @include('component.link', [
-                    'modifiers' => 'm-large m-block',
-                    'title' => 'Vaba teema',
-                    'route' => ''
-                ])
-
-                @include('component.button', [
-                    'modifiers' => 'm-secondary m-block',
-                    'title' => 'Otsi foorumist',
-                    'route' => ''
-                ])
-
-                @include('component.button', [
-                    'modifiers' => 'm-secondary m-block',
-                    'title' => 'Alusta teemat',
-                    'route' => ''
+                @include('component.content.forum.nav', [
+                    'items' => [
+                        [
+                            'title' => 'Üldfoorum',
+                            'route' => '#',
+                            'modifiers' => 'm-large m-block'
+                        ],
+                        [
+                            'title' => 'Ost-müük',
+                            'route' => '#',
+                            'modifiers' => 'm-large m-block'
+                        ],
+                        [
+                            'title' => 'Vaba teema',
+                            'route' => '#',
+                            'modifiers' => 'm-large m-block'
+                        ],
+                        [
+                            'type' => 'button',
+                            'title' => 'Otsi foorumist',
+                            'route' => '#',
+                            'modifiers' => 'm-secondary m-block'
+                        ],
+                        [
+                            'type' => 'button',
+                            'title' => 'Alusta teemat',
+                            'route' => '#',
+                            'modifiers' => 'm-block'
+                        ]
+                    ]
                 ])
 
             </div>
