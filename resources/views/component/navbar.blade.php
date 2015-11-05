@@ -20,11 +20,11 @@
                         ],
                         'children' => [
                             [
-                                'title' => 'Profile',
+                                'title' => trans('menu.user.profile'),
                                 'route' => route('user.show', [auth()->user()]),
                             ],
                             [
-                                'title' => 'Messages',
+                                'title' => trans('menu.user.message'),
                                 'route' => route('message.index', [auth()->user()]),
                                 'badge' => [
                                     'modifiers' => 'm-blue',
@@ -32,11 +32,11 @@
                                 ]
                             ],
                             [
-                                'title' => 'Change profile',
+                                'title' => trans('menu.user.edit.profile'),
                                 'route' => route('user.edit', [auth()->user()]),
                             ],
                             [
-                                'title' => 'Logout',
+                                'title' => trans('menu.auth.logout'),
                                 'route' => route('login.logout'),
                             ],
                         ]
@@ -54,11 +54,11 @@
                         'title' =>  auth()->user()->name,
                         'children' => [
                             [
-                                'title' => 'Admin',
+                                'title' => trans('menu.auth.admin'),
                                 'route' => route('content.index', ['internal'])
                             ],
                             [
-                                'title' => 'Logout',
+                                'title' => trans('menu.auth.logout'),
                                 'route' => route('login.logout'),
                             ],
                         ]
