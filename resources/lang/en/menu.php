@@ -32,6 +32,8 @@ return [
     'forum.buysell' => 'Buying and selling',
 
     'user.activity' => 'Activity',
+    'user.profile' => 'Profile',
+    'user.edit.profile' => 'Edit profile',
     'user.message' => 'Messages',
     'user.follow' => 'Follows',
 

@@ -14,12 +14,14 @@
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
             @include('component.navbar',[
-                'modifiers' => 'm-alternative'
+                'modifiers' => 'm-alternative m-purple'
             ])
 
         @else
 
-            @include('component.navbar')
+            @include('component.navbar',[
+                'modifiers' => 'm-blue'
+            ])
 
         @endif
 

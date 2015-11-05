@@ -16,10 +16,7 @@
 
             &.m-has-children {
 
-                @include arrowY(down, $color-white);
-
                 position: relative;
-                padding-right: 24px;
             }
         }
 
@@ -41,9 +38,32 @@
                 }
             }
 
+                .c-nav__list-item-link-text {
+
+                    .c-nav__list-item.m-has-children & {
+
+                        @include arrowY(down, $color-text-link);
+
+                        position: relative;
+                        padding-right: $spacer;
+
+                        .c-nav.m-alternative & {
+
+                            @include arrowY(down, $color-white);
+                        }
+                    }
+                }
+
+                .c-nav__list-item-image {
+
+                    float: right;
+                    margin-left: $spacer;
+                }
+
             .c-nav__sub-list {
 
                 @include clear-list;
+                @include color-modifiers-and(background);
 
                 position: absolute;
                 top: 100%;
@@ -51,11 +71,12 @@
                 display: none;
                 width: $spacer * 16;
                 padding: $spacer / 2 0;
-                background: $brand-red;
                 border-radius: 3px;
                 box-shadow: 0 12px 24px rgba($shadow-dark, 0.3);
 
                 &:before {
+
+                    @include color-modifiers-and(border-bottom-color);
 
                     content: '';
                     position: absolute;
@@ -65,7 +86,10 @@
                     height: 0;
                     border-style: solid;
                     border-width: 0 5.5px 6px 5.5px;
-                    border-color: $transparent $transparent $brand-red $transparent;
+                    border-top-color: $transparent;
+                    border-left-color: $transparent;
+                    border-right-color: $transparent;
+                    border-bottom-color: inherit;
                 }
 
                 .c-nav__list-item:hover & {
@@ -96,6 +120,6 @@
 
                         &:hover {
 
-                            background: $brand-red-dark;
+                            @include color-modifiers-dark-and(background);
                         }
                     }

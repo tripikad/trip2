@@ -14,12 +14,33 @@
                 'items' => [
                     'user' => [
                         'route' => route('user.show', [auth()->user()]),
-                        'title' =>  auth()->user()->name
+                        'title' =>  auth()->user()->name,
+                        'profile' => [
+                            'image' => \App\Image::getRandom(),
+                        ],
+                        'children' => [
+                            [
+                                'title' => trans('menu.user.profile'),
+                                'route' => route('user.show', [auth()->user()]),
+                            ],
+                            [
+                                'title' => 'Sõnumid',
+                                'route' => route('message.index', [auth()->user()]),
+                                'badge' => [
+                                    'modifiers' => 'm-blue',
+                                    'count' => '2'
+                                ]
+                            ],
+                            [
+                                'title' => trans('menu.user.edit.profile'),
+                                'route' => route('user.edit', [auth()->user()]),
+                            ],
+                            [
+                                'title' => trans('menu.auth.logout'),
+                                'route' => route('login.logout'),
+                            ],
+                        ]
                     ],
-                    'logout' => [
-                        'route' => route('login.logout'),
-                    ],
-
                 ],
             ])
 
@@ -30,15 +51,18 @@
                 'items' => [
                     'user' => [
                         'route' => route('user.show', [auth()->user()]),
-                        'title' =>  auth()->user()->name
+                        'title' =>  auth()->user()->name,
+                        'children' => [
+                            [
+                                'title' => trans('menu.auth.admin'),
+                                'route' => route('content.index', ['internal'])
+                            ],
+                            [
+                                'title' => trans('menu.auth.logout'),
+                                'route' => route('login.logout'),
+                            ],
+                        ]
                     ],
-                    'admin' => [
-                        'route' => route('content.index', ['internal'])
-                    ],
-                    'logout' => [
-                        'route' => route('login.logout'),
-                    ],
-
                 ],
             ])
 
@@ -61,4 +85,3 @@
     </ul>
 
 </nav>
-
