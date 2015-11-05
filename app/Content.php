@@ -74,18 +74,20 @@ class Content extends Model
     {
         if ($this->destinationsPreset()) {
             return $this->destinationsPreset()->first()->$name;
-        } else {
-            return;
         }
+
+        return;
     }
 
     public function destinationSubPreset($name = 'id')
     {
         if ($this->destinationsPreset()) {
-            return $this->destinationsPreset()->last()->$name;
-        } else {
-            return;
+            if ($this->destinationsPreset()->first()->id !== $this->destinationsPreset()->last()->id) {
+                return $this->destinationsPreset()->last()->$name;
+            }
         }
+
+        return;
     }
 
     public function followersEmails()
