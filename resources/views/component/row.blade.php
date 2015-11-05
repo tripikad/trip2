@@ -57,7 +57,7 @@ modifiers:
 
     @if (isset($profile) && !isset($icon))
 
-    <div class="c-row__profile">
+    <div class="c-row__image">
 
         @include('component.profile', [
             'modifiers' => $profile['modifiers'],
@@ -90,13 +90,13 @@ modifiers:
 
     @if (isset($text) || isset($extra))
 
-    <p class="c-row__text">
+    <div class="c-row__text">
 
         {!! $text or '' !!}
 
         {!! $extra or '' !!}
 
-    </p>
+    </div>
 
     @endif
 

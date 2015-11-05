@@ -2,6 +2,13 @@
 
     margin-bottom: $spacer;
 
+    &.m-image {
+
+        position: relative;
+        padding-left: $spacer * 6;
+        margin-bottom: $spacer * 2;
+    }
+
     &.m-icon {
 
         position: relative;
@@ -33,12 +40,23 @@
         }
     }
 
+    .c-row__image {
+
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        width: $spacer * 4;
+        height: $spacer * 4;
+    }
+
     .c-row__title {
 
         font-size: $font-size-normal;
         line-height: 1.5;
 
-        .c-row.m-icon & {
+        .c-row.m-icon &,
+        .c-row.m-image & {
 
             @include font-smoothing;
 
@@ -75,7 +93,8 @@
         color: $color-text-neutral-dark;
         font-size: $font-size-small;
 
-        .c-row.m-icon & {
+        .c-row.m-icon &,
+        .c-row.m-image & {
 
             font-size: $font-size-normal;
             margin-top: $spacer * 0.75;
