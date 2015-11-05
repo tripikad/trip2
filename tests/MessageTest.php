@@ -7,8 +7,7 @@ use App\Message;
 class MessageTest extends TestCase
 {
     use DatabaseTransactions;
-
-  
+ 
     public function test_unlogged_user_can_not_see_messages()
     {
         $user1 = factory(App\User::class)->create();
@@ -20,8 +19,7 @@ class MessageTest extends TestCase
         $this->visit("user/$user1->id/messages")
             ->visit("user/$user1->id/messages/$user2->id");
     }
-
-  
+ 
     public function test_regular_user_can_not_see_other_user_messages()
     {
         $user1 = factory(App\User::class)->create();
