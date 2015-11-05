@@ -65,9 +65,9 @@ class Content extends Model
         if (! empty($destinationIds)) {
             return Destination::whereIn('id', $destinationIds)
                 ->get();
-        } else {
-            return;
         }
+        
+        return;
     }
 
     public function destinationMainPreset($name = 'id')
