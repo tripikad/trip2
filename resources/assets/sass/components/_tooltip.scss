@@ -1,0 +1,72 @@
+.c-tooltip {
+
+    @include color-modifiers-dark(color);
+
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: $spacer $spacer * 1.5;
+    background: $color-white;
+
+    &:before {
+
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+    }
+
+    &.m-top {
+
+        &:before {
+
+            top: -$spacer / 2;
+            left: $spacer * 4;
+            border-width: 0 5.5px 6px 5.5px;
+            border-top-color: $transparent;
+            border-left-color: $transparent;
+            border-right-color: $transparent;
+            border-bottom-color: $color-white;
+        }
+    }
+
+    &.m-bottom {
+
+        &:before {
+
+            bottom: -$spacer / 2;
+            left: $spacer * 4;
+            border-width: 6px 5.5px 0 5.5px;
+            border-top-color: $color-white;
+            border-left-color: $transparent;
+            border-right-color: $transparent;
+            border-bottom-color: $transparent;
+        }
+    }
+
+    &.m-inverted {
+
+        @include color-modifiers-and(background);
+
+        color: $color-white;
+
+        &.m-top {
+
+            &:before {
+
+                @include color-modifiers-and(border-bottom-color);
+            }
+        }
+
+        &.m-bottom {
+
+            &:before {
+
+                @include color-modifiers-and(border-top-color);
+            }
+        }
+    }
+}

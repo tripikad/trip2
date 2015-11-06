@@ -24,6 +24,18 @@ code: |
                         'modifiers' => 'm-green',
                         'route' => ''
                     ]
+                ],
+                'children' => [
+                    [
+                        'profile' => [
+                            'modifiers' => 'm-mini',
+                            'image' => \App\Image::getRandom(),
+                            'title' => 'Charles Darwin',
+                            'route' => ''
+                        ],
+                        'date' => '12. jaanuar, 12:31',
+                        'text' => 'Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi.'
+                    ]
                 ]
             ]
         ]

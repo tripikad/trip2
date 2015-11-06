@@ -119,10 +119,15 @@
             @include clearfix;
             @include clear-list;
 
-            display: block;
+            display: none;
             overflow: hidden;
             width: 100%;
             padding: $spacer * 2 0 $spacer * 3 $spacer * 6;
+
+            .c-forum-list.m-compact & {
+
+                display: block;
+            }
         }
 
             .c-forum-list__sublist-item {

@@ -45,7 +45,10 @@
 
                 <div class="r-user__info-travel-mate">
 
-                    <p>Otsin reisikaaslast tooltip</p>
+                    @include('component.tooltip', [
+                        'modifiers' => 'm-green m-bottom',
+                        'text' => 'Otsin reisikaaslast'
+                     ])
                 </div>
             </div>
 
@@ -66,8 +69,14 @@
                 @endif
 
                 @include('component.button',[
-                    'modifiers' => 'm-primary',
-                    'title' => 'Follow',
+                    'modifiers' => 'm-secondary m-small',
+                    'title' => 'Saada sõnum',
+                    'route' => ''
+                ])
+
+                @include('component.button',[
+                    'modifiers' => 'm-border m-small',
+                    'title' => 'Jälgi',
                     'route' => ''
                 ])
 

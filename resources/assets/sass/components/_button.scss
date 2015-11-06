@@ -16,20 +16,40 @@
 
     &:hover {
 
-        background: $color-fill-success-dark;
+        background-color: $color-fill-success-dark;
     }
 
     &.m-secondary {
 
+        @include color-modifiers-dark-and(color);
+
         color: $color-text-link;
         background: $color-white;
-        box-shadow: 0 1px 1px rgba($color-fill-neutral, 0.75);
+
+        &:hover {}
     }
 
     &.m-tertiary {
 
         color: $color-text-neutral-darker;
         background: $color-fill-neutral-light;
+
+        &:hover {
+
+            background: $color-fill-neutral;
+        }
+    }
+
+    &.m-border {
+
+        color: $color-white;
+        background: none;
+        box-shadow: inset 0 0 0 2px $color-white;
+
+        &:hover {
+
+            background: none;
+        }
     }
 
     &.m-loading {
@@ -39,21 +59,20 @@
         animation: move 2s linear infinite;
     }
 
+    &.m-shadow {
+
+        box-shadow: 0 1px 1px rgba($color-fill-neutral, 0.75);
+    }
+
     &.m-block {
 
         display: block;
         width: 100%;
     }
 
-    &.m-large {
-
-        font-size: $font-size-large;
-        padding: $spacer $spacer * 3;
-    }
-
     &.m-small {
 
-        font-size: $font-size-normal;
+        font-size: $font-size-small;
         padding: $spacer * 0.75 $spacer * 2;
 
         &.m-icon-pre {
@@ -65,6 +84,12 @@
 
             padding-right: $spacer * 3.5;
         }
+    }
+
+    &.m-large {
+
+        font-size: $font-size-large;
+        padding: $spacer $spacer * 3;
     }
 }
 
