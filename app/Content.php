@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
-use Cache;
 
 class Content extends Model
 {
