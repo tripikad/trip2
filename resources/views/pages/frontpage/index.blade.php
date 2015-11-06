@@ -12,7 +12,7 @@
 
     @include('component.search',[
         'modifiers' => 'm-red',
-        'placeholder' => 'Where do you want to go today?'
+        'placeholder' => trans('frontpage.index.search.title')
     ])
 
 @stop
@@ -44,10 +44,14 @@
 
                                 @include('component.destination', [
                                     'modifiers' => $flights1_modifiers[$name],
-                                    'title' => 'Aafrika',
-                                    'title_route' => '/destination/4',
-                                    'subtitle' => 'Itaalia',
-                                    'subtitle_route' => '#'
+                                    'title' =>
+                                        $flight1->getDestination() ? $flight1->getDestination()->name : null,
+                                    'title_route' =>
+                                        $flight1->getDestination() ? route('destination.show', $flight1->getDestination()) : null,
+                                    'subtitle' =>
+                                        $flight1->getDestinationParent() ? $flight1->getDestinationParent()->name : null,
+                                    'subtitle_route' =>
+                                        $flight1->getDestinationParent() ? route('destination.show', $flight1->getDestinationParent()) : null
                                 ])
 
                                 @include('component.card', [
@@ -112,18 +116,18 @@
                     @include('component.content.forum.nav', [
                         'items' => [
                             [
-                                'title' => 'Üldfoorum',
-                                'route' => '#',
+                                'title' => trans('frontpage.index.forum.general'),
+                                'route' => route('content.show', 'forum'),
                                 'modifiers' => 'm-large m-block'
                             ],
                             [
-                                'title' => 'Ost-müük',
-                                'route' => '#',
+                                'title' => trans('frontpage.index.forum.buysell'),
+                                'route' => route('content.show', 'buysell'),
                                 'modifiers' => 'm-large m-block'
                             ],
                             [
-                                'title' => 'Vaba teema',
-                                'route' => '#',
+                                'title' => trans('frontpage.index.forum.expat'),
+                                'route' => route('content.show', 'expat'),
                                 'modifiers' => 'm-large m-block'
                             ],
                             [

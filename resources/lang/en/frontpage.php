@@ -6,6 +6,10 @@ return [
     'index.search.destination.title' => 'Enter a destination',
     'index.search.submit.title' => 'Go',
 
+    'index.forum.general' => 'General',
+    'index.forum.buysell' => 'Buy & sell',
+    'index.forum.expat' => 'Expatriate',
+
     'index.shortnews.title' => 'Shortnews',
     'index.flight.title' => 'Flight offers',
     'index.travelmate.title' => 'Travelmates',
