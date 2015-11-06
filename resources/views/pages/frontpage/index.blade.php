@@ -44,10 +44,14 @@
 
                                 @include('component.destination', [
                                     'modifiers' => $flights1_modifiers[$name],
-                                    'title' => $flight1->destinationMainPreset('name'),
-                                    'title_route' => route('destination.show', $flight1->destinationMainPreset()),
-                                    'subtitle' => $flight1->destinationSubPreset('name'),
-                                    'subtitle_route' => route('destination.show', $flight1->destinationSubPreset())
+                                    'title' =>
+                                        $flight1->getDestination() ? $flight1->getDestination()->name : null,
+                                    'title_route' =>
+                                        $flight1->getDestination() ? route('destination.show', $flight1->getDestination()) : null,
+                                    'subtitle' =>
+                                        $flight1->getDestinationParent() ? $flight1->getDestinationParent()->name : null,
+                                    'subtitle_route' =>
+                                        $flight1->getDestinationParent() ? route('destination.show', $flight1->getDestinationParent()) : null
                                 ])
 
                                 @include('component.card', [

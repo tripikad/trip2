@@ -48,24 +48,14 @@ class Content extends Model
         return $this->morphMany('App\Follow', 'followable');
     }
 
-    public function destinationMainPreset($name = 'id')
+    public function getDestination()
     {
-        if ($this->destinations->first()) {
-            return $this->destinations->first()->$name;
-        }
-
-        return;
+        return $this->destinations->first();
     }
 
-    public function destinationSubPreset($name = 'id')
+    public function getDestinationParent()
     {
-        if ($this->destinations->first()) {
-            if ($this->destinations->first()->parent_id) {
-                return Destination::find($this->destinations->first()->parent_id)->$name;
-            }
-        }
-
-        return;
+        return $this->destinations->first()->parent()->first();
     }
 
     public function followersEmails()
