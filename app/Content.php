@@ -66,7 +66,7 @@ class Content extends Model
             return Destination::whereIn('id', $destinationIds)
                 ->get();
         }
-        
+
         return;
     }
 
