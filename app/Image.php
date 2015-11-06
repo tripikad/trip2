@@ -74,7 +74,7 @@ class Image extends Model
 
         $filename = $new_filename ? $new_filename : preg_replace('/\s+/', '-', $file->getClientOriginalName());
 
-        if(! $new_filename) {
+        if (! $new_filename) {
             $img_name = substr($filename, 0, (strrpos($filename, '.')));
             $filename = $img_name.'_'.str_random(5).'.'.$ext;
         }
