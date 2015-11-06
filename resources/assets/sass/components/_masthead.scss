@@ -69,6 +69,11 @@
             top: -$spacer * 9;
             width: 280px;
             height: 132px;
+
+            .c-masthead.m-profile & {
+
+                display: none;
+            }
         }
 
         .c-masthead__title {
@@ -93,6 +98,11 @@
             .c-masthead.m-alternative & {
 
                 color: $color-white;
+            }
+
+            .c-masthead.m-profile & {
+
+                display: none;
             }
         }
 

@@ -2,7 +2,7 @@
 
 title: Masthead
 
-description: By default masthead has no background and the text is black, the m-alternative class is used together with background image. The front page uses m-search class to properly align the search box.
+description: By default masthead has no background and the text is black, the m-alternative class is used together with background image. The front page uses m-search class to properly align the search box. User profile page uses m-profile to hide logo and title.
 
 code: |
 
@@ -15,6 +15,7 @@ modifiers:
 
 - m-alternative
 - m-search
+- m-profile
 
 --}}
 
