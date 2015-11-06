@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Cache;
 
 class Content extends Model
 {
@@ -48,32 +49,10 @@ class Content extends Model
         return $this->morphMany('App\Follow', 'followable');
     }
 
-    public function destinationsPreset()
-    {
-        $destinationIds = [];
-
-        if ($this->destinations) {
-            $find = ['id', 'parent_id'];
-
-            foreach ($find as $values) {
-                if (isset($this->destinations->first()->$values)) {
-                    $destinationIds[] = $this->destinations->first()->$values;
-                }
-            }
-        }
-
-        if (! empty($destinationIds)) {
-            return Destination::whereIn('id', $destinationIds)
-                ->get();
-        }
-
-        return;
-    }
-
     public function destinationMainPreset($name = 'id')
     {
-        if ($this->destinationsPreset()) {
-            return $this->destinationsPreset()->first()->$name;
+        if ($this->destinations) {
+            return $this->destinations->first()->$name;
         }
 
         return;
@@ -81,9 +60,9 @@ class Content extends Model
 
     public function destinationSubPreset($name = 'id')
     {
-        if ($this->destinationsPreset()) {
-            if ($this->destinationsPreset()->first()->id !== $this->destinationsPreset()->last()->id) {
-                return $this->destinationsPreset()->last()->$name;
+        if ($this->destinations) {
+            if ($this->destinations->first()->parent_id) {
+                return Destination::find($this->destinations->first()->parent_id)->$name;
             }
         }
 
