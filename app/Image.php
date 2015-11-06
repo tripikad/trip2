@@ -86,4 +86,17 @@ class Image extends Model
 
         return $photo ? $photo->imagePreset('large') : null;
     }
+
+    public static function getAllContentExcept($except = null)
+    {
+        $images = self::whereIn('id', function ($query) use ($except) {
+                $query->from('imageables')
+                    ->select('imageables.image_id')
+                    ->join('contents', 'imageables.imageable_id', '=', 'contents.id')
+                    ->where('contents.type', '!=', $except);
+            })
+            ->orderBy('id', 'asc');
+
+        return $images ? $images : null;
+    }
 }

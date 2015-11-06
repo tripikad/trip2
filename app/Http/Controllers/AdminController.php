@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
     public function imageIndex()
     {
-        $images = Image::orderBy('id', 'asc')->simplePaginate(96);
+        $images = Image::getAllContentExcept('photo')->simplePaginate(96);
 
         return view('pages.admin.image.index', [
             'images' => $images,
