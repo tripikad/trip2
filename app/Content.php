@@ -55,7 +55,11 @@ class Content extends Model
 
     public function getDestinationParent()
     {
-        return $this->destinations->first()->parent()->first();
+        if($this->destinations->first()) {
+            return $this->destinations->first()->parent()->first();
+        }
+
+        return;
     }
 
     public function followersEmails()
