@@ -50,7 +50,7 @@ class Content extends Model
 
     public function destinationMainPreset($name = 'id')
     {
-        if ($this->destinations) {
+        if ($this->destinations->first()) {
             return $this->destinations->first()->$name;
         }
 
@@ -59,7 +59,7 @@ class Content extends Model
 
     public function destinationSubPreset($name = 'id')
     {
-        if ($this->destinations) {
+        if ($this->destinations->first()) {
             if ($this->destinations->first()->parent_id) {
                 return Destination::find($this->destinations->first()->parent_id)->$name;
             }
