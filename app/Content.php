@@ -55,7 +55,7 @@ class Content extends Model
 
     public function getDestinationParent()
     {
-        if($this->destinations->first()) {
+        if ($this->destinations->first()) {
             return $this->destinations->first()->parent()->first();
         }
 
