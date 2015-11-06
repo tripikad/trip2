@@ -92,6 +92,66 @@ modifiers:
 
                 @endif
 
+                @if(isset($item['children']))
+
+                    <ul class="c-forum-list__sublist">
+
+                    @foreach ($item['children'] as $child)
+
+                        <li class="c-forum-list__sublist-item">
+
+                            @if (isset($child['profile']))
+
+                                <div class="c-forum-list__sublist-item-profile">
+
+                                    @include('component.profile', [
+                                        'modifiers' => $child['profile']['modifiers'],
+                                        'image' => $child['profile']['image']
+                                    ])
+
+                                </div>
+
+                            @endif
+
+                            <div class="c-forum-list__sublist-item-meta">
+
+                                @if (isset($child['profile']))
+
+                                    @include('component.link', [
+                                        'modifiers' => '',
+                                        'title' => $child['profile']['title'],
+                                        'route' => $child['profile']['route']
+                                    ])
+
+                                @endif
+
+                                <span>{{ $child['date'] }}</span>
+
+                            </div>
+
+                            <div class="c-forum-list__sublist-item-content">
+
+                                {{ $child['text'] }}
+
+                            </div>
+
+                            <div class="c-forum-list__sublist-item-actions">
+
+                                @include('component.link', [
+                                    'title' => 'Vaata kogu teemat',
+                                    'route' => ''
+                                ])
+
+                            </div>
+
+                        </li>
+
+                    @endforeach
+
+                    </ul>
+
+                @endif
+
             </li>
 
         @endforeach

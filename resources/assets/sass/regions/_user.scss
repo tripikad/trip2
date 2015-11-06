@@ -103,19 +103,18 @@
 
             .r-user__additional-header {
 
-                @include clearfix;
-
+                display: flex;
+                align-items: center;
                 margin-bottom: $spacer * 2;
             }
 
                 .r-user__additional-title {
 
-                    float: left;
+                    flex: 1;
                 }
 
                 .r-user__additional-action {
 
-                    float: right;
                 }
 
     .r-user__offers {

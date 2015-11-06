@@ -1,6 +1,6 @@
 @foreach ($items as $item)
 
-    <div class="utils-padding-bottom">
+    <div class="utils-padding-bottom {{ $item->activity_type }}">
 
     @if ($item->activity_type == 'content')
 

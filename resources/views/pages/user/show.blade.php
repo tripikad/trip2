@@ -32,7 +32,6 @@
         <div class="r-user__info-extra">
 
             <p>Külastatud sihtkohad ja muu info</p>
-
         </div>
 
         <div class="r-user__info-wrap">
@@ -47,9 +46,7 @@
                 <div class="r-user__info-travel-mate">
 
                     <p>Otsin reisikaaslast tooltip</p>
-
                 </div>
-
             </div>
 
             <div class="r-user__info-actions">
@@ -75,7 +72,6 @@
                 ])
 
                 @include('component.user.contact')
-
             </div>
 
             <div class="r-user__info-title">
@@ -84,7 +80,6 @@
                     'modifiers' => 'm-huge m-white',
                     'title' => $user->name
                 ])
-
             </div>
 
             <div class="r-user__info-description">
@@ -94,7 +89,6 @@
                      'created_at' => view('component.date.relative', ['date' => $user->created_at])
                  ]) }}
                  </p>
-
             </div>
 
              @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id))
@@ -160,53 +154,157 @@
                     </div>
                 </div>
 
-                <div class="utils-padding-bottom">
+                @include('component.content.forum.list', [
+                    'modifiers' => 'm-compact',
+                    'items' => [
+                        [
+                            'topic' => 'Samui hotellid?',
+                            'route' => '#',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom()
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 9
+                            ],
+                            'children' => [
+                                [
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'title' => 'Charles Darwin',
+                                        'route' => ''
+                                    ],
+                                    'date' => '12. jaanuar, 12:31',
+                                    'text' => 'Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.',
+
+                                ]
+                            ]
+                        ],
+                        [
+                            'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
+                            'route' => '#',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom()
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 4
+                            ],
+                            'children' => [
+                                [
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'title' => 'Charles Darwin',
+                                        'route' => ''
+                                    ],
+                                    'date' => '12. jaanuar, 12:31',
+                                    'text' => 'Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne.',
+
+                                ]
+                            ]
+                        ],
+                        [
+                            'topic' => 'Puhkuseosakud Tenerifel',
+                            'route' => '#',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom()
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 2
+                            ],
+                            'children' => [
+                                [
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'title' => 'Charles Darwin',
+                                        'route' => ''
+                                    ],
+                                    'date' => '12. jaanuar, 12:31',
+                                    'text' => 'Mina puurisin nüüd juba mitu-mitu aastat tagasi.',
+
+                                ]
+                            ]
+                        ],
+                        [
+                            'topic' => 'Ischgl mäeolud-pilet ja majutus',
+                            'route' => '#',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom()
+                            ],
+                            'badge' => [
+                                'modifiers' => '',
+                                'count' => 2
+                            ],
+                            'children' => [
+                                [
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'title' => 'Charles Darwin',
+                                        'route' => ''
+                                    ],
+                                    'date' => '12. jaanuar, 12:31',
+                                    'text' => 'Mina puurisin nüüd juba kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.',
+
+                                ]
+                            ]
+                        ]
+                    ]
+                ])
+
+
+                <div style="display: none;">
 
                     @include('component.user.count', [
                         'content_count' => $content_count,
                         'comment_count' => $comment_count
                     ])
 
+                    @if (count($user->destinationHaveBeen()) > 0 || count($user->destinationWantsToGo()) > 0)
+
+                        <div class="utils-border-bottom">
+
+                                @if (count($user->destinationHaveBeen()) > 0)
+
+                                    <h3>{{ trans('user.show.havebeen.title') }}</h3>
+
+                                    @include('component.user.destination', [
+                                        'destinations' => $user->destinationHaveBeen()
+                                    ])
+
+                                @endif
+
+                        </div>
+
+                        <div class="utils-border-bottom">
+
+                                @if (count($user->destinationWantsToGo()) > 0)
+
+                                    <h3>{{ trans('user.show.wantstogo.title') }}</h3>
+
+                                    @include('component.user.destination', [
+                                        'destinations' => $user->destinationWantsToGo()
+                                    ])
+
+                                @endif
+
+                        </div>
+
+                    @endif
+
+
+                    @include('component.user.activity', [
+                        'items' => $items
+                    ])
                 </div>
-
-
-                @if (count($user->destinationHaveBeen()) > 0 || count($user->destinationWantsToGo()) > 0)
-
-                    <div class="utils-border-bottom">
-
-                            @if (count($user->destinationHaveBeen()) > 0)
-
-                                <h3>{{ trans('user.show.havebeen.title') }}</h3>
-
-                                @include('component.user.destination', [
-                                    'destinations' => $user->destinationHaveBeen()
-                                ])
-
-                            @endif
-
-                    </div>
-
-                    <div class="utils-border-bottom">
-
-                            @if (count($user->destinationWantsToGo()) > 0)
-
-                                <h3>{{ trans('user.show.wantstogo.title') }}</h3>
-
-                                @include('component.user.destination', [
-                                    'destinations' => $user->destinationWantsToGo()
-                                ])
-
-                            @endif
-
-                    </div>
-
-                @endif
-
-
-                @include('component.user.activity', [
-                    'items' => $items
-                ])
-
 
             </div>
 
@@ -244,7 +342,7 @@
 
                 </div>
 
-                <div class="r-user__additional-sidebar-block">
+                <div class="r-user__additional-block">
 
                     @include('component.promo', [
                         'route' => '#',
@@ -253,7 +351,7 @@
 
                 </div>
 
-                <div class="r-user__additional-sidebar-block">
+                <div class="r-user__additional-block">
 
                     @include('component.promo', [
                         'route' => '#',
