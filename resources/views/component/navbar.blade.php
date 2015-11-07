@@ -16,7 +16,7 @@
                         'route' => route('user.show', [auth()->user()]),
                         'title' =>  auth()->user()->name,
                         'profile' => [
-                            'image' => \App\Image::getRandom(),
+                            'image' => auth()->user()->imagePreset(),
                         ],
                         'children' => [
                             [
@@ -28,7 +28,7 @@
                                 'route' => route('message.index', [auth()->user()]),
                                 'badge' => [
                                     'modifiers' => 'm-blue',
-                                    'count' => '2'
+                                    'count' => auth()->user()->unreadMessagesCount()
                                 ]
                             ],
                             [
@@ -53,7 +53,7 @@
                         'route' => route('user.show', [auth()->user()]),
                         'title' =>  auth()->user()->name,
                         'profile' => [
-                            'image' => \App\Image::getRandom(),
+                            'image' => auth()->user()->imagePreset(),
                         ],
                         'children' => [
                             [
@@ -65,7 +65,7 @@
                                 'route' => route('message.index', [auth()->user()]),
                                 'badge' => [
                                     'modifiers' => 'm-blue',
-                                    'count' => '2'
+                                    'count' => auth()->user()->unreadMessagesCount()
                                 ]
                             ],
                             [
