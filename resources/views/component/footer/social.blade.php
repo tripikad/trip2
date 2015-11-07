@@ -36,7 +36,7 @@ code: |
 
         </span>
 
-        <a href="{{ $item['route'] }}" class="c-footer__social-item-link">
+        <a href="{{ $item['route'] }}" class="c-footer__social-item-link" @if(isset($item['external'])) target="_blank" @endif>
             {{ isset($item['title']) ? $item['title'] : trans("menu.$menu.$key") }}
         </a>
     </li>
