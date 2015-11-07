@@ -70,7 +70,15 @@ class Image extends Model
     {
         $path = config('imagepresets.original.path');
 
+        $ext = $file->guessExtension();
+
         $filename = $new_filename ? $new_filename : preg_replace('/\s+/', '-', $file->getClientOriginalName());
+
+        if (! $new_filename) {
+            $img_name = substr($filename, 0, (strrpos($filename, '.')));
+            $filename = $img_name.'_'.str_random(5).'.'.$ext;
+        }
+
         $file->move($path, $filename);
 
         self::createImagePresets($path, $filename);
@@ -85,5 +93,18 @@ class Image extends Model
             ->first();
 
         return $photo ? $photo->imagePreset('large') : null;
+    }
+
+    public static function getAllContentExcept($except = null)
+    {
+        $images = self::whereIn('id', function ($query) use ($except) {
+                $query->from('imageables')
+                    ->select('imageables.image_id')
+                    ->join('contents', 'imageables.imageable_id', '=', 'contents.id')
+                    ->where('contents.type', '!=', $except);
+            })
+            ->orderBy('id', 'asc');
+
+        return $images ? $images : null;
     }
 }

@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
     public function imageIndex()
     {
-        $images = Image::orderBy('id', 'asc')->simplePaginate(96);
+        $images = Image::getAllContentExcept('photo')->simplePaginate(96);
 
         return view('pages.admin.image.index', [
             'images' => $images,
@@ -25,11 +25,12 @@ class AdminController extends Controller
         ]);
 
         $filename = Image::storeImageFile($request->file('image'));
+        $orig_filename = $request->file('image')->getClientOriginalName();
         Image::create(['filename' => $filename]);
 
         return back()
             ->with('info', trans('admin.image.store.info', [
-                    'filename' => $filename,
+                    'filename' => $orig_filename,
             ]));
     }
 

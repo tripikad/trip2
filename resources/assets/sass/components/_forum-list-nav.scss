@@ -1,0 +1,9 @@
+.c-forum-list-nav {
+
+    @include clear-list;
+}
+
+    .c-forum-list-nav__item {
+
+        margin-bottom: $spacer;
+    }

@@ -110,6 +110,11 @@
 
                             text-decoration: underline;
                         }
+
+                        .c-footer__nav-list-item.active & {
+
+                            color: $color-fill-black;
+                        }
                     }
 
         .c-footer__social {

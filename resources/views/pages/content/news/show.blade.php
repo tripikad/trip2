@@ -1,7 +1,7 @@
 @extends('layouts.two_column')
 
 @section('title')
- 
+
     {{ $content->title }}
 
 @stop
@@ -18,26 +18,18 @@
 
 @section('content.one')
 
-    <div class="utils-border-bottom 
-        @if (! $content->status)
-            utils-unpublished
-        @endif
-    ">
-
     @include('component.row', [
         'profile' => [
             'modifiers' => '',
             'image' => $content->user->imagePreset(),
             'route' => route('user.show', [$content->user])
         ],
+        'modifiers' => 'm-image',
         'text' => view('component.content.text', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
         'extra' => view('component.flags', ['flags' => $content->getFlags()]),
-        'body' => $content->body_filtered,
-        'modifiers' => '-centered'
+        'body' => $content->body_filtered
     ])
-
-    </div>
 
     @include('component.comment.index', ['comments' => $content->comments])
 

@@ -24,7 +24,7 @@
                                 'route' => route('user.show', [auth()->user()]),
                             ],
                             [
-                                'title' => 'Sõnumid',
+                                'title' => trans('menu.user.message'),
                                 'route' => route('message.index', [auth()->user()]),
                                 'badge' => [
                                     'modifiers' => 'm-blue',
