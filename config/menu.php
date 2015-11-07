@@ -3,7 +3,7 @@
 return [
 
     'header' => [
-           'home' => [
+        'home' => [
             'route' => '/',
         ],
         'news' => [
