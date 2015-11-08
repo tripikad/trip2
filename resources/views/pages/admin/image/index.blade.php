@@ -17,7 +17,13 @@
 
 @section('header1.right')
 
-    @include('component.image.create')
+    @include('component.image.create', [
+        'id' => 'adminImage',
+        'name' => 'image',
+        'maxFileSize' => 5,
+        'uploadMultiple' => true,
+        'maxFiles' => 1
+    ])
 
 @stop
 

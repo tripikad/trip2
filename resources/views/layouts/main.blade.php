@@ -23,6 +23,8 @@
 
         <script type="text/javascript" src="/js/main.js"></script>
 
+        @yield('scripts')
+
     </body>
 
 </html>
