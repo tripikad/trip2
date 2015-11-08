@@ -38,12 +38,12 @@
 
                     <div class="c-columns m-3-cols">
 
-                        @foreach($flights1 as $name => $flight1)
+                        @foreach($flights1 as $key => $flight1)
 
                             <div class="c-columns__item">
 
                                 @include('component.destination', [
-                                    'modifiers' => $flights1_modifiers[$name],
+                                    'modifiers' => ['m-yellow', 'm-red', 'm-green'][$key],
                                     'title' =>
                                         $flight1->getDestination() ? $flight1->getDestination()->name : null,
                                     'title_route' =>
@@ -55,7 +55,7 @@
                                 ])
 
                                 @include('component.card', [
-                                    'modifiers' => $flights1_modifiers[$name],
+                                    'modifiers' => ['m-yellow', 'm-red', 'm-green'][$key],
                                     'route' => route('content.show', [$flight1->type, $flight1]),
                                     'title' => $flight1->title.' '.$flight1->price.' '.config('site.currency.symbol'),
                                     'image' => $flight1->imagePreset(),
@@ -163,18 +163,14 @@
                                         'modifiers' => 'm-inverted',
                                         'count' => count($forum->comments)
                                     ],
-                                    'tags' => [
-                                        [
-                                            'title' => 'Inglismaa',
-                                            'modifiers' => 'm-green',
-                                            'route' => ''
-                                        ],
-                                        [
-                                            'title' => 'London',
-                                            'modifiers' => 'm-purple',
-                                            'route' => ''
-                                        ],
-                                    ]
+                                    'tags' => $forum->topics->take(2)->transform(function ($topic, $key) use ($forum) {
+                                        return [
+                                            'title' => $topic->name,
+                                            'modifiers' => ['m-green', 'm-blue', 'm-orange', 'm-yellow', 'm-red'][$key],
+                                            'route' => route('content.show', [$forum->type]).'?topic='.$topic->id,
+                                        ];
+                                    })
+
                                 ];
                             })
                         ])
@@ -214,16 +210,16 @@
 
                         <div class="r-home__news-block-wrap">
 
-                            @foreach($news1 as $name => $new)
+                            @foreach($news1 as $key => $new)
 
-                                <div class="r-home__news-block @if($name==0) m-first @else m-last @endif">
+                                <div class="r-home__news-block @if($key==0) m-first @else m-last @endif">
 
                                     @include('component.news', [
                                         'title' => $new->title,
                                         'route' => route('content.show', [$new->type, $new]),
                                         'date' => $new->created_at,
                                         'image' => $new->imagePreset(),
-                                        'modifiers' => ($name==0?'':'m-small')
+                                        'modifiers' => ($key==0?'':'m-small')
                                     ])
 
                                 </div>
@@ -275,11 +271,11 @@
 
                     @if(isset($flights2) && !empty($flights2))
 
-                        @foreach($flights2 as $name => $flight2)
+                        @foreach($flights2 as $key => $flight2)
 
                             @include('component.row', [
                                 'icon' => 'icon-offer',
-                                'modifiers' => $flights2_modifiers[$name].' m-icon',
+                                'modifiers' => ['m-blue', 'm-yellow', 'm-green', 'm-red', 'm-purple'][$key].' m-icon',
                                 'title' => $flight2->title.' '.$flight2->price.' '.config('site.currency.symbol'),
                                 'route' => route('content.show', [$flight2->type, $flight2]),
                                 'text' =>
