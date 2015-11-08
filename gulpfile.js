@@ -37,27 +37,6 @@ gulp.task('sass', function() {
 
 });
 
-gulp.task('sass_legacy', function() {
-
-    gulp.src([
-        './resources/assets/sass_legacy/variables.scss',
-        './node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
-        './node_modules/selectize/dist/css/selectize.bootstrap3.css',
-        './resources/assets/sass_legacy/**/*.scss',
-    ])
-    .pipe(concat('main.scss'))
-    .pipe(sass({includePaths: [
-        './node_modules/bootstrap-sass/assets/stylesheets',
-    ]
-    }))
-    .pipe(autoprefixer({
-        browsers: ['last 2 versions'],
-        cascade: false
-    }))
-    .pipe(gulp.dest('./public/css'));
-
-});
-
 gulp.task('js', function() {
 
     gulp.src([

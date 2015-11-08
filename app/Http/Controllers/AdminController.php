@@ -25,11 +25,12 @@ class AdminController extends Controller
         ]);
 
         $filename = Image::storeImageFile($request->file('image'));
+        $orig_filename = $request->file('image')->getClientOriginalName();
         Image::create(['filename' => $filename]);
 
         return back()
             ->with('info', trans('admin.image.store.info', [
-                    'filename' => $filename,
+                    'filename' => $orig_filename,
             ]));
     }
 
