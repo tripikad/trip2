@@ -36,6 +36,11 @@
 
                     color: $color-white;
                 }
+
+                .c-nav__list-item.active & {
+
+                    color: $color-fill-black;
+                }
             }
 
                 .c-nav__list-item-link-text {
