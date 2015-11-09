@@ -13,9 +13,9 @@
 
         @yield('header', view('component.header'))
 
-        @include('component.info.success')
+        @include('component.alert.success')
 
-        @include('component.info.error')
+        @include('component.alert.error')
 
         @yield('content')
 

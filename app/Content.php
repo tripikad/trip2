@@ -48,6 +48,20 @@ class Content extends Model
         return $this->morphMany('App\Follow', 'followable');
     }
 
+    public function getDestination()
+    {
+        return $this->destinations->first();
+    }
+
+    public function getDestinationParent()
+    {
+        if ($this->destinations->first()) {
+            return $this->destinations->first()->parent()->first();
+        }
+
+        return;
+    }
+
     public function followersEmails()
     {
         $followerIds = $this->followers->lists('user_id');

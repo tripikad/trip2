@@ -148,6 +148,7 @@ return [
         Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
         Roumen\Feed\FeedServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Laravelista\Ekko\EkkoServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -212,7 +213,7 @@ return [
         'Date'      => Jenssegers\Date\Date::class,
         'Feed'      => Roumen\Feed\Facades\Feed::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-
+        'Ekko'      => Laravelista\Ekko\Facades\Ekko::class,
     ],
 
 ];

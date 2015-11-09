@@ -27,7 +27,58 @@ modifiers:
 
 	<div class="c-destination__header">
 
-		<h3 class="c-destination__title"><a href="{{ $title_route }}" class="c-destination__title-link">{{ $title }} &rsaquo;</a></h3>
-		<div class="c-destination__subtitle"><a href="{{ $subtitle_route }}">{{ $subtitle }} &rsaquo;</a></div>
+        <h3 class="c-destination__title">
+
+            @if(isset($title_route))
+
+                <a href="{{ $title_route }}" class="c-destination__title-link">
+
+            @endif
+
+                @if(isset($title))
+
+                    {{ $title }} &rsaquo;
+
+                @else
+
+                    &nbsp;
+
+                @endif
+
+            @if(isset($title_route))
+
+                </a>
+
+            @endif
+
+        </h3>
+
+
+        <div class="c-destination__subtitle">
+
+            @if(isset($subtitle_route))
+
+                <a href="{{ $subtitle_route }}">
+
+            @endif
+
+                @if(isset($subtitle))
+
+                    {{ $subtitle }} &rsaquo;
+
+                @else
+
+                    &nbsp;
+
+                @endif
+
+            @if(isset($subtitle_route))
+
+                </a>
+
+            @endif
+
+        </div>
+
 	</div>
 </div>

@@ -16,7 +16,7 @@
                         'route' => route('user.show', [auth()->user()]),
                         'title' =>  auth()->user()->name,
                         'profile' => [
-                            'image' => \App\Image::getRandom(),
+                            'image' => auth()->user()->imagePreset(),
                         ],
                         'children' => [
                             [
@@ -28,7 +28,7 @@
                                 'route' => route('message.index', [auth()->user()]),
                                 'badge' => [
                                     'modifiers' => 'm-blue',
-                                    'count' => '2'
+                                    'count' => auth()->user()->unreadMessagesCount()
                                 ]
                             ],
                             [
@@ -52,7 +52,26 @@
                     'user' => [
                         'route' => route('user.show', [auth()->user()]),
                         'title' =>  auth()->user()->name,
+                        'profile' => [
+                            'image' => auth()->user()->imagePreset(),
+                        ],
                         'children' => [
+                            [
+                                'title' => trans('menu.user.profile'),
+                                'route' => route('user.show', [auth()->user()]),
+                            ],
+                            [
+                                'title' => trans('menu.user.message'),
+                                'route' => route('message.index', [auth()->user()]),
+                                'badge' => [
+                                    'modifiers' => 'm-blue',
+                                    'count' => auth()->user()->unreadMessagesCount()
+                                ]
+                            ],
+                            [
+                                'title' => trans('menu.user.edit.profile'),
+                                'route' => route('user.edit', [auth()->user()]),
+                            ],
                             [
                                 'title' => trans('menu.auth.admin'),
                                 'route' => route('content.index', ['internal'])
