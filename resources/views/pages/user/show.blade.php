@@ -31,7 +31,6 @@
 
         <div class="r-user__info-extra">
 
-            <p>Külastatud sihtkohad ja muu info</p>
         </div>
 
         <div class="r-user__info-wrap">
