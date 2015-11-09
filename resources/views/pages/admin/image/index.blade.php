@@ -43,7 +43,7 @@
                 <div class="form-group">
 
                 {!! Form::text('id', "[[$image->id]]", [
-                    'class' => 'c-form__input autoselect',
+                    'class' => 'c-form__input js-autoselect',
                 ]) !!}
 
                 </div>
