@@ -9,7 +9,6 @@ use App\User;
 use App\Image;
 use Hash;
 
-
 class UserController extends Controller
 {
     public function show($id)
@@ -126,7 +125,7 @@ class UserController extends Controller
         ]);
 
         $fields = [
-            'password' => $user->password
+            'password' => $user->password,
         ];
 
         if (trim($request->get('password'))) {
