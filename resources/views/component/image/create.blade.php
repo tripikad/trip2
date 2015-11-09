@@ -18,7 +18,7 @@ code: |
     'url' => route('admin.image.store'),
     'files' => true,
     'class' => 'dropzone',
-    'id' => $id ? $id : 'dropzoneImage'
+    'id' => isset($id) ? $id : 'dropzoneImage'
 ]) !!}
 
 <div class="fallback">
