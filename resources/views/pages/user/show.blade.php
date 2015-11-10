@@ -105,20 +105,6 @@
                                     'icon' => view('component.icon',['icon' => 'icon-twitter']),
                                     'route' => '#'
                                 ]),
-                            ],
-                            [
-                                'button' => view('component.button',[
-                                    'modifiers' => 'm-icon m-small m-round',
-                                    'icon' => view('component.icon',['icon' => 'icon-facebook']),
-                                    'route' => '#'
-                                ]),
-                            ],
-                            [
-                                'button' => view('component.button',[
-                                    'modifiers' => 'm-icon m-small m-round',
-                                    'icon' => view('component.icon',['icon' => 'icon-twitter']),
-                                    'route' => '#'
-                                ]),
                             ]
                         ]
                     ])
@@ -147,36 +133,46 @@
                      </p>
                 </div>
 
-                 @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id))
+                @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
 
                     <div class="r-user__info-admin">
 
-                     @include('component.button', [
-                         'route' => route('user.edit', [$user]),
-                         'title' => trans('user.edit.title')
-                     ])
+                        @include('component.button.group',[
+                            'items' => [
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-small',
+                                        'title' => trans('user.edit.title'),
+                                        'route' => route('user.edit', [$user]),
+                                    ])
+                                ],
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-secondary m-small',
+                                        'title' => 'Activity',
+                                        'route' => route('user.show', [$user])
+                                    ])
+                                ],
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-secondary m-small',
+                                        'title' => 'Messages',
+                                        'route' => route('message.index', [$user])
+                                    ]),
+                                ],
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-secondary m-small',
+                                        'title' => 'Follows',
+                                        'route' => route('follow.index', [$user])
+                                    ]),
+                                ]
+                            ]
+                        ])
 
                      </div>
 
-                 @endif
-
-                 @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
-
-                     <div class="r-user__info-admin">
-
-                         @include('component.nav', [
-                             'menu' => 'user',
-                             'items' => [
-                                 'activity' => ['route' => route('user.show', [$user])],
-                                 'message' => ['route' => route('message.index', [$user])],
-                                 'follow' => ['route' => route('follow.index', [$user])]
-                             ],
-                             'options' => 'text-center'
-                         ])
-
-                     </div>
-
-                 @endif
+                @endif
 
              </div>
 
@@ -278,7 +274,7 @@
                                 'image' => \App\Image::getRandom()
                             ],
                             'badge' => [
-                                'modifiers' => 'm-inverted',
+                                'modifiers' => 'm-inverted m-green',
                                 'count' => 9
                             ],
                             'children' => [
@@ -303,7 +299,7 @@
                                 'image' => \App\Image::getRandom()
                             ],
                             'badge' => [
-                                'modifiers' => 'm-inverted',
+                                'modifiers' => 'm-inverted m-green',
                                 'count' => 4
                             ],
                             'children' => [
@@ -328,7 +324,7 @@
                                 'image' => \App\Image::getRandom()
                             ],
                             'badge' => [
-                                'modifiers' => 'm-inverted',
+                                'modifiers' => 'm-inverted m-green',
                                 'count' => 2
                             ],
                             'children' => [
@@ -353,7 +349,7 @@
                                 'image' => \App\Image::getRandom()
                             ],
                             'badge' => [
-                                'modifiers' => '',
+                                'modifiers' => 'm-green',
                                 'count' => 2
                             ],
                             'children' => [

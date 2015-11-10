@@ -110,7 +110,12 @@
             bottom: 0;
         }
 
-        .r-user__info-admin {}
+        .r-user__info-admin {
+
+            clear: both;
+            width: 100%;
+            padding-top: $spacer * 2;
+        }
 
     .r-user__gallery {
 
