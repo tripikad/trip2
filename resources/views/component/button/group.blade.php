@@ -5,7 +5,7 @@ title: Button group
 code: |
 
     @include('component.button.group', [
-        'items' => ''
+        'items' => []
     ])
 
 --}}
