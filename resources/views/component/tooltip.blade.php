@@ -28,4 +28,7 @@ modifiers:
 
 <div class="c-tooltip {{ $modifiers or '' }}">
     {{ $text }}
+    @if (isset($link))
+        {!! $link !!}
+    @endif
 </div>

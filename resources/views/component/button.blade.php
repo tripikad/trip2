@@ -19,4 +19,16 @@ modifiers:
 
 --}}
 
-<a href="{{ $route }}" class="c-button {{ $modifiers or '' }}">{{ $title }}</a>
+<a href="{{ $route }}" class="c-button {{ $modifiers or '' }}">
+    @if (isset($title))
+
+    {{ $title }}
+
+    @endif
+
+    @if (isset($icon) && !isset($title))
+
+    {!! $icon !!}
+
+    @endif
+</a>

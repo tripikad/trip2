@@ -18,119 +18,224 @@
 
 <div class="r-user m-green">
 
-    <div class="r-user__masthead">
+    <div class="r-user__header">
 
-        @include('component.masthead', [
-            'modifiers' => 'm-alternative m-profile',
-            'image' => \App\Image::getRandom()
-        ])
+        <div class="r-user__masthead">
 
-    </div>
-
-    <div class="r-user__info">
-
-        <div class="r-user__info-extra">
+            @include('component.masthead', [
+                'modifiers' => 'm-alternative m-profile',
+                'image' => \App\Image::getRandom()
+            ])
 
         </div>
 
-        <div class="r-user__info-wrap">
+        <div class="r-user__info">
 
-            <div class="r-user__info-image">
+            <div class="r-user__map">
 
-                @include('component.profile', [
-                    'image' => $user->imagePreset('small_square'),
-                    'modifiers' => 'm-full',
-                ])
+                @include('component.map')
 
-                <div class="r-user__info-travel-mate">
-
-                    @include('component.tooltip', [
-                        'modifiers' => 'm-green m-bottom',
-                        'text' => 'Otsin reisikaaslast'
-                     ])
-                </div>
             </div>
 
-            <div class="r-user__info-actions">
+            <div class="r-user__info-extra">
 
-                @if (\Auth::check() && \Auth::user()->id !== $user->id)
+            </div>
 
-                    @include('component.button', [
-                        'modifiers' => 'm-secondary',
-                        'route' => route('message.index.with', [
-                            \Auth::user(),
-                            $user,
-                            '#message'
-                        ]),
-                        'title' => trans('user.show.message.create')
+            <div class="r-user__info-wrap">
+
+                <div class="r-user__info-image">
+
+                    @include('component.profile', [
+                        'image' => $user->imagePreset('small_square'),
+                        'modifiers' => 'm-full',
                     ])
 
-                @endif
+                    <div class="r-user__info-travel-mate">
 
-                @include('component.button',[
-                    'modifiers' => 'm-secondary m-small',
-                    'title' => 'Saada sõnum',
-                    'route' => ''
-                ])
+                        @include('component.tooltip', [
+                            'modifiers' => 'm-green m-bottom',
+                            'text' => 'Otsin reisikaaslast',
+                            'link' => view('component.link', ['title' => 'Loe lähemalt', 'route' => '#', 'modifiers' => 'm-small'])
+                         ])
+                    </div>
+                </div>
 
-                @include('component.button',[
-                    'modifiers' => 'm-border m-small',
-                    'title' => 'Jälgi',
-                    'route' => ''
-                ])
+                <div class="r-user__info-actions">
 
-                @include('component.user.contact')
-            </div>
+                    @if (\Auth::check() && \Auth::user()->id !== $user->id)
 
-            <div class="r-user__info-title">
+                        @include('component.button', [
+                            'modifiers' => 'm-secondary',
+                            'route' => route('message.index.with', [
+                                \Auth::user(),
+                                $user,
+                                '#message'
+                            ]),
+                            'title' => trans('user.show.message.create')
+                        ])
 
-                @include ('component.title', [
-                    'modifiers' => 'm-huge m-white',
-                    'title' => $user->name
-                ])
-            </div>
+                    @endif
 
-            <div class="r-user__info-description">
+                    @include('component.button.group',[
+                        'items' => [
+                            [
+                                'button' => view('component.button',[
+                                    'modifiers' => 'm-secondary m-small',
+                                    'title' => 'Saada sõnum',
+                                    'route' => ''
+                                ])
+                            ],
+                            [
+                                'button' => view('component.button',[
+                                    'modifiers' => 'm-border m-small',
+                                    'title' => 'Jälgi',
+                                    'route' => ''
+                                ]),
+                            ],
+                            [
+                                'button' => view('component.button',[
+                                    'modifiers' => 'm-icon m-small m-round',
+                                    'icon' => view('component.icon',['icon' => 'icon-facebook']),
+                                    'route' => '#'
+                                ]),
+                            ],
+                            [
+                                'button' => view('component.button',[
+                                    'modifiers' => 'm-icon m-small m-round',
+                                    'icon' => view('component.icon',['icon' => 'icon-twitter']),
+                                    'route' => '#'
+                                ]),
+                            ],
+                            [
+                                'button' => view('component.button',[
+                                    'modifiers' => 'm-icon m-small m-round',
+                                    'icon' => view('component.icon',['icon' => 'icon-facebook']),
+                                    'route' => '#'
+                                ]),
+                            ],
+                            [
+                                'button' => view('component.button',[
+                                    'modifiers' => 'm-icon m-small m-round',
+                                    'icon' => view('component.icon',['icon' => 'icon-twitter']),
+                                    'route' => '#'
+                                ]),
+                            ]
+                        ]
+                    ])
 
-                <p>
-                 {{ trans('user.show.joined', [
-                     'created_at' => view('component.date.relative', ['date' => $user->created_at])
-                 ]) }}
-                 </p>
-            </div>
+                    @include('component.user.contact')
+                </div>
 
-             @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id))
+                <div class="r-user__info-title">
 
-                <div class="r-user__info-admin">
+                    @include ('component.title', [
+                        'modifiers' => 'm-huge m-white',
+                        'title' => $user->name
+                    ])
+                </div>
 
-                 @include('component.button', [
-                     'route' => route('user.edit', [$user]),
-                     'title' => trans('user.edit.title')
-                 ])
+                <div class="r-user__info-description">
 
-                 </div>
+                    @include('component.user.description',[
+                        'text' => 'Kuigi viikingite laevad jõudsid Põhja-Ameerikasse ligi 500 aastat enne Kolumbuse retke, tekkis Euroopal püsiv kontakt tolle Uue Maailmaga alles tänu Kolumbuse avastusele.'
+                    ])
 
-             @endif
+                    <p>
+                     {{ trans('user.show.joined', [
+                         'created_at' => view('component.date.relative', ['date' => $user->created_at])
+                     ]) }}
+                     </p>
+                </div>
 
-             @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
+                 @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id))
 
-                 <div class="r-user__info-admin">
+                    <div class="r-user__info-admin">
 
-                     @include('component.nav', [
-                         'menu' => 'user',
-                         'items' => [
-                             'activity' => ['route' => route('user.show', [$user])],
-                             'message' => ['route' => route('message.index', [$user])],
-                             'follow' => ['route' => route('follow.index', [$user])]
-                         ],
-                         'options' => 'text-center'
+                     @include('component.button', [
+                         'route' => route('user.edit', [$user]),
+                         'title' => trans('user.edit.title')
                      ])
 
-                 </div>
+                     </div>
 
-             @endif
+                 @endif
 
-         </div>
+                 @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
+
+                     <div class="r-user__info-admin">
+
+                         @include('component.nav', [
+                             'menu' => 'user',
+                             'items' => [
+                                 'activity' => ['route' => route('user.show', [$user])],
+                                 'message' => ['route' => route('message.index', [$user])],
+                                 'follow' => ['route' => route('follow.index', [$user])]
+                             ],
+                             'options' => 'text-center'
+                         ])
+
+                     </div>
+
+                 @endif
+
+             </div>
+
+        </div>
+
+    </div>
+
+    <div class="r-user__gallery">
+
+        <div class="r-user__gallery-wrap">
+
+            @include('component.gallery', [
+                'items' => [
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 1'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 2'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 3'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 4'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 5'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 6'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 7'
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'alt' => 'Pilt 8'
+                    ],
+                ],
+                'more_count' => '119',
+                'more_route' => '#'
+            ])
+
+        </div>
 
     </div>
 
