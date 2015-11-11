@@ -116,17 +116,17 @@
 
             @include respond-to(desktop) {
 
-                right: $container-desktop/28*2;
+                right: $container-desktop / 28 * 2;
             }
 
             @include respond-to(desktop-medium) {
 
-                right: $container-desktop-medium/28*2;
+                right: $container-desktop-medium / 28 * 2;
             }
 
             @include respond-to(desktop-large) {
 
-                right: $container-desktop-large/28*2;
+                right: $container-desktop-large / 28 * 2;
             }
         }
 

@@ -63,9 +63,9 @@
 
             &:before {
 
-                border-bottom-color: $color-white;
-
                 @include color-modifiers-dark-and(border-bottom-color);
+
+                border-bottom-color: $color-white;
             }
         }
 
@@ -73,9 +73,9 @@
 
             &:before {
 
-                border-top-color: $color-white;
-
                 @include color-modifiers-dark-and(border-top-color);
+
+                border-top-color: $color-white;
             }
         }
     }
