@@ -12,10 +12,17 @@ code: |
 
 modifiers:
 
-- m-block
 - m-secondary
+- m-tertiary
+- m-block
+- m-secondary m-block
+- m-tertiary m-block
+- m-small
 - m-large
 - m-loading
+- m-shadow m-secondary
+- m-border
+- m-round
 
 --}}
 

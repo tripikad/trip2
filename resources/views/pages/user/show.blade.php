@@ -37,10 +37,6 @@
 
             </div>
 
-            <div class="r-user__info-extra">
-
-            </div>
-
             <div class="r-user__info-wrap">
 
                 <div class="r-user__info-image">
@@ -53,7 +49,7 @@
                     <div class="r-user__info-travel-mate">
 
                         @include('component.tooltip', [
-                            'modifiers' => 'm-green m-bottom',
+                            'modifiers' => 'm-green m-bottom m-one-line',
                             'text' => 'Otsin reisikaaslast',
                             'link' => view('component.link', ['title' => 'Loe lähemalt', 'route' => '#', 'modifiers' => 'm-small'])
                          ])
@@ -173,6 +169,27 @@
                      </div>
 
                 @endif
+
+                <div class="r-user__info-extra">
+
+                    @include('component.user.extra', [
+                        'items' => [
+                            [
+                                'icon' => 'icon-offer',
+                                'title' => '123',
+                                'text' => 'Postitusi foorumis',
+                                'route' => ''
+                            ],
+                            [
+                                'icon' => 'icon-offer',
+                                'title' => '421',
+                                'text' => 'Külastatud sihtkohti',
+                                'route' => ''
+                            ],
+                        ]
+                    ])
+
+                </div>
 
              </div>
 
@@ -368,7 +385,6 @@
                         ]
                     ]
                 ])
-
 
                 <div style="display: none;">
 

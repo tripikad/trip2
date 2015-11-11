@@ -11,6 +11,11 @@
     background: $color-white;
     border-radius: 3px;
 
+    &.m-one-line {
+
+        white-space: nowrap;
+    }
+
     &:before {
 
         content: '';
@@ -50,7 +55,7 @@
 
     &.m-inverted {
 
-        @include color-modifiers-and(background);
+        @include color-modifiers-dark-and(background);
 
         color: $color-white;
 
@@ -58,7 +63,9 @@
 
             &:before {
 
-                @include color-modifiers-and(border-bottom-color);
+                border-bottom-color: $color-white;
+
+                @include color-modifiers-dark-and(border-bottom-color);
             }
         }
 
@@ -66,7 +73,9 @@
 
             &:before {
 
-                @include color-modifiers-and(border-top-color);
+                border-top-color: $color-white;
+
+                @include color-modifiers-dark-and(border-top-color);
             }
         }
     }

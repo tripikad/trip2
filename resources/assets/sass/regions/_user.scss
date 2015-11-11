@@ -79,7 +79,6 @@
                 position: absolute;
                 top: $spacer * 2;
                 left: $spacer * 12;
-                width: $spacer * 24;
             }
 
         .r-user__info-actions {
@@ -106,8 +105,29 @@
         .r-user__info-extra {
 
             position: absolute;
+            z-index: 10;
             right: 0;
             bottom: 0;
+
+            @include respond-to(tablet) {
+
+                right: span(2);
+            }
+
+            @include respond-to(desktop) {
+
+                right: $container-desktop/28*2;
+            }
+
+            @include respond-to(desktop-medium) {
+
+                right: $container-desktop-medium/28*2;
+            }
+
+            @include respond-to(desktop-large) {
+
+                right: $container-desktop-large/28*2;
+            }
         }
 
         .r-user__info-admin {
@@ -195,6 +215,3 @@
 
             @include wrap('narrow');
         }
-
-
-
