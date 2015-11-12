@@ -108,12 +108,38 @@
                     @include('component.user.contact')
                 </div>
 
-                <div class="r-user__info-title">
+                <div class="r-user__info-heading">
 
-                    @include ('component.title', [
-                        'modifiers' => 'm-huge m-white',
-                        'title' => $user->name
-                    ])
+                    <div class="r-user__info-title">
+
+                        @include ('component.title', [
+                            'modifiers' => 'm-huge m-white',
+                            'title' => $user->name
+                        ])
+
+                    </div>
+
+                    <div class="r-user__info-status">
+
+                        <div class="r-user__info-status-icon">
+
+                            @include ('component.icon', [
+                                'icon' => 'icon-offer'
+                            ])
+
+                        </div>
+
+                        <div class="r-user__info-status-text">
+
+                            @include ('component.badge', [
+                                'modifiers' => 'm-green m-dark m-inverted',
+                                'title' => 'Amateur'
+                            ])
+
+                        </div>
+
+                    </div>
+
                 </div>
 
                 <div class="r-user__info-description">

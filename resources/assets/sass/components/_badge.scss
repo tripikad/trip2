@@ -18,5 +18,15 @@
 
         color: $color-white;
         background: $brand-yellow;
+
+        &.m-dark {
+
+            @include color-modifiers-dark(background);
+        }
     }
 }
+
+    .c-badge__text {
+
+        padding: 0 $spacer * 2;
+    }

@@ -89,10 +89,46 @@
             padding-left: $spacer * 2.5;
         }
 
-        .r-user__info-title {
+        .r-user__info-heading {
 
+            display: flex;
+            align-items: center;
             margin: -$spacer * 7 0 $spacer * 2;
         }
+
+            .r-user__info-title {
+
+                margin-right: $spacer * 3;
+            }
+
+            .r-user__info-status {
+
+                text-align: center;
+            }
+
+                .r-user__info-status-icon {
+
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: $spacer * 6.5;
+                    width: $spacer * 6.5;
+                    background: $color-white;
+                    border-radius: 50%;
+
+                    svg {
+
+                        height: $spacer * 5;
+                        width: $spacer * 5;
+                    }
+                }
+
+                .r-user__info-status-text {
+
+                    position: relative;
+                    top: -$spacer;
+                }
+
 
         .r-user__info-description {
 
