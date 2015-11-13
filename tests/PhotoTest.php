@@ -37,7 +37,7 @@ class PhotoTest extends TestCase
         // Check original file exists
 
         $filepath = config('imagepresets.original.path').$filename;
-        $this->assertTrue(file_exists($filepath));     
+        $this->assertTrue(file_exists($filepath));
 
         // See thumbnails exist
 
@@ -45,7 +45,7 @@ class PhotoTest extends TestCase
             $filepath = config("imagepresets.presets.$preset.path").$filename;
             $this->assertTrue(file_exists($filepath));
         }
-   
+
         $this->see(trans('content.edit.title'))
             ->press(trans('content.edit.title'))
             ->seePageIs('content/photo/'.$content->id.'/edit')
@@ -63,34 +63,33 @@ class PhotoTest extends TestCase
                 'status' => 1,
             ]);
 
-            $file_new = $this->getImageByTitle('New Hello photo title');
-            $filename_new = $file_new->filename;
+        $file_new = $this->getImageByTitle('New Hello photo title');
+        $filename_new = $file_new->filename;
 
-            $filepath = config('imagepresets.original.path').$filename_new;
-            $this->assertTrue(file_exists($filepath));      
+        $filepath = config('imagepresets.original.path').$filename_new;
+        $this->assertTrue(file_exists($filepath));
 
-            foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                $filepath = config("imagepresets.presets.$preset.path").$filename_new;
-                $this->assertTrue(file_exists($filepath));
-            }
+        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+            $filepath = config("imagepresets.presets.$preset.path").$filename_new;
+            $this->assertTrue(file_exists($filepath));
+        }
 
             //check if old images are unlinked
             $filepath = config('imagepresets.original.path').$filename;
-            $this->assertFalse(file_exists($filepath));
+        $this->assertFalse(file_exists($filepath));
 
-            foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                $filepath = config("imagepresets.presets.$preset.path").$filename;
-                $this->assertFalse(file_exists($filepath));
-            }
+        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+            $filepath = config("imagepresets.presets.$preset.path").$filename;
+            $this->assertFalse(file_exists($filepath));
+        }
 
             //unlink new images
             unlink(config('imagepresets.original.path').$filename_new);
 
-            foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                $filepath = config("imagepresets.presets.$preset.path").$filename_new;
-                unlink($filepath);
-            }
-
+        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+            $filepath = config("imagepresets.presets.$preset.path").$filename_new;
+            unlink($filepath);
+        }
     }
 
     public function getImageByTitle($title)

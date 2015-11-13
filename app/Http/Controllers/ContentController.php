@@ -108,7 +108,7 @@ class ContentController extends Controller
 
     public function store(Request $request, $type)
     {
-        $validator = config("content_$type.add.validate")?config("content_$type.add.validate"):config("content_$type.edit.validate");
+        $validator = config("content_$type.add.validate") ? config("content_$type.add.validate") : config("content_$type.edit.validate");
         $this->validate($request, $validator);
 
         $fields = [
@@ -183,8 +183,8 @@ class ContentController extends Controller
 
         if ($request->hasFile('file')) {
             $old_image = $content->images()->first();
-            
-            if($old_image) {
+
+            if ($old_image) {
                 $filename = $old_image->filename;
                 $filepath = config('imagepresets.original.path').$filename;
                 unlink($filepath);
@@ -197,7 +197,6 @@ class ContentController extends Controller
 
             $filename = Image::storeImageFile($request->file('file'));
             $content->images()->update(['filename' => $filename]);
-
         }
 
         $content->update(array_merge($fields, $request->all()));
