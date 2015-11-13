@@ -22,6 +22,7 @@
         &.m-dark {
 
             @include color-modifiers-dark(background);
+
         }
     }
 }
