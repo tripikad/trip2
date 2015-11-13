@@ -53,7 +53,9 @@
                             'text' => 'Otsin reisikaaslast',
                             'link' => view('component.link', ['title' => 'Loe lähemalt', 'route' => '#', 'modifiers' => 'm-small'])
                          ])
+
                     </div>
+
                 </div>
 
                 <div class="r-user__info-actions">
@@ -149,10 +151,13 @@
                     ])
 
                     <p>
+
                      {{ trans('user.show.joined', [
                          'created_at' => view('component.date.relative', ['date' => $user->created_at])
                      ]) }}
+
                      </p>
+
                 </div>
 
                 @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
@@ -304,6 +309,7 @@
                         ])
 
                     </div>
+
                 </div>
 
                 @include('component.content.forum.list', [
@@ -548,12 +554,14 @@
                         'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                         'image' => \App\Image::getRandom()
                     ])
+
                 </div>
 
             </div>
-        </div>
-    </div>
 
+        </div>
+
+    </div>
 
     <div class="r-user__footer-promo">
 
@@ -565,6 +573,7 @@
             ])
 
         </div>
+
     </div>
 
 </div>

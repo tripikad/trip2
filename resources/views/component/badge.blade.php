@@ -27,15 +27,25 @@ modifiers:
 --}}
 
 <div class="c-badge {{ $modifiers or '' }}">
+
     @if(isset($count))
-    <span class="c-badge__count">
-    	{{ $count }}
-    </span>
+
+        <span class="c-badge__count">
+
+    	    {{ $count }}
+
+        </span>
+
     @endif
 
     @if(isset($title))
-    <span class="c-badge__text">
-        {{ $title }}
-    </span>
+
+        <span class="c-badge__text">
+
+            {{ $title }}
+
+        </span>
+
     @endif
+
 </div>
