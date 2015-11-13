@@ -132,6 +132,25 @@
 
         <div class="r-flights__content">
 
+            @include('component.row', [
+                'modifiers' => 'm-icon m-featured',
+                'icon' => 'icon-offer',
+                'title' => 'Riiast Londonisse edasi-tagasi al. 46 €',
+                'route' => '',
+                'list' => [
+                    [
+                        'title' => 'Aasia'
+                    ],
+                    [
+                        'title' => '25.10.15'
+                    ],
+                    [
+                        'title' => '250€'
+                    ]
+                ],
+                'badge' => 'Väga hea hind veel ainult täna'
+            ])
+
             @foreach ($contents as $index => $content)
 
                 @include('component.row', [
@@ -142,14 +161,20 @@
                         'type' => $content->type,
                         'id' => $content
                     ]),
-                    'text' => view('component.date.short', [
-                        'date' => $content->end_at
-                    ]),
-                    'extra' => $content->price
-                        ? trans("content.flight.index.field.price", [
-                            'price' => $content->price,
-                            'symbol' => config('site.currency.symbol')
-                    ]) : null,
+                    'list' => [
+                        [
+                            'title' => view('component.date.short', [
+                                'date' => $content->end_at
+                            ]),
+                        ],
+                        [
+                            'title' => $content->price
+                                ? trans("content.flight.index.field.price", [
+                                    'price' => $content->price,
+                                    'symbol' => config('site.currency.symbol')
+                            ]) : null
+                        ],
+                    ]
                 ])
 
             @endforeach
