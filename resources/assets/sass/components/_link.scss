@@ -1,6 +1,5 @@
 .c-link {
 
-    @include clearfix;
     @include color-modifiers;
     @include font-smoothing;
 
@@ -31,10 +30,5 @@
     &.m-block {
 
         display: block;
-    }
-
-    &.m-right {
-
-        float: right;
     }
 }

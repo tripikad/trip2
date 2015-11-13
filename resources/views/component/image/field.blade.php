@@ -1,12 +1,11 @@
-<div class="component-image-field"
+<div class="component-image-field">
     
     @if (isset($image))
 
-        style="background-image: url({{ $image }});"
+        <img src="{{url($image)}}">
  
     @endif
 
->
 
     <a
         href=""

@@ -20,6 +20,13 @@
 
         margin-bottom: $spacer * 2;
     }
+
+    &.m-featured {
+
+        padding-bottom: $spacer * 2;
+        margin-bottom: $spacer * 3;
+        border-bottom: 2px solid $color-fill-neutral;
+    }
 }
 
     .c-row__icon {
@@ -31,12 +38,23 @@
         width: $spacer * 4;
         height: $spacer * 4;
 
+        .c-row.m-featured & {
+
+            width: $spacer * 5;
+            height: $spacer * 5;
+        }
+
         svg {
 
             @include color-modifiers-and(fill);
 
             height: 100%;
             width: 100%;
+
+            .c-row.m-featured & {
+
+                fill: $brand-green;
+            }
         }
     }
 
@@ -60,7 +78,7 @@
 
             @include font-smoothing;
 
-            font-size: $font-size-larger;
+            font-size: $font-size-larger - 2;
             font-weight: $font-weight-bold;
             line-height: 1.15;
         }
@@ -68,6 +86,13 @@
         .c-row.m-large & {
 
             @include font-smoothing;
+
+            font-size: $font-size-larger - 2;
+            font-weight: $font-weight-bold;
+            line-height: 1.15;
+        }
+
+        .c-row.m-featured & {
 
             font-size: $font-size-larger;
             font-weight: $font-weight-bold;
@@ -85,6 +110,11 @@
             &:hover {
 
                 text-decoration: underline;
+            }
+
+            .c-row.m-featured & {
+
+                color: $brand-green;
             }
         }
 
@@ -106,3 +136,14 @@
             margin-top: $spacer * 0.75;
         }
     }
+
+        .c-row__list {
+
+            display: inline-block;
+            margin-right: $spacer;
+        }
+
+        .c-row__badge {
+
+            display: inline-block;
+        }

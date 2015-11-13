@@ -1,0 +1,12 @@
+.c-button-group {
+
+    @include clear-list;
+
+    display: flex;
+    align-items: center;
+}
+
+    .c-button-group__item {
+
+        padding-right: $spacer;
+    }

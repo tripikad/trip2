@@ -1,0 +1,56 @@
+.c-user-extra {
+
+    @include clear-list;
+    display: flex;
+    align-items: center;
+}
+
+    .c-user-extra__item {
+
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin-left: $spacer * 2;
+        cursor: pointer;
+    }
+
+        .c-user-extra__item-link {
+
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .c-user-extra__item-icon {
+
+            width: $spacer * 3;
+            height: $spacer * 3;
+            margin-right: $spacer;
+
+            svg {
+
+                fill: $color-white;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .c-user-extra__item-title {
+
+            color: $color-white;
+            font-size: $font-size-medium;
+        }
+
+        .c-user-extra__item-text {
+
+            position: absolute;
+            z-index: 2;
+            bottom: $spacer * 4;
+            left: 0;
+            display: none;
+
+            .c-user-extra__item:hover & {
+
+                display: block;
+            }
+        }

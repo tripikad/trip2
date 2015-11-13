@@ -24,6 +24,18 @@ code: |
                         'modifiers' => 'm-green',
                         'route' => ''
                     ]
+                ],
+                'children' => [
+                    [
+                        'profile' => [
+                            'modifiers' => 'm-mini',
+                            'image' => \App\Image::getRandom(),
+                            'title' => 'Charles Darwin',
+                            'route' => ''
+                        ],
+                        'date' => '12. jaanuar, 12:31',
+                        'text' => 'Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi.'
+                    ]
                 ]
             ]
         ]
@@ -89,6 +101,66 @@ modifiers:
                         ])
 
                     </div>
+
+                @endif
+
+                @if(isset($item['children']))
+
+                    <ul class="c-forum-list__sublist">
+
+                    @foreach ($item['children'] as $child)
+
+                        <li class="c-forum-list__sublist-item">
+
+                            @if (isset($child['profile']))
+
+                                <div class="c-forum-list__sublist-item-profile">
+
+                                    @include('component.profile', [
+                                        'modifiers' => $child['profile']['modifiers'],
+                                        'image' => $child['profile']['image']
+                                    ])
+
+                                </div>
+
+                            @endif
+
+                            <div class="c-forum-list__sublist-item-meta">
+
+                                @if (isset($child['profile']))
+
+                                    @include('component.link', [
+                                        'modifiers' => '',
+                                        'title' => $child['profile']['title'],
+                                        'route' => $child['profile']['route']
+                                    ])
+
+                                @endif
+
+                                <span>{{ $child['date'] }}</span>
+
+                            </div>
+
+                            <div class="c-forum-list__sublist-item-content">
+
+                                {{ $child['text'] }}
+
+                            </div>
+
+                            <div class="c-forum-list__sublist-item-actions">
+
+                                @include('component.link', [
+                                    'title' => 'Vaata kogu teemat',
+                                    'route' => ''
+                                ])
+
+                            </div>
+
+                        </li>
+
+                    @endforeach
+
+                    </ul>
 
                 @endif
 

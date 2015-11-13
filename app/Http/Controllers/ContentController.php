@@ -108,7 +108,8 @@ class ContentController extends Controller
 
     public function store(Request $request, $type)
     {
-        $this->validate($request, config("content_$type.edit.validate"));
+        $validator = config("content_$type.add.validate") ? config("content_$type.add.validate") : config("content_$type.edit.validate");
+        $this->validate($request, $validator);
 
         $fields = [
             'type' => $type,
@@ -181,6 +182,19 @@ class ContentController extends Controller
         $fields = [];
 
         if ($request->hasFile('file')) {
+            $old_image = $content->images()->first();
+
+            if ($old_image) {
+                $filename = $old_image->filename;
+                $filepath = config('imagepresets.original.path').$filename;
+                unlink($filepath);
+
+                foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+                    $filepath = config("imagepresets.presets.$preset.path").$filename;
+                    unlink($filepath);
+                }
+            }
+
             $filename = Image::storeImageFile($request->file('file'));
             $content->images()->update(['filename' => $filename]);
         }
