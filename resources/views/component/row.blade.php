@@ -88,13 +88,40 @@ modifiers:
 
     @endif
 
-    @if (isset($text) || isset($extra))
+    @if (isset($text) || isset($extra) || isset($list) || isset($badge))
 
     <div class="c-row__text">
 
         {!! $text or '' !!}
 
         {!! $extra or '' !!}
+
+        @if(isset($list))
+
+            <div class="c-row__list">
+
+            @include('component.inline_list', [
+                'items' => $list
+            ])
+
+            </div>
+
+        @endif
+
+        @if(isset($badge))
+
+            <div class="c-row__badge">
+
+            {{-- Change count to text after all merged to master --}}
+
+            @include('component.badge', [
+                'modifiers' => 'm-green m-inverted',
+                'count' => $badge
+            ])
+
+            </div>
+
+        @endif
 
     </div>
 
