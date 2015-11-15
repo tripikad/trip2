@@ -49,7 +49,7 @@ code: |
 
         {!! Form::file($name) !!}
 
-        {!! Form::submit(trans('admin.image.create.submit.title'), [
+        {!! Form::submit('Submit', [
             'class' => 'btn btn-primary'
         ]) !!}
 
