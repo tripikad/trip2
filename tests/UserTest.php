@@ -13,8 +13,7 @@ class UserTest extends TestCase
 
         $this->actingAs($user1)
             ->visit("user/$user1->id/edit")
-            ->attach(storage_path().'/tests/test.jpg', 'file')
-            ->press('Submit')
+            ->attach(storage_path().'/tests/test.jpg', 'image')
             ->seePageIs("user/$user1->id/edit");
 
         $filename = $this->getImageFilenameByUserId($user1->id);
