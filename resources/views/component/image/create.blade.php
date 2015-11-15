@@ -6,8 +6,8 @@ code: |
 
     @include('component.image.create', [
         'form' => [
-            'url' => $url,
-            'method' => $method,
+            'url' => '',
+            'method' => 'post',
             'model' => null
         ],
         'id' => 'uniqueId',
