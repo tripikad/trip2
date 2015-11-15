@@ -19,7 +19,7 @@ code: |
 
 --}}
 
-@if($form['model'])
+@if(isset($form['model']))
 
     {!! Form::model($form['model'], [
         'url' => $form['url'],
