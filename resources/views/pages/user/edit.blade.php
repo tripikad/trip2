@@ -17,7 +17,22 @@
 
         </div>
 
+        @include('component.image.create', [
+            'form' => [
+                'url' => $url,
+                'method' => $method,
+                'model' => isset($user) ? $user : null
+            ],
+            'name' => 'image',
+            'maxFileSize' => 5,
+            'uploadMultiple' => false
+        ])
+
     </div>
+
+@stop
+
+@section('content.one')
 
     {!! Form::model(isset($user) ? $user : null, [
         'url' => $url,
@@ -25,32 +40,6 @@
         'files' => true
     ]) !!}
 
-    {!! Form::file('file') !!}
-
-    {!! Form::submit('Submit', ['name' => 'image_submit']) !!}
-
-    <div class="form-group">
-
-        @if (! $user->image)
-
-        <a href="" id="image_link" class="btn btn-primary btn-md">
-            {{ trans('user.image.create.title') }}
-        </a>
-        
-        @else 
-
-        <a href="" id="image_link" class="btn btn-link">
-            {{ trans('user.image.edit.title') }}
-        </a>
-
-        @endif
-
-    </div>
-
-@stop
-
-@section('content.one')
-    
     <div class="row">
 
         <div class="col-sm-4 utils-padding-right">

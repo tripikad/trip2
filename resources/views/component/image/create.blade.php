@@ -5,6 +5,11 @@ title: Image field
 code: |
 
     @include('component.image.create', [
+        'form' => [
+            'url' => $url,
+            'method' => $method,
+            'model' => null
+        ],
         'id' => 'uniqueId',
         'name' => 'image',
         'maxFileSize' => 5,
@@ -14,12 +19,29 @@ code: |
 
 --}}
 
-{!! Form::open([
-    'url' => route('admin.image.store'),
-    'files' => true,
-    'class' => 'dropzone',
-    'id' => isset($id) ? $id : 'dropzoneImage'
-]) !!}
+@if($form['model'])
+
+    {!! Form::model($form['model'], [
+        'url' => $form['url'],
+        'method' => isset($form['method']) ? $form['method'] : 'post',
+        'files' => true,
+        'class' => 'dropzone',
+        'id' => isset($id) ? $id : 'dropzoneImage'
+    ]) !!}
+
+@else
+
+    {!! Form::open([
+        'url' => $form['url'],
+        'method' => isset($form['method']) ? $form['method'] : 'post',
+        'files' => true,
+        'class' => 'dropzone',
+        'id' => isset($id) ? $id : 'dropzoneImage'
+    ]) !!}
+
+@endif
+
+{!! Form::hidden($name.'_submit', '1') !!}
 
 <div class="fallback">
 
@@ -66,7 +88,25 @@ code: |
             dictFallbackMessage: '{{ trans('site.fallback.message') }}',
             dictFallbackText: '{{ trans('site.fallback.text') }}',
             dictMaxFilesExceeded: '{{ trans('site.max.files.exceeded') }}',
-            dictFileTooBig: '{{ trans('site.file.size.exceeded') }}'
+            dictFileTooBig: '{{ trans('site.file.size.exceeded') }}',
+
+            @if(isset($uploadMultiple) && $uploadMultiple == true)
+
+                init: function () {
+                    this.on('successmultiple', function () {
+                        location.reload();
+                    });
+                },
+
+            @else
+
+                init: function () {
+                    this.on('success', function () {
+                        location.reload();
+                    });
+                },
+
+            @endif
         };
 
     </script>

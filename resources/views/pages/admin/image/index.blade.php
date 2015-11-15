@@ -18,6 +18,9 @@
 @section('header1.right')
 
     @include('component.image.create', [
+        'form' => [
+            'url' => route('admin.image.store')
+        ],
         'name' => 'image',
         'maxFileSize' => 5,
         'uploadMultiple' => false
@@ -59,4 +62,3 @@
     {!! $images->render() !!}
 
 @stop
-
