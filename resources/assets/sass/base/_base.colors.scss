@@ -111,6 +111,9 @@ $color-text-link: #36a1eb;
 $color-fill-success: #49c91f;
 $color-fill-success-dark: $brand-green-dark;
 
+$color-fill-warning: lighten($brand-yellow, 42%);
+$color-fill-warning-dark: lighten($brand-yellow, 15%);
+
 $color-fill-notice: $brand-orange;
 $color-fill-notice-dark: $brand-orange-dark;
 

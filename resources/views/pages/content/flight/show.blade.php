@@ -59,6 +59,11 @@
 
                 </div>
 
+                @include('component.alert', [
+                    'modifiers' => 'm-warning',
+                    'text' => 'Pakkumine võib olla aegunud'
+                ])
+
             </div>
 
             <div class="c-body">
