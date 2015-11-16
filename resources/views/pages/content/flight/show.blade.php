@@ -28,6 +28,17 @@
 
 <div class="r-flights m-single">
 
+    <div class="r-flights__map">
+
+        <div class="r-flights__map-inner">
+
+            @include('component.map', [
+                'modifiers' => 'm-flights'
+            ])
+
+        </div>
+    </div>
+
     <div class="r-flights__masthead">
 
         @include('component.masthead', [

@@ -2,7 +2,8 @@
 
     .r-flights__map {
 
-        width: 100%;
+        @include wrap();
+
         position: relative;
     }
 
@@ -10,9 +11,13 @@
 
             position: absolute;
             right: 0;
-            top: $spacer * 20;
-            height: $spacer * 70;
-            width: $spacer * 100;
+            top: $spacer * 26;
+            width: $spacer * 60;
+
+            @include respond-to(desktop-large) {
+
+                right: -$spacer * 4;
+            }
         }
 
     .r-flights__content-wrap {
