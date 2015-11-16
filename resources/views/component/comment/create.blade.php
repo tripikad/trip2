@@ -1,33 +1,21 @@
-<div class="form-group">
+{!! Form::open(array('url' => route('comment.store', [$content->type, $content->id]))) !!}
 
-    {!! Form::open(array('url' => route('comment.store', [$content->type, $content->id]))) !!}
+<div class="c-form__group">
 
-    <div class="form-group">
-    
-        {!! Form::textarea('body', null, [
-            'class' => 'form-control input-md',
-            'placeholder' => trans('comment.create.field.body.title'),
-            'rows' => 5
-        ]) !!}
-    
-    </div>
-
-    <div class="row">
-
-        <div class="col-md-4 col-md-offset-8">
-        
-            <div class="form-group">
-
-                {!! Form::submit(trans('comment.create.submit.title'), [
-                'class' => 'btn btn-primary btn-md btn-block'
-                ]) !!}
-            
-            </div>
-            
-        </div>
-
-    </div>
-
-    {!! Form::close() !!}
+    {!! Form::textarea('body', null, [
+        'class' => 'c-form__input m-high',
+        'placeholder' => trans('comment.create.field.body.title'),
+        'rows' => 5
+    ]) !!}
 
 </div>
+
+<div class="c-form__group m-no-margin m-right">
+
+    {!! Form::submit(trans('comment.create.submit.title'), [
+    'class' => 'c-button m-small'
+    ]) !!}
+
+</div>
+
+{!! Form::close() !!}

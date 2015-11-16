@@ -33,22 +33,18 @@
         }
     }
 
-        .r-flights__search {
+        .r-flights__content-header {
 
-            padding: $spacer * 2 $spacer * 2 0;
-            margin-bottom: $spacer * 2.5;
-            background: $color-fill-neutral-light;
+            margin-bottom: $spacer * 3;
         }
 
-            .r-flights__search-title {
-
-                margin-bottom: $spacer;
-            }
-
-            .r-flights__search-body {
+            .r-flights__content-header-title {
 
                 margin-bottom: $spacer * 1.5;
             }
+
+            .r-flights__content-header-meta {}
+
 
         .r-flights__content-block {
 
@@ -61,10 +57,20 @@
                 background: $color-fill-neutral-light;
             }
 
-        .r-flights__content-title {
+            .r-flights__content-title {
 
-            margin-bottom: $spacer * 3;
-        }
+                margin-bottom: $spacer * 3;
+            }
+
+            .r-flights__content-footer {
+
+                padding-top: $spacer;
+
+                &.m-right {
+
+                    text-align: right;
+                }
+            }
 
     .r-flights__sidebar {
 
@@ -92,10 +98,10 @@
                 background: $color-fill-neutral-light;
             }
 
-        .r-flights__sidebar-title {
+            .r-flights__sidebar-title {
 
-            margin-bottom: $spacer * 1.5;
-        }
+                margin-bottom: $spacer * 1.5;
+            }
 
 
     .r-flights__forum {

@@ -25,6 +25,13 @@
         text-transform: none;
     }
 
+    &.m-larger {
+
+        font-size: $font-size-huge / 2;
+        font-weight: $font-weight-bold;
+        text-transform: none;
+    }
+
     &.m-huge {
 
         font-size: 60px; // Exception
