@@ -254,6 +254,51 @@
             </div>
         </div>
 
+        <div class="r-home__featured-news">
+
+            <div class="r-home__featured-news-wrap">
+
+                <div class="c-columns m-3-cols">
+
+                    <div class="c-columns__item">
+
+                        @include('component.news', [
+                            'title' => 'Suur valuutaülevaade – kuhu tasub just praegu reisida',
+                            'route' => '',
+                            'image' => \App\Image::getRandom(),
+                            'modifiers' => 'm-smaller'
+                        ])
+
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        @include('component.news', [
+                            'title' => 'Euroopa Kohus otsustas – lennuki tehniline rike ei päästa hüvitise maksmisest',
+                            'route' => '',
+                            'image' => \App\Image::getRandom(),
+                            'modifiers' => 'm-smaller'
+                        ])
+
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        @include('component.news', [
+                            'title' => 'Suur valuutaülevaade – kuhu tasub just praegu reisida',
+                            'route' => '',
+                            'image' => \App\Image::getRandom(),
+                            'modifiers' => 'm-smaller'
+                        ])
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
         <div class="r-home__travel">
 
             <div class="r-home__travel-wrap">
