@@ -1,3 +1,27 @@
+{{--
+
+title: Forum post
+
+code: |
+
+    @include('component.content.forum.post', [
+        'profile' => [
+            'modifiers' => '',
+            'image' => '',
+            'title' => '',
+            'route' => ''
+        ],
+        'date' => '',
+        'text' => '',
+        'more' => [
+            'modifiers' => '',
+            'title' => '',
+            'route' => ''
+        ]
+    ])
+
+--}}
+
 <div class="c-forum-post">
 
     @if (isset($profile))
@@ -5,7 +29,7 @@
         <div class="c-forum-post__profile">
 
             @include('component.profile', [
-                'modifiers' => $profile['modifiers'],
+                'modifiers' => 'm-mini',
                 'image' => $profile['image']
             ])
 
@@ -34,5 +58,19 @@
         {!! $text !!}
 
     </div>
+
+    @if(isset($more))
+
+    <div class="c-forum-post__footer {{ $more['modifiers'] or '' }} ">
+
+        @include('component.link', [
+            'modifiers' => 'm-small',
+            'title' => $more['title'],
+            'route' => $more['route']
+        ])
+
+    </div>
+
+    @endif
 
 </div>

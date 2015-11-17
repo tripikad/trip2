@@ -15,9 +15,6 @@
                     'user' => [
                         'route' => route('user.show', [auth()->user()]),
                         'title' =>  auth()->user()->name,
-                        'profile' => [
-                            'image' => auth()->user()->imagePreset(),
-                        ],
                         'children' => [
                             [
                                 'title' => trans('menu.user.profile'),
@@ -27,7 +24,7 @@
                                 'title' => trans('menu.user.message'),
                                 'route' => route('message.index', [auth()->user()]),
                                 'badge' => [
-                                    'modifiers' => 'm-blue',
+                                    'modifiers' => 'm-purple',
                                     'count' => auth()->user()->unreadMessagesCount()
                                 ]
                             ],
@@ -41,6 +38,13 @@
                             ],
                         ]
                     ],
+                    'second' => [
+                        'title' => '',
+                        'route' => route('user.show', [auth()->user()]),
+                        'profile' => [
+                            'image' => auth()->user()->imagePreset(),
+                        ],
+                    ]
                 ],
             ])
 
@@ -52,9 +56,6 @@
                     'user' => [
                         'route' => route('user.show', [auth()->user()]),
                         'title' =>  auth()->user()->name,
-                        'profile' => [
-                            'image' => auth()->user()->imagePreset(),
-                        ],
                         'children' => [
                             [
                                 'title' => trans('menu.user.profile'),
@@ -82,6 +83,13 @@
                             ],
                         ]
                     ],
+                    'second' => [
+                        'title' => '',
+                        'route' => route('user.show', [auth()->user()]),
+                        'profile' => [
+                            'image' => auth()->user()->imagePreset(),
+                        ],
+                    ]
                 ],
             ])
 

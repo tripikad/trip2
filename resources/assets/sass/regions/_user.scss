@@ -164,6 +164,11 @@
 
                 right: $container-desktop-large / 28 * 2;
             }
+
+            .r-user.m-logged-in & {
+
+                bottom: $spacer * 4;
+            }
         }
 
         .r-user__info-admin {

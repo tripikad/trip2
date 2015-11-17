@@ -112,49 +112,19 @@ modifiers:
 
                         <li class="c-forum-list__sublist-item">
 
-                            @if (isset($child['profile']))
-
-                                <div class="c-forum-list__sublist-item-profile">
-
-                                    @include('component.profile', [
-                                        'modifiers' => $child['profile']['modifiers'],
-                                        'image' => $child['profile']['image']
-                                    ])
-
-                                </div>
-
-                            @endif
-
-                            <div class="c-forum-list__sublist-item-meta">
-
-                                @if (isset($child['profile']))
-
-                                    @include('component.link', [
-                                        'modifiers' => '',
-                                        'title' => $child['profile']['title'],
-                                        'route' => $child['profile']['route']
-                                    ])
-
-                                @endif
-
-                                <span>{{ $child['date'] }}</span>
-
-                            </div>
-
-                            <div class="c-forum-list__sublist-item-content">
-
-                                {{ $child['text'] }}
-
-                            </div>
-
-                            <div class="c-forum-list__sublist-item-actions">
-
-                                @include('component.link', [
-                                    'title' => 'Vaata kogu teemat',
-                                    'route' => ''
-                                ])
-
-                            </div>
+                            @include('component.content.forum.post',[
+                                'profile' => [
+                                    'image' => $child['profile']['image'],
+                                    'title' => $child['profile']['title'],
+                                    'route' => $child['profile']['route']
+                                ],
+                                'date' => $child['date'],
+                                'text' => $child['text'],
+                                'more' => [
+                                    'title' => $child['more']['title'],
+                                    'route' => $child['more']['route']
+                                ]
+                            ])
 
                         </li>
 

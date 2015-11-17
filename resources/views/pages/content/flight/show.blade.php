@@ -250,7 +250,6 @@
 
                     @include('component.content.forum.post',[
                         'profile' => [
-                            'modifiers' => 'm-mini',
                             'image' => \App\Image::getRandom(),
                             'title' => 'Charles Darwin',
                             'route' => ''
@@ -261,7 +260,6 @@
 
                     @include('component.content.forum.post',[
                         'profile' => [
-                            'modifiers' => 'm-mini',
                             'image' => \App\Image::getRandom(),
                             'title' => 'Charles Darwin',
                             'route' => ''
