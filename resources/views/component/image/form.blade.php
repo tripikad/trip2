@@ -4,7 +4,7 @@ title: Form component with Dropzone
 
 code: |
 
-    @include('component.image.create', [
+    @include('component.image.form', [
         'form' => [
             'url' => '',
             'method' => 'post',
@@ -210,90 +210,76 @@ code: |
 
             <script type="text/javascript">
 
-                Dropzone.autoDiscover = false;
+                createDropzone(
+                        false,
+                        '#{{ isset($id) ? $id : 'dropzoneImage' }}',
+                        '{{ $form['url'] }}',
+                        '{{ isset($form['method']) && $form['method']!='put' ? $form['method'] : 'post' }}',
+                        '{{ $name }}',
 
-                $('#{{ isset($id) ? $id : 'dropzoneImage' }}').dropzone({
-                    url: '{{ $form['url'] }}',
-                    method:  '{{ isset($form['method']) && $form['method']!='put' ? $form['method'] : 'post' }}',
-                    paramName: '{{ $name }}',
+                        @if (isset($maxFileSize))
 
-                    @if (isset($maxFileSize))
-
-                        maxFilesize: {{ $maxFileSize }},
-
-                    @endif
-
-                    @if (isset($uploadMultiple))
-
-                        uploadMultiple: {{ $uploadMultiple ? 'true' : 'false' }},
-
-                    @endif
-
-                    @if (isset($maxFiles))
-
-                        maxFiles: {{ $maxFiles }},
-
-                    @endif
-
-                    @if (isset($fields) && ! empty($fields))
-
-                        autoProcessQueue: false,
-                        addRemoveLinks: true,
-
-                    @endif
-
-                    headers: {
-                        'X-CSRF-Token': $('input[name="_token"]').val()
-                    },
-
-                    dictDefaultMessage: '{{ trans('site.dropzone.default') }}',
-                    dictFallbackMessage: '{{ trans('site.dropzone.fallback.message') }}',
-                    dictFallbackText: '{{ trans('site.dropzone.fallback.text') }}',
-                    dictMaxFilesExceeded: '{{ trans('site.dropzone.max.files.exceeded') }}',
-                    dictFileTooBig: '{{ trans('site.dropzone.file.size.exceeded') }}',
-                    dictRemoveFile: '{{ trans('site.dropzone.file.remove') }}',
-
-                    sending: function(file, xhr, formData) {
-
-                        $('input, textarea, select', '#form-{{ isset($id) ? $id : 'dropzoneImage' }}').each(function() {
-
-                            formData.append($(this).attr('name'), $(this).val());
-
-                        });
-
-                    },
-
-                    @if (!isset($fields) || empty($fields))
-
-                        @if (isset($uploadMultiple) && $uploadMultiple == true)
-
-                            successmultiple: function () {
-                                location.reload();
-                            },
+                            '{{ $maxFileSize }}',
 
                         @else
 
-                            success: function () {
-                                location.reload();
-                            },
+                            '',
 
                         @endif
 
-                    @else
+                        @if (isset($uploadMultiple))
 
-                        init: function() {
-                            var myDropzone = this;
+                            @if ($uploadMultiple === true)
 
-                            $("#submit-{{ isset($id) ? $id : 'dropzoneImage'}}").click(function (e) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                myDropzone.processQueue();
-                                //$('#form-{{ isset($id) ? $id : 'dropzoneImage' }}').submit();
-                            });
-                        },
+                                'true',
 
-                    @endif
-            });
+                            @else
+
+                                'false',
+
+                            @endif
+
+                        @else
+
+                            '',
+
+                        @endif
+
+                        @if (isset($maxFiles))
+
+                            '{{ $maxFiles }}',
+
+                        @else
+
+                            '',
+
+                        @endif
+
+                        @if (isset($fields) && ! empty($fields))
+
+                            'false',
+
+                        @else
+
+                            '',
+
+                        @endif
+
+                        '',
+
+                        [
+                            '{{ trans('site.dropzone.default') }}',
+                            '{{ trans('site.dropzone.fallback.message') }}',
+                            '{{ trans('site.dropzone.fallback.text') }}',
+                            '{{ trans('site.dropzone.max.files.exceeded') }}',
+                            '{{ trans('site.dropzone.file.size.exceeded') }}',
+                            '{{ trans('site.dropzone.file.remove') }}',
+                        ],
+
+                        '#form-{{ isset($id) ? $id : 'dropzoneImage' }}',
+                        '#submit-{{ isset($id) ? $id : 'dropzoneImage' }}'
+
+                );
 
             </script>
 

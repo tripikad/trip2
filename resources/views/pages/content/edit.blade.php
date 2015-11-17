@@ -6,7 +6,7 @@
 
 @section('content.one')
 
-    @include('component.image.create', [
+    @include('component.image.form', [
         'form' => [
                 'url' => $url,
                 'method' => isset($method) ? $method : 'post',
