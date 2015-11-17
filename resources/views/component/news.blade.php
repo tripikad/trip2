@@ -15,6 +15,7 @@ code: |
 modifiers:
 
 - m-small
+- m-smaller
 
 --}}
 
@@ -25,9 +26,11 @@ modifiers:
     <h3 class="c-news__title">
         <a href="{{ $route }}" class="c-news__title-link">{{ $title }}</a>
     </h3>
+    @if(isset($date))
     <div class="c-news__meta">
         <p class="c-news__meta-date">
             @include('component.date.relative', ['date' => $date])
         </p>
     </div>
+    @endif
 </div>

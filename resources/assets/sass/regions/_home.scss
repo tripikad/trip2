@@ -163,6 +163,17 @@
                         }
                     }
 
+    .r-home__featured-news {
+
+        padding: 48px 0 0;
+        background: $color-fill-neutral-light;
+    }
+
+        .r-home__featured-news-wrap {
+
+            @include wrap('narrow');
+        }
+
     .r-home__travel {
 
         background: $color-fill-neutral-light;
