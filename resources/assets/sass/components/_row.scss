@@ -48,6 +48,7 @@
 
             @include color-modifiers-and(fill);
 
+            fill: $color-text-link;
             height: 100%;
             width: 100%;
 
@@ -120,7 +121,7 @@
 
     .c-row__text {
 
-        color: $color-text-neutral-dark;
+        color: $color-text-neutral-darker;
         font-size: $font-size-small;
 
         .c-row.m-icon &,

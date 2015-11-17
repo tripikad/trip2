@@ -87,7 +87,6 @@
 
 @stop
 
-
 @section('header1.right')
 
     @include('component.button', [
@@ -116,7 +115,6 @@
             ])
 
         </div>
-
     </div>
 
     <div class="r-flights__masthead">
@@ -125,7 +123,6 @@
             'modifiers' => 'm-alternative',
             'image' => \App\Image::getRandom()
         ])
-
     </div>
 
     <div class="r-flights__content-wrap">
@@ -154,7 +151,7 @@
             @foreach ($contents as $index => $content)
 
                 @include('component.row', [
-                    'modifiers' => 'm-icon m-blue',
+                    'modifiers' => 'm-icon',
                     'icon' => 'icon-offer',
                     'title' => $content->title,
                     'route' => route('content.show', [
@@ -203,93 +200,95 @@
 
             </ul>
 
+            <div class="r-flights__content-block">
 
-            <div class="r-flights__search">
+                <div class="r-flights__content-block-inner">
 
-                <div class="r-flights__search-title">
+                    <div class="r-flights__content-title">
 
-                    @include('component.title', [
-                        'title' => 'Otsi lende',
-                        'modifiers' => 'm-large m-green'
-                    ])
-
-                </div>
-
-                <div class="r-flights__search-body">
-
-                    <p>Kui ei leidnud sobivat pakkumist, siis leia endale meelepärane lend siit.</p>
-
-                </div>
-
-                <form action="#" class="r-flights__search-form">
-
-                    <div class="c-columns m-2-cols m-space m-center">
-
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <input type="text" class="c-form__input" placeholder="Alguspunkt">
-                            </div>
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <input type="text" class="c-form__input" placeholder="Sihtpunkt">
-                            </div>
-                        </div>
+                        @include('component.title', [
+                            'title' => 'Otsi lende',
+                            'modifiers' => 'm-large m-green'
+                        ])
                     </div>
 
-                    <div class="c-columns m-4-cols m-space m-center">
+                    <div class="r-flights__content-body">
 
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <div class="c-form__input-wrap">
-                                    <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-right'])</span>
-                                    <input type="date" class="c-form__input m-small m-icon" placeholder="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <div class="c-form__input-wrap">
-                                    <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-left'])</span>
-                                    <input type="date" class="c-form__input m-small m-icon" placeholder="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <div class="c-form__input-wrap">
-
-                                    <select name="" id="" class="c-form__input m-small">
-                                        <option value="">1 reisija</option>
-                                        <option value="">2 reisija</option>
-                                        <option value="">3 reisija</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <input type="submit" class="c-button m-small m-block" value="Otsi">
-                            </div>
-                        </div>
+                        @include('component.text', [
+                            'text' => '<p>Kui ei leidnud sobivat pakkumist, siis leia endale meelepärane lend siit.</p>'
+                        ])
                     </div>
-                </form>
+
+                    <form action="#">
+
+                        <div class="c-columns m-2-cols m-space m-center">
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <input type="text" class="c-form__input" placeholder="Alguspunkt">
+                                </div>
+                            </div>
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <input type="text" class="c-form__input" placeholder="Sihtpunkt">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="c-columns m-4-cols m-space m-center">
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <div class="c-form__input-wrap">
+                                        <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-right'])</span>
+                                        <input type="date" class="c-form__input m-small m-icon" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <div class="c-form__input-wrap">
+                                        <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-left'])</span>
+                                        <input type="date" class="c-form__input m-small m-icon" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <div class="c-form__input-wrap">
+
+                                        <select name="" id="" class="c-form__input m-small">
+                                            <option value="">1 reisija</option>
+                                            <option value="">2 reisija</option>
+                                            <option value="">3 reisija</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <input type="submit" class="c-button m-small m-block" value="Otsi">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -511,7 +510,6 @@
                                     'route' => ''
                                 ]
                             ]
-
                         ]
                     ]
                 ])

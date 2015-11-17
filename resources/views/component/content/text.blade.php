@@ -1,4 +1,5 @@
 @include('component.inline_list', [
+    'modifiers' => 'm-light m-small',
     'items' => [
         [
             'title' => $content->user->name,

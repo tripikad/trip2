@@ -112,11 +112,9 @@ modifiers:
 
             <div class="c-row__badge">
 
-            {{-- Change count to text after all merged to master --}}
-
             @include('component.badge', [
                 'modifiers' => 'm-green m-inverted',
-                'count' => $badge
+                'title' => $badge
             ])
 
             </div>
