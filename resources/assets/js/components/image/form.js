@@ -1,3 +1,5 @@
+/*exported createDropzone */
+
 function createDropzone(
     selector,
     url,
