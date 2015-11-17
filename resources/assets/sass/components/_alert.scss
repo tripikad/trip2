@@ -13,6 +13,15 @@
         padding: $spacer * 1.5 $spacer * 2;
     }
 
+    &.m-warning {
+
+        color: $color-text-black;
+        background: $color-fill-warning;
+        border: 1px solid $color-fill-warning-dark;
+        border-bottom: 2px solid $color-fill-warning-dark;
+        border-radius: 3px;
+    }
+
     &.m-notice {
 
         color: $color-fill-notice;
@@ -24,7 +33,6 @@
 
         color: $color-fill-error;
         border: 2px solid $color-fill-error;
-
     }
 
     &.m-success {

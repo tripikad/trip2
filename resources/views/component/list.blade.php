@@ -42,7 +42,22 @@ modifiers:
 
             <h3 class="c-list__item-title">
 
-                <a href="{{ $item['route'] }}" class="c-list__item-title-link">{{ $item['title'] }}</a>
+                <a href="{{ $item['route'] }}" class="c-list__item-title-link">
+
+                    @if (isset($item['icon']))
+
+                        <span class="c-list__item-icon">
+
+                            @include('component.icon',[
+                                'icon' => $item['icon']
+                            ])
+
+                        </span>
+
+                    @endif
+
+                    {{ $item['title'] }}
+                </a>
 
             </h3>
 
