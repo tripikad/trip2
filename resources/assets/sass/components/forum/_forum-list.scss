@@ -119,52 +119,10 @@
             @include clearfix;
             @include clear-list;
 
-            display: none;
-            overflow: hidden;
             width: 100%;
-            padding: $spacer * 2 0 $spacer * 3 $spacer * 6;
-
-            .c-forum-list.m-compact & {
-
-                display: block;
-            }
         }
 
             .c-forum-list__sublist-item {
 
-                position: relative;
                 padding: $spacer * 2 $spacer * 4;
-                background: $color-white;
-                border-radius: 3px;
             }
-
-                .c-forum-list__sublist-item-profile {
-
-                    position: absolute;
-                    left: -$spacer * 1.5;
-                    top: $spacer;
-                }
-
-                .c-forum-list__sublist-item-meta {
-
-                    color: $color-text-neutral-dark;
-                    margin-bottom: $spacer * 2;
-
-                    span {
-
-                        padding-left: $spacer;
-                    }
-                }
-
-                .c-forum-list__sublist-item-content {
-
-                    max-height: $spacer * 20;
-                    overflow: hidden;
-                }
-
-                .c-forum-list__sublist-item-actions {
-
-                    text-align: right;
-                    position: relative;
-                    padding-top: $spacer * 2;
-                }

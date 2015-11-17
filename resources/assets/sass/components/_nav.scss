@@ -39,7 +39,7 @@
 
                 .c-nav__list-item.active & {
 
-                    color: $color-fill-black;
+                    opacity: 0.6;
                 }
             }
 
@@ -57,12 +57,6 @@
                             @include arrowY(down, $color-white);
                         }
                     }
-                }
-
-                .c-nav__list-item-image {
-
-                    float: right;
-                    margin-left: $spacer;
                 }
 
             .c-nav__sub-list {

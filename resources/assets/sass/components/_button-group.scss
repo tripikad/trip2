@@ -9,4 +9,14 @@
     .c-button-group__item {
 
         padding-right: $spacer;
+
+        &.m-hide {
+
+            display: none;
+        }
+
+        &.m-right {
+
+            margin-left: auto;
+        }
     }

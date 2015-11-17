@@ -46,10 +46,13 @@
 
         .c-profile.m-full & {
 
+            @include color-modifiers-dark-and(background);
+
             display: block;
             flex: none;
             width: 100%;
             height: 100%;
+            border-radius: 50%;
         }
     }
 

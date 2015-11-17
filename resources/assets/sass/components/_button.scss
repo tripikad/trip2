@@ -120,6 +120,12 @@
         font-size: $font-size-large;
         padding: $spacer $spacer * 3;
     }
+
+    &.m-disabled {
+
+        opacity: 0.9;
+        cursor: not-allowed;
+    }
 }
 
 .c-button__icon {

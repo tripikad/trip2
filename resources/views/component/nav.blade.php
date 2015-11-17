@@ -38,7 +38,7 @@ code: |
                     'modifiers' => 'm-mini',
                     'image' => $item['profile']['image'],
                     'badge' => [
-                        'modifiers' => 'm-blue m-inverted',
+                        'modifiers' => 'm-purple m-inverted',
                         'count' => '7'
                     ]
                 ])

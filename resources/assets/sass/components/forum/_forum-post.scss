@@ -30,7 +30,6 @@
     .c-forum-post__content {
 
         line-height: 1.5;
-        overflow: hidden;
 
         p {
 
@@ -48,4 +47,10 @@
         text-align: right;
         position: relative;
         padding-top: $spacer * 2;
+    }
+
+    .c-forum-post__footer {
+
+        text-align: right;
+        padding-top: $spacer * 3;
     }

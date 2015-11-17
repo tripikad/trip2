@@ -16,7 +16,15 @@
 
 @section('content')
 
+@if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
+
+<div class="r-user m-green m-logged-in">
+
+@else
+
 <div class="r-user m-green">
+
+@endif
 
     <div class="r-user__header">
 
@@ -43,7 +51,7 @@
 
                     @include('component.profile', [
                         'image' => $user->imagePreset('small_square'),
-                        'modifiers' => 'm-full',
+                        'modifiers' => 'm-full m-green',
                     ])
 
                     <div class="r-user__info-travel-mate">
@@ -60,6 +68,8 @@
 
                 <div class="r-user__info-actions">
 
+
+
                     @if (\Auth::check() && \Auth::user()->id !== $user->id)
 
                         @include('component.button', [
@@ -74,40 +84,78 @@
 
                     @endif
 
-                    @include('component.button.group',[
-                        'items' => [
-                            [
-                                'button' => view('component.button',[
-                                    'modifiers' => 'm-secondary m-small',
-                                    'title' => 'Saada sõnum',
-                                    'route' => ''
-                                ])
-                            ],
-                            [
-                                'button' => view('component.button',[
-                                    'modifiers' => 'm-border m-small',
-                                    'title' => 'Jälgi',
-                                    'route' => ''
-                                ]),
-                            ],
-                            [
-                                'button' => view('component.button',[
-                                    'modifiers' => 'm-icon m-small m-round',
-                                    'icon' => view('component.icon',['icon' => 'icon-facebook']),
-                                    'route' => '#'
-                                ]),
-                            ],
-                            [
-                                'button' => view('component.button',[
-                                    'modifiers' => 'm-icon m-small m-round',
-                                    'icon' => view('component.icon',['icon' => 'icon-twitter']),
-                                    'route' => '#'
-                                ]),
-                            ]
-                        ]
-                    ])
+                    @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
 
-                    @include('component.user.contact')
+                        @include('component.button.group',[
+                            'items' => [
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-secondary m-small m-disabled',
+                                        'title' => 'Saada sõnum',
+                                        'route' => ''
+                                    ])
+                                ],
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-border m-small m-disabled',
+                                        'title' => 'Jälgi',
+                                        'route' => ''
+                                    ]),
+                                ],
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-icon m-small m-round m-disabled',
+                                        'icon' => view('component.icon',['icon' => 'icon-facebook']),
+                                        'route' => '#'
+                                    ]),
+                                ],
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-icon m-small m-round m-disabled',
+                                        'icon' => view('component.icon',['icon' => 'icon-twitter']),
+                                        'route' => '#'
+                                    ]),
+                                ]
+                            ]
+                        ])
+
+                    @else
+
+                        @include('component.button.group',[
+                            'items' => [
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-secondary m-small',
+                                        'title' => 'Saada sõnum',
+                                        'route' => ''
+                                    ])
+                                ],
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-border m-small',
+                                        'title' => 'Jälgi',
+                                        'route' => ''
+                                    ]),
+                                ],
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-icon m-small m-round',
+                                        'icon' => view('component.icon',['icon' => 'icon-facebook']),
+                                        'route' => '#'
+                                    ]),
+                                ],
+                                [
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-icon m-small m-round',
+                                        'icon' => view('component.icon',['icon' => 'icon-twitter']),
+                                        'route' => '#'
+                                    ]),
+                                ]
+                            ]
+                        ])
+
+                    @endif
+
                 </div>
 
                 <div class="r-user__info-heading">
@@ -150,14 +198,6 @@
                         'text' => 'Kuigi viikingite laevad jõudsid Põhja-Ameerikasse ligi 500 aastat enne Kolumbuse retke, tekkis Euroopal püsiv kontakt tolle Uue Maailmaga alles tänu Kolumbuse avastusele.'
                     ])
 
-                    <p>
-
-                     {{ trans('user.show.joined', [
-                         'created_at' => view('component.date.relative', ['date' => $user->created_at])
-                     ]) }}
-
-                     </p>
-
                 </div>
 
                 @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
@@ -167,13 +207,23 @@
                         @include('component.button.group',[
                             'items' => [
                                 [
+                                    'modifiers' => '',
                                     'button' => view('component.button',[
-                                        'modifiers' => 'm-small',
+                                        'modifiers' => 'm-secondary m-small',
                                         'title' => trans('user.edit.title'),
                                         'route' => route('user.edit', [$user]),
                                     ])
                                 ],
                                 [
+                                    'modifiers' => '',
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-small m-border',
+                                        'title' => 'Lisa reisikuulutuse kuulutus',
+                                        'route' => '',
+                                    ])
+                                ],
+                                [
+                                    'modifiers' => 'm-hide',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
                                         'title' => 'Activity',
@@ -181,6 +231,7 @@
                                     ])
                                 ],
                                 [
+                                    'modifiers' => 'm-hide',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
                                         'title' => 'Messages',
@@ -188,10 +239,19 @@
                                     ]),
                                 ],
                                 [
+                                    'modifiers' => 'm-hide',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
                                         'title' => 'Follows',
                                         'route' => route('follow.index', [$user])
+                                    ]),
+                                ],
+                                [
+                                    'modifiers' => 'm-right',
+                                    'button' => view('component.button',[
+                                        'modifiers' => 'm-secondary m-small',
+                                        'title' => 'Täienda oma kaarti',
+                                        'route' => ''
                                     ]),
                                 ]
                             ]
@@ -213,7 +273,7 @@
                             ],
                             [
                                 'icon' => 'icon-offer',
-                                'title' => '421',
+                                'title' => '31 (19%)',
                                 'text' => 'Külastatud sihtkohti',
                                 'route' => ''
                             ],
@@ -329,14 +389,16 @@
                             'children' => [
                                 [
                                     'profile' => [
-                                        'modifiers' => 'm-mini',
                                         'image' => \App\Image::getRandom(),
                                         'title' => 'Charles Darwin',
                                         'route' => ''
                                     ],
                                     'date' => '12. jaanuar, 12:31',
-                                    'text' => 'Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.',
-
+                                    'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi.</p><p>Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p>',
+                                    'more' =>[
+                                        'title' => 'Vaata kogu teemat',
+                                        'route' => ''
+                                    ]
                                 ]
                             ]
                         ],
@@ -354,14 +416,16 @@
                             'children' => [
                                 [
                                     'profile' => [
-                                        'modifiers' => 'm-mini',
                                         'image' => \App\Image::getRandom(),
                                         'title' => 'Charles Darwin',
                                         'route' => ''
                                     ],
                                     'date' => '12. jaanuar, 12:31',
-                                    'text' => 'Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne.',
-
+                                    'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne.</p>',
+                                    'more' =>[
+                                        'title' => 'Vaata kogu teemat',
+                                        'route' => ''
+                                    ]
                                 ]
                             ]
                         ],
@@ -379,14 +443,16 @@
                             'children' => [
                                 [
                                     'profile' => [
-                                        'modifiers' => 'm-mini',
                                         'image' => \App\Image::getRandom(),
                                         'title' => 'Charles Darwin',
                                         'route' => ''
                                     ],
                                     'date' => '12. jaanuar, 12:31',
-                                    'text' => 'Mina puurisin nüüd juba mitu-mitu aastat tagasi.',
-
+                                    'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi.</p>',
+                                    'more' =>[
+                                        'title' => 'Vaata kogu teemat',
+                                        'route' => ''
+                                    ]
                                 ]
                             ]
                         ],
@@ -404,14 +470,16 @@
                             'children' => [
                                 [
                                     'profile' => [
-                                        'modifiers' => 'm-mini',
                                         'image' => \App\Image::getRandom(),
                                         'title' => 'Charles Darwin',
                                         'route' => ''
                                     ],
                                     'date' => '12. jaanuar, 12:31',
-                                    'text' => 'Mina puurisin nüüd juba kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.',
-
+                                    'text' => '<p>Mina puurisin nüüd juba kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p>',
+                                    'more' =>[
+                                        'title' => 'Vaata kogu teemat',
+                                        'route' => ''
+                                    ]
                                 ]
                             ]
                         ]

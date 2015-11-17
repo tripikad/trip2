@@ -14,7 +14,7 @@ code: |
 
     @foreach ($items as $item)
 
-        <li class="c-button-group__item">
+        <li class="c-button-group__item {{ $item['modifiers'] or '' }}">
 
             {!! $item['button'] !!}
 
