@@ -19,7 +19,8 @@
 
     @include('component.image.create', [
         'form' => [
-            'url' => route('admin.image.store')
+            'url' => route('admin.image.store'),
+            'files' => true
         ],
         'name' => 'image',
         'maxFileSize' => 5,

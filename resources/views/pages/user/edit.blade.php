@@ -20,8 +20,9 @@
         @include('component.image.create', [
             'form' => [
                 'url' => $url,
-                'method' => $method,
-                'model' => isset($user) ? $user : null
+                'method' => isset($method) ? $method : 'post',
+                'model' => isset($user) ? $user : null,
+                'files' => true
             ],
             'name' => 'image',
             'maxFileSize' => 5,
