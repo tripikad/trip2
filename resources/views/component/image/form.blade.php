@@ -210,8 +210,9 @@ code: |
 
             <script type="text/javascript">
 
+                Dropzone.autoDiscover = false;
+
                 createDropzone(
-                        false,
                         '#{{ isset($id) ? $id : 'dropzoneImage' }}',
                         '{{ $form['url'] }}',
                         '{{ isset($form['method']) && $form['method']!='put' ? $form['method'] : 'post' }}',

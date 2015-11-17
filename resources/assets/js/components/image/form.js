@@ -1,5 +1,4 @@
 function createDropzone(
-    autoDiscover,
     selector,
     url,
     method,
@@ -13,7 +12,6 @@ function createDropzone(
     formSelector,
     submitSelector
 ) {
-    Dropzone.autoDiscover = autoDiscover;
 
     if (maxFileSize === '') {
         maxFileSize = 256;
