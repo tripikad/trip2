@@ -85,7 +85,7 @@ function createDropzone(
                     });
                 }
             } else {
-                this.on("addedfile", function() {
+                this.on('addedfile', function() {
 
                     if (parseInt(maxFiles) == 1) {
 
@@ -106,7 +106,10 @@ function createDropzone(
                         $(hiddenFieldSelector).remove();
                     }
 
-                    hiddenFile.appendTo($(formSelector)).attr({'name' : paramName, 'id' : hiddenFieldSelector });
+                    hiddenFile.appendTo($(formSelector)).attr({
+                        'name' : paramName,
+                        'id' : hiddenFieldSelector
+                    });
 
                     $(formSelector).submit();
                 });
@@ -114,3 +117,4 @@ function createDropzone(
         }
     });
 }
+
