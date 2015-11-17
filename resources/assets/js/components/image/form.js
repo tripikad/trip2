@@ -1,8 +1,21 @@
-function createDropzone(autoDiscover, selector, url, method, paramName, maxFileSize, uploadMultiple, maxFiles, autoProcessQueue, token, translations, formSelector, submitSelector) {
-
+function createDropzone(
+    autoDiscover,
+    selector,
+    url,
+    method,
+    paramName,
+    maxFileSize,
+    uploadMultiple,
+    maxFiles,
+    autoProcessQueue,
+    token,
+    translations,
+    formSelector,
+    submitSelector
+) {
     Dropzone.autoDiscover = autoDiscover;
 
-    if (maxFileSize == '') {
+    if (maxFileSize === '') {
         maxFileSize = 256;
     }
 
@@ -12,7 +25,7 @@ function createDropzone(autoDiscover, selector, url, method, paramName, maxFileS
         uploadMultiple = true;
     }
 
-    if (maxFiles == '') {
+    if (maxFiles === '') {
         maxFiles = null;
     }
 
@@ -22,7 +35,7 @@ function createDropzone(autoDiscover, selector, url, method, paramName, maxFileS
         autoProcessQueue = true;
     }
 
-    if (token == '' && $('input[name="_token"]', formSelector).length > 0) {
+    if (token === '' && $('input[name="_token"]', formSelector).length > 0) {
         token = $('input[name="_token"]', formSelector).val();
     }
 
@@ -76,7 +89,7 @@ function createDropzone(autoDiscover, selector, url, method, paramName, maxFileS
 
                     if (parseInt(maxFiles) == 1) {
 
-                        if (this.files[1] != null) {
+                        if (this.files[1] !== null) {
                             this.removeFile(this.files[0]);
                         }
 
