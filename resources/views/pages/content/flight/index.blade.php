@@ -131,7 +131,7 @@
 
             @include('component.row', [
                 'modifiers' => 'm-icon m-featured',
-                'icon' => 'icon-offer',
+                'icon' => 'icon-tickets',
                 'title' => 'Riiast Londonisse edasi-tagasi al. 46 €',
                 'route' => '',
                 'list' => [
@@ -152,7 +152,7 @@
 
                 @include('component.row', [
                     'modifiers' => 'm-icon',
-                    'icon' => 'icon-offer',
+                    'icon' => 'icon-tickets',
                     'title' => $content->title,
                     'route' => route('content.show', [
                         'type' => $content->type,

@@ -111,22 +111,22 @@
                         [
                             'title' => 'Leia soodne majutus',
                             'route' => '',
-                            'icon' => 'icon-search'
+                            'icon' => 'icon-house'
                         ],
                         [
                             'title' => 'Leia soodne rendiauto',
                             'route' => '',
-                            'icon' => 'icon-search'
+                            'icon' => 'icon-car'
                         ],
                         [
                             'title' => 'Võrdle reisikindlustusi ja osta internetist',
                             'route' => '',
-                            'icon' => 'icon-search'
+                            'icon' => 'icon-lock'
                         ],
                         [
                             'title' => 'Vaktsiinisoovitused sihtkohas',
                             'route' => '',
-                            'icon' => 'icon-search'
+                            'icon' => 'icon-umbrella'
                         ]
                     ]
                 ])
@@ -153,7 +153,7 @@
                 <div class="r-flights__content-body">
 
                     @include('component.row', [
-                        'icon' => 'icon-offer',
+                        'icon' => 'icon-tickets',
                         'modifiers' => 'm-icon',
                         'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
                         'route' => '#',
@@ -171,7 +171,7 @@
                     ])
 
                     @include('component.row', [
-                        'icon' => 'icon-offer',
+                        'icon' => 'icon-tickets',
                         'modifiers' => ' m-icon',
                         'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
                         'route' => '#',
@@ -189,7 +189,7 @@
                     ])
 
                     @include('component.row', [
-                        'icon' => 'icon-offer',
+                        'icon' => 'icon-tickets',
                         'modifiers' => 'm-icon',
                         'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
                         'route' => '#',
@@ -207,7 +207,7 @@
                     ])
 
                     @include('component.row', [
-                        'icon' => 'icon-offer',
+                        'icon' => 'icon-tickets',
                         'modifiers' => 'm-icon',
                         'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
                         'route' => '#',

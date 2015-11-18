@@ -319,7 +319,7 @@
                         @foreach($flights2 as $key => $flight2)
 
                             @include('component.row', [
-                                'icon' => 'icon-offer',
+                                'icon' => 'icon-tickets',
                                 'modifiers' => ['m-blue', 'm-yellow', 'm-green', 'm-red', 'm-purple'][$key].' m-icon',
                                 'title' => $flight2->title.' '.$flight2->price.' '.config('site.currency.symbol'),
                                 'route' => route('content.show', [$flight2->type, $flight2]),
