@@ -12,11 +12,9 @@ code: |
             [
                 'title' => 'Loe lähemalt Trip.ee-st ›',
                 'route' => '#',
+                'modifiers' => 'm-icon',
+                'icon' => 'icon-arrow-right'
             ],
-            [
-                'title' => 'Mis on veahind ›',
-                'route' => '#',
-            ]
         ],
         'button' => [
             'title' => 'Liitu Trip.ee-ga',
