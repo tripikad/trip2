@@ -28,11 +28,24 @@ code: |
 
                 @else
 
-                    @include('component.link', [
-                        'modifiers' => $item['modifiers'],
-                        'title' => $item['title'],
-                        'route' => $item['route']
-                    ])
+                    @if(isset($item['icon']))
+
+                        @include('component.link', [
+                            'modifiers' => $item['modifiers'],
+                            'title' => $item['title'],
+                            'route' => $item['route'],
+                            'icon' => $item['icon']
+                        ])
+
+                    @else
+
+                        @include('component.link', [
+                            'modifiers' => $item['modifiers'],
+                            'title' => $item['title'],
+                            'route' => $item['route']
+                        ])
+
+                    @endif
 
                 @endif
 

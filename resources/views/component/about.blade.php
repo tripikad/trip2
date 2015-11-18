@@ -50,7 +50,8 @@ modifiers:
             @foreach ($links as $link)
 
                 @include('component.link', [
-                    'modifiers' => 'm-block',
+                    'modifiers' => $link['modifiers'],
+                    'icon' => $link['icon'],
                     'title' => $link['title'],
                     'route' => $link['route']
                 ])

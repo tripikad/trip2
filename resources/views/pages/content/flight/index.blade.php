@@ -303,12 +303,16 @@
                         'text' => 'Pakkumised võivad aeguda juba paari päevaga. Paremaks orienteerumiseks on vanemad pakkumised eri värvi.',
                         'links' => [
                             [
-                                'title' => 'Loe lähemalt Trip.ee-st ›',
-                                'route' => '#'
+                                'modifiers' => 'm-icon',
+                                'title' => 'Loe lähemalt Trip.ee-st',
+                                'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Mis on veahind ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Mis on veahind',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ]
                         ]
                     ])
@@ -342,16 +346,22 @@
                         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
                         'links' => [
                             [
-                                'title' => 'Loe lähemalt Trip.ee-st ›',
-                                'route' => '#'
+                                'modifiers' => 'm-icon',
+                                'title' => 'Loe lähemalt Trip.ee-st',
+                                'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Trip.ee Facebookis ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Trip.ee Facebookis',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Trip.ee Twitteris ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Trip.ee Twitteris',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ]
                         ],
                         'button' => [

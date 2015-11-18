@@ -228,8 +228,10 @@
                 <div class="r-flights__content-footer m-right">
 
                     @include('component.link', [
+                        'modifiers' => 'm-icon',
                         'title' => 'Vaata kõiki  sooduspakkumisi',
-                        'route' => '#'
+                        'route' => '#',
+                        'icon' => 'icon-arrow-right'
                     ])
                 </div>
             </div>
@@ -434,16 +436,22 @@
                         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
                         'links' => [
                             [
-                                'title' => 'Loe lähemalt Trip.ee-st ›',
-                                'route' => '#'
+                                'modifiers' => 'm-icon',
+                                'title' => 'Loe lähemalt Trip.ee-st',
+                                'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Trip.ee Facebookis ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Trip.ee Facebookis',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Trip.ee Twitteris ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Trip.ee Twitteris',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ]
                         ],
                         'button' => [

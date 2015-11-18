@@ -64,9 +64,10 @@ code: |
     <div class="c-forum-post__footer {{ $more['modifiers'] or '' }} ">
 
         @include('component.link', [
-            'modifiers' => 'm-small',
+            'modifiers' => 'm-small m-icon',
             'title' => $more['title'],
-            'route' => $more['route']
+            'route' => $more['route'],
+            'icon' => 'icon-arrow-right'
         ])
 
     </div>

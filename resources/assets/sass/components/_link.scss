@@ -31,4 +31,25 @@
 
         display: block;
     }
+
+    &.m-icon {
+
+        display: inline-flex;
+        align-items: center;
+    }
 }
+
+    .c-link__icon {
+
+        display: inline-block;
+        margin-left: $spacer / 2;
+        height: 18px;
+        width: 18px;
+
+        svg {
+
+            fill: $color-fill-neutral;
+            height: 100%;
+            width: 100%;
+        }
+    }
