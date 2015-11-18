@@ -94,15 +94,15 @@ class UserController extends Controller
 
         if ($request->get('image_submit')) {
             $this->validate($request, [
-                'file' => 'required|image',
+                'image' => 'required|image',
             ]);
 
             $filename = 'picture-'
                 .$user->id
                 .'.'
-                .$request->file('file')->getClientOriginalExtension();
+                .$request->file('image')->getClientOriginalExtension();
 
-            $filename = Image::storeImageFile($request->file('file'), $filename);
+            $filename = Image::storeImageFile($request->file('image'), $filename);
 
             $user->images()->delete();
             $user->images()->create(['filename' => $filename]);
