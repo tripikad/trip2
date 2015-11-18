@@ -20,9 +20,10 @@
         <div class="c-destination-helper__actions">
 
             @include('component.link',[
-                'modifiers' => '',
+                'modifiers' => 'm-icon',
                 'title' => 'Veel',
-                'route' => ''
+                'route' => '',
+                'icon' => 'icon-arrow-right'
             ])
 
         </div>

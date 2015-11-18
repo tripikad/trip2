@@ -66,6 +66,16 @@
                         @endforeach
 
                     </div>
+                    <div class="r-home__destinations-action">
+
+                        @include('component.link', [
+                            'modifiers' => 'm-icon',
+                            'title' => 'Vaata kõiki sooduspakkumisi',
+                            'route' => route('content.show', ['flight']),
+                            'icon' => 'icon-arrow-right'
+                        ])
+
+                    </div>
                 </div>
             </div>
 
@@ -82,8 +92,10 @@
                         'title' => str_limit($content->body, 300),
                         'links' => [
                             [
+                                'modifiers' => 'm-icon',
                                 'title' => trans('frontpage.index.about.title'),
                                 'route' => route('content.show', [$content->type, $content]),
+                                'icon' => 'icon-arrow-right'
                             ]
                         ],
                         'button' => [
@@ -118,17 +130,20 @@
                             [
                                 'title' => trans('frontpage.index.forum.general'),
                                 'route' => route('content.show', 'forum'),
-                                'modifiers' => 'm-large m-block'
+                                'modifiers' => 'm-large m-block m-icon',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'title' => trans('frontpage.index.forum.buysell'),
                                 'route' => route('content.show', 'buysell'),
-                                'modifiers' => 'm-large m-block'
+                                'modifiers' => 'm-large m-block m-icon',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'title' => trans('frontpage.index.forum.expat'),
                                 'route' => route('content.show', 'expat'),
-                                'modifiers' => 'm-large m-block'
+                                'modifiers' => 'm-large m-block m-icon',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'type' => 'button',
@@ -245,11 +260,16 @@
 
                     @endif
 
-                    @include('component.link', [
-                        'title' => trans('frontpage.index.all.news'),
-                        'route' => route('content.show', ['news'])
-                    ])
+                    <div class="r-home__news-footer">
 
+                        @include('component.link', [
+                            'title' => trans('frontpage.index.all.news'),
+                            'route' => route('content.show', ['news']),
+                            'modifiers' => 'm-icon',
+                            'icon' => 'icon-arrow-right'
+                        ])
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -319,7 +339,7 @@
                         @foreach($flights2 as $key => $flight2)
 
                             @include('component.row', [
-                                'icon' => 'icon-offer',
+                                'icon' => 'icon-tickets',
                                 'modifiers' => ['m-blue', 'm-yellow', 'm-green', 'm-red', 'm-purple'][$key].' m-icon',
                                 'title' => $flight2->title.' '.$flight2->price.' '.config('site.currency.symbol'),
                                 'route' => route('content.show', [$flight2->type, $flight2]),
@@ -333,10 +353,16 @@
 
                     @endif
 
-                    @include('component.link', [
-                        'title' => trans('frontpage.index.all.offers'),
-                        'route' => route('content.show', ['flight'])
-                    ])
+                    <div class="r-home__travel-column-footer">
+
+                        @include('component.link', [
+                            'modifiers' => 'm-icon',
+                            'title' => trans('frontpage.index.all.offers'),
+                            'route' => route('content.show', ['flight']),
+                            'icon' => 'icon-arrow-right'
+                        ])
+
+                    </div>
 
                 </div>
 

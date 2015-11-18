@@ -174,7 +174,7 @@
                         <div class="r-user__info-status-icon">
 
                             @include ('component.icon', [
-                                'icon' => 'icon-offer'
+                                'icon' => 'icon-umbrella'
                             ])
 
                         </div>
@@ -266,13 +266,13 @@
                     @include('component.user.extra', [
                         'items' => [
                             [
-                                'icon' => 'icon-offer',
+                                'icon' => 'icon-comment',
                                 'title' => '123',
                                 'text' => 'Postitusi foorumis',
                                 'route' => ''
                             ],
                             [
-                                'icon' => 'icon-offer',
+                                'icon' => 'icon-pin',
                                 'title' => '31 (19%)',
                                 'text' => 'Külastatud sihtkohti',
                                 'route' => ''

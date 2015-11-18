@@ -111,22 +111,22 @@
                         [
                             'title' => 'Leia soodne majutus',
                             'route' => '',
-                            'icon' => 'icon-search'
+                            'icon' => 'icon-house'
                         ],
                         [
                             'title' => 'Leia soodne rendiauto',
                             'route' => '',
-                            'icon' => 'icon-search'
+                            'icon' => 'icon-car'
                         ],
                         [
                             'title' => 'Võrdle reisikindlustusi ja osta internetist',
                             'route' => '',
-                            'icon' => 'icon-search'
+                            'icon' => 'icon-lock'
                         ],
                         [
                             'title' => 'Vaktsiinisoovitused sihtkohas',
                             'route' => '',
-                            'icon' => 'icon-search'
+                            'icon' => 'icon-umbrella'
                         ]
                     ]
                 ])
@@ -153,7 +153,7 @@
                 <div class="r-flights__content-body">
 
                     @include('component.row', [
-                        'icon' => 'icon-offer',
+                        'icon' => 'icon-tickets',
                         'modifiers' => 'm-icon',
                         'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
                         'route' => '#',
@@ -171,7 +171,7 @@
                     ])
 
                     @include('component.row', [
-                        'icon' => 'icon-offer',
+                        'icon' => 'icon-tickets',
                         'modifiers' => ' m-icon',
                         'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
                         'route' => '#',
@@ -189,7 +189,7 @@
                     ])
 
                     @include('component.row', [
-                        'icon' => 'icon-offer',
+                        'icon' => 'icon-tickets',
                         'modifiers' => 'm-icon',
                         'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
                         'route' => '#',
@@ -207,7 +207,7 @@
                     ])
 
                     @include('component.row', [
-                        'icon' => 'icon-offer',
+                        'icon' => 'icon-tickets',
                         'modifiers' => 'm-icon',
                         'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
                         'route' => '#',
@@ -228,8 +228,10 @@
                 <div class="r-flights__content-footer m-right">
 
                     @include('component.link', [
+                        'modifiers' => 'm-icon',
                         'title' => 'Vaata kõiki  sooduspakkumisi',
-                        'route' => '#'
+                        'route' => '#',
+                        'icon' => 'icon-arrow-right'
                     ])
                 </div>
             </div>
@@ -434,16 +436,22 @@
                         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
                         'links' => [
                             [
-                                'title' => 'Loe lähemalt Trip.ee-st ›',
-                                'route' => '#'
+                                'modifiers' => 'm-icon',
+                                'title' => 'Loe lähemalt Trip.ee-st',
+                                'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Trip.ee Facebookis ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Trip.ee Facebookis',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Trip.ee Twitteris ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Trip.ee Twitteris',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ]
                         ],
                         'button' => [
