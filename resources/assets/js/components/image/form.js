@@ -15,7 +15,7 @@ function createDropzone(
     submitSelector
 ) {
 
-    if (maxFileSize === '') {
+    if (maxFileSize.length === 0) {
         maxFileSize = 256;
     }
 
@@ -25,7 +25,7 @@ function createDropzone(
         uploadMultiple = true;
     }
 
-    if (maxFiles === '') {
+    if (maxFiles.length === 0) {
         maxFiles = null;
     }
 
@@ -35,7 +35,7 @@ function createDropzone(
         autoProcessQueue = true;
     }
 
-    if (token === '' && $('input[name="_token"]', formSelector).length > 0) {
+    if (token.length === 0 && $('input[name="_token"]', formSelector).length > 0) {
         token = $('input[name="_token"]', formSelector).val();
     }
 
@@ -88,8 +88,7 @@ function createDropzone(
                 this.on('addedfile', function() {
 
                     if (parseInt(maxFiles) == 1) {
-
-                        if (this.files[1] !== null) {
+                        if (typeof this.files[1] !== 'undefined' && this.files[1] !== null) {
                             this.removeFile(this.files[0]);
                         }
 
@@ -117,4 +116,3 @@ function createDropzone(
         }
     });
 }
-
