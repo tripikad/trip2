@@ -28,6 +28,17 @@
 
 <div class="r-flights m-single">
 
+    <div class="r-flights__map">
+
+        <div class="r-flights__map-inner">
+
+            @include('component.map', [
+                'modifiers' => 'm-flights'
+            ])
+
+        </div>
+    </div>
+
     <div class="r-flights__masthead">
 
         @include('component.masthead', [
@@ -42,31 +53,40 @@
 
         <div class="r-flights__content">
 
-            {{ $content->title }}
+            <div class="r-flights__content-header">
+
+                <div class="r-flights__content-header-title">
+
+                    @include('component.title', [
+                        'modifiers' => 'm-larger',
+                        'title' => $content->title
+                    ])
+
+                </div>
+
+                <div class="r-flights__content-header-meta">
+
+                    @include('component.content.text', ['content' => $content])
+
+                </div>
+
+                @include('component.alert', [
+                    'modifiers' => 'm-warning',
+                    'text' => 'Pakkumine võib olla aegunud'
+                ])
+
+            </div>
 
             <div class="c-body">
 
                 @include('component.row', [
-                    'profile' => [
-                        'modifiers' => '',
-                        'image' => $content->user->imagePreset(),
-                        'route' => route('user.show', [$content->user])
-                    ],
-                    'text' => view('component.content.text', ['content' => $content]),
-                    'actions' => view('component.actions', ['actions' => $content->getActions()]),
-                    'extra' => view('component.flags', ['flags' => $content->getFlags()]),
                     'body' => $content->body_filtered
                 ])
 
             </div>
 
-            @include('component.comment.index', ['comments' => $comments])
-
-            @if (\Auth::check())
-
-                @include('component.comment.create')
-
-            @endif
+            @include('component.actions', ['actions' => $content->getActions()])
+            @include('component.flags', ['flags' => $content->getFlags()])
 
             <div class="r-flights__content-block">
 
@@ -75,13 +95,41 @@
                     <div class="r-flights__content-title">
 
                         @include('component.title', [
-                            'title' => 'Jaga sõbraga',
+                            'title' => 'Soovita pakkumist sõpradele',
                             'modifiers' => 'm-large m-green'
                         ])
-
                     </div>
-
                 </div>
+            </div>
+
+            <div class="r-flights__content-block">
+
+                @include('component.destination.helper', [
+                    'modifiers' => 'm-green',
+                    'title' => 'Rio De Janeiro',
+                    'items' => [
+                        [
+                            'title' => 'Leia soodne majutus',
+                            'route' => '',
+                            'icon' => 'icon-house'
+                        ],
+                        [
+                            'title' => 'Leia soodne rendiauto',
+                            'route' => '',
+                            'icon' => 'icon-car'
+                        ],
+                        [
+                            'title' => 'Võrdle reisikindlustusi ja osta internetist',
+                            'route' => '',
+                            'icon' => 'icon-lock'
+                        ],
+                        [
+                            'title' => 'Vaktsiinisoovitused sihtkohas',
+                            'route' => '',
+                            'icon' => 'icon-umbrella'
+                        ]
+                    ]
+                ])
             </div>
 
             <div class="r-flights__content-block">
@@ -90,7 +138,6 @@
                     'route' => '#',
                     'image' => \App\Image::getRandom()
                 ])
-
             </div>
 
             <div class="r-flights__content-block">
@@ -101,48 +148,153 @@
                         'modifiers' => 'm-green',
                         'title' => 'Lennupakkumised'
                     ])
-
                 </div>
 
-                @include('component.row', [
-                    'icon' => 'icon-offer',
-                    'modifiers' => 'm-blue m-icon',
-                    'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
-                    'route' => '#',
-                    'text' => 'Itaalia   •   Jaanuar – veebruar 2016   •   Täna 12:32 '
-                ])
+                <div class="r-flights__content-body">
 
-                @include('component.row', [
-                    'icon' => 'icon-offer',
-                    'modifiers' => 'm-blue m-icon',
-                    'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
-                    'route' => '#',
-                    'text' => 'Itaalia   •   Jaanuar – veebruar 2016   •   Täna 12:32 '
-                ])
+                    @include('component.row', [
+                        'icon' => 'icon-tickets',
+                        'modifiers' => 'm-icon',
+                        'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
+                        'route' => '#',
+                        'list' => [
+                            [
+                                'title' => 'Itaalia'
+                            ],
+                            [
+                                'title' => 'Jaanuar – veebruar 2016 '
+                            ],
+                            [
+                                'title' => 'Täna 12:32'
+                            ]
+                        ]
+                    ])
 
-                @include('component.row', [
-                    'icon' => 'icon-offer',
-                    'modifiers' => 'm-blue m-icon',
-                    'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
-                    'route' => '#',
-                    'text' => 'Itaalia   •   Jaanuar – veebruar 2016   •   Täna 12:32 '
-                ])
+                    @include('component.row', [
+                        'icon' => 'icon-tickets',
+                        'modifiers' => ' m-icon',
+                        'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
+                        'route' => '#',
+                        'list' => [
+                            [
+                                'title' => 'Itaalia'
+                            ],
+                            [
+                                'title' => 'Jaanuar – veebruar 2016 '
+                            ],
+                            [
+                                'title' => 'Täna 12:32'
+                            ]
+                        ]
+                    ])
 
-                @include('component.row', [
-                    'icon' => 'icon-offer',
-                    'modifiers' => 'm-blue m-icon',
-                    'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
-                    'route' => '#',
-                    'text' => 'Itaalia   •   Jaanuar – veebruar 2016   •   Täna 12:32 '
-                ])
+                    @include('component.row', [
+                        'icon' => 'icon-tickets',
+                        'modifiers' => 'm-icon',
+                        'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
+                        'route' => '#',
+                        'list' => [
+                            [
+                                'title' => 'Itaalia'
+                            ],
+                            [
+                                'title' => 'Jaanuar – veebruar 2016 '
+                            ],
+                            [
+                                'title' => 'Täna 12:32'
+                            ]
+                        ]
+                    ])
 
+                    @include('component.row', [
+                        'icon' => 'icon-tickets',
+                        'modifiers' => 'm-icon',
+                        'title' => 'easyJeti lennupiletid Tallinnast Milanosse al 65 €',
+                        'route' => '#',
+                        'list' => [
+                            [
+                                'title' => 'Itaalia'
+                            ],
+                            [
+                                'title' => 'Jaanuar – veebruar 2016 '
+                            ],
+                            [
+                                'title' => 'Täna 12:32'
+                            ]
+                        ]
+                    ])
+                </div>
 
-                @include('component.link', [
-                    'title' => 'Vaata kõiki  sooduspakkumisi',
-                    'route' => '#'
-                ])
+                <div class="r-flights__content-footer m-right">
 
+                    @include('component.link', [
+                        'modifiers' => 'm-icon',
+                        'title' => 'Vaata kõiki  sooduspakkumisi',
+                        'route' => '#',
+                        'icon' => 'icon-arrow-right'
+                    ])
+                </div>
             </div>
+
+            <div class="r-flights__content-block">
+
+                <div class="r-flights__content-title">
+
+                    @include('component.title', [
+                        'title' => 'Kommentaarid',
+                        'modifiers' => 'm-green'
+                    ])
+                </div>
+
+                <div class="r-flights__content-body">
+
+                    @include('component.comment.index', ['comments' => $comments])
+
+                    @include('component.content.forum.post',[
+                        'profile' => [
+                            'image' => \App\Image::getRandom(),
+                            'title' => 'Charles Darwin',
+                            'route' => ''
+                        ],
+                        'date' => '12. jaanuar, 12:31',
+                        'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p><p>Kuna mul oli plaanis arengumaades maapiirkondades kohalikke (arvatavasti) igasuguse litsentsita reisijuhte kasutada, näiteks kuskilt väikesest kohast ümberkaudsete külade üleöö külastamiseks ehk pikad jalgsimatkad mägistes piirkondades, oli tarvis, et juhul kui juhtub õnnetus, see ka korvatakse. Tegemist ei olnud siis spordiga, vaid lihtsalt keskmisest veidi koormavamate matkadega. Kokkuvõttes oli sel ajal vaid Ifil kindlustuses selline asi sees, sai ka kirjalikult üle küsitud (et oleks tõestusmaterjal hiljem!) ning teised firmad pakkusid seda lisakaitse all päris räiga lisahinnaga või ei võtnud üldse jutule, kui giidi litsentsi poleks ette näidata.</p>',
+                    ])
+
+                    @include('component.content.forum.post',[
+                        'profile' => [
+                            'image' => \App\Image::getRandom(),
+                            'title' => 'Charles Darwin',
+                            'route' => ''
+                        ],
+                        'date' => '12. jaanuar, 12:31',
+                        'text' => '<p>Tegemist ei olnud siis spordiga, vaid lihtsalt keskmisest veidi koormavamate matkadega. Kokkuvõttes oli sel ajal vaid Ifil kindlustuses selline asi sees, sai ka kirjalikult üle küsitud (et oleks tõestusmaterjal hiljem!) ning teised firmad pakkusid seda lisakaitse all päris räiga lisahinnaga või ei võtnud üldse jutule, kui giidi litsentsi poleks ette näidata.</p>',
+                    ])
+                </div>
+            </div>
+
+            @if (\Auth::check())
+
+            <div class="r-flights__content-block">
+
+                <div class="r-flights__content-block-inner">
+
+                    <div class="r-flights__content-title">
+
+                        @include('component.title', [
+                            'title' => 'Lisa kommentaar',
+                            'modifiers' => 'm-large m-green'
+                        ])
+                    </div>
+
+                    <div class="r-flights__content-body">
+
+                        @include('component.comment.create')
+                    </div>
+                </div>
+            </div>
+
+            @endif
+
         </div>
 
         <div class="r-flights__sidebar">
@@ -284,16 +436,22 @@
                         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
                         'links' => [
                             [
-                                'title' => 'Loe lähemalt Trip.ee-st ›',
-                                'route' => '#'
+                                'modifiers' => 'm-icon',
+                                'title' => 'Loe lähemalt Trip.ee-st',
+                                'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Trip.ee Facebookis ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Trip.ee Facebookis',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Trip.ee Twitteris ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Trip.ee Twitteris',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ]
                         ],
                         'button' => [

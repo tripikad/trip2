@@ -12,11 +12,9 @@ code: |
             [
                 'title' => 'Loe lähemalt Trip.ee-st ›',
                 'route' => '#',
+                'modifiers' => 'm-icon',
+                'icon' => 'icon-arrow-right'
             ],
-            [
-                'title' => 'Mis on veahind ›',
-                'route' => '#',
-            ]
         ],
         'button' => [
             'title' => 'Liitu Trip.ee-ga',
@@ -50,7 +48,8 @@ modifiers:
             @foreach ($links as $link)
 
                 @include('component.link', [
-                    'modifiers' => 'm-block',
+                    'modifiers' => $link['modifiers'],
+                    'icon' => $link['icon'],
                     'title' => $link['title'],
                     'route' => $link['route']
                 ])

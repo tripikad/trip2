@@ -46,15 +46,17 @@ code: |
                 'route' => '#',
                 'alt' => 'Pilt 8'
             ]
-        ]
+        ],
+        'more_count' => '120',
+        'more_route' => '#'
     ])
 
 --}}
 
 
-<div class="c-gallery">
+<div class="c-gallery m-8-cols">
 
-    <ul class="c-gallery__list m-8-cols">
+    <ul class="c-gallery__list">
 
         @foreach ($items as $item)
 
@@ -62,11 +64,22 @@ code: |
                 <a href="{{ $item['route'] }}" class="c-gallery__list-item-link">
                     <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
                 </a>
+
+                @if ($item == end($items))
+
+                    @if (isset($more_count) && isset($more_route))
+
+                        <a href="{{ $more_route }}" class="c-gallery__more">
+                            <span>+ {{ $more_count }}</span>
+                        </a>
+
+                    @endif
+
+                @endif
             </li>
 
         @endforeach
 
     </ul>
-
 </div>
 

@@ -32,12 +32,12 @@
 
             flex: 1 0 100%;
 
-            @include respond-to(tablet-portrait) {
+            @include respond-to(tablet) {
 
                 flex: 1 0 50%;
             }
 
-            @include respond-to(tablet) {
+            @include respond-to(desktop) {
 
                 flex: 1 0 33%;
             }

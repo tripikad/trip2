@@ -36,7 +36,11 @@ code: |
 
                 @include('component.profile', [
                     'modifiers' => 'm-mini',
-                    'image' => $item['profile']['image']
+                    'image' => $item['profile']['image'],
+                    'badge' => [
+                        'modifiers' => 'm-purple m-inverted',
+                        'count' => '7'
+                    ]
                 ])
 
             </div>

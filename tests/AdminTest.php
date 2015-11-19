@@ -72,7 +72,7 @@ class AdminTest extends TestCase
         $this->actingAs($user1)
             ->visit('admin/image')
             ->attach(storage_path().'/tests/test.jpg', 'image')
-            ->press(trans('admin.image.create.submit.title'))
+            ->press('Submit')
             ->seePageIs('admin/image');
 
         $filename = $this->getLatestImageFilename($user1->user_id);

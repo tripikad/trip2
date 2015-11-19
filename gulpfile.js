@@ -13,6 +13,7 @@ gulp.task('sass', function() {
         './node_modules/susy/sass/_susy.scss',
         './node_modules/breakpoint-sass/stylesheets/_breakpoint.scss',
         './node_modules/selectize/dist/css/selectize.css',
+        './node_modules/dropzone/dist/dropzone.css',
         './resources/assets/sass/base/_base.mixins.scss',
         './resources/assets/sass/base/_base.colors.scss',
         './resources/assets/sass/base/_base.layout.scss',
@@ -44,6 +45,7 @@ gulp.task('js', function() {
         './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
         './node_modules/selectize/dist/js/standalone/selectize.js',
         './node_modules/fastclick/lib/fastclick.js',
+        './node_modules/dropzone/dist/dropzone.js',
         './resources/assets/js/**/*.js'
     ])
     .pipe(concat('main.js'))

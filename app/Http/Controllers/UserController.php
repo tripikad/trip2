@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Image;
+use Hash;
 
 class UserController extends Controller
 {
@@ -93,15 +94,15 @@ class UserController extends Controller
 
         if ($request->get('image_submit')) {
             $this->validate($request, [
-                'file' => 'required|image',
+                'image' => 'required|image',
             ]);
 
             $filename = 'picture-'
                 .$user->id
                 .'.'
-                .$request->file('file')->getClientOriginalExtension();
+                .$request->file('image')->getClientOriginalExtension();
 
-            $filename = Image::storeImageFile($request->file('file'), $filename);
+            $filename = Image::storeImageFile($request->file('image'), $filename);
 
             $user->images()->delete();
             $user->images()->create(['filename' => $filename]);
@@ -115,13 +116,23 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:users,name,'.$user->id,
             'email' => 'required|unique:users,email,'.$user->id,
+            'password' => 'sometimes|confirmed|min:6',
+            'password_confirmation' => 'required_with:password|same:password',
             'contact_facebook' => 'url',
             'contact_twitter' => 'url',
             'contact_instagram' => 'url',
             'contact_homepage' => 'url',
         ]);
 
-        $user->update($request->all());
+        $fields = [
+            'password' => $user->password,
+        ];
+
+        if (trim($request->get('password'))) {
+            $fields['password'] = Hash::make($request->get('password'));
+        }
+
+        $user->update(array_merge($request->all(), $fields));
 
         return redirect()
             ->route('user.show', [$user])

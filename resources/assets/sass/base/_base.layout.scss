@@ -36,20 +36,20 @@ $susy: (
 
 			@if $value == 'narrow' {
 
-				padding: 0;
+				padding: 0 $spacer * 1.5;
 			} @else {
 
-				padding: 0 18px;
+				padding: 0 $spacer * 1.5;
 			}
 
 		@include respond-to(tablet-portrait) {
 
 			@if $value == 'narrow' {
 
-				padding: 0;
+				padding: 0 $spacer * 2;
 			} @else {
 
-				padding: 0 24px;
+				padding: 0 $spacer * 2;
 			}
 
 		}
@@ -61,7 +61,7 @@ $susy: (
 				padding: 0 span(2);
 			} @else {
 
-				padding: 0 12px;
+				padding: 0 $spacer;
 			}
 		}
 

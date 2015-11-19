@@ -87,7 +87,6 @@
 
 @stop
 
-
 @section('header1.right')
 
     @include('component.button', [
@@ -116,7 +115,6 @@
             ])
 
         </div>
-
     </div>
 
     <div class="r-flights__masthead">
@@ -125,31 +123,55 @@
             'modifiers' => 'm-alternative',
             'image' => \App\Image::getRandom()
         ])
-
     </div>
 
     <div class="r-flights__content-wrap">
 
         <div class="r-flights__content">
 
+            @include('component.row', [
+                'modifiers' => 'm-icon m-featured',
+                'icon' => 'icon-tickets',
+                'title' => 'Riiast Londonisse edasi-tagasi al. 46 €',
+                'route' => '',
+                'list' => [
+                    [
+                        'title' => 'Aasia'
+                    ],
+                    [
+                        'title' => '25.10.15'
+                    ],
+                    [
+                        'title' => '250€'
+                    ]
+                ],
+                'badge' => 'Väga hea hind veel ainult täna'
+            ])
+
             @foreach ($contents as $index => $content)
 
                 @include('component.row', [
-                    'modifiers' => 'm-icon m-blue',
-                    'icon' => 'icon-offer',
+                    'modifiers' => 'm-icon',
+                    'icon' => 'icon-tickets',
                     'title' => $content->title,
                     'route' => route('content.show', [
                         'type' => $content->type,
                         'id' => $content
                     ]),
-                    'text' => view('component.date.short', [
-                        'date' => $content->end_at
-                    ]),
-                    'extra' => $content->price
-                        ? trans("content.flight.index.field.price", [
-                            'price' => $content->price,
-                            'symbol' => config('site.currency.symbol')
-                    ]) : null,
+                    'list' => [
+                        [
+                            'title' => view('component.date.short', [
+                                'date' => $content->end_at
+                            ]),
+                        ],
+                        [
+                            'title' => $content->price
+                                ? trans("content.flight.index.field.price", [
+                                    'price' => $content->price,
+                                    'symbol' => config('site.currency.symbol')
+                            ]) : null
+                        ],
+                    ]
                 ])
 
             @endforeach
@@ -178,93 +200,95 @@
 
             </ul>
 
+            <div class="r-flights__content-block">
 
-            <div class="r-flights__search">
+                <div class="r-flights__content-block-inner">
 
-                <div class="r-flights__search-title">
+                    <div class="r-flights__content-title">
 
-                    @include('component.title', [
-                        'title' => 'Otsi lende',
-                        'modifiers' => 'm-large m-green'
-                    ])
-
-                </div>
-
-                <div class="r-flights__search-body">
-
-                    <p>Kui ei leidnud sobivat pakkumist, siis leia endale meelepärane lend siit.</p>
-
-                </div>
-
-                <form action="#" class="r-flights__search-form">
-
-                    <div class="c-columns m-2-cols m-space m-center">
-
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <input type="text" class="c-form__input" placeholder="Alguspunkt">
-                            </div>
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <input type="text" class="c-form__input" placeholder="Sihtpunkt">
-                            </div>
-                        </div>
+                        @include('component.title', [
+                            'title' => 'Otsi lende',
+                            'modifiers' => 'm-large m-green'
+                        ])
                     </div>
 
-                    <div class="c-columns m-4-cols m-space m-center">
+                    <div class="r-flights__content-body">
 
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <div class="c-form__input-wrap">
-                                    <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-right'])</span>
-                                    <input type="date" class="c-form__input m-small m-icon" placeholder="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <div class="c-form__input-wrap">
-                                    <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-left'])</span>
-                                    <input type="date" class="c-form__input m-small m-icon" placeholder="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <div class="c-form__input-wrap">
-
-                                    <select name="" id="" class="c-form__input m-small">
-                                        <option value="">1 reisija</option>
-                                        <option value="">2 reisija</option>
-                                        <option value="">3 reisija</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            <div class="c-form__group">
-
-                                <input type="submit" class="c-button m-small m-block" value="Otsi">
-                            </div>
-                        </div>
+                        @include('component.text', [
+                            'text' => '<p>Kui ei leidnud sobivat pakkumist, siis leia endale meelepärane lend siit.</p>'
+                        ])
                     </div>
-                </form>
+
+                    <form action="#">
+
+                        <div class="c-columns m-2-cols m-space m-center">
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <input type="text" class="c-form__input" placeholder="Alguspunkt">
+                                </div>
+                            </div>
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <input type="text" class="c-form__input" placeholder="Sihtpunkt">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="c-columns m-4-cols m-space m-center">
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <div class="c-form__input-wrap">
+                                        <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-right'])</span>
+                                        <input type="date" class="c-form__input m-small m-icon" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <div class="c-form__input-wrap">
+                                        <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-left'])</span>
+                                        <input type="date" class="c-form__input m-small m-icon" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <div class="c-form__input-wrap">
+
+                                        <select name="" id="" class="c-form__input m-small">
+                                            <option value="">1 reisija</option>
+                                            <option value="">2 reisija</option>
+                                            <option value="">3 reisija</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="c-columns__item">
+
+                                <div class="c-form__group">
+
+                                    <input type="submit" class="c-button m-small m-block" value="Otsi">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -279,12 +303,16 @@
                         'text' => 'Pakkumised võivad aeguda juba paari päevaga. Paremaks orienteerumiseks on vanemad pakkumised eri värvi.',
                         'links' => [
                             [
-                                'title' => 'Loe lähemalt Trip.ee-st ›',
-                                'route' => '#'
+                                'modifiers' => 'm-icon',
+                                'title' => 'Loe lähemalt Trip.ee-st',
+                                'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Mis on veahind ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Mis on veahind',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ]
                         ]
                     ])
@@ -318,16 +346,22 @@
                         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
                         'links' => [
                             [
-                                'title' => 'Loe lähemalt Trip.ee-st ›',
-                                'route' => '#'
+                                'modifiers' => 'm-icon',
+                                'title' => 'Loe lähemalt Trip.ee-st',
+                                'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Trip.ee Facebookis ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Trip.ee Facebookis',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ],
                             [
-                                'title' => 'Trip.ee Twitteris ›',
+                                'modifiers' => 'm-icon',
+                                'title' => 'Trip.ee Twitteris',
                                 'route' => '#',
+                                'icon' => 'icon-arrow-right'
                             ]
                         ],
                         'button' => [
@@ -486,7 +520,6 @@
                                     'route' => ''
                                 ]
                             ]
-
                         ]
                     ]
                 ])

@@ -15,6 +15,11 @@
 
         margin-bottom: $spacer;
 
+        .c-list.m-medium & {
+
+            margin-bottom: $spacer * 1.5;
+        }
+
         .c-list.m-large & {
 
             margin-bottom: $spacer * 2;
@@ -54,6 +59,15 @@
             font-size: $font-size-normal;
             line-height: 1.5;
 
+            .c-list.m-medium & {
+
+                @include font-smoothing;
+
+                font-size: $font-size-medium;
+                font-weight: $font-weight-bold;
+                line-height: 1.15;
+            }
+
             .c-list.m-large & {
 
                 @include font-smoothing;
@@ -69,12 +83,36 @@
             }
         }
 
+            .c-list__item-icon {
+
+                display: inline-block;
+                margin-right: $spacer / 2;
+                height: $spacer * 1.5;
+                width: $spacer * 1.5;
+
+                svg {
+
+                    height: 100%;
+                    width: 100%;
+
+                    .c-list.m-default & {
+
+                        fill: $color-text-link;
+                    }
+                }
+            }
+
             .c-list__item-title-link {
 
                 @include color-modifiers-and(color);
 
                 color: $color-text-link;
                 text-decoration: none;
+
+                .c-list.m-default & {
+
+                    color: $color-text-link;
+                }
 
                 .c-list.m-dot & {
 

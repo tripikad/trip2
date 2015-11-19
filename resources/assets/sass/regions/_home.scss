@@ -18,6 +18,7 @@
             .r-home__destinations-action {
 
                 padding: 24px 0;
+                text-align: right;
             }
 
     .r-home__about {}
@@ -102,6 +103,11 @@
                 }
             }
 
+            .r-home__news-footer {
+
+                text-align: right;
+            }
+
             .r-home__news-column {
 
                 &.m-first {
@@ -163,6 +169,17 @@
                         }
                     }
 
+    .r-home__featured-news {
+
+        padding: 48px 0 0;
+        background: $color-fill-neutral-light;
+    }
+
+        .r-home__featured-news-wrap {
+
+            @include wrap('narrow');
+        }
+
     .r-home__travel {
 
         background: $color-fill-neutral-light;
@@ -211,6 +228,11 @@
                     }
                 }
             }
+
+                .r-home__travel-column-footer {
+
+                    text-align: right;
+                }
 
     .r-home__gallery {
 
