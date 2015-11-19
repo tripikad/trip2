@@ -52,7 +52,7 @@ class FrontpageController extends Controller
             ],
             'content' => [
                 'take' => 1,
-                'id' => 1534,
+                'id' => 0,
                 'status' => 1,
             ],
             'forums' => [
@@ -147,7 +147,6 @@ class FrontpageController extends Controller
             } else {
                 $content_query = $content_query->union($query);
             }
-
         }
 
         $content_query = $content_query->get();

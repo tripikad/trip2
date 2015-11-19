@@ -81,7 +81,7 @@
 
         @endif
 
-        @if(isset($content) && !empty($content))
+        @if(isset($content) && !empty($content->first()))
 
             <div class="r-home__about">
 
