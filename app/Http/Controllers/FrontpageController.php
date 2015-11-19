@@ -37,7 +37,7 @@ class FrontpageController extends Controller
 
         $types = [
             'flights1' => [
-                'skip' => NULL,
+                'skip' => null,
                 'take' => 3,
                 'type' => ['flight'],
                 'status' => 1,
@@ -52,19 +52,18 @@ class FrontpageController extends Controller
             ],
             'content' => [
                 'take' => 1,
-                'type' => ['content'],
                 'id' => 1534,
                 'status' => 1,
             ],
             'forums' => [
-                'skip' => NULL,
+                'skip' => null,
                 'take' => 5,
                 'type' => ['forum', 'buysell', 'expat'],
                 'status' => 1,
                 'latest' => true,
             ],
             'news1' => [
-                'skip' => NULL,
+                'skip' => null,
                 'take' => 2,
                 'type' => ['news'],
                 'status' => 1,
@@ -78,21 +77,21 @@ class FrontpageController extends Controller
                 'latest' => true,
             ],
             'blogs' => [
-                'skip' => NULL,
+                'skip' => null,
                 'take' => 1,
                 'type' => ['blog'],
                 'status' => 1,
                 'latest' => true,
             ],
             'photos' => [
-                'skip' => NULL,
+                'skip' => null,
                 'take' => 8,
                 'type' => ['photo'],
                 'status' => 1,
                 'latest' => true,
             ],
             'travelmates' => [
-                'skip' => NULL,
+                'skip' => null,
                 'take' => 4,
                 'type' => ['travelmate'],
                 'status' => 1,
@@ -117,28 +116,28 @@ class FrontpageController extends Controller
 
     public function getCollections($types)
     {
-        $content_query = NULL;
+        $content_query = null;
         $i = 0;
 
         foreach ($types as $key => $type) {
             ++$i;
 
-            $query = NULL;
+            $query = null;
 
             if (isset($type['id'])) {
-                $query = Content::select(['*', DB::raw('REPEAT(\'' . $key . '\',1) AS `index`')])->where('id', $type['id'])->whereStatus($type['status']);
+                $query = Content::select(['*', DB::raw('REPEAT(\''.$key.'\',1) AS `index`')])->where('id', $type['id'])->whereStatus($type['status']);
             } else {
-                $query = Content::select(['*', DB::raw('REPEAT(\'' . $key . '\',1) AS `index`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
+                $query = Content::select(['*', DB::raw('REPEAT(\''.$key.'\',1) AS `index`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
 
-                if (isset($type['latest']) && $type['latest'] !== NULL) {
+                if (isset($type['latest']) && $type['latest'] !== null) {
                     $query = $query->latest();
                 }
 
-                if (isset($type['skip']) && $type['skip'] !== NULL) {
+                if (isset($type['skip']) && $type['skip'] !== null) {
                     $query = $query->skip($type['skip']);
                 }
 
-                if (isset($type['take']) && $type['take'] !== NULL) {
+                if (isset($type['take']) && $type['take'] !== null) {
                     $query = $query->take($type['take']);
                 }
             }
