@@ -7,6 +7,8 @@ use View;
 use Cache;
 use App\Content;
 use App\Destination;
+use Illuminate\Support\Collection;
+use DB;
 
 class FrontpageController extends Controller
 {
@@ -33,59 +35,72 @@ class FrontpageController extends Controller
                 ->get();
         }
 
-        $take = [
-            'flights1' => 3,
-            'flights2' => 5,
-            'content' => 1,
-            'forums' => 5,
-            'news1' => 2,
-            'news2' => 5,
-            'blogs' => 1,
-            'photos' => 8,
-            'travelmates' => 4,
+        $types = [
+            'flights1' => [
+                'skip' => NULL,
+                'take' => 3,
+                'type' => ['flight'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'flights2' => [
+                'skip' => 3,
+                'take' => 5,
+                'type' => ['flight'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'content' => [
+                'take' => 1,
+                'type' => ['content'],
+                'id' => 1534,
+                'status' => 1,
+            ],
+            'forums' => [
+                'skip' => NULL,
+                'take' => 5,
+                'type' => ['forum', 'buysell', 'expat'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'news1' => [
+                'skip' => NULL,
+                'take' => 2,
+                'type' => ['news'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'news2' => [
+                'skip' => 2,
+                'take' => 5,
+                'type' => ['news'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'blogs' => [
+                'skip' => NULL,
+                'take' => 1,
+                'type' => ['blog'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'photos' => [
+                'skip' => NULL,
+                'take' => 8,
+                'type' => ['photo'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'travelmates' => [
+                'skip' => NULL,
+                'take' => 4,
+                'type' => ['travelmate'],
+                'status' => 1,
+                'latest' => true,
+            ],
         ];
 
-        $collection['content'] = Content::whereType('flight')->whereStatus(1)->latest()
-            ->take($take['flights1'])
-            ->union(Content::whereType('flight')->whereStatus(1)->latest()
-                ->skip($take['flights1'])
-                ->take($take['flights2']))
-            ->union(Content::where('id', 1534))
-            ->union(Content::whereIn('type', ['forum', 'buysell', 'expat'])->whereStatus(1)->latest()
-                ->take($take['forums']))
-            ->union(Content::whereType('news')->whereStatus(1)->latest()
-                ->take($take['news1']))
-            ->union(Content::whereType('news')->whereStatus(1)->latest()
-                ->skip($take['news1'])
-                ->take($take['news2']))
-            ->union(Content::whereType('blog')->whereStatus(1)->latest()
-                ->take($take['blogs']))
-            ->union(Content::whereType('photo')->whereStatus(1)->latest()
-                ->take($take['photos']))
-            ->union(Content::whereType('travelmate')->whereStatus(1)->latest()
-                ->take($take['travelmates']))
-            ->get();
-
-        $i = 0;
-        $index = 0;
-        $previous_value = 0;
-        $viewVariables = [];
-
-        foreach ($take as $key => $value) {
-            ++$i;
-
-            if ($i == 1) {
-                $index = 0;
-            } else {
-                $index += $previous_value;
-            }
-
-            $$key = collect($collection['content']->slice($index, $value)->all());
-
-            $viewVariables[$key] = $$key;
-
-            $previous_value = $value;
-        }
+        $viewVariables = $this->getCollections($types);
 
         $viewVariables['destinations'] = $destinations;
 
@@ -98,5 +113,54 @@ class FrontpageController extends Controller
     {
         return redirect()
             ->route('destination.index', [$request->destination]);
+    }
+
+    public function getCollections($types)
+    {
+        $content_query = NULL;
+        $i = 0;
+
+        foreach ($types as $key => $type) {
+            ++$i;
+
+            $query = NULL;
+
+            if (isset($type['id'])) {
+                $query = Content::select(['*', DB::raw('REPEAT(\'' . $key . '\',1) AS `index`')])->where('id', $type['id'])->whereStatus($type['status']);
+            } else {
+                $query = Content::select(['*', DB::raw('REPEAT(\'' . $key . '\',1) AS `index`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
+
+                if (isset($type['latest']) && $type['latest'] !== NULL) {
+                    $query = $query->latest();
+                }
+
+                if (isset($type['skip']) && $type['skip'] !== NULL) {
+                    $query = $query->skip($type['skip']);
+                }
+
+                if (isset($type['take']) && $type['take'] !== NULL) {
+                    $query = $query->take($type['take']);
+                }
+            }
+
+            if ($i == 1) {
+                $content_query = $query;
+            } else {
+                $content_query = $content_query->union($query);
+            }
+
+        }
+
+        $content_query = $content_query->get();
+
+        $viewVariables = [];
+
+        foreach ($types as $key => $type) {
+            $$key = Collection::make($content_query->where('index', $key)->values()->all());
+
+            $viewVariables[$key] = $$key;
+        }
+
+        return $viewVariables;
     }
 }
