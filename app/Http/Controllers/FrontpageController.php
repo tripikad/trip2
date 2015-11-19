@@ -33,46 +33,64 @@ class FrontpageController extends Controller
                 ->get();
         }
 
-        // Latest flights view
-        $flights1 = Content::whereType('flight')->whereStatus(1)->latest()->take(3)->get();
+        $take = [
+            'flights1' => 3,
+            'flights2' => 5,
+            'content' => 1,
+            'forums' => 5,
+            'news1' => 2,
+            'news2' => 5,
+            'blogs' => 1,
+            'photos' => 8,
+            'travelmates' => 4,
+        ];
 
-        // About us
-        $content = Content::where('id', 1534)->first();
+        $collection['content'] = Content::whereType('flight')->whereStatus(1)->latest()
+            ->take($take['flights1'])
+            ->union(Content::whereType('flight')->whereStatus(1)->latest()
+                ->skip($take['flights1'])
+                ->take($take['flights2']))
+            ->union(Content::where('id', 1534))
+            ->union(Content::whereIn('type', ['forum', 'buysell', 'expat'])->whereStatus(1)->latest()
+                ->take($take['forums']))
+            ->union(Content::whereType('news')->whereStatus(1)->latest()
+                ->take($take['news1']))
+            ->union(Content::whereType('news')->whereStatus(1)->latest()
+                ->skip($take['news1'])
+                ->take($take['news2']))
+            ->union(Content::whereType('blog')->whereStatus(1)->latest()
+                ->take($take['blogs']))
+            ->union(Content::whereType('photo')->whereStatus(1)->latest()
+                ->take($take['photos']))
+            ->union(Content::whereType('travelmate')->whereStatus(1)->latest()
+                ->take($take['travelmates']))
+            ->get();
 
-        // Latest forum posts
-        $forums = Content::whereIn('type', ['forum', 'buysell', 'expat'])->whereStatus(1)->latest()->take(5)->get();
+        $i = 0;
+        $index = 0;
+        $previous_value = 0;
+        $viewVariables = [];
 
-        // Latest news posts
-        $news1 = Content::whereType('news')->whereStatus(1)->latest()->take(2)->get();
+        foreach($take as $key => $value) {
+            ++$i;
 
-        // Latest news posts
-        $news2 = Content::whereType('news')->whereStatus(1)->latest()->skip(2)->take(5)->get();
+            if($i == 1)
+                $index = 0;
+            else
+                $index += $previous_value;
 
-        // Latest flight offers
-        $flights2 = Content::whereType('flight')->whereStatus(1)->latest()->skip(3)->take(5)->get();
+            $$key = collect($collection['content']->slice($index, $value)->all());
 
-        // Latest travel letter from blog
-        $blogs = Content::whereType('blog')->whereStatus(1)->latest()->take(1)->get();
+            $viewVariables[$key] = $$key;
 
-        // Latest gallery posts
-        $photos = Content::whereType('photo')->whereStatus(1)->latest()->take(8)->get();
+            $previous_value = $value;
+        }
 
-        // Latest travel mates
-        $travelmates = Content::whereType('travelmate')->whereStatus(1)->latest()->take(4)->get();
+        $viewVariables['destinations'] = $destinations;
 
-        return response()->view('pages.frontpage.index', [
-            'destinations' => $destinations,
-            'features' => $features,
-            'flights1' => $flights1,
-            'flights2' => $flights2,
-            'content' => $content,
-            'forums' => $forums,
-            'news1' => $news1,
-            'news2' => $news2,
-            'blogs' => $blogs,
-            'photos' => $photos,
-            'travelmates' => $travelmates,
-        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.frontpage'));
+        return response()
+            ->view('pages.frontpage.index', $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('site.cache.frontpage'));
     }
 
     public function search(Request $request)
