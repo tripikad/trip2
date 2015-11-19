@@ -71,13 +71,14 @@ class FrontpageController extends Controller
         $previous_value = 0;
         $viewVariables = [];
 
-        foreach($take as $key => $value) {
+        foreach ($take as $key => $value) {
             ++$i;
 
-            if($i == 1)
+            if ($i == 1) {
                 $index = 0;
-            else
+            } else {
                 $index += $previous_value;
+            }
 
             $$key = collect($collection['content']->slice($index, $value)->all());
 
