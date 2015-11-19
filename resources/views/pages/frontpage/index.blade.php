@@ -81,7 +81,7 @@
 
         @endif
 
-        @if(isset($content) && !empty($content))
+        @if(isset($content) && !empty($content->first()))
 
             <div class="r-home__about">
 
@@ -89,12 +89,12 @@
 
                     @include('component.about', [
                         'modifiers' => 'm-wide',
-                        'title' => str_limit($content->body, 300),
+                        'title' => str_limit($content->first()->body, 300),
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
                                 'title' => trans('frontpage.index.about.title'),
-                                'route' => route('content.show', [$content->type, $content]),
+                                'route' => route('content.show', [$content->first()->type, $content->first()]),
                                 'icon' => 'icon-arrow-right'
                             ]
                         ],
