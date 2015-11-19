@@ -1,0 +1,37 @@
+.c-destination-helper {
+
+    @include color-modifiers(background);
+}
+
+    .c-destination-helper__header {
+
+        padding: $spacer * 3 $spacer * 2 $spacer * 2;
+    }
+
+        .c-destination-helper__title {
+
+            @include font-smoothing;
+
+            color: $color-white;
+            font-size: $font-size-medium * 2;
+            font-weight: $font-weight-bold;
+        }
+
+            .c-destination-helper__subtitle {
+
+                @include color-modifiers-dark-and(color);
+
+                font-size: $font-size-large;
+                margin-left: $spacer;
+            }
+
+    .c-destination-helper__content {
+
+        padding: $spacer * 3 $spacer * 2 $spacer * 2;
+        background: $color-fill-neutral-light;
+    }
+
+        .c-destination-helper__actions {
+
+            text-align: right;
+        }

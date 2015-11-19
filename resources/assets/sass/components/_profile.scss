@@ -14,6 +14,12 @@
 
         display: block;
     }
+
+    &.m-full {
+
+        height: 100%;
+        width: 100%;
+    }
 }
 
     .c-profile__image-wrap {
@@ -37,6 +43,17 @@
             display: inline-block;
             width: $spacer * 2;
         }
+
+        .c-profile.m-full & {
+
+            @include color-modifiers-dark-and(background);
+
+            display: block;
+            flex: none;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
     }
 
         .c-profile__image {
@@ -58,6 +75,12 @@
                 height: $spacer * 2;
                 width: $spacer * 2;
             }
+
+            .c-profile.m-full & {
+
+                width: 100%;
+                height: 100%;
+            }
         }
 
         .c-profile__badge {
@@ -71,12 +94,25 @@
 
                 display: block;
             }
+
+            .c-profile.m-full & {
+
+                display: none;
+            }
         }
 
     .c-profile__info {
 
+        flex: 1;
+
+        .c-profile.m-center & {
+
+            flex: inherit;
+        }
+
         .c-profile.m-mini &,
-        .c-profile.m-micro & {
+        .c-profile.m-micro &,
+        .c-profile.m-full & {
 
             display: none;
         }
@@ -108,7 +144,8 @@
 
             .c-profile.m-mini &,
             .c-profile.m-small &,
-            .c-profile.m-micro & {
+            .c-profile.m-micro &,
+            .c-profile.m-full & {
 
                 display: none;
             }

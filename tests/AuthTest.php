@@ -86,7 +86,10 @@ class AuthTest extends TestCase
             ->notSeeInDatabase('password_resets', [
                 'email' => $user->email,
                 'token' => $token,
-            ]);
+            ])
+            ->seeLink($user->name, 'user/'.$user->id)
+            ->visit('/user/'.$user->id)
+            ->seeLink(trans('user.edit.title'), 'user/'.$user->id.'/edit');
     }
 
     public function test_nonregistered_user_can_not_reset_password()

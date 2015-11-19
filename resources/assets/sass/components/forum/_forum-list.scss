@@ -55,6 +55,11 @@
                 color: inherit;
                 text-decoration: underline;
             }
+
+            .c-forum-list.m-compact & {
+
+                flex: none;
+            }
         }
 
         .c-forum-list__item-content {
@@ -108,3 +113,16 @@
                 display: none;
             }
         }
+
+        .c-forum-list__sublist {
+
+            @include clearfix;
+            @include clear-list;
+
+            width: 100%;
+        }
+
+            .c-forum-list__sublist-item {
+
+                padding: $spacer * 2 $spacer * 4;
+            }

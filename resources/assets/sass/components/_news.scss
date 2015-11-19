@@ -6,6 +6,11 @@
 
         margin-bottom: $spacer * 4;
     }
+
+    &.m-smaller {
+
+        display: flex;
+    }
 }
 
     .c-news__image-wrap {
@@ -19,6 +24,12 @@
         .c-news.m-small & {
 
             height: $spacer * 12;
+        }
+
+        .c-news.m-smaller & {
+
+            flex: 0 1 $spacer * 12;
+            height: $spacer * 7.5;
         }
     }
 
@@ -45,6 +56,13 @@
         .c-news.m-small & {
 
             font-size: $font-size-large;
+        }
+
+        .c-news.m-smaller & {
+
+            font-size: $font-size-medium;
+            flex: 2;
+            padding: 0 $spacer * 1.5;
         }
     }
 

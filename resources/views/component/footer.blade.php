@@ -25,7 +25,16 @@ modifiers:
 
         <nav class="c-footer__nav">
 
-            <a href="#" class="c-footer__nav-logo">Trip.ee</a>
+            <div class="c-footer__nav-logo-wrap">
+
+                <a href="/" class="c-footer__nav-logo">
+                    @if (isset($image))
+                        <img src="/svg/tripee_logo_plain.svg" alt="">
+                    @else
+                        <img src="/svg/tripee_logo_plain_dark.svg" alt="">
+                    @endif
+                </a>
+            </div>
 
             @include('component.footer.nav', [
                 'menu' => 'footer',

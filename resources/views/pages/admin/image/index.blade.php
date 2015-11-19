@@ -17,7 +17,15 @@
 
 @section('header1.right')
 
-    @include('component.image.create')
+    @include('component.image.form', [
+        'form' => [
+            'url' => route('admin.image.store'),
+            'files' => true
+        ],
+        'name' => 'image',
+        'maxFileSize' => 5,
+        'uploadMultiple' => false
+    ])
 
 @stop
 
@@ -37,7 +45,7 @@
                 <div class="form-group">
 
                 {!! Form::text('id', "[[$image->id]]", [
-                    'class' => 'form-control input-md',
+                    'class' => 'c-form__input js-autoselect',
                 ]) !!}
 
                 </div>
@@ -55,4 +63,3 @@
     {!! $images->render() !!}
 
 @stop
-

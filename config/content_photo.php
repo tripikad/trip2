@@ -40,6 +40,17 @@ return [
         'validate' => [
 
             'title' => 'required',
+            'file' => 'sometimes|required|image',
+
+        ],
+
+    ],
+
+    'add' => [
+
+        'validate' => [
+
+            'title' => 'required',
             'file' => 'required|image',
 
         ],

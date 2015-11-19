@@ -44,7 +44,6 @@
         svg {
 
             fill: $color-white;
-
             margin: $spacer / 4;
             width: $spacer * 1.5;
             height: $spacer * 1.5;
@@ -58,9 +57,15 @@
 
             .c-search.m-small & {
 
+                fill: $color-text-link;
                 margin: $spacer / 4;
                 width: $spacer * 1.5;
                 height: $spacer * 1.5;
+            }
+
+            .c-search.m-small.m-alternative & {
+
+                fill: $color-white;
             }
         }
 
@@ -104,6 +109,22 @@
         &::-webkit-input-placeholder {
 
             color: $color-white;
+        }
+
+        .c-search.m-small & {
+
+            &::-webkit-input-placeholder {
+
+                color: $color-text-link;
+            }
+        }
+
+        .c-search.m-small.m-alternative & {
+
+            &::-webkit-input-placeholder {
+
+                color: $color-white;
+            }
         }
 
         .c-search.m-active & {

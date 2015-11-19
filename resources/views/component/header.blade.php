@@ -2,10 +2,21 @@
 
     <div class="c-header__search">
 
-        @include('component.search',[
-        	'modifiers' => 'm-small m-red',
-        	'placeholder' => 'Search'
-        ])
+        @if (isset($modifiers) && $modifiers === 'm-alternative')
+
+            @include('component.search',[
+            	'modifiers' => 'm-small m-red m-alternative',
+            	'placeholder' => 'Search'
+            ])
+
+        @else
+
+            @include('component.search',[
+                'modifiers' => 'm-small m-red',
+                'placeholder' => 'Search'
+            ])
+
+        @endif
 
     </div>
 
@@ -14,12 +25,14 @@
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
             @include('component.navbar',[
-                'modifiers' => 'm-alternative'
+                'modifiers' => 'm-alternative m-purple'
             ])
 
         @else
 
-            @include('component.navbar')
+            @include('component.navbar',[
+                'modifiers' => 'm-blue'
+            ])
 
         @endif
 

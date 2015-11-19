@@ -24,6 +24,22 @@ code: |
                         'modifiers' => 'm-green',
                         'route' => ''
                     ]
+                ],
+                'children' => [
+                    [
+                        'profile' => [
+                            'modifiers' => 'm-mini',
+                            'image' => \App\Image::getRandom(),
+                            'title' => 'Charles Darwin',
+                            'route' => ''
+                        ],
+                        'date' => '12. jaanuar, 12:31',
+                        'text' => 'Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi.',
+                        'more' => [
+                            'title' => 'Vaata kogu postitust',
+                            'route' => ''
+                        ]
+                    ]
                 ]
             ]
         ]
@@ -84,10 +100,41 @@ modifiers:
                     <div class="c-forum-list__item-tags">
 
                         @include('component.tags', [
+                            'modifiers' => 'm-small',
                             'items' => $item['tags']
                         ])
 
                     </div>
+
+                @endif
+
+                @if(isset($item['children']))
+
+                    <ul class="c-forum-list__sublist">
+
+                    @foreach ($item['children'] as $child)
+
+                        <li class="c-forum-list__sublist-item">
+
+                            @include('component.content.forum.post',[
+                                'profile' => [
+                                    'image' => $child['profile']['image'],
+                                    'title' => $child['profile']['title'],
+                                    'route' => $child['profile']['route']
+                                ],
+                                'date' => $child['date'],
+                                'text' => $child['text'],
+                                'more' => [
+                                    'title' => $child['more']['title'],
+                                    'route' => $child['more']['route']
+                                ]
+                            ])
+
+                        </li>
+
+                    @endforeach
+
+                    </ul>
 
                 @endif
 

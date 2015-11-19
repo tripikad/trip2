@@ -12,11 +12,30 @@ code: |
 
 modifiers:
 
-- m-block
 - m-secondary
+- m-tertiary
+- m-block
+- m-secondary m-block
+- m-tertiary m-block
+- m-small
 - m-large
 - m-loading
+- m-shadow m-secondary
+- m-border
+- m-round
 
 --}}
 
-<a href="{{ $route }}" class="c-button {{ $modifiers or '' }}">{{ $title }}</a>
+<a href="{{ $route }}" class="c-button {{ $modifiers or '' }}">
+    @if (isset($title))
+
+    {{ $title }}
+
+    @endif
+
+    @if (isset($icon) && !isset($title))
+
+    {!! $icon !!}
+
+    @endif
+</a>

@@ -14,12 +14,37 @@
                 'items' => [
                     'user' => [
                         'route' => route('user.show', [auth()->user()]),
-                        'title' =>  auth()->user()->name
+                        'title' =>  auth()->user()->name,
+                        'children' => [
+                            [
+                                'title' => trans('menu.user.profile'),
+                                'route' => route('user.show', [auth()->user()]),
+                            ],
+                            [
+                                'title' => trans('menu.user.message'),
+                                'route' => route('message.index', [auth()->user()]),
+                                'badge' => [
+                                    'modifiers' => 'm-purple',
+                                    'count' => auth()->user()->unreadMessagesCount()
+                                ]
+                            ],
+                            [
+                                'title' => trans('menu.user.edit.profile'),
+                                'route' => route('user.edit', [auth()->user()]),
+                            ],
+                            [
+                                'title' => trans('menu.auth.logout'),
+                                'route' => route('login.logout'),
+                            ],
+                        ]
                     ],
-                    'logout' => [
-                        'route' => route('login.logout'),
-                    ],
-
+                    'second' => [
+                        'title' => '',
+                        'route' => route('user.show', [auth()->user()]),
+                        'profile' => [
+                            'image' => auth()->user()->imagePreset(),
+                        ],
+                    ]
                 ],
             ])
 
@@ -30,15 +55,41 @@
                 'items' => [
                     'user' => [
                         'route' => route('user.show', [auth()->user()]),
-                        'title' =>  auth()->user()->name
+                        'title' =>  auth()->user()->name,
+                        'children' => [
+                            [
+                                'title' => trans('menu.user.profile'),
+                                'route' => route('user.show', [auth()->user()]),
+                            ],
+                            [
+                                'title' => trans('menu.user.message'),
+                                'route' => route('message.index', [auth()->user()]),
+                                'badge' => [
+                                    'modifiers' => 'm-blue',
+                                    'count' => auth()->user()->unreadMessagesCount()
+                                ]
+                            ],
+                            [
+                                'title' => trans('menu.user.edit.profile'),
+                                'route' => route('user.edit', [auth()->user()]),
+                            ],
+                            [
+                                'title' => trans('menu.auth.admin'),
+                                'route' => route('content.index', ['internal'])
+                            ],
+                            [
+                                'title' => trans('menu.auth.logout'),
+                                'route' => route('login.logout'),
+                            ],
+                        ]
                     ],
-                    'admin' => [
-                        'route' => route('content.index', ['internal'])
-                    ],
-                    'logout' => [
-                        'route' => route('login.logout'),
-                    ],
-
+                    'second' => [
+                        'title' => '',
+                        'route' => route('user.show', [auth()->user()]),
+                        'profile' => [
+                            'image' => auth()->user()->imagePreset(),
+                        ],
+                    ]
                 ],
             ])
 
@@ -61,4 +112,3 @@
     </ul>
 
 </nav>
-

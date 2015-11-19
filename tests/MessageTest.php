@@ -43,7 +43,7 @@ class MessageTest extends TestCase
 
         $this->actingAs($user3)
             ->visit("user/$user1->id")
-            ->dontSeeLink(trans('menu.user.message'));
+            ->dontSeeLink(trans('menu.user.message'), 'user/'.$user1->id.'/messages');
 
         // Return 401
 

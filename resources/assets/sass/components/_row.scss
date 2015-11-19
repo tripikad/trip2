@@ -2,6 +2,13 @@
 
     margin-bottom: $spacer;
 
+    &.m-image {
+
+        position: relative;
+        padding-left: $spacer * 6;
+        margin-bottom: $spacer * 2;
+    }
+
     &.m-icon {
 
         position: relative;
@@ -12,6 +19,13 @@
     &.m-large {
 
         margin-bottom: $spacer * 2;
+    }
+
+    &.m-featured {
+
+        padding-bottom: $spacer * 2;
+        margin-bottom: $spacer * 3;
+        border-bottom: 2px solid $color-fill-neutral;
     }
 }
 
@@ -24,13 +38,35 @@
         width: $spacer * 4;
         height: $spacer * 4;
 
+        .c-row.m-featured & {
+
+            width: $spacer * 5;
+            height: $spacer * 5;
+        }
+
         svg {
 
             @include color-modifiers-and(fill);
 
+            fill: $color-text-link;
             height: 100%;
             width: 100%;
+
+            .c-row.m-featured & {
+
+                fill: $brand-green;
+            }
         }
+    }
+
+    .c-row__image {
+
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        width: $spacer * 4;
+        height: $spacer * 4;
     }
 
     .c-row__title {
@@ -38,11 +74,12 @@
         font-size: $font-size-normal;
         line-height: 1.5;
 
-        .c-row.m-icon & {
+        .c-row.m-icon &,
+        .c-row.m-image & {
 
             @include font-smoothing;
 
-            font-size: $font-size-larger;
+            font-size: $font-size-larger - 2;
             font-weight: $font-weight-bold;
             line-height: 1.15;
         }
@@ -50,6 +87,13 @@
         .c-row.m-large & {
 
             @include font-smoothing;
+
+            font-size: $font-size-larger - 2;
+            font-weight: $font-weight-bold;
+            line-height: 1.15;
+        }
+
+        .c-row.m-featured & {
 
             font-size: $font-size-larger;
             font-weight: $font-weight-bold;
@@ -68,14 +112,20 @@
 
                 text-decoration: underline;
             }
+
+            .c-row.m-featured & {
+
+                color: $brand-green;
+            }
         }
 
     .c-row__text {
 
-        color: $color-text-neutral-dark;
+        color: $color-text-neutral-darker;
         font-size: $font-size-small;
 
-        .c-row.m-icon & {
+        .c-row.m-icon &,
+        .c-row.m-image & {
 
             font-size: $font-size-normal;
             margin-top: $spacer * 0.75;
@@ -87,3 +137,14 @@
             margin-top: $spacer * 0.75;
         }
     }
+
+        .c-row__list {
+
+            display: inline-block;
+            margin-right: $spacer;
+        }
+
+        .c-row__badge {
+
+            display: inline-block;
+        }

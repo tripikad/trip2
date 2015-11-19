@@ -28,11 +28,15 @@ code: |
 
     <li class="c-footer__social-item">
 
-        @include('component.icon', [
-            'icon' => $item['icon']
-        ])
+        <span class="c-footer__social-item-icon">
 
-        <a href="{{ $item['route'] }}" class="c-footer__social-item-link">
+            @include('component.icon', [
+                'icon' => $item['icon']
+            ])
+
+        </span>
+
+        <a href="{{ $item['route'] }}" class="c-footer__social-item-link" @if(isset($item['external'])) target="_blank" @endif>
             {{ isset($item['title']) ? $item['title'] : trans("menu.$menu.$key") }}
         </a>
     </li>

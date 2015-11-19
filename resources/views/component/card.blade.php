@@ -26,7 +26,15 @@ modifiers:
 
 <div class="c-card {{ $modifiers or '' }}">
 
-    <div class="c-card__bg" style="background-image: url({{ $image }});"></div>
+    <div class="c-card__bg"
+
+         @if(isset($image))
+
+            style="background-image: url({{ $image }});"
+
+         @endif
+
+         ></div>
 
     @if (isset($route))
 

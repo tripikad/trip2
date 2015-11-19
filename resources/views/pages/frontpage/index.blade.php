@@ -12,7 +12,7 @@
 
     @include('component.search',[
         'modifiers' => 'm-red',
-        'placeholder' => 'Where do you want to go today?'
+        'placeholder' => trans('frontpage.index.search.title')
     ])
 
 @stop
@@ -38,20 +38,24 @@
 
                     <div class="c-columns m-3-cols">
 
-                        @foreach($flights1 as $name => $flight1)
+                        @foreach($flights1 as $key => $flight1)
 
                             <div class="c-columns__item">
 
                                 @include('component.destination', [
-                                    'modifiers' => $flights1_modifiers[$name],
-                                    'title' => 'Aafrika',
-                                    'title_route' => '/destination/4',
-                                    'subtitle' => 'Itaalia',
-                                    'subtitle_route' => '#'
+                                    'modifiers' => ['m-yellow', 'm-red', 'm-green'][$key],
+                                    'title' =>
+                                        $flight1->getDestination() ? $flight1->getDestination()->name : null,
+                                    'title_route' =>
+                                        $flight1->getDestination() ? route('destination.show', $flight1->getDestination()) : null,
+                                    'subtitle' =>
+                                        $flight1->getDestinationParent() ? $flight1->getDestinationParent()->name : null,
+                                    'subtitle_route' =>
+                                        $flight1->getDestinationParent() ? route('destination.show', $flight1->getDestinationParent()) : null
                                 ])
 
                                 @include('component.card', [
-                                    'modifiers' => $flights1_modifiers[$name],
+                                    'modifiers' => ['m-yellow', 'm-red', 'm-green'][$key],
                                     'route' => route('content.show', [$flight1->type, $flight1]),
                                     'title' => $flight1->title.' '.$flight1->price.' '.config('site.currency.symbol'),
                                     'image' => $flight1->imagePreset(),
@@ -60,6 +64,16 @@
                             </div>
 
                         @endforeach
+
+                    </div>
+                    <div class="r-home__destinations-action">
+
+                        @include('component.link', [
+                            'modifiers' => 'm-icon',
+                            'title' => 'Vaata kõiki sooduspakkumisi',
+                            'route' => route('content.show', ['flight']),
+                            'icon' => 'icon-arrow-right'
+                        ])
 
                     </div>
                 </div>
@@ -78,8 +92,10 @@
                         'title' => str_limit($content->body, 300),
                         'links' => [
                             [
+                                'modifiers' => 'm-icon',
                                 'title' => trans('frontpage.index.about.title'),
                                 'route' => route('content.show', [$content->type, $content]),
+                                'icon' => 'icon-arrow-right'
                             ]
                         ],
                         'button' => [
@@ -109,34 +125,39 @@
 
                 <div class="r-home__forum-column m-first">
 
-                    @include('component.link', [
-                        'modifiers' => 'm-large m-block',
-                        'title' => 'Üldfoorum',
-                        'route' => ''
-                    ])
-
-                    @include('component.link', [
-                        'modifiers' => 'm-large m-block',
-                        'title' => 'Ost-müük',
-                        'route' => ''
-                    ])
-
-                    @include('component.link', [
-                        'modifiers' => 'm-large m-block',
-                        'title' => 'Vaba teema',
-                        'route' => ''
-                    ])
-
-                    @include('component.button', [
-                        'modifiers' => 'm-secondary m-block',
-                        'title' => 'Otsi foorumist',
-                        'route' => ''
-                    ])
-
-                    @include('component.button', [
-                        'modifiers' => 'm-secondary m-block',
-                        'title' => 'Alusta teemat',
-                        'route' => ''
+                    @include('component.content.forum.nav', [
+                        'items' => [
+                            [
+                                'title' => trans('frontpage.index.forum.general'),
+                                'route' => route('content.show', 'forum'),
+                                'modifiers' => 'm-large m-block m-icon',
+                                'icon' => 'icon-arrow-right'
+                            ],
+                            [
+                                'title' => trans('frontpage.index.forum.buysell'),
+                                'route' => route('content.show', 'buysell'),
+                                'modifiers' => 'm-large m-block m-icon',
+                                'icon' => 'icon-arrow-right'
+                            ],
+                            [
+                                'title' => trans('frontpage.index.forum.expat'),
+                                'route' => route('content.show', 'expat'),
+                                'modifiers' => 'm-large m-block m-icon',
+                                'icon' => 'icon-arrow-right'
+                            ],
+                            [
+                                'type' => 'button',
+                                'title' => 'Otsi foorumist',
+                                'route' => '#',
+                                'modifiers' => 'm-secondary m-block'
+                            ],
+                            [
+                                'type' => 'button',
+                                'title' => 'Alusta teemat',
+                                'route' => '#',
+                                'modifiers' => 'm-block'
+                            ]
+                        ]
                     ])
 
                 </div>
@@ -157,18 +178,14 @@
                                         'modifiers' => 'm-inverted',
                                         'count' => count($forum->comments)
                                     ],
-                                    'tags' => [
-                                        [
-                                            'title' => 'Inglismaa',
-                                            'modifiers' => 'm-green',
-                                            'route' => ''
-                                        ],
-                                        [
-                                            'title' => 'London',
-                                            'modifiers' => 'm-purple',
-                                            'route' => ''
-                                        ],
-                                    ]
+                                    'tags' => $forum->topics->take(2)->transform(function ($topic, $key) use ($forum) {
+                                        return [
+                                            'title' => $topic->name,
+                                            'modifiers' => ['m-green', 'm-blue', 'm-orange', 'm-yellow', 'm-red'][$key],
+                                            'route' => route('content.show', [$forum->type]).'?topic='.$topic->id,
+                                        ];
+                                    })
+
                                 ];
                             })
                         ])
@@ -208,16 +225,16 @@
 
                         <div class="r-home__news-block-wrap">
 
-                            @foreach($news1 as $name => $new)
+                            @foreach($news1 as $key => $new)
 
-                                <div class="r-home__news-block @if($name==0) m-first @else m-last @endif">
+                                <div class="r-home__news-block @if($key==0) m-first @else m-last @endif">
 
                                     @include('component.news', [
                                         'title' => $new->title,
                                         'route' => route('content.show', [$new->type, $new]),
                                         'date' => $new->created_at,
                                         'image' => $new->imagePreset(),
-                                        'modifiers' => ($name==0?'':'m-small')
+                                        'modifiers' => ($key==0?'':'m-small')
                                     ])
 
                                 </div>
@@ -243,13 +260,63 @@
 
                     @endif
 
-                    @include('component.link', [
-                        'title' => trans('frontpage.index.all.news'),
-                        'route' => route('content.show', ['news'])
-                    ])
+                    <div class="r-home__news-footer">
 
+                        @include('component.link', [
+                            'title' => trans('frontpage.index.all.news'),
+                            'route' => route('content.show', ['news']),
+                            'modifiers' => 'm-icon',
+                            'icon' => 'icon-arrow-right'
+                        ])
+
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="r-home__featured-news">
+
+            <div class="r-home__featured-news-wrap">
+
+                <div class="c-columns m-3-cols">
+
+                    <div class="c-columns__item">
+
+                        @include('component.news', [
+                            'title' => 'Suur valuutaülevaade – kuhu tasub just praegu reisida',
+                            'route' => '',
+                            'image' => \App\Image::getRandom(),
+                            'modifiers' => 'm-smaller'
+                        ])
+
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        @include('component.news', [
+                            'title' => 'Euroopa Kohus otsustas – lennuki tehniline rike ei päästa hüvitise maksmisest',
+                            'route' => '',
+                            'image' => \App\Image::getRandom(),
+                            'modifiers' => 'm-smaller'
+                        ])
+
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        @include('component.news', [
+                            'title' => 'Suur valuutaülevaade – kuhu tasub just praegu reisida',
+                            'route' => '',
+                            'image' => \App\Image::getRandom(),
+                            'modifiers' => 'm-smaller'
+                        ])
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
         <div class="r-home__travel">
@@ -269,11 +336,11 @@
 
                     @if(isset($flights2) && !empty($flights2))
 
-                        @foreach($flights2 as $name => $flight2)
+                        @foreach($flights2 as $key => $flight2)
 
                             @include('component.row', [
-                                'icon' => 'icon-offer',
-                                'modifiers' => $flights2_modifiers[$name].' m-icon',
+                                'icon' => 'icon-tickets',
+                                'modifiers' => ['m-blue', 'm-yellow', 'm-green', 'm-red', 'm-purple'][$key].' m-icon',
                                 'title' => $flight2->title.' '.$flight2->price.' '.config('site.currency.symbol'),
                                 'route' => route('content.show', [$flight2->type, $flight2]),
                                 'text' =>
@@ -286,10 +353,16 @@
 
                     @endif
 
-                    @include('component.link', [
-                        'title' => trans('frontpage.index.all.offers'),
-                        'route' => route('content.show', ['flight'])
-                    ])
+                    <div class="r-home__travel-column-footer">
+
+                        @include('component.link', [
+                            'modifiers' => 'm-icon',
+                            'title' => trans('frontpage.index.all.offers'),
+                            'route' => route('content.show', ['flight']),
+                            'icon' => 'icon-arrow-right'
+                        ])
+
+                    </div>
 
                 </div>
 
@@ -404,5 +477,14 @@
         </div>
 
     </div>
+
+@stop
+
+@section('footer')
+
+    @include('component.footer', [
+        'modifiers' => 'm-alternative',
+        'image' => \App\Image::getRandom()
+    ])
 
 @stop

@@ -8,6 +8,11 @@
     font-weight: $font-weight-bold;
     text-transform: uppercase;
 
+    &.m-white {
+
+        color: $color-white;
+    }
+
     &.m-small {
 
         font-size: $font-size-tiny;
@@ -16,6 +21,20 @@
     &.m-large {
 
         font-size: $font-size-large;
+        font-weight: $font-weight-bold;
+        text-transform: none;
+    }
+
+    &.m-larger {
+
+        font-size: $font-size-huge / 2;
+        font-weight: $font-weight-bold;
+        text-transform: none;
+    }
+
+    &.m-huge {
+
+        font-size: 60px; // Exception
         font-weight: $font-weight-bold;
         text-transform: none;
     }
