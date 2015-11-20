@@ -1,4 +1,4 @@
-<nav class="c-nav {{ $modifiers or '' }}">
+<nav class="c-nav js-nav {{ $modifiers or '' }}">
 
     <ul class="c-nav-list">
 
