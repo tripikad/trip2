@@ -1,18 +1,15 @@
 .c-header {
 
-    position: relative;
+    position: absolute;
     z-index: 10000;
     top: 0;
     left: 0;
-    display: flex;
     height: $spacer * 6.5;
-    justify-content: space-between;
+    padding: 0 $spacer;
     width: 100%;
-    background: $color-fill-neutral;
 
     @include respond-to(tablet) {
 
-        position: absolute;
         height: auto;
         background: none;
     }
@@ -20,13 +17,13 @@
 
     .c-header__logo {
 
+        position: absolute;
+        left: $spacer;
+        top: 0;
         display: flex;
         align-items: center;
         height: $spacer * 6.5;
         width: $spacer * 6.5;
-        position: absolute;
-        left: $spacer;
-        top: 0;
 
         @include respond-to(tablet) {
 
@@ -34,37 +31,149 @@
         }
     }
 
+    .c-header__search-trigger {
+
+        float: right;
+        position: relative;
+        display: block;
+        height: $spacer * 4;
+        width: $spacer * 4;
+        margin-top: $spacer * 1.25;
+        background: $color-fill-neutral-darker;
+
+        @include respond-to(tablet) {
+
+            display: none;
+        }
+
+        svg {
+
+            fill: $color-white;
+            height: $spacer * 2;
+            width: $spacer * 2;
+            margin: $spacer;
+        }
+    }
+
     .c-header__search {
 
         position: absolute;
         z-index: 1000;
-        top: 0;
+        top: $spacer * 6.5;
+        left: 0;
+        display: none;
         width: 100%;
+        padding: $spacer;
+        background: $color-fill-neutral-dark;
+
+        &.m-active {
+
+            display: block;
+        }
 
         @include respond-to(tablet) {
 
-            left: 0;
-            width: auto;
-            margin-top: $spacer * 1.5;
-            margin-left: $spacer;
+            float: left;
+            position: static;
+            display: block;
+            width: $spacer * 15;
+            padding: $spacer / 2 0;
+            background: none;
+        }
+    }
+
+    .c-header__nav-trigger {
+
+        float: right;
+        position: relative;
+        z-index: 2000;
+        display: block;
+        height: $spacer * 4;
+        width: $spacer * 4;
+        margin-top: $spacer * 1.25;
+        background: $color-fill-neutral-darkest;
+
+        @include respond-to(tablet) {
+
+            display: none;
         }
 
-        @include respond-to(desktop) {
+        span {
 
-            margin-left: $spacer * 3;
+            position: absolute;
+            top: 50%;
+            left: $spacer;
+            height: $spacer / 4;
+            width: $spacer * 2;
+            margin-top: -$spacer / 6;
+            background: $color-white;
+            transition: all .2s;
+
+            &:nth-child(1) {
+
+                transform: translateY(-7px);
+            }
+
+            &:nth-child(3) {
+
+                transform: translateY(7px);
+            }
+        }
+
+        &.m-active {
+
+            span {
+
+                &:nth-child(1) {
+
+                    transform: translateY(0) rotate(-45deg);
+                }
+
+                &:nth-child(2) {
+
+                    opacity: 0;
+                }
+
+                &:nth-child(3) {
+
+                    transform: translateY(0) rotate(45deg);
+                }
+            }
         }
     }
 
     .c-header__nav {
 
-        margin-top: $spacer * 0.75;
-        margin-right: $spacer;
-        position: absolute;
-        top: 0;
-        right: 0;
+        display: none;
 
-        @include respond-to(desktop) {
+        @include respond-to(tablet) {
 
-            margin-right: $spacer * 3;
+            float: right;
+            display: block;
+        }
+
+        &.m-active {
+
+            position: fixed;
+            z-index: 1100;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    }
+
+    .c-header__user {
+
+        float: right;
+        position: relative;
+        z-index: 2000;
+        margin-top: $spacer * 1.25;
+
+        @include respond-to(tablet) {
+
+            margin: 0;
         }
     }

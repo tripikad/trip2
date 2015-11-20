@@ -2,18 +2,12 @@
 
     @include clearfix;
     @include clear-list;
-
-    float: right;
-
-    .c-nav.m-active & {
-
-        position: absolute;
-        top: 0;
-        right: $spacer;
-    }
 }
 
-    .c-nav-user__item {}
+    .c-nav-user__item {
+
+        position: relative;
+    }
 
         .c-nav-user__item-link {
 
@@ -26,9 +20,14 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            padding: $spacer;
+            padding: $spacer / 2;
 
-            .c-nav.m-alternative & {
+            @include respond-to(tablet) {
+
+                padding: $spacer;
+            }
+
+            .m-alternative & {
 
                 color: $color-white;
             }
@@ -62,6 +61,12 @@
             border-radius: 3px;
             box-shadow: 0 12px 24px rgba($shadow-dark, 0.3);
 
+            @include respond-to(tablet) {
+
+                top: 100%;
+                right: $spacer;
+            }
+
             &:before {
 
                 @include color-modifiers-and(border-bottom-color);
@@ -69,7 +74,7 @@
                 content: '';
                 position: absolute;
                 top: -$spacer / 2;
-                right: $spacer * 4;
+                right: $spacer * 1.5;
                 width: 0;
                 height: 0;
                 border-style: solid;
@@ -78,6 +83,11 @@
                 border-left-color: $transparent;
                 border-right-color: $transparent;
                 border-bottom-color: inherit;
+
+                @include respond-to(tablet) {
+
+                    right: $spacer * 6;
+                }
             }
 
             .c-nav-user__item:hover & {

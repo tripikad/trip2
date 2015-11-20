@@ -2,35 +2,19 @@
 
     @include clearfix;
     @include clear-list;
-
-    display: none;
-
-    @include respond-to(tablet) {
-
-        float: left;
-        display: block;
-    }
-
-    .c-nav.m-active & {
-
-        display: block;
-        width: 100%;
-    }
+    width: 100%;
 }
 
     .c-nav-list__item {
 
-        float: left;
         display: block;
         margin: $spacer;
-        height: $spacer * 3;
 
-        .c-nav.m-active & {
+        @include respond-to(tablet) {
 
-            float: none;
-            height: auto;
-            margin: 0;
-            text-align: center;
+            float: left;
+            margin: $spacer;
+            height: $spacer * 3;
         }
     }
 
@@ -46,13 +30,13 @@
             display: block;
             height: $spacer * 3;
 
-            .c-nav.m-active &,
-            .c-nav.m-alternative & {
+            .m-active &,
+            .m-alternative & {
 
                 color: $color-white;
             }
 
-            .c-nav-list__item.active & {
+            .active & {
 
                 opacity: 0.6;
             }

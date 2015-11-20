@@ -2,6 +2,8 @@
 
     &.m-small {
 
+        width: 100%;
+
         @include respond-to(tablet) {
 
             position: relative;
@@ -18,16 +20,6 @@
 .c-search__form {
 
     position: relative;
-
-    .c-search.m-small & {
-
-        position: static;
-
-        @include respond-to(tablet) {
-
-            position: relative;
-        }
-    }
 }
 
     .c-search__form-icon {
@@ -49,29 +41,9 @@
 
         .c-search.m-small & {
 
-            top: 9px;
-            left: auto;
-            right: $spacer * 6;
-            height: $spacer * 5;
-            width: $spacer * 5;
-            display: block;
-            transform: none;
-            cursor: pointer;
-
-            .m-logged-in & {
-
-                right: $spacer * 11;
-            }
-
-            @include respond-to(tablet) {
-
-                top: 50%;
-                left: $spacer;
-                height: $spacer * 2;
-                width: $spacer * 2;
-                transform: translateY(-50%);
-                cursor: default;
-            }
+            left: 0;
+            height: $spacer * 2;
+            width: $spacer * 2;
         }
 
         svg {
@@ -91,16 +63,9 @@
             .c-search.m-small & {
 
                 fill: $color-text-link;
-                margin: $spacer * 1.5;
-                width: $spacer * 2;
-                height: $spacer * 2;
-
-                @include respond-to(tablet) {
-
-                    margin: $spacer / 4;
-                    width: $spacer * 1.5;
-                    height: $spacer * 1.5;
-                }
+                margin: $spacer / 4;
+                width: $spacer * 1.5;
+                height: $spacer * 1.5;
             }
 
             .c-search.m-small.m-alternative & {
@@ -140,23 +105,10 @@
 
         .c-search.m-small & {
 
-            position: absolute;
-            height: $spacer * 6.5;
-            left: 0;
-            top: $spacer * 6.5;
-
             font-size: $font-size-normal;
-            padding: $spacer * 0.75 $spacer $spacer / 2 $spacer;
-            background: $color-fill-neutral-dark;
+            padding: $spacer $spacer $spacer * 0.75 $spacer * 3;
+            background: none;
             box-shadow: none;
-
-            @include respond-to(tablet) {
-
-                position: static;
-                height: auto;
-                padding: $spacer * 0.75 $spacer $spacer / 2 $spacer * 4;
-                background: none;
-            }
         }
 
         &::-webkit-input-placeholder {
