@@ -91,13 +91,13 @@
 
     @endif
 
-    <a href="#" class="c-header__nav-trigger">
+    <a href="#" class="c-header__nav-trigger js-header__nav-trigger">
         <span></span>
         <span></span>
         <span></span>
     </a>
 
-    <div class="c-header__nav">
+    <div class="c-header__nav js-header__nav">
 
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
@@ -114,14 +114,14 @@
         @endif
     </div>
 
-    <a href="#" class="c-header__search-trigger">
+    <a href="#" class="c-header__search-trigger js-header__search-trigger">
 
         @include('component.icon', [
             'icon' => 'icon-search'
         ])
     </a>
 
-    <div class="c-header__search">
+    <div class="c-header__search js-header__search">
 
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
