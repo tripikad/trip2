@@ -7,7 +7,7 @@
         @include color-modifiers-none(background);
     }
 
-    .m-active & {
+    &.m-active {
 
         text-align: center;
         position: absolute;
