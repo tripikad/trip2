@@ -13,7 +13,7 @@ class AdminController extends Controller
     {
         $exception = [
             'contents.type' => 'photo',
-            'imageable_type' => 'App\\User'
+            'imageable_type' => 'App\\User',
         ];
 
         $images = Image::getAllContentExcept($exception)->simplePaginate(96);

@@ -99,7 +99,7 @@ class Image extends Model
     {
         if (! is_array($except)) {
             $except = [
-                'contents.type' => $except
+                'contents.type' => $except,
             ];
         }
 
@@ -113,7 +113,7 @@ class Image extends Model
 
                 if (isset($except['contents.type'])) {
                     $query->where('contents.type', '=', $except['contents.type']);
-                } elseif(isset($except['imageable_type'])) {
+                } elseif (isset($except['imageable_type'])) {
                     $whereType = 'where';
                 }
 
