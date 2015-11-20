@@ -7,6 +7,8 @@ use View;
 use Cache;
 use App\Content;
 use App\Destination;
+use Illuminate\Support\Collection;
+use DB;
 
 class FrontpageController extends Controller
 {
@@ -33,51 +35,130 @@ class FrontpageController extends Controller
                 ->get();
         }
 
-        // Latest flights view
-        $flights1 = Content::whereType('flight')->whereStatus(1)->latest()->take(3)->get();
+        $types = [
+            'flights1' => [
+                'skip' => null,
+                'take' => 3,
+                'type' => ['flight'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'flights2' => [
+                'skip' => 3,
+                'take' => 5,
+                'type' => ['flight'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'content' => [
+                'take' => 1,
+                'id' => 0,
+                'status' => 1,
+            ],
+            'forums' => [
+                'skip' => null,
+                'take' => 5,
+                'type' => ['forum', 'buysell', 'expat'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'news1' => [
+                'skip' => null,
+                'take' => 2,
+                'type' => ['news'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'news2' => [
+                'skip' => 2,
+                'take' => 5,
+                'type' => ['news'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'blogs' => [
+                'skip' => null,
+                'take' => 1,
+                'type' => ['blog'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'photos' => [
+                'skip' => null,
+                'take' => 8,
+                'type' => ['photo'],
+                'status' => 1,
+                'latest' => true,
+            ],
+            'travelmates' => [
+                'skip' => null,
+                'take' => 4,
+                'type' => ['travelmate'],
+                'status' => 1,
+                'latest' => true,
+            ],
+        ];
 
-        // About us
-        $content = Content::where('id', 1534)->first();
+        $viewVariables = $this->getCollections($types);
 
-        // Latest forum posts
-        $forums = Content::whereIn('type', ['forum', 'buysell', 'expat'])->whereStatus(1)->latest()->take(5)->get();
+        $viewVariables['destinations'] = $destinations;
 
-        // Latest news posts
-        $news1 = Content::whereType('news')->whereStatus(1)->latest()->take(2)->get();
-
-        // Latest news posts
-        $news2 = Content::whereType('news')->whereStatus(1)->latest()->skip(2)->take(5)->get();
-
-        // Latest flight offers
-        $flights2 = Content::whereType('flight')->whereStatus(1)->latest()->skip(3)->take(5)->get();
-
-        // Latest travel letter from blog
-        $blogs = Content::whereType('blog')->whereStatus(1)->latest()->take(1)->get();
-
-        // Latest gallery posts
-        $photos = Content::whereType('photo')->whereStatus(1)->latest()->take(8)->get();
-
-        // Latest travel mates
-        $travelmates = Content::whereType('travelmate')->whereStatus(1)->latest()->take(4)->get();
-
-        return response()->view('pages.frontpage.index', [
-            'destinations' => $destinations,
-            'features' => $features,
-            'flights1' => $flights1,
-            'flights2' => $flights2,
-            'content' => $content,
-            'forums' => $forums,
-            'news1' => $news1,
-            'news2' => $news2,
-            'blogs' => $blogs,
-            'photos' => $photos,
-            'travelmates' => $travelmates,
-        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.frontpage'));
+        return response()
+            ->view('pages.frontpage.index', $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('site.cache.frontpage'));
     }
 
     public function search(Request $request)
     {
         return redirect()
             ->route('destination.index', [$request->destination]);
+    }
+
+    public function getCollections($types)
+    {
+        $content_query = null;
+        $i = 0;
+
+        foreach ($types as $key => $type) {
+            ++$i;
+
+            $query = null;
+
+            if (isset($type['id'])) {
+                $query = Content::select(['*', DB::raw('REPEAT(\''.$key.'\',1) AS `index`')])->where('id', $type['id'])->whereStatus($type['status']);
+            } else {
+                $query = Content::select(['*', DB::raw('REPEAT(\''.$key.'\',1) AS `index`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
+
+                if (isset($type['latest']) && $type['latest'] !== null) {
+                    $query = $query->latest();
+                }
+
+                if (isset($type['skip']) && $type['skip'] !== null) {
+                    $query = $query->skip($type['skip']);
+                }
+
+                if (isset($type['take']) && $type['take'] !== null) {
+                    $query = $query->take($type['take']);
+                }
+            }
+
+            if ($i == 1) {
+                $content_query = $query;
+            } else {
+                $content_query = $content_query->union($query);
+            }
+        }
+
+        $content_query = $content_query->get();
+
+        $viewVariables = [];
+
+        foreach ($types as $key => $type) {
+            $$key = Collection::make($content_query->where('index', $key)->values()->all());
+
+            $viewVariables[$key] = $$key;
+        }
+
+        return $viewVariables;
     }
 }
