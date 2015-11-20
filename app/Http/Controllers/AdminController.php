@@ -11,7 +11,12 @@ class AdminController extends Controller
 {
     public function imageIndex()
     {
-        $images = Image::getAllContentExcept('photo')->simplePaginate(96);
+        $exception = [
+            'contents.type' => 'photo',
+            'imageable_type' => 'App\\User'
+        ];
+
+        $images = Image::getAllContentExcept($exception)->simplePaginate(96);
 
         return view('pages.admin.image.index', [
             'images' => $images,
