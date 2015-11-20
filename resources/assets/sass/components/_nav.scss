@@ -1,124 +1,73 @@
 .c-nav {
+
+    &.m-active {
+
+        @include color-modifiers(background);
+
+        position: fixed;
+        z-index: 1200;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+    }
 }
 
-    .c-nav__list {
+    .c-nav__trigger {
 
-        @include clearfix;
-        @include clear-list;
-    }
+        position: absolute;
+        z-index: 1001;
+        right: 0;
+        top: 0;
+        display: block;
+        height: $spacer * 5;
+        width: $spacer * 5;
 
-        .c-nav__list-item {
+        @include respond-to(tablet) {
 
-            float: left;
-            display: block;
-            margin: $spacer;
-            height: $spacer * 3;
-
-            &.m-has-children {
-
-                position: relative;
-            }
+            display: none;
         }
 
-            .c-nav__list-item-link {
+        .m-logged-in & {
 
-                @include font-smoothing;
+            right: $spacer * 5;
+        }
 
-                color: $color-text-link;
-                font-size: $font-size-normal;
-                font-weight: $font-weight-bold;
-                line-height: $spacer * 3;
-                text-decoration: none;
-                display: block;
-                height: $spacer * 3;
+        .c-nav.m-active & {
 
-                .c-nav.m-alternative & {
+            position: fixed;
+        }
 
-                    color: $color-white;
-                }
+        span {
 
-                .c-nav__list-item.active & {
+            position: absolute;
+            top: 50%;
+            left: $spacer * 1.5;
+            height: $spacer / 4;
+            width: $spacer * 2;
+            margin-top: -$spacer / 6;
+            background: $color-text-link;
+            transition: all .2s;
 
-                    opacity: 0.6;
-                }
+            &:nth-child(1) {
+
+                transform: translateY(-7px);
             }
 
-                .c-nav__list-item-link-text {
+            &:nth-child(3) {
 
-                    .c-nav__list-item.m-has-children & {
-
-                        @include arrowY(down, $color-text-link);
-
-                        position: relative;
-                        padding-right: $spacer;
-
-                        .c-nav.m-alternative & {
-
-                            @include arrowY(down, $color-white);
-                        }
-                    }
-                }
-
-            .c-nav__sub-list {
-
-                @include clear-list;
-                @include color-modifiers-and(background);
-
-                position: absolute;
-                top: 100%;
-                right: 0;
-                display: none;
-                width: $spacer * 16;
-                padding: $spacer / 2 0;
-                border-radius: 3px;
-                box-shadow: 0 12px 24px rgba($shadow-dark, 0.3);
-
-                &:before {
-
-                    @include color-modifiers-and(border-bottom-color);
-
-                    content: '';
-                    position: absolute;
-                    top: -$spacer / 2;
-                    right: $spacer * 4;
-                    width: 0;
-                    height: 0;
-                    border-style: solid;
-                    border-width: 0 5.5px 6px 5.5px;
-                    border-top-color: $transparent;
-                    border-left-color: $transparent;
-                    border-right-color: $transparent;
-                    border-bottom-color: inherit;
-                }
-
-                .c-nav__list-item:hover & {
-
-                    display: block;
-                }
+                transform: translateY(7px);
             }
 
-                .c-nav__sub-list-item {
+            .c-nav.m-active &,
+            .c-nav.m-alternative & {
 
-                    display: block;
-                    margin: 0;
-                    padding: 0;
-                }
-
-                    .c-nav__sub-list-item-link {
-
-                        @include font-smoothing;
-
-                        color: $color-white;
-                        font-size: $font-size-normal;
-                        font-weight: $font-weight-bold;
-                        text-decoration: none;
-                        line-height: $spacer * 3;
-                        display: block;
-                        height: $spacer * 3;
-                        padding: 0 $spacer * 2;
-
-                        &:hover {
-
-                            @include color-modifiers-dark-and(background);
-                        }
-                    }
+                background: $color-white;
+            }
+        }
+    }

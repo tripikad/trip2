@@ -18,13 +18,30 @@ modifiers:
 
 <div class="c-logo {{ $modifiers or '' }}">
 
-    @if ($modifiers === 'm-dark')
+    @if(isset($modifiers))
 
-    <img src="/svg/tripee_logo_dark.svg" alt="">
+        @if($modifiers === 'm-small')
+
+        <img src="/svg/tripee_logo_plain.svg" alt="">
+
+        @elseif($modifiers === 'm-small m-dark' || $modifiers === 'm-dark m-small')
+
+        <img src="/svg/tripee_logo_plain_dark.svg" alt="">
+
+        @elseif($modifiers === 'm-dark')
+
+        <img src="/svg/tripee_logo_dark.svg" alt="">
+
+        @else
+
+        <img src="/svg/tripee_logo.svg" alt="">
+
+        @endif
 
     @else
 
-    <img src="/svg/tripee_logo.svg" alt="">
+        <img src="/svg/tripee_logo.svg" alt="">
 
     @endif
+
 </div>

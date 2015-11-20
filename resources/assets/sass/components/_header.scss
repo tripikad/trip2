@@ -1,32 +1,52 @@
 .c-header {
 
-    position: absolute;
+    position: relative;
     z-index: 10000;
     top: 0;
     left: 0;
     display: flex;
+    height: $spacer * 6.5;
     justify-content: space-between;
     width: 100%;
+    background: $color-fill-neutral;
+
+    @include respond-to(tablet) {
+
+        position: absolute;
+        height: auto;
+        background: none;
+    }
 }
+
+    .c-header__logo {
+
+        display: flex;
+        align-items: center;
+        height: $spacer * 6.5;
+        width: $spacer * 6.5;
+        position: absolute;
+        left: $spacer;
+        top: 0;
+
+        @include respond-to(tablet) {
+
+            display: none;
+        }
+    }
 
     .c-header__search {
 
         position: absolute;
         z-index: 1000;
         top: 0;
-        left: 0;
-        width: 80%;
-        margin-top: $spacer * 1.5;
-        margin-left: $spacer;
-
-        @include respond-to(tablet-portrait) {
-
-            width: 60%;
-        }
+        width: 100%;
 
         @include respond-to(tablet) {
 
+            left: 0;
             width: auto;
+            margin-top: $spacer * 1.5;
+            margin-left: $spacer;
         }
 
         @include respond-to(desktop) {
