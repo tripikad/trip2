@@ -28,6 +28,7 @@ code: |
 
 <li class="c-nav__list-item @if (isset($item['children'])) m-has-children @endif {{ Ekko::isActiveURL($item['route']) }}">
     <a href="{{ $item['route'] }}" class="c-nav__list-item-link" @if(isset($item['external'])) target="_blank" @endif>
+
         <span class="c-nav__list-item-link-text">{{ isset($item['title']) ? $item['title'] : trans("menu.$menu.$key") }}</span>
 
         @if (isset($item['profile']))
