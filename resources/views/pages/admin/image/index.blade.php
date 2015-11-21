@@ -64,6 +64,8 @@
 
     </div>
 
-    @include('component.pagination', ['collection' => $images])
+    @include('component.pagination',
+        ['collection' => $images]
+    )
 
 @stop
