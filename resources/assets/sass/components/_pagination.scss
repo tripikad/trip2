@@ -1,0 +1,49 @@
+.c-pagination {
+
+    display: inline-block;
+    padding-left: 0;
+    margin: $spacer 0;
+
+    > .c-pagination__item {
+
+        display: inline;
+
+        .c-pagination__item-text {
+
+            position: relative;
+            float: left;
+            padding: $spacer $spacer;
+            line-height: $spacer;
+            text-decoration: none;
+            color: $color-white;
+            background-color: $brand-green;
+            margin-left: -1px;
+        }
+    }
+
+        .c-pagination__item-text {
+
+            &:hover, &:focus {
+
+                z-index: 3;
+                background-color: $brand-green-dark;
+            }
+        }
+
+        > .active > .c-pagination__item-text {
+
+            &, &:hover, &:focus {
+
+                z-index: 2;
+                background-color: $brand-green-dark;
+            }
+        }
+
+        > .disabled {
+
+            > .c-pagination__item-text {
+
+                display: none;
+            }
+        }
+}
