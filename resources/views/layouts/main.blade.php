@@ -13,11 +13,13 @@
 
         @yield('header', view('component.header'))
 
-        @include('component.alert.success')
+        @section('content')
 
-        @include('component.alert.error')
+            @include('component.alert.success')
 
-        @yield('content')
+            @include('component.alert.error')
+
+        @show
 
         @yield('footer', view('component.footer'))
 

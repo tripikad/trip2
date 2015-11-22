@@ -34,6 +34,8 @@
 
     @endforeach
 
-  {!! $contents->render() !!}
+    @include('component.pagination',
+        ['collection' => $contents]
+    )
 
 @stop

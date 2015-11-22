@@ -28,6 +28,8 @@
 
 @section('content')
 
+@parent
+
 <div class="r-destination">
 
     <div class="r-destination__masthead">

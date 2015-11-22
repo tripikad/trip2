@@ -1,0 +1,44 @@
+.c-pagination {
+
+    @include clearfix;
+    @include clear-list;
+
+    width: 100%;
+    margin: $spacer 0;
+
+    > .c-pagination__item {
+
+        display: block;
+
+        &.m-first {
+
+            float: left;
+        }
+
+        &.m-last {
+
+            float: right;
+        }
+
+        .c-pagination__item-text {
+
+            position: relative;
+            float: left;
+            text-decoration: none;
+        }
+
+        &:hover,
+        &.active .c-pagination__item-text {
+
+            background: $color-fill-neutral;
+        }
+    }
+
+        > .disabled {
+
+            > .c-pagination__item-text {
+
+                display: none;
+            }
+        }
+}

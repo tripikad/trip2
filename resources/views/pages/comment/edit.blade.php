@@ -11,29 +11,22 @@
         'method' => 'put'
     )) !!}
 
-    <div class="form-group">
+    <div class="c-form__group">
     
         {!! Form::textarea('body', null, [
-            'class' => 'form-control input-md',
+            'class' => 'c-form__input m-high',
             'placeholder' => trans('comment.edit.body.title'),
             'rows' => 8
         ]) !!}
     
     </div>
 
-    <div class="row">
+    <div class="c-form__group m-no-margin m-right">
 
-        <div class="col-sm-4 col-md-offset-12">
-        
-            <div class="form-group">
-
-                {!! Form::submit(trans('comment.edit.submit.title'), [
-                    'class' => 'btn btn-primary btn-md btn-block'
-                ]) !!}
+        {!! Form::submit(trans('comment.edit.submit.title'), [
+            'class' => 'c-button m-small'
+        ]) !!}
             
-            </div>
-        </div>
-
     </div>
 
     {!! Form::close() !!}

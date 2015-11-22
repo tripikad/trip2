@@ -69,130 +69,107 @@ code: |
 
     @foreach ($fields as $key => $field)
 
-        <div class="form-group">
+        <div class="c-form__input-wrap">
 
-            @if (in_array($field['type'], ['text', 'textarea', 'url', 'email', 'date']))
+            <div class="c-form__group">
 
-                {!! Form::$field['type']($key, null, [
-                    'class' =>  isset($field['large']) ? 'form-control input-lg' : 'form-control input-md',
-                    'placeholder' => trans("content.$type.edit.field.$key.title"),
-                    'rows' => isset($field['rows']) ? $field['rows'] : 8,
-                ]) !!}
+                @if (in_array($field['type'], ['text', 'textarea', 'url', 'email', 'date']))
 
-                <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
+                    {!! Form::$field['type']($key, null, [
+                        'class' =>  (isset($field['large']) && $field['large'] == true)
+                            ? 'c-form__input m-high'
+                            : 'c-form__input',
+                        'placeholder' => trans("content.$type.edit.field.$key.title"),
+                        'rows' => isset($field['rows']) ? $field['rows'] : 8,
+                    ]) !!}
 
-            @elseif ($field['type'] == 'file')
+                @elseif ($field['type'] == 'file')
 
-                <div id="{{ isset($id) ? $id : 'dropzoneImage' }}" class="dropzone">
+                    <div id="{{ isset($id) ? $id : 'dropzoneImage' }}" class="dropzone">
 
-                    <div class="fallback">
+                        <div class="fallback">
 
-                        <div class="form-group">
+                            <div class="form-group">
 
-                            {!! Form::$field['type']($key) !!}
+                                {!! Form::$field['type']($key) !!}
+
+                            </div>
 
                         </div>
 
                     </div>
 
-                </div>
+                @elseif ($field['type'] == 'image_id')
 
-                <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
-
-            @elseif ($field['type'] == 'image_id')
-
-                {!! Form::text($key, null, [
-                    'class' => 'form-control input-md',
-                    'placeholder' => trans("content.$type.edit.field.$key.title"),
-                ]) !!}
-
-                <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
-
-            @elseif ($field['type'] == 'destinations')
-
-                {!! Form::select(
-                    $key . '[]',
-                    $destinations,
-                    $destination,
-                    [
-                        'multiple' => 'true',
-                        'id' => $key,
+                    {!! Form::text($key, null, [
+                        'class' => 'c-form__input',
                         'placeholder' => trans("content.$type.edit.field.$key.title"),
-                    ]
-                )!!}
+                    ]) !!}
 
-                <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
+                @elseif ($field['type'] == 'destinations')
 
-            @elseif ($field['type'] == 'topics')
+                    {!! Form::select(
+                        $key . '[]',
+                        $destinations,
+                        $destination,
+                        [
+                            'multiple' => 'true',
+                            'id' => $key,
+                            'placeholder' => trans("content.$type.edit.field.$key.title"),
+                        ]
+                    )!!}
 
-                {!! Form::select(
-                    $key . '[]',
-                    $topics,
-                    $topic,
-                    [
-                        'multiple' => 'true',
-                        'id' => $key,
+                @elseif ($field['type'] == 'topics')
+
+                    {!! Form::select(
+                        $key . '[]',
+                        $topics,
+                        $topic,
+                        [
+                            'multiple' => 'true',
+                            'id' => $key,
+                            'placeholder' => trans("content.$type.edit.field.$key.title"),
+                        ]
+                    )!!}
+
+                @elseif ($field['type'] == 'datetime')
+
+                    {!! Form::text($key, null, [
+                        'class' => 'c-form__input',
                         'placeholder' => trans("content.$type.edit.field.$key.title"),
-                    ]
-                )!!}
+                    ]) !!}
 
-                <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
+                @elseif ($field['type'] == 'currency')
 
-            @elseif ($field['type'] == 'datetime')
+                    {!! Form::text($key, null, [
+                        'class' => 'c-form__input m-narrow',
+                        'placeholder' => trans("content.$type.edit.field.$key.title"),
+                    ]) !!}
 
-                {!! Form::text($key, null, [
-                    'class' => 'form-control input-md',
-                    'placeholder' => trans("content.$type.edit.field.$key.title"),
-                ]) !!}
+                    <span class="c-form__text">
 
-                <div class="help-block">
+                        {{ config('site.currency.symbol') }}
 
-                    {{ trans("content.$type.edit.field.$key.help", ['now' => $now]) }}
+                    </span>
 
-                </div>
+                @elseif (in_array($field['type'], ['submit', 'button']))
 
-            @elseif ($field['type'] == 'currency')
+                    {!! Form::submit(trans("content.$mode.submit.title"), [
+                        'class' => 'c-button m-large m-block',
+                        'id'    => 'submit-' . (isset($id) ? $id : 'dropzoneImage')
+                    ]) !!}
 
-                <div class="row">
+                @endif
 
-                    <div class="col-sm-6">
+                @if (trans("content.$type.edit.field.$key.help") != '' && trans("content.$type.edit.field.$key.help") != "content.$type.edit.field.$key.help")
 
-                        <div class="input-group">
+                    {!! Form::label($key, trans("content.$type.edit.field.$key.help", ['now' =>  $now]), [
+                        'class' => 'c-form__label'
+                    ]) !!}
 
-                            {!! Form::text($key, null, [
-                                'class' => 'form-control input-md',
-                                'placeholder' => trans("content.$type.edit.field.$key.title"),
-                            ]) !!}
+                @endif
 
-                            <span class="input-group-addon">
-
-                                {{ config('site.currency.symbol') }}
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="help-block">{{ trans("content.$type.edit.field.$key.help") }}</div>
-
-            @elseif (in_array($field['type'], ['submit', 'button']))
-
-                <div class="row">
-
-                    <div class="col-md-4 col-md-offset-12">
-
-                        {!! Form::submit(trans("content.$mode.submit.title"), [
-                            'class' => 'btn btn-primary btn-md btn-block',
-                            'id'    => 'submit-' . (isset($id) ? $id : 'dropzoneImage')
-                        ]) !!}
-
-                    </div>
-
-                </div>
-
-            @endif
+            </div>
 
         </div>
 

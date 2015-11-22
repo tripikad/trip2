@@ -49,13 +49,13 @@ return [
     'news.create.title' => 'Add news post',
 
     'news.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
-    'news.edit.field.image_id.help' => '',
+    'news.edit.field.image_id.help' => 'You can use image shortcuts, for example: [[456]]',
 
     'news.edit.field.title.title' => 'Title',
     'news.edit.field.title.help' => '',
 
     'news.edit.field.body.title' => 'Body',
-    'news.edit.field.body.help' => 'You can use image shortcuts, for example: [[456]]',
+    'news.edit.field.body.help' => '',
 
     'news.edit.field.destinations.title' => 'Select destinations',
     'news.edit.field.destinations.help' => '',
@@ -98,10 +98,10 @@ return [
     'flight.edit.field.title.help' => '',
 
     'flight.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
-    'flight.edit.field.image_id.help' => '',
+    'flight.edit.field.image_id.help' => 'You can use image shortcuts, for example: [[456]]',
 
     'flight.edit.field.body.title' => 'Body',
-    'flight.edit.field.body.help' => 'You can use image shortcuts, for example: [[456]]',
+    'flight.edit.field.body.help' => '',
 
     'flight.edit.field.destinations.title' => 'Select destinations',
     'flight.edit.field.destinations.help' => '',

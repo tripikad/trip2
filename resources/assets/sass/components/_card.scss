@@ -69,6 +69,7 @@
                 z-index: 2;
                 width: 100%;
                 padding: 0 $spacer * 4;
+                word-break: break-all;
             }
 
             .c-card__text {
@@ -83,4 +84,5 @@
                 z-index: 2;
                 width: 100%;
                 padding: 0 $spacer * 4;
+                word-break: break-all;
             }

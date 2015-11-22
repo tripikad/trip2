@@ -30,11 +30,11 @@ return [
             'title' => [
                 'type' => 'textarea',
                 'rows' => 3,
-                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
                 'rows' => 2,
+                'large' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',
