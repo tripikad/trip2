@@ -14,6 +14,7 @@ return [
         'photo',
         'static',
         'travelmate',
+        'sponsored',
     ],
 
 ];

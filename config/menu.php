@@ -114,6 +114,9 @@ return [
         'internal' => [
             'route' => '/content/internal',
         ],
+        'sponsored' => [
+            'route' => '/content/sponsored',
+        ],
         'image' => [
             'route' => '/admin/image',
         ],
