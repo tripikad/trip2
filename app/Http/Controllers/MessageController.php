@@ -27,11 +27,11 @@ class MessageController extends Controller
         $messageIds = $user->messagesWith($user_id_with)->keyBy('id')->keys()->toArray();
 
         Message::whereIn('id', $messageIds)->update(['read' => 1]);
-
+        //dd($user->messagesWith($user_id_with)->all());
         return View::make('pages.message.with')
             ->with('user', $user)
             ->with('user_with', $user_with)
-            ->with('messages', $user->messagesWith($user_id_with)->all())
+            ->with('messages', $user->messagesWith($user_id_with))
             ->render();
     }
 

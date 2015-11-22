@@ -136,6 +136,11 @@
             font-size: $font-size-normal;
             margin-top: $spacer * 0.75;
         }
+
+        & > a {
+
+            color: $color-text-link;
+        }
     }
 
         .c-row__list {

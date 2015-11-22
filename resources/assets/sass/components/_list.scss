@@ -81,6 +81,11 @@
 
                 font-weight: $font-weight-medium;
             }
+
+            .c-list.m-dark & {
+
+                color: $color-text-neutral-dark;
+            }
         }
 
             .c-list__item-icon {
@@ -100,6 +105,14 @@
                         fill: $color-text-link;
                     }
                 }
+            }
+
+            .c-list__item-image {
+
+                display: inline-block;
+                margin-right: $spacer / 2;
+                margin-bottom: $spacer / 2;
+                vertical-align: middle;
             }
 
             .c-list__item-title-link {
@@ -129,6 +142,12 @@
 
             color: $color-text-neutral-dark;
             font-size: $font-size-small;
+
+            .c-list.m-dark & {
+
+                color: $color-text-black;
+                line-height: $font-size-small * 1.25;
+            }
 
             .c-list.m-large & {
 

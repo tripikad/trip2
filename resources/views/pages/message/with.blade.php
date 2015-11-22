@@ -28,27 +28,25 @@
 
 @if (count($messages))
 
-@foreach ($messages as $message)
-
-    <div id="message-{{ $message->id }}" class="utils-padding-bottom @if ($message->read) utils-read @endif">
-
-    @include('component.row', [
-        'profile' => [
-            'modifiers' => '',
-            'image' => $message->fromUser->imagePreset(),
-            'route' => ''
-        ],
-        'text' => trans('message.index.with.row.description', [
-            'user' => $message->fromUser->name,
-            'created_at' => view('component.date.long', ['date' => $message->created_at])
-        ]),
-        'body' => nl2br($message->body),
-        'modifiers' => '-narrow -small'
+    @include('component.list', [
+        'modifiers' => 'm-dark',
+        'items' => $messages->transform(function ($message) {
+            return [
+                'id' => 'message-' . $message->id,
+                'modifiers' => ($message->read ? 'm-blue' : 'm-red'),
+                'title' => trans('message.index.with.row.description', [
+                    'user' => $message->fromUser->name,
+                    'created_at' => view('component.date.long', ['date' => $message->created_at])
+                ]),
+                'text' => nl2br($message->body),
+                'profile' => [
+                    'modifiers' => 'm-small',
+                    'image' => $message->fromUser->imagePreset(),
+                    'route' => ''
+                ]
+            ];
+        })
     ])
-
-    </div>
-
-@endforeach
 
 @endif
 
