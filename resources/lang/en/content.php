@@ -245,4 +245,28 @@ return [
     'static.edit.field.body.title' => 'Body',
     'static.edit.field.body.help' => '',
 
+    // Sponsored
+
+    'sponsored.index.title' => 'Sponsored articles',
+
+    'sponsored.create.title' => 'Add sponsored post',
+
+    'sponsored.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
+    'sponsored.edit.field.image_id.help' => 'You can use image shortcuts, for example: [[456]]',
+
+    'sponsored.edit.field.title.title' => 'Title',
+    'sponsored.edit.field.title.help' => '',
+
+    'sponsored.edit.field.body.title' => 'Body',
+    'sponsored.edit.field.body.help' => '',
+
+    'sponsored.edit.field.destinations.title' => 'Select destinations',
+    'sponsored.edit.field.destinations.help' => '',
+
+    'sponsored.edit.field.topics.title' => 'Select topics',
+    'sponsored.edit.field.topics.help' => '',
+
+    'sponsored.edit.field.url.title' => 'URL',
+    'sponsored.edit.field.url.help' => '',
+
 ];
