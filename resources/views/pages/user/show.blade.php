@@ -16,6 +16,8 @@
 
 @section('content')
 
+@parent
+
 @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
 
 <div class="r-user m-green m-logged-in">

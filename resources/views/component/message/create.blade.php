@@ -1,28 +1,20 @@
 {!! Form::open(array('id' => 'message', 'url' => route('message.store', [$user_from, $user_to]))) !!}
 
-<div class="form-group">
+<div class="c-form__group">
 
     {!! Form::textarea('body', null, [
-        'class' => 'form-control input-md',
+        'class' => 'c-form__input m-high',
         'placeholder' => trans('message.create.field.body.title'),
         'rows' => 5
     ]) !!}
         
 </div>
 
-<div class="row">
+<div class="c-form__group m-no-margin m-right">
 
-    <div class="col-md-6 col-md-offset-6">
-
-        <div class="form-group">
-
-        {!! Form::submit(trans('message.create.submit.title'), [
-            'class' => 'btn btn-primary btn-md btn-block'
-        ]) !!}
-        
-        </div>
-
-    </div>
+    {!! Form::submit(trans('message.create.submit.title'), [
+        'class' => 'c-button m-small'
+    ]) !!}
 
 </div>
 

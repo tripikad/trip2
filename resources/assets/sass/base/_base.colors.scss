@@ -41,6 +41,17 @@ $colors: ('yellow' $brand-yellow $brand-yellow-dark),
 	}
 }
 
+@mixin color-modifiers-none($property: color) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        &.m-#{$name} {
+
+            #{$property}: none;
+        }
+    }
+}
+
 @mixin color-modifiers-dark($property: color) {
 
     @each $name, $color, $color-dark in $colors {

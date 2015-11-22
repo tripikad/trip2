@@ -56,14 +56,21 @@
             @include color-modifiers-and(border-color);
 
             position: relative;
-            top: -$spacer * 8;
+            top: -$spacer * 4;
             z-index: 2;
             display: block;
-            width: $spacer * 16;
-            height: $spacer * 16;
+            width: $spacer * 8;
+            height: $spacer * 8;
             border-width: 6px;
             border-style: solid;
             border-radius: 50%;
+
+            @include respond-to(tablet) {
+
+                top: -$spacer * 8;
+                width: $spacer * 16;
+                height: $spacer * 16;
+            }
 
             img {
 
@@ -77,33 +84,58 @@
             .r-user__info-travel-mate {
 
                 position: absolute;
-                top: $spacer * 2;
-                left: $spacer * 12;
+                top: -$spacer * 3;
+                left: $spacer * 2;
+
+                @include respond-to(tablet) {
+
+                    top: $spacer * 2;
+                    left: $spacer * 12;
+                }
             }
 
         .r-user__info-actions {
 
             position: relative;
-            z-index: 4;
-            top: -$spacer * 10;
-            padding-left: $spacer * 2.5;
+            top: -$spacer * 2;
+
+            @include respond-to(tablet) {
+
+                z-index: 4;
+                top: -$spacer * 10;
+                padding-left: $spacer * 2.5;
+            }
         }
 
         .r-user__info-heading {
 
             display: flex;
             align-items: center;
-            margin: -$spacer * 7 0 $spacer * 2;
+            margin-bottom: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                margin: -$spacer * 7 0 $spacer * 2;
+            }
         }
 
             .r-user__info-title {
 
-                margin-right: $spacer * 3;
+                @include respond-to(tablet) {
+
+                    margin-right: $spacer * 3;
+                }
             }
 
             .r-user__info-status {
 
                 text-align: center;
+                display: none;
+
+                @include respond-to(tablet) {
+
+                    display: block;
+                }
             }
 
                 .r-user__info-status-icon {
@@ -129,7 +161,6 @@
                     top: -$spacer;
                 }
 
-
         .r-user__info-description {
 
             @include respond-to(tablet) {
@@ -142,12 +173,13 @@
 
             position: absolute;
             z-index: 10;
-            right: 0;
             bottom: 0;
+            display: none;
 
             @include respond-to(tablet) {
 
                 right: span(2);
+                display: block;
             }
 
             @include respond-to(desktop) {

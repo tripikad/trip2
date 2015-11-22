@@ -104,6 +104,8 @@
 
 @section('content')
 
+@parent
+
 <div class="r-flights">
 
     <div class="r-flights__map">
@@ -176,29 +178,13 @@
 
             @endforeach
 
-            <ul class="c-pager">
-
-                @if ($contents->previousPageUrl())
-
-                <li class="c-pager__item m-first">
-
-                    <a href="{{ $contents->previousPageUrl() }}" class="c-button m-tertiary m-small m-icon-pre">Uuemad pakkumised <span class="c-button__icon">@include('component.icon', ['icon' => 'icon-arrow-left'])</span></a>
-
-                </li>
-
-                @endif
-
-                @if ($contents->nextPageUrl())
-
-                <li class="c-pager__item m-last">
-
-                    <a href="{{ $contents->nextPageUrl() }}" class="c-button m-tertiary m-small m-icon-post">Vanemad pakkumised <span class="c-button__icon">@include('component.icon', ['icon' => 'icon-arrow-right'])</span></a>
-
-                </li>
-
-                @endif
-
-            </ul>
+            @include('component.pagination', [
+                'collection' => $contents,
+                'text' => [
+                    'next' => 'Vanemad pakkumised',
+                    'previous' => 'Uuemad pakkumised',
+                ]
+            ])
 
             <div class="r-flights__content-block">
 

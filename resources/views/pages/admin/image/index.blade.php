@@ -15,31 +15,31 @@
 
 @stop
 
-@section('header1.right')
-
-    @include('component.image.form', [
-        'form' => [
-            'url' => route('admin.image.store'),
-            'files' => true
-        ],
-        'name' => 'image',
-        'maxFileSize' => 5,
-        'uploadMultiple' => false
-    ])
-
-@stop
-
 @section('content.one')
 
-    <div class="row">
+    <div class="c-form__group">
+
+        @include('component.image.form', [
+            'form' => [
+                'url' => route('admin.image.store'),
+                'files' => true
+            ],
+            'name' => 'image',
+            'maxFileSize' => 5,
+            'uploadMultiple' => false
+        ])
+
+    </div>
+
+    <div class="c-columns m-4-cols m-space">
 
         @foreach ($images as $index => $image)
 
-            <div class="col-xs-4 col-sm-2 utils-padding-bottom utils-padding-right">
+            <div class="c-columns__item">
 
                 @include('component.card', [
-                    'image' => $image->preset('xsmall_square'),
-                    'options' => '-noshade'
+                    'image' => $image->preset('small'),
+                    'text' => $image->filename,
                 ])
 
                 <div class="form-group">
@@ -50,16 +50,22 @@
 
                 </div>
 
-                {{ $image->filename }}
-
             </div>
 
-            @if (($index + 1) % 6 == 0) </div><div class="row"> @endif
+            @if (($index + 1) % 4 == 0)
+
+                </div>
+
+                <div class="c-columns m-4-cols m-space">
+
+            @endif
 
         @endforeach
 
     </div>
 
-    {!! $images->render() !!}
+    @include('component.pagination',
+        ['collection' => $images]
+    )
 
 @stop

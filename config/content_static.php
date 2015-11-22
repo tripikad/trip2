@@ -15,11 +15,11 @@ return [
             'title' => [
                 'type' => 'text',
                 'title' => 'Title',
-                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
                 'title' => 'Body',
+                'large' => true,
             ],
             'submit' => [
                 'type' => 'submit',

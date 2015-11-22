@@ -23,10 +23,10 @@ return [
 
             'title' => [
                 'type' => 'text',
-                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
+                'large' => true,
             ],
             'topics' => [
                 'type' => 'topics',

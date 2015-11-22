@@ -6,6 +6,8 @@
 
 <div class="l-one-column">
 
+    @parent
+
     @yield('content.one')
 
 </div>

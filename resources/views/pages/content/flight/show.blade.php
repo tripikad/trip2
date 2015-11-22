@@ -26,6 +26,8 @@
 
 @section('content')
 
+@parent
+
 <div class="r-flights m-single">
 
     <div class="r-flights__map">

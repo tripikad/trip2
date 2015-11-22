@@ -3,9 +3,14 @@
     &.m-small {
 
         width: 100%;
-        position: relative;
 
         @include respond-to(tablet) {
+
+            position: relative;
+            width: $spacer * 22;
+        }
+
+        @include respond-to(desktop-large) {
 
             width: $spacer * 33;
         }
@@ -36,7 +41,7 @@
 
         .c-search.m-small & {
 
-            left: $spacer;
+            left: 0;
             height: $spacer * 2;
             width: $spacer * 2;
         }
@@ -101,7 +106,7 @@
         .c-search.m-small & {
 
             font-size: $font-size-normal;
-            padding: $spacer * 0.75 $spacer $spacer / 2 $spacer * 4;
+            padding: $spacer $spacer $spacer * 0.75 $spacer * 3;
             background: none;
             box-shadow: none;
         }
