@@ -8,8 +8,6 @@
 
     <div class="l-two-column__left">
 
-        @parent
-
         @yield('content.one')
 
     </div>

@@ -104,8 +104,6 @@
 
 @section('content')
 
-@parent
-
 <div class="r-flights">
 
     <div class="r-flights__map">

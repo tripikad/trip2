@@ -2,11 +2,11 @@
 
     color: $color-white;
     font-size: $font-size-normal;
+    line-height: $font-size-normal * 1.5;
     font-weight: $font-weight-medium;
     padding: $spacer;
-    margin-bottom: $spacer;
     background: $color-white;
-    border-radius: 3px;
+    position: relative;
 
     @include respond-to(tablet) {
 
@@ -19,14 +19,12 @@
         background: $color-fill-warning;
         border: 1px solid $color-fill-warning-dark;
         border-bottom: 2px solid $color-fill-warning-dark;
-        border-radius: 3px;
     }
 
     &.m-notice {
 
         color: $color-fill-notice;
-        border-bottom: 2px solid $color-fill-notice;
-        border-radius: 3px 3px 0 0;
+        border: 2px solid $color-fill-notice;
     }
 
     &.m-error {
@@ -38,8 +36,28 @@
     &.m-success {
 
         color: $color-fill-success;
-        border-bottom: 2px solid $color-fill-success;
-        border-radius: 3px 3px 0 0;
+        border: 2px solid $color-fill-success;
+    }
+
+    .c-alert__close {
+
+        position: absolute;
+        right: $spacer;
+        top: $spacer;
+        display: block;
+        color: $color-fill-neutral-darkest;
+        cursor: pointer;
+
+        @include respond-to(tablet) {
+
+            top: $spacer * 1.5;
+            right: $spacer * 2;
+        }
+
+        &:hover {
+
+            color: $color-fill-black;
+        }
     }
 
     a {

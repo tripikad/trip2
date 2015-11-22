@@ -9,6 +9,8 @@
 
         @endforeach
 
+        <span class="c-alert__close js-close-element">X</span>
+
     </div>
 
 @endif
