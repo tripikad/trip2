@@ -22,10 +22,10 @@ return [
         'fields' => [
             'title' => [
                 'type' => 'text',
-                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
+                'large' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

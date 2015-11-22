@@ -1,77 +1,145 @@
-@if ((method_exists($collection, 'lastPage')) || (! empty($collection->nextPageUrl()) || ! empty($collection->previousPageUrl())))
+{{--
 
-    <ul class="c-pagination">
+title: Pagination
 
-        <li class="c-pagination__item{{ ($collection->currentPage() == 1) ? ' disabled' : '' }}">
+code: |
 
-            @if ($collection->currentPage() != 1)
+    @include('component.pagination', [
+        'collection' => false,
+        'text' => [
+            'next' => 'Next',
+            'previous' => 'Previous',
+        ]
+    ])
 
-                <a href="{{ $collection->previousPageUrl() }}" class="c-pagination__item-text">
+--}}
 
-            @else
+@if ($collection)
+    @if ((method_exists($collection, 'lastPage')) || (! empty($collection->nextPageUrl()) || ! empty($collection->previousPageUrl())))
 
-                <span class="c-pagination__item-text">
+        <ul class="c-pagination">
+
+            <li class="c-pagination__item
+
+            {{ ($collection->currentPage() == 1) ? ' disabled' : '' }}
+
+            @if (! method_exists($collection, 'lastPage') || $collection->lastPage() <= 1)
+
+                    m-first
 
             @endif
 
-            {{ trans('pagination.previous') }}
+            ">
 
-            @if ($collection->currentPage() != 1)
+                @if ($collection->currentPage() != 1)
 
-                </a>
+                    <a href="{{ $collection->previousPageUrl() }}" class="c-pagination__item-text m-icon-pre c-button m-tertiary m-small">
 
-            @else
+                @else
+
+                    <span class="c-pagination__item-text m-icon-pre c-button m-tertiary m-small">
+
+                @endif
+
+                @if (isset($text) && !empty($text) && $text['previous'])
+
+                    {{  $text['previous'] }}
+
+                @else
+
+                    {{ trans('pagination.previous') }}
+
+                @endif
+
+                <span class="c-button__icon">
+
+                    @include('component.icon', ['icon' => 'icon-arrow-left'])
 
                 </span>
 
-            @endif
+                @if ($collection->currentPage() != 1)
 
-        </li>
-        @if(method_exists($collection, 'lastPage'))
-            @if($collection->lastPage() > 1)
+                    </a>
 
-                @for ($i = 1; $i <= $collection->lastPage(); $i++)
+                @else
 
-                    <li class="c-pagination__item{{ ($collection->currentPage() == $i) ? ' active' : '' }}">
+                    </span>
 
-                        <a href="{{ $collection->url($i) }}" class="c-pagination__item-text">
+                @endif
 
-                            {{ $i }}
+            </li>
 
-                        </a>
+            @if (method_exists($collection, 'lastPage'))
 
-                    </li>
+                @if ($collection->lastPage() > 1)
 
-                @endfor
+                    @for ($i = 1; $i <= $collection->lastPage(); $i++)
 
-            @endif
-        @endif
+                        <li class="c-pagination__item{{ ($collection->currentPage() == $i) ? ' active' : '' }}">
 
-        <li class="c-pagination__item{{ empty($collection->nextPageUrl()) ? ' disabled' : '' }}">
+                            <a href="{{ $collection->url($i) }}" class="c-pagination__item-text c-button m-tertiary m-small">
 
-            @if (! empty($collection->nextPageUrl()))
+                                {{ $i }}
 
-                <a href="{{ $collection->nextPageUrl() }}" class="c-pagination__item-text">
-            @else
+                            </a>
 
-                <span class="c-pagination__item-text">
+                        </li>
 
-            @endif
+                    @endfor
 
-            {{ trans('pagination.next') }}
-
-            @if (! empty($collection->nextPageUrl()))
-
-                </a>
-
-            @else
-
-                </span>
+                @endif
 
             @endif
 
-        </li>
+            <li class="c-pagination__item
 
-    </ul>
+                {{ empty($collection->nextPageUrl()) ? ' disabled' : '' }}
 
+                @if (! method_exists($collection, 'lastPage') || $collection->lastPage() <= 1)
+
+                    m-last
+
+                @endif
+            ">
+
+                @if (! empty($collection->nextPageUrl()))
+
+                    <a href="{{ $collection->nextPageUrl() }}" class="c-pagination__item-text m-icon-post c-button m-tertiary m-small">
+                @else
+
+                    <span class="c-pagination__item-text m-icon-post c-button m-tertiary m-small">
+
+                @endif
+
+                    @if (isset($text) && !empty($text) && $text['next'])
+
+                        {{  $text['next'] }}
+
+                    @else
+
+                        {{ trans('pagination.next') }}
+
+                    @endif
+
+                    <span class="c-button__icon">
+
+                        @include('component.icon', ['icon' => 'icon-arrow-right'])
+
+                    </span>
+
+                @if (! empty($collection->nextPageUrl()))
+
+                    </a>
+
+                @else
+
+                    </span>
+
+                @endif
+
+            </li>
+
+        </ul>
+
+    @endif
 @endif

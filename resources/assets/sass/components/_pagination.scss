@@ -1,46 +1,38 @@
 .c-pagination {
 
-    display: inline-block;
-    padding-left: 0;
+    @include clearfix;
+    @include clear-list;
+
+    width: 100%;
     margin: $spacer 0;
 
     > .c-pagination__item {
 
-        display: inline;
+        display: block;
+
+        &.m-first {
+
+            float: left;
+        }
+
+        &.m-last {
+
+            float: right;
+        }
 
         .c-pagination__item-text {
 
             position: relative;
             float: left;
-            padding: $spacer $spacer;
-            line-height: $spacer;
             text-decoration: none;
-            color: $color-white;
-            background-color: $brand-green;
-            margin-left: -1px;
+        }
+
+        &:hover,
+        &.active .c-pagination__item-text {
+
+            background: $color-fill-neutral;
         }
     }
-
-        .c-pagination__item-text {
-
-            &:hover,
-            &:focus {
-
-                z-index: 3;
-                background-color: $brand-green-dark;
-            }
-        }
-
-        > .active > .c-pagination__item-text {
-
-            &,
-            &:hover,
-            &:focus {
-
-                z-index: 2;
-                background-color: $brand-green-dark;
-            }
-        }
 
         > .disabled {
 

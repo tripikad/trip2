@@ -22,7 +22,6 @@ return [
         'fields' => [
             'title' => [
                 'type' => 'text',
-                'large' => true,
             ],
             'image_id' => [
                 'type' => 'image_id',
@@ -30,6 +29,7 @@ return [
             'body' => [
                 'type' => 'textarea',
                 'rows' => 16,
+                'large' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

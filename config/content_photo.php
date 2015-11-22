@@ -27,6 +27,7 @@ return [
                 'type' => 'textarea',
                 'title' => 'Description',
                 'rows' => 2,
+                'large' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

@@ -30,7 +30,6 @@ return [
             'title' => [
                 'type' => 'text',
                 'title' => 'Title',
-                'large' => true,
             ],
             'image_id' => [
                 'type' => 'image_id',
@@ -39,6 +38,7 @@ return [
                 'type' => 'textarea',
                 'title' => 'Body',
                 'rows' => 16,
+                'large' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',
