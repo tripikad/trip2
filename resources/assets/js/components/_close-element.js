@@ -1,8 +1,8 @@
 $('.js-close-element').on('click', function() {
 
-    $(this).hide(function() {
+    $(this).parent().slideUp('fast', function() {
 
-        $(this).parent().remove();
+        $(this).remove();
 
     });
 
