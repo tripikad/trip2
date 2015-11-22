@@ -52,7 +52,7 @@ class FrontpageController extends Controller
             ],
             'content' => [
                 'take' => 1,
-                'id' => 0,
+                'id' => 1534,
                 'status' => 1,
             ],
             'forums' => [
