@@ -96,7 +96,7 @@
             font-family: $font-primary;
             font-size: $font-size-medium;
             font-weight: $font-weight-normal;
-            margin: $spacer * 0.375 0 0 !important;
+            margin: $spacer * 0.375 0 0;
         }
 
         .c-form__group.m-error & {
