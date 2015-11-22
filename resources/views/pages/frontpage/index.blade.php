@@ -32,7 +32,7 @@
 
         </div>
 
-        @if(isset($flights1) && !empty($flights1))
+        @if (isset($flights1) && ! empty($flights1))
 
             <div class="r-home__destinations">
 
@@ -40,7 +40,7 @@
 
                     <div class="c-columns m-3-cols">
 
-                        @foreach($flights1 as $key => $flight1)
+                        @foreach ($flights1 as $key => $flight1)
 
                             <div class="c-columns__item">
 
@@ -83,7 +83,7 @@
 
         @endif
 
-        @if(isset($content) && !empty($content->first()))
+        @if (isset($content) && ! empty($content->first()))
 
             <div class="r-home__about">
 
@@ -164,7 +164,7 @@
 
                 </div>
 
-                @if(isset($forums) && !empty($forums))
+                @if (isset($forums) && ! empty($forums))
 
                     <div class="r-home__forum-column m-last">
                         @include('component.content.forum.list', [
@@ -223,7 +223,7 @@
 
                     </div>
 
-                    @if(isset($news1) && !empty($news1))
+                    @if (isset($news1) && ! empty($news1))
 
                         <div class="r-home__news-block-wrap">
 
@@ -248,7 +248,7 @@
                     @endif
 
 
-                    @if(isset($news2) && !empty($news2))
+                    @if (isset($news2) && ! empty($news2))
 
                         @include('component.list', [
                             'items' => $news2->transform(function ($new) {
@@ -276,42 +276,28 @@
             </div>
         </div>
 
-        <div class="r-home__featured-news">
+        @if (isset($featured_news) && ! empty($featured_news))
 
-            <div class="r-home__featured-news-wrap">
+            <div class="r-home__featured-news">
 
-                <div class="c-columns m-3-cols">
+                <div class="r-home__featured-news-wrap">
 
-                    <div class="c-columns__item">
+                    <div class="c-columns m-3-cols">
 
-                        @include('component.news', [
-                            'title' => 'Suur valuutaülevaade – kuhu tasub just praegu reisida',
-                            'route' => '',
-                            'image' => \App\Image::getRandom(),
-                            'modifiers' => 'm-smaller'
-                        ])
+                        @foreach ($featured_news as $featured_new)
 
-                    </div>
+                            <div class="c-columns__item">
 
-                    <div class="c-columns__item">
+                                @include('component.news', [
+                                    'title' => $featured_new->title,
+                                    'route' => route('content.show', [$featured_new->type, $featured_new]),
+                                    'image' => $featured_new->imagePreset(),
+                                    'modifiers' => 'm-smaller'
+                                ])
 
-                        @include('component.news', [
-                            'title' => 'Euroopa Kohus otsustas – lennuki tehniline rike ei päästa hüvitise maksmisest',
-                            'route' => '',
-                            'image' => \App\Image::getRandom(),
-                            'modifiers' => 'm-smaller'
-                        ])
+                            </div>
 
-                    </div>
-
-                    <div class="c-columns__item">
-
-                        @include('component.news', [
-                            'title' => 'Suur valuutaülevaade – kuhu tasub just praegu reisida',
-                            'route' => '',
-                            'image' => \App\Image::getRandom(),
-                            'modifiers' => 'm-smaller'
-                        ])
+                        @endforeach
 
                     </div>
 
@@ -319,7 +305,7 @@
 
             </div>
 
-        </div>
+        @endif
 
         <div class="r-home__travel">
 
@@ -336,9 +322,9 @@
 
                     </div>
 
-                    @if(isset($flights2) && !empty($flights2))
+                    @if (isset($flights2) && ! empty($flights2))
 
-                        @foreach($flights2 as $key => $flight2)
+                        @foreach ($flights2 as $key => $flight2)
 
                             @include('component.row', [
                                 'icon' => 'icon-tickets',
@@ -368,7 +354,7 @@
 
                 </div>
 
-                @if(isset($blogs) && !empty($blogs))
+                @if (isset($blogs) && ! empty($blogs))
 
                     <div class="r-home__travel-column m-last">
 
@@ -381,7 +367,7 @@
 
                         </div>
 
-                        @foreach($blogs as $blog)
+                        @foreach ($blogs as $blog)
 
                             @include('component.blog', [
                                 'title' => $blog->title,
@@ -404,7 +390,7 @@
         </div>
 
 
-        @if(isset($photos) && !empty($photos))
+        @if (isset($photos) && ! empty($photos))
 
             <div class="r-home__gallery">
 
@@ -426,7 +412,7 @@
 
         @endif
 
-        @if(isset($travelmates) && !empty($travelmates))
+        @if (isset($travelmates) && ! empty($travelmates))
 
             <div class="r-home__travel-mates">
 
@@ -443,7 +429,7 @@
 
                     <div class="c-columns m-4-cols">
 
-                        @foreach($travelmates as $travelmate)
+                        @foreach ($travelmates as $travelmate)
 
                             <div class="c-columns__item">
 
