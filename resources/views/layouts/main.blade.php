@@ -11,15 +11,13 @@
     </head>
     <body>{{ Analytics::render() }}
 
+        @include('component.alert.success')
+
+        @include('component.alert.error')
+
         @yield('header', view('component.header'))
 
-        @section('content')
-
-            @include('component.alert.success')
-
-            @include('component.alert.error')
-
-        @show
+        @yield('content')
 
         @yield('footer', view('component.footer'))
 

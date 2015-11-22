@@ -20,6 +20,7 @@ return [
     'edit.notify.title' => 'E-mail notifications',
 
     'edit.field.name.title' => 'Username',
+    'edit.field.email.title' => 'E-mail',
     'edit.field.password.title' => 'New password',
     'edit.field.password_confirmation.title' => 'Confirm new password',
 

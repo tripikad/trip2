@@ -19,8 +19,6 @@
 
 @section('content')
 
-@parent
-
     <div class="r-home">
 
         <div class="r-home__masthead">
