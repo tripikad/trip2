@@ -31,7 +31,7 @@ class MessageController extends Controller
         return View::make('pages.message.with')
             ->with('user', $user)
             ->with('user_with', $user_with)
-            ->with('messages', $user->messagesWith($user_id_with)->all())
+            ->with('messages', $user->messagesWith($user_id_with))
             ->render();
     }
 

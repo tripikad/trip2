@@ -24,15 +24,13 @@
 
 @section('content.one')
 
-@if (count($user->messages()))
+    @if (count($user->messages()))
 
-    @foreach ($user->messages() as $message)
-
-        <div class="utils-padding-bottom @if ($message->read) utils-read @endif">
+        @foreach ($user->messages() as $message)
 
             @include('component.row', [
                 'profile' => [
-                    'modifiers' => '',
+                    'modifiers' => 'm-small',
                     'image' => $message->withUser->imagePreset(),
                     'route' => route('user.show', [$message->withUser])
                 ],
@@ -42,13 +40,11 @@
                     'user' => view('component.user.link', ['user' => $message->withUser]),
                     'created_at' => view('component.date.long', ['date' => $message->created_at])
                 ]),
-                'modifiers' => '-narrow'
+                'modifiers' => 'm-image ' . ($message->read ? 'm-blue' : 'm-green')
             ])
 
-        </div>
+        @endforeach
 
-    @endforeach
-
-@endif
+    @endif
 
 @stop

@@ -25,7 +25,7 @@ modifiers:
 
 --}}
 
-@if (isset($route))
+@if (isset($route) && $route != '')
 
 <a class="c-profile {{ $modifiers or '' }}" href="{{ $route }}">
 
@@ -74,7 +74,7 @@ modifiers:
 
      @endif
 
-@if (isset($route))
+@if (isset($route) && $route != '')
 
 </a>
 

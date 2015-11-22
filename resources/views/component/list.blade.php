@@ -31,6 +31,7 @@ modifiers:
 - m-orange
 - m-yellow
 - m-purple
+- m-dark
 
 --}}
 
@@ -38,28 +39,58 @@ modifiers:
 
     @foreach ($items as $item)
 
-        <li class="c-list__item {{ $item['modifiers'] or '' }}">
+        <li class="c-list__item {{ $item['modifiers'] or '' }}"{{ (isset($item['id']) ? ' id="' . $item['id'] . '"' : '') }}>
 
-            <h3 class="c-list__item-title">
+            @if (isset($item['icon']) || isset($item['profile']['image']) || isset($item['title']))
 
-                <a href="{{ $item['route'] }}" class="c-list__item-title-link">
+                <h3 class="c-list__item-title">
 
-                    @if (isset($item['icon']))
+                    @if (isset($item['route']))
 
-                        <span class="c-list__item-icon">
-
-                            @include('component.icon',[
-                                'icon' => $item['icon']
-                            ])
-
-                        </span>
+                        <a href="{{ $item['route'] }}" class="c-list__item-title-link">
 
                     @endif
 
-                    {{ $item['title'] }}
-                </a>
+                        @if (isset($item['icon']))
 
-            </h3>
+                            <span class="c-list__item-icon">
+
+                                @include('component.icon',[
+                                    'icon' => $item['icon']
+                                ])
+
+                            </span>
+
+                        @elseif (isset($item['profile']['image']))
+
+                            <span class="c-list__item-image">
+
+                                @include('component.profile', [
+                                    'modifiers' => $item['profile']['modifiers'],
+                                    'route' => $item['profile']['route'],
+                                    'image' => $item['profile']['image'],
+                                    'title' => ''
+                                ])
+
+                            </span>
+
+                        @endif
+
+                        @if (isset($item['title']))
+
+                            {{ $item['title'] }}
+
+                        @endif
+
+                    @if (isset($item['route']))
+
+                        </a>
+
+                    @endif
+
+                </h3>
+
+            @endif
 
             @if (isset($item['text']))
 
@@ -67,7 +98,7 @@ modifiers:
 
                     @if (isset($item['text']))
 
-                        {{ $item['text'] }}
+                        {!! $item['text'] !!}
 
                     @endif
 
