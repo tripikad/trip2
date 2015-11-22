@@ -76,6 +76,13 @@ class FrontpageController extends Controller
                 'status' => 1,
                 'latest' => true,
             ],
+            'featured_news' => [
+                'skip' => null,
+                'take' => 3,
+                'type' => ['sponsored'],
+                'status' => 1,
+                'latest' => true,
+            ],
             'blogs' => [
                 'skip' => null,
                 'take' => 1,
