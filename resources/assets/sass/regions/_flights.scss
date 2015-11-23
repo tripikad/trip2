@@ -34,7 +34,15 @@
 
         @include respond-to(tablet) {
 
-            @include span(14 of 24);
+            @include span(15 of 24);
+        }
+
+        .r-flights.m-single & {
+
+            @include respond-to(tablet) {
+
+                @include span(14 of 24);
+            }
         }
     }
 
@@ -86,12 +94,17 @@
 
         @include respond-to(tablet) {
 
-            @include span(8 of 24 at 3);
+            @include span(7 of 24 at 3);
         }
 
         .r-flights.m-single & {
 
             padding-top: $spacer * 26;
+
+            @include respond-to(tablet) {
+
+                @include span(8 of 24 at 3);
+            }
         }
     }
 
