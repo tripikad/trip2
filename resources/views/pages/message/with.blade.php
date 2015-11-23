@@ -17,7 +17,7 @@
                 'message' => ['route' => route('message.index', [$user])],
                 'follow' => ['route' => route('follow.index', [$user])]
             ],
-            'options' => 'text-center'
+            'modifiers' => ''
         ])
 
     @endif

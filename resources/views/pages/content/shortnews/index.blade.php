@@ -16,6 +16,7 @@
 @section('header2.content')
 
     @include('component.nav', [
+        'modifiers' => '',
         'menu' => 'news',
         'items' => config('menu.news')
     ])
