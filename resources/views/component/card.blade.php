@@ -9,7 +9,7 @@ code: |
         'route' => '',
         'title' => 'Here is title',
         'text' => 'Here is subtitle',
-        'options' => $modifiers,
+        'modifiers' => $modifiers,
     ])
 
 modifiers:
@@ -21,6 +21,7 @@ modifiers:
 - m-yellow
 - m-purple
 - m-small
+- m-wrap-text
 
 --}}
 
