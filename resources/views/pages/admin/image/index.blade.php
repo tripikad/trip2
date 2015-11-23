@@ -41,6 +41,7 @@
                 @include('component.card', [
                     'image' => $image->preset('small'),
                     'text' => $image->filename,
+                    'modifiers' => 'm-wrap-text'
                 ])
 
                 <div class="form-group">

@@ -18,10 +18,16 @@ class Image extends Model
 
     public function preset($preset = 'small')
     {
-        return '/images/'
+        $file = '/images/'
             .$preset
             .'/'
             .$this->filename;
+
+        if (! file_exists(public_path().$file)) {
+            $file = '';
+        }
+
+        return $file;
     }
 
     public static function createImagePresets($path, $filename)
