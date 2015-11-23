@@ -23,7 +23,7 @@ class Image extends Model
             .'/'
             .$this->filename;
 
-        if (! file_exists(public_path() . $file)) {
+        if (! file_exists(public_path().$file)) {
             $file = '';
         }
 
