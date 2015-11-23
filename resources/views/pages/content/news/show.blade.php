@@ -19,12 +19,12 @@
 @section('content.one')
 
     @include('component.row', [
+        'modifiers' => 'm-image',
         'profile' => [
             'modifiers' => '',
             'image' => $content->user->imagePreset(),
             'route' => route('user.show', [$content->user])
         ],
-        'modifiers' => 'm-image',
         'text' => view('component.content.text', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
         'extra' => view('component.flags', ['flags' => $content->getFlags()]),

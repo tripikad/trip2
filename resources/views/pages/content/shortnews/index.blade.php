@@ -26,9 +26,8 @@
 
     @foreach ($contents as $content)
 
-        <div class="utils-border-bottom">
-
         @include('component.row', [
+            'modifiers' => 'm-image',
             'profile' => [
                 'modifiers' => '',
                 'image' => $content->user->imagePreset(),
@@ -38,8 +37,6 @@
             'route' => route('content.show', [$content->type, $content->id]),
             'text' => view('component.content.text', ['content' => $content])
         ])
-
-        </div>
 
     @endforeach
 

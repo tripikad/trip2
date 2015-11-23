@@ -23,6 +23,7 @@
     @endif
 
     @include('component.row', [
+        'modifiers' => 'm-image',
         'profile' => [
             'modifiers' => '',
             'image' => $content->user->imagePreset(),
@@ -32,8 +33,7 @@
         'text' => view('component.content.text', ['content' => $content]),
         'actions' => view('component.actions', ['actions' => $content->getActions()]),
         'extra' => view('component.flags', ['flags' => $content->getFlags()]),
-        'body' => $content->body_filtered,
-        'modifiers' => '-narrow'
+        'body' => $content->body_filtered
     ])
 
     </div>
