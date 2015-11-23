@@ -18,6 +18,7 @@
 @section('header2.content')
 
     @include('component.nav', [
+        'modifiers' => '',
         'menu' => 'admin',
         'items' => config('menu.admin')
     ])
