@@ -4,24 +4,33 @@
 
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
+        <a href="/" class="c-header__logo-link">
+
             @include('component.logo', [
                 'modifiers' => 'm-small'
             ])
 
+        </a>
+
         @else
+
+        <a href="/" class="c-header__logo-link">
 
             @include('component.logo', [
                 'modifiers' => 'm-small m-dark'
             ])
 
+        </a>
+
         @endif
+
     </div>
 
     @if(auth()->user() && ! auth()->user()->hasRole('admin'))
 
     <div class="c-header__user">
 
-        @include('component.nav.user', [
+        @include('component.navbar.user', [
             'modifiers' => 'm-purple',
             'profile' => [
                 'image' => auth()->user()->imagePreset(),
@@ -55,7 +64,7 @@
 
     <div class="c-header__user">
 
-        @include('component.nav.user', [
+        @include('component.navbar.user', [
             'modifiers' => 'm-purple',
             'profile' => [
                 'image' => auth()->user()->imagePreset(),
