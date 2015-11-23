@@ -87,21 +87,6 @@
 
 @stop
 
-@section('header1.right')
-
-    @include('component.button', [
-        'route' => route('content.create', ['type' => $type]),
-        'title' => trans("content.$type.create.title")
-    ])
-
-@stop
-
-@section('header2.content')
-
-    @include('component.filter')
-
-@stop
-
 @section('content')
 
 <div class="r-flights">
@@ -298,9 +283,22 @@
                                 'route' => '#',
                                 'icon' => 'icon-arrow-right'
                             ]
+                        ],
+                        'button' => [
+                            'modifiers' => 'm-block',
+                            'route' => route('content.create', ['type' => $type]),
+                            'title' => trans("content.$type.create.title")
                         ]
                     ])
 
+                </div>
+            </div>
+
+            <div class="r-flights__sidebar-block">
+
+                <div class="r-flights__sidebar-block-inner">
+
+                    @include('component.filter')
                 </div>
             </div>
 
