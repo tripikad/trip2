@@ -28,9 +28,8 @@
 
     @foreach ($contents as $content)
 
-        <div class="utils-padding-bottom">
-
         @include('component.row', [
+            'modifiers' => 'm-image',
             'profile' => [
                 'modifiers' => '',
                 'image' => $content->user->imagePreset(),
@@ -42,8 +41,6 @@
                 'content' => $content
             ]),
         ])
-
-        </div>
 
     @endforeach
 

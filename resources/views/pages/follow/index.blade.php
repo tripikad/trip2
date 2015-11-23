@@ -28,28 +28,25 @@
 
     @if (count($user->follows))
 
-    @foreach ($user->follows as $follow)
+        @foreach ($user->follows as $follow)
 
-        <div class="utils-padding-bottom">
+                @include('component.row', [
+                    'modifiers' => 'm-image',
+                    'profile' => [
+                        'modifiers' => '',
+                        'image' => $follow->followable->user->imagePreset(),
+                        'route' => route('user.show', [$follow->followable->user])
+                    ],
+                    'title' => $follow->followable->title,
+                    'route' => route('content.show', [
+                        $follow->followable->type,
+                        $follow->followable
+                    ]),
+                    'text' => view('component.content.text', ['content' => $follow->followable]),
+                    'actions' => view('component.actions', ['actions' => $follow->followable->getActions()])
+                ])
 
-            @include('component.row', [
-                'profile' => [
-                    'modifiers' => '',
-                    'image' => $follow->followable->user->imagePreset(),
-                    'route' => route('user.show', [$follow->followable->user])
-                ],
-                'title' => $follow->followable->title,
-                'route' => route('content.show', [
-                    $follow->followable->type,
-                    $follow->followable
-                ]),
-                'text' => view('component.content.text', ['content' => $follow->followable]),
-                'actions' => view('component.actions', ['actions' => $follow->followable->getActions()])
-            ])
-
-        </div>
-
-    @endforeach
+        @endforeach
 
     @endif
 
