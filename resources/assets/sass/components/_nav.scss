@@ -7,14 +7,6 @@
     padding: 0;
     width: 100%;
     text-align: center;
-
-    @include color-modifiers(background);
-
-    @include respond-to(tablet) {
-
-        @include color-modifiers-none(background);
-    }
-
 }
 
     .c-nav__list-item {

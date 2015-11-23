@@ -1,10 +1,10 @@
 {{--
 
-title: Nav user
+title: Navbar user
 
 code: |
 
-    @include('component.nav.user', [
+    @include('component.navbar.user', [
         'modifiers' => '',
         'profile' => [
             'image' => '',
@@ -27,15 +27,15 @@ code: |
 
 --}}
 
-<ul class="c-nav-user {{ $modifiers or '' }}">
+<ul class="c-navbar-user {{ $modifiers or '' }}">
 
-    <li class="c-nav-user__item">
-        <a href="{{ $profile['route'] }}" class="c-nav-user__item-link">
-            <span class="c-nav-user__item-text">{{ $profile['title'] }}</span>
+    <li class="c-navbar-user__item">
+        <a href="{{ $profile['route'] }}" class="c-navbar-user__item-link">
+            <span class="c-navbar-user__item-text">{{ $profile['title'] }}</span>
 
             @if (isset($profile))
 
-            <div class="c-nav-user__item-image">
+            <div class="c-navbar-user__item-image">
 
                 @include('component.profile', [
                     'modifiers' => 'm-mini',
@@ -52,18 +52,18 @@ code: |
 
         @if (isset($children))
 
-            <ul class="c-nav-user__sub">
+            <ul class="c-navbar-user__sub">
 
                 @foreach($children as $child)
 
-                    <li class="c-nav-user__sub-item">
+                    <li class="c-navbar-user__sub-item">
 
-                        <a href="{{ $child['route'] }}" class="c-nav-user__sub-item-link">
-                            <span class="c-nav-user__sub-item-text">{{ $child['title'] }}</span>
+                        <a href="{{ $child['route'] }}" class="c-navbar-user__sub-item-link">
+                            <span class="c-navbar-user__sub-item-text">{{ $child['title'] }}</span>
 
                             @if (isset($child['badge']))
 
-                                <span class="c-nav-user__sub-item-badge">
+                                <span class="c-navbar-user__sub-item-badge">
 
                                 @include('component.badge', [
                                     'modifiers' => $modifiers,

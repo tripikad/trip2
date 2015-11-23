@@ -1,7 +1,7 @@
 
 var tablet = 1000,
     body = $('body'),
-    nav = $('.js-nav'),
+    nav = $('.js-navbar'),
     headerNav = $('.js-header__nav'),
     headerSearch = $('.js-header__search'),
     headerNavTrigger = $('.js-header__nav-trigger'),

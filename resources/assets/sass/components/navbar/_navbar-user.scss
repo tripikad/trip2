@@ -1,15 +1,15 @@
-.c-nav-user {
+.c-navbar-user {
 
     @include clearfix;
     @include clear-list;
 }
 
-    .c-nav-user__item {
+    .c-navbar-user__item {
 
         position: relative;
     }
 
-        .c-nav-user__item-link {
+        .c-navbar-user__item-link {
 
             @include font-smoothing;
 
@@ -33,7 +33,7 @@
             }
         }
 
-            .c-nav-user__item-text {
+            .c-navbar-user__item-text {
 
                 display: none;
                 padding-right: $spacer;
@@ -44,9 +44,9 @@
                 }
             }
 
-            .c-nav-user__item-image {}
+            .c-navbar-user__item-image {}
 
-        .c-nav-user__sub {
+        .c-navbar-user__sub {
 
             @include clear-list;
             @include color-modifiers-and(background);
@@ -90,20 +90,20 @@
                 }
             }
 
-            .c-nav-user__item:hover & {
+            .c-navbar-user__item:hover & {
 
                 display: block;
             }
         }
 
-            .c-nav-user__sub-item {
+            .c-navbar-user__sub-item {
 
                 display: block;
                 margin: 0;
                 padding: 0;
             }
 
-                .c-nav-user__sub-item-link {
+                .c-navbar-user__sub-item-link {
 
                     @include font-smoothing;
 
@@ -122,9 +122,9 @@
                     }
                 }
 
-                    .c-nav-user__sub-item-text {}
+                    .c-navbar-user__sub-item-text {}
 
-                    .c-nav-user__sub-item-badge {
+                    .c-navbar-user__sub-item-badge {
 
                         padding-left: $spacer / 2;
                     }
