@@ -28,7 +28,7 @@
 
     .r-flights__content-wrap {
 
-        @include wrap('narrow');
+        @include wrap();
 
         position: relative;
         z-index: 2;
