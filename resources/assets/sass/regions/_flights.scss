@@ -12,7 +12,13 @@
             position: absolute;
             right: 0;
             top: $spacer * 26;
+            display: none;
             width: $spacer * 60;
+
+            @include respond-to(tablet) {
+
+                display: block;
+            }
 
             @include respond-to(desktop-large) {
 
@@ -64,18 +70,33 @@
 
         .r-flights__content-block {
 
-            margin-bottom: $spacer * 6;
+            margin-bottom: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 6;
+            }
         }
 
             .r-flights__content-block-inner {
 
-                padding: $spacer * 3;
+                padding: $spacer * 1.5 $spacer;
                 background: $color-fill-neutral-light;
+
+                @include respond-to(tablet) {
+
+                    padding: $spacer * 3;
+                }
             }
 
             .r-flights__content-title {
 
-                margin-bottom: $spacer * 3;
+                margin-bottom: $spacer * 1.5;
+
+                @include respond-to(tablet) {
+
+                    margin-bottom: $spacer * 3;
+                }
             }
 
             .r-flights__content-footer {
@@ -87,33 +108,43 @@
 
     .r-flights__sidebar {
 
-        padding-top: $spacer * 4;
-
         @include respond-to(tablet) {
 
             @include span(7 of 24 at 3);
+
+            padding-top: $spacer * 4;
         }
 
         .r-flights.m-single & {
 
-            padding-top: $spacer * 26;
-
             @include respond-to(tablet) {
 
                 @include span(8 of 24 at 3);
+
+                padding-top: $spacer * 26;
             }
         }
     }
 
         .r-flights__sidebar-block {
 
-            margin-bottom: $spacer * 2.5;
+            margin-bottom: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 2.5;
+            }
         }
 
             .r-flights__sidebar-block-inner {
 
-                padding: $spacer * 3;
+                padding: $spacer * 1.5 $spacer;
                 background: $color-fill-neutral-light;
+
+                @include respond-to(tablet) {
+
+                    padding: $spacer * 3;
+                }
             }
 
             .r-flights__sidebar-title {
