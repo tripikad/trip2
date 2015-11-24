@@ -9,7 +9,7 @@
 
         @endforeach
 
-        <span class="c-alert__close js-close-element">X</span>
+        <span class="c-alert__close js-close-element">&times;</span>
 
     </div>
 
