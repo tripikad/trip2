@@ -74,11 +74,11 @@
 
                     <ul class="c-button-group">
 
-                        @if (\Auth::user())
+                        <li class="c-button-group__item">
 
-                            @if(\Auth::user()->id !== $user->id)
+                            @if (\Auth::user())
 
-                                <li class="c-button-group__item">
+                                @if(\Auth::user()->id !== $user->id)
 
                                     @include('component.button',[
                                         'modifiers' => 'm-secondary m-small',
@@ -90,29 +90,33 @@
                                         ])
                                     ])
 
-                                </li>
+                                @else
 
-                            @endif
+                                    @include('component.button',[
+                                        'modifiers' => 'm-secondary m-small',
+                                        'title' => trans('menu.user.message'),
+                                        'route' => route('message.index', [$user])
+                                    ])
 
-                        @else
+                                @endif
 
-                            <li class="c-button-group__item">
+                            @else
 
                                 @include('component.button',[
                                     'modifiers' => 'm-secondary m-small m-disabled',
                                     'title' => trans('user.show.message.create')
                                 ])
 
-                            </li>
+                            @endif
 
-                        @endif
+                        </li>
 
                         @if (\Auth::user() && \Auth::user()->id == $user->id)
 
                             <li class="c-button-group__item">
 
                                 @include('component.button',[
-                                    'modifiers' => 'm-secondary m-small',
+                                    'modifiers' => 'm-border m-small',
                                     'title' => trans('menu.user.follow'),
                                     'route' => route('follow.index', [$user])
                                 ])
@@ -156,6 +160,50 @@
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_twitter
+                                        :
+                                            false
+                                    ),
+                                    'target' => '_blank'
+                                ])
+
+                            </li>
+
+                        @endif
+
+                        @if (isset($user->contact_instagram) && $user->contact_instagram != '')
+
+                            <li class="c-button-group__item">
+
+                                @include('component.button',[
+                                    'modifiers' => (
+                                        \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
+                                    ),
+                                    'icon' => view('component.icon',['icon' => 'icon-instagram']),
+                                    'route' => (\Auth::check()
+                                        ?
+                                            $user->contact_instagram
+                                        :
+                                            false
+                                    ),
+                                    'target' => '_blank'
+                                ])
+
+                            </li>
+
+                        @endif
+
+                        @if (isset($user->contact_homepage) && $user->contact_homepage != '')
+
+                            <li class="c-button-group__item">
+
+                                @include('component.button',[
+                                    'modifiers' => (
+                                        \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
+                                    ),
+                                    'icon' => view('component.icon',['icon' => 'icon-homepage']),
+                                    'route' => (\Auth::check()
+                                        ?
+                                            $user->contact_homepage
                                         :
                                             false
                                     ),
@@ -222,7 +270,7 @@
                                     'modifiers' => '',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
-                                        'title' => trans('menu.user.edit.title'),
+                                        'title' => trans('menu.user.edit.profile'),
                                         'route' => route('user.edit', [$user]),
                                     ])
                                 ],
@@ -230,8 +278,8 @@
                                     'modifiers' => '',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-small m-border',
-                                        'title' => 'Lisa reisikuulutus',
-                                        'route' => '',
+                                        'title' => trans('menu.user.travelmate'),
+                                        'route' => route('content.create', ['type' => 'travelmate']),
                                     ])
                                 ],
                                 [
@@ -243,27 +291,11 @@
                                     ])
                                 ],
                                 [
-                                    'modifiers' => 'm-hide',
-                                    'button' => view('component.button',[
-                                        'modifiers' => 'm-secondary m-small',
-                                        'title' => 'Messages',
-                                        'route' => route('message.index', [$user])
-                                    ]),
-                                ],
-                                [
-                                    'modifiers' => 'm-hide',
-                                    'button' => view('component.button',[
-                                        'modifiers' => 'm-secondary m-small',
-                                        'title' => 'Follows',
-                                        'route' => route('follow.index', [$user])
-                                    ]),
-                                ],
-                                [
                                     'modifiers' => 'm-right',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
-                                        'title' => 'Täienda oma kaarti',
-                                        'route' => ''
+                                        'title' => trans('menu.user.add.places'),
+                                        'route' => '#'
                                     ]),
                                 ]
                             ]
