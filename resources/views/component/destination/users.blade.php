@@ -10,7 +10,7 @@
                 
                 @include('component.user.image', [
                     'image' => $user->user->imagePreset('xsmall_square'),
-                    'options' => '-circle'
+                    'modifiers' => 'm-circle'
                 ])
             
             </a>

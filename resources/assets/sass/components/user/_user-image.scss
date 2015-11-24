@@ -1,0 +1,98 @@
+.c-user-image {
+
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    text-decoration: none;
+
+    .c-user-image__image {
+
+        width: 100%;
+    }
+
+    &.m-center {
+
+        justify-content: center;
+    }
+
+    &.m-mini {
+
+        display: block;
+    }
+
+    &.m-full {
+
+        height: 100%;
+        width: 100%;
+    }
+
+    &.m-circle > .c-user-image__image {
+
+        border-radius: 50%;
+    }
+}
+
+.c-user-image__image-wrap {
+
+    flex: 0 1 $spacer * 6;
+
+    .c-user-image.m-small & {
+
+        flex: 0 1 $spacer * 4;
+    }
+
+    .c-user-image.m-mini & {
+
+        position: relative;
+        display: block;
+        width: $spacer * 3;
+    }
+
+    .c-user-image.m-micro & {
+
+        display: inline-block;
+        width: $spacer * 2;
+    }
+
+    .c-user-image.m-full & {
+
+        @include color-modifiers-dark-and(background);
+
+        display: block;
+        flex: none;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.c-user-image__image {
+
+    display: block;
+    height: $spacer * 4;
+    width: $spacer * 4;
+
+    .c-user-image.m-mini &,
+    .c-user-image.m-small & {
+
+        height: $spacer * 3;
+        width: $spacer * 3;
+    }
+
+    .c-user-image.m-normal & {
+
+        width: $spacer * 15;
+        height: $spacer * 15;
+    }
+
+    .c-user-image.m-micro & {
+
+        height: $spacer * 2;
+        width: $spacer * 2;
+    }
+
+    .c-user-image.m-full & {
+
+        width: 100%;
+        height: 100%;
+    }
+}
