@@ -38,6 +38,11 @@
         font-weight: $font-weight-bold;
         text-transform: none;
     }
+
+    &.m-margin {
+
+        margin-bottom: $spacer * 2;
+    }
 }
 
     .c-title__link {
