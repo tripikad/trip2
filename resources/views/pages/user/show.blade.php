@@ -112,19 +112,9 @@
                             <li class="c-button-group__item">
 
                                 @include('component.button',[
-                                    'modifiers' => (
-                                        \Auth::check() ? 'm-border m-small' : 'm-border m-small m-disabled'
-                                    ),
+                                    'modifiers' => 'm-secondary m-small',
                                     'title' => trans('menu.user.follow'),
-                                    'route' => (
-                                        \Auth::check()
-                                        ?
-                                            route('follow.index', [
-                                                $user
-                                            ])
-                                        :
-                                            false
-                                    )
+                                    'route' => route('follow.index', [$user])
                                 ])
 
                             </li>
@@ -222,7 +212,7 @@
 
                 </div>
 
-                @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
+                @if (\Auth::check() && (\Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::user()->hasRoleOrOwner('superuser', $user->id)))
 
                     <div class="r-user__info-admin">
 
@@ -232,7 +222,7 @@
                                     'modifiers' => '',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
-                                        'title' => trans('user.edit.title'),
+                                        'title' => trans('menu.user.edit.title'),
                                         'route' => route('user.edit', [$user]),
                                     ])
                                 ],
@@ -240,7 +230,7 @@
                                     'modifiers' => '',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-small m-border',
-                                        'title' => 'Lisa reisikuulutuse kuulutus',
+                                        'title' => 'Lisa reisikuulutus',
                                         'route' => '',
                                     ])
                                 ],
@@ -248,7 +238,7 @@
                                     'modifiers' => 'm-hide',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
-                                        'title' => 'Activity',
+                                        'title' => trans('menu.user.activity'),
                                         'route' => route('user.show', [$user])
                                     ])
                                 ],
@@ -289,8 +279,14 @@
                         'items' => [
                             [
                                 'icon' => 'icon-comment',
-                                'title' => '123',
-                                'text' => 'Postitusi foorumis',
+                                'title' =>
+                                    (isset($content_count) ? intval($content_count) : 0)
+                                    .' / '.
+                                    (isset($comment_count) ? intval($comment_count) : 0),
+                                'text' =>
+                                    trans('user.show.count.content.title')
+                                    .' / '.
+                                    trans('user.show.count.comment.title'),
                                 'route' => ''
                             ],
                             [
