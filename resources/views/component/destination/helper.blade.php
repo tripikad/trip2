@@ -20,7 +20,7 @@
         <div class="c-destination-helper__actions">
 
             @include('component.link',[
-                'modifiers' => 'm-icon',
+                'modifiers' => 'm-icon m-right',
                 'title' => 'Veel',
                 'route' => '',
                 'icon' => 'icon-arrow-right'

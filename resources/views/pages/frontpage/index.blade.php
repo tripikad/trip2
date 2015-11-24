@@ -69,7 +69,7 @@
                     <div class="r-home__destinations-action">
 
                         @include('component.link', [
-                            'modifiers' => 'm-icon',
+                            'modifiers' => 'm-icon m-right',
                             'title' => 'Vaata kõiki sooduspakkumisi',
                             'route' => route('content.show', ['flight']),
                             'icon' => 'icon-arrow-right'
@@ -265,7 +265,7 @@
                         @include('component.link', [
                             'title' => trans('frontpage.index.all.news'),
                             'route' => route('content.show', ['news']),
-                            'modifiers' => 'm-icon',
+                            'modifiers' => 'm-icon m-right',
                             'icon' => 'icon-arrow-right'
                         ])
 

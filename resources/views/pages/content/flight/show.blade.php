@@ -225,10 +225,10 @@
                     ])
                 </div>
 
-                <div class="r-flights__content-footer m-right">
+                <div class="r-flights__content-footer">
 
                     @include('component.link', [
-                        'modifiers' => 'm-icon',
+                        'modifiers' => 'm-icon m-right',
                         'title' => 'Vaata kõiki  sooduspakkumisi',
                         'route' => '#',
                         'icon' => 'icon-arrow-right'

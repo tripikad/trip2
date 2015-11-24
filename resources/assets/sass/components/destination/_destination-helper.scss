@@ -33,5 +33,5 @@
 
         .c-destination-helper__actions {
 
-            text-align: right;
+            @include clearfix;
         }

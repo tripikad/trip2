@@ -80,12 +80,9 @@
 
             .r-flights__content-footer {
 
+                @include clearfix;
+
                 padding-top: $spacer;
-
-                &.m-right {
-
-                    text-align: right;
-                }
             }
 
     .r-flights__sidebar {
