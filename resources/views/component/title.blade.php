@@ -20,10 +20,15 @@ modifiers:
 - m-orange
 - m-yellow
 - m-purple
+- m-white
+- m-margin
+- m-large
+- m-larger
+- m-huge
 
 --}}
 
-<h2 class="c-title {{ $modifiers or 'm-yellow' }}">
+<h2 class="c-title {{ $modifiers or '' }}">
     @if (isset($link_route)) <a href="{{ $link_route }}" class="c-title__link"> @endif
     {{ $title }}
     @if (isset($link_route)) </a> @endif

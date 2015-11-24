@@ -4,7 +4,7 @@
 
     .r-travelmates__wrap {
 
-        @include wrap('narrow');
+        @include wrap();
     }
 
     .r-travelmates__content {

@@ -31,7 +31,7 @@ modifiers:
 
         <div class="c-masthead__logo">
 
-            @if (isset($image))
+            @if (isset($image) && isset($modifiers))
 
                 @include ('component.logo',[
                     'modifiers' => ''

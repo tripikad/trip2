@@ -5,15 +5,25 @@
     &.m-image {
 
         position: relative;
-        padding-left: $spacer * 6;
+        padding-left: $spacer * 4;
         margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            padding-left: $spacer * 6;
+        }
     }
 
     &.m-icon {
 
         position: relative;
-        padding-left: $spacer * 6;
+        padding-left: $spacer * 4;
         margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            padding-left: $spacer * 6;
+        }
     }
 
     &.m-large {
@@ -35,13 +45,22 @@
         left: 0;
         top: 0;
         display: block;
-        width: $spacer * 4;
-        height: $spacer * 4;
+        width: $spacer * 3;
+        height: $spacer * 3;
+
+        @include respond-to(tablet) {
+
+            width: $spacer * 4;
+            height: $spacer * 4;
+        }
 
         .c-row.m-featured & {
 
-            width: $spacer * 5;
-            height: $spacer * 5;
+            @include respond-to(tablet) {
+
+                width: $spacer * 5;
+                height: $spacer * 5;
+            }
         }
 
         svg {
@@ -79,25 +98,40 @@
 
             @include font-smoothing;
 
-            font-size: $font-size-larger - 2;
+            font-size: $font-size-large;
             font-weight: $font-weight-bold;
             line-height: 1.15;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-larger - 2;
+            }
         }
 
         .c-row.m-large & {
 
             @include font-smoothing;
 
-            font-size: $font-size-larger - 2;
+            font-size: $font-size-large;
             font-weight: $font-weight-bold;
             line-height: 1.15;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-larger - 2;
+            }
         }
 
         .c-row.m-featured & {
 
-            font-size: $font-size-larger;
+            font-size: $font-size-larger - 2;
             font-weight: $font-weight-bold;
             line-height: 1.15;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-larger;
+            }
         }
     }
 

@@ -2,7 +2,7 @@
 
     .r-forum__wrap {
 
-        @include wrap('narrow');
+        @include wrap();
     }
 
     .r-forum__content {

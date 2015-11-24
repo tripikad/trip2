@@ -37,6 +37,11 @@
         display: flex;
         align-items: center;
     }
+
+    &.m-right {
+
+        float: right;
+    }
 }
 
     .c-link__icon {

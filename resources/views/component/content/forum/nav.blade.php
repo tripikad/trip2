@@ -16,9 +16,9 @@ code: |
 
         @foreach ($items as $item)
 
-            <li class="c-forum-list-nav__item">
+            @if (isset($item['type']) && $item['type'] === 'button')
 
-                @if (isset($item['type']) && $item['type'] === 'button')
+                <li class="c-forum-list-nav__item m-button">
 
                     @include('component.button', [
                         'modifiers' => $item['modifiers'],
@@ -26,7 +26,11 @@ code: |
                         'route' => $item['route']
                     ])
 
-                @else
+                </li>
+
+            @else
+
+                <li class="c-forum-list-nav__item">
 
                     @if(isset($item['icon']))
 
@@ -47,9 +51,9 @@ code: |
 
                     @endif
 
-                @endif
+                </li>
 
-            </li>
+            @endif
 
         @endforeach
 
