@@ -74,32 +74,40 @@
 
                     <ul class="c-button-group">
 
-                        @if (\Auth::user()->id !== $user->id)
+                        @if (\Auth::user())
+
+                            @if(\Auth::user()->id !== $user->id)
+
+                                <li class="c-button-group__item">
+
+                                    @include('component.button',[
+                                        'modifiers' => 'm-secondary m-small',
+                                        'title' => trans('user.show.message.create'),
+                                        'route' => route('message.index.with', [
+                                            \Auth::user(),
+                                            $user,
+                                            '#message'
+                                        ])
+                                    ])
+
+                                </li>
+
+                            @endif
+
+                        @else
 
                             <li class="c-button-group__item">
 
                                 @include('component.button',[
-                                    'modifiers' => (
-                                        \Auth::check() ? 'm-secondary m-small' : 'm-secondary m-small m-disabled'
-                                    ),
-                                    'title' => trans('user.show.message.create'),
-                                    'route' => (\Auth::check()
-                                         ?
-                                            route('message.index.with', [
-                                                \Auth::user(),
-                                                $user,
-                                                '#message'
-                                            ])
-                                        :
-                                            false
-                                    )
+                                    'modifiers' => 'm-secondary m-small m-disabled',
+                                    'title' => trans('user.show.message.create')
                                 ])
 
                             </li>
 
                         @endif
 
-                        @if (\Auth::user()->id == $user->id)
+                        @if (\Auth::user() && \Auth::user()->id == $user->id)
 
                             <li class="c-button-group__item">
 
