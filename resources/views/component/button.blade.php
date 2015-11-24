@@ -6,7 +6,8 @@ code: |
 
     @include('component.button', [
         'title' => 'Button',
-        'route' => '',
+        'route' => '#',
+        'target' => '_blank',
         'modifiers' => $modifiers
     ])
 
