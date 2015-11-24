@@ -56,23 +56,23 @@ modifiers:
 
     @if (isset($title))
 
-    <div class="c-profile__info">
+        <div class="c-profile__info">
 
-        <h3 class="c-profile__title">
-        	{{ $title }}
-			@if (isset($age))
-				<span>({{ $age }})</span>
-			@endif
-        </h3>
+            <h3 class="c-profile__title">
+                {{ $title }}
+                @if (isset($age))
+                    <span>({{ $age }})</span>
+                @endif
+            </h3>
 
-        @if (isset($interests))
+            @if (isset($interests))
 
-        <p class="c-profile__interests">{{ $interests }}</p>
+            <p class="c-profile__interests">{{ $interests }}</p>
 
-        @endif
-    </div>
+            @endif
+        </div>
 
-     @endif
+    @endif
 
 @if (isset($route) && $route != '')
 

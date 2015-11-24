@@ -1,0 +1,58 @@
+.r-user-edit {}
+
+    .r-user-edit__content-wrap {
+
+        @include wrap();
+
+        position: relative;
+        z-index: 2;
+    }
+
+    .r-user-edit__content {
+
+        padding-top: $spacer * 4;
+
+        @include respond-to(tablet) {
+
+            @include span(15 of 24);
+        }
+
+        .r-user-edit.m-single & {
+
+            @include respond-to(tablet) {
+
+                @include span(14 of 24);
+            }
+        }
+    }
+
+    .r-user-edit__sidebar {
+
+        padding-top: $spacer * 4;
+
+        @include respond-to(tablet) {
+
+            @include span(7 of 24 at 2);
+        }
+
+        .r-user-edit.m-single & {
+
+            padding-top: $spacer * 26;
+
+            @include respond-to(tablet) {
+
+                @include span(8 of 24 at 2);
+            }
+        }
+    }
+
+        .r-user-edit__sidebar-block {
+
+            margin-bottom: $spacer * 2.5;
+        }
+
+            .r-user-edit__sidebar-block-inner {
+
+                padding: $spacer * 3;
+                background: $color-fill-neutral-light;
+            }
