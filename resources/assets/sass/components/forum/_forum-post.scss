@@ -1,11 +1,16 @@
 .c-forum-post {
 
     position: relative;
-    padding: $spacer * 2 $spacer * 4;
+    padding: $spacer * 2;
     margin: 0 0 $spacer * 2 $spacer * 1.5;
     background: $color-white;
     border-radius: 3px;
     border: 2px solid $color-fill-neutral;
+
+    @include respond-to(tablet) {
+
+        padding: $spacer * 2 $spacer * 4;
+    }
 }
 
     .c-forum-post__profile {

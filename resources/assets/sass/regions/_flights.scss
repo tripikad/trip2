@@ -95,7 +95,17 @@
 
                 @include respond-to(tablet) {
 
-                    margin-bottom: $spacer * 3;
+                    margin-bottom: $spacer * 2;
+                }
+            }
+
+            .r-flights__content-body {
+
+                margin-bottom: $spacer;
+
+                @include respond-to(tablet) {
+
+                    margin-bottom: $spacer * 1.5;
                 }
             }
 
