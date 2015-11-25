@@ -87,7 +87,7 @@ class AuthTest extends TestCase
                 'email' => $user->email,
                 'token' => $token,
             ])
-            ->seeLink($user->name, 'user/'.$user->id)
+            ->seeLink(str_limit($user->name, 15), 'user/'.$user->id)
             ->visit('/user/'.$user->id)
             ->seeLink(trans('user.edit.title'), 'user/'.$user->id.'/edit');
     }
