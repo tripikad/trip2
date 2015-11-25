@@ -54,7 +54,7 @@
                         'modifiers' => 'm-full m-green',
                     ])
 
-                    @if (isset($latest_announcement) && ! empty($latest_announcement))
+                    @if (isset($latest_announcement) && count($latest_announcement))
 
                         <div class="r-user__info-travel-mate">
 
@@ -231,15 +231,15 @@
 
                         @if(strlen($user->name) >= 30)
 
-                        <h1 class="c-user-title m-long">{{ $user->name }}</h1>
+                            <h1 class="c-user-title m-long">{{ $user->name }}</h1>
 
                         @elseif(strlen($user->name) < 30 && strlen($user->name) >= 15)
 
-                        <h1 class="c-user-title">{{ $user->name }}</h1>
+                            <h1 class="c-user-title">{{ $user->name }}</h1>
 
                         @else
 
-                        <h1 class="c-user-title m-short">{{ $user->name }}</h1>
+                            <h1 class="c-user-title m-short">{{ $user->name }}</h1>
 
                         @endif
 
@@ -354,7 +354,7 @@
 
     </div>
 
-    @if (isset($photos) && ! empty($photos))
+    @if (isset($photos) && count($photos))
 
         <div class="r-user__gallery">
 
@@ -384,7 +384,7 @@
 
             <div class="r-user__additional-content">
 
-                @if (isset($forum_posts) && ! empty($forum_posts))
+                @if (isset($forum_posts) && count($forum_posts))
 
                     <div class="r-user__additional-header">
 
@@ -392,7 +392,7 @@
 
                             @include('component.title', [
                                 'modifiers' => 'm-green',
-                                'title' => 'Viimased postitused'
+                                'title' => trans('site.content.latest.posts')
                             ])
 
                         </div>
@@ -401,8 +401,8 @@
 
                             @include('component.link', [
                                 'modifiers' => 'm-small',
-                                'title' => 'Trip.ee foorum',
-                                'route' => '#'
+                                'title' => trans('menu.forum.forum'),
+                                'route' => route('content.show', ['forum'])
                             ])
 
                         </div>
@@ -411,7 +411,7 @@
 
                     @include('component.content.forum.list', [
                         'modifiers' => 'm-compact',
-                        'items' => $forum_posts->transform(function ($forum_post) {
+                        'items' => $forum_posts->transform(function($forum_post) use($user) {
                             return [
                                 'topic' => $forum_post->title,
                                 'route' => route('content.show', [$forum_post->type, $forum_post]),
@@ -495,37 +495,46 @@
 
             <div class="r-user__additional-sidebar">
 
-                <div class="r-user__additional-block">
+                @if (isset($blogs) && count($blogs))
 
-                    <div class="r-user__additional-header">
+                    <div class="r-user__additional-block">
 
-                        <div class="r-user__additional-title">
+                        <div class="r-user__additional-header">
 
-                            @include('component.title', [
-                                'modifiers' => 'm-green',
-                                'title' => 'Reisikirjad'
-                            ])
+                            <div class="r-user__additional-title">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-green',
+                                    'title' => trans('frontpage.index.travelletter.title')
+                                ])
+
+                            </div>
+
+                            <div class="r-user__additional-action">
+
+                                @include('component.link', [
+                                    'modifiers' => 'm-small',
+                                    'title' => trans('site.link.read.more'),
+                                    'route' => route('content.show', ['blog'])
+                                ])
+
+                            </div>
 
                         </div>
 
-                        <div class="r-user__additional-action">
+                        @foreach ($blogs as $blog)
 
-                            @include('component.link', [
-                                'modifiers' => 'm-small',
-                                'title' => 'Veel',
-                                'route' => '#'
+                            @include('component.blog', [
+                                'title' => $blog->title,
+                                'route' => route('content.show', [$blog->type, $blog]),
+                                'image' => $blog->imagePreset(),
                             ])
 
-                        </div>
+                        @endforeach
+
                     </div>
 
-                    @include('component.blog', [
-                        'title' => 'Minu Malta  – jutustusi kuuajaselt ringreisilt',
-                        'route' => '#',
-                        'image' => \App\Image::getRandom(),
-                    ])
-
-                </div>
+                @endif
 
                 <div class="r-user__additional-block">
 

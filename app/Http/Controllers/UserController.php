@@ -99,6 +99,14 @@ class UserController extends Controller
             ->take(4)
             ->get();
 
+        $blogs = $user
+            ->contents()
+            ->whereStatus(1)
+            ->where('type', 'blog')
+            ->latest('created_at')
+            ->take(1)
+            ->get();
+
         return response()->view('pages.user.show', [
             'user' => $user,
             'items' => $items,
@@ -108,6 +116,7 @@ class UserController extends Controller
             'photos' => $photos,
             'count_photos' => $count_photos,
             'forum_posts' => $forum_posts,
+            'blogs' => $blogs,
         ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
     }
 
