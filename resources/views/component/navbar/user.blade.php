@@ -31,7 +31,7 @@ code: |
 
     <li class="c-navbar-user__item">
         <a href="{{ $profile['route'] }}" class="c-navbar-user__item-link">
-            <span class="c-navbar-user__item-text">{{ $profile['title'] }}</span>
+            <span class="c-navbar-user__item-text">{{ str_limit($profile['title'], 15) }}</span>
 
             @if (isset($profile))
 
