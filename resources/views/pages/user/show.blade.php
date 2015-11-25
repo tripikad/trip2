@@ -54,19 +54,26 @@
                         'modifiers' => 'm-full m-green',
                     ])
 
-                    <div class="r-user__info-travel-mate">
+                    @if (isset($latest_announcement) && ! empty($latest_announcement))
 
-                        @include('component.tooltip', [
-                            'modifiers' => 'm-green m-bottom m-one-line',
-                            'text' => 'Otsin reisikaaslast',
-                            'link' => view('component.link', [
-                                'title' => 'Loe lähemalt',
-                                'route' => '#',
-                                'modifiers' => 'm-small'
-                            ])
-                         ])
+                        <div class="r-user__info-travel-mate">
 
-                    </div>
+                            @include('component.tooltip', [
+                                'modifiers' => 'm-green m-bottom m-one-line',
+                                'text' => $latest_announcement->title,
+                                'link' => view('component.link', [
+                                    'title' => trans('site.link.read.more'),
+                                    'route' => route('content.show', [
+                                        $latest_announcement->type,
+                                        $latest_announcement
+                                    ]),
+                                    'modifiers' => 'm-small'
+                                ])
+                             ])
+
+                        </div>
+
+                    @endif
 
                 </div>
 
@@ -156,7 +163,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon',['icon' => 'icon-twitter']),
+                                    'icon' => view('component.icon', ['icon' => 'icon-twitter']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_twitter
@@ -338,60 +345,29 @@
 
     </div>
 
-    <div class="r-user__gallery">
+    @if (isset($photos) && ! empty($photos))
 
-        <div class="r-user__gallery-wrap">
+        <div class="r-user__gallery">
+
+            <div class="r-user__gallery-wrap">
 
             @include('component.gallery', [
-                'items' => [
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 1'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 2'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 3'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 4'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 5'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 6'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 7'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 8'
-                    ],
-                ],
-                'more_count' => '119',
-                'more_route' => '#'
+                'items' => $photos->transform(function($photo) {
+                    return [
+                        'image' => $photo->imagePreset(),
+                        'route' => route('content.show', [$photo->type, $photo]),
+                        'alt' => $photo->title
+                    ];
+                }),
+                'more_count' => intval($count_photos),
+                'more_route' => route('content.show', ['photo'])
             ])
+
+            </div>
 
         </div>
 
-    </div>
+    @endif
 
     <div class="r-user__additional">
 
