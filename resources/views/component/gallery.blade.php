@@ -76,7 +76,7 @@ code: |
 
                 @endif
 
-                @if ($item == end($items) || $item == $items->last())
+                @if ($item == end($items) || (method_exists($items, 'last') && $item == $items->last()))
 
                     @if (isset($more_count) && isset($more_route))
 
