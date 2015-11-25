@@ -6,7 +6,8 @@ code: |
 
     @include('component.button', [
         'title' => 'Button',
-        'route' => '',
+        'route' => '#',
+        'target' => '_blank',
         'modifiers' => $modifiers
     ])
 
@@ -26,7 +27,16 @@ modifiers:
 
 --}}
 
-<a href="{{ $route }}" class="c-button {{ $modifiers or '' }}">
+@if(isset($route) && $route!='')
+
+    <a href="{{ $route }}" target="{{ $target or '_parent' }}" class="c-button {{ $modifiers or '' }}">
+
+@else
+
+    <span class="c-button {{ $modifiers or '' }}">
+
+@endif
+
     @if (isset($title))
 
     {{ $title }}
@@ -38,4 +48,13 @@ modifiers:
     {!! $icon !!}
 
     @endif
-</a>
+
+@if(isset($route) && $route!='')
+
+    </a>
+
+@else
+
+    </span>
+
+@endif

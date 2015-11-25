@@ -61,11 +61,22 @@ code: |
         @foreach ($items as $item)
 
             <li class="c-gallery__list-item">
-                <a href="{{ $item['route'] }}" class="c-gallery__list-item-link">
-                    <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
-                </a>
 
-                @if ($item == end($items))
+                @if (isset($item['route']))
+
+                    <a href="{{ $item['route'] }}" class="c-gallery__list-item-link">
+
+                @endif
+
+                    <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
+
+                @if (isset($item['route']))
+
+                    </a>
+
+                @endif
+
+                @if ($item == end($items) || (method_exists($items, 'last') && $item == $items->last()))
 
                     @if (isset($more_count) && isset($more_route))
 
@@ -82,4 +93,3 @@ code: |
 
     </ul>
 </div>
-

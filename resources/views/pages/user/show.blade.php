@@ -54,107 +54,174 @@
                         'modifiers' => 'm-full m-green',
                     ])
 
-                    <div class="r-user__info-travel-mate">
+                    @if (isset($latest_announcement) && ! empty($latest_announcement))
 
-                        @include('component.tooltip', [
-                            'modifiers' => 'm-green m-bottom m-one-line',
-                            'text' => 'Otsin reisikaaslast',
-                            'link' => view('component.link', ['title' => 'Loe lähemalt', 'route' => '#', 'modifiers' => 'm-small'])
-                         ])
+                        <div class="r-user__info-travel-mate">
 
-                    </div>
+                            @include('component.tooltip', [
+                                'modifiers' => 'm-green m-bottom m-one-line',
+                                'text' => $latest_announcement->title,
+                                'link' => view('component.link', [
+                                    'title' => trans('site.link.read.more'),
+                                    'route' => route('content.show', [
+                                        $latest_announcement->type,
+                                        $latest_announcement
+                                    ]),
+                                    'modifiers' => 'm-small'
+                                ])
+                             ])
+
+                        </div>
+
+                    @endif
 
                 </div>
 
                 <div class="r-user__info-actions">
 
+                    <ul class="c-button-group">
 
+                        <li class="c-button-group__item">
 
-                    @if (\Auth::check() && \Auth::user()->id !== $user->id)
+                            @if (\Auth::user())
 
-                        @include('component.button', [
-                            'modifiers' => 'm-secondary',
-                            'route' => route('message.index.with', [
-                                \Auth::user(),
-                                $user,
-                                '#message'
-                            ]),
-                            'title' => trans('user.show.message.create')
-                        ])
+                                @if(\Auth::user()->id !== $user->id)
 
-                    @endif
-
-                    @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
-
-                        @include('component.button.group',[
-                            'items' => [
-                                [
-                                    'button' => view('component.button',[
-                                        'modifiers' => 'm-secondary m-small m-disabled',
-                                        'title' => 'Saada sõnum',
-                                        'route' => ''
-                                    ])
-                                ],
-                                [
-                                    'button' => view('component.button',[
-                                        'modifiers' => 'm-border m-small m-disabled',
-                                        'title' => 'Jälgi',
-                                        'route' => ''
-                                    ]),
-                                ],
-                                [
-                                    'button' => view('component.button',[
-                                        'modifiers' => 'm-icon m-small m-round m-disabled',
-                                        'icon' => view('component.icon',['icon' => 'icon-facebook']),
-                                        'route' => '#'
-                                    ]),
-                                ],
-                                [
-                                    'button' => view('component.button',[
-                                        'modifiers' => 'm-icon m-small m-round m-disabled',
-                                        'icon' => view('component.icon',['icon' => 'icon-twitter']),
-                                        'route' => '#'
-                                    ]),
-                                ]
-                            ]
-                        ])
-
-                    @else
-
-                        @include('component.button.group',[
-                            'items' => [
-                                [
-                                    'button' => view('component.button',[
+                                    @include('component.button',[
                                         'modifiers' => 'm-secondary m-small',
-                                        'title' => 'Saada sõnum',
-                                        'route' => ''
+                                        'title' => trans('user.show.message.create'),
+                                        'route' => route('message.index.with', [
+                                            \Auth::user(),
+                                            $user,
+                                            '#message'
+                                        ])
                                     ])
-                                ],
-                                [
-                                    'button' => view('component.button',[
-                                        'modifiers' => 'm-border m-small',
-                                        'title' => 'Jälgi',
-                                        'route' => ''
-                                    ]),
-                                ],
-                                [
-                                    'button' => view('component.button',[
-                                        'modifiers' => 'm-icon m-small m-round',
-                                        'icon' => view('component.icon',['icon' => 'icon-facebook']),
-                                        'route' => '#'
-                                    ]),
-                                ],
-                                [
-                                    'button' => view('component.button',[
-                                        'modifiers' => 'm-icon m-small m-round',
-                                        'icon' => view('component.icon',['icon' => 'icon-twitter']),
-                                        'route' => '#'
-                                    ]),
-                                ]
-                            ]
-                        ])
 
-                    @endif
+                                @else
+
+                                    @include('component.button',[
+                                        'modifiers' => 'm-secondary m-small',
+                                        'title' => trans('menu.user.message'),
+                                        'route' => route('message.index', [$user])
+                                    ])
+
+                                @endif
+
+                            @else
+
+                                @include('component.button',[
+                                    'modifiers' => 'm-secondary m-small m-disabled',
+                                    'title' => trans('user.show.message.create')
+                                ])
+
+                            @endif
+
+                        </li>
+
+                        @if (\Auth::user() && \Auth::user()->id == $user->id)
+
+                            <li class="c-button-group__item">
+
+                                @include('component.button',[
+                                    'modifiers' => 'm-border m-small',
+                                    'title' => trans('menu.user.follow'),
+                                    'route' => route('follow.index', [$user])
+                                ])
+
+                            </li>
+
+                        @endif
+
+
+                        @if (isset($user->contact_facebook) && $user->contact_facebook != '')
+
+                            <li class="c-button-group__item">
+
+                                @include('component.button',[
+                                    'modifiers' => (
+                                        \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
+                                    ),
+                                    'icon' => view('component.icon',['icon' => 'icon-facebook']),
+                                    'route' => (\Auth::check()
+                                        ?
+                                            $user->contact_facebook
+                                        :
+                                            false
+                                    ),
+                                    'target' => '_blank'
+                                ])
+
+                            </li>
+
+                        @endif
+
+                        @if (isset($user->contact_twitter) && $user->contact_twitter != '')
+
+                            <li class="c-button-group__item">
+
+                                @include('component.button',[
+                                    'modifiers' => (
+                                        \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
+                                    ),
+                                    'icon' => view('component.icon', ['icon' => 'icon-twitter']),
+                                    'route' => (\Auth::check()
+                                        ?
+                                            $user->contact_twitter
+                                        :
+                                            false
+                                    ),
+                                    'target' => '_blank'
+                                ])
+
+                            </li>
+
+                        @endif
+
+                        @if (isset($user->contact_instagram) && $user->contact_instagram != '')
+
+                            <li class="c-button-group__item">
+
+                                @include('component.button',[
+                                    'modifiers' => (
+                                        \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
+                                    ),
+                                    'icon' => view('component.icon',['icon' => 'icon-instagram']),
+                                    'route' => (\Auth::check()
+                                        ?
+                                            $user->contact_instagram
+                                        :
+                                            false
+                                    ),
+                                    'target' => '_blank'
+                                ])
+
+                            </li>
+
+                        @endif
+
+                        @if (isset($user->contact_homepage) && $user->contact_homepage != '')
+
+                            <li class="c-button-group__item">
+
+                                @include('component.button',[
+                                    'modifiers' => (
+                                        \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
+                                    ),
+                                    'icon' => view('component.icon',['icon' => 'icon-homepage']),
+                                    'route' => (\Auth::check()
+                                        ?
+                                            $user->contact_homepage
+                                        :
+                                            false
+                                    ),
+                                    'target' => '_blank'
+                                ])
+
+                            </li>
+
+                        @endif
+
+                    </ul>
 
                 </div>
 
@@ -200,7 +267,7 @@
 
                 </div>
 
-                @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
+                @if (\Auth::check() && (\Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::user()->hasRoleOrOwner('superuser', $user->id)))
 
                     <div class="r-user__info-admin">
 
@@ -210,7 +277,7 @@
                                     'modifiers' => '',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
-                                        'title' => trans('user.edit.title'),
+                                        'title' => trans('menu.user.edit.profile'),
                                         'route' => route('user.edit', [$user]),
                                     ])
                                 ],
@@ -218,40 +285,24 @@
                                     'modifiers' => '',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-small m-border',
-                                        'title' => 'Lisa reisikuulutuse kuulutus',
-                                        'route' => '',
+                                        'title' => trans('menu.user.travelmate'),
+                                        'route' => route('content.create', ['type' => 'travelmate']),
                                     ])
                                 ],
                                 [
                                     'modifiers' => 'm-hide',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
-                                        'title' => 'Activity',
+                                        'title' => trans('menu.user.activity'),
                                         'route' => route('user.show', [$user])
                                     ])
-                                ],
-                                [
-                                    'modifiers' => 'm-hide',
-                                    'button' => view('component.button',[
-                                        'modifiers' => 'm-secondary m-small',
-                                        'title' => 'Messages',
-                                        'route' => route('message.index', [$user])
-                                    ]),
-                                ],
-                                [
-                                    'modifiers' => 'm-hide',
-                                    'button' => view('component.button',[
-                                        'modifiers' => 'm-secondary m-small',
-                                        'title' => 'Follows',
-                                        'route' => route('follow.index', [$user])
-                                    ]),
                                 ],
                                 [
                                     'modifiers' => 'm-right',
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
-                                        'title' => 'Täienda oma kaarti',
-                                        'route' => ''
+                                        'title' => trans('menu.user.add.places'),
+                                        'route' => '#'
                                     ]),
                                 ]
                             ]
@@ -267,8 +318,14 @@
                         'items' => [
                             [
                                 'icon' => 'icon-comment',
-                                'title' => '123',
-                                'text' => 'Postitusi foorumis',
+                                'title' =>
+                                    (isset($content_count) ? intval($content_count) : 0)
+                                    .' / '.
+                                    (isset($comment_count) ? intval($comment_count) : 0),
+                                'text' =>
+                                    trans('user.show.count.content.title')
+                                    .' / '.
+                                    trans('user.show.count.comment.title'),
                                 'route' => ''
                             ],
                             [
@@ -288,60 +345,29 @@
 
     </div>
 
-    <div class="r-user__gallery">
+    @if (isset($photos) && ! empty($photos))
 
-        <div class="r-user__gallery-wrap">
+        <div class="r-user__gallery">
+
+            <div class="r-user__gallery-wrap">
 
             @include('component.gallery', [
-                'items' => [
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 1'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 2'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 3'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 4'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 5'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 6'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 7'
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'alt' => 'Pilt 8'
-                    ],
-                ],
-                'more_count' => '119',
-                'more_route' => '#'
+                'items' => $photos->transform(function($photo) {
+                    return [
+                        'image' => $photo->imagePreset(),
+                        'route' => route('content.show', [$photo->type, $photo]),
+                        'alt' => $photo->title
+                    ];
+                }),
+                'more_count' => intval($count_photos),
+                'more_route' => route('content.show', ['photo'])
             ])
+
+            </div>
 
         </div>
 
-    </div>
+    @endif
 
     <div class="r-user__additional">
 

@@ -67,11 +67,39 @@ class UserController extends Controller
             ->merge($comments)
             ->sortByDesc('created_at');
 
+        $now = Carbon::now();
+
+        $latest_announcement = $user
+            ->contents()
+            ->whereStatus(1)
+            ->whereIn('type', ['travelmate'])
+            ->where('start_at', '>=', $now)
+            ->latest('created_at')
+            ->take(1)
+            ->first();
+
+        $photos = $user
+            ->contents()
+            ->whereStatus(1)
+            ->where('type', 'photo')
+            ->latest('created_at')
+            ->take(8)
+            ->get();
+
+        $count_photos = $user
+            ->contents()
+            ->whereStatus(1)
+            ->where('type', 'photo')
+            ->count();
+
         return response()->view('pages.user.show', [
             'user' => $user,
             'items' => $items,
             'content_count' => $content_count,
             'comment_count' => $comment_count,
+            'latest_announcement' => $latest_announcement,
+            'photos' => $photos,
+            'count_photos' => $count_photos,
         ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
     }
 
