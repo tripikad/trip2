@@ -229,10 +229,19 @@
 
                     <div class="r-user__info-title">
 
-                        @include ('component.title', [
-                            'modifiers' => 'm-huge m-white',
-                            'title' => $user->name
-                        ])
+                        @if(strlen($user->name) >= 30)
+
+                        <h1 class="c-user-title m-long">{{ $user->name }}</h1>
+
+                        @elseif(strlen($user->name) < 30 && strlen($user->name) >= 15)
+
+                        <h1 class="c-user-title">{{ $user->name }}</h1>
+
+                        @else
+
+                        <h1 class="c-user-title m-short">{{ $user->name }}</h1>
+
+                        @endif
 
                     </div>
 
