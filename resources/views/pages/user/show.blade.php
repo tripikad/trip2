@@ -384,142 +384,67 @@
 
             <div class="r-user__additional-content">
 
-                <div class="r-user__additional-header">
+                @if (isset($forum_posts) && ! empty($forum_posts))
 
-                    <div class="r-user__additional-title">
+                    <div class="r-user__additional-header">
 
-                        @include('component.title', [
-                            'modifiers' => 'm-green',
-                            'title' => 'Viimased postitused'
-                        ])
+                        <div class="r-user__additional-title">
 
-                    </div>
-
-                    <div class="r-user__additional-action">
-
-                        @include('component.link', [
-                            'modifiers' => 'm-small',
-                            'title' => 'Trip.ee foorum',
-                            'route' => '#'
-                        ])
-
-                    </div>
-
-                </div>
-
-                @include('component.content.forum.list', [
-                    'modifiers' => 'm-compact',
-                    'items' => [
-                        [
-                            'topic' => 'Samui hotellid?',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
-                                'modifiers' => 'm-inverted m-green',
-                                'count' => 9
-                            ],
-                            'children' => [
-                                [
-                                    'profile' => [
-                                        'image' => \App\Image::getRandom(),
-                                        'title' => 'Charles Darwin',
-                                        'route' => ''
-                                    ],
-                                    'date' => '12. jaanuar, 12:31',
-                                    'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi.</p><p>Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p>',
-                                    'more' =>[
-                                        'title' => 'Vaata kogu teemat',
-                                        'route' => ''
-                                    ]
-                                ]
-                            ]
-                        ],
-                        [
-                            'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
-                                'modifiers' => 'm-inverted m-green',
-                                'count' => 4
-                            ],
-                            'children' => [
-                                [
-                                    'profile' => [
-                                        'image' => \App\Image::getRandom(),
-                                        'title' => 'Charles Darwin',
-                                        'route' => ''
-                                    ],
-                                    'date' => '12. jaanuar, 12:31',
-                                    'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne.</p>',
-                                    'more' =>[
-                                        'title' => 'Vaata kogu teemat',
-                                        'route' => ''
-                                    ]
-                                ]
-                            ]
-                        ],
-                        [
-                            'topic' => 'Puhkuseosakud Tenerifel',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
-                                'modifiers' => 'm-inverted m-green',
-                                'count' => 2
-                            ],
-                            'children' => [
-                                [
-                                    'profile' => [
-                                        'image' => \App\Image::getRandom(),
-                                        'title' => 'Charles Darwin',
-                                        'route' => ''
-                                    ],
-                                    'date' => '12. jaanuar, 12:31',
-                                    'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi.</p>',
-                                    'more' =>[
-                                        'title' => 'Vaata kogu teemat',
-                                        'route' => ''
-                                    ]
-                                ]
-                            ]
-                        ],
-                        [
-                            'topic' => 'Ischgl mäeolud-pilet ja majutus',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
+                            @include('component.title', [
                                 'modifiers' => 'm-green',
-                                'count' => 2
-                            ],
-                            'children' => [
-                                [
-                                    'profile' => [
-                                        'image' => \App\Image::getRandom(),
-                                        'title' => 'Charles Darwin',
-                                        'route' => ''
-                                    ],
-                                    'date' => '12. jaanuar, 12:31',
-                                    'text' => '<p>Mina puurisin nüüd juba kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p>',
-                                    'more' =>[
-                                        'title' => 'Vaata kogu teemat',
-                                        'route' => ''
+                                'title' => 'Viimased postitused'
+                            ])
+
+                        </div>
+
+                        <div class="r-user__additional-action">
+
+                            @include('component.link', [
+                                'modifiers' => 'm-small',
+                                'title' => 'Trip.ee foorum',
+                                'route' => '#'
+                            ])
+
+                        </div>
+
+                    </div>
+
+                    @include('component.content.forum.list', [
+                        'modifiers' => 'm-compact',
+                        'items' => $forum_posts->transform(function ($forum_post) {
+                            return [
+                                'topic' => $forum_post->title,
+                                'route' => route('content.show', [$forum_post->type, $forum_post]),
+                                'profile' => [
+                                    'modifiers' => 'm-mini',
+                                    'image' => $forum_post->imagePreset()
+                                ],
+                                'badge' => [
+                                    'modifiers' => 'm-mini',
+                                    'count' => 999
+                                ],
+                                'children' => [
+                                    [
+                                        'profile' => [
+                                            'image' => $user->imagePreset(),
+                                            'title' => $user->title,
+                                            'route' => route('user.show', [$user])
+                                        ],
+                                        'date' => view('component.date.long', [
+                                            'date' => $forum_post->created_at
+                                        ]),
+                                        'text' => $forum_post->body,
+                                        'more' => [
+                                            'title' => 'Vaata kogu teemat',
+                                            'route' => route('content.show', [$forum_post->type, $forum_post])
+                                        ]
                                     ]
                                 ]
-                            ]
-                        ]
-                    ]
-                ])
+                            ];
+                        })
+                    ])
+
+                @endif
 
                 <div style="display: none;">
 

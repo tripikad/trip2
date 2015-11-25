@@ -92,6 +92,13 @@ class UserController extends Controller
             ->where('type', 'photo')
             ->count();
 
+        $forum_posts = $user
+            ->contents()
+            ->whereStatus(1)
+            ->latest('created_at')
+            ->take(4)
+            ->get();
+
         return response()->view('pages.user.show', [
             'user' => $user,
             'items' => $items,
@@ -100,6 +107,7 @@ class UserController extends Controller
             'latest_announcement' => $latest_announcement,
             'photos' => $photos,
             'count_photos' => $count_photos,
+            'forum_posts' => $forum_posts,
         ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
     }
 
