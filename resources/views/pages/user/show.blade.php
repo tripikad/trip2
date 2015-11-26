@@ -141,7 +141,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon',['icon' => 'icon-facebook']),
+                                    'icon' => view('component.icon', ['icon' => 'icon-facebook']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_facebook
@@ -185,7 +185,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon',['icon' => 'icon-instagram']),
+                                    'icon' => view('component.icon', ['icon' => 'icon-instagram']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_instagram
@@ -207,7 +207,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon',['icon' => 'icon-plus']),
+                                    'icon' => view('component.icon', ['icon' => 'icon-plus']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_homepage
