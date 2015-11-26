@@ -355,15 +355,7 @@
                             [
                                 'icon' => 'icon-pin',
                                 'title' =>
-                                    $user->destinationHaveBeen()->count()
-                                    .' ('.
-                                    ($user->destinationHaveBeen()->count() > 0 && $destinations_count > 0
-                                    ?
-                                        round(($user->destinationHaveBeen()->count() * 100) / $destinations_count, 2)
-                                    :
-                                        0
-                                    )
-                                    .'%)',
+                                    $user->destinationHaveBeen()->count().' ('.$destinations_percent.'%)',
                                 'text' => trans('user.show.count.visited.destinations'),
                                 'route' => ''
                             ],

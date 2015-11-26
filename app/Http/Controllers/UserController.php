@@ -120,6 +120,12 @@ class UserController extends Controller
 
         $destinations_count = Destination::count();
 
+        if($user->destinationHaveBeen()->count() > 0 && $destinations_count > 0) {
+            $destinations_percent = round(($user->destinationHaveBeen()->count() * 100) / $destinations_count, 2);
+        } else {
+            $destinations_percent = 0;
+        }
+
         $user_status = [];
 
         return response()->view('pages.user.show', [
@@ -135,6 +141,7 @@ class UserController extends Controller
             'blogs' => $blogs,
             'flights' => $flights,
             'destinations_count' => $destinations_count,
+            'destinations_percent' => $destinations_percent,
         ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
     }
 
