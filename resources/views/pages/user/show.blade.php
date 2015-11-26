@@ -207,7 +207,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon',['icon' => 'icon-plus']),
+                                    'icon' => view('component.icon',['icon' => 'icon-homepage']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_homepage
