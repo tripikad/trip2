@@ -1,1 +1,1 @@
-<p class="c-user-description">{{ $text }}</p>
+<p class="c-user-description">{!! $text !!}</p>
