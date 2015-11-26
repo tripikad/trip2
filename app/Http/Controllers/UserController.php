@@ -15,7 +15,6 @@ class UserController extends Controller
     public function show($id)
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
-        $types2 = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
 
         $user = User::with('flags', 'flags.flaggable')->findorFail($id);
 
@@ -61,7 +60,7 @@ class UserController extends Controller
         $activity_content = $user
             ->contents()
             ->whereStatus(1)
-            ->whereIn('type', $types2)
+            ->whereIn('type', $types)
             ->latest('created_at')
             ->take(4)
             ->get()
@@ -78,8 +77,8 @@ class UserController extends Controller
                 $query->whereIn('type', $types);
             })
             ->latest('created_at')
-            ->take(4)
             ->get()
+            ->unique('content_id')
             ->transform(function ($item) {
                 $item['activity_type'] = 'comment';
 
