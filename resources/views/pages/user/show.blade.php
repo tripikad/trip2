@@ -272,13 +272,24 @@
 
                 </div>
 
-                <div class="r-user__info-description">
+                @if (count($user->destinationWantsToGo()))
 
-                    @include('component.user.description',[
-                        'text' => 'Kuigi viikingite laevad jõudsid Põhja-Ameerikasse ligi 500 aastat enne Kolumbuse retke, tekkis Euroopal püsiv kontakt tolle Uue Maailmaga alles tänu Kolumbuse avastusele.'
-                    ])
+                    <div class="r-user__info-description">
 
-                </div>
+                        @include('component.user.description',[
+                            'text' =>
+                                trans('user.show.wantstogo.title')
+                                .
+                                view('component.user.destination', [
+                                    'modifiers' => 'm-white',
+                                    'destinations' => $user->destinationWantsToGo(),
+                                    'take' => 10
+                                ])
+                        ])
+
+                    </div>
+
+                @endif
 
                 @if (\Auth::check() && (\Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::user()->hasRoleOrOwner('superuser', $user->id)))
 
@@ -343,8 +354,12 @@
                             ],
                             [
                                 'icon' => 'icon-pin',
-                                'title' => '31 (19%)',
-                                'text' => 'Külastatud sihtkohti',
+                                'title' =>
+                                    $user->destinationHaveBeen()->count()
+                                    .' ('.
+                                    round(($user->destinationHaveBeen()->count() * 100) / $destinations_count, 2)
+                                    .'%)',
+                                'text' => trans('user.show.count.visited.destinations'),
                                 'route' => ''
                             ],
                         ]
@@ -451,45 +466,6 @@
                 @endif
 
                 <div style="display: none;">
-
-                    @include('component.user.count', [
-                        'content_count' => $content_count,
-                        'comment_count' => $comment_count
-                    ])
-
-                    @if (count($user->destinationHaveBeen()) > 0 || count($user->destinationWantsToGo()) > 0)
-
-                        <div class="utils-border-bottom">
-
-                                @if (count($user->destinationHaveBeen()) > 0)
-
-                                    <h3>{{ trans('user.show.havebeen.title') }}</h3>
-
-                                    @include('component.user.destination', [
-                                        'destinations' => $user->destinationHaveBeen()
-                                    ])
-
-                                @endif
-
-                        </div>
-
-                        <div class="utils-border-bottom">
-
-                                @if (count($user->destinationWantsToGo()) > 0)
-
-                                    <h3>{{ trans('user.show.wantstogo.title') }}</h3>
-
-                                    @include('component.user.destination', [
-                                        'destinations' => $user->destinationWantsToGo()
-                                    ])
-
-                                @endif
-
-                        </div>
-
-                    @endif
-
-
                     @include('component.user.activity', [
                         'items' => $items
                     ])

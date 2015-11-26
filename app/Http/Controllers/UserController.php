@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Image;
+use App\Destination;
 use Hash;
 
 class UserController extends Controller
@@ -14,11 +15,9 @@ class UserController extends Controller
     public function show($id)
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
-        $types2 = ['forum', 'news'];
+        $types2 = ['forum', 'news', 'blog'];
 
         $user = User::with('flags', 'flags.flaggable')->findorFail($id);
-
-        $user_status = [];
 
         $content_count = $user
             ->contents()
@@ -119,6 +118,10 @@ class UserController extends Controller
             ->take(3)
             ->get();
 
+        $destinations_count = Destination::count();
+
+        $user_status = [];
+
         return response()->view('pages.user.show', [
             'user' => $user,
             'user_status' => $user_status,
@@ -131,6 +134,7 @@ class UserController extends Controller
             'forum_posts' => $forum_posts,
             'blogs' => $blogs,
             'flights' => $flights,
+            'destinations_count' => $destinations_count,
         ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
     }
 
