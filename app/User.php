@@ -53,16 +53,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function unreadMessagesCount()
     {
         $received = $this->hasMany('App\Message', 'user_id_to')
+            ->where('read', '0')
             ->get()
-            ->unique('user_id_from');
+            ->unique('user_id_from')
+            ->count();
 
-        if ($received) {
-            $received = count($received);
-
-            return $received;
-        }
-
-        return;
+        return $received;
     }
 
     public function messages()
@@ -86,7 +82,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 return $item;
             });
 
-        return $received->merge($sentWithoutReply)->sortBy('created_at')->all();
+        return $received->merge($sentWithoutReply)->sortByDesc('created_at')->all();
     }
 
     public function messagesWith($user_id_with)
