@@ -109,7 +109,7 @@ class UserController extends Controller
 
         $destinations_count = Destination::count();
 
-        if($user->destinationHaveBeen()->count() > 0 && $destinations_count > 0) {
+        if ($user->destinationHaveBeen()->count() > 0 && $destinations_count > 0) {
             $destinations_percent = round(($user->destinationHaveBeen()->count() * 100) / $destinations_count, 2);
         } else {
             $destinations_percent = 0;
