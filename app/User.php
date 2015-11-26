@@ -82,7 +82,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 return $item;
             });
 
-        return $received->merge($sentWithoutReply)->sortBy('created_at')->all();
+        return $received->merge($sentWithoutReply)->sortByDesc('created_at')->all();
     }
 
     public function messagesWith($user_id_with)
