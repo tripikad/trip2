@@ -466,6 +466,45 @@
                 @endif
 
                 <div style="display: none;">
+
+                    @include('component.user.count', [
+                        'content_count' => $content_count,
+                        'comment_count' => $comment_count
+                    ])
+
+                    @if (count($user->destinationHaveBeen()) > 0 || count($user->destinationWantsToGo()) > 0)
+
+                        <div class="utils-border-bottom">
+
+                                @if (count($user->destinationWantsToGo()) > 0)
+
+                                    <h3>{{ trans('user.show.havebeen.title') }}</h3>
+
+                                    @include('component.user.destination', [
+                                        'destinations' => $user->destinationWantsToGo()
+                                    ])
+
+                                @endif
+
+                        </div>
+
+                        <div class="utils-border-bottom">
+
+                                @if (count($user->destinationHaveBeen()) > 0)
+
+                                    <h3>{{ trans('user.show.wantstogo.title') }}</h3>
+
+                                    @include('component.user.destination', [
+                                        'destinations' => $user->destinationHaveBeen()
+                                    ])
+
+                                @endif
+
+                        </div>
+
+                    @endif
+
+
                     @include('component.user.activity', [
                         'items' => $items
                     ])
