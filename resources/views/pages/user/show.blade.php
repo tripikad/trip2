@@ -373,7 +373,7 @@
 
     </div>
 
-    @if (isset($photos) && count($photos))
+    @if (isset($photos) && count($photos) > 0)
 
         <div class="r-user__gallery">
 
@@ -403,7 +403,7 @@
 
             <div class="r-user__additional-content">
 
-                @if (isset($forum_posts) && count($forum_posts))
+                @if (isset($forum_posts) && count($forum_posts) > 0)
 
                     <div class="r-user__additional-header">
 
@@ -512,7 +512,7 @@
 
             </div>
 
-            @if (isset($blogs) && count($blogs))
+            @if (isset($blogs) && count($blogs) > 0)
 
                 <div class="r-user__additional-sidebar">
 
@@ -579,7 +579,7 @@
 
     </div>
 
-    @if (isset($flights) && count($flights))
+    @if (isset($flights) && count($flights) > 0)
 
         <div class="r-user__offers">
 
