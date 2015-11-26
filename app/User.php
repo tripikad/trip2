@@ -55,15 +55,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $received = $this->hasMany('App\Message', 'user_id_to')
             ->where('read', '0')
             ->get()
-            ->unique('user_id_from');
+            ->unique('user_id_from')
+            ->count();
 
-        if ($received) {
-            $received = count($received);
-
-            return $received;
-        }
-
-        return;
+        return $received;
     }
 
     public function messages()
