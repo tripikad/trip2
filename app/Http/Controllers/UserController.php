@@ -15,7 +15,7 @@ class UserController extends Controller
     public function show($id)
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
-        $types2 = ['forum', 'news', 'blog'];
+        $types2 = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
 
         $user = User::with('flags', 'flags.flaggable')->findorFail($id);
 
@@ -32,42 +32,6 @@ class UserController extends Controller
                 $query->whereIn('type', $types);
             })
             ->count();
-
-        $from = Carbon::now()->subMonths(6)->startOfMonth();
-        $to = Carbon::now();
-
-        $content = $user
-            ->contents()
-            ->whereStatus(1)
-            ->whereIn('type', $types)
-            ->whereBetween('created_at', [$from, $to])
-            ->latest('created_at')
-            ->get()
-            ->transform(function ($item) {
-                $item['activity_type'] = 'content';
-
-                return $item;
-            });
-
-        $comments = $user
-            ->comments()
-            ->with('content')
-            ->whereStatus(1)
-            ->whereBetween('created_at', [$from, $to])
-            ->whereHas('content', function ($query) use ($types) {
-                $query->whereIn('type', $types);
-            })
-            ->latest('created_at')
-            ->get()
-            ->transform(function ($item) {
-                $item['activity_type'] = 'comment';
-
-                return $item;
-            });
-
-        $items = $content
-            ->merge($comments)
-            ->sortByDesc('created_at');
 
         $now = Carbon::now();
 
@@ -94,15 +58,40 @@ class UserController extends Controller
             ->where('type', 'photo')
             ->count();
 
-        $forum_posts = $user
+        $activity_content = $user
             ->contents()
             ->whereStatus(1)
             ->whereIn('type', $types2)
             ->latest('created_at')
             ->take(4)
-            ->get();
+            ->get()
+            ->transform(function ($item) {
+                $item['activity_type'] = 'content';
 
-        $blogs = $user
+                return $item;
+            });
+
+        $activity_comment = $user
+            ->comments()
+            ->whereStatus(1)
+            ->whereHas('content', function ($query) use ($types) {
+                $query->whereIn('type', $types);
+            })
+            ->latest('created_at')
+            ->take(4)
+            ->get()
+            ->transform(function ($item) {
+                $item['activity_type'] = 'comment';
+
+                return $item;
+            });
+
+        $activities = $activity_content
+            ->merge($activity_comment)
+            ->sortByDesc('created_at')
+            ->take(4);
+
+        $blog_posts = $user
             ->contents()
             ->whereStatus(1)
             ->where('type', 'blog')
@@ -131,14 +120,13 @@ class UserController extends Controller
         return response()->view('pages.user.show', [
             'user' => $user,
             'user_status' => $user_status,
-            'items' => $items,
             'content_count' => $content_count,
             'comment_count' => $comment_count,
             'latest_announcement' => $latest_announcement,
             'photos' => $photos,
             'count_photos' => $count_photos,
-            'forum_posts' => $forum_posts,
-            'blogs' => $blogs,
+            'activities' => $activities,
+            'blog_posts' => $blog_posts,
             'flights' => $flights,
             'destinations_count' => $destinations_count,
             'destinations_percent' => $destinations_percent,

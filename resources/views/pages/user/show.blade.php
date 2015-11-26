@@ -282,8 +282,7 @@
                                 .
                                 view('component.user.destination', [
                                     'modifiers' => 'm-white',
-                                    'destinations' => $user->destinationWantsToGo(),
-                                    'take' => 10
+                                    'destinations' => $user->destinationWantsToGo()->sortByDesc('id')->take(10)
                                 ])
                         ])
 
@@ -400,7 +399,7 @@
 
             <div class="r-user__additional-content">
 
-                @if (isset($forum_posts) && count($forum_posts) > 0)
+                @if (isset($activities) && count($activities) > 0)
 
                     <div class="r-user__additional-header">
 
@@ -408,7 +407,7 @@
 
                             @include('component.title', [
                                 'modifiers' => 'm-green',
-                                'title' => trans('site.content.latest.posts')
+                                'title' => trans('user.activity.index.title')
                             ])
 
                         </div>
@@ -425,91 +424,15 @@
 
                     </div>
 
-                    @include('component.content.forum.list', [
-                        'modifiers' => 'm-compact',
-                        'items' => $forum_posts->transform(function($forum_post) use($user) {
-                            return [
-                                'topic' => $forum_post->title,
-                                'route' => route('content.show', [$forum_post->type, $forum_post]),
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => $forum_post->imagePreset()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-mini',
-                                    'count' => 999
-                                ],
-                                'children' => [
-                                    [
-                                        'profile' => [
-                                            'image' => $user->imagePreset(),
-                                            'title' => $user->title,
-                                            'route' => route('user.show', [$user])
-                                        ],
-                                        'date' => view('component.date.long', [
-                                            'date' => $forum_post->created_at
-                                        ]),
-                                        'text' => $forum_post->body,
-                                        'more' => [
-                                            'title' => 'Vaata kogu teemat',
-                                            'route' => route('content.show', [$forum_post->type, $forum_post])
-                                        ]
-                                    ]
-                                ]
-                            ];
-                        })
+                    @include('component.user.activity', [
+                        'items' => $activities
                     ])
 
                 @endif
 
-                <div style="display: none;">
-
-                    @include('component.user.count', [
-                        'content_count' => $content_count,
-                        'comment_count' => $comment_count
-                    ])
-
-                    @if (count($user->destinationHaveBeen()) > 0 || count($user->destinationWantsToGo()) > 0)
-
-                        <div class="utils-border-bottom">
-
-                                @if (count($user->destinationHaveBeen()) > 0)
-
-                                    <h3>{{ trans('user.show.havebeen.title') }}</h3>
-
-                                    @include('component.user.destination', [
-                                        'destinations' => $user->destinationHaveBeen()
-                                    ])
-
-                                @endif
-
-                        </div>
-
-                        <div class="utils-border-bottom">
-
-                                @if (count($user->destinationWantsToGo()) > 0)
-
-                                    <h3>{{ trans('user.show.wantstogo.title') }}</h3>
-
-                                    @include('component.user.destination', [
-                                        'destinations' => $user->destinationWantsToGo()
-                                    ])
-
-                                @endif
-
-                        </div>
-
-                    @endif
-
-
-                    @include('component.user.activity', [
-                        'items' => $items
-                    ])
-                </div>
-
             </div>
 
-            @if (isset($blogs) && count($blogs) > 0)
+            @if (isset($blog_posts) && count($blog_posts) > 0)
 
                 <div class="r-user__additional-sidebar">
 
@@ -538,12 +461,12 @@
 
                         </div>
 
-                        @foreach ($blogs as $blog)
+                        @foreach ($blog_posts as $blog_post)
 
                             @include('component.blog', [
-                                'title' => $blog->title,
-                                'route' => route('content.show', [$blog->type, $blog]),
-                                'image' => $blog->imagePreset(),
+                                'title' => $blog_post->title,
+                                'route' => route('content.show', [$blog_post->type, $blog_post]),
+                                'image' => $blog_post->imagePreset(),
                             ])
 
                         @endforeach
