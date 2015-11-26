@@ -54,7 +54,7 @@
                         'modifiers' => 'm-full m-green',
                     ])
 
-                    @if (isset($latest_announcement) && ! empty($latest_announcement))
+                    @if (isset($latest_announcement) && count($latest_announcement))
 
                         <div class="r-user__info-travel-mate">
 
@@ -141,7 +141,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon',['icon' => 'icon-facebook']),
+                                    'icon' => view('component.icon', ['icon' => 'icon-facebook']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_facebook
@@ -185,7 +185,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon',['icon' => 'icon-instagram']),
+                                    'icon' => view('component.icon', ['icon' => 'icon-instagram']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_instagram
@@ -207,7 +207,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon',['icon' => 'icon-homepage']),
+                                    'icon' => view('component.icon', ['icon' => 'icon-plus']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_homepage
@@ -231,50 +231,64 @@
 
                         @if(strlen($user->name) >= 30)
 
-                        <h1 class="c-user-title m-long">{{ $user->name }}</h1>
+                            <h1 class="c-user-title m-long">{{ $user->name }}</h1>
 
                         @elseif(strlen($user->name) < 30 && strlen($user->name) >= 15)
 
-                        <h1 class="c-user-title">{{ $user->name }}</h1>
+                            <h1 class="c-user-title">{{ $user->name }}</h1>
 
                         @else
 
-                        <h1 class="c-user-title m-short">{{ $user->name }}</h1>
+                            <h1 class="c-user-title m-short">{{ $user->name }}</h1>
 
                         @endif
 
                     </div>
 
-                    <div class="r-user__info-status">
+                    @if (isset($user_status) && count($user_status))
 
-                        <div class="r-user__info-status-icon">
+                        <div class="r-user__info-status">
 
-                            @include ('component.icon', [
-                                'icon' => 'icon-umbrella'
-                            ])
+                            <div class="r-user__info-status-icon">
+
+                                @include ('component.icon', [
+                                    'icon' => $user_status->icon
+                                ])
+
+                            </div>
+
+                            <div class="r-user__info-status-text">
+
+                                @include ('component.badge', [
+                                    'modifiers' => 'm-green m-dark m-inverted',
+                                    'title' => $user_status->title
+                                ])
+
+                            </div>
 
                         </div>
 
-                        <div class="r-user__info-status-text">
+                    @endif
 
-                            @include ('component.badge', [
-                                'modifiers' => 'm-green m-dark m-inverted',
-                                'title' => 'Amateur'
-                            ])
+                </div>
 
-                        </div>
+                @if (count($user->destinationWantsToGo()))
+
+                    <div class="r-user__info-description">
+
+                        @include('component.user.description',[
+                            'text' =>
+                                trans('user.show.wantstogo.title')
+                                .
+                                view('component.user.destination', [
+                                    'modifiers' => 'm-white',
+                                    'destinations' => $user->destinationWantsToGo()->sortByDesc('id')->take(10)
+                                ])
+                        ])
 
                     </div>
 
-                </div>
-
-                <div class="r-user__info-description">
-
-                    @include('component.user.description',[
-                        'text' => 'Kuigi viikingite laevad jõudsid Põhja-Ameerikasse ligi 500 aastat enne Kolumbuse retke, tekkis Euroopal püsiv kontakt tolle Uue Maailmaga alles tänu Kolumbuse avastusele.'
-                    ])
-
-                </div>
+                @endif
 
                 @if (\Auth::check() && (\Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::user()->hasRoleOrOwner('superuser', $user->id)))
 
@@ -339,8 +353,9 @@
                             ],
                             [
                                 'icon' => 'icon-pin',
-                                'title' => '31 (19%)',
-                                'text' => 'Külastatud sihtkohti',
+                                'title' =>
+                                    $user->destinationHaveBeen()->count().' ('.$destinations_percent.'%)',
+                                'text' => trans('user.show.count.visited.destinations'),
                                 'route' => ''
                             ],
                         ]
@@ -354,7 +369,7 @@
 
     </div>
 
-    @if (isset($photos) && ! empty($photos))
+    @if (isset($photos) && count($photos) > 0)
 
         <div class="r-user__gallery">
 
@@ -384,193 +399,7 @@
 
             <div class="r-user__additional-content">
 
-                <div class="r-user__additional-header">
-
-                    <div class="r-user__additional-title">
-
-                        @include('component.title', [
-                            'modifiers' => 'm-green',
-                            'title' => 'Viimased postitused'
-                        ])
-
-                    </div>
-
-                    <div class="r-user__additional-action">
-
-                        @include('component.link', [
-                            'modifiers' => 'm-small',
-                            'title' => 'Trip.ee foorum',
-                            'route' => '#'
-                        ])
-
-                    </div>
-
-                </div>
-
-                @include('component.content.forum.list', [
-                    'modifiers' => 'm-compact',
-                    'items' => [
-                        [
-                            'topic' => 'Samui hotellid?',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
-                                'modifiers' => 'm-inverted m-green',
-                                'count' => 9
-                            ],
-                            'children' => [
-                                [
-                                    'profile' => [
-                                        'image' => \App\Image::getRandom(),
-                                        'title' => 'Charles Darwin',
-                                        'route' => ''
-                                    ],
-                                    'date' => '12. jaanuar, 12:31',
-                                    'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi.</p><p>Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p>',
-                                    'more' =>[
-                                        'title' => 'Vaata kogu teemat',
-                                        'route' => ''
-                                    ]
-                                ]
-                            ]
-                        ],
-                        [
-                            'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
-                                'modifiers' => 'm-inverted m-green',
-                                'count' => 4
-                            ],
-                            'children' => [
-                                [
-                                    'profile' => [
-                                        'image' => \App\Image::getRandom(),
-                                        'title' => 'Charles Darwin',
-                                        'route' => ''
-                                    ],
-                                    'date' => '12. jaanuar, 12:31',
-                                    'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne.</p>',
-                                    'more' =>[
-                                        'title' => 'Vaata kogu teemat',
-                                        'route' => ''
-                                    ]
-                                ]
-                            ]
-                        ],
-                        [
-                            'topic' => 'Puhkuseosakud Tenerifel',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
-                                'modifiers' => 'm-inverted m-green',
-                                'count' => 2
-                            ],
-                            'children' => [
-                                [
-                                    'profile' => [
-                                        'image' => \App\Image::getRandom(),
-                                        'title' => 'Charles Darwin',
-                                        'route' => ''
-                                    ],
-                                    'date' => '12. jaanuar, 12:31',
-                                    'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi.</p>',
-                                    'more' =>[
-                                        'title' => 'Vaata kogu teemat',
-                                        'route' => ''
-                                    ]
-                                ]
-                            ]
-                        ],
-                        [
-                            'topic' => 'Ischgl mäeolud-pilet ja majutus',
-                            'route' => '#',
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
-                            ],
-                            'badge' => [
-                                'modifiers' => 'm-green',
-                                'count' => 2
-                            ],
-                            'children' => [
-                                [
-                                    'profile' => [
-                                        'image' => \App\Image::getRandom(),
-                                        'title' => 'Charles Darwin',
-                                        'route' => ''
-                                    ],
-                                    'date' => '12. jaanuar, 12:31',
-                                    'text' => '<p>Mina puurisin nüüd juba kui välja arvata mõned nüansid mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p>',
-                                    'more' =>[
-                                        'title' => 'Vaata kogu teemat',
-                                        'route' => ''
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ])
-
-                <div style="display: none;">
-
-                    @include('component.user.count', [
-                        'content_count' => $content_count,
-                        'comment_count' => $comment_count
-                    ])
-
-                    @if (count($user->destinationHaveBeen()) > 0 || count($user->destinationWantsToGo()) > 0)
-
-                        <div class="utils-border-bottom">
-
-                                @if (count($user->destinationHaveBeen()) > 0)
-
-                                    <h3>{{ trans('user.show.havebeen.title') }}</h3>
-
-                                    @include('component.user.destination', [
-                                        'destinations' => $user->destinationHaveBeen()
-                                    ])
-
-                                @endif
-
-                        </div>
-
-                        <div class="utils-border-bottom">
-
-                                @if (count($user->destinationWantsToGo()) > 0)
-
-                                    <h3>{{ trans('user.show.wantstogo.title') }}</h3>
-
-                                    @include('component.user.destination', [
-                                        'destinations' => $user->destinationWantsToGo()
-                                    ])
-
-                                @endif
-
-                        </div>
-
-                    @endif
-
-
-                    @include('component.user.activity', [
-                        'items' => $items
-                    ])
-                </div>
-
-            </div>
-
-            <div class="r-user__additional-sidebar">
-
-                <div class="r-user__additional-block">
+                @if (isset($activities) && count($activities) > 0)
 
                     <div class="r-user__additional-header">
 
@@ -578,7 +407,7 @@
 
                             @include('component.title', [
                                 'modifiers' => 'm-green',
-                                'title' => 'Reisikirjad'
+                                'title' => trans('user.activity.index.title')
                             ])
 
                         </div>
@@ -587,36 +416,110 @@
 
                             @include('component.link', [
                                 'modifiers' => 'm-small',
-                                'title' => 'Veel',
-                                'route' => '#'
+                                'title' => trans('menu.forum.forum'),
+                                'route' => route('content.show', ['forum'])
                             ])
 
                         </div>
+
                     </div>
 
-                    @include('component.blog', [
-                        'title' => 'Minu Malta  – jutustusi kuuajaselt ringreisilt',
-                        'route' => '#',
-                        'image' => \App\Image::getRandom(),
+                    @include('component.user.activity', [
+                        'items' => $activities
                     ])
+
+                @endif
+
+            </div>
+
+            @if (isset($blog_posts) && count($blog_posts) > 0)
+
+                <div class="r-user__additional-sidebar">
+
+                    <div class="r-user__additional-block">
+
+                        <div class="r-user__additional-header">
+
+                            <div class="r-user__additional-title">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-green',
+                                    'title' => trans('frontpage.index.travelletter.title')
+                                ])
+
+                            </div>
+
+                            <div class="r-user__additional-action">
+
+                                @include('component.link', [
+                                    'modifiers' => 'm-small',
+                                    'title' => trans('site.link.read.more'),
+                                    'route' => route('content.show', ['blog'])
+                                ])
+
+                            </div>
+
+                        </div>
+
+                        @foreach ($blog_posts as $blog_post)
+
+                            @include('component.blog', [
+                                'title' => $blog_post->title,
+                                'route' => route('content.show', [$blog_post->type, $blog_post]),
+                                'image' => $blog_post->imagePreset(),
+                            ])
+
+                        @endforeach
+
+                    </div>
+
+                    <div class="r-user__additional-block">
+
+                        @include('component.promo', [
+                            'route' => '#',
+                            'image' => \App\Image::getRandom()
+                        ])
+
+                    </div>
+
+                    <div class="r-user__additional-block">
+
+                        @include('component.promo', [
+                            'route' => '#',
+                            'image' => \App\Image::getRandom()
+                        ])
+
+                    </div>
 
                 </div>
 
-                <div class="r-user__additional-block">
+            @endif
 
-                    @include('component.promo', [
-                        'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
+        </div>
 
-                </div>
+    </div>
 
-                <div class="r-user__additional-block">
+    @if (isset($flights) && count($flights) > 0)
 
-                    @include('component.promo', [
-                        'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
+        <div class="r-user__offers">
+
+            <div class="r-user__offers-wrap">
+
+                <div class="c-columns m-{{ count($flights) }}-cols">
+
+                    @foreach($flights as $flight)
+
+                        <div class="c-columns__item">
+
+                            @include('component.card', [
+                                'route' => route('content.show', [$flight->type, $flight]),
+                                'title' => $flight->title,
+                                'image' => $flight->imagePreset()
+                            ])
+
+                        </div>
+
+                    @endforeach
 
                 </div>
 
@@ -624,47 +527,7 @@
 
         </div>
 
-    </div>
-
-    <div class="r-user__offers">
-
-        <div class="r-user__offers-wrap">
-
-            <div class="c-columns m-3-cols">
-
-                <div class="c-columns__item">
-
-                    @include('component.card', [
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                        'image' => \App\Image::getRandom()
-                    ])
-                </div>
-
-                <div class="c-columns__item">
-
-                    @include('component.card', [
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                        'image' => \App\Image::getRandom()
-                    ])
-                </div>
-
-                <div class="c-columns__item">
-
-                    @include('component.card', [
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                        'image' => \App\Image::getRandom()
-                    ])
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+    @endif
 
     <div class="r-user__footer-promo">
 

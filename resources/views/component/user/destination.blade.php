@@ -1,21 +1,15 @@
-<ul class="list-inline">
+@foreach ($destinations as $key => $destination)
 
-    @foreach ($destinations as $destination)
+    @if (isset($destination->flaggable))
 
-        @if(isset($destination->flaggable))
-        
-            <li>
+        <span class="c-user-destination__item">
+            <a href="{{ route('destination.show', [$destination->flaggable]) }}" class="c-user-destination__item-link {{ $modifiers or '' }}">
 
-                <a href="{{ route('destination.show', [$destination->flaggable]) }}">
-                
-                    {{ $destination->flaggable->name }}
-                
-                </a>
+                {{ $destination->flaggable->name }}
 
-            </li>
+            </a>
+        </span>
 
-        @endif
+    @endif
 
-    @endforeach
-
-</ul>
+@endforeach

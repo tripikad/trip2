@@ -1,0 +1,29 @@
+.c-user-destination {}
+
+.c-user-destination__item {
+
+    display: inline-block;
+
+    &:after {
+
+        content: ', ';
+        display: inline-block;
+        margin-left: -4px;
+    }
+
+    &:last-child:after {
+
+        content: none;
+    }
+}
+
+    .c-user-destination__item-link {
+
+        color: $color-fill-black-dark;
+        display: inline-block;
+
+        &.m-white {
+
+            color: $color-white;
+        }
+    }

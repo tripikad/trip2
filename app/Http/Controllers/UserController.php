@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Image;
+use App\Destination;
 use Hash;
 
 class UserController extends Controller
@@ -30,42 +31,6 @@ class UserController extends Controller
                 $query->whereIn('type', $types);
             })
             ->count();
-
-        $from = Carbon::now()->subMonths(6)->startOfMonth();
-        $to = Carbon::now();
-
-        $content = $user
-            ->contents()
-            ->whereStatus(1)
-            ->whereIn('type', $types)
-            ->whereBetween('created_at', [$from, $to])
-            ->latest('created_at')
-            ->get()
-            ->transform(function ($item) {
-                $item['activity_type'] = 'content';
-
-                return $item;
-            });
-
-        $comments = $user
-            ->comments()
-            ->with('content')
-            ->whereStatus(1)
-            ->whereBetween('created_at', [$from, $to])
-            ->whereHas('content', function ($query) use ($types) {
-                $query->whereIn('type', $types);
-            })
-            ->latest('created_at')
-            ->get()
-            ->transform(function ($item) {
-                $item['activity_type'] = 'comment';
-
-                return $item;
-            });
-
-        $items = $content
-            ->merge($comments)
-            ->sortByDesc('created_at');
 
         $now = Carbon::now();
 
@@ -92,14 +57,78 @@ class UserController extends Controller
             ->where('type', 'photo')
             ->count();
 
+        $activity_content = $user
+            ->contents()
+            ->whereStatus(1)
+            ->whereIn('type', $types)
+            ->latest('created_at')
+            ->take(4)
+            ->get()
+            ->transform(function ($item) {
+                $item['activity_type'] = 'content';
+
+                return $item;
+            });
+
+        $activity_comment = $user
+            ->comments()
+            ->whereStatus(1)
+            ->whereHas('content', function ($query) use ($types) {
+                $query->whereIn('type', $types);
+            })
+            ->latest('created_at')
+            ->get()
+            ->unique('content_id')
+            ->transform(function ($item) {
+                $item['activity_type'] = 'comment';
+
+                return $item;
+            });
+
+        $activities = $activity_content
+            ->merge($activity_comment)
+            ->sortByDesc('created_at')
+            ->take(4);
+
+        $blog_posts = $user
+            ->contents()
+            ->whereStatus(1)
+            ->where('type', 'blog')
+            ->latest('created_at')
+            ->take(1)
+            ->get();
+
+        $flights = $user
+            ->contents()
+            ->whereStatus(1)
+            ->where('type', 'flight')
+            ->latest('created_at')
+            ->take(3)
+            ->get();
+
+        $destinations_count = Destination::count();
+
+        if ($user->destinationHaveBeen()->count() > 0 && $destinations_count > 0) {
+            $destinations_percent = round(($user->destinationHaveBeen()->count() * 100) / $destinations_count, 2);
+        } else {
+            $destinations_percent = 0;
+        }
+
+        $user_status = [];
+
         return response()->view('pages.user.show', [
             'user' => $user,
-            'items' => $items,
+            'user_status' => $user_status,
             'content_count' => $content_count,
             'comment_count' => $comment_count,
             'latest_announcement' => $latest_announcement,
             'photos' => $photos,
             'count_photos' => $count_photos,
+            'activities' => $activities,
+            'blog_posts' => $blog_posts,
+            'flights' => $flights,
+            'destinations_count' => $destinations_count,
+            'destinations_percent' => $destinations_percent,
         ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
     }
 

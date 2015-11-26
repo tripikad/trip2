@@ -8,8 +8,10 @@ return [
     'show.count.content.title' => 'Posts',
     'show.count.comment.title' => 'Comments',
 
+    'show.count.visited.destinations' => 'Visited destinations',
+
     'show.havebeen.title' => 'Have been in',
-    'show.wantstogo.title' => 'Wants to go to',
+    'show.wantstogo.title' => 'I\'m interested in visiting following places: ',
 
     'image.create.title' => 'Add profile image',
     'image.edit.title' => 'Change profile image',
@@ -37,9 +39,10 @@ return [
     'update.image.info' => 'User image has been updated',
     'update.info' => 'User profile has been updated',
 
-    'activity.index.title' => ':user latest activity',
+    'activity.index.title' => 'Latest activity',
     'activity.index.row.content' => ':user posted :title at :created_at',
     'activity.index.row.comment' => ':user added a comment :comment_title at the post :title at :created_at',
+    'activity.view.full.post' => 'View full post',
 
     'show.contact_facebook.title' => 'Facebook',
     'show.contact_twitter.title' => 'Twitter',

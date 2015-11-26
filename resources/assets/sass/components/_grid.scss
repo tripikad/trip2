@@ -18,6 +18,11 @@
 
         max-width: 100%;
 
+        .c-columns.m-1-cols & {
+
+            flex: 1 0 100%;
+        }
+
         .c-columns.m-2-cols & {
 
             flex: 1 0 100%;
