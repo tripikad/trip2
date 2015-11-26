@@ -357,7 +357,12 @@
                                 'title' =>
                                     $user->destinationHaveBeen()->count()
                                     .' ('.
-                                    round(($user->destinationHaveBeen()->count() * 100) / $destinations_count, 2)
+                                    ($user->destinationHaveBeen()->count() > 0 && $destinations_count > 0
+                                    ?
+                                        round(($user->destinationHaveBeen()->count() * 100) / $destinations_count, 2)
+                                    :
+                                        0
+                                    )
                                     .'%)',
                                 'text' => trans('user.show.count.visited.destinations'),
                                 'route' => ''
