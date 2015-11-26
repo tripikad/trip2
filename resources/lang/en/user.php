@@ -8,8 +8,10 @@ return [
     'show.count.content.title' => 'Posts',
     'show.count.comment.title' => 'Comments',
 
+    'show.count.visited.destinations' => 'Visited destinations',
+
     'show.havebeen.title' => 'Have been in',
-    'show.wantstogo.title' => 'Wants to go to',
+    'show.wantstogo.title' => 'I\'m interested in visiting following places: ',
 
     'image.create.title' => 'Add profile image',
     'image.edit.title' => 'Change profile image',
