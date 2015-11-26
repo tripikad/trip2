@@ -14,8 +14,11 @@ class UserController extends Controller
     public function show($id)
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
+        $types2 = ['forum', 'news'];
 
         $user = User::with('flags', 'flags.flaggable')->findorFail($id);
+
+        $user_status = [];
 
         $content_count = $user
             ->contents()
@@ -95,6 +98,7 @@ class UserController extends Controller
         $forum_posts = $user
             ->contents()
             ->whereStatus(1)
+            ->whereIn('type', $types2)
             ->latest('created_at')
             ->take(4)
             ->get();
@@ -107,8 +111,17 @@ class UserController extends Controller
             ->take(1)
             ->get();
 
+        $flights = $user
+            ->contents()
+            ->whereStatus(1)
+            ->where('type', 'flight')
+            ->latest('created_at')
+            ->take(3)
+            ->get();
+
         return response()->view('pages.user.show', [
             'user' => $user,
+            'user_status' => $user_status,
             'items' => $items,
             'content_count' => $content_count,
             'comment_count' => $comment_count,
@@ -117,6 +130,7 @@ class UserController extends Controller
             'count_photos' => $count_photos,
             'forum_posts' => $forum_posts,
             'blogs' => $blogs,
+            'flights' => $flights,
         ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
     }
 

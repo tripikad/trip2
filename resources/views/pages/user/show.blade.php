@@ -245,26 +245,30 @@
 
                     </div>
 
-                    <div class="r-user__info-status">
+                    @if (isset($user_status) && count($user_status))
 
-                        <div class="r-user__info-status-icon">
+                        <div class="r-user__info-status">
 
-                            @include ('component.icon', [
-                                'icon' => 'icon-umbrella'
-                            ])
+                            <div class="r-user__info-status-icon">
+
+                                @include ('component.icon', [
+                                    'icon' => $user_status->icon
+                                ])
+
+                            </div>
+
+                            <div class="r-user__info-status-text">
+
+                                @include ('component.badge', [
+                                    'modifiers' => 'm-green m-dark m-inverted',
+                                    'title' => $user_status->title
+                                ])
+
+                            </div>
 
                         </div>
 
-                        <div class="r-user__info-status-text">
-
-                            @include ('component.badge', [
-                                'modifiers' => 'm-green m-dark m-inverted',
-                                'title' => 'Amateur'
-                            ])
-
-                        </div>
-
-                    </div>
+                    @endif
 
                 </div>
 
@@ -493,9 +497,9 @@
 
             </div>
 
-            <div class="r-user__additional-sidebar">
+            @if (isset($blogs) && count($blogs))
 
-                @if (isset($blogs) && count($blogs))
+                <div class="r-user__additional-sidebar">
 
                     <div class="r-user__additional-block">
 
@@ -534,23 +538,53 @@
 
                     </div>
 
-                @endif
+                    <div class="r-user__additional-block">
 
-                <div class="r-user__additional-block">
+                        @include('component.promo', [
+                            'route' => '#',
+                            'image' => \App\Image::getRandom()
+                        ])
 
-                    @include('component.promo', [
-                        'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
+                    </div>
+
+                    <div class="r-user__additional-block">
+
+                        @include('component.promo', [
+                            'route' => '#',
+                            'image' => \App\Image::getRandom()
+                        ])
+
+                    </div>
 
                 </div>
 
-                <div class="r-user__additional-block">
+            @endif
 
-                    @include('component.promo', [
-                        'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
+        </div>
+
+    </div>
+
+    @if (isset($flights) && count($flights))
+
+        <div class="r-user__offers">
+
+            <div class="r-user__offers-wrap">
+
+                <div class="c-columns m-{{ count($flights) }}-cols">
+
+                    @foreach($flights as $flight)
+
+                        <div class="c-columns__item">
+
+                            @include('component.card', [
+                                'route' => route('content.show', [$flight->type, $flight]),
+                                'title' => $flight->title,
+                                'image' => $flight->imagePreset()
+                            ])
+
+                        </div>
+
+                    @endforeach
 
                 </div>
 
@@ -558,47 +592,7 @@
 
         </div>
 
-    </div>
-
-    <div class="r-user__offers">
-
-        <div class="r-user__offers-wrap">
-
-            <div class="c-columns m-3-cols">
-
-                <div class="c-columns__item">
-
-                    @include('component.card', [
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                        'image' => \App\Image::getRandom()
-                    ])
-                </div>
-
-                <div class="c-columns__item">
-
-                    @include('component.card', [
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                        'image' => \App\Image::getRandom()
-                    ])
-                </div>
-
-                <div class="c-columns__item">
-
-                    @include('component.card', [
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                        'image' => \App\Image::getRandom()
-                    ])
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+    @endif
 
     <div class="r-user__footer-promo">
 
