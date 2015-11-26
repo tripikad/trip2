@@ -277,14 +277,7 @@
                     <div class="r-user__info-description">
 
                         @include('component.user.description',[
-                            'text' =>
-                                trans('user.show.wantstogo.title')
-                                .
-                                view('component.user.destination', [
-                                    'modifiers' => 'm-white',
-                                    'destinations' => $user->destinationWantsToGo(),
-                                    'take' => 10
-                                ])
+                            'text' => trans('user.show.wantstogo.title')
                         ])
 
                     </div>
@@ -480,9 +473,6 @@
 
                                     <h3>{{ trans('user.show.havebeen.title') }}</h3>
 
-                                    @include('component.user.destination', [
-                                        'destinations' => $user->destinationHaveBeen()
-                                    ])
 
                                 @endif
 
@@ -494,9 +484,6 @@
 
                                     <h3>{{ trans('user.show.wantstogo.title') }}</h3>
 
-                                    @include('component.user.destination', [
-                                        'destinations' => $user->destinationWantsToGo()
-                                    ])
 
                                 @endif
 
