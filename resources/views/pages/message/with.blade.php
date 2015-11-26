@@ -6,7 +6,7 @@
 
 @stop
 
-@section('content2.content')
+@section('header2.content')
 
     @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
 
