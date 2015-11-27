@@ -1,6 +1,5 @@
 /vendor
 /node_modules
-/.idea
 .env
 *.lock
 **/.DS_Store
