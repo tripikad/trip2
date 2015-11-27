@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use View;
 use Cache;
 use App\Destination;
+use DB;
 
 class DestinationController extends Controller
 {
@@ -33,9 +34,54 @@ class DestinationController extends Controller
                 ->get();
         }
 
+        $previous_destination = Destination::
+            where(DB::raw('CONCAT(`name`, `id`)'), '<', function ($query) use($id) {
+                $query->select(DB::raw('CONCAT(`name`, `id`)'))
+                    ->from('destinations')
+                    ->where('id', $id);
+            })
+            ->where('parent_id', $destination->parent_id)
+            ->orderBy('name', 'desc')
+            ->union(
+                Destination::where('id', function ($query) use($destination) {
+                    $query->select('id')
+                        ->from('destinations')
+                        ->where('parent_id', $destination->parent_id)
+                        ->orderBy('name', 'desc')
+                        ->take(1);
+                })
+            )
+            ->take(1)
+            ->first();
+
+        $next_destination = Destination::
+            where(DB::raw('CONCAT(`name`, `id`)'), '>', function ($query) use($id) {
+                $query->select(DB::raw('CONCAT(`name`, `id`)'))
+                    ->from('destinations')
+                    ->where('id', $id);
+            })
+            ->where('parent_id', $destination->parent_id)
+            ->orderBy('name', 'asc')
+            ->union(
+                Destination::where('id', function ($query) use($destination) {
+                    $query->select('id')
+                        ->from('destinations')
+                        ->where('parent_id', $destination->parent_id)
+                        ->orderBy('name', 'asc')
+                        ->take(1);
+                })
+            )
+            ->take(1)
+            ->first();
+
+        $parent_destination = $destination->parent()->first();
+
         return response()->view('pages.destination.show', [
             'destination' => $destination,
             'features' => $features,
+            'previous_destination' => $previous_destination,
+            'next_destination' => $next_destination,
+            'parent_destination' => $parent_destination,
         ])->header('Cache-Control', 'public, s-maxage='.config('destination.cache'));
     }
 }
