@@ -34,8 +34,8 @@
 
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
-            'subtitle' => (isset($parent_destination) ? $parent_destination->name : ''),
-            'subtitle_route' => (isset($parent_destination) ? route('destination.show', [$parent_destination]) : ''),
+            'subtitle' => (isset($parent_destination) ? $parent_destination->name : null),
+            'subtitle_route' => (isset($parent_destination) ? route('destination.show', [$parent_destination]) : null),
             'image' => \App\Image::getRandom()
         ])
 
