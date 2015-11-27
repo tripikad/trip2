@@ -17,10 +17,10 @@
 @section('masthead.nav')
 
     @include('component.masthead.nav', [
-        'nav_previous_title' => 'Itaalia',
-        'nav_previous_route' => '#',
-        'nav_next_title' => 'Ameerika',
-        'nav_next_route' => '#',
+        'nav_previous_title' => $previous_destination->name,
+        'nav_previous_route' => route('destination.show', [$previous_destination]),
+        'nav_next_title' => $next_destination->name,
+        'nav_next_route' => route('destination.show', [$next_destination]),
         'modifiers' => 'm-yellow'
     ])
 
@@ -34,8 +34,8 @@
 
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
-            'subtitle' => 'Aafrika',
-            'subtitle_route' => '#',
+            'subtitle' => (isset($parent_destination) ? $parent_destination->name : ''),
+            'subtitle_route' => (isset($parent_destination) ? route('destination.show', [$parent_destination]) : ''),
             'image' => \App\Image::getRandom()
         ])
 
