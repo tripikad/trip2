@@ -61,19 +61,19 @@ class DestinationController extends Controller
             $feature_item = $destination->content()
                 ->whereType($type);
 
-            if(isset($types[$type]['with']) && is_array($types[$type]['with'])) {
+            if (isset($types[$type]['with']) && is_array($types[$type]['with'])) {
                 $feature_item->with($types[$type]['with']);
             }
 
-            if(isset($types[$type]['latest'])) {
+            if (isset($types[$type]['latest'])) {
                 $feature_item->latest($types[$type]['latest']);
             }
 
-            if(isset($types[$type]['skip'])) {
+            if (isset($types[$type]['skip'])) {
                 $feature_item->skip($types[$type]['skip']);
             }
 
-            if(isset($types[$type]['take'])) {
+            if (isset($types[$type]['take'])) {
                 $feature_item->take($types[$type]['take']);
             }
 
