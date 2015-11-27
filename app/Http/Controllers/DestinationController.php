@@ -42,16 +42,17 @@ class DestinationController extends Controller
             })
             ->where('parent_id', $destination->parent_id)
             ->orderBy('name', 'desc')
-            ->union(
-                Destination::where('id', function ($query) use ($destination) {
-                    $query->select('id')
-                        ->from('destinations')
-                        ->where('parent_id', $destination->parent_id)
-                        ->orderBy('name', 'desc')
-                        ->take(1);
-                })
-            )
             ->take(1)
+            ->union(
+                Destination::where(DB::raw('CONCAT(`name`, `id`)'), '>', function ($query) use ($id) {
+                    $query->select(DB::raw('CONCAT(`name`, `id`)'))
+                        ->from('destinations')
+                        ->where('id', $id);
+                })
+                ->where('parent_id', $destination->parent_id)
+                ->orderBy('name', 'desc')
+                ->take(1)
+            )
             ->first();
 
         $next_destination = Destination::
@@ -62,16 +63,17 @@ class DestinationController extends Controller
             })
             ->where('parent_id', $destination->parent_id)
             ->orderBy('name', 'asc')
-            ->union(
-                Destination::where('id', function ($query) use ($destination) {
-                    $query->select('id')
-                        ->from('destinations')
-                        ->where('parent_id', $destination->parent_id)
-                        ->orderBy('name', 'asc')
-                        ->take(1);
-                })
-            )
             ->take(1)
+            ->union(
+                Destination::where(DB::raw('CONCAT(`name`, `id`)'), '<', function ($query) use ($id) {
+                    $query->select(DB::raw('CONCAT(`name`, `id`)'))
+                        ->from('destinations')
+                        ->where('id', $id);
+                })
+                ->where('parent_id', $destination->parent_id)
+                ->orderBy('name', 'asc')
+                ->take(1)
+            )
             ->first();
 
         $parent_destination = $destination->parent()->first();
