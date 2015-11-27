@@ -32,7 +32,25 @@ class StatsPages extends StatsBase
 
     public function countContent()
     {
-        $types = ['page', 'trip_hotel', 'poll', 'trip_guide', 'task', 'trip_question', 'book', 'trip_reisikaaslasekuulutus', 'trip_forum_commercial', 'quiz', 'quiz_directions', 'long_answer','matching', 'multichoice', 'truefalse', 'short_answer', 'scale'];
+        $types = [
+            'page',
+            'trip_hotel',
+            'poll',
+            'trip_guide',
+            'task',
+            'trip_question',
+            'book',
+            'trip_reisikaaslasekuulutus',
+            'trip_forum_commercial',
+            'quiz',
+            'quiz_directions',
+            'long_answer',
+            'matching',
+            'multichoice',
+            'truefalse',
+            'short_answer',
+            'scale',
+        ];
 
         foreach ($types as $type) {
             $results = DB::connection($this->connection)

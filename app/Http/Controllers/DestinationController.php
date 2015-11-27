@@ -35,7 +35,7 @@ class DestinationController extends Controller
         }
 
         $previous_destination = Destination::
-            where(DB::raw('CONCAT(`name`, `id`)'), '<', function ($query) use($id) {
+            where(DB::raw('CONCAT(`name`, `id`)'), '<', function ($query) use ($id) {
                 $query->select(DB::raw('CONCAT(`name`, `id`)'))
                     ->from('destinations')
                     ->where('id', $id);
@@ -43,7 +43,7 @@ class DestinationController extends Controller
             ->where('parent_id', $destination->parent_id)
             ->orderBy('name', 'desc')
             ->union(
-                Destination::where('id', function ($query) use($destination) {
+                Destination::where('id', function ($query) use ($destination) {
                     $query->select('id')
                         ->from('destinations')
                         ->where('parent_id', $destination->parent_id)
@@ -55,7 +55,7 @@ class DestinationController extends Controller
             ->first();
 
         $next_destination = Destination::
-            where(DB::raw('CONCAT(`name`, `id`)'), '>', function ($query) use($id) {
+            where(DB::raw('CONCAT(`name`, `id`)'), '>', function ($query) use ($id) {
                 $query->select(DB::raw('CONCAT(`name`, `id`)'))
                     ->from('destinations')
                     ->where('id', $id);
@@ -63,7 +63,7 @@ class DestinationController extends Controller
             ->where('parent_id', $destination->parent_id)
             ->orderBy('name', 'asc')
             ->union(
-                Destination::where('id', function ($query) use($destination) {
+                Destination::where('id', function ($query) use ($destination) {
                     $query->select('id')
                         ->from('destinations')
                         ->where('parent_id', $destination->parent_id)
