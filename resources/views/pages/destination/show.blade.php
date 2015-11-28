@@ -301,9 +301,9 @@
                                     'route' => route('content.show', [$blog->type, $blog]),
                                     'image' => $blog->imagePreset(),
                                     'profile' => [
-                                        'route' => route('users.show', [$blog->user]),
+                                        'route' => route('user.show', [$blog->user]),
                                         'title' => $blog->user->name,
-                                        'image' => $blog->user->imagePrest()
+                                        'image' => $blog->user->imagePreset()
                                     ]
                                 ])
 
