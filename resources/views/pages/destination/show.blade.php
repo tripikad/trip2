@@ -372,7 +372,7 @@
 
                             <div class="c-columns__item">
 
-                                @foreach ($features['flights2'] as $flight)
+                                @foreach ($features['flights2']['contents'] as $flight)
 
                                     @include('component.card', [
                                         'route' => route('content.show', [$flight->type, $flight]),
