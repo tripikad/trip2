@@ -45,64 +45,78 @@
 
         <div class="r-destination__about-wrap">
 
-            <div class="r-destination__about-column m-first">
+            @if (isset($features['flights']) && count($features['flights']['contents']))
 
-                <div class="r-destination__title-block m-white m-distribute">
+                <div class="r-destination__about-column m-first">
 
-                    @include('component.title', [
-                        'modifiers' => 'm-yellow',
-                        'title' => 'Head pakkumised'
-                    ])
+                    <div class="r-destination__title-block m-white m-distribute">
 
-                    @include('component.link', [
-                        'modifiers' => 'm-tiny',
-                        'title' => 'Kõik pakkumised &rsaquo;',
-                        'route' => '#'
-                    ])
+                        @include('component.title', [
+                            'modifiers' => 'm-yellow',
+                            'title' => trans('destination.show.good.offer')
+                        ])
+
+                        @include('component.link', [
+                            'modifiers' => 'm-tiny',
+                            'title' => trans('destination.show.link.view.all'),
+                            'route' => route('content.show', ['flights'])
+                        ])
+
+                    </div>
+
+                    @foreach ($features['flights']['contents'] as $flight)
+
+                        @include('component.card', [
+                            'modifiers' => 'm-yellow m-small',
+                            'route' => route('content.show', [$flight->type, $flight]),
+                            'title' => $flight->title,
+                            'image' => $flight->imagePreset(),
+                        ])
+
+                    @endforeach
 
                 </div>
 
-                @include('component.card', [
-                    'modifiers' => 'm-yellow m-small',
-                    'route' => '#',
-                    'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                    'image' => \App\Image::getRandom(),
-                ])
+            @endif
 
-                @include('component.card', [
-                    'modifiers' => 'm-yellow m-small',
-                    'route' => '#',
-                    'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                    'image' => \App\Image::getRandom(),
-                ])
+            <div class="r-destination__about-column
+            @if (isset($features['flights']) && count($features['flights']['contents']))
+                m-last
+            @endif
+            ">
 
-            </div>
+                <div class="c-columns m-2-cols m-space">
 
-            <div class="r-destination__about-column m-last">
+                    <div class="c-columns__item">
 
-                @include('component.destination.info',[
-                    'modifiers' => 'm-yellow',
-                    'text' => 'Malta on tihedalt asustatud saareriik Vahemeres, mis koosneb 3 asustatud ja neljast asustamata saartest',
-                    'wiki_route' => '#',
-                    'definitions' => [
-                        [
-                            'term' => 'Rahvaarv',
-                            'definition' => '417 600 in'
-                        ],
-                        [
-                            'term' => 'Pindala',
-                            'definition' => '316 km²'
-                        ],
-                        [
-                            'term' => 'Valuuta',
-                            'definition' => 'Euro (€, EUR)'
-                        ],
-                        [
-                            'term' => 'Aeg',
-                            'definition' => '10:23(+1h)'
-                        ],
-                    ]
-                ])
+                        @include('component.destination.info',[
+                            'modifiers' => 'm-yellow',
+                            'definitions' => [
+                                [
+                                    'term' => trans('destination.show.user.havebeen.title'),
+                                    'definition' => $destination->usersHaveBeen()->count()
+                                ],
+                            ]
+                        ])
+
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        @include('component.destination.info',[
+                            'modifiers' => 'm-yellow',
+                            'definitions' => [
+                                [
+                                    'term' => trans('destination.show.user.wantstogo.title'),
+                                    'definition' => $destination->usersWantsToGo()->count()
+                                ],
+                            ]
+                        ])
+
+                    </div>
+
+                </div>
+
             </div>
 
             <div class="r-destination__about-map">
