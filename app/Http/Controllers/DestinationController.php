@@ -15,23 +15,79 @@ class DestinationController extends Controller
             ->findOrFail($id);
 
         $types = [
-            'news',
-            'flight',
-            'travelmate',
-            'forum',
-            'photo',
-            'blog',
+            'news' => [
+                'type' => 'news',
+                'with' => ['images'],
+                'latest' => 'created_at',
+                'take' => 5,
+            ],
+            'flights' => [
+                'type' => 'flight',
+                'with' => ['images'],
+                'latest' => 'created_at',
+                'take' => 2,
+            ],
+            'flights2' => [
+                'type' => 'flight',
+                'with' => ['images'],
+                'latest' => 'created_at',
+                'take' => 3,
+                'skip' => 2,
+            ],
+            'travel_mates' => [
+                'type' => 'travelmate',
+                'with' => ['images'],
+                'latest' => 'created_at',
+                'take' => 4,
+            ],
+            'forum_posts' => [
+                'type' => 'forum',
+                'with' => ['images'],
+                'latest' => 'created_at',
+                'take' => 4,
+            ],
+            'photos' => [
+                'type' => 'photo',
+                'with' => ['images'],
+                'latest' => 'created_at',
+                'take' => 8,
+            ],
+            'blog_posts' => [
+                'type' => 'blog',
+                'with' => ['images'],
+                'latest' => 'created_at',
+                'take' => 1,
+            ],
         ];
 
         $features = [];
 
-        foreach ($types as $type) {
-            $features[$type]['contents'] = $destination->content()
-                ->whereType($type)
-                ->with(config("content_$type.frontpage.with"))
-                ->latest(config("content_$type.frontpage.latest"))
-                ->take(config("content_$type.frontpage.take"))
-                ->get();
+        foreach ($types as $type => $attributes) {
+            $feature_item = null;
+
+            $feature_item = $destination->content();
+
+            if (isset($types[$type]['type'])) {
+                $feature_item->whereType($types[$type]['type']);
+            }
+
+            if (isset($types[$type]['with']) && is_array($types[$type]['with'])) {
+                $feature_item->with($types[$type]['with']);
+            }
+
+            if (isset($types[$type]['latest'])) {
+                $feature_item->latest($types[$type]['latest']);
+            }
+
+            if (isset($types[$type]['skip'])) {
+                $feature_item->skip($types[$type]['skip']);
+            }
+
+            if (isset($types[$type]['take'])) {
+                $feature_item->take($types[$type]['take']);
+            }
+
+            $features[$type]['contents'] = $feature_item->get();
         }
 
         $previous_destination = Destination::

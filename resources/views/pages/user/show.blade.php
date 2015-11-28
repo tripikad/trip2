@@ -513,7 +513,7 @@
 
                             @include('component.card', [
                                 'route' => route('content.show', [$flight->type, $flight]),
-                                'title' => $flight->title,
+                                'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
                                 'image' => $flight->imagePreset()
                             ])
 
