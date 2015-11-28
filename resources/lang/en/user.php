@@ -49,4 +49,6 @@ return [
     'show.contact_instagram.title' => 'Instagram',
     'show.contact_homepage.title' => 'Homepage',
 
+    'destinations.title' => 'My destinations',
+
 ];
