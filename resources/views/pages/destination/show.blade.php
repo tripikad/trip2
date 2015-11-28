@@ -69,7 +69,7 @@
                         @include('component.card', [
                             'modifiers' => 'm-yellow m-small',
                             'route' => route('content.show', [$flight->type, $flight]),
-                            'title' => $flight->title,
+                            'title' => str_limit($flight->title, 50).' '.$flight->price.' '.config('site.currency.symbol'),
                             'image' => $flight->imagePreset(),
                         ])
 
