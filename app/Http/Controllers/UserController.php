@@ -195,4 +195,13 @@ class UserController extends Controller
             ->route('user.show', [$user])
             ->with('info', trans('user.update.info'));
     }
+
+    public function destinationsIndex($id)
+    {
+        $user = User::findorFail($id);
+
+        return response()->view('pages.user.destinations', [
+            'user' => $user,
+        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
+    }
 }
