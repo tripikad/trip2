@@ -41,7 +41,7 @@ class DestinationController extends Controller
                 'take' => 4,
             ],
             'forum_posts' => [
-                'type' => 'forum',
+                'type' => ['forum', 'buysell', 'expat'],
                 'with' => ['images'],
                 'latest' => 'created_at',
                 'take' => 4,
@@ -67,8 +67,10 @@ class DestinationController extends Controller
 
             $feature_item = $destination->content();
 
-            if (isset($types[$type]['type'])) {
+            if (isset($types[$type]['type']) && ! is_array($types[$type]['type'])) {
                 $feature_item->whereType($types[$type]['type']);
+            } else {
+                $feature_item->whereIn('type', $types[$type]['type']);
             }
 
             if (isset($types[$type]['with']) && is_array($types[$type]['with'])) {
