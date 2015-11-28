@@ -2,6 +2,11 @@
 
 return [
 
+    'destination' => [
+        'header' => null,
+        'getPopular' => 30, // minutes
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Default Cache Store

@@ -29,6 +29,24 @@ class Destination extends Baum\Node
         return $this->flags->where('flag_type', 'wantstogo');
     }
 
+    public function getPopular()
+    {
+        return Cache::remember('popular.destinations.root'.$this->id, config('cache.destination.getPopular'), function () {
+
+            return Destination::find($this->id)
+                ->descendantsAndSelf()
+                ->get()
+                ->transform(function ($item) {
+                    $item->attributes['usersHaveBeen'] = $item->usersHaveBeen()->count();
+                    $item->attributes['usersWantsToGo'] = $item->usersWantsToGo()->count();
+                    $item->attributes['interestTotal'] = $item->attributes['usersHaveBeen'] + $item->attributes['usersWantsToGo'];
+
+                    return $item;
+                });
+
+        });
+    }
+
     public static function getNames()
     {
         return Cache::rememberForever('destination.names', function () {
