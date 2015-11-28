@@ -294,7 +294,7 @@
 
                             </div>
 
-                            @foreach($featuers['blog_posts']['contents'] as $blog)
+                            @foreach($features['blog_posts']['contents'] as $blog)
 
                                 @include('component.blog', [
                                     'title' => $blog->title,
