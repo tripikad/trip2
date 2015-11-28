@@ -34,7 +34,7 @@ class DestinationController extends Controller
                 'take' => 3,
                 'skip' => 2,
             ],
-            'travelmates' => [
+            'travel_mates' => [
                 'type' => 'travelmate',
                 'with' => ['images'],
                 'latest' => 'created_at',
