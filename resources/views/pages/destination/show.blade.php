@@ -141,91 +141,93 @@
 
         <div class="r-destination__content-wrap">
 
-            <div class="r-destination__content-about">
+            @if ((isset($popular_destinations) && count($popular_destinations)) || (isset($features['forum_posts']) && count($features['forum_posts']['contents'])))
 
-                <div class="r-destination__content-about-column m-first">
+                <div class="r-destination__content-about">
 
-                    @include('component.promo', [
-                        'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
+                    <div class="r-destination__content-about-column m-first">
 
-                </div>
-
-                <div class="r-destination__content-about-column m-middle">
-
-                    @if (isset($features['forum_posts']) && count($features['forum_posts']['contents']))
-
-                        <div class="r-destination__content-title">
-
-                            @include('component.title', [
-                                'modifiers' => 'm-yellow',
-                                'title' => trans('destination.show.forum.title')
-                            ])
-
-                        </div>
-
-                        @include('component.content.forum.list', [
-                            'modifiers' => 'm-compact',
-                            'items' => $features['forum_posts']['contents']->transform(function($forum) {
-                                return [
-                                    'topic' => $forum->title,
-                                    'route' => route('content.show', [$forum->type, $forum]),
-                                    'profile' => [
-                                        'modifiers' => 'm-mini',
-                                        'image' => $forum->user->imagePreset()
-                                    ],
-                                    'badge' => [
-                                        'modifiers' => 'm-inverted',
-                                        'count' => $forum->comments->count()
-                                    ]
-                                ];
-                            })
-                        ])
-                    @else
-
-                        <p>&nbsp;</p>
-
-                    @endif
-
-                </div>
-
-                <div class="r-destination__content-about-column m-last">
-
-                    <div class="r-destination__content-title">
-
-                        @include('component.title', [
-                            'modifiers' => 'm-yellow',
-                            'title' => trans('destination.show.popular.title')
+                        @include('component.promo', [
+                            'route' => '#',
+                            'image' => \App\Image::getRandom()
                         ])
 
                     </div>
 
-                    @include('component.list', [
-                        'modifiers' => 'm-dot m-yellow',
-                        'items' => [
-                            [
-                                'title' => 'Valletta',
-                                'route' => '#'
-                            ],
-                            [
-                                'title' => 'Cottonera',
-                                'route' => '#'
-                            ],
-                            [
-                                'title' => 'Hagar Qim and Mnajdra',
-                                'route' => '#'
-                            ],
-                            [
-                                'title' => 'Mellieha',
-                                'route' => '#'
-                            ],
-                        ]
-                    ])
+                    <div class="r-destination__content-about-column m-middle">
+
+                        @if (isset($features['forum_posts']) && count($features['forum_posts']['contents']))
+
+                            <div class="r-destination__content-title">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-yellow',
+                                    'title' => trans('destination.show.forum.title')
+                                ])
+
+                            </div>
+
+                            @include('component.content.forum.list', [
+                                'modifiers' => 'm-compact',
+                                'items' => $features['forum_posts']['contents']->transform(function($forum) {
+                                    return [
+                                        'topic' => $forum->title,
+                                        'route' => route('content.show', [$forum->type, $forum]),
+                                        'profile' => [
+                                            'modifiers' => 'm-mini',
+                                            'image' => $forum->user->imagePreset()
+                                        ],
+                                        'badge' => [
+                                            'modifiers' => 'm-inverted',
+                                            'count' => $forum->comments->count()
+                                        ]
+                                    ];
+                                })
+                            ])
+                        @else
+
+                            <p>&nbsp;</p>
+
+                        @endif
+
+                    </div>
+
+                    <div class="r-destination__content-about-column m-last">
+
+                        @if (isset($popular_destinations) && count($popular_destinations))
+
+                            <div class="r-destination__content-title">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-yellow',
+                                    'title' => trans('destination.show.popular.title', [
+                                        'destination' => $root_destination->name
+                                    ])
+                                ])
+
+                            </div>
+
+                            @include('component.list', [
+                                'modifiers' => 'm-dot m-yellow',
+                                'items' => $popular_destinations->transform(function($destination) {
+                                    return [
+                                        'title' => $destination->name,
+                                        'route' => route('destination.show', [$destination])
+                                    ];
+                                })
+                            ])
+
+                        @else
+
+                            <p>&nbsp;</p>
+
+                        @endif
+
+                    </div>
 
                 </div>
 
-            </div>
+            @endif
 
             @if (isset($features['photos']) && count($features['photos']['contents']))
 

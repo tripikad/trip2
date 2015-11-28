@@ -136,12 +136,22 @@ class DestinationController extends Controller
 
         $parent_destination = $destination->parent()->first();
 
+        if(! $destination->parent()) {
+            $root_destination = $destination;
+        } else {
+            $root_destination = $destination->getRoot();
+        }
+
+        $popular_destinations = $root_destination->getPopular()->sortByDesc('interestTotal')->take(4);
+
         return response()->view('pages.destination.show', [
             'destination' => $destination,
             'features' => $features,
             'previous_destination' => $previous_destination,
             'next_destination' => $next_destination,
             'parent_destination' => $parent_destination,
-        ])->header('Cache-Control', 'public, s-maxage='.config('destination.cache'));
+            'root_destination' => $root_destination,
+            'popular_destinations' => $popular_destinations,
+        ])->header('Cache-Control', 'public, s-maxage='.config('cache.destination.header'));
     }
 }
