@@ -24,13 +24,12 @@ class FlagController extends Controller
             ],
         ];
 
-        if(isset($flags[$flaggable_type]) && count($flags[$flaggable_type])) {
+        if (isset($flags[$flaggable_type]) && count($flags[$flaggable_type])) {
             $flag_types = $flags[$flaggable_type]['flag_types'];
             $typeMap = $flags[$flaggable_type]['controller'];
 
-            if(in_array($flag_type, $flag_types)) {
-
-                if($typeMap::find($flaggable_id)) {
+            if (in_array($flag_type, $flag_types)) {
+                if ($typeMap::find($flaggable_id)) {
                     $fields = [
                         'flaggable_type' => $typeMap,
                         'flaggable_id' => $flaggable_id,

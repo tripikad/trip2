@@ -136,7 +136,7 @@ class DestinationController extends Controller
 
         $parent_destination = $destination->parent()->first();
 
-        if(! $destination->parent()) {
+        if (! $destination->parent()) {
             $root_destination = $destination;
         } else {
             $root_destination = $destination->getRoot();
