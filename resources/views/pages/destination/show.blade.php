@@ -91,7 +91,7 @@
             @endif
             ">
 
-                <div class="c-columns m-2-cols m-space">
+                <div class="c-columns {{ (isset($features['flights']) && count($features['flights']['contents']) ? 'm-1-cols' : 'm-2-cols m-space') }}">
 
                     <div class="c-columns__item">
 
@@ -121,6 +121,44 @@
 
                     </div>
 
+                    @if (\Auth::user())
+
+                        <ul class="c-button-group">
+
+                            <li class="c-button-group__item m-green">
+
+                                @include('component.button',[
+                                    'modifiers' => 'm-small',
+                                    'title' => (count($destination->usersHaveBeen()->where('user_id', \Auth::user()->id))
+                                        ?
+                                            trans('destination.show.user.button.havenotbeen')
+                                        :
+                                            trans('destination.show.user.button.havebeen')
+                                    ),
+                                    'route' => route('flag.toggle', ['destination', $destination, 'havebeen'])
+                                ])
+
+                            </li>
+
+                            <li class="c-button-group__item m-red">
+
+                                @include('component.button',[
+                                    'modifiers' => 'm-secondary m-small',
+                                    'title' => (count($destination->usersWantsToGo()->where('user_id', \Auth::user()->id))
+                                        ?
+                                            trans('destination.show.user.button.dontwanttogo')
+                                        :
+                                            trans('destination.show.user.button.wanttogo')
+                                    ),
+                                    'route' => route('flag.toggle', ['destination', $destination, 'wantstogo'])
+                                ])
+
+                            </li>
+
+                        </ul>
+
+                    @endif
+
                 </div>
 
             </div>
@@ -131,6 +169,7 @@
                     'map_top' => '53%',
                     'map_left' => '50%'
                 ])
+
             </div>
 
         </div>
