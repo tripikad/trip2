@@ -8,7 +8,7 @@ return [
     'show.user.wantstogo.title' => 'How many Trip.ee users want to go here?',
 
     'show.forum.title' => 'Trip.ee users discuss',
-    'show.popular.title' => 'Popular destinations',
+    'show.popular.title' => 'Popular destinations in :destination',
     'show.news.title' => 'News',
 
     'index.user.havebeen.title' => ':count have been here',
