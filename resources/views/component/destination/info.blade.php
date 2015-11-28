@@ -41,24 +41,32 @@ modifiers:
 
 <div class="c-destination-info {{ $modifiers or 'm-yellow' }}">
 
-    <p class="c-destination-info__text">{{ $text }}
-    @if (isset($wiki_route))
-        <a href="{{ $wiki_route }}">Wikipedia &rsaquo;</a>
+    @if (isset($text))
+
+        <p class="c-destination-info__text">{{ $text }}
+
+        @if (isset($wiki_route))
+
+            <a href="{{ $wiki_route }}">Wikipedia &rsaquo;</a>
+
+        @endif
+
+        </p>
+
     @endif
-    </p>
 
     @if (isset($definitions))
 
-    <dl class="c-destination-info__definition-list">
+        <dl class="c-destination-info__definition-list">
 
-        @foreach ($definitions as $item)
+            @foreach ($definitions as $item)
 
-        <dt class="c-destination-info__definition-list-term">{{ $item['term'] }}</dt>
-        <dd class="c-destination-info__definition-list-definition">{{ $item['definition'] }}</dd>
+                <dt class="c-destination-info__definition-list-term">{{ $item['term'] }}</dt>
+                <dd class="c-destination-info__definition-list-definition">{{ $item['definition'] }}</dd>
 
-        @endforeach
+            @endforeach
 
-    </dl>
+        </dl>
 
     @endif
 

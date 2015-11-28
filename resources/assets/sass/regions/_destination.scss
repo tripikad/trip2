@@ -53,10 +53,12 @@
         }
 
             .r-destination__about-column {
+                padding-top: 48px;
 
                 &.m-first {
 
                     padding-bottom: 48px;
+                    padding-top: 0;
 
                     @include respond-to(tablet) {
 
