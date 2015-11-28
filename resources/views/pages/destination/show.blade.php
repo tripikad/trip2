@@ -148,68 +148,39 @@
 
                 <div class="r-destination__content-about-column m-middle">
 
-                    <div class="r-destination__content-title">
+                    @if (isset($features['forum_posts']) && count($features['forum_posts']['contents']))
 
-                        @include('component.title', [
-                            'modifiers' => 'm-yellow',
-                            'title' => trans('destination.show.forum.title')
+                        <div class="r-destination__content-title">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-yellow',
+                                'title' => trans('destination.show.forum.title')
+                            ])
+
+                        </div>
+
+                        @include('component.content.forum.list', [
+                            'modifiers' => 'm-compact',
+                            'items' => $features['forum_posts']['contents']->transform(function($forum) {
+                                return [
+                                    'topic' => $forum->title,
+                                    'route' => route('content.show', [$forum->type, $forum]),
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => $forum->user->imagePreset()
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted',
+                                        'count' => $forum->comments->count()
+                                    ]
+                                ];
+                            })
                         ])
+                    @else
 
-                    </div>
+                        <p>&nbsp;</p>
 
-                    @include('component.content.forum.list', [
-                        'modifiers' => 'm-compact',
-                        'items' => [
-                            [
-                                'topic' => 'Samui hotellid?',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted',
-                                    'count' => 9
-                                ]
-                            ],
-                            [
-                                'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted',
-                                    'count' => 4
-                                ]
-                            ],
-                            [
-                                'topic' => 'Puhkuseosakud Tenerifel',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted',
-                                    'count' => 2
-                                ]
-                            ],
-                            [
-                                'topic' => 'Ischgl mäeolud-pilet ja majutus',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => '',
-                                    'count' => 2
-                                ]
-                            ]
-                        ]
-                    ])
+                    @endif
 
                 </div>
 
@@ -221,6 +192,7 @@
                             'modifiers' => 'm-yellow',
                             'title' => trans('destination.show.popular.title')
                         ])
+
                     </div>
 
                     @include('component.list', [
@@ -246,6 +218,7 @@
                     ])
 
                 </div>
+
             </div>
 
             @if (isset($features['photos']) && count($features['photos']['contents']))
@@ -299,97 +272,87 @@
                                     ];
                                 })
                             ])
+
                         @else
+
                             <p>&nbsp;</p>
+
                         @endif
 
                     </div>
 
                     <div class="r-destination__content-news-column m-last">
 
+                        @if (isset($features['blog_posts']) && count($features['blog_posts']['contents']))
+
+                            <div class="r-destination__content-title">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-yellow',
+                                    'title' => trans('frontpage.index.travelletter.title')
+                                ])
+
+                            </div>
+
+                            @foreach($featuers['blog_posts']['contents'] as $blog)
+
+                                @include('component.blog', [
+                                    'title' => $blog->title,
+                                    'route' => route('content.show', [$blog->type, $blog]),
+                                    'image' => $blog->imagePreset(),
+                                    'profile' => [
+                                        'route' => route('users.show', [$blog->user]),
+                                        'title' => $blog->user->name,
+                                        'image' => $blog->user->imagePrest()
+                                    ]
+                                ])
+
+                            @endforeach
+
+                        @else
+
+                            <p>&nbsp;</p>
+
+                        @endif
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            @if (isset($features['travel_mates']) && count($features['travel_mates']['contents']))
+
+                <div class="r-destination__content-travel-mates">
+
+                    <div class="r-destination__content-travel-mates-wrap">
+
                         <div class="r-destination__content-title">
 
                             @include('component.title', [
-                                'modifiers' => 'm-yellow',
-                                'title' => trans('frontpage.index.travelletter.title')
-                            ])
-                        </div>
-
-                        @include('component.blog', [
-                            'title' => 'Minu Aafrika – jutustusi kuuajaselt ringreisilt',
-                            'route' => '#',
-                            'image' => \App\Image::getRandom(),
-                            'profile' => [
-                                'route' => '#profile',
-                                'title' => 'Mari Maasikas',
-                                'image' => \App\Image::getRandom()
-                            ]
-                        ])
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="r-destination__content-travel-mates">
-
-                <div class="r-destination__content-travel-mates-wrap">
-
-                    <div class="r-destination__content-title">
-
-                        @include('component.title', [
-                            'title' => trans('frontpage.index.travelmate.title'),
-                            'modifiers' => 'm-yellow'
-                        ])
-
-                    </div>
-
-                    <div class="c-columns m-4-cols">
-
-                        <div class="c-columns__item">
-
-                            @include('component.profile', [
-                                'title' => 'Jaanus Jaaniuss',
-                                'age' => '22',
-                                'interests' => 'Itaalia',
-                                'route' => '',
-                                'image' => \App\Image::getRandom()
+                                'title' => trans('frontpage.index.travelmate.title'),
+                                'modifiers' => 'm-yellow'
                             ])
 
                         </div>
 
-                        <div class="c-columns__item">
+                        <div class="c-columns m-{{ count($features['travel_mates']['contents']) }}-cols">
 
-                            @include('component.profile', [
-                                'title' => 'Mari Maasikas',
-                                'age' => '29',
-                                'interests' => 'Itaalia, Kreeka',
-                                'route' => '',
-                                'image' => \App\Image::getRandom()
-                            ])
+                            @foreach($features['travel_mates']['contents'] as $travel_mate)
 
-                        </div>
+                                <div class="c-columns__item">
 
-                        <div class="c-columns__item">
+                                    @include('component.profile', [
+                                        'title' => $travel_mate->user->name,
+                                        'age' => $travel_mate->user->age,
+                                        'interests' => $travel_mate->title,
+                                        'route' => route('content.show', [$travel_mate->type, $travel_mate]),
+                                        'image' => $travel_mate->user->imagePreset()
+                                    ])
 
-                            @include('component.profile', [
-                                'title' => 'Inga Ingel',
-                                'age' => '32',
-                                'interests' => 'Kreeka',
-                                'route' => '',
-                                'image' => \App\Image::getRandom()
-                            ])
+                                </div>
 
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            @include('component.profile', [
-                                'title' => 'Silver Siil',
-                                'age' => '19',
-                                'interests' => 'Aasia, Euroopa',
-                                'route' => '',
-                                'image' => \App\Image::getRandom()
-                            ])
+                            @endforeach
 
                         </div>
 
@@ -397,41 +360,29 @@
 
                 </div>
 
-            </div>
+            @endif
 
-            <div class="r-destination__content-flights">
+            @if (isset($features['flights2']) && count($features['flights2']['contents']))
 
-                <div class="r-destination__content-flights-wrap">
+                <div class="r-destination__content-flights">
 
-                    <div class="c-columns m-3-cols">
+                    <div class="r-destination__content-flights-wrap">
 
-                        <div class="c-columns__item">
+                        <div class="c-columns m-3-cols">
 
-                            @include('component.card', [
-                                'route' => '#',
-                                'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                                'image' => \App\Image::getRandom()
-                            ])
+                            <div class="c-columns__item">
 
-                        </div>
+                                @foreach ($features['flights2'] as $flight)
 
-                        <div class="c-columns__item">
+                                    @include('component.card', [
+                                        'route' => route('content.show', [$flight->type, $flight]),
+                                        'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
+                                        'image' => $flight->imagePreset()
+                                    ])
 
-                            @include('component.card', [
-                                'route' => '#',
-                                'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                                'image' => \App\Image::getRandom()
-                            ])
+                                @endforeach
 
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            @include('component.card', [
-                                'route' => '#',
-                                'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                                'image' => \App\Image::getRandom()
-                            ])
+                            </div>
 
                         </div>
 
@@ -439,7 +390,7 @@
 
                 </div>
 
-            </div>
+            @endif
 
         </div>
 
