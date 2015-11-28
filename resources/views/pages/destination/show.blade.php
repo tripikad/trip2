@@ -126,7 +126,9 @@
                     'map_left' => '50%'
                 ])
             </div>
+
         </div>
+
     </div>
 
     <div class="r-destination__content">
@@ -141,6 +143,7 @@
                         'route' => '#',
                         'image' => \App\Image::getRandom()
                     ])
+
                 </div>
 
                 <div class="r-destination__content-about-column m-middle">
@@ -149,8 +152,9 @@
 
                         @include('component.title', [
                             'modifiers' => 'm-yellow',
-                            'title' => 'Tripikad räägivad'
+                            'title' => trans('destination.show.forum.title')
                         ])
+
                     </div>
 
                     @include('component.content.forum.list', [
@@ -215,7 +219,7 @@
 
                         @include('component.title', [
                             'modifiers' => 'm-yellow',
-                            'title' => 'Populaarsed sihtkohad'
+                            'title' => trans('destination.show.popular.title')
                         ])
                     </div>
 
@@ -244,57 +248,27 @@
                 </div>
             </div>
 
-            <div class="r-destination__content-gallery">
+            @if (isset($features['photos']) && count($features['photos']['contents']))
 
-                <div class="r-destination__gallery-wrap">
+                <div class="r-destination__content-gallery">
 
-                    @include('component.gallery', [
-                        'items' => [
-                            [
-                                'image' => \App\Image::getRandom(),
-                                'route' => '#',
-                                'alt' => 'Pilt 1'
-                            ],
-                            [
-                                'image' => \App\Image::getRandom(),
-                                'route' => '#',
-                                'alt' => 'Pilt 2'
-                            ],
-                            [
-                                'image' => \App\Image::getRandom(),
-                                'route' => '#',
-                                'alt' => 'Pilt 3'
-                            ],
-                            [
-                                'image' => \App\Image::getRandom(),
-                                'route' => '#',
-                                'alt' => 'Pilt 4'
-                            ],
-                            [
-                                'image' => \App\Image::getRandom(),
-                                'route' => '#',
-                                'alt' => 'Pilt 5'
-                            ],
-                            [
-                                'image' => \App\Image::getRandom(),
-                                'route' => '#',
-                                'alt' => 'Pilt 6'
-                            ],
-                            [
-                                'image' => \App\Image::getRandom(),
-                                'route' => '#',
-                                'alt' => 'Pilt 7'
-                            ],
-                            [
-                                'image' => \App\Image::getRandom(),
-                                'route' => '#',
-                                'alt' => 'Pilt 8'
-                            ],
-                        ]
-                    ])
+                    <div class="r-destination__gallery-wrap">
+
+                        @include('component.gallery', [
+                            'items' => $features['photos']['contents']->transform(function($photo) {
+                                return [
+                                    'image' => $photo->imagePreset(),
+                                    'route' => route('content.show', [$photo->type, $photo]),
+                                    'alt' => $photo->title
+                                ];
+                            })
+                        ])
+
+                    </div>
 
                 </div>
-            </div>
+
+            @endif
 
             <div class="r-destination__content-news">
 
@@ -302,34 +276,32 @@
 
                     <div class="r-destination__content-news-column m-first">
 
-                        <div class="r-destination__content-title">
+                        @if (isset($features['news']) && count($features['news']['contents']))
 
-                            @include('component.title', [
-                                'modifiers' => 'm-yellow',
-                                'title' => 'Uudised'
+                            <div class="r-destination__content-title">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-yellow',
+                                    'title' => trans('destination.show.news.title')
+                                ])
+
+                            </div>
+
+                            @include('component.list', [
+                                'modifiers' => 'm-large',
+                                'items' => $features['news']['contents']->transform(function($new) {
+                                    return [
+                                        'title' => $new->title,
+                                        'route' => route('content.show', [$new->type, $new]),
+                                        'text' => view('component.date.short', [
+                                            'date' => $new->created_at
+                                        ])
+                                    ];
+                                })
                             ])
-                        </div>
-
-                        @include('component.list', [
-                            'modifiers' => 'm-large',
-                            'items' => [
-                                [
-                                    'title' => 'Air Canada tunnistab veahinnaga pileteid!',
-                                    'route' => '#',
-                                    'text' => '23. oktoober'
-                                ],
-                                [
-                                    'title' => 'Kas ametlikult maailma parim lennufirma on parim ka reisijate arvates?',
-                                    'route' => '#',
-                                    'text' => '19. oktoober'
-                                ],
-                                [
-                                    'title' => 'Reisiidee: maailma suurim hindu tempel Akshardham Delhis',
-                                    'route' => '#',
-                                    'text' => '11. oktoober'
-                                ]
-                            ]
-                        ])
+                        @else
+                            <p>&nbsp;</p>
+                        @endif
 
                     </div>
 
@@ -339,7 +311,7 @@
 
                             @include('component.title', [
                                 'modifiers' => 'm-yellow',
-                                'title' => 'Reisikirjad'
+                                'title' => trans('frontpage.index.travelletter.title')
                             ])
                         </div>
 
@@ -365,9 +337,10 @@
                     <div class="r-destination__content-title">
 
                         @include('component.title', [
-                            'title' => 'Reisikaaslased',
+                            'title' => trans('frontpage.index.travelmate.title'),
                             'modifiers' => 'm-yellow'
                         ])
+
                     </div>
 
                     <div class="c-columns m-4-cols">
@@ -381,6 +354,7 @@
                                 'route' => '',
                                 'image' => \App\Image::getRandom()
                             ])
+
                         </div>
 
                         <div class="c-columns__item">
@@ -392,6 +366,7 @@
                                 'route' => '',
                                 'image' => \App\Image::getRandom()
                             ])
+
                         </div>
 
                         <div class="c-columns__item">
@@ -403,6 +378,7 @@
                                 'route' => '',
                                 'image' => \App\Image::getRandom()
                             ])
+
                         </div>
 
                         <div class="c-columns__item">
@@ -414,9 +390,13 @@
                                 'route' => '',
                                 'image' => \App\Image::getRandom()
                             ])
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
 
             <div class="r-destination__content-flights">
@@ -432,6 +412,7 @@
                                 'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                                 'image' => \App\Image::getRandom()
                             ])
+
                         </div>
 
                         <div class="c-columns__item">
@@ -441,6 +422,7 @@
                                 'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                                 'image' => \App\Image::getRandom()
                             ])
+
                         </div>
 
                         <div class="c-columns__item">
@@ -450,13 +432,17 @@
                                 'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
                                 'image' => \App\Image::getRandom()
                             ])
+
                         </div>
 
                     </div>
+
                 </div>
+
             </div>
 
         </div>
+
     </div>
 
     <div class="r-destination__footer-promo">
@@ -468,7 +454,9 @@
                 'image' => \App\Image::getRandom()
             ])
         </div>
+
     </div>
+
 </div>
 
 @stop
