@@ -50,5 +50,9 @@ return [
     'show.contact_homepage.title' => 'Homepage',
 
     'destinations.title' => 'My destinations',
+    'destinations.submit.title' => 'Add',
+    'destinations.update.info' => 'Destinations added successfully to your profile!',
+    'destinations.have.been.title' => 'I have been',
+    'destinations.want.to.go.title' => 'I want to go',
 
 ];
