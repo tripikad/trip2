@@ -200,8 +200,39 @@ class UserController extends Controller
     {
         $user = User::findorFail($id);
 
+        $user_have_been = $user->destinationHaveBeen()->lists('flaggable_id')->toArray();
+        $have_been_destinations = Destination::getNames();
+
+        if (count($user_have_been)) {
+            $have_been_destinations->forget($user_have_been);
+        }
+
+        $have_been_destination = [];
+
+        $user_want_to_go = $user->destinationWantsToGo()->lists('flaggable_id')->toArray();
+        $want_to_go_destinations = Destination::getNames()->forget($user_want_to_go);
+
+        if (count($user_want_to_go)) {
+            $want_to_go_destinations->forget($user_want_to_go);
+        }
+
+        $want_to_go_destination = [];
+
         return response()->view('pages.user.destinations', [
             'user' => $user,
+            'have_been_destinations' => $have_been_destinations,
+            'have_been_destination' => $have_been_destination,
+            'want_to_go_destinations' => $want_to_go_destinations,
+            'want_to_go_destination' => $want_to_go_destination,
         ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
+    }
+
+    public function destinationStore(Request $request, $id)
+    {
+        $user = User::findorFail($id);
+
+        return redirect()
+            ->route('user.destinations', [$user])
+            ->with('info', trans('user.destinations.update.info'));
     }
 }
