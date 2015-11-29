@@ -95,6 +95,8 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     get('{id}/destinations', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@destinationsIndex', 'as' => 'destinations']);
 
+    post('{id}/destinations', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@destinationStore', 'as' => 'destination.store']);
+
 });
 
 // Messages
