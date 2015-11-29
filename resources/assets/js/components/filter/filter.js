@@ -12,3 +12,4 @@ $('select[name=topic]').selectize({
 
 $('#destinations').selectize();
 $('#topics').selectize();
+$('.js-select').selectize();

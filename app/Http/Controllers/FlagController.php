@@ -36,7 +36,9 @@ class FlagController extends Controller
                         'flag_type' => $flag_type,
                     ];
 
-                    if ($flag = Auth::user()->flags()->where($fields)->first()) {
+                    $flag = Auth::user()->flags()->where($fields);
+
+                    if (count($flag->get())) {
                         $flag->delete();
                     } else {
                         Auth::user()->flags()->create($fields);
