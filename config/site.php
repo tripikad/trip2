@@ -12,13 +12,4 @@ return [
 
     ],
 
-    'cache' => [
-        'frontpage' => 60 * 10,
-        'destination' => 60 * 10,
-        'content' => [
-            'index' => 60 * 10,
-            'show' => 60 * 10,
-        ],
-        'user' => 60 * 10,
-    ],
 ];
