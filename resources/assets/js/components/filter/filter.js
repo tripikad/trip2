@@ -8,8 +8,9 @@ if (submit.length > 0) {
         onChange: function() {
             submit.click();
         }
-    })
+    });
 } else {
 
     filter.selectize();
 }
+
