@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Image;
+use App\Flag;
 use App\Destination;
 use Hash;
 
@@ -194,5 +195,81 @@ class UserController extends Controller
         return redirect()
             ->route('user.show', [$user])
             ->with('info', trans('user.update.info'));
+    }
+
+    public function destinationsIndex($id)
+    {
+        $user = User::with('flags', 'flags.flaggable')->findorFail($id);
+
+        $user_have_been = $user->destinationHaveBeen()->lists('flaggable_id')->toArray();
+        $have_been_destinations = Destination::getNames();
+
+        if (count($user_have_been)) {
+            $have_been_destinations->forget($user_have_been);
+        }
+
+        $have_been_destination = [];
+
+        $user_want_to_go = $user->destinationWantsToGo()->lists('flaggable_id')->toArray();
+        $want_to_go_destinations = Destination::getNames()->forget($user_want_to_go);
+
+        if (count($user_want_to_go)) {
+            $want_to_go_destinations->forget($user_want_to_go);
+        }
+
+        $want_to_go_destination = [];
+
+        return response()->view('pages.user.destinations', [
+            'user' => $user,
+            'have_been_destinations' => $have_been_destinations,
+            'have_been_destination' => $have_been_destination,
+            'want_to_go_destinations' => $want_to_go_destinations,
+            'want_to_go_destination' => $want_to_go_destination,
+        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
+    }
+
+    public function destinationStore(Request $request, $id)
+    {
+        $user = User::findorFail($id);
+
+        $this->validate($request, [
+            'have_been' => 'required_without:want_to_go',
+            'want_to_go' => 'required_without:have_been',
+        ]);
+
+        $user_have_been = $user->destinationHaveBeen();
+        $user_wants_to_go = $user->destinationWantsToGo();
+
+        $fields = [];
+        if ($request->has('have_been')) {
+            foreach ($request->have_been as $have_been) {
+                if (count($user_have_been->where('flaggable_id', (int) $have_been)) == 0) {
+                    $fields[] = new Flag([
+                        'flaggable_type' => 'App\Destination',
+                        'flaggable_id' => $have_been,
+                        'flag_type' => 'havebeen',
+                    ]);
+                }
+            }
+        }
+
+        if ($request->has('want_to_go')) {
+            foreach ($request->want_to_go as $want_to_go) {
+                if (count($user_wants_to_go->where('flaggable_id', (int) $want_to_go)) == 0) {
+                    $fields[] = new Flag([
+                        'flaggable_type' => 'App\Destination',
+                        'flaggable_id' => $want_to_go,
+                        'flag_type' => 'wantstogo',
+                    ]);
+                }
+            }
+        }
+
+        $user->flags()
+            ->saveMany($fields);
+
+        return redirect()
+            ->route('user.destinations', [$user])
+            ->with('info', trans('user.destinations.update.info'));
     }
 }

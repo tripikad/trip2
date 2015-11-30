@@ -325,7 +325,7 @@
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
                                         'title' => trans('menu.user.add.places'),
-                                        'route' => '#'
+                                        'route' => route('user.destinations', [$user])
                                     ]),
                                 ]
                             ]
