@@ -25,7 +25,7 @@ return [
     ],
 
     'feed' => [
-        'atom' => null
+        'atom' => null,
     ],
 
 
