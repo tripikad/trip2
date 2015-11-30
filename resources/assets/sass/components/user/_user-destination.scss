@@ -21,7 +21,8 @@
         margin-left: -4px;
     }
 
-    &.m-box:after, &:last-child:after {
+    &.m-box:after,
+    &:last-child:after {
 
         content: none;
         margin-left: 0;
@@ -29,8 +30,8 @@
 
     &.m-box {
 
-        display:block;
-        float:left;
+        display: block;
+        float: left;
     }
 
     &.m-box:last-child > .c-user-destination__item-link {
@@ -70,7 +71,7 @@
             display: inline-block;
             padding: $spacer / 2;
             background: $color-fill-error-light;
-            box-shadow:inset 0px 0px 0px 1px $brand-red;
+            box-shadow:inset 0 0 0 1px $brand-red;
             color: $brand-red;
             font-size: $font-size-medium;
             line-height: $font-size-medium;
