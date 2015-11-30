@@ -42,6 +42,10 @@ class ContentController extends Controller
                 ->where('content_topic.topic_id', '=', $request->topic);
         }
 
+        if ($request->author) {
+            $contents = $contents->where('user_id', $request->author);
+        }
+
         $contents = $contents->simplePaginate(config("content_$type.index.paginate"));
 
         $destinations = Destination::getNames($type);
@@ -245,8 +249,9 @@ class ContentController extends Controller
         return redirect()->route(
             'content.index',
             [$type,
-            'destination' => $request->destination ? $request->destination : null,
-            'topic' => $request->topic ? $request->topic : null,
+                'destination' => $request->destination ? $request->destination : null,
+                'topic' => $request->topic ? $request->topic : null,
+                'author' => $request->author ? $request->author : null,
             ]
         );
     }

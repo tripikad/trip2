@@ -378,13 +378,17 @@
             @include('component.gallery', [
                 'items' => $photos->transform(function($photo) {
                     return [
+                        'type' => $photo->type,
                         'image' => $photo->imagePreset(),
                         'route' => route('content.show', [$photo->type, $photo]),
                         'alt' => $photo->title
                     ];
                 }),
-                'more_count' => intval($count_photos),
-                'more_route' => route('content.show', ['photo'])
+                'more_count' => $count_photos,
+                'more_route' => route('content.index', [
+                    $photos->first()['type'],
+                    'author=' . $user->id
+                ])
             ])
 
             </div>
