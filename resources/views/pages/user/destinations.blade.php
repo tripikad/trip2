@@ -51,7 +51,7 @@
                         $have_been_destination,
                         [
                             'multiple' => 'true',
-                            'class' => 'js-select',
+                            'class' => 'js-filter',
                             'placeholder' => trans('user.destinations.have.been.title'),
                         ]
                     )!!}
@@ -70,7 +70,7 @@
                         $want_to_go_destination,
                         [
                             'multiple' => 'true',
-                            'class' => 'js-select',
+                            'class' => 'js-filter',
                             'placeholder' => trans('user.destinations.want.to.go.title'),
                         ]
                     )!!}

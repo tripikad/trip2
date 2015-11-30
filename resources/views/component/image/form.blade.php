@@ -115,6 +115,7 @@ code: |
                         [
                             'multiple' => 'true',
                             'id' => $key,
+                            'class' => 'js-filter',
                             'placeholder' => trans("content.$type.edit.field.$key.title"),
                         ]
                     )!!}
@@ -128,6 +129,7 @@ code: |
                         [
                             'multiple' => 'true',
                             'id' => $key,
+                            'class' => 'js-filter',
                             'placeholder' => trans("content.$type.edit.field.$key.title"),
                         ]
                     )!!}
