@@ -60,7 +60,7 @@ class ContentController extends Controller
             'destinations' => $destinations,
             'topic' => $request->topic,
             'topics' => $topics,
-        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.content.index'));
+        ])->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
 
     public function show($type, $id)
@@ -84,7 +84,7 @@ class ContentController extends Controller
             'content' => $content,
             'comments' => $comments,
             'type' => $type,
-        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.content.show'));
+        ])->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
     }
 
     public function create($type)
