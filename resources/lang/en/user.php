@@ -54,5 +54,6 @@ return [
     'destinations.update.info' => 'Destinations added successfully to your profile!',
     'destinations.have.been.title' => 'I have been',
     'destinations.want.to.go.title' => 'I want to go',
+    'destinations.remove.title' => 'Remove',
 
 ];
