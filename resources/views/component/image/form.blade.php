@@ -82,12 +82,8 @@ code: |
                                 : 'c-form__input')
                             .
                             (isset($field['wysiwyg']) && $field['wysiwyg'] == true
-                                ? ' ckeditor'
+                                ? ' js-ckeditor'
                                 : ''),
-                        'id' =>
-                            (isset($field['wysiwyg']) && $field['wysiwyg'] == true
-                                ? $key
-                                : null),
                         'placeholder' => trans("content.$type.edit.field.$key.title"),
                         'rows' => isset($field['rows']) ? $field['rows'] : 8,
                     ]) !!}
@@ -273,26 +269,6 @@ code: |
             </script>
 
         @endif
-
-    @endif
-
-
-    @if(isset($fields) && count($fields) > 0)
-
-        <script type="text/javascript" src="/plugins/ckeditor/ckeditor.js"></script>
-        <script type="text/javascript">
-
-        @foreach ($fields as $key => $field)
-
-            @if (isset($field['wysiwyg']) && $field['wysiwyg']==true)
-
-                CKEDITOR.replace('{{ $key }}');
-
-            @endif
-
-        @endforeach
-
-        </script>
 
     @endif
 
