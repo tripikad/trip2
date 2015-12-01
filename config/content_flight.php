@@ -30,6 +30,7 @@ return [
                 'type' => 'textarea',
                 'rows' => 16,
                 'large' => true,
+                'wysiwyg' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',
