@@ -1,4 +1,7 @@
 scss_files: "resources/assets/sass/**/*.scss"
+scss:
+  exclude:
+    - "public/plugins/**"
 linters:
   BangFormat:
     enabled: true
