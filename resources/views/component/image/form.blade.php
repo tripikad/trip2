@@ -276,8 +276,11 @@ code: |
 
     @endif
 
-    <script type="text/javascript" src="/plugins/ckeditor/ckeditor.js"></script>
-    <script type="text/javascript">
+
+    @if(isset($fields) && count($fields) > 0)
+
+        <script type="text/javascript" src="/plugins/ckeditor/ckeditor.js"></script>
+        <script type="text/javascript">
 
         @foreach ($fields as $key => $field)
 
@@ -289,6 +292,8 @@ code: |
 
         @endforeach
 
-    </script>
+        </script>
+
+    @endif
 
 @stop
