@@ -112,7 +112,7 @@ class FrontpageController extends Controller
 
         return response()
             ->view('pages.frontpage.index', $viewVariables)
-            ->header('Cache-Control', 'public, s-maxage='.config('site.cache.frontpage'));
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.frontpage.header'));
     }
 
     public function search(Request $request)
