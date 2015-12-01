@@ -1,6 +1,4 @@
 scss:
-    exclude:
-        - "public/plugins/**"
     enabled: true
     config_file: .scss-lint.yml
 
