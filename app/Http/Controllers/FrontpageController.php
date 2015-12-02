@@ -132,9 +132,9 @@ class FrontpageController extends Controller
             $query = null;
 
             if (isset($type['id'])) {
-                $query = Content::select(['*', DB::raw('REPEAT(\''.$key.'\',1) AS `index`')])->where('id', $type['id'])->whereStatus($type['status']);
+                $query = Content::select(['*', DB::raw('\''.$key.'\' AS `index`')])->where('id', $type['id'])->whereStatus($type['status']);
             } else {
-                $query = Content::select(['*', DB::raw('REPEAT(\''.$key.'\',1) AS `index`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
+                $query = Content::select(['*', DB::raw('\''.$key.'\' AS `index`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
 
                 if (isset($type['latest']) && $type['latest'] !== null) {
                     $query = $query->latest();
