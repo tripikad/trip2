@@ -39,6 +39,7 @@ return [
                 'title' => 'Body',
                 'rows' => 16,
                 'large' => true,
+                'wysiwyg' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

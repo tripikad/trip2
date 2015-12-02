@@ -76,9 +76,14 @@ code: |
                 @if (in_array($field['type'], ['text', 'textarea', 'url', 'email', 'date']))
 
                     {!! Form::$field['type']($key, null, [
-                        'class' =>  (isset($field['large']) && $field['large'] == true)
-                            ? 'c-form__input m-high'
-                            : 'c-form__input',
+                        'class' =>
+                            (isset($field['large']) && $field['large'] == true
+                                ? 'c-form__input m-high'
+                                : 'c-form__input')
+                            .
+                            (isset($field['wysiwyg']) && $field['wysiwyg'] == true
+                                ? ' js-ckeditor'
+                                : ''),
                         'placeholder' => trans("content.$type.edit.field.$key.title"),
                         'rows' => isset($field['rows']) ? $field['rows'] : 8,
                     ]) !!}
@@ -181,11 +186,11 @@ code: |
 
 {!! Form::close() !!}
 
-@if (isset($form['files']))
+@section('scripts')
 
-    @if ($form['files'])
+    @if (isset($form['files']))
 
-        @section('scripts')
+        @if ($form['files'])
 
             <script type="text/javascript">
 
@@ -263,8 +268,8 @@ code: |
 
             </script>
 
-        @stop
+        @endif
 
     @endif
 
-@endif
+@stop
