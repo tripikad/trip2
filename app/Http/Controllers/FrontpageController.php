@@ -88,7 +88,7 @@ class FrontpageController extends Controller
         ];
 
         $findDestinationsParent = [
-            'flights1'
+            'flights1',
         ];
 
         $viewVariables = $this->getCollections($types);
