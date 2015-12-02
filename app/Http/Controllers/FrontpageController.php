@@ -17,25 +17,6 @@ class FrontpageController extends Controller
         $destinations = Destination::getNames();
 
         $types = [
-            'shortnews',
-            'flight',
-            'travelmate',
-            'forum',
-            'photo',
-            'blog',
-        ];
-
-        $features = [];
-
-        foreach ($types as $type) {
-            $features[$type]['contents'] = Content::whereType($type)
-                ->with(config("content_$type.frontpage.with"))
-                ->latest(config("content_$type.frontpage.latest"))
-                ->take(config("content_$type.frontpage.take"))
-                ->get();
-        }
-
-        $types = [
             'flights1' => [
                 'skip' => null,
                 'take' => 3,
@@ -136,8 +117,12 @@ class FrontpageController extends Controller
             } else {
                 $query = Content::select(['*', DB::raw('\''.$key.'\' AS `index`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
 
+                if (isset($type['with']) && $type['with'] !== null) {
+                    $query = $query->with($type['with']);
+                }
+
                 if (isset($type['latest']) && $type['latest'] !== null) {
-                    $query = $query->latest();
+                    $query = $query->latest($type['latest']);
                 }
 
                 if (isset($type['skip']) && $type['skip'] !== null) {
