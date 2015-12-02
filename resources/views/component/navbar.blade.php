@@ -7,7 +7,7 @@
             'items' => config('menu.header')
         ])
 
-        @if(!auth()->user())
+        @if(! \Auth::user())
 
             @include('component.navbar.list', [
                 'menu' => 'auth',
