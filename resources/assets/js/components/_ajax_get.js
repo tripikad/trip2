@@ -1,4 +1,4 @@
-$('.js-ajax_get').click(function (e)
+$('.js-ajax_get').stop(true, true).click(function (e)
 {
     e.preventDefault();
 
