@@ -17,38 +17,19 @@ class FrontpageController extends Controller
         $destinations = Destination::getNames();
 
         $types = [
-            'shortnews',
-            'flight',
-            'travelmate',
-            'forum',
-            'photo',
-            'blog',
-        ];
-
-        $features = [];
-
-        foreach ($types as $type) {
-            $features[$type]['contents'] = Content::whereType($type)
-                ->with(config("content_$type.frontpage.with"))
-                ->latest(config("content_$type.frontpage.latest"))
-                ->take(config("content_$type.frontpage.take"))
-                ->get();
-        }
-
-        $types = [
             'flights1' => [
                 'skip' => null,
                 'take' => 3,
                 'type' => ['flight'],
                 'status' => 1,
-                'latest' => true,
+                'latest' => 'created_at',
             ],
             'flights2' => [
                 'skip' => 3,
                 'take' => 5,
                 'type' => ['flight'],
                 'status' => 1,
-                'latest' => true,
+                'latest' => 'created_at',
             ],
             'content' => [
                 'take' => 1,
@@ -60,49 +41,49 @@ class FrontpageController extends Controller
                 'take' => 5,
                 'type' => ['forum', 'buysell', 'expat'],
                 'status' => 1,
-                'latest' => true,
+                'latest' => 'created_at',
             ],
             'news1' => [
                 'skip' => null,
                 'take' => 2,
                 'type' => ['news'],
                 'status' => 1,
-                'latest' => true,
+                'latest' => 'created_at',
             ],
             'news2' => [
                 'skip' => 2,
                 'take' => 5,
                 'type' => ['news'],
                 'status' => 1,
-                'latest' => true,
+                'latest' => 'created_at',
             ],
             'featured_news' => [
                 'skip' => null,
                 'take' => 3,
                 'type' => ['sponsored'],
                 'status' => 1,
-                'latest' => true,
+                'latest' => 'created_at',
             ],
             'blogs' => [
                 'skip' => null,
                 'take' => 1,
                 'type' => ['blog'],
                 'status' => 1,
-                'latest' => true,
+                'latest' => 'created_at',
             ],
             'photos' => [
                 'skip' => null,
                 'take' => 8,
                 'type' => ['photo'],
                 'status' => 1,
-                'latest' => true,
+                'latest' => 'created_at',
             ],
             'travelmates' => [
                 'skip' => null,
                 'take' => 4,
                 'type' => ['travelmate'],
                 'status' => 1,
-                'latest' => true,
+                'latest' => 'created_at',
             ],
         ];
 
@@ -136,8 +117,12 @@ class FrontpageController extends Controller
             } else {
                 $query = Content::select(['*', DB::raw('\''.$key.'\' AS `index`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
 
+                if (isset($type['with']) && $type['with'] !== null) {
+                    $query = $query->with($type['with']);
+                }
+
                 if (isset($type['latest']) && $type['latest'] !== null) {
-                    $query = $query->latest();
+                    $query = $query->latest($type['latest']);
                 }
 
                 if (isset($type['skip']) && $type['skip'] !== null) {
