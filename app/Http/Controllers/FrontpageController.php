@@ -137,7 +137,7 @@ class FrontpageController extends Controller
             if ($i == 1) {
                 $content_query = $query;
             } else {
-                $content_query = $content_query->union($query);
+                $content_query = $content_query->unionAll($query);
             }
         }
 
