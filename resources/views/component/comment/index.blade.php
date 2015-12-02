@@ -6,7 +6,7 @@
         id="comment-{{ $comment->id }}"
         class="
         @if (count($comments) == ($index + 1))
-            utils-padding-bottom 
+            utils-padding-bottom
         @else
             utils-border-bottom
         @endif
@@ -17,7 +17,7 @@
 
         @include('component.row', [
             'profile' => [
-                'modifiers' => '',
+                'modifiers' => 'm-small',
                 'image' => $comment->user->imagePreset('xsmall_square'),
                 'route' => route('user.show', [$comment->user])
             ],
@@ -25,12 +25,12 @@
             'actions' => view('component.actions', ['actions' => $comment->getActions()]),
             'extra' => view('component.flags', ['flags' => $comment->getFlags()]),
             'body' => nl2br($comment->body),
-            'modifiers' => '-centered'
+            'modifiers' => 'm-image'
 
         ])
 
     </div>
-    
+
 @endforeach
 
 @endif

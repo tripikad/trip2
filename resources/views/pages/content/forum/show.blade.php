@@ -21,7 +21,7 @@
 
             @include('component.row', [
                 'profile' => [
-                    'modifiers' => '',
+                    'modifiers' => 'm-small',
                     'image' => $content->user->imagePreset(),
                     'route' => route('user.show', [$content->user])
                 ],
