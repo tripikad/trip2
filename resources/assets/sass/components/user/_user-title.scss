@@ -1,0 +1,32 @@
+.c-user-title {
+
+    color: $color-white;
+    font-size: $font-size-largest; // 30px
+    font-weight: $font-weight-bold;
+
+    @include respond-to(tablet) {
+
+        font-size: $font-size-largest * 2; // 60px
+    }
+
+    &.m-short {
+
+        font-size: $font-size-largest + 6; // 36px
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-huge - 24; // 72px
+        }
+    }
+
+    &.m-long {
+
+        font-size: $font-size-larger; // 24px
+        word-break: break-all;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-huge / 2; // 48px
+        }
+    }
+}

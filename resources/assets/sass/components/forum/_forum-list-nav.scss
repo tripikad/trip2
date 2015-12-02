@@ -5,5 +5,10 @@
 
     .c-forum-list-nav__item {
 
-        margin-bottom: $spacer;
+        margin-bottom: $spacer * 2;
+
+        &.m-button {
+
+            margin-bottom: $spacer;
+        }
     }

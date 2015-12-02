@@ -20,23 +20,43 @@
 
     &.m-large {
 
-        font-size: $font-size-large;
+        font-size: $font-size-medium;
         font-weight: $font-weight-bold;
         text-transform: none;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-large;
+        }
     }
 
     &.m-larger {
 
-        font-size: $font-size-huge / 2;
+        font-size: $font-size-largest;
         font-weight: $font-weight-bold;
         text-transform: none;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-huge / 2;
+        }
     }
 
     &.m-huge {
 
-        font-size: 60px; // Exception
+        font-size: $font-size-huge / 2;
         font-weight: $font-weight-bold;
         text-transform: none;
+
+        @include respond-to(tablet) {
+
+            font-size: 60px; // Exception
+        }
+    }
+
+    &.m-margin {
+
+        margin-bottom: $spacer * 2;
     }
 }
 

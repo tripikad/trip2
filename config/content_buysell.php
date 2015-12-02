@@ -2,14 +2,6 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => [],
-        'latest' => 'created_at',
-        'take' => 1,
-    ],
-
     'index' => [
 
         'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],

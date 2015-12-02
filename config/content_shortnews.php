@@ -2,15 +2,6 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => false,
-        'with' => [],
-        'latest' => 'created_at',
-        'take' => 4,
-
-    ],
-
     'index' => [
 
         'with' => ['destinations', 'topics'],

@@ -22,8 +22,8 @@ class ActivityTest extends TestCase
 
         $this->visit("user/$user1->id")
             ->see($user1->name)
-            ->seeLink('Hello')
-            ->click('Hello')
+            ->see('Hello')
+            ->click(trans('user.activity.view.full.post'), "content/$content1->type/$content1->id")
             ->seePageIs("content/$content1->type/$content1->id");
 
         // Comment activity
@@ -35,8 +35,8 @@ class ActivityTest extends TestCase
         ]);
 
         $this->visit("user/$user1->id")
-            ->seeLink('World')
-            ->click('World')
+            ->see('World')
+            ->click(trans('user.activity.view.full.post'), "content/$comment1->content->type/$comment1->content->id?#comment-$comment1->id")
             ->seePageIs("content/$content1->type/$content1->id");
     }
 }

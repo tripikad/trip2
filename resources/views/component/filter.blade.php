@@ -8,7 +8,10 @@
             'destination',
             ['' => trans('content.index.filter.field.destination.title')]
                  + $destinations->toArray(),
-            $destination
+            $destination,
+            [
+                'class' => 'js-filter'
+            ]
         )!!}
 
     </div>
@@ -19,7 +22,10 @@
             'topic',
             ['' => trans('content.index.filter.field.topic.title')]
                  + $topics->toArray(),
-            $topic
+            $topic,
+            [
+                'class' => 'js-filter'
+            ]
         )!!}
 
     </div>

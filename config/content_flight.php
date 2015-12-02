@@ -2,14 +2,6 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => ['images'],
-        'latest' => 'created_at',
-        'take' => 8,
-    ],
-
     'index' => [
 
         'with' => ['images'],
@@ -30,6 +22,7 @@ return [
                 'type' => 'textarea',
                 'rows' => 16,
                 'large' => true,
+                'wysiwyg' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

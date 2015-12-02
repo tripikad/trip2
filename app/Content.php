@@ -11,7 +11,7 @@ class Content extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-    protected $appends = ['body_filtered','image_id'];
+    protected $appends = ['body_filtered', 'image_id'];
 
     public function user()
     {
@@ -48,11 +48,6 @@ class Content extends Model
         return $this->morphMany('App\Follow', 'followable');
     }
 
-    public function getDestination()
-    {
-        return $this->destinations->first();
-    }
-
     public function getDestinationParent()
     {
         if ($this->destinations->first()) {
@@ -75,8 +70,6 @@ class Content extends Model
     {
         return $this->image ? '/images/'.$this->type.'/small/'.$this->image : 'http://trip.ee/files/pictures/picture_none.png';
     }
-
-//    public function getFilteredbodyAttribute()
 
     public function getBodyFilteredAttribute()
     {

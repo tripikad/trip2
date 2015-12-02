@@ -1,4 +1,6 @@
 scss_files: "resources/assets/sass/**/*.scss"
+exclude: "public/plugins/ckeditor/skins/**"
+
 linters:
   BangFormat:
     enabled: true

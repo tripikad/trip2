@@ -92,6 +92,16 @@ code {
 
 	background: $color-fill-neutral-light;
 	border-radius: $spacer / 4;
+}
 
+svg {
+
+	height: 100%;
+	width: 100%;
+}
+
+a {
+
+	color: $color-text-link;
 }
 
