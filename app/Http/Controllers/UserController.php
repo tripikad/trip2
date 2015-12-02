@@ -199,7 +199,7 @@ class UserController extends Controller
 
     public function destinationsIndex($id)
     {
-        $user = User::with(['flags.flaggable' => function($query) use($id) {
+        $user = User::with(['flags.flaggable' => function ($query) use ($id) {
             $query->where('user_id', $id);
         }])->findorFail($id);
 
