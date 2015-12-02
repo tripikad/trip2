@@ -87,9 +87,20 @@ class FrontpageController extends Controller
             ],
         ];
 
+        $findDestinationsParent = [
+            'flights1',
+        ];
+
         $viewVariables = $this->getCollections($types);
 
         $viewVariables['destinations'] = $destinations;
+
+        foreach ($findDestinationsParent as $type) {
+            foreach ($viewVariables[$type] as $key => $element) {
+                $viewVariables[$type][$key]['destination'] = $element->destinations->first();
+                $viewVariables[$type][$key]['parent_destination'] = $element->getDestinationParent();
+            }
+        }
 
         return response()
             ->view('pages.frontpage.index', $viewVariables)
@@ -137,7 +148,7 @@ class FrontpageController extends Controller
             if ($i == 1) {
                 $content_query = $query;
             } else {
-                $content_query = $content_query->union($query);
+                $content_query = $content_query->unionAll($query);
             }
         }
 

@@ -45,13 +45,13 @@
                                 @include('component.destination', [
                                     'modifiers' => ['m-yellow', 'm-red', 'm-green'][$key],
                                     'title' =>
-                                        $flight1->getDestination() ? $flight1->getDestination()->name : null,
+                                        $flight1->destination ? $flight1->destination->name : null,
                                     'title_route' =>
-                                        $flight1->getDestination() ? route('destination.show', $flight1->getDestination()) : null,
+                                        $flight1->parent_destination ? route('destination.show', $flight1->parent_destination) : null,
                                     'subtitle' =>
-                                        $flight1->getDestinationParent() ? $flight1->getDestinationParent()->name : null,
+                                        $flight1->parent_destination ? $flight1->parent_destination->name : null,
                                     'subtitle_route' =>
-                                        $flight1->getDestinationParent() ? route('destination.show', $flight1->getDestinationParent()) : null
+                                        $flight1->parent_destination ? route('destination.show', $flight1->parent_destination) : null
                                 ])
 
                                 @include('component.card', [
