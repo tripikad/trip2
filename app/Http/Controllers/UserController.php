@@ -17,7 +17,9 @@ class UserController extends Controller
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
 
-        $user = User::with('flags', 'flags.flaggable')->findorFail($id);
+        $user = User::with(['flags.flaggable' => function ($query) use ($id) {
+            $query->where('user_id', $id);
+        }])->findorFail($id);
 
         $content_count = $user
             ->contents()
