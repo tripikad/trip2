@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App;
+use Request;
 
 class FlagController extends Controller
 {
@@ -47,6 +48,21 @@ class FlagController extends Controller
             }
         }
 
-        return back();
+        if (Request::ajax()) {
+            if (($flaggable_type == 'content' || $flaggable_type == 'comment')
+                && in_array($flag_type, $flags[$flaggable_type]['flag_types'])) {
+                return $flags[$flaggable_type]['controller']::find($flaggable_id)
+                    ->flags()
+                    ->where([
+                        'flaggable_type' => $flags[$flaggable_type]['controller'],
+                        'flag_type' => $flag_type,
+                    ])
+                    ->count();
+            } else {
+                return back();
+            }
+        } else {
+            return back();
+        }
     }
 }
