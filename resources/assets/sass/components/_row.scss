@@ -235,3 +235,9 @@
 
             display: inline-block;
         }
+
+    .c-row__body {
+
+        font-size: $font-size-normal;
+        line-height: $font-size-normal * 1.5;
+    }
