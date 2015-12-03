@@ -46,12 +46,18 @@ class ContentController extends Controller
             $contents = $contents->where('user_id', $request->author);
         }
 
-        $contents = $contents->simplePaginate(config("content_$type.index.paginate"));
+        $contents = $contents->simplePaginate(config('content_'.$type.'.index.paginate'));
 
         $destinations = Destination::getNames($type);
         $topics = Topic::getNames($type);
 
-        $view = view()->exists("pages.content.$type.index") ? "pages.content.$type.index" : 'pages.content.index';
+        if (view()->exists('pages.content.'.$type.'.index')) {
+            $view = 'pages.content.'.$type.'.index';
+        } elseif (view()->exists(config('content_'.$type.'.view.index'))) {
+            $view = config('content_'.$type.'.view.index');
+        } else {
+            $view = 'pages.content.index';
+        }
 
         return response()->view($view, [
             'contents' => $contents,
@@ -78,7 +84,13 @@ class ContentController extends Controller
             return $comment->status || (Auth::check() && Auth::user()->hasRole('admin'));
         });
 
-        $view = view()->exists("pages.content.$type.show") ? "pages.content.$type.show" : 'pages.content.show';
+        if (view()->exists('pages.content.'.$type.'.show')) {
+            $view = 'pages.content.'.$type.'.show';
+        } elseif (view()->exists(config('content_'.$type.'.view.show'))) {
+            $view = config('content_'.$type.'.view.show');
+        } else {
+            $view = 'pages.content.show';
+        }
 
         return response()->view($view, [
             'content' => $content,
