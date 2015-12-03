@@ -420,7 +420,6 @@ class ConvertBase extends Command
          * Case id 9 - Business user
          * Case id 11 - Business user 2.
          */
-
         if ($user && $user->status == 1 && ! in_array($user->uid, [7288556, 4694, 3661]) &&
             ! $blockedSender && $user->rid !== 9 && $user->rid !== 11) {
             return true;
