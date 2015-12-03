@@ -37,6 +37,37 @@
         margin-bottom: $spacer * 3;
         border-bottom: 2px solid $color-fill-neutral;
     }
+
+    &.m-quote {
+
+        background: $color-fill-neutral-light;
+        border-left: $spacer / 2 solid $color-fill-neutral-dark;
+        position: relative;
+        padding-top: $spacer;
+        padding-bottom: $spacer;
+    }
+
+    &.m-quote:after {
+
+        content: '\201D';
+        display: block;
+        position: absolute;
+        top: $spacer;
+        right: $spacer;
+        color: $color-fill-neutral-dark;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-largest * 2;
+    }
+
+    &.m-quote.m-image {
+
+        padding-left: $spacer * 6;
+
+        @include respond-to(tablet) {
+
+            padding-left: $spacer * 8;
+        }
+    }
 }
 
     .c-row__icon {
@@ -86,6 +117,18 @@
         display: block;
         width: $spacer * 4;
         height: $spacer * 4;
+
+        .c-row.m-quote.m-image & {
+
+            left: (($spacer * 6) - ($spacer * 4)) / 2;
+            top: $spacer + 2;
+
+            @include respond-to(tablet) {
+
+                left: (($spacer * 8) - ($spacer * 4)) / 2;
+                top: $spacer + 2;
+            }
+        }
     }
 
     .c-row__title {
@@ -163,6 +206,11 @@
 
             font-size: $font-size-normal;
             margin-top: $spacer * 0.75;
+        }
+
+        .c-row.m-quote & {
+
+            margin-top: 0;
         }
 
         .c-row.m-large & {
