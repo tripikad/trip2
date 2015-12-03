@@ -7,6 +7,8 @@ return [
         'show' => 'pages.content.forum.show',
     ],
 
+    'menu' => 'forum',
+
     'index' => [
 
         'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],

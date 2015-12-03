@@ -9,6 +9,8 @@ return [
         'paginate' => 25,
     ],
 
+    'menu' => 'forum',
+
     'edit' => [
 
         'fields' => [
