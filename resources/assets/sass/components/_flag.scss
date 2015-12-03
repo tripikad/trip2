@@ -5,42 +5,54 @@
     display: flex;
 }
 
-        .c-flag__item {
+    .c-flag__item {
 
-            @include color-modifiers(background);
+        @include color-modifiers(background);
 
-            border-radius: 50%;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        display: flex;
+        width: $spacer * 2.5;
+        height: $spacer * 2.5;
+        margin-left: $spacer;
+
+        &:first-child {
+
+            margin-left: 0;
+        }
+    }
+
+        .c-flag__item-text {
+
+            @include font-smoothing;
+
+            font-size: $font-size-medium;
+            font-family: $font-primary;
+            font-weight: $font-weight-medium;
+            color: $color-fill-neutral;
             align-items: center;
             justify-content: center;
             text-align: center;
             display: flex;
-            width: 30px;
-            height: 30px;
-            margin-left: $spacer;
-
-            &:first-child {
-
-                margin-left: 0;
-            }
+            width: 100%;
+            height: $spacer * 2.5;
         }
 
-            .c-flag__item-text {
+            .c-flag__item-link {
 
-                @include font-smoothing;
+                color: $color-white;
+                text-decoration: none;
+                width: 100%;
+                height: $spacer * 2.5;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                display: flex;
 
-                font-size: $font-size-medium;
-                font-family: $font-primary;
-                font-weight: $font-weight-medium;
-                color: $color-fill-neutral;
-            }
+                &:hover {
 
-                .c-flag__item-link {
-
-                    color: $color-white;
-                    text-decoration: none;
-
-                    &:hover {
-
-                        color: $color-fill-neutral;
-                    }
+                    color: $color-fill-neutral;
                 }
+            }
