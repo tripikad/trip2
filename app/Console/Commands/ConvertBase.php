@@ -415,13 +415,18 @@ class ConvertBase extends Command
         // Eliminating mail duplicates using
         // SELECT uid, mail, COUNT(*) c FROM users GROUP BY mail HAVING c > 1;
 
-        return ($user
-            && $user->status == 1
-            && ! in_array($user->uid, [7288556, 4694, 3661])
-            && ! $blockedSender
-            && $user->rid !== 9 // Ärikasutaja
-            && $user->rid !== 11 // Ärikasutaja 2
-        );
+        /**
+         * $user->rid
+         * Case id 9 - Business user
+         * Case id 11 - Business user 2
+         */
+
+        if ($user && $user->status == 1 && ! in_array($user->uid, [7288556, 4694, 3661]) &&
+            ! $blockedSender && $user->rid !== 9 && $user->rid !== 11) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function getRole($rid)
