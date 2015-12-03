@@ -25,7 +25,7 @@
                     'image' => $content->user->imagePreset(),
                     'route' => route('user.show', [$content->user])
                 ],
-                'modifiers' => 'm-image',
+                'modifiers' => 'm-image' . (count($comments) ? ' m-featured' : ''),
                 'title' => $content->title,
                 'text' => view('component.content.text', ['content' => $content]),
                 'actions' => view('component.actions', ['actions' => $content->getActions()]),
@@ -45,7 +45,39 @@
 
         <div class="r-forum__sidebar">
 
+            <div class="r-forum__sidebar-block">
+
+                <div class="r-forum__sidebar-block-inner">
+
+                    @include('component.nav', [
+                        'modifiers' => '',
+                        'menu' => 'forum',
+                        'items' => config('menu.forum')
+                    ])
+
+                </div>
+
+            </div>
+
+            @if (\Auth::check())
+
+                <div class="r-forum__sidebar-block">
+
+                    <div class="r-forum__sidebar-block-inner">
+
+                        @include('component.button', [
+                            'route' => route('content.create', ['type' => $type]),
+                            'title' => trans("content.$type.create.title")
+                        ])
+
+                    </div>
+
+                </div>
+
+            @endif
+
         </div>
+
     </div>
 
 @stop
