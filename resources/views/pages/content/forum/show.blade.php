@@ -51,8 +51,8 @@
 
                     @include('component.nav', [
                         'modifiers' => '',
-                        'menu' => 'forum',
-                        'items' => config('menu.forum')
+                        'menu' => config('content_'.$type.'.menu'),
+                        'items' => config('menu.'.config('content_'.$type.'.menu'))
                     ])
 
                 </div>
