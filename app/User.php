@@ -140,7 +140,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function hasRoleOrOwner($role, $ownable_user_id)
     {
-        return ($this->hasRole($role) || $ownable_user_id == $this->id);
+        return $this->hasRole($role) || $ownable_user_id == $this->id;
     }
 
     public function destinationHaveBeen()

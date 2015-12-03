@@ -418,7 +418,7 @@ class ConvertBase extends Command
         /**
          * $user->rid
          * Case id 9 - Business user
-         * Case id 11 - Business user 2
+         * Case id 11 - Business user 2.
          */
 
         if ($user && $user->status == 1 && ! in_array($user->uid, [7288556, 4694, 3661]) &&
