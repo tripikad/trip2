@@ -2,6 +2,13 @@
 
 return [
 
+    'view' => [
+        'index' => 'pages.content.forum.index',
+        'show' => 'pages.content.forum.show',
+    ],
+
+    'menu' => 'forum',
+
     'index' => [
 
         'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],

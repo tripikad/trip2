@@ -11,7 +11,7 @@
                     $flags['good']['flaggable_id'],
                     $flags['good']['flag_type'],
                     isset($flags['good']['return']) ? $flags['good']['return'] : null,
-                ]) }}" class="c-flag__item-link">
+                ]) }}" class="c-flag__item-link js-ajax_get">
 
             @endif
 
@@ -38,7 +38,7 @@
                     $flags['bad']['flaggable_id'],
                     $flags['bad']['flag_type'],
                     isset($flags['bad']['return']) ? $flags['bad']['return'] : null,
-                ]) }}" class="c-flag__item-link">
+                ]) }}" class="c-flag__item-link js-ajax_get">
 
             @endif
 
