@@ -17,6 +17,11 @@
 
             border-radius: 12px;
             margin: $spacer / 6;
+
+            &.m-gray {
+
+                background: $color-fill-neutral-darker;
+            }
         }
 
         &.m-active {
@@ -25,7 +30,8 @@
         }
     }
 
-        .c-tags__item-link {
+        .c-tags__item-link,
+        .c-tags__item-wrap {
 
             @include font-smoothing;
 

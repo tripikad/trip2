@@ -1,0 +1,59 @@
+.c-travelmate-user {
+
+    @include color-modifiers(background);
+
+    color: #ffffff;
+    padding: $spacer * 4 $spacer * 3 $spacer * 2;
+}
+
+    .c-travelmate-user__header {
+
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: $spacer * 2;
+    }
+
+        .c-travelmate-user__image {
+
+            position: relative;
+            top: -$spacer;
+            flex: 0 0 $spacer * 7.5;
+            width: $spacer * 7.5;
+            height: $spacer * 7.5;
+            margin-right: 12px;
+            overflow: hidden;
+            border-radius: 50%;
+
+            img {
+
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .c-travelmate-user__header-info {}
+
+        .c-travelmate-user__title {
+
+            font-size: $font-size-medium;
+            font-weight: $font-weight-bold;
+            margin-bottom: $spacer;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-larger - 2;
+            }
+
+            span {
+
+                @include color-modifiers-dark-and(color);
+
+                font-size: $font-size-small;
+                padding-left: $spacer;
+            }
+        }
+
+    .c-travelmate-user__body {
+
+        margin-bottom: $spacer * 2;
+    }

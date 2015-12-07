@@ -13,7 +13,13 @@
 
         @include respond-to(tablet) {
 
-            @include span(15 of 24);
+            @include span(16 of 24);
+            padding-left: span(1 of 16);
+        }
+
+        @include respond-to(desktop) {
+
+            padding-left: 0;
         }
 
         .r-travelmates.m-single & {
@@ -25,16 +31,54 @@
         }
     }
 
+        .r-travelmates__title {
+
+            font-size: $font-size-largest;
+            font-weight: $font-weight-bold;
+            line-height: 1.125;
+            margin-bottom: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-huge / 2;
+            }
+        }
+
+        .r-travelmates__meta {
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 3;
+            }
+        }
+
+            .r-travelmates__meta-date {
+
+                font-size: $font-size-small;
+                color: $color-fill-neutral-darker;
+            }
+
+
     .r-travelmates__sidebar {
 
         padding-top: $spacer * 4;
 
         @include respond-to(tablet) {
 
-            @include span(7 of 24 at 3);
+            @include span(7 of 24 at 2);
         }
 
         .r-travelmates.m-single & {
+
+            &.m-first {
+
+                padding-top: 0;
+            }
 
             @include respond-to(tablet) {
 
@@ -43,13 +87,35 @@
         }
     }
 
-        .r-travelmates__sidebar-block {
+    .r-travelmates__offers {}
 
-            margin-bottom: $spacer * 2.5;
+        .r-travelmates__offers-wrap {
+
+            @include wrap();
+
+            margin-bottom: -$spacer * 4;
         }
 
-            .r-travelmates__sidebar-block-inner {
+    .r-travelmates__additional {
 
-                padding: $spacer * 3;
-                background: $color-fill-neutral-light;
-            }
+        padding: $spacer * 10 0 $spacer * 2;
+        background: $color-fill-neutral-light;
+    }
+
+        .r-travelmates__additional-wrap {
+
+            @include wrap();
+        }
+
+    .r-travelmates__footer-promo {
+
+        background: $color-fill-neutral-light;
+        margin-bottom: -48px;
+    }
+
+        .r-travelmates__footer-promo-wrap {
+
+            @include wrap('narrow');
+            position: relative;
+            z-index: 2;
+        }
