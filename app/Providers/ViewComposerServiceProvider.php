@@ -22,8 +22,8 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     private function composeSvgStandalone()
     {
-        view()->composer('component.svg.standalone', function ($view)
-        {
+        view()->composer('component.svg.standalone', function ($view) {
+
             $data = $view->getData();
 
             $svg = new DOMDocument();
