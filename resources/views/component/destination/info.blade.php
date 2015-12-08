@@ -7,7 +7,10 @@ code: |
     @include('component.destination.info',[
         'modifiers' => $modifiers,
         'text' => 'Malta on tihedalt asustatud saareriik Vahemeres, mis koosneb 3 asustatud ja neljast asustamata saartest',
-        'wiki_route' => '#',
+        'link' => [
+            'title' => 'Wikipdeia &rsaquo;',
+            'route' => '#'
+        ],
         'definitions' => [
             [
                 'term' => 'Rahvaarv',
@@ -41,24 +44,48 @@ modifiers:
 
 <div class="c-destination-info {{ $modifiers or 'm-yellow' }}">
 
-    <p class="c-destination-info__text">{{ $text }}
-    @if (isset($wiki_route))
-        <a href="{{ $wiki_route }}">Wikipedia &rsaquo;</a>
+    @if (isset($text))
+
+        <p class="c-destination-info__text">{{ $text }}
+
+        @if (isset($link) && count($link))
+
+            @if (isset($link['title']))
+
+                @if (isset($link['route']))
+
+                    <a href="{{ $link['route'] }}">
+
+                @endif
+
+                {{ $link['title'] }}
+
+                @if (isset($link['route']))
+
+                    </a>
+
+                @endif
+
+            @endif
+
+        @endif
+
+        </p>
+
     @endif
-    </p>
 
     @if (isset($definitions))
 
-    <dl class="c-destination-info__definition-list">
+        <dl class="c-destination-info__definition-list">
 
-        @foreach ($definitions as $item)
+            @foreach ($definitions as $item)
 
-        <dt class="c-destination-info__definition-list-term">{{ $item['term'] }}</dt>
-        <dd class="c-destination-info__definition-list-definition">{{ $item['definition'] }}</dd>
+                <dt class="c-destination-info__definition-list-term">{{ $item['term'] }}</dt>
+                <dd class="c-destination-info__definition-list-definition">{{ $item['definition'] }}</dd>
 
-        @endforeach
+            @endforeach
 
-    </dl>
+        </dl>
 
     @endif
 

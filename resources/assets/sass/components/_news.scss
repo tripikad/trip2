@@ -48,21 +48,36 @@
 
         @include font-smoothing;
 
-        font-size: $font-size-larger;
+        font-size: $font-size-large;
         font-weight: $font-weight-bold;
         line-height: 1.15;
         margin-bottom: $spacer * 2;
 
+        @include respond-to(tablet) {
+
+            font-size: $font-size-larger;
+        }
+
         .c-news.m-small & {
 
-            font-size: $font-size-large;
+            font-size: $font-size-medium;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-large;
+            }
         }
 
         .c-news.m-smaller & {
 
-            font-size: $font-size-medium;
+            font-size: $font-size-normal;
             flex: 2;
             padding: 0 $spacer * 1.5;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-medium;
+            }
         }
     }
 

@@ -4,44 +4,53 @@
 
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
+        <a href="/" class="c-header__logo-link">
+
             @include('component.logo', [
                 'modifiers' => 'm-small'
             ])
 
+        </a>
+
         @else
+
+        <a href="/" class="c-header__logo-link">
 
             @include('component.logo', [
                 'modifiers' => 'm-small m-dark'
             ])
 
+        </a>
+
         @endif
+
     </div>
 
-    @if(auth()->user() && ! auth()->user()->hasRole('admin'))
+    @if(\Auth::user() && ! \Auth::user()->hasRole('admin'))
 
     <div class="c-header__user">
 
-        @include('component.nav.user', [
+        @include('component.navbar.user', [
             'modifiers' => 'm-purple',
             'profile' => [
-                'image' => auth()->user()->imagePreset(),
-                'title' => auth()->user()->name,
-                'route' => route('user.show', [auth()->user()]),
-                'badge' => auth()->user()->unreadMessagesCount()
+                'image' => \Auth::user()->imagePreset(),
+                'title' => \Auth::user()->name,
+                'route' => route('user.show', [\Auth::user()]),
+                'badge' => \Auth::user()->unreadMessagesCount()
             ],
             'children' => [
                 [
                     'title' => trans('menu.user.profile'),
-                    'route' => route('user.show', [auth()->user()]),
+                    'route' => route('user.show', [\Auth::user()]),
                 ],
                 [
                     'title' => trans('menu.user.message'),
-                    'route' => route('message.index', [auth()->user()]),
-                    'badge' => auth()->user()->unreadMessagesCount()
+                    'route' => route('message.index', [\Auth::user()]),
+                    'badge' => \Auth::user()->unreadMessagesCount()
                 ],
                 [
                     'title' => trans('menu.user.edit.profile'),
-                    'route' => route('user.edit', [auth()->user()]),
+                    'route' => route('user.edit', [\Auth::user()]),
                 ],
                 [
                     'title' => trans('menu.auth.logout'),
@@ -51,31 +60,31 @@
         ])
     </div>
 
-    @elseif(auth()->user() && auth()->user()->hasRole('admin'))
+    @elseif(\Auth::user() && \Auth::user()->hasRole('admin'))
 
     <div class="c-header__user">
 
-        @include('component.nav.user', [
+        @include('component.navbar.user', [
             'modifiers' => 'm-purple',
             'profile' => [
-                'image' => auth()->user()->imagePreset(),
-                'title' => auth()->user()->name,
-                'route' => route('user.show', [auth()->user()]),
-                'badge' => auth()->user()->unreadMessagesCount()
+                'image' => \Auth::user()->imagePreset(),
+                'title' => \Auth::user()->name,
+                'route' => route('user.show', [\Auth::user()]),
+                'badge' => \Auth::user()->unreadMessagesCount()
             ],
             'children' => [
                 [
                     'title' => trans('menu.user.profile'),
-                    'route' => route('user.show', [auth()->user()]),
+                    'route' => route('user.show', [\Auth::user()]),
                 ],
                 [
                     'title' => trans('menu.user.message'),
-                    'route' => route('message.index', [auth()->user()]),
-                    'badge' => auth()->user()->unreadMessagesCount()
+                    'route' => route('message.index', [\Auth::user()]),
+                    'badge' => \Auth::user()->unreadMessagesCount()
                 ],
                 [
                     'title' => trans('menu.user.edit.profile'),
-                    'route' => route('user.edit', [auth()->user()]),
+                    'route' => route('user.edit', [\Auth::user()]),
                 ],
                 [
                     'title' => trans('menu.auth.admin'),
@@ -87,6 +96,7 @@
                 ]
             ]
         ])
+
     </div>
 
     @endif
@@ -116,8 +126,8 @@
 
     <a href="#" class="c-header__search-trigger js-header__search-trigger">
 
-        @include('component.icon', [
-            'icon' => 'icon-search'
+        @include('component.svg.sprite', [
+            'name' => 'icon-search'
         ])
     </a>
 

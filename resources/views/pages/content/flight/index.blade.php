@@ -87,24 +87,7 @@
 
 @stop
 
-@section('header1.right')
-
-    @include('component.button', [
-        'route' => route('content.create', ['type' => $type]),
-        'title' => trans("content.$type.create.title")
-    ])
-
-@stop
-
-@section('header2.content')
-
-    @include('component.filter')
-
-@stop
-
 @section('content')
-
-@parent
 
 <div class="r-flights">
 
@@ -233,7 +216,11 @@
                                 <div class="c-form__group">
 
                                     <div class="c-form__input-wrap">
-                                        <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-right'])</span>
+                                        <span class="c-form__input-icon">
+
+                                            @include('component.svg.sprite', ['name' => 'icon-arrow-right'])
+
+                                        </span>
                                         <input type="date" class="c-form__input m-small m-icon" placeholder="">
                                     </div>
                                 </div>
@@ -244,7 +231,11 @@
                                 <div class="c-form__group">
 
                                     <div class="c-form__input-wrap">
-                                        <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-left'])</span>
+                                        <span class="c-form__input-icon">
+
+                                            @include('component.svg.sprite', ['name' => 'icon-arrow-left'])
+
+                                        </span>
                                         <input type="date" class="c-form__input m-small m-icon" placeholder="">
                                     </div>
                                 </div>
@@ -300,9 +291,22 @@
                                 'route' => '#',
                                 'icon' => 'icon-arrow-right'
                             ]
+                        ],
+                        'button' => [
+                            'modifiers' => 'm-block',
+                            'route' => route('content.create', ['type' => $type]),
+                            'title' => trans("content.$type.create.title")
                         ]
                     ])
 
+                </div>
+            </div>
+
+            <div class="r-flights__sidebar-block">
+
+                <div class="r-flights__sidebar-block-inner">
+
+                    @include('component.filter')
                 </div>
             </div>
 

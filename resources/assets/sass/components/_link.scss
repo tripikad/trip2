@@ -34,8 +34,13 @@
 
     &.m-icon {
 
-        display: inline-flex;
+        display: flex;
         align-items: center;
+    }
+
+    &.m-right {
+
+        float: right;
     }
 }
 

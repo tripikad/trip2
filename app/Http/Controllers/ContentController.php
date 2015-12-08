@@ -42,12 +42,22 @@ class ContentController extends Controller
                 ->where('content_topic.topic_id', '=', $request->topic);
         }
 
-        $contents = $contents->simplePaginate(config("content_$type.index.paginate"));
+        if ($request->author) {
+            $contents = $contents->where('user_id', $request->author);
+        }
+
+        $contents = $contents->simplePaginate(config('content_'.$type.'.index.paginate'));
 
         $destinations = Destination::getNames($type);
         $topics = Topic::getNames($type);
 
-        $view = view()->exists("pages.content.$type.index") ? "pages.content.$type.index" : 'pages.content.index';
+        if (view()->exists('pages.content.'.$type.'.index')) {
+            $view = 'pages.content.'.$type.'.index';
+        } elseif (view()->exists(config('content_'.$type.'.view.index'))) {
+            $view = config('content_'.$type.'.view.index');
+        } else {
+            $view = 'pages.content.index';
+        }
 
         return response()->view($view, [
             'contents' => $contents,
@@ -56,7 +66,7 @@ class ContentController extends Controller
             'destinations' => $destinations,
             'topic' => $request->topic,
             'topics' => $topics,
-        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.content.index'));
+        ])->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
 
     public function show($type, $id)
@@ -74,13 +84,19 @@ class ContentController extends Controller
             return $comment->status || (Auth::check() && Auth::user()->hasRole('admin'));
         });
 
-        $view = view()->exists("pages.content.$type.show") ? "pages.content.$type.show" : 'pages.content.show';
+        if (view()->exists('pages.content.'.$type.'.show')) {
+            $view = 'pages.content.'.$type.'.show';
+        } elseif (view()->exists(config('content_'.$type.'.view.show'))) {
+            $view = config('content_'.$type.'.view.show');
+        } else {
+            $view = 'pages.content.show';
+        }
 
         return response()->view($view, [
             'content' => $content,
             'comments' => $comments,
             'type' => $type,
-        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.content.show'));
+        ])->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
     }
 
     public function create($type)
@@ -245,8 +261,9 @@ class ContentController extends Controller
         return redirect()->route(
             'content.index',
             [$type,
-            'destination' => $request->destination ? $request->destination : null,
-            'topic' => $request->topic ? $request->topic : null,
+                'destination' => $request->destination ? $request->destination : null,
+                'topic' => $request->topic ? $request->topic : null,
+                'author' => $request->author ? $request->author : null,
             ]
         );
     }

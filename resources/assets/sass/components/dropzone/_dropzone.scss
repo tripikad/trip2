@@ -3,8 +3,9 @@
     min-height: 100px;
     width: 100%;
     position: relative;
-    border: $brand-orange 2px solid;
+    border: $color-fill-info 1px solid;
+    box-shadow: 0 0 0 1px $color-fill-info;
     padding: $spacer;
-    background: transparent;
+    border-radius: 3px;
+    background: $color-fill-info-light;
 }
-

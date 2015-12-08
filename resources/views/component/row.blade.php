@@ -47,8 +47,8 @@ modifiers:
 
     <div class="c-row__icon">
 
-        @include('component.icon', [
-            'icon' => $icon
+        @include('component.svg.sprite', [
+            'name' => $icon
         ])
 
     </div>
@@ -72,68 +72,84 @@ modifiers:
 
     @if (isset($title))
 
-    <h3 class="c-row__title">
+        <h3 class="c-row__title">
 
-        @if (isset($preheading)) <span>{!! $preheading !!}</span> @endif
+            @if (isset($preheading))
 
-        @if (isset($route)) <a href="{{ $route }}" class="c-row__title-link"> @endif
+                <span>{!! $preheading !!}</span>
 
-        {{ $title }}
+            @endif
 
-        @if (isset($route)) </a> @endif
+            @if (isset($route))
 
-        @if (isset( $postheading )) <span>{!! $postheading !!}</span> @endif
+                <a href="{{ $route }}" class="c-row__title-link">
 
-    </h3>
+            @endif
+
+            {{ ($title != '' ? $title : '&nbsp;') }}
+
+            @if (isset($route))
+
+                </a>
+
+            @endif
+
+            @if (isset( $postheading ))
+
+                <span>{!! $postheading !!}</span>
+
+            @endif
+
+        </h3>
 
     @endif
 
     @if (isset($text) || isset($extra) || isset($list) || isset($badge))
 
-    <div class="c-row__text">
+        <div class="c-row__text">
 
-        {!! $text or '' !!}
+            {!! $text or '' !!}
 
-        {!! $extra or '' !!}
+            {!! $extra or '' !!}
 
-        @if(isset($list))
+            @if(isset($list))
 
-            <div class="c-row__list">
+                <div class="c-row__list">
 
-            @include('component.inline_list', [
-                'items' => $list
-            ])
+                    @include('component.inline_list', [
+                        'items' => $list
+                    ])
 
-            </div>
+                </div>
 
-        @endif
+            @endif
 
-        @if(isset($badge))
+            @if(isset($badge))
 
-            <div class="c-row__badge">
+                <div class="c-row__badge">
 
-            @include('component.badge', [
-                'modifiers' => 'm-green m-inverted',
-                'title' => $badge
-            ])
+                    @include('component.badge', [
+                        'modifiers' => 'm-green m-inverted',
+                        'title' => $badge
+                    ])
 
-            </div>
+                </div>
 
-        @endif
+            @endif
 
-    </div>
+        </div>
 
     @endif
 
     @if (isset($actions))
 
-    <div class="c-row__actions">{!! $actions !!}</div>
+        <div class="c-row__actions">{!! $actions !!}</div>
 
     @endif
 
     @if (isset($body))
 
-    <div class="c-row__body">{!! $body !!}</div>
+        <div class="c-row__body">{!! $body !!}</div>
 
     @endif
 

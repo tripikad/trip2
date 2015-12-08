@@ -2,7 +2,7 @@
 
     position: absolute;
     z-index: 10000;
-    top: 0;
+    top: inherit;
     left: 0;
     height: $spacer * 6.5;
     padding: 0 $spacer;
@@ -30,6 +30,13 @@
             display: none;
         }
     }
+
+        .c-header__logo-link {
+
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
 
     .c-header__search-trigger {
 

@@ -10,13 +10,13 @@ return [
     'index.forum.buysell' => 'Buy & sell',
     'index.forum.expat' => 'Expatriate',
 
-    'index.shortnews.title' => 'Shortnews',
+    'index.shortnews.title' => 'Short news',
     'index.flight.title' => 'Flight offers',
-    'index.travelmate.title' => 'Travelmates',
+    'index.travelmate.title' => 'Travel mates',
     'index.forum.title' => 'Forums',
     'index.news.title' => 'News',
     'index.photo.title' => 'Photos',
-    'index.blog.title' => 'Blogs',
+    'index.blog.title' => 'Blog',
     'index.offer.title' => 'Travel offers',
     'index.travelletter.title' => 'Travel letter',
 

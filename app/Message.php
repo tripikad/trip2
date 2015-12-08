@@ -27,7 +27,7 @@ class Message extends Model
 
     public function getTitleAttribute()
     {
-        return str_limit($this->attributes['body'], 30);
+        return str_limit($this->attributes['body'], 70);
     }
 
     public function getBodyAttribute($value)

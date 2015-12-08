@@ -3,3 +3,4 @@
 .env
 *.lock
 **/.DS_Store
+/.idea

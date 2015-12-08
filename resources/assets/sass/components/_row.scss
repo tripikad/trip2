@@ -5,15 +5,25 @@
     &.m-image {
 
         position: relative;
-        padding-left: $spacer * 6;
+        padding-left: $spacer * 4;
         margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            padding-left: $spacer * 6;
+        }
     }
 
     &.m-icon {
 
         position: relative;
-        padding-left: $spacer * 6;
+        padding-left: $spacer * 4;
         margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            padding-left: $spacer * 6;
+        }
     }
 
     &.m-large {
@@ -27,6 +37,37 @@
         margin-bottom: $spacer * 3;
         border-bottom: 2px solid $color-fill-neutral;
     }
+
+    &.m-quote {
+
+        background: $color-fill-neutral-light;
+        border-left: $spacer / 2 solid $color-fill-neutral-dark;
+        position: relative;
+        padding-top: $spacer;
+        padding-bottom: $spacer;
+    }
+
+    &.m-quote:after {
+
+        content: '\201D';
+        display: block;
+        position: absolute;
+        top: $spacer;
+        right: $spacer;
+        color: $color-fill-neutral-dark;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-largest * 2;
+    }
+
+    &.m-quote.m-image {
+
+        padding-left: $spacer * 6;
+
+        @include respond-to(tablet) {
+
+            padding-left: $spacer * 8;
+        }
+    }
 }
 
     .c-row__icon {
@@ -35,13 +76,22 @@
         left: 0;
         top: 0;
         display: block;
-        width: $spacer * 4;
-        height: $spacer * 4;
+        width: $spacer * 3;
+        height: $spacer * 3;
+
+        @include respond-to(tablet) {
+
+            width: $spacer * 4;
+            height: $spacer * 4;
+        }
 
         .c-row.m-featured & {
 
-            width: $spacer * 5;
-            height: $spacer * 5;
+            @include respond-to(tablet) {
+
+                width: $spacer * 5;
+                height: $spacer * 5;
+            }
         }
 
         svg {
@@ -67,6 +117,18 @@
         display: block;
         width: $spacer * 4;
         height: $spacer * 4;
+
+        .c-row.m-quote.m-image & {
+
+            left: (($spacer * 6) - ($spacer * 4)) / 2;
+            top: $spacer + 2;
+
+            @include respond-to(tablet) {
+
+                left: (($spacer * 8) - ($spacer * 4)) / 2;
+                top: $spacer + 2;
+            }
+        }
     }
 
     .c-row__title {
@@ -79,25 +141,40 @@
 
             @include font-smoothing;
 
-            font-size: $font-size-larger - 2;
+            font-size: $font-size-large;
             font-weight: $font-weight-bold;
             line-height: 1.15;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-larger - 2;
+            }
         }
 
         .c-row.m-large & {
 
             @include font-smoothing;
 
-            font-size: $font-size-larger - 2;
+            font-size: $font-size-large;
             font-weight: $font-weight-bold;
             line-height: 1.15;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-larger - 2;
+            }
         }
 
         .c-row.m-featured & {
 
-            font-size: $font-size-larger;
+            font-size: $font-size-larger - 2;
             font-weight: $font-weight-bold;
             line-height: 1.15;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-larger;
+            }
         }
     }
 
@@ -131,10 +208,20 @@
             margin-top: $spacer * 0.75;
         }
 
+        .c-row.m-quote & {
+
+            margin-top: 0;
+        }
+
         .c-row.m-large & {
 
             font-size: $font-size-normal;
             margin-top: $spacer * 0.75;
+        }
+
+        > a {
+
+            color: $color-text-link;
         }
     }
 
@@ -148,3 +235,9 @@
 
             display: inline-block;
         }
+
+    .c-row__body {
+
+        font-size: $font-size-normal;
+        line-height: $font-size-normal * 1.5;
+    }

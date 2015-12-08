@@ -46,6 +46,8 @@ return [
     'user.edit.profile' => 'Edit profile',
     'user.message' => 'Messages',
     'user.follow' => 'Follows',
+    'user.travelmate' => 'Looking for travel mate?',
+    'user.add.places' => 'Add places you have been',
 
     'admin.internal' => 'Internal forum',
     'admin.image' => 'All images',

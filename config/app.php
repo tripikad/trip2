@@ -149,14 +149,14 @@ return [
         Roumen\Feed\FeedServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laravelista\Ekko\EkkoServiceProvider::class,
+        Jenssegers\Date\DateServiceProvider::class,
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        Jenssegers\Date\DateServiceProvider::class,
+        App\Providers\ViewComposerServiceProvider::class,
 
     ],
 

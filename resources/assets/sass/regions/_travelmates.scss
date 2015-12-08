@@ -1,0 +1,55 @@
+.r-travelmates {}
+
+    .r-travelmates__masthead {}
+
+    .r-travelmates__wrap {
+
+        @include wrap();
+    }
+
+    .r-travelmates__content {
+
+        padding-top: $spacer * 4;
+
+        @include respond-to(tablet) {
+
+            @include span(15 of 24);
+        }
+
+        .r-travelmates.m-single & {
+
+            @include respond-to(tablet) {
+
+                @include span(14 of 24);
+            }
+        }
+    }
+
+    .r-travelmates__sidebar {
+
+        padding-top: $spacer * 4;
+
+        @include respond-to(tablet) {
+
+            @include span(7 of 24 at 3);
+        }
+
+        .r-travelmates.m-single & {
+
+            @include respond-to(tablet) {
+
+                @include span(8 of 24 at 3);
+            }
+        }
+    }
+
+        .r-travelmates__sidebar-block {
+
+            margin-bottom: $spacer * 2.5;
+        }
+
+            .r-travelmates__sidebar-block-inner {
+
+                padding: $spacer * 3;
+                background: $color-fill-neutral-light;
+            }

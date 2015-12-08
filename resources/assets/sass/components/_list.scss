@@ -63,23 +63,38 @@
 
                 @include font-smoothing;
 
-                font-size: $font-size-medium;
+                font-size: $font-size-normal;
                 font-weight: $font-weight-bold;
                 line-height: 1.15;
+
+                @include respond-to(tablet) {
+
+                    font-size: $font-size-medium;
+                }
             }
 
             .c-list.m-large & {
 
                 @include font-smoothing;
 
-                font-size: $font-size-larger;
+                font-size: $font-size-large;
                 font-weight: $font-weight-bold;
                 line-height: 1.15;
+
+                @include respond-to(tablet) {
+
+                    font-size: $font-size-larger;
+                }
             }
 
             .c-list.m-dot & {
 
                 font-weight: $font-weight-medium;
+            }
+
+            .c-list.m-dark & {
+
+                color: $color-text-neutral-dark;
             }
         }
 
@@ -92,14 +107,19 @@
 
                 svg {
 
-                    height: 100%;
-                    width: 100%;
-
                     .c-list.m-default & {
 
                         fill: $color-text-link;
                     }
                 }
+            }
+
+            .c-list__item-image {
+
+                display: inline-block;
+                margin-right: $spacer / 2;
+                margin-bottom: $spacer / 2;
+                vertical-align: middle;
             }
 
             .c-list__item-title-link {
@@ -129,6 +149,12 @@
 
             color: $color-text-neutral-dark;
             font-size: $font-size-small;
+
+            .c-list.m-dark & {
+
+                color: $color-text-black;
+                line-height: $font-size-small * 1.25;
+            }
 
             .c-list.m-large & {
 

@@ -1,45 +1,50 @@
 .c-alert {
 
     color: $color-white;
-    font-size: $font-size-normal;
+    font-size: $font-size-small;
+    line-height: 1.5;
     font-weight: $font-weight-medium;
-    padding: $spacer;
-    margin-bottom: $spacer;
+    position: relative;
+    padding: $spacer $spacer * 4.5 $spacer $spacer;
     background: $color-white;
     border-radius: 3px;
 
     @include respond-to(tablet) {
 
-        padding: $spacer * 1.5 $spacer * 2;
+        font-size: $font-size-normal;
+        padding: $spacer * 1.5 $spacer * 4.5 $spacer * 1.5 $spacer * 2;
     }
 
     &.m-warning {
 
         color: $color-text-black;
-        background: $color-fill-warning;
+        background: $color-fill-warning-light;
         border: 1px solid $color-fill-warning-dark;
         border-bottom: 2px solid $color-fill-warning-dark;
-        border-radius: 3px;
     }
 
     &.m-notice {
 
         color: $color-fill-notice;
+        background: $color-fill-notice-light;
+        border: 1px solid $color-fill-notice;
         border-bottom: 2px solid $color-fill-notice;
-        border-radius: 3px 3px 0 0;
     }
 
     &.m-error {
 
         color: $color-fill-error;
-        border: 2px solid $color-fill-error;
+        background: $color-fill-error-light;
+        border: 1px solid $color-fill-error;
+        border-bottom: 2px solid $color-fill-error;
     }
 
     &.m-success {
 
         color: $color-fill-success;
+        background: $color-fill-success-light;
+        border: 1px solid $color-fill-success;
         border-bottom: 2px solid $color-fill-success;
-        border-radius: 3px 3px 0 0;
     }
 
     a {
@@ -53,3 +58,38 @@
         }
     }
 }
+
+    .c-alert__close {
+
+        color: $color-white;
+        font-size: $font-size-larger;
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: flex;
+        width: $spacer * 3.5;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        .c-alert.m-warning & {
+
+            background: $color-fill-warning-dark;
+        }
+
+        .c-alert.m-notice & {
+
+            background: $color-fill-notice;
+        }
+
+        .c-alert.m-error & {
+
+            background: $color-fill-error;
+        }
+
+        .c-alert.m-success & {
+
+            background: $color-fill-success;
+        }
+    }

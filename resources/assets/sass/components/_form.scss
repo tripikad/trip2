@@ -1,7 +1,6 @@
 .c-form__group {
 
     position: relative;
-    float: left;
     width: 100%;
     margin-bottom: $spacer * 2;
 
@@ -44,11 +43,10 @@
         font-weight: $font-weight-normal;
         width: 100%;
         height: $spacer * 4 + 4;
-        padding: $spacer;
+        padding: $spacer $spacer $spacer / 2;
         background: $color-white;
         border: 1px solid $color-fill-neutral;
         border-radius: 3px;
-        float: left;
 
         &.m-medium {
 
@@ -59,7 +57,7 @@
         &.m-small {
 
             font-size: $font-size-normal;
-            padding: $spacer * 0.75 $spacer;
+            padding: $spacer - 2 $spacer $spacer / 2;
             height: $spacer * 3;
 
             &.m-icon {

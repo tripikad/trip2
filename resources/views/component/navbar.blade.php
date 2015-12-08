@@ -1,15 +1,15 @@
-<nav class="c-nav js-nav {{ $modifiers or '' }}">
+<nav class="c-navbar js-navbar {{ $modifiers or '' }}">
 
-    <ul class="c-nav-list">
+    <ul class="c-navbar-list">
 
-        @include('component.nav.list', [
+        @include('component.navbar.list', [
             'menu' => 'header',
             'items' => config('menu.header')
         ])
 
-        @if(!auth()->user())
+        @if(! \Auth::user())
 
-            @include('component.nav.list', [
+            @include('component.navbar.list', [
                 'menu' => 'auth',
                 'items' => [
                     'register' => [

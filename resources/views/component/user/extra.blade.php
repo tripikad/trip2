@@ -29,9 +29,13 @@ code: |
 
     <li class="c-user-extra__item">
 
-        @if(isset($item['route']))
+        @if(isset($item['route']) && $item['route']!='')
 
-        <a href="{{ $item['route'] }}" class="c-user-extra__item-link">
+            <a href="{{ $item['route'] }}" class="c-user-extra__item-link">
+
+        @else
+
+            <span class="c-user-extra__item-link">
 
         @endif
 
@@ -39,8 +43,8 @@ code: |
 
         <div class="c-user-extra__item-icon">
 
-            @include('component.icon',[
-                'icon' => $item['icon']
+            @include('component.svg.sprite',[
+                'name' => $item['icon']
             ])
 
         </div>
@@ -70,9 +74,13 @@ code: |
 
         @endif
 
-        @if(isset($item['route']))
+        @if(isset($item['route']) && $item['route']!='')
 
-        </a>
+            </a>
+
+        @else
+
+            </span>
 
         @endif
 
