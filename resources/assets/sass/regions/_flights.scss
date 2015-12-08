@@ -52,69 +52,10 @@
         }
     }
 
-        .r-flights__content-header {
+        .r-flights__content-header-meta {
 
-            margin-bottom: $spacer * 3;
+            margin-bottom: $spacer * 1.5;
         }
-
-            .r-flights__content-header-title {
-
-                margin-bottom: $spacer * 1.5;
-            }
-
-            .r-flights__content-header-meta {
-
-                margin-bottom: $spacer * 1.5;
-            }
-
-
-        .r-flights__content-block {
-
-            margin-bottom: $spacer * 2;
-
-            @include respond-to(tablet) {
-
-                margin-bottom: $spacer * 6;
-            }
-        }
-
-            .r-flights__content-block-inner {
-
-                padding: $spacer * 1.5 $spacer;
-                background: $color-fill-neutral-light;
-
-                @include respond-to(tablet) {
-
-                    padding: $spacer * 3;
-                }
-            }
-
-            .r-flights__content-title {
-
-                margin-bottom: $spacer * 1.5;
-
-                @include respond-to(tablet) {
-
-                    margin-bottom: $spacer * 2;
-                }
-            }
-
-            .r-flights__content-body {
-
-                margin-bottom: $spacer;
-
-                @include respond-to(tablet) {
-
-                    margin-bottom: $spacer * 1.5;
-                }
-            }
-
-            .r-flights__content-footer {
-
-                @include clearfix;
-
-                padding-top: $spacer;
-            }
 
     .r-flights__sidebar {
 
@@ -135,33 +76,6 @@
             }
         }
     }
-
-        .r-flights__sidebar-block {
-
-            margin-bottom: $spacer * 2;
-
-            @include respond-to(tablet) {
-
-                margin-bottom: $spacer * 2.5;
-            }
-        }
-
-            .r-flights__sidebar-block-inner {
-
-                padding: $spacer * 1.5 $spacer;
-                background: $color-fill-neutral-light;
-
-                @include respond-to(tablet) {
-
-                    padding: $spacer * 3;
-                }
-            }
-
-            .r-flights__sidebar-title {
-
-                margin-bottom: $spacer * 1.5;
-            }
-
 
     .r-flights__forum {
 

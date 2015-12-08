@@ -35,7 +35,7 @@
 
         @include respond-to(tablet) {
 
-            margin-bottom: $spacer * 2;
+            margin-bottom: $spacer * 3;
         }
 
         .r-block.m-small & {
@@ -80,4 +80,6 @@
     .r-block__footer {
 
         @include clearfix;
+
+        padding-top: $spacer;
     }
