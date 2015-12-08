@@ -80,6 +80,10 @@
 
         </div>
 
+        <div style="display: none">
+            @include('component.actions', ['actions' => $content->getActions()])
+        </div>
+
         <div class="r-travelmates__sidebar m-first">
 
             <div class="r-block m-small">
