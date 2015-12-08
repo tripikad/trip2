@@ -134,12 +134,12 @@ class DestinationController extends Controller
             )
             ->first();
 
-        /**
+        /*
          * Baum bug fix.
          * Baum always tries to find result from database.
          *
          * Ex. WHERE id = NULL.
-         **/
+         */
         if ($destination->parent_id) {
             $parent_destination = $destination->parent()->first();
         } else {
