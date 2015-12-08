@@ -34,162 +34,35 @@
 
                     1. Tags that are not countries or cities must be m-gray
 
-                    @foreach ($contents as $index => $content)
-
-                    $content->user->imagePreset('small_square')
-                    $content->user->name
-                    $content->title
-
-                    @endforeach
-
                 --}}
 
+                @if (count($contents))
 
-                @include('component.travelmate.list', [
-                    'modifiers' => 'm-2col',
-                    'items' => [
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Charles Darwin',
-                            'route' => '#',
-                            'sex_and_age' => 'N,28',
-                            'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => 'India'
-                                ],
-                                [
-                                    'modifiers' => 'm-purple',
-                                    'title' => 'Delhi'
+                    @include('component.travelmate.list', [
+                        'modifiers' => 'm-2col',
+                        'items' => $contents->take(3)->transform(function ($content) {
+                            return [
+                                'modifiers' => '',
+                                'image' =>  $content->user->imagePreset('small_square'),
+                                'name' => $content->user->name,
+                                'route' => route('content.show', [$content->type, $content]),
+                                'sex_and_age' => 'N,28',
+                                'title' => $content->title,
+                                'tags' => [
+                                    [
+                                        'modifiers' => 'm-yellow',
+                                        'title' => 'India'
+                                    ],
+                                    [
+                                        'modifiers' => 'm-purple',
+                                        'title' => 'Delhi'
+                                    ]
                                 ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Epptriin ',
-                            'route' => '#',
-                            'sex_and_age' => 'N,22',
-                            'title' => 'Suusareis Austriasse veebruar-märts 2016',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-red',
-                                    'title' => 'Austria'
-                                ],
-                                [
-                                    'modifiers' => 'm-gray',
-                                    'title' => 'Suusareis'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Silka ',
-                            'route' => '#',
-                            'sex_and_age' => 'M,32',
-                            'title' => 'Puerto Rico',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-green',
-                                    'title' => 'Puerto Rico'
-                                ],
-                                [
-                                    'modifiers' => 'm-gray',
-                                    'title' => 'Puhkusereis'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Stwsp ',
-                            'route' => '#',
-                            'sex_and_age' => 'N,22',
-                            'title' => 'Prantsusmaalt/Saksamaalt küüti Eestisse ja tagasi (tore oleks kohaliku bussitäie koorilauljatega)',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-green',
-                                    'title' => 'Euroopa'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Jaanus89 ',
-                            'route' => '#',
-                            'sex_and_age' => 'M,19',
-                            'title' => 'Jaanuari lõpus Åre´sse (6 mäepäeva)',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-red',
-                                    'title' => 'Åre'
-                                ],
-                                [
-                                    'modifiers' => 'm-gray',
-                                    'title' => 'Suusareis'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Kilial ',
-                            'route' => '#',
-                            'sex_and_age' => 'M,34',
-                            'title' => 'Kevadel Nikal-Traveliga Türgisse',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => 'India'
-                                ],
-                                [
-                                    'modifiers' => 'm-purple',
-                                    'title' => 'Delhi'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Charles Darwin',
-                            'route' => '#',
-                            'sex_and_age' => 'N,28',
-                            'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => 'India'
-                                ],
-                                [
-                                    'modifiers' => 'm-purple',
-                                    'title' => 'Delhi'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Epptriin ',
-                            'route' => '#',
-                            'sex_and_age' => 'N,22',
-                            'title' => 'Suusareis Austriasse veebruar-märts 2016',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-red',
-                                    'title' => 'Austria'
-                                ],
-                                [
-                                    'modifiers' => 'm-gray',
-                                    'title' => 'Suusareis'
-                                ]
-                            ]
-                        ],
-                    ]
-                ])
+                            ];
+                        })
+                    ])
+
+                @endif
 
                 <div class="r-block m-small">
 
@@ -200,151 +73,33 @@
 
                 </div>
 
-                @include('component.travelmate.list', [
-                    'modifiers' => 'm-2col',
-                    'items' => [
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Charles Darwin',
-                            'route' => '#',
-                            'sex_and_age' => 'N,28',
-                            'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => 'India'
-                                ],
-                                [
-                                    'modifiers' => 'm-purple',
-                                    'title' => 'Delhi'
+                @if (count($contents))
+
+                    @include('component.travelmate.list', [
+                        'modifiers' => 'm-2col',
+                        'items' => $contents->splice(3)->take(3)->transform(function ($content) {
+                            return [
+                                'modifiers' => '',
+                                'image' => $content->user->imagePreset('small_square'),
+                                'name' => $content->user->name,
+                                'route' => route('content.show', [$content->type, $content]),
+                                'sex_and_age' => 'N,28',
+                                'title' => $content->title,
+                                'tags' => [
+                                    [
+                                        'modifiers' => 'm-yellow',
+                                        'title' => 'India'
+                                    ],
+                                    [
+                                        'modifiers' => 'm-purple',
+                                        'title' => 'Delhi'
+                                    ]
                                 ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Epptriin ',
-                            'route' => '#',
-                            'sex_and_age' => 'N,22',
-                            'title' => 'Suusareis Austriasse veebruar-märts 2016',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-red',
-                                    'title' => 'Austria'
-                                ],
-                                [
-                                    'modifiers' => 'm-gray',
-                                    'title' => 'Suusareis'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Silka ',
-                            'route' => '#',
-                            'sex_and_age' => 'M,32',
-                            'title' => 'Puerto Rico',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-green',
-                                    'title' => 'Puerto Rico'
-                                ],
-                                [
-                                    'modifiers' => 'm-gray',
-                                    'title' => 'Puhkusereis'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Stwsp ',
-                            'route' => '#',
-                            'sex_and_age' => 'N,22',
-                            'title' => 'Prantsusmaalt/Saksamaalt küüti Eestisse ja tagasi (tore oleks kohaliku bussitäie koorilauljatega)',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-green',
-                                    'title' => 'Euroopa'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Jaanus89 ',
-                            'route' => '#',
-                            'sex_and_age' => 'M,19',
-                            'title' => 'Jaanuari lõpus Åre´sse (6 mäepäeva)',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-red',
-                                    'title' => 'Åre'
-                                ],
-                                [
-                                    'modifiers' => 'm-gray',
-                                    'title' => 'Suusareis'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Kilial ',
-                            'route' => '#',
-                            'sex_and_age' => 'M,34',
-                            'title' => 'Kevadel Nikal-Traveliga Türgisse',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => 'India'
-                                ],
-                                [
-                                    'modifiers' => 'm-purple',
-                                    'title' => 'Delhi'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Charles Darwin',
-                            'route' => '#',
-                            'sex_and_age' => 'N,28',
-                            'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => 'India'
-                                ],
-                                [
-                                    'modifiers' => 'm-purple',
-                                    'title' => 'Delhi'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => '',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Epptriin ',
-                            'route' => '#',
-                            'sex_and_age' => 'N,22',
-                            'title' => 'Suusareis Austriasse veebruar-märts 2016',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-red',
-                                    'title' => 'Austria'
-                                ],
-                                [
-                                    'modifiers' => 'm-gray',
-                                    'title' => 'Suusareis'
-                                ]
-                            ]
-                        ],
-                    ]
-                ])
+                            ];
+                        })
+                    ])
+
+                @endif
 
                 @include('component.pagination',
                     ['collection' => $contents]
