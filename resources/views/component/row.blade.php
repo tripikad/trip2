@@ -47,8 +47,8 @@ modifiers:
 
     <div class="c-row__icon">
 
-        @include('component.icon', [
-            'icon' => $icon
+        @include('component.svg.sprite', [
+            'name' => $icon
         ])
 
     </div>

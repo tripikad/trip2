@@ -43,8 +43,8 @@ code: |
 
         <div class="c-user-extra__item-icon">
 
-            @include('component.icon',[
-                'icon' => $item['icon']
+            @include('component.svg.sprite',[
+                'name' => $item['icon']
             ])
 
         </div>
