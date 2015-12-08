@@ -25,12 +25,12 @@ class ViewComposerServiceProvider extends ServiceProvider
         view()->composer('component.svg.standalone', function ($view) {
 
             $data = $view->getData();
-            if(! file_exists(public_path('/svg/'.$data['name'].'.svg'))) {
+            if (! file_exists(public_path('/svg/'.$data['name'].'.svg'))) {
                 $logo = '';
             } else {
                 $svg = new DOMDocument();
 
-                $svg->load(public_path('/svg/' . $data['name'] . '.svg'));
+                $svg->load(public_path('/svg/'.$data['name'].'.svg'));
 
                 $logo = $svg->saveXML($svg->documentElement);
             }
