@@ -109,13 +109,17 @@
 
     .r-travelmates__footer-promo {
 
-        background: $color-fill-neutral-light;
         margin-bottom: -48px;
+
+        .r-travelmates.m-single & {
+
+            background: $color-fill-neutral-light;
+        }
     }
 
         .r-travelmates__footer-promo-wrap {
 
-            @include wrap('narrow');
+            @include wrap();
             position: relative;
             z-index: 2;
         }
