@@ -35,6 +35,7 @@ class Destination extends Baum\Node
 
             return Destination::find($this->id)
                 ->descendantsAndSelf()
+                ->with('flags')
                 ->get()
                 ->transform(function ($item) {
                     $item->attributes['usersHaveBeen'] = $item->usersHaveBeen()->count();
