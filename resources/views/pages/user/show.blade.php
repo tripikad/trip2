@@ -141,7 +141,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon', ['icon' => 'icon-facebook']),
+                                    'icon' => view('component.svg.sprite', ['name' => 'icon-facebook']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_facebook
@@ -163,7 +163,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon', ['icon' => 'icon-twitter']),
+                                    'icon' => view('component.svg.sprite', ['name' => 'icon-twitter']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_twitter
@@ -185,7 +185,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon', ['icon' => 'icon-instagram']),
+                                    'icon' => view('component.svg.sprite', ['name' => 'icon-instagram']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_instagram
@@ -207,7 +207,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon', ['icon' => 'icon-plus']),
+                                    'icon' => view('component.svg.sprite', ['name' => 'icon-plus']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_homepage
@@ -251,8 +251,8 @@
 
                             <div class="r-user__info-status-icon">
 
-                                @include ('component.icon', [
-                                    'icon' => $user_status->icon
+                                @include ('component.svg.sprite', [
+                                    'name' => $user_status->icon
                                 ])
 
                             </div>

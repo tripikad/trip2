@@ -2,8 +2,8 @@
     {{ $title }}
     @if(isset($icon))
         <span class="c-link__icon">
-            @include('component.icon', [
-                'icon' => $icon
+            @include('component.svg.sprite', [
+                'name' => $icon
             ])
         </span>
     @endif

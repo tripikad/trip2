@@ -94,8 +94,8 @@ class Content extends Model
 
     public function imagePreset($preset = 'small')
     {
-        if ($image = $this->images()->first()) {
-            return $image->preset($preset);
+        if ($this->images->count() > 0) {
+            return $this->images->first()->preset($preset);
         }
 
         return;
