@@ -216,7 +216,11 @@
                                 <div class="c-form__group">
 
                                     <div class="c-form__input-wrap">
-                                        <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-right'])</span>
+                                        <span class="c-form__input-icon">
+
+                                            @include('component.svg.sprite', ['name' => 'icon-arrow-right'])
+
+                                        </span>
                                         <input type="date" class="c-form__input m-small m-icon" placeholder="">
                                     </div>
                                 </div>
@@ -227,7 +231,11 @@
                                 <div class="c-form__group">
 
                                     <div class="c-form__input-wrap">
-                                        <span class="c-form__input-icon">@include('component.icon', ['icon' => 'icon-arrow-left'])</span>
+                                        <span class="c-form__input-icon">
+
+                                            @include('component.svg.sprite', ['name' => 'icon-arrow-left'])
+
+                                        </span>
                                         <input type="date" class="c-form__input m-small m-icon" placeholder="">
                                     </div>
                                 </div>
