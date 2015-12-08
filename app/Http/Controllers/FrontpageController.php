@@ -152,7 +152,7 @@ class FrontpageController extends Controller
             }
         }
 
-        $content_query = $content_query->get();
+        $content_query = $content_query->with('images')->get();
 
         $viewVariables = [];
 
