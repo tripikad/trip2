@@ -10,6 +10,4 @@ code: |
 
 --}}
 
-<svg>
-    <use xlink:href="/svg/{{ $name }}.svg"></use>
-</svg>
+{!! $name !!}
