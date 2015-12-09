@@ -9,7 +9,7 @@ class Comment extends Model
 {
     protected $fillable = ['user_id', 'content_id', 'body', 'status'];
 
-    protected $appends = ['title'];
+    protected $appends = ['title', 'body_filtered'];
 
     protected $touches = ['content'];
 
@@ -53,6 +53,22 @@ class Comment extends Model
         }
 
         return $actions;
+    }
+
+    public function getBodyFilteredAttribute()
+    {
+        $pattern = '/\[\[([0-9]+)\]\]/';
+        $filteredBody = $this->body;
+
+        if (preg_match_all($pattern, $filteredBody, $matches)) {
+            foreach ($matches[1] as $match) {
+                if ($image = \App\Image::find($match)) {
+                    $filteredBody = str_replace("[[$image->id]]", '<img src="'.$image->preset('medium').'" />', $filteredBody);
+                }
+            }
+        }
+
+        return nl2br($filteredBody);
     }
 
     public function getFlags()
