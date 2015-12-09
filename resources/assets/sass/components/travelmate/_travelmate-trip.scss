@@ -1,0 +1,24 @@
+.c-travelmate-trip {
+
+    padding: $spacer * 3;
+    background: $color-fill-neutral-light;
+}
+
+    .c-travelmate-trip__body {}
+
+        .c-travelmate-trip__info {
+
+            margin-bottom: $spacer * 2.5;
+            line-height: 1.5;
+
+            &:last-child {
+
+                margin-bottom: 0;
+            }
+
+            span {
+
+                display: block;
+                margin-top: $spacer * 1.5;
+            }
+        }

@@ -53,23 +53,21 @@
 
         <div class="r-flights__content">
 
-            <div class="r-flights__content-block">
+            <div class="r-block">
 
-                <div class="r-flights__content-header">
+                <div class="r-block__header">
 
-                    <div class="r-flights__content-header-title">
+                    <div class="r-block__header-title">
 
                         @include('component.title', [
                             'modifiers' => 'm-larger',
                             'title' => $content->title
                         ])
-
                     </div>
 
                     <div class="r-flights__content-header-meta">
 
                         @include('component.content.text', ['content' => $content])
-
                     </div>
 
                     @include('component.alert', [
@@ -79,113 +77,37 @@
 
                 </div>
 
-                <div class="c-body">
+                <div class="r-block__body">
 
-                    <p><strong>Hetkel on saadaval soodsad lennupiletid Stockholmist Tai ja Vietnami külastamiseks. Soodsaimad piletid (al 338 €) saadaval juhul, kui tagasilend valida Londonisse (mõnikümmend eurot kallimad piletid tagasilennuga Frankfurti). Lennupileteid soovitame otsida ja osta läbi <a href="#">momondo</a>.</strong></p>
+                    <div class="c-body">
 
-                    <figure>
+                        <p><strong>Hetkel on saadaval soodsad lennupiletid Stockholmist Tai ja Vietnami külastamiseks. Soodsaimad piletid (al 338 €) saadaval juhul, kui tagasilend valida Londonisse (mõnikümmend eurot kallimad piletid tagasilennuga Frankfurti). Lennupileteid soovitame otsida ja osta läbi <a href="#">momondo</a>.</strong></p>
+
+                        <figure>
+                            <img src="{{ \App\Image::getRandom() }}" alt="">
+                            <figcaption>Näidispakkumine momondo veebilehelt</figcaption>
+                        </figure>
+
+                        <p>Bangkokist saab vägagi lihtsalt ühistranspordiga edasi kas Põhja-Taisse või Kambodžasse. Saab ühel reisil külastada nii Bangkoki kuulsat Khao San Roadi, Angkor Wati Siem Reapis kui ka eestlaste seas üsna populaarset rannakuurorti Sihanoukvilles Kambodžas. Tagasilend Euroopasse on Vietnami suurlinnast Ho Chi Minh City.</p>
+
+                        <h2>Heading 2</h2>
+
+                        <p>Soodsaima öömaja leiab kui kasutada hotellipakkumiste otsimiseks <a href="#">HotelsCombined.com</a>.</p>
+
                         <img src="{{ \App\Image::getRandom() }}" alt="">
-                        <figcaption>Näidispakkumine momondo veebilehelt</figcaption>
-                    </figure>
 
-                    <p>Bangkokist saab vägagi lihtsalt ühistranspordiga edasi kas Põhja-Taisse või Kambodžasse. Saab ühel reisil külastada nii Bangkoki kuulsat Khao San Roadi, Angkor Wati Siem Reapis kui ka eestlaste seas üsna populaarset rannakuurorti Sihanoukvilles Kambodžas. Tagasilend Euroopasse on Vietnami suurlinnast Ho Chi Minh City.</p>
+                        <p><a href="#">Krisostomuse raamatupoel</a> on käimas kampaania, kus pakutakse Lonely Planet ning Rough Guide reisijuhte –25% soodsamalt! Sobiva reisijuhi vastavalt oma sihtkohale leiad <a href="#">SIIT</a>.</p>
 
-                    <h2>Heading 2</h2>
+                        <h3>Heading 3</h3>
 
-                    <p>Soodsaima öömaja leiab kui kasutada hotellipakkumiste otsimiseks <a href="#">HotelsCombined.com</a>.</p>
+                        <p>Bangkokist saab vägagi lihtsalt ühistranspordiga edasi kas Põhja-Taisse või Kambodžasse. Saab ühel reisil külastada nii Bangkoki kuulsat Khao San Roadi, Angkor Wati Siem Reapis kui ka eestlaste seas üsna populaarset rannakuurorti Sihanoukvilles Kambodžas. Tagasilend Euroopasse on Vietnami suurlinnast Ho Chi Minh City.</p>
 
-                    <img src="{{ \App\Image::getRandom() }}" alt="">
+                        <h4>Heading 4</h4>
 
-                    <p><a href="#">Krisostomuse raamatupoel</a> on käimas kampaania, kus pakutakse Lonely Planet ning Rough Guide reisijuhte –25% soodsamalt! Sobiva reisijuhi vastavalt oma sihtkohale leiad <a href="#">SIIT</a>.</p>
-
-                    <h3>Heading 3</h3>
-
-                    <p>Bangkokist saab vägagi lihtsalt ühistranspordiga edasi kas Põhja-Taisse või Kambodžasse. Saab ühel reisil külastada nii Bangkoki kuulsat Khao San Roadi, Angkor Wati Siem Reapis kui ka eestlaste seas üsna populaarset rannakuurorti Sihanoukvilles Kambodžas. Tagasilend Euroopasse on Vietnami suurlinnast Ho Chi Minh City.</p>
-
-                    <h4>Heading 4</h4>
-
-                    <p>Bangkokist saab vägagi lihtsalt ühistranspordiga edasi kas Põhja-Taisse või Kambodžasse. Saab ühel reisil külastada nii Bangkoki kuulsat Khao San Roadi, Angkor Wati Siem Reapis kui ka eestlaste seas üsna populaarset rannakuurorti Sihanoukvilles Kambodžas. Tagasilend Euroopasse on Vietnami suurlinnast Ho Chi Minh City.</p>
-
-                    @include('component.list', [
-                        'modifiers' => 'm-dot m-green',
-                        'items' => [
-                            [
-                                'title' => '05.11-21-11',
-                                'route' => '#'
-                            ],
-                            [
-                                'title' => '09.11-30-11 (jõulud)',
-                                'route' => '#'
-                            ],
-                        ]
-                    ])
-
-                </div>
-
-                {{--
-
-                @include('component.row', ['body' => $content->body_filtered])
-                @include('component.actions', ['actions' => $content->getActions()])
-                @include('component.flags', ['flags' => $content->getFlags()])
-
-                --}}
-
-            </div>
-
-            <div class="r-flights__content-block">
-
-                <div class="r-flights__content-header">
-
-                    <div class="r-flights__content-header-title">
-
-                        @include('component.title', [
-                            'modifiers' => 'm-large m-green',
-                            'title' => 'Näidiskuupäevad'
-                        ])
-
-                    </div>
-                </div>
-
-                <div class="c-columns m-3-cols">
-
-                    <div class="c-columns__item">
-
-                        @include('component.title', [
-                            'modifiers' => 'm-margin',
-                            'title' => 'November 2015'
-                        ])
+                        <p>Bangkokist saab vägagi lihtsalt ühistranspordiga edasi kas Põhja-Taisse või Kambodžasse. Saab ühel reisil külastada nii Bangkoki kuulsat Khao San Roadi, Angkor Wati Siem Reapis kui ka eestlaste seas üsna populaarset rannakuurorti Sihanoukvilles Kambodžas. Tagasilend Euroopasse on Vietnami suurlinnast Ho Chi Minh City.</p>
 
                         @include('component.list', [
-                            'items' => [
-                                [
-                                    'title' => '05.11-21-11',
-                                    'route' => '#'
-                                ],
-                                [
-                                    'title' => '09.11-30-11',
-                                    'route' => '#'
-                                ],
-                                [
-                                    'title' => '12.11-03.12',
-                                    'route' => '#'
-                                ],
-                                [
-                                    'title' => '19.11-10.12',
-                                    'route' => '#'
-                                ],
-                            ]
-                        ])
-
-                    </div>
-
-                    <div class="c-columns__item">
-
-                        @include('component.title', [
-                            'modifiers' => 'm-margin',
-                            'title' => 'Detsember 2015'
-                        ])
-
-                        @include('component.list', [
+                            'modifiers' => 'm-dot m-green',
                             'items' => [
                                 [
                                     'title' => '05.11-21-11',
@@ -200,60 +122,146 @@
 
                     </div>
 
-                    <div class="c-columns__item">
+                    {{--
 
-                        @include('component.title', [
-                            'modifiers' => 'm-margin',
-                            'title' => 'Jaanuar 2016'
-                        ])
+                    @include('component.row', ['body' => $content->body_filtered])
+                    @include('component.actions', ['actions' => $content->getActions()])
+                    @include('component.flags', ['flags' => $content->getFlags()])
 
-                        @include('component.list', [
-                            'items' => [
-                                [
-                                    'title' => '05.11-21-11',
-                                    'route' => '#'
-                                ],
-                                [
-                                    'title' => '09.11-30-11',
-                                    'route' => '#'
-                                ],
-                                [
-                                    'title' => '12.11-03.12',
-                                    'route' => '#'
-                                ],
-                                [
-                                    'title' => '19.11-10.12',
-                                    'route' => '#'
-                                ],
-                            ]
-                        ])
-
-                    </div>
-                </div>
-
-                <div class="c-body">
-
-                    <p>Need on näidiskuupäevad. Soodsate hindadega lennupileteid leiab lendmiseks oktoobri lõpust aprillini! Otsi sobivad lennukuupäevad <a href="#">momondost</a>.</p>
-
-                </div>
-
-            </div>
-
-            <div class="r-flights__content-block">
-
-                <div class="r-flights__content-block-inner">
-
-                    <div class="r-flights__content-title">
-
-                        @include('component.title', [
-                            'title' => 'Soovita pakkumist sõpradele',
-                            'modifiers' => 'm-large m-green'
-                        ])
-                    </div>
+                    --}}
                 </div>
             </div>
 
-            <div class="r-flights__content-block">
+            <div class="r-block">
+
+                <div class="r-block__header">
+
+                    <div class="r-block__header-title">
+
+                        @include('component.title', [
+                            'modifiers' => 'm-large m-green',
+                            'title' => 'Näidiskuupäevad'
+                        ])
+                    </div>
+                </div>
+
+                <div class="r-block__body">
+
+                    <div class="c-columns m-3-cols">
+
+                        <div class="c-columns__item">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-margin',
+                                'title' => 'November 2015'
+                            ])
+
+                            @include('component.list', [
+                                'items' => [
+                                    [
+                                        'title' => '05.11-21-11',
+                                        'route' => '#'
+                                    ],
+                                    [
+                                        'title' => '09.11-30-11',
+                                        'route' => '#'
+                                    ],
+                                    [
+                                        'title' => '12.11-03.12',
+                                        'route' => '#'
+                                    ],
+                                    [
+                                        'title' => '19.11-10.12',
+                                        'route' => '#'
+                                    ],
+                                ]
+                            ])
+
+                        </div>
+
+                        <div class="c-columns__item">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-margin',
+                                'title' => 'Detsember 2015'
+                            ])
+
+                            @include('component.list', [
+                                'items' => [
+                                    [
+                                        'title' => '05.11-21-11',
+                                        'route' => '#'
+                                    ],
+                                    [
+                                        'title' => '09.11-30-11 (jõulud)',
+                                        'route' => '#'
+                                    ],
+                                ]
+                            ])
+
+                        </div>
+
+                        <div class="c-columns__item">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-margin',
+                                'title' => 'Jaanuar 2016'
+                            ])
+
+                            @include('component.list', [
+                                'items' => [
+                                    [
+                                        'title' => '05.11-21-11',
+                                        'route' => '#'
+                                    ],
+                                    [
+                                        'title' => '09.11-30-11',
+                                        'route' => '#'
+                                    ],
+                                    [
+                                        'title' => '12.11-03.12',
+                                        'route' => '#'
+                                    ],
+                                    [
+                                        'title' => '19.11-10.12',
+                                        'route' => '#'
+                                    ],
+                                ]
+                            ])
+
+                        </div>
+                    </div>
+
+                    <div class="c-body">
+
+                        <p>Need on näidiskuupäevad. Soodsate hindadega lennupileteid leiab lendmiseks oktoobri lõpust aprillini! Otsi sobivad lennukuupäevad <a href="#">momondost</a>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r-block">
+
+                <div class="r-block__inner">
+
+                    <div class="r-block__header">
+
+                        <div class="r-block__header-title">
+
+                            @include('component.title', [
+                                'title' => 'Soovita pakkumist sõpradele',
+                                'modifiers' => 'm-large m-green'
+                            ])
+                        </div>
+                    </div>
+
+                    <div class="r-block__body">
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="r-block">
 
                 @include('component.destination.helper', [
                     'modifiers' => 'm-green',
@@ -283,7 +291,7 @@
                 ])
             </div>
 
-            <div class="r-flights__content-block">
+            <div class="r-block">
 
                 @include('component.promo', [
                     'route' => '#',
@@ -291,17 +299,20 @@
                 ])
             </div>
 
-            <div class="r-flights__content-block">
+            <div class="r-block">
 
-                <div class="r-flights__content-title">
+                <div class="r-block__header">
 
-                    @include('component.title', [
-                        'modifiers' => 'm-green',
-                        'title' => 'Lennupakkumised'
-                    ])
+                    <div class="r-block__header-title">
+
+                        @include('component.title', [
+                            'modifiers' => 'm-green',
+                            'title' => 'Lennupakkumised'
+                        ])
+                    </div>
                 </div>
 
-                <div class="r-flights__content-body">
+                <div class="r-block__body">
 
                     @include('component.row', [
                         'icon' => 'icon-tickets',
@@ -376,7 +387,7 @@
                     ])
                 </div>
 
-                <div class="r-flights__content-footer">
+                <div class="r-block__footer">
 
                     @include('component.link', [
                         'modifiers' => 'm-icon m-right',
@@ -387,17 +398,20 @@
                 </div>
             </div>
 
-            <div class="r-flights__content-block">
+            <div class="r-block">
 
-                <div class="r-flights__content-title">
+                <div class="r-block__header">
 
-                    @include('component.title', [
-                        'title' => 'Kommentaarid',
-                        'modifiers' => 'm-green'
-                    ])
+                    <div class="r-block__header-title">
+
+                        @include('component.title', [
+                            'title' => 'Kommentaarid',
+                            'modifiers' => 'm-green'
+                        ])
+                    </div>
                 </div>
 
-                <div class="r-flights__content-body">
+                <div class="r-block__body">
 
                     @include('component.comment.index', ['comments' => $comments])
 
@@ -425,19 +439,22 @@
 
             @if (\Auth::check())
 
-            <div class="r-flights__content-block">
+            <div class="r-block">
 
-                <div class="r-flights__content-block-inner">
+                <div class="r-block__inner">
 
-                    <div class="r-flights__content-title">
+                    <div class="r-block__header">
 
-                        @include('component.title', [
-                            'title' => 'Lisa kommentaar',
-                            'modifiers' => 'm-large m-green'
-                        ])
+                        <div class="r-block__header-title">
+
+                            @include('component.title', [
+                                'title' => 'Lisa kommentaar',
+                                'modifiers' => 'm-large m-green'
+                            ])
+                        </div>
                     </div>
 
-                    <div class="r-flights__content-body">
+                    <div class="r-block__body">
 
                         @include('component.comment.create')
                     </div>
@@ -450,7 +467,7 @@
 
         <div class="r-flights__sidebar">
 
-            <div class="r-flights__sidebar-block">
+            <div class="r-block m-small">
 
                 @include('component.destination', [
                     'modifiers' => 'm-green',
@@ -474,75 +491,80 @@
                     'image' => \App\Image::getRandom()
                 ])
 
-                <div class="r-flights__sidebar-block-inner">
+                <div class="r-block__inner">
 
-                    <div class="r-flights__sidebar-title">
+                    <div class="r-block__header">
 
-                        @include('component.title', [
-                            'modifiers' => 'm-green',
-                            'title' => 'Tripikad räägivad'
-                        ])
+                        <div class="r-block__header-title">
 
+                            @include('component.title', [
+                                'modifiers' => 'm-green',
+                                'title' => 'Tripikad räägivad'
+                            ])
+                        </div>
                     </div>
 
-                    @include('component.content.forum.list', [
-                        'modifiers' => 'm-compact',
-                        'items' => [
-                            [
-                                'topic' => 'Samui hotellid?',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
+                    <div class="r-block__body">
+
+                        @include('component.content.forum.list', [
+                            'modifiers' => 'm-compact',
+                            'items' => [
+                                [
+                                    'topic' => 'Samui hotellid?',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom()
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-green',
+                                        'count' => 9
+                                    ]
                                 ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-green',
-                                    'count' => 9
-                                ]
-                            ],
-                            [
-                                'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
+                                [
+                                    'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom()
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-green',
+                                        'count' => 4
+                                    ]
                                 ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-green',
-                                    'count' => 4
-                                ]
-                            ],
-                            [
-                                'topic' => 'Puhkuseosakud Tenerifel',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
+                                [
+                                    'topic' => 'Puhkuseosakud Tenerifel',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom()
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-green',
+                                        'count' => 2
+                                    ]
                                 ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-green',
-                                    'count' => 2
-                                ]
-                            ],
-                            [
-                                'topic' => 'Ischgl mäeolud-pilet ja majutus',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-green',
-                                    'count' => 2
+                                [
+                                    'topic' => 'Ischgl mäeolud-pilet ja majutus',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom()
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-green',
+                                        'count' => 2
+                                    ]
                                 ]
                             ]
-                        ]
-                    ])
+                        ])
+                    </div>
 
                 </div>
             </div>
 
-            <div class="r-flights__sidebar-block">
+            <div class="r-block m-small">
 
                 @include('component.destination', [
                     'modifiers' => 'm-yellow',
@@ -567,21 +589,19 @@
                     'subtitle' => 'Inglismaa',
                     'subtitle_route' => '#'
                 ])
-
             </div>
 
-            <div class="r-flights__sidebar-block">
+            <div class="r-block m-small">
 
                 @include('component.promo', [
                     'route' => '',
                     'image' => \App\Image::getRandom()
                 ])
-
             </div>
 
-            <div class="r-flights__sidebar-block">
+            <div class="r-block m-small">
 
-                <div class="r-flights__sidebar-block-inner">
+                <div class="r-block__inner">
 
                     @include('component.about', [
                         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
@@ -613,17 +633,16 @@
                     ])
 
                 </div>
-
             </div>
 
-            <div class="r-flights__sidebar-block">
+            <div class="r-block m-small">
 
                 @include('component.promo', [
                     'route' => '',
                     'image' => \App\Image::getRandom()
                 ])
-
             </div>
+
         </div>
 
     </div>

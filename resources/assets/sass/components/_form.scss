@@ -4,6 +4,11 @@
     width: 100%;
     margin-bottom: $spacer * 2;
 
+    &.m-small-margin {
+
+        margin-bottom: $spacer;
+    }
+
     &.m-no-margin {
 
         margin-bottom: 0;
