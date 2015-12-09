@@ -723,6 +723,16 @@ class ConvertBase extends Command
         }
     }
 
+    public function convertStaticAlias($aliasable_type, $path, $route_type)
+    {
+        \DB::table('aliases')->insert([
+            'aliasable_id' => 0,
+            'aliasable_type' => $aliasable_type,
+            'path' => $this->cleanAll($path),
+            'route_type' => $route_type,
+        ]);
+    }
+
     public function convertTermAlias($tid, $aliasable_type)
     {
         if ($alias = $this->getTermAlias($tid)) {
