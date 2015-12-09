@@ -7,7 +7,8 @@ class ConvertIndexAliases extends ConvertBase
     protected $signature = 'convert:indexAliases';
     private $items = [];
 
-    public function insertItem($aliasable_type, $path, $route_type) {
+    public function insertItem($aliasable_type, $path, $route_type)
+    {
         $this->items[] = collect([
             'aliasable_type' => $aliasable_type,
             'path' => $path,
@@ -17,9 +18,6 @@ class ConvertIndexAliases extends ConvertBase
 
     public function convertIndexAliases()
     {
-
-        $i = 0;
-
         $this->insertItem('content.index', 'foorum', 'forum');
         $this->insertItem('content.index', 'soodsad_lennupiletid', 'flight');
         //$this->insertItem('content.index', 'vabateema', ''); 404
@@ -31,7 +29,6 @@ class ConvertIndexAliases extends ConvertBase
         $this->insertItem('content.index', 'eluvalismaal', 'expat');
 
         $items = collect($this->items);
-
 
         $this->info('Converting index aliases');
         $this->output->progressStart(($this->take > $items->count()) ? $items->count() : $this->take);

@@ -54,7 +54,7 @@ class RedirectController extends Controller
         if ($alias) {
             return redirect()
                 ->route('content.index', [
-                    $alias->route_type
+                    $alias->route_type,
                 ], 301);
         }
 
