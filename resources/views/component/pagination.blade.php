@@ -53,7 +53,7 @@ code: |
 
                 <span class="c-button__icon">
 
-                    @include('component.icon', ['icon' => 'icon-arrow-left'])
+                    @include('component.svg.sprite', ['name' => 'icon-arrow-left'])
 
                 </span>
 
@@ -123,7 +123,7 @@ code: |
 
                     <span class="c-button__icon">
 
-                        @include('component.icon', ['icon' => 'icon-arrow-right'])
+                        @include('component.svg.sprite', ['name' => 'icon-arrow-right'])
 
                     </span>
 

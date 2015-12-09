@@ -42,6 +42,25 @@ class RedirectController extends Controller
         abort(404);
     }
 
+    public function redirectContentIndex($path)
+    {
+        $alias = \DB::table('aliases')
+            ->wherePath($path)
+            ->where('aliasable_type', 'content.index')
+            ->first();
+
+        dump($path);
+
+        if ($alias) {
+            return redirect()
+                ->route('content.index', [
+                    $alias->route_type,
+                ], 301);
+        }
+
+        abort(404);
+    }
+
     public function redirectTaxonomy($tid)
     {
         $alias = \DB::table('aliases')
@@ -65,7 +84,7 @@ class RedirectController extends Controller
                 ], 301);
         }
 
-        if ($carrier = Carrier::find($term_id)) {
+        if ($carrier = Carrier::find($tid)) {
             return redirect()->route(
                 'content.index', [
                     'flight',
