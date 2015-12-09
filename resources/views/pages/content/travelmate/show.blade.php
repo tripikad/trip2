@@ -88,6 +88,7 @@
                     'modifiers' => 'm-purple',
                     'image' => \App\Image::getRandom(),
                     'name' => 'Charles Dawson',
+                    'user_route' => '#',
                     'sex_and_age' => 'M,34',
                     'description' => '<p>I’m a 28 year-old who loves travelling to discover places and to meet people all over the world.</p>',
                     'social_items' => [

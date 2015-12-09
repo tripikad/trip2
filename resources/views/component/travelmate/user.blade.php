@@ -3,15 +3,27 @@
     <div class="c-travelmate-user__header">
 
         <div class="c-travelmate-user__image">
+            @if(isset($user_route))
+            <a href="{{ $user_route }}" class="c-travelmate-user__image-link">
+            @endif
             <img src="{{ $image }}" alt="">
+            @if(isset($user_route))
+            </a>
+            @endif
         </div>
 
         <div class="c-travelmate-user__header-info">
 
             <h2 class="c-travelmate-user__title">
-                {{ $name }}
-                @if(isset($sex_and_age))
-                <span>({{ $sex_and_age }})</span>
+                @if(isset($user_route))
+                <a href="{{ $user_route }}" class="c-travelmate-user__title-link">
+                @endif
+                    {{ $name }}
+                    @if(isset($sex_and_age))
+                    <span>({{ $sex_and_age }})</span>
+                    @endif
+                @if(isset($user_route))
+                </a>
                 @endif
             </h2>
 
@@ -26,7 +38,7 @@
                     <li class="c-button-group__item">
                         @include('component.button',[
                             'modifiers' => 'm-icon m-small m-round',
-                            'icon' => view('component.icon',['icon' => $social['icon']]),
+                            'icon' => view('component.svg.sprite',['name' => $social['icon']]),
                             'route' => $social['route'],
                             'target' => '_blank'
                         ])

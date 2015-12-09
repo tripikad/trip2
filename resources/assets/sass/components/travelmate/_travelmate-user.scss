@@ -2,7 +2,7 @@
 
     @include color-modifiers(background);
 
-    color: #ffffff;
+    color: $color-white;
     padding: $spacer * 4 $spacer * 3 $spacer * 2;
 }
 
@@ -31,6 +31,13 @@
             }
         }
 
+            .c-travelmate-user__image-link {
+
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+
         .c-travelmate-user__header-info {}
 
         .c-travelmate-user__title {
@@ -52,6 +59,17 @@
                 padding-left: $spacer;
             }
         }
+
+            .c-travelmate-user__title-link {
+
+                color: $color-white;
+                text-decoration: none;
+
+                span {
+
+                    @include color-modifiers-dark-and(color);
+                }
+            }
 
     .c-travelmate-user__body {
 

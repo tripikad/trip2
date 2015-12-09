@@ -55,7 +55,11 @@ code: |
 
     <div class="c-forum-post__content">
 
+        <div class="c-body">
+
         {!! $text !!}
+
+        </div>
 
     </div>
 
