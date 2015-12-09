@@ -47,7 +47,7 @@
                                     'title' =>
                                         $flight1->destination ? $flight1->destination->name : null,
                                     'title_route' =>
-                                        $flight1->parent_destination ? route('destination.show', $flight1->parent_destination) : null,
+                                        $flight1->destination ? route('destination.show', $flight1->destination) : null,
                                     'subtitle' =>
                                         $flight1->parent_destination ? $flight1->parent_destination->name : null,
                                     'subtitle_route' =>

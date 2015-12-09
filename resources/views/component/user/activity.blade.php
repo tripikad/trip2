@@ -56,7 +56,7 @@
                         'date' => view('component.date.long', [
                             'date' => $item->created_at
                         ]),
-                        'text' => $item->body,
+                        'text' => $item->body_filtered,
                         'more' => [
                             'title' => trans('user.activity.view.full.post'),
                             'route' => route('content.show', [$item->content->type, $item->content, '#comment-' . $item->id])

@@ -124,9 +124,9 @@ class FrontpageController extends Controller
             $query = null;
 
             if (isset($type['id'])) {
-                $query = Content::select(['*', DB::raw('\''.$key.'\' AS `index`')])->where('id', $type['id'])->whereStatus($type['status']);
+                $query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->where('id', $type['id'])->whereStatus($type['status']);
             } else {
-                $query = Content::select(['*', DB::raw('\''.$key.'\' AS `index`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
+                $query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
 
                 if (isset($type['with']) && $type['with'] !== null) {
                     $query = $query->with($type['with']);
@@ -157,7 +157,7 @@ class FrontpageController extends Controller
         $viewVariables = [];
 
         foreach ($types as $key => $type) {
-            $$key = Collection::make($content_query->where('index', $key)->values()->all());
+            $$key = Collection::make($content_query->where('pseudo', $key)->values()->all());
 
             $viewVariables[$key] = $$key;
         }
