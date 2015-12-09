@@ -46,16 +46,24 @@ class RedirectController extends Controller
     {
         $alias = \DB::table('aliases')
             ->wherePath($path)
-            ->where('aliasable_type', 'content.index')
+            ->where('aliasable_type', 'like', 'content.%')
             ->first();
 
         dump($path);
 
         if ($alias) {
-            return redirect()
-                ->route('content.index', [
-                    $alias->route_type,
-                ], 301);
+            if ($alias->aliasable_id > 0) {
+                return redirect()
+                    ->route($alias->aliasable_type, [
+                        $alias->route_type,
+                        $alias->aliasable_id,
+                    ], 301);
+            } else {
+                return redirect()
+                    ->route($alias->aliasable_type, [
+                        $alias->route_type,
+                    ], 301);
+            }
         }
 
         abort(404);
