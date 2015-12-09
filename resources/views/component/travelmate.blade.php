@@ -5,7 +5,7 @@
     </div>
 
     <p class="c-travelmate__name">
-        {{ str_limit($name, 20) }}
+        {{ str_limit($name, 24) }}
         @if(isset($sex_and_age))
             <span>({{ $sex_and_age }})</span>
         @endif
