@@ -718,7 +718,7 @@ class ConvertBase extends Command
             ->insert([
                 'aliasable_id' => $nid,
                 'aliasable_type' => 'content',
-                'path' => $this->cleanAll($alias->dst),
+                'path' => $alias->dst,
             ]);
         }
     }
@@ -728,7 +728,7 @@ class ConvertBase extends Command
         \DB::table('aliases')->insert([
             'aliasable_id' => 0,
             'aliasable_type' => $aliasable_type,
-            'path' => $this->cleanAll($path),
+            'path' => $path,
             'route_type' => $route_type,
         ]);
     }
@@ -752,7 +752,7 @@ class ConvertBase extends Command
                 ->insert([
                     'aliasable_id' => $tid,
                     'aliasable_type' => $aliasable_type,
-                    'path' => $this->cleanAll($alias->dst),
+                    'path' => $alias->dst,
                 ]);
 
             if ($aliasable_type != 'destination') {
