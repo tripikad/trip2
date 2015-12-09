@@ -12,15 +12,16 @@ class CreateContentsTable extends Migration
             $table->integer('user_id')->index();
             $table->string('title');
             $table->text('body');
-            $table->string('type');
+            $table->string('type')->index();
             $table->string('url');
-            $table->integer('status')->required();
+            $table->integer('status')->required()->index();
             $table->timestamps();
 
             $table->dateTime('start_at')->nullable();
             $table->dateTime('end_at')->nullable();
             $table->string('duration')->nullable();
             $table->integer('price')->nullable();
+            $table->string('pseudo')->nullable()->index();
 
         });
     }
