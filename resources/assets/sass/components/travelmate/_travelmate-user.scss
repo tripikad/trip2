@@ -3,7 +3,12 @@
     @include color-modifiers(background);
 
     color: $color-white;
-    padding: $spacer * 4 $spacer * 3 $spacer * 2;
+    padding: $spacer * 3 $spacer * 2 $spacer * 2;
+
+    @include respond-to(tablet) {
+
+        padding: $spacer * 4 $spacer * 3 $spacer * 2;
+    }
 }
 
     .c-travelmate-user__header {
