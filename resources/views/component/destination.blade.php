@@ -58,7 +58,7 @@ modifiers:
 
             @if(isset($subtitle_route))
 
-                <a href="{{ $subtitle_route }}">
+                <a href="{{ $subtitle_route }}" class="c-destination__subtitle-link">
 
             @endif
 
