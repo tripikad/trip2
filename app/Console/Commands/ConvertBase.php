@@ -88,7 +88,7 @@ class ConvertBase extends Command
         return $query;
     }
 
-    public function convertNode($node, $modelname, $type, $route='')
+    public function convertNode($node, $modelname, $type, $route = '')
     {
         if (! $modelname::find($node->nid)) {
             if ($this->isUserConvertable($node->uid)) {
@@ -730,7 +730,7 @@ class ConvertBase extends Command
         }
     }
 
-    public function convertStaticAlias($aliasable_type, $path, $route_type, $nid=0)
+    public function convertStaticAlias($aliasable_type, $path, $route_type, $nid = 0)
     {
         \DB::table('aliases')->insert([
             'aliasable_id' => $nid,

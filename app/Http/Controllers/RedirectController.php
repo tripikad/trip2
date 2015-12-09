@@ -52,7 +52,7 @@ class RedirectController extends Controller
         dump($path);
 
         if ($alias) {
-            if($alias->aliasable_id > 0) {
+            if ($alias->aliasable_id > 0) {
                 return redirect()
                     ->route($alias->aliasable_type, [
                         $alias->route_type,
