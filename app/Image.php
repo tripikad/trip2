@@ -18,10 +18,7 @@ class Image extends Model
 
     public function preset($preset = 'small')
     {
-        $file = '/images/'
-            .$preset
-            .'/'
-            .$this->filename;
+        $file = config('imagepresets.presets.'.$preset.'.path').$this->filename;
 
         if (! file_exists(public_path().$file)) {
             $file = '';
