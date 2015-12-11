@@ -29,7 +29,6 @@ class Image extends Model
 
     public static function createImagePresets($path, $filename)
     {
-        $path = public_path().$path;
         foreach (array_keys(config('imagepresets.presets')) as $preset) {
             Imageconv::make($path.$filename)
                 ->{config("imagepresets.presets.$preset.operation")}(
@@ -39,7 +38,7 @@ class Image extends Model
                         $constraint->aspectRatio();
                 })
                 ->save(
-                    config("imagepresets.presets.$preset.path").$filename,
+                    public_path().config("imagepresets.presets.$preset.path").$filename,
                     config("imagepresets.presets.$preset.quality")
                 );
         }
