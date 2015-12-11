@@ -166,14 +166,12 @@
             <div class="r-destination__about-map">
 
                 @include('component.map', [
+                    'modifiers' => 'm-destination',
                     'map_top' => '53%',
                     'map_left' => '50%'
                 ])
-
             </div>
-
         </div>
-
     </div>
 
     <div class="r-destination__content">
@@ -382,6 +380,72 @@
                             ])
 
                         </div>
+
+                        {{--
+
+                        1. NEW updated travelmate list
+
+                        @include('component.travelmate.list', [
+                            'modifiers' => 'm-3col',
+                            'items' => [
+                                [
+                                    'modifiers' => 'm-small',
+                                    'image' =>  \App\Image::getRandom(),
+                                    'name' => 'Charles Darwin',
+                                    'route' => '#',
+                                    'sex_and_age' => 'N,28',
+                                    'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
+                                    'tags' => [
+                                        [
+                                            'modifiers' => 'm-yellow',
+                                            'title' => 'India'
+                                        ],
+                                        [
+                                            'modifiers' => 'm-purple',
+                                            'title' => 'Delhi'
+                                        ]
+                                    ]
+                                ],
+                                [
+                                    'modifiers' => 'm-small',
+                                    'image' =>  \App\Image::getRandom(),
+                                    'name' => 'Epptriin ',
+                                    'route' => '#',
+                                    'sex_and_age' => 'N,22',
+                                    'title' => 'Suusareis Austriasse veebruar-märts 2016',
+                                    'tags' => [
+                                        [
+                                            'modifiers' => 'm-red',
+                                            'title' => 'Austria'
+                                        ],
+                                        [
+                                            'modifiers' => 'm-gray',
+                                            'title' => 'Suusareis'
+                                        ]
+                                    ]
+                                ],
+                                [
+                                    'modifiers' => 'm-small',
+                                    'image' =>  \App\Image::getRandom(),
+                                    'name' => 'Silka ',
+                                    'route' => '#',
+                                    'sex_and_age' => 'M,32',
+                                    'title' => 'Puerto Rico',
+                                    'tags' => [
+                                        [
+                                            'modifiers' => 'm-green',
+                                            'title' => 'Puerto Rico'
+                                        ],
+                                        [
+                                            'modifiers' => 'm-gray',
+                                            'title' => 'Puhkusereis'
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ])
+
+                        --}}
 
                         <div class="c-columns m-{{ count($features['travel_mates']['contents']) }}-cols">
 

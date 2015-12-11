@@ -1,0 +1,40 @@
+.c-travelmate-list {
+
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+    .c-travelmate-list__item {
+
+        flex: 1 0 100%;
+        margin-bottom: $spacer * 2;
+
+        .c-travelmate-list.m-2col & {
+
+            background: $color-fill-neutral-light;
+
+            @include respond-to(tablet-portrait) {
+
+                flex: 0 1 47%;
+            }
+        }
+
+        .c-travelmate-list.m-3col & {
+
+            flex: 1 0 100%;
+
+            @include respond-to(tablet) {
+
+                flex: 0 1 33%;
+            }
+        }
+    }
+
+        .c-travelmate-list__link {
+
+            text-decoration: none;
+        }

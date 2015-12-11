@@ -28,7 +28,7 @@
 
     <div class="r-user__header">
 
-        <div class="r-user__masthead">
+        <div class="r-user__masthead m-green">
 
             @include('component.masthead', [
                 'modifiers' => 'm-alternative m-profile',
@@ -41,7 +41,9 @@
 
             <div class="r-user__map">
 
-                @include('component.map')
+                @include('component.map', [
+                    'modifiers' => 'm-profile'
+                ])
 
             </div>
 
