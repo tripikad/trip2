@@ -88,7 +88,7 @@ class ConvertBase extends Command
         return $query;
     }
 
-    public function convertNode($node, $modelname, $type)
+    public function convertNode($node, $modelname, $type, $route = '')
     {
         if (! $modelname::find($node->nid)) {
             if ($this->isUserConvertable($node->uid)) {
@@ -116,7 +116,14 @@ class ConvertBase extends Command
                 $this->convertUser($node->uid);
                 $this->convertComments($node->nid);
                 $this->convertFlags($node->nid, 'App\Content', 'node');
-                $this->convertNodeAlias($node->nid, 'App\Content', 'node');
+
+                if ($route != '') {
+                    if ($alias = $this->getNodeAlias($node->nid)) {
+                        $this->convertStaticAlias($route, $alias->dst, $type, $node->nid);
+                    }
+                } else {
+                    $this->convertNodeAlias($node->nid, 'App\Content', 'node');
+                }
 
                 return $model;
             } else {
@@ -718,9 +725,19 @@ class ConvertBase extends Command
             ->insert([
                 'aliasable_id' => $nid,
                 'aliasable_type' => 'content',
-                'path' => $this->cleanAll($alias->dst),
+                'path' => $alias->dst,
             ]);
         }
+    }
+
+    public function convertStaticAlias($aliasable_type, $path, $route_type, $nid = 0)
+    {
+        \DB::table('aliases')->insert([
+            'aliasable_id' => $nid,
+            'aliasable_type' => $aliasable_type,
+            'path' => $path,
+            'route_type' => $route_type,
+        ]);
     }
 
     public function convertTermAlias($tid, $aliasable_type)
@@ -742,7 +759,7 @@ class ConvertBase extends Command
                 ->insert([
                     'aliasable_id' => $tid,
                     'aliasable_type' => $aliasable_type,
-                    'path' => $this->cleanAll($alias->dst),
+                    'path' => $alias->dst,
                 ]);
 
             if ($aliasable_type != 'destination') {

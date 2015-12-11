@@ -11,7 +11,7 @@
             'text' => view('component.comment.text', ['comment' => $comment]),
             'actions' => view('component.actions', ['actions' => $comment->getActions()]),
             'extra' => view('component.flags', ['flags' => $comment->getFlags()]),
-            'body' => nl2br($comment->body),
+            'body' => nl2br($comment->body_filtered),
             'modifiers' => 'm-image m-quote'
         ])
 
