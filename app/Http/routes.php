@@ -137,7 +137,6 @@ get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
 
 get('styleguide', 'StyleguideController@index');
 
-
 /*
  * Redirect old URL-s
  */
