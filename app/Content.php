@@ -68,7 +68,17 @@ class Content extends Model
 
     public function imagePath()
     {
-        return $this->image ? '/images/'.$this->type.'/small/'.$this->image : 'http://trip.ee/files/pictures/picture_none.png';
+        $image = null;
+
+        if($this->image) {
+            $image = config('imagepresets.presets.small.path').$this->image;
+        }
+
+        if(! file_exists(public_path().$image)) {
+            $image = config('imagepresets.image.none');
+        }
+
+        return $image;
     }
 
     public function getBodyFilteredAttribute()
