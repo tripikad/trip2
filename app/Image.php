@@ -29,6 +29,7 @@ class Image extends Model
 
     public static function createImagePresets($path, $filename)
     {
+        $path = public_path().$path;
         foreach (array_keys(config('imagepresets.presets')) as $preset) {
             Imageconv::make($path.$filename)
                 ->{config("imagepresets.presets.$preset.operation")}(
@@ -46,7 +47,7 @@ class Image extends Model
 
     public static function storeImageFromUrl($url, $filename = null)
     {
-        $path = config('imagepresets.original.path');
+        $path = public_path().config('imagepresets.original.path');
 
         $info = getimagesize($url);
         $ext = image_type_to_extension($info[2]);
@@ -71,7 +72,7 @@ class Image extends Model
 
     public static function storeImageFile($file, $new_filename = null)
     {
-        $path = config('imagepresets.original.path');
+        $path = public_path().config('imagepresets.original.path');
 
         $ext = $file->guessExtension();
 
