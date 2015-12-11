@@ -2,7 +2,7 @@
 
     position: relative;
     display: block;
-    padding: $spacer * 2 $spacer * 2 $spacer * 2 $spacer * 4;
+    padding: $spacer * 1.5 $spacer * 2 $spacer * 1.5 $spacer * 4;
 
     @include respond-to(tablet) {
 
@@ -63,11 +63,12 @@
         color: $color-text-neutral-darker;
         font-size: $font-size-tiny;
         font-weight: $font-weight-bold;
-        margin-bottom: $spacer;
+        margin-bottom: $spacer / 2;
 
         @include respond-to(tablet) {
 
             font-size: $font-size-small;
+            margin-bottom: $spacer;
         }
 
         span {
@@ -92,9 +93,15 @@
 
     .c-travelmate__more {
 
-        color: $color-text-link;
-        font-size: $font-size-small;
-        margin-bottom: $spacer * 2;
+        display: none;
+
+        @include respond-to(tablet) {
+
+            color: $color-text-link;
+            font-size: $font-size-small;
+            display: block;
+            margin-bottom: $spacer * 2;
+        }
 
         .c-travelmate.m-small & {
 

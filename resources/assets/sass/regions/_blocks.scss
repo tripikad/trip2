@@ -20,7 +20,7 @@
 
     .r-block__inner {
 
-        padding: $spacer * 1.5 $spacer;
+        padding: $spacer * 2;
         background: $color-fill-neutral-light;
 
         @include respond-to(tablet) {

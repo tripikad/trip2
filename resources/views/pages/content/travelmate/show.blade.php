@@ -21,7 +21,8 @@
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
             'image' => \App\Image::getRandom(),
-            'subtitle' => 'Vaata kõiki pakkumisi ›'
+            'subtitle' => 'Vaata kõiki pakkumisi',
+            'subtitle_route' => '/content/travelmate'
         ])
     </div>
 
