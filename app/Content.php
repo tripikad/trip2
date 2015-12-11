@@ -70,11 +70,11 @@ class Content extends Model
     {
         $image = null;
 
-        if($this->image) {
+        if ($this->image) {
             $image = config('imagepresets.presets.small.path').$this->image;
         }
 
-        if(! file_exists(public_path().$image)) {
+        if (! file_exists(public_path().$image)) {
             $image = config('imagepresets.image.none');
         }
 
