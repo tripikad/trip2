@@ -23,12 +23,16 @@ post('login', ['uses' => 'Auth\LoginController@submit', 'as' => 'login.submit'])
 
 get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'login.logout']);
 
-//Facebook login
+// Facebook login
+
 get('redirect/facebook', ['middleware' => null, 'uses' => 'SocialController@facebookRedirect', 'as' => 'facebook.redirect']);
+
 get('facebook', ['uses' => 'SocialController@facebook', 'as' => 'facebook']);
 
-//Google+ login
+// Google+ login
+
 get('redirect/google', ['middleware' => null, 'uses' => 'SocialController@googleRedirect', 'as' => 'google.redirect']);
+
 get('google', ['uses' => 'SocialController@google', 'as' => 'google']);
 
 // Password reset
@@ -89,6 +93,10 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     put('{id}', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@update', 'as' => 'update']);
 
+    get('{id}/destinations', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@destinationsIndex', 'as' => 'destinations']);
+
+    post('{id}/destinations', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@destinationStore', 'as' => 'destination.store']);
+
 });
 
 // Messages
@@ -121,6 +129,14 @@ get('destination/{id}', ['uses' => 'DestinationController@show', 'as' => 'destin
 
 get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
 
+// Atom feed
+
+get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
+
+// Styleguide
+
+get('styleguide', 'StyleguideController@index');
+
 // Legacy content paths
 
 get('node/{id}', 'RedirectController@redirectNode');
@@ -136,10 +152,6 @@ get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 
 get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
 
-// Atom feed
+// Legacy content landings
 
-get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
-
-// Styleguide
-
-get('styleguide', 'StyleguideController@index');
+get('{path}', 'RedirectController@redirectContentIndex');

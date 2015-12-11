@@ -28,7 +28,7 @@
 
     <div class="r-user__header">
 
-        <div class="r-user__masthead">
+        <div class="r-user__masthead m-green">
 
             @include('component.masthead', [
                 'modifiers' => 'm-alternative m-profile',
@@ -41,7 +41,9 @@
 
             <div class="r-user__map">
 
-                @include('component.map')
+                @include('component.map', [
+                    'modifiers' => 'm-profile'
+                ])
 
             </div>
 
@@ -141,7 +143,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon', ['icon' => 'icon-facebook']),
+                                    'icon' => view('component.svg.sprite', ['name' => 'icon-facebook']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_facebook
@@ -163,7 +165,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon', ['icon' => 'icon-twitter']),
+                                    'icon' => view('component.svg.sprite', ['name' => 'icon-twitter']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_twitter
@@ -185,7 +187,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon', ['icon' => 'icon-instagram']),
+                                    'icon' => view('component.svg.sprite', ['name' => 'icon-instagram']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_instagram
@@ -207,7 +209,7 @@
                                     'modifiers' => (
                                         \Auth::check() ? 'm-icon m-small m-round' : 'm-icon m-small m-round m-disabled'
                                     ),
-                                    'icon' => view('component.icon', ['icon' => 'icon-plus']),
+                                    'icon' => view('component.svg.sprite', ['name' => 'icon-plus']),
                                     'route' => (\Auth::check()
                                         ?
                                             $user->contact_homepage
@@ -251,8 +253,8 @@
 
                             <div class="r-user__info-status-icon">
 
-                                @include ('component.icon', [
-                                    'icon' => $user_status->icon
+                                @include ('component.svg.sprite', [
+                                    'name' => $user_status->icon
                                 ])
 
                             </div>
@@ -325,7 +327,7 @@
                                     'button' => view('component.button',[
                                         'modifiers' => 'm-secondary m-small',
                                         'title' => trans('menu.user.add.places'),
-                                        'route' => '#'
+                                        'route' => route('user.destinations', [$user])
                                     ]),
                                 ]
                             ]
@@ -378,13 +380,17 @@
             @include('component.gallery', [
                 'items' => $photos->transform(function($photo) {
                     return [
+                        'type' => $photo->type,
                         'image' => $photo->imagePreset(),
                         'route' => route('content.show', [$photo->type, $photo]),
                         'alt' => $photo->title
                     ];
                 }),
-                'more_count' => intval($count_photos),
-                'more_route' => route('content.show', ['photo'])
+                'more_count' => $count_photos,
+                'more_route' => route('content.index', [
+                    $photos->first()['type'],
+                    'author=' . $user->id
+                ])
             ])
 
             </div>

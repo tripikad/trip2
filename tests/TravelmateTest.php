@@ -24,7 +24,7 @@ class TravelmateTest extends TestCase
                 'title' => 'Hello title',
             ]))
             ->see('Hello title')
-            ->see($regular_user->name)
+            ->see(str_limit($regular_user->name, 24))
             ->seeInDatabase('contents', [
                 'user_id' => $regular_user->id,
                 'title' => 'Hello title',

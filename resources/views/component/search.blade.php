@@ -4,8 +4,8 @@
 
         <span class="c-search__form-icon">
 
-            @include('component.icon', [
-                'icon' => 'icon-search'
+            @include('component.svg.sprite', [
+                'name' => 'icon-search'
             ])
 
         </span>

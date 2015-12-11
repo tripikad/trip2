@@ -2,6 +2,32 @@
 
 return [
 
+    'frontpage' => [
+        'header' => 60 * 10,
+    ],
+
+    'destination' => [
+        'header' => 60 * 10,
+        'getPopular' => 30, // minutes
+    ],
+
+    'content' => [
+        'index' => [
+            'header' => 60 * 10,
+        ],
+        'show' => [
+            'header' => 60 * 10,
+        ],
+    ],
+
+    'user' => [
+        'header' => 60 * 10,
+    ],
+
+    'feed' => [
+        'atom' => null,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Default Cache Store

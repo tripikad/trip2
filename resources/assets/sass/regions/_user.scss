@@ -8,6 +8,11 @@
     overflow: hidden;
 }
 
+.r-user__masthead {
+
+    @include color-modifiers-dark(background);
+}
+
 .r-user__info {
 
     @include color-modifiers-and(background);
@@ -19,7 +24,7 @@
     .r-user__map {
 
         position: absolute;
-        bottom: $spacer * 4;
+        top: -$spacer * 32;
         z-index: 1;
         display: none;
 
@@ -32,14 +37,16 @@
 
         @include respond-to(desktop) {
 
-            right: -$spacer * 8;
-            width: 90%;
+            right: 0;
+            top: -$spacer * 32;
+            height: $spacer * 52;
+            width: $spacer * 92;
         }
 
         @include respond-to(desktop-large) {
 
-            right: $spacer * 4;
-            width: 80%;
+            right: 40%;
+            margin-right: -$spacer * 46;
         }
     }
 

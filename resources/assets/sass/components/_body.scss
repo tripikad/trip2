@@ -3,6 +3,11 @@
     font-size: $font-size-normal;
     line-height: 1.5;
 
+    >:last-child {
+
+        margin-bottom: 0;
+    }
+
     p {
 
         font-size: $font-size-normal;

@@ -48,11 +48,6 @@ class Content extends Model
         return $this->morphMany('App\Follow', 'followable');
     }
 
-    public function getDestination()
-    {
-        return $this->destinations->first();
-    }
-
     public function getDestinationParent()
     {
         if ($this->destinations->first()) {
@@ -75,8 +70,6 @@ class Content extends Model
     {
         return $this->image ? '/images/'.$this->type.'/small/'.$this->image : 'http://trip.ee/files/pictures/picture_none.png';
     }
-
-//    public function getFilteredbodyAttribute()
 
     public function getBodyFilteredAttribute()
     {
@@ -101,8 +94,8 @@ class Content extends Model
 
     public function imagePreset($preset = 'small')
     {
-        if ($image = $this->images()->first()) {
-            return $image->preset($preset);
+        if ($this->images->count() > 0) {
+            return $this->images->first()->preset($preset);
         }
 
         return;

@@ -22,6 +22,8 @@ code: |
 
     @endif
 
-    <img src="/svg/map.svg" alt="">
+    @include('component.svg.standalone', [
+        'name' => 'map'
+    ])
 
 </div>

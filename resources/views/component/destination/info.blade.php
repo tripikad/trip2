@@ -7,7 +7,10 @@ code: |
     @include('component.destination.info',[
         'modifiers' => $modifiers,
         'text' => 'Malta on tihedalt asustatud saareriik Vahemeres, mis koosneb 3 asustatud ja neljast asustamata saartest',
-        'wiki_route' => '#',
+        'link' => [
+            'title' => 'Wikipdeia &rsaquo;',
+            'route' => '#'
+        ],
         'definitions' => [
             [
                 'term' => 'Rahvaarv',
@@ -45,9 +48,25 @@ modifiers:
 
         <p class="c-destination-info__text">{{ $text }}
 
-        @if (isset($wiki_route))
+        @if (isset($link) && count($link))
 
-            <a href="{{ $wiki_route }}">Wikipedia &rsaquo;</a>
+            @if (isset($link['title']))
+
+                @if (isset($link['route']))
+
+                    <a href="{{ $link['route'] }}">
+
+                @endif
+
+                {{ $link['title'] }}
+
+                @if (isset($link['route']))
+
+                    </a>
+
+                @endif
+
+            @endif
 
         @endif
 

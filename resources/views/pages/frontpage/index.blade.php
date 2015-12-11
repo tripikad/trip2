@@ -45,13 +45,13 @@
                                 @include('component.destination', [
                                     'modifiers' => ['m-yellow', 'm-red', 'm-green'][$key],
                                     'title' =>
-                                        $flight1->getDestination() ? $flight1->getDestination()->name : null,
+                                        $flight1->destination ? $flight1->destination->name : null,
                                     'title_route' =>
-                                        $flight1->getDestination() ? route('destination.show', $flight1->getDestination()) : null,
+                                        $flight1->destination ? route('destination.show', $flight1->destination) : null,
                                     'subtitle' =>
-                                        $flight1->getDestinationParent() ? $flight1->getDestinationParent()->name : null,
+                                        $flight1->parent_destination ? $flight1->parent_destination->name : null,
                                     'subtitle_route' =>
-                                        $flight1->getDestinationParent() ? route('destination.show', $flight1->getDestinationParent()) : null
+                                        $flight1->parent_destination ? route('destination.show', $flight1->parent_destination) : null
                                 ])
 
                                 @include('component.card', [
@@ -425,11 +425,69 @@
 
                     </div>
 
-                    <div class="c-columns m-4-cols">
+                    @include('component.travelmate.list', [
+                        'modifiers' => 'm-3col',
+                        'items' => [
+                            [
+                                'modifiers' => 'm-small',
+                                'image' =>  \App\Image::getRandom(),
+                                'name' => 'Charles Darwin',
+                                'route' => '#',
+                                'sex_and_age' => 'N,28',
+                                'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
+                                'tags' => [
+                                    [
+                                        'modifiers' => 'm-yellow',
+                                        'title' => 'India'
+                                    ],
+                                    [
+                                        'modifiers' => 'm-purple',
+                                        'title' => 'Delhi'
+                                    ]
+                                ]
+                            ],
+                            [
+                                'modifiers' => 'm-small',
+                                'image' =>  \App\Image::getRandom(),
+                                'name' => 'Epptriin ',
+                                'route' => '#',
+                                'sex_and_age' => 'N,22',
+                                'title' => 'Suusareis Austriasse veebruar-märts 2016',
+                                'tags' => [
+                                    [
+                                        'modifiers' => 'm-red',
+                                        'title' => 'Austria'
+                                    ],
+                                    [
+                                        'modifiers' => 'm-gray',
+                                        'title' => 'Suusareis'
+                                    ]
+                                ]
+                            ],
+                            [
+                                'modifiers' => 'm-small',
+                                'image' =>  \App\Image::getRandom(),
+                                'name' => 'Silka ',
+                                'route' => '#',
+                                'sex_and_age' => 'M,32',
+                                'title' => 'Puerto Rico',
+                                'tags' => [
+                                    [
+                                        'modifiers' => 'm-green',
+                                        'title' => 'Puerto Rico'
+                                    ],
+                                    [
+                                        'modifiers' => 'm-gray',
+                                        'title' => 'Puhkusereis'
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ])
+
+                    {{--
 
                         @foreach ($travelmates as $travelmate)
-
-                            <div class="c-columns__item">
 
                                 @include('component.profile', [
                                     'title' => $travelmate->user->name,
@@ -439,11 +497,10 @@
                                     'image' => $travelmate->user->imagePreset()
                                 ])
 
-                            </div>
-
                         @endforeach
 
-                    </div>
+                    --}}
+
                 </div>
             </div>
 

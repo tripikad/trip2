@@ -2,15 +2,6 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => [],
-        'latest' => 'created_at',
-        'take' => 5,
-
-    ],
-
     'index' => [
 
         'with' => ['destinations', 'topics'],
@@ -39,6 +30,7 @@ return [
                 'title' => 'Body',
                 'rows' => 16,
                 'large' => true,
+                'wysiwyg' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

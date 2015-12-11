@@ -10,17 +10,6 @@
     .c-destination__header {
 
         padding: $spacer * 1.5 $spacer * 2 $spacer * 1.5;
-
-        a {
-
-            color: $color-white;
-            text-decoration: none;
-
-            &:hover {
-
-                text-decoration: none;
-            }
-        }
     }
 
     .c-destination__title {
@@ -32,6 +21,18 @@
         font-weight: $font-weight-bold;
     }
 
+        .c-destination__title-link {
+
+            color: $color-white;
+            text-decoration: none;
+            display: block;
+
+            &:hover {
+
+                text-decoration: none;
+            }
+        }
+
     .c-destination__subtitle {
 
         @include font-smoothing;
@@ -40,3 +41,15 @@
         font-weight: $font-weight-bold;
         margin-top: $spacer;
     }
+
+        .c-destination__subtitle-link {
+
+            color: $color-white;
+            text-decoration: none;
+            display: block;
+
+            &:hover {
+
+                text-decoration: none;
+            }
+        }

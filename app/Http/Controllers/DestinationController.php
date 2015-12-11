@@ -41,7 +41,7 @@ class DestinationController extends Controller
                 'take' => 4,
             ],
             'forum_posts' => [
-                'type' => 'forum',
+                'type' => ['forum', 'buysell', 'expat'],
                 'with' => ['images'],
                 'latest' => 'created_at',
                 'take' => 4,
@@ -67,8 +67,10 @@ class DestinationController extends Controller
 
             $feature_item = $destination->content();
 
-            if (isset($types[$type]['type'])) {
+            if (isset($types[$type]['type']) && ! is_array($types[$type]['type'])) {
                 $feature_item->whereType($types[$type]['type']);
+            } else {
+                $feature_item->whereIn('type', $types[$type]['type']);
             }
 
             if (isset($types[$type]['with']) && is_array($types[$type]['with'])) {
@@ -87,7 +89,7 @@ class DestinationController extends Controller
                 $feature_item->take($types[$type]['take']);
             }
 
-            $features[$type]['contents'] = $feature_item->get();
+            $features[$type]['contents'] = $feature_item->with('images')->get();
         }
 
         $previous_destination = Destination::
@@ -99,7 +101,7 @@ class DestinationController extends Controller
             ->where('parent_id', $destination->parent_id)
             ->orderBy('name', 'desc')
             ->take(1)
-            ->union(
+            ->unionAll(
                 Destination::where(DB::raw('CONCAT(`name`, `id`)'), '>', function ($query) use ($id) {
                     $query->select(DB::raw('CONCAT(`name`, `id`)'))
                         ->from('destinations')
@@ -120,7 +122,7 @@ class DestinationController extends Controller
             ->where('parent_id', $destination->parent_id)
             ->orderBy('name', 'asc')
             ->take(1)
-            ->union(
+            ->unionAll(
                 Destination::where(DB::raw('CONCAT(`name`, `id`)'), '<', function ($query) use ($id) {
                     $query->select(DB::raw('CONCAT(`name`, `id`)'))
                         ->from('destinations')
@@ -132,7 +134,28 @@ class DestinationController extends Controller
             )
             ->first();
 
-        $parent_destination = $destination->parent()->first();
+        /*
+         * Baum bug fix.
+         * Baum always tries to find result from database.
+         *
+         * Ex. WHERE id = NULL.
+         */
+        if ($destination->parent_id) {
+            $parent_destination = $destination->parent()->first();
+        } else {
+            $parent_destination = null;
+        }
+
+        if (! $parent_destination) {
+            $root_destination = $destination;
+        } else {
+            $root_destination = $destination->getRoot();
+        }
+
+        $popular_destinations = $root_destination
+            ->getPopular()
+            ->sortByDesc('interestTotal')
+            ->take(4);
 
         return response()->view('pages.destination.show', [
             'destination' => $destination,
@@ -140,6 +163,8 @@ class DestinationController extends Controller
             'previous_destination' => $previous_destination,
             'next_destination' => $next_destination,
             'parent_destination' => $parent_destination,
-        ])->header('Cache-Control', 'public, s-maxage='.config('destination.cache'));
+            'root_destination' => $root_destination,
+            'popular_destinations' => $popular_destinations,
+        ])->header('Cache-Control', 'public, s-maxage='.config('cache.destination.header'));
     }
 }
