@@ -166,14 +166,12 @@
             <div class="r-destination__about-map">
 
                 @include('component.map', [
+                    'modifiers' => 'm-destination',
                     'map_top' => '53%',
                     'map_left' => '50%'
                 ])
-
             </div>
-
         </div>
-
     </div>
 
     <div class="r-destination__content">
