@@ -124,7 +124,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function imagePreset($preset = 'small_square')
     {
-        return count($this->images) ? '/images/'.$preset.'/'.$this->images[0]->filename : '/svg/picture_none.svg';
+        $image = null;
+
+        if (count($this->images)) {
+            $image = config('imagepresets.presets.'.$preset.'.path').$this->images[0]->filename;
+        }
+
+        if (! file_exists(public_path().$image)) {
+            $image = config('imagepresets.image.none');
+        }
+
+        return $image;
     }
 
     public function hasRole($role)
