@@ -137,12 +137,16 @@ get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
 
 get('styleguide', 'StyleguideController@index');
 
+/*
+ * Redirect old URL-s
+ */
+
 // Legacy content paths
 
 get('node/{id}', 'RedirectController@redirectNode');
 
 get('content/{path}', 'RedirectController@redirectContent')
-    ->where(['path' => '(.*)\.html(.*)']);
+    ->where('path', '.*');
 
 // Legacy term paths
 
@@ -152,6 +156,6 @@ get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 
 get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
 
-// Legacy content landings
+// All other content pages
 
-get('{path}', 'RedirectController@redirectContentIndex');
+get('{path}', 'RedirectController@redirectContentBySlug');

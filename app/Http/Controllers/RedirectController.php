@@ -27,8 +27,6 @@ class RedirectController extends Controller
             ->wherePath('content/'.$path)
             ->first();
 
-        dump('content/'.$path);
-
         if ($alias) {
             $content = Content::find($alias->aliasable_id);
 
@@ -42,14 +40,12 @@ class RedirectController extends Controller
         abort(404);
     }
 
-    public function redirectContentIndex($path)
+    public function redirectContentBySlug($path)
     {
         $alias = \DB::table('aliases')
             ->wherePath($path)
             ->where('aliasable_type', 'like', 'content.%')
             ->first();
-
-        dump($path);
 
         if ($alias) {
             if ($alias->aliasable_id > 0) {
