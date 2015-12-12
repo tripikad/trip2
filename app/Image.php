@@ -95,14 +95,15 @@ class Image extends Model
         return $filename;
     }
 
-    public static function checkIfExists($path, $filename, $ext, $i=0)
+    public static function checkIfExists($path, $filename, $ext, $i = 0)
     {
-        if($i>0) {
+        if ($i>0) {
             $filename = $filename.'-'.$i;
         }
 
         if (file_exists($path.$filename.$ext)) {
             ++$i;
+
             return self::checkIfExists($path, $filename, $ext, $i);
         } else {
             return $filename.$ext;
