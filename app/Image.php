@@ -97,7 +97,7 @@ class Image extends Model
 
     public static function checkIfExists($path, $filename, $ext, $i = 0)
     {
-        if ($i>0) {
+        if ($i > 0) {
             $filename = $filename.'-'.$i;
         }
 
