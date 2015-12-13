@@ -255,17 +255,19 @@ class ContentController extends Controller
         $fields = [];
 
         foreach ($dates_only as $name => $value) {
-            $date = Carbon::createFromDate(
-                $request->{$name.'_year'},
-                $request->{$name.'_month'},
-                $request->{$name.'_day'}
-            )->format('Y-m-d');
-            $time = Carbon::createFromTime(
-                $request->{$name.'_hour'},
-                $request->{$name.'_minute'},
-                Carbon::now()->second
-            )->format('H:i:s');
-            $fields[$name] = $date.' '.$time;
+            if (! $request->{$name}) {
+                $date = Carbon::createFromDate(
+                    $request->{$name.'_year'},
+                    $request->{$name.'_month'},
+                    $request->{$name.'_day'}
+                )->format('Y-m-d');
+                $time = Carbon::createFromTime(
+                    $request->{$name.'_hour'},
+                    $request->{$name.'_minute'},
+                    Carbon::now()->second
+                )->format('H:i:s');
+                $fields[$name] = $date.' '.$time;
+            }
         }
 
         return $fields;
