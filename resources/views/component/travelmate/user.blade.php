@@ -60,11 +60,22 @@
         </div>
     </div>
 
-    <div class="c-travelmate-user__footer">
-        @include('component.button', [
-            'modifiers' => 'm-block m-secondary',
-            'title' => 'Saada sõnum',
-            'route' => '#'
-        ])
-    </div>
+    @if (\Auth::user())
+        @if(\Auth::user()->id !== $user->id)
+
+            <div class="c-travelmate-user__footer">
+                @include('component.button', [
+                    'modifiers' => 'm-block m-secondary',
+                    'title' => trans('content.action.message.send'),
+                    'route' => route('message.index.with', [
+                        \Auth::user(),
+                        $user,
+                        '#message'
+                    ])
+                ])
+            </div>
+
+        @endif
+    @endif
+
 </div>
