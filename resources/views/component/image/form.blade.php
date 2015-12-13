@@ -141,10 +141,39 @@ code: |
 
                 @elseif ($field['type'] == 'datetime')
 
-                    {!! Form::text($key, null, [
-                        'class' => 'c-form__input',
-                        'placeholder' => trans("content.$type.edit.field.$key.title"),
-                    ]) !!}
+                    @include('component.date.select', [
+                        'from' => 1,
+                        'to' => 31,
+                        'selected' => \Carbon\Carbon::now()->day,
+                        'key' => $key.'_day'
+                    ])
+
+                    @include('component.date.select', [
+                        'month' => true,
+                        'selected' => \Carbon\Carbon::now()->month,
+                        'key' => $key.'_month'
+                    ])
+
+                    @include('component.date.select', [
+                        'from' => \Carbon\Carbon::now()->year,
+                        'to' => \Carbon\Carbon::parse('+5 years')->year,
+                        'selected' => \Carbon\Carbon::now()->year,
+                        'key' => $key.'_year'
+                    ])
+
+                    @include('component.date.select', [
+                        'from' => 1,
+                        'to' => 24,
+                        'selected' => \Carbon\Carbon::now()->hour,
+                        'key' => $key.'_hour'
+                    ])
+
+                    @include('component.date.select', [
+                        'from' => 1,
+                        'to' => 60,
+                        'selected' => \Carbon\Carbon::now()->minute,
+                        'key' => $key.'_minute'
+                    ])
 
                 @elseif ($field['type'] == 'currency')
 
