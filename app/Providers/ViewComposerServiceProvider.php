@@ -12,7 +12,8 @@ class ViewComposerServiceProvider extends ServiceProvider
         $this->composeComponentDateSelect();
     }
 
-    private function composeComponentDateSelect() {
+    private function composeComponentDateSelect()
+    {
         view()->composer('component.date.select', function ($view) {
 
             $months = null;
@@ -21,7 +22,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             if (isset($data['month'])) {
                 $months = [];
                 $year = Date::now()->format('Y');
-                for ($i=1; $i<=12; ++$i) {
+                for ($i = 1; $i <= 12; ++$i) {
                     $months[$i] = Date::parse("01.$i.$year")->format('F');
                 }
             }

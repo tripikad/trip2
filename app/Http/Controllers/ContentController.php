@@ -248,12 +248,13 @@ class ContentController extends Controller
             ->with('info', trans('content.update.info', ['title' => $content->title]));
     }
 
-    private static function fetchDates($request, $type) {
+    private static function fetchDates($request, $type)
+    {
         $dates_only = collect(config("content_$type.edit.fields"))->where('type', 'datetime');
 
         $fields = [];
 
-        foreach($dates_only as $name => $value) {
+        foreach ($dates_only as $name => $value) {
             $date = Carbon::createFromDate(
                 $request->{$name.'_year'},
                 $request->{$name.'_month'},
