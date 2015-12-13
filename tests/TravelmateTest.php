@@ -12,13 +12,22 @@ class TravelmateTest extends TestCase
     {
         $regular_user = factory(App\User::class)->create();
         $datetime = Carbon::now()->addMonth(1)->toDateTimeString();
+        $year = Carbon::parse($datetime)->year;
+        $month = Carbon::parse($datetime)->month;
+        $day = Carbon::parse($datetime)->day;
+        $hour = Carbon::parse($datetime)->hour;
+        $minute = Carbon::parse($datetime)->minute;
 
         $this->actingAs($regular_user)
             ->visit('content/travelmate')
             ->click(trans('content.travelmate.create.title'))
             ->seePageIs('content/travelmate/create')
             ->type('Hello title', 'title')
-            ->type($datetime, 'start_at')
+            ->type($year, 'start_at_year')
+            ->type($month, 'start_at_month')
+            ->type($day, 'start_at_day')
+            ->type($hour, 'start_at_hour')
+            ->type($minute, 'start_at_minute')
             ->press(trans('content.create.submit.title'))
             ->see(trans('content.store.status.1.info', [
                 'title' => 'Hello title',
