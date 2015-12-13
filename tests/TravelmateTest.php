@@ -23,11 +23,11 @@ class TravelmateTest extends TestCase
             ->click(trans('content.travelmate.create.title'))
             ->seePageIs('content/travelmate/create')
             ->type('Hello title', 'title')
-            ->type($year, 'start_at_year')
-            ->type($month, 'start_at_month')
-            ->type($day, 'start_at_day')
-            ->type($hour, 'start_at_hour')
-            ->type($minute, 'start_at_minute')
+            ->select($year, 'start_at_year')
+            ->select($month, 'start_at_month')
+            ->select($day, 'start_at_day')
+            ->select($hour, 'start_at_hour')
+            ->select($minute, 'start_at_minute')
             ->press(trans('content.create.submit.title'))
             ->see(trans('content.store.status.1.info', [
                 'title' => 'Hello title',
@@ -45,13 +45,22 @@ class TravelmateTest extends TestCase
         $content = Content::whereTitle('Hello title')->first();
 
         $new_datetime = Carbon::now()->addMonth(2)->toDateTimeString();
+        $year = Carbon::parse($new_datetime)->year;
+        $month = Carbon::parse($new_datetime)->month;
+        $day = Carbon::parse($new_datetime)->day;
+        $hour = Carbon::parse($new_datetime)->hour;
+        $minute = Carbon::parse($new_datetime)->minute;
 
         $this->actingAs($regular_user)
                 ->visit("content/travelmate/$content->id")
                 ->press(trans('content.action.edit.title'))
                 ->seePageIs("content/travelmate/$content->id/edit")
                 ->type('Hola titulo', 'title')
-                ->type($new_datetime, 'start_at')
+                ->select($year, 'start_at_year')
+                ->select($month, 'start_at_month')
+                ->select($day, 'start_at_day')
+                ->select($hour, 'start_at_hour')
+                ->select($minute, 'start_at_minute')
                 ->press(trans('content.edit.submit.title'))
                 ->seePageIs("content/travelmate/$content->id")
                 ->see('Hola titulo')
