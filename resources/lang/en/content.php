@@ -20,6 +20,8 @@ return [
     'action.status.1.info' => 'The post :title has been published',
     'action.status.0.info' => 'The post :title has been unpublished',
 
+    'action.message.send' => 'Send private message',
+
     'field.image.title' => 'Select image',
     'field.image.selected.title' => 'New image selected',
 
