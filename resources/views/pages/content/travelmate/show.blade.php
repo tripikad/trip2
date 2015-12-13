@@ -92,6 +92,7 @@
                 @include('component.travelmate.user', [
                     'modifiers' => 'm-purple',
                     'image' => \App\Image::getRandom(),
+                    'user' => $content->user,
                     'name' => 'Charles Dawson',
                     'user_route' => '#',
                     'sex_and_age' => 'M,34',
