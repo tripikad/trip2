@@ -162,22 +162,22 @@ code: |
                     ])
 
                     @include('component.date.select', [
-                        'from' => 1,
-                        'to' => 24,
+                        'from' => 0,
+                        'to' => 23,
                         'selected' => \Carbon\Carbon::now()->hour,
                         'key' => $key.'_hour'
                     ])
 
                     @include('component.date.select', [
-                        'from' => 1,
-                        'to' => 60,
+                        'from' => 0,
+                        'to' => 59,
                         'selected' => \Carbon\Carbon::now()->minute,
                         'key' => $key.'_minute'
                     ])
 
                     @include('component.date.select', [
-                        'from' => 1,
-                        'to' => 60,
+                        'from' => 0,
+                        'to' => 59,
                         'selected' => '00',
                         'key' => $key.'_second'
                     ])

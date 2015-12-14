@@ -4,6 +4,6 @@
 
 @else
 
-    {!! Form::selectRange($key, $from, $to, [$selected]) !!}
+    {!! Form::select($key, $from_to, [$selected]) !!}
 
 @endif
