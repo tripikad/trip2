@@ -5,7 +5,10 @@ return [
     'index' => [
 
         'with' => ['images'],
-        'latest' => 'end_at',
+        'orderBy' => [
+            'field' => 'end_at',
+            'order' => 'desc',
+        ],
         'paginate' => 24,
     ],
 
