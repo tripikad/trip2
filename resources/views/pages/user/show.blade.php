@@ -482,6 +482,7 @@
                     <div class="r-user__additional-block">
 
                         @include('component.promo', [
+                            'modifiers' => 'm-sidebar-large',
                             'route' => '#',
                             'image' => \App\Image::getRandom()
                         ])
@@ -491,6 +492,7 @@
                     <div class="r-user__additional-block">
 
                         @include('component.promo', [
+                            'modifiers' => 'm-sidebar-small',
                             'route' => '#',
                             'image' => \App\Image::getRandom()
                         ])
@@ -540,6 +542,7 @@
         <div class="r-user__footer-promo-wrap">
 
             @include('component.promo', [
+                'modifiers' => 'm-footer',
                 'route' => '#',
                 'image' => \App\Image::getRandom()
             ])

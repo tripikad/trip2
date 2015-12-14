@@ -322,6 +322,7 @@
             <div class="r-block m-small">
 
                 @include('component.promo', [
+                    'modifiers' => 'm-sidebar-large',
                     'route' => '',
                     'image' => \App\Image::getRandom()
                 ])
@@ -330,6 +331,7 @@
             <div class="r-block m-small">
 
                 @include('component.promo', [
+                    'modifiers' => 'm-sidebar-small',
                     'route' => '',
                     'image' => \App\Image::getRandom()
                 ])
@@ -393,29 +395,32 @@
                         [
                             'title' => 'Üldfoorum',
                             'route' => '#',
-                            'modifiers' => 'm-large m-block'
+                            'modifiers' => 'm-large m-block m-icon',
+                            'icon' => 'icon-arrow-right'
                         ],
                         [
                             'title' => 'Ost-müük',
                             'route' => '#',
-                            'modifiers' => 'm-large m-block'
+                            'modifiers' => 'm-large m-block m-icon',
+                            'icon' => 'icon-arrow-right'
                         ],
                         [
                             'title' => 'Vaba teema',
                             'route' => '#',
-                            'modifiers' => 'm-large m-block'
+                            'modifiers' => 'm-large m-block m-icon',
+                            'icon' => 'icon-arrow-right'
                         ],
                         [
                             'type' => 'button',
                             'title' => 'Otsi foorumist',
                             'route' => '#',
-                            'modifiers' => 'm-secondary m-block'
+                            'modifiers' => 'm-secondary m-block m-shadow'
                         ],
                         [
                             'type' => 'button',
                             'title' => 'Alusta teemat',
                             'route' => '#',
-                            'modifiers' => 'm-block'
+                            'modifiers' => 'm-secondary m-block m-shadow'
                         ]
                     ]
                 ])
@@ -429,6 +434,7 @@
                         [
                             'topic' => 'Samui hotellid?',
                             'route' => '#',
+                            'date' => 'Täna, 15:12',
                             'profile' => [
                                 'modifiers' => 'm-mini',
                                 'image' => \App\Image::getRandom()
@@ -453,6 +459,7 @@
                         [
                             'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
                             'route' => '#',
+                            'date' => 'Täna, 12:17',
                             'profile' => [
                                 'modifiers' => 'm-mini',
                                 'image' => \App\Image::getRandom()
@@ -464,7 +471,7 @@
                             'tags' => [
                                 [
                                     'title' => 'Rongireis',
-                                    'modifiers' => 'm-orange',
+                                    'modifiers' => 'm-gray',
                                     'route' => ''
                                 ]
                             ]
@@ -472,6 +479,7 @@
                         [
                             'topic' => 'Puhkuseosakud Tenerifel',
                             'route' => '#',
+                            'date' => '10. detsember 2015',
                             'profile' => [
                                 'modifiers' => 'm-mini',
                                 'image' => \App\Image::getRandom()
@@ -491,6 +499,7 @@
                         [
                             'topic' => 'Ischgl mäeolud-pilet ja majutus',
                             'route' => '#',
+                            'date' => '11. detsember 2015',
                             'profile' => [
                                 'modifiers' => 'm-mini',
                                 'image' => \App\Image::getRandom()
@@ -507,12 +516,12 @@
                                 ],
                                 [
                                     'title' => 'Rong',
-                                    'modifiers' => 'm-green',
+                                    'modifiers' => 'm-gray',
                                     'route' => ''
                                 ],
                                 [
                                     'title' => 'Mäed',
-                                    'modifiers' => 'm-blue',
+                                    'modifiers' => 'm-gray',
                                     'route' => ''
                                 ]
                             ]
@@ -528,6 +537,7 @@
         <div class="r-flights__footer-promo-wrap">
 
             @include('component.promo', [
+                'modifiers' => 'm-footer',
                 'route' => '#',
                 'image' => \App\Image::getRandom()
             ])

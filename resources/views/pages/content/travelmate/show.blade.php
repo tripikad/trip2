@@ -304,6 +304,7 @@
             <div class="r-block m-small">
 
                 @include('component.promo', [
+                    'modifiers' => 'm-sidebar-small',
                     'route' => '',
                     'image' => \App\Image::getRandom()
                 ])
@@ -424,6 +425,7 @@
         <div class="r-travelmates__footer-promo-wrap">
 
             @include('component.promo', [
+                'modifiers' => 'm-footer',
                 'route' => '',
                 'image' => \App\Image::getRandom()
             ])
