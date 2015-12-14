@@ -388,46 +388,31 @@
 
                         @endif
 
+                        <div class="r-block">
+
+                            @include('component.promo', [
+                                'modifiers' => 'm-body',
+                                'route' => '#',
+                                'image' => \App\Image::getRandom()
+                            ])
+
+                        </div>
+
                     </div>
 
                     <div class="r-destination__content-news-column m-last">
 
-                        @if (isset($features['blog_posts']) && count($features['blog_posts']['contents']))
+                        <div class="r-block">
 
-                            <div class="r-destination__content-title">
+                            @include('component.promo', [
+                                'modifiers' => 'm-sidebar-large',
+                                'route' => '#',
+                                'image' => \App\Image::getRandom()
+                            ])
 
-                                @include('component.title', [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => trans('frontpage.index.travelletter.title')
-                                ])
-
-                            </div>
-
-                            @foreach($features['blog_posts']['contents'] as $blog)
-
-                                @include('component.blog', [
-                                    'title' => $blog->title,
-                                    'route' => route('content.show', [$blog->type, $blog]),
-                                    'image' => $blog->imagePreset(),
-                                    'profile' => [
-                                        'route' => route('user.show', [$blog->user]),
-                                        'title' => $blog->user->name,
-                                        'image' => $blog->user->imagePreset()
-                                    ]
-                                ])
-
-                            @endforeach
-
-                        @else
-
-                            <p>&nbsp;</p>
-
-                        @endif
-
+                        </div>
                     </div>
-
                 </div>
-
             </div>
 
             @if (isset($features['travel_mates']) && count($features['travel_mates']['contents']))
@@ -444,10 +429,6 @@
                             ])
 
                         </div>
-
-                        {{--
-
-                        1. NEW updated travelmate list
 
                         @include('component.travelmate.list', [
                             'modifiers' => 'm-3col',
@@ -509,7 +490,9 @@
                             ]
                         ])
 
-                        --}}
+                        {{--
+
+                        1. NEW updated travelmate list
 
                         <div class="c-columns m-{{ count($features['travel_mates']['contents']) }}-cols">
 
@@ -530,6 +513,8 @@
                             @endforeach
 
                         </div>
+
+                        --}}
 
                     </div>
 
