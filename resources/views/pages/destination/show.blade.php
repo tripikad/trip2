@@ -185,6 +185,7 @@
                     <div class="r-destination__content-about-column m-first">
 
                         @include('component.promo', [
+                            'modifiers' => 'm-sidebar-small',
                             'route' => '#',
                             'image' => \App\Image::getRandom()
                         ])
@@ -512,6 +513,7 @@
         <div class="r-destination__footer-promo-wrap">
 
             @include('component.promo', [
+                'modifiers' => 'm-footer',
                 'route' => '#',
                 'image' => \App\Image::getRandom()
             ])

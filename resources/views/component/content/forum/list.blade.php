@@ -10,6 +10,7 @@ code: |
             [
                 'topic' => 'This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition',
                 'route' => '#',
+                'date' => '',
                 'profile' => [
                     'modifiers' => 'm-mini',
                     'image' => \App\Image::getRandom()
@@ -83,7 +84,15 @@ modifiers:
 
                 @endif
 
-                <h3 class="c-forum-list__item-topic">{{ $item['topic'] }}</h3>
+                <div class="c-forum-list__item-info">
+
+                    <h3 class="c-forum-list__item-topic">{{ $item['topic'] }}</h3>
+
+                    @if(isset($item['date']))
+                        <p class="c-forum-list__date">{{ $item['date'] }}</p>
+                    @endif
+
+                </div>
 
                 @if (isset($item['route']))
 

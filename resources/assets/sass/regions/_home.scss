@@ -147,11 +147,6 @@
 
                                 @include span(7 of 15);
                             }
-
-                            @include respond-to(tablet) {
-
-                                @include span(9 of 15);
-                            }
                         }
 
                         &.m-last {
@@ -160,12 +155,6 @@
 
                                 @include span(7 of 15 at 2);
 
-                                padding-top: 48px;
-                            }
-
-                            @include respond-to(tablet) {
-
-                                @include span(5 of 15 at 2);
                             }
                         }
                     }
@@ -245,6 +234,17 @@
             padding-bottom: 72px;
         }
     }
+        .r-home__gallery-title {
+
+            @include wrap('narrow');
+
+            padding-bottom: 24px;
+
+            @include respond-to(tablet) {
+
+                padding-bottom: 36px;
+            }
+        }
 
         .r-home__gallery-wrap {
 

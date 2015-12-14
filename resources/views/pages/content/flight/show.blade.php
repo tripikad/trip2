@@ -294,6 +294,7 @@
             <div class="r-block">
 
                 @include('component.promo', [
+                    'modifiers' => 'm-body',
                     'route' => '#',
                     'image' => \App\Image::getRandom()
                 ])
@@ -594,6 +595,7 @@
             <div class="r-block m-small">
 
                 @include('component.promo', [
+                    'modifiers' => 'm-sidebar-small',
                     'route' => '',
                     'image' => \App\Image::getRandom()
                 ])
@@ -638,6 +640,7 @@
             <div class="r-block m-small">
 
                 @include('component.promo', [
+                    'modifiers' => 'm-sidebar-small',
                     'route' => '',
                     'image' => \App\Image::getRandom()
                 ])
@@ -697,54 +700,65 @@
 
             </div>
 
-            <div class="c-columns m-4-cols">
-
-                <div class="c-columns__item">
-
-                    @include('component.profile', [
-                        'title' => 'Jaanus Jaaniuss',
-                        'age' => '22',
-                        'interests' => 'Rooma',
+            @include('component.travelmate.list', [
+                'modifiers' => 'm-3col',
+                'items' => [
+                    [
+                        'modifiers' => 'm-small',
+                        'image' =>  \App\Image::getRandom(),
+                        'name' => 'Charles Darwin',
                         'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
-
-                </div>
-                <div class="c-columns__item">
-
-                    @include('component.profile', [
-                        'title' => 'Jaanus Jaaniuss',
-                        'age' => '22',
-                        'interests' => 'Rooma',
+                        'sex_and_age' => 'N,28',
+                        'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
+                        'tags' => [
+                            [
+                                'modifiers' => 'm-yellow',
+                                'title' => 'India'
+                            ],
+                            [
+                                'modifiers' => 'm-purple',
+                                'title' => 'Delhi'
+                            ]
+                        ]
+                    ],
+                    [
+                        'modifiers' => 'm-small',
+                        'image' =>  \App\Image::getRandom(),
+                        'name' => 'Epptriin ',
                         'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
-
-                </div>
-                <div class="c-columns__item">
-
-                    @include('component.profile', [
-                        'title' => 'Jaanus Jaaniuss',
-                        'age' => '22',
-                        'interests' => 'Rooma',
+                        'sex_and_age' => 'N,22',
+                        'title' => 'Suusareis Austriasse veebruar-märts 2016',
+                        'tags' => [
+                            [
+                                'modifiers' => 'm-red',
+                                'title' => 'Austria'
+                            ],
+                            [
+                                'modifiers' => 'm-gray',
+                                'title' => 'Suusareis'
+                            ]
+                        ]
+                    ],
+                    [
+                        'modifiers' => 'm-small',
+                        'image' =>  \App\Image::getRandom(),
+                        'name' => 'Silka ',
                         'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
-
-                </div>
-                <div class="c-columns__item">
-
-                    @include('component.profile', [
-                        'title' => 'Jaanus Jaaniuss',
-                        'age' => '22',
-                        'interests' => 'Rooma',
-                        'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
-
-                </div>
-
-            </div>
+                        'sex_and_age' => 'M,32',
+                        'title' => 'Puerto Rico',
+                        'tags' => [
+                            [
+                                'modifiers' => 'm-green',
+                                'title' => 'Puerto Rico'
+                            ],
+                            [
+                                'modifiers' => 'm-gray',
+                                'title' => 'Puhkusereis'
+                            ]
+                        ]
+                    ]
+                ]
+            ])
 
         </div>
 
@@ -755,6 +769,7 @@
         <div class="r-flights__footer-promo-wrap">
 
             @include('component.promo', [
+                'modifiers' => 'm-footer',
                 'route' => '#',
                 'image' => \App\Image::getRandom()
             ])
