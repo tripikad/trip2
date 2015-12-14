@@ -4,7 +4,6 @@ namespace App;
 
 class Main
 {
-
     public static function getBodyFilteredAttribute($object)
     {
         $pattern = '/\[\[([0-9]+)\]\]/';
