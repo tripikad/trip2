@@ -17,6 +17,7 @@ class TravelmateTest extends TestCase
         $day = Carbon::parse($datetime)->day;
         $hour = Carbon::parse($datetime)->hour;
         $minute = Carbon::parse($datetime)->minute;
+        $second = Carbon::parse($datetime)->second;
 
         $this->actingAs($regular_user)
             ->visit('content/travelmate')
@@ -28,6 +29,7 @@ class TravelmateTest extends TestCase
             ->select($day, 'start_at_day')
             ->select($hour, 'start_at_hour')
             ->select($minute, 'start_at_minute')
+            ->select($second, 'start_at_second')
             ->press(trans('content.create.submit.title'))
             ->see(trans('content.store.status.1.info', [
                 'title' => 'Hello title',
@@ -50,6 +52,7 @@ class TravelmateTest extends TestCase
         $day = Carbon::parse($new_datetime)->day;
         $hour = Carbon::parse($new_datetime)->hour;
         $minute = Carbon::parse($new_datetime)->minute;
+        $second = Carbon::parse($new_datetime)->second;
 
         $this->actingAs($regular_user)
                 ->visit("content/travelmate/$content->id")
@@ -61,6 +64,7 @@ class TravelmateTest extends TestCase
                 ->select($day, 'start_at_day')
                 ->select($hour, 'start_at_hour')
                 ->select($minute, 'start_at_minute')
+                ->select($second, 'start_at_second')
                 ->press(trans('content.edit.submit.title'))
                 ->seePageIs("content/travelmate/$content->id")
                 ->see('Hola titulo')
