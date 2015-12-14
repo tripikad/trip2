@@ -2,7 +2,8 @@
 
 namespace App;
 
-class Main {
+class Main
+{
 
     public static function getBodyFilteredAttribute($object)
     {
@@ -19,5 +20,4 @@ class Main {
 
         return nl2br($filteredBody);
     }
-
 }
