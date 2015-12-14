@@ -57,18 +57,7 @@ class Comment extends Model
 
     public function getBodyFilteredAttribute()
     {
-        $pattern = '/\[\[([0-9]+)\]\]/';
-        $filteredBody = $this->body;
-
-        if (preg_match_all($pattern, $filteredBody, $matches)) {
-            foreach ($matches[1] as $match) {
-                if ($image = \App\Image::find($match)) {
-                    $filteredBody = str_replace("[[$image->id]]", '<img src="'.$image->preset('medium').'" />', $filteredBody);
-                }
-            }
-        }
-
-        return nl2br($filteredBody);
+        return Main::getBodyFilteredAttribute($this);
     }
 
     public function getFlags()
