@@ -691,7 +691,7 @@
 
         <div class="r-flights__travel-mates-wrap">
 
-            <div class="r-home__travel-mates-title">
+            <div class="r-flights_travel-mates-title">
 
                 @include('component.title', [
                     'title' => 'Reisikaaslased',

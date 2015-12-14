@@ -4,6 +4,8 @@
     flex-flow: row wrap;
     align-items: center;
     text-decoration: none;
+    border-radius: 50%;
+    background: $color-fill-neutral;
 
     &.m-center {
 
@@ -20,7 +22,22 @@
         height: 100%;
         width: 100%;
     }
+
+    &.m-status {
+
+        padding: 3px;
+    }
 }
+
+        .c-profile__status {
+
+        }
+
+        .c-profile__status-title {
+
+            position: absolute;
+            display: none;
+        }
 
     .c-profile__image-wrap {
 
@@ -95,56 +112,6 @@
                 display: block;
             }
 
-            .c-profile.m-full & {
-
-                display: none;
-            }
-        }
-
-    .c-profile__info {
-
-        flex: 1;
-
-        .c-profile.m-center & {
-
-            flex: inherit;
-        }
-
-        .c-profile.m-mini &,
-        .c-profile.m-micro &,
-        .c-profile.m-full & {
-
-            display: none;
-        }
-    }
-
-        .c-profile__title {
-
-            color: $color-text-link;
-            font-size: $font-size-normal;
-            text-decoration: none;
-
-            span {
-
-                color: $color-text-neutral-dark;
-            }
-        }
-
-            .c-profile__title-link {
-
-                color: $color-text-link;
-                text-decoration: none;
-            }
-
-        .c-profile__interests {
-
-            color: $color-text-neutral-dark;
-            font-size: $font-size-small;
-            margin-top: $spacer / 2;
-
-            .c-profile.m-mini &,
-            .c-profile.m-small &,
-            .c-profile.m-micro &,
             .c-profile.m-full & {
 
                 display: none;

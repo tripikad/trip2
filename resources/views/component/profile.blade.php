@@ -35,6 +35,23 @@ modifiers:
 
 @endif
 
+    @if(isset($status))
+
+        <div class="c-profile__status">
+
+            <div class="c-profile__status-title">
+
+            @include('component.tooltip', [
+                'text' => $status,
+                'modifiers' => 'm-blue m-bottom m-center'
+            ])
+
+            </div>
+
+        </div>
+
+    @endif
+
     <div class="c-profile__image-wrap">
 
         <img src="{{ $image }}" alt="" class="c-profile__image">

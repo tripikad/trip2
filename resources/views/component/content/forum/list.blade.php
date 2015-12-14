@@ -129,7 +129,8 @@ modifiers:
                                 'profile' => [
                                     'image' => $child['profile']['image'],
                                     'title' => $child['profile']['title'],
-                                    'route' => $child['profile']['route']
+                                    'route' => $child['profile']['route'],
+                                    'modifiers' => 'm-mini'
                                 ],
                                 'date' => $child['date'],
                                 'text' => $child['text'],

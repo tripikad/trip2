@@ -16,6 +16,20 @@
             margin-bottom: $spacer * 2.5;
         }
     }
+
+    &.m-flex {
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        &:after,
+        &:before {
+
+            display: none;
+        }
+    }
 }
 
     .r-block__inner {

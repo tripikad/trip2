@@ -95,6 +95,14 @@
                 @include span(14 of 28);
             }
         }
+
+        .c-masthead.m-forum & {
+
+            @include wrap('narrow');
+
+            width: 100%;
+            top: 0;
+        }
     }
 
         .c-masthead__logo {
@@ -114,6 +122,12 @@
             .c-masthead.m-profile & {
 
                 display: none;
+            }
+
+            .c-masthead.m-forum & {
+
+                top: 0;
+                left: 0;
             }
         }
 
@@ -149,6 +163,11 @@
             }
 
             .c-masthead.m-profile & {
+
+                display: none;
+            }
+
+            .c-masthead.m-forum & {
 
                 display: none;
             }
