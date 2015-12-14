@@ -37,6 +37,15 @@
             border-right-color: $transparent;
             border-bottom-color: $color-white;
         }
+
+        &.m-right {
+
+            &:before {
+
+                left: auto;
+                right: $spacer;
+            }
+        }
     }
 
     &.m-bottom {
@@ -50,6 +59,15 @@
             border-left-color: $transparent;
             border-right-color: $transparent;
             border-bottom-color: $transparent;
+        }
+
+        &.m-right {
+
+            &:before {
+
+                left: auto;
+                right: $spacer;
+            }
         }
     }
 

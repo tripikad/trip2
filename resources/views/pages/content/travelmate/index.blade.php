@@ -22,7 +22,8 @@
 
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
-            'image' => \App\Image::getRandom()
+            'image' => \App\Image::getRandom(),
+            'subtitle' => 'Viimase 14 päeva jooksul lisatud 53 kuulutust',
         ])
     </div>
 

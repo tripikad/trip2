@@ -30,6 +30,82 @@
 
 <div class="r-destination">
 
+    <div class="r-destination__extra m-yellow">
+
+        @if (\Auth::user())
+
+            @include('component.destination.extra', [
+                'items' => [
+                    [
+                        'icon' => (count($destination->usersHaveBeen()->where('user_id', \Auth::user()->id))
+                            ?
+                                'icon-pin-filled'
+                            :
+                                'icon-pin'
+                        ),
+                        'title' => $destination->usersHaveBeen()->count(),
+                        'modifiers' => (count($destination->usersHaveBeen()->where('user_id', \Auth::user()->id))
+                            ?
+                                'm-active'
+                            :
+                                ''
+                        ),
+                        'text' => (count($destination->usersHaveBeen()->where('user_id', \Auth::user()->id))
+                            ?
+                                trans('destination.show.user.button.havenotbeen')
+                            :
+                                trans('destination.show.user.button.havebeen')
+                        ),
+                        'route' => route('flag.toggle', ['destination', $destination, 'havebeen'])
+                    ],
+                    [
+                        'icon' => (count($destination->usersWantsToGo()->where('user_id', \Auth::user()->id))
+                            ?
+                                'icon-star-filled'
+                            :
+                                'icon-star'
+                        ),
+                        'title' => $destination->usersWantsToGo()->count(),
+                        'modifiers' => (count($destination->usersWantsToGo()->where('user_id', \Auth::user()->id))
+                            ?
+                                'm-active'
+                            :
+                                ''
+                        ),
+                        'text' => (count($destination->usersWantsToGo()->where('user_id', \Auth::user()->id))
+                            ?
+                                trans('destination.show.user.button.dontwanttogo')
+                            :
+                                trans('destination.show.user.button.wanttogo')
+                        ),
+                        'route' => route('flag.toggle', ['destination', $destination, 'wantstogo'])
+                    ]
+                ]
+            ])
+
+        @else
+
+            @include('component.destination.extra', [
+                'items' => [
+                    [
+                        'icon' => 'icon-pin',
+                        'title' => $destination->usersHaveBeen()->count(),
+                        'text' => 'Have been there',
+                        'route' => ''
+                    ],
+                    [
+                        'icon' => 'icon-pin',
+                        'title' => $destination->usersWantsToGo()->count(),
+                        'text' => 'Want to go there',
+                        'route' => ''
+                    ]
+                ]
+            ])
+
+        @endif
+
+    </div>
+
     <div class="r-destination__masthead">
 
         @include('component.masthead', [
@@ -95,72 +171,16 @@
 
                     <div class="c-columns__item">
 
-                        @include('component.destination.info',[
-                            'modifiers' => 'm-yellow',
-                            'definitions' => [
-                                [
-                                    'term' => trans('destination.show.user.havebeen.title'),
-                                    'definition' => $destination->usersHaveBeen()->count()
-                                ],
-                            ]
-                        ])
+
 
                     </div>
 
                     <div class="c-columns__item">
 
-                        @include('component.destination.info',[
-                            'modifiers' => 'm-yellow',
-                            'definitions' => [
-                                [
-                                    'term' => trans('destination.show.user.wantstogo.title'),
-                                    'definition' => $destination->usersWantsToGo()->count()
-                                ],
-                            ]
-                        ])
+
 
                     </div>
-
-                    @if (\Auth::user())
-
-                        <ul class="c-button-group">
-
-                            <li class="c-button-group__item m-green">
-
-                                @include('component.button',[
-                                    'modifiers' => 'm-small',
-                                    'title' => (count($destination->usersHaveBeen()->where('user_id', \Auth::user()->id))
-                                        ?
-                                            trans('destination.show.user.button.havenotbeen')
-                                        :
-                                            trans('destination.show.user.button.havebeen')
-                                    ),
-                                    'route' => route('flag.toggle', ['destination', $destination, 'havebeen'])
-                                ])
-
-                            </li>
-
-                            <li class="c-button-group__item m-red">
-
-                                @include('component.button',[
-                                    'modifiers' => 'm-secondary m-small',
-                                    'title' => (count($destination->usersWantsToGo()->where('user_id', \Auth::user()->id))
-                                        ?
-                                            trans('destination.show.user.button.dontwanttogo')
-                                        :
-                                            trans('destination.show.user.button.wanttogo')
-                                    ),
-                                    'route' => route('flag.toggle', ['destination', $destination, 'wantstogo'])
-                                ])
-
-                            </li>
-
-                        </ul>
-
-                    @endif
-
                 </div>
-
             </div>
 
             <div class="r-destination__about-map">
@@ -273,6 +293,14 @@
 
                     <div class="r-destination__gallery-wrap">
 
+                        <div class="r-destination__gallery-title">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-yellow',
+                                'title' => 'Viimati lisatud pildid'
+                            ])
+                        </div>
+
                         @include('component.gallery', [
                             'items' => $features['photos']['contents']->transform(function($photo) {
                                 return [
@@ -306,18 +334,53 @@
 
                             </div>
 
-                            @include('component.list', [
-                                'modifiers' => 'm-large',
-                                'items' => $features['news']['contents']->transform(function($new) {
-                                    return [
-                                        'title' => $new->title,
-                                        'route' => route('content.show', [$new->type, $new]),
-                                        'text' => view('component.date.short', [
-                                            'date' => $new->created_at
-                                        ])
-                                    ];
-                                })
-                            ])
+                            <div class="c-columns m-2-cols m-space">
+
+                                <div class="c-columns__item">
+
+                                    @include('component.news', [
+                                        'title' => 'Emirates kompab piire – lennukisse mahutatakse 615 reisijat',
+                                        'modifiers' => 'm-smaller',
+                                        'route' => '#',
+                                        'date' => '',
+                                        'image' => \App\Image::getRandom()
+                                    ])
+                                </div>
+
+                                <div class="c-columns__item">
+
+                                    @include('component.news', [
+                                        'title' => 'Tuhande saare järv Hiinas',
+                                        'modifiers' => 'm-smaller',
+                                        'route' => '#',
+                                        'date' => '',
+                                        'image' => \App\Image::getRandom()
+                                    ])
+                                </div>
+
+                                <div class="c-columns__item">
+
+                                    @include('component.news', [
+                                        'title' => 'EasyJet esitles uusi tehnikat täis vorme',
+                                        'modifiers' => 'm-smaller',
+                                        'route' => '#',
+                                        'date' => '',
+                                        'image' => \App\Image::getRandom()
+                                    ])
+                                </div>
+
+                                <div class="c-columns__item">
+
+                                    @include('component.news', [
+                                        'title' => 'Egiptuse turismist - natuke laiemalt',
+                                        'modifiers' => 'm-smaller',
+                                        'route' => '#',
+                                        'date' => '',
+                                        'image' => \App\Image::getRandom()
+                                    ])
+                                </div>
+
+                            </div>
 
                         @else
 
