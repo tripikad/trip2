@@ -264,7 +264,7 @@ class ContentController extends Controller
                 $time = Carbon::createFromTime(
                     $request->{$name.'_hour'},
                     $request->{$name.'_minute'},
-                    Carbon::now()->second
+                    $request->{$name.'_second'}
                 )->format('H:i:s');
                 $fields[$name] = $date.' '.$time;
             }

@@ -175,6 +175,13 @@ code: |
                         'key' => $key.'_minute'
                     ])
 
+                    @include('component.date.select', [
+                        'from' => 1,
+                        'to' => 60,
+                        'selected' => '00',
+                        'key' => $key.'_second'
+                    ])
+
                 @elseif ($field['type'] == 'currency')
 
                     {!! Form::text($key, null, [
