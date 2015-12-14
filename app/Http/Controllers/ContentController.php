@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
 use App\Content;
@@ -125,6 +126,11 @@ class ContentController extends Controller
     public function store(Request $request, $type)
     {
         $validator = config("content_$type.add.validate") ? config("content_$type.add.validate") : config("content_$type.edit.validate");
+
+        $request->merge(
+            self::fetchDates($request, $type)
+        );
+
         $this->validate($request, $validator);
 
         $fields = [
@@ -193,6 +199,10 @@ class ContentController extends Controller
     {
         $content = \App\Content::findorFail($id);
 
+        $request->merge(
+            self::fetchDates($request, $type)
+        );
+
         $this->validate($request, config("content_$type.edit.validate"));
 
         $fields = [];
@@ -236,6 +246,31 @@ class ContentController extends Controller
         return redirect()
             ->route('content.show', [$type, $content])
             ->with('info', trans('content.update.info', ['title' => $content->title]));
+    }
+
+    private static function fetchDates($request, $type)
+    {
+        $dates_only = collect(config("content_$type.edit.fields"))->where('type', 'datetime');
+
+        $fields = [];
+
+        foreach ($dates_only as $name => $value) {
+            if (! $request->{$name}) {
+                $date = Carbon::createFromDate(
+                    $request->{$name.'_year'},
+                    $request->{$name.'_month'},
+                    $request->{$name.'_day'}
+                )->format('Y-m-d');
+                $time = Carbon::createFromTime(
+                    $request->{$name.'_hour'},
+                    $request->{$name.'_minute'},
+                    $request->{$name.'_second'}
+                )->format('H:i:s');
+                $fields[$name] = $date.' '.$time;
+            }
+        }
+
+        return $fields;
     }
 
     public function status($type, $id, $status)
