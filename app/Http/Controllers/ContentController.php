@@ -22,7 +22,10 @@ class ContentController extends Controller
 
         $contents = Content::whereType($type)
             ->with(config("content_$type.index.with"))
-            ->latest(config("content_$type.index.latest"))
+            ->orderBy(
+                config("content_$type.index.orderBy.field"),
+                config("content_$type.index.orderBy.order")
+            )
             ->whereStatus(1);
 
         if ($request->destination) {

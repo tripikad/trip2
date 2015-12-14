@@ -12,7 +12,10 @@ return [
     'index' => [
 
         'with' => ['user', 'destinations', 'topics'],
-        'latest' => 'updated_at',
+        'orderBy' => [
+            'field' => 'updated_at',
+            'order' => 'desc',
+        ],
         'paginate' => 25,
     ],
 
