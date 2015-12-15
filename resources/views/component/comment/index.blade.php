@@ -15,7 +15,7 @@
             ],
             'date' => view('component.date.relative', ['date' => $comment->created_at]),
             'text' => nl2br($comment->body_filtered),
-            'actions' => view('component.actions', ['actions' => $content->getActions()]),
+            'actions' => view('component.actions', ['actions' => $comment->getActions()]),
             'thumbs' => view('component.flags', ['flags' => $comment->getFlags()]),
         ])
 
