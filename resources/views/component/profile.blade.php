@@ -15,6 +15,9 @@ code: |
         'status' => [
             'modifiers' => '',
             'position' => ''
+        ],
+        'editor' => [
+            'modifiers' => ''
         ]
     ])
 
@@ -38,7 +41,19 @@ modifiers:
 
 @endif
 
+
     @if(isset($status))
+
+        @if(isset($status['editor']))
+
+            <div class="c-profile__bubble {{ $status['modifiers'] or '' }}">
+
+                @include('component.svg.sprite', [
+                    'name' => 'icon-star-filled'
+                ])
+            </div>
+
+        @endif
 
         <div class="c-profile__status {{ $status['modifiers'] or '' }}">
 
@@ -52,10 +67,22 @@ modifiers:
 
                     <div class="c-profile__status-title">
 
-                        @include('component.tooltip', [
-                            'text' => 'Amatöör',
-                            'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                        ])
+                        @if(isset($status['editor']))
+
+                            @include('component.tooltip', [
+                                'text' => 'Amatöör / Toimetaja',
+                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
+                            ])
+
+                        @else
+
+                            @include('component.tooltip', [
+                                'text' => 'Amatöör',
+                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
+                            ])
+
+                        @endif
+
                     </div>
 
                 @elseif($status['position'] == 2)
@@ -66,10 +93,21 @@ modifiers:
 
                     <div class="c-profile__status-title">
 
-                        @include('component.tooltip', [
-                            'text' => 'Edasijõudnud',
-                            'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                        ])
+                        @if(isset($status['editor']))
+
+                            @include('component.tooltip', [
+                                'text' => 'Edasijõudnud / Toimetaja',
+                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
+                            ])
+
+                        @else
+
+                            @include('component.tooltip', [
+                                'text' => 'Edasijõudnud',
+                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
+                            ])
+
+                        @endif
                     </div>
 
                 @elseif($status['position'] == 3)
@@ -80,10 +118,21 @@ modifiers:
 
                     <div class="c-profile__status-title">
 
-                        @include('component.tooltip', [
-                            'text' => 'Tripikas',
-                            'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                        ])
+                        @if(isset($status['editor']))
+
+                            @include('component.tooltip', [
+                                'text' => 'Tripikas / Toimetaja',
+                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
+                            ])
+
+                        @else
+
+                            @include('component.tooltip', [
+                                'text' => 'Tripikas',
+                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
+                            ])
+
+                        @endif
                     </div>
 
                 @else
@@ -94,10 +143,21 @@ modifiers:
 
                     <div class="c-profile__status-title">
 
-                        @include('component.tooltip', [
-                            'text' => 'Guru',
-                            'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                        ])
+                        @if(isset($status['editor']))
+
+                            @include('component.tooltip', [
+                                'text' => 'Guru / Toimetaja',
+                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
+                            ])
+
+                        @else
+
+                            @include('component.tooltip', [
+                                'text' => 'Guru',
+                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
+                            ])
+
+                        @endif
                     </div>
 
                 @endif

@@ -8,14 +8,14 @@
 
     .c-forum-post__title {
 
-        font-size: $font-size-largest + 6;
+        font-size: $font-size-larger;
         font-weight: $font-weight-bold;
         line-height: 1.15;
-
-        padding: $spacer * 2 $spacer * 2 0;
+        padding: $spacer * 2 $spacer * 2 0 $spacer * 3;
 
         @include respond-to(tablet) {
 
+            font-size: $font-size-largest + 6;
             padding: $spacer * 3 $spacer * 4 0;
         }
     }
@@ -23,7 +23,7 @@
     .c-forum-post__content {
 
         position: relative;
-        padding: $spacer * 2;
+        padding: $spacer * 3 $spacer * 2 $spacer * 2 $spacer * 3;
 
         @include respond-to(tablet) {
 
@@ -35,7 +35,7 @@
 
             position: absolute;
             left: -$spacer * 2;
-            top: $spacer * 2;
+            top: $spacer * 1.5;
             width: $spacer * 4;
             height: $spacer * 4;
 
@@ -49,7 +49,12 @@
                 width: $spacer * 5;
                 height: $spacer * 5;
                 left: -$spacer * 2.5;
-                top: $spacer + 3;
+                top: $spacer;
+
+                @include respond-to(tablet) {
+
+                    top: $spacer + 3;
+                }
             }
         }
 

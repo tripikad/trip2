@@ -40,7 +40,8 @@
                     'route' => route('user.show', [$content->user]),
                     'status' => [
                         'modifiers' => 'm-purple',
-                        'position' => '3'
+                        'position' => '3',
+                        'editor' => true
                     ]
                 ],
                 'title' => $content->title,
@@ -63,7 +64,7 @@
                 ]
             ])
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-body',

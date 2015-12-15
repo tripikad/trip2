@@ -53,7 +53,7 @@ code: |
                     'modifiers' => $profile['modifiers'],
                     'image' => $profile['image'],
                     'title' => '',
-                    'status' => $profile['status']
+                    'status' => $profile['status'],
                 ])
 
             </div>
