@@ -15,7 +15,7 @@
 
         @include respond-to(tablet) {
 
-            padding: 0 $spacer * 2 0 $spacer * 10;
+            padding: 0 $spacer * 2 0 $spacer * 8;
         }
     }
 }
@@ -46,7 +46,7 @@
 
             @include respond-to(tablet) {
 
-                left: $spacer * 3.3;
+                left: $spacer;
                 top: 0;
             }
         }

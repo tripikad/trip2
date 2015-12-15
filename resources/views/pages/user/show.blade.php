@@ -342,6 +342,18 @@
                     @include('component.user.extra', [
                         'items' => [
                             [
+                                'icon' => 'icon-pin',
+                                'title' => '283',
+                                'text' => 'Jälgijaid',
+                                'route' => ''
+                            ],
+                            [
+                                'icon' => 'icon-pin',
+                                'title' => '12',
+                                'text' => 'Meeldimisi',
+                                'route' => ''
+                            ],
+                            [
                                 'icon' => 'icon-comment',
                                 'title' =>
                                     (isset($content_count) ? intval($content_count) : 0)
