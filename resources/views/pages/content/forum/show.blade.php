@@ -63,7 +63,24 @@
                 ]
             ])
 
+            <div class="r-block m-small">
+
+                @include('component.promo', [
+                    'modifiers' => 'm-body',
+                    'image' => \App\Image::getRandom(),
+                    'route' => '#'
+                ])
+
+            </div>
+
             @include('component.comment.index', ['comments' => $comments])
+
+            <div class="r-block">
+
+                @include('component.pagination.numbered', [
+                    'collection' => false
+                ])
+            </div>
 
             @if (\Auth::check())
 

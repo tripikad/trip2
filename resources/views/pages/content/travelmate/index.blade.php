@@ -97,9 +97,9 @@
 
             @endif
 
-            @include('component.pagination',
-                ['collection' => $contents]
-            )
+            @include('component.pagination',[
+                'collection' => $contents
+            ])
 
         </div>
 
