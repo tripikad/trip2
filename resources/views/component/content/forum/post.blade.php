@@ -9,7 +9,11 @@ code: |
             'modifiers' => '',
             'image' => '',
             'title' => '',
-            'route' => ''
+            'route' => '',
+            'status' => [
+                'modifiers' => '',
+                'position' => ''
+            ]
         ],
         'date' => '',
         'text' => '',
@@ -47,8 +51,8 @@ code: |
                 @include('component.profile', [
                     'modifiers' => $profile['modifiers'],
                     'image' => $profile['image'],
-                    'status' => '1',
-                    'title' => ''
+                    'title' => '',
+                    'status' => $profile['status']
                 ])
 
             </div>
@@ -89,6 +93,16 @@ code: |
             </div>
 
         </div>
+
+        @if(isset($actions))
+
+        <div class="c-forum-post__actions">
+
+            {!! $actions !!}
+
+        </div>
+
+        @endif
 
         @if(isset($thumbs) || isset($tags))
 

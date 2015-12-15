@@ -27,7 +27,7 @@ code: |
         ]) !!}
 
         {!! Form::submit($action['title'], [
-            'class' => 'c-link'
+            'class' => 'c-actions__link'
         ]) !!}
 
         {!! Form::close() !!}

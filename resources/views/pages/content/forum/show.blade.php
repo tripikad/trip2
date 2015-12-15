@@ -26,12 +26,17 @@
                     'modifiers' => 'm-full m-status',
                     'image' => $content->user->imagePreset(),
                     'title' => $content->user->name,
-                    'route' => route('user.show', [$content->user])
+                    'route' => route('user.show', [$content->user]),
+                    'status' => [
+                        'modifiers' => 'm-purple',
+                        'position' => '3'
+                    ]
                 ],
                 'title' => $content->title,
                 'date' => view('component.date.relative', ['date' => $content->created_at]),
                 'date_edit' => '10. jaanuar, 17:14',
                 'text' => $content->body_filtered,
+                'actions' => view('component.actions', ['actions' => $content->getActions()]),
                 'thumbs' => view('component.flags', ['flags' => $content->getFlags()]),
                 'tags' => [
                     [
