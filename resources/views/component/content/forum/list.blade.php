@@ -13,7 +13,7 @@ code: |
                 'date' => '',
                 'profile' => [
                     'modifiers' => 'm-mini',
-                    'image' => \App\Image::getRandom()
+                    'image' => \App\Image::getRandom(),
                 ],
                 'badge' => [
                     'modifiers' => 'm-inverted',
@@ -32,7 +32,11 @@ code: |
                             'modifiers' => 'm-mini',
                             'image' => \App\Image::getRandom(),
                             'title' => 'Charles Darwin',
-                            'route' => ''
+                            'route' => '',
+                            'status' => [
+                                'modifiers' => 'm-blue',
+                                'position' => '1'
+                            ]
                         ],
                         'date' => '12. jaanuar, 12:31',
                         'text' => 'Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi.',
@@ -130,7 +134,8 @@ modifiers:
                                     'image' => $child['profile']['image'],
                                     'title' => $child['profile']['title'],
                                     'route' => $child['profile']['route'],
-                                    'modifiers' => 'm-mini'
+                                    'modifiers' => 'm-full m-status',
+                                    'status' => $child['profile']['status']
                                 ],
                                 'date' => $child['date'],
                                 'text' => $child['text'],

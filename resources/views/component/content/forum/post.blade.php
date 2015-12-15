@@ -15,6 +15,7 @@ code: |
                 'position' => ''
             ]
         ],
+        'actions' => '',
         'date' => '',
         'text' => '',
         'more' => [
