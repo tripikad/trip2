@@ -51,7 +51,15 @@ modifiers:
 
         </div>
 
+        @if (isset($title))
+
+        <h1 class="c-masthead__title">{{ $title }}</h1>
+
+        @else
+
         <h1 class="c-masthead__title">@yield('title')</h1>
+
+        @endif
 
         @if (isset($subtitle))
 

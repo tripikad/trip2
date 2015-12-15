@@ -13,7 +13,8 @@
     <div class="r-forum__masthead">
 
         @include('component.masthead', [
-            'modifiers' => 'm-forum'
+            'modifiers' => 'm-forum',
+            'title' => 'forum'
         ])
     </div>
 
