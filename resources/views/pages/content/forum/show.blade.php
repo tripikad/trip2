@@ -74,13 +74,24 @@
 
             </div>
 
-            @include('component.comment.index', ['comments' => $comments])
+
+            @if (method_exists($comments, 'currentPage'))
+
+                @include('component.comment.index', [
+                    'comments' => $comments->forPage(
+                        $comments->currentPage(),
+                        $comments->perPage()
+                    )
+                ])
+
+            @endif
 
             <div class="r-block">
 
                 @include('component.pagination.numbered', [
-                    'collection' => false
+                    'collection' => $comments
                 ])
+
             </div>
 
             @if (\Auth::check())
