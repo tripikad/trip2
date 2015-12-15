@@ -61,6 +61,15 @@
             border-bottom-color: $transparent;
         }
 
+        &.m-center {
+
+            &:before {
+
+                left: 50%;
+                margin-left: -$spacer / 2;
+            }
+        }
+
         &.m-right {
 
             &:before {
@@ -92,6 +101,33 @@
             &:before {
 
                 @include color-modifiers-dark-and(border-top-color);
+
+                border-top-color: $color-white;
+            }
+        }
+    }
+
+    &.m-inverted-light {
+
+        @include color-modifiers-and(background);
+
+        color: $color-white;
+
+        &.m-top {
+
+            &:before {
+
+                @include color-modifiers-and(border-bottom-color);
+
+                border-bottom-color: $color-white;
+            }
+        }
+
+        &.m-bottom {
+
+            &:before {
+
+                @include color-modifiers-and(border-top-color);
 
                 border-top-color: $color-white;
             }

@@ -2,55 +2,87 @@
 
     <div class="c-flag__item m-green">
 
-        <div class="c-flag__item-text">
+        @if ($flags['good']['flaggable'])
 
-            @if ($flags['good']['flaggable'])
+            <a href="{{ route('flag.toggle', [
+                $flags['good']['flaggable_type'],
+                $flags['good']['flaggable_id'],
+                $flags['good']['flag_type'],
+                isset($flags['good']['return']) ? $flags['good']['return'] : null,
+            ]) }}" class="c-flag__item-link js-flag">
 
-                <a href="{{ route('flag.toggle', [
-                    $flags['good']['flaggable_type'],
-                    $flags['good']['flaggable_id'],
-                    $flags['good']['flag_type'],
-                    isset($flags['good']['return']) ? $flags['good']['return'] : null,
-                ]) }}" class="c-flag__item-link js-ajax_get">
+        @endif
 
-            @endif
+        <div class="c-flag__item-icon m-active js-icon">
+
+            @include('component.svg.sprite', [
+                'name' => 'icon-thumb-up'
+            ])
+
+        </div>
+
+        <div class="c-flag__item-icon m-filled js-icon-filled">
+
+            @include('component.svg.sprite', [
+                'name' => 'icon-thumb-up-filled'
+            ])
+
+        </div>
+
+        <div class="c-flag__item-text js-flag-text">
 
             {{ $flags['good']['value'] }}
 
-            @if ($flags['good']['flaggable'])
-
-                </a>
-
-            @endif
-
         </div>
+
+        @if ($flags['good']['flaggable'])
+
+            </a>
+
+        @endif
 
     </div>
 
     <div class="c-flag__item m-red">
 
-        <div class="c-flag__item-text">
+        @if ($flags['bad']['flaggable'])
 
-            @if ($flags['bad']['flaggable'])
+            <a href="{{ route('flag.toggle', [
+                $flags['bad']['flaggable_type'],
+                $flags['bad']['flaggable_id'],
+                $flags['bad']['flag_type'],
+                isset($flags['bad']['return']) ? $flags['bad']['return'] : null,
+            ]) }}" class="c-flag__item-link js-flag">
 
-                <a href="{{ route('flag.toggle', [
-                    $flags['bad']['flaggable_type'],
-                    $flags['bad']['flaggable_id'],
-                    $flags['bad']['flag_type'],
-                    isset($flags['bad']['return']) ? $flags['bad']['return'] : null,
-                ]) }}" class="c-flag__item-link js-ajax_get">
+        @endif
 
-            @endif
+        <div class="c-flag__item-icon m-active js-icon">
+
+            @include('component.svg.sprite', [
+                'name' => 'icon-thumb-down'
+            ])
+
+        </div>
+
+        <div class="c-flag__item-icon m-filled js-icon-filled">
+
+            @include('component.svg.sprite', [
+                'name' => 'icon-thumb-down-filled'
+            ])
+
+        </div>
+
+        <div class="c-flag__item-text js-flag-text">
 
             {{ $flags['bad']['value'] }}
 
-            @if ($flags['bad']['flaggable'])
-
-                </a>
-
-            @endif
-
         </div>
+
+        @if ($flags['bad']['flaggable'])
+
+            </a>
+
+        @endif
 
     </div>
 

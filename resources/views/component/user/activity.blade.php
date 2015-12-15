@@ -19,7 +19,11 @@
                         'profile' => [
                             'image' => $item->user->imagePreset(),
                             'title' => $item->user->title,
-                            'route' => route('user.show', [$item->user])
+                            'route' => route('user.show', [$item->user]),
+                            'status' => [
+                                'modifiers' => 'm-green',
+                                'position' => '1'
+                            ]
                         ],
                         'date' => view('component.date.long', [
                             'date' => $item->created_at
@@ -51,7 +55,11 @@
                         'profile' => [
                             'image' => $item->user->imagePreset(),
                             'title' => $item->user->title,
-                            'route' => route('user.show', [$item->user])
+                            'route' => route('user.show', [$item->user]),
+                            'status' => [
+                                'modifiers' => 'm-green',
+                                'position' => '1'
+                            ]
                         ],
                         'date' => view('component.date.long', [
                             'date' => $item->created_at

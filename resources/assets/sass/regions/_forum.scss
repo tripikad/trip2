@@ -1,8 +1,52 @@
 .r-forum {}
 
+    .r-forum__masthead {
+
+        .r-forum.m-single & {
+
+            position: relative;
+        }
+    }
+
+    .r-forum__map {
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        display: block;
+        height: 100%;
+        width: 50%;
+    }
+
+        .r-forum__map-inner {
+
+            position: absolute;
+            top: -40%;
+            left: -40%;
+            width: 150%;
+            height: 150%;
+        }
+
+
     .r-forum__wrap {
 
-        @include wrap();
+        @include wrap('narrow');
+
+        .r-forum.m-single & {
+
+            @include respond-to(tablet) {
+
+                position: relative;
+                z-index: 100;
+                margin-top: -$spacer * 12;
+            }
+
+            @include respond-to(desktop) {
+
+                margin-top: -$spacer * 20;
+            }
+        }
     }
 
     .r-forum__content {
@@ -19,6 +63,8 @@
             @include respond-to(tablet) {
 
                 @include span(14 of 24);
+
+                padding-top: 0;
             }
         }
     }
@@ -37,17 +83,57 @@
             @include respond-to(tablet) {
 
                 @include span(8 of 24 at 3);
+
+                padding-top: 0;
             }
         }
     }
 
-        .r-forum__sidebar-block {
+    .r-forum__additional {
 
-            margin-bottom: $spacer * 2.5;
+        @include clearfix;
+
+        padding: $spacer * 4 0 $spacer * 2;
+        background: $color-fill-neutral-light;
+    }
+
+        .r-forum__additional-wrap {
+
+            @include wrap('narrow');
         }
 
-            .r-forum__sidebar-block-inner {
+            .r-forum__additional-column {
 
-                padding: $spacer * 3;
-                background: $color-fill-neutral-light;
+                &.m-first {
+
+                    padding-bottom: 48px;
+
+                    @include respond-to(tablet) {
+
+                        @include span(4 of 24);
+
+                        padding-bottom: 0;
+                    }
+                }
+
+                &.m-last {
+
+                    @include respond-to(tablet) {
+
+                        @include span(18.5 of 24 at 2.5);
+                    }
+                }
             }
+
+    .r-forum__footer-promo {
+
+        background: $color-fill-neutral-light;
+        margin-bottom: -$spacer * 4;
+    }
+
+        .r-forum__footer-promo-wrap {
+
+            @include wrap('narrow');
+            position: relative;
+            z-index: 2;
+        }

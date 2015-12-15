@@ -66,8 +66,8 @@
 
     </div>
 
-    @include('component.pagination',
-        ['collection' => $images]
-    )
+    @include('component.pagination.default', [
+        'collection' => $images
+    ])
 
 @stop

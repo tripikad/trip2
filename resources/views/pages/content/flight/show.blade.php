@@ -420,8 +420,14 @@
                         'profile' => [
                             'image' => \App\Image::getRandom(),
                             'title' => 'Charles Darwin',
-                            'route' => ''
+                            'route' => '',
+                            'modifiers' => 'm-full m-status',
+                            'status' => [
+                                'modifiers' => 'm-blue',
+                                'position' => '1'
+                            ]
                         ],
+                        'actions' => view('component.actions', ['actions' => $content->getActions()]),
                         'date' => '12. jaanuar, 12:31',
                         'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p><p>Kuna mul oli plaanis arengumaades maapiirkondades kohalikke (arvatavasti) igasuguse litsentsita reisijuhte kasutada, näiteks kuskilt väikesest kohast ümberkaudsete külade üleöö külastamiseks ehk pikad jalgsimatkad mägistes piirkondades, oli tarvis, et juhul kui juhtub õnnetus, see ka korvatakse. Tegemist ei olnud siis spordiga, vaid lihtsalt keskmisest veidi koormavamate matkadega. Kokkuvõttes oli sel ajal vaid Ifil kindlustuses selline asi sees, sai ka kirjalikult üle küsitud (et oleks tõestusmaterjal hiljem!) ning teised firmad pakkusid seda lisakaitse all päris räiga lisahinnaga või ei võtnud üldse jutule, kui giidi litsentsi poleks ette näidata.</p>',
                     ])
@@ -430,8 +436,14 @@
                         'profile' => [
                             'image' => \App\Image::getRandom(),
                             'title' => 'Charles Darwin',
-                            'route' => ''
+                            'route' => '',
+                            'modifiers' => 'm-full m-status',
+                            'status' => [
+                                'modifiers' => 'm-red',
+                                'position' => '2'
+                            ]
                         ],
+                        'actions' => view('component.actions', ['actions' => $content->getActions()]),
                         'date' => '12. jaanuar, 12:31',
                         'text' => '<p>Tegemist ei olnud siis spordiga, vaid lihtsalt keskmisest veidi koormavamate matkadega. Kokkuvõttes oli sel ajal vaid Ifil kindlustuses selline asi sees, sai ka kirjalikult üle küsitud (et oleks tõestusmaterjal hiljem!) ning teised firmad pakkusid seda lisakaitse all päris räiga lisahinnaga või ei võtnud üldse jutule, kui giidi litsentsi poleks ette näidata.</p>',
                     ])
@@ -691,7 +703,7 @@
 
         <div class="r-flights__travel-mates-wrap">
 
-            <div class="r-home__travel-mates-title">
+            <div class="r-flights_travel-mates-title">
 
                 @include('component.title', [
                     'title' => 'Reisikaaslased',

@@ -4,6 +4,7 @@
     flex-flow: row wrap;
     align-items: center;
     text-decoration: none;
+    border-radius: 50%;
 
     &.m-center {
 
@@ -20,7 +21,120 @@
         height: 100%;
         width: 100%;
     }
+
+    &.m-status {
+
+        padding: 4px;
+        background: $color-fill-neutral;
+    }
 }
+
+    .c-profile__bubble {
+
+        @include color-modifiers(background);
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        display: block;
+        height: $spacer + 4;
+        width: $spacer + 4;
+        border-radius: 50%;
+
+        svg {
+
+            fill: $color-white;
+            transform: scale(0.6);
+        }
+    }
+
+    .c-profile__status {
+
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+        .c-profile__status-pie {
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+
+            &.m-25,
+            &.m-50 {
+
+                background: $color-fill-neutral;
+            }
+
+            &.m-75,
+            &.m-100 {
+
+                @include color-modifiers-and(background);
+            }
+        }
+
+            .c-profile__status-pie-inner {
+
+                position: absolute;
+                width: 100%;
+                height: 100%;
+
+                .c-profile__status-pie.m-25 & {
+
+                    @include color-modifiers-and(background);
+
+                    top: -50%;
+                    left: 50%;
+                    margin-left: -1px;
+                }
+
+                .c-profile__status-pie.m-50 & {
+
+                    @include color-modifiers-and(background);
+
+                    top: 0;
+                    left: 50%;
+                    margin-left: -1px;
+                    background: $color-fill-neutral;
+                }
+
+                .c-profile__status-pie.m-75 & {
+
+                    top: -50%;
+                    left: -50%;
+                    margin-left: -1px;
+                    background: $color-fill-neutral;
+                }
+            }
+
+        .c-profile__status-title {
+
+            position: absolute;
+            z-index: 20;
+            display: none;
+
+            .c-profile:hover & {
+
+                @include respond-to(tablet) {
+
+                    display: block;
+                    top: -$spacer * 4 + 4;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
 
     .c-profile__image-wrap {
 
@@ -53,6 +167,12 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
+        }
+
+        .c-profile.m-status & {
+
+            position: relative;
+            z-index: 10;
         }
     }
 
@@ -95,56 +215,6 @@
                 display: block;
             }
 
-            .c-profile.m-full & {
-
-                display: none;
-            }
-        }
-
-    .c-profile__info {
-
-        flex: 1;
-
-        .c-profile.m-center & {
-
-            flex: inherit;
-        }
-
-        .c-profile.m-mini &,
-        .c-profile.m-micro &,
-        .c-profile.m-full & {
-
-            display: none;
-        }
-    }
-
-        .c-profile__title {
-
-            color: $color-text-link;
-            font-size: $font-size-normal;
-            text-decoration: none;
-
-            span {
-
-                color: $color-text-neutral-dark;
-            }
-        }
-
-            .c-profile__title-link {
-
-                color: $color-text-link;
-                text-decoration: none;
-            }
-
-        .c-profile__interests {
-
-            color: $color-text-neutral-dark;
-            font-size: $font-size-small;
-            margin-top: $spacer / 2;
-
-            .c-profile.m-mini &,
-            .c-profile.m-small &,
-            .c-profile.m-micro &,
             .c-profile.m-full & {
 
                 display: none;

@@ -16,6 +16,30 @@
             margin-bottom: $spacer * 2.5;
         }
     }
+
+    &.m-mobile-hide {
+
+        display: none;
+
+        @include respond-to(tablet) {
+
+            display: block;
+        }
+    }
+
+    &.m-flex {
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        &:after,
+        &:before {
+
+            display: none;
+        }
+    }
 }
 
     .r-block__inner {

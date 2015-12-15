@@ -7,16 +7,11 @@
 
     .c-flag__item {
 
-        @include color-modifiers(background);
-
-        border-radius: 50%;
         align-items: center;
         justify-content: center;
         text-align: center;
         display: flex;
-        width: $spacer * 2.5;
-        height: $spacer * 2.5;
-        margin-left: $spacer;
+        margin-left: $spacer * 1.5;
 
         &:first-child {
 
@@ -24,35 +19,66 @@
         }
     }
 
-        .c-flag__item-text {
+        .c-flag__item-link {
 
-            @include font-smoothing;
-
-            font-size: $font-size-medium;
-            font-family: $font-primary;
-            font-weight: $font-weight-medium;
-            color: $color-fill-neutral;
+            color: $color-text-gray;
+            text-decoration: none;
+            width: 100%;
+            height: $spacer * 2.5;
             align-items: center;
             justify-content: center;
             text-align: center;
             display: flex;
-            width: 100%;
-            height: $spacer * 2.5;
+
+            &:hover {
+
+                @include color-modifiers-and(color);
+            }
+
+            &.m-active {
+
+                @include color-modifiers-and(color);
+            }
         }
 
-            .c-flag__item-link {
+            .c-flag__item-icon {
 
-                color: $color-white;
-                text-decoration: none;
-                width: 100%;
+                width: $spacer * 2.5;
                 height: $spacer * 2.5;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                display: flex;
+                flex: 0 0 $spacer * 2.5;
+                margin-right: $spacer / 2;
+                display: none;
 
-                &:hover {
+                &.m-active {
 
-                    color: $color-fill-neutral;
+                    display: block;
                 }
+
+                &.m-filled {
+
+                    svg {
+
+                        @include color-modifiers-and(fill);
+                    }
+                }
+
+                svg {
+
+                    fill: $color-text-gray;
+
+                    .c-flag__item-link:hover & {
+
+                        @include color-modifiers-and(fill);
+                    }
+                }
+            }
+
+            .c-flag__item-text {
+
+                @include font-smoothing;
+
+                font-size: $font-size-small;
+                font-family: $font-primary;
+                font-weight: $font-weight-medium;
+                flex: 1;
             }

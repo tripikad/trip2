@@ -9,6 +9,7 @@ use App\Content;
 use App\Destination;
 use App\Topic;
 use App\Image;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ContentController extends Controller
 {
@@ -87,6 +88,13 @@ class ContentController extends Controller
         $comments = $content->comments->filter(function ($comment) {
             return $comment->status || (Auth::check() && Auth::user()->hasRole('admin'));
         });
+
+        $comments = new LengthAwarePaginator(
+            $comments,
+            $comments->count(),
+            config('content_'.$type.'.index.paginate')
+        );
+        $comments->setPath(route('content.show', [$type, $id]));
 
         if (view()->exists('pages.content.'.$type.'.show')) {
             $view = 'pages.content.'.$type.'.show';

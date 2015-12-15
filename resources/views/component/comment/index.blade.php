@@ -2,17 +2,21 @@
 
     @foreach ($comments as $index => $comment)
 
-        @include('component.row', [
+        @include('component.content.forum.post', [
             'profile' => [
-                'modifiers' => 'm-small',
+                'modifiers' => 'm-full m-status',
                 'image' => $comment->user->imagePreset('xsmall_square'),
-                'route' => route('user.show', [$comment->user])
+                'title' => $comment->user->name,
+                'route' => route('user.show', [$comment->user]),
+                'status' => [
+                    'modifiers' => 'm-blue',
+                    'position' => '1'
+                ]
             ],
-            'text' => view('component.comment.text', ['comment' => $comment]),
+            'date' => view('component.date.relative', ['date' => $comment->created_at]),
+            'text' => nl2br($comment->body_filtered),
             'actions' => view('component.actions', ['actions' => $comment->getActions()]),
-            'extra' => view('component.flags', ['flags' => $comment->getFlags()]),
-            'body' => nl2br($comment->body_filtered),
-            'modifiers' => 'm-image m-quote'
+            'thumbs' => view('component.flags', ['flags' => $comment->getFlags()]),
         ])
 
     @endforeach
