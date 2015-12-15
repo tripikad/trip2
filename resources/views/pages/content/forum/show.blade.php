@@ -16,6 +16,16 @@
             'modifiers' => 'm-forum',
             'title' => 'forum'
         ])
+
+        <div class="r-forum__map">
+
+            <div class="r-forum__map-inner">
+
+                @include('component.map', [
+                    'modifiers' => 'm-forum'
+                ])
+            </div>
+        </div>
     </div>
 
     <div class="r-forum__wrap">
