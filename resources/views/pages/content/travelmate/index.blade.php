@@ -97,7 +97,7 @@
 
             @endif
 
-            @include('component.pagination',[
+            @include('component.pagination.default',[
                 'collection' => $contents
             ])
 

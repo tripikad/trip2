@@ -168,13 +168,14 @@
 
                 <div class="r-block__footer">
 
-                    @include('component.pagination', [
+                    @include('component.pagination.default', [
                         'collection' => $contents,
                         'text' => [
                             'next' => 'Vanemad pakkumised',
                             'previous' => 'Uuemad pakkumised',
                         ]
                     ])
+
                 </div>
             </div>
 

@@ -35,9 +35,10 @@
 
                 @endforeach
 
-                @include('component.pagination',
-                    ['collection' => $contents]
-                )
+                @include('component.pagination.default', [
+                    'collection' => $contents
+                ])
+
             </div>
 
             <div class="r-forum__sidebar">
