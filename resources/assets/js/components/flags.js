@@ -4,7 +4,6 @@ $('.js-flag').stop(true, true).click(function (e){
 
     var element = $(this),
         textContainer = element.find('.js-flag-text'),
-        textContainerValue = parseInt(textContainer.text(), 10),
         icon = element.find('.js-icon'),
         iconFilled = element.find('.js-icon-filled'),
         url = element.attr('href');
