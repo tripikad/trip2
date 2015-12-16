@@ -87,13 +87,12 @@
 
             .r-user__info-level {
 
-                display: block;
                 position: absolute;
-                bottom: -$spacer;
                 z-index: 30;
+                bottom: -$spacer;
                 left: 50%;
-                transform: translateX(-50%);
                 display: none;
+                transform: translateX(-50%);
 
                 @include respond-to(tablet) {
 
