@@ -65,6 +65,8 @@ modifiers:
                         <span class="c-profile__status-pie-inner"></span>
                     </div>
 
+                    @if(!isset($status['tooltip']))
+
                     <div class="c-profile__status-title">
 
                         @if(isset($status['editor']))
@@ -85,11 +87,15 @@ modifiers:
 
                     </div>
 
+                    @endif
+
                 @elseif($status['position'] == 2)
 
                     <div class="c-profile__status-pie m-50">
                         <span class="c-profile__status-pie-inner"></span>
                     </div>
+
+                    @if(!isset($status['tooltip']))
 
                     <div class="c-profile__status-title">
 
@@ -110,11 +116,15 @@ modifiers:
                         @endif
                     </div>
 
+                    @endif
+
                 @elseif($status['position'] == 3)
 
                     <div class="c-profile__status-pie m-75">
                         <span class="c-profile__status-pie-inner"></span>
                     </div>
+
+                    @if(!isset($status['tooltip']))
 
                     <div class="c-profile__status-title">
 
@@ -135,11 +145,15 @@ modifiers:
                         @endif
                     </div>
 
+                    @endif
+
                 @else
 
                     <div class="c-profile__status-pie m-100">
                         <span class="c-profile__status-pie-inner"></span>
                     </div>
+
+                    @if(!isset($status['tooltip']))
 
                     <div class="c-profile__status-title">
 
@@ -159,6 +173,8 @@ modifiers:
 
                         @endif
                     </div>
+
+                    @endif
 
                 @endif
 

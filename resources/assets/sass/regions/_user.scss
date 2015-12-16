@@ -5,6 +5,7 @@
 
 .r-user__header {
 
+    @include color-modifiers-and(background);
     overflow: hidden;
 }
 
@@ -14,8 +15,6 @@
 }
 
 .r-user__info {
-
-    @include color-modifiers-and(background);
 
     position: relative;
     padding-bottom: $spacer * 4;
@@ -30,17 +29,17 @@
 
         @include respond-to(tablet) {
 
-            right: -$spacer * 8;
+            right: 10%;
+            top: 0;
+            width: 80%;
             display: block;
-            width: 100%;
         }
 
         @include respond-to(desktop) {
 
+            @include wrap('narrow');
             right: 0;
-            top: -$spacer * 32;
-            height: $spacer * 52;
-            width: $spacer * 92;
+            width: 100%;
         }
 
         @include respond-to(desktop-large) {
@@ -60,23 +59,21 @@
 
         .r-user__info-image {
 
-            @include color-modifiers-and(border-color);
-
             position: relative;
-            top: -$spacer * 4;
+            margin-top: -$spacer * 7;
+            margin-bottom: $spacer * 2;
             z-index: 2;
             display: block;
-            width: $spacer * 8;
-            height: $spacer * 8;
-            border-width: 6px;
-            border-style: solid;
+            width: $spacer * 14;
+            height: $spacer * 14;
             border-radius: 50%;
 
             @include respond-to(tablet) {
 
-                top: -$spacer * 8;
-                width: $spacer * 16;
-                height: $spacer * 16;
+                margin-top: -$spacer * 8.5;
+                margin-bottom: $spacer * 5;
+                width: $spacer * 17;
+                height: $spacer * 17;
             }
 
             img {
@@ -87,6 +84,22 @@
                 border-radius: 50%;
             }
         }
+
+            .r-user__info-level {
+
+                display: block;
+                position: absolute;
+                bottom: -$spacer;
+                z-index: 30;
+                left: 50%;
+                transform: translateX(-50%);
+                display: none;
+
+                @include respond-to(tablet) {
+
+                    display: block;
+                }
+            }
 
             .r-user__info-travel-mate {
 
@@ -101,38 +114,30 @@
                 }
             }
 
-        .r-user__info-actions {
-
-            position: relative;
-            top: -$spacer * 2;
-
-            @include respond-to(tablet) {
-
-                z-index: 4;
-                top: -$spacer * 10;
-                padding-left: $spacer * 2.5;
-            }
-        }
-
         .r-user__info-heading {
 
             display: flex;
             align-items: center;
             margin-bottom: $spacer * 2;
-
-            @include respond-to(tablet) {
-
-                margin: -$spacer * 7 0 $spacer * 2;
-            }
         }
 
             .r-user__info-title {
 
-                @include respond-to(tablet) {
-
-                    margin-right: $spacer * 3;
-                }
+                width: 100%;
             }
+
+                .r-user__info-title-wrap {
+
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    margin-bottom: $spacer * 1.5;
+
+                    @include respond-to(tablet) {
+
+                        margin-bottom: $spacer * 2;
+                    }
+                }
 
             .r-user__info-status {
 
@@ -170,9 +175,11 @@
 
         .r-user__info-description {
 
+            color: $color-white;
+
             @include respond-to(tablet) {
 
-                @include span(10 of 24);
+                @include span(12 of 24);
             }
         }
 
@@ -203,18 +210,18 @@
 
                 right: $container-desktop-large / 28 * 2;
             }
-
-            .r-user.m-logged-in & {
-
-                bottom: $spacer * 4;
-            }
         }
 
-        .r-user__info-admin {
+    .r-user__admin {
 
-            clear: both;
-            width: 100%;
-            padding-top: $spacer * 2;
+        @include color-modifiers-dark-and(background);
+
+        padding: $spacer * 2 0;
+    }
+
+        .r-user__admin-wrap {
+
+            @include wrap('narrow');
         }
 
     .r-user__gallery {
@@ -225,6 +232,7 @@
         .r-user__gallery-wrap {
 
             @include wrap();
+            @include color-modifiers-dark-and(background);
         }
 
     .r-user__additional {

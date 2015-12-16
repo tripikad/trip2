@@ -29,6 +29,16 @@
         background: $color-white;
 
         &:hover {}
+
+        &.m-icon {
+
+            @include color-modifiers-dark-and(background);
+
+            svg {
+
+                @include color-modifiers-and(fill);
+            }
+        }
     }
 
     &.m-tertiary {
@@ -100,8 +110,14 @@
         &.m-icon {
 
             padding: 0;
-            width: $spacer * 3;
-            height: $spacer * 3;
+            width: $spacer * 2;
+            height: $spacer * 2;
+
+            svg {
+
+                width: $spacer;
+                height: $spacer;
+            }
         }
 
         &.m-icon-pre {
