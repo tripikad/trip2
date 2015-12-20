@@ -46,7 +46,7 @@
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
                             'sex_and_age' =>
-                                ($content->user->sex ? $content->user->sex.', ' : null).
+                                ($content->user->gender ? trans('user.gender.'.$content->user->gender).', ' : null).
                                 ($content->user->age ? $content->user->age : null),
                             'title' => $content->title,
                             'tags' => $content->destinations->transform(function ($content_destination, $key) {
@@ -82,7 +82,7 @@
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
                             'sex_and_age' =>
-                                ($content->user->sex ? $content->user->sex.', ' : null).
+                                ($content->user->gender ? trans('user.gender.'.$content->user->gender).', ' : null).
                                 ($content->user->age ? $content->user->age : null),
                             'title' => $content->title,
                             'tags' => $content->destinations->transform(function ($content_destination, $key) {
