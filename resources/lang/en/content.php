@@ -22,6 +22,12 @@ return [
 
     'action.message.send' => 'Send private message',
 
+    'action.register' => 'Join with Trip.ee',
+    'action.more.about' => 'Read more about Trip.ee',
+    'action.facebook.text' => 'Trip.ee\'s Facebook',
+    'action.twitter.text' => 'Trip.ee\'s Twitter',
+    'action.read.more' => 'Read more',
+
     'field.image.title' => 'Select image',
     'field.image.selected.title' => 'New image selected',
 
@@ -122,7 +128,9 @@ return [
 
     // Travelmate
 
-    'travelmate.index.title' => 'Travelmates',
+    'travelmate.index.title' => 'Travel mates',
+
+    'travelmate.activity' => 'Viimase :days päeva jooksul lisatud :posts_count kuulutust',
 
     'travelmate.create.title' => 'Add listing',
 
