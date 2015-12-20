@@ -15,7 +15,7 @@
         {{ $title }}
     </h3>
 
-    <p class="c-travelmate__more">Loe lähemalt ›</p>
+    <p class="c-travelmate__more">{{ trans('content.action.read.more') }} ›</p>
 
     @if(isset($tags))
 
