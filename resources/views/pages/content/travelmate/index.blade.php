@@ -46,7 +46,10 @@
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
                             'sex_and_age' =>
-                                ($content->user->gender ? trans('user.gender.'.$content->user->gender).', ' : null).
+                                ($content->user->gender ?
+                                    trans('user.gender.'.$content->user->gender).
+                                    ($content->user->age ? ', ' : '')
+                                : null).
                                 ($content->user->age ? $content->user->age : null),
                             'title' => $content->title,
                             'tags' => $content->destinations->transform(function ($content_destination, $key) {
@@ -82,7 +85,10 @@
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
                             'sex_and_age' =>
-                                ($content->user->gender ? trans('user.gender.'.$content->user->gender).', ' : null).
+                                ($content->user->gender ?
+                                    trans('user.gender.'.$content->user->gender).
+                                    ($content->user->age ? ', ' : '')
+                                : null).
                                 ($content->user->age ? $content->user->age : null),
                             'title' => $content->title,
                             'tags' => $content->destinations->transform(function ($content_destination, $key) {
@@ -126,11 +132,12 @@
                                 'icon' => 'icon-arrow-right'
                             ]
                         ],
-                        'button' => [
-                            'modifiers' => 'm-block',
-                            'route' => route('content.create', ['type' => $type]),
-                            'title' => trans("content.$type.create.title")
-                        ]
+                        'button' =>
+                            \Auth::check() ? [
+                                'modifiers' => 'm-block',
+                                'route' => route('content.create', ['type' => $type]),
+                                'title' => trans("content.$type.create.title")
+                            ] : null
                     ])
 
                 </div>
@@ -216,7 +223,7 @@
                 <div class="r-block__inner">
 
                     @include('component.about', [
-                        'title' => count($about) ? str_limit($about->first()->body, 300) : '',
+                        'title' => count($about) ? str_limit($about->first()->body, 300) : null,
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
@@ -224,7 +231,7 @@
                                 'route' =>
                                     count($about) ?
                                         route('content.show', [$about->first()->type, $about->first()])
-                                    : '',
+                                    : null,
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
@@ -240,11 +247,12 @@
                                 'icon' => 'icon-arrow-right'
                             ]
                         ],
-                        'button' => [
-                            'modifiers' => 'm-block',
-                            'route' => route('register.form'),
-                            'title' => trans('content.action.register')
-                        ]
+                        'button' =>
+                            !\Auth::check() ? [
+                                'modifiers' => 'm-block',
+                                'route' => route('register.form'),
+                                'title' => trans('content.action.register')
+                            ] : null
                     ])
 
                 </div>
