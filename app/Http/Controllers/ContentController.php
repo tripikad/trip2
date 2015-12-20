@@ -80,7 +80,8 @@ class ContentController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
 
-    public function getTravelMateIndex() {
+    public function getTravelMateIndex()
+    {
         $viewVariables['about'] = Content::whereId(1534)
             ->whereStatus(1)
             ->get();
@@ -88,7 +89,8 @@ class ContentController extends Controller
         $viewVariables['activity'] = Content::whereType('travelmate')
             ->whereStatus(1)
             ->whereBetween('created_at', [
-                Carbon::now(), Carbon::now()->addDays(14)
+                Carbon::now(),
+                Carbon::now()->addDays(14),
             ])
             ->count();
 
