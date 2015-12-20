@@ -10,7 +10,7 @@
                 'modifiers' => $item['modifiers'],
                 'image' => $item['image'],
                 'name' => $item['name'],
-                'sex_and_age' => $item['sex_and_age'],
+                'sex_and_age' => $item['sex_and_age'] ? $item['sex_and_age'] : null,
                 'title' => $item['title'],
                 'tags' => $item['tags']
             ])
