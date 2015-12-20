@@ -64,14 +64,35 @@ class ContentController extends Controller
             $view = 'pages.content.index';
         }
 
-        return response()->view($view, [
-            'contents' => $contents,
-            'type'  => $type,
-            'destination' => $request->destination,
-            'destinations' => $destinations,
-            'topic' => $request->topic,
-            'topics' => $topics,
-        ])->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
+        if ($type == 'travelmate') {
+            $viewVariables = $this->getTravelMateIndex();
+        }
+
+        $viewVariables['contents'] = $contents;
+        $viewVariables['type'] = $type;
+        $viewVariables['destination'] = $request->destination;
+        $viewVariables['destinations'] = $destinations;
+        $viewVariables['topic'] = $request->topic;
+        $viewVariables['topics'] = $topics;
+
+        return response()
+            ->view($view, $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
+    }
+
+    public function getTravelMateIndex() {
+        $viewVariables['about'] = Content::whereId(1534)
+            ->whereStatus(1)
+            ->get();
+
+        $viewVariables['activity'] = Content::whereType('travelmate')
+            ->whereStatus(1)
+            ->whereBetween('created_at', [
+                Carbon::now(), Carbon::now()->addDays(14)
+            ])
+            ->count();
+
+        return $viewVariables;
     }
 
     public function show($type, $id)
