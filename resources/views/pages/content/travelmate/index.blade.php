@@ -23,8 +23,12 @@
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
             'image' => \App\Image::getRandom(),
-            'subtitle' => 'Viimase 14 päeva jooksul lisatud 53 kuulutust',
+            'subtitle' => trans('content.travelmate.activity', [
+                'days' => 14,
+                'posts_count' => $activity
+            ])
         ])
+
     </div>
 
     <div class="r-travelmates__wrap">
@@ -41,18 +45,16 @@
                             'image' =>  $content->user->imagePreset('small_square'),
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
-                            'sex_and_age' => 'N,28',
+                            'sex_and_age' =>
+                                ($content->user->sex ? $content->user->sex.', ' : null).
+                                ($content->user->age ? $content->user->age : null),
                             'title' => $content->title,
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => 'India'
-                                ],
-                                [
-                                    'modifiers' => 'm-purple',
-                                    'title' => 'Delhi'
-                                ]
-                            ]
+                            'tags' => $content->destinations->transform(function ($content_destination, $key) {
+                                return [
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][$key],
+                                    'title' => $content_destination->name
+                                ];
+                            })
                         ];
                     })
                 ])
@@ -69,28 +71,26 @@
 
             </div>
 
-            @if (count($contents))
+            @if (count($contents) > 8)
 
                 @include('component.travelmate.list', [
                     'modifiers' => 'm-2col',
-                    'items' => $contents->splice(8)->take(8)->transform(function ($content) {
+                    'items' => $contents->splice(8)->transform(function ($content) {
                         return [
                             'modifiers' => '',
                             'image' => $content->user->imagePreset('small_square'),
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
-                            'sex_and_age' => 'N,28',
+                            'sex_and_age' =>
+                                ($content->user->sex ? $content->user->sex.', ' : null).
+                                ($content->user->age ? $content->user->age : null),
                             'title' => $content->title,
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => 'India'
-                                ],
-                                [
-                                    'modifiers' => 'm-purple',
-                                    'title' => 'Delhi'
-                                ]
-                            ]
+                            'tags' => $content->destinations->transform(function ($content_destination, $key) {
+                                return [
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][$key],
+                                    'title' => $content_destination->name
+                                ];
+                            })
                         ];
                     })
                 ])
@@ -216,31 +216,34 @@
                 <div class="r-block__inner">
 
                     @include('component.about', [
-                        'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+                        'title' => count($about) ? str_limit($about->first()->body, 300) : '',
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
-                                'title' => 'Loe lähemalt Trip.ee-st',
-                                'route' => '#',
+                                'title' => trans('content.action.more.about'),
+                                'route' =>
+                                    count($about) ?
+                                        route('content.show', [$about->first()->type, $about->first()])
+                                    : '',
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'modifiers' => 'm-icon',
-                                'title' => 'Trip.ee Facebookis',
-                                'route' => '#',
+                                'title' => trans('content.action.facebook.text'),
+                                'route' => config('menu.footer-social.facebook.route'),
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'modifiers' => 'm-icon',
-                                'title' => 'Trip.ee Twitteris',
-                                'route' => '#',
+                                'title' => trans('content.action.twitter.text'),
+                                'route' => config('menu.footer-social.twitter.route'),
                                 'icon' => 'icon-arrow-right'
                             ]
                         ],
                         'button' => [
                             'modifiers' => 'm-block',
-                            'route' => '',
-                            'title' => 'Liitu Trip.ee-ga'
+                            'route' => route('register.form'),
+                            'title' => trans('content.action.register')
                         ]
                     ])
 
