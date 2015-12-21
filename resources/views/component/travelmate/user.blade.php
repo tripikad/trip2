@@ -18,10 +18,13 @@
                 @if(isset($user_route))
                 <a href="{{ $user_route }}" class="c-travelmate-user__title-link">
                 @endif
+
                     {{ str_limit($name, 18) }}
-                    @if(isset($sex_and_age))
-                    <span>({{ $sex_and_age }})</span>
+
+                    @if(isset($sex_and_age) && $sex_and_age != '')
+                        <span>({{ $sex_and_age }})</span>
                     @endif
+
                 @if(isset($user_route))
                 </a>
                 @endif
