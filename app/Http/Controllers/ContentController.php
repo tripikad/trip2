@@ -165,8 +165,7 @@ class ContentController extends Controller
             ->orderBy('contents.created_at', 'desc')
             ->get();
 
-        $max = null;
-        if ($sidebar_flights) {
+        if (count($sidebar_flights)) {
             $sidebar_flights = $sidebar_flights->groupBy('destination_id')->max()->take(2);
         }
 
