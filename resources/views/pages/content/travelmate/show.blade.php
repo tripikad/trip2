@@ -22,20 +22,23 @@
             'modifiers' => 'm-alternative',
             'image' => \App\Image::getRandom(),
             'subtitle' => 'Vaata kõiki pakkumisi',
-            'subtitle_route' => '/content/travelmate'
+            'subtitle_route' => route('content.index', [$content->type])
         ])
 
     </div>
 
     <div class="r-travelmates__wrap">
-
         <div class="r-travelmates__content">
-
             <h1 class="r-travelmates__title">{{ $content->title }}</h1>
 
             <div class="r-travelmates__meta">
-
-                <p class="r-travelmates__meta-date">Lisatud eile 12.32</p>
+                <p class="r-travelmates__meta-date">
+                    {{ trans('content.post.added', [
+                        'created_at' => view('component.date.relative', [
+                            'date' => $content->created_at
+                        ])
+                    ]) }}
+                </p>
 
                 @if (count($content->destinations))
 
@@ -105,79 +108,70 @@
         </div>
 
         <div class="r-travelmates__sidebar m-first">
-
             <div class="r-block m-small">
 
                 @include('component.travelmate.user', [
                     'modifiers' => 'm-purple',
-                    'image' => \App\Image::getRandom(),
+                    'image' => $content->user->imagePreset('small_square'),
                     'user' => $content->user,
-                    'name' => 'Charles Dawson',
-                    'user_route' => '#',
-                    'sex_and_age' => 'M,34',
-                    'description' => '<p>I’m a 28 year-old who loves travelling to discover places and to meet people all over the world.</p>',
+                    'name' => $content->user->name,
+                    'user_route' => route('content.show', [$content->type, $content]),
+                    'sex_and_age' =>
+                        ($content->user->gender ?
+                            trans('user.gender.'.$content->user->gender).
+                                ($content->user->age ? ', ' : '')
+                        : null).
+                        ($content->user->age ? $content->user->age : null),
+                    'description' => null,
                     'social_items' => [
                         [
                             'icon' => 'icon-facebook',
-                            'route' => '#'
+                            'route' => $content->user->contact_facebook
                         ],
                         [
                             'icon' => 'icon-instagram',
-                            'route' => '#'
+                            'route' => $content->user->contact_instagram
                         ],
                         [
                             'icon' => 'icon-twitter',
-                            'route' => '#'
+                            'route' => $content->user->contact_twitter
                         ],
                         [
                             'icon' => 'icon-plus',
-                            'route' => '#'
+                            'route' => $content->user->contact_homepage
                         ],
                     ]
                 ])
 
                 @include('component.travelmate.trip', [
-                    'trip_start' => 'Märts, 2016',
-                    'trip_duration' => '9 kuud – aasta',
-                    'trip_mate' => 'Kõik sobib'
+                    'trip_start' => view('component.date.short', [
+                        'date' => $content->start_at
+                    ]),
+                    'trip_duration' => $content->duration,
+                    'trip_mate' => null
                 ])
+
             </div>
-
         </div>
-
     </div>
 
     <div class="r-travelmates__wrap">
-
         <div class="r-travelmates__content">
-
             <div class="r-block">
-
-                <div class="r-block__inner">
-
-                    <div class="r-block__header">
-
-                        @include('component.title', [
-                            'title' => 'Soovita pakkumist sõpradele',
-                            'modifiers' => 'm-large m-purple'
-                        ])
-                    </div>
-                </div>
-            </div>
-
-            <div class="r-block">
-
                 <div class="r-block__header">
 
                     @include('component.title', [
-                        'title' => 'Kommentaarid',
+                        'title' => trans('content.comments.title'),
                         'modifiers' => 'm-purple'
                     ])
+
                 </div>
 
                 <div class="r-block__body">
 
-                    @include('component.comment.index', ['comments' => $comments])
+                    @include('component.comment.index', [
+                        'comments' => $comments
+                    ])
 
                     @include('component.content.forum.post',[
                         'profile' => [
@@ -215,31 +209,29 @@
 
             @if (\Auth::check())
 
-            <div class="r-block">
+                <div class="r-block">
+                    <div class="r-block__inner">
+                        <div class="r-block__header">
 
-                <div class="r-block__inner">
+                            @include('component.title', [
+                                'title' => trans('content.action.add.comment'),
+                                'modifiers' => 'm-large m-green'
+                            ])
 
-                    <div class="r-block__header">
+                        </div>
+                        <div class="r-block__body">
 
-                        @include('component.title', [
-                            'title' => 'Lisa kommentaar',
-                            'modifiers' => 'm-large m-green'
-                        ])
-                    </div>
+                            @include('component.comment.create')
 
-                    <div class="r-block__body">
-
-                        @include('component.comment.create')
+                        </div>
                     </div>
                 </div>
-            </div>
 
             @endif
 
         </div>
 
         <div class="r-travelmates__sidebar">
-
             <div class="r-block m-small">
 
                 @include('component.destination', [
@@ -265,7 +257,6 @@
                 ])
 
                 <div class="r-block__inner">
-
                     <div class="r-block__header">
 
                         @include('component.title', [
@@ -345,11 +336,8 @@
     </div>
 
     <div class="r-travelmates__offers">
-
         <div class="r-travelmates__offers-wrap">
-
             <div class="c-columns m-3-cols">
-
                 <div class="c-columns__item">
 
                     @include('component.card', [
@@ -358,6 +346,7 @@
                         'title' => 'Edasi-tagasi Riiast või Helsingist Delhisse al 350 €',
                         'image' => \App\Image::getRandom()
                     ])
+
                 </div>
 
                 <div class="c-columns__item">
@@ -386,7 +375,6 @@
     </div>
 
     <div class="r-travelmates__additional">
-
         <div class="r-travelmates__additional-wrap">
 
             @include('component.travelmate.list', [
@@ -448,11 +436,11 @@
                     ]
                 ]
             ])
+
         </div>
     </div>
 
     <div class="r-travelmates__footer-promo">
-
         <div class="r-travelmates__footer-promo-wrap">
 
             @include('component.promo', [
@@ -460,6 +448,7 @@
                 'route' => '',
                 'image' => \App\Image::getRandom()
             ])
+
         </div>
     </div>
 
