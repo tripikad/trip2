@@ -11,7 +11,7 @@ class FeedController extends Controller
     {
         $feed = Feed::make();
 
-        $feed->setCache(config('site.cache.atom'));
+        $feed->setCache(config('cache.feed.atom'));
 
         if (! $feed->isCached()) {
             $feed->title = config('site.name');

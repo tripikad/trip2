@@ -35,6 +35,23 @@
         }
     }
 
+    &.m-profile {
+
+        opacity: 0.68;
+
+        &:after {
+
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: rgba($color-fill-black, 0.6);
+        }
+    }
+
     &.m-search {
 
         padding-bottom: $spacer * 8;
@@ -78,6 +95,17 @@
                 @include span(14 of 28);
             }
         }
+
+        .c-masthead.m-forum & {
+
+            @include wrap();
+
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
 
         .c-masthead__logo {
@@ -98,7 +126,20 @@
 
                 display: none;
             }
+
+            .c-masthead.m-forum & {
+
+                top: $spacer * 2.5;
+                left: $spacer * 2.5;
+            }
         }
+
+            .c-masthead__logo-link {
+
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
 
         .c-masthead__title {
 
@@ -127,6 +168,22 @@
             .c-masthead.m-profile & {
 
                 display: none;
+            }
+
+            .c-masthead.m-forum & {
+
+                @include font-smoothing(subpixel-antialiased);
+
+                font-size: $font-size-largest + 6;
+                position: absolute;
+                top: $spacer * 6 + 8;
+                left: $spacer * 20;
+                display: none;
+
+                @include respond-to(tablet) {
+
+                    display: block;
+                }
             }
         }
 

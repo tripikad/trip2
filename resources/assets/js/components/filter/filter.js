@@ -1,15 +1,16 @@
-$('select[name=destination]').selectize({
-    onChange: function(value) {
-        $('input[type=submit]').click();
-    }
-});
+var filter = $('.js-filter'),
+    submit = $('.js-submit');
 
-$('select[name=topic]').selectize({
-    onChange: function(value) {
-        $('input[type=submit]').click();
-    }
-});
+if (submit.length > 0) {
 
-$('#destinations').selectize();
-$('#topics').selectize();
-$('.js-select').selectize();
+    filter.selectize({
+
+        onChange: function() {
+            submit.click();
+        }
+    });
+} else {
+
+    filter.selectize();
+}
+

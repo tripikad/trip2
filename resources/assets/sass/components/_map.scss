@@ -1,26 +1,38 @@
 .c-map {
 
     position: relative;
+    width: 100%;
+    height: 100%;
 
     &.m-destination {
 
         svg {
 
             @include color-modifiers-dark-and(fill);
-
-            width: 622px;
-            height: 427px;
         }
     }
 
-    &.m-flights {
+    &.m-flights,
+    &.m-forum {
 
         svg {
 
-            fill: $color-fill-neutral-light;
-            width: 100%;
-            height: 100%;
+            fill: $color-fill-neutral;
         }
+    }
+
+    &.m-profile {
+
+        svg {
+
+            @include color-modifiers-dark-and(fill);
+        }
+    }
+
+    svg {
+
+        width: 100%;
+        height: 100%;
     }
 }
 

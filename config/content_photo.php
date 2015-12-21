@@ -2,18 +2,13 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => [],
-        'latest' => 'created_at',
-        'take' => 8,
-    ],
-
     'index' => [
 
         'with' => ['user', 'destinations'],
-        'latest' => 'created_at',
+        'orderBy' => [
+            'field' => 'created_at',
+            'order' => 'desc',
+        ],
         'paginate' => 24,
     ],
 

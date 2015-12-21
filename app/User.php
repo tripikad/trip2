@@ -32,6 +32,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $hidden = ['password', 'remember_token'];
 
+    public $messages_count = false;
+
     public static function boot()
     {
         parent::boot();
@@ -52,13 +54,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function unreadMessagesCount()
     {
-        $received = $this->hasMany('App\Message', 'user_id_to')
-            ->where('read', '0')
-            ->get()
-            ->unique('user_id_from')
-            ->count();
+        if ($this->messages_count === false) {
+            $this->messages_count = $this->hasMany('App\Message', 'user_id_to')
+                ->where('read', '0')
+                ->get()
+                ->unique('user_id_from')
+                ->count();
+        }
 
-        return $received;
+        return $this->messages_count;
     }
 
     public function messages()
@@ -120,7 +124,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function imagePreset($preset = 'small_square')
     {
-        return count($this->images) ? '/images/'.$preset.'/'.$this->images[0]->filename : '/svg/picture_none.svg';
+        $image = null;
+
+        if (count($this->images)) {
+            $image = config('imagepresets.presets.'.$preset.'.path').$this->images[0]->filename;
+        }
+
+        if (! file_exists(public_path().$image)) {
+            $image = config('imagepresets.image.none');
+        }
+
+        return $image;
     }
 
     public function hasRole($role)
@@ -136,7 +150,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function hasRoleOrOwner($role, $ownable_user_id)
     {
-        return ($this->hasRole($role) || $ownable_user_id == $this->id);
+        return $this->hasRole($role) || $ownable_user_id == $this->id;
     }
 
     public function destinationHaveBeen()

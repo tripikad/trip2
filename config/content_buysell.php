@@ -2,18 +2,20 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => [],
-        'latest' => 'created_at',
-        'take' => 1,
+    'view' => [
+        'index' => 'pages.content.forum.index',
+        'show' => 'pages.content.forum.show',
     ],
+
+    'menu' => 'forum',
 
     'index' => [
 
         'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],
-        'latest' => 'updated_at',
+        'orderBy' => [
+            'field' => 'updated_at',
+            'order' => 'desc',
+        ],
         'paginate' => 25,
     ],
 

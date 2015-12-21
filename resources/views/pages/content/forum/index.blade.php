@@ -35,9 +35,10 @@
 
                 @endforeach
 
-                @include('component.pagination',
-                    ['collection' => $contents]
-                )
+                @include('component.pagination.default', [
+                    'collection' => $contents
+                ])
+
             </div>
 
             <div class="r-forum__sidebar">
@@ -48,26 +49,30 @@
 
                         @include('component.nav', [
                             'modifiers' => '',
-                            'menu' => 'forum',
-                            'items' => config('menu.forum')
+                            'menu' => config('content_'.$type.'.menu'),
+                            'items' => config('menu.'.config('content_'.$type.'.menu'))
                         ])
 
                     </div>
 
                 </div>
 
-                <div class="r-forum__sidebar-block">
+                @if (\Auth::check())
 
-                    <div class="r-forum__sidebar-block-inner">
+                    <div class="r-forum__sidebar-block">
 
-                        @include('component.button', [
-                            'route' => route('content.create', ['type' => $type]),
-                            'title' => trans("content.$type.create.title")
-                        ])
+                        <div class="r-forum__sidebar-block-inner">
+
+                            @include('component.button', [
+                                'route' => route('content.create', ['type' => $type]),
+                                'title' => trans("content.$type.create.title")
+                            ])
+
+                        </div>
 
                     </div>
 
-                </div>
+                @endif
 
                 <div class="r-forum__sidebar-block">
 

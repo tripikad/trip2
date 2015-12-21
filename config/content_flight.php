@@ -2,18 +2,13 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => ['images'],
-        'latest' => 'created_at',
-        'take' => 8,
-    ],
-
     'index' => [
 
         'with' => ['images'],
-        'latest' => 'end_at',
+        'orderBy' => [
+            'field' => 'end_at',
+            'order' => 'desc',
+        ],
         'paginate' => 24,
     ],
 
@@ -30,6 +25,7 @@ return [
                 'type' => 'textarea',
                 'rows' => 16,
                 'large' => true,
+                'wysiwyg' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

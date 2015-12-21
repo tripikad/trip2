@@ -129,12 +129,24 @@ get('destination/{id}', ['uses' => 'DestinationController@show', 'as' => 'destin
 
 get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
 
+// Atom feed
+
+get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
+
+// Styleguide
+
+get('styleguide', 'StyleguideController@index');
+
+/*
+ * Redirect old URL-s
+ */
+
 // Legacy content paths
 
 get('node/{id}', 'RedirectController@redirectNode');
 
 get('content/{path}', 'RedirectController@redirectContent')
-    ->where(['path' => '(.*)\.html(.*)']);
+    ->where('path', '.*');
 
 // Legacy term paths
 
@@ -144,10 +156,6 @@ get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 
 get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
 
-// Atom feed
+// All other content pages
 
-get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
-
-// Styleguide
-
-get('styleguide', 'StyleguideController@index');
+get('{path}', 'RedirectController@redirectContentBySlug');

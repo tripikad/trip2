@@ -6,31 +6,39 @@
 
 @section('content.one')
 
-    <div id="link-have-been" class="c-user-destination">
+    @if ($user->destinationHaveBeen()->count() > 0)
 
-        @include('component.row', [
-            'title' => trans('user.destinations.have.been.title'),
-            'text' => view('component.user.destination.destination', [
-                'destinations' => $user->destinationHaveBeen()->sortByDesc('id'),
-                'title' => trans('user.destinations.remove.title'),
-                'modifiers' => 'js-ajax_get'
+        <div id="link-have-been" class="c-user-destination">
+
+            @include('component.row', [
+                'title' => trans('user.destinations.have.been.title'),
+                'text' => view('component.user.destination.destination', [
+                    'destinations' => $user->destinationHaveBeen()->sortByDesc('id'),
+                    'title' => trans('user.destinations.remove.title'),
+                    'modifiers' => 'js-ajax_get'
+                ])
             ])
-        ])
 
-    </div>
+        </div>
 
-    <div id="link-want-to-go" class="c-user-destination">
+    @endif
 
-        @include('component.row', [
-            'title' => trans('user.destinations.want.to.go.title'),
-            'text' => view('component.user.destination.destination', [
-                'destinations' => $user->destinationWantsToGo()->sortByDesc('id'),
-                'title' => trans('user.destinations.remove.title'),
-                'modifiers' => 'js-ajax_get'
+    @if ($user->destinationWantsToGo()->count() > 0)
+
+        <div id="link-want-to-go" class="c-user-destination">
+
+            @include('component.row', [
+                'title' => trans('user.destinations.want.to.go.title'),
+                'text' => view('component.user.destination.destination', [
+                    'destinations' => $user->destinationWantsToGo()->sortByDesc('id'),
+                    'title' => trans('user.destinations.remove.title'),
+                    'modifiers' => 'js-ajax_get'
+                ])
             ])
-        ])
 
-    </div>
+        </div>
+
+    @endif
 
     <div id="link-add-destinations" class="c-user-destination">
 
@@ -51,7 +59,7 @@
                         $have_been_destination,
                         [
                             'multiple' => 'true',
-                            'class' => 'js-select',
+                            'class' => 'js-filter',
                             'placeholder' => trans('user.destinations.have.been.title'),
                         ]
                     )!!}
@@ -70,7 +78,7 @@
                         $want_to_go_destination,
                         [
                             'multiple' => 'true',
-                            'class' => 'js-select',
+                            'class' => 'js-filter',
                             'placeholder' => trans('user.destinations.want.to.go.title'),
                         ]
                     )!!}

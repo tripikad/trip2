@@ -27,7 +27,8 @@ class StyleguideController extends Controller
 
         return view('pages.styleguide.index', [
             'components' => $components,
-            'icons' => $this->getIcons(),
+            'svg_sprites' => $this->getSvgSprites(),
+            'svg_standalones' => $this->getSvgStandalones(),
         ]);
     }
 
@@ -65,14 +66,25 @@ class StyleguideController extends Controller
         return false;
     }
 
-    public function getIcons()
+    public function getSvgSprites()
     {
-        $icons = [];
+        $svg_sprites = [];
 
         foreach (Storage::disk('resources')->files('assets/svg/sprite') as $filepath) {
-            $icons[] = pathinfo($filepath)['filename'];
+            $svg_sprites[] = pathinfo($filepath)['filename'];
         }
 
-        return $icons;
+        return $svg_sprites;
+    }
+
+    public function getSvgStandalones()
+    {
+        $svg_standalones = [];
+
+        foreach (Storage::disk('resources')->files('assets/svg/standalone') as $filepath) {
+            $svg_standalones[] = pathinfo($filepath)['filename'];
+        }
+
+        return $svg_standalones;
     }
 }

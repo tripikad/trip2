@@ -30,13 +30,21 @@
 
             <div class="right">
 
-                @if ($component['filepath'] == 'views/component/icon.blade.php')
+                @if ($component['filepath'] == 'views/component/svg/sprite.blade.php')
 
-                        @foreach($icons as $icon)
-                            <a title="{{ $icon }}">
-                                @include('component.icon', ['icon' => $icon])
-                            </a>
-                        @endforeach
+                    @foreach($svg_sprites as $sprite)
+                        <a title="{{ $sprite }}">
+                            @include('component.svg.sprite', ['name' => $sprite])
+                        </a>
+                    @endforeach
+
+                @elseif ($component['filepath'] == 'views/component/svg/standalone.blade.php')
+
+                    @foreach($svg_standalones as $standalone)
+                        <a title="{{ $standalone }}">
+                            @include('component.svg.standalone', ['name' => $standalone])
+                        </a>
+                    @endforeach
 
                 @elseif (isset($component['modifiers']))
 

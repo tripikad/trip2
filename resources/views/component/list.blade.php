@@ -55,8 +55,8 @@ modifiers:
 
                             <span class="c-list__item-icon">
 
-                                @include('component.icon',[
-                                    'icon' => $item['icon']
+                                @include('component.svg.sprite',[
+                                    'name' => $item['icon']
                                 ])
 
                             </span>

@@ -10,9 +10,10 @@ code: |
             [
                 'topic' => 'This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition',
                 'route' => '#',
+                'date' => '',
                 'profile' => [
                     'modifiers' => 'm-mini',
-                    'image' => \App\Image::getRandom()
+                    'image' => \App\Image::getRandom(),
                 ],
                 'badge' => [
                     'modifiers' => 'm-inverted',
@@ -31,7 +32,11 @@ code: |
                             'modifiers' => 'm-mini',
                             'image' => \App\Image::getRandom(),
                             'title' => 'Charles Darwin',
-                            'route' => ''
+                            'route' => '',
+                            'status' => [
+                                'modifiers' => 'm-blue',
+                                'position' => '1'
+                            ]
                         ],
                         'date' => '12. jaanuar, 12:31',
                         'text' => 'Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi.',
@@ -83,7 +88,15 @@ modifiers:
 
                 @endif
 
-                <h3 class="c-forum-list__item-topic">{{ $item['topic'] }}</h3>
+                <div class="c-forum-list__item-info">
+
+                    <h3 class="c-forum-list__item-topic">{{ $item['topic'] }}</h3>
+
+                    @if(isset($item['date']))
+                        <p class="c-forum-list__date">{{ $item['date'] }}</p>
+                    @endif
+
+                </div>
 
                 @if (isset($item['route']))
 
@@ -120,7 +133,9 @@ modifiers:
                                 'profile' => [
                                     'image' => $child['profile']['image'],
                                     'title' => $child['profile']['title'],
-                                    'route' => $child['profile']['route']
+                                    'route' => $child['profile']['route'],
+                                    'modifiers' => 'm-full m-status',
+                                    'status' => $child['profile']['status']
                                 ],
                                 'date' => $child['date'],
                                 'text' => $child['text'],

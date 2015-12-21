@@ -12,11 +12,11 @@
     .c-nav__list-item {
 
         display: inline-block;
-        margin: 0 $spacer / 2;
+        width: 100%;
+        margin: 0 0 $spacer;
 
-        &:first-child {
+        &:last-child {
 
-            content: none;
             margin: 0;
         }
 

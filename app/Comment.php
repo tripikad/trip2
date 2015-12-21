@@ -9,7 +9,7 @@ class Comment extends Model
 {
     protected $fillable = ['user_id', 'content_id', 'body', 'status'];
 
-    protected $appends = ['title'];
+    protected $appends = ['title', 'body_filtered'];
 
     protected $touches = ['content'];
 
@@ -53,6 +53,11 @@ class Comment extends Model
         }
 
         return $actions;
+    }
+
+    public function getBodyFilteredAttribute()
+    {
+        return Main::getBodyFilteredAttribute($this);
     }
 
     public function getFlags()

@@ -30,8 +30,8 @@ code: |
 
         <span class="c-footer__social-item-icon">
 
-            @include('component.icon', [
-                'icon' => $item['icon']
+            @include('component.svg.sprite', [
+                'name' => $item['icon']
             ])
 
         </span>

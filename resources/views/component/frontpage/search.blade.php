@@ -10,7 +10,11 @@
     {!! Form::select(
         'destination',
         ['' => trans('frontpage.index.search.destination.title')]
-             + $destinations->toArray()
+             + $destinations->toArray(),
+        null,
+        [
+            'class' => 'js-filter'
+        ]
 
     )!!}
     
@@ -20,7 +24,7 @@
     
     {!! Form::submit(
         trans('frontpage.index.search.submit.title'), 
-        ['class' => 'btn btn-primary btn-sm btn-block'])
+        ['class' => 'btn btn-primary btn-sm btn-block js-filter'])
     !!}
 
     </div>

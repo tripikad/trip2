@@ -76,9 +76,14 @@ code: |
                 @if (in_array($field['type'], ['text', 'textarea', 'url', 'email', 'date']))
 
                     {!! Form::$field['type']($key, null, [
-                        'class' =>  (isset($field['large']) && $field['large'] == true)
-                            ? 'c-form__input m-high'
-                            : 'c-form__input',
+                        'class' =>
+                            (isset($field['large']) && $field['large'] == true
+                                ? 'c-form__input m-high'
+                                : 'c-form__input')
+                            .
+                            (isset($field['wysiwyg']) && $field['wysiwyg'] == true
+                                ? ' js-ckeditor'
+                                : ''),
                         'placeholder' => trans("content.$type.edit.field.$key.title"),
                         'rows' => isset($field['rows']) ? $field['rows'] : 8,
                     ]) !!}
@@ -115,6 +120,7 @@ code: |
                         [
                             'multiple' => 'true',
                             'id' => $key,
+                            'class' => 'js-filter',
                             'placeholder' => trans("content.$type.edit.field.$key.title"),
                         ]
                     )!!}
@@ -128,16 +134,53 @@ code: |
                         [
                             'multiple' => 'true',
                             'id' => $key,
+                            'class' => 'js-filter',
                             'placeholder' => trans("content.$type.edit.field.$key.title"),
                         ]
                     )!!}
 
                 @elseif ($field['type'] == 'datetime')
 
-                    {!! Form::text($key, null, [
-                        'class' => 'c-form__input',
-                        'placeholder' => trans("content.$type.edit.field.$key.title"),
-                    ]) !!}
+                    @include('component.date.select', [
+                        'from' => 1,
+                        'to' => 31,
+                        'selected' => \Carbon\Carbon::now()->day,
+                        'key' => $key.'_day'
+                    ])
+
+                    @include('component.date.select', [
+                        'month' => true,
+                        'selected' => \Carbon\Carbon::now()->month,
+                        'key' => $key.'_month'
+                    ])
+
+                    @include('component.date.select', [
+                        'from' => \Carbon\Carbon::now()->year,
+                        'to' => \Carbon\Carbon::parse('+5 years')->year,
+                        'selected' => \Carbon\Carbon::now()->year,
+                        'key' => $key.'_year'
+                    ])
+
+                    @include('component.date.select', [
+                        'from' => 0,
+                        'to' => 23,
+                        'selected' => \Carbon\Carbon::now()->hour,
+                        'key' => $key.'_hour'
+                    ])
+
+                    @include('component.date.select', [
+                        'from' => 0,
+                        'to' => 59,
+                        'selected' => \Carbon\Carbon::now()->minute,
+                        'key' => $key.'_minute'
+                    ])
+
+                    @include('component.date.select', [
+                        'from' => 0,
+                        'to' => 59,
+                        'selected' => '00',
+                        'key' => $key.'_second'
+                    ])
 
                 @elseif ($field['type'] == 'currency')
 
@@ -179,11 +222,11 @@ code: |
 
 {!! Form::close() !!}
 
-@if (isset($form['files']))
+@section('scripts')
 
-    @if ($form['files'])
+    @if (isset($form['files']))
 
-        @section('scripts')
+        @if ($form['files'])
 
             <script type="text/javascript">
 
@@ -261,8 +304,8 @@ code: |
 
             </script>
 
-        @stop
+        @endif
 
     @endif
 
-@endif
+@stop

@@ -79,16 +79,16 @@ class AdminTest extends TestCase
 
         // Check original file exists
 
-        $filepath = config('imagepresets.original.path').$filename;
+        $filepath = public_path().config('imagepresets.original.path').$filename;
         $this->assertTrue(file_exists($filepath));
         unlink($filepath);
 
         // See thumbnails exist
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = config("imagepresets.presets.$preset.path").$filename;
+            $filepath = public_path().config("imagepresets.presets.$preset.path").$filename;
             $this->assertTrue(file_exists($filepath));
-          //  unlink($filepath);
+            unlink($filepath);
         }
     }
 
