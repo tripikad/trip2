@@ -37,28 +37,46 @@
 
                 <p class="r-travelmates__meta-date">Lisatud eile 12.32</p>
 
-                @include('component.tags', [
-                    'modifiers' => 'm-small',
-                    'items' => [
-                        [
-                            'modifiers' => 'm-yellow',
-                            'route' => '',
-                            'title' => 'Delhi'
-                        ],
-                        [
-                            'modifiers' => 'm-purple',
-                            'route' => '',
-                            'title' => 'India'
-                        ],
-                    ]
-                ])
+                @if (count($content->destinations))
+
+                    @include('component.tags', [
+                        'modifiers' => 'm-small',
+                        'items' => $content->destinations->transform(function ($content_destination) {
+                            return [
+                                'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                                'route' => route('destination.show', [$content_destination->id]),
+                                'title' => $content_destination->name
+                            ];
+                        })
+                    ])
+
+                @endif
+
             </div>
 
-            <div class="r-travelmates__content-body">
+            @if (count($content->topics))
 
+                <div class="r-travelmates__meta">
+
+                    @include('component.tags', [
+                        'modifiers' => 'm-small',
+                        'items' => $content->topics->transform(function ($content_topic) {
+                            return [
+                                'modifiers' => 'm-gray',
+                                'title' => $content_topic->name
+                            ];
+                        })
+                    ])
+
+                </div>
+
+            @endif
+
+            <div class="r-travelmates__content-body">
                 <div class="c-body">
 
                     {!! $content->body_filtered !!}
+
                 </div>
             </div>
 
