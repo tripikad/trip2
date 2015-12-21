@@ -4,7 +4,12 @@ return [
 
     // General
 
+    'post.added' => 'Post added at :created_at',
+    'comments.title' => 'Comments',
+
     'row.text.comment' => 'Latest comment :updated_at',
+
+    'action.add.comment' => 'Add comment',
 
     'action.edit.title' => 'Edit',
 
