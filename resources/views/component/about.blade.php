@@ -34,12 +34,12 @@ modifiers:
     <div class="c-about__content">
 
         @if (isset($title) && $title!='')
-            <h2 class="c-about__title">{{ $title }}</h2>
+            <h2 class="c-about__title">{!! $title !!}</h2>
         @endif
 
         @if (isset($text))
 
-        <p class="c-about__text">{{ $text }}</p>
+        <p class="c-about__text">{!! $text !!}</p>
 
         @endif
 
