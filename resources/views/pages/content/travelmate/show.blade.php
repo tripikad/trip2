@@ -94,7 +94,7 @@
                     'image' => $content->user->imagePreset('small_square'),
                     'user' => $content->user,
                     'name' => $content->user->name,
-                    'user_route' => route('content.show', [$content->type, $content]),
+                    'user_route' => route('user.show', [$content->user]),
                     'sex_and_age' =>
                         ($content->user->gender ?
                             trans('user.gender.'.$content->user->gender).
@@ -184,25 +184,26 @@
 
                 @include('component.destination', [
                     'modifiers' => 'm-purple',
-                    'title' => 'New Delhi',
-                    'title_route' => '#',
-                    'subtitle' => 'India',
-                    'subtitle_route' => '#'
+                    'title' => $destination ? $destination->name : null,
+                    'title_route' => $destination ? route('destination.show', $destination) : null,
+                    'subtitle' => $parent_destination ? $parent_destination->name : null,
+                    'subtitle_route' => $parent_destination ? route('destination.show', $parent_destination) : null,
                 ])
 
-                @include('component.card', [
-                    'modifiers' => 'm-purple',
-                    'route' => '#',
-                    'title' => 'Edasi-tagasi Riiast või Helsingist Delhisse al 350 €',
-                    'image' => \App\Image::getRandom()
-                ])
+                @if (count($sidebar_flights))
 
-                @include('component.card', [
-                    'modifiers' => 'm-purple',
-                    'route' => '#',
-                    'title' => 'Stockholmist Delhisse, Goasse või Mumbaisse al 285 €',
-                    'image' => \App\Image::getRandom()
-                ])
+                    @foreach ($sidebar_flights as $sidebar_flight)
+
+                        @include('component.card', [
+                            'modifiers' => 'm-purple',
+                            'route' => route('content.show', [$sidebar_flight->type, $sidebar_flight]),
+                            'title' => $sidebar_flight->title,
+                            'image' => $sidebar_flight->imagePreset()
+                        ])
+
+                    @endforeach
+
+                @endif
 
                 @if (count($forums))
 
