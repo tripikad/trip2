@@ -35,14 +35,18 @@
 
                     @foreach($social_items as $social)
 
-                    <li class="c-button-group__item">
-                        @include('component.button',[
-                            'modifiers' => 'm-icon m-small m-round',
-                            'icon' => view('component.svg.sprite',['name' => $social['icon']]),
-                            'route' => $social['route'],
-                            'target' => '_blank'
-                        ])
-                    </li>
+                        @if (isset($social['route']) && $social['route']!='')
+
+                            <li class="c-button-group__item">
+                                @include('component.button',[
+                                    'modifiers' => 'm-icon m-small m-round',
+                                    'icon' => view('component.svg.sprite',['name' => $social['icon']]),
+                                    'route' => $social['route'],
+                                    'target' => '_blank'
+                                ])
+                            </li>
+
+                        @endif
 
                     @endforeach
                 </ul>
@@ -54,11 +58,15 @@
         </div>
     </div>
 
-    <div class="c-travelmate-user__body">
-        <div class="c-body">
-            {!! $description !!}
+    @if (isset($description) && $description != '')
+
+        <div class="c-travelmate-user__body">
+            <div class="c-body">
+                {!! $description !!}
+            </div>
         </div>
-    </div>
+
+    @endif
 
     @if (\Auth::user())
         @if(\Auth::user()->id !== $user->id)
