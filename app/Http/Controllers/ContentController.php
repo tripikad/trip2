@@ -64,14 +64,41 @@ class ContentController extends Controller
             $view = 'pages.content.index';
         }
 
-        return response()->view($view, [
-            'contents' => $contents,
-            'type'  => $type,
-            'destination' => $request->destination,
-            'destinations' => $destinations,
-            'topic' => $request->topic,
-            'topics' => $topics,
-        ])->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
+        if ($type == 'travelmate') {
+            $viewVariables = $this->getTravelMateIndex();
+        }
+
+        $viewVariables['contents'] = $contents;
+        $viewVariables['type'] = $type;
+        $viewVariables['destination'] = $request->destination;
+        $viewVariables['destinations'] = $destinations;
+        $viewVariables['topic'] = $request->topic;
+        $viewVariables['topics'] = $topics;
+
+        return response()
+            ->view($view, $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
+    }
+
+    public function getTravelMateIndex()
+    {
+        $content = Content::whereIn('id', [1534, 25151])
+            ->whereStatus(1)
+            ->get();
+
+        $viewVariables['about'] = $content->where('id', 1534);
+
+        $viewVariables['rules'] = $content->where('id', 25151);
+
+        $viewVariables['activity'] = Content::whereType('travelmate')
+            ->whereStatus(1)
+            ->whereBetween('created_at', [
+                Carbon::now(),
+                Carbon::now()->addDays(14),
+            ])
+            ->count();
+
+        return $viewVariables;
     }
 
     public function show($type, $id)
@@ -104,11 +131,55 @@ class ContentController extends Controller
             $view = 'pages.content.show';
         }
 
-        return response()->view($view, [
-            'content' => $content,
-            'comments' => $comments,
-            'type' => $type,
-        ])->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
+        if ($type == 'travelmate') {
+            $viewVariables = $this->getTravelMateShow($content);
+        }
+
+        $viewVariables['content'] = $content;
+        $viewVariables['comments'] = $comments;
+        $viewVariables['type'] = $type;
+
+        return response()
+            ->view($view, $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
+    }
+
+    public function getTravelMateShow($content)
+    {
+        $viewVariables['travel_mates'] = Content::where('id', '!=', $content->id)
+            ->whereStatus(1)
+            ->whereType('travelmate')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        $types = [
+            'forums' => 'forum',
+            'flights' => 'flight',
+        ];
+
+        foreach ($types as $key => $type) {
+            $viewVariables[$key] = Content::
+            join('content_destination', 'content_destination.content_id', '=', 'contents.id')
+                ->leftJoin('content_topic', 'content_topic.content_id', '=', 'contents.id')
+                ->select('contents.*')
+                ->where('contents.type', $type)
+                ->whereNested(function ($query) use ($content) {
+                    $query->whereIn(
+                        'content_destination.destination_id',
+                        $content->destinations->lists('id')->toArray()
+                    )
+                        ->orWhereIn(
+                            'content_topic.topic_id',
+                            $content->topics->lists('id')->toArray()
+                        );
+                })
+                ->orderBy('contents.created_at', 'desc')
+                ->take(3)
+                ->get();
+        }
+
+        return $viewVariables;
     }
 
     public function create($type)
