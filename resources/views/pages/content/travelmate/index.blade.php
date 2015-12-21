@@ -116,22 +116,16 @@
                 <div class="r-block__inner">
 
                     @include('component.about', [
-                        'title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
-                        'text' => 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.',
-                        'links' => [
+                        'title' => trans('content.travelmate.description.title'),
+                        'text' => trans('content.travelmate.description.text'),
+                        'links' => count($rules) ? [
                             [
                                 'modifiers' => 'm-icon',
-                                'title' => 'Reeglid',
-                                'route' => '#',
+                                'title' => $rules->first()->title,
+                                'route' => route('content.show', [$rules->first()->type, $rules->first()]),
                                 'icon' => 'icon-arrow-right'
                             ],
-                            [
-                                'modifiers' => 'm-icon',
-                                'title' => 'Kellele ja miks?',
-                                'route' => '#',
-                                'icon' => 'icon-arrow-right'
-                            ]
-                        ],
+                        ] : null,
                         'button' =>
                             \Auth::check() ? [
                                 'modifiers' => 'm-block',
@@ -144,68 +138,10 @@
             </div>
 
             <div class="r-block m-small">
-
-                {{-- @include('component.filter') --}}
-
                 <div class="r-block__inner">
 
-                    <div class="r-block__header">
+                    @include('component.travelmate.filter')
 
-                        <div class="r-block__header-title">
-
-                            @include('component.title', [
-                                'title' => 'Filter',
-                                'modifiers' => 'm-large m-green'
-                            ])
-
-                        </div>
-
-                        <div class="c-body">
-                            <p>Kui ei leia sobivat kaaslast, siis ehk aitab sind filter.</p>
-                        </div>
-                    </div>
-
-                    <div class="r-block__body">
-
-                        <div class="c-form__group m-small-margin">
-                            <select name="" id="" class="c-form__input">
-                                <option value="">Riik</option>
-                            </select>
-                        </div>
-
-                        <div class="c-form__group m-small-margin">
-                            <select name="" id="" class="c-form__input">
-                                <option value="">Linn</option>
-                            </select>
-                        </div>
-
-                        <div class="c-form__group m-small-margin">
-                            <select name="" id="" class="c-form__input">
-                                <option value="">Reisistiil</option>
-                            </select>
-                        </div>
-
-                        <div class="c-form__group m-small-margin">
-                            <select name="" id="" class="c-form__input">
-                                <option value="">Vanus</option>
-                            </select>
-                        </div>
-
-                        <div class="c-form__group m-small-margin">
-                            <select name="" id="" class="c-form__input">
-                                <option value="">Sugu</option>
-                                <option value="">Mees</option>
-                                <option value="">Naine</option>
-                            </select>
-                        </div>
-
-                        @include('component.button', [
-                            'modifiers' => 'm-block',
-                            'title' => 'Filtreeri',
-                            'route' => ''
-                        ])
-
-                    </div>
                 </div>
             </div>
 
