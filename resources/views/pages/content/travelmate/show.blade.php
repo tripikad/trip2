@@ -24,6 +24,7 @@
             'subtitle' => 'Vaata kõiki pakkumisi',
             'subtitle_route' => '/content/travelmate'
         ])
+
     </div>
 
     <div class="r-travelmates__wrap">
