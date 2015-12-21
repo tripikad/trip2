@@ -182,13 +182,17 @@
         <div class="r-travelmates__sidebar">
             <div class="r-block m-small">
 
-                @include('component.destination', [
-                    'modifiers' => 'm-purple',
-                    'title' => $destination ? $destination->name : null,
-                    'title_route' => $destination ? route('destination.show', $destination) : null,
-                    'subtitle' => $parent_destination ? $parent_destination->name : null,
-                    'subtitle_route' => $parent_destination ? route('destination.show', $parent_destination) : null,
-                ])
+                @if ($destination && $parent_destination)
+
+                    @include('component.destination', [
+                        'modifiers' => 'm-purple',
+                        'title' => $destination ? $destination->name : null,
+                        'title_route' => $destination ? route('destination.show', $destination) : null,
+                        'subtitle' => $parent_destination ? $parent_destination->name : null,
+                        'subtitle_route' => $parent_destination ? route('destination.show', $parent_destination) : null,
+                    ])
+
+                @endif
 
                 @if (count($sidebar_flights))
 
