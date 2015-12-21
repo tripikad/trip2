@@ -21,7 +21,7 @@
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
             'image' => \App\Image::getRandom(),
-            'subtitle' => 'Vaata kõiki pakkumisi',
+            'subtitle' => trans('content.travelmate.view.all.offers'),
             'subtitle_route' => route('content.index', [$content->type])
         ])
 
@@ -32,8 +32,10 @@
             <h1 class="r-travelmates__title">{{ $content->title }}</h1>
 
             <div class="r-travelmates__meta">
+                @include('component.actions', ['actions' => $content->getActions()])
+
                 <p class="r-travelmates__meta-date">
-                    {{ trans('content.post.added', [
+                    {{ trans('content.travelmate.post.added', [
                         'created_at' => view('component.date.relative', [
                             'date' => $content->created_at
                         ])
@@ -82,29 +84,6 @@
 
                 </div>
             </div>
-
-            {{--
-
-            @include('component.row', [
-                'profile' => [
-                    'modifiers' => '',
-                    'image' => $content->user->imagePreset(),
-                    'route' => route('user.show', [$content->user])
-                ],
-                'modifiers' => 'm-image',
-                'title' => $content->title,
-                'text' => view('component.content.text', ['content' => $content]),
-                'actions' => view('component.actions', ['actions' => $content->getActions()]),
-                'extra' => view('component.flags', ['flags' => $content->getFlags()]),
-                'body' => $content->body_filtered,
-            ])
-
-            --}}
-
-        </div>
-
-        <div style="display: none">
-            @include('component.actions', ['actions' => $content->getActions()])
         </div>
 
         <div class="r-travelmates__sidebar m-first">
@@ -173,37 +152,6 @@
                         'comments' => $comments
                     ])
 
-                    @include('component.content.forum.post',[
-                        'profile' => [
-                            'modifiers' => 'm-full m-status',
-                            'image' => \App\Image::getRandom(),
-                            'title' => 'Charles Darwin',
-                            'route' => '',
-                            'status' => [
-                                'modifiers' => 'm-blue',
-                                'position' => '1'
-                            ]
-                        ],
-                        'actions' => view('component.actions', ['actions' => $content->getActions()]),
-                        'date' => '12. jaanuar, 12:31',
-                        'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p><p>Kuna mul oli plaanis arengumaades maapiirkondades kohalikke (arvatavasti) igasuguse litsentsita reisijuhte kasutada, näiteks kuskilt väikesest kohast ümberkaudsete külade üleöö külastamiseks ehk pikad jalgsimatkad mägistes piirkondades, oli tarvis, et juhul kui juhtub õnnetus, see ka korvatakse. Tegemist ei olnud siis spordiga, vaid lihtsalt keskmisest veidi koormavamate matkadega. Kokkuvõttes oli sel ajal vaid Ifil kindlustuses selline asi sees, sai ka kirjalikult üle küsitud (et oleks tõestusmaterjal hiljem!) ning teised firmad pakkusid seda lisakaitse all päris räiga lisahinnaga või ei võtnud üldse jutule, kui giidi litsentsi poleks ette näidata.</p>',
-                    ])
-
-                    @include('component.content.forum.post',[
-                        'profile' => [
-                            'modifiers' => 'm-full m-status',
-                            'image' => \App\Image::getRandom(),
-                            'title' => 'Charles Darwin',
-                            'route' => '',
-                            'status' => [
-                                'modifiers' => 'm-blue',
-                                'position' => '1'
-                            ]
-                        ],
-                        'actions' => view('component.actions', ['actions' => $content->getActions()]),
-                        'date' => '12. jaanuar, 12:31',
-                        'text' => '<p>Tegemist ei olnud siis spordiga, vaid lihtsalt keskmisest veidi koormavamate matkadega. Kokkuvõttes oli sel ajal vaid Ifil kindlustuses selline asi sees, sai ka kirjalikult üle küsitud (et oleks tõestusmaterjal hiljem!) ning teised firmad pakkusid seda lisakaitse all päris räiga lisahinnaga või ei võtnud üldse jutule, kui giidi litsentsi poleks ette näidata.</p>',
-                    ])
                 </div>
             </div>
 
@@ -374,71 +322,40 @@
         </div>
     </div>
 
-    <div class="r-travelmates__additional">
-        <div class="r-travelmates__additional-wrap">
+    @if (count($travel_mates))
 
-            @include('component.travelmate.list', [
-                'modifiers' => 'm-3col',
-                'items' => [
-                    [
-                        'modifiers' => 'm-small',
-                        'image' =>  \App\Image::getRandom(),
-                        'name' => 'Charles Darwin',
-                        'route' => '#',
-                        'sex_and_age' => 'N,28',
-                        'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
-                        'tags' => [
-                            [
-                                'modifiers' => 'm-yellow',
-                                'title' => 'India'
-                            ],
-                            [
-                                'modifiers' => 'm-purple',
-                                'title' => 'Delhi'
-                            ]
-                        ]
-                    ],
-                    [
-                        'modifiers' => 'm-small',
-                        'image' =>  \App\Image::getRandom(),
-                        'name' => 'Epptriin ',
-                        'route' => '#',
-                        'sex_and_age' => 'N,22',
-                        'title' => 'Suusareis Austriasse veebruar-märts 2016',
-                        'tags' => [
-                            [
-                                'modifiers' => 'm-red',
-                                'title' => 'Austria'
-                            ],
-                            [
-                                'modifiers' => 'm-gray',
-                                'title' => 'Suusareis'
-                            ]
-                        ]
-                    ],
-                    [
-                        'modifiers' => 'm-small',
-                        'image' =>  \App\Image::getRandom(),
-                        'name' => 'Silka ',
-                        'route' => '#',
-                        'sex_and_age' => 'M,32',
-                        'title' => 'Puerto Rico',
-                        'tags' => [
-                            [
-                                'modifiers' => 'm-green',
-                                'title' => 'Puerto Rico'
-                            ],
-                            [
-                                'modifiers' => 'm-gray',
-                                'title' => 'Puhkusereis'
-                            ]
-                        ]
-                    ]
-                ]
-            ])
+        <div class="r-travelmates__additional">
+            <div class="r-travelmates__additional-wrap">
 
+                @include('component.travelmate.list', [
+                    'modifiers' => 'm-3col',
+                    'items' => $travel_mates->transform(function ($travel_mate) {
+                        return [
+                            'modifiers' => 'm-small',
+                            'image' => $travel_mate->user->imagePreset('small_square'),
+                            'name' => $travel_mate->user->name,
+                            'route' => route('content.show', [$travel_mate->type, $travel_mate]),
+                            'sex_and_age' =>
+                                ($travel_mate->user->gender ?
+                                    trans('user.gender.'.$travel_mate->user->gender).
+                                    ($travel_mate->user->age ? ', ' : '')
+                                : null).
+                                ($travel_mate->user->age ? $travel_mate->user->age : null),
+                            'title' => $travel_mate->title,
+                            'tags' => $travel_mate->destinations->transform(function ($travel_mate_destination) {
+                                return [
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                                    'title' => $travel_mate_destination->name
+                                ];
+                            })
+                        ];
+                    })
+                ])
+
+            </div>
         </div>
-    </div>
+
+    @endif
 
     <div class="r-travelmates__footer-promo">
         <div class="r-travelmates__footer-promo-wrap">
