@@ -153,6 +153,32 @@ class ContentController extends Controller
             ->take(3)
             ->get();
 
+        $types = [
+            'forums' => 'forum',
+            'flights' => 'flight',
+        ];
+
+        foreach ($types as $key => $type) {
+            $viewVariables[$key] = Content::
+            join('content_destination', 'content_destination.content_id', '=', 'contents.id')
+                ->leftJoin('content_topic', 'content_topic.content_id', '=', 'contents.id')
+                ->select('contents.*')
+                ->where('contents.type', $type)
+                ->whereNested(function ($query) use ($content) {
+                    $query->whereIn(
+                        'content_destination.destination_id',
+                        $content->destinations->lists('id')->toArray()
+                    )
+                        ->orWhereIn(
+                            'content_topic.topic_id',
+                            $content->topics->lists('id')->toArray()
+                        );
+                })
+                ->orderBy('contents.created_at', 'desc')
+                ->take(3)
+                ->get();
+        }
+
         return $viewVariables;
     }
 
