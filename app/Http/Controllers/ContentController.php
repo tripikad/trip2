@@ -131,11 +131,29 @@ class ContentController extends Controller
             $view = 'pages.content.show';
         }
 
-        return response()->view($view, [
-            'content' => $content,
-            'comments' => $comments,
-            'type' => $type,
-        ])->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
+        if ($type == 'travelmate') {
+            $viewVariables = $this->getTravelMateShow($content);
+        }
+
+        $viewVariables['content'] = $content;
+        $viewVariables['comments'] = $comments;
+        $viewVariables['type'] = $type;
+
+        return response()
+            ->view($view, $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
+    }
+
+    public function getTravelMateShow($content)
+    {
+        $viewVariables['travel_mates'] = Content::where('id', '!=', $content->id)
+            ->whereStatus(1)
+            ->whereType('travelmate')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        return $viewVariables;
     }
 
     public function create($type)
