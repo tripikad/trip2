@@ -52,9 +52,9 @@
                                 : null).
                                 ($content->user->age ? $content->user->age : null),
                             'title' => $content->title,
-                            'tags' => $content->destinations->transform(function ($content_destination, $key) {
+                            'tags' => $content->destinations->transform(function ($content_destination) {
                                 return [
-                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][$key],
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
                                     'title' => $content_destination->name
                                 ];
                             })
@@ -91,9 +91,9 @@
                                 : null).
                                 ($content->user->age ? $content->user->age : null),
                             'title' => $content->title,
-                            'tags' => $content->destinations->transform(function ($content_destination, $key) {
+                            'tags' => $content->destinations->transform(function ($content_destination) {
                                 return [
-                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][$key],
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
                                     'title' => $content_destination->name
                                 ];
                             })
