@@ -31,6 +31,7 @@ return [
     'field.image.title' => 'Select image',
     'field.image.selected.title' => 'New image selected',
 
+    'index.filter.title' => 'Filter',
     'index.filter.field.destination.title' => 'All',
     'index.filter.field.topic.title' => 'All',
     'index.filter.submit.title' => 'Filter',
@@ -151,6 +152,11 @@ return [
 
     'travelmate.edit.field.duration.title' => 'Trip duration',
     'travelmate.edit.field.duration.help' => '',
+
+    'travelmate.filter.text' => 'Kui ei leia sobivat kaaslast, siis ehk aitab sind filter.',
+
+    'travelmate.description.title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
+    'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.',
 
     // Forum
 
