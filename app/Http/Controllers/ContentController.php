@@ -82,9 +82,13 @@ class ContentController extends Controller
 
     public function getTravelMateIndex()
     {
-        $viewVariables['about'] = Content::whereId(1534)
+        $content = Content::whereIn('id', [1534, 25151])
             ->whereStatus(1)
             ->get();
+
+        $viewVariables['about'] = $content->where('id', 1534);
+
+        $viewVariables['rules'] = $content->where('id', 25151);
 
         $viewVariables['activity'] = Content::whereType('travelmate')
             ->whereStatus(1)
