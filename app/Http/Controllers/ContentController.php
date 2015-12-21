@@ -109,7 +109,7 @@ class ContentController extends Controller
             abort(401);
         }
 
-        $content = \App\Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers')
+        $content = Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers')
             ->findorFail($id);
 
         $comments = $content->comments->filter(function ($comment) {
@@ -153,25 +153,55 @@ class ContentController extends Controller
             ->take(3)
             ->get();
 
+        $destination_ids = $content->destinations->lists('id')->toArray();
+        $topic_ids = $content->topics->lists('id')->toArray();
+
+        $viewVariables['destination'] = null;
+        $viewVariables['parent_destination'] = null;
+        $destinationNotIn = [];
+
+        $sidebar_flights = Content::
+            with('destinations')
+            ->whereHas('destinations', function ($query) use ($destination_ids) {
+                $query->whereIn('content_destination.destination_id', $destination_ids);
+            })
+            ->where('type', 'flight')
+            ->whereStatus(1)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        if (count($sidebar_flights)) {
+            $sidebar_flights = $sidebar_flights->groupBy('destination_id')->max()->take(2);
+
+            $viewVariables['destination'] = $sidebar_flights->first()->destinations->first();
+            if ($viewVariables['destination']) {
+                $viewVariables['parent_destination'] = $viewVariables['destination']->parent()->first();
+            }
+
+            $destinationNotIn = $sidebar_flights->first()->destinations->lists('id')->toArray();
+        }
+
         $types = [
             'forums' => 'forum',
             'flights' => 'flight',
         ];
 
+        $viewVariables['sidebar_flights'] = $sidebar_flights;
+
         foreach ($types as $key => $type) {
             $viewVariables[$key] = Content::
             join('content_destination', 'content_destination.content_id', '=', 'contents.id')
                 ->leftJoin('content_topic', 'content_topic.content_id', '=', 'contents.id')
-                ->select('contents.*')
                 ->where('contents.type', $type)
-                ->whereNested(function ($query) use ($content) {
+                ->whereNotIn('content_destination.destination_id', $destinationNotIn)
+                ->whereNested(function ($query) use ($content, $destination_ids, $topic_ids) {
                     $query->whereIn(
                         'content_destination.destination_id',
-                        $content->destinations->lists('id')->toArray()
+                        $destination_ids
                     )
                         ->orWhereIn(
                             'content_topic.topic_id',
-                            $content->topics->lists('id')->toArray()
+                            $topic_ids
                         );
                 })
                 ->orderBy('contents.created_at', 'desc')
