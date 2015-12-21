@@ -204,71 +204,40 @@
                     'image' => \App\Image::getRandom()
                 ])
 
-                <div class="r-block__inner">
-                    <div class="r-block__header">
+                @if (count($forums))
 
-                        @include('component.title', [
-                            'modifiers' => 'm-purple',
-                            'title' => 'Tripikad räägivad'
+                    <div class="r-block__inner">
+                        <div class="r-block__header">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-purple',
+                                'title' => trans('destination.show.forum.title')
+                            ])
+
+                        </div>
+
+                        @include('component.content.forum.list', [
+                            'modifiers' => 'm-compact',
+                            'items' => $forums->transform(function ($forum) {
+                                return [
+                                    'topic' => str_limit($forum->title, 30),
+                                    'route' => route('content.show', [$forum->type, $forum]),
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => $forum->user->imagePreset('small_square')
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-purple',
+                                        'count' => $forum->comments->count()
+                                    ]
+                                ];
+                            })
                         ])
 
                     </div>
 
-                    @include('component.content.forum.list', [
-                        'modifiers' => 'm-compact',
-                        'items' => [
-                            [
-                                'topic' => 'Samui hotellid?',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-purple',
-                                    'count' => 9
-                                ]
-                            ],
-                            [
-                                'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-purple',
-                                    'count' => 4
-                                ]
-                            ],
-                            [
-                                'topic' => 'Puhkuseosakud Tenerifel',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-purple',
-                                    'count' => 2
-                                ]
-                            ],
-                            [
-                                'topic' => 'Ischgl mäeolud-pilet ja majutus',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-purple',
-                                    'count' => 2
-                                ]
-                            ]
-                        ]
-                    ])
+                @endif
 
-                </div>
             </div>
 
             <div class="r-block m-small">
@@ -283,44 +252,32 @@
         </div>
     </div>
 
-    <div class="r-travelmates__offers">
-        <div class="r-travelmates__offers-wrap">
-            <div class="c-columns m-3-cols">
-                <div class="c-columns__item">
+    @if (count($flights))
 
-                    @include('component.card', [
-                        'modifiers' => 'm-purple',
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Delhisse al 350 €',
-                        'image' => \App\Image::getRandom()
-                    ])
+        <div class="r-travelmates__offers">
+            <div class="r-travelmates__offers-wrap">
+                <div class="c-columns m-{{ count($flights) }}-cols">
 
-                </div>
+                    @foreach($flights as $flight)
 
-                <div class="c-columns__item">
+                        <div class="c-columns__item">
 
-                    @include('component.card', [
-                        'modifiers' => 'm-purple',
-                        'route' => '#',
-                        'title' => 'Stockholmist Delhisse, Goasse või Mumbaisse al 285 €',
-                        'image' => \App\Image::getRandom()
-                    ])
+                            @include('component.card', [
+                                'modifiers' => 'm-purple',
+                                'route' => route('content.show', [$flight->type, $flight]),
+                                'title' => $flight->title,
+                                'image' => $flight->imagePreset()
+                            ])
 
-                </div>
+                        </div>
 
-                <div class="c-columns__item">
-
-                    @include('component.card', [
-                        'modifiers' => 'm-purple',
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Delhisse al 350 €',
-                        'image' => \App\Image::getRandom()
-                    ])
+                    @endforeach
 
                 </div>
             </div>
         </div>
-    </div>
+
+    @endif
 
     @if (count($travel_mates))
 
