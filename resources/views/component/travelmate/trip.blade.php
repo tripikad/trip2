@@ -3,7 +3,7 @@
 
         @if(isset($trip_start) && $trip_start != '')
             <p class="c-travelmate-trip__info">
-                <strong>{{ trans('cntent.travelmate.edit.field.start_at.title') }}</strong><br>
+                <strong>{{ trans('content.travelmate.edit.field.start_at.title') }}</strong><br>
                 <span>{{$trip_start}}</span>
             </p>
         @endif
