@@ -158,14 +158,14 @@ class ContentController extends Controller
 
         $sidebar_flights = Content::
             with('destinations')
-            ->whereHas('destinations', function($query) use ($destination_ids) {
+            ->whereHas('destinations', function ($query) use ($destination_ids) {
                 $query->whereIn('content_destination.destination_id', $destination_ids);
             })
             ->where('contents.type', 'flight')
             ->orderBy('contents.created_at', 'desc')
             ->get();
 
-        $max = NULL;
+        $max = null;
         $sidebar_flights = $sidebar_flights->groupBy('destination_id')->max()->take(2);
 
         $viewVariables['parent_destination'] = null;
