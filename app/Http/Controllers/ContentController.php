@@ -166,7 +166,9 @@ class ContentController extends Controller
             ->get();
 
         $max = null;
-        $sidebar_flights = $sidebar_flights->groupBy('destination_id')->max()->take(2);
+        if ($sidebar_flights) {
+            $sidebar_flights = $sidebar_flights->groupBy('destination_id')->max()->take(2);
+        }
 
         $viewVariables['parent_destination'] = null;
         $viewVariables['destination'] = $sidebar_flights->first()->destinations->first();
