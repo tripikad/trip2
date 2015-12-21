@@ -4,7 +4,6 @@ return [
 
     // General
 
-    'post.added' => 'Post added at :created_at',
     'comments.title' => 'Comments',
 
     'row.text.comment' => 'Latest comment :updated_at',
@@ -135,6 +134,10 @@ return [
     // Travelmate
 
     'travelmate.index.title' => 'Travel mates',
+
+    'travelmate.view.all.offers' => 'View all offers',
+
+    'travelmate.post.added' => 'Post added :created_at',
 
     'travelmate.activity' => 'Viimase :days päeva jooksul lisatud :posts_count kuulutust',
 
