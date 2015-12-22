@@ -89,7 +89,7 @@ class AuthTest extends TestCase
             ])
             ->seeLink(str_limit($user->name, 15), 'user/'.$user->id)
             ->visit('/user/'.$user->id)
-            ->seeLink(trans('user.edit.title'), 'user/'.$user->id.'/edit');
+            ->seeLink(trans('menu.user.edit.profile'), 'user/'.$user->id.'/edit');
     }
 
     public function test_nonregistered_user_can_not_reset_password()
