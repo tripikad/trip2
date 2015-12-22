@@ -274,22 +274,23 @@
 
             @endif
 
-            <div class="r-block m-small">
+            @if (count($relative_flights))
 
-                @include('component.card', [
-                    'route' => '#',
-                    'title' => 'Stockholmist Los Angelesse, New Yorki või Seatlisse al 285 €',
-                    'image' => \App\Image::getRandom()
-                ])
-                @include('component.card', [
-                    'route' => '#',
-                    'title' => 'Edasi-tagasi Riiast või Helsingist LAsse al 350 €',
-                    'image' => \App\Image::getRandom()
-                ])
-            </div>
+                <div class="r-block m-small">
+
+                    @foreach ($relative_flights as $flight)
+                        @include('component.card', [
+                            'route' => route('content.show', [$flight->type, $flight]),
+                            'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
+                            'image' => $flight->imagePreset()
+                        ])
+                    @endforeach
+
+                </div>
+
+            @endif
 
         </div>
-
     </div>
 
     @if (count($forums) || count($travel_mates) || count($flights))
