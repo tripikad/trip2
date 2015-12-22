@@ -46,22 +46,20 @@
                 ],
                 'title' => $content->title,
                 'date' => view('component.date.relative', ['date' => $content->created_at]),
-                'date_edit' => '10. jaanuar, 17:14',
+                'date_edit' =>
+                    $content->created_at != $content->updated_at ?
+                        view('component.date.long', ['date' => $content->updated_at])
+                    : null,
                 'text' => $content->body_filtered,
                 'actions' => view('component.actions', ['actions' => $content->getActions()]),
                 'thumbs' => view('component.flags', ['flags' => $content->getFlags()]),
-                'tags' => [
-                    [
-                        'modifiers' => 'm-blue',
-                        'title' => 'Aafrika',
-                        'route' => '#'
-                    ],
-                    [
-                        'modifiers' => 'm-purple',
-                        'title' => 'Põhja-Ameerika',
-                        'route' => '#'
-                    ]
-                ]
+                'tags' => $content->destinations->transform(function ($destination) {
+                    return [
+                        'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                        'title' => $destination->name,
+                        'route' => route('destination.show', [$destination->id])
+                    ];
+                })
             ])
 
             <div class="r-block m-small m-mobile-hide">
@@ -134,22 +132,20 @@
                     ]
                 ])
 
-                @include('component.content.forum.nav', [
-                    'items' => [
-                        [
-                            'type' => 'button',
-                            'title' => 'Otsi foorumist',
-                            'route' => '#',
-                            'modifiers' => 'm-secondary m-block m-shadow'
-                        ],
-                        [
-                            'type' => 'button',
-                            'title' => trans("content.$type.create.title"),
-                            'route' => route('content.create', ['type' => $type]),
-                            'modifiers' => 'm-secondary m-block m-shadow'
+                @if (\Auth::check())
+
+                    @include('component.content.forum.nav', [
+                        'items' => [
+                            [
+                                'type' => 'button',
+                                'title' => trans("content.$type.create.title"),
+                                'route' => route('content.create', ['type' => $type]),
+                                'modifiers' => 'm-secondary m-block m-shadow'
+                            ]
                         ]
-                    ]
-                ])
+                    ])
+
+                @endif
 
             </div>
 
@@ -171,7 +167,7 @@
 
                             @include('component.title', [
                                 'modifiers' => 'm-purple',
-                                'title' => 'Tripikad räägivad'
+                                'title' => trans('destination.show.forum.title')
                             ])
                         </div>
                     </div>
@@ -262,7 +258,7 @@
 
                             @include('component.title', [
                                 'modifiers' => 'm-blue',
-                                'title' => 'Tripikad räägivad'
+                                'title' => trans('destination.show.forum.title')
                             ])
                         </div>
                     </div>
@@ -354,7 +350,7 @@
 
                     @include('component.title', [
                         'modifiers' => 'm-red',
-                        'title' => 'Tripikad räägivad'
+                        'title' => trans('destination.show.forum.title')
                     ])
 
                 </div>
@@ -502,110 +498,74 @@
                 </div>
             </div>
 
-            <div class="r-block">
+            @if (count($flights))
 
-                <div class="c-columns m-3-cols">
+                <div class="r-block">
+                    <div class="c-columns m-{{ count($flights) }}-cols">
 
-                    <div class="c-columns__item">
+                        @foreach ($flights as $flight)
 
-                        @include('component.card', [
-                            'route' => '#',
-                            'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                            'image' => \App\Image::getRandom()
-                        ])
+                            <div class="c-columns__item">
+
+                                @include('component.card', [
+                                    'route' => route('content.show', [$flight->type, $flight]),
+                                    'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
+                                    'image' => $flight->imagePreset()
+                                ])
+
+                            </div>
+
+                        @endforeach
+
                     </div>
-
-                    <div class="c-columns__item">
-
-                        @include('component.card', [
-                            'route' => '#',
-                            'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                            'image' => \App\Image::getRandom()
-                        ])
-                    </div>
-
-                    <div class="c-columns__item">
-
-                        @include('component.card', [
-                            'route' => '#',
-                            'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                            'image' => \App\Image::getRandom()
-                        ])
-                    </div>
-
                 </div>
-            </div>
 
-            <div class="r-block">
+            @endif
 
-                <div class="r-block__header">
-                    @include('component.title', [
-                        'title' => 'Reisikaaslased',
-                        'modifiers' => 'm-red'
+            @if (count($travel_mates))
+
+                <div class="r-block">
+
+                    <div class="r-block__header">
+                        @include('component.title', [
+                            'title' => trans('frontpage.index.travelmate.title'),
+                            'modifiers' => 'm-red'
+                        ])
+                    </div>
+
+                    @include('component.travelmate.list', [
+                        'modifiers' => 'm-'.count($travel_mates).'col',
+                        'items' => $travel_mates->transform(function ($travel_mate) {
+                            return [
+                                'modifiers' => 'm-small',
+                                'image' =>  $travel_mate->imagePreset(),
+                                'name' =>
+                                    $travel_mate->user->real_name ?
+                                        $travel_mate->user->real_name
+                                    :
+                                        $travel_mate->user->name,
+                                'route' => route('content.show', [$travel_mate->type, $travel_mate]),
+                                'sex_and_age' =>
+                                    ($travel_mate->user->gender ?
+                                        trans('user.gender.'.$travel_mate->user->gender).
+                                        ($travel_mate->user->age ? ', ' : '')
+                                    : null).
+                                    ($travel_mate->user->age ? $travel_mate->user->age : null),
+                                'title' => $travel_mate->title,
+                                'tags' => $travel_mate->destinations->transform(function ($destination) {
+                                    return [
+                                        'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                                        'title' => $destination->name
+                                    ];
+                                })
+                            ];
+                        })
                     ])
+
                 </div>
 
-                @include('component.travelmate.list', [
-                    'modifiers' => 'm-3col',
-                    'items' => [
-                        [
-                            'modifiers' => 'm-small',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Charles Darwin',
-                            'route' => '#',
-                            'sex_and_age' => 'N,28',
-                            'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => 'India'
-                                ],
-                                [
-                                    'modifiers' => 'm-purple',
-                                    'title' => 'Delhi'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => 'm-small',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Epptriin ',
-                            'route' => '#',
-                            'sex_and_age' => 'N,22',
-                            'title' => 'Suusareis Austriasse veebruar-märts 2016',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-red',
-                                    'title' => 'Austria'
-                                ],
-                                [
-                                    'modifiers' => 'm-gray',
-                                    'title' => 'Suusareis'
-                                ]
-                            ]
-                        ],
-                        [
-                            'modifiers' => 'm-small',
-                            'image' =>  \App\Image::getRandom(),
-                            'name' => 'Silka ',
-                            'route' => '#',
-                            'sex_and_age' => 'M,32',
-                            'title' => 'Puerto Rico',
-                            'tags' => [
-                                [
-                                    'modifiers' => 'm-green',
-                                    'title' => 'Puerto Rico'
-                                ],
-                                [
-                                    'modifiers' => 'm-gray',
-                                    'title' => 'Puhkusereis'
-                                ]
-                            ]
-                        ]
-                    ]
-                ])
+            @endif
 
-            </div>
         </div>
     </div>
 
@@ -633,25 +593,3 @@
     ])
 
 @stop
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
