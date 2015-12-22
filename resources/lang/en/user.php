@@ -22,12 +22,19 @@ return [
     'edit.title' => 'Edit profile',
     'edit.contact.title' => 'Contact information',
     'edit.account.title' => 'Account details',
+    'edit.general.title' => 'General information',
     'edit.notify.title' => 'E-mail notifications',
+
+    'edit.choose.gender' => 'Choose gender',
 
     'edit.field.name.title' => 'Username',
     'edit.field.email.title' => 'E-mail',
     'edit.field.password.title' => 'New password',
     'edit.field.password_confirmation.title' => 'Confirm new password',
+
+    'edit.field.real.name.title' => 'Your name',
+    'edit.field.birthyear.title' => 'Year of birth',
+    'edit.field.description.title' => 'Write more about yourself',
 
     'edit.field.contact_facebook.title' => 'Facebook link',
     'edit.field.contact_twitter.title' => 'Twitter link',
