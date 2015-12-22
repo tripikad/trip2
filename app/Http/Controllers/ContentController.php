@@ -133,6 +133,8 @@ class ContentController extends Controller
 
         if ($type == 'travelmate') {
             $viewVariables = $this->getTravelMateShow($content);
+        } elseif ($type == 'forum' || $type == 'expat' || $type == 'buysell' || $type == 'internal') {
+            $viewVariables = $this->getForumShow($content);
         }
 
         $viewVariables['content'] = $content;
@@ -208,6 +210,23 @@ class ContentController extends Controller
                 ->take(3)
                 ->get();
         }
+
+        return $viewVariables;
+    }
+
+    public function getForumShow($content)
+    {
+        $viewVariables['travel_mates'] = Content::whereType('travelmate')
+            ->whereStatus(1)
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        $viewVariables['flights'] = Content::whereType('flight')
+            ->whereStatus(1)
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
 
         return $viewVariables;
     }
