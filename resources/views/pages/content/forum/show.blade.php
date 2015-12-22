@@ -340,234 +340,152 @@
 
     </div>
 
-    <div class="r-forum__additional">
+    @if (count($forums) || count($travel_mates) || count($flights))
 
-        <div class="r-forum__additional-wrap">
+        <div class="r-forum__additional">
+            <div class="r-forum__additional-wrap">
 
-            <div class="r-block">
+                @if (count($forums))
 
-                <div class="r-block__header">
+                    <div class="r-block">
+                        <div class="r-block__header">
 
-                    @include('component.title', [
-                        'modifiers' => 'm-red',
-                        'title' => trans('destination.show.forum.title')
-                    ])
+                            @include('component.title', [
+                                'modifiers' => 'm-red',
+                                'title' => trans('destination.show.forum.title')
+                            ])
 
-                </div>
+                        </div>
+                        <div class="r-forum__additional-column m-first">
 
-                <div class="r-forum__additional-column m-first">
-
-                    @include('component.content.forum.nav', [
-                        'items' => [
-                            [
-                                'title' => 'Üldfoorum',
-                                'route' => '#',
-                                'modifiers' => 'm-large m-block m-icon',
-                                'icon' => 'icon-arrow-right'
-                            ],
-                            [
-                                'title' => 'Ost-müük',
-                                'route' => '#',
-                                'modifiers' => 'm-large m-block m-icon',
-                                'icon' => 'icon-arrow-right'
-                            ],
-                            [
-                                'title' => 'Vaba teema',
-                                'route' => '#',
-                                'modifiers' => 'm-large m-block m-icon',
-                                'icon' => 'icon-arrow-right'
-                            ],
-                            [
-                                'type' => 'button',
-                                'title' => 'Otsi foorumist',
-                                'route' => '#',
-                                'modifiers' => 'm-secondary m-block m-shadow'
-                            ],
-                            [
-                                'type' => 'button',
-                                'title' => 'Alusta teemat',
-                                'route' => '#',
-                                'modifiers' => 'm-secondary m-block m-shadow'
-                            ]
-                        ]
-                    ])
-
-                </div>
-
-                <div class="r-forum__additional-column m-last">
-
-                    @include('component.content.forum.list', [
-                        'items' => [
-                            [
-                                'topic' => 'Samui hotellid?',
-                                'route' => '#',
-                                'date' => 'Täna, 15:12',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted',
-                                    'count' => 9
-                                ],
-                                'tags' => [
+                            @include('component.content.forum.nav', [
+                                'items' => [
                                     [
-                                        'title' => 'Inglismaa',
-                                        'modifiers' => 'm-green',
-                                        'route' => ''
+                                        'title' => trans('frontpage.index.forum.general'),
+                                        'route' => route('content.show', 'forum'),
+                                        'modifiers' => 'm-large m-block m-icon',
+                                        'icon' => 'icon-arrow-right'
                                     ],
                                     [
-                                        'title' => 'London',
-                                        'modifiers' => 'm-purple',
-                                        'route' => ''
+                                        'title' => trans('frontpage.index.forum.buysell'),
+                                        'route' => route('content.show', 'buysell'),
+                                        'modifiers' => 'm-large m-block m-icon',
+                                        'icon' => 'icon-arrow-right'
                                     ],
-                                ]
-                            ],
-                            [
-                                'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
-                                'route' => '#',
-                                'date' => 'Täna, 12:17',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted',
-                                    'count' => 4
-                                ],
-                                'tags' => [
                                     [
-                                        'title' => 'Rongireis',
-                                        'modifiers' => 'm-gray',
-                                        'route' => ''
+                                        'title' => trans('frontpage.index.forum.expat'),
+                                        'route' => route('content.show', 'expat'),
+                                        'modifiers' => 'm-large m-block m-icon',
+                                        'icon' => 'icon-arrow-right'
                                     ]
                                 ]
-                            ],
-                            [
-                                'topic' => 'Puhkuseosakud Tenerifel',
-                                'route' => '#',
-                                'date' => '10. detsember 2015',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted',
-                                    'count' => 2
-                                ],
-                                'tags' => [
-                                    [
-                                        'title' => 'Tenerife',
-                                        'modifiers' => 'm-red',
-                                        'route' => ''
-                                    ]
-                                ]
-                            ],
-                            [
-                                'topic' => 'Ischgl mäeolud-pilet ja majutus',
-                                'route' => '#',
-                                'date' => '11. detsember 2015',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => '',
-                                    'count' => 2
-                                ],
-                                'tags' => [
-                                    [
-                                        'title' => 'Tenerife',
-                                        'modifiers' => 'm-red',
-                                        'route' => ''
-                                    ],
-                                    [
-                                        'title' => 'Rong',
-                                        'modifiers' => 'm-gray',
-                                        'route' => ''
-                                    ],
-                                    [
-                                        'title' => 'Mäed',
-                                        'modifiers' => 'm-gray',
-                                        'route' => ''
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ])
-                </div>
-            </div>
+                            ])
 
-            @if (count($flights))
+                        </div>
+                        <div class="r-forum__additional-column m-last">
 
-                <div class="r-block">
-                    <div class="c-columns m-{{ count($flights) }}-cols">
-
-                        @foreach ($flights as $flight)
-
-                            <div class="c-columns__item">
-
-                                @include('component.card', [
-                                    'route' => route('content.show', [$flight->type, $flight]),
-                                    'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
-                                    'image' => $flight->imagePreset()
-                                ])
-
-                            </div>
-
-                        @endforeach
-
-                    </div>
-                </div>
-
-            @endif
-
-            @if (count($travel_mates))
-
-                <div class="r-block">
-
-                    <div class="r-block__header">
-                        @include('component.title', [
-                            'title' => trans('frontpage.index.travelmate.title'),
-                            'modifiers' => 'm-red'
-                        ])
-                    </div>
-
-                    @include('component.travelmate.list', [
-                        'modifiers' => 'm-'.count($travel_mates).'col',
-                        'items' => $travel_mates->transform(function ($travel_mate) {
-                            return [
-                                'modifiers' => 'm-small',
-                                'image' =>  $travel_mate->imagePreset(),
-                                'name' =>
-                                    $travel_mate->user->real_name ?
-                                        $travel_mate->user->real_name
-                                    :
-                                        $travel_mate->user->name,
-                                'route' => route('content.show', [$travel_mate->type, $travel_mate]),
-                                'sex_and_age' =>
-                                    ($travel_mate->user->gender ?
-                                        trans('user.gender.'.$travel_mate->user->gender).
-                                        ($travel_mate->user->age ? ', ' : '')
-                                    : null).
-                                    ($travel_mate->user->age ? $travel_mate->user->age : null),
-                                'title' => $travel_mate->title,
-                                'tags' => $travel_mate->destinations->transform(function ($destination) {
+                            @include('component.content.forum.list', [
+                                'items' => $forums->transform(function ($forum) {
                                     return [
-                                        'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
-                                        'title' => $destination->name
+                                        'topic' => str_limit($forum->title, 50),
+                                        'route' => route('content.show', [$forum->type, $forum]),
+                                        'date' => view('component.date.relative', [
+                                            'date' => $forum->created_at
+                                        ]),
+                                        'profile' => [
+                                            'modifiers' => 'm-mini',
+                                            'image' => $forum->user->imagePreset()
+                                        ],
+                                        'badge' => [
+                                            'modifiers' => 'm-inverted',
+                                            'count' => $forum->comments->count()
+                                        ],
+                                        'tags' => $forum->destinations->take(2)->transform(function ($destination, $key) use ($forum) {
+                                            return [
+                                                'title' => $destination->name,
+                                                'modifiers' => ['m-green', 'm-blue', 'm-orange', 'm-yellow', 'm-red'][$key],
+                                                'route' => route('content.show', [$forum->type]).'?topic='.$destination->id,
+                                            ];
+                                        })
                                     ];
                                 })
-                            ];
-                        })
-                    ])
+                            ])
+                        </div>
+                    </div>
 
-                </div>
+                @endif
 
-            @endif
+                @if (count($flights))
 
+                    <div class="r-block">
+                        <div class="c-columns m-{{ count($flights) }}-cols">
+
+                            @foreach ($flights as $flight)
+
+                                <div class="c-columns__item">
+
+                                    @include('component.card', [
+                                        'route' => route('content.show', [$flight->type, $flight]),
+                                        'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
+                                        'image' => $flight->imagePreset()
+                                    ])
+
+                                </div>
+
+                            @endforeach
+
+                        </div>
+                    </div>
+
+                @endif
+
+                @if (count($travel_mates))
+
+                    <div class="r-block">
+                        <div class="r-block__header">
+                            @include('component.title', [
+                                'title' => trans('frontpage.index.travelmate.title'),
+                                'modifiers' => 'm-red'
+                            ])
+                        </div>
+
+                        @include('component.travelmate.list', [
+                            'modifiers' => 'm-'.count($travel_mates).'col',
+                            'items' => $travel_mates->transform(function ($travel_mate) {
+                                return [
+                                    'modifiers' => 'm-small',
+                                    'image' =>  $travel_mate->imagePreset(),
+                                    'name' =>
+                                        $travel_mate->user->real_name ?
+                                            $travel_mate->user->real_name
+                                        :
+                                            $travel_mate->user->name,
+                                    'route' => route('content.show', [$travel_mate->type, $travel_mate]),
+                                    'sex_and_age' =>
+                                        ($travel_mate->user->gender ?
+                                            trans('user.gender.'.$travel_mate->user->gender).
+                                            ($travel_mate->user->age ? ', ' : '')
+                                        : null).
+                                        ($travel_mate->user->age ? $travel_mate->user->age : null),
+                                    'title' => $travel_mate->title,
+                                    'tags' => $travel_mate->destinations->transform(function ($destination) {
+                                        return [
+                                            'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                                            'title' => $destination->name
+                                        ];
+                                    })
+                                ];
+                            })
+                        ])
+
+                    </div>
+
+                @endif
+
+            </div>
         </div>
-    </div>
+
+    @endif
 
     <div class="r-forum__footer-promo">
 
