@@ -201,7 +201,7 @@
                         @include('component.card', [
                             'modifiers' => 'm-purple',
                             'route' => route('content.show', [$sidebar_flight->type, $sidebar_flight]),
-                            'title' => $sidebar_flight->title,
+                            'title' => $sidebar_flight->title.' '.$sidebar_flight->price.' '.config('site.currency.symbol'),
                             'image' => $sidebar_flight->imagePreset()
                         ])
 
@@ -270,7 +270,7 @@
                             @include('component.card', [
                                 'modifiers' => 'm-purple',
                                 'route' => route('content.show', [$flight->type, $flight]),
-                                'title' => $flight->title,
+                                'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
                                 'image' => $flight->imagePreset()
                             ])
 

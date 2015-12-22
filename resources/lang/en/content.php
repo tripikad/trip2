@@ -4,6 +4,8 @@ return [
 
     // General
 
+    'post.updated.at' => 'Edited: :updated_at',
+
     'comments.title' => 'Comments',
 
     'row.text.comment' => 'Latest comment :updated_at',

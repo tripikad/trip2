@@ -79,7 +79,7 @@ code: |
             <div class="c-forum-post__date">
                 {{ $date }}
                 @if(isset($date_edit))
-                    <span>(Edited: {{ $date_edit }})</span>
+                    <span>({{ trim(trans('content.post.updated.at', ['updated_at' => $date_edit])) }})</span>
                 @endif
             </div>
 
