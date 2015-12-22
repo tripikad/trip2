@@ -184,8 +184,8 @@ class ContentController extends Controller
         }
 
         $types = [
-            'forums' => 'forum',
-            'flights' => 'flight',
+            'forums' => ['forum', 'expat', 'buysell'],
+            'flights' => ['flight'],
         ];
 
         $viewVariables['sidebar_flights'] = $sidebar_flights;
@@ -194,7 +194,7 @@ class ContentController extends Controller
             $viewVariables[$key] = Content::
             join('content_destination', 'content_destination.content_id', '=', 'contents.id')
                 ->leftJoin('content_topic', 'content_topic.content_id', '=', 'contents.id')
-                ->where('contents.type', $type)
+                ->whereIn('contents.type', $type)
                 ->whereNotIn('content_destination.destination_id', $destinationNotIn)
                 ->whereNested(function ($query) use ($content, $destination_ids, $topic_ids) {
                     $query->whereIn(
@@ -233,6 +233,46 @@ class ContentController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(4)
             ->get();
+
+        $destination_ids = $content->destinations->lists('id')->toArray();
+
+        $relation_posts = Content::
+            with('destinations')
+            ->whereHas('destinations', function ($query) use ($destination_ids) {
+                $query->whereIn('destination_id', $destination_ids);
+            })
+            ->whereIn('type', ['forum', 'expat', 'buysell'])
+            ->where('id', '!=', $content->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $first_relative_posts = null;
+        $second_relative_posts = null;
+        $viewVariables['first_destination'] = null;
+        $viewVariables['first_destination_parent'] = null;
+        $viewVariables['second_destination'] = null;
+        $viewVariables['second_destination_parent'] = null;
+        if (count($relation_posts)) {
+            $relation_posts = $relation_posts->groupBy(function ($item) {
+                return $item->destinations->first()->id;
+            })->take(2);
+
+            if (count($relation_posts)) {
+                $first_relative_posts = $relation_posts->first();
+                $viewVariables['first_destination'] = $first_relative_posts->first()->destinations->first();
+                $viewVariables['first_destination_parent'] = $first_relative_posts->first()->destinations->first()->parent()->first();
+            }
+
+            if (count($relation_posts) > 1) {
+                $second_relative_posts = $relation_posts->last();
+                $viewVariables['second_destination'] = $second_relative_posts->first()->destinations->first();
+                $viewVariables['second_destination_parent'] = $second_relative_posts->first()->destinations->first()->parent()->first();
+            }
+
+        }
+
+        $viewVariables['first_relative_posts'] = $first_relative_posts;
+        $viewVariables['second_relative_posts'] = $second_relative_posts;
 
         return $viewVariables;
     }
