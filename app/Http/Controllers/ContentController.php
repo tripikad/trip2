@@ -228,6 +228,12 @@ class ContentController extends Controller
             ->take(3)
             ->get();
 
+        $viewVariables['forums'] = Content::whereIn('type', ['forum', 'expat', 'buysell'])
+            ->whereStatus(1)
+            ->orderBy('created_at', 'desc')
+            ->take(4)
+            ->get();
+
         return $viewVariables;
     }
 
