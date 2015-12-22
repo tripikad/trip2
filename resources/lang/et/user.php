@@ -2,8 +2,8 @@
 
 return [
 
-    'gender.1' => 'Female',
-    'gender.2' => 'Male',
+    'gender.1' => 'Naine',
+    'gender.2' => 'Mees',
 
     'show.joined' => 'Joined :created_at',
     'show.message.create' => 'Send private message',
