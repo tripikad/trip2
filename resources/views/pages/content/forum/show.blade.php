@@ -400,10 +400,10 @@
                                             'modifiers' => 'm-inverted',
                                             'count' => $forum->comments->count()
                                         ],
-                                        'tags' => $forum->destinations->take(2)->transform(function ($destination, $key) use ($forum) {
+                                        'tags' => $forum->destinations->merge($forum->topics)->take(2)->transform(function ($destination, $key) use ($forum) {
                                             return [
                                                 'title' => $destination->name,
-                                                'modifiers' => ['m-green', 'm-blue', 'm-orange', 'm-yellow', 'm-red'][$key],
+                                                'modifiers' => ['m-gray', 'm-green', 'm-blue', 'm-orange', 'm-yellow', 'm-red'][$key],
                                                 'route' => route('content.show', [$forum->type]).'?topic='.$destination->id,
                                             ];
                                         })
