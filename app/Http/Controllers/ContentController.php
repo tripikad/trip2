@@ -195,16 +195,17 @@ class ContentController extends Controller
             join('content_destination', 'content_destination.content_id', '=', 'contents.id')
                 ->leftJoin('content_topic', 'content_topic.content_id', '=', 'contents.id')
                 ->whereIn('contents.type', $type)
+                ->where('contents.status', 1)
                 ->whereNotIn('content_destination.destination_id', $destinationNotIn)
-                ->whereNested(function ($query) use ($content, $destination_ids, $topic_ids) {
+                ->whereNested(function ($query) use ($destination_ids, $topic_ids) {
                     $query->whereIn(
                         'content_destination.destination_id',
                         $destination_ids
                     )
-                        ->orWhereIn(
-                            'content_topic.topic_id',
-                            $topic_ids
-                        );
+                    ->orWhereIn(
+                        'content_topic.topic_id',
+                        $topic_ids
+                    );
                 })
                 ->orderBy('contents.created_at', 'desc')
                 ->take(3)
@@ -235,6 +236,7 @@ class ContentController extends Controller
             ->get();
 
         $destination_ids = $content->destinations->lists('id')->toArray();
+        $topic_ids = $content->topics->lists('id')->toArray();
 
         $relation_posts = Content::
             with('destinations')
@@ -268,11 +270,29 @@ class ContentController extends Controller
                 $viewVariables['second_destination'] = $second_relative_posts->first()->destinations->first();
                 $viewVariables['second_destination_parent'] = $second_relative_posts->first()->destinations->first()->parent()->first();
             }
-
         }
 
         $viewVariables['first_relative_posts'] = $first_relative_posts;
         $viewVariables['second_relative_posts'] = $second_relative_posts;
+
+        $viewVariables['relative_flights'] = Content::
+            join('content_destination', 'content_destination.content_id', '=', 'contents.id')
+            ->leftJoin('content_topic', 'content_topic.content_id', '=', 'contents.id')
+            ->where('contents.type', 'flight')
+            ->where('contents.status', 1)
+            ->whereNested(function ($query) use ($destination_ids, $topic_ids) {
+                $query->whereIn(
+                    'content_destination.destination_id',
+                    $destination_ids
+                )
+                ->orWhereIn(
+                    'content_topic.topic_id',
+                    $topic_ids
+                );
+            })
+            ->orderBy('contents.created_at', 'desc')
+            ->take(2)
+            ->get();
 
         return $viewVariables;
     }
