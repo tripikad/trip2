@@ -149,87 +149,63 @@
 
             </div>
 
-            <div class="r-block m-small">
+            @if (count($first_relative_posts))
 
-                @include('component.destination', [
-                    'modifiers' => 'm-purple',
-                    'title' => 'New York',
-                    'title_route' => '/destination/4',
-                    'subtitle' => 'Põhja-Ameerika',
-                    'subtitle_route' => '#'
-                ])
+                <div class="r-block m-small">
 
-                <div class="r-block__inner">
+                    @if ($first_destination)
 
-                    <div class="r-block__header">
+                        @include('component.destination', [
+                            'modifiers' => 'm-purple',
+                            'title' => $first_destination->name,
+                            'title_route' => route('destination.show', [
+                                $first_destination
+                            ]),
+                            'subtitle' => $first_destination_parent ? $first_destination_parent->name : null,
+                            'subtitle_route' => $first_destination_parent ? route('destination.show', [
+                                $first_destination_parent
+                            ]) : null
+                        ])
 
-                        <div class="r-block__header-title">
+                    @endif
 
-                            @include('component.title', [
-                                'modifiers' => 'm-purple',
-                                'title' => trans('destination.show.forum.title')
+                    <div class="r-block__inner">
+
+                        <div class="r-block__header">
+
+                            <div class="r-block__header-title">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-purple',
+                                    'title' => trans('destination.show.forum.title')
+                                ])
+                            </div>
+                        </div>
+
+                        <div class="r-block__body">
+
+                            @include('component.content.forum.list', [
+                                'modifiers' => 'm-compact',
+                                'items' => $first_relative_posts->transform(function ($post) {
+                                    return [
+                                        'topic' => str_limit($post->title, 25),
+                                        'route' => route('content.show', [$post->type, $post]),
+                                        'profile' => [
+                                            'modifiers' => 'm-mini',
+                                            'image' => $post->user->imagePreset()
+                                        ],
+                                        'badge' => [
+                                            'modifiers' => 'm-inverted m-purple',
+                                            'count' => $post->comments->count()
+                                        ]
+                                    ];
+                                })
                             ])
                         </div>
                     </div>
-
-                    <div class="r-block__body">
-
-                        @include('component.content.forum.list', [
-                            'modifiers' => 'm-compact',
-                            'items' => [
-                                [
-                                    'topic' => 'Samui hotellid?',
-                                    'route' => '#',
-                                    'profile' => [
-                                        'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
-                                    ],
-                                    'badge' => [
-                                        'modifiers' => 'm-inverted m-purple',
-                                        'count' => 9
-                                    ]
-                                ],
-                                [
-                                    'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
-                                    'route' => '#',
-                                    'profile' => [
-                                        'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
-                                    ],
-                                    'badge' => [
-                                        'modifiers' => 'm-inverted m-purple',
-                                        'count' => 4
-                                    ]
-                                ],
-                                [
-                                    'topic' => 'Puhkuseosakud Tenerifel',
-                                    'route' => '#',
-                                    'profile' => [
-                                        'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
-                                    ],
-                                    'badge' => [
-                                        'modifiers' => 'm-inverted m-purple',
-                                        'count' => 2
-                                    ]
-                                ],
-                                [
-                                    'topic' => 'Ischgl mäeolud-pilet ja majutus',
-                                    'route' => '#',
-                                    'profile' => [
-                                        'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
-                                    ],
-                                    'badge' => [
-                                        'modifiers' => 'm-purple',
-                                        'count' => 2
-                                    ]
-                                ]
-                            ]
-                        ])
-                    </div>
                 </div>
-            </div>
+
+            @endif
 
             <div class="r-block m-small">
 
@@ -240,87 +216,63 @@
                 ])
             </div>
 
-            <div class="r-block m-small">
+            @if (count($second_relative_posts))
 
-                @include('component.destination', [
-                    'modifiers' => 'm-blue',
-                    'title' => 'Keenia',
-                    'title_route' => '/destination/4',
-                    'subtitle' => 'Aafrika',
-                    'subtitle_route' => '#'
-                ])
+                <div class="r-block m-small">
 
-                <div class="r-block__inner">
+                    @if ($second_destination)
 
-                    <div class="r-block__header">
+                        @include('component.destination', [
+                            'modifiers' => 'm-blue',
+                            'title' => $second_destination->name,
+                            'title_route' => route('destination.show', [
+                                $second_destination
+                            ]),
+                            'subtitle' => $second_destination_parent ? $second_destination_parent->name : null,
+                            'subtitle_route' => $second_destination_parent ? route('destination.show', [
+                                $second_destination_parent
+                            ]) : null
+                        ])
 
-                        <div class="r-block__header-title">
+                    @endif
 
-                            @include('component.title', [
-                                'modifiers' => 'm-blue',
-                                'title' => trans('destination.show.forum.title')
+                    <div class="r-block__inner">
+
+                        <div class="r-block__header">
+
+                            <div class="r-block__header-title">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-blue',
+                                    'title' => trans('destination.show.forum.title')
+                                ])
+                            </div>
+                        </div>
+
+                        <div class="r-block__body">
+
+                            @include('component.content.forum.list', [
+                                'modifiers' => 'm-compact',
+                                'items' => $second_relative_posts->transform(function ($post) {
+                                    return [
+                                        'topic' => str_limit($post->title, 25),
+                                        'route' => route('content.show', [$post->type, $post]),
+                                        'profile' => [
+                                            'modifiers' => 'm-mini',
+                                            'image' => $post->user->imagePreset()
+                                        ],
+                                        'badge' => [
+                                            'modifiers' => 'm-inverted m-blue',
+                                            'count' => $post->comments->count()
+                                        ]
+                                    ];
+                                })
                             ])
                         </div>
                     </div>
-
-                    <div class="r-block__body">
-
-                        @include('component.content.forum.list', [
-                            'modifiers' => 'm-compact',
-                            'items' => [
-                                [
-                                    'topic' => 'Samui hotellid?',
-                                    'route' => '#',
-                                    'profile' => [
-                                        'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
-                                    ],
-                                    'badge' => [
-                                        'modifiers' => 'm-inverted m-blue',
-                                        'count' => 9
-                                    ]
-                                ],
-                                [
-                                    'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
-                                    'route' => '#',
-                                    'profile' => [
-                                        'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
-                                    ],
-                                    'badge' => [
-                                        'modifiers' => 'm-inverted m-blue',
-                                        'count' => 4
-                                    ]
-                                ],
-                                [
-                                    'topic' => 'Puhkuseosakud Tenerifel',
-                                    'route' => '#',
-                                    'profile' => [
-                                        'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
-                                    ],
-                                    'badge' => [
-                                        'modifiers' => 'm-inverted m-blue',
-                                        'count' => 2
-                                    ]
-                                ],
-                                [
-                                    'topic' => 'Ischgl mäeolud-pilet ja majutus',
-                                    'route' => '#',
-                                    'profile' => [
-                                        'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
-                                    ],
-                                    'badge' => [
-                                        'modifiers' => 'm-blue',
-                                        'count' => 2
-                                    ]
-                                ]
-                            ]
-                        ])
-                    </div>
                 </div>
-            </div>
+
+            @endif
 
             <div class="r-block m-small">
 
