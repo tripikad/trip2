@@ -63,8 +63,8 @@ return [
 
     'news.create.title' => 'Lisa uus uudis',
 
-    'news.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
-    'news.edit.field.image_id.help' => 'You can use image shortcuts, for example: [[456]]',
+    'news.edit.field.image_id.title' => 'Pildi ID, näiteks [[123]]',
+    'news.edit.field.image_id.help' => 'Pildi ID tuleb sisestada kujul: [[456]]',
 
     'news.edit.field.title.title' => 'Pealkiri',
     'news.edit.field.title.help' => '',
@@ -112,8 +112,8 @@ return [
     'flight.edit.field.title.title' => 'Pealkiri',
     'flight.edit.field.title.help' => '',
 
-    'flight.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
-    'flight.edit.field.image_id.help' => 'You can use image shortcuts, for example: [[456]]',
+    'flight.edit.field.image_id.title' => 'Pildi ID, näiteks [[123]]',
+    'flight.edit.field.image_id.help' => 'Pildi ID tuleb sisestada kujul: [[456]]',
 
     'flight.edit.field.body.title' => 'Sisu',
     'flight.edit.field.body.help' => '',
@@ -137,30 +137,30 @@ return [
 
     'travelmate.index.title' => 'Reisikaaslased',
 
-    'travelmate.view.all.offers' => 'View all offers',
+    'travelmate.view.all.offers' => 'Vaata kõiki pakkumisi',
 
-    'travelmate.post.added' => 'Post added :created_at',
+    'travelmate.post.added' => 'Lisatud :created_at',
 
     'travelmate.activity' => 'Viimase :days päeva jooksul lisatud :posts_count kuulutust',
 
-    'travelmate.create.title' => 'Add listing',
+    'travelmate.create.title' => 'Lisa kuulutus',
 
-    'travelmate.edit.field.title.title' => 'Title',
+    'travelmate.edit.field.title.title' => 'Pealkiri',
     'travelmate.edit.field.title.help' => '',
 
-    'travelmate.edit.field.body.title' => 'Body',
+    'travelmate.edit.field.body.title' => 'Sisu',
     'travelmate.edit.field.body.help' => '',
 
-    'travelmate.edit.field.destinations.title' => 'Select destinations',
+    'travelmate.edit.field.destinations.title' => 'Vali sihtkohad',
     'travelmate.edit.field.destinations.help' => '',
 
-    'travelmate.edit.field.topics.title' => 'Select topics',
+    'travelmate.edit.field.topics.title' => 'Vali valdkonnad',
     'travelmate.edit.field.topics.help' => '',
 
-    'travelmate.edit.field.start_at.title' => 'Starting the trip at',
+    'travelmate.edit.field.start_at.title' => 'Alustan reisi kuupäeval',
     'travelmate.edit.field.start_at.help' => '',
 
-    'travelmate.edit.field.duration.title' => 'Trip duration',
+    'travelmate.edit.field.duration.title' => 'Reisi kestus',
     'travelmate.edit.field.duration.help' => '',
 
     'travelmate.filter.text' => 'Kui ei leia sobivat kaaslast, siis ehk aitab sind filter.',
@@ -170,82 +170,82 @@ return [
 
     // Forum
 
-    'forum.index.title' => 'General forum',
-    'forum.create.title' => 'Add post',
+    'forum.index.title' => 'Üldine foorum',
+    'forum.create.title' => 'Lisa uus',
 
-    'forum.edit.field.title.title' => 'Title',
+    'forum.edit.field.title.title' => 'Pealkiri',
     'forum.edit.field.title.help' => '',
 
-    'forum.edit.field.body.title' => 'Body',
+    'forum.edit.field.body.title' => 'Sisu',
     'forum.edit.field.body.help' => '',
 
-    'forum.edit.field.destinations.title' => 'Select destinations',
+    'forum.edit.field.destinations.title' => 'Vali sihtkohad',
     'forum.edit.field.destinations.help' => '',
 
-    'forum.edit.field.topics.title' => 'Select topics',
+    'forum.edit.field.topics.title' => 'Vali valdkonnad',
     'forum.edit.field.topics.help' => '',
 
     // Expat
 
-    'expat.index.title' => 'Expat forum',
-    'expat.create.title' => 'Add post',
+    'expat.index.title' => 'Elu välismaal',
+    'expat.create.title' => 'Lisa uus',
 
-    'expat.edit.field.title.title' => 'Title',
+    'expat.edit.field.title.title' => 'Pealkiri',
     'expat.edit.field.title.help' => '',
 
-    'expat.edit.field.body.title' => 'Body',
+    'expat.edit.field.body.title' => 'Sisu',
     'expat.edit.field.body.help' => '',
 
-    'expat.edit.field.destinations.title' => 'Select destinations',
+    'expat.edit.field.destinations.title' => 'Vali sihtkohad',
     'expat.edit.field.destinations.help' => '',
 
-    'expat.edit.field.topics.title' => 'Select topics',
+    'expat.edit.field.topics.title' => 'Vali valdkonnad',
     'expat.edit.field.topics.help' => '',
 
     // Buysell
 
-    'buysell.index.title' => 'Buying and selling',
+    'buysell.index.title' => 'Ost-müük',
 
-    'buysell.create.title' => 'Add post',
+    'buysell.create.title' => 'Lisa uus',
 
-    'buysell.edit.field.title.title' => 'Title',
+    'buysell.edit.field.title.title' => 'Pealkiri',
     'buysell.edit.field.title.help' => '',
 
-    'buysell.edit.field.body.title' => 'Body',
+    'buysell.edit.field.body.title' => 'Sisu',
     'buysell.edit.field.body.help' => '',
 
-    'buysell.edit.field.destinations.title' => 'Select destinations',
+    'buysell.edit.field.destinations.title' => 'Vali sihtkohad',
     'buysell.edit.field.destinations.help' => '',
 
-    'buysell.edit.field.topics.title' => 'Select topics',
+    'buysell.edit.field.topics.title' => 'Vali valdkonnad',
     'buysell.edit.field.topics.help' => '',
 
     // Photo
 
-    'photo.index.title' => 'Photos',
-    'photo.create.title' => 'Add photo',
+    'photo.index.title' => 'Pildid',
+    'photo.create.title' => 'Lisa pilt',
 
     'photo.edit.field.file.help' => '',
 
-    'photo.edit.field.title.title' => 'Description',
+    'photo.edit.field.title.title' => 'Kirjeldus',
     'photo.edit.field.title.help' => '',
 
-    'photo.edit.field.destinations.title' => 'Select destinations',
+    'photo.edit.field.destinations.title' => 'Vali sihtkohad',
     'photo.edit.field.destinations.help' => '',
 
     // Blog
 
-    'blog.index.title' => 'Blogs',
+    'blog.index.title' => 'Blogi',
 
-    'blog.create.title' => 'Add post',
+    'blog.create.title' => 'Lisa uus',
 
-    'blog.edit.field.title.title' => 'Title',
+    'blog.edit.field.title.title' => 'Pealkiri',
     'blog.edit.field.title.help' => '',
 
-    'blog.edit.field.body.title' => 'Body',
+    'blog.edit.field.body.title' => 'Sisu',
     'blog.edit.field.body.help' => '',
 
-    'blog.edit.field.destinations.title' => 'Select destinations',
+    'blog.edit.field.destinations.title' => 'Vali sihtkohad',
     'blog.edit.field.destinations.help' => '',
 
     'blog.edit.field.url.title' => 'URL',
@@ -253,43 +253,43 @@ return [
 
     // Internal
 
-    'internal.index.title' => 'Internal forum',
+    'internal.index.title' => 'Sisefoorum',
 
-    'internal.create.title' => 'Add post',
+    'internal.create.title' => 'Lisa uus',
 
-    'internal.edit.field.title.title' => 'Title',
+    'internal.edit.field.title.title' => 'Pealkiri',
     'internal.edit.field.title.help' => '',
 
-    'internal.edit.field.body.title' => 'Body',
+    'internal.edit.field.body.title' => 'Sisu',
     'internal.edit.field.body.help' => '',
 
     // Static
 
-    'static.edit.field.title.title' => 'Title',
+    'static.edit.field.title.title' => 'Pealkiri',
     'static.edit.field.title.help' => '',
 
-    'static.edit.field.body.title' => 'Body',
+    'static.edit.field.body.title' => 'Sisu',
     'static.edit.field.body.help' => '',
 
     // Sponsored
 
-    'sponsored.index.title' => 'Sponsored articles',
+    'sponsored.index.title' => 'Toimetaja valik',
 
-    'sponsored.create.title' => 'Add sponsored post',
+    'sponsored.create.title' => 'Lisa uus',
 
-    'sponsored.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
-    'sponsored.edit.field.image_id.help' => 'You can use image shortcuts, for example: [[456]]',
+    'sponsored.edit.field.image_id.title' => 'Pildi ID, näiteks [[123]]',
+    'sponsored.edit.field.image_id.help' => 'Pildi ID tuleb sisestada kujul: [[456]]',
 
-    'sponsored.edit.field.title.title' => 'Title',
+    'sponsored.edit.field.title.title' => 'Pealkiri',
     'sponsored.edit.field.title.help' => '',
 
-    'sponsored.edit.field.body.title' => 'Body',
+    'sponsored.edit.field.body.title' => 'Sisu',
     'sponsored.edit.field.body.help' => '',
 
-    'sponsored.edit.field.destinations.title' => 'Select destinations',
+    'sponsored.edit.field.destinations.title' => 'Vali sihtkohad',
     'sponsored.edit.field.destinations.help' => '',
 
-    'sponsored.edit.field.topics.title' => 'Select topics',
+    'sponsored.edit.field.topics.title' => 'Vali valdkonnad',
     'sponsored.edit.field.topics.help' => '',
 
     'sponsored.edit.field.url.title' => 'URL',
