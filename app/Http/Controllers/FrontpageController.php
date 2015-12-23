@@ -43,16 +43,9 @@ class FrontpageController extends Controller
                 'status' => 1,
                 'latest' => 'created_at',
             ],
-            'news1' => [
+            'news' => [
                 'skip' => null,
-                'take' => 2,
-                'type' => ['news'],
-                'status' => 1,
-                'latest' => 'created_at',
-            ],
-            'news2' => [
-                'skip' => 2,
-                'take' => 5,
+                'take' => 8,
                 'type' => ['news'],
                 'status' => 1,
                 'latest' => 'created_at',
@@ -80,7 +73,7 @@ class FrontpageController extends Controller
             ],
             'travelmates' => [
                 'skip' => null,
-                'take' => 4,
+                'take' => 3,
                 'type' => ['travelmate'],
                 'status' => 1,
                 'latest' => 'created_at',
@@ -117,6 +110,7 @@ class FrontpageController extends Controller
     {
         $content_query = null;
         $i = 0;
+        $viewVariables = [];
 
         foreach ($types as $key => $type) {
             ++$i;
@@ -124,9 +118,11 @@ class FrontpageController extends Controller
             $query = null;
 
             if (isset($type['id'])) {
-                $query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->where('id', $type['id'])->whereStatus($type['status']);
+                //$query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->where('id', $type['id'])->whereStatus($type['status']);
+                $query = Content::where('id', $type['id'])->whereStatus($type['status']);
             } else {
-                $query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
+                //$query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
+                $query = Content::whereIn('type', $type['type'])->whereStatus($type['status']);
 
                 if (isset($type['with']) && $type['with'] !== null) {
                     $query = $query->with($type['with']);
@@ -145,22 +141,22 @@ class FrontpageController extends Controller
                 }
             }
 
-            if ($i == 1) {
+            /*if ($i == 1) {
                 $content_query = $query;
             } else {
                 $content_query = $content_query->unionAll($query);
-            }
+            }*/
+            $$key = $query->with('images')->get();
+            $viewVariables[$key] = $$key;
         }
 
-        $content_query = $content_query->with('images')->get();
+        //$content_query = $content_query->with('images')->get();
 
-        $viewVariables = [];
-
-        foreach ($types as $key => $type) {
+        /*foreach ($types as $key => $type) {
             $$key = Collection::make($content_query->where('pseudo', $key)->values()->all());
 
             $viewVariables[$key] = $$key;
-        }
+        }*/
 
         return $viewVariables;
     }
