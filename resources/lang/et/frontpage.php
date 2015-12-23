@@ -15,7 +15,7 @@ return [
     'index.travelmate.title' => 'Reisikaaslased',
     'index.forum.title' => 'Foorum',
     'index.news.title' => 'Uudised',
-    'index.photo.title' => 'Pildid',
+    'index.photo.title' => 'Viimati lisatud pildid',
     'index.blog.title' => 'Blogi',
     'index.offer.title' => 'Reisipakkumised',
     'index.travelletter.title' => 'Reisikirjad',
