@@ -2,7 +2,7 @@
 
 return [
 
-    'previous' => 'Previous',
-    'next'     => 'Next',
+    'previous' => 'Eelmine',
+    'next'     => 'Järgmine',
 
 ];

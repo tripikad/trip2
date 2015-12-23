@@ -2,19 +2,19 @@
 
 return [
 
-    'show.good.offer' => 'Good offers',
-    'show.link.view.all' => 'View all offers &rsaquo;',
-    'show.user.havebeen.title' => 'How many Trip.ee users have been there?',
-    'show.user.wantstogo.title' => 'How many Trip.ee users want to go there?',
+    'show.good.offer' => 'Head pakkumised',
+    'show.link.view.all' => 'Vaata kõiki pakkumisi &rsaquo;',
+    'show.user.havebeen.title' => 'Kui palju Trip.ee kasutajatest on siin käinud?',
+    'show.user.wantstogo.title' => 'Kui palju Trip.ee kasutajatest tahavad sinna minna?',
 
-    'show.user.button.havebeen' => 'I have been there',
-    'show.user.button.havenotbeen' => 'I haven\'t been there',
+    'show.user.button.havebeen' => 'Ma olen siin käinud',
+    'show.user.button.havenotbeen' => 'Ma ei ole siin käinud',
 
-    'show.user.button.wanttogo' => 'I want to go there',
-    'show.user.button.dontwanttogo' => 'I don\'t want to go there',
+    'show.user.button.wanttogo' => 'Ma tahan sinna minna',
+    'show.user.button.dontwanttogo' => 'Ma ei taha sinna minna',
 
-    'show.forum.title' => 'Trip.ee users discuss',
-    'show.popular.title' => 'Popular destinations in :destination',
-    'show.news.title' => 'News',
+    'show.forum.title' => 'Tripikad räägivad',
+    'show.popular.title' => 'Populaarsed sihtkohad - :destination',
+    'show.news.title' => 'Uudised',
 
 ];

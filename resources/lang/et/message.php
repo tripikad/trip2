@@ -2,16 +2,16 @@
 
 return [
 
-    'index.title' => ':user messages',
-    'index.row.description' => 'With :user, last message at :created_at',
+    'index.title' => ':user sõnumid',
+    'index.row.description' => 'Suhtluses kasutajaga :user, viimane sõnum :created_at',
 
-    'index.with.title' => ':user messages with :user_with',
-    'index.with.row.description' => 'By :user at :created_at',
+    'index.with.title' => ':user sõnumid kasutajaga :user_with',
+    'index.with.row.description' => 'Suhtlus kasutajaga :user kuupäeval :created_at',
 
-    'create.field.body.title' => 'Message',
-    'create.submit.title' => 'Send private message',
+    'create.field.body.title' => 'Sõnum',
+    'create.submit.title' => 'Saada sõnum',
 
-    'store.email.subject' => ':user has sent you a private message',
-    'store.email.body' => 'See the full message here :url',
+    'store.email.subject' => ':user on saatnud sulle sõnumi',
+    'store.email.body' => 'Loe täispikka sõnumit siit: :url',
 
 ];
