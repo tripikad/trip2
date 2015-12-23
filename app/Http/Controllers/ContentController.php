@@ -29,6 +29,16 @@ class ContentController extends Controller
             )
             ->whereStatus(1);
 
+        if (config("content_$type.index.expire.field") && config("content_$type.index.expire.daysBack")) {
+            $contents = $contents->whereBetween(
+                config("content_$type.index.expire.field"),
+                [
+                    Carbon::now()->addDays(-config("content_$type.index.expire.daysBack")),
+                    Carbon::now(),
+                ]
+            );
+        }
+
         if ($request->destination) {
             $descendants = Destination::find($request->destination)
                 ->descendantsAndSelf()
@@ -109,8 +119,20 @@ class ContentController extends Controller
             abort(401);
         }
 
-        $content = Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers')
-            ->findorFail($id);
+
+        $content = Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers');
+
+        if (config("content_$type.index.expire.field") && config("content_$type.index.expire.daysBack")) {
+            $content = $content->whereBetween(
+                config("content_$type.index.expire.field"),
+                [
+                    Carbon::now()->addDays(-config("content_$type.index.expire.daysBack")),
+                    Carbon::now(),
+                ]
+            );
+        }
+
+        $content = $content->findorFail($id);
 
         $comments = $content->comments->filter(function ($comment) {
             return $comment->status || (Auth::check() && Auth::user()->hasRole('admin'));
