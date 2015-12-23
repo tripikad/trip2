@@ -2,10 +2,10 @@
 
 return [
 
-    'password' => 'Passwords must be at least six characters and match the confirmation',
-    'user' => "We can't find a user with that e-mail address",
-    'token' => 'This password reset token is invalid',
-    'sent' => 'We have e-mailed your password reset link',
-    'reset' => 'Your password has been reset',
+    'password' => 'Parool peab olema vähemalt 6 töhemärki pikk ja peab klappima parool uuesti väljaga',
+    'user' => "Sellise e-posti aadressiga kasutajat meie andmebaasis pole",
+    'token' => 'Parooli taastamise link on aegunud või vigane',
+    'sent' => 'Me saatsime su e-postile parooli taastamise lingi',
+    'reset' => 'Su uus parool on nüüd kasutusel',
 
 ];

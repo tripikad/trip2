@@ -2,11 +2,11 @@
 
 return [
 
-    'index.title' => ':user follows',
-    'index.row.text' => 'By :user at :created_at',
+    'index.title' => ':user jälgib',
+    'index.row.text' => 'Kasutaja :user kuupäeval :created_at',
 
-    'content.email.subject' => 'The post :title has received a new comment',
+    'content.email.subject' => 'Postitusele ":title" on lisatud uus kommentaar',
 
-    'email.content.body' => 'Check the full comment out here: :url',
+    'email.content.body' => 'Loe täispikka kommentaari siit: :url',
 
 ];
