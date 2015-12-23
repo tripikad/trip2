@@ -119,7 +119,6 @@ class ContentController extends Controller
             abort(401);
         }
 
-
         $content = Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers');
 
         if (config("content_$type.index.expire.field") && config("content_$type.index.expire.daysBack")) {
