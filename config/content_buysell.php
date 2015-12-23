@@ -16,6 +16,10 @@ return [
             'field' => 'updated_at',
             'order' => 'desc',
         ],
+        'expire' => [
+            'field' => 'created_at',
+            'daysBack' => 30,
+        ],
         'paginate' => 25,
     ],
 
