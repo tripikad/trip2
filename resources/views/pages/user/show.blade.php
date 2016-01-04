@@ -448,7 +448,7 @@
                             @include('component.link', [
                                 'modifiers' => 'm-small',
                                 'title' => trans('menu.forum.forum'),
-                                'route' => route('content.show', ['forum'])
+                                'route' => route('content.index', ['forum'])
                             ])
 
                         </div>
@@ -485,7 +485,7 @@
                                 @include('component.link', [
                                     'modifiers' => 'm-small',
                                     'title' => trans('site.link.read.more'),
-                                    'route' => route('content.show', ['blog'])
+                                    'route' => route('content.index', ['blog'])
                                 ])
 
                             </div>

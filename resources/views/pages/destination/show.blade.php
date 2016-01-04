@@ -141,7 +141,7 @@
                         @include('component.link', [
                             'modifiers' => 'm-tiny',
                             'title' => trans('destination.show.link.view.all'),
-                            'route' => route('content.show', ['flights'])
+                            'route' => route('content.index', ['flights'])
                         ])
 
                     </div>
