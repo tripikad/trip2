@@ -18,10 +18,13 @@
                 @if(isset($user_route))
                 <a href="{{ $user_route }}" class="c-travelmate-user__title-link">
                 @endif
+
                     {{ str_limit($name, 18) }}
-                    @if(isset($sex_and_age))
-                    <span>({{ $sex_and_age }})</span>
+
+                    @if(isset($sex_and_age) && $sex_and_age != '')
+                        <span>({{ $sex_and_age }})</span>
                     @endif
+
                 @if(isset($user_route))
                 </a>
                 @endif
@@ -35,14 +38,18 @@
 
                     @foreach($social_items as $social)
 
-                    <li class="c-button-group__item">
-                        @include('component.button',[
-                            'modifiers' => 'm-icon m-small m-round',
-                            'icon' => view('component.svg.sprite',['name' => $social['icon']]),
-                            'route' => $social['route'],
-                            'target' => '_blank'
-                        ])
-                    </li>
+                        @if (isset($social['route']) && $social['route']!='')
+
+                            <li class="c-button-group__item">
+                                @include('component.button',[
+                                    'modifiers' => 'm-icon m-small m-round',
+                                    'icon' => view('component.svg.sprite',['name' => $social['icon']]),
+                                    'route' => $social['route'],
+                                    'target' => '_blank'
+                                ])
+                            </li>
+
+                        @endif
 
                     @endforeach
                 </ul>
@@ -54,11 +61,15 @@
         </div>
     </div>
 
-    <div class="c-travelmate-user__body">
-        <div class="c-body">
-            {!! $description !!}
+    @if (isset($description) && $description != '')
+
+        <div class="c-travelmate-user__body">
+            <div class="c-body">
+                {!! $description !!}
+            </div>
         </div>
-    </div>
+
+    @endif
 
     @if (\Auth::user())
         @if(\Auth::user()->id !== $user->id)

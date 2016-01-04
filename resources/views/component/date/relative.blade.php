@@ -9,4 +9,4 @@ code: |
 
 --}}
 
-@if(isset($date)) {{ Date::parse($date)->diffForHumans() }} @endif
+{{ isset($date) ? Date::parse($date)->diffForHumans() : '' }}

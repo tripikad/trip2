@@ -121,6 +121,68 @@
             <div class="c-form__group">
 
                 @include('component.title', [
+                    'title' => trans('user.edit.general.title'),
+                    'modifiers' => 'm-orange'
+                ])
+
+            </div>
+
+            <div class="c-form__group">
+
+                {!! Form::text('real_name', null, [
+                    'class' => 'c-form__input',
+                    'placeholder' => trans('user.edit.field.real.name.title')
+                ]) !!}
+
+            </div>
+
+            <div class="c-form__group">
+
+                <div class="c-form__label">
+                    {{ trans('user.edit.choose.gender') }}
+                </div>
+
+                {!! Form::radio('gender', '1', null, [
+                    'id' => 'gender1'
+                ]) !!}
+
+                {!! Form::label('gender1', trans('user.gender.1')) !!}
+
+                {!! Form::radio('gender', '2', null, [
+                    'id' => 'gender2'
+                ]) !!}
+
+                {!! Form::label('gender2', trans('user.gender.2')) !!}
+
+            </div>
+
+            <div class="c-form__group">
+
+                <div class="c-form__label">
+                    {{ trans('user.edit.field.birthyear.title') }}
+                </div>
+
+                @include('component.date.select', [
+                    'from' => \Carbon\Carbon::parse('-100 years')->year,
+                    'to' => \Carbon\Carbon::now()->year,
+                    'selected' => $user->birthyear ? $user->birthyear : \Carbon\Carbon::parse('-30 years')->year,
+                    'key' => 'birthyear'
+                ])
+
+            </div>
+
+            <div class="c-form__group">
+
+                {!! Form::textarea('description', null, [
+                    'class' => 'c-form__input m-high',
+                    'placeholder' => trans('user.edit.field.description.title')
+                ]) !!}
+
+            </div>
+
+            <div class="c-form__group">
+
+                @include('component.title', [
                     'title' => trans('user.edit.notify.title'),
                     'modifiers' => 'm-orange'
                 ])

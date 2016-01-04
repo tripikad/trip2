@@ -105,11 +105,9 @@
 
                     <div class="r-user__info-title">
 
-                        {{-- User real name --}}
-
                         <div class="r-user__info-title-wrap">
 
-                            <h1 class="c-user-title">Charles Dawson</h1>
+                            <h1 class="c-user-title">{{ $user->real_name ? $user->real_name : $user->name }}</h1>
 
                             @if (\Auth::user())
 
@@ -266,7 +264,9 @@
 
                         <div class="c-body">
 
-                            <p>Kasutaja Rännumees liitus 6 aastat tagas Kasutaja Rännumees liitus 6 aastat tagas Kasutaja Rännumees liitus 6 aastat tagasKasutaja Rännumees liitus 6 aastat tagasKasutaja Rännumees liitus 6 aastat tagasKasutaja Rännumees liitus 6 aastat tagasKasutaja Rännumees liitus 6 aastat tagasv</p>
+                            @if ($user->description)
+                                <p>{{ $user->description }}</p>
+                            @endif
 
                             @if (count($user->destinationWantsToGo()))
 

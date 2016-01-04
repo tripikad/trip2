@@ -17,13 +17,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'email',
         'password',
         'image',
-        'role',
-        'verified',
-        'registration_token',
+        'role', // Why?
+        'verified', // Why?
+        'registration_token', // Why?
         'contact_facebook',
         'contact_twitter',
         'contact_instagram',
         'contact_homepage',
+
+        'real_name',
+        'show_real_name',
+        'gender',
+        'birthyear',
+        'description',
 
         'notify_message',
         'notify_follow',
