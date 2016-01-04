@@ -112,19 +112,19 @@
                     'items' => [
                         [
                             'title' => trans('frontpage.index.forum.general'),
-                            'route' => route('content.show', 'forum'),
+                            'route' => route('content.index', 'forum'),
                             'modifiers' => 'm-large m-block m-icon',
                             'icon' => 'icon-arrow-right'
                         ],
                         [
                             'title' => trans('frontpage.index.forum.buysell'),
-                            'route' => route('content.show', 'buysell'),
+                            'route' => route('content.index', 'buysell'),
                             'modifiers' => 'm-large m-block m-icon',
                             'icon' => 'icon-arrow-right'
                         ],
                         [
                             'title' => trans('frontpage.index.forum.expat'),
-                            'route' => route('content.show', 'expat'),
+                            'route' => route('content.index', 'expat'),
                             'modifiers' => 'm-large m-block m-icon',
                             'icon' => 'icon-arrow-right'
                         ],
@@ -315,19 +315,19 @@
                                 'items' => [
                                     [
                                         'title' => trans('frontpage.index.forum.general'),
-                                        'route' => route('content.show', 'forum'),
+                                        'route' => route('content.index', 'forum'),
                                         'modifiers' => 'm-large m-block m-icon',
                                         'icon' => 'icon-arrow-right'
                                     ],
                                     [
                                         'title' => trans('frontpage.index.forum.buysell'),
-                                        'route' => route('content.show', 'buysell'),
+                                        'route' => route('content.index', 'buysell'),
                                         'modifiers' => 'm-large m-block m-icon',
                                         'icon' => 'icon-arrow-right'
                                     ],
                                     [
                                         'title' => trans('frontpage.index.forum.expat'),
-                                        'route' => route('content.show', 'expat'),
+                                        'route' => route('content.index', 'expat'),
                                         'modifiers' => 'm-large m-block m-icon',
                                         'icon' => 'icon-arrow-right'
                                     ]
@@ -357,7 +357,7 @@
                                             return [
                                                 'title' => $destination->name,
                                                 'modifiers' => ['m-gray', 'm-green', 'm-blue', 'm-orange', 'm-yellow', 'm-red'][$key],
-                                                'route' => route('content.show', [$forum->type]).'?topic='.$destination->id,
+                                                'route' => route('content.index', [$forum->type]).'?topic='.$destination->id,
                                             ];
                                         })
                                     ];

@@ -71,7 +71,7 @@
                         @include('component.link', [
                             'modifiers' => 'm-icon m-right',
                             'title' => 'Vaata kõiki sooduspakkumisi',
-                            'route' => route('content.show', ['flight']),
+                            'route' => route('content.index', ['flight']),
                             'icon' => 'icon-arrow-right'
                         ])
 
@@ -129,19 +129,19 @@
                         'items' => [
                             [
                                 'title' => trans('frontpage.index.forum.general'),
-                                'route' => route('content.show', 'forum'),
+                                'route' => route('content.index', 'forum'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'title' => trans('frontpage.index.forum.buysell'),
-                                'route' => route('content.show', 'buysell'),
+                                'route' => route('content.index', 'buysell'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'title' => trans('frontpage.index.forum.expat'),
-                                'route' => route('content.show', 'expat'),
+                                'route' => route('content.index', 'expat'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
                             ]
@@ -179,7 +179,7 @@
                                         return [
                                             'title' => $topic->name,
                                             'modifiers' => 'm-gray',
-                                            'route' => route('content.show', [$forum->type]).'?topic='.$topic->id,
+                                            'route' => route('content.index', [$forum->type]).'?topic='.$topic->id,
                                         ];
                                     })
                                 ];
@@ -262,7 +262,7 @@
 
                             @include('component.link', [
                                 'title' => trans('frontpage.index.all.news'),
-                                'route' => route('content.show', ['news']),
+                                'route' => route('content.index', ['news']),
                                 'modifiers' => 'm-icon m-right',
                                 'icon' => 'icon-arrow-right'
                             ])
@@ -343,7 +343,7 @@
                         @include('component.link', [
                             'modifiers' => 'm-icon',
                             'title' => trans('frontpage.index.all.offers'),
-                            'route' => route('content.show', ['flight']),
+                            'route' => route('content.index', ['flight']),
                             'icon' => 'icon-arrow-right'
                         ])
 
