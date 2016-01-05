@@ -29,7 +29,7 @@ class CommentController extends Controller
                 ->forget(Auth::user()->id)
                 ->toArray()
         ) {
-            Mail::send('email.follow.content', ['comment' => $comment], function ($mail) use ($followersEmails, $comment) {
+            Mail::queue('email.follow.content', ['comment' => $comment], function ($mail) use ($followersEmails, $comment) {
 
                 $mail->bcc($followersEmails)
                     ->subject(trans('follow.content.email.subject', [
