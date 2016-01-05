@@ -166,7 +166,9 @@
                                 return [
                                     'topic' => str_limit($forum->title, 50),
                                     'route' => route('content.show', [$forum->type, $forum]),
-                                    'date' => 'Täna 17:11',
+                                    'date' => view('component.date.relative', [
+                                        'date' => $forum->created_at
+                                    ]),
                                     'profile' => [
                                         'modifiers' => 'm-mini',
                                         'image' => $forum->user->imagePreset()
