@@ -8,7 +8,8 @@ use View;
 use Cache;
 use App\Content;
 use App\Destination;
-use Illuminate\Support\Collection;
+use App\Main;
+//use Illuminate\Support\Collection;
 use DB;
 
 class FrontpageController extends Controller
@@ -24,15 +25,7 @@ class FrontpageController extends Controller
                 'type' => ['flight'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' => [
-                    'field' => config('content_flight.index.expire.field'),
-                    'daysFrom' => config('content_flight.index.expire.daysFrom') ?
-                                    Carbon::now()->addDays(config('content_flight.index.expire.daysFrom')) :
-                                    Carbon::now(),
-                    'daysTo' => config('content_flight.index.expire.daysTo') ?
-                                    Carbon::now()->addDays(config('content_flight.index.expire.daysTo')) :
-                                    Carbon::now(),
-                ],
+                'whereBetween' =>  Main::getExpireData('flight', 1),
             ],
             'flights2' => [
                 'skip' => 3,
@@ -40,15 +33,7 @@ class FrontpageController extends Controller
                 'type' => ['flight'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' => [
-                    'field' => config('content_flight.index.expire.field'),
-                    'daysFrom' => config('content_flight.index.expire.daysFrom') ?
-                        Carbon::now()->addDays(config('content_flight.index.expire.daysFrom')) :
-                        Carbon::now(),
-                    'daysTo' => config('content_flight.index.expire.daysTo') ?
-                        Carbon::now()->addDays(config('content_flight.index.expire.daysTo')) :
-                        Carbon::now(),
-                ],
+                'whereBetween' => Main::getExpireData('flight', 1),
             ],
             'content' => [
                 'take' => 1,
@@ -61,16 +46,7 @@ class FrontpageController extends Controller
                 'type' => ['forum', 'buysell', 'expat'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' => [
-                    'field' => config('content_buysell.index.expire.field'),
-                    'daysFrom' => config('content_buysell.index.expire.daysFrom') ?
-                        Carbon::now()->addDays(config('content_buysell.index.expire.daysFrom')) :
-                        Carbon::now(),
-                    'daysTo' => config('content_buysell.index.expire.daysTo') ?
-                        Carbon::now()->addDays(config('content_buysell.index.expire.daysTo')) :
-                        Carbon::now(),
-                    'only' => 'buysell',
-                ],
+                'whereBetween' =>  Main::getExpireData('buysell', 1),
             ],
             'news' => [
                 'skip' => null,
@@ -106,17 +82,11 @@ class FrontpageController extends Controller
                 'type' => ['travelmate'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' => [
-                    'field' => config('content_travelmate.index.expire.field'),
-                    'daysFrom' => config('content_travelmate.index.expire.daysFrom') ?
-                        Carbon::now()->addDays(config('content_travelmate.index.expire.daysFrom')) :
-                        Carbon::now(),
-                    'daysTo' => config('content_travelmate.index.expire.daysTo') ?
-                        Carbon::now()->addDays(config('content_travelmate.index.expire.daysTo')) :
-                        Carbon::now(),
-                ],
+                'whereBetween' =>  Main::getExpireData('travelmate', 1),
             ],
         ];
+
+        $types['forums']['whereBetween']['only'] = 'buysell';
 
         $findDestinationsParent = [
             'flights1',
@@ -127,9 +97,11 @@ class FrontpageController extends Controller
         $viewVariables['destinations'] = $destinations;
 
         foreach ($findDestinationsParent as $type) {
-            foreach ($viewVariables[$type] as $key => $element) {
-                $viewVariables[$type][$key]['destination'] = $element->destinations->first();
-                $viewVariables[$type][$key]['parent_destination'] = $element->getDestinationParent();
+            if (isset($viewVariables[$type])) {
+                foreach ($viewVariables[$type] as $key => $element) {
+                    $viewVariables[$type][$key]['destination'] = $element->destinations->first();
+                    $viewVariables[$type][$key]['parent_destination'] = $element->getDestinationParent();
+                }
             }
         }
 
@@ -164,13 +136,25 @@ class FrontpageController extends Controller
 
                 if (isset($type['whereBetween']) && ! empty($type['whereBetween'])) {
                     if (! isset($type['whereBetween']['only'])) {
-                        $query = $query->whereBetween(
-                            $type['whereBetween']['field'],
-                            [
+                        $expireData = [
+                            $type['whereBetween']['daysFrom'],
+                            $type['whereBetween']['daysTo'],
+                        ];
+
+                        if (in_array($type['whereBetween']['field'], $expireData)) {
+                            if (($key = array_search($type['whereBetween']['field'], $expireData)) !== false) {
+                                unset($expireData[$key]);
+                            }
+
+                            $query = $query->whereRaw('`'.$type['whereBetween']['field'].'` >= ?', [
+                                array_values($expireData)[0],
+                            ]);
+                        } else {
+                            $query = $query->whereBetween($type['whereBetween']['field'], [
                                 $type['whereBetween']['daysFrom'],
                                 $type['whereBetween']['daysTo'],
-                            ]
-                        );
+                            ]);
+                        }
                     } else {
                         $query = $query->whereRaw('IF(`type` = ?, ?, ?) BETWEEN ? AND ?', [
                                 $type['whereBetween']['only'],
@@ -179,8 +163,6 @@ class FrontpageController extends Controller
                                 $type['whereBetween']['daysFrom'],
                                 $type['whereBetween']['daysTo'],
                             ]);
-
-                        //dd($query->toSql());
                     }
                 }
 
