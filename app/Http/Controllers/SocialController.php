@@ -76,7 +76,7 @@ class SocialController extends Controller
 
         switch ($provider) {
             case 'facebook': $avatar_url = $user->avatar_original; break;
-            case 'google' : $avatar_url = str_replace('?sz=50', '', $user->avatar); break;
+            case 'google': $avatar_url = str_replace('?sz=50', '', $user->avatar); break;
         }
 
         //has avatar picture

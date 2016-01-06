@@ -55,7 +55,7 @@ class FrontpageController extends Controller
                     'field' => config('content_buysell.index.expire.field'),
                     'daysBack' => config('content_buysell.index.expire.daysBack'),
                     'only' => 'buysell',
-                ]
+                ],
             ],
             'news' => [
                 'skip' => null,
