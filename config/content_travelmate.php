@@ -11,7 +11,8 @@ return [
         ],
         'expire' => [
             'field' => 'start_at',
-            'daysBack' => 30,
+            'daysFrom' => false,
+            'daysTo' => 30,
         ],
         'paginate' => 24,
     ],
