@@ -27,7 +27,7 @@ class FrontpageController extends Controller
                 'whereBetween' => [
                     'field' => config('content_flight.index.expire.field'),
                     'daysBack' => config('content_flight.index.expire.daysBack'),
-                ]
+                ],
             ],
             'flights2' => [
                 'skip' => 3,
@@ -38,7 +38,7 @@ class FrontpageController extends Controller
                 'whereBetween' => [
                     'field' => config('content_flight.index.expire.field'),
                     'daysBack' => config('content_flight.index.expire.daysBack'),
-                ]
+                ],
             ],
             'content' => [
                 'take' => 1,
@@ -94,7 +94,7 @@ class FrontpageController extends Controller
                 'whereBetween' => [
                     'field' => config('content_travelmate.index.expire.field'),
                     'daysBack' => config('content_travelmate.index.expire.daysBack'),
-                ]
+                ],
             ],
         ];
 
