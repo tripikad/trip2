@@ -9,7 +9,6 @@ use App\Content;
 use App\Destination;
 use App\Topic;
 use App\Image;
-use App\Main;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ContentController extends Controller
@@ -30,23 +29,14 @@ class ContentController extends Controller
             )
             ->whereStatus(1);
 
-        $expireField = config("content_$type.index.expire.field");
-        if ($expireField) {
-            $expireData = Main::getExpireData($type);
-            if (in_array($expireField, $expireData)) {
-                if (($key = array_search($expireField, $expireData)) !== false) {
-                    unset($expireData[$key]);
-                }
-
-                $contents = $contents->whereRaw('`'.$expireField.'` >= ?', [
-                    array_values($expireData)[0],
-                ]);
-            } else {
-                $contents = $contents->whereBetween($expireField, [
-                    $expireData['daysFrom'],
-                    $expireData['daysTo'],
-                ]);
-            }
+        if (config("content_$type.index.expire.field") && config("content_$type.index.expire.daysBack")) {
+            $contents = $contents->whereBetween(
+                config("content_$type.index.expire.field"),
+                [
+                    Carbon::now()->addDays(-config("content_$type.index.expire.daysBack")),
+                    Carbon::now(),
+                ]
+            );
         }
 
         if ($request->destination) {
@@ -131,23 +121,14 @@ class ContentController extends Controller
 
         $content = Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers');
 
-        $expireField = config("content_$type.index.expire.field");
-        if ($expireField) {
-            $expireData = Main::getExpireData($type);
-            if (in_array($expireField, $expireData)) {
-                if (($key = array_search($expireField, $expireData)) !== false) {
-                    unset($expireData[$key]);
-                }
-
-                $content = $content->whereRaw('`'.$expireField.'` >= ?', [
-                    array_values($expireData)[0],
-                ]);
-            } else {
-                $content = $content->whereBetween($expireField, [
-                    $expireData['daysFrom'],
-                    $expireData['daysTo'],
-                ]);
-            }
+        if (config("content_$type.index.expire.field") && config("content_$type.index.expire.daysBack")) {
+            $content = $content->whereBetween(
+                config("content_$type.index.expire.field"),
+                [
+                    Carbon::now()->addDays(-config("content_$type.index.expire.daysBack")),
+                    Carbon::now(),
+                ]
+            );
         }
 
         $content = $content->findorFail($id);
