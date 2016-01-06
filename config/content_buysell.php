@@ -20,6 +20,7 @@ return [
             'field' => 'created_at',
             'daysFrom' => -30,
             'daysTo' => false,
+            'type' => 'datetime',
         ],
         'paginate' => 25,
     ],
