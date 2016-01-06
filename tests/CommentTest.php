@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Content;
 use App\Comment;
+use Carbon\Carbon;
 
 class CommentTest extends TestCase
 {
