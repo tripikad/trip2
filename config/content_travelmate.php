@@ -9,6 +9,10 @@ return [
             'field' => 'created_at',
             'order' => 'desc',
         ],
+        'expire' => [
+            'field' => 'start_at',
+            'daysBack' => 30,
+        ],
         'paginate' => 24,
     ],
 
