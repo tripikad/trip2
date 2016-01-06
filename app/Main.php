@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Carbon\Carbon;
+
 class Main
 {
     public static function getBodyFilteredAttribute($object)
@@ -18,5 +20,35 @@ class Main
         }
 
         return nl2br($filteredBody);
+    }
+
+    public static function getExpireData($type, $withField = 0)
+    {
+        $names = ['daysFrom', 'daysTo'];
+        $data = NULL;
+
+        if (config("content_$type.index.expire.field")) {
+            if ($withField == 1) {
+                $data['field'] = config("content_$type.index.expire.field");
+            }
+
+            if(config("content_$type.index.expire.type") == 'date') {
+                $format = 'Y-m-d';
+            } else {
+                $format = 'Y-m-d H:i:s';
+            }
+
+            foreach ($names as $name) {
+                if (config("content_$type.index.expire.$name") && ! is_numeric(config("content_$type.index.expire.$name"))) {
+                    $data[$name] = config("content_$type.index.expire.field");
+                } elseif (config("content_$type.index.expire.$name")) {
+                    $data[$name] = Carbon::now()->addDays(config("content_$type.index.expire.$name"))->format($format);
+                } else {
+                    $data[$name] = Carbon::now()->format($format);
+                }
+            }
+        }
+
+        return $data;
     }
 }
