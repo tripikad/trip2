@@ -42,6 +42,7 @@ class CommentTest extends TestCase
                 'user_id' => factory(App\User::class)->create()->id,
                 'type' => $type,
                 'end_at' => Carbon::now()->addDays(30),
+                'start_at' => Carbon::now()->addDays(30),
             ]);
 
             // Can comment
