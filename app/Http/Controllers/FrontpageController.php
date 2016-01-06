@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use View;
 use Cache;
@@ -23,6 +24,10 @@ class FrontpageController extends Controller
                 'type' => ['flight'],
                 'status' => 1,
                 'latest' => 'created_at',
+                'whereBetween' => [
+                    'field' => config('content_flight.index.expire.field'),
+                    'daysBack' => config('content_flight.index.expire.daysBack'),
+                ]
             ],
             'flights2' => [
                 'skip' => 3,
@@ -30,6 +35,10 @@ class FrontpageController extends Controller
                 'type' => ['flight'],
                 'status' => 1,
                 'latest' => 'created_at',
+                'whereBetween' => [
+                    'field' => config('content_flight.index.expire.field'),
+                    'daysBack' => config('content_flight.index.expire.daysBack'),
+                ]
             ],
             'content' => [
                 'take' => 1,
@@ -42,6 +51,11 @@ class FrontpageController extends Controller
                 'type' => ['forum', 'buysell', 'expat'],
                 'status' => 1,
                 'latest' => 'created_at',
+                'whereBetween' => [
+                    'field' => config('content_buysell.index.expire.field'),
+                    'daysBack' => config('content_buysell.index.expire.daysBack'),
+                    'only' => 'buysell',
+                ]
             ],
             'news' => [
                 'skip' => null,
@@ -77,6 +91,10 @@ class FrontpageController extends Controller
                 'type' => ['travelmate'],
                 'status' => 1,
                 'latest' => 'created_at',
+                'whereBetween' => [
+                    'field' => config('content_travelmate.index.expire.field'),
+                    'daysBack' => config('content_travelmate.index.expire.daysBack'),
+                ]
             ],
         ];
 
@@ -123,6 +141,28 @@ class FrontpageController extends Controller
             } else {
                 //$query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
                 $query = Content::whereIn('type', $type['type'])->whereStatus($type['status']);
+
+                if (isset($type['whereBetween']) && ! empty($type['whereBetween'])) {
+                    if (! isset($type['whereBetween']['only'])) {
+                        $query = $query->whereBetween(
+                            $type['whereBetween']['field'],
+                            [
+                                Carbon::now()->addDays(-$type['whereBetween']['daysBack']),
+                                Carbon::now(),
+                            ]
+                        );
+                    } else {
+                        $query = $query->whereRaw('IF(`type` = ?, ?, ?) BETWEEN ? AND ?', [
+                                $type['whereBetween']['only'],
+                                $type['whereBetween']['field'],
+                                Carbon::now(),
+                                Carbon::now()->addDays(-$type['whereBetween']['daysBack']),
+                                Carbon::now(),
+                            ]);
+
+                        //dd($query->toSql());
+                    }
+                }
 
                 if (isset($type['with']) && $type['with'] !== null) {
                     $query = $query->with($type['with']);
