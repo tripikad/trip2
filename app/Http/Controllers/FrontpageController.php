@@ -7,8 +7,7 @@ use View;
 use Cache;
 use App\Content;
 use App\Destination;
-use App\Main;
-//use Illuminate\Support\Collection;
+use Illuminate\Support\Collection;
 use DB;
 
 class FrontpageController extends Controller
@@ -24,7 +23,6 @@ class FrontpageController extends Controller
                 'type' => ['flight'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' =>  Main::getExpireData('flight', 1),
             ],
             'flights2' => [
                 'skip' => 3,
@@ -32,7 +30,6 @@ class FrontpageController extends Controller
                 'type' => ['flight'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' => Main::getExpireData('flight', 1),
             ],
             'content' => [
                 'take' => 1,
@@ -45,7 +42,6 @@ class FrontpageController extends Controller
                 'type' => ['forum', 'buysell', 'expat'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' =>  Main::getExpireData('buysell', 1),
             ],
             'news' => [
                 'skip' => null,
@@ -81,11 +77,8 @@ class FrontpageController extends Controller
                 'type' => ['travelmate'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' =>  Main::getExpireData('travelmate', 1),
             ],
         ];
-
-        $types['forums']['whereBetween']['only'] = 'buysell';
 
         $findDestinationsParent = [
             'flights1',
@@ -96,11 +89,9 @@ class FrontpageController extends Controller
         $viewVariables['destinations'] = $destinations;
 
         foreach ($findDestinationsParent as $type) {
-            if (isset($viewVariables[$type])) {
-                foreach ($viewVariables[$type] as $key => $element) {
-                    $viewVariables[$type][$key]['destination'] = $element->destinations->first();
-                    $viewVariables[$type][$key]['parent_destination'] = $element->getDestinationParent();
-                }
+            foreach ($viewVariables[$type] as $key => $element) {
+                $viewVariables[$type][$key]['destination'] = $element->destinations->first();
+                $viewVariables[$type][$key]['parent_destination'] = $element->getDestinationParent();
             }
         }
 
@@ -132,38 +123,6 @@ class FrontpageController extends Controller
             } else {
                 //$query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
                 $query = Content::whereIn('type', $type['type'])->whereStatus($type['status']);
-
-                if (isset($type['whereBetween']) && ! empty($type['whereBetween'])) {
-                    if (! isset($type['whereBetween']['only'])) {
-                        $expireData = [
-                            $type['whereBetween']['daysFrom'],
-                            $type['whereBetween']['daysTo'],
-                        ];
-
-                        if (in_array($type['whereBetween']['field'], $expireData)) {
-                            if (($key = array_search($type['whereBetween']['field'], $expireData)) !== false) {
-                                unset($expireData[$key]);
-                            }
-
-                            $query = $query->whereRaw('`'.$type['whereBetween']['field'].'` >= ?', [
-                                array_values($expireData)[0],
-                            ]);
-                        } else {
-                            $query = $query->whereBetween($type['whereBetween']['field'], [
-                                $type['whereBetween']['daysFrom'],
-                                $type['whereBetween']['daysTo'],
-                            ]);
-                        }
-                    } else {
-                        $query = $query->whereRaw('IF(`type` = ?, ?, ?) BETWEEN ? AND ?', [
-                                $type['whereBetween']['only'],
-                                $type['whereBetween']['field'],
-                                $type['whereBetween']['daysTo'],
-                                $type['whereBetween']['daysFrom'],
-                                $type['whereBetween']['daysTo'],
-                            ]);
-                    }
-                }
 
                 if (isset($type['with']) && $type['with'] !== null) {
                     $query = $query->with($type['with']);
