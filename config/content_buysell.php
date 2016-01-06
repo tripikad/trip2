@@ -18,7 +18,9 @@ return [
         ],
         'expire' => [
             'field' => 'created_at',
-            'daysBack' => 30,
+            'daysFrom' => -30,
+            'daysTo' => false,
+            'type' => 'datetime',
         ],
         'paginate' => 25,
     ],

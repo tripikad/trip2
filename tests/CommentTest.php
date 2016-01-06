@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Content;
 use App\Comment;
+use Carbon\Carbon;
 
 class CommentTest extends TestCase
 {
@@ -40,6 +41,8 @@ class CommentTest extends TestCase
             $content = factory(Content::class)->create([
                 'user_id' => factory(App\User::class)->create()->id,
                 'type' => $type,
+                'end_at' => Carbon::now()->addDays(30),
+                'start_at' => Carbon::now()->addDays(30),
             ]);
 
             // Can comment

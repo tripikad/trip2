@@ -30,7 +30,7 @@
 
         </div>
 
-        @if (count($flights1) > 0)
+        @if (isset($flights1) && count($flights1) > 0)
 
             <div class="r-home__destinations">
 
@@ -81,7 +81,7 @@
 
         @endif
 
-        @if (count($content) > 0)
+        @if (isset($content) && count($content) > 0)
 
             <div class="r-home__about">
 
@@ -158,7 +158,7 @@
 
                 --}}
 
-                @if (count($forums) > 0)
+                @if (isset($forums) && count($forums) > 0)
 
                     <div class="r-home__forum-column m-last">
                         @include('component.content.forum.list', [
@@ -227,7 +227,7 @@
 
                     </div>
 
-                    @if (count($news) > 0)
+                    @if (isset($news) && count($news) > 0)
 
                         <div class="r-home__news-block-wrap">
 
@@ -282,7 +282,7 @@
             </div>
         </div>
 
-        @if (count($featured_news) > 0)
+        @if (isset($featured_news) && count($featured_news) > 0)
 
             <div class="r-home__featured-news">
                 <div class="r-home__featured-news-wrap">
@@ -321,7 +321,7 @@
 
                     </div>
 
-                    @if (count($flights2) > 0)
+                    @if (isset($flights2) && count($flights2) > 0)
 
                         @foreach ($flights2 as $key => $flight2)
 
@@ -353,7 +353,7 @@
 
                 </div>
 
-                @if (count($blogs) > 0)
+                @if (isset($blogs) && count($blogs) > 0)
 
                     <div class="r-home__travel-column m-last">
                         <div class="r-home__travel-title">
@@ -388,7 +388,7 @@
         </div>
 
 
-        @if (count($photos) > 0)
+        @if (isset($photos) && count($photos) > 0)
 
             <div class="r-home__gallery">
                 <div class="r-home__gallery-wrap">
@@ -416,7 +416,7 @@
 
         @endif
 
-        @if (count($travelmates) > 0)
+        @if (isset($travelmates) && count($travelmates) > 0)
 
             <div class="r-home__travel-mates">
                 <div class="r-home__travel-mates-wrap">
