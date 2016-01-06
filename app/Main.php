@@ -25,14 +25,14 @@ class Main
     public static function getExpireData($type, $withField = 0)
     {
         $names = ['daysFrom', 'daysTo'];
-        $data = NULL;
+        $data = null;
 
         if (config("content_$type.index.expire.field")) {
             if ($withField == 1) {
                 $data['field'] = config("content_$type.index.expire.field");
             }
 
-            if(config("content_$type.index.expire.type") == 'date') {
+            if (config("content_$type.index.expire.type") == 'date') {
                 $format = 'Y-m-d';
             } else {
                 $format = 'Y-m-d H:i:s';

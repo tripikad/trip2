@@ -49,7 +49,6 @@ class ContentController extends Controller
             }
         }
 
-
         if ($request->destination) {
             $descendants = Destination::find($request->destination)
                 ->descendantsAndSelf()
