@@ -29,12 +29,16 @@ class ContentController extends Controller
             )
             ->whereStatus(1);
 
-        if (config("content_$type.index.expire.field") && config("content_$type.index.expire.daysBack")) {
+        if (config("content_$type.index.expire.field")) {
             $contents = $contents->whereBetween(
                 config("content_$type.index.expire.field"),
                 [
-                    Carbon::now()->addDays(-config("content_$type.index.expire.daysBack")),
-                    Carbon::now(),
+                    config("content_$type.index.expire.daysFrom") ?
+                        Carbon::now()->addDays(config("content_$type.index.expire.daysFrom")) :
+                        Carbon::now(),
+                    config("content_$type.index.expire.daysTo") ?
+                        Carbon::now()->addDays(config("content_$type.index.expire.daysTo")) :
+                        Carbon::now(),
                 ]
             );
         }
@@ -121,12 +125,16 @@ class ContentController extends Controller
 
         $content = Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers');
 
-        if (config("content_$type.index.expire.field") && config("content_$type.index.expire.daysBack")) {
+        if (config("content_$type.index.expire.field")) {
             $content = $content->whereBetween(
                 config("content_$type.index.expire.field"),
                 [
-                    Carbon::now()->addDays(-config("content_$type.index.expire.daysBack")),
-                    Carbon::now(),
+                    config("content_$type.index.expire.daysFrom") ?
+                        Carbon::now()->addDays(config("content_$type.index.expire.daysFrom")) :
+                        Carbon::now(),
+                    config("content_$type.index.expire.daysTo") ?
+                        Carbon::now()->addDays(config("content_$type.index.expire.daysTo")) :
+                        Carbon::now(),
                 ]
             );
         }

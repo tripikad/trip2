@@ -26,7 +26,12 @@ class FrontpageController extends Controller
                 'latest' => 'created_at',
                 'whereBetween' => [
                     'field' => config('content_flight.index.expire.field'),
-                    'daysBack' => config('content_flight.index.expire.daysBack'),
+                    'daysFrom' => config('content_flight.index.expire.daysFrom') ?
+                                    Carbon::now()->addDays(config('content_flight.index.expire.daysFrom')) :
+                                    Carbon::now(),
+                    'daysTo' => config('content_flight.index.expire.daysTo') ?
+                                    Carbon::now()->addDays(config('content_flight.index.expire.daysTo')) :
+                                    Carbon::now(),
                 ],
             ],
             'flights2' => [
@@ -37,7 +42,12 @@ class FrontpageController extends Controller
                 'latest' => 'created_at',
                 'whereBetween' => [
                     'field' => config('content_flight.index.expire.field'),
-                    'daysBack' => config('content_flight.index.expire.daysBack'),
+                    'daysFrom' => config('content_flight.index.expire.daysFrom') ?
+                        Carbon::now()->addDays(config('content_flight.index.expire.daysFrom')) :
+                        Carbon::now(),
+                    'daysTo' => config('content_flight.index.expire.daysTo') ?
+                        Carbon::now()->addDays(config('content_flight.index.expire.daysTo')) :
+                        Carbon::now(),
                 ],
             ],
             'content' => [
@@ -53,7 +63,12 @@ class FrontpageController extends Controller
                 'latest' => 'created_at',
                 'whereBetween' => [
                     'field' => config('content_buysell.index.expire.field'),
-                    'daysBack' => config('content_buysell.index.expire.daysBack'),
+                    'daysFrom' => config('content_buysell.index.expire.daysFrom') ?
+                        Carbon::now()->addDays(config('content_buysell.index.expire.daysFrom')) :
+                        Carbon::now(),
+                    'daysTo' => config('content_buysell.index.expire.daysTo') ?
+                        Carbon::now()->addDays(config('content_buysell.index.expire.daysTo')) :
+                        Carbon::now(),
                     'only' => 'buysell',
                 ],
             ],
@@ -93,7 +108,12 @@ class FrontpageController extends Controller
                 'latest' => 'created_at',
                 'whereBetween' => [
                     'field' => config('content_travelmate.index.expire.field'),
-                    'daysBack' => config('content_travelmate.index.expire.daysBack'),
+                    'daysFrom' => config('content_travelmate.index.expire.daysFrom') ?
+                        Carbon::now()->addDays(config('content_travelmate.index.expire.daysFrom')) :
+                        Carbon::now(),
+                    'daysTo' => config('content_travelmate.index.expire.daysTo') ?
+                        Carbon::now()->addDays(config('content_travelmate.index.expire.daysTo')) :
+                        Carbon::now(),
                 ],
             ],
         ];
@@ -147,17 +167,17 @@ class FrontpageController extends Controller
                         $query = $query->whereBetween(
                             $type['whereBetween']['field'],
                             [
-                                Carbon::now()->addDays(-$type['whereBetween']['daysBack']),
-                                Carbon::now(),
+                                $type['whereBetween']['daysFrom'],
+                                $type['whereBetween']['daysTo'],
                             ]
                         );
                     } else {
                         $query = $query->whereRaw('IF(`type` = ?, ?, ?) BETWEEN ? AND ?', [
                                 $type['whereBetween']['only'],
                                 $type['whereBetween']['field'],
-                                Carbon::now(),
-                                Carbon::now()->addDays(-$type['whereBetween']['daysBack']),
-                                Carbon::now(),
+                                $type['whereBetween']['daysTo'],
+                                $type['whereBetween']['daysFrom'],
+                                $type['whereBetween']['daysTo'],
                             ]);
 
                         //dd($query->toSql());
