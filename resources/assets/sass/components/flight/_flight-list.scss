@@ -1,0 +1,67 @@
+.c-flight-list {
+
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+    .c-flight-list__item {
+
+        flex: 1 0 100%;
+        margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet-portrait) {
+
+            flex: 0 1 47%;
+            margin-bottom: $spacer * 4;
+        }
+    }
+
+        .c-flight-list__image {
+
+            display: block;
+            width: 100%;
+            height: $spacer * 16;
+            margin-bottom: $spacer;
+            background-position: top center;
+            background-size: cover;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 1.5;
+            }
+        }
+
+        .c-flight-list__title {
+
+            font-size: $font-size-medium;
+            font-weight: $font-weight-medium;
+            line-height: 1.3;
+            margin-bottom: $spacer / 2;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-larger;
+                font-weight: $font-weight-medium;
+                line-height: 1.2;
+                margin-bottom: $spacer;
+            }
+        }
+
+            .c-flight-list__title-link {
+
+                text-decoration: none;
+
+                &:hover {
+
+                    text-decoration: underline;
+                }
+
+                span {
+
+                    @include color-modifiers(color);
+                }
+            }
