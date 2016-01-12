@@ -52,6 +52,7 @@ code: |
                 @include('component.profile', [
                     'modifiers' => $profile['modifiers'],
                     'image' => $profile['image'],
+                    'letter' => $profile['letter'],
                     'title' => '',
                     'status' => $profile['status'],
                 ])

@@ -81,7 +81,8 @@ modifiers:
                         @include('component.profile', [
                             'modifiers' => $item['profile']['modifiers'],
                             'image' => $item['profile']['image'],
-                            'badge' => $item['badge']
+                            'badge' => $item['badge'],
+                            'letter' => $item['profile']['letter']
                         ])
 
                     </div>
@@ -135,7 +136,8 @@ modifiers:
                                     'title' => $child['profile']['title'],
                                     'route' => $child['profile']['route'],
                                     'modifiers' => 'm-full m-status',
-                                    'status' => $child['profile']['status']
+                                    'status' => $child['profile']['status'],
+                                    'letter' => $child['profile']['letter'],
                                 ],
                                 'date' => $child['date'],
                                 'text' => $child['text'],

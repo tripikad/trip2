@@ -186,7 +186,31 @@ modifiers:
 
     <div class="c-profile__image-wrap">
 
-        <img src="{{ $image }}" alt="" class="c-profile__image">
+        @if (isset($image))
+
+            @if ($image != '')
+
+                <img src="{{ $image }}" alt="" class="c-profile__image">
+
+            @else
+
+                @if (isset($letter))
+
+                    <div class="c-profile__letter {{ $letter['modifiers'] }}"><span>{{ $letter['text'] }}</span></div>
+
+                @endif
+
+            @endif
+
+        @else
+
+            @if (isset($letter))
+
+                <div class="c-profile__letter {{ $letter['modifiers'] }}"><span>{{ $letter['text'] }}</span></div>
+
+            @endif
+
+        @endif
 
         @if (isset($badge))
 
@@ -212,3 +236,19 @@ modifiers:
 </div>
 
 @endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

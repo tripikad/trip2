@@ -171,7 +171,11 @@
                                     ]),
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => $forum->user->imagePreset()
+                                        'image' => $forum->user->imagePreset(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted',
