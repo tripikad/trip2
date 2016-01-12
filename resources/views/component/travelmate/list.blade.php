@@ -9,6 +9,7 @@
             @include('component.travelmate', [
                 'modifiers' => $item['modifiers'],
                 'image' => $item['image'],
+                'letter' => $item['letter'],
                 'name' => $item['name'],
                 'sex_and_age' => $item['sex_and_age'] ? $item['sex_and_age'] : null,
                 'title' => $item['title'],

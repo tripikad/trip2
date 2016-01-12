@@ -424,6 +424,10 @@
                                 return [
                                     'modifiers' => 'm-small',
                                     'image' =>  $travel_mate->imagePreset(),
+                                    'letter'=> [
+                                        'modifiers' => 'm-red',
+                                        'text' => 'J'
+                                    ],
                                     'name' =>
                                         $travel_mate->user->real_name ?
                                             $travel_mate->user->real_name

@@ -439,6 +439,10 @@
                             return [
                                 'modifiers' => 'm-small',
                                 'image' => $travel_mate->user->imagePreset('small_square'),
+                                'letter'=> [
+                                    'modifiers' => 'm-red',
+                                    'text' => 'J'
+                                ],
                                 'name' => $travel_mate->user->name,
                                 'route' => route('content.show', [$travel_mate->type, $travel_mate]),
                                 'sex_and_age' =>
