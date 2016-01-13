@@ -1,5 +1,7 @@
 .c-form__group {
 
+    @include clearfix;
+
     position: relative;
     width: 100%;
     margin-bottom: $spacer * 2;
@@ -22,7 +24,7 @@
 
 .c-form__label {
 
-    color: $color-text-neutral-dark;
+    color: $color-text-neutral-darkest;
     font-size: $font-size-normal;
     font-weight: $font-weight-medium;
     display: block;
@@ -31,6 +33,11 @@
     .c-form__group.m-error & {
 
         color: $color-fill-error;
+    }
+
+    &.m-checkbox {
+
+        margin-left: $spacer * 2;
     }
 }
 
@@ -69,6 +76,13 @@
 
                 padding-left: $spacer * 3;
             }
+        }
+
+        &.m-checkbox {
+
+            width: $spacer;
+            height: $spacer;
+            float: left;
         }
 
         &.m-high {

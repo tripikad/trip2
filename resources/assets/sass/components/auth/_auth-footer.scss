@@ -1,0 +1,24 @@
+.c-auth-footer {
+
+    text-align: center;
+}
+
+    .c-auth-footer__text {
+
+        color: $color-text-neutral-darker;
+        font-size: $font-size-small;
+        line-height: 1.5;
+    }
+
+    .c-auth-footer__link {
+
+        color: $color-text-link;
+        font-size: $font-size-small;
+        line-height: 1.5;
+        text-decoration: underline;
+
+        &:hover {
+
+            text-decoration: none;
+        }
+    }
