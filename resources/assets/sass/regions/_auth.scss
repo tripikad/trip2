@@ -23,11 +23,21 @@
 
         .r-auth__masthead {}
 
-    .r-auth__content {
+    .r-auth__notifications {
+
+        @include wrap('narrow');
 
         position: relative;
         z-index: 10;
-        width: span(20 of 24);
+        margin-bottom: $spacer * 2;
+    }
+
+    .r-auth__content {
+
+        @include wrap('narrow');
+
+        position: relative;
+        z-index: 10;
         margin: 0 auto;
         padding-bottom: $spacer * 4;
 
@@ -59,6 +69,16 @@
                 padding: $spacer * 4 $spacer * 6 $spacer * 2;
             }
         }
+
+            .r-auth__content-title {
+
+                margin-bottom: $spacer;
+
+                @include respond-to(tablet) {
+
+                    margin-bottom: $spacer * 2;
+                }
+            }
 
         .r-auth__content-footer {
 

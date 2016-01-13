@@ -1,12 +1,18 @@
-@extends('layouts.one_column')
+@extends('layouts.main')
 
 @section('title')
     {{ $title }}
 @stop
 
-@section('content.one')
+@section('header')
 
-    <div class="r-user-edit__content-wrap">
+    @include('component.header')
+
+@stop
+
+@section('content')
+
+{{--     <div class="r-user-edit__content-wrap">
 
         <div class="r-user-edit__content">
 
@@ -84,7 +90,7 @@
                             'class' => 'c-form__input',
                             'placeholder' => trans('user.edit.field.contact_facebook.title')
                         ]) !!}
-            
+
                     </div>
 
                     <div class="c-form__group">
@@ -255,5 +261,393 @@
         </div>
 
     </div>
+ --}}
+
+ <div class="r-auth">
+
+     <div class="r-auth__map">
+
+         <div class="c-auth-map">
+             @include('component.svg.standalone', [
+                 'name' => 'map'
+             ])
+         </div>
+     </div>
+
+     <div class="r-auth__header">
+
+         <div class="r-auth__masthead">
+
+             @include('component.auth.masthead')
+
+         </div>
+     </div>
+
+     <div class="r-auth__notifications">
+
+        <div class="c-alert m-success">Teretulemast tripikas Vaata veel üle allolev info, et kõik oleks tip-top ja siis liigume edasi</div>
+
+     </div>
+
+     <div class="r-auth__content">
+
+         <div class="r-auth__content-inner">
+
+            <h3 class="c-auth-title m-margin">Üldinfo</h3>
+
+            <div class="c-form__group m-small-margin">
+
+                {!! Form::label('name', 'Nimi', [
+                    'class' => 'c-form__label'
+                ]) !!}
+
+                {!! Form::text('name', null, [
+                    'class' => 'c-form__input'
+                ]) !!}
+            </div>
+
+            <div class="c-form__group">
+                {{ Form::checkbox('noname', 1, null, [
+                    'class' => 'c-form__input m-checkbox',
+                    'id' => 'remember'
+                ]) }}
+
+                {!! Form::label('noname', 'Ei soovi avalikustada oma nime',[
+                    'class' => 'c-form__label m-checkbox'
+                ]) !!}
+            </div>
+
+            <div class="c-form__group">
+
+                <div class="c-columns m-2-cols m-space">
+
+                    <div class="c-columns__item m-mobile-margin">
+
+                        {!! Form::label('name', 'Sugu', [
+                            'class' => 'c-form__label'
+                        ]) !!}
+
+                        <div class="c-columns m-2-cols m-space">
+
+                            <div class="c-columns__item m-middle">
+                                {{ Form::radio('sex', 1, null, [
+                                    'class' => 'c-form__input m-radio',
+                                    'id' => 'sex-1'
+                                ]) }}
+
+                                {!! Form::label('sex-1', 'Mees',[
+                                    'class' => 'c-form__label m-radio'
+                                ]) !!}
+                            </div>
+
+                            <div class="c-columns__item m-middle">
+
+                                {{ Form::radio('sex', 1, null, [
+                                    'class' => 'c-form__input m-radio',
+                                    'id' => 'sex-2'
+                                ]) }}
+
+                                {!! Form::label('sex-2', 'Naine',[
+                                    'class' => 'c-form__label m-radio'
+                                ]) !!}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        {!! Form::label('birth_date', 'Sünniaasta', [
+                            'class' => 'c-form__label'
+                        ]) !!}
+
+                        {{ Form::select('birth_date', ['1980', '1981', '1982'], null, [
+                            'class' => 'c-form__input',
+                        ]) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-form__group">
+
+                {!! Form::label('location', 'Praegune asukoht', [
+                    'class' => 'c-form__label'
+                ]) !!}
+
+                {!! Form::text('location', null, [
+                    'class' => 'c-form__input m-search'
+                ]) !!}
+            </div>
+
+            <div class="c-form__group">
+
+                {!! Form::label('description', 'Lühikirjeldus', [
+                    'class' => 'c-form__label'
+                ]) !!}
+
+                {!! Form::textarea('description', null, [
+                    'class' => 'c-form__input m-high',
+                    'placeholder' => 'Kirjelda tripikatele ennast ja oma reisikogemusi…'
+                ]) !!}
+            </div>
+
+            <h3 class="c-auth-title m-margin">Kontaktinfo</h3>
+
+            <div class="c-form__group m-small-margin">
+
+                <div class="c-columns m-2-cols m-first-smaller m-center">
+
+                    <div class="c-columns__item">
+
+                        {!! Form::label('facebook', 'Facebook', [
+                            'class' => 'c-form__label'
+                        ]) !!}
+
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        {!! Form::text('facebook', null, [
+                            'class' => 'c-form__input'
+                        ]) !!}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-form__group m-small-margin">
+
+                <div class="c-columns m-2-cols m-first-smaller m-center">
+
+                    <div class="c-columns__item">
+
+                        {!! Form::label('instagram', 'Instagram', [
+                            'class' => 'c-form__label'
+                        ]) !!}
+
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        {!! Form::text('instagram', null, [
+                            'class' => 'c-form__input'
+                        ]) !!}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-form__group m-small-margin">
+
+                <div class="c-columns m-2-cols m-first-smaller m-center">
+
+                    <div class="c-columns__item">
+
+                        {!! Form::label('skype', 'Skype', [
+                            'class' => 'c-form__label'
+                        ]) !!}
+
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        {!! Form::text('skype', null, [
+                            'class' => 'c-form__input'
+                        ]) !!}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-form__group m-large-margin">
+
+                <div class="c-columns m-2-cols m-first-smaller m-center">
+
+                    <div class="c-columns__item">
+
+                        {!! Form::label('homepage', 'Koduleht', [
+                            'class' => 'c-form__label'
+                        ]) !!}
+
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        {!! Form::text('homepage', null, [
+                            'class' => 'c-form__input'
+                        ]) !!}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-form__group m-large-margin">
+
+                <div class="c-columns m-2-cols m-last-smaller m-center">
+
+                    <div class="c-columns__item">
+
+                        <h3 class="c-auth-title">Profiilipilt</h3>
+
+                        <p class="c-form__note">Kuvatakse sinu profiili ning postituse juures</p>
+
+                        @include('component.button', [
+                            'modifiers' => 'm-quaternary m-min',
+                            'title' => 'Vali pildifail',
+                            'route' => '#'
+                        ])
+
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        @include('component.svg.standalone', [
+                            'name' => 'profile-user-image'
+                        ])
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-form__group m-large-margin">
+
+                <div class="c-columns m-2-cols m-last-smaller m-center">
+
+                    <div class="c-columns__item">
+
+                        <h3 class="c-auth-title">Taustapilt</h3>
+
+                        <p class="c-form__note">Kuvatakse sinu profiili päise taustana</p>
+
+                        @include('component.button', [
+                            'modifiers' => 'm-quaternary m-min',
+                            'title' => 'Vali pildifail',
+                            'route' => '#'
+                        ])
+
+                    </div>
+
+                    <div class="c-columns__item">
+
+                        @include('component.svg.standalone', [
+                            'name' => 'profile-user-head-image'
+                        ])
+                    </div>
+                </div>
+            </div>
+
+            <div class="c-form__group">
+
+                <h3 class="c-auth-title">Profiili värv</h3>
+
+                <p class="c-form__note">Kuvatakse sinu profiili taustana</p>
+
+                <div class="c-form__group m-inline">
+
+                    {!! Form::label('color-yellow', 'Yellow', [
+                        'class' => 'c-form__label m-color m-yellow'
+                    ]) !!}
+
+                    {{ Form::radio('color', 1, null, [
+                        'class' => 'c-form__input m-radio',
+                        'id' => 'color-yellow'
+                    ]) }}
+                </div>
+
+                <div class="c-form__group m-inline">
+
+                    {!! Form::label('color-green', 'Green', [
+                        'class' => 'c-form__label m-color m-green'
+                    ]) !!}
+
+                    {{ Form::radio('color', 2, null, [
+                        'class' => 'c-form__input m-radio',
+                        'id' => 'color-green'
+                    ]) }}
+                </div>
+
+                <div class="c-form__group m-inline">
+
+                    {!! Form::label('color-blue', 'Blue', [
+                        'class' => 'c-form__label m-color m-blue'
+                    ]) !!}
+
+                    {{ Form::radio('color', 3, null, [
+                        'class' => 'c-form__input m-radio',
+                        'id' => 'color-blue'
+                    ]) }}
+                </div>
+
+                <div class="c-form__group m-inline">
+
+                    {!! Form::label('color-purple', 'Purple', [
+                        'class' => 'c-form__label m-color m-purple'
+                    ]) !!}
+
+                    {{ Form::radio('color', 4, null, [
+                        'class' => 'c-form__input m-radio',
+                        'id' => 'color-purple'
+                    ]) }}
+                </div>
+
+                <div class="c-form__group m-inline">
+
+                    {!! Form::label('color-red', 'Red', [
+                        'class' => 'c-form__label m-color m-red'
+                    ]) !!}
+
+                    {{ Form::radio('color', 5, null, [
+                        'class' => 'c-form__input m-radio',
+                        'id' => 'color-red'
+                    ]) }}
+                </div>
+
+                <div class="c-form__group m-inline">
+
+                    {!! Form::label('color-orange', 'Orange', [
+                        'class' => 'c-form__label m-color m-orange'
+                    ]) !!}
+
+                    {{ Form::radio('color', 6, null, [
+                        'class' => 'c-form__input m-radio',
+                        'id' => 'color-orange'
+                    ]) }}
+                </div>
+            </div>
+
+            <div class="c-form__group">
+                {!! Form::submit('Edasi', [
+                    'class' => 'c-button m-large m-block'
+                ]) !!}
+            </div>
+
+         </div>
+     </div>
+ </div>
+@stop
+
+@section('footer')
+
+    @include('component.footer')
 
 @stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
