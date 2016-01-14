@@ -60,36 +60,118 @@ code: |
 
         @foreach ($items as $item)
 
+        <?php $images[] = $item['image']; ?>
+
             <li class="c-gallery__list-item">
 
-                @if (isset($item['route']))
+                @if (isset($modal))
 
-                    <a href="{{ $item['route'] }}" class="c-gallery__list-item-link">
-
-                @endif
-
-                    <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
-
-                @if (isset($item['route']))
-
+                    <a href="#" class="c-gallery__list-item-link js-gallery-modal-trigger">
+                        <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
                     </a>
 
-                @endif
+                @else
 
-                @if ($item == end($items) || (method_exists($items, 'last') && $item == $items->last()))
+                    @if (isset($item['route']))
 
-                    @if (isset($more_count) && isset($more_route))
+                        <a href="{{ $item['route'] }}" class="c-gallery__list-item-link">
 
-                        <a href="{{ $more_route }}" class="c-gallery__more">
-                            <span>+ {{ $more_count }}</span>
+                    @endif
+
+                        <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
+
+                    @if (isset($item['route']))
+
                         </a>
 
                     @endif
 
+                    @if ($item == end($items) || (method_exists($items, 'last') && $item == $items->last()))
+
+                        @if (isset($more_count) && isset($more_route))
+
+                            <a href="{{ $more_route }}" class="c-gallery__more">
+                                <span>+ {{ $more_count }}</span>
+                            </a>
+
+                        @endif
+
+                    @endif
                 @endif
             </li>
 
         @endforeach
-
     </ul>
+
+    <?php ?>
+
+    @if (isset($modal))
+
+    <div class="c-gallery__modal js-gallery-modal {{ $modal['modifiers'] or '' }}" data-images='<?php  echo json_encode($images); ?>'>
+
+        <a href="#" class="c-gallery__modal-close js-gallery-modal-close">
+            @include('component.svg.sprite', [
+                'name' => 'icon-plus'
+            ])
+        </a>
+
+        <div class="c-gallery__modal-inner">
+
+            <div class="c-gallery__modal-image-container js-gallery-modal-images">
+
+                <a href="#" class="c-gallery__modal-nav m-previous js-gallery-modal-previous">
+                    @include('component.svg.sprite', [
+                        'name' => 'icon-arrow-left'
+                    ])
+                </a>
+
+                <a href="#" class="c-gallery__modal-nav m-next js-gallery-modal-next">
+                    @include('component.svg.sprite', [
+                        'name' => 'icon-arrow-right'
+                    ])
+                </a>
+            </div>
+
+            <div class="c-gallery__modal-thumb-container">
+
+                <div class="c-gallery__modal-thumb-container-inner js-gallery-modal-thumbs"></div>
+
+            </div>
+        </div>
+    </div>
+
+    @endif
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

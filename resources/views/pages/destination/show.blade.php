@@ -301,14 +301,74 @@
                             ])
                         </div>
 
+                        {{--
+
                         @include('component.gallery', [
+                            'modal' => [
+                                'modifiers' => 'm-yellow',
+                            ],
                             'items' => $features['photos']['contents']->transform(function($photo) {
                                 return [
                                     'image' => $photo->imagePreset(),
                                     'route' => route('content.show', [$photo->type, $photo]),
-                                    'alt' => $photo->title
+                                    'alt' => $photo->title,
                                 ];
                             })
+                        ])
+
+                        --}}
+
+                        @include('component.gallery', [
+                            'modal' => [
+                                'modifiers' => 'm-yellow',
+                            ],
+                            'items' => [
+                                    [
+                                        'image' => \App\Image::getRandom(),
+                                        'route' => '#',
+                                        'alt' => '',
+                                    ],
+                                    [
+                                        'image' => \App\Image::getRandom(),
+                                        'route' => '#',
+                                        'alt' => '',
+                                    ],
+                                    [
+                                        'image' => \App\Image::getRandom(),
+                                        'route' => '#',
+                                        'alt' => '',
+                                    ],
+                                    [
+                                        'image' => \App\Image::getRandom(),
+                                        'route' => '#',
+                                        'alt' => '',
+                                    ],
+                                    [
+                                        'image' => \App\Image::getRandom(),
+                                        'route' => '#',
+                                        'alt' => '',
+                                    ],
+                                    [
+                                        'image' => \App\Image::getRandom(),
+                                        'route' => '#',
+                                        'alt' => '',
+                                    ],
+                                    [
+                                        'image' => \App\Image::getRandom(),
+                                        'route' => '#',
+                                        'alt' => '',
+                                    ],
+                                    [
+                                        'image' => \App\Image::getRandom(),
+                                        'route' => '#',
+                                        'alt' => '',
+                                    ],
+                                    [
+                                        'image' => \App\Image::getRandom(),
+                                        'route' => '#',
+                                        'alt' => '',
+                                    ]
+                                ]
                         ])
 
                     </div>
