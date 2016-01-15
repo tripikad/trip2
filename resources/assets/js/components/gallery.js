@@ -98,11 +98,23 @@ galleryTrigger.on('click', function() {
         // Add images and thumbs
 
         if(index === currentSlideIndex) {
-            galleryImageContainer.append('<div class="c-gallery__modal-image m-active js-gallery-modal-image"><img src="'+ value.image +'">');
-            galleryThumbContainer.append('<div class="c-gallery__modal-thumb m-active js-gallery-modal-thumb" style="background-image:url('+value.image+');"></div>');
+            galleryImageContainer
+            .append(
+                '<div class="c-gallery__modal-image m-active js-gallery-modal-image">' +
+                '<img src="'+ value.image +'">' +
+                '</div>'
+            );
+            galleryThumbContainer
+            .append('<div class="c-gallery__modal-thumb m-active js-gallery-modal-thumb" style="background-image:url('+value.image+');"></div>');
         } else {
-            galleryImageContainer.append('<div class="c-gallery__modal-image js-gallery-modal-image"><img src="'+ value.image +'">');
-            galleryThumbContainer.append('<div class="c-gallery__modal-thumb js-gallery-modal-thumb" style="background-image:url('+value.image+');"></div>');
+            galleryImageContainer
+            .append(
+                '<div class="c-gallery__modal-image js-gallery-modal-image">' +
+                '<img src="'+ value.image +'">' +
+                '</div>'
+            );
+            galleryThumbContainer
+            .append('<div class="c-gallery__modal-thumb js-gallery-modal-thumb" style="background-image:url('+value.image+');"></div>');
         }
 
         // Add title if available
@@ -122,7 +134,11 @@ galleryTrigger.on('click', function() {
             $.each(value.tags , function(tagindex, tag){
 
                 $('.c-gallery__modal-image').eq(index).find('.c-tags')
-                .append('<li class="c-tags__item '+ tag.modifiers +'"><a href="'+ tag.route +'" class="c-tags__item-link">'+ tag.name +'</a></li>');
+                .append(
+                    '<li class="c-tags__item '+ tag.modifiers +'">' +
+                    '<a href="'+ tag.route +'" class="c-tags__item-link">'+ tag.name +'</a>' +
+                    '</li>'
+                );
             });
         }
     });
