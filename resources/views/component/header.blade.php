@@ -133,7 +133,6 @@
     </div>
 
     <a href="#" class="c-header__search-trigger js-header__search-trigger">
-
         @include('component.svg.sprite', [
             'name' => 'icon-search'
         ])
