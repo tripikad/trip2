@@ -19,7 +19,6 @@ class AuthTest extends TestCase
             ->type('user@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
-            ->check('eula')
             ->press(trans('auth.register.submit.title'))
             ->seePageIs('/')
             ->see(trans('auth.register.sent.info'))
