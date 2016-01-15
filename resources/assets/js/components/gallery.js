@@ -188,6 +188,29 @@ galleryPrevious.on('click', function(){
     return false;
 });
 
+// On thumb click
+
+galleryThumbContainer.on('click', 'div', function() {
+
+    var currentSlideIndex;
+
+    // Get slide info
+
+    currentSlideIndex = $(this).index();
+
+    // Change main image
+
+    galleryImageItem.removeClass('m-active');
+    galleryImageItem.eq(currentSlideIndex).addClass('m-active');
+
+    // Change thumb image
+
+    galleryThumbItem.removeClass('m-active');
+    galleryThumbItem.eq(currentSlideIndex).addClass('m-active');
+
+
+});
+
 // Functions
 
 tripGallery = {
