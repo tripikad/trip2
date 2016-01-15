@@ -10,6 +10,10 @@ code: |
             'image' => '',
             'title' => '',
             'route' => '',
+            'letter' => [
+                'modifiers' => 'm-blue m-small',
+                'text' => 'J'
+            ],
             'status' => [
                 'modifiers' => '',
                 'position' => ''
