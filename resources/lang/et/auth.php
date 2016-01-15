@@ -34,7 +34,8 @@ return [
     'login.field.remember.title' => 'Pea mu logimine meeles',
     'login.submit.title' => 'Logi sisse',
 
-    'reset.apply.title' => 'Unustasid parooli?',
+    'reset.apply.title' => 'Ei mäleta oma parooli?',
+    'reset.apply.title.link' => 'Taasta oma parool siin',
     'reset.apply.field.email.title' => 'Sinu e-post',
     'reset.apply.submit.title' => 'Saada',
 
