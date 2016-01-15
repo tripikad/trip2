@@ -43,6 +43,10 @@
                         return [
                             'modifiers' => '',
                             'image' =>  $content->user->imagePreset('small_square'),
+                            'letter'=> [
+                                'modifiers' => 'm-red',
+                                'text' => 'J'
+                            ],
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
                             'sex_and_age' =>
@@ -82,6 +86,10 @@
                         return [
                             'modifiers' => '',
                             'image' => $content->user->imagePreset('small_square'),
+                            'letter'=> [
+                                'modifiers' => 'm-red',
+                                'text' => 'J'
+                            ],
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
                             'sex_and_age' =>

@@ -422,6 +422,10 @@
                             'title' => 'Charles Darwin',
                             'route' => '',
                             'modifiers' => 'm-full m-status',
+                            'letter'=> [
+                                'modifiers' => 'm-red m-small',
+                                'text' => 'J'
+                            ],
                             'status' => [
                                 'modifiers' => 'm-blue',
                                 'position' => '1'
@@ -436,6 +440,10 @@
                         'profile' => [
                             'image' => \App\Image::getRandom(),
                             'title' => 'Charles Darwin',
+                            'letter'=> [
+                                'modifiers' => 'm-red m-small',
+                                'text' => 'J'
+                            ],
                             'route' => '',
                             'modifiers' => 'm-full m-status',
                             'status' => [
@@ -527,7 +535,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted m-green',
@@ -539,7 +551,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted m-green',
@@ -551,7 +567,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted m-green',
@@ -563,7 +583,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-green',
@@ -718,6 +742,10 @@
                     [
                         'modifiers' => 'm-small',
                         'image' =>  \App\Image::getRandom(),
+                        'letter'=> [
+                            'modifiers' => 'm-red',
+                            'text' => 'J'
+                        ],
                         'name' => 'Charles Darwin',
                         'route' => '#',
                         'sex_and_age' => 'N,28',
@@ -736,6 +764,10 @@
                     [
                         'modifiers' => 'm-small',
                         'image' =>  \App\Image::getRandom(),
+                        'letter'=> [
+                            'modifiers' => 'm-red',
+                            'text' => 'J'
+                        ],
                         'name' => 'Epptriin ',
                         'route' => '#',
                         'sex_and_age' => 'N,22',
@@ -754,6 +786,10 @@
                     [
                         'modifiers' => 'm-small',
                         'image' =>  \App\Image::getRandom(),
+                        'letter'=> [
+                            'modifiers' => 'm-red',
+                            'text' => 'J'
+                        ],
                         'name' => 'Silka ',
                         'route' => '#',
                         'sex_and_age' => 'M,32',

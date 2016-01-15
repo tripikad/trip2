@@ -38,6 +38,10 @@
                     'image' => $content->user->imagePreset(),
                     'title' => $content->user->name,
                     'route' => route('user.show', [$content->user]),
+                    'letter' => [
+                        'modifiers' => 'm-purple m-small',
+                        'text' => 'J'
+                    ],
                     'status' => [
                         'modifiers' => 'm-purple',
                         'position' => '3',
@@ -192,7 +196,11 @@
                                         'route' => route('content.show', [$post->type, $post]),
                                         'profile' => [
                                             'modifiers' => 'm-mini',
-                                            'image' => $post->user->imagePreset()
+                                            'image' => $post->user->imagePreset(),
+                                            'letter' => [
+                                                'modifiers' => 'm-green m-small',
+                                                'text' => 'D'
+                                            ],
                                         ],
                                         'badge' => [
                                             'modifiers' => 'm-inverted m-purple',
@@ -259,7 +267,11 @@
                                         'route' => route('content.show', [$post->type, $post]),
                                         'profile' => [
                                             'modifiers' => 'm-mini',
-                                            'image' => $post->user->imagePreset()
+                                            'image' => $post->user->imagePreset(),
+                                            'letter' => [
+                                                'modifiers' => 'm-green m-small',
+                                                'text' => 'D'
+                                            ],
                                         ],
                                         'badge' => [
                                             'modifiers' => 'm-inverted m-blue',
@@ -347,7 +359,11 @@
                                         ]),
                                         'profile' => [
                                             'modifiers' => 'm-mini',
-                                            'image' => $forum->user->imagePreset()
+                                            'image' => $forum->user->imagePreset(),
+                                            'letter' => [
+                                                'modifiers' => 'm-green m-small',
+                                                'text' => 'D'
+                                            ],
                                         ],
                                         'badge' => [
                                             'modifiers' => 'm-inverted',
@@ -408,6 +424,10 @@
                                 return [
                                     'modifiers' => 'm-small',
                                     'image' =>  $travel_mate->imagePreset(),
+                                    'letter'=> [
+                                        'modifiers' => 'm-red',
+                                        'text' => 'J'
+                                    ],
                                     'name' =>
                                         $travel_mate->user->real_name ?
                                             $travel_mate->user->real_name

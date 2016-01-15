@@ -141,8 +141,8 @@ class FrontpageController extends Controller
                         ];
 
                         if (in_array($type['whereBetween']['field'], $expireData)) {
-                            if (($key = array_search($type['whereBetween']['field'], $expireData)) !== false) {
-                                unset($expireData[$key]);
+                            if (($datakey = array_search($type['whereBetween']['field'], $expireData)) !== false) {
+                                unset($expireData[$datakey]);
                             }
 
                             $query = $query->whereRaw('`'.$type['whereBetween']['field'].'` >= ?', [
