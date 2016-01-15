@@ -131,8 +131,23 @@
 
             left: 50%;
             top: 50%;
-            height: 90%;
+            height: 70%;
             transform: translate(-50%, -50%);
+        }
+
+        @include respond-to(desktop) {
+
+            margin-top: -$spacer * 6;
+        }
+
+        @include respond-to(desktop-medium) {
+
+            margin-top: -$spacer * 6.5;
+        }
+
+        @include respond-to(desktop-large) {
+
+            margin-top: -$spacer * 7;
         }
     }
 
@@ -143,40 +158,31 @@
             position: relative;
             width: 100%;
             height: 100%;
+        }
 
-            @include respond-to(desktop) {
-
-                padding-bottom: $spacer * 12;
-            }
-
-            @include respond-to(desktop-medium) {
-
-                padding-bottom: $spacer * 13;
-            }
-
-            @include respond-to(desktop-large) {
-
-                padding-bottom: $spacer * 14;
-            }
-
-            img {
+            .c-gallery__modal-image {
 
                 display: none;
-                position: relative;
-                top: 50%;
-                left: 50%;
-                max-width: 100%;
-                max-height: 100%;
-                width: auto;
-                height: auto;
-                transform: translate(-50%, -50%);
+                height: 100%;
+                width: 100%;
 
                 &.m-active {
 
                     display: block;
                 }
+
+                img {
+
+                    position: relative;
+                    top: 50%;
+                    left: 50%;
+                    max-width: 100%;
+                    max-height: 100%;
+                    width: auto;
+                    height: auto;
+                    transform: translate(-50%, -50%);
+                }
             }
-        }
 
             .c-gallery__modal-nav {
 
@@ -223,7 +229,6 @@
 
             position: absolute;
             left: 0;
-            bottom: 0;
             overflow: hidden;
             width: 100%;
             display: none;
@@ -232,16 +237,19 @@
             @include respond-to(desktop) {
 
                 display: block;
+                bottom: -$spacer * 12;
                 height: $spacer * 12;
             }
 
             @include respond-to(desktop-medium) {
 
+                bottom: -$spacer * 13;
                 height: $spacer * 13;
             }
 
             @include respond-to(desktop-large) {
 
+                bottom: -$spacer * 14;
                 height: $spacer * 14;
             }
         }

@@ -5,26 +5,68 @@ var galleryModal = $('.js-gallery-modal'),
     galleryClose = $('.js-gallery-modal-close'),
     galleryImageContainer = $('.js-gallery-modal-images'),
     galleryThumbContainer = $('.js-gallery-modal-thumbs'),
-    galleryTrigger = $('.js-gallery-modal-trigger');
+    galleryTrigger = $('.js-gallery-modal-trigger'),
+    galleryImageItem,
+    galleryThumbItem,
+    galleryDesktopLarge = 1520,
+    galleryDesktopMedium = 1440,
+    galleryDesktop = 1200,
+    winWidth = $(window).width(),
+    nudge,
+    offset;
+
+$(window).on('resize', function(){
+
+    winWidth = $(window).width();
+});
+
+
+if (winWidth >= galleryDesktopLarge) {
+
+    offset = 168;
+
+} else if (winWidth >= galleryDesktopMedium) {
+
+    offset = 156;
+
+} else {
+
+    offset = 144;
+}
 
 // Open gallery and fill it with content
 
 galleryTrigger.on('click', function() {
 
     var images = galleryModal.data('images');
-    var count;
+
+    var currentSlide;
+    var currentSlideIndex;
+
+    // Change main image
+
+    currentSlide = galleryTrigger.filter($(this));
+    currentSlideIndex = galleryTrigger.index(currentSlide);
 
     $.each(images , function(index, value){
-        if(index === 0) {
-            galleryImageContainer.append('<img src="'+ value +'" class="m-active">');
-            galleryThumbContainer.append('<div class="c-gallery__modal-thumb m-active" style="background-image:url('+value+');"></div>');
+        if(index === currentSlideIndex) {
+            galleryImageContainer.append('<div class="c-gallery__modal-image m-active js-gallery-modal-image"><img src="'+ value +'">');
+            galleryThumbContainer.append('<div class="c-gallery__modal-thumb m-active js-gallery-modal-thumb" style="background-image:url('+value+');"></div>');
         } else {
-            galleryImageContainer.append('<img src="'+ value +'">');
-            galleryThumbContainer.append('<div class="c-gallery__modal-thumb" style="background-image:url('+value+');"></div>');
+            galleryImageContainer.append('<div class="c-gallery__modal-image js-gallery-modal-image"><img src="'+ value +'">');
+            galleryThumbContainer.append('<div class="c-gallery__modal-thumb js-gallery-modal-thumb" style="background-image:url('+value+');"></div>');
         }
     });
 
+    if (currentSlideIndex > 7) {
+
+        tripGallery.nudgeNegative(currentSlideIndex);
+    }
+
     galleryModal.addClass('m-active');
+
+    galleryImageItem = $('.js-gallery-modal-image');
+    galleryThumbItem = $('.js-gallery-modal-thumb');
 
     return false;
 });
@@ -34,8 +76,9 @@ galleryTrigger.on('click', function() {
 galleryClose.on('click', function(){
 
     galleryModal.removeClass('m-active');
-    galleryImageContainer.find('img').remove();
-    galleryThumbContainer.find('div').remove();
+    galleryImageItem.remove();
+    galleryThumbItem.remove();
+    nudge = 0;
 
     return false;
 });
@@ -44,18 +87,16 @@ galleryClose.on('click', function(){
 
 galleryNext.on('click', function(){
 
-    var currentSlide;
-    var currentSlideIndex;
-    var nextSlideIndex;
-    var item = galleryImageContainer.find('img');
-    var thumb = galleryThumbContainer.find('div');
+    var currentSlide,
+        currentSlideIndex,
+        nextSlideIndex;
 
-    // Change main image
+    // Get slide info
 
-    currentSlide = item.filter('.m-active');
-    currentSlideIndex = item.index(currentSlide);
+    currentSlide = galleryImageItem.filter('.m-active');
+    currentSlideIndex = galleryImageItem.index(currentSlide);
 
-    if (currentSlideIndex + 1 >= item.length) {
+    if (currentSlideIndex + 1 >= galleryImageItem.length) {
 
         nextSlideIndex = 0;
 
@@ -64,32 +105,19 @@ galleryNext.on('click', function(){
         nextSlideIndex = currentSlideIndex + 1;
     }
 
-    console.log(nextSlideIndex);
+    // Nudge container left if necessary
 
-    if (nextSlideIndex > 7) {
+    tripGallery.nudgeNegative(nextSlideIndex);
 
-        // Shows max 8 thumbs, if thumb is for example 11
-        // then thumb container moves to the left -37.5% (11-8 => 3*12.5)
+    // Change main image
 
-        var percentage = (nextSlideIndex - 7) * 156;
-
-        galleryThumbContainer.css({
-            'left' : '-'+ percentage +'px'
-        });
-    } else if (nextSlideIndex === 0) {
-
-        galleryThumbContainer.css({
-            'left' : '0'
-        });
-    }
-
-    item.removeClass('m-active');
-    item.eq(nextSlideIndex).addClass('m-active');
+    galleryImageItem.removeClass('m-active');
+    galleryImageItem.eq(nextSlideIndex).addClass('m-active');
 
     // Change thumb image
 
-    thumb.removeClass('m-active');
-    thumb.eq(nextSlideIndex).addClass('m-active');
+    galleryThumbItem.removeClass('m-active');
+    galleryThumbItem.eq(nextSlideIndex).addClass('m-active');
 
     return false;
 });
@@ -98,36 +126,85 @@ galleryNext.on('click', function(){
 
 galleryPrevious.on('click', function(){
 
-    var currentSlide;
-    var currentSlideIndex;
-    var nextSlideIndex;
-    var item = galleryImageContainer.find('img');
-    var thumb = galleryThumbContainer.find('div');
+    var currentSlide,
+        currentSlideIndex,
+        nextSlideIndex,
+        currentNudge = galleryThumbContainer.css('left');
 
-    // Change main image
+    // Get slide info
 
-    currentSlide = item.filter('.m-active');
-    currentSlideIndex = item.index(currentSlide);
+    currentSlide = galleryImageItem.filter('.m-active');
+    currentSlideIndex = galleryImageItem.index(currentSlide);
 
     if (currentSlideIndex - 1 < 0) {
 
-        nextSlideIndex = item.length - 1;
+        nextSlideIndex = galleryImageItem.length - 1;
 
     } else {
 
         nextSlideIndex = currentSlideIndex - 1;
     }
 
-    item.removeClass('m-active');
-    item.eq(nextSlideIndex).addClass('m-active');
+    tripGallery.nudgePositive(nextSlideIndex);
+
+    // Change main image
+
+    galleryImageItem.removeClass('m-active');
+    galleryImageItem.eq(nextSlideIndex).addClass('m-active');
 
     // Change thumb image
 
-    var left = galleryThumbContainer.css('left');
-    console.log(left);
-
-    thumb.removeClass('m-active');
-    thumb.eq(nextSlideIndex).addClass('m-active');
+    galleryThumbItem.removeClass('m-active');
+    galleryThumbItem.eq(nextSlideIndex).addClass('m-active');
 
     return false;
 });
+
+// Functions
+
+tripGallery = {
+
+    nudgeNegative: function(slideIndex) {
+
+        if (slideIndex > 7) {
+
+            nudge =  (slideIndex - 7) * offset;
+
+            galleryThumbContainer.css({
+                'left' : '-'+ nudge +'px'
+            });
+
+        } else if (slideIndex === 0) {
+
+            nudge = 0;
+
+            galleryThumbContainer.css({
+                'left' : nudge
+            });
+
+        }
+
+        console.log('nudgeNegative: ' + nudge);
+    },
+
+    nudgePositive: function(slideIndex) {
+
+        if (slideIndex < galleryImageItem.length - 8) {
+
+            nudge = nudge - offset;
+
+        } else if (slideIndex === galleryImageItem.length - 1) {
+
+            console.log(galleryImageItem.length );
+
+            nudge = (galleryImageItem.length - 8) * offset;
+        }
+
+        galleryThumbContainer.css({
+            'left' : '-'+ nudge +'px'
+        });
+
+        console.log('nudgePositive: ' + nudge);
+    }
+};
+

@@ -62,48 +62,45 @@ code: |
 
         <?php $images[] = $item['image']; ?>
 
+        @if (isset($modal))
+
+            <li class="c-gallery__list-item js-gallery-modal-trigger">
+
+        @else
+
             <li class="c-gallery__list-item">
 
-                @if (isset($modal))
+        @endif
 
-                    <a href="#" class="c-gallery__list-item-link js-gallery-modal-trigger">
-                        <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
+                @if (isset($item['route']))
+
+                    <a href="{{ $item['route'] }}" class="c-gallery__list-item-link">
+
+                @endif
+
+                    <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
+
+                @if (isset($item['route']))
+
                     </a>
 
-                @else
+                @endif
 
-                    @if (isset($item['route']))
+                @if ($item == end($items) || (method_exists($items, 'last') && $item == $items->last()))
 
-                        <a href="{{ $item['route'] }}" class="c-gallery__list-item-link">
+                    @if (isset($more_count) && isset($more_route))
 
-                    @endif
-
-                        <img src="{{ $item['image'] }}" alt="{{ $item['alt'] or '' }}" class="c-gallery__list-item-image">
-
-                    @if (isset($item['route']))
-
+                        <a href="{{ $more_route }}" class="c-gallery__more">
+                            <span>+ {{ $more_count }}</span>
                         </a>
 
                     @endif
 
-                    @if ($item == end($items) || (method_exists($items, 'last') && $item == $items->last()))
-
-                        @if (isset($more_count) && isset($more_route))
-
-                            <a href="{{ $more_route }}" class="c-gallery__more">
-                                <span>+ {{ $more_count }}</span>
-                            </a>
-
-                        @endif
-
-                    @endif
                 @endif
             </li>
 
         @endforeach
     </ul>
-
-    <?php ?>
 
     @if (isset($modal))
 
