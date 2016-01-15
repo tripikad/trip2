@@ -535,7 +535,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted m-green',
@@ -547,7 +551,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted m-green',
@@ -559,7 +567,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted m-green',
@@ -571,7 +583,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-green',
