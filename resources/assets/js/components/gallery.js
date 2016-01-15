@@ -132,7 +132,13 @@ galleryTrigger.on('click', function() {
 
         if(typeof value.title !== 'undefined' && value.title.length > 0) {
 
-            $('.c-gallery__modal-image').eq(index).append('<div class="c-gallery__modal-title">'+ value.title +'</div>');
+            $('.c-gallery__modal-image')
+            .eq(index)
+            .append(
+                $('<div>')
+                .addClass('c-gallery__modal-title')
+                .text(value.title)
+            );
         }
 
         // Add tags if available
@@ -140,15 +146,27 @@ galleryTrigger.on('click', function() {
         if(typeof value.tags !== 'undefined' && value.tags.length > 0) {
 
             $('.c-gallery__modal-image').eq(index)
-            .append('<div class="c-gallery__modal-tags"><ul class="c-tags m-small"></ul></div>');
+            .append(
+                $('<div>')
+                .addClass('c-gallery__modal-tags')
+                .append(
+                    $('<ul>')
+                    .addClass('c-tags m-small')
+                )
+            );
 
             $.each(value.tags , function(tagindex, tag){
 
                 $('.c-gallery__modal-image').eq(index).find('.c-tags')
                 .append(
-                    '<li class="c-tags__item '+ tag.modifiers +'">' +
-                    '<a href="'+ tag.route +'" class="c-tags__item-link">'+ tag.name +'</a>' +
-                    '</li>'
+                    $('<li>')
+                    .addClass('c-tags__item '+ tag.modifiers)
+                    .append(
+                        $('<a>')
+                        .attr('href', tag.route)
+                        .addClass('c-tags__item-link')
+                        .text(tag.name)
+                    )
                 );
             });
         }
