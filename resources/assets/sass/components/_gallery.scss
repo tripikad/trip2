@@ -82,7 +82,7 @@
     display: none;
     width: 100%;
     height: 100%;
-    background: rgba($color-fill-black, .8);
+    background: rgba($color-fill-black, 0.8);
 
     &.m-active {
 
@@ -343,7 +343,7 @@
                     height: $spacer * 14;
                 }
 
-                &:before {
+                &::before {
 
                     @include color-modifiers-dark-and-opacity();
 
@@ -355,12 +355,12 @@
                     display: block;
                     width: 100%;
                     height: 100%;
-                    background: rgba($color-fill-black, .8);
+                    background: rgba($color-fill-black, 0.8);
                 }
 
                 &.m-active {
 
-                    &:before {
+                    &::before {
 
                         display: none;
                     }

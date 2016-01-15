@@ -92,7 +92,7 @@ $colors: ('yellow' $brand-yellow $brand-yellow-dark),
 
         &.m-#{$name} {
 
-            #{$property}: rgba($color, .8);
+            #{$property}: rgba($color, 0.8);
         }
     }
 }
@@ -103,7 +103,7 @@ $colors: ('yellow' $brand-yellow $brand-yellow-dark),
 
         &.m-#{$name} {
 
-            #{$property}: rgba($color-dark, .8);
+            #{$property}: rgba($color-dark, 0.8);
         }
     }
 }
@@ -114,7 +114,7 @@ $colors: ('yellow' $brand-yellow $brand-yellow-dark),
 
         .m-#{$name} & {
 
-            #{$property}: rgba($color-dark, .8);
+            #{$property}: rgba($color-dark, 0.8);
         }
     }
 }

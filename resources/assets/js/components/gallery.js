@@ -10,7 +10,6 @@ var galleryModal = $('.js-gallery-modal'),
     galleryThumbItem,
     galleryDesktopLarge = 1520,
     galleryDesktopMedium = 1440,
-    galleryDesktop = 1200,
     winWidth = $(window).width(),
     nudge,
     offset;
@@ -213,7 +212,7 @@ galleryThumbContainer.on('click', 'div', function() {
 
 // Functions
 
-tripGallery = {
+var tripGallery = {
 
     // Moves the thumb container to the left
 
@@ -247,8 +246,6 @@ tripGallery = {
             nudge = nudge - offset;
 
         } else if (slideIndex === galleryImageItem.length - 1) {
-
-            console.log(galleryImageItem.length );
 
             nudge = (galleryImageItem.length - 8) * offset;
         }
