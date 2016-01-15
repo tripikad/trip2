@@ -97,23 +97,35 @@ galleryTrigger.on('click', function() {
         // Add images and thumbs
 
         if(index === currentSlideIndex) {
-            galleryImageContainer
-            .append(
-                '<div class="c-gallery__modal-image m-active js-gallery-modal-image">' +
-                '<img src="'+ value.image +'">' +
-                '</div>'
+
+            galleryImageContainer.append(
+                $('<div>')
+                .addClass('c-gallery__modal-image m-active js-gallery-modal-image')
+                .append('<img src="'+ value.image +'">')
             );
-            galleryThumbContainer
-            .append('<div class="c-gallery__modal-thumb m-active js-gallery-modal-thumb" style="background-image:url('+value.image+');"></div>');
+
+            galleryThumbContainer.append(
+                $('<div>')
+                .addClass('c-gallery__modal-thumb m-active js-gallery-modal-thumb')
+                .css({
+                    'background-image': 'url('+value.image+')'
+                })
+            );
         } else {
-            galleryImageContainer
-            .append(
-                '<div class="c-gallery__modal-image js-gallery-modal-image">' +
-                '<img src="'+ value.image +'">' +
-                '</div>'
+
+            galleryImageContainer.append(
+                $('<div>')
+                .addClass('c-gallery__modal-image js-gallery-modal-image')
+                .append('<img src="'+ value.image +'">')
             );
-            galleryThumbContainer
-            .append('<div class="c-gallery__modal-thumb js-gallery-modal-thumb" style="background-image:url('+value.image+');"></div>');
+
+            galleryThumbContainer.append(
+                $('<div>')
+                .addClass('c-gallery__modal-thumb js-gallery-modal-thumb')
+                .css({
+                    'background-image': 'url('+value.image+')'
+                })
+            );
         }
 
         // Add title if available
