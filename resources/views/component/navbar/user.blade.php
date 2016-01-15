@@ -10,7 +10,11 @@ code: |
             'image' => '',
             'title' => '',
             'route' => '',
-            'badge' => ''
+            'badge' => '',
+            'letter' => [
+                'modifiers' => 'm-green m-tiny',
+                'text' => 'W'
+            ]
         ],
         'children' => [
             [
