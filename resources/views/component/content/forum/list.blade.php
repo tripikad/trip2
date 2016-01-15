@@ -14,6 +14,10 @@ code: |
                 'profile' => [
                     'modifiers' => 'm-mini',
                     'image' => \App\Image::getRandom(),
+                    'letter' => [
+                        'modifiers' => 'm-red',
+                        'text' => 'J'
+                    ],
                 ],
                 'badge' => [
                     'modifiers' => 'm-inverted',
@@ -33,6 +37,10 @@ code: |
                             'image' => \App\Image::getRandom(),
                             'title' => 'Charles Darwin',
                             'route' => '',
+                            'letter' => [
+                                'modifiers' => 'm-green m-small',
+                                'text' => 'D'
+                            ],
                             'status' => [
                                 'modifiers' => 'm-blue',
                                 'position' => '1'
