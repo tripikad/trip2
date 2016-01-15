@@ -311,17 +311,18 @@
 
         <div class="r-home__travel">
             <div class="r-home__travel-wrap">
-                <div class="r-home__travel-column m-first">
-                    <div class="r-home__travel-title">
 
-                        @include('component.title', [
-                            'modifiers' => 'm-red',
-                            'title' => trans('frontpage.index.flight.title')
-                        ])
+                @if (isset($flights2) && count($flights2) > 0)
 
-                    </div>
+                    <div class="r-home__travel-column m-first">
+                        <div class="r-home__travel-title">
 
-                    @if (isset($flights2) && count($flights2) > 0)
+                            @include('component.title', [
+                                'modifiers' => 'm-red',
+                                'title' => trans('frontpage.index.flight.title')
+                            ])
+
+                        </div>
 
                         @foreach ($flights2 as $key => $flight2)
 
@@ -338,20 +339,20 @@
 
                         @endforeach
 
-                    @endif
+                        <div class="r-home__travel-column-footer">
 
-                    <div class="r-home__travel-column-footer">
+                            @include('component.link', [
+                                'modifiers' => 'm-icon',
+                                'title' => trans('frontpage.index.all.offers'),
+                                'route' => route('content.index', ['flight']),
+                                'icon' => 'icon-arrow-right'
+                            ])
 
-                        @include('component.link', [
-                            'modifiers' => 'm-icon',
-                            'title' => trans('frontpage.index.all.offers'),
-                            'route' => route('content.index', ['flight']),
-                            'icon' => 'icon-arrow-right'
-                        ])
+                        </div>
 
                     </div>
 
-                </div>
+                @endif
 
                 @if (isset($blogs) && count($blogs) > 0)
 
@@ -396,7 +397,7 @@
 
                         @include('component.title', [
                             'modifiers' => 'm-red',
-                            'title' => trans('index.photo.title')
+                            'title' => trans('frontpage.index.photo.title')
                         ])
 
                     </div>
