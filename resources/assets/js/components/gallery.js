@@ -220,8 +220,7 @@ galleryPrevious.on('click', function(){
 
     var currentSlide,
         currentSlideIndex,
-        nextSlideIndex,
-        currentNudge = galleryThumbContainer.css('left');
+        nextSlideIndex;
 
     // Get slide info
 
