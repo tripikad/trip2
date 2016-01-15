@@ -131,25 +131,6 @@ class ContentController extends Controller
 
         $content = Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers');
 
-        $expireField = config("content_$type.index.expire.field");
-        if ($expireField) {
-            $expireData = Main::getExpireData($type);
-            if (in_array($expireField, $expireData)) {
-                if (($key = array_search($expireField, $expireData)) !== false) {
-                    unset($expireData[$key]);
-                }
-
-                $content = $content->whereRaw('`'.$expireField.'` >= ?', [
-                    array_values($expireData)[0],
-                ]);
-            } else {
-                $content = $content->whereBetween($expireField, [
-                    $expireData['daysFrom'],
-                    $expireData['daysTo'],
-                ]);
-            }
-        }
-
         $content = $content->findorFail($id);
 
         $comments = $content->comments->filter(function ($comment) {
