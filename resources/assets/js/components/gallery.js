@@ -33,6 +33,52 @@ if (winWidth >= galleryDesktopLarge) {
     offset = 144;
 }
 
+// Functions
+
+var tripGallery = {
+
+    // Moves the thumb container to the left
+
+    nudgeNegative: function(slideIndex) {
+
+        if (slideIndex > 7) {
+
+            nudge =  (slideIndex - 7) * offset;
+
+            galleryThumbContainer.css({
+                'left' : '-'+ nudge +'px'
+            });
+
+        } else if (slideIndex === 0) {
+
+            nudge = 0;
+
+            galleryThumbContainer.css({
+                'left' : nudge
+            });
+
+        }
+    },
+
+    // Moves the thumb container to the right
+
+    nudgePositive: function(slideIndex) {
+
+        if (slideIndex < galleryImageItem.length - 8) {
+
+            nudge = nudge - offset;
+
+        } else if (slideIndex === galleryImageItem.length - 1) {
+
+            nudge = (galleryImageItem.length - 8) * offset;
+        }
+
+        galleryThumbContainer.css({
+            'left' : '-'+ nudge +'px'
+        });
+    }
+};
+
 // Open gallery and fill it with content
 
 galleryTrigger.on('click', function() {
@@ -79,7 +125,8 @@ galleryTrigger.on('click', function() {
         }
     });
 
-    // If clicked image does not fit in the container 8, then nudge the container
+    // If clicked image does not fit in the container of 8
+    // then nudge the container
 
     if (currentSlideIndex > 7) {
 
@@ -210,48 +257,4 @@ galleryThumbContainer.on('click', 'div', function() {
 
 });
 
-// Functions
 
-var tripGallery = {
-
-    // Moves the thumb container to the left
-
-    nudgeNegative: function(slideIndex) {
-
-        if (slideIndex > 7) {
-
-            nudge =  (slideIndex - 7) * offset;
-
-            galleryThumbContainer.css({
-                'left' : '-'+ nudge +'px'
-            });
-
-        } else if (slideIndex === 0) {
-
-            nudge = 0;
-
-            galleryThumbContainer.css({
-                'left' : nudge
-            });
-
-        }
-    },
-
-    // Moves the thumb container to the right
-
-    nudgePositive: function(slideIndex) {
-
-        if (slideIndex < galleryImageItem.length - 8) {
-
-            nudge = nudge - offset;
-
-        } else if (slideIndex === galleryImageItem.length - 1) {
-
-            nudge = (galleryImageItem.length - 8) * offset;
-        }
-
-        galleryThumbContainer.css({
-            'left' : '-'+ nudge +'px'
-        });
-    }
-};
