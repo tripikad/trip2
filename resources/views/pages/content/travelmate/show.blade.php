@@ -92,6 +92,10 @@
                 @include('component.travelmate.user', [
                     'modifiers' => 'm-purple',
                     'image' => $content->user->imagePreset('small_square'),
+                    'letter' => [
+                        'modifiers' => 'm-purple',
+                        'text' => 'J'
+                    ],
                     'user' => $content->user,
                     'name' => $content->user->name,
                     'user_route' => route('user.show', [$content->user]),
@@ -229,7 +233,11 @@
                                     'route' => route('content.show', [$forum->type, $forum]),
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => $forum->user->imagePreset('small_square')
+                                        'image' => $forum->user->imagePreset('small_square'),
+                                        'letter' => [
+                                            'modifiers' => 'm-red',
+                                            'text' => 'J'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted m-purple',
@@ -295,6 +303,10 @@
                         return [
                             'modifiers' => 'm-small',
                             'image' => $travel_mate->user->imagePreset('small_square'),
+                            'letter' => [
+                                'modifiers' => 'm-red',
+                                'text' => 'J'
+                            ],
                             'name' => $travel_mate->user->name,
                             'route' => route('content.show', [$travel_mate->type, $travel_mate]),
                             'sex_and_age' =>

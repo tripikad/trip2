@@ -58,6 +58,42 @@
         }
     }
 
+        .c-travelmate__letter {
+
+            @include color-modifiers(background);
+
+            color: $color-white;
+            font-weight: $font-weight-bold;
+            font-size: $font-size-large;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+
+            &.m-tiny {
+
+                font-size: $font-size-small;
+            }
+
+            &.m-small {
+
+                font-size: $font-size-medium;
+            }
+
+            &.m-large {
+
+                font-size: $font-size-huge / 2;
+            }
+
+            span {
+
+                margin-top: $spacer / 3;
+            }
+        }
+
     .c-travelmate__name {
 
         color: $color-text-neutral-darker;

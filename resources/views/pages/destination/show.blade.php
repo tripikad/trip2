@@ -233,7 +233,11 @@
                                         'route' => route('content.show', [$forum->type, $forum]),
                                         'profile' => [
                                             'modifiers' => 'm-mini',
-                                            'image' => $forum->user->imagePreset()
+                                            'image' => $forum->user->imagePreset(),
+                                            'letter'=> [
+                                                'modifiers' => 'm-red',
+                                                'text' => 'J'
+                                            ],
                                         ],
                                         'badge' => [
                                             'modifiers' => 'm-inverted',
@@ -515,6 +519,10 @@
                                 [
                                     'modifiers' => 'm-small',
                                     'image' =>  \App\Image::getRandom(),
+                                    'letter'=> [
+                                        'modifiers' => 'm-red',
+                                        'text' => 'J'
+                                    ],
                                     'name' => 'Charles Darwin',
                                     'route' => '#',
                                     'sex_and_age' => 'N,28',
@@ -533,6 +541,10 @@
                                 [
                                     'modifiers' => 'm-small',
                                     'image' =>  \App\Image::getRandom(),
+                                    'letter'=> [
+                                        'modifiers' => 'm-red',
+                                        'text' => 'J'
+                                    ],
                                     'name' => 'Epptriin ',
                                     'route' => '#',
                                     'sex_and_age' => 'N,22',
@@ -551,6 +563,10 @@
                                 [
                                     'modifiers' => 'm-small',
                                     'image' =>  \App\Image::getRandom(),
+                                    'letter'=> [
+                                        'modifiers' => 'm-red',
+                                        'text' => 'J'
+                                    ],
                                     'name' => 'Silka ',
                                     'route' => '#',
                                     'sex_and_age' => 'M,32',

@@ -10,6 +10,10 @@ code: |
             'image' => '',
             'title' => '',
             'route' => '',
+            'letter' => [
+                'modifiers' => 'm-blue m-small',
+                'text' => 'J'
+            ],
             'status' => [
                 'modifiers' => '',
                 'position' => ''
@@ -52,6 +56,7 @@ code: |
                 @include('component.profile', [
                     'modifiers' => $profile['modifiers'],
                     'image' => $profile['image'],
+                    'letter' => $profile['letter'],
                     'title' => '',
                     'status' => $profile['status'],
                 ])

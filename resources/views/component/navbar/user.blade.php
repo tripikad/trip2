@@ -10,7 +10,11 @@ code: |
             'image' => '',
             'title' => '',
             'route' => '',
-            'badge' => ''
+            'badge' => '',
+            'letter' => [
+                'modifiers' => 'm-green m-tiny',
+                'text' => 'W'
+            ]
         ],
         'children' => [
             [
@@ -40,8 +44,9 @@ code: |
                 @include('component.profile', [
                     'modifiers' => 'm-mini',
                     'image' => $profile['image'],
+                    'letter' => $profile['letter'],
                     'badge' => [
-                        'modifiers' => 'm-inverted '. $modifiers,
+                        'modifiers' => 'm-inverted m-red',
                         'count' => $profile['badge']
                     ]
                 ])

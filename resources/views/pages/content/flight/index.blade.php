@@ -114,70 +114,223 @@
 
         <div class="r-flights__content">
 
-            <div class="r-block">
+            {{-- List option for flight offers
 
-                <div class="r-block__body">
+            @include('component.row', [
+                'modifiers' => 'm-icon m-featured',
+                'icon' => 'icon-tickets',
+                'title' => 'Riiast Londonisse edasi-tagasi al. 46 €',
+                'route' => '',
+                'list' => [
+                    [
+                        'title' => 'Aasia'
+                    ],
+                    [
+                        'title' => '25.10.15'
+                    ],
+                    [
+                        'title' => '250€'
+                    ]
+                ],
+                'badge' => 'Väga hea hind veel ainult täna'
+            ])
 
-                    @include('component.row', [
-                        'modifiers' => 'm-icon m-featured',
-                        'icon' => 'icon-tickets',
-                        'title' => 'Riiast Londonisse edasi-tagasi al. 46 €',
-                        'route' => '',
-                        'list' => [
-                            [
-                                'title' => 'Aasia'
-                            ],
-                            [
-                                'title' => '25.10.15'
-                            ],
-                            [
-                                'title' => '250€'
-                            ]
-                        ],
-                        'badge' => 'Väga hea hind veel ainult täna'
-                    ])
+            @foreach ($contents as $index => $content)
 
-                    @foreach ($contents as $index => $content)
-
-                        @include('component.row', [
-                            'modifiers' => 'm-icon',
-                            'icon' => 'icon-tickets',
-                            'title' => $content->title,
-                            'route' => route('content.show', [
-                                'type' => $content->type,
-                                'id' => $content
+                @include('component.row', [
+                    'modifiers' => 'm-icon',
+                    'icon' => 'icon-tickets',
+                    'title' => $content->title,
+                    'route' => route('content.show', [
+                        'type' => $content->type,
+                        'id' => $content
+                    ]),
+                    'list' => [
+                        [
+                            'title' => view('component.date.short', [
+                                'date' => $content->end_at
                             ]),
-                            'list' => [
+                        ],
+                        [
+                            'title' => $content->price
+                                ? trans("content.flight.index.field.price", [
+                                    'price' => $content->price,
+                                    'symbol' => config('site.currency.symbol')
+                            ]) : null
+                        ],
+                    ]
+                ])
+
+            @endforeach
+
+            --}}
+
+            {{-- Block option for flight offers --}}
+
+            @include('component.content.flight.block', [
+                'items' => [
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki al',
+                        'price' => '472 €',
+                        'meta' => view('component.inline_list', [
+                            'modifiers' => 'm-light m-small',
+                            'items' => [
                                 [
-                                    'title' => view('component.date.short', [
-                                        'date' => $content->end_at
-                                    ]),
+                                    'title' => 'Aasia',
                                 ],
                                 [
-                                    'title' => $content->price
-                                        ? trans("content.flight.index.field.price", [
-                                            'price' => $content->price,
-                                            'symbol' => config('site.currency.symbol')
-                                    ]) : null
+                                    'title' => 'Täna 12.31',
                                 ],
                             ]
                         ])
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'title' => 'AirAsia kampaania SALE lennupiletid al',
+                        'price' => '6 €',
+                        'meta' => view('component.inline_list', [
+                            'modifiers' => 'm-light m-small',
+                            'items' => [
+                                [
+                                    'title' => 'Aasia',
+                                ],
+                                [
+                                    'title' => 'Täna 12.31',
+                                ],
+                            ]
+                        ])
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'title' => 'Helsinkist Aasiasse puhkama al',
+                        'price' => '472 €',
+                        'meta' => view('component.inline_list', [
+                            'modifiers' => 'm-light m-small',
+                            'items' => [
+                                [
+                                    'title' => 'Aasia',
+                                ],
+                                [
+                                    'title' => 'Täna 12.31',
+                                ],
+                            ]
+                        ])
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'title' => 'AirAsia kampaania SALE lennupiletid al',
+                        'price' => '6 €',
+                        'meta' => view('component.inline_list', [
+                            'modifiers' => 'm-light m-small',
+                            'items' => [
+                                [
+                                    'title' => 'Aasia',
+                                ],
+                                [
+                                    'title' => 'Täna 12.31',
+                                ],
+                            ]
+                        ])
+                    ],
+                ]
+            ])
 
-                    @endforeach
-                </div>
+            <div class="r-block">
 
-                <div class="r-block__footer">
-
-                    @include('component.pagination.default', [
-                        'collection' => $contents,
-                        'text' => [
-                            'next' => 'Vanemad pakkumised',
-                            'previous' => 'Uuemad pakkumised',
-                        ]
-                    ])
-
-                </div>
+                @include('component.promo', [
+                    'modifiers' => 'm-body',
+                    'route' => '',
+                    'image' => \App\Image::getRandom()
+                ])
             </div>
+
+            @include('component.content.flight.block', [
+                'items' => [
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki al',
+                        'price' => '472 €',
+                        'meta' => view('component.inline_list', [
+                            'modifiers' => 'm-light m-small',
+                            'items' => [
+                                [
+                                    'title' => 'Aasia',
+                                ],
+                                [
+                                    'title' => 'Täna 12.31',
+                                ],
+                            ]
+                        ])
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'title' => 'AirAsia kampaania SALE lennupiletid al',
+                        'price' => '6 €',
+                        'meta' => view('component.inline_list', [
+                            'modifiers' => 'm-light m-small',
+                            'items' => [
+                                [
+                                    'title' => 'Aasia',
+                                ],
+                                [
+                                    'title' => 'Täna 12.31',
+                                ],
+                            ]
+                        ])
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki al',
+                        'price' => '472 €',
+                        'meta' => view('component.inline_list', [
+                            'modifiers' => 'm-light m-small',
+                            'items' => [
+                                [
+                                    'title' => 'Aasia',
+                                ],
+                                [
+                                    'title' => 'Täna 12.31',
+                                ],
+                            ]
+                        ])
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '#',
+                        'title' => 'AirAsia kampaania SALE lennupiletid al',
+                        'price' => '6 €',
+                        'meta' => view('component.inline_list', [
+                            'modifiers' => 'm-light m-small',
+                            'items' => [
+                                [
+                                    'title' => 'Aasia',
+                                ],
+                                [
+                                    'title' => 'Täna 12.31',
+                                ],
+                            ]
+                        ])
+                    ],
+                ]
+            ])
+
+
+
+            @include('component.pagination.default', [
+                'collection' => $contents,
+                'text' => [
+                    'next' => 'Vanemad pakkumised',
+                    'previous' => 'Uuemad pakkumised',
+                ]
+            ])
 
             <div class="r-block">
 
@@ -438,7 +591,11 @@
                             'date' => 'Täna, 15:12',
                             'profile' => [
                                 'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
                             ],
                             'badge' => [
                                 'modifiers' => 'm-inverted',
@@ -463,7 +620,11 @@
                             'date' => 'Täna, 12:17',
                             'profile' => [
                                 'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
                             ],
                             'badge' => [
                                 'modifiers' => 'm-inverted',
@@ -483,7 +644,11 @@
                             'date' => '10. detsember 2015',
                             'profile' => [
                                 'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
                             ],
                             'badge' => [
                                 'modifiers' => 'm-inverted',
@@ -503,7 +668,11 @@
                             'date' => '11. detsember 2015',
                             'profile' => [
                                 'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
                             ],
                             'badge' => [
                                 'modifiers' => '',

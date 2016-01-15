@@ -171,7 +171,11 @@
                                     ]),
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => $forum->user->imagePreset()
+                                        'image' => $forum->user->imagePreset(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted',
@@ -311,17 +315,18 @@
 
         <div class="r-home__travel">
             <div class="r-home__travel-wrap">
-                <div class="r-home__travel-column m-first">
-                    <div class="r-home__travel-title">
 
-                        @include('component.title', [
-                            'modifiers' => 'm-red',
-                            'title' => trans('frontpage.index.flight.title')
-                        ])
+                @if (isset($flights2) && count($flights2) > 0)
 
-                    </div>
+                    <div class="r-home__travel-column m-first">
+                        <div class="r-home__travel-title">
 
-                    @if (isset($flights2) && count($flights2) > 0)
+                            @include('component.title', [
+                                'modifiers' => 'm-red',
+                                'title' => trans('frontpage.index.flight.title')
+                            ])
+
+                        </div>
 
                         @foreach ($flights2 as $key => $flight2)
 
@@ -338,20 +343,20 @@
 
                         @endforeach
 
-                    @endif
+                        <div class="r-home__travel-column-footer">
 
-                    <div class="r-home__travel-column-footer">
+                            @include('component.link', [
+                                'modifiers' => 'm-icon',
+                                'title' => trans('frontpage.index.all.offers'),
+                                'route' => route('content.index', ['flight']),
+                                'icon' => 'icon-arrow-right'
+                            ])
 
-                        @include('component.link', [
-                            'modifiers' => 'm-icon',
-                            'title' => trans('frontpage.index.all.offers'),
-                            'route' => route('content.index', ['flight']),
-                            'icon' => 'icon-arrow-right'
-                        ])
+                        </div>
 
                     </div>
 
-                </div>
+                @endif
 
                 @if (isset($blogs) && count($blogs) > 0)
 
@@ -396,7 +401,7 @@
 
                         @include('component.title', [
                             'modifiers' => 'm-red',
-                            'title' => trans('index.photo.title')
+                            'title' => trans('frontpage.index.photo.title')
                         ])
 
                     </div>
@@ -435,6 +440,10 @@
                             return [
                                 'modifiers' => 'm-small',
                                 'image' => $travel_mate->user->imagePreset('small_square'),
+                                'letter'=> [
+                                    'modifiers' => 'm-red',
+                                    'text' => 'J'
+                                ],
                                 'name' => $travel_mate->user->name,
                                 'route' => route('content.show', [$travel_mate->type, $travel_mate]),
                                 'sex_and_age' =>
