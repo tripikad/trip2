@@ -82,23 +82,12 @@
                     ]) !!}
                 </div>
 
-                {{--
-
-                <div class="c-form__group">
-                    {!! Form::checkbox('eula', 1) !!}
-                    {!! trans('auth.register.field.eula.title', [
-                        'link' => '<a href="' . route('content.show', ['static', 25151]) . '">' . trans('auth.register.field.eula.title.link'). '</a>'
-                    ]) !!}
-                </div>
-
-                --}}
-
                 <div class="c-form__group">
                     {!! Form::submit(trans('auth.register.submit.title'), [
                         'class' => 'c-button m-large m-block'
                     ]) !!}
                 </div>
-
+            {!! Form::hidden('eula', 1) !!}
             {!! Form::close() !!}
         </div>
 
@@ -106,7 +95,10 @@
 
             <div class="c-auth-footer">
 
-                <p class="c-auth-footer__text">Creating an account means you're okay with Trip.ee's<br><a href="#" class="c-auth-footer__link">Terms of Service</a>, <a href="#" class="c-auth-footer__link">Privacy Policy</a> and <a href="#" class="c-auth-footer__link">Cookie use</a>.</p>
+                <p class="c-auth-footer__text">
+                    {!! trans('auth.register.field.eula.title', [
+                        'link' => '<a href="' . route('content.show', ['static', 25151]) . '" class="c-auth-footer__link">' . trans('auth.register.field.eula.title.link'). '</a>'
+                    ]) !!}</p>
 
             </div>
 
