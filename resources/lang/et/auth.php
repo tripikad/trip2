@@ -7,8 +7,8 @@ return [
     'register.field.email.title' => 'E-post',
     'register.field.password.title' => 'Parool',
     'register.field.password_confirmation.title' => 'Parool uuesti',
-    'register.field.eula.title' => 'Ma nõustun tingimustega :link',
-    'register.field.eula.title.link' => 'Kasutustingimused',
+    'register.field.eula.title' => 'Trip.ee keskkonnaga liitudes nõustun ma :link.',
+    'register.field.eula.title.link' => 'kasutajatingimustega',
     'register.submit.title' => 'Registreeri',
 
     'register.email.subject' => 'Kinnita oma konto',
