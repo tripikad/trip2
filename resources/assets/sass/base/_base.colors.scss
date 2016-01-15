@@ -86,6 +86,39 @@ $colors: ('yellow' $brand-yellow $brand-yellow-dark),
     }
 }
 
+@mixin color-modifiers-opacity($property: background) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        &.m-#{$name} {
+
+            #{$property}: rgba($color, 0.8);
+        }
+    }
+}
+
+@mixin color-modifiers-dark-opacity($property: background) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        &.m-#{$name} {
+
+            #{$property}: rgba($color-dark, 0.8);
+        }
+    }
+}
+
+@mixin color-modifiers-dark-and-opacity($property: background) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        .m-#{$name} & {
+
+            #{$property}: rgba($color-dark, 0.8);
+        }
+    }
+}
+
 
 // Neutrals
 
