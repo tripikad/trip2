@@ -100,13 +100,17 @@ galleryTrigger.on('click', function() {
 
             galleryImageContainer.append(
                 $('<div>')
-                .addClass('c-gallery__modal-image m-active js-gallery-modal-image')
+                .addClass('c-gallery__modal-image')
+                .addClass('m-active')
+                .addClass('js-gallery-modal-image')
                 .append('<img src="'+ value.image +'">')
             );
 
             galleryThumbContainer.append(
                 $('<div>')
-                .addClass('c-gallery__modal-thumb m-active js-gallery-modal-thumb')
+                .addClass('c-gallery__modal-thumb')
+                .addClass('m-active')
+                .addClass('js-gallery-modal-thumb')
                 .css({
                     'background-image': 'url('+value.image+')'
                 })
@@ -115,13 +119,15 @@ galleryTrigger.on('click', function() {
 
             galleryImageContainer.append(
                 $('<div>')
-                .addClass('c-gallery__modal-image js-gallery-modal-image')
+                .addClass('c-gallery__modal-image')
+                .addClass('js-gallery-modal-image')
                 .append('<img src="'+ value.image +'">')
             );
 
             galleryThumbContainer.append(
                 $('<div>')
-                .addClass('c-gallery__modal-thumb js-gallery-modal-thumb')
+                .addClass('c-gallery__modal-thumb')
+                .addClass('js-gallery-modal-thumb')
                 .css({
                     'background-image': 'url('+value.image+')'
                 })
