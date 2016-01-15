@@ -491,10 +491,24 @@
                         <p class="c-form__note">Kuvatakse sinu profiili ning postituse juures</p>
 
                         @include('component.button', [
-                            'modifiers' => 'm-quaternary m-min',
+                            'modifiers' => 'm-quaternary m-min js-dropzoneClick',
                             'title' => 'Vali pildifail',
                             'route' => '#'
                         ])
+
+                        <div style="display:none">
+                            @include('component.image.form', [
+                                'form' => [
+                                    'url' => $url,
+                                    'method' => isset($method) ? $method : 'post',
+                                    'model' => isset($user) ? $user : null,
+                                    'files' => true
+                                ],
+                                'name' => 'image',
+                                'maxFileSize' => 5,
+                                'uploadMultiple' => false
+                            ])
+                        </div>
 
                     </div>
 
