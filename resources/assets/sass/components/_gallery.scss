@@ -113,7 +113,10 @@
 
         &:hover {
 
-            fill: $color-white;
+            svg {
+
+                fill: $color-white;
+            }
         }
     }
 
@@ -165,6 +168,15 @@
                 display: none;
                 height: 100%;
                 width: 100%;
+                box-shadow: 0 12px 36px $color-fill-black;
+
+                 @each $name, $color, $color-dark in $colors {
+
+                    .c-gallery__modal.m-#{$name} & {
+
+                        box-shadow: 0 12px 36px $color-dark;
+                    }
+                }
 
                 &.m-active {
 
@@ -181,8 +193,45 @@
                     width: auto;
                     height: auto;
                     transform: translate(-50%, -50%);
+
+                    @include respond-to(desktop) {
+
+                        object-fit: cover;
+                        height: 100%;
+                        width: 100%;
+                    }
                 }
             }
+
+                .c-gallery__modal-tags {
+
+                    position: absolute;
+                    left: $spacer;
+                    bottom: $spacer;
+                    display: none;
+
+                    @include respond-to(desktop) {
+
+                        display: block;
+                        max-width: $spacer * 40;
+                    }
+                }
+
+                .c-gallery__modal-title {
+
+                    color: $color-white;
+                    font-size: $font-size-small;
+                    text-align: right;
+                    position: absolute;
+                    right: $spacer;
+                    bottom: $spacer;
+                    text-shadow: 0px 1px 3px rgba($color-text-black, .5);
+
+                    @include respond-to(desktop) {
+
+                        max-width: $spacer * 40;
+                    }
+                }
 
             .c-gallery__modal-nav {
 
@@ -217,11 +266,16 @@
                 svg {
 
                     @include color-modifiers-and('fill');
+
+                    fill: $color-white;
                 }
 
                 &:hover {
 
-                    fill: $color-white;
+                    svg {
+
+                        fill: $color-white;
+                    }
                 }
             }
 
@@ -232,7 +286,6 @@
             overflow: hidden;
             width: 100%;
             display: none;
-            background: green;
 
             @include respond-to(desktop) {
 
@@ -302,6 +355,7 @@
                     display: block;
                     width: 100%;
                     height: 100%;
+                    background: rgba($color-fill-black, .8);
                 }
 
                 &.m-active {

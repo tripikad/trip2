@@ -43,27 +43,55 @@ galleryTrigger.on('click', function() {
     var currentSlide;
     var currentSlideIndex;
 
-    // Change main image
+    // Show image based on click
 
     currentSlide = galleryTrigger.filter($(this));
     currentSlideIndex = galleryTrigger.index(currentSlide);
 
     $.each(images , function(index, value){
+
+        // Add images and thumbs
+
         if(index === currentSlideIndex) {
-            galleryImageContainer.append('<div class="c-gallery__modal-image m-active js-gallery-modal-image"><img src="'+ value +'">');
-            galleryThumbContainer.append('<div class="c-gallery__modal-thumb m-active js-gallery-modal-thumb" style="background-image:url('+value+');"></div>');
+            galleryImageContainer.append('<div class="c-gallery__modal-image m-active js-gallery-modal-image"><img src="'+ value.image +'">');
+            galleryThumbContainer.append('<div class="c-gallery__modal-thumb m-active js-gallery-modal-thumb" style="background-image:url('+value.image+');"></div>');
         } else {
-            galleryImageContainer.append('<div class="c-gallery__modal-image js-gallery-modal-image"><img src="'+ value +'">');
-            galleryThumbContainer.append('<div class="c-gallery__modal-thumb js-gallery-modal-thumb" style="background-image:url('+value+');"></div>');
+            galleryImageContainer.append('<div class="c-gallery__modal-image js-gallery-modal-image"><img src="'+ value.image +'">');
+            galleryThumbContainer.append('<div class="c-gallery__modal-thumb js-gallery-modal-thumb" style="background-image:url('+value.image+');"></div>');
+        }
+
+        // Add title if available
+
+        if(typeof value.title !== 'undefined' && value.title.length > 0) {
+
+            $('.c-gallery__modal-image').eq(index).append('<div class="c-gallery__modal-title">'+ value.title +'</div>');
+        }
+
+        // Add tags if available
+
+        if(typeof value.tags !== 'undefined' && value.tags.length > 0) {
+
+            $('.c-gallery__modal-image').eq(index).append('<div class="c-gallery__modal-tags"><ul class="c-tags m-small"></ul></div>');
+
+            $.each(value.tags , function(tagindex, tag){
+
+                $('.c-gallery__modal-image').eq(index).find('.c-tags').append('<li class="c-tags__item '+ tag.modifiers +'"><a href="'+ tag.route +'" class="c-tags__item-link">'+ tag.name +'</a></li>');
+            });
         }
     });
+
+    // If clicked image does not fit in the container 8, then nudge the container
 
     if (currentSlideIndex > 7) {
 
         tripGallery.nudgeNegative(currentSlideIndex);
     }
 
+    // Show modal
+
     galleryModal.addClass('m-active');
+
+    // Assign variables
 
     galleryImageItem = $('.js-gallery-modal-image');
     galleryThumbItem = $('.js-gallery-modal-thumb');
@@ -164,6 +192,8 @@ galleryPrevious.on('click', function(){
 
 tripGallery = {
 
+    // Moves the thumb container to the left
+
     nudgeNegative: function(slideIndex) {
 
         if (slideIndex > 7) {
@@ -183,9 +213,9 @@ tripGallery = {
             });
 
         }
-
-        console.log('nudgeNegative: ' + nudge);
     },
+
+    // Moves the thumb container to the right
 
     nudgePositive: function(slideIndex) {
 
@@ -203,8 +233,5 @@ tripGallery = {
         galleryThumbContainer.css({
             'left' : '-'+ nudge +'px'
         });
-
-        console.log('nudgePositive: ' + nudge);
     }
 };
-

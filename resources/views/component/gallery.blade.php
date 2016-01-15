@@ -53,6 +53,10 @@ code: |
 
 --}}
 
+<?php
+    $tags = [];
+    $i = 0;
+?>
 
 <div class="c-gallery m-8-cols">
 
@@ -60,7 +64,31 @@ code: |
 
         @foreach ($items as $item)
 
-        <?php $images[] = $item['image']; ?>
+        <?php $images[$i]['image'] = $item['image']; ?>
+
+        @if (isset($item['tags']))
+
+        <?php $j = 0; ?>
+
+            @foreach ($item['tags'] as $tag)
+
+        <?php
+            $images[$i]['tags'][$j]['name'] = $tag['title'];
+            $images[$i]['tags'][$j]['modifiers'] = $tag['modifiers'];
+            $images[$i]['tags'][$j]['route'] = $tag['route'];
+
+            $j++;
+        ?>
+
+            @endforeach
+
+        @endif
+
+        @if (isset($item['alt']))
+
+        <?php $images[$i]['title'] = $item['alt']; ?>
+
+        @endif
 
         @if (isset($modal))
 
@@ -98,6 +126,8 @@ code: |
 
                 @endif
             </li>
+
+            <?php $i++; ?>
 
         @endforeach
     </ul>
