@@ -52,6 +52,12 @@
         }
     }
 
+    &.m-quaternary {
+
+        color: $color-white;
+        background: $color-text-link;
+    }
+
     &.m-border {
 
         color: $color-white;
@@ -99,6 +105,14 @@
 
         display: block;
         width: 100%;
+    }
+
+    &.m-min {
+
+        @include respond-to(tablet) {
+
+            min-width: $spacer * 15;
+        }
     }
 
     &.m-small {
