@@ -36,7 +36,7 @@ return [
 
     'reset.apply.title' => 'Unustasid parooli?',
     'reset.apply.field.email.title' => 'Sinu e-post',
-    'reset.apply.submit.title' => 'Saada mulle parooli taastamise link',
+    'reset.apply.submit.title' => 'Saada',
 
     'reset.password.title' => 'Vali uus parool',
     'reset.password.field.email.title' => 'E-post',
