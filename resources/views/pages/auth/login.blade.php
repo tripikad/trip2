@@ -87,7 +87,9 @@
 
             <div class="c-auth-footer">
 
-                <p class="c-auth-footer__text">Ei mäleta oma parooli? <a href="{{ route('reset.apply.form') }}" class="c-auth-footer__link">Taasta oma parool siin</a></p>
+                <p class="c-auth-footer__text">
+                    {!! trans('auth.reset.apply.title') !!}
+                    <a href="{{ route('reset.apply.form') }}" class="c-auth-footer__link">{{ trans('auth.reset.apply.title.link') }}</a></p>
 
             </div>
 
