@@ -1,5 +1,11 @@
 /*exported createDropzone */
 
+$('.js-dropzoneClick').click(function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $("#dropzoneImage").trigger('click');
+});
+
 function createDropzone(
     selector,
     url,
