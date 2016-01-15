@@ -50,11 +50,7 @@
                 </div>
 
                 <div class="c-form__group">
-                    {{-- Form::submit(trans('auth.reset.apply.submit.title'), [
-                        'class' => 'c-button m-large m-block'
-                    ]) --}}
-
-                    {!! Form::submit('Saada', [
+                    {!! Form::submit(trans('auth.reset.apply.submit.title'), [
                         'class' => 'c-button m-large m-block'
                     ]) !!}
                 </div>
