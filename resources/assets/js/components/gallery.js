@@ -35,49 +35,48 @@ if (winWidth >= galleryDesktopLarge) {
 
 // Functions
 
-var tripGallery = {
 
-    // Moves the thumb container to the left
+// Moves the thumb container to the left
 
-    nudgeNegative: function(slideIndex) {
+var nudgeNegative = function(slideIndex) {
 
-        if (slideIndex > 7) {
+    if (slideIndex > 7) {
 
-            nudge =  (slideIndex - 7) * offset;
-
-            galleryThumbContainer.css({
-                'left' : '-'+ nudge +'px'
-            });
-
-        } else if (slideIndex === 0) {
-
-            nudge = 0;
-
-            galleryThumbContainer.css({
-                'left' : nudge
-            });
-
-        }
-    },
-
-    // Moves the thumb container to the right
-
-    nudgePositive: function(slideIndex) {
-
-        if (slideIndex < galleryImageItem.length - 8) {
-
-            nudge = nudge - offset;
-
-        } else if (slideIndex === galleryImageItem.length - 1) {
-
-            nudge = (galleryImageItem.length - 8) * offset;
-        }
+        nudge =  (slideIndex - 7) * offset;
 
         galleryThumbContainer.css({
             'left' : '-'+ nudge +'px'
         });
+
+    } else if (slideIndex === 0) {
+
+        nudge = 0;
+
+        galleryThumbContainer.css({
+            'left' : nudge
+        });
+
     }
 };
+
+// Moves the thumb container to the right
+
+var nudgePositive = function(slideIndex) {
+
+    if (slideIndex < galleryImageItem.length - 8) {
+
+        nudge = nudge - offset;
+
+    } else if (slideIndex === galleryImageItem.length - 1) {
+
+        nudge = (galleryImageItem.length - 8) * offset;
+    }
+
+    galleryThumbContainer.css({
+        'left' : '-'+ nudge +'px'
+    });
+};
+
 
 // Open gallery and fill it with content
 
@@ -148,7 +147,7 @@ galleryTrigger.on('click', function() {
 
     if (currentSlideIndex > 7) {
 
-        tripGallery.nudgeNegative(currentSlideIndex);
+        nudgeNegative(currentSlideIndex);
     }
 
     // Show modal
@@ -199,7 +198,7 @@ galleryNext.on('click', function(){
 
     // Nudge container left if necessary
 
-    tripGallery.nudgeNegative(nextSlideIndex);
+    nudgeNegative(nextSlideIndex);
 
     // Change main image
 
@@ -236,7 +235,7 @@ galleryPrevious.on('click', function(){
         nextSlideIndex = currentSlideIndex - 1;
     }
 
-    tripGallery.nudgePositive(nextSlideIndex);
+    nudgePositive(nextSlideIndex);
 
     // Change main image
 
