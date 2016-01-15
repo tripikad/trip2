@@ -320,7 +320,7 @@
 
                         @include('component.gallery', [
                             'modal' => [
-                                'modifiers' => 'm-blue',
+                                'modifiers' => 'm-yellow',
                             ],
                             'items' => [
                                 [
@@ -387,31 +387,6 @@
                                     'route' => '#',
                                     'alt' => '',
                                 ],
-                                [
-                                    'image' => \App\Image::getRandom(),
-                                    'route' => '#',
-                                    'alt' => '',
-                                ],
-                                [
-                                    'image' => \App\Image::getRandom(),
-                                    'route' => '#',
-                                    'alt' => '',
-                                ],
-                                [
-                                    'image' => \App\Image::getRandom(),
-                                    'route' => '#',
-                                    'alt' => '',
-                                ],
-                                [
-                                    'image' => \App\Image::getRandom(),
-                                    'route' => '#',
-                                    'alt' => '',
-                                ],
-                                [
-                                    'image' => \App\Image::getRandom(),
-                                    'route' => '#',
-                                    'alt' => '',
-                                ]
                             ]
                         ])
 
