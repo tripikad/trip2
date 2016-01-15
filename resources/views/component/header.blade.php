@@ -74,7 +74,11 @@
                 'image' => \Auth::user()->imagePreset(),
                 'title' => \Auth::user()->name,
                 'route' => route('user.show', [\Auth::user()]),
-                'badge' => \Auth::user()->unreadMessagesCount()
+                'badge' => \Auth::user()->unreadMessagesCount(),
+                'letter' => [
+                    'modifiers' => 'm-green m-tiny',
+                    'text' => 'W'
+                ]
             ],
             'children' => [
                 [
