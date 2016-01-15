@@ -64,7 +64,7 @@ class AuthTest extends TestCase
 
         $this->visit('/')
             ->click(trans('menu.auth.login'))
-            ->click(trans('auth.reset.apply.title'))
+            ->click(trans('auth.reset.apply.title.link'))
             ->type($user->email, 'email')
             ->press(trans('auth.reset.apply.submit.title'))
             ->seePageIs('/')
@@ -95,7 +95,7 @@ class AuthTest extends TestCase
     {
         $this->visit('/')
             ->click(trans('menu.auth.login'))
-            ->click(trans('auth.reset.apply.title'))
+            ->click(trans('auth.reset.apply.title.link'))
             ->type('user@example.com', 'email')
             ->press(trans('auth.reset.apply.submit.title'))
             ->seePageIs('/reset/apply')
