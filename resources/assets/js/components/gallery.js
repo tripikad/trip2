@@ -116,11 +116,13 @@ galleryTrigger.on('click', function() {
 
         if(typeof value.tags !== 'undefined' && value.tags.length > 0) {
 
-            $('.c-gallery__modal-image').eq(index).append('<div class="c-gallery__modal-tags"><ul class="c-tags m-small"></ul></div>');
+            $('.c-gallery__modal-image').eq(index)
+            .append('<div class="c-gallery__modal-tags"><ul class="c-tags m-small"></ul></div>');
 
             $.each(value.tags , function(tagindex, tag){
 
-                $('.c-gallery__modal-image').eq(index).find('.c-tags').append('<li class="c-tags__item '+ tag.modifiers +'"><a href="'+ tag.route +'" class="c-tags__item-link">'+ tag.name +'</a></li>');
+                $('.c-gallery__modal-image').eq(index).find('.c-tags')
+                .append('<li class="c-tags__item '+ tag.modifiers +'"><a href="'+ tag.route +'" class="c-tags__item-link">'+ tag.name +'</a></li>');
             });
         }
     });
