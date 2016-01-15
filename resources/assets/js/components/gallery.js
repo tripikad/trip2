@@ -35,7 +35,6 @@ if (winWidth >= galleryDesktopLarge) {
 
 // Functions
 
-
 // Moves the thumb container to the left
 
 var nudgeNegative = function(slideIndex) {
@@ -76,7 +75,6 @@ var nudgePositive = function(slideIndex) {
         'left' : '-'+ nudge +'px'
     });
 };
-
 
 // Open gallery and fill it with content
 
@@ -308,5 +306,3 @@ galleryThumbContainer.on('click', 'div', function() {
 
 
 });
-
-
