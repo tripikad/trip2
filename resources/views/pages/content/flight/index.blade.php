@@ -591,7 +591,11 @@
                             'date' => 'Täna, 15:12',
                             'profile' => [
                                 'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
                             ],
                             'badge' => [
                                 'modifiers' => 'm-inverted',
@@ -616,7 +620,11 @@
                             'date' => 'Täna, 12:17',
                             'profile' => [
                                 'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
                             ],
                             'badge' => [
                                 'modifiers' => 'm-inverted',
@@ -636,7 +644,11 @@
                             'date' => '10. detsember 2015',
                             'profile' => [
                                 'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
                             ],
                             'badge' => [
                                 'modifiers' => 'm-inverted',
@@ -656,7 +668,11 @@
                             'date' => '11. detsember 2015',
                             'profile' => [
                                 'modifiers' => 'm-mini',
-                                'image' => \App\Image::getRandom()
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
                             ],
                             'badge' => [
                                 'modifiers' => '',

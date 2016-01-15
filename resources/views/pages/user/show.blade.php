@@ -61,6 +61,10 @@
                     @include('component.profile', [
                         'image' => $user->imagePreset('small_square'),
                         'modifiers' => 'm-full m-green m-status m-user',
+                        'letter' => [
+                            'modifiers' => 'm-green m-large',
+                            'text' => 'D'
+                        ],
                         'status' => [
                             'position' => '3',
                             'modifiers' => 'm-green',

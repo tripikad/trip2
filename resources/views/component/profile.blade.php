@@ -33,39 +33,37 @@ modifiers:
 
 @if (isset($route) && $route != '')
 
-<a class="c-profile {{ $modifiers or '' }}" href="{{ $route }}">
+    <a class="c-profile {{ $modifiers or '' }}" href="{{ $route }}">
 
 @else
 
-<div class="c-profile {{ $modifiers or '' }}">
+    <div class="c-profile {{ $modifiers or '' }}">
 
 @endif
 
+@if(isset($status))
 
-    @if(isset($status))
+    @if(isset($status['editor']))
 
-        @if(isset($status['editor']))
+        <div class="c-profile__bubble {{ $status['modifiers'] or '' }}">
+            @include('component.svg.sprite', [
+                'name' => 'icon-star-filled'
+            ])
+        </div>
 
-            <div class="c-profile__bubble {{ $status['modifiers'] or '' }}">
+    @endif
 
-                @include('component.svg.sprite', [
-                    'name' => 'icon-star-filled'
-                ])
-            </div>
+    <div class="c-profile__status {{ $status['modifiers'] or '' }}">
 
-        @endif
+        @if(isset($status['position']))
 
-        <div class="c-profile__status {{ $status['modifiers'] or '' }}">
+            @if($status['position'] == 1)
 
-            @if(isset($status['position']))
+                <div class="c-profile__status-pie m-25">
+                    <span class="c-profile__status-pie-inner"></span>
+                </div>
 
-                @if($status['position'] == 1)
-
-                    <div class="c-profile__status-pie m-25">
-                        <span class="c-profile__status-pie-inner"></span>
-                    </div>
-
-                    @if(!isset($status['tooltip']))
+                @if(!isset($status['tooltip']))
 
                     <div class="c-profile__status-title">
 
@@ -87,15 +85,15 @@ modifiers:
 
                     </div>
 
-                    @endif
+                @endif
 
-                @elseif($status['position'] == 2)
+            @elseif($status['position'] == 2)
 
-                    <div class="c-profile__status-pie m-50">
-                        <span class="c-profile__status-pie-inner"></span>
-                    </div>
+                <div class="c-profile__status-pie m-50">
+                    <span class="c-profile__status-pie-inner"></span>
+                </div>
 
-                    @if(!isset($status['tooltip']))
+                @if(!isset($status['tooltip']))
 
                     <div class="c-profile__status-title">
 
@@ -116,15 +114,15 @@ modifiers:
                         @endif
                     </div>
 
-                    @endif
+                @endif
 
-                @elseif($status['position'] == 3)
+            @elseif($status['position'] == 3)
 
-                    <div class="c-profile__status-pie m-75">
-                        <span class="c-profile__status-pie-inner"></span>
-                    </div>
+                <div class="c-profile__status-pie m-75">
+                    <span class="c-profile__status-pie-inner"></span>
+                </div>
 
-                    @if(!isset($status['tooltip']))
+                @if(!isset($status['tooltip']))
 
                     <div class="c-profile__status-title">
 
@@ -145,15 +143,15 @@ modifiers:
                         @endif
                     </div>
 
-                    @endif
+                @endif
 
-                @else
+            @else
 
-                    <div class="c-profile__status-pie m-100">
-                        <span class="c-profile__status-pie-inner"></span>
-                    </div>
+                <div class="c-profile__status-pie m-100">
+                    <span class="c-profile__status-pie-inner"></span>
+                </div>
 
-                    @if(!isset($status['tooltip']))
+                @if(!isset($status['tooltip']))
 
                     <div class="c-profile__status-title">
 
@@ -174,21 +172,45 @@ modifiers:
                         @endif
                     </div>
 
-                    @endif
-
                 @endif
 
             @endif
 
-        </div>
+        @endif
+
+    </div>
+
+@endif
+
+<div class="c-profile__image-wrap">
+
+    @if (isset($image))
+
+        @if ($image != '')
+
+            <img src="{{ $image }}" alt="" class="c-profile__image">
+
+        @else
+
+            @if (isset($letter))
+
+                <div class="c-profile__letter {{ $letter['modifiers'] }}"><span>{{ $letter['text'] }}</span></div>
+
+            @endif
+
+        @endif
+
+    @else
+
+        @if (isset($letter))
+
+            <div class="c-profile__letter {{ $letter['modifiers'] }}"><span>{{ $letter['text'] }}</span></div>
+
+        @endif
 
     @endif
 
-    <div class="c-profile__image-wrap">
-
-        <img src="{{ $image }}" alt="" class="c-profile__image">
-
-        @if (isset($badge))
+    @if (isset($badge))
 
         <div class="c-profile__badge">
 
@@ -199,16 +221,16 @@ modifiers:
 
         </div>
 
-		@endif
+	@endif
 
-    </div>
+</div>
 
 @if (isset($route) && $route != '')
 
-</a>
+    </a>
 
 @else
 
-</div>
+    </div>
 
 @endif

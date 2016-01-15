@@ -8,7 +8,11 @@
                 'route' => route('content.show', [$item->type, $item]),
                 'profile' => [
                     'modifiers' => 'm-mini',
-                    'image' => $item->user->imagePreset()
+                    'image' => $item->user->imagePreset(),
+                    'letter' => [
+                        'modifiers' => 'm-green m-small',
+                        'text' => 'D'
+                    ],
                 ],
                 'badge' => [
                     'modifiers' => 'm-mini',
@@ -20,6 +24,10 @@
                             'image' => $item->user->imagePreset(),
                             'title' => $item->user->title,
                             'route' => route('user.show', [$item->user]),
+                            'letter' => [
+                                'modifiers' => 'm-green m-small',
+                                'text' => 'D'
+                            ],
                             'status' => [
                                 'modifiers' => 'm-green',
                                 'position' => '1'
@@ -44,7 +52,11 @@
                 'route' => route('content.show', [$item->content->type, $item->content]),
                 'profile' => [
                     'modifiers' => 'm-mini',
-                    'image' => $item->content->user->imagePreset()
+                    'image' => $item->content->user->imagePreset(),
+                    'letter' => [
+                        'modifiers' => 'm-green m-small',
+                        'text' => 'D'
+                    ],
                 ],
                 'badge' => [
                     'modifiers' => 'm-mini',
@@ -56,6 +68,10 @@
                             'image' => $item->user->imagePreset(),
                             'title' => $item->user->title,
                             'route' => route('user.show', [$item->user]),
+                            'letter' => [
+                                'modifiers' => 'm-green m-small',
+                                'text' => 'D'
+                            ],
                             'status' => [
                                 'modifiers' => 'm-green',
                                 'position' => '1'

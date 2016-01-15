@@ -25,7 +25,11 @@
                         'profile' => [
                             'modifiers' => '',
                             'image' => $content->user->imagePreset(),
-                            'route' => route('user.show', [$content->user])
+                            'route' => route('user.show', [$content->user]),
+                            'letter' => [
+                                'modifiers' => 'm-green m-small',
+                                'text' => 'D'
+                            ],
                         ],
                         'modifiers' => 'm-image',
                         'title' => $content->title,

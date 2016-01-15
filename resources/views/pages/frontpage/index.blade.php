@@ -171,7 +171,11 @@
                                     ]),
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => $forum->user->imagePreset()
+                                        'image' => $forum->user->imagePreset(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted',
@@ -436,6 +440,10 @@
                             return [
                                 'modifiers' => 'm-small',
                                 'image' => $travel_mate->user->imagePreset('small_square'),
+                                'letter'=> [
+                                    'modifiers' => 'm-red',
+                                    'text' => 'J'
+                                ],
                                 'name' => $travel_mate->user->name,
                                 'route' => route('content.show', [$travel_mate->type, $travel_mate]),
                                 'sex_and_age' =>
