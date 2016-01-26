@@ -7,6 +7,12 @@ get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
 
 post('/', ['uses' => 'FrontpageController@search', 'as' => 'frontpage.search']);
 
+//search
+get('search', ['uses' => 'SearchController@search', 'as' => 'search.results']);
+get('search/ajaxsearch', ['uses' => 'SearchController@ajaxsearch', 'as' => 'search.ajax']);
+get('search/{token}', ['uses' => 'SearchController@search', 'as' => 'search.results.type']);
+
+
 // Registration
 
 get('register', ['uses' => 'Auth\RegistrationController@form', 'as' => 'register.form']);
