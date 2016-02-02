@@ -8,9 +8,9 @@ Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index
 Route::post('/', ['uses' => 'FrontpageController@search', 'as' => 'frontpage.search']);
 
 //search
-get('search', ['uses' => 'SearchController@search', 'as' => 'search.results']);
-get('search/ajaxsearch', ['uses' => 'SearchController@ajaxsearch', 'as' => 'search.ajax']);
-get('search/{token}', ['uses' => 'SearchController@search', 'as' => 'search.results.type']);
+Route::get('search', ['uses' => 'SearchController@search', 'as' => 'search.results']);
+Route::get('search/ajaxsearch', ['uses' => 'SearchController@ajaxsearch', 'as' => 'search.ajax']);
+Route::get('search/{token}', ['uses' => 'SearchController@search', 'as' => 'search.results.type']);
 
 
 // Registration
