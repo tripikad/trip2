@@ -16,7 +16,8 @@
 
         {!! Form::input('search', 'q', $request->input('q'), [
              'class' => 'c-search__form-input',
-             'id' => 'global_search_input'
+             'id' => 'global_search_input',
+             'autocomplete' => 'off'
         ]) !!}
 
         {!! Form::close() !!}

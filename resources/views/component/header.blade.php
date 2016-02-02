@@ -131,7 +131,7 @@
         ])
     </a>
 
-    @if (Request::path() != '/' && Request::path() != 'search')
+    @if (Request::path() != '/' && !Request::is('search*'))
     <div class="c-header__search js-header__search">
 
         @if (isset($modifiers) && $modifiers === 'm-alternative')

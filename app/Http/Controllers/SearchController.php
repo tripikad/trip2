@@ -114,12 +114,6 @@ class SearchController extends Controller
     	return $res;
     }
 
-    protected function getValuesFromCollection($data, $cnt) 
-    {
-    	foreach ($data as $value) {
-    		
-    	}
-    }
 
     public function ajaxsearch(Request $request)
     {
