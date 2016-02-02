@@ -10,6 +10,10 @@ code: |
             'image' => '',
             'title' => '',
             'route' => '',
+            'letter' => [
+                'modifiers' => 'm-blue m-small',
+                'text' => 'J'
+            ],
             'status' => [
                 'modifiers' => '',
                 'position' => ''
@@ -52,6 +56,7 @@ code: |
                 @include('component.profile', [
                     'modifiers' => $profile['modifiers'],
                     'image' => $profile['image'],
+                    'letter' => $profile['letter'],
                     'title' => '',
                     'status' => $profile['status'],
                 ])
@@ -79,7 +84,7 @@ code: |
             <div class="c-forum-post__date">
                 {{ $date }}
                 @if(isset($date_edit))
-                    <span>(Edited: {{ $date_edit }})</span>
+                    <span>({{ trim(trans('content.post.updated.at', ['updated_at' => $date_edit])) }})</span>
                 @endif
             </div>
 

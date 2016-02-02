@@ -32,9 +32,9 @@ class ViewComposerServiceProvider extends ServiceProvider
                 for ($i = $data['from']; $i <= $data['to']; ++$i) {
                     $numbers[$i] = (strlen($i) == 1 ? '0' : '').
                         $i;
-
-                    $view->with('from_to', $numbers);
                 }
+
+                $view->with('from_to', $numbers);
             }
 
         });

@@ -141,7 +141,7 @@
                         @include('component.link', [
                             'modifiers' => 'm-tiny',
                             'title' => trans('destination.show.link.view.all'),
-                            'route' => route('content.show', ['flights'])
+                            'route' => route('content.index', ['flights'])
                         ])
 
                     </div>
@@ -233,7 +233,11 @@
                                         'route' => route('content.show', [$forum->type, $forum]),
                                         'profile' => [
                                             'modifiers' => 'm-mini',
-                                            'image' => $forum->user->imagePreset()
+                                            'image' => $forum->user->imagePreset(),
+                                            'letter'=> [
+                                                'modifiers' => 'm-red',
+                                                'text' => 'J'
+                                            ],
                                         ],
                                         'badge' => [
                                             'modifiers' => 'm-inverted',
@@ -301,14 +305,93 @@
                             ])
                         </div>
 
+                        {{--
+
                         @include('component.gallery', [
+                            'modal' => [
+                                'modifiers' => 'm-yellow',
+                            ],
                             'items' => $features['photos']['contents']->transform(function($photo) {
                                 return [
                                     'image' => $photo->imagePreset(),
                                     'route' => route('content.show', [$photo->type, $photo]),
-                                    'alt' => $photo->title
+                                    'alt' => $photo->title,
                                 ];
                             })
+                        ])
+
+                        --}}
+
+                        @include('component.gallery', [
+                            'modal' => [
+                                'modifiers' => 'm-yellow',
+                            ],
+                            'items' => [
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => 'Random name or title',
+                                    'tags' => [
+                                        [
+                                            'title' => 'Malta',
+                                            'modifiers' => 'm-orange',
+                                            'route' => '#'
+                                        ],
+                                        [
+                                            'title' => 'Europe',
+                                            'modifiers' => 'm-red',
+                                            'route' => '#'
+                                        ],
+                                        [
+                                            'title' => 'Suusapuhkus',
+                                            'modifiers' => 'm-gray',
+                                            'route' => '#'
+                                        ]
+                                    ]
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                    'tags' => [
+                                        [
+                                            'title' => 'Valetta',
+                                            'modifiers' => 'm-blue',
+                                            'route' => '#'
+                                        ]
+                                    ]
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => 'Random longer name or very long title and something else which is long',
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                ],
+                            ]
                         ])
 
                     </div>
@@ -436,6 +519,10 @@
                                 [
                                     'modifiers' => 'm-small',
                                     'image' =>  \App\Image::getRandom(),
+                                    'letter'=> [
+                                        'modifiers' => 'm-red',
+                                        'text' => 'J'
+                                    ],
                                     'name' => 'Charles Darwin',
                                     'route' => '#',
                                     'sex_and_age' => 'N,28',
@@ -454,6 +541,10 @@
                                 [
                                     'modifiers' => 'm-small',
                                     'image' =>  \App\Image::getRandom(),
+                                    'letter'=> [
+                                        'modifiers' => 'm-red',
+                                        'text' => 'J'
+                                    ],
                                     'name' => 'Epptriin ',
                                     'route' => '#',
                                     'sex_and_age' => 'N,22',
@@ -472,6 +563,10 @@
                                 [
                                     'modifiers' => 'm-small',
                                     'image' =>  \App\Image::getRandom(),
+                                    'letter'=> [
+                                        'modifiers' => 'm-red',
+                                        'text' => 'J'
+                                    ],
                                     'name' => 'Silka ',
                                     'route' => '#',
                                     'sex_and_age' => 'M,32',

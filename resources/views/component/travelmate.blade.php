@@ -1,7 +1,32 @@
 <div class="c-travelmate {{ $modifiers or '' }}">
 
     <div class="c-travelmate__image">
-        <img src="{{ $image }}" alt="">
+
+        @if (isset($image))
+
+            @if ($image != '')
+
+                <img src="{{ $image }}" alt="">
+
+            @else
+
+                @if (isset($letter))
+
+                    <div class="c-travelmate__letter {{ $letter['modifiers'] }}"><span>{{ $letter['text'] }}</span></div>
+
+                @endif
+
+            @endif
+
+        @else
+
+            @if (isset($letter))
+
+                <div class="c-travelmate__letter {{ $letter['modifiers'] }}"><span>{{ $letter['text'] }}</span></div>
+
+            @endif
+
+        @endif
     </div>
 
     <p class="c-travelmate__name">
@@ -15,7 +40,7 @@
         {{ $title }}
     </h3>
 
-    <p class="c-travelmate__more">Loe lähemalt ›</p>
+    <p class="c-travelmate__more">{{ trans('content.action.read.more') }} ›</p>
 
     @if(isset($tags))
 

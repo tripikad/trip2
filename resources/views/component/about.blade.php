@@ -33,11 +33,13 @@ modifiers:
 
     <div class="c-about__content">
 
-        <h2 class="c-about__title">{{ $title }}</h2>
+        @if (isset($title) && $title!='')
+            <h2 class="c-about__title">{!! $title !!}</h2>
+        @endif
 
         @if (isset($text))
 
-        <p class="c-about__text">{{ $text }}</p>
+        <p class="c-about__text">{!! $text !!}</p>
 
         @endif
 
@@ -47,18 +49,22 @@ modifiers:
 
             @foreach ($links as $link)
 
-                @include('component.link', [
-                    'modifiers' => $link['modifiers'],
-                    'icon' => $link['icon'],
-                    'title' => $link['title'],
-                    'route' => $link['route']
-                ])
+                @if (isset($link['title']) && $link['title']!='' && isset($link['route']) && $link['route']!='')
+
+                    @include('component.link', [
+                        'modifiers' => $link['modifiers'],
+                        'icon' => $link['icon'],
+                        'title' => $link['title'],
+                        'route' => $link['route']
+                    ])
+
+                @endif
 
             @endforeach
 
         </div>
 
-         @endif
+        @endif
 
     </div>
 

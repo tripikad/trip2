@@ -2,13 +2,35 @@
 
     @include clear-list;
 
-    display: flex;
-    align-items: center;
+    @include respond-to(tablet) {
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    &.m-small {
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
 }
 
     .c-button-group__item {
 
+        margin-bottom: $spacer;
         padding-right: $spacer;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: 0;
+        }
+
+        .c-button-group.m-small & {
+
+            padding-right: $spacer / 2;
+        }
 
         &.m-hide {
 

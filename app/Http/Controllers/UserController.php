@@ -182,6 +182,8 @@ class UserController extends Controller
             'contact_twitter' => 'url',
             'contact_instagram' => 'url',
             'contact_homepage' => 'url',
+            'birthyear' => 'sometimes|digits:4',
+            'gender' => 'required',
         ]);
 
         $fields = [

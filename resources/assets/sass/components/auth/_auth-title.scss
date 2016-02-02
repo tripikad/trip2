@@ -1,0 +1,16 @@
+.c-auth-title {
+
+    color: $color-text-link;
+    font-size: $font-size-medium;
+    margin-bottom: $spacer;
+
+    &.m-margin {
+
+        margin-bottom: $spacer * 1.5;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 2;
+        }
+    }
+}

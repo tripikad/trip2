@@ -8,6 +8,10 @@
                 'image' => $comment->user->imagePreset('xsmall_square'),
                 'title' => $comment->user->name,
                 'route' => route('user.show', [$comment->user]),
+                'letter' => [
+                    'modifiers' => 'm-blue m-small',
+                    'text' => 'J'
+                ],
                 'status' => [
                     'modifiers' => 'm-blue',
                     'position' => '1'

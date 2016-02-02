@@ -31,12 +31,16 @@
     <div class="c-header__user">
 
         @include('component.navbar.user', [
-            'modifiers' => 'm-purple',
+            'modifiers' => 'm-green',
             'profile' => [
                 'image' => \Auth::user()->imagePreset(),
                 'title' => \Auth::user()->name,
                 'route' => route('user.show', [\Auth::user()]),
-                'badge' => \Auth::user()->unreadMessagesCount()
+                'badge' => \Auth::user()->unreadMessagesCount(),
+                'letter' => [
+                    'modifiers' => 'm-green m-tiny',
+                    'text' => 'W'
+                ]
             ],
             'children' => [
                 [
@@ -70,7 +74,11 @@
                 'image' => \Auth::user()->imagePreset(),
                 'title' => \Auth::user()->name,
                 'route' => route('user.show', [\Auth::user()]),
-                'badge' => \Auth::user()->unreadMessagesCount()
+                'badge' => \Auth::user()->unreadMessagesCount(),
+                'letter' => [
+                    'modifiers' => 'm-green m-tiny',
+                    'text' => 'W'
+                ]
             ],
             'children' => [
                 [
@@ -125,7 +133,6 @@
     </div>
 
     <a href="#" class="c-header__search-trigger js-header__search-trigger">
-
         @include('component.svg.sprite', [
             'name' => 'icon-search'
         ])
