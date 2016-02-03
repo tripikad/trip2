@@ -136,7 +136,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted m-green',
@@ -148,7 +152,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted m-green',
@@ -160,7 +168,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted m-green',
@@ -172,7 +184,11 @@
                                     'route' => '#',
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => \App\Image::getRandom()
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-green',
@@ -329,6 +345,10 @@
                         'image' =>  \App\Image::getRandom(),
                         'name' => 'Charles Darwin',
                         'route' => '#',
+                        'letter' => [
+                                'modifiers' => 'm-green m-small',
+                                'text' => 'D'
+                            ],
                         'sex_and_age' => 'N,28',
                         'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
                         'tags' => [
@@ -347,6 +367,10 @@
                         'image' =>  \App\Image::getRandom(),
                         'name' => 'Epptriin ',
                         'route' => '#',
+                        'letter' => [
+                                'modifiers' => 'm-green m-small',
+                                'text' => 'D'
+                            ],
                         'sex_and_age' => 'N,22',
                         'title' => 'Suusareis Austriasse veebruar-märts 2016',
                         'tags' => [
@@ -365,6 +389,10 @@
                         'image' =>  \App\Image::getRandom(),
                         'name' => 'Silka ',
                         'route' => '#',
+                        'letter' => [
+                                'modifiers' => 'm-green m-small',
+                                'text' => 'D'
+                            ],
                         'sex_and_age' => 'M,32',
                         'title' => 'Puerto Rico',
                         'tags' => [
