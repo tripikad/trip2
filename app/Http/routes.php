@@ -12,7 +12,6 @@ Route::get('search', ['uses' => 'SearchController@search', 'as' => 'search.resul
 Route::get('search/ajaxsearch', ['uses' => 'SearchController@ajaxsearch', 'as' => 'search.ajax']);
 Route::get('search/{token}', ['uses' => 'SearchController@search', 'as' => 'search.results.type']);
 
-
 // Registration
 
 Route::get('register', ['uses' => 'Auth\RegistrationController@form', 'as' => 'register.form']);
