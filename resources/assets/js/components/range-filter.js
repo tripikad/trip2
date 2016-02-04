@@ -30,8 +30,8 @@ var slider = $('.c-range-filter__slider'),
     }
 });
 
-firstInitialStep = slider.slider( "values", 0 );
-lastInitialStep = slider.slider( "values", 1 );
+firstInitialStep = slider.slider('values', 0 );
+lastInitialStep = slider.slider('values', 1 );
 
 $('.ui-slider-handle').eq(0).html('<span>' + steps[firstInitialStep] + '</span>');
 $('.ui-slider-handle').eq(1).html('<span>' + steps[lastInitialStep] + '</span>');
