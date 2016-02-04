@@ -28,6 +28,7 @@
     width: $spacer * 2;
     height: $spacer * 2;
     background: $color-text-link url('../svg/icon-drag.svg') no-repeat center center;
+    background-size: 14px 8px;
     border-radius: 50%;
     cursor: default;
     touch-action: none;
