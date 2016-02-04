@@ -22,7 +22,7 @@
                 <li class="c-search__results-list-item">
                     <span class="c-search__results-list-item-icon">
                         @include('component.svg.sprite',[
-                            'name' => 'icon-comment'
+                            'name' => 'icon-pin'
                         ])
                     </span>
                     Sihtkohad
