@@ -36,7 +36,7 @@
 
     .r-flights__content {
 
-        padding-top: $spacer * 4;
+        padding-top: $spacer * 2;
 
         @include respond-to(tablet) {
 
@@ -52,6 +52,11 @@
         }
     }
 
+        .r-flights__content-filter {
+
+            padding-top: $spacer * 4;
+        }
+
         .r-flights__content-header-meta {
 
             margin-bottom: $spacer * 1.5;
@@ -63,7 +68,7 @@
 
             @include span(7 of 24 at 3);
 
-            padding-top: $spacer * 4;
+            padding-top: $spacer * 2;
         }
 
         .r-flights.m-single & {

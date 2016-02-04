@@ -112,6 +112,12 @@
 
     <div class="r-flights__content-wrap">
 
+        <div class="r-flights__content-filter">
+
+            @include('component.range_filter')
+
+        </div>
+
         <div class="r-flights__content">
 
             {{-- List option for flight offers
