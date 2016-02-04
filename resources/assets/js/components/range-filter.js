@@ -25,15 +25,21 @@ var slider = $('.c-range-filter__slider'),
     slide: function(event, ui) {
         firstStep = steps[ui.values[0]];
         lastStep = steps[ui.values[1]];
-        $('.ui-slider-handle').eq(0).html('<span>' + firstStep + '</span>');
-        $('.ui-slider-handle').eq(1).html('<span>' + lastStep + '</span>');
+        $('.ui-slider-handle')
+            .eq(0)
+            .html('<span>' + firstStep + '</span>');
+        $('.ui-slider-handle')
+            .eq(1)
+            .html('<span>' + lastStep + '</span>');
     }
 });
 
 firstInitialStep = slider.slider('values', 0 );
 lastInitialStep = slider.slider('values', 1 );
 
-$('.ui-slider-handle').eq(0).html('<span>' + steps[firstInitialStep] + '</span>');
-$('.ui-slider-handle').eq(1).html('<span>' + steps[lastInitialStep] + '</span>');
-
-
+$('.ui-slider-handle')
+    .eq(0)
+    .html('<span>' + steps[firstInitialStep] + '</span>');
+$('.ui-slider-handle')
+    .eq(1)
+    .html('<span>' + steps[lastInitialStep] + '</span>');
