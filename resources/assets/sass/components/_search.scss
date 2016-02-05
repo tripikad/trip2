@@ -309,11 +309,14 @@
 
                                 flex: 0 1 $spacer * 3;
                                 height: $spacer * 3;
-                                margin-right: $spacer;
+                                margin-right: $spacer * 2;
 
                                 .c-search.m-small & {
 
-                                    display: none;
+                                    flex: 0 1 $spacer * 2;
+                                    height: $spacer * 2;
+                                    margin-right: $spacer;
+                                    align-self: flex-start;
                                 }
                             }
 

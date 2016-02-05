@@ -140,20 +140,23 @@
 
     <div class="c-header__search js-header__search">
 
-        @if (isset($modifiers) && $modifiers === 'm-alternative')
+        @if(!Request::is('/'))
 
-            @include('component.search',[
-                'modifiers' => 'm-small m-red m-alternative',
-                'placeholder' => 'Search'
-            ])
+            @if (isset($modifiers) && $modifiers === 'm-alternative')
 
-        @else
+                @include('component.header.search',[
+                    'modifiers' => 'm-small m-red m-alternative',
+                    'placeholder' => 'Search'
+                ])
 
-            @include('component.search',[
-                'modifiers' => 'm-small m-red',
-                'placeholder' => 'Search'
-            ])
+            @else
 
+                @include('component.header.search',[
+                    'modifiers' => 'm-small m-red',
+                    'placeholder' => 'Search'
+                ])
+
+            @endif
         @endif
     </div>
 
