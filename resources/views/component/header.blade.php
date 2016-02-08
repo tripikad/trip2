@@ -132,6 +132,8 @@
         @endif
     </div>
 
+    @if(!Request::is('/'))
+
     <a href="#" class="c-header__search-trigger js-header__search-trigger">
         @include('component.svg.sprite', [
             'name' => 'icon-search'
@@ -142,19 +144,22 @@
 
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
-            @include('component.search',[
+            @include('component.header.search',[
                 'modifiers' => 'm-small m-red m-alternative',
-                'placeholder' => 'Search'
+                'placeholder' => ''
             ])
 
         @else
 
-            @include('component.search',[
+            @include('component.header.search',[
                 'modifiers' => 'm-small m-red',
-                'placeholder' => 'Search'
+                'placeholder' => ''
             ])
 
         @endif
+
     </div>
+
+    @endif
 
 </header>
