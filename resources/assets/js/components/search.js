@@ -4,7 +4,8 @@ $('.js-search__form-input').on('focus', function(){
 });
 
 $(document).on('click', function (e) {
-   if (!$('.js-search').is(e.target) && $('.js-search').has(e.target).length === 0) {
+    if (!$('.js-search').is(e.target) &&
+        $('.js-search').has(e.target).length === 0) {
         $('.js-search').removeClass('m-active');
    }
 });
