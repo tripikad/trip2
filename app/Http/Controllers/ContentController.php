@@ -328,7 +328,13 @@ class ContentController extends Controller
 
         $now = \Carbon\Carbon::now();
 
-        return \View::make('pages.content.edit')
+        if (view()->exists('pages.content.'.$type.'.edit')) {
+            $view = 'pages.content.'.$type.'.edit';
+        } else {
+            $view = 'pages.content.edit';
+        }
+
+        return \View::make($view)
             ->with('mode', 'create')
             ->with('fields', config("content_$type.edit.fields"))
             ->with('url', route('content.store', [$type]))
@@ -398,7 +404,13 @@ class ContentController extends Controller
         $topics = Topic::getNames();
         $topic = $content->topics()->select('topics.id')->lists('id')->toArray();
 
-        return \View::make('pages.content.edit')
+        if (view()->exists('pages.content.'.$type.'.edit')) {
+            $view = 'pages.content.'.$type.'.edit';
+        } else {
+            $view = 'pages.content.edit';
+        }
+
+        return \View::make($view)
             ->with('mode', 'edit')
             ->with('fields', config("content_$type.edit.fields"))
             ->with('content', $content)
