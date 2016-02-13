@@ -79,7 +79,8 @@ class SearchController extends Controller
         $builder = $this->getSearchBuilderByType($type, $q);
 
         $order_type = config('search.types.'.$type.'.order_type') ? config('search.types.'.$type.'.order_type') : 'ASC';
-        $res = $builder->orderBy(config('search.types.'.$type.'.order'), $order_type)->simplePaginate(config('search.types.'.$type.'.items_per_page'));
+        $res = $builder->orderBy(config('search.types.'.$type.'.order'), $order_type)
+                    ->simplePaginate(config('search.types.'.$type.'.items_per_page'));
         $res->setPath(env('FULL_BASE_URL').'search/'.$type);
         $res->appends(['q' => $q]);
 
