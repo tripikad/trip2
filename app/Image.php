@@ -101,7 +101,7 @@ class Image extends Model
             $filename = $filename.'-'.$i;
         }
 
-        if (file_exists($path.$filename.$ext)) {
+        if (file_exists($path.$filename.'.'.$ext)) {
             ++$i;
 
             return self::checkIfExists($path, $filename, $ext, $i);
