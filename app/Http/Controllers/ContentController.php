@@ -382,7 +382,7 @@ class ContentController extends Controller
         if (! $request->ajax()) {
             return redirect()
                 ->route('content.index', [$type])
-                ->with('info', trans('content.store.status.' . config("content_$type.store.status", 1) . '.info', [
+                ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
                     'title' => $content->title,
                 ]));
         }
