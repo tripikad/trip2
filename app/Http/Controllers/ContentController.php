@@ -379,11 +379,13 @@ class ContentController extends Controller
             $content->topics()->sync($request->topics);
         }
 
-        return redirect()
-            ->route('content.index', [$type])
-            ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
-                'title' => $content->title,
-            ]));
+        if (! $request->ajax()) {
+            return redirect()
+                ->route('content.index', [$type])
+                ->with('info', trans('content.store.status.' . config("content_$type.store.status", 1) . '.info', [
+                    'title' => $content->title,
+                ]));
+        }
     }
 
     public function edit($type, $id)
@@ -461,9 +463,11 @@ class ContentController extends Controller
             $content->topics()->sync($request->topics);
         }
 
-        return redirect()
-            ->route('content.show', [$type, $content])
-            ->with('info', trans('content.update.info', ['title' => $content->title]));
+        if (! $request->ajax()) {
+            return redirect()
+                ->route('content.show', [$type, $content])
+                ->with('info', trans('content.update.info', ['title' => $content->title]));
+        }
     }
 
     private static function fetchDates($request, $type)
