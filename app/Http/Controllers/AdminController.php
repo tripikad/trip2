@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use View;
 use App\Image;
 use App\Content;
 
@@ -33,10 +32,12 @@ class AdminController extends Controller
         $orig_filename = $request->file('image')->getClientOriginalName();
         Image::create(['filename' => $filename]);
 
-        return back()
-            ->with('info', trans('admin.image.store.info', [
+        if (! $request->ajax()) {
+            return back()
+                ->with('info', trans('admin.image.store.info', [
                     'filename' => $orig_filename,
-            ]));
+                ]));
+        }
     }
 
     public function contentIndex()
