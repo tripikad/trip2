@@ -30,7 +30,7 @@
 
         </div>
 
-        @if (isset($flights1) && ! empty($flights1))
+        @if (isset($flights1) && count($flights1) > 0)
 
             <div class="r-home__destinations">
 
@@ -71,7 +71,7 @@
                         @include('component.link', [
                             'modifiers' => 'm-icon m-right',
                             'title' => 'Vaata kõiki sooduspakkumisi',
-                            'route' => route('content.show', ['flight']),
+                            'route' => route('content.index', ['flight']),
                             'icon' => 'icon-arrow-right'
                         ])
 
@@ -81,7 +81,7 @@
 
         @endif
 
-        @if (isset($content) && ! empty($content->first()))
+        @if (isset($content) && count($content) > 0)
 
             <div class="r-home__about">
 
@@ -89,7 +89,7 @@
 
                     @include('component.about', [
                         'modifiers' => 'm-wide',
-                        'title' => str_limit($content->first()->body, 300),
+                        'title' => str_limit($content->first()->body_filtered, 300),
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
@@ -129,40 +129,36 @@
                         'items' => [
                             [
                                 'title' => trans('frontpage.index.forum.general'),
-                                'route' => route('content.show', 'forum'),
+                                'route' => route('content.index', 'forum'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'title' => trans('frontpage.index.forum.buysell'),
-                                'route' => route('content.show', 'buysell'),
+                                'route' => route('content.index', 'buysell'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'title' => trans('frontpage.index.forum.expat'),
-                                'route' => route('content.show', 'expat'),
+                                'route' => route('content.index', 'expat'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
-                            ],
-                            [
-                                'type' => 'button',
-                                'title' => 'Otsi foorumist',
-                                'route' => '#',
-                                'modifiers' => 'm-secondary m-block'
-                            ],
-                            [
-                                'type' => 'button',
-                                'title' => 'Alusta teemat',
-                                'route' => '#',
-                                'modifiers' => 'm-block'
                             ]
                         ]
                     ])
 
                 </div>
 
-                @if (isset($forums) && ! empty($forums))
+                {{--
+
+                    Forum tags
+
+                    Destination tags should be coloured, everything else sholud be "m-gray"
+
+                --}}
+
+                @if (isset($forums) && count($forums) > 0)
 
                     <div class="r-home__forum-column m-last">
                         @include('component.content.forum.list', [
@@ -170,22 +166,28 @@
                                 return [
                                     'topic' => str_limit($forum->title, 50),
                                     'route' => route('content.show', [$forum->type, $forum]),
+                                    'date' => view('component.date.relative', [
+                                        'date' => $forum->created_at
+                                    ]),
                                     'profile' => [
                                         'modifiers' => 'm-mini',
-                                        'image' => $forum->user->imagePreset()
+                                        'image' => $forum->user->imagePreset(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
                                     ],
                                     'badge' => [
                                         'modifiers' => 'm-inverted',
                                         'count' => count($forum->comments)
                                     ],
-                                    'tags' => $forum->topics->take(2)->transform(function ($topic, $key) use ($forum) {
+                                    'tags' => $forum->topics->take(2)->transform(function ($topic) use ($forum) {
                                         return [
                                             'title' => $topic->name,
-                                            'modifiers' => ['m-green', 'm-blue', 'm-orange', 'm-yellow', 'm-red'][$key],
-                                            'route' => route('content.show', [$forum->type]).'?topic='.$topic->id,
+                                            'modifiers' => 'm-gray',
+                                            'route' => route('content.index', [$forum->type]).'?topic='.$topic->id,
                                         ];
                                     })
-
                                 ];
                             })
                         ])
@@ -198,20 +200,28 @@
         </div>
 
         <div class="r-home__news">
-
             <div class="r-home__news-wrap">
-
                 <div class="r-home__news-column m-first">
+                    <div class="r-block m-small">
 
-                    @include('component.promo', [
-                        'route' => '',
-                        'image' => \App\Image::getRandom()
-                    ])
+                        @include('component.promo', [
+                            'modifiers' => 'm-sidebar-large',
+                            'route' => '',
+                            'image' => 'images/large/crowded-albufeira_3384859k.jpg'
+                        ])
 
+                    </div>
+                    <div class="r-block m-small">
+
+                        @include('component.promo', [
+                            'modifiers' => 'm-sidebar-small',
+                            'route' => '',
+                            'image' => \App\Image::getRandom()
+                        ])
+
+                    </div>
                 </div>
-
                 <div class="r-home__news-column m-last">
-
                     <div class="r-home__news-title">
 
                         @include('component.title', [
@@ -221,65 +231,65 @@
 
                     </div>
 
-                    @if (isset($news1) && ! empty($news1))
+                    @if (isset($news) && count($news) > 0)
 
                         <div class="r-home__news-block-wrap">
 
-                            @foreach($news1 as $key => $new)
+                        @foreach ($news as $key => $new)
 
-                                <div class="r-home__news-block @if($key==0) m-first @else m-last @endif">
+                            <div class="r-home__news-block @if(($key + 1) % 2 == 0) m-last @else m-first @endif">
 
-                                    @include('component.news', [
-                                        'title' => $new->title,
-                                        'route' => route('content.show', [$new->type, $new]),
-                                        'date' => $new->created_at,
-                                        'image' => $new->imagePreset(),
-                                        'modifiers' => ($key==0?'':'m-small')
-                                    ])
+                                @include('component.news', [
+                                    'title' => $new->title,
+                                    'route' => route('content.show', [$new->type, $new]),
+                                    'date' => $new->created_at,
+                                    'image' => $new->imagePreset(),
+                                    'modifiers' => $key > 3 ? 'm-smaller' : null
+                                ])
+
+                            </div>
+
+                            @if (($key + 1) % 2 == 0)
 
                                 </div>
 
-                            @endforeach
+                                <div class="r-home__news-block-wrap">
+
+                            @endif
+
+                        @endforeach
 
                         </div>
 
                     @endif
 
-
-                    @if (isset($news2) && ! empty($news2))
-
-                        @include('component.list', [
-                            'items' => $news2->transform(function ($new) {
-                                return [
-                                    'title' => $new->title,
-                                    'route' => route('content.show', [$new->type, $new]),
-                                    'text' => view('component.date.short', ['date' => $new->created_at])
-                                ];
-                            })
-                        ])
-
-                    @endif
-
                     <div class="r-home__news-footer">
+                        <div class="r-block">
 
-                        @include('component.link', [
-                            'title' => trans('frontpage.index.all.news'),
-                            'route' => route('content.show', ['news']),
-                            'modifiers' => 'm-icon m-right',
-                            'icon' => 'icon-arrow-right'
-                        ])
+                            @include('component.link', [
+                                'title' => trans('frontpage.index.all.news'),
+                                'route' => route('content.index', ['news']),
+                                'modifiers' => 'm-icon m-right',
+                                'icon' => 'icon-arrow-right'
+                            ])
 
+                        </div>
                     </div>
+
+                    @include('component.promo', [
+                        'modifiers' => 'm-body',
+                        'route' => '',
+                        'image' => \App\Image::getRandom()
+                    ])
+
                 </div>
             </div>
         </div>
 
-        @if (isset($featured_news) && ! empty($featured_news))
+        @if (isset($featured_news) && count($featured_news) > 0)
 
             <div class="r-home__featured-news">
-
                 <div class="r-home__featured-news-wrap">
-
                     <div class="c-columns m-3-cols">
 
                         @foreach ($featured_news as $featured_new)
@@ -298,35 +308,31 @@
                         @endforeach
 
                     </div>
-
                 </div>
-
             </div>
 
         @endif
 
         <div class="r-home__travel">
-
             <div class="r-home__travel-wrap">
 
-                <div class="r-home__travel-column m-first">
+                @if (isset($flights2) && count($flights2) > 0)
 
-                    <div class="r-home__travel-title">
+                    <div class="r-home__travel-column m-first">
+                        <div class="r-home__travel-title">
 
-                        @include('component.title', [
-                            'modifiers' => 'm-red',
-                            'title' => trans('frontpage.index.flight.title')
-                        ])
+                            @include('component.title', [
+                                'modifiers' => 'm-red',
+                                'title' => trans('frontpage.index.flight.title')
+                            ])
 
-                    </div>
-
-                    @if (isset($flights2) && ! empty($flights2))
+                        </div>
 
                         @foreach ($flights2 as $key => $flight2)
 
                             @include('component.row', [
                                 'icon' => 'icon-tickets',
-                                'modifiers' => ['m-blue', 'm-yellow', 'm-green', 'm-red', 'm-purple'][$key].' m-icon',
+                                'modifiers' => 'm-icon',
                                 'title' => $flight2->title.' '.$flight2->price.' '.config('site.currency.symbol'),
                                 'route' => route('content.show', [$flight2->type, $flight2]),
                                 'text' =>
@@ -337,25 +343,24 @@
 
                         @endforeach
 
-                    @endif
+                        <div class="r-home__travel-column-footer">
 
-                    <div class="r-home__travel-column-footer">
+                            @include('component.link', [
+                                'modifiers' => 'm-icon',
+                                'title' => trans('frontpage.index.all.offers'),
+                                'route' => route('content.index', ['flight']),
+                                'icon' => 'icon-arrow-right'
+                            ])
 
-                        @include('component.link', [
-                            'modifiers' => 'm-icon',
-                            'title' => trans('frontpage.index.all.offers'),
-                            'route' => route('content.show', ['flight']),
-                            'icon' => 'icon-arrow-right'
-                        ])
+                        </div>
 
                     </div>
 
-                </div>
+                @endif
 
-                @if (isset($blogs) && ! empty($blogs))
+                @if (isset($blogs) && count($blogs) > 0)
 
                     <div class="r-home__travel-column m-last">
-
                         <div class="r-home__travel-title">
 
                             @include('component.title', [
@@ -388,11 +393,18 @@
         </div>
 
 
-        @if (isset($photos) && ! empty($photos))
+        @if (isset($photos) && count($photos) > 0)
 
             <div class="r-home__gallery">
-
                 <div class="r-home__gallery-wrap">
+                    <div class="r-home__gallery-title">
+
+                        @include('component.title', [
+                            'modifiers' => 'm-red',
+                            'title' => trans('frontpage.index.photo.title')
+                        ])
+
+                    </div>
 
                     @include('component.gallery', [
                         'items' => $photos->transform(function ($photo) {
@@ -405,17 +417,14 @@
                     ])
 
                 </div>
-
             </div>
 
         @endif
 
-        @if (isset($travelmates) && ! empty($travelmates))
+        @if (isset($travelmates) && count($travelmates) > 0)
 
             <div class="r-home__travel-mates">
-
                 <div class="r-home__travel-mates-wrap">
-
                     <div class="r-home__travel-mates-title">
 
                         @include('component.title', [
@@ -426,80 +435,33 @@
                     </div>
 
                     @include('component.travelmate.list', [
-                        'modifiers' => 'm-3col',
-                        'items' => [
-                            [
+                        'modifiers' => 'm-'.count($travelmates).'col',
+                        'items' => $travelmates->transform(function ($travel_mate) {
+                            return [
                                 'modifiers' => 'm-small',
-                                'image' =>  \App\Image::getRandom(),
-                                'name' => 'Charles Darwin',
-                                'route' => '#',
-                                'sex_and_age' => 'N,28',
-                                'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
-                                'tags' => [
-                                    [
-                                        'modifiers' => 'm-yellow',
-                                        'title' => 'India'
-                                    ],
-                                    [
-                                        'modifiers' => 'm-purple',
-                                        'title' => 'Delhi'
-                                    ]
-                                ]
-                            ],
-                            [
-                                'modifiers' => 'm-small',
-                                'image' =>  \App\Image::getRandom(),
-                                'name' => 'Epptriin ',
-                                'route' => '#',
-                                'sex_and_age' => 'N,22',
-                                'title' => 'Suusareis Austriasse veebruar-märts 2016',
-                                'tags' => [
-                                    [
-                                        'modifiers' => 'm-red',
-                                        'title' => 'Austria'
-                                    ],
-                                    [
-                                        'modifiers' => 'm-gray',
-                                        'title' => 'Suusareis'
-                                    ]
-                                ]
-                            ],
-                            [
-                                'modifiers' => 'm-small',
-                                'image' =>  \App\Image::getRandom(),
-                                'name' => 'Silka ',
-                                'route' => '#',
-                                'sex_and_age' => 'M,32',
-                                'title' => 'Puerto Rico',
-                                'tags' => [
-                                    [
-                                        'modifiers' => 'm-green',
-                                        'title' => 'Puerto Rico'
-                                    ],
-                                    [
-                                        'modifiers' => 'm-gray',
-                                        'title' => 'Puhkusereis'
-                                    ]
-                                ]
-                            ]
-                        ]
+                                'image' => $travel_mate->user->imagePreset('small_square'),
+                                'letter'=> [
+                                    'modifiers' => 'm-red',
+                                    'text' => 'J'
+                                ],
+                                'name' => $travel_mate->user->name,
+                                'route' => route('content.show', [$travel_mate->type, $travel_mate]),
+                                'sex_and_age' =>
+                                    ($travel_mate->user->gender ?
+                                        trans('user.gender.'.$travel_mate->user->gender).
+                                        ($travel_mate->user->age ? ', ' : '')
+                                    : null).
+                                    ($travel_mate->user->age ? $travel_mate->user->age : null),
+                                'title' => $travel_mate->title,
+                                'tags' => $travel_mate->destinations->transform(function ($travel_mate_destination) {
+                                    return [
+                                        'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                                        'title' => $travel_mate_destination->name
+                                    ];
+                                })
+                            ];
+                        })
                     ])
-
-                    {{--
-
-                        @foreach ($travelmates as $travelmate)
-
-                                @include('component.profile', [
-                                    'title' => $travelmate->user->name,
-                                    'age' => $travelmate->user->age,
-                                    'interests' => $travelmate->title,
-                                    'route' => route('content.show', [$travelmate->type, $travelmate]),
-                                    'image' => $travelmate->user->imagePreset()
-                                ])
-
-                        @endforeach
-
-                    --}}
 
                 </div>
             </div>
@@ -508,17 +470,16 @@
 
 
         <div class="r-home__footer-promo">
-
             <div class="r-home__footer-promo-wrap">
 
                 @include('component.promo', [
+                    'modifiers' => 'm-footer',
                     'route' => '#',
                     'image' => \App\Image::getRandom()
                 ])
 
             </div>
         </div>
-
     </div>
 
 @stop

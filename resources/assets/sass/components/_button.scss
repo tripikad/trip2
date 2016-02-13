@@ -29,6 +29,16 @@
         background: $color-white;
 
         &:hover {}
+
+        &.m-icon {
+
+            @include color-modifiers-dark-and(background);
+
+            svg {
+
+                @include color-modifiers-and(fill);
+            }
+        }
     }
 
     &.m-tertiary {
@@ -40,6 +50,12 @@
 
             background: $color-fill-neutral;
         }
+    }
+
+    &.m-quaternary {
+
+        color: $color-white;
+        background: $color-text-link;
     }
 
     &.m-border {
@@ -91,6 +107,14 @@
         width: 100%;
     }
 
+    &.m-min {
+
+        @include respond-to(tablet) {
+
+            min-width: $spacer * 15;
+        }
+    }
+
     &.m-small {
 
         font-size: $font-size-small;
@@ -100,8 +124,14 @@
         &.m-icon {
 
             padding: 0;
-            width: $spacer * 3;
-            height: $spacer * 3;
+            width: $spacer * 2;
+            height: $spacer * 2;
+
+            svg {
+
+                width: $spacer;
+                height: $spacer;
+            }
         }
 
         &.m-icon-pre {

@@ -4,7 +4,7 @@ title: Pagination
 
 code: |
 
-    @include('component.pagination', [
+    @include('component.pagination.default', [
         'collection' => false,
         'text' => [
             'next' => 'Next',

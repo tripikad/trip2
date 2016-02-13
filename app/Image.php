@@ -53,10 +53,13 @@ class Image extends Model
 
         //create random name
         if (! $filename) {
-            $filename = 'image_'.str_random(5).$ext;
+            $filename = 'image_'.str_random(5).'.'.$ext;
         } else {
-            $filename = $filename.$ext;
+            $filename = $filename.'.'.$ext;
         }
+
+        $filename = self::getImageName($filename);
+        $filename = self::checkIfExists($path, $filename, $ext);
 
         try {
             copy($url, $path.$filename);
@@ -78,15 +81,38 @@ class Image extends Model
         $filename = $new_filename ? $new_filename : preg_replace('/\s+/', '-', $file->getClientOriginalName());
 
         if (! $new_filename) {
-            $img_name = substr($filename, 0, (strrpos($filename, '.')));
+            $img_name = self::getImageName($filename);
             $filename = $img_name.'_'.str_random(5).'.'.$ext;
         }
+
+        $filename = self::getImageName($filename);
+        $filename = self::checkIfExists($path, $filename, $ext);
 
         $file->move($path, $filename);
 
         self::createImagePresets($path, $filename);
 
         return $filename;
+    }
+
+    public static function checkIfExists($path, $filename, $ext, $i = 0)
+    {
+        if ($i > 0) {
+            $filename = $filename.'-'.$i;
+        }
+
+        if (file_exists($path.$filename.$ext)) {
+            ++$i;
+
+            return self::checkIfExists($path, $filename, $ext, $i);
+        } else {
+            return $filename.'.'.$ext;
+        }
+    }
+
+    public static function getImageName($file)
+    {
+        return substr($file, 0, (strrpos($file, '.')));
     }
 
     public static function getRandom()

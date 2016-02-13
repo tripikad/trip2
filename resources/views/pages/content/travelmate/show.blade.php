@@ -21,114 +21,124 @@
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
             'image' => \App\Image::getRandom(),
-            'subtitle' => 'Vaata kõiki pakkumisi',
-            'subtitle_route' => '/content/travelmate'
+            'subtitle' => trans('content.travelmate.view.all.offers'),
+            'subtitle_route' => route('content.index', [$content->type])
         ])
+
     </div>
 
     <div class="r-travelmates__wrap">
-
         <div class="r-travelmates__content">
-
             <h1 class="r-travelmates__title">{{ $content->title }}</h1>
 
             <div class="r-travelmates__meta">
+                @include('component.actions', ['actions' => $content->getActions()])
 
-                <p class="r-travelmates__meta-date">Lisatud eile 12.32</p>
+                <p class="r-travelmates__meta-date">
+                    {{ trans('content.travelmate.post.added', [
+                        'created_at' => view('component.date.relative', [
+                            'date' => $content->created_at
+                        ])
+                    ]) }}
+                </p>
 
-                @include('component.tags', [
-                    'modifiers' => 'm-small',
-                    'items' => [
-                        [
-                            'modifiers' => 'm-yellow',
-                            'route' => '',
-                            'title' => 'Delhi'
-                        ],
-                        [
-                            'modifiers' => 'm-purple',
-                            'route' => '',
-                            'title' => 'India'
-                        ],
-                    ]
-                ])
+                @if (count($content->destinations))
+
+                    @include('component.tags', [
+                        'modifiers' => 'm-small',
+                        'items' => $content->destinations->transform(function ($content_destination) {
+                            return [
+                                'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                                'route' => route('destination.show', [$content_destination->id]),
+                                'title' => $content_destination->name
+                            ];
+                        })
+                    ])
+
+                @endif
+
             </div>
 
-            <div class="r-travelmates__content-body">
+            @if (count($content->topics))
 
+                <div class="r-travelmates__meta">
+
+                    @include('component.tags', [
+                        'modifiers' => 'm-small',
+                        'items' => $content->topics->transform(function ($content_topic) {
+                            return [
+                                'modifiers' => 'm-gray',
+                                'title' => $content_topic->name
+                            ];
+                        })
+                    ])
+
+                </div>
+
+            @endif
+
+            <div class="r-travelmates__content-body">
                 <div class="c-body">
 
                     {!! $content->body_filtered !!}
+
                 </div>
             </div>
-
-            {{--
-
-            @include('component.row', [
-                'profile' => [
-                    'modifiers' => '',
-                    'image' => $content->user->imagePreset(),
-                    'route' => route('user.show', [$content->user])
-                ],
-                'modifiers' => 'm-image',
-                'title' => $content->title,
-                'text' => view('component.content.text', ['content' => $content]),
-                'actions' => view('component.actions', ['actions' => $content->getActions()]),
-                'extra' => view('component.flags', ['flags' => $content->getFlags()]),
-                'body' => $content->body_filtered,
-            ])
-
-            --}}
-
-        </div>
-
-        <div style="display: none">
-            @include('component.actions', ['actions' => $content->getActions()])
         </div>
 
         <div class="r-travelmates__sidebar m-first">
-
             <div class="r-block m-small">
 
                 @include('component.travelmate.user', [
                     'modifiers' => 'm-purple',
-                    'image' => \App\Image::getRandom(),
-                    'name' => 'Charles Dawson',
-                    'user_route' => '#',
-                    'sex_and_age' => 'M,34',
-                    'description' => '<p>I’m a 28 year-old who loves travelling to discover places and to meet people all over the world.</p>',
+                    'image' => $content->user->imagePreset('small_square'),
+                    'letter' => [
+                        'modifiers' => 'm-purple',
+                        'text' => 'J'
+                    ],
+                    'user' => $content->user,
+                    'name' => $content->user->name,
+                    'user_route' => route('user.show', [$content->user]),
+                    'sex_and_age' =>
+                        ($content->user->gender ?
+                            trans('user.gender.'.$content->user->gender).
+                                ($content->user->age ? ', ' : '')
+                        : null).
+                        ($content->user->age ? $content->user->age : null),
+                    'description' => null,
                     'social_items' => [
                         [
                             'icon' => 'icon-facebook',
-                            'route' => '#'
+                            'route' => $content->user->contact_facebook
                         ],
                         [
                             'icon' => 'icon-instagram',
-                            'route' => '#'
+                            'route' => $content->user->contact_instagram
                         ],
                         [
                             'icon' => 'icon-twitter',
-                            'route' => '#'
+                            'route' => $content->user->contact_twitter
                         ],
                         [
                             'icon' => 'icon-plus',
-                            'route' => '#'
+                            'route' => $content->user->contact_homepage
                         ],
                     ]
                 ])
 
                 @include('component.travelmate.trip', [
-                    'trip_start' => 'Märts, 2016',
-                    'trip_duration' => '9 kuud – aasta',
-                    'trip_mate' => 'Kõik sobib'
+                    'trip_start' => view('component.date.short', [
+                        'date' => $content->start_at
+                    ]),
+                    'trip_duration' => $content->duration,
+                    'trip_mate' => null
                 ])
+
             </div>
-
         </div>
-
     </div>
 
     <div class="r-travelmates__wrap">
-
         <div class="r-travelmates__content">
 
             <div class="r-block">
@@ -137,172 +147,140 @@
 
                     <div class="r-block__header">
 
-                        @include('component.title', [
-                            'title' => 'Soovita pakkumist sõpradele',
-                            'modifiers' => 'm-large m-purple'
-                        ])
+                        <div class="r-block__header-title">
+
+                            @include('component.title', [
+                                'title' => 'Soovita pakkumist sõpradele',
+                                'modifiers' => 'm-large m-green'
+                            ])
+                        </div>
                     </div>
+
+                    <div class="r-block__body">
+
+                        @include('component.facebook')
+                    </div>
+
                 </div>
             </div>
 
             <div class="r-block">
-
                 <div class="r-block__header">
 
                     @include('component.title', [
-                        'title' => 'Kommentaarid',
+                        'title' => trans('content.comments.title'),
                         'modifiers' => 'm-purple'
                     ])
+
                 </div>
 
                 <div class="r-block__body">
 
-                    @include('component.comment.index', ['comments' => $comments])
-
-                    @include('component.content.forum.post',[
-                        'profile' => [
-                            'image' => \App\Image::getRandom(),
-                            'title' => 'Charles Darwin',
-                            'route' => ''
-                        ],
-                        'date' => '12. jaanuar, 12:31',
-                        'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p><p>Kuna mul oli plaanis arengumaades maapiirkondades kohalikke (arvatavasti) igasuguse litsentsita reisijuhte kasutada, näiteks kuskilt väikesest kohast ümberkaudsete külade üleöö külastamiseks ehk pikad jalgsimatkad mägistes piirkondades, oli tarvis, et juhul kui juhtub õnnetus, see ka korvatakse. Tegemist ei olnud siis spordiga, vaid lihtsalt keskmisest veidi koormavamate matkadega. Kokkuvõttes oli sel ajal vaid Ifil kindlustuses selline asi sees, sai ka kirjalikult üle küsitud (et oleks tõestusmaterjal hiljem!) ning teised firmad pakkusid seda lisakaitse all päris räiga lisahinnaga või ei võtnud üldse jutule, kui giidi litsentsi poleks ette näidata.</p>',
+                    @include('component.comment.index', [
+                        'comments' => $comments
                     ])
 
-                    @include('component.content.forum.post',[
-                        'profile' => [
-                            'image' => \App\Image::getRandom(),
-                            'title' => 'Charles Darwin',
-                            'route' => ''
-                        ],
-                        'date' => '12. jaanuar, 12:31',
-                        'text' => '<p>Tegemist ei olnud siis spordiga, vaid lihtsalt keskmisest veidi koormavamate matkadega. Kokkuvõttes oli sel ajal vaid Ifil kindlustuses selline asi sees, sai ka kirjalikult üle küsitud (et oleks tõestusmaterjal hiljem!) ning teised firmad pakkusid seda lisakaitse all päris räiga lisahinnaga või ei võtnud üldse jutule, kui giidi litsentsi poleks ette näidata.</p>',
-                    ])
                 </div>
             </div>
 
             @if (\Auth::check())
 
-            <div class="r-block">
+                <div class="r-block">
+                    <div class="r-block__inner">
+                        <div class="r-block__header">
 
-                <div class="r-block__inner">
+                            @include('component.title', [
+                                'title' => trans('content.action.add.comment'),
+                                'modifiers' => 'm-large m-green'
+                            ])
 
-                    <div class="r-block__header">
+                        </div>
+                        <div class="r-block__body">
 
-                        @include('component.title', [
-                            'title' => 'Lisa kommentaar',
-                            'modifiers' => 'm-large m-green'
-                        ])
-                    </div>
+                            @include('component.comment.create')
 
-                    <div class="r-block__body">
-
-                        @include('component.comment.create')
+                        </div>
                     </div>
                 </div>
-            </div>
 
             @endif
 
         </div>
 
         <div class="r-travelmates__sidebar">
-
             <div class="r-block m-small">
 
-                @include('component.destination', [
-                    'modifiers' => 'm-purple',
-                    'title' => 'New Delhi',
-                    'title_route' => '#',
-                    'subtitle' => 'India',
-                    'subtitle_route' => '#'
-                ])
+                @if ($destination && $parent_destination)
 
-                @include('component.card', [
-                    'modifiers' => 'm-purple',
-                    'route' => '#',
-                    'title' => 'Edasi-tagasi Riiast või Helsingist Delhisse al 350 €',
-                    'image' => \App\Image::getRandom()
-                ])
+                    @include('component.destination', [
+                        'modifiers' => 'm-purple',
+                        'title' => $destination ? $destination->name : null,
+                        'title_route' => $destination ? route('destination.show', $destination) : null,
+                        'subtitle' => $parent_destination ? $parent_destination->name : null,
+                        'subtitle_route' => $parent_destination ? route('destination.show', $parent_destination) : null,
+                    ])
 
-                @include('component.card', [
-                    'modifiers' => 'm-purple',
-                    'route' => '#',
-                    'title' => 'Stockholmist Delhisse, Goasse või Mumbaisse al 285 €',
-                    'image' => \App\Image::getRandom()
-                ])
+                @endif
 
-                <div class="r-block__inner">
+                @if (count($sidebar_flights))
 
-                    <div class="r-block__header">
+                    @foreach ($sidebar_flights as $sidebar_flight)
 
-                        @include('component.title', [
+                        @include('component.card', [
                             'modifiers' => 'm-purple',
-                            'title' => 'Tripikad räägivad'
+                            'route' => route('content.show', [$sidebar_flight->type, $sidebar_flight]),
+                            'title' => $sidebar_flight->title.' '.$sidebar_flight->price.' '.config('site.currency.symbol'),
+                            'image' => $sidebar_flight->imagePreset()
+                        ])
+
+                    @endforeach
+
+                @endif
+
+                @if (count($forums))
+
+                    <div class="r-block__inner">
+                        <div class="r-block__header">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-purple',
+                                'title' => trans('destination.show.forum.title')
+                            ])
+
+                        </div>
+
+                        @include('component.content.forum.list', [
+                            'modifiers' => 'm-compact',
+                            'items' => $forums->transform(function ($forum) {
+                                return [
+                                    'topic' => str_limit($forum->title, 30),
+                                    'route' => route('content.show', [$forum->type, $forum]),
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => $forum->user->imagePreset('small_square'),
+                                        'letter' => [
+                                            'modifiers' => 'm-red',
+                                            'text' => 'J'
+                                        ],
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-purple',
+                                        'count' => $forum->comments->count()
+                                    ]
+                                ];
+                            })
                         ])
 
                     </div>
 
-                    @include('component.content.forum.list', [
-                        'modifiers' => 'm-compact',
-                        'items' => [
-                            [
-                                'topic' => 'Samui hotellid?',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-purple',
-                                    'count' => 9
-                                ]
-                            ],
-                            [
-                                'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-purple',
-                                    'count' => 4
-                                ]
-                            ],
-                            [
-                                'topic' => 'Puhkuseosakud Tenerifel',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-purple',
-                                    'count' => 2
-                                ]
-                            ],
-                            [
-                                'topic' => 'Ischgl mäeolud-pilet ja majutus',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-purple',
-                                    'count' => 2
-                                ]
-                            ]
-                        ]
-                    ])
+                @endif
 
-                </div>
             </div>
 
             <div class="r-block m-small">
 
                 @include('component.promo', [
+                    'modifiers' => 'm-sidebar-small',
                     'route' => '',
                     'image' => \App\Image::getRandom()
                 ])
@@ -311,121 +289,81 @@
         </div>
     </div>
 
-    <div class="r-travelmates__offers">
+    @if (count($flights))
 
-        <div class="r-travelmates__offers-wrap">
+        <div class="r-travelmates__offers">
+            <div class="r-travelmates__offers-wrap">
+                <div class="c-columns m-{{ count($flights) }}-cols">
 
-            <div class="c-columns m-3-cols">
+                    @foreach($flights as $flight)
 
-                <div class="c-columns__item">
+                        <div class="c-columns__item">
 
-                    @include('component.card', [
-                        'modifiers' => 'm-purple',
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Delhisse al 350 €',
-                        'image' => \App\Image::getRandom()
-                    ])
-                </div>
+                            @include('component.card', [
+                                'modifiers' => 'm-purple',
+                                'route' => route('content.show', [$flight->type, $flight]),
+                                'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
+                                'image' => $flight->imagePreset()
+                            ])
 
-                <div class="c-columns__item">
+                        </div>
 
-                    @include('component.card', [
-                        'modifiers' => 'm-purple',
-                        'route' => '#',
-                        'title' => 'Stockholmist Delhisse, Goasse või Mumbaisse al 285 €',
-                        'image' => \App\Image::getRandom()
-                    ])
-
-                </div>
-
-                <div class="c-columns__item">
-
-                    @include('component.card', [
-                        'modifiers' => 'm-purple',
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Delhisse al 350 €',
-                        'image' => \App\Image::getRandom()
-                    ])
+                    @endforeach
 
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="r-travelmates__additional">
+    @endif
 
-        <div class="r-travelmates__additional-wrap">
+    @if (count($travel_mates))
 
-            @include('component.travelmate.list', [
-                'modifiers' => 'm-3col',
-                'items' => [
-                    [
-                        'modifiers' => 'm-small',
-                        'image' =>  \App\Image::getRandom(),
-                        'name' => 'Charles Darwin',
-                        'route' => '#',
-                        'sex_and_age' => 'N,28',
-                        'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
-                        'tags' => [
-                            [
-                                'modifiers' => 'm-yellow',
-                                'title' => 'India'
-                            ],
-                            [
-                                'modifiers' => 'm-purple',
-                                'title' => 'Delhi'
-                            ]
-                        ]
-                    ],
-                    [
-                        'modifiers' => 'm-small',
-                        'image' =>  \App\Image::getRandom(),
-                        'name' => 'Epptriin ',
-                        'route' => '#',
-                        'sex_and_age' => 'N,22',
-                        'title' => 'Suusareis Austriasse veebruar-märts 2016',
-                        'tags' => [
-                            [
+        <div class="r-travelmates__additional">
+            <div class="r-travelmates__additional-wrap">
+
+                @include('component.travelmate.list', [
+                    'modifiers' => 'm-3col',
+                    'items' => $travel_mates->transform(function ($travel_mate) {
+                        return [
+                            'modifiers' => 'm-small',
+                            'image' => $travel_mate->user->imagePreset('small_square'),
+                            'letter' => [
                                 'modifiers' => 'm-red',
-                                'title' => 'Austria'
+                                'text' => 'J'
                             ],
-                            [
-                                'modifiers' => 'm-gray',
-                                'title' => 'Suusareis'
-                            ]
-                        ]
-                    ],
-                    [
-                        'modifiers' => 'm-small',
-                        'image' =>  \App\Image::getRandom(),
-                        'name' => 'Silka ',
-                        'route' => '#',
-                        'sex_and_age' => 'M,32',
-                        'title' => 'Puerto Rico',
-                        'tags' => [
-                            [
-                                'modifiers' => 'm-green',
-                                'title' => 'Puerto Rico'
-                            ],
-                            [
-                                'modifiers' => 'm-gray',
-                                'title' => 'Puhkusereis'
-                            ]
-                        ]
-                    ]
-                ]
-            ])
+                            'name' => $travel_mate->user->name,
+                            'route' => route('content.show', [$travel_mate->type, $travel_mate]),
+                            'sex_and_age' =>
+                                ($travel_mate->user->gender ?
+                                    trans('user.gender.'.$travel_mate->user->gender).
+                                    ($travel_mate->user->age ? ', ' : '')
+                                : null).
+                                ($travel_mate->user->age ? $travel_mate->user->age : null),
+                            'title' => $travel_mate->title,
+                            'tags' => $travel_mate->destinations->transform(function ($travel_mate_destination) {
+                                return [
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                                    'title' => $travel_mate_destination->name
+                                ];
+                            })
+                        ];
+                    })
+                ])
+
+            </div>
         </div>
-    </div>
+
+    @endif
 
     <div class="r-travelmates__footer-promo">
-
         <div class="r-travelmates__footer-promo-wrap">
 
             @include('component.promo', [
+                'modifiers' => 'm-footer',
                 'route' => '',
                 'image' => \App\Image::getRandom()
             ])
+
         </div>
     </div>
 

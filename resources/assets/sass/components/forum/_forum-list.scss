@@ -53,7 +53,7 @@
             &:hover {
 
                 color: inherit;
-                text-decoration: underline;
+                text-decoration: none;
             }
 
             .c-forum-list.m-compact & {
@@ -79,22 +79,45 @@
                 padding-right: $spacer * 2;
             }
 
-            .c-forum-list__item-topic {
+            .c-forum-list__item-info {
 
-                color: $color-text-black;
-                font-weight: $font-weight-medium;
-                font-size: $font-size-medium;
-                line-height: 1.15;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
                 flex: 1;
-
-                .c-forum-list.m-compact & {
-
-                    font-size: $font-size-normal;
-                }
             }
+
+                .c-forum-list__item-topic {
+
+                    color: $color-text-black;
+                    font-weight: $font-weight-medium;
+                    font-size: $font-size-medium;
+                    line-height: 1.15;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+
+                    .c-forum-list.m-compact & {
+
+                        font-size: $font-size-normal;
+                    }
+
+                    .c-forum-list__item-link:hover & {
+
+                        text-decoration: underline;
+                    }
+                }
+
+                .c-forum-list__date {
+
+                    font-size: $font-size-small;
+                    text-decoration: none;
+                    color: $color-text-gray;
+                    display: block;
+                    margin-top: 6px;
+
+                    .c-forum-list__item-link:hover & {
+
+                        text-decoration: none;
+                    }
+                }
 
         .c-forum-list__item-tags {
 

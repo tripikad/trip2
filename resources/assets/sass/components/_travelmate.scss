@@ -15,7 +15,7 @@
 
         @include respond-to(tablet) {
 
-            padding: 0 $spacer * 2 0 $spacer * 10;
+            padding: 0 $spacer * 2 0 $spacer * 8;
         }
     }
 }
@@ -46,7 +46,7 @@
 
             @include respond-to(tablet) {
 
-                left: $spacer * 3.3;
+                left: $spacer;
                 top: 0;
             }
         }
@@ -57,6 +57,42 @@
             width: 100%;
         }
     }
+
+        .c-travelmate__letter {
+
+            @include color-modifiers(background);
+
+            color: $color-white;
+            font-weight: $font-weight-bold;
+            font-size: $font-size-large;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+
+            &.m-tiny {
+
+                font-size: $font-size-small;
+            }
+
+            &.m-small {
+
+                font-size: $font-size-medium;
+            }
+
+            &.m-large {
+
+                font-size: $font-size-huge / 2;
+            }
+
+            span {
+
+                margin-top: $spacer / 3;
+            }
+        }
 
     .c-travelmate__name {
 
@@ -101,10 +137,5 @@
             font-size: $font-size-small;
             display: block;
             margin-bottom: $spacer * 2;
-        }
-
-        .c-travelmate.m-small & {
-
-            display: none;
         }
     }

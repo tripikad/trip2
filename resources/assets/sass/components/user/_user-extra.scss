@@ -39,6 +39,9 @@
 
             color: $color-white;
             font-size: $font-size-medium;
+            line-height: $spacer * 3 + 4;
+            display: block;
+            height: $spacer * 3;
         }
 
         .c-user-extra__item-text {

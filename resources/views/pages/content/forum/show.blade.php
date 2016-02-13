@@ -12,32 +12,97 @@
 
     <div class="r-forum__masthead">
 
-        @include('component.masthead')
+        @include('component.masthead', [
+            'modifiers' => 'm-forum',
+            'title' => 'forum'
+        ])
+
+        <div class="r-forum__map">
+
+            <div class="r-forum__map-inner">
+
+                @include('component.map', [
+                    'modifiers' => 'm-forum'
+                ])
+            </div>
+        </div>
     </div>
 
     <div class="r-forum__wrap">
 
         <div class="r-forum__content">
 
-            @include('component.row', [
+            @include('component.content.forum.post', [
                 'profile' => [
-                    'modifiers' => 'm-small',
+                    'modifiers' => 'm-full m-status',
                     'image' => $content->user->imagePreset(),
-                    'route' => route('user.show', [$content->user])
+                    'title' => $content->user->name,
+                    'route' => route('user.show', [$content->user]),
+                    'letter' => [
+                        'modifiers' => 'm-purple m-small',
+                        'text' => 'J'
+                    ],
+                    'status' => [
+                        'modifiers' => 'm-purple',
+                        'position' => '3',
+                        'editor' => true
+                    ]
                 ],
-                'modifiers' => 'm-image' . (count($comments) ? ' m-featured' : ''),
                 'title' => $content->title,
-                'text' => view('component.content.text', ['content' => $content]),
+                'date' => view('component.date.relative', ['date' => $content->created_at]),
+                'date_edit' =>
+                    $content->created_at != $content->updated_at ?
+                        view('component.date.long', ['date' => $content->updated_at])
+                    : null,
+                'text' => $content->body_filtered,
                 'actions' => view('component.actions', ['actions' => $content->getActions()]),
-                'extra' => view('component.flags', ['flags' => $content->getFlags()]),
-                'body' => $content->body_filtered,
+                'thumbs' => view('component.flags', ['flags' => $content->getFlags()]),
+                'tags' => $content->destinations->transform(function ($destination) {
+                    return [
+                        'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                        'title' => $destination->name,
+                        'route' => route('destination.show', [$destination->id])
+                    ];
+                })
             ])
 
-            @include('component.comment.index', ['comments' => $comments])
+            <div class="r-block m-small m-mobile-hide">
+
+                @include('component.promo', [
+                    'modifiers' => 'm-body',
+                    'image' => \App\Image::getRandom(),
+                    'route' => '#'
+                ])
+
+            </div>
+
+
+            @if (method_exists($comments, 'currentPage'))
+
+                @include('component.comment.index', [
+                    'comments' => $comments->forPage(
+                        $comments->currentPage(),
+                        $comments->perPage()
+                    )
+                ])
+
+            @endif
+
+            <div class="r-block">
+
+                @include('component.pagination.numbered', [
+                    'collection' => $comments
+                ])
+
+            </div>
 
             @if (\Auth::check())
 
+            <div class="r-block">
+
                 @include('component.comment.create')
+
+            </div>
 
             @endif
 
@@ -45,41 +110,377 @@
 
         <div class="r-forum__sidebar">
 
-            <div class="r-forum__sidebar-block">
+            <div class="r-block m-small m-flex">
 
-                <div class="r-forum__sidebar-block-inner">
+                @include('component.content.forum.nav', [
+                    'items' => [
+                        [
+                            'title' => trans('frontpage.index.forum.general'),
+                            'route' => route('content.index', 'forum'),
+                            'modifiers' => 'm-large m-block m-icon',
+                            'icon' => 'icon-arrow-right'
+                        ],
+                        [
+                            'title' => trans('frontpage.index.forum.buysell'),
+                            'route' => route('content.index', 'buysell'),
+                            'modifiers' => 'm-large m-block m-icon',
+                            'icon' => 'icon-arrow-right'
+                        ],
+                        [
+                            'title' => trans('frontpage.index.forum.expat'),
+                            'route' => route('content.index', 'expat'),
+                            'modifiers' => 'm-large m-block m-icon',
+                            'icon' => 'icon-arrow-right'
+                        ],
 
-                    @include('component.nav', [
-                        'modifiers' => '',
-                        'menu' => config('content_'.$type.'.menu'),
-                        'items' => config('menu.'.config('content_'.$type.'.menu'))
+                    ]
+                ])
+
+                @if (\Auth::check())
+
+                    @include('component.content.forum.nav', [
+                        'items' => [
+                            [
+                                'type' => 'button',
+                                'title' => trans("content.$type.create.title"),
+                                'route' => route('content.create', ['type' => $type]),
+                                'modifiers' => 'm-secondary m-block m-shadow'
+                            ]
+                        ]
                     ])
 
-                </div>
+                @endif
 
             </div>
 
-            @if (\Auth::check())
+            @if (count($first_relative_posts))
 
-                <div class="r-forum__sidebar-block">
+                <div class="r-block m-small">
 
-                    <div class="r-forum__sidebar-block-inner">
+                    @if ($first_destination)
 
-                        @include('component.button', [
-                            'route' => route('content.create', ['type' => $type]),
-                            'title' => trans("content.$type.create.title")
+                        @include('component.destination', [
+                            'modifiers' => 'm-purple',
+                            'title' => $first_destination->name,
+                            'title_route' => route('destination.show', [
+                                $first_destination
+                            ]),
+                            'subtitle' => $first_destination_parent ? $first_destination_parent->name : null,
+                            'subtitle_route' => $first_destination_parent ? route('destination.show', [
+                                $first_destination_parent
+                            ]) : null
                         ])
 
+                    @endif
+
+                    <div class="r-block__inner">
+
+                        <div class="r-block__header">
+
+                            <div class="r-block__header-title">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-purple',
+                                    'title' => trans('destination.show.forum.title')
+                                ])
+                            </div>
+                        </div>
+
+                        <div class="r-block__body">
+
+                            @include('component.content.forum.list', [
+                                'modifiers' => 'm-compact',
+                                'items' => $first_relative_posts->transform(function ($post) {
+                                    return [
+                                        'topic' => str_limit($post->title, 25),
+                                        'route' => route('content.show', [$post->type, $post]),
+                                        'profile' => [
+                                            'modifiers' => 'm-mini',
+                                            'image' => $post->user->imagePreset(),
+                                            'letter' => [
+                                                'modifiers' => 'm-green m-small',
+                                                'text' => 'D'
+                                            ],
+                                        ],
+                                        'badge' => [
+                                            'modifiers' => 'm-inverted m-purple',
+                                            'count' => $post->comments->count()
+                                        ]
+                                    ];
+                                })
+                            ])
+                        </div>
                     </div>
+                </div>
+
+            @endif
+
+            <div class="r-block m-small">
+
+                @include('component.promo', [
+                    'modifiers' => 'm-sidebar-small',
+                    'route' => '#',
+                    'image' => \App\Image::getRandom()
+                ])
+            </div>
+
+            @if (count($second_relative_posts))
+
+                <div class="r-block m-small">
+
+                    @if ($second_destination)
+
+                        @include('component.destination', [
+                            'modifiers' => 'm-blue',
+                            'title' => $second_destination->name,
+                            'title_route' => route('destination.show', [
+                                $second_destination
+                            ]),
+                            'subtitle' => $second_destination_parent ? $second_destination_parent->name : null,
+                            'subtitle_route' => $second_destination_parent ? route('destination.show', [
+                                $second_destination_parent
+                            ]) : null
+                        ])
+
+                    @endif
+
+                    <div class="r-block__inner">
+
+                        <div class="r-block__header">
+
+                            <div class="r-block__header-title">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-blue',
+                                    'title' => trans('destination.show.forum.title')
+                                ])
+                            </div>
+                        </div>
+
+                        <div class="r-block__body">
+
+                            @include('component.content.forum.list', [
+                                'modifiers' => 'm-compact',
+                                'items' => $second_relative_posts->transform(function ($post) {
+                                    return [
+                                        'topic' => str_limit($post->title, 25),
+                                        'route' => route('content.show', [$post->type, $post]),
+                                        'profile' => [
+                                            'modifiers' => 'm-mini',
+                                            'image' => $post->user->imagePreset(),
+                                            'letter' => [
+                                                'modifiers' => 'm-green m-small',
+                                                'text' => 'D'
+                                            ],
+                                        ],
+                                        'badge' => [
+                                            'modifiers' => 'm-inverted m-blue',
+                                            'count' => $post->comments->count()
+                                        ]
+                                    ];
+                                })
+                            ])
+                        </div>
+                    </div>
+                </div>
+
+            @endif
+
+            @if (count($relative_flights))
+
+                <div class="r-block m-small">
+
+                    @foreach ($relative_flights as $flight)
+                        @include('component.card', [
+                            'route' => route('content.show', [$flight->type, $flight]),
+                            'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
+                            'image' => $flight->imagePreset()
+                        ])
+                    @endforeach
 
                 </div>
 
             @endif
 
         </div>
-
     </div>
 
+    @if (count($forums) || count($travel_mates) || count($flights))
+
+        <div class="r-forum__additional">
+            <div class="r-forum__additional-wrap">
+
+                @if (count($forums))
+
+                    <div class="r-block">
+                        <div class="r-block__header">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-red',
+                                'title' => trans('destination.show.forum.title')
+                            ])
+
+                        </div>
+                        <div class="r-forum__additional-column m-first">
+
+                            @include('component.content.forum.nav', [
+                                'items' => [
+                                    [
+                                        'title' => trans('frontpage.index.forum.general'),
+                                        'route' => route('content.index', 'forum'),
+                                        'modifiers' => 'm-large m-block m-icon',
+                                        'icon' => 'icon-arrow-right'
+                                    ],
+                                    [
+                                        'title' => trans('frontpage.index.forum.buysell'),
+                                        'route' => route('content.index', 'buysell'),
+                                        'modifiers' => 'm-large m-block m-icon',
+                                        'icon' => 'icon-arrow-right'
+                                    ],
+                                    [
+                                        'title' => trans('frontpage.index.forum.expat'),
+                                        'route' => route('content.index', 'expat'),
+                                        'modifiers' => 'm-large m-block m-icon',
+                                        'icon' => 'icon-arrow-right'
+                                    ]
+                                ]
+                            ])
+
+                        </div>
+                        <div class="r-forum__additional-column m-last">
+
+                            @include('component.content.forum.list', [
+                                'items' => $forums->transform(function ($forum) {
+                                    return [
+                                        'topic' => str_limit($forum->title, 50),
+                                        'route' => route('content.show', [$forum->type, $forum]),
+                                        'date' => view('component.date.relative', [
+                                            'date' => $forum->created_at
+                                        ]),
+                                        'profile' => [
+                                            'modifiers' => 'm-mini',
+                                            'image' => $forum->user->imagePreset(),
+                                            'letter' => [
+                                                'modifiers' => 'm-green m-small',
+                                                'text' => 'D'
+                                            ],
+                                        ],
+                                        'badge' => [
+                                            'modifiers' => 'm-inverted',
+                                            'count' => $forum->comments->count()
+                                        ],
+                                        'tags' => $forum->destinations->merge($forum->topics)->take(2)->transform(function ($destination, $key) use ($forum) {
+                                            return [
+                                                'title' => $destination->name,
+                                                'modifiers' => ['m-gray', 'm-green', 'm-blue', 'm-orange', 'm-yellow', 'm-red'][$key],
+                                                'route' => route('content.index', [$forum->type]).'?topic='.$destination->id,
+                                            ];
+                                        })
+                                    ];
+                                })
+                            ])
+                        </div>
+                    </div>
+
+                @endif
+
+                @if (count($flights))
+
+                    <div class="r-block">
+                        <div class="c-columns m-{{ count($flights) }}-cols">
+
+                            @foreach ($flights as $flight)
+
+                                <div class="c-columns__item">
+
+                                    @include('component.card', [
+                                        'route' => route('content.show', [$flight->type, $flight]),
+                                        'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
+                                        'image' => $flight->imagePreset()
+                                    ])
+
+                                </div>
+
+                            @endforeach
+
+                        </div>
+                    </div>
+
+                @endif
+
+                @if (count($travel_mates))
+
+                    <div class="r-block">
+                        <div class="r-block__header">
+                            @include('component.title', [
+                                'title' => trans('frontpage.index.travelmate.title'),
+                                'modifiers' => 'm-red'
+                            ])
+                        </div>
+
+                        @include('component.travelmate.list', [
+                            'modifiers' => 'm-'.count($travel_mates).'col',
+                            'items' => $travel_mates->transform(function ($travel_mate) {
+                                return [
+                                    'modifiers' => 'm-small',
+                                    'image' =>  $travel_mate->imagePreset(),
+                                    'letter'=> [
+                                        'modifiers' => 'm-red',
+                                        'text' => 'J'
+                                    ],
+                                    'name' =>
+                                        $travel_mate->user->real_name ?
+                                            $travel_mate->user->real_name
+                                        :
+                                            $travel_mate->user->name,
+                                    'route' => route('content.show', [$travel_mate->type, $travel_mate]),
+                                    'sex_and_age' =>
+                                        ($travel_mate->user->gender ?
+                                            trans('user.gender.'.$travel_mate->user->gender).
+                                            ($travel_mate->user->age ? ', ' : '')
+                                        : null).
+                                        ($travel_mate->user->age ? $travel_mate->user->age : null),
+                                    'title' => $travel_mate->title,
+                                    'tags' => $travel_mate->destinations->transform(function ($destination) {
+                                        return [
+                                            'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                                            'title' => $destination->name
+                                        ];
+                                    })
+                                ];
+                            })
+                        ])
+
+                    </div>
+
+                @endif
+
+            </div>
+        </div>
+
+    @endif
+
+    <div class="r-forum__footer-promo">
+
+        <div class="r-forum__footer-promo-wrap">
+
+            @include('component.promo', [
+                'modifiers' => 'm-footer',
+                'route' => '#',
+                'image' => \App\Image::getRandom()
+            ])
+
+        </div>
+    </div>
 </div>
+
+@stop
+
+@section('footer')
+
+    @include('component.footer', [
+        'modifiers' => 'm-alternative',
+        'image' => \App\Image::getRandom()
+    ])
 
 @stop

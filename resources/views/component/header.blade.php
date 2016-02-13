@@ -31,12 +31,16 @@
     <div class="c-header__user">
 
         @include('component.navbar.user', [
-            'modifiers' => 'm-purple',
+            'modifiers' => 'm-green',
             'profile' => [
                 'image' => \Auth::user()->imagePreset(),
                 'title' => \Auth::user()->name,
                 'route' => route('user.show', [\Auth::user()]),
-                'badge' => \Auth::user()->unreadMessagesCount()
+                'badge' => \Auth::user()->unreadMessagesCount(),
+                'letter' => [
+                    'modifiers' => 'm-green m-tiny',
+                    'text' => 'W'
+                ]
             ],
             'children' => [
                 [
@@ -70,7 +74,11 @@
                 'image' => \Auth::user()->imagePreset(),
                 'title' => \Auth::user()->name,
                 'route' => route('user.show', [\Auth::user()]),
-                'badge' => \Auth::user()->unreadMessagesCount()
+                'badge' => \Auth::user()->unreadMessagesCount(),
+                'letter' => [
+                    'modifiers' => 'm-green m-tiny',
+                    'text' => 'W'
+                ]
             ],
             'children' => [
                 [
@@ -124,8 +132,9 @@
         @endif
     </div>
 
-    <a href="#" class="c-header__search-trigger js-header__search-trigger">
+    @if(!Request::is('/'))
 
+    <a href="#" class="c-header__search-trigger js-header__search-trigger">
         @include('component.svg.sprite', [
             'name' => 'icon-search'
         ])
@@ -135,19 +144,22 @@
 
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
-            @include('component.search',[
+            @include('component.header.search',[
                 'modifiers' => 'm-small m-red m-alternative',
-                'placeholder' => 'Search'
+                'placeholder' => ''
             ])
 
         @else
 
-            @include('component.search',[
+            @include('component.header.search',[
                 'modifiers' => 'm-small m-red',
-                'placeholder' => 'Search'
+                'placeholder' => ''
             ])
 
         @endif
+
     </div>
+
+    @endif
 
 </header>

@@ -3,10 +3,10 @@
     &.m-small {
 
         width: 100%;
+        position: relative;
 
         @include respond-to(tablet) {
 
-            position: relative;
             width: $spacer * 22;
         }
 
@@ -41,7 +41,7 @@
 
         .c-search.m-small & {
 
-            left: 0;
+            left: $spacer - 2;
             height: $spacer * 2;
             width: $spacer * 2;
         }
@@ -106,7 +106,7 @@
         .c-search.m-small & {
 
             font-size: $font-size-normal;
-            padding: $spacer $spacer $spacer * 0.75 $spacer * 3;
+            padding: $spacer $spacer $spacer * 0.75 $spacer * 4;
             background: none;
             box-shadow: none;
         }
@@ -162,9 +162,9 @@
 
     .c-search__results-content {
 
-        overflow: scroll;
+        overflow: auto;
         height: $spacer * 32;
-        padding-bottom: $spacer * 2;
+        padding-bottom: $spacer * 6;
     }
 
         .c-search__results-list {
@@ -222,29 +222,63 @@
                 }
             }
 
+                .c-search__results-list-item-icon {
+
+                    position: absolute;
+                    top: 0;
+                    left: -$spacer * 5;
+                    display: block;
+                    height: $spacer * 3;
+                    width: $spacer * 3;
+
+                    .c-search.m-small & {
+
+                        left: -$spacer * 3;
+                        height: $spacer * 2;
+                        width: $spacer * 2;
+                    }
+
+                    svg {
+
+                        fill: $color-fill-neutral-dark;
+                    }
+                }
+
                 .c-search__results-sublist {
 
                     @include clear-list;
 
-                    margin-top: $spacer * 1.5;
+                    margin-top: $spacer;
 
                     .c-search.m-small & {
 
                         margin-top: $spacer;
+                        margin-bottom: $spacer;
                     }
                 }
 
                     .c-search__results-sublist-item {
 
-                        font-size: $font-size-large;
+                        font-size: $font-size-medium;
                         font-weight: $font-weight-medium;
                         line-height: 1.5;
                         text-transform: none;
                         margin-bottom: $spacer / 2;
 
+                        @include respond-to(tablet) {
+
+                            padding-right: $spacer * 8;
+                        }
+
                         .c-search.m-small & {
 
-                            font-size: $font-size-normal;
+                            font-size: $font-size-small;
+                            margin-bottom: $spacer / 4;
+
+                            @include respond-to(tablet) {
+
+                                padding-right: 0;
+                            }
                         }
 
                         .c-search__results-list.m-forum & {
@@ -273,11 +307,16 @@
 
                             .c-search__results-link-profile {
 
-                                flex: 0 1 $spacer * 5;
+                                flex: 0 1 $spacer * 3;
+                                height: $spacer * 3;
+                                margin-right: $spacer * 2;
 
                                 .c-search.m-small & {
 
-                                    flex: 0 1 $spacer * 3;
+                                    flex: 0 1 $spacer * 2;
+                                    height: $spacer * 2;
+                                    margin-right: $spacer;
+                                    align-self: flex-start;
                                 }
                             }
 
@@ -289,13 +328,22 @@
 
     .c-search__results-footer {
 
-        position: relative;
-        padding: $spacer * 1.5 $spacer * 7;
+        font-weight: $font-weight-medium;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: $spacer * 1.5 $spacer * 2;
         background: $color-white;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 1.5 $spacer * 7;
+        }
 
         .c-search.m-small & {
 
-            padding: $spacer $spacer * 4;
+            padding: $spacer;
         }
 
         &:before {

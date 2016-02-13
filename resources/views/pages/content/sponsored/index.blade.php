@@ -45,8 +45,8 @@
 
     @endforeach
 
-    @include('component.pagination',
-        ['collection' => $contents]
-    )
+    @include('component.pagination.default', [
+        'collection' => $contents
+    ])
 
 @stop

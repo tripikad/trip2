@@ -1,5 +1,7 @@
 .c-form__group {
 
+    @include clearfix;
+
     position: relative;
     width: 100%;
     margin-bottom: $spacer * 2;
@@ -7,6 +9,16 @@
     &.m-small-margin {
 
         margin-bottom: $spacer;
+    }
+
+    &.m-large-margin {
+
+        margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 4;
+        }
     }
 
     &.m-no-margin {
@@ -18,19 +30,45 @@
 
         text-align: right;
     }
+
+    &.m-inline {
+
+        display: inline-block;
+        margin-right: $spacer;
+        width: auto;
+        text-align: center;
+    }
 }
 
 .c-form__label {
 
-    color: $color-text-neutral-dark;
+    color: $color-text-neutral-darkest;
     font-size: $font-size-normal;
     font-weight: $font-weight-medium;
     display: block;
     margin-bottom: $spacer;
+    cursor: pointer;
 
     .c-form__group.m-error & {
 
         color: $color-fill-error;
+    }
+
+    &.m-radio,
+    &.m-checkbox {
+
+        margin-left: $spacer * 2;
+    }
+
+    &.m-color {
+
+        @include color-modifiers(background);
+        @include hide-text();
+
+        display: block;
+        width: $spacer * 3;
+        height: $spacer * 3;
+        border-radius: 3px;
     }
 }
 
@@ -71,6 +109,25 @@
             }
         }
 
+        &.m-radio,
+        &.m-checkbox {
+
+            width: $spacer * 1.5;
+            height: $spacer * 1.5;
+            float: left;
+
+            .c-form__group.m-inline & {
+
+                float: none;
+                margin: 0 auto;
+            }
+
+            &:focus {
+
+                box-shadow: none;
+            }
+        }
+
         &.m-high {
 
             height: $spacer * 12;
@@ -107,6 +164,19 @@
             background: $color-fill-error-light;
             border-color: $color-fill-error;
             box-shadow: 0 0 0 1px $color-fill-error;
+        }
+    }
+
+    .c-form__note {
+
+        color: $color-text-neutral-darker;
+        font-size: $font-size-normal;
+        display: block;
+        margin-bottom: $spacer;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 2;
         }
     }
 

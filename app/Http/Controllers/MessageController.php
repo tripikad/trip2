@@ -55,7 +55,7 @@ class MessageController extends Controller
         if ($user_to->notify_message) {
             $user_from = User::find($user_id_from);
 
-            Mail::send('email.message.store', [
+            Mail::queue('email.message.store', [
                 'new_message' => $message, // 'message' variable is reseved by mailer
                 'user_from' => $user_from,
                 'user_to' => $user_to,
