@@ -53,9 +53,9 @@ class Image extends Model
 
         //create random name
         if (! $filename) {
-            $filename = 'image_'.str_random(5).$ext;
+            $filename = 'image_'.str_random(5).'.'.$ext;
         } else {
-            $filename = $filename.$ext;
+            $filename = $filename.'.'.$ext;
         }
 
         $filename = self::getImageName($filename);
@@ -106,7 +106,7 @@ class Image extends Model
 
             return self::checkIfExists($path, $filename, $ext, $i);
         } else {
-            return $filename.$ext;
+            return $filename.'.'.$ext;
         }
     }
 
