@@ -4,7 +4,6 @@ namespace App;
 
 use Cache;
 use Baum;
-use App\Main;
 
 class Destination extends Baum\Node
 {

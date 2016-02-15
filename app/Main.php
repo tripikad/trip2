@@ -52,7 +52,7 @@ class Main
         return $data;
     }
 
-    public static function sqlToArray($collection, $parent_id=0)
+    public static function sqlToArray($collection, $parent_id = 0)
     {
         $tree = [];
 
@@ -69,7 +69,7 @@ class Main
         return collect($tree);
     }
 
-    public static function collectionAsSelect($tree, $indent='', $eloquentCollection=[], $parameters=['name' => 'name'], $saved='', $level=1)
+    public static function collectionAsSelect($tree, $indent = '', $eloquentCollection = [], $parameters = ['name' => 'name'], $saved = '', $level = 1)
     {
         if (count($eloquentCollection) && count($tree)==0) {
             return self::collectionAsSelect(
