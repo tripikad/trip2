@@ -148,4 +148,9 @@
                 }
             }
         }
+
+        .c-columns.m-border & {
+
+            border-bottom: 1px solid $color-fill-neutral;
+        }
     }

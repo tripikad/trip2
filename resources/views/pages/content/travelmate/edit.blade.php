@@ -343,11 +343,19 @@
                 </div>
             </div>
         </div>
-
     </div>
 
+    <div class="r-travelmates__footer-promo">
+        <div class="r-travelmates__footer-promo-wrap">
 
+            @include('component.promo', [
+                'modifiers' => 'm-footer',
+                'route' => '',
+                'image' => \App\Image::getRandom()
+            ])
 
+        </div>
+    </div>
 </div>
 
 @stop

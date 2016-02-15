@@ -70,6 +70,11 @@
         height: $spacer * 3;
         border-radius: 3px;
     }
+
+    .c-form__group-radio & {
+
+        margin-bottom: 0;
+    }
 }
 
 .c-form__input-wrap {
@@ -165,6 +170,16 @@
             background: $color-fill-error-light;
             border-color: $color-fill-error;
             box-shadow: 0 0 0 1px $color-fill-error;
+        }
+    }
+
+    .c-form__group-radio {
+
+        padding: $spacer * 1.5 $spacer;
+
+        &.m-active {
+
+            background: $color-fill-neutral-light;
         }
     }
 
