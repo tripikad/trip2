@@ -71,7 +71,7 @@ class Main
 
     public static function collectionAsSelect($tree, $indent = '', $eloquentCollection = [], $parameters = ['name' => 'name'], $saved = '', $level = 1)
     {
-        if (count($eloquentCollection) && count($tree)==0) {
+        if (count($eloquentCollection) && count($tree) == 0) {
             return self::collectionAsSelect(
                 self::sqlToarray($eloquentCollection),
                 $indent
@@ -91,7 +91,7 @@ class Main
                                 [],
                                 $parameters,
                                 $items[$item->id].$indent,
-                                round((int)$level + 1)
+                                round((int) $level + 1)
                             );
                     }
                 }
