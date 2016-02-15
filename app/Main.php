@@ -51,4 +51,53 @@ class Main
 
         return $data;
     }
+
+    public static function sqlToArray($collection, $parent_id=0)
+    {
+        $tree = [];
+
+        foreach ($collection as $item) {
+            if ($item['parent_id'] == $parent_id) {
+                $children = self::sqlToArray($collection, $item['id']);
+                if ($children) {
+                    $item['children'] = $children;
+                }
+                $tree[] = $item;
+            }
+        }
+
+        return collect($tree);
+    }
+
+    public static function collectionAsSelect($tree, $indent='', $eloquentCollection=[], $parameters=['name' => 'name'], $saved='', $level=1)
+    {
+        if (count($eloquentCollection) && count($tree)==0) {
+            return self::collectionAsSelect(
+                self::sqlToarray($eloquentCollection),
+                $indent
+            );
+        } else {
+            $items = [];
+
+            if (count($tree)) {
+                foreach ($tree as $item) {
+                    $items[$item->id] = $saved.$item->$parameters['name'];
+
+                    if (isset($item->children) && count($item->children)) {
+                        $items = $items +
+                            self::collectionAsSelect(
+                                $item->children,
+                                $indent,
+                                [],
+                                $parameters,
+                                $items[$item->id].$indent,
+                                round((int)$level + 1)
+                            );
+                    }
+                }
+            }
+
+            return $items;
+        }
+    }
 }
