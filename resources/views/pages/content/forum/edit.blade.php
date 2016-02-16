@@ -177,7 +177,7 @@
                                 'class' => 'c-form__label'
                             ]) !!}
                             {!! Form::select('destinations[]', $destinations, $destination, [
-                                'class' => 'js-select c-select',
+                                'class' => 'js-filter c-select',
                                 'id' => 'destinations',
                                 'multiple' => 'true',
                             ]) !!}

@@ -10,7 +10,7 @@
                  + $destinations->toArray(),
             $destination,
             [
-                'class' => 'js-select c-select'
+                'class' => 'js-filter'
             ]
         )!!}
 
@@ -24,7 +24,7 @@
                  + $topics->toArray(),
             $topic,
             [
-                'class' => 'js-select c-select'
+                'class' => 'js-filter'
             ]
         )!!}
 

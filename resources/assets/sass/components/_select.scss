@@ -1,325 +1,128 @@
-.select2 {
+.selectize-control {
 
-    width: 100% !important;
-}
-
-.select2-container {
-
-    vertical-align: middle;
     position: relative;
-    display: inline-block;
-    margin: 0;
-
-    .select2-selection--multiple {
-
-        display: block;
-        min-height: $spacer * 4 + 4;
-        user-select: none;
-        cursor: pointer;
-
-        .select2-selection__rendered {
-
-            overflow: hidden;
-            display: inline-block;
-        }
-    }
-
-    .select2-search--inline {
-
-        float: left;
-
-        .select2-search__field {
-
-            padding: 0;
-            border: none;
-
-            &::-webkit-search-cancel-button {
-
-                -webkit-appearance: none;
-            }
-        }
-    }
-
-    .select2-selection--single {
-
-        display: block;
-        cursor: pointer;
-        user-select: none;
-
-        .select2-selection__clear {
-
-            position: relative;
-        }
-    }
 }
 
-.select2-dropdown {
-
-    position: absolute;
-    left: -100000px;
-    z-index: 1051;
-    display: block;
-    width: 100%;
-    background-color: $color-fill-neutral;
-}
-
-.select2-results {
-
-    display: block;
-}
-
-.select2-results__options {
-
-    list-style: none;
-    overflow: auto;
-    margin: 0;
-    padding: 0;
-    max-height: $spacer * 26;
-}
-
-.select2-results__option {
-
-    font-size: $font-size-small;
-    font-weight: $font-weight-normal;
-    padding: $spacer;
-    user-select: none;
-    cursor: pointer;
-
-    &:nth-child(even) {
-
-        background: $color-fill-neutral-light;
-    }
-}
-
-.select2-container--open .select2-dropdown {
-
-    left: 0;
-}
-
-.select2-container--open .select2-dropdown--above {
-
-    border-bottom: none;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.select2-container--open .select2-dropdown--below {
-
-    border-top: none;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-
-.select2-search--dropdown {
-
-    display: block;
-    padding: $spacer / 3;
-
-    .select2-search__field {
-
-        padding: $spacer / 3;
-        width: 100%;
-
-
-        &::-webkit-search-cancel-button {
-
-            -webkit-appearance: none;
-        }
-    }
-
-    &.select2-search--hide {
-
-        display: none;
-    }
-}
-
-.select2-close-mask {
-
-    position: fixed;
-    z-index: 99;
-    left: 0;
-    top: 0;
-    display: block;
-    min-height: 100%;
-    min-width: 100%;
-    height: auto;
-    width: auto;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    opacity: 0;
-}
-
-.select2-hidden-accessible {
-
-    position: absolute !important;
-    overflow: hidden !important;
-    height: 1px !important;
-    width: 1px !important;
-    margin: -1px !important;
-    padding: 0 !important;
-    border: 0 !important;
-    clip: rect(0 0 0 0) !important;
-}
-
-// Theme
-
-.select2-selection--multiple {
+.selectize-input {
 
     color: $color-text-black;
     font-family: $font-primary;
     font-size: $font-size-medium;
     font-weight: $font-weight-normal;
+    line-height: 1.2;
     width: 100%;
     min-height: $spacer * 4 + 4;
     padding: $spacer $spacer $spacer / 2;
     background: $color-white;
     border: 1px solid $color-fill-neutral;
     border-radius: 3px;
-    cursor: text;
-    outline: 0;
+    appearance: none;
 
-    &:focus {
+    &.has-items {
 
+        overflow: hidden;
+        padding-top: $spacer - 2;
     }
 
-    .select2-selection__rendered {
+    > input {
 
-        list-style: none;
-        margin: 0;
-        padding: 0;
+        border: none;
+        padding-top: $spacer / 2;
     }
 
-    .select2-selection__clear {
+    &.has-items {
 
-        display: none;
+        > input {
+
+            &::-ms-clear {
+
+                display: none;
+            }
+
+            display: inline-block !important;
+            padding: 0 !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            max-width: 100% !important;
+            text-indent: 0 !important;
+            border: 0 none !important;
+            background: none !important;
+            line-height: inherit !important;
+            -webkit-user-select: auto !important;
+
+            &:focus {
+
+                outline: none !important;
+            }
+        }
     }
 
-    .select2-selection__choice {
+    &.not-full {
+
+        .item {
+
+            padding-left: $spacer * 1.5;
+        }
+    }
+
+    .item {
 
         color: $color-text-neutral-darkest;
         font-size: $font-size-small;
         font-weight: $font-weight-normal;
+        float: left;
+        position: relative;
+        margin-right: $spacer / 2;
+        margin-bottom: $spacer / 2;
+        padding: $spacer - 4 $spacer / 2 $spacer / 3 $spacer / 2;
         background-color: $color-fill-neutral-light;
         border: 1px solid $color-fill-neutral;
         border-radius: 3px;
         cursor: default;
-        float: left;
-        margin-right: $spacer / 2;
-        margin-bottom: $spacer / 2;
-        padding: $spacer / 2;
+
+        .remove {
+
+            color: $color-text-black;
+            font-size: $font-size-small;
+            font-weight: $font-weight-normal;
+            text-decoration: none;
+            position: absolute;
+            left: $spacer / 2;
+            top: 50%;
+            display: block;
+            margin-top: -$spacer / 2;
+            cursor: pointer;
+        }
     }
+}
 
-    .select2-selection__choice__remove {
+.selectize-dropdown {
 
-        color: $color-text-black;
+    position: absolute;
+    z-index: 10;
+    border: 1px solid $color-fill-neutral;
+    background-color: $color-fill-neutral;
+    margin: -1px 0 0 0;
+    border-top: 0 none;
+}
+
+.selectize-dropdown-content {
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: $spacer * 26;
+
+    .option {
+
         font-size: $font-size-small;
         font-weight: $font-weight-normal;
-        display: inline-block;
-        margin-right: $spacer / 4;
+        padding: $spacer;
+        user-select: none;
         cursor: pointer;
 
-        &:hover {
+        &:nth-child(even) {
 
+            background: $color-fill-neutral-light;
         }
     }
 }
-
-.select2-search__field {
-
-    color: $color-text-black;
-    font-family: $font-primary;
-    font-size: $font-size-normal;
-    font-weight: $font-weight-normal;
-    position: relative;
-    width: 100%;
-    padding: $spacer - 2 $spacer $spacer / 2;
-    height: $spacer * 3;
-    background: $color-white;
-    border: 1px solid $color-fill-neutral;
-    border-radius: 3px;
-    cursor: text;
-    outline: 0;
-    box-sizing: border-box !important;
-}
-
-.select2-selection--single {
-
-    color: $color-text-black;
-    font-family: $font-primary;
-    font-size: $font-size-medium;
-    font-weight: $font-weight-normal;
-    position: relative;
-    width: 100%;
-    min-height: $spacer * 4 + 4;
-    padding: $spacer $spacer * 3 $spacer $spacer / 2;
-    background: $color-white;
-    border: 1px solid $color-fill-neutral;
-    border-radius: 3px;
-    cursor: text;
-    outline: 0;
-
-    .select2-selection__rendered {
-
-        color: $color-text-black;
-        font-family: $font-primary;
-        font-size: $font-size-medium;
-        font-weight: $font-weight-normal;
-        line-height: 1.2;
-        cursor: default;
-        float: left;
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        padding: $spacer / 2 0 0;
-    }
-
-    .select2-selection__arrow {
-
-        position: absolute;
-        right: $spacer;
-        top: 50%;
-        display: block;
-        width: 0;
-        height: 0;
-        margin-top: -$spacer / 4;
-        border-left: $spacer / 2 solid transparent;
-        border-right: $spacer / 2 solid transparent;
-        border-top: $spacer / 2 solid $color-fill-neutral;
-        border-bottom: none;
-        pointer-events: none;
-    }
-}
-
-&.select2-container--open {
-
-    .select2-selection--single,
-    .select2-selection--multiple {
-
-        border: 1px solid $color-fill-neutral;
-    }
-
-    &.select2-container--above {
-
-        .select2-selection--multiple {
-
-            border-top: none;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-    }
-
-    &.select2-container--below {
-
-        .select2-selection--single,
-        .select2-selection--multiple {
-
-            border-bottom: none;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-    }
-}
-
-

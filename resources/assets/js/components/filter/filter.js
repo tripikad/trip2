@@ -11,6 +11,9 @@ if (submit.length > 0) {
     });
 } else {
 
-    filter.selectize();
+    filter.selectize({
+
+        plugins: ['remove_button'],
+    });
 }
 
