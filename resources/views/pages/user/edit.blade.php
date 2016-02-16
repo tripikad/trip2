@@ -359,10 +359,11 @@
                         {!! Form::label('birth_date', 'Sünniaasta', [
                             'class' => 'c-form__label'
                         ]) !!}
-
-                        {{ Form::select('birth_date', ['1980', '1981', '1982'], null, [
-                            'class' => 'c-form__input',
-                        ]) }}
+                        <div class="c-form__group-select">
+                            {{ Form::select('birth_date', ['1980', '1981', '1982'], null, [
+                                'class' => 'c-form__select',
+                            ]) }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -490,7 +491,6 @@
 
                         <p class="c-form__note">Kuvatakse sinu profiili ning postituse juures</p>
 
-                        {{--
 
                         @include('component.image.form', [
                             'form' => [
@@ -504,7 +504,6 @@
                             'uploadMultiple' => false
                         ])
 
-                        --}}
 
                     </div>
 

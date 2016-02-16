@@ -46,13 +46,6 @@
         cursor: pointer;
         user-select: none;
 
-        .select2-selection__rendered {
-
-            overflow: hidden;
-            display: block;
-            padding: 0;
-        }
-
         .select2-selection__clear {
 
             position: relative;
@@ -90,6 +83,7 @@
     font-weight: $font-weight-normal;
     padding: $spacer;
     user-select: none;
+    cursor: pointer;
 
     &:nth-child(even) {
 
@@ -231,8 +225,76 @@
     }
 }
 
+.select2-search__field {
+
+    color: $color-text-black;
+    font-family: $font-primary;
+    font-size: $font-size-normal;
+    font-weight: $font-weight-normal;
+    position: relative;
+    width: 100%;
+    padding: $spacer - 2 $spacer $spacer / 2;
+    height: $spacer * 3;
+    background: $color-white;
+    border: 1px solid $color-fill-neutral;
+    border-radius: 3px;
+    cursor: text;
+    outline: 0;
+    box-sizing: border-box !important;
+}
+
+.select2-selection--single {
+
+    color: $color-text-black;
+    font-family: $font-primary;
+    font-size: $font-size-medium;
+    font-weight: $font-weight-normal;
+    position: relative;
+    width: 100%;
+    min-height: $spacer * 4 + 4;
+    padding: $spacer $spacer * 3 $spacer $spacer / 2;
+    background: $color-white;
+    border: 1px solid $color-fill-neutral;
+    border-radius: 3px;
+    cursor: text;
+    outline: 0;
+
+    .select2-selection__rendered {
+
+        color: $color-text-black;
+        font-family: $font-primary;
+        font-size: $font-size-medium;
+        font-weight: $font-weight-normal;
+        line-height: 1.2;
+        cursor: default;
+        float: left;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding: $spacer / 2 0 0;
+    }
+
+    .select2-selection__arrow {
+
+        position: absolute;
+        right: $spacer;
+        top: 50%;
+        display: block;
+        width: 0;
+        height: 0;
+        margin-top: -$spacer / 4;
+        border-left: $spacer / 2 solid transparent;
+        border-right: $spacer / 2 solid transparent;
+        border-top: $spacer / 2 solid $color-fill-neutral;
+        border-bottom: none;
+        pointer-events: none;
+    }
+}
+
 &.select2-container--open {
 
+    .select2-selection--single,
     .select2-selection--multiple {
 
         border: 1px solid $color-fill-neutral;
@@ -250,6 +312,7 @@
 
     &.select2-container--below {
 
+        .select2-selection--single,
         .select2-selection--multiple {
 
             border-bottom: none;
