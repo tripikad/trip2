@@ -39,7 +39,7 @@ code: |
                     <div class="form-group">
 
                         {!! Form::file($name, [
-                            'class' => 'c-form__input m-medium'
+                            'class' => 'c-form__input m-medium dropzone-input'
                         ]) !!}
 
                         {!! Form::submit('Submit', [
