@@ -491,7 +491,6 @@
 
                         <p class="c-form__note">Kuvatakse sinu profiili ning postituse juures</p>
 
-
                         @include('component.image.form', [
                             'form' => [
                                 'url' => $url,
@@ -526,6 +525,8 @@
 
                         <p class="c-form__note">Kuvatakse sinu profiili päise taustana</p>
 
+                        {{-- Second dropzone
+
                         @include('component.image.form', [
                             'form' => [
                                 'url' => $url,
@@ -537,6 +538,8 @@
                             'maxFileSize' => 5,
                             'uploadMultiple' => false
                         ])
+
+                        --}}
 
                     </div>
 
