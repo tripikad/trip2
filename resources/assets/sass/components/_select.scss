@@ -34,11 +34,6 @@
 
         > input {
 
-            &::-ms-clear {
-
-                display: none;
-            }
-
             display: inline-block;
             padding: 0;
             min-height: 0;
@@ -48,11 +43,16 @@
             border: 0 none;
             background: none;
             line-height: inherit;
-            -webkit-user-select: auto;
+            user-select: auto;
 
             &:focus {
 
                 outline: none;
+            }
+
+            &::-ms-clear {
+
+                display: none;
             }
         }
     }
