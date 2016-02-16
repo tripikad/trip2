@@ -498,7 +498,8 @@
                                 'model' => isset($user) ? $user : null,
                                 'files' => true,
                             ],
-                            'name' => 'image',
+                            'id' => 'profile_image',
+                            'name' => 'profile_image',
                             'maxFileSize' => 5,
                             'uploadMultiple' => false
                         ])
@@ -525,7 +526,6 @@
 
                         <p class="c-form__note">Kuvatakse sinu profiili päise taustana</p>
 
-                        {{-- Second dropzone
 
                         @include('component.image.form', [
                             'form' => [
@@ -534,12 +534,12 @@
                                 'model' => isset($user) ? $user : null,
                                 'files' => true
                             ],
-                            'name' => 'image_bg',
+                            'id' => 'bg_image',
+                            'name' => 'bg_image',
                             'maxFileSize' => 5,
                             'uploadMultiple' => false
                         ])
 
-                        --}}
 
                     </div>
 
