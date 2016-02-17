@@ -24,7 +24,7 @@
 
         @if (isset($subtitle))
 
-        <h2 class="c-auth-masthead__subtitle">{{ $subtitle }}</h2>
+        <h2 class="c-auth-masthead__subtitle">{!! $subtitle !!}</h2>
 
         @endif
 

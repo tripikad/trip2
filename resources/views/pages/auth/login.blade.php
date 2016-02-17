@@ -27,7 +27,9 @@
 
         <div class="r-auth__masthead">
 
-            @include('component.auth.masthead')
+            @include('component.auth.masthead', [
+                'subtitle' => 'Pole veel kasutaja? <a href="/register">Registreeri siin</a>'
+            ])
 
         </div>
     </div>
