@@ -51,6 +51,20 @@
 
             width: span(12 of 24);
         }
+
+        &.m-wide {
+
+            @include respond-to(tablet) {
+
+                width: span(16 of 24);
+                padding-bottom: $spacer * 8;
+            }
+
+            @include respond-to(desktop) {
+
+                width: span(14 of 24);
+            }
+        }
     }
 
         .r-auth__content-inner {

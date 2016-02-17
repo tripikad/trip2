@@ -12,7 +12,6 @@ gulp.task('sass', function() {
         './node_modules/normalize.css/normalize.css',
         './node_modules/susy/sass/_susy.scss',
         './node_modules/breakpoint-sass/stylesheets/_breakpoint.scss',
-        './node_modules/selectize/dist/css/selectize.css',
         './node_modules/dropzone/dist/dropzone.css',
         './resources/assets/sass/base/_base.mixins.scss',
         './resources/assets/sass/base/_base.colors.scss',

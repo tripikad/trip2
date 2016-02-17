@@ -415,12 +415,13 @@
                                     <div class="c-form__group">
 
                                         <div class="c-form__input-wrap">
-
-                                            <select name="" id="" class="c-form__input m-small">
-                                                <option value="">1 reisija</option>
-                                                <option value="">2 reisija</option>
-                                                <option value="">3 reisija</option>
-                                            </select>
+                                            <div class="c-form__group-select">
+                                                <select name="" id="" class="c-form__select m-small">
+                                                    <option value="">1 reisija</option>
+                                                    <option value="">2 reisija</option>
+                                                    <option value="">3 reisija</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
