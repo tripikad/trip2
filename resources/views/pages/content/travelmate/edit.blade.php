@@ -77,6 +77,64 @@
 
                 <div class="c-form__input-wrap">
                     <div class="c-form__group">
+                        <div class="c-form__label">
+                            {{ trans("content.travelmate.edit.field.start_at.title") }}
+                        </div>
+
+                        <div class="c-columns m-6-cols m-space">
+                            <div class="c-columns__item">
+                                @include('component.date.select', [
+                                    'from' => 1,
+                                    'to' => 31,
+                                    'selected' => \Carbon\Carbon::now()->day,
+                                    'key' => 'start_at_day'
+                                ])
+                            </div>
+                            <div class="c-columns__item">
+                                @include('component.date.select', [
+                                    'month' => true,
+                                    'selected' => \Carbon\Carbon::now()->month,
+                                    'key' => 'start_at_month'
+                                ])
+                            </div>
+                            <div class="c-columns__item">
+                                @include('component.date.select', [
+                                    'from' => \Carbon\Carbon::now()->year,
+                                    'to' => \Carbon\Carbon::parse('+5 years')->year,
+                                    'selected' => \Carbon\Carbon::now()->year,
+                                    'key' => 'start_at_year'
+                                ])
+                            </div>
+                            <div class="c-columns__item">
+                                @include('component.date.select', [
+                                    'from' => 0,
+                                    'to' => 23,
+                                    'selected' => \Carbon\Carbon::now()->hour,
+                                    'key' => 'start_at_hour'
+                                ])
+                            </div>
+                            <div class="c-columns__item">
+                                @include('component.date.select', [
+                                    'from' => 0,
+                                    'to' => 59,
+                                    'selected' => \Carbon\Carbon::now()->minute,
+                                    'key' => 'start_at_minute'
+                                ])
+                            </div>
+                            <div class="c-columns__item">
+                                @include('component.date.select', [
+                                    'from' => 0,
+                                    'to' => 59,
+                                    'selected' => '00',
+                                    'key' => 'start_at_second'
+                                ])
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="c-form__input-wrap">
+                    <div class="c-form__group">
                         {!! Form::label('planned_date', 'Planeeritud aeg', [
                             'class' => 'c-form__label'
                         ]) !!}

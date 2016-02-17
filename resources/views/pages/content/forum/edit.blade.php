@@ -146,10 +146,10 @@
 
                     <div class="c-form__input-wrap">
                         <div class="c-form__group">
-                            {!! Form::label('content', 'Sisu', [
+                            {!! Form::label('body', 'Sisu', [
                                 'class' => 'c-form__label'
                             ]) !!}
-                            {!! Form::textarea('content', null, [
+                            {!! Form::textarea('body', null, [
                                 'class' => 'c-form__input m-high',
                                 'placeholder' => 'Postituse sisu. Enne kirjutamist tutvu kindlasti ka meie foorumi reeglitega…',
                             ]) !!}

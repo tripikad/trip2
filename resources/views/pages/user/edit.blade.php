@@ -498,8 +498,8 @@
                                 'model' => isset($user) ? $user : null,
                                 'files' => true,
                             ],
-                            'id' => 'profile_image',
-                            'name' => 'profile_image',
+                            'id' => 'image',
+                            'name' => 'image',
                             'maxFileSize' => 5,
                             'uploadMultiple' => false
                         ])
