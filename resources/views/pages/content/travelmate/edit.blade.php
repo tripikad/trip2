@@ -92,10 +92,10 @@
 
                 <div class="c-form__input-wrap">
                     <div class="c-form__group">
-                        {!! Form::label('kirjeldus', 'Sobiva kaaslase kirjeldus', [
+                        {!! Form::label('body', 'Sobiva kaaslase kirjeldus', [
                             'class' => 'c-form__label'
                         ]) !!}
-                        {!! Form::textarea('kirjeldus', null, [
+                        {!! Form::textarea('body', null, [
                             'class' => 'c-form__input m-high',
                             'placeholder' => 'Kirjelda sinule sobivat reisikaaslast. Kui oled nõus reisima igaühega, siis ütle ka seda …',
                         ]) !!}
@@ -172,7 +172,7 @@
                 </div>
 
 
-                {!! Form::submit('Lisa kuulutus', [
+                {!! Form::submit(trans("content.$mode.submit.title"), [
                     'class' => 'c-button m-large m-block'
                 ]) !!}
 
