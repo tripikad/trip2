@@ -63,7 +63,7 @@
                 right: $spacer;
             }
 
-            &:before {
+            &::before {
 
                 @include color-modifiers-and(border-bottom-color);
 
