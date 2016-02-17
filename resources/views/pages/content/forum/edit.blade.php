@@ -184,7 +184,7 @@
                         </div>
                     </div>
 
-                    {!! Form::submit('Lisa teema', [
+                    {!! Form::submit(trans("content.$mode.submit.title"), [
                         'class' => 'c-button m-large m-block'
                     ]) !!}
 
