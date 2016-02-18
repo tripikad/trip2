@@ -70,6 +70,11 @@
         height: $spacer * 3;
         border-radius: 3px;
     }
+
+    .c-form__group-radio & {
+
+        margin-bottom: 0;
+    }
 }
 
 .c-form__input-wrap {
@@ -77,8 +82,7 @@
     position: relative;
 }
 
-    .c-form__input,
-    .selectize-input {
+    .c-form__input {
 
         color: $color-text-black;
         font-family: $font-primary;
@@ -130,6 +134,7 @@
 
         &.m-high {
 
+            line-height: 1.35;
             height: $spacer * 12;
         }
 
@@ -165,6 +170,69 @@
             border-color: $color-fill-error;
             box-shadow: 0 0 0 1px $color-fill-error;
         }
+    }
+
+    .c-form__group-radio {
+
+        padding: $spacer * 1.5 $spacer;
+
+        &.m-active {
+
+            background: $color-fill-neutral-light;
+        }
+    }
+
+    .c-form__group-select {
+
+        position: relative;
+        width: 100%;
+
+        &::after {
+
+            content: '';
+            position: absolute;
+            right: $spacer;
+            top: 50%;
+            display: block;
+            width: 0;
+            height: 0;
+            margin-top: -$spacer / 4;
+            border-left: $spacer / 2 solid transparent;
+            border-right: $spacer / 2 solid transparent;
+            border-top: $spacer / 2 solid $color-fill-neutral;
+            border-bottom: none;
+            pointer-events: none;
+        }
+    }
+
+    .c-form__select {
+
+        color: $color-text-black;
+        font-family: $font-primary;
+        font-size: $font-size-medium;
+        font-weight: $font-weight-normal;
+        line-height: 1.2;
+        width: 100%;
+        height: $spacer * 4 + 4;
+        padding: $spacer $spacer $spacer / 2;
+        background: $color-white;
+        border: 1px solid $color-fill-neutral;
+        border-radius: 3px;
+        appearance: none;
+
+        &.m-medium {
+
+            font-size: $font-size-medium;
+            height: $spacer * 3.5;
+        }
+
+        &.m-small {
+
+            font-size: $font-size-normal;
+            padding: $spacer - 2 $spacer $spacer / 2;
+            height: $spacer * 3;
+        }
+
     }
 
     .c-form__note {

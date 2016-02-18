@@ -145,7 +145,7 @@
 
                 @include respond-to(tablet-portrait) {
 
-                    flex: 0 1 67%;
+                    flex: 0 0 64%;
                     margin-bottom: 0;
                 }
             }
@@ -154,8 +154,13 @@
 
                 @include respond-to(tablet-portrait) {
 
-                    flex: 0 1 32%;
+                    flex: 0 0 32%;
                 }
             }
+        }
+
+        .c-columns.m-border & {
+
+            border-bottom: 1px solid $color-fill-neutral;
         }
     }

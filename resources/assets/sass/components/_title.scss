@@ -47,6 +47,18 @@
         }
     }
 
+    &.m-largest {
+
+        font-size: $font-size-largest;
+        font-weight: $font-weight-bold;
+        text-transform: none;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-largest + 6;
+        }
+    }
+
     &.m-huge {
 
         font-size: $font-size-huge / 2;
