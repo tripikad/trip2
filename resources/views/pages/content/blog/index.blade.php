@@ -9,6 +9,7 @@
 @section('header')
 
     @include('component.blog.header',[
+        'modifiers' => 'm-alternative',
         'back' => [
             'title' => 'trip.ee',
             'route' => '#'

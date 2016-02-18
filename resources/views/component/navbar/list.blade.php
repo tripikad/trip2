@@ -26,7 +26,7 @@ code: |
 
 @foreach ($items as $key => $item)
 
-<li class="c-navbar-list__item {{ Ekko::isActiveURL($item['route']) }}">
+<li class="c-navbar-list__item {{ Ekko::isActiveURL($item['route']) }}{{ $item['modifiers'] or ''}}">
     <a href="{{ $item['route'] }}" class="c-navbar-list__item-link" @if(isset($item['external'])) target="_blank" @endif>
         <span class="c-navbar-list__item-text">{{ isset($item['title']) ? $item['title'] : trans("menu.$menu.$key") }}</span>
     </a>

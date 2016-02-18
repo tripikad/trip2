@@ -1,11 +1,5 @@
 <div class="c-blog-header {{ $modifiers or '' }}">
 
-    @if (isset($back))
-
-    <a href="{{ $back['route'] }}" class="c-blog-header__back">{{ $back['title'] }}</a>
-
-    @endif
-
     @if (isset($logo))
 
     <div class="c-blog-header__logo">
@@ -16,7 +10,7 @@
                 'modifiers' => 'm-dark'
             ])
         </a>
-        <span class="c-blog-header__logo-title">blog</span>
+        <span class="c-blog-header__logo-title">blogid</span>
     </div>
 
     @endif
@@ -29,9 +23,19 @@
 
     <div class="c-blog-header__nav js-header__nav">
 
-        @include('component.blog.navbar',[
-            'modifiers' => 'm-alternative m-green'
-        ])
+        @if(isset($modifiers) && $modifiers == 'm-alternative')
+
+            @include('component.blog.navbar',[
+                'modifiers' => 'm-green m-blog'
+            ])
+
+        @else
+
+            @include('component.blog.navbar',[
+                'modifiers' => 'm-green m-alternative'
+            ])
+
+        @endif
 
     </div>
 
@@ -43,11 +47,26 @@
 
     <div class="c-blog-header__search js-header__search">
 
-        @include('component.header.search',[
-            'modifiers' => 'm-small m-red m-blog',
-            'placeholder' => ''
-        ])
+        @if(isset($modifiers) && $modifiers == 'm-alternative')
+
+            @include('component.header.search',[
+                'modifiers' => 'm-small m-red m-blog',
+                'placeholder' => ''
+            ])
+        @else
+
+            @include('component.header.search',[
+                'modifiers' => 'm-small m-red m-alternative',
+                'placeholder' => ''
+            ])
+        @endif
     </div>
+
+    @if (isset($back))
+
+    <a href="{{ $back['route'] }}" class="c-blog-header__back">{{ $back['title'] }}</a>
+
+    @endif
 
 {{--     <div class="c-blog-header__actions">
 

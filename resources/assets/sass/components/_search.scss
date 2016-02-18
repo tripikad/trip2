@@ -14,6 +14,11 @@
 
             width: $spacer * 33;
         }
+
+        &.m-active {
+
+            z-index: 200;
+        }
     }
 }
 
@@ -71,6 +76,11 @@
             .c-search.m-small.m-alternative & {
 
                 fill: $color-white;
+            }
+
+            .c-search.m-small.m-blog & {
+
+                fill: $color-text-gray;
             }
         }
 

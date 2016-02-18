@@ -13,8 +13,6 @@
         @include respond-to(tablet) {
 
             float: left;
-            padding: $spacer;
-            height: $spacer * 3;
         }
     }
 
@@ -34,6 +32,30 @@
             .m-alternative & {
 
                 color: $color-white;
+            }
+
+            .m-blog & {
+
+                color: $color-text-gray;
+            }
+
+            .c-navbar-list__item.m-border & {
+
+                @include respond-to(tablet) {
+
+                    padding-left: $spacer;
+                    padding-right: $spacer;
+                    border: 2px solid $color-white;
+                    border-radius: 3px;
+                }
+            }
+
+            .m-blog .c-navbar-list__item.m-border & {
+
+                @include respond-to(tablet) {
+
+                    border: 2px solid $color-text-gray;
+                }
             }
 
             .active & {
@@ -59,7 +81,7 @@
 
             @include respond-to(tablet) {
 
-                top: $spacer * 4;
+                top: 90%;
                 right: $spacer;
             }
 
