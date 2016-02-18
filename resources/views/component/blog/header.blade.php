@@ -1,4 +1,4 @@
-<div class="c-blog-header">
+<div class="c-blog-header {{ $modifiers or '' }}">
 
     @if (isset($back))
 

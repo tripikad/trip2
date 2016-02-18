@@ -3,6 +3,22 @@
 .r-blog__wrap {
 
     @include wrap();
+
+    &.m-small {
+
+        @include respond-to(tablet) {
+
+            max-width: span(16 of 24);
+        }
+    }
+
+    &.m-smaller {
+
+        @include respond-to(tablet) {
+
+            max-width: span(14 of 24);
+        }
+    }
 }
 
 .r-blog__masthead {
@@ -105,5 +121,26 @@
 
         position: relative;
         z-index: 2;
+    }
+}
+
+.r-blog__content {
+
+    padding: $spacer * 4 0;
+
+    @include respond-to(tablet) {
+
+        padding: $spacer * 6 0 $spacer * 8;
+    }
+}
+
+.r-blog__comments {
+
+    background: $color-fill-neutral-light;
+    padding: $spacer * 2 0;
+
+    @include respond-to(tablet) {
+
+        padding: $spacer * 5 0;
     }
 }
