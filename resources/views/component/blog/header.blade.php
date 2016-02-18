@@ -21,7 +21,35 @@
 
     @endif
 
-    <div class="c-blog-header__actions">
+    <a href="#" class="c-header__nav-trigger js-header__nav-trigger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+
+    <div class="c-blog-header__nav js-header__nav">
+
+        @include('component.blog.navbar',[
+            'modifiers' => 'm-alternative m-green'
+        ])
+
+    </div>
+
+    <a href="#" class="c-blog-header__search-trigger js-header__search-trigger">
+        @include('component.svg.sprite', [
+            'name' => 'icon-search'
+        ])
+    </a>
+
+    <div class="c-blog-header__search js-header__search">
+
+        @include('component.header.search',[
+            'modifiers' => 'm-small m-red m-blog',
+            'placeholder' => ''
+        ])
+    </div>
+
+{{--     <div class="c-blog-header__actions">
 
         <a href="#" class="c-blog-header__action m-border">Alusta blogimist</a>
 
@@ -111,5 +139,5 @@
 
         @endif
 
-    </div>
+    </div> --}}
 </div>

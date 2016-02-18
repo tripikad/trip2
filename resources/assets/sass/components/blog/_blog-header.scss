@@ -15,6 +15,80 @@
     }
 }
 
+    .c-blog-header__nav {
+
+        display: none;
+
+        @include respond-to(tablet) {
+
+            float: right;
+            display: block;
+        }
+
+        &.m-active {
+
+            position: fixed;
+            z-index: 1100;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    }
+
+    .c-blog-header__search-trigger {
+
+        float: right;
+        position: relative;
+        display: block;
+        height: $spacer * 4;
+        width: $spacer * 4;
+        margin-top: $spacer * 1.25;
+        background: $color-fill-neutral-darker;
+
+        @include respond-to(tablet) {
+
+            display: none;
+        }
+
+        svg {
+
+            fill: $color-white;
+            height: $spacer * 2;
+            width: $spacer * 2;
+            margin: $spacer;
+        }
+    }
+
+    .c-blog-header__search {
+
+        position: absolute;
+        z-index: 1000;
+        top: $spacer * 6.5;
+        left: 0;
+        display: none;
+        width: 100%;
+        padding: $spacer;
+        background: $color-fill-neutral-dark;
+
+        &.m-active {
+
+            display: block;
+        }
+
+        @include respond-to(tablet) {
+
+            float: left;
+            position: static;
+            display: block;
+            width: $spacer * 15;
+            padding: $spacer / 2 0;
+            background: none;
+        }
+    }
+
     .c-blog-header__back {
 
         position: absolute;
@@ -34,27 +108,30 @@
             width: 100%;
         }
 
-    .c-blog-header__actions {
+    // .c-blog-header__actions {
 
-        position: absolute;
-        right: $spacer;
-        top: 0;
-    }
+    //     @include respond-to(tablet) {
 
-        .c-blog-header__action {
+    //         position: absolute;
+    //         right: $spacer;
+    //         top: 0;
+    //     }
+    // }
 
-            &.m-border {}
-        }
+    //     .c-blog-header__action {
 
-        .c-blog-header__user {
+    //         &.m-border {}
+    //     }
 
-            float: right;
-            position: relative;
-            z-index: 2000;
-            margin-top: $spacer * 1.25;
+    //     .c-blog-header__user {
 
-            @include respond-to(tablet) {
+    //         float: right;
+    //         position: relative;
+    //         z-index: 2000;
+    //         margin-top: $spacer * 1.25;
 
-                margin: 0;
-            }
-        }
+    //         @include respond-to(tablet) {
+
+    //             margin: 0;
+    //         }
+    //     }

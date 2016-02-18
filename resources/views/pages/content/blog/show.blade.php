@@ -32,9 +32,9 @@
             'user' => [
                 'route' => '#',
                 'name' => 'Charles Blunt',
-                'color' => 'm-purple',
+                'color' => 'm-green',
                 'letter' => 'J',
-                'status' => '2',
+                'status' => '1',
                 'image' => \App\Image::getRandom(),
                 'editor' => true
             ]
