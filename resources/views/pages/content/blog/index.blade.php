@@ -57,7 +57,13 @@
 
             <div class="c-blog-featured m-video">
 
-                <a href="#" class="c-blog-featured__image-link" style="background-image: url({{\App\Image::getRandom()}});"></a>
+                <a href="#" class="c-blog-featured__image-link" style="background-image: url({{\App\Image::getRandom()}});">
+                    <span class="c-blog-featured__type">
+                        @include('component.svg.sprite', [
+                            'name' => 'icon-video'
+                        ])
+                    </span>
+                </a>
 
                 <div class="c-blog-featured__content">
 
@@ -78,6 +84,10 @@
                                 ],
                                 [
                                     'title' => 'Aserbaidžaan',
+                                    'route' => '#'
+                                ],
+                                [
+                                    'title' => 'Video',
                                     'route' => '#'
                                 ]
                             ]
@@ -124,7 +134,13 @@
 
                     <div class="c-blog-featured m-small m-video">
 
-                        <a href="#" class="c-blog-featured__image-link" style="background-image: url({{\App\Image::getRandom()}});"></a>
+                        <a href="#" class="c-blog-featured__image-link" style="background-image: url({{\App\Image::getRandom()}});">
+                            <span class="c-blog-featured__type">
+                                @include('component.svg.sprite', [
+                                    'name' => 'icon-video'
+                                ])
+                            </span>
+                        </a>
 
                         <div class="c-blog-featured__content">
 
@@ -448,15 +464,19 @@
 
                     <div class="c-blog-article__divider"></div>
 
-                    <div class="c-blog-article">
+                    <div class="c-blog-article m-video">
 
                         <h3 class="c-blog-article__title"><a href="#" class="c-blog-article__title-link">Beginner’s Guide to Travel Hacking: Travel Anywhere, Pay (Almost) Nothing</a></h3>
 
-                        <a href="#" class="c-blog-article__image-link" style="background-image: url({{\App\Image::getRandom()}});"></a>
+                        <a href="#" class="c-blog-article__image-link" style="background-image: url({{\App\Image::getRandom()}});">
+                            <span class="c-blog-article__type">
+                                @include('component.svg.sprite', [
+                                    'name' => 'icon-video'
+                                ])
+                            </span>
+                        </a>
 
                         <div class="c-blog-article__content">
-
-                            <p class="c-blog-article__excerpt">In the two years since graduating from college, I’ve been taking free round trip flights around the world using a strategy called “churning”. A few destinations I’ve visited or will visit soon: Florence…</p>
 
                             <div class="c-blog-article__tags">
 

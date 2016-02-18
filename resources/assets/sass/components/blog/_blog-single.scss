@@ -80,8 +80,11 @@
 
         .c-blog-single__flags {
 
+            margin-bottom: $spacer;
+
             @include respond-to(tablet) {
 
                 float: right;
+                margin-bottom: 0;
             }
         }

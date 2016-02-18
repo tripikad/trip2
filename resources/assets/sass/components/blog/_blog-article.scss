@@ -35,6 +35,7 @@
 
     .c-blog-article__image-link {
 
+        position: relative;
         background-repeat: no-repeat;
         background-size: cover;
 
@@ -46,6 +47,26 @@
             padding-bottom: 33%;
         }
     }
+
+        .c-blog-article__type {
+
+            position: absolute;
+            display: none;
+            width: $spacer * 3 - 2;
+            height: $spacer * 2 + 2;
+            bottom: $spacer * 2;
+            right: $spacer * 2;
+
+            .c-blog-article.m-video & {
+
+                display: block;
+            }
+
+            svg {
+
+                fill: $color-white;
+            }
+        }
 
     .c-blog-article__content {
 

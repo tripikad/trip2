@@ -3,23 +3,28 @@
 .r-blog__wrap {
 
     @include wrap();
-
-    &.m-small {
-
-        @include respond-to(tablet) {
-
-            max-width: span(16 of 24);
-        }
-    }
-
-    &.m-smaller {
-
-        @include respond-to(tablet) {
-
-            max-width: span(14 of 24);
-        }
-    }
 }
+
+    .r-blog__wrap-inner {
+
+        margin: 0 auto;
+
+        &.m-small {
+
+            @include respond-to(tablet) {
+
+                max-width: span(16 of 24);
+            }
+        }
+
+        &.m-smaller {
+
+            @include respond-to(tablet) {
+
+                max-width: span(14 of 24);
+            }
+        }
+    }
 
 .r-blog__masthead {
 

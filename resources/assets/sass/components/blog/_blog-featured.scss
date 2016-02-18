@@ -9,6 +9,7 @@
 
         background-repeat: no-repeat;
         background-size: cover;
+        position: relative;
 
         @include respond-to(tablet) {
 
@@ -32,6 +33,32 @@
             }
         }
     }
+
+        .c-blog-featured__type {
+
+            position: absolute;
+            display: none;
+            width: $spacer * 3 - 2;
+            height: $spacer * 2 + 2;
+            bottom: $spacer * 2;
+            right: $spacer * 2;
+
+            .c-blog-featured.m-small & {
+
+                bottom: $spacer + 2;
+                right: $spacer + 2;
+            }
+
+            .c-blog-featured.m-video & {
+
+                display: block;
+            }
+
+            svg {
+
+                fill: $color-white;
+            }
+        }
 
     .c-blog-featured__content {
 
