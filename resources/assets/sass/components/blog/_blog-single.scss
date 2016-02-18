@@ -53,6 +53,52 @@
         }
     }
 
+        .c-blog-single__iframe {
+
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            margin-bottom: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 4;
+            }
+
+            iframe {
+
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+    .c-blog-single__gallery {
+
+        margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            max-width: span(21 of 24);
+            margin: 0 auto $spacer * 4;
+        }
+    }
+
+        .c-blog-single__gallery-header {
+
+            margin-bottom: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                max-width: span(16 of 21);
+                margin: 0 auto $spacer * 2;
+            }
+        }
+
     .c-blog-single__meta {
 
         @include clearfix;

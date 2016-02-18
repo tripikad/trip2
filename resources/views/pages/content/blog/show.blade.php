@@ -43,31 +43,36 @@
 
     <div class="r-blog__content">
 
-        <div class="r-blog__wrap">
-
-            <div class="r-blog__wrap-inner m-small">
-
 {{--
-                @include('component.row', [
-                    'profile' => [
-                        'modifiers' => '',
-                        'image' => $content->user->imagePreset(),
-                        'route' => route('user.show', [$content->user])
-                    ],
-                    'modifiers' => 'm-image',
-                    'title' => $content->title,
-                    'text' => view('component.content.text', ['content' => $content]),
-                    'actions' => view('component.actions', ['actions' => $content->getActions()]),
-                    'extra' => view('component.flags', ['flags' => $content->getFlags()]),
-                    'body' => $content->body_filtered,
-                ])
+        @include('component.row', [
+            'profile' => [
+                'modifiers' => '',
+                'image' => $content->user->imagePreset(),
+                'route' => route('user.show', [$content->user])
+            ],
+            'modifiers' => 'm-image',
+            'title' => $content->title,
+            'text' => view('component.content.text', ['content' => $content]),
+            'actions' => view('component.actions', ['actions' => $content->getActions()]),
+            'extra' => view('component.flags', ['flags' => $content->getFlags()]),
+            'body' => $content->body_filtered,
+        ])
 --}}
 
-                <div class="c-blog-single">
+        <div class="c-blog-single">
+
+            <div class="r-blog__wrap">
+
+                <div class="r-blog__wrap-inner m-small">
 
                     <div class="c-blog-single__body">
 
                         {{-- {!! $content->body_filtered !!}  --}}
+
+                        <div class="c-blog-single__iframe">
+
+                            <iframe src="https://player.vimeo.com/video/153737805" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        </div>
 
                         <p>My fiance and I were out at a bar the other night after a movie and we witnessed a probably very common occurrence. I was sitting on a stool with my back to the bar and he was standing in front of me. Next to me was a dressed up, dark haired young girl sitting next to her friend. Talking to her was a guy at least eight to ten years older than her. He tried to pretend like he knew us like we would provide some social proof for him. He was buying them drinks and working very hard to get her out of the bar.</p>
 
@@ -84,8 +89,69 @@
                         </ul>
 
                         <p>So I suggested it and they were literally like “Wow. I didn’t even think of that.” It made me a little sad. These were smart young women that go to good schools and somehow it had not been communicated to them at any point that they could set boundaries with men. We talked about the commerce of the guys buying them drinks and that if they didn’t want to feel like they owed the guys anything not to let them buy. We also talked about the fact that even though the guys bought them drinks they didn’t owe them anything anyway. And as I left I emphasized how it is always ok to say “No thank you.”</p>
-
                     </div>
+                </div>
+            </div>
+
+            <div class="r-blog__wrap">
+
+                <div class="r-blog__wrap-inner">
+
+                    <div class="c-blog-single__gallery">
+
+                        <div class="c-blog-single__gallery-header">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-green',
+                                'title' => 'Galerii'
+                            ])
+                        </div>
+
+                        @include('component.gallery', [
+                            'columns' => 6,
+                            'modal' => [
+                                'modifiers' => 'm-green',
+                            ],
+                            'items' => [
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => 'Pilt 1'
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => 'Pilt 2'
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => 'Pilt 3'
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => 'Pilt 4'
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => 'Pilt 5'
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => 'Pilt 6'
+                                ],
+                            ]
+                        ])
+                    </div>
+                </div>
+            </div>
+
+            <div class="r-blog__wrap">
+
+                <div class="r-blog__wrap-inner m-small">
 
                     <div class="c-blog-single__meta">
 
