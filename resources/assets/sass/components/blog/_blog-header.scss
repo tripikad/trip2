@@ -1,0 +1,60 @@
+.c-blog-header {
+
+    position: absolute;
+    z-index: 9998;
+    top: inherit;
+    left: 0;
+    height: $spacer * 6.5;
+    padding: 0 $spacer;
+    width: 100%;
+
+    @include respond-to(tablet) {
+
+        height: auto;
+        background: none;
+    }
+}
+
+    .c-blog-header__back {
+
+        position: absolute;
+        left: 0;
+    }
+
+    .c-blog-header__logo {
+
+        width: $spacer * 23.5;
+        height: $spacer * 11;
+    }
+
+        .c-blog-header__logo-link {
+
+            display: block;
+            height: 100%;
+            width: 100%;
+        }
+
+    .c-blog-header__actions {
+
+        position: absolute;
+        right: $spacer;
+        top: 0;
+    }
+
+        .c-blog-header__action {
+
+            &.m-border {}
+        }
+
+        .c-blog-header__user {
+
+            float: right;
+            position: relative;
+            z-index: 2000;
+            margin-top: $spacer * 1.25;
+
+            @include respond-to(tablet) {
+
+                margin: 0;
+            }
+        }

@@ -1,0 +1,9 @@
+.c-blog-masthead {
+
+    background: $color-fill-neutral-light;
+
+    @include respond-to(tablet) {
+
+        height: 100%;
+    }
+}
