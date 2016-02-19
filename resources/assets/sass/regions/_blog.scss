@@ -41,6 +41,11 @@
 
     padding-top: $spacer * 2;
 
+    @include respond-to(tablet) {
+
+        padding-top: 0;
+    }
+
     .r-blog.m-index & {
 
         @include respond-to(tablet) {

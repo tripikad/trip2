@@ -10,7 +10,6 @@
                 'modifiers' => 'm-dark'
             ])
         </a>
-        <span class="c-blog-header__logo-title">blogid</span>
     </div>
 
     @endif

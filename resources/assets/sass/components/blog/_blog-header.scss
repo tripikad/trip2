@@ -149,23 +149,8 @@
         left: 50%;
         width: $spacer * 23.5;
         height: $spacer * 11;
-        margin-left: -$spacer * 14 - 10;
+        transform: translateX(-50%);
     }
-
-        .c-blog-header__logo-title {
-
-            font-size: $font-size-largest + 6;
-            font-weight: $font-weight-bold;
-            position: absolute;
-            top: $spacer * 4 + 2;
-            left: $spacer * 17 + 8;
-            display: none;
-
-            @include respond-to(tablet) {
-
-                display: block;
-            }
-        }
 
         .c-blog-header__logo-link {
 
