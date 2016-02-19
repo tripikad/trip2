@@ -18,4 +18,9 @@
             padding: $spacer - 4 $spacer $spacer - 7;
             border: 2px solid $color-fill-neutral-darker;
             border-radius: $spacer * 4;
+
+            &:hover {
+
+                border: 2px solid $color-fill-neutral-dark;
+            }
         }

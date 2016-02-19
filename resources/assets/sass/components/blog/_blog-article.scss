@@ -26,6 +26,7 @@
 
             color: $color-text-black;
             text-decoration: none;
+            display: block;
 
             &:hover {
 
@@ -123,6 +124,11 @@
                 font-size: $font-size-small;
                 font-weight: $font-weight-bold;
                 text-decoration: none;
+
+                &:hover {
+
+                    text-decoration: underline;
+                }
             }
 
         .c-blog-article__date {

@@ -6,7 +6,7 @@
             'items' => [
                 [
                     'title' => 'Alusta blogimist',
-                    'route' => '',
+                    'route' => '/content/blog/create',
                     'modifiers' => 'm-border'
                 ]
             ]
