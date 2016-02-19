@@ -50,6 +50,17 @@
                 @include span(14 of 24);
             }
         }
+
+        .r-flights.m-create & {
+
+            @include respond-to(tablet) {
+
+                @include span(14 of 24);
+
+                float: none;
+                margin: 0 auto;
+            }
+        }
     }
 
         .r-flights__content-filter {
@@ -135,6 +146,11 @@
 
         background: $color-fill-neutral-light;
         margin-bottom: -$spacer * 4;
+
+        &.m-white {
+
+            background: $color-white;
+        }
     }
 
         .r-flights__footer-promo-wrap {
