@@ -74,11 +74,6 @@
         padding: $spacer;
         background: $color-fill-neutral-dark;
 
-        &.m-active {
-
-            display: block;
-        }
-
         @include respond-to(tablet) {
 
             float: left;
@@ -87,6 +82,11 @@
             width: $spacer * 15;
             padding: $spacer / 2 0;
             background: none;
+        }
+
+        &.m-active {
+
+            display: block;
         }
     }
 
