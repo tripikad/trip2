@@ -39,6 +39,8 @@
 
 .r-blog__featured-main {
 
+    padding-top: $spacer * 2;
+
     .r-blog.m-index & {
 
         @include respond-to(tablet) {
@@ -52,7 +54,7 @@
 
 .r-blog__featured-list {
 
-    padding: $spacer * 4 0;
+    padding: $spacer * 4 0 0;
 
     @include respond-to(tablet) {
 
@@ -72,6 +74,8 @@
 }
 
 .r-blog__main {
+
+    padding-top: $spacer * 2;
 
     @include respond-to(tablet) {
 

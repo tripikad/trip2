@@ -2,7 +2,12 @@
 
     @include clearfix;
 
-    &.m-small {}
+    margin-bottom: $spacer * 2;
+
+    &.m-small {
+
+        margin-bottom: $spacer * 2;
+    }
 }
 
     .c-blog-featured__image-link {
@@ -10,24 +15,29 @@
         background-repeat: no-repeat;
         background-size: cover;
         position: relative;
+        overflow: hidden;
+        display: block;
+        width: 100%;
+        height: 0;
+        margin-bottom: $spacer;
+        padding-bottom: 56.25%;
 
         @include respond-to(tablet) {
 
             float: left;
             width: 50%;
-            display: block;
             padding-bottom: 33%;
+            margin-bottom: 0;
         }
 
         .c-blog-featured.m-small & {
 
+            padding-bottom: 56.25%;
+
             @include respond-to(tablet) {
 
                 float: none;
-                overflow: hidden;
-                display: block;
                 width: 100%;
-                height: 0;
                 margin-bottom: $spacer * 2.5;
                 padding-bottom: 56.25%;
             }
@@ -85,7 +95,7 @@
             font-size: $font-size-larger;
             font-weight: $font-weight-bold;
             line-height: 1.25;
-            margin-bottom: $spacer * 1.5;
+            margin-bottom: $spacer;
 
             @include respond-to(tablet) {
 
@@ -97,6 +107,7 @@
 
                 font-size: $font-size-larger;
                 line-height: 1.5;
+                margin-bottom: $spacer;
 
                 @include respond-to(tablet) {
 
@@ -133,7 +144,12 @@
 
         .c-blog-featured__tags {
 
-            margin-bottom: $spacer * 2;
+            margin-bottom: $spacer;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 2;
+            }
         }
 
         .c-blog-featured__meta {
