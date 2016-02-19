@@ -12,7 +12,7 @@
         'modifiers' => 'm-show',
         'back' => [
             'title' => 'trip.ee blogid',
-            'route' => '#'
+            'route' => '/content/blog'
         ],
     ])
 

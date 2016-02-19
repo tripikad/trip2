@@ -12,7 +12,7 @@
         'modifiers' => 'm-alternative',
         'back' => [
             'title' => 'trip.ee',
-            'route' => '#'
+            'route' => '/'
         ],
         'logo' => true
     ])
