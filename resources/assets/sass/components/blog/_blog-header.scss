@@ -174,30 +174,15 @@
             width: 100%;
         }
 
-    // .c-blog-header__actions {
+    .c-blog-header__user {
 
-    //     @include respond-to(tablet) {
+        float: right;
+        position: relative;
+        z-index: 2000;
+        margin-top: $spacer * 1.25;
 
-    //         position: absolute;
-    //         right: $spacer;
-    //         top: 0;
-    //     }
-    // }
+        @include respond-to(tablet) {
 
-    //     .c-blog-header__action {
-
-    //         &.m-border {}
-    //     }
-
-    //     .c-blog-header__user {
-
-    //         float: right;
-    //         position: relative;
-    //         z-index: 2000;
-    //         margin-top: $spacer * 1.25;
-
-    //         @include respond-to(tablet) {
-
-    //             margin: 0;
-    //         }
-    //     }
+            margin: 0;
+        }
+    }

@@ -15,6 +15,170 @@
 
     @endif
 
+    @if(\Auth::user() && ! \Auth::user()->hasRole('admin'))
+
+    <div class="c-blog-header__user">
+
+        @if(isset($modifiers) && $modifiers == 'm-alternative')
+
+            @include('component.navbar.user', [
+                'modifiers' => 'm-green m-blog',
+                'profile' => [
+                    'image' => \Auth::user()->imagePreset(),
+                    'title' => \Auth::user()->name,
+                    'route' => route('user.show', [\Auth::user()]),
+                    'badge' => \Auth::user()->unreadMessagesCount(),
+                    'letter' => [
+                        'modifiers' => 'm-green m-tiny',
+                        'text' => 'W'
+                    ]
+                ],
+                'children' => [
+                    [
+                        'title' => trans('menu.user.profile'),
+                        'route' => route('user.show', [\Auth::user()]),
+                    ],
+                    [
+                        'title' => trans('menu.user.message'),
+                        'route' => route('message.index', [\Auth::user()]),
+                        'badge' => \Auth::user()->unreadMessagesCount()
+                    ],
+                    [
+                        'title' => trans('menu.user.edit.profile'),
+                        'route' => route('user.edit', [\Auth::user()]),
+                    ],
+                    [
+                        'title' => trans('menu.auth.logout'),
+                        'route' => route('login.logout'),
+                    ]
+                ]
+            ])
+
+        @else
+
+            @include('component.navbar.user', [
+                'modifiers' => 'm-green m-alternative',
+                'profile' => [
+                    'image' => \Auth::user()->imagePreset(),
+                    'title' => \Auth::user()->name,
+                    'route' => route('user.show', [\Auth::user()]),
+                    'badge' => \Auth::user()->unreadMessagesCount(),
+                    'letter' => [
+                        'modifiers' => 'm-green m-tiny',
+                        'text' => 'W'
+                    ]
+                ],
+                'children' => [
+                    [
+                        'title' => trans('menu.user.profile'),
+                        'route' => route('user.show', [\Auth::user()]),
+                    ],
+                    [
+                        'title' => trans('menu.user.message'),
+                        'route' => route('message.index', [\Auth::user()]),
+                        'badge' => \Auth::user()->unreadMessagesCount()
+                    ],
+                    [
+                        'title' => trans('menu.user.edit.profile'),
+                        'route' => route('user.edit', [\Auth::user()]),
+                    ],
+                    [
+                        'title' => trans('menu.auth.logout'),
+                        'route' => route('login.logout'),
+                    ]
+                ]
+            ])
+
+        @endif
+
+    </div>
+
+    @elseif(\Auth::user() && \Auth::user()->hasRole('admin'))
+
+    <div class="c-blog-header__user">
+
+        @if(isset($modifiers) && $modifiers == 'm-alternative')
+
+            @include('component.navbar.user', [
+                'modifiers' => 'm-purple m-blog',
+                'profile' => [
+                    'image' => \Auth::user()->imagePreset(),
+                    'title' => \Auth::user()->name,
+                    'route' => route('user.show', [\Auth::user()]),
+                    'badge' => \Auth::user()->unreadMessagesCount(),
+                    'letter' => [
+                        'modifiers' => 'm-green m-tiny',
+                        'text' => 'W'
+                    ]
+                ],
+                'children' => [
+                    [
+                        'title' => trans('menu.user.profile'),
+                        'route' => route('user.show', [\Auth::user()]),
+                    ],
+                    [
+                        'title' => trans('menu.user.message'),
+                        'route' => route('message.index', [\Auth::user()]),
+                        'badge' => \Auth::user()->unreadMessagesCount()
+                    ],
+                    [
+                        'title' => trans('menu.user.edit.profile'),
+                        'route' => route('user.edit', [\Auth::user()]),
+                    ],
+                    [
+                        'title' => trans('menu.auth.admin'),
+                        'route' => route('content.index', ['internal'])
+                    ],
+                    [
+                        'title' => trans('menu.auth.logout'),
+                        'route' => route('login.logout'),
+                    ]
+                ]
+            ])
+
+        @else
+
+            @include('component.navbar.user', [
+                'modifiers' => 'm-purple m-alternative',
+                'profile' => [
+                    'image' => \Auth::user()->imagePreset(),
+                    'title' => \Auth::user()->name,
+                    'route' => route('user.show', [\Auth::user()]),
+                    'badge' => \Auth::user()->unreadMessagesCount(),
+                    'letter' => [
+                        'modifiers' => 'm-green m-tiny',
+                        'text' => 'W'
+                    ]
+                ],
+                'children' => [
+                    [
+                        'title' => trans('menu.user.profile'),
+                        'route' => route('user.show', [\Auth::user()]),
+                    ],
+                    [
+                        'title' => trans('menu.user.message'),
+                        'route' => route('message.index', [\Auth::user()]),
+                        'badge' => \Auth::user()->unreadMessagesCount()
+                    ],
+                    [
+                        'title' => trans('menu.user.edit.profile'),
+                        'route' => route('user.edit', [\Auth::user()]),
+                    ],
+                    [
+                        'title' => trans('menu.auth.admin'),
+                        'route' => route('content.index', ['internal'])
+                    ],
+                    [
+                        'title' => trans('menu.auth.logout'),
+                        'route' => route('login.logout'),
+                    ]
+                ]
+            ])
+        @endif
+    </div>
+
+    @endif
+
     <a href="#" class="c-header__nav-trigger js-header__nav-trigger">
         <span></span>
         <span></span>
@@ -67,6 +231,8 @@
     <a href="{{ $back['route'] }}" class="c-blog-header__back">{{ $back['title'] }}</a>
 
     @endif
+
+
 
 {{--     <div class="c-blog-header__actions">
 
