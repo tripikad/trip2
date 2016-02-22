@@ -153,7 +153,7 @@
                     </div>
                 </div>
 
-                <div class="c-form__group">
+                <div class="c-form__group m-small-margin">
 
                     {!! Form::label('flight_start', 'Lennumarsruut', [
                         'class' => 'c-form__label'
@@ -179,6 +179,15 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="c-form__group">
+                    @include('component.link', [
+                        'modifiers' => 'm-icon-prepend js-add-destination-row',
+                        'title' => 'Lisa rida',
+                        'route' => '',
+                        'icon' => 'icon-circle-add'
+                    ])
                 </div>
 
                 <div class="c-form__input-wrap">
@@ -211,7 +220,7 @@
                         {!! Form::label('screenshot', 'Ekraanitõmmise üleslaadimine', [
                             'class' => 'c-form__label'
                         ]) !!}
-                        <div id="screenshot" class="dropzone"></div>
+
                     </div>
                 </div>
 
@@ -221,7 +230,6 @@
                             'class' => 'c-form__label'
                         ]) !!}
 
-                        <div id="flight_image" class="dropzone"></div>
                     </div>
                 </div>
 
