@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use View;
 use Cache;
-use App\Content;
-use App\Destination;
-use App\Main;
-use DB;
+//use App\Content;
+//use App\Destination;
+//use App\Main;
+//use DB;
 
 class SearchController extends Controller
 {
