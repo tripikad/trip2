@@ -7,6 +7,9 @@ Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index
 
 Route::post('/', ['uses' => 'FrontpageController@search', 'as' => 'frontpage.search']);
 
+// Search
+Route::get('search/show', ['uses' => 'SearchController@show', 'as' => 'search.show']);
+
 // Registration
 
 Route::get('register', ['uses' => 'Auth\RegistrationController@form', 'as' => 'register.form']);

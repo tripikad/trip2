@@ -166,7 +166,10 @@
 
     .c-search.m-active & {
 
-        display: block;
+        @include respond-to(tablet) {
+
+            display: block;
+        }
     }
 }
 
