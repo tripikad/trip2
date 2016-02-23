@@ -1,6 +1,9 @@
 .c-search-tabs {
 
     @include clear-list;
+
+    width: 100%;
+    white-space: nowrap;
 }
 
     .c-search-tabs__item {
@@ -10,20 +13,44 @@
 
         .c-search-tabs__item-link {
 
-            color: $color-white;
-            font-size: $font-size-normal;
+            color: $color-text-gray;
+            font-size: $font-size-small;
             font-weight: $font-weight-medium;
-            line-height: $spacer * 5;
             text-decoration: none;
             display: inline-block;
+            line-height: $spacer * 5;
             height: $spacer * 5;
-            margin: 0 $spacer * 1.5;
+            padding: 0 $spacer;
+
+            @include respond-to(tablet) {
+
+                color: $color-white;
+                font-size: $font-size-normal;
+                line-height: $spacer * 5;
+                height: $spacer * 5;
+                padding: 0;
+                margin: 0 $spacer * 0.75;
+            }
+
+            @include respond-to(desktop) {
+
+                margin: 0 $spacer * 1.5;
+            }
 
             &.m-active {
 
                 color: $color-text-link;
-                padding: 0 $spacer * 1.5;
                 background: $color-white;
+
+                @include respond-to(tablet) {
+
+                    padding: 0 $spacer;
+                }
+
+                @include respond-to(desktop) {
+
+                    padding: 0 $spacer * 1.5;
+                }
             }
 
             .c-search-tabs__item:first-child & {
@@ -39,15 +66,24 @@
             span {
 
                 color: $color-white;
-                font-size: $font-size-small;
+                font-size: $font-size-tiny;
                 line-height: 1;
                 display: inline-block;
-                padding: $spacer / 3 $spacer * 0.75 $spacer / 12;
+                padding: $spacer / 4 $spacer * 0.75 $spacer / 6;
                 margin-left: $spacer / 2;
                 background: $color-text-gray;
                 border-radius: $spacer * 4;
 
-                .c-search-tabs__item.m-active & {
+                @include respond-to(tablet) {
+
+                    font-size: $font-size-small;
+                    padding: $spacer / 3 $spacer * 0.75 $spacer / 12;
+                }
+            }
+
+            &.m-active {
+
+                span {
 
                     color: $color-text-gray;
                     background: $color-fill-neutral;

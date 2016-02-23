@@ -1,9 +1,9 @@
-.c-search-flights {
+.c-search-destinations {
 
     @include clear-list;
 }
 
-    .c-search-flights__item {
+    .c-search-destinations__item {
 
         @include clearfix;
 
@@ -17,24 +17,26 @@
         }
     }
 
-        .c-search-flights__item-image {
+        .c-search-destinations__item-image {
 
-            display: none;
+            display: block;
+            float: left;
+            width: $spacer * 6.5;
+            height: $spacer * 4 + 4;
+            background-size: cover;
+            background-repeat: no-repeat;
 
             @include respond-to(tablet) {
 
-                display: block;
-                float: left;
                 width: $spacer * 8;
                 height: $spacer * 5 + 5;
-                background-size: cover;
-                background-repeat: no-repeat;
             }
         }
 
-        .c-search-flights__item-content {
+        .c-search-destinations__item-content {
 
             display: block;
+            margin-left: $spacer * 8;
 
             @include respond-to(tablet) {
 
@@ -42,21 +44,15 @@
             }
         }
 
-            .c-search-flights__item-title {
+            .c-search-destinations__item-title {
 
                 font-size: $font-size-medium;
                 font-weight: $font-weight-bold;
                 line-height: 1.35;
                 margin-bottom: $spacer;
-
-                @include respond-to(tablet) {
-
-                    display: flex;
-                    justify-content: space-between;
-                }
             }
 
-                .c-search-flights__item-title-link {
+                .c-search-destinations__item-title-link {
 
                     color: $color-text-black;
                     text-decoration: none;
@@ -68,14 +64,7 @@
                     }
                 }
 
-                .c-search-flights__item-title-date {
-
-                    color: $color-text-gray;
-                    font-size: $font-size-small;
-                    font-weight: $font-weight-normal;
-                }
-
-            .c-search-flights__item-info {
+            .c-search-destinations__item-info {
 
                 @include clear-list;
 
@@ -87,14 +76,12 @@
 
                     &::before {
 
-                        content: '';
+                        content: '›';
+                        color: $color-text-gray;
+                        font-size: $font-size-small;
                         margin: 0 $spacer / 2;
                         display: inline-block;
                         vertical-align: middle;
-                        width: 4px;
-                        height: 4px;
-                        background: $color-text-gray;
-                        border-radius: 50%;
                     }
 
                     &:first-child::before {
@@ -105,3 +92,14 @@
                     }
                 }
             }
+
+                .c-search-destinations__item-info-link {
+
+                    color: $color-text-gray;
+                    text-decoration: none;
+
+                    &:hover {
+
+                        text-decoration: underline;
+                    }
+                }

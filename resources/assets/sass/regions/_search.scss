@@ -4,15 +4,32 @@
 
     .r-search__tabs {
 
-        @include wrap('narrow');
+        background: $color-fill-neutral-light;
 
         @include respond-to(tablet) {
+
+            @include wrap('narrow');
 
             position: relative;
             z-index: 10;
             margin-top: -$spacer * 5;
+            background: none;
         }
     }
+
+        .r-search__tabs-wrap {
+
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+
+            @include respond-to(tablet) {
+
+                overflow: hidden;
+                padding-bottom: 0;
+            }
+        }
 
     .r-search__content {
 
@@ -26,12 +43,15 @@
 
         .r-search__content-wrap {
 
-            @include wrap('narrow');
+            @include respond-to(tablet) {
+
+                @include wrap('narrow');
+            }
         }
 
             .r-search__content-container {
 
-                padding: $spacer * 2;
+                padding: 0 $spacer * 2 $spacer * 2;
                 background: $color-white;
 
                 @include respond-to(tablet) {

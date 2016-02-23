@@ -1,9 +1,9 @@
-.c-search-blogs {
+.c-search-news {
 
     @include clear-list;
 }
 
-    .c-search-blogs__item {
+    .c-search-news__item {
 
         @include clearfix;
 
@@ -17,7 +17,7 @@
         }
     }
 
-        .c-search-blogs__item-image {
+        .c-search-news__item-image {
 
             display: none;
 
@@ -32,7 +32,7 @@
             }
         }
 
-        .c-search-blogs__item-content {
+        .c-search-news__item-content {
 
             display: block;
 
@@ -56,7 +56,7 @@
             }
         }
 
-            .c-search-blogs__item-title {
+            .c-search-news__item-title {
 
                 font-size: $font-size-medium;
                 font-weight: $font-weight-bold;
@@ -70,7 +70,7 @@
                 }
             }
 
-                .c-search-blogs__item-title-link {
+                .c-search-news__item-title-link {
 
                     color: $color-text-black;
                     text-decoration: none;
@@ -82,7 +82,7 @@
                     }
                 }
 
-                .c-search-blogs__item-title-date {
+                .c-search-news__item-title-date {
 
                     color: $color-text-gray;
                     font-size: $font-size-small;

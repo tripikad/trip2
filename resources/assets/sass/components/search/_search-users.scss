@@ -11,6 +11,16 @@
         align-items: center;
         padding: $spacer * 0.75 0;
 
+        &:first-child {
+
+            padding-top: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                padding-top: $spacer * 0.75;
+            }
+        }
+
         &:last-child {
 
             border-bottom: none;
@@ -26,15 +36,27 @@
         .c-search-users__item-image {
 
             position: relative;
-            height: $spacer * 4 - 4;
-            width: $spacer * 4 - 4;
-            margin-right: $spacer * 2;
+            height: $spacer * 3;
+            width: $spacer * 3;
+            margin-right: $spacer * 1.5;
+
+            @include respond-to(tablet) {
+
+                height: $spacer * 4 - 4;
+                width: $spacer * 4 - 4;
+                margin-right: $spacer * 2;
+            }
         }
 
         .c-search-users__item-title {
 
-            font-size: $font-size-medium;
+            font-size: $font-size-normal;
             font-weight: $font-weight-bold;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-medium;
+            }
         }
 
             .c-search-users__item-title-link {
