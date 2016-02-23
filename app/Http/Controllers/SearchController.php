@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 //use Illuminate\Http\Request;
 use View;
 use Cache;
+
 //use App\Content;
 //use App\Destination;
 //use App\Main;
