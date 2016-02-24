@@ -6,8 +6,8 @@
 
         <a href="/" class="c-blog-header__logo-link">
 
-            @include('component.logo', [
-                'modifiers' => 'm-dark'
+            @include('component.svg.standalone', [
+                'name' => 'tripee_logo_blogid'
             ])
         </a>
     </div>

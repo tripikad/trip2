@@ -16,7 +16,6 @@
         ],
         'logo' => true
     ])
-
 @stop
 
 @section('content')
@@ -352,7 +351,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -388,9 +386,7 @@
                         'image' => \App\Image::getRandom(),
                     ])
                 </div>
-
             </div>
-
         </div>
     </div>
 
@@ -562,7 +558,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="r-block">
@@ -753,9 +748,7 @@
                     ])
                 </div>
             </div>
-
         </div>
-
     </div>
 
     <div class="r-blog__offers">
@@ -771,7 +764,6 @@
                         'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al. 350 €',
                         'image' => \App\Image::getRandom()
                     ])
-
                 </div>
 
                 <div class="c-columns__item">
@@ -781,7 +773,6 @@
                         'title' => 'Air China Stockholmist Filipiinidele, Singapuri või Hongkongi al. 285 €',
                         'image' => \App\Image::getRandom()
                     ])
-
                 </div>
 
                 <div class="c-columns__item">
@@ -791,7 +782,6 @@
                         'title' => 'Riiast Maltale al. 350 €',
                         'image' => \App\Image::getRandom()
                     ])
-
                 </div>
             </div>
         </div>
@@ -808,8 +798,6 @@
             ])
         </div>
     </div>
-
-
 </div>
 
 @stop

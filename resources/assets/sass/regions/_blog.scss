@@ -35,6 +35,14 @@
             height: $spacer * 25.5;
         }
     }
+
+    .r-blog.m-edit & {
+
+        @include respond-to(tablet) {
+
+            height: $spacer * 9;
+        }
+    }
 }
 
 .r-blog__featured-main {
@@ -145,6 +153,14 @@
     @include respond-to(tablet) {
 
         padding: $spacer * 6 0 $spacer * 8;
+    }
+
+    &.m-small {
+
+        @include respond-to(tablet) {
+
+            padding-top: $spacer * 5 0;
+        }
     }
 }
 

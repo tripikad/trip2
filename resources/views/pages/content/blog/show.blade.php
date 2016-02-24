@@ -15,7 +15,6 @@
             'route' => '/content/blog'
         ],
     ])
-
 @stop
 
 @section('content')
@@ -201,7 +200,6 @@
                             'modifiers' => 'm-green',
                             'title' => 'Kommentaarid'
                         ])
-
                     </div>
 
                     {{-- @include('component.comment.index', ['comments' => $comments]) --}}
@@ -262,7 +260,6 @@
                         </div>
 
                         @include('component.comment.create')
-
                     </div>
 
                 @endif
@@ -320,8 +317,6 @@
             ])
         </div>
     </div>
-
-
 </div>
 
 @stop

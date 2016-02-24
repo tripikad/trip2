@@ -8,15 +8,9 @@
     align-items: center;
     min-height: $spacer * 8;
     width: 100%;
-    padding: $spacer * 2;
     background: $color-white;
     border: 2px dashed $color-fill-neutral;
     border-radius: 3px;
-
-    @include respond-to(tablet) {
-
-        min-height: $spacer * 16;
-    }
 
     .fallback {
 
@@ -34,4 +28,9 @@
 
     color: $color-text-link;
     text-decoration: underline;
+}
+
+.dropzone .dz-message {
+
+    margin: $spacer * 2 auto;
 }

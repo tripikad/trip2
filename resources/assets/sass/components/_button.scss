@@ -118,6 +118,7 @@
     &.m-small {
 
         font-size: $font-size-small;
+        line-height: 1.2;
         height: $spacer * 3;
         padding: $spacer - 2 $spacer * 2 $spacer * 0.75;
 
@@ -148,6 +149,7 @@
     &.m-large {
 
         font-size: $font-size-large;
+        line-height: 1.4;
         padding: $spacer $spacer * 3;
     }
 
