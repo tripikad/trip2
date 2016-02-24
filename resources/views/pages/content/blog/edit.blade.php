@@ -115,7 +115,7 @@
                         <div class="c-columns__item">
 
                             @include('component.svg.standalone', [
-                                'name' => ''
+                                'name' => 'illustration-blog-headerphoto'
                             ])
                         </div>
                     </div>
