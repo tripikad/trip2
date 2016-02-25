@@ -145,9 +145,7 @@
 
                 &.m-first {
 
-                    padding-bottom: 48
-
-                    0px;
+                    padding-bottom: 0;
 
                     @include respond-to(tablet) {
 

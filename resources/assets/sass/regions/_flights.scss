@@ -169,7 +169,7 @@
             @include wrap('narrow');
         }
 
-    .r-flights__travel-mates {
+    .r-flights__travelmates {
 
         padding-top: $spacer * 2;
         padding-bottom: $spacer * 2;
@@ -182,12 +182,12 @@
         }
     }
 
-        .r-flights_travel-mates-title {
+        .r-flights_travelmates-title {
 
             padding-bottom: $spacer * 2;
         }
 
-        .r-flights__travel-mates-wrap {
+        .r-flights__travelmates-wrap {
 
             @include wrap('narrow');
         }
