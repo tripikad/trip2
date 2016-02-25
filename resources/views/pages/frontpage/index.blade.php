@@ -398,12 +398,13 @@
             <div class="r-home__gallery">
                 <div class="r-home__gallery-wrap">
                     <div class="r-home__gallery-title">
+                        <div class="r-home__gallery-title-wrap">
 
-                        @include('component.title', [
-                            'modifiers' => 'm-red',
-                            'title' => trans('frontpage.index.photo.title')
-                        ])
-
+                            @include('component.title', [
+                                'modifiers' => 'm-red',
+                                'title' => trans('frontpage.index.photo.title')
+                            ])
+                        </div>
                     </div>
 
                     @include('component.gallery', [
