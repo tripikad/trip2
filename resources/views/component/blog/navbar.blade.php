@@ -2,10 +2,12 @@
 
     <ul class="c-navbar-list">
 
+        {{-- Title == 'Alusta blogimist' --}}
+
         @include('component.navbar.list', [
             'items' => [
                 [
-                    'title' => 'Alusta blogimist',
+                    'title' => 'Lisa uus',
                     'route' => '/content/blog/create',
                     'modifiers' => 'm-border'
                 ]
