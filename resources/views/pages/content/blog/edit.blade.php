@@ -27,15 +27,9 @@
 
             <div class="r-blog__content m-small">
 
+                <h1 class="c-blog-title m-large">Uus postitus</h1>
+
                 <div class="r-block m-small">
-
-                    <div class="r-block__header">
-
-                        @include('component.title', [
-                            'modifiers' => 'm-largest m-blue',
-                            'title' => 'Uus postitus'
-                        ])
-                    </div>
 
                     <div class="r-block__inner">
 
