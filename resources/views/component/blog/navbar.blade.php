@@ -2,7 +2,7 @@
 
     <ul class="c-navbar-list">
 
-        {{-- Title == 'Alusta blogimist' --}}
+        <?php /* Title = 'Alusta blogimist' */ ?>
 
         @include('component.navbar.list', [
             'items' => [
