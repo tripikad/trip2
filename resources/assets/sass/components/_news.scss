@@ -10,7 +10,7 @@
     &.m-smaller {
 
         display: flex;
-        margin-bottom: $spacer * 2;
+        margin-bottom: $spacer;
 
         @include respond-to(tablet) {
 
@@ -32,8 +32,14 @@
         .c-news.m-smaller & {
 
             flex: 0 0 $spacer * 12;
+            margin-bottom: $spacer;
             margin-right: $spacer * 2;
             height: $spacer * 7.5;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 2;
+            }
         }
     }
 

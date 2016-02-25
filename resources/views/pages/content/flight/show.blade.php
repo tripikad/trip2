@@ -292,7 +292,7 @@
                 ])
             </div>
 
-            <div class="r-block">
+            <div class="r-block m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-body',
@@ -629,7 +629,7 @@
                 ])
             </div>
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-sidebar-small',
@@ -674,7 +674,7 @@
                 </div>
             </div>
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-sidebar-small',

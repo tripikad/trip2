@@ -215,7 +215,7 @@
 
             @endif
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-sidebar-small',

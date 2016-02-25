@@ -24,7 +24,6 @@
             'subtitle' => trans('content.travelmate.view.all.offers'),
             'subtitle_route' => route('content.index', [$content->type])
         ])
-
     </div>
 
     <div class="r-travelmates__wrap">
@@ -32,7 +31,6 @@
             <h1 class="r-travelmates__title">{{ $content->title }}</h1>
 
             <div class="r-travelmates__meta">
-                @include('component.actions', ['actions' => $content->getActions()])
 
                 <p class="r-travelmates__meta-date">
                     {{ trans('content.travelmate.post.added', [
@@ -72,7 +70,6 @@
                             ];
                         })
                     ])
-
                 </div>
 
             @endif
@@ -164,24 +161,27 @@
                 </div>
             </div>
 
-            <div class="r-block">
-                <div class="r-block__header">
+            @if(count($comments) > 0)
 
-                    @include('component.title', [
-                        'title' => trans('content.comments.title'),
-                        'modifiers' => 'm-purple'
-                    ])
+                <div class="r-block">
+                    <div class="r-block__header">
 
+                        @include('component.title', [
+                            'title' => trans('content.comments.title'),
+                            'modifiers' => 'm-purple'
+                        ])
+
+                    </div>
+
+                    <div class="r-block__body">
+
+                        @include('component.comment.index', [
+                            'comments' => $comments
+                        ])
+
+                    </div>
                 </div>
-
-                <div class="r-block__body">
-
-                    @include('component.comment.index', [
-                        'comments' => $comments
-                    ])
-
-                </div>
-            </div>
+            @endif
 
             @if (\Auth::check())
 
@@ -277,7 +277,7 @@
 
             </div>
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-sidebar-small',

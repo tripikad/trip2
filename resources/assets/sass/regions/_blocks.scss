@@ -2,6 +2,7 @@
 
     @include clearfix;
 
+    overflow: hidden;
     margin-bottom: $spacer * 2;
 
     @include respond-to(tablet) {

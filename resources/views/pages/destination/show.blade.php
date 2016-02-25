@@ -299,10 +299,13 @@
 
                         <div class="r-destination__gallery-title">
 
-                            @include('component.title', [
-                                'modifiers' => 'm-yellow',
-                                'title' => 'Viimati lisatud pildid'
-                            ])
+                            <div class="r-destination__gallery-title-wrap">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-yellow',
+                                    'title' => 'Viimati lisatud pildid'
+                                ])
+                            </div>
                         </div>
 
                         {{--
@@ -471,16 +474,14 @@
 
                         @endif
 
-                        <div class="r-block">
+                        <div class="r-block m-mobile-hide">
 
                             @include('component.promo', [
                                 'modifiers' => 'm-body',
                                 'route' => '#',
                                 'image' => \App\Image::getRandom()
                             ])
-
                         </div>
-
                     </div>
 
                     <div class="r-destination__content-news-column m-last">
@@ -492,7 +493,6 @@
                                 'route' => '#',
                                 'image' => \App\Image::getRandom()
                             ])
-
                         </div>
                     </div>
                 </div>
