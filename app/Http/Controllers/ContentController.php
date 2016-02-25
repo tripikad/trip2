@@ -100,6 +100,15 @@ class ContentController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
 
+    public function blog_profile()
+    {
+        $viewVariables = [];
+
+        return response()
+            ->view('pages.content.blog.profile', $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.content.blog.profile.header'));
+    }
+
     public function getTravelMateIndex()
     {
         $content = Content::whereIn('id', [1534, 25151])
