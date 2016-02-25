@@ -30,7 +30,7 @@
 
         &.m-mobile-margin {
 
-            margin-bottom: $spacer * 1.5;
+            margin-bottom: $spacer;
 
             @include respond-to(tablet) {
 

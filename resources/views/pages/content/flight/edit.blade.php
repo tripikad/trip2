@@ -34,10 +34,7 @@
 
                 <div class="r-block__header">
 
-                    @include('component.title', [
-                        'modifiers' => 'm-largest m-blue',
-                        'title' => 'Lennupakkumiste lisamine'
-                    ])
+                    <h1 class="c-flight-title m-large">Lennupakkumiste lisamine</h1>
                 </div>
 
                 <div class="r-block__inner">
@@ -114,7 +111,7 @@
 
                     <div class="c-columns m-2-cols m-space">
 
-                        <div class="c-columns__item">
+                        <div class="c-columns__item m-mobile-margin">
                             <div class="c-form__input-wrap">
                                 <span class="c-form__input-icon">
 
@@ -148,31 +145,38 @@
                         'class' => 'c-form__label'
                     ]) !!}
 
-                    <div class="c-columns m-2-cols m-space">
+                    <div class="c-flight-route js-flight-route">
 
-                        <div class="c-columns__item">
-                            <div class="c-form__input-wrap">
+                        <div class="c-flight-route__row js-flight-route-row">
+
+                            <div class="c-flight-route__column m-first">
                                 {!! Form::text('add-flight-flight_start', null, [
                                     'class' => 'c-form__input',
                                     'placeholder' => 'Alguskoht',
                                 ]) !!}
                             </div>
-                        </div>
 
-                        <div class="c-columns__item">
-                            <div class="c-form__input-wrap">
+                            <div class="c-flight-route__column m-last">
                                 {!! Form::text('add-flight-flight_end', null, [
                                     'class' => 'c-form__input',
                                     'placeholder' => 'Sihtkoht',
                                 ]) !!}
                             </div>
+
+                            <a href="#" class="c-flight-route__remove js-flight-route-remove">
+                                @include('component.svg.sprite', [
+                                    'name' => 'icon-circle-remove'
+                                ])
+                            </a>
                         </div>
                     </div>
+
+                    <div class="js-flight-route-container"></div>
                 </div>
 
                 <div class="c-form__group">
                     @include('component.link', [
-                        'modifiers' => 'm-icon-prepend js-add-destination-row',
+                        'modifiers' => 'm-icon-prepend js-add-flight-route',
                         'title' => 'Lisa rida',
                         'route' => '',
                         'icon' => 'icon-circle-add'
@@ -212,6 +216,50 @@
                         'class' => 'c-form__label'
                     ]) !!}
 
+                </div>
+
+                <div class="c-form__group m-no-margin">
+
+                    <h2 class="c-flight-title">Näidiskuupäevad</h2>
+                </div>
+
+                <div class="c-flight-dates js-flight-dates">
+
+                    <div class="c-flight-dates__row js-flight-dates-row">
+
+                        <div class="c-flight-dates__column m-first">
+                            {!! Form::text('add-flight-title', null, [
+                                'class' => 'c-form__input',
+                                'placeholder' => 'Kuu ja aasta',
+                            ]) !!}
+                        </div>
+
+                        <div class="c-flight-dates__column m-last">
+
+                            {!! Form::textarea('add-flight-body', null, [
+                                'class' => 'c-form__input m-high js-ckeditor',
+                                'placeholder' => 'Pakkumise sisu (lubatud html koodi sisestamine)…',
+                                'rows' => 16
+                            ]) !!}
+                        </div>
+
+                        <a href="#" class="c-flight-dates__remove js-flight-dates-remove">
+                            @include('component.svg.sprite', [
+                                'name' => 'icon-circle-remove'
+                            ])
+                        </a>
+                    </div>
+                </div>
+
+                <div class="js-flight-dates-container"></div>
+
+                <div class="c-form__group m-large-margin">
+                    @include('component.link', [
+                        'modifiers' => 'm-icon-prepend js-add-flight-dates',
+                        'title' => 'Lisa rida',
+                        'route' => '',
+                        'icon' => 'icon-circle-add'
+                    ])
                 </div>
 
                 <div class="c-form__note">Enne pakkumise sisestamist kontrolli palun uuesti kõik sisestatud andmed</div>
