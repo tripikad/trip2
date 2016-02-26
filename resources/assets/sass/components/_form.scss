@@ -99,6 +99,11 @@
 
             font-size: $font-size-medium;
             height: $spacer * 3.5;
+
+            &.m-icon {
+
+                padding-left: $spacer * 3;
+            }
         }
 
         &.m-small {
@@ -275,5 +280,10 @@
             display: block;
             height: 100%;
             width: 100%;
+
+             .c-form__group.m-error & {
+
+                fill: $color-fill-error;
+             }
         }
     }
