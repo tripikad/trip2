@@ -1,12 +1,10 @@
 .c-flight-search {
 
-    margin-bottom: $spacer * 2;
     padding: $spacer * 2;
     background: $color-fill-neutral-light;
 
     @include respond-to(tablet) {
 
-        margin-bottom: $spacer * 6;
         padding: $spacer * 3 $spacer * 3 $spacer;
     }
 }

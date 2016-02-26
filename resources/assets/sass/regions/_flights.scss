@@ -68,6 +68,16 @@
             margin-bottom: $spacer * 1.5;
         }
 
+        .r-flights__search {
+
+            margin-bottom: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 6;
+            }
+        }
+
     .r-flights__sidebar {
 
         @include respond-to(tablet) {
