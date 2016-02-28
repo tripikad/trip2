@@ -81,7 +81,7 @@ class Main
 
             if (count($tree)) {
                 foreach ($tree as $item) {
-                    $items[$item->id] = $saved.$item->$parameters['name'];
+                    $items[$item->id] = $saved.$item->{$parameters['name']};
 
                     if (isset($item->children) && count($item->children)) {
                         $items = $items +
