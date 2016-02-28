@@ -8,12 +8,12 @@
     .c-navbar-list__item {
 
         display: block;
-        margin: $spacer;
+        padding: $spacer;
 
         @include respond-to(tablet) {
 
             float: left;
-            margin: $spacer;
+            padding: $spacer;
             height: $spacer * 3;
         }
     }
@@ -41,3 +41,81 @@
                 opacity: 0.6;
             }
         }
+
+        .c-navbar-list__sub {
+
+            @include clear-list;
+            @include color-modifiers-and(background);
+
+            position: absolute;
+            z-index: 1100;
+            top: 100%;
+            right: 0;
+            display: none;
+            width: $spacer * 16;
+            padding: $spacer / 2 0;
+            border-radius: 3px;
+            box-shadow: 0 12px 24px rgba($shadow-dark, 0.3);
+
+            @include respond-to(tablet) {
+
+                top: $spacer * 4;
+                right: $spacer;
+            }
+
+            &::before {
+
+                @include color-modifiers-and(border-bottom-color);
+
+                content: '';
+                position: absolute;
+                top: -$spacer / 2;
+                right: $spacer * 1.5;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 5.5px 6px 5.5px;
+                border-top-color: $transparent;
+                border-left-color: $transparent;
+                border-right-color: $transparent;
+                border-bottom-color: inherit;
+
+                @include respond-to(tablet) {
+
+                    right: $spacer * 6;
+                }
+            }
+
+            .c-navbar-list__item:hover & {
+
+                display: block;
+            }
+        }
+
+            .c-navbar-list__sub-item {
+
+                display: block;
+                margin: 0;
+                padding: 0;
+            }
+
+                .c-navbar-list__sub-item-link {
+
+                    @include font-smoothing;
+
+                    color: $color-white;
+                    font-size: $font-size-normal;
+                    font-weight: $font-weight-bold;
+                    text-decoration: none;
+                    line-height: $spacer * 3;
+                    display: block;
+                    height: $spacer * 3;
+                    padding: 0 $spacer * 2;
+
+                    &:hover {
+
+                        @include color-modifiers-dark-and(background);
+                    }
+                }
+
+                    .c-navbar-list__sub-item-text {}

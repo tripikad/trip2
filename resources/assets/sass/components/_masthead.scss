@@ -35,6 +35,15 @@
         }
     }
 
+    &.m-forum {
+
+        &.m-small {
+
+            height: $spacer * 13;
+            overflow: hidden;
+        }
+    }
+
     &.m-profile {
 
         opacity: 0.68;

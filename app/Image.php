@@ -49,16 +49,13 @@ class Image extends Model
         $path = public_path().config('imagepresets.original.path');
 
         $info = getimagesize($url);
-        $ext = image_type_to_extension($info[2]);
+        $ext = image_type_to_extension($info[2], false);
 
         //create random name
         if (! $filename) {
-            $filename = 'image_'.str_random(5).$ext;
-        } else {
-            $filename = $filename.$ext;
+            $filename = 'image_'.str_random(5);
         }
 
-        $filename = self::getImageName($filename);
         $filename = self::checkIfExists($path, $filename, $ext);
 
         try {
@@ -101,12 +98,12 @@ class Image extends Model
             $filename = $filename.'-'.$i;
         }
 
-        if (file_exists($path.$filename.$ext)) {
+        if (file_exists($path.$filename.'.'.$ext)) {
             ++$i;
 
             return self::checkIfExists($path, $filename, $ext, $i);
         } else {
-            return $filename.$ext;
+            return $filename.'.'.$ext;
         }
     }
 

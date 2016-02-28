@@ -140,6 +140,30 @@
 
     <div class="r-travelmates__wrap">
         <div class="r-travelmates__content">
+
+            <div class="r-block">
+
+                <div class="r-block__inner">
+
+                    <div class="r-block__header">
+
+                        <div class="r-block__header-title">
+
+                            @include('component.title', [
+                                'title' => 'Soovita pakkumist sõpradele',
+                                'modifiers' => 'm-large m-green'
+                            ])
+                        </div>
+                    </div>
+
+                    <div class="r-block__body">
+
+                        @include('component.facebook')
+                    </div>
+
+                </div>
+            </div>
+
             <div class="r-block">
                 <div class="r-block__header">
 

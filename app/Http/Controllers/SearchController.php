@@ -140,5 +140,28 @@ class SearchController extends Controller
 
         return response()
             ->view('component.searchblock', ['results' => $results, 'total_cnt' => $total_cnt]);
-    }
-}
+    }        
+
+}            
+
+
+//use Illuminate\Http\Request;
+// use View;
+// use Cache;
+
+//use App\Content;
+//use App\Destination;
+//use App\Main;
+//use DB;
+
+// class SearchController2 extends Controller
+// {
+//     public function show()
+//     {
+//         $viewVariables = [];
+
+//         return response()
+//             ->view('pages.search.show', $viewVariables)
+//             ->header('Cache-Control', 'public, s-maxage='.config('cache.search.header'));
+//     }
+// }

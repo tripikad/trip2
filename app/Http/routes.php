@@ -72,6 +72,9 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
 });
 
+// Additional blog (DUMMY)
+Route::get('content/blog/profile', ['uses' => 'ContentController@blog_profile', 'as' => 'content.show.profile']);
+
 // Comments
 
 Route::post('content/{type}/{id}/comment', ['middleware' => 'role:regular', 'uses' => 'CommentController@store', 'as' => 'comment.store']);

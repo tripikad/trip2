@@ -33,6 +33,12 @@
 
     <div class="r-travelmates__wrap">
 
+        <div class="r-travelmates__filter">
+
+            @include('component.range_filter')
+
+        </div>
+
         <div class="r-travelmates__content">
 
             @if (count($contents))

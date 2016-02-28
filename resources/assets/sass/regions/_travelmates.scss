@@ -5,6 +5,17 @@
     .r-travelmates__wrap {
 
         @include wrap();
+
+        &.m-small {
+
+            padding-left: span(2 of 24);
+            padding-right: span(2 of 24);
+        }
+    }
+
+    .r-travelmates__filter {
+
+        padding-top: $spacer * 4;
     }
 
     .r-travelmates__content {
@@ -15,7 +26,7 @@
 
             @include span(16 of 24);
             padding-left: span(1 of 16);
-            padding-top: $spacer * 4;
+            padding-top: $spacer * 2;
         }
 
         @include respond-to(desktop) {
@@ -23,11 +34,23 @@
             padding-left: 0;
         }
 
+        .r-travelmates__wrap.m-small & {
+
+            padding-top: $spacer * 4;
+
+            @include respond-to(tablet) {
+
+                @include span(10 of 20);
+                padding-top: $spacer * 5;
+            }
+        }
+
         .r-travelmates.m-single & {
 
             @include respond-to(tablet) {
 
                 @include span(14 of 24);
+                padding-top: $spacer * 4;
             }
         }
     }
@@ -72,8 +95,17 @@
         @include respond-to(tablet) {
 
             @include span(7 of 24 at 2);
+        }
+
+        .r-travelmates__wrap.m-small & {
 
             padding-top: $spacer * 4;
+
+            @include respond-to(tablet) {
+
+                @include span(8 of 20 at 3);
+                padding-top: $spacer * 5;
+            }
         }
 
         .r-travelmates.m-single & {

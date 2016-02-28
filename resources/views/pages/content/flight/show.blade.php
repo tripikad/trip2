@@ -256,6 +256,7 @@
 
                     <div class="r-block__body">
 
+                        @include('component.facebook')
                     </div>
 
                 </div>
