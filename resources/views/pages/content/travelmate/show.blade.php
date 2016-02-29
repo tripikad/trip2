@@ -31,7 +31,7 @@
             <h1 class="r-travelmates__title">{{ $content->title }}</h1>
 
             <div class="r-travelmates__meta">
-
+                @include('component.actions', ['actions' => $content->getActions()])
                 <p class="r-travelmates__meta-date">
                     {{ trans('content.travelmate.post.added', [
                         'created_at' => view('component.date.relative', [
