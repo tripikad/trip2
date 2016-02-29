@@ -42,7 +42,7 @@
 
     <div class="r-blog__content">
 
-{{--
+<!--
         @include('component.row', [
             'profile' => [
                 'modifiers' => '',
@@ -56,7 +56,7 @@
             'extra' => view('component.flags', ['flags' => $content->getFlags()]),
             'body' => $content->body_filtered,
         ])
---}}
+-->
 
         <div class="c-blog-single">
 
@@ -66,7 +66,7 @@
 
                     <div class="c-blog-single__body">
 
-                        {{-- {!! $content->body_filtered !!}  --}}
+                        <!-- {!! $content->body_filtered !!}  -->
 
                         <div class="c-blog-single__iframe">
 
@@ -202,7 +202,7 @@
                         ])
                     </div>
 
-                    {{-- @include('component.comment.index', ['comments' => $comments]) --}}
+                    <!-- @include('component.comment.index', ['comments' => $comments]) -->
 
                     @include('component.content.forum.post', [
                         'profile' => [

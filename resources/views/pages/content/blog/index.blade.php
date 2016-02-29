@@ -20,8 +20,8 @@
 
 @section('content')
 
-{{-- OLD CONTENT
 
+    <!--
     @foreach ($contents as $content)
 
         @include('component.row', [
@@ -42,7 +42,7 @@
     @include('component.pagination.default', [
         'collection' => $contents
     ])
---}}
+    -->
 
 <div class="r-blog m-index">
 
