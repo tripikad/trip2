@@ -42,7 +42,7 @@
 
     <div class="r-blog__content">
 
-<!--
+{{-- VANA BLOGI --}}
         @include('component.row', [
             'modifiers' => 'm-image',
             'profile' => [
@@ -56,7 +56,7 @@
             'extra' => view('component.flags', ['flags' => $content->getFlags()]),
             'body' => $content->body_filtered,
         ])
--->
+{{-- VANA BLOGI --}}
 
         <div class="c-blog-single">
 
@@ -66,8 +66,9 @@
 
                     <div class="c-blog-single__body">
 
-                        <!-- {!! $content->body_filtered !!}  -->
+                        {!! $content->body_filtered !!}
 
+                        {{--UUS BLOGI
                         <div class="c-blog-single__iframe">
 
                             <iframe src="https://player.vimeo.com/video/153737805" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -87,7 +88,7 @@
                             <li>“Trick those guys into leaving us alone.”</li>
                         </ul>
 
-                        <p>So I suggested it and they were literally like “Wow. I didn’t even think of that.” It made me a little sad. These were smart young women that go to good schools and somehow it had not been communicated to them at any point that they could set boundaries with men. We talked about the commerce of the guys buying them drinks and that if they didn’t want to feel like they owed the guys anything not to let them buy. We also talked about the fact that even though the guys bought them drinks they didn’t owe them anything anyway. And as I left I emphasized how it is always ok to say “No thank you.”</p>
+                        <p>So I suggested it and they were literally like “Wow. I didn’t even think of that.” It made me a little sad. These were smart young women that go to good schools and somehow it had not been communicated to them at any point that they could set boundaries with men. We talked about the commerce of the guys buying them drinks and that if they didn’t want to feel like they owed the guys anything not to let them buy. We also talked about the fact that even though the guys bought them drinks they didn’t owe them anything anyway. And as I left I emphasized how it is always ok to say “No thank you.”</p> --}}
                     </div>
                 </div>
             </div>
