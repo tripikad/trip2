@@ -975,8 +975,6 @@ class ConvertBase extends Command
         if (isset($genderMap[$string])) {
             return $genderMap[$string];
         }
-
-        return;
     }
 
     public function convertBirthyear($string)
@@ -984,7 +982,5 @@ class ConvertBase extends Command
         if (preg_match('/[12][0-9]{3}/', $string) && intval($string) > 1915 && intval($string) < 2010) {
             return intval($string);
         }
-
-        return;
     }
 }
