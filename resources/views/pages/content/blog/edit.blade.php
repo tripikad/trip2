@@ -59,23 +59,28 @@
                     </div>
                 </div>
 
+                {!! Form::model(isset($model) ? $model : null, [
+                    'url' => $url,
+                    'method' => isset($method) ? $method : 'post'
+                ]) !!}
+
                 <div class="c-form__group">
-                    {!! Form::label('blog-post-title', 'Pealkiri', [
+                    {!! Form::label('title', 'Pealkiri', [
                         'class' => 'c-form__label'
                     ]) !!}
                     <div class="c-form__input-wrap">
-                        {!! Form::text('blog-post-title', null, [
+                        {!! Form::text('title', null, [
                             'class' => 'c-form__input',
                         ]) !!}
                     </div>
                 </div>
 
                 <div class="c-form__group">
-                    {!! Form::label('blog-post-body', 'Sisu', [
+                    {!! Form::label('body', 'Sisu', [
                         'class' => 'c-form__label'
                     ]) !!}
                     <div class="c-form__input-wrap">
-                        {!! Form::textarea('blog-post-body', null, [
+                        {!! Form::textarea('body', null, [
                             'class' => 'c-form__input m-high js-ckeditor',
                             'placeholder' => '',
                         ]) !!}
@@ -101,7 +106,8 @@
                                    ],
                                    'name' => 'blog-post-bg-image',
                                    'maxFileSize' => 5,
-                                   'uploadMultiple' => false
+                                   'uploadMultiple' => false,
+                                   'fields' => null
                                ])
                            </div>
                         </div>
@@ -127,19 +133,20 @@
                            ],
                            'name' => 'blog-post-gallery-images',
                            'maxFileSize' => 5,
-                           'uploadMultiple' => true
+                           'uploadMultiple' => true,
+                           'fields' => null
                        ])
                    </div>
                 </div>
 
                 <div class="c-form__group m-large-margin">
-                    {!! Form::label('blog-post-tags', 'Tag\'id', [
+                    {!! Form::label('topics', 'Tag\'id', [
                         'class' => 'c-form__label'
                     ]) !!}
                     <div class="c-form__group-select">
-                        {!! Form::select('blog-post-tags', ['Reisivarustus', 'Lennupiletid', 'Muu'], null, [
+                        {!! Form::select('topics[]', $topics, $topic, [
                             'class' => 'c-select js-filter',
-                            'id' => 'blog-post-tags',
+                            'id' => 'topics',
                             'placeholder' => 'Vali',
                             'multiple' => 'true',
                         ]) !!}
@@ -152,9 +159,11 @@
                     <a href="#" class="c-button m-tertiary m-large m-block">Vaata eelvaadet</a>
                 </div>
 
-                {!! Form::submit('Avalda', [
+                {!! Form::submit(trans("content.$mode.submit.title"), [
                     'class' => 'c-button m-large m-block'
                 ]) !!}
+
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
