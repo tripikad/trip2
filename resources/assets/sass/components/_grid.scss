@@ -93,6 +93,16 @@
             }
         }
 
+        .c-columns.m-3-cols.m-space & {
+
+            flex: 1 0 100%;
+
+            @include respond-to(tablet-portrait) {
+
+                flex: 0 1 30%;
+            }
+        }
+
         .c-columns.m-4-cols.m-space & {
 
             flex: 1 0 100%;

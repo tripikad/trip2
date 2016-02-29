@@ -244,12 +244,21 @@
 
         color: $color-text-neutral-darker;
         font-size: $font-size-normal;
+        line-height: 1.25;
         display: block;
         margin-bottom: $spacer;
 
         @include respond-to(tablet) {
 
             margin-bottom: $spacer * 2;
+        }
+
+        &.m-small-margin {
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer;
+            }
         }
     }
 

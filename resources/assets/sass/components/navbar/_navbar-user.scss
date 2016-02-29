@@ -31,6 +31,11 @@
 
                 color: $color-white;
             }
+
+            .m-alternative .m-blog & {
+
+                color: $color-text-gray;
+            }
         }
 
             .c-navbar-user__item-text {
@@ -84,7 +89,7 @@
                 border-right-color: $transparent;
                 border-bottom-color: inherit;
 
-                @include respond-to(tablet) {
+                @include respond-to(desktop) {
 
                     right: $spacer * 6;
                 }
