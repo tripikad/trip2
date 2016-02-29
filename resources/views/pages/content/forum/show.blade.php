@@ -29,7 +29,6 @@
     </div>
 
     <div class="r-forum__wrap">
-
         <div class="r-forum__content">
 
             @include('component.content.forum.post', [
