@@ -53,8 +53,6 @@ class Content extends Model
         if ($this->destinations->first()) {
             return $this->destinations->first()->parent()->first();
         }
-
-        return null;
     }
 
     public function followersEmails()
@@ -96,8 +94,6 @@ class Content extends Model
         if ($this->images->count() > 0) {
             return $this->images->first()->preset($preset);
         }
-
-        return null;
     }
 
     public function getImageIdAttribute()
@@ -105,8 +101,6 @@ class Content extends Model
         if ($image = $this->images()->first()) {
             return '[['.$image->id.']]';
         }
-
-        return null;
     }
 
     public function getActions()
