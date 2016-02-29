@@ -44,12 +44,12 @@
 
 <!--
         @include('component.row', [
+            'modifiers' => 'm-image',
             'profile' => [
                 'modifiers' => '',
                 'image' => $content->user->imagePreset(),
                 'route' => route('user.show', [$content->user])
             ],
-            'modifiers' => 'm-image',
             'title' => $content->title,
             'text' => view('component.content.text', ['content' => $content]),
             'actions' => view('component.actions', ['actions' => $content->getActions()]),
@@ -202,7 +202,7 @@
                         ])
                     </div>
 
-                    <!-- @include('component.comment.index', ['comments' => $comments]) -->
+                    <!-- @include('component.comment.index', ['comments' => $content->comments]) -->
 
                     @include('component.content.forum.post', [
                         'profile' => [
