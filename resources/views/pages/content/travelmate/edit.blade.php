@@ -47,117 +47,107 @@
                     'method' => isset($method) ? $method : 'post'
                 ]) !!}
 
-                <div class="c-form__input-wrap">
-                    <div class="c-form__group">
-                        {!! Form::label('destinations', 'Sihtkoht', [
-                            'class' => 'c-form__label'
-                        ]) !!}
-                        {!! Form::select('destinations[]', $destinations, $destination, [
-                            'class' => 'js-filter',
-                            'id' => 'destinations',
-                            'multiple' => 'true',
+                <div class="c-form__group">
+                    {!! Form::label('destinations', 'Sihtkoht', [
+                        'class' => 'c-form__label'
+                    ]) !!}
+                    {!! Form::select('destinations[]', $destinations, $destination, [
+                        'class' => 'js-filter',
+                        'id' => 'destinations',
+                        'multiple' => 'true',
+                    ]) !!}
+                </div>
+
+                <div class="c-form__group">
+                    {!! Form::label('topics', 'Reisistiil', [
+                        'class' => 'c-form__label'
+                    ]) !!}
+                    <div class="c-form__group-select">
+                        {!! Form::select('topics[]', $topics, $topic, [
+                            'class' => 'c-form__select',
+                            'id' => 'topics',
+                            'placeholder' => 'Vali stiil',
                         ]) !!}
                     </div>
                 </div>
 
-                <div class="c-form__input-wrap">
-                    <div class="c-form__group">
-                        {!! Form::label('topics', 'Reisistiil', [
-                            'class' => 'c-form__label'
-                        ]) !!}
-                        <div class="c-form__group-select">
-                            {!! Form::select('topics[]', $topics, $topic, [
-                                'class' => 'c-form__select',
-                                'id' => 'topics',
-                                'placeholder' => 'Vali stiil',
-                            ]) !!}
+                <div class="c-form__group">
+                    <div class="c-form__label">
+                        {{ trans("content.travelmate.edit.field.start_at.title") }}
+                    </div>
+
+                    <div class="c-columns m-6-cols m-space">
+                        <div class="c-columns__item">
+                            @include('component.date.select', [
+                                'from' => 1,
+                                'to' => 31,
+                                'selected' => \Carbon\Carbon::now()->day,
+                                'key' => 'start_at_day'
+                            ])
+                        </div>
+                        <div class="c-columns__item">
+                            @include('component.date.select', [
+                                'month' => true,
+                                'selected' => \Carbon\Carbon::now()->month,
+                                'key' => 'start_at_month'
+                            ])
+                        </div>
+                        <div class="c-columns__item">
+                            @include('component.date.select', [
+                                'from' => \Carbon\Carbon::now()->year,
+                                'to' => \Carbon\Carbon::parse('+5 years')->year,
+                                'selected' => \Carbon\Carbon::now()->year,
+                                'key' => 'start_at_year'
+                            ])
+                        </div>
+                        <div class="c-columns__item">
+                            @include('component.date.select', [
+                                'from' => 0,
+                                'to' => 23,
+                                'selected' => \Carbon\Carbon::now()->hour,
+                                'key' => 'start_at_hour'
+                            ])
+                        </div>
+                        <div class="c-columns__item">
+                            @include('component.date.select', [
+                                'from' => 0,
+                                'to' => 59,
+                                'selected' => \Carbon\Carbon::now()->minute,
+                                'key' => 'start_at_minute'
+                            ])
+                        </div>
+                        <div class="c-columns__item">
+                            @include('component.date.select', [
+                                'from' => 0,
+                                'to' => 59,
+                                'selected' => '00',
+                                'key' => 'start_at_second'
+                            ])
                         </div>
                     </div>
                 </div>
 
-                <div class="c-form__input-wrap">
-                    <div class="c-form__group">
-                        <div class="c-form__label">
-                            {{ trans("content.travelmate.edit.field.start_at.title") }}
-                        </div>
-
-                        <div class="c-columns m-6-cols m-space">
-                            <div class="c-columns__item">
-                                @include('component.date.select', [
-                                    'from' => 1,
-                                    'to' => 31,
-                                    'selected' => \Carbon\Carbon::now()->day,
-                                    'key' => 'start_at_day'
-                                ])
-                            </div>
-                            <div class="c-columns__item">
-                                @include('component.date.select', [
-                                    'month' => true,
-                                    'selected' => \Carbon\Carbon::now()->month,
-                                    'key' => 'start_at_month'
-                                ])
-                            </div>
-                            <div class="c-columns__item">
-                                @include('component.date.select', [
-                                    'from' => \Carbon\Carbon::now()->year,
-                                    'to' => \Carbon\Carbon::parse('+5 years')->year,
-                                    'selected' => \Carbon\Carbon::now()->year,
-                                    'key' => 'start_at_year'
-                                ])
-                            </div>
-                            <div class="c-columns__item">
-                                @include('component.date.select', [
-                                    'from' => 0,
-                                    'to' => 23,
-                                    'selected' => \Carbon\Carbon::now()->hour,
-                                    'key' => 'start_at_hour'
-                                ])
-                            </div>
-                            <div class="c-columns__item">
-                                @include('component.date.select', [
-                                    'from' => 0,
-                                    'to' => 59,
-                                    'selected' => \Carbon\Carbon::now()->minute,
-                                    'key' => 'start_at_minute'
-                                ])
-                            </div>
-                            <div class="c-columns__item">
-                                @include('component.date.select', [
-                                    'from' => 0,
-                                    'to' => 59,
-                                    'selected' => '00',
-                                    'key' => 'start_at_second'
-                                ])
-                            </div>
-                        </div>
+                <div class="c-form__group">
+                    {!! Form::label('planned_date', 'Planeeritud aeg', [
+                        'class' => 'c-form__label'
+                    ]) !!}
+                    <div class="c-form__group-select">
+                        {!! Form::select('planned_date', ['Talv 2016', 'Suvi 2017', 'Kevad 2017'], null, [
+                            'class' => 'c-form__select',
+                            'id' => 'topics',
+                            'placeholder' => 'Vali aeg',
+                        ]) !!}
                     </div>
                 </div>
 
-                <div class="c-form__input-wrap">
-                    <div class="c-form__group">
-                        {!! Form::label('planned_date', 'Planeeritud aeg', [
-                            'class' => 'c-form__label'
-                        ]) !!}
-                        <div class="c-form__group-select">
-                            {!! Form::select('planned_date', ['Talv 2016', 'Suvi 2017', 'Kevad 2017'], null, [
-                                'class' => 'c-form__select',
-                                'id' => 'topics',
-                                'placeholder' => 'Vali aeg',
-                            ]) !!}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="c-form__input-wrap">
-                    <div class="c-form__group">
-                        {!! Form::label('body', 'Sobiva kaaslase kirjeldus', [
-                            'class' => 'c-form__label'
-                        ]) !!}
-                        {!! Form::textarea('body', null, [
-                            'class' => 'c-form__input m-high',
-                            'placeholder' => 'Kirjelda sinule sobivat reisikaaslast. Kui oled nõus reisima igaühega, siis ütle ka seda …',
-                        ]) !!}
-                    </div>
+                <div class="c-form__group">
+                    {!! Form::label('body', 'Sobiva kaaslase kirjeldus', [
+                        'class' => 'c-form__label'
+                    ]) !!}
+                    {!! Form::textarea('body', null, [
+                        'class' => 'c-form__input m-high js-ckeditor',
+                        'placeholder' => 'Kirjelda sinule sobivat reisikaaslast. Kui oled nõus reisima igaühega, siis ütle ka seda …',
+                    ]) !!}
                 </div>
 
                 <div class="c-form__group">
@@ -205,30 +195,25 @@
                     </div>
                 </div>
 
-                <div class="c-form__input-wrap">
-                    <div class="c-form__group">
-                        {!! Form::label('title', 'Pealkiri', [
-                            'class' => 'c-form__label'
-                        ]) !!}
-                        {!! Form::text('title', null, [
-                            'class' => 'c-form__input',
-                            'placeholder' => 'nt. "Seiklusreis Alaskale", "Veebruaris Aasiasse" jms',
-                        ]) !!}
-                    </div>
+                <div class="c-form__group">
+                    {!! Form::label('title', 'Pealkiri', [
+                        'class' => 'c-form__label'
+                    ]) !!}
+                    {!! Form::text('title', null, [
+                        'class' => 'c-form__input',
+                        'placeholder' => 'nt. "Seiklusreis Alaskale", "Veebruaris Aasiasse" jms',
+                    ]) !!}
                 </div>
 
-                <div class="c-form__input-wrap">
-                    <div class="c-form__group">
-                        {!! Form::label('additional_info', 'Lisainfo', [
-                            'class' => 'c-form__label'
-                        ]) !!}
-                        {!! Form::textarea('additional_info', null, [
-                            'class' => 'c-form__input m-high',
-                            'placeholder' => 'Sinu nägemus reisist (mida kindlalt soovid näha, mis on umbkaudne eelarve jms)…',
-                        ]) !!}
-                    </div>
+                <div class="c-form__group">
+                    {!! Form::label('additional_info', 'Lisainfo', [
+                        'class' => 'c-form__label'
+                    ]) !!}
+                    {!! Form::textarea('additional_info', null, [
+                        'class' => 'c-form__input m-high js-ckeditor',
+                        'placeholder' => 'Sinu nägemus reisist (mida kindlalt soovid näha, mis on umbkaudne eelarve jms)…',
+                    ]) !!}
                 </div>
-
 
                 {!! Form::submit(trans("content.$mode.submit.title"), [
                     'class' => 'c-button m-large m-block'

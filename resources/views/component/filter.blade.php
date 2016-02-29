@@ -2,7 +2,7 @@
     'url' => route('content.filter', [$type]),
 ]) !!}
 
-    <div class="c-form__group">
+    <div class="c-form__group m-small-margin">
 
         {!! Form::select(
             'destination',
@@ -16,7 +16,7 @@
 
     </div>
 
-    <div class="c-form__group">
+    <div class="c-form__group m-small-margin">
 
         {!! Form::select(
             'topic',
@@ -30,7 +30,7 @@
 
     </div>
 
-    <div class="c-form__group">
+    <div class="c-form__group m-small-margin">
 
         {!! Form::submit(
             trans('content.index.filter.submit.title'),
