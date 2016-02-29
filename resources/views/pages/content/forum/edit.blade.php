@@ -42,15 +42,9 @@
 
             <div class="r-forum__content">
 
+                <h1 class="c-forum-title m-large">Alusta uut teemat</h1>
+
                 <div class="r-block">
-
-                    <div class="r-block__header">
-
-                        @include('component.title', [
-                            'modifiers' => 'm-largest m-blue',
-                            'title' => 'Alusta uut teemat'
-                        ])
-                    </div>
 
                     {!! Form::model(isset($model) ? $model : null, [
                         'url' => $url,

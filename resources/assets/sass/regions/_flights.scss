@@ -48,13 +48,35 @@
             @include respond-to(tablet) {
 
                 @include span(14 of 24);
+
+                padding-top: $spacer * 4;
+            }
+        }
+
+        .r-flights.m-create & {
+
+            padding-top: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                @include span(14 of 24);
+
+                float: none;
+                margin: 0 auto;
+                padding-top: $spacer * 4;
             }
         }
     }
 
         .r-flights__content-filter {
 
-            padding-top: $spacer * 4;
+            display: none;
+
+            @include respond-to(tablet) {
+
+                display: block;
+                padding-top: $spacer * 4;
+            }
         }
 
         .r-flights__content-header-meta {
@@ -84,7 +106,7 @@
 
     .r-flights__forum {
 
-        padding: $spacer * 4 0;
+        padding: $spacer * 2 0;
         background: $color-fill-neutral-light;
 
         @include respond-to(tablet) {
@@ -112,7 +134,7 @@
 
                 &.m-first {
 
-                    padding-bottom: $spacer * 4;
+                    padding-bottom: $spacer * 2;
 
                     @include respond-to(tablet) {
 
@@ -133,8 +155,19 @@
 
     .r-flights__footer-promo {
 
+        display: none;
         background: $color-fill-neutral-light;
-        margin-bottom: -$spacer * 4;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: -$spacer * 4;
+            display: block;
+        }
+
+        &.m-white {
+
+            background: $color-white;
+        }
     }
 
         .r-flights__footer-promo-wrap {
@@ -160,6 +193,11 @@
         padding-top: $spacer * 12;
         background: $color-fill-neutral-light;
     }
+
+        .r-flights__travel-mates-title {
+
+            margin-bottom: $spacer * 2;
+        }
 
         .r-flights__travel-mates-wrap {
 
