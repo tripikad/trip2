@@ -976,7 +976,7 @@ class ConvertBase extends Command
             return $genderMap[$string];
         }
 
-        return;
+        return null;
     }
 
     public function convertBirthyear($string)
@@ -985,6 +985,6 @@ class ConvertBase extends Command
             return intval($string);
         }
 
-        return;
+        return null;
     }
 }

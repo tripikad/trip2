@@ -54,7 +54,7 @@ class Content extends Model
             return $this->destinations->first()->parent()->first();
         }
 
-        return;
+        return null;
     }
 
     public function followersEmails()
@@ -97,7 +97,7 @@ class Content extends Model
             return $this->images->first()->preset($preset);
         }
 
-        return;
+        return null;
     }
 
     public function getImageIdAttribute()
@@ -106,7 +106,7 @@ class Content extends Model
             return '[['.$image->id.']]';
         }
 
-        return;
+        return null;
     }
 
     public function getActions()
