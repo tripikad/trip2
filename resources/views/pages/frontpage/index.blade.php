@@ -144,6 +144,18 @@
                                 'route' => route('content.index', 'expat'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
+                            ],
+                            [
+                                'type' => 'button',
+                                'title' => 'Otsi foorumist',
+                                'route' => '#',
+                                'modifiers' => 'm-secondary m-block m-shadow'
+                            ],
+                            [
+                                'type' => 'button',
+                                'title' => 'Alusta teemat',
+                                'route' => '#',
+                                'modifiers' => 'm-secondary m-block m-shadow'
                             ]
                         ]
                     ])
