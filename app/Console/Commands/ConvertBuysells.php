@@ -42,14 +42,14 @@ class ConvertBuysells extends ConvertBase
             $node->type = $type ? $type[0]->name : null;
 
             /*
-            
+
             $fields = [
                 'category',
                 'type',
                 'field_buysellprice_value',
                 'field_buysellcontact_value'
             ];
-            
+
             */
 
             if ($node->type) {

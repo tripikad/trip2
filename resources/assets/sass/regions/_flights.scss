@@ -48,6 +48,22 @@
             @include respond-to(tablet) {
 
                 @include span(14 of 24);
+
+                padding-top: $spacer * 4;
+            }
+        }
+
+        .r-flights.m-create & {
+
+            padding-top: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                @include span(14 of 24);
+
+                float: none;
+                margin: 0 auto;
+                padding-top: $spacer * 4;
             }
         }
     }
@@ -128,7 +144,7 @@
 
                 &.m-first {
 
-                    padding-bottom: $spacer * 4;
+                    padding-bottom: $spacer * 2;
 
                     @include respond-to(tablet) {
 
@@ -153,9 +169,14 @@
 
         @include respond-to(tablet) {
 
-            display: block;
             margin-bottom: -$spacer * 4;
+            display: block;
             background: $color-fill-neutral-light;
+        }
+
+        &.m-white {
+
+            background: $color-white;
         }
     }
 

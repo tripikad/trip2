@@ -2,7 +2,7 @@
 
     <div class="c-search__form">
 
-        <span class="c-search__form-icon">
+        <span class="c-search__form-icon js-search__form-icon">
 
             @include('component.svg.sprite', [
                 'name' => 'icon-search'
