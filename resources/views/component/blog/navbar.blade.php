@@ -7,8 +7,8 @@
         @include('component.navbar.list', [
             'items' => [
                 [
-                    'title' => 'Lisa uus',
-                    'route' => '/content/blog/create',
+                    'title' => trans("content.blog.create.title"),
+                    'route' => route('content.create', ['type' => 'blog']),
                     'modifiers' => 'm-border'
                 ]
             ]
