@@ -9,7 +9,6 @@
             @include('component.logo', [
                 'modifiers' => 'm-small'
             ])
-
         </a>
 
         @else
@@ -19,7 +18,6 @@
             @include('component.logo', [
                 'modifiers' => 'm-small m-dark'
             ])
-
         </a>
 
         @endif
@@ -130,15 +128,17 @@
             ])
 
         @endif
+
+        <div class="c-header__nav-search">
+
+            @include('component.header.search',[
+                'modifiers' => 'm-small m-red m-active',
+                'placeholder' => ''
+            ])
+        </div>
     </div>
 
     @if(!Request::is('/'))
-
-    <a href="#" class="c-header__search-trigger js-header__search-trigger">
-        @include('component.svg.sprite', [
-            'name' => 'icon-search'
-        ])
-    </a>
 
     <div class="c-header__search js-header__search">
 

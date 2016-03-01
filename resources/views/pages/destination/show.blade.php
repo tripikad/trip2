@@ -120,7 +120,6 @@
                         \App\Image::getRandom()
                 )
         ])
-
     </div>
 
     <div class="r-destination__about m-yellow">
@@ -143,7 +142,6 @@
                             'title' => trans('destination.show.link.view.all'),
                             'route' => route('content.index', ['flights'])
                         ])
-
                     </div>
 
                     @foreach ($features['flights']['contents'] as $flight)

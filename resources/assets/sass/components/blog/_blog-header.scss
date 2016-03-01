@@ -39,29 +39,21 @@
         }
     }
 
-    .c-blog-header__search-trigger {
+        .c-blog-header__nav-search {
 
-        float: right;
-        position: relative;
-        display: block;
-        height: $spacer * 4;
-        width: $spacer * 4;
-        margin-top: $spacer * 1.25;
-        background: $color-fill-neutral-darker;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 9999;
+            display: block;
+            width: 100%;
+            padding: $spacer;
 
-        @include respond-to(tablet) {
+            @include respond-to(tablet) {
 
-            display: none;
+                display: none;
+            }
         }
-
-        svg {
-
-            fill: $color-white;
-            height: $spacer * 2;
-            width: $spacer * 2;
-            margin: $spacer;
-        }
-    }
 
     .c-blog-header__search {
 
@@ -92,20 +84,20 @@
 
     .c-blog-header__back {
 
-        color: $color-white;
-        font-weight: $font-weight-bold;
-        float: left;
-        position: relative;
-        left: $spacer;
-        z-index: 100;
-        display: block;
-        padding: $spacer $spacer $spacer $spacer * 1.5;
-        margin-top: $spacer * 0.75;
-        text-decoration: none;
+        display: none;
 
         @include respond-to(tablet) {
 
+            color: $color-white;
+            font-weight: $font-weight-bold;
+            float: left;
+            position: relative;
             left: -$spacer * 9;
+            z-index: 100;
+            display: block;
+            padding: $spacer $spacer $spacer $spacer * 1.5;
+            margin-top: $spacer * 0.75;
+            text-decoration: none;
         }
 
         .c-blog-header.m-alternative & {
@@ -144,12 +136,19 @@
 
     .c-blog-header__logo {
 
-        position: absolute;
-        top: -$spacer;
-        left: 50%;
-        width: $spacer * 23.5;
-        height: $spacer * 11;
-        transform: translateX(-50%);
+        display: none;
+
+        @include respond-to(tablet) {
+
+            position: absolute;
+            top: -$spacer;
+            left: 50%;
+            display: block;
+            width: $spacer * 23.5;
+            height: $spacer * 11;
+            transform: translateX(-50%);
+            margin-left: -$spacer * 3;
+        }
     }
 
         .c-blog-header__logo-link {
@@ -158,6 +157,29 @@
             height: 100%;
             width: 100%;
         }
+
+    .c-blog-header__logo-mobile {
+
+        position: absolute;
+        top: $spacer * 2 + 4;
+        left: $spacer;
+        height: $spacer * 2 - 2;
+        display: block;
+
+        @include respond-to(tablet) {
+
+            display: none;
+        }
+
+        .c-blog-header.m-show &,
+        .c-blog-header.m-profile & {
+
+            svg {
+
+                fill: $color-white;
+            }
+        }
+    }
 
     .c-blog-header__user {
 

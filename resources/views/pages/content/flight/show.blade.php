@@ -644,6 +644,7 @@
 
                     @include('component.about', [
                         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+                        'text' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',

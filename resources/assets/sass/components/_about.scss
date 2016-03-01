@@ -1,7 +1,10 @@
 .c-about {
 
-    display: flex;
-    flex-flow: row wrap;
+    @include respond-to(tablet) {
+
+        display: flex;
+        flex-flow: row wrap;
+    }
 
     &.m-wide {
 
@@ -40,7 +43,7 @@
 
             .c-about.m-wide & {
 
-                font-size: $font-size-larger;
+                font-size: $font-size-large;
                 line-height: 1.15;
             }
         }
@@ -73,7 +76,7 @@
 
         .c-about.m-wide & {
 
-            padding: $spacer * 4 0 0;
+            padding: $spacer * 2 0 0;
 
             @include respond-to(tablet) {
 

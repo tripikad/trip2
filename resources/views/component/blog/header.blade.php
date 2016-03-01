@@ -200,13 +200,14 @@
 
         @endif
 
-    </div>
+        <div class="c-blog-header__nav-search">
 
-    <a href="#" class="c-blog-header__search-trigger js-header__search-trigger">
-        @include('component.svg.sprite', [
-            'name' => 'icon-search'
-        ])
-    </a>
+            @include('component.header.search',[
+                'modifiers' => 'm-small m-red m-blog m-active',
+                'placeholder' => ''
+            ])
+        </div>
+    </div>
 
     <div class="c-blog-header__search js-header__search">
 
@@ -228,6 +229,32 @@
     @if (isset($back))
 
     <a href="{{ $back['route'] }}" class="c-blog-header__back">{{ $back['title'] }}</a>
+
+        @if ($back['title'] === 'trip.ee blogid')
+
+        <div class="c-blog-header__logo-mobile">
+
+            <a href="{{ $back['route'] }}" class="c-blog-header__logo-link">
+
+                @include('component.svg.standalone', [
+                    'name' => 'tripee_logo_plain_blog_dark'
+                ])
+            </a>
+        </div>
+
+        @else
+
+        <div class="c-blog-header__logo-mobile m-small">
+
+            <a href="{{ $back['route'] }}" class="c-blog-header__logo-link">
+
+                @include('component.svg.standalone', [
+                    'name' => 'tripee_logo_plain_dark'
+                ])
+            </a>
+        </div>
+
+        @endif
 
     @endif
 

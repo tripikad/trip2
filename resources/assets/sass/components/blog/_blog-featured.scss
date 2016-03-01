@@ -134,7 +134,12 @@
             font-family: $font-secondary;
             font-size: $font-size-medium;
             line-height: 1.75;
-            margin-bottom: $spacer * 2;
+            margin-bottom: $spacer;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 2;
+            }
 
             .c-blog-featured.m-small & {
 

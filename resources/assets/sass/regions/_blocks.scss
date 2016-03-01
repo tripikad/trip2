@@ -2,7 +2,6 @@
 
     @include clearfix;
 
-    overflow: hidden;
     margin-bottom: $spacer * 2;
 
     @include respond-to(tablet) {
@@ -10,11 +9,34 @@
         margin-bottom: $spacer * 6;
     }
 
+    &.m-contain {
+
+        overflow: hidden;
+    }
+
     &.m-small {
 
         @include respond-to(tablet) {
 
             margin-bottom: $spacer * 2.5;
+        }
+
+        &.m-no-mobile-margin {
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 2.5;
+            }
+        }
+
+        &.m-no-margin {
+
+            margin-bottom: 0;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: 0;
+            }
         }
     }
 
@@ -28,12 +50,35 @@
         }
     }
 
+    &.m-no-mobile-margin {
+
+        margin-bottom: 0;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 6;
+        }
+    }
+
+    &.m-no-margin {
+
+        margin-bottom: 0;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: 0;
+        }
+    }
+
     &.m-flex {
 
-        display: flex;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        justify-content: space-between;
+        @include respond-to(tablet) {
+
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
 
         &:after,
         &:before {

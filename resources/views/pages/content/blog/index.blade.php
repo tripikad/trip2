@@ -48,7 +48,9 @@
 
     <div class="r-blog__masthead">
 
-        @include('component.blog.masthead')
+        @include('component.blog.masthead', [
+            'modifiers' => 'm-index'
+        ])
     </div>
 
     <div class="r-blog__featured-main">
@@ -396,7 +398,7 @@
 
             <div class="r-blog__main-content">
 
-                <div class="r-block m-small">
+                <div class="r-block m-small m-no-mobile-margin">
 
                     <div class="r-block__header">
                         @include('component.title', [
@@ -560,7 +562,7 @@
                     </div>
                 </div>
 
-                <div class="r-block">
+                <div class="r-block m-mobile-hide">
                     @include('component.promo', [
                         'modifiers' => 'm-body',
                         'route' => '',
@@ -570,7 +572,7 @@
 
                 <div class="r-block m-small">
 
-                    <div class="c-blog-article">
+                    <div class="c-blog-article m-last">
 
                         <h3 class="c-blog-article__title"><a href="#" class="c-blog-article__title-link">Zhangbei, China, is a county formerly in the Chahar province</a></h3>
 
@@ -730,7 +732,7 @@
                     ])
                 </div>
 
-                <div class="r-block m-small">
+                <div class="r-block m-small m-mobile-hide">
 
                     @include('component.promo', [
                         'modifiers' => 'm-sidebar-small',
@@ -739,7 +741,7 @@
                     ])
                 </div>
 
-                <div class="r-block m-small">
+                <div class="r-block m-small m-mobile-hide">
 
                     @include('component.promo', [
                         'modifiers' => 'm-sidebar-large',

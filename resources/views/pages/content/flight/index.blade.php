@@ -616,7 +616,7 @@
             <div class="r-flights__forum-title">
 
                 @include('component.title', [
-                    'modifiers' => 'm-yellow',
+                    'modifiers' => 'm-red',
                     'title' => 'Tripikad räägivad'
                 ])
 
@@ -775,7 +775,84 @@
                                     'route' => ''
                                 ]
                             ]
-                        ]
+                        ],
+                        [
+                            'topic' => 'Samui hotellid?',
+                            'route' => '#',
+                            'date' => 'Täna, 15:12',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 9
+                            ],
+                            'tags' => [
+                                [
+                                    'title' => 'Inglismaa',
+                                    'modifiers' => 'm-green',
+                                    'route' => ''
+                                ],
+                                [
+                                    'title' => 'London',
+                                    'modifiers' => 'm-purple',
+                                    'route' => ''
+                                ],
+                            ]
+                        ],
+                        [
+                            'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
+                            'route' => '#',
+                            'date' => 'Täna, 12:17',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 4
+                            ],
+                            'tags' => [
+                                [
+                                    'title' => 'Rongireis',
+                                    'modifiers' => 'm-gray',
+                                    'route' => ''
+                                ]
+                            ]
+                        ],
+                        [
+                            'topic' => 'Puhkuseosakud Tenerifel',
+                            'route' => '#',
+                            'date' => '10. detsember 2015',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 2
+                            ],
+                            'tags' => [
+                                [
+                                    'title' => 'Tenerife',
+                                    'modifiers' => 'm-red',
+                                    'route' => ''
+                                ]
+                            ]
+                        ],
                     ]
                 ])
             </div>
@@ -794,7 +871,6 @@
 
         </div>
     </div>
-
 </div>
 
 @stop

@@ -69,6 +69,11 @@
             @include wrap;
 
             position: relative;
+
+            @include respond-to(tablet) {
+
+                min-height: $spacer * 16.5;
+            }
         }
 
             .r-destination__about-column {

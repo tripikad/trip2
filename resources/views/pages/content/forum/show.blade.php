@@ -12,10 +12,7 @@
 
     <div class="r-forum__masthead">
 
-        @include('component.masthead', [
-            'modifiers' => 'm-forum',
-            'title' => 'forum'
-        ])
+        @include('component.forum.masthead')
 
         <div class="r-forum__map">
 
@@ -72,9 +69,7 @@
                     'image' => \App\Image::getRandom(),
                     'route' => '#'
                 ])
-
             </div>
-
 
             @if (method_exists($comments, 'currentPage'))
 
@@ -84,7 +79,6 @@
                         $comments->perPage()
                     )
                 ])
-
             @endif
 
             <div class="r-block">
@@ -92,15 +86,30 @@
                 @include('component.pagination.numbered', [
                     'collection' => $comments
                 ])
-
             </div>
 
             @if (\Auth::check())
 
             <div class="r-block">
 
-                @include('component.comment.create')
+                <div class="r-block__inner">
 
+                    <div class="r-block__header">
+
+                        <div class="r-block__header-title">
+
+                            @include('component.title', [
+                                'title' => 'Lisa kommentaar',
+                                'modifiers' => 'm-large m-green'
+                            ])
+                        </div>
+                    </div>
+
+                    <div class="r-block__body">
+
+                        @include('component.comment.create')
+                    </div>
+                </div>
             </div>
 
             @endif
@@ -409,7 +418,7 @@
 
                 @if (count($travel_mates))
 
-                    <div class="r-block">
+                    <div class="r-block m-no-mobile-margin">
                         <div class="r-block__header">
                             @include('component.title', [
                                 'title' => trans('frontpage.index.travelmate.title'),

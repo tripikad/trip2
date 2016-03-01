@@ -121,7 +121,7 @@
 
         @include respond-to(tablet) {
 
-            padding: $spacer * 4 0 $spacer * 12;
+            padding: $spacer * 4 0 $spacer * 8;
         }
     }
 
@@ -208,7 +208,6 @@
 
         @include respond-to(tablet) {
 
-            padding-bottom: $spacer * 6;
             padding-top: $spacer * 12;
         }
     }

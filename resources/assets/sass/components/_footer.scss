@@ -11,8 +11,8 @@
 
     &.m-alternative {
 
-        background-repeat: no-repeat;
         background-position: top center;
+        background-repeat: no-repeat;
         background-size: cover;
 
         &:after {
@@ -31,31 +31,34 @@
     .c-footer__wrap {
 
         @include wrap;
+
         position: relative;
         z-index: 2;
     }
 
         .c-footer__nav {
 
-            display: flex;
-            flex-flow: row wrap;
-            margin: 0 auto $spacer * 7;
+            margin: 0 0 $spacer * 2;
 
             @include respond-to(tablet) {
 
                 @include span(15 of 24);
 
+                display: flex;
+                flex-flow: row wrap;
                 float: none;
+                margin: 0 auto $spacer * 7;
             }
         }
 
             .c-footer__nav-logo-wrap {
 
-                flex: 0 1 100%;
+                margin-bottom: $spacer;
 
                 @include respond-to(tablet) {
 
                     flex: 0 1 22%;
+                    margin-bottom: 0;
                 }
             }
 
@@ -76,8 +79,6 @@
             .c-footer__nav-list {
 
                 @include clear-list;
-
-                flex: 0 1 100%;
 
                 @include respond-to(tablet-portrait) {
 
@@ -127,7 +128,12 @@
             @include clear-list;
 
             text-align: center;
-            margin-bottom: 48px;
+            margin-bottom: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 2;
+            }
         }
 
             .c-footer__social-item {

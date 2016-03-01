@@ -5,6 +5,14 @@
         .r-forum.m-single & {
 
             position: relative;
+            height: $spacer * 6.5;
+            overflow: hidden;
+
+            @include respond-to(tablet) {
+
+                overflow: visible;
+                height: auto;
+            }
         }
     }
 
@@ -75,6 +83,8 @@
 
         .r-forum.m-single & {
 
+            padding-top: $spacer * 2;
+
             @include respond-to(tablet) {
 
                 @include span(14 of 24);
@@ -98,11 +108,11 @@
 
     .r-forum__sidebar {
 
-        padding-top: $spacer * 4;
-
         @include respond-to(tablet) {
 
             @include span(7 of 24 at 3);
+
+            padding-top: $spacer * 4;
         }
 
         .r-forum.m-single & {
@@ -110,14 +120,10 @@
             @include respond-to(tablet) {
 
                 @include span(8 of 24 at 3);
-
-                padding-top: 0;
             }
         }
 
         .r-forum__wrap.m-small & {
-
-            padding-top: 0;
 
             @include respond-to(tablet) {
 
@@ -132,8 +138,13 @@
 
         @include clearfix;
 
-        padding: $spacer * 4 0 $spacer * 2;
+        padding: $spacer * 2 0 0;
         background: $color-fill-neutral-light;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 4 0 $spacer * 2;
+        }
     }
 
         .r-forum__additional-wrap {

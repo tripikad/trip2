@@ -161,6 +161,9 @@
 
         .c-columns.m-border & {
 
-            border-bottom: 1px solid $color-fill-neutral;
+            @include respond-to(tablet-portrait) {
+
+                border-bottom: 1px solid $color-fill-neutral;
+            }
         }
     }

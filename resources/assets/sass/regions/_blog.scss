@@ -67,11 +67,21 @@
 
 .r-blog__featured-list {
 
-    padding: $spacer * 4 0 0;
+    padding: 0;
 
     @include respond-to(tablet) {
 
         padding: $spacer * 4 0;
+    }
+
+    .r-blog.m-profile & {
+
+        padding-top: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 4 0;
+        }
     }
 }
 
@@ -157,9 +167,11 @@
 
     &.m-small {
 
+        padding: $spacer * 2 0;
+
         @include respond-to(tablet) {
 
-            padding-top: $spacer * 5 0;
+            padding: $spacer * 5 0;
         }
     }
 }
