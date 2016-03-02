@@ -428,9 +428,13 @@
 
     @endif
 
+
+
     <div class="r-user__additional">
 
         <div class="r-user__additional-wrap">
+
+        @if (isset($activities) && count($activities) > 0 || isset($activities) && count($activities) > 0)
 
             <div class="r-user__additional-content">
 
@@ -465,10 +469,7 @@
                     ])
 
                 @endif
-
             </div>
-
-
 
             <div class="r-user__additional-sidebar">
 
@@ -531,6 +532,8 @@
 
                 </div>
             </div>
+        @endif
+
         </div>
     </div>
 

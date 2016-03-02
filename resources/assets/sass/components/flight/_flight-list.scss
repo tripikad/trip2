@@ -17,6 +17,10 @@
         @include respond-to(tablet-portrait) {
 
             flex: 0 1 47%;
+        }
+
+        @include respond-to(desktop) {
+
             margin-bottom: $spacer * 4;
         }
     }

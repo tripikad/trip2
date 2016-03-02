@@ -38,8 +38,13 @@
 
                 float: none;
                 width: 100%;
-                margin-bottom: $spacer * 2.5;
+                margin-bottom: $spacer;
                 padding-bottom: 56.25%;
+            }
+
+            @include respond-to(desktop) {
+
+                margin-bottom: $spacer * 2.5;
             }
         }
     }
@@ -100,6 +105,11 @@
             @include respond-to(tablet) {
 
                 font-size: $font-size-largest + 6;
+                margin-bottom: $spacer * 1.5;
+            }
+
+            @include respond-to(desktop) {
+
                 margin-bottom: $spacer * 2.5;
             }
 
@@ -112,6 +122,11 @@
                 @include respond-to(tablet) {
 
                     font-size: $font-size-larger;
+                    margin-bottom: $spacer;
+                }
+
+                @include respond-to(desktop) {
+
                     margin-bottom: $spacer * 2.5;
                 }
             }
@@ -167,7 +182,7 @@
 
                 display: flex;
                 align-items: center;
-                margin-right: $spacer * 2;
+                margin-right: $spacer;
             }
 
                 .c-blog-featured__user-image {

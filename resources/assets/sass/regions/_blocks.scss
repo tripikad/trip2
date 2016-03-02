@@ -6,6 +6,11 @@
 
     @include respond-to(tablet) {
 
+        margin-bottom: $spacer * 4;
+    }
+
+    @include respond-to(desktop) {
+
         margin-bottom: $spacer * 6;
     }
 
@@ -55,6 +60,11 @@
         margin-bottom: 0;
 
         @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 4;
+        }
+
+        @include respond-to(desktop) {
 
             margin-bottom: $spacer * 6;
         }

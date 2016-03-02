@@ -27,7 +27,7 @@
     </div>
 
     <div class="r-travelmates__wrap">
-        <div class="r-travelmates__content">
+        <div class="r-travelmates__content m-first">
             <h1 class="r-travelmates__title">{{ $content->title }}</h1>
 
             <div class="r-travelmates__meta">
@@ -289,6 +289,7 @@
         </div>
     </div>
 
+
     @if (count($flights))
 
         <div class="r-travelmates__offers">
@@ -318,7 +319,16 @@
 
     @if (count($travel_mates))
 
+        @if (count($flights))
+
+        <div class="r-travelmates__additional m-padding">
+
+        @else
+
         <div class="r-travelmates__additional">
+
+        @endif
+
             <div class="r-travelmates__additional-wrap">
 
                 @include('component.travelmate.list', [

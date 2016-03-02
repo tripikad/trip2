@@ -2,7 +2,7 @@
 
     margin-bottom: $spacer * 2;
 
-    @include respond-to(tablet) {
+    @include respond-to(desktop) {
 
         margin-bottom: $spacer * 4;
     }
@@ -11,14 +11,14 @@
 
         margin-bottom: $spacer;
 
-        @include respond-to(tablet-portrait) {
-
-            display: flex;
-        }
-
         @include respond-to(tablet) {
 
             margin-bottom: $spacer * 2;
+        }
+
+        @include respond-to(desktop) {
+
+            display: flex;
         }
     }
 }
@@ -40,10 +40,9 @@
 
         .c-news.m-smaller & {
 
-
             height: $spacer * 7.5;
 
-            @include respond-to(tablet-portrait) {
+            @include respond-to(desktop) {
 
                 flex: 0 0 $spacer * 12;
                 margin-right: $spacer * 2;
@@ -55,7 +54,7 @@
 
         &.m-smaller & {
 
-            @include respond-to(tablet-portrait) {
+            @include respond-to(desktop) {
 
                 flex: 1;
             }

@@ -166,7 +166,7 @@
 
     .c-search.m-active & {
 
-        @include respond-to(tablet) {
+        @include respond-to(desktop) {
 
             display: block;
             padding-bottom: $spacer * 4;
