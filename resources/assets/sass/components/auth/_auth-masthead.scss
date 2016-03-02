@@ -67,10 +67,12 @@
             line-height: 1.5;
             text-align: center;
             margin-top: $spacer;
+            padding: 0 $spacer * 2;
 
             @include respond-to(tablet) {
 
-                margin-top: $spacer * 1.5;
                 font-size: $font-size-medium;
+                margin-top: $spacer * 1.5;
+                padding: 0;
             }
         }

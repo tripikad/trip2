@@ -34,20 +34,17 @@ code: |
 
                     @if(isset($item['icon']))
 
-                        @include('component.link', [
-                            'modifiers' => $item['modifiers'],
-                            'title' => $item['title'],
-                            'route' => $item['route'],
-                            'icon' => $item['icon']
-                        ])
+                        <a href="{{ $item['route'] }}" class="c-forum-list-nav__item-link">{{ $item['title'] }}
+                            <span class="c-forum-list-nav__item-icon">
+                                @include('component.svg.sprite', [
+                                    'name' => $item['icon']
+                                ])
+                            </span>
+                        </a>
 
                     @else
 
-                        @include('component.link', [
-                            'modifiers' => $item['modifiers'],
-                            'title' => $item['title'],
-                            'route' => $item['route']
-                        ])
+                        <a href="{{ $item['route'] }}" class="c-forum-list-nav__item-link">{{ $item['title'] }}</a>
 
                     @endif
 

@@ -102,6 +102,7 @@
 
             .r-user__info-travel-mate {
 
+                display: none;
                 position: absolute;
                 top: -$spacer * 3;
                 left: $spacer * 2;
@@ -299,6 +300,7 @@
 
             position: relative;
             z-index: 2;
+            display: block;
             margin-bottom: -$spacer * 4;
         }
     }

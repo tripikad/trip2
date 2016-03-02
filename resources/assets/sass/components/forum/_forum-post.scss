@@ -92,6 +92,11 @@
 
                 font-weight: $font-weight-medium;
 
+                @include respond-to(tablet) {
+
+                    margin-left: $spacer;
+                }
+
                 span {
 
                     font-weight: $font-weight-normal;
@@ -112,11 +117,11 @@
 
         .c-forum-post__footer {
 
+            @include clearfix;
+
             padding-top: $spacer * 1.5;
 
             &.m-right {
-
-                @include clearfix;
 
                 text-align: right;
             }

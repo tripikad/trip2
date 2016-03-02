@@ -59,7 +59,16 @@
 
                 &.m-first {
 
+                    padding-bottom: $spacer;
+
                     @include respond-to(tablet) {
+
+                        @include span(5 of 24);
+
+                        padding-bottom: 0;
+                    }
+
+                    @include respond-to(desktop) {
 
                         @include span(4 of 24);
                     }
@@ -68,6 +77,11 @@
                 &.m-last {
 
                     @include respond-to(tablet) {
+
+                        @include span(17.5 of 24 at 2.5);
+                    }
+
+                    @include respond-to(desktop) {
 
                         @include span(18.5 of 24 at 2.5);
                     }

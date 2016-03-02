@@ -450,9 +450,10 @@
                         <div class="r-user__additional-action">
 
                             @include('component.link', [
-                                'modifiers' => 'm-small',
+                                'modifiers' => 'm-icon m-right m-small',
                                 'title' => trans('menu.forum.forum'),
-                                'route' => route('content.index', ['forum'])
+                                'route' => route('content.index', ['forum']),
+                                'icon' => 'icon-arrow-right'
                             ])
 
                         </div>
@@ -467,73 +468,70 @@
 
             </div>
 
-            @if (isset($blog_posts) && count($blog_posts) > 0)
 
-                <div class="r-user__additional-sidebar">
 
-                    <div class="r-user__additional-block">
+            <div class="r-user__additional-sidebar">
 
-                        <div class="r-user__additional-header">
+                @if (isset($blog_posts) && count($blog_posts) > 0)
 
-                            <div class="r-user__additional-title">
+                <div class="r-user__additional-block">
 
-                                @include('component.title', [
-                                    'modifiers' => 'm-green',
-                                    'title' => trans('frontpage.index.travelletter.title')
-                                ])
+                    <div class="r-user__additional-header">
 
-                            </div>
+                        <div class="r-user__additional-title">
 
-                            <div class="r-user__additional-action">
-
-                                @include('component.link', [
-                                    'modifiers' => 'm-small',
-                                    'title' => trans('site.link.read.more'),
-                                    'route' => route('content.index', ['blog'])
-                                ])
-
-                            </div>
-
+                            @include('component.title', [
+                                'modifiers' => 'm-green',
+                                'title' => trans('frontpage.index.travelletter.title')
+                            ])
                         </div>
 
-                        @foreach ($blog_posts as $blog_post)
+                        <div class="r-user__additional-action">
 
-                            @include('component.blog', [
-                                'title' => $blog_post->title,
-                                'route' => route('content.show', [$blog_post->type, $blog_post]),
-                                'image' => $blog_post->imagePreset(),
+                            @include('component.link', [
+                                'modifiers' => 'm-icon m-right m-small',
+                                'title' => trans('site.link.read.more'),
+                                'route' => route('content.index', ['blog']),
+                                'icon' => 'icon-arrow-right'
                             ])
-
-                        @endforeach
-
+                        </div>
                     </div>
 
-                    <div class="r-user__additional-block">
+                    @foreach ($blog_posts as $blog_post)
 
-                        @include('component.promo', [
-                            'modifiers' => 'm-sidebar-large',
-                            'route' => '#',
-                            'image' => \App\Image::getRandom()
+                        @include('component.blog', [
+                            'title' => $blog_post->title,
+                            'route' => route('content.show', [$blog_post->type, $blog_post]),
+                            'image' => $blog_post->imagePreset(),
                         ])
 
-                    </div>
-
-                    <div class="r-user__additional-block">
-
-                        @include('component.promo', [
-                            'modifiers' => 'm-sidebar-small',
-                            'route' => '#',
-                            'image' => \App\Image::getRandom()
-                        ])
-
-                    </div>
+                    @endforeach
 
                 </div>
 
-            @endif
+                @endif
 
+                <div class="r-block m-small m-mobile-hide">
+
+                    @include('component.promo', [
+                        'modifiers' => 'm-sidebar-large',
+                        'route' => '#',
+                        'image' => \App\Image::getRandom()
+                    ])
+
+                </div>
+
+                <div class="r-block m-small m-mobile-hide">
+
+                    @include('component.promo', [
+                        'modifiers' => 'm-sidebar-small',
+                        'route' => '#',
+                        'image' => \App\Image::getRandom()
+                    ])
+
+                </div>
+            </div>
         </div>
-
     </div>
 
     @if (isset($flights) && count($flights) > 0)

@@ -30,13 +30,72 @@
 
         </div>
 
-        @if (isset($flights1) && count($flights1) > 0)
 
             <div class="r-home__destinations">
 
                 <div class="r-home__destinations-wrap">
 
                     <div class="c-columns m-3-cols">
+
+                        <div class="c-columns__item">
+
+                            @include('component.destination', [
+                                'modifiers' => 'm-purple',
+                                'title' => 'Tai',
+                                'title_route' => '/destination/335',
+                                'subtitle' => 'Aasia',
+                                'subtitle_route' => '/destination/2'
+                            ])
+
+                            @include('component.card', [
+                                'modifiers' => 'm-purple',
+                                'route' => '',
+                                'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
+                                'image' => \App\Image::getRandom(),
+                            ])
+                        </div>
+
+                        <div class="c-columns__item">
+
+                            @include('component.destination', [
+                                'modifiers' => 'm-yellow',
+                                'title' => 'Saksamaa',
+                                'title_route' => '/destination/326',
+                                'subtitle' => 'Euroopa',
+                                'subtitle_route' => '/destination/1'
+                            ])
+
+                            @include('component.card', [
+                                'modifiers' => 'm-yellow',
+                                'route' => '',
+                                'title' => 'Kevadpuhkus Amsterdamis al 121 €',
+                                'image' => \App\Image::getRandom(),
+                            ])
+                        </div>
+
+                        <div class="c-columns__item">
+
+                            @include('component.destination', [
+                                'modifiers' => 'm-red',
+                                'title' => 'New York',
+                                'title_route' => '/destination/451',
+                                'subtitle' => 'Põhja-Ameerika',
+                                'subtitle_route' => '/destination/5'
+                            ])
+
+                            @include('component.card', [
+                                'modifiers' => 'm-red',
+                                'route' => '',
+                                'title' => 'Edasi-tagasi lennud New Yorki al 449 €',
+                                'image' => \App\Image::getRandom(),
+                            ])
+                        </div>
+
+                        {{--
+
+                        @if (isset($flights1) && count($flights1) > 0)
+
+                        @endif
 
                         @foreach ($flights1 as $key => $flight1)
 
@@ -65,6 +124,7 @@
 
                         @endforeach
 
+                        --}}
                     </div>
                     <div class="r-home__destinations-action">
 
@@ -74,12 +134,11 @@
                             'route' => route('content.index', ['flight']),
                             'icon' => 'icon-arrow-right'
                         ])
-
                     </div>
                 </div>
             </div>
 
-        @endif
+
 
         @if (isset($content) && count($content) > 0)
 
@@ -89,7 +148,8 @@
 
                     @include('component.about', [
                         'modifiers' => 'm-wide',
-                        'title' => str_limit($content->first()->body_filtered, 300),
+                        'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+                        //'title' => str_limit($content->first()->body_filtered, 300),
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',

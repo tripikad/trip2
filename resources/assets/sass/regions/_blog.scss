@@ -71,7 +71,7 @@
 
     @include respond-to(tablet) {
 
-        padding: $spacer * 4 0;
+        padding: $spacer * 2 0;
     }
 
     .r-blog.m-profile & {
@@ -158,7 +158,7 @@
 
 .r-blog__content {
 
-    padding: $spacer * 4 0;
+    padding: $spacer * 2 0;
 
     @include respond-to(tablet) {
 

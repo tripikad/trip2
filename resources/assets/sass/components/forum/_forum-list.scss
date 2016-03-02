@@ -9,9 +9,14 @@
         display: flex;
         flex-flow: row wrap;
         align-items: center;
-        padding: $spacer * 0.75 $spacer * 2;
+        padding: $spacer * 0.75 $spacer;
         margin-bottom: $spacer / 2;
         border-left: 2px solid $color-fill-neutral;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 0.75 $spacer * 2;
+        }
 
         &:nth-child(even) {
 
@@ -89,11 +94,16 @@
 
                     color: $color-text-black;
                     font-weight: $font-weight-medium;
-                    font-size: $font-size-medium;
+                    font-size: $font-size-normal;
                     line-height: 1.15;
                     white-space: nowrap;
                     text-overflow: ellipsis;
                     overflow: hidden;
+
+                    @include respond-to(tablet) {
+
+                        font-size: $font-size-medium;
+                    }
 
                     .c-forum-list.m-compact & {
 

@@ -43,8 +43,10 @@
 
             .c-about.m-wide & {
 
-                font-size: $font-size-large;
-                line-height: 1.15;
+                @include respond-to(tablet) {
+
+                    font-size: $font-size-large + 2;
+                }
             }
         }
 

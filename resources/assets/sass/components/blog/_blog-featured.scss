@@ -95,7 +95,7 @@
             font-size: $font-size-larger;
             font-weight: $font-weight-bold;
             line-height: 1.25;
-            margin-bottom: $spacer;
+            margin-bottom: $spacer / 2;
 
             @include respond-to(tablet) {
 
@@ -107,7 +107,7 @@
 
                 font-size: $font-size-larger;
                 line-height: 1.5;
-                margin-bottom: $spacer;
+                margin-bottom: $spacer / 2;
 
                 @include respond-to(tablet) {
 

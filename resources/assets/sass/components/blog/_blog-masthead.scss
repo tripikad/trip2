@@ -205,19 +205,21 @@
 
             font-size: $font-size-larger;
             line-height: 1.25;
-            padding: $spacer * 2;
-            margin-bottom: $spacer * 2;
+            padding: $spacer;
 
             @include respond-to(tablet) {
 
                 font-size: $font-size-larger * 3;
                 line-height: 1;
+                padding: $spacer * 2;
+                margin-bottom: $spacer * 2;
             }
 
             @include respond-to(desktop) {
 
                 font-size: $font-size-large * 4;
                 padding: 0 $spacer * 12;
+                margin-bottom: $spacer * 2;
             }
         }
     }

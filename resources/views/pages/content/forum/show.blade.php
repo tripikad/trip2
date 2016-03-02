@@ -81,7 +81,7 @@
                 ])
             @endif
 
-            <div class="r-block">
+            <div class="r-block m-small">
 
                 @include('component.pagination.numbered', [
                     'collection' => $comments
@@ -418,7 +418,7 @@
 
                 @if (count($travel_mates))
 
-                    <div class="r-block m-no-mobile-margin">
+                    <div class="r-block m-no-margin">
                         <div class="r-block__header">
                             @include('component.title', [
                                 'title' => trans('frontpage.index.travelmate.title'),

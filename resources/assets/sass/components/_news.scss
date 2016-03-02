@@ -9,8 +9,12 @@
 
     &.m-smaller {
 
-        display: flex;
         margin-bottom: $spacer;
+
+        @include respond-to(tablet-portrait) {
+
+            display: flex;
+        }
 
         @include respond-to(tablet) {
 
@@ -25,20 +29,24 @@
         overflow: hidden;
         display: block;
         height: $spacer * 16;
-        margin-bottom: $spacer * 2;
+        margin-bottom: $spacer;
         background-size: cover;
         background-position: top center;
 
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 2;
+        }
+
         .c-news.m-smaller & {
 
-            flex: 0 0 $spacer * 12;
-            margin-bottom: $spacer;
-            margin-right: $spacer * 2;
+
             height: $spacer * 7.5;
 
-            @include respond-to(tablet) {
+            @include respond-to(tablet-portrait) {
 
-                margin-bottom: $spacer * 2;
+                flex: 0 0 $spacer * 12;
+                margin-right: $spacer * 2;
             }
         }
     }
@@ -47,7 +55,10 @@
 
         &.m-smaller & {
 
-            flex: 1;
+            @include respond-to(tablet-portrait) {
+
+                flex: 1;
+            }
         }
     }
 
@@ -55,14 +66,15 @@
 
         @include font-smoothing;
 
-        font-size: $font-size-large;
+        font-size: $font-size-medium;
         font-weight: $font-weight-bold;
-        line-height: 1.15;
+        line-height: 1.35;
         margin-bottom: $spacer / 2;
 
         @include respond-to(tablet) {
 
             font-size: $font-size-larger;
+            line-height: 1.15;
         }
 
         .c-news.m-smaller & {
