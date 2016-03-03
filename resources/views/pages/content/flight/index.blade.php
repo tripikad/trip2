@@ -177,7 +177,7 @@
                 'items' => [
                     [
                         'image' => \App\Image::getRandom(),
-                        'route' => '#',
+                        'route' => '/content/flight/93904',
                         'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki al',
                         'price' => '472 €',
                         'meta' => view('component.inline_list', [
@@ -194,7 +194,7 @@
                     ],
                     [
                         'image' => \App\Image::getRandom(),
-                        'route' => '#',
+                        'route' => '/content/flight/93904',
                         'title' => 'AirAsia kampaania SALE lennupiletid al',
                         'price' => '6 €',
                         'meta' => view('component.inline_list', [

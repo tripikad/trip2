@@ -59,7 +59,7 @@
 
             <div class="c-blog-featured m-video">
 
-                <a href="#" class="c-blog-featured__image-link" style="background-image: url({{\App\Image::getRandom()}});">
+                <a href="/content/blog/91258" class="c-blog-featured__image-link" style="background-image: url({{\App\Image::getRandom()}});">
                     <span class="c-blog-featured__type">
                         @include('component.svg.sprite', [
                             'name' => 'icon-video'
@@ -69,7 +69,7 @@
 
                 <div class="c-blog-featured__content">
 
-                    <h3 class="c-blog-featured__title"><a href="#" class="c-blog-featured__title-link">Motikaga Gruusias, Armeenias ja Karabahhis</a></h3>
+                    <h3 class="c-blog-featured__title"><a href="/content/blog/91258" class="c-blog-featured__title-link">Motikaga Gruusias, Armeenias ja Karabahhis</a></h3>
                     <p class="c-blog-featured__excerpt">Tbilisi suur probleem on jalakäijatele mitte mõtlemine -- raske on liikuda kesklinnas ja ületada mitmerealisi tänavaid, mis on paksult autosid täis. On mõningad tunnelid jalakäijatele kuid natuke linnasüdamest eemal on need pimedad ja kohati ka…</p>
 
                     <div class="c-blog-featured__tags">

@@ -12,6 +12,12 @@
 
         height: auto;
         background: none;
+        padding: $spacer * 0.75 $spacer * 2 0;
+    }
+
+    @include respond-to(desktop) {
+
+        padding: $spacer * 0.75 $spacer * 4 0;
     }
 }
 

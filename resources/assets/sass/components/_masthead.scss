@@ -100,15 +100,23 @@
         .c-masthead__logo {
 
             position: absolute;
-            left: -$spacer * 6;
-            top: -$spacer * 9;
+            left: -$spacer * 4.5;
+            top: -$spacer * 7;
             display: none;
-            width: 280px;
-            height: 132px;
+            width: 220px;
+            height: 106px;
 
             @include respond-to(tablet) {
 
                 display: block;
+            }
+
+            .c-masthead.m-search & {
+
+                top: -$spacer * 9.5;
+                left: -$spacer * 7;
+                width: 280px;
+                height: 132px;
             }
 
             .c-masthead.m-profile & {
@@ -140,7 +148,7 @@
 
             @include respond-to(desktop) {
 
-                font-size: $font-size-huge;
+                font-size: $font-size-huge - 6;
             }
 
             .c-masthead.m-alternative & {

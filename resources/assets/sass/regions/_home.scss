@@ -254,6 +254,14 @@
                     }
                 }
 
+                &.m-single {
+
+                    @include respond-to(tablet) {
+
+                        @include span(8 of 24);
+                    }
+                }
+
                 &.m-last {
 
                     @include respond-to(tablet) {
