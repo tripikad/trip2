@@ -209,12 +209,34 @@
                         'class' => 'c-form__label'
                     ]) !!}
 
+                    @include('component.image.form', [
+                       'form' => [
+                           'url' => '/content/flight/edit',
+                           'files' => true
+                       ],
+                       'name' => 'add-flight-screenshot',
+                       'maxFileSize' => 5,
+                       'uploadMultiple' => true,
+                       'fields' => null
+                   ])
+
                 </div>
 
                 <div class="c-form__group m-large-margin">
                     {!! Form::label('add-flight_image', 'Pakkumise foto üleslaadimine', [
                         'class' => 'c-form__label'
                     ]) !!}
+
+                    @include('component.image.form', [
+                       'form' => [
+                           'url' => '/content/flight/edit',
+                           'files' => true
+                       ],
+                       'name' => 'add-flight_image',
+                       'maxFileSize' => 5,
+                       'uploadMultiple' => true,
+                       'fields' => null
+                   ])
 
                 </div>
 

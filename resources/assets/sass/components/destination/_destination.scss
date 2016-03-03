@@ -9,7 +9,12 @@
 
     .c-destination__header {
 
-        padding: $spacer * 1.5 $spacer * 2 $spacer * 1.5;
+        padding: $spacer * 1.5 $spacer * 2;
+
+        @include respond-to(desktop) {
+
+            padding: $spacer * 2 $spacer * 2.5;
+        }
     }
 
     .c-destination__title {
@@ -39,7 +44,7 @@
 
         font-size: $font-size-normal;
         font-weight: $font-weight-bold;
-        margin-top: $spacer;
+        margin-top: $spacer / 2;
     }
 
         .c-destination__subtitle-link {

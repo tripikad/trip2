@@ -2,7 +2,7 @@
 
     position: relative;
     width: 100%;
-    padding: $spacer * 12 0 $spacer * 4;
+    padding: $spacer * 8 0 $spacer * 4;
     background-color: $color-fill-neutral-light;
 
     @include respond-to(tablet) {

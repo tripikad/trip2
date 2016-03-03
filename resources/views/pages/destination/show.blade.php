@@ -94,7 +94,7 @@
                         'route' => ''
                     ],
                     [
-                        'icon' => 'icon-pin',
+                        'icon' => 'icon-star',
                         'title' => $destination->usersWantsToGo()->count(),
                         'text' => 'Want to go there',
                         'route' => ''
