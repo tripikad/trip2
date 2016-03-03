@@ -143,13 +143,13 @@
                 font-size: $font-size-normal;
                 font-weight: $font-weight-medium;
                 line-height: 1.2;
-                display: inline-flex;
-                align-items: center;
+                display: inline-block;
                 margin: 0 $spacer * 2;
             }
 
                 .c-footer__social-item-icon {
 
+                    display: inline-block;
                     width: $spacer * 2;
                     height: $spacer * 1.5;
                     margin-right: $spacer;
@@ -171,7 +171,7 @@
 
                     color: $color-text-neutral-darker;
                     text-decoration: none;
-                    display: block;
+                    display: inline-block;
                     padding: $spacer / 2 0;
 
                     .c-footer.m-alternative & {

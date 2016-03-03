@@ -128,16 +128,21 @@
 
             &.m-flex {
 
-                display: flex;
-                width: 100%;
-                align-items: center;
-                justify-content: flex-end;
+                // display: flex;
+                // width: 100%;
+                // align-items: center;
+                // justify-content: flex-end;
             }
         }
 
-            .c-forum-post__tags {}
+            .c-forum-post__tags {
+
+                float: left;
+                max-width: 50%;
+            }
 
             .c-forum-post__thumbs {
 
-                margin-left: auto;
+                float: right;
+                max-width: 50%;
             }

@@ -39,17 +39,30 @@
 
         <div class="r-user__map">
 
+        {{--
+
             @include('component.map', [
                 'modifiers' => 'm-profile'
             ])
+        --}}
 
-            @include('component.user.location', [
-                'modifiers' => 'm-green',
-                'location' => 'Tallinn',
-                'top' => 25,
-                'left' => 52
-            ])
+            <div class="c-user-map">
 
+                <div class="c-user-map__map">
+
+                    @include('component.svg.standalone', [
+                        'name' => 'map'
+                    ])
+
+                </div>
+
+                @include('component.user.location', [
+                    'modifiers' => 'm-green',
+                    'location' => 'Tallinn',
+                    'top' => 25,
+                    'left' => 52
+                ])
+            </div>
         </div>
 
         <div class="r-user__info">

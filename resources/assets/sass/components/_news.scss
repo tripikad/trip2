@@ -18,7 +18,7 @@
 
         @include respond-to(desktop) {
 
-            display: flex;
+            @include clearfix;
         }
     }
 }
@@ -44,19 +44,19 @@
 
             @include respond-to(desktop) {
 
-                flex: 0 0 $spacer * 12;
-                margin-right: $spacer * 2;
+                width: $spacer * 12;
+                float: left;
             }
         }
     }
 
     .c-news__content {
 
-        &.m-smaller & {
+        .m-smaller & {
 
             @include respond-to(desktop) {
 
-                flex: 1;
+                margin-left: $spacer * 14;
             }
         }
     }

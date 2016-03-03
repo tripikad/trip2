@@ -1,6 +1,7 @@
 .c-map {
 
     position: relative;
+    display: block;
     width: 100%;
     height: 100%;
 
@@ -18,14 +19,8 @@
         svg {
 
             fill: $color-fill-neutral;
-        }
-    }
-
-    &.m-profile {
-
-        svg {
-
-            @include color-modifiers-dark-and(fill);
+            width: $spacer * 60;
+            height: $spacer * 40;
         }
     }
 

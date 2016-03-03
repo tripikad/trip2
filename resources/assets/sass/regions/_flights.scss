@@ -1,5 +1,10 @@
 .r-flights {}
 
+    .r-flights__masthead {
+
+        overflow: hidden;
+    }
+
     .r-flights__map {
 
         @include wrap();
