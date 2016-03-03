@@ -193,15 +193,7 @@
 
     <div class="r-destination__content">
 
-    @if (isset($features['flights2']) && count($features['flights2']['contents']))
-
-        <div class="r-destination__content-wrap m-padding">
-
-    @else
-
         <div class="r-destination__content-wrap">
-
-    @endif
 
             @if ((isset($popular_destinations) && count($popular_destinations)) || (isset($features['forum_posts']) && count($features['forum_posts']['contents'])))
 
@@ -408,23 +400,21 @@
 
             @endif
 
-            <div class="r-destination__content-news">
+            @if (isset($features['news']) && count($features['news']['contents']))
 
-                <div class="r-destination__content-news-wrap">
+                <div class="r-destination__content-news">
 
-                    <div class="r-destination__content-news-column m-first">
+                    <div class="r-destination__content-news-wrap">
 
-                    @if (isset($features['news']) && count($features['news']['contents']))
+                        <div class="r-destination__content-news-column m-first">
 
-                        <div class="r-destination__content-title">
+                            <div class="r-destination__content-title">
 
-                            @include('component.title', [
-                                'modifiers' => 'm-yellow',
-                                'title' => trans('destination.show.news.title')
-                            ])
-                        </div>
-
-                        <div class="r-destination__content-news-block">
+                                @include('component.title', [
+                                    'modifiers' => 'm-yellow',
+                                    'title' => trans('destination.show.news.title')
+                                ])
+                            </div>
 
                             <div class="c-columns m-2-cols m-space">
 
@@ -472,140 +462,59 @@
                                     ])
                                 </div>
                             </div>
-                        </div>
 
-                    @endif
+                            <div class="r-block m-mobile-hide">
 
-                        <div class="r-block m-mobile-hide">
-
-                            @include('component.promo', [
-                                'modifiers' => 'm-body',
-                                'route' => '#',
-                                'image' => \App\Image::getRandom()
-                            ])
-                        </div>
-
-                        <div class="r-destination__content-title">
-
-                            @include('component.title', [
-                                'modifiers' => 'm-yellow',
-                                'title' => 'Reisikirjad'
-                            ])
-                        </div>
-
-                        <div class="c-columns m-2-cols m-space">
-
-                            <div class="c-columns__item">
-
-                                @include('component.blog', [
-                                    'modifiers' => 'm-mobile-margin',
-                                    'title' => 'Minu Malta – jutustusi kuuajaliselt ringreisilt',
-                                    'image' => \App\Image::getRandom(),
+                                @include('component.promo', [
+                                    'modifiers' => 'm-body',
                                     'route' => '#',
-                                    'profile' => [
-                                        'route' => '#',
-                                        'title' => 'Mari Maasikas',
-                                        'image' => \App\Image::getRandom()
-                                    ]
-                                ])
-                            </div>
-
-                            <div class="c-columns__item">
-
-                                @include('component.blog', [
-                                    'title' => 'Minu Malta – jutustusi kuuajaliselt ringreisilt',
-                                    'image' => \App\Image::getRandom(),
-                                    'route' => '#',
-                                    'profile' => [
-                                        'route' => '#',
-                                        'title' => 'Mari Maasikas',
-                                        'image' => \App\Image::getRandom()
-                                    ]
+                                    'image' => \App\Image::getRandom()
                                 ])
                             </div>
                         </div>
-                    </div>
 
-                    <div class="r-destination__content-news-column m-last">
+                        <div class="r-destination__content-news-column m-last">
 
-                        <div class="r-block">
+                            <div class="r-block">
 
-                            @include('component.promo', [
-                                'modifiers' => 'm-sidebar-large',
-                                'route' => '#',
-                                'image' => \App\Image::getRandom()
-                            ])
+                                @include('component.promo', [
+                                    'modifiers' => 'm-sidebar-large',
+                                    'route' => '#',
+                                    'image' => \App\Image::getRandom()
+                                ])
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+            @endif
         </div>
     </div>
 
     @if (isset($features['flights2']) && count($features['flights2']['contents']))
 
-    <div class="r-destination__flights">
+        <div class="r-destination__content-flights">
 
-        <div class="r-destination__flights-wrap">
+            <div class="r-destination__content-flights-wrap">
 
-            <div class="c-columns m-3-cols">
+                <div class="c-columns m-3-cols">
 
-                <div class="c-columns__item">
+                    <div class="c-columns__item">
 
-                    @include('component.destination', [
-                        'modifiers' => 'm-purple',
-                        'title' => 'Tai',
-                        'title_route' => '/destination/335',
-                        'subtitle' => 'Aasia',
-                        'subtitle_route' => '/destination/2'
-                    ])
+                        @foreach ($features['flights2']['contents'] as $flight)
 
-                    @include('component.card', [
-                        'modifiers' => 'm-purple',
-                        'route' => '',
-                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                        'image' => \App\Image::getRandom(),
-                    ])
-                </div>
+                            @include('component.card', [
+                                'route' => route('content.show', [$flight->type, $flight]),
+                                'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
+                                'image' => $flight->imagePreset()
+                            ])
 
-                <div class="c-columns__item">
+                        @endforeach
 
-                    @include('component.destination', [
-                        'modifiers' => 'm-yellow',
-                        'title' => 'Saksamaa',
-                        'title_route' => '/destination/326',
-                        'subtitle' => 'Euroopa',
-                        'subtitle_route' => '/destination/1'
-                    ])
-
-                    @include('component.card', [
-                        'modifiers' => 'm-yellow',
-                        'route' => '',
-                        'title' => 'Kevadpuhkus Amsterdamis al 121 €',
-                        'image' => \App\Image::getRandom(),
-                    ])
-                </div>
-
-                <div class="c-columns__item">
-
-                    @include('component.destination', [
-                        'modifiers' => 'm-red',
-                        'title' => 'New York',
-                        'title_route' => '/destination/451',
-                        'subtitle' => 'Põhja-Ameerika',
-                        'subtitle_route' => '/destination/5'
-                    ])
-
-                    @include('component.card', [
-                        'modifiers' => 'm-red',
-                        'route' => '',
-                        'title' => 'Edasi-tagasi lennud New Yorki al 449 €',
-                        'image' => \App\Image::getRandom(),
-                    ])
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
     @endif
 

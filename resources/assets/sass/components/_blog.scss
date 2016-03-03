@@ -1,30 +1,42 @@
-.c-blog {}
+.c-blog {
 
-    .c-blog__image-link {
+    &.m-mobile-margin {
 
-        display: block;
-    }
+        margin-bottom: $spacer * 2;
 
-        .c-blog__image {
+        @include respond-to(tablet) {
 
-            display: block;
-            max-width: 100%;
-            height: auto;
+            margin-bottom: 0;
         }
+    }
+}
+
+    .c-blog__image {
+
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+        display: block;
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%;
+        margin-bottom: $spacer;
+    }
 
     .c-blog__title {
 
         @include font-smoothing;
 
-        font-size: $font-size-large;
+        font-size: $font-size-medium;
         font-weight: $font-weight-bold;
         text-align: center;
         line-height: 1.2;
-        padding: $spacer * 2;
+        padding: $spacer 0;
 
         @include respond-to(tablet) {
 
-            font-size: $font-size-largest;
+            font-size: $font-size-larger;
         }
     }
 

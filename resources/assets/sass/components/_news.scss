@@ -45,6 +45,7 @@
             @include respond-to(desktop) {
 
                 width: $spacer * 12;
+                margin-bottom: 0;
                 float: left;
             }
         }
