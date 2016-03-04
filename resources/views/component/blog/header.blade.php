@@ -99,7 +99,7 @@
         @if(isset($modifiers) && $modifiers == 'm-alternative')
 
             @include('component.navbar.user', [
-                'modifiers' => 'm-purple m-blog',
+                'modifiers' => 'm-green m-blog',
                 'profile' => [
                     'image' => \Auth::user()->imagePreset(),
                     'title' => \Auth::user()->name,
@@ -138,7 +138,7 @@
         @else
 
             @include('component.navbar.user', [
-                'modifiers' => 'm-purple m-alternative',
+                'modifiers' => 'm-green m-alternative',
                 'profile' => [
                     'image' => \Auth::user()->imagePreset(),
                     'title' => \Auth::user()->name,
@@ -178,13 +178,38 @@
 
     @endif
 
-    <a href="#" class="c-header__nav-trigger js-header__nav-trigger">
+    <a href="#" class="c-blog-header__nav-trigger js-header__nav-trigger">
         <span></span>
         <span></span>
         <span></span>
     </a>
 
-    <div class="c-blog-header__nav js-header__nav">
+    <div class="c-blog-header__mobile-nav js-header__nav">
+
+        @if (isset($modifiers) && $modifiers === 'm-alternative')
+
+            @include('component.navbar.mobile',[
+                'modifiers' => 'm-green m-blog'
+            ])
+
+        @else
+
+            @include('component.navbar.mobile',[
+                'modifiers' => 'm-green m-alternative'
+            ])
+
+        @endif
+
+        <div class="c-header__mobile-nav-search">
+
+            @include('component.header.search',[
+                'modifiers' => 'm-small m-green m-active',
+                'placeholder' => ''
+            ])
+        </div>
+    </div>
+
+    <div class="c-blog-header__nav">
 
         @if(isset($modifiers) && $modifiers == 'm-alternative')
 
@@ -199,14 +224,6 @@
             ])
 
         @endif
-
-        <div class="c-blog-header__nav-search">
-
-            @include('component.header.search',[
-                'modifiers' => 'm-small m-red m-blog m-active',
-                'placeholder' => ''
-            ])
-        </div>
     </div>
 
     <div class="c-blog-header__search js-header__search">
@@ -214,13 +231,13 @@
         @if(isset($modifiers) && $modifiers == 'm-alternative')
 
             @include('component.header.search',[
-                'modifiers' => 'm-small m-red m-blog',
+                'modifiers' => 'm-small m-green m-blog',
                 'placeholder' => ''
             ])
         @else
 
             @include('component.header.search',[
-                'modifiers' => 'm-small m-red m-alternative',
+                'modifiers' => 'm-small m-green m-alternative',
                 'placeholder' => ''
             ])
         @endif
