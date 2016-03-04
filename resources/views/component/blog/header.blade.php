@@ -202,9 +202,9 @@
 
         <div class="c-header__mobile-nav-search">
 
-            @include('component.header.search',[
-                'modifiers' => 'm-small m-green m-active',
-                'placeholder' => ''
+            @include('component.header.search-simple',[
+                'modifiers' => 'm-green',
+                'placeholder' => 'Otsi'
             ])
         </div>
     </div>

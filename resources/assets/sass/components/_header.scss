@@ -5,7 +5,7 @@
     top: inherit;
     left: 0;
     height: $spacer * 6.5;
-    padding: 0 $spacer;
+    padding: 0 $spacer * 1.5;
     width: 100%;
 
     @include respond-to(tablet) {
@@ -24,7 +24,7 @@
     .c-header__logo {
 
         position: absolute;
-        left: $spacer;
+        left: $spacer * 1.5;
         top: 0;
         display: flex;
         align-items: center;

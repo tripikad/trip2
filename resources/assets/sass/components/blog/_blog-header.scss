@@ -5,7 +5,7 @@
     top: inherit;
     left: 0;
     height: $spacer * 6.5;
-    padding: 0 $spacer;
+    padding: 0 $spacer * 1.5;
     width: 100%;
 
     @include respond-to(tablet) {
@@ -118,7 +118,6 @@
                 display: none;
             }
         }
-
 
     .c-blog-header__nav {
 
@@ -238,7 +237,7 @@
 
         position: absolute;
         top: $spacer * 2 + 4;
-        left: $spacer;
+        left: $spacer * 1.5;
         height: $spacer * 2 - 2;
         display: block;
 

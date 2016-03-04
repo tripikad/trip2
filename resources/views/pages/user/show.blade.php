@@ -39,13 +39,6 @@
 
         <div class="r-user__map">
 
-        {{--
-
-            @include('component.map', [
-                'modifiers' => 'm-profile'
-            ])
-        --}}
-
             <div class="c-user-map">
 
                 <div class="c-user-map__map">

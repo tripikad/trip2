@@ -31,7 +31,7 @@
         height: $spacer * 16;
         margin-bottom: $spacer;
         background-size: cover;
-        background-position: top center;
+        background-position: center center;
 
         @include respond-to(tablet) {
 

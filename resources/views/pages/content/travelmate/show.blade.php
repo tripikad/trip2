@@ -239,13 +239,26 @@
                 @if (count($forums))
 
                     <div class="r-block__inner">
+
                         <div class="r-block__header">
 
-                            @include('component.title', [
-                                'modifiers' => 'm-purple',
-                                'title' => trans('destination.show.forum.title')
-                            ])
+                            <div class="r-block__header-title m-flex">
 
+                                @include('component.title', [
+                                    'modifiers' => 'm-purple',
+                                    'title' => trans('destination.show.forum.title')
+                                ])
+
+                                <div class="r-block__header-link">
+
+                                    @include('component.link', [
+                                        'modifiers' => 'm-icon m-small',
+                                        'title' => 'Tai foorum',
+                                        'route' => '#',
+                                        'icon' => 'icon-arrow-right'
+                                    ])
+                                </div>
+                            </div>
                         </div>
 
                         @include('component.content.forum.list', [

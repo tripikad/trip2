@@ -32,7 +32,7 @@
 
         @include respond-to(tablet) {
 
-            height: $spacer * 25.5;
+            height: $spacer * 9;
         }
     }
 
@@ -49,19 +49,9 @@
 
     padding-top: $spacer * 2;
 
-    @include respond-to(tablet) {
+    @include respond-to(desktop) {
 
-        padding-top: 0;
-    }
-
-    .r-blog.m-index & {
-
-        @include respond-to(tablet) {
-
-            position: relative;
-            z-index: 10;
-            margin-top: -$spacer * 12.5;
-        }
+        padding-top: $spacer * 4;
     }
 }
 

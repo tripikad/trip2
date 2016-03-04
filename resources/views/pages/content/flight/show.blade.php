@@ -517,12 +517,22 @@
 
                     <div class="r-block__header">
 
-                        <div class="r-block__header-title">
+                        <div class="r-block__header-title m-flex">
 
                             @include('component.title', [
                                 'modifiers' => 'm-green',
                                 'title' => 'Tripikad räägivad'
                             ])
+
+                            <div class="r-block__header-link">
+
+                                @include('component.link', [
+                                    'modifiers' => 'm-icon m-small',
+                                    'title' => 'Brasiilia foorum',
+                                    'route' => '#',
+                                    'icon' => 'icon-arrow-right'
+                                ])
+                            </div>
                         </div>
                     </div>
 

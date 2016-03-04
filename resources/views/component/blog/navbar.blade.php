@@ -9,7 +9,7 @@
                 [
                     'title' => trans("content.blog.create.title"),
                     'route' => route('content.create', ['type' => 'blog']),
-                    'modifiers' => 'm-border'
+                    'modifiers' => ' m-border'
                 ]
             ]
         ])

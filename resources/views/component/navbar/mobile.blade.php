@@ -40,17 +40,11 @@
 
             @include('component.navbar.user-mobile', [
                 'modifiers' => 'm-green',
-                'profile' => [
-                    'image' => \Auth::user()->imagePreset(),
-                    'title' => \Auth::user()->name,
-                    'route' => route('user.show', [\Auth::user()]),
-                    'badge' => \Auth::user()->unreadMessagesCount(),
-                    'letter' => [
-                        'modifiers' => 'm-green m-tiny',
-                        'text' => 'W'
-                    ]
-                ],
                 'children' => [
+                    [
+                        'title' => trans('menu.user.profile'),
+                        'route' => route('user.show', [\Auth::user()]),
+                    ],
                     [
                         'title' => trans('menu.user.message'),
                         'route' => route('message.index', [\Auth::user()]),
@@ -70,17 +64,11 @@
 
             @include('component.navbar.user-mobile', [
                 'modifiers' => 'm-purple',
-                'profile' => [
-                    'image' => \Auth::user()->imagePreset(),
-                    'title' => \Auth::user()->name,
-                    'route' => route('user.show', [\Auth::user()]),
-                    'badge' => \Auth::user()->unreadMessagesCount(),
-                    'letter' => [
-                        'modifiers' => 'm-green m-tiny',
-                        'text' => 'W'
-                    ]
-                ],
                 'children' => [
+                    [
+                        'title' => trans('menu.user.profile'),
+                        'route' => route('user.show', [\Auth::user()]),
+                    ],
                     [
                         'title' => trans('menu.user.message'),
                         'route' => route('message.index', [\Auth::user()]),

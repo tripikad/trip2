@@ -178,8 +178,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '/content/flight/93904',
-                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki al',
-                        'price' => '472 €',
+                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki',
+                        'price' => 'al 472 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -195,8 +195,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '/content/flight/93904',
-                        'title' => 'AirAsia kampaania SALE lennupiletid al',
-                        'price' => '6 €',
+                        'title' => 'AirAsia kampaania SALE lennupiletid',
+                        'price' => 'al 6 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -212,8 +212,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'Helsinkist Aasiasse puhkama al',
-                        'price' => '472 €',
+                        'title' => 'Helsinkist Aasiasse puhkama',
+                        'price' => 'al 472 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -229,8 +229,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'AirAsia kampaania SALE lennupiletid al',
-                        'price' => '6 €',
+                        'title' => 'AirAsia kampaania SALE lennupiletid',
+                        'price' => 'al 6 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -260,8 +260,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki al',
-                        'price' => '472 €',
+                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki',
+                        'price' => 'al 472 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -277,8 +277,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'AirAsia kampaania SALE lennupiletid al',
-                        'price' => '6 €',
+                        'title' => 'AirAsia kampaania SALE lennupiletid',
+                        'price' => 'al 6 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -294,8 +294,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki al',
-                        'price' => '472 €',
+                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki',
+                        'price' => 'al 472 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -311,8 +311,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'AirAsia kampaania SALE lennupiletid al',
-                        'price' => '6 €',
+                        'title' => 'AirAsia kampaania SALE lennupiletid',
+                        'price' => 'al 6 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -327,8 +327,6 @@
                     ],
                 ]
             ])
-
-
 
             @include('component.pagination.default', [
                 'collection' => $contents,

@@ -196,7 +196,27 @@
 
                     padding-bottom: $spacer * 3;
                 }
+
+                &.m-flex {
+
+                    @include respond-to(desktop) {
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+                }
             }
+
+                .r-destination__content-title-link {
+
+                    margin-top: $spacer / 2;
+
+                    @include respond-to(desktop) {
+
+                        margin-top: -$spacer / 6;
+                    }
+                }
 
             .r-destination__content-about {
 

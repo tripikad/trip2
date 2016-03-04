@@ -4,7 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="/css/main.css" rel='stylesheet' type='text/css'>
-        <title>@yield('title') | {{ config('site.name') }}</title>
+        @if(Request::is('/'))
+        <title>{{ config('site.name') }}</title>
+        @else
+        <title>@yield('title') – {{ config('site.name') }}</title>
+        @endif
         <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}">
         <meta property="og:url" content="{{ Request::root() }}">
         <meta property="og:type" content="@yield('fb_type', 'website')">

@@ -221,13 +221,22 @@
 
                         @if (isset($features['forum_posts']) && count($features['forum_posts']['contents']))
 
-                            <div class="r-destination__content-title">
+                            <div class="r-destination__content-title m-flex">
 
                                 @include('component.title', [
                                     'modifiers' => 'm-yellow',
                                     'title' => trans('destination.show.forum.title')
                                 ])
 
+                                <div class="r-destination__content-title-link">
+
+                                    @include('component.link', [
+                                        'modifiers' => 'm-icon m-small',
+                                        'title' => $root_destination->name .' foorum',
+                                        'route' => '#',
+                                        'icon' => 'icon-arrow-right'
+                                    ])
+                                </div>
                             </div>
 
                             @include('component.content.forum.list', [

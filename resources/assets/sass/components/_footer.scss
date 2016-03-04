@@ -38,12 +38,14 @@
 
         .c-footer__nav {
 
+            text-align: center;
             margin: 0 0 $spacer * 2;
 
             @include respond-to(tablet) {
 
                 @include span(15 of 24);
 
+                text-align: left;
                 display: flex;
                 flex-flow: row wrap;
                 float: none;
@@ -67,6 +69,7 @@
                     display: block;
                     width: $spacer * 7;
                     height: auto;
+                    margin: 0 auto;
 
                     img {
 
@@ -105,7 +108,12 @@
                         color: $color-text-neutral-darker;
                         text-decoration: none;
                         display: block;
-                        padding: $spacer / 2 0;
+                        padding: $spacer * 0.75 0;
+
+                        @include respond-to(tablet) {
+
+                            padding: $spacer / 2 0;
+                        }
 
                         .c-footer.m-alternative & {
 
