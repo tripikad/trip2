@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use Cookie;
 
 class AuthenticatedHeader
 {
@@ -11,12 +12,13 @@ class AuthenticatedHeader
     {
         $response = $next($request);
 
-        /*
-    	* Facebook redirect return somehow Symfony's RedirectResponse, not laravel's RedirectResponse object,
-    	* so there's no header function
-    	*/
-        if (get_class($response) != 'Symfony\Component\HttpFoundation\RedirectResponse') {
-            $response->header('X-Authenticated', Auth::check() ? 'true' : 'false');
+        if (Auth::check()) {
+
+            $response->withCookie(Cookie::forever('logged', 'true'));
+
+        } else {
+            
+            $response->withCookie(Cookie::forget('logged'));
         }
 
         return $response;
