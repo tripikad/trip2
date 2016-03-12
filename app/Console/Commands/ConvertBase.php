@@ -50,11 +50,11 @@ class ConvertBase extends Command
 
         $this->skip = env('CONVERT_SKIP', 10);
         $this->take = env('CONVERT_TAKE', 10);
-        $this->copyFiles = true;
+        $this->copyFiles = env('CONVERT_FILES', false);
         $this->scrambleMessages = env('CONVERT_SCRAMBLE', true);
         $this->fileHash = env('CONVERT_FILEHASH', false);
         $this->overwriteFiles = env('CONVERT_OVERWRITE', false);
-        $this->demoAccounts = true;
+        $this->demoAccounts = env('CONVERT_DEMOACCOUNTS', false);
     }
 
     // Nodes
@@ -812,18 +812,10 @@ class ConvertBase extends Command
                         public_path().config("imagepresets.presets.$preset.path").basename($to),
                         config("imagepresets.presets.$preset.quality")
                     );
-                echo public_path().config("imagepresets.presets.$preset.path").basename($to);
-                exit();
             }
         } catch (\Intervention\Image\Exception\NotReadableException $e) {
-            echo 'S1 '.$e;
-            exit();
         } catch (\Intervention\Image\Exception\NotSupportedException $e) {
-            echo 'S2 '.$e;
-            exit();
         } catch (\Symfony\Component\Debug\Exception\FatalErrorException $e) {
-            echo 'S3 '.$e;
-            exit();
         }
     }
 
