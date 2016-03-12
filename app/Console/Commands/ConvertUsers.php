@@ -158,12 +158,8 @@ class ConvertUsers extends ConvertBase
         $this->convertUsersOld();
         $this->convertUsersOther();
 
-        //if ($this->demoAccounts) {
+        if ($this->demoAccounts) {
             $this->convertUsersDemo();
-        //}
-        var_dump($this->demoAccounts);
-        echo ' ';
-        var_dump($this->copyFiles);
-        exit();
+        }
     }
 }
