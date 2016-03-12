@@ -50,11 +50,11 @@ class ConvertBase extends Command
 
         $this->skip = env('CONVERT_SKIP', 10);
         $this->take = env('CONVERT_TAKE', 10);
-        $this->copyFiles = env('CONVERT_FILES', false);
+        $this->copyFiles = true;
         $this->scrambleMessages = env('CONVERT_SCRAMBLE', true);
         $this->fileHash = env('CONVERT_FILEHASH', false);
         $this->overwriteFiles = env('CONVERT_OVERWRITE', false);
-        $this->demoAccounts = env('CONVERT_DEMOACCOUNTS', false);
+        $this->demoAccounts = true;
     }
 
     // Nodes
