@@ -50,11 +50,11 @@ class ConvertBase extends Command
 
         $this->skip = env('CONVERT_SKIP', 10);
         $this->take = env('CONVERT_TAKE', 10);
-        $this->copyFiles = true;
+        $this->copyFiles = env('CONVERT_FILES', false);
         $this->scrambleMessages = env('CONVERT_SCRAMBLE', true);
         $this->fileHash = env('CONVERT_FILEHASH', false);
         $this->overwriteFiles = env('CONVERT_OVERWRITE', false);
-        $this->demoAccounts = true;
+        $this->demoAccounts = env('CONVERT_DEMOACCOUNTS', false);
     }
 
     // Nodes
@@ -801,7 +801,7 @@ class ConvertBase extends Command
             }
 
             foreach ($presets as $preset) {
-                Imageconv::make($to)
+                Imageconv::make($from)
                     ->{config("imagepresets.presets.$preset.operation")}(
                         config("imagepresets.presets.$preset.width"),
                         config("imagepresets.presets.$preset.height"),
