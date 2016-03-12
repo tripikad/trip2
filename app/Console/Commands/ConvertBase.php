@@ -782,12 +782,12 @@ class ConvertBase extends Command
                 'save_to' => $to,
                 'exceptions' => false,
             ]);
-            var_dump($response); exit();
+            var_dump($response); echo ' '.$from.' '.$to; echo ' S1'; exit();
         } catch (\GuzzleHttp\Exception\ConnectException $e) {
-            echo $e; exit();
+            echo $e; echo ' S2'; exit();
             //return false;
         } catch (\GuzzleHttp\Exception\RequestException $e) {
-            echo $e; exit();
+            echo $e; echo ' S3'; exit();
             //return false;
         }
 
