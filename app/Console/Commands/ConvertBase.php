@@ -782,13 +782,10 @@ class ConvertBase extends Command
                 'save_to' => $to,
                 'exceptions' => false,
             ]);
-            var_dump($response); echo ' '.$from.' '.$to; echo ' S1'; exit();
         } catch (\GuzzleHttp\Exception\ConnectException $e) {
-            echo $e; echo ' S2'; exit();
-            //return false;
+            return false;
         } catch (\GuzzleHttp\Exception\RequestException $e) {
-            echo $e; echo ' S3'; exit();
-            //return false;
+            return false;
         }
 
         return true;
@@ -804,7 +801,7 @@ class ConvertBase extends Command
             }
 
             foreach ($presets as $preset) {
-                Imageconv::make($to)
+                Imageconv::make($from)
                     ->{config("imagepresets.presets.$preset.operation")}(
                         config("imagepresets.presets.$preset.width"),
                         config("imagepresets.presets.$preset.height"),
