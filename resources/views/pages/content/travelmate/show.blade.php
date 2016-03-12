@@ -30,6 +30,8 @@
         <div class="r-travelmates__content m-first">
             <h1 class="r-travelmates__title">{{ $content->title }}</h1>
 
+            @include('component.actions', ['actions' => $content->getActions()])
+
             <div class="r-travelmates__meta">
                 <p class="r-travelmates__meta-date">
                     {{ trans('content.travelmate.post.added', [
