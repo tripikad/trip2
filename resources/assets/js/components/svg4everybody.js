@@ -1,4 +1,5 @@
-/* jslint latedef: svg4everybody */
+/*jslint latedef: "svg4everybody" */
+/*jshint camelcase: false */
 
 var svg4everybody_path = '/plugins/svg4everybody/',
     script = svg4everybody_path + 'svg4everybody.min.js';
