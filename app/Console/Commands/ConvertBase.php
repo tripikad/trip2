@@ -812,10 +812,18 @@ class ConvertBase extends Command
                         public_path().config("imagepresets.presets.$preset.path").basename($to),
                         config("imagepresets.presets.$preset.quality")
                     );
+                echo public_path().config("imagepresets.presets.$preset.path").basename($to);
+                exit();
             }
         } catch (\Intervention\Image\Exception\NotReadableException $e) {
+            echo 'S1 '.$e;
+            exit();
         } catch (\Intervention\Image\Exception\NotSupportedException $e) {
+            echo 'S2 '.$e;
+            exit();
         } catch (\Symfony\Component\Debug\Exception\FatalErrorException $e) {
+            echo 'S3 '.$e;
+            exit();
         }
     }
 
