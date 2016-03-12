@@ -3,7 +3,7 @@
 return [
 
     'show.good.offer' => 'Head pakkumised',
-    'show.link.view.all' => 'Vaata kõiki pakkumisi &rsaquo;',
+    'show.link.view.all' => 'Veel &rsaquo;',
     'show.user.havebeen.title' => 'Kui palju Trip.ee kasutajatest on siin käinud?',
     'show.user.wantstogo.title' => 'Kui palju Trip.ee kasutajatest tahavad sinna minna?',
 

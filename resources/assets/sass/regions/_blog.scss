@@ -32,7 +32,7 @@
 
         @include respond-to(tablet) {
 
-            height: $spacer * 25.5;
+            height: $spacer * 9;
         }
     }
 
@@ -49,29 +49,29 @@
 
     padding-top: $spacer * 2;
 
-    @include respond-to(tablet) {
+    @include respond-to(desktop) {
 
-        padding-top: 0;
-    }
-
-    .r-blog.m-index & {
-
-        @include respond-to(tablet) {
-
-            position: relative;
-            z-index: 10;
-            margin-top: -$spacer * 12.5;
-        }
+        padding-top: $spacer * 4;
     }
 }
 
 .r-blog__featured-list {
 
-    padding: $spacer * 4 0 0;
+    padding: 0;
 
     @include respond-to(tablet) {
 
-        padding: $spacer * 4 0;
+        padding: $spacer * 2 0;
+    }
+
+    .r-blog.m-profile & {
+
+        padding-top: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 4 0;
+        }
     }
 }
 
@@ -148,7 +148,7 @@
 
 .r-blog__content {
 
-    padding: $spacer * 4 0;
+    padding: $spacer * 2 0;
 
     @include respond-to(tablet) {
 
@@ -157,9 +157,11 @@
 
     &.m-small {
 
+        padding: $spacer * 2 0;
+
         @include respond-to(tablet) {
 
-            padding-top: $spacer * 5 0;
+            padding: $spacer * 5 0;
         }
     }
 }

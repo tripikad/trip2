@@ -36,10 +36,8 @@
 
                 <div class="r-block__header">
 
-                    @include('component.title', [
-                        'modifiers' => 'm-largest m-blue',
-                        'title' => 'Lisa uus kuulutus'
-                    ])
+                    <h1 class="c-travelmate-title m-large">Lisa uus kuulutus</h1>
+
                 </div>
 
                 {!! Form::model(isset($model) ? $model : null, [

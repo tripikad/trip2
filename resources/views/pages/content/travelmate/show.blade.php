@@ -27,11 +27,12 @@
     </div>
 
     <div class="r-travelmates__wrap">
-        <div class="r-travelmates__content">
+        <div class="r-travelmates__content m-first">
             <h1 class="r-travelmates__title">{{ $content->title }}</h1>
 
+            @include('component.actions', ['actions' => $content->getActions()])
+
             <div class="r-travelmates__meta">
-                @include('component.actions', ['actions' => $content->getActions()])
                 <p class="r-travelmates__meta-date">
                     {{ trans('content.travelmate.post.added', [
                         'created_at' => view('component.date.relative', [
@@ -240,13 +241,26 @@
                 @if (count($forums))
 
                     <div class="r-block__inner">
+
                         <div class="r-block__header">
 
-                            @include('component.title', [
-                                'modifiers' => 'm-purple',
-                                'title' => trans('destination.show.forum.title')
-                            ])
+                            <div class="r-block__header-title m-flex">
 
+                                @include('component.title', [
+                                    'modifiers' => 'm-purple',
+                                    'title' => trans('destination.show.forum.title')
+                                ])
+
+                                <div class="r-block__header-link">
+
+                                    @include('component.link', [
+                                        'modifiers' => 'm-icon m-small',
+                                        'title' => 'Tai foorum',
+                                        'route' => '#',
+                                        'icon' => 'icon-arrow-right'
+                                    ])
+                                </div>
+                            </div>
                         </div>
 
                         @include('component.content.forum.list', [
@@ -289,6 +303,7 @@
         </div>
     </div>
 
+
     @if (count($flights))
 
         <div class="r-travelmates__offers">
@@ -318,7 +333,16 @@
 
     @if (count($travel_mates))
 
+        @if (count($flights))
+
+        <div class="r-travelmates__additional m-padding">
+
+        @else
+
         <div class="r-travelmates__additional">
+
+        @endif
+
             <div class="r-travelmates__additional-wrap">
 
                 @include('component.travelmate.list', [

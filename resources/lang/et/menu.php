@@ -4,7 +4,7 @@ return [
 
     'header.home' => 'Trip.ee',
     'header.news' => 'Uudised',
-    'header.flights' => 'Soodsad lennupiletid',
+    'header.flights' => 'Lennupakkumised',
     'header.travelmates' => 'Reisikaaslased',
     'header.forum' => 'Foorum',
     'header.photos' => 'Pildid',
@@ -17,7 +17,7 @@ return [
     'auth.logout' => 'Logi välja',
 
     'footer.news' => 'Uudised',
-    'footer.flights' => 'Soodsad lennupiletid',
+    'footer.flights' => 'Lennupakkumised',
     'footer.offers' => 'Pakkumised',
     'footer.travelmates' => 'Reisikaaslased',
 

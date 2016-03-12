@@ -187,11 +187,19 @@
         </div>
     </div>
 
+    {{-- Kui kommentaare ei ole ja kommenteerida ei saa siis seda blokki ei tohiks üldse näidata --}}
+
+    @if (\Auth::check() || count($content->comments) > 0)
+
     <div class="r-blog__comments">
 
         <div class="r-blog__wrap">
 
             <div class="r-blog__wrap-inner m-smaller">
+
+                {{-- Kui kommentaare ei ole, ei tohiks seda üldse näidata --}}
+
+                @if (count($content->comments) > 0)
 
                 <div class="r-block m-small">
 
@@ -246,14 +254,13 @@
                         'thumbs' => view('component.flags', ['flags' => $content->getFlags()]),
                     ])
                      --}}
-
-
-
                 </div>
+
+                @endif
 
                 @if (\Auth::check())
 
-                    <div class="r-block m-small">
+                    <div class="r-block m-small m-no-margin">
 
                         <div class="r-block__header">
 
@@ -271,6 +278,8 @@
             </div>
         </div>
     </div>
+
+    @endif
 
     <div class="r-blog__offers">
 

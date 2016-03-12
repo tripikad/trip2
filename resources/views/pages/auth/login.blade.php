@@ -94,7 +94,6 @@
                     <a href="{{ route('reset.apply.form') }}" class="c-auth-footer__link">{{ trans('auth.reset.apply.title.link') }}</a></p>
 
             </div>
-
         </div>
 
         {{--

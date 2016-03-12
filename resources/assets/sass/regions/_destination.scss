@@ -60,6 +60,11 @@
 
         @include respond-to(tablet) {
 
+            padding-bottom: $spacer * 22;
+        }
+
+        @include respond-to(desktop) {
+
             padding-bottom: $spacer * 24;
         }
     }
@@ -69,6 +74,11 @@
             @include wrap;
 
             position: relative;
+
+            @include respond-to(tablet) {
+
+                min-height: $spacer * 16.5;
+            }
         }
 
             .r-destination__about-column {
@@ -136,14 +146,13 @@
 
     .r-destination__content {
 
-        padding-bottom: $spacer * 2;
         padding-top: $spacer * 2;
         background: $color-white;
 
         @include respond-to(tablet) {
 
             margin-top: -$spacer * 20;
-            margin-bottom: $spacer * 8;
+            margin-bottom: $spacer * 4;
             padding-top: 0;
             background: none;
         }
@@ -154,17 +163,60 @@
             @include wrap;
 
             background: $color-white;
+
+            &.m-padding {
+
+                @include respond-to(tablet) {
+
+                    padding-bottom: $spacer * 4;
+                }
+
+                @include respond-to(desktop) {
+
+                    padding-bottom: $spacer * 4;
+                }
+
+                @include respond-to(desktop-medium) {
+
+                    padding-bottom: $spacer * 4;
+                }
+
+                @include respond-to(desktop-large) {
+
+                    padding-bottom: $spacer * 4;
+                }
+            }
         }
 
             .r-destination__content-title {
 
                 padding-bottom: $spacer * 2;
 
-                @include respond-to(tablet) {
+                @include respond-to(desktop) {
 
                     padding-bottom: $spacer * 3;
                 }
+
+                &.m-flex {
+
+                    @include respond-to(desktop) {
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+                }
             }
+
+                .r-destination__content-title-link {
+
+                    margin-top: $spacer / 2;
+
+                    @include respond-to(desktop) {
+
+                        margin-top: -$spacer / 6;
+                    }
+                }
 
             .r-destination__content-about {
 
@@ -174,7 +226,7 @@
                 z-index: 10;
                 padding-bottom: $spacer * 2;
 
-                @include respond-to(tablet) {
+                @include respond-to(desktop) {
 
                     padding-bottom: $spacer * 4;
                 }
@@ -206,6 +258,11 @@
                         @include respond-to(tablet) {
 
                             @include span(8 of 28 at 3);
+                            padding-top: $spacer * 2;
+                        }
+
+                        @include respond-to(desktop) {
+
                             padding-top: $spacer * 4;
                         }
                     }
@@ -217,6 +274,11 @@
                         @include respond-to(tablet) {
 
                             @include span(6 of 28 at 13);
+                            padding-top: $spacer * 2;
+                        }
+
+                        @include respond-to(desktop) {
+
                             padding-top: $spacer * 4;
                         }
                     }
@@ -293,35 +355,56 @@
                         }
                     }
 
-            .r-destination__content-travel-mates {
+                    .r-destination__content-news-block {
 
-                @include respond-to(tablet) {
+                        padding-bottom: $spacer * 2;
 
-                    padding-bottom: $spacer * 4;
-                }
-            }
+                        &:last-of-type {
 
-                .r-destination__content-travel-mates-wrap {
-
-                    @include respond-to(tablet) {
-
-                        @include wrap('narrow');
+                            padding-bottom: 0;
+                        }
                     }
-                }
 
-            .r-destination__content-flights {
+    .r-destination__flights {
 
-                @include respond-to(tablet) {
+        @include respond-to(tablet) {
 
-                    position: relative;
-                    bottom: -$spacer * 4;
-                }
+            position: relative;
+            margin-top: -$spacer * 8;
+            padding-bottom: $spacer * 4;
+        }
+    }
+
+        .r-destination__flights-wrap {
+
+            @include wrap('narrow');
+        }
+
+    .r-destination__travelmates {
+
+        padding: $spacer * 2 0 0 0;
+
+        @include respond-to(tablet) {
+
+            padding-top: 0;
+            padding-bottom: $spacer * 2;
+        }
+
+        @include respond-to(desktop) {
+
+            padding-bottom: $spacer * 4;
+        }
+    }
+
+        .r-destination__travelmates-wrap {
+
+            @include wrap();
+
+            @include respond-to(tablet) {
+
+                @include wrap('narrow');
             }
-
-                .r-destination__content-flights-wrap {
-
-                    @include wrap('narrow');
-                }
+        }
 
     .r-destination__footer-promo {
 
