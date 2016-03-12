@@ -143,11 +143,6 @@ class ConvertUsers extends ConvertBase
                 'verified' => 1,
             ]);
 
-            var_dump($this->demoAccounts);
-            echo ' '.bcrypt('demo'.$role).' '.md5('demo'.$role);
-            $duser = User::whereName('demo'.$role)->first();
-            echo $duser->password;
-            exit();
             ++$i;
 
             $this->output->progressAdvance();
