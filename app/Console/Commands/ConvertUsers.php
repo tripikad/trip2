@@ -143,8 +143,11 @@ class ConvertUsers extends ConvertBase
                 'verified' => 1,
             ]);
 
-            echo bcrypt('demo'.$role).' '.md5('demo'.$role);
-
+            var_dump($this->demoAccounts);
+            echo ' '.bcrypt('demo'.$role).' '.md5('demo'.$role);
+            $duser = User::whereName('demo'.$role)->first();
+            echo $duser->password;
+            exit();
             ++$i;
 
             $this->output->progressAdvance();
@@ -160,8 +163,8 @@ class ConvertUsers extends ConvertBase
         $this->convertUsersOld();
         $this->convertUsersOther();
 
-        if ($this->demoAccounts) {
+        //if ($this->demoAccounts) {
             $this->convertUsersDemo();
-        }
+        //}
     }
 }
