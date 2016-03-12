@@ -123,7 +123,18 @@ class ConvertUsers extends ConvertBase
 
     public function convertUsersDemo()
     {
-        foreach (['regular', 'admin', 'superuser'] as $role) {
+
+        $demoUsers = [
+            'regular',
+            'admin',
+            'superuser',
+        ];
+        $this->info('Converting demo users');
+
+        $this->output->progressStart(count($demoUsers));
+
+        $i = 0;
+        foreach ($demoUsers as $role) {
             User::create([
                 'name' => 'demo'.$role,
                 'email' => $role.'@example.com',
@@ -131,7 +142,17 @@ class ConvertUsers extends ConvertBase
                 'role' => $role,
                 'verified' => 1,
             ]);
-        };
+
+            echo bcrypt('demo'.$role).' '.md5('demo'.$role);
+
+            ++$i;
+
+            $this->output->progressAdvance();
+        }
+
+        $this->output->progressFinish();
+
+        $this->line("Converted $i users");
     }
 
     public function handle()
