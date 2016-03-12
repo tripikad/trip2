@@ -123,7 +123,6 @@ class ConvertUsers extends ConvertBase
 
     public function convertUsersDemo()
     {
-
         $demoUsers = [
             'regular',
             'admin',
