@@ -1,11 +1,14 @@
 @if (session('info'))
 
-    <div class="c-alert m-success js-alert">
+    <div class="c-alert m-success m-fixed js-alert">
 
-        {{ session('info') }}
+        <div class="c-alert__inner">
 
-        <span class="c-alert__close js-alert__close">&times;</span>
+            {{ session('info') }}
 
+            <span class="c-alert__close js-alert__close">&times;</span>
+
+        </div>
     </div>
 
 @endif

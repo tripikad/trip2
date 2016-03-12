@@ -3,47 +3,43 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use DOMDocument;
+use Jenssegers\Date\Date;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
     public function boot()
     {
-        $this->composeSvgStandalone();
+        $this->composeComponentDateSelect();
     }
 
-    /**
-     * Compose the SVG standalone.
-     */
-    private function composeSvgStandalone()
+    private function composeComponentDateSelect()
     {
-        view()->composer('component.svg.standalone', function ($view) {
+        view()->composer('component.date.select', function ($view) {
 
             $data = $view->getData();
-            if (! file_exists(public_path('/svg/'.$data['name'].'.svg'))) {
-                $logo = '';
+
+            if (isset($data['month'])) {
+                $months = [];
+                $year = Date::now()->format('Y');
+                for ($i = 1; $i <= 12; ++$i) {
+                    $months[$i] = Date::parse("01.$i.$year")->format('F');
+                }
+
+                $view->with('month', $months);
             } else {
-                $svg = new DOMDocument();
+                $numbers = [];
 
-                $svg->load(public_path('/svg/'.$data['name'].'.svg'));
+                for ($i = $data['from']; $i <= $data['to']; ++$i) {
+                    $numbers[$i] = (strlen($i) == 1 ? '0' : '').
+                        $i;
+                }
 
-                $logo = $svg->saveXML($svg->documentElement);
+                $view->with('from_to', $numbers);
             }
 
-            $view->with('name', $logo);
         });
     }
 
-    /**
-     * Register the application services.
-     *
-     * @return void
-     */
     public function register()
     {
         //

@@ -38,7 +38,7 @@
                     'user' => $message->fromUser->name,
                     'created_at' => view('component.date.long', ['date' => $message->created_at])
                 ]),
-                'text' => nl2br($message->body),
+                'text' => nl2br($message->body_filtered),
                 'profile' => [
                     'modifiers' => 'm-small',
                     'image' => $message->fromUser->imagePreset(),

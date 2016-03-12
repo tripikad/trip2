@@ -5,7 +5,10 @@ return [
     'index' => [
 
         'with' => ['destinations', 'topics'],
-        'latest' => 'created_at',
+        'orderBy' => [
+            'field' => 'created_at',
+            'order' => 'desc',
+        ],
         'paginate' => 25,
     ],
 

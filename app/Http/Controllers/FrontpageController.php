@@ -7,7 +7,8 @@ use View;
 use Cache;
 use App\Content;
 use App\Destination;
-use Illuminate\Support\Collection;
+use App\Main;
+//use Illuminate\Support\Collection;
 use DB;
 
 class FrontpageController extends Controller
@@ -23,6 +24,7 @@ class FrontpageController extends Controller
                 'type' => ['flight'],
                 'status' => 1,
                 'latest' => 'created_at',
+                'whereBetween' =>  Main::getExpireData('flight', 1),
             ],
             'flights2' => [
                 'skip' => 3,
@@ -30,6 +32,7 @@ class FrontpageController extends Controller
                 'type' => ['flight'],
                 'status' => 1,
                 'latest' => 'created_at',
+                'whereBetween' => Main::getExpireData('flight', 1),
             ],
             'content' => [
                 'take' => 1,
@@ -42,17 +45,11 @@ class FrontpageController extends Controller
                 'type' => ['forum', 'buysell', 'expat'],
                 'status' => 1,
                 'latest' => 'created_at',
+                'whereBetween' =>  Main::getExpireData('buysell', 1),
             ],
-            'news1' => [
+            'news' => [
                 'skip' => null,
-                'take' => 2,
-                'type' => ['news'],
-                'status' => 1,
-                'latest' => 'created_at',
-            ],
-            'news2' => [
-                'skip' => 2,
-                'take' => 5,
+                'take' => 8,
                 'type' => ['news'],
                 'status' => 1,
                 'latest' => 'created_at',
@@ -80,12 +77,15 @@ class FrontpageController extends Controller
             ],
             'travelmates' => [
                 'skip' => null,
-                'take' => 4,
+                'take' => 3,
                 'type' => ['travelmate'],
                 'status' => 1,
                 'latest' => 'created_at',
+                'whereBetween' =>  Main::getExpireData('travelmate', 1),
             ],
         ];
+
+        $types['forums']['whereBetween']['only'] = 'buysell';
 
         $findDestinationsParent = [
             'flights1',
@@ -96,9 +96,11 @@ class FrontpageController extends Controller
         $viewVariables['destinations'] = $destinations;
 
         foreach ($findDestinationsParent as $type) {
-            foreach ($viewVariables[$type] as $key => $element) {
-                $viewVariables[$type][$key]['destination'] = $element->destinations->first();
-                $viewVariables[$type][$key]['parent_destination'] = $element->getDestinationParent();
+            if (isset($viewVariables[$type])) {
+                foreach ($viewVariables[$type] as $key => $element) {
+                    $viewVariables[$type][$key]['destination'] = $element->destinations->first();
+                    $viewVariables[$type][$key]['parent_destination'] = $element->getDestinationParent();
+                }
             }
         }
 
@@ -117,6 +119,7 @@ class FrontpageController extends Controller
     {
         $content_query = null;
         $i = 0;
+        $viewVariables = [];
 
         foreach ($types as $key => $type) {
             ++$i;
@@ -124,9 +127,43 @@ class FrontpageController extends Controller
             $query = null;
 
             if (isset($type['id'])) {
-                $query = Content::select(['*', DB::raw('\''.$key.'\' AS `index`')])->where('id', $type['id'])->whereStatus($type['status']);
+                //$query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->where('id', $type['id'])->whereStatus($type['status']);
+                $query = Content::where('id', $type['id'])->whereStatus($type['status']);
             } else {
-                $query = Content::select(['*', DB::raw('\''.$key.'\' AS `index`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
+                //$query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
+                $query = Content::whereIn('type', $type['type'])->whereStatus($type['status']);
+
+                if (isset($type['whereBetween']) && ! empty($type['whereBetween'])) {
+                    if (! isset($type['whereBetween']['only'])) {
+                        $expireData = [
+                            $type['whereBetween']['daysFrom'],
+                            $type['whereBetween']['daysTo'],
+                        ];
+
+                        if (in_array($type['whereBetween']['field'], $expireData)) {
+                            if (($datakey = array_search($type['whereBetween']['field'], $expireData)) !== false) {
+                                unset($expireData[$datakey]);
+                            }
+
+                            $query = $query->whereRaw('`'.$type['whereBetween']['field'].'` >= ?', [
+                                array_values($expireData)[0],
+                            ]);
+                        } else {
+                            $query = $query->whereBetween($type['whereBetween']['field'], [
+                                $type['whereBetween']['daysFrom'],
+                                $type['whereBetween']['daysTo'],
+                            ]);
+                        }
+                    } else {
+                        $query = $query->whereRaw('IF(`type` = ?, ?, ?) BETWEEN ? AND ?', [
+                                $type['whereBetween']['only'],
+                                $type['whereBetween']['field'],
+                                $type['whereBetween']['daysTo'],
+                                $type['whereBetween']['daysFrom'],
+                                $type['whereBetween']['daysTo'],
+                            ]);
+                    }
+                }
 
                 if (isset($type['with']) && $type['with'] !== null) {
                     $query = $query->with($type['with']);
@@ -145,22 +182,22 @@ class FrontpageController extends Controller
                 }
             }
 
-            if ($i == 1) {
+            /*if ($i == 1) {
                 $content_query = $query;
             } else {
                 $content_query = $content_query->unionAll($query);
-            }
-        }
-
-        $content_query = $content_query->with('images')->get();
-
-        $viewVariables = [];
-
-        foreach ($types as $key => $type) {
-            $$key = Collection::make($content_query->where('index', $key)->values()->all());
-
+            }*/
+            $$key = $query->with('images')->get();
             $viewVariables[$key] = $$key;
         }
+
+        //$content_query = $content_query->with('images')->get();
+
+        /*foreach ($types as $key => $type) {
+            $$key = Collection::make($content_query->where('pseudo', $key)->values()->all());
+
+            $viewVariables[$key] = $$key;
+        }*/
 
         return $viewVariables;
     }

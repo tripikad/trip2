@@ -19,7 +19,6 @@ class AuthTest extends TestCase
             ->type('user@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
-            ->check('eula')
             ->press(trans('auth.register.submit.title'))
             ->seePageIs('/')
             ->see(trans('auth.register.sent.info'))
@@ -65,7 +64,7 @@ class AuthTest extends TestCase
 
         $this->visit('/')
             ->click(trans('menu.auth.login'))
-            ->click(trans('auth.reset.apply.title'))
+            ->click(trans('auth.reset.apply.title.link'))
             ->type($user->email, 'email')
             ->press(trans('auth.reset.apply.submit.title'))
             ->seePageIs('/')
@@ -89,14 +88,14 @@ class AuthTest extends TestCase
             ])
             ->seeLink(str_limit($user->name, 15), 'user/'.$user->id)
             ->visit('/user/'.$user->id)
-            ->seeLink(trans('user.edit.title'), 'user/'.$user->id.'/edit');
+            ->seeLink(trans('menu.user.edit.profile'), 'user/'.$user->id.'/edit');
     }
 
     public function test_nonregistered_user_can_not_reset_password()
     {
         $this->visit('/')
             ->click(trans('menu.auth.login'))
-            ->click(trans('auth.reset.apply.title'))
+            ->click(trans('auth.reset.apply.title.link'))
             ->type('user@example.com', 'email')
             ->press(trans('auth.reset.apply.submit.title'))
             ->seePageIs('/reset/apply')

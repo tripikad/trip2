@@ -10,4 +10,4 @@ code: |
 
 --}}
 
-{!! $name !!}
+<span class="js-standalone" data-name="/svg/{!! $name !!}.svg"></span>

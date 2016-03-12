@@ -10,7 +10,11 @@ code: |
             'image' => '',
             'title' => '',
             'route' => '',
-            'badge' => ''
+            'badge' => '',
+            'letter' => [
+                'modifiers' => 'm-green m-tiny',
+                'text' => 'W'
+            ]
         ],
         'children' => [
             [
@@ -40,9 +44,10 @@ code: |
                 @include('component.profile', [
                     'modifiers' => 'm-mini',
                     'image' => $profile['image'],
+                    'letter' => $profile['letter'],
                     'badge' => [
-                        'modifiers' => 'm-inverted '. $modifiers,
-                        'count' => $profile['badge']
+                        'modifiers' => 'm-inverted m-red',
+                        'count' => $profile['badge'],
                     ]
                 ])
             </div>
@@ -67,7 +72,7 @@ code: |
 
                                 @include('component.badge', [
                                     'modifiers' => $modifiers,
-                                    'count' => $child['badge']
+                                    'count' => $child['badge'],
                                 ])
 
                                 </span>

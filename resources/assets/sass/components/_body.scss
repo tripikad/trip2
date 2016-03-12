@@ -3,6 +3,11 @@
     font-size: $font-size-normal;
     line-height: 1.5;
 
+    >:last-child {
+
+        margin-bottom: 0;
+    }
+
     p {
 
         font-size: $font-size-normal;
@@ -12,19 +17,34 @@
     img {
 
         max-width: 100%;
-        margin-bottom: $spacer * 3;
+        margin-bottom: $spacer * 1.5;
         height: auto;
         box-shadow: 0 12px 24px rgba($shadow-dark, 0.3);
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 3;
+        }
     }
 
     figure {
 
-        margin: 0 auto $spacer * 3;
+        margin: 0 auto $spacer * 1.5;
         text-align: center;
+
+        @include respond-to(tablet) {
+
+            margin: 0 auto $spacer * 3;
+        }
 
         img {
 
-            margin-bottom: $spacer * 2;
+            margin-bottom: $spacer;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 2;
+            }
         }
 
         figcaption {

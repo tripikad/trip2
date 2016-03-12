@@ -1,0 +1,89 @@
+.c-flight-search {
+
+    padding: $spacer * 2;
+    background: $color-fill-neutral-light;
+
+    @include respond-to(tablet) {
+
+        padding: $spacer * 3 $spacer * 3 $spacer;
+    }
+}
+
+    .c-flight-search__header {
+
+        padding-bottom: $spacer;
+    }
+
+        .c-flight-search__header-title {
+
+            margin-bottom: $spacer;
+        }
+
+        .c-flight-search__header-text {
+
+            line-height: 1.5;
+            margin-bottom: $spacer;
+        }
+
+    .c-flight-search__row {
+
+        @include clearfix;
+
+        &.m-first {}
+
+        &.m-last {}
+    }
+
+        .c-flight-search__row-column {
+
+            .c-flight-search__row.m-first & {
+
+                @include respond-to(tablet) {
+
+                    width: 50%;
+                    float: left;
+                }
+
+                &:first-child {
+
+                    @include respond-to(tablet) {
+
+                        padding-right: $spacer / 2;
+                    }
+                }
+
+                &:last-child {
+
+                    @include respond-to(tablet) {
+
+                        padding-left: $spacer / 2;
+                    }
+                }
+            }
+
+            .c-flight-search__row.m-last & {
+
+                @include respond-to(tablet) {
+
+                    width: 25%;
+                    padding: $spacer / 6 $spacer / 2;
+                    float: left;
+                }
+
+                &:first-child {
+
+                    @include respond-to(tablet) {
+
+                        padding-left: 0;
+                    }
+                }
+
+                &:last-child {
+
+                    @include respond-to(tablet) {
+
+                        padding: 0 0 0 $spacer / 2;
+                    }
+                }
+            }
+        }

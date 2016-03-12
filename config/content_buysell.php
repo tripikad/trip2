@@ -12,7 +12,16 @@ return [
     'index' => [
 
         'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],
-        'latest' => 'updated_at',
+        'orderBy' => [
+            'field' => 'updated_at',
+            'order' => 'desc',
+        ],
+        'expire' => [
+            'field' => 'created_at',
+            'daysFrom' => -30,
+            'daysTo' => false,
+            'type' => 'datetime',
+        ],
         'paginate' => 25,
     ],
 

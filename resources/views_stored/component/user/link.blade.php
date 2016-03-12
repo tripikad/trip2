@@ -1,1 +1,0 @@
-<a href="{{ route('user.show', [$user]) }}">{{ $user->name }}</a>

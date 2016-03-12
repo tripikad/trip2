@@ -31,6 +31,8 @@ modifiers:
 
         <div class="c-masthead__logo">
 
+            <a href="/" class="c-masthead__logo-link">
+
             @if (isset($image) && isset($modifiers))
 
                 @include ('component.logo',[
@@ -45,9 +47,19 @@ modifiers:
 
             @endif
 
+            </a>
+
         </div>
 
+        @if (isset($title))
+
+        <h1 class="c-masthead__title">{{ $title }}</h1>
+
+        @else
+
         <h1 class="c-masthead__title">@yield('title')</h1>
+
+        @endif
 
         @if (isset($subtitle))
 
