@@ -558,9 +558,12 @@ class ConvertBase extends Command
         $to = public_path().config('imagepresets.original.path').$filename;
 
         if ($this->copyFiles) {
+            echo $from.' '.$to;
             if (file_exists($to) && ! $this->overwriteFiles) {
+                echo ' File exists';
                 return false;
             }
+            exit();
 
             $this->copyFile($from, $to);
 
@@ -783,9 +786,11 @@ class ConvertBase extends Command
                 'exceptions' => false,
             ]);
         } catch (\GuzzleHttp\Exception\ConnectException $e) {
-            return false;
+            echo $e; exit();
+            //return false;
         } catch (\GuzzleHttp\Exception\RequestException $e) {
-            return false;
+            echo $e; exit();
+            //return false;
         }
 
         return true;
