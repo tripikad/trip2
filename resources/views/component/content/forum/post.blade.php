@@ -116,10 +116,13 @@ code: |
 
             @if(isset($tags))
 
-            @include('component.tags', [
-                'modifiers' => 'm-small',
-                'items' => $tags
-            ])
+            <div class="c-forum-post__tags">
+
+                @include('component.tags', [
+                    'modifiers' => 'm-small',
+                    'items' => $tags
+                ])
+            </div>
 
             @endif
 

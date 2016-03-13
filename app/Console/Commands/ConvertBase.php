@@ -48,13 +48,13 @@ class ConvertBase extends Command
 
         // max size: messages ~100000
 
-        $this->skip = env('CONVERT_SKIP', 10);
-        $this->take = env('CONVERT_TAKE', 10);
-        $this->copyFiles = env('CONVERT_FILES', false);
-        $this->scrambleMessages = env('CONVERT_SCRAMBLE', true);
-        $this->fileHash = env('CONVERT_FILEHASH', false);
-        $this->overwriteFiles = env('CONVERT_OVERWRITE', false);
-        $this->demoAccounts = env('CONVERT_DEMOACCOUNTS', false);
+        $this->skip = config('convert.skip');
+        $this->take = config('convert.take');
+        $this->copyFiles = config('convert.copyFiles');
+        $this->scrambleMessages = config('convert.scrambleMessages');
+        $this->fileHash = config('convert.fileHash');
+        $this->overwriteFiles = config('convert.overwriteFiles');
+        $this->demoAccounts = config('convert.demoAccounts');
     }
 
     // Nodes
@@ -801,7 +801,7 @@ class ConvertBase extends Command
             }
 
             foreach ($presets as $preset) {
-                Imageconv::make($to)
+                Imageconv::make($from)
                     ->{config("imagepresets.presets.$preset.operation")}(
                         config("imagepresets.presets.$preset.width"),
                         config("imagepresets.presets.$preset.height"),
@@ -975,8 +975,6 @@ class ConvertBase extends Command
         if (isset($genderMap[$string])) {
             return $genderMap[$string];
         }
-
-        return;
     }
 
     public function convertBirthyear($string)
@@ -984,7 +982,5 @@ class ConvertBase extends Command
         if (preg_match('/[12][0-9]{3}/', $string) && intval($string) > 1915 && intval($string) < 2010) {
             return intval($string);
         }
-
-        return;
     }
 }

@@ -39,7 +39,7 @@
         position: relative;
         z-index: 10;
         margin: 0 auto;
-        padding-bottom: $spacer * 4;
+        margin-bottom: $spacer * 2;
 
         @include respond-to(tablet) {
 
@@ -50,6 +50,20 @@
         @include respond-to(desktop) {
 
             width: span(12 of 24);
+        }
+
+        &.m-wide {
+
+            @include respond-to(tablet) {
+
+                width: span(16 of 24);
+                padding-bottom: $spacer * 8;
+            }
+
+            @include respond-to(desktop) {
+
+                width: span(14 of 24);
+            }
         }
     }
 

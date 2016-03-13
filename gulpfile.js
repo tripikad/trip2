@@ -12,7 +12,6 @@ gulp.task('sass', function() {
         './node_modules/normalize.css/normalize.css',
         './node_modules/susy/sass/_susy.scss',
         './node_modules/breakpoint-sass/stylesheets/_breakpoint.scss',
-        './node_modules/selectize/dist/css/selectize.css',
         './node_modules/dropzone/dist/dropzone.css',
         './resources/assets/sass/base/_base.mixins.scss',
         './resources/assets/sass/base/_base.colors.scss',
@@ -43,6 +42,7 @@ gulp.task('js', function() {
     gulp.src([
         './node_modules/jquery/dist/jquery.js',
         './resources/assets/js/jquery-ui/jquery-ui.min.js',
+        './resources/assets/js/svg4everybody/svg4everybody.min.js',
         './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
         './node_modules/selectize/dist/js/standalone/selectize.js',
         './node_modules/dropzone/dist/dropzone.js',

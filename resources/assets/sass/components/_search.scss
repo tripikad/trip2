@@ -14,6 +14,11 @@
 
             width: $spacer * 33;
         }
+
+        &.m-active {
+
+            z-index: 200;
+        }
     }
 }
 
@@ -31,12 +36,18 @@
         height: $spacer * 2;
         width: $spacer * 2;
         transform: translateY(-50%);
+        cursor: pointer;
 
         @include respond-to(tablet) {
 
             left: $spacer * 1.5;
             height: $spacer * 4;
             width: $spacer * 4;
+        }
+
+        &:hover {
+
+            opacity: 0.6;
         }
 
         .c-search.m-small & {
@@ -71,6 +82,11 @@
             .c-search.m-small.m-alternative & {
 
                 fill: $color-white;
+            }
+
+            .c-search.m-small.m-blog & {
+
+                fill: $color-text-gray;
             }
         }
 
@@ -107,8 +123,13 @@
 
             font-size: $font-size-normal;
             padding: $spacer $spacer $spacer * 0.75 $spacer * 4;
-            background: none;
+            background: $color-white;
             box-shadow: none;
+
+            @include respond-to(tablet) {
+
+                background: none;
+            }
         }
 
         &::-webkit-input-placeholder {
@@ -156,15 +177,30 @@
 
     .c-search.m-active & {
 
-        display: block;
+        @include respond-to(desktop) {
+
+            display: block;
+            padding-bottom: $spacer * 4;
+        }
     }
 }
+
+    .c-search__results-wrap {
+
+        height: $spacer * 32;
+        //padding-bottom: $spacer * 2;
+
+        .c-search.m-small & {
+
+            height: $spacer * 24;
+        }
+    }
 
     .c-search__results-content {
 
         overflow: auto;
-        height: $spacer * 32;
-        padding-bottom: $spacer * 6;
+        max-height: 100%;
+        //padding-bottom: $spacer * 2;
     }
 
         .c-search__results-list {
@@ -176,15 +212,21 @@
             padding: $spacer $spacer * 2 $spacer / 2 $spacer * 7;
             border-bottom: 1px solid $color-fill-neutral;
 
+            &:last-child {
+
+                border: none;
+                margin-bottom: $spacer * 2;
+            }
+
             .c-search.m-small & {
 
                 margin: $spacer / 2 0 0 0;
                 padding: $spacer / 2 $spacer 0 $spacer * 4;
-            }
 
-            &:last-child {
+                &:last-child {
 
-                border: none;
+                    margin-bottom: $spacer * 2;
+                }
             }
 
             &:before {

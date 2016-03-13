@@ -38,10 +38,12 @@ code: |
 
                     <div class="form-group">
 
-                        {!! Form::file($name) !!}
+                        {!! Form::file($name, [
+                            'class' => 'c-form__input m-medium dropzone-input'
+                        ]) !!}
 
                         {!! Form::submit('Submit', [
-                            'class' => 'btn btn-primary'
+                            'class' => 'c-button m-small'
                         ]) !!}
 
                     </div>
@@ -244,74 +246,76 @@ code: |
 
                 Dropzone.autoDiscover = false;
 
+
                 createDropzone(
-                        '#{{ isset($id) ? $id : 'dropzoneImage' }}',
-                        '{{ $form['url'] }}',
-                        '{{ isset($form['method']) && $form['method']!='put' ? $form['method'] : 'post' }}',
-                        '{{ $name }}',
+                    '.dropzone',
+                    // #{{ isset($id) ? $id : 'dropzoneImage' }} <- changed to .dropzone
+                    '{{ $form['url'] }}',
+                    '{{ isset($form['method']) && $form['method']!='put' ? $form['method'] : 'post' }}',
+                    '{{ $name }}',
 
-                        @if (isset($maxFileSize))
+                    @if (isset($maxFileSize))
 
-                            '{{ $maxFileSize }}',
+                        '{{ $maxFileSize }}',
 
-                        @else
-
-                            '',
-
-                        @endif
-
-                        @if (isset($uploadMultiple))
-
-                            @if ($uploadMultiple === true)
-
-                                'true',
-
-                            @else
-
-                                'false',
-
-                            @endif
-
-                        @else
-
-                            '',
-
-                        @endif
-
-                        @if (isset($maxFiles))
-
-                            '{{ $maxFiles }}',
-
-                        @else
-
-                            '',
-
-                        @endif
-
-                        @if (isset($fields) && ! empty($fields))
-
-                            'false',
-
-                        @else
-
-                            '',
-
-                        @endif
+                    @else
 
                         '',
 
-                        [
-                            '{{ trans('site.dropzone.default') }}',
-                            '{{ trans('site.dropzone.fallback.message') }}',
-                            '{{ trans('site.dropzone.fallback.text') }}',
-                            '{{ trans('site.dropzone.max.files.exceeded') }}',
-                            '{{ trans('site.dropzone.file.size.exceeded') }}',
-                            '{{ trans('site.dropzone.file.remove') }}',
-                        ],
+                    @endif
 
-                        '#form-{{ isset($id) ? $id : 'dropzoneImage' }}',
-                        '#submit-{{ isset($id) ? $id : 'dropzoneImage' }}'
+                    @if (isset($uploadMultiple))
 
+                        @if ($uploadMultiple === true)
+
+                            'true',
+
+                        @else
+
+                            'false',
+
+                        @endif
+
+                    @else
+
+                        '',
+
+                    @endif
+
+                    @if (isset($maxFiles))
+
+                        '{{ $maxFiles }}',
+
+                    @else
+
+                        '',
+
+                    @endif
+
+                    @if (isset($fields) && ! empty($fields))
+
+                        'false',
+
+                    @else
+
+                        '',
+
+                    @endif
+
+                    '',
+
+                    [
+                        //'{{ trans('site.dropzone.default') }}',
+                        'Üleslaadimiseks lohista fail siia või <span class="dropzone-link">vajuta siia</span>',
+                        '{{ trans('site.dropzone.fallback.message') }}',
+                        '{{ trans('site.dropzone.fallback.text') }}',
+                        '{{ trans('site.dropzone.max.files.exceeded') }}',
+                        '{{ trans('site.dropzone.file.size.exceeded') }}',
+                        '{{ trans('site.dropzone.file.remove') }}',
+                    ],
+
+                    '#form-{{ isset($id) ? $id : 'dropzoneImage' }}',
+                    '#submit-{{ isset($id) ? $id : 'dropzoneImage' }}'
                 );
 
             </script>

@@ -285,11 +285,13 @@
 
      <div class="r-auth__notifications">
 
-        <div class="c-alert m-success">Teretulemast tripikas Vaata veel üle allolev info, et kõik oleks tip-top ja siis liigume edasi</div>
+        <div class="c-alert m-success">
+            <div class="c-alert__inner">Teretulemast tripikas Vaata veel üle allolev info, et kõik oleks tip-top ja siis liigume edasi</div>
+        </div>
 
      </div>
 
-     <div class="r-auth__content">
+     <div class="r-auth__content m-wide">
 
          <div class="r-auth__content-inner">
 
@@ -359,10 +361,11 @@
                         {!! Form::label('birth_date', 'Sünniaasta', [
                             'class' => 'c-form__label'
                         ]) !!}
-
-                        {{ Form::select('birth_date', ['1980', '1981', '1982'], null, [
-                            'class' => 'c-form__input',
-                        ]) }}
+                        <div class="c-form__group-select">
+                            {{ Form::select('birth_date', ['1980', '1981', '1982'], null, [
+                                'class' => 'c-form__select',
+                            ]) }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -482,7 +485,7 @@
 
             <div class="c-form__group m-large-margin">
 
-                <div class="c-columns m-2-cols m-last-smaller m-center">
+                <div class="c-columns m-2-cols m-last-smaller m-space">
 
                     <div class="c-columns__item">
 
@@ -490,25 +493,19 @@
 
                         <p class="c-form__note">Kuvatakse sinu profiili ning postituse juures</p>
 
-                        @include('component.button', [
-                            'modifiers' => 'm-quaternary m-min js-dropzoneClick',
-                            'title' => 'Vali pildifail',
-                            'route' => '#'
+                        @include('component.image.form', [
+                            'form' => [
+                                'url' => $url,
+                                'method' => isset($method) ? $method : 'post',
+                                'model' => isset($user) ? $user : null,
+                                'files' => true,
+                            ],
+                            'id' => 'image',
+                            'name' => 'image',
+                            'maxFileSize' => 5,
+                            'uploadMultiple' => false
                         ])
 
-                        <div style="display:none">
-                            @include('component.image.form', [
-                                'form' => [
-                                    'url' => $url,
-                                    'method' => isset($method) ? $method : 'post',
-                                    'model' => isset($user) ? $user : null,
-                                    'files' => true
-                                ],
-                                'name' => 'image',
-                                'maxFileSize' => 5,
-                                'uploadMultiple' => false
-                            ])
-                        </div>
 
                     </div>
 
@@ -523,7 +520,7 @@
 
             <div class="c-form__group m-large-margin">
 
-                <div class="c-columns m-2-cols m-last-smaller m-center">
+                <div class="c-columns m-2-cols m-last-smaller m-space">
 
                     <div class="c-columns__item">
 
@@ -531,11 +528,20 @@
 
                         <p class="c-form__note">Kuvatakse sinu profiili päise taustana</p>
 
-                        @include('component.button', [
-                            'modifiers' => 'm-quaternary m-min',
-                            'title' => 'Vali pildifail',
-                            'route' => '#'
+
+                        @include('component.image.form', [
+                            'form' => [
+                                'url' => $url,
+                                'method' => isset($method) ? $method : 'post',
+                                'model' => isset($user) ? $user : null,
+                                'files' => true
+                            ],
+                            'id' => 'bg_image',
+                            'name' => 'bg_image',
+                            'maxFileSize' => 5,
+                            'uploadMultiple' => false
                         ])
+
 
                     </div>
 

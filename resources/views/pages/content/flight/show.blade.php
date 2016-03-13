@@ -292,7 +292,7 @@
                 ])
             </div>
 
-            <div class="r-block">
+            <div class="r-block m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-body',
@@ -517,12 +517,22 @@
 
                     <div class="r-block__header">
 
-                        <div class="r-block__header-title">
+                        <div class="r-block__header-title m-flex">
 
                             @include('component.title', [
                                 'modifiers' => 'm-green',
                                 'title' => 'Tripikad räägivad'
                             ])
+
+                            <div class="r-block__header-link">
+
+                                @include('component.link', [
+                                    'modifiers' => 'm-icon m-small',
+                                    'title' => 'Brasiilia foorum',
+                                    'route' => '#',
+                                    'icon' => 'icon-arrow-right'
+                                ])
+                            </div>
                         </div>
                     </div>
 
@@ -629,7 +639,7 @@
                 ])
             </div>
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-sidebar-small',
@@ -644,6 +654,7 @@
 
                     @include('component.about', [
                         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+                        'text' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
@@ -674,7 +685,7 @@
                 </div>
             </div>
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-sidebar-small',
@@ -724,11 +735,11 @@
         </div>
     </div>
 
-    <div class="r-flights__travel-mates">
+    <div class="r-flights__travelmates">
 
-        <div class="r-flights__travel-mates-wrap">
+        <div class="r-flights__travelmates-wrap">
 
-            <div class="r-flights_travel-mates-title">
+            <div class="r-flights__travelmates-title">
 
                 @include('component.title', [
                     'title' => 'Reisikaaslased',

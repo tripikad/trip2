@@ -100,6 +100,15 @@ class ContentController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
 
+    public function blog_profile()
+    {
+        $viewVariables = [];
+
+        return response()
+            ->view('pages.content.blog.profile', $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.content.blog.profile.header'));
+    }
+
     public function getTravelMateIndex()
     {
         $content = Content::whereIn('id', [1534, 25151])
@@ -328,7 +337,13 @@ class ContentController extends Controller
 
         $now = \Carbon\Carbon::now();
 
-        return \View::make('pages.content.edit')
+        if (view()->exists('pages.content.'.$type.'.edit')) {
+            $view = 'pages.content.'.$type.'.edit';
+        } else {
+            $view = 'pages.content.edit';
+        }
+
+        return \View::make($view)
             ->with('mode', 'create')
             ->with('fields', config("content_$type.edit.fields"))
             ->with('url', route('content.store', [$type]))
@@ -379,11 +394,13 @@ class ContentController extends Controller
             $content->topics()->sync($request->topics);
         }
 
-        return redirect()
-            ->route('content.index', [$type])
-            ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
-                'title' => $content->title,
-            ]));
+        if (! $request->ajax()) {
+            return redirect()
+                ->route('content.index', [$type])
+                ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
+                    'title' => $content->title,
+                ]));
+        }
     }
 
     public function edit($type, $id)
@@ -398,7 +415,13 @@ class ContentController extends Controller
         $topics = Topic::getNames();
         $topic = $content->topics()->select('topics.id')->lists('id')->toArray();
 
-        return \View::make('pages.content.edit')
+        if (view()->exists('pages.content.'.$type.'.edit')) {
+            $view = 'pages.content.'.$type.'.edit';
+        } else {
+            $view = 'pages.content.edit';
+        }
+
+        return \View::make($view)
             ->with('mode', 'edit')
             ->with('fields', config("content_$type.edit.fields"))
             ->with('content', $content)
@@ -461,9 +484,11 @@ class ContentController extends Controller
             $content->topics()->sync($request->topics);
         }
 
-        return redirect()
-            ->route('content.show', [$type, $content])
-            ->with('info', trans('content.update.info', ['title' => $content->title]));
+        if (! $request->ajax()) {
+            return redirect()
+                ->route('content.show', [$type, $content])
+                ->with('info', trans('content.update.info', ['title' => $content->title]));
+        }
     }
 
     private static function fetchDates($request, $type)

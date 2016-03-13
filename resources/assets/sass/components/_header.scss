@@ -5,20 +5,26 @@
     top: inherit;
     left: 0;
     height: $spacer * 6.5;
-    padding: 0 $spacer;
+    padding: 0 $spacer * 1.5;
     width: 100%;
 
     @include respond-to(tablet) {
 
         height: auto;
         background: none;
+        padding: $spacer * 0.75 $spacer * 2 0;
+    }
+
+    @include respond-to(desktop) {
+
+        padding: $spacer * 0.75 $spacer * 4 0;
     }
 }
 
     .c-header__logo {
 
         position: absolute;
-        left: $spacer;
+        left: $spacer * 1.5;
         top: 0;
         display: flex;
         align-items: center;
@@ -38,50 +44,13 @@
             width: 100%;
         }
 
-    .c-header__search-trigger {
-
-        float: right;
-        position: relative;
-        display: block;
-        height: $spacer * 4;
-        width: $spacer * 4;
-        margin-top: $spacer * 1.25;
-        background: $color-fill-neutral-darker;
-
-        @include respond-to(tablet) {
-
-            display: none;
-        }
-
-        svg {
-
-            fill: $color-white;
-            height: $spacer * 2;
-            width: $spacer * 2;
-            margin: $spacer;
-        }
-    }
-
     .c-header__search {
 
-        position: absolute;
-        z-index: 1000;
-        top: $spacer * 6.5;
-        left: 0;
         display: none;
-        width: 100%;
-        padding: $spacer;
-        background: $color-fill-neutral-dark;
-
-        &.m-active {
-
-            display: block;
-        }
 
         @include respond-to(tablet) {
 
             float: left;
-            position: static;
             display: block;
             width: $spacer * 15;
             padding: $spacer / 2 0;
@@ -158,6 +127,16 @@
             float: right;
             display: block;
         }
+    }
+
+    .c-header__mobile-nav {
+
+        display: none;
+
+        @include respond-to(tablet) {
+
+            display: none;
+        }
 
         &.m-active {
 
@@ -169,11 +148,35 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
+
+            @include respond-to(tablet) {
+
+                display: none;
+            }
         }
     }
 
+        .c-header__mobile-nav-search {
+
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 9999;
+            display: block;
+            width: 100%;
+            padding: $spacer;
+
+            @include respond-to(tablet) {
+
+                display: none;
+            }
+        }
+
+        .c-header__mobile-nav-user {}
+
     .c-header__user {
 
+        display: none;
         float: right;
         position: relative;
         z-index: 2000;
@@ -182,5 +185,6 @@
         @include respond-to(tablet) {
 
             margin: 0;
+            display: block;
         }
     }

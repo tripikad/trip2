@@ -13,6 +13,11 @@
         color: $color-white;
     }
 
+    &.m-gray {
+
+        color: $color-text-gray;
+    }
+
     &.m-small {
 
         font-size: $font-size-tiny;
@@ -39,6 +44,18 @@
         @include respond-to(tablet) {
 
             font-size: $font-size-huge / 2;
+        }
+    }
+
+    &.m-largest {
+
+        font-size: $font-size-largest;
+        font-weight: $font-weight-bold;
+        text-transform: none;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-largest + 6;
         }
     }
 

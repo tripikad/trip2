@@ -5,11 +5,23 @@
     .r-travelmates__wrap {
 
         @include wrap();
+
+        &.m-small {
+
+            padding-left: span(2 of 24);
+            padding-right: span(2 of 24);
+        }
     }
 
     .r-travelmates__filter {
 
-        padding-top: $spacer * 4;
+        display: none;
+
+        @include respond-to(tablet) {
+
+            display: block;
+            padding-top: $spacer * 4;
+        }
     }
 
     .r-travelmates__content {
@@ -19,6 +31,7 @@
         @include respond-to(tablet) {
 
             @include span(16 of 24);
+
             padding-left: span(1 of 16);
             padding-top: $spacer * 2;
         }
@@ -28,12 +41,37 @@
             padding-left: 0;
         }
 
-        .r-travelmates.m-single & {
+        .r-travelmates__wrap.m-small & {
+
+            padding-top: $spacer * 2;
 
             @include respond-to(tablet) {
 
+                @include span(10 of 20);
+
+                padding-top: $spacer * 5;
+            }
+        }
+
+        .r-travelmates.m-single & {
+
+            padding-top: 0;
+
+            @include respond-to(tablet) {
+
+                @include span(15 of 24);
+            }
+
+            @include respond-to(desktop) {
+
                 @include span(14 of 24);
-                padding-top: $spacer * 4;
+
+                padding-top: $spacer * 2;
+            }
+
+            &.m-first {
+
+                padding-top: $spacer * 2;
             }
         }
     }
@@ -44,10 +82,12 @@
             font-weight: $font-weight-bold;
             line-height: 1.125;
             margin-bottom: $spacer * 2;
+            padding-top: $spacer * 2;
 
             @include respond-to(tablet) {
 
                 font-size: $font-size-huge / 2;
+                padding-top: 0;
             }
         }
 
@@ -73,26 +113,52 @@
 
     .r-travelmates__sidebar {
 
-        padding-top: $spacer * 2;
-
         @include respond-to(tablet) {
 
             @include span(7 of 24 at 2);
+
+            padding-top: $spacer * 2;
+        }
+
+        @include respond-to(desktop) {
+
+            padding-top: $spacer * 2;
+        }
+
+        .r-travelmates__wrap.m-small & {
+
+            @include respond-to(tablet) {
+
+                @include span(8 of 20 at 3);
+
+                padding-top: $spacer * 5;
+            }
         }
 
         .r-travelmates.m-single & {
 
+            @include respond-to(tablet) {
+
+                @include span(8 of 24 at 2);
+
+                padding-top: 0;
+            }
+
+            @include respond-to(desktop) {
+
+                @include span(8 of 24 at 3);
+
+                padding-top: $spacer * 2;
+            }
+
             &.m-first {
+
+                padding-top: $spacer * 2;
 
                 @include respond-to(tablet) {
 
                     padding-top: 0;
                 }
-            }
-
-            @include respond-to(tablet) {
-
-                @include span(8 of 24 at 3);
             }
         }
     }
@@ -103,13 +169,29 @@
 
             @include wrap();
 
-            margin-bottom: -$spacer * 4;
+            @include respond-to(tablet) {
+
+                margin-bottom: -$spacer * 4;
+            }
         }
 
     .r-travelmates__additional {
 
-        padding: $spacer * 10 0 $spacer * 2;
+        padding: $spacer * 2 0 0;
         background: $color-fill-neutral-light;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 4 0 $spacer * 2;
+        }
+
+        &.m-padding {
+
+            @include respond-to(tablet) {
+
+                padding: $spacer * 10 0 $spacer * 2;
+            }
+        }
     }
 
         .r-travelmates__additional-wrap {
@@ -119,7 +201,13 @@
 
     .r-travelmates__footer-promo {
 
-        margin-bottom: -48px;
+        display: none;
+
+        @include respond-to(tablet) {
+
+            display: block;
+            margin-bottom: -$spacer * 4;
+        }
 
         .r-travelmates.m-single & {
 
@@ -130,6 +218,7 @@
         .r-travelmates__footer-promo-wrap {
 
             @include wrap();
+
             position: relative;
             z-index: 2;
         }

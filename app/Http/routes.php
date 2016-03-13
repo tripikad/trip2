@@ -7,6 +7,9 @@ Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index
 
 Route::post('/', ['uses' => 'FrontpageController@search', 'as' => 'frontpage.search']);
 
+// Search
+Route::get('search/show', ['uses' => 'SearchController@show', 'as' => 'search.show']);
+
 // Registration
 
 Route::get('register', ['uses' => 'Auth\RegistrationController@form', 'as' => 'register.form']);
@@ -66,6 +69,9 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
     Route::post('/filter', ['middleware' => null, 'uses' => 'ContentController@filter', 'as' => 'filter']);
 
 });
+
+// Additional blog (DUMMY)
+Route::get('content/blog/profile', ['uses' => 'ContentController@blog_profile', 'as' => 'content.show.profile']);
 
 // Comments
 

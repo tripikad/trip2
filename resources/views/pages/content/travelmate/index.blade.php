@@ -74,7 +74,7 @@
 
             @endif
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-body',
@@ -120,7 +120,6 @@
             @include('component.pagination.default',[
                 'collection' => $contents
             ])
-
         </div>
 
         <div class="r-travelmates__sidebar">
@@ -155,11 +154,10 @@
                 <div class="r-block__inner">
 
                     @include('component.travelmate.filter')
-
                 </div>
             </div>
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-sidebar-small',

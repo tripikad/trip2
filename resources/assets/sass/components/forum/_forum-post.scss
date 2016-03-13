@@ -4,14 +4,19 @@
     background: $color-white;
     border-radius: 3px;
     border: 2px solid $color-fill-neutral;
+
+    &:last-child {
+
+        margin-bottom: 0;
+    }
 }
 
     .c-forum-post__title {
 
-        font-size: $font-size-larger;
+        font-size: $font-size-medium;
         font-weight: $font-weight-bold;
         line-height: 1.15;
-        padding: $spacer * 2 $spacer * 2 0 $spacer * 3;
+        padding: $spacer * 1.5 $spacer * 1.5 0 $spacer * 2;
 
         @include respond-to(tablet) {
 
@@ -23,7 +28,7 @@
     .c-forum-post__content {
 
         position: relative;
-        padding: $spacer * 3 $spacer * 2 $spacer * 2 $spacer * 3;
+        padding: $spacer * 2.5 $spacer * 1.5 $spacer * 1.5 $spacer * 2;
 
         @include respond-to(tablet) {
 
@@ -36,24 +41,24 @@
             position: absolute;
             left: -$spacer * 2;
             top: $spacer * 1.5;
-            width: $spacer * 4;
-            height: $spacer * 4;
+            width: $spacer * 3;
+            height: $spacer * 3;
 
             @include respond-to(tablet) {
 
                 top: $spacer * 2;
+                width: $spacer * 4;
+                height: $spacer * 4;
             }
 
            .c-forum-post.m-main & {
 
-                width: $spacer * 5;
-                height: $spacer * 5;
-                left: -$spacer * 2.5;
-                top: $spacer;
-
                 @include respond-to(tablet) {
 
                     top: $spacer + 3;
+                    left: -$spacer * 2.5;
+                    width: $spacer * 5;
+                    height: $spacer * 5;
                 }
             }
         }
@@ -63,27 +68,46 @@
             color: $color-text-neutral-darker;
             font-size: $font-size-small;
             font-weight: $font-weight-bold;
-            display: flex;
-            align-items: center;
-            margin-bottom: $spacer * 2;
+            margin-bottom: $spacer;
+
+            @include respond-to(tablet) {
+
+                display: flex;
+                align-items: center;
+                margin-bottom: $spacer * 2;
+            }
         }
 
             .c-forum-post__name {
 
+                margin-bottom: $spacer / 2;
+
+                @include respond-to(tablet) {
+
+                    margin-bottom: 0;
+                }
             }
 
             .c-forum-post__date {
 
-                padding-left: $spacer;
                 font-weight: $font-weight-medium;
+
+                @include respond-to(tablet) {
+
+                    margin-left: $spacer;
+                }
 
                 span {
 
                     font-weight: $font-weight-normal;
+                    padding-left: $spacer;
                 }
             }
 
-        .c-forum-post__body {}
+        .c-forum-post__body {
+
+            overflow: hidden;
+        }
 
         .c-forum-post__actions {
 
@@ -93,27 +117,32 @@
 
         .c-forum-post__footer {
 
+            @include clearfix;
+
             padding-top: $spacer * 1.5;
 
             &.m-right {
-
-                @include clearfix;
 
                 text-align: right;
             }
 
             &.m-flex {
 
-                display: flex;
-                width: 100%;
-                align-items: center;
-                justify-content: flex-end;
+                // display: flex;
+                // width: 100%;
+                // align-items: center;
+                // justify-content: flex-end;
             }
         }
 
-            .c-forum-post__tags {}
+            .c-forum-post__tags {
+
+                float: left;
+                max-width: 50%;
+            }
 
             .c-forum-post__thumbs {
 
-                margin-left: auto;
+                float: right;
+                max-width: 50%;
             }

@@ -24,16 +24,15 @@
             'subtitle' => trans('content.travelmate.view.all.offers'),
             'subtitle_route' => route('content.index', [$content->type])
         ])
-
     </div>
 
     <div class="r-travelmates__wrap">
-        <div class="r-travelmates__content">
+        <div class="r-travelmates__content m-first">
             <h1 class="r-travelmates__title">{{ $content->title }}</h1>
 
-            <div class="r-travelmates__meta">
-                @include('component.actions', ['actions' => $content->getActions()])
+            @include('component.actions', ['actions' => $content->getActions()])
 
+            <div class="r-travelmates__meta">
                 <p class="r-travelmates__meta-date">
                     {{ trans('content.travelmate.post.added', [
                         'created_at' => view('component.date.relative', [
@@ -72,7 +71,6 @@
                             ];
                         })
                     ])
-
                 </div>
 
             @endif
@@ -164,24 +162,27 @@
                 </div>
             </div>
 
-            <div class="r-block">
-                <div class="r-block__header">
+            @if(count($comments) > 0)
 
-                    @include('component.title', [
-                        'title' => trans('content.comments.title'),
-                        'modifiers' => 'm-purple'
-                    ])
+                <div class="r-block">
+                    <div class="r-block__header">
 
+                        @include('component.title', [
+                            'title' => trans('content.comments.title'),
+                            'modifiers' => 'm-purple'
+                        ])
+
+                    </div>
+
+                    <div class="r-block__body">
+
+                        @include('component.comment.index', [
+                            'comments' => $comments
+                        ])
+
+                    </div>
                 </div>
-
-                <div class="r-block__body">
-
-                    @include('component.comment.index', [
-                        'comments' => $comments
-                    ])
-
-                </div>
-            </div>
+            @endif
 
             @if (\Auth::check())
 
@@ -240,13 +241,26 @@
                 @if (count($forums))
 
                     <div class="r-block__inner">
+
                         <div class="r-block__header">
 
-                            @include('component.title', [
-                                'modifiers' => 'm-purple',
-                                'title' => trans('destination.show.forum.title')
-                            ])
+                            <div class="r-block__header-title m-flex">
 
+                                @include('component.title', [
+                                    'modifiers' => 'm-purple',
+                                    'title' => trans('destination.show.forum.title')
+                                ])
+
+                                <div class="r-block__header-link">
+
+                                    @include('component.link', [
+                                        'modifiers' => 'm-icon m-small',
+                                        'title' => 'Tai foorum',
+                                        'route' => '#',
+                                        'icon' => 'icon-arrow-right'
+                                    ])
+                                </div>
+                            </div>
                         </div>
 
                         @include('component.content.forum.list', [
@@ -277,7 +291,7 @@
 
             </div>
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-sidebar-small',
@@ -288,6 +302,7 @@
             </div>
         </div>
     </div>
+
 
     @if (count($flights))
 
@@ -318,7 +333,16 @@
 
     @if (count($travel_mates))
 
+        @if (count($flights))
+
+        <div class="r-travelmates__additional m-padding">
+
+        @else
+
         <div class="r-travelmates__additional">
+
+        @endif
+
             <div class="r-travelmates__additional-wrap">
 
                 @include('component.travelmate.list', [

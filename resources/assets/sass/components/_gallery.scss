@@ -32,6 +32,26 @@
                 flex: 0 1 12.5%;
             }
         }
+
+        .c-gallery.m-6-cols & {
+
+            flex: 0 1 50%;
+
+            @include respond-to(tablet-portrait) {
+
+                flex: 0 1 33.33%;
+            }
+
+            @include respond-to(tablet) {
+
+                flex: 0 1 33.33%;
+            }
+
+            @include respond-to(desktop) {
+
+                flex: 0 1 16.6666%;
+            }
+        }
     }
 
         .c-gallery__list-item-link {
@@ -48,7 +68,8 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            max-width: 200%;
+            min-width: 100%;
+            min-height: 100%;
             height: auto;
             transform: translate(-50%, -50%);
         }
@@ -161,6 +182,7 @@
             position: relative;
             width: 100%;
             height: 100%;
+            margin-top: -$spacer / 12;
         }
 
             .c-gallery__modal-image {

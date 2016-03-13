@@ -43,11 +43,18 @@
 
             .c-flag__item-icon {
 
-                width: $spacer * 2.5;
-                height: $spacer * 2.5;
-                flex: 0 0 $spacer * 2.5;
+                width: $spacer * 2;
+                height: $spacer * 2;
+                flex: 0 0 $spacer * 2;
                 margin-right: $spacer / 2;
                 display: none;
+
+                @include respond-to(tablet) {
+
+                    width: $spacer * 2.5;
+                    height: $spacer * 2.5;
+                    flex: 0 0 $spacer * 2.5;
+                }
 
                 &.m-active {
 
