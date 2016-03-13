@@ -144,6 +144,7 @@
                     ]) !!}
                     {!! Form::textarea('body', null, [
                         'class' => 'c-form__input m-high js-ckeditor',
+                        'id' => 'body',
                         'placeholder' => 'Kirjelda sinule sobivat reisikaaslast. Kui oled nõus reisima igaühega, siis ütle ka seda …',
                     ]) !!}
                 </div>
@@ -209,6 +210,7 @@
                     ]) !!}
                     {!! Form::textarea('additional_info', null, [
                         'class' => 'c-form__input m-high js-ckeditor',
+                        'id' => 'additional_info',
                         'placeholder' => 'Sinu nägemus reisist (mida kindlalt soovid näha, mis on umbkaudne eelarve jms)…',
                     ]) !!}
                 </div>
