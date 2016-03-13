@@ -53,6 +53,20 @@
             height: $spacer * 24;
         }
     }
+
+    &.m-edit,
+    &.m-index {
+
+        height: $spacer * 6.5;
+        padding: 0;
+        overflow: hidden;
+
+        @include respond-to(tablet) {
+
+            overflow: visible;
+            height: 100%;
+        }
+    }
 }
 
     .c-blog-masthead__content {
@@ -191,19 +205,21 @@
 
             font-size: $font-size-larger;
             line-height: 1.25;
-            padding: $spacer * 2;
-            margin-bottom: $spacer * 2;
+            padding: $spacer;
 
             @include respond-to(tablet) {
 
                 font-size: $font-size-larger * 3;
                 line-height: 1;
+                padding: $spacer * 2;
+                margin-bottom: $spacer * 2;
             }
 
             @include respond-to(desktop) {
 
                 font-size: $font-size-large * 4;
                 padding: 0 $spacer * 12;
+                margin-bottom: $spacer * 2;
             }
         }
     }

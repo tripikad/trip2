@@ -38,7 +38,7 @@ modifiers:
 
     @endif
 
-    @if(isset($title))
+    @if(isset($title) && !isset($count))
 
         <span class="c-badge__text">
 

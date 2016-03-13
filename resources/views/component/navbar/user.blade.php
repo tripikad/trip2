@@ -47,7 +47,7 @@ code: |
                     'letter' => $profile['letter'],
                     'badge' => [
                         'modifiers' => 'm-inverted m-red',
-                        'count' => $profile['badge']
+                        'count' => $profile['badge'],
                     ]
                 ])
             </div>
@@ -72,7 +72,7 @@ code: |
 
                                 @include('component.badge', [
                                     'modifiers' => $modifiers,
-                                    'count' => $child['badge']
+                                    'count' => $child['badge'],
                                 ])
 
                                 </span>

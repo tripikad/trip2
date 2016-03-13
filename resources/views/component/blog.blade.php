@@ -1,12 +1,6 @@
-<div class="c-blog">
+<div class="c-blog {{ $modifiers or '' }}">
 
-    <div class="c-blog__image-wrap">
-
-        <a href="{{ $route }}" class="c-blog__image-link">
-            <img src="{{ $image }}" alt="" class="c-blog__image">
-        </a>
-
-    </div>
+    <a href="{{ $route }}" class="c-blog__image" style="background-image: url({{ $image }});"></a>
 
     <h3 class="c-blog__title"><a href="{{ $route }}" class="c-blog__title-link">{{ $title }}</a></h3>
 

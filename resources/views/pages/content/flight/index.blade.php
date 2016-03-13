@@ -177,9 +177,26 @@
                 'items' => [
                     [
                         'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki al',
-                        'price' => '472 €',
+                        'route' => '/content/flight/93904',
+                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki',
+                        'price' => 'al 472 €',
+                        'meta' => view('component.inline_list', [
+                            'modifiers' => 'm-light m-small',
+                            'items' => [
+                                [
+                                    'title' => 'Aasia',
+                                ],
+                                [
+                                    'title' => 'Täna 12.31',
+                                ],
+                            ]
+                        ])
+                    ],
+                    [
+                        'image' => \App\Image::getRandom(),
+                        'route' => '/content/flight/93904',
+                        'title' => 'AirAsia kampaania SALE lennupiletid',
+                        'price' => 'al 6 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -195,8 +212,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'AirAsia kampaania SALE lennupiletid al',
-                        'price' => '6 €',
+                        'title' => 'Helsinkist Aasiasse puhkama',
+                        'price' => 'al 472 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -212,25 +229,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'Helsinkist Aasiasse puhkama al',
-                        'price' => '472 €',
-                        'meta' => view('component.inline_list', [
-                            'modifiers' => 'm-light m-small',
-                            'items' => [
-                                [
-                                    'title' => 'Aasia',
-                                ],
-                                [
-                                    'title' => 'Täna 12.31',
-                                ],
-                            ]
-                        ])
-                    ],
-                    [
-                        'image' => \App\Image::getRandom(),
-                        'route' => '#',
-                        'title' => 'AirAsia kampaania SALE lennupiletid al',
-                        'price' => '6 €',
+                        'title' => 'AirAsia kampaania SALE lennupiletid',
+                        'price' => 'al 6 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -260,8 +260,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki al',
-                        'price' => '472 €',
+                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki',
+                        'price' => 'al 472 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -277,8 +277,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'AirAsia kampaania SALE lennupiletid al',
-                        'price' => '6 €',
+                        'title' => 'AirAsia kampaania SALE lennupiletid',
+                        'price' => 'al 6 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -294,8 +294,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki al',
-                        'price' => '472 €',
+                        'title' => 'Edasi-tagasi lennupiletid Tallinnast Bangkokki',
+                        'price' => 'al 472 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -311,8 +311,8 @@
                     [
                         'image' => \App\Image::getRandom(),
                         'route' => '#',
-                        'title' => 'AirAsia kampaania SALE lennupiletid al',
-                        'price' => '6 €',
+                        'title' => 'AirAsia kampaania SALE lennupiletid',
+                        'price' => 'al 6 €',
                         'meta' => view('component.inline_list', [
                             'modifiers' => 'm-light m-small',
                             'items' => [
@@ -327,8 +327,6 @@
                     ],
                 ]
             ])
-
-
 
             @include('component.pagination.default', [
                 'collection' => $contents,
@@ -616,7 +614,7 @@
             <div class="r-flights__forum-title">
 
                 @include('component.title', [
-                    'modifiers' => 'm-yellow',
+                    'modifiers' => 'm-red',
                     'title' => 'Tripikad räägivad'
                 ])
 
@@ -775,7 +773,84 @@
                                     'route' => ''
                                 ]
                             ]
-                        ]
+                        ],
+                        [
+                            'topic' => 'Samui hotellid?',
+                            'route' => '#',
+                            'date' => 'Täna, 15:12',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 9
+                            ],
+                            'tags' => [
+                                [
+                                    'title' => 'Inglismaa',
+                                    'modifiers' => 'm-green',
+                                    'route' => ''
+                                ],
+                                [
+                                    'title' => 'London',
+                                    'modifiers' => 'm-purple',
+                                    'route' => ''
+                                ],
+                            ]
+                        ],
+                        [
+                            'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
+                            'route' => '#',
+                            'date' => 'Täna, 12:17',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 4
+                            ],
+                            'tags' => [
+                                [
+                                    'title' => 'Rongireis',
+                                    'modifiers' => 'm-gray',
+                                    'route' => ''
+                                ]
+                            ]
+                        ],
+                        [
+                            'topic' => 'Puhkuseosakud Tenerifel',
+                            'route' => '#',
+                            'date' => '10. detsember 2015',
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => \App\Image::getRandom(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
+                            ],
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => 2
+                            ],
+                            'tags' => [
+                                [
+                                    'title' => 'Tenerife',
+                                    'modifiers' => 'm-red',
+                                    'route' => ''
+                                ]
+                            ]
+                        ],
                     ]
                 ])
             </div>
@@ -794,7 +869,6 @@
 
         </div>
     </div>
-
 </div>
 
 @stop

@@ -1,6 +1,7 @@
 .c-destination-extra {
 
     @include clear-list;
+
     display: flex;
     align-items: center;
 }
@@ -11,7 +12,6 @@
         display: flex;
         align-items: center;
         margin-left: $spacer * 2;
-        cursor: pointer;
     }
 
         .c-destination-extra__link {

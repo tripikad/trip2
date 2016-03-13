@@ -285,7 +285,9 @@
 
      <div class="r-auth__notifications">
 
-        <div class="c-alert m-success">Teretulemast tripikas Vaata veel üle allolev info, et kõik oleks tip-top ja siis liigume edasi</div>
+        <div class="c-alert m-success">
+            <div class="c-alert__inner">Teretulemast tripikas Vaata veel üle allolev info, et kõik oleks tip-top ja siis liigume edasi</div>
+        </div>
 
      </div>
 

@@ -18,7 +18,9 @@
 
     <div class="r-blog__masthead">
 
-        @include('component.blog.masthead')
+        @include('component.blog.masthead', [
+            'modifiers' => 'm-edit'
+        ])
     </div>
 
     <div class="r-blog__wrap">

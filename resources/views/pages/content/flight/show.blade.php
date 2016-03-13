@@ -517,12 +517,22 @@
 
                     <div class="r-block__header">
 
-                        <div class="r-block__header-title">
+                        <div class="r-block__header-title m-flex">
 
                             @include('component.title', [
                                 'modifiers' => 'm-green',
                                 'title' => 'Tripikad räägivad'
                             ])
+
+                            <div class="r-block__header-link">
+
+                                @include('component.link', [
+                                    'modifiers' => 'm-icon m-small',
+                                    'title' => 'Brasiilia foorum',
+                                    'route' => '#',
+                                    'icon' => 'icon-arrow-right'
+                                ])
+                            </div>
                         </div>
                     </div>
 
@@ -644,6 +654,7 @@
 
                     @include('component.about', [
                         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+                        'text' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
