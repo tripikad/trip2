@@ -200,7 +200,8 @@
                     {!! Form::textarea('add-flight-body', null, [
                         'class' => 'c-form__input m-high js-ckeditor',
                         'placeholder' => 'Pakkumise sisu (lubatud html koodi sisestamine)…',
-                        'rows' => 16
+                        'rows' => 16,
+                        'id' => 'add-flight-body'
                     ]) !!}
                 </div>
 
@@ -258,10 +259,11 @@
 
                         <div class="c-flight-dates__column m-last">
 
-                            {!! Form::textarea('add-flight-body', null, [
+                            {!! Form::textarea('add-flight-body2', null, [
                                 'class' => 'c-form__input m-high js-ckeditor',
                                 'placeholder' => 'Pakkumise sisu (lubatud html koodi sisestamine)…',
-                                'rows' => 16
+                                'rows' => 16,
+                                'id' => 'add-flight-body2'
                             ]) !!}
                         </div>
 
