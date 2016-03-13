@@ -3,6 +3,6 @@ var svg4everybodyPath = '/plugins/svg4everybody/',
 
 $.getScript(script, function() {
     if (typeof svg4everybody == 'function') {
-        $('test').svg4everybody();
+        svg4everybody();
     }
 });
