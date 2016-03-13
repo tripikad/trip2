@@ -16,13 +16,10 @@ class LoggedCookie
         // can bypass the caching if needed
 
         if (Auth::check()) {
-
             $response->withCookie(Cookie::forever('logged', 'true'));
 
         // If user is not logged in, remove the cookie
-
         } else {
-            
             $response->withCookie(Cookie::forget('logged'));
         }
 
