@@ -7,10 +7,9 @@ var selector = $('.js-ckeditor'),
     adapter = window.CKEDITOR_BASEPATH + 'adapters/jquery.js';
 
 if (selector.length > 0) {
-    $.getScript(script, function() {
+    $.cachedScript(script).done(function() {
 
-        $.getScript(adapter, function() {
-
+        $.cachedScript(adapter).done(function() {
             $.each(selector, function () {
 
                 $(this).ckeditor();
