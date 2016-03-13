@@ -1,3 +1,5 @@
+// jshint latedef: svg4everybody
+
 var svg4everybodyPath = '/plugins/svg4everybody/',
     script = svg4everybodyPath + 'svg4everybody.min.js';
 
