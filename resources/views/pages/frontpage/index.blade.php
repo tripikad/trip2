@@ -30,55 +30,51 @@
 
         </div>
 
-        <div class="r-home__destinations">
+        @if (isset($flights1) && count($flights1))
+            <div class="r-home__destinations">
+                <div class="r-home__destinations-wrap">
+                    <div class="c-columns m-{{ count($flights1) }}-cols">
 
-            <div class="r-home__destinations-wrap">
+                        @foreach ($flights1 as $key => $flight1)
 
-                <div class="c-columns m-{{ count($flights1) }}-cols">
+                            <div class="c-columns__item">
 
-                    @if (isset($flights1) && count($flights1))
+                                @include('component.destination', [
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
+                                    'title' =>
+                                        $flight1->destination ? $flight1->destination->name : null,
+                                    'title_route' =>
+                                        $flight1->destination ? route('destination.show', $flight1->destination) : null,
+                                    'subtitle' =>
+                                        $flight1->parent_destination ? $flight1->parent_destination->name : null,
+                                    'subtitle_route' =>
+                                        $flight1->parent_destination ? route('destination.show', $flight1->parent_destination) : null
+                                ])
 
-                    @endif
+                                @include('component.card', [
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
+                                    'route' => route('content.show', [$flight1->type, $flight1]),
+                                    'title' => $flight1->title.' '.$flight1->price.config('site.currency.symbol'),
+                                    'image' => $flight1->imagePreset(),
+                                ])
 
-                    @foreach ($flights1 as $key => $flight1)
+                            </div>
 
-                        <div class="c-columns__item">
+                        @endforeach
 
-                            @include('component.destination', [
-                                'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
-                                'title' =>
-                                    $flight1->destination ? $flight1->destination->name : null,
-                                'title_route' =>
-                                    $flight1->destination ? route('destination.show', $flight1->destination) : null,
-                                'subtitle' =>
-                                    $flight1->parent_destination ? $flight1->parent_destination->name : null,
-                                'subtitle_route' =>
-                                    $flight1->parent_destination ? route('destination.show', $flight1->parent_destination) : null
-                            ])
+                    </div>
+                    <div class="r-home__destinations-action">
 
-                            @include('component.card', [
-                                'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
-                                'route' => route('content.show', [$flight1->type, $flight1]),
-                                'title' => $flight1->title.' '.$flight1->price.config('site.currency.symbol'),
-                                'image' => $flight1->imagePreset(),
-                            ])
-
-                        </div>
-
-                    @endforeach
-
-                </div>
-                <div class="r-home__destinations-action">
-
-                    @include('component.link', [
-                        'modifiers' => 'm-icon m-right',
-                        'title' => trans('frontpage.index.all.offers'),
-                        'route' => route('content.index', ['flight']),
-                        'icon' => 'icon-arrow-right'
-                    ])
+                        @include('component.link', [
+                            'modifiers' => 'm-icon m-right',
+                            'title' => trans('frontpage.index.all.offers'),
+                            'route' => route('content.index', ['flight']),
+                            'icon' => 'icon-arrow-right'
+                        ])
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
 
         @if (isset($content) && count($content) > 0)
 
