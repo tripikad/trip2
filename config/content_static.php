@@ -5,7 +5,10 @@ return [
     'index' => [
 
         'with' => ['destinations', 'topics'],
-        'latest' => 'created_at',
+        'orderBy' => [
+            'field' => 'created_at',
+            'order' => 'desc',
+        ],
         'paginate' => 25,
     ],
 
@@ -15,11 +18,11 @@ return [
             'title' => [
                 'type' => 'text',
                 'title' => 'Title',
-                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
                 'title' => 'Body',
+                'large' => true,
             ],
             'submit' => [
                 'type' => 'submit',

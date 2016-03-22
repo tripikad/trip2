@@ -1,17 +1,25 @@
 {{--
 
-description: Promo / Ad
+title: Promo / Ad
 
 code: |
 
     @include('component.promo', [
+        'modifiers' => '',
         'route' => '',
         'image' => '',
     ])
 
+modifiers:
+
+- m-sidebar-large
+- m-sidebar-small
+- m-footer
+- m-body
+
 --}}
 
-<div class="c-promo">
+<div class="c-promo {{ $modifiers or '' }}">
 
     <a href="{{ $route }}" class="c-promo__link">
         <img src="{{ $image }}" alt="" class="c-promo__image">

@@ -3,12 +3,12 @@
 return [
 
     'header' => [
-           'home' => [
+        'home' => [
             'route' => '/',
         ],
-        'news' => [
-            'route' => '/content/news',
-        ],
+        // 'news' => [
+        //     'route' => '/content/news',
+        // ],
        'flights' => [
             'route' => '/content/flight',
         ],
@@ -18,16 +18,16 @@ return [
         'forum' => [
             'route' => '/content/forum',
         ],
-        'photos' => [
-            'route' => '/content/photo',
-        ],
+        // 'photos' => [
+        //     'route' => '/content/photo',
+        // ],
         'blogs' => [
             'route' => '/content/blog',
         ],
-        'offers' => [
-            'route' => 'http://vana.trip.ee/reisipakkumised',
-            'external' => true,
-        ],
+        // 'offers' => [
+        //     'route' => 'http://vana.trip.ee/reisipakkumised',
+        //     'external' => true,
+        // ],
     ],
 
     'footer' => [
@@ -113,6 +113,9 @@ return [
     'admin' => [
         'internal' => [
             'route' => '/content/internal',
+        ],
+        'sponsored' => [
+            'route' => '/content/sponsored',
         ],
         'image' => [
             'route' => '/admin/image',

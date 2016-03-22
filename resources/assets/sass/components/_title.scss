@@ -1,0 +1,91 @@
+.c-title {
+
+    @include color-modifiers;
+    @include font-smoothing;
+
+    font-family: $font-primary;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+
+    &.m-white {
+
+        color: $color-white;
+    }
+
+    &.m-gray {
+
+        color: $color-text-gray;
+    }
+
+    &.m-small {
+
+        font-size: $font-size-tiny;
+    }
+
+    &.m-large {
+
+        font-size: $font-size-medium;
+        font-weight: $font-weight-bold;
+        text-transform: none;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-large;
+        }
+    }
+
+    &.m-larger {
+
+        font-size: $font-size-largest;
+        font-weight: $font-weight-bold;
+        text-transform: none;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-huge / 2;
+        }
+    }
+
+    &.m-largest {
+
+        font-size: $font-size-largest;
+        font-weight: $font-weight-bold;
+        text-transform: none;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-largest + 6;
+        }
+    }
+
+    &.m-huge {
+
+        font-size: $font-size-huge / 2;
+        font-weight: $font-weight-bold;
+        text-transform: none;
+
+        @include respond-to(tablet) {
+
+            font-size: 60px; // Exception
+        }
+    }
+
+    &.m-margin {
+
+        margin-bottom: $spacer * 2;
+    }
+}
+
+    .c-title__link {
+
+        @include color-modifiers-and;
+
+        color: $color-text-link;
+        text-decoration: none;
+
+        &:hover {
+
+            text-decoration: underline;
+        }
+    }

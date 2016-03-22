@@ -1,4 +1,4 @@
-@extends('layouts.medium')
+@extends('layouts.one_column')
 
 @section('title')
 
@@ -6,50 +6,47 @@
 
 @stop
 
-@section('content2.content')
-    
+@section('header2.content')
+
     @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
-                    
-        @include('component.menu', [
+
+        @include('component.nav', [
             'menu' => 'user',
             'items' => [
                 'activity' => ['route' => route('user.show', [$user])],
                 'message' => ['route' => route('message.index', [$user])],
                 'follow' => ['route' => route('follow.index', [$user])]
             ],
-            'options' => 'text-center'
+            'modifiers' => ''
         ])
-                    
+
     @endif
 
 @stop
 
-@section('content.medium')
+@section('content.one')
 
 @if (count($messages))
 
-@foreach ($messages as $message)
-
-    <div
-
-        id="message-{{ $message->id }}"
-        class="utils-padding-bottom @if ($message->read) utils-read @endif"
-
-    >
-
-    @include('component.row', [
-        'image' => $message->fromUser->imagePreset(),
-        'description' => trans('message.index.with.row.description', [
-            'user' => $message->fromUser->name,
-            'created_at' => view('component.date.long', ['date' => $message->created_at])
-        ]),
-        'body' => nl2br($message->body),
-        'options' => '-narrow -small'
+    @include('component.list', [
+        'modifiers' => 'm-dark',
+        'items' => $messages->transform(function ($message) {
+            return [
+                'id' => 'message-' . $message->id,
+                'modifiers' => ($message->read ? 'm-blue' : 'm-red'),
+                'title' => trans('message.index.with.row.description', [
+                    'user' => $message->fromUser->name,
+                    'created_at' => view('component.date.long', ['date' => $message->created_at])
+                ]),
+                'text' => nl2br($message->body_filtered),
+                'profile' => [
+                    'modifiers' => 'm-small',
+                    'image' => $message->fromUser->imagePreset(),
+                    'route' => ''
+                ]
+            ];
+        })
     ])
-
-    </div>
-
-@endforeach
 
 @endif
 

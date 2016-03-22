@@ -1,0 +1,200 @@
+.c-button {
+
+    @include font-smoothing;
+
+    color: $color-white;
+    font-family: $font-primary;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacer $spacer * 2;
+    background-color: $color-fill-success;
+    border: none;
+    border-radius: 3px;
+
+    &:hover {
+
+        background-color: $color-fill-success-dark;
+    }
+
+    &.m-secondary {
+
+        @include color-modifiers-dark-and(color);
+
+        color: $color-text-link;
+        background: $color-white;
+
+        &:hover {}
+
+        &.m-icon {
+
+            @include color-modifiers-dark-and(background);
+
+            svg {
+
+                @include color-modifiers-and(fill);
+            }
+        }
+    }
+
+    &.m-tertiary {
+
+        color: $color-text-neutral-darker;
+        background: $color-fill-neutral-light;
+
+        &:hover {
+
+            background: $color-fill-neutral;
+        }
+    }
+
+    &.m-quaternary {
+
+        color: $color-white;
+        background: $color-text-link;
+    }
+
+    &.m-border {
+
+        color: $color-white;
+        background: none;
+        box-shadow: inset 0 0 0 2px $color-white;
+
+        &:hover {
+
+            background: none;
+        }
+    }
+
+    &.m-icon {
+
+        padding: 0;
+        background: $color-white;
+
+        svg {
+
+            @include color-modifiers-and(fill);
+
+            width: $spacer * 1.5;
+            height: $spacer * 1.5;
+        }
+    }
+
+    &.m-loading {
+
+        background-image: linear-gradient(-45deg, $color-fill-neutral 25%, $color-fill-neutral-dark 25%, $color-fill-neutral-dark 50%, $color-fill-neutral 50%, $color-fill-neutral 75%, $color-fill-neutral-dark 75%, $color-fill-neutral-dark);
+        background-size: 50px 50px;
+        animation: move 2s linear infinite;
+    }
+
+    &.m-round {
+
+        border-radius: 50%;
+    }
+
+    &.m-shadow {
+
+        box-shadow: 0 1px 1px rgba($color-fill-neutral, 0.75);
+    }
+
+    &.m-block {
+
+        display: block;
+        width: 100%;
+    }
+
+    &.m-min {
+
+        @include respond-to(tablet) {
+
+            min-width: $spacer * 15;
+        }
+    }
+
+    &.m-small {
+
+        font-size: $font-size-small;
+        line-height: 1.2;
+        height: $spacer * 3;
+        padding: $spacer - 2 $spacer * 2 $spacer * 0.75;
+
+        &.m-icon {
+
+            padding: 0;
+            width: $spacer * 2;
+            height: $spacer * 2;
+
+            svg {
+
+                width: $spacer;
+                height: $spacer;
+            }
+        }
+
+        &.m-icon-pre {
+
+            padding-left: $spacer * 3.5;
+        }
+
+        &.m-icon-post {
+
+            padding-right: $spacer * 3.5;
+        }
+    }
+
+    &.m-large {
+
+        font-size: $font-size-large;
+        line-height: 1.4;
+        padding: $spacer $spacer * 3;
+        line-height: 1.4;
+    }
+
+    &.m-disabled {
+
+        opacity: 0.9;
+        cursor: not-allowed;
+    }
+}
+
+.c-button__icon {
+
+    position: absolute;
+    top: 50%;
+    display: block;
+    height: $spacer * 1.5;
+    width: $spacer * 1.5;
+    margin-top: -$spacer * 0.75;
+
+    .c-button.m-icon-pre & {
+
+        left: $spacer;
+    }
+
+    .c-button.m-icon-post & {
+
+        right: $spacer;
+    }
+
+    svg {
+
+        display: block;
+        height: 100%;
+        width: 100%;
+
+        .c-button.m-tertiary & {
+
+            fill: $color-text-neutral-darker;
+        }
+    }
+}
+
+@keyframes move {
+
+  0% { background-position: 0 0;}
+  100% { background-position: 50px 50px;}
+}

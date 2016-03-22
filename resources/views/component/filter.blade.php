@@ -1,42 +1,49 @@
 {!! Form::open([
     'url' => route('content.filter', [$type]),
-    'class' => 'form-inline'
 ]) !!}
 
-<div class="row">
-
-    <div class="col-sm-4 utils-half-padding-right">
+    <div class="c-form__group m-small-margin">
 
         {!! Form::select(
             'destination',
             ['' => trans('content.index.filter.field.destination.title')]
                  + $destinations->toArray(),
-            $destination
+            $destination,
+            [
+                'class' => 'js-filter'
+            ]
         )!!}
 
     </div>
 
-    <div class="col-sm-4 utils-half-padding-right">
+    <div class="c-form__group m-small-margin">
 
         {!! Form::select(
             'topic',
             ['' => trans('content.index.filter.field.topic.title')]
-                 + $topics->toArray(), 
-            $topic
+                 + $topics->toArray(),
+            $topic,
+            [
+                'class' => 'js-filter'
+            ]
         )!!}
 
     </div>
 
-    <div class="col-sm-4">
+    <div class="c-form__group m-small-margin">
 
         {!! Form::submit(
-            trans('content.index.filter.submit.title'), 
-            ['class' => 'btn btn-link'])
+            trans('content.index.filter.submit.title'),
+            ['class' => 'c-button m-block'])
         !!}
 
-        <a 
+    </div>
+
+    <div class="c-form__group m-right m-no-margin">
+
+        <a
             href="{{ route('content.index', [$type]) }}"
-            class="btn btn-link"
+            class="c-link"
         >
 
         {{ trans('content.index.filter.reset.title') }}
@@ -45,17 +52,15 @@
 
     </div>
 
-</div>
-
 {!! Form::close() !!}
 
 @if ($destination)
 
-    <div class="text-center utils-border-top"> 
+    <div class="text-center utils-border-top">
 
         <h3>
             {!! trans('content.index.filter.destination.title', [
-                'destination' => 
+                'destination' =>
                     '<a href="' . route('destination.index', [$destination]) . '">'
                     . $destinations[$destination]
                     . '</a>'

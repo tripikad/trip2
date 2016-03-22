@@ -1,0 +1,27 @@
+.c-user-title {
+
+    @include font-smoothing;
+
+    color: $color-white;
+    font-size: $font-size-largest; // 30px
+    font-weight: $font-weight-bold;
+    padding-right: $spacer;
+
+    @include respond-to(tablet) {
+
+        font-size: $font-size-largest * 2; // 60px
+    }
+}
+
+    .c-user-title__sub {
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+        .c-user-title__sub-info {
+
+            @include color-modifiers-dark-and(color);
+            font-weight: $font-weight-medium;
+        }

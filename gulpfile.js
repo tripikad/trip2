@@ -12,35 +12,22 @@ gulp.task('sass', function() {
         './node_modules/normalize.css/normalize.css',
         './node_modules/susy/sass/_susy.scss',
         './node_modules/breakpoint-sass/stylesheets/_breakpoint.scss',
-        './node_modules/selectize/dist/css/selectize.css',
-        './resources/assets/sass/**/*.scss',
-
+        './node_modules/dropzone/dist/dropzone.css',
+        './resources/assets/sass/base/_base.mixins.scss',
+        './resources/assets/sass/base/_base.colors.scss',
+        './resources/assets/sass/base/_base.layout.scss',
+        './resources/assets/sass/base/_base.fonts.scss',
+        './resources/assets/sass/base/_base.typography.scss',
+        './resources/assets/sass/base/_base.scss',
+        './resources/assets/sass/**/_*.scss'
     ])
     .pipe(concat('main.scss'))
-    .pipe(sass({includePaths: [
-        './node_modules/susy/sass',
-        './node_modules/breakpoint-sass/stylesheets',
-    ]}))
-    .pipe(autoprefixer({
-        browsers: ['last 2 versions'],
-        cascade: false
-    }))
-    .pipe(gulp.dest('./public/css'));
-
-});
-
-gulp.task('sass_legacy', function() {
-
-    gulp.src([
-        './resources/assets/sass_legacy/variables.scss',
-        './node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
-        './node_modules/selectize/dist/css/selectize.bootstrap3.css',
-        './resources/assets/sass_legacy/**/*.scss',
-    ])
-    .pipe(concat('main.scss'))
-    .pipe(sass({includePaths: [
-        './node_modules/bootstrap-sass/assets/stylesheets',
-    ]
+    .pipe(sass({
+        includePaths: [
+            './node_modules/susy/sass',
+            './node_modules/breakpoint-sass/stylesheets'
+        ],
+        errLogToConsole: true
     }))
     .pipe(autoprefixer({
         browsers: ['last 2 versions'],
@@ -51,13 +38,15 @@ gulp.task('sass_legacy', function() {
 });
 
 gulp.task('js', function() {
- 
+
     gulp.src([
         './node_modules/jquery/dist/jquery.js',
+        './resources/assets/js/jquery-ui/jquery-ui.min.js',
+        './resources/assets/js/helpers/**/*.js',
         './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
         './node_modules/selectize/dist/js/standalone/selectize.js',
-        './node_modules/fastclick/lib/fastclick.js',
-        './resources/assets/js/**/*.js'
+        './node_modules/dropzone/dist/dropzone.js',
+        './resources/assets/js/components/**/*.js'
     ])
     .pipe(concat('main.js'))
     .pipe(gulp.dest('./public/js'));

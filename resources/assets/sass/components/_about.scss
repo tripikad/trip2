@@ -1,0 +1,91 @@
+.c-about {
+
+    &.m-wide {
+
+        padding: $spacer * 2 0;
+
+        @include respond-to(tablet) {
+
+            display: flex;
+            justify-content: space-between;
+            flex-flow: row wrap;
+            padding: $spacer * 2;
+        }
+
+        @include respond-to(desktop) {
+
+            padding: $spacer * 4;
+        }
+    }
+}
+
+    .c-about__content {
+
+        .c-about.m-wide & {
+
+            @include respond-to(tablet) {
+
+                flex: 0 0 65%;
+            }
+        }
+
+        > :last-child {
+
+            margin-bottom: 0;
+        }
+    }
+
+        .c-about__title {
+
+            font-size: $font-size-medium;
+            font-weight: $font-weight-bold;
+            line-height: 1.35;
+            margin-bottom: $spacer;
+
+            .c-about.m-wide & {
+
+                @include respond-to(tablet) {
+
+                    font-size: $font-size-large + 2;
+                }
+            }
+        }
+
+        .c-about__text {
+
+            font-size: $font-size-normal;
+            font-weight: $font-weight-normal;
+            line-height: 1.5;
+            margin-bottom: $spacer;
+        }
+
+        .c-about__links {
+
+            a {
+
+                margin-bottom: $spacer;
+            }
+
+            > :last-child {
+
+                margin-bottom: 0;
+            }
+        }
+
+    .c-about__action {
+
+        width: 100%;
+        padding: $spacer * 2 0 0 0;
+
+        .c-about.m-wide & {
+
+            padding: $spacer * 2 0 0;
+
+            @include respond-to(tablet) {
+
+                flex: 0 0 25%;
+                width: auto;
+                padding: 0;
+            }
+        }
+    }

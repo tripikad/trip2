@@ -2,19 +2,13 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => false,
-        'with' => [],
-        'latest' => 'created_at',
-        'take' => 4,
-
-    ],
-
     'index' => [
 
         'with' => ['destinations', 'topics'],
-        'latest' => 'created_at',
+        'orderBy' => [
+            'field' => 'created_at',
+            'order' => 'desc',
+        ],
         'paginate' => 24,
     ],
 
@@ -30,11 +24,11 @@ return [
             'title' => [
                 'type' => 'textarea',
                 'rows' => 3,
-                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
                 'rows' => 2,
+                'large' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

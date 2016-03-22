@@ -1,0 +1,365 @@
+.r-home {
+
+    background: $color-white;
+}
+
+    .r-home__destinations {
+
+        margin-top: -$spacer * 4;
+        position: relative;
+        z-index: 2;
+    }
+
+        .r-home__destinations-wrap {
+
+            @include wrap('narrow');
+        }
+
+            .r-home__destinations-action {
+
+                @include clearfix;
+
+                padding: $spacer * 2 0;
+            }
+
+    .r-home__about {}
+
+        .r-home__about-wrap {
+
+            @include wrap('narrow');
+        }
+
+    .r-home__forum {
+
+        padding: $spacer * 2 0;
+        background: $color-fill-neutral-light;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 4 0 $spacer * 12.5;
+        }
+
+        @include respond-to(desktop) {
+
+            padding-bottom: $spacer * 16;
+        }
+    }
+
+        .r-home__forum-wrap {
+
+            @include wrap('narrow');
+        }
+
+            .r-home__forum-title {
+
+                padding-bottom: $spacer * 2;
+
+                @include respond-to(tablet) {
+
+                    padding-bottom: $spacer * 3;
+                }
+            }
+
+            .r-home__forum-column {
+
+                &.m-first {
+
+                    padding-bottom: $spacer;
+
+                    @include respond-to(tablet) {
+
+                        @include span(5 of 24);
+
+                        padding-bottom: 0;
+                    }
+
+                    @include respond-to(desktop) {
+
+                        @include span(4 of 24);
+                    }
+                }
+
+                &.m-last {
+
+                    @include respond-to(tablet) {
+
+                        @include span(17.5 of 24 at 1.5);
+                    }
+
+                    @include respond-to(desktop) {
+
+                        @include span(18.5 of 24 at 2.5);
+                    }
+                }
+            }
+
+    .r-home__news {
+
+        padding: $spacer * 2 0 0;
+
+        @include respond-to(tablet) {
+
+            margin-top: -$spacer * 8;
+            padding: 0 0 $spacer * 4;
+        }
+
+        @include respond-to(desktop) {
+
+            padding: 0 0 $spacer * 6;
+        }
+    }
+
+        .r-home__news-wrap {
+
+            @include wrap('narrow');
+        }
+
+            .r-home__news-title {
+
+                padding-bottom: $spacer * 2;
+
+                @include respond-to(tablet) {
+
+                    padding-bottom: $spacer * 3;
+                }
+            }
+
+            .r-home__news-footer {
+
+                @include clearfix;
+            }
+
+            .r-home__news-column {
+
+                &.m-first {
+
+                    display: none;
+
+                    @include respond-to(tablet) {
+
+                        @include span(7 of 24);
+
+                        display: block;
+                        padding-top: $spacer * 4;
+                    }
+                }
+
+                &.m-last {
+
+                    @include respond-to(tablet) {
+
+                        @include span(16 of 24 at 2);
+                    }
+
+                    @include respond-to(desktop) {
+
+                        @include span(15 of 24 at 3);
+                    }
+                }
+            }
+
+                .r-home__news-block-wrap {
+
+                    @include clearfix;
+                }
+
+                    .r-home__news-block {
+
+                        &.m-first {
+
+                            @include respond-to(tablet-portrait) {
+
+                                @include span(7 of 15);
+                            }
+                        }
+
+                        &.m-last {
+
+                            @include respond-to(tablet-portrait) {
+
+                                @include span(7 of 15 at 2);
+
+                            }
+                        }
+                    }
+
+    .r-home__featured-news {
+
+        padding: $spacer * 2 0;
+        background: $color-fill-neutral-light;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 4 0;
+        }
+    }
+
+        .r-home__featured-news-wrap {
+
+            @include wrap();
+
+            @include respond-to(tablet) {
+
+                @include wrap('narrow');
+            }
+        }
+
+    .r-home__travel {
+
+        background: $color-fill-neutral-light;
+        padding: $spacer * 2 0;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 4 0;
+        }
+
+        @include respond-to(desktop) {
+
+            padding: $spacer * 5.5 0;
+        }
+    }
+
+        .r-home__travel-wrap {
+
+            @include wrap();
+
+            @include respond-to(tablet) {
+
+                @include wrap('narrow');
+            }
+        }
+
+            .r-home__travel-title {
+
+                padding-bottom: $spacer * 2;
+
+                @include respond-to(tablet) {
+
+                    padding-bottom: $spacer * 3;
+                }
+            }
+
+            .r-home__travel-column {
+
+                &.m-first {
+
+                    padding-bottom: $spacer * 2;
+
+                    @include respond-to(tablet) {
+
+                        @include span(15 of 24);
+
+                        padding-bottom: 0;
+                    }
+                }
+
+                &.m-single {
+
+                    @include respond-to(tablet) {
+
+                        @include span(8 of 24);
+                    }
+                }
+
+                &.m-last {
+
+                    @include respond-to(tablet) {
+
+                        @include span(8 of 24 at 2);
+                    }
+                }
+            }
+
+                .r-home__travel-column-footer {
+
+                    text-align: right;
+                }
+
+    .r-home__gallery {
+
+        background: $color-fill-neutral-light;
+        padding-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            padding-bottom: $spacer * 4;
+        }
+
+        @include respond-to(desktop) {
+
+            padding-bottom: $spacer * 6;
+        }
+    }
+        .r-home__gallery-title {
+
+            padding-bottom: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                padding-bottom: $spacer * 3;
+            }
+        }
+
+            .r-home__gallery-title-wrap {
+
+                @include respond-to(tablet) {
+
+                    @include wrap('narrow');
+                }
+            }
+
+        .r-home__gallery-wrap {
+
+            @include wrap;
+        }
+
+    .r-home__travel-mates {
+
+        background: $color-fill-neutral-light;
+        padding-bottom: 0;
+
+        @include respond-to(tablet) {
+
+            padding-bottom: $spacer * 2;
+        }
+
+        @include respond-to(desktop) {
+
+            padding-bottom: $spacer * 4;
+        }
+    }
+
+        .r-home__travel-mates-wrap {
+
+            @include wrap('narrow');
+        }
+
+            .r-home__travel-mates-title {
+
+                padding-bottom: $spacer * 2;
+
+                @include respond-to(tablet) {
+
+                    padding-bottom: $spacer * 3;
+                }
+            }
+
+    .r-home__footer-promo {
+
+        display: none;
+
+        @include respond-to(tablet) {
+
+            display: block;
+            background: $color-fill-neutral-light;
+            margin-bottom: -$spacer * 4;
+        }
+    }
+
+        .r-home__footer-promo-wrap {
+
+            @include wrap('narrow');
+            position: relative;
+            z-index: 2;
+        }

@@ -72,23 +72,23 @@ class AdminTest extends TestCase
         $this->actingAs($user1)
             ->visit('admin/image')
             ->attach(storage_path().'/tests/test.jpg', 'image')
-            ->press(trans('admin.image.create.submit.title'))
+            ->press('Submit')
             ->seePageIs('admin/image');
 
         $filename = $this->getLatestImageFilename($user1->user_id);
 
         // Check original file exists
 
-        $filepath = config('imagepresets.original.path').$filename;
+        $filepath = public_path().config('imagepresets.original.path').$filename;
         $this->assertTrue(file_exists($filepath));
         unlink($filepath);
 
         // See thumbnails exist
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = config("imagepresets.presets.$preset.path").$filename;
+            $filepath = public_path().config("imagepresets.presets.$preset.path").$filename;
             $this->assertTrue(file_exists($filepath));
-          //  unlink($filepath);
+            unlink($filepath);
         }
     }
 

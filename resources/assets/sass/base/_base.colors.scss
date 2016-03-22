@@ -1,0 +1,183 @@
+// Brand colors
+
+$brand-yellow: #f7ba00;
+$brand-yellow-dark: #d67d00;
+
+$brand-green: #78cc5c;
+$brand-green-dark: #288f18;
+
+$brand-red: #ed6262;
+$brand-red-dark: #cb4949;
+$brand-red-darker: #b13636;
+
+$brand-purple: #8b84d7;
+$brand-purple-dark: #5147c0;
+
+$brand-blue: #4ac9e3;
+$brand-blue-dark: #0087ae;
+
+$brand-orange: #ff9a3e;
+$brand-orange-dark: #d94d00;
+
+
+// Brand color map
+
+$colors: ('yellow' $brand-yellow $brand-yellow-dark),
+         ('green' $brand-green $brand-green-dark),
+         ('red' $brand-red $brand-red-dark),
+         ('purple' $brand-purple $brand-purple-dark),
+         ('blue' $brand-blue $brand-blue-dark),
+         ('orange' $brand-orange $brand-orange-dark);
+
+
+@mixin color-modifiers($property: color) {
+
+	@each $name, $color, $color-dark in $colors {
+
+		&.m-#{$name} {
+
+			#{$property}: $color;
+		}
+	}
+}
+
+@mixin color-modifiers-none($property: color) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        &.m-#{$name} {
+
+            #{$property}: none;
+        }
+    }
+}
+
+@mixin color-modifiers-dark($property: color) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        &.m-#{$name} {
+
+            #{$property}: $color-dark;
+        }
+    }
+}
+
+
+@mixin color-modifiers-and($property: color) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        .m-#{$name} & {
+
+            #{$property}: $color;
+        }
+    }
+}
+
+@mixin color-modifiers-dark-and($property: color) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        .m-#{$name} & {
+
+            #{$property}: $color-dark;
+        }
+    }
+}
+
+@mixin color-modifiers-opacity($property: background) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        &.m-#{$name} {
+
+            #{$property}: rgba($color, 0.8);
+        }
+    }
+}
+
+@mixin color-modifiers-dark-opacity($property: background) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        &.m-#{$name} {
+
+            #{$property}: rgba($color-dark, 0.8);
+        }
+    }
+}
+
+@mixin color-modifiers-dark-and-opacity($property: background) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        .m-#{$name} & {
+
+            #{$property}: rgba($color-dark, 0.8);
+        }
+    }
+}
+
+
+// Neutrals
+
+$color-white: #ffffff;
+
+$color-fill-black-dark: #111111;
+$color-fill-black: #222222;
+
+$color-fill-neutral-lightest: #fbfcfd;
+$color-fill-neutral-light: #f7f9fa;
+$color-fill-neutral: #e1e7eb;
+$color-fill-neutral-dark: #d1dae0;
+$color-fill-neutral-darker: #979da1;
+$color-fill-neutral-darkest: #707477;
+
+$color-text-black: #444444;
+$color-text-gray: #999999;
+
+$color-text-neutral-lightest: $color-fill-neutral-lightest;
+$color-text-neutral-light: $color-fill-neutral-light;
+$color-text-neutral: $color-fill-neutral;
+$color-text-neutral-dark: $color-fill-neutral-dark;
+$color-text-neutral-darker: $color-fill-neutral-darker;
+$color-text-neutral-darkest: $color-fill-neutral-darkest;
+
+
+// Shadow colors
+
+$shadow-dark: #0e1217;
+
+// Utility colors
+
+$color-text-link: #36a1eb;
+
+$color-fill-success-light: #f9fdf8;
+$color-fill-success: #49c91f;
+$color-fill-success-dark: $brand-green-dark;
+
+$color-fill-warning-light: #fffdf7;
+$color-fill-warning: lighten($brand-yellow, 42%);
+$color-fill-warning-dark: lighten($brand-yellow, 15%);
+
+$color-fill-notice-light: lighten($brand-orange, 30%);
+$color-fill-notice: $brand-orange;
+$color-fill-notice-dark: $brand-orange-dark;
+
+$color-fill-info-light: #f5fbff;
+$color-fill-info: $color-text-link;
+$color-fill-info-dark: $brand-blue-dark;
+
+$color-fill-error-light: #fff7f7;
+$color-fill-error: $brand-red;
+$color-fill-error-dark: $brand-red-dark;
+
+// New colors
+
+$transparent: transparent;
+
+// Social colors
+
+$color-facebook: #3b5998;
+$color-google: #dd4b39;

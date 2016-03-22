@@ -1,33 +1,28 @@
 @if (count($comments))
 
-@foreach ($comments as $index => $comment)
+    @foreach ($comments as $index => $comment)
 
-    <div
-        id="comment-{{ $comment->id }}"
-        class="
-        @if (count($comments) == ($index + 1))
-            utils-padding-bottom 
-        @else
-            utils-border-bottom
-        @endif
-        @if (! $comment->status)
-            utils-unpublished
-        @endif
-    ">
-
-        @include('component.row', [
-            'image' => $comment->user->imagePreset('xsmall_square'),
-            'image_link' => route('user.show', [$comment->user]),
-            'description' => view('component.comment.description', ['comment' => $comment]),
+        @include('component.content.forum.post', [
+            'profile' => [
+                'modifiers' => 'm-full m-status',
+                'image' => $comment->user->imagePreset('xsmall_square'),
+                'title' => $comment->user->name,
+                'route' => route('user.show', [$comment->user]),
+                'letter' => [
+                    'modifiers' => 'm-blue m-small',
+                    'text' => 'J'
+                ],
+                'status' => [
+                    'modifiers' => 'm-blue',
+                    'position' => '1'
+                ]
+            ],
+            'date' => view('component.date.relative', ['date' => $comment->created_at]),
+            'text' => nl2br($comment->body_filtered),
             'actions' => view('component.actions', ['actions' => $comment->getActions()]),
-            'extra' => view('component.flags', ['flags' => $comment->getFlags()]),
-            'body' => nl2br($comment->body),
-            'options' => '-centered' 
-
+            'thumbs' => view('component.flags', ['flags' => $comment->getFlags()]),
         ])
 
-    </div>
-    
-@endforeach
+    @endforeach
 
 @endif

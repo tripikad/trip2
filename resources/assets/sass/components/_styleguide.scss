@@ -1,0 +1,25 @@
+.c-styleguide__component {
+
+    @include clearfix();
+    margin-bottom: $spacer * 6;
+}
+
+.c-styleguide__component > .left {
+
+    @include respond-to(tablet) {
+
+        @include span(13 of 28);
+
+    }
+    
+}
+
+.c-styleguide__component > .right {
+
+    @include respond-to(tablet) {
+
+        @include span(13 of 28 at 2);
+
+    }
+    
+}

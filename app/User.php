@@ -17,13 +17,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'email',
         'password',
         'image',
-        'role',
-        'verified',
-        'registration_token',
+        'role', // Why?
+        'verified', // Why?
+        'registration_token', // Why?
         'contact_facebook',
         'contact_twitter',
         'contact_instagram',
         'contact_homepage',
+
+        'real_name',
+        'show_real_name',
+        'gender',
+        'birthyear',
+        'description',
 
         'notify_message',
         'notify_follow',
@@ -31,6 +37,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     protected $hidden = ['password', 'remember_token'];
+
+    public $messages_count = false;
 
     public static function boot()
     {
@@ -48,6 +56,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->verified = true;
         $this->registration_token = null;
         $this->save();
+    }
+
+    public function unreadMessagesCount()
+    {
+        if ($this->messages_count === false) {
+            $this->messages_count = $this->hasMany('App\Message', 'user_id_to')
+                ->where('read', '0')
+                ->get()
+                ->unique('user_id_from')
+                ->count();
+        }
+
+        return $this->messages_count;
     }
 
     public function messages()
@@ -71,7 +92,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 return $item;
             });
 
-        return $received->merge($sentWithoutReply)->sortBy('created_at')->all();
+        return $received->merge($sentWithoutReply)->sortByDesc('created_at')->all();
     }
 
     public function messagesWith($user_id_with)
@@ -109,7 +130,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function imagePreset($preset = 'small_square')
     {
-        return count($this->images) ? '/images/'.$preset.'/'.$this->images[0]->filename : '/svg/picture_none.svg';
+        $image = null;
+
+        if (count($this->images)) {
+            $image = config('imagepresets.presets.'.$preset.'.path').$this->images[0]->filename;
+        }
+
+        if (! file_exists(public_path().$image)) {
+            $image = config('imagepresets.image.none');
+        }
+
+        return $image;
     }
 
     public function hasRole($role)
@@ -125,7 +156,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function hasRoleOrOwner($role, $ownable_user_id)
     {
-        return ($this->hasRole($role) || $ownable_user_id == $this->id);
+        return $this->hasRole($role) || $ownable_user_id == $this->id;
     }
 
     public function destinationHaveBeen()

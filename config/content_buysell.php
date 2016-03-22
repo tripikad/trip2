@@ -2,18 +2,26 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => [],
-        'latest' => 'created_at',
-        'take' => 1,
+    'view' => [
+        'index' => 'pages.content.forum.index',
+        'show' => 'pages.content.forum.show',
     ],
+
+    'menu' => 'forum',
 
     'index' => [
 
         'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],
-        'latest' => 'updated_at',
+        'orderBy' => [
+            'field' => 'updated_at',
+            'order' => 'desc',
+        ],
+        'expire' => [
+            'field' => 'created_at',
+            'daysFrom' => -30,
+            'daysTo' => false,
+            'type' => 'datetime',
+        ],
         'paginate' => 25,
     ],
 
@@ -23,10 +31,10 @@ return [
 
             'title' => [
                 'type' => 'text',
-                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
+                'large' => true,
             ],
             'topics' => [
                 'type' => 'topics',

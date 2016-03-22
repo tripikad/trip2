@@ -2,19 +2,13 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => [],
-        'latest' => 'created_at',
-        'take' => 1,
-
-    ],
-
     'index' => [
 
         'with' => ['user', 'comments', 'destinations', 'topics'],
-        'latest' => 'created_at',
+        'orderBy' => [
+            'field' => 'created_at',
+            'order' => 'desc',
+        ],
         'paginate' => 25,
     ],
 
@@ -23,10 +17,10 @@ return [
         'fields' => [
             'title' => [
                 'type' => 'text',
-                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
+                'large' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

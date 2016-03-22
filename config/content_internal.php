@@ -2,10 +2,20 @@
 
 return [
 
+    'view' => [
+        'index' => 'pages.content.forum.index',
+        'show' => 'pages.content.forum.show',
+    ],
+
+    'menu' => 'admin',
+
     'index' => [
 
         'with' => ['user', 'destinations', 'topics'],
-        'latest' => 'updated_at',
+        'orderBy' => [
+            'field' => 'updated_at',
+            'order' => 'desc',
+        ],
         'paginate' => 25,
     ],
 
@@ -15,11 +25,11 @@ return [
             'title' => [
                 'type' => 'text',
                 'title' => 'Title',
-                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
                 'title' => 'Body',
+                'large' => true,
             ],
             'submit' => [
                 'type' => 'submit',

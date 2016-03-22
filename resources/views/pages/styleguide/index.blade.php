@@ -1,42 +1,56 @@
-@extends('layouts.main')
+@extends('layouts.one_column')
 
 @section('title', 'Styleguide')
 
-@section('content')
+@section('content.one')
 
-<div class="component-styleguide">
+<div class="c-styleguide">
 
 @if (count($components)) 
 
     @foreach($components as $component)
 
-        <mark>{{ $component['title'] }}</mark>
+        <div class="c-styleguide__component">
 
-        <div class="row">
+            <div class="left">
 
-            <div class="col-md-6">
-
+                <p style="font-size: 1.5em; margin-bottom: 0.5em">
+                    {{ $component['title'] }}
+                </p>
+                
                 <p>{!! $component['description'] !!}</p>
                 
-                <pre>{{ str_replace('@', '&#64;', htmlentities($component['code'])) }}</pre>
+                <pre>// {{ $component['filepath'] }}
+
+{{ str_replace('@', '&#64;', htmlentities($component['code'])) }}
+
+                </pre>
                         
             </div>
 
-            <div class="col-md-5 col-md-offset-1">
+            <div class="right">
 
-                @if ($component['title'] == 'views/component/icon.blade.php')
+                @if ($component['filepath'] == 'views/component/svg/sprite.blade.php')
 
-                        @foreach($icons as $icon)
-                            <a title="{{ $icon }}">
-                                @include('component.icon', ['icon' => $icon])
-                            </a>
-                        @endforeach
+                    @foreach($svg_sprites as $sprite)
+                        <a title="{{ $sprite }}">
+                            @include('component.svg.sprite', ['name' => $sprite])
+                        </a>
+                    @endforeach
 
-                @elseif (isset($component['options']))
+                @elseif ($component['filepath'] == 'views/component/svg/standalone.blade.php')
 
-                    @foreach($component['options'] as $option)
+                    @foreach($svg_standalones as $standalone)
+                        <a title="{{ $standalone }}">
+                            @include('component.svg.standalone', ['name' => $standalone])
+                        </a>
+                    @endforeach
 
-                        <code>-{{ $option }}</code>
+                @elseif (isset($component['modifiers']))
+
+                    @foreach($component['modifiers'] as $modifier)
+
+                        <code>{{ $modifier }}</code>
 
                         <br /><br />
 
@@ -44,7 +58,7 @@
                             'template' => $component['code'],
                             'cache_key' => str_random(10),
                             'updated_at' => 0
-                        ], ['options' => "-$option"]) !!}
+                        ], ['modifiers' => $modifier]) !!}
 
                         <br />
 
@@ -52,11 +66,13 @@
 
                 @else  
 
+
                     {!! \StringView::make([
                         'template' => $component['code'],
                         'cache_key' => str_random(10),
                         'updated_at' => 0
                     ]) !!}
+
 
                 @endif
 

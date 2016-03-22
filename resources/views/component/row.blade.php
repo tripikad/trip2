@@ -1,102 +1,156 @@
 {{--
 
-description: Row is meant for listings and content headers
+title: Row
+
+description: Row is meant for complex listings and content headers
 
 code: |
 
     @include('component.row', [
-        'image' => \App\Image::getRandom(),
-        'image_link' => '',
-        'preheading' => view('component.label', [
-            'title' => 'Label'
-        ]),
-        'heading' => 'This is heading',
-        'heading_link' => '',
-        'postheading' => view('component.label', [
-            'title' => 'Label'
-        ]),
+        'modifiers' => $modifiers,
+        'icon' => 'icon-offer',
+        'profile' => [
+            'modifiers' => '',
+            'image' => \App\Image::getRandom(),
+            'route' => '',
+        ],
+        'preheading' => 'Preheading',
+        'title' => '',
+        'route' => '',
+        'postheading' => 'Postheading',
         'actions' => view('component.actions', [
             'actions' => [
                 ['route' => '', 'title' => 'This is first action'],
                 ['route' => '', 'title' => 'This is second action'],
             ]
         ]),
-        'description' => 'This is the description',
+        'text' => '',
         'extra' => 'Extra',
         'body' => 'This book is a record of a pleasure trip. If it were a record of a solemn scientific expedition...',
-        'options' => ''
     ])
+
+modifiers:
+
+- m-icon
+- m-profile
+- m-red
+- m-blue
+- m-green
+- m-orange
+- m-yellow
+- m-purple
 
 --}}
 
-<div class="component-row {{ $options or '' }}">
+<article class="c-row {{ $modifiers or '' }}">
+    @if (isset($icon) && !isset($profile))
 
-    <div class="row utils-equal-height">
+    <div class="c-row__icon">
 
-        <div class="col-xs-2 col-sm-1 utils-half-padding-right">
-
-            @if (isset($image_link)) <a href="{{ $image_link }}"> @endif
-
-            @if (isset($image))
-                
-                @include('component.user.image', [
-                    'image' => $image,
-                    'options' => '-circle',
-                ])
-
-            @endif
-             
-            @if (isset($image_link)) </a> @endif
-
-        </div>
-
-        <div class="col-xs-8 col-sm-9">
-
-            <div class="content">
-
-                <div class="title">
-
-                    @if (isset($preheading)) <span>{!! $preheading !!}</span> @endif
-
-                    @if (isset($heading_link)) <a href="{{ $heading_link }}"> @endif
-                
-                    @if (isset($heading)) <h4>{{ $heading }}</h4> @endif
-
-                    @if (isset($heading_link)) </a> @endif
-
-                    @if (isset($postheading)) <span>{!! $postheading !!}</span> @endif
-
-
-                </div>
-
-                @if (isset($description)) <div class="text">{!! $description !!}</div> @endif
-
-                @if (isset($actions)) <div class="actions">{!! $actions !!}</div> @endif
-
-            </div>
-
-        </div>
-
-        <div class="col-sm-2">
-     
-            {!! $extra or '' !!}
-
-        </div>
+        @include('component.svg.sprite', [
+            'name' => $icon
+        ])
 
     </div>
 
-    @if (isset($body))
+    @endif
 
-        <div class="row">
+    @if (isset($profile) && !isset($icon))
 
-            <div class="col-sm-11 col-sm-offset-1">
+    <div class="c-row__image">
 
-                {!! $body !!}
+        @include('component.profile', [
+            'modifiers' => $profile['modifiers'],
+            'route' => $profile['route'],
+            'image' => $profile['image'],
+            'title' => ''
+        ])
 
-            </div>
+    </div>
+
+    @endif
+
+    @if (isset($title))
+
+        <h3 class="c-row__title">
+
+            @if (isset($preheading))
+
+                <span>{!! $preheading !!}</span>
+
+            @endif
+
+            @if (isset($route))
+
+                <a href="{{ $route }}" class="c-row__title-link">
+
+            @endif
+
+            {{ ($title != '' ? $title : '&nbsp;') }}
+
+            @if (isset($route))
+
+                </a>
+
+            @endif
+
+            @if (isset( $postheading ))
+
+                <span>{!! $postheading !!}</span>
+
+            @endif
+
+        </h3>
+
+    @endif
+
+    @if (isset($text) || isset($extra) || isset($list) || isset($badge))
+
+        <div class="c-row__text">
+
+            {!! $text or '' !!}
+
+            {!! $extra or '' !!}
+
+            @if(isset($list))
+
+                <div class="c-row__list">
+
+                    @include('component.inline_list', [
+                        'items' => $list
+                    ])
+
+                </div>
+
+            @endif
+
+            @if(isset($badge))
+
+                <div class="c-row__badge">
+
+                    @include('component.badge', [
+                        'modifiers' => 'm-green m-inverted',
+                        'title' => $badge
+                    ])
+
+                </div>
+
+            @endif
 
         </div>
 
     @endif
 
-</div>
+    @if (isset($actions))
+
+        <div class="c-row__actions">{!! $actions !!}</div>
+
+    @endif
+
+    @if (isset($body))
+
+        <div class="c-row__body">{!! $body !!}</div>
+
+    @endif
+
+</article>

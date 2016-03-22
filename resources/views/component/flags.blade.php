@@ -1,32 +1,49 @@
-<div class="component-flag utils-padding-left">
+<div class="c-flag">
 
-    <div class="good">
+    <div class="c-flag__item m-green">
 
         @if ($flags['good']['flaggable'])
-        
+
             <a href="{{ route('flag.toggle', [
                 $flags['good']['flaggable_type'],
                 $flags['good']['flaggable_id'],
                 $flags['good']['flag_type'],
                 isset($flags['good']['return']) ? $flags['good']['return'] : null,
-            ]) }}">
-        
-        @endif 
+            ]) }}" class="c-flag__item-link js-flag">
 
-        @include('component.number', [
-            'number' => $flags['good']['value'],
-            'options' => '-small -good' . (! $flags['good']['value'] ? ' -neutral' : '')
-        ])
+        @endif
+
+        <div class="c-flag__item-icon m-active js-icon">
+
+            @include('component.svg.sprite', [
+                'name' => 'icon-thumb-up'
+            ])
+
+        </div>
+
+        <div class="c-flag__item-icon m-filled js-icon-filled">
+
+            @include('component.svg.sprite', [
+                'name' => 'icon-thumb-up-filled'
+            ])
+
+        </div>
+
+        <div class="c-flag__item-text js-flag-text">
+
+            {{ $flags['good']['value'] }}
+
+        </div>
 
         @if ($flags['good']['flaggable'])
 
             </a>
 
-        @endif 
+        @endif
 
     </div>
 
-    <div class="bad">
+    <div class="c-flag__item m-red">
 
         @if ($flags['bad']['flaggable'])
 
@@ -35,14 +52,31 @@
                 $flags['bad']['flaggable_id'],
                 $flags['bad']['flag_type'],
                 isset($flags['bad']['return']) ? $flags['bad']['return'] : null,
-            ]) }}">
+            ]) }}" class="c-flag__item-link js-flag">
 
         @endif
 
-        @include('component.number', [
-            'number' => $flags['bad']['value'],
-            'options' => '-small -bad' . (! $flags['bad']['value'] ? ' -neutral' : '')
-        ])
+        <div class="c-flag__item-icon m-active js-icon">
+
+            @include('component.svg.sprite', [
+                'name' => 'icon-thumb-down'
+            ])
+
+        </div>
+
+        <div class="c-flag__item-icon m-filled js-icon-filled">
+
+            @include('component.svg.sprite', [
+                'name' => 'icon-thumb-down-filled'
+            ])
+
+        </div>
+
+        <div class="c-flag__item-text js-flag-text">
+
+            {{ $flags['bad']['value'] }}
+
+        </div>
 
         @if ($flags['bad']['flaggable'])
 

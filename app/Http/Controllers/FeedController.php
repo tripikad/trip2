@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Feed;
+use App;
 use App\Content;
 
 class FeedController extends Controller
 {
     public function index()
     {
-        $feed = Feed::make();
+        $feed = App::make('feed');
 
-        $feed->setCache(config('site.cache.atom'));
+        $feed->setCache(config('cache.feed.atom'));
 
         if (! $feed->isCached()) {
             $feed->title = config('site.name');

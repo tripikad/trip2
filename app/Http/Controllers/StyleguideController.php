@@ -14,20 +14,21 @@ class StyleguideController extends Controller
         $directories = array_merge(
             ['views/component'],
             Storage::disk('resources')->allDirectories('views/component'),
-            ['assets/sass/style']
+            ['assets/sass/base']
         );
 
         foreach ($directories as $directory) {
             foreach (Storage::disk('resources')->files($directory) as $filepath) {
                 if ($header = $this->getHeader($filepath)) {
-                    $components[] = ['title' => $filepath] + $header;
+                    $components[] = ['filepath' => $filepath] + $header;
                 }
             }
         }
 
         return view('pages.styleguide.index', [
             'components' => $components,
-            'icons' => $this->getIcons(),
+            'svg_sprites' => $this->getSvgSprites(),
+            'svg_standalones' => $this->getSvgStandalones(),
         ]);
     }
 
@@ -55,23 +56,35 @@ class StyleguideController extends Controller
             $header = Yaml::parse(trim(preg_replace($start, '', $parts[0])));
 
             return [
+                'title' => isset($header['title']) ? trim($header['title']) : null,
                 'description' => isset($header['description']) ? trim($header['description']) : null,
                 'code' => isset($header['code']) ? trim($header['code']) : null,
-                'options' => isset($header['options']) ? array_merge(['(none)'], $header['options']) : null,
+                'modifiers' => isset($header['modifiers']) ? array_merge(['(none)'], $header['modifiers']) : null,
             ];
         }
 
         return false;
     }
 
-    public function getIcons()
+    public function getSvgSprites()
     {
-        $icons = [];
+        $svg_sprites = [];
 
         foreach (Storage::disk('resources')->files('assets/svg/sprite') as $filepath) {
-            $icons[] = pathinfo($filepath)['filename'];
+            $svg_sprites[] = pathinfo($filepath)['filename'];
         }
 
-        return $icons;
+        return $svg_sprites;
+    }
+
+    public function getSvgStandalones()
+    {
+        $svg_standalones = [];
+
+        foreach (Storage::disk('resources')->files('assets/svg/standalone') as $filepath) {
+            $svg_standalones[] = pathinfo($filepath)['filename'];
+        }
+
+        return $svg_standalones;
     }
 }

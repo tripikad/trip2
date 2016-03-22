@@ -1,0 +1,42 @@
+.c-map {
+
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    &.m-destination {
+
+        svg {
+
+            @include color-modifiers-dark-and(fill);
+        }
+    }
+
+    &.m-flights,
+    &.m-forum {
+
+        svg {
+
+            fill: $color-fill-neutral;
+            width: $spacer * 60;
+            height: $spacer * 40;
+        }
+    }
+
+    svg {
+
+        width: 100%;
+        height: 100%;
+    }
+}
+
+    .c-map__location {
+
+        position: absolute;
+        display: block;
+        width: 16px;
+        height: 16px;
+        border: 3px solid $color-white;
+        border-radius: 50%;
+    }

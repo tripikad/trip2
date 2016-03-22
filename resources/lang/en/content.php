@@ -4,7 +4,13 @@ return [
 
     // General
 
+    'post.updated.at' => 'Edited: :updated_at',
+
+    'comments.title' => 'Comments',
+
     'row.text.comment' => 'Latest comment :updated_at',
+
+    'action.add.comment' => 'Add comment',
 
     'action.edit.title' => 'Edit',
 
@@ -20,9 +26,18 @@ return [
     'action.status.1.info' => 'The post :title has been published',
     'action.status.0.info' => 'The post :title has been unpublished',
 
+    'action.message.send' => 'Send private message',
+
+    'action.register' => 'Join with Trip.ee',
+    'action.more.about' => 'Read more about Trip.ee',
+    'action.facebook.text' => 'Trip.ee\'s Facebook',
+    'action.twitter.text' => 'Trip.ee\'s Twitter',
+    'action.read.more' => 'Read more',
+
     'field.image.title' => 'Select image',
     'field.image.selected.title' => 'New image selected',
 
+    'index.filter.title' => 'Filter',
     'index.filter.field.destination.title' => 'All',
     'index.filter.field.topic.title' => 'All',
     'index.filter.submit.title' => 'Filter',
@@ -49,13 +64,13 @@ return [
     'news.create.title' => 'Add news post',
 
     'news.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
-    'news.edit.field.image_id.help' => '',
+    'news.edit.field.image_id.help' => 'You can use image shortcuts, for example: [[456]]',
 
     'news.edit.field.title.title' => 'Title',
     'news.edit.field.title.help' => '',
 
     'news.edit.field.body.title' => 'Body',
-    'news.edit.field.body.help' => 'You can use image shortcuts, for example: [[456]]',
+    'news.edit.field.body.help' => '',
 
     'news.edit.field.destinations.title' => 'Select destinations',
     'news.edit.field.destinations.help' => '',
@@ -98,10 +113,10 @@ return [
     'flight.edit.field.title.help' => '',
 
     'flight.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
-    'flight.edit.field.image_id.help' => '',
+    'flight.edit.field.image_id.help' => 'You can use image shortcuts, for example: [[456]]',
 
     'flight.edit.field.body.title' => 'Body',
-    'flight.edit.field.body.help' => 'You can use image shortcuts, for example: [[456]]',
+    'flight.edit.field.body.help' => '',
 
     'flight.edit.field.destinations.title' => 'Select destinations',
     'flight.edit.field.destinations.help' => '',
@@ -120,7 +135,13 @@ return [
 
     // Travelmate
 
-    'travelmate.index.title' => 'Travelmates',
+    'travelmate.index.title' => 'Travel mates',
+
+    'travelmate.view.all.offers' => 'View all offers',
+
+    'travelmate.post.added' => 'Post added :created_at',
+
+    'travelmate.activity' => 'Viimase :days päeva jooksul lisatud :posts_count kuulutust',
 
     'travelmate.create.title' => 'Add listing',
 
@@ -141,6 +162,11 @@ return [
 
     'travelmate.edit.field.duration.title' => 'Trip duration',
     'travelmate.edit.field.duration.help' => '',
+
+    'travelmate.filter.text' => 'Kui ei leia sobivat kaaslast, siis ehk aitab sind filter.',
+
+    'travelmate.description.title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
+    'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.',
 
     // Forum
 
@@ -244,5 +270,29 @@ return [
 
     'static.edit.field.body.title' => 'Body',
     'static.edit.field.body.help' => '',
+
+    // Sponsored
+
+    'sponsored.index.title' => 'Sponsored articles',
+
+    'sponsored.create.title' => 'Add sponsored post',
+
+    'sponsored.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
+    'sponsored.edit.field.image_id.help' => 'You can use image shortcuts, for example: [[456]]',
+
+    'sponsored.edit.field.title.title' => 'Title',
+    'sponsored.edit.field.title.help' => '',
+
+    'sponsored.edit.field.body.title' => 'Body',
+    'sponsored.edit.field.body.help' => '',
+
+    'sponsored.edit.field.destinations.title' => 'Select destinations',
+    'sponsored.edit.field.destinations.help' => '',
+
+    'sponsored.edit.field.topics.title' => 'Select topics',
+    'sponsored.edit.field.topics.help' => '',
+
+    'sponsored.edit.field.url.title' => 'URL',
+    'sponsored.edit.field.url.help' => '',
 
 ];

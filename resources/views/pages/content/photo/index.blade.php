@@ -1,4 +1,4 @@
-@extends('layouts.medium')
+@extends('layouts.one_column')
 
 @section('title')
     
@@ -21,33 +21,29 @@
 
 @stop
 
-@section('content.medium')
+@section('content.one')
 
     @foreach ($contents as $content)
 
-        <div class="utils-padding-bottom">
-                            
-            <a href="{{ route('content.show', [$content->type, $content]) }}">
-                    
-                <img src="{{ $content->imagePreset('large') }}" />
-                
-            </a>
+        <a href="{{ route('content.show', [$content->type, $content]) }}">
 
-        </div>
+            <img src="{{ $content->imagePreset('large') }}">
 
-        <div class="utils-padding-bottom">
+        </a>
 
-            @include('component.row', [
+        @include('component.row', [
+            'modifiers' => 'm-image',
+            'profile' => [
+                'modifiers' => '',
                 'image' => $content->user->imagePreset(),
-                'image_link' => route('user.show', [$content->user]),
-                'heading' => $content->title,
-                'description' => view('component.content.description', ['content' => $content]),
-                'actions' => view('component.actions', ['actions' => $content->getActions()]),
-                'extra' => view('component.flags', ['flags' => $content->getFlags()]),
-                'body' => $content->body_filtered,
-            ])
-
-        </div>
+                'route' => route('user.show', [$content->user])
+            ],
+            'title' => $content->title,
+            'text' => view('component.content.text', ['content' => $content]),
+            'actions' => view('component.actions', ['actions' => $content->getActions()]),
+            'extra' => view('component.flags', ['flags' => $content->getFlags()]),
+            'body' => $content->body_filtered,
+        ])
         
         @include('component.comment.index', [
             'comments' => $content->comments,
@@ -55,7 +51,8 @@
 
     @endforeach
 
-    {!! $contents->render() !!}
+    @include('component.pagination.default', [
+        'collection' => $contents
+    ])
 
 @stop
-

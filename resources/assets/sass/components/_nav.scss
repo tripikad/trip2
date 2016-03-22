@@ -1,0 +1,40 @@
+.c-nav {
+
+    font-family: $font-primary;
+    list-style: none;
+    display: inline-block;
+    margin: $spacer / 2 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+    .c-nav__list-item {
+
+        display: inline-block;
+        width: 100%;
+        margin: 0 0 $spacer;
+
+        &:last-child {
+
+            margin: 0;
+        }
+
+        &.active .c-nav__list-item-link {
+
+            opacity: 0.6;
+        }
+    }
+
+        .c-nav__list-item-link {
+
+            @include color-modifiers-and(color);
+
+            color: $color-text-link;
+            text-decoration: none;
+
+            &:hover {
+
+                text-decoration: underline;
+            }
+        }

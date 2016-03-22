@@ -1,12 +1,12 @@
-@extends('layouts.medium')
+@extends('layouts.one_column')
 
 @section('title')
     {{ trans($content->title) }}
 @stop
 
-@section('content.medium')
+@section('content.one')
 
-    <div class="utils-padding-bottom 
+    <div class="
         @if (! $content->status)
             utils-unpublished
         @endif

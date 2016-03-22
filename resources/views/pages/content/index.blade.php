@@ -1,4 +1,4 @@
-@extends('layouts.twocol')
+@extends('layouts.two_column')
 
 @section('title')
 
@@ -7,8 +7,8 @@
 @stop
 
 @section('header1.right')
-    
-    @include('component.button', [ 
+
+    @include('component.button', [
         'route' => route('content.create', ['type' => $type]),
         'title' => trans("content.$type.create.title")
     ])
@@ -16,41 +16,41 @@
 @stop
 
 @section('header2.content')
-            
-    @include('component.menu', [
+
+    @include('component.nav', [
+        'modifiers' => '',
         'menu' => 'forum',
         'items' => config('menu.forum')
     ])
-        
+
 @stop
 
 @section('header3.content')
-    
+
     @include('component.filter')
 
 @stop
 
-@section('content.left')
+@section('content.one')
 
     @foreach ($contents as $content)
 
-        <div class="utils-padding-bottom">
-
         @include('component.row', [
-            'image' => $content->user->imagePreset(),
-            'image_link' => route('user.show', [$content->user]),
-            'heading' => $content->title,
-            'heading_link' => route('content.show', [$content->type, $content->id]),
-            'description' => view('component.content.description', ['content' => $content]),
-            'extra' => view('component.content.number', [
-                'number' => count($content->comments)
-            ]),
+            'profile' => [
+                'modifiers' => '',
+                'image' => $content->user->imagePreset(),
+                'route' => route('user.show', [$content->user])
+            ],
+            'modifiers' => 'm-image',
+            'title' => $content->title,
+            'route' => route('content.show', [$content->type, $content->id]),
+            'text' => view('component.content.text', ['content' => $content]),
         ])
-        
-        </div>
 
     @endforeach
 
-  {!! $contents->render() !!}
+    @include('component.pagination.default', [
+        'collection' => $contents
+    ])
 
 @stop

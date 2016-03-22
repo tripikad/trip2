@@ -1,0 +1,110 @@
+.c-alert {
+
+    &.m-fixed {
+
+        position: fixed;
+        top: 0;
+        left: 50%;
+        z-index: 9999;
+        width: 100%;
+        padding: $spacer $spacer * 1.5;
+        max-width: $spacer * 64;
+        transform: translateX(-50%);
+    }
+
+    a {
+
+        color: $color-text-link;
+        text-decoration: none;
+
+        &:hover {
+
+            text-decoration: underline;
+        }
+    }
+}
+
+    .c-alert__inner {
+
+        color: $color-white;
+        font-size: $font-size-small;
+        line-height: 1.5;
+        font-weight: $font-weight-medium;
+        position: relative;
+        padding: $spacer $spacer * 4.5 $spacer $spacer;
+        background: $color-white;
+        border-radius: 3px;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-normal;
+            padding: $spacer * 1.5 $spacer * 4.5 $spacer * 1.5 $spacer * 2;
+        }
+
+        .c-alert.m-warning & {
+
+            color: $color-text-black;
+            background: $color-fill-warning-light;
+            border: 1px solid $color-fill-warning-dark;
+            border-bottom: 2px solid $color-fill-warning-dark;
+        }
+
+        .c-alert.m-notice & {
+
+            color: $color-fill-notice;
+            background: $color-fill-notice-light;
+            border: 1px solid $color-fill-notice;
+            border-bottom: 2px solid $color-fill-notice;
+        }
+
+        .c-alert.m-error & {
+
+            color: $color-fill-error;
+            background: $color-fill-error-light;
+            border: 1px solid $color-fill-error;
+            border-bottom: 2px solid $color-fill-error;
+        }
+
+        .c-alert.m-success & {
+
+            color: $color-fill-success;
+            background: $color-fill-success-light;
+            border: 1px solid $color-fill-success;
+            border-bottom: 2px solid $color-fill-success;
+        }
+    }
+
+    .c-alert__close {
+
+        color: $color-white;
+        font-size: $font-size-larger;
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: flex;
+        width: $spacer * 3.5;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        .c-alert.m-warning & {
+
+            background: $color-fill-warning-dark;
+        }
+
+        .c-alert.m-notice & {
+
+            background: $color-fill-notice;
+        }
+
+        .c-alert.m-error & {
+
+            background: $color-fill-error;
+        }
+
+        .c-alert.m-success & {
+
+            background: $color-fill-success;
+        }
+    }

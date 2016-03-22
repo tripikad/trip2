@@ -20,7 +20,7 @@
 
 			@endif
 
-			<h3 class="c-forum__list-item-topic"><a href="{{ $item['route'] }}" class="c-forum__list-item-topic-link"><?php echo $item['topic']; ?></a></h3>
+			<h3 class="c-forum__list-item-topic"><a href="{{ $item['route'] }}" class="c-forum__list-item-topic-link">{{ $item['topic'] }}</a></h3>
 
 			@if (isset($item['tags']))
 

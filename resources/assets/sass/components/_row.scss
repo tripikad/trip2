@@ -1,0 +1,248 @@
+.c-row {
+
+    margin-bottom: $spacer;
+
+    &.m-image {
+
+        position: relative;
+        padding-left: $spacer * 4;
+        margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            padding-left: $spacer * 6;
+        }
+    }
+
+    &.m-icon {
+
+        position: relative;
+        padding-left: $spacer * 4;
+        margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            padding-left: $spacer * 6;
+        }
+    }
+
+    &.m-large {
+
+        margin-bottom: $spacer * 2;
+    }
+
+    &.m-featured {
+
+        padding-bottom: $spacer * 2;
+        margin-bottom: $spacer * 3;
+        border-bottom: 2px solid $color-fill-neutral;
+    }
+
+    &.m-quote {
+
+        background: $color-fill-neutral-light;
+        border-left: $spacer / 2 solid $color-fill-neutral-dark;
+        position: relative;
+        padding-top: $spacer;
+        padding-bottom: $spacer;
+    }
+
+    &.m-quote:after {
+
+        content: '\201D';
+        display: block;
+        position: absolute;
+        top: $spacer;
+        right: $spacer;
+        color: $color-fill-neutral-dark;
+        font-weight: $font-weight-bold;
+        font-size: $font-size-largest * 2;
+    }
+
+    &.m-quote.m-image {
+
+        padding-left: $spacer * 6;
+
+        @include respond-to(tablet) {
+
+            padding-left: $spacer * 8;
+        }
+    }
+
+    &:last-of-type {
+
+        margin-bottom: 0;
+    }
+}
+
+    .c-row__icon {
+
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        width: $spacer * 3;
+        height: $spacer * 3;
+
+        @include respond-to(tablet) {
+
+            width: $spacer * 4;
+            height: $spacer * 4;
+        }
+
+        .c-row.m-featured & {
+
+            @include respond-to(tablet) {
+
+                width: $spacer * 5;
+                height: $spacer * 5;
+            }
+        }
+
+        svg {
+
+            @include color-modifiers-and(fill);
+
+            fill: $color-text-link;
+            height: 100%;
+            width: 100%;
+
+            .c-row.m-featured & {
+
+                fill: $brand-green;
+            }
+        }
+    }
+
+    .c-row__image {
+
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        width: $spacer * 4;
+        height: $spacer * 4;
+
+        .c-row.m-quote.m-image & {
+
+            left: (($spacer * 6) - ($spacer * 4)) / 2;
+            top: $spacer + 2;
+
+            @include respond-to(tablet) {
+
+                left: (($spacer * 8) - ($spacer * 4)) / 2;
+                top: $spacer + 2;
+            }
+        }
+    }
+
+    .c-row__title {
+
+        font-size: $font-size-normal;
+        line-height: 1.5;
+
+        .c-row.m-icon &,
+        .c-row.m-image & {
+
+            @include font-smoothing;
+
+            font-size: $font-size-large;
+            font-weight: $font-weight-bold;
+            line-height: 1.15;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-larger - 2;
+            }
+        }
+
+        .c-row.m-large & {
+
+            @include font-smoothing;
+
+            font-size: $font-size-large;
+            font-weight: $font-weight-bold;
+            line-height: 1.15;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-larger - 2;
+            }
+        }
+
+        .c-row.m-featured & {
+
+            font-size: $font-size-larger - 2;
+            font-weight: $font-weight-bold;
+            line-height: 1.15;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-larger;
+            }
+        }
+    }
+
+        .c-row__title-link {
+
+            @include color-modifiers-and(color);
+
+            color: $color-text-link;
+            text-decoration: none;
+
+            &:hover {
+
+                text-decoration: underline;
+            }
+
+            .c-row.m-featured & {
+
+                color: $brand-green;
+            }
+        }
+
+    .c-row__text {
+
+        color: $color-text-neutral-darker;
+        font-size: $font-size-small;
+
+        .c-row.m-icon &,
+        .c-row.m-image & {
+
+            font-size: $font-size-normal;
+            margin-top: $spacer * 0.75;
+        }
+
+        .c-row.m-quote & {
+
+            margin-top: 0;
+        }
+
+        .c-row.m-large & {
+
+            font-size: $font-size-normal;
+            margin-top: $spacer * 0.75;
+        }
+
+        > a {
+
+            color: $color-text-link;
+        }
+    }
+
+        .c-row__list {
+
+            display: inline-block;
+            margin-right: $spacer;
+        }
+
+        .c-row__badge {
+
+            display: inline-block;
+        }
+
+    .c-row__body {
+
+        font-size: $font-size-normal;
+        line-height: $font-size-normal * 1.5;
+    }

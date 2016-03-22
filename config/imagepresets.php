@@ -1,13 +1,23 @@
 <?php
 
+<<<<<<< HEAD
 $prepath = storage_path().'/app/images/';
+=======
+$images_path = '/images/';
+$svg_path = '/svg/';
+>>>>>>> master
 
 return [
+
+    'image' => [
+        'none' => $svg_path.'picture_none.svg',
+        'path' => $images_path,
+    ],
 
     'original' => [
         'width' => null,
         'height' => null,
-        'path' => $prepath.'original/',
+        'path' => $images_path.'original/',
     ],
 
     'presets' => [
@@ -16,7 +26,7 @@ return [
             'operation' => 'resize',
             'width' => 900,
             'height' => null,
-            'path' => $prepath.'large/',
+            'path' => $images_path.'large/',
             'quality' => 75,
         ],
 
@@ -24,7 +34,7 @@ return [
             'operation' => 'resize',
             'width' => 700,
             'height' => null,
-            'path' => $prepath.'medium/',
+            'path' => $images_path.'medium/',
             'quality' => 75,
         ],
 
@@ -32,7 +42,7 @@ return [
             'operation' => 'resize',
             'width' => 300,
             'height' => null,
-            'path' => $prepath.'small/',
+            'path' => $images_path.'small/',
             'quality' => 75,
         ],
 
@@ -40,7 +50,7 @@ return [
             'operation' => 'fit',
             'width' => 180,
             'height' => null,
-            'path' => $prepath.'small_square/',
+            'path' => $images_path.'small_square/',
             'quality' => 75,
         ],
 
@@ -48,7 +58,7 @@ return [
             'operation' => 'fit',
             'width' => 75,
             'height' => null,
-            'path' => $prepath.'xsmall_square/',
+            'path' => $images_path.'xsmall_square/',
             'quality' => 75,
         ],
 

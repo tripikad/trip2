@@ -1,0 +1,44 @@
+.c-blog-social {}
+
+    .c-blog-social__link {
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 24px;
+        width: 24px;
+        margin-right: $spacer * 1.5;
+
+        &:last-child {
+
+            margin-right: 0;
+
+            @include respond-to(tablet) {
+
+                margin-right: $spacer * 1.5;
+            }
+        }
+
+        &.m-twitter {
+
+            svg {
+
+                width: $spacer * 2;
+                height: $spacer * 2 - 5;
+            }
+        }
+
+        &.m-facebook {
+
+            svg {
+
+                width: $spacer - 2;
+                height: $spacer * 2 - 4;
+            }
+        }
+
+        svg {
+
+            fill: $color-text-gray;
+        }
+    }

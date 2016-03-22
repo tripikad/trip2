@@ -1,0 +1,166 @@
+.c-navbar-list {
+
+    @include clearfix;
+    @include clear-list;
+    width: 100%;
+}
+
+    .c-navbar-list__item {
+
+        display: block;
+
+        @include respond-to(tablet) {
+
+            float: left;
+            padding: $spacer;
+        }
+
+        @include respond-to(desktop) {
+
+            padding: $spacer $spacer * 1.5;
+        }
+    }
+
+        .c-navbar-list__item-link {
+
+            @include font-smoothing;
+
+            color: $color-text-link;
+            font-size: $font-size-normal;
+            font-weight: $font-weight-bold;
+            padding: $spacer * 1.5 $spacer;
+            text-decoration: none;
+            display: block;
+
+            @include respond-to(tablet) {
+
+                line-height: $spacer * 3;
+                position: relative;
+                height: $spacer * 3;
+                padding: 0;
+            }
+
+            .m-active &,
+            .m-alternative &,
+            .m-blog.m-active & {
+
+                color: $color-white;
+            }
+
+            .m-blog & {
+
+                color: $color-text-gray;
+            }
+
+            .c-navbar-list__item.m-border & {
+
+                @include respond-to(tablet) {
+
+                    padding-left: $spacer;
+                    padding-right: $spacer;
+                    border: 2px solid $color-white;
+                    border-radius: 3px;
+                }
+            }
+
+            .m-blog .c-navbar-list__item.m-border & {
+
+                @include respond-to(tablet) {
+
+                    border: 2px solid $color-text-gray;
+                }
+            }
+
+            .active & {
+
+                opacity: 0.6;
+            }
+        }
+
+        .c-navbar-list__sub {
+
+            @include clear-list;
+            @include color-modifiers-and(background);
+
+            display: block;
+
+            @include respond-to(tablet) {
+
+                top: 90%;
+                display: none;
+                right: $spacer;
+                position: absolute;
+                z-index: 1100;
+                width: $spacer * 16;
+                padding: $spacer / 2 0;
+                border-radius: 3px;
+                box-shadow: 0 12px 24px rgba($shadow-dark, 0.3);
+            }
+
+            &::before {
+
+                @include color-modifiers-and(border-bottom-color);
+
+                content: '';
+                position: absolute;
+                top: -$spacer / 2;
+                right: $spacer * 1.5;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 5.5px 6px 5.5px;
+                border-top-color: $transparent;
+                border-left-color: $transparent;
+                border-right-color: $transparent;
+                border-bottom-color: inherit;
+
+                @include respond-to(tablet) {
+
+                    right: $spacer * 6;
+                }
+            }
+
+            .c-navbar-list__item:hover & {
+
+                @include respond-to(tablet) {
+
+                    display: block;
+                }
+            }
+        }
+
+            .c-navbar-list__sub-item {
+
+                display: block;
+                margin: 0;
+                padding: 0;
+            }
+
+                .c-navbar-list__sub-item-link {
+
+                    @include font-smoothing;
+
+                    color: $color-white;
+                    font-size: $font-size-normal;
+                    font-weight: $font-weight-bold;
+                    text-decoration: none;
+                    display: block;
+                    padding: $spacer * 1.5 $spacer;
+
+                    @include respond-to(tablet) {
+
+                        line-height: $spacer * 3;
+                        height: $spacer * 3;
+                        padding: 0 $spacer * 2;
+                    }
+
+                    &:hover {
+
+                        @include respond-to(tablet) {
+
+                            @include color-modifiers-dark-and(background);
+                        }
+                    }
+                }
+
+                    .c-navbar-list__sub-item-text {}

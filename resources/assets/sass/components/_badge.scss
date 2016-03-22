@@ -1,0 +1,33 @@
+.c-badge {
+
+    @include color-modifiers(color);
+
+    color: $brand-yellow;
+    font-size: $font-size-small;
+    line-height: 26px;
+    text-align: center;
+    display: inline-block;
+    height: 22px;
+    min-width: 26px;
+    border-radius: 20px;
+    background: $color-white;
+
+    &.m-inverted {
+
+        @include color-modifiers(background);
+
+        color: $color-white;
+        background: $brand-yellow;
+
+        &.m-dark {
+
+            @include color-modifiers-dark(background);
+
+        }
+    }
+}
+
+    .c-badge__text {
+
+        padding: 0 $spacer * 2;
+    }

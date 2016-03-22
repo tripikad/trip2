@@ -1,0 +1,107 @@
+$spacer: 12px;
+
+$breakpoint-tablet-portrait: 560px;
+$container-tablet-portrait: 100%;
+$breakpoint-tablet: 1000px;
+$container-tablet: 100%;
+$breakpoint-desktop: 1200px;
+$container-desktop: 1152px;
+$breakpoint-desktop-medium: 1440px;
+$container-desktop-medium: 1248px;
+$breakpoint-desktop-large: 1520px;
+$container-desktop-large: 1344px;
+
+@include add-breakpoint('tablet-portrait', $breakpoint-tablet-portrait);
+@include add-breakpoint('tablet', $breakpoint-tablet);
+@include add-breakpoint('desktop', $breakpoint-desktop);
+@include add-breakpoint('desktop-medium', $breakpoint-desktop-medium);
+@include add-breakpoint('desktop-large', $breakpoint-desktop-large);
+
+// Vertical breakpoints will be used to target screens wider than tablet($breakpoint-tablet) and height smaller than specified
+@include add-breakpoint('vertical-small', (min-width $breakpoint-tablet) (max-height 640px));
+@include add-breakpoint('vertical-medium', (min-width $breakpoint-tablet) (max-height 700px));
+
+$susy: (
+
+	columns: 28,
+	output: isolate,
+	gutters: 0
+);
+
+@mixin wrap($value: 'normal') {
+
+	//.l-container {
+
+		@include container(100%);
+
+			@if $value == 'narrow' {
+
+				padding: 0 $spacer * 1.5;
+			} @else {
+
+				padding: 0 $spacer * 1.5;
+			}
+
+		@include respond-to(tablet-portrait) {
+
+			@if $value == 'narrow' {
+
+				padding: 0 $spacer * 2;
+			} @else {
+
+				padding: 0 $spacer * 2;
+			}
+
+		}
+
+		@include respond-to(tablet) {
+
+			@if $value == 'narrow' {
+
+				padding: 0 span(2);
+			} @else {
+
+				padding: 0 $spacer;
+			}
+		}
+
+		@include respond-to(desktop) {
+
+			@include container($container-desktop);
+
+			@if $value == 'narrow' {
+
+				padding: 0 $container-desktop/28*2;
+			} @else {
+
+				padding: 0;
+			}
+		}
+
+		@include respond-to(desktop-medium) {
+
+			@include container($container-desktop-medium);
+
+			@if $value == 'narrow' {
+
+				padding: 0 $container-desktop-medium/28*2;
+			} @else {
+
+				padding: 0;
+			}
+		}
+
+		@include respond-to(desktop-large) {
+
+			@include container($container-desktop-large);
+
+			@if $value == 'narrow' {
+
+				padding: 0 $container-desktop-large/28*2;
+			} @else {
+
+				padding: 0;
+			}
+		}
+	//}
+}

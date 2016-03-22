@@ -1,0 +1,7 @@
+.l-one-column {
+    
+    @include wrap('narrow');
+    margin: $spacer * 3 0;
+
+}
+

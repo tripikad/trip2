@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use View;
 use App\Image;
 use App\Content;
 
@@ -11,7 +10,12 @@ class AdminController extends Controller
 {
     public function imageIndex()
     {
-        $images = Image::orderBy('id', 'asc')->simplePaginate(96);
+        $exception = [
+            'contents.type' => 'photo',
+            'imageable_type' => 'App\\User',
+        ];
+
+        $images = Image::getAllContentExcept($exception)->simplePaginate(96);
 
         return view('pages.admin.image.index', [
             'images' => $images,
@@ -25,12 +29,15 @@ class AdminController extends Controller
         ]);
 
         $filename = Image::storeImageFile($request->file('image'));
+        $orig_filename = $request->file('image')->getClientOriginalName();
         Image::create(['filename' => $filename]);
 
-        return back()
-            ->with('info', trans('admin.image.store.info', [
-                    'filename' => $filename,
-            ]));
+        if (! $request->ajax()) {
+            return back()
+                ->with('info', trans('admin.image.store.info', [
+                    'filename' => $orig_filename,
+                ]));
+        }
     }
 
     public function contentIndex()

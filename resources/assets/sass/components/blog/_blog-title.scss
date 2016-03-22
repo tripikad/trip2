@@ -1,0 +1,29 @@
+.c-blog-title {
+
+    color: $color-text-link;
+    font-size: $font-size-medium;
+    margin-bottom: $spacer;
+
+    &.m-large {
+
+        font-size: $font-size-larger;
+        font-weight: $font-weight-bold;
+        margin-bottom: $spacer * 1.5;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-largest;
+            margin-bottom: $spacer * 2;
+        }
+    }
+
+    &.m-margin {
+
+        margin-bottom: $spacer * 1.5;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 2;
+        }
+    }
+}

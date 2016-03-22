@@ -1,13 +1,13 @@
-@extends('layouts.main')
+@extends('layouts.one_column')
 
 @section('title')
-    
+
     {{ trans("content.$type.index.title") }}
 
 @stop
 
 @section('header1.right')
-    @include('component.button', [ 
+    @include('component.button', [
         'route' => route('content.create', ['type' => $type]),
         'title' => trans("content.$type.create.title")
     ])
@@ -15,7 +15,8 @@
 
 @section('header2.content')
 
-    @include('component.menu', [
+    @include('component.nav', [
+        'modifiers' => '',
         'menu' => 'news',
         'items' => config('menu.news')
     ])
@@ -28,10 +29,10 @@
 
 @stop
 
-@section('content')
+@section('content.one')
 
     <div class="row">
-  
+
         @foreach ($contents as $index => $content)
 
             <div class="col-sm-3">
@@ -53,6 +54,8 @@
 
     </div>
 
-    {!! $contents->render() !!}
+    @include('component.pagination.default', [
+        'collection' => $contents
+    ])
 
 @stop

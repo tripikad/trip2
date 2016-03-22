@@ -6,9 +6,10 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.1.*",
+        "laravel/framework": "5.2.14",
+        "nikic/php-parser": "2.0.0",
         "guzzlehttp/guzzle": "~5.3|~6.0",
-        "laravelcollective/html": "5.1.*",
+        "laravelcollective/html": "5.2.*@dev",
         "intervention/image": "^2.3@dev",
         "barryvdh/laravel-debugbar": "^2.0@dev",
         "baum/baum": "~1.1",
@@ -16,13 +17,17 @@
         "wpb/string-blade-compiler": "2.*@dev",
         "jenssegers/date": "3.*@dev",
         "ipunkt/laravel-analytics": "~1.1",
-        "roumen/feed": "~2.9"
+        "roumen/feed": "~2.10",
+        "laravel/socialite" : "~2.0",
+        "laravelista/ekko": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "~2.1",
+        "symfony/dom-crawler": "2.8.*|3.0.*",
+        "symfony/css-selector": "2.8.*|3.0.*"
     },
     "autoload": {
         "classmap": [

@@ -1,0 +1,43 @@
+.c-promo {
+
+    overflow: hidden;
+    display: none;
+
+    @include respond-to(tablet) {
+
+        display: block;
+    }
+
+    &.m-sidebar-large {
+
+        max-height: $spacer * 48;
+    }
+
+    &.m-sidebar-small {
+
+        max-height: $spacer * 32;
+    }
+
+    &.m-footer {
+
+        max-height: $spacer * 12;
+    }
+
+    &.m-body {
+
+        max-height: $spacer * 10;
+    }
+}
+
+    .c-promo__link {
+
+        display: block;
+    }
+
+        .c-promo__image {
+
+            display: block;
+            max-width: 100%;
+            margin: 0 auto;
+            width: 100%;
+        }

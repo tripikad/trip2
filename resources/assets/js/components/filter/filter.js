@@ -1,16 +1,19 @@
-// $('input[type=submit]').hide();
+var filter = $('.js-filter'),
+    submit = $('.js-submit');
 
-$('select[name=destination]').selectize({
-    onChange: function(value) {
-        $('input[type=submit]').click();
-    }
-});
+if (submit.length > 0) {
 
-$('select[name=topic]').selectize({
-    onChange: function(value) {
-        $('input[type=submit]').click();
-    }
-});
+    filter.selectize({
 
-$('#destinations').selectize();
-$('#topics').selectize();
+        onChange: function() {
+            submit.click();
+        }
+    });
+} else {
+
+    filter.selectize({
+
+        plugins: ['remove_button'],
+    });
+}
+

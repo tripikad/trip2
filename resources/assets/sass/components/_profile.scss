@@ -1,0 +1,378 @@
+.c-profile {
+
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 50%;
+
+    &.m-center {
+
+        justify-content: center;
+    }
+
+    &.m-mini {
+
+        display: block;
+    }
+
+    &.m-full {
+
+        height: 100%;
+        width: 100%;
+    }
+
+    &.m-status {
+
+        padding: 4px;
+        background-color: $color-fill-neutral;
+
+        &.m-user {
+
+            @include color-modifiers(background-color);
+            padding: $spacer;
+        }
+    }
+}
+
+    .c-profile__bubble {
+
+        @include color-modifiers(background-color);
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        display: block;
+        height: $spacer + 4;
+        width: $spacer + 4;
+        border-radius: 50%;
+
+        .c-profile.m-user & {
+
+            @include color-modifiers-dark(background-color);
+
+            top: $spacer * 1.5;
+            left: $spacer;
+            height: $spacer * 3;
+            width: $spacer * 3;
+        }
+
+        svg {
+
+            fill: $color-white;
+            transform: scale(0.6);
+        }
+    }
+
+    .c-profile__status {
+
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+        .c-profile__status-pie {
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+
+            &.m-25,
+            &.m-50 {
+
+                background-color: $color-fill-neutral;
+
+                .c-profile.m-user & {
+
+                    @include color-modifiers-and(background-color);
+                }
+            }
+
+            &.m-75,
+            &.m-100 {
+
+                @include color-modifiers-and(background-color);
+
+                .c-profile.m-user & {
+
+                    background-color: $color-white;
+                }
+            }
+        }
+
+            .c-profile__status-pie-inner {
+
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-clip: padding-box;
+
+                &:after,
+                &:before {
+
+                    .c-profile.m-user & {
+
+                        content: '';
+                        position: absolute;
+                        height: $spacer;
+                        width: $spacer;
+                        border-radius: 50%;
+                        background-color: $color-white;
+                    }
+                }
+
+                .c-profile__status-pie.m-25 & {
+
+                    @include color-modifiers-and(background-color);
+
+                    top: -50%;
+                    left: 50%;
+                    margin-left: -1px;
+
+                    .c-profile.m-user & {
+
+                        background-color: $color-white;
+                    }
+
+                    &:before {
+
+                        .c-profile.m-user & {
+
+                            bottom: 50%;
+                            left: -$spacer / 2;
+                            margin-bottom: -$spacer;
+                        }
+                    }
+
+                    &:after {
+
+                        .c-profile.m-user & {
+
+                            left: 50%;
+                            bottom: -$spacer / 2;
+                            margin-left: -$spacer;
+                        }
+                    }
+                }
+
+                .c-profile__status-pie.m-50 & {
+
+                    @include color-modifiers-and(background-color);
+
+                    top: 0;
+                    left: 50%;
+                    margin-left: -1px;
+                    background-color: $color-fill-neutral;
+
+                    .c-profile.m-user & {
+
+                        background-color: $color-white;
+                    }
+
+                    &:before {
+
+                        .c-profile.m-user & {
+
+                            top: 0;
+                            left: -$spacer / 2;
+                            margin-bottom: -$spacer;
+                        }
+                    }
+
+                    &:after {
+
+                        .c-profile.m-user & {
+
+                            left: 0;
+                            bottom: 0;
+                            margin-left: -$spacer / 2;
+                        }
+                    }
+                }
+
+                .c-profile__status-pie.m-75 & {
+
+                    top: -50%;
+                    left: -50%;
+                    margin-left: -1px;
+                    background-color: $color-fill-neutral;
+
+                    .c-profile.m-user & {
+
+                        @include color-modifiers-and(background-color);
+                    }
+
+                    &:before {
+
+                        .c-profile.m-user & {
+
+                            right: 0;
+                            bottom: 50%;
+                            margin-bottom: -$spacer;
+                            margin-right: -$spacer / 2;
+                        }
+                    }
+
+                    &:after {
+
+                        .c-profile.m-user & {
+
+                            left: 50%;
+                            bottom: 0;
+                            margin-left: 1px;
+                            margin-bottom: -$spacer / 2;
+                        }
+                    }
+                }
+            }
+
+        .c-profile__status-title {
+
+            position: absolute;
+            z-index: 20;
+            display: none;
+
+            .c-profile:hover & {
+
+                @include respond-to(tablet) {
+
+                    display: block;
+                    top: -$spacer * 4 + 4;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+
+    .c-profile__image-wrap {
+
+        flex: 0 1 $spacer * 6;
+
+        .c-profile.m-small & {
+
+            flex: 0 1 $spacer * 4;
+        }
+
+        .c-profile.m-mini & {
+
+            position: relative;
+            display: block;
+            width: $spacer * 3;
+            height: $spacer * 3;
+        }
+
+        .c-profile.m-micro & {
+
+            display: inline-block;
+            width: $spacer * 2;
+            height: $spacer * 2;
+        }
+
+        .c-profile.m-full & {
+
+            @include color-modifiers-dark-and(background-color);
+
+            display: block;
+            flex: none;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .c-profile.m-status & {
+
+            position: relative;
+            z-index: 10;
+        }
+    }
+
+        .c-profile__image {
+
+            display: block;
+            height: $spacer * 4;
+            width: $spacer * 4;
+            border-radius: 50%;
+
+            .c-profile.m-mini &,
+            .c-profile.m-small & {
+
+                height: $spacer * 3;
+                width: $spacer * 3;
+            }
+
+            .c-profile.m-micro & {
+
+                height: $spacer * 2;
+                width: $spacer * 2;
+            }
+
+            .c-profile.m-full & {
+
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .c-profile__letter {
+
+            @include color-modifiers-dark(background-color);
+
+            color: $color-white;
+            font-weight: $font-weight-bold;
+            font-size: $font-size-large;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+
+            &.m-tiny {
+
+                font-size: $font-size-small;
+            }
+
+            &.m-small {
+
+                font-size: $font-size-medium;
+            }
+
+            &.m-large {
+
+                font-size: $font-size-huge / 2;
+            }
+
+            span {
+
+                margin-top: $spacer / 3;
+            }
+        }
+
+        .c-profile__badge {
+
+            position: absolute;
+            bottom: -$spacer / 2;
+            right: -$spacer;
+            display: none;
+
+            .c-profile.m-mini & {
+
+                display: block;
+            }
+
+            .c-profile.m-full & {
+
+                display: none;
+            }
+        }

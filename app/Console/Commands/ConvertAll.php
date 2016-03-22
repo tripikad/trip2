@@ -29,5 +29,7 @@ class ConvertAll extends ConvertBase
         $this->call('convert:messages');
 
         $this->call('convert:users');
+
+        $this->call('convert:indexAliases');
     }
 }

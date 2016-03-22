@@ -48,13 +48,13 @@ class ConvertBase extends Command
 
         // max size: messages ~100000
 
-        $this->skip = env('CONVERT_SKIP', 10);
-        $this->take = env('CONVERT_TAKE', 10);
-        $this->copyFiles = env('CONVERT_FILES', false);
-        $this->scrambleMessages = env('CONVERT_SCRAMBLE', true);
-        $this->fileHash = env('CONVERT_FILEHASH', false);
-        $this->overwriteFiles = env('CONVERT_OVERWRITE', false);
-        $this->demoAccounts = env('CONVERT_DEMOACCOUNTS', false);
+        $this->skip = config('convert.skip');
+        $this->take = config('convert.take');
+        $this->copyFiles = config('convert.copyFiles');
+        $this->scrambleMessages = config('convert.scrambleMessages');
+        $this->fileHash = config('convert.fileHash');
+        $this->overwriteFiles = config('convert.overwriteFiles');
+        $this->demoAccounts = config('convert.demoAccounts');
     }
 
     // Nodes
@@ -88,7 +88,7 @@ class ConvertBase extends Command
         return $query;
     }
 
-    public function convertNode($node, $modelname, $type)
+    public function convertNode($node, $modelname, $type, $route = '')
     {
         if (! $modelname::find($node->nid)) {
             if ($this->isUserConvertable($node->uid)) {
@@ -116,7 +116,14 @@ class ConvertBase extends Command
                 $this->convertUser($node->uid);
                 $this->convertComments($node->nid);
                 $this->convertFlags($node->nid, 'App\Content', 'node');
-                $this->convertNodeAlias($node->nid, 'App\Content', 'node');
+
+                if ($route != '') {
+                    if ($alias = $this->getNodeAlias($node->nid)) {
+                        $this->convertStaticAlias($route, $alias->dst, $type, $node->nid);
+                    }
+                } else {
+                    $this->convertNodeAlias($node->nid, 'App\Content', 'node');
+                }
 
                 return $model;
             } else {
@@ -415,13 +422,17 @@ class ConvertBase extends Command
         // Eliminating mail duplicates using
         // SELECT uid, mail, COUNT(*) c FROM users GROUP BY mail HAVING c > 1;
 
-        return ($user
-            && $user->status == 1
-            && ! in_array($user->uid, [7288556, 4694, 3661])
-            && ! $blockedSender
-            && $user->rid !== 9 // Ärikasutaja
-            && $user->rid !== 11 // Ärikasutaja 2
-        );
+        /**
+         * $user->rid
+         * Case id 9 - Business user
+         * Case id 11 - Business user 2.
+         */
+        if ($user && $user->status == 1 && ! in_array($user->uid, [7288556, 4694, 3661]) &&
+            ! $blockedSender && $user->rid !== 9 && $user->rid !== 11) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function getRole($rid)
@@ -544,7 +555,11 @@ class ConvertBase extends Command
         $model->images()->attach($image);
 
         $from = 'http://trip.ee/'.$imagePath;
+<<<<<<< HEAD
         $to = storage_path().'/app/images/original/'.$filename;
+=======
+        $to = public_path().config('imagepresets.original.path').$filename;
+>>>>>>> master
 
         if ($this->copyFiles) {
             if (file_exists($to) && ! $this->overwriteFiles) {
@@ -588,7 +603,11 @@ class ConvertBase extends Command
             }
 
             $from = $imageUrl;
+<<<<<<< HEAD
             $to = storage_path().'/app/images/original/'.$filename;
+=======
+            $to = public_path().config('imagepresets.original.path').$filename;
+>>>>>>> master
 
             if ($this->copyFiles) {
                 if (file_exists($to) && ! $this->overwriteFiles) {
@@ -714,9 +733,19 @@ class ConvertBase extends Command
             ->insert([
                 'aliasable_id' => $nid,
                 'aliasable_type' => 'content',
-                'path' => $this->cleanAll($alias->dst),
+                'path' => $alias->dst,
             ]);
         }
+    }
+
+    public function convertStaticAlias($aliasable_type, $path, $route_type, $nid = 0)
+    {
+        \DB::table('aliases')->insert([
+            'aliasable_id' => $nid,
+            'aliasable_type' => $aliasable_type,
+            'path' => $path,
+            'route_type' => $route_type,
+        ]);
     }
 
     public function convertTermAlias($tid, $aliasable_type)
@@ -738,7 +767,7 @@ class ConvertBase extends Command
                 ->insert([
                     'aliasable_id' => $tid,
                     'aliasable_type' => $aliasable_type,
-                    'path' => $this->cleanAll($alias->dst),
+                    'path' => $alias->dst,
                 ]);
 
             if ($aliasable_type != 'destination') {
@@ -780,7 +809,7 @@ class ConvertBase extends Command
             }
 
             foreach ($presets as $preset) {
-                Imageconv::make($to)
+                Imageconv::make($from)
                     ->{config("imagepresets.presets.$preset.operation")}(
                         config("imagepresets.presets.$preset.width"),
                         config("imagepresets.presets.$preset.height"),
@@ -788,7 +817,7 @@ class ConvertBase extends Command
                             $constraint->aspectRatio();
                     })
                     ->save(
-                        config("imagepresets.presets.$preset.path").basename($to),
+                        public_path().config("imagepresets.presets.$preset.path").basename($to),
                         config("imagepresets.presets.$preset.quality")
                     );
             }
@@ -954,8 +983,6 @@ class ConvertBase extends Command
         if (isset($genderMap[$string])) {
             return $genderMap[$string];
         }
-
-        return;
     }
 
     public function convertBirthyear($string)
@@ -963,7 +990,5 @@ class ConvertBase extends Command
         if (preg_match('/[12][0-9]{3}/', $string) && intval($string) > 1915 && intval($string) < 2010) {
             return intval($string);
         }
-
-        return;
     }
 }

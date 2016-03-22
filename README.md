@@ -26,7 +26,7 @@ Note: If you have problems with ```npm install```, try to run ```npm install --n
 
 #### Configuration
 
-Then  add following parameters to ```/.env```:
+Then add following parameters to ```/.env```:
 
     DB_HOST1=127.0.0.1
     DB_DATABASE1=trip
@@ -39,6 +39,14 @@ Then  add following parameters to ```/.env```:
     DB_PASSWORD2=secret
 
     DB_CONNECTION=trip2
+
+Then change these parameter values properly from ```/.env```:
+
+    FULL_BASE_URL=http://localhost:8000/
+    FACEBOOK_CLIENT_ID=
+    FACEBOOK_SECRET_KEY=
+    GOOGLE_CLIENT_ID=
+    GOOGLE_SECRET_KEY=
 
 Now you should be able to access the web app and also run console commands.
 
@@ -94,79 +102,15 @@ The entrypoing to the templates are pages. They are called from controllers usin
 
 ##### Components
 
-Here is a sample component HTML:
+Here is a sample component HTML, we use BEM convention for class names and ```c-``` prefix for components.
 
 ```mustache
 
     {{-- /resources/views/component/sample.blade.php --}}
 
-    <div class="component-sample">
-        <h3 class="title">{{ $title }}
-        <p class="text">{{ $text }}
+    <div class="c-sample">
+        <h3 class="c-sample__title">{{ $title }}
+        <p class="c-sample__title">{{ $text }}
     </div>
 
 ```
-
-#### SCSS / CSS files
-
-CSS tries to follow [RSCSS](https://github.com/rstacruz/rscss/blob/master/Readme.md) naming convention (see the comparision with BEM [here](https://github.com/rstacruz/rscss/blob/master/Readme.md)).
-
-All the SCSS files that are found in ```/resources/assets/sass/``` subdirectory are automatically included and compiled to CSS in ```/gulpfile.js```, there is no need to explicty include them.
-
-##### Variables
-
-    /resources/assets/sass/variables.scss
-
-##### General styles
-
-    /resources/assets/sass/style/
-
-Here are the site-wide CSS styles for general scaffolding, typography and various util classes with ```.utils-``` prefix.
-
-##### Pages and Layouts
-
-As of time of writing there is no page- or layout-specific CSS. Everything is  layed out via Bootstrap ```.container```, ```.row``` and ```.col-*```  classes and custom ```.utils-``` classes.
-
-##### Components
-
-    /resources/assets/sass/component/
-
-The components follow the HTML template naming conventions. Here is a sample component SCSS file.
-
-```scss
-
-    // /resources/assets/sass/component/sample.scss
-
-    .component-sample {
-
-        > .title {
-            color: $orange;
-        }
-
-    }
-
-```
-
-#### SCSS formatting
-
-Avoid too deep nesting in SCSS, use maximum three levels of nesting:
-
-```scss
-
-    .component-first {
-
-        .second {
-
-            .third {
-
-                ...
-            }
-
-            .third > .fourth {
-
-                ...
-            }
-        
-        }
-    
-    }

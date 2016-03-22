@@ -1,0 +1,62 @@
+.c-destination-helper {
+
+    @include color-modifiers(background);
+}
+
+    .c-destination-helper__header {
+
+        padding: $spacer * 1.5 $spacer;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 3 $spacer * 2 $spacer * 2;
+        }
+    }
+
+        .c-destination-helper__title {
+
+            @include font-smoothing;
+
+            color: $color-white;
+            font-size: $font-size-larger;
+            font-weight: $font-weight-bold;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-medium * 2;
+            }
+        }
+
+            .c-destination-helper__subtitle {
+
+                @include color-modifiers-dark-and(color);
+
+                font-size: $font-size-normal;
+                margin-top: $spacer;
+                display: block;
+
+                @include respond-to(tablet) {
+
+                    font-size: $font-size-large;
+                    display: inline-block;
+                    margin-top: 0;
+                    margin-left: $spacer;
+
+                }
+            }
+
+    .c-destination-helper__content {
+
+        padding: $spacer * 1.5 $spacer;
+        background: $color-fill-neutral-light;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 3 $spacer * 2 $spacer * 2;
+        }
+    }
+
+        .c-destination-helper__actions {
+
+            @include clearfix;
+        }

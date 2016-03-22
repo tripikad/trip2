@@ -1,0 +1,106 @@
+.c-user-extra {
+
+    @include clear-list;
+
+    margin: $spacer * 2 0 0;
+
+    @include respond-to(tablet) {
+
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+}
+
+    .c-user-extra__item {
+
+        position: relative;
+        margin-bottom: $spacer;
+
+        @include respond-to(tablet) {
+
+            display: flex;
+            align-items: center;
+            margin-left: $spacer * 2;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        &:last-child {
+
+            margin-bottom: 0;
+        }
+    }
+
+        .c-user-extra__item-link {
+
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .c-user-extra__item-icon {
+
+            width: $spacer * 3;
+            height: $spacer * 3;
+            margin-right: $spacer;
+
+            svg {
+
+                fill: $color-white;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .c-user-extra__item-title {
+
+            color: $color-white;
+            font-size: $font-size-medium;
+            line-height: $spacer * 3 + 4;
+            display: block;
+            height: $spacer * 3;
+        }
+
+        .c-user-extra__item-text {
+
+            @include respond-to(tablet) {
+
+                position: absolute;
+                z-index: 2;
+                bottom: $spacer * 4;
+                left: 0;
+                display: none;
+            }
+
+            .c-user-extra__item:hover & {
+
+                @include respond-to(tablet) {
+
+                    display: block;
+                }
+            }
+        }
+
+            .c-user-extra__item-text-mobile {
+
+                color: $color-white;
+                font-size: $font-size-small;
+                display: inline-block;
+                margin-left: $spacer;
+
+                @include respond-to(tablet) {
+
+                    display: none;
+                }
+            }
+
+            .c-user-extra__item-text-desktop {
+
+                display: none;
+
+                @include respond-to(tablet) {
+
+                    display: block;
+                }
+            }

@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\User;
 use App\Image;
+use App\Flag;
+use App\Destination;
+use Hash;
 
 class UserController extends Controller
 {
@@ -14,7 +17,9 @@ class UserController extends Controller
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
 
-        $user = User::with('flags', 'flags.flaggable')->findorFail($id);
+        $user = User::with(['flags.flaggable' => function ($query) use ($id) {
+            $query->where('user_id', $id);
+        }])->findorFail($id);
 
         $content_count = $user
             ->contents()
@@ -30,15 +35,37 @@ class UserController extends Controller
             })
             ->count();
 
-        $from = Carbon::now()->subMonths(6)->startOfMonth();
-        $to = Carbon::now();
+        $now = Carbon::now();
 
-        $content = $user
+        $latest_announcement = $user
+            ->contents()
+            ->whereStatus(1)
+            ->whereIn('type', ['travelmate'])
+            ->where('start_at', '>=', $now)
+            ->latest('created_at')
+            ->take(1)
+            ->first();
+
+        $photos = $user
+            ->contents()
+            ->whereStatus(1)
+            ->where('type', 'photo')
+            ->latest('created_at')
+            ->take(8)
+            ->get();
+
+        $count_photos = $user
+            ->contents()
+            ->whereStatus(1)
+            ->where('type', 'photo')
+            ->count();
+
+        $activity_content = $user
             ->contents()
             ->whereStatus(1)
             ->whereIn('type', $types)
-            ->whereBetween('created_at', [$from, $to])
             ->latest('created_at')
+            ->take(4)
             ->get()
             ->transform(function ($item) {
                 $item['activity_type'] = 'content';
@@ -46,31 +73,65 @@ class UserController extends Controller
                 return $item;
             });
 
-        $comments = $user
+        $activity_comment = $user
             ->comments()
-            ->with('content')
             ->whereStatus(1)
-            ->whereBetween('created_at', [$from, $to])
             ->whereHas('content', function ($query) use ($types) {
                 $query->whereIn('type', $types);
             })
             ->latest('created_at')
             ->get()
+            ->unique('content_id')
             ->transform(function ($item) {
                 $item['activity_type'] = 'comment';
 
                 return $item;
             });
 
-        $items = $content
-            ->merge($comments)
-            ->sortByDesc('created_at');
+        $activities = $activity_content
+            ->merge($activity_comment)
+            ->sortByDesc('created_at')
+            ->take(4);
+
+        $blog_posts = $user
+            ->contents()
+            ->whereStatus(1)
+            ->where('type', 'blog')
+            ->latest('created_at')
+            ->take(1)
+            ->get();
+
+        $flights = $user
+            ->contents()
+            ->whereStatus(1)
+            ->where('type', 'flight')
+            ->latest('created_at')
+            ->take(3)
+            ->get();
+
+        $destinations_count = Destination::count();
+
+        if ($user->destinationHaveBeen()->count() > 0 && $destinations_count > 0) {
+            $destinations_percent = round(($user->destinationHaveBeen()->count() * 100) / $destinations_count, 2);
+        } else {
+            $destinations_percent = 0;
+        }
+
+        $user_status = [];
 
         return response()->view('pages.user.show', [
             'user' => $user,
-            'items' => $items,
+            'user_status' => $user_status,
             'content_count' => $content_count,
             'comment_count' => $comment_count,
+            'latest_announcement' => $latest_announcement,
+            'photos' => $photos,
+            'count_photos' => $count_photos,
+            'activities' => $activities,
+            'blog_posts' => $blog_posts,
+            'flights' => $flights,
+            'destinations_count' => $destinations_count,
+            'destinations_percent' => $destinations_percent,
         ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
     }
 
@@ -93,38 +154,132 @@ class UserController extends Controller
 
         if ($request->get('image_submit')) {
             $this->validate($request, [
-                'file' => 'required|image',
+                'image' => 'required|image',
             ]);
 
             $filename = 'picture-'
                 .$user->id
                 .'.'
-                .$request->file('file')->getClientOriginalExtension();
+                .$request->file('image')->getClientOriginalExtension();
 
-            $filename = Image::storeImageFile($request->file('file'), $filename);
+            $filename = Image::storeImageFile($request->file('image'), $filename);
 
             $user->images()->delete();
             $user->images()->create(['filename' => $filename]);
 
-            return redirect()
-                ->route('user.edit', [$user])
-                ->withInput()
-                ->with('status', trans('user.update.image.status'));
+            if (! $request->ajax()) {
+                return redirect()
+                    ->route('user.edit', [$user])
+                    ->withInput()
+                    ->with('status', trans('user.update.image.status'));
+            }
         }
 
         $this->validate($request, [
             'name' => 'required|unique:users,name,'.$user->id,
             'email' => 'required|unique:users,email,'.$user->id,
+            'password' => 'sometimes|confirmed|min:6',
+            'password_confirmation' => 'required_with:password|same:password',
             'contact_facebook' => 'url',
             'contact_twitter' => 'url',
             'contact_instagram' => 'url',
             'contact_homepage' => 'url',
+            'birthyear' => 'sometimes|digits:4',
+            'gender' => 'required',
         ]);
 
-        $user->update($request->all());
+        $fields = [
+            'password' => $user->password,
+        ];
+
+        if (trim($request->get('password'))) {
+            $fields['password'] = Hash::make($request->get('password'));
+        }
+
+        $user->update(array_merge($request->all(), $fields));
+
+        if (! $request->ajax()) {
+            return redirect()
+                ->route('user.show', [$user])
+                ->with('info', trans('user.update.info'));
+        }
+    }
+
+    public function destinationsIndex($id)
+    {
+        $user = User::with(['flags.flaggable' => function ($query) use ($id) {
+            $query->where('user_id', $id);
+        }])->findorFail($id);
+
+        $user_have_been = $user->destinationHaveBeen()->lists('flaggable_id')->toArray();
+        $have_been_destinations = Destination::getNames();
+
+        if (count($user_have_been)) {
+            $have_been_destinations->forget($user_have_been);
+        }
+
+        $have_been_destination = [];
+
+        $user_want_to_go = $user->destinationWantsToGo()->lists('flaggable_id')->toArray();
+        $want_to_go_destinations = Destination::getNames()->forget($user_want_to_go);
+
+        if (count($user_want_to_go)) {
+            $want_to_go_destinations->forget($user_want_to_go);
+        }
+
+        $want_to_go_destination = [];
+
+        return response()->view('pages.user.destinations', [
+            'user' => $user,
+            'have_been_destinations' => $have_been_destinations,
+            'have_been_destination' => $have_been_destination,
+            'want_to_go_destinations' => $want_to_go_destinations,
+            'want_to_go_destination' => $want_to_go_destination,
+        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.user'));
+    }
+
+    public function destinationStore(Request $request, $id)
+    {
+        $user = User::findorFail($id);
+
+        $this->validate($request, [
+            'have_been' => 'required_without:want_to_go',
+            'want_to_go' => 'required_without:have_been',
+        ]);
+
+        $user_have_been = $user->destinationHaveBeen();
+        $user_wants_to_go = $user->destinationWantsToGo();
+
+        $fields = [];
+        if ($request->has('have_been')) {
+            foreach ($request->have_been as $have_been) {
+                if (count($user_have_been->where('flaggable_id', (int) $have_been)) == 0) {
+                    $fields[] = new Flag([
+                        'flaggable_type' => 'App\Destination',
+                        'flaggable_id' => $have_been,
+                        'flag_type' => 'havebeen',
+                    ]);
+                }
+            }
+        }
+
+        if ($request->has('want_to_go')) {
+            foreach ($request->want_to_go as $want_to_go) {
+                if (count($user_wants_to_go->where('flaggable_id', (int) $want_to_go)) == 0) {
+                    $fields[] = new Flag([
+                        'flaggable_type' => 'App\Destination',
+                        'flaggable_id' => $want_to_go,
+                        'flag_type' => 'wantstogo',
+                    ]);
+                }
+            }
+        }
+
+        $user->flags()
+            ->saveMany($fields);
 
         return redirect()
-            ->route('user.show', [$user])
-            ->with('info', trans('user.update.info'));
+            ->route('user.destinations', [$user])
+            ->with('info', trans('user.destinations.update.info'));
     }
 }

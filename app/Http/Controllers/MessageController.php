@@ -24,14 +24,21 @@ class MessageController extends Controller
         $user = User::findorFail($user_id);
         $user_with = User::findorFail($user_id_with);
 
-        $messageIds = $user->messagesWith($user_id_with)->keyBy('id')->keys()->toArray();
+        $messages = $user->messagesWith($user_id_with);
+
+        $messageIds = $user
+            ->messagesWith($user_id_with)
+            ->where('user_id_to', $user->id)
+            ->keyBy('id')
+            ->keys()
+            ->toArray();
 
         Message::whereIn('id', $messageIds)->update(['read' => 1]);
 
         return View::make('pages.message.with')
             ->with('user', $user)
             ->with('user_with', $user_with)
-            ->with('messages', $user->messagesWith($user_id_with)->all())
+            ->with('messages', $messages)
             ->render();
     }
 
@@ -48,7 +55,7 @@ class MessageController extends Controller
         if ($user_to->notify_message) {
             $user_from = User::find($user_id_from);
 
-            Mail::send('email.message.store', [
+            Mail::queue('email.message.store', [
                 'new_message' => $message, // 'message' variable is reseved by mailer
                 'user_from' => $user_from,
                 'user_to' => $user_to,

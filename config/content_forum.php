@@ -2,20 +2,17 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => [],
-        'latest' => 'updated_at',
-        'take' => 1,
-    ],
-
     'index' => [
 
         'with' => ['user', 'comments', 'flags', 'destinations', 'topics'],
-        'latest' => 'updated_at',
+        'orderBy' => [
+            'field' => 'updated_at',
+            'order' => 'desc',
+        ],
         'paginate' => 25,
     ],
+
+    'menu' => 'forum',
 
     'edit' => [
 
@@ -23,10 +20,10 @@ return [
 
             'title' => [
                 'type' => 'text',
-                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
+                'large' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

@@ -18,7 +18,7 @@ class MessageTest extends TestCase
         $user2 = factory(App\User::class)->create();
 
         $this->visit("user/$user1->id")
-            ->dontSee(trans('user.show.message.create'));
+            ->dontSeeLink(trans('user.show.message.create'));
 
         // Return 401
 
@@ -43,7 +43,7 @@ class MessageTest extends TestCase
 
         $this->actingAs($user3)
             ->visit("user/$user1->id")
-            ->dontSeeLink(trans('menu.user.message'));
+            ->dontSeeLink(trans('menu.user.message'), 'user/'.$user1->id.'/messages');
 
         // Return 401
 

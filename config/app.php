@@ -2,6 +2,8 @@
 
 return [
 
+    'env' => env('APP_ENV', 'production'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
@@ -52,7 +54,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'et',
 
     /*
     |--------------------------------------------------------------------------
@@ -113,13 +115,11 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
         Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-        Illuminate\Routing\ControllerServiceProvider::class,
         Illuminate\Cookie\CookieServiceProvider::class,
         Illuminate\Database\DatabaseServiceProvider::class,
         Illuminate\Encryption\EncryptionServiceProvider::class,
@@ -147,14 +147,16 @@ return [
         Wpb\StringBladeCompiler\StringBladeCompilerServiceProvider::class,
         Ipunkt\LaravelAnalytics\AnalyticsServiceProvider::class,
         Roumen\Feed\FeedServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Laravelista\Ekko\EkkoServiceProvider::class,
+        Jenssegers\Date\DateServiceProvider::class,
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        Jenssegers\Date\DateServiceProvider::class,
+        App\Providers\ViewComposerServiceProvider::class,
 
     ],
 
@@ -209,8 +211,9 @@ return [
         'Imageconv' => Intervention\Image\Facades\Image::class,
         'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
         'Date'      => Jenssegers\Date\Date::class,
-        'Feed'      => Roumen\Feed\Facades\Feed::class,
-
+        'Feed'      => Roumen\Feed\Feed::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Ekko'      => Laravelista\Ekko\Facades\Ekko::class,
     ],
 
 ];

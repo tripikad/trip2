@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -28,8 +27,6 @@ class RedirectController extends Controller
             ->wherePath('content/'.$path)
             ->first();
 
-        dump('content/'.$path);
-
         if ($alias) {
             $content = Content::find($alias->aliasable_id);
 
@@ -38,6 +35,31 @@ class RedirectController extends Controller
                     $content->type,
                     $content,
                 ], 301);
+        }
+
+        abort(404);
+    }
+
+    public function redirectContentBySlug($path)
+    {
+        $alias = \DB::table('aliases')
+            ->wherePath($path)
+            ->where('aliasable_type', 'like', 'content.%')
+            ->first();
+
+        if ($alias) {
+            if ($alias->aliasable_id > 0) {
+                return redirect()
+                    ->route($alias->aliasable_type, [
+                        $alias->route_type,
+                        $alias->aliasable_id,
+                    ], 301);
+            } else {
+                return redirect()
+                    ->route($alias->aliasable_type, [
+                        $alias->route_type,
+                    ], 301);
+            }
         }
 
         abort(404);
@@ -66,7 +88,7 @@ class RedirectController extends Controller
                 ], 301);
         }
 
-        if ($carrier = Carrier::find($term_id)) {
+        if ($carrier = Carrier::find($tid)) {
             return redirect()->route(
                 'content.index', [
                     'flight',

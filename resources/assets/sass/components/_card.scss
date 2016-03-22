@@ -1,0 +1,96 @@
+.c-card {
+
+    @include color-modifiers-dark(background-color);
+
+    position: relative;
+    display: block;
+    height: $spacer * 16;
+    width: 100%;
+    background-color: $color-fill-neutral;
+
+    &.m-small {
+
+        height: $spacer * 12;
+    }
+}
+
+    .c-card__bg {
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.8;
+        background-size: cover;
+        background-position: top center;
+    }
+
+    .c-card__link {
+
+        display: block;
+        height: 100%;
+        width: 100%;
+        text-decoration: none;
+    }
+
+        .c-card__content {
+
+            @include vertically-center-children;
+
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+
+            &:before {
+
+                content: '';
+                position: absolute;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba($color-fill-black, 0.2);
+            }
+        }
+
+            .c-card__title {
+
+                color: $color-white;
+                font-size: $font-size-larger;
+                font-weight: $font-weight-medium;
+                line-height: 1.15;
+                text-align: center;
+                z-index: 2;
+                width: 100%;
+                padding: 0 $spacer * 4;
+
+                .m-wrap-text & {
+
+                    word-break: break-all;
+                    padding: 0 $spacer * 3;
+                }
+            }
+
+            .c-card__text {
+
+                @include font-smoothing;
+
+                color: $color-white;
+                font-size: $font-size-normal;
+                font-weight: $font-weight-bold;
+                line-height: 1.15;
+                text-align: center;
+                z-index: 2;
+                width: 100%;
+                padding: 0 $spacer * 4;
+
+                .m-wrap-text & {
+
+                    word-break: break-all;
+                    padding: 0 $spacer * 3;
+                }
+            }

@@ -2,18 +2,19 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => ['user'],
-        'latest' => 'created_at',
-        'take' => 8,
-    ],
-
     'index' => [
 
         'with' => ['user', 'destinations', 'topics'],
-        'latest' => 'created_at',
+        'orderBy' => [
+            'field' => 'created_at',
+            'order' => 'desc',
+        ],
+        'expire' => [
+            'field' => 'start_at',
+            'daysFrom' => 'start_at',
+            'daysTo' => -30,
+            'type' => 'datetime',
+        ],
         'paginate' => 24,
     ],
 
@@ -22,10 +23,10 @@ return [
         'fields' => [
             'title' => [
                 'type' => 'text',
-                'large' => true,
             ],
             'body' => [
                 'type' => 'textarea',
+                'large' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

@@ -1,0 +1,46 @@
+.c-destination-info {}
+
+    .c-destination-info__text {
+
+        @include font-smoothing;
+
+        margin-bottom: $spacer * 2;
+        color: $color-white;
+        font-size: $font-size-medium;
+        font-weight: $font-weight-medium;
+        line-height: 1.5;
+
+        a {
+
+            @include color-modifiers-dark-and;
+
+            font-size: $font-size-normal;
+            font-weight: $font-weight-bold;
+            text-decoration: none;
+        }
+    }
+
+    .c-destination-info__definition-list {
+
+        @include clearfix;
+        @include font-smoothing;
+
+        font-weight: $font-weight-medium;
+    }
+
+        .c-destination-info__definition-list-term {
+
+            @include color-modifiers-dark-and;
+
+            float: left;
+            clear: left;
+            min-width: 30%;
+            margin-bottom: $spacer * 1.5;
+        }
+
+        .c-destination-info__definition-list-definition {
+
+            color: $color-white;
+            float: left;
+            margin-bottom: $spacer * 1.5;
+        }

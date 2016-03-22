@@ -1,5 +1,7 @@
 {{--
 
+title: Placeholder
+
 description: Placeholder is meant for prototyping components not yet created. It accepts <code>height</code> parameter for specifying component height in pixels.
 
 code: |
@@ -11,7 +13,7 @@ code: |
 
 --}}
 
-<div class="component-placeholder"
+<div class="c-placeholder"
 
     @if (isset($height))
         style="height: {{ $height }}px;"

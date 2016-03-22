@@ -2,18 +2,13 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => [],
-        'latest' => 'created_at',
-        'take' => 8,
-    ],
-
     'index' => [
 
         'with' => ['user', 'destinations'],
-        'latest' => 'created_at',
+        'orderBy' => [
+            'field' => 'created_at',
+            'order' => 'desc',
+        ],
         'paginate' => 24,
     ],
 
@@ -27,6 +22,7 @@ return [
                 'type' => 'textarea',
                 'title' => 'Description',
                 'rows' => 2,
+                'large' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',
@@ -36,6 +32,17 @@ return [
                 'title' => 'Add',
             ],
         ],
+
+        'validate' => [
+
+            'title' => 'required',
+            'file' => 'sometimes|required|image',
+
+        ],
+
+    ],
+
+    'add' => [
 
         'validate' => [
 

@@ -1,46 +1,93 @@
-@foreach ($items as $item)
-    
-    <div class="utils-padding-bottom">
+@include('component.content.forum.list', [
+    'modifiers' => 'm-compact',
+    'items' => $items->transform(function($item) {
+        if($item->activity_type == 'content') {
 
-    @if ($item->activity_type == 'content') 
+            return [
+                'topic' => $item->title,
+                'route' => route('content.show', [$item->type, $item]),
+                'profile' => [
+                    'modifiers' => 'm-mini',
+                    'image' => $item->user->imagePreset(),
+                    'letter' => [
+                        'modifiers' => 'm-green m-small',
+                        'text' => 'D'
+                    ],
+                ],
+                'badge' => [
+                    'modifiers' => 'm-mini',
+                    'count' => $item->comments->count()
+                ],
+                'children' => [
+                    [
+                        'profile' => [
+                            'image' => $item->user->imagePreset(),
+                            'title' => $item->user->title,
+                            'route' => route('user.show', [$item->user]),
+                            'letter' => [
+                                'modifiers' => 'm-green m-small',
+                                'text' => 'D'
+                            ],
+                            'status' => [
+                                'modifiers' => 'm-green',
+                                'position' => '1'
+                            ]
+                        ],
+                        'date' => view('component.date.long', [
+                            'date' => $item->created_at
+                        ]),
+                        'text' => $item->body,
+                        'more' => [
+                            'title' => trans('user.activity.view.full.post'),
+                            'route' => route('content.show', [$item->type, $item])
+                        ]
+                    ]
+                ]
+            ];
 
-        @include('component.row', [
-            'image' => $user->imagePreset(),
-            'description' => trans('user.activity.index.row.content', [
-                'user' => $user->name,
-                'title' => '<a href="'
-                    . route('content.show', [$item->type, $item->id])
-                    . '">'
-                    . $item->title
-                    . '</a>',
-                'created_at' => view('component.date.relative', ['date' => $item->created_at])
-            ]),
-            'options' => '-narrow -small'
-        ])
+        } else {
 
-    @else
-
-        @include('component.row', [
-            'image' => $user->imagePreset(),
-            'description' => trans('user.activity.index.row.comment', [
-                'user' => $user->name,
-                'title' => '<a href="'
-                    . route('content.show', [$item->content->type, $item->content->id])
-                    . '">'
-                    . $item->content->title
-                    . '</a>',
-                'comment_title' => '<a href="'
-                    . route('content.show', [$item->content->type, $item->content->id, '#comment-' . $item->id])
-                    . '">'
-                    . $item->title
-                    . '</a>',
-                'created_at' => view('component.date.relative', ['date' => $item->created_at])
-            ]),
-            'options' => '-small -narrow'
-        ])
-
-    @endif
-
-    </div>
-
-@endforeach
+            return [
+                'topic' => $item->content->title,
+                'route' => route('content.show', [$item->content->type, $item->content]),
+                'profile' => [
+                    'modifiers' => 'm-mini',
+                    'image' => $item->content->user->imagePreset(),
+                    'letter' => [
+                        'modifiers' => 'm-green m-small',
+                        'text' => 'D'
+                    ],
+                ],
+                'badge' => [
+                    'modifiers' => 'm-mini',
+                    'count' => $item->content->comments->count()
+                ],
+                'children' => [
+                    [
+                        'profile' => [
+                            'image' => $item->user->imagePreset(),
+                            'title' => $item->user->title,
+                            'route' => route('user.show', [$item->user]),
+                            'letter' => [
+                                'modifiers' => 'm-green m-small',
+                                'text' => 'D'
+                            ],
+                            'status' => [
+                                'modifiers' => 'm-green',
+                                'position' => '1'
+                            ]
+                        ],
+                        'date' => view('component.date.long', [
+                            'date' => $item->created_at
+                        ]),
+                        'text' => $item->body_filtered,
+                        'more' => [
+                            'title' => trans('user.activity.view.full.post'),
+                            'route' => route('content.show', [$item->content->type, $item->content, '#comment-' . $item->id])
+                        ]
+                    ]
+                ]
+            ];
+        }
+    })
+])

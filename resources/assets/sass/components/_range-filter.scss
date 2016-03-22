@@ -1,0 +1,85 @@
+.c-range-filter {
+
+    text-align: left;
+    position: relative;
+    height: $spacer * 0.75;
+    width: 100%;
+    padding: 0 $spacer * 8;
+    margin-bottom: $spacer * 4;
+    background: $color-fill-neutral-light;
+}
+
+    .c-range-filter__slider {
+
+        text-align: left;
+        position: relative;
+        height: $spacer * 0.75;
+        width: 100%;
+        background: $color-fill-neutral-light;
+    }
+
+.ui-slider .ui-slider-handle {
+
+    font-size: $font-size-small;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    position: absolute;
+    z-index: 2;
+    width: $spacer * 2;
+    height: $spacer * 2;
+    background: $color-text-link url('../svg/icon-drag.svg') no-repeat center center;
+    background-size: 14px 8px;
+    border-radius: 50%;
+    cursor: default;
+    touch-action: none;
+    outline: none;
+
+    span {
+
+        color: $color-text-link;
+        white-space: nowrap;
+        position: absolute;
+        left: 0;
+        top: $spacer * 3;
+        display: block;
+        transform: translateX(-40%);
+    }
+}
+
+.ui-slider .ui-slider-range {
+
+    position: absolute;
+    z-index: 1;
+    display: block;
+    border: 0;
+    background-position: 0 0;
+}
+
+.ui-slider.ui-state-disabled .ui-slider-handle,
+.ui-slider.ui-state-disabled .ui-slider-range {
+
+    filter: inherit;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+
+    top: -$spacer / 2;
+    margin-left: -$spacer;
+}
+
+.ui-slider-horizontal .ui-slider-range {
+
+    top: 0;
+    height: 100%;
+    background: $color-fill-neutral;
+}
+
+.ui-slider-horizontal .ui-slider-range-min {
+
+    left: 0;
+}
+
+.ui-slider-horizontal .ui-slider-range-max {
+
+    right: 0;
+}

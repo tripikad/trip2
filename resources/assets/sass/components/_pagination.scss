@@ -1,0 +1,88 @@
+.c-pagination {
+
+    @include clearfix;
+    @include clear-list;
+
+    width: 100%;
+    margin: $spacer 0;
+
+    &.m-numbered {
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+    .c-pagination__item {
+
+        display: block;
+
+        .c-pagination.m-numbered & {
+
+            display: flex;
+            margin: 0 $spacer / 4;
+        }
+
+        &.m-first {
+
+            float: left;
+        }
+
+        &.m-last {
+
+            float: right;
+        }
+    }
+
+        .c-pagination__item-text,
+        .c-pagination__item-link {
+
+            position: relative;
+            float: left;
+
+            .c-pagination.m-numbered & {
+
+                color: $color-text-neutral-darker;
+                font-size: $font-size-small;
+                text-align: center;
+                text-decoration: none;
+                line-height: $spacer * 3;
+                position: static;
+                float: none;
+                height: $spacer * 3;
+                width: $spacer * 3;
+                border-bottom: 2px solid $color-fill-neutral-darker;
+            }
+
+            &:hover {
+
+                .c-pagination.m-numbered & {
+
+                    background: none;
+                }
+            }
+
+            &.m-previous,
+            &.m-next {
+
+                .c-pagination.m-numbered & {
+
+                    border: none;
+                }
+            }
+
+            &.m-disabled {
+
+                .c-pagination.m-numbered & {
+
+                    color: $color-text-neutral;
+                    border-color: $color-fill-neutral;
+                }
+            }
+
+            .c-pagination__item.disabled & {
+
+                display: none;
+            }
+        }

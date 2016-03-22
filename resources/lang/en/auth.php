@@ -21,6 +21,12 @@ return [
     'login.login.info' => 'You are now logged in',
     'login.logout.info' => 'You are now logged out',
     'login.failed.info' => 'Failed to log you in',
+    'login.facebook.service.error' => 'Could not find Facebook user',
+    'login.facebook.user.error' => 'Login with Facebook failed. Please use registration form',
+    'login.google.service.error' => 'Could not find Google user',
+    'login.google.user.error' => 'Login with Google failed. Please use registration form',
+    'login.facebook.title' => 'Login with Facebook',
+    'login.google.title' => 'Login with Google+',
 
     'login.title' => 'Login',
     'login.field.name.title' => 'Username',

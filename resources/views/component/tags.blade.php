@@ -1,20 +1,25 @@
 {{--
 
-description: Tags
+title: Tags
 
 code: |
 
     @include('component.tags', [
+        'modifiers' => '',
         'items' => [
             [
-                'modifiers' => $options,
+                'modifiers' => $modifiers,
                 'route' => '',
                 'title' => 'Tag name'
             ],
         ]
     ])
 
-options:
+parent_modifiers:
+
+- m-small
+
+modifiers:
 
 - m-red
 - m-blue
@@ -22,14 +27,27 @@ options:
 - m-yellow
 - m-orange
 - m-purple
+- m-gray
 
 --}}
 
-<ul class="c-tags">
+<ul class="c-tags {{ $modifiers or '' }}">
 
     @foreach ($items as $item)
 
-    <li class="c-tags__item {{ $item['modifiers'] or 'm-yellow' }}"><a href="{{ $item['route'] }}" class="c-tags__item-link">{{ $item['title'] }}</a></li>
+    <li class="c-tags__item {{ $item['modifiers'] or 'm-yellow' }}">
+        @if(isset($item['route']))
+        <a href="{{ $item['route'] }}" class="c-tags__item-link">
+        @else
+        <span class="c-tags__item-wrap">
+        @endif
+        {{ $item['title'] }}
+        @if(isset($item['route']))
+        </a>
+        @else
+        </span>
+        @endif
+    </li>
 
     @endforeach
 

@@ -1,0 +1,23 @@
+.l-two-column {
+
+    @include wrap('narrow');
+
+    &__left {
+
+        @include respond-to(tablet) {
+
+            @include span(14 of 24);
+
+        }
+    }
+
+    &__right {
+
+        @include respond-to(tablet) {
+
+            @include span(8 of 24 at 3);
+
+        }
+    }
+}
+

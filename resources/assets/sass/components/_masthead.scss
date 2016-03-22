@@ -1,0 +1,248 @@
+.c-masthead {
+
+    position: relative;
+    width: 100%;
+    padding: $spacer * 8 0 $spacer * 4;
+    background-color: $color-fill-neutral-light;
+
+    @include respond-to(tablet) {
+
+        height: $spacer * 26;
+        padding: 0;
+    }
+
+    @include respond-to(desktop) {
+
+        height: $spacer * 32;
+    }
+
+    &.m-alternative {
+
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
+        background-color: none;
+
+        &:after {
+
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba($color-fill-black-dark, 0.4);
+        }
+    }
+
+    &.m-profile {
+
+        opacity: 0.68;
+
+        &:after {
+
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: rgba($color-fill-black, 0.6);
+        }
+    }
+
+    &.m-search {
+
+        padding-bottom: $spacer * 8;
+
+        @include respond-to(tablet) {
+
+            padding: 0;
+        }
+    }
+}
+
+    .c-masthead__body {
+
+        position: relative;
+        z-index: 3;
+
+        @include respond-to(tablet) {
+
+            position: absolute;
+            z-index: 3;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .c-masthead.m-search & {
+
+            width: 80%;
+            margin: 0 auto;
+
+            @include respond-to(tablet) {
+
+                @include span(20 of 28);
+
+                z-index: 100;
+                max-width: 768px;
+            }
+
+            @include respond-to(desktop) {
+
+                @include span(14 of 28);
+            }
+        }
+    }
+
+        .c-masthead__logo {
+
+            position: absolute;
+            left: -$spacer * 4.5;
+            top: -$spacer * 7;
+            display: none;
+            width: 220px;
+            height: 106px;
+
+            @include respond-to(tablet) {
+
+                display: block;
+            }
+
+            .c-masthead.m-search & {
+
+                top: -$spacer * 9.5;
+                left: -$spacer * 7;
+                width: 280px;
+                height: 132px;
+            }
+
+            .c-masthead.m-profile & {
+
+                display: none;
+            }
+        }
+
+            .c-masthead__logo-link {
+
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+
+        .c-masthead__title {
+
+            @include font-smoothing;
+
+            color: $color-text-black;
+            font-size: $font-size-largest;
+            font-weight: $font-weight-bold;
+            text-align: center;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-huge / 1.5;
+            }
+
+            @include respond-to(desktop) {
+
+                font-size: $font-size-huge - 6;
+            }
+
+            .c-masthead.m-alternative & {
+
+                color: $color-white;
+            }
+
+            .c-masthead.m-profile & {
+
+                display: none;
+            }
+        }
+
+        .c-masthead__subtitle {
+
+            @include font-smoothing;
+
+            color: $color-text-black;
+            font-size: $font-size-normal;
+            font-weight: $font-weight-bold;
+            text-align: center;
+            margin-top: $spacer;
+
+            @include respond-to(tablet) {
+
+                text-align: right;
+                margin-top: 0;
+            }
+
+            .c-masthead.m-alternative & {
+
+                color: $color-white;
+            }
+        }
+
+            .c-masthead__subtitle-link {
+
+                color: $color-text-black;
+                text-decoration: none;
+
+                .c-masthead.m-alternative & {
+
+                    color: $color-white;
+                }
+            }
+
+    .c-masthead__nav {
+
+        @include color-modifiers;
+
+        text-decoration: none;
+        position: absolute;
+        z-index: 3;
+        top: 50%;
+        display: none;
+
+        @include respond-to(tablet) {
+
+            display: block;
+        }
+
+        &.m-previous {
+
+            left: $spacer;
+
+            @include respond-to(desktop) {
+
+                left: $spacer * 4;
+            }
+        }
+
+        &.m-next {
+
+            right: $spacer;
+
+            @include respond-to(desktop) {
+
+                right: $spacer * 4;
+            }
+        }
+    }
+
+    .c-masthead__bottom {
+
+        text-align: center;
+        position: absolute;
+        z-index: 10;
+        bottom: $spacer * 3;
+        left: 0;
+        width: 100%;
+        display: none;
+
+        @include respond-to(desktop) {
+
+            display: block;
+        }
+    }

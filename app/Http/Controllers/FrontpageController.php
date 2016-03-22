@@ -7,6 +7,9 @@ use View;
 use Cache;
 use App\Content;
 use App\Destination;
+use App\Main;
+//use Illuminate\Support\Collection;
+use DB;
 
 class FrontpageController extends Controller
 {
@@ -15,33 +18,187 @@ class FrontpageController extends Controller
         $destinations = Destination::getNames();
 
         $types = [
-            'shortnews',
-            'flight',
-            'travelmate',
-            'forum',
-            'photo',
-            'blog',
+            'flights1' => [
+                'skip' => null,
+                'take' => 3,
+                'type' => ['flight'],
+                'status' => 1,
+                'latest' => 'created_at',
+                'whereBetween' =>  Main::getExpireData('flight', 1),
+            ],
+            'flights2' => [
+                'skip' => 3,
+                'take' => 5,
+                'type' => ['flight'],
+                'status' => 1,
+                'latest' => 'created_at',
+                'whereBetween' => Main::getExpireData('flight', 1),
+            ],
+            'content' => [
+                'take' => 1,
+                'id' => 1534,
+                'status' => 1,
+            ],
+            'forums' => [
+                'skip' => null,
+                'take' => 5,
+                'type' => ['forum', 'buysell', 'expat'],
+                'status' => 1,
+                'latest' => 'created_at',
+                'whereBetween' =>  Main::getExpireData('buysell', 1),
+            ],
+            'news' => [
+                'skip' => null,
+                'take' => 8,
+                'type' => ['news'],
+                'status' => 1,
+                'latest' => 'created_at',
+            ],
+            'featured_news' => [
+                'skip' => null,
+                'take' => 3,
+                'type' => ['sponsored'],
+                'status' => 1,
+                'latest' => 'created_at',
+            ],
+            'blogs' => [
+                'skip' => null,
+                'take' => 1,
+                'type' => ['blog'],
+                'status' => 1,
+                'latest' => 'created_at',
+            ],
+            'photos' => [
+                'skip' => null,
+                'take' => 8,
+                'type' => ['photo'],
+                'status' => 1,
+                'latest' => 'created_at',
+            ],
+            'travelmates' => [
+                'skip' => null,
+                'take' => 3,
+                'type' => ['travelmate'],
+                'status' => 1,
+                'latest' => 'created_at',
+                'whereBetween' =>  Main::getExpireData('travelmate', 1),
+            ],
         ];
 
-        $features = [];
+        $types['forums']['whereBetween']['only'] = 'buysell';
 
-        foreach ($types as $type) {
-            $features[$type]['contents'] = Content::whereType($type)
-                ->with(config("content_$type.frontpage.with"))
-                ->latest(config("content_$type.frontpage.latest"))
-                ->take(config("content_$type.frontpage.take"))
-                ->get();
+        $findDestinationsParent = [
+            'flights1',
+        ];
+
+        $viewVariables = $this->getCollections($types);
+
+        $viewVariables['destinations'] = $destinations;
+
+        foreach ($findDestinationsParent as $type) {
+            if (isset($viewVariables[$type])) {
+                foreach ($viewVariables[$type] as $key => $element) {
+                    $viewVariables[$type][$key]['destination'] = $element->destinations->first();
+                    $viewVariables[$type][$key]['parent_destination'] = $element->getDestinationParent();
+                }
+            }
         }
 
-        return response()->view('pages.frontpage.index', [
-            'destinations' => $destinations,
-            'features' => $features,
-        ])->header('Cache-Control', 'public, s-maxage='.config('site.cache.frontpage'));
+        return response()
+            ->view('pages.frontpage.index', $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.frontpage.header'));
     }
 
     public function search(Request $request)
     {
         return redirect()
             ->route('destination.index', [$request->destination]);
+    }
+
+    public function getCollections($types)
+    {
+        $content_query = null;
+        $i = 0;
+        $viewVariables = [];
+
+        foreach ($types as $key => $type) {
+            ++$i;
+
+            $query = null;
+
+            if (isset($type['id'])) {
+                //$query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->where('id', $type['id'])->whereStatus($type['status']);
+                $query = Content::where('id', $type['id'])->whereStatus($type['status']);
+            } else {
+                //$query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
+                $query = Content::whereIn('type', $type['type'])->whereStatus($type['status']);
+
+                if (isset($type['whereBetween']) && ! empty($type['whereBetween'])) {
+                    if (! isset($type['whereBetween']['only'])) {
+                        $expireData = [
+                            $type['whereBetween']['daysFrom'],
+                            $type['whereBetween']['daysTo'],
+                        ];
+
+                        if (in_array($type['whereBetween']['field'], $expireData)) {
+                            if (($datakey = array_search($type['whereBetween']['field'], $expireData)) !== false) {
+                                unset($expireData[$datakey]);
+                            }
+
+                            $query = $query->whereRaw('`'.$type['whereBetween']['field'].'` >= ?', [
+                                array_values($expireData)[0],
+                            ]);
+                        } else {
+                            $query = $query->whereBetween($type['whereBetween']['field'], [
+                                $type['whereBetween']['daysFrom'],
+                                $type['whereBetween']['daysTo'],
+                            ]);
+                        }
+                    } else {
+                        $query = $query->whereRaw('IF(`type` = ?, ?, ?) BETWEEN ? AND ?', [
+                                $type['whereBetween']['only'],
+                                $type['whereBetween']['field'],
+                                $type['whereBetween']['daysTo'],
+                                $type['whereBetween']['daysFrom'],
+                                $type['whereBetween']['daysTo'],
+                            ]);
+                    }
+                }
+
+                if (isset($type['with']) && $type['with'] !== null) {
+                    $query = $query->with($type['with']);
+                }
+
+                if (isset($type['latest']) && $type['latest'] !== null) {
+                    $query = $query->latest($type['latest']);
+                }
+
+                if (isset($type['skip']) && $type['skip'] !== null) {
+                    $query = $query->skip($type['skip']);
+                }
+
+                if (isset($type['take']) && $type['take'] !== null) {
+                    $query = $query->take($type['take']);
+                }
+            }
+
+            /*if ($i == 1) {
+                $content_query = $query;
+            } else {
+                $content_query = $content_query->unionAll($query);
+            }*/
+            $$key = $query->with('images')->get();
+            $viewVariables[$key] = $$key;
+        }
+
+        //$content_query = $content_query->with('images')->get();
+
+        /*foreach ($types as $key => $type) {
+            $$key = Collection::make($content_query->where('pseudo', $key)->values()->all());
+
+            $viewVariables[$key] = $$key;
+        }*/
+
+        return $viewVariables;
     }
 }

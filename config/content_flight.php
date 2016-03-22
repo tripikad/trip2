@@ -2,18 +2,19 @@
 
 return [
 
-    'frontpage' => [
-
-        'show' => true,
-        'with' => ['images'],
-        'latest' => 'created_at',
-        'take' => 8,
-    ],
-
     'index' => [
 
         'with' => ['images'],
-        'latest' => 'end_at',
+        'orderBy' => [
+            'field' => 'end_at',
+            'order' => 'desc',
+        ],
+        'expire' => [
+            'field' => 'end_at',
+            'daysFrom' => 'end_at',
+            'daysTo' => -7,
+            'type' => 'datetime',
+        ],
         'paginate' => 24,
     ],
 
@@ -22,7 +23,6 @@ return [
         'fields' => [
             'title' => [
                 'type' => 'text',
-                'large' => true,
             ],
             'image_id' => [
                 'type' => 'image_id',
@@ -30,6 +30,8 @@ return [
             'body' => [
                 'type' => 'textarea',
                 'rows' => 16,
+                'large' => true,
+                'wysiwyg' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',
