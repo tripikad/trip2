@@ -1,11 +1,7 @@
 <?php
 
-<<<<<<< HEAD
-$prepath = storage_path().'/app/images/';
-=======
-$images_path = '/images/';
+$images_path = storage_path() . '/images/';
 $svg_path = '/svg/';
->>>>>>> master
 
 return [
 

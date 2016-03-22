@@ -555,11 +555,8 @@ class ConvertBase extends Command
         $model->images()->attach($image);
 
         $from = 'http://trip.ee/'.$imagePath;
-<<<<<<< HEAD
-        $to = storage_path().'/app/images/original/'.$filename;
-=======
-        $to = public_path().config('imagepresets.original.path').$filename;
->>>>>>> master
+
+        $to = storage_path() . config('imagepresets.original.path').$filename;
 
         if ($this->copyFiles) {
             if (file_exists($to) && ! $this->overwriteFiles) {
@@ -603,11 +600,8 @@ class ConvertBase extends Command
             }
 
             $from = $imageUrl;
-<<<<<<< HEAD
-            $to = storage_path().'/app/images/original/'.$filename;
-=======
-            $to = public_path().config('imagepresets.original.path').$filename;
->>>>>>> master
+
+            $to = storage_path() . config('imagepresets.original.path') . $filename;
 
             if ($this->copyFiles) {
                 if (file_exists($to) && ! $this->overwriteFiles) {

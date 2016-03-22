@@ -2,9 +2,6 @@
 /node_modules
 .env
 *.lock
-<<<<<<< HEAD
-public/images
-=======
 **/.DS_Store
 /.idea
->>>>>>> master
+public/images
