@@ -601,7 +601,7 @@ class ConvertBase extends Command
 
             $from = $imageUrl;
 
-            $to = config('imagepresets.original.path') . $filename;
+            $to = config('imagepresets.original.path').$filename;
 
             if ($this->copyFiles) {
                 if (file_exists($to) && ! $this->overwriteFiles) {
