@@ -136,7 +136,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $image = config('imagepresets.presets.'.$preset.'.path').$this->images[0]->filename;
         }
 
-        if (! file_exists(public_path().$image)) {
+        if (! file_exists($image)) {
             $image = config('imagepresets.image.none');
         }
 

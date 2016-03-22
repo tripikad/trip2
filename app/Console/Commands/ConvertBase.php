@@ -556,7 +556,7 @@ class ConvertBase extends Command
 
         $from = 'http://trip.ee/'.$imagePath;
 
-        $to = storage_path() . config('imagepresets.original.path').$filename;
+        $to = config('imagepresets.original.path').$filename;
 
         if ($this->copyFiles) {
             if (file_exists($to) && ! $this->overwriteFiles) {
@@ -601,7 +601,7 @@ class ConvertBase extends Command
 
             $from = $imageUrl;
 
-            $to = storage_path() . config('imagepresets.original.path') . $filename;
+            $to = config('imagepresets.original.path') . $filename;
 
             if ($this->copyFiles) {
                 if (file_exists($to) && ! $this->overwriteFiles) {
@@ -811,7 +811,7 @@ class ConvertBase extends Command
                             $constraint->aspectRatio();
                     })
                     ->save(
-                        public_path().config("imagepresets.presets.$preset.path").basename($to),
+                        config("imagepresets.presets.$preset.path").basename($to),
                         config("imagepresets.presets.$preset.quality")
                     );
             }

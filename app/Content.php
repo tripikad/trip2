@@ -72,7 +72,7 @@ class Content extends Model
             $image = config('imagepresets.presets.small.path').$this->image;
         }
 
-        if (! file_exists(public_path().$image)) {
+        if (! file_exists($image)) {
             $image = config('imagepresets.image.none');
         }
 

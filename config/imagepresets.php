@@ -1,6 +1,6 @@
 <?php
 
-$images_path = storage_path() . '/images/';
+$images_path = storage_path().'/app/images/';
 $svg_path = '/svg/';
 
 return [
