@@ -1,18 +1,36 @@
 @extends('layouts.main')
 
-@section('title')
+@section('header')
 
-    {{ trans("content.$type.index.title") }}
+    @include('component.header', [
+        'hide' => ['search'],
+    ])
 
 @stop
 
-@section('content')
+@section('masthead.search')
 
+    @include('component.search',[
+        'modifiers' => 'm-red m-inverted',
+        'placeholder' => 'Otsi foorumist...',
+    ])
+
+@stop
+
+@section('title')
+    foorum
+@stop
+
+@section('content')
     <div class="r-forum">
 
         <div class="r-forum__masthead">
 
-            @include('component.masthead')
+            @include('component.masthead', [
+                'modifiers' => 'm-search m-logo-title',
+                'map' => true,
+            ])
+
         </div>
 
         <div class="r-forum__wrap">
@@ -93,5 +111,14 @@
         </div>
 
     </div>
+
+@stop
+
+@section('footer')
+
+    @include('component.footer', [
+        'modifiers' => 'm-alternative',
+        'image' => \App\Image::getRandom()
+    ])
 
 @stop
