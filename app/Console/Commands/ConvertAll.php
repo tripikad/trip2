@@ -8,7 +8,6 @@ class ConvertAll extends ConvertBase
 
     public function handle()
     {
-
         \Storage::makeDirectory('images/large');
         \Storage::makeDirectory('images/medium');
         \Storage::makeDirectory('images/original');
