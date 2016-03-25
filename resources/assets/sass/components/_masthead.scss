@@ -185,17 +185,35 @@
 
                 font-size: $font-size-largest;
                 display: inline-block;
-                width: auto;
                 position: absolute;
-                left: $spacer * 13.5;
+                left: 0;
+                width: 100%;
+                text-align: center;
                 top: -$spacer * 2.75;
-                text-shadow: -1px -1px 0px $color-text-black;
+                text-shadow: -1px -1px 0 $color-text-black;
+                text-transform: lowercase;
             }
 
             .c-masthead.m-search.m-logo-title & {
 
-                left: $spacer * 11.25;
                 top: -($spacer * 5.25) + 1;
+            }
+
+            @include respond-to(tablet) {
+
+                .m-logo-title & {
+
+                    left: $spacer * 13.5;
+                    width: auto;
+                    text-align: left;
+                }
+
+                .c-masthead.m-search.m-logo-title & {
+
+                    left: $spacer * 11.25;
+                    width: auto;
+                    text-align: left;
+                }
             }
         }
 

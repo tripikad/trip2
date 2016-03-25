@@ -18,7 +18,7 @@
 @stop
 
 @section('title')
-    foorum
+    Foorum
 @stop
 
 @section('content')
