@@ -189,6 +189,7 @@
                 position: absolute;
                 left: $spacer * 13.5;
                 top: -$spacer * 2.75;
+                text-shadow: -1px -1px 0px $color-text-black;
             }
 
             .c-masthead.m-search.m-logo-title & {
