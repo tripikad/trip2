@@ -14,8 +14,13 @@ install:
     - composer self-update
     - composer install --no-interaction --prefer-source
     - cp .env.travis .env
+    - mkdir -p storage/app/images/large
+    - mkdir -p storage/app/images/medium
+    - mkdir -p storage/app/images/original
+    - mkdir -p storage/app/images/small
+    - mkdir -p storage/app/images/small_square
+    - mkdir -p storage/app/images/xsmall_square
     - chmod -R o+w storage/
-    - ln -s storage/app/images public/images
     - mysql -e 'create database IF NOT EXISTS trip2;'
 
 before_script:
