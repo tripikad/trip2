@@ -2,13 +2,15 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Content;
-/*
+
 class PhotoTest extends TestCase
 {
     use DatabaseTransactions;
 
     public function test_regular_user_can_post_and_edit_photos()
     {
+        $this->markTestSkipped();
+
         $regular_user = factory(App\User::class)->create();
 
         $this->actingAs($regular_user)
@@ -97,4 +99,3 @@ class PhotoTest extends TestCase
         return Content::whereType('photo')->whereTitle($title)->first()->images[0];
     }
 }
-*/
