@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Content;
-
+/*
 class ContentTest extends TestCase
 {
     use DatabaseTransactions;
@@ -75,7 +75,6 @@ class ContentTest extends TestCase
         }
     }
 
-/*
     public function test_regular_user_can_not_create_private_content()
     {
         $regular_user = factory(App\User::class)->create();
@@ -98,5 +97,5 @@ class ContentTest extends TestCase
         }
 
     }
-*/
 }
+*/
