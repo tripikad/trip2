@@ -8,6 +8,14 @@ class ConvertAll extends ConvertBase
 
     public function handle()
     {
+
+        \Storage::makeDirectory('images/large');
+        \Storage::makeDirectory('images/medium');
+        \Storage::makeDirectory('images/original');
+        \Storage::makeDirectory('images/small');
+        \Storage::makeDirectory('images/small_square');
+        \Storage::makeDirectory('images/xsmall_square');
+
         $this->call('convert:terms');
 
         $this->call('convert:blogs');
