@@ -4,6 +4,8 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.5",
     "breakpoint-sass": "^2.6.1",
+    "del": "^2.2.0",
+    "dropzone": "^4.2.0",
     "fastclick": "^1.0.6",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
@@ -15,8 +17,7 @@
     "jquery": "^2.1.4",
     "normalize.css": "^3.0.3",
     "selectize": "^0.12.1",
-    "susy": "^2.2.6",
-    "dropzone": "^4.2.0"
+    "susy": "^2.2.6"
   },
   "devDependencies": {
     "jquery": "^2.2.0"
