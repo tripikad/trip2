@@ -97,6 +97,26 @@
         }
     }
 
+        .c-masthead__map {
+
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+            .c-masthead__map-map {
+
+                width: $spacer * 80;
+                margin-top: -$spacer * 6;
+                margin-left: -$spacer * 16;
+
+                svg {
+                    fill: $color-fill-neutral;
+                }
+            }
+
         .c-masthead__logo {
 
             position: absolute;
@@ -159,6 +179,22 @@
             .c-masthead.m-profile & {
 
                 display: none;
+            }
+
+            .m-logo-title & {
+
+                font-size: $font-size-largest;
+                display: inline-block;
+                width: auto;
+                position: absolute;
+                left: $spacer * 13.5;
+                top: -$spacer * 2.75;
+            }
+
+            .c-masthead.m-search.m-logo-title & {
+
+                left: $spacer * 11.25;
+                top: -($spacer * 5.25) + 1;
             }
         }
 
