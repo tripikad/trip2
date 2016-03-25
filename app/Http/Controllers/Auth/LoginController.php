@@ -22,8 +22,7 @@ class LoginController extends Controller
 
         if ($this->signIn($request)) {
             return redirect('/')
-                ->with('info', trans('auth.login.login.info'))
-                ->header('X-Authenticated', true);
+                ->with('info', trans('auth.login.login.info'));
         }
 
         return redirect()
@@ -36,7 +35,7 @@ class LoginController extends Controller
         Auth::logout();
 
         return redirect()
-            ->route('frontpage.index')
+            ->route('login.form')
             ->with('info', trans('auth.login.logout.info'));
     }
 
