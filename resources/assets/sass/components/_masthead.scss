@@ -192,23 +192,20 @@
                 top: -$spacer * 2.75;
                 text-shadow: -1px -1px 0 $color-text-black;
                 text-transform: lowercase;
-            }
 
-            .c-masthead.m-search.m-logo-title & {
-
-                top: -($spacer * 5.25) + 1;
-            }
-
-            @include respond-to(tablet) {
-
-                .m-logo-title & {
+                @include respond-to(tablet) {
 
                     left: $spacer * 13.5;
                     width: auto;
                     text-align: left;
                 }
+            }
 
-                .c-masthead.m-search.m-logo-title & {
+            .c-masthead.m-search.m-logo-title & {
+
+                top: -($spacer * 5.25) + 1;
+
+                @include respond-to(tablet) {
 
                     left: $spacer * 11.25;
                     width: auto;
