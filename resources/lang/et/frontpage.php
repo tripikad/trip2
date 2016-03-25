@@ -21,7 +21,7 @@ return [
     'index.travelletter.title' => 'Reisikirjad',
 
     'index.all.news' => 'Kõik uudised',
-    'index.all.offers' => 'Vaata kõiki pakkumisi',
+    'index.all.offers' => 'Vaata kõiki sooduspakkumisi',
 
     'index.about.title' => 'Loe täpsemalt, mis on Trip.ee',
     'index.about.register' => 'Liitu Trip.ee-ga',

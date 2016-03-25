@@ -86,6 +86,7 @@ code: |
                             (isset($field['wysiwyg']) && $field['wysiwyg'] == true
                                 ? ' js-ckeditor'
                                 : ''),
+                        'id' => $key,
                         'placeholder' => trans("content.$type.edit.field.$key.title"),
                         'rows' => isset($field['rows']) ? $field['rows'] : 8,
                     ]) !!}

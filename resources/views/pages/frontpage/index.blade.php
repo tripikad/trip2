@@ -30,112 +30,51 @@
 
         </div>
 
-        <div class="r-home__destinations">
+        @if (isset($flights1) && count($flights1))
+            <div class="r-home__destinations">
+                <div class="r-home__destinations-wrap">
+                    <div class="c-columns m-{{ count($flights1) }}-cols">
 
-            <div class="r-home__destinations-wrap">
+                        @foreach ($flights1 as $key => $flight1)
 
-                <div class="c-columns m-3-cols">
+                            <div class="c-columns__item">
 
-                    <div class="c-columns__item">
+                                @include('component.destination', [
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
+                                    'title' =>
+                                        $flight1->destination ? $flight1->destination->name : null,
+                                    'title_route' =>
+                                        $flight1->destination ? route('destination.show', $flight1->destination) : null,
+                                    'subtitle' =>
+                                        $flight1->parent_destination ? $flight1->parent_destination->name : null,
+                                    'subtitle_route' =>
+                                        $flight1->parent_destination ? route('destination.show', $flight1->parent_destination) : null
+                                ])
 
-                        @include('component.destination', [
-                            'modifiers' => 'm-purple',
-                            'title' => 'Tai',
-                            'title_route' => '/destination/335',
-                            'subtitle' => 'Aasia',
-                            'subtitle_route' => '/destination/2'
-                        ])
+                                @include('component.card', [
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
+                                    'route' => route('content.show', [$flight1->type, $flight1]),
+                                    'title' => $flight1->title.' '.$flight1->price.config('site.currency.symbol'),
+                                    'image' => $flight1->imagePreset(),
+                                ])
 
-                        @include('component.card', [
-                            'modifiers' => 'm-purple',
-                            'route' => '',
-                            'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
-                            'image' => \App\Image::getRandom(),
+                            </div>
+
+                        @endforeach
+
+                    </div>
+                    <div class="r-home__destinations-action">
+
+                        @include('component.link', [
+                            'modifiers' => 'm-icon m-right',
+                            'title' => trans('frontpage.index.all.offers'),
+                            'route' => route('content.index', ['flight']),
+                            'icon' => 'icon-arrow-right'
                         ])
                     </div>
-
-                    <div class="c-columns__item">
-
-                        @include('component.destination', [
-                            'modifiers' => 'm-yellow',
-                            'title' => 'Saksamaa',
-                            'title_route' => '/destination/326',
-                            'subtitle' => 'Euroopa',
-                            'subtitle_route' => '/destination/1'
-                        ])
-
-                        @include('component.card', [
-                            'modifiers' => 'm-yellow',
-                            'route' => '',
-                            'title' => 'Kevadpuhkus Amsterdamis al 121 €',
-                            'image' => \App\Image::getRandom(),
-                        ])
-                    </div>
-
-                    <div class="c-columns__item">
-
-                        @include('component.destination', [
-                            'modifiers' => 'm-red',
-                            'title' => 'New York',
-                            'title_route' => '/destination/451',
-                            'subtitle' => 'Põhja-Ameerika',
-                            'subtitle_route' => '/destination/5'
-                        ])
-
-                        @include('component.card', [
-                            'modifiers' => 'm-red',
-                            'route' => '',
-                            'title' => 'Edasi-tagasi lennud New Yorki al 449 €',
-                            'image' => \App\Image::getRandom(),
-                        ])
-                    </div>
-
-                    {{--
-
-                    @if (isset($flights1) && count($flights1) > 0)
-
-                    @endif
-
-                    @foreach ($flights1 as $key => $flight1)
-
-                        <div class="c-columns__item">
-
-                            @include('component.destination', [
-                                'modifiers' => ['m-yellow', 'm-red', 'm-green'][$key],
-                                'title' =>
-                                    $flight1->destination ? $flight1->destination->name : null,
-                                'title_route' =>
-                                    $flight1->destination ? route('destination.show', $flight1->destination) : null,
-                                'subtitle' =>
-                                    $flight1->parent_destination ? $flight1->parent_destination->name : null,
-                                'subtitle_route' =>
-                                    $flight1->parent_destination ? route('destination.show', $flight1->parent_destination) : null
-                            ])
-
-                            @include('component.card', [
-                                'modifiers' => ['m-yellow', 'm-red', 'm-green'][$key],
-                                'route' => route('content.show', [$flight1->type, $flight1]),
-                                'title' => $flight1->title.' '.$flight1->price.' '.config('site.currency.symbol'),
-                                'image' => $flight1->imagePreset(),
-                            ])
-
-                        </div>
-
-                    @endforeach
-
-                    --}}
-                </div>
-                <div class="r-home__destinations-action">
-
-                    @include('component.link', [
-                        'modifiers' => 'm-icon m-right',
-                        'title' => 'Vaata kõiki sooduspakkumisi',
-                        'route' => route('content.index', ['flight']),
-                        'icon' => 'icon-arrow-right'
-                    ])
                 </div>
             </div>
-        </div>
+        @endif
 
         @if (isset($content) && count($content) > 0)
 
@@ -145,8 +84,7 @@
 
                     @include('component.about', [
                         'modifiers' => 'm-wide',
-                        'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
-                        //'title' => str_limit($content->first()->body_filtered, 300),
+                        'title' => str_limit($content->first()->body_filtered, 120),
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',

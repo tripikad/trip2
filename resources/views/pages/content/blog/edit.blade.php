@@ -84,6 +84,7 @@
                     <div class="c-form__input-wrap">
                         {!! Form::textarea('body', null, [
                             'class' => 'c-form__input m-high js-ckeditor',
+                            'id' => 'body',
                             'placeholder' => '',
                         ]) !!}
                     </div>
