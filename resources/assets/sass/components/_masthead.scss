@@ -183,33 +183,36 @@
 
             .m-logo-title & {
 
-                font-size: $font-size-largest;
+                font-size: $font-size-larger;
                 display: inline-block;
                 position: absolute;
                 left: 0;
                 width: 100%;
                 text-align: center;
                 top: -$spacer * 2.75;
-                text-shadow: -1px -1px 0 $color-text-black;
+
                 text-transform: lowercase;
+
 
                 @include respond-to(tablet) {
 
-                    left: $spacer * 13.5;
+                    left: $spacer * 13;
                     width: auto;
                     text-align: left;
+                    font-size: $font-size-largest + 6;
+                    letter-spacing: 0.5px;
+                    text-shadow: -1px 0 0 $color-text-black;
                 }
             }
 
             .c-masthead.m-search.m-logo-title & {
 
-                top: -($spacer * 5.25) + 1;
+                top: -($spacer * 5.75);
 
                 @include respond-to(tablet) {
 
-                    left: $spacer * 11.25;
-                    width: auto;
-                    text-align: left;
+                    top: -($spacer * 5.5) - 1;
+                    left: $spacer * 10.75;
                 }
             }
         }
