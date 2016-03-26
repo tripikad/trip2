@@ -161,6 +161,18 @@
         }
     }
 
+    .r-forum__offers {}
+
+        .r-forum__offers-wrap {
+
+            @include wrap();
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 4;
+            }
+        }
+
     .r-forum__additional {
 
         @include clearfix;
