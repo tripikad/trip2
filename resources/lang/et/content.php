@@ -170,8 +170,13 @@ return [
 
     // Forum
 
+    'forum.sidebar.title' => 'Rubriigid',
+    'forum.popular.title' => 'Populaarsemad postitused',
+
+    'forum.filter.text' => 'Kui ei leia sobivat teemat, siis ehk aitab sind filter.',
+
     'forum.index.title' => 'Üldine foorum',
-    'forum.create.title' => 'Lisa uus',
+    'forum.create.title' => 'Lisa uus teema',
 
     'forum.edit.field.title.title' => 'Pealkiri',
     'forum.edit.field.title.help' => '',
@@ -188,7 +193,7 @@ return [
     // Expat
 
     'expat.index.title' => 'Elu välismaal',
-    'expat.create.title' => 'Lisa uus',
+    'expat.create.title' => 'Lisa uus teema',
 
     'expat.edit.field.title.title' => 'Pealkiri',
     'expat.edit.field.title.help' => '',
@@ -206,7 +211,7 @@ return [
 
     'buysell.index.title' => 'Ost-müük',
 
-    'buysell.create.title' => 'Lisa uus',
+    'buysell.create.title' => 'Lisa uus teema',
 
     'buysell.edit.field.title.title' => 'Pealkiri',
     'buysell.edit.field.title.help' => '',
@@ -250,6 +255,9 @@ return [
 
     'blog.edit.field.url.title' => 'URL',
     'blog.edit.field.url.help' => '',
+
+    // Admin
+    'admin.sidebar.title' => 'Navigeerimiseks',
 
     // Internal
 
