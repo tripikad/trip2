@@ -86,6 +86,8 @@ class ContentController extends Controller
 
         if ($type == 'travelmate') {
             $viewVariables = $this->getTravelMateIndex();
+        } elseif($type == 'forum') {
+            $viewVariables = $this->getForumIndex();
         }
 
         $viewVariables['contents'] = $contents;
@@ -126,6 +128,17 @@ class ContentController extends Controller
                 Carbon::now()->addDays(14),
             ])
             ->count();
+
+        return $viewVariables;
+    }
+
+    public function getForumIndex()
+    {
+        $viewVariables['flights'] = Content::whereType('flight')
+            ->whereStatus(1)
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
 
         return $viewVariables;
     }
