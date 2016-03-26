@@ -133,7 +133,7 @@
                         <div class="r-block__header-title m-flex">
                             @include('component.title', [
                                 'modifiers' => 'm-blue',
-                                'title' => trans('destination.show.forum.title')
+                                'title' => trans('content.forum.popular.title')
                             ])
                         </div>
                     </div>
