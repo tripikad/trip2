@@ -170,7 +170,8 @@ return [
 
     // Forum
 
-    'forum.sidebar.title' => 'Tripikad räägivad',
+    'forum.sidebar.title' => 'Rubriigid',
+    'forum.popular.title' => 'Populaarsemad postitused',
 
     'forum.filter.text' => 'Kui ei leia sobivat teemat, siis ehk aitab sind filter.',
 
