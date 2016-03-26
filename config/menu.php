@@ -124,7 +124,7 @@ return [
             'title' => 'menu.admin.internal',
             'route' => '/content/internal',
             'modifiers' => 'm-large m-block m-icon',
-            'icon' => 'icon-arrow-right'
+            'icon' => 'icon-arrow-right',
         ],
         [
             'title' => 'menu.admin.sponsored',

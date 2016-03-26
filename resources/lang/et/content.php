@@ -257,7 +257,7 @@ return [
 
     // Admin
     'admin.sidebar.title' => 'Navigeerimiseks',
-    
+
     // Internal
 
     'internal.index.title' => 'Sisefoorum',
