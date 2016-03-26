@@ -37,25 +37,36 @@
 
             <div class="r-forum__content">
 
-                @foreach ($contents as $content)
-
-                    @include('component.row', [
-                        'profile' => [
-                            'modifiers' => '',
-                            'image' => $content->user->imagePreset(),
-                            'route' => route('user.show', [$content->user]),
-                            'letter' => [
-                                'modifiers' => 'm-green m-small',
-                                'text' => 'D'
+                @include('component.content.forum.list', [
+                    'items' => $contents->transform(function ($forum) {
+                        return [
+                            'topic' => str_limit($forum->title, 50),
+                            'route' => route('content.show', [$forum->type, $forum]),
+                            'date' => view('component.date.relative', [
+                                'date' => $forum->created_at
+                            ]),
+                            'profile' => [
+                                'modifiers' => 'm-mini',
+                                'image' => $forum->user->imagePreset(),
+                                'letter' => [
+                                    'modifiers' => 'm-green m-small',
+                                    'text' => 'D'
+                                ],
                             ],
-                        ],
-                        'modifiers' => 'm-image',
-                        'title' => $content->title,
-                        'route' => route('content.show', [$content->type, $content->id]),
-                        'text' => view('component.content.text', ['content' => $content]),
-                    ])
-
-                @endforeach
+                            'badge' => [
+                                'modifiers' => 'm-inverted',
+                                'count' => count($forum->comments)
+                            ],
+                            'tags' => $forum->topics->take(2)->transform(function ($topic) use ($forum) {
+                                return [
+                                    'title' => $topic->name,
+                                    'modifiers' => 'm-gray',
+                                    'route' => route('content.index', [$forum->type]).'?topic='.$topic->id,
+                                ];
+                            })
+                        ];
+                    })
+                ])
 
                 @include('component.pagination.default', [
                     'collection' => $contents
@@ -211,6 +222,33 @@
             </div>
 
         </div>
+
+        @if (isset($flights) && count($flights))
+
+            <div class="r-forum__offers">
+                <div class="r-forum__offers-wrap">
+                    <div class="c-columns m-{{ count($flights) }}-cols">
+
+                        @foreach($flights as $flight)
+
+                            <div class="c-columns__item">
+
+                                @include('component.card', [
+                                    'modifiers' => 'm-blue',
+                                    'route' => route('content.show', [$flight->type, $flight]),
+                                    'title' => $flight->title.' '.$flight->price.config('site.currency.symbol'),
+                                    'image' => $flight->imagePreset()
+                                ])
+
+                            </div>
+
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+
+        @endif
 
 
         <div class="r-forum__footer-promo">
