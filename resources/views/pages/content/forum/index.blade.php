@@ -65,51 +65,184 @@
 
             <div class="r-forum__sidebar">
 
-                <div class="r-forum__sidebar-block">
+                <div class="r-block m-small">
+                    @include('component.title', [
+                        'modifiers' => 'm-red',
+                        'title' => trans('destination.show.forum.title')
+                    ])
+                </div>
+                <div class="r-block m-small">
+                    @include('component.content.forum.nav', [
+                        'items' => [
+                            [
+                                'title' => trans('frontpage.index.forum.general'),
+                                'route' => route('content.index', 'forum'),
+                                'modifiers' => 'm-large m-block m-icon',
+                                'icon' => 'icon-arrow-right'
+                            ],
+                            [
+                                'title' => trans('frontpage.index.forum.buysell'),
+                                'route' => route('content.index', 'buysell'),
+                                'modifiers' => 'm-large m-block m-icon',
+                                'icon' => 'icon-arrow-right'
+                            ],
+                            [
+                                'title' => trans('frontpage.index.forum.expat'),
+                                'route' => route('content.index', 'expat'),
+                                'modifiers' => 'm-large m-block m-icon',
+                                'icon' => 'icon-arrow-right'
+                            ],
+                        ]
+                    ])
+                </div>
 
-                    <div class="r-forum__sidebar-block-inner">
+                <div class="r-block m-small">
 
-                        @include('component.nav', [
-                            'modifiers' => '',
-                            'menu' => config('content_'.$type.'.menu'),
-                            'items' => config('menu.'.config('content_'.$type.'.menu'))
+                    <div class="r-block__inner">
+
+                        @include('component.about', [
+                            'title' => 'Alusta uut teemat',
+                            'text' => 'Soovid midagi küsida? Tripikad vastavad.',
+                            'links' => [
+                                [
+                                    'modifiers' => 'm-icon',
+                                    'title' => 'Kasutjaid hetkel 147',
+                                    'route' => '',
+                                    'icon' => ''
+                                ],
+                            ],
+                            'button' =>
+                                \Auth::check() ? [
+                                    'modifiers' => 'm-block',
+                                    'route' => route('content.create', ['type' => $type]),
+                                    'title' => trans("content.$type.create.title")
+                                ] : null
                         ])
 
                     </div>
+                </div>
+
+                <div class="r-block m-small">
+                    <div class="r-block__inner">
+                        @include('component.forum.filter')
+                    </div>
+                </div>
+
+                <div class="r-block m-small m-mobile-hide">
+                    @include('component.promo', [
+                        'modifiers' => 'm-sidebar-small',
+                        'route' => '',
+                        'image' => \App\Image::getRandom()
+                    ])
+                </div>
+
+                <div class="r-block__inner">
+                    <div class="r-block__header">
+                        <div class="r-block__header-title m-flex">
+                            @include('component.title', [
+                                'modifiers' => 'm-blue',
+                                'title' => trans('destination.show.forum.title')
+                            ])
+                        </div>
+                    </div>
+
+                    @include('component.content.forum.list', [
+                            'modifiers' => 'm-compact',
+                            'items' => [
+                                [
+                                    'topic' => 'Pikaajaliselt paikses LAs',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-red',
+                                            'text' => 'K',
+                                        ],
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-blue',
+                                        'count' => rand(1, 12),
+                                    ]
+                                ],
+                                [
+                                    'topic' => 'Los Angeles, Venice beach',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-red',
+                                            'text' => 'K',
+                                        ],
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-blue',
+                                        'count' => rand(1, 12),
+                                    ]
+                                ],
+                                [
+                                    'topic' => 'Mida teha New Yorgis?',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-red',
+                                            'text' => 'K',
+                                        ],
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-blue',
+                                        'count' => rand(1, 12),
+                                    ]
+                                ],
+                                [
+                                    'topic' => 'Kasulikku infot Washingtoni...',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-red',
+                                            'text' => 'K',
+                                        ],
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-blue',
+                                        'count' => rand(1, 12),
+                                    ]
+                                ]
+                            ]
+                        ])
 
                 </div>
 
-                @if (\Auth::check())
+                <div class="r-block m-small m-mobile-hide">
 
-                    <div class="r-forum__sidebar-block">
-
-                        <div class="r-forum__sidebar-block-inner">
-
-                            @include('component.button', [
-                                'route' => route('content.create', ['type' => $type]),
-                                'title' => trans("content.$type.create.title")
-                            ])
-
-                        </div>
-
-                    </div>
-
-                @endif
-
-                <div class="r-forum__sidebar-block">
-
-                    <div class="r-forum__sidebar-block-inner">
-
-                        @include('component.filter')
-
-                    </div>
-
+                    @include('component.promo', [
+                        'modifiers' => 'm-sidebar-large',
+                        'route' => '',
+                        'image' => \App\Image::getRandom()
+                    ])
                 </div>
 
             </div>
 
         </div>
 
+
+        <div class="r-forum__footer-promo">
+
+            <div class="r-forum__footer-promo-wrap">
+
+                @include('component.promo', [
+                    'modifiers' => 'm-footer',
+                    'route' => '',
+                    'image' => \App\Image::getRandom()
+                ])
+            </div>
+        </div>
     </div>
 
 @stop
