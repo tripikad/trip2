@@ -18,7 +18,7 @@
 @stop
 
 @section('title')
-    Foorum
+    {{ trans("content.$type.index.title") }}
 @stop
 
 @section('content')
@@ -68,31 +68,12 @@
                 <div class="r-block m-small">
                     @include('component.title', [
                         'modifiers' => 'm-red',
-                        'title' => trans('destination.show.forum.title')
+                        'title' => trans('content.'.config('content_'.$type.'.menu').'.sidebar.title')
                     ])
                 </div>
                 <div class="r-block m-small">
                     @include('component.content.forum.nav', [
-                        'items' => [
-                            [
-                                'title' => trans('frontpage.index.forum.general'),
-                                'route' => route('content.index', 'forum'),
-                                'modifiers' => 'm-large m-block m-icon',
-                                'icon' => 'icon-arrow-right'
-                            ],
-                            [
-                                'title' => trans('frontpage.index.forum.buysell'),
-                                'route' => route('content.index', 'buysell'),
-                                'modifiers' => 'm-large m-block m-icon',
-                                'icon' => 'icon-arrow-right'
-                            ],
-                            [
-                                'title' => trans('frontpage.index.forum.expat'),
-                                'route' => route('content.index', 'expat'),
-                                'modifiers' => 'm-large m-block m-icon',
-                                'icon' => 'icon-arrow-right'
-                            ],
-                        ]
+                        'items' => config('menu.'.config('content_'.$type.'.menu')),
                     ])
                 </div>
 
