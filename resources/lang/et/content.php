@@ -170,6 +170,8 @@ return [
 
     // Forum
 
+    'forum.sidebar.title' => 'Tripikad räägivad',
+
     'forum.filter.text' => 'Kui ei leia sobivat teemat, siis ehk aitab sind filter.',
 
     'forum.index.title' => 'Üldine foorum',
@@ -253,6 +255,9 @@ return [
     'blog.edit.field.url.title' => 'URL',
     'blog.edit.field.url.help' => '',
 
+    // Admin
+    'admin.sidebar.title' => 'Navigeerimiseks',
+    
     // Internal
 
     'internal.index.title' => 'Sisefoorum',
