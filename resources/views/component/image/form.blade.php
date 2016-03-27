@@ -70,14 +70,13 @@ code: |
 @if (isset($fields) && ! empty($fields))
 
     @foreach ($fields as $key => $field)
-
         <div class="c-form__input-wrap">
 
             <div class="c-form__group">
 
                 @if (in_array($field['type'], ['text', 'textarea', 'url', 'email', 'date']))
 
-                    {!! Form::$field['type']($key, null, [
+                    {!! call_user_func('Form::'.$field['type'], $key, null, [
                         'class' =>
                             (isset($field['large']) && $field['large'] == true
                                 ? 'c-form__input m-high'
@@ -99,7 +98,7 @@ code: |
 
                             <div class="form-group">
 
-                                {!! Form::$field['type']($key) !!}
+                                {!! call_user_func('Form::'.$field['type'], $key) !!}
 
                             </div>
 
