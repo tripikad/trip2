@@ -9,8 +9,6 @@ class PhotoTest extends TestCase
 
     public function test_regular_user_can_post_and_edit_photos()
     {
-        $this->markTestSkipped();
-
         $regular_user = factory(App\User::class)->create();
 
         $this->actingAs($regular_user)
