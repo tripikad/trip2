@@ -70,7 +70,6 @@ code: |
 @if (isset($fields) && ! empty($fields))
 
     @foreach ($fields as $key => $field)
-
         <div class="c-form__input-wrap">
 
             <div class="c-form__group">
@@ -99,7 +98,7 @@ code: |
 
                             <div class="form-group">
 
-                                {!! Form::$field['type']($key) !!}
+                                {!! call_user_func('Form::'.$field['type'], $key) !!}
 
                             </div>
 
