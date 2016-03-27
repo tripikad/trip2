@@ -77,7 +77,7 @@ code: |
 
                 @if (in_array($field['type'], ['text', 'textarea', 'url', 'email', 'date']))
 
-                    {!! Form::$field['type']($key, null, [
+                    {!! Form::{$field['type']}($key, null, [
                         'class' =>
                             (isset($field['large']) && $field['large'] == true
                                 ? 'c-form__input m-high'
