@@ -6,9 +6,15 @@
 
     &.m-large {
 
-        font-size: $font-size-largest;
+        font-size: $font-size-larger;
         font-weight: $font-weight-bold;
-        margin-bottom: $spacer * 2;
+        margin-bottom: $spacer * 1.5;
+
+        @include respond-to(tablet) {
+
+            font-size: $font-size-largest;
+            margin-bottom: $spacer * 2;
+        }
     }
 
     &.m-margin {

@@ -6,9 +6,9 @@ return [
         'home' => [
             'route' => '/',
         ],
-        'news' => [
-            'route' => '/content/news',
-        ],
+        // 'news' => [
+        //     'route' => '/content/news',
+        // ],
        'flights' => [
             'route' => '/content/flight',
         ],
@@ -18,16 +18,16 @@ return [
         'forum' => [
             'route' => '/content/forum',
         ],
-        'photos' => [
-            'route' => '/content/photo',
-        ],
+        // 'photos' => [
+        //     'route' => '/content/photo',
+        // ],
         'blogs' => [
             'route' => '/content/blog',
         ],
-        'offers' => [
-            'route' => 'http://vana.trip.ee/reisipakkumised',
-            'external' => true,
-        ],
+        // 'offers' => [
+        //     'route' => 'http://vana.trip.ee/reisipakkumised',
+        //     'external' => true,
+        // ],
     ],
 
     'footer' => [
@@ -99,29 +99,50 @@ return [
     ],
 
     'forum' => [
-        'forum' => [
+        [
+            'title' => 'menu.forum.forum',
             'route' => '/content/forum',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
         ],
-        'expat' => [
+        [
+            'title' => 'menu.forum.expat',
             'route' => '/content/expat',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
         ],
-        'buysell' => [
+        [
+            'title' => 'menu.forum.buysell',
             'route' => '/content/buysell',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
         ],
     ],
 
     'admin' => [
-        'internal' => [
+        [
+            'title' => 'menu.admin.internal',
             'route' => '/content/internal',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
         ],
-        'sponsored' => [
+        [
+            'title' => 'menu.admin.sponsored',
             'route' => '/content/sponsored',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
         ],
-        'image' => [
+        [
+            'title' => 'menu.admin.image',
             'route' => '/admin/image',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
         ],
-        'content' => [
+        [
+            'title' => 'menu.admin.content',
             'route' => '/admin/content',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
         ],
     ],
 

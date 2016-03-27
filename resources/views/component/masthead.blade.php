@@ -25,6 +25,16 @@ modifiers:
     @endif
 >
 
+    @if (isset($map) && $map === true)
+        <div class="c-masthead__map">
+            <div class="c-masthead__map-map">
+                @include('component.svg.standalone', [
+                    'name' => 'map'
+                ])
+            </div>
+        </div>
+    @endif
+
     @yield('masthead.nav')
 
     <div class="c-masthead__body">

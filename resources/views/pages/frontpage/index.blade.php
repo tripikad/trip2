@@ -30,20 +30,17 @@
 
         </div>
 
-        @if (isset($flights1) && count($flights1) > 0)
-
+        @if (isset($flights1) && count($flights1))
             <div class="r-home__destinations">
-
                 <div class="r-home__destinations-wrap">
-
-                    <div class="c-columns m-3-cols">
+                    <div class="c-columns m-{{ count($flights1) }}-cols">
 
                         @foreach ($flights1 as $key => $flight1)
 
                             <div class="c-columns__item">
 
                                 @include('component.destination', [
-                                    'modifiers' => ['m-yellow', 'm-red', 'm-green'][$key],
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
                                     'title' =>
                                         $flight1->destination ? $flight1->destination->name : null,
                                     'title_route' =>
@@ -55,9 +52,9 @@
                                 ])
 
                                 @include('component.card', [
-                                    'modifiers' => ['m-yellow', 'm-red', 'm-green'][$key],
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
                                     'route' => route('content.show', [$flight1->type, $flight1]),
-                                    'title' => $flight1->title.' '.$flight1->price.' '.config('site.currency.symbol'),
+                                    'title' => $flight1->title.' '.$flight1->price.config('site.currency.symbol'),
                                     'image' => $flight1->imagePreset(),
                                 ])
 
@@ -70,15 +67,13 @@
 
                         @include('component.link', [
                             'modifiers' => 'm-icon m-right',
-                            'title' => 'Vaata kõiki sooduspakkumisi',
+                            'title' => trans('frontpage.index.all.offers'),
                             'route' => route('content.index', ['flight']),
                             'icon' => 'icon-arrow-right'
                         ])
-
                     </div>
                 </div>
             </div>
-
         @endif
 
         @if (isset($content) && count($content) > 0)
@@ -89,7 +84,7 @@
 
                     @include('component.about', [
                         'modifiers' => 'm-wide',
-                        'title' => str_limit($content->first()->body_filtered, 300),
+                        'title' => str_limit($content->first()->body_filtered, 120),
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
@@ -326,11 +321,13 @@
         @endif
 
         <div class="r-home__travel">
+
             <div class="r-home__travel-wrap">
 
                 @if (isset($flights2) && count($flights2) > 0)
 
                     <div class="r-home__travel-column m-first">
+
                         <div class="r-home__travel-title">
 
                             @include('component.title', [
@@ -365,14 +362,22 @@
                             ])
 
                         </div>
-
                     </div>
 
                 @endif
 
                 @if (isset($blogs) && count($blogs) > 0)
 
+                    @if (isset($flights2) && count($flights2) > 0)
+
                     <div class="r-home__travel-column m-last">
+
+                    @else
+
+                    <div class="r-home__travel-column m-single">
+
+                    @endif
+
                         <div class="r-home__travel-title">
 
                             @include('component.title', [
@@ -386,7 +391,8 @@
 
                             @include('component.blog', [
                                 'title' => $blog->title,
-                                'image' => $blog->imagePreset(),
+                                //'image' => $blog->imagePreset(),
+                                'image' => \App\Image::getRandom(),
                                 'route' => route('content.show', [$blog->type, $blog]),
                                 'profile' => [
                                     'route' => route('user.show', [$blog->user]),

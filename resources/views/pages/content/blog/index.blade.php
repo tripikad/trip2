@@ -48,7 +48,9 @@
 
     <div class="r-blog__masthead">
 
-        @include('component.blog.masthead')
+        @include('component.blog.masthead', [
+            'modifiers' => 'm-index'
+        ])
     </div>
 
     <div class="r-blog__featured-main">
@@ -57,7 +59,7 @@
 
             <div class="c-blog-featured m-video">
 
-                <a href="#" class="c-blog-featured__image-link" style="background-image: url({{\App\Image::getRandom()}});">
+                <a href="/content/blog/91258" class="c-blog-featured__image-link" style="background-image: url({{\App\Image::getRandom()}});">
                     <span class="c-blog-featured__type">
                         @include('component.svg.sprite', [
                             'name' => 'icon-video'
@@ -67,7 +69,7 @@
 
                 <div class="c-blog-featured__content">
 
-                    <h3 class="c-blog-featured__title"><a href="#" class="c-blog-featured__title-link">Motikaga Gruusias, Armeenias ja Karabahhis</a></h3>
+                    <h3 class="c-blog-featured__title"><a href="/content/blog/91258" class="c-blog-featured__title-link">Motikaga Gruusias, Armeenias ja Karabahhis</a></h3>
                     <p class="c-blog-featured__excerpt">Tbilisi suur probleem on jalakäijatele mitte mõtlemine -- raske on liikuda kesklinnas ja ületada mitmerealisi tänavaid, mis on paksult autosid täis. On mõningad tunnelid jalakäijatele kuid natuke linnasüdamest eemal on need pimedad ja kohati ka…</p>
 
                     <div class="c-blog-featured__tags">
@@ -396,7 +398,7 @@
 
             <div class="r-blog__main-content">
 
-                <div class="r-block m-small">
+                <div class="r-block m-small m-no-mobile-margin">
 
                     <div class="r-block__header">
                         @include('component.title', [
@@ -560,7 +562,7 @@
                     </div>
                 </div>
 
-                <div class="r-block">
+                <div class="r-block m-mobile-hide">
                     @include('component.promo', [
                         'modifiers' => 'm-body',
                         'route' => '',
@@ -570,7 +572,7 @@
 
                 <div class="r-block m-small">
 
-                    <div class="c-blog-article">
+                    <div class="c-blog-article m-last">
 
                         <h3 class="c-blog-article__title"><a href="#" class="c-blog-article__title-link">Zhangbei, China, is a county formerly in the Chahar province</a></h3>
 
@@ -730,7 +732,7 @@
                     ])
                 </div>
 
-                <div class="r-block m-small">
+                <div class="r-block m-small m-mobile-hide">
 
                     @include('component.promo', [
                         'modifiers' => 'm-sidebar-small',
@@ -739,7 +741,7 @@
                     ])
                 </div>
 
-                <div class="r-block m-small">
+                <div class="r-block m-small m-mobile-hide">
 
                     @include('component.promo', [
                         'modifiers' => 'm-sidebar-large',

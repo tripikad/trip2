@@ -2,9 +2,14 @@
 
     position: relative;
     text-align: center;
-    padding: $spacer * 12 0 $spacer * 4;
+    padding: $spacer * 8 0 $spacer * 2;
 
     @include respond-to(tablet) {
+
+        padding: $spacer * 4 0;
+    }
+
+    @include respond-to(desktop) {
 
         padding: $spacer * 4 0 $spacer * 6;
     }
@@ -42,7 +47,7 @@
             @include font-smoothing;
 
             color: $color-text-black;
-            font-size: $font-size-largest;
+            font-size: $font-size-larger;
             font-weight: $font-weight-bold;
             text-align: center;
 
@@ -64,12 +69,15 @@
             color: $color-text-neutral-darkest;
             font-size: $font-size-normal;
             font-weight: $font-weight-bold;
+            line-height: 1.5;
             text-align: center;
             margin-top: $spacer;
+            padding: 0 $spacer * 2;
 
             @include respond-to(tablet) {
 
-                margin-top: 18px;
                 font-size: $font-size-medium;
+                margin-top: $spacer * 1.5;
+                padding: 0;
             }
         }

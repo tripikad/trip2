@@ -20,9 +20,8 @@
 
     <div class="r-forum__masthead">
 
-        @include('component.masthead', [
-            'modifiers' => 'm-forum m-small',
-            'title' => 'forum'
+        @include('component.forum.masthead', [
+            'modifiers' => 'm-small',
         ])
 
         <div class="r-forum__map">

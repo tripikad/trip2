@@ -106,7 +106,7 @@
 
         .c-blog-single__tags {
 
-            margin-bottom: $spacer;
+            margin-bottom: $spacer * 2;
 
             @include respond-to(tablet) {
 
@@ -118,19 +118,32 @@
 
         .c-blog-single__social {
 
+            text-align: right;
+            float: left;
+            width: 50%;
+            padding-right: $spacer * 2;
+            border-right: 1px solid $color-fill-neutral;
+
             @include respond-to(tablet) {
 
+                text-align: left;
                 float: right;
+                padding: 0;
+                width: auto;
+                margin-right: $spacer * 1.5;
             }
         }
 
         .c-blog-single__flags {
 
-            margin-bottom: $spacer;
+            float: right;
+            width: 50%;
+            padding-left: $spacer * 2;
 
             @include respond-to(tablet) {
 
                 float: right;
-                margin-bottom: 0;
+                padding: 0;
+                width: auto;
             }
         }

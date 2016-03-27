@@ -3,7 +3,7 @@
 @section('header')
 
     @include('component.blog.header',[
-        'modifiers' => 'm-show',
+        'modifiers' => 'm-profile',
         'back' => [
             'title' => 'trip.ee blogid',
             'route' => '/content/blog'
@@ -13,7 +13,7 @@
 
 @section('content')
 
-<div class="r-blog m-show">
+<div class="r-blog m-profile">
 
     <div class="r-blog__masthead">
 

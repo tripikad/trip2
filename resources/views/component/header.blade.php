@@ -9,7 +9,6 @@
             @include('component.logo', [
                 'modifiers' => 'm-small'
             ])
-
         </a>
 
         @else
@@ -19,7 +18,6 @@
             @include('component.logo', [
                 'modifiers' => 'm-small m-dark'
             ])
-
         </a>
 
         @endif
@@ -69,7 +67,7 @@
     <div class="c-header__user">
 
         @include('component.navbar.user', [
-            'modifiers' => 'm-purple',
+            'modifiers' => 'm-green',
             'profile' => [
                 'image' => \Auth::user()->imagePreset(),
                 'title' => \Auth::user()->name,
@@ -104,7 +102,6 @@
                 ]
             ]
         ])
-
     </div>
 
     @endif
@@ -115,30 +112,49 @@
         <span></span>
     </a>
 
-    <div class="c-header__nav js-header__nav">
+    <div class="c-header__mobile-nav js-header__nav">
+
+        @if (isset($modifiers) && $modifiers === 'm-alternative')
+
+            @include('component.navbar.mobile',[
+                'modifiers' => 'm-alternative m-green'
+            ])
+
+        @else
+
+            @include('component.navbar.mobile',[
+                'modifiers' => 'm-green'
+            ])
+
+        @endif
+
+        <div class="c-header__mobile-nav-search">
+
+            @include('component.header.search-simple',[
+                'modifiers' => 'm-green',
+                'placeholder' => 'Otsi'
+            ])
+        </div>
+    </div>
+
+    <div class="c-header__nav">
 
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
             @include('component.navbar',[
-                'modifiers' => 'm-alternative m-purple'
+                'modifiers' => 'm-alternative m-green'
             ])
 
         @else
 
             @include('component.navbar',[
-                'modifiers' => 'm-blue'
+                'modifiers' => 'm-green'
             ])
 
         @endif
     </div>
 
-    @if(!Request::is('/'))
-
-    <a href="#" class="c-header__search-trigger js-header__search-trigger">
-        @include('component.svg.sprite', [
-            'name' => 'icon-search'
-        ])
-    </a>
+    @if(!Request::is('/') && (isset($hide) && !in_array('search', $hide)))
 
     @if (Request::path() != '/' && !Request::is('search*'))
     <div class="c-header__search js-header__search">
@@ -146,14 +162,14 @@
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
             @include('component.header.search',[
-                'modifiers' => 'm-small m-red m-alternative',
+                'modifiers' => 'm-small m-green m-alternative',
                 'placeholder' => ''
             ])
 
         @else
 
             @include('component.header.search',[
-                'modifiers' => 'm-small m-red',
+                'modifiers' => 'm-small m-green',
                 'placeholder' => ''
             ])
 

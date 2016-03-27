@@ -1,11 +1,4 @@
-.c-blog-social {
-
-    @include respond-to(tablet) {
-
-        border-right: 1px solid $color-fill-neutral;
-        margin-right: $spacer * 1.5;
-    }
-}
+.c-blog-social {}
 
     .c-blog-social__link {
 
@@ -15,6 +8,16 @@
         height: 24px;
         width: 24px;
         margin-right: $spacer * 1.5;
+
+        &:last-child {
+
+            margin-right: 0;
+
+            @include respond-to(tablet) {
+
+                margin-right: $spacer * 1.5;
+            }
+        }
 
         &.m-twitter {
 

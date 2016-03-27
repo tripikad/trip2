@@ -63,8 +63,7 @@
 
             <div class="c-auth-footer">
 
-                <p class="c-auth-footer__text">Tuli meelde? <a href="#" class="c-auth-footer__link">Logi sisse siit</a>.</p>
-
+                <p class="c-auth-footer__text">Tuli meelde? <a href="{{ route('login.form') }}" class="c-auth-footer__link">Logi sisse siit</a>.</p>
             </div>
         </div>
     </div>

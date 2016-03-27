@@ -18,7 +18,9 @@
 
     <div class="r-blog__masthead">
 
-        @include('component.blog.masthead')
+        @include('component.blog.masthead', [
+            'modifiers' => 'm-edit'
+        ])
     </div>
 
     <div class="r-blog__wrap">
@@ -82,6 +84,7 @@
                     <div class="c-form__input-wrap">
                         {!! Form::textarea('body', null, [
                             'class' => 'c-form__input m-high js-ckeditor',
+                            'id' => 'body',
                             'placeholder' => '',
                         ]) !!}
                     </div>

@@ -48,13 +48,13 @@ class ConvertBase extends Command
 
         // max size: messages ~100000
 
-        $this->skip = env('CONVERT_SKIP', 10);
-        $this->take = env('CONVERT_TAKE', 10);
-        $this->copyFiles = env('CONVERT_FILES', false);
-        $this->scrambleMessages = env('CONVERT_SCRAMBLE', true);
-        $this->fileHash = env('CONVERT_FILEHASH', false);
-        $this->overwriteFiles = env('CONVERT_OVERWRITE', false);
-        $this->demoAccounts = env('CONVERT_DEMOACCOUNTS', false);
+        $this->skip = config('convert.skip');
+        $this->take = config('convert.take');
+        $this->copyFiles = config('convert.copyFiles');
+        $this->scrambleMessages = config('convert.scrambleMessages');
+        $this->fileHash = config('convert.fileHash');
+        $this->overwriteFiles = config('convert.overwriteFiles');
+        $this->demoAccounts = config('convert.demoAccounts');
     }
 
     // Nodes
@@ -510,9 +510,9 @@ class ConvertBase extends Command
             $model->registration_token = null;
 
             // if ($notifyMessage = $this->getUserNotifyMessage($user->uid)) {
-            //
+
             //    $model->notify_message = 1;
-            //
+
             // }
 
             $model->save();
@@ -801,7 +801,7 @@ class ConvertBase extends Command
             }
 
             foreach ($presets as $preset) {
-                Imageconv::make($to)
+                Imageconv::make($from)
                     ->{config("imagepresets.presets.$preset.operation")}(
                         config("imagepresets.presets.$preset.width"),
                         config("imagepresets.presets.$preset.height"),

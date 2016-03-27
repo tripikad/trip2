@@ -200,7 +200,8 @@
                     {!! Form::textarea('add-flight-body', null, [
                         'class' => 'c-form__input m-high js-ckeditor',
                         'placeholder' => 'Pakkumise sisu (lubatud html koodi sisestamine)…',
-                        'rows' => 16
+                        'rows' => 16,
+                        'id' => 'add-flight-body'
                     ]) !!}
                 </div>
 
@@ -209,12 +210,34 @@
                         'class' => 'c-form__label'
                     ]) !!}
 
+                    @include('component.image.form', [
+                       'form' => [
+                           'url' => '/content/flight/edit',
+                           'files' => true
+                       ],
+                       'name' => 'add-flight-screenshot',
+                       'maxFileSize' => 5,
+                       'uploadMultiple' => true,
+                       'fields' => null
+                   ])
+
                 </div>
 
                 <div class="c-form__group m-large-margin">
                     {!! Form::label('add-flight_image', 'Pakkumise foto üleslaadimine', [
                         'class' => 'c-form__label'
                     ]) !!}
+
+                    @include('component.image.form', [
+                       'form' => [
+                           'url' => '/content/flight/edit',
+                           'files' => true
+                       ],
+                       'name' => 'add-flight_image',
+                       'maxFileSize' => 5,
+                       'uploadMultiple' => true,
+                       'fields' => null
+                   ])
 
                 </div>
 
@@ -236,10 +259,11 @@
 
                         <div class="c-flight-dates__column m-last">
 
-                            {!! Form::textarea('add-flight-body', null, [
+                            {!! Form::textarea('add-flight-body2', null, [
                                 'class' => 'c-form__input m-high js-ckeditor',
                                 'placeholder' => 'Pakkumise sisu (lubatud html koodi sisestamine)…',
-                                'rows' => 16
+                                'rows' => 16,
+                                'id' => 'add-flight-body2'
                             ]) !!}
                         </div>
 

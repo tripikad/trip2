@@ -45,7 +45,6 @@ class ContentTest extends TestCase
                     'title' => "Hello title $type",
                 ]))
                 ->see("Hello title $type")
-                ->see($regular_user->name)
                 ->seeInDatabase('contents', [
                     'user_id' => $regular_user->id,
                     'title' => "Hello title $type",
