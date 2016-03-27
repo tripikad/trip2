@@ -14,74 +14,22 @@
 
 @stop
 
+@if (isset($uniqueTopics) && count($uniqueTopics))
 @section('masthead.bottom')
 
     @include('component.tags', [
-        'items' => [
-            [
-                'modifiers' => 'm-green',
-                'route' => '#',
-                'title' => 'Soojale maale'
-            ],
-            [
-                'modifiers' => 'm-green',
-                'route' => '#',
-                'title' => 'Suurlinn'
-            ],
-            [
-                'modifiers' => 'm-green m-active',
-                'route' => '#',
-                'title' => 'Rannapuhkus'
-            ],
-            [
-                'modifiers' => 'm-green',
-                'route' => '#',
-                'title' => 'Talvepuhkus'
-            ],
-            [
-                'modifiers' => 'm-green',
-                'route' => '#',
-                'title' => 'Koolivaheaeg'
-            ],
-            [
-                'modifiers' => 'm-green',
-                'route' => '#',
-                'title' => 'Eksootiline'
-            ],
-            [
-                'modifiers' => 'm-green',
-                'route' => '#',
-                'title' => 'Aafrika'
-            ],
-            [
-                'modifiers' => 'm-green',
-                'route' => '#',
-                'title' => 'Veahind'
-            ],
-            [
-                'modifiers' => 'm-green',
-                'route' => '#',
-                'title' => 'Aasia'
-            ],
-            [
-                'modifiers' => 'm-green',
-                'route' => '#',
-                'title' => 'Ameerika'
-            ],
-            [
-                'modifiers' => 'm-green m-active',
-                'route' => '#',
-                'title' => 'Perepuhkus'
-            ],
-            [
-                'modifiers' => 'm-green',
-                'route' => '#',
-                'title' => 'Šhopping'
-            ],
-        ]
+        'items' => $uniqueTopics->transform(function ($uniqueTopic) {
+            return [
+                'modifiers' => 'm-green' .
+                    (Input::get('topic_id')==$uniqueTopic['id']?' m-active' : ''),
+                'route' => '?topic_id='.$uniqueTopic['id'],
+                'title' => $uniqueTopic['name'],
+            ];
+        })
     ])
 
-@stop
+    @stop
+@endif
 
 @section('content')
 
