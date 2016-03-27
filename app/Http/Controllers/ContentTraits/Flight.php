@@ -12,14 +12,10 @@ trait Flight
         $uniqueTopics = [];
 
         foreach ($contents as $content) {
-            if (count($uniqueTopics) == $topicsLimit) {
-                break;
-            }
-
             if (count($content->topics)) {
                 foreach ($content->topics as $topic) {
                     if (count($uniqueTopics) == $topicsLimit) {
-                        break;
+                        break 2;
                     }
 
                     if (! in_array($topic->name, $uniqueTopics)) {
