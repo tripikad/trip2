@@ -25,11 +25,23 @@ modifiers:
     @endif
 >
 
+    @if (isset($map) && $map === true)
+        <div class="c-masthead__map">
+            <div class="c-masthead__map-map">
+                @include('component.svg.standalone', [
+                    'name' => 'map'
+                ])
+            </div>
+        </div>
+    @endif
+
     @yield('masthead.nav')
 
     <div class="c-masthead__body">
 
         <div class="c-masthead__logo">
+
+            <a href="/" class="c-masthead__logo-link">
 
             @if (isset($image) && isset($modifiers))
 
@@ -45,9 +57,19 @@ modifiers:
 
             @endif
 
+            </a>
+
         </div>
 
+        @if (isset($title))
+
+        <h1 class="c-masthead__title">{{ $title }}</h1>
+
+        @else
+
         <h1 class="c-masthead__title">@yield('title')</h1>
+
+        @endif
 
         @if (isset($subtitle))
 

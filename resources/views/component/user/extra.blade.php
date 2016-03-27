@@ -43,8 +43,8 @@ code: |
 
         <div class="c-user-extra__item-icon">
 
-            @include('component.icon',[
-                'icon' => $item['icon']
+            @include('component.svg.sprite',[
+                'name' => $item['icon']
             ])
 
         </div>
@@ -65,11 +65,16 @@ code: |
 
         <div class="c-user-extra__item-text">
 
+            <span class="c-user-extra__item-text-mobile">({{$item['text']}})</span>
+
+            <div class="c-user-extra__item-text-desktop">
+
             @include('component.tooltip',[
                 'modifiers' => 'm-inverted m-bottom m-one-line',
                 'text' => $item['text']
             ])
 
+            </div>
         </div>
 
         @endif

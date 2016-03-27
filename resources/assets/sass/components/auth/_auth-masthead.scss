@@ -1,0 +1,83 @@
+.c-auth-masthead {
+
+    position: relative;
+    text-align: center;
+    padding: $spacer * 8 0 $spacer * 2;
+
+    @include respond-to(tablet) {
+
+        padding: $spacer * 4 0;
+    }
+
+    @include respond-to(desktop) {
+
+        padding: $spacer * 4 0 $spacer * 6;
+    }
+}
+
+    .c-auth-masthead__body {
+
+        display: inline-block;
+    }
+
+        .c-auth-masthead__logo {
+
+            position: relative;
+            left: -$spacer * 6;
+            display: none;
+            width: 280px;
+            height: 132px;
+            margin-bottom: -$spacer * 3;
+
+            @include respond-to(tablet) {
+
+                display: block;
+            }
+        }
+
+            .c-auth-masthead__logo-link {
+
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+
+        .c-auth-masthead__title {
+
+            @include font-smoothing;
+
+            color: $color-text-black;
+            font-size: $font-size-larger;
+            font-weight: $font-weight-bold;
+            text-align: center;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-huge / 1.5;
+            }
+
+            @include respond-to(desktop) {
+
+                font-size: $font-size-huge;
+            }
+        }
+
+        .c-auth-masthead__subtitle {
+
+            @include font-smoothing;
+
+            color: $color-text-neutral-darkest;
+            font-size: $font-size-normal;
+            font-weight: $font-weight-bold;
+            line-height: 1.5;
+            text-align: center;
+            margin-top: $spacer;
+            padding: 0 $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-medium;
+                margin-top: $spacer * 1.5;
+                padding: 0;
+            }
+        }

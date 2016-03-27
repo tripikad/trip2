@@ -1,0 +1,48 @@
+.c-user-location {
+
+    @include color-modifiers-and(background);
+
+    position: absolute;
+    display: none;
+    height: $spacer * 3;
+    width: $spacer * 3;
+    border-radius: 50%;
+
+    @include respond-to(tablet) {
+
+        display: block;
+    }
+}
+
+    .c-user-location__icon {
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+
+        svg {
+
+            fill: $color-white;
+            height: $spacer * 1.75;
+            width: $spacer * 1.75;
+        }
+    }
+
+    .c-user-location__info {
+
+        position: absolute;
+        top: -$spacer * 4;
+        left: 50%;
+        display: none;
+        transform: translateX(-50%);
+
+        .c-user-location:hover & {
+
+            display: block;
+        }
+    }

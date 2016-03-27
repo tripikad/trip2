@@ -5,7 +5,16 @@ return [
     'index' => [
 
         'with' => ['images'],
-        'latest' => 'end_at',
+        'orderBy' => [
+            'field' => 'end_at',
+            'order' => 'desc',
+        ],
+        'expire' => [
+            'field' => 'end_at',
+            'daysFrom' => 'end_at',
+            'daysTo' => -7,
+            'type' => 'datetime',
+        ],
         'paginate' => 24,
     ],
 

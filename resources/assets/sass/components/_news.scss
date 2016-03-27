@@ -2,14 +2,24 @@
 
     margin-bottom: $spacer * 2;
 
-    @include respond-to(tablet) {
+    @include respond-to(desktop) {
 
         margin-bottom: $spacer * 4;
     }
 
     &.m-smaller {
 
-        display: flex;
+        margin-bottom: $spacer;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 2;
+        }
+
+        @include respond-to(desktop) {
+
+            @include clearfix;
+        }
     }
 }
 
@@ -19,65 +29,57 @@
         overflow: hidden;
         display: block;
         height: $spacer * 16;
-        margin-bottom: $spacer * 2;
+        margin-bottom: $spacer;
+        background-size: cover;
+        background-position: center center;
 
-        .c-news.m-small & {
+        @include respond-to(tablet) {
 
-            height: $spacer * 12;
+            margin-bottom: $spacer * 2;
         }
 
         .c-news.m-smaller & {
 
-            flex: 0 1 $spacer * 12;
             height: $spacer * 7.5;
+
+            @include respond-to(desktop) {
+
+                width: $spacer * 12;
+                margin-bottom: 0;
+                float: left;
+            }
         }
     }
 
-        .c-news__image {
+    .c-news__content {
 
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            display: block;
-            max-width: 120%;
-            height: auto;
-            transform: translate(-50%, -50%);
+        .m-smaller & {
+
+            @include respond-to(desktop) {
+
+                margin-left: $spacer * 14;
+            }
         }
+    }
 
     .c-news__title {
 
         @include font-smoothing;
 
-        font-size: $font-size-large;
+        font-size: $font-size-medium;
         font-weight: $font-weight-bold;
-        line-height: 1.15;
-        margin-bottom: $spacer * 2;
+        line-height: 1.35;
+        margin-bottom: $spacer / 2;
 
         @include respond-to(tablet) {
 
             font-size: $font-size-larger;
-        }
-
-        .c-news.m-small & {
-
-            font-size: $font-size-medium;
-
-            @include respond-to(tablet) {
-
-                font-size: $font-size-large;
-            }
+            line-height: 1.15;
         }
 
         .c-news.m-smaller & {
 
             font-size: $font-size-normal;
-            flex: 2;
-            padding: 0 $spacer * 1.5;
-
-            @include respond-to(tablet) {
-
-                font-size: $font-size-medium;
-            }
         }
     }
 
@@ -94,29 +96,6 @@
 
     .c-news__meta {
 
-        color: $color-text-neutral-dark;
+        color: $color-text-gray;
         font-size: $font-size-small;
-        position: relative;
-
-        &:after {
-
-            content: '';
-            position: absolute;
-            top: 50%;
-            display: block;
-            width: 100%;
-            height: 2px;
-            margin-top: -2px;
-            background: $color-fill-neutral;
-        }
     }
-
-        .c-news__meta-date {
-
-            position: relative;
-            z-index: 1;
-            display: inline-block;
-            padding: 0 $spacer 0 0;
-            margin: 0;
-            background: $color-white;
-        }

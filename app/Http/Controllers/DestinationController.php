@@ -89,7 +89,7 @@ class DestinationController extends Controller
                 $feature_item->take($types[$type]['take']);
             }
 
-            $features[$type]['contents'] = $feature_item->get();
+            $features[$type]['contents'] = $feature_item->with('images')->get();
         }
 
         $previous_destination = Destination::
@@ -101,7 +101,7 @@ class DestinationController extends Controller
             ->where('parent_id', $destination->parent_id)
             ->orderBy('name', 'desc')
             ->take(1)
-            ->union(
+            ->unionAll(
                 Destination::where(DB::raw('CONCAT(`name`, `id`)'), '>', function ($query) use ($id) {
                     $query->select(DB::raw('CONCAT(`name`, `id`)'))
                         ->from('destinations')
@@ -122,7 +122,7 @@ class DestinationController extends Controller
             ->where('parent_id', $destination->parent_id)
             ->orderBy('name', 'asc')
             ->take(1)
-            ->union(
+            ->unionAll(
                 Destination::where(DB::raw('CONCAT(`name`, `id`)'), '<', function ($query) use ($id) {
                     $query->select(DB::raw('CONCAT(`name`, `id`)'))
                         ->from('destinations')
@@ -134,15 +134,28 @@ class DestinationController extends Controller
             )
             ->first();
 
-        $parent_destination = $destination->parent()->first();
+        /*
+         * Baum bug fix.
+         * Baum always tries to find result from database.
+         *
+         * Ex. WHERE id = NULL.
+         */
+        if ($destination->parent_id) {
+            $parent_destination = $destination->parent()->first();
+        } else {
+            $parent_destination = null;
+        }
 
-        if (! $destination->parent()) {
+        if (! $parent_destination) {
             $root_destination = $destination;
         } else {
             $root_destination = $destination->getRoot();
         }
 
-        $popular_destinations = $root_destination->getPopular()->sortByDesc('interestTotal')->take(4);
+        $popular_destinations = $root_destination
+            ->getPopular()
+            ->sortByDesc('interestTotal')
+            ->take(4);
 
         return response()->view('pages.destination.show', [
             'destination' => $destination,

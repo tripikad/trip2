@@ -30,6 +30,81 @@
 
 <div class="r-destination">
 
+    <div class="r-destination__extra m-yellow">
+
+        @if (\Auth::user())
+
+            @include('component.destination.extra', [
+                'items' => [
+                    [
+                        'icon' => (count($destination->usersHaveBeen()->where('user_id', \Auth::user()->id))
+                            ?
+                                'icon-pin-filled'
+                            :
+                                'icon-pin'
+                        ),
+                        'title' => $destination->usersHaveBeen()->count(),
+                        'modifiers' => (count($destination->usersHaveBeen()->where('user_id', \Auth::user()->id))
+                            ?
+                                'm-active'
+                            :
+                                ''
+                        ),
+                        'text' => (count($destination->usersHaveBeen()->where('user_id', \Auth::user()->id))
+                            ?
+                                trans('destination.show.user.button.havenotbeen')
+                            :
+                                trans('destination.show.user.button.havebeen')
+                        ),
+                        'route' => route('flag.toggle', ['destination', $destination, 'havebeen'])
+                    ],
+                    [
+                        'icon' => (count($destination->usersWantsToGo()->where('user_id', \Auth::user()->id))
+                            ?
+                                'icon-star-filled'
+                            :
+                                'icon-star'
+                        ),
+                        'title' => $destination->usersWantsToGo()->count(),
+                        'modifiers' => (count($destination->usersWantsToGo()->where('user_id', \Auth::user()->id))
+                            ?
+                                'm-active'
+                            :
+                                ''
+                        ),
+                        'text' => (count($destination->usersWantsToGo()->where('user_id', \Auth::user()->id))
+                            ?
+                                trans('destination.show.user.button.dontwanttogo')
+                            :
+                                trans('destination.show.user.button.wanttogo')
+                        ),
+                        'route' => route('flag.toggle', ['destination', $destination, 'wantstogo'])
+                    ]
+                ]
+            ])
+
+        @else
+
+            @include('component.destination.extra', [
+                'items' => [
+                    [
+                        'icon' => 'icon-pin',
+                        'title' => $destination->usersHaveBeen()->count(),
+                        'text' => 'Have been there',
+                        'route' => ''
+                    ],
+                    [
+                        'icon' => 'icon-star',
+                        'title' => $destination->usersWantsToGo()->count(),
+                        'text' => 'Want to go there',
+                        'route' => ''
+                    ]
+                ]
+            ])
+
+        @endif
+    </div>
+
     <div class="r-destination__masthead">
 
         @include('component.masthead', [
@@ -44,7 +119,6 @@
                         \App\Image::getRandom()
                 )
         ])
-
     </div>
 
     <div class="r-destination__about m-yellow">
@@ -65,9 +139,8 @@
                         @include('component.link', [
                             'modifiers' => 'm-tiny',
                             'title' => trans('destination.show.link.view.all'),
-                            'route' => route('content.show', ['flights'])
+                            'route' => route('content.index', ['flights'])
                         ])
-
                     </div>
 
                     @foreach ($features['flights']['contents'] as $flight)
@@ -95,90 +168,40 @@
 
                     <div class="c-columns__item">
 
-                        @include('component.destination.info',[
-                            'modifiers' => 'm-yellow',
-                            'definitions' => [
-                                [
-                                    'term' => trans('destination.show.user.havebeen.title'),
-                                    'definition' => $destination->usersHaveBeen()->count()
-                                ],
-                            ]
-                        ])
+
 
                     </div>
 
                     <div class="c-columns__item">
 
-                        @include('component.destination.info',[
-                            'modifiers' => 'm-yellow',
-                            'definitions' => [
-                                [
-                                    'term' => trans('destination.show.user.wantstogo.title'),
-                                    'definition' => $destination->usersWantsToGo()->count()
-                                ],
-                            ]
-                        ])
+
 
                     </div>
-
-                    @if (\Auth::user())
-
-                        <ul class="c-button-group">
-
-                            <li class="c-button-group__item m-green">
-
-                                @include('component.button',[
-                                    'modifiers' => 'm-small',
-                                    'title' => (count($destination->usersHaveBeen()->where('user_id', \Auth::user()->id))
-                                        ?
-                                            trans('destination.show.user.button.havenotbeen')
-                                        :
-                                            trans('destination.show.user.button.havebeen')
-                                    ),
-                                    'route' => route('flag.toggle', ['destination', $destination, 'havebeen'])
-                                ])
-
-                            </li>
-
-                            <li class="c-button-group__item m-red">
-
-                                @include('component.button',[
-                                    'modifiers' => 'm-secondary m-small',
-                                    'title' => (count($destination->usersWantsToGo()->where('user_id', \Auth::user()->id))
-                                        ?
-                                            trans('destination.show.user.button.dontwanttogo')
-                                        :
-                                            trans('destination.show.user.button.wanttogo')
-                                    ),
-                                    'route' => route('flag.toggle', ['destination', $destination, 'wantstogo'])
-                                ])
-
-                            </li>
-
-                        </ul>
-
-                    @endif
-
                 </div>
-
             </div>
 
             <div class="r-destination__about-map">
 
                 @include('component.map', [
+                    'modifiers' => 'm-destination',
                     'map_top' => '53%',
                     'map_left' => '50%'
                 ])
-
             </div>
-
         </div>
-
     </div>
 
     <div class="r-destination__content">
 
+    @if (isset($features['flights2']) && count($features['flights2']['contents']))
+
+        <div class="r-destination__content-wrap m-padding">
+
+    @else
+
         <div class="r-destination__content-wrap">
+
+    @endif
 
             @if ((isset($popular_destinations) && count($popular_destinations)) || (isset($features['forum_posts']) && count($features['forum_posts']['contents'])))
 
@@ -187,6 +210,7 @@
                     <div class="r-destination__content-about-column m-first">
 
                         @include('component.promo', [
+                            'modifiers' => 'm-sidebar-small',
                             'route' => '#',
                             'image' => \App\Image::getRandom()
                         ])
@@ -197,13 +221,22 @@
 
                         @if (isset($features['forum_posts']) && count($features['forum_posts']['contents']))
 
-                            <div class="r-destination__content-title">
+                            <div class="r-destination__content-title m-flex">
 
                                 @include('component.title', [
                                     'modifiers' => 'm-yellow',
                                     'title' => trans('destination.show.forum.title')
                                 ])
 
+                                <div class="r-destination__content-title-link">
+
+                                    @include('component.link', [
+                                        'modifiers' => 'm-icon m-small',
+                                        'title' => $root_destination->name .' foorum',
+                                        'route' => '#',
+                                        'icon' => 'icon-arrow-right'
+                                    ])
+                                </div>
                             </div>
 
                             @include('component.content.forum.list', [
@@ -214,7 +247,11 @@
                                         'route' => route('content.show', [$forum->type, $forum]),
                                         'profile' => [
                                             'modifiers' => 'm-mini',
-                                            'image' => $forum->user->imagePreset()
+                                            'image' => $forum->user->imagePreset(),
+                                            'letter'=> [
+                                                'modifiers' => 'm-red',
+                                                'text' => 'J'
+                                            ],
                                         ],
                                         'badge' => [
                                             'modifiers' => 'm-inverted',
@@ -274,14 +311,104 @@
 
                     <div class="r-destination__gallery-wrap">
 
+                        <div class="r-destination__gallery-title">
+
+                            <div class="r-destination__gallery-title-wrap">
+
+                                @include('component.title', [
+                                    'modifiers' => 'm-yellow',
+                                    'title' => 'Viimati lisatud pildid'
+                                ])
+                            </div>
+                        </div>
+
+                        {{--
+
                         @include('component.gallery', [
+                            'modal' => [
+                                'modifiers' => 'm-yellow',
+                            ],
                             'items' => $features['photos']['contents']->transform(function($photo) {
                                 return [
                                     'image' => $photo->imagePreset(),
                                     'route' => route('content.show', [$photo->type, $photo]),
-                                    'alt' => $photo->title
+                                    'alt' => $photo->title,
                                 ];
                             })
+                        ])
+
+                        --}}
+
+                        @include('component.gallery', [
+                            'modal' => [
+                                'modifiers' => 'm-yellow',
+                            ],
+                            'items' => [
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => 'Random name or title',
+                                    'tags' => [
+                                        [
+                                            'title' => 'Malta',
+                                            'modifiers' => 'm-orange',
+                                            'route' => '#'
+                                        ],
+                                        [
+                                            'title' => 'Europe',
+                                            'modifiers' => 'm-red',
+                                            'route' => '#'
+                                        ],
+                                        [
+                                            'title' => 'Suusapuhkus',
+                                            'modifiers' => 'm-gray',
+                                            'route' => '#'
+                                        ]
+                                    ]
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                    'tags' => [
+                                        [
+                                            'title' => 'Valetta',
+                                            'modifiers' => 'm-blue',
+                                            'route' => '#'
+                                        ]
+                                    ]
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => 'Random longer name or very long title and something else which is long',
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                ],
+                                [
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'alt' => '',
+                                ],
+                            ]
                         ])
 
                     </div>
@@ -296,165 +423,331 @@
 
                     <div class="r-destination__content-news-column m-first">
 
-                        @if (isset($features['news']) && count($features['news']['contents']))
-
-                            <div class="r-destination__content-title">
-
-                                @include('component.title', [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => trans('destination.show.news.title')
-                                ])
-
-                            </div>
-
-                            @include('component.list', [
-                                'modifiers' => 'm-large',
-                                'items' => $features['news']['contents']->transform(function($new) {
-                                    return [
-                                        'title' => $new->title,
-                                        'route' => route('content.show', [$new->type, $new]),
-                                        'text' => view('component.date.short', [
-                                            'date' => $new->created_at
-                                        ])
-                                    ];
-                                })
-                            ])
-
-                        @else
-
-                            <p>&nbsp;</p>
-
-                        @endif
-
-                    </div>
-
-                    <div class="r-destination__content-news-column m-last">
-
-                        @if (isset($features['blog_posts']) && count($features['blog_posts']['contents']))
-
-                            <div class="r-destination__content-title">
-
-                                @include('component.title', [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => trans('frontpage.index.travelletter.title')
-                                ])
-
-                            </div>
-
-                            @foreach($features['blog_posts']['contents'] as $blog)
-
-                                @include('component.blog', [
-                                    'title' => $blog->title,
-                                    'route' => route('content.show', [$blog->type, $blog]),
-                                    'image' => $blog->imagePreset(),
-                                    'profile' => [
-                                        'route' => route('user.show', [$blog->user]),
-                                        'title' => $blog->user->name,
-                                        'image' => $blog->user->imagePreset()
-                                    ]
-                                ])
-
-                            @endforeach
-
-                        @else
-
-                            <p>&nbsp;</p>
-
-                        @endif
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            @if (isset($features['travel_mates']) && count($features['travel_mates']['contents']))
-
-                <div class="r-destination__content-travel-mates">
-
-                    <div class="r-destination__content-travel-mates-wrap">
+                    @if (isset($features['news']) && count($features['news']['contents']))
 
                         <div class="r-destination__content-title">
 
                             @include('component.title', [
-                                'title' => trans('frontpage.index.travelmate.title'),
-                                'modifiers' => 'm-yellow'
+                                'modifiers' => 'm-yellow',
+                                'title' => trans('destination.show.news.title')
+                            ])
+                        </div>
+
+                        <div class="r-destination__content-news-block">
+
+                            <div class="c-columns m-2-cols m-space">
+
+                                <div class="c-columns__item">
+
+                                    @include('component.news', [
+                                        'title' => 'Emirates kompab piire – lennukisse mahutatakse 615 reisijat',
+                                        'modifiers' => 'm-smaller',
+                                        'route' => '#',
+                                        'date' => '',
+                                        'image' => \App\Image::getRandom()
+                                    ])
+                                </div>
+
+                                <div class="c-columns__item">
+
+                                    @include('component.news', [
+                                        'title' => 'Tuhande saare järv Hiinas',
+                                        'modifiers' => 'm-smaller',
+                                        'route' => '#',
+                                        'date' => '',
+                                        'image' => \App\Image::getRandom()
+                                    ])
+                                </div>
+
+                                <div class="c-columns__item">
+
+                                    @include('component.news', [
+                                        'title' => 'EasyJet esitles uusi tehnikat täis vorme',
+                                        'modifiers' => 'm-smaller',
+                                        'route' => '#',
+                                        'date' => '',
+                                        'image' => \App\Image::getRandom()
+                                    ])
+                                </div>
+
+                                <div class="c-columns__item">
+
+                                    @include('component.news', [
+                                        'title' => 'Egiptuse turismist - natuke laiemalt',
+                                        'modifiers' => 'm-smaller',
+                                        'route' => '#',
+                                        'date' => '',
+                                        'image' => \App\Image::getRandom()
+                                    ])
+                                </div>
+                            </div>
+                        </div>
+
+                    @endif
+
+                        <div class="r-block m-mobile-hide">
+
+                            @include('component.promo', [
+                                'modifiers' => 'm-body',
+                                'route' => '#',
+                                'image' => \App\Image::getRandom()
+                            ])
+                        </div>
+
+                        <div class="r-destination__content-title">
+
+                            @include('component.title', [
+                                'modifiers' => 'm-yellow',
+                                'title' => 'Reisikirjad'
+                            ])
+                        </div>
+
+                        <div class="c-columns m-2-cols m-space">
+
+                            <div class="c-columns__item">
+
+                                @include('component.blog', [
+                                    'modifiers' => 'm-mobile-margin',
+                                    'title' => 'Minu Malta – jutustusi kuuajaliselt ringreisilt',
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'profile' => [
+                                        'route' => '#',
+                                        'title' => 'Mari Maasikas',
+                                        'image' => \App\Image::getRandom()
+                                    ]
+                                ])
+                            </div>
+
+                            <div class="c-columns__item">
+
+                                @include('component.blog', [
+                                    'title' => 'Minu Malta – jutustusi kuuajaliselt ringreisilt',
+                                    'image' => \App\Image::getRandom(),
+                                    'route' => '#',
+                                    'profile' => [
+                                        'route' => '#',
+                                        'title' => 'Mari Maasikas',
+                                        'image' => \App\Image::getRandom()
+                                    ]
+                                ])
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="r-destination__content-news-column m-last">
+
+                        <div class="r-block">
+
+                            @include('component.promo', [
+                                'modifiers' => 'm-sidebar-large',
+                                'route' => '#',
+                                'image' => \App\Image::getRandom()
+                            ])
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (isset($features['flights2']) && count($features['flights2']['contents']))
+
+    <div class="r-destination__flights">
+
+        <div class="r-destination__flights-wrap">
+
+            <div class="c-columns m-3-cols">
+
+                <div class="c-columns__item">
+
+                    @include('component.destination', [
+                        'modifiers' => 'm-purple',
+                        'title' => 'Tai',
+                        'title_route' => '/destination/335',
+                        'subtitle' => 'Aasia',
+                        'subtitle_route' => '/destination/2'
+                    ])
+
+                    @include('component.card', [
+                        'modifiers' => 'm-purple',
+                        'route' => '',
+                        'title' => 'Edasi-tagasi Riiast või Helsingist Bangkoki al 350 €',
+                        'image' => \App\Image::getRandom(),
+                    ])
+                </div>
+
+                <div class="c-columns__item">
+
+                    @include('component.destination', [
+                        'modifiers' => 'm-yellow',
+                        'title' => 'Saksamaa',
+                        'title_route' => '/destination/326',
+                        'subtitle' => 'Euroopa',
+                        'subtitle_route' => '/destination/1'
+                    ])
+
+                    @include('component.card', [
+                        'modifiers' => 'm-yellow',
+                        'route' => '',
+                        'title' => 'Kevadpuhkus Amsterdamis al 121 €',
+                        'image' => \App\Image::getRandom(),
+                    ])
+                </div>
+
+                <div class="c-columns__item">
+
+                    @include('component.destination', [
+                        'modifiers' => 'm-red',
+                        'title' => 'New York',
+                        'title_route' => '/destination/451',
+                        'subtitle' => 'Põhja-Ameerika',
+                        'subtitle_route' => '/destination/5'
+                    ])
+
+                    @include('component.card', [
+                        'modifiers' => 'm-red',
+                        'route' => '',
+                        'title' => 'Edasi-tagasi lennud New Yorki al 449 €',
+                        'image' => \App\Image::getRandom(),
+                    ])
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @endif
+
+    @if (isset($features['travel_mates']) && count($features['travel_mates']['contents']))
+
+        <div class="r-destination__travelmates">
+
+            <div class="r-destination__travelmates-wrap">
+
+                <div class="r-destination__content-title">
+
+                    @include('component.title', [
+                        'title' => trans('frontpage.index.travelmate.title'),
+                        'modifiers' => 'm-yellow'
+                    ])
+
+                </div>
+
+                @include('component.travelmate.list', [
+                    'modifiers' => 'm-3col',
+                    'items' => [
+                        [
+                            'modifiers' => 'm-small',
+                            'image' =>  \App\Image::getRandom(),
+                            'letter'=> [
+                                'modifiers' => 'm-red',
+                                'text' => 'J'
+                            ],
+                            'name' => 'Charles Darwin',
+                            'route' => '#',
+                            'sex_and_age' => 'N,28',
+                            'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
+                            'tags' => [
+                                [
+                                    'modifiers' => 'm-yellow',
+                                    'title' => 'India'
+                                ],
+                                [
+                                    'modifiers' => 'm-purple',
+                                    'title' => 'Delhi'
+                                ]
+                            ]
+                        ],
+                        [
+                            'modifiers' => 'm-small',
+                            'image' =>  \App\Image::getRandom(),
+                            'letter'=> [
+                                'modifiers' => 'm-red',
+                                'text' => 'J'
+                            ],
+                            'name' => 'Epptriin ',
+                            'route' => '#',
+                            'sex_and_age' => 'N,22',
+                            'title' => 'Suusareis Austriasse veebruar-märts 2016',
+                            'tags' => [
+                                [
+                                    'modifiers' => 'm-red',
+                                    'title' => 'Austria'
+                                ],
+                                [
+                                    'modifiers' => 'm-gray',
+                                    'title' => 'Suusareis'
+                                ]
+                            ]
+                        ],
+                        [
+                            'modifiers' => 'm-small',
+                            'image' =>  \App\Image::getRandom(),
+                            'letter'=> [
+                                'modifiers' => 'm-red',
+                                'text' => 'J'
+                            ],
+                            'name' => 'Silka ',
+                            'route' => '#',
+                            'sex_and_age' => 'M,32',
+                            'title' => 'Puerto Rico',
+                            'tags' => [
+                                [
+                                    'modifiers' => 'm-green',
+                                    'title' => 'Puerto Rico'
+                                ],
+                                [
+                                    'modifiers' => 'm-gray',
+                                    'title' => 'Puhkusereis'
+                                ]
+                            ]
+                        ]
+                    ]
+                ])
+
+                {{--
+
+                1. NEW updated travelmate list
+
+                <div class="c-columns m-{{ count($features['travel_mates']['contents']) }}-cols">
+
+                    @foreach($features['travel_mates']['contents'] as $travel_mate)
+
+                        <div class="c-columns__item">
+
+                            @include('component.profile', [
+                                'title' => $travel_mate->user->name,
+                                'age' => $travel_mate->user->age,
+                                'interests' => $travel_mate->title,
+                                'route' => route('content.show', [$travel_mate->type, $travel_mate]),
+                                'image' => $travel_mate->user->imagePreset()
                             ])
 
                         </div>
 
-                        <div class="c-columns m-{{ count($features['travel_mates']['contents']) }}-cols">
-
-                            @foreach($features['travel_mates']['contents'] as $travel_mate)
-
-                                <div class="c-columns__item">
-
-                                    @include('component.profile', [
-                                        'title' => $travel_mate->user->name,
-                                        'age' => $travel_mate->user->age,
-                                        'interests' => $travel_mate->title,
-                                        'route' => route('content.show', [$travel_mate->type, $travel_mate]),
-                                        'image' => $travel_mate->user->imagePreset()
-                                    ])
-
-                                </div>
-
-                            @endforeach
-
-                        </div>
-
-                    </div>
+                    @endforeach
 
                 </div>
 
-            @endif
+                --}}
 
-            @if (isset($features['flights2']) && count($features['flights2']['contents']))
-
-                <div class="r-destination__content-flights">
-
-                    <div class="r-destination__content-flights-wrap">
-
-                        <div class="c-columns m-3-cols">
-
-                            <div class="c-columns__item">
-
-                                @foreach ($features['flights2']['contents'] as $flight)
-
-                                    @include('component.card', [
-                                        'route' => route('content.show', [$flight->type, $flight]),
-                                        'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
-                                        'image' => $flight->imagePreset()
-                                    ])
-
-                                @endforeach
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            @endif
+            </div>
 
         </div>
 
-    </div>
+    @endif
 
     <div class="r-destination__footer-promo">
 
         <div class="r-destination__footer-promo-wrap">
 
             @include('component.promo', [
+                'modifiers' => 'm-footer',
                 'route' => '#',
                 'image' => \App\Image::getRandom()
             ])
         </div>
-
     </div>
-
 </div>
 
 @stop

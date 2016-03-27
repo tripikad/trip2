@@ -8,7 +8,7 @@ class Message extends Model
 {
     protected $fillable = ['user_id_from', 'user_id_to', 'body'];
 
-    protected $appends = ['title'];
+    protected $appends = ['title', 'body_filtered'];
 
     public function fromUser()
     {
@@ -33,5 +33,10 @@ class Message extends Model
     public function getBodyAttribute($value)
     {
         return $value;
+    }
+
+    public function getBodyFilteredAttribute()
+    {
+        return Main::getBodyFilteredAttribute($this);
     }
 }

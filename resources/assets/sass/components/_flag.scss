@@ -5,42 +5,87 @@
     display: flex;
 }
 
-        .c-flag__item {
+    .c-flag__item {
 
-            @include color-modifiers(background);
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        display: flex;
+        margin-left: $spacer * 1.5;
 
-            border-radius: 50%;
+        &:first-child {
+
+            margin-left: 0;
+        }
+    }
+
+        .c-flag__item-link {
+
+            color: $color-text-gray;
+            text-decoration: none;
+            width: 100%;
+            height: $spacer * 2.5;
             align-items: center;
             justify-content: center;
             text-align: center;
             display: flex;
-            width: 30px;
-            height: 30px;
-            margin-left: $spacer;
 
-            &:first-child {
+            &:hover {
 
-                margin-left: 0;
+                @include color-modifiers-and(color);
+            }
+
+            &.m-active {
+
+                @include color-modifiers-and(color);
             }
         }
+
+            .c-flag__item-icon {
+
+                width: $spacer * 2;
+                height: $spacer * 2;
+                flex: 0 0 $spacer * 2;
+                margin-right: $spacer / 2;
+                display: none;
+
+                @include respond-to(tablet) {
+
+                    width: $spacer * 2.5;
+                    height: $spacer * 2.5;
+                    flex: 0 0 $spacer * 2.5;
+                }
+
+                &.m-active {
+
+                    display: block;
+                }
+
+                &.m-filled {
+
+                    svg {
+
+                        @include color-modifiers-and(fill);
+                    }
+                }
+
+                svg {
+
+                    fill: $color-text-gray;
+
+                    .c-flag__item-link:hover & {
+
+                        @include color-modifiers-and(fill);
+                    }
+                }
+            }
 
             .c-flag__item-text {
 
                 @include font-smoothing;
 
-                font-size: $font-size-medium;
+                font-size: $font-size-small;
                 font-family: $font-primary;
                 font-weight: $font-weight-medium;
-                color: $color-fill-neutral;
+                flex: 1;
             }
-
-                .c-flag__item-link {
-
-                    color: $color-white;
-                    text-decoration: none;
-
-                    &:hover {
-
-                        color: $color-fill-neutral;
-                    }
-                }

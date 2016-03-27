@@ -53,8 +53,6 @@ class Content extends Model
         if ($this->destinations->first()) {
             return $this->destinations->first()->parent()->first();
         }
-
-        return;
     }
 
     public function followersEmails()
@@ -68,23 +66,22 @@ class Content extends Model
 
     public function imagePath()
     {
-        return $this->image ? '/images/'.$this->type.'/small/'.$this->image : 'http://trip.ee/files/pictures/picture_none.png';
+        $image = null;
+
+        if ($this->image) {
+            $image = config('imagepresets.presets.small.path').$this->image;
+        }
+
+        if (! file_exists(public_path().$image)) {
+            $image = config('imagepresets.image.none');
+        }
+
+        return $image;
     }
 
     public function getBodyFilteredAttribute()
     {
-        $pattern = '/\[\[([0-9]+)\]\]/';
-        $filteredBody = $this->body;
-
-        if (preg_match_all($pattern, $filteredBody, $matches)) {
-            foreach ($matches[1] as $match) {
-                if ($image = \App\Image::find($match)) {
-                    $filteredBody = str_replace("[[$image->id]]", '<img src="'.$image->preset('medium').'" />', $filteredBody);
-                }
-            }
-        }
-
-        return nl2br($filteredBody);
+        return Main::getBodyFilteredAttribute($this);
     }
 
     public function images()
@@ -94,11 +91,9 @@ class Content extends Model
 
     public function imagePreset($preset = 'small')
     {
-        if ($image = $this->images()->first()) {
-            return $image->preset($preset);
+        if ($this->images->count() > 0) {
+            return $this->images->first()->preset($preset);
         }
-
-        return;
     }
 
     public function getImageIdAttribute()
@@ -106,8 +101,6 @@ class Content extends Model
         if ($image = $this->images()->first()) {
             return '[['.$image->id.']]';
         }
-
-        return;
     }
 
     public function getActions()

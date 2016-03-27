@@ -9,4 +9,4 @@ code: |
 
 --}}
 
-@if(isset($date)) {{ $date->format('d. m Y') }}  @endif
+{{ isset($date) ? $date->format('d. m Y') : '' }}

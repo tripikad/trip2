@@ -1,0 +1,100 @@
+.r-auth {
+
+    position: relative;
+    overflow: hidden;
+    background: $color-fill-neutral-light;
+}
+
+    .r-auth__map {
+
+        position: absolute;
+        z-index: 1;
+        top: -$spacer * 5;
+        left: -$spacer * 16;
+        width: $spacer * 80;
+        height: $spacer * 51;
+    }
+
+    .r-auth__header {
+
+        position: relative;
+        z-index: 10;
+    }
+
+        .r-auth__masthead {}
+
+    .r-auth__notifications {
+
+        @include wrap('narrow');
+
+        position: relative;
+        z-index: 10;
+        margin-bottom: $spacer * 2;
+    }
+
+    .r-auth__content {
+
+        @include wrap('narrow');
+
+        position: relative;
+        z-index: 10;
+        margin: 0 auto;
+        margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            width: span(14 of 24);
+            padding-bottom: $spacer * 8;
+        }
+
+        @include respond-to(desktop) {
+
+            width: span(12 of 24);
+        }
+
+        &.m-wide {
+
+            @include respond-to(tablet) {
+
+                width: span(16 of 24);
+                padding-bottom: $spacer * 8;
+            }
+
+            @include respond-to(desktop) {
+
+                width: span(14 of 24);
+            }
+        }
+    }
+
+        .r-auth__content-inner {
+
+            background: $color-white;
+
+            padding: $spacer * 1.5 $spacer * 1.5 $spacer / 12;
+
+            @include respond-to(tablet) {
+
+                padding: $spacer * 2.5 $spacer * 3.5 $spacer / 2;
+            }
+
+            @include respond-to(desktop) {
+
+                padding: $spacer * 4 $spacer * 6 $spacer * 2;
+            }
+        }
+
+            .r-auth__content-title {
+
+                margin-bottom: $spacer;
+
+                @include respond-to(tablet) {
+
+                    margin-bottom: $spacer * 2;
+                }
+            }
+
+        .r-auth__content-footer {
+
+            padding-top: $spacer * 2;
+        }

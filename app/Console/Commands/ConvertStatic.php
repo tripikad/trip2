@@ -28,7 +28,7 @@ class ConvertStatic extends ConvertBase
 
         foreach ($nodes as $node) {
             $node->uid = 1;
-            $this->convertNode($node, '\App\Content', 'static');
+            $this->convertNode($node, '\App\Content', 'static', 'content.show');
             $this->output->progressAdvance();
         }
 

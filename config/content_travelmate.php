@@ -5,7 +5,16 @@ return [
     'index' => [
 
         'with' => ['user', 'destinations', 'topics'],
-        'latest' => 'created_at',
+        'orderBy' => [
+            'field' => 'created_at',
+            'order' => 'desc',
+        ],
+        'expire' => [
+            'field' => 'start_at',
+            'daysFrom' => 'start_at',
+            'daysTo' => -30,
+            'type' => 'datetime',
+        ],
         'paginate' => 24,
     ],
 

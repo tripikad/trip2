@@ -86,6 +86,39 @@ $colors: ('yellow' $brand-yellow $brand-yellow-dark),
     }
 }
 
+@mixin color-modifiers-opacity($property: background) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        &.m-#{$name} {
+
+            #{$property}: rgba($color, 0.8);
+        }
+    }
+}
+
+@mixin color-modifiers-dark-opacity($property: background) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        &.m-#{$name} {
+
+            #{$property}: rgba($color-dark, 0.8);
+        }
+    }
+}
+
+@mixin color-modifiers-dark-and-opacity($property: background) {
+
+    @each $name, $color, $color-dark in $colors {
+
+        .m-#{$name} & {
+
+            #{$property}: rgba($color-dark, 0.8);
+        }
+    }
+}
+
 
 // Neutrals
 
@@ -101,7 +134,8 @@ $color-fill-neutral-dark: #d1dae0;
 $color-fill-neutral-darker: #979da1;
 $color-fill-neutral-darkest: #707477;
 
-$color-text-black: #444;
+$color-text-black: #444444;
+$color-text-gray: #999999;
 
 $color-text-neutral-lightest: $color-fill-neutral-lightest;
 $color-text-neutral-light: $color-fill-neutral-light;
@@ -142,3 +176,8 @@ $color-fill-error-dark: $brand-red-dark;
 // New colors
 
 $transparent: transparent;
+
+// Social colors
+
+$color-facebook: #3b5998;
+$color-google: #dd4b39;

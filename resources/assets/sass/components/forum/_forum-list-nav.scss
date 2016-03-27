@@ -5,10 +5,41 @@
 
     .c-forum-list-nav__item {
 
-        margin-bottom: $spacer * 2;
+        margin-bottom: $spacer;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 2;
+        }
 
         &.m-button {
 
             margin-bottom: $spacer;
         }
     }
+
+        .c-forum-list-nav__item-link {
+
+            color: $color-text-link;
+            font-size: $font-size-medium;
+            font-weight: $font-weight-bold;
+            text-decoration: none;
+
+            @include respond-to(desktop) {
+
+                font-size: $font-size-large;
+            }
+        }
+
+            .c-forum-list-nav__item-icon {
+
+                display: inline-block;
+                width: $spacer * 1.5;
+                height: $spacer * 1.5;
+                margin-left: $spacer * 0.75;
+
+                svg {
+
+                    fill: $color-fill-neutral;
+                }
+            }

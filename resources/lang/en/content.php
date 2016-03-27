@@ -4,7 +4,13 @@ return [
 
     // General
 
+    'post.updated.at' => 'Edited: :updated_at',
+
+    'comments.title' => 'Comments',
+
     'row.text.comment' => 'Latest comment :updated_at',
+
+    'action.add.comment' => 'Add comment',
 
     'action.edit.title' => 'Edit',
 
@@ -20,9 +26,18 @@ return [
     'action.status.1.info' => 'The post :title has been published',
     'action.status.0.info' => 'The post :title has been unpublished',
 
+    'action.message.send' => 'Send private message',
+
+    'action.register' => 'Join with Trip.ee',
+    'action.more.about' => 'Read more about Trip.ee',
+    'action.facebook.text' => 'Trip.ee\'s Facebook',
+    'action.twitter.text' => 'Trip.ee\'s Twitter',
+    'action.read.more' => 'Read more',
+
     'field.image.title' => 'Select image',
     'field.image.selected.title' => 'New image selected',
 
+    'index.filter.title' => 'Filter',
     'index.filter.field.destination.title' => 'All',
     'index.filter.field.topic.title' => 'All',
     'index.filter.submit.title' => 'Filter',
@@ -120,7 +135,13 @@ return [
 
     // Travelmate
 
-    'travelmate.index.title' => 'Travelmates',
+    'travelmate.index.title' => 'Travel mates',
+
+    'travelmate.view.all.offers' => 'View all offers',
+
+    'travelmate.post.added' => 'Post added :created_at',
+
+    'travelmate.activity' => 'Viimase :days päeva jooksul lisatud :posts_count kuulutust',
 
     'travelmate.create.title' => 'Add listing',
 
@@ -141,6 +162,11 @@ return [
 
     'travelmate.edit.field.duration.title' => 'Trip duration',
     'travelmate.edit.field.duration.help' => '',
+
+    'travelmate.filter.text' => 'Kui ei leia sobivat kaaslast, siis ehk aitab sind filter.',
+
+    'travelmate.description.title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
+    'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.',
 
     // Forum
 

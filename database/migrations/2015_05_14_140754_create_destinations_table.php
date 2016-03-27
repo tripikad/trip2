@@ -14,8 +14,8 @@ class CreateDestinationsTable extends Migration
     {
         Schema::create('destinations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->integer('parent_id')->nullable();
+            $table->string('name')->index();
+            $table->integer('parent_id')->nullable()->index();
 
             $table->integer('lft')->nullable();
             $table->integer('rgt')->nullable();

@@ -167,10 +167,12 @@ class UserController extends Controller
             $user->images()->delete();
             $user->images()->create(['filename' => $filename]);
 
-            return redirect()
-                ->route('user.edit', [$user])
-                ->withInput()
-                ->with('status', trans('user.update.image.status'));
+            if (! $request->ajax()) {
+                return redirect()
+                    ->route('user.edit', [$user])
+                    ->withInput()
+                    ->with('status', trans('user.update.image.status'));
+            }
         }
 
         $this->validate($request, [
@@ -182,6 +184,8 @@ class UserController extends Controller
             'contact_twitter' => 'url',
             'contact_instagram' => 'url',
             'contact_homepage' => 'url',
+            'birthyear' => 'sometimes|digits:4',
+            'gender' => 'required',
         ]);
 
         $fields = [
@@ -194,9 +198,11 @@ class UserController extends Controller
 
         $user->update(array_merge($request->all(), $fields));
 
-        return redirect()
-            ->route('user.show', [$user])
-            ->with('info', trans('user.update.info'));
+        if (! $request->ajax()) {
+            return redirect()
+                ->route('user.show', [$user])
+                ->with('info', trans('user.update.info'));
+        }
     }
 
     public function destinationsIndex($id)

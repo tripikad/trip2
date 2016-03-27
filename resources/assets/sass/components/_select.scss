@@ -1,0 +1,129 @@
+.selectize-control {
+
+    position: relative;
+}
+
+.selectize-input {
+
+    color: $color-text-black;
+    font-family: $font-primary;
+    font-size: $font-size-normal;
+    font-weight: $font-weight-normal;
+    line-height: 1.2;
+    width: 100%;
+    min-height: $spacer * 4 + 4;
+    padding: $spacer $spacer $spacer / 2;
+    background: $color-white;
+    border: 1px solid $color-fill-neutral;
+    border-radius: 3px;
+    appearance: none;
+
+    &.has-items {
+
+        overflow: hidden;
+        padding-top: $spacer - 2;
+    }
+
+    > input {
+
+        border: none;
+        padding-top: $spacer / 2;
+        min-width: 200px;
+    }
+
+    &.has-items {
+
+        > input {
+
+            display: inline-block;
+            padding: 0;
+            min-height: 0;
+            max-height: none;
+            max-width: 100%;
+            text-indent: 0;
+            border: 0 none;
+            background: none;
+            line-height: inherit;
+            user-select: auto;
+
+            &:focus {
+
+                outline: none;
+            }
+
+            &::-ms-clear {
+
+                display: none;
+            }
+        }
+    }
+
+    &.not-full {
+
+        .item {
+
+            padding-left: $spacer * 1.5;
+        }
+    }
+
+    .item {
+
+        color: $color-text-neutral-darkest;
+        font-size: $font-size-small;
+        font-weight: $font-weight-normal;
+        float: left;
+        position: relative;
+        margin-right: $spacer / 2;
+        margin-bottom: $spacer / 2;
+        padding: $spacer - 4 $spacer / 2 $spacer / 3 $spacer / 2;
+        background-color: $color-fill-neutral-light;
+        border: 1px solid $color-fill-neutral;
+        border-radius: 3px;
+        cursor: default;
+
+        .remove {
+
+            color: $color-text-black;
+            font-size: $font-size-small;
+            font-weight: $font-weight-normal;
+            text-decoration: none;
+            position: absolute;
+            left: $spacer / 2;
+            top: 50%;
+            display: block;
+            margin-top: -$spacer / 2;
+            cursor: pointer;
+        }
+    }
+}
+
+.selectize-dropdown {
+
+    position: absolute;
+    z-index: 10;
+    border: 1px solid $color-fill-neutral;
+    background-color: $color-fill-neutral;
+    margin: -1px 0 0 0;
+    border-top: 0 none;
+}
+
+.selectize-dropdown-content {
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: $spacer * 26;
+
+    .option {
+
+        font-size: $font-size-small;
+        font-weight: $font-weight-normal;
+        padding: $spacer;
+        user-select: none;
+        cursor: pointer;
+
+        &:nth-child(even) {
+
+            background: $color-fill-neutral-light;
+        }
+    }
+}

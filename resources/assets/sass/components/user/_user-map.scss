@@ -1,0 +1,41 @@
+.c-user-map {
+
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+    .c-user-map__map {
+
+        width: 100%;
+        display: block;
+
+        svg {
+
+            @include color-modifiers-dark-and(fill);
+
+            display: block;
+            width: 100%;
+            height: auto;
+
+            @include respond-to(tablet) {
+
+                min-height: $spacer * 48;
+            }
+
+            @include respond-to(desktop) {
+
+                min-height: $spacer * 53;
+            }
+
+            @include respond-to(desktop-medium) {
+
+                min-height: $spacer * 56;
+            }
+
+            @include respond-to(desktop-large) {
+
+                min-height: $spacer * 60;
+            }
+        }
+    }

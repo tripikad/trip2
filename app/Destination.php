@@ -35,6 +35,7 @@ class Destination extends Baum\Node
 
             return Destination::find($this->id)
                 ->descendantsAndSelf()
+                ->with('flags')
                 ->get()
                 ->transform(function ($item) {
                     $item->attributes['usersHaveBeen'] = $item->usersHaveBeen()->count();
@@ -51,16 +52,11 @@ class Destination extends Baum\Node
     {
         return Cache::rememberForever('destination.names', function () {
 
-            return Destination::select('name', 'id')
-                ->lists('name', 'id')
-                ->transform(function ($item, $key) {
-
-                    $ancestors = Destination::find($key)->ancestorsAndSelf()->lists('name')->toArray();
-
-                    return implode(' › ', $ancestors);
-
-                })
-                ->sort();
+            return collect(Main::collectionAsSelect(
+                [],
+                ' › ',
+                Destination::select('name', 'id', 'parent_id')->get()
+            ))->sort();
 
         });
     }
