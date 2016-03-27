@@ -95,6 +95,8 @@ class ContentController extends Controller
             $viewVariables = $this->getTravelMateIndex();
         } elseif ($type == 'forum' || $type == 'expat' || $type == 'buysell') {
             $viewVariables = $this->getForumIndex();
+        } elseif ($type == 'flight') {
+            $viewVariables = $this->getFlightIndex($contents, $topics);
         }
 
         $viewVariables['contents'] = $contents;
