@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\ContentTraits;
 
-use App\Content;
-
 trait Flight
 {
     public function getFlightIndex($contents, $topics)
