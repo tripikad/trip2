@@ -58,7 +58,15 @@ code: |
     $i = 0;
 ?>
 
+@if (isset($columns))
+
+<div class="c-gallery m-{{$columns}}-cols">
+
+@else
+
 <div class="c-gallery m-8-cols">
+
+@endif
 
     <ul class="c-gallery__list">
 

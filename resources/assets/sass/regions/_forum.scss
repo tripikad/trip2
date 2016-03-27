@@ -56,8 +56,11 @@
 
         &.m-small {
 
-            padding-left: span(2 of 24);
-            padding-right: span(2 of 24);
+            @include respond-to(tablet) {
+
+                padding-left: span(2 of 24);
+                padding-right: span(2 of 24);
+            }
         }
     }
 
@@ -82,11 +85,12 @@
 
         .r-forum__wrap.m-small & {
 
-            padding-top: $spacer * 4;
+            padding-top: $spacer * 2;
 
             @include respond-to(tablet) {
 
                 @include span(10 of 20);
+
                 padding-top: $spacer * 5;
             }
         }
@@ -113,11 +117,12 @@
 
         .r-forum__wrap.m-small & {
 
-            padding-top: $spacer * 4;
+            padding-top: 0;
 
             @include respond-to(tablet) {
 
                 @include span(8 of 20 at 3);
+
                 padding-top: $spacer * 5;
             }
         }
@@ -140,7 +145,7 @@
 
                 &.m-first {
 
-                    padding-bottom: 48px;
+                    padding-bottom: 0;
 
                     @include respond-to(tablet) {
 
@@ -161,8 +166,14 @@
 
     .r-forum__footer-promo {
 
-        background: $color-fill-neutral-light;
-        margin-bottom: -$spacer * 4;
+        display: none;
+
+        @include respond-to(tablet) {
+
+            display: block;
+            margin-bottom: -$spacer * 4;
+            background: $color-fill-neutral-light;
+        }
 
         &.m-white {
 

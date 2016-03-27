@@ -29,7 +29,6 @@
     </div>
 
     <div class="r-forum__wrap">
-
         <div class="r-forum__content">
 
             @include('component.content.forum.post', [
@@ -215,7 +214,7 @@
 
             @endif
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
                     'modifiers' => 'm-sidebar-small',

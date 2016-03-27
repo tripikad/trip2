@@ -1,0 +1,58 @@
+.c-blog-sponsored {
+
+    @include clearfix;
+
+    margin-bottom: $spacer * 2;
+
+    @include respond-to(tablet) {
+
+        margin-bottom: 0;
+    }
+}
+
+    .c-blog-sponsored__image-link {
+
+        display: block;
+        width: 100%;
+        height: $spacer * 8;
+        margin-bottom: $spacer;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        @include respond-to(tablet) {
+
+            float: left;
+            display: block;
+            width: $spacer * 12;
+            height: $spacer * 8;
+            margin-bottom: 0;
+        }
+    }
+
+    .c-blog-sponsored__content {
+
+        @include respond-to(tablet) {
+
+            margin-left: $spacer * 14;
+            display: block;
+        }
+    }
+
+        .c-blog-sponsored__title {
+
+            font-size: $font-size-medium;
+            font-weight: $font-weight-bold;
+            line-height: 1.25;
+        }
+
+            .c-blog-sponsored__title-link {
+
+                color: $color-text-black;
+                text-decoration: none;
+                display: block;
+
+                &:hover {
+
+                    text-decoration: underline;
+                }
+            }

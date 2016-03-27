@@ -45,17 +45,20 @@
     </div>
 
     <div class="c-form__group m-small-margin">
+
+        {!! Form::submit(
+                trans('content.index.filter.submit.title'),
+                ['class' => 'c-button m-block'])
+        !!}
+        </div>
+
+     <div class="c-form__group m-right m-no-margin">
         <a href="{{ route('content.index', [$type]) }}" class="c-link">
 
             {{ trans('content.index.filter.reset.title') }}
 
         </a>
     </div>
-
-    {!! Form::submit(
-            trans('content.index.filter.submit.title'),
-            ['class' => 'c-button m-block'])
-    !!}
 
 </div>
 

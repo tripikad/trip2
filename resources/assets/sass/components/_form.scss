@@ -86,7 +86,7 @@
 
         color: $color-text-black;
         font-family: $font-primary;
-        font-size: $font-size-medium;
+        font-size: $font-size-normal;
         font-weight: $font-weight-normal;
         width: 100%;
         height: $spacer * 4 + 4;
@@ -95,10 +95,20 @@
         border: 1px solid $color-fill-neutral;
         border-radius: 3px;
 
+        &.m-icon {
+
+            padding-left: $spacer * 3;
+        }
+
         &.m-medium {
 
-            font-size: $font-size-medium;
+            font-size: $font-size-normal;
             height: $spacer * 3.5;
+
+            &.m-icon {
+
+                padding-left: $spacer * 3;
+            }
         }
 
         &.m-small {
@@ -239,12 +249,21 @@
 
         color: $color-text-neutral-darker;
         font-size: $font-size-normal;
+        line-height: 1.25;
         display: block;
         margin-bottom: $spacer;
 
         @include respond-to(tablet) {
 
             margin-bottom: $spacer * 2;
+        }
+
+        &.m-small-margin {
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer;
+            }
         }
     }
 
@@ -275,5 +294,10 @@
             display: block;
             height: 100%;
             width: 100%;
+
+             .c-form__group.m-error & {
+
+                fill: $color-fill-error;
+             }
         }
     }

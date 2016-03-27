@@ -39,7 +39,7 @@
         position: relative;
         z-index: 10;
         margin: 0 auto;
-        padding-bottom: $spacer * 4;
+        padding-bottom: $spacer * 2;
 
         @include respond-to(tablet) {
 
