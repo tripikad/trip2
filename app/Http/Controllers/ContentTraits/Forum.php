@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\ContentTraits;
 
-use Illuminate\Http\Request;
-use Auth;
 use App\Content;
 
-trait Forum {
+trait Forum
+{
     public function getForumIndex()
     {
         $viewVariables['flights'] = Content::whereType('flight')

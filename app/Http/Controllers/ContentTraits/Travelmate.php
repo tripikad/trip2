@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\ContentTraits;
 
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Auth;
 use App\Content;
 
-trait Travelmate {
+trait Travelmate
+{
     public function getTravelMateIndex()
     {
         $content = Content::whereIn('id', [1534, 25151])

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\ContentTraits;
 
-use Illuminate\Http\Request;
-use Auth;
-
-trait Blog {
+trait Blog
+{
     public function blog_profile()
     {
         $viewVariables = [];

@@ -11,7 +11,7 @@ use App\Topic;
 use App\Image;
 use App\Main;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+// Traits
 use App\Http\Controllers\ContentTraits\Blog;
 use App\Http\Controllers\ContentTraits\Flight;
 use App\Http\Controllers\ContentTraits\Forum;
