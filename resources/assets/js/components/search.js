@@ -19,15 +19,11 @@ $(document).on('click', function (e) {
 /* Search tabs */
 
 // $('.js-search-tab').on('click', function(){
-
 //     var data = $(this).data('tab');
-
 //     $('.js-search-tab').removeClass('m-active');
 //     $('.js-search-container').removeClass('m-active');
-
 //     $(this).addClass('m-active');
 //     $('.js-search-container[data-container='+ data +']').addClass('m-active');
-
 //     return false;
 // });
 
