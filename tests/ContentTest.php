@@ -34,25 +34,46 @@ class ContentTest extends TestCase
         $regular_user = factory(App\User::class)->create();
 
         foreach ($this->publicContentTypes as $type) {
-            $this->actingAs($regular_user)
-                ->visit("content/$type")
-                ->click(trans("content.$type.create.title"))
-                ->seePageIs("content/$type/create")
-                ->type("Hello title $type", 'title')
-                ->type("Hello body $type", 'body')
-                ->press(trans('content.create.submit.title'))
-                ->see(trans('content.store.status.1.info', [
-                    'title' => "Hello title $type",
-                ]))
-                ->see("Hello title $type")
-                ->see($regular_user->name)
-                ->seeInDatabase('contents', [
-                    'user_id' => $regular_user->id,
-                    'title' => "Hello title $type",
-                    'body' => "Hello body $type",
-                    'type' => $type,
-                    'status' => 1,
-                ]);
+            if ($type == 'forum' || $type == 'internal' || $type == 'expat' || $type == 'buysell') {
+                $this->actingAs($regular_user)
+                    ->visit("content/$type")
+                    ->click(trans("content.$type.create.title"))
+                    ->seePageIs("content/$type/create")
+                    ->type("Hello title $type", 'title')
+                    ->type("Hello body $type", 'body')
+                    ->press(trans('content.create.submit.title'))
+                    ->see(trans('content.store.status.1.info', [
+                        'title' => "Hello title $type",
+                    ]))
+                    ->see("Hello title $type")
+                    ->seeInDatabase('contents', [
+                        'user_id' => $regular_user->id,
+                        'title' => "Hello title $type",
+                        'body' => "Hello body $type",
+                        'type' => $type,
+                        'status' => 1,
+                    ]);
+            } else {
+                $this->actingAs($regular_user)
+                    ->visit("content/$type")
+                    ->click(trans("content.$type.create.title"))
+                    ->seePageIs("content/$type/create")
+                    ->type("Hello title $type", 'title')
+                    ->type("Hello body $type", 'body')
+                    ->press(trans('content.create.submit.title'))
+                    ->see(trans('content.store.status.1.info', [
+                        'title' => "Hello title $type",
+                    ]))
+                    ->see("Hello title $type")
+                    ->see($regular_user->name)
+                    ->seeInDatabase('contents', [
+                        'user_id' => $regular_user->id,
+                        'title' => "Hello title $type",
+                        'body' => "Hello body $type",
+                        'type' => $type,
+                        'status' => 1,
+                    ]);
+            }
 
             $content = Content::whereTitle("Hello title $type")->first();
 
