@@ -53,10 +53,6 @@
                 'route' => '#',
                 'title' => 'Aafrika'
             ],
-        ]
-    ])
-    @include('component.tags', [
-        'items' => [
             [
                 'modifiers' => 'm-green',
                 'route' => '#',
