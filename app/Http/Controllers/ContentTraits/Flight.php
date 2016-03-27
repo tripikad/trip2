@@ -8,10 +8,20 @@ trait Flight
     {
         $viewVariables = [];
 
+        $topicsLimit = 12;
         $uniqueTopics = [];
+
         foreach ($contents as $content) {
+            if (count($uniqueTopics) == $topicsLimit) {
+                break;
+            }
+
             if (count($content->topics)) {
                 foreach ($content->topics as $topic) {
+                    if (count($uniqueTopics) == $topicsLimit) {
+                        break;
+                    }
+
                     if (! in_array($topic->name, $uniqueTopics)) {
                         $uniqueTopics[] = [
                             'name' => $topic->name,
@@ -23,7 +33,7 @@ trait Flight
         }
 
         if (! count($uniqueTopics)) {
-            $topics = $topics->take(12);
+            $topics = $topics->take($topicsLimit);
 
             if (count($topics)) {
                 foreach ($topics as $id => $name) {
