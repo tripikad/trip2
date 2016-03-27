@@ -22,7 +22,7 @@ code: |
 
                     @include('component.button', [
                         'modifiers' => $item['modifiers'],
-                        'title' => $item['title'],
+                        'title' => (trans($item['title']) ? trans($item['title']) : $item['title']),
                         'route' => $item['route']
                     ])
 
@@ -34,7 +34,7 @@ code: |
 
                     @if(isset($item['icon']))
 
-                        <a href="{{ $item['route'] }}" class="c-forum-list-nav__item-link">{{ $item['title'] }}
+                        <a href="{{ $item['route'] }}" class="c-forum-list-nav__item-link">{{ (trans($item['title']) ? trans($item['title']) : $item['title']) }}
                             <span class="c-forum-list-nav__item-icon">
                                 @include('component.svg.sprite', [
                                     'name' => $item['icon']
@@ -44,7 +44,7 @@ code: |
 
                     @else
 
-                        <a href="{{ $item['route'] }}" class="c-forum-list-nav__item-link">{{ $item['title'] }}</a>
+                        <a href="{{ $item['route'] }}" class="c-forum-list-nav__item-link">{{ (trans($item['title']) ? trans($item['title']) : $item['title']) }}</a>
 
                     @endif
 
