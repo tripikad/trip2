@@ -16,12 +16,10 @@
         
     </div>
 
-<<<<<<< HEAD
 </form>
 
-    <div class="c-search__results" id="search_results_div">
+<div class="c-search__results" id="search_results_div">
 
-=======
     <div class="c-search__results">
 
         <div class="c-search__results-wrap">
@@ -140,6 +138,6 @@
                 'icon' => 'icon-arrow-right'
             ])
         </footer>
->>>>>>> master
+
     </div>
 </div>
