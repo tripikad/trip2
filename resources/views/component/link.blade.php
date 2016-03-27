@@ -1,8 +1,4 @@
-@if (isset($route) && $route != '')
-    <a href="{{ $route }}" class="c-link {{ $modifiers or '' }}">
-@else
-    <span class="c-link {{ $modifiers or '' }}">
-@endif
+<a href="{{ $route }}" class="c-link {{ $modifiers or '' }}">
     {{ $title }}
     @if(isset($icon))
         <span class="c-link__icon">
@@ -11,9 +7,4 @@
             ])
         </span>
     @endif
-
-@if (isset($route) && $route != '')
-    </a>
-@else
-    </span>
-@endif
+</a>

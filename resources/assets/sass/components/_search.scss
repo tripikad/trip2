@@ -88,11 +88,6 @@
 
                 fill: $color-text-gray;
             }
-
-            .c-search.m-inverted & {
-
-                fill: $color-fill-neutral-darker;
-            }
         }
 
         @each $name, $color, $color-dark in $colors {
@@ -155,18 +150,6 @@
             &::-webkit-input-placeholder {
 
                 color: $color-white;
-            }
-        }
-
-        .c-search.m-inverted & {
-
-            background: $color-white;
-            border: 1px solid $color-fill-neutral;
-            color: $color-text-black;
-
-            &::-webkit-input-placeholder {
-
-                color: $color-text-black;
             }
         }
 

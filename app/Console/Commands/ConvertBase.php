@@ -510,9 +510,9 @@ class ConvertBase extends Command
             $model->registration_token = null;
 
             // if ($notifyMessage = $this->getUserNotifyMessage($user->uid)) {
-
+            //
             //    $model->notify_message = 1;
-
+            //
             // }
 
             $model->save();

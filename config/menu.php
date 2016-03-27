@@ -99,50 +99,29 @@ return [
     ],
 
     'forum' => [
-        [
-            'title' => 'menu.forum.forum',
+        'forum' => [
             'route' => '/content/forum',
-            'modifiers' => 'm-large m-block m-icon',
-            'icon' => 'icon-arrow-right',
         ],
-        [
-            'title' => 'menu.forum.expat',
+        'expat' => [
             'route' => '/content/expat',
-            'modifiers' => 'm-large m-block m-icon',
-            'icon' => 'icon-arrow-right',
         ],
-        [
-            'title' => 'menu.forum.buysell',
+        'buysell' => [
             'route' => '/content/buysell',
-            'modifiers' => 'm-large m-block m-icon',
-            'icon' => 'icon-arrow-right',
         ],
     ],
 
     'admin' => [
-        [
-            'title' => 'menu.admin.internal',
+        'internal' => [
             'route' => '/content/internal',
-            'modifiers' => 'm-large m-block m-icon',
-            'icon' => 'icon-arrow-right',
         ],
-        [
-            'title' => 'menu.admin.sponsored',
+        'sponsored' => [
             'route' => '/content/sponsored',
-            'modifiers' => 'm-large m-block m-icon',
-            'icon' => 'icon-arrow-right',
         ],
-        [
-            'title' => 'menu.admin.image',
+        'image' => [
             'route' => '/admin/image',
-            'modifiers' => 'm-large m-block m-icon',
-            'icon' => 'icon-arrow-right',
         ],
-        [
-            'title' => 'menu.admin.content',
+        'content' => [
             'route' => '/admin/content',
-            'modifiers' => 'm-large m-block m-icon',
-            'icon' => 'icon-arrow-right',
         ],
     ],
 

@@ -49,7 +49,7 @@ modifiers:
 
             @foreach ($links as $link)
 
-                @if (isset($link['title']) && $link['title']!='')
+                @if (isset($link['title']) && $link['title']!='' && isset($link['route']) && $link['route']!='')
 
                     @include('component.link', [
                         'modifiers' => $link['modifiers'],
