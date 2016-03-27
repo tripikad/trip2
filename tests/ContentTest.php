@@ -33,7 +33,7 @@ class ContentTest extends TestCase
     {
         $regular_user = factory(App\User::class)->create();
 
-        foreach ($this->publicContentTypes as $type)
+        foreach ($this->publicContentTypes as $type) {
             $this->actingAs($regular_user)
                 ->visit("content/$type")
                 ->click(trans("content.$type.create.title"))
