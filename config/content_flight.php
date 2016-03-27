@@ -4,7 +4,7 @@ return [
 
     'index' => [
 
-        'with' => ['images'],
+        'with' => ['images', 'topics'],
         'orderBy' => [
             'field' => 'end_at',
             'order' => 'desc',
@@ -12,7 +12,7 @@ return [
         'expire' => [
             'field' => 'end_at',
             'daysFrom' => 'end_at',
-            'daysTo' => -7,
+            'daysTo' => -700000000,
             'type' => 'datetime',
         ],
         'paginate' => 24,
