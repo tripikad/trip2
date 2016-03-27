@@ -82,9 +82,9 @@
                     'collection' => $results
             ])
 
-            @else
-                {{ trans('search.results.noresults') }}
-            @endif
+        @else
+           {{ trans('search.results.noresults') }}
+        @endif
         </div>
 
         <div class="r-flights__sidebar" style="padding-top:50px;">
