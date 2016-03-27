@@ -32,6 +32,6 @@ return [
             'order' => 'name',
         ],
     ],
-    'ajax_results' => 8
+    'ajax_results' => 8,
 
 ];

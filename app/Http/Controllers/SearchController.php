@@ -26,7 +26,7 @@ class SearchController extends Controller
                 $tabs[$type]['cnt'] = $counts[$type];
                 $tabs[$type]['modifier'] = $counts[$type];
                 $tabs[$type]['title'] = trans('search.tab.'.$type);
-                $tabs[$type]['route'] = $counts[$type]?'/search/'.$type.'?q='.$q : '#';
+                $tabs[$type]['route'] = $counts[$type] ? '/search/'.$type.'?q='.$q : '#';
             }
 
             $active_search = $search_type ? $search_type : 'forum';
@@ -61,24 +61,26 @@ class SearchController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.search.header'));
     }
 
-    private function modifyForumResults($results) {
+    private function modifyForumResults($results)
+    {
         foreach ($results as $key => $value) {
-            $results[$key]['short_body_text'] = (strlen($value->body) > 300)?substr($value->body, 0, 300).'...':$value->body;
-            $results[$key]['route'] = route('content.show', [$value->type, $value]);  
+            $results[$key]['short_body_text'] = (strlen($value->body) > 300) ? substr($value->body, 0, 300).'...' : $value->body;
+            $results[$key]['route'] = route('content.show', [$value->type, $value]);
             $results[$key]['comments_count'] = count($value->comments);
             $results[$key]['user_img'] = $value->user->imagePreset();
         }
     }
 
-    private function modifyUserResults($results) {
-        
+    private function modifyUserResults($results)
+    {
     }
 
-    private function modifyBlogResults($results) {
-        
+    private function modifyBlogResults($results)
+    {
     }
 
-    private function modifyFlightResults($results) {
+    private function modifyFlightResults($results)
+    {
         foreach ($results as $key => $value) {
             $results[$key]['route'] = route('content.show', [$value->type, $value]);
             $results[$key]['content_img'] = $value->imagePreset('small_square');
@@ -86,30 +88,33 @@ class SearchController extends Controller
         }
     }
 
-    private function modifyNewsResults($results) {
+    private function modifyNewsResults($results)
+    {
         foreach ($results as $key => $value) {
-            $results[$key]['short_body_text'] = (strlen($value->body) > 300)?substr($value->body, 0, 300).'...':$value->body;
-            $results[$key]['route'] = route('content.show', [$value->type, $value]);  
+            $results[$key]['short_body_text'] = (strlen($value->body) > 300) ? substr($value->body, 0, 300).'...' : $value->body;
+            $results[$key]['route'] = route('content.show', [$value->type, $value]);
             $results[$key]['comments_count'] = count($value->comments);
             $results[$key]['content_img'] = $value->imagePreset('small_square');
         }
     }
 
-    private function modifyDestinationResults($results) {
+    private function modifyDestinationResults($results)
+    {
         $destinations = Destination::getNames();
-        foreach ($results as $key => $value) {  
+        foreach ($results as $key => $value) {
             $results[$key]['path'] = $destinations[$value->id];
         }
     }
 
-    protected function modifyResultsByType($type, &$results) {
+    protected function modifyResultsByType($type, &$results)
+    {
         switch ($type) {
-            case 'forum': $this->modifyForumResults($results);break;
-            case 'destination': $this->modifyDestinationResults($results);break;
-            case 'user': $this->modifyUserResults($results);break;
-            case 'blog': $this->modifyBlogResults($results);break;
-            case 'news': $this->modifyNewsResults($results);break;
-            case 'flight': $this->modifyFlightResults($results);break;
+            case 'forum' : $this->modifyForumResults($results); break;
+            case 'destination': $this->modifyDestinationResults($results); break;
+            case 'user': $this->modifyUserResults($results); break;
+            case 'blog': $this->modifyBlogResults($results); break;
+            case 'news': $this->modifyNewsResults($results); break;
+            case 'flight': $this->modifyFlightResults($results); break;
             default:
                 throw new Exception('Can not modify search type results');
         }
@@ -127,7 +132,7 @@ class SearchController extends Controller
     protected function getTotalCount($q, $types = [])
     {
         $res = 0;
-        $types = $types?$types:array_keys(config('search.types'));
+        $types = $types ? $types : array_keys(config('search.types'));
         foreach ($types as $type) {
             $res += intval($this->getResultsCountByType($type, $q));
         }
@@ -180,16 +185,16 @@ class SearchController extends Controller
         $q = trim($request->input('q'));
 
         if ($q && ! empty($q)) {
-            $types = ['destination','flight','forum'];
+            $types = ['destination', 'flight', 'forum'];
             $total_cnt = $this->getTotalCount($q, $types);
             $remaining_cnt = config('search.ajax_results');
             foreach ($types as $type) {
-                if($remaining_cnt > 0) {
+                if ($remaining_cnt > 0) {
                     $builder = $this->getSearchBuilderByType($type, $q);
 
                     //active flight offers
-                    if($type == 'flight') {
-                        $builder->where('end_at','>=', Carbon::now());
+                    if ($type == 'flight') {
+                        $builder->where('end_at', '>=', Carbon::now());
                     }
 
                     $results[$type] = $builder->take($remaining_cnt)->get();
@@ -212,6 +217,5 @@ class SearchController extends Controller
 
         return response()
             ->view('component.searchblock', ['results' => $results, 'total_cnt' => $total_cnt, 'q' => $q]);
-    }        
-
-}            
+    }
+}
