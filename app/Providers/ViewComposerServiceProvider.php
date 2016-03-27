@@ -42,6 +42,5 @@ class ViewComposerServiceProvider extends ServiceProvider
 
     public function register()
     {
-        //
     }
 }
