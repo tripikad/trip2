@@ -2,17 +2,31 @@
 
     <div class="c-search__results-content">
 
+        <div class="c-search__results-wrap">
+
         @foreach($results as $type => $content)
 
             @if(isset($results[$type]) && $results[$type])
 
-                 @include('component.search.results.ajax.'.$type, [
-                            'content' => $results[$type]
-                        ]) 
+                @if($type == 'forum' && $header_search)
+
+                    @include('component.search.results.ajax.forum_small', [
+                                'content' => $results[$type]
+                            ])
+
+                @else
+
+                    @include('component.search.results.ajax.'.$type, [
+                                'content' => $results[$type]
+                            ])
+
+                @endif         
 
             @endif 
 
         @endforeach
+
+        </div>
 
     </div>
 

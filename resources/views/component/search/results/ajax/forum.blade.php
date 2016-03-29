@@ -18,7 +18,7 @@
                             <img src="{{$row->user_img}}" alt="" class="c-profile__image">
                             <div class="c-profile__badge">
                                 <div class="c-badge m-inverted">
-                                    <span class="c-badge__count">3</span>
+                                    <span class="c-badge__count">{{$row->comments_count}}</span>
                                 </div>
                             </div>
                         </div>

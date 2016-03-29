@@ -61,13 +61,16 @@ class SearchController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.search.header'));
     }
 
-    private function modifyForumResults($results)
+    private function modifyForumResults($results, $ajax)
     {
-        foreach ($results as $key => $value) {
-            $results[$key]['short_body_text'] = (strlen($value->body) > 300) ? substr($value->body, 0, 300).'...' : $value->body;
-            $results[$key]['route'] = route('content.show', [$value->type, $value]);
-            $results[$key]['comments_count'] = count($value->comments);
-            $results[$key]['user_img'] = $value->user->imagePreset();
+        foreach ($results as $key => $item) {
+            if(!$ajax) {
+                $results[$key]['short_body_text'] = (strlen($item->body) > 300) ? substr($item->body, 0, 300).'...' : $item->body;
+                $results[$key]['comments_count'] = count($item->comments);
+            }
+            
+            $results[$key]['route'] = route('content.show', [$item->type, $item]);
+            $results[$key]['user_img'] = $item->user->imagePreset();
         }
     }
 
@@ -79,42 +82,51 @@ class SearchController extends Controller
     {
     }
 
-    private function modifyFlightResults($results)
+    private function modifyFlightResults($results, $ajax)
     {
-        foreach ($results as $key => $value) {
-            $results[$key]['route'] = route('content.show', [$value->type, $value]);
-            $results[$key]['content_img'] = $value->imagePreset('small_square');
-            $results[$key]['destinations'] = $value->destinations;
+        foreach ($results as $key => $item) {
+            if(!$ajax) {
+                $results[$key]['content_img'] = $item->imagePreset('small_square');
+                $results[$key]['destinations'] = $item->destinations;
+            }
+                
+            $results[$key]['route'] = route('content.show', [$item->type, $item]);
+            
         }
     }
 
     private function modifyNewsResults($results)
     {
-        foreach ($results as $key => $value) {
-            $results[$key]['short_body_text'] = (strlen($value->body) > 300) ? substr($value->body, 0, 300).'...' : $value->body;
-            $results[$key]['route'] = route('content.show', [$value->type, $value]);
-            $results[$key]['comments_count'] = count($value->comments);
-            $results[$key]['content_img'] = $value->imagePreset('small_square');
+        foreach ($results as $key => $item) {
+            $results[$key]['short_body_text'] = (strlen($item->body) > 300) ? substr($item->body, 0, 300).'...' : $item->body;
+            $results[$key]['route'] = route('content.show', [$item->type, $item]);
+            $results[$key]['comments_count'] = count($item->comments);
+            $results[$key]['content_img'] = $item->imagePreset('small_square');
         }
     }
 
-    private function modifyDestinationResults($results)
+    private function modifyDestinationResults($results, $ajax)
     {
         $destinations = Destination::getNames();
-        foreach ($results as $key => $value) {
-            $results[$key]['path'] = $destinations[$value->id];
+        foreach ($results as $key => $item) {
+            $results[$key]['path'] = $destinations[$item->id];
+            $parent = $item->parent()->first();
+            $results[$key]['parent'] = $parent;
+
+            if($ajax)
+                $results[$key]['name'] = $parent?$item->name.' > '.$parent->name:$item->name; 
         }
     }
 
-    protected function modifyResultsByType($type, &$results)
+    protected function modifyResultsByType($type, &$results, $ajax = false)
     {
         switch ($type) {
-            case 'forum' : $this->modifyForumResults($results); break;
-            case 'destination': $this->modifyDestinationResults($results); break;
+            case 'forum' : $this->modifyForumResults($results, $ajax); break;
+            case 'destination': $this->modifyDestinationResults($results, $ajax); break;
             case 'user': $this->modifyUserResults($results); break;
             case 'blog': $this->modifyBlogResults($results); break;
             case 'news': $this->modifyNewsResults($results); break;
-            case 'flight': $this->modifyFlightResults($results); break;
+            case 'flight': $this->modifyFlightResults($results, $ajax); break;
             default:
                 throw new Exception('Can not modify search type results');
         }
@@ -183,6 +195,7 @@ class SearchController extends Controller
     public function ajaxsearch(Request $request)
     {
         $q = trim($request->input('q'));
+        $header_search = $request->input('header_search');
         $total_cnt = 0;
 
         if ($q && ! empty($q)) {
@@ -200,7 +213,7 @@ class SearchController extends Controller
 
                     $results[$type] = $builder->take($remaining_cnt)->get();
                     if (count($results[$type])) {
-                        $this->modifyResultsByType($type, $results[$type]);
+                        $this->modifyResultsByType($type, $results[$type], true);
                         if (count($results[$type]) == config('search.ajax_results')) {
                             break;
                         } else {
@@ -218,6 +231,6 @@ class SearchController extends Controller
             return null;  
 
         return response()
-            ->view('component.searchblock', ['results' => $results, 'total_cnt' => $total_cnt, 'q' => $q]);
+            ->view('component.searchblock', ['results' => $results, 'total_cnt' => $total_cnt, 'q' => $q, 'header_search' => $header_search]);
     }
 }
