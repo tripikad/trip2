@@ -110,7 +110,7 @@ return [
     'flight.index.title' => 'Lennupakkumised',
     'flight.index.field.price' => 'Alates :price:symbol',
     'flight.index.about.title' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
-    'flight.index.about.text' => 'Pakkumised võivad aeguda juba paari päevaga. Paremaks orienteerumiseks on vanemad pakkumised eri värvi.',
+    'flight.index.about.text' => 'Pakkumised võivad aeguda juba paari päevaga.',
     'flight.index.from' => 'al',
     'flight.no.results' => 'Hetkel pole ühtegi aktiivset lennupakkumist.',
     'flight.filter.no.results' => 'Sinu otsingukriteeriumitele vastavalt ei leitud hetkel ühtegi tulemust.',
