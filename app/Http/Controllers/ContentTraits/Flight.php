@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\ContentTraits;
 
-use App\Content;
 use App\Main;
 
 trait Flight
@@ -23,8 +22,7 @@ trait Flight
                 'type' => ['forum', 'buysell', 'expat'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' =>
-                    Main::getExpireData('buysell', 1) +
+                'whereBetween' => Main::getExpireData('buysell', 1) +
                     ['only' => 'buysell'],
             ],
         ];

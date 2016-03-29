@@ -9,7 +9,6 @@ use App\Content;
 use App\Destination;
 use App\Main;
 //use Illuminate\Support\Collection;
-use DB;
 
 class FrontpageController extends Controller
 {
@@ -45,8 +44,7 @@ class FrontpageController extends Controller
                 'type' => ['forum', 'buysell', 'expat'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' =>
-                    Main::getExpireData('buysell', 1) +
+                'whereBetween' => Main::getExpireData('buysell', 1) +
                     ['only' => 'buysell'],
             ],
             'news' => [

@@ -3,7 +3,6 @@
 namespace App;
 
 use Carbon\Carbon;
-use App\Content;
 
 class Main
 {
