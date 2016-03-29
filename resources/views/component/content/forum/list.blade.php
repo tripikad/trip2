@@ -1,10 +1,10 @@
-{{--
-
+<?php
+/*
 title: Forum list
 
 code: |
 
-    @include('component.content.forum.list', [
+    #include('component.content.forum.list', [
         'modifiers' => $modifiers,
         'items' => [
             [
@@ -61,8 +61,8 @@ code: |
 modifiers:
 
 - m-compact
-
---}}
+*/
+?>
 
 <ul class="c-forum-list {{ $modifiers or '' }}">
 

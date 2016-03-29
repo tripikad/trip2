@@ -84,7 +84,7 @@
 
                     @include('component.about', [
                         'modifiers' => 'm-wide',
-                        'title' => str_limit($content->first()->body_filtered, 120),
+                        'title' => trans('content.action.more.about.text'),
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
@@ -142,12 +142,6 @@
                             ],
                             [
                                 'type' => 'button',
-                                'title' => 'Otsi foorumist',
-                                'route' => '#',
-                                'modifiers' => 'm-secondary m-block m-shadow'
-                            ],
-                            [
-                                'type' => 'button',
                                 'title' => 'Alusta teemat',
                                 'route' => '#',
                                 'modifiers' => 'm-secondary m-block m-shadow'
@@ -166,41 +160,14 @@
                 --}}
 
                 @if (isset($forums) && count($forums) > 0)
-
                     <div class="r-home__forum-column m-last">
-                        @include('component.content.forum.list', [
-                            'items' => $forums->transform(function ($forum) {
-                                return [
-                                    'topic' => str_limit($forum->title, 50),
-                                    'route' => route('content.show', [$forum->type, $forum]),
-                                    'date' => view('component.date.relative', [
-                                        'date' => $forum->created_at
-                                    ]),
-                                    'profile' => [
-                                        'modifiers' => 'm-mini',
-                                        'image' => $forum->user->imagePreset(),
-                                        'letter' => [
-                                            'modifiers' => 'm-green m-small',
-                                            'text' => 'D'
-                                        ],
-                                    ],
-                                    'badge' => [
-                                        'modifiers' => 'm-inverted',
-                                        'count' => count($forum->comments)
-                                    ],
-                                    'tags' => $forum->topics->take(2)->transform(function ($topic) use ($forum) {
-                                        return [
-                                            'title' => $topic->name,
-                                            'modifiers' => 'm-gray',
-                                            'route' => route('content.index', [$forum->type]).'?topic='.$topic->id,
-                                        ];
-                                    })
-                                ];
-                            })
+                        @include('region.content.forum.list', [
+                            'items' => $forums,
+                            'tags' => [
+                                'take' => 2,
+                            ],
                         ])
-
                     </div>
-
                 @endif
 
             </div>
