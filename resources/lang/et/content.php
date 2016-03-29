@@ -28,11 +28,14 @@ return [
 
     'action.message.send' => 'Saada sõnum',
 
-    'action.register' => 'Liitu Trip.ee kogukonnaga',
+    'action.more.about.text' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+
+    'action.register' => 'Liitu Trip.ee-ga',
     'action.more.about' => 'Loe, mis on Trip.ee',
     'action.facebook.text' => 'Trip.ee Facebook',
     'action.twitter.text' => 'Trip.ee Twitter',
     'action.read.more' => 'Loe edasi',
+    'action.price.error' => 'Mis on veahind',
 
     'field.image.title' => 'Vali pilt',
     'field.image.selected.title' => 'Uus pilt on valitud',
@@ -106,6 +109,14 @@ return [
 
     'flight.index.title' => 'Lennupakkumised',
     'flight.index.field.price' => 'Alates :price:symbol',
+    'flight.index.about.title' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
+    'flight.index.about.text' => 'Pakkumised võivad aeguda juba paari päevaga.',
+    'flight.index.from' => 'al',
+    'flight.no.results' => 'Hetkel pole ühtegi aktiivset lennupakkumist.',
+    'flight.filter.no.results' => 'Sinu otsingukriteeriumitele vastavalt ei leitud hetkel ühtegi tulemust.',
+
+    'flight.action.previous' => 'Uuemad pakkumised',
+    'flight.action.next' => 'Vanemad pakkumised',
 
     'flight.create.title' => 'Lisa lennupakkumine',
 
@@ -175,7 +186,7 @@ return [
 
     'forum.filter.text' => 'Kui ei leia sobivat teemat, siis ehk aitab sind filter.',
 
-    'forum.index.title' => 'Üldine foorum',
+    'forum.index.title' => 'Üldfoorum',
     'forum.create.title' => 'Lisa uus teema',
 
     'forum.edit.field.title.title' => 'Pealkiri',

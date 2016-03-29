@@ -105,3 +105,33 @@ a {
 	color: $color-text-link;
 }
 
+.m-small-offset-top {
+
+    margin-top: $spacer;
+}
+
+.m-small-offset-bottom {
+
+    margin-bottom: $spacer;
+}
+
+.m-large-offset-top {
+
+    margin-top: $spacer * 2;
+
+    @include respond-to(tablet) {
+
+        margin-top: $spacer * 4;
+    }
+}
+
+.m-large-offset-bottom {
+
+    margin-bottom: $spacer * 2;
+
+    @include respond-to(tablet) {
+
+        margin-bottom: $spacer * 4;
+    }
+}
+

@@ -5,15 +5,7 @@
 @stop
 
 @section('content.one')
-
-    <div class="
-        @if (! $content->status)
-            utils-unpublished
-        @endif
-    ">
-
-        {!! $content->body_filtered !!}
-
-    </div>
+        
+    {!! $content->body_filtered !!}
 
 @stop

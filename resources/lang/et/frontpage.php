@@ -6,7 +6,7 @@ return [
     'index.search.destination.title' => 'Sisesta sihtkoht',
     'index.search.submit.title' => 'Mine',
 
-    'index.forum.general' => 'Üldine',
+    'index.forum.general' => 'Üldfoorum',
     'index.forum.buysell' => 'Ost-müük',
     'index.forum.expat' => 'Elu välismaal',
 

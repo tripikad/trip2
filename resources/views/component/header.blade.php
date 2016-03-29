@@ -154,7 +154,7 @@
         @endif
     </div>
 
-    @if(!Request::is('/') && (isset($hide) && !in_array('search', $hide)))
+    @if(!Request::is('/') && ((!isset($hide)) || (isset($hide) && !in_array('search', $hide))))
 
     @if (Request::path() != '/' && !Request::is('search*'))
     <div class="c-header__search js-header__search">
