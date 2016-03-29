@@ -183,6 +183,7 @@ class SearchController extends Controller
     public function ajaxsearch(Request $request)
     {
         $q = trim($request->input('q'));
+        $total_cnt = 0;
 
         if ($q && ! empty($q)) {
             $types = ['destination', 'flight', 'forum'];
@@ -210,10 +211,11 @@ class SearchController extends Controller
                     }
                 }
             }
-        } else {
-            $results = null;
-            $total_cnt = 0;
-        }
+        } 
+        else return null;
+
+        if($total_cnt == 0)
+            return null;  
 
         return response()
             ->view('component.searchblock', ['results' => $results, 'total_cnt' => $total_cnt, 'q' => $q]);
