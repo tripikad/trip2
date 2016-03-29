@@ -8,6 +8,7 @@ use Cache;
 use App\Content;
 use App\Destination;
 use App\Main;
+
 //use Illuminate\Support\Collection;
 
 class FrontpageController extends Controller

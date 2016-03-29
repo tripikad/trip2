@@ -64,11 +64,11 @@ class SearchController extends Controller
     private function modifyForumResults($results, $ajax)
     {
         foreach ($results as $key => $item) {
-            if(!$ajax) {
+            if (! $ajax) {
                 $results[$key]['short_body_text'] = (strlen($item->body) > 300) ? substr($item->body, 0, 300).'...' : $item->body;
                 $results[$key]['comments_count'] = count($item->comments);
             }
-            
+
             $results[$key]['route'] = route('content.show', [$item->type, $item]);
             $results[$key]['user_img'] = $item->user->imagePreset();
         }
@@ -85,13 +85,12 @@ class SearchController extends Controller
     private function modifyFlightResults($results, $ajax)
     {
         foreach ($results as $key => $item) {
-            if(!$ajax) {
+            if (! $ajax) {
                 $results[$key]['content_img'] = $item->imagePreset('small_square');
                 $results[$key]['destinations'] = $item->destinations;
             }
-                
+
             $results[$key]['route'] = route('content.show', [$item->type, $item]);
-            
         }
     }
 
@@ -113,15 +112,16 @@ class SearchController extends Controller
             $parent = $item->parent()->first();
             $results[$key]['parent'] = $parent;
 
-            if($ajax)
-                $results[$key]['name'] = $parent?$item->name.' > '.$parent->name:$item->name; 
+            if ($ajax) {
+                $results[$key]['name'] = $parent ? $item->name.' > '.$parent->name : $item->name;
+            }
         }
     }
 
     protected function modifyResultsByType($type, &$results, $ajax = false)
     {
         switch ($type) {
-            case 'forum' : $this->modifyForumResults($results, $ajax); break;
+            case 'forum': $this->modifyForumResults($results, $ajax); break;
             case 'destination': $this->modifyDestinationResults($results, $ajax); break;
             case 'user': $this->modifyUserResults($results); break;
             case 'blog': $this->modifyBlogResults($results); break;
@@ -224,11 +224,13 @@ class SearchController extends Controller
                     }
                 }
             }
-        } 
-        else return null;
+        } else {
+            return;
+        }
 
-        if($total_cnt == 0)
-            return null;  
+        if ($total_cnt == 0) {
+            return;
+        }
 
         return response()
             ->view('component.searchblock', ['results' => $results, 'total_cnt' => $total_cnt, 'q' => $q, 'header_search' => $header_search]);
