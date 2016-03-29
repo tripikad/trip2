@@ -33,46 +33,21 @@
 
         </div>
 
-        <div class="r-forum__wrap">
+        <div class="r-forum__wrap m-large-offset-bottom">
+            @if (isset($contents) && count($contents))
+                <div class="r-forum__content">
+                    @include('region.content.forum.list', [
+                        'items' => $contents,
+                        'tags' => [
+                            'take' => 2,
+                        ],
+                    ])
 
-            <div class="r-forum__content">
-
-                @include('component.content.forum.list', [
-                    'items' => $contents->transform(function ($forum) {
-                        return [
-                            'topic' => str_limit($forum->title, 50),
-                            'route' => route('content.show', [$forum->type, $forum]),
-                            'date' => view('component.date.relative', [
-                                'date' => $forum->created_at
-                            ]),
-                            'profile' => [
-                                'modifiers' => 'm-mini',
-                                'image' => $forum->user->imagePreset(),
-                                'letter' => [
-                                    'modifiers' => 'm-green m-small',
-                                    'text' => 'D'
-                                ],
-                            ],
-                            'badge' => [
-                                'modifiers' => 'm-inverted',
-                                'count' => count($forum->comments)
-                            ],
-                            'tags' => $forum->topics->take(2)->transform(function ($topic) use ($forum) {
-                                return [
-                                    'title' => $topic->name,
-                                    'modifiers' => 'm-gray',
-                                    'route' => route('content.index', [$forum->type]).'?topic='.$topic->id,
-                                ];
-                            })
-                        ];
-                    })
-                ])
-
-                @include('component.pagination.default', [
-                    'collection' => $contents
-                ])
-
-            </div>
+                    @include('component.pagination.default', [
+                        'collection' => $contents
+                    ])
+                </div>
+            @endif
 
             <div class="r-forum__sidebar">
 
@@ -89,12 +64,11 @@
                 </div>
 
                 <div class="r-block m-small">
-
                     <div class="r-block__inner">
-
                         @include('component.about', [
                             'title' => 'Alusta uut teemat',
                             'text' => 'Soovid midagi küsida? Tripikad vastavad.',
+                            /* To-do V2
                             'links' => [
                                 [
                                     'modifiers' => 'm-icon',
@@ -102,7 +76,7 @@
                                     'route' => '',
                                     'icon' => ''
                                 ],
-                            ],
+                            ],*/
                             'button' =>
                                 \Auth::check() ? [
                                     'modifiers' => 'm-block',
@@ -110,7 +84,6 @@
                                     'title' => trans("content.$type.create.title")
                                 ] : null
                         ])
-
                     </div>
                 </div>
 
@@ -128,17 +101,18 @@
                     ])
                 </div>
 
+                <?php /* To-do V2
                 <div class="r-block__inner">
                     <div class="r-block__header">
                         <div class="r-block__header-title m-flex">
-                            @include('component.title', [
+                            #include('component.title', [
                                 'modifiers' => 'm-blue',
                                 'title' => trans('content.forum.popular.title')
                             ])
                         </div>
                     </div>
 
-                    @include('component.content.forum.list', [
+                    #include('component.content.forum.list', [
                             'modifiers' => 'm-compact',
                             'items' => [
                                 [
@@ -209,6 +183,8 @@
                         ])
 
                 </div>
+                */
+                ?>
 
                 <div class="r-block m-small m-mobile-hide">
 
