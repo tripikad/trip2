@@ -41,7 +41,7 @@
                         $content->destinations->push(['name' => $content->created_at]);
 
                         return [
-                            'image' => $content->user->imagePreset('medium'),
+                            'image' => $content->imagePreset('medium'),
                             'route' => route('content.show', [$content->type, $content]),
                             'title' => $content->title,
                             'price' => trans('content.flight.index.from').' '.$content->price.config('site.currency.symbol'),
@@ -86,7 +86,7 @@
                         $content->destinations->push(['name' => $content->created_at]);
 
                         return [
-                            'image' => $content->user->imagePreset('medium'),
+                            'image' => $content->imagePreset('medium'),
                             'route' => route('content.show', [$content->type, $content]),
                             'title' => $content->title,
                             'price' => trans('content.flight.index.from').' '.$content->price.config('site.currency.symbol'),
