@@ -14,6 +14,13 @@
     .c-list__item {
 
         margin-bottom: $spacer;
+        padding-left: 0;
+
+        &:before {
+
+            content: normal;
+            position: static;
+        }
 
         .c-list.m-medium & {
 
