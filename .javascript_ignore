@@ -1,4 +1,6 @@
 resources/assets/js/jquery-ui/*
 resources/assets/js/components/svg4everybody.js
 gulpfile.js
-public/vendor/**
+public/vendor/svg4everybody/*
+public/vendor/ckeditor/*
+public/vendor/ckeditor/plugins/**
