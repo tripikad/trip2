@@ -8,7 +8,6 @@ use Cache;
 use App\Destination;
 use App\Main;
 
-
 class FrontpageController extends Controller
 {
     public function index()
