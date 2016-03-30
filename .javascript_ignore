@@ -3,10 +3,3 @@ resources/assets/js/components/svg4everybody.js
 gulpfile.js
 public/vendor/svg4everybody/*
 public/vendor/ckeditor/*
-public/vendor/ckeditor/**
-public/vendor/ckeditor/plugins/**
-public/vendor/ckeditor/plugins/**/*
-public/vendor/ckeditor/plugins/**/**/*
-public/vendor/ckeditor/plugins/**/**/**/*
-public/vendor/ckeditor/plugins/**/**/**/**/*
-public/vendor/ckeditor/plugins/**/**/**/**/**/*
