@@ -14,38 +14,26 @@
 
 @stop
 
-@section('header1.image')
-
-    @if($content->images())
-
-        {{ $content->imagePreset('large') }}
-
-    @endif
-
-@stop
-
 @section('content')
 
 <div class="r-flights m-single">
 
     <div class="r-flights__map">
-
         <div class="r-flights__map-inner">
-
             @include('component.map', [
                 'modifiers' => 'm-flights'
             ])
-
         </div>
     </div>
 
     <div class="r-flights__masthead">
-
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
-            'subtitle' => 'Kõik pakkumised',
-            'subtitle_route' => '/content/flight',
-            'image' => \App\Image::getRandom()
+            'subtitle' => trans('content.flight.show.action.all'),
+            'subtitle_route' => route('content.index', [$content->type]),
+            'image' => ($content->imagePreset('large') ?
+                $content->imagePreset('large') :
+                \App\Image::getRandom())
         ])
     </div>
 
@@ -106,19 +94,17 @@
 
                         <p>Bangkokist saab vägagi lihtsalt ühistranspordiga edasi kas Põhja-Taisse või Kambodžasse. Saab ühel reisil külastada nii Bangkoki kuulsat Khao San Roadi, Angkor Wati Siem Reapis kui ka eestlaste seas üsna populaarset rannakuurorti Sihanoukvilles Kambodžas. Tagasilend Euroopasse on Vietnami suurlinnast Ho Chi Minh City.</p>
 
-                        @include('component.list', [
-                            'modifiers' => 'm-dot m-green',
-                            'items' => [
-                                [
-                                    'title' => '05.11-21-11',
-                                    'route' => '#'
-                                ],
-                                [
-                                    'title' => '09.11-30-11 (jõulud)',
-                                    'route' => '#'
-                                ],
-                            ]
-                        ])
+                        <ul>
+                            <li>05.11-21.11</li>
+                            <li><a href="#">05.11-21.11 (jõulud)</a></li>
+                        </ul>
+
+                        <h5>Näidiskuupäevad</h5>
+                        <table>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </table>
 
                     </div>
 

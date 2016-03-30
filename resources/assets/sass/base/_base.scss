@@ -135,3 +135,71 @@ a {
     }
 }
 
+ul {
+
+    @include clear-list;
+
+    font-family: $font-primary;
+    margin-bottom: $spacer * 2;
+
+    @include respond-to(tablet) {
+
+        margin: 0 0 $spacer * 2.5;
+    }
+
+    > li {
+
+        margin-bottom: $spacer;
+        position: relative;
+        padding-left: $spacer * 2;
+        font-size: $font-size-normal;
+        line-height: 1.5;
+        font-weight: $font-weight-medium;
+
+        &::before {
+
+            background-color: $brand-green;
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        > a {
+
+            color: $color-text-black;
+            line-height: 1.5;
+            text-decoration: none;
+
+            &:hover {
+
+                text-decoration: underline;
+            }
+        }
+
+        .m-medium & {
+
+            margin-bottom: $spacer * 1.5;
+        }
+
+        .m-large & {
+
+            margin-bottom: $spacer * 2;
+        }
+
+        @each $name, $color, $color-dark in $colors {
+
+            .m-#{$name} & {
+
+                &::before {
+
+                    background-color: $color;
+                }
+            }
+        }
+    }
+}
+

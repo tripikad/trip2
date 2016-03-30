@@ -12,6 +12,13 @@
         padding: $spacer * 0.75 $spacer;
         margin-bottom: $spacer / 2;
         border-left: 2px solid $color-fill-neutral;
+        padding-left: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         @include respond-to(tablet) {
 
@@ -159,6 +166,13 @@
             .c-forum-list__sublist-item {
 
                 padding: $spacer * 2;
+                margin-bottom: 0;
+
+                &::before {
+
+                    content: normal;
+                    position: static;
+                }
 
                 @include respond-to(tablet) {
 
