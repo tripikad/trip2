@@ -6,7 +6,7 @@
                 'name' => 'icon-pin'
             ])
         </span>
-        Sihtkohad
+        {{trans('search.tab.destination')}}
         <ul class="c-search__results-sublist">
         @foreach ($content as $row)
             <li class="c-search__results-sublist-item"><a href="{{route('destination.show', [$row])}}" class="c-search__results-link">{{$row['name']}}</a></li>

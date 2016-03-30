@@ -8,7 +8,7 @@ $(document).on('click', function (e) {
 $('.c-search__form-input').on('keyup', function() {
     if($('.c-search__form-input').val()) {
         $(this).closest('.js-search').addClass('m-active');
-        var headerSearch = ($(this).attr('id') && $(this).attr('id') == 'search_small')?true:false;
+        var headerSearch = ($(this).attr('id') && $(this).attr('id') == 'search_small')?1:0;
         $.ajax({
             url: '/search/ajaxsearch',
             type: 'get',

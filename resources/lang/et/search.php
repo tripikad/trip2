@@ -2,7 +2,7 @@
 
 return [
 
-    'tab.forum' => 'Foorumi postitused',
+    'tab.forum' => 'Foorum',
     'tab.destination' => 'Sihtkohad',
     'tab.user' => 'Kasutajad',
     'tab.blog' => 'Blogid',
@@ -10,5 +10,6 @@ return [
     'tab.flight' => 'Lennupakkumised',
 
     'results.noresults' => 'Tulemusi ei leitud',
+    'results.all' => 'Kõik tulemused',
 
 ];

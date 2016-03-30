@@ -66,9 +66,9 @@ class SearchController extends Controller
         foreach ($results as $key => $item) {
             if (! $ajax) {
                 $results[$key]['short_body_text'] = (strlen($item->body) > 300) ? substr($item->body, 0, 300).'...' : $item->body;
-                $results[$key]['comments_count'] = count($item->comments);
             }
 
+            $results[$key]['comments_count'] = count($item->comments);
             $results[$key]['route'] = route('content.show', [$item->type, $item]);
             $results[$key]['user_img'] = $item->user->imagePreset();
         }
@@ -155,9 +155,7 @@ class SearchController extends Controller
     protected function getSearchResultsByType($type, $q)
     {
         $builder = $this->getSearchBuilderByType($type, $q);
-
-        $order_type = config('search.types.'.$type.'.order_type') ? config('search.types.'.$type.'.order_type') : 'ASC';
-        $res = $builder->orderBy(config('search.types.'.$type.'.order'), $order_type)->simplePaginate(config('search.types.'.$type.'.items_per_page'));
+        $res = $builder->simplePaginate(config('search.types.'.$type.'.items_per_page'));
         $res->setPath(env('FULL_BASE_URL').'search/'.$type);
         $res->appends(['q' => $q]);
 
@@ -166,6 +164,9 @@ class SearchController extends Controller
 
     protected function getSearchBuilderByType($type, $q)
     {
+        $order_type = config('search.types.'.$type.'.order_type') ? config('search.types.'.$type.'.order_type') : 'ASC';
+        $order_by = config('search.types.'.$type.'.order')?config('search.types.'.$type.'.order'):null;
+
         switch ($type) {
             case 'destination':
                 $res = Destination::where('name', 'LIKE', '%'.$q.'%');
@@ -188,6 +189,9 @@ class SearchController extends Controller
             default:
                    throw new Exception('Invalid search type');
         }
+
+        if($order_by)
+            $res->orderBy($order_by, $order_type);
 
         return $res;
     }
@@ -232,7 +236,15 @@ class SearchController extends Controller
             return;
         }
 
+        $footer_modifier = $header_search?'m-icon m-small':'m-icon';
+
         return response()
-            ->view('component.searchblock', ['results' => $results, 'total_cnt' => $total_cnt, 'q' => $q, 'header_search' => $header_search]);
+            ->view('component.searchblock', [
+                'results' => $results, 
+                'total_cnt' => $total_cnt, 
+                'q' => $q, 
+                'header_search' => $header_search,
+                'footer_modifier' => $footer_modifier
+            ]);
     }
 }

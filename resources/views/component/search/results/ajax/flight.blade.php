@@ -5,7 +5,7 @@
                 'name' => 'icon-tickets'
             ])
         </span>
-        Lennupakkumised
+        {{trans('search.tab.flight')}}
         <ul class="c-search__results-sublist">
         @foreach ($content as $row)
             <li class="c-search__results-sublist-item"><a href="{{route('content.show', ['flight', $row])}}" class="c-search__results-link">{{$row['title']}}</a></li>

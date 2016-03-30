@@ -32,8 +32,8 @@
 
     <footer class="c-search__results-footer">
         @include('component.link', [
-            'modifiers' => 'm-icon',
-            'title' => 'Kõik tulemused ('.$total_cnt.')',
+            'modifiers' => $footer_modifier,
+            'title' => trans('search.results.all').' ('.$total_cnt.')',
             'route' => '/search?q='.$q,
             'icon' => 'icon-arrow-right'
         ])

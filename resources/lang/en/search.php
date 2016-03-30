@@ -10,5 +10,6 @@ return [
     'tab.flight' => 'Flightoffers',
 
     'results.noresults' => 'No results found',
+    'results.all' => 'All results',
 
 ];

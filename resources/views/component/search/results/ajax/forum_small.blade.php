@@ -5,7 +5,7 @@
                 'name' => 'icon-comment'
             ])
         </span>
-        Foorum
+        {{trans('search.tab.forum')}}
         <ul class="c-search__results-sublist">
         @foreach ($content as $row)
             <li class="c-search__results-sublist-item">
