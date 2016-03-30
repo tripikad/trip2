@@ -112,6 +112,9 @@ return [
     'flight.index.about.title' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
     'flight.index.about.text' => 'Pakkumised võivad aeguda juba paari päevaga.',
     'flight.index.from' => 'al',
+
+    'flight.show.action.all' => 'Kõik pakkumised',
+
     'flight.no.results' => 'Hetkel pole ühtegi aktiivset lennupakkumist.',
     'flight.filter.no.results' => 'Sinu otsingukriteeriumitele vastavalt ei leitud hetkel ühtegi tulemust.',
 
