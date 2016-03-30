@@ -3,9 +3,7 @@ scss:
     config_file: .scss-lint.yml
 
 javascript:
-    ignore_file: .javascript_ignore
-
-java_script:
+    enabled: false
     ignore_file: .javascript_ignore
 
 fail_on_violations: true
