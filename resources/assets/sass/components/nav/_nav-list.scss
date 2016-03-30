@@ -9,6 +9,13 @@
 
         display: block;
         margin: $spacer;
+        padding-left: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         @include respond-to(tablet) {
 

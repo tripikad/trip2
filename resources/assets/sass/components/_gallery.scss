@@ -12,6 +12,14 @@
     .c-gallery__list-item {
 
         position: relative;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         .c-gallery.m-8-cols & {
 

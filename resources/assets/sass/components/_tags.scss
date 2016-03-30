@@ -10,6 +10,13 @@
         border-radius: 48px;
         display: inline-block;
         margin: $spacer / 3 $spacer / 12;
+        padding-left: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         .c-tags.m-small & {
 

@@ -7,6 +7,14 @@
     .c-navbar-user__item {
 
         position: relative;
+        margin-bottom: 0;
+        padding-left: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
     }
 
         .c-navbar-user__item-link {
@@ -115,6 +123,12 @@
                 display: block;
                 margin: 0;
                 padding: 0;
+
+                &::before {
+
+                    content: normal;
+                    position: static;
+                }
             }
 
                 .c-navbar-user__sub-item-link {

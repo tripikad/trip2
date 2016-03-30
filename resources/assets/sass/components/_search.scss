@@ -271,6 +271,14 @@
                 font-weight: $font-weight-bold;
                 text-transform: uppercase;
                 position: relative;
+                padding-left: 0;
+                margin-bottom: 0;
+
+                &::before {
+
+                    content: normal;
+                    position: static;
+                }
 
                 @each $name, $color, $color-dark in $colors {
 
