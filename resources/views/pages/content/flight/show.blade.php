@@ -71,10 +71,8 @@
 
                         <p><strong>Hetkel on saadaval soodsad lennupiletid Stockholmist Tai ja Vietnami külastamiseks. Soodsaimad piletid (al 338 €) saadaval juhul, kui tagasilend valida Londonisse (mõnikümmend eurot kallimad piletid tagasilennuga Frankfurti). Lennupileteid soovitame otsida ja osta läbi <a href="#">momondo</a>.</strong></p>
 
-                        <figure>
-                            <img src="{{ \App\Image::getRandom() }}" alt="">
-                            <figcaption>Näidispakkumine momondo veebilehelt</figcaption>
-                        </figure>
+                        <img src="{{ \App\Image::getRandom() }}" alt="">
+                        <blockquote>Näidispakkumine momondo veebilehelt</blockquote>
 
                         <p>Bangkokist saab vägagi lihtsalt ühistranspordiga edasi kas Põhja-Taisse või Kambodžasse. Saab ühel reisil külastada nii Bangkoki kuulsat Khao San Roadi, Angkor Wati Siem Reapis kui ka eestlaste seas üsna populaarset rannakuurorti Sihanoukvilles Kambodžas. Tagasilend Euroopasse on Vietnami suurlinnast Ho Chi Minh City.</p>
 
@@ -102,10 +100,29 @@
                         <h5>Näidiskuupäevad</h5>
                         <table>
                             <tr>
-                                <th></th>
+                                <td>
+                                    <h6>November 2015</h6>
+                                    <a href="#">05.11-21.11</a><br>
+                                    <a href="#">09.11-30.11</a><br>
+                                    <a href="#">12.11-03.12</a><br>
+                                    <a href="#">19.11-10.12</a>
+                                </td>
+                                <td>
+                                    <h6>Detsember 2015</h6>
+                                    <a href="#">05.12-21.12</a><br>
+                                    <a href="#">09.12-30.12 (jõulud)</a>
+                                </td>
+                                <td>
+                                    <h6>Jaanuar 2015</h6>
+                                    <a href="#">05.01-21.01</a><br>
+                                    <a href="#">09.01-30.01</a><br>
+                                    <a href="#">12.01-03.02</a><br>
+                                    <a href="#">19.01-10.02</a>
+                                </td>
                             </tr>
                         </table>
 
+                        <p>Need on näidiskuupäevad. Soodsate hindadega lennupileteid leiab lendmiseks oktoobri lõpust aprillini! Otsi sobivad lennukuupäevad <a href="#">momondost</a>.</p>
                     </div>
 
                     {{--
@@ -115,113 +132,6 @@
                     @include('component.flags', ['flags' => $content->getFlags()])
 
                     --}}
-                </div>
-            </div>
-
-            <div class="r-block">
-
-                <div class="r-block__header">
-
-                    <div class="r-block__header-title">
-
-                        @include('component.title', [
-                            'modifiers' => 'm-large m-green',
-                            'title' => 'Näidiskuupäevad'
-                        ])
-                    </div>
-                </div>
-
-                <div class="r-block__body">
-
-                    <div class="c-columns m-3-cols">
-
-                        <div class="c-columns__item">
-
-                            @include('component.title', [
-                                'modifiers' => 'm-margin',
-                                'title' => 'November 2015'
-                            ])
-
-                            @include('component.list', [
-                                'items' => [
-                                    [
-                                        'title' => '05.11-21-11',
-                                        'route' => '#'
-                                    ],
-                                    [
-                                        'title' => '09.11-30-11',
-                                        'route' => '#'
-                                    ],
-                                    [
-                                        'title' => '12.11-03.12',
-                                        'route' => '#'
-                                    ],
-                                    [
-                                        'title' => '19.11-10.12',
-                                        'route' => '#'
-                                    ],
-                                ]
-                            ])
-
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            @include('component.title', [
-                                'modifiers' => 'm-margin',
-                                'title' => 'Detsember 2015'
-                            ])
-
-                            @include('component.list', [
-                                'items' => [
-                                    [
-                                        'title' => '05.11-21-11',
-                                        'route' => '#'
-                                    ],
-                                    [
-                                        'title' => '09.11-30-11 (jõulud)',
-                                        'route' => '#'
-                                    ],
-                                ]
-                            ])
-
-                        </div>
-
-                        <div class="c-columns__item">
-
-                            @include('component.title', [
-                                'modifiers' => 'm-margin',
-                                'title' => 'Jaanuar 2016'
-                            ])
-
-                            @include('component.list', [
-                                'items' => [
-                                    [
-                                        'title' => '05.11-21-11',
-                                        'route' => '#'
-                                    ],
-                                    [
-                                        'title' => '09.11-30-11',
-                                        'route' => '#'
-                                    ],
-                                    [
-                                        'title' => '12.11-03.12',
-                                        'route' => '#'
-                                    ],
-                                    [
-                                        'title' => '19.11-10.12',
-                                        'route' => '#'
-                                    ],
-                                ]
-                            ])
-
-                        </div>
-                    </div>
-
-                    <div class="c-body">
-
-                        <p>Need on näidiskuupäevad. Soodsate hindadega lennupileteid leiab lendmiseks oktoobri lõpust aprillini! Otsi sobivad lennukuupäevad <a href="#">momondost</a>.</p>
-                    </div>
                 </div>
             </div>
 
