@@ -281,7 +281,7 @@ table {
             margin-top: $spacer + 4;
             line-height: $font-size-small;
 
-            &:first-child {
+            td:first-child h6 {
 
                 margin-top: 0;
             }
