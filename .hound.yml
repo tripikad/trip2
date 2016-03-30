@@ -2,7 +2,7 @@ scss:
     enabled: true
     config_file: .scss-lint.yml
 
-java_script:
+javascript:
     ignore_file: .javascript_ignore
 
 fail_on_violations: true
