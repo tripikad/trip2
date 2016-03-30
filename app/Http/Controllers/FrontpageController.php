@@ -7,11 +7,7 @@ use View;
 use Cache;
 use App\Destination;
 use App\Main;
-<<<<<<< HEAD
 
-//use Illuminate\Support\Collection;
-=======
->>>>>>> master
 
 class FrontpageController extends Controller
 {
