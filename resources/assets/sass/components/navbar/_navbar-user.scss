@@ -30,6 +30,11 @@
             align-items: center;
             padding: $spacer / 2;
 
+            &:hover {
+
+                text-decoration: none;
+            }
+
             @include respond-to(tablet) {
 
                 color: $color-text-link;

@@ -37,6 +37,14 @@
         }
     }
 
+        .c-tags__item-link {
+
+            &:hover {
+
+                text-decoration: none;
+            }
+        }
+
         .c-tags__item-link,
         .c-tags__item-wrap {
 

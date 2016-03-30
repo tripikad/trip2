@@ -30,6 +30,11 @@
         &.active .c-nav__list-item-link {
 
             opacity: 0.6;
+
+            &:hover {
+
+                text-decoration: none;
+            }
         }
     }
 

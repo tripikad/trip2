@@ -69,6 +69,11 @@
             display: block;
             height: 0;
             padding-bottom: 100%;
+
+            &:hover {
+
+                text-decoration: none;
+            }
         }
 
         .c-gallery__list-item-image {

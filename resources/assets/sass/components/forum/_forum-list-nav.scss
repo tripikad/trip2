@@ -32,6 +32,11 @@
             font-weight: $font-weight-bold;
             text-decoration: none;
 
+            &:hover {
+
+                text-decoration: none;
+            }
+
             @include respond-to(desktop) {
 
                 font-size: $font-size-large;
