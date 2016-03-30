@@ -1,6 +1,6 @@
 /*jslint browser: true*/
 
-window.CKEDITOR_BASEPATH = '/plugins/ckeditor/';
+window.CKEDITOR_BASEPATH = '/vendor/ckeditor/';
 
 var selector = $('.js-ckeditor'),
     script = window.CKEDITOR_BASEPATH + 'ckeditor.js',
