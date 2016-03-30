@@ -113,7 +113,7 @@ class SearchController extends Controller
             $results[$key]['parent'] = $parent;
 
             if ($ajax) {
-                $results[$key]['name'] = $parent ? $item->name.' > '.$parent->name : $item->name;
+                $results[$key]['name'] = $parent ? $item->name.' < '.$parent->name : $item->name;
             }
         }
     }

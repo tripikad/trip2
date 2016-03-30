@@ -9,6 +9,13 @@
     .c-search-tabs__item {
 
         display: inline-block;
+        padding-left: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
     }
 
         .c-search-tabs__item-link {
