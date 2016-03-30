@@ -95,10 +95,9 @@ CKEDITOR.stylesSet.add( 'default', [
 		name: 'Compact table',
 		element: 'table',
 		attributes: {
-			cellpadding: '5',
+			cellpadding: '0',
 			cellspacing: '0',
-			border: '1',
-			bordercolor: '#ccc'
+			border: '0'
 		},
 		styles: {
 			'border-collapse': 'collapse'
