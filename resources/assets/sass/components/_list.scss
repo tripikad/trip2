@@ -16,7 +16,7 @@
         margin-bottom: $spacer;
         padding-left: 0;
 
-        &:before {
+        &::before {
 
             content: normal;
             position: static;
