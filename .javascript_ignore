@@ -1,6 +1,3 @@
-public/plugins/ckeditor/**/**/**/*
-public/plugins/ckeditor/**/**/*
-public/plugins/ckeditor/**/*
 public/plugins/ckeditor/*
 public/plugins/svg4everybody/*
 resources/assets/js/jquery-ui/*
