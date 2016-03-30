@@ -170,8 +170,6 @@ ul {
 
         > a {
 
-            @include color-modifiers-and(color);
-
             color: $color-text-black;
             line-height: 1.5;
             text-decoration: none;
