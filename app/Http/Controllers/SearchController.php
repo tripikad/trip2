@@ -165,7 +165,7 @@ class SearchController extends Controller
     protected function getSearchBuilderByType($type, $q)
     {
         $order_type = config('search.types.'.$type.'.order_type') ? config('search.types.'.$type.'.order_type') : 'ASC';
-        $order_by = config('search.types.'.$type.'.order')?config('search.types.'.$type.'.order'):null;
+        $order_by = config('search.types.'.$type.'.order') ? config('search.types.'.$type.'.order') : null;
 
         switch ($type) {
             case 'destination':
@@ -190,8 +190,9 @@ class SearchController extends Controller
                    throw new Exception('Invalid search type');
         }
 
-        if($order_by)
+        if ($order_by) {
             $res->orderBy($order_by, $order_type);
+        }
 
         return $res;
     }
@@ -236,15 +237,15 @@ class SearchController extends Controller
             return;
         }
 
-        $footer_modifier = $header_search?'m-icon m-small':'m-icon';
+        $footer_modifier = $header_search ? 'm-icon m-small' : 'm-icon';
 
         return response()
             ->view('component.searchblock', [
-                'results' => $results, 
-                'total_cnt' => $total_cnt, 
-                'q' => $q, 
+                'results' => $results,
+                'total_cnt' => $total_cnt,
+                'q' => $q,
                 'header_search' => $header_search,
-                'footer_modifier' => $footer_modifier
+                'footer_modifier' => $footer_modifier,
             ]);
     }
 }
