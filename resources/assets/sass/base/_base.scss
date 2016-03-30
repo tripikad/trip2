@@ -147,7 +147,7 @@ ul {
         margin: 0 0 $spacer * 2.5;
     }
 
-    & > li {
+    > li {
 
         margin-bottom: $spacer;
         position: relative;
@@ -156,7 +156,7 @@ ul {
         line-height: 1.5;
         font-weight: $font-weight-medium;
 
-        &:before {
+        &::before {
 
             background-color: $brand-green;
             content: '';
@@ -168,7 +168,7 @@ ul {
             border-radius: 50%;
         }
 
-        & > a {
+        > a {
 
             @include color-modifiers-and(color);
 
@@ -196,7 +196,7 @@ ul {
 
             .m-#{$name} & {
 
-                &:before {
+                &::before {
 
                     background-color: $color;
                 }
