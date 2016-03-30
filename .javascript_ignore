@@ -1,5 +1,7 @@
+public/plugins/ckeditor/**/**/**/*
+public/plugins/ckeditor/**/**/*
+public/plugins/ckeditor/**/*
 public/plugins/ckeditor/*
-public/plugins/ckeditor/plugins/*
 public/plugins/svg4everybody/*
 resources/assets/js/jquery-ui/*
 resources/assets/js/components/svg4everybody.js
