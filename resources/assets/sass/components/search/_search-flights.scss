@@ -10,6 +10,12 @@
         padding: $spacer * 2 0;
         border-bottom: 1px solid $color-fill-neutral;
 
+        &::before {
+
+            content: normal;
+            position: static;
+        }
+
         &:last-child {
 
             border-bottom: none;
