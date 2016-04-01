@@ -224,42 +224,27 @@
                 @endif
 
                 @if (count($sidebar_flights))
-
                     @foreach ($sidebar_flights as $sidebar_flight)
 
                         @include('component.card', [
                             'modifiers' => 'm-purple',
                             'route' => route('content.show', [$sidebar_flight->type, $sidebar_flight]),
-                            'title' => $sidebar_flight->title.' '.$sidebar_flight->price.' '.config('site.currency.symbol'),
+                            'title' => $sidebar_flight->title.' '.$sidebar_flight->price.config('site.currency.symbol'),
                             'image' => $sidebar_flight->imagePreset()
                         ])
 
                     @endforeach
-
                 @endif
 
-                @if (count($forums))
+                @if (isset($forums) && count($forums))
 
                     <div class="r-block__inner">
-
                         <div class="r-block__header">
-
                             <div class="r-block__header-title m-flex">
-
                                 @include('component.title', [
                                     'modifiers' => 'm-purple',
                                     'title' => trans('destination.show.forum.title')
                                 ])
-
-                                <div class="r-block__header-link">
-
-                                    @include('component.link', [
-                                        'modifiers' => 'm-icon m-small',
-                                        'title' => 'Tai foorum',
-                                        'route' => '#',
-                                        'icon' => 'icon-arrow-right'
-                                    ])
-                                </div>
                             </div>
                         </div>
 
@@ -308,72 +293,26 @@
 
         <div class="r-travelmates__offers">
             <div class="r-travelmates__offers-wrap">
-                <div class="c-columns m-{{ count($flights) }}-cols">
-
-                    @foreach($flights as $flight)
-
-                        <div class="c-columns__item">
-
-                            @include('component.card', [
-                                'modifiers' => 'm-purple',
-                                'route' => route('content.show', [$flight->type, $flight]),
-                                'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
-                                'image' => $flight->imagePreset()
-                            ])
-
-                        </div>
-
-                    @endforeach
-
-                </div>
+                @include('region.content.flight.card', [
+                    'items' => $flights
+                ])
             </div>
         </div>
 
     @endif
 
-    @if (count($travel_mates))
+    @if (isset($travel_mates) && count($travel_mates))
 
-        @if (count($flights))
-
+        @if (isset($flights) && count($flights))
         <div class="r-travelmates__additional m-padding">
-
         @else
-
         <div class="r-travelmates__additional">
-
         @endif
 
             <div class="r-travelmates__additional-wrap">
-
-                @include('component.travelmate.list', [
-                    'modifiers' => 'm-3col',
-                    'items' => $travel_mates->transform(function ($travel_mate) {
-                        return [
-                            'modifiers' => 'm-small',
-                            'image' => $travel_mate->user->imagePreset('small_square'),
-                            'letter' => [
-                                'modifiers' => 'm-red',
-                                'text' => 'J'
-                            ],
-                            'name' => $travel_mate->user->name,
-                            'route' => route('content.show', [$travel_mate->type, $travel_mate]),
-                            'sex_and_age' =>
-                                ($travel_mate->user->gender ?
-                                    trans('user.gender.'.$travel_mate->user->gender).
-                                    ($travel_mate->user->age ? ', ' : '')
-                                : null).
-                                ($travel_mate->user->age ? $travel_mate->user->age : null),
-                            'title' => $travel_mate->title,
-                            'tags' => $travel_mate->destinations->transform(function ($travel_mate_destination) {
-                                return [
-                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
-                                    'title' => $travel_mate_destination->name
-                                ];
-                            })
-                        ];
-                    })
+                @include('region.content.travelmate.list', [
+                    'items' => $travel_mates
                 ])
-
             </div>
         </div>
 
