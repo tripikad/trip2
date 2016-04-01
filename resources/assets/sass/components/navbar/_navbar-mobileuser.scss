@@ -9,6 +9,14 @@
     .c-navbar-mobileuser__item {
 
         position: relative;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
     }
 
         .c-navbar-mobileuser__item-link {

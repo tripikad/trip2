@@ -13,6 +13,14 @@
 .c-user-destination__item {
 
     display: inline-block;
+    padding-left: 0;
+    margin-bottom: 0;
+
+    &::before {
+
+        content: normal;
+        position: static;
+    }
 
     &:after {
 
