@@ -90,7 +90,7 @@ trait Travelmate
                             $topic_ids
                         );
                 })
-                ->groupBy('contents.id');;
+                ->groupBy('contents.id');
 
             if ($key == 'forums') {
                 $viewVariables[$key] = $viewVariables[$key]->with(['destinations', 'topics']);

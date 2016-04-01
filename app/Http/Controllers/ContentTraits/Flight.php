@@ -132,7 +132,7 @@ trait Flight
                 'type' => ['flight'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' => Main::getExpireData('flight')
+                'whereBetween' => Main::getExpireData('flight'),
             ],
         ];
 
@@ -182,7 +182,7 @@ trait Flight
                 $viewVariables[$key] = $viewVariables[$key]->with(['destinations', 'topics']);
             }
 
-            $viewVariables[$key] =  $viewVariables[$key]->orderBy('contents.created_at', 'desc')
+            $viewVariables[$key] = $viewVariables[$key]->orderBy('contents.created_at', 'desc')
                 ->take($take[$key])
                 ->get();
         }
@@ -196,7 +196,7 @@ trait Flight
         $viewVariables['parent_destination'] = $parent_destination;
         $viewVariables['sidebar_flights'] = $sidebar_flights;
         $viewVariables['sidebar_destinations'] = $content->destinations->filter(function ($item) use ($usedIds) {
-            return !in_array($item->id, $usedIds);
+            return ! in_array($item->id, $usedIds);
         });
         $viewVariables = Main::getParentDestinations(['sidebar_destinations'], $viewVariables, true);
 

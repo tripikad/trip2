@@ -192,7 +192,7 @@ class Main
         return $viewVariables;
     }
 
-    public static function getParentDestinations(array $collectionString, $viewVariables, $isDestination=null)
+    public static function getParentDestinations(array $collectionString, $viewVariables, $isDestination = null)
     {
         foreach ($collectionString as $type) {
             if (isset($viewVariables[$type])) {
