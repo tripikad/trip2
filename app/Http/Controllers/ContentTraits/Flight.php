@@ -147,7 +147,9 @@ trait Flight
             $viewVariables['flights2'] = null;
         }
 
-        $usedIds = $usedIds->merge($viewVariables['flights']->lists('id'));
+        if (isset($viewVariables['flights']) && count($viewVariables['flights'])) {
+            $usedIds = $usedIds->merge($viewVariables['flights']->lists('id'));
+        }
 
         $types = [
             'forums' => ['forum', 'expat', 'buysell'],
