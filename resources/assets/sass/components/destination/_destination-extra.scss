@@ -12,6 +12,14 @@
         display: flex;
         align-items: center;
         margin-left: $spacer * 2;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
     }
 
         .c-destination-extra__link {

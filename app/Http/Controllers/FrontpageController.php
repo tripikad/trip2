@@ -21,7 +21,7 @@ class FrontpageController extends Controller
                 'type' => ['flight'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' =>  Main::getExpireData('flight', 1),
+                'whereBetween' =>  Main::getExpireData('flight'),
             ],
             'flights2' => [
                 'skip' => 3,
@@ -29,7 +29,7 @@ class FrontpageController extends Controller
                 'type' => ['flight'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' => Main::getExpireData('flight', 1),
+                'whereBetween' => Main::getExpireData('flight'),
             ],
             'content' => [
                 'take' => 1,
@@ -42,7 +42,7 @@ class FrontpageController extends Controller
                 'type' => ['forum', 'buysell', 'expat'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' => Main::getExpireData('buysell', 1) +
+                'whereBetween' => Main::getExpireData('buysell') +
                     ['only' => 'buysell'],
             ],
             'news' => [
@@ -79,7 +79,7 @@ class FrontpageController extends Controller
                 'type' => ['travelmate'],
                 'status' => 1,
                 'latest' => 'created_at',
-                'whereBetween' =>  Main::getExpireData('travelmate', 1),
+                'whereBetween' =>  Main::getExpireData('travelmate'),
             ],
         ];
 

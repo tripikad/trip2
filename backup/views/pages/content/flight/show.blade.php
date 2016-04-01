@@ -239,21 +239,30 @@
 
             </div>
 
-            <div class="r-flights__content-block">
+            <div class="r-block">
 
-                <div class="r-flights__content-block-inner">
+                <div class="r-block__inner">
 
-                    <div class="r-flights__content-title">
+                    <div class="r-block__header">
 
-                        @include('component.title', [
-                            'title' => 'Soovita pakkumist sõpradele',
-                            'modifiers' => 'm-large m-green'
-                        ])
+                        <div class="r-block__header-title">
+
+                            @include('component.title', [
+                                'title' => 'Soovita pakkumist sõpradele',
+                                'modifiers' => 'm-large m-green'
+                            ])
+                        </div>
                     </div>
+
+                    <div class="r-block__body">
+
+                        @include('component.facebook')
+                    </div>
+
                 </div>
             </div>
 
-            <div class="r-flights__content-block">
+            <div class="r-block">
 
                 @include('component.destination.helper', [
                     'modifiers' => 'm-green',
@@ -283,25 +292,29 @@
                 ])
             </div>
 
-            <div class="r-flights__content-block">
+            <div class="r-block m-mobile-hide">
 
                 @include('component.promo', [
+                    'modifiers' => 'm-body',
                     'route' => '#',
                     'image' => \App\Image::getRandom()
                 ])
             </div>
 
-            <div class="r-flights__content-block">
+            <div class="r-block">
 
-                <div class="r-flights__content-title">
+                <div class="r-block__header">
 
-                    @include('component.title', [
-                        'modifiers' => 'm-green',
-                        'title' => 'Lennupakkumised'
-                    ])
+                    <div class="r-block__header-title">
+
+                        @include('component.title', [
+                            'modifiers' => 'm-green',
+                            'title' => 'Lennupakkumised'
+                        ])
+                    </div>
                 </div>
 
-                <div class="r-flights__content-body">
+                <div class="r-block__body">
 
                     @include('component.row', [
                         'icon' => 'icon-tickets',
@@ -376,7 +389,7 @@
                     ])
                 </div>
 
-                <div class="r-flights__content-footer">
+                <div class="r-block__footer">
 
                     @include('component.link', [
                         'modifiers' => 'm-icon m-right',
@@ -387,17 +400,20 @@
                 </div>
             </div>
 
-            <div class="r-flights__content-block">
+            <div class="r-block">
 
-                <div class="r-flights__content-title">
+                <div class="r-block__header">
 
-                    @include('component.title', [
-                        'title' => 'Kommentaarid',
-                        'modifiers' => 'm-green'
-                    ])
+                    <div class="r-block__header-title">
+
+                        @include('component.title', [
+                            'title' => 'Kommentaarid',
+                            'modifiers' => 'm-green'
+                        ])
+                    </div>
                 </div>
 
-                <div class="r-flights__content-body">
+                <div class="r-block__body">
 
                     @include('component.comment.index', ['comments' => $comments])
 
@@ -405,8 +421,18 @@
                         'profile' => [
                             'image' => \App\Image::getRandom(),
                             'title' => 'Charles Darwin',
-                            'route' => ''
+                            'route' => '',
+                            'modifiers' => 'm-full m-status',
+                            'letter'=> [
+                                'modifiers' => 'm-red m-small',
+                                'text' => 'J'
+                            ],
+                            'status' => [
+                                'modifiers' => 'm-blue',
+                                'position' => '1'
+                            ]
                         ],
+                        'actions' => view('component.actions', ['actions' => $content->getActions()]),
                         'date' => '12. jaanuar, 12:31',
                         'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p><p>Kuna mul oli plaanis arengumaades maapiirkondades kohalikke (arvatavasti) igasuguse litsentsita reisijuhte kasutada, näiteks kuskilt väikesest kohast ümberkaudsete külade üleöö külastamiseks ehk pikad jalgsimatkad mägistes piirkondades, oli tarvis, et juhul kui juhtub õnnetus, see ka korvatakse. Tegemist ei olnud siis spordiga, vaid lihtsalt keskmisest veidi koormavamate matkadega. Kokkuvõttes oli sel ajal vaid Ifil kindlustuses selline asi sees, sai ka kirjalikult üle küsitud (et oleks tõestusmaterjal hiljem!) ning teised firmad pakkusid seda lisakaitse all päris räiga lisahinnaga või ei võtnud üldse jutule, kui giidi litsentsi poleks ette näidata.</p>',
                     ])
@@ -415,8 +441,18 @@
                         'profile' => [
                             'image' => \App\Image::getRandom(),
                             'title' => 'Charles Darwin',
-                            'route' => ''
+                            'letter'=> [
+                                'modifiers' => 'm-red m-small',
+                                'text' => 'J'
+                            ],
+                            'route' => '',
+                            'modifiers' => 'm-full m-status',
+                            'status' => [
+                                'modifiers' => 'm-red',
+                                'position' => '2'
+                            ]
                         ],
+                        'actions' => view('component.actions', ['actions' => $content->getActions()]),
                         'date' => '12. jaanuar, 12:31',
                         'text' => '<p>Tegemist ei olnud siis spordiga, vaid lihtsalt keskmisest veidi koormavamate matkadega. Kokkuvõttes oli sel ajal vaid Ifil kindlustuses selline asi sees, sai ka kirjalikult üle küsitud (et oleks tõestusmaterjal hiljem!) ning teised firmad pakkusid seda lisakaitse all päris räiga lisahinnaga või ei võtnud üldse jutule, kui giidi litsentsi poleks ette näidata.</p>',
                     ])
@@ -425,24 +461,27 @@
 
             @if (\Auth::check())
 
-            <div class="r-flights__content-block">
+                <div class="r-block">
 
-                <div class="r-flights__content-block-inner">
+                    <div class="r-block__inner">
 
-                    <div class="r-flights__content-title">
+                        <div class="r-block__header">
 
-                        @include('component.title', [
-                            'title' => 'Lisa kommentaar',
-                            'modifiers' => 'm-large m-green'
-                        ])
-                    </div>
+                            <div class="r-block__header-title">
 
-                    <div class="r-flights__content-body">
+                                @include('component.title', [
+                                    'title' => 'Lisa kommentaar',
+                                    'modifiers' => 'm-large m-green'
+                                ])
+                            </div>
+                        </div>
 
-                        @include('component.comment.create')
+                        <div class="r-block__body">
+
+                            @include('component.comment.create')
+                        </div>
                     </div>
                 </div>
-            </div>
 
             @endif
 
@@ -450,7 +489,7 @@
 
         <div class="r-flights__sidebar">
 
-            <div class="r-flights__sidebar-block">
+            <div class="r-block m-small">
 
                 @include('component.destination', [
                     'modifiers' => 'm-green',
@@ -474,75 +513,106 @@
                     'image' => \App\Image::getRandom()
                 ])
 
-                <div class="r-flights__sidebar-block-inner">
+                <div class="r-block__inner">
 
-                    <div class="r-flights__sidebar-title">
+                    <div class="r-block__header">
 
-                        @include('component.title', [
-                            'modifiers' => 'm-green',
-                            'title' => 'Tripikad räägivad'
-                        ])
+                        <div class="r-block__header-title m-flex">
 
+                            @include('component.title', [
+                                'modifiers' => 'm-green',
+                                'title' => 'Tripikad räägivad'
+                            ])
+
+                            <div class="r-block__header-link">
+
+                                @include('component.link', [
+                                    'modifiers' => 'm-icon m-small',
+                                    'title' => 'Brasiilia foorum',
+                                    'route' => '#',
+                                    'icon' => 'icon-arrow-right'
+                                ])
+                            </div>
+                        </div>
                     </div>
 
-                    @include('component.content.forum.list', [
-                        'modifiers' => 'm-compact',
-                        'items' => [
-                            [
-                                'topic' => 'Samui hotellid?',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
+                    <div class="r-block__body">
+
+                        @include('component.content.forum.list', [
+                            'modifiers' => 'm-compact',
+                            'items' => [
+                                [
+                                    'topic' => 'Samui hotellid?',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-green',
+                                        'count' => 9
+                                    ]
                                 ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-green',
-                                    'count' => 9
-                                ]
-                            ],
-                            [
-                                'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
+                                [
+                                    'topic' => 'Soodsalt inglismaal rongi/metroo/bussiga? Kus hindu vaadata?',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-green',
+                                        'count' => 4
+                                    ]
                                 ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-green',
-                                    'count' => 4
-                                ]
-                            ],
-                            [
-                                'topic' => 'Puhkuseosakud Tenerifel',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
+                                [
+                                    'topic' => 'Puhkuseosakud Tenerifel',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-inverted m-green',
+                                        'count' => 2
+                                    ]
                                 ],
-                                'badge' => [
-                                    'modifiers' => 'm-inverted m-green',
-                                    'count' => 2
-                                ]
-                            ],
-                            [
-                                'topic' => 'Ischgl mäeolud-pilet ja majutus',
-                                'route' => '#',
-                                'profile' => [
-                                    'modifiers' => 'm-mini',
-                                    'image' => \App\Image::getRandom()
-                                ],
-                                'badge' => [
-                                    'modifiers' => 'm-green',
-                                    'count' => 2
+                                [
+                                    'topic' => 'Ischgl mäeolud-pilet ja majutus',
+                                    'route' => '#',
+                                    'profile' => [
+                                        'modifiers' => 'm-mini',
+                                        'image' => \App\Image::getRandom(),
+                                        'letter' => [
+                                            'modifiers' => 'm-green m-small',
+                                            'text' => 'D'
+                                        ],
+                                    ],
+                                    'badge' => [
+                                        'modifiers' => 'm-green',
+                                        'count' => 2
+                                    ]
                                 ]
                             ]
-                        ]
-                    ])
+                        ])
+                    </div>
 
                 </div>
             </div>
 
-            <div class="r-flights__sidebar-block">
+            <div class="r-block m-small">
 
                 @include('component.destination', [
                     'modifiers' => 'm-yellow',
@@ -567,24 +637,24 @@
                     'subtitle' => 'Inglismaa',
                     'subtitle_route' => '#'
                 ])
-
             </div>
 
-            <div class="r-flights__sidebar-block">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
+                    'modifiers' => 'm-sidebar-small',
                     'route' => '',
                     'image' => \App\Image::getRandom()
                 ])
-
             </div>
 
-            <div class="r-flights__sidebar-block">
+            <div class="r-block m-small">
 
-                <div class="r-flights__sidebar-block-inner">
+                <div class="r-block__inner">
 
                     @include('component.about', [
                         'title' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+                        'text' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
@@ -613,17 +683,17 @@
                     ])
 
                 </div>
-
             </div>
 
-            <div class="r-flights__sidebar-block">
+            <div class="r-block m-small m-mobile-hide">
 
                 @include('component.promo', [
+                    'modifiers' => 'm-sidebar-small',
                     'route' => '',
                     'image' => \App\Image::getRandom()
                 ])
-
             </div>
+
         </div>
 
     </div>
@@ -665,11 +735,11 @@
         </div>
     </div>
 
-    <div class="r-flights__travel-mates">
+    <div class="r-flights__travelmates">
 
-        <div class="r-flights__travel-mates-wrap">
+        <div class="r-flights__travelmates-wrap">
 
-            <div class="r-home__travel-mates-title">
+            <div class="r-flights__travelmates-title">
 
                 @include('component.title', [
                     'title' => 'Reisikaaslased',
@@ -678,54 +748,77 @@
 
             </div>
 
-            <div class="c-columns m-4-cols">
-
-                <div class="c-columns__item">
-
-                    @include('component.profile', [
-                        'title' => 'Jaanus Jaaniuss',
-                        'age' => '22',
-                        'interests' => 'Rooma',
+            @include('component.travelmate.list', [
+                'modifiers' => 'm-3col',
+                'items' => [
+                    [
+                        'modifiers' => 'm-small',
+                        'image' =>  \App\Image::getRandom(),
+                        'letter'=> [
+                            'modifiers' => 'm-red',
+                            'text' => 'J'
+                        ],
+                        'name' => 'Charles Darwin',
                         'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
-
-                </div>
-                <div class="c-columns__item">
-
-                    @include('component.profile', [
-                        'title' => 'Jaanus Jaaniuss',
-                        'age' => '22',
-                        'interests' => 'Rooma',
+                        'sex_and_age' => 'N,28',
+                        'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
+                        'tags' => [
+                            [
+                                'modifiers' => 'm-yellow',
+                                'title' => 'India'
+                            ],
+                            [
+                                'modifiers' => 'm-purple',
+                                'title' => 'Delhi'
+                            ]
+                        ]
+                    ],
+                    [
+                        'modifiers' => 'm-small',
+                        'image' =>  \App\Image::getRandom(),
+                        'letter'=> [
+                            'modifiers' => 'm-red',
+                            'text' => 'J'
+                        ],
+                        'name' => 'Epptriin ',
                         'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
-
-                </div>
-                <div class="c-columns__item">
-
-                    @include('component.profile', [
-                        'title' => 'Jaanus Jaaniuss',
-                        'age' => '22',
-                        'interests' => 'Rooma',
+                        'sex_and_age' => 'N,22',
+                        'title' => 'Suusareis Austriasse veebruar-märts 2016',
+                        'tags' => [
+                            [
+                                'modifiers' => 'm-red',
+                                'title' => 'Austria'
+                            ],
+                            [
+                                'modifiers' => 'm-gray',
+                                'title' => 'Suusareis'
+                            ]
+                        ]
+                    ],
+                    [
+                        'modifiers' => 'm-small',
+                        'image' =>  \App\Image::getRandom(),
+                        'letter'=> [
+                            'modifiers' => 'm-red',
+                            'text' => 'J'
+                        ],
+                        'name' => 'Silka ',
                         'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
-
-                </div>
-                <div class="c-columns__item">
-
-                    @include('component.profile', [
-                        'title' => 'Jaanus Jaaniuss',
-                        'age' => '22',
-                        'interests' => 'Rooma',
-                        'route' => '#',
-                        'image' => \App\Image::getRandom()
-                    ])
-
-                </div>
-
-            </div>
+                        'sex_and_age' => 'M,32',
+                        'title' => 'Puerto Rico',
+                        'tags' => [
+                            [
+                                'modifiers' => 'm-green',
+                                'title' => 'Puerto Rico'
+                            ],
+                            [
+                                'modifiers' => 'm-gray',
+                                'title' => 'Puhkusereis'
+                            ]
+                        ]
+                    ]
+                ]
+            ])
 
         </div>
 
@@ -736,6 +829,7 @@
         <div class="r-flights__footer-promo-wrap">
 
             @include('component.promo', [
+                'modifiers' => 'm-footer',
                 'route' => '#',
                 'image' => \App\Image::getRandom()
             ])

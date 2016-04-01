@@ -39,7 +39,7 @@ class ContentController extends Controller
 
         $expireField = config("content_$type.index.expire.field");
         if ($expireField) {
-            $expireData = Main::getExpireData($type);
+            $expireData = Main::getExpireData($type, 0);
             if (in_array($expireField, $expireData)) {
                 if (($key = array_search($expireField, $expireData)) !== false) {
                     unset($expireData[$key]);
@@ -146,6 +146,8 @@ class ContentController extends Controller
             $viewVariables = $this->getTravelMateShow($content);
         } elseif ($type == 'forum' || $type == 'expat' || $type == 'buysell' || $type == 'internal') {
             $viewVariables = $this->getForumShow($content);
+        } elseif ($type == 'flight') {
+            $viewVariables = $this->getFlightShow($content);
         }
 
         $viewVariables['content'] = $content;

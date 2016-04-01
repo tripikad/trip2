@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ContentTraits;
 
 use Carbon\Carbon;
 use App\Content;
+use App\Main;
 
 trait Travelmate
 {
@@ -73,7 +74,7 @@ trait Travelmate
         $viewVariables['sidebar_flights'] = $sidebar_flights;
 
         foreach ($types as $key => $type) {
-            $viewVariables[$key] = Content::
+            $viewVariables[$key] = Content::select(['*', 'contents.id AS id'])->
             join('content_destination', 'content_destination.content_id', '=', 'contents.id')
                 ->leftJoin('content_topic', 'content_topic.content_id', '=', 'contents.id')
                 ->whereIn('contents.type', $type)
@@ -89,10 +90,33 @@ trait Travelmate
                             $topic_ids
                         );
                 })
-                ->orderBy('contents.created_at', 'desc')
+                ->groupBy('contents.id');
+
+            if ($key == 'forums') {
+                $viewVariables[$key] = $viewVariables[$key]->with(['destinations', 'topics']);
+            }
+
+            $viewVariables[$key] = $viewVariables[$key]->orderBy('contents.created_at', 'desc')
                 ->take(3)
                 ->get();
         }
+
+        /* To-do V2 ?
+        $forums = $viewVariables['forums'];
+        $forumRelationIds['destinationIds'] = Main::listRelationIds($forums, 'destinations');
+        $forumRelationIds['topicIds'] = Main::listRelationIds($forums, 'topics');
+
+
+        $viewVariables['forum_topic_title'] = $viewVariables['forums']->first()->destinations->find(
+            $viewVariables['forums']->first()->destination_id
+        )->name;
+
+        $viewVariables['forum_topic_route'] = route('content.index',
+            [
+                $viewVariables['forums']->first()->type,
+                'destination_id='.$viewVariables['forums']->first()->destination_id
+            ]);
+        */
 
         return $viewVariables;
     }

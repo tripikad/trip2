@@ -88,26 +88,127 @@
 }
 
 @mixin triangle($direction, $size: 6px, $color: $color-fill-black) {
-  content: '';
-  display: block;
-  position: absolute;
-  height: 0; width: 0;
-  @if ($direction == 'up') {
-    border-bottom: $size solid $color;
-    border-left: 1/2*$size solid $transparent;
-    border-right: 1/2*$size solid $transparent;
-  } @else if ($direction == 'down') {
-    border-top: $size solid $color;
-    border-left: 1/2*$size solid $transparent;
-    border-right: 1/2*$size solid $transparent;
-  } @else if ($direction == 'left') {
-    border-top: 1/2*$size solid $transparent;
-    border-bottom: 1/2*$size solid $transparent;
-    border-right: $size solid $color;
-  } @else if ($direction == 'right') {
-    border-top: 1/2*$size solid $transparent;
-    border-bottom: 1/2*$size solid $transparent;
-    border-left: $size solid $color;
-  }
+
+    content: '';
+    display: block;
+    position: absolute;
+    height: 0;
+    width: 0;
+
+    @if ($direction == 'up') {
+        border-bottom: $size solid $color;
+        border-left: 1/2*$size solid $transparent;
+        border-right: 1/2*$size solid $transparent;
+    } @else if ($direction == 'down') {
+        border-top: $size solid $color;
+        border-left: 1/2*$size solid $transparent;
+        border-right: 1/2*$size solid $transparent;
+    } @else if ($direction == 'left') {
+        border-top: 1/2*$size solid $transparent;
+        border-bottom: 1/2*$size solid $transparent;
+        border-right: $size solid $color;
+    } @else if ($direction == 'right') {
+        border-top: 1/2*$size solid $transparent;
+        border-bottom: 1/2*$size solid $transparent;
+        border-left: $size solid $color;
+    }
 }
 
+@mixin th-td-width($col, $width) {
+	#{$col} {
+		width: $width;
+	}
+}
+
+@mixin table-columns($widths...) {
+
+	table-layout: fixed;
+	width: 100%;
+
+	th, td {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	$n: 1;
+	$var: "th:nth-child(" + $n + "), td:nth-child(" + $n + ")";
+	@each $width in $widths {
+		@include th-td-width($var, $width);
+		$n: $n + 1;
+		$var: "th:nth-child(" + $n + "), td:nth-child(" + $n + ")";
+	}
+}
+
+@mixin responsive_table {
+    display: block;
+
+
+    tbody {
+
+        border: none;
+    }
+
+    tbody, th, td, tr, tfoot {
+
+        display: block;
+    }
+
+    thead {
+
+        display: none;
+    }
+
+    tr {
+
+        float: left;
+        width: 100%;
+
+        td {
+
+            float:left;
+            width: 100%;
+
+            &::before {
+
+                width: 100%;
+                display: block;
+                float: left;
+                clear: both;
+            }
+        }
+    }
+}
+
+@mixin responsive_table_tablet {
+    display: table;
+
+    th, td {
+
+        display: table-cell;
+    }
+
+    tr {
+
+        display: table-row;
+        border: none;
+        float: none;
+        box-shadow: none;
+
+        td {
+
+            float: none;
+            width: auto;
+        }
+    }
+
+    thead {
+
+        display: table-header-group;
+    }
+
+    tbody,tfoot {
+
+        display: table-row-group;
+    }
+}

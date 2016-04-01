@@ -49,7 +49,17 @@ i {
 
 blockquote {
 
-	margin: 0;
+    margin: 0 auto $spacer * 1.5;
+    text-align: center;
+    color: $color-fill-neutral-darker;
+    font-size: $font-size-small;
+    position: relative;
+    top: -$spacer;
+
+    @include respond-to(tablet) {
+
+        margin: 0 auto $spacer * 3;
+    }
 }
 
 input:not([type=checkbox]):not([type=radio]),
@@ -203,3 +213,86 @@ ul {
     }
 }
 
+h5 {
+
+    margin-bottom: $spacer * 1.5;
+    @include color-modifiers;
+    @include font-smoothing;
+
+    font-family: $font-primary;
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    color: $brand-green;
+
+    @include respond-to(tablet) {
+
+        margin-bottom: $spacer * 3;
+    }
+
+    .r-block.m-small & {
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 1.5;
+        }
+    }
+}
+
+table {
+
+    width: 100%;
+    float: left;
+    margin-bottom: $spacer * 2;
+
+    @include responsive_table;
+
+    @include respond-to(tablet) {
+
+        @include responsive_table_tablet;
+    }
+
+    tr td,
+    tr th {
+
+        vertical-align: top;
+        text-align: left;
+        line-height: $spacer * 3;
+
+        a {
+
+            text-decoration: none;
+
+            &:hover {
+
+                text-decoration: underline;
+            }
+        }
+
+        h6 {
+
+            @include color-modifiers;
+            @include font-smoothing;
+
+            font-family: $font-primary;
+            font-size: $font-size-small;
+            font-weight: $font-weight-bold;
+            text-transform: uppercase;
+            margin-bottom: $spacer + 4;
+            margin-top: $spacer + 4;
+            line-height: $font-size-small;
+
+            td:first-child h6 {
+
+                margin-top: 0;
+            }
+
+            @include respond-to(tablet) {
+
+                & {
+
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}

@@ -72,7 +72,6 @@
             @endif
 
             <div class="r-block m-mobile-hide">
-
                 @include('component.promo', [
                     'modifiers' => 'm-body',
                     'route' => '',
