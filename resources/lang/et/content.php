@@ -37,6 +37,8 @@ return [
     'action.read.more' => 'Loe edasi',
     'action.price.error' => 'Mis on veahind',
 
+    'action.type.forum' => ':type foorum',
+
     'field.image.title' => 'Vali pilt',
     'field.image.selected.title' => 'Uus pilt on valitud',
 
@@ -114,6 +116,7 @@ return [
     'flight.index.from' => 'al',
 
     'flight.show.action.all' => 'Kõik pakkumised',
+    'flight.show.expired' => 'Pakkumine võib olla aegunud',
 
     'flight.no.results' => 'Hetkel pole ühtegi aktiivset lennupakkumist.',
     'flight.filter.no.results' => 'Sinu otsingukriteeriumitele vastavalt ei leitud hetkel ühtegi tulemust.',
