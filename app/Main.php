@@ -22,7 +22,7 @@ class Main
         return nl2br($filteredBody);
     }
 
-    public static function getExpireData($type, $withField = 0)
+    public static function getExpireData($type, $withField = 1)
     {
         $names = ['daysFrom', 'daysTo'];
         $data = null;
@@ -151,6 +151,10 @@ class Main
                     }
                 }
 
+                if (isset($type['notId']) && count($type['notId'])) {
+                    $query = $query->whereNotIn('id', $type['notId']);
+                }
+
                 if (isset($type['with']) && $type['with'] !== null) {
                     $query = $query->with($type['with']);
                 }
@@ -188,17 +192,33 @@ class Main
         return $viewVariables;
     }
 
-    public static function getParentDestinations(array $collectionString, $viewVariables)
+    public static function getParentDestinations(array $collectionString, $viewVariables, $isDestination=null)
     {
         foreach ($collectionString as $type) {
             if (isset($viewVariables[$type])) {
                 foreach ($viewVariables[$type] as $key => $element) {
-                    $viewVariables[$type][$key]['destination'] = $element->destinations->first();
+                    if ($isDestination) {
+                        $viewVariables[$type][$key]['destination'] = $element;
+                    } else {
+                        $viewVariables[$type][$key]['destination'] = $element->destinations->first();
+                    }
+
                     $viewVariables[$type][$key]['parent_destination'] = $element->getDestinationParent();
                 }
             }
         }
 
         return $viewVariables;
+    }
+
+    public static function listRelationIds($collection, $relationName)
+    {
+        $relationCollection = collect();
+
+        foreach ($collection as $item) {
+            $relationCollection = $relationCollection->merge($item->$relationName->lists('id'));
+        }
+
+        return $relationCollection;
     }
 }
