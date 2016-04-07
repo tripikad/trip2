@@ -23,7 +23,7 @@
         'footer' => [
             'id1' => env('PROMO_FOOTER_ID1'),
             'id2' => env('PROMO_FOOTER_ID2'),
-            'width' => 1152,
+            'width' => 988,
             'height' => 144,
         ],
 
