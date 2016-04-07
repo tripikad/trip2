@@ -39,7 +39,7 @@
 
     </div>
 
-    <div class="c-form__group m-right m-no-margin">
+    <div class="c-form__group m-right @if ($destination) m-small-margin @else m-no-margin @endif">
 
         <a
             href="{{ route('content.index', [$type]) }}"
@@ -55,18 +55,14 @@
 {!! Form::close() !!}
 
 @if ($destination)
-
-    <div class="text-center utils-border-top">
-
+    <div class="c-form__group m-no-margin">
         <h3>
             {!! trans('content.index.filter.destination.title', [
                 'destination' =>
-                    '<a href="' . route('destination.index', [$destination]) . '">'
+                    '<a href="' . route('destination.show', [$destination]) . '">'
                     . $destinations[$destination]
                     . '</a>'
             ]) !!}
         </h3>
-
     </div>
-
 @endif

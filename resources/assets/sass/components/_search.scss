@@ -271,6 +271,14 @@
                 font-weight: $font-weight-bold;
                 text-transform: uppercase;
                 position: relative;
+                padding-left: 0;
+                margin-bottom: 0;
+
+                &::before {
+
+                    content: normal;
+                    position: static;
+                }
 
                 @each $name, $color, $color-dark in $colors {
 
@@ -323,6 +331,13 @@
                         line-height: 1.5;
                         text-transform: none;
                         margin-bottom: $spacer / 2;
+                        padding-left: 0;
+
+                        &::before {
+
+                            content: normal;
+                            position: static;
+                        }
 
                         @include respond-to(tablet) {
 

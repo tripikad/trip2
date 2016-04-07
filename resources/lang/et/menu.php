@@ -37,7 +37,7 @@ return [
     'news.news' => 'Uudised',
     'news.shortnews' => 'Lühiuudised',
 
-    'forum.forum' => 'Üldine',
+    'forum.forum' => 'Üldfoorum',
     'forum.expat' => 'Elu välismaal',
     'forum.buysell' => 'Ost-müük',
 

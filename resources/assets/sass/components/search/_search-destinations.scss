@@ -9,6 +9,13 @@
 
         padding: $spacer * 2 0;
         border-bottom: 1px solid $color-fill-neutral;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         &:last-child {
 

@@ -31,8 +31,6 @@ class ContentTest extends TestCase
 
     public function test_regular_user_can_create_and_edit_public_content()
     {
-        $this->markTestSkipped();
-
         $regular_user = factory(App\User::class)->create();
 
         foreach ($this->publicContentTypes as $type) {
@@ -47,7 +45,6 @@ class ContentTest extends TestCase
                     'title' => "Hello title $type",
                 ]))
                 ->see("Hello title $type")
-                ->see($regular_user->name)
                 ->seeInDatabase('contents', [
                     'user_id' => $regular_user->id,
                     'title' => "Hello title $type",

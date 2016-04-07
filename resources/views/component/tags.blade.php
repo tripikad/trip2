@@ -33,7 +33,7 @@ modifiers:
 
 <ul class="c-tags {{ $modifiers or '' }}">
 
-    @foreach ($items as $item)
+    @foreach ($items as $index => $item)
 
     <li class="c-tags__item {{ $item['modifiers'] or 'm-yellow' }}">
         @if(isset($item['route']))
@@ -48,6 +48,13 @@ modifiers:
         </span>
         @endif
     </li>
+
+        @if (($index + 1) % (isset($limit) ? $limit : 7) == 0)
+
+            </ul>
+            <ul class="c-tags {{ $modifiers or '' }}">
+
+        @endif
 
     @endforeach
 

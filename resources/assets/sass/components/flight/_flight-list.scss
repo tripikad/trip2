@@ -13,6 +13,13 @@
     .c-flight-list__item {
 
         margin-bottom: $spacer * 2;
+        padding-left: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         @include respond-to(tablet-portrait) {
 

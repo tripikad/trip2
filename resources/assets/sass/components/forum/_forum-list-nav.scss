@@ -6,6 +6,13 @@
     .c-forum-list-nav__item {
 
         margin-bottom: $spacer;
+        padding-left: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         @include respond-to(tablet) {
 
@@ -24,6 +31,11 @@
             font-size: $font-size-medium;
             font-weight: $font-weight-bold;
             text-decoration: none;
+
+            &:hover {
+
+                text-decoration: none;
+            }
 
             @include respond-to(desktop) {
 

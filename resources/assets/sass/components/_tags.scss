@@ -10,6 +10,13 @@
         border-radius: 48px;
         display: inline-block;
         margin: $spacer / 3 $spacer / 12;
+        padding-left: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         .c-tags.m-small & {
 
@@ -29,6 +36,14 @@
             @include color-modifiers(background);
         }
     }
+
+        .c-tags__item-link {
+
+            &:hover {
+
+                text-decoration: none;
+            }
+        }
 
         .c-tags__item-link,
         .c-tags__item-wrap {

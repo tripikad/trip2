@@ -53,7 +53,7 @@ modifiers:
 
         @if (isset($text))
 
-        <p class="c-card__text">{{ $text }}</p>
+        <p class="c-card__text">{!! $text !!}</p>
 
         @endif
 

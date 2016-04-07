@@ -8,6 +8,14 @@
     .c-auth-tabs__item {
 
         flex: 1;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
     }
 
         .c-auth-tabs__text {

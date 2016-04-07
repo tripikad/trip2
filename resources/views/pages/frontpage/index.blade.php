@@ -84,7 +84,7 @@
 
                     @include('component.about', [
                         'modifiers' => 'm-wide',
-                        'title' => str_limit($content->first()->body_filtered, 120),
+                        'title' => trans('content.action.more.about.text'),
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
@@ -142,12 +142,6 @@
                             ],
                             [
                                 'type' => 'button',
-                                'title' => 'Otsi foorumist',
-                                'route' => '#',
-                                'modifiers' => 'm-secondary m-block m-shadow'
-                            ],
-                            [
-                                'type' => 'button',
                                 'title' => 'Alusta teemat',
                                 'route' => '#',
                                 'modifiers' => 'm-secondary m-block m-shadow'
@@ -157,50 +151,18 @@
 
                 </div>
 
-                {{--
-
-                    Forum tags
-
-                    Destination tags should be coloured, everything else sholud be "m-gray"
-
-                --}}
+                {{-- Forum tags:
+                     Destination tags should be coloured, everything else sholud be "m-gray" --}}
 
                 @if (isset($forums) && count($forums) > 0)
-
                     <div class="r-home__forum-column m-last">
-                        @include('component.content.forum.list', [
-                            'items' => $forums->transform(function ($forum) {
-                                return [
-                                    'topic' => str_limit($forum->title, 50),
-                                    'route' => route('content.show', [$forum->type, $forum]),
-                                    'date' => view('component.date.relative', [
-                                        'date' => $forum->created_at
-                                    ]),
-                                    'profile' => [
-                                        'modifiers' => 'm-mini',
-                                        'image' => $forum->user->imagePreset(),
-                                        'letter' => [
-                                            'modifiers' => 'm-green m-small',
-                                            'text' => 'D'
-                                        ],
-                                    ],
-                                    'badge' => [
-                                        'modifiers' => 'm-inverted',
-                                        'count' => count($forum->comments)
-                                    ],
-                                    'tags' => $forum->topics->take(2)->transform(function ($topic) use ($forum) {
-                                        return [
-                                            'title' => $topic->name,
-                                            'modifiers' => 'm-gray',
-                                            'route' => route('content.index', [$forum->type]).'?topic='.$topic->id,
-                                        ];
-                                    })
-                                ];
-                            })
+                        @include('region.content.forum.list', [
+                            'items' => $forums,
+                            'tags' => [
+                                'take' => 2,
+                            ],
                         ])
-
                     </div>
-
                 @endif
 
             </div>
@@ -337,25 +299,14 @@
 
                         </div>
 
-                        @foreach ($flights2 as $key => $flight2)
+                        @include('region.content.flight.list', [
+                            'items' => $flights2
+                        ])
 
-                            @include('component.row', [
-                                'icon' => 'icon-tickets',
-                                'modifiers' => 'm-icon',
-                                'title' => $flight2->title.' '.$flight2->price.' '.config('site.currency.symbol'),
-                                'route' => route('content.show', [$flight2->type, $flight2]),
-                                'text' =>
-                                    view('component.date.short', ['date' => $flight2->end_at])
-                                    .' / '.
-                                    view('component.date.relative', ['date' => $flight2->created_at])
-                            ])
-
-                        @endforeach
-
-                        <div class="r-home__travel-column-footer">
+                        <div class="r-block__footer">
 
                             @include('component.link', [
-                                'modifiers' => 'm-icon',
+                                'modifiers' => 'm-icon m-right',
                                 'title' => trans('frontpage.index.all.offers'),
                                 'route' => route('content.index', ['flight']),
                                 'icon' => 'icon-arrow-right'
@@ -453,40 +404,13 @@
 
                     </div>
 
-                    @include('component.travelmate.list', [
-                        'modifiers' => 'm-'.count($travelmates).'col',
-                        'items' => $travelmates->transform(function ($travel_mate) {
-                            return [
-                                'modifiers' => 'm-small',
-                                'image' => $travel_mate->user->imagePreset('small_square'),
-                                'letter'=> [
-                                    'modifiers' => 'm-red',
-                                    'text' => 'J'
-                                ],
-                                'name' => $travel_mate->user->name,
-                                'route' => route('content.show', [$travel_mate->type, $travel_mate]),
-                                'sex_and_age' =>
-                                    ($travel_mate->user->gender ?
-                                        trans('user.gender.'.$travel_mate->user->gender).
-                                        ($travel_mate->user->age ? ', ' : '')
-                                    : null).
-                                    ($travel_mate->user->age ? $travel_mate->user->age : null),
-                                'title' => $travel_mate->title,
-                                'tags' => $travel_mate->destinations->transform(function ($travel_mate_destination) {
-                                    return [
-                                        'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
-                                        'title' => $travel_mate_destination->name
-                                    ];
-                                })
-                            ];
-                        })
+                    @include('region.content.travelmate.list', [
+                        'items' => $travelmates
                     ])
-
                 </div>
             </div>
 
         @endif
-
 
         <div class="r-home__footer-promo">
             <div class="r-home__footer-promo-wrap">
