@@ -17,6 +17,14 @@
     .c-pagination__item {
 
         display: block;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         .c-pagination.m-numbered & {
 

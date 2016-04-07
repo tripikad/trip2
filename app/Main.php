@@ -22,7 +22,7 @@ class Main
         return nl2br($filteredBody);
     }
 
-    public static function getExpireData($type, $withField = 0)
+    public static function getExpireData($type, $withField = 1)
     {
         $names = ['daysFrom', 'daysTo'];
         $data = null;
@@ -99,5 +99,128 @@ class Main
 
             return $items;
         }
+    }
+
+    public static function getContentCollections($types)
+    {
+        $content_query = null;
+        $i = 0;
+        $viewVariables = [];
+
+        foreach ($types as $key => $type) {
+            ++$i;
+
+            $query = null;
+
+            if (isset($type['id'])) {
+                //$query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->where('id', $type['id'])->whereStatus($type['status']);
+                $query = Content::where('id', $type['id'])->whereStatus($type['status']);
+            } else {
+                //$query = Content::select(['*', DB::raw('\''.$key.'\' AS `pseudo`')])->whereIn('type', $type['type'])->whereStatus($type['status']);
+                $query = Content::whereIn('type', $type['type'])->whereStatus($type['status']);
+
+                if (isset($type['whereBetween']) && ! empty($type['whereBetween'])) {
+                    if (! isset($type['whereBetween']['only'])) {
+                        $expireData = [
+                            $type['whereBetween']['daysFrom'],
+                            $type['whereBetween']['daysTo'],
+                        ];
+
+                        if (in_array($type['whereBetween']['field'], $expireData)) {
+                            if (($datakey = array_search($type['whereBetween']['field'], $expireData)) !== false) {
+                                unset($expireData[$datakey]);
+                            }
+
+                            $query = $query->whereRaw('`'.$type['whereBetween']['field'].'` >= ?', [
+                                array_values($expireData)[0],
+                            ]);
+                        } else {
+                            $query = $query->whereBetween($type['whereBetween']['field'], [
+                                $type['whereBetween']['daysFrom'],
+                                $type['whereBetween']['daysTo'],
+                            ]);
+                        }
+                    } else {
+                        $query = $query->whereRaw('IF(`type` = ?, ?, ?) BETWEEN ? AND ?', [
+                            $type['whereBetween']['only'],
+                            $type['whereBetween']['field'],
+                            $type['whereBetween']['daysTo'],
+                            $type['whereBetween']['daysFrom'],
+                            $type['whereBetween']['daysTo'],
+                        ]);
+                    }
+                }
+
+                if (isset($type['notId']) && count($type['notId'])) {
+                    $query = $query->whereNotIn('id', $type['notId']);
+                }
+
+                if (isset($type['with']) && $type['with'] !== null) {
+                    $query = $query->with($type['with']);
+                }
+
+                if (isset($type['latest']) && $type['latest'] !== null) {
+                    $query = $query->latest($type['latest']);
+                }
+
+                if (isset($type['skip']) && $type['skip'] !== null) {
+                    $query = $query->skip($type['skip']);
+                }
+
+                if (isset($type['take']) && $type['take'] !== null) {
+                    $query = $query->take($type['take']);
+                }
+            }
+
+            /*if ($i == 1) {
+                $content_query = $query;
+            } else {
+                $content_query = $content_query->unionAll($query);
+            }*/
+            $$key = $query->with('images')->get();
+            $viewVariables[$key] = $$key;
+        }
+
+        //$content_query = $content_query->with('images')->get();
+
+        /*foreach ($types as $key => $type) {
+            $$key = Collection::make($content_query->where('pseudo', $key)->values()->all());
+
+            $viewVariables[$key] = $$key;
+        }*/
+
+        return $viewVariables;
+    }
+
+    public static function getParentDestinations(array $collectionString, $viewVariables, $isDestination = null)
+    {
+        foreach ($collectionString as $type) {
+            if (isset($viewVariables[$type])) {
+                foreach ($viewVariables[$type] as $key => $element) {
+                    if ($isDestination) {
+                        $viewVariables[$type][$key]['destination'] = $element;
+                    } else {
+                        $viewVariables[$type][$key]['destination'] = $element->destinations->first();
+                    }
+
+                    $viewVariables[$type][$key]['parent_destination'] = $element->getDestinationParent();
+                }
+            }
+        }
+
+        return $viewVariables;
+    }
+
+    public static function listRelationIds($collection, $relationName)
+    {
+        $relationCollection = collect();
+
+        foreach ($collection as $item) {
+            if (isset($item->$relationName) && count($item->$relationName)) {
+                $relationCollection = $relationCollection->merge($item->$relationName->lists('id'));
+            }
+        }
+
+        return $relationCollection;
     }
 }

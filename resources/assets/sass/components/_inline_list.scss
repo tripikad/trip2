@@ -21,6 +21,8 @@
     .c-inline-list__item {
 
         line-height: 1.35;
+        padding-left: 0;
+        margin-bottom: 0;
 
         &:before {
 
@@ -32,6 +34,9 @@
             height: 4px;
             background: $color-text-neutral-darker;
             border-radius: 50%;
+            position: static;
+            top: auto;
+            left: auto;
         }
 
         &:first-child:before {

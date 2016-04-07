@@ -60,4 +60,11 @@ class Destination extends Baum\Node
 
         });
     }
+
+    public function getDestinationParent()
+    {
+        if ($this) {
+            return $this->parent()->first();
+        }
+    }
 }

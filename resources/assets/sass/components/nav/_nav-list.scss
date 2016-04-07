@@ -9,6 +9,13 @@
 
         display: block;
         margin: $spacer;
+        padding-left: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         @include respond-to(tablet) {
 
@@ -39,5 +46,10 @@
             .active & {
 
                 opacity: 0.6;
+            }
+
+            &:hover {
+
+                text-decoration: none;
             }
         }

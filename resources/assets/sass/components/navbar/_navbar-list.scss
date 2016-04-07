@@ -8,6 +8,14 @@
     .c-navbar-list__item {
 
         display: block;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         @include respond-to(tablet) {
 
@@ -75,6 +83,11 @@
 
                 opacity: 0.6;
             }
+
+            &:hover {
+
+                text-decoration: none;
+            }
         }
 
         .c-navbar-list__sub {
@@ -134,6 +147,12 @@
                 display: block;
                 margin: 0;
                 padding: 0;
+
+                &::before {
+
+                    content: normal;
+                    position: static;
+                }
             }
 
                 .c-navbar-list__sub-item-link {
@@ -160,6 +179,8 @@
 
                             @include color-modifiers-dark-and(background);
                         }
+
+                        text-decoration: none;
                     }
                 }
 

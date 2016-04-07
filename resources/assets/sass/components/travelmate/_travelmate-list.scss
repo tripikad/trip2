@@ -12,6 +12,13 @@
 
         flex: 1 0 100%;
         margin-bottom: $spacer * 2;
+        padding-left: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         .c-travelmate-list.m-2col & {
 
@@ -37,4 +44,9 @@
         .c-travelmate-list__link {
 
             text-decoration: none;
+
+            &:hover {
+
+                text-decoration: none;
+            }
         }
