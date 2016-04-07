@@ -209,11 +209,7 @@
 
                     <div class="r-destination__content-about-column m-first">
 
-                        @include('component.promo', [
-                            'modifiers' => 'm-sidebar-small',
-                            'route' => '#',
-                            'image' => \App\Image::getRandom()
-                        ])
+                        @include('component.promo', ['promo' => 'sidebar_small'])
 
                     </div>
 
@@ -487,11 +483,8 @@
 
                         <div class="r-block m-mobile-hide">
 
-                            @include('component.promo', [
-                                'modifiers' => 'm-body',
-                                'route' => '#',
-                                'image' => \App\Image::getRandom()
-                            ])
+                            @include('component.promo', ['promo' => 'body'])
+
                         </div>
 
                         <div class="r-destination__content-title">
@@ -539,11 +532,8 @@
 
                         <div class="r-block">
 
-                            @include('component.promo', [
-                                'modifiers' => 'm-sidebar-large',
-                                'route' => '#',
-                                'image' => \App\Image::getRandom()
-                            ])
+                            @include('component.promo', ['promo' => 'sidebar_large'])
+
                         </div>
                     </div>
                 </div>
@@ -741,11 +731,8 @@
 
         <div class="r-destination__footer-promo-wrap">
 
-            @include('component.promo', [
-                'modifiers' => 'm-footer',
-                'route' => '#',
-                'image' => \App\Image::getRandom()
-            ])
+            @include('component.promo', ['promo' => 'footer'])
+
         </div>
     </div>
 </div>

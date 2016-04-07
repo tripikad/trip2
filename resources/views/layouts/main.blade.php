@@ -16,6 +16,7 @@
         <meta property="og:description" content="@yield('fb_description')">
         <meta property="og:image" content="@yield('fb_image')">
         <meta property="og:locale" content="et_EE">
+        <meta property="promos" content="{{ rawurlencode(json_encode(config('promo'))) }}">
     </head>
     <body>{{ Analytics::render() }}
 

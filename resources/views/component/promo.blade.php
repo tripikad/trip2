@@ -19,9 +19,12 @@ modifiers:
 
 --}}
 
-<div class="c-promo {{ $modifiers or '' }}">
 
-    <a href="{{ $route }}" class="c-promo__link">
-        <img src="{{ $image }}" alt="" class="c-promo__image">
-    </a>
+<div id='{{ config("promo.$promo.id2") }}' style='width:{{ config("promo.$promo.width") }}px; height:{{ config("promo.$promo.height") }}px;'>
+    <script type='text/javascript'>
+    window.onload = function(e){ 
+        googletag.cmd.push(function() { googletag.display('{{ config("promo.$promo.id2") }}'); });
+    }
+    </script>
 </div>
+

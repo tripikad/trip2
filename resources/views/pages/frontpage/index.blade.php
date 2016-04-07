@@ -173,20 +173,12 @@
                 <div class="r-home__news-column m-first">
                     <div class="r-block m-small">
 
-                        @include('component.promo', [
-                            'modifiers' => 'm-sidebar-large',
-                            'route' => '',
-                            'image' => 'images/large/crowded-albufeira_3384859k.jpg'
-                        ])
+                        @include('component.promo', ['promo' => 'sidebar_large'])
 
                     </div>
                     <div class="r-block m-small">
 
-                        @include('component.promo', [
-                            'modifiers' => 'm-sidebar-small',
-                            'route' => '',
-                            'image' => \App\Image::getRandom()
-                        ])
+                        @include('component.promo', ['promo' => 'sidebar_small'])
 
                     </div>
                 </div>
@@ -245,11 +237,7 @@
                         </div>
                     </div>
 
-                    @include('component.promo', [
-                        'modifiers' => 'm-body',
-                        'route' => '',
-                        'image' => \App\Image::getRandom()
-                    ])
+                   @include('component.promo', ['promo' => 'body'])
 
                 </div>
             </div>
@@ -415,11 +403,7 @@
         <div class="r-home__footer-promo">
             <div class="r-home__footer-promo-wrap">
 
-                @include('component.promo', [
-                    'modifiers' => 'm-footer',
-                    'route' => '#',
-                    'image' => \App\Image::getRandom()
-                ])
+                @include('component.promo', ['promo' => 'footer'])
 
             </div>
         </div>
