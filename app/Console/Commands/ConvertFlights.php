@@ -62,7 +62,7 @@ class ConvertFlights extends ConvertBase
                 if (preg_match('/(\d+)€/', $node->title, $matches)) {
                     $node->price = $matches[1];
                     $node->title = preg_replace('/[al]*\.?\s?(\d+)€/', '', $node->title);
-                };
+                }
 
                 $node->body = str_replace('src="/images', 'src="http://www.trip.ee/images', $node->body);
 
