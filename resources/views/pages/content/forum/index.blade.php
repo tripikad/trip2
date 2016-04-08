@@ -94,11 +94,7 @@
                 </div>
 
                 <div class="r-block m-small m-mobile-hide">
-                    @include('component.promo', [
-                        'modifiers' => 'm-sidebar-small',
-                        'route' => '',
-                        'image' => \App\Image::getRandom()
-                    ])
+                    @include('component.promo', ['promo' => 'sidebar_small'])
                 </div>
 
                 <?php /* To-do V2
@@ -188,11 +184,8 @@
 
                 <div class="r-block m-small m-mobile-hide">
 
-                    @include('component.promo', [
-                        'modifiers' => 'm-sidebar-large',
-                        'route' => '',
-                        'image' => \App\Image::getRandom()
-                    ])
+                    @include('component.promo', ['promo' => 'sidebar_large'])
+
                 </div>
 
             </div>
@@ -231,11 +224,8 @@
 
             <div class="r-forum__footer-promo-wrap">
 
-                @include('component.promo', [
-                    'modifiers' => 'm-footer',
-                    'route' => '',
-                    'image' => \App\Image::getRandom()
-                ])
+                @include('component.promo', ['promo' => 'footer'])
+
             </div>
         </div>
     </div>

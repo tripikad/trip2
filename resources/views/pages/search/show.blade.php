@@ -74,11 +74,8 @@
 
         <div class="r-search__footer-promo-wrap">
 
-            @include('component.promo', [
-                'modifiers' => 'm-footer',
-                'route' => '',
-                'image' => \App\Image::getRandom()
-            ])
+            @include('component.promo', ['promo' => 'footer'])
+
         </div>
     </div>
 </div>

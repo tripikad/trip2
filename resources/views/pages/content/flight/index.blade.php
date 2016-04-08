@@ -72,11 +72,7 @@
             @endif
 
             <div class="r-block m-mobile-hide">
-                @include('component.promo', [
-                    'modifiers' => 'm-body',
-                    'route' => '',
-                    'image' => \App\Image::getRandom()
-                ])
+                @include('component.promo', ['promo' => 'body'])
             </div>
 
             @if (count($contents) > 4)
@@ -157,19 +153,11 @@
             </div>
 
             <div class="r-block m-small m-mobile-hide">
-                @include('component.promo', [
-                    'modifiers' => 'm-sidebar-large',
-                    'route' => '',
-                    'image' => \App\Image::getRandom()
-                ])
+                @include('component.promo', ['promo' => 'sidebar_large'])
             </div>
 
             <div class="r-block m-small m-mobile-hide">
-                @include('component.promo', [
-                    'modifiers' => 'm-sidebar-small',
-                    'route' => '',
-                    'image' => \App\Image::getRandom()
-                ])
+                @include('component.promo', ['promo' => 'sidebar_small'])
             </div>
 
             @if (isset($about) && count($about))
@@ -241,11 +229,7 @@
 
     <div class="r-flights__footer-promo">
         <div class="r-flights__footer-promo-wrap">
-            @include('component.promo', [
-                'modifiers' => 'm-footer',
-                'route' => '#',
-                'image' => \App\Image::getRandom()
-            ])
+            @include('component.promo', ['promo' => 'footer'])
         </div>
     </div>
 </div>

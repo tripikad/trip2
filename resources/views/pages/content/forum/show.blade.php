@@ -64,11 +64,8 @@
 
             <div class="r-block m-small m-mobile-hide">
 
-                @include('component.promo', [
-                    'modifiers' => 'm-body',
-                    'image' => \App\Image::getRandom(),
-                    'route' => '#'
-                ])
+                @include('component.promo', ['promo' => 'body'])
+
             </div>
 
             @if (method_exists($comments, 'currentPage'))
@@ -235,11 +232,8 @@
 
             <div class="r-block m-small m-mobile-hide">
 
-                @include('component.promo', [
-                    'modifiers' => 'm-sidebar-small',
-                    'route' => '#',
-                    'image' => \App\Image::getRandom()
-                ])
+                @include('component.promo', ['promo' => 'sidebar_small'])
+
             </div>
 
             @if (count($second_relative_posts))
@@ -492,11 +486,7 @@
 
         <div class="r-forum__footer-promo-wrap">
 
-            @include('component.promo', [
-                'modifiers' => 'm-footer',
-                'route' => '#',
-                'image' => \App\Image::getRandom()
-            ])
+            @include('component.promo', ['promo' => 'footer'])
 
         </div>
     </div>

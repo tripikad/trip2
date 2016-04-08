@@ -563,11 +563,9 @@
                 </div>
 
                 <div class="r-block m-mobile-hide">
-                    @include('component.promo', [
-                        'modifiers' => 'm-body',
-                        'route' => '',
-                        'image' => \App\Image::getRandom()
-                    ])
+
+                    @include('component.promo', ['promo' => 'body'])
+
                 </div>
 
                 <div class="r-block m-small">
@@ -734,20 +732,14 @@
 
                 <div class="r-block m-small m-mobile-hide">
 
-                    @include('component.promo', [
-                        'modifiers' => 'm-sidebar-small',
-                        'route' => '',
-                        'image' => \App\Image::getRandom()
-                    ])
+                    @include('component.promo', ['promo' => 'sidebar_small'])
+
                 </div>
 
                 <div class="r-block m-small m-mobile-hide">
 
-                    @include('component.promo', [
-                        'modifiers' => 'm-sidebar-large',
-                        'route' => '',
-                        'image' => \App\Image::getRandom()
-                    ])
+                    @include('component.promo', ['promo' => 'sidebar_large'])
+
                 </div>
             </div>
         </div>
@@ -793,11 +785,8 @@
 
         <div class="r-blog__wrap">
 
-            @include('component.promo', [
-                'modifiers' => 'm-footer',
-                'route' => '',
-                'image' => \App\Image::getRandom()
-            ])
+           @include('component.promo', ['promo' => 'footer'])
+
         </div>
     </div>
 </div>

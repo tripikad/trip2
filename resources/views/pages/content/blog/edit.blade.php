@@ -175,11 +175,8 @@
 
         <div class="r-blog__wrap">
 
-            @include('component.promo', [
-                'modifiers' => 'm-footer',
-                'route' => '',
-                'image' => \App\Image::getRandom()
-            ])
+            @include('component.promo', ['promo' => 'footer'])
+
         </div>
     </div>
 </div>

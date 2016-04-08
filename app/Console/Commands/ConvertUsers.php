@@ -108,7 +108,7 @@ class ConvertUsers extends ConvertBase
 
                 if ($user = User::find($uid)) {
                     $user->update(['contact_homepage' => null]);
-                };
+                }
 
                 $i++;
 
