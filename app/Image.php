@@ -18,13 +18,7 @@ class Image extends Model
 
     public function preset($preset = 'small')
     {
-        $file = config('imagepresets.presets.'.$preset.'.path').$this->filename;
-
-        if (! file_exists(public_path().$file)) {
-            $file = '';
-        }
-
-        return $file;
+        return config('imagepresets.presets.'.$preset.'.displaypath').$this->filename;
     }
 
     public static function createImagePresets($path, $filename)
@@ -38,7 +32,7 @@ class Image extends Model
                         $constraint->aspectRatio();
                 })
                 ->save(
-                    public_path().config("imagepresets.presets.$preset.path").$filename,
+                    config("imagepresets.presets.$preset.path").$filename,
                     config("imagepresets.presets.$preset.quality")
                 );
         }
@@ -46,7 +40,7 @@ class Image extends Model
 
     public static function storeImageFromUrl($url, $filename = null)
     {
-        $path = public_path().config('imagepresets.original.path');
+        $path = config('imagepresets.original.path');
 
         $info = getimagesize($url);
         $ext = image_type_to_extension($info[2], false);
@@ -71,7 +65,7 @@ class Image extends Model
 
     public static function storeImageFile($file, $new_filename = null)
     {
-        $path = public_path().config('imagepresets.original.path');
+        $path = config('imagepresets.original.path');
 
         $ext = $file->guessExtension();
 

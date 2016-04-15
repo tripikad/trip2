@@ -36,13 +36,13 @@ class PhotoTest extends TestCase
 
         // Check original file exists
 
-        $filepath = public_path().config('imagepresets.original.path').$filename;
+        $filepath = config('imagepresets.original.path').$filename;
         $this->assertTrue(file_exists($filepath));
 
         // See thumbnails exist
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = public_path().config("imagepresets.presets.$preset.path").$filename;
+            $filepath = config("imagepresets.presets.$preset.path").$filename;
             $this->assertTrue(file_exists($filepath));
         }
 
@@ -66,28 +66,28 @@ class PhotoTest extends TestCase
         $file_new = $this->getImageByTitle('New Hello photo title');
         $filename_new = $file_new->filename;
 
-        $filepath = public_path().config('imagepresets.original.path').$filename_new;
+        $filepath = config('imagepresets.original.path').$filename_new;
         $this->assertTrue(file_exists($filepath));
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = public_path().config("imagepresets.presets.$preset.path").$filename_new;
+            $filepath = config("imagepresets.presets.$preset.path").$filename_new;
             $this->assertTrue(file_exists($filepath));
         }
 
             //check if old images are unlinked
-            $filepath = public_path().config('imagepresets.original.path').$filename;
+            $filepath = config('imagepresets.original.path').$filename;
         $this->assertFalse(file_exists($filepath));
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = public_path().config("imagepresets.presets.$preset.path").$filename;
+            $filepath = config("imagepresets.presets.$preset.path").$filename;
             $this->assertFalse(file_exists($filepath));
         }
 
             //unlink new images
-            unlink(public_path().config('imagepresets.original.path').$filename_new);
+            unlink(config('imagepresets.original.path').$filename_new);
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = public_path().config("imagepresets.presets.$preset.path").$filename_new;
+            $filepath = config("imagepresets.presets.$preset.path").$filename_new;
             unlink($filepath);
         }
     }

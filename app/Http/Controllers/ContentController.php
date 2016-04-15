@@ -285,11 +285,11 @@ class ContentController extends Controller
 
             if ($old_image) {
                 $filename = $old_image->filename;
-                $filepath = public_path().config('imagepresets.original.path').$filename;
+                $filepath = config('imagepresets.original.path').$filename;
                 unlink($filepath);
 
                 foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                    $filepath = public_path().config("imagepresets.presets.$preset.path").$filename;
+                    $filepath = config("imagepresets.presets.$preset.path").$filename;
                     unlink($filepath);
                 }
             }
