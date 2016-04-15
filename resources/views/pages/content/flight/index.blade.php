@@ -138,7 +138,7 @@
                             [
                                 'modifiers' => 'm-icon',
                                 'title' => trans('content.action.price.error'),
-                                'route' => '#',
+                                'route' => route('content.show', ['static', 97203]),
                                 'icon' => 'icon-arrow-right'
                             ]
                         ],
