@@ -9,12 +9,12 @@ class ConvertStatic extends ConvertBase
     public function getStaticNodes()
     {
 
-        // Mis on Trip.ee, Kontakt, Kasutustingimused, Reklaam
+        // Mis on Trip.ee, Kontakt, Kasutustingimused, Reklaam, Mis on veahind?
 
         $query = \DB::connection($this->connection)
             ->table('node')
             ->join('node_revisions', 'node_revisions.nid', '=', 'node.nid')
-            ->whereIn('node.nid', [1534, 972, 25151, 22125]);
+            ->whereIn('node.nid', [1534, 972, 25151, 22125, 97203]);
 
         return $query;
     }
