@@ -74,9 +74,10 @@ class ContentTest extends TestCase
         }
     }
 
-/*
     public function test_regular_user_can_not_create_private_content()
     {
+        $this->markTestSkipped();
+
         $regular_user = factory(App\User::class)->create();
 
         foreach ($this->privateContentTypes as $type) {
@@ -93,9 +94,6 @@ class ContentTest extends TestCase
                 ->visit("content/$type")
                 ->dontSee(trans("content.$type.create.title"))
                 ->visit("content/$type/create"); // 401
-
         }
-
     }
-*/
 }
