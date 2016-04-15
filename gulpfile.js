@@ -6,6 +6,8 @@ var svgstore = require('gulp-svgstore');
 var rename = require('gulp-rename');
 var svgmin = require('gulp-svgmin');
 var del = require('del');
+var minifyCSS = require('gulp-clean-css');
+var minifyJS = require('gulp-uglify');
 
 gulp.task('del', function () {
   return del([
@@ -42,6 +44,7 @@ gulp.task('sass', ['del'], function() {
         browsers: ['last 2 versions'],
         cascade: false
     }))
+    .pipe(minifyCSS())
     .pipe(gulp.dest('./public/css'));
 
 });
@@ -58,6 +61,7 @@ gulp.task('js', ['del'], function() {
         './resources/assets/js/components/**/*.js'
     ])
     .pipe(concat('main.js'))
+    .pipe(minifyJS())
     .pipe(gulp.dest('./public/js'));
 
 });
