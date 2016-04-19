@@ -11,16 +11,27 @@ class exportDestinations extends Command
     public function handle()
     {
         $client = new \GuzzleHttp\Client();
+
         $contents = $client
             ->get('https://raw.githubusercontent.com/mledoze/countries/master/dist/countries.json')
             ->getBody()
             ->getContents();
         $countries = collect(json_decode($contents));
-        
+
+        $contents_et = $client
+            ->get('http://api.geonames.org/countryInfo?lang=et&username=kristjanjansen')
+            ->getBody()
+            ->getContents();
+        $countries_et = collect(json_decode(json_encode(simplexml_load_string($contents_et)), true)['country']);
+        dd($countries_et->first());
+
+        // 
+
         //dump($countries->where('name.common', 'Aruba'));
         $destinations = \App\Destination::get();
 
         foreach ($destinations as $destination) {
+            if ($destination->getLevel() == 1) {
             if ($country = $countries->where('name.common', $destination->name)->first()) {
                $this->line(
                     $destination->name . ',' 
@@ -31,6 +42,7 @@ class exportDestinations extends Command
                 );
             } else {
                 $this->line($destination->name . ',,,,');
+            }
             }
         }
     }
