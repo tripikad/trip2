@@ -107,7 +107,7 @@ class exportDestinations extends Command
             ]);
         }
 
-        $this->line("<?php\n\nreturn " . var_export($results, true) . ";");
+        $this->line("<?php\n\nreturn " . str_replace(['array (', ')'], ['[', ']'], var_export($results, true)) . ";");
 
     }
 }
