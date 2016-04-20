@@ -11,62 +11,62 @@ class exportDestinations extends Command
     public function handle()
     {
 
-        $countries_unknown = collect([
-            ['Holland' => 'NL'],
-            ['Iirimaa' => 'IE'],
-            ['Lõuna-Aafrika Vabariik' => 'ZA'],
-            ['Tansaania' => 'TZ'],
-            ['Šveits' => 'CH'],
-            ['Uus-Meremaa' => 'NZ'],
-            ['Jordaania' => 'JO'],
-            ['Seišellid' => ''],
-            ['Kambodža' => ''],
-            ['Paraguai' => ''],
-            ['Küpros' => ''],
-            ['Jamaika' => ''],
-            ['Tšiili' => ''],
-            ['Fidži' => ''],
-            ['Saalomoni saared' => ''],
-            ['Vatikan' => ''],
-            ['Bosnia ja Hertsegoviina' => ''],
-            ['Tadžikistan' => ''],
-            ['Kanaari saared' => ''],
-            ['Kolumbia' => ''],
-            ['Havai' => ''],
-            ['Aserbaidžaan' => ''],
-            ['Tšehhi' => ''],
-            ['Jugoslaavia' => ''],
-            ['Galapagos' => ''],
-            ['Elevandiluurannik' => ''],
-            ['Suurbritannia' => ''],
-            ['Taivan' => ''],
-            ['Hollandi Antillid' => ''],
-            ['Lõuna-Korea' => ''],
-            ['Surinam' => ''],
-            ['Sambia' => ''],
-            ['Sao Tome ja Principe' => ''],
-            ['Kõrgõzstan' => ''],
-            ['Reunion' => ''],
-            ['Paapua Uus-Guinea' => ''],
-            ['Makedoonia' => ''],
-            ['Tšaad' => ''],
-            ['Kesk-Aafrika Vabariik' => ''],
-            ['Kongo' => ''],
-            ['Kongo Demokraatlik Vabariik' => ''],
-            ['Angoola' => ''],
-            ['Komoorid' => ''],
-            ['Bahama' => ''],
-            ['Uruguai' => ''],
-            ['Ida-Timor' => ''],
-            ['Kookosesaared' => ''],
-            ['Mikroneesia' => ''],
-            ['Saint-Pierre ja Miquelon' => ''],
-            ['Saint Vincent ja Grenadiinid' => ''],
-            ['Marshalli saared' => ''],
-            ['Somaalimaa' => ''],
-            ['Chennai' => ''],
-        ]);
-        
+        $countries_unknown = [
+            'Holland' => 'NL',
+            'Iirimaa' => 'IE',
+            'Lõuna-Aafrika Vabariik' => 'ZA',
+            'Tansaania' => 'TZ',
+            'Šveits' => 'CH',
+            'Uus-Meremaa' => 'NZ',
+            'Jordaania' => 'JO',
+            'Seišellid' => 'SC',
+            'Kambodža' => 'KH',
+            'Paraguai' => 'PY',
+            'Küpros' => 'CY',
+            'Jamaika' => 'JM',
+            'Tšiili' => 'CL',
+            'Fidži' => 'FJ',
+            'Saalomoni saared' => 'SB',
+            'Vatikan' => 'VA',
+            'Bosnia ja Hertsegoviina' => 'BA',
+            'Tadžikistan' => 'TJ',
+            // 'Kanaari saared' => '',
+            'Kolumbia' => 'CO',
+            // 'Havai' => '',
+            'Aserbaidžaan' => 'AZ',
+            'Tšehhi' => 'CZ',
+            //'Jugoslaavia' => '',
+            //'Galapagos' => '',
+            'Elevandiluurannik' => 'CI',
+            'Suurbritannia' => 'GB',
+            'Taivan' => 'TW',
+            //'Hollandi Antillid' => '',
+            'Lõuna-Korea' => 'KR',
+            'Surinam' => 'SR',
+            'Sambia' => 'ZM',
+            'Sao Tome ja Principe' => 'ST',
+            'Kõrgõzstan' => 'KG',
+            //'Reunion' => '',
+            'Paapua Uus-Guinea' => 'PG',
+            'Makedoonia' => 'MK',
+            'Tšaad' => 'TD',
+            'Kesk-Aafrika Vabariik' => 'CF',
+            'Kongo' => 'CG',
+            'Kongo Demokraatlik Vabariik' => 'CD',
+            'Angoola' => 'AO',
+            'Komoorid' => 'KM',
+            'Bahama' => 'BS',
+            'Uruguai' => 'UY',
+            'Ida-Timor' => 'TL',
+            'Kookosesaared' => 'CC',
+            'Mikroneesia' => 'FM',
+            'Saint-Pierre ja Miquelon' => 'PM',
+            'Saint Vincent ja Grenadiinid' => 'VC',
+            'Marshalli saared' => 'MH'
+            //'Somaalimaa' => '',
+            //'Chennai' => '',
+        ];
+    
         $client = new \GuzzleHttp\Client();
 
         $contents = $client
@@ -80,34 +80,34 @@ class exportDestinations extends Command
             ->getBody()
             ->getContents();
         $countries_et = collect(json_decode(json_encode(simplexml_load_string($contents_et)), true)['country']);
+           
+        $destinations = \App\Destination::orderBy('name')->get();
         
-        //dd($countries_et);
-        
-        //dd($countries->where('name.common', 'Aruba')->first());
-        
-        $destinations = \App\Destination::get();
-        $no = [];
+        $results = [];
 
         foreach ($destinations as $destination) {
             if ($destination->getLevel() == 1) {
                 if ($country = $countries->where('name.common', $destination->name)->first()) {
-                   /*
-                   $this->line(
-                        $destination->name . ',' 
-                        . $country->cca2 . ',' 
-                        . $country->cca3 . ',' 
-                        . $country->currency[0] . ',' 
-                        . $country->area
-                    );*/
+                    $results[$destination->name] = $country->cca2;
                 } else if ($country_et = $countries_et->where('countryName', $destination->name)->first()) {
-                    //$this->line($destination->name);
-                } else {
-                    //$this->line($destination->name . ',,,,');
-                    $this->line("['$destination->name' => ''],");
+                    $results[$destination->name] = $country_et['countryCode'];
+                } else if (in_array($destination->name, array_keys($countries_unknown))) {
+                    $results[$destination->name] = $countries_unknown[$destination->name];
                 }
             }
         }
 
+        $this->line('Name,Code,Area,Population,CallingCode');
+
+        foreach ($results as $name => $code) {
+            $this->line(implode(', ', [
+                $name,
+                $code,
+                explode('.', $countries_et->where('countryCode', $code)->first()['areaInSqKm'])[0],
+                $countries_et->where('countryCode', $code)->first()['population'],
+                $countries->where('cca2', $code)->first()->callingCode[0]
+            ]));
+        }
     }
 }
 
