@@ -10,7 +10,6 @@ class exportDestinations extends Command
 
     public function handle()
     {
-
         $countries_unknown = [
             'Holland' => 'NL',
             'Iirimaa' => 'IE',
@@ -62,11 +61,11 @@ class exportDestinations extends Command
             'Mikroneesia' => 'FM',
             'Saint-Pierre ja Miquelon' => 'PM',
             'Saint Vincent ja Grenadiinid' => 'VC',
-            'Marshalli saared' => 'MH'
+            'Marshalli saared' => 'MH',
             //'Somaalimaa' => '',
             //'Chennai' => '',
         ];
-    
+
         $client = new \GuzzleHttp\Client();
 
         $contents = $client
@@ -80,18 +79,18 @@ class exportDestinations extends Command
             ->getBody()
             ->getContents();
         $countries_et = collect(json_decode(json_encode(simplexml_load_string($contents_et)), true)['country']);
-           
+
         $destinations = \App\Destination::orderBy('name')->get();
-        
+
         $results = [];
 
         foreach ($destinations as $destination) {
             if ($destination->getLevel() == 1) {
                 if ($country = $countries->where('name.common', $destination->name)->first()) {
                     $results[$destination->id] = ['code' => $country->cca2];
-                } else if ($country_et = $countries_et->where('countryName', $destination->name)->first()) {
+                } elseif ($country_et = $countries_et->where('countryName', $destination->name)->first()) {
                     $results[$destination->id] = ['code' => $country_et['countryCode']];
-                } else if (in_array($destination->name, array_keys($countries_unknown))) {
+                } elseif (in_array($destination->name, array_keys($countries_unknown))) {
                     $results[$destination->id] = ['code' => $countries_unknown[$destination->name]];
                 }
             }
@@ -105,15 +104,13 @@ class exportDestinations extends Command
                 'area' => $countries->where('cca2', $data['code'])->first()->area,
                 'population' => $countries_et->where('countryCode', $data['code'])->first()['population'],
                 'callingCode' => $countries->where('cca2', $data['code'])->first()->callingCode[0],
-                'currencyCode' => $countries_et->where('countryCode', $data['code'])->first()['currencyCode']
+                'currencyCode' => $countries_et->where('countryCode', $data['code'])->first()['currencyCode'],
             ]);
 
-            $this->line("$id => " . str_replace(['array (', ')'], ['[', ']'], var_export($row, true)) . ",");
-        
+            $this->line("$id => ".str_replace(['array (', ')'], ['[', ']'], var_export($row, true)).',');
         }
 
-        $this->line("];");
-
+        $this->line('];');
     }
 }
 
@@ -211,7 +208,7 @@ class exportDestinations extends Command
 
 array:18 [
   "countryCode" => "AW" // cca2
-  "countryName" => "Aruba" 
+  "countryName" => "Aruba"
   "isoNumeric" => "533" // ccn3
   "isoAlpha3" => "ABW" // cca3
   "fipsCode" => "AA"
