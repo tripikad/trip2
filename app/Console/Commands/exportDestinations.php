@@ -97,17 +97,22 @@ class exportDestinations extends Command
             }
         }
 
+        $this->line("<?php\n\nreturn [");
+
         foreach ($results as $id => $data) {
-            $results[$id] = array_merge($results[$id], [
+            $row = array_merge($results[$id], [
                 'capital' => $countries_et->where('countryCode', $data['code'])->first()['capital'],
                 'area' => $countries->where('cca2', $data['code'])->first()->area,
                 'population' => $countries_et->where('countryCode', $data['code'])->first()['population'],
                 'callingCode' => $countries->where('cca2', $data['code'])->first()->callingCode[0],
                 'currencyCode' => $countries_et->where('countryCode', $data['code'])->first()['currencyCode']
             ]);
+
+            $this->line("$id => " . str_replace(['array (', ')'], ['[', ']'], var_export($row, true)) . ",");
+
         }
 
-        $this->line("<?php\n\nreturn " . str_replace(['array (', ')'], ['[', ']'], var_export($results, true)) . ";");
+        $this->line("];");
 
     }
 }
