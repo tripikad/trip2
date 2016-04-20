@@ -88,29 +88,27 @@ class exportDestinations extends Command
         foreach ($destinations as $destination) {
             if ($destination->getLevel() == 1) {
                 if ($country = $countries->where('name.common', $destination->name)->first()) {
-                    $results[$destination->name] = $country->cca2;
+                    $results[$destination->id] = ['code' => $country->cca2];
                 } else if ($country_et = $countries_et->where('countryName', $destination->name)->first()) {
-                    $results[$destination->name] = $country_et['countryCode'];
+                    $results[$destination->id] = ['code' => $country_et['countryCode']];
                 } else if (in_array($destination->name, array_keys($countries_unknown))) {
-                    $results[$destination->name] = $countries_unknown[$destination->name];
+                    $results[$destination->id] = ['code' => $countries_unknown[$destination->name]];
                 }
             }
         }
 
-        $this->line('Name,Code,Area,Population,CallingCode,CurrencyCode,Domain,Capital');
-
-        foreach ($results as $name => $code) {
-            $this->line(implode(', ', [
-                $name,
-                $code,
-                explode('.', $countries_et->where('countryCode', $code)->first()['areaInSqKm'])[0],
-                $countries_et->where('countryCode', $code)->first()['population'],
-                $countries->where('cca2', $code)->first()->callingCode[0],
-                $countries_et->where('countryCode', $code)->first()['currencyCode'],
-                $countries->where('cca2', $code)->first()->tld[0],
-                $countries_et->where('countryCode', $code)->first()['capital'],
-            ]));
+        foreach ($results as $id => $data) {
+            $results[$id] = array_merge($results[$id], [
+                'capital' => $countries_et->where('countryCode', $data['code'])->first()['capital'],
+                'area' => $countries->where('cca2', $data['code'])->first()->area,
+                'population' => $countries_et->where('countryCode', $data['code'])->first()['population'],
+                'callingCode' => $countries->where('cca2', $data['code'])->first()->callingCode[0],
+                'currencyCode' => $countries_et->where('countryCode', $data['code'])->first()['currencyCode']
+            ]);
         }
+
+        $this->line("<?php\n\nreturn " . var_export($results, true) . ";");
+
     }
 }
 
