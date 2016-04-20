@@ -97,7 +97,7 @@ class exportDestinations extends Command
             }
         }
 
-        $this->line('Name,Code,Area,Population,CallingCode');
+        $this->line('Name,Code,Area,Population,CallingCode,CurrencyCode,Domain,Capital');
 
         foreach ($results as $name => $code) {
             $this->line(implode(', ', [
@@ -105,7 +105,10 @@ class exportDestinations extends Command
                 $code,
                 explode('.', $countries_et->where('countryCode', $code)->first()['areaInSqKm'])[0],
                 $countries_et->where('countryCode', $code)->first()['population'],
-                $countries->where('cca2', $code)->first()->callingCode[0]
+                $countries->where('cca2', $code)->first()->callingCode[0],
+                $countries_et->where('countryCode', $code)->first()['currencyCode'],
+                $countries->where('cca2', $code)->first()->tld[0],
+                $countries_et->where('countryCode', $code)->first()['capital'],
             ]));
         }
     }
