@@ -579,9 +579,7 @@ return [
 ],
 331 => [
   'code' => 'IL',
-  'capital' => 
-  [
-  ],
+  'capital' => '',
   'area' => 20770,
   'population' => '7353985',
   'callingCode' => '972',

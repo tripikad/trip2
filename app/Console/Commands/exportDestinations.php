@@ -101,7 +101,7 @@ class exportDestinations extends Command
 
         foreach ($results as $id => $data) {
             $row = array_merge($results[$id], [
-                'capital' => $countries_et->where('countryCode', $data['code'])->first()['capital'],
+                'capital' => $id == 331 ? '' : $countries_et->where('countryCode', $data['code'])->first()['capital'],
                 'area' => $countries->where('cca2', $data['code'])->first()->area,
                 'population' => $countries_et->where('countryCode', $data['code'])->first()['population'],
                 'callingCode' => $countries->where('cca2', $data['code'])->first()->callingCode[0],
@@ -109,7 +109,7 @@ class exportDestinations extends Command
             ]);
 
             $this->line("$id => " . str_replace(['array (', ')'], ['[', ']'], var_export($row, true)) . ",");
-
+        
         }
 
         $this->line("];");
