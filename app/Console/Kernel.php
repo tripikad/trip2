@@ -41,5 +41,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\StatsUsersNew::class,
         \App\Console\Commands\StatsUsersOld::class,
 
+        \App\Console\Commands\ExportDestinations::class,
+        \App\Console\Commands\ExportFeatured::class,
+
     ];
 }
