@@ -64,7 +64,7 @@ class ExportDestinations extends Command
             'Mikroneesia' => 'FM',
             'Saint-Pierre ja Miquelon' => 'PM',
             'Saint Vincent ja Grenadiinid' => 'VC',
-            'Marshalli saared' => 'MH'
+            'Marshalli saared' => 'MH',
             //'Somaalimaa' => '',
             //'Chennai' => '',
         ];
@@ -93,15 +93,17 @@ class ExportDestinations extends Command
         // either by English or Estonian name
         // If no match is found, fall back to $countries_unknown map
 
+        $destinations = \App\Destination::orderBy('name')->get();
+
         $results = [];
 
         foreach ($destinations as $destination) {
             if ($destination->getLevel() == 1) {
                 if ($country = $countries->where('name.common', $destination->name)->first()) {
                     $results[$destination->id] = ['code' => $country->cca2];
-                } else if ($country_et = $countries_et->where('countryName', $destination->name)->first()) {
+                } elseif ($country_et = $countries_et->where('countryName', $destination->name)->first()) {
                     $results[$destination->id] = ['code' => $country_et['countryCode']];
-                } else if (in_array($destination->name, array_keys($countries_unknown))) {
+                } elseif (in_array($destination->name, array_keys($countries_unknown))) {
                     $results[$destination->id] = ['code' => $countries_unknown[$destination->name]];
                 }
             }
@@ -119,7 +121,7 @@ class ExportDestinations extends Command
                 'area' => $countries->where('cca2', $data['code'])->first()->area,
                 'population' => $countries_et->where('countryCode', $data['code'])->first()['population'],
                 'callingCode' => $countries->where('cca2', $data['code'])->first()->callingCode[0],
-                'currencyCode' => $countries_et->where('countryCode', $data['code'])->first()['currencyCode']
+                'currencyCode' => $countries_et->where('countryCode', $data['code'])->first()['currencyCode'],
             ]);
 
             // Convert the result to short array syntax and output it
@@ -229,7 +231,7 @@ class ExportDestinations extends Command
 
 array:18 [
   "countryCode" => "AW" // cca2
-  "countryName" => "Aruba" 
+  "countryName" => "Aruba"
   "isoNumeric" => "533" // ccn3
   "isoAlpha3" => "ABW" // cca3
   "fipsCode" => "AA"
