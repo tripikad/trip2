@@ -35,7 +35,7 @@ return [
 ],
 311 => [
   'code' => 'US',
-  'capital' => 'Washington, D.C.',
+  'capital' => 'Washington, D. C.',
   'area' => 9372610,
   'population' => '310232863',
   'callingCode' => '1',
@@ -123,7 +123,7 @@ return [
 ],
 368 => [
   'code' => 'AT',
-  'capital' => 'Viin',
+  'capital' => 'Vienna',
   'area' => 83871,
   'population' => '8205000',
   'callingCode' => '43',
@@ -139,7 +139,7 @@ return [
 ],
 385 => [
   'code' => 'BH',
-  'capital' => 'Al-Manāmah',
+  'capital' => 'Manama',
   'area' => 765,
   'population' => '738004',
   'callingCode' => '973',
@@ -659,7 +659,7 @@ return [
 ],
 343 => [
   'code' => 'JO',
-  'capital' => '‘Ammān',
+  'capital' => 'Amman',
   'area' => 89342,
   'population' => '6407085',
   'callingCode' => '962',
@@ -795,7 +795,7 @@ return [
 ],
 1503 => [
   'code' => 'XK',
-  'capital' => 'Priština',
+  'capital' => 'Pristina',
   'area' => 10908,
   'population' => '1800000',
   'callingCode' => '383',
@@ -1131,7 +1131,9 @@ return [
 ],
 931 => [
   'code' => 'NR',
-  'capital' => 'Yaren',
+  'capital' => 
+  [
+  ],
   'area' => 21,
   'population' => '10065',
   'callingCode' => '674',
@@ -1211,7 +1213,7 @@ return [
 ],
 908 => [
   'code' => 'PW',
-  'capital' => 'Melekeok',
+  'capital' => 'Melekeok - Palau State Capital',
   'area' => 459,
   'population' => '19907',
   'callingCode' => '680',
@@ -1251,7 +1253,7 @@ return [
 ],
 701 => [
   'code' => 'KP',
-  'capital' => 'P\'yŏngyang',
+  'capital' => 'Pyongyang',
   'area' => 120538,
   'population' => '22912177',
   'callingCode' => '850',
@@ -1325,7 +1327,7 @@ return [
   'code' => 'SE',
   'capital' => 'Stockholm',
   'area' => 450295,
-  'population' => '9828655',
+  'population' => '9555893',
   'callingCode' => '46',
   'currencyCode' => 'SEK',
 ],
@@ -1675,7 +1677,7 @@ return [
 ],
 395 => [
   'code' => 'TM',
-  'capital' => 'Aşgabat',
+  'capital' => 'Ashgabat',
   'area' => 488100,
   'population' => '4940916',
   'callingCode' => '993',
@@ -1813,7 +1815,7 @@ return [
   'code' => 'ZW',
   'capital' => 'Harare',
   'area' => 390757,
-  'population' => '13061000',
+  'population' => '11651858',
   'callingCode' => '263',
   'currencyCode' => 'ZWL',
 ],
