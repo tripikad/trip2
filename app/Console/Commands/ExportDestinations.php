@@ -4,12 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class exportDestinations extends Command
+class ExportDestinations extends Command
 {
     protected $signature = 'export:destinations';
 
     public function handle()
     {
+
+        // Countries we can not detect country code by name
 
         $countries_unknown = [
             'Holland' => 'NL',
@@ -67,6 +69,8 @@ class exportDestinations extends Command
             //'Chennai' => '',
         ];
     
+        // Get the datasets
+
         $client = new \GuzzleHttp\Client();
 
         $contents = $client
@@ -81,8 +85,14 @@ class exportDestinations extends Command
             ->getContents();
         $countries_et = collect(json_decode(json_encode(simplexml_load_string($contents_et)), true)['country']);
            
+        // Get the destinations
+           
         $destinations = \App\Destination::orderBy('name')->get();
         
+        // For each 1-level destination (a country) try to detect its country code,
+        // either by English or Estonian name
+        // If no match is found, fall back to $countries_unknown map
+
         $results = [];
 
         foreach ($destinations as $destination) {
@@ -97,7 +107,11 @@ class exportDestinations extends Command
             }
         }
 
+        // Output config file header
+
         $this->line("<?php\n\nreturn [");
+
+        // Go through the results and popluate the data
 
         foreach ($results as $id => $data) {
             $row = array_merge($results[$id], [
@@ -108,9 +122,13 @@ class exportDestinations extends Command
                 'currencyCode' => $countries_et->where('countryCode', $data['code'])->first()['currencyCode']
             ]);
 
+            // Convert the result to short array syntax and output it
+
             $this->line("$id => " . str_replace(['array (', ')'], ['[', ']'], var_export($row, true)) . ",");
         
         }
+
+        // Output config file footer
 
         $this->line("];");
 
