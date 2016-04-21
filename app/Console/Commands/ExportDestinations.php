@@ -117,7 +117,7 @@ class ExportDestinations extends Command
 
         foreach ($results as $id => $data) {
             $row = array_merge($results[$id], [
-                'capital' => $id == 331 ? '' : $countries_et->where('countryCode', $data['code'])->first()['capital'],
+                'capital' => ($id == 331 || $id == 931) ? '' : $countries_et->where('countryCode', $data['code'])->first()['capital'],
                 'area' => $countries->where('cca2', $data['code'])->first()->area,
                 'population' => $countries_et->where('countryCode', $data['code'])->first()['population'],
                 'callingCode' => $countries->where('cca2', $data['code'])->first()->callingCode[0],
