@@ -42,10 +42,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\StatsUsersOld::class,
 
         \App\Console\Commands\ExportDestinations::class,
-<<<<<<< HEAD
         \App\Console\Commands\ExportFeatured::class,
-=======
->>>>>>> master
 
     ];
 }
