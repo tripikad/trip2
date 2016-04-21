@@ -68,7 +68,7 @@ class ExportDestinations extends Command
             //'Somaalimaa' => '',
             //'Chennai' => '',
         ];
-    
+
         // Get the datasets
 
         $client = new \GuzzleHttp\Client();
@@ -84,11 +84,11 @@ class ExportDestinations extends Command
             ->getBody()
             ->getContents();
         $countries_et = collect(json_decode(json_encode(simplexml_load_string($contents_et)), true)['country']);
-           
+
         // Get the destinations
-           
+
         $destinations = \App\Destination::orderBy('name')->get();
-        
+
         // For each 1-level destination (a country) try to detect its country code,
         // either by English or Estonian name
         // If no match is found, fall back to $countries_unknown map
@@ -126,14 +126,12 @@ class ExportDestinations extends Command
 
             // Convert the result to short array syntax and output it
 
-            $this->line("$id => " . str_replace(['array (', ')'], ['[', ']'], var_export($row, true)) . ",");
-        
+            $this->line("$id => ".str_replace(['array (', ')'], ['[', ']'], var_export($row, true)).',');
         }
 
         // Output config file footer
 
-        $this->line("];");
-
+        $this->line('];');
     }
 }
 
