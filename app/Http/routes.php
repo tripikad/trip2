@@ -13,7 +13,6 @@ Route::get('photodemo', function () {
             echo '<a href="'.str_replace('small', 'original', $photo->imagePreset()).'"><img src="'.$photo->imagePreset('medium').'" /></a>';
         }
     }
-    // \App\Content::whereType('photo')->where
 
 });
 
