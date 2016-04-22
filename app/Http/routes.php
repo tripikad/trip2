@@ -1,5 +1,21 @@
 <?php
 
+// Temporary photo test
+
+Route::get('photodemo', function () {
+
+    foreach (config('featured') as $key => $value) {
+        $destination = \App\Destination::find($key);
+        $photo = \App\Content::whereType('photo')->find($value);
+
+        echo '<h2 style="font-family: sans-serif">' . $destination->name . '</h2>';
+        if ($photo) {
+            echo '<a href="' . str_replace('small', 'original', $photo->imagePreset()) . '"><img src="' . $photo->imagePreset('medium') . '" /></a>';
+        }
+    }
+    // \App\Content::whereType('photo')->where
+
+});
 
 // Frontpage
 
