@@ -549,6 +549,9 @@ class ConvertBase extends Command
         $imagePath = $this->cleanAll($imagePath);
         $filename = basename($imagePath);
 
+        $filename = preg_replace('/\s+/', '_', $filename);
+        $filename = str_replace('%20', '_', $filename);
+
         $model = $modelName::findOrFail($id);
 
         $image = \App\Image::create(['filename' => $filename]);
@@ -585,7 +588,8 @@ class ConvertBase extends Command
                 $filename = $file.'.'.$ext;
             }
 
-            $filename = str_replace('%20', '-', $filename);
+            $filename = preg_replace('/\s+/', '_', $filename);
+            $filename = str_replace('%20', '_', $filename);
 
             $model = $modelName::findOrFail($id);
 
@@ -803,7 +807,7 @@ class ConvertBase extends Command
             }
 
             foreach ($presets as $preset) {
-                Imageconv::make($from)
+                Imageconv::make($to)
                     ->{config("imagepresets.presets.$preset.operation")}(
                         config("imagepresets.presets.$preset.width"),
                         config("imagepresets.presets.$preset.height"),
