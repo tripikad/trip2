@@ -10,7 +10,7 @@ Route::get('photodemo', function () {
 
         echo '<div style="font-family: sans-serif"><h2>'.$destination->name.'</h2>';
         echo '<a href="http://trip.ee/node/'.$value.'" target="_blank">http://trip.ee/node/'.$value.'</a><br />';
-        
+
         if ($photo) {
             echo '<a href="'.str_replace('small', 'original', $photo->imagePreset()).'"><img src="'.$photo->imagePreset('medium').'" /></a></div>';
         }
