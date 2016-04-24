@@ -1,26 +1,5 @@
 <?php
 
-<<<<<<< HEAD
-=======
-// Temporary photo test
-
-Route::get('photodemo', function () {
-
-    foreach (config('featured') as $key => $value) {
-        $destination = \App\Destination::find($key);
-        $photo = \App\Content::whereType('photo')->find($value);
-
-        echo '<div style="font-family: sans-serif"><h2>'.$destination->name.'</h2>';
-        echo '<a href="http://trip.ee/node/'.$value.'" target="_blank">http://trip.ee/node/'.$value.'</a><br />';
-
-        if ($photo) {
-            echo '<a href="'.str_replace('small', 'original', $photo->imagePreset()).'"><img src="'.$photo->imagePreset('medium').'" /></a></div>';
-        }
-    }
-
-});
-
->>>>>>> master
 // Frontpage
 
 Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
