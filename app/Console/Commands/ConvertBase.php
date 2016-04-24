@@ -414,10 +414,16 @@ class ConvertBase extends Command
     {
         $user = $this->getUser($uid);
 
-        $blockedSender = DB::connection($this->connection)
-            ->table('pm_block_user')
-            ->where('author', '=', $uid)
-            ->get();
+        $blockedSender = false;
+
+        // We only consider user being blocked when it is not admininstrator, editor, senior editor or superuser
+
+        if (! in_array($user->rid, [4, 7, 8, 12])) {
+            $blockedSender = DB::connection($this->connection)
+                ->table('pm_block_user')
+                ->where('author', '=', $uid)
+                ->get();
+        }
 
         // Eliminating mail duplicates using
         // SELECT uid, mail, COUNT(*) c FROM users GROUP BY mail HAVING c > 1;
