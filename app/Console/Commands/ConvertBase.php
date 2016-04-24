@@ -425,8 +425,6 @@ class ConvertBase extends Command
                 ->get();
         }
 
-        dump($blockedSender);
-
         // Eliminating mail duplicates using
         // SELECT uid, mail, COUNT(*) c FROM users GROUP BY mail HAVING c > 1;
 
