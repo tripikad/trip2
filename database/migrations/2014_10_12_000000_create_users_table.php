@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('contact_homepage')->nullable();
 
             $table->string('real_name');
-            $table->integer('show_real_name')->unsigned()->nullable();
+            $table->boolean('real_name_show')->default(false);
             $table->integer('gender')->unsigned()->nullable();
             $table->integer('birthyear')->unsigned()->nullable();
 
