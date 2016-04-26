@@ -15,7 +15,7 @@ class LoggedCookie
         // Proceed if we do not have a redirect
 
         if (get_class($response) !== 'Symfony\Component\HttpFoundation\RedirectResponse') {
-            
+
             // If user is logged in, send a cookie
             // so HTTP caching reverse proxy can bypass the caching if needed
 
@@ -23,13 +23,11 @@ class LoggedCookie
                 $response->withCookie(Cookie::forever('logged', 'true'));
 
             // If user is not logged in, remove the cookie
-
             } else {
                 $response->withCookie(Cookie::forget('logged'));
             }
-
         }
-        
+
         return $response;
     }
 }
