@@ -12,7 +12,7 @@ class LoggedCookie
     {
         $response = $next($request);
 
-        // Proceed if we do not have a redirect going on
+        // Proceed if we do not have a redirect
 
         if (get_class($response) !== 'Symfony\Component\HttpFoundation\RedirectResponse') {
             
