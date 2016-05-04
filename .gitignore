@@ -4,3 +4,4 @@
 *.lock
 **/.DS_Store
 /.idea
+/public/images
