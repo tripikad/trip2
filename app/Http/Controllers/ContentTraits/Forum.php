@@ -62,13 +62,13 @@ trait Forum
             })->take(2);
 
             if (count($relation_posts)) {
-                $first_relative_posts = $relation_posts->first();
+                $first_relative_posts = $relation_posts->first()->take(5);
                 $viewVariables['first_destination'] = $first_relative_posts->first()->destinations->first();
                 $viewVariables['first_destination_parent'] = $first_relative_posts->first()->destinations->first()->parent()->first();
             }
 
             if (count($relation_posts) > 1) {
-                $second_relative_posts = $relation_posts->last();
+                $second_relative_posts = $relation_posts->last()->take(5);
                 $viewVariables['second_destination'] = $second_relative_posts->first()->destinations->first();
                 $viewVariables['second_destination_parent'] = $second_relative_posts->first()->destinations->first()->parent()->first();
             }
