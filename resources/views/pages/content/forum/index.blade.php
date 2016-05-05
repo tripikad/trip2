@@ -34,6 +34,7 @@
         </div>
 
         <div class="r-forum__wrap m-large-offset-bottom">
+
             @if (isset($contents) && count($contents))
                 <div class="r-forum__content">
                     @include('region.content.forum.list', [
@@ -68,15 +69,6 @@
                         @include('component.about', [
                             'title' => 'Alusta uut teemat',
                             'text' => 'Soovid midagi küsida? Tripikad vastavad.',
-                            /* To-do V2
-                            'links' => [
-                                [
-                                    'modifiers' => 'm-icon',
-                                    'title' => 'Kasutjaid hetkel 147',
-                                    'route' => '',
-                                    'icon' => ''
-                                ],
-                            ],*/
                             'button' =>
                                 \Auth::check() ? [
                                     'modifiers' => 'm-block',
