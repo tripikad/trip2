@@ -352,7 +352,21 @@ class ContentController extends Controller
                 if ($id && Image::find($id)) {
                     $content->images()->sync([$id]);
                 }
-            } elseif (! array_key_exists('image_id', $allowedFields) && count($content->images)) {
+            } elseif (! array_key_exists('image_id', $allowedFields) && count($content->images) && ! array_key_exists('file', $allowedFields) && count($content->images)) {
+                $old_images = $content->images;
+
+                if (count($old_images)) {
+                    foreach ($old_images as $old_image) {
+                        $filename = $old_image->filename;
+                        $filepath = config('imagepresets.original.path').$filename;
+                        unlink($filepath);
+
+                        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+                            $filepath = config("imagepresets.presets.$preset.path").$filename;
+                            unlink($filepath);
+                        }
+                    }
+                }
                 $content->images()->delete();
             }
 
