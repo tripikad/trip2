@@ -226,7 +226,6 @@ class ContentController extends Controller
             $view = 'pages.content.edit';
         }
 
-
         $viewVariables = [
             'mode' => 'edit',
             'fields' => config("content_$type.edit.fields"),
@@ -370,13 +369,20 @@ class ContentController extends Controller
             }
 
             if (! $request->ajax()) {
-                return redirect()
-                    ->route('content.show', [$type, $content])
-                    ->with('info', trans((! $id ? 'content.store.status.'.config("content_$type.store.status", 1).'.info' : 'content.update.info'), [
-                        'title' => $content->title,
-                    ]));
+                if (! $id) {
+                    return redirect()
+                        ->route('content.index', [$type])
+                        ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
+                            'title' => $content->title,
+                        ]));
+                } else {
+                    return redirect()
+                        ->route('content.show', [$type, $content])
+                        ->with('info', trans('content.update.info', [
+                            'title' => $content->title,
+                        ]));
+                }
             }
-
         } else {
             return redirect()
                 ->route('content.index', [$type]);
