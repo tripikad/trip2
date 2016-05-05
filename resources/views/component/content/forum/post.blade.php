@@ -1,10 +1,11 @@
-{{--
+<?php
+/*
 
 title: Forum post
 
 code: |
 
-    @include('component.content.forum.post', [
+    #include('component.content.forum.post', [
         'profile' => [
             'modifiers' => '',
             'image' => '',
@@ -29,7 +30,8 @@ code: |
         ]
     ])
 
---}}
+*/
+?>
 
 @if (isset($title))
 

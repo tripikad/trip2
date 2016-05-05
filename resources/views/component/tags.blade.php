@@ -1,10 +1,10 @@
-{{--
-
+<?php
+/*
 title: Tags
 
 code: |
 
-    @include('component.tags', [
+    #include('component.tags', [
         'modifiers' => '',
         'items' => [
             [
@@ -29,7 +29,8 @@ modifiers:
 - m-purple
 - m-gray
 
---}}
+*/
+?>
 
 <ul class="c-tags {{ $modifiers or '' }}">
 
