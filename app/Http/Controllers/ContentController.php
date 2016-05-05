@@ -169,70 +169,35 @@ class ContentController extends Controller
 
         $now = \Carbon\Carbon::now();
 
-        if (view()->exists('pages.content.'.$type.'.edit')) {
-            $view = 'pages.content.'.$type.'.edit';
+        $viewType = $type;
+        foreach (config('menu.forum') as $item) {
+            if ($type == $item['type']) {
+                $viewType = 'forum';
+                break;
+            }
+        }
+
+        if (view()->exists('pages.content.'.$viewType.'.edit')) {
+            $view = 'pages.content.'.$viewType.'.edit';
         } else {
             $view = 'pages.content.edit';
         }
 
-        return \View::make($view)
-            ->with('mode', 'create')
-            ->with('fields', config("content_$type.edit.fields"))
-            ->with('url', route('content.store', [$type]))
-            ->with('type', $type)
-            ->with('destinations', $destinations)
-            ->with('destination', $destination)
-            ->with('topics', $topics)
-            ->with('topic', $topic)
-            ->with('now', $now)
-            ->render();
-    }
-
-    public function store(Request $request, $type)
-    {
-        $validator = config("content_$type.add.validate") ? config("content_$type.add.validate") : config("content_$type.edit.validate");
-
-        $request->merge(
-            self::fetchDates($request, $type)
-        );
-
-        $this->validate($request, $validator);
-
-        $fields = [
+        $viewVariables = [
+            'mode' => 'create',
+            'fields' => config("content_$type.edit.fields"),
+            'url' => route('content.store', [$type]),
             'type' => $type,
-            'status' => config("content_$type.store.status", 1),
+            'destinations' => $destinations,
+            'destination' => $destination,
+            'topics' => $topics,
+            'topic' => $topic,
+            'now' => $now,
         ];
 
-        $content = Auth::user()->contents()->create(array_merge($request->all(), $fields));
-
-        if ($request->hasFile('file')) {
-            $filename = Image::storeImageFile($request->file('file'));
-            $content->images()->create(['filename' => $filename]);
-        }
-
-        if ($request->has('image_id')) {
-            $id = str_replace(['[[', ']]'], '', $request->image_id);
-
-            if (is_int($id) && Image::find($id)) {
-                $content->images()->sync($id);
-            }
-        }
-
-        if ($request->has('destinations')) {
-            $content->destinations()->sync($request->destinations);
-        }
-
-        if ($request->has('topics')) {
-            $content->topics()->sync($request->topics);
-        }
-
-        if (! $request->ajax()) {
-            return redirect()
-                ->route('content.index', [$type])
-                ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
-                    'title' => $content->title,
-                ]));
-        }
+        return response()
+            ->view($view, $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.content.create.header'));
     }
 
     public function edit($type, $id)
@@ -247,79 +212,174 @@ class ContentController extends Controller
         $topics = Topic::getNames();
         $topic = $content->topics()->select('topics.id')->lists('id')->toArray();
 
-        if (view()->exists('pages.content.'.$type.'.edit')) {
-            $view = 'pages.content.'.$type.'.edit';
+        $viewType = $type;
+        foreach (config('menu.forum') as $item) {
+            if ($type == $item['type']) {
+                $viewType = 'forum';
+                break;
+            }
+        }
+
+        if (view()->exists('pages.content.'.$viewType.'.edit')) {
+            $view = 'pages.content.'.$viewType.'.edit';
         } else {
             $view = 'pages.content.edit';
         }
 
-        return \View::make($view)
-            ->with('mode', 'edit')
-            ->with('fields', config("content_$type.edit.fields"))
-            ->with('content', $content)
-            ->with('method', 'put')
-            ->with('url', route('content.update', [$content->type, $content]))
-            ->with('type', $type)
-            ->with('destinations', $destinations)
-            ->with('destination', $destination)
-            ->with('topics', $topics)
-            ->with('topic', $topic)
-            ->with('now', $now)
-            ->render();
+
+        $viewVariables = [
+            'mode' => 'edit',
+            'fields' => config("content_$type.edit.fields"),
+            'content' => $content,
+            'method' => 'put',
+            'url' => route('content.update', [$content->type, $content]),
+            'type' => $type,
+            'destinations' => $destinations,
+            'destination' => $destination,
+            'topics' => $topics,
+            'topic' => $topic,
+            'now' => $now,
+        ];
+
+        return response()
+            ->view($view, $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.content.edit.header'));
     }
 
-    public function update(Request $request, $type, $id)
+    protected function fetchTypesArray($array=[])
     {
-        $content = \App\Content::findorFail($id);
+        $types = [];
+        foreach ($array as $key => $value) {
+            $types[] = $value['type'];
+        }
 
-        $request->merge(
-            self::fetchDates($request, $type)
-        );
+        return $types;
+    }
 
-        $this->validate($request, config("content_$type.edit.validate"));
+    public function store(Request $request, $type, $id=null)
+    {
+        if (Auth::user()) {
+            $user_id = Auth::user()->id;
+            $content = null;
+            if ($id) {
+                $content = Content::findorFail($id);
+            } else {
+                $content = new Content();
+            }
 
-        $fields = [];
+            $columns = array_flip(\DB::connection()->getSchemaBuilder()->getColumnListing("contents"));
+            $protectedColumns = ['id','user_id','created_at','updated_at','pseudo'];
 
-        if ($request->hasFile('file')) {
-            $old_image = $content->images()->first();
+            foreach ($protectedColumns as $protectedColumn) {
+                if (isset($columns[$protectedColumn])) {
+                    unset($columns[$protectedColumn]);
+                }
+            }
+            $columns = array_flip($columns);
 
-            if ($old_image) {
-                $filename = $old_image->filename;
-                $filepath = config('imagepresets.original.path').$filename;
-                unlink($filepath);
-
-                foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                    $filepath = config("imagepresets.presets.$preset.path").$filename;
-                    unlink($filepath);
+            $allowedFields = config('content_'.$type.'.edit.fields');
+            if ($request->has('type') && isset($allowedFields['type']) && isset($allowedFields['type']['items'])) {
+                $allowedTypes = $this->fetchTypesArray(config($allowedFields['type']['items']));
+                if (in_array($request->type, $allowedTypes)) {
+                    $allowedFields = config('content_' . $request->type . '.edit.fields');
                 }
             }
 
-            $filename = Image::storeImageFile($request->file('file'));
-            $content->images()->update(['filename' => $filename]);
-        }
+            if (! $id) {
+                $validator = config("content_$type.add.validate") ? config("content_$type.add.validate") : config("content_$type.edit.validate");
 
-        $content->update(array_merge($fields, $request->all()));
-
-        if ($request->has('image_id')) {
-            $id = (int) str_replace(['[[', ']]'], '', $request->image_id);
-
-            if ($id && Image::find($id)) {
-                $content->images()->sync([$id]);
+                $content->user_id = $user_id;
+                $content->type = $type;
+                $content->status = config("content_$type.store.status", 1);
+            } else {
+                $validator = config("content_$type.edit.validate");
             }
-        }
 
-        if ($request->has('destinations')) {
-            $content->destinations()->sync($request->destinations);
-        }
+            $request->merge(
+                self::fetchDates($request, $type)
+            );
 
-        if ($request->has('topics')) {
-            $content->topics()->sync($request->topics);
-        }
+            $this->validate($request, $validator);
+            foreach ($request->all() as $key => $value) {
+                if (array_key_exists($key , $allowedFields) && in_array($key, $columns)) {
+                    if ($key == 'type' && isset($allowedFields['type']['items'])) {
+                        $allowedTypes = $this->fetchTypesArray(config($allowedFields['type']['items']));
 
-        if (! $request->ajax()) {
+                        if (! in_array($value, $allowedTypes)) {
+                            $value = $type;
+                        } else {
+                            $type = $value;
+                        }
+                    } elseif ($key == 'type' && ! isset($allowedFields['type']['items'])) {
+                        $value = $type;
+                    }
+
+                    $content->$key = $value;
+                }
+            }
+
+            if ($id) {
+                if ($request->hasFile('file') && array_key_exists('file', $allowedFields)) {
+                    $old_image = $content->images()->first();
+
+                    if ($old_image) {
+                        $filename = $old_image->filename;
+                        $filepath = config('imagepresets.original.path').$filename;
+                        unlink($filepath);
+
+                        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+                            $filepath = config("imagepresets.presets.$preset.path").$filename;
+                            unlink($filepath);
+                        }
+                    }
+
+                    $filename = Image::storeImageFile($request->file('file'));
+                    $content->images()->update(['filename' => $filename]);
+                }
+            }
+
+            $content->save();
+
+            if (! $id) {
+                if ($request->hasFile('file') && array_key_exists('file', $allowedFields)) {
+                    $filename = Image::storeImageFile($request->file('file'));
+                    $content->images()->create(['filename' => $filename]);
+                }
+            }
+
+            if ($request->has('image_id') && array_key_exists('image_id', $allowedFields)) {
+                $id = str_replace(['[[', ']]'], '', $request->image_id);
+
+                if ($id && Image::find($id)) {
+                    $content->images()->sync([$id]);
+                }
+            } elseif (! array_key_exists('image_id', $allowedFields) && count($content->images)) {
+                $content->images()->delete();
+            }
+
+            if ($request->has('destinations') && array_key_exists('destinations', $allowedFields)) {
+                $content->destinations()->sync($request->destinations);
+            } elseif (! array_key_exists('destinations', $allowedFields) && count($content->destinations)) {
+                $content->destinations()->delete();
+            }
+
+            if ($request->has('topics') && array_key_exists('topics', $allowedFields)) {
+                $content->topics()->sync($request->topics);
+            } elseif (! array_key_exists('topics', $allowedFields) && count($content->topics)) {
+                $content->topics()->delete();
+            }
+
+            if (! $request->ajax()) {
+                return redirect()
+                    ->route('content.show', [$type, $content])
+                    ->with('info', trans((! $id ? 'content.store.status.'.config("content_$type.store.status", 1).'.info' : 'content.update.info'), [
+                        'title' => $content->title,
+                    ]));
+            }
+
+        } else {
             return redirect()
-                ->route('content.show', [$type, $content])
-                ->with('info', trans('content.update.info', ['title' => $content->title]));
+                ->route('content.index', [$type]);
         }
     }
 
