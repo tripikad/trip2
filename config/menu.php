@@ -104,18 +104,21 @@ return [
             'route' => '/content/forum',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
+            'type' => 'forum',
         ],
         [
             'title' => 'menu.forum.expat',
             'route' => '/content/expat',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
+            'type' => 'expat',
         ],
         [
             'title' => 'menu.forum.buysell',
             'route' => '/content/buysell',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
+            'type' => 'buysell',
         ],
     ],
 
