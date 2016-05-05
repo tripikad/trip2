@@ -1,14 +1,15 @@
-{{--
-
+<?php
+/*
 title: Forum list nav
 
 code: |
 
-    @include('component.content.forum.nav', [
+    #include('component.content.forum.nav', [
         'items' => []
     ])
 
---}}
+*/
+?>
 
 <ul class="c-forum-list-nav">
 

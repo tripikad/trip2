@@ -70,7 +70,14 @@ code: |
 @if (isset($fields) && ! empty($fields))
 
     @foreach ($fields as $key => $field)
-        <div class="c-form__group">
+        <div class="c-form__input-wrap">
+            <div class="c-form__group">
+
+            @if (trans("content.$type.edit.field.$key.title") != '' && trans("content.$type.edit.field.$key.title") != "content.$type.edit.field.$key.title")
+                {!! Form::label($key, trans("content.$type.edit.field.$key.title"), [
+                    'class' => 'c-form__label'
+                ]) !!}
+            @endif
 
             @if (in_array($field['type'], ['text', 'textarea', 'url', 'email', 'date']))
 
@@ -84,23 +91,42 @@ code: |
                             ? ' js-ckeditor'
                             : ''),
                     'id' => $key,
-                    'placeholder' => trans("content.$type.edit.field.$key.title"),
+                    'placeholder' => (trans("content.$type.edit.field.$key.help") == '' || trans("content.$type.edit.field.$key.help") == "content.$type.edit.field.$key.help" ? trans("content.$type.edit.field.$key.title") : trans("content.$type.edit.field.$key.help", ['now' =>  $now])),
                     'rows' => isset($field['rows']) ? $field['rows'] : 8,
                 ]) !!}
 
             @elseif ($field['type'] == 'file')
 
                 <div id="{{ isset($id) ? $id : 'dropzoneImage' }}" class="dropzone">
-
                     <div class="fallback">
-
                         <div class="form-group">
-
                             {!! call_user_func('Form::'.$field['type'], $key) !!}
+                        </div>
+                    </div>
+                </div>
 
+            @elseif ($field['type'] == 'radio')
+
+                <div class="c-columns m-2-cols m-border">
+
+                    @foreach(config($field['items']) as $index => $item)
+                        <div class="c-columns__item">
+                            <div class="c-form__group-radio js-radio-wrap">
+                                {{ Form::radio('type', $item['type'], null, [
+                                    'class' => 'c-form__input m-radio js-radio',
+                                    'id' => $item['type']
+                                ]) }}
+                                {!! Form::label($item['type'], trans($item['title']),[
+                                    'class' => 'c-form__label m-radio js-radio'
+                                ]) !!}
+                            </div>
                         </div>
 
-                    </div>
+                        @if (($index + 1) % 2 == 0)
+                            <div class="c-columns m-2-cols m-border">
+                            </div>
+                        @endif
+                    @endforeach
 
                 </div>
 
@@ -108,7 +134,7 @@ code: |
 
                 {!! Form::text($key, null, [
                     'class' => 'c-form__input',
-                    'placeholder' => trans("content.$type.edit.field.$key.title"),
+                    'placeholder' => (trans("content.$type.edit.field.$key.help") == '' || trans("content.$type.edit.field.$key.help") == "content.$type.edit.field.$key.help" ? trans("content.$type.edit.field.$key.title") : trans("content.$type.edit.field.$key.help", ['now' =>  $now]))
                 ]) !!}
 
             @elseif ($field['type'] == 'destinations')
@@ -121,7 +147,7 @@ code: |
                         'multiple' => 'true',
                         'id' => $key,
                         'class' => 'js-filter',
-                        'placeholder' => trans("content.$type.edit.field.$key.title"),
+                        'placeholder' => (trans("content.$type.edit.field.$key.help") == '' || trans("content.$type.edit.field.$key.help") == "content.$type.edit.field.$key.help" ? trans("content.$type.edit.field.$key.title") : trans("content.$type.edit.field.$key.help", ['now' =>  $now]))
                     ]
                 )!!}
 
@@ -135,7 +161,7 @@ code: |
                         'multiple' => 'true',
                         'id' => $key,
                         'class' => 'js-filter',
-                        'placeholder' => trans("content.$type.edit.field.$key.title"),
+                        'placeholder' => (trans("content.$type.edit.field.$key.help") == '' || trans("content.$type.edit.field.$key.help") == "content.$type.edit.field.$key.help" ? trans("content.$type.edit.field.$key.title") : trans("content.$type.edit.field.$key.help", ['now' =>  $now]))
                     ]
                 )!!}
 
@@ -198,7 +224,7 @@ code: |
 
                 {!! Form::text($key, null, [
                     'class' => 'c-form__input m-narrow',
-                    'placeholder' => trans("content.$type.edit.field.$key.title"),
+                    'placeholder' => (trans("content.$type.edit.field.$key.help") == '' || trans("content.$type.edit.field.$key.help") == "content.$type.edit.field.$key.help" ? trans("content.$type.edit.field.$key.title") : trans("content.$type.edit.field.$key.help", ['now' =>  $now]))
                 ]) !!}
 
                 <span class="c-form__text">
@@ -215,21 +241,15 @@ code: |
                 ]) !!}
 
             @endif
-
-            @if (trans("content.$type.edit.field.$key.help") != '' && trans("content.$type.edit.field.$key.help") != "content.$type.edit.field.$key.help")
-
-                {!! Form::label($key, trans("content.$type.edit.field.$key.help", ['now' =>  $now]), [
-                    'class' => 'c-form__label'
-                ]) !!}
-
-            @endif
-
+            </div>
         </div>
     @endforeach
 
 @endif
 
-{!! Form::close() !!}
+@if (isset($form['files']))
+    {!! Form::close() !!}
+@endif
 
 @section('scripts')
 
@@ -300,8 +320,7 @@ code: |
                     '',
 
                     [
-                        //'{{ trans('site.dropzone.default') }}',
-                        'Üleslaadimiseks lohista fail siia või <span class="dropzone-link">vajuta siia</span>',
+                        '{!! trans('site.dropzone.default') !!}',
                         '{{ trans('site.dropzone.fallback.message') }}',
                         '{{ trans('site.dropzone.fallback.text') }}',
                         '{{ trans('site.dropzone.max.files.exceeded') }}',

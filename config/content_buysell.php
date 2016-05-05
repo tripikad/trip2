@@ -28,7 +28,10 @@ return [
     'edit' => [
 
         'fields' => [
-
+            'type' => [
+                'type' => 'radio',
+                'items' => 'menu.forum',
+            ],
             'title' => [
                 'type' => 'text',
             ],

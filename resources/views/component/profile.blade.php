@@ -1,10 +1,11 @@
-{{--
+<?php
+/*
 
 title: Profile
 
 code: |
 
-    @include('component.profile', [
+    #include('component.profile', [
         'modifiers' => $modifiers,
         'route' => '#',
         'image' => \App\Image::getRandom(),
@@ -28,8 +29,8 @@ modifiers:
 - m-micro
 - m-full
 - m-status
-
---}}
+*/
+?>
 
 @if (isset($route) && $route != '')
 

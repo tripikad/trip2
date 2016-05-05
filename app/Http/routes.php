@@ -63,7 +63,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
     Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@edit', 'as' => 'edit']);
 
-    Route::put('{id}', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@update', 'as' => 'update']);
+    Route::put('{id}', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@store', 'as' => 'update']);
 
     Route::put('{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'ContentController@status', 'as' => 'status']);
 
