@@ -246,7 +246,7 @@ class ContentController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.edit.header'));
     }
 
-    protected function fetchTypesArray($array=[])
+    protected function fetchTypesArray($array = [])
     {
         $types = [];
         foreach ($array as $key => $value) {
@@ -256,7 +256,7 @@ class ContentController extends Controller
         return $types;
     }
 
-    public function store(Request $request, $type, $id=null)
+    public function store(Request $request, $type, $id = null)
     {
         if (Auth::user()) {
             $user_id = Auth::user()->id;
@@ -267,8 +267,8 @@ class ContentController extends Controller
                 $content = new Content();
             }
 
-            $columns = array_flip(\DB::connection()->getSchemaBuilder()->getColumnListing("contents"));
-            $protectedColumns = ['id','user_id','created_at','updated_at','pseudo'];
+            $columns = array_flip(\DB::connection()->getSchemaBuilder()->getColumnListing('contents'));
+            $protectedColumns = ['id', 'user_id', 'created_at', 'updated_at', 'pseudo'];
 
             foreach ($protectedColumns as $protectedColumn) {
                 if (isset($columns[$protectedColumn])) {
@@ -281,7 +281,7 @@ class ContentController extends Controller
             if ($request->has('type') && isset($allowedFields['type']) && isset($allowedFields['type']['items'])) {
                 $allowedTypes = $this->fetchTypesArray(config($allowedFields['type']['items']));
                 if (in_array($request->type, $allowedTypes)) {
-                    $allowedFields = config('content_' . $request->type . '.edit.fields');
+                    $allowedFields = config('content_'.$request->type.'.edit.fields');
                 }
             }
 
@@ -301,7 +301,7 @@ class ContentController extends Controller
 
             $this->validate($request, $validator);
             foreach ($request->all() as $key => $value) {
-                if (array_key_exists($key , $allowedFields) && in_array($key, $columns)) {
+                if (array_key_exists($key, $allowedFields) && in_array($key, $columns)) {
                     if ($key == 'type' && isset($allowedFields['type']['items'])) {
                         $allowedTypes = $this->fetchTypesArray(config($allowedFields['type']['items']));
 
