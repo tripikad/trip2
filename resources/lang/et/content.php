@@ -35,6 +35,7 @@ return [
     'action.facebook.text' => 'Trip.ee Facebook',
     'action.twitter.text' => 'Trip.ee Twitter',
     'action.read.more' => 'Loe edasi',
+    'action.continue.reading' => 'Loe lähemalt',
     'action.price.error' => 'Mis on veahind',
 
     'action.type.forum' => ':type foorum',
@@ -54,6 +55,11 @@ return [
 
     'edit.title' => 'Muuda',
     'edit.submit.title' => 'Uuenda',
+    'edit.notes.heading' => 'Hea teada',
+    'edit.notes.body' => '<p>Austan eesti keele reegleid, jälgin et minu kirjutised oleks loetavad, ma ei kasuta slängi, suurtähti ja korduvaid kirjavahemärke ning kasutan suuri algustähti lause alguses ja kohanimedes.</p>
+                          <p>Ma ei ropenda, halvusta teisi ega kasutata Trip.ee\'d rassismi, usupropaganda või muul moel kitsarinnalisuse levitamiseks.</p>
+                          <p>Ma ei avalda reklaamsisuga teateid, selleks kasutan Trip.ee <a href=":route">reklaamivõimalust</a>.</p>
+                          <p>Tean ja nõustun, et kasutustingimuste rikkumisel võidakse minu kasutuskonto ilma hoiatamata sulgeda ja/või minu ligipääs Trip.ee\'le blokeerida.</p>',
 
     'store.status.1.info' => ':title on edukalt lisatud.',
     'store.status.0.info' => ':title on lisatud, kuid teistele peidetud. Vajuta lingile "Avalikusta", et näidata seda teistele.',
@@ -193,13 +199,15 @@ return [
     'forum.filter.text' => 'Kui ei leia sobivat teemat, siis ehk aitab sind filter.',
 
     'forum.index.title' => 'Üldfoorum',
-    'forum.create.title' => 'Lisa uus teema',
+    'forum.create.title' => 'Alusta uut teemat',
+
+    'forum.edit.field.type.title' => 'Rubriik',
 
     'forum.edit.field.title.title' => 'Pealkiri',
-    'forum.edit.field.title.help' => '',
+    'forum.edit.field.title.help' => 'Teema pealkiri',
 
     'forum.edit.field.body.title' => 'Sisu',
-    'forum.edit.field.body.help' => '',
+    'forum.edit.field.body.help' => 'Postituse sisu. Enne kirjutamist tutvu kindlasti ka meie foorumi reeglitega…',
 
     'forum.edit.field.destinations.title' => 'Vali sihtkohad',
     'forum.edit.field.destinations.help' => '',
