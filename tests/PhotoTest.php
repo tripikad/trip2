@@ -19,7 +19,6 @@ class PhotoTest extends TestCase
             ->type('Hello photo title', 'title')
             ->attach(storage_path().'/tests/test.jpg', 'file')
             ->press(trans('content.create.submit.title'))
-            ->seePageIs('content/photo')
             ->see(trans('content.store.status.1.info', ['title' => 'Hello photo title']))
             ->see('Hello photo title')
             ->seeInDatabase('contents', [
