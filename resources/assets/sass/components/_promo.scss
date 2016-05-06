@@ -27,6 +27,13 @@
 
         max-height: $spacer * 10;
     }
+
+    iframe {
+
+        display: block;
+        max-width: 100%;
+    }
+
 }
 
     .c-promo__link {
