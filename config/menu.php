@@ -71,9 +71,6 @@ return [
         'advertising' => [
             'route' => '/content/static/22125',
         ],
-        'styleguide' => [
-            'route' => '/styleguide',
-        ],
     ],
 
     'footer-social' => [
