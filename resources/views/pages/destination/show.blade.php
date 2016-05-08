@@ -104,7 +104,7 @@
             'image' =>
                 (isset($features['photos']) && count($features['photos']['contents'])
                     ?
-                        $features['photos']['contents']->random(1)->imagePreset()
+                        $features['photos']['contents']->random(1)->imagePreset('large')
                     :
                         \App\Image::getRandom()
                 )
@@ -183,13 +183,9 @@
     <div class="r-destination__content">
 
     @if (isset($features['flights2']) && count($features['flights2']['contents']))
-
         <div class="r-destination__content-wrap m-padding">
-
     @else
-
         <div class="r-destination__content-wrap">
-
     @endif
 
             @if ((isset($popular_destinations) && count($popular_destinations)) || (isset($features['forum_posts']) && count($features['forum_posts']['contents'])))
