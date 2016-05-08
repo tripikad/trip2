@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('contact_twitter')->nullable();
             $table->string('contact_instagram')->nullable();
             $table->string('contact_homepage')->nullable();
-
+            $table->string('profile_color')->default('m-green');
             $table->string('real_name');
             $table->boolean('real_name_show')->default(false);
             $table->integer('gender')->unsigned()->nullable();
