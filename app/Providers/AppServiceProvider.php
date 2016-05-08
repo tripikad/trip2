@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Analytics;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Auth\Guard;
 
 class AppServiceProvider extends ServiceProvider
