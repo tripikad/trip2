@@ -172,6 +172,8 @@ class UserController extends Controller
                     ->route('user.edit', [$user])
                     ->withInput()
                     ->with('status', trans('user.update.image.status'));
+            } else {
+                exit();
             }
         }
 
@@ -184,8 +186,9 @@ class UserController extends Controller
             'contact_twitter' => 'url',
             'contact_instagram' => 'url',
             'contact_homepage' => 'url',
-            'birthyear' => 'sometimes|digits:4',
+            'birthyear' => 'required|digits:4',
             'gender' => 'required',
+            'real_name' => 'required'
         ]);
 
         $fields = [
