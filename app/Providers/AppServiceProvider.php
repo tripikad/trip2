@@ -29,9 +29,7 @@ class AppServiceProvider extends ServiceProvider
 
     protected function google_analytics_track($auth)
     {
-        view()->composer('layouts.main', function($view) use ($auth) {
-            $currentUser = $auth->user();
-
+        view()->composer('layouts.main', function () use ($auth) {
             if ($auth->check()) {
                 Analytics::setUserId($auth->user()->id);
                 Analytics::trackCustom("ga('set', 'user_role', '".$auth->user()->role."');");
