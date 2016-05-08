@@ -149,7 +149,7 @@ class ConvertUsers extends ConvertBase
 
         $this->output->progressFinish();
 
-        $this->line("Converted $i users");
+        $this->line("Converted $i demo users");
     }
 
     public function handle()
