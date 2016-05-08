@@ -72,7 +72,7 @@ code: |
 
         @foreach ($items as $item)
 
-        <?php $images[$i]['image'] = $item['image']; ?>
+        <?php $images[$i]['image'] = (isset($item['image_large']) ? $item['image_large'] : $item['image']); ?>
 
         @if (isset($item['tags']))
 
