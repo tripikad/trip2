@@ -7,7 +7,7 @@
                 'image' => $item->user->imagePreset('small_square'),
                 'letter' => [
                     'modifiers' => 'm-red',
-                    'text' => 'J'
+                    'text' => (strlen($item->user->name) ? $item->user->name[0] : '')
                 ],
                 'name' => $item->user->name,
                 'route' => route('content.show', [$item->type, $item]),

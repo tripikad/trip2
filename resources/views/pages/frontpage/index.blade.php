@@ -330,7 +330,7 @@
 
                             @include('component.blog', [
                                 'title' => $blog->title,
-                                //'image' => $blog->imagePreset(),
+                                /*'image' => $blog->imagePreset(),*/
                                 'image' => \App\Image::getRandom(),
                                 'route' => route('content.show', [$blog->type, $blog]),
                                 'profile' => [

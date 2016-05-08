@@ -150,6 +150,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laravelista\Ekko\EkkoServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
+        GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -211,6 +212,7 @@ return [
         'Imageconv' => Intervention\Image\Facades\Image::class,
         'Analytics' => Ipunkt\LaravelAnalytics\AnalyticsFacade::class,
         'Date'      => Jenssegers\Date\Date::class,
+        'HTMLMin'   => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
         'Feed'      => Roumen\Feed\Feed::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Ekko'      => Laravelista\Ekko\Facades\Ekko::class,

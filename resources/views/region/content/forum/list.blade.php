@@ -14,7 +14,7 @@
                     'image' => $item->user->imagePreset(),
                     'letter' => [
                         'modifiers' => (isset($modifiers) && isset($modifiers['letter']) ? $modifiers['letter'] : 'm-green m-small'),
-                        'text' => 'D'
+                        'text' => (strlen($item->user->name) ? $item->user->name[0] : '')
                     ],
                 ],
                 'badge' => [

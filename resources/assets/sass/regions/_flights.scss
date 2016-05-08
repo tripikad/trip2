@@ -134,7 +134,7 @@
 
                 @include span(8 of 24 at 2);
 
-                padding-top: $spacer * 26;
+                padding-top: $spacer * 4;
             }
 
             @include respond-to(desktop) {

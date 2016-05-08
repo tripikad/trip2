@@ -6,6 +6,7 @@ use View;
 use Cache;
 use App\Destination;
 use DB;
+use App\Main;
 
 class DestinationController extends Controller
 {
@@ -92,6 +93,13 @@ class DestinationController extends Controller
             $features[$type]['contents'] = $feature_item->with('images')->get();
         }
 
+        $getParentDestinations = [
+            'flights2',
+        ];
+        $viewVariables['flights2'] = $features['flights2']['contents'];
+        $viewVariables = Main::getParentDestinations($getParentDestinations, $viewVariables);
+        $features['flights2']['contents'] = $viewVariables['flights2'];
+
         $previous_destination = Destination::
             where(DB::raw('CONCAT(`name`, `id`)'), '<', function ($query) use ($id) {
                 $query->select(DB::raw('CONCAT(`name`, `id`)'))
@@ -152,6 +160,19 @@ class DestinationController extends Controller
             $root_destination = $destination->getRoot();
         }
 
+        $destination_info = null;
+        if ($destination->depth > 0) {
+            if ($destination->depth == 1) {
+                $destination_info = $destination;
+            } elseif ($destination->depth == 2) {
+                $destination_info = $parent_destination;
+            } else {
+                if ($parent_destination) {
+                    $destination_info = Destination::whereId($parent_destination->parent_id)->first();
+                }
+            }
+        }
+
         $popular_destinations = $root_destination
             ->getPopular()
             ->sortByDesc('interestTotal')
@@ -165,6 +186,7 @@ class DestinationController extends Controller
             'parent_destination' => $parent_destination,
             'root_destination' => $root_destination,
             'popular_destinations' => $popular_destinations,
+            'destination_info' => $destination_info,
         ])->header('Cache-Control', 'public, s-maxage='.config('cache.destination.header'));
     }
 }

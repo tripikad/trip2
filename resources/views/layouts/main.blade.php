@@ -19,31 +19,15 @@
         <meta property="promos" content="{{ rawurlencode(json_encode(config('promo'))) }}">
     </head>
     <body>{{ Analytics::render() }}
-
         @include('component.alert.success')
-
         @include('component.alert.error')
-
         @yield('header', view('component.header'))
-
         @yield('content')
-
         @yield('footer', view('component.footer'))
-
         <script type="text/javascript" src="/js/main.js"></script>
-
         @yield('scripts')
-
         <!-- Load Facebook SDK for JavaScript -->
         <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-
+        <script>(function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0];if (d.getElementById(id)) return;js = d.createElement(s); js.id = id;js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));</script>
     </body>
-
 </html>

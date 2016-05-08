@@ -264,7 +264,7 @@ code: |
 
                 createDropzone(
                     '.dropzone',
-                    // #{{ isset($id) ? $id : 'dropzoneImage' }} <- changed to .dropzone
+                    /* #{{ isset($id) ? $id : 'dropzoneImage' }} <- changed to .dropzone */
                     '{{ $form['url'] }}',
                     '{{ isset($form['method']) && $form['method']!='put' ? $form['method'] : 'post' }}',
                     '{{ $name }}',
