@@ -19,7 +19,8 @@
         "ipunkt/laravel-analytics": "~1.1",
         "roumen/feed": "~2.10",
         "laravel/socialite" : "~2.0",
-        "laravelista/ekko": "~1.0"
+        "laravelista/ekko": "~1.0",
+        "graham-campbell/htmlmin": "^4.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
