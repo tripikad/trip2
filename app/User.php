@@ -24,16 +24,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'contact_twitter',
         'contact_instagram',
         'contact_homepage',
-
+        'profile_color',
         'real_name',
         'real_name_show',
         'gender',
         'birthyear',
         'description',
-
         'notify_message',
         'notify_follow',
-
     ];
 
     protected $hidden = ['password', 'remember_token'];
