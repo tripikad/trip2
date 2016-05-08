@@ -1,10 +1,6 @@
 @extends('layouts.main')
 
-@section('title')
-
-    {{ $user->name }}
-
-@stop
+@section('title', $user->name)
 
 @section('header')
 

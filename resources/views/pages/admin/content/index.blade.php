@@ -1,8 +1,6 @@
 @extends('layouts.one_column')
 
-@section('title')
-    {{ trans('admin.content.index.title') }}
-@stop
+@section('title', trans('admin.content.index.title'))
 
 @section('header2.content')
 

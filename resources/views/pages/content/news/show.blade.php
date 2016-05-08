@@ -1,10 +1,6 @@
 @extends('layouts.two_column')
 
-@section('title')
-
-    {{ $content->title }}
-
-@stop
+@section('title', $content->title)
 
 @section('header1.image')
 

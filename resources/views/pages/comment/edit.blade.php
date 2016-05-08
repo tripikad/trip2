@@ -1,8 +1,6 @@
 @extends('layouts.one_column')
 
-@section('title')
-    {{ trans('comment.edit.title') }}
-@stop
+@section('title', trans('comment.edit.title'))
 
 @section('content.one')
     

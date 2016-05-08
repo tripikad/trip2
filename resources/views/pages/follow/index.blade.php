@@ -1,10 +1,6 @@
 @extends('layouts.one_column')
 
-@section('title')
-
-    {{ trans('follow.index.title', ['user' => $user->name]) }}
-
-@stop
+@section('title', trans('follow.index.title', ['user' => $user->name]))
 
 @section('header2.content')
 

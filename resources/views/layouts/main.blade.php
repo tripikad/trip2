@@ -3,20 +3,16 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="/css/main.css" rel='stylesheet' type='text/css'>
-        @if(Request::is('/'))
-        <title>{{ config('site.name') }}</title>
-        @else
-        <title>@yield('title') – {{ config('site.name') }}</title>
-        @endif
+        <title>{{ (trim($__env->yieldContent('title')) ? trim($__env->yieldContent('title')).' - ' : '')  }}{{ config('site.name') }}</title>
         <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}">
         <meta property="og:url" content="{{ Request::root() }}">
         <meta property="og:type" content="@yield('fb_type', 'website')">
-        <meta property="og:title" content="@yield('title', config('site.name'))">
+        <meta property="og:title" content="{{ (trim($__env->yieldContent('title')) ? trim($__env->yieldContent('title')).' - ' : '')  }}{{ config('site.name') }}">
         <meta property="og:description" content="@yield('fb_description')">
         <meta property="og:image" content="@yield('fb_image')">
         <meta property="og:locale" content="et_EE">
         <meta property="promos" content="{{ rawurlencode(json_encode(config('promo'))) }}">
+        <link href="/css/main.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         @include('component.alert.success')

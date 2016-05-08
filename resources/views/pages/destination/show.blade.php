@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title'){{ $destination->name }}@stop
+@section('title', $destination->name)
 
 @section('header')
     @include('component.header',[

@@ -1,10 +1,6 @@
 @extends('layouts.one_column')
 
-@section('title')
-
-    {{ trans('message.index.with.title', ['user' => $user->name, 'user_with' => $user_with->name]) }}
-
-@stop
+@section('title', trans('message.index.with.title', ['user' => $user->name, 'user_with' => $user_with->name]))
 
 @section('header2.content')
 

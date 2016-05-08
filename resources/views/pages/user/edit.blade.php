@@ -1,8 +1,6 @@
 @extends('layouts.main')
 
-@section('title')
-    {{ $title }}
-@stop
+@section('title', $title)
 
 @section('header')
 
@@ -12,7 +10,7 @@
 
 @section('content')
 
-{{--     <div class="r-user-edit__content-wrap">
+<?php /*     <div class="r-user-edit__content-wrap">
 
         <div class="r-user-edit__content">
 
@@ -261,7 +259,7 @@
         </div>
 
     </div>
- --}}
+ */?>
 
  <div class="r-auth">
 
