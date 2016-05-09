@@ -101,20 +101,20 @@
             'modifiers' => 'm-alternative',
             'subtitle' => (isset($parent_destination) ? $parent_destination->name : null),
             'subtitle_route' => (isset($parent_destination) ? route('destination.show', [$parent_destination]) : null),
-            'image' =>
-                (isset($features['photos']) && count($features['photos']['contents'])
+            'image' => \App\Image::getRandom($destination->id)
+                /*(isset($featured['photos']) && count($featured['photos']['contents'])
                     ?
-                        $features['photos']['contents']->random(1)->imagePreset('large')
+                        $featured['photos']['contents']->random(1)->imagePreset('large')
                     :
                         \App\Image::getRandom()
-                )
+                )*/
         ])
     </div>
 
     <div class="r-destination__about m-yellow">
-        @if ((isset($features['flights']) && count($features['flights']['contents'])) || (isset($destination_info) && $destination_info) && config("destinations.$destination_info->id") && count(config("destinations.$destination_info->id")))
+        @if ((isset($featured['flights']) && count($featured['flights']['contents'])) || (isset($destination_info) && $destination_info) && config("destinations.$destination_info->id") && count(config("destinations.$destination_info->id")))
         <div class="r-destination__about-wrap">
-            @if (isset($features['flights']) && count($features['flights']['contents']))
+            @if (isset($featured['flights']) && count($featured['flights']['contents']))
                 <div class="r-destination__about-column m-first">
                     <div class="r-destination__title-block m-white m-distribute">
                         @include('component.title', [
@@ -129,7 +129,7 @@
                         ])
                     </div>
 
-                    @foreach ($features['flights']['contents'] as $flight)
+                    @foreach ($featured['flights']['contents'] as $flight)
                         @include('component.card', [
                             'modifiers' => 'm-yellow m-small',
                             'route' => route('content.show', [$flight->type, $flight]),
@@ -142,7 +142,7 @@
 
             @if (isset($destination_info) && $destination_info)
                 <div class="r-destination__about-column
-                    @if (isset($features['flights']) && count($features['flights']['contents']))
+                    @if (isset($featured['flights']) && count($featured['flights']['contents']))
                         m-last
                     @endif
                 ">
@@ -182,13 +182,13 @@
 
     <div class="r-destination__content">
 
-    @if (isset($features['flights2']) && count($features['flights2']['contents']))
+    @if (isset($featured['flights2']) && count($featured['flights2']['contents']))
         <div class="r-destination__content-wrap m-padding">
     @else
         <div class="r-destination__content-wrap">
     @endif
 
-            @if ((isset($popular_destinations) && count($popular_destinations)) || (isset($features['forum_posts']) && count($features['forum_posts']['contents'])))
+            @if ((isset($popular_destinations) && count($popular_destinations)) || (isset($featured['forum_posts']) && count($featured['forum_posts']['contents'])))
 
                 <div class="r-destination__content-about">
                     <div class="r-destination__content-about-column m-first">
@@ -196,7 +196,7 @@
                     </div>
 
                     <div class="r-destination__content-about-column m-middle">
-                        @if (isset($features['forum_posts']) && count($features['forum_posts']['contents']))
+                        @if (isset($featured['forum_posts']) && count($featured['forum_posts']['contents']))
                             <div class="r-destination__content-title m-flex">
                                 @include('component.title', [
                                     'modifiers' => 'm-yellow',
@@ -214,7 +214,7 @@
                             </div>
 
                             @include('region.content.forum.list', [
-                                'items' => $features['forum_posts']['contents'],
+                                'items' => $featured['forum_posts']['contents'],
                                 'modifiers' => [
                                     'main' => 'm-compact'
                                 ]
@@ -251,7 +251,7 @@
                 </div>
             @endif
 
-            @if (isset($features['photos']) && count($features['photos']['contents']))
+            @if (isset($featured['photos']) && count($featured['photos']['contents']))
                 <div class="r-destination__content-gallery">
                     <div class="r-destination__gallery-wrap">
                         <div class="r-destination__gallery-title">
@@ -267,7 +267,7 @@
                             'modal' => [
                                 'modifiers' => 'm-yellow',
                             ],
-                            'items' => $features['photos']['contents']->transform(function($photo) {
+                            'items' => $featured['photos']['contents']->transform(function($photo) {
                                 return [
                                     'image' => $photo->imagePreset(),
                                     'image_large' => $photo->imagePreset('large'),
@@ -291,7 +291,7 @@
             <div class="r-destination__content-news">
                 <div class="r-destination__content-news-wrap">
                     <div class="r-destination__content-news-column m-first">
-                    @if (isset($features['news']) && count($features['news']['contents']))
+                    @if (isset($featured['news']) && count($featured['news']['contents']))
                         <div class="r-destination__content-title">
                             @include('component.title', [
                                 'modifiers' => 'm-yellow',
@@ -300,7 +300,7 @@
                         </div>
                         <div class="r-destination__content-news-block">
                             <div class="c-columns m-2-cols m-space">
-                                @foreach ($features['news']['contents'] as $new)
+                                @foreach ($featured['news']['contents'] as $new)
                                     <div class="c-columns__item">
                                         @include('component.news', [
                                             'title' => $new->title,
@@ -330,12 +330,12 @@
         </div>
     </div>
 
-    @if (isset($features['flights2']) && count($features['flights2']['contents']))
+    @if (isset($featured['flights2']) && count($featured['flights2']['contents']))
 
     <div class="r-destination__flights">
         <div class="r-destination__flights-wrap">
-            <div class="c-columns m-{{ count($features['flights2']['contents']) }}-cols">
-                @foreach ($features['flights2']['contents'] as $key => $flight)
+            <div class="c-columns m-{{ count($featured['flights2']['contents']) }}-cols">
+                @foreach ($featured['flights2']['contents'] as $key => $flight)
                     <div class="c-columns__item">
                         @include('component.destination', [
                             'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
@@ -349,7 +349,7 @@
                             'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
                             'route' => route('content.show', [$flight->type, $flight]),
                             'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
-                            'image' => $flight->imagePreset(count($features['flights2']['contents']) == 1 ? 'large' : '')
+                            'image' => $flight->imagePreset(count($featured['flights2']['contents']) == 1 ? 'large' : '')
                         ])
                     </div>
                 @endforeach
@@ -359,7 +359,7 @@
 
     @endif
 
-    @if (isset($features['travel_mates']) && count($features['travel_mates']['contents']))
+    @if (isset($featured['travel_mates']) && count($featured['travel_mates']['contents']))
         <div class="r-destination__travelmates">
             <div class="r-destination__travelmates-wrap">
                 <div class="r-destination__content-title">
@@ -370,7 +370,7 @@
                 </div>
 
                 @include('region.content.travelmate.list', [
-                    'items' => $features['travel_mates']['contents']
+                    'items' => $featured['travel_mates']['contents']
                 ])
             </div>
         </div>
