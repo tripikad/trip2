@@ -185,7 +185,7 @@
 
     {{-- Kui kommentaare ei ole ja kommenteerida ei saa siis seda blokki ei tohiks üldse näidata --}}
 
-    @if (\Auth::check() || count($content->comments) > 0)
+    @if (count($content->comments) > 0)
 
     <div class="r-blog__comments">
 
