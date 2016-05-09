@@ -35,6 +35,7 @@ return [
     'edit.field.password_confirmation.title' => 'Korda parooli',
 
     'edit.field.real.name.title' => 'Sinu nimi',
+    'edit.field.real.name.show.title' => 'Ei soovi avalikustada oma nime',
     'edit.field.birthyear.title' => 'Sünniaasta',
     'edit.field.description.label' => 'Lühikirjeldus',
     'edit.field.description.title' => 'Kirjelda tripikatele ennast ja oma reisikogemusi…',
