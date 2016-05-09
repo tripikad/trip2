@@ -1,8 +1,6 @@
 @extends('layouts.one_column')
 
-@section('title')
-    {{ trans('auth.reset.password.title') }}
-@stop
+@section('title', trans('auth.reset.password.title'))
 
 @section('content.one')
 

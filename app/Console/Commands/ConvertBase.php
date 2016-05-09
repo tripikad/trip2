@@ -501,9 +501,10 @@ class ConvertBase extends Command
                 $model->birthyear = isset($profile[25]) ? $this->convertBirthyear($profile[25]) : null;
             }
 
-            // $model->password = bcrypt($this->cleanAll($user->name));
-
-            $model->password = $user->pass;
+            $model->password = password_hash($user->pass, PASSWORD_BCRYPT, ['cost' => 10]);
+            if ($model->password === false) {
+                throw new \Exception('Bcrypt hashing not supported.');
+            }
 
             $model->role = $this->getRole($user->rid);
 

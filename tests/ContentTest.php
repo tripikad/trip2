@@ -74,22 +74,22 @@ class ContentTest extends TestCase
         }
     }
 
+    /**
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Received status code [401]
+     */
     public function test_regular_user_can_not_create_private_content()
     {
-        $this->markTestSkipped();
-
         $regular_user = factory(App\User::class)->create();
 
         foreach ($this->privateContentTypes as $type) {
 
             // Acting as unlogged user
-
             $this->visit("content/$type")
                 ->dontSee(trans("content.$type.create.title"))
                 ->visit("content/$type/create"); // 401
 
             // Acting as registered user
-
             $this->actingAs($regular_user)
                 ->visit("content/$type")
                 ->dontSee(trans("content.$type.create.title"))

@@ -1,10 +1,6 @@
 @extends('layouts.one_column')
 
-@section('title')
-
-    {{ trans("content.$type.index.title") }}
-
-@stop
+@section('title', trans("content.$type.index.title"))
 
 @section('header1.right')
     @include('component.button', [

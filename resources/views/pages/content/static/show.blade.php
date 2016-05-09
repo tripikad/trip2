@@ -1,8 +1,6 @@
 @extends('layouts.one_column')
 
-@section('title')
-    {{ trans($content->title) }}
-@stop
+@section('title', $content->title)
 
 @section('content.one')
         

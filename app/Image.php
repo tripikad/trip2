@@ -106,11 +106,20 @@ class Image extends Model
         return substr($file, 0, (strrpos($file, '.')));
     }
 
-    public static function getRandom()
+    public static function getRandom($destination_id = 0)
     {
-        $photo = Content::whereType('photo')
-            ->orderByRaw('RAND()')
-            ->first();
+        if ($destination_id == 0) {
+            $featured = config('featured');
+            $featured = $featured[array_rand($featured)];
+        } else {
+            $featured = config('featured.'.$destination_id);
+
+            if (! $featured) {
+                return self::getRandom();
+            }
+        }
+
+        $photo = Content::whereType('photo')->find($featured);
 
         return $photo ? $photo->imagePreset('large') : null;
     }

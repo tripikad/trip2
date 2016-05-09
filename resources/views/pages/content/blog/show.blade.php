@@ -1,10 +1,6 @@
 @extends('layouts.main')
 
-@section('title')
-
-    {{ trans("content.$type.index.title") }}
-
-@stop
+@section('title', trans("content.$type.index.title"))
 
 @section('header')
 
@@ -187,17 +183,9 @@
         </div>
     </div>
 
-    {{-- Kui kommentaare ei ole ja kommenteerida ei saa siis seda blokki ei tohiks üldse näidata --}}
-
-    @if (\Auth::check() || count($content->comments) > 0)
-
     <div class="r-blog__comments">
-
         <div class="r-blog__wrap">
-
             <div class="r-blog__wrap-inner m-smaller">
-
-                {{-- Kui kommentaare ei ole, ei tohiks seda üldse näidata --}}
 
                 @if (count($content->comments) > 0)
 
@@ -213,8 +201,8 @@
 
                     @include('component.comment.index', ['comments' => $content->comments])
 
-                    {{--UUS KOMMENTAARI DISAIN
-                     @include('component.content.forum.post', [
+                    <?php /*UUS KOMMENTAARI DISAIN
+                     #include('component.content.forum.post', [
                         'profile' => [
                             'modifiers' => 'm-full m-status',
                             'image' => \App\Image::getRandom(),
@@ -234,7 +222,7 @@
                         'thumbs' => view('component.flags', ['flags' => $content->getFlags()]),
                     ])
 
-                     @include('component.content.forum.post', [
+                     #include('component.content.forum.post', [
                         'profile' => [
                             'modifiers' => 'm-full m-status',
                             'image' => \App\Image::getRandom(),
@@ -253,7 +241,7 @@
                         'text' => '<p>Mina puurisin nüüd juba mitu-mitu aastat tagasi oma Kagu-Aasia reiside eel samuti mitme (Eesti) kindlustusfirma tingimusi. Muidu olid välistused jne suhteliselt ühtsed, kui välja arvata mõned nüansid.</p><p>Kuna mul oli plaanis arengumaades maapiirkondades kohalikke (arvatavasti) igasuguse litsentsita reisijuhte kasutada, näiteks kuskilt väikesest kohast ümberkaudsete külade üleöö külastamiseks ehk pikad jalgsimatkad mägistes piirkondades, oli tarvis, et juhul kui juhtub õnnetus, see ka korvatakse. Tegemist ei olnud siis spordiga, vaid lihtsalt keskmisest veidi koormavamate matkadega. Kokkuvõttes oli sel ajal vaid Ifil kindlustuses selline asi sees, sai ka kirjalikult üle küsitud (et oleks tõestusmaterjal hiljem!) ning teised firmad pakkusid seda lisakaitse all päris räiga lisahinnaga või ei võtnud üldse jutule, kui giidi litsentsi poleks ette näidata.</p>',
                         'thumbs' => view('component.flags', ['flags' => $content->getFlags()]),
                     ])
-                     --}}
+                    */ ?>
                 </div>
 
                 @endif
@@ -278,8 +266,6 @@
             </div>
         </div>
     </div>
-
-    @endif
 
     <div class="r-blog__offers">
 

@@ -1,8 +1,6 @@
 @extends('layouts.main')
 
-    @section('title')
-        {{ trans("content.$type.index.title") }}
-    @stop
+    @section('title', trans("content.$type.index.title"))
 
     @section('header')
         @include('component.header',[

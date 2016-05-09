@@ -152,6 +152,7 @@
                     &:hover {
 
                         @include color-modifiers-dark-and(background);
+                        text-decoration: none;
                     }
                 }
 

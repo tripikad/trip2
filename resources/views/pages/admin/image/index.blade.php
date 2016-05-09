@@ -1,10 +1,6 @@
 @extends('layouts.one_column')
 
-@section('title')
-
-    {{ trans('admin.image.index.title') }}
-
-@stop
+@section('title', trans('admin.image.index.title'))
 
 @section('header2.content')
 

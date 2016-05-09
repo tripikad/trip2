@@ -172,6 +172,8 @@ class UserController extends Controller
                     ->route('user.edit', [$user])
                     ->withInput()
                     ->with('status', trans('user.update.image.status'));
+            } else {
+                exit();
             }
         }
 
@@ -184,8 +186,9 @@ class UserController extends Controller
             'contact_twitter' => 'url',
             'contact_instagram' => 'url',
             'contact_homepage' => 'url',
-            'birthyear' => 'sometimes|digits:4',
+            'birthyear' => 'required|digits:4',
             'gender' => 'required',
+            'real_name' => 'required',
         ]);
 
         $fields = [
@@ -196,7 +199,33 @@ class UserController extends Controller
             $fields['password'] = Hash::make($request->get('password'));
         }
 
-        $user->update(array_merge($request->all(), $fields));
+        $allowedFields = ['name', 'email', 'contact_facebook', 'contact_twitter', 'contact_instagram', 'contact_homepage', 'real_name', 'gender', 'birthyear', 'description', 'profile_color'];
+
+        if ($request->real_name_show == '') {
+            $fields['real_name_show'] = 1;
+        } else {
+            $fields['real_name_show'] = 0;
+        }
+
+        if ($request->notify_message) {
+            $fields['notify_message'] = 1;
+        } else {
+            $fields['notify_message'] = 0;
+        }
+
+        if ($request->notify_follow) {
+            $fields['notify_follow'] = 1;
+        } else {
+            $fields['notify_follow'] = 0;
+        }
+
+        foreach ($request->all() as $field_name => $field_value) {
+            if (in_array($field_name, $allowedFields)) {
+                $fields[$field_name] = $field_value;
+            }
+        }
+
+        $user->update($fields);
 
         if (! $request->ajax()) {
             return redirect()

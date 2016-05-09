@@ -17,9 +17,7 @@
 
 @stop
 
-@section('title')
-    {{ trans("content.$type.index.title") }}
-@stop
+@section('title', trans("content.$type.index.title"))
 
 @section('content')
     <div class="r-forum">

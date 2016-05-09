@@ -1,8 +1,6 @@
 @extends('layouts.main')
 
-@section('title')
-    {{ trans('auth.register.title') }}
-@stop
+@section('title', trans('auth.register.title'))
 
 @section('header')
 
