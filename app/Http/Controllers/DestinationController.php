@@ -61,7 +61,7 @@ class DestinationController extends Controller
             ],
         ];
 
-        $features = [];
+        $featured = [];
 
         foreach ($types as $type => $attributes) {
             $feature_item = null;
@@ -90,15 +90,15 @@ class DestinationController extends Controller
                 $feature_item->take($types[$type]['take']);
             }
 
-            $features[$type]['contents'] = $feature_item->with('images')->get();
+            $featured[$type]['contents'] = $feature_item->with('images')->get();
         }
 
         $getParentDestinations = [
             'flights2',
         ];
-        $viewVariables['flights2'] = $features['flights2']['contents'];
+        $viewVariables['flights2'] = $featured['flights2']['contents'];
         $viewVariables = Main::getParentDestinations($getParentDestinations, $viewVariables);
-        $features['flights2']['contents'] = $viewVariables['flights2'];
+        $featured['flights2']['contents'] = $viewVariables['flights2'];
 
         $previous_destination = Destination::
             where(DB::raw('CONCAT(`name`, `id`)'), '<', function ($query) use ($id) {
@@ -180,7 +180,7 @@ class DestinationController extends Controller
 
         return response()->view('pages.destination.show', [
             'destination' => $destination,
-            'features' => $features,
+            'featured' => $featured,
             'previous_destination' => $previous_destination,
             'next_destination' => $next_destination,
             'parent_destination' => $parent_destination,
