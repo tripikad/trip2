@@ -74,7 +74,6 @@ class ContentTest extends TestCase
         }
     }
 
-
     /**
      * !expectedException PHPUnit_Framework_ExpectationFailedException
      * !expectedExceptionMessage Received status code [401].
