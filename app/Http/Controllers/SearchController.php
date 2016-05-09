@@ -31,7 +31,7 @@ class SearchController extends Controller
 
             $active_search = $search_type ? $search_type : 'forum';
 
-            if ($active_search == 'forum' && $counts['forum'] == 0) {
+            if ($active_search == 'forum' && isset($counts) && $counts['forum'] == 0) {
                 foreach ($counts as $type => $cnt) {
                     if ($cnt && $cnt > 0) {
                         $active_search = $type;
@@ -49,15 +49,6 @@ class SearchController extends Controller
 
         return response()
             ->view('pages.search.show', ['request' => $request, 'results' => $results, 'active_search' => $active_search, 'tabs' => $tabs])
-            ->header('Cache-Control', 'public, s-maxage='.config('cache.search.header'));
-    }
-
-    public function show()
-    {
-        $viewVariables = [];
-
-        return response()
-            ->view('pages.search.show', $viewVariables)
             ->header('Cache-Control', 'public, s-maxage='.config('cache.search.header'));
     }
 
@@ -113,7 +104,7 @@ class SearchController extends Controller
             $results[$key]['parent'] = $parent;
 
             if ($ajax) {
-                $results[$key]['name'] = $parent ? $item->name.' < '.$parent->name : $item->name;
+                $results[$key]['name'] = $parent ? $item->name.' › '.$parent->name : $item->name;
             }
         }
     }
@@ -164,30 +155,37 @@ class SearchController extends Controller
 
     protected function getSearchBuilderByType($type, $q)
     {
+        mb_internal_encoding('UTF-8');
         $order_type = config('search.types.'.$type.'.order_type') ? config('search.types.'.$type.'.order_type') : 'ASC';
         $order_by = config('search.types.'.$type.'.order') ? config('search.types.'.$type.'.order') : null;
 
         switch ($type) {
             case 'destination':
-                $res = Destination::where('name', 'LIKE', '%'.$q.'%');
+                $res = Destination::whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%']);
                 break;
             case 'user':
-                $res = User::whereVerified(1)->where('name', 'LIKE', '%'.$q.'%');
+                $res = User::whereVerified(1)
+                    ->whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%']);
                 break;
             case 'blog':
-                $res = Content::where(['type' => 'blog', 'status' => 1])->where('title', 'LIKE', '%'.$q.'%');
+                $res = Content::where(['type' => 'blog', 'status' => 1])
+                    ->whereRaw('LOWER(`title`) LIKE ?', ['%'.mb_strtolower($q).'%']);
                 break;
             case 'news':
-                $res = Content::where(['type' => 'news', 'status' => 1])->where('title', 'LIKE', '%'.$q.'%');
+                $res = Content::where(['type' => 'news', 'status' => 1])
+                    ->whereRaw('LOWER(`title`) LIKE ?', ['%'.mb_strtolower($q).'%']);
                 break;
             case 'flight':
-                $res = Content::where(['type' => 'flight', 'status' => 1])->where('title', 'LIKE', '%'.$q.'%');
+                $res = Content::where(['type' => 'flight', 'status' => 1])
+                    ->whereRaw('LOWER(`title`) LIKE ?', ['%'.mb_strtolower($q).'%']);
                 break;
             case 'forum':
-                $res = Content::whereIn('type', ['forum', 'buysell', 'expat'])->whereStatus(1)->where('title', 'LIKE', '%'.$q.'%');
+                $res = Content::whereIn('type', ['forum', 'buysell', 'expat'])
+                    ->whereStatus(1)
+                    ->whereRaw('LOWER(`title`) LIKE ?', ['%'.mb_strtolower($q).'%']);
                 break;
             default:
-                   throw new Exception('Invalid search type');
+                throw new \Exception('Invalid search type');
         }
 
         if ($order_by) {
@@ -230,11 +228,14 @@ class SearchController extends Controller
                 }
             }
         } else {
-            return;
+            return '';
         }
 
         if ($total_cnt == 0) {
-            return;
+            return response()
+                ->view('component.searchblock', [
+                    'not_found' => trans('search.results.noresults'),
+                ]);
         }
 
         $footer_modifier = $header_search ? 'm-icon m-small' : 'm-icon';
