@@ -5,7 +5,8 @@ return [
     'gender.1' => 'Naine',
     'gender.2' => 'Mees',
 
-    'show.joined' => 'Liitus :created_at',
+    'show.joined' => 'Kasutaja :user liitus :created_at',
+    'show.likes' => 'Meeldimisi',
     'show.message.create' => 'Saada sõnum',
 
     'show.count.content.title' => 'Postitusi',
@@ -56,7 +57,7 @@ return [
     'update.image.info' => 'Profiilipilt on uuendatud!',
     'update.info' => 'Kasutaja profiil on uuendatud!',
 
-    'activity.index.title' => 'Tegevuste ajalugu',
+    'activity.index.title' => 'Viimased postitused',
     'activity.index.row.content' => ':user lisas postituse :title kuupäeval :created_at',
     'activity.index.row.comment' => ':user kirjutas kommentaari :comment_title postitusele :title kuupäeval :created_at',
     'activity.view.full.post' => 'Vaata postitust',
