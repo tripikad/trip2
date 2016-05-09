@@ -185,8 +185,6 @@
 
     {{-- Kui kommentaare ei ole ja kommenteerida ei saa siis seda blokki ei tohiks üldse näidata --}}
 
-    @if (count($content->comments) > 0)
-
     <div class="r-blog__comments">
 
         <div class="r-blog__wrap">
@@ -274,8 +272,6 @@
             </div>
         </div>
     </div>
-
-    @endif
 
     <div class="r-blog__offers">
 
