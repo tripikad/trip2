@@ -9,7 +9,6 @@
 @stop
 
 @section('content')
-
  <div class="r-auth">
      <div class="r-auth__map">
          <div class="c-auth-map">
@@ -78,12 +77,12 @@
                  ]) !!}
              </div>
              <div class="c-form__group">
-                 {{ Form::checkbox('real_name_show', 0, null, [
+                 {{ Form::checkbox('real_name_show', 0, ($user->real_name_show == 0 ? true : false), [
                      'class' => 'c-form__input m-checkbox',
                      'id' => 'noname'
                  ]) }}
 
-                 {!! Form::label('noname', 'Ei soovi avalikustada oma nime',[
+                 {!! Form::label('noname', trans('user.edit.field.real.name.show.title'),[
                      'class' => 'c-form__label m-checkbox'
                  ]) !!}
              </div>
