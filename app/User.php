@@ -168,4 +168,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->flags->where('flag_type', 'wantstogo');
     }
+
+    public function likes()
+    {
+        return $this->flags->where('flag_type', 'good');
+    }
 }
