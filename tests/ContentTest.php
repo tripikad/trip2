@@ -74,6 +74,11 @@ class ContentTest extends TestCase
         }
     }
 
+
+    /**
+     * !expectedException PHPUnit_Framework_ExpectationFailedException
+     * !expectedExceptionMessage Received status code [401].
+     */
     public function test_regular_user_can_not_create_private_content()
     {
         $regular_user = factory(App\User::class)->create();
