@@ -104,6 +104,14 @@
                    fill: $color;
                 }
             }
+
+            .c-search.m-#{$name} .c-search__form-input:focus + & {
+
+                svg {
+
+                    fill: $color;
+                }
+            }
         }
     }
 
@@ -113,7 +121,7 @@
         font-size: $font-size-normal;
         font-weight: $font-weight-medium;
         width: 100%;
-        padding: $spacer $spacer $spacer * 0.75 $spacer * 4;
+        padding: $spacer * 0.75 $spacer $spacer * 0.75 $spacer * 4;
         background: rgba($color-white, 0.2);
         border: none;
         box-shadow: 0 18px 48px rgba($shadow-dark, 0.2);
@@ -133,7 +141,14 @@
 
             @include respond-to(tablet) {
 
-                background: none;
+                background: transparent;
+            }
+
+            &:focus,
+            &:active {
+
+                color: $color-text-black;
+                background: $color-white;
             }
         }
 
@@ -179,6 +194,18 @@
 
                 color: $color-text-neutral;
             }
+
+            @include respond-to(tablet) {
+
+                background: $color-white;
+            }
+        }
+
+        &:focus,
+        &:active {
+
+            color: $color-text-black;
+            background: $color-white;
         }
     }
 
