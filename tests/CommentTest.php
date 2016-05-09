@@ -88,7 +88,7 @@ class CommentTest extends TestCase
      */
     public function test_regular_user_cannot_edit_other_comments()
     {
-        $this->markTestSkipped('Problem with dontSee exception (/Muuda/i not found fail)');
+        $this->markTestSkipped(); // Problem with dontSee exception (/Muuda/i not found fail)
         $regular_user = factory(App\User::class)->create();
 
         foreach ($this->publicContentTypes as $type) {
