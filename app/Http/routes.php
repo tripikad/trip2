@@ -13,29 +13,29 @@ Route::get('search/{token}', ['uses' => 'SearchController@search', 'as' => 'sear
 
 // Registration
 
-Route::get('register', ['uses' => 'Auth\RegistrationController@form', 'as' => 'register.form']);
+Route::get('register', ['middleware' => 'guest', 'uses' => 'Auth\RegistrationController@form', 'as' => 'register.form']);
 
-Route::post('register', ['uses' => 'Auth\RegistrationController@submit', 'as' => 'register.submit']);
+Route::post('register', ['middleware' => 'guest', 'uses' => 'Auth\RegistrationController@submit', 'as' => 'register.submit']);
 
 Route::get('register/confirm/{token}', ['uses' => 'Auth\RegistrationController@confirm', 'as' => 'register.confirm']);
 
 // Login and logout
 
-Route::get('login', ['uses' => 'Auth\LoginController@form', 'as' => 'login.form']);
+Route::get('login', ['middleware' => 'guest', 'uses' => 'Auth\LoginController@form', 'as' => 'login.form']);
 
-Route::post('login', ['uses' => 'Auth\LoginController@submit', 'as' => 'login.submit']);
+Route::post('login', ['middleware' => 'guest', 'uses' => 'Auth\LoginController@submit', 'as' => 'login.submit']);
 
-Route::get('logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'login.logout']);
+Route::get('logout', ['middleware' => 'auth', 'uses' => 'Auth\LoginController@logout', 'as' => 'login.logout']);
 
 // Facebook login
 
-Route::get('redirect/facebook', ['middleware' => null, 'uses' => 'SocialController@facebookRedirect', 'as' => 'facebook.redirect']);
+Route::get('redirect/facebook', ['middleware' => 'guest', 'uses' => 'SocialController@facebookRedirect', 'as' => 'facebook.redirect']);
 
 Route::get('facebook', ['uses' => 'SocialController@facebook', 'as' => 'facebook']);
 
 // Google+ login
 
-Route::get('redirect/google', ['middleware' => null, 'uses' => 'SocialController@googleRedirect', 'as' => 'google.redirect']);
+Route::get('redirect/google', ['middleware' => 'guest', 'uses' => 'SocialController@googleRedirect', 'as' => 'google.redirect']);
 
 Route::get('google', ['uses' => 'SocialController@google', 'as' => 'google']);
 
