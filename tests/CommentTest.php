@@ -83,8 +83,8 @@ class CommentTest extends TestCase
     }
 
     /**
-     * !expectedException PHPUnit_Framework_ExpectationFailedException
-     * !expectedExceptionMessage Received status code [401].
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Received status code [401].
      */
     public function test_regular_user_cannot_edit_other_comments()
     {
