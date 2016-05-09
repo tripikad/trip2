@@ -245,6 +245,12 @@
         overflow: auto;
         max-height: 100%;
         //padding-bottom: $spacer * 2;
+
+        p {
+
+            padding: $spacer * 4 $spacer * 2 0 $spacer * 7;
+            min-height: 66px;
+        }
     }
 
         .c-search__results-list {
