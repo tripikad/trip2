@@ -97,10 +97,6 @@ class ContentTest extends TestCase
         }
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessage Received status code [401]
-     */
     public function test_regular_user_cannot_edit_other_user_content()
     {
         $creator_user = factory(App\User::class)->create();
@@ -130,10 +126,11 @@ class ContentTest extends TestCase
 
             // visitor view content
             $content_id = $this->getContentIdByTitleType("Creator title $type");
+            $response = $this->call('GET', "content/$type/$content_id/edit");
             $this->actingAs($visitor_user)
                 ->visit("content/$type/$content_id")
                 ->dontSee(trans('content.action.edit.title'))
-                ->visit("content/$type/$content_id/edit"); // 401
+                ->assertEquals(401, $response->status());
         }
     }
 
