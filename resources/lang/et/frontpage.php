@@ -2,13 +2,14 @@
 
 return [
 
-    'index.search.title' => 'Kuhu sa täna sooviksid minna?',
+    'index.search.title' => 'Kuhu sa soovid minna?',
     'index.search.destination.title' => 'Sisesta sihtkoht',
     'index.search.submit.title' => 'Mine',
 
     'index.forum.general' => 'Üldfoorum',
     'index.forum.buysell' => 'Ost-müük',
     'index.forum.expat' => 'Elu välismaal',
+    'index.forum.create' => 'Alusta teemat',
 
     'index.shortnews.title' => 'Lühiuudised',
     'index.flight.title' => 'Soodsad lennupiletid',
