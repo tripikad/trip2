@@ -12,7 +12,8 @@ var galleryModal = $('.js-gallery-modal'),
     galleryDesktopMedium = 1440,
     winWidth = $(window).width(),
     nudge,
-    offset;
+    offset,
+    galleryInstalled = null;
 
 $(window).on('resize', function(){
 
@@ -78,120 +79,129 @@ var nudgePositive = function(slideIndex) {
 
 // Open gallery and fill it with content
 
-galleryTrigger.on('click', function() {
+galleryTrigger.find('a').on('click', function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    galleryTrigger.trigger('click');
+});
 
-    var images = galleryModal.data('images');
+galleryTrigger.stop(true, true).on('click', function() {
 
-    var currentSlide;
-    var currentSlideIndex;
+    if (!galleryInstalled) {
+        var images = galleryModal.data('images');
 
-    // Show image based on click
+        var currentSlide;
+        var currentSlideIndex;
 
-    currentSlide = galleryTrigger.filter($(this));
-    currentSlideIndex = galleryTrigger.index(currentSlide);
+        // Show image based on click
 
-    $.each(images , function(index, value){
+        currentSlide = galleryTrigger.filter($(this));
+        currentSlideIndex = galleryTrigger.index(currentSlide);
 
-        // Add images and thumbs
+        $.each(images , function(index, value){
 
-        if(index === currentSlideIndex) {
+            // Add images and thumbs
 
-            galleryImageContainer.append(
-                $('<div>')
-                .addClass('c-gallery__modal-image')
-                .addClass('m-active')
-                .addClass('js-gallery-modal-image')
-                .append('<img src="'+ value.image +'">')
-            );
+            if(index === currentSlideIndex) {
 
-            galleryThumbContainer.append(
-                $('<div>')
-                .addClass('c-gallery__modal-thumb')
-                .addClass('m-active')
-                .addClass('js-gallery-modal-thumb')
-                .css({
-                    'background-image': 'url('+value.image+')'
-                })
-            );
-        } else {
+                galleryImageContainer.append(
+                    $('<div>')
+                        .addClass('c-gallery__modal-image')
+                        .addClass('m-active')
+                        .addClass('js-gallery-modal-image')
+                        .append('<img src="'+ value.image +'">')
+                );
 
-            galleryImageContainer.append(
-                $('<div>')
-                .addClass('c-gallery__modal-image')
-                .addClass('js-gallery-modal-image')
-                .append('<img src="'+ value.image +'">')
-            );
+                galleryThumbContainer.append(
+                    $('<div>')
+                        .addClass('c-gallery__modal-thumb')
+                        .addClass('m-active')
+                        .addClass('js-gallery-modal-thumb')
+                        .css({
+                            'background-image': 'url('+value.image+')'
+                        })
+                );
+            } else {
 
-            galleryThumbContainer.append(
-                $('<div>')
-                .addClass('c-gallery__modal-thumb')
-                .addClass('js-gallery-modal-thumb')
-                .css({
-                    'background-image': 'url('+value.image+')'
-                })
-            );
-        }
+                galleryImageContainer.append(
+                    $('<div>')
+                        .addClass('c-gallery__modal-image')
+                        .addClass('js-gallery-modal-image')
+                        .append('<img src="'+ value.image +'">')
+                );
 
-        // Add title if available
+                galleryThumbContainer.append(
+                    $('<div>')
+                        .addClass('c-gallery__modal-thumb')
+                        .addClass('js-gallery-modal-thumb')
+                        .css({
+                            'background-image': 'url('+value.image+')'
+                        })
+                );
+            }
 
-        if(typeof value.title !== 'undefined' && value.title.length > 0) {
+            // Add title if available
 
-            $('.c-gallery__modal-image')
-            .eq(index)
-            .append(
-                $('<div>')
-                .addClass('c-gallery__modal-title')
-                .text(value.title)
-            );
-        }
+            if(typeof value.title !== 'undefined' && value.title.length > 0) {
 
-        // Add tags if available
-
-        if(typeof value.tags !== 'undefined' && value.tags.length > 0) {
-
-            $('.c-gallery__modal-image').eq(index)
-            .append(
-                $('<div>')
-                .addClass('c-gallery__modal-tags')
-                .append(
-                    $('<ul>')
-                    .addClass('c-tags m-small')
-                )
-            );
-
-            $.each(value.tags , function(tagindex, tag){
-
-                $('.c-gallery__modal-image').eq(index).find('.c-tags')
-                .append(
-                    $('<li>')
-                    .addClass('c-tags__item '+ tag.modifiers)
+                $('.c-gallery__modal-image')
+                    .eq(index)
                     .append(
-                        $('<a>')
-                        .attr('href', tag.route)
-                        .addClass('c-tags__item-link')
-                        .text(tag.name)
+                    $('<div>')
+                        .addClass('c-gallery__modal-title')
+                        .text(value.title)
+                );
+            }
+
+            // Add tags if available
+
+            if(typeof value.tags !== 'undefined' && value.tags.length > 0) {
+
+                $('.c-gallery__modal-image').eq(index)
+                    .append(
+                    $('<div>')
+                        .addClass('c-gallery__modal-tags')
+                        .append(
+                        $('<ul>')
+                            .addClass('c-tags m-small')
                     )
                 );
-            });
+
+                $.each(value.tags , function(tagindex, tag){
+
+                    $('.c-gallery__modal-image').eq(index).find('.c-tags')
+                        .append(
+                        $('<li>')
+                            .addClass('c-tags__item '+ tag.modifiers)
+                            .append(
+                            $('<a>')
+                                .attr('href', tag.route)
+                                .addClass('c-tags__item-link')
+                                .text(tag.name)
+                        )
+                    );
+                });
+            }
+        });
+
+        // If clicked image does not fit in the container of 8
+        // then nudge the container
+
+        if (currentSlideIndex > 7) {
+
+            nudgeNegative(currentSlideIndex);
         }
-    });
 
-    // If clicked image does not fit in the container of 8
-    // then nudge the container
+        // Show modal
 
-    if (currentSlideIndex > 7) {
+        galleryModal.addClass('m-active');
 
-        nudgeNegative(currentSlideIndex);
+        // Assign variables
+
+        galleryImageItem = $('.js-gallery-modal-image');
+        galleryThumbItem = $('.js-gallery-modal-thumb');
+        galleryInstalled = true;
     }
-
-    // Show modal
-
-    galleryModal.addClass('m-active');
-
-    // Assign variables
-
-    galleryImageItem = $('.js-gallery-modal-image');
-    galleryThumbItem = $('.js-gallery-modal-thumb');
 
     return false;
 });
@@ -204,6 +214,7 @@ galleryClose.on('click', function(){
     galleryImageItem.remove();
     galleryThumbItem.remove();
     nudge = 0;
+    galleryInstalled = null;
 
     return false;
 });

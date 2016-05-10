@@ -61,7 +61,7 @@ class FrontpageController extends Controller
             ],
             'blogs' => [
                 'skip' => null,
-                'take' => 1,
+                'take' => 3,
                 'type' => ['blog'],
                 'status' => 1,
                 'latest' => 'created_at',

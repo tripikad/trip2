@@ -1,10 +1,10 @@
-{{--
+<?php /*
 
 title: Gallery component
 
 code: |
 
-    @include('component.gallery', [
+    #include('component.gallery', [
         'items' => [
             [
                 'image' => \App\Image::getRandom(),
@@ -51,7 +51,7 @@ code: |
         'more_route' => '#'
     ])
 
---}}
+*/ ?>
 
 <?php
     $tags = [];
@@ -72,7 +72,7 @@ code: |
 
         @foreach ($items as $item)
 
-        <?php $images[$i]['image'] = (isset($item['image_large']) ? $item['image_large'] : $item['image']); ?>
+        <?php $images[$i]['image'] = (isset($item['image_large']) ? htmlentities($item['image_large'], ENT_QUOTES) : htmlentities($item['image'], ENT_QUOTES)); ?>
 
         @if (isset($item['tags']))
 
@@ -81,9 +81,9 @@ code: |
             @foreach ($item['tags'] as $tag)
 
         <?php
-            $images[$i]['tags'][$j]['name'] = $tag['title'];
-            $images[$i]['tags'][$j]['modifiers'] = $tag['modifiers'];
-            $images[$i]['tags'][$j]['route'] = $tag['route'];
+            $images[$i]['tags'][$j]['name'] = htmlentities($tag['title'], ENT_QUOTES);
+            $images[$i]['tags'][$j]['modifiers'] = htmlentities($tag['modifiers'], ENT_QUOTES);
+            $images[$i]['tags'][$j]['route'] = htmlentities($tag['route'], ENT_QUOTES);
 
             $j++;
         ?>
@@ -94,7 +94,7 @@ code: |
 
         @if (isset($item['alt']))
 
-        <?php $images[$i]['title'] = $item['alt']; ?>
+        <?php $images[$i]['title'] = htmlentities($item['alt'], ENT_QUOTES); ?>
 
         @endif
 

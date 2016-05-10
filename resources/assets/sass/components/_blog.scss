@@ -1,8 +1,20 @@
 .c-blog {
 
+    margin-bottom: $spacer * 2;
+
+    &:last-child {
+
+        margin-bottom: 0;
+    }
+
     &.m-mobile-margin {
 
         margin-bottom: $spacer * 2;
+
+        &:last-child {
+
+            margin-bottom: 0;
+        }
 
         @include respond-to(tablet) {
 

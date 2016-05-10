@@ -334,12 +334,23 @@
         <div class="r-user__gallery">
             <div class="r-user__gallery-wrap">
                 @include('component.gallery', [
+                    'modal' => [
+                        'modifiers' => $user->profile_color,
+                    ],
                     'items' => $photos->transform(function($photo) {
                         return [
                             'type' => $photo->type,
-                            'image' => $photo->imagePreset(),
+                            'image' => $photo->imagePreset('small'),
+                            'image_large' => $photo->imagePreset('large'),
                             'route' => route('content.show', [$photo->type, $photo]),
-                            'alt' => $photo->title
+                            'alt' => $photo->title,
+                            'tags' => $photo->destinations->transform(function($destination) {
+                                return [
+                                    'title' => $destination->name,
+                                    'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
+                                    'route' => route('destination.show', $destination)
+                                ];
+                            })
                         ];
                     }),
                     'more_count' => $count_photos,
