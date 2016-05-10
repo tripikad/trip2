@@ -66,6 +66,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
             return $controller->create($type);
         } else {
             abort(401);
+
             return false;
         }
     }]);
@@ -78,6 +79,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
             return $controller->store($request, $type);
         } else {
             abort(401);
+
             return false;
         }
     }]);
@@ -92,6 +94,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
             return $controller->edit($type, $id);
         } else {
             abort(401);
+
             return false;
         }
     }]);
