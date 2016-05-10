@@ -8,6 +8,7 @@ class ContentTest extends TestCase
     use DatabaseTransactions;
 
     protected $publicContentTypes;
+    protected $privateContentTypes;
 
     public function setUp()
     {
@@ -129,7 +130,7 @@ class ContentTest extends TestCase
             $response = $this->call('GET', "content/$type/$content_id/edit");
             $this->actingAs($visitor_user)
                 ->visit("content/$type/$content_id")
-                ->dontSee(trans('content.action.edit.title'))
+                ->dontSeeInElement('.c-actions__link', trans('content.action.edit.title'))
                 ->assertEquals(401, $response->status());
         }
     }
