@@ -75,6 +75,7 @@ class PhotoTest extends TestCase
             ->press(trans('content.action.edit.title'))
             ->seePageIs("content/photo/$content_id/edit")
             ->type('Editor title photo', 'title')
+            ->attach(storage_path().'/tests/test2.jpeg', 'file')
             ->press(trans('content.edit.submit.title'))
             ->see(trans('content.update.info', [
                 'title' => 'Editor title photo',
