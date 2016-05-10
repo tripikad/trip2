@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\ContentController;
+
 // Frontpage
 
 Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
@@ -55,13 +58,46 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
     Route::get('/', ['middleware' => null, 'uses' => 'ContentController@index', 'as' => 'index']);
 
-    Route::get('create', ['middleware' => 'role:regular', 'uses' => 'ContentController@create', 'as' => 'create']);
+    Route::get('create', ['middleware' => 'role:regular', 'as' => 'create', function ($type) {
+        $controller = new ContentController;
+        if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
+            return $controller->create($type);
+        } elseif (\Auth::user()->hasRole('regular') && in_array($type, config('content.everyone_can_edit'))) {
+            return $controller->create($type);
+        } else {
+            abort(401);
 
-    Route::post('/', ['middleware' => 'role:regular', 'uses' => 'ContentController@store', 'as' => 'store']);
+            return false;
+        }
+    }]);
+
+    Route::post('/', ['middleware' => 'role:regular', 'as' => 'store', function ($type, Request $request) {
+        $controller = new ContentController;
+        if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
+            return $controller->store($request, $type);
+        } elseif (\Auth::user()->hasRole('regular') && in_array($type, config('content.everyone_can_edit'))) {
+            return $controller->store($request, $type);
+        } else {
+            abort(401);
+
+            return false;
+        }
+    }]);
 
     Route::get('{id}', ['middleware' => null, 'uses' => 'ContentController@show', 'as' => 'show']);
 
-    Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@edit', 'as' => 'edit']);
+    Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'as' => 'edit', function ($type, $id) {
+        $controller = new ContentController;
+        if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
+            return $controller->edit($type, $id);
+        } elseif (\Auth::user()->hasRole('regular') && in_array($type, config('content.everyone_can_edit'))) {
+            return $controller->edit($type, $id);
+        } else {
+            abort(401);
+
+            return false;
+        }
+    }]);
 
     Route::put('{id}', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@store', 'as' => 'update']);
 

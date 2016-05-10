@@ -27,6 +27,7 @@ class ConvertIndexAliases extends ConvertBase
         $this->insertItem('content.index', 'uudised', 'news');
         $this->insertItem('content.index', 'pildid', 'photo');
         $this->insertItem('content.index', 'eluvalismaal', 'expat');
+        $this->insertItem('content.index', 'blog', 'blog');
 
         $items = collect($this->items);
 

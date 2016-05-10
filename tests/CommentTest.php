@@ -83,12 +83,11 @@ class CommentTest extends TestCase
     }
 
     /**
-     * !expectedException PHPUnit_Framework_ExpectationFailedException
-     * !expectedExceptionMessage Received status code [401].
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Received status code [401]
      */
     public function test_regular_user_cannot_edit_other_comments()
     {
-        $this->markTestSkipped(); // Problem with dontSee exception (/Muuda/i not found fail)
         $regular_user = factory(App\User::class)->create();
 
         foreach ($this->publicContentTypes as $type) {
@@ -106,7 +105,7 @@ class CommentTest extends TestCase
 
             $this->actingAs($regular_user)
                 ->visit("content/$content->type/$content->id")
-                ->dontSee(trans('comment.action.edit.title'))
+                ->dontSeeInElement('.c-actions__link', trans('comment.action.edit.title'))
                 ->visit("comment/$comment->id/edit"); // 401
         }
     }

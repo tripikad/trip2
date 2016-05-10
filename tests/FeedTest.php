@@ -15,12 +15,10 @@ class FeedTest extends TestCase
                 'type' => 'news',
             ]);
 
-        $this->visit('index.atom')
-                ->see('<feed xmlns="http://www.w3.org/2005/Atom">');
+        $this->visit('index.atom');
 
         foreach ($contents as $content) {
-            $this->visit('index.atom')
-                    ->see($content->title);
+            $this->see($content->title);
         }
     }
 }

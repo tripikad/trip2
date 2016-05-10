@@ -8,6 +8,7 @@ class ContentTest extends TestCase
     use DatabaseTransactions;
 
     protected $publicContentTypes;
+    protected $privateContentTypes;
 
     public function setUp()
     {
@@ -95,5 +96,153 @@ class ContentTest extends TestCase
                 ->dontSee(trans("content.$type.create.title"))
                 ->visit("content/$type/create"); // 401
         }
+    }
+
+    public function test_regular_user_cannot_create_admin_only_content()
+    {
+        $creator_user = factory(App\User::class)->create([
+            'role' => 'admin',
+            'verified' => 1,
+        ]);
+        $regular_user = factory(App\User::class)->create();
+        $admin_only_types = config('content.admin_only_edit');
+
+        foreach ($admin_only_types as $type) {
+            // regular user try to create content
+            $this->actingAs($regular_user);
+            $response = $this->call('GET', "content/$type/create");
+            $this->assertEquals(401, $response->status());
+
+            // admin user can create content
+            $this->actingAs($creator_user)
+                ->visit("content/$type/create")
+                ->type("Admin title $type", 'title')
+                ->type("Admin body $type", 'body');
+
+            if ($type == 'flight') {
+                $this->type('200', 'price');
+                $seeInDatabase = [
+                    'user_id' => $creator_user->id,
+                    'title' => "Admin title $type",
+                    'body' => "Admin body $type",
+                    'type' => $type,
+                    'price' => 200,
+                ];
+            } else {
+                $seeInDatabase = [
+                    'user_id' => $creator_user->id,
+                    'title' => "Admin title $type",
+                    'body' => "Admin body $type",
+                    'type' => $type,
+                ];
+            }
+
+            $this->press(trans('content.create.submit.title'))
+                ->see(trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
+                    'title' => "Admin title $type",
+                ]))
+                ->seeInDatabase('contents', $seeInDatabase);
+        }
+    }
+
+    public function test_regular_user_cannot_edit_other_user_content()
+    {
+        $creator_user = factory(App\User::class)->create([
+            'role' => 'admin',
+            'verified' => 1,
+        ]);
+        $visitor_user = factory(App\User::class)->create();
+
+        foreach ($this->privateContentTypes as $type) {
+
+            // creator create content
+            $this->actingAs($creator_user)
+                ->visit("content/$type")
+                ->click(trans("content.$type.create.title"))
+                ->seePageIs("content/$type/create")
+                ->type("Creator title $type", 'title')
+                ->type("Creator body $type", 'body')
+                ->press(trans('content.create.submit.title'))
+                ->see(trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
+                    'title' => "Creator title $type",
+                ]))
+                ->see("Creator title $type")
+                ->seeInDatabase('contents', [
+                    'user_id' => $creator_user->id,
+                    'title' => "Creator title $type",
+                    'body' => "Creator body $type",
+                    'type' => $type,
+                ]);
+
+            // visitor view content
+            $content_id = $this->getContentIdByTitleType("Creator title $type");
+            $this->actingAs($visitor_user);
+            $response = $this->call('GET', "content/$type/$content_id/edit");
+            $this->visit("content/$type/$content_id")
+                ->dontSeeInElement('form', trans('content.action.edit.title'))
+                ->assertEquals(401, $response->status());
+        }
+    }
+
+    public function test_admin_user_can_edit_content()
+    {
+        $types = [
+            'forum',
+            'expat',
+            'buysell',
+        ];
+
+        $creator_user = factory(App\User::class)->create();
+        $editor_user = factory(App\User::class)->create([
+            'role' => 'admin',
+            'verified' => 1,
+        ]);
+
+        foreach ($types as $type) {
+
+            // creator create content
+            $this->actingAs($creator_user)
+                ->visit("content/$type")
+                ->click(trans("content.$type.create.title"))
+                ->seePageIs("content/$type/create")
+                ->type("Creator title $type", 'title')
+                ->type("Creator body $type", 'body')
+                ->press(trans('content.create.submit.title'))
+                ->see(trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
+                    'title' => "Creator title $type",
+                ]))
+                ->see("Creator title $type")
+                ->seeInDatabase('contents', [
+                    'user_id' => $creator_user->id,
+                    'title' => "Creator title $type",
+                    'body' => "Creator body $type",
+                    'type' => $type,
+                ]);
+
+            // editor edit content
+            $content_id = $this->getContentIdByTitleType("Creator title $type");
+            $this->actingAs($editor_user)
+                ->visit("content/$type/$content_id")
+                ->seeInElement('form', trans('content.action.edit.title'))
+                ->press(trans('content.action.edit.title'))
+                ->seePageIs("content/$type/$content_id/edit")
+                ->type("Editor title $type", 'title')
+                ->type("Editor body $type", 'body')
+                ->press(trans('content.edit.submit.title'))
+                ->see(trans('content.update.info', [
+                    'title' => "Editor title $type",
+                ]))
+                ->seeInDatabase('contents', [
+                    'user_id' => $creator_user->id,
+                    'title' => "Editor title $type",
+                    'body' => "Editor body $type",
+                    'type' => $type,
+                ]);
+        }
+    }
+
+    private function getContentIdByTitleType($title)
+    {
+        return Content::whereTitle($title)->first()->id;
     }
 }
