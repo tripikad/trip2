@@ -121,7 +121,7 @@ class ContentTest extends TestCase
                 ->type("Admin body $type", 'body')
                 ->press(trans('content.create.submit.title'))
                 ->see(trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
-                    'title' => "Creator title $type",
+                    'title' => "Admin title $type",
                 ]))
                 ->seeInDatabase('contents', [
                     'user_id' => $creator_user->id,
