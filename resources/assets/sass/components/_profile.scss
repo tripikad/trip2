@@ -256,24 +256,19 @@
 
     .c-profile__image-wrap {
 
-        flex: 0 1 $spacer * 6;
-
-        .c-profile.m-small & {
-
-            flex: 0 1 $spacer * 4;
-        }
+        display: table;
+        text-align: center;
+        width: auto;
 
         .c-profile.m-mini & {
 
             position: relative;
-            display: block;
             width: $spacer * 3;
             height: $spacer * 3;
         }
 
         .c-profile.m-micro & {
 
-            display: inline-block;
             width: $spacer * 2;
             height: $spacer * 2;
         }
@@ -282,8 +277,6 @@
 
             @include color-modifiers-dark-and(background-color);
 
-            display: block;
-            flex: none;
             width: 100%;
             height: 100%;
             border-radius: 50%;
@@ -298,7 +291,8 @@
 
         .c-profile__image {
 
-            display: block;
+            display: table-cell;
+            vertical-align: middle;
             height: $spacer * 4;
             width: $spacer * 4;
             border-radius: 50%;
@@ -321,6 +315,13 @@
                 width: 100%;
                 height: 100%;
             }
+        }
+
+        .c-profile__title {
+
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0 0 0 $spacer;
         }
 
         .c-profile__letter {
