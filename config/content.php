@@ -32,7 +32,7 @@ return [
         'expat',
         'buysell',
         'photo',
-        'travelmate'
+        'travelmate',
     ],
 
 ];
