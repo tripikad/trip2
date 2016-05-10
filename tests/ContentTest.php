@@ -100,7 +100,10 @@ class ContentTest extends TestCase
 
     public function test_regular_user_cannot_edit_other_user_content()
     {
-        $creator_user = factory(App\User::class)->create();
+        $creator_user = factory(App\User::class)->create([
+            'role' => 'admin',
+            'verified' => 1,
+        ]);
         $visitor_user = factory(App\User::class)->create();
 
         foreach ($this->privateContentTypes as $type) {
