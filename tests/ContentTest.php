@@ -166,8 +166,65 @@ class ContentTest extends TestCase
             $this->actingAs($visitor_user);
             $response = $this->call('GET', "content/$type/$content_id/edit");
             $this->visit("content/$type/$content_id")
-                ->dontSeeInElement('.c-actions__link', trans('content.action.edit.title'))
+                ->dontSeeInElement('form', trans('content.action.edit.title'))
                 ->assertEquals(401, $response->status());
+        }
+    }
+
+    public function test_admin_user_can_edit_content()
+    {
+        $types = [
+            'forum',
+            'expat',
+            'buysell',
+        ];
+
+        $creator_user = factory(App\User::class)->create();
+        $editor_user = factory(App\User::class)->create([
+            'role' => 'admin',
+            'verified' => 1,
+        ]);
+
+        foreach ($types as $type) {
+
+            // creator create content
+            $this->actingAs($creator_user)
+                ->visit("content/$type")
+                ->click(trans("content.$type.create.title"))
+                ->seePageIs("content/$type/create")
+                ->type("Creator title $type", 'title')
+                ->type("Creator body $type", 'body')
+                ->press(trans('content.create.submit.title'))
+                ->see(trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
+                    'title' => "Creator title $type",
+                ]))
+                ->see("Creator title $type")
+                ->seeInDatabase('contents', [
+                    'user_id' => $creator_user->id,
+                    'title' => "Creator title $type",
+                    'body' => "Creator body $type",
+                    'type' => $type,
+                ]);
+
+            // editor edit content
+            $content_id = $this->getContentIdByTitleType("Creator title $type");
+            $this->actingAs($editor_user)
+                ->visit("content/$type/$content_id")
+                ->seeInElement("form", trans('content.action.edit.title'))
+                ->press(trans('content.action.edit.title'))
+                ->seePageIs("content/$type/$content_id/edit")
+                ->type("Editor title $type", 'title')
+                ->type("Editor body $type", 'body')
+                ->press(trans('content.edit.submit.title'))
+                ->see(trans('content.update.info', [
+                    'title' => "Editor title $type",
+                ]))
+                ->seeInDatabase('contents', [
+                    'user_id' => $creator_user->id,
+                    'title' => "Editor title $type",
+                    'body' => "Editor body $type",
+                    'type' => $type,
+                ]);
         }
     }
 
