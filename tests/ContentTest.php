@@ -210,7 +210,7 @@ class ContentTest extends TestCase
             $content_id = $this->getContentIdByTitleType("Creator title $type");
             $this->actingAs($editor_user)
                 ->visit("content/$type/$content_id")
-                ->seeInElement("form", trans('content.action.edit.title'))
+                ->seeInElement('form', trans('content.action.edit.title'))
                 ->press(trans('content.action.edit.title'))
                 ->seePageIs("content/$type/$content_id/edit")
                 ->type("Editor title $type", 'title')

@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Content;
 use App\User;
-use Symfony\Component\DomCrawler;
 
 class FeedTest extends TestCase
 {
