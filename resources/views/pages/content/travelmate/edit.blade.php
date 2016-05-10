@@ -217,7 +217,7 @@
 
                 {!! Form::close() !!}
 
-                {{--
+                <?php /*
 
                     OLD FORM ELEMENTS
 
@@ -340,7 +340,7 @@
 
                     {!! Form::close() !!}
 
-                --}}
+                */ ?>
 
             </div>
 
