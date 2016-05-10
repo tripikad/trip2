@@ -166,7 +166,6 @@ class TravelmateTest extends TestCase
                 'status' => 1,
             ]);
 
-
         $datetime = Carbon::now()->addMonth(2)->toDateTimeString();
         $year = Carbon::parse($datetime)->year;
         $month = Carbon::parse($datetime)->month;
