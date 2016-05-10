@@ -100,15 +100,35 @@ class ContentTest extends TestCase
 
     public function test_regular_user_cannot_create_admin_only_content()
     {
-        $creator_user = factory(App\User::class)->create();
+        $creator_user = factory(App\User::class)->create([
+            'role' => 'admin',
+            'verified' => 1,
+        ]);
+        $regular_user = factory(App\User::class)->create();
         $admin_only_types = config('content.admin_only_edit');
 
         foreach ($admin_only_types as $type) {
 
-            // try to create content
-            $this->actingAs($creator_user);
+            // regular user try to create content
+            $this->actingAs($regular_user);
             $response = $this->call('GET', "content/$type/create");
             $this->assertEquals(401, $response->status());
+
+            // admin user can create content
+            $this->actingAs($creator_user)
+                ->visit("content/$type/create")
+                ->type("Admin title $type", 'title')
+                ->type("Admin body $type", 'body')
+                ->press(trans('content.create.submit.title'))
+                ->see(trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
+                    'title' => "Creator title $type",
+                ]))
+                ->seeInDatabase('contents', [
+                    'user_id' => $creator_user->id,
+                    'title' => "Admin title $type",
+                    'body' => "Admin body $type",
+                    'type' => $type,
+                ]);
         }
     }
 
