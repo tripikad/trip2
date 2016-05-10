@@ -276,7 +276,7 @@
                                     'tags' => $photo->destinations->transform(function($destination) {
                                         return [
                                             'title' => $destination->name,
-                                            'modifiers' => ['m-orange', 'm-red', 'm-gray', 'm-blue'][rand(0,3)],
+                                            'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
                                             'route' => route('destination.show', $destination)
                                         ];
                                     })
