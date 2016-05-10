@@ -122,7 +122,6 @@ class ContentTest extends TestCase
                     'title' => "Creator title $type",
                     'body' => "Creator body $type",
                     'type' => $type,
-                    'status' => 1,
                 ]);
 
             // visitor view content
