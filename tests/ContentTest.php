@@ -113,7 +113,7 @@ class ContentTest extends TestCase
                 ->type("Creator title $type", 'title')
                 ->type("Creator body $type", 'body')
                 ->press(trans('content.create.submit.title'))
-                ->see(trans('content.store.status.1.info', [
+                ->see(trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
                     'title' => "Creator title $type",
                 ]))
                 ->see("Creator title $type")
