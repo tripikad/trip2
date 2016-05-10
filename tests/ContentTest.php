@@ -98,6 +98,20 @@ class ContentTest extends TestCase
         }
     }
 
+    public function test_regular_user_cannot_create_admin_only_content()
+    {
+        $creator_user = factory(App\User::class)->create();
+        $admin_only_types = config('content.admin_only_edit');
+
+        foreach ($admin_only_types as $type) {
+
+            // try to create content
+            $this->actingAs($creator_user);
+            $response = $this->call('GET', "content/$type/create");
+            $this->assertEquals(401, $response->status());
+        }
+    }
+
     public function test_regular_user_cannot_edit_other_user_content()
     {
         $creator_user = factory(App\User::class)->create([
