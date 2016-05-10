@@ -96,4 +96,49 @@ class ContentTest extends TestCase
                 ->visit("content/$type/create"); // 401
         }
     }
+
+    /**
+     * @expectedException PHPUnit_Framework_ExpectationFailedException
+     * @expectedExceptionMessage Received status code [401]
+     */
+    public function test_regular_user_cannot_edit_other_user_content()
+    {
+        $creator_user = factory(App\User::class)->create();
+        $visitor_user = factory(App\User::class)->create();
+
+        foreach ($this->privateContentTypes as $type) {
+
+            // creator create content
+            $this->actingAs($creator_user)
+                ->visit("content/$type")
+                ->click(trans("content.$type.create.title"))
+                ->seePageIs("content/$type/create")
+                ->type("Creator title $type", 'title')
+                ->type("Creator body $type", 'body')
+                ->press(trans('content.create.submit.title'))
+                ->see(trans('content.store.status.1.info', [
+                    'title' => "Creator title $type",
+                ]))
+                ->see("Creator title $type")
+                ->seeInDatabase('contents', [
+                    'user_id' => $creator_user->id,
+                    'title' => "Creator title $type",
+                    'body' => "Creator body $type",
+                    'type' => $type,
+                    'status' => 1,
+                ]);
+
+            // visitor view content
+            $content_id = $this->getContentIdByTitleType("Creator title $type");
+            $this->actingAs($visitor_user)
+                ->visit("content/$type/$content_id")
+                ->dontSee(trans('content.action.edit.title'))
+                ->visit("content/$type/$content_id/edit"); // 401
+        }
+    }
+
+    private function getContentIdByTitleType($title)
+    {
+        return Content::whereTitle($title)->first()->id;
+    }
 }
