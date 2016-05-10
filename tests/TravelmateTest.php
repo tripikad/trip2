@@ -123,6 +123,87 @@ class TravelmateTest extends TestCase
                 ]);
     }
 
+    public function test_admin_user_can_edit_content()
+    {
+        $creator_user = factory(App\User::class)->create();
+        $editor_user = factory(App\User::class)->create([
+            'role' => 'admin',
+            'verified' => 1,
+        ]);
+
+        $datetime = Carbon::now()->addMonth(1)->toDateTimeString();
+        $year = Carbon::parse($datetime)->year;
+        $month = Carbon::parse($datetime)->month;
+        $day = Carbon::parse($datetime)->day;
+        $hour = Carbon::parse($datetime)->hour;
+        $minute = Carbon::parse($datetime)->minute;
+        $second = Carbon::parse($datetime)->second;
+
+        // creator create content
+        $this->actingAs($creator_user)
+            ->visit('content/travelmate')
+            ->click(trans('content.travelmate.create.title'))
+            ->seePageIs('content/travelmate/create')
+            ->type('Creator title travelmate', 'title')
+            ->type('Creator body travelmate', 'body')
+            ->select($year, 'start_at_year')
+            ->select($month, 'start_at_month')
+            ->select($day, 'start_at_day')
+            ->select($hour, 'start_at_hour')
+            ->select($minute, 'start_at_minute')
+            ->select($second, 'start_at_second')
+            ->press(trans('content.create.submit.title'))
+            ->see(trans('content.store.status.'.config('content_travelmate.store.status', 1).'.info', [
+                'title' => 'Creator title travelmate',
+            ]))
+            ->see('Creator title travelmate')
+            ->seeInDatabase('contents', [
+                'user_id' => $creator_user->id,
+                'start_at' => $datetime,
+                'title' => 'Creator title travelmate',
+                'body' => 'Creator body travelmate',
+                'type' => 'travelmate',
+                'status' => 1,
+            ]);
+
+
+        $datetime = Carbon::now()->addMonth(2)->toDateTimeString();
+        $year = Carbon::parse($datetime)->year;
+        $month = Carbon::parse($datetime)->month;
+        $day = Carbon::parse($datetime)->day;
+        $hour = Carbon::parse($datetime)->hour;
+        $minute = Carbon::parse($datetime)->minute;
+        $second = Carbon::parse($datetime)->second;
+
+        // editor edit content
+        $content_id = $this->getContentIdByTitleType('Creator title travelmate');
+        $this->actingAs($editor_user)
+            ->visit("content/travelmate/$content_id")
+            ->seeInElement('form', trans('content.action.edit.title'))
+            ->press(trans('content.action.edit.title'))
+            ->seePageIs("content/travelmate/$content_id/edit")
+            ->type('Editor title travelmate', 'title')
+            ->type('Editor body travelmate', 'body')
+            ->select($year, 'start_at_year')
+            ->select($month, 'start_at_month')
+            ->select($day, 'start_at_day')
+            ->select($hour, 'start_at_hour')
+            ->select($minute, 'start_at_minute')
+            ->select($second, 'start_at_second')
+            ->press(trans('content.edit.submit.title'))
+            ->see(trans('content.update.info', [
+                'title' => 'Editor title travelmate',
+            ]))
+            ->seeInDatabase('contents', [
+                'user_id' => $creator_user->id,
+                'start_at' => $datetime,
+                'title' => 'Editor title travelmate',
+                'body' => 'Editor body travelmate',
+                'type' => 'travelmate',
+                'status' => 1,
+            ]);
+    }
+
     private function getContentIdByTitleType($title)
     {
         return Content::whereTitle($title)->first()->id;
