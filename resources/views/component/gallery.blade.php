@@ -72,7 +72,7 @@ code: |
 
         @foreach ($items as $item)
 
-        <?php $images[$i]['image'] = (isset($item['image_large']) ? htmlentities($item['image_large'], ENT_QUOTES) : htmlentities($item['image'], ENT_QUOTES)); ?>
+        <?php $images[$i]['image'] = (isset($item['image_large']) ? htmlentities($item['image_large']) : htmlentities($item['image'])); ?>
 
         @if (isset($item['tags']))
 
@@ -81,9 +81,9 @@ code: |
             @foreach ($item['tags'] as $tag)
 
         <?php
-            $images[$i]['tags'][$j]['name'] = htmlentities($tag['title'], ENT_QUOTES);
-            $images[$i]['tags'][$j]['modifiers'] = htmlentities($tag['modifiers'], ENT_QUOTES);
-            $images[$i]['tags'][$j]['route'] = htmlentities($tag['route'], ENT_QUOTES);
+            $images[$i]['tags'][$j]['name'] = htmlentities($tag['title']);
+            $images[$i]['tags'][$j]['modifiers'] = htmlentities($tag['modifiers']);
+            $images[$i]['tags'][$j]['route'] = htmlentities($tag['route']);
 
             $j++;
         ?>
@@ -142,7 +142,7 @@ code: |
 
     @if (isset($modal))
 
-    <div class="c-gallery__modal js-gallery-modal {{ $modal['modifiers'] or '' }}" data-images='<?php  echo json_encode($images); ?>'>
+    <div class="c-gallery__modal js-gallery-modal {{ $modal['modifiers'] or '' }}" data-images='<?php  echo json_encode($images, JSON_HEX_APOS); ?>'>
 
         <a href="#" class="c-gallery__modal-close js-gallery-modal-close">
             @include('component.svg.sprite', [
