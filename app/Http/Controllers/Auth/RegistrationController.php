@@ -35,6 +35,20 @@ class RegistrationController extends Controller
 
             $mail->to($user->email, $user->name)->subject(trans('auth.register.email.subject'));
 
+            $swiftMessage = $mail->getSwiftMessage();
+            $headers = $swiftMessage->getHeaders();
+
+            $header = [
+                'category' => [
+                    'auth_register',
+                ],
+                'unique_args' => [
+                    'user_id' => (string)$user->id,
+                ]
+            ];
+
+            $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
+
         });
 
         return redirect()
