@@ -76,7 +76,7 @@ class MessageController extends Controller
                     'unique_args' => [
                         'message_from_user_id' => (string) $user_from->id,
                         'message_to_user_id' => (string) $user_to->id,
-                    ]
+                    ],
                 ];
 
                 $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));

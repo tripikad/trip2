@@ -48,7 +48,7 @@ class CommentController extends Controller
                             'user_id' => (string) $followerId,
                             'content_id' => (string) $comment->content->id,
                             'content_type' => (string) $comment->content->type,
-                        ]
+                        ],
                     ];
 
                     $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));

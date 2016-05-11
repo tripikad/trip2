@@ -54,7 +54,7 @@ class ResetController extends Controller
                 ],
                 'unique_args' => [
                     'user_id' => (string) $user->id,
-                ]
+                ],
             ];
 
             $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
