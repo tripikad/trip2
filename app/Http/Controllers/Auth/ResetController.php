@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -54,7 +53,7 @@ class ResetController extends Controller
                     'auth_reset',
                 ],
                 'unique_args' => [
-                    'user_id' => (string)$user->id,
+                    'user_id' => (string) $user->id,
                 ]
             ];
 

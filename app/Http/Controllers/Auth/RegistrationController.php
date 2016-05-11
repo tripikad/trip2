@@ -43,7 +43,7 @@ class RegistrationController extends Controller
                     'auth_register',
                 ],
                 'unique_args' => [
-                    'user_id' => (string)$user->id,
+                    'user_id' => (string) $user->id,
                 ]
             ];
 

@@ -74,8 +74,8 @@ class MessageController extends Controller
                         'private_message',
                     ],
                     'unique_args' => [
-                        'message_from_user_id' => (string)$user_from->id,
-                        'message_to_user_id' => (string)$user_to->id,
+                        'message_from_user_id' => (string) $user_from->id,
+                        'message_to_user_id' => (string) $user_to->id,
                     ]
                 ];
 

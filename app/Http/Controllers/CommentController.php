@@ -45,9 +45,9 @@ class CommentController extends Controller
                             'follow_content',
                         ],
                         'unique_args' => [
-                            'user_id' => (string)$followerId,
-                            'content_id' => (string)$comment->content->id,
-                            'content_type' => (string)$comment->content->type,
+                            'user_id' => (string) $followerId,
+                            'content_id' => (string) $comment->content->id,
+                            'content_type' => (string) $comment->content->type,
                         ]
                     ];
 
