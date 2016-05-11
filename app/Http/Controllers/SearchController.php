@@ -198,11 +198,17 @@ class SearchController extends Controller
     public function ajaxsearch(Request $request)
     {
         $q = trim($request->input('q'));
+
+        if ($request->has('types')) {
+            $types = explode(',', $request->types);
+        } else {
+            $types = ['destination', 'flight', 'forum'];
+        }
+
         $header_search = $request->input('header_search');
         $total_cnt = 0;
 
         if ($q && ! empty($q)) {
-            $types = ['destination', 'flight', 'forum'];
             $total_cnt = $this->getTotalCount($q, $types);
             $remaining_cnt = config('search.ajax_results');
             foreach ($types as $type) {
