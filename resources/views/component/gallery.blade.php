@@ -94,7 +94,7 @@ code: |
 
         @if (isset($item['alt']))
 
-        <?php $images[$i]['title'] = htmlentities($item['alt'], ENT_QUOTES); ?>
+        <?php $images[$i]['title'] = htmlentities($item['alt']); ?>
 
         @endif
 
