@@ -414,7 +414,9 @@ class ConvertBase extends Command
     {
         $user = $this->getUser($uid);
 
-        if (!$user) return false;
+        if (! $user) {
+            return false;
+        }
 
         $blockedSender = false;
 
