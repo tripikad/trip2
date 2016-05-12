@@ -414,6 +414,8 @@ class ConvertBase extends Command
     {
         $user = $this->getUser($uid);
 
+        if (!$user) return false;
+
         $blockedSender = false;
 
         // We only consider user being blocked when it is not admininstrator, editor, senior editor or superuser
