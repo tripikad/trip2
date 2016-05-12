@@ -1,10 +1,6 @@
 @extends('layouts.main')
 
-@section('title')
-
-	{{ trans('error.404.title') }}
-
-@stop
+@section('title', trans('error.404.title'))
 
 @section('header')
 
