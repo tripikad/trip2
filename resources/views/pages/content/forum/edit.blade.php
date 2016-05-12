@@ -26,7 +26,7 @@
         <div class="r-forum__content-wrap">
             <div class="r-forum__wrap m-small">
                 <div class="r-forum__content">
-                    <h1 class="c-forum-title m-large">{{ trans('content.forum.create.title') }}</h1>
+                    <h1 class="c-forum-title m-large">{{ trans("content.forum.$mode.title") }}</h1>
                     <div class="r-block">
                         {!! Form::model(isset($content) ? $content : null, [
                             'url' => $url,
