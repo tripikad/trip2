@@ -29,14 +29,31 @@ class CommentController extends Controller
                 ->forget(Auth::user()->id)
                 ->toArray()
         ) {
-            Mail::queue('email.follow.content', ['comment' => $comment], function ($mail) use ($followersEmails, $comment) {
+            foreach ($followersEmails as $followerId => $followerEmail) {
+                Mail::queue('email.follow.content', ['comment' => $comment], function ($mail) use ($followerEmail, $followerId, $comment) {
 
-                $mail->bcc($followersEmails)
-                    ->subject(trans('follow.content.email.subject', [
-                        'title' => $comment->content->title,
-                    ]));
+                    $mail->to($followerEmail)
+                        ->subject(trans('follow.content.email.subject', [
+                            'title' => $comment->content->title,
+                        ]));
 
-            });
+                    $swiftMessage = $mail->getSwiftMessage();
+                    $headers = $swiftMessage->getHeaders();
+
+                    $header = [
+                        'category' => [
+                            'follow_content',
+                        ],
+                        'unique_args' => [
+                            'user_id' => (string) $followerId,
+                            'content_id' => (string) $comment->content->id,
+                            'content_type' => (string) $comment->content->type,
+                        ],
+                    ];
+
+                    $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
+                });
+            }
         }
 
         return redirect()->route('content.show', [$type, $content_id, '#comment-'.$comment->id]);

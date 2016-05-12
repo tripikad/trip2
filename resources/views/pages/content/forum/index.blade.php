@@ -13,6 +13,7 @@
     @include('component.search',[
         'modifiers' => 'm-red m-inverted',
         'placeholder' => 'Otsi foorumist...',
+        'types' => ['forum'],
     ])
 
 @stop

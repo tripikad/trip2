@@ -1,10 +1,6 @@
 @extends('layouts.main')
 
-@section('title')
-
-    {{ trans("content.$type.index.title") }}
-
-@stop
+@section('title', trans("content.$type.index.title"))
 
 @section('header')
 
@@ -33,6 +29,12 @@
 
     <div class="r-travelmates__wrap">
 
+        <div class="r-travelmates__filter">
+
+            @include('component.range_filter')
+
+        </div>
+
         <div class="r-travelmates__content">
 
             @if (count($contents))
@@ -43,6 +45,10 @@
                         return [
                             'modifiers' => '',
                             'image' =>  $content->user->imagePreset('small_square'),
+                            'letter'=> [
+                                'modifiers' => 'm-red',
+                                'text' => 'J'
+                            ],
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
                             'sex_and_age' =>
@@ -52,9 +58,9 @@
                                 : null).
                                 ($content->user->age ? $content->user->age : null),
                             'title' => $content->title,
-                            'tags' => $content->destinations->transform(function ($content_destination, $key) {
+                            'tags' => $content->destinations->transform(function ($content_destination) {
                                 return [
-                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][$key],
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
                                     'title' => $content_destination->name
                                 ];
                             })
@@ -64,13 +70,9 @@
 
             @endif
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
-                @include('component.promo', [
-                    'modifiers' => 'm-body',
-                    'route' => '',
-                    'image' => \App\Image::getRandom()
-                ])
+                @include('component.promo', ['promo' => 'body'])
 
             </div>
 
@@ -82,6 +84,10 @@
                         return [
                             'modifiers' => '',
                             'image' => $content->user->imagePreset('small_square'),
+                            'letter'=> [
+                                'modifiers' => 'm-red',
+                                'text' => 'J'
+                            ],
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
                             'sex_and_age' =>
@@ -91,9 +97,9 @@
                                 : null).
                                 ($content->user->age ? $content->user->age : null),
                             'title' => $content->title,
-                            'tags' => $content->destinations->transform(function ($content_destination, $key) {
+                            'tags' => $content->destinations->transform(function ($content_destination) {
                                 return [
-                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][$key],
+                                    'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
                                     'title' => $content_destination->name
                                 ];
                             })
@@ -106,7 +112,6 @@
             @include('component.pagination.default',[
                 'collection' => $contents
             ])
-
         </div>
 
         <div class="r-travelmates__sidebar">
@@ -116,22 +121,16 @@
                 <div class="r-block__inner">
 
                     @include('component.about', [
-                        'title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
-                        'text' => 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.',
-                        'links' => [
+                        'title' => trans('content.travelmate.description.title'),
+                        'text' => trans('content.travelmate.description.text'),
+                        'links' => count($rules) ? [
                             [
                                 'modifiers' => 'm-icon',
-                                'title' => 'Reeglid',
-                                'route' => '#',
+                                'title' => $rules->first()->title,
+                                'route' => route('content.show', [$rules->first()->type, $rules->first()]),
                                 'icon' => 'icon-arrow-right'
                             ],
-                            [
-                                'modifiers' => 'm-icon',
-                                'title' => 'Kellele ja miks?',
-                                'route' => '#',
-                                'icon' => 'icon-arrow-right'
-                            ]
-                        ],
+                        ] : null,
                         'button' =>
                             \Auth::check() ? [
                                 'modifiers' => 'm-block',
@@ -144,78 +143,16 @@
             </div>
 
             <div class="r-block m-small">
-
-                @include('component.filter')
-
                 <div class="r-block__inner">
 
-                    <div class="r-block__header">
-
-                        <div class="r-block__header-title">
-
-                            @include('component.title', [
-                                'title' => 'Filter',
-                                'modifiers' => 'm-large m-green'
-                            ])
-
-                        </div>
-
-                        <div class="c-body">
-                            <p>Kui ei leia sobivat kaaslast, siis ehk aitab sind filter.</p>
-                        </div>
-                    </div>
-
-                    <div class="r-block__body">
-
-                        <div class="c-form__group m-small-margin">
-                            <select name="" id="" class="c-form__input">
-                                <option value="">Riik</option>
-                            </select>
-                        </div>
-
-                        <div class="c-form__group m-small-margin">
-                            <select name="" id="" class="c-form__input">
-                                <option value="">Linn</option>
-                            </select>
-                        </div>
-
-                        <div class="c-form__group m-small-margin">
-                            <select name="" id="" class="c-form__input">
-                                <option value="">Reisistiil</option>
-                            </select>
-                        </div>
-
-                        <div class="c-form__group m-small-margin">
-                            <select name="" id="" class="c-form__input">
-                                <option value="">Vanus</option>
-                            </select>
-                        </div>
-
-                        <div class="c-form__group m-small-margin">
-                            <select name="" id="" class="c-form__input">
-                                <option value="">Sugu</option>
-                                <option value="">Mees</option>
-                                <option value="">Naine</option>
-                            </select>
-                        </div>
-
-                        @include('component.button', [
-                            'modifiers' => 'm-block',
-                            'title' => 'Filtreeri',
-                            'route' => ''
-                        ])
-
-                    </div>
+                    @include('component.travelmate.filter')
                 </div>
             </div>
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
-                @include('component.promo', [
-                    'modifiers' => 'm-sidebar-small',
-                    'route' => '',
-                    'image' => \App\Image::getRandom()
-                ])
+                @include('component.promo', ['promo' => 'sidebar_small'])
+
             </div>
 
             <div class="r-block m-small">
@@ -223,7 +160,7 @@
                 <div class="r-block__inner">
 
                     @include('component.about', [
-                        'title' => count($about) ? str_limit($about->first()->body, 300) : null,
+                        'title' => count($about) ? str_limit($about->first()->body_filtered, 300) : null,
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
@@ -264,11 +201,8 @@
 
         <div class="r-travelmates__footer-promo-wrap">
 
-            @include('component.promo', [
-                'modifiers' => 'm-footer',
-                'route' => '',
-                'image' => \App\Image::getRandom()
-            ])
+            @include('component.promo', ['promo' => 'footer'])
+
         </div>
     </div>
 
