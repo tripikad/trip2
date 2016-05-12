@@ -166,11 +166,6 @@ code: |
                 )!!}
 
             @elseif ($field['type'] == 'datetime')
-
-                <div class="c-form__label">
-                    {{ trans("content.$type.edit.field.$key.title") }}
-                </div>
-
                 <div class="c-columns m-6-cols m-space">
                     <div class="c-columns__item">
                         @include('component.date.select', [
