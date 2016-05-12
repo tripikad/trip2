@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\User;
 
 class ResetController extends Controller
 {
@@ -40,8 +40,24 @@ class ResetController extends Controller
     {
         $this->validate($request, ['email' => 'required|email']);
 
-        $response = Password::sendResetLink($request->only('email'), function (Message $message) {
+        $user = User::where('email', $request->email)->take(1)->first();
+
+        $response = Password::sendResetLink($request->only('email'), function ($message) use ($user) {
             $message->subject($this->getEmailSubject());
+
+            $swiftMessage = $message->getSwiftMessage();
+            $headers = $swiftMessage->getHeaders();
+
+            $header = [
+                'category' => [
+                    'auth_reset',
+                ],
+                'unique_args' => [
+                    'user_id' => (string) $user->id,
+                ],
+            ];
+
+            $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
         });
 
         switch ($response) {

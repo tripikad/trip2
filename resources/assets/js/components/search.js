@@ -10,7 +10,8 @@ var searchInput = '.c-search__form-input',
 $(searchInput).on('keypress keyup keydown click change', function() {
     if($(searchInput).val()) {
         var searchObject = this,
-            jsSearchElement = $(searchObject).closest('.js-search');
+            jsSearchElement = $(searchObject).closest('.js-search'),
+            searchType = '#js-search-type';
 
         if (searchRequest) {
             searchRequest.abort();
@@ -20,11 +21,17 @@ $(searchInput).on('keypress keyup keydown click change', function() {
             jsSearchElement.addClass('m-active');
         }
 
+        if ($(searchType).length && $(searchType).val()) {
+            searchType = {types: $(searchType).val()};
+        } else {
+            searchType = {};
+        }
+
         var headerSearch = ($(this).attr('id') && $(this).attr('id') == 'search_small')?1:0;
         searchRequest = $.ajax({
             url: '/search/ajaxsearch',
             type: 'get',
-            data: {q: $('.c-search__form-input').val(), 'header_search': headerSearch},
+            data: $.extend({q: $('.c-search__form-input').val(), 'header_search': headerSearch}, searchType),
             success: function(response) {
                 if (response) {
                     $('#search_results_div').html(response);

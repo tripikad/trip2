@@ -7,6 +7,7 @@ return [
     'post.updated.at' => 'Muudetud: :updated_at',
 
     'comments.title' => 'Kommentaarid',
+    'share.post.title' => 'Soovita pakkumist sõpradele',
 
     'row.text.comment' => 'Viimane kommentaar :updated_at',
 

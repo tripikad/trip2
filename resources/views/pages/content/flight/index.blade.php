@@ -139,7 +139,7 @@
                             ]
                         ],
                         'button' =>
-                        \Auth::check() ? [
+                        \Auth::check() && \Auth::user()->hasRole('admin') ? [
                             'modifiers' => 'm-block',
                             'route' => route('content.create', ['type' => $type]),
                             'title' => trans("content.$type.create.title")
