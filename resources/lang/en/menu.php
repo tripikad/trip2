@@ -19,7 +19,8 @@ return [
     'footer.news' => 'News',
     'footer.flights' => 'Flights',
     'footer.offers' => 'Offers',
-    'footer.travelmates' => 'Travel mates',
+    'footer.travelmates' => 'Travelmates',
+    'footer.blogs' => 'Blogs',
 
     'footer2.forum' => 'Forum',
     'footer2.expat' => 'Expatriate',

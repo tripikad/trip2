@@ -6,9 +6,6 @@ return [
         'home' => [
             'route' => '/',
         ],
-        // 'news' => [
-        //     'route' => '/content/news',
-        // ],
        'flights' => [
             'route' => '/content/flight',
         ],
@@ -18,31 +15,20 @@ return [
         'forum' => [
             'route' => '/content/forum',
         ],
-        // 'photos' => [
-        //     'route' => '/content/photo',
-        // ],
-        'blogs' => [
-            'route' => '/content/blog',
-        ],
-        // 'offers' => [
-        //     'route' => 'http://vana.trip.ee/reisipakkumised',
-        //     'external' => true,
-        // ],
     ],
 
     'footer' => [
-        'news' => [
-            'route' => '/content/news',
-        ],
         'flights' => [
             'route' => '/content/flight',
         ],
-        'offers' => [
-            'route' => 'http://vana.trip.ee/reisipakkumised',
-            'external' => true,
-        ],
         'travelmates' => [
             'route' => '/content/travelmate',
+        ],
+        'news' => [
+            'route' => '/content/news',
+        ],
+        'blogs' => [
+            'route' => '/content/blog',
         ],
     ],
 

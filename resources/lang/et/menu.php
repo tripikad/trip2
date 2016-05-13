@@ -20,6 +20,7 @@ return [
     'footer.flights' => 'Lennupakkumised',
     'footer.offers' => 'Pakkumised',
     'footer.travelmates' => 'Reisikaaslased',
+    'footer.blogs' => 'Reisikirjad',
 
     'footer2.forum' => 'Foorum',
     'footer2.expat' => 'Elu välismaal',
