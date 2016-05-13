@@ -42,6 +42,13 @@
             }
         }
 
+        .r-general.m-col-1 & {
+
+            @include span(24 of 24);
+
+            padding-top: $spacer * 4;
+        }
+
         .r-general.m-create & {
 
             padding-top: $spacer * 2;
