@@ -17,4 +17,14 @@ return [
     'show.popular.title' => 'Popular destinations in :destination',
     'show.news.title' => 'News',
 
+    'show.description.1' => 'Europe',
+    'show.description.2' => 'Asia',
+    'show.description.3' => 'Middle East',
+    'show.description.4' => 'Africa',
+    'show.description.5' => 'North America',
+    'show.description.6' => 'Central America',
+    'show.description.7' => 'South America',
+    'show.description.8' => 'Australia and Oceania',
+    'show.description.819' => 'Antarctica'
+
 ];
