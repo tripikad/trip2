@@ -124,7 +124,8 @@
             .r-destination__about-map {
 
                 display: none;
-
+                opacity: 0.2;
+                
                 @include respond-to(tablet) {
 
                     position: absolute;
