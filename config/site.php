@@ -8,6 +8,7 @@ return [
 
     'allowAllTags' => [
         'content/flight',
+        'content/news',
     ],
 
     'currency' => [
