@@ -49,17 +49,19 @@
                 @endif
             </div>
             <div class="r-forum__sidebar">
-                <div class="r-block m-small">
-                    @include('component.title', [
-                        'modifiers' => 'm-red',
-                        'title' => trans('content.forum.sidebar.title')
-                    ])
-                </div>
-                <div class="r-block m-small">
-                    @include('component.content.forum.nav', [
-                        'items' => config('menu.news'),
-                    ])
-                </div>
+                @if ($type == 'news' || $type == 'shortnews')
+                    <div class="r-block m-small">
+                        @include('component.title', [
+                            'modifiers' => 'm-red',
+                            'title' => trans('content.forum.sidebar.title')
+                        ])
+                    </div>
+                    <div class="r-block m-small">
+                        @include('component.content.forum.nav', [
+                            'items' => config('menu.news'),
+                        ])
+                    </div>
+                @endif
 
                 @if (Auth::check() && ((in_array($type, config('content.admin_only_edit')) && Auth::user()->hasRole('admin')) || (in_array($type, config('content.everyone_can_edit')) && Auth::user()->hasRole('regular'))))
                     <div class="r-block m-small">
