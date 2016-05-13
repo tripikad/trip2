@@ -138,7 +138,7 @@
                     <div class="r-block__header">
                         <div class="r-block__header-title">
                             @include('component.title', [
-                                'title' => 'Kommentaarid',
+                                'title' => trans('content.comments.title'),
                                 'modifiers' => 'm-green'
                             ])
                         </div>
@@ -156,7 +156,7 @@
                         <div class="r-block__header">
                             <div class="r-block__header-title">
                                 @include('component.title', [
-                                    'title' => 'Lisa kommentaar',
+                                    'title' => trans('content.action.add.comment'),
                                     'modifiers' => 'm-large m-green'
                                 ])
                             </div>
