@@ -26,7 +26,7 @@ class XssProtection
             if (! preg_match('#('.implode('|', config('site.allowAllTags')).')#', 'content/flight')) {
                 $request->merge(['body' => strip_tags($request->body, config('site.allowedtags'))]);
             } else {
-                $request->merge(['body' => str_replace("\n", '', $request->body)]);
+                $request->merge(['body' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", '', $request->body)))]);
             }
         }
 
