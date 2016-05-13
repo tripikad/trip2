@@ -19,6 +19,7 @@ install:
 
 before_script:
     - php artisan migrate:refresh
+    - phpenv config-rm xdebug.ini
 
 script: phpunit
 
