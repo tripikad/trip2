@@ -42,7 +42,7 @@
                         @include('component.card', [
                             'text' => (isset($destination) || isset($topic) ?
                                 trans('content.flight.filter.no.results') :
-                                trans('content.shortnews.no.results')),
+                                trans("content.$type.no.results")),
                             'modifiers' => 'm-red',
                         ])
                     </div>
