@@ -8,7 +8,7 @@
         [
             'title' => view('component.date.relative', ['date' => $content->created_at])
         ],
-        ($content->updated_at != $content->created_at ? [
+        (count($content->comments) && $content->updated_at !== $content->created_at ? [
             'title' => trans('content.row.text.comment', [
                 'updated_at' => view('component.date.relative', ['date' => $content->updated_at])
             ])
