@@ -146,6 +146,18 @@
                         m-last
                     @endif
                 ">
+                    @if ($destination_info->isRoot())
+                        @include('component.destination.info',[
+                            'modifiers' => 'm-yellow',
+                            'text' => '',
+                            'definitions' => [
+                                [
+                                    'term' => '',
+                                    'definition' => trans("destination.show.description.$destination_info->id")
+                                ],
+                            ]
+                        ])
+                    @endif
                     @if (config("destinations.$destination_info->id") && count(config("destinations.$destination_info->id")))
                         @include('component.destination.info',[
                             'modifiers' => 'm-yellow',
