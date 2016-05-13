@@ -1,29 +1,78 @@
-@extends('layouts.two_column')
+@extends('layouts.main')
 
-@section('title', trans("content.$type.index.title"))
+@section('title', $content->title)
 
-@section('content.one')
-
-    @include('component.row', [
-        'profile' => [
-            'modifiers' => '',
-            'image' => $content->user->imagePreset(),
-            'route' => route('user.show', [$content->user])
-        ],
-        'modifiers' => 'm-image',
-        'title' => $content->title,
-        'text' => view('component.content.text', ['content' => $content]),
-        'actions' => view('component.actions', ['actions' => $content->getActions()]),
-        'extra' => view('component.flags', ['flags' => $content->getFlags()]),
-        'body' => $content->body_filtered,
+@section('header')
+    @include('component.header',[
+        'modifiers' => 'm-alternative'
     ])
+@stop
 
-    @include('component.comment.index', ['comments' => $comments])
+@section('content')
 
-    @if (\Auth::check())
+    <div class="r-general m-col-1">
+        <div class="r-general__masthead">
+            @include('component.masthead', [
+                'modifiers' => 'm-alternative m-small',
+                'image' => ($content->imagePreset('large') ? $content->imagePreset('large') : \App\Image::getRandom()),
+                'actions' => view('component.actions', ['actions' => $content->getActions()]),
+            ])
+        </div>
 
-        @include('component.comment.create')
+        <div class="r-general__content-wrap m-large-offset-bottom">
+            <div class="r-general__content">
+                @include('component.row', [
+                    'text' => view('component.content.text', ['content' => $content]),
+                    'extra' => view('component.flags', ['flags' => $content->getFlags()]),
+                    'body' => [
+                        'modifiers' => 'm-large-offset-top m-large-offset-bottom',
+                        'text' => $content->body_filtered,
+                    ]
+                ])
 
-    @endif
+                @if (isset($comments) && count($comments))
+                    <div class="r-block">
+                        <div class="r-block__header">
+                            <div class="r-block__header-title">
+                                @include('component.title', [
+                                    'title' => trans('content.comments.title'),
+                                    'modifiers' => 'm-green'
+                                ])
+                            </div>
+                        </div>
 
+                        <div class="r-block__body">
+                            @include('component.comment.index', ['comments' => $comments])
+                        </div>
+                    </div>
+                @endif
+
+                @if (\Auth::check())
+                    <div class="r-block">
+                        <div class="r-block__inner">
+                            <div class="r-block__header">
+                                <div class="r-block__header-title">
+                                    @include('component.title', [
+                                        'title' => trans('content.action.add.comment'),
+                                        'modifiers' => 'm-large m-green'
+                                    ])
+                                </div>
+                            </div>
+
+                            <div class="r-block__body">
+                                @include('component.comment.create')
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+@stop
+
+@section('footer')
+    @include('component.footer', [
+        'modifiers' => 'm-alternative',
+        'image' => \App\Image::getRandom()
+    ])
 @stop
