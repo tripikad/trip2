@@ -88,10 +88,18 @@ return [
 
     'news' => [
         'news' => [
+            'title' => 'menu.news.news',
             'route' => '/content/news',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
+            'type' => 'news',
         ],
         'shortnews' => [
+            'title' => 'menu.news.shortnews',
             'route' => '/content/shortnews',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
+            'type' => 'shortnews',
         ],
     ],
 

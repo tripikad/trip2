@@ -89,6 +89,10 @@ modifiers:
 
         @endif
 
+        @if (isset($actions))
+            <div class="c-masthead__actions">{!! $actions !!}</div>
+        @endif
+
         @yield('masthead.search')
 
     </div>
