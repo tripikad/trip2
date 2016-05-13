@@ -22,6 +22,12 @@
         <div class="r-general__content-wrap m-large-offset-bottom">
             <div class="r-general__content">
                 @include('component.row', [
+                    'modifiers' => ($type == 'blog' ? 'm-image' : ''),
+                    'profile' => ($type == 'blog' ? [
+                        'modifiers' => '',
+                        'image' => $content->user->imagePreset(),
+                        'route' => route('user.show', [$content->user])
+                    ] : null),
                     'text' => view('component.content.text', ['content' => $content]),
                     'extra' => view('component.flags', ['flags' => $content->getFlags()]),
                     'body' => [
