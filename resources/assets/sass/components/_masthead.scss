@@ -132,10 +132,15 @@
                 display: block;
             }
 
-            .c-masthead.m-search & {
+            .c-masthead.m-search &,
+            .c-masthead.m-small & {
 
                 top: -$spacer * 9.5;
                 left: -$spacer * 7;
+            }
+
+            .c-masthead.m-search & {
+
                 width: 280px;
                 height: 132px;
             }
@@ -170,6 +175,21 @@
             @include respond-to(desktop) {
 
                 font-size: $font-size-huge - 6;
+            }
+
+            .c-masthead.m-small & {
+
+                font-size: $font-size-large;
+
+                @include respond-to(tablet) {
+
+                    font-size: $font-size-largest;
+                }
+
+                @include respond-to(desktop) {
+
+                    font-size: $font-size-largest + 12;
+                }
             }
 
             .c-masthead.m-alternative & {
@@ -250,6 +270,21 @@
                     color: $color-white;
                 }
             }
+
+        .c-masthead__actions {
+
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: -$spacer * 3.5;
+
+            .c-actions__link {
+
+                color: $color-fill-neutral;
+            }
+        }
 
     .c-masthead__nav {
 

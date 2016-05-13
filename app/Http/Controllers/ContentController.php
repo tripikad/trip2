@@ -34,8 +34,13 @@ class ContentController extends Controller
             ->orderBy(
                 config("content_$type.index.orderBy.field"),
                 config("content_$type.index.orderBy.order")
-            )
-            ->whereStatus(1);
+            );
+
+        if (config("content_$type.store.status", 1) == 0 && Auth::check() && Auth::user()->hasRole('admin')) {
+            //$contents->whereStatus(0);
+        } else {
+            $contents->whereStatus(1);
+        }
 
         $expireField = config("content_$type.index.expire.field");
         if ($expireField) {
@@ -347,10 +352,10 @@ class ContentController extends Controller
             }
 
             if ($request->has('image_id') && array_key_exists('image_id', $allowedFields)) {
-                $id = str_replace(['[[', ']]'], '', $request->image_id);
+                $image_id = str_replace(['[[', ']]'], '', $request->image_id);
 
-                if ($id && Image::find($id)) {
-                    $content->images()->sync([$id]);
+                if ($image_id && Image::find($image_id)) {
+                    $content->images()->sync([$image_id]);
                 }
             } elseif (! array_key_exists('image_id', $allowedFields) && count($content->images) && ! array_key_exists('file', $allowedFields) && count($content->images)) {
                 $old_images = $content->images;

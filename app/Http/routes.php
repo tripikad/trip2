@@ -108,7 +108,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 });
 
 // Additional blog (DUMMY)
-Route::get('content/blog/profile', ['uses' => 'ContentController@blog_profile', 'as' => 'content.show.profile']);
+//Route::get('content/blog/profile', ['uses' => 'ContentController@blog_profile', 'as' => 'content.show.profile']);
 
 // Comments
 

@@ -73,6 +73,12 @@
                     word-break: break-all;
                     padding: 0 $spacer * 3;
                 }
+
+                .m-text-small & {
+
+                    padding: 0 $spacer;
+                    font-size: $font-size-normal;
+                }
             }
 
             .c-card__text {
@@ -92,5 +98,19 @@
 
                     word-break: break-all;
                     padding: 0 $spacer * 3;
+                }
+
+                .m-text-small & {
+
+                    padding: 0 $spacer;
+                    font-size: $font-size-small;
+                    position: absolute;
+                    left: 0;
+                    bottom: $spacer;
+                }
+
+                .m-text-gray & {
+
+                    color: $color-fill-neutral;
                 }
             }

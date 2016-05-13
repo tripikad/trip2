@@ -1,10 +1,10 @@
-{{--
-
+<?php
+/*
 title: Card
 
 code: |
 
-    @include('component.card', [
+    #include('component.card', [
         'image' => \App\Image::getRandom(),
         'route' => '',
         'title' => 'Here is title',
@@ -22,8 +22,10 @@ modifiers:
 - m-purple
 - m-small
 - m-wrap-text
-
---}}
+- m-text-small
+- m-text-gray
+*/
+?>
 
 <div class="c-card {{ $modifiers or '' }}">
 

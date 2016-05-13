@@ -4,6 +4,8 @@ return [
 
     // General
 
+    'post.status.unpublished' => 'Peidetud',
+
     'post.updated.at' => 'Muudetud: :updated_at',
 
     'comments.title' => 'Kommentaarid',
@@ -93,6 +95,8 @@ return [
     'news.edit.field.url.title' => 'URL',
     'news.edit.field.url.help' => '',
 
+    'news.no.results' => 'Hetkel pole ühtegi uudist.',
+
     // Shortnews
 
     'shortnews.index.title' => 'Lühiuudised',
@@ -113,6 +117,8 @@ return [
 
     'shortnews.edit.field.url.title' => 'URL',
     'shortnews.edit.field.url.help' => '',
+
+    'shortnews.no.results' => 'Hetkel pole ühtegi lühiuudist.',
 
     // Flight
 
@@ -192,6 +198,8 @@ return [
     'travelmate.description.title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
     'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.',
 
+    'travelmate.no.results' => 'Hetkel pole ühtegi aktiivset reisikaaslase otsijat.',
+
     // Forum
 
     'forum.sidebar.title' => 'Rubriigid',
@@ -216,6 +224,8 @@ return [
     'forum.edit.field.topics.title' => 'Vali valdkonnad',
     'forum.edit.field.topics.help' => '',
 
+    'forum.no.results' => 'Hetkel pole ühtegi foorumi postitust.',
+
     // Expat
 
     'expat.index.title' => 'Elu välismaal',
@@ -232,6 +242,8 @@ return [
 
     'expat.edit.field.topics.title' => 'Vali valdkonnad',
     'expat.edit.field.topics.help' => '',
+
+    'expat.no.results' => 'Hetkel pole ühtegi postitust rubriigis "Elu välismaal".',
 
     // Buysell
 
@@ -251,6 +263,8 @@ return [
     'buysell.edit.field.topics.title' => 'Vali valdkonnad',
     'buysell.edit.field.topics.help' => '',
 
+    'buysell.no.results' => 'Hetkel pole ühtegi postitust rubriigis "Ost-müük".',
+
     // Photo
 
     'photo.index.title' => 'Pildid',
@@ -264,11 +278,13 @@ return [
     'photo.edit.field.destinations.title' => 'Vali sihtkohad',
     'photo.edit.field.destinations.help' => '',
 
+    'photo.no.results' => 'Hetkel pole ühtegi pilti veel lisatud.',
+
     // Blog
 
     'blog.index.title' => 'Blogi',
 
-    'blog.create.title' => 'Lisa uus',
+    'blog.create.title' => 'Lisa postitus',
 
     'blog.edit.field.title.title' => 'Pealkiri',
     'blog.edit.field.title.help' => '',
@@ -281,6 +297,8 @@ return [
 
     'blog.edit.field.url.title' => 'URL',
     'blog.edit.field.url.help' => '',
+
+    'blog.no.results' => 'Hetkel pole ühtegi reisipäevikut veel lisatud.',
 
     // Admin
     'admin.sidebar.title' => 'Navigeerimiseks',
@@ -296,6 +314,8 @@ return [
 
     'internal.edit.field.body.title' => 'Sisu',
     'internal.edit.field.body.help' => '',
+
+    'internal.no.results' => 'Hetkel pole ühtegi sisefoorumi postitust.',
 
     // Static
 
@@ -328,5 +348,7 @@ return [
 
     'sponsored.edit.field.url.title' => 'URL',
     'sponsored.edit.field.url.help' => '',
+
+    'sponsored.no.results' => 'Hetkel pole ühtegi artiklit lisatud rubriiki "Toimetaja valik".',
 
 ];

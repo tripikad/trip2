@@ -1,39 +1,30 @@
 @extends('layouts.main')
 
 @section('header')
-
     @include('component.header', [
         'hide' => ['search'],
     ])
-
 @stop
 
 @section('masthead.search')
-
     @include('component.search',[
         'modifiers' => 'm-red m-inverted',
         'placeholder' => 'Otsi foorumist...',
         'types' => ['forum'],
     ])
-
 @stop
 
 @section('title', trans("content.$type.index.title"))
 
 @section('content')
     <div class="r-forum">
-
         <div class="r-forum__masthead">
-
             @include('component.masthead', [
                 'modifiers' => 'm-search m-logo-title',
                 'map' => true,
             ])
-
         </div>
-
         <div class="r-forum__wrap m-large-offset-bottom">
-
             @if (isset($contents) && count($contents))
                 <div class="r-forum__content">
                     @include('region.content.forum.list', [
@@ -185,7 +176,7 @@
 
         @if (isset($flights) && count($flights))
 
-            <div class="r-forum__offers">
+            <div class="r-forum__offers m-large-offset-bottom">
                 <div class="r-forum__offers-wrap">
                     <div class="c-columns m-{{ count($flights) }}-cols">
 
@@ -212,11 +203,8 @@
 
 
         <div class="r-forum__footer-promo">
-
             <div class="r-forum__footer-promo-wrap">
-
                 @include('component.promo', ['promo' => 'footer'])
-
             </div>
         </div>
     </div>

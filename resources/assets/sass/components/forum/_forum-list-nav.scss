@@ -23,6 +23,11 @@
 
             margin-bottom: $spacer;
         }
+
+        &.active .c-forum-list-nav__item-link {
+
+            opacity: 0.6;
+        }
     }
 
         .c-forum-list-nav__item-link {
