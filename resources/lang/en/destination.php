@@ -25,6 +25,6 @@ return [
     'show.description.6' => 'Central America',
     'show.description.7' => 'South America',
     'show.description.8' => 'Australia and Oceania',
-    'show.description.819' => 'Antarctica'
+    'show.description.819' => 'Antarctica',
 
 ];
