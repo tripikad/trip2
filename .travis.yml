@@ -12,13 +12,14 @@ sudo: false
 
 install:
     - composer self-update
-    - composer install --no-interaction --prefer-source
+    - composer install --no-interaction
     - cp .env.travis .env
     - chmod -R o+w storage/
     - mysql -e 'create database IF NOT EXISTS trip2;'
 
 before_script:
     - php artisan migrate:refresh
+    - phpenv config-rm xdebug.ini
 
 script: phpunit
 
