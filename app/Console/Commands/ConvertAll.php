@@ -8,7 +8,6 @@ class ConvertAll extends ConvertBase
 
     public function handle()
     {
-
         $this->call('convert:terms');
 
         $this->call('convert:blogs');
