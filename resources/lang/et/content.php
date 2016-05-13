@@ -274,7 +274,7 @@ return [
 
     'blog.index.title' => 'Blogi',
 
-    'blog.create.title' => 'Lisa uus',
+    'blog.create.title' => 'Lisa postitus',
 
     'blog.edit.field.title.title' => 'Pealkiri',
     'blog.edit.field.title.help' => '',
