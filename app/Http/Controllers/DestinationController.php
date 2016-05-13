@@ -171,6 +171,8 @@ class DestinationController extends Controller
                     $destination_info = Destination::whereId($parent_destination->parent_id)->first();
                 }
             }
+        } else {
+            $destination_info = $destination;
         }
 
         $popular_destinations = $root_destination
