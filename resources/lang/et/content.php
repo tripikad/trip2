@@ -4,6 +4,8 @@ return [
 
     // General
 
+    'post.status.unpublished' => 'Peidetud',
+
     'post.updated.at' => 'Muudetud: :updated_at',
 
     'comments.title' => 'Kommentaarid',
@@ -93,6 +95,8 @@ return [
     'news.edit.field.url.title' => 'URL',
     'news.edit.field.url.help' => '',
 
+    'news.no.results' => 'Hetkel pole ühtegi uudist.',
+
     // Shortnews
 
     'shortnews.index.title' => 'Lühiuudised',
@@ -113,6 +117,8 @@ return [
 
     'shortnews.edit.field.url.title' => 'URL',
     'shortnews.edit.field.url.help' => '',
+
+    'shortnews.no.results' => 'Hetkel pole ühtegi lühiuudist.',
 
     // Flight
 
