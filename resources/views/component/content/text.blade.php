@@ -8,11 +8,11 @@
         [
             'title' => view('component.date.relative', ['date' => $content->created_at])
         ],
-        [
+        ($content->updated_at != $content->created_at ? [
             'title' => trans('content.row.text.comment', [
-                                'updated_at' => view('component.date.relative', ['date' => $content->updated_at])
-                            ])
-        ],
+                'updated_at' => view('component.date.relative', ['date' => $content->updated_at])
+            ])
+        ] : null),
         [
             'title' => $content->destinations->implode('name', '</li><li class="c-inline-list__item">')
         ],
