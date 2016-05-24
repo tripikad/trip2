@@ -46,6 +46,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ExportFeatured::class,
 
         \App\Console\Commands\MailTest::class,
+        \App\Console\Commands\MailActive::class,
 
     ];
 }
