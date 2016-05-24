@@ -21,7 +21,7 @@ class MailTest extends Command
 
                 $header = [
                     'category' => [
-                        'test',
+                        'follow_content',
                     ],
                     'unique_args' => [
                         'test_id' => '1',
