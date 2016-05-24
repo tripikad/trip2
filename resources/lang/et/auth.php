@@ -46,7 +46,7 @@ return [
     'reset.password.submit.title' => 'Kinnita',
 
     'reset.email.subject' => 'Sinu kasutaja parooli taastamine',
-    'reset.email.body.line1' => 'Palun külasta allolevat linki, et taastada oma parool',
-    'reset.email.body.line2' => 'Märkuseks: kui sina ise pole uut parooli taastanud, kustuta see kiri koheselt.',
+    'reset.email.body.line1' => 'Palun külasta allolevat linki, et taastada oma parool:',
+    'reset.email.body.line2' => 'Märkuseks: kui sina ise pole uut parooli taastanud, siis võid selle kirja rahulikult kustutada.',
 
 ];
