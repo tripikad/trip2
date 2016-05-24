@@ -14,25 +14,21 @@ class MailActive extends Command
     public function handle()
     {
         $top_commenters_ids = App\User::leftJoin('comments', 'comments.user_id', '=', 'users.id')
-            ->select('users.*', DB::Raw('count(*) as commentsCount'))
+            ->select('users.*', DB::Raw('count(comments.id) as commentsCount'))
             ->whereDate('comments.created_at', '>=', Carbon::today()->subYears(2)->toDateString())
             ->where('users.role', '=', 'regular')
             ->groupBy('users.id')
             ->orderBy('commentsCount', 'desc')
-            ->take(100)
-    //      ->get()
-    //      ->each(function($user) { $this->line($user->name . ',' . $user->commentsCount . ',comments'); });
+            ->take(650)
             ->lists('users.id');
 
         $top_contenters_ids = App\User::leftJoin('contents', 'contents.user_id', '=', 'users.id')
-            ->select('users.*', DB::Raw('count(*) as contentsCount'))
+            ->select('users.*', DB::Raw('count(contents.id) as contentsCount'))
             ->whereDate('contents.created_at', '>=', Carbon::today()->subYears(2)->toDateString())
             ->where('users.role', '=', 'regular')
             ->groupBy('users.id')
             ->orderBy('contentsCount', 'desc')
-            ->take(100)
-    //      ->get()
-    //      ->each(function($user) {  $this->line($user->name . ',' . $user->contentsCount . ',posts'); });
+            ->take(90)
             ->lists('users.id');
 
         $top_ids = $top_commenters_ids->merge($top_contenters_ids)->unique();
