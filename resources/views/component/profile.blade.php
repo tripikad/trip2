@@ -41,7 +41,7 @@ modifiers:
 
 @if(isset($status))
 
-    @if(isset($status['editor']))
+    @if(isset($status['editor']) && $status['editor'])
         <div class="c-profile__bubble {{ $status['modifiers'] or '' }}">
             @include('component.svg.sprite', [
                 'name' => 'icon-star-filled'
@@ -51,86 +51,24 @@ modifiers:
 
     <div class="c-profile__status {{ $status['modifiers'] or '' }}">
         @if(isset($status['position']))
-            @if($status['position'] == 1)
-                <div class="c-profile__status-pie m-25">
-                    <span class="c-profile__status-pie-inner"></span>
-                </div>
+            <div class="c-profile__status-pie m-{{ $status['position'] * 25 }}">
+                <span class="c-profile__status-pie-inner"></span>
+            </div>
 
-                @if(!isset($status['tooltip']))
-                    <div class="c-profile__status-title">
-                        @if(isset($status['editor']))
-                            @include('component.tooltip', [
-                                'text' => 'Uus kasutaja / Toimetaja',
-                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                            ])
-                        @else
-                            @include('component.tooltip', [
-                                'text' => 'Uus kasutaja',
-                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                            ])
-                        @endif
-                    </div>
-                @endif
-            @elseif($status['position'] == 2)
-                <div class="c-profile__status-pie m-50">
-                    <span class="c-profile__status-pie-inner"></span>
+            @if(!isset($status['tooltip']))
+                <div class="c-profile__status-title">
+                    @if(isset($status['editor']) && $status['editor'])
+                        @include('component.tooltip', [
+                            'text' => trans('user.rank.'.$status['position']).' / ' .trans('user.role.editor'),
+                            'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
+                        ])
+                    @else
+                        @include('component.tooltip', [
+                            'text' => trans('user.rank.'.$status['position']),
+                            'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
+                        ])
+                    @endif
                 </div>
-
-                @if(!isset($status['tooltip']))
-                    <div class="c-profile__status-title">
-                        @if(isset($status['editor']))
-                            @include('component.tooltip', [
-                                'text' => 'Tripikas / Toimetaja',
-                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                            ])
-                        @else
-                            @include('component.tooltip', [
-                                'text' => 'Tripikas',
-                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                            ])
-                        @endif
-                    </div>
-                @endif
-            @elseif($status['position'] == 3)
-                <div class="c-profile__status-pie m-75">
-                    <span class="c-profile__status-pie-inner"></span>
-                </div>
-
-                @if(!isset($status['tooltip']))
-                    <div class="c-profile__status-title">
-                        @if(isset($status['editor']))
-                            @include('component.tooltip', [
-                                'text' => 'Kogenud tripikas / Toimetaja',
-                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                            ])
-                        @else
-                            @include('component.tooltip', [
-                                'text' => 'Kogenud tripikas',
-                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                            ])
-                        @endif
-                    </div>
-
-                @endif
-            @else
-                <div class="c-profile__status-pie m-100">
-                    <span class="c-profile__status-pie-inner"></span>
-                </div>
-                @if(!isset($status['tooltip']))
-                    <div class="c-profile__status-title">
-                        @if(isset($status['editor']))
-                            @include('component.tooltip', [
-                                'text' => 'Guru / Toimetaja',
-                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                            ])
-                        @else
-                            @include('component.tooltip', [
-                                'text' => 'Guru',
-                                'modifiers' => 'm-bottom m-inverted-light m-center m-one-line '. $status['modifiers'],
-                            ])
-                        @endif
-                    </div>
-                @endif
             @endif
         @endif
     </div>

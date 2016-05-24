@@ -10,12 +10,13 @@
                 'route' => route('user.show', [$comment->user]),
                 'letter' => [
                     'modifiers' => 'm-blue m-small',
-                    'text' => 'J'
+                    'text' =>  $content->user->name[0]
                 ],
                 'status' => [
                     'modifiers' => 'm-blue',
-                    'position' => '1'
-                ]
+                    'position' => $comment->user->rank,
+                    'editor' => $comment->user->role == 'admin'?true:false
+                ],
             ],
             'date' => view('component.date.relative', ['date' => $comment->created_at]),
             'text' => nl2br($comment->body_filtered),

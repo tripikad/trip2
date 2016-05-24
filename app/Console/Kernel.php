@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -45,5 +46,13 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ExportDestinations::class,
         \App\Console\Commands\ExportFeatured::class,
 
+        \App\Console\Commands\GenerateUserRankings::class,
+
     ];
+
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->command('generate:userRankings')
+            ->dailyAt('04:00');
+    }
 }
