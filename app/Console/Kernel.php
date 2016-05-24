@@ -48,6 +48,9 @@ class Kernel extends ConsoleKernel
 
         \App\Console\Commands\GenerateUserRankings::class,
 
+        \App\Console\Commands\MailTest::class,
+        \App\Console\Commands\MailActive::class,
+
     ];
 
     protected function schedule(Schedule $schedule)

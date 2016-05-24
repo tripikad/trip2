@@ -5,6 +5,7 @@
         '#comment-' . $comment->id
     ])
 ]) }}
-
+<br /><br />
 --
+<br />
 {{ config('site.name') }}
