@@ -53,9 +53,9 @@
                             'text' => (strlen($user->name) ? $user->name[0] : '')
                         ],
                         'status' => [
-                            'position' => '3',
+                            'position' => $user->rank,
                             'modifiers' => $user->profile_color,
-                            'editor' => true,
+                            'editor' => $user->role == 'admin'?true:false,
                             'tooltip' => false,
                         ],
                     ])
@@ -80,8 +80,8 @@
                     <div class="r-user__info-level">
                         @include('component.user.status', [
                             'modifiers' => $user->profile_color,
-                            'status' => '3',
-                            'editor' => true
+                            'status' => $user->rank,
+                            'editor' => $user->role == 'admin'?true:false,
                         ])
                     </div>
 

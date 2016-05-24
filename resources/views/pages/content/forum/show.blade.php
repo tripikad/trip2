@@ -32,13 +32,13 @@
                     'route' => route('user.show', [$content->user]),
                     'letter' => [
                         'modifiers' => 'm-purple m-small',
-                        'text' => 'J'
+                        'text' => $content->user->name[0]
                     ],
                     'status' => [
                         'modifiers' => 'm-purple',
-                        'position' => '3',
-                        'editor' => true
-                    ]
+                        'position' => $content->user->rank,
+                        'editor' => $content->user->role == 'admin'?true:false
+                    ],
                 ],
                 'title' => $content->title,
                 'date' => view('component.date.relative', ['date' => $content->created_at]),

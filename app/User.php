@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Carbon\Carbon;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -18,6 +19,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'password',
         'image',
         'role', // Why?
+        'rank',
         'verified', // Why?
         'registration_token', // Why?
         'contact_facebook',
@@ -172,5 +174,87 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function likes()
     {
         return $this->flags->where('flag_type', 'good');
+    }
+
+    public function updateRanking()
+    {
+        $contents = $this->contents()->whereNotIn('type', ['buysell', 'internal'])->count();
+        $comments = $this->comments()->count();
+        $posts = $comments + $contents;
+        $have_been = $this->destinationHaveBeen()->count();
+        $age = $this->created_at;
+
+        $level = config('user.ranking.starting_level');
+        $end = false;
+
+        foreach (config('user.ranking.levels') as $rank => $condition) {
+            if ($end) {
+                break;
+            }
+
+            foreach ($condition as $condition => $value) {
+                if ($condition === 'countries') {
+                    if ($value <= $have_been) {
+                        $this->increaseLevel($level);
+                    } else {
+                        $this->decreaseLevel($level);
+                    }
+                } elseif ($condition === 'posts') {
+                    if ($value <= $posts) {
+                        $this->increaseLevel($level);
+                    } else {
+                        $this->decreaseLevel($level);
+                    }
+                } elseif ($condition === 'active_time_months') {
+                    $created = Carbon::parse($age);
+                    $diff = $created->diffInMonths();
+
+                    if ($value <= $diff) {
+                        $this->increaseLevel($level);
+                    } else {
+                        $this->decreaseLevel($level);
+                    }
+                }
+
+                if ($level === config('user.ranking.starting_level')) {
+                    $end = true;
+                    break;
+                }
+            }
+        }
+
+        foreach (config('user.ranking.max_level_user_ids') as $user_id) {
+            if ($this->id === $user_id) {
+                $level = config('user.ranking.max_level');
+            }
+        }
+
+        $this->update(['rank' => $level]);
+    }
+
+    private function increaseLevel(&$level)
+    {
+        $new_level = $level + 1;
+        if ($new_level == config('user.ranking.max_level')) {
+            return;
+        }
+
+        $ranking = config('user.ranking.levels');
+        if (isset($ranking[$new_level])) {
+            $level = $new_level;
+        }
+    }
+
+    private function decreaseLevel(&$level)
+    {
+        $new_level = $level - 1;
+        if ($level == config('user.ranking.starting_level')) {
+            return;
+        }
+
+        $ranking = config('user.ranking.levels');
+        if (isset($ranking[$new_level])) {
+            $level = $new_level;
+        }
     }
 }

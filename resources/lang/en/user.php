@@ -66,4 +66,12 @@ return [
     'destinations.want.to.go.title' => 'I want to go',
     'destinations.remove.title' => 'Remove',
 
+    'rank.0' => 'Uus kasutaja',
+    'rank.1' => 'Reisihuviline',
+    'rank.2' => 'Reisisell',
+    'rank.3' => 'Rändur',
+    'rank.4' => 'Reisiguru',
+
+    'role.editor' => 'Editor',
+
 ];

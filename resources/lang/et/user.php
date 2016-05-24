@@ -74,4 +74,12 @@ return [
     'destinations.want.to.go.title' => 'Ma tahan minna',
     'destinations.remove.title' => 'Kustuta',
 
+    'rank.0' => 'Uus kasutaja',
+    'rank.1' => 'Reisihuviline',
+    'rank.2' => 'Reisisell',
+    'rank.3' => 'Rändur',
+    'rank.4' => 'Reisiguru',
+
+    'role.editor' => 'Toimetus',
+
 ];
