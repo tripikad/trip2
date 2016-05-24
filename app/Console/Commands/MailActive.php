@@ -9,12 +9,10 @@ use Carbon\Carbon;
 
 class MailActive extends Command
 {
-    
     protected $signature = 'mail:active {--ids}';
 
     public function handle()
     {
-   
         $top_commenters_ids = App\User::leftJoin('comments', 'comments.user_id', '=', 'users.id')
             ->select('users.*', DB::Raw('count(*) as commentsCount'))
             ->whereDate('comments.created_at', '>=', Carbon::today()->subYears(2)->toDateString())
@@ -36,22 +34,17 @@ class MailActive extends Command
     //      ->get()
     //      ->each(function($user) {  $this->line($user->name . ',' . $user->contentsCount . ',posts'); });
             ->lists('users.id');
-        
+
         $top_ids = $top_commenters_ids->merge($top_contenters_ids)->unique();
 
         $this->line('Username,Email');
-        
+
         if ($this->option('ids')) {
-
             $this->line($top_ids->implode(','));
-        
         } else {
-
-            App\User::whereIn('id', $top_ids)->each(function($user) {
-                $this->line($user->name . ',' . $user->email . ';');
+            App\User::whereIn('id', $top_ids)->each(function ($user) {
+                $this->line($user->name.','.$user->email.';');
             });
-        
         }
-        
     }
 }
