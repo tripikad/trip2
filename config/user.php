@@ -24,7 +24,7 @@ return [
 
                 'countries' => 15,
                 'posts' => 200,
-                'active_time_months' => 12
+                'active_time_months' => 12,
 
             ],
         ],
@@ -39,8 +39,8 @@ return [
             177, //Marks66
             713, //hbert
 
-        ]
+        ],
 
-    ]
+    ],
 
 ];

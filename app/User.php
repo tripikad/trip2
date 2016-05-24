@@ -178,7 +178,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function updateRanking()
     {
-        $contents = $this->contents()->whereNotIn('type', ['buysell','internal'])->count();
+        $contents = $this->contents()->whereNotIn('type', ['buysell', 'internal'])->count();
         $comments = $this->comments()->count();
         $posts = $comments + $contents;
         $have_been = $this->destinationHaveBeen()->count();
@@ -187,50 +187,44 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $level = config('user.ranking.starting_level');
         $end = false;
 
-        foreach(config('user.ranking.levels') as $rank => $condition) {
-
-            if($end) {
+        foreach (config('user.ranking.levels') as $rank => $condition) {
+            if ($end) {
                 break;
             }
 
             foreach ($condition as $condition => $value) {
-                if($condition === 'countries') {
-                    if($value <= $have_been) {
+                if ($condition === 'countries') {
+                    if ($value <= $have_been) {
                         $this->increaseLevel($level);
-                    }
-                    else {
+                    } else {
                         $this->decreaseLevel($level);
                     }
-                }
-                else if($condition === 'posts') {
-                    if($value <= $posts) {
+                } elseif ($condition === 'posts') {
+                    if ($value <= $posts) {
                         $this->increaseLevel($level);
-                    }
-                    else {
+                    } else {
                         $this->decreaseLevel($level);
                     }
-                }
-                else if($condition === 'active_time_months') {
+                } elseif ($condition === 'active_time_months') {
                     $created = Carbon::parse($age);
                     $diff = $created->diffInMonths();
 
-                    if($value <= $diff) {
+                    if ($value <= $diff) {
                         $this->increaseLevel($level);
-                    }
-                    else {
+                    } else {
                         $this->decreaseLevel($level);
                     }
                 }
 
-                if($level === config('user.ranking.starting_level')) {
+                if ($level === config('user.ranking.starting_level')) {
                     $end = true;
                     break;
                 }
             }
         }
 
-        foreach(config('user.ranking.max_level_user_ids') as $user_id) {
-            if($this->id === $user_id) {
+        foreach (config('user.ranking.max_level_user_ids') as $user_id) {
+            if ($this->id === $user_id) {
                 $level = config('user.ranking.max_level');
             }
         }
@@ -240,26 +234,26 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     private function increaseLevel(&$level)
     {
-        $new_level = $level+1;
-        if($new_level == config('user.ranking.max_level')) {
+        $new_level = $level + 1;
+        if ($new_level == config('user.ranking.max_level')) {
             return;
         }
 
         $ranking = config('user.ranking.levels');
-        if(isset($ranking[$new_level])) {
+        if (isset($ranking[$new_level])) {
             $level = $new_level;
         }
     }
 
     private function decreaseLevel(&$level)
     {
-        $new_level = $level-1;
-        if($level == config('user.ranking.starting_level')) {
+        $new_level = $level - 1;
+        if ($level == config('user.ranking.starting_level')) {
             return;
         }
 
         $ranking = config('user.ranking.levels');
-        if(isset($ranking[$new_level])) {
+        if (isset($ranking[$new_level])) {
             $level = $new_level;
         }
     }

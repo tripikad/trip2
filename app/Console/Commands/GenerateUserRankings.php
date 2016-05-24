@@ -9,7 +9,6 @@ class GenerateUserRankings extends Command
 {
     protected $signature = 'generate:userRankings';
 
-
     public function handle()
     {
         $this->line('Generating user ranking based on config.user');
@@ -21,8 +20,6 @@ class GenerateUserRankings extends Command
 
         });
 
-
         $this->line('Done');
     }
-    
 }
