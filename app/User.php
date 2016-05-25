@@ -187,7 +187,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $level = config('user.ranking.starting_level');
 
         foreach (config('user.ranking.levels') as $rank => $condition) {
-
             foreach ($condition as $condition => $value) {
                 if ($condition === 'countries') {
                     if ($value <= $have_been) {
