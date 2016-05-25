@@ -10,7 +10,7 @@ class ConvertExpats extends ConvertBase
     {
         $nodes = $this->getNodes('trip_forum_expat')->get();
 
-        $this->info('Coverting Expats');
+        $this->info('Converting Expats');
         $this->output->progressStart(count($nodes));
 
         foreach ($nodes as $node) {
