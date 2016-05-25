@@ -52,7 +52,7 @@ class RegistrationController extends Controller
         });
 
         return redirect()
-            ->route('frontpage.index')
+            ->route('login.form')
             ->with('info', trans('auth.register.sent.info'));
     }
 
