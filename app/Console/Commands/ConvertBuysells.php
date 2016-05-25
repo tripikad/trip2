@@ -31,7 +31,7 @@ class ConvertBuysells extends ConvertBase
             )
             ->get();
 
-        $this->info('Coverting Buysells');
+        $this->info('Converting Buysells');
         $this->output->progressStart(count($nodes));
 
         foreach ($nodes as $node) {
