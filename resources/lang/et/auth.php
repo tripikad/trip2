@@ -13,7 +13,7 @@ return [
 
     'register.email.subject' => 'Kinnita oma konto',
     'register.email.body.line1' => 'Täname, et liitusid Eesti suurima reisikogukonnaga',
-    'register.email.body.line2' => 'Palun kinnita veel oma e-posti aadress külastades allolevat linki',
+    'register.email.body.line2' => 'Palun kinnita oma e-posti aadress külastades allolevat linki',
 
     'register.sent.info' => 'Sinu e-postile saadeti kinnituskiri',
     'register.confirmed.info' => 'Sinu e-post on nüüd kinnitatud. Nüüd saad oma kasutajaga sisse logida.',
