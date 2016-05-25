@@ -92,4 +92,4 @@ gulp.task('watch', function () {
 
 });
 
-gulp.task('default', ['sass', 'js', 'svg_sprite', 'svg_standalone']);
+gulp.task('v1', ['sass', 'js', 'svg_sprite', 'svg_standalone']);
