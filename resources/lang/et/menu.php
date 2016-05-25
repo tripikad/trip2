@@ -42,7 +42,7 @@ return [
     'forum.expat' => 'Elu välismaal',
     'forum.buysell' => 'Ost-müük',
 
-    'user.activity' => 'Ajalugu',
+    'user.activity' => 'Minu profiil',
     'user.profile' => 'Profiil',
     'user.edit.profile' => 'Muuda profiili',
     'user.message' => 'Sõnumid',

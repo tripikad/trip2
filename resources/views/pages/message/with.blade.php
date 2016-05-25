@@ -6,15 +6,42 @@
 
     @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
 
-        @include('component.nav', [
-            'menu' => 'user',
-            'items' => [
-                'activity' => ['route' => route('user.show', [$user])],
-                'message' => ['route' => route('message.index', [$user])],
-                'follow' => ['route' => route('follow.index', [$user])]
-            ],
-            'modifiers' => ''
-        ])
+    <div class="r-user m-green">
+        <div class="r-user__admin">
+            <div class="r-user__admin-wrap">
+
+                @include('component.button.group',[
+                    'items' => [
+                        [
+                            'modifiers' => 'm-green',
+                            'button' => view('component.button',[
+                                'modifiers' => 'm-small',
+                                'title' => trans('menu.user.activity'),
+                                'route' => route('user.show', [$user]),
+                            ])
+                        ],
+                        [
+                            'modifiers' => 'm-green',
+                            'button' => view('component.button',[
+                                'modifiers' => 'm-small m-border',
+                                'title' => trans('menu.user.message'),
+                                'route' => route('message.index', [$user]),
+                            ])
+                        ],
+                        [
+                            'modifiers' => 'm-green',
+                            'button' => view('component.button',[
+                                'modifiers' => 'm-small',
+                                'title' => trans('menu.user.follow'),
+                                'route' => route('follow.index', [$user]),
+                            ])
+                        ],
+                    ]
+                ])
+
+            </div>
+        </div>
+    </div>
 
     @endif
 
