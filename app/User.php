@@ -185,12 +185,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $age = $this->created_at;
 
         $level = config('user.ranking.starting_level');
-        $end = false;
 
         foreach (config('user.ranking.levels') as $rank => $condition) {
-            if ($end) {
-                break;
-            }
 
             foreach ($condition as $condition => $value) {
                 if ($condition === 'countries') {
@@ -217,8 +213,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 }
 
                 if ($level === config('user.ranking.starting_level')) {
-                    $end = true;
-                    break;
+                    break 2;
                 }
             }
         }
