@@ -21,7 +21,7 @@ class AuthTest extends TestCase
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
             ->press(trans('auth.register.submit.title'))
-            ->seePageIs('/')
+            ->seePageIs('/login')
             ->see(trans('auth.register.sent.info'))
             ->seeInDatabase('users', ['name' => 'user', 'verified' => 0]);
 
