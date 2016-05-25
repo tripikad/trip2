@@ -13,11 +13,10 @@ class GenerateUserRankings extends Command
     {
         $this->line('Generating user ranking based on config.user');
 
-        $users = User::get();
-
-        $users->each(function ($item, $key) {
-            $item->updateRanking();
-
+        User::chunk(200, function ($users) {
+            foreach ($users as $user) {
+                $user->updateRanking();
+            }
         });
 
         $this->line('Done');
