@@ -8,10 +8,19 @@ class Main
 {
     public static function getBodyFilteredAttribute($object)
     {
-        $pattern = '/\[\[([0-9]+)\]\]/';
         $filteredBody = $object->body;
 
-        if (preg_match_all($pattern, $filteredBody, $matches)) {
+        // Modified version of http://stackoverflow.com/a/5289151 and http://stackoverflow.com/a/12590772
+
+        $urlPattern = "/(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))(?![^<>]*>)/i";
+
+        if ($processedBody = preg_replace($urlPattern, '<a href="$1">$1</a>', $filteredBody)) {
+            $filteredBody = $processedBody;
+        }
+
+        $imagePattern = '/\[\[([0-9]+)\]\]/';
+
+        if (preg_match_all($imagePattern, $filteredBody, $matches)) {
             foreach ($matches[1] as $match) {
                 if ($image = Image::find($match)) {
                     $filteredBody = str_replace("[[$image->id]]", '<img src="'.$image->preset('medium').'" />', $filteredBody);
