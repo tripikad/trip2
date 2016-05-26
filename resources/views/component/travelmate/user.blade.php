@@ -46,11 +46,9 @@
                 @endif
 
                     {{ str_limit($name, 18) }}
-
                     @if(isset($sex_and_age) && $sex_and_age != '')
-                        <span>({{ $sex_and_age }})</span>
+                        <span></span>
                     @endif
-
                 @if(isset($user_route))
                 </a>
                 @endif
