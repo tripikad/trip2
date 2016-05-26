@@ -86,6 +86,8 @@
                      'class' => 'c-form__label m-checkbox'
                  ]) !!}
              </div>
+
+             {{--
              <div class="c-form__group">
                  <div class="c-columns m-2-cols m-space">
                      <div class="c-columns__item m-mobile-margin">
@@ -127,7 +129,10 @@
                          </div>
                      </div>
                  </div>
+
              </div>
+
+             --}}
 
              <div class="c-form__group">
                  {!! Form::label('description', trans('user.edit.field.description.label'), [
@@ -150,6 +155,7 @@
                      'class' => 'c-form__label m-checkbox'
                  ]) !!}
              </div>
+             {{--
              <div class="c-form__group">
                  {{ Form::checkbox('notify_follow', 1, null, [
                      'class' => 'c-form__input m-checkbox',
@@ -160,7 +166,7 @@
                      'class' => 'c-form__label m-checkbox'
                  ]) !!}
              </div>
-
+            --}}
              <h3 class="c-auth-title m-margin">{{ trans('user.edit.contact.title') }}</h3>
 
              <div class="c-form__group m-small-margin">
@@ -222,7 +228,7 @@
                      </div>
                  </div>
              </div>
-
+             {{--
              <div class="c-form__group">
                  <h3 class="c-auth-title">{{ trans('user.edit.profile_color.title') }}</h3>
                  <p class="c-form__note">{{ trans('user.edit.profile_color.description') }}</p>
@@ -239,6 +245,7 @@
                      </div>
                  @endforeach
              </div>
+             --}}
 
              <div class="c-form__group">
                  {!! Form::submit($submit, [
@@ -251,7 +258,7 @@
                  <div class="c-columns m-2-cols m-last-smaller m-space">
                      <div class="c-columns__item">
                          <h3 class="c-auth-title">{{ trans('user.image.title') }}</h3>
-                         <p class="c-form__note">{{ trans('user.image.description') }}</p>
+                         {{--<p class="c-form__note">{{ trans('user.image.description') }}</p>--}}
                          @include('component.image.form', [
                             'form' => [
                                 'url' => $url,
