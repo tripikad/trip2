@@ -71,6 +71,23 @@
 
         @endforeach
 
+
+        <div class="r-user__admin">
+            <div class="r-user__admin-wrap">
+            
+            @include('component.card', [
+                'text' => trans('follow.index.email'),
+            ])
+            
+            </div>
+        </div>
+
+    @else 
+
+        @include('component.card', [
+            'text' => trans('follow.index.empty'),
+        ])
+    
     @endif
 
 @stop
