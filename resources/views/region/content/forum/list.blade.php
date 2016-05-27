@@ -7,7 +7,7 @@
                 'topic' => str_limit($item->title, 50),
                 'route' => route('content.show', [$item->type, $item]),
                 'date' => view('component.date.relative', [
-                    'date' => $item->created_at
+                    'date' => $item->updated_at
                 ]),
                 'profile' => [
                     'modifiers' => (isset($modifiers) && isset($modifiers['profile']) ? $modifiers['profile'] : 'm-mini'),
