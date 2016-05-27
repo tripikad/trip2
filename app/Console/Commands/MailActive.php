@@ -39,7 +39,7 @@ class MailActive extends Command
             $this->line($top_ids->implode(','));
         } else {
             App\User::whereIn('id', $top_ids)->each(function ($user) {
-                $this->line($user->name.','.$user->email.';');
+                $this->line($user->name.','.$user->email);
             });
         }
     }
