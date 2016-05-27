@@ -125,6 +125,11 @@ class ConvertBase extends Command
                     $this->convertNodeAlias($node->nid, 'App\Content', 'node');
                 }
 
+                $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);
+                $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment);
+
+                $model->save();
+                
                 return $model;
             } else {
                 return false;
