@@ -15,7 +15,6 @@ class ViewComposerServiceProvider extends ServiceProvider
     private function composeComponentDateSelect()
     {
         view()->composer('component.date.select', function ($view) {
-
             $data = $view->getData();
 
             if (isset($data['month'])) {
@@ -36,7 +35,6 @@ class ViewComposerServiceProvider extends ServiceProvider
 
                 $view->with('from_to', $numbers);
             }
-
         });
     }
 

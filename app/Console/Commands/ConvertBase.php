@@ -131,7 +131,7 @@ class ConvertBase extends Command
                 $model->timestamps = false;
 
                 $model->save();
-                
+
                 return $model;
             } else {
                 return false;
@@ -256,11 +256,9 @@ class ConvertBase extends Command
         $topics = [];
 
         array_walk($this->topicMap, function ($value, $key) use (&$topics) {
-
             if (array_key_exists('tid', $value)) {
                 $topics[$key] = array_merge($value, ['name' => $key]);
             }
-
         });
 
         return $topics;
@@ -831,7 +829,7 @@ class ConvertBase extends Command
                         config("imagepresets.presets.$preset.height"),
                         function ($constraint) {
                             $constraint->aspectRatio();
-                    })
+                        })
                     ->save(
                         config("imagepresets.presets.$preset.path").basename($to),
                         config("imagepresets.presets.$preset.quality")
@@ -871,9 +869,7 @@ class ConvertBase extends Command
     public function formatFields($node, $fields)
     {
         return  implode("\n", array_map(function ($field) use ($node) {
-
             return '<strong>'.$field.'</strong>: '.$node->$field;
-
         }, $fields));
     }
 

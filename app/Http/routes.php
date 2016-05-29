@@ -55,7 +55,6 @@ Route::post('reset/password', ['uses' => 'Auth\ResetController@postReset', 'as' 
 // Content
 
 Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
-
     Route::get('/', ['middleware' => null, 'uses' => 'ContentController@index', 'as' => 'index']);
 
     Route::get('create', ['middleware' => 'role:regular', 'as' => 'create', function ($type) {
@@ -104,7 +103,6 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
     Route::put('{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'ContentController@status', 'as' => 'status']);
 
     Route::post('/filter', ['middleware' => null, 'uses' => 'ContentController@filter', 'as' => 'filter']);
-
 });
 
 // Additional blog (DUMMY)
@@ -139,7 +137,6 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
     Route::get('{id}/destinations', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@destinationsIndex', 'as' => 'destinations']);
 
     Route::post('{id}/destinations', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@destinationStore', 'as' => 'destination.store']);
-
 });
 
 // Messages

@@ -45,9 +45,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         parent::boot();
 
         static::creating(function ($user) {
-
             $user->registration_token = str_random(30);
-
         });
     }
 
