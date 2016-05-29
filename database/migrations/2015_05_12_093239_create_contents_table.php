@@ -23,7 +23,6 @@ class CreateContentsTable extends Migration
             $table->integer('price')->nullable();
             $table->integer('highlight')->nullable()->index(); // Frontpage - 1
             $table->string('pseudo')->nullable()->index();
-
         });
     }
 

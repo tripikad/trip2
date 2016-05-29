@@ -18,7 +18,6 @@ use App\Comment;
 use App\Follow;
 
 $factory->define(User::class, function ($faker) {
-
     $name = $faker->name;
 
     return [
@@ -38,22 +37,18 @@ $factory->define(User::class, function ($faker) {
         'registration_token' => '',
         'remember_token' => null,
     ];
-
 });
 
 $factory->define(Message::class, function ($faker) {
-
     return [
         'user_id_from' => 1,
         'user_id_to' => 2,
         'body' => $faker->paragraph(),
         'read' => 1,
     ];
-
 });
 
 $factory->define(Content::class, function ($faker) {
-
     return [
         'user_id' => 1,
         'title' => $faker->sentence(),
@@ -61,26 +56,21 @@ $factory->define(Content::class, function ($faker) {
         'type' => 'forum',
         'status' => 1,
     ];
-
 });
 
 $factory->define(Comment::class, function ($faker) {
-
     return [
         'user_id' => 1,
         'content_id' => 1,
         'body' => $faker->paragraph(),
         'status' => 1,
     ];
-
 });
 
 $factory->define(Follow::class, function ($faker) {
-
     return [
         'user_id' => 1,
         'followable_id' => 1,
         'followable_type' => 'App\Content',
     ];
-
 });

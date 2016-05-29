@@ -108,8 +108,6 @@ class ConvertBase extends Command
                 $model->price = (isset($node->price) && is_int((int) $node->price)) ? $node->price : null;
 
                 $model->status = 1;
-                $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);
-                $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment);
 
                 $model->save();
 
@@ -125,11 +123,15 @@ class ConvertBase extends Command
                     $this->convertNodeAlias($node->nid, 'App\Content', 'node');
                 }
 
+                // We re-save the model, now with original timestamps since the the converters above
+                // might have been touching the timestamps
+
                 $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);
                 $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment);
+                $model->timestamps = false;
 
                 $model->save();
-                
+
                 return $model;
             } else {
                 return false;
@@ -254,11 +256,9 @@ class ConvertBase extends Command
         $topics = [];
 
         array_walk($this->topicMap, function ($value, $key) use (&$topics) {
-
             if (array_key_exists('tid', $value)) {
                 $topics[$key] = array_merge($value, ['name' => $key]);
             }
-
         });
 
         return $topics;
@@ -829,7 +829,7 @@ class ConvertBase extends Command
                         config("imagepresets.presets.$preset.height"),
                         function ($constraint) {
                             $constraint->aspectRatio();
-                    })
+                        })
                     ->save(
                         config("imagepresets.presets.$preset.path").basename($to),
                         config("imagepresets.presets.$preset.quality")
@@ -869,9 +869,7 @@ class ConvertBase extends Command
     public function formatFields($node, $fields)
     {
         return  implode("\n", array_map(function ($field) use ($node) {
-
             return '<strong>'.$field.'</strong>: '.$node->$field;
-
         }, $fields));
     }
 

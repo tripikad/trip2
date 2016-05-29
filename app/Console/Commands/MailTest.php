@@ -12,14 +12,13 @@ class MailTest extends Command
     public function handle()
     {
         Mail::raw('Test email', function ($message) {
-
-                $message->to('sink@sink.sendgrid.net')
+            $message->to('sink@sink.sendgrid.net')
                     ->subject('Mail test');
 
-                $swiftMessage = $message->getSwiftMessage();
-                $headers = $swiftMessage->getHeaders();
+            $swiftMessage = $message->getSwiftMessage();
+            $headers = $swiftMessage->getHeaders();
 
-                $header = [
+            $header = [
                     'category' => [
                         'follow_content',
                     ],
@@ -28,8 +27,7 @@ class MailTest extends Command
                     ],
                 ];
 
-                $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
-
-            });
+            $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
+        });
     }
 }

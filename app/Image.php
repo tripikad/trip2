@@ -30,7 +30,7 @@ class Image extends Model
                     config("imagepresets.presets.$preset.height"),
                     function ($constraint) {
                         $constraint->aspectRatio();
-                })
+                    })
                 ->save(
                     config("imagepresets.presets.$preset.path").$filename,
                     config("imagepresets.presets.$preset.quality")
@@ -133,23 +133,23 @@ class Image extends Model
         }
 
         $images = self::whereNotIn('id', function ($query) use ($except) {
-                $whereType = 'orWhere';
+            $whereType = 'orWhere';
 
-                $query->from('imageables')
+            $query->from('imageables')
                     ->select('imageables.image_id');
 
-                $query->leftJoin('contents', 'imageables.imageable_id', '=', 'contents.id');
+            $query->leftJoin('contents', 'imageables.imageable_id', '=', 'contents.id');
 
-                if (isset($except['contents.type'])) {
-                    $query->where('contents.type', '=', $except['contents.type']);
-                } elseif (isset($except['imageable_type'])) {
-                    $whereType = 'where';
-                }
+            if (isset($except['contents.type'])) {
+                $query->where('contents.type', '=', $except['contents.type']);
+            } elseif (isset($except['imageable_type'])) {
+                $whereType = 'where';
+            }
 
-                if (isset($except['imageable_type'])) {
-                    $query->$whereType('imageables.imageable_type', '!=', $except['imageable_type']);
-                }
-            })
+            if (isset($except['imageable_type'])) {
+                $query->$whereType('imageables.imageable_type', '!=', $except['imageable_type']);
+            }
+        })
             ->orderBy('id', 'asc');
 
         return $images ? $images : null;

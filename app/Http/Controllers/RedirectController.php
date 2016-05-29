@@ -120,7 +120,9 @@ class RedirectController extends Controller
     public function redirectCategory($part1, $part2, $part3 = null, $part4 = null)
     {
         $path = collect(['category', $part1, $part2, $part3, $part4])
-            ->reject(function ($name) { return empty($name); })
+            ->reject(function ($name) {
+                return empty($name);
+            })
             ->implode('/');
 
         $alias = \DB::table('aliases')

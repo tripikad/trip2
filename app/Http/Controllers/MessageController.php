@@ -60,7 +60,6 @@ class MessageController extends Controller
                 'user_from' => $user_from,
                 'user_to' => $user_to,
             ], function ($mail) use ($user_from, $user_to) {
-
                 $mail->to($user_to->email)
                     ->subject(trans('message.store.email.subject', [
                         'user' => $user_from->name,
@@ -80,7 +79,6 @@ class MessageController extends Controller
                 ];
 
                 $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
-
             });
         }
 

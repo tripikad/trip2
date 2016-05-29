@@ -31,7 +31,6 @@ class CommentController extends Controller
         ) {
             foreach ($followersEmails as $followerId => $followerEmail) {
                 Mail::queue('email.follow.content', ['comment' => $comment], function ($mail) use ($followerEmail, $followerId, $comment) {
-
                     $mail->to($followerEmail)
                         ->subject(trans('follow.content.email.subject', [
                             'title' => $comment->content->title,
