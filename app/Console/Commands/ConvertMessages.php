@@ -24,7 +24,6 @@ class ConvertMessages extends ConvertBase
         $this->output->progressStart(($this->take > $count) ? $count : $this->take);
 
         $nodes = $this->getMessages()->chunk($this->chunk, function ($nodes) use (&$i) {
-
             if ($i++ > $this->chunkLimit()) {
                 return false;
             }
@@ -69,7 +68,6 @@ class ConvertMessages extends ConvertBase
 
                 $this->output->progressAdvance();
             }
-
         });
 
         $this->output->progressFinish();

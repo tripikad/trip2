@@ -15,9 +15,7 @@ class XssProtection
         $input = $request->except('body');
 
         array_walk_recursive($input, function (&$input) {
-
             $input = strip_tags($input);
-
         });
 
         $request->merge($input);

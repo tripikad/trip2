@@ -25,7 +25,6 @@ class ConvertForums extends ConvertBase
         $this->output->progressStart(($this->take > $count) ? $count : $this->take);
 
         $nodes = $this->getNodes('trip_forum')->skip($this->skip)->chunk($this->chunk, function ($nodes) use (&$i) {
-
             if ($i++ > $this->chunkLimit()) {
                 return false;
             }
@@ -45,7 +44,6 @@ class ConvertForums extends ConvertBase
                     $this->output->progressAdvance();
                 }
             }
-
         });
 
         $this->output->progressFinish();

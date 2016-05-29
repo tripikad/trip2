@@ -35,7 +35,6 @@ class ConvertFlights extends ConvertBase
         $this->output->progressStart($this->take < $count ? $this->take : $count);
 
         $nodes = $flightNodes->skip($this->skip)->chunk($this->chunk, function ($nodes) use (&$i) {
-
             if ($i++ > $this->chunkLimit()) {
                 return false;
             }
@@ -121,7 +120,6 @@ class ConvertFlights extends ConvertBase
 
                 $this->output->progressAdvance();
             }
-
         });
 
         $this->output->progressFinish();

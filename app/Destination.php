@@ -32,7 +32,6 @@ class Destination extends Baum\Node
     public function getPopular()
     {
         return Cache::remember('popular.destinations.root'.$this->id, config('cache.destination.getPopular'), function () {
-
             return Destination::find($this->id)
                 ->descendantsAndSelf()
                 ->with('flags')
@@ -44,20 +43,17 @@ class Destination extends Baum\Node
 
                     return $item;
                 });
-
         });
     }
 
     public static function getNames()
     {
         return Cache::rememberForever('destination.names', function () {
-
             return collect(Main::collectionAsSelect(
                 [],
                 ' › ',
                 Destination::select('name', 'id', 'parent_id')->get()
             ))->sort();
-
         });
     }
 

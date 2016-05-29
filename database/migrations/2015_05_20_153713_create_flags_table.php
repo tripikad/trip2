@@ -19,7 +19,6 @@ class CreateFlagsTable extends Migration
             $table->string('flaggable_type')->index();
             $table->string('flag_type');
             $table->timestamps();
-
         });
     }
 
