@@ -108,8 +108,6 @@ class ConvertBase extends Command
                 $model->price = (isset($node->price) && is_int((int) $node->price)) ? $node->price : null;
 
                 $model->status = 1;
-                $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);
-                $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment);
 
                 $model->save();
 
@@ -125,8 +123,12 @@ class ConvertBase extends Command
                     $this->convertNodeAlias($node->nid, 'App\Content', 'node');
                 }
 
+                // We re-save the model, now with original timestamps since the the converters above
+                // might have been touching the timestamps
+
                 $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);
                 $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment);
+                $model->timestamps = false;
 
                 $model->save();
                 
