@@ -366,14 +366,15 @@ class ConvertBase extends Command
                 $model->status = 1 - $comment->status;
                 $model->created_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);
                 $model->updated_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);
+                $model->timestamps = false;
 
                 $model->save();
 
                 $node = $this->getNode($nid);
 
-                \App\Content::findOrFail($nid)->update([
-                    'updated_at' => \Carbon\Carbon::createFromTimeStamp($node->last_comment),
-                ]);
+                // \App\Content::findOrFail($nid)->update([
+                //     'updated_at' => \Carbon\Carbon::createFromTimeStamp($node->last_comment),
+                // ]);
 
                 $this->convertUser($user_id);
 
@@ -519,6 +520,7 @@ class ConvertBase extends Command
 
             $model->created_at = \Carbon\Carbon::createFromTimeStamp($user->created);
             $model->updated_at = \Carbon\Carbon::createFromTimeStamp($user->created);
+            $model->timestamps = false;
 
             $model->save();
 
@@ -678,7 +680,8 @@ class ConvertBase extends Command
 
         $model->created_at = \Carbon\Carbon::createFromTimeStamp($flag->timestamp);
         $model->updated_at = \Carbon\Carbon::createFromTimeStamp($flag->timestamp);
-
+        $model->timestamps = false;
+        
         $model->save();
     }
 
