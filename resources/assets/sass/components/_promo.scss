@@ -1,7 +1,7 @@
 .c-promo {
 
     overflow: hidden;
-    display: none;
+    display: block;
 
     @include respond-to(tablet) {
 

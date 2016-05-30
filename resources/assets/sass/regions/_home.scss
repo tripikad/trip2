@@ -133,7 +133,7 @@
 
                 &.m-first {
 
-                    display: none;
+                    display: block;
 
                     @include respond-to(tablet) {
 
