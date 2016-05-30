@@ -11,14 +11,14 @@ cache:
 sudo: false
 
 install:
-    - echo 'function composer() { COMPOSER="$(which composer)" || { echo "Could not find composer in path" >&2 ; return 1 ; } && sudo php5dismod -s cli xdebug ; $COMPOSER "$@" ; STATUS=$? ; sudo php5enmod -s cli xdebug ; return $STATUS ; }' >> ~/.bash_aliases
-    - . ~/.bash_aliases
+    - phpenv config-rm xdebug.ini
     - composer update --prefer-dist
     - cp .env.travis .env
     - chmod -R o+w storage/
     - mysql -e 'create database IF NOT EXISTS trip2;'
 
 before_script:
+    - phpenv config-all xdebug.ini
     - php artisan migrate:refresh
 
 script: phpunit
