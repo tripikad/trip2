@@ -47,7 +47,7 @@
 
     &.m-mobile-hide {
 
-        display: none;
+        display: block;
 
         @include respond-to(tablet) {
 
