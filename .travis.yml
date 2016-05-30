@@ -11,14 +11,12 @@ cache:
 sudo: false
 
 install:
-    - phpenv config-rm xdebug.ini
     - composer update --prefer-dist
     - cp .env.travis .env
     - chmod -R o+w storage/
     - mysql -e 'create database IF NOT EXISTS trip2;'
 
 before_script:
-    - phpenv config-add xdebug.ini
     - php artisan migrate:refresh
 
 script: phpunit
