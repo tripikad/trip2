@@ -681,7 +681,7 @@ class ConvertBase extends Command
         $model->created_at = \Carbon\Carbon::createFromTimeStamp($flag->timestamp);
         $model->updated_at = \Carbon\Carbon::createFromTimeStamp($flag->timestamp);
         $model->timestamps = false;
-        
+
         $model->save();
     }
 
