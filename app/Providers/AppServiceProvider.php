@@ -26,9 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       Carbon::setLocale(config('app.locale'));
+        Carbon::setLocale(config('app.locale'));
     }
-
 
     protected function google_analytics_track($auth)
     {
