@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Analytics;
 use Illuminate\Contracts\Auth\Guard;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Carbon::setLocale(config('app.locale'));
     }
 
     protected function google_analytics_track($auth)
