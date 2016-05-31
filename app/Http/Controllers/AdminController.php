@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Image;
 use App\Content;
+use DB;
 
 class AdminController extends Controller
 {
@@ -12,10 +13,16 @@ class AdminController extends Controller
     {
         $exception = [
             'contents.type' => 'photo',
-            'imageable_type' => 'App\\User',
+            'imageable_type' => 'App\User',
         ];
 
-        $images = Image::getAllContentExcept($exception)->simplePaginate(96);
+        $user_image_ids = DB::table('imageables')
+            ->where('imageable_type', '=', 'App\User')
+            ->lists('image_id');
+
+        $images = Image::whereNotIn('id', $user_image_ids)
+            ->orderBy('id', 'desc')
+            ->simplePaginate(96);
 
         return view('pages.admin.image.index', [
             'images' => $images,
