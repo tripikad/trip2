@@ -53,7 +53,14 @@ class ConvertNews extends ConvertBase
                     $replaceImages = [];
 
                     foreach ($images as $index => $image) {
-                        $newImage = $this->convertRemoteImage($node->nid, $image, '\App\Content', 'news');
+                        $newImage = $this->convertRemoteImage(
+                            $node->nid,
+                            $image,
+                            '\App\Content',
+                            'news',
+                            $news->created_at,
+                            $news->updated_at
+                        );
 
                         $escapedImage = str_replace('/', '\/', $image);
                         $escapedImage = str_replace('.', '\.', $escapedImage);

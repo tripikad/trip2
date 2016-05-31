@@ -28,7 +28,7 @@ class AdminController extends Controller
 
         $images = Image::whereNotIn('id', $user_image_ids)
             ->whereNotIn('id', $photo_ids)
-            ->orderBy('id', 'desc')
+            ->orderBy('created_at', 'desc')
             ->simplePaginate(96);
 
         return view('pages.admin.image.index', [

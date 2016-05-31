@@ -590,7 +590,7 @@ class ConvertBase extends Command
         }
     }
 
-    public function convertRemoteImage($id, $imageUrl, $modelName, $type = null)
+    public function convertRemoteImage($id, $imageUrl, $modelName, $type = null, $created_at = null, $updated_at = null)
     {
         $newImage = false;
 
@@ -612,7 +612,11 @@ class ConvertBase extends Command
             $model = $modelName::findOrFail($id);
 
             if (method_exists($model, 'images')) {
-                $image = \App\Image::create(['filename' => $filename]);
+                $image = \App\Image::create([
+                    'filename' => $filename,
+                    'created_at' => $created_at,
+                    'updated_at' => $updated_at
+                ]);
                 $model->images()->attach($image);
 
                 $newImage = $image;
