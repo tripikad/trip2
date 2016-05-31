@@ -77,14 +77,14 @@ return [
 
     'news.create.title' => 'Lisa uus uudis',
 
-    'news.edit.field.image_id.title' => 'Pildi ID, näiteks [[123]]',
-    'news.edit.field.image_id.help' => 'Pildi ID tuleb sisestada kujul: [[456]]',
+    'news.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Pildid all',
+    'news.edit.field.image_id.help' => '[[123]]',
 
     'news.edit.field.title.title' => 'Pealkiri',
     'news.edit.field.title.help' => '',
 
     'news.edit.field.body.title' => 'Sisu',
-    'news.edit.field.body.help' => '',
+    'news.edit.field.body.help' => 'Siia saab lisada pildilinke kujul [[123]], pilte saab lisada Administreeri → Pildid all',
 
     'news.edit.field.destinations.title' => 'Vali sihtkohad',
     'news.edit.field.destinations.help' => '',
@@ -142,11 +142,11 @@ return [
     'flight.edit.field.title.title' => 'Pealkiri',
     'flight.edit.field.title.help' => '',
 
-    'flight.edit.field.image_id.title' => 'Pildi ID, näiteks [[123]]',
-    'flight.edit.field.image_id.help' => 'Pildi ID tuleb sisestada kujul: [[456]]',
+    'flight.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Pildid all',
+    'flight.edit.field.image_id.help' => '[[123]]',
 
     'flight.edit.field.body.title' => 'Sisu',
-    'flight.edit.field.body.help' => '',
+    'flight.edit.field.body.help' => 'Siia saab lisada pildilinke kujul [[123]], pilte saab lisada Administreeri → Pildid all',
 
     'flight.edit.field.destinations.title' => 'Vali sihtkohad',
     'flight.edit.field.destinations.help' => '',

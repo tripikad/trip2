@@ -20,7 +20,14 @@ class AdminController extends Controller
             ->where('imageable_type', '=', 'App\User')
             ->lists('image_id');
 
+        $photo_ids = DB::table('imageables')
+            ->join('contents', 'contents.id', '=', 'imageables.imageable_id')
+            ->where('imageables.imageable_type', '=', 'App\Content')
+            ->where('contents.type', '=', 'photo')
+            ->lists('imageables.image_id');
+
         $images = Image::whereNotIn('id', $user_image_ids)
+            ->whereNotIn('id', $photo_ids)
             ->orderBy('id', 'desc')
             ->simplePaginate(96);
 
