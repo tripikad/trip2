@@ -35,7 +35,7 @@
             <div class="c-columns__item">
 
                 @include('component.card', [
-                    'image' => $image->preset('small'),
+                    'image' => $image->preset('small_square'),
                     'text' => $image->filename,
                     'modifiers' => 'm-wrap-text'
                 ])

@@ -123,35 +123,4 @@ class Image extends Model
 
         return $photo ? $photo->imagePreset('large') : null;
     }
-
-    public static function getAllContentExcept($except = null)
-    {
-        if (! is_array($except)) {
-            $except = [
-                'contents.type' => $except,
-            ];
-        }
-
-        $images = self::whereNotIn('id', function ($query) use ($except) {
-            $whereType = 'orWhere';
-
-            $query->from('imageables')
-                    ->select('imageables.image_id');
-
-            $query->leftJoin('contents', 'imageables.imageable_id', '=', 'contents.id');
-
-            if (isset($except['contents.type'])) {
-                $query->where('contents.type', '=', $except['contents.type']);
-            } elseif (isset($except['imageable_type'])) {
-                $whereType = 'where';
-            }
-
-            if (isset($except['imageable_type'])) {
-                $query->$whereType('imageables.imageable_type', '!=', $except['imageable_type']);
-            }
-        })
-            ->orderBy('id', 'asc');
-
-        return $images ? $images : null;
-    }
 }

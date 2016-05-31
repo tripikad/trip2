@@ -13,7 +13,7 @@ return [
 
     'auth.register' => 'Registreeri',
     'auth.login' => 'Logi sisse',
-    'auth.admin' => 'Administraator',
+    'auth.admin' => 'Administreeri',
     'auth.logout' => 'Logi välja',
 
     'footer.news' => 'Uudised',
@@ -51,7 +51,7 @@ return [
     'user.add.places' => 'Lisa riigid, kus oled käinud',
 
     'admin.internal' => 'Sisefoorum',
-    'admin.image' => 'Kõik pildid',
+    'admin.image' => 'Pildid',
     'admin.content' => 'Peidetud sisu',
     'admin.sponsored' => 'Sponsorite artiklid',
 
