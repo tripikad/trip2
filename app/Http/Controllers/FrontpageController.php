@@ -41,7 +41,7 @@ class FrontpageController extends Controller
                 'take' => 5,
                 'type' => ['forum', 'buysell', 'expat'],
                 'status' => 1,
-                'latest' => 'created_at',
+                'latest' => 'updated_at',
                 'whereBetween' => Main::getExpireData('buysell') +
                     ['only' => 'buysell'],
             ],
