@@ -123,6 +123,4 @@ class Image extends Model
 
         return $photo ? $photo->imagePreset('large') : null;
     }
-
-  
 }
