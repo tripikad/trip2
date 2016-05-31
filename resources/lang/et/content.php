@@ -83,8 +83,8 @@ return [
     'news.edit.field.title.title' => 'Pealkiri',
     'news.edit.field.title.help' => '',
 
-    'news.edit.field.body.title' => 'Sisu',
-    'news.edit.field.body.help' => 'Siia saab lisada pildilinke kujul [[123]], pilte saab lisada Administreeri → Pildid all',
+    'news.edit.field.body.title' => 'Sisu. Ka siia saab lisada pildilinke a la [[123]]',
+    'news.edit.field.body.help' => '',
 
     'news.edit.field.destinations.title' => 'Vali sihtkohad',
     'news.edit.field.destinations.help' => '',
@@ -145,8 +145,8 @@ return [
     'flight.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Pildid all',
     'flight.edit.field.image_id.help' => '[[123]]',
 
-    'flight.edit.field.body.title' => 'Sisu',
-    'flight.edit.field.body.help' => 'Siia saab lisada pildilinke kujul [[123]], pilte saab lisada Administreeri → Pildid all',
+    'flight.edit.field.body.title' => 'Sisu. Ka siia saab lisada pildilinke stiilis [[123]]',
+    'flight.edit.field.body.help' => '',
 
     'flight.edit.field.destinations.title' => 'Vali sihtkohad',
     'flight.edit.field.destinations.help' => '',
