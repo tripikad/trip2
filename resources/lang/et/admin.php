@@ -2,9 +2,9 @@
 
 return [
 
-    'content.index.title' => 'Avaldamata sisu',
+    'content.index.title' => 'Peidetud sisu',
 
-    'image.index.title' => 'Pildid',
+    'image.index.title' => 'Toimetuse pildid',
 
     'image.create.submit.title' => 'Lisa pilt',
 
