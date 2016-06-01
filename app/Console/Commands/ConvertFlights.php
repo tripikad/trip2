@@ -81,7 +81,14 @@ class ConvertFlights extends ConvertBase
                         $replaceImages = [];
 
                         foreach ($images as $index => $image) {
-                            $newImage = $this->convertRemoteImage($node->nid, $image, '\App\Content', 'flight', 'jpg');
+                            $newImage = $this->convertRemoteImage(
+                                $node->nid,
+                                $image,
+                                '\App\Content',
+                                'flight',
+                                $flight->created_at,
+                                $flight->updated_at
+                            );
 
                             $escapedImage = str_replace('/', '\/', $image);
                             $escapedImage = str_replace('.', '\.', $escapedImage);
