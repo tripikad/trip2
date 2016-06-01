@@ -30,6 +30,10 @@ return [
         'blogs' => [
             'route' => '/content/blog',
         ],
+        'photos' => [
+            'route' => '/content/photo',
+        ],
+
     ],
 
     'footer2' => [
@@ -42,6 +46,7 @@ return [
         'buysell' => [
             'route' => '/content/buysell',
         ],
+        
     ],
 
     'footer3' => [

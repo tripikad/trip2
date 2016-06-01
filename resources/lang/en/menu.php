@@ -21,6 +21,7 @@ return [
     'footer.offers' => 'Offers',
     'footer.travelmates' => 'Travelmates',
     'footer.blogs' => 'Blogs',
+    'footer.photos' => 'Photos',
 
     'footer2.forum' => 'Forum',
     'footer2.expat' => 'Expatriate',
@@ -47,8 +48,9 @@ return [
     'user.edit.profile' => 'Edit profile',
     'user.message' => 'Messages',
     'user.follow' => 'Follows',
-    'user.travelmate' => 'Looking for travel mate?',
+    'user.travelmate' => 'Looking for travelmate?',
     'user.add.places' => 'Add places you have been',
+    'user.photo' => 'Add photo',
 
     'admin.internal' => 'Internal forum',
     'admin.image' => 'All images',
