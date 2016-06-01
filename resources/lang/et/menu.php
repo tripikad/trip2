@@ -21,7 +21,6 @@ return [
     'footer.offers' => 'Pakkumised',
     'footer.travelmates' => 'Reisikaaslased',
     'footer.blogs' => 'Reisikirjad',
-    'footer.photos' => 'Reisipildid',
 
     'footer2.forum' => 'Foorum',
     'footer2.expat' => 'Elu välismaal',
@@ -50,7 +49,6 @@ return [
     'user.follow' => 'Jälgimised',
     'user.travelmate' => 'Otsid reisikaaslast?',
     'user.add.places' => 'Lisa riigid, kus oled käinud',
-    'user.photo' => 'Lisa reisipilt',
 
     'admin.internal' => 'Sisefoorum',
     'admin.image' => 'Toimetuse pildid',

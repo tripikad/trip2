@@ -265,7 +265,7 @@ return [
 
     // Photo
 
-    'photo.index.title' => 'Reisipildid',
+    'photo.index.title' => 'Pildid',
     'photo.create.title' => 'Lisa pilt',
 
     'photo.edit.field.file.help' => '',
