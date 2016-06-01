@@ -322,7 +322,7 @@ class ConvertBase extends Command
 
     public function newNodeTopics($node)
     {
-        $topics = collect($this->getNewTopics())->reject(function($topic) {
+        $topics = collect($this->getNewTopics())->reject(function ($topic) {
             return $topic['tid'] == 5000;
         });
 
