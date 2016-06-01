@@ -51,7 +51,7 @@ return [
     'user.add.places' => 'Lisa riigid, kus oled käinud',
 
     'admin.internal' => 'Sisefoorum',
-    'admin.image' => 'Pildid',
+    'admin.image' => 'Toimetuse pildid',
     'admin.content' => 'Peidetud sisu',
     'admin.sponsored' => 'Sponsorite artiklid',
 

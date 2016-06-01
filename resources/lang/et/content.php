@@ -59,10 +59,7 @@ return [
     'edit.title' => 'Muuda',
     'edit.submit.title' => 'Uuenda',
     'edit.notes.heading' => 'Hea teada',
-    'edit.notes.body' => '<p>Austan eesti keele reegleid, jälgin et minu kirjutised oleks loetavad, ma ei kasuta slängi, suurtähti ja korduvaid kirjavahemärke ning kasutan suuri algustähti lause alguses ja kohanimedes.</p>
-                          <p>Ma ei ropenda, halvusta teisi ega kasutata Trip.ee\'d rassismi, usupropaganda või muul moel kitsarinnalisuse levitamiseks.</p>
-                          <p>Ma ei avalda reklaamsisuga teateid, selleks kasutan Trip.ee <a href=":route">reklaamivõimalust</a>.</p>
-                          <p>Tean ja nõustun, et kasutustingimuste rikkumisel võidakse minu kasutuskonto ilma hoiatamata sulgeda ja/või minu ligipääs Trip.ee\'le blokeerida.</p>',
+    'edit.notes.body' => '<p>See on reisifoorum kooliharidust nuusutanud inimesele, kes mõistab kirjutada korralikus eesti keeles.</p><p>Ole hea ja uuri enne postitamist Trip.ee otsinguga juba olemasolevaid teemasid ning palun pane postitusele selle sisu avav pealkiri (mitte piirdudes koha või riigi nimega).</p>',
 
     'store.status.1.info' => ':title on edukalt lisatud.',
     'store.status.0.info' => ':title on lisatud, kuid teistele peidetud. Vajuta lingile "Avalikusta", et näidata seda teistele.',
@@ -77,7 +74,7 @@ return [
 
     'news.create.title' => 'Lisa uus uudis',
 
-    'news.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Pildid all',
+    'news.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Toimetuse pildid all',
     'news.edit.field.image_id.help' => '[[123]]',
 
     'news.edit.field.title.title' => 'Pealkiri',
@@ -142,7 +139,7 @@ return [
     'flight.edit.field.title.title' => 'Pealkiri',
     'flight.edit.field.title.help' => '',
 
-    'flight.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Pildid all',
+    'flight.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Toimetuse pildid all',
     'flight.edit.field.image_id.help' => '[[123]]',
 
     'flight.edit.field.body.title' => 'Sisu. Ka siia saab lisada pildilinke stiilis [[123]]',

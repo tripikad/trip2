@@ -121,12 +121,6 @@ return [
             'icon' => 'icon-arrow-right',
         ],
         [
-            'title' => 'menu.admin.sponsored',
-            'route' => '/content/sponsored',
-            'modifiers' => 'm-large m-block m-icon',
-            'icon' => 'icon-arrow-right',
-        ],
-        [
             'title' => 'menu.admin.image',
             'route' => '/admin/image',
             'modifiers' => 'm-large m-block m-icon',
