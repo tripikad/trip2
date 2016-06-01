@@ -2,7 +2,7 @@
 
 @section('title', trans('admin.image.index.title'))
 
-@section('header2.content')
+@section('masthead.search')
 
     @include('component.nav', [
         'modifiers' => '',
