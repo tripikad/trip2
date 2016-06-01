@@ -4,10 +4,14 @@
 
 @section('masthead.search')
     
-    @include('component.button', [
-        'route' => route('content.create', ['type' => $type]),
-        'title' => trans("content.$type.create.title")
-    ])
+    @if (\Auth::check())
+
+        @include('component.button', [
+            'route' => route('content.create', ['type' => $type]),
+            'title' => trans("content.$type.create.title")
+        ])
+
+    @endif
 
 @stop
 
