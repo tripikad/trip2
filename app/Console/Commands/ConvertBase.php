@@ -580,8 +580,12 @@ class ConvertBase extends Command
         $model = $modelName::findOrFail($id);
 
         $data = ['filename' => $filename];
-        if (isset($created_at)) $data['created_at'] = $created_at;
-        if (isset($updated_at)) $data['updated_at'] = $updated_at;
+        if (isset($created_at)) {
+            $data['created_at'] = $created_at;
+        }
+        if (isset($updated_at)) {
+            $data['updated_at'] = $updated_at;
+        }
 
         $image = \App\Image::create($data);
         $model->images()->attach($image);
@@ -623,11 +627,14 @@ class ConvertBase extends Command
             $model = $modelName::findOrFail($id);
 
             if (method_exists($model, 'images')) {
-                
                 $data = ['filename' => $filename];
-                if (isset($created_at)) $data['created_at'] = $created_at;
-                if (isset($updated_at)) $data['updated_at'] = $updated_at;
-                
+                if (isset($created_at)) {
+                    $data['created_at'] = $created_at;
+                }
+                if (isset($updated_at)) {
+                    $data['updated_at'] = $updated_at;
+                }
+
                 $image = \App\Image::create($data);
                 $model->images()->attach($image);
 
