@@ -272,7 +272,7 @@ class ContentController extends Controller
             }
 
             $columns = array_flip(\DB::connection()->getSchemaBuilder()->getColumnListing('contents'));
-            $protectedColumns = ['id', 'user_id', 'created_at', 'updated_at', 'pseudo'];
+            $protectedColumns = ['id', 'user_id', 'created_at', 'updated_at'];
 
             foreach ($protectedColumns as $protectedColumn) {
                 if (isset($columns[$protectedColumn])) {

@@ -21,8 +21,6 @@ class CreateContentsTable extends Migration
             $table->dateTime('end_at')->nullable();
             $table->string('duration')->nullable();
             $table->integer('price')->nullable();
-            $table->integer('highlight')->nullable()->index(); // Frontpage - 1
-            $table->string('pseudo')->nullable()->index();
         });
     }
 
