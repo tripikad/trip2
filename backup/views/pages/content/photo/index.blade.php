@@ -15,6 +15,12 @@
 
 @stop
 
+@section('header2.content')
+
+    @include('component.filter')
+
+@stop
+
 @section('content.one')
 
     @foreach ($contents as $content)

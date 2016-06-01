@@ -2,12 +2,18 @@
 
 @section('title', trans("content.$type.index.title"))
 
-@section('masthead.search')
+@section('header1.right')
     
-    @include('component.button', [
+    @include('component.button', [ 
         'route' => route('content.create', ['type' => $type]),
         'title' => trans("content.$type.create.title")
     ])
+
+@stop
+
+@section('header2.content')
+
+    @include('component.filter')
 
 @stop
 

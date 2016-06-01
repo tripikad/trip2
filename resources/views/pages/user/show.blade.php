@@ -301,14 +301,6 @@
                         ])
                     ],
                     [
-                        'modifiers' => '',
-                        'button' => view('component.button',[
-                            'modifiers' => 'm-small m-border',
-                            'title' => trans('menu.user.photo'),
-                            'route' => route('content.create', ['type' => 'photo']),
-                        ])
-                    ],
-                    [
                         'modifiers' => 'm-hide',
                         'button' => view('component.button',[
                             'modifiers' => 'm-small m-border',
