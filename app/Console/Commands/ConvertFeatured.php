@@ -32,11 +32,18 @@ class ConvertFeatured extends ConvertBase
         $this->output->progressStart(count($nodes));
 
         foreach ($nodes as $node) {
-            if ($this->convertNode($node, '\App\Content', 'photo')) {
+            if ($photo = $this->convertNode($node, '\App\Content', 'photo')) {
                 $this->convertNodeDestinations($node);
 
                 if ($node->filepath) {
-                    $this->convertLocalImage($node->nid, $node->filepath, '\App\Content', 'photo');
+                    $this->convertLocalImage(
+                        $node->nid,
+                        $node->filepath,
+                        '\App\Content',
+                        'photo',
+                        $photo->created_at,
+                        $photo->updated_at
+                        );
                 }
             }
 

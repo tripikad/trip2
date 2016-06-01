@@ -536,7 +536,14 @@ class ConvertBase extends Command
             $model->save();
 
             if ($user->picture) {
-                $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user');
+                $this->convertLocalImage(
+                    $user->uid,
+                    $user->picture,
+                    '\App\User',
+                    'user',
+                    $model->created_at,
+                    $model->updated_at
+                );
             }
         }
     }
@@ -562,7 +569,7 @@ class ConvertBase extends Command
         $model->save(['timestamps' => false]);
     }
 
-    public function convertLocalImage($id, $imagePath, $modelName, $type = null)
+    public function convertLocalImage($id, $imagePath, $modelName, $type = null, $created_at = null, $updated_at = null)
     {
         $imagePath = $this->cleanAll($imagePath);
         $filename = basename($imagePath);
@@ -572,7 +579,15 @@ class ConvertBase extends Command
 
         $model = $modelName::findOrFail($id);
 
-        $image = \App\Image::create(['filename' => $filename]);
+        $data = ['filename' => $filename];
+        if (isset($created_at)) {
+            $data['created_at'] = $created_at;
+        }
+        if (isset($updated_at)) {
+            $data['updated_at'] = $updated_at;
+        }
+
+        $image = \App\Image::create($data);
         $model->images()->attach($image);
 
         $from = 'http://trip.ee/'.$imagePath;
@@ -590,7 +605,7 @@ class ConvertBase extends Command
         }
     }
 
-    public function convertRemoteImage($id, $imageUrl, $modelName, $type = null)
+    public function convertRemoteImage($id, $imageUrl, $modelName, $type = null, $created_at = null, $updated_at = null)
     {
         $newImage = false;
 
@@ -612,7 +627,15 @@ class ConvertBase extends Command
             $model = $modelName::findOrFail($id);
 
             if (method_exists($model, 'images')) {
-                $image = \App\Image::create(['filename' => $filename]);
+                $data = ['filename' => $filename];
+                if (isset($created_at)) {
+                    $data['created_at'] = $created_at;
+                }
+                if (isset($updated_at)) {
+                    $data['updated_at'] = $updated_at;
+                }
+
+                $image = \App\Image::create($data);
                 $model->images()->attach($image);
 
                 $newImage = $image;

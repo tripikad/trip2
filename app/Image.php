@@ -9,8 +9,6 @@ class Image extends Model
 {
     protected $fillable = ['filename'];
 
-    public $timestamps = false;
-
     public function content()
     {
         return $this->morphedByMany('App\Content', 'imageable');
