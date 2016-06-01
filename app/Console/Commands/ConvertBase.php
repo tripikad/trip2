@@ -234,7 +234,7 @@ class ConvertBase extends Command
         'Turvalisus' => ['tid' => 5005, 'pattern' => '/(turval|varasta)/i'],
         'Uuring' => ['tid' => 5006, 'pattern' => '/(uuring|uurimus|küsitlus)/i'],
         'Töö' => ['tid' => 5007, 'pattern' => '/(töö leid|töö ots|tööle|töökoh)/i'],
-        'Mobiil' => ['tid' => 5008, 'pattern' => '/(mobiil|nutitelef|mobla|iphone|android|ipad|tablet|sim-|sim kaart|samsung|äpp|rakendus)/i'],
+        'Mobiil' => ['tid' => 5008, 'pattern' => '/(mobiil|nutitelef|htc|nokia|mobla|iphone|android|ipad|tablet|sim-|sim kaart|samsung|äpp|rakendus)/i'],
 
     ];
 
@@ -322,7 +322,9 @@ class ConvertBase extends Command
 
     public function newNodeTopics($node)
     {
-        $topics = $this->getNewTopics();
+        $topics = collect($this->getNewTopics())->reject(function($topic) {
+            return $topic['tid'] == 5000;
+        });
 
         foreach ($topics as $topic) {
             if (preg_match($topic['pattern'], $node->title.$node->body)) {
