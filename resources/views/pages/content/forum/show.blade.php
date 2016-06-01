@@ -51,9 +51,16 @@
                 'thumbs' => view('component.flags', ['flags' => $content->getFlags()]),
                 'tags' => $content->destinations->transform(function ($destination) {
                     return [
-                        'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                        'modifiers' => 'm-yellow',
                         'title' => $destination->name,
                         'route' => route('destination.show', [$destination->id])
+                    ];
+                }),
+                'tags2' => $content->topics->transform(function ($topic) {
+                    return [
+                        'modifiers' => 'm-gray',
+                        'title' => $topic->name,
+                        'route' => ''
                     ];
                 })
             ])

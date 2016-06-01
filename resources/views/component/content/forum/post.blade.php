@@ -124,6 +124,12 @@ code: |
                     'modifiers' => 'm-small',
                     'items' => $tags
                 ])
+
+                @include('component.tags', [
+                    'modifiers' => 'm-small',
+                    'items' => $tags2
+                ])
+
             </div>
 
             @endif
