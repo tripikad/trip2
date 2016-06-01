@@ -46,7 +46,7 @@ return [
         'buysell' => [
             'route' => '/content/buysell',
         ],
-        
+
     ],
 
     'footer3' => [
