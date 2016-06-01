@@ -206,6 +206,7 @@ return [
 
     'forum.index.title' => 'Üldfoorum',
     'forum.create.title' => 'Alusta uut teemat',
+    'forum.edit.title' => 'Muuda teemat',
 
     'forum.edit.field.type.title' => 'Rubriik',
 
