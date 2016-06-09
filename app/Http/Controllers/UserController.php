@@ -63,7 +63,7 @@ class UserController extends Controller
         $activity_content = $user
             ->contents()
             ->whereStatus(1)
-            ->whereIn('type', $types)
+            ->whereIn('type', ['forum', 'travelmate', 'blog', 'news', 'flights'])
             ->latest('created_at')
             ->take(4)
             ->get()
