@@ -21,7 +21,7 @@
         </div>
 
         <div class="r-forum__content-wrap">
-            <div class="r-forum__wrap{{ ($type != 'flight' ? ' m-small' : '') }}">
+            <div class="r-forum__wrap{{ (! in_array($type,['news', 'flight']) ? ' m-small' : '') }}">
                 <div class="r-forum__content">
                     <div class="r-block m-small">
                         <div class="r-block__header">
@@ -69,6 +69,7 @@
                         ])
                     </div>
                 </div>
+                @if (! in_array($type,['news', 'flight', 'buysell']) )
                 <div class="r-forum__sidebar">
                     <div class="r-block m-small">
                         <div class="r-block__inner">
@@ -95,6 +96,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
