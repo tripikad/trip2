@@ -7,8 +7,11 @@ CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here.
 	// For complete reference see:
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
-    config.extraPlugins = 'colorbutton,justify';
+    //config.extraPlugins = 'colorbutton,justify';
 	// The toolbar groups arrangement, optimized for two toolbar rows.
+    config.allowedContent = true;
+    config.removeFormatAttributes = '';
+
 	config.toolbarGroups = [
 		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
 		{ name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ] },
@@ -27,16 +30,20 @@ CKEDITOR.editorConfig = function( config ) {
 	];
 
     config.toolbar = [
+        { name: 'tools', items: [ 'Bold', 'Italic', 'BulletedList', 'Link', 'Source' ]},
+
+    /*
         { name: 'clipborad', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ]},
         { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ]},
         { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar' ]},
-        /*{ name: 'tools', items: [ 'Maximize' ]},*/
+        { name: 'tools', items: [ 'Maximize' ]},
         { name: 'document', items: [ 'Source' ]},
         '/',
         { name: 'colors', items: [ 'TextColor' ]},
         { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat', '-', 'Subscript', 'Superscript' ]},
         { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyBlock', 'JustifyLeft', 'JustifyCenter', 'JustifyRight' ]},
         { name: 'styles', items: [ 'Format' ]}
+    */
     ];
 
 	config.removePlugins = 'uploadimage,backup,stat';
