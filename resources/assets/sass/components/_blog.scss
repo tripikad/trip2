@@ -33,7 +33,7 @@
         width: 100%;
         height: 0;
         padding-bottom: 56.25%;
-        margin-bottom: $spacer;
+        margin-bottom: $spacer * 2;
     }
 
     .c-blog__title {
@@ -44,11 +44,11 @@
         font-weight: $font-weight-bold;
         text-align: center;
         line-height: 1.2;
-        padding: $spacer 0;
+        padding: 0 0 $spacer 0;
 
         @include respond-to(tablet) {
 
-            font-size: $font-size-larger;
+            font-size: $font-size-largest;
         }
     }
 
@@ -56,6 +56,11 @@
 
             color: $color-text-black;
             text-decoration: none;
+
+            &:hover {
+
+                text-decoration: underline;
+            }
         }
 
     .c-blog__profile {

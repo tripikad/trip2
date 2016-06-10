@@ -14,6 +14,8 @@
 
 <div class="r-flights m-single">
 
+    {{-- Will be hidden until there is a functionality to show the flight path
+
     <div class="r-flights__map">
         <div class="r-flights__map-inner">
             @include('component.map', [
@@ -21,6 +23,8 @@
             ])
         </div>
     </div>
+
+    --}}
 
     <div class="r-flights__masthead">
         @include('component.masthead', [
@@ -44,6 +48,33 @@
                         ])
                     </div>
 
+                    {{-- "Jälgi" inserted to the list and flags floated to the right  --}}
+
+                    <div class="r-flights__content-header-meta">
+
+                        <div class="r-flights__content-header-meta-item">
+                            <ul class="c-inline-list m-light m-small">
+                                <li class="c-inline-list__item">
+                                    <a href="http://localhost:8000/user/111" class="c-inline-list__item-link">Trip.ee</a>
+                                </li>
+                                <li class="c-inline-list__item">
+                                    1 nädal tagasi
+                                </li>
+                                <li class="c-inline-list__item">
+                                    Euroopa
+                                </li>
+                                <li class="c-inline-list__item">
+                                    <a href="http://localhost:8000/user/111" class="c-inline-list__item-link">Jälgi</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="r-flights__content-header-meta-item">
+                            @include('component.flags', ['flags' => $content->getFlags()])
+                        </div>
+                    </div>
+
+                    {{--
+
                     @if (strtotime($content->end_at) <= strtotime(Carbon\Carbon::now()))
                         <div class="r-flights__content-header-meta">
                             @include('component.content.text', ['content' => $content])
@@ -66,6 +97,8 @@
                             @endif
                         </div>
                     </div>
+
+                    --}}
 
                     @if (strtotime($content->end_at) < strtotime(Carbon\Carbon::now()))
                         @include('component.alert', [
@@ -100,9 +133,7 @@
                 </div>
             </div>
 
-            <div class="r-block m-mobile-hide">
-                @include('component.promo', ['promo' => 'body'])
-            </div>
+            @include('component.promo', ['promo' => 'body m-margin'])
 
             @if (isset($flights) && count($flights))
                 <div class="r-block">
@@ -115,16 +146,14 @@
                         </div>
                     </div>
 
-                    <div class="r-block__body">
-                        @include('region.content.flight.list', [
-                            'items' => $flights
-                        ])
-                    </div>
+                    @include('region.content.flight.list', [
+                        'items' => $flights
+                    ])
 
                     <div class="r-block__footer">
 
                         @include('component.link', [
-                            'modifiers' => 'm-icon m-right',
+                            'modifiers' => 'm-icon',
                             'title' => trans('frontpage.index.all.offers'),
                             'route' => route('content.index', ['flight']),
                             'icon' => 'icon-arrow-right'
@@ -239,10 +268,7 @@
                 </div>
             @endif
 
-            <div class="r-block m-small m-mobile-hide">
-
-                @include('component.promo', ['promo' => 'sidebar_small'])
-            </div>
+            @include('component.promo', ['promo' => 'sidebar_small m-small-margin'])
 
             @if (isset($about) && count($about))
                 <div class="r-block m-small">
@@ -281,9 +307,8 @@
                 </div>
             @endif
 
-            <div class="r-block m-small m-mobile-hide">
-                @include('component.promo', ['promo' => 'sidebar_small'])
-            </div>
+            @include('component.promo', ['promo' => 'sidebar_small m-small-margin'])
+
         </div>
     </div>
 

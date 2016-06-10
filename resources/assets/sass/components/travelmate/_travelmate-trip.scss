@@ -13,13 +13,8 @@
 
         .c-travelmate-trip__info {
 
-            margin-bottom: $spacer * 1.5;
+            margin-bottom: $spacer;
             line-height: 1.5;
-
-            @include respond-to(tablet) {
-
-                margin-bottom: $spacer * 2.5;
-            }
 
             &:last-child {
 
@@ -29,11 +24,5 @@
             span {
 
                 display: block;
-                margin-top: $spacer / 2;
-
-                @include respond-to(tablet) {
-
-                    margin-top: $spacer * 1.5;
-                }
             }
         }

@@ -87,7 +87,7 @@
             @include span(16 of 24);
 
             padding-left: span(1 of 16);
-            padding-top: $spacer * 2;
+            padding-top: $spacer * 4;
         }
 
         @include respond-to(desktop) {
@@ -132,7 +132,7 @@
 
             @include span(7 of 24 at 2);
 
-            padding-top: $spacer * 2;
+            padding-top: $spacer * 4;
         }
 
         .r-forum.m-single & {

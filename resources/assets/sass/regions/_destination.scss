@@ -125,7 +125,7 @@
 
                 display: none;
                 opacity: 0.2;
-                
+
                 @include respond-to(tablet) {
 
                     position: absolute;
@@ -153,7 +153,6 @@
         @include respond-to(tablet) {
 
             margin-top: -$spacer * 20;
-            margin-bottom: $spacer * 4;
             padding-top: 0;
             background: none;
         }
@@ -387,13 +386,12 @@
 
         @include respond-to(tablet) {
 
-            padding-top: 0;
-            padding-bottom: $spacer * 2;
+            padding: $spacer * 2 0;
         }
 
         @include respond-to(desktop) {
 
-            padding-bottom: $spacer * 4;
+            padding: $spacer * 3 0 $spacer;
         }
     }
 

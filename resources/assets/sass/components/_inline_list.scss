@@ -52,6 +52,7 @@
             @include color-modifiers-and(color);
 
             color: $color-text-link;
+            line-height: 1.35;
             text-decoration: none;
 
             &:hover {
