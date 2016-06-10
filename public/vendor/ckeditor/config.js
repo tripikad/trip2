@@ -11,6 +11,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// The toolbar groups arrangement, optimized for two toolbar rows.
     config.allowedContent = true;
     config.removeFormatAttributes = '';
+    config.height = 600;
 
 	config.toolbarGroups = [
 		{ name: 'clipboard',   groups: [ 'clipboard', 'undo' ] },
