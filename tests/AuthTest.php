@@ -68,7 +68,7 @@ class AuthTest extends TestCase
             ->click(trans('auth.reset.apply.title.link'))
             ->type($user->email, 'email')
             ->press(trans('auth.reset.apply.submit.title'))
-            ->seePageIs('/')
+            ->seePageIs('/reset/apply')
             ->see(trans('passwords.sent'))
             ->seeInDatabase('password_resets', ['email' => $user->email]);
 

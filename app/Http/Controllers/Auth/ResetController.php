@@ -63,7 +63,7 @@ class ResetController extends Controller
         switch ($response) {
             case Password::RESET_LINK_SENT:
                 return redirect()
-                    ->route('frontpage.index')
+                    ->back()
                     ->with('info', trans($response));
 
             case Password::INVALID_USER:
