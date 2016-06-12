@@ -195,6 +195,8 @@ return [
     'travelmate.description.title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
     'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.',
 
+    'travelmate.about.text' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu',
+
     'travelmate.no.results' => 'Hetkel pole ühtegi aktiivset reisikaaslase otsijat.',
 
     // Forum
