@@ -13,7 +13,7 @@
 @section('content')
     @include('component.masthead', [
         'modifiers' => 'm-alternative',
-        'image' => \App\Image::getRandom()
+        'image' => \App\Image::getHeader()
     ])
 
     <div class="l-one-column">

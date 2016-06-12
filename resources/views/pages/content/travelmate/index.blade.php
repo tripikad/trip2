@@ -18,7 +18,7 @@
 
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
-            'image' => \App\Image::getRandom(),
+            'image' => \App\Image::getHeader(),
             'subtitle' => trans('content.travelmate.activity', [
                 'days' => 14,
                 'posts_count' => $activity
@@ -199,7 +199,7 @@
 
     @include('component.footer', [
         'modifiers' => 'm-alternative',
-        'image' => \App\Image::getRandom()
+        'image' => \App\Image::getFooter()
     ])
 
 @stop
