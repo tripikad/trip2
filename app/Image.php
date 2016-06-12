@@ -122,12 +122,13 @@ class Image extends Model
         return $photo ? $photo->imagePreset('large') : null;
     }
 
-    public static function getHeader() {
+    public static function getHeader()
+    {
         return '/photos/header.jpg';
     }
 
-    public static function getFooter() {
+    public static function getFooter()
+    {
         return '/photos/footer.jpg';
     }
-
 }
