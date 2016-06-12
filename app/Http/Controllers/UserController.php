@@ -17,9 +17,7 @@ class UserController extends Controller
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
 
-        $user = User::with(['flags.flaggable' => function ($query) use ($id) {
-            $query->where('user_id', $id);
-        }])->findorFail($id);
+        $user = User::with(['flags.flaggable'])->findorFail($id);
 
         $content_count = $user
             ->contents()
@@ -63,7 +61,7 @@ class UserController extends Controller
         $activity_content = $user
             ->contents()
             ->whereStatus(1)
-            ->whereIn('type', $types)
+            ->whereIn('type', ['forum', 'travelmate', 'blog', 'news', 'flights'])
             ->latest('created_at')
             ->take(4)
             ->get()

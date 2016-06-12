@@ -16,9 +16,6 @@ class TravelmateTest extends TestCase
         $year = Carbon::parse($datetime)->year;
         $month = Carbon::parse($datetime)->month;
         $day = Carbon::parse($datetime)->day;
-        $hour = Carbon::parse($datetime)->hour;
-        $minute = Carbon::parse($datetime)->minute;
-        $second = Carbon::parse($datetime)->second;
 
         // creator create content
         $this->actingAs($creator_user)
@@ -29,9 +26,6 @@ class TravelmateTest extends TestCase
             ->select($year, 'start_at_year')
             ->select($month, 'start_at_month')
             ->select($day, 'start_at_day')
-            ->select($hour, 'start_at_hour')
-            ->select($minute, 'start_at_minute')
-            ->select($second, 'start_at_second')
             ->press(trans('content.create.submit.title'))
             ->see(trans('content.store.status.'.config('content_travelmate.store.status', 1).'.info', [
                 'title' => 'Creator title travelmate',
@@ -40,7 +34,7 @@ class TravelmateTest extends TestCase
             ->seeInDatabase('contents', [
                 'user_id' => $creator_user->id,
                 'title' => 'Creator title travelmate',
-                'start_at' => $datetime,
+                'start_at' => $year.'-'.$month.'-'.$day.' 00:00:00',
                 'type' => 'travelmate',
                 'status' => 1,
             ]);
@@ -61,9 +55,6 @@ class TravelmateTest extends TestCase
         $year = Carbon::parse($datetime)->year;
         $month = Carbon::parse($datetime)->month;
         $day = Carbon::parse($datetime)->day;
-        $hour = Carbon::parse($datetime)->hour;
-        $minute = Carbon::parse($datetime)->minute;
-        $second = Carbon::parse($datetime)->second;
 
         $this->actingAs($regular_user)
             ->visit('content/travelmate')
@@ -73,9 +64,6 @@ class TravelmateTest extends TestCase
             ->select($year, 'start_at_year')
             ->select($month, 'start_at_month')
             ->select($day, 'start_at_day')
-            ->select($hour, 'start_at_hour')
-            ->select($minute, 'start_at_minute')
-            ->select($second, 'start_at_second')
             ->press(trans('content.create.submit.title'))
             ->see(trans('content.store.status.1.info', [
                 'title' => 'Hello title',
@@ -85,7 +73,7 @@ class TravelmateTest extends TestCase
             ->seeInDatabase('contents', [
                 'user_id' => $regular_user->id,
                 'title' => 'Hello title',
-                'start_at' => $datetime,
+                'start_at' => $year.'-'.$month.'-'.$day.' 00:00:00',
                 'type' => 'travelmate',
                 'status' => 1,
             ]);
@@ -96,9 +84,6 @@ class TravelmateTest extends TestCase
         $year = Carbon::parse($new_datetime)->year;
         $month = Carbon::parse($new_datetime)->month;
         $day = Carbon::parse($new_datetime)->day;
-        $hour = Carbon::parse($new_datetime)->hour;
-        $minute = Carbon::parse($new_datetime)->minute;
-        $second = Carbon::parse($new_datetime)->second;
 
         $this->actingAs($regular_user)
                 ->visit("content/travelmate/$content->id")
@@ -108,16 +93,13 @@ class TravelmateTest extends TestCase
                 ->select($year, 'start_at_year')
                 ->select($month, 'start_at_month')
                 ->select($day, 'start_at_day')
-                ->select($hour, 'start_at_hour')
-                ->select($minute, 'start_at_minute')
-                ->select($second, 'start_at_second')
                 ->press(trans('content.edit.submit.title'))
                 ->seePageIs("content/travelmate/$content->id")
                 ->see('Hola titulo')
                 ->seeInDatabase('contents', [
                     'user_id' => $regular_user->id,
                     'title' => 'Hola titulo',
-                    'start_at' => $new_datetime,
+                    'start_at' => $year.'-'.$month.'-'.$day.' 00:00:00',
                     'type' => 'travelmate',
                     'status' => 1,
                 ]);
@@ -135,9 +117,6 @@ class TravelmateTest extends TestCase
         $year = Carbon::parse($datetime)->year;
         $month = Carbon::parse($datetime)->month;
         $day = Carbon::parse($datetime)->day;
-        $hour = Carbon::parse($datetime)->hour;
-        $minute = Carbon::parse($datetime)->minute;
-        $second = Carbon::parse($datetime)->second;
 
         // creator create content
         $this->actingAs($creator_user)
@@ -149,9 +128,6 @@ class TravelmateTest extends TestCase
             ->select($year, 'start_at_year')
             ->select($month, 'start_at_month')
             ->select($day, 'start_at_day')
-            ->select($hour, 'start_at_hour')
-            ->select($minute, 'start_at_minute')
-            ->select($second, 'start_at_second')
             ->press(trans('content.create.submit.title'))
             ->see(trans('content.store.status.'.config('content_travelmate.store.status', 1).'.info', [
                 'title' => 'Creator title travelmate',
@@ -159,7 +135,7 @@ class TravelmateTest extends TestCase
             ->see('Creator title travelmate')
             ->seeInDatabase('contents', [
                 'user_id' => $creator_user->id,
-                'start_at' => $datetime,
+                'start_at' => $year.'-'.$month.'-'.$day.' 00:00:00',
                 'title' => 'Creator title travelmate',
                 'body' => 'Creator body travelmate',
                 'type' => 'travelmate',
@@ -170,9 +146,6 @@ class TravelmateTest extends TestCase
         $year = Carbon::parse($datetime)->year;
         $month = Carbon::parse($datetime)->month;
         $day = Carbon::parse($datetime)->day;
-        $hour = Carbon::parse($datetime)->hour;
-        $minute = Carbon::parse($datetime)->minute;
-        $second = Carbon::parse($datetime)->second;
 
         // editor edit content
         $content_id = $this->getContentIdByTitleType('Creator title travelmate');
@@ -186,16 +159,13 @@ class TravelmateTest extends TestCase
             ->select($year, 'start_at_year')
             ->select($month, 'start_at_month')
             ->select($day, 'start_at_day')
-            ->select($hour, 'start_at_hour')
-            ->select($minute, 'start_at_minute')
-            ->select($second, 'start_at_second')
             ->press(trans('content.edit.submit.title'))
             ->see(trans('content.update.info', [
                 'title' => 'Editor title travelmate',
             ]))
             ->seeInDatabase('contents', [
                 'user_id' => $creator_user->id,
-                'start_at' => $datetime,
+                'start_at' => $year.'-'.$month.'-'.$day.' 00:00:00',
                 'title' => 'Editor title travelmate',
                 'body' => 'Editor body travelmate',
                 'type' => 'travelmate',

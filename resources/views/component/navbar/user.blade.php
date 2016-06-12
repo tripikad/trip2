@@ -43,8 +43,9 @@ code: |
 
                 @include('component.profile', [
                     'modifiers' => 'm-mini',
-                    'image' => $profile['image'],
+                    'image' => $profile['image'] . '?' . str_random(4),
                     'letter' => $profile['letter'],
+                    'title' => null,
                     'badge' => [
                         'modifiers' => 'm-inverted m-red',
                         'count' => $profile['badge'],
