@@ -100,12 +100,7 @@
         @include respond-to(tablet) {
 
             margin-top: -$spacer * 8;
-            padding: 0 0 $spacer * 4;
-        }
-
-        @include respond-to(desktop) {
-
-            padding: 0 0 $spacer * 6;
+            padding: 0;
         }
     }
 
@@ -183,54 +178,134 @@
                         }
                     }
 
-    .r-home__featured-news {
+    .r-home__alternative {
 
-        padding: $spacer * 2 0;
+        padding: $spacer 0;
         background: $color-fill-neutral-light;
 
         @include respond-to(tablet) {
 
-            padding: $spacer * 4 0;
-        }
-    }
-
-        .r-home__featured-news-wrap {
-
-            @include wrap();
-
-            @include respond-to(tablet) {
-
-                @include wrap('narrow');
-            }
-        }
-
-    .r-home__travel {
-
-        background: $color-fill-neutral-light;
-        padding: $spacer * 2 0;
-
-        @include respond-to(tablet) {
-
-            padding: $spacer * 4 0;
+            padding: $spacer * 2 0;
         }
 
         @include respond-to(desktop) {
 
-            padding: $spacer * 5.5 0;
+            padding: $spacer * 3 0;
         }
     }
 
-        .r-home__travel-wrap {
+        .r-home__featured-news {
 
-            @include wrap();
+            padding: $spacer 0;
 
             @include respond-to(tablet) {
 
-                @include wrap('narrow');
+                padding: $spacer * 2 0;
+            }
+
+            @include respond-to(desktop) {
+
+                padding: $spacer * 3 0;
             }
         }
 
-            .r-home__travel-title {
+            .r-home__featured-news-wrap {
+
+                @include wrap();
+
+                @include respond-to(tablet) {
+
+                    @include wrap('narrow');
+                }
+            }
+
+        .r-home__travel {
+
+            padding: $spacer 0;
+
+            @include respond-to(tablet) {
+
+                padding: $spacer * 2 0;
+            }
+
+            @include respond-to(desktop) {
+
+                padding: $spacer * 3 0;
+            }
+        }
+
+            .r-home__travel-wrap {
+
+                @include wrap();
+
+                @include respond-to(tablet) {
+
+                    @include wrap('narrow');
+                }
+            }
+
+                .r-home__travel-title {
+
+                    padding-bottom: $spacer * 2;
+
+                    @include respond-to(tablet) {
+
+                        padding-bottom: $spacer * 3;
+                    }
+                }
+
+                .r-home__travel-column {
+
+                    &.m-first {
+
+                        padding-bottom: $spacer * 2;
+
+                        @include respond-to(tablet) {
+
+                            @include span(15 of 24);
+
+                            padding-bottom: 0;
+                        }
+                    }
+
+                    &.m-single {
+
+                        @include respond-to(tablet) {
+
+                            @include span(8 of 24);
+                        }
+                    }
+
+                    &.m-last {
+
+                        @include respond-to(tablet) {
+
+                            @include span(8 of 24 at 2);
+                        }
+                    }
+                }
+
+                    .r-home__travel-column-footer {
+
+                        text-align: right;
+                    }
+
+        .r-home__gallery {
+
+            padding: $spacer 0;
+
+            @include respond-to(tablet) {
+
+                padding: $spacer * 2 0;
+            }
+
+            @include respond-to(desktop) {
+
+                padding: $spacer * 3 0;
+            }
+        }
+
+            .r-home__gallery-title {
 
                 padding-bottom: $spacer * 2;
 
@@ -240,93 +315,31 @@
                 }
             }
 
-            .r-home__travel-column {
-
-                &.m-first {
-
-                    padding-bottom: $spacer * 2;
+                .r-home__gallery-title-wrap {
 
                     @include respond-to(tablet) {
 
-                        @include span(15 of 24);
-
-                        padding-bottom: 0;
+                        @include wrap('narrow');
                     }
                 }
 
-                &.m-single {
+            .r-home__gallery-wrap {
 
-                    @include respond-to(tablet) {
-
-                        @include span(8 of 24);
-                    }
-                }
-
-                &.m-last {
-
-                    @include respond-to(tablet) {
-
-                        @include span(8 of 24 at 2);
-                    }
-                }
+                @include wrap;
             }
-
-                .r-home__travel-column-footer {
-
-                    text-align: right;
-                }
-
-    .r-home__gallery {
-
-        background: $color-fill-neutral-light;
-        padding-bottom: $spacer * 2;
-
-        @include respond-to(tablet) {
-
-            padding-bottom: $spacer * 4;
-        }
-
-        @include respond-to(desktop) {
-
-            padding-bottom: $spacer * 6;
-        }
-    }
-        .r-home__gallery-title {
-
-            padding-bottom: $spacer * 2;
-
-            @include respond-to(tablet) {
-
-                padding-bottom: $spacer * 3;
-            }
-        }
-
-            .r-home__gallery-title-wrap {
-
-                @include respond-to(tablet) {
-
-                    @include wrap('narrow');
-                }
-            }
-
-        .r-home__gallery-wrap {
-
-            @include wrap;
-        }
 
     .r-home__travel-mates {
 
-        background: $color-fill-neutral-light;
-        padding-bottom: 0;
+        padding: $spacer 0 0;
 
         @include respond-to(tablet) {
 
-            padding-bottom: $spacer * 2;
+            padding: $spacer * 2 0 0;
         }
 
         @include respond-to(desktop) {
 
-            padding-bottom: $spacer * 4;
+            padding: $spacer * 3 0 $spacer;
         }
     }
 
@@ -352,14 +365,15 @@
         @include respond-to(tablet) {
 
             display: block;
-            background: $color-fill-neutral-light;
             margin-bottom: -$spacer * 4;
+            background: $color-fill-neutral-light;
         }
     }
 
         .r-home__footer-promo-wrap {
 
             @include wrap('narrow');
+
             position: relative;
             z-index: 2;
         }

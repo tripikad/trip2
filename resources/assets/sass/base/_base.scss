@@ -11,6 +11,8 @@
 
 body {
 
+    @include font-smoothing;
+
 	color: $body-font-color;
 	font-family: $font-primary;
 	font-size: $base-font-size;

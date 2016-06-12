@@ -164,7 +164,8 @@
 
     .r-block__body {
 
-        overflow: hidden;
+        @include clearfix;
+
         margin-bottom: $spacer;
 
         @include respond-to(tablet) {
