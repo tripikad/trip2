@@ -388,7 +388,7 @@
 
     {{-- If component is hidden, containg wrapper must be hidden also --}}
 
-    <div class="r-destination__footer-promo" style="display:none;">
+    <div class="r-destination__footer-promo">
         <div class="r-destination__footer-promo-wrap">
             @include('component.promo', ['promo' => 'footer'])
         </div>
