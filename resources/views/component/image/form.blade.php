@@ -166,7 +166,7 @@ code: |
                 )!!}
 
             @elseif ($field['type'] == 'datetime')
-                <div class="c-columns m-6-cols m-space">
+                <div class="c-columns m-3-cols m-space">
                     <div class="c-columns__item">
                         @include('component.date.select', [
                             'from' => 1,
@@ -188,30 +188,6 @@ code: |
                             'to' => \Carbon\Carbon::parse('+5 years')->year,
                             'selected' => \Carbon\Carbon::now()->year,
                             'key' => $key.'_year'
-                        ])
-                    </div>
-                    <div class="c-columns__item">
-                        @include('component.date.select', [
-                            'from' => 0,
-                            'to' => 23,
-                            'selected' => \Carbon\Carbon::now()->hour,
-                            'key' => $key.'_hour'
-                        ])
-                    </div>
-                    <div class="c-columns__item">
-                        @include('component.date.select', [
-                            'from' => 0,
-                            'to' => 59,
-                            'selected' => \Carbon\Carbon::now()->minute,
-                            'key' => $key.'_minute'
-                        ])
-                    </div>
-                    <div class="c-columns__item">
-                        @include('component.date.select', [
-                            'from' => 0,
-                            'to' => 59,
-                            'selected' => '00',
-                            'key' => $key.'_second'
                         ])
                     </div>
                 </div>

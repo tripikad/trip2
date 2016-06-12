@@ -421,11 +421,12 @@ class ContentController extends Controller
                     $request->{$name.'_month'},
                     $request->{$name.'_day'}
                 )->format('Y-m-d');
-                $time = Carbon::createFromTime(
+                /*$time = Carbon::createFromTime(
                     $request->{$name.'_hour'},
                     $request->{$name.'_minute'},
                     $request->{$name.'_second'}
-                )->format('H:i:s');
+                )->format('H:i:s');*/
+                $time = '00:00:00';
                 $fields[$name] = $date.' '.$time;
             }
         }
