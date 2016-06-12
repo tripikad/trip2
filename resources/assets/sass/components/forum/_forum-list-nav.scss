@@ -39,7 +39,7 @@
 
             &:hover {
 
-                text-decoration: none;
+                text-decoration: underline;
             }
 
             @include respond-to(desktop) {

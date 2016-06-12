@@ -182,7 +182,7 @@
                 </div>
                 <div class="r-destination__about-map">
 
-                    @include('component.map')
+                    @include('component.map', ['modifiers' => 'm-destination'])
 
                 </div>
             @endif
@@ -385,6 +385,8 @@
             </div>
         </div>
     @endif
+
+    {{-- If component is hidden, containg wrapper must be hidden also --}}
 
     <div class="r-destination__footer-promo">
         <div class="r-destination__footer-promo-wrap">

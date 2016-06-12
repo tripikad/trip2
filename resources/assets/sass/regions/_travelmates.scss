@@ -72,6 +72,11 @@
             &.m-first {
 
                 padding-top: $spacer * 2;
+
+                @include respond-to(tablet) {
+
+                    padding-top: $spacer * 4;
+                }
             }
         }
     }
@@ -81,7 +86,7 @@
             font-size: $font-size-largest;
             font-weight: $font-weight-bold;
             line-height: 1.125;
-            margin-bottom: $spacer * 2;
+            margin-bottom: $spacer;
             padding-top: $spacer * 2;
 
             @include respond-to(tablet) {
@@ -93,21 +98,35 @@
 
         .r-travelmates__meta {
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: $spacer * 2;
+            @include clearfix;
+
+            margin-bottom: $spacer;
 
             @include respond-to(tablet) {
 
-                margin-bottom: $spacer * 3;
+                margin-bottom: $spacer * 1.5;
             }
         }
 
-            .r-travelmates__meta-date {
+            .r-travelmates__meta-item {
 
-                font-size: $font-size-small;
-                color: $color-fill-neutral-darker;
+                margin-bottom: $spacer;
+
+                @include respond-to(tablet) {
+
+                    float: left;
+                    margin-bottom: 0;
+                }
+
+                &:last-child {
+
+                    margin-bottom: 0;
+
+                    @include respond-to(tablet) {
+
+                        float: right;
+                    }
+                }
             }
 
 

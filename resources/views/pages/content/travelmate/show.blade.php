@@ -25,41 +25,44 @@
             <h1 class="r-travelmates__title">{{ $content->title }}</h1>
 
             <div class="r-travelmates__meta">
-                <p class="r-travelmates__meta-date">
-                    {{ trans('content.travelmate.post.added', [
-                        'created_at' => view('component.date.relative', [
-                            'date' => $content->created_at
-                        ])
-                    ]) }}
-                </p>
-                <div class="m-pull-right">
-                    @include('component.actions', ['actions' => $content->getActions()])
-                </div>
-            </div>
 
-            @if (count($content->topics) || count($content->destinations))
-                @php
-                (count($content->topics) ? $content_topics = $content->topics->transform(function ($content_topic) {
-                    return [
-                            'modifiers' => 'm-gray',
-                            'title' => $content_topic->name
-                    ];
-                }) : $content_topics = collect([]));
-                (count($content->destinations) ? $content_destinations = $content->destinations->transform(function ($content_destination) {
-                    return [
-                            'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
-                            'route' => route('destination.show', [$content_destination->id]),
-                            'title' => $content_destination->name
-                    ];
-                }) : $content_destinations = collect([]));
-                @endphp
-                <div class="r-travelmates__meta">
-                    @include('component.tags', [
-                        'modifiers' => 'm-small',
-                        'items' => array_merge($content_topics->toArray(), $content_destinations->toArray()),
-                    ])
+                <div class="r-travelmates__meta-item">
+                    <ul class="c-inline-list m-light m-small">
+                        <li class="c-inline-list__item">
+                            {{ trans('content.travelmate.post.added', [
+                                'created_at' => view('component.date.relative', [
+                                    'date' => $content->created_at
+                                ])
+                            ]) }}
+                        </li>
+                        @include('component.actions.list', ['actions' => $content->getActions()])
+                    </ul>
                 </div>
-            @endif
+
+                    @if (count($content->topics) || count($content->destinations))
+                    @php
+                    (count($content->topics) ? $content_topics = $content->topics->transform(function ($content_topic) {
+                        return [
+                                'modifiers' => 'm-gray',
+                                'title' => $content_topic->name
+                        ];
+                    }) : $content_topics = collect([]));
+                    (count($content->destinations) ? $content_destinations = $content->destinations->transform(function ($content_destination) {
+                        return [
+                                'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                                'route' => route('destination.show', [$content_destination->id]),
+                                'title' => $content_destination->name
+                        ];
+                    }) : $content_destinations = collect([]));
+                    @endphp
+                    <div class="r-travelmates__meta-item">
+                        @include('component.tags', [
+                            'modifiers' => 'm-small',
+                            'items' => array_merge($content_topics->toArray(), $content_destinations->toArray()),
+                        ])
+                    </div>
+                    @endif
+            </div>
 
             <div class="r-travelmates__content-body">
                 <div class="c-body">
@@ -220,9 +223,9 @@
                     </div>
                 @endif
             </div>
-            <div class="r-block m-small m-mobile-hide">
-                @include('component.promo', ['promo' => 'sidebar_small'])
-            </div>
+
+            @include('component.promo', ['promo' => 'sidebar_small m-small-margin'])
+
         </div>
     </div>
 

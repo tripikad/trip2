@@ -63,11 +63,7 @@
 
             @endif
 
-            <div class="r-block m-small m-mobile-hide">
-
-                @include('component.promo', ['promo' => 'body'])
-
-            </div>
+            @include('component.promo', ['promo' => 'body m-margin'])
 
             @if (count($contents) > 8)
 
@@ -142,11 +138,7 @@
                 </div>
             </div>
 
-            <div class="r-block m-small m-mobile-hide">
-
-                @include('component.promo', ['promo' => 'sidebar_small'])
-
-            </div>
+            @include('component.promo', ['promo' => 'sidebar_small m-small-margin'])
 
             <div class="r-block m-small">
 

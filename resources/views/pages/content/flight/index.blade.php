@@ -13,13 +13,6 @@
 @section('content')
 
 <div class="r-flights">
-    <div class="r-flights__map">
-        <div class="r-flights__map-inner">
-            @include('component.map', [
-                'modifiers' => 'm-flights'
-            ])
-        </div>
-    </div>
 
     <div class="r-flights__masthead">
         @include('component.masthead', [
@@ -67,9 +60,7 @@
                 </div>
             @endif
 
-            <div class="r-block m-mobile-hide">
-                @include('component.promo', ['promo' => 'body'])
-            </div>
+            @include('component.promo', ['promo' => 'body m-margin'])
 
             @if (count($contents) > 4)
                 @include('component.content.flight.block', [
@@ -148,13 +139,9 @@
                 </div>
             </div>
 
-            <div class="r-block m-small m-mobile-hide">
-                @include('component.promo', ['promo' => 'sidebar_large'])
-            </div>
+            @include('component.promo', ['promo' => 'sidebar_large m-small-margin '])
 
-            <div class="r-block m-small m-mobile-hide">
-                @include('component.promo', ['promo' => 'sidebar_small'])
-            </div>
+            @include('component.promo', ['promo' => 'sidebar_small m-small-margin '])
 
             @if (isset($about) && count($about))
                 <div class="r-block m-small">

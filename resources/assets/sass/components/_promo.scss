@@ -3,11 +3,6 @@
     overflow: hidden;
     display: block;
 
-    @include respond-to(tablet) {
-
-        display: block;
-    }
-
     &.m-sidebar-large {
 
         max-height: $spacer * 48;
@@ -28,12 +23,31 @@
         max-height: $spacer * 10;
     }
 
+    &.m-margin {
+
+        margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 4;
+        }
+    }
+
+    &.m-small-margin {
+
+        margin-bottom: $spacer;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 2.5;
+        }
+    }
+
     iframe {
 
         display: block;
         max-width: 100%;
     }
-
 }
 
     .c-promo__link {

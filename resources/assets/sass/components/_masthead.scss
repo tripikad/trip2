@@ -19,7 +19,7 @@
     &.m-alternative {
 
         background-repeat: no-repeat;
-        background-position: top center;
+        background-position: center center;
         background-size: cover;
         background-color: none;
 
@@ -204,6 +204,8 @@
 
             .m-logo-title & {
 
+                @include font-smoothing;
+
                 font-size: $font-size-larger;
                 display: inline-block;
                 position: absolute;
@@ -211,7 +213,6 @@
                 width: 100%;
                 text-align: center;
                 top: -$spacer * 2.75;
-
                 text-transform: lowercase;
 
 
@@ -220,7 +221,7 @@
                     left: $spacer * 13;
                     width: auto;
                     text-align: left;
-                    font-size: $font-size-largest + 6;
+                    font-size: $font-size-largest + 5;
                     letter-spacing: 0.5px;
                     text-shadow: -1px 0 0 $color-text-black;
                 }
@@ -232,7 +233,7 @@
 
                 @include respond-to(tablet) {
 
-                    top: -($spacer * 5.5) - 1;
+                    top: -($spacer * 5.5) + 2;
                     left: $spacer * 10.75;
                 }
             }

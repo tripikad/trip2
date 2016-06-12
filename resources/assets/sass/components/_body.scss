@@ -1,5 +1,7 @@
 .c-body {
 
+    @include font-smoothing('none');
+
     font-size: $font-size-normal;
     line-height: 1.5;
 
