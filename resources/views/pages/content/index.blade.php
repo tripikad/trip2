@@ -13,7 +13,7 @@
         <div class="r-forum__masthead">
             @include('component.masthead', [
                 'modifiers' => 'm-alternative',
-                'image' => \App\Image::getRandom()
+                'image' => \App\Image::getHeader()
             ])
         </div>
 
@@ -101,6 +101,6 @@
 @section('footer')
     @include('component.footer', [
         'modifiers' => 'm-alternative',
-        'image' => \App\Image::getRandom()
+        'image' => \App\Image::getFooter()
     ])
 @stop

@@ -14,7 +14,7 @@
     <div class="r-travelmates__masthead">
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
-            'image' => \App\Image::getRandom(),
+            'image' => \App\Image::getHeader(),
             'subtitle' => trans('content.travelmate.view.all.offers'),
             'subtitle_route' => route('content.index', [$content->type])
         ])
@@ -265,6 +265,6 @@
 @section('footer')
     @include('component.footer', [
         'modifiers' => 'm-alternative',
-        'image' => \App\Image::getRandom()
+        'image' => \App\Image::getFooter()
     ])
 @stop
