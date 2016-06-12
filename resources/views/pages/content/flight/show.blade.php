@@ -14,7 +14,7 @@
 
 <div class="r-flights m-single">
 
-    {{-- Will be hidden until there is a functionality to show the flight path
+    <?php /*Will be hidden until there is a functionality to show the flight path
 
     <div class="r-flights__map">
         <div class="r-flights__map-inner">
@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    --}}
+    */ ?>
 
     <div class="r-flights__masthead">
         @include('component.masthead', [
@@ -48,57 +48,20 @@
                         ])
                     </div>
 
-                    {{-- "Jälgi" inserted to the list and flags floated to the right  --}}
-
                     <div class="r-flights__content-header-meta">
-
                         <div class="r-flights__content-header-meta-item">
                             <ul class="c-inline-list m-light m-small">
-                                <li class="c-inline-list__item">
-                                    <a href="http://localhost:8000/user/111" class="c-inline-list__item-link">Trip.ee</a>
-                                </li>
-                                <li class="c-inline-list__item">
-                                    1 nädal tagasi
-                                </li>
-                                <li class="c-inline-list__item">
-                                    Euroopa
-                                </li>
-                                <li class="c-inline-list__item">
-                                    <a href="http://localhost:8000/user/111" class="c-inline-list__item-link">Jälgi</a>
-                                </li>
+                                @include('component.content.text', [
+                                    'without_wrapper' => true,
+                                    'content' => $content
+                                ])
+                                @include('component.actions.list', ['actions' => $content->getActions()])
                             </ul>
                         </div>
                         <div class="r-flights__content-header-meta-item">
                             @include('component.flags', ['flags' => $content->getFlags()])
                         </div>
                     </div>
-
-                    {{--
-
-                    @if (strtotime($content->end_at) <= strtotime(Carbon\Carbon::now()))
-                        <div class="r-flights__content-header-meta">
-                            @include('component.content.text', ['content' => $content])
-                        </div>
-                    @endif
-
-                    <div class="m-small-offset-bottom">
-                        @if (count($content->getActions()))
-                        <div class="c-columns m-2-cols">
-                        @else
-                        <div class="c-columns m-1-cols">
-                        @endif
-                            <div class="c-columns__item">
-                                @include('component.flags', ['flags' => $content->getFlags()])
-                            </div>
-                            @if (count($content->getActions()))
-                                <div class="c-columns__item">
-                                    @include('component.actions', ['actions' => $content->getActions()])
-                                </div>
-                            @endif
-                        </div>
-                    </div>
-
-                    --}}
 
                     @if (strtotime($content->end_at) < strtotime(Carbon\Carbon::now()))
                         @include('component.alert', [
@@ -121,7 +84,7 @@
                     <div class="r-block__header">
                         <div class="r-block__header-title">
                             @include('component.title', [
-                                'title' => 'Soovita pakkumist sõpradele',
+                                'title' => trans('content.share.post.title'),
                                 'modifiers' => 'm-large m-green'
                             ])
                         </div>
