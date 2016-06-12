@@ -146,9 +146,9 @@
             <div class="r-home__news-wrap">
                 <div class="r-home__news-column m-first">
 
-                    @include('component.promo', ['promo' => 'sidebar_large m-small-margin'])
+                    @include('component.promo', ['promo' => 'sidebar_large'])
 
-                    @include('component.promo', ['promo' => 'sidebar_small m-small-margin'])
+                    @include('component.promo', ['promo' => 'sidebar_small'])
 
                 </div>
 
@@ -194,7 +194,7 @@
                             ])
                         </div>
                     </div>
-                   @include('component.promo', ['promo' => 'body m-margin'])
+                   @include('component.promo', ['promo' => 'body'])
                 </div>
             </div>
         </div>
