@@ -145,7 +145,7 @@
                 <div class="r-block__inner">
 
                     @include('component.about', [
-                        'title' => trans('content.travelmate.about.text'),
+                        'title' => count($about) ? str_limit($about->first()->body_filtered, 300) : null,
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
