@@ -19,7 +19,6 @@ modifiers:
 
 --}}
 
-{{ dump($promo) }}
 @if (isset($promo) && $promo)
 <div id='{{ config("promo.$promo.id2") }}' style='width:{{ config("promo.$promo.width") }}px; height:{{ config("promo.$promo.height") }}px;'>
      <script type='text/javascript'>
