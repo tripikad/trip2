@@ -80,11 +80,11 @@
                                 'icon' => 'icon-arrow-right'
                             ]
                         ],
-                        'button' => [
+                        'button' => (! Auth::user() ? [
                             'title' => trans('frontpage.index.about.register'),
                             'route' => route('register.form'),
                             'modifiers' => 'm-block'
-                        ]
+                        ] : null)
                     ])
                 </div>
             </div>
