@@ -34,7 +34,7 @@ class TravelmateTest extends TestCase
             ->seeInDatabase('contents', [
                 'user_id' => $creator_user->id,
                 'title' => 'Creator title travelmate',
-                'start_at' => $datetime,
+                'start_at' => $year.'-'.$month.'-'.$year.' 00:00:00',
                 'type' => 'travelmate',
                 'status' => 1,
             ]);
@@ -73,7 +73,7 @@ class TravelmateTest extends TestCase
             ->seeInDatabase('contents', [
                 'user_id' => $regular_user->id,
                 'title' => 'Hello title',
-                'start_at' => $datetime,
+                'start_at' => $year.'-'.$month.'-'.$year.' 00:00:00',
                 'type' => 'travelmate',
                 'status' => 1,
             ]);
@@ -99,7 +99,7 @@ class TravelmateTest extends TestCase
                 ->seeInDatabase('contents', [
                     'user_id' => $regular_user->id,
                     'title' => 'Hola titulo',
-                    'start_at' => $new_datetime,
+                    'start_at' => $year.'-'.$month.'-'.$year.' 00:00:00',
                     'type' => 'travelmate',
                     'status' => 1,
                 ]);
@@ -135,7 +135,7 @@ class TravelmateTest extends TestCase
             ->see('Creator title travelmate')
             ->seeInDatabase('contents', [
                 'user_id' => $creator_user->id,
-                'start_at' => $datetime,
+                'start_at' => $year.'-'.$month.'-'.$year.' 00:00:00',
                 'title' => 'Creator title travelmate',
                 'body' => 'Creator body travelmate',
                 'type' => 'travelmate',
@@ -165,7 +165,7 @@ class TravelmateTest extends TestCase
             ]))
             ->seeInDatabase('contents', [
                 'user_id' => $creator_user->id,
-                'start_at' => $datetime,
+                'start_at' => $year.'-'.$month.'-'.$year.' 00:00:00',
                 'title' => 'Editor title travelmate',
                 'body' => 'Editor body travelmate',
                 'type' => 'travelmate',
