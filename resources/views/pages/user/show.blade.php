@@ -27,7 +27,7 @@
 
             @include('component.masthead', [
                 'modifiers' => 'm-alternative m-profile',
-                'image' => \App\Image::getRandom()
+                'image' => \App\Image::getHeader()
             ])
 
         </div>

@@ -14,7 +14,7 @@
     <div class="r-travelmates__masthead">
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
-            'image' => \App\Image::getRandom(),
+            'image' => \App\Image::getHeader(),
             'subtitle' => ''
         ])
     </div>
@@ -80,6 +80,6 @@
 @section('footer')
     @include('component.footer', [
         'modifiers' => 'm-alternative',
-        'image' => \App\Image::getRandom()
+        'image' => \App\Image::getFooter()
     ])
 @stop

@@ -14,7 +14,7 @@
         <div class="r-general__masthead">
             @include('component.masthead', [
                 'modifiers' => 'm-alternative m-small',
-                'image' => ($content->imagePreset('large') ? $content->imagePreset('large') : \App\Image::getRandom()),
+                'image' => ($content->imagePreset('large') ? $content->imagePreset('large') : \App\Image::getHeader()),
                 'actions' => view('component.actions', ['actions' => $content->getActions()]),
             ])
         </div>
@@ -79,6 +79,6 @@
 @section('footer')
     @include('component.footer', [
         'modifiers' => 'm-alternative',
-        'image' => \App\Image::getRandom()
+        'image' => \App\Image::getFooter()
     ])
 @stop

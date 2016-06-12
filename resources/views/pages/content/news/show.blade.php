@@ -73,6 +73,6 @@
 @section('footer')
     @include('component.footer', [
         'modifiers' => 'm-alternative',
-        'image' => \App\Image::getRandom()
+        'image' => \App\Image::getFooter()
     ])
 @stop
