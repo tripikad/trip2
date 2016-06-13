@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Image;
 use Socialite;
+use Log;
 
 class SocialController extends Controller
 {
@@ -32,6 +33,10 @@ class SocialController extends Controller
         if ($authUser) {
             Auth::login($authUser, true);
 
+            Log::info('Facebook social login', [
+                'name' =>  $authUser->name,
+            ]);
+
             return redirect()->route('frontpage.index')->with('info', trans('auth.login.login.info'));
         } else {
             return redirect()->route('register.form')->with('info', trans('auth.login.facebook.user.error'));
@@ -50,6 +55,10 @@ class SocialController extends Controller
 
         if ($authUser) {
             Auth::login($authUser, true);
+
+            Log::info('Google social login', [
+                'name' =>  $authUser->name,
+            ]);
 
             return redirect()->route('frontpage.index')->with('info', trans('auth.login.login.info'));
         } else {
