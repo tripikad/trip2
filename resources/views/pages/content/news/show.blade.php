@@ -21,50 +21,54 @@
 
         <div class="r-general__content-wrap m-large-offset-bottom">
             <div class="r-general__content">
-                @include('component.row', [
-                    'text' => view('component.content.text', ['content' => $content]),
-                    'extra' => view('component.flags', ['flags' => $content->getFlags()]),
-                    'body' => [
-                        'modifiers' => 'm-large-offset-top  m-large-offset-bottom',
-                        'text' => $content->body_filtered,
-                    ]
-                ])
+                <div class="r-medium-wrapper__center">
+                    <div class="r-container">
+                        @include('component.row', [
+                            'text' => view('component.content.text', ['content' => $content]),
+                            'extra' => view('component.flags', ['flags' => $content->getFlags()]),
+                            'body' => [
+                                'modifiers' => 'm-large-offset-top  m-large-offset-bottom',
+                                'text' => $content->body_filtered,
+                            ]
+                        ])
 
-                @if (isset($comments) && count($comments))
-                    <div class="r-block">
-                        <div class="r-block__header">
-                            <div class="r-block__header-title">
-                                @include('component.title', [
-                                    'title' => trans('content.comments.title'),
-                                    'modifiers' => 'm-green'
-                                ])
-                            </div>
-                        </div>
+                        @if (isset($comments) && count($comments))
+                            <div class="r-block">
+                                <div class="r-block__header">
+                                    <div class="r-block__header-title">
+                                        @include('component.title', [
+                                            'title' => trans('content.comments.title'),
+                                            'modifiers' => 'm-green'
+                                        ])
+                                    </div>
+                                </div>
 
-                        <div class="r-block__body">
-                            @include('component.comment.index', ['comments' => $comments])
-                        </div>
-                    </div>
-                @endif
-
-                @if (\Auth::check())
-                    <div class="r-block">
-                        <div class="r-block__inner">
-                            <div class="r-block__header">
-                                <div class="r-block__header-title">
-                                    @include('component.title', [
-                                        'title' => trans('content.action.add.comment'),
-                                        'modifiers' => 'm-large m-green'
-                                    ])
+                                <div class="r-block__body">
+                                    @include('component.comment.index', ['comments' => $comments])
                                 </div>
                             </div>
+                        @endif
 
-                            <div class="r-block__body">
-                                @include('component.comment.create')
+                        @if (\Auth::check())
+                            <div class="r-block">
+                                <div class="r-block__inner">
+                                    <div class="r-block__header">
+                                        <div class="r-block__header-title">
+                                            @include('component.title', [
+                                                'title' => trans('content.action.add.comment'),
+                                                'modifiers' => 'm-large m-green'
+                                            ])
+                                        </div>
+                                    </div>
+
+                                    <div class="r-block__body">
+                                        @include('component.comment.create')
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
-                @endif
+                </div>
             </div>
         </div>
     </div>

@@ -63,3 +63,22 @@
             }
         }
     }
+
+    .r-medium-wrapper__center {
+
+        width: 100%;
+        float: left;
+        text-align: center;
+
+        .r-container {
+
+            width: 100%;
+            display: inline-block;
+            text-align: left;
+
+            @include respond-to(desktop) {
+
+                width: 70%;
+            }
+        }
+    }
