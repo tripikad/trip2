@@ -64,7 +64,7 @@ class CommentController extends Controller
                 ->content
                 ->followersEmails()
                 ->forget(Auth::user()->id)
-                ->count()
+                ->count(),
         ]);
 
         return redirect()->route('content.show', [$type, $content_id, '#comment-'.$comment->id]);
