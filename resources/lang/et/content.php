@@ -47,8 +47,8 @@ return [
     'field.image.selected.title' => 'Uus pilt on valitud',
 
     'index.filter.title' => 'Filtreeri',
-    'index.filter.field.destination.title' => 'Kõik',
-    'index.filter.field.topic.title' => 'Kõik',
+    'index.filter.field.destination.title' => 'Vali sihtkoht',
+    'index.filter.field.topic.title' => 'Vali valdkond',
     'index.filter.submit.title' => 'Filtreeri',
     'index.filter.reset.title' => 'Lähtesta',
     'index.filter.destination.title' => 'Vaata ka meie :destination lehte',

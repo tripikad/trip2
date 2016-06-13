@@ -25,6 +25,7 @@
         position: absolute;
         top: -$spacer * 32;
         z-index: 1;
+        opacity: 0.3;
         display: none;
 
         @include respond-to(tablet) {

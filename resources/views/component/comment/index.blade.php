@@ -1,8 +1,9 @@
 @if (count($comments))
 
     @foreach ($comments as $index => $comment)
-
+        <a id="comment-{{ $comment->id }}" name="comment-{{ $comment->id }}"></a>
         @include('component.content.forum.post', [
+            'modifiers' => (! $comment->status ? 'm-unpublished' : ''),
             'profile' => [
                 'modifiers' => 'm-full m-status',
                 'image' => $comment->user->imagePreset('xsmall_square'),
