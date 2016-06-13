@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
+use Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -21,6 +22,11 @@ class LoginController extends Controller
         ]);
 
         if ($this->signIn($request)) {
+
+            Log::info('User logged in', [
+                'name' =>  $request->name,
+            ]);
+
             return redirect('/')
                 ->with('info', trans('auth.login.login.info'));
         }
