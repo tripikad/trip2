@@ -60,6 +60,11 @@ class CommentController extends Controller
             'user' =>  Auth::user()->name,
             'body' =>  $request->get('body'),
             'link' => route('content.show', [$type, $content_id, '#comment-'.$comment->id]),
+            'followers' => $comment
+                ->content
+                ->followersEmails()
+                ->forget(Auth::user()->id)
+                ->count()
         ]);
 
         return redirect()->route('content.show', [$type, $content_id, '#comment-'.$comment->id]);
