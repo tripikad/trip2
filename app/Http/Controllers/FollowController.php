@@ -31,7 +31,7 @@ class FollowController extends Controller
 
             Log::info('Content has been followed', [
                 'user' =>  Auth::user()->name,
-                'link' => route('content.show', [$type, $id])
+                'link' => route('content.show', [$type, $id]),
             ]);
 
             return back()

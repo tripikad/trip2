@@ -50,10 +50,9 @@ class FlagController extends Controller
                             'data' =>  [
                                 'type' => $flaggable_type,
                                 'id' => $flaggable_id,
-                                'flagtype' => $flag_type
-                            ]
+                                'flagtype' => $flag_type,
+                            ],
                         ]);
-
                     }
                 }
             }
