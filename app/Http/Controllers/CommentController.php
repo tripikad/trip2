@@ -24,6 +24,7 @@ class CommentController extends Controller
 
         $comment = Auth::user()->comments()->create(array_merge($request->all(), $fields));
 
+        /* 
         if ($followersEmails = $comment
                 ->content
                 ->followersEmails()
@@ -55,6 +56,8 @@ class CommentController extends Controller
                 });
             }
         }
+        
+        */
 
         Log::info('New comment added', [
             'user' =>  Auth::user()->name,
