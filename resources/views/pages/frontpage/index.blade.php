@@ -66,7 +66,7 @@
             </div>
         @endif
 
-        @if (isset($content) && count($content) > 0)
+        @if (isset($content) && count($content) > 0 && ! Auth::user())
             <div class="r-home__about">
                 <div class="r-home__about-wrap">
                     @include('component.about', [
@@ -80,11 +80,11 @@
                                 'icon' => 'icon-arrow-right'
                             ]
                         ],
-                        'button' => (! Auth::user() ? [
+                        'button' => [
                             'title' => trans('frontpage.index.about.register'),
                             'route' => route('register.form'),
                             'modifiers' => 'm-block'
-                        ] : null)
+                        ]
                     ])
                 </div>
             </div>
