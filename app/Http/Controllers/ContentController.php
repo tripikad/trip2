@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
+use Log;
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -343,6 +344,14 @@ class ContentController extends Controller
             }
 
             $content->save();
+
+            Log::info('New content added', [
+                'user' =>  Auth::user()->name,
+                'title' =>  $request->get('title'),
+                'type' =>  $type,
+                'body' =>  $request->get('body'),
+                'link' => route('content.show', [$type, $content]),
+            ]);
 
             if (! $id) {
                 if ($request->hasFile('file') && array_key_exists('file', $allowedFields)) {

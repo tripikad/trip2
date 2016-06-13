@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use View;
+use Log;
 use App\Message;
 use App\User;
 
@@ -81,6 +82,8 @@ class MessageController extends Controller
                 $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
             });
         }
+
+        Log::info('A private message has been sent');
 
         return redirect()->route('message.index.with', [
             $user_id_from, $user_id_to, '#message-'.$message->id,

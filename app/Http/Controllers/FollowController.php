@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use View;
+use Log;
+use Auth;
 use App\User;
 
 class FollowController extends Controller
@@ -25,6 +27,11 @@ class FollowController extends Controller
             auth()->user()->follows()->create([
                 'followable_id' => $id,
                 'followable_type' => 'App\Content',
+            ]);
+
+            Log::info('Content has been followed', [
+                'user' =>  Auth::user()->name,
+                'link' => route('content.show', [$type, $id]),
             ]);
 
             return back()
