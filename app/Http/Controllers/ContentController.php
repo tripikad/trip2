@@ -350,7 +350,7 @@ class ContentController extends Controller
                 'title' =>  $request->get('title'),
                 'type' =>  $type,
                 'body' =>  $request->get('body'),
-                'link' => route('content.show', [$type, $content])
+                'link' => route('content.show', [$type, $content]),
             ]);
 
             if (! $id) {
