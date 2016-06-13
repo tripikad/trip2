@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Mail;
+use Log;
 
 class CommentController extends Controller
 {
@@ -54,6 +55,12 @@ class CommentController extends Controller
                 });
             }
         }
+
+        Log::info('New comment added', [
+            'user' =>  Auth::user()->name,
+            'body' =>  $request->get('body'),
+            'link' => route('content.show', [$type, $content_id, '#comment-'.$comment->id])
+        ]);
 
         return redirect()->route('content.show', [$type, $content_id, '#comment-'.$comment->id]);
     }
