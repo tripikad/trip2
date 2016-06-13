@@ -56,7 +56,13 @@ class RegistrationController extends Controller
 
     public function confirm($token)
     {
-        User::where('registration_token', $token)->firstOrFail()->confirmEmail();
+        $user = User::where('registration_token', $token)->firstOrFail();
+        $user->confirmEmail();
+
+        Log::info('New user registrered', [
+            'name' =>  $user->name,
+            'link' =>  route('user.show', $user),
+        ]);
 
         return redirect()
             ->route('login.form')

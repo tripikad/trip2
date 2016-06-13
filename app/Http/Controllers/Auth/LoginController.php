@@ -22,6 +22,7 @@ class LoginController extends Controller
         ]);
 
         if ($this->signIn($request)) {
+            
             Log::info('User logged in', [
                 'name' =>  $request->name,
             ]);
