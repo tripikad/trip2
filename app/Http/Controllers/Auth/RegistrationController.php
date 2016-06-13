@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mail;
 use Hash;
+use Log;
 use App\User;
 
 class RegistrationController extends Controller
@@ -49,6 +50,11 @@ class RegistrationController extends Controller
             $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
         });
 
+        Log::info('New user registered', [
+            'name' =>  $user->name,
+            'link' =>  route('user.show', [$user]),
+        ]);
+
         return redirect()
             ->route('login.form')
             ->with('info', trans('auth.register.sent.info'));
@@ -59,9 +65,9 @@ class RegistrationController extends Controller
         $user = User::where('registration_token', $token)->firstOrFail();
         $user->confirmEmail();
 
-        Log::info('New user registrered', [
+        Log::info('New user confirmed registration', [
             'name' =>  $user->name,
-            'link' =>  route('user.show', $user),
+            'link' =>  route('user.show', [$user]),
         ]);
 
         return redirect()
