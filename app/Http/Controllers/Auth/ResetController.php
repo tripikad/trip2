@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\User;
+use Log;
 
 class ResetController extends Controller
 {
@@ -59,6 +60,10 @@ class ResetController extends Controller
 
             $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
         });
+
+        Log::info('Password reset request has been submitted', [
+            'email' =>  $request->email,
+        ]);
 
         switch ($response) {
             case Password::RESET_LINK_SENT:

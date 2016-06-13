@@ -21,7 +21,7 @@ modifiers:
 
 
 @if (isset($promo) && $promo)
-    <div id="{{ config("promo.$promo.id2") }}" class="c-promo {{ (isset($modifiers) && $modifiers ? $modifiers : 'm-'.$promo)  }}" style="display: none;"></div>
+    <div id="{{ config('promo.'.explode(' ', $promo)[0].'.id2') }}" class="c-promo {{ (isset($modifiers) && $modifiers ? $modifiers : 'm-'.$promo)  }}"></div>
 @else
     <div class="c-promo {{ $modifiers or '' }}">
         <a href="{{ $route }}" class="c-promo__link">

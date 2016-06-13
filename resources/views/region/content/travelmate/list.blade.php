@@ -18,7 +18,7 @@
                                 : null).
                                     ($item->user->age ? $item->user->age : null),
                 'title' => $item->title,
-                'tags' => $item->destinations->transform(function ($item_destination) {
+                'tags' => $item->destinations->take(0)->transform(function ($item_destination) {
                     return [
                         'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
                         'title' => $item_destination->name

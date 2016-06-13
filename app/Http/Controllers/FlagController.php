@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App;
 use Request;
+use Log;
 
 class FlagController extends Controller
 {
@@ -43,6 +44,15 @@ class FlagController extends Controller
                         $flag->delete();
                     } else {
                         Auth::user()->flags()->create($fields);
+
+                        Log::info('Content has been flagged', [
+                            'user' =>  Auth::user()->name,
+                            'data' =>  [
+                                'type' => $flaggable_type,
+                                'id' => $flaggable_id,
+                                'flagtype' => $flag_type,
+                            ],
+                        ]);
                     }
                 }
             }
