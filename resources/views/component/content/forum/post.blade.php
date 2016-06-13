@@ -35,11 +35,11 @@ code: |
 
 @if (isset($title))
 
-<div class="c-forum-post m-main">
+<div class="c-forum-post m-main {{ $modifiers or '' }}">
 
 @else
 
-<div class="c-forum-post">
+<div class="c-forum-post {{ $modifiers or '' }}">
 
 @endif
 

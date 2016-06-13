@@ -9,6 +9,11 @@
 
         margin-bottom: 0;
     }
+
+    &.m-unpublished {
+
+        background: rgba(255, 182, 193, 0.7);
+    }
 }
 
     .c-forum-post__title {
