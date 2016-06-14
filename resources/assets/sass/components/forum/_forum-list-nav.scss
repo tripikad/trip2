@@ -14,11 +14,6 @@
             position: static;
         }
 
-        @include respond-to(tablet) {
-
-            margin-bottom: $spacer * 2;
-        }
-
         &.m-button {
 
             margin-bottom: $spacer;
