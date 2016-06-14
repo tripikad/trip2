@@ -240,4 +240,9 @@
 
         font-size: $font-size-normal;
         line-height: $font-size-normal * 1.5;
+
+        a {
+
+            word-wrap: break-word;
+        }
     }
