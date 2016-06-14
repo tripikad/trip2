@@ -16,7 +16,7 @@
         $(document).ready(function() {
             var $alert = $('.c-alert');
             if ($alert.length) {
-                $alert.delay(1200).slideUp('slow', function(){
+                $alert.delay(900).slideUp('slow', function(){
                     $(this).remove();
                 });
             }
