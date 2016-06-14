@@ -11,7 +11,15 @@
         @endif
     ">
 
-        {!! $content->body_filtered !!}
+        <div class="r-medium-wrapper__center">
+            
+            <div class="r-container">
+            
+                {!! $content->body_filtered !!}
+
+            </div>
+        
+        </div>
 
     </div>
 
