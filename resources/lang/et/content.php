@@ -319,6 +319,8 @@ return [
 
     // Static
 
+    'static.index.title' => 'Infoks',
+
     'static.edit.field.title.title' => 'Pealkiri',
     'static.edit.field.title.help' => '',
 
