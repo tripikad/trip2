@@ -6,7 +6,7 @@ return [
 
         'with' => ['images', 'topics'],
         'orderBy' => [
-            'field' => 'end_at',
+            'field' => 'created_at',
             'order' => 'desc',
         ],
         'expire' => [
