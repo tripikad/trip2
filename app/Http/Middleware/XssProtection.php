@@ -21,7 +21,7 @@ class XssProtection
         $request->merge($input);
 
         if ($request->has('body')) {
-            if (! preg_match('#('.implode('|', config('site.allowAllTags')).')#', 'content/flight')) {
+            if (! preg_match('#('.implode('|', config('site.allowAllTags')).')#', $request->path())) {
                 $request->merge(['body' => strip_tags($request->body, config('site.allowedtags'))]);
             } else {
                 $request->merge(['body' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", '', $request->body)))]);

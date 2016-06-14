@@ -28,7 +28,7 @@ class Main
             }
         }
 
-        return nl2br($filteredBody);
+        return str_replace(array("\n", "\t", "\r"), '', nl2br($filteredBody));
     }
 
     public static function getExpireData($type, $withField = 1)
