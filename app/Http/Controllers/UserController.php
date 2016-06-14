@@ -234,9 +234,7 @@ class UserController extends Controller
 
     public function destinationsIndex($id)
     {
-        $user = User::with(['flags.flaggable' => function ($query) use ($id) {
-            $query->where('user_id', $id);
-        }])->findorFail($id);
+        $user = User::with(['flags.flaggable'])->findorFail($id);
 
         $user_have_been = $user->destinationHaveBeen()->lists('flaggable_id')->toArray();
         $have_been_destinations = Destination::getNames();
