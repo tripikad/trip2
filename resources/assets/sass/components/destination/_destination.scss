@@ -22,7 +22,7 @@
         @include font-smoothing;
 
         color: $color-white;
-        font-size: 28px;
+        font-size: $font-size-larger;
         font-weight: $font-weight-bold;
     }
 
