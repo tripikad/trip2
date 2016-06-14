@@ -76,9 +76,9 @@
             display: inline-block;
             text-align: left;
 
-            @include respond-to(desktop) {
+            @include respond-to(tablet) {
 
-                width: 50%;
+                width: 70%;
                 
             }
         }
