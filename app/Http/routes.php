@@ -196,6 +196,10 @@ Route::get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 
 Route::get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
 
+// API
+
+Route::get('api/destinations', 'ApiController@destinations');
+
 // All other content pages
 
 Route::get('{path}', 'RedirectController@redirectContentBySlug');
