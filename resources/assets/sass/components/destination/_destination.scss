@@ -13,7 +13,7 @@
 
         @include respond-to(desktop) {
 
-            padding: $spacer * 2 $spacer * 2.5;
+            padding: $spacer * 1.5 + 2 $spacer * 2.5;
         }
     }
 
@@ -29,8 +29,12 @@
         .c-destination__title-link {
 
             color: $color-white;
+            line-height: 1.4;
             text-decoration: none;
+            text-overflow: ellipsis;
+            overflow: hidden;
             display: block;
+            white-space: nowrap;
 
             &:hover {
 

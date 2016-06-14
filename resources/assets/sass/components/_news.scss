@@ -42,7 +42,7 @@
 
             height: $spacer * 7.5;
 
-            @include respond-to(desktop) {
+            @include respond-to(desktop-large) {
 
                 width: $spacer * 12;
                 margin-bottom: 0;
@@ -55,7 +55,7 @@
 
         .m-smaller & {
 
-            @include respond-to(desktop) {
+            @include respond-to(desktop-large) {
 
                 margin-left: $spacer * 14;
             }
