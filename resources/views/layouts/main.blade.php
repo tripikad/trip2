@@ -7,7 +7,8 @@
         <meta name="description" content="@yield('head_description')">
         <meta property="og:title" content="@yield('head_title')">
         <meta property="og:description" content="@yield('head_description')">
-        <meta property="og:url" content="{{ Request::root() }}">
+        <meta property="og:image" content="@yield('head_image')">
+        <meta property="og:url" content="{{ Request::url() }}">
         <meta property="og:type" content="@yield('fb_type', 'website')">
         <meta property="og:locale" content="et_EE">
         <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}">
