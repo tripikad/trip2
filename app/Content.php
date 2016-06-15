@@ -161,19 +161,13 @@ class Content extends Model
 
     public function getHeadTitle()
     {
-        
-        return isset($this->price) ? $this->title . ' ' . $this->price . '€' : $this->title;
-    
+        return isset($this->price) ? $this->title.' '.$this->price.'€' : $this->title;
     }
 
     public function getHeadDescription()
     {
-        
         $description = str_replace(["\n", "\t", "\r"], '', strip_tags($this->body));
 
         return str_limit($description, 200);
-    
     }
-
-
 }
