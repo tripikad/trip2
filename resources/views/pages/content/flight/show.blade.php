@@ -2,6 +2,10 @@
 
 @section('title', trans("content.$type.index.title"))
 
+@section('head_title',  $content->getHeadTitle())
+
+@section('head_description', $content->getHeadDescription())
+
 @section('header')
 
     @include('component.header',[

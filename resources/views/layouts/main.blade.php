@@ -4,13 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ (trim($__env->yieldContent('title')) ? trim($__env->yieldContent('title')).' - ' : '')  }}{{ config('site.name') }}</title>
-        <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}">
+        <meta name="description" content="@yield('head_description')">
+        <meta property="og:title" content="@yield('head_title')">
+        <meta property="og:description" content="@yield('head_description')">
         <meta property="og:url" content="{{ Request::root() }}">
         <meta property="og:type" content="@yield('fb_type', 'website')">
-        <meta property="og:title" content="{{ (trim($__env->yieldContent('title')) ? trim($__env->yieldContent('title')).' - ' : '')  }}{{ config('site.name') }}">
-        <meta property="og:description" content="@yield('fb_description')">
         <meta property="og:image" content="@yield('fb_image')">
         <meta property="og:locale" content="et_EE">
+        <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}">
+        <meta property="twitter:title" content="@yield('head_title')">
+        <meta name="twitter:description" content="@yield('head_description')">
         <meta property="promos" content="{{ rawurlencode(json_encode(config('promo'))) }}">
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
