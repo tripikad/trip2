@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ (trim($__env->yieldContent('title')) ? trim($__env->yieldContent('title')).' - ' : '')  }}{{ config('site.name') }}</title>
         <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}">
-        <meta property="og:url" content="{{ Request::url() }}">
+        <meta property="og:url" content="{{ Request::root() }}">
         <meta property="og:type" content="@yield('fb_type', 'website')">
         <meta property="og:title" content="{{ (trim($__env->yieldContent('title')) ? trim($__env->yieldContent('title')).' - ' : '')  }}{{ config('site.name') }}">
         <meta property="og:description" content="@yield('fb_description')">

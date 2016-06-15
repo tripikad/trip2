@@ -2,9 +2,6 @@
 
 @section('title', trans("content.$type.index.title"))
 
-@section('fb_description', $content->title)
-@section('fb_image', env('FULL_BASE_URL').$content->imagePreset('medium'))
-
 @section('header')
 
     @include('component.header',[
