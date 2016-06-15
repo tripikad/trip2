@@ -6,6 +6,8 @@
 
 @section('head_description', $content->getHeadDescription())
 
+@section('head_image', $content->imagePreset('large'))
+
 @section('header')
 
     @include('component.header',[
