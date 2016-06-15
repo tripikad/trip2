@@ -167,6 +167,7 @@ class Content extends Model
     public function getHeadDescription()
     {
         $description = str_replace(["\n", "\t", "\r"], '', strip_tags($this->body));
+        $description = preg_replace("/\[\[([0-9]+)\]\]/", '', $this->body);
 
         return str_limit($description, 200);
     }
