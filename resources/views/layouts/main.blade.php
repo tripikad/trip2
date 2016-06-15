@@ -13,6 +13,7 @@
         <meta property="og:locale" content="et_EE">
         <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}">
         <meta property="twitter:title" content="@yield('head_title')">
+        <meta property="twitter:image" content="@yield('head_image')">
         <meta name="twitter:description" content="@yield('head_description')">
         <meta property="promos" content="{{ rawurlencode(json_encode(config('promo'))) }}">
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">

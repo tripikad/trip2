@@ -10,6 +10,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
 
         \App\Console\Commands\GenerateUserRankings::class,
+        \App\Console\Commands\ConvertOldUser::class,
 
     ];
 
