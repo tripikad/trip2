@@ -63,11 +63,31 @@ modifiers:
 
         @if (isset($title))
 
-        <h1 class="c-masthead__title">{{ $title }}</h1>
+        <h1 class="c-masthead__title">
+            @if (isset($route) && $route != '')
+                <a href="{{ $route }}">
+            @endif
+
+            {{ $title }}
+
+            @if (isset($route) && $route != '')
+                </a>
+            @endif
+        </h1>
 
         @else
 
-        <h1 class="c-masthead__title">@yield('title')</h1>
+        <h1 class="c-masthead__title">
+            @if (isset($route) && $route != '')
+                <a href="{{ $route }}">
+            @endif
+
+            @yield('title')
+
+            @if (isset($route) && $route != '')
+                </a>
+            @endif
+        </h1>
 
         @endif
 

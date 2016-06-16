@@ -35,6 +35,7 @@
     <div class="r-flights__masthead">
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
+            'route' => route('content.index', [$content->type]),
             'subtitle' => trans('content.flight.show.action.all'),
             'subtitle_route' => route('content.index', [$content->type]),
             'image' => ($content->imagePreset('large') ?
