@@ -65,11 +65,9 @@
                 })
             ])
 
-            <div class="r-block m-small m-mobile-hide">
-
-                @include('component.promo', ['promo' => 'body'])
-
-            </div>
+            @if ($comments->count())
+                <a href="{{ route('content.show', [$content->type, $content]) . ($comments->lastPage() > 1 ? '?page=' . $comments->lastPage() : '') . '#comment-' . $comments->last()->id }}" class="m-center m-medium-offset-bottom">{{ trans('comment.action.latest.comment') }}</a>
+            @endif
 
             @if ($comments->perPage() < $comments->total())
 
@@ -90,6 +88,9 @@
                     )
                 ])
             @endif
+
+            <?php //dd($comments->last());
+            ?>
 
             @if ($comments->perPage() < $comments->total())
 
@@ -303,6 +304,12 @@
                 </div>
 
             @endif
+
+            <div class="r-block m-small m-mobile-hide">
+
+                @include('component.promo', ['promo' => 'sidebar_large'])
+
+            </div>
 
             @if (count($relative_flights))
 
