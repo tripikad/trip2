@@ -90,6 +90,16 @@ code: |
                 @endif
             </div>
 
+            @if(isset($thumbs))
+
+                <div class="c-forum-post__thumbs">
+
+                    {!! $thumbs !!}
+
+                </div>
+
+            @endif
+
         </div>
 
         <div class="c-forum-post__body">
@@ -112,39 +122,23 @@ code: |
 
         @endif
 
-        @if(isset($thumbs) || isset($tags))
+        @if(isset($tags))
 
-        <div class="c-forum-post__footer m-flex">
+            <div class="c-forum-post__footer m-flex">
+                <div class="c-forum-post__tags">
 
-            @if(isset($tags))
+                    @include('component.tags', [
+                        'modifiers' => 'm-small',
+                        'items' => $tags
+                    ])
 
-            <div class="c-forum-post__tags">
+                    @include('component.tags', [
+                        'modifiers' => 'm-small',
+                        'items' => $tags2
+                    ])
 
-                @include('component.tags', [
-                    'modifiers' => 'm-small',
-                    'items' => $tags
-                ])
-
-                @include('component.tags', [
-                    'modifiers' => 'm-small',
-                    'items' => $tags2
-                ])
-
+                </div>
             </div>
-
-            @endif
-
-            @if(isset($thumbs))
-
-            <div class="c-forum-post__thumbs">
-
-                {!! $thumbs !!}
-
-            </div>
-
-            @endif
-
-        </div>
 
         @endif
 
