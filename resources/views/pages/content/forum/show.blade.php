@@ -71,6 +71,16 @@
 
             </div>
 
+            @if ($comments->perPage() < $comments->total())
+
+                <div class="r-block m-small">
+                    @include('component.pagination.numbered', [
+                        'collection' => $comments
+                    ])
+                </div>
+
+            @endif
+
             @if (method_exists($comments, 'currentPage'))
 
                 @include('component.comment.index', [
@@ -81,12 +91,15 @@
                 ])
             @endif
 
-            <div class="r-block m-small">
+            @if ($comments->perPage() < $comments->total())
 
-                @include('component.pagination.numbered', [
-                    'collection' => $comments
-                ])
-            </div>
+                <div class="r-block m-small">
+                    @include('component.pagination.numbered', [
+                        'collection' => $comments
+                    ])
+                </div>
+
+            @endif
 
             @if (\Auth::check())
 
