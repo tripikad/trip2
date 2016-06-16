@@ -22,7 +22,7 @@ return [
             'daysTo' => false,
             'type' => 'datetime',
         ],
-        'paginate' => 25,
+        'paginate' => 35,
     ],
 
     'edit' => [

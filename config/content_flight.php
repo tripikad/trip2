@@ -15,7 +15,7 @@ return [
             'daysTo' => -700000000,
             'type' => 'datetime',
         ],
-        'paginate' => 24,
+        'paginate' => 25,
     ],
 
     'edit' => [

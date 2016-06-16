@@ -25,8 +25,29 @@
         <div class="r-flights__content">
 
             @if (count($contents))
-                @include('region.content.flight.list', [
-                    'items' => $contents->take(8)
+                @include('component.content.flight.block', [
+                    'items' => $contents->take(4)->transform(function ($content) {
+                        $content->destinations->push(['name' => $content->created_at]);
+
+                        return [
+                            'image' => $content->imagePreset('medium'),
+                            'route' => route('content.show', [$content->type, $content]),
+                            'title' => $content->title,
+                            'price' => trans('content.flight.index.from').' '.$content->price.config('site.currency.symbol'),
+                            'meta' => view('component.inline_list', [
+                                'modifiers' => 'm-light m-small',
+                                'items' => $content->destinations->transform(function ($content_destination, $key) {
+                                    $item = [
+                                        'title' => (isset($content_destination->name) ?
+                                            $content_destination->name :
+                                            view('component.date.relative', ['date' => $content_destination['name']]))
+                                    ];
+
+                                    return $item;
+                                })
+                            ]),
+                        ];
+                    })
                 ])
             @else
                 <div class="m-small-offset-bottom">
@@ -41,9 +62,30 @@
 
             @include('component.promo', ['promo' => 'body m-margin'])
 
-            @if (count($contents) > 8)
-                @include('region.content.flight.list', [
-                    'items' => $contents->splice(8)
+            @if (count($contents) > 4)
+                @include('component.content.flight.block', [
+                    'items' => $contents->splice(4)->transform(function ($content) {
+                        $content->destinations->push(['name' => $content->created_at]);
+
+                        return [
+                            'image' => $content->imagePreset('medium'),
+                            'route' => route('content.show', [$content->type, $content]),
+                            'title' => $content->title,
+                            'price' => trans('content.flight.index.from').' '.$content->price.config('site.currency.symbol'),
+                            'meta' => view('component.inline_list', [
+                                'modifiers' => 'm-light m-small',
+                                'items' => $content->destinations->transform(function ($content_destination, $key) {
+                                    $item = [
+                                        'title' => (isset($content_destination->name) ?
+                                            $content_destination->name :
+                                            view('component.date.relative', ['date' => $content_destination['name']]))
+                                        ];
+
+                                    return $item;
+                                })
+                            ]),
+                        ];
+                    })
                 ])
             @endif
 

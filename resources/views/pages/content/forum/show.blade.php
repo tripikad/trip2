@@ -65,11 +65,19 @@
                 })
             ])
 
-            <div class="r-block m-small m-mobile-hide">
+            @if ($comments->count())
+                <a href="{{ route('content.show', [$content->type, $content]) . ($comments->lastPage() > 1 ? '?page=' . $comments->lastPage() : '') . '#comment-' . $comments->last()->id }}" class="m-center m-medium-offset-bottom">{{ trans('comment.action.latest.comment') }}</a>
+            @endif
 
-                @include('component.promo', ['promo' => 'body'])
+            @if ($comments->perPage() < $comments->total())
 
-            </div>
+                <div class="r-block m-small">
+                    @include('component.pagination.numbered', [
+                        'collection' => $comments
+                    ])
+                </div>
+
+            @endif
 
             @if (method_exists($comments, 'currentPage'))
 
@@ -81,12 +89,18 @@
                 ])
             @endif
 
-            <div class="r-block m-small">
+            <?php //dd($comments->last());
+            ?>
 
-                @include('component.pagination.numbered', [
-                    'collection' => $comments
-                ])
-            </div>
+            @if ($comments->perPage() < $comments->total())
+
+                <div class="r-block m-small">
+                    @include('component.pagination.numbered', [
+                        'collection' => $comments
+                    ])
+                </div>
+
+            @endif
 
             @if (\Auth::check())
 
@@ -290,6 +304,12 @@
                 </div>
 
             @endif
+
+            <div class="r-block m-small m-mobile-hide">
+
+                @include('component.promo', ['promo' => 'sidebar_large'])
+
+            </div>
 
             @if (count($relative_flights))
 

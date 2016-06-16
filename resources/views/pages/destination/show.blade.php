@@ -125,7 +125,7 @@
                         @include('component.link', [
                             'modifiers' => 'm-tiny',
                             'title' => trans('destination.show.link.view.all'),
-                            'route' => route('content.index', ['flights'])
+                            'route' => route('search.results.type', ['flight']).'?q='.urlencode($destination->name)
                         ])
                     </div>
 

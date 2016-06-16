@@ -166,19 +166,27 @@ code: |
                 )!!}
 
             @elseif ($field['type'] == 'datetime')
+                @php
+                    if (isset($form['model']) && $form['model']) {
+                        $dateTime = \Carbon\Carbon::parse($form['model'][$key]);
+                    } else {
+                        $dateTime = \Carbon\Carbon::now();
+                    }
+                @endphp
+
                 <div class="c-columns m-3-cols m-space">
                     <div class="c-columns__item">
                         @include('component.date.select', [
                             'from' => 1,
                             'to' => 31,
-                            'selected' => \Carbon\Carbon::now()->day,
+                            'selected' => $dateTime->day,
                             'key' => $key.'_day'
                         ])
                     </div>
                     <div class="c-columns__item">
                         @include('component.date.select', [
                             'month' => true,
-                            'selected' => \Carbon\Carbon::now()->month,
+                            'selected' => $dateTime->month,
                             'key' => $key.'_month'
                         ])
                     </div>
@@ -186,7 +194,7 @@ code: |
                         @include('component.date.select', [
                             'from' => \Carbon\Carbon::now()->year,
                             'to' => \Carbon\Carbon::parse('+5 years')->year,
-                            'selected' => \Carbon\Carbon::now()->year,
+                            'selected' => $dateTime->year,
                             'key' => $key.'_year'
                         ])
                     </div>

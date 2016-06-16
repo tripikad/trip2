@@ -237,6 +237,17 @@
                     left: $spacer * 10.75;
                 }
             }
+
+            a {
+
+                text-decoration: none;
+                color: $color-text-black;
+            }
+
+            .c-masthead.m-alternative & a {
+
+                color: $color-white;
+            }
         }
 
         .c-masthead__subtitle {

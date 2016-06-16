@@ -127,6 +127,16 @@ a {
     margin-bottom: $spacer;
 }
 
+.m-medium-offset-top {
+
+    margin-top: $spacer * 1.6;
+}
+
+.m-medium-offset-bottom {
+
+    margin-bottom: $spacer * 1.6;
+}
+
 .m-large-offset-top {
 
     margin-top: $spacer * 2;
@@ -302,4 +312,11 @@ table {
 .m-pull-right {
 
     float: right;
+}
+
+.m-center {
+
+    text-align: center;
+    width: 100%;
+    display: inline-block;
 }
