@@ -8,6 +8,12 @@
     ])
 @stop
 
+@section('head_title',  $content->getHeadTitle())
+
+@section('head_description', $content->getHeadDescription())
+
+@section('head_image', $content->getHeadImage())
+
 @section('content')
 
     <div class="r-general m-col-1">
