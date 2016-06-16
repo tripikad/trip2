@@ -11,6 +11,8 @@ return [
 
     'index.row.text' => ':user :created_at',
 
+    'action.latest.comment' => 'Mine uusima kommentaari juurde',
+
     'create.field.body.title' => 'Kommentaar',
     'create.submit.title' => 'Lisa kommentaar',
 
