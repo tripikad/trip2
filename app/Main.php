@@ -19,7 +19,7 @@ class Main
         }
 
         //add _blank if not trip.ee
-        if ($processedBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is','\\1 target="_blank">',$filteredBody)) {
+        if ($processedBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $filteredBody)) {
             $filteredBody = $processedBody;
         }
 
