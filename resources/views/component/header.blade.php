@@ -106,7 +106,15 @@
 
     @endif
 
+    @if (isset($modifiers) && $modifiers === 'm-alternative')
+
     <a href="#" class="c-header__nav-trigger js-header__nav-trigger">
+
+    @else
+
+    <a href="#" class="c-header__nav-trigger m-dark js-header__nav-trigger">
+
+    @endif
         <span></span>
         <span></span>
         <span></span>
