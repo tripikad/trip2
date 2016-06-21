@@ -95,6 +95,22 @@
             }
         }
 
+        &.m-dark {
+
+            span {
+
+                background: $color-text-black;
+            }
+        }
+
+        &.m-active.m-dark {
+
+            span {
+
+                background: $color-white;
+            }
+        }
+
         &.m-active {
 
             span {
