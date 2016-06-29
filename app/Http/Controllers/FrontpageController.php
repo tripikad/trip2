@@ -38,7 +38,7 @@ class FrontpageController extends Controller
             ],
             'forums' => [
                 'skip' => null,
-                'take' => 5,
+                'take' => 12,
                 'type' => ['forum', 'buysell', 'expat'],
                 'status' => 1,
                 'latest' => 'updated_at',
