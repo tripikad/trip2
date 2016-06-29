@@ -108,6 +108,13 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 // Additional blog (DUMMY)
 //Route::get('content/blog/profile', ['uses' => 'ContentController@blog_profile', 'as' => 'content.show.profile']);
 
+// Blog test pages
+
+Route::get('/blogtest', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@index', 'as' => 'index']);
+Route::get('/blogtest/show', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@show', 'as' => 'show']);
+Route::get('/blogtest/edit', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@edit', 'as' => 'edit']);
+Route::get('/blogtest/profile', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@profile', 'as' => 'profile']);
+
 // Comments
 
 Route::post('content/{type}/{id}/comment', ['middleware' => 'role:regular', 'uses' => 'CommentController@store', 'as' => 'comment.store']);
