@@ -7,7 +7,7 @@ use App\Content;
 
 class FeedController extends Controller
 {
-    public function flightsFeed()
+    public function index()
     {
         $feed = App::make('feed');
 
@@ -19,7 +19,7 @@ class FeedController extends Controller
             $feed->link = route('feed');
             $feed->setShortening(false);
 
-            $contents = Content::whereType('flight')->whereStatus(1)->latest()->take(15)->get();
+            $contents = Content::whereType('news')->whereStatus(1)->latest()->take(15)->get();
 
             foreach ($contents as $content) {
                 $feed->add(

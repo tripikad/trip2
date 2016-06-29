@@ -171,7 +171,7 @@ Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 
 
 // Atom feed
 
-Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightsFeed', 'as' => 'feed']);
+Route::get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
 
 // Styleguide
 
