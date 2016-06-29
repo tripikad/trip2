@@ -16,29 +16,6 @@
 
 @section('content')
 
-
-    @foreach ($contents as $content)
-
-        @include('component.row', [
-            'modifiers' => 'm-image',
-            'profile' => [
-                'modifiers' => '',
-                'image' => $content->user->imagePreset(),
-                'route' => route('user.show', [$content->user])
-            ],
-            'title' => $content->title,
-            'route' => route('content.show', [$content->type, $content->id]),
-            'text' => view('component.content.text', ['content' => $content]),
-            'body' => $content->body_filtered,
-        ])
-
-    @endforeach
-
-    @include('component.pagination.default', [
-        'collection' => $contents
-    ])
-    -->
-
 <div class="r-blog m-index">
 
     <div class="r-blog__masthead">
