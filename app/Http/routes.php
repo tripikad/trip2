@@ -137,7 +137,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     Route::get('{id}', ['uses' => 'UserController@show', 'as' => 'show']);
 
-    Route::get('{id}/edit', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@edit', 'as' => 'edit']);
+    Route::get('{id}/edit', ['middleware' => 'role:superuser,userowner', 'uses' => 'UserController@edit', 'as' => 'edit']);
 
     Route::put('{id}', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@update', 'as' => 'update']);
 
