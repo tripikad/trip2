@@ -20,5 +20,16 @@ class FeedTest extends TestCase
         foreach ($contents as $content) {
             $this->see($content->title);
         }
+
+        $contents = factory(Content::class, 15)->create([
+            'user_id' => factory(User::class)->create()->id,
+            'type' => 'flight',
+        ]);
+
+        $this->visit('lendude_sooduspakkumised/rss');
+
+        foreach ($contents as $content) {
+            $this->see($content->title);
+        }
     }
 }
