@@ -131,4 +131,9 @@ class Image extends Model
     {
         return '/photos/footer.jpg';
     }
+
+    public static function getSocial()
+    {
+        return '/photos/social.jpg';
+    }
 }
