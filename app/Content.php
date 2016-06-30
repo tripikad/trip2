@@ -174,6 +174,6 @@ class Content extends Model
 
     public function getHeadImage()
     {
-        return $this->imagePreset('large');
+        return config('app.url').$this->imagePreset('large');
     }
 }
