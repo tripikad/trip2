@@ -124,11 +124,16 @@ class Image extends Model
 
     public static function getHeader()
     {
-        return '/photos/header.jpg';
+        return '/photos/header2.jpg';
     }
 
     public static function getFooter()
     {
         return '/photos/footer.jpg';
+    }
+
+    public static function getSocial()
+    {
+        return config('app.url').'photos/social.jpg';
     }
 }

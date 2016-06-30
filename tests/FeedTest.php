@@ -12,10 +12,10 @@ class FeedTest extends TestCase
     {
         $contents = factory(Content::class, 15)->create([
                 'user_id' => factory(User::class)->create()->id,
-                'type' => 'flight',
+                'type' => 'news',
             ]);
 
-        $this->visit('lendude_sooduspakkumised/rss');
+        $this->visit('index.atom');
 
         foreach ($contents as $content) {
             $this->see($content->title);

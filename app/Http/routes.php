@@ -108,6 +108,13 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 // Additional blog (DUMMY)
 //Route::get('content/blog/profile', ['uses' => 'ContentController@blog_profile', 'as' => 'content.show.profile']);
 
+// Blog test pages
+
+Route::get('/blogtest', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@index', 'as' => 'index']);
+Route::get('/blogtest/show', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@show', 'as' => 'show']);
+Route::get('/blogtest/edit', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@edit', 'as' => 'edit']);
+Route::get('/blogtest/profile', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@profile', 'as' => 'profile']);
+
 // Comments
 
 Route::post('content/{type}/{id}/comment', ['middleware' => 'role:regular', 'uses' => 'CommentController@store', 'as' => 'comment.store']);
@@ -130,7 +137,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
     Route::get('{id}', ['uses' => 'UserController@show', 'as' => 'show']);
 
-    Route::get('{id}/edit', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@edit', 'as' => 'edit']);
+    Route::get('{id}/edit', ['middleware' => 'role:superuser,userowner', 'uses' => 'UserController@edit', 'as' => 'edit']);
 
     Route::put('{id}', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@update', 'as' => 'update']);
 
@@ -171,7 +178,7 @@ Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 
 
 // Atom feed
 
-Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightsFeed', 'as' => 'feed']);
+Route::get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
 
 // Styleguide
 
