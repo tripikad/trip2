@@ -136,5 +136,4 @@ class Image extends Model
     {
         return '/photos/social.jpg';
     }
-
 }
