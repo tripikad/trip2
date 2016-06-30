@@ -134,6 +134,6 @@ class Image extends Model
 
     public static function getSocial()
     {
-        return config('app.url') . 'photos/social.jpg';
+        return config('app.url').'photos/social.jpg';
     }
 }
