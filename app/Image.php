@@ -124,7 +124,7 @@ class Image extends Model
 
     public static function getHeader()
     {
-        return '/photos/header.jpg';
+        return '/photos/header2.jpg';
     }
 
     public static function getFooter()
