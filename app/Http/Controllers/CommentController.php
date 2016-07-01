@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Mail;
 use Log;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CommentController extends Controller
 {
@@ -70,7 +71,23 @@ class CommentController extends Controller
                 ->count(),
         ]);
 
-        return redirect()->route('content.show', [$type, $content_id, '#comment-'.$comment->id]);
+        $content = $comment->content;
+
+        $comments = new LengthAwarePaginator(
+            $content->comments,
+            $content->comments->count(),
+            config('content_'.$type.'.index.paginate')
+        );
+        $comments->setPath(route('content.show', [$type, $content_id]));
+
+        return redirect()
+            ->route('content.show', [
+                $type,
+                $content_id,
+                ($comments->lastPage() > 1 ? 'page=' . $comments->lastPage() : '') 
+                    . '#comment-'.$comment->id
+            ]);
+
     }
 
     public function edit($id)
