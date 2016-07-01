@@ -176,9 +176,10 @@ Route::get('destination/{id}', ['uses' => 'DestinationController@show', 'as' => 
 
 Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
 
-// Atom feed
+// Atom feeds
 
-Route::get('index.atom', ['uses' => 'FeedController@index', 'as' => 'feed']);
+Route::get('index.atom', ['uses' => 'FeedController@newsFeed', 'as' => 'news.feed']);
+
 Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightFeed', 'as' => 'flight.feed']);
 
 // Styleguide

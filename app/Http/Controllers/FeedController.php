@@ -7,7 +7,7 @@ use App\Content;
 
 class FeedController extends Controller
 {
-    public function index()
+    public function newsFeed()
     {
         $feed = App::make('feed');
 
@@ -16,7 +16,7 @@ class FeedController extends Controller
         if (! $feed->isCached()) {
             $feed->title = config('site.name');
             $feed->description = trans('site.description');
-            $feed->link = route('feed');
+            $feed->link = route('news.feed');
             $feed->setShortening(false);
 
             $contents = Content::whereType('news')->whereStatus(1)->latest()->take(15)->get();
@@ -45,7 +45,7 @@ class FeedController extends Controller
         if (! $feed->isCached()) {
             $feed->title = config('site.name');
             $feed->description = trans('site.description');
-            $feed->link = route('feed');
+            $feed->link = route('flight.feed');
             $feed->setShortening(false);
 
             $contents = Content::whereType('flight')->whereStatus(1)->latest()->take(15)->get();
