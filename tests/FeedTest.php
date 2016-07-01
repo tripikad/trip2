@@ -35,5 +35,4 @@ class FeedTest extends TestCase
             $this->see($content->title);
         }
     }
-    
 }
