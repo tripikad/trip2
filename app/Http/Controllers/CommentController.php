@@ -84,10 +84,9 @@ class CommentController extends Controller
             ->route('content.show', [
                 $type,
                 $content_id,
-                ($comments->lastPage() > 1 ? 'page=' . $comments->lastPage() : '') 
-                    . '#comment-'.$comment->id
+                ($comments->lastPage() > 1 ? 'page='.$comments->lastPage() : '')
+                    .'#comment-'.$comment->id,
             ]);
-
     }
 
     public function edit($id)
