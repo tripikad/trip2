@@ -273,6 +273,15 @@
                         max-width: $spacer * 40;
                     }
                 }
+                    .c-gallery__modal-title a {
+                        text-decoration: none;
+                        color: $color-white;
+                    }
+                .c-gallery__modal-title a:hover {
+                    text-decoration: underline;
+                    font-size: $font-size-normal;
+                    transition: 0.5s;
+                }
 
             .c-gallery__modal-nav {
 

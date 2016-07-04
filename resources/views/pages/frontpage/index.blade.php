@@ -291,7 +291,7 @@
 
                         @include('component.gallery', [
                             'modal' => [
-                                'modifiers' => 'm-yellow',
+                                'modifiers' => 'm-black',
                             ],
                             'items' => $photos->transform(function ($photo) {
                                 return [
@@ -299,14 +299,17 @@
                                     'image_large' => $photo->imagePreset('large'),
                                     'route' => route('content.show', [$photo->type, $photo]),
                                     'alt' => $photo->title,
-                                    'tags' => $photo->destinations->transform(function($destination) {
-                                        return [
-                                            'title' => $destination->name,
-                                            'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
-                                            'route' => route('destination.show', $destination)
-                                        ];
-                                    })
-                                ];
+                                    'tags' =>$photo->destinations->transform(function($destination) {
+                                                return [
+
+                                                        'title' => $destination->name,
+                                                        'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
+                                                        'route' => route('destination.show', $destination)
+                                                ];
+                                            }),
+                                    'userName' => $photo->user->name,
+                                    'userRoute' => route('user.show',$photo->user),
+                               ];
                             })
                         ])
                     </div>
