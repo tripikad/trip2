@@ -289,7 +289,9 @@
                                             'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
                                             'route' => route('destination.show', $destination)
                                         ];
-                                    })
+                                    }),
+                                    'userName' => $photo->user->name,
+                                    'userRoute' => route('user.show',$photo->user),
                                 ];
                             })
                         ])

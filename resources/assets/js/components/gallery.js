@@ -150,6 +150,12 @@ galleryTrigger.stop(true, true).on('click', function() {
                     $('<div>')
                         .addClass('c-gallery__modal-title')
                         .text(value.title)
+                        .append(
+                            $('<br>'),
+                            $('<a>')
+                                .attr("href", value.userRoute.length > 0 ? value.userRoute : '#')
+                                .text(value.userName.length > 0 ? "Lisas: " + value.userName: '')
+                        )
                 );
             }
 

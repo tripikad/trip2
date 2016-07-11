@@ -77,9 +77,7 @@ code: |
         @if (isset($item['tags']))
 
         <?php $j = 0; ?>
-
             @foreach ($item['tags'] as $tag)
-
         <?php
             $images[$i]['tags'][$j]['name'] = $tag['title'];
             $images[$i]['tags'][$j]['modifiers'] = $tag['modifiers'];
@@ -97,6 +95,10 @@ code: |
         <?php $images[$i]['title'] = $item['alt']; ?>
 
         @endif
+
+        <?php $images[$i]['userName'] = (isset($item['userName']) ? $item['userName'] : ''); ?>
+
+        <?php $images[$i]['userRoute'] = (isset($item['userRoute']) ? $item['userRoute']: ''); ?>
 
         @if (isset($modal))
 
@@ -135,6 +137,7 @@ code: |
                 @endif
             </li>
 
+
             <?php $i++; ?>
 
         @endforeach
@@ -143,17 +146,14 @@ code: |
     @if (isset($modal))
 
     <div class="c-gallery__modal js-gallery-modal {{ $modal['modifiers'] or '' }}" data-images='<?php  echo json_encode($images, JSON_HEX_APOS); ?>'>
-
         <a href="#" class="c-gallery__modal-close js-gallery-modal-close">
             @include('component.svg.sprite', [
                 'name' => 'icon-plus'
             ])
         </a>
-
         <div class="c-gallery__modal-inner">
 
             <div class="c-gallery__modal-image-container js-gallery-modal-images">
-
                 <a href="#" class="c-gallery__modal-nav m-previous js-gallery-modal-previous">
                     @include('component.svg.sprite', [
                         'name' => 'icon-arrow-left'
