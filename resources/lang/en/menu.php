@@ -31,11 +31,7 @@ return [
     'footer3.contact' => 'Contact',
     'footer3.eula' => 'EULA',
     'footer3.advertising' => 'Advertising',
-    'footer3.flightFeed' => 'Flight RSS',
-    'footer3.newsFeed' => 'News RSS',
     'footer3.styleguide' => 'Styleguide',
-
-
 
     'footer-social.facebook' => 'Facebook',
     'footer-social.twitter' => 'Twitter',
