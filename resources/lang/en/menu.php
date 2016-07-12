@@ -31,6 +31,8 @@ return [
     'footer3.contact' => 'Contact',
     'footer3.eula' => 'EULA',
     'footer3.advertising' => 'Advertising',
+    'footer3.flightfeed' => 'Flight RSS',
+    'footer3.newsfeed' => 'News RSS',
     'footer3.styleguide' => 'Styleguide',
 
     'footer-social.facebook' => 'Facebook',
