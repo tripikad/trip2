@@ -31,8 +31,8 @@ return [
     'footer3.contact' => 'Kontakt',
     'footer3.eula' => 'Kasutustingimused',
     'footer3.advertising' => 'Reklaam',
-    'footer3.flightFeed' => 'Lennupakkumiste RSS',
-    'footer3.newsFeed' => 'Uudiste RSS',
+    'footer3.flightfeed' => 'Lennupakkumiste RSS',
+    'footer3.newsfeed' => 'Uudiste RSS',
     'footer3.styleguide' => 'Styleguide',
 
     'footer-social.facebook' => 'Facebook',

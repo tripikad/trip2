@@ -17,7 +17,6 @@ class FeedTest extends TestCase
 
         $this
             ->visit('/')
-            ->click(trans('Uudiste RSS'))
             ->seePageIs('index.atom');
 
         foreach ($contents as $content) {
@@ -34,7 +33,6 @@ class FeedTest extends TestCase
 
         $this
             ->visit('/')
-            ->click(trans('Lennupakkumiste RSS'))
             ->seePageIs('lendude_sooduspakkumised/rss');
 
         foreach ($contents as $content) {
