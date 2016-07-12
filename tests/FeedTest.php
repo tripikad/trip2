@@ -15,7 +15,10 @@ class FeedTest extends TestCase
                 'type' => 'news',
             ]);
 
-        $this->visit('index.atom');
+        $this
+            ->visit('/')
+            ->click(trans('Uudiste RSS'))
+            ->seePageIs('index.atom');
 
         foreach ($contents as $content) {
             $this->see($content->title);
@@ -29,7 +32,10 @@ class FeedTest extends TestCase
             'type' => 'flight',
         ]);
 
-        $this->visit('lendude_sooduspakkumised/rss');
+        $this
+            ->visit('/')
+            ->click(trans('Lennupakkumiste RSS'))
+            ->seePageIs('lendude_sooduspakkumised/rss');
 
         foreach ($contents as $content) {
             $this->see($content->title);
