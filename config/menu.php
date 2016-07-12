@@ -62,6 +62,12 @@ return [
         'advertising' => [
             'route' => '/content/static/22125',
         ],
+        'flightFeed' => [
+            'route' => 'lendude_sooduspakkumised/rss',
+        ],
+        'newsFeed' => [
+            'route' => 'index.atom',
+        ],
     ],
 
     'footer-social' => [
