@@ -31,10 +31,7 @@ class ConvertUrl extends ConvertBase
                     'aliasable_id' => $moveMap->to,
                 ];
             })
-            ->map(function($moveMap) {
-                dump($moveMap);
-                return $moveMap;
-            })
+            ->map(function($moveMap) { dump($moveMap); return $moveMap; })
             ->each(function($moveMap) {
                 
                 \DB::table('aliases')->insert([
@@ -76,6 +73,7 @@ class ConvertUrl extends ConvertBase
             ->filter(function($deleteMap) {
                 return $deleteMap->path;
             })
+            ->map(function($deleteMap) { dump($deleteMap); return $deleteMap; })
             ->each(function($deleteMap) {
 
                 \DB::table('aliases')->insert([
@@ -93,7 +91,7 @@ class ConvertUrl extends ConvertBase
     public function handle()
     {
         //$this->generateMovedTermAliases();
-        $this->generateDeletedTermAliases();
+        //$this->generateDeletedTermAliases();
     }
 
 };
