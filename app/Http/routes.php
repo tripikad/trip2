@@ -197,9 +197,18 @@ Route::get('node/{id}', 'RedirectController@redirectNode');
 Route::get('content/{path}', 'RedirectController@redirectContent')
     ->where('path', '.*');
 
+// Legacy user paths
+
+Route::get('user/{id}/forum', 'RedirectController@redirectUser');
+
 // Legacy term paths
 
 Route::get('taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
+
+Route::get(
+    'sein/term/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}', 
+    'RedirectController@redirectTaxonomy'
+);
 
 Route::get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 

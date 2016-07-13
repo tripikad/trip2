@@ -158,4 +158,12 @@ class RedirectController extends Controller
 
         abort(404);
     }
+
+    public function redirectUser($id)
+    {
+
+       return redirect()->route('user.show', [$id], 301);
+
+    }
+    
 }
