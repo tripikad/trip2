@@ -13,7 +13,12 @@
         'dropzone.file.size.exceeded' => 'You tried to upload too big file',
         'dropzone.file.remove' => 'Remove',
 
-        'description' => 'Estonian oldest and largest travel community',
+        'description' => [
+            'main' => 'One-stop place for all travel needs',
+            'flights' => 'All the cheap tickets from one place',
+            'news' => 'Travel news around the world',
+        ],
+
         'footer.copyright' => 'Copyright &copy; Trip.ee 1998-:current_year',
 
     ];

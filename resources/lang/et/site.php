@@ -13,7 +13,12 @@
         'dropzone.file.size.exceeded' => 'Sa üritasid lisada liiga mahukat pilti.',
         'dropzone.file.remove' => 'Kustuta',
 
-        'description' => 'Eesti vanim ja suurim reisiteemaline kogukond',
+        'description' => [
+            'main' => 'Üks koht kõigi...',
+            'flights' => 'Kõik odavad...',
+            'news' => 'Ülemaailmsed...',
+        ],
+
         'footer.copyright' => 'Autoriõigused &copy; Trip.ee 1998-:current_year',
 
     ];
