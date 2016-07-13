@@ -203,7 +203,11 @@ Route::get('taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
 
 Route::get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 
+Route::get('node/sihtkoht/{title}', 'RedirectController@redirectDestination');
+
 Route::get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
+
+Route::get('node/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
 
 // API
 

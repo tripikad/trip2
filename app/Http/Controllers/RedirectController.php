@@ -69,10 +69,10 @@ class RedirectController extends Controller
     public function redirectTaxonomy($tid)
     {
         $alias = \DB::table('aliases')
-            ->wherePath('taxonomy/tid/'.$tid)
+            ->wherePath('taxonomy/term/'.$tid)
             ->first();
 
-        $tid = $alias ? $alias->tid : $tid;
+        $tid = $alias ? $alias->aliasable_id : $tid;
 
         if ($destination = Destination::find($tid)) {
             return redirect()->route(
