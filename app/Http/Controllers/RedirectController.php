@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Content;
 use App\Destination;
 use App\Topic;
+use App\Carrier;
 
 class RedirectController extends Controller
 {
@@ -96,7 +97,10 @@ class RedirectController extends Controller
                 ], 301);
         }
 
-        abort(404);
+        return redirect()->route(
+            'content.index', [
+                'forum'
+            ], 301);
     }
 
     public function redirectDestination($title)
@@ -144,6 +148,12 @@ class RedirectController extends Controller
                         'topic' => $topic,
                     ], 301);
             }
+
+            return redirect()->route(
+                'content.index', [
+                    'forum',
+                ], 301);
+
         }
 
         abort(404);
