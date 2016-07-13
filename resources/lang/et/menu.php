@@ -13,7 +13,7 @@ return [
 
     'auth.register' => 'Registreeri',
     'auth.login' => 'Logi sisse',
-    'auth.admin' => 'Administreeri',
+    'auth.admin' => 'Toimetus',
     'auth.logout' => 'Logi välja',
 
     'footer.news' => 'Uudised',
