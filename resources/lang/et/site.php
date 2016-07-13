@@ -14,9 +14,15 @@
         'dropzone.file.remove' => 'Kustuta',
 
         'description' => [
-            'main' => 'Üks koht kõigi...',
-            'flights' => 'Kõik odavad...',
-            'news' => 'Ülemaailmsed...',
+            'main' => 'Üks koht kõigi reisivajaduste rahuldamiseks. Trip.ee aitab leida odavaid pileteid, reisikaaslaseid,teiste kasutajate reisisoovitusi/muljeid ja alguse elu parimale seiklusele',
+            'flights' => 'Kõik odavad lennupiletid mugavalt ühel lehel. Vaata jalustrabavaid lennupakkumisi ning alusta oma reisi planeerimist siit.',
+            'news' => 'Lühiuudised ülemaailmsete reisiuudiste, lennufirmade, viisade, hinnamuutuste, soovituste ja kommete kohta.',
+            'travelmate' => 'Leia reisikaaslased olemasolevatele reisiplaanidele või kedagi kellega koos plaani pidada.',
+            'forum' => 'Üldfoorm  reisimuljete jagamiseks, lennupiletite, reisikaaslaste otsimiseks, reisiplaanide pidamiseks ja parimate pakkumiste leidmiseks.',
+            'expat' => 'Uudiseid ja soovitused väliseestlaste või reisil olevate eestlaste poolt, lisaks uudised nende tegemiste, plaanide ja pakkumiste kohta.',
+            'buysell' => 'Lennupiletite, reisivarustuse, kinkekaartide ja muu reisimiseks vajaliku ost ja müük. ',
+            'blog' => 'Reisikirjad, videod, uudised ja muljed reisihuviliste poolt eri reiside, matkade ja retkede kohta',
+            'photo' => 'Jaga enda reisipilte Trip.ee kasutajatega või vaata teiste reisijate pilte. ',
         ],
 
         'footer.copyright' => 'Autoriõigused &copy; Trip.ee 1998-:current_year',

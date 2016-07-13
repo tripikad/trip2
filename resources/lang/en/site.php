@@ -17,6 +17,12 @@
             'main' => 'One-stop place for all travel needs',
             'flights' => 'All the cheap tickets from one place',
             'news' => 'Travel news around the world',
+            'travelmate' => 'Find a travelmate for your travelplans',
+            'forum' => 'Forum for sharing impressions of travel, airline tickets, travel mates search, trip planning and find the best deals.',
+            'expat' => 'News and suggestions from estonians living abroad',
+            'buysell' => 'Buy or sell anything you need for travelling',
+            'blog' => 'Travel blog...',
+            'photo' => 'Share your travel photos or view photos of others',
         ],
 
         'footer.copyright' => 'Copyright &copy; Trip.ee 1998-:current_year',
