@@ -268,7 +268,7 @@ class ContentController extends Controller
             $content = null;
             if ($id) {
                 $content = Content::findorFail($id);
-                if (in_array($content->type, ['forum','buysell', 'expat'])) {
+                if (in_array($content->type, ['forum', 'buysell', 'expat'])) {
                     $content->timestamps = false;
                 }
             } else {
