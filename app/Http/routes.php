@@ -194,15 +194,17 @@ Route::get('styleguide', 'StyleguideController@index');
 
 Route::get('user/{id}/forum', 'RedirectController@redirectUser');
 
+Route::get('sein/user/{id}', 'RedirectController@redirectUser');
+
 // Legacy term paths
 
-Route::get('taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
+Route::get('taxonomy/term/{id}/{a?}', 'RedirectController@redirectTaxonomy');
 
 Route::get('node/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
 
 Route::get('content/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
 
-Route::get('content/tai/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
+Route::get('content/{blurb}/taxonomy/term/{id}', 'RedirectController@redirectTaxonomyBlurb');
 
 Route::get('trip_destination/tid/{id}', 'RedirectController@redirectTaxonomy');
 
@@ -216,7 +218,15 @@ Route::get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@red
 
 Route::get('node/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
 
-Route::get('content/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
+Route::get(
+    'content/category/{part1}/{part2}/{part3?}/{part4?}',
+    'RedirectController@redirectCategory'
+);
+
+Route::get(
+    'content/{blurb}/category/{part1}/{part2}/{part3?}/{part4?}',
+    'RedirectController@redirectCategoryBlurb'
+);
 
 Route::get(
     'sein/term/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}', 
@@ -225,9 +235,20 @@ Route::get(
 
 // Legacy content paths
 
-Route::get('node/{id}', 'RedirectController@redirectNode');
+Route::get(
+    'node/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}', 
+    'RedirectController@redirectNode'
+);
 
 Route::get('node/view/{id}', 'RedirectController@redirectNode');
+
+Route::get('node.php?id={id}', 'RedirectController@redirectNode');
+
+Route::get('blog/{id}', 'RedirectController@redirectNode');
+
+Route::get('content/news/{id}', 'RedirectController@redirectNode');
+
+Route::get('sein/user/node/{id}', 'RedirectController@redirectNode');
 
 Route::get('node/{id}/atom/feed', 'RedirectController@redirectNode');
 

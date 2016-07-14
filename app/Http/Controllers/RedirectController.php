@@ -103,6 +103,12 @@ class RedirectController extends Controller
             ], 301);
     }
 
+    public function redirectTaxonomyBlurb($blurb = '', $tid) {
+    
+        return $this->redirectTaxonomy($tid);
+    
+    }
+
     public function redirectDestination($title)
     {
         $alias = \DB::table('aliases')
@@ -157,6 +163,12 @@ class RedirectController extends Controller
         }
 
         abort(404);
+    }
+
+    public function redirectCategoryBlurb($blurb = '', $part1, $part2, $part3 = null, $part4 = null) {
+    
+        return $this->redirectCategory($part1, $part2, $part3, $part4);
+    
     }
 
     public function redirectUser($id)
