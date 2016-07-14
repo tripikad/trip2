@@ -186,6 +186,10 @@ Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightFeed
 
 Route::get('styleguide', 'StyleguideController@index');
 
+// API
+
+Route::get('api/destinations', 'ApiController@destinations');
+
 /*
  * Redirect old URL-s
  */
@@ -266,10 +270,6 @@ Route::get('crss/node/{id}', 'RedirectController@redirectNode');
 
 Route::get('content/{path}', 'RedirectController@redirectContent')
     ->where('path', '.*');
-
-// API
-
-Route::get('api/destinations', 'ApiController@destinations');
 
 // All other content pages
 
