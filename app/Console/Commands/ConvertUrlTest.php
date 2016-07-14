@@ -22,16 +22,19 @@ class ConvertUrlTest extends ConvertBase
 
             $url = str_replace('http://trip.ee/', '', $row['URL']);
 
-            $request = \Request::create($url, 'GET');
-            $response = \Route::dispatch($request);
+            $response = $this->client->get('http://localhost/'.$url, [
+                'exceptions' => false,
+            ]);
 
-            if (in_array($response->status(), [200, 301])) {
+            $code = $response->getStatusCode();
 
-                $this->info($row['Response Code'].' -> '.$response->status().' '.$url);
+            if (in_array($code, [200, 301])) {
+
+                $this->info($row['Response Code'].' -> '.$code.' '.$url);
         
             } else {
 
-            $this->error($row['Response Code'].' -> '.$response->status().' '.$url);
+            $this->error($row['Response Code'].' -> '.$code.' '.$url);
 
             }
 
