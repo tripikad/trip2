@@ -271,6 +271,6 @@ Route::get('crss/node/{id}', 'RedirectController@redirectNode');
 Route::get('content/{path}', 'RedirectController@redirectContent')
     ->where('path', '.*');
 
-// All other content pages
+// All other legacy aliases
 
-Route::get('{path}', 'RedirectController@redirectContentBySlug');
+Route::get('{part1}/{part2?}', 'RedirectController@redirectAlias');

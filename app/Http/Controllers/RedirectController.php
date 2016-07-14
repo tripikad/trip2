@@ -41,30 +41,59 @@ class RedirectController extends Controller
         abort(404);
     }
 
-    public function redirectContentBySlug($path)
+    public function redirectAlias($part1, $part2 = '')
     {
-        $alias = \DB::table('aliases')
-            ->wherePath($path)
-            ->where('aliasable_type', 'like', 'content.%')
-            ->first();
+        $pathMap = [
 
-        if ($alias) {
-            if ($alias->aliasable_id > 0) {
-                return redirect()
-                    ->route($alias->aliasable_type, [
-                        $alias->route_type,
-                        $alias->aliasable_id,
-                    ], 301);
-            } else {
-                return redirect()
-                    ->route($alias->aliasable_type, [
-                        $alias->route_type,
-                    ], 301);
-            }
+            'content/mis-on-veahind.html' => 'content/static/97203',
+            'kasutustingimused' => 'content/static/25151',
+            'reklaam' => 'content/static/22125',
+            'misontripee' => 'content/static/1534',
+            'kontakt' => 'content/static/972',
+
+            'blog' => 'content/blog',
+            'paevikud' => 'content/blog',
+            'sein/paevikud' => 'content/blog',
+
+            'eluvalismaal' => 'content/expat',
+
+            'pildid' => 'content/photo',
+
+            'uudised' => 'content/news',
+            'sein/uudised' => 'content/news',
+
+            'reisikaaslased' => 'content/travelmate',
+            'sein/reisikaaslased' => 'content/travelmate',
+
+            'ostmuuk' => 'content/buysell',
+
+            'soodsad_lennupiletid' => 'content/flight',
+            'lendude_sooduspakkumised' => 'content/flight',
+
+            'foorum' => 'content/forum',
+            'sein/foorum' => 'content/forum',
+
+            'reisipakkumised' => '/',
+            'sein/reisipakkumised' => '/',
+            'sein/turg' => '/',
+
+
+            'sein' => '/',
+
+        ];
+
+        $path = $part2 ? $part1."/".$part2 : $part1;
+
+        if (isset($pathMap[$path])) {
+
+            return redirect($pathMap[$path], 301);
+        
         }
 
         abort(404);
+        
     }
+
 
     public function redirectTaxonomy($tid)
     {
