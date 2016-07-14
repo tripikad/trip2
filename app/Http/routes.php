@@ -210,6 +210,8 @@ Route::get('trip_destination/tid/{id}', 'RedirectController@redirectTaxonomy');
 
 Route::get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 
+Route::get('content/{blurb}/sihtkoht/{title}', 'RedirectController@redirectDestinationBlurb');
+
 Route::get('node/sihtkoht/{title}', 'RedirectController@redirectDestination');
 
 Route::get('content/sihtkoht/{title}', 'RedirectController@redirectDestination');

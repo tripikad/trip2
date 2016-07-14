@@ -20,7 +20,7 @@ class ConvertUrlTest extends ConvertBase
 
         $this->line(count($csv).' items');
 
-        collect($csv)->slice(0, 6000)->each(function($row) {
+        collect($csv)->slice(100, 6000)->each(function($row, $key) {
 
             $url = str_replace('http://trip.ee/', '', $row['URL']);
 
@@ -33,11 +33,11 @@ class ConvertUrlTest extends ConvertBase
 
             if (in_array($code, [200, 301])) {
 
-                $this->info($row['Response Code'].' -> '.$code.' '.$url);
+                // $this->info($row['Response Code'].' -> '.$code.' '.$url);
         
             } else {
 
-            $this->error($row['Response Code'].' -> '.$code.' '.$url);
+                $this->error($key.'  '.$row['Response Code'].' -> '.$code.' '.$url);
 
             }
 
