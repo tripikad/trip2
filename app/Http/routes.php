@@ -202,6 +202,10 @@ Route::get('node/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
 
 Route::get('content/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
 
+Route::get('content/tai/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
+
+Route::get('trip_destination/tid/{id}', 'RedirectController@redirectTaxonomy');
+
 Route::get('sihtkoht/{title}', 'RedirectController@redirectDestination');
 
 Route::get('node/sihtkoht/{title}', 'RedirectController@redirectDestination');
@@ -223,7 +227,7 @@ Route::get(
 
 Route::get('node/{id}', 'RedirectController@redirectNode');
 
-Route::get('node/{id}', 'RedirectController@redirectNode');
+Route::get('node/view/{id}', 'RedirectController@redirectNode');
 
 Route::get('node/{id}/atom/feed', 'RedirectController@redirectNode');
 
