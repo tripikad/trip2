@@ -194,6 +194,12 @@ Route::get('styleguide', 'StyleguideController@index');
 
 Route::get('node/{id}', 'RedirectController@redirectNode');
 
+Route::get('node/{id}', 'RedirectController@redirectNode');
+
+Route::get('node/{id}/atom/feed', 'RedirectController@redirectNode');
+
+Route::get('crss/node/{id}', 'RedirectController@redirectNode');
+
 Route::get('content/{path}', 'RedirectController@redirectContent')
     ->where('path', '.*');
 
@@ -206,7 +212,7 @@ Route::get('user/{id}/forum', 'RedirectController@redirectUser');
 Route::get('taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
 
 Route::get(
-    'sein/term/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}', 
+    'sein/term/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}', 
     'RedirectController@redirectTaxonomy'
 );
 
