@@ -20,12 +20,13 @@ class ConvertUrlTest extends ConvertBase
 
         $this->line(count($csv).' items');
 
-        collect($csv)->slice(0, 10)->each(function($row) {
+        collect($csv)->slice(100, 100)->each(function($row) {
 
             $url = str_replace('http://trip.ee/', '', $row['URL']);
 
-            $response = $this->client->head('http://localhost/'.$url, [
+            $response = $this->client->head('http://localhost:8000/'.$url, [
                 'exceptions' => false,
+                'allow_redirects' => false
             ]);
 
             $code = $response->getStatusCode();

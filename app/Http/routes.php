@@ -190,6 +190,35 @@ Route::get('styleguide', 'StyleguideController@index');
  * Redirect old URL-s
  */
 
+// Legacy user paths
+
+Route::get('user/{id}/forum', 'RedirectController@redirectUser');
+
+// Legacy term paths
+
+Route::get('taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
+
+Route::get('node/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
+
+Route::get('content/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
+
+Route::get('sihtkoht/{title}', 'RedirectController@redirectDestination');
+
+Route::get('node/sihtkoht/{title}', 'RedirectController@redirectDestination');
+
+Route::get('content/sihtkoht/{title}', 'RedirectController@redirectDestination');
+
+Route::get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
+
+Route::get('node/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
+
+Route::get('content/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
+
+Route::get(
+    'sein/term/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}', 
+    'RedirectController@redirectTaxonomy'
+);
+
 // Legacy content paths
 
 Route::get('node/{id}', 'RedirectController@redirectNode');
@@ -202,27 +231,6 @@ Route::get('crss/node/{id}', 'RedirectController@redirectNode');
 
 Route::get('content/{path}', 'RedirectController@redirectContent')
     ->where('path', '.*');
-
-// Legacy user paths
-
-Route::get('user/{id}/forum', 'RedirectController@redirectUser');
-
-// Legacy term paths
-
-Route::get('taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
-
-Route::get(
-    'sein/term/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}', 
-    'RedirectController@redirectTaxonomy'
-);
-
-Route::get('sihtkoht/{title}', 'RedirectController@redirectDestination');
-
-Route::get('node/sihtkoht/{title}', 'RedirectController@redirectDestination');
-
-Route::get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
-
-Route::get('node/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
 
 // API
 
