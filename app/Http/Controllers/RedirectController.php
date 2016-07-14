@@ -82,18 +82,14 @@ class RedirectController extends Controller
 
         ];
 
-        $path = $part2 ? $part1."/".$part2 : $part1;
+        $path = $part2 ? $part1.'/'.$part2 : $part1;
 
         if (isset($pathMap[$path])) {
-
             return redirect($pathMap[$path], 301);
-        
         }
 
         abort(404);
-        
     }
-
 
     public function redirectTaxonomy($tid)
     {
@@ -128,14 +124,13 @@ class RedirectController extends Controller
 
         return redirect()->route(
             'content.index', [
-                'forum'
+                'forum',
             ], 301);
     }
 
-    public function redirectTaxonomyBlurb($blurb = '', $tid) {
-    
+    public function redirectTaxonomyBlurb($blurb, $tid)
+    {
         return $this->redirectTaxonomy($tid);
-    
     }
 
     public function redirectDestination($title)
@@ -156,16 +151,14 @@ class RedirectController extends Controller
         abort(404);
     }
 
-    public function redirectDestinationBlurb($blurb = '', $title) {
-    
+    public function redirectDestinationBlurb($blurb, $title)
+    {
         return $this->redirectDestination($title);
-    
     }
 
-    public function redirectDestinationBlurb2($blurb = '', $blurb2 = '', $title) {
-    
+    public function redirectDestinationBlurb2($blurb, $blurb2, $title)
+    {
         return $this->redirectDestination($title);
-    
     }
 
     public function redirectCategory($part1, $part2, $part3 = null, $part4 = null)
@@ -200,23 +193,18 @@ class RedirectController extends Controller
                 'content.index', [
                     'forum',
                 ], 301);
-
         }
 
         abort(404);
     }
 
-    public function redirectCategoryBlurb($blurb = '', $part1, $part2, $part3 = null, $part4 = null) {
-    
+    public function redirectCategoryBlurb($blurb, $part1, $part2, $part3 = null, $part4 = null)
+    {
         return $this->redirectCategory($part1, $part2, $part3, $part4);
-    
     }
 
     public function redirectUser($id)
     {
-
-       return redirect()->route('user.show', [$id], 301);
-
+        return redirect()->route('user.show', [$id], 301);
     }
-    
 }
