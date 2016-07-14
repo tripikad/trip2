@@ -77,7 +77,7 @@ class ConvertUrl extends ConvertBase
             ->each(function($deleteMap) {
 
                 \DB::table('aliases')->insert([
-                    'aliasable_id' => null,
+                    'aliasable_id' => 0,
                     'aliasable_type' => 'topic',
                     'path' =>  $deleteMap->path,
                 ]);
@@ -90,8 +90,8 @@ class ConvertUrl extends ConvertBase
 
     public function handle()
     {
-        //$this->generateMovedTermAliases();
-        //$this->generateDeletedTermAliases();
+        $this->generateMovedTermAliases();
+        $this->generateDeletedTermAliases();
     }
 
 };
