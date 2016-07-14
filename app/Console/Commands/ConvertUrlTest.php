@@ -18,18 +18,20 @@ class ConvertUrlTest extends ConvertBase
         });
         array_shift($csv);
 
-        collect($csv)->take(5)->each(function($row) {
+        collect($csv)->take(10)->each(function($row) {
 
-            $request = \Request::create($row['URL'], 'GET');
+            $url = str_replace('http://trip.ee/', '', $row['URL']);
+
+            $request = \Request::create($url, 'GET');
             $response = \Route::dispatch($request);
 
             if (in_array($response->status(), [200, 301])) {
 
-                $this->info($row['Response Code'].' -> '.$response->status());
+                $this->info($row['Response Code'].' -> '.$response->status().' '.$url);
         
             } else {
 
-            $this->error($row['Response Code'].' -> '.$response->status().' '.$row['URL']);
+            $this->error($row['Response Code'].' -> '.$response->status().' '.$url);
 
             }
 
