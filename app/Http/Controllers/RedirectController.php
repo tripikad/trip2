@@ -133,6 +133,12 @@ class RedirectController extends Controller
     
     }
 
+    public function redirectDestinationBlurb2($blurb = '', $blurb2 = '', $title) {
+    
+        return $this->redirectDestination($title);
+    
+    }
+
     public function redirectCategory($part1, $part2, $part3 = null, $part4 = null)
     {
         $path = collect(['category', $part1, $part2, $part3, $part4])
