@@ -20,7 +20,7 @@ class ConvertUrlTest extends ConvertBase
 
         $this->line(count($csv).' items');
 
-        collect($csv)->slice(100, 6000)->each(function($row, $key) {
+        collect($csv)->slice(0, 6000)->each(function($row, $key) {
 
             $url = str_replace('http://trip.ee/', '', $row['URL']);
 

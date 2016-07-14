@@ -48,12 +48,6 @@ class ConvertUrl extends ConvertBase
                         'path' =>  $moveMap->path2,
                     ]);
 
-                    \DB::table('aliases')->insert([
-                        'aliasable_id' => $moveMap->aliasable_id,
-                        'aliasable_type' => 'topic',
-                        'path' =>  'content/'.$moveMap->path2,
-                    ]);
-
                 }
 
             });
@@ -86,12 +80,6 @@ class ConvertUrl extends ConvertBase
                     'aliasable_id' => 0,
                     'aliasable_type' => 'topic',
                     'path' =>  $deleteMap->path,
-                ]);
-
-                \DB::table('aliases')->insert([
-                    'aliasable_id' => 0,
-                    'aliasable_type' => 'topic',
-                    'path' =>  'content/'.$deleteMap->path,
                 ]);
 
             });     
