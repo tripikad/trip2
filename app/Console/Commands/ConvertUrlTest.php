@@ -18,13 +18,21 @@ class ConvertUrlTest extends ConvertBase
         });
         array_shift($csv);
 
-        collect($csv)->take(10)->each(function($row) {
-            
+        collect($csv)->take(5)->each(function($row) {
+
             $request = \Request::create($row['URL'], 'GET');
             $response = \Route::dispatch($request);
 
-            $this->line($row['Response Code'].' -> '.$response->status());
+            if (in_array($response->status(), [200, 301])) {
+
+                $this->info($row['Response Code'].' -> '.$response->status());
         
+            } else {
+
+            $this->error($row['Response Code'].' -> '.$response->status().' '.$row['URL']);
+
+            }
+
         });
 
     }
