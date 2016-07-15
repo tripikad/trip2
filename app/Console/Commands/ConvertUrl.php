@@ -8,7 +8,6 @@ class ConvertUrl extends ConvertBase
 
     public function generateMovedTermAliases()
     {
-
         collect($this->topicMap)
             ->filter(function ($value) {
                 return collect($value)->has('move');
@@ -34,7 +33,6 @@ class ConvertUrl extends ConvertBase
                 return $moveMap;
             })
             ->each(function ($moveMap) {
-              
                 \DB::table('aliases')->insert([
                     'aliasable_id' => $moveMap->aliasable_id,
                     'aliasable_type' => 'topic',
@@ -42,15 +40,12 @@ class ConvertUrl extends ConvertBase
                 ]);
 
                 if ($moveMap->path2) {
-                    
                     \DB::table('aliases')->insert([
                         'aliasable_id' => $moveMap->aliasable_id,
                         'aliasable_type' => 'topic',
                         'path' =>  $moveMap->path2,
                     ]);
-                    
                 }
-
             });
     }
 
