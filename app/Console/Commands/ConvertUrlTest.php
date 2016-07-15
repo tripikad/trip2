@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 class ConvertUrlTest extends ConvertBase
 {
-    protected $signature = 'convert:urltest';
+    protected $signature = 'convert:urltest {baseurl}';
 
     public function handle()
     {
@@ -20,19 +20,19 @@ class ConvertUrlTest extends ConvertBase
         collect($csv)->slice(0, 6000)->each(function ($row, $key) {
             $url = str_replace('http://trip.ee/', '', $row['URL']);
 
-            $response = $this->client->head('http://localhost:8000/'.$url, [
+            $response = $this->client->head($this->argument('baseurl').'/'.$url, [
                 'exceptions' => false,
                 'allow_redirects' => false,
             ]);
 
             $code = $response->getStatusCode();
 
-            if (in_array($code, [200, 301])) {
+            $message = $key.'  '.$row['Response Code'].' -> '.$code.' '.$url;
 
-                // $this->info($row['Response Code'].' -> '.$code.' '.$url);
-            } else {
-                $this->error($key.'  '.$row['Response Code'].' -> '.$code.' '.$url);
-            }
+            $type = in_array($code, [200, 301]) ? 'info' : 'error';
+
+            $this->$type($message);
+
         });
     }
 }
