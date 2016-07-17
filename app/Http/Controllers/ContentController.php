@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Http\Request;
 use Auth;
 use Log;
@@ -115,6 +116,16 @@ class ContentController extends Controller
         return response()
             ->view($view, $viewVariables)
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
+    }
+
+    public function showSlug($type, $slug)
+    {
+        $content = Content::findBySlugOrFail($slug);
+        if (!$content) {
+            abort(404);
+        }
+
+        return $this->show($type, $content->id);
     }
 
     public function show($type, $id)

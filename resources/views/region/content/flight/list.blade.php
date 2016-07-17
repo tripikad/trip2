@@ -4,7 +4,7 @@
             'icon' => 'icon-tickets',
             'modifiers' => 'm-icon',
             'title' => $item->title.' '.$item->price.config('site.currency.symbol'),
-            'route' => route('content.show', [$item->type, $item]),
+            'route' => route('content.show', [$item->type, $item->slug]),
             'list' => [
                 (isset($item->destinations) && count($item->destinations) ?
                 [

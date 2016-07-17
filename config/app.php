@@ -151,6 +151,7 @@ return [
         Laravelista\Ekko\EkkoServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
         /*
          * Application Service Providers...
          */

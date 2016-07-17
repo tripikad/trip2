@@ -83,7 +83,9 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
         }
     }]);
 
-    Route::get('{id}', ['middleware' => null, 'uses' => 'ContentController@show', 'as' => 'show']);
+    Route::get('{slug}', ['middleware' => null, 'uses' => 'ContentController@showSlug', 'as' => 'show']);
+
+    //Route::get('{id}', ['middleware' => null, 'uses' => 'ContentController@show', 'as' => 'show']);
 
     Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'as' => 'edit', function ($type, $id) {
         $controller = new ContentController;

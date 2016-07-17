@@ -10,7 +10,7 @@
                     'text' => (strlen($item->user->name) ? $item->user->name[0] : '')
                 ],
                 'name' => $item->user->name,
-                'route' => route('content.show', [$item->type, $item]),
+                'route' => route('content.show', [$item->type, $item->slug]),
                 'sex_and_age' =>
                     ($item->user->gender ?
                         trans('user.gender.'.$item->user->gender).

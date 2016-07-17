@@ -47,7 +47,7 @@
 
                                 @include('component.card', [
                                     'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
-                                    'route' => route('content.show', [$flight1->type, $flight1]),
+                                    'route' => route('content.show', [$flight1->type, $flight1->slug]),
                                     'title' => $flight1->title.' '.$flight1->price.config('site.currency.symbol'),
                                     'image' => $flight1->imagePreset(),
                                 ])
@@ -168,7 +168,7 @@
                             <div class="r-home__news-block @if(($key + 1) % 2 == 0) m-last @else m-first @endif">
                                 @include('component.news', [
                                     'title' => $new->title,
-                                    'route' => route('content.show', [$new->type, $new]),
+                                    'route' => route('content.show', [$new->type, $new->slug]),
                                     'date' => $new->created_at,
                                     'image' => $new->imagePreset(),
                                     'modifiers' => $key > 3 ? 'm-smaller' : null
@@ -209,7 +209,7 @@
                                 <div class="c-columns__item">
                                     @include('component.news', [
                                         'title' => $featured_new->title,
-                                        'route' => route('content.show', [$featured_new->type, $featured_new]),
+                                        'route' => route('content.show', [$featured_new->type, $featured_new->slug]),
                                         'image' => $featured_new->imagePreset(),
                                         'modifiers' => 'm-smaller'
                                     ])
@@ -264,7 +264,7 @@
                                 @include('component.blog', [
                                     'title' => $blog->title,
                                     'image' => '',
-                                    'route' => route('content.show', [$blog->type, $blog]),
+                                    'route' => route('content.show', [$blog->type, $blog->slug]),
                                     'profile' => [
                                         'route' => route('user.show', [$blog->user]),
                                         'title' => $blog->user->name,

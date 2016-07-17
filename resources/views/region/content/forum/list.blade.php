@@ -5,7 +5,7 @@
         'items' => $items->transform(function ($item) use ($modifiers) {
             return [
                 'topic' => str_limit($item->title, 50),
-                'route' => route('content.show', [$item->type, $item]),
+                'route' => route('content.show', [$item->type, $item->slug]),
                 'date' => view('component.date.relative', [
                     'date' => $item->updated_at
                 ]),

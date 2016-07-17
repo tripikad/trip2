@@ -6,7 +6,7 @@
             <div class="c-columns__item">
                 @include('component.card', [
                     'modifiers' => 'm-purple',
-                    'route' => route('content.show', [$item->type, $item]),
+                    'route' => route('content.show', [$item->type, $item->slug]),
                     'title' => $item->title.' '.$item->price.config('site.currency.symbol'),
                     'image' => $item->imagePreset()
                 ])
