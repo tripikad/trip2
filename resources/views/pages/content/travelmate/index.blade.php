@@ -2,6 +2,8 @@
 
 @section('title', trans("content.$type.index.title"))
 
+@section('head_description', trans('site.description.travelmate'))
+
 @section('header')
 
     @include('component.header',[

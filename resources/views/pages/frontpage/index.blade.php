@@ -8,6 +8,8 @@
 
 @stop
 
+@section('head_description', trans('site.description.main'))
+
 @section('masthead.search')
 
     @include('component.search',[
