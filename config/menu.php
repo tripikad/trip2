@@ -63,10 +63,10 @@ return [
             'route' => '/content/static/22125',
         ],
         'flightfeed' => [
-            'route' => 'lendude_sooduspakkumised/rss',
+            'route' => '/lendude_sooduspakkumised/rss',
         ],
         'newsfeed' => [
-            'route' => 'index.atom',
+            'route' => '/index.atom',
         ],
     ],
 
