@@ -14,14 +14,14 @@
         'dropzone.file.remove' => 'Kustuta',
 
         'description' => [
-            'main' => 'Trip.ee aitab leida odavaid pileteid, reisiideid, reisikaaslasi, reisisoovitusi, reisivarustust ja palju muud reisiks vajalikku',
+            'main' => 'Trip.ee aitab leida odavaid pileteid, reisiideid, reisikaaslasi, reisisoovitusi, reisivarustust ning palju muud reisiks vajalikku',
             'flights' => 'Kõik odavad lennupiletid mugavalt ühelt lehel. Vaata ülisoodsaid lennupakkumisi ning alusta oma reisi planeerimist siit',
             'news' => 'Uudised reisimisest, lennufirmadest, viisadest, hinnamuutustest, kultuurist ja  tavadest',
             'travelmate' => 'Leia omale reisikaaslane, kas juba planeeritud reisiks või uute plaanide koostamiseks',
             'forum' => 'Foorum reisimuljete jagamiseks, lennupiletite ja reisikaaslaste otsimiseks, reisiplaanide pidamiseks ning parimate pakkumiste leidmiseks',
             'expat' => 'Uudiseid ja soovitused välismaal elavatelt eestlastelt',
             'buysell' => 'Lennupiletite, reisivarustuse, kinkekaartide ja muu reisimiseks vajaliku ost ja müük',
-            'blog' => 'Reisipäevikud, reisijutud ning muidu pikemad reisilood',
+            'blog' => 'Reisipäevikud, reisijutud ning pikemad reisilood',
             'photo' => 'Reisifotod, paremad kui Instagramis',
             'internal' => 'Moderaatorite foorum',
             'static' => 'Sisulehed',
