@@ -11,6 +11,8 @@ class Kernel extends ConsoleKernel
 
         \App\Console\Commands\GenerateUserRankings::class,
         \App\Console\Commands\ConvertOldUser::class,
+        \App\Console\Commands\ConvertUrl::class,
+        \App\Console\Commands\ConvertUrlTest::class,
 
     ];
 
