@@ -23,6 +23,9 @@
             'buysell' => 'Buy or sell anything you need for travelling',
             'blog' => 'Travel blog...',
             'photo' => 'Share your travel photos or view photos of others',
+            'internal' => '',
+            'static' => '',
+            'shortnews' => '',
         ],
 
         'footer.copyright' => 'Copyright &copy; Trip.ee 1998-:current_year',

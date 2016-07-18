@@ -23,6 +23,9 @@
             'buysell' => 'Lennupiletite, reisivarustuse, kinkekaartide ja muu reisimiseks vajaliku ost ja müük. ',
             'blog' => 'Reisikirjad, videod, uudised ja muljed reisihuviliste poolt eri reiside, matkade ja retkede kohta',
             'photo' => 'Jaga enda reisipilte Trip.ee kasutajatega või vaata teiste reisijate pilte. ',
+            'internal' => '',
+            'static' => '',
+            'shortnews' => '',
         ],
 
         'footer.copyright' => 'Autoriõigused &copy; Trip.ee 1998-:current_year',
