@@ -80,6 +80,6 @@ class ResetController extends Controller
 
     protected function getEmailSubject()
     {
-        return property_exists($this, 'subject') ? $this->subject : 'Sinu kasutaja parooli taastamine';
+        return property_exists($this, 'subject') ? $this->subject : trans('auth.reset.email.subject');
     }
 }
