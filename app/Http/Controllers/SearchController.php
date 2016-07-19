@@ -47,6 +47,7 @@ class SearchController extends Controller
             $results = $tabs = null;
         }
 
+
         return response()
             ->view('pages.search.show', ['request' => $request, 'results' => $results, 'active_search' => $active_search, 'tabs' => $tabs])
             ->header('Cache-Control', 'public, s-maxage='.config('cache.search.header'));
