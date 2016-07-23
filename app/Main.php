@@ -28,7 +28,7 @@ class Main
         if (preg_match_all($imagePattern, $filteredBody, $matches)) {
             foreach ($matches[1] as $match) {
                 if ($image = Image::find($match)) {
-                    $filteredBody = str_replace("[[$image->id]]", '<img src="'.$image->preset('medium').'" />', $filteredBody);
+                    $filteredBody = str_replace("[[$image->id]]", '<img src="'.$image->preset('large').'" style="width: 100%"/>', $filteredBody);
                 }
             }
         }
