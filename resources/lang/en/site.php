@@ -26,7 +26,7 @@
             'internal' => 'Forum for site moderators',
             'static' => 'Static pages',
             'shortnews' => 'Short news',
-            'destination' => 'travel information about :name',
+            'destination' => 'Travel information about :name',
         ],
 
         'footer.copyright' => 'Copyright &copy; Trip.ee 1998-:current_year',
