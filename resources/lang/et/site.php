@@ -26,6 +26,7 @@
             'internal' => 'Moderaatorite foorum',
             'static' => 'Sisulehed',
             'shortnews' => 'Lühiuudised',
+            'destination' => ':name: reisiinfo ning ülevaate headest pakkumistest, reisisoovitustest, kuulutustest ja reisikaaslastest',
         ],
 
         'footer.copyright' => 'Autoriõigused &copy; Trip.ee 1998-:current_year',
