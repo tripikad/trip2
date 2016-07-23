@@ -50,7 +50,7 @@ class SearchController extends Controller
 
         Log::info('User searched', [
             'search' => $q,
-            'user' => auth()->check() ? 'logged' : 'unlogged'
+            'user' => auth()->check() ? 'logged' : 'unlogged',
         ]);
 
         return response()
