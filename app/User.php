@@ -126,7 +126,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->morphToMany('App\Image', 'imageable');
     }
 
-    public function imagePreset($preset = 'small')
+    public function imagePreset($preset = 'small_square')
     {
         $image = null;
 
