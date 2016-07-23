@@ -47,8 +47,10 @@ class SearchController extends Controller
         } else {
             $results = $tabs = null;
         }
-
-        Log::info('Search request has been done', ['search' => $q]);
+        
+            Log::info('Search request has been done', ['search' => $q, 'user' => Auth()->check() ? 'logged-in' : 'visitor']);
+        
+        
 
         return response()
             ->view('pages.search.show', ['request' => $request, 'results' => $results, 'active_search' => $active_search, 'tabs' => $tabs])
