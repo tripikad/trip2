@@ -14,6 +14,8 @@
     ])
 @stop
 
+@section('head_description', trans("site.description.$type"))
+
 @section('title', trans("content.$type.index.title"))
 
 @section('content')

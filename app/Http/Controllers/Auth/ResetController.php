@@ -77,4 +77,9 @@ class ResetController extends Controller
                     ->withErrors(['email' => trans($response)]);
         }
     }
+
+    protected function getEmailSubject()
+    {
+        return property_exists($this, 'subject') ? $this->subject : trans('auth.reset.email.subject');
+    }
 }
