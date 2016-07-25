@@ -47,7 +47,7 @@
 
                                 @include('component.card', [
                                     'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
-                                    'route' => route('content.show', [$flight1->type, $flight1->slug]),
+                                    'route' => route($flight1->type.'.show', [$flight1->slug]),
                                     'title' => $flight1->title.' '.$flight1->price.config('site.currency.symbol'),
                                     'image' => $flight1->imagePreset(),
                                 ])
@@ -58,7 +58,7 @@
                         @include('component.link', [
                             'modifiers' => 'm-icon m-right',
                             'title' => trans('frontpage.index.all.offers'),
-                            'route' => route('content.index', ['flight']),
+                            'route' => route('flight.index'),
                             'icon' => 'icon-arrow-right'
                         ])
                     </div>
@@ -103,19 +103,19 @@
                         'items' => [
                             [
                                 'title' => trans('frontpage.index.forum.general'),
-                                'route' => route('content.index', 'forum'),
+                                'route' => route('forum.index'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'title' => trans('frontpage.index.forum.buysell'),
-                                'route' => route('content.index', 'buysell'),
+                                'route' => route('buysell.index'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'title' => trans('frontpage.index.forum.expat'),
-                                'route' => route('content.index', 'expat'),
+                                'route' => route('expat.index'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
                             ],
@@ -168,7 +168,7 @@
                             <div class="r-home__news-block @if(($key + 1) % 2 == 0) m-last @else m-first @endif">
                                 @include('component.news', [
                                     'title' => $new->title,
-                                    'route' => route('content.show', [$new->type, $new->slug]),
+                                    'route' => route($new->type.'.show', [$new->slug]),
                                     'date' => $new->created_at,
                                     'image' => $new->imagePreset(),
                                     'modifiers' => $key > 3 ? 'm-smaller' : null
@@ -188,7 +188,7 @@
                         <div class="r-block">
                             @include('component.link', [
                                 'title' => trans('frontpage.index.all.news'),
-                                'route' => route('content.index', ['news']),
+                                'route' => route('news.index'),
                                 'modifiers' => 'm-icon m-right',
                                 'icon' => 'icon-arrow-right'
                             ])
@@ -209,7 +209,7 @@
                                 <div class="c-columns__item">
                                     @include('component.news', [
                                         'title' => $featured_new->title,
-                                        'route' => route('content.show', [$featured_new->type, $featured_new->slug]),
+                                        'route' => route($featured_new->type.'.show', [$featured_new->slug]),
                                         'image' => $featured_new->imagePreset(),
                                         'modifiers' => 'm-smaller'
                                     ])
@@ -239,7 +239,7 @@
                                 @include('component.link', [
                                     'modifiers' => 'm-icon',
                                     'title' => trans('frontpage.index.all.offers'),
-                                    'route' => route('content.index', ['flight']),
+                                    'route' => route('flight.index'),
                                     'icon' => 'icon-arrow-right'
                                 ])
                             </div>
@@ -264,7 +264,7 @@
                                 @include('component.blog', [
                                     'title' => $blog->title,
                                     'image' => '',
-                                    'route' => route('content.show', [$blog->type, $blog->slug]),
+                                    'route' => route($blog->type.'.show', [$blog->slug]),
                                     'profile' => [
                                         'route' => route('user.show', [$blog->user]),
                                         'title' => $blog->user->name,

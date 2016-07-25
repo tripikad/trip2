@@ -29,7 +29,7 @@
                                 'image' => $content->imagePreset('small'),
                                 'title' => $content->title,
                                 'text' => ($content->status == 1 ? view('component.date.relative', ['date' => $content->created_at]) : trans('content.post.status.unpublished')),
-                                'route' => route('content.show', ['type' => $content->type, 'id' => $content]),
+                                'route' => route('content.show', [$content->type, $content->slug]),
                             ])
                         </div>
 

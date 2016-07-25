@@ -7,28 +7,28 @@ return [
             'route' => '/',
         ],
        'flights' => [
-            'route' => '/content/flight',
+            'route' => '/odavad-lennupiletid',
         ],
         'travelmates' => [
-            'route' => '/content/travelmate',
+            'route' => '/reisikaaslased',
         ],
         'forum' => [
-            'route' => '/content/forum',
+            'route' => '/foorum/uldfoorum',
         ],
     ],
 
     'footer' => [
         'flights' => [
-            'route' => '/content/flight',
+            'route' => '/odavad-lennupiletid',
         ],
         'travelmates' => [
-            'route' => '/content/travelmate',
+            'route' => '/reisikaaslased',
         ],
         'news' => [
-            'route' => '/content/news',
+            'route' => '/uudised',
         ],
         'blogs' => [
-            'route' => '/content/blog',
+            'route' => '/reisikirjad',
         ],
         'photos' => [
             'route' => '/content/photo',
@@ -103,21 +103,21 @@ return [
     'forum' => [
         [
             'title' => 'menu.forum.forum',
-            'route' => '/content/forum',
+            'route' => '/foorum/uldfoorum',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
             'type' => 'forum',
         ],
         [
             'title' => 'menu.forum.expat',
-            'route' => '/content/expat',
+            'route' => '/foorum/elu-valimaal',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
             'type' => 'expat',
         ],
         [
             'title' => 'menu.forum.buysell',
-            'route' => '/content/buysell',
+            'route' => '/foorum/ost-muuk',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
             'type' => 'buysell',

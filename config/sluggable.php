@@ -125,11 +125,14 @@ return [
 
 
     'contentTypeMapping' => [
-        'forum' => 'foorum',
-        'flight' => 'lennupakkumised',
+        'forum' => 'foorum/uldfoorum',
+        'expat' => 'foorum/elu-valimaal',
+        'buysell' => 'foorum/ost-muuk',
+        'flight' => 'odavad-lennupiletid',
         'travelmate' => 'reisikaaslased',
-        'blog' => 'blogid',
-        'news' => 'uudised'
+        'blog' => 'reisikirjad',
+        'news' => 'uudised',
+        'shortnews' => 'luhiuudised'
     ],
 
 

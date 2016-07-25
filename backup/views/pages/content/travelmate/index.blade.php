@@ -50,7 +50,7 @@
                                 'text' => 'J'
                             ],
                             'name' => $content->user->name,
-                            'route' => route('content.show', [$content->type, $content]),
+                            'route' => route($item->type.'.show', [$item->slug]),
                             'sex_and_age' =>
                                 ($content->user->gender ?
                                     trans('user.gender.'.$content->user->gender).

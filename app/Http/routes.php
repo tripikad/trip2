@@ -52,6 +52,22 @@ Route::get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordFo
 
 Route::post('reset/password', ['uses' => 'Auth\ResetController@postReset', 'as' => 'reset.password.submit']);
 
+//SEO content
+
+foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $type) {
+    Route::group(['prefix' => $slugType, 'as' => $type.'.'], function () use($type){
+        Route::get('/', ['middleware' => null, 'as' => 'index', function () use ($type) {
+            $controller = new ContentController;
+            return $controller->index(app('request'), $type);
+        }]);
+
+        Route::get('{slug}', ['middleware' => null, 'as' => 'show', function ($slug) use ($type) {
+            $controller = new ContentController;
+            return $controller->findBySlugAndType($type, $slug);
+        }]);
+    });
+}
+
 // Content
 
 Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
@@ -83,9 +99,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
         }
     }]);
 
-    Route::get('{slug}', ['middleware' => null, 'uses' => 'ContentController@showSlug', 'as' => 'show']);
-
-    //Route::get('{id}', ['middleware' => null, 'uses' => 'ContentController@show', 'as' => 'show']);
+    Route::get('{id}', ['middleware' => null, 'uses' => 'ContentController@show', 'as' => 'show']);
 
     Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'as' => 'edit', function ($type, $id) {
         $controller = new ContentController;
