@@ -46,7 +46,7 @@
 
                 <div class="c-form__group">
 
-                    {!! Honeypot::generate('name_h', 'time') !!}
+                    {!! Honeypot::generate('name_h', 'time_n') !!}
 
                     {!! Form::label('name', trans('auth.login.field.name.title'), [
                         'class' => 'c-form__label'
@@ -58,7 +58,7 @@
 
                 <div class="c-form__group">
 
-                    {!! Honeypot::generate('parool_h', 'time') !!}
+                    {!! Honeypot::generate('parool_h', 'time_p') !!}
 
                     {!! Form::label('password', trans('auth.login.field.password.title'), [
                         'class' => 'c-form__label'
