@@ -24,7 +24,7 @@ class RegistrationController extends Controller
             'password' => 'required|confirmed|min:6',
             'eula' => 'required',
             'fullname'   => 'honeypot',
-            'time'   => 'required|honeytime:5'
+            'time'   => 'required|honeytime:5',
         ]);
 
         $fields = [
