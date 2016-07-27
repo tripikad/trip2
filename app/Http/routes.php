@@ -68,6 +68,15 @@ foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $typ
     });
 }
 
+//SEO static
+
+foreach (config('sluggable.staticContentMapping') as $static_id => $slug) {
+    Route::get($slug, ['middleware' => null, 'as' => 'static.'.$static_id, function () use ($static_id) {
+        $controller = new ContentController;
+        return $controller->show('static', $static_id);
+    }]);
+};
+
 // Content
 
 Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {

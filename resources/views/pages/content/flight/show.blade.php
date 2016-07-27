@@ -35,9 +35,9 @@
     <div class="r-flights__masthead">
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
-            'route' => route('content.index', [$content->type]),
+            'route' => route($content->type.'.index'),
             'subtitle' => trans('content.flight.show.action.all'),
-            'subtitle_route' => route('content.index', [$content->type]),
+            'subtitle_route' => route($content->type.'.index'),
             'image' => ($content->imagePreset('large') ?
                 $content->imagePreset('large') :
                 \App\Image::getHeader())
@@ -125,7 +125,7 @@
                         @include('component.link', [
                             'modifiers' => 'm-icon',
                             'title' => trans('frontpage.index.all.offers'),
-                            'route' => route('content.index', ['flight']),
+                            'route' => route('flight.index'),
                             'icon' => 'icon-arrow-right'
                         ])
                     </div>
@@ -190,7 +190,7 @@
 
                         @include('component.card', [
                             'modifiers' => 'm-green',
-                            'route' => route('content.show', [$sidebar_flight->type, $sidebar_flight]),
+                            'route' => route($sidebar_flight->type.'.show', [$sidebar_flight->slug]),
                             'title' => $sidebar_flight->title.' '.$sidebar_flight->price.config('site.currency.symbol'),
                             'image' => $sidebar_flight->imagePreset()
                         ])
@@ -250,7 +250,7 @@
                                 [
                                     'modifiers' => 'm-icon',
                                     'title' => trans('content.action.more.about'),
-                                    'route' => route('content.show', [$about->first()->type, $about->first()]),
+                                    'route' => route('static.1534'),
                                     'icon' => 'icon-arrow-right'
                                 ],
                                 [

@@ -134,7 +134,7 @@
                     @foreach ($featured['flights']['contents'] as $flight)
                         @include('component.card', [
                             'modifiers' => 'm-yellow m-small',
-                            'route' => route('content.show', [$flight->type, $flight]),
+                            'route' => route($flight->type.'.show', [$flight->slug]),
                             'title' => str_limit($flight->title, 50).' '.$flight->price.' '.config('site.currency.symbol'),
                             'image' => $flight->imagePreset(),
                         ])
@@ -219,7 +219,7 @@
                                     @include('component.link', [
                                         'modifiers' => 'm-icon m-small',
                                         'title' => $destination->name .' '.trans('destination.show.forum.button.title'),
-                                        'route' => route('content.index', 'forum').'?destination='.$destination->id,
+                                        'route' => route('forum.index').'?destination='.$destination->id,
                                         'icon' => 'icon-arrow-right'
                                     ])
                                 </div>
@@ -283,7 +283,7 @@
                                 return [
                                     'image' => $photo->imagePreset(),
                                     'image_large' => $photo->imagePreset('large'),
-                                    'route' => route('content.show', [$photo->type, $photo]),
+                                    'route' => route($photo->type.'.show', [$photo->slug]),
                                     'alt' => $photo->title,
                                     'tags' => $photo->destinations->transform(function($destination) {
                                         return [
@@ -319,7 +319,7 @@
                                         @include('component.news', [
                                             'title' => $new->title,
                                             'modifiers' => 'm-smaller',
-                                            'route' => route('content.show', [$new->type, $new]),
+                                            'route' => route($new->type.'.show', [$new->slug]),
                                             'date' => $new->created_at,
                                             'image' => $new->imagePreset()
                                         ])
@@ -361,7 +361,7 @@
 
                         @include('component.card', [
                             'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
-                            'route' => route('content.show', [$flight->type, $flight]),
+                            'route' => route($flight->type.'.show', [$flight->slug]),
                             'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
                             'image' => $flight->imagePreset(count($featured['flights2']['contents']) == 1 ? 'large' : '')
                         ])

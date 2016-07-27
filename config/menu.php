@@ -31,36 +31,36 @@ return [
             'route' => '/reisikirjad',
         ],
         'photos' => [
-            'route' => '/content/photo',
+            'route' => '/reisipildid',
         ],
 
     ],
 
     'footer2' => [
         'forum' => [
-            'route' => '/content/forum',
+            'route' => '/foorum/uldfoorum',
         ],
         'expat' => [
-            'route' => '/content/expat',
+            'route' => '/foorum/elu-valimaal',
         ],
         'buysell' => [
-            'route' => '/content/buysell',
+            'route' => '/foorum/ost-muuk',
         ],
 
     ],
 
     'footer3' => [
         'about' => [
-            'route' => '/content/static/1534',
+            'route' => '/tripist',
         ],
         'contact' => [
-            'route' => '/content/static/972',
+            'route' => '/kontakt',
         ],
         'eula' => [
-            'route' => '/content/static/25151',
+            'route' => '/kasutustingimused',
         ],
         'advertising' => [
-            'route' => '/content/static/22125',
+            'route' => '/reklaam',
         ],
         'flightfeed' => [
             'route' => '/lendude_sooduspakkumised/rss',
@@ -86,14 +86,14 @@ return [
     'news' => [
         'news' => [
             'title' => 'menu.news.news',
-            'route' => '/content/news',
+            'route' => '/uudised',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
             'type' => 'news',
         ],
         'shortnews' => [
             'title' => 'menu.news.shortnews',
-            'route' => '/content/shortnews',
+            'route' => '/luhiuudised',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
             'type' => 'shortnews',

@@ -78,7 +78,7 @@
                             [
                                 'modifiers' => 'm-icon',
                                 'title' => trans('frontpage.index.about.title'),
-                                'route' => route('content.show', [$content->first()->type, $content->first()]),
+                                'route' => route('static.'.$content->first()->id),
                                 'icon' => 'icon-arrow-right'
                             ]
                         ],

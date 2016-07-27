@@ -150,7 +150,10 @@ class ContentController extends Controller
             $comments->count(),
             config('content_'.$type.'.index.paginate')
         );
-        $comments->setPath(route($type.'.show', [$content->slug]));
+
+        if($type !== 'static') {
+            $comments->setPath(route($type.'.show', [$content->slug]));
+        }
 
         if (view()->exists('pages.content.'.$type.'.show')) {
             $view = 'pages.content.'.$type.'.show';

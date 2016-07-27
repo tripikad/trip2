@@ -132,8 +132,17 @@ return [
         'travelmate' => 'reisikaaslased',
         'blog' => 'reisikirjad',
         'news' => 'uudised',
-        'shortnews' => 'luhiuudised'
+        'shortnews' => 'luhiuudised',
+        'photo' => 'reisipildid'
     ],
+
+    'staticContentMapping' => [
+        1534 => 'tripist',
+        972 => 'kontakt',
+        22125 => 'reklaam',
+        97203 => 'mis-on-veahind',
+        25151 => 'kasutustingimused',
+    ]
 
 
 ];

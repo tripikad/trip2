@@ -16,7 +16,7 @@
             'modifiers' => 'm-alternative',
             'image' => \App\Image::getHeader(),
             'subtitle' => trans('content.travelmate.view.all.offers'),
-            'subtitle_route' => route('content.index', [$content->type])
+            'subtitle_route' => route($content->type.'.index')
         ])
     </div>
 
@@ -195,7 +195,7 @@
                     @foreach ($sidebar_flights as $sidebar_flight)
                         @include('component.card', [
                             'modifiers' => 'm-purple',
-                            'route' => route('content.show', [$sidebar_flight->type, $sidebar_flight]),
+                            'route' => route($sidebar_flight->type.'.show', [$sidebar_flight->slug]),
                             'title' => $sidebar_flight->title.' '.$sidebar_flight->price.config('site.currency.symbol'),
                             'image' => $sidebar_flight->imagePreset()
                         ])
