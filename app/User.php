@@ -130,17 +130,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         $image = null;
 
-        if (count($this->images)) {
-            $image = config('imagepresets.presets.'.$preset.'.path').$this->images[0]->filename;
+        if ($image = $this->images->first()) {
+
+            return $image->preset($preset);
+
         }
 
-        if (! file_exists($image)) {
-            $image = config('imagepresets.image.none');
-        } else {
-            $image = config('imagepresets.presets.'.$preset.'.displaypath').$this->images[0]->filename;
-        }
-
-        return $image;
+        return config('imagepresets.image.none'); 
     }
 
     public function hasRole($role)
