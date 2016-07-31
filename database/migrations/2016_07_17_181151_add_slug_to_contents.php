@@ -30,7 +30,6 @@ class AddSlugToContents extends Migration
         Schema::table('contents', function (Blueprint $table) {
             $table->string('slug')->nullable(false)->unique()->change();
         });
-
     }
 
     /**

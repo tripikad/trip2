@@ -55,14 +55,16 @@ Route::post('reset/password', ['uses' => 'Auth\ResetController@postReset', 'as' 
 //SEO content
 
 foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $type) {
-    Route::group(['prefix' => $slugType, 'as' => $type.'.'], function () use($type){
+    Route::group(['prefix' => $slugType, 'as' => $type.'.'], function () use ($type) {
         Route::get('/', ['middleware' => null, 'as' => 'index', function () use ($type) {
             $controller = new ContentController;
+
             return $controller->index(app('request'), $type);
         }]);
 
         Route::get('{slug}', ['middleware' => null, 'as' => 'show', function ($slug) use ($type) {
             $controller = new ContentController;
+
             return $controller->findBySlugAndType($type, $slug);
         }]);
     });
@@ -73,9 +75,10 @@ foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $typ
 foreach (config('sluggable.staticContentMapping') as $static_id => $slug) {
     Route::get($slug, ['middleware' => null, 'as' => 'static.'.$static_id, function () use ($static_id) {
         $controller = new ContentController;
+
         return $controller->show('static', $static_id);
     }]);
-};
+}
 
 //SEO destination
 

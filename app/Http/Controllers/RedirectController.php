@@ -15,7 +15,7 @@ class RedirectController extends Controller
             return redirect()
                 ->route(
                     $content->type.'.show', [
-                    $content->slug
+                    $content->slug,
                 ], 301);
         }
 
@@ -34,7 +34,7 @@ class RedirectController extends Controller
             return redirect()
                 ->route(
                     $content->type.'.show', [
-                    $content->slug
+                    $content->slug,
                 ], 301);
         }
 

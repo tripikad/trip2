@@ -7,7 +7,6 @@ use Cache;
 use App\Destination;
 use DB;
 use App\Main;
-use Cviebrock\EloquentSluggable\Sluggable;
 
 class DestinationController extends Controller
 {
@@ -199,5 +198,4 @@ class DestinationController extends Controller
 
         return $this->show($destination->id);
     }
-
 }

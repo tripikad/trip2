@@ -4,8 +4,8 @@ namespace App;
 
 use Cache;
 use Baum;
-use \Cviebrock\EloquentSluggable\Sluggable as Sluggable;
-use \Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
+use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 
 class Destination extends Baum\Node
 {
@@ -72,8 +72,8 @@ class Destination extends Baum\Node
     {
         return [
             'slug' => [
-                'source' => 'name'
-            ]
+                'source' => 'name',
+            ],
         ];
     }
 }

@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
-use \Cviebrock\EloquentSluggable\Sluggable as Sluggable;
-use \Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
+use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 
 class Content extends Model
 {
@@ -185,8 +185,8 @@ class Content extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
-            ]
+                'source' => 'title',
+            ],
         ];
     }
 }

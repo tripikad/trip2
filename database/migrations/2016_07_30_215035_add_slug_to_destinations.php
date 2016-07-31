@@ -19,7 +19,7 @@ class AddSlugToDestinations extends Migration
         });
 
         Destination::chunk(200, function ($destinations) {
-            /** @var Destination destination */
+            /* @var Destination destination */
             foreach ($destinations as $destination) {
                 $slug = SlugService::createSlug(Destination::class, 'slug', $destination->name);
                 $destination->update(['slug' => $slug]);

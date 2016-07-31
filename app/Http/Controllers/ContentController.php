@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Http\Request;
 use Auth;
 use Log;
@@ -118,11 +117,10 @@ class ContentController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
 
-
     public function findBySlugAndType($type, $slug)
     {
         $content = Content::where('slug', $slug)->where('type', $type)->firstOrFail();
-        if (!$content) {
+        if (! $content) {
             abort(404);
         }
 
@@ -151,7 +149,7 @@ class ContentController extends Controller
             config('content_'.$type.'.index.paginate')
         );
 
-        if($type !== 'static') {
+        if ($type !== 'static') {
             $comments->setPath(route($type.'.show', [$content->slug]));
         }
 
