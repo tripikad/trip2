@@ -7,6 +7,7 @@ use Cache;
 use App\Destination;
 use DB;
 use App\Main;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class DestinationController extends Controller
 {
@@ -191,4 +192,12 @@ class DestinationController extends Controller
             'destination_info' => $destination_info,
         ])->header('Cache-Control', 'public, s-maxage='.config('cache.destination.header'));
     }
+
+    public function showSlug($slug)
+    {
+        $destination = Destination::findBySlugOrFail($slug);
+
+        return $this->show($destination->id);
+    }
+
 }

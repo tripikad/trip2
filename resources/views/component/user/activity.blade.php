@@ -5,7 +5,7 @@
 
             return [
                 'topic' => $item->title,
-                'route' => route('content.show', [$item->type, $item]),
+                'route' => route($item->type.'.show', [$item->slug]),
                 'profile' => [
                     'modifiers' => 'm-mini',
                     'image' => $item->user->imagePreset(),
@@ -49,7 +49,7 @@
 
             return [
                 'topic' => $item->content->title,
-                'route' => route('content.show', [$item->content->type, $item->content]),
+                'route' => route($item->content->type.'.show', [$item->content->slug]),
                 'profile' => [
                     'modifiers' => 'm-mini',
                     'image' => $item->content->user->imagePreset(),
@@ -83,7 +83,7 @@
                         'text' => $item->body_filtered,
                         'more' => [
                             'title' => trans('user.activity.view.full.post'),
-                            'route' => route('content.show', [$item->content->type, $item->content, '#comment-' . $item->id])
+                            'route' => route($item->content->type.'.show', [$item->content->slug, '#comment-' . $item->id])
                         ]
                     ]
                 ]

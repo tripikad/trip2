@@ -59,7 +59,7 @@
                     return [
                         'modifiers' => 'm-yellow',
                         'title' => $destination->name,
-                        'route' => route('destination.show', [$destination->id])
+                        'route' => route('destination.slug', $destination->slug)
                     ];
                 }),
                 'tags2' => $content->topics->transform(function ($topic) {
@@ -190,12 +190,12 @@
                         @include('component.destination', [
                             'modifiers' => 'm-purple',
                             'title' => $first_destination->name,
-                            'title_route' => route('destination.show', [
-                                $first_destination
+                            'title_route' => route('destination.slug', [
+                                $first_destination->slug
                             ]),
                             'subtitle' => $first_destination_parent ? $first_destination_parent->name : null,
-                            'subtitle_route' => $first_destination_parent ? route('destination.show', [
-                                $first_destination_parent
+                            'subtitle_route' => $first_destination_parent ? route('destination.slug', [
+                                $first_destination_parent->slug
                             ]) : null
                         ])
 
@@ -258,12 +258,12 @@
                         @include('component.destination', [
                             'modifiers' => 'm-blue',
                             'title' => $second_destination->name,
-                            'title_route' => route('destination.show', [
-                                $second_destination
+                            'title_route' => route('destination.slug', [
+                                $second_destination->slug
                             ]),
                             'subtitle' => $second_destination_parent ? $second_destination_parent->name : null,
-                            'subtitle_route' => $second_destination_parent ? route('destination.show', [
-                                $second_destination_parent
+                            'subtitle_route' => $second_destination_parent ? route('destination.slug', [
+                                $second_destination_parent->slug
                             ]) : null
                         ])
 

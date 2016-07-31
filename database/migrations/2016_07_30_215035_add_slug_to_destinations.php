@@ -3,9 +3,9 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
-use App\Content;
+use App\Destination;
 
-class AddSlugToContents extends Migration
+class AddSlugToDestinations extends Migration
 {
     /**
      * Run the migrations.
@@ -14,23 +14,21 @@ class AddSlugToContents extends Migration
      */
     public function up()
     {
-        Schema::table('contents', function (Blueprint $table) {
+        Schema::table('destinations', function (Blueprint $table) {
             $table->string('slug');
         });
 
-        Content::chunk(200, function ($contents) {
-            /** @var Content $content */
-            foreach ($contents as $content) {
-                $content->timestamps = false;
-                $slug = SlugService::createSlug(Content::class, 'slug', $content->title);
-                $content->update(['slug' => $slug]);
+        Destination::chunk(200, function ($destinations) {
+            /** @var Destination destination */
+            foreach ($destinations as $destination) {
+                $slug = SlugService::createSlug(Destination::class, 'slug', $destination->name);
+                $destination->update(['slug' => $slug]);
             }
         });
 
-        Schema::table('contents', function (Blueprint $table) {
+        Schema::table('destinations', function (Blueprint $table) {
             $table->string('slug')->nullable(false)->unique()->change();
         });
-
     }
 
     /**

@@ -178,9 +178,9 @@
                     @include('component.destination', [
                         'modifiers' => 'm-green',
                         'title' => $destination ? $destination->name : null,
-                        'title_route' => $destination ? route('destination.show', $destination) : null,
+                        'title_route' => $destination ? route('destination.slug', $destination->slug) : null,
                         'subtitle' => $parent_destination ? $parent_destination->name : null,
-                        'subtitle_route' => $parent_destination ? route('destination.show', $parent_destination) : null,
+                        'subtitle_route' => $parent_destination ? route('destination.slug', $parent_destination->slug) : null,
                     ])
 
                 @endif
@@ -228,11 +228,11 @@
                         @include('component.destination', [
                             'modifiers' => ['m-yellow', 'm-blue', 'm-red', 'm-purple'][($key>3?rand(0,3):$key)],
                             'title' => $sidebar_destination->name,
-                            'title_route' => route('destination.show', $sidebar_destination),
+                            'title_route' => route('destination.slug', $sidebar_destination->slug),
                             'subtitle' =>
                                 $sidebar_destination->parent_destination ? $sidebar_destination->parent_destination->name : null,
                             'subtitle_route' =>
-                                $sidebar_destination->parent_destination ? route('destination.show', $sidebar_destination->parent_destination) : null
+                                $sidebar_destination->parent_destination ? route('destination.slug', $sidebar_destination->parent_destination->slug) : null
                         ])
                     @endforeach
                 </div>

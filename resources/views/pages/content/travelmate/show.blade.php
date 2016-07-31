@@ -50,7 +50,7 @@
                     (count($content->destinations) ? $content_destinations = $content->destinations->transform(function ($content_destination) {
                         return [
                                 'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
-                                'route' => route('destination.show', [$content_destination->id]),
+                                'route' => route('destination.slug', [$content_destination->slug]),
                                 'title' => $content_destination->name
                         ];
                     }) : $content_destinations = collect([]));
@@ -185,9 +185,9 @@
                     @include('component.destination', [
                         'modifiers' => 'm-purple',
                         'title' => $destination ? $destination->name : null,
-                        'title_route' => $destination ? route('destination.show', $destination) : null,
+                        'title_route' => $destination ? route('destination.slug', $destination->slug) : null,
                         'subtitle' => $parent_destination ? $parent_destination->name : null,
-                        'subtitle_route' => $parent_destination ? route('destination.show', $parent_destination) : null,
+                        'subtitle_route' => $parent_destination ? route('destination.slug', $parent_destination->slug) : null,
                     ])
                 @endif
 

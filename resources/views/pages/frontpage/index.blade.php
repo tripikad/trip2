@@ -40,11 +40,11 @@
                                     'title' =>
                                         $flight1->destination ? $flight1->destination->name : null,
                                     'title_route' =>
-                                        $flight1->destination ? route('destination.show', $flight1->destination) : null,
+                                        $flight1->destination ? route('destination.slug', $flight1->destination->slug) : null,
                                     'subtitle' =>
                                         $flight1->parent_destination ? $flight1->parent_destination->name : null,
                                     'subtitle_route' =>
-                                        $flight1->parent_destination ? route('destination.show', $flight1->parent_destination) : null
+                                        $flight1->parent_destination ? route('destination.slug', $flight1->parent_destination->slug) : null
                                 ])
 
                                 @include('component.card', [
@@ -299,14 +299,14 @@
                                 return [
                                     'image' => $photo->imagePreset('small'),
                                     'image_large' => $photo->imagePreset('large'),
-                                    'route' => route('content.show', [$photo->type, $photo]),
+                                    'route' => route($photo->type.'.show', [$photo->slug]),
                                     'alt' => $photo->title,
                                     'tags' =>$photo->destinations->transform(function($destination) {
                                                 return [
 
                                                         'title' => $destination->name,
                                                         'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
-                                                        'route' => route('destination.show', $destination)
+                                                        'route' => route('destination.slug', $destination->slug)
                                                 ];
                                             }),
                                     'userName' => $photo->user->name,

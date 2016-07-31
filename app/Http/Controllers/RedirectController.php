@@ -101,8 +101,8 @@ class RedirectController extends Controller
 
         if ($destination = Destination::find($tid)) {
             return redirect()->route(
-                'destination.show', [
-                    $destination,
+                'destination.slug', [
+                    $destination->slug,
                 ], 301);
         }
 
@@ -141,8 +141,8 @@ class RedirectController extends Controller
             $destination = Destination::find($alias->aliasable_id);
 
             return redirect()->route(
-                'destination.show', [
-                    $destination,
+                'destination.slug', [
+                    $destination->slug,
                 ], 301);
         }
 
@@ -174,8 +174,8 @@ class RedirectController extends Controller
         if ($alias) {
             if ($destination = Destination::find($alias->aliasable_id)) {
                 return redirect()->route(
-                    'destination.show', [
-                        $destination,
+                    'destination.slug', [
+                        $destination->slug,
                     ], 301);
             }
 

@@ -77,6 +77,10 @@ foreach (config('sluggable.staticContentMapping') as $static_id => $slug) {
     }]);
 };
 
+//SEO destination
+
+Route::get('sihtkoht/{slug}', ['middleware' => null, 'uses' => 'DestinationController@showSlug', 'as' => 'destination.slug']);
+
 // Content
 
 Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
