@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Content;
 use App\Comment;
-use Carbon\Carbon;
 
 class ContentUpdateTest extends TestCase
 {
@@ -15,32 +14,31 @@ class ContentUpdateTest extends TestCase
 
         $typesUpdatingTimestamp = [
             'news',
-            'flight'
+            'flight',
         ];
         $typesNotUpdatingTimestamp = [
             'forum',
             'buysell',
-            'expat'
+            'expat',
         ];
-        
+
         // Mapping the correct PHPUnit assertions to each type
         $types = collect($typesUpdatingTimestamp)
-            ->map(function($type) {
+            ->map(function ($type) {
                 return [$type => 'assertGreaterThan'];
             })
             ->merge(collect($typesNotUpdatingTimestamp)
-                ->map(function($type) {
+                ->map(function ($type) {
                     return [$type => 'assertEquals'];
                 })
             )
             ->flatten(1);
         // Iterating over the types and making sure
         // the timestamps either update or not
-        $types->each(function($assertion, $type) use ($superuser) {
-
+        $types->each(function ($assertion, $type) use ($superuser) {
             $content = factory(Content::class)->create([
                 'user_id' => $superuser->id,
-                'type' => $type
+                'type' => $type,
             ]);
 
             $first_date = Content::find($content->id)->updated_at;
@@ -49,13 +47,12 @@ class ContentUpdateTest extends TestCase
 
             $this->actingAs($superuser)
                 ->visit("content/$type/$content->id/edit")
-                ->type("Hola titulo", 'title')
+                ->type('Hola titulo', 'title')
                 ->press(trans('content.edit.submit.title'));
 
             $second_date = Content::find($content->id)->updated_at;
 
             $this->$assertion($first_date->timestamp, $second_date->timestamp, "Type: $type");
-            
         });
     }
 
@@ -68,13 +65,12 @@ class ContentUpdateTest extends TestCase
             'buysell',
             'expat',
             'news',
-            'flight'
+            'flight',
         ];
-        
+
         // Iterating over the types and making sure
         // the timestamps either update or not
         foreach ($ContentTypes as $type) {
-
             $content = factory(Content::class)->create([
                 'user_id' => $superuser->id,
                 'type' => $type,
@@ -99,5 +95,4 @@ class ContentUpdateTest extends TestCase
             $this->assertEquals($first_date->timestamp, $second_date->timestamp);
         }
     }
-    
 }
