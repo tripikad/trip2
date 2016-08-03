@@ -1,5 +1,13 @@
 <?php
 
+use App\Utils;
+
+function component($component, $with = []) {
+
+    return (new Utils\Component($component, $with));
+        
+}
+
 function format_smtp_header(array $data)
 {
     $json = json_encode($data);
@@ -9,3 +17,4 @@ function format_smtp_header(array $data)
 
     return $str;
 }
+
