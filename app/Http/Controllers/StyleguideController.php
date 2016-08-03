@@ -10,6 +10,8 @@ class StyleguideController extends Controller
             ->with('content', collect()
                 ->push(component('Arc'))
                 ->push(component('Button')->with('title', 'Button'))
-            );
+            )
+            ->with('footer', region('Footer'));
+
     }
 }

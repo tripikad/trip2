@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 
 import Arc from './components/Arc/Arc.vue'
+import Icon from './components/Icon/Icon.vue'
+import IconLoader from './components/IconLoader/IconLoader.vue'
 
 const globalProps = JSON.parse(decodeURIComponent(
     document.querySelector('#globalprops').getAttribute('content')
@@ -14,7 +16,9 @@ new Vue({
     el: 'body',
 
     components: {
-        Arc
+        Arc,
+        Icon,
+        IconLoader
     },
 
     events: {

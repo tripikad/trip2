@@ -1,6 +1,7 @@
 <?php
 
 use App\Utils;
+use Illuminate\Http\Request;
 
 function component($component)
 {
