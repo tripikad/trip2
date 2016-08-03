@@ -10,12 +10,12 @@ class Component {
     protected $is;
     protected $with;
 
-    public function __construct($component, $with = null)
+    public function __construct($component)
     {
         
         $this->component = $component;
         $this->is = collect();
-        $this->with = collect($with);
+        $this->with = collect();
     
     }
 

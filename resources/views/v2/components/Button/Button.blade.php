@@ -1,14 +1,20 @@
-<a href="">
+@php
 
-<div class="Button {{ $isclasses }}">
+$route = $route ?? '';
+$title = $title ?? '';
 
+@endphp
 
-    <div class="Button__title">
+<a href="{{ $route }}">
 
-        {{ $title }}
+    <div class="Button {{ $isclasses }}">
+
+        <div class="Button__title">
+
+            {{ $title }}
+
+        </div>
 
     </div>
-
-</div>
 
 </a>

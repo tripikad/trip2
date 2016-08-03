@@ -114,7 +114,8 @@ elixir(function(mix) {
             './resources/views/v2/utils/**/*.css',
             './resources/views/v2/components/**/*.css'
         ],
-        './public/v2/css'
+        './public/v2/css',
+        './resources/views/v2/utils/'
     )
 
     mix.svg([

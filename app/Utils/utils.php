@@ -2,9 +2,16 @@
 
 use App\Utils;
 
-function component($component, $with = []) {
+function component($component) {
 
-    return (new Utils\Component($component, $with));
+    return (new Utils\Component($component));
+        
+}
+
+function region($component, ...$arguments) {
+
+    $class = "\App\Http\Regions\\$component";
+    return (new $class)->render(new Request, ...$arguments);
         
 }
 

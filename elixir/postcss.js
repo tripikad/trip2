@@ -6,7 +6,7 @@ var Elixir = require('laravel-elixir');
 var $ = Elixir.Plugins;
 var config = Elixir.config;
 
-Elixir.extend('postcss', function (src, output) {
+Elixir.extend('postcss', function (src, output, includePath) {
 
     return new Elixir.Task('postcss', function () {
         
@@ -16,7 +16,7 @@ Elixir.extend('postcss', function (src, output) {
             .pipe($.if(config.sourcemaps, $.sourcemaps.init()))
             .pipe(postcss([
                 require('postcss-import')({ path: [
-                    './resources/views/v2/utils',
+                    includePath,
                     './node_modules'
                 ]}),
                 require('postcss-simple-vars')(),
