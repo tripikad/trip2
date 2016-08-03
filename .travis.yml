@@ -1,10 +1,10 @@
 language: php
 
-node_js:
-  - "6"
-
 php:
   - 7.0
+
+env:
+  - TRAVIS_NODE_VERSION="6"
 
 cache:
   directories:
@@ -14,9 +14,9 @@ cache:
 sudo: false
 
 install:
-    - npm update -g npm
+    - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
     - npm install
-    - composer update --prefer-dist
+    - composer install --prefer-dist
     - cp .env.travis .env
     - chmod -R o+w storage/
     - mysql -e 'create database IF NOT EXISTS trip2;'
