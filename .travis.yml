@@ -7,11 +7,13 @@ cache:
   directories:
     - vendor
     - $HOME/.composer/cache
+    - node_modules
 
 sudo: false
 
 install:
     - composer update --prefer-dist
+    - npm install
     - cp .env.travis .env
     - chmod -R o+w storage/
     - mysql -e 'create database IF NOT EXISTS trip2;'
@@ -19,7 +21,9 @@ install:
 before_script:
     - php artisan migrate:refresh
 
-script: phpunit
+script:
+    - phpunit
+    - npm run test
 
 notifications:
     email: false
