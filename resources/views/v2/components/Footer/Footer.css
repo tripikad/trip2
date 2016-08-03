@@ -7,8 +7,8 @@
 
     .Footer__wrapper {
         display: flex;
-        justify-content: center;
         flex-direction: column ?if $tablet;
+        justify-content: center;
         margin-bottom: $margin-xxl;
     }
 
@@ -27,23 +27,23 @@
 
     .Footer__social {
         display: flex;
-        justify-content: center;
         flex-direction: column ?if $mobile;
+        justify-content: center;
         text-align: center;
     }
 
     .Footer__socialLink {
         color: white;
         font: $font-heading-sm;
-        padding: $padding-xs;
         margin-right: $padding-md;
+        padding: $padding-xs;
     }
 
     .Footer__licence {
-        margin-top: $margin-sm;
-        text-align: center;
         color: white;
-        opacity: $opacity-md;
         font: $font-text-md;
         height: $height-md;
+        margin-top: $margin-sm;
+        opacity: $opacity-md;
+        text-align: center;
     }
