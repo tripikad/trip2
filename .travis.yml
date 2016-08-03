@@ -14,8 +14,9 @@ cache:
 sudo: false
 
 install:
-    - composer update --prefer-dist
+    - npm update -g npm
     - npm install
+    - composer update --prefer-dist
     - cp .env.travis .env
     - chmod -R o+w storage/
     - mysql -e 'create database IF NOT EXISTS trip2;'
