@@ -1,0 +1,19 @@
+@import "variables";
+
+.Button {
+    align-items: center;
+    background: $green;
+    border-radius: $border-radius-md;
+    display: inline-flex;
+    font: $font-heading-md;
+    justify-content: center;
+    padding: $padding-sm $padding-lg;
+}
+
+.Button--wide {
+    display: flex;
+}
+
+    .Button__title {
+        color: $white;
+    }

@@ -1,0 +1,12 @@
+{
+  "extends": "standard",
+  "rules": {
+    "indent": [2, 4],
+    "no-multiple-empty-lines": [2, { "max": 2 }],
+    "space-before-function-paren": [2, "never"],
+    "no-new": [0]
+  },
+  plugins: [
+    "html"
+  ],
+}

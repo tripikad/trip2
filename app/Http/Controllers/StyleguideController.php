@@ -2,89 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Symfony\Component\Yaml\Yaml;
-use Storage;
-
 class StyleguideController extends Controller
 {
     public function index()
     {
-        $components = [];
+        return view('v2.layouts.1col')
+            ->with('content', collect()
 
-        $directories = array_merge(
-            ['views/component'],
-            Storage::disk('resources')->allDirectories('views/component'),
-            ['assets/sass/base']
-        );
 
-        foreach ($directories as $directory) {
-            foreach (Storage::disk('resources')->files($directory) as $filepath) {
-                if ($header = $this->getHeader($filepath)) {
-                    $components[] = ['filepath' => $filepath] + $header;
-                }
-            }
-        }
+                ->push(component('Body')
+                    ->is('responsive')
+                    ->with('body', '
+                        <p>Ennui flannel offal next level bitters four loko listicle synth church-key you probably havent heard of them keffiyeh sriracha.</p><img src="photos/social.jpg" /><p>Trade 90 cold-pressed beard photo booth selvage craft.</p><h3>H3 Gentrify etsy chartreuse</h3><p> trade 90 cold-pressed beard photo booth selvage craft. <a href="">Ennui flannel offal</a> next level bitters four loko listicle synth church-key.<ul><li>You probably havent</li><li>Heard</li><li>of them</li></ul>keffiyeh sriracha.</p><h4>H4 Gentrify etsy chartreuse</h4><p> trade 90 cold-pressed beard photo booth selvage craft</p>
+                    ')
+                )
 
-        return view('pages.styleguide.index', [
-            'components' => $components,
-            'svg_sprites' => $this->getSvgSprites(),
-            'svg_standalones' => $this->getSvgStandalones(),
-        ]);
-    }
+                ->push(component('Button')->with('title', 'Button'))
 
-    public function getHeader($filepath)
-    {
-        $start = '/{{--/';
-        $end = '/--}}/';
-
-        if (pathinfo($filepath)['extension'] == 'scss') {
-            $start = '/\/\*/';
-            $end = '/\*\//';
-        }
-
-        // Get the file contents
-
-        $file = Storage::disk('resources')->get($filepath);
-
-        // Split the file to the header and body
-
-        $parts = preg_split($end, $file);
-
-        // Verify we have the header
-
-        if (count($parts) > 1) {
-            $header = Yaml::parse(trim(preg_replace($start, '', $parts[0])));
-
-            return [
-                'title' => isset($header['title']) ? trim($header['title']) : null,
-                'description' => isset($header['description']) ? trim($header['description']) : null,
-                'code' => isset($header['code']) ? trim($header['code']) : null,
-                'modifiers' => isset($header['modifiers']) ? array_merge(['(none)'], $header['modifiers']) : null,
-            ];
-        }
-
-        return false;
-    }
-
-    public function getSvgSprites()
-    {
-        $svg_sprites = [];
-
-        foreach (Storage::disk('resources')->files('assets/svg/sprite') as $filepath) {
-            $svg_sprites[] = pathinfo($filepath)['filename'];
-        }
-
-        return $svg_sprites;
-    }
-
-    public function getSvgStandalones()
-    {
-        $svg_standalones = [];
-
-        foreach (Storage::disk('resources')->files('assets/svg/standalone') as $filepath) {
-            $svg_standalones[] = pathinfo($filepath)['filename'];
-        }
-
-        return $svg_standalones;
+                ->push(component('Arc'))
+            )
+            ->with('footer', region('Footer'));
     }
 }
