@@ -80,3 +80,20 @@
     height: 0;
     margin: $margin-md 0;
 }
+
+.Body .iframeWrapper {
+    height: 0;
+    max-width: 100%;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    margin-bottom: $margin-md;
+}
+
+.Body .iframeWrapper > iframe {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
