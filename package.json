@@ -1,6 +1,9 @@
 {
   "name": "trip2",
   "private": true,
+  "scripts": {
+    "test": "eslint \"resources/views/v2/**/*.{js,vue}\" ; stylelint \"resources/views/v2/**/*.css\""
+  },
   "dependencies": {
     "bootstrap-sass": "^3.3.5",
     "breakpoint-sass": "^2.6.1",
@@ -21,6 +24,11 @@
     "normalize.css": "^3.0.3",
     "selectize": "^0.12.1",
     "susy": "^2.2.6",
+    "eslint": "^3.1.1",
+    "eslint-config-standard": "^5.3.5",
+    "eslint-plugin-html": "^1.5.1",
+    "eslint-plugin-promise": "^2.0.0",
+    "eslint-plugin-standard": "^2.0.0",
     "gulp-postcss": "^6.1.1",
     "gulp-svgmin": "^1.2.2",
     "gulp-svgstore": "^6.0.0",
@@ -33,6 +41,8 @@
     "postcss-responsive-type": "^0.3.3",
     "postcss-short": "^1.4.0",
     "postcss-simple-vars": "^2.0.0",
+    "stylelint": "^7.0.3",
+    "stylelint-config-standard": "^11.0.0",
     "vue-resource": "^0.7.0"
 
   }

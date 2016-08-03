@@ -14,11 +14,11 @@ new Vue({
     el: 'body',
 
     components: {
-        Arc,
+        Arc
     },
 
     events: {
-},
+    },
 
     ready() {
     }
