@@ -15,9 +15,9 @@ cache:
 sudo: false
 
 install:
+    - composer install --prefer-dist
     - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
     - npm install
-    - composer install --prefer-dist
     - cp .env.travis .env
     - chmod -R o+w storage/
     - mysql -e 'create database trip2;'
