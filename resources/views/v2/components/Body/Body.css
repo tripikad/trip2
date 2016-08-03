@@ -23,11 +23,19 @@
 
 .Body h1,
 .Body h2,
-.Body h3,
-.Body h4,
-.Body h5 {
+.Body h3 {
     font-size: responsive;
+    font-weight: $font-weight-semibold;
     margin: $margin-topbottom-sm;
+    max-font-size: $font-size-lg;
+    min-font-size: $font-size-md;
+}
+
+.Body h4 {
+    color: $gray-light;
+    font-size: responsive;
+    font-weight: $font-weight-semibold;
+    margin: $margin-topbottom-xs;
     max-font-size: $font-size-lg;
     min-font-size: $font-size-md;
 }
@@ -57,7 +65,13 @@
     width: 100%;
 }
 
-.Body th,
+.Body th {
+    font-weight: $font-weight-semibold;
+    border-bottom: 1px solid $gray-lighter;
+    text-align: left;
+    vertical-align: top;
+}
+
 .Body tr {
     border-bottom: 1px solid $gray-lighter;
     text-align: left;
