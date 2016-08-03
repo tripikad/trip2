@@ -123,3 +123,6 @@ elixir(function(mix) {
         './public/v2/svg'
     )
 })
+
+gulp.task('v2', ['default']);
+
