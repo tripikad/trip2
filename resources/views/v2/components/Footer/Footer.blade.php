@@ -1,3 +1,12 @@
+@php
+
+    $image = $image ?? '';
+    $logo = $logo ?? '';
+    $links = $links ?? [];
+    $licence = $licence ?? '';
+
+@endphp
+
 <div
     class="Footer {{ $isclasses }}"
     style="
