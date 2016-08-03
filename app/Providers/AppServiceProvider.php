@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
         Collection::macro('render', function ($callback) {
             return $this
                 ->map($callback)
-                ->map(function($item) {
+                ->map(function ($item) {
                     return (string) $item;
                 })
                 ->implode('');
@@ -47,15 +47,20 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Collection::macro('pushWhen', function ($condition, $item) {
-            if ($condition) $this->push($item);
+            if ($condition) {
+                $this->push($item);
+            }
+
             return $this;
         });
 
         Collection::macro('putWhen', function ($condition, $key, $item) {
-            if ($condition) $this->put($key, $item);
+            if ($condition) {
+                $this->put($key, $item);
+            }
+
             return $this;
         });
-        
     }
 
     protected function google_analytics_track($auth)
@@ -67,6 +72,4 @@ class AppServiceProvider extends ServiceProvider
             }
         });
     }
-
-
 }

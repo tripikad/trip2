@@ -2,17 +2,16 @@
 
 use App\Utils;
 
-function component($component) {
-
-    return (new Utils\Component($component));
-        
+function component($component)
+{
+    return new Utils\Component($component);
 }
 
-function region($component, ...$arguments) {
-
+function region($component, ...$arguments)
+{
     $class = "\App\Http\Regions\\$component";
+
     return (new $class)->render(new Request, ...$arguments);
-        
 }
 
 function format_smtp_header(array $data)
@@ -24,4 +23,3 @@ function format_smtp_header(array $data)
 
     return $str;
 }
-
