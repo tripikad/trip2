@@ -151,7 +151,6 @@ class CommentTest extends TestCase
         $contentTypes = array_merge($this->publicContentTypes, $this->privateContentTypes);
 
         foreach ($contentTypes as $type) {
-
             $content = factory(Content::class)->create([
                 'user_id' => $superuser->id,
                 'type' => $type,
@@ -176,5 +175,4 @@ class CommentTest extends TestCase
             $this->assertEquals($first_date->timestamp, $second_date->timestamp);
         }
     }
-
 }
