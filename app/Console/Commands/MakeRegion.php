@@ -14,11 +14,11 @@ class MakeRegion extends Command
     {
 
         $name = $this->argument('name');
-        $dir = "app/Http/ComponentGroups"; 
+        $dir = "app/Http/Regions"; 
         
         $php = [
             "<?php",
-            "namespace App\Http\ComponentGroups;",
+            "namespace App\Http\Regions;",
             "use Illuminate\Http\Request;",
             "class $name {",
             "    public function render(Request \$request, \$content)\n    {",
@@ -29,8 +29,11 @@ class MakeRegion extends Command
 
         Storage::disk('root')->put("$dir/$name.php", implode("\n\n", $php));
 
-        $this->line("$dir/$name.php created");
-
+        $this->info("\n$dir/$name.php created\n");
+        $this->line("Your next steps:\n");
+        $this->line("    1. Add a following line to app/Http/Controllers/StyleguideController.php\n");
+        $this->comment("       ->push(region('$name', (object) ['body' => 'I am $name region']))\n");
+        
     }
 
 }

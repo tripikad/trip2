@@ -85,7 +85,7 @@ class MakeComponent extends Command
             $this->line("    1. Edit resources/views/v2/main.js to import your new component\n");
             $this->line("    2. Run gulp v2\n");
             $this->line("    3. Add a following line to app/Http/Controllers/StyleguideController.php\n");
-            $this->line("       ->push(component('$name')->with('title', 'I am $name'))\n");
+            $this->comment("       ->push(component('$name')->with('title', 'I am $name'))\n");
             
         } else {
 
@@ -94,7 +94,7 @@ class MakeComponent extends Command
             $this->line("Your next steps:\n");
             $this->line("    1. Run gulp v2\n");
             $this->line("    2. Add a following line to app/Http/Controllers/StyleguideController.php\n");
-            $this->line("       ->push(component('$name')->with('title', 'I am $name'))\n");
+            $this->comment("       ->push(component('$name')->with('title', 'I am $name'))\n");
             
         }
 
