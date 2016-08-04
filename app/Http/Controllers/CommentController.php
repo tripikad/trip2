@@ -107,7 +107,7 @@ class CommentController extends Controller
             'status' => 1,
         ];
 
-        $comment->update(array_merge($request->all(), $fields), ['touch' => false]);
+        $comment->update(array_merge($request->all(), $fields));
 
         return redirect()
             ->route('content.show', [
@@ -123,7 +123,7 @@ class CommentController extends Controller
 
         if ($status == 0 || $status == 1) {
             $comment->status = $status;
-            $comment->save(['touch' => false]);
+            $comment->save();
 
             return redirect()
                 ->route('content.show', [

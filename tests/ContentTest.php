@@ -241,6 +241,53 @@ class ContentTest extends TestCase
         }
     }
 
+    public function test_forum_content_do_not_update_timestamp_when_superuser_updates_content()
+    {
+        $superuser = factory(App\User::class)->create(['role' => 'superuser']);
+
+        $typesUpdatingTimestamp = [
+            'news',
+            'flight',
+        ];
+        $typesNotUpdatingTimestamp = [
+            'forum',
+            'buysell',
+            'expat',
+        ];
+
+        // Mapping the correct PHPUnit assertions to each type
+        $types = collect($typesUpdatingTimestamp)
+            ->map(function ($type) {
+                return [$type => 'assertGreaterThan'];
+            })
+            ->merge(collect($typesNotUpdatingTimestamp)
+                ->map(function ($type) {
+                    return [$type => 'assertEquals'];
+                })
+            )
+            ->flatten(1);
+
+        $types->each(function ($assertion, $type) use ($superuser) {
+            $content = factory(Content::class)->create([
+                'user_id' => $superuser->id,
+                'type' => $type,
+            ]);
+
+            $first_date = Content::find($content->id)->updated_at;
+
+            sleep(1);
+
+            $this->actingAs($superuser)
+                ->visit("content/$type/$content->id/edit")
+                ->type('Hola titulo', 'title')
+                ->press(trans('content.edit.submit.title'));
+
+            $second_date = Content::find($content->id)->updated_at;
+
+            $this->$assertion($first_date->timestamp, $second_date->timestamp);
+        });
+    }
+
     private function getContentIdByTitleType($title)
     {
         return Content::whereTitle($title)->first()->id;
