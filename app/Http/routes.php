@@ -186,29 +186,91 @@ Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightFeed
 
 Route::get('styleguide', 'StyleguideController@index');
 
-/*
- * Redirect old URL-s
- */
-
-// Legacy content paths
-
-Route::get('node/{id}', 'RedirectController@redirectNode');
-
-Route::get('content/{path}', 'RedirectController@redirectContent')
-    ->where('path', '.*');
-
-// Legacy term paths
-
-Route::get('taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
-
-Route::get('sihtkoht/{title}', 'RedirectController@redirectDestination');
-
-Route::get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
-
 // API
 
 Route::get('api/destinations', 'ApiController@destinations');
 
-// All other content pages
+/*
+ * Redirect old URL-s
+ */
 
-Route::get('{path}', 'RedirectController@redirectContentBySlug');
+// Legacy user paths
+
+Route::get('user/{id}/forum', 'RedirectController@redirectUser');
+
+Route::get('sein/user/{id}', 'RedirectController@redirectUser');
+
+// Legacy term paths
+
+Route::get('taxonomy/term/{id}/{a?}', 'RedirectController@redirectTaxonomy');
+
+Route::get('node/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
+
+Route::get('content/taxonomy/term/{id}', 'RedirectController@redirectTaxonomy');
+
+Route::get('content/{blurb}/taxonomy/term/{id}', 'RedirectController@redirectTaxonomyBlurb');
+
+Route::get('trip_destination/tid/{id}', 'RedirectController@redirectTaxonomy');
+
+Route::get('sihtkoht/{title}', 'RedirectController@redirectDestination');
+
+Route::get(
+    'content/{blurb}/sihtkoht/{title}',
+    'RedirectController@redirectDestinationBlurb'
+);
+
+Route::get(
+    'content/{blurb}/{blurb2}/sihtkoht/{title}',
+    'RedirectController@redirectDestinationBlurb2'
+);
+
+Route::get('node/sihtkoht/{title}', 'RedirectController@redirectDestination');
+
+Route::get('content/sihtkoht/{title}', 'RedirectController@redirectDestination');
+
+Route::get('category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
+
+Route::get('node/category/{part1}/{part2}/{part3?}/{part4?}', 'RedirectController@redirectCategory');
+
+Route::get(
+    'content/category/{part1}/{part2}/{part3?}/{part4?}',
+    'RedirectController@redirectCategory'
+);
+
+Route::get(
+    'content/{blurb}/category/{part1}/{part2}/{part3?}/{part4?}',
+    'RedirectController@redirectCategoryBlurb'
+);
+
+Route::get(
+    'sein/term/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}',
+    'RedirectController@redirectTaxonomy'
+);
+
+// Legacy content paths
+
+Route::get(
+    'node/{id}/{a?}/{b?}/{c?}/{d?}/{e?}/{f?}/{g?}/{h?}/{i?}/{j?}/{k?}/{l?}/{m?}/{n?}',
+    'RedirectController@redirectNode'
+);
+
+Route::get('node/view/{id}', 'RedirectController@redirectNode');
+
+Route::get('node.php?id={id}', 'RedirectController@redirectNode');
+
+Route::get('blog/{id}', 'RedirectController@redirectNode');
+
+Route::get('content/news/{id}', 'RedirectController@redirectNode');
+
+Route::get('sein/user/node/{id}', 'RedirectController@redirectNode');
+
+Route::get('node/{id}/atom/feed', 'RedirectController@redirectNode');
+
+Route::get('crss/node/{id}', 'RedirectController@redirectNode');
+
+Route::get('content/{path}', 'RedirectController@redirectContent')
+    ->where('path', '.*');
+
+// All other legacy aliases
+
+Route::get('{part1}/{part2?}', 'RedirectController@redirectAlias');

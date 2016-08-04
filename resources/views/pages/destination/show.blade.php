@@ -2,6 +2,8 @@
 
 @section('title', $destination->name)
 
+@section('head_description', trans("site.description.destination", ['name' => $destination->name]))
+
 @section('header')
     @include('component.header',[
         'modifiers' => 'm-alternative'

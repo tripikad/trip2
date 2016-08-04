@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Log;
 use App\Content;
 use App\User;
 use App\Destination;
@@ -46,6 +47,11 @@ class SearchController extends Controller
         } else {
             $results = $tabs = null;
         }
+
+        Log::info('User searched', [
+            'search' => $q,
+            'user' => auth()->check() ? 'logged' : 'unlogged',
+        ]);
 
         return response()
             ->view('pages.search.show', ['request' => $request, 'results' => $results, 'active_search' => $active_search, 'tabs' => $tabs])

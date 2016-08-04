@@ -1,3 +1,5 @@
+// V1
+
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
@@ -93,3 +95,35 @@ gulp.task('watch', function () {
 });
 
 gulp.task('v1', ['sass', 'js', 'svg_sprite', 'svg_standalone']);
+
+// V2
+
+var elixir = require('laravel-elixir')
+
+require('laravel-elixir-vueify')
+require('./elixir/postcss')
+require('./elixir/svg')
+
+elixir(function(mix) {
+    mix.browserify(
+        './resources/views/v2/main.js',
+        './public/v2/js'
+    )
+
+    mix.postcss([
+            './resources/views/v2/utils/**/*.css',
+            './resources/views/v2/components/**/*.css'
+        ],
+        './public/v2/css',
+        './resources/views/v2/utils/'
+    )
+
+    mix.svg([
+        './resources/views/v2/svg/*.svg',
+        ],
+        './public/v2/svg'
+    )
+})
+
+gulp.task('v2', ['default']);
+

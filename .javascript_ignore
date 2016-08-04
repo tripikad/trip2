@@ -1,5 +1,0 @@
-resources/assets/js/jquery-ui/*
-resources/assets/js/components/svg4everybody.js
-gulpfile.js
-public/vendor/svg4everybody/*
-public/vendor/ckeditor/*

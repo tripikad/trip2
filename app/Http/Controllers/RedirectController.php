@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Content;
 use App\Destination;
 use App\Topic;
+use App\Carrier;
 
 class RedirectController extends Controller
 {
@@ -40,26 +41,51 @@ class RedirectController extends Controller
         abort(404);
     }
 
-    public function redirectContentBySlug($path)
+    public function redirectAlias($part1, $part2 = '')
     {
-        $alias = \DB::table('aliases')
-            ->wherePath($path)
-            ->where('aliasable_type', 'like', 'content.%')
-            ->first();
+        $pathMap = [
 
-        if ($alias) {
-            if ($alias->aliasable_id > 0) {
-                return redirect()
-                    ->route($alias->aliasable_type, [
-                        $alias->route_type,
-                        $alias->aliasable_id,
-                    ], 301);
-            } else {
-                return redirect()
-                    ->route($alias->aliasable_type, [
-                        $alias->route_type,
-                    ], 301);
-            }
+            'content/mis-on-veahind.html' => 'content/static/97203',
+            'kasutustingimused' => 'content/static/25151',
+            'reklaam' => 'content/static/22125',
+            'misontripee' => 'content/static/1534',
+            'kontakt' => 'content/static/972',
+
+            'blog' => 'content/blog',
+            'paevikud' => 'content/blog',
+            'sein/paevikud' => 'content/blog',
+
+            'eluvalismaal' => 'content/expat',
+
+            'pildid' => 'content/photo',
+
+            'uudised' => 'content/news',
+            'sein/uudised' => 'content/news',
+
+            'reisikaaslased' => 'content/travelmate',
+            'sein/reisikaaslased' => 'content/travelmate',
+
+            'ostmuuk' => 'content/buysell',
+
+            'soodsad_lennupiletid' => 'content/flight',
+            'lendude_sooduspakkumised' => 'content/flight',
+
+            'foorum' => 'content/forum',
+            'sein/foorum' => 'content/forum',
+
+            'reisipakkumised' => '/',
+            'sein/reisipakkumised' => '/',
+            'sein/turg' => '/',
+
+
+            'sein' => '/',
+
+        ];
+
+        $path = $part2 ? $part1.'/'.$part2 : $part1;
+
+        if (isset($pathMap[$path])) {
+            return redirect($pathMap[$path], 301);
         }
 
         abort(404);
@@ -68,10 +94,10 @@ class RedirectController extends Controller
     public function redirectTaxonomy($tid)
     {
         $alias = \DB::table('aliases')
-            ->wherePath('taxonomy/tid/'.$tid)
+            ->wherePath('taxonomy/term/'.$tid)
             ->first();
 
-        $tid = $alias ? $alias->tid : $tid;
+        $tid = $alias ? $alias->aliasable_id : $tid;
 
         if ($destination = Destination::find($tid)) {
             return redirect()->route(
@@ -96,7 +122,15 @@ class RedirectController extends Controller
                 ], 301);
         }
 
-        abort(404);
+        return redirect()->route(
+            'content.index', [
+                'forum',
+            ], 301);
+    }
+
+    public function redirectTaxonomyBlurb($blurb, $tid)
+    {
+        return $this->redirectTaxonomy($tid);
     }
 
     public function redirectDestination($title)
@@ -115,6 +149,16 @@ class RedirectController extends Controller
         }
 
         abort(404);
+    }
+
+    public function redirectDestinationBlurb($blurb, $title)
+    {
+        return $this->redirectDestination($title);
+    }
+
+    public function redirectDestinationBlurb2($blurb, $blurb2, $title)
+    {
+        return $this->redirectDestination($title);
     }
 
     public function redirectCategory($part1, $part2, $part3 = null, $part4 = null)
@@ -144,8 +188,23 @@ class RedirectController extends Controller
                         'topic' => $topic,
                     ], 301);
             }
+
+            return redirect()->route(
+                'content.index', [
+                    'forum',
+                ], 301);
         }
 
         abort(404);
+    }
+
+    public function redirectCategoryBlurb($blurb, $part1, $part2, $part3 = null, $part4 = null)
+    {
+        return $this->redirectCategory($part1, $part2, $part3, $part4);
+    }
+
+    public function redirectUser($id)
+    {
+        return redirect()->route('user.show', [$id], 301);
     }
 }
