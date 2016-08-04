@@ -31,7 +31,6 @@ class ContentTest extends TestCase
             'internal',
             'static',
         ];
-
     }
 
     public function test_regular_user_can_create_and_edit_public_content()
@@ -262,7 +261,6 @@ class ContentTest extends TestCase
         ];
 
         foreach ($contentTypes as $type) {
-
             $content = factory(Content::class)->create([
                 'user_id' => $superuser->id,
                 'type' => $type,
@@ -278,15 +276,13 @@ class ContentTest extends TestCase
                 ->press(trans('content.edit.submit.title'));
 
             $second_date = Content::find($content->id)->updated_at;
-            
+
             if (in_array($type, $notUpdatingTypes)) {
                 $this->assertEquals($first_date->timestamp, $second_date->timestamp);
             } else {
                 $this->assertGreaterThan($first_date->timestamp, $second_date->timestamp);
             }
-
-        };
-    
+        }
     }
 
     private function getContentIdByTitleType($title)
