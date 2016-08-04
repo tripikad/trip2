@@ -22,12 +22,16 @@ class ContentTest extends TestCase
         ];
 
         $this->privateContentTypes = [
-//          'internal',
-//          'static',
             'flight',
             'news',
             'shortnews',
         ];
+
+        $this->internalContentTypes = [
+            'internal',
+            'static',
+        ];
+
     }
 
     public function test_regular_user_can_create_and_edit_public_content()
@@ -245,29 +249,20 @@ class ContentTest extends TestCase
     {
         $superuser = factory(App\User::class)->create(['role' => 'superuser']);
 
-        $typesUpdatingTimestamp = [
-            'news',
-            'flight',
-        ];
-        $typesNotUpdatingTimestamp = [
+        $contentTypes = array_merge(
+            $this->publicContentTypes,
+            $this->privateContentTypes,
+            $this->internalContentTypes
+        );
+
+        $notUpdatingTypes = [
             'forum',
             'buysell',
             'expat',
         ];
 
-        // Mapping the correct PHPUnit assertions to each type
-        $types = collect($typesUpdatingTimestamp)
-            ->map(function ($type) {
-                return [$type => 'assertGreaterThan'];
-            })
-            ->merge(collect($typesNotUpdatingTimestamp)
-                ->map(function ($type) {
-                    return [$type => 'assertEquals'];
-                })
-            )
-            ->flatten(1);
+        foreach ($contentTypes as $type) {
 
-        $types->each(function ($assertion, $type) use ($superuser) {
             $content = factory(Content::class)->create([
                 'user_id' => $superuser->id,
                 'type' => $type,
@@ -283,9 +278,15 @@ class ContentTest extends TestCase
                 ->press(trans('content.edit.submit.title'));
 
             $second_date = Content::find($content->id)->updated_at;
+            
+            if (in_array($type, $notUpdatingTypes)) {
+                $this->assertEquals($first_date->timestamp, $second_date->timestamp);
+            } else {
+                $this->assertGreaterThan($first_date->timestamp, $second_date->timestamp);
+            }
 
-            $this->$assertion($first_date->timestamp, $second_date->timestamp);
-        });
+        };
+    
     }
 
     private function getContentIdByTitleType($title)
