@@ -1,0 +1,24 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: black;
+  box-sizing: border-box;
+}
+
+/*
+*[class^="row"] {
+    border: 1px dotted black;
+    padding: 3px;
+}
+*[class^="col"] {
+    border: 1px dotted red;
+    padding: 3px;
+}
+*[class^="col"] > * {
+    border: 1px dotted blue;
+    padding: 3px;
+}
+*/

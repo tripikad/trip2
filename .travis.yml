@@ -3,23 +3,29 @@ language: php
 php:
   - 7.0
 
+env:
+  - TRAVIS_NODE_VERSION="6"
+
 cache:
   directories:
     - vendor
     - $HOME/.composer/cache
+    - node_modules
 
 sudo: false
 
 install:
-    - composer update --prefer-dist
+    - composer install --prefer-dist
+    - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+    - npm install
     - cp .env.travis .env
     - chmod -R o+w storage/
-    - mysql -e 'create database IF NOT EXISTS trip2;'
-
-before_script:
+    - mysql -e 'create database trip2;'
     - php artisan migrate:refresh
 
-script: phpunit
+script:
+    - phpunit
+    - npm run test
 
 notifications:
     email: false
