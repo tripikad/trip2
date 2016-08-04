@@ -128,7 +128,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function imagePreset($preset = 'small_square')
     {
-
         if ($image = $this->images->first()) {
             return $image->preset($preset);
         }
