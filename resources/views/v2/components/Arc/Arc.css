@@ -1,5 +1,5 @@
 @import "variables";
 
 .Arc > svg {
-    stroke: $blue;
+    stroke: $cyan;
 }

@@ -16,7 +16,7 @@ class FooterLight
                     'title' => trans("menu.$menuKey.$key"),
                     'route' => $value['route'],
                     'icon' => isset($value['icon'])
-                        ? component('Icon')->is('gray')->with('icon', $value['icon'])
+                        ? component('Icon')->is('darkGray')->with('icon', $value['icon'])
                         : '',
                     'target' => isset($value['external']) ? '_blank' : '',
                 ];
@@ -29,7 +29,7 @@ class FooterLight
             ->is('light')
             ->with('logo_route', route('frontpage.index'))
             ->with('logo', component('Icon')
-                ->is('gray')
+                ->is('darkGray')
                 ->with('icon', 'tripee_logo_plain')
                 ->with('width', '100')
                 ->with('height', '25')

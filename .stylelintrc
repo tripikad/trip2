@@ -1,7 +1,6 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "indentation": null,
-    "block-no-empty": null
+    "indentation": null
   }
 }
