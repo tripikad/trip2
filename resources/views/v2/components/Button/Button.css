@@ -4,11 +4,15 @@
     align-items: center;
     background: $green;
     border-radius: $border-radius-md;
+    display: flex ?if $mobile;
     display: inline-flex;
     font: $font-heading-md;
     justify-content: center;
     padding: $padding-sm $padding-lg;
-    display: flex ?if $mobile;
+}
+
+.Button__icon {
+    margin-right: $margin-xs;
 }
 
 .Button__title {

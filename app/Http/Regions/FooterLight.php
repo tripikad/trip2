@@ -44,4 +44,5 @@ class FooterLight
                 'current_year' => Carbon::now()->year,
             ]));
     }
+
 }

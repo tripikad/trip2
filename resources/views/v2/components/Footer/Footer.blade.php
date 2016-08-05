@@ -50,6 +50,8 @@
             
             <a href="{{ $link->route }}" target="{{ $link->target }}">
                 
+                <span class="Footer__socialIcon">{!! $link->icon !!}</span>
+
                 <span class="Footer__socialLink">{!! $link->title !!}</span>
 
             </a>

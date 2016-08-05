@@ -16,10 +16,19 @@ class StyleguideController extends Controller
                     ')
                 )
 
-                ->push(component('Button')->with('title', 'Button'))
+                ->push(component('Button')
+                    ->with('icon', 'icon-facebook')
+                    ->with('title', 'Button')
+                    ->with('route', route('styleguide.index'))
+                )
 
                 ->push(component('Arc'))
+                
+                ->push(region('FooterLight'))
+
+                ->push(region('Footer'))
+
             )
-            ->with('footer', region('FooterLight'));
+            ->with('footer', '');
     }
 }
