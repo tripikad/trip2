@@ -200,7 +200,7 @@ class ContentController extends Controller
         
         // We check if user has read the post or its comments
 
-        $key = 'new_'.$content->id.'_7319058';
+        $key = 'new_'.$content->id.'_'.$userId;
 
         $newId = Cache::get($key);
         
