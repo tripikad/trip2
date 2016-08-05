@@ -1,8 +1,8 @@
 @php
 
-$icon = $icon ?? false;
-$route = $route ?? false;
-$title = $title ?? false;
+$icon = $icon ?? '';
+$route = $route ?? '';
+$title = $title ?? '';
 
 @endphp
 
@@ -11,7 +11,7 @@ $title = $title ?? false;
 
     <div class="Button {{ $isclasses }}">
 
-        @if ($icon)
+        @if (!empty($icon))
 
         <div class="Button__icon">
 

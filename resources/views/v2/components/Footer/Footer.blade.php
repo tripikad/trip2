@@ -1,16 +1,16 @@
 @php
 
-    $image = $image ?? false;
-    $logo = $logo ?? false;
-    $logo_route = $logo_route ?? false;
+    $image = $image ?? '';
+    $logo = $logo ?? '';
+    $logo_route = $logo_route ?? '';
     $links = $links ?? [];
-    $licence = $licence ?? false;
+    $licence = $licence ?? '';
 
 @endphp
 
 <div
     class="Footer {{ $isclasses }}"
-    @if ($image)
+    @if (!empty($image))
     style="
         background-image: linear-gradient(
             rgba(0, 0, 0, 0.5),

@@ -1,7 +1,7 @@
 @php
 
-$route = $route ?? false;
-$title = $title ?? false;
+$route = $route ?? '';
+$title = $title ?? '';
 $icon = $icon ?? 'icon-arrow-right';
 
 @endphp
@@ -16,7 +16,11 @@ $icon = $icon ?? 'icon-arrow-right';
 	        
 	    </div>
 
-        {!! component('Icon')->is('gray')->with('icon', $icon) !!}
+        <div class="Link__icon">
+
+            {!! component('Icon')->is('gray')->with('icon', $icon) !!}
+
+        </div>
 
 	</div>
 
