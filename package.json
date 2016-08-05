@@ -2,7 +2,7 @@
   "name": "trip2",
   "private": true,
   "scripts": {
-    "test": "eslint \"resources/views/v2/**/*.{js,vue}\" ; stylelint \"resources/views/v2/**/*.css\""
+    "test": "eslint \"resources/views/v2/**/*.{js,vue}\" \"gulpfile.js\" \"elixir/*.js\" ; stylelint \"resources/views/v2/**/*.css\""
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.5",

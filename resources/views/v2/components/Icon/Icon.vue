@@ -5,7 +5,7 @@
         :class="isclasses"
         :style="style"
     >
-        <use xlink:href="#{{ name }}"></use>
+        <use xlink:href="#{{ icon }}"></use>
 
     </svg>
 
@@ -20,8 +20,7 @@
             size: { default: 'md' },
             width: { default: 0 },
             height: { default: 0 },
-            name: { default: '' },
-            color: { default: 'black' }
+            icon: { default: '' }
         },
 
         computed: {
@@ -31,15 +30,13 @@
                 if (this.width && this.height) {
                     return {
                         width: this.width,
-                        height: this.height,
-                        fill: this.color
+                        height: this.height
                     }
                 }
 
                 return {
                     width: sizes[this.size],
-                    height: sizes[this.size],
-                    fill: this.color
+                    height: sizes[this.size]
                 }
             }
         }

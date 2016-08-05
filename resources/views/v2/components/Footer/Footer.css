@@ -40,10 +40,24 @@
     }
 
     .Footer__licence {
-        color: white;
+        color: $gray-dark;
         font: $font-text-md;
         height: $height-md;
         margin-top: $margin-sm;
-        opacity: $opacity-md;
         text-align: center;
+    }
+
+.Footer--light
+    .Footer__link {
+        color: $gray-darker;
+    }
+
+.Footer--light
+    .Footer__socialLink {
+        color: $gray-darker;
+    }
+
+.Footer--light
+    .Footer__licence {
+        color: $gray-darker;
     }

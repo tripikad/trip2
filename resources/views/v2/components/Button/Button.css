@@ -4,16 +4,17 @@
     align-items: center;
     background: $green;
     border-radius: $border-radius-md;
+    display: flex ?if $mobile;
     display: inline-flex;
-    font: $font-heading-md;
+    font: $font-heading-sm;
     justify-content: center;
     padding: $padding-sm $padding-lg;
 }
 
-.Button--wide {
-    display: flex;
+.Button__icon {
+    margin-right: $margin-xs;
 }
 
-    .Button__title {
-        color: $white;
-    }
+.Button__title {
+    color: $white;
+}

@@ -9,6 +9,23 @@ class StyleguideController extends Controller
         return view('v2.layouts.1col')
             ->with('content', collect()
 
+                ->push(component('Block')
+                    ->is('responsive')
+                    ->with('title', 'Hello')
+                    ->with('subtitle', 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?')
+                    ->with('content', collect()
+                        ->push(component('Body')
+                            ->with('body', 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.')
+                        )
+                        ->push(component('Link')
+                            ->with('title', 'Kasutustingimused')
+                        )
+                        ->push(component('Button')
+                            ->with('title', 'Button')
+                        )
+                    )
+                )
+
                 ->push(component('Body')
                     ->is('responsive')
                     ->with('body', '
@@ -16,10 +33,19 @@ class StyleguideController extends Controller
                     ')
                 )
 
-                ->push(component('Button')->with('title', 'Button'))
+                ->push(component('Button')
+                    ->with('icon', 'icon-facebook')
+                    ->with('title', 'Button')
+                    ->with('route', route('styleguide.index'))
+                )
 
                 ->push(component('Arc'))
+
+                ->push(region('FooterLight'))
+
+                ->push(region('Footer'))
+
             )
-            ->with('footer', region('Footer'));
+            ->with('footer', '');
     }
 }

@@ -1,27 +1,29 @@
 /* Brand colors */
-$yellow: #f7ba00;
-$yellow-dark: #d67d00;
-$green: #78cc5c;
+$blue: #36a1eb;
+$cyan-dark: #0087ae;
+$cyan: #4ac9e3;
 $green-dark: #288f18;
-$red: #ed6262;
+$green: #78cc5c;
+$orange-dark: #d94d00;
+$orange: #ff9a3e;
+$purple-dark: #5147c0;
+$purple: #8b84d7;
 $red-dark: #cb4949;
 $red-darker: #b13636;
-$purple: #8b84d7;
-$purple-dark: #5147c0;
-$blue: #4ac9e3;
-$blue-dark: #0087ae;
-$orange: #ff9a3e;
-$orange-dark: #d94d00;
+$red: #ed6262;
+$yellow-dark: #d67d00;
+$yellow: #f7ba00;
 
 /* Neutral colors */
 $white: #fff;
-$gray-lightest: #fafafa;
-$gray-lighter: #eee;
-$gray-light: #aaa;
-$gray: #555;
-$gray-dark: #444;
-$gray-darker: #222;
-$gray-darkest: #111;
+$black: #000;
+
+$gray-lighter: #fbfcfd;
+$gray-light: #f7f9fa;
+$gray: #e1e7eb;
+$gray-dark: #d1dae0;
+$gray-darker: #979da1;
+$gray-darkest: #707477;
 
 /* Fonts */
 $font-family: "Sailec";
@@ -48,7 +50,7 @@ $font-text-sm: $font-weight-normal $font-size-sm / $line-height-md $font-family,
 $font-text-md: $font-weight-normal $font-size-md / $line-height-md $font-family, sans-serif;
 $font-text-lg: $font-weight-normal $font-size-lg / $line-height-md $font-family, sans-serif;
 $font-text-xl: $font-weight-normal $font-size-xl / $line-height-md $font-family, sans-serif;
-$font-heading-xs: $font-weight-semibold $font-size-sm / $line-height-md $font-family, sans-serif;
+$font-heading-xs: $font-weight-semibold $font-size-sm / $font-family, sans-serif;
 $font-heading-sm: $font-weight-semibold $font-size-md / $line-height-md $font-family, sans-serif;
 $font-heading-md: $font-weight-semibold $font-size-lg / $line-height-md $font-family, sans-serif;
 $font-heading-lg: $font-weight-bold $font-size-xl / $line-height-lg $font-family, sans-serif;
