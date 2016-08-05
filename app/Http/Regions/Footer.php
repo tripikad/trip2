@@ -27,6 +27,7 @@ class Footer
     {
         return component('Footer')
             ->with('image', '/photos/footer.jpg')
+            ->with('logo_route', route('frontpage.index'))
             ->with('logo', component('Icon')
                 ->is('white')
                 ->with('icon', 'tripee_logo_plain')

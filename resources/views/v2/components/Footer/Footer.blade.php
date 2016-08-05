@@ -2,6 +2,7 @@
 
     $image = $image ?? false;
     $logo = $logo ?? false;
+    $logo_route = $logo_route ?? false;
     $links = $links ?? [];
     $licence = $licence ?? false;
 
@@ -24,7 +25,11 @@
     
             <div class="Footer__col">
                 
+                <a href="{{ $logo_route }}">
+
                 {!! $logo !!}
+
+                </a>
 
             </div>
 

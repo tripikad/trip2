@@ -27,6 +27,7 @@ class FooterLight
     {
         return component('Footer')
             ->is('light')
+            ->with('logo_route', route('frontpage.index'))
             ->with('logo', component('Icon')
                 ->is('gray')
                 ->with('icon', 'tripee_logo_plain')
