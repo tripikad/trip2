@@ -56,8 +56,7 @@ class Component
 
     public function render()
     {
-
-        if (!$this->show) {
+        if (! $this->show) {
             return '';
         }
 

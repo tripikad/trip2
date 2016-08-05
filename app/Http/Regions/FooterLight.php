@@ -7,7 +7,6 @@ use Carbon\Carbon;
 
 class FooterLight
 {
-
     protected function prepareLinks($menuKey)
     {
         return collect(config("menu.$menuKey"))
@@ -45,5 +44,4 @@ class FooterLight
                 'current_year' => Carbon::now()->year,
             ]));
     }
-
 }

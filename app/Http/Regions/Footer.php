@@ -7,7 +7,6 @@ use Carbon\Carbon;
 
 class Footer
 {
-
     protected function prepareLinks($menuKey)
     {
         return collect(config("menu.$menuKey"))

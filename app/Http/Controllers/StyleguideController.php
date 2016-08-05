@@ -40,7 +40,7 @@ class StyleguideController extends Controller
                 )
 
                 ->push(component('Arc'))
-                
+
                 ->push(region('FooterLight'))
 
                 ->push(region('Footer'))
