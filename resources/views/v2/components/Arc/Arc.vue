@@ -25,7 +25,7 @@
             size: { default: 50 },
             border: { default: 4 },
             endangle: { default: 270 },
-            color: { default: 'black' }
+            color: { default: '' }
         },
 
         data() {

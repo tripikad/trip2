@@ -8,12 +8,9 @@
     font: $font-heading-md;
     justify-content: center;
     padding: $padding-sm $padding-lg;
+    display: flex ?if $mobile;
 }
 
-.Button--wide {
-    display: flex;
+.Button__title {
+    color: $white;
 }
-
-    .Button__title {
-        color: $white;
-    }
