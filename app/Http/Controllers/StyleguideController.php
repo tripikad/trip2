@@ -2,12 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+
 class StyleguideController extends Controller
 {
     public function index()
     {
         return view('v2.layouts.1col')
             ->with('content', collect()
+
+                ->push(component('ProfileImage')
+                    ->with('image', User::find(3)->imagePreset('small_square'))
+                    ->with('endangle', 180)
+                )
+
+                ->push(component('ProfileImage')
+                    ->with('image', User::find(4)->imagePreset('small_square'))
+                    ->with('endangle', 90)
+                )
 
                 ->push(component('Block')
                     ->is('responsive')
