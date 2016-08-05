@@ -12,6 +12,8 @@ use App\Topic;
 use App\Image;
 use App\Main;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Cache;
+use DB;
 // Traits
 use App\Http\Controllers\ContentTraits\Blog;
 use App\Http\Controllers\ContentTraits\Flight;
@@ -105,12 +107,44 @@ class ContentController extends Controller
             $viewVariables = $this->getFlightIndex($contents, $topics);
         }
 
+            // We get the current user id
+        if(auth()->check()){
+
+            $userId = auth()->id();
+
+            // and assuming there is $contents collection, we iterate over its posts
+
+            $contents->map(function($content) use ($userId) {
+
+                $key = 'new_'.$content->id.'_'.$userId;
+
+                // If the post is unread by the user or there are new comments
+
+                if (Cache::has($key)) {
+
+                    // Mark post as new so the view can style the post accordingly 
+
+                    $content->isNew = true;
+
+                    // If there are new comments in the post, add relative link to the route
+                    // so the user will be redirected to the first new comment
+
+                        $content->route;
+
+                }
+
+                return $content;
+
+            });
+        }
+        dd($request->isNew);
         $viewVariables['contents'] = $contents;
         $viewVariables['type'] = $type;
         $viewVariables['destination'] = $request->destination;
         $viewVariables['destinations'] = $destinations;
         $viewVariables['topic'] = $request->topic;
         $viewVariables['topics'] = $topics;
+        $viewVariables['new'] = $request->isNew;
 
         return response()
             ->view($view, $viewVariables)
@@ -159,6 +193,42 @@ class ContentController extends Controller
         $viewVariables['content'] = $content;
         $viewVariables['comments'] = $comments;
         $viewVariables['type'] = $type;
+
+
+           // We get the current user id if logged in
+    if(auth()->check()){
+
+        $userId = auth()->user()->id;
+        
+        // We check if user has read the post or its comments
+
+        $key = 'new_'.$content->id.'_7319058';
+
+        $newId = Cache::get($key);
+        
+        // We iterate over post comments
+
+        $content->comments->map(function($comment) use ($newId) {
+
+            // If the comment is the first unread (or newer) comment
+
+            if ($newId > 0 && $comment->id >= $newId) {
+
+                // Mark the comment as new so the view can style the comment accordingly
+
+                $comment->isNew = true;
+
+            }
+
+            return $comment;
+
+        });
+
+        // Mark the post and its comments read
+
+        Cache::forget($key);
+    }   
+
 
         return response()
             ->view($view, $viewVariables)
@@ -344,6 +414,25 @@ class ContentController extends Controller
             }
 
             $content->save();
+            $id = $content->id;
+
+             DB::table('users')->select('id')->chunk(1000, function($users) use ($content) {
+
+                collect($users)->each(function($user) use ($content) {
+
+                // For user we store the cache key about new content item
+
+                $key = 'new_'.$content->id.'_'.$user->id;
+
+                // Cache value is initally 0 (no new comments are added yet) 
+                // Note: not sure about set for x seconds / set forever / auto-expiration yet
+
+                Cache::forever($key, 0);
+
+                });
+
+            });
+
 
             Log::info('New content added', [
                 'user' =>  Auth::user()->name,
