@@ -47,3 +47,18 @@
         opacity: $opacity-md;
         text-align: center;
     }
+
+.Footer--light
+    .Footer__link {
+        color: $gray-light;
+    }
+
+.Footer--light
+    .Footer__socialLink {
+        color: $gray-light;
+    }
+
+.Footer--light
+    .Footer__licence {
+        color: $gray-light;
+    }

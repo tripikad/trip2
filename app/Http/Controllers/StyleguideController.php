@@ -20,6 +20,6 @@ class StyleguideController extends Controller
 
                 ->push(component('Arc'))
             )
-            ->with('footer', region('Footer'));
+            ->with('footer', region('FooterLight'));
     }
 }

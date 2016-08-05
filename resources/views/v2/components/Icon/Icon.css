@@ -1,7 +1,7 @@
 @import "variables";
 
 .Icon--gray {
-    fill: $gray;
+    fill: $gray-light;
 }
 
 .Icon--white {

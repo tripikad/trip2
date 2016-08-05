@@ -5,7 +5,7 @@
         :class="isclasses"
         :style="style"
     >
-        <use xlink:href="#{{ name }}"></use>
+        <use xlink:href="#{{ icon }}"></use>
 
     </svg>
 
@@ -20,7 +20,7 @@
             size: { default: 'md' },
             width: { default: 0 },
             height: { default: 0 },
-            name: { default: '' }
+            icon: { default: '' }
         },
 
         computed: {

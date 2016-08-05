@@ -5,7 +5,7 @@ namespace App\Http\Regions;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class Footer
+class FooterLight
 {
 
     protected function prepareLinks($menuKey)
@@ -16,7 +16,7 @@ class Footer
                     'title' => trans("menu.$menuKey.$key"),
                     'route' => $value['route'],
                     'icon' => isset($value['icon'])
-                        ? component('Icon')->is('white')->with('icon', $value['icon'])
+                        ? component('Icon')->is('gray')->with('icon', $value['icon'])
                         : '',
                     'target' => isset($value['external']) ? '_blank' : '',
                 ];
@@ -26,9 +26,9 @@ class Footer
     public function render(Request $request)
     {
         return component('Footer')
-            ->with('image', '/photos/footer.jpg')
+            ->is('light')
             ->with('logo', component('Icon')
-                ->is('white')
+                ->is('gray')
                 ->with('icon', 'tripee_logo_plain')
                 ->with('width', '100')
                 ->with('height', '25')

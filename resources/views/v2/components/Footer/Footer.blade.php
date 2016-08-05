@@ -1,20 +1,22 @@
 @php
 
-    $image = $image ?? '';
-    $logo = $logo ?? '';
+    $image = $image ?? false;
+    $logo = $logo ?? false;
     $links = $links ?? [];
-    $licence = $licence ?? '';
+    $licence = $licence ?? false;
 
 @endphp
 
 <div
     class="Footer {{ $isclasses }}"
+    @if ($image)
     style="
         background-image: linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
         ),
     url({{ $image }});"
+    @endif
 >    
     <div class="container">
 
@@ -47,10 +49,8 @@
             @foreach($links['social'] as $link)
             
             <a href="{{ $link->route }}" target="{{ $link->target }}">
-
-                {!! $link->icon !!}
-
-                <span class="Footer__socialLink">{{ $link->title }}</span>
+                
+                <span class="Footer__socialLink">{!! $link->title !!}</span>
 
             </a>
 

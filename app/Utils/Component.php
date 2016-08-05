@@ -9,12 +9,21 @@ class Component
     protected $component;
     protected $is;
     protected $with;
+    protected $show;
 
     public function __construct($component)
     {
         $this->component = $component;
         $this->is = collect();
         $this->with = collect();
+        $this->show = true;
+    }
+
+    public function when($condition)
+    {
+        $this->show = $condition;
+
+        return $this;
     }
 
     public function is($is)
@@ -47,6 +56,8 @@ class Component
 
     public function render()
     {
+     //   if (! $this->show) return '';
+
         $name = "v2.components.$this->component.$this->component";
 
         $with = $this->with->flatten(1)->all();
