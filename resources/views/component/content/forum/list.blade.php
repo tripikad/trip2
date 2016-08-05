@@ -101,12 +101,16 @@ modifiers:
 
                     <h3 class="c-forum-list__item-topic">{{ $item['topic'] }}</h3>
 
-                    @if($item['new'])
-                    <span>Unread</span>
-                    @endif
-                    
+
                     @if(isset($item['date']))
                         <p class="c-forum-list__date">{{ $item['date'] }}</p>
+                    @endif
+
+                    @if(isset($item['new']) && $item['new'])
+                        @include('component.badge', [
+                            'modifiers' => 'm-inverted m-red',
+                            'title' => 'unread'
+                        ])
                     @endif
 
                 </div>
