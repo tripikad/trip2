@@ -45,9 +45,10 @@ To show a component use a ```component()``` helper:
 
 ```php
 component('MyComponent')
-    ->is('small') // A CSS modifier, adds a MyComponent--small class
+    ->is('small') // Optional CSS modifier, adds a MyComponent--small class
     ->with('data1', 'Hello') // Passing a variable, similar to view()->with()
     ->with('data2', 'World') // Variables can be chained
+    ->show($request->user()) // Optional condition whenever to show component or not
 ```
 
 #### Making a component
