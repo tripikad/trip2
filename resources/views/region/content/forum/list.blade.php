@@ -29,9 +29,11 @@
                             'route' => route('content.index', [$item->type]).'?topic='.$topic->id,
                         ];
                     })
-                )
+                ),
+                'new' => (isset($item->isNew) ? $item->isNew : false)
+
             ];
         })
     ])
-
+    
 @endif

@@ -132,19 +132,17 @@ class ContentController extends Controller
                         $content->route;
 
                 }
-
                 return $content;
 
             });
         }
-        dd($request->isNew);
+
         $viewVariables['contents'] = $contents;
         $viewVariables['type'] = $type;
         $viewVariables['destination'] = $request->destination;
         $viewVariables['destinations'] = $destinations;
         $viewVariables['topic'] = $request->topic;
         $viewVariables['topics'] = $topics;
-        $viewVariables['new'] = $request->isNew;
 
         return response()
             ->view($view, $viewVariables)
