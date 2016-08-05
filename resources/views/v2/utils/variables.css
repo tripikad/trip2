@@ -50,7 +50,7 @@ $font-text-sm: $font-weight-normal $font-size-sm / $line-height-md $font-family,
 $font-text-md: $font-weight-normal $font-size-md / $line-height-md $font-family, sans-serif;
 $font-text-lg: $font-weight-normal $font-size-lg / $line-height-md $font-family, sans-serif;
 $font-text-xl: $font-weight-normal $font-size-xl / $line-height-md $font-family, sans-serif;
-$font-heading-xs: $font-weight-semibold $font-size-sm / $font-family, sans-serif;
+$font-heading-xs: $font-weight-semibold $font-size-sm / $line-height-md $font-family, sans-serif;
 $font-heading-sm: $font-weight-semibold $font-size-md / $line-height-md $font-family, sans-serif;
 $font-heading-md: $font-weight-semibold $font-size-lg / $line-height-md $font-family, sans-serif;
 $font-heading-lg: $font-weight-bold $font-size-xl / $line-height-lg $font-family, sans-serif;
@@ -166,6 +166,7 @@ $border-red: 2px solid $red;
 
 /* Border radiuses */
 $border-radius-md: 3px;
+$border-radius-lg: $spacer;
 
 /* Shadows */
 $box-shadow-left: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);

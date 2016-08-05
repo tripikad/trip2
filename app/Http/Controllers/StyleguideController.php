@@ -9,25 +9,27 @@ class StyleguideController extends Controller
     public function index()
     {
         $user1 = User::find(3);
-        $user2 = User::find(12);
         $user3 = User::find(5);
+        $user2 = User::find(12);
 
         return view('v2.layouts.1col')
             ->with('content', collect()
 
+               ->push(component('Badge')->with('title', 2))
+
                 ->push(component('ProfileImage')
                     ->with('image', $user1->imagePreset('small_square'))
-                    ->with('endangle', $user1->rank * 90)
+                    ->with('value', $user1->rank * 90)
                 )
 
                 ->push(component('ProfileImage')
                     ->with('image', $user2->imagePreset('small_square'))
-                    ->with('endangle', $user2->rank * 90)
+                    ->with('value', $user2->rank * 90)
                 )
 
                 ->push(component('ProfileImage')
                     ->with('image', $user3->imagePreset('small_square'))
-                    ->with('endangle', $user3->rank * 90)
+                    ->with('value', $user3->rank * 90)
                 )
 
                 ->push(component('Block')

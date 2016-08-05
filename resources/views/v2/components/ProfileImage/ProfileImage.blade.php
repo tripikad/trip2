@@ -1,7 +1,7 @@
 @php
 
 $image = $image ?? '';
-$endValue = $value ?? 0;
+$value = $value ?? 0;
 
 @endphp
 
@@ -14,7 +14,7 @@ $endValue = $value ?? 0;
         {!!
             component('Arc')
                 ->with('startangle', 0) 
-                ->with('endangle', $endangle) 
+                ->with('endangle', $value) 
         !!}
 
     </div>
@@ -23,7 +23,7 @@ $endValue = $value ?? 0;
 
         {!!
             component('Arc')
-                ->with('startangle', $endangle) 
+                ->with('startangle', $value) 
                 ->with('endangle', 360) 
         !!}
 
