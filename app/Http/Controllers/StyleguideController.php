@@ -15,7 +15,17 @@ class StyleguideController extends Controller
         return view('v2.layouts.1col')
             ->with('content', collect()
 
-               ->push(component('Badge')->with('title', 2))
+                ->push(component('ListItem')
+                    ->with('figure', component('ProfileImage')
+                        ->with('image', $user1->imagePreset('small_square'))
+                        ->with('value', $user1->rank * 90)
+                    )
+                    ->with('title', 'Title')
+                    ->with('route', '')
+                    ->with('subtitle', 'Subtitle')
+                )
+
+                ->push(component('Badge')->with('title', 2))
 
                 ->push(component('ProfileImage')
                     ->with('image', $user1->imagePreset('small_square'))
