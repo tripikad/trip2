@@ -7,7 +7,7 @@
     .Link__title {
         color: $blue;
         margin-right: $margin-sm;
-        font: $font-heading-sm;
+        font: $font-text-md;
     }
 
     .Link__icon {
