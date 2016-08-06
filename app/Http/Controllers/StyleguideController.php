@@ -13,45 +13,12 @@ class StyleguideController extends Controller
         $user3 = User::find(5);
         $user2 = User::find(12);
 
-        $post = Content::find(98443);
+        $posts = Content::whereType('forum')->latest()->skip(6)->take(3)->get();
 
         return view('v2.layouts.1col')
             ->with('content', collect()
 
-                ->push(component('ForumItem')
-                    ->with('figure', component('ProfileImage')
-                        ->with('image', $post->user->imagePreset('small_square'))
-                        ->with('value', $post->user->rank * 90)
-                    )            
-                    ->with('title', $post->title)
-                    ->with('route', route('content.show', [$post->type, $post]))
-                    ->with('meta', collect()
-                        ->push(component('Meta')
-                            ->with('profile_name', $post->user->name)
-                            ->with('profile_route', route('user.show', [$post->user]))
-                            ->with('date', $post->created_at->diffForHumans())
-                        )
-                        ->merge($post->destinations->map(function($tag) {
-                            return component('Tag')->is('orange')->with('title', $tag->name);
-                        }))
-                        ->merge($post->topics->map(function($tag) {
-                            return component('Tag')->with('title', $tag->name);
-                        }))
-                        ->render()
-                        ->implode(' ')
-                    )
-                )
-
-           
-                ->push(component('ForumItem')
-                    ->with('figure', component('ProfileImage')
-                        ->with('image', $user1->imagePreset('small_square'))
-                        ->with('value', $user1->rank * 90)
-                    )
-                    ->with('title', 'Title')
-                    ->with('route', '')
-                    ->with('subtitle', 'Subtitle')
-                )
+                ->merge($posts->map(function($post) { return region('ForumItem', $post); }))
 
                 ->push(component('Tag')->with('title', 'Lendamine'))
 

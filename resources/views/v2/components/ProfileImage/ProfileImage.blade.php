@@ -1,5 +1,6 @@
 @php
 
+$route = $route ?? 0;
 $image = $image ?? '';
 $value = $value ?? 0;
 
@@ -7,6 +8,8 @@ $value = $value ?? 0;
 
 <div class="ProfileImage {{ $isclasses }}">
     
+    <a href="{{ $route }}">
+
     <img class="ProfileImage__image" src="{{ $image }}" />
 
     <div class="ProfileImage__arcValue">
@@ -28,5 +31,7 @@ $value = $value ?? 0;
         !!}
 
     </div>
+
+    </a>
 
 </div>

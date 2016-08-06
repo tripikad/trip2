@@ -19,8 +19,8 @@ class MakeRegion extends Command
             "namespace App\Http\Regions;",
             "use Illuminate\Http\Request;",
             "class $name {",
-            "    public function render(Request \$request, \$content)\n    {",
-            "        return component('Body')\n            ->with('body', \$content->body);",
+            "    public function render(Request \$request, \$post)\n    {",
+            "        return component('Body')\n            ->with('body', \$post->body);",
             '    }',
             "}\n",
         ];

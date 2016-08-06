@@ -1,7 +1,7 @@
 @php
 
 $route = $route ?? '';
-$figure = $figure ?? '';
+$profile = $profile ?? '';
 $title = $title ?? '';
 $meta = $meta ?? collect();
 
@@ -13,7 +13,7 @@ $meta = $meta ?? collect();
 
     <div class="ForumItem__left">
 
-        {!! $figure !!}
+        {!! $profile !!}
 
     </div>
 
