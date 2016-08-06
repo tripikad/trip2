@@ -29,11 +29,11 @@ class StyleguideController extends Controller
                     )
                 )
 
-                ->merge($posts->first()->comments->take(2)->map(function($comment) {
+                ->merge($posts->first()->comments->take(2)->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
 
-                ->merge($posts->map(function($post) {
+                ->merge($posts->map(function ($post) {
                     return region('ForumItem', $post);
                 }))
 
@@ -101,10 +101,9 @@ class StyleguideController extends Controller
     public function form()
     {
         dump(request()->all());
-        
+
         sleep(2);
 
         return redirect()->route('styleguide.index')->with('alert', 'We are back');
     }
-
 }
