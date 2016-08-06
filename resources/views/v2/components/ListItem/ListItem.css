@@ -1,0 +1,27 @@
+@import "variables";
+
+.ListItem {
+    display: flex;
+}
+
+    .ListItem__left {
+        display: flex;
+        align-items: center;
+        padding-right: $padding-md;
+        display: none ?if $mobile;
+    }
+
+    .ListItem__right {
+        display: flex;
+        align-items: center;
+    }
+
+    .ListItem__title {
+        font: $font-heading-md;
+    }
+
+    .ListItem__subtitle {
+        color: $gray-darker;
+        font: $font-text-sm;
+        margin: $margin-bottom-xs;
+    }

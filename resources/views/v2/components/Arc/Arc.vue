@@ -24,14 +24,14 @@
         props: {
             size: { default: 50 },
             border: { default: 4 },
+            startangle: { default: 0 },
             endangle: { default: 270 },
             color: { default: '' }
         },
 
         data() {
             return {
-                arc: '',
-                startangle: 0
+                arc: ''
             }
         },
 
