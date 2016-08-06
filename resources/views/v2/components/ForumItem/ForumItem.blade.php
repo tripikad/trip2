@@ -7,8 +7,6 @@ $meta = $meta ?? collect();
 
 @endphp
 
-<a href="{{ $route }}">
-
 <div class="ForumItem {{ $isclasses }}">
 
     <div class="ForumItem__left">
@@ -20,6 +18,8 @@ $meta = $meta ?? collect();
     <div class="ForumItem__right">
 
         <div>
+
+            <a href="{{ $route }}">
 
             <div class="ForumItem__title">
 
@@ -33,10 +33,10 @@ $meta = $meta ?? collect();
 
             </div>
 
+            </a>
+
         </div>
 
     </div>
 
 </div>
-
-</a>

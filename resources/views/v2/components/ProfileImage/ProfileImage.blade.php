@@ -2,7 +2,7 @@
 
 $route = $route ?? 0;
 $image = $image ?? '';
-$value = $value ?? 0;
+$rank = $rank ?? 0;
 
 @endphp
 
@@ -12,12 +12,12 @@ $value = $value ?? 0;
 
     <img class="ProfileImage__image" src="{{ $image }}" />
 
-    <div class="ProfileImage__arcValue">
+    <div class="ProfileImage__arcRank">
 
         {!!
             component('Arc')
                 ->with('startangle', 0) 
-                ->with('endangle', $value) 
+                ->with('endangle', $rank) 
         !!}
 
     </div>
@@ -26,7 +26,7 @@ $value = $value ?? 0;
 
         {!!
             component('Arc')
-                ->with('startangle', $value) 
+                ->with('startangle', $rank) 
                 ->with('endangle', 360) 
         !!}
 

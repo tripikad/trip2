@@ -10,13 +10,13 @@ class ForumItem {
     {
 
         return component('ForumItem')
+            ->with('route', route('content.show', [$post->type, $post]))
             ->with('profile', component('ProfileImage')
-                ->with('image', $post->user->imagePreset('small_square'))
-                ->with('value', $post->user->rank * 90)
                 ->with('route', route('user.show', [$post->user]))
+                ->with('image', $post->user->imagePreset('small_square'))
+                ->with('rank', $post->user->rank * 90)
             )            
             ->with('title', $post->title)
-            ->with('route', route('content.show', [$post->type, $post]))
             ->with('meta', collect()
                 ->push(component('MetaItem')
                     ->with('title', $post->user->name)

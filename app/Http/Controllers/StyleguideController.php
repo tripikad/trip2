@@ -13,7 +13,7 @@ class StyleguideController extends Controller
         $user3 = User::find(5);
         $user2 = User::find(12);
 
-        $posts = Content::whereType('forum')->latest()->skip(6)->take(3)->get();
+        $posts = Content::whereType('forum')->latest()->skip(9)->take(3)->get();
 
         return view('v2.layouts.1col')
             ->with('content', collect()

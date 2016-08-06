@@ -12,7 +12,7 @@
     padding: 2px;
 }
 
-.ProfileImage__arcValue,
+.ProfileImage__arcRank,
 .ProfileImage__arcReminder {
     position: absolute;
     top: 0;
@@ -21,7 +21,7 @@
     left: 0;
 }
 
-.ProfileImage__arcValue svg {
+.ProfileImage__arcRank svg {
     stroke: $cyan;
 }
 
