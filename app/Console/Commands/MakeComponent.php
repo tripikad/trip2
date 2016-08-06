@@ -80,14 +80,14 @@ class MakeComponent extends Command
             $this->info("\nVue component $dir created\n");
             $this->line("Your next steps:\n");
             $this->line("    1. Edit resources/views/v2/main.js to import your new component\n");
-            $this->line("    2. Run gulp v2\n");
+            $this->line("    2. Run gulp\n");
             $this->line("    3. Add a following line to app/Http/Controllers/StyleguideController.php\n");
             $this->comment("       ->push(component('$name')->with('title', 'I am $name'))\n");
         } else {
             Storage::disk('root')->put("$dir/$name.blade.php", implode("\n\n", $blade));
             $this->info("\nBlade component $dir created\n");
             $this->line("Your next steps:\n");
-            $this->line("    1. Run gulp v2\n");
+            $this->line("    1. Run gulp\n");
             $this->line("    2. Add a following line to app/Http/Controllers/StyleguideController.php\n");
             $this->comment("       ->push(component('$name')->with('title', 'I am $name'))\n");
         }

@@ -24,9 +24,13 @@ class StyleguideController extends Controller
                         ->with('value', $post->user->rank * 90)
                     )            
                     ->with('title', $post->title)
-                    ->with('route', route('content.index', [$post]))
-                    ->with('subtitle', '')
-                    ->with('tags', collect()
+                    ->with('route', route('content.show', [$post->type, $post]))
+                    ->with('meta', collect()
+                        ->push(component('Meta')
+                            ->with('profile_name', $post->user->name)
+                            ->with('profile_route', route('user.show', [$post->user]))
+                            ->with('date', $post->created_at->diffForHumans())
+                        )
                         ->merge($post->destinations->map(function($tag) {
                             return component('Tag')->is('orange')->with('title', $tag->name);
                         }))

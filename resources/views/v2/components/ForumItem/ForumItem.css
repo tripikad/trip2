@@ -20,8 +20,7 @@
         font: $font-heading-md;
     }
 
-    .ForumItem__subtitle {
-        color: $gray-darker;
-        font: $font-text-sm;
+    .ForumItem__meta {
         margin: $margin-bottom-xs;
     }
+

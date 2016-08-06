@@ -3,8 +3,7 @@
 $route = $route ?? '';
 $figure = $figure ?? '';
 $title = $title ?? '';
-$subtitle = $subtitle ?? '';
-$tags = $tags ?? collect();
+$meta = $meta ?? collect();
 
 @endphp
 
@@ -28,11 +27,9 @@ $tags = $tags ?? collect();
 
             </div>
 
-            <div class="ForumItem__subtitle">
+            <div class="ForumItem__meta">
 
-                {!! $subtitle !!}
-
-                {!! $tags !!}
+                {!! $meta !!}
 
             </div>
 
