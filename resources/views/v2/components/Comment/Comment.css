@@ -1,0 +1,13 @@
+@import "variables";
+
+.Comment {
+    display: flex;
+    border: $border-gray;
+    border-radius: $border-radius-md;
+    padding: $padding-md;
+}
+
+    .Comment__left {
+        padding-right: $padding-md;
+        display: none ?if $mobile;
+    }
