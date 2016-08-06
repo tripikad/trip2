@@ -8,6 +8,12 @@
 }
 
     .Comment__left {
-        padding-right: $padding-md;
+        padding-right: $padding-sm;
         display: none ?if $mobile;
+        margin-left: calc($spacer * -3.5);
+        margin-top: calc($spacer * -0.75);
+    }
+
+    .Comment__meta {
+        margin-bottom: $margin-sm;
     }

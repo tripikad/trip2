@@ -13,14 +13,18 @@ class StyleguideController extends Controller
         $user3 = User::find(5);
         $user2 = User::find(12);
 
-        $posts = Content::whereType('forum')->latest()->skip(30)->take(3)->get();
+        $posts = Content::whereType('forum')->latest()->skip(24)->take(3)->get();
 
         return view('v2.layouts.1col')
             ->with('content', collect()
 
-                ->push(region('Comment', $posts->first()->comments->first()))
+                ->merge($posts->first()->comments->take(2)->map(function($comment) {
+                    return region('Comment', $comment);
+                }))
 
-                ->merge($posts->map(function($post) { return region('ForumItem', $post); }))
+                ->merge($posts->map(function($post) {
+                    return region('ForumItem', $post);
+                }))
 
                 ->push(component('Tag')->with('title', 'Lendamine'))
 

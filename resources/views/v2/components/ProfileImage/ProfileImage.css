@@ -1,15 +1,12 @@
 @import "variables";
 
 .ProfileImage {
-    width: $width-md;
-    height: $height-md;
     position: relative;
 }
 
 .ProfileImage__image {
     border-radius: 50%;
     width: 100%;
-    padding: 2px;
 }
 
 .ProfileImage__arcRank,

@@ -22,6 +22,9 @@ class Comment {
                 )
                 ->push(component('MetaItem')
                     ->with('title', $comment->created_at->diffForHumans())
+                    ->with('route', route('content.show', [
+                        $comment->content->type, $comment->content, '#comment-'.$comment->id
+                    ]))
                 )
                 ->render()
                 ->implode(' ')

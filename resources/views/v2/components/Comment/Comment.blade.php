@@ -1,10 +1,13 @@
 @php
 
+$id = $id ?? 0;
 $profile = $profile ?? '';
 $meta = $meta ?? '';
 $body = $body ?? '';
 
 @endphp
+
+<a id="comment-{{ $id }}">
 
 <div class="Comment {{ $isclasses }}">
 
@@ -31,3 +34,5 @@ $body = $body ?? '';
     </div>
 
 </div>
+
+</a>
