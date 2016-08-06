@@ -4,6 +4,7 @@ $route = $route ?? '';
 $figure = $figure ?? '';
 $title = $title ?? '';
 $subtitle = $subtitle ?? '';
+$tags = $tags ?? collect();
 
 @endphp
 
@@ -30,6 +31,8 @@ $subtitle = $subtitle ?? '';
             <div class="ForumItem__subtitle">
 
                 {!! $subtitle !!}
+
+                {!! $tags !!}
 
             </div>
 

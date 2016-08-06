@@ -13,7 +13,7 @@ class StyleguideController extends Controller
         $user3 = User::find(5);
         $user2 = User::find(12);
 
-        $post = Content::find(49640);
+        $post = Content::find(98443);
 
         return view('v2.layouts.1col')
             ->with('content', collect()
@@ -25,13 +25,20 @@ class StyleguideController extends Controller
                     )            
                     ->with('title', $post->title)
                     ->with('route', route('content.index', [$post]))
-                    ->with('subtitle', 'Subtitle')
+                    ->with('subtitle', '')
+                    ->with('tags', collect()
+                        ->merge($post->destinations->map(function($tag) {
+                            return component('Tag')->is('orange')->with('title', $tag->name);
+                        }))
+                        ->merge($post->topics->map(function($tag) {
+                            return component('Tag')->with('title', $tag->name);
+                        }))
+                        ->render()
+                        ->implode(' ')
+                    )
                 )
 
-                ->push(component('Tag')->with('title', 'Lendamine'))
-
-                ->push(component('Tag')->is('orange')->with('title', 'Hiina'))
-
+           
                 ->push(component('ForumItem')
                     ->with('figure', component('ProfileImage')
                         ->with('image', $user1->imagePreset('small_square'))
@@ -41,6 +48,10 @@ class StyleguideController extends Controller
                     ->with('route', '')
                     ->with('subtitle', 'Subtitle')
                 )
+
+                ->push(component('Tag')->with('title', 'Lendamine'))
+
+                ->push(component('Tag')->is('orange')->with('title', 'Hiina'))
 
                 ->push(component('Badge')->with('title', 2))
 

@@ -29,13 +29,16 @@ class AppServiceProvider extends ServiceProvider
     {
         Carbon::setLocale(config('app.locale'));
 
-        Collection::macro('render', function ($callback) {
-            return $this
-                ->map($callback)
-                ->map(function ($item) {
+        Collection::macro('render', function ($callback = false) {
+
+            $renderable = $this;
+
+            if ($callback) $renderable = $this->map($callback);
+
+            return $renderable->map(function ($item) {
                     return (string) $item;
-                })
-                ->implode('');
+            });
+
         });
 
         Collection::macro('withoutLast', function () {
