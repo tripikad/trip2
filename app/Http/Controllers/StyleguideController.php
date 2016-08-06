@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Content;
 
 class StyleguideController extends Controller
 {
@@ -12,10 +13,26 @@ class StyleguideController extends Controller
         $user3 = User::find(5);
         $user2 = User::find(12);
 
+        $post = Content::find(49640);
+
         return view('v2.layouts.1col')
             ->with('content', collect()
 
-                ->push(component('ListItem')
+                ->push(component('ForumItem')
+                    ->with('figure', component('ProfileImage')
+                        ->with('image', $post->user->imagePreset('small_square'))
+                        ->with('value', $post->user->rank * 90)
+                    )            
+                    ->with('title', $post->title)
+                    ->with('route', route('content.index', [$post]))
+                    ->with('subtitle', 'Subtitle')
+                )
+
+                ->push(component('Tag')->with('title', 'Lendamine'))
+
+                ->push(component('Tag')->is('orange')->with('title', 'Hiina'))
+
+                ->push(component('ForumItem')
                     ->with('figure', component('ProfileImage')
                         ->with('image', $user1->imagePreset('small_square'))
                         ->with('value', $user1->rank * 90)

@@ -1,26 +1,26 @@
 @import "variables";
 
-.ListItem {
+.ForumItem {
     display: flex;
 }
 
-    .ListItem__left {
+    .ForumItem__left {
         display: flex;
         align-items: center;
         padding-right: $padding-md;
         display: none ?if $mobile;
     }
 
-    .ListItem__right {
+    .ForumItem__right {
         display: flex;
         align-items: center;
     }
 
-    .ListItem__title {
+    .ForumItem__title {
         font: $font-heading-md;
     }
 
-    .ListItem__subtitle {
+    .ForumItem__subtitle {
         color: $gray-darker;
         font: $font-text-sm;
         margin: $margin-bottom-xs;
