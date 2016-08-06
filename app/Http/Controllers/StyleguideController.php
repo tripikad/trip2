@@ -18,6 +18,10 @@ class StyleguideController extends Controller
         return view('v2.layouts.1col')
             ->with('content', collect()
 
+                ->push(component('FormTextfield')
+                        ->with('label', 'Field')
+                )
+
                 ->merge($posts->first()->comments->take(2)->map(function($comment) {
                     return region('Comment', $comment);
                 }))
