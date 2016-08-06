@@ -2,6 +2,22 @@
 
 /* Paddings */
 
+.padding-top-xs {
+  padding-top: $padding-xs;
+}
+
+.padding-right-xs {
+  padding-right: $padding-xs;
+}
+
+.padding-bottom-xs {
+  padding-bottom: $padding-xs;
+}
+
+.padding-left-xs {
+  padding-left: $padding-xs;
+}
+
 .padding-top-sm {
   padding-top: $padding-sm;
 }
@@ -113,6 +129,22 @@
 }
 
 /* Margins */
+
+.margin-top-xs {
+  margin-top: $margin-xs;
+}
+
+.margin-right-xs {
+  margin-right: $margin-xs;
+}
+
+.margin-bottom-xs {
+  margin-bottom: $margin-xs;
+}
+
+.margin-left-xs {
+  margin-left: $margin-xs;
+}
 
 .margin-top-sm {
   margin-top: $margin-sm;

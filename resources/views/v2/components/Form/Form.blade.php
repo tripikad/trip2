@@ -2,7 +2,7 @@
 
 $route = $route ?? '';
 $method = $method ?? 'POST';
-$fields = collect();
+$fields = $fields ?? collect();
 
 @endphp
 
@@ -14,7 +14,7 @@ $fields = collect();
 
     @foreach ($fields->withoutLast() as $field)
     
-        <div class="margin-bottom-xs">
+        <div class="margin-bottom-sm">
 
         {!! $field !!}
         

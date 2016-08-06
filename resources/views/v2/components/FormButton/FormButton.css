@@ -4,11 +4,11 @@
     align-items: center;
     background: $green;
     border-radius: $border-radius-md;
-    border: none;
-    color: $white;
+    display: flex ?if $mobile;
     display: inline-flex;
-    font: $font-heading-md;
+    font: $font-heading-sm;
     justify-content: center;
     padding: $padding-sm $padding-lg;
-    width: 100% ?if $mobile;
+    border: none;
+    color: $white;
 }

@@ -18,8 +18,15 @@ class StyleguideController extends Controller
         return view('v2.layouts.1col')
             ->with('content', collect()
 
-                ->push(component('FormTextfield')
-                        ->with('label', 'Field')
+                ->push(component('Form')
+                    ->with('route', route('styleguide.form'))
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->with('name', 'field')
+                            ->with('label', 'Field')
+                        )
+                        ->push(component('FormButton')->with('title', 'Yo'))
+                    )
                 )
 
                 ->merge($posts->first()->comments->take(2)->map(function($comment) {
@@ -90,4 +97,14 @@ class StyleguideController extends Controller
             )
             ->with('footer', '');
     }
+
+    public function form()
+    {
+        dump(request()->all());
+        
+        sleep(2);
+
+        return redirect()->route('styleguide.index')->with('alert', 'We are back');
+    }
+
 }
