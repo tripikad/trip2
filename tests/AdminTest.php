@@ -180,7 +180,7 @@ class AdminTest extends TestCase
         $content1 = factory(App\Content::class)->create([
             'user_id' => $user2->id,
             'title' => 'Hello internal',
-            'type' => 'internal'
+            'type' => 'internal',
         ]);
 
         $this->actingAs($user1)

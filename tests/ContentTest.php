@@ -114,7 +114,7 @@ class ContentTest extends TestCase
             $this->assertEquals(401, $response->status());
 
             //skip sponsored and static - we have no index view for them
-            if(in_array($type, ['static','sponsored'])) {
+            if (in_array($type, ['static', 'sponsored'])) {
                 continue;
             }
 
