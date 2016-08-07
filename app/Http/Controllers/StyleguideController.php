@@ -16,12 +16,12 @@ class StyleguideController extends Controller
         $user2 = User::find(12);
 
         $posts = Content::whereType('forum')->latest()->skip(24)->take(3)->get();
-        
+
         */
 
         return view('v2.layouts.1col')
             ->with('content', collect()
-                
+
                 /*
 
                 ->push(region('CommentCreateForm', $posts->first()))

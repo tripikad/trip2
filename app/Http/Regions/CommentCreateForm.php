@@ -4,11 +4,10 @@ namespace App\Http\Regions;
 
 use Illuminate\Http\Request;
 
-class CommentCreateForm {
-
+class CommentCreateForm
+{
     public function render(Request $request, $content)
     {
-
         return component('Block')
             ->with('title', trans('comment.create.title'))
             ->with('content', collect()
@@ -25,7 +24,5 @@ class CommentCreateForm {
                     )
                 )
             );
-
     }
-
 }
