@@ -123,7 +123,6 @@ return [
 
     'onUpdate' => false,
 
-
     'contentTypeMapping' => [
         'forum' => 'foorum/uldfoorum',
         'expat' => 'foorum/elu-valimaal',

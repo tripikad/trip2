@@ -39,7 +39,7 @@
                         'text' => $item->body,
                         'more' => [
                             'title' => trans('user.activity.view.full.post'),
-                            'route' => route('content.show', [$item->type, $item])
+                            'route' => route($item->type.'.show', [$item->slug])
                         ]
                     ]
                 ]

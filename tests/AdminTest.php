@@ -180,7 +180,7 @@ class AdminTest extends TestCase
         $content1 = factory(App\Content::class)->create([
             'user_id' => $user2->id,
             'title' => 'Hello internal',
-            'type' => 'internal',
+            'type' => 'internal'
         ]);
 
         $this->actingAs($user1)
@@ -191,7 +191,7 @@ class AdminTest extends TestCase
             ->see(trans('content.internal.index.title'))
             ->seeLink('Hello internal')
             ->click('Hello internal')
-            ->seePageIs('content/'.$content1->type.'/'.$content1->id)
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug)
             ->see('Hello internal');
     }
 
