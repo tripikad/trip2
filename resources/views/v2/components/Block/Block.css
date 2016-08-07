@@ -1,0 +1,22 @@
+@import "variables";
+
+.Block {
+    background: $gray-light;
+    padding: $padding-md;
+}
+
+.Block--white {
+    background: $white;
+}
+
+    .Block__title {
+        font: $font-heading-md;
+        margin-bottom: $margin-sm;
+        color: $green;
+    }
+
+    .Block__subtitle {
+        font: $font-heading-sm;
+        margin-bottom: $margin-sm;
+        color: $gray-darkest;
+    }

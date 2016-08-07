@@ -216,7 +216,7 @@ Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightFeed
 
 // Styleguide
 
-Route::get('styleguide', 'StyleguideController@index');
+Route::get('styleguide', ['uses' => 'StyleguideController@index', 'as' => 'styleguide.index']);
 
 // API
 

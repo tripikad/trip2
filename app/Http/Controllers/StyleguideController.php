@@ -2,89 +2,83 @@
 
 namespace App\Http\Controllers;
 
-use Symfony\Component\Yaml\Yaml;
-use Storage;
+use App\User;
 
 class StyleguideController extends Controller
 {
     public function index()
     {
-        $components = [];
+        $user1 = User::find(3);
+        $user3 = User::find(5);
+        $user2 = User::find(12);
 
-        $directories = array_merge(
-            ['views/component'],
-            Storage::disk('resources')->allDirectories('views/component'),
-            ['assets/sass/base']
-        );
+        return view('v2.layouts.1col')
+            ->with('content', collect()
 
-        foreach ($directories as $directory) {
-            foreach (Storage::disk('resources')->files($directory) as $filepath) {
-                if ($header = $this->getHeader($filepath)) {
-                    $components[] = ['filepath' => $filepath] + $header;
-                }
-            }
-        }
+                ->push(component('ListItem')
+                    ->with('figure', component('ProfileImage')
+                        ->with('image', $user1->imagePreset('small_square'))
+                        ->with('value', $user1->rank * 90)
+                    )
+                    ->with('title', 'Title')
+                    ->with('route', '')
+                    ->with('subtitle', 'Subtitle')
+                )
 
-        return view('pages.styleguide.index', [
-            'components' => $components,
-            'svg_sprites' => $this->getSvgSprites(),
-            'svg_standalones' => $this->getSvgStandalones(),
-        ]);
-    }
+                ->push(component('Badge')->with('title', 2))
 
-    public function getHeader($filepath)
-    {
-        $start = '/{{--/';
-        $end = '/--}}/';
+                ->push(component('ProfileImage')
+                    ->with('image', $user1->imagePreset('small_square'))
+                    ->with('value', $user1->rank * 90)
+                )
 
-        if (pathinfo($filepath)['extension'] == 'scss') {
-            $start = '/\/\*/';
-            $end = '/\*\//';
-        }
+                ->push(component('ProfileImage')
+                    ->with('image', $user2->imagePreset('small_square'))
+                    ->with('value', $user2->rank * 90)
+                )
 
-        // Get the file contents
+                ->push(component('ProfileImage')
+                    ->with('image', $user3->imagePreset('small_square'))
+                    ->with('value', $user3->rank * 90)
+                )
 
-        $file = Storage::disk('resources')->get($filepath);
+                ->push(component('Block')
+                    ->is('responsive')
+                    ->with('title', 'Hello')
+                    ->with('subtitle', 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?')
+                    ->with('content', collect()
+                        ->push(component('Body')
+                            ->with('body', 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.')
+                        )
+                        ->push(component('Link')
+                            ->with('title', 'Kasutustingimused')
+                        )
+                        ->push(component('Button')
+                            ->with('title', 'Button')
+                        )
+                    )
+                )
 
-        // Split the file to the header and body
+                ->push(component('Body')
+                    ->is('responsive')
+                    ->with('body', '
+                        <p>Ennui flannel offal next level bitters four loko listicle synth church-key you probably havent heard of them keffiyeh sriracha.</p><img src="photos/social.jpg" /><p>Meditation retro shabby chic food truck, master cleanse offal tofu. Taxidermy skateboard post-ironic, freegan helvetica pickled art party tilde kinfolk stumptown.</p><table><tr><th>Synth</th><th>Skateboard</th><th>Freegan</th></tr><tr><td>Skateboard</td><td>Freegan</td><td>Beard</td></tr></table><p>Meditation retro shabby chic food truck, master cleanse offal tofu. Taxidermy skateboard post-ironic, freegan helvetica pickled art party tilde kinfolk stumptown.</p><div class="iframeWrapper"><iframe width="560" height="315" src="https://www.youtube.com/embed/ATr37Yl17jg" frameborder="0" allowfullscreen></iframe></div><p>Trade 90 cold-pressed beard photo booth selvage craft.</p><h3>H3 Gentrify etsy chartreuse</h3><p>Trade 90 cold-pressed beard photo booth selvage craft. <a href="">Ennui flannel offal</a> next level bitters four loko listicle synth church-key.<ul><li>You probably havent</li><li>Heard</li><li>of them</li></ul>keffiyeh sriracha.</p><h4>H4 Gentrify etsy chartreuse</h4><p> trade 90 cold-pressed beard photo booth selvage craft</p>
+                    ')
+                )
 
-        $parts = preg_split($end, $file);
+                ->push(component('Button')
+                    ->with('icon', 'icon-facebook')
+                    ->with('title', 'Button')
+                    ->with('route', route('styleguide.index'))
+                )
 
-        // Verify we have the header
+                ->push(component('Arc'))
 
-        if (count($parts) > 1) {
-            $header = Yaml::parse(trim(preg_replace($start, '', $parts[0])));
+                ->push(region('FooterLight'))
 
-            return [
-                'title' => isset($header['title']) ? trim($header['title']) : null,
-                'description' => isset($header['description']) ? trim($header['description']) : null,
-                'code' => isset($header['code']) ? trim($header['code']) : null,
-                'modifiers' => isset($header['modifiers']) ? array_merge(['(none)'], $header['modifiers']) : null,
-            ];
-        }
+                ->push(region('Footer'))
 
-        return false;
-    }
-
-    public function getSvgSprites()
-    {
-        $svg_sprites = [];
-
-        foreach (Storage::disk('resources')->files('assets/svg/sprite') as $filepath) {
-            $svg_sprites[] = pathinfo($filepath)['filename'];
-        }
-
-        return $svg_sprites;
-    }
-
-    public function getSvgStandalones()
-    {
-        $svg_standalones = [];
-
-        foreach (Storage::disk('resources')->files('assets/svg/standalone') as $filepath) {
-            $svg_standalones[] = pathinfo($filepath)['filename'];
-        }
-
-        return $svg_standalones;
+            )
+            ->with('footer', '');
     }
 }

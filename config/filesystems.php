@@ -48,6 +48,11 @@ return [
             'root'   => storage_path('app'),
         ],
 
+        'root' => [
+            'driver' => 'local',
+            'root'   => base_path(),
+        ],
+
         'resources' => [
             'driver' => 'local',
             'root'   => base_path('resources'),
