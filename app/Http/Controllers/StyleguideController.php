@@ -9,31 +9,22 @@ class StyleguideController extends Controller
 {
     public function index()
     {
+        /*
+
         $user1 = User::find(3);
         $user3 = User::find(5);
         $user2 = User::find(12);
 
         $posts = Content::whereType('forum')->latest()->skip(24)->take(3)->get();
+        
+        */
 
         return view('v2.layouts.1col')
             ->with('content', collect()
+                
+                /*
 
-                ->push(component('Form')
-                    ->with('route', route('styleguide.form'))
-                    ->with('fields', collect()
-                        ->push(component('FormTextfield')
-                            ->with('name', 'field')
-                            ->with('label', 'Field')
-                            ->with('placeholder', 'Placeholder')
-                        )
-                        ->push(component('FormTextarea')
-                            ->with('name', 'field2')
-                            ->with('label', 'Field2')
-                            ->with('placeholder', 'Placeholder2')
-                        )
-                        ->push(component('FormButton')->with('title', 'Yo'))
-                    )
-                )
+                ->push(region('CommentCreateForm', $posts->first()))
 
                 ->merge($posts->first()->comments->take(2)->map(function ($comment) {
                     return region('Comment', $comment);
@@ -43,11 +34,9 @@ class StyleguideController extends Controller
                     return region('ForumItem', $post);
                 }))
 
-                ->push(component('Badge')->with('title', 2))
+                */
 
-                ->push(component('Badge')->with('title', 20))
-
-                ->push(component('Badge')->with('title', 'New'))
+                ->push(component('Badge')->with('title', 200))
 
                 ->push(component('Block')
                     ->is('responsive')
