@@ -1,13 +1,13 @@
 @import "variables";
 
-    .FormTextfield__label {
+    .FormTextarea__label {
         color: $gray-darkest;
         display: block;
         font: $font-heading-sm;
         margin-bottom: $margin-xs;
     }
 
-    .FormTextfield__input {
+    .FormTextarea__textarea {
         border-radius: $border-radius-md;
         border: $border-gray-sm;
         font: $font-text-md;
@@ -15,6 +15,6 @@
         width: 100%;
     }
 
-    .FormTextfield__input::placeholder {
+    .FormTextarea__textarea::placeholder {
         color: $gray;
     }

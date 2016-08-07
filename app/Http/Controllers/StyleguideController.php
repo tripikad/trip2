@@ -24,6 +24,12 @@ class StyleguideController extends Controller
                         ->push(component('FormTextfield')
                             ->with('name', 'field')
                             ->with('label', 'Field')
+                            ->with('placeholder', 'Placeholder')
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('name', 'field2')
+                            ->with('label', 'Field2')
+                            ->with('placeholder', 'Placeholder2')
                         )
                         ->push(component('FormButton')->with('title', 'Yo'))
                     )
@@ -37,26 +43,11 @@ class StyleguideController extends Controller
                     return region('ForumItem', $post);
                 }))
 
-                ->push(component('Tag')->with('title', 'Lendamine'))
-
-                ->push(component('Tag')->is('orange')->with('title', 'Hiina'))
-
                 ->push(component('Badge')->with('title', 2))
 
-                ->push(component('ProfileImage')
-                    ->with('image', $user1->imagePreset('small_square'))
-                    ->with('value', $user1->rank * 90)
-                )
+                ->push(component('Badge')->with('title', 20))
 
-                ->push(component('ProfileImage')
-                    ->with('image', $user2->imagePreset('small_square'))
-                    ->with('value', $user2->rank * 90)
-                )
-
-                ->push(component('ProfileImage')
-                    ->with('image', $user3->imagePreset('small_square'))
-                    ->with('value', $user3->rank * 90)
-                )
+                ->push(component('Badge')->with('title', 'New'))
 
                 ->push(component('Block')
                     ->is('responsive')

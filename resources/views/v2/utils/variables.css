@@ -160,8 +160,9 @@ $height-xxxl: $width-xxxl;
 $height-xxxxl: $width-xxxxl;
 
 /* Borders */
-$border-gray: 2px solid $gray;
-$border-green: 2px solid $green;
+$border-gray-sm: 1px solid $gray-dark;
+$border-gray-md: 2px solid $gray;
+$border-green-md: 2px solid $green;
 
 /* Border radiuses */
 $border-radius-md: 3px;

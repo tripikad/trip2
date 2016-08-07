@@ -3,6 +3,7 @@
 $label = $label ?? '';
 $name = $name ?? '';
 $value = $value ?? '';
+$placeholder = $placeholder ?? '';
 
 @endphp
 
@@ -14,6 +15,13 @@ $value = $value ?? '';
     
     @endif
 
-    <input class="FormTextfield__title" name="{{ $name }}" type="text" value="{{ $value }}">
+    <input
+        class="FormTextfield__input"
+        id="{{ $name }}"
+        name="{{ $name }}"
+        type="text"
+        value="{{ $value }}"
+        placeholder="{{ $placeholder }}"
+    >
 
 </div>
