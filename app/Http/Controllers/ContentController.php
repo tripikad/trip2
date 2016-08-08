@@ -412,7 +412,6 @@ class ContentController extends Controller
             }
 
             $content->save();
-            $id = $content->id;
 
              DB::table('users')->select('id')->chunk(1000, function($users) use ($content) {
 
