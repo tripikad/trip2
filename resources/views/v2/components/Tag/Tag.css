@@ -1,0 +1,19 @@
+@import "variables";
+
+.Tag {
+    align-items: center;
+    background: $gray-dark;
+    border-radius: $border-radius-lg;
+    display: inline-flex;
+    font: $font-text-xs;
+    justify-content: center;
+    padding: 0 $padding-xs;
+}
+
+    .Tag__title {
+        color: $white;
+    }
+
+.Tag--orange {
+    background: $orange;
+}

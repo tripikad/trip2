@@ -1,0 +1,14 @@
+@import "variables";
+
+.FormButton {
+    align-items: center;
+    background: $green;
+    border-radius: $border-radius-md;
+    display: flex ?if $mobile;
+    display: inline-flex;
+    font: $font-heading-sm;
+    justify-content: center;
+    padding: $padding-sm $padding-lg;
+    border: none;
+    color: $white;
+}

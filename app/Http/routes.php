@@ -186,6 +186,8 @@ Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightFeed
 
 Route::get('styleguide', ['uses' => 'StyleguideController@index', 'as' => 'styleguide.index']);
 
+Route::post('styleguide', ['uses' => 'StyleguideController@form', 'as' => 'styleguide.form']);
+
 // API
 
 Route::get('api/destinations', 'ApiController@destinations');
