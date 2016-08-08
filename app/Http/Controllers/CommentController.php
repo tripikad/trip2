@@ -61,10 +61,9 @@ class CommentController extends Controller
         }
 
         */
-        if(in_array($comment->content->type, ['forum','buysell', 'expat'])) {
-            DB::table('users')->select('id')->chunk(1000, function($users) use ($comment) {
-
-                collect($users)->each(function($user) use ($comment) {
+        if (in_array($comment->content->type, ['forum', 'buysell', 'expat'])) {
+            DB::table('users')->select('id')->chunk(1000, function ($users) use ($comment) {
+                collect($users)->each(function ($user) use ($comment) {
 
                     // For each active user we store the cache key about new added comment
 
@@ -78,13 +77,10 @@ class CommentController extends Controller
                         // to the right place later
 
                         Cache::forever($key, $comment->id);
-
                     }
-
                 });
-
             });
-        }  
+        }
 
         Log::info('New comment added', [
             'user' =>  Auth::user()->name,
