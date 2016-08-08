@@ -40,6 +40,10 @@ class StyleguideController extends Controller
 
                 ->push(component('Alert'))
 
+                ->push(region('NavbarDesktop'))
+
+                ->push(region('NavbarMobile'))
+
                 ->push(component('Form')
                     ->with('route', route('styleguide.form'))
                     ->with('fields', collect()

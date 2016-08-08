@@ -5,6 +5,8 @@ import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
+import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
+import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 
 const globalProps = JSON.parse(decodeURIComponent(
     document.querySelector('#globalprops').getAttribute('content')
@@ -20,7 +22,9 @@ new Vue({
         Alert,
         Arc,
         Icon,
-        IconLoader
+        IconLoader,
+        NavbarDesktop,
+        NavbarMobile
     },
 
     events: {
