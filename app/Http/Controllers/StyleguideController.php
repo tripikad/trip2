@@ -9,6 +9,8 @@ class StyleguideController extends Controller
 {
     public function index()
     {
+        session()->keep('info');
+
         /*
 
         $user1 = User::find(3);
@@ -35,6 +37,21 @@ class StyleguideController extends Controller
                 }))
 
                 */
+
+                ->push(component('Alert'))
+
+                ->push(component('Form')
+                    ->with('route', route('styleguide.form'))
+                    ->with('fields', collect()
+                        ->push(component('FormTextarea')
+                            ->with('name', 'body')
+                            ->with('placeholder', trans('comment.create.field.body.title'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('comment.create.submit.title'))
+                        )
+                    )
+                )
 
                 ->push(component('Badge')->with('title', 200))
 
@@ -84,6 +101,6 @@ class StyleguideController extends Controller
 
         sleep(2);
 
-        return redirect()->route('styleguide.index')->with('alert', 'We are back');
+        return redirect()->route('styleguide.index')->with('info', 'We are back');
     }
 }

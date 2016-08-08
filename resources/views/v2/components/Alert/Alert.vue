@@ -8,11 +8,15 @@
     >
 
         <div class="Alert__title">
-            {{ alert }}
+            
+            {{ title }}
+        
         </div>
 
         <div class="Alert__close" @click="show = false">
-            <component is="Icon" name="icon-close"></component>
+            
+            <component is="Icon" icon="icon-close"></component>
+        
         </div>
 
     </div>
@@ -31,7 +35,7 @@ export default {
 
     props: {
         isclasses: { default: '' },
-        alert: { default: '' }
+        title: { default: '' }
     },
 
     data() {
@@ -42,7 +46,7 @@ export default {
 
     events: {
         'showAlert': function(alert) {
-            this.alert = alert
+            this.title = alert
             this.show = true
             setTimeout(function() {
                 this.show = false

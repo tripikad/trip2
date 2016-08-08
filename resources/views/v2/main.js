@@ -30,7 +30,7 @@ new Vue({
     },
 
     ready() {
-        this.$http.get('/alert').then(function(res) {
+        this.$http.get(globalProps.alertRoute).then(function(res) {
             if (res.data.info) {
                 this.$emit('showAlert', res.data.info)
             }

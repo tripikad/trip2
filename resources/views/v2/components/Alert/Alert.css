@@ -3,11 +3,10 @@
 .Alert {
     align-items: center;
     border-radius: $border-radius-md;
-    border: $border-green;
+    border: $border-green-md;
     display: flex;
-    height: $height-lg;
     justify-content: space-between;
-    padding: $padding-leftright-md;
+    padding: $padding-md;
 }
 
     .Alert__title {
@@ -17,4 +16,8 @@
 
     .Alert__close {
         cursor: pointer;
+    }
+
+    .Alert__close svg {
+        fill: $green;
     }
