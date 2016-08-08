@@ -1,0 +1,20 @@
+@import "variables";
+
+.Alert {
+    align-items: center;
+    border-radius: $border-radius-md;
+    border: $border-green;
+    display: flex;
+    height: $height-lg;
+    justify-content: space-between;
+    padding: $padding-leftright-md;
+}
+
+    .Alert__title {
+        font: $font-heading-md;
+        color: $green;
+    }
+
+    .Alert__close {
+        cursor: pointer;
+    }
