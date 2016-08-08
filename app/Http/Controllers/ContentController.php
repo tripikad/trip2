@@ -108,21 +108,19 @@ class ContentController extends Controller
         }
 
             // We get the current user id
-        if(auth()->check()){
-
+        if (auth()->check()) {
             $userId = auth()->id();
 
             // and assuming there is $contents collection, we iterate over its posts
 
-            $contents->map(function($content) use ($userId) {
-
+            $contents->map(function ($content) use ($userId) {
                 $key = 'new_'.$content->id.'_'.$userId;
 
                 // If the post is unread by the user or there are new comments
 
                 if (Cache::has($key)) {
 
-                    // Mark post as new so the view can style the post accordingly 
+                    // Mark post as new so the view can style the post accordingly
 
                     $content->isNew = true;
 
@@ -130,10 +128,9 @@ class ContentController extends Controller
                     // so the user will be redirected to the first new comment
 
                         $content->route;
-
                 }
-                return $content;
 
+                return $content;
             });
         }
 
@@ -194,19 +191,18 @@ class ContentController extends Controller
 
 
            // We get the current user id if logged in
-    if(auth()->check()){
-
+    if (auth()->check()) {
         $userId = auth()->user()->id;
-        
+
         // We check if user has read the post or its comments
 
         $key = 'new_'.$content->id.'_'.$userId;
 
         $newId = Cache::get($key);
-        
+
         // We iterate over post comments
 
-        $content->comments->map(function($comment) use ($newId) {
+        $content->comments->map(function ($comment) use ($newId) {
 
             // If the comment is the first unread (or newer) comment
 
@@ -215,17 +211,15 @@ class ContentController extends Controller
                 // Mark the comment as new so the view can style the comment accordingly
 
                 $comment->isNew = true;
-
             }
 
             return $comment;
-
         });
 
         // Mark the post and its comments read
 
         Cache::forget($key);
-    }   
+    }
 
 
         return response()
@@ -413,21 +407,18 @@ class ContentController extends Controller
 
             $content->save();
 
-             DB::table('users')->select('id')->chunk(1000, function($users) use ($content) {
-
-                collect($users)->each(function($user) use ($content) {
+            DB::table('users')->select('id')->chunk(1000, function ($users) use ($content) {
+                collect($users)->each(function ($user) use ($content) {
 
                 // For user we store the cache key about new content item
 
                 $key = 'new_'.$content->id.'_'.$user->id;
 
-                // Cache value is initally 0 (no new comments are added yet) 
+                // Cache value is initally 0 (no new comments are added yet)
                 // Note: not sure about set for x seconds / set forever / auto-expiration yet
 
                 Cache::forever($key, 0);
-
                 });
-
             });
 
 
