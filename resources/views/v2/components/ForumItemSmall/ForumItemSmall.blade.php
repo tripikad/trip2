@@ -1,8 +1,7 @@
 @php
 
-$count = $count ?? 0;
-$route = $route ?? '#';
-$user = $user ?? '';
+$profile = $profile ?? '';
+$route = $route ?? '';
 $title = $title ?? '';
 $time = $time ?? '';
 
@@ -12,10 +11,6 @@ $time = $time ?? '';
 
     <div class="ForumItemSmall {{ $isclasses }}">
 
-    	<div class="ForumItemSmall__badge">
-        	{!!
-        		component('ProfileImage')
-        	!!}
         </div>
 
         <a href="{!! $route !!}">
@@ -28,14 +23,8 @@ $time = $time ?? '';
 
         	    </div>
 
-        	    <div class="ForumItemSmall__time">
-        	    	{!! $time !!}
-        	    </div>
 
-            </div>
 
-            <div class="ForumItemSmall__badge">
-            	{!! component('badge')->with('title', $count) !!}
             </div>
 
         </a>

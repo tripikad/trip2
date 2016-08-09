@@ -2,15 +2,8 @@
 
 .ForumItemSmall {
 	display: flex;
-	padding: $padding-sm;
 	align-items: center;
 }
-
-.ForumItemSmall a {
-	display: flex;
-	align-items: center;
-}
-
 	
 	.ForumItemSmall__info {
     	padding: $padding-sm;
@@ -18,9 +11,15 @@
 
 	    .ForumItemSmall__title {
 	    	font: $font-heading-md;
+	    	margin-bottom: $margin-xs;
 	    }
 
 	    .ForumItemSmall__time {
-	    	font: $font-text-xs;
-	    	color: $gray;
+	    	font: $font-text-md;
+	    	color: $gray-dark;
+	    }
+
+	.ForumItemSmall__badge {
+			align-self: flex-start;
+			padding-top: $padding-sm;
 	    }

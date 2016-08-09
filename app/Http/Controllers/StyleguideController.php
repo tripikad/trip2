@@ -20,7 +20,6 @@ class StyleguideController extends Controller
 
         $destination = Destination::find(4639);
 
-        $post = Content::find(98470);
 
         return view('v2.layouts.1col')
             ->with('content', collect()
@@ -44,6 +43,10 @@ class StyleguideController extends Controller
                     return region('ForumItem', $post);
                 }))
 
+                ->merge($posts->map(function ($post) {
+                    return region('ForumItemSmall', $post);
+                }))
+
                 ->push(component('Alert'))
 
                 ->push(region('NavbarDesktop'))
@@ -62,14 +65,7 @@ class StyleguideController extends Controller
                         )
                     )
                 )
-
-                ->push(component('ForumItemSmall')
-                    ->with('title', $post->title)
-                    ->with('time', '2 kuud tagasi')
-                    ->with('route', './content/forum/98470')
-                    ->with('count', count($post->comments))
-                    )
-
+                    
                 ->push(component('Badge')->with('title', 200))
 
                 ->push(component('Block')
