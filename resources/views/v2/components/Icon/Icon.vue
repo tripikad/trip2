@@ -25,7 +25,7 @@
 
         computed: {
             style: function() {
-                var sizes = { sm: 14, md: 18, lg: 32 }
+                var sizes = { sm: 14, md: 18, lg: 32, xl: 48 }
 
                 if (this.width && this.height) {
                     return {

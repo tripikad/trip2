@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Content;
+use App\Destination;
 
 class StyleguideController extends Controller
 {
     public function index()
     {
-        /*
+        session()->keep('info');
 
         $user1 = User::find(3);
         $user3 = User::find(5);
@@ -17,16 +18,23 @@ class StyleguideController extends Controller
 
         $posts = Content::whereType('forum')->latest()->skip(24)->take(3)->get();
 
-        */
+        $destination = Destination::find(4639);
 
         $post = Content::find(98470);
 
         return view('v2.layouts.1col')
             ->with('content', collect()
 
-                /*
+                ->push(component('DestinationBar')
+                    ->with('route', route('destination.show', [$destination]))
+                    ->with('title', $destination->name)
+                    ->with('subtitle', collect()
+                        ->push('Aasia')
+                        ->push('Indoneesia')
+                    )
+                )
 
-                ->push(region('CommentCreateForm', $posts->first()))
+                // ->push(region('CommentCreateForm', $posts->first()))
 
                 ->merge($posts->first()->comments->take(2)->map(function ($comment) {
                     return region('Comment', $comment);
@@ -36,7 +44,24 @@ class StyleguideController extends Controller
                     return region('ForumItem', $post);
                 }))
 
-                */
+                ->push(component('Alert'))
+
+                ->push(region('NavbarDesktop'))
+
+                ->push(region('NavbarMobile'))
+
+                ->push(component('Form')
+                    ->with('route', route('styleguide.form'))
+                    ->with('fields', collect()
+                        ->push(component('FormTextarea')
+                            ->with('name', 'body')
+                            ->with('placeholder', trans('comment.create.field.body.title'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('comment.create.submit.title'))
+                        )
+                    )
+                )
 
                 ->push(component('ForumItemSmall')
                     ->with('title', $post->title)
@@ -93,6 +118,6 @@ class StyleguideController extends Controller
 
         sleep(2);
 
-        return redirect()->route('styleguide.index')->with('alert', 'We are back');
+        return redirect()->route('styleguide.index')->with('info', 'We are back');
     }
 }

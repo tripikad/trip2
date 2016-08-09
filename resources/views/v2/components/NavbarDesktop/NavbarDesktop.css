@@ -1,0 +1,56 @@
+@import "variables";
+
+.NavbarDesktop {
+    position: relative;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+    .NavbarDesktop__links {
+        display: flex;
+    }
+
+    .NavbarDesktop__link {
+        padding: $padding-sm;
+        color: $gray-darker;
+        font: $font-heading-sm;
+    }
+
+    .NavbarDesktop__popover {
+        width: $width-xxl;
+        position: absolute;
+        right: 0;
+        top: $height-md;
+    }
+
+    .NavbarDesktop__arrowWrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .NavbarDesktop__arrow {
+        width: 0;
+        height: 0;
+        border-left: $width-xxs solid transparent;
+        border-right: $width-xxs solid transparent;
+        border-bottom: $width-xxs solid $green;
+    }
+
+    .NavbarDesktop__sublinks {
+        border-radius: $border-radius-md;
+        background: $green;
+        padding: $padding-xs 0;
+    }
+
+    .NavbarDesktop__sublink {
+        color: $white;
+        font: $font-heading-sm;
+        padding: $padding-xs $padding-sm;
+    }
+
+    .NavbarDesktop__sublink:hover {
+        color: $white;
+        font: $font-heading-sm;
+        background: $green-dark;
+    }

@@ -3,6 +3,18 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\ContentController;
 
+// V2
+
+// Styleguide
+
+Route::get('styleguide', ['uses' => 'StyleguideController@index', 'as' => 'styleguide.index']);
+
+Route::post('styleguide', ['uses' => 'StyleguideController@form', 'as' => 'styleguide.form']);
+
+Route::get('alert', ['uses' => 'HelpersController@alert', 'as' => 'helpers.alert']);
+
+// V1
+
 // Frontpage
 
 Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
@@ -181,12 +193,6 @@ Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 
 Route::get('index.atom', ['uses' => 'FeedController@newsFeed', 'as' => 'news.feed']);
 
 Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightFeed', 'as' => 'flight.feed']);
-
-// Styleguide
-
-Route::get('styleguide', ['uses' => 'StyleguideController@index', 'as' => 'styleguide.index']);
-
-Route::post('styleguide', ['uses' => 'StyleguideController@form', 'as' => 'styleguide.form']);
 
 // API
 

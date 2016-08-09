@@ -1,0 +1,34 @@
+@import "variables";
+
+.DestinationBar {
+    background: $orange;
+    display: flex;
+    padding: $padding-md;
+}
+
+.DestinationBar--dark {
+    background: $orange-dark;
+}
+
+    .DestinationBar__icon {
+        padding-right: $padding-xs;
+    }
+
+    .DestinationBar__icon svg {
+        fill: $white;
+        margin-left: calc($spacer / -2);
+    }
+
+    .DestinationBar__title {
+        color: $white;
+        font: $font-heading-lg;
+        line-height: 100%;
+    }
+
+    .DestinationBar__subtitle {
+        color: $white;
+        font: $font-heading-md;
+        line-height: 100%;
+        margin-bottom: $margin-sm;
+        opacity: $opacity-md;
+    }
