@@ -2,21 +2,21 @@
 
 namespace App\Http\Regions;
 
-class NavbarDesktop {
-
+class NavbarDesktop
+{
     protected function prepareLinks()
     {
         $user = request()->user();
 
         return collect(config('menu.header'))
-            ->map(function($value, $key) {
+            ->map(function ($value, $key) {
                 return [
                     'title' => trans("menu.header.$key"),
                     'route' => $value['route'],
                 ];
             })
             ->putWhen(! $user, 'user', [
-                'title' => trans("menu2.header.user"),
+                'title' => trans('menu2.header.user'),
                 'route' => route('login.form'),
                 'menu' => true,
             ])
@@ -53,7 +53,7 @@ class NavbarDesktop {
             ->pushWhen($user, [
                 'title' => trans('menu.user.message'),
                 'route' => route('message.index', [$user]),
-                'badge' => $user ? $user->unreadMessagesCount() : ''
+                'badge' => $user ? $user->unreadMessagesCount() : '',
             ])
             ->pushWhen($user && $user->hasRole('admin'), [
                 'title' => trans('menu.auth.admin'),
@@ -66,10 +66,8 @@ class NavbarDesktop {
             ->toArray();
     }
 
-
     public function render()
     {
-
         return collect()
             ->push(component('NavbarDesktop')
                 ->with('links', $this->prepareLinks())
@@ -78,5 +76,4 @@ class NavbarDesktop {
             )
             ->implode('');
     }
-
 }
