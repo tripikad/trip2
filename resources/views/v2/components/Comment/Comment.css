@@ -5,6 +5,7 @@
     border: $border-gray-md;
     border-radius: $border-radius-md;
     padding: $padding-md;
+    padding: $padding-sm ?if $mobile;
 }
 
     .Comment__left {
