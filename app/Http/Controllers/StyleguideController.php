@@ -48,7 +48,7 @@ class StyleguideController extends Controller
                     ->with('title', 'Tripikad räägivad')
                     ->with('content', $posts->map(function ($post) {
                         return region('ForumItemSmall', $post);
-                        })
+                    })
                     )
                 )
 
@@ -125,10 +125,9 @@ class StyleguideController extends Controller
     {
         if (request()->has('value')) {
             return response()->json([
-                'value' => request()->get('value') + 1
+                'value' => request()->get('value') + 1,
             ]);
         }
         //return abort(404);
     }
-
 }
