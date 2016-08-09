@@ -1,0 +1,18 @@
+@import "variables";
+
+.SearchSmall {
+	display: flex;
+	align-items: center;
+}
+
+	.SearchSmall__field{
+		padding: $padding-xs;
+	}
+
+		.SearchSmall__field input{
+			border: $border-gray-sm;
+		}
+
+	.SearchSmall__icon{
+		cursor: pointer;
+	}
