@@ -19,6 +19,8 @@ class StyleguideController extends Controller
 
         */
 
+        $post = Content::find(98470);
+
         return view('v2.layouts.1col')
             ->with('content', collect()
 
@@ -35,6 +37,13 @@ class StyleguideController extends Controller
                 }))
 
                 */
+
+                ->push(component('ForumItemSmall')
+                    ->with('title', $post->title)
+                    ->with('time', '2 kuud tagasi')
+                    ->with('route', './content/forum/98470')
+                    ->with('count', count($post->comments))
+                    )
 
                 ->push(component('Badge')->with('title', 200))
 

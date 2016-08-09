@@ -1,0 +1,26 @@
+@import "variables";
+
+.ForumItemSmall {
+	display: flex;
+	padding: $padding-sm;
+	align-items: center;
+}
+
+.ForumItemSmall a {
+	display: flex;
+	align-items: center;
+}
+
+	
+	.ForumItemSmall__info {
+    	padding: $padding-sm;
+    }
+
+	    .ForumItemSmall__title {
+	    	font: $font-heading-md;
+	    }
+
+	    .ForumItemSmall__time {
+	    	font: $font-text-xs;
+	    	color: $gray;
+	    }
