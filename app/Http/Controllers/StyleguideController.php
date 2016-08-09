@@ -20,6 +20,7 @@ class StyleguideController extends Controller
 
         $destination = Destination::find(4639);
 
+
         return view('v2.layouts.1col')
             ->with('content', collect()
 
@@ -40,6 +41,10 @@ class StyleguideController extends Controller
 
                 ->merge($posts->map(function ($post) {
                     return region('ForumItem', $post);
+                }))
+
+                ->merge($posts->map(function ($post) {
+                    return region('ForumItemSmall', $post);
                 }))
 
                 ->push(component('Alert'))
