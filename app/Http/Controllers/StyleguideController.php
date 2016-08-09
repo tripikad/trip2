@@ -65,7 +65,7 @@ class StyleguideController extends Controller
                         )
                     )
                 )
-                    
+
                 ->push(component('Badge')->with('title', 200))
 
                 ->push(component('Block')
