@@ -20,21 +20,11 @@ $badge = $badge ?? '';
 
         <a href="{!! $route !!}">
 
-            <div class="ForumItemSmall__info">
-
         	    <div class="ForumItemSmall__title">
 
         	        {{ $title }}
 
         	    </div>
-
-                <div class="ForumItemSmall__time">
-
-                    {{ $time }}
-
-                </div>
-
-            </div>
 
         </a>
 

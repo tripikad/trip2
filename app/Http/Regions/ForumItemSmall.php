@@ -15,7 +15,7 @@ class ForumItemSmall
                 ->with('image', $post->user->imagePreset('small_square'))
                 ->with('rank', $post->user->rank * 90)
             )
-            ->with('title', mb_strimwidth($post->title, 0, 30, '...'))
+            ->with('title', $post->title)
             ->with('time', $post->created_at->diffForHumans())
             ->with('badge', component('Badge')->with('title', count($post->comments)));
     }

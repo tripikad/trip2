@@ -5,21 +5,8 @@
 	align-items: center;
 }
 	
-	.ForumItemSmall__info {
-    	padding: $padding-sm;
+
+    .ForumItemSmall__title {
+    	font: $font-heading-md;
+    	padding: $padding-xs;
     }
-
-	    .ForumItemSmall__title {
-	    	font: $font-heading-md;
-	    	margin-bottom: $margin-xs;
-	    }
-
-	    .ForumItemSmall__time {
-	    	font: $font-text-md;
-	    	color: $gray-dark;
-	    }
-
-	.ForumItemSmall__badge {
-			align-self: flex-start;
-			padding-top: $padding-sm;
-	    }
