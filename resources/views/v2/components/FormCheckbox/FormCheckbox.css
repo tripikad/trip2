@@ -1,0 +1,6 @@
+@import "variables";
+
+.FormCheckbox__label {
+    font: $font-text-md;
+    padding-left: $padding-sm;
+}

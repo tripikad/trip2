@@ -15,6 +15,7 @@
     "eslint-plugin-promise": "^2.0.0",
     "eslint-plugin-standard": "^2.0.0",
     "fastclick": "^1.0.6",
+    "geojson2svg": "^1.0.3",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-clean-css": "^2.0.6",
@@ -40,6 +41,7 @@
     "stylelint": "^7.0.3",
     "stylelint-config-standard": "^11.0.0",
     "susy": "^2.2.6",
+    "turf": "^3.0.14",
     "vue-clickaway": "^1.1.1",
     "vue-resource": "^0.7.0"
   }
