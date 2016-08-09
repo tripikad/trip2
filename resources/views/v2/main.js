@@ -5,6 +5,7 @@ import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
+import Flag from './components/Flag/Flag.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 
@@ -23,6 +24,7 @@ new Vue({
         Arc,
         Icon,
         IconLoader,
+        Flag,
         NavbarDesktop,
         NavbarMobile
     },

@@ -16,9 +16,10 @@ class StyleguideController extends Controller
         $user3 = User::find(5);
         $user2 = User::find(12);
 
-        $posts = Content::whereType('forum')->latest()->skip(24)->take(3)->get();
+        $posts = Content::whereType('forum')->latest()->skip(1)->take(3)->get();
 
         $destination = Destination::find(4639);
+
 
         return view('v2.layouts.1col')
             ->with('content', collect()
@@ -42,6 +43,15 @@ class StyleguideController extends Controller
                     return region('ForumItem', $post);
                 }))
 
+                ->push(component('Block')
+                    ->is('uppercase')
+                    ->with('title', 'Tripikad räägivad')
+                    ->with('content', $posts->map(function ($post) {
+                        return region('ForumItemSmall', $post);
+                    })
+                    )
+                )
+
                 ->push(component('Alert'))
 
                 ->push(region('NavbarDesktop'))
@@ -64,7 +74,6 @@ class StyleguideController extends Controller
                 ->push(component('Badge')->with('title', 200))
 
                 ->push(component('Block')
-                    ->is('responsive')
                     ->with('title', 'Hello')
                     ->with('subtitle', 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?')
                     ->with('content', collect()
@@ -110,5 +119,15 @@ class StyleguideController extends Controller
         sleep(2);
 
         return redirect()->route('styleguide.index')->with('info', 'We are back');
+    }
+
+    public function flag()
+    {
+        if (request()->has('value')) {
+            return response()->json([
+                'value' => request()->get('value') + 1,
+            ]);
+        }
+        //return abort(404);
     }
 }

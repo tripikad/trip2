@@ -1,8 +1,15 @@
 @php
 
 $title = $title ?? '';
+$route = $route ?? '';
 
 @endphp
+
+@if ($route)
+
+<a href="{{ $route }}">
+
+@endif
 
 <div class="Tag {{ $isclasses }}">
 
@@ -13,3 +20,9 @@ $title = $title ?? '';
     </div>
 
 </div>
+
+@if ($route)
+
+</a>
+
+@endif

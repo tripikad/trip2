@@ -5,6 +5,7 @@
     border: $border-gray-md;
     border-radius: $border-radius-md;
     padding: $padding-md;
+    padding: $padding-sm ?if $mobile;
 }
 
     .Comment__left {
@@ -17,3 +18,8 @@
     .Comment__meta {
         margin-bottom: $margin-sm;
     }
+
+.Comment--unpublished {
+    border: $border-red-md;
+    opacity: $opacity-md;
+}

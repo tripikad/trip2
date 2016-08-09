@@ -1,11 +1,12 @@
 @import "variables";
 
-.MetaItem {
+.LinkMeta {
     display: inline;
 }
 
-    .MetaItem__title {
+    .LinkMeta__title {
         font: $font-text-sm;
         color: $gray-dark;
         display: inline;
     }
+

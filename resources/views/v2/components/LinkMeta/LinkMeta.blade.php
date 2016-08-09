@@ -5,11 +5,11 @@ $title = $title ?? '';
 
 @endphp
 
-<div class="MetaItem {{ $isclasses }}">
+<div class="LinkMeta {{ $isclasses }}">
 
     @if ($route) <a href="{{ $route }}"> @endif
 
-    <div class="MetaItem__title">
+    <div class="LinkMeta__title">
 
         {{ $title }}
 

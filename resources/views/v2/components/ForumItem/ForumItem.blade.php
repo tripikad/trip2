@@ -29,8 +29,12 @@ $meta = $meta ?? collect();
 
             <div class="ForumItem__meta">
 
-                {!! $meta !!}
+                @foreach ($meta as $meta_item)
 
+                {!! $meta_item !!}
+
+                @endforeach
+            
             </div>
 
             </a>
