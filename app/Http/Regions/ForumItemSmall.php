@@ -16,6 +16,11 @@ class ForumItemSmall
                 ->with('rank', $post->user->rank * 90)
             )
             ->with('title', $post->title)
+            ->with('meta', collect()
+                ->push(component('LinkMeta')
+                    ->with('title', $post->created_at->diffForHumans())
+                )
+            )
             ->with('badge', component('Badge')->with('title', count($post->comments)));
     }
 }

@@ -2,10 +2,14 @@
 
 .ForumItemSmall {
 	display: flex;
-	align-items: center;
 }
 
+    .ForumItemSmall__profile {
+        margin-right: $margin-sm;
+    }
+
     .ForumItemSmall__title {
-    	font: $font-heading-md;
-    	padding: $padding-xs;
+        font: $font-heading-md;
+        margin-right: $margin-xs;
+        margin-bottom: $margin-xs;
     }

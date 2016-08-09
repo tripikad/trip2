@@ -16,7 +16,7 @@ class StyleguideController extends Controller
         $user3 = User::find(5);
         $user2 = User::find(12);
 
-        $posts = Content::whereType('forum')->latest()->skip(24)->take(3)->get();
+        $posts = Content::whereType('forum')->latest()->skip(1)->take(3)->get();
 
         $destination = Destination::find(4639);
 
@@ -44,6 +44,7 @@ class StyleguideController extends Controller
                 }))
 
                 ->push(component('Block')
+                    ->is('uppercase')
                     ->with('title', 'Tripikad räägivad')
                     ->with('content', $posts->map(function ($post) {
                         return region('ForumItemSmall', $post);

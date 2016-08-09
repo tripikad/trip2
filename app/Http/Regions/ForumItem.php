@@ -30,8 +30,6 @@ class ForumItem
                 ->merge($post->topics->map(function ($tag) {
                     return component('Tag')->with('title', $tag->name);
                 }))
-                ->render()
-                ->implode(' ')
             );
     }
 }

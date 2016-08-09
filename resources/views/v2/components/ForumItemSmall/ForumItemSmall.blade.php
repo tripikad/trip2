@@ -23,6 +23,16 @@ $badge = $badge ?? '';
 
 	    </div>
 
+        <div class="ForumItemSmall__meta">
+
+            @foreach ($meta as $meta_item)
+
+            {!! $meta_item !!}
+
+            @endforeach
+
+        </div>
+
     </a>
 
     <div class="ForumItemSmall__badge">
