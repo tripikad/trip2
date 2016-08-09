@@ -29,6 +29,6 @@
         color: $white;
         font: $font-heading-md;
         line-height: 100%;
-        margin-bottom: $margin-xs;
+        margin-bottom: $margin-sm;
         opacity: $opacity-md;
     }

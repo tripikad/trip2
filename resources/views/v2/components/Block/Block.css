@@ -19,4 +19,5 @@
         font: $font-heading-sm;
         margin-bottom: $margin-sm;
         color: $gray-darkest;
+        line-height: $line-height-xxl;
     }
