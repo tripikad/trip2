@@ -6,7 +6,7 @@
 	display: inline-flex;
 	justify-content: center;
 	min-width: $width-sm;
-	padding: 0 $padding-xs;
+	padding: $padding-xxxs $padding-xs;
 }
 
 	.Badge__title {

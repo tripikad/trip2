@@ -9,9 +9,14 @@ use App\Http\Controllers\ContentController;
 
 Route::get('styleguide', ['uses' => 'StyleguideController@index', 'as' => 'styleguide.index']);
 
-Route::post('styleguide', ['uses' => 'StyleguideController@form', 'as' => 'styleguide.form']);
+Route::post('styleguide/form', ['uses' => 'StyleguideController@form', 'as' => 'styleguide.form']);
+
+Route::post('styleguide/flag', ['uses' => 'StyleguideController@flag', 'as' => 'styleguide.flag']);
+
+// Alert
 
 Route::get('alert', ['uses' => 'HelpersController@alert', 'as' => 'helpers.alert']);
+
 
 // V1
 

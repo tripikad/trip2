@@ -18,8 +18,5 @@
 
     .ForumItem__title {
         font: $font-heading-md;
-    }
-
-    .ForumItem__meta {
-        margin: $margin-bottom-xs;
+        margin-bottom: $margin-xs;
     }

@@ -111,4 +111,15 @@ class StyleguideController extends Controller
 
         return redirect()->route('styleguide.index')->with('info', 'We are back');
     }
+
+    public function flag()
+    {
+        if ($value = request()->get('value')) {
+            return response()->json([
+                'value' => $value + 1
+            ]);
+        }
+        //return abort(404);
+    }
+
 }

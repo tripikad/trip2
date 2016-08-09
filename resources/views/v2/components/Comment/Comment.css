@@ -17,3 +17,8 @@
     .Comment__meta {
         margin-bottom: $margin-sm;
     }
+
+.Comment--unpublished {
+    border: $border-red-md;
+    opacity: $opacity-md;
+}

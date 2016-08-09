@@ -17,11 +17,11 @@ class ForumItem
             )
             ->with('title', $post->title)
             ->with('meta', collect()
-                ->push(component('MetaItem')
+                ->push(component('LinkMeta')
                     ->with('title', $post->user->name)
                     ->with('route', route('user.show', [$post->user]))
                 )
-                ->push(component('MetaItem')
+                ->push(component('LinkMeta')
                     ->with('title', $post->created_at->diffForHumans())
                 )
                 ->merge($post->destinations->map(function ($tag) {
