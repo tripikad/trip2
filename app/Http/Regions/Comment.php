@@ -1,5 +1,36 @@
 <?php
 
+/*
+
+        if (auth()->user() && auth()->user()->hasRoleOrOwner('admin', $this->user->id)) {
+            $actions['edit'] = [
+               'title' => trans('comment.action.edit.title'),
+               'route' => route('comment.edit', [$this]),
+           ];
+        }
+
+        if (auth()->user() && auth()->user()->hasRole('admin')) {
+            $actions['status'] = [
+               'title' => trans("comment.action.status.$this->status.title"),
+               'route' => route('comment.status', [$this, (1 - $this->status)]),
+               'method' => 'PUT',
+           ];
+        }
+        
+        {!! Form::open([
+            'url' => $action['route'],
+            'method' => isset($action['method']) ? $action['method'] : 'GET',
+            'class' => 'c-actions__form m-inline'
+        ]) !!}
+
+        {!! Form::submit($action['title'], [
+            'class' => 'c-actions__link'
+        ]) !!}
+
+        {!! Form::close() !!}
+
+*/
+
 namespace App\Http\Regions;
 
 use Illuminate\Http\Request;
