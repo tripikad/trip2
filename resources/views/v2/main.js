@@ -7,6 +7,7 @@ import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
+import Map from './components/Map/Map.vue'
 
 const globalProps = JSON.parse(decodeURIComponent(
     document.querySelector('#globalprops').getAttribute('content')
@@ -24,7 +25,8 @@ new Vue({
         Icon,
         IconLoader,
         NavbarDesktop,
-        NavbarMobile
+        NavbarMobile,
+        Map
     },
 
     events: {
