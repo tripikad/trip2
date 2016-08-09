@@ -43,9 +43,13 @@ class StyleguideController extends Controller
                     return region('ForumItem', $post);
                 }))
 
-                ->merge($posts->map(function ($post) {
-                    return region('ForumItemSmall', $post);
-                }))
+                ->push(component('Block')
+                    ->with('title', 'Tripikad räägivad')
+                    ->with('content', $posts->map(function ($post) {
+                        return region('ForumItemSmall', $post);
+                        })
+                    )
+                )
 
                 ->push(component('Alert'))
 
@@ -69,7 +73,6 @@ class StyleguideController extends Controller
                 ->push(component('Badge')->with('title', 200))
 
                 ->push(component('Block')
-                    ->is('responsive')
                     ->with('title', 'Hello')
                     ->with('subtitle', 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?')
                     ->with('content', collect()
