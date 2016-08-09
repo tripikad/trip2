@@ -119,7 +119,7 @@ class StyleguideController extends Controller
                 'value' => $value + 1
             ]);
         }
-        //return abort(404);
+        return abort(404);
     }
 
 }
