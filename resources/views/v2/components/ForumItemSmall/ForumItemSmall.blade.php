@@ -3,7 +3,6 @@
 $profile = $profile ?? '';
 $route = $route ?? '';
 $title = $title ?? '';
-$time = $time ?? '';
 $badge = $badge ?? '';
 
 @endphp
@@ -34,4 +33,3 @@ $badge = $badge ?? '';
 
         </div>
     </div>
-
