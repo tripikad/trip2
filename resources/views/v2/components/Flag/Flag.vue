@@ -13,7 +13,7 @@
 
         </div>
 
-        <div class="Flag__value">{{ innerValue }}</div>
+        <div class="Flag__value">{{ value }}</div>
 
     </div>
 
@@ -36,21 +36,11 @@ export default {
         route: { default: '' }
     },
 
-    data: function() {
-        return {
-            innerValue: 0
-        }
-    },
-
-    ready() {
-        this.innerValue = this.value
-    },
-
     methods: {
         toggleFlag: function() {
-            this.$http.post(this.route, { value: this.innerValue })
+            this.$http.post(this.route, { value: this.value })
                 .then(function(res) {
-                    this.innerValue = res.data.value
+                    this.value = res.data.value
                 })
         }
     }
