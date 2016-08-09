@@ -7,8 +7,6 @@ $badge = $badge ?? '';
 
 @endphp
 
-
-
     <div class="ForumItemSmall {{ $isclasses }}">
 
     	<div class="ForumItemSmall__Profile">
