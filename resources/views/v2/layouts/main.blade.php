@@ -7,7 +7,8 @@
         <meta id="globalprops" name="globalprops" content="
             {{
                 rawurlencode(json_encode([
-                    'token' => csrf_token()
+                    'token' => csrf_token(),
+                    'alertRoute' => route('helpers.alert')
                 ])) 
             }}
         ">
