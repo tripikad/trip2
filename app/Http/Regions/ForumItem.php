@@ -14,6 +14,8 @@ class ForumItem
                 ->with('route', route('user.show', [$post->user]))
                 ->with('image', $post->user->imagePreset('small_square'))
                 ->with('rank', $post->user->rank * 90)
+                ->with('size', 48)
+                ->with('border', 4)
             )
             ->with('title', $post->title)
             ->with('meta', collect()
