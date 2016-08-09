@@ -35,12 +35,6 @@ class StyleguideController extends Controller
 
                 ->push(component('Map'))
 
-                ->push(component('FormCheckbox')
-                    ->with('label', 'klikka siia')
-                    ->with('name', 'name')
-
-                )
-
                 // ->push(region('CommentCreateForm', $posts->first()))
 
                 ->merge($posts->first()->comments->take(2)->map(function ($comment) {
@@ -72,6 +66,10 @@ class StyleguideController extends Controller
                         ->push(component('FormTextarea')
                             ->with('name', 'body')
                             ->with('placeholder', trans('comment.create.field.body.title'))
+                        )
+                        ->push(component('FormCheckbox')
+                            ->with('name', 'check')
+                            ->with('label', 'Subscribe to comment')
                         )
                         ->push(component('FormButton')
                             ->with('title', trans('comment.create.submit.title'))
