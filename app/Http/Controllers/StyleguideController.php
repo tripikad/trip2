@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Content;
+use App\Destination;
 
 class StyleguideController extends Controller
 {
@@ -11,22 +12,27 @@ class StyleguideController extends Controller
     {
         session()->keep('info');
 
-        /*
-
         $user1 = User::find(3);
         $user3 = User::find(5);
         $user2 = User::find(12);
 
         $posts = Content::whereType('forum')->latest()->skip(24)->take(3)->get();
 
-        */
+        $destination = Destination::find(4639);
 
         return view('v2.layouts.1col')
             ->with('content', collect()
 
-                /*
+                ->push(component('DestinationBar')
+                    ->with('route', route('destination.show', [$destination]))
+                    ->with('title', $destination->name)
+                    ->with('subtitle', collect()
+                        ->push('Aasia')
+                        ->push('Indoneesia')
+                    )
+                )
 
-                ->push(region('CommentCreateForm', $posts->first()))
+                // ->push(region('CommentCreateForm', $posts->first()))
 
                 ->merge($posts->first()->comments->take(2)->map(function ($comment) {
                     return region('Comment', $comment);
@@ -35,8 +41,6 @@ class StyleguideController extends Controller
                 ->merge($posts->map(function ($post) {
                     return region('ForumItem', $post);
                 }))
-
-                */
 
                 ->push(component('Alert'))
 
