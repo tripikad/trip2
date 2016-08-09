@@ -114,9 +114,9 @@ class StyleguideController extends Controller
 
     public function flag()
     {
-        if ($value = request()->get('value')) {
+        if (request()->has('value')) {
             return response()->json([
-                'value' => $value + 1
+                'value' => request()->get('value') + 1
             ]);
         }
         //return abort(404);

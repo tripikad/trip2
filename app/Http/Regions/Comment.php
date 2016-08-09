@@ -30,8 +30,6 @@ class Comment
                     ->with('route', route('styleguide.flag'))
                     ->with('icon', 'icon-thumb-up')
                 )
-                ->render()
-                ->implode(' ')
             )
             ->with('body', component('Body')->with('body', $comment->body));
     }

@@ -2,7 +2,7 @@
 
 $id = $id ?? 0;
 $profile = $profile ?? '';
-$meta = $meta ?? '';
+$meta = $meta ?? collect();
 $body = $body ?? '';
 
 @endphp
@@ -21,7 +21,11 @@ $body = $body ?? '';
 
         <div class="Comment__meta">
 
-            {!! $meta !!}
+        @foreach ($meta as $meta_item)
+
+            {!! $meta_item !!}
+
+        @endforeach
 
         </div>
 
