@@ -26,7 +26,7 @@ class Comment
                     ]))
                 )
                 ->push(component('Flag')
-                    ->with('value', 2)
+                    ->with('value', 1)
                     ->with('route', route('styleguide.flag'))
                     ->with('icon', 'icon-thumb-up')
                 )
