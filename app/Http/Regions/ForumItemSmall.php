@@ -1,6 +1,9 @@
 <?php
+
 namespace App\Http\Regions;
+
 use Illuminate\Http\Request;
+
 class ForumItemSmall
 {
     public function render(Request $request, $post)
@@ -15,6 +18,5 @@ class ForumItemSmall
             ->with('title', mb_strimwidth($post->title, 0, 30, '...'))
             ->with('time', $post->created_at->diffForHumans())
             ->with('badge', component('Badge')->with('title', count($post->comments)));
-            
     }
 }
