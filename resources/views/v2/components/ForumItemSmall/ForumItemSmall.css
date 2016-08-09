@@ -1,0 +1,11 @@
+@import "variables";
+
+.ForumItemSmall {
+	display: flex;
+	align-items: center;
+}
+
+    .ForumItemSmall__title {
+    	font: $font-heading-md;
+    	padding: $padding-xs;
+    }
