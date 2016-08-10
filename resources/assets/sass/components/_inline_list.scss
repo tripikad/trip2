@@ -20,16 +20,30 @@
 
     .c-inline-list__item {
 
+        line-height: 1.35;
+        padding-left: 0;
+        margin-bottom: 0;
+
         &:before {
 
-            content: '●';
+            content: '';
             margin: 0 $spacer / 2;
+            display: inline-block;
+            vertical-align: middle;
+            width: 4px;
+            height: 4px;
+            background: $color-text-neutral-darker;
+            border-radius: 50%;
+            position: static;
+            top: auto;
+            left: auto;
         }
 
         &:first-child:before {
 
             content: none;
             margin: 0;
+            display: none;
         }
     }
 
@@ -38,7 +52,12 @@
             @include color-modifiers-and(color);
 
             color: $color-text-link;
+            line-height: 1.35;
             text-decoration: none;
+            background: transparent;
+            margin: 0;
+            padding: 0;
+            border: 0;
 
             &:hover {
 

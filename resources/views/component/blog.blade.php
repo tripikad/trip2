@@ -1,13 +1,7 @@
-<div class="c-blog">
-
-    <div class="c-blog__image-wrap">
-
-        <a href="{{ $route }}" class="c-blog__image-link">
-            <img src="{{ $image }}" alt="" class="c-blog__image">
-        </a>
-
-    </div>
-
+<div class="c-blog {{ $modifiers or '' }}">
+    @if (isset($image) && $image)
+        <a href="{{ $route }}" class="c-blog__image" style="background-image: url({{ $image }});"></a>
+    @endif
     <h3 class="c-blog__title"><a href="{{ $route }}" class="c-blog__title-link">{{ $title }}</a></h3>
 
     @if (isset($profile))

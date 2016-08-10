@@ -7,13 +7,13 @@ return [
     'register.field.email.title' => 'E-post',
     'register.field.password.title' => 'Parool',
     'register.field.password_confirmation.title' => 'Parool uuesti',
-    'register.field.eula.title' => 'Ma nõustun tingimustega :link',
-    'register.field.eula.title.link' => 'Kasutustingimused',
+    'register.field.eula.title' => 'Trip.ee keskkonnaga liitudes nõustun ma :link.',
+    'register.field.eula.title.link' => 'kasutajatingimustega',
     'register.submit.title' => 'Registreeri',
 
     'register.email.subject' => 'Kinnita oma konto',
     'register.email.body.line1' => 'Täname, et liitusid Eesti suurima reisikogukonnaga',
-    'register.email.body.line2' => 'Palun kinnita veel oma e-posti aadress külastades allolevat linki',
+    'register.email.body.line2' => 'Palun kinnita oma e-posti aadress külastades allolevat linki',
 
     'register.sent.info' => 'Sinu e-postile saadeti kinnituskiri',
     'register.confirmed.info' => 'Sinu e-post on nüüd kinnitatud. Nüüd saad oma kasutajaga sisse logida.',
@@ -34,9 +34,10 @@ return [
     'login.field.remember.title' => 'Pea mu logimine meeles',
     'login.submit.title' => 'Logi sisse',
 
-    'reset.apply.title' => 'Unustasid parooli?',
+    'reset.apply.title' => 'Ei mäleta oma parooli?',
+    'reset.apply.title.link' => 'Taasta oma parool siin',
     'reset.apply.field.email.title' => 'Sinu e-post',
-    'reset.apply.submit.title' => 'Saada mulle parooli taastamise link',
+    'reset.apply.submit.title' => 'Saada',
 
     'reset.password.title' => 'Vali uus parool',
     'reset.password.field.email.title' => 'E-post',
@@ -44,8 +45,8 @@ return [
     'reset.password.field.password_confirmation.title' => 'Korda parooli',
     'reset.password.submit.title' => 'Kinnita',
 
-    'reset.email.subject' => 'Sinu kasutaja parooli taastamine',
-    'reset.email.body.line1' => 'Palun külasta allolevat linki, et taastada oma parool',
-    'reset.email.body.line2' => 'Märkuseks: kui sina ise pole uut parooli taastanud, kustuta see kiri koheselt.',
+    'reset.email.subject' => 'Taasta oma parool',
+    'reset.email.body.line1' => 'Palun külasta allolevat linki, et taastada oma parool:',
+    'reset.email.body.line2' => 'Märkuseks: kui sina ise pole uut parooli taastanud, siis võid selle kirja rahulikult kustutada.',
 
 ];

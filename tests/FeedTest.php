@@ -8,19 +8,37 @@ class FeedTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function test_unlogged_user_can_access_atom_feed()
+    public function test_unlogged_user_can_access_news_feed()
     {
         $contents = factory(Content::class, 15)->create([
                 'user_id' => factory(User::class)->create()->id,
                 'type' => 'news',
             ]);
 
-        $this->visit('index.atom')
-                ->see('<feed xmlns="http://www.w3.org/2005/Atom">');
+        $this
+            ->visit('/')
+            ->click(trans('menu.footer3.newsfeed'))
+            ->seePageIs('index.atom');
 
         foreach ($contents as $content) {
-            $this->visit('index.atom')
-                    ->see($content->title);
+            $this->see($content->title);
+        }
+    }
+
+    public function test_unlogged_user_can_access_flight_feed()
+    {
+        $contents = factory(Content::class, 15)->create([
+            'user_id' => factory(User::class)->create()->id,
+            'type' => 'flight',
+        ]);
+
+        $this
+            ->visit('/')
+            ->click(trans('menu.footer3.flightfeed'))
+            ->seePageIs('lendude_sooduspakkumised/rss');
+
+        foreach ($contents as $content) {
+            $this->see($content->title);
         }
     }
 }

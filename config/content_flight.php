@@ -4,12 +4,18 @@ return [
 
     'index' => [
 
-        'with' => ['images'],
+        'with' => ['images', 'topics'],
         'orderBy' => [
-            'field' => 'end_at',
+            'field' => 'created_at',
             'order' => 'desc',
         ],
-        'paginate' => 24,
+        'expire' => [
+            'field' => 'end_at',
+            'daysFrom' => 'end_at',
+            'daysTo' => -700000000,
+            'type' => 'datetime',
+        ],
+        'paginate' => 15,
     ],
 
     'edit' => [

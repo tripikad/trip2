@@ -18,15 +18,20 @@ return [
         ],
         'expire' => [
             'field' => 'created_at',
-            'daysBack' => 30,
+            'daysFrom' => -30,
+            'daysTo' => false,
+            'type' => 'datetime',
         ],
-        'paginate' => 25,
+        'paginate' => 35,
     ],
 
     'edit' => [
 
         'fields' => [
-
+            'type' => [
+                'type' => 'radio',
+                'items' => 'menu.forum',
+            ],
             'title' => [
                 'type' => 'text',
             ],

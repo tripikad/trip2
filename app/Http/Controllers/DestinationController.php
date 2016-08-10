@@ -6,6 +6,7 @@ use View;
 use Cache;
 use App\Destination;
 use DB;
+use App\Main;
 
 class DestinationController extends Controller
 {
@@ -60,7 +61,7 @@ class DestinationController extends Controller
             ],
         ];
 
-        $features = [];
+        $featured = [];
 
         foreach ($types as $type => $attributes) {
             $feature_item = null;
@@ -89,8 +90,15 @@ class DestinationController extends Controller
                 $feature_item->take($types[$type]['take']);
             }
 
-            $features[$type]['contents'] = $feature_item->with('images')->get();
+            $featured[$type]['contents'] = $feature_item->with('images')->get();
         }
+
+        $getParentDestinations = [
+            'flights2',
+        ];
+        $viewVariables['flights2'] = $featured['flights2']['contents'];
+        $viewVariables = Main::getParentDestinations($getParentDestinations, $viewVariables);
+        $featured['flights2']['contents'] = $viewVariables['flights2'];
 
         $previous_destination = Destination::
             where(DB::raw('CONCAT(`name`, `id`)'), '<', function ($query) use ($id) {
@@ -152,6 +160,21 @@ class DestinationController extends Controller
             $root_destination = $destination->getRoot();
         }
 
+        $destination_info = null;
+        if ($destination->depth > 0) {
+            if ($destination->depth == 1) {
+                $destination_info = $destination;
+            } elseif ($destination->depth == 2) {
+                $destination_info = $parent_destination;
+            } else {
+                if ($parent_destination) {
+                    $destination_info = Destination::whereId($parent_destination->parent_id)->first();
+                }
+            }
+        } else {
+            $destination_info = $destination;
+        }
+
         $popular_destinations = $root_destination
             ->getPopular()
             ->sortByDesc('interestTotal')
@@ -159,12 +182,13 @@ class DestinationController extends Controller
 
         return response()->view('pages.destination.show', [
             'destination' => $destination,
-            'features' => $features,
+            'featured' => $featured,
             'previous_destination' => $previous_destination,
             'next_destination' => $next_destination,
             'parent_destination' => $parent_destination,
             'root_destination' => $root_destination,
             'popular_destinations' => $popular_destinations,
+            'destination_info' => $destination_info,
         ])->header('Cache-Control', 'public, s-maxage='.config('cache.destination.header'));
     }
 }

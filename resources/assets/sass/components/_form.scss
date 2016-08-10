@@ -1,5 +1,7 @@
 .c-form__group {
 
+    @include clearfix;
+
     position: relative;
     width: 100%;
     margin-bottom: $spacer * 2;
@@ -7,6 +9,16 @@
     &.m-small-margin {
 
         margin-bottom: $spacer;
+    }
+
+    &.m-large-margin {
+
+        margin-bottom: $spacer * 2;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 4;
+        }
     }
 
     &.m-no-margin {
@@ -18,19 +30,50 @@
 
         text-align: right;
     }
+
+    &.m-inline {
+
+        display: inline-block;
+        margin-right: $spacer;
+        width: auto;
+        text-align: center;
+    }
 }
 
 .c-form__label {
 
-    color: $color-text-neutral-dark;
+    color: $color-text-neutral-darkest;
     font-size: $font-size-normal;
     font-weight: $font-weight-medium;
     display: block;
     margin-bottom: $spacer;
+    cursor: pointer;
 
     .c-form__group.m-error & {
 
         color: $color-fill-error;
+    }
+
+    &.m-radio,
+    &.m-checkbox {
+
+        margin-left: $spacer * 2;
+    }
+
+    &.m-color {
+
+        @include color-modifiers(background);
+        @include hide-text();
+
+        display: block;
+        width: $spacer * 3;
+        height: $spacer * 3;
+        border-radius: 3px;
+    }
+
+    .c-form__group-radio & {
+
+        margin-bottom: 0;
     }
 }
 
@@ -39,12 +82,11 @@
     position: relative;
 }
 
-    .c-form__input,
-    .selectize-input {
+    .c-form__input {
 
         color: $color-text-black;
         font-family: $font-primary;
-        font-size: $font-size-medium;
+        font-size: $font-size-normal;
         font-weight: $font-weight-normal;
         width: 100%;
         height: $spacer * 4 + 4;
@@ -53,10 +95,20 @@
         border: 1px solid $color-fill-neutral;
         border-radius: 3px;
 
+        &.m-icon {
+
+            padding-left: $spacer * 3;
+        }
+
         &.m-medium {
 
-            font-size: $font-size-medium;
+            font-size: $font-size-normal;
             height: $spacer * 3.5;
+
+            &.m-icon {
+
+                padding-left: $spacer * 3;
+            }
         }
 
         &.m-small {
@@ -71,9 +123,29 @@
             }
         }
 
+        &.m-radio,
+        &.m-checkbox {
+
+            width: $spacer * 1.5;
+            height: $spacer * 1.5;
+            float: left;
+
+            .c-form__group.m-inline & {
+
+                float: none;
+                margin: 0 auto;
+            }
+
+            &:focus {
+
+                box-shadow: none;
+            }
+        }
+
         &.m-high {
 
-            height: $spacer * 12;
+            line-height: 1.35;
+            height: $spacer * 25;
         }
 
         &.m-narrow {
@@ -110,6 +182,91 @@
         }
     }
 
+    .c-form__group-radio {
+
+        padding: $spacer * 1.5 $spacer;
+
+        &.m-active {
+
+            background: $color-fill-neutral-light;
+        }
+    }
+
+    .c-form__group-select {
+
+        position: relative;
+        width: 100%;
+
+        &::after {
+
+            content: '';
+            position: absolute;
+            right: $spacer;
+            top: 50%;
+            display: block;
+            width: 0;
+            height: 0;
+            margin-top: -$spacer / 4;
+            border-left: $spacer / 2 solid transparent;
+            border-right: $spacer / 2 solid transparent;
+            border-top: $spacer / 2 solid $color-fill-neutral;
+            border-bottom: none;
+            pointer-events: none;
+        }
+    }
+
+    .c-form__select {
+
+        color: $color-text-black;
+        font-family: $font-primary;
+        font-size: $font-size-medium;
+        font-weight: $font-weight-normal;
+        line-height: 1.2;
+        width: 100%;
+        height: $spacer * 4 + 4;
+        padding: $spacer $spacer $spacer / 2;
+        background: $color-white;
+        border: 1px solid $color-fill-neutral;
+        border-radius: 3px;
+        appearance: none;
+
+        &.m-medium {
+
+            font-size: $font-size-medium;
+            height: $spacer * 3.5;
+        }
+
+        &.m-small {
+
+            font-size: $font-size-normal;
+            padding: $spacer - 2 $spacer $spacer / 2;
+            height: $spacer * 3;
+        }
+
+    }
+
+    .c-form__note {
+
+        color: $color-text-neutral-darker;
+        font-size: $font-size-normal;
+        line-height: 1.25;
+        display: block;
+        margin-bottom: $spacer;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 2;
+        }
+
+        &.m-small-margin {
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer;
+            }
+        }
+    }
+
     .c-form__text {
 
         color: $color-text-black;
@@ -137,5 +294,10 @@
             display: block;
             height: 100%;
             width: 100%;
+
+             .c-form__group.m-error & {
+
+                fill: $color-fill-error;
+             }
         }
     }

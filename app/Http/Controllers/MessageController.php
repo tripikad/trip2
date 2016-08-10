@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use View;
+use Log;
 use App\Message;
 use App\User;
 
@@ -55,19 +56,34 @@ class MessageController extends Controller
         if ($user_to->notify_message) {
             $user_from = User::find($user_id_from);
 
-            Mail::send('email.message.store', [
+            Mail::queue('email.message.store', [
                 'new_message' => $message, // 'message' variable is reseved by mailer
                 'user_from' => $user_from,
                 'user_to' => $user_to,
             ], function ($mail) use ($user_from, $user_to) {
-
                 $mail->to($user_to->email)
                     ->subject(trans('message.store.email.subject', [
                         'user' => $user_from->name,
                     ]));
 
+                $swiftMessage = $mail->getSwiftMessage();
+                $headers = $swiftMessage->getHeaders();
+
+                $header = [
+                    'category' => [
+                        'private_message',
+                    ],
+                    'unique_args' => [
+                        'message_from_user_id' => (string) $user_from->id,
+                        'message_to_user_id' => (string) $user_to->id,
+                    ],
+                ];
+
+                $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
             });
         }
+
+        Log::info('A private message has been sent');
 
         return redirect()->route('message.index.with', [
             $user_id_from, $user_id_to, '#message-'.$message->id,

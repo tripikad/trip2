@@ -2,28 +2,29 @@
 
 return [
 
-    'index.search.title' => 'Kuhu sa täna sooviksid minna?',
+    'index.search.title' => 'Kuhu sa soovid minna?',
     'index.search.destination.title' => 'Sisesta sihtkoht',
     'index.search.submit.title' => 'Mine',
 
-    'index.forum.general' => 'Üldine',
+    'index.forum.general' => 'Üldfoorum',
     'index.forum.buysell' => 'Ost-müük',
     'index.forum.expat' => 'Elu välismaal',
+    'index.forum.create' => 'Alusta teemat',
 
     'index.shortnews.title' => 'Lühiuudised',
     'index.flight.title' => 'Soodsad lennupiletid',
     'index.travelmate.title' => 'Reisikaaslased',
-    'index.forum.title' => 'Foorum',
+    'index.forum.title' => 'Tripikad räägivad',
     'index.news.title' => 'Uudised',
     'index.photo.title' => 'Viimati lisatud pildid',
     'index.blog.title' => 'Blogi',
     'index.offer.title' => 'Reisipakkumised',
     'index.travelletter.title' => 'Reisikirjad',
 
-    'index.all.news' => 'Kõik uudised &rsaquo;',
-    'index.all.offers' => 'Vaata kõiki pakkumisi &rsaquo;',
+    'index.all.news' => 'Kõik uudised',
+    'index.all.offers' => 'Vaata kõiki sooduspakkumisi',
 
-    'index.about.title' => 'Loe täpsemalt, mis on Trip.ee ›',
-    'index.about.register' => 'Liitu Trip.ee kogukonnaga',
+    'index.about.title' => 'Loe täpsemalt, mis on Trip.ee',
+    'index.about.register' => 'Liitu Trip.ee-ga',
 
 ];

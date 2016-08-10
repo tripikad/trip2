@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mail;
 use Hash;
+use Log;
 use App\User;
 
 class RegistrationController extends Controller
@@ -31,20 +32,43 @@ class RegistrationController extends Controller
 
         $user = User::create(array_merge($request->all(), $fields));
 
-        Mail::send('email.auth.register', ['user' => $user], function ($mail) use ($user) {
-
+        Mail::queue('email.auth.register', ['user' => $user], function ($mail) use ($user) {
             $mail->to($user->email, $user->name)->subject(trans('auth.register.email.subject'));
 
+            $swiftMessage = $mail->getSwiftMessage();
+            $headers = $swiftMessage->getHeaders();
+
+            $header = [
+                'category' => [
+                    'auth_register',
+                ],
+                'unique_args' => [
+                    'user_id' => (string) $user->id,
+                ],
+            ];
+
+            $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
         });
 
+        Log::info('New user registered', [
+            'name' =>  $user->name,
+            'link' =>  route('user.show', [$user]),
+        ]);
+
         return redirect()
-            ->route('frontpage.index')
+            ->route('login.form')
             ->with('info', trans('auth.register.sent.info'));
     }
 
     public function confirm($token)
     {
-        User::where('registration_token', $token)->firstOrFail()->confirmEmail();
+        $user = User::where('registration_token', $token)->firstOrFail();
+        $user->confirmEmail();
+
+        Log::info('New user confirmed registration', [
+            'name' =>  $user->name,
+            'link' =>  route('user.show', [$user]),
+        ]);
 
         return redirect()
             ->route('login.form')

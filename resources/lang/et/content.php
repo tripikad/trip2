@@ -4,9 +4,12 @@ return [
 
     // General
 
+    'post.status.unpublished' => 'Peidetud',
+
     'post.updated.at' => 'Muudetud: :updated_at',
 
     'comments.title' => 'Kommentaarid',
+    'share.post.title' => 'Soovita pakkumist sõpradele',
 
     'row.text.comment' => 'Viimane kommentaar :updated_at',
 
@@ -28,18 +31,24 @@ return [
 
     'action.message.send' => 'Saada sõnum',
 
-    'action.register' => 'Liitu Trip.ee kogukonnaga',
+    'action.more.about.text' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+
+    'action.register' => 'Liitu Trip.ee-ga',
     'action.more.about' => 'Loe, mis on Trip.ee',
     'action.facebook.text' => 'Trip.ee Facebook',
     'action.twitter.text' => 'Trip.ee Twitter',
     'action.read.more' => 'Loe edasi',
+    'action.continue.reading' => 'Loe lähemalt',
+    'action.price.error' => 'Mis on veahind',
+
+    'action.type.forum' => ':type foorum',
 
     'field.image.title' => 'Vali pilt',
     'field.image.selected.title' => 'Uus pilt on valitud',
 
     'index.filter.title' => 'Filtreeri',
-    'index.filter.field.destination.title' => 'Kõik',
-    'index.filter.field.topic.title' => 'Kõik',
+    'index.filter.field.destination.title' => 'Vali sihtkoht',
+    'index.filter.field.topic.title' => 'Vali valdkond',
     'index.filter.submit.title' => 'Filtreeri',
     'index.filter.reset.title' => 'Lähtesta',
     'index.filter.destination.title' => 'Vaata ka meie :destination lehte',
@@ -49,6 +58,8 @@ return [
 
     'edit.title' => 'Muuda',
     'edit.submit.title' => 'Uuenda',
+    'edit.notes.heading' => 'Hea teada',
+    'edit.notes.body' => '<p>See on reisifoorum kooliharidust nuusutanud inimesele, kes mõistab kirjutada korralikus eesti keeles.</p><p>Ole hea ja uuri enne postitamist Trip.ee otsinguga juba olemasolevaid teemasid ning palun pane postitusele selle sisu avav pealkiri (mitte piirdudes koha või riigi nimega).</p>',
 
     'store.status.1.info' => ':title on edukalt lisatud.',
     'store.status.0.info' => ':title on lisatud, kuid teistele peidetud. Vajuta lingile "Avalikusta", et näidata seda teistele.',
@@ -63,13 +74,13 @@ return [
 
     'news.create.title' => 'Lisa uus uudis',
 
-    'news.edit.field.image_id.title' => 'Pildi ID, näiteks [[123]]',
-    'news.edit.field.image_id.help' => 'Pildi ID tuleb sisestada kujul: [[456]]',
+    'news.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Toimetuse pildid all',
+    'news.edit.field.image_id.help' => '[[123]]',
 
     'news.edit.field.title.title' => 'Pealkiri',
     'news.edit.field.title.help' => '',
 
-    'news.edit.field.body.title' => 'Sisu',
+    'news.edit.field.body.title' => 'Sisu. Ka siia saab lisada pildilinke a la [[123]]',
     'news.edit.field.body.help' => '',
 
     'news.edit.field.destinations.title' => 'Vali sihtkohad',
@@ -80,6 +91,8 @@ return [
 
     'news.edit.field.url.title' => 'URL',
     'news.edit.field.url.help' => '',
+
+    'news.no.results' => 'Hetkel pole ühtegi uudist.',
 
     // Shortnews
 
@@ -102,20 +115,34 @@ return [
     'shortnews.edit.field.url.title' => 'URL',
     'shortnews.edit.field.url.help' => '',
 
+    'shortnews.no.results' => 'Hetkel pole ühtegi lühiuudist.',
+
     // Flight
 
     'flight.index.title' => 'Lennupakkumised',
     'flight.index.field.price' => 'Alates :price:symbol',
+    'flight.index.about.title' => 'Hoiame headel pakkumistel igapäevaselt silma peal ning jagame neid kõigi huvilistega.',
+    'flight.index.about.text' => 'Pakkumised võivad aeguda juba paari päevaga.',
+    'flight.index.from' => 'al',
+
+    'flight.show.action.all' => 'Kõik pakkumised',
+    'flight.show.expired' => 'Pakkumine võib olla aegunud',
+
+    'flight.no.results' => 'Hetkel pole ühtegi aktiivset lennupakkumist.',
+    'flight.filter.no.results' => 'Sinu otsingukriteeriumitele vastavalt ei leitud hetkel ühtegi tulemust.',
+
+    'flight.action.previous' => 'Uuemad pakkumised',
+    'flight.action.next' => 'Vanemad pakkumised',
 
     'flight.create.title' => 'Lisa lennupakkumine',
 
     'flight.edit.field.title.title' => 'Pealkiri',
     'flight.edit.field.title.help' => '',
 
-    'flight.edit.field.image_id.title' => 'Pildi ID, näiteks [[123]]',
-    'flight.edit.field.image_id.help' => 'Pildi ID tuleb sisestada kujul: [[456]]',
+    'flight.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Toimetuse pildid all',
+    'flight.edit.field.image_id.help' => '[[123]]',
 
-    'flight.edit.field.body.title' => 'Sisu',
+    'flight.edit.field.body.title' => 'Sisu. Ka siia saab lisada pildilinke stiilis [[123]]',
     'flight.edit.field.body.help' => '',
 
     'flight.edit.field.destinations.title' => 'Vali sihtkohad',
@@ -168,16 +195,28 @@ return [
     'travelmate.description.title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
     'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.',
 
+    'travelmate.about.text' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu',
+
+    'travelmate.no.results' => 'Hetkel pole ühtegi aktiivset reisikaaslase otsijat.',
+
     // Forum
 
-    'forum.index.title' => 'Üldine foorum',
-    'forum.create.title' => 'Lisa uus',
+    'forum.sidebar.title' => 'Rubriigid',
+    'forum.popular.title' => 'Populaarsemad postitused',
+
+    'forum.filter.text' => 'Kui ei leia sobivat teemat, siis ehk aitab sind filter.',
+
+    'forum.index.title' => 'Üldfoorum',
+    'forum.create.title' => 'Alusta uut teemat',
+    'forum.edit.title' => 'Muuda teemat',
+
+    'forum.edit.field.type.title' => 'Rubriik',
 
     'forum.edit.field.title.title' => 'Pealkiri',
-    'forum.edit.field.title.help' => '',
+    'forum.edit.field.title.help' => 'Teema pealkiri',
 
     'forum.edit.field.body.title' => 'Sisu',
-    'forum.edit.field.body.help' => '',
+    'forum.edit.field.body.help' => 'Postituse sisu. Enne kirjutamist tutvu kindlasti ka meie foorumi reeglitega…',
 
     'forum.edit.field.destinations.title' => 'Vali sihtkohad',
     'forum.edit.field.destinations.help' => '',
@@ -185,10 +224,12 @@ return [
     'forum.edit.field.topics.title' => 'Vali valdkonnad',
     'forum.edit.field.topics.help' => '',
 
+    'forum.no.results' => 'Hetkel pole ühtegi foorumi postitust.',
+
     // Expat
 
     'expat.index.title' => 'Elu välismaal',
-    'expat.create.title' => 'Lisa uus',
+    'expat.create.title' => 'Lisa uus teema',
 
     'expat.edit.field.title.title' => 'Pealkiri',
     'expat.edit.field.title.help' => '',
@@ -202,11 +243,13 @@ return [
     'expat.edit.field.topics.title' => 'Vali valdkonnad',
     'expat.edit.field.topics.help' => '',
 
+    'expat.no.results' => 'Hetkel pole ühtegi postitust rubriigis "Elu välismaal".',
+
     // Buysell
 
     'buysell.index.title' => 'Ost-müük',
 
-    'buysell.create.title' => 'Lisa uus',
+    'buysell.create.title' => 'Lisa uus teema',
 
     'buysell.edit.field.title.title' => 'Pealkiri',
     'buysell.edit.field.title.help' => '',
@@ -220,9 +263,11 @@ return [
     'buysell.edit.field.topics.title' => 'Vali valdkonnad',
     'buysell.edit.field.topics.help' => '',
 
+    'buysell.no.results' => 'Hetkel pole ühtegi postitust rubriigis "Ost-müük".',
+
     // Photo
 
-    'photo.index.title' => 'Pildid',
+    'photo.index.title' => 'Reisipildid',
     'photo.create.title' => 'Lisa pilt',
 
     'photo.edit.field.file.help' => '',
@@ -233,11 +278,13 @@ return [
     'photo.edit.field.destinations.title' => 'Vali sihtkohad',
     'photo.edit.field.destinations.help' => '',
 
+    'photo.no.results' => 'Hetkel pole ühtegi pilti veel lisatud.',
+
     // Blog
 
     'blog.index.title' => 'Blogi',
 
-    'blog.create.title' => 'Lisa uus',
+    'blog.create.title' => 'Lisa postitus',
 
     'blog.edit.field.title.title' => 'Pealkiri',
     'blog.edit.field.title.help' => '',
@@ -251,6 +298,11 @@ return [
     'blog.edit.field.url.title' => 'URL',
     'blog.edit.field.url.help' => '',
 
+    'blog.no.results' => 'Hetkel pole ühtegi reisipäevikut veel lisatud.',
+
+    // Admin
+    'admin.sidebar.title' => 'Navigeerimiseks',
+
     // Internal
 
     'internal.index.title' => 'Sisefoorum',
@@ -263,7 +315,11 @@ return [
     'internal.edit.field.body.title' => 'Sisu',
     'internal.edit.field.body.help' => '',
 
+    'internal.no.results' => 'Hetkel pole ühtegi sisefoorumi postitust.',
+
     // Static
+
+    'static.index.title' => 'Infoks',
 
     'static.edit.field.title.title' => 'Pealkiri',
     'static.edit.field.title.help' => '',
@@ -294,5 +350,7 @@ return [
 
     'sponsored.edit.field.url.title' => 'URL',
     'sponsored.edit.field.url.help' => '',
+
+    'sponsored.no.results' => 'Hetkel pole ühtegi artiklit lisatud rubriiki "Toimetaja valik".',
 
 ];

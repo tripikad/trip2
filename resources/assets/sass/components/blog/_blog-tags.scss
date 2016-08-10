@@ -1,0 +1,34 @@
+.c-blog-tags {
+
+    @include clear-list;
+}
+
+    .c-blog-tags__item {
+
+        display: inline-block;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
+    }
+
+        .c-blog-tags__item-link {
+
+            color: $color-text-neutral-darker;
+            font-size: $font-size-small;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 $spacer / 3 $spacer / 3 0;
+            padding: $spacer - 4 $spacer $spacer - 7;
+            border: 2px solid $color-fill-neutral-darker;
+            border-radius: $spacer * 4;
+
+            &:hover {
+
+                border: 2px solid $color-fill-neutral-dark;
+            }
+        }

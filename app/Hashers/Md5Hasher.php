@@ -2,22 +2,30 @@
 
 namespace App\Hashers;
 
-use Illuminate\Contracts\Hashing\Hasher as HasherContract;
+use RuntimeException;
+use Illuminate\Hashing\BcryptHasher as HasherContract;
 
-class Md5Hasher implements HasherContract
+class Md5Hasher extends HasherContract
 {
     public function make($value, array $options = [])
     {
-        return md5($value);
+        $cost = isset($options['rounds']) ? $options['rounds'] : $this->rounds;
+
+        $hash = password_hash(md5($value), PASSWORD_BCRYPT, ['cost' => $cost]);
+
+        if ($hash === false) {
+            throw new RuntimeException('Bcrypt hashing not supported.');
+        }
+
+        return $hash;
     }
 
     public function check($value, $hashedValue, array $options = [])
     {
-        return $this->make($value) === $hashedValue;
-    }
+        if (strlen($hashedValue) === 0) {
+            return false;
+        }
 
-    public function needsRehash($hashedValue, array $options = [])
-    {
-        return false;
+        return password_verify(md5($value), $hashedValue);
     }
 }

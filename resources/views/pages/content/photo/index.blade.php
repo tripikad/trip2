@@ -1,23 +1,19 @@
 @extends('layouts.one_column')
 
-@section('title')
+@section('title', trans("content.$type.index.title"))
+
+@section('head_description', trans('site.description.photo'))
+
+@section('masthead.search')
     
-    {{ trans("content.$type.index.title") }}
+    @if (\Auth::check())
 
-@stop
+        @include('component.button', [
+            'route' => route('content.create', ['type' => $type]),
+            'title' => trans("content.$type.create.title")
+        ])
 
-@section('header1.right')
-    
-    @include('component.button', [ 
-        'route' => route('content.create', ['type' => $type]),
-        'title' => trans("content.$type.create.title")
-    ])
-
-@stop
-
-@section('header2.content')
-
-    @include('component.filter')
+    @endif
 
 @stop
 

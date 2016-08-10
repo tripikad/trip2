@@ -1,13 +1,18 @@
 .c-footer {
 
     position: relative;
-    padding: $spacer * 11 0 $spacer * 4;
+    padding: $spacer * 2 0;
     background-color: $color-white;
+
+    @include respond-to(tablet) {
+
+        padding: $spacer * 11 0 $spacer * 4;
+    }
 
     &.m-alternative {
 
+        background-position: center center;
         background-repeat: no-repeat;
-        background-position: top center;
         background-size: cover;
 
         &:after {
@@ -26,31 +31,36 @@
     .c-footer__wrap {
 
         @include wrap;
+
         position: relative;
         z-index: 2;
     }
 
         .c-footer__nav {
 
-            display: flex;
-            flex-flow: row wrap;
-            margin: 0 auto $spacer * 7;
+            text-align: center;
+            margin: 0 0 $spacer * 2;
 
             @include respond-to(tablet) {
 
                 @include span(15 of 24);
 
+                text-align: left;
+                display: flex;
+                flex-flow: row wrap;
                 float: none;
+                margin: 0 auto $spacer * 7;
             }
         }
 
             .c-footer__nav-logo-wrap {
 
-                flex: 0 1 100%;
+                margin-bottom: $spacer;
 
                 @include respond-to(tablet) {
 
                     flex: 0 1 22%;
+                    margin-bottom: 0;
                 }
             }
 
@@ -59,6 +69,7 @@
                     display: block;
                     width: $spacer * 7;
                     height: auto;
+                    margin: 0 auto;
 
                     img {
 
@@ -71,8 +82,6 @@
             .c-footer__nav-list {
 
                 @include clear-list;
-
-                flex: 0 1 100%;
 
                 @include respond-to(tablet-portrait) {
 
@@ -92,6 +101,14 @@
                     font-size: $font-size-normal;
                     font-weight: $font-weight-medium;
                     line-height: 1.2;
+                    padding-left: 0;
+                    margin-bottom: 0;
+
+                    &::before {
+
+                        content: normal;
+                        position: static;
+                    }
                 }
 
                     .c-footer__nav-link {
@@ -99,7 +116,12 @@
                         color: $color-text-neutral-darker;
                         text-decoration: none;
                         display: block;
-                        padding: $spacer / 2 0;
+                        padding: $spacer * 0.75 0;
+
+                        @include respond-to(tablet) {
+
+                            padding: $spacer / 2 0;
+                        }
 
                         .c-footer.m-alternative & {
 
@@ -113,7 +135,7 @@
 
                         .c-footer__nav-list-item.active & {
 
-                            color: $color-fill-black;
+                            opacity: 0.6;
                         }
                     }
 
@@ -122,7 +144,12 @@
             @include clear-list;
 
             text-align: center;
-            margin-bottom: 48px;
+            margin-bottom: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: $spacer * 2;
+            }
         }
 
             .c-footer__social-item {
@@ -132,13 +159,20 @@
                 font-size: $font-size-normal;
                 font-weight: $font-weight-medium;
                 line-height: 1.2;
-                display: inline-flex;
-                align-items: center;
+                display: inline-block;
                 margin: 0 $spacer * 2;
+                padding-left: 0;
+
+                &::before {
+
+                    content: normal;
+                    position: static;
+                }
             }
 
                 .c-footer__social-item-icon {
 
+                    display: inline-block;
                     width: $spacer * 2;
                     height: $spacer * 1.5;
                     margin-right: $spacer;
@@ -160,7 +194,7 @@
 
                     color: $color-text-neutral-darker;
                     text-decoration: none;
-                    display: block;
+                    display: inline-block;
                     padding: $spacer / 2 0;
 
                     .c-footer.m-alternative & {

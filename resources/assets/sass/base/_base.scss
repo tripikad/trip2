@@ -11,6 +11,8 @@
 
 body {
 
+    @include font-smoothing;
+
 	color: $body-font-color;
 	font-family: $font-primary;
 	font-size: $base-font-size;
@@ -49,7 +51,17 @@ i {
 
 blockquote {
 
-	margin: 0;
+    margin: 0 auto $spacer * 1.5;
+    text-align: center;
+    color: $color-fill-neutral-darker;
+    font-size: $font-size-small;
+    position: relative;
+    top: -$spacer;
+
+    @include respond-to(tablet) {
+
+        margin: 0 auto $spacer * 3;
+    }
 }
 
 input:not([type=checkbox]):not([type=radio]),
@@ -105,3 +117,206 @@ a {
 	color: $color-text-link;
 }
 
+.m-small-offset-top {
+
+    margin-top: $spacer;
+}
+
+.m-small-offset-bottom {
+
+    margin-bottom: $spacer;
+}
+
+.m-medium-offset-top {
+
+    margin-top: $spacer * 1.6;
+}
+
+.m-medium-offset-bottom {
+
+    margin-bottom: $spacer * 1.6;
+}
+
+.m-large-offset-top {
+
+    margin-top: $spacer * 2;
+
+    @include respond-to(tablet) {
+
+        margin-top: $spacer * 4;
+    }
+}
+
+.m-large-offset-bottom {
+
+    margin-bottom: $spacer * 2;
+
+    @include respond-to(tablet) {
+
+        margin-bottom: $spacer * 4;
+    }
+}
+
+ul {
+
+    @include clear-list;
+
+    font-family: $font-primary;
+    margin-bottom: $spacer * 2;
+
+    @include respond-to(tablet) {
+
+        margin: 0 0 $spacer * 2.5;
+    }
+
+    > li {
+
+        margin-bottom: $spacer;
+        position: relative;
+        padding-left: $spacer * 2;
+        font-size: $font-size-normal;
+        line-height: 1.5;
+        font-weight: $font-weight-medium;
+
+        &::before {
+
+            background-color: $brand-green;
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        > a {
+
+            color: $color-text-black;
+            line-height: 1.5;
+            text-decoration: none;
+
+            &:hover {
+
+                text-decoration: underline;
+            }
+        }
+
+        .m-medium & {
+
+            margin-bottom: $spacer * 1.5;
+        }
+
+        .m-large & {
+
+            margin-bottom: $spacer * 2;
+        }
+
+        @each $name, $color, $color-dark in $colors {
+
+            .m-#{$name} & {
+
+                &::before {
+
+                    background-color: $color;
+                }
+            }
+        }
+    }
+}
+
+h5 {
+
+    margin-bottom: $spacer * 1.5;
+    @include color-modifiers;
+    @include font-smoothing;
+
+    font-family: $font-primary;
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    color: $brand-green;
+
+    @include respond-to(tablet) {
+
+        margin-bottom: $spacer * 3;
+    }
+
+    .r-block.m-small & {
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 1.5;
+        }
+    }
+}
+
+table {
+
+    width: 100%;
+    float: left;
+    margin-bottom: $spacer * 2;
+
+    @include responsive_table;
+
+    @include respond-to(tablet) {
+
+        @include responsive_table_tablet;
+    }
+
+    tr td,
+    tr th {
+
+        vertical-align: top;
+        text-align: left;
+        line-height: $spacer * 3;
+
+        a {
+
+            text-decoration: none;
+
+            &:hover {
+
+                text-decoration: underline;
+            }
+        }
+
+        h6 {
+
+            @include color-modifiers;
+            @include font-smoothing;
+
+            font-family: $font-primary;
+            font-size: $font-size-small;
+            font-weight: $font-weight-bold;
+            text-transform: uppercase;
+            margin-bottom: $spacer + 4;
+            margin-top: $spacer + 4;
+            line-height: $font-size-small;
+
+            td:first-child h6 {
+
+                margin-top: 0;
+            }
+
+            @include respond-to(tablet) {
+
+                & {
+
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}
+
+.m-pull-right {
+
+    float: right;
+}
+
+.m-center {
+
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+}

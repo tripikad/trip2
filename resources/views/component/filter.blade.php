@@ -2,7 +2,7 @@
     'url' => route('content.filter', [$type]),
 ]) !!}
 
-    <div class="c-form__group">
+    <div class="c-form__group m-small-margin">
 
         {!! Form::select(
             'destination',
@@ -16,7 +16,7 @@
 
     </div>
 
-    <div class="c-form__group">
+    <div class="c-form__group m-small-margin">
 
         {!! Form::select(
             'topic',
@@ -30,7 +30,7 @@
 
     </div>
 
-    <div class="c-form__group">
+    <div class="c-form__group m-small-margin">
 
         {!! Form::submit(
             trans('content.index.filter.submit.title'),
@@ -39,7 +39,7 @@
 
     </div>
 
-    <div class="c-form__group m-right m-no-margin">
+    <div class="c-form__group m-right @if ($destination) m-small-margin @else m-no-margin @endif">
 
         <a
             href="{{ route('content.index', [$type]) }}"
@@ -55,18 +55,14 @@
 {!! Form::close() !!}
 
 @if ($destination)
-
-    <div class="text-center utils-border-top">
-
+    <div class="c-form__group m-no-margin">
         <h3>
             {!! trans('content.index.filter.destination.title', [
                 'destination' =>
-                    '<a href="' . route('destination.index', [$destination]) . '">'
+                    '<a href="' . route('destination.show', [$destination]) . '">'
                     . $destinations[$destination]
                     . '</a>'
             ]) !!}
         </h3>
-
     </div>
-
 @endif

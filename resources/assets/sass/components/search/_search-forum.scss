@@ -1,0 +1,96 @@
+.c-search-forum {
+
+    @include clear-list;
+}
+
+    .c-search-forum__item {
+
+        @include clearfix;
+
+        padding: $spacer * 2 0;
+        border-bottom: 1px solid $color-fill-neutral;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
+
+        &:last-child {
+
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+    }
+
+        .c-search-forum__item-image {
+
+            display: block;
+            float: left;
+            width: $spacer * 2 + 4;
+            height: $spacer * 2 + 4;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 50%;
+        }
+
+        .c-search-forum__item-content {
+
+            display: block;
+
+            p {
+
+                color: $color-text-gray;
+                font-size: $font-size-small;
+                line-height: 1.5;
+                margin: 0 0 0 $spacer * 4;
+
+                span {
+
+                    color: $brand-red;
+                    font-weight: $font-weight-bold;
+                }
+            }
+        }
+
+            .c-search-forum__item-title {
+
+                font-size: $font-size-medium;
+                font-weight: $font-weight-bold;
+                line-height: 1.35;
+                margin-bottom: $spacer;
+
+                @include respond-to(tablet) {
+
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+
+                .c-search-forum__item-title-link {
+
+                    color: $color-text-black;
+                    text-decoration: none;
+                    display: block;
+
+                    span {
+
+                        margin-right: $spacer;
+                    }
+
+                    &:hover {
+
+                        span {
+
+                            text-decoration: underline;
+                        }
+                    }
+                }
+
+                .c-search-forum__item-title-date {
+
+                    color: $color-text-gray;
+                    font-size: $font-size-small;
+                    font-weight: $font-weight-normal;
+                }

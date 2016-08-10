@@ -4,3 +4,5 @@
 *.lock
 **/.DS_Store
 /.idea
+/public/images
+npm-debug.log

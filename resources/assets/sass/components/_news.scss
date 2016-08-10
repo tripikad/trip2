@@ -2,19 +2,23 @@
 
     margin-bottom: $spacer * 2;
 
-    @include respond-to(tablet) {
+    @include respond-to(desktop) {
 
         margin-bottom: $spacer * 4;
     }
 
     &.m-smaller {
 
-        display: flex;
-        margin-bottom: $spacer * 2;
+        margin-bottom: $spacer;
 
         @include respond-to(tablet) {
 
             margin-bottom: $spacer * 2;
+        }
+
+        @include respond-to(desktop) {
+
+            @include clearfix;
         }
     }
 }
@@ -25,23 +29,36 @@
         overflow: hidden;
         display: block;
         height: $spacer * 16;
-        margin-bottom: $spacer * 2;
+        margin-bottom: $spacer;
         background-size: cover;
-        background-position: top center;
+        background-position: center center;
+
+        @include respond-to(tablet) {
+
+            margin-bottom: $spacer * 2;
+        }
 
         .c-news.m-smaller & {
 
-            flex: 0 0 $spacer * 12;
-            margin-right: $spacer * 2;
             height: $spacer * 7.5;
+
+            @include respond-to(desktop-large) {
+
+                width: $spacer * 12;
+                margin-bottom: 0;
+                float: left;
+            }
         }
     }
 
     .c-news__content {
 
-        &.m-smaller & {
+        .m-smaller & {
 
-            flex: 1;
+            @include respond-to(desktop-large) {
+
+                margin-left: $spacer * 14;
+            }
         }
     }
 
@@ -49,14 +66,15 @@
 
         @include font-smoothing;
 
-        font-size: $font-size-large;
+        font-size: $font-size-medium;
         font-weight: $font-weight-bold;
-        line-height: 1.15;
+        line-height: 1.35;
         margin-bottom: $spacer / 2;
 
         @include respond-to(tablet) {
 
             font-size: $font-size-larger;
+            line-height: 1.15;
         }
 
         .c-news.m-smaller & {

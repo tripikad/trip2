@@ -6,9 +6,6 @@ return [
         'home' => [
             'route' => '/',
         ],
-        'news' => [
-            'route' => '/content/news',
-        ],
        'flights' => [
             'route' => '/content/flight',
         ],
@@ -18,32 +15,25 @@ return [
         'forum' => [
             'route' => '/content/forum',
         ],
-        'photos' => [
-            'route' => '/content/photo',
-        ],
-        'blogs' => [
-            'route' => '/content/blog',
-        ],
-        'offers' => [
-            'route' => 'http://vana.trip.ee/reisipakkumised',
-            'external' => true,
-        ],
     ],
 
     'footer' => [
-        'news' => [
-            'route' => '/content/news',
-        ],
         'flights' => [
             'route' => '/content/flight',
-        ],
-        'offers' => [
-            'route' => 'http://vana.trip.ee/reisipakkumised',
-            'external' => true,
         ],
         'travelmates' => [
             'route' => '/content/travelmate',
         ],
+        'news' => [
+            'route' => '/content/news',
+        ],
+        'blogs' => [
+            'route' => '/content/blog',
+        ],
+        'photos' => [
+            'route' => '/content/photo',
+        ],
+
     ],
 
     'footer2' => [
@@ -56,6 +46,7 @@ return [
         'buysell' => [
             'route' => '/content/buysell',
         ],
+
     ],
 
     'footer3' => [
@@ -71,8 +62,11 @@ return [
         'advertising' => [
             'route' => '/content/static/22125',
         ],
-        'styleguide' => [
-            'route' => '/styleguide',
+        'flightfeed' => [
+            'route' => '/lendude_sooduspakkumised/rss',
+        ],
+        'newsfeed' => [
+            'route' => '/index.atom',
         ],
     ],
 
@@ -91,37 +85,63 @@ return [
 
     'news' => [
         'news' => [
+            'title' => 'menu.news.news',
             'route' => '/content/news',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
+            'type' => 'news',
         ],
         'shortnews' => [
+            'title' => 'menu.news.shortnews',
             'route' => '/content/shortnews',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
+            'type' => 'shortnews',
         ],
     ],
 
     'forum' => [
-        'forum' => [
+        [
+            'title' => 'menu.forum.forum',
             'route' => '/content/forum',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
+            'type' => 'forum',
         ],
-        'expat' => [
+        [
+            'title' => 'menu.forum.expat',
             'route' => '/content/expat',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
+            'type' => 'expat',
         ],
-        'buysell' => [
+        [
+            'title' => 'menu.forum.buysell',
             'route' => '/content/buysell',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
+            'type' => 'buysell',
         ],
     ],
 
     'admin' => [
-        'internal' => [
+        [
+            'title' => 'menu.admin.internal',
             'route' => '/content/internal',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
         ],
-        'sponsored' => [
-            'route' => '/content/sponsored',
-        ],
-        'image' => [
+        [
+            'title' => 'menu.admin.image',
             'route' => '/admin/image',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
         ],
-        'content' => [
+        [
+            'title' => 'menu.admin.content',
             'route' => '/admin/content',
+            'modifiers' => 'm-large m-block m-icon',
+            'icon' => 'icon-arrow-right',
         ],
     ],
 

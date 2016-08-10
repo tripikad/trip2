@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Mail;
+use Log;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CommentController extends Controller
 {
@@ -23,23 +25,68 @@ class CommentController extends Controller
 
         $comment = Auth::user()->comments()->create(array_merge($request->all(), $fields));
 
+        /*
         if ($followersEmails = $comment
                 ->content
                 ->followersEmails()
                 ->forget(Auth::user()->id)
                 ->toArray()
         ) {
-            Mail::send('email.follow.content', ['comment' => $comment], function ($mail) use ($followersEmails, $comment) {
+            foreach ($followersEmails as $followerId => $followerEmail) {
+                Mail::queue('email.follow.content', ['comment' => $comment], function ($mail) use ($followerEmail, $followerId, $comment) {
+                    $mail->to($followerEmail)
+                        ->subject(trans('follow.content.email.subject', [
+                            'title' => $comment->content->title,
+                        ]));
 
-                $mail->bcc($followersEmails)
-                    ->subject(trans('follow.content.email.subject', [
-                        'title' => $comment->content->title,
-                    ]));
+                    $swiftMessage = $mail->getSwiftMessage();
+                    $headers = $swiftMessage->getHeaders();
 
-            });
+                    $header = [
+                        'category' => [
+                            'follow_content',
+                        ],
+                        'unique_args' => [
+                            'user_id' => (string) $followerId,
+                            'content_id' => (string) $comment->content->id,
+                            'content_type' => (string) $comment->content->type,
+                        ],
+                    ];
+
+                    $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
+                });
+            }
         }
 
-        return redirect()->route('content.show', [$type, $content_id, '#comment-'.$comment->id]);
+        */
+
+        Log::info('New comment added', [
+            'user' =>  Auth::user()->name,
+            'body' =>  $request->get('body'),
+            'link' => route('content.show', [$type, $content_id, '#comment-'.$comment->id]),
+            'followers' => $comment
+                ->content
+                ->followersEmails()
+                ->forget(Auth::user()->id)
+                ->count(),
+        ]);
+
+        $content = $comment->content;
+
+        $comments = new LengthAwarePaginator(
+            $content->comments,
+            $content->comments->count(),
+            config('content_'.$type.'.index.paginate')
+        );
+        $comments->setPath(route('content.show', [$type, $content_id]));
+
+        return redirect()
+            ->route('content.show', [
+                $type,
+                $content_id,
+                ($comments->lastPage() > 1 ? 'page='.$comments->lastPage() : '')
+                    .'#comment-'.$comment->id,
+            ]);
     }
 
     public function edit($id)

@@ -1,17 +1,42 @@
 .c-user-extra {
 
     @include clear-list;
-    display: flex;
-    align-items: center;
+
+    margin: $spacer * 2 0 0;
+
+    @include respond-to(tablet) {
+
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
 }
 
     .c-user-extra__item {
 
         position: relative;
-        display: flex;
-        align-items: center;
-        margin-left: $spacer * 2;
-        cursor: pointer;
+        margin-bottom: $spacer;
+        padding-left: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
+
+        @include respond-to(tablet) {
+
+            display: flex;
+            align-items: center;
+            margin-left: $spacer * 2;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        &:last-child {
+
+            margin-bottom: 0;
+        }
     }
 
         .c-user-extra__item-link {
@@ -46,14 +71,43 @@
 
         .c-user-extra__item-text {
 
-            position: absolute;
-            z-index: 2;
-            bottom: $spacer * 4;
-            left: 0;
-            display: none;
+            @include respond-to(tablet) {
+
+                position: absolute;
+                z-index: 2;
+                bottom: $spacer * 4;
+                left: 0;
+                display: none;
+            }
 
             .c-user-extra__item:hover & {
 
-                display: block;
+                @include respond-to(tablet) {
+
+                    display: block;
+                }
             }
         }
+
+            .c-user-extra__item-text-mobile {
+
+                color: $color-white;
+                font-size: $font-size-small;
+                display: inline-block;
+                margin-left: $spacer;
+
+                @include respond-to(tablet) {
+
+                    display: none;
+                }
+            }
+
+            .c-user-extra__item-text-desktop {
+
+                display: none;
+
+                @include respond-to(tablet) {
+
+                    display: block;
+                }
+            }

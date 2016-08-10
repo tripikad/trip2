@@ -7,6 +7,87 @@ class PhotoTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function test_regular_user_cannot_edit_other_user_photo()
+    {
+        $creator_user = factory(App\User::class)->create();
+        $visitor_user = factory(App\User::class)->create();
+
+        // creator create content
+        $this->actingAs($creator_user)
+            ->visit('content/photo')
+            ->click(trans('content.photo.create.title'))
+            ->seePageIs('content/photo/create')
+            ->type('Creator title photo', 'title')
+            ->attach(storage_path().'/tests/test.jpg', 'file')
+            ->press(trans('content.create.submit.title'))
+            ->see(trans('content.store.status.'.config('content_photo.store.status', 1).'.info', [
+                'title' => 'Creator title photo',
+            ]))
+            ->see('Creator title photo')
+            ->seeInDatabase('contents', [
+                'user_id' => $creator_user->id,
+                'title' => 'Creator title photo',
+                'type' => 'photo',
+                'status' => 1,
+            ]);
+
+        // visitor view content
+        $content_id = $this->getContentIdByTitleType('Creator title photo');
+        $this->actingAs($visitor_user);
+        $response = $this->call('GET', "content/photo/$content_id/edit");
+        $this->visit("content/photo/$content_id")
+            ->dontSeeInElement('form', trans('content.action.edit.title'))
+            ->assertEquals(401, $response->status());
+    }
+
+    public function test_admin_user_can_edit_photo()
+    {
+        $creator_user = factory(App\User::class)->create();
+        $editor_user = factory(App\User::class)->create([
+            'role' => 'admin',
+            'verified' => 1,
+        ]);
+
+        // creator create content
+        $this->actingAs($creator_user)
+            ->visit('content/photo')
+            ->click(trans('content.photo.create.title'))
+            ->seePageIs('content/photo/create')
+            ->type('Creator title photo', 'title')
+            ->attach(storage_path().'/tests/test.jpg', 'file')
+            ->press(trans('content.create.submit.title'))
+            ->see(trans('content.store.status.'.config('content_photo.store.status', 1).'.info', [
+                'title' => 'Creator title photo',
+            ]))
+            ->see('Creator title photo')
+            ->seeInDatabase('contents', [
+                'user_id' => $creator_user->id,
+                'title' => 'Creator title photo',
+                'type' => 'photo',
+                'status' => 1,
+            ]);
+
+        // editor edit content
+        $content_id = $this->getContentIdByTitleType('Creator title photo');
+        $this->actingAs($editor_user)
+            ->visit("content/photo/$content_id")
+            ->seeInElement('form', trans('content.action.edit.title'))
+            ->press(trans('content.action.edit.title'))
+            ->seePageIs("content/photo/$content_id/edit")
+            ->type('Editor title photo', 'title')
+            ->attach(storage_path().'/tests/test2.jpeg', 'file')
+            ->press(trans('content.edit.submit.title'))
+            ->see(trans('content.update.info', [
+                'title' => 'Editor title photo',
+            ]))
+            ->seeInDatabase('contents', [
+                'user_id' => $creator_user->id,
+                'title' => 'Editor title photo',
+                'type' => 'photo',
+                'status' => 1,
+            ]);
+    }
+
     public function test_regular_user_can_post_and_edit_photos()
     {
         $regular_user = factory(App\User::class)->create();
@@ -36,13 +117,13 @@ class PhotoTest extends TestCase
 
         // Check original file exists
 
-        $filepath = public_path().config('imagepresets.original.path').$filename;
+        $filepath = config('imagepresets.original.path').$filename;
         $this->assertTrue(file_exists($filepath));
 
         // See thumbnails exist
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = public_path().config("imagepresets.presets.$preset.path").$filename;
+            $filepath = config("imagepresets.presets.$preset.path").$filename;
             $this->assertTrue(file_exists($filepath));
         }
 
@@ -66,28 +147,28 @@ class PhotoTest extends TestCase
         $file_new = $this->getImageByTitle('New Hello photo title');
         $filename_new = $file_new->filename;
 
-        $filepath = public_path().config('imagepresets.original.path').$filename_new;
+        $filepath = config('imagepresets.original.path').$filename_new;
         $this->assertTrue(file_exists($filepath));
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = public_path().config("imagepresets.presets.$preset.path").$filename_new;
+            $filepath = config("imagepresets.presets.$preset.path").$filename_new;
             $this->assertTrue(file_exists($filepath));
         }
 
             //check if old images are unlinked
-            $filepath = public_path().config('imagepresets.original.path').$filename;
+            $filepath = config('imagepresets.original.path').$filename;
         $this->assertFalse(file_exists($filepath));
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = public_path().config("imagepresets.presets.$preset.path").$filename;
+            $filepath = config("imagepresets.presets.$preset.path").$filename;
             $this->assertFalse(file_exists($filepath));
         }
 
             //unlink new images
-            unlink(public_path().config('imagepresets.original.path').$filename_new);
+            unlink(config('imagepresets.original.path').$filename_new);
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-            $filepath = public_path().config("imagepresets.presets.$preset.path").$filename_new;
+            $filepath = config("imagepresets.presets.$preset.path").$filename_new;
             unlink($filepath);
         }
     }
@@ -95,5 +176,10 @@ class PhotoTest extends TestCase
     public function getImageByTitle($title)
     {
         return Content::whereType('photo')->whereTitle($title)->first()->images[0];
+    }
+
+    private function getContentIdByTitleType($title)
+    {
+        return Content::whereTitle($title)->first()->id;
     }
 }

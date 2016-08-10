@@ -1,0 +1,78 @@
+.c-search-users {
+
+    @include clear-list;
+}
+
+    .c-search-users__item {
+
+        border-bottom: 1px solid $color-fill-neutral;
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: $spacer * 0.75 0;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
+
+        &:first-child {
+
+            padding-top: $spacer * 2;
+
+            @include respond-to(tablet) {
+
+                padding-top: $spacer * 0.75;
+            }
+        }
+
+        &:last-child {
+
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        &:hover {
+
+            z-index: 10;
+        }
+    }
+
+        .c-search-users__item-image {
+
+            position: relative;
+            height: $spacer * 3;
+            width: $spacer * 3;
+            margin-right: $spacer * 1.5;
+
+            @include respond-to(tablet) {
+
+                height: $spacer * 4 - 4;
+                width: $spacer * 4 - 4;
+                margin-right: $spacer * 2;
+            }
+        }
+
+        .c-search-users__item-title {
+
+            font-size: $font-size-normal;
+            font-weight: $font-weight-bold;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-medium;
+            }
+        }
+
+            .c-search-users__item-title-link {
+
+                color: $color-text-black;
+                text-decoration: none;
+
+                &:hover {
+
+                    text-decoration: underline;
+                }
+            }

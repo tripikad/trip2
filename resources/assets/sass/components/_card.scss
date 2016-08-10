@@ -59,11 +59,9 @@
 
             .c-card__title {
 
-                @include font-smoothing;
-
                 color: $color-white;
                 font-size: $font-size-larger;
-                font-weight: $font-weight-bold;
+                font-weight: $font-weight-medium;
                 line-height: 1.15;
                 text-align: center;
                 z-index: 2;
@@ -74,6 +72,12 @@
 
                     word-break: break-all;
                     padding: 0 $spacer * 3;
+                }
+
+                .m-text-small & {
+
+                    padding: 0 $spacer;
+                    font-size: $font-size-normal;
                 }
             }
 
@@ -94,5 +98,19 @@
 
                     word-break: break-all;
                     padding: 0 $spacer * 3;
+                }
+
+                .m-text-small & {
+
+                    padding: 0 $spacer;
+                    font-size: $font-size-small;
+                    position: absolute;
+                    left: 0;
+                    bottom: $spacer;
+                }
+
+                .m-text-gray & {
+
+                    color: $color-fill-neutral;
                 }
             }

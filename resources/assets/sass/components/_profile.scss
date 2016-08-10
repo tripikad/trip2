@@ -25,11 +25,11 @@
     &.m-status {
 
         padding: 4px;
-        background: $color-fill-neutral;
+        background-color: $color-fill-neutral;
 
         &.m-user {
 
-            @include color-modifiers(background);
+            @include color-modifiers(background-color);
             padding: $spacer;
         }
     }
@@ -37,7 +37,7 @@
 
     .c-profile__bubble {
 
-        @include color-modifiers(background);
+        @include color-modifiers(background-color);
 
         position: absolute;
         top: 0;
@@ -50,7 +50,7 @@
 
         .c-profile.m-user & {
 
-            @include color-modifiers-dark(background);
+            @include color-modifiers-dark(background-color);
 
             top: $spacer * 1.5;
             left: $spacer;
@@ -90,22 +90,22 @@
             &.m-25,
             &.m-50 {
 
-                background: $color-fill-neutral;
+                background-color: $color-fill-neutral;
 
                 .c-profile.m-user & {
 
-                    @include color-modifiers-and(background);
+                    @include color-modifiers-and(background-color);
                 }
             }
 
             &.m-75,
             &.m-100 {
 
-                @include color-modifiers-and(background);
+                @include color-modifiers-and(background-color);
 
                 .c-profile.m-user & {
 
-                    background: $color-white;
+                    background-color: $color-white;
                 }
             }
         }
@@ -115,6 +115,7 @@
                 position: absolute;
                 width: 100%;
                 height: 100%;
+                background-clip: padding-box;
 
                 &:after,
                 &:before {
@@ -126,13 +127,13 @@
                         height: $spacer;
                         width: $spacer;
                         border-radius: 50%;
-                        background: $color-white;
+                        background-color: $color-white;
                     }
                 }
 
                 .c-profile__status-pie.m-25 & {
 
-                    @include color-modifiers-and(background);
+                    @include color-modifiers-and(background-color);
 
                     top: -50%;
                     left: 50%;
@@ -140,7 +141,7 @@
 
                     .c-profile.m-user & {
 
-                        background: $color-white;
+                        background-color: $color-white;
                     }
 
                     &:before {
@@ -166,16 +167,16 @@
 
                 .c-profile__status-pie.m-50 & {
 
-                    @include color-modifiers-and(background);
+                    @include color-modifiers-and(background-color);
 
                     top: 0;
                     left: 50%;
                     margin-left: -1px;
-                    background: $color-fill-neutral;
+                    background-color: $color-fill-neutral;
 
                     .c-profile.m-user & {
 
-                        background: $color-white;
+                        background-color: $color-white;
                     }
 
                     &:before {
@@ -204,11 +205,11 @@
                     top: -50%;
                     left: -50%;
                     margin-left: -1px;
-                    background: $color-fill-neutral;
+                    background-color: $color-fill-neutral;
 
                     .c-profile.m-user & {
 
-                        @include color-modifiers-and(background);
+                        @include color-modifiers-and(background-color);
                     }
 
                     &:before {
@@ -255,32 +256,27 @@
 
     .c-profile__image-wrap {
 
-        flex: 0 1 $spacer * 6;
-
-        .c-profile.m-small & {
-
-            flex: 0 1 $spacer * 4;
-        }
+        display: table;
+        text-align: center;
+        width: auto;
 
         .c-profile.m-mini & {
 
             position: relative;
-            display: block;
             width: $spacer * 3;
+            height: $spacer * 3;
         }
 
         .c-profile.m-micro & {
 
-            display: inline-block;
             width: $spacer * 2;
+            height: $spacer * 2;
         }
 
         .c-profile.m-full & {
 
-            @include color-modifiers-dark-and(background);
+            @include color-modifiers-dark-and(background-color);
 
-            display: block;
-            flex: none;
             width: 100%;
             height: 100%;
             border-radius: 50%;
@@ -295,7 +291,8 @@
 
         .c-profile__image {
 
-            display: block;
+            display: table-cell;
+            vertical-align: middle;
             height: $spacer * 4;
             width: $spacer * 4;
             border-radius: 50%;
@@ -317,6 +314,51 @@
 
                 width: 100%;
                 height: 100%;
+                position: absolute;
+            }
+        }
+
+        .c-profile__title {
+
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0 0 0 $spacer;
+        }
+
+        .c-profile__letter {
+
+            @include color-modifiers-dark(background-color);
+
+            color: $color-white;
+            font-weight: $font-weight-bold;
+            font-size: $font-size-large;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            text-transform: uppercase;
+
+            &.m-tiny {
+
+                font-size: $font-size-small;
+            }
+
+            &.m-small {
+
+                font-size: $font-size-medium;
+            }
+
+            &.m-large {
+
+                font-size: $font-size-huge / 2;
+            }
+
+            span {
+
+                margin-top: $spacer / 3;
             }
         }
 

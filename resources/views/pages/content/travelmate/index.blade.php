@@ -1,10 +1,8 @@
 @extends('layouts.main')
 
-@section('title')
+@section('title', trans("content.$type.index.title"))
 
-    {{ trans("content.$type.index.title") }}
-
-@stop
+@section('head_description', trans('site.description.travelmate'))
 
 @section('header')
 
@@ -22,7 +20,7 @@
 
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
-            'image' => \App\Image::getRandom(),
+            'image' => \App\Image::getHeader(),
             'subtitle' => trans('content.travelmate.activity', [
                 'days' => 14,
                 'posts_count' => $activity
@@ -32,7 +30,6 @@
     </div>
 
     <div class="r-travelmates__wrap">
-
         <div class="r-travelmates__content">
 
             @if (count($contents))
@@ -43,6 +40,10 @@
                         return [
                             'modifiers' => '',
                             'image' =>  $content->user->imagePreset('small_square'),
+                            'letter'=> [
+                                'modifiers' => 'm-red',
+                                'text' => 'J'
+                            ],
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
                             'sex_and_age' =>
@@ -64,15 +65,7 @@
 
             @endif
 
-            <div class="r-block m-small">
-
-                @include('component.promo', [
-                    'modifiers' => 'm-body',
-                    'route' => '',
-                    'image' => \App\Image::getRandom()
-                ])
-
-            </div>
+            @include('component.promo', ['promo' => 'body m-margin'])
 
             @if (count($contents) > 8)
 
@@ -82,6 +75,10 @@
                         return [
                             'modifiers' => '',
                             'image' => $content->user->imagePreset('small_square'),
+                            'letter'=> [
+                                'modifiers' => 'm-red',
+                                'text' => 'J'
+                            ],
                             'name' => $content->user->name,
                             'route' => route('content.show', [$content->type, $content]),
                             'sex_and_age' =>
@@ -106,7 +103,6 @@
             @include('component.pagination.default',[
                 'collection' => $contents
             ])
-
         </div>
 
         <div class="r-travelmates__sidebar">
@@ -141,25 +137,17 @@
                 <div class="r-block__inner">
 
                     @include('component.travelmate.filter')
-
                 </div>
             </div>
 
-            <div class="r-block m-small">
-
-                @include('component.promo', [
-                    'modifiers' => 'm-sidebar-small',
-                    'route' => '',
-                    'image' => \App\Image::getRandom()
-                ])
-            </div>
+            @include('component.promo', ['promo' => 'sidebar_small m-small-margin'])
 
             <div class="r-block m-small">
 
                 <div class="r-block__inner">
 
                     @include('component.about', [
-                        'title' => count($about) ? str_limit($about->first()->body_filtered, 300) : null,
+                        'title' => trans('content.travelmate.about.text'),
                         'links' => [
                             [
                                 'modifiers' => 'm-icon',
@@ -200,11 +188,8 @@
 
         <div class="r-travelmates__footer-promo-wrap">
 
-            @include('component.promo', [
-                'modifiers' => 'm-footer',
-                'route' => '',
-                'image' => \App\Image::getRandom()
-            ])
+            @include('component.promo', ['promo' => 'footer'])
+
         </div>
     </div>
 
@@ -216,7 +201,7 @@
 
     @include('component.footer', [
         'modifiers' => 'm-alternative',
-        'image' => \App\Image::getRandom()
+        'image' => \App\Image::getFooter()
     ])
 
 @stop

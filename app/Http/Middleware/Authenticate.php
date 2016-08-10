@@ -38,7 +38,7 @@ class Authenticate
             if ($request->ajax()) {
                 return response(trans('401.ajax.title'), 401);
             } else {
-                return redirect()->guest('auth/login');
+                return redirect()->guest('login');
             }
         }
 

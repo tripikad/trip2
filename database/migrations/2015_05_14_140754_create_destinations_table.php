@@ -20,7 +20,6 @@ class CreateDestinationsTable extends Migration
             $table->integer('lft')->nullable();
             $table->integer('rgt')->nullable();
             $table->integer('depth')->nullable();
-
         });
     }
 

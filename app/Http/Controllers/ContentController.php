@@ -5,14 +5,23 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
+use Log;
 use App\Content;
 use App\Destination;
 use App\Topic;
 use App\Image;
+use App\Main;
 use Illuminate\Pagination\LengthAwarePaginator;
+// Traits
+use App\Http\Controllers\ContentTraits\Blog;
+use App\Http\Controllers\ContentTraits\Flight;
+use App\Http\Controllers\ContentTraits\Forum;
+use App\Http\Controllers\ContentTraits\Travelmate;
 
 class ContentController extends Controller
 {
+    use Blog, Flight, Forum, Travelmate;
+
     public function index(Request $request, $type)
     {
         if ($type == 'internal'
@@ -26,17 +35,31 @@ class ContentController extends Controller
             ->orderBy(
                 config("content_$type.index.orderBy.field"),
                 config("content_$type.index.orderBy.order")
-            )
-            ->whereStatus(1);
-
-        if (config("content_$type.index.expire.field") && config("content_$type.index.expire.daysBack")) {
-            $contents = $contents->whereBetween(
-                config("content_$type.index.expire.field"),
-                [
-                    Carbon::now()->addDays(-config("content_$type.index.expire.daysBack")),
-                    Carbon::now(),
-                ]
             );
+
+        if (config("content_$type.store.status", 1) == 0 && Auth::check() && Auth::user()->hasRole('admin')) {
+            //$contents->whereStatus(0);
+        } else {
+            $contents->whereStatus(1);
+        }
+
+        $expireField = config("content_$type.index.expire.field");
+        if ($expireField) {
+            $expireData = Main::getExpireData($type, 0);
+            if (in_array($expireField, $expireData)) {
+                if (($key = array_search($expireField, $expireData)) !== false) {
+                    unset($expireData[$key]);
+                }
+
+                $contents = $contents->whereRaw('`'.$expireField.'` >= ?', [
+                    array_values($expireData)[0],
+                ]);
+            } else {
+                $contents = $contents->whereBetween($expireField, [
+                    $expireData['daysFrom'],
+                    $expireData['daysTo'],
+                ]);
+            }
         }
 
         if ($request->destination) {
@@ -76,6 +99,10 @@ class ContentController extends Controller
 
         if ($type == 'travelmate') {
             $viewVariables = $this->getTravelMateIndex();
+        } elseif ($type == 'forum' || $type == 'expat' || $type == 'buysell') {
+            $viewVariables = $this->getForumIndex();
+        } elseif ($type == 'flight') {
+            $viewVariables = $this->getFlightIndex($contents, $topics);
         }
 
         $viewVariables['contents'] = $contents;
@@ -90,27 +117,6 @@ class ContentController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
 
-    public function getTravelMateIndex()
-    {
-        $content = Content::whereIn('id', [1534, 25151])
-            ->whereStatus(1)
-            ->get();
-
-        $viewVariables['about'] = $content->where('id', 1534);
-
-        $viewVariables['rules'] = $content->where('id', 25151);
-
-        $viewVariables['activity'] = Content::whereType('travelmate')
-            ->whereStatus(1)
-            ->whereBetween('created_at', [
-                Carbon::now(),
-                Carbon::now()->addDays(14),
-            ])
-            ->count();
-
-        return $viewVariables;
-    }
-
     public function show($type, $id)
     {
         if ($type == 'internal'
@@ -120,16 +126,6 @@ class ContentController extends Controller
         }
 
         $content = Content::with('user', 'comments', 'comments.user', 'flags', 'comments.flags', 'flags.user', 'comments.flags.user', 'destinations', 'topics', 'carriers');
-
-        if (config("content_$type.index.expire.field") && config("content_$type.index.expire.daysBack")) {
-            $content = $content->whereBetween(
-                config("content_$type.index.expire.field"),
-                [
-                    Carbon::now()->addDays(-config("content_$type.index.expire.daysBack")),
-                    Carbon::now(),
-                ]
-            );
-        }
 
         $content = $content->findorFail($id);
 
@@ -156,6 +152,8 @@ class ContentController extends Controller
             $viewVariables = $this->getTravelMateShow($content);
         } elseif ($type == 'forum' || $type == 'expat' || $type == 'buysell' || $type == 'internal') {
             $viewVariables = $this->getForumShow($content);
+        } elseif ($type == 'flight') {
+            $viewVariables = $this->getFlightShow($content);
         }
 
         $viewVariables['content'] = $content;
@@ -165,157 +163,6 @@ class ContentController extends Controller
         return response()
             ->view($view, $viewVariables)
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
-    }
-
-    public function getTravelMateShow($content)
-    {
-        $viewVariables['travel_mates'] = Content::where('id', '!=', $content->id)
-            ->whereStatus(1)
-            ->whereType('travelmate')
-            ->orderBy('created_at', 'desc')
-            ->take(3)
-            ->get();
-
-        $destination_ids = $content->destinations->lists('id')->toArray();
-        $topic_ids = $content->topics->lists('id')->toArray();
-
-        $viewVariables['destination'] = null;
-        $viewVariables['parent_destination'] = null;
-        $destinationNotIn = [];
-
-        $sidebar_flights = Content::
-            with('destinations')
-            ->whereHas('destinations', function ($query) use ($destination_ids) {
-                $query->whereIn('content_destination.destination_id', $destination_ids);
-            })
-            ->where('type', 'flight')
-            ->whereStatus(1)
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        if (count($sidebar_flights)) {
-            $sidebar_flights = $sidebar_flights->groupBy('destination_id')->max()->take(2);
-
-            $viewVariables['destination'] = $sidebar_flights->first()->destinations->first();
-            if ($viewVariables['destination']) {
-                $viewVariables['parent_destination'] = $viewVariables['destination']->parent()->first();
-            }
-
-            $destinationNotIn = $sidebar_flights->first()->destinations->lists('id')->toArray();
-        }
-
-        $types = [
-            'forums' => ['forum', 'expat', 'buysell'],
-            'flights' => ['flight'],
-        ];
-
-        $viewVariables['sidebar_flights'] = $sidebar_flights;
-
-        foreach ($types as $key => $type) {
-            $viewVariables[$key] = Content::
-            join('content_destination', 'content_destination.content_id', '=', 'contents.id')
-                ->leftJoin('content_topic', 'content_topic.content_id', '=', 'contents.id')
-                ->whereIn('contents.type', $type)
-                ->where('contents.status', 1)
-                ->whereNotIn('content_destination.destination_id', $destinationNotIn)
-                ->whereNested(function ($query) use ($destination_ids, $topic_ids) {
-                    $query->whereIn(
-                        'content_destination.destination_id',
-                        $destination_ids
-                    )
-                    ->orWhereIn(
-                        'content_topic.topic_id',
-                        $topic_ids
-                    );
-                })
-                ->orderBy('contents.created_at', 'desc')
-                ->take(3)
-                ->get();
-        }
-
-        return $viewVariables;
-    }
-
-    public function getForumShow($content)
-    {
-        $viewVariables['travel_mates'] = Content::whereType('travelmate')
-            ->whereStatus(1)
-            ->orderBy('created_at', 'desc')
-            ->take(3)
-            ->get();
-
-        $viewVariables['flights'] = Content::whereType('flight')
-            ->whereStatus(1)
-            ->orderBy('created_at', 'desc')
-            ->take(3)
-            ->get();
-
-        $viewVariables['forums'] = Content::whereIn('type', ['forum', 'expat', 'buysell'])
-            ->whereStatus(1)
-            ->orderBy('created_at', 'desc')
-            ->take(4)
-            ->get();
-
-        $destination_ids = $content->destinations->lists('id')->toArray();
-        $topic_ids = $content->topics->lists('id')->toArray();
-
-        $relation_posts = Content::
-            with('destinations')
-            ->whereHas('destinations', function ($query) use ($destination_ids) {
-                $query->whereIn('destination_id', $destination_ids);
-            })
-            ->whereIn('type', ['forum', 'expat', 'buysell'])
-            ->where('id', '!=', $content->id)
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        $first_relative_posts = null;
-        $second_relative_posts = null;
-        $viewVariables['first_destination'] = null;
-        $viewVariables['first_destination_parent'] = null;
-        $viewVariables['second_destination'] = null;
-        $viewVariables['second_destination_parent'] = null;
-        if (count($relation_posts)) {
-            $relation_posts = $relation_posts->groupBy(function ($item) {
-                return $item->destinations->first()->id;
-            })->take(2);
-
-            if (count($relation_posts)) {
-                $first_relative_posts = $relation_posts->first();
-                $viewVariables['first_destination'] = $first_relative_posts->first()->destinations->first();
-                $viewVariables['first_destination_parent'] = $first_relative_posts->first()->destinations->first()->parent()->first();
-            }
-
-            if (count($relation_posts) > 1) {
-                $second_relative_posts = $relation_posts->last();
-                $viewVariables['second_destination'] = $second_relative_posts->first()->destinations->first();
-                $viewVariables['second_destination_parent'] = $second_relative_posts->first()->destinations->first()->parent()->first();
-            }
-        }
-
-        $viewVariables['first_relative_posts'] = $first_relative_posts;
-        $viewVariables['second_relative_posts'] = $second_relative_posts;
-
-        $viewVariables['relative_flights'] = Content::
-            join('content_destination', 'content_destination.content_id', '=', 'contents.id')
-            ->leftJoin('content_topic', 'content_topic.content_id', '=', 'contents.id')
-            ->where('contents.type', 'flight')
-            ->where('contents.status', 1)
-            ->whereNested(function ($query) use ($destination_ids, $topic_ids) {
-                $query->whereIn(
-                    'content_destination.destination_id',
-                    $destination_ids
-                )
-                ->orWhereIn(
-                    'content_topic.topic_id',
-                    $topic_ids
-                );
-            })
-            ->orderBy('contents.created_at', 'desc')
-            ->take(2)
-            ->get();
-
-        return $viewVariables;
     }
 
     public function create($type)
@@ -328,62 +175,35 @@ class ContentController extends Controller
 
         $now = \Carbon\Carbon::now();
 
-        return \View::make('pages.content.edit')
-            ->with('mode', 'create')
-            ->with('fields', config("content_$type.edit.fields"))
-            ->with('url', route('content.store', [$type]))
-            ->with('type', $type)
-            ->with('destinations', $destinations)
-            ->with('destination', $destination)
-            ->with('topics', $topics)
-            ->with('topic', $topic)
-            ->with('now', $now)
-            ->render();
-    }
-
-    public function store(Request $request, $type)
-    {
-        $validator = config("content_$type.add.validate") ? config("content_$type.add.validate") : config("content_$type.edit.validate");
-
-        $request->merge(
-            self::fetchDates($request, $type)
-        );
-
-        $this->validate($request, $validator);
-
-        $fields = [
-            'type' => $type,
-            'status' => config("content_$type.store.status", 1),
-        ];
-
-        $content = Auth::user()->contents()->create(array_merge($request->all(), $fields));
-
-        if ($request->hasFile('file')) {
-            $filename = Image::storeImageFile($request->file('file'));
-            $content->images()->create(['filename' => $filename]);
-        }
-
-        if ($request->has('image_id')) {
-            $id = str_replace(['[[', ']]'], '', $request->image_id);
-
-            if (is_int($id) && Image::find($id)) {
-                $content->images()->sync($id);
+        $viewType = $type;
+        foreach (config('menu.forum') as $item) {
+            if ($type == $item['type']) {
+                $viewType = 'forum';
+                break;
             }
         }
 
-        if ($request->has('destinations')) {
-            $content->destinations()->sync($request->destinations);
+        if (view()->exists('pages.content.'.$viewType.'.edit')) {
+            $view = 'pages.content.'.$viewType.'.edit';
+        } else {
+            $view = 'pages.content.edit';
         }
 
-        if ($request->has('topics')) {
-            $content->topics()->sync($request->topics);
-        }
+        $viewVariables = [
+            'mode' => 'create',
+            'fields' => config("content_$type.edit.fields"),
+            'url' => route('content.store', [$type]),
+            'type' => $type,
+            'destinations' => $destinations,
+            'destination' => $destination,
+            'topics' => $topics,
+            'topic' => $topic,
+            'now' => $now,
+        ];
 
-        return redirect()
-            ->route('content.index', [$type])
-            ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
-                'title' => $content->title,
-            ]));
+        return response()
+            ->view($view, $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.content.create.header'));
     }
 
     public function edit($type, $id)
@@ -398,72 +218,203 @@ class ContentController extends Controller
         $topics = Topic::getNames();
         $topic = $content->topics()->select('topics.id')->lists('id')->toArray();
 
-        return \View::make('pages.content.edit')
-            ->with('mode', 'edit')
-            ->with('fields', config("content_$type.edit.fields"))
-            ->with('content', $content)
-            ->with('method', 'put')
-            ->with('url', route('content.update', [$content->type, $content]))
-            ->with('type', $type)
-            ->with('destinations', $destinations)
-            ->with('destination', $destination)
-            ->with('topics', $topics)
-            ->with('topic', $topic)
-            ->with('now', $now)
-            ->render();
+        $viewType = $type;
+        foreach (config('menu.forum') as $item) {
+            if ($type == $item['type']) {
+                $viewType = 'forum';
+                break;
+            }
+        }
+
+        if (view()->exists('pages.content.'.$viewType.'.edit')) {
+            $view = 'pages.content.'.$viewType.'.edit';
+        } else {
+            $view = 'pages.content.edit';
+        }
+
+        $viewVariables = [
+            'mode' => 'edit',
+            'fields' => config("content_$type.edit.fields"),
+            'content' => $content,
+            'method' => 'put',
+            'url' => route('content.update', [$content->type, $content]),
+            'type' => $type,
+            'destinations' => $destinations,
+            'destination' => $destination,
+            'topics' => $topics,
+            'topic' => $topic,
+            'now' => $now,
+        ];
+
+        return response()
+            ->view($view, $viewVariables)
+            ->header('Cache-Control', 'public, s-maxage='.config('cache.content.edit.header'));
     }
 
-    public function update(Request $request, $type, $id)
+    protected function fetchTypesArray($array = [])
     {
-        $content = \App\Content::findorFail($id);
+        $types = [];
+        foreach ($array as $key => $value) {
+            $types[] = $value['type'];
+        }
 
-        $request->merge(
-            self::fetchDates($request, $type)
-        );
+        return $types;
+    }
 
-        $this->validate($request, config("content_$type.edit.validate"));
+    public function store(Request $request, $type, $id = null)
+    {
+        if (Auth::user()) {
+            $user_id = Auth::user()->id;
+            $content = null;
+            if ($id) {
+                $content = Content::findorFail($id);
+            } else {
+                $content = new Content();
+            }
 
-        $fields = [];
+            $columns = array_flip(\DB::connection()->getSchemaBuilder()->getColumnListing('contents'));
+            $protectedColumns = ['id', 'user_id', 'created_at', 'updated_at'];
 
-        if ($request->hasFile('file')) {
-            $old_image = $content->images()->first();
+            foreach ($protectedColumns as $protectedColumn) {
+                if (isset($columns[$protectedColumn])) {
+                    unset($columns[$protectedColumn]);
+                }
+            }
+            $columns = array_flip($columns);
 
-            if ($old_image) {
-                $filename = $old_image->filename;
-                $filepath = public_path().config('imagepresets.original.path').$filename;
-                unlink($filepath);
-
-                foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                    $filepath = public_path().config("imagepresets.presets.$preset.path").$filename;
-                    unlink($filepath);
+            $allowedFields = config('content_'.$type.'.edit.fields');
+            if ($request->has('type') && isset($allowedFields['type']) && isset($allowedFields['type']['items'])) {
+                $allowedTypes = $this->fetchTypesArray(config($allowedFields['type']['items']));
+                if (in_array($request->type, $allowedTypes)) {
+                    $allowedFields = config('content_'.$request->type.'.edit.fields');
                 }
             }
 
-            $filename = Image::storeImageFile($request->file('file'));
-            $content->images()->update(['filename' => $filename]);
-        }
+            if (! $id) {
+                $validator = config("content_$type.add.validate") ? config("content_$type.add.validate") : config("content_$type.edit.validate");
 
-        $content->update(array_merge($fields, $request->all()));
-
-        if ($request->has('image_id')) {
-            $id = (int) str_replace(['[[', ']]'], '', $request->image_id);
-
-            if ($id && Image::find($id)) {
-                $content->images()->sync([$id]);
+                $content->user_id = $user_id;
+                $content->type = $type;
+                $content->status = config("content_$type.store.status", 1);
+            } else {
+                $validator = config("content_$type.edit.validate");
             }
-        }
 
-        if ($request->has('destinations')) {
-            $content->destinations()->sync($request->destinations);
-        }
+            $request->merge(
+                self::fetchDates($request, $type)
+            );
 
-        if ($request->has('topics')) {
-            $content->topics()->sync($request->topics);
-        }
+            $this->validate($request, $validator);
+            foreach ($request->all() as $key => $value) {
+                if (array_key_exists($key, $allowedFields) && in_array($key, $columns)) {
+                    if ($key == 'type' && isset($allowedFields['type']['items'])) {
+                        $allowedTypes = $this->fetchTypesArray(config($allowedFields['type']['items']));
 
-        return redirect()
-            ->route('content.show', [$type, $content])
-            ->with('info', trans('content.update.info', ['title' => $content->title]));
+                        if (! in_array($value, $allowedTypes)) {
+                            $value = $type;
+                        } else {
+                            $type = $value;
+                        }
+                    } elseif ($key == 'type' && ! isset($allowedFields['type']['items'])) {
+                        $value = $type;
+                    }
+
+                    $content->$key = $value;
+                }
+            }
+
+            if ($id) {
+                if ($request->hasFile('file') && array_key_exists('file', $allowedFields)) {
+                    $old_image = $content->images()->first();
+
+                    if ($old_image) {
+                        $filename = $old_image->filename;
+                        $filepath = config('imagepresets.original.path').$filename;
+                        unlink($filepath);
+
+                        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+                            $filepath = config("imagepresets.presets.$preset.path").$filename;
+                            unlink($filepath);
+                        }
+                    }
+
+                    $filename = Image::storeImageFile($request->file('file'));
+                    $content->images()->update(['filename' => $filename]);
+                }
+            }
+
+            $content->save();
+
+            Log::info('New content added', [
+                'user' =>  Auth::user()->name,
+                'title' =>  $request->get('title'),
+                'type' =>  $type,
+                'body' =>  $request->get('body'),
+                'link' => route('content.show', [$type, $content]),
+            ]);
+
+            if (! $id) {
+                if ($request->hasFile('file') && array_key_exists('file', $allowedFields)) {
+                    $filename = Image::storeImageFile($request->file('file'));
+                    $content->images()->create(['filename' => $filename]);
+                }
+            }
+
+            if ($request->has('image_id') && array_key_exists('image_id', $allowedFields)) {
+                $image_id = str_replace(['[[', ']]'], '', $request->image_id);
+
+                if ($image_id && Image::find($image_id)) {
+                    $content->images()->sync([$image_id]);
+                }
+            } elseif (! array_key_exists('image_id', $allowedFields) && count($content->images) && ! array_key_exists('file', $allowedFields) && count($content->images)) {
+                $old_images = $content->images;
+
+                if (count($old_images)) {
+                    foreach ($old_images as $old_image) {
+                        $filename = $old_image->filename;
+                        $filepath = config('imagepresets.original.path').$filename;
+                        unlink($filepath);
+
+                        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+                            $filepath = config("imagepresets.presets.$preset.path").$filename;
+                            unlink($filepath);
+                        }
+                    }
+                }
+                $content->images()->delete();
+            }
+
+            if ($request->has('destinations') && array_key_exists('destinations', $allowedFields)) {
+                $content->destinations()->sync($request->destinations);
+            } elseif (! array_key_exists('destinations', $allowedFields) && count($content->destinations)) {
+                $content->destinations()->delete();
+            }
+
+            if ($request->has('topics') && array_key_exists('topics', $allowedFields)) {
+                $content->topics()->sync($request->topics);
+            } elseif (! array_key_exists('topics', $allowedFields) && count($content->topics)) {
+                $content->topics()->delete();
+            }
+
+            if (! $request->ajax()) {
+                if (! $id) {
+                    return redirect()
+                        ->route('content.index', [$type])
+                        ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
+                            'title' => $content->title,
+                        ]));
+                } else {
+                    return redirect()
+                        ->route('content.show', [$type, $content])
+                        ->with('info', trans('content.update.info', [
+                            'title' => $content->title,
+                        ]));
+                }
+            }
+        } else {
+            return redirect()
+                ->route('content.index', [$type]);
+        }
     }
 
     private static function fetchDates($request, $type)
@@ -479,11 +430,12 @@ class ContentController extends Controller
                     $request->{$name.'_month'},
                     $request->{$name.'_day'}
                 )->format('Y-m-d');
-                $time = Carbon::createFromTime(
+                /*$time = Carbon::createFromTime(
                     $request->{$name.'_hour'},
                     $request->{$name.'_minute'},
                     $request->{$name.'_second'}
-                )->format('H:i:s');
+                )->format('H:i:s');*/
+                $time = '00:00:00';
                 $fields[$name] = $date.' '.$time;
             }
         }

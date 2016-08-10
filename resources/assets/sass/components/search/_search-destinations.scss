@@ -1,0 +1,112 @@
+.c-search-destinations {
+
+    @include clear-list;
+}
+
+    .c-search-destinations__item {
+
+        @include clearfix;
+
+        padding: $spacer * 2 0;
+        border-bottom: 1px solid $color-fill-neutral;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
+
+        &:last-child {
+
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+    }
+
+        .c-search-destinations__item-image {
+
+            display: block;
+            float: left;
+            width: $spacer * 6.5;
+            height: $spacer * 4 + 4;
+            background-size: cover;
+            background-repeat: no-repeat;
+
+            @include respond-to(tablet) {
+
+                width: $spacer * 8;
+                height: $spacer * 5 + 5;
+            }
+        }
+
+        .c-search-destinations__item-content {
+
+            display: block;
+            margin-left: $spacer * 8;
+
+            @include respond-to(tablet) {
+
+                margin-left: $spacer * 10;
+            }
+        }
+
+            .c-search-destinations__item-title {
+
+                font-size: $font-size-medium;
+                font-weight: $font-weight-bold;
+                line-height: 1.35;
+                margin-bottom: $spacer;
+            }
+
+                .c-search-destinations__item-title-link {
+
+                    color: $color-text-black;
+                    text-decoration: none;
+                    display: block;
+
+                    &:hover {
+
+                        text-decoration: underline;
+                    }
+                }
+
+            .c-search-destinations__item-info {
+
+                @include clear-list;
+
+                li {
+
+                    color: $color-text-gray;
+                    font-size: $font-size-small;
+                    display: inline-block;
+
+                    &::before {
+
+                        content: '›';
+                        color: $color-text-gray;
+                        font-size: $font-size-small;
+                        margin: 0 $spacer / 2;
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+
+                    &:first-child::before {
+
+                        content: none;
+                        margin: 0;
+                        display: none;
+                    }
+                }
+            }
+
+                .c-search-destinations__item-info-link {
+
+                    color: $color-text-gray;
+                    text-decoration: none;
+
+                    &:hover {
+
+                        text-decoration: underline;
+                    }
+                }

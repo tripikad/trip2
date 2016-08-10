@@ -16,13 +16,16 @@ return [
             'field' => 'updated_at',
             'order' => 'desc',
         ],
-        'paginate' => 25,
+        'paginate' => 35,
     ],
 
     'edit' => [
 
         'fields' => [
-
+            'type' => [
+                'type' => 'radio',
+                'items' => 'menu.forum',
+            ],
             'title' => [
                 'type' => 'text',
             ],

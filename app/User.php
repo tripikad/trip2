@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Carbon\Carbon;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -18,22 +19,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'password',
         'image',
         'role', // Why?
+        'rank',
         'verified', // Why?
         'registration_token', // Why?
         'contact_facebook',
         'contact_twitter',
         'contact_instagram',
         'contact_homepage',
-
+        'profile_color',
         'real_name',
-        'show_real_name',
+        'real_name_show',
         'gender',
         'birthyear',
         'description',
-
         'notify_message',
         'notify_follow',
-
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -45,9 +45,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         parent::boot();
 
         static::creating(function ($user) {
-
             $user->registration_token = str_random(30);
-
         });
     }
 
@@ -130,17 +128,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function imagePreset($preset = 'small_square')
     {
-        $image = null;
-
-        if (count($this->images)) {
-            $image = config('imagepresets.presets.'.$preset.'.path').$this->images[0]->filename;
+        if ($image = $this->images->first()) {
+            return $image->preset($preset);
         }
 
-        if (! file_exists(public_path().$image)) {
-            $image = config('imagepresets.image.none');
-        }
-
-        return $image;
+        return config('imagepresets.image.none');
     }
 
     public function hasRole($role)
@@ -167,5 +159,86 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function destinationWantsToGo()
     {
         return $this->flags->where('flag_type', 'wantstogo');
+    }
+
+    public function likes()
+    {
+        return $this->flags->where('flag_type', 'good');
+    }
+
+    public function updateRanking()
+    {
+        $contents = $this->contents()->whereNotIn('type', ['buysell', 'internal'])->count();
+        $comments = $this->comments()->count();
+        $posts = $comments + $contents;
+        $have_been = $this->destinationHaveBeen()->count();
+        $age = $this->created_at;
+
+        $level = config('user.ranking.starting_level');
+
+        foreach (config('user.ranking.levels') as $rank => $condition) {
+            foreach ($condition as $condition => $value) {
+                if ($condition === 'countries') {
+                    if ($value <= $have_been) {
+                        $this->increaseLevel($level);
+                    } else {
+                        $this->decreaseLevel($level);
+                    }
+                } elseif ($condition === 'posts') {
+                    if ($value <= $posts) {
+                        $this->increaseLevel($level);
+                    } else {
+                        $this->decreaseLevel($level);
+                    }
+                } elseif ($condition === 'active_time_months') {
+                    $created = Carbon::parse($age);
+                    $diff = $created->diffInMonths();
+
+                    if ($value <= $diff) {
+                        $this->increaseLevel($level);
+                    } else {
+                        $this->decreaseLevel($level);
+                    }
+                }
+
+                if ($level === config('user.ranking.starting_level')) {
+                    break 2;
+                }
+            }
+        }
+
+        foreach (config('user.ranking.max_level_user_ids') as $user_id) {
+            if ($this->id === $user_id) {
+                $level = config('user.ranking.max_level');
+            }
+        }
+
+        $this->update(['rank' => $level]);
+    }
+
+    private function increaseLevel(&$level)
+    {
+        $new_level = $level + 1;
+        if ($new_level == config('user.ranking.max_level')) {
+            return;
+        }
+
+        $ranking = config('user.ranking.levels');
+        if (isset($ranking[$new_level])) {
+            $level = $new_level;
+        }
+    }
+
+    private function decreaseLevel(&$level)
+    {
+        $new_level = $level - 1;
+        if ($level == config('user.ranking.starting_level')) {
+            return;
+        }
+
+        $ranking = config('user.ranking.levels');
+        if (isset($ranking[$new_level])) {
+            $level = $new_level;
+        }
     }
 }

@@ -1,35 +1,28 @@
 @extends('layouts.main')
 
-@section('title')
+@section('title', $destination->name)
 
-    {{ $destination->name }}
-
-@stop
+@section('head_description', trans("site.description.destination", ['name' => $destination->name]))
 
 @section('header')
-
     @include('component.header',[
         'modifiers' => 'm-alternative'
     ])
-
 @stop
 
 @section('masthead.nav')
-
     @include('component.masthead.nav', [
-        'nav_previous_title' => $previous_destination->name,
-        'nav_previous_route' => route('destination.show', [$previous_destination]),
-        'nav_next_title' => $next_destination->name,
-        'nav_next_route' => route('destination.show', [$next_destination]),
+        'nav_previous_title' => ($previous_destination ? $previous_destination->name : ''),
+        'nav_previous_route' => ($previous_destination ? route('destination.show', [$previous_destination]) : null),
+        'nav_next_title' => ($next_destination ? $next_destination->name : ''),
+        'nav_next_route' => ($next_destination ? route('destination.show', [$next_destination]) : null),
         'modifiers' => 'm-yellow'
     ])
-
 @stop
 
 @section('content')
 
 <div class="r-destination">
-
     <div class="r-destination__extra m-yellow">
 
         @if (\Auth::user())
@@ -90,49 +83,42 @@
                     [
                         'icon' => 'icon-pin',
                         'title' => $destination->usersHaveBeen()->count(),
-                        'text' => 'Have been there',
+                        'text' => trans('destination.show.user.button.havebeen'),
                         'route' => ''
                     ],
                     [
-                        'icon' => 'icon-pin',
+                        'icon' => 'icon-star',
                         'title' => $destination->usersWantsToGo()->count(),
-                        'text' => 'Want to go there',
+                        'text' => trans('destination.show.user.button.wanttogo'),
                         'route' => ''
                     ]
                 ]
             ])
 
         @endif
-
     </div>
 
     <div class="r-destination__masthead">
-
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
             'subtitle' => (isset($parent_destination) ? $parent_destination->name : null),
             'subtitle_route' => (isset($parent_destination) ? route('destination.show', [$parent_destination]) : null),
-            'image' =>
-                (isset($features['photos']) && count($features['photos']['contents'])
+            'image' => \App\Image::getRandom($destination->id)
+                /*(isset($featured['photos']) && count($featured['photos']['contents'])
                     ?
-                        $features['photos']['contents']->random(1)->imagePreset()
+                        $featured['photos']['contents']->random(1)->imagePreset('large')
                     :
                         \App\Image::getRandom()
-                )
+                )*/
         ])
-
     </div>
 
     <div class="r-destination__about m-yellow">
-
+        @if ((isset($featured['flights']) && count($featured['flights']['contents'])) || (isset($destination_info) && $destination_info) && config("destinations.$destination_info->id") && count(config("destinations.$destination_info->id")))
         <div class="r-destination__about-wrap">
-
-            @if (isset($features['flights']) && count($features['flights']['contents']))
-
+            @if (isset($featured['flights']) && count($featured['flights']['contents']))
                 <div class="r-destination__about-column m-first">
-
                     <div class="r-destination__title-block m-white m-distribute">
-
                         @include('component.title', [
                             'modifiers' => 'm-yellow',
                             'title' => trans('destination.show.good.offer')
@@ -141,128 +127,124 @@
                         @include('component.link', [
                             'modifiers' => 'm-tiny',
                             'title' => trans('destination.show.link.view.all'),
-                            'route' => route('content.index', ['flights'])
+                            'route' => route('search.results.type', ['flight']).'?q='.urlencode($destination->name)
                         ])
-
                     </div>
 
-                    @foreach ($features['flights']['contents'] as $flight)
-
+                    @foreach ($featured['flights']['contents'] as $flight)
                         @include('component.card', [
                             'modifiers' => 'm-yellow m-small',
                             'route' => route('content.show', [$flight->type, $flight]),
                             'title' => str_limit($flight->title, 50).' '.$flight->price.' '.config('site.currency.symbol'),
                             'image' => $flight->imagePreset(),
                         ])
-
                     @endforeach
-
                 </div>
-
             @endif
 
-            <div class="r-destination__about-column
-            @if (isset($features['flights']) && count($features['flights']['contents']))
-                m-last
-            @endif
-            ">
-
-                <div class="c-columns {{ (isset($features['flights']) && count($features['flights']['contents']) ? 'm-1-cols' : 'm-2-cols m-space') }}">
-
-                    <div class="c-columns__item">
-
-
-
-                    </div>
-
-                    <div class="c-columns__item">
-
-
-
-                    </div>
+            @if (isset($destination_info) && $destination_info)
+                <div class="r-destination__about-column
+                    @if (isset($featured['flights']) && count($featured['flights']['contents']))
+                        m-last
+                    @endif
+                ">
+                    @if ($destination_info->isRoot())
+                        @include('component.destination.description',[
+                            'text' => trans("destination.show.description.$destination_info->id")
+                        ])
+                    @endif
+                    @if (config("destinations.$destination_info->id") && count(config("destinations.$destination_info->id")))
+                        @include('component.destination.info',[
+                            'modifiers' => 'm-yellow',
+                            'text' => $destination_info->name,
+                            'definitions' => [
+                                [
+                                    'term' => trans('destination.show.about.capital'),
+                                    'definition' => config("destinations.$destination_info->id.capital")
+                                ],
+                                [
+                                    'term' => trans('destination.show.about.area'),
+                                    'definition' => config("destinations.$destination_info->id.area").' km²'
+                                ],
+                                [
+                                    'term' => trans('destination.show.about.population'),
+                                    'definition' => (round(config("destinations.$destination_info->id.population") / 1000000, 2) != 0 ? round(config("destinations.$destination_info->id.population") / 1000000, 2) : round(config("destinations.$destination_info->id.population") / 1000000, 4)).' '.trans('destination.show.about.population.milion')
+                                ],
+                                [
+                                    'term' => trans('destination.show.about.currency'),
+                                    'definition' => config("destinations.$destination_info->id.currencyCode")
+                                ],
+                                [
+                                    'term' => trans('destination.show.about.callingCode'),
+                                    'definition' => '+'.config("destinations.$destination_info->id.callingCode")
+                                ],
+                            ]
+                        ])
+                    @endif
                 </div>
-            </div>
+                <div class="r-destination__about-map">
 
-            <div class="r-destination__about-map">
+                    @include('component.map', ['modifiers' => 'm-destination'])
 
-                @include('component.map', [
-                    'modifiers' => 'm-destination',
-                    'map_top' => '53%',
-                    'map_left' => '50%'
-                ])
-            </div>
+                </div>
+            @endif
         </div>
+        @endif
     </div>
 
     <div class="r-destination__content">
 
+    @if (isset($featured['flights2']) && count($featured['flights2']['contents']))
+        <div class="r-destination__content-wrap m-padding">
+    @else
         <div class="r-destination__content-wrap">
+    @endif
 
-            @if ((isset($popular_destinations) && count($popular_destinations)) || (isset($features['forum_posts']) && count($features['forum_posts']['contents'])))
+            @if ((isset($popular_destinations) && count($popular_destinations)) || (isset($featured['forum_posts']) && count($featured['forum_posts']['contents'])))
 
                 <div class="r-destination__content-about">
-
                     <div class="r-destination__content-about-column m-first">
-
-                        @include('component.promo', [
-                            'modifiers' => 'm-sidebar-small',
-                            'route' => '#',
-                            'image' => \App\Image::getRandom()
-                        ])
-
+                        @include('component.promo', ['promo' => 'sidebar_small'])
                     </div>
 
                     <div class="r-destination__content-about-column m-middle">
-
-                        @if (isset($features['forum_posts']) && count($features['forum_posts']['contents']))
-
-                            <div class="r-destination__content-title">
-
+                        @if (isset($featured['forum_posts']) && count($featured['forum_posts']['contents']))
+                            <div class="r-destination__content-title m-flex">
                                 @include('component.title', [
                                     'modifiers' => 'm-yellow',
                                     'title' => trans('destination.show.forum.title')
                                 ])
 
+                                <div class="r-destination__content-title-link">
+                                    @include('component.link', [
+                                        'modifiers' => 'm-icon m-small',
+                                        'title' => $destination->name .' '.trans('destination.show.forum.button.title'),
+                                        'route' => route('content.index', 'forum').'?destination='.$destination->id,
+                                        'icon' => 'icon-arrow-right'
+                                    ])
+                                </div>
                             </div>
 
-                            @include('component.content.forum.list', [
-                                'modifiers' => 'm-compact',
-                                'items' => $features['forum_posts']['contents']->transform(function($forum) {
-                                    return [
-                                        'topic' => $forum->title,
-                                        'route' => route('content.show', [$forum->type, $forum]),
-                                        'profile' => [
-                                            'modifiers' => 'm-mini',
-                                            'image' => $forum->user->imagePreset()
-                                        ],
-                                        'badge' => [
-                                            'modifiers' => 'm-inverted',
-                                            'count' => $forum->comments->count()
-                                        ]
-                                    ];
-                                })
+                            @include('region.content.forum.list', [
+                                'items' => $featured['forum_posts']['contents'],
+                                'modifiers' => [
+                                    'main' => 'm-compact'
+                                ]
                             ])
                         @else
-
                             <p>&nbsp;</p>
-
                         @endif
-
                     </div>
 
                     <div class="r-destination__content-about-column m-last">
-
                         @if (isset($popular_destinations) && count($popular_destinations))
-
                             <div class="r-destination__content-title">
-
                                 @include('component.title', [
                                     'modifiers' => 'm-yellow',
                                     'title' => trans('destination.show.popular.title', [
                                         'destination' => $root_destination->name
                                     ])
                                 ])
-
                             </div>
 
                             @include('component.list', [
@@ -274,310 +256,154 @@
                                     ];
                                 })
                             ])
-
                         @else
-
                             <p>&nbsp;</p>
-
                         @endif
-
                     </div>
-
                 </div>
-
             @endif
 
-            @if (isset($features['photos']) && count($features['photos']['contents']))
-
+            @if (isset($featured['photos']) && count($featured['photos']['contents']))
                 <div class="r-destination__content-gallery">
-
                     <div class="r-destination__gallery-wrap">
-
                         <div class="r-destination__gallery-title">
-
-                            @include('component.title', [
-                                'modifiers' => 'm-yellow',
-                                'title' => 'Viimati lisatud pildid'
-                            ])
+                            <div class="r-destination__gallery-title-wrap">
+                                @include('component.title', [
+                                    'modifiers' => 'm-yellow',
+                                    'title' => trans('destination.show.gallery.title')
+                                ])
+                            </div>
                         </div>
 
                         @include('component.gallery', [
-                            'items' => $features['photos']['contents']->transform(function($photo) {
+                            'modal' => [
+                                'modifiers' => 'm-yellow',
+                            ],
+                            'items' => $featured['photos']['contents']->transform(function($photo) {
                                 return [
                                     'image' => $photo->imagePreset(),
+                                    'image_large' => $photo->imagePreset('large'),
                                     'route' => route('content.show', [$photo->type, $photo]),
-                                    'alt' => $photo->title
+                                    'alt' => $photo->title,
+                                    'tags' => $photo->destinations->transform(function($destination) {
+                                        return [
+                                            'title' => $destination->name,
+                                            'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
+                                            'route' => route('destination.show', $destination)
+                                        ];
+                                    }),
+                                    'userName' => $photo->user->name,
+                                    'userRoute' => route('user.show',$photo->user),
                                 ];
                             })
                         ])
 
                     </div>
-
                 </div>
-
             @endif
 
             <div class="r-destination__content-news">
-
                 <div class="r-destination__content-news-wrap">
-
                     <div class="r-destination__content-news-column m-first">
-
-                        @if (isset($features['news']) && count($features['news']['contents']))
-
-                            <div class="r-destination__content-title">
-
-                                @include('component.title', [
-                                    'modifiers' => 'm-yellow',
-                                    'title' => trans('destination.show.news.title')
-                                ])
-
-                            </div>
-
-                            <div class="c-columns m-2-cols m-space">
-
-                                <div class="c-columns__item">
-
-                                    @include('component.news', [
-                                        'title' => 'Emirates kompab piire – lennukisse mahutatakse 615 reisijat',
-                                        'modifiers' => 'm-smaller',
-                                        'route' => '#',
-                                        'date' => '',
-                                        'image' => \App\Image::getRandom()
-                                    ])
-                                </div>
-
-                                <div class="c-columns__item">
-
-                                    @include('component.news', [
-                                        'title' => 'Tuhande saare järv Hiinas',
-                                        'modifiers' => 'm-smaller',
-                                        'route' => '#',
-                                        'date' => '',
-                                        'image' => \App\Image::getRandom()
-                                    ])
-                                </div>
-
-                                <div class="c-columns__item">
-
-                                    @include('component.news', [
-                                        'title' => 'EasyJet esitles uusi tehnikat täis vorme',
-                                        'modifiers' => 'm-smaller',
-                                        'route' => '#',
-                                        'date' => '',
-                                        'image' => \App\Image::getRandom()
-                                    ])
-                                </div>
-
-                                <div class="c-columns__item">
-
-                                    @include('component.news', [
-                                        'title' => 'Egiptuse turismist - natuke laiemalt',
-                                        'modifiers' => 'm-smaller',
-                                        'route' => '#',
-                                        'date' => '',
-                                        'image' => \App\Image::getRandom()
-                                    ])
-                                </div>
-
-                            </div>
-
-                        @else
-
-                            <p>&nbsp;</p>
-
-                        @endif
-
-                        <div class="r-block">
-
-                            @include('component.promo', [
-                                'modifiers' => 'm-body',
-                                'route' => '#',
-                                'image' => \App\Image::getRandom()
+                    @if (isset($featured['news']) && count($featured['news']['contents']))
+                        <div class="r-destination__content-title">
+                            @include('component.title', [
+                                'modifiers' => 'm-yellow',
+                                'title' => trans('destination.show.news.title')
                             ])
-
                         </div>
+                        <div class="r-destination__content-news-block">
+                            <div class="c-columns m-2-cols m-space">
+                                @foreach ($featured['news']['contents'] as $new)
+                                    <div class="c-columns__item">
+                                        @include('component.news', [
+                                            'title' => $new->title,
+                                            'modifiers' => 'm-smaller',
+                                            'route' => route('content.show', [$new->type, $new]),
+                                            'date' => $new->created_at,
+                                            'image' => $new->imagePreset()
+                                        ])
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
 
+                        <div class="r-block m-mobile-hide">
+                            @include('component.promo', ['promo' => 'body'])
+                        </div>
                     </div>
 
                     <div class="r-destination__content-news-column m-last">
-
                         <div class="r-block">
-
-                            @include('component.promo', [
-                                'modifiers' => 'm-sidebar-large',
-                                'route' => '#',
-                                'image' => \App\Image::getRandom()
-                            ])
-
+                            @include('component.promo', ['promo' => 'sidebar_large'])
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            @if (isset($features['travel_mates']) && count($features['travel_mates']['contents']))
+    @if (isset($featured['flights2']) && count($featured['flights2']['contents']))
 
-                <div class="r-destination__content-travel-mates">
-
-                    <div class="r-destination__content-travel-mates-wrap">
-
-                        <div class="r-destination__content-title">
-
-                            @include('component.title', [
-                                'title' => trans('frontpage.index.travelmate.title'),
-                                'modifiers' => 'm-yellow'
-                            ])
-
-                        </div>
-
-                        @include('component.travelmate.list', [
-                            'modifiers' => 'm-3col',
-                            'items' => [
-                                [
-                                    'modifiers' => 'm-small',
-                                    'image' =>  \App\Image::getRandom(),
-                                    'name' => 'Charles Darwin',
-                                    'route' => '#',
-                                    'sex_and_age' => 'N,28',
-                                    'title' => 'Otsin reisikaaslast Indiasse märtsis ja/või aprillis',
-                                    'tags' => [
-                                        [
-                                            'modifiers' => 'm-yellow',
-                                            'title' => 'India'
-                                        ],
-                                        [
-                                            'modifiers' => 'm-purple',
-                                            'title' => 'Delhi'
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'modifiers' => 'm-small',
-                                    'image' =>  \App\Image::getRandom(),
-                                    'name' => 'Epptriin ',
-                                    'route' => '#',
-                                    'sex_and_age' => 'N,22',
-                                    'title' => 'Suusareis Austriasse veebruar-märts 2016',
-                                    'tags' => [
-                                        [
-                                            'modifiers' => 'm-red',
-                                            'title' => 'Austria'
-                                        ],
-                                        [
-                                            'modifiers' => 'm-gray',
-                                            'title' => 'Suusareis'
-                                        ]
-                                    ]
-                                ],
-                                [
-                                    'modifiers' => 'm-small',
-                                    'image' =>  \App\Image::getRandom(),
-                                    'name' => 'Silka ',
-                                    'route' => '#',
-                                    'sex_and_age' => 'M,32',
-                                    'title' => 'Puerto Rico',
-                                    'tags' => [
-                                        [
-                                            'modifiers' => 'm-green',
-                                            'title' => 'Puerto Rico'
-                                        ],
-                                        [
-                                            'modifiers' => 'm-gray',
-                                            'title' => 'Puhkusereis'
-                                        ]
-                                    ]
-                                ]
-                            ]
+    <div class="r-destination__flights">
+        <div class="r-destination__flights-wrap">
+            <div class="c-columns m-{{ count($featured['flights2']['contents']) }}-cols">
+                @foreach ($featured['flights2']['contents'] as $key => $flight)
+                    <div class="c-columns__item">
+                        @include('component.destination', [
+                            'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
+                            'title' => $flight->destination ? $flight->destination->name : null,
+                            'title_route' => $flight->destination ? route('destination.show', $flight->destination) : null,
+                            'subtitle' => $flight->parent_destination ? $flight->parent_destination->name : null,
+                            'subtitle_route' => $flight->parent_destination ? route('destination.show', $flight->parent_destination) : null
                         ])
 
-                        {{--
-
-                        1. NEW updated travelmate list
-
-                        <div class="c-columns m-{{ count($features['travel_mates']['contents']) }}-cols">
-
-                            @foreach($features['travel_mates']['contents'] as $travel_mate)
-
-                                <div class="c-columns__item">
-
-                                    @include('component.profile', [
-                                        'title' => $travel_mate->user->name,
-                                        'age' => $travel_mate->user->age,
-                                        'interests' => $travel_mate->title,
-                                        'route' => route('content.show', [$travel_mate->type, $travel_mate]),
-                                        'image' => $travel_mate->user->imagePreset()
-                                    ])
-
-                                </div>
-
-                            @endforeach
-
-                        </div>
-
-                        --}}
-
+                        @include('component.card', [
+                            'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
+                            'route' => route('content.show', [$flight->type, $flight]),
+                            'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
+                            'image' => $flight->imagePreset(count($featured['flights2']['contents']) == 1 ? 'large' : '')
+                        ])
                     </div>
-
-                </div>
-
-            @endif
-
-            @if (isset($features['flights2']) && count($features['flights2']['contents']))
-
-                <div class="r-destination__content-flights">
-
-                    <div class="r-destination__content-flights-wrap">
-
-                        <div class="c-columns m-3-cols">
-
-                            <div class="c-columns__item">
-
-                                @foreach ($features['flights2']['contents'] as $flight)
-
-                                    @include('component.card', [
-                                        'route' => route('content.show', [$flight->type, $flight]),
-                                        'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
-                                        'image' => $flight->imagePreset()
-                                    ])
-
-                                @endforeach
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            @endif
-
+                @endforeach
+            </div>
         </div>
-
     </div>
+
+    @endif
+
+    @if (isset($featured['travel_mates']) && count($featured['travel_mates']['contents']))
+        <div class="r-destination__travelmates">
+            <div class="r-destination__travelmates-wrap">
+                <div class="r-destination__content-title">
+                    @include('component.title', [
+                        'title' => trans('frontpage.index.travelmate.title'),
+                        'modifiers' => 'm-yellow'
+                    ])
+                </div>
+
+                @include('region.content.travelmate.list', [
+                    'items' => $featured['travel_mates']['contents']
+                ])
+            </div>
+        </div>
+    @endif
+
+    {{-- If component is hidden, containg wrapper must be hidden also --}}
 
     <div class="r-destination__footer-promo">
-
         <div class="r-destination__footer-promo-wrap">
-
-            @include('component.promo', [
-                'modifiers' => 'm-footer',
-                'route' => '#',
-                'image' => \App\Image::getRandom()
-            ])
+            @include('component.promo', ['promo' => 'footer'])
         </div>
-
     </div>
-
 </div>
 
 @stop
 
 @section('footer')
-
     @include('component.footer', [
         'modifiers' => 'm-alternative',
-        'image' => \App\Image::getRandom()
+        'image' => \App\Image::getFooter()
     ])
-
 @stop

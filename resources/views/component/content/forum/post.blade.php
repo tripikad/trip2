@@ -1,15 +1,20 @@
-{{--
+<?php
+/*
 
 title: Forum post
 
 code: |
 
-    @include('component.content.forum.post', [
+    #include('component.content.forum.post', [
         'profile' => [
             'modifiers' => '',
             'image' => '',
             'title' => '',
             'route' => '',
+            'letter' => [
+                'modifiers' => 'm-blue m-small',
+                'text' => 'J'
+            ],
             'status' => [
                 'modifiers' => '',
                 'position' => ''
@@ -25,15 +30,16 @@ code: |
         ]
     ])
 
---}}
+*/
+?>
 
 @if (isset($title))
 
-<div class="c-forum-post m-main">
+<div class="c-forum-post m-main {{ $modifiers or '' }}">
 
 @else
 
-<div class="c-forum-post">
+<div class="c-forum-post {{ $modifiers or '' }}">
 
 @endif
 
@@ -52,6 +58,7 @@ code: |
                 @include('component.profile', [
                     'modifiers' => $profile['modifiers'],
                     'image' => $profile['image'],
+                    'letter' => $profile['letter'],
                     'title' => '',
                     'status' => $profile['status'],
                 ])
@@ -83,6 +90,16 @@ code: |
                 @endif
             </div>
 
+            @if(isset($thumbs))
+
+                <div class="c-forum-post__thumbs">
+
+                    {!! $thumbs !!}
+
+                </div>
+
+            @endif
+
         </div>
 
         <div class="c-forum-post__body">
@@ -105,30 +122,23 @@ code: |
 
         @endif
 
-        @if(isset($thumbs) || isset($tags))
+        @if(isset($tags))
 
-        <div class="c-forum-post__footer m-flex">
+            <div class="c-forum-post__footer m-flex">
+                <div class="c-forum-post__tags">
 
-            @if(isset($tags))
+                    @include('component.tags', [
+                        'modifiers' => 'm-small',
+                        'items' => $tags
+                    ])
 
-            @include('component.tags', [
-                'modifiers' => 'm-small',
-                'items' => $tags
-            ])
+                    @include('component.tags', [
+                        'modifiers' => 'm-small',
+                        'items' => $tags2
+                    ])
 
-            @endif
-
-            @if(isset($thumbs))
-
-            <div class="c-forum-post__thumbs">
-
-                {!! $thumbs !!}
-
+                </div>
             </div>
-
-            @endif
-
-        </div>
 
         @endif
 

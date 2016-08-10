@@ -9,4 +9,4 @@ code: |
 
 --}}
 
-{{ isset($date) ? Date::parse($date)->diffForHumans() : '' }}
+{{ isset($date) ? $date->diffForHumans() : '' }}

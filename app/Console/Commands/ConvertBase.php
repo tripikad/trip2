@@ -48,13 +48,13 @@ class ConvertBase extends Command
 
         // max size: messages ~100000
 
-        $this->skip = env('CONVERT_SKIP', 10);
-        $this->take = env('CONVERT_TAKE', 10);
-        $this->copyFiles = env('CONVERT_FILES', false);
-        $this->scrambleMessages = env('CONVERT_SCRAMBLE', true);
-        $this->fileHash = env('CONVERT_FILEHASH', false);
-        $this->overwriteFiles = env('CONVERT_OVERWRITE', false);
-        $this->demoAccounts = env('CONVERT_DEMOACCOUNTS', false);
+        $this->skip = config('convert.skip');
+        $this->take = config('convert.take');
+        $this->copyFiles = config('convert.copyFiles');
+        $this->scrambleMessages = config('convert.scrambleMessages');
+        $this->fileHash = config('convert.fileHash');
+        $this->overwriteFiles = config('convert.overwriteFiles');
+        $this->demoAccounts = config('convert.demoAccounts');
     }
 
     // Nodes
@@ -108,8 +108,6 @@ class ConvertBase extends Command
                 $model->price = (isset($node->price) && is_int((int) $node->price)) ? $node->price : null;
 
                 $model->status = 1;
-                $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);
-                $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment);
 
                 $model->save();
 
@@ -124,6 +122,15 @@ class ConvertBase extends Command
                 } else {
                     $this->convertNodeAlias($node->nid, 'App\Content', 'node');
                 }
+
+                // We re-save the model, now with original timestamps since the the converters above
+                // might have been touching the timestamps
+
+                $model->created_at = \Carbon\Carbon::createFromTimeStamp($node->created);
+                $model->updated_at = \Carbon\Carbon::createFromTimeStamp($node->last_comment);
+                $model->timestamps = false;
+
+                $model->save();
 
                 return $model;
             } else {
@@ -227,7 +234,7 @@ class ConvertBase extends Command
         'Turvalisus' => ['tid' => 5005, 'pattern' => '/(turval|varasta)/i'],
         'Uuring' => ['tid' => 5006, 'pattern' => '/(uuring|uurimus|küsitlus)/i'],
         'Töö' => ['tid' => 5007, 'pattern' => '/(töö leid|töö ots|tööle|töökoh)/i'],
-        'Mobiil' => ['tid' => 5008, 'pattern' => '/(mobiil|nutitelef|mobla|iphone|android|ipad|tablet|sim-|sim kaart|samsung|äpp|rakendus)/i'],
+        'Mobiil' => ['tid' => 5008, 'pattern' => '/(mobiil|nutitelef|htc|nokia|mobla|iphone|android|ipad|tablet|sim-|sim kaart|samsung|äpp|rakendus)/i'],
 
     ];
 
@@ -249,11 +256,9 @@ class ConvertBase extends Command
         $topics = [];
 
         array_walk($this->topicMap, function ($value, $key) use (&$topics) {
-
             if (array_key_exists('tid', $value)) {
                 $topics[$key] = array_merge($value, ['name' => $key]);
             }
-
         });
 
         return $topics;
@@ -317,7 +322,9 @@ class ConvertBase extends Command
 
     public function newNodeTopics($node)
     {
-        $topics = $this->getNewTopics();
+        $topics = collect($this->getNewTopics())->reject(function ($topic) {
+            return $topic['tid'] == 5000;
+        });
 
         foreach ($topics as $topic) {
             if (preg_match($topic['pattern'], $node->title.$node->body)) {
@@ -361,14 +368,15 @@ class ConvertBase extends Command
                 $model->status = 1 - $comment->status;
                 $model->created_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);
                 $model->updated_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);
+                $model->timestamps = false;
 
                 $model->save();
 
                 $node = $this->getNode($nid);
 
-                \App\Content::findOrFail($nid)->update([
-                    'updated_at' => \Carbon\Carbon::createFromTimeStamp($node->last_comment),
-                ]);
+                // \App\Content::findOrFail($nid)->update([
+                //     'updated_at' => \Carbon\Carbon::createFromTimeStamp($node->last_comment),
+                // ]);
 
                 $this->convertUser($user_id);
 
@@ -414,10 +422,20 @@ class ConvertBase extends Command
     {
         $user = $this->getUser($uid);
 
-        $blockedSender = DB::connection($this->connection)
-            ->table('pm_block_user')
-            ->where('author', '=', $uid)
-            ->get();
+        if (! $user) {
+            return false;
+        }
+
+        $blockedSender = false;
+
+        // We only consider user being blocked when it is not admininstrator, editor, senior editor or superuser
+
+        if (! in_array($user->rid, [4, 7, 8, 12])) {
+            $blockedSender = DB::connection($this->connection)
+                ->table('pm_block_user')
+                ->where('author', '=', $uid)
+                ->get();
+        }
 
         // Eliminating mail duplicates using
         // SELECT uid, mail, COUNT(*) c FROM users GROUP BY mail HAVING c > 1;
@@ -428,7 +446,7 @@ class ConvertBase extends Command
          * Case id 11 - Business user 2.
          */
         if ($user && $user->status == 1 && ! in_array($user->uid, [7288556, 4694, 3661]) &&
-            ! $blockedSender && $user->rid !== 9 && $user->rid !== 11) {
+            ! $blockedSender /* && $user->rid !== 9 && $user->rid !== 11 */) {
             return true;
         } else {
             return false;
@@ -495,14 +513,16 @@ class ConvertBase extends Command
                 $model->birthyear = isset($profile[25]) ? $this->convertBirthyear($profile[25]) : null;
             }
 
-            // $model->password = bcrypt($this->cleanAll($user->name));
-
-            $model->password = $user->pass;
+            $model->password = password_hash($user->pass, PASSWORD_BCRYPT, ['cost' => 10]);
+            if ($model->password === false) {
+                throw new \Exception('Bcrypt hashing not supported.');
+            }
 
             $model->role = $this->getRole($user->rid);
 
             $model->created_at = \Carbon\Carbon::createFromTimeStamp($user->created);
             $model->updated_at = \Carbon\Carbon::createFromTimeStamp($user->created);
+            $model->timestamps = false;
 
             $model->save();
 
@@ -510,15 +530,22 @@ class ConvertBase extends Command
             $model->registration_token = null;
 
             // if ($notifyMessage = $this->getUserNotifyMessage($user->uid)) {
-            //
+
             //    $model->notify_message = 1;
-            //
+
             // }
 
             $model->save();
 
             if ($user->picture) {
-                $this->convertLocalImage($user->uid, $user->picture, '\App\User', 'user');
+                $this->convertLocalImage(
+                    $user->uid,
+                    $user->picture,
+                    '\App\User',
+                    'user',
+                    $model->created_at,
+                    $model->updated_at
+                );
             }
         }
     }
@@ -544,18 +571,30 @@ class ConvertBase extends Command
         $model->save(['timestamps' => false]);
     }
 
-    public function convertLocalImage($id, $imagePath, $modelName, $type = null)
+    public function convertLocalImage($id, $imagePath, $modelName, $type = null, $created_at = null, $updated_at = null)
     {
         $imagePath = $this->cleanAll($imagePath);
         $filename = basename($imagePath);
 
+        $filename = preg_replace('/\s+/', '_', $filename);
+        $filename = str_replace('%20', '_', $filename);
+
         $model = $modelName::findOrFail($id);
 
-        $image = \App\Image::create(['filename' => $filename]);
+        $data = ['filename' => $filename];
+        if (isset($created_at)) {
+            $data['created_at'] = $created_at;
+        }
+        if (isset($updated_at)) {
+            $data['updated_at'] = $updated_at;
+        }
+
+        $image = \App\Image::create($data);
         $model->images()->attach($image);
 
         $from = 'http://trip.ee/'.$imagePath;
-        $to = public_path().config('imagepresets.original.path').$filename;
+
+        $to = config('imagepresets.original.path').$filename;
 
         if ($this->copyFiles) {
             if (file_exists($to) && ! $this->overwriteFiles) {
@@ -568,7 +607,7 @@ class ConvertBase extends Command
         }
     }
 
-    public function convertRemoteImage($id, $imageUrl, $modelName, $type = null)
+    public function convertRemoteImage($id, $imageUrl, $modelName, $type = null, $created_at = null, $updated_at = null)
     {
         $newImage = false;
 
@@ -584,12 +623,21 @@ class ConvertBase extends Command
                 $filename = $file.'.'.$ext;
             }
 
-            $filename = str_replace('%20', '-', $filename);
+            $filename = preg_replace('/\s+/', '_', $filename);
+            $filename = str_replace('%20', '_', $filename);
 
             $model = $modelName::findOrFail($id);
 
             if (method_exists($model, 'images')) {
-                $image = \App\Image::create(['filename' => $filename]);
+                $data = ['filename' => $filename];
+                if (isset($created_at)) {
+                    $data['created_at'] = $created_at;
+                }
+                if (isset($updated_at)) {
+                    $data['updated_at'] = $updated_at;
+                }
+
+                $image = \App\Image::create($data);
                 $model->images()->attach($image);
 
                 $newImage = $image;
@@ -599,7 +647,8 @@ class ConvertBase extends Command
             }
 
             $from = $imageUrl;
-            $to = public_path().config('imagepresets.original.path').$filename;
+
+            $to = config('imagepresets.original.path').$filename;
 
             if ($this->copyFiles) {
                 if (file_exists($to) && ! $this->overwriteFiles) {
@@ -656,6 +705,7 @@ class ConvertBase extends Command
 
         $model->created_at = \Carbon\Carbon::createFromTimeStamp($flag->timestamp);
         $model->updated_at = \Carbon\Carbon::createFromTimeStamp($flag->timestamp);
+        $model->timestamps = false;
 
         $model->save();
     }
@@ -807,9 +857,9 @@ class ConvertBase extends Command
                         config("imagepresets.presets.$preset.height"),
                         function ($constraint) {
                             $constraint->aspectRatio();
-                    })
+                        })
                     ->save(
-                        public_path().config("imagepresets.presets.$preset.path").basename($to),
+                        config("imagepresets.presets.$preset.path").basename($to),
                         config("imagepresets.presets.$preset.quality")
                     );
             }
@@ -847,9 +897,7 @@ class ConvertBase extends Command
     public function formatFields($node, $fields)
     {
         return  implode("\n", array_map(function ($field) use ($node) {
-
             return '<strong>'.$field.'</strong>: '.$node->$field;
-
         }, $fields));
     }
 
@@ -975,8 +1023,6 @@ class ConvertBase extends Command
         if (isset($genderMap[$string])) {
             return $genderMap[$string];
         }
-
-        return;
     }
 
     public function convertBirthyear($string)
@@ -984,7 +1030,5 @@ class ConvertBase extends Command
         if (preg_match('/[12][0-9]{3}/', $string) && intval($string) > 1915 && intval($string) < 2010) {
             return intval($string);
         }
-
-        return;
     }
 }

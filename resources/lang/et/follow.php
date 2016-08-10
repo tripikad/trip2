@@ -2,8 +2,11 @@
 
 return [
 
-    'index.title' => ':user jälgib',
+//  'index.title' => ':user jälgib',
+    'index.title' => 'Jälgimised',
     'index.row.text' => 'Kasutaja :user kuupäeval :created_at',
+    'index.empty' => 'Sa ei jälgi hetkel ühti teemat. Vajuta foorumipostituste juures "Jälgi" nupule',
+    'index.email' => 'NB! Jälgimisi ei saadeta e-maille',
 
     'content.email.subject' => 'Postitusele ":title" on lisatud uus kommentaar',
 

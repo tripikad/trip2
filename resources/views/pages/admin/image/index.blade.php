@@ -1,12 +1,8 @@
 @extends('layouts.one_column')
 
-@section('title')
+@section('title', trans('admin.image.index.title'))
 
-    {{ trans('admin.image.index.title') }}
-
-@stop
-
-@section('header2.content')
+@section('masthead.search')
 
     @include('component.nav', [
         'modifiers' => '',
@@ -39,7 +35,7 @@
             <div class="c-columns__item">
 
                 @include('component.card', [
-                    'image' => $image->preset('small'),
+                    'image' => $image->preset('small_square'),
                     'text' => $image->filename,
                     'modifiers' => 'm-wrap-text'
                 ])

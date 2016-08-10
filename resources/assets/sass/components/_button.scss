@@ -18,6 +18,7 @@
 
     &:hover {
 
+        text-decoration: none;
         background-color: $color-fill-success-dark;
     }
 
@@ -50,6 +51,12 @@
 
             background: $color-fill-neutral;
         }
+    }
+
+    &.m-quaternary {
+
+        color: $color-white;
+        background: $color-text-link;
     }
 
     &.m-border {
@@ -101,9 +108,18 @@
         width: 100%;
     }
 
+    &.m-min {
+
+        @include respond-to(tablet) {
+
+            min-width: $spacer * 15;
+        }
+    }
+
     &.m-small {
 
         font-size: $font-size-small;
+        line-height: 1.2;
         height: $spacer * 3;
         padding: $spacer - 2 $spacer * 2 $spacer * 0.75;
 
@@ -134,7 +150,9 @@
     &.m-large {
 
         font-size: $font-size-large;
+        line-height: 1.4;
         padding: $spacer $spacer * 3;
+        line-height: 1.4;
     }
 
     &.m-disabled {

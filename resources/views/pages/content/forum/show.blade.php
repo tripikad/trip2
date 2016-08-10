@@ -1,10 +1,12 @@
 @extends('layouts.main')
 
-@section('title')
+@section('title', trans("content.$type.index.title"))
 
-    {{ trans("content.$type.index.title") }}
+@section('head_title',  $content->getHeadTitle())
 
-@stop
+@section('head_description', $content->getHeadDescription())
+
+@section('head_image', \App\Image::getSocial())
 
 @section('content')
 
@@ -12,10 +14,7 @@
 
     <div class="r-forum__masthead">
 
-        @include('component.masthead', [
-            'modifiers' => 'm-forum',
-            'title' => 'forum'
-        ])
+        @include('component.forum.masthead')
 
         <div class="r-forum__map">
 
@@ -29,7 +28,6 @@
     </div>
 
     <div class="r-forum__wrap">
-
         <div class="r-forum__content">
 
             @include('component.content.forum.post', [
@@ -38,11 +36,15 @@
                     'image' => $content->user->imagePreset(),
                     'title' => $content->user->name,
                     'route' => route('user.show', [$content->user]),
+                    'letter' => [
+                        'modifiers' => 'm-purple m-small',
+                        'text' => $content->user->name[0]
+                    ],
                     'status' => [
                         'modifiers' => 'm-purple',
-                        'position' => '3',
-                        'editor' => true
-                    ]
+                        'position' => $content->user->rank,
+                        'editor' => $content->user->role == 'admin'?true:false
+                    ],
                 ],
                 'title' => $content->title,
                 'date' => view('component.date.relative', ['date' => $content->created_at]),
@@ -55,23 +57,33 @@
                 'thumbs' => view('component.flags', ['flags' => $content->getFlags()]),
                 'tags' => $content->destinations->transform(function ($destination) {
                     return [
-                        'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
+                        'modifiers' => 'm-yellow',
                         'title' => $destination->name,
                         'route' => route('destination.show', [$destination->id])
+                    ];
+                }),
+                'tags2' => $content->topics->transform(function ($topic) {
+                    return [
+                        'modifiers' => 'm-gray',
+                        'title' => $topic->name,
+                        'route' => ''
                     ];
                 })
             ])
 
-            <div class="r-block m-small m-mobile-hide">
+            @if ($comments->count())
+                <a href="{{ route('content.show', [$content->type, $content]) . ($comments->lastPage() > 1 ? '?page=' . $comments->lastPage() : '') . '#comment-' . $comments->last()->id }}" class="m-center m-medium-offset-bottom">{{ trans('comment.action.latest.comment') }}</a>
+            @endif
 
-                @include('component.promo', [
-                    'modifiers' => 'm-body',
-                    'image' => \App\Image::getRandom(),
-                    'route' => '#'
-                ])
+            @if ($comments->perPage() < $comments->total())
 
-            </div>
+                <div class="r-block m-small">
+                    @include('component.pagination.numbered', [
+                        'collection' => $comments
+                    ])
+                </div>
 
+            @endif
 
             @if (method_exists($comments, 'currentPage'))
 
@@ -81,23 +93,43 @@
                         $comments->perPage()
                     )
                 ])
-
             @endif
 
-            <div class="r-block">
+            <?php //dd($comments->last());
+            ?>
 
-                @include('component.pagination.numbered', [
-                    'collection' => $comments
-                ])
+            @if ($comments->perPage() < $comments->total())
 
-            </div>
+                <div class="r-block m-small">
+                    @include('component.pagination.numbered', [
+                        'collection' => $comments
+                    ])
+                </div>
+
+            @endif
 
             @if (\Auth::check())
 
             <div class="r-block">
 
-                @include('component.comment.create')
+                <div class="r-block__inner">
 
+                    <div class="r-block__header">
+
+                        <div class="r-block__header-title">
+
+                            @include('component.title', [
+                                'title' => 'Lisa kommentaar',
+                                'modifiers' => 'm-large m-green'
+                            ])
+                        </div>
+                    </div>
+
+                    <div class="r-block__body">
+
+                        @include('component.comment.create')
+                    </div>
+                </div>
             </div>
 
             @endif
@@ -173,7 +205,7 @@
 
                         <div class="r-block__header">
 
-                            <div class="r-block__header-title">
+                            <div class="r-block__header-title m-flex">
 
                                 @include('component.title', [
                                     'modifiers' => 'm-purple',
@@ -192,7 +224,11 @@
                                         'route' => route('content.show', [$post->type, $post]),
                                         'profile' => [
                                             'modifiers' => 'm-mini',
-                                            'image' => $post->user->imagePreset()
+                                            'image' => $post->user->imagePreset(),
+                                            'letter' => [
+                                                'modifiers' => 'm-green m-small',
+                                                'text' => 'D'
+                                            ],
                                         ],
                                         'badge' => [
                                             'modifiers' => 'm-inverted m-purple',
@@ -207,13 +243,10 @@
 
             @endif
 
-            <div class="r-block m-small">
+            <div class="r-block m-small m-mobile-hide">
 
-                @include('component.promo', [
-                    'modifiers' => 'm-sidebar-small',
-                    'route' => '#',
-                    'image' => \App\Image::getRandom()
-                ])
+                @include('component.promo', ['promo' => 'sidebar_small'])
+
             </div>
 
             @if (count($second_relative_posts))
@@ -240,10 +273,10 @@
 
                         <div class="r-block__header">
 
-                            <div class="r-block__header-title">
+                            <div class="r-block__header-title m-flex">
 
                                 @include('component.title', [
-                                    'modifiers' => 'm-blue',
+                                    'modifiers' => 'm-purple',
                                     'title' => trans('destination.show.forum.title')
                                 ])
                             </div>
@@ -259,7 +292,11 @@
                                         'route' => route('content.show', [$post->type, $post]),
                                         'profile' => [
                                             'modifiers' => 'm-mini',
-                                            'image' => $post->user->imagePreset()
+                                            'image' => $post->user->imagePreset(),
+                                            'letter' => [
+                                                'modifiers' => 'm-green m-small',
+                                                'text' => 'D'
+                                            ],
                                         ],
                                         'badge' => [
                                             'modifiers' => 'm-inverted m-blue',
@@ -273,6 +310,12 @@
                 </div>
 
             @endif
+
+            <div class="r-block m-small m-mobile-hide">
+
+                @include('component.promo', ['promo' => 'sidebar_large'])
+
+            </div>
 
             @if (count($relative_flights))
 
@@ -347,7 +390,11 @@
                                         ]),
                                         'profile' => [
                                             'modifiers' => 'm-mini',
-                                            'image' => $forum->user->imagePreset()
+                                            'image' => $forum->user->imagePreset(),
+                                            'letter' => [
+                                                'modifiers' => 'm-green m-small',
+                                                'text' => 'D'
+                                            ],
                                         ],
                                         'badge' => [
                                             'modifiers' => 'm-inverted',
@@ -394,7 +441,7 @@
 
                 @if (count($travel_mates))
 
-                    <div class="r-block">
+                    <div class="r-block m-no-margin">
                         <div class="r-block__header">
                             @include('component.title', [
                                 'title' => trans('frontpage.index.travelmate.title'),
@@ -408,6 +455,10 @@
                                 return [
                                     'modifiers' => 'm-small',
                                     'image' =>  $travel_mate->imagePreset(),
+                                    'letter'=> [
+                                        'modifiers' => 'm-red',
+                                        'text' => 'J'
+                                    ],
                                     'name' =>
                                         $travel_mate->user->real_name ?
                                             $travel_mate->user->real_name
@@ -444,11 +495,7 @@
 
         <div class="r-forum__footer-promo-wrap">
 
-            @include('component.promo', [
-                'modifiers' => 'm-footer',
-                'route' => '#',
-                'image' => \App\Image::getRandom()
-            ])
+            @include('component.promo', ['promo' => 'footer'])
 
         </div>
     </div>
@@ -460,7 +507,7 @@
 
     @include('component.footer', [
         'modifiers' => 'm-alternative',
-        'image' => \App\Image::getRandom()
+        'image' => \App\Image::getFooter()
     ])
 
 @stop

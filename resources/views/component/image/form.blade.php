@@ -38,10 +38,12 @@ code: |
 
                     <div class="form-group">
 
-                        {!! Form::file($name) !!}
+                        {!! Form::file($name, [
+                            'class' => 'c-form__input m-medium dropzone-input'
+                        ]) !!}
 
                         {!! Form::submit('Submit', [
-                            'class' => 'btn btn-primary'
+                            'class' => 'c-button m-small'
                         ]) !!}
 
                     </div>
@@ -68,171 +70,165 @@ code: |
 @if (isset($fields) && ! empty($fields))
 
     @foreach ($fields as $key => $field)
-
         <div class="c-form__input-wrap">
-
             <div class="c-form__group">
 
-                @if (in_array($field['type'], ['text', 'textarea', 'url', 'email', 'date']))
+            @if (trans("content.$type.edit.field.$key.title") != '' && trans("content.$type.edit.field.$key.title") != "content.$type.edit.field.$key.title")
+                {!! Form::label($key, trans("content.$type.edit.field.$key.title"), [
+                    'class' => 'c-form__label'
+                ]) !!}
+            @endif
 
-                    {!! Form::$field['type']($key, null, [
-                        'class' =>
-                            (isset($field['large']) && $field['large'] == true
-                                ? 'c-form__input m-high'
-                                : 'c-form__input')
-                            .
-                            (isset($field['wysiwyg']) && $field['wysiwyg'] == true
-                                ? ' js-ckeditor'
-                                : ''),
-                        'placeholder' => trans("content.$type.edit.field.$key.title"),
-                        'rows' => isset($field['rows']) ? $field['rows'] : 8,
-                    ]) !!}
+            @if (in_array($field['type'], ['text', 'textarea', 'url', 'email', 'date']))
 
-                @elseif ($field['type'] == 'file')
+                {!! call_user_func('Form::'.$field['type'], $key, null, [
+                    'class' =>
+                        (isset($field['large']) && $field['large'] == true
+                            ? 'c-form__input m-high'
+                            : 'c-form__input')
+                        .
+                        (isset($field['wysiwyg']) && $field['wysiwyg'] == true
+                            ? ' js-ckeditor'
+                            : ''),
+                    'id' => $key,
+                    'placeholder' => (trans("content.$type.edit.field.$key.help") == '' || trans("content.$type.edit.field.$key.help") == "content.$type.edit.field.$key.help" ? trans("content.$type.edit.field.$key.title") : trans("content.$type.edit.field.$key.help", ['now' =>  $now])),
+                    'rows' => isset($field['rows']) ? $field['rows'] : 8,
+                ]) !!}
 
-                    <div id="{{ isset($id) ? $id : 'dropzoneImage' }}" class="dropzone">
+            @elseif ($field['type'] == 'file')
 
-                        <div class="fallback">
+                <div id="{{ isset($id) ? $id : 'dropzoneImage' }}" class="dropzone">
+                    <div class="fallback">
+                        <div class="form-group">
+                            {!! call_user_func('Form::'.$field['type'], $key) !!}
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="form-group">
+            @elseif ($field['type'] == 'radio')
 
-                                {!! Form::$field['type']($key) !!}
+                <div class="c-columns m-2-cols m-border">
 
+                    @foreach(config($field['items']) as $index => $item)
+                        <div class="c-columns__item">
+                            <div class="c-form__group-radio js-radio-wrap">
+                                {{ Form::radio('type', $item['type'], null, [
+                                    'class' => 'c-form__input m-radio js-radio',
+                                    'id' => $item['type']
+                                ]) }}
+                                {!! Form::label($item['type'], trans($item['title']),[
+                                    'class' => 'c-form__label m-radio js-radio'
+                                ]) !!}
                             </div>
-
                         </div>
 
+                        @if (($index + 1) % 2 == 0)
+                            <div class="c-columns m-2-cols m-border">
+                            </div>
+                        @endif
+                    @endforeach
+
+                </div>
+
+            @elseif ($field['type'] == 'image_id')
+
+                {!! Form::text($key, null, [
+                    'class' => 'c-form__input',
+                    'placeholder' => (trans("content.$type.edit.field.$key.help") == '' || trans("content.$type.edit.field.$key.help") == "content.$type.edit.field.$key.help" ? trans("content.$type.edit.field.$key.title") : trans("content.$type.edit.field.$key.help", ['now' =>  $now]))
+                ]) !!}
+
+            @elseif ($field['type'] == 'destinations')
+
+                {!! Form::select(
+                    $key . '[]',
+                    $destinations,
+                    $destination,
+                    [
+                        'multiple' => 'true',
+                        'id' => $key,
+                        'class' => 'js-filter',
+                        'placeholder' => (trans("content.$type.edit.field.$key.help") == '' || trans("content.$type.edit.field.$key.help") == "content.$type.edit.field.$key.help" ? trans("content.$type.edit.field.$key.title") : trans("content.$type.edit.field.$key.help", ['now' =>  $now]))
+                    ]
+                )!!}
+
+            @elseif ($field['type'] == 'topics')
+
+                {!! Form::select(
+                    $key . '[]',
+                    $topics,
+                    $topic,
+                    [
+                        'multiple' => 'true',
+                        'id' => $key,
+                        'class' => 'js-filter',
+                        'placeholder' => (trans("content.$type.edit.field.$key.help") == '' || trans("content.$type.edit.field.$key.help") == "content.$type.edit.field.$key.help" ? trans("content.$type.edit.field.$key.title") : trans("content.$type.edit.field.$key.help", ['now' =>  $now]))
+                    ]
+                )!!}
+
+            @elseif ($field['type'] == 'datetime')
+                @php
+                    if (isset($form['model']) && $form['model']) {
+                        $dateTime = \Carbon\Carbon::parse($form['model'][$key]);
+                    } else {
+                        $dateTime = \Carbon\Carbon::now();
+                    }
+                @endphp
+
+                <div class="c-columns m-3-cols m-space">
+                    <div class="c-columns__item">
+                        @include('component.date.select', [
+                            'from' => 1,
+                            'to' => 31,
+                            'selected' => $dateTime->day,
+                            'key' => $key.'_day'
+                        ])
                     </div>
-
-                @elseif ($field['type'] == 'image_id')
-
-                    {!! Form::text($key, null, [
-                        'class' => 'c-form__input',
-                        'placeholder' => trans("content.$type.edit.field.$key.title"),
-                    ]) !!}
-
-                @elseif ($field['type'] == 'destinations')
-
-                    {!! Form::select(
-                        $key . '[]',
-                        $destinations,
-                        $destination,
-                        [
-                            'multiple' => 'true',
-                            'id' => $key,
-                            'class' => 'js-filter',
-                            'placeholder' => trans("content.$type.edit.field.$key.title"),
-                        ]
-                    )!!}
-
-                @elseif ($field['type'] == 'topics')
-
-                    {!! Form::select(
-                        $key . '[]',
-                        $topics,
-                        $topic,
-                        [
-                            'multiple' => 'true',
-                            'id' => $key,
-                            'class' => 'js-filter',
-                            'placeholder' => trans("content.$type.edit.field.$key.title"),
-                        ]
-                    )!!}
-
-                @elseif ($field['type'] == 'datetime')
-
-                    <div class="c-form__label">
-                        {{ trans("content.$type.edit.field.$key.title") }}
+                    <div class="c-columns__item">
+                        @include('component.date.select', [
+                            'month' => true,
+                            'selected' => $dateTime->month,
+                            'key' => $key.'_month'
+                        ])
                     </div>
-
-                    <div class="c-columns m-6-cols m-space">
-                        <div class="c-columns__item">
-                            @include('component.date.select', [
-                                'from' => 1,
-                                'to' => 31,
-                                'selected' => \Carbon\Carbon::now()->day,
-                                'key' => $key.'_day'
-                            ])
-                        </div>
-                        <div class="c-columns__item">
-                            @include('component.date.select', [
-                                'month' => true,
-                                'selected' => \Carbon\Carbon::now()->month,
-                                'key' => $key.'_month'
-                            ])
-                        </div>
-                        <div class="c-columns__item">
-                            @include('component.date.select', [
-                                'from' => \Carbon\Carbon::now()->year,
-                                'to' => \Carbon\Carbon::parse('+5 years')->year,
-                                'selected' => \Carbon\Carbon::now()->year,
-                                'key' => $key.'_year'
-                            ])
-                        </div>
-                        <div class="c-columns__item">
-                            @include('component.date.select', [
-                                'from' => 0,
-                                'to' => 23,
-                                'selected' => \Carbon\Carbon::now()->hour,
-                                'key' => $key.'_hour'
-                            ])
-                        </div>
-                        <div class="c-columns__item">
-                            @include('component.date.select', [
-                                'from' => 0,
-                                'to' => 59,
-                                'selected' => \Carbon\Carbon::now()->minute,
-                                'key' => $key.'_minute'
-                            ])
-                        </div>
-                        <div class="c-columns__item">
-                            @include('component.date.select', [
-                                'from' => 0,
-                                'to' => 59,
-                                'selected' => '00',
-                                'key' => $key.'_second'
-                            ])
-                        </div>
+                    <div class="c-columns__item">
+                        @include('component.date.select', [
+                            'from' => \Carbon\Carbon::now()->year,
+                            'to' => \Carbon\Carbon::parse('+5 years')->year,
+                            'selected' => $dateTime->year,
+                            'key' => $key.'_year'
+                        ])
                     </div>
-                @elseif ($field['type'] == 'currency')
+                </div>
+            @elseif ($field['type'] == 'currency')
 
-                    {!! Form::text($key, null, [
-                        'class' => 'c-form__input m-narrow',
-                        'placeholder' => trans("content.$type.edit.field.$key.title"),
-                    ]) !!}
+                {!! Form::text($key, null, [
+                    'class' => 'c-form__input m-narrow',
+                    'placeholder' => (trans("content.$type.edit.field.$key.help") == '' || trans("content.$type.edit.field.$key.help") == "content.$type.edit.field.$key.help" ? trans("content.$type.edit.field.$key.title") : trans("content.$type.edit.field.$key.help", ['now' =>  $now]))
+                ]) !!}
 
-                    <span class="c-form__text">
+                <span class="c-form__text">
 
                         {{ config('site.currency.symbol') }}
 
                     </span>
 
-                @elseif (in_array($field['type'], ['submit', 'button']))
+            @elseif (in_array($field['type'], ['submit', 'button']))
 
-                    {!! Form::submit(trans("content.$mode.submit.title"), [
-                        'class' => 'c-button m-large m-block',
-                        'id'    => 'submit-' . (isset($id) ? $id : 'dropzoneImage')
-                    ]) !!}
+                {!! Form::submit(trans("content.$mode.submit.title"), [
+                    'class' => 'c-button m-large m-block',
+                    'id'    => 'submit-' . (isset($id) ? $id : 'dropzoneImage')
+                ]) !!}
 
-                @endif
-
-                @if (trans("content.$type.edit.field.$key.help") != '' && trans("content.$type.edit.field.$key.help") != "content.$type.edit.field.$key.help")
-
-                    {!! Form::label($key, trans("content.$type.edit.field.$key.help", ['now' =>  $now]), [
-                        'class' => 'c-form__label'
-                    ]) !!}
-
-                @endif
-
+            @endif
             </div>
-
         </div>
-
     @endforeach
 
 @endif
 
-{!! Form::close() !!}
+@if (isset($form['files']))
+    {!! Form::close() !!}
+@endif
 
 @section('scripts')
 
@@ -244,74 +240,75 @@ code: |
 
                 Dropzone.autoDiscover = false;
 
+
                 createDropzone(
-                        '#{{ isset($id) ? $id : 'dropzoneImage' }}',
-                        '{{ $form['url'] }}',
-                        '{{ isset($form['method']) && $form['method']!='put' ? $form['method'] : 'post' }}',
-                        '{{ $name }}',
+                    '.dropzone',
+                    /* #{{ isset($id) ? $id : 'dropzoneImage' }} <- changed to .dropzone */
+                    '{{ $form['url'] }}',
+                    '{{ isset($form['method']) && $form['method']!='put' ? $form['method'] : 'post' }}',
+                    '{{ $name }}',
 
-                        @if (isset($maxFileSize))
+                    @if (isset($maxFileSize))
 
-                            '{{ $maxFileSize }}',
+                        '{{ $maxFileSize }}',
 
-                        @else
-
-                            '',
-
-                        @endif
-
-                        @if (isset($uploadMultiple))
-
-                            @if ($uploadMultiple === true)
-
-                                'true',
-
-                            @else
-
-                                'false',
-
-                            @endif
-
-                        @else
-
-                            '',
-
-                        @endif
-
-                        @if (isset($maxFiles))
-
-                            '{{ $maxFiles }}',
-
-                        @else
-
-                            '',
-
-                        @endif
-
-                        @if (isset($fields) && ! empty($fields))
-
-                            'false',
-
-                        @else
-
-                            '',
-
-                        @endif
+                    @else
 
                         '',
 
-                        [
-                            '{{ trans('site.dropzone.default') }}',
-                            '{{ trans('site.dropzone.fallback.message') }}',
-                            '{{ trans('site.dropzone.fallback.text') }}',
-                            '{{ trans('site.dropzone.max.files.exceeded') }}',
-                            '{{ trans('site.dropzone.file.size.exceeded') }}',
-                            '{{ trans('site.dropzone.file.remove') }}',
-                        ],
+                    @endif
 
-                        '#form-{{ isset($id) ? $id : 'dropzoneImage' }}',
-                        '#submit-{{ isset($id) ? $id : 'dropzoneImage' }}'
+                    @if (isset($uploadMultiple))
 
+                        @if ($uploadMultiple === true)
+
+                            'true',
+
+                        @else
+
+                            'false',
+
+                        @endif
+
+                    @else
+
+                        '',
+
+                    @endif
+
+                    @if (isset($maxFiles))
+
+                        '{{ $maxFiles }}',
+
+                    @else
+
+                        '',
+
+                    @endif
+
+                    @if (isset($fields) && ! empty($fields))
+
+                        'false',
+
+                    @else
+
+                        '',
+
+                    @endif
+
+                    '',
+
+                    [
+                        '{!! trans('site.dropzone.default') !!}',
+                        '{{ trans('site.dropzone.fallback.message') }}',
+                        '{{ trans('site.dropzone.fallback.text') }}',
+                        '{{ trans('site.dropzone.max.files.exceeded') }}',
+                        '{{ trans('site.dropzone.file.size.exceeded') }}',
+                        '{{ trans('site.dropzone.file.remove') }}',
+                    ],
+
+                    '#form-{{ isset($id) ? $id : 'dropzoneImage' }}',
+                    '#submit-{{ isset($id) ? $id : 'dropzoneImage' }}'
                 );
 
             </script>

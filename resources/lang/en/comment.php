@@ -11,6 +11,7 @@ return [
 
     'index.row.text' => ':user :created_at',
 
+    'create.title' => 'Add comment',
     'create.field.body.title' => 'Comment',
     'create.submit.title' => 'Add comment',
 

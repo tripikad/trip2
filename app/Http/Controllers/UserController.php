@@ -17,9 +17,7 @@ class UserController extends Controller
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
 
-        $user = User::with(['flags.flaggable' => function ($query) use ($id) {
-            $query->where('user_id', $id);
-        }])->findorFail($id);
+        $user = User::with(['flags.flaggable'])->findorFail($id);
 
         $content_count = $user
             ->contents()
@@ -63,7 +61,7 @@ class UserController extends Controller
         $activity_content = $user
             ->contents()
             ->whereStatus(1)
-            ->whereIn('type', $types)
+            ->whereIn('type', ['forum', 'travelmate', 'blog', 'news', 'flights'])
             ->latest('created_at')
             ->take(4)
             ->get()
@@ -167,10 +165,14 @@ class UserController extends Controller
             $user->images()->delete();
             $user->images()->create(['filename' => $filename]);
 
-            return redirect()
-                ->route('user.edit', [$user])
-                ->withInput()
-                ->with('status', trans('user.update.image.status'));
+            if (! $request->ajax()) {
+                return redirect()
+                    ->route('user.edit', [$user])
+                    ->withInput()
+                    ->with('status', trans('user.update.image.status'));
+            } else {
+                exit();
+            }
         }
 
         $this->validate($request, [
@@ -182,8 +184,9 @@ class UserController extends Controller
             'contact_twitter' => 'url',
             'contact_instagram' => 'url',
             'contact_homepage' => 'url',
-            'birthyear' => 'sometimes|digits:4',
-            'gender' => 'required',
+//          'birthyear' => 'required|digits:4',
+//          'gender' => 'required',
+//          'real_name' => 'required',
         ]);
 
         $fields = [
@@ -194,18 +197,44 @@ class UserController extends Controller
             $fields['password'] = Hash::make($request->get('password'));
         }
 
-        $user->update(array_merge($request->all(), $fields));
+        $allowedFields = ['name', 'email', 'contact_facebook', 'contact_twitter', 'contact_instagram', 'contact_homepage', 'real_name', 'gender', 'birthyear', 'description', 'profile_color'];
 
-        return redirect()
-            ->route('user.show', [$user])
-            ->with('info', trans('user.update.info'));
+        if ($request->real_name_show == '') {
+            $fields['real_name_show'] = 1;
+        } else {
+            $fields['real_name_show'] = 0;
+        }
+
+        if ($request->notify_message) {
+            $fields['notify_message'] = 1;
+        } else {
+            $fields['notify_message'] = 0;
+        }
+
+        if ($request->notify_follow) {
+            $fields['notify_follow'] = 1;
+        } else {
+            $fields['notify_follow'] = 0;
+        }
+
+        foreach ($request->all() as $field_name => $field_value) {
+            if (in_array($field_name, $allowedFields)) {
+                $fields[$field_name] = $field_value;
+            }
+        }
+
+        $user->update($fields);
+
+        if (! $request->ajax()) {
+            return redirect()
+                ->route('user.show', [$user])
+                ->with('info', trans('user.update.info'));
+        }
     }
 
     public function destinationsIndex($id)
     {
-        $user = User::with(['flags.flaggable' => function ($query) use ($id) {
-            $query->where('user_id', $id);
-        }])->findorFail($id);
+        $user = User::with(['flags.flaggable'])->findorFail($id);
 
         $user_have_been = $user->destinationHaveBeen()->lists('flaggable_id')->toArray();
         $have_been_destinations = Destination::getNames();

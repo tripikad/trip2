@@ -14,7 +14,7 @@
 
             display: flex;
             justify-content: space-between;
-            padding: 20px 24px 14px;
+            padding: $spacer * 2 - 4 $spacer * 2 $spacer + 2;
 
             > * {
 
@@ -60,6 +60,11 @@
 
         @include respond-to(tablet) {
 
+            padding-bottom: $spacer * 22;
+        }
+
+        @include respond-to(desktop) {
+
             padding-bottom: $spacer * 24;
         }
     }
@@ -69,14 +74,20 @@
             @include wrap;
 
             position: relative;
+
+            @include respond-to(tablet) {
+
+                min-height: $spacer * 16.5;
+            }
         }
 
             .r-destination__about-column {
+
                 padding-top: $spacer * 4;
 
                 &.m-first {
 
-                    padding-bottom: $spacer * 4;
+                    padding-bottom: $spacer * 2;
                     padding-top: 0;
 
                     @include respond-to(tablet) {
@@ -86,7 +97,7 @@
                         padding-bottom: 0;
                         margin-top: -$spacer * 4;
 
-                         @each $name, $color, $color-dark in $colors {
+                        @each $name, $color, $color-dark in $colors {
 
                             .r-destination__about.m-#{$name} & {
 
@@ -104,6 +115,7 @@
                     @include respond-to(tablet) {
 
                         @include span(8 of 28 at 3);
+
                         padding-top: $spacer * 4;
                     }
                 }
@@ -112,6 +124,7 @@
             .r-destination__about-map {
 
                 display: none;
+                opacity: 0.2;
 
                 @include respond-to(tablet) {
 
@@ -134,14 +147,12 @@
 
     .r-destination__content {
 
-        padding-bottom: $spacer * 2;
         padding-top: $spacer * 2;
         background: $color-white;
 
         @include respond-to(tablet) {
 
             margin-top: -$spacer * 20;
-            margin-bottom: $spacer * 8;
             padding-top: 0;
             background: none;
         }
@@ -150,26 +161,72 @@
         .r-destination__content-wrap {
 
             @include wrap;
+
             background: $color-white;
+
+            &.m-padding {
+
+                @include respond-to(tablet) {
+
+                    padding-bottom: $spacer * 4;
+                }
+
+                @include respond-to(desktop) {
+
+                    padding-bottom: $spacer * 4;
+                }
+
+                @include respond-to(desktop-medium) {
+
+                    padding-bottom: $spacer * 4;
+                }
+
+                @include respond-to(desktop-large) {
+
+                    padding-bottom: $spacer * 4;
+                }
+            }
         }
 
             .r-destination__content-title {
 
                 padding-bottom: $spacer * 2;
 
-                @include respond-to(tablet) {
+                @include respond-to(desktop) {
 
                     padding-bottom: $spacer * 3;
                 }
+
+                &.m-flex {
+
+                    @include respond-to(desktop) {
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+                }
             }
+
+                .r-destination__content-title-link {
+
+                    margin-top: $spacer / 2;
+
+                    @include respond-to(desktop) {
+
+                        margin-top: -$spacer / 6;
+                    }
+                }
 
             .r-destination__content-about {
 
                 @include clearfix;
 
+                position: relative;
+                z-index: 10;
                 padding-bottom: $spacer * 2;
 
-                @include respond-to(tablet) {
+                @include respond-to(desktop) {
 
                     padding-bottom: $spacer * 4;
                 }
@@ -177,7 +234,7 @@
 
                 .r-destination__content-about-column {
 
-                    padding-bottom: $spacer * 4;
+                    padding-bottom: $spacer * 2;
 
                     @include respond-to(tablet) {
 
@@ -186,9 +243,13 @@
 
                     &.m-first {
 
+                        display: none;
+
                         @include respond-to(tablet) {
 
                             @include span(8 of 28);
+
+                            display: block;
                         }
                     }
 
@@ -197,6 +258,11 @@
                         @include respond-to(tablet) {
 
                             @include span(8 of 28 at 3);
+                            padding-top: $spacer * 2;
+                        }
+
+                        @include respond-to(desktop) {
+
                             padding-top: $spacer * 4;
                         }
                     }
@@ -208,6 +274,11 @@
                         @include respond-to(tablet) {
 
                             @include span(6 of 28 at 13);
+                            padding-top: $spacer * 2;
+                        }
+
+                        @include respond-to(desktop) {
+
                             padding-top: $spacer * 4;
                         }
                     }
@@ -215,7 +286,7 @@
 
             .r-destination__content-gallery {
 
-                padding-bottom: $spacer * 4;
+                padding-bottom: $spacer * 2;
 
                 @include respond-to(tablet) {
 
@@ -225,8 +296,6 @@
 
                 .r-destination__gallery-title {
 
-                    @include wrap('narrow');
-
                     padding-bottom: $spacer * 2;
 
                     @include respond-to(tablet) {
@@ -235,14 +304,28 @@
                     }
                 }
 
+                    .r-destination__gallery-title-wrap {
+
+                        @include respond-to(tablet) {
+
+                            @include wrap('narrow');
+                        }
+                    }
+
             .r-destination__content-news {
 
-                padding-bottom: $spacer * 4;
+                @include respond-to(tablet) {
+
+                    padding-bottom: $spacer * 4;
+                }
             }
 
                 .r-destination__content-news-wrap {
 
-                    @include wrap('narrow');
+                    @include respond-to(tablet) {
+
+                        @include wrap('narrow');
+                    }
                 }
 
                     .r-destination__content-news-column {
@@ -261,52 +344,83 @@
 
                         &.m-last {
 
+                            display: none;
+
                             @include respond-to(tablet) {
 
                                 @include span(8 of 24 at 3);
+
+                                display: block;
                             }
                         }
                     }
 
-            .r-destination__content-travel-mates {
+                    .r-destination__content-news-block {
 
-                padding-bottom: $spacer * 4;
+                        padding-bottom: $spacer * 2;
+
+                        &:last-of-type {
+
+                            padding-bottom: 0;
+                        }
+                    }
+
+    .r-destination__flights {
+
+        @include respond-to(tablet) {
+
+            position: relative;
+            margin-top: -$spacer * 8;
+            padding-bottom: $spacer * 4;
+        }
+    }
+
+        .r-destination__flights-wrap {
+
+            @include wrap('narrow');
+        }
+
+    .r-destination__travelmates {
+
+        padding: $spacer * 2 0 0 0;
+
+        @include respond-to(tablet) {
+
+            padding: $spacer * 2 0;
+        }
+
+        @include respond-to(desktop) {
+
+            padding: $spacer * 3 0 $spacer;
+        }
+    }
+
+        .r-destination__travelmates-wrap {
+
+            @include wrap();
+
+            @include respond-to(tablet) {
+
+                @include wrap('narrow');
             }
-
-                .r-destination__content-travel-mates-wrap {
-
-                    @include wrap('narrow');
-                }
-
-            .r-destination__content-flights {
-
-                @include respond-to(tablet) {
-
-                    position: relative;
-                    bottom: -$spacer * 4;
-                }
-            }
-
-                .r-destination__content-flights-wrap {
-
-                    @include wrap('narrow');
-                }
+        }
 
     .r-destination__footer-promo {
 
         display: none;
-        margin-bottom: -$spacer * 4;
-        background: $color-fill-neutral-light;
 
         @include respond-to(tablet) {
 
             display: block;
+            margin-bottom: -$spacer * 4;
+            background: $color-fill-neutral-light;
         }
     }
 
         .r-destination__footer-promo-wrap {
 
             @include wrap('narrow');
+
             position: relative;
             z-index: 2;
         }

@@ -26,7 +26,14 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
-        return parent::report($e);
+        if (config('app.log') == 'syslog') {
+            \Log::error($e->getMessage(), [
+                'file' => $e->getTrace()[0]['file'],
+                'line' => $e->getTrace()[0]['line'],
+            ]);
+        } else {
+            return parent::report($e);
+        }
     }
 
     /**

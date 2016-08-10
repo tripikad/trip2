@@ -1,10 +1,10 @@
-{{--
-
+<?php
+/*
 title: Forum list
 
 code: |
 
-    @include('component.content.forum.list', [
+    #include('component.content.forum.list', [
         'modifiers' => $modifiers,
         'items' => [
             [
@@ -14,6 +14,10 @@ code: |
                 'profile' => [
                     'modifiers' => 'm-mini',
                     'image' => \App\Image::getRandom(),
+                    'letter' => [
+                        'modifiers' => 'm-red',
+                        'text' => 'J'
+                    ],
                 ],
                 'badge' => [
                     'modifiers' => 'm-inverted',
@@ -33,6 +37,10 @@ code: |
                             'image' => \App\Image::getRandom(),
                             'title' => 'Charles Darwin',
                             'route' => '',
+                            'letter' => [
+                                'modifiers' => 'm-green m-small',
+                                'text' => 'D'
+                            ],
                             'status' => [
                                 'modifiers' => 'm-blue',
                                 'position' => '1'
@@ -53,8 +61,8 @@ code: |
 modifiers:
 
 - m-compact
-
---}}
+*/
+?>
 
 <ul class="c-forum-list {{ $modifiers or '' }}">
 
@@ -81,7 +89,8 @@ modifiers:
                         @include('component.profile', [
                             'modifiers' => $item['profile']['modifiers'],
                             'image' => $item['profile']['image'],
-                            'badge' => $item['badge']
+                            'badge' => $item['badge'],
+                            'letter' => $item['profile']['letter']
                         ])
 
                     </div>
@@ -135,7 +144,8 @@ modifiers:
                                     'title' => $child['profile']['title'],
                                     'route' => $child['profile']['route'],
                                     'modifiers' => 'm-full m-status',
-                                    'status' => $child['profile']['status']
+                                    'status' => $child['profile']['status'],
+                                    'letter' => $child['profile']['letter'],
                                 ],
                                 'date' => $child['date'],
                                 'text' => $child['text'],

@@ -19,7 +19,9 @@ return [
     'footer.news' => 'News',
     'footer.flights' => 'Flights',
     'footer.offers' => 'Offers',
-    'footer.travelmates' => 'Travel mates',
+    'footer.travelmates' => 'Travelmates',
+    'footer.blogs' => 'Blogs',
+    'footer.photos' => 'Photos',
 
     'footer2.forum' => 'Forum',
     'footer2.expat' => 'Expatriate',
@@ -29,6 +31,8 @@ return [
     'footer3.contact' => 'Contact',
     'footer3.eula' => 'EULA',
     'footer3.advertising' => 'Advertising',
+    'footer3.flightfeed' => 'Flight RSS',
+    'footer3.newsfeed' => 'News RSS',
     'footer3.styleguide' => 'Styleguide',
 
     'footer-social.facebook' => 'Facebook',
@@ -46,8 +50,9 @@ return [
     'user.edit.profile' => 'Edit profile',
     'user.message' => 'Messages',
     'user.follow' => 'Follows',
-    'user.travelmate' => 'Looking for travel mate?',
+    'user.travelmate' => 'Looking for travelmate?',
     'user.add.places' => 'Add places you have been',
+    'user.photo' => 'Add photo',
 
     'admin.internal' => 'Internal forum',
     'admin.image' => 'All images',

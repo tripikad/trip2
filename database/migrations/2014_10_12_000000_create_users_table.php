@@ -22,9 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('contact_twitter')->nullable();
             $table->string('contact_instagram')->nullable();
             $table->string('contact_homepage')->nullable();
-
+            $table->string('profile_color')->default('m-green');
             $table->string('real_name');
-            $table->integer('show_real_name')->unsigned()->nullable();
+            $table->boolean('real_name_show')->default(false);
             $table->integer('gender')->unsigned()->nullable();
             $table->integer('birthyear')->unsigned()->nullable();
 
@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->boolean('notify_follow')->default(false);
 
             $table->string('role');
+            $table->integer('rank')->default(0);
             $table->boolean('verified')->default(false);
             $table->string('registration_token')->nullable();
             $table->rememberToken();

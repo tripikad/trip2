@@ -1,10 +1,6 @@
 @extends('layouts.main')
 
-@section('title')
-
-    {{ $user->name }}
-
-@stop
+@section('title', $user->real_name && $user->real_name_show ? $user->real_name : $user->name)
 
 @section('header')
 
@@ -18,63 +14,56 @@
 
 @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
 
-<div class="r-user m-green m-logged-in">
+<div class="r-user {{ $user->profile_color }} m-logged-in">
 
 @else
 
-<div class="r-user m-green">
+<div class="r-user {{ $user->profile_color }}">
 
 @endif
 
     <div class="r-user__header">
-
-        <div class="r-user__masthead m-green">
+        <div class="r-user__masthead {{ $user->profile_color }}">
 
             @include('component.masthead', [
                 'modifiers' => 'm-alternative m-profile',
-                'image' => \App\Image::getRandom()
+                'image' => \App\Image::getHeader()
             ])
 
         </div>
 
         <div class="r-user__map">
-
-            @include('component.map', [
-                'modifiers' => 'm-profile'
-            ])
-
-            @include('component.user.location', [
-                'modifiers' => 'm-green',
-                'location' => 'Tallinn',
-                'top' => 25,
-                'left' => 52
-            ])
-
+            <div class="c-user-map">
+                <div class="c-user-map__map">
+                    @include('component.svg.standalone', [
+                        'name' => 'map'
+                    ])
+                </div>
+            </div>
         </div>
 
         <div class="r-user__info">
-
             <div class="r-user__info-wrap">
-
                 <div class="r-user__info-image">
-
                     @include('component.profile', [
                         'image' => $user->imagePreset('small_square'),
-                        'modifiers' => 'm-full m-green m-status m-user',
+                        'modifiers' => 'm-full '.$user->profile_color.' m-status m-user',
+                        'letter' => [
+                            'modifiers' => $user->profile_color.' m-large',
+                            'text' => (strlen($user->name) ? $user->name[0] : '')
+                        ],
                         'status' => [
-                            'position' => '3',
-                            'modifiers' => 'm-green',
-                            'editor' => true,
+                            'position' => $user->rank,
+                            'modifiers' => $user->profile_color,
+                            'editor' => $user->role == 'admin'?true:false,
                             'tooltip' => false,
                         ],
                     ])
 
                     @if (isset($latest_announcement) && count($latest_announcement))
-
                         <div class="r-user__info-travel-mate">
-
                             @include('component.tooltip', [
-                                'modifiers' => 'm-green m-bottom m-one-line',
+                                'modifiers' => $user->profile_color.' m-bottom m-one-line',
                                 'text' => $latest_announcement->title,
                                 'link' => view('component.link', [
                                     'title' => trans('site.link.read.more'),
@@ -85,58 +74,40 @@
                                     'modifiers' => 'm-small'
                                 ])
                              ])
-
                         </div>
-
                     @endif
 
                     <div class="r-user__info-level">
-
                         @include('component.user.status', [
-                            'modifiers' => 'm-green',
-                            'status' => '3',
-                            'editor' => true
+                            'modifiers' => $user->profile_color,
+                            'status' => $user->rank,
+                            'editor' => $user->role == 'admin'?true:false,
                         ])
                     </div>
 
                 </div>
 
                 <div class="r-user__info-heading">
-
                     <div class="r-user__info-title">
-
                         <div class="r-user__info-title-wrap">
-
-                            <h1 class="c-user-title">{{ $user->real_name ? $user->real_name : $user->name }}</h1>
-
-                            @if (\Auth::user())
-
-                                @if(\Auth::user()->id !== $user->id)
-
-                                    @include('component.button',[
-                                        'modifiers' => 'm-secondary m-small',
-                                        'title' => trans('user.show.message.create'),
-                                        'route' => route('message.index.with', [
-                                            \Auth::user(),
-                                            $user,
-                                            '#message'
-                                        ])
+                            <h1 class="c-user-title">{{ $user->real_name && $user->real_name_show ? $user->real_name : $user->name }}</h1>
+                            @if(\Auth::user() && \Auth::user()->id !== $user->id)
+                                @include('component.button',[
+                                    'modifiers' => 'm-secondary m-small',
+                                    'title' => trans('user.show.message.create'),
+                                    'route' => route('message.index.with', [
+                                        \Auth::user(),
+                                        $user,
+                                        '#message'
                                     ])
-
-                                @endif
-
+                                ])
                             @endif
-
                         </div>
 
                         <div class="c-user-title__sub">
-
                             <ul class="c-button-group m-small">
-
                                 @if (isset($user->contact_facebook) && $user->contact_facebook != '')
-
                                     <li class="c-button-group__item">
-
                                         @include('component.button',[
                                             'modifiers' => (
                                                 \Auth::check() ? 'm-icon m-small m-round m-secondary' : 'm-icon m-small m-round m-disabled'
@@ -150,15 +121,11 @@
                                             ),
                                             'target' => '_blank'
                                         ])
-
                                     </li>
-
                                 @endif
 
                                 @if (isset($user->contact_twitter) && $user->contact_twitter != '')
-
                                     <li class="c-button-group__item">
-
                                         @include('component.button',[
                                             'modifiers' => (
                                                 \Auth::check() ? 'm-icon m-small m-round m-secondary' : 'm-icon m-small m-round m-disabled'
@@ -172,15 +139,11 @@
                                             ),
                                             'target' => '_blank'
                                         ])
-
                                     </li>
-
                                 @endif
 
                                 @if (isset($user->contact_instagram) && $user->contact_instagram != '')
-
                                     <li class="c-button-group__item">
-
                                         @include('component.button',[
                                             'modifiers' => (
                                                 \Auth::check() ? 'm-icon m-small m-round m-secondary' : 'm-icon m-small m-round m-disabled'
@@ -194,20 +157,16 @@
                                             ),
                                             'target' => '_blank'
                                         ])
-
                                     </li>
-
                                 @endif
 
                                 @if (isset($user->contact_homepage) && $user->contact_homepage != '')
-
                                     <li class="c-button-group__item">
-
                                         @include('component.button',[
                                             'modifiers' => (
                                                 \Auth::check() ? 'm-icon m-small m-round m-secondary' : 'm-icon m-small m-round m-disabled'
                                             ),
-                                            'icon' => view('component.svg.sprite', ['name' => 'icon-plus']),
+                                            'icon' => view('component.svg.sprite', ['name' => 'icon-house']),
                                             'route' => (\Auth::check()
                                                 ?
                                                     $user->contact_homepage
@@ -216,17 +175,15 @@
                                             ),
                                             'target' => '_blank'
                                         ])
-
                                     </li>
-
                                 @endif
-
                             </ul>
-
-                            <p class="c-user-title__sub-info">Kasutaja {{ $user->name }} liitus 6 aastat tagasi</p>
-
+                            <p class="c-user-title__sub-info">{{
+                            trans('user.show.joined', [
+                                'user' => $user->name,
+                                'created_at' => view('component.date.relative', ['date' => $user->created_at])
+                            ]) }}</p>
                         </div>
-
                     </div>
 
                     {{--
@@ -246,7 +203,7 @@
                             <div class="r-user__info-status-text">
 
                                 @include ('component.badge', [
-                                    'modifiers' => 'm-green m-dark m-inverted',
+                                    'modifiers' => $user->profile_color.' m-dark m-inverted',
                                     'title' => $user_status->title
                                 ])
 
@@ -259,11 +216,8 @@
                     --}}
 
                 </div>
-
                     <div class="r-user__info-description">
-
                         <div class="c-body">
-
                             @if ($user->description)
                                 <p>{{ $user->description }}</p>
                             @endif
@@ -280,25 +234,15 @@
                                         ])
                                 ])
                             @endif
-
                         </div>
-
                     </div>
-
                 <div class="r-user__info-extra">
-
                     @include('component.user.extra', [
                         'items' => [
                             [
-                                'icon' => 'icon-star',
-                                'title' => '283',
-                                'text' => 'Jälgijaid',
-                                'route' => ''
-                            ],
-                            [
                                 'icon' => 'icon-thumb-up',
-                                'title' => '12',
-                                'text' => 'Meeldimisi',
+                                'title' => $user->likes()->count(),
+                                'text' => trans('user.show.likes'),
                                 'route' => ''
                             ],
                             [
@@ -322,21 +266,14 @@
                             ],
                         ]
                     ])
-
                 </div>
-
              </div>
-
         </div>
-
     </div>
 
     @if (\Auth::check() && (\Auth::user()->hasRoleOrOwner('admin', $user->id) || \Auth::user()->hasRoleOrOwner('superuser', $user->id)))
-
     <div class="r-user__admin">
-
         <div class="r-user__admin-wrap">
-
             @include('component.button.group',[
                 'items' => [
                     [
@@ -361,6 +298,14 @@
                             'modifiers' => 'm-border m-small',
                             'title' => trans('menu.user.follow'),
                             'route' => route('follow.index', [$user])
+                        ])
+                    ],
+                    [
+                        'modifiers' => '',
+                        'button' => view('component.button',[
+                            'modifiers' => 'm-small m-border',
+                            'title' => trans('menu.user.photo'),
+                            'route' => route('content.create', ['type' => 'photo']),
                         ])
                     ],
                     [
@@ -389,70 +334,64 @@
                     ]
                 ]
             ])
-
         </div>
-
      </div>
-
     @endif
 
     @if (isset($photos) && count($photos) > 0)
-
         <div class="r-user__gallery">
-
             <div class="r-user__gallery-wrap">
-
-            @include('component.gallery', [
-                'items' => $photos->transform(function($photo) {
-                    return [
-                        'type' => $photo->type,
-                        'image' => $photo->imagePreset(),
-                        'route' => route('content.show', [$photo->type, $photo]),
-                        'alt' => $photo->title
-                    ];
-                }),
-                'more_count' => $count_photos,
-                'more_route' => route('content.index', [
-                    $photos->first()['type'],
-                    'author=' . $user->id
+                @include('component.gallery', [
+                    'modal' => [
+                        'modifiers' => $user->profile_color,
+                    ],
+                    'items' => $photos->transform(function($photo) {
+                        return [
+                            'type' => $photo->type,
+                            'image' => $photo->imagePreset('small'),
+                            'image_large' => $photo->imagePreset('large'),
+                            'route' => route('content.show', [$photo->type, $photo]),
+                            'alt' => $photo->title,
+                            'tags' => $photo->destinations->transform(function($destination) {
+                                return [
+                                    'title' => $destination->name,
+                                    'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
+                                    'route' => route('destination.show', $destination)
+                                ];
+                            })
+                        ];
+                    }),
+                    'more_count' => $count_photos,
+                    'more_route' => route('content.index', [
+                        $photos->first()['type'],
+                        'author=' . $user->id
+                    ])
                 ])
-            ])
-
             </div>
-
         </div>
-
     @endif
 
     <div class="r-user__additional">
-
         <div class="r-user__additional-wrap">
-
+        @if (isset($activities) && count($activities) > 0 || isset($activities) && count($activities) > 0)
             <div class="r-user__additional-content">
-
                 @if (isset($activities) && count($activities) > 0)
-
                     <div class="r-user__additional-header">
-
                         <div class="r-user__additional-title">
-
                             @include('component.title', [
-                                'modifiers' => 'm-green',
+                                'modifiers' => $user->profile_color,
                                 'title' => trans('user.activity.index.title')
                             ])
-
                         </div>
-
                         <div class="r-user__additional-action">
-
                             @include('component.link', [
-                                'modifiers' => 'm-small',
+                                'modifiers' => 'm-icon m-right m-small',
                                 'title' => trans('menu.forum.forum'),
-                                'route' => route('content.index', ['forum'])
+                                'route' => route('content.index', ['forum']),
+                                'icon' => 'icon-arrow-right'
                             ])
 
                         </div>
-
                     </div>
 
                     @include('component.user.activity', [
@@ -460,131 +399,90 @@
                     ])
 
                 @endif
-
             </div>
 
-            @if (isset($blog_posts) && count($blog_posts) > 0)
+            <div class="r-user__additional-sidebar">
 
-                <div class="r-user__additional-sidebar">
+                @if (isset($blog_posts) && count($blog_posts) > 0)
 
-                    <div class="r-user__additional-block">
-
-                        <div class="r-user__additional-header">
-
-                            <div class="r-user__additional-title">
-
-                                @include('component.title', [
-                                    'modifiers' => 'm-green',
-                                    'title' => trans('frontpage.index.travelletter.title')
-                                ])
-
-                            </div>
-
-                            <div class="r-user__additional-action">
-
-                                @include('component.link', [
-                                    'modifiers' => 'm-small',
-                                    'title' => trans('site.link.read.more'),
-                                    'route' => route('content.index', ['blog'])
-                                ])
-
-                            </div>
-
+                <div class="r-user__additional-block">
+                    <div class="r-user__additional-header">
+                        <div class="r-user__additional-title">
+                            @include('component.title', [
+                                'modifiers' => $user->profile_color,
+                                'title' => trans('frontpage.index.travelletter.title')
+                            ])
                         </div>
 
-                        @foreach ($blog_posts as $blog_post)
-
-                            @include('component.blog', [
-                                'title' => $blog_post->title,
-                                'route' => route('content.show', [$blog_post->type, $blog_post]),
-                                'image' => $blog_post->imagePreset(),
+                        <div class="r-user__additional-action">
+                            @include('component.link', [
+                                'modifiers' => 'm-icon m-right m-small',
+                                'title' => trans('site.link.read.more'),
+                                'route' => route('content.index', ['blog']),
+                                'icon' => 'icon-arrow-right'
                             ])
-
-                        @endforeach
-
+                        </div>
                     </div>
 
-                    <div class="r-user__additional-block">
-
-                        @include('component.promo', [
-                            'modifiers' => 'm-sidebar-large',
-                            'route' => '#',
-                            'image' => \App\Image::getRandom()
+                    @foreach ($blog_posts as $blog_post)
+                        @include('component.blog', [
+                            'title' => $blog_post->title,
+                            'route' => route('content.show', [$blog_post->type, $blog_post]),
+                            'image' => $blog_post->imagePreset(),
                         ])
-
-                    </div>
-
-                    <div class="r-user__additional-block">
-
-                        @include('component.promo', [
-                            'modifiers' => 'm-sidebar-small',
-                            'route' => '#',
-                            'image' => \App\Image::getRandom()
-                        ])
-
-                    </div>
-
+                    @endforeach
                 </div>
 
-            @endif
+                @endif
+
+                <div class="r-block m-small m-mobile-hide">
+                    @include('component.promo', ['promo' => 'sidebar_large'])
+                </div>
+
+                <div class="r-block m-small m-mobile-hide">
+                    @include('component.promo', ['promo' => 'sidebar_small'])
+                </div>
+            </div>
+        @endif
 
         </div>
-
     </div>
 
     @if (isset($flights) && count($flights) > 0)
 
         <div class="r-user__offers">
-
             <div class="r-user__offers-wrap">
-
                 <div class="c-columns m-{{ count($flights) }}-cols">
 
                     @foreach($flights as $flight)
 
                         <div class="c-columns__item">
-
                             @include('component.card', [
                                 'route' => route('content.show', [$flight->type, $flight]),
                                 'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
                                 'image' => $flight->imagePreset()
                             ])
-
                         </div>
 
                     @endforeach
 
                 </div>
-
             </div>
-
         </div>
-
     @endif
 
     <div class="r-user__footer-promo">
-
         <div class="r-user__footer-promo-wrap">
-
-            @include('component.promo', [
-                'modifiers' => 'm-footer',
-                'route' => '#',
-                'image' => \App\Image::getRandom()
-            ])
-
+            @include('component.promo', ['promo' => 'footer'])
         </div>
-
     </div>
-
 </div>
 
 @stop
 
 @section('footer')
-
     @include('component.footer', [
         'modifiers' => 'm-alternative',
-        'image' => \App\Image::getRandom()
+        'image' => \App\Image::getFooter()
     ])
-
 @stop

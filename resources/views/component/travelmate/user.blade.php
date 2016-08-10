@@ -6,7 +6,33 @@
             @if(isset($user_route))
             <a href="{{ $user_route }}" class="c-travelmate-user__image-link">
             @endif
-            <img src="{{ $image }}" alt="">
+
+                @if (isset($image))
+
+                    @if ($image != '')
+
+                        <img src="{{ $image }}" alt="">
+
+                    @else
+
+                        @if (isset($letter))
+
+                            <div class="c-travelmate-user__letter {{ $letter['modifiers'] }}"><span>{{ $letter['text'] }}</span></div>
+
+                        @endif
+
+                    @endif
+
+                @else
+
+                    @if (isset($letter))
+
+                        <div class="c-travelmate-user__letter {{ $letter['modifiers'] }}"><span>{{ $letter['text'] }}</span></div>
+
+                    @endif
+
+                @endif
+
             @if(isset($user_route))
             </a>
             @endif
@@ -20,11 +46,9 @@
                 @endif
 
                     {{ str_limit($name, 18) }}
-
                     @if(isset($sex_and_age) && $sex_and_age != '')
-                        <span>({{ $sex_and_age }})</span>
+                        <span></span>
                     @endif
-
                 @if(isset($user_route))
                 </a>
                 @endif

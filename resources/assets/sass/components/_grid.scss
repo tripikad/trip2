@@ -17,6 +17,34 @@
     .c-columns__item {
 
         max-width: 100%;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
+
+        &.m-middle {
+
+            padding-top: $spacer;
+
+            @include respond-to(tablet) {
+
+                padding-top: $spacer + 3;
+            }
+        }
+
+        &.m-mobile-margin {
+
+            margin-bottom: $spacer;
+
+            @include respond-to(tablet) {
+
+                margin-bottom: 0;
+            }
+        }
 
         .c-columns.m-1-cols & {
 
@@ -73,18 +101,86 @@
             }
         }
 
+        .c-columns.m-3-cols.m-space & {
+
+            flex: 1 0 100%;
+            max-width: 100%;
+
+            @include respond-to(tablet-portrait) {
+
+                flex: 0 1 30%;
+                max-width: 30%;
+            }
+        }
+
         .c-columns.m-4-cols.m-space & {
 
             flex: 1 0 100%;
+            max-width: 100%;
 
             @include respond-to(tablet-portrait) {
 
                 flex: 0 1 49%;
+                max-width: 49%;
             }
 
             @include respond-to(tablet) {
 
                 flex: 0 1 23%;
+                max-width: 23%;
+            }
+        }
+
+        .c-columns.m-2-cols.m-first-smaller & {
+
+            &:first-child {
+
+                @include respond-to(tablet-portrait) {
+
+                    flex: 0 1 32%;
+                    max-width: 32%;
+                }
+            }
+
+            &:last-child {
+
+                @include respond-to(tablet-portrait) {
+
+                    flex: 0 1 67%;
+                    max-width: 67%;
+                }
+            }
+        }
+
+        .c-columns.m-2-cols.m-last-smaller & {
+
+            &:first-child {
+
+                margin-bottom: $spacer;
+
+                @include respond-to(tablet-portrait) {
+
+                    flex: 0 0 64%;
+                    margin-bottom: 0;
+                    max-width: 64%;
+                }
+            }
+
+            &:last-child {
+
+                @include respond-to(tablet-portrait) {
+
+                    flex: 0 0 32%;
+                    max-width: 32%;
+                }
+            }
+        }
+
+        .c-columns.m-border & {
+
+            @include respond-to(tablet-portrait) {
+
+                border-bottom: 1px solid $color-fill-neutral;
             }
         }
     }

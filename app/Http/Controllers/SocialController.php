@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Image;
 use Socialite;
+use Log;
 
 class SocialController extends Controller
 {
@@ -32,6 +33,10 @@ class SocialController extends Controller
         if ($authUser) {
             Auth::login($authUser, true);
 
+            Log::info('Facebook social login', [
+                'name' =>  $authUser->name,
+            ]);
+
             return redirect()->route('frontpage.index')->with('info', trans('auth.login.login.info'));
         } else {
             return redirect()->route('register.form')->with('info', trans('auth.login.facebook.user.error'));
@@ -50,6 +55,10 @@ class SocialController extends Controller
 
         if ($authUser) {
             Auth::login($authUser, true);
+
+            Log::info('Google social login', [
+                'name' =>  $authUser->name,
+            ]);
 
             return redirect()->route('frontpage.index')->with('info', trans('auth.login.login.info'));
         } else {
@@ -76,7 +85,7 @@ class SocialController extends Controller
 
         switch ($provider) {
             case 'facebook': $avatar_url = $user->avatar_original; break;
-            case 'google'  : $avatar_url = str_replace('?sz=50', '', $user->avatar); break;
+            case 'google': $avatar_url = str_replace('?sz=50', '', $user->avatar); break;
         }
 
         //has avatar picture

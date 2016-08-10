@@ -1,24 +1,47 @@
 @extends('layouts.one_column')
 
-@section('title')
-
-    {{ trans('follow.index.title', ['user' => $user->name]) }}
-
-@stop
+@section('title', trans('follow.index.title', ['user' => $user->name]))
 
 @section('header2.content')
 
     @if (\Auth::check() && \Auth::user()->hasRoleOrOwner('superuser', $user->id))
 
-        @include('component.nav', [
-            'menu' => 'user',
-            'items' => [
-                'activity' => ['route' => route('user.show', [$user])],
-                'message' => ['route' => route('message.index', [$user])],
-                'follow' => ['route' => route('follow.index', [$user])]
-            ],
-            'modifiers' => ''
-        ])
+    <div class="r-user m-green">
+        <div class="r-user__admin">
+            <div class="r-user__admin-wrap">
+
+                @include('component.button.group',[
+                    'items' => [
+                        [
+                            'modifiers' => 'm-green',
+                            'button' => view('component.button',[
+                                'modifiers' => 'm-small',
+                                'title' => trans('menu.user.activity'),
+                                'route' => route('user.show', [$user]),
+                            ])
+                        ],
+                        [
+                            'modifiers' => 'm-green',
+                            'button' => view('component.button',[
+                                'modifiers' => 'm-small',
+                                'title' => trans('menu.user.message'),
+                                'route' => route('message.index', [$user]),
+                            ])
+                        ],
+                        [
+                            'modifiers' => 'm-green',
+                            'button' => view('component.button',[
+                                'modifiers' => 'm-small m-border',
+                                'title' => trans('menu.user.follow'),
+                                'route' => route('follow.index', [$user]),
+                            ])
+                        ],
+                    ]
+                ])
+
+            </div>
+        </div>
+    </div>
 
     @endif
 
@@ -48,6 +71,23 @@
 
         @endforeach
 
+
+        <div class="r-user__admin">
+            <div class="r-user__admin-wrap">
+            
+            @include('component.card', [
+                'text' => trans('follow.index.email'),
+            ])
+            
+            </div>
+        </div>
+
+    @else 
+
+        @include('component.card', [
+            'text' => trans('follow.index.empty'),
+        ])
+    
     @endif
 
 @stop

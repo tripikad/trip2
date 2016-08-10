@@ -25,6 +25,16 @@ modifiers:
     @endif
 >
 
+    @if (isset($map) && $map === true)
+        <div class="c-masthead__map">
+            <div class="c-masthead__map-map">
+                @include('component.svg.standalone', [
+                    'name' => 'map'
+                ])
+            </div>
+        </div>
+    @endif
+
     @yield('masthead.nav')
 
     <div class="c-masthead__body">
@@ -53,11 +63,31 @@ modifiers:
 
         @if (isset($title))
 
-        <h1 class="c-masthead__title">{{ $title }}</h1>
+        <h1 class="c-masthead__title">
+            @if (isset($route) && $route != '')
+                <a href="{{ $route }}">
+            @endif
+
+            {{ $title }}
+
+            @if (isset($route) && $route != '')
+                </a>
+            @endif
+        </h1>
 
         @else
 
-        <h1 class="c-masthead__title">@yield('title')</h1>
+        <h1 class="c-masthead__title">
+            @if (isset($route) && $route != '')
+                <a href="{{ $route }}">
+            @endif
+
+            @yield('title')
+
+            @if (isset($route) && $route != '')
+                </a>
+            @endif
+        </h1>
 
         @endif
 
@@ -77,6 +107,10 @@ modifiers:
 
         </h2>
 
+        @endif
+
+        @if (isset($actions))
+            <div class="c-masthead__actions">{!! $actions !!}</div>
         @endif
 
         @yield('masthead.search')

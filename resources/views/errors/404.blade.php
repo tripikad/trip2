@@ -1,20 +1,26 @@
-@extends('layouts.one_column')
+@extends('layouts.main')
 
-@section('title')
+@section('title', trans('error.404.title'))
 
-	{{ trans('error.404.title') }}
+@section('header')
+
+    @include('component.header',[
+        'modifiers' => 'm-alternative'
+    ])
 
 @stop
 
-@section('content.one')
+@section('content')
+    @include('component.masthead', [
+        'modifiers' => 'm-alternative',
+        'image' => \App\Image::getHeader()
+    ])
 
-<div class="utils-padding-bottom">
-    
-@include('component.card', [
-    'title' => trans('error.404.body'),
-    'options' => '-center -invert -noshade -wide'
-])
-
-</div>
+    <div class="l-one-column">
+        @include('component.card', [
+            'text' => str_replace("\n", "<br>", trans('error.404.body')),
+            'modifiers' => 'm-blue',
+        ])
+    </div>
 
 @stop

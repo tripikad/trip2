@@ -1,0 +1,64 @@
+.c-auth-tabs {
+
+    @include clear-list;
+
+    display: flex;
+}
+
+    .c-auth-tabs__item {
+
+        flex: 1;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
+    }
+
+        .c-auth-tabs__text {
+
+            color: $color-text-link;
+            font-size: $font-size-small;
+            font-weight: $font-weight-medium;
+            text-align: center;
+            line-height: $spacer * 4;
+            display: block;
+            height: $spacer * 4;
+            background: $color-white;
+            cursor: default;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-large;
+            }
+        }
+
+        .c-auth-tabs__link {
+
+            color: $color-white;
+            font-size: $font-size-small;
+            font-weight: $font-weight-medium;
+            line-height: $spacer * 4;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            height: $spacer * 4;
+
+            @include respond-to(tablet) {
+
+                font-size: $font-size-large;
+            }
+
+            &.m-facebook {
+
+                background: $color-facebook;
+            }
+
+            &.m-google {
+
+                background: $color-google;
+            }
+        }

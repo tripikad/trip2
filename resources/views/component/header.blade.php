@@ -9,7 +9,6 @@
             @include('component.logo', [
                 'modifiers' => 'm-small'
             ])
-
         </a>
 
         @else
@@ -19,7 +18,6 @@
             @include('component.logo', [
                 'modifiers' => 'm-small m-dark'
             ])
-
         </a>
 
         @endif
@@ -31,12 +29,16 @@
     <div class="c-header__user">
 
         @include('component.navbar.user', [
-            'modifiers' => 'm-purple',
+            'modifiers' => 'm-green',
             'profile' => [
                 'image' => \Auth::user()->imagePreset(),
                 'title' => \Auth::user()->name,
                 'route' => route('user.show', [\Auth::user()]),
-                'badge' => \Auth::user()->unreadMessagesCount()
+                'badge' => \Auth::user()->unreadMessagesCount(),
+                'letter' => [
+                    'modifiers' => 'm-green m-tiny',
+                    'text' => 'W'
+                ]
             ],
             'children' => [
                 [
@@ -65,12 +67,16 @@
     <div class="c-header__user">
 
         @include('component.navbar.user', [
-            'modifiers' => 'm-purple',
+            'modifiers' => 'm-green',
             'profile' => [
                 'image' => \Auth::user()->imagePreset(),
                 'title' => \Auth::user()->name,
                 'route' => route('user.show', [\Auth::user()]),
-                'badge' => \Auth::user()->unreadMessagesCount()
+                'badge' => \Auth::user()->unreadMessagesCount(),
+                'letter' => [
+                    'modifiers' => 'm-green m-tiny',
+                    'text' => 'W'
+                ]
             ],
             'children' => [
                 [
@@ -96,58 +102,90 @@
                 ]
             ]
         ])
-
     </div>
 
     @endif
 
+    @if (isset($modifiers) && $modifiers === 'm-alternative')
+
     <a href="#" class="c-header__nav-trigger js-header__nav-trigger">
+
+    @else
+
+    <a href="#" class="c-header__nav-trigger m-dark js-header__nav-trigger">
+
+    @endif
         <span></span>
         <span></span>
         <span></span>
     </a>
 
-    <div class="c-header__nav js-header__nav">
+    <div class="c-header__mobile-nav js-header__nav">
+
+        @if (isset($modifiers) && $modifiers === 'm-alternative')
+
+            @include('component.navbar.mobile',[
+                'modifiers' => 'm-alternative m-green'
+            ])
+
+        @else
+
+            @include('component.navbar.mobile',[
+                'modifiers' => 'm-green'
+            ])
+
+        @endif
+
+        <div class="c-header__mobile-nav-search">
+
+            @include('component.header.search-simple',[
+                'modifiers' => 'm-green',
+                'placeholder' => 'Otsi'
+            ])
+        </div>
+    </div>
+
+    <div class="c-header__nav">
 
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
             @include('component.navbar',[
-                'modifiers' => 'm-alternative m-purple'
+                'modifiers' => 'm-alternative m-green'
             ])
 
         @else
 
             @include('component.navbar',[
-                'modifiers' => 'm-blue'
+                'modifiers' => 'm-green'
             ])
 
         @endif
     </div>
 
-    <a href="#" class="c-header__search-trigger js-header__search-trigger">
+    @if(!Request::is('/') && ((!isset($hide)) || (isset($hide) && !in_array('search', $hide))))
 
-        @include('component.svg.sprite', [
-            'name' => 'icon-search'
-        ])
-    </a>
-
+    @if (Request::path() != '/' && !Request::is('search*'))
     <div class="c-header__search js-header__search">
 
         @if (isset($modifiers) && $modifiers === 'm-alternative')
 
-            @include('component.search',[
-                'modifiers' => 'm-small m-red m-alternative',
-                'placeholder' => 'Search'
+            @include('component.header.search',[
+                'modifiers' => 'm-small m-green m-alternative',
+                'placeholder' => ''
             ])
 
         @else
 
-            @include('component.search',[
-                'modifiers' => 'm-small m-red',
-                'placeholder' => 'Search'
+            @include('component.header.search',[
+                'modifiers' => 'm-small m-green',
+                'placeholder' => ''
             ])
 
         @endif
+
     </div>
+    @endif
+
+    @endif
 
 </header>

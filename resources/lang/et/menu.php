@@ -4,7 +4,7 @@ return [
 
     'header.home' => 'Trip.ee',
     'header.news' => 'Uudised',
-    'header.flights' => 'Soodsad lennupiletid',
+    'header.flights' => 'Lennupakkumised',
     'header.travelmates' => 'Reisikaaslased',
     'header.forum' => 'Foorum',
     'header.photos' => 'Pildid',
@@ -13,13 +13,15 @@ return [
 
     'auth.register' => 'Registreeri',
     'auth.login' => 'Logi sisse',
-    'auth.admin' => 'Administraator',
+    'auth.admin' => 'Toimetus',
     'auth.logout' => 'Logi välja',
 
     'footer.news' => 'Uudised',
-    'footer.flights' => 'Soodsad lennupiletid',
+    'footer.flights' => 'Lennupakkumised',
     'footer.offers' => 'Pakkumised',
     'footer.travelmates' => 'Reisikaaslased',
+    'footer.blogs' => 'Reisikirjad',
+    'footer.photos' => 'Reisipildid',
 
     'footer2.forum' => 'Foorum',
     'footer2.expat' => 'Elu välismaal',
@@ -29,6 +31,8 @@ return [
     'footer3.contact' => 'Kontakt',
     'footer3.eula' => 'Kasutustingimused',
     'footer3.advertising' => 'Reklaam',
+    'footer3.flightfeed' => 'Lennupakkumiste RSS',
+    'footer3.newsfeed' => 'Uudiste RSS',
     'footer3.styleguide' => 'Styleguide',
 
     'footer-social.facebook' => 'Facebook',
@@ -37,20 +41,21 @@ return [
     'news.news' => 'Uudised',
     'news.shortnews' => 'Lühiuudised',
 
-    'forum.forum' => 'Üldine',
+    'forum.forum' => 'Üldfoorum',
     'forum.expat' => 'Elu välismaal',
     'forum.buysell' => 'Ost-müük',
 
-    'user.activity' => 'Ajalugu',
+    'user.activity' => 'Minu profiil',
     'user.profile' => 'Profiil',
     'user.edit.profile' => 'Muuda profiili',
     'user.message' => 'Sõnumid',
     'user.follow' => 'Jälgimised',
     'user.travelmate' => 'Otsid reisikaaslast?',
     'user.add.places' => 'Lisa riigid, kus oled käinud',
+    'user.photo' => 'Lisa reisipilt',
 
     'admin.internal' => 'Sisefoorum',
-    'admin.image' => 'Kõik pildid',
+    'admin.image' => 'Toimetuse pildid',
     'admin.content' => 'Peidetud sisu',
     'admin.sponsored' => 'Sponsorite artiklid',
 

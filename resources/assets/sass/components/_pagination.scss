@@ -4,7 +4,6 @@
     @include clear-list;
 
     width: 100%;
-    margin: $spacer 0;
 
     &.m-numbered {
 
@@ -17,6 +16,14 @@
     .c-pagination__item {
 
         display: block;
+        padding-left: 0;
+        margin-bottom: 0;
+
+        &::before {
+
+            content: normal;
+            position: static;
+        }
 
         .c-pagination.m-numbered & {
 

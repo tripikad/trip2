@@ -53,8 +53,6 @@ class Content extends Model
         if ($this->destinations->first()) {
             return $this->destinations->first()->parent()->first();
         }
-
-        return;
     }
 
     public function followersEmails()
@@ -74,7 +72,7 @@ class Content extends Model
             $image = config('imagepresets.presets.small.path').$this->image;
         }
 
-        if (! file_exists(public_path().$image)) {
+        if (! file_exists($image)) {
             $image = config('imagepresets.image.none');
         }
 
@@ -96,8 +94,6 @@ class Content extends Model
         if ($this->images->count() > 0) {
             return $this->images->first()->preset($preset);
         }
-
-        return;
     }
 
     public function getImageIdAttribute()
@@ -105,8 +101,6 @@ class Content extends Model
         if ($image = $this->images()->first()) {
             return '[['.$image->id.']]';
         }
-
-        return;
     }
 
     public function getActions()
@@ -163,5 +157,23 @@ class Content extends Model
                 'flag_type' => 'bad',
             ],
         ];
+    }
+
+    public function getHeadTitle()
+    {
+        return isset($this->price) ? $this->title.' '.$this->price.'€' : $this->title;
+    }
+
+    public function getHeadDescription()
+    {
+        $description = str_replace(["\n", "\t", "\r"], '', strip_tags($this->body));
+        $description = preg_replace("/\[\[([0-9]+)\]\]/", '', $description);
+
+        return str_limit(trim($description), 200);
+    }
+
+    public function getHeadImage()
+    {
+        return config('app.url').$this->imagePreset('large');
     }
 }

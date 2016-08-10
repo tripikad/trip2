@@ -2,15 +2,18 @@
 
     <div class="c-alert m-error js-alert">
 
-        @foreach ($errors->all() as $error)
+        <div class="c-alert__inner">
 
-            {{ $error }}
-            <br>
+            @foreach ($errors->all() as $error)
 
-        @endforeach
+                {{ $error }}
+                <br>
 
-        <span class="c-alert__close js-alert__close">&times;</span>
+            @endforeach
 
+            <span class="c-alert__close js-alert__close">&times;</span>
+
+        </div>
     </div>
 
 @endif

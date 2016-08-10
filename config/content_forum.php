@@ -9,7 +9,7 @@ return [
             'field' => 'updated_at',
             'order' => 'desc',
         ],
-        'paginate' => 25,
+        'paginate' => 35,
     ],
 
     'menu' => 'forum',
@@ -17,7 +17,10 @@ return [
     'edit' => [
 
         'fields' => [
-
+            'type' => [
+                'type' => 'radio',
+                'items' => 'menu.forum',
+            ],
             'title' => [
                 'type' => 'text',
             ],
