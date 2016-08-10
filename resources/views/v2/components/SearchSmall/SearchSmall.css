@@ -5,14 +5,14 @@
 	align-items: center;
 }
 
-	.SearchSmall__field{
+	.SearchSmall__field {
 		padding: $padding-xs;
 	}
 
-		.SearchSmall__field input{
+		.SearchSmall__field input {
 			border: $border-gray-sm;
 		}
 
-	.SearchSmall__icon{
+	.SearchSmall__icon {
 		cursor: pointer;
 	}

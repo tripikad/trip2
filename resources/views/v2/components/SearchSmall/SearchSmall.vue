@@ -27,24 +27,24 @@
 
 import Icon from '../Icon/Icon.vue'
 
-    export default {
+export default {
 
-        components: {
-            Icon
-        },
+    components: {
+        Icon
+    },
 
-        props: {
-            isclasses: { default: '' },
-            showField: false,
-            search: { default: '' }
-        },
+    props: {
+        isclasses: { default: '' },
+        showField: false,
+        search: { default: '' }
+    },
 
-        methods: {
-            Search: function () {
-                window.location = './search?q='+this.search;
-            }
+    methods: {
+        Search: function() {
+            window.location = './search?q=' + this.search
         }
-
     }
+
+}
 
 </script>
