@@ -17,7 +17,7 @@ class ForumItemSmall
             )
             ->with('title', $post->title)
             ->with('meta', collect()
-                ->push(component('LinkMeta')
+                ->push(component('Link')
                     ->with('title', $post->created_at->diffForHumans())
                 )
             )

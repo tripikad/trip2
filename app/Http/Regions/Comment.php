@@ -47,11 +47,11 @@ class Comment
                 ->with('rank', $comment->user->rank * 90)
             )
             ->with('meta', collect()
-                ->push(component('LinkMeta')
+                ->push(component('Link')
                     ->with('title', $comment->user->name)
                     ->with('route', route('user.show', [$comment->user]))
                 )
-                ->push(component('LinkMeta')
+                ->push(component('Link')
                     ->with('title', $comment->created_at->diffForHumans())
                     ->with('route', route('content.show', [
                         $comment->content->type, $comment->content, '#comment-'.$comment->id,
