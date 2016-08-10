@@ -1,5 +1,9 @@
 @if (isset($route) && $route != '')
-    <a href="{{ $route }}" class="c-link {{ $modifiers or '' }}">
+    <a href="{{ $route }}"
+       @if (isset($target) && $target != '')
+           target="{!! $target !!}"
+       @endif
+       class="c-link {{ $modifiers or '' }}">
 @else
     <span class="c-link {{ $modifiers or '' }}">
 @endif
