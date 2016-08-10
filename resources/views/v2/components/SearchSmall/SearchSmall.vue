@@ -13,10 +13,10 @@
 
         </div>
 
-        <div class="SearchSmall__field" v-if="ShowField" @keyup.enter="Search()">
+        <div class="SearchSmall__field" v-if="ShowField" @keyup.enter="Search(search)">
 
-            <input type="text">{{ search }}</input
-
+            <input type="text" v-model="search"></input
+            
         </div>
 
     </div>
@@ -41,7 +41,7 @@ import Icon from '../Icon/Icon.vue'
 
         methods: {
             Search: function (search) {
-                window.location('./search/q='+search);
+                window.location = './search?q='+search;
             }
         }
 
