@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use Cache;
-use DB;
 
 class Content extends Model
 {
@@ -179,8 +178,8 @@ class Content extends Model
         return config('app.url').$this->imagePreset('large');
     }
 
-    public static function IsNewContent($contents) {
-
+    public static function IsNewContent($contents)
+    {
         if (auth()->check()) {
             $userId = auth()->id();
 
@@ -208,6 +207,5 @@ class Content extends Model
         }
 
         return $contents;
-
     }
 }
