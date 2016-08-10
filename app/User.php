@@ -18,10 +18,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'email',
         'password',
         'image',
-        'role', // Why?
         'rank',
-        'verified', // Why?
-        'registration_token', // Why?
         'contact_facebook',
         'contact_twitter',
         'contact_instagram',
