@@ -1,12 +1,7 @@
 @import "variables";
 
-.Link {
-    display: inline;
-}
-
     .Link__title {
         font: $font-text-sm;
         color: $gray-dark;
-        display: inline;
     }
 

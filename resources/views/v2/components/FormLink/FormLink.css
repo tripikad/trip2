@@ -1,9 +1,9 @@
 @import "variables";
 
-    .FormLink__title {
-        background: none;
-        border: none;
-        color: $gray-dark;
-        font: $font-text-sm;
-    }
+.FormLink {
+    background: none;
+    border: none;
+    color: $gray-dark;
+    font: $font-text-sm;
+}
 
