@@ -9,7 +9,7 @@ class AuthTest extends TestCase
 
     public function test_user_can_register_confirm_and_login()
     {
-        $this->markTestSkipped();
+        //$this->markTestSkipped();
 
         // User can register
 
