@@ -7,6 +7,7 @@ use View;
 use Cache;
 use App\Destination;
 use App\Main;
+use App\Content;
 
 class FrontpageController extends Controller
 {
@@ -86,6 +87,8 @@ class FrontpageController extends Controller
         $viewVariables = Main::getContentCollections($types);
 
         $viewVariables['destinations'] = $destinations;
+
+        $viewVariables['forums'] = Content::IsNewContent($viewVariables['forums']);
 
         $getParentDestinations = [
             'flights1',

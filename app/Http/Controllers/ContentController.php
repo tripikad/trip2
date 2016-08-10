@@ -108,31 +108,7 @@ class ContentController extends Controller
         }
 
             // We get the current user id
-        if (auth()->check()) {
-            $userId = auth()->id();
-
-            // and assuming there is $contents collection, we iterate over its posts
-
-            $contents->map(function ($content) use ($userId) {
-                $key = 'new_'.$content->id.'_'.$userId;
-
-                // If the post is unread by the user or there are new comments
-
-                if (Cache::has($key)) {
-
-                    // Mark post as new so the view can style the post accordingly
-
-                    $content->isNew = true;
-
-                    // If there are new comments in the post, add relative link to the route
-                    // so the user will be redirected to the first new comment
-
-                        $content->route;
-                }
-
-                return $content;
-            });
-        }
+        $contents = Content::IsNewContent($contents);
 
         $viewVariables['contents'] = $contents;
         $viewVariables['type'] = $type;
@@ -185,6 +161,7 @@ class ContentController extends Controller
             $viewVariables = $this->getFlightShow($content);
         }
 
+        $viewVariables['forums'] = Content::IsNewContent($viewVariables['forums']);
         $viewVariables['content'] = $content;
         $viewVariables['comments'] = $comments;
         $viewVariables['type'] = $type;
