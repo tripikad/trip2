@@ -16,7 +16,7 @@ class StyleguideController extends Controller
         $user3 = User::find(5);
         $user2 = User::find(12);
 
-        $posts = Content::whereType('forum')->latest()->skip(10)->take(3)->get();
+        $posts = Content::whereType('forum')->latest()->skip(25)->take(3)->get();
 
         $destination = Destination::find(4639);
 

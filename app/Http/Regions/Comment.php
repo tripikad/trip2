@@ -40,6 +40,7 @@ class Comment
     public function render(Request $request, $comment)
     {
         return component('Comment')
+            ->is('unpublished')
             ->with('profile', component('ProfileImage')
                 ->with('route', route('user.show', [$comment->user]))
                 ->with('image', $comment->user->imagePreset('small_square'))
