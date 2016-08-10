@@ -35,6 +35,14 @@ class StyleguideController extends Controller
                     )
                 )
 
+                ->push(component('Map'))
+
+                ->push(component('FormCheckbox')
+                    ->with('label', 'klikka siia')
+                    ->with('name', 'name')
+
+                )
+
                 // ->push(region('CommentCreateForm', $posts->first()))
 
                 ->merge($posts->first()->comments->take(2)->map(function ($comment) {

@@ -9,6 +9,7 @@ import Flag from './components/Flag/Flag.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 import SearchSmall from './components/SearchSmall/SearchSmall.vue'
+import Map from './components/Map/Map.vue'
 
 const globalProps = JSON.parse(decodeURIComponent(
     document.querySelector('#globalprops').getAttribute('content')
@@ -28,7 +29,8 @@ new Vue({
         Flag,
         NavbarDesktop,
         NavbarMobile,
-        SearchSmall
+        SearchSmall,
+        Map
     },
 
     events: {

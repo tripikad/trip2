@@ -8,15 +8,15 @@
                 is="Icon"
                 icon="icon-search"
                 size="md"
-                @click="ShowField = true"
+                @click="showField = true"
             ></component>
 
         </div>
 
-        <div class="SearchSmall__field" v-if="ShowField" @keyup.enter="Search(search)">
+        <div class="SearchSmall__field" v-if="showField" @keyup.enter="Search()">
 
             <input type="text" v-model="search"></input
-            
+
         </div>
 
     </div>
@@ -35,13 +35,13 @@ import Icon from '../Icon/Icon.vue'
 
         props: {
             isclasses: { default: '' },
-            ShowField: false,
+            showField: false,
             search: { default: '' }
         },
 
         methods: {
-            Search: function (search) {
-                window.location = './search?q='+search;
+            Search: function () {
+                window.location = './search?q='+this.search;
             }
         }
 
