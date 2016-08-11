@@ -37,8 +37,10 @@ use Illuminate\Http\Request;
 
 class Comment
 {
-    public function render(Request $request, $comment)
+    public function render($comment)
     {
+        $user = auth()->user();
+
         return component('Comment')
             ->with('profile', component('ProfileImage')
                 ->with('route', route('user.show', [$comment->user]))
@@ -56,11 +58,14 @@ class Comment
                         $comment->content->type, $comment->content, '#comment-'.$comment->id,
                     ]))
                 )
-                ->push(component('Form')
-                    ->with('route', '')
-                    ->with('fields', collect()
-                        ->push(component('FormLink')->with('title', 'Jalgi'))
-                    )
+                ->pushWhen($user && $user->hasRole('admin'), component('Form')
+                        ->with('route', route('comment.status', [$comment, (1 - $comment->status)]))
+                        ->with('method', 'PUT')
+                        ->with('fields', collect()
+                            ->push(component('FormLink')
+                                ->with('title', trans("comment.action.status.$comment->status.title"))
+                            )
+                        )
                 )
                 ->push(component('Flag')
                     ->with('value', 1)

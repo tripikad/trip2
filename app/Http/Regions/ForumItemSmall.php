@@ -2,11 +2,9 @@
 
 namespace App\Http\Regions;
 
-use Illuminate\Http\Request;
-
 class ForumItemSmall
 {
-    public function render(Request $request, $post)
+    public function render($post)
     {
         return component('ForumItemSmall')
             ->with('route', route('content.show', [$post->type, $post]))

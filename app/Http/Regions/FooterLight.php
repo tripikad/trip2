@@ -2,7 +2,6 @@
 
 namespace App\Http\Regions;
 
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class FooterLight
@@ -22,7 +21,7 @@ class FooterLight
             });
     }
 
-    public function render(Request $request)
+    public function render()
     {
         return component('Footer')
             ->is('light')
