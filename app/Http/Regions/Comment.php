@@ -16,7 +16,7 @@
                'method' => 'PUT',
            ];
         }
-        
+
         {!! Form::open([
             'url' => $action['route'],
             'method' => isset($action['method']) ? $action['method'] : 'GET',
@@ -33,8 +33,6 @@
 
 namespace App\Http\Regions;
 
-use Illuminate\Http\Request;
-
 class Comment
 {
     public function render($comment)
@@ -43,7 +41,7 @@ class Comment
 
         return component('Comment')
             ->show($comment->status || ($user && $user->hasRole('admin')))
-            ->is($comment->status ?: 'unpublished') 
+            ->is($comment->status ?: 'unpublished')
             ->with('profile', component('ProfileImage')
                 ->with('route', route('user.show', [$comment->user]))
                 ->with('image', $comment->user->imagePreset('small_square'))
