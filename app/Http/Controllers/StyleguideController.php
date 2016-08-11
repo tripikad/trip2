@@ -26,7 +26,11 @@ class StyleguideController extends Controller
 
                 ->push(component('Header')
                     ->with('search', component('HeaderSearch'))
-                    ->with('logo', 'Logo')
+                    ->with('logo', component('Icon')
+                        ->with('icon', 'tripee_logo_plain_dark')
+                        ->with('width', 80)
+                        ->with('height', 30)
+                    )
                     ->with('navbar_desktop', region('NavbarDesktop'))
                     ->with('navbar_mobile', region('NavbarMobile'))
                 )

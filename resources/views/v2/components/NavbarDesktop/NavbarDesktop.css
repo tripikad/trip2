@@ -2,9 +2,9 @@
 
 .NavbarDesktop {
     position: relative;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
+    az-index: 1000;
+    adisplay: flex;
+    aalign-items: center;
 }
 
     .NavbarDesktop__links {

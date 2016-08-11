@@ -4,3 +4,23 @@
     display: flex;
     align-content: space-between;
 }
+
+    .Header__search {
+        display: block;
+        display: none ?if $mobile;
+    }
+
+    .Header__logo {
+        display: block ?if $mobile;
+        display: none;
+    }
+
+    .Header__navbarDesktop {
+        display: block;
+        display: none ?if $mobile;
+    }
+
+    .Header__navbarMobile {
+        display: block ?if $mobile;
+        display: none;
+    }

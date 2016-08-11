@@ -16,8 +16,6 @@
         align-items: center;
         background: $green;
         bottom: 0;
-        display: flex;
-        justify-content: center;
         left: 0;
         padding: $padding-md;
         position: fixed;
@@ -26,17 +24,22 @@
         z-index: 10000;
     }
 
-        .NavbarMobile__closeIcon {
-            cursor: pointer;
-            padding: $padding-lg;
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
+    .NavbarMobile__menuHeader {
+        display: flex;
+        justify-content: space-between;
+    }
 
-        .NavbarMobile__closeIcon svg {
-            fill: $white;
-        }
+    .NavbarMobile__closeIcon {
+        cursor: pointer;
+        padding: $padding-lg;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .NavbarMobile__closeIcon svg {
+        fill: $white;
+    }
 
         .NavbarMobile__links {
             padding: $padding-lg;
