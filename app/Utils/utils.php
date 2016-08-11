@@ -1,7 +1,6 @@
 <?php
 
 use App\Utils;
-use Illuminate\Http\Request;
 
 function component($component)
 {
@@ -12,7 +11,7 @@ function region($component, ...$arguments)
 {
     $class = "\App\Http\Regions\\$component";
 
-    return (new $class)->render(new Request, ...$arguments);
+    return (new $class)->render(...$arguments);
 }
 
 function format_smtp_header(array $data)

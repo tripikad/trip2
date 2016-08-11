@@ -7,7 +7,7 @@
     .ForumItem__left {
         display: flex;
         align-items: center;
-        padding-right: $padding-md;
+        padding-right: $padding-sm;
         display: none ?if $mobile;
     }
 
@@ -17,6 +17,7 @@
     }
 
     .ForumItem__title {
+        color: $gray-darkest;
         font: $font-heading-md;
         margin-bottom: $margin-xs;
     }

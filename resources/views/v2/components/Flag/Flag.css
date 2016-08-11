@@ -1,7 +1,7 @@
 @import "variables";
 
 .Flag {
-    display: inline-flex;
+    display: flex;
     align-items: baseline;
 }
 
