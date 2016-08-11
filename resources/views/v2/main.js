@@ -3,6 +3,7 @@ import VueResource from 'vue-resource'
 
 import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
+import HeaderSearch from './components/HeaderSearch/HeaderSearch.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import Flag from './components/Flag/Flag.vue'
@@ -23,6 +24,7 @@ new Vue({
     components: {
         Alert,
         Arc,
+        HeaderSearch,
         Icon,
         IconLoader,
         Flag,
