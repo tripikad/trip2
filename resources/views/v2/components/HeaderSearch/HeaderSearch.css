@@ -5,14 +5,18 @@
 	align-items: center;
 }
 
-	.HeaderSearch__field {
+	.HeaderSearch__icon {
+		cursor: pointer;
+		margin-right: $margin-sm;
+	}
+
+	.HeaderSearch__input {
+		background: none;
+		border: none;
+		font: $font-text-md;
 		padding: $padding-xs;
 	}
 
-		.HeaderSearch__field input {
-			border: $border-gray-sm;
-		}
-
-	.HeaderSearch__icon {
-		cursor: pointer;
-	}
+.HeaderSearch--active .HeaderSearch__icon svg {
+	fill: $green;
+}

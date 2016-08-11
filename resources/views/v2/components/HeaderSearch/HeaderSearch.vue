@@ -1,6 +1,6 @@
 <template>
 
-    <div class="HeaderSearch" :class="isclasses">
+    <div class="HeaderSearch" :class="{ 'HeaderSearch--active': active }">
 
         <div class="HeaderSearch__icon">
 
@@ -8,16 +8,19 @@
                 is="Icon"
                 icon="icon-search"
                 size="md"
-                @click="showField = true"
+                @click="active = ! active"
             ></component>
 
         </div>
 
-        <div class="HeaderSearch__field" v-if="showField" @keyup.enter="Search()">
-
-            <input type="text" v-model="search"></input
-
-        </div>
+        <input
+            class="HeaderSearch__input"
+            type="text"
+            v-model="keywords"
+            @keyup.enter="search()"
+            v-focus="active"
+            @click="active = true"
+        >
 
     </div>
 
@@ -26,6 +29,7 @@
 <script>
 
 import Icon from '../Icon/Icon.vue'
+import { focus } from 'vue-focus'
 
 export default {
 
@@ -33,15 +37,22 @@ export default {
         Icon
     },
 
+    directives: { focus },
+
     props: {
         isclasses: { default: '' },
-        showField: false,
-        search: { default: '' }
+        keywords: { default: '' }
+    },
+
+    data: function() {
+        return {
+            active: false
+        }
     },
 
     methods: {
-        Search: function() {
-            window.location = '/search?q=' + this.search
+        search: function() {
+            window.location = '/search?q=' + this.keywords
         }
     }
 
