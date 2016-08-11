@@ -24,6 +24,13 @@ class StyleguideController extends Controller
         return view('v2.layouts.1col')
             ->with('content', collect()
 
+                ->push(component('Header')
+                    ->with('search', component('HeaderSearch'))
+                    ->with('logo', 'Logo')
+                    ->with('navbar_desktop', region('NavbarDesktop'))
+                    ->with('navbar_mobile', region('NavbarMobile'))
+                )
+
                 ->push(component('DestinationBar')
                     ->with('route', route('destination.show', [$destination]))
                     ->with('title', $destination->name)

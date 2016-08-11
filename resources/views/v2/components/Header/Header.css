@@ -1,0 +1,6 @@
+@import "variables";
+
+.Header {
+    display: flex;
+    align-content: space-between;
+}
