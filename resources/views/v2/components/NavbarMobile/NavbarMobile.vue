@@ -8,7 +8,7 @@
             @click="toggle()"
         >
         
-            <component is="Icon" icon="icon-menu"></component>
+            <component is="Icon" icon="icon-menu" size="lg"></component>
         
         </div>
 
@@ -20,7 +20,7 @@
 
             <div class="NavbarMobile__closeIcon" @click="toggle()">
                 
-                <component is="Icon" icon="icon-close"></component>
+                <component is="Icon" icon="icon-close" size="lg"></component>
 
             </div>
 
