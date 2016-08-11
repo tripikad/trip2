@@ -1,0 +1,22 @@
+@import "variables";
+
+.HeaderSearch {
+	display: flex;
+	align-items: center;
+}
+
+	.HeaderSearch__icon {
+		cursor: pointer;
+		margin-right: $margin-sm;
+	}
+
+	.HeaderSearch__input {
+		background: none;
+		border: none;
+		font: $font-text-md;
+		padding: $padding-xs;
+	}
+
+.HeaderSearch--active .HeaderSearch__icon svg {
+	fill: $green;
+}
