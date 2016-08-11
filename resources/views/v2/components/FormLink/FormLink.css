@@ -4,6 +4,7 @@
     background: none;
     border: none;
     color: $gray-dark;
+    cursor: pointer;
     font: $font-text-sm;
 }
 

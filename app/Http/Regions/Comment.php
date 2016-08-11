@@ -60,6 +60,10 @@ class Comment
                         $comment->content->type, $comment->content, '#comment-'.$comment->id,
                     ]))
                 )
+                ->pushWhen($user && $user->hasRoleOrOwner('admin', $comment->user->id), component('Link')
+                    ->with('title', trans('comment.action.edit.title'))
+                    ->with('route', route('comment.edit', [$comment]))
+                )
                 ->pushWhen($user && $user->hasRole('admin'), component('Form')
                         ->with('route', route('comment.status', [$comment, (1 - $comment->status)]))
                         ->with('method', 'PUT')
