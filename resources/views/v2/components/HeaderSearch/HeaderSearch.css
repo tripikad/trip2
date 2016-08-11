@@ -1,18 +1,18 @@
 @import "variables";
 
-.SearchSmall {
+.HeaderSearch {
 	display: flex;
 	align-items: center;
 }
 
-	.SearchSmall__field {
+	.HeaderSearch__field {
 		padding: $padding-xs;
 	}
 
-		.SearchSmall__field input {
+		.HeaderSearch__field input {
 			border: $border-gray-sm;
 		}
 
-	.SearchSmall__icon {
+	.HeaderSearch__icon {
 		cursor: pointer;
 	}

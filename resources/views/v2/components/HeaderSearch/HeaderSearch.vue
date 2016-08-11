@@ -1,8 +1,8 @@
 <template>
 
-    <div class="SearchSmall" :class="isclasses">
+    <div class="HeaderSearch" :class="isclasses">
 
-        <div class="SearchSmall__icon">
+        <div class="HeaderSearch__icon">
 
             <component
                 is="Icon"
@@ -13,7 +13,7 @@
 
         </div>
 
-        <div class="SearchSmall__field" v-if="showField" @keyup.enter="Search()">
+        <div class="HeaderSearch__field" v-if="showField" @keyup.enter="Search()">
 
             <input type="text" v-model="search"></input
 
@@ -41,7 +41,7 @@ export default {
 
     methods: {
         Search: function() {
-            window.location = './search?q=' + this.search
+            window.location = '/search?q=' + this.search
         }
     }
 

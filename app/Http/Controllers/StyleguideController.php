@@ -24,7 +24,7 @@ class StyleguideController extends Controller
         return view('v2.layouts.1col')
             ->with('content', collect()
 
-                ->push(component('SearchSmall')->with('title', 'I am SearchSmall'))
+                ->push(component('HeaderSearch'))
 
                 ->push(component('DestinationBar')
                     ->with('route', route('destination.show', [$destination]))

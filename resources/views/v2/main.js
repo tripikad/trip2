@@ -3,12 +3,12 @@ import VueResource from 'vue-resource'
 
 import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
+import HeaderSearch from './components/HeaderSearch/HeaderSearch.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import Flag from './components/Flag/Flag.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
-import SearchSmall from './components/SearchSmall/SearchSmall.vue'
 import Map from './components/Map/Map.vue'
 
 const globalProps = JSON.parse(decodeURIComponent(
@@ -24,12 +24,12 @@ new Vue({
     components: {
         Alert,
         Arc,
+        HeaderSearch,
         Icon,
         IconLoader,
         Flag,
         NavbarDesktop,
         NavbarMobile,
-        SearchSmall,
         Map
     },
 
