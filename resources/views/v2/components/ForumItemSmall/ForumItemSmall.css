@@ -9,7 +9,8 @@
     }
 
     .ForumItemSmall__title {
+        color: $gray-darkest;
         font: $font-heading-md;
-        margin-right: $margin-xs;
         margin-bottom: $margin-xs;
+        margin-right: $margin-xs;
     }

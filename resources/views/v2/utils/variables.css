@@ -14,9 +14,16 @@ $red: #ed6262;
 $yellow-dark: #d67d00;
 $yellow: #f7ba00;
 
+/* Special colors */
+
+$pink: #fff3f3;
+
 /* Neutral colors */
+
 $white: #fff;
 $black: #000;
+
+/* Grays */
 
 $gray-lighter: #fbfcfd;
 $gray-light: #f7f9fa;
@@ -159,7 +166,6 @@ $height-xxxxl: $width-xxxxl;
 $border-gray-sm: 1px solid $gray-dark;
 $border-gray-md: 2px solid $gray;
 $border-green-md: 2px solid $green;
-$border-red-md: 2px solid $red;
 
 /* Border radiuses */
 $border-radius-md: 3px;

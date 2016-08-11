@@ -17,9 +17,15 @@
 
     .Comment__meta {
         margin-bottom: $margin-sm;
+        display: flex;
+        align-items: baseline;
+    }
+
+    .Comment__meta > * {
+        margin-right: $margin-sm;
     }
 
 .Comment--unpublished {
-    border: $border-red-md;
     opacity: $opacity-md;
+    background: $pink;
 }

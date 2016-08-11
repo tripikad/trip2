@@ -27,7 +27,6 @@
     }
 
         .NavbarMobile__closeIcon {
-            color: $white;
             cursor: pointer;
             padding: $padding-lg;
             position: absolute;
@@ -36,7 +35,7 @@
         }
 
         .NavbarMobile__closeIcon svg {
-            fill: $gray;
+            fill: $white;
         }
 
         .NavbarMobile__links {
