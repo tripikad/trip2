@@ -24,6 +24,10 @@ class StyleguideController extends Controller
         return view('v2.layouts.1col')
             ->with('content', collect()
 
+                 ->push(component('MastHeadNews')
+                    ->with('title', 'No bluff you! Jetstar Asia teavitab reisijaid singlishis.')
+                    )
+
                 ->push(component('HeaderSearch'))
 
                 ->push(component('DestinationBar')
