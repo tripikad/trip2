@@ -51,3 +51,7 @@
             text-align: center;
             padding: $padding-sm;
         }
+
+.HeaderNavbarMobile--white .HeaderNavbarMobile__menuIcon svg {
+    fill: $white;
+}

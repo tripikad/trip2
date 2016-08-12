@@ -20,3 +20,11 @@
 	.HeaderSearch__input:focus {
 	    outline: none;
 	}
+
+.HeaderSearch--white {
+	fill: $white;
+}
+	
+	.HeaderSearch--white .HeaderSearch__input {
+		color: $white;
+	}

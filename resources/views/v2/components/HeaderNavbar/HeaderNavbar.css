@@ -51,3 +51,7 @@
         font: $font-heading-sm;
         background: $green-dark;
     }
+
+.HeaderNavbar--white .HeaderNavbar__link {
+    color: $white;
+}

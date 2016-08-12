@@ -1,6 +1,6 @@
 <template>
 
-    <div class="HeaderSearch" :class="{ 'HeaderSearch--active': active }">
+    <div class="HeaderSearch" :class="[ isclasses, { 'HeaderSearch--active': active }]">
 
         <div class="HeaderSearch__icon">
 
