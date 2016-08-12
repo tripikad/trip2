@@ -39,7 +39,7 @@ class StyleguideController extends Controller
                         ->with('navbar', region('HeaderNavbar'))
                         ->with('navbar_mobile', region('HeaderNavbarMobile'))
                         )
-                        ->with('meta',  $news->created_at->diffForHumans())
+                        ->with('meta', $news->created_at->diffForHumans())
                     )
 
                 ->push(component('HeaderSearch'))
