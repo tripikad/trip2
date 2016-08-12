@@ -7,7 +7,7 @@ import HeaderSearch from './components/HeaderSearch/HeaderSearch.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import Flag from './components/Flag/Flag.vue'
-import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
+import HeaderNavbar from './components/HeaderNavbar/HeaderNavbar.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 import Map from './components/Map/Map.vue'
 
@@ -28,7 +28,7 @@ new Vue({
         Icon,
         IconLoader,
         Flag,
-        NavbarDesktop,
+        HeaderNavbar,
         NavbarMobile,
         Map
     },

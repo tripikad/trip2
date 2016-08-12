@@ -2,7 +2,7 @@
 
 $search = $search ?? '';
 $logo = $logo ?? '';
-$navbar_desktop = $navbar_desktop ?? '';
+$navbar = $navbar?? '';
 $navbar_mobile = $navbar_mobile ?? '';
 
 @endphp
@@ -27,9 +27,9 @@ $navbar_mobile = $navbar_mobile ?? '';
 
     <div class="Header__right">
 
-        <div class="Header__navbarDesktop">
+        <div class="Header__navbar">
 
-            {!! $navbar_desktop !!}
+            {!! $navbar !!}
 
         </div>
 

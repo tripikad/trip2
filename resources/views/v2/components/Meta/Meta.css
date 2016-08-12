@@ -1,9 +1,11 @@
 @import "variables";
 
 .Meta {
-
+    display: flex;
+    align-items: center;
 }
 
-    .Meta__title {
-
+    .Meta__item {
+        margin-right: $margin-xs;
     }
+

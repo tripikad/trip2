@@ -1,32 +1,32 @@
 @import "variables";
 
-.NavbarDesktop {
+.HeaderNavbar {
     position: relative;
 }
 
-    .NavbarDesktop__links {
+    .HeaderNavbar__links {
         display: flex;
     }
 
-    .NavbarDesktop__link {
+    .HeaderNavbar__link {
         padding: $padding-sm;
         color: $gray-darker;
         font: $font-heading-sm;
     }
 
-    .NavbarDesktop__popover {
+    .HeaderNavbar__popover {
         width: $width-xxl;
         position: absolute;
         right: 0;
         top: $height-md;
     }
 
-    .NavbarDesktop__arrowWrapper {
+    .HeaderNavbar__arrowWrapper {
         display: flex;
         justify-content: center;
     }
 
-    .NavbarDesktop__arrow {
+    .HeaderNavbar__arrow {
         width: 0;
         height: 0;
         border-left: $width-xxs solid transparent;
@@ -34,19 +34,19 @@
         border-bottom: $width-xxs solid $green;
     }
 
-    .NavbarDesktop__sublinks {
+    .HeaderNavbar__sublinks {
         border-radius: $border-radius-md;
         background: $green;
         padding: $padding-xs 0;
     }
 
-    .NavbarDesktop__sublink {
+    .HeaderNavbar__sublink {
         color: $white;
         font: $font-heading-sm;
         padding: $padding-xs $padding-sm;
     }
 
-    .NavbarDesktop__sublink:hover {
+    .HeaderNavbar__sublink:hover {
         color: $white;
         font: $font-heading-sm;
         background: $green-dark;

@@ -31,7 +31,7 @@ class StyleguideController extends Controller
                         ->with('width', 80)
                         ->with('height', 30)
                     )
-                    ->with('navbar_desktop', region('NavbarDesktop'))
+                    ->with('navbar', region('HeaderNavbar'))
                     ->with('navbar_mobile', region('NavbarMobile'))
                 )
 
@@ -66,10 +66,6 @@ class StyleguideController extends Controller
                 )
 
                 ->push(component('Alert'))
-
-                ->push(region('NavbarDesktop'))
-
-                ->push(region('NavbarMobile'))
 
                 ->push(component('Form')
                     ->with('route', route('styleguide.form'))

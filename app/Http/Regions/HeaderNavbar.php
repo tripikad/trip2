@@ -2,7 +2,7 @@
 
 namespace App\Http\Regions;
 
-class NavbarDesktop
+class HeaderNavbar
 {
     protected function prepareLinks()
     {
@@ -69,7 +69,7 @@ class NavbarDesktop
     public function render()
     {
         return collect()
-            ->push(component('NavbarDesktop')
+            ->push(component('HeaderNavbar')
                 ->with('links', $this->prepareLinks())
                 ->with('sublinks', $this->prepareSublinks())
                 ->render()
