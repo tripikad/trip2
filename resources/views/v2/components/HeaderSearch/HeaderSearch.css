@@ -17,6 +17,6 @@
 		padding: $padding-xs;
 	}
 
-.HeaderSearch--active .HeaderSearch__icon svg {
-	fill: $green;
-}
+	.HeaderSearch__input:focus {
+	    outline: none;
+	}

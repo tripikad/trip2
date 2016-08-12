@@ -1,9 +1,9 @@
 <template>
 
-    <div class="NavbarMobile" :class="isclasses">
+    <div class="HeaderNavbarMobile" :class="isclasses">
 
         <div
-            class="NavbarMobile__menuIcon"
+            class="HeaderNavbarMobile__menuIcon"
             v-if="! menuOpen"
             @click="toggle()"
         >
@@ -14,17 +14,27 @@
 
         <div
             v-else
-            class="NavbarMobile__menu"
+            class="HeaderNavbarMobile__menu"
             transition="fadeZoom"
         >
 
-            <div class="NavbarMobile__closeIcon" @click="toggle()">
+            <div class="HeaderNavbarMobile__header">
+
+                <div class="HeaderNavbarMobile__search">
                 
-                <component is="Icon" icon="icon-close" size="lg"></component>
+                    <component is="headerSearch"></component>
+                
+                </div>
+
+                <div class="HeaderNavbarMobile__closeIcon" @click="toggle()">
+                    
+                    <component is="Icon" icon="icon-close" size="lg"></component>
+
+                </div>
 
             </div>
 
-            <div class="NavbarMobile__links">
+            <div class="HeaderNavbarMobile__links">
        
                 <a
                     v-for="link in links"
@@ -32,7 +42,7 @@
                     track-by="$index"
                 >
 
-                    <div class="NavbarMobile__link">
+                    <div class="HeaderNavbarMobile__link">
                         
                         {{ link.title }}
                         
@@ -46,7 +56,7 @@
                     track-by="$index"
                 >
 
-                    <div class="NavbarMobile__link">
+                    <div class="HeaderNavbarMobile__link">
                         
                         {{ link.title }}
                         
@@ -64,11 +74,13 @@
 
 <script>
 
+    import HeaderSearch from '../HeaderSearch/HeaderSearch.vue'
     import Icon from '../Icon/Icon.vue'
 
     export default {
     
         components: {
+            HeaderSearch,
             Icon
         },
 

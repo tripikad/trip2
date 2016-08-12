@@ -16,20 +16,21 @@ class ForumItem
                 ->with('border', 4)
             )
             ->with('title', $post->title)
-            ->with('meta', collect()
-                ->push(component('Link')
-                    ->with('title', $post->user->name)
-                    ->with('route', route('user.show', [$post->user]))
+            ->with('meta', component('Meta')->with('items', collect()
+                    ->push(component('Link')
+                        ->with('title', $post->user->name)
+                        ->with('route', route('user.show', [$post->user]))
+                    )
+                    ->push(component('Link')
+                        ->with('title', $post->created_at->diffForHumans())
+                    )
+                    ->merge($post->destinations->map(function ($tag) {
+                        return component('Tag')->is('orange')->with('title', $tag->name);
+                    }))
+                    ->merge($post->topics->map(function ($tag) {
+                        return component('Tag')->with('title', $tag->name);
+                    }))
                 )
-                ->push(component('Link')
-                    ->with('title', $post->created_at->diffForHumans())
-                )
-                ->merge($post->destinations->map(function ($tag) {
-                    return component('Tag')->is('orange')->with('title', $tag->name);
-                }))
-                ->merge($post->topics->map(function ($tag) {
-                    return component('Tag')->with('title', $tag->name);
-                }))
             );
     }
 }

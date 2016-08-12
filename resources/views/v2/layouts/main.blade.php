@@ -16,8 +16,8 @@
     </head>
     <body>
 
-        <component is="IconLoader" route="/v2/svg/main.svg"></component>
-
+        @include('v2.include.svg')
+        
         @yield('header')
         @yield('content')
         @yield('footer')

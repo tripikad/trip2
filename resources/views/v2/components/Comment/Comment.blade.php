@@ -21,11 +21,7 @@ $body = $body ?? '';
 
         <div class="Comment__meta">
 
-        @foreach ($meta as $meta_item)
-
-            {!! $meta_item !!}
-
-        @endforeach
+            {!! $meta !!}
 
         </div>
 
