@@ -32,7 +32,7 @@ class StyleguideController extends Controller
                         ->with('height', 30)
                     )
                     ->with('navbar', region('HeaderNavbar'))
-                    ->with('navbar_mobile', region('NavbarMobile'))
+                    ->with('navbar_mobile', region('HeaderNavbarMobile'))
                 )
 
                 ->push(component('DestinationBar')

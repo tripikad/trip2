@@ -1,18 +1,18 @@
 @import "variables";
 
-.NavbarMobile {
+.HeaderNavbarMobile {
     display: block;
 }
 
-    .NavbarMobile__menuIcon {
+    .HeaderNavbarMobile__menuIcon {
         cursor: pointer;
     }
 
-    .NavbarMobile__menuIcon svg {
+    .HeaderNavbarMobile__menuIcon svg {
         fill: $gray-darker;
     }
 
-    .NavbarMobile__menu {
+    .HeaderNavbarMobile__menu {
         align-items: center;
         background: $green;
         bottom: 0;
@@ -24,12 +24,12 @@
         z-index: 10000;
     }
 
-    .NavbarMobile__menuHeader {
+    .HeaderNavbarMobile__menuHeader {
         display: flex;
         justify-content: space-between;
     }
 
-    .NavbarMobile__closeIcon {
+    .HeaderNavbarMobile__closeIcon {
         cursor: pointer;
         padding: $padding-lg;
         position: absolute;
@@ -37,15 +37,15 @@
         top: 0;
     }
 
-    .NavbarMobile__closeIcon svg {
+    .HeaderNavbarMobile__closeIcon svg {
         fill: $white;
     }
 
-        .NavbarMobile__links {
+        .HeaderNavbarMobile__links {
             padding: $padding-lg;
         }
 
-        .NavbarMobile__link {
+        .HeaderNavbarMobile__link {
             color: $white;
             font: $font-text-lg;
             text-align: center;

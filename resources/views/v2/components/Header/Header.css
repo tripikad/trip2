@@ -7,20 +7,20 @@
 
     .Header__search {
         display: block;
-        display: none ?if $mobile;
+        display: none ?if $tablet;
     }
 
     .Header__logo {
-        display: block ?if $mobile;
+        display: block ?if $tablet;
         display: none;
     }
 
-    .Header__navbarDesktop {
+    .Header__navbar {
         display: block;
-        display: none ?if $mobile;
+        display: none ?if $tablet;
     }
 
     .Header__navbarMobile {
-        display: block ?if $mobile;
+        display: block ?if $tablet;
         display: none;
     }

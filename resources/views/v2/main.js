@@ -8,7 +8,7 @@ import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import Flag from './components/Flag/Flag.vue'
 import HeaderNavbar from './components/HeaderNavbar/HeaderNavbar.vue'
-import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
+import HeaderNavbarMobile from './components/HeaderNavbarMobile/HeaderNavbarMobile.vue'
 import Map from './components/Map/Map.vue'
 
 const globalProps = JSON.parse(decodeURIComponent(
@@ -29,7 +29,7 @@ new Vue({
         IconLoader,
         Flag,
         HeaderNavbar,
-        NavbarMobile,
+        HeaderNavbarMobile,
         Map
     },
 
