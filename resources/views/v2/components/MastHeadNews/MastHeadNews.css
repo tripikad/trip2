@@ -19,7 +19,8 @@
         display: flex;
         flex-direction: column;
         max-width: 60%;
-        margin: $margin-xxxl 0 $margin-md 0;
+        margin: calc($spacer * 22) 0 $margin-md 0;
+        margin: calc($spacer * 11) 0 $margin-md 0 ?if $mobile;
     }
 
         .MastHeadNews__title { 
