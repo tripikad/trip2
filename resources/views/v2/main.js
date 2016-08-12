@@ -7,8 +7,8 @@ import HeaderSearch from './components/HeaderSearch/HeaderSearch.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import Flag from './components/Flag/Flag.vue'
-import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
-import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
+import HeaderNavbar from './components/HeaderNavbar/HeaderNavbar.vue'
+import HeaderNavbarMobile from './components/HeaderNavbarMobile/HeaderNavbarMobile.vue'
 import Map from './components/Map/Map.vue'
 
 const globalProps = JSON.parse(decodeURIComponent(
@@ -28,8 +28,8 @@ new Vue({
         Icon,
         IconLoader,
         Flag,
-        NavbarDesktop,
-        NavbarMobile,
+        HeaderNavbar,
+        HeaderNavbarMobile,
         Map
     },
 

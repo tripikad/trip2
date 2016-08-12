@@ -30,6 +30,17 @@ class StyleguideController extends Controller
                     )
 
                 ->push(component('HeaderSearch'))
+                
+                ->push(component('Header')
+                    ->with('search', component('HeaderSearch'))
+                    ->with('logo', component('Icon')
+                        ->with('icon', 'tripee_logo_plain_dark')
+                        ->with('width', 80)
+                        ->with('height', 30)
+                    )
+                    ->with('navbar', region('HeaderNavbar'))
+                    ->with('navbar_mobile', region('HeaderNavbarMobile'))
+                )
 
                 ->push(component('DestinationBar')
                     ->with('route', route('destination.show', [$destination]))
@@ -40,7 +51,7 @@ class StyleguideController extends Controller
                     )
                 )
 
-                ->push(component('Map'))
+                // ->push(component('Map'))
 
                 // ->push(region('CommentCreateForm', $posts->first()))
 
@@ -62,10 +73,6 @@ class StyleguideController extends Controller
                 )
 
                 ->push(component('Alert'))
-
-                ->push(region('NavbarDesktop'))
-
-                ->push(region('NavbarMobile'))
 
                 ->push(component('Form')
                     ->with('route', route('styleguide.form'))

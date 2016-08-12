@@ -166,6 +166,7 @@ $height-xxxxl: $width-xxxxl;
 $border-gray-sm: 1px solid $gray-dark;
 $border-gray-md: 2px solid $gray;
 $border-green-md: 2px solid $green;
+$border-white-md: 2px solid $white;
 
 /* Border radiuses */
 $border-radius-md: 3px;

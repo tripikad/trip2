@@ -16,9 +16,11 @@
         <input
             class="HeaderSearch__input"
             type="text"
+            size="12"
             v-model="keywords"
             @keyup.enter="search()"
             v-focus="active"
+            v-if="active"
             @click="active = true"
         >
 
