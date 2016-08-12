@@ -21,11 +21,3 @@
         font: $font-heading-md;
         margin-bottom: $margin-xs;
     }
-
-    .ForumItem__meta {
-        display: flex;
-    }
-
-    .ForumItem__meta > * {
-        margin-right: $margin-xs;
-    }
