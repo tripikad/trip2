@@ -66,10 +66,11 @@ class HeaderNavbar
             ->toArray();
     }
 
-    public function render()
+    public function render($color = '')
     {
         return collect()
             ->push(component('HeaderNavbar')
+                ->is($color)
                 ->with('links', $this->prepareLinks())
                 ->with('sublinks', $this->prepareSublinks())
                 ->render()
