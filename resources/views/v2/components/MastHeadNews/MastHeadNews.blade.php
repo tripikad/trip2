@@ -1,7 +1,8 @@
 @php
 
 
-$background = $background ?? '/photos/header2.jpg';
+$background = $background ?? '';
+$header = $header ?? '';
 $title = $title ?? '';
 
 @endphp
@@ -12,15 +13,11 @@ $title = $title ?? '';
       rgba(0, 0, 0, 0.3)
     ), url({{ $background }});">
 
-    <a href="/" class="MastHeadNews__icon">
+    <div class="MastHeadNews__header">
 
-            <component
-                is="Icon"
-                icon="tripee_logo_plain"
-                size="xl"
-            ></component>
+        {{ $header }}
 
-        </a>
+    </div>
 
     <div class="MastHeadNews__title">
 

@@ -26,6 +26,7 @@ class StyleguideController extends Controller
 
                  ->push(component('MastHeadNews')
                     ->with('title', 'No bluff you! Jetstar Asia teavitab reisijaid singlishis.')
+                    ->with('background', '/photos/header2.jpg')
                     )
 
                 ->push(component('HeaderSearch'))
