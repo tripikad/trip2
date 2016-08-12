@@ -44,7 +44,7 @@ class StyleguideController extends Controller
                     )
                 )
 
-                ->push(component('Map'))
+                // ->push(component('Map'))
 
                 // ->push(region('CommentCreateForm', $posts->first()))
 

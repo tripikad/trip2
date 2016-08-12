@@ -19,6 +19,7 @@
             v-model="keywords"
             @keyup.enter="search()"
             v-focus="active"
+            v-if="active"
             @click="active = true"
         >
 

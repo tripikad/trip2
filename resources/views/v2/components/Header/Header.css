@@ -2,7 +2,7 @@
 
 .Header {
     display: flex;
-    align-content: space-between;
+    justify-content: space-between;
 }
 
     .Header__search {

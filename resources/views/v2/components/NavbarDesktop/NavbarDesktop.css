@@ -2,9 +2,6 @@
 
 .NavbarDesktop {
     position: relative;
-    az-index: 1000;
-    adisplay: flex;
-    aalign-items: center;
 }
 
     .NavbarDesktop__links {
