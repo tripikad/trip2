@@ -18,6 +18,8 @@ class StyleguideController extends Controller
 
         $posts = Content::whereType('forum')->latest()->skip(25)->take(3)->get();
 
+        $news = Content::find(98479);
+
         $destination = Destination::find(4639);
 
 
@@ -25,12 +27,23 @@ class StyleguideController extends Controller
             ->with('content', collect()
 
                  ->push(component('MastHeadNews')
-                    ->with('title', 'No bluff you! Jetstar Asia teavitab reisijaid singlishis.')
+                    ->with('title', $news->title)
                     ->with('background', '/photos/header2.jpg')
+                    ->with('header', component('Header')
+                        ->with('search', component('HeaderSearch'))
+                        ->with('logo', component('Icon')
+                            ->with('icon', 'tripee_logo_plain_dark')
+                            ->with('width', 80)
+                            ->with('height', 30)
+                        )
+                        ->with('navbar', region('HeaderNavbar'))
+                        ->with('navbar_mobile', region('HeaderNavbarMobile'))
+                        )
+                        ->with('meta',  $news->created_at->diffForHumans())
                     )
 
                 ->push(component('HeaderSearch'))
-                
+
                 ->push(component('Header')
                     ->with('search', component('HeaderSearch'))
                     ->with('logo', component('Icon')

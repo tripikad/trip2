@@ -1,9 +1,9 @@
 @php
 
-
 $background = $background ?? '';
 $header = $header ?? '';
 $title = $title ?? '';
+$meta = $meta ?? '';
 
 @endphp
 
@@ -15,14 +15,28 @@ $title = $title ?? '';
 
     <div class="MastHeadNews__header">
 
-        {{ $header }}
+    	<div class="container">
+
+        	{!! $header !!}
+        	
+        </div>
 
     </div>
 
-    <div class="MastHeadNews__title">
+    <div class="MastHeadNews__body">
+
+    	<div class="MastHeadNews__title">
 
         {{ $title }}
 
-    </div>
+        </div>
+
+        <div class="MastHeadNews__meta">
+
+        {{ $meta }}
+
+    	</div>
+
+    </div>   
 
 </div>

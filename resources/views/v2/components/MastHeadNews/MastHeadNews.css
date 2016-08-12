@@ -4,33 +4,37 @@
 	height: 40vh;
 	width: 100%;
 	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-	align-items: center;
+	justify-content: center;
+    flex-wrap: wrap;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
 
-    .MastHeadNews__title {
-    	font: $font-heading-xl;
-    	color: $white;
-    	background-color: rgba(0,0,0,0.3);
-    	padding: $padding-xs;
-    	border-radius: 5px;
-    	max-width: 60%;
+    .MastHeadNews__header {
+        width: 100%;
+        padding-top: $padding-xs;
+    }
+
+    .MastHeadNews__body {
+        align-self: flex-end;
+        display: flex;
+        flex-direction: column;
+        max-width: 60%;
         margin-bottom: $margin-lg;
-    	text-align: center;
     }
 
-@media screen and (max-width: 700px) {
-    .MastHeadNews__title {
-    	font: $font-heading-lg;
-    }
-}
+        .MastHeadNews__title { 
+        	font: $font-heading-xl;
+            font: $font-heading-lg ?if $mobile;
+        	color: $white;
+        	padding: $padding-xs;
+            text-align: center;  
+        }
 
-@media screen and (max-width: 500px) {
-    .MastHeadNews__title {
-        font: $font-heading-md;
-        line-height: 125%;
-    }
-}
+        .MastHeadNews__meta {
+            align-self: flex-end;
+            color: $white;
+            opacity: $opacity-md;
+        }
+
+
