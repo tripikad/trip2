@@ -7,36 +7,36 @@ $meta = $meta ?? '';
 
 @endphp
 
-<div class="MastHeadNews {{ $isclasses }}" 
+<div class="MastheadNews {{ $isclasses }}" 
 	style="background-image: linear-gradient(
       rgba(0, 0, 0, 0.1),
       rgba(0, 0, 0, 0.3)
     ), url({{ $background }});">
 
-    <div class="MastHeadNews__header">
+    <div class="container">
 
-    	<div class="container">
+        <div class="MastheadNews__header">
 
         	{!! $header !!}
         	
         </div>
 
+        <div class="MastheadNews__content">
+
+        	<div class="MastheadNews__title">
+
+            {!! $title !!}
+
+            </div>
+
+            <div class="MastheadNews__meta">
+
+            {!! $meta !!}
+
+        	</div>
+
+        </div>   
+
     </div>
-
-    <div class="MastHeadNews__body">
-
-    	<div class="MastHeadNews__title">
-
-        {{ $title }}
-
-        </div>
-
-        <div class="MastHeadNews__meta">
-
-        {{ $meta }}
-
-    	</div>
-
-    </div>   
 
 </div>

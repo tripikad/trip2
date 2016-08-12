@@ -24,7 +24,7 @@ class StyleguideController extends Controller
 
 
         return view('v2.layouts.1col')
-            ->with('header', component('MastHeadNews')
+            ->with('header', component('MastheadNews')
                     ->with('title', $news->title)
                     ->with('background', '/photos/header2.jpg')
                     ->with('header', component('Header')
@@ -36,10 +36,19 @@ class StyleguideController extends Controller
                         )
                         ->with('navbar', region('HeaderNavbar'))
                         ->with('navbar_mobile', region('HeaderNavbarMobile'))
-                        )
-                        ->with('meta', $news->created_at->diffForHumans())
                     )
-
+                    ->with('meta', component('Meta')
+                        ->with('items', collect()
+                            ->push(component('Link')
+                                ->with('title', $news->user->name)
+                                ->with('route', route('user.show', [$news->user]))
+                            )
+                            ->push(component('Link')
+                                ->with('title', $news->created_at->diffForHumans())
+                            )
+                        )
+                    )
+            )
             ->with('content', collect()
 
                 ->push(component('Header')
