@@ -1,6 +1,32 @@
 @import "variables";
 
 .MastheadNews {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.MastheadNews__header {
+}
+
+.MastheadNews__content {
+    margin-top: calc($spacer * 25);
+    margin-top: calc($spacer * 15) ?if $mobile;
+    margin-bottom: $margin-md;
+}
+
+    .MastheadNews__title {
+        color: $white;
+        font: $font-heading-xl;
+        font: $font-heading-lg ?if $mobile;
+        line-height: $line-height-lg;
+        line-height: $line-height-lg ?if $mobile;
+        margin-bottom: $margin-md;
+        margin-right: $margin-xxl;
+        margin-right: 0 ?if $mobile;
+    }
+
+/*
+.MastheadNews {
 	width: 100%;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -39,3 +65,4 @@
             .MastheadNews__meta {
                 align-self: flex-end;
             }
+*/

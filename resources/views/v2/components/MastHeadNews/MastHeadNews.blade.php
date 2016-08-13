@@ -21,6 +21,10 @@ $meta = $meta ?? '';
         	
         </div>
 
+        <div class="row row-center">
+
+        <div class="col-9">
+
         <div class="MastheadNews__content">
 
         	<div class="MastheadNews__title">
@@ -35,7 +39,11 @@ $meta = $meta ?? '';
 
         	</div>
 
-        </div>   
+        </div>
+
+        </div>
+
+        </div>  
 
     </div>
 
