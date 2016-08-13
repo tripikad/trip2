@@ -47,6 +47,6 @@ class Comment
                     )
                 )
             )
-            ->with('body', component('Body')->with('body', $comment->body));
+            ->with('body', component('Body')->with('body', nl2br($comment->body)));
     }
 }

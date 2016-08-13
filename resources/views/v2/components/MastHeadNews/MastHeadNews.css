@@ -3,16 +3,13 @@
 .MastheadNews {
     background-repeat: no-repeat;
     background-size: cover;
+    padding: $padding-md 0;
 }
 
-.MastheadNews__header {
-}
-
-.MastheadNews__content {
-    margin-top: calc($spacer * 25);
-    margin-top: calc($spacer * 15) ?if $mobile;
-    margin-bottom: $margin-md;
-}
+    .MastheadNews__content {
+        margin-top: calc($spacer * 25);
+        margin-top: calc($spacer * 15) ?if $mobile;
+    }
 
     .MastheadNews__title {
         color: $white;
@@ -21,48 +18,6 @@
         line-height: $line-height-lg;
         line-height: $line-height-lg ?if $mobile;
         margin-bottom: $margin-md;
-        margin-right: $margin-xxl;
+        margin-right: $margin-xxxl;
         margin-right: 0 ?if $mobile;
     }
-
-/*
-.MastheadNews {
-	width: 100%;
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-
-    .MastheadNews .container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-        .MastheadNews__header {
-            width: 100%;
-            margin-top: $margin-md;
-        }
-
-        .MastheadNews__content {
-            align-self: flex-end;
-            display: flex;
-            flex-direction: column;
-            max-width: 60%;
-            margin-bottom: $margin-md;
-            margin-top: calc($spacer * 11) ?if $mobile;
-            margin-top: calc($spacer * 22);
-        }
-
-            .MastheadNews__title {
-            	font: $font-heading-xl;
-                font: $font-heading-lg ?if $mobile;
-            	color: $white;
-            	padding: $padding-xs;
-                text-align: center;
-                line-height: $line-height-lg;
-            }
-
-            .MastheadNews__meta {
-                align-self: flex-end;
-            }
-*/

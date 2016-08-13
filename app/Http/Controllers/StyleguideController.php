@@ -131,7 +131,7 @@ class StyleguideController extends Controller
     public function newsShow()
     {
 
-        $news = Content::find(97997);
+        $news = Content::find(97961);
 
         return view('v2.layouts.1col')
             ->with('header', region('MastheadNews', $news))

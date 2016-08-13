@@ -27,6 +27,11 @@
     .HeaderNavbarMobile__menuHeader {
         display: flex;
         justify-content: space-between;
+        align-content: center;
+    }
+
+    .HeaderNavbarMobile__search svg {
+        fill: $white;
     }
 
     .HeaderNavbarMobile__closeIcon {

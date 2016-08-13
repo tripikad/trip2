@@ -4,12 +4,12 @@ namespace App\Http\Regions;
 
 class MastheadNews {
 
-    public function render($news)
+    public function render($post)
     {
 
         return component('MastheadNews')
-            ->with('title', $news->title)
-            ->with('background', $news->getHeadImage())
+            ->with('title', $post->title)
+            ->with('background', $post->getHeadImage())
             ->with('header', component('Header')
                 ->with('search', component('HeaderSearch')->is('white'))
                 ->with('logo', component('Icon')
@@ -22,13 +22,24 @@ class MastheadNews {
             )
             ->with('meta', component('Meta')
                 ->with('items', collect()
-                    ->push(component('Link')
-                        ->with('title', $news->user->name)
-                        ->with('route', route('user.show', [$news->user]))
+                    ->push(component('ProfileImage')
+                        ->with('route', route('user.show', [$post->user]))
+                        ->with('image', $post->user->imagePreset('small_square'))
+                        ->with('rank', $post->user->rank * 90)
                     )
                     ->push(component('Link')
-                        ->with('title', $news->created_at->diffForHumans())
+                        ->with('title', $post->user->name)
+                        ->with('route', route('user.show', [$post->user]))
                     )
+                    ->push(component('Link')
+                        ->with('title', $post->created_at->diffForHumans())
+                    )
+                    ->merge($post->destinations->map(function ($tag) {
+                        return component('Tag')->is('orange')->with('title', $tag->name);
+                    }))
+                    ->merge($post->topics->map(function ($tag) {
+                        return component('Tag')->with('title', $tag->name);
+                    }))
                 )
             );
     }
