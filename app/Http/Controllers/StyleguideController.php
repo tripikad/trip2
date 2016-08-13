@@ -134,41 +134,13 @@ class StyleguideController extends Controller
         $news = Content::find(97997);
 
         return view('v2.layouts.1col')
-            ->with('header', component('MastheadNews')
-                    ->with('title', $news->title)
-                    ->with('background', $news->getHeadImage())
-                    ->with('header', component('Header')
-                        ->with('search', component('HeaderSearch')->is('white'))
-                        ->with('logo', component('Icon')
-                            ->with('icon', 'tripee_logo_plain_dark')
-                            ->with('width', 80)
-                            ->with('height', 30)
-                        )
-                        ->with('navbar', region('HeaderNavbar', 'white'))
-                        ->with('navbar_mobile', region('HeaderNavbarMobile', 'white'))
-                    )
-                    ->with('meta', component('Meta')
-                        ->with('items', collect()
-                            ->push(component('Link')
-                                ->with('title', $news->user->name)
-                                ->with('route', route('user.show', [$news->user]))
-                            )
-                            ->push(component('Link')
-                                ->with('title', $news->created_at->diffForHumans())
-                            )
-                        )
-                    )
-            )
+            ->with('header', region('MastheadNews', $news))
             ->with('content', collect()
-
                 ->push(component('Body')->is('responsive')->with('body', nl2br($news->body)))
-
                 ->merge($news->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-            
                 ->push(region('CommentCreateForm', $news))
-
             )
             ->with('footer', region('Footer'))
         ;
