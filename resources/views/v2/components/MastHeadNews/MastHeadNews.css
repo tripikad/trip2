@@ -33,6 +33,7 @@
             	color: $white;
             	padding: $padding-xs;
                 text-align: center;
+                line-height: $line-height-lg;
             }
 
             .MastheadNews__meta {
