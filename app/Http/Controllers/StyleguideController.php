@@ -131,12 +131,12 @@ class StyleguideController extends Controller
     public function newsShow()
     {
 
-        $news = Content::find(97961);
+        $news = Content::find(96534);
 
         return view('v2.layouts.1col')
             ->with('header', region('MastheadNews', $news))
             ->with('content', collect()
-                ->push(component('Body')->is('responsive')->with('body', nl2br($news->body)))
+                ->push(component('Body')->is('responsive')->with('body', body_filter($news->body)))
                 ->merge($news->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))

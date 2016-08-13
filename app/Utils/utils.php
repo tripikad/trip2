@@ -14,6 +14,11 @@ function region($component, ...$arguments)
     return (new $class)->render(...$arguments);
 }
 
+function body_filter($body)
+{
+    return (new Utils\BodyFilter($body))->filter();
+}
+
 function format_smtp_header(array $data)
 {
     $json = json_encode($data);
