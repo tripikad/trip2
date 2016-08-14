@@ -4,7 +4,7 @@ namespace App\Utils;
 
 use App\Image;
 
-class BodyFilter
+class BodyFormatter
 {
     protected $body;
 
@@ -81,7 +81,7 @@ class BodyFilter
         return $this;
     }
 
-    public function filter()
+    public function format()
     {
         return $this
             ->links()

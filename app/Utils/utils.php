@@ -14,9 +14,9 @@ function region($component, ...$arguments)
     return (new $class)->render(...$arguments);
 }
 
-function body_filter($body)
+function format_body($body)
 {
-    return (new Utils\BodyFilter($body))->filter();
+    return (new Utils\BodyFormatter($body))->format();
 }
 
 function format_smtp_header(array $data)

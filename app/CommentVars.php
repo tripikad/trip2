@@ -23,7 +23,7 @@ class CommentVars
 
     public function body()
     {
-        return body_filter($this->comment->body);
+        return format_body($this->comment->body);
     }
 
 }

@@ -23,7 +23,7 @@ class ContentVars
 
     public function body()
     {
-        return body_filter($this->content->body);
+        return format_body($this->content->body);
     }
 
 }

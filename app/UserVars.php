@@ -23,7 +23,7 @@ class UserVars
 
     public function name()
     {
-        return str_limit($this->user->name, 30) . 'aa';
+        return str_limit($this->user->name, 30);
     }
 
     public function rank()

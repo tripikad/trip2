@@ -11,7 +11,7 @@ class ForumItemSmall
             ->with('profile', component('ProfileImage')
                 ->with('route', route('user.show', [$post->user]))
                 ->with('image', $post->user->imagePreset('small_square'))
-                ->with('rank', $post->user->rank * 90)
+                ->with('rank', $post->user->vars()->rank)
             )
             ->with('title', $post->title)
             ->with('meta', component('Meta')->with('items', collect()
