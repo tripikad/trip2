@@ -45,4 +45,12 @@ class V2NewsController extends Controller
             )
             ->with('footer', region('Footer'));
     }
+
+    public function edit()
+    {
+       
+        return view('v2.layouts.fullpage')
+            ->with('content', collect()->push(component('Editor')));
+    }
+
 }

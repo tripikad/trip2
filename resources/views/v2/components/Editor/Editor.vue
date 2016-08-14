@@ -41,6 +41,7 @@
 <script>
 
     import brace from 'brace'
+    
     // import _ from 'lodash'
     // import tomarkdown from 'to-markdown'
     // import striptags from 'striptags'
@@ -93,7 +94,7 @@
         methods: {
 
             updatePreview: function() {
-                this.$http.post('./utils/format', {body: this.editor.getValue()})
+                this.$http.post('/v2/utils/format', {body: this.editor.getValue()})
                     .then(function(res) {
                         this.body = res.data.body
                     })

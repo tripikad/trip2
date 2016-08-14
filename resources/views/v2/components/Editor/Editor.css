@@ -13,7 +13,7 @@
         padding: $padding-sm;
         font-family: $font-family-code;
         font-size: $font-size-xs;
-        color: $gray-light;
+        color: $gray-darkest;
     }
 
     .Editor__wrapper {

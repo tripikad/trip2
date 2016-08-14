@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use App\Image;
+use Markdown;
 
 class BodyFormatter
 {
@@ -82,13 +83,22 @@ class BodyFormatter
         return $this;
     }
 
+    public function markdown()
+    {
+
+        $this->body = Markdown::setBreaksEnabled(true)->text($this->body);
+
+        return $this;
+
+    }
+
     public function format()
     {
         return $this
+            ->markdown()
             ->links()
             ->images()
             ->youtube2()
-            ->newlines()
             ->body;
     }
 }
