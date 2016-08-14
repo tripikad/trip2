@@ -138,7 +138,15 @@ class StyleguideController extends Controller
     {
 
         $news = Content::
-            with('images', 'user', 'user.images', 'comments', 'comments.user', 'destinations', 'topics')
+            with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
             ->whereStatus(1)
             ->find($id);
 
