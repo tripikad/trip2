@@ -5,21 +5,53 @@ use App\Http\Controllers\ContentController;
 
 // V2
 
+// News
+
+Route::get('v2/news', [
+    'uses' => 'V2NewsController@index',
+    'as' => 'news.index'
+]);
+
+Route::get('v2/news/{id}', [
+    'uses' => 'V2NewsController@show',
+    'as' => 'news.show'
+]);
+
+// Static
+
+Route::get('v2/static', [
+    'uses' => 'V2StaticController@index',
+    'as' => 'static.index'
+]);
+
+Route::get('v2/static/{id}', [
+    'uses' => 'V2StaticController@show',
+    'as' => 'static.show'
+]);
+
 // Styleguide
 
-Route::get('styleguide', ['uses' => 'StyleguideController@index', 'as' => 'styleguide.index']);
+Route::get('v2/styleguide', [
+    'uses' => 'V2StyleguideController@index',
+    'as' => 'styleguide.index'
+]);
 
-Route::get('styleguide/news', ['uses' => 'StyleguideController@newsIndex', 'as' => 'styleguide.news.index']);
+Route::post('v2/styleguide/form', [
+    'uses' => 'V2StyleguideController@form',
+    'as' => 'styleguide.form'
+]);
 
-Route::get('styleguide/news/{id}', ['uses' => 'StyleguideController@newsShow', 'as' => 'styleguide.news.show']);
-
-Route::post('styleguide/form', ['uses' => 'StyleguideController@form', 'as' => 'styleguide.form']);
-
-Route::post('styleguide/flag', ['uses' => 'StyleguideController@flag', 'as' => 'styleguide.flag']);
+Route::post('v2/styleguide/flag', [
+    'uses' => 'V2StyleguideController@flag',
+    'as' => 'styleguide.flag'
+]);
 
 // Alert
 
-Route::get('alert', ['uses' => 'HelpersController@alert', 'as' => 'helpers.alert']);
+Route::get('v2/helpers/alert', [
+    'uses' => 'V2HelpersController@alert',
+    'as' => 'helpers.alert'
+]);
 
 
 // V1
