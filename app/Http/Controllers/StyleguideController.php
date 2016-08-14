@@ -128,10 +128,25 @@ class StyleguideController extends Controller
             ->with('footer', '');
     }
 
-    public function newsShow()
+    public function newsIndex()
     {
 
-        $news = Content::find(96534);
+        $posts = Content::whereType('news')->latest()->whereStatus(1)->take(20)->get();
+
+        return view('v2.layouts.1col')
+            ->with('content', collect()
+                ->merge($posts->map(function ($post) {
+                    return region('NewsItem', $post);
+                }))
+            )
+        ;
+    
+    }
+
+    public function newsShow($id)
+    {
+
+        $news = Content::whereStatus(1)->find($id);
 
         return view('v2.layouts.1col')
             ->with('header', region('MastheadNews', $news))
