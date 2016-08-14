@@ -21,9 +21,25 @@ class CommentVars
         }
     }
 
+    public function title()
+    {
+        return str_limit($this->attributes['body'], 30);
+    }
+
     public function body()
     {
         return format_body($this->comment->body);
     }
+
+    public function created_at()
+    {
+        return format_date($this->comment->created_at);
+    }
+
+    public function updated_at()
+    {
+        return format_date($this->comment->created_at);
+    }
+
 
 }

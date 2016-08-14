@@ -22,7 +22,7 @@ class Comment
                         ->with('route', route('user.show', [$comment->user]))
                     )
                     ->push(component('Link')
-                        ->with('title', $comment->created_at->diffForHumans())
+                        ->with('title', $comment->vars()->created_at)
                         ->with('route', route('content.show', [
                             $comment->content->type, $comment->content, '#comment-'.$comment->id,
                         ]))

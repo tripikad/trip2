@@ -7,6 +7,8 @@ class MastheadNews {
     public function render($post)
     {
 
+        $user = auth()->user();
+
         return component('MastheadNews')
             ->with('title', $post->title)
             ->with('background', $post->getHeadImage())
@@ -32,7 +34,7 @@ class MastheadNews {
                         ->with('route', route('user.show', [$post->user]))
                     )
                     ->push(component('Link')
-                        ->with('title', $post->created_at->diffForHumans())
+                        ->with('title', $post->vars()->created_at)
                     )
                     ->merge($post->destinations->map(function ($tag) {
                         return component('Tag')->is('orange')->with('title', $tag->name);
@@ -40,6 +42,23 @@ class MastheadNews {
                     ->merge($post->topics->map(function ($tag) {
                         return component('Tag')->with('title', $tag->name);
                     }))
+                    ->pushWhen($user && $user->hasRole('admin'), component('Link')
+                        ->with('title', trans('content.action.edit.title'))
+                        ->with('route', route('content.edit', [$post->type, $post]))
+                    )
+                    ->pushWhen($user && $user->hasRole('admin'), component('Form')
+                            ->with('route', route('content.status', [
+                                $post->type,
+                                $post,
+                                (1 - $post->status)
+                            ]))
+                            ->with('method', 'PUT')
+                            ->with('fields', collect()
+                                ->push(component('FormLink')
+                                    ->with('title', trans("content.action.status.$post->status.title"))
+                                )
+                            )
+                    )
                 )
             );
     }

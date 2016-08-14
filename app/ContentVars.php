@@ -26,4 +26,14 @@ class ContentVars
         return format_body($this->content->body);
     }
 
+    public function created_at()
+    {
+        return format_date($this->content->created_at);
+    }
+
+    public function updated_at()
+    {
+        return format_date($this->content->created_at);
+    }
+
 }
