@@ -160,7 +160,7 @@ class StyleguideController extends Controller
                 ->merge($news->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-                ->push(region('CommentCreateForm', $news))
+               // ->push(region('CommentCreateForm', $news))
             )
             ->with('footer', region('Footer'));
     }
