@@ -49,12 +49,6 @@ class StyleguideController extends Controller
 
                 // ->push(component('Map'))
 
-                // ->push(region('CommentCreateForm', $posts->first()))
-
-                ->merge($posts->first()->comments->take(2)->map(function ($comment) {
-                    return region('Comment', $comment);
-                }))
-
                 ->merge($posts->map(function ($post) {
                     return region('ForumItem', $post);
                 }))
