@@ -140,7 +140,10 @@ class StyleguideController extends Controller
     public function newsShow($id)
     {
 
-        $news = Content::whereStatus(1)->find($id);
+        $news = Content::
+            with('images', 'user', 'user.images', 'comments', 'comments.user', 'destinations', 'topics')
+            ->whereStatus(1)
+            ->find($id);
 
         return view('v2.layouts.1col')
             ->with('header', region('MastheadNews', $news))
