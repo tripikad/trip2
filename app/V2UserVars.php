@@ -2,7 +2,7 @@
 
 namespace App;
 
-class UserVars
+class V2UserVars
 {
     protected $user;
 

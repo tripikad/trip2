@@ -77,7 +77,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function vars()
     {
-        return new UserVars($this);
+        return new V2UserVars($this);
     }
 
     // V1

@@ -36,7 +36,7 @@ class Comment extends Model
 
     public function vars()
     {
-        return new CommentVars($this);
+        return new V2CommentVars($this);
     }
 
     // V1

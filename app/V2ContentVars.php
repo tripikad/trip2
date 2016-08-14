@@ -2,7 +2,7 @@
 
 namespace App;
 
-class ContentVars
+class V2ContentVars
 {
     protected $content;
 
@@ -16,6 +16,11 @@ class ContentVars
         if (method_exists($this, $property)) {
             return call_user_func([$this, $property]);
         }
+    }
+
+    public function title()
+    {
+        return $this->content->title;
     }
 
     public function body()
