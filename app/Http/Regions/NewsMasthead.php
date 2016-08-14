@@ -2,13 +2,13 @@
 
 namespace App\Http\Regions;
 
-class MastheadNews
+class NewsMasthead
 {
     public function render($post)
     {
         $user = auth()->user();
 
-        return component('MastheadNews')
+        return component('NewsMasthead')
             ->with('title', $post->title)
             ->with('background', $post->getHeadImage())
             ->with('header', component('Header')

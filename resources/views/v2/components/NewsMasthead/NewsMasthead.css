@@ -1,17 +1,17 @@
 @import "variables";
 
-.MastheadNews {
+.NewsMasthead {
     background-repeat: no-repeat;
     background-size: cover;
     padding: $padding-md 0;
 }
 
-    .MastheadNews__content {
+    .NewsMasthead__content {
         margin-top: calc($spacer * 25);
         margin-top: calc($spacer * 15) ?if $mobile;
     }
 
-    .MastheadNews__title {
+    .NewsMasthead__title {
         color: $white;
         font: $font-heading-xl;
         font: $font-heading-lg ?if $mobile;
