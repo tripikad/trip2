@@ -21,7 +21,7 @@ class HeaderNavbar
                 'menu' => true,
             ])
             ->putWhen($user, 'user', [
-                'title' => $user ? $user->name : '',
+                'title' => $user ? $user->vars()->name : '',
                 'route' => route('user.show', [$user]),
                 'badge' => $user ? $user->unreadMessagesCount() : '',
                 'menu' => true,
