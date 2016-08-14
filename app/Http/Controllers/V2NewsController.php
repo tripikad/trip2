@@ -6,7 +6,6 @@ use App\Content;
 
 class V2NewsController extends Controller
 {
-
     public function index()
     {
         $posts = Content::whereType('news')->latest()->whereStatus(1)->take(20)->get();

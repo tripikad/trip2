@@ -9,48 +9,48 @@ use App\Http\Controllers\ContentController;
 
 Route::get('v2/news', [
     'uses' => 'V2NewsController@index',
-    'as' => 'news.index'
+    'as' => 'news.index',
 ]);
 
 Route::get('v2/news/{id}', [
     'uses' => 'V2NewsController@show',
-    'as' => 'news.show'
+    'as' => 'news.show',
 ]);
 
 // Static
 
 Route::get('v2/static', [
     'uses' => 'V2StaticController@index',
-    'as' => 'static.index'
+    'as' => 'static.index',
 ]);
 
 Route::get('v2/static/{id}', [
     'uses' => 'V2StaticController@show',
-    'as' => 'static.show'
+    'as' => 'static.show',
 ]);
 
 // Styleguide
 
 Route::get('v2/styleguide', [
     'uses' => 'V2StyleguideController@index',
-    'as' => 'styleguide.index'
+    'as' => 'styleguide.index',
 ]);
 
 Route::post('v2/styleguide/form', [
     'uses' => 'V2StyleguideController@form',
-    'as' => 'styleguide.form'
+    'as' => 'styleguide.form',
 ]);
 
 Route::post('v2/styleguide/flag', [
     'uses' => 'V2StyleguideController@flag',
-    'as' => 'styleguide.flag'
+    'as' => 'styleguide.flag',
 ]);
 
 // Alert
 
 Route::get('v2/helpers/alert', [
     'uses' => 'V2HelpersController@alert',
-    'as' => 'helpers.alert'
+    'as' => 'helpers.alert',
 ]);
 
 

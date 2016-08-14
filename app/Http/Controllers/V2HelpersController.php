@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Response;
 
-class HelpersController extends Controller
+class V2HelpersController extends Controller
 {
     public function alert()
     {
