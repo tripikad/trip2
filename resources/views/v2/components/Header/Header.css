@@ -16,6 +16,10 @@
         display: none;
     }
 
+    .Header__logo svg {
+        fill: $white ?if $tablet;
+    }
+
     .Header__navbar {
         display: block;
         display: none ?if $tablet;

@@ -13,6 +13,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
     use Authenticatable, CanResetPassword;
 
+    // Setup
+
     protected $fillable = [
         'name',
         'email',
@@ -35,8 +37,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $hidden = ['password', 'remember_token'];
 
-    public $messages_count = false;
-
     public static function boot()
     {
         parent::boot();
@@ -45,6 +45,44 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $user->registration_token = str_random(30);
         });
     }
+
+    // Relations
+
+    public function contents()
+    {
+        return $this->hasMany('App\Content');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
+    public function flags()
+    {
+        return $this->hasMany('App\Flag');
+    }
+
+    public function follows()
+    {
+        return $this->hasMany('App\Follow');
+    }
+
+    public function images()
+    {
+        return $this->morphToMany('App\Image', 'imageable');
+    }
+
+    // V2
+
+    public function vars()
+    {
+        return new UserVars($this);
+    }
+
+    // V1
+
+    public $messages_count = false;
 
     public function confirmEmail()
     {
@@ -96,31 +134,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $received = $this->hasMany('App\Message', 'user_id_to')->where('user_id_from', $user_id_with)->get();
 
         return $sent->merge($received)->sortBy('created_at');
-    }
-
-    public function contents()
-    {
-        return $this->hasMany('App\Content');
-    }
-
-    public function comments()
-    {
-        return $this->hasMany('App\Comment');
-    }
-
-    public function flags()
-    {
-        return $this->hasMany('App\Flag');
-    }
-
-    public function follows()
-    {
-        return $this->hasMany('App\Follow');
-    }
-
-    public function images()
-    {
-        return $this->morphToMany('App\Image', 'imageable');
     }
 
     public function imagePreset($preset = 'small_square')

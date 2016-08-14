@@ -47,6 +47,7 @@
     color: $blue;
     text-decoration: underline;
     word-wrap: break-word;
+    word-break: break-word;
 }
 
 .Body ul {

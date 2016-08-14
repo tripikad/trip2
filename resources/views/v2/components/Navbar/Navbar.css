@@ -1,32 +1,32 @@
 @import "variables";
 
-.HeaderNavbar {
+.Navbar {
     position: relative;
 }
 
-    .HeaderNavbar__links {
+    .Navbar__links {
         display: flex;
     }
 
-    .HeaderNavbar__link {
+    .Navbar__link {
         padding: $padding-sm;
         color: $gray-darker;
         font: $font-heading-sm;
     }
 
-    .HeaderNavbar__popover {
+    .Navbar__popover {
         width: $width-xxl;
         position: absolute;
         right: 0;
         top: $height-md;
     }
 
-    .HeaderNavbar__arrowWrapper {
+    .Navbar__arrowWrapper {
         display: flex;
         justify-content: center;
     }
 
-    .HeaderNavbar__arrow {
+    .Navbar__arrow {
         width: 0;
         height: 0;
         border-left: $width-xxs solid transparent;
@@ -34,24 +34,24 @@
         border-bottom: $width-xxs solid $green;
     }
 
-    .HeaderNavbar__sublinks {
+    .Navbar__sublinks {
         border-radius: $border-radius-md;
         background: $green;
         padding: $padding-xs 0;
     }
 
-    .HeaderNavbar__sublink {
+    .Navbar__sublink {
         color: $white;
         font: $font-heading-sm;
         padding: $padding-xs $padding-sm;
     }
 
-    .HeaderNavbar__sublink:hover {
+    .Navbar__sublink:hover {
         color: $white;
         font: $font-heading-sm;
         background: $green-dark;
     }
 
-.HeaderNavbar--white .HeaderNavbar__link {
+.Navbar--white .Navbar__link {
     color: $white;
 }

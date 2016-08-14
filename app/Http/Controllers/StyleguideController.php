@@ -24,43 +24,22 @@ class StyleguideController extends Controller
 
 
         return view('v2.layouts.1col')
-            ->with('header', component('MastheadNews')
-                    ->with('title', $news->title)
-                    ->with('background', '/photos/header2.jpg')
-                    ->with('header', component('Header')
-                        ->with('search', component('HeaderSearch')->is('white'))
-                        ->with('logo', component('Icon')
-                            ->with('icon', 'tripee_logo_plain_dark')
-                            ->with('width', 80)
-                            ->with('height', 30)
-                        )
-                        ->with('navbar', region('HeaderNavbar', 'white'))
-                        ->with('navbar_mobile', region('HeaderNavbarMobile', 'white'))
-                    )
-                    ->with('meta', component('Meta')
-                        ->with('items', collect()
-                            ->push(component('Link')
-                                ->with('title', $news->user->name)
-                                ->with('route', route('user.show', [$news->user]))
-                            )
-                            ->push(component('Link')
-                                ->with('title', $news->created_at->diffForHumans())
-                            )
-                        )
-                    )
-            )
-            ->with('content', collect()
 
-                ->push(component('Header')
-                    ->with('search', component('HeaderSearch'))
+            ->with('header', component('Masthead')
+                ->with('header', component('Header')
+                    ->with('search', component('HeaderSearch')->is('gray'))
                     ->with('logo', component('Icon')
                         ->with('icon', 'tripee_logo_plain_dark')
                         ->with('width', 80)
                         ->with('height', 30)
                     )
-                    ->with('navbar', region('HeaderNavbar'))
-                    ->with('navbar_mobile', region('HeaderNavbarMobile'))
+                    ->with('navbar', region('Navbar'))
+                    ->with('navbar_mobile', region('NavbarMobile'))
                 )
+                ->with('title', 'I am the big header')
+            )
+
+            ->with('content', collect()
 
                 ->push(component('DestinationBar')
                     ->with('route', route('destination.show', [$destination]))
@@ -72,12 +51,6 @@ class StyleguideController extends Controller
                 )
 
                 // ->push(component('Map'))
-
-                // ->push(region('CommentCreateForm', $posts->first()))
-
-                ->merge($posts->first()->comments->take(2)->map(function ($comment) {
-                    return region('Comment', $comment);
-                }))
 
                 ->merge($posts->map(function ($post) {
                     return region('ForumItem', $post);
@@ -150,6 +123,46 @@ class StyleguideController extends Controller
 
             )
             ->with('footer', '');
+    }
+
+    public function newsIndex()
+    {
+        $posts = Content::whereType('news')->latest()->whereStatus(1)->take(20)->get();
+
+        return view('v2.layouts.1col')
+            ->with('content', collect()
+                ->merge($posts->map(function ($post) {
+                    return region('NewsItem', $post);
+                }))
+            );
+    }
+
+    public function newsShow($id)
+    {
+        $news = Content::
+            with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->whereStatus(1)
+            ->find($id);
+
+
+        return view('v2.layouts.1col')
+            ->with('header', region('NewsMasthead', $news))
+            ->with('content', collect()
+                ->push(component('Body')->is('responsive')->with('body', $news->vars()->body))
+                ->merge($news->comments->map(function ($comment) {
+                    return region('Comment', $comment);
+                }))
+                ->push(region('CommentCreateForm', $news))
+            )
+            ->with('footer', region('Footer'));
     }
 
     public function form()

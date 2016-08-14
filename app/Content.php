@@ -7,11 +7,15 @@ use Auth;
 
 class Content extends Model
 {
+    // Setup
+
     protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image', 'status', 'start_at', 'end_at', 'duration', 'price'];
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
     protected $appends = ['body_filtered', 'image_id'];
+
+    // Relations
 
     public function user()
     {
@@ -47,6 +51,15 @@ class Content extends Model
     {
         return $this->morphMany('App\Follow', 'followable');
     }
+
+    // V2
+
+    public function vars()
+    {
+        return new ContentVars($this);
+    }
+
+    // V1
 
     public function getDestinationParent()
     {

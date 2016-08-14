@@ -2,11 +2,9 @@
 
 namespace App\Http\Regions;
 
-use Illuminate\Http\Request;
-
 class CommentCreateForm
 {
-    public function render(Request $request, $content)
+    public function render($content)
     {
         return component('Block')
             ->with('title', trans('comment.create.title'))

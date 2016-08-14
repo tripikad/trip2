@@ -14,15 +14,15 @@ class Comment
             ->with('profile', component('ProfileImage')
                 ->with('route', route('user.show', [$comment->user]))
                 ->with('image', $comment->user->imagePreset('small_square'))
-                ->with('rank', $comment->user->rank * 90)
+                ->with('rank', $comment->user->vars()->rank)
             )
             ->with('meta', component('Meta')->with('items', collect()
                     ->push(component('Link')
-                        ->with('title', $comment->user->name)
+                        ->with('title', $comment->user->vars()->name)
                         ->with('route', route('user.show', [$comment->user]))
                     )
                     ->push(component('Link')
-                        ->with('title', $comment->created_at->diffForHumans())
+                        ->with('title', $comment->vars()->created_at)
                         ->with('route', route('content.show', [
                             $comment->content->type, $comment->content, '#comment-'.$comment->id,
                         ]))
@@ -47,6 +47,8 @@ class Comment
                     )
                 )
             )
-            ->with('body', component('Body')->with('body', $comment->body));
+            ->with('body', component('Body')
+                ->with('body', $comment->vars()->body)
+            );
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Regions;
 
-class HeaderNavbar
+class NavbarMobile
 {
     protected function prepareLinks()
     {
@@ -21,7 +21,7 @@ class HeaderNavbar
                 'menu' => true,
             ])
             ->putWhen($user, 'user', [
-                'title' => $user ? $user->name : '',
+                'title' => $user ? $user->vars()->name : '',
                 'route' => route('user.show', [$user]),
                 'badge' => $user ? $user->unreadMessagesCount() : '',
                 'menu' => true,
@@ -69,7 +69,7 @@ class HeaderNavbar
     public function render($color = '')
     {
         return collect()
-            ->push(component('HeaderNavbar')
+            ->push(component('NavbarMobile')
                 ->is($color)
                 ->with('links', $this->prepareLinks())
                 ->with('sublinks', $this->prepareSublinks())

@@ -7,11 +7,15 @@ use Auth;
 
 class Comment extends Model
 {
+    // Setup
+
     protected $fillable = ['user_id', 'content_id', 'body', 'status'];
 
     protected $appends = ['title', 'body_filtered'];
 
     protected $touches = ['content'];
+
+    // Relations
 
     public function content()
     {
@@ -27,6 +31,15 @@ class Comment extends Model
     {
         return $this->morphMany('App\Flag', 'flaggable');
     }
+
+    // V2
+
+    public function vars()
+    {
+        return new CommentVars($this);
+    }
+
+    // V1
 
     public function getTitleAttribute()
     {

@@ -1,0 +1,25 @@
+@import "variables";
+
+.Masthead {
+    padding-top: $padding-md;
+    background: $gray-light;
+}
+
+    .Masthead__map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
+
+    .Masthead__content {
+        height: calc($spacer * 15);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .Masthead__title {
+        font: $font-heading-xxxl;
+        color: $gray-darkest;
+    }
