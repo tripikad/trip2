@@ -2,13 +2,10 @@
 
 namespace App;
 
-use App\Comment;
-
 class CommentVars
 {
-    
     protected $comment;
-   
+
     public function __construct(Comment $comment)
     {
         $this->comment = $comment;
@@ -40,6 +37,4 @@ class CommentVars
     {
         return format_date($this->comment->created_at);
     }
-
-
 }

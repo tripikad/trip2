@@ -2,13 +2,10 @@
 
 namespace App;
 
-use App\Content;
-
 class ContentVars
 {
-    
     protected $content;
-   
+
     public function __construct(Content $content)
     {
         $this->content = $content;
@@ -35,5 +32,4 @@ class ContentVars
     {
         return format_date($this->content->created_at);
     }
-
 }

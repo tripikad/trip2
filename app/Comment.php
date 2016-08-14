@@ -3,9 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
 use Auth;
-use App\CommentVars;
 
 class Comment extends Model
 {
@@ -36,8 +34,9 @@ class Comment extends Model
 
     // V2
 
-    public function vars() {
-        return (new CommentVars($this));
+    public function vars()
+    {
+        return new CommentVars($this);
     }
 
     // V1
