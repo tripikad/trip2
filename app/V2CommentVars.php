@@ -2,7 +2,7 @@
 
 namespace App;
 
-class CommentVars
+class V2CommentVars
 {
     protected $comment;
 

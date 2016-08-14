@@ -56,7 +56,7 @@ class Content extends Model
 
     public function vars()
     {
-        return new ContentVars($this);
+        return new V2ContentVars($this);
     }
 
     // V1
