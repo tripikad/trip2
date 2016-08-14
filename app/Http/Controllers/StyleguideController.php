@@ -139,7 +139,6 @@ class StyleguideController extends Controller
 
     public function newsShow($id)
     {
-
         $news = Content::
             with(
                 'images',
