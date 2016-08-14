@@ -151,7 +151,7 @@ class StyleguideController extends Controller
         return view('v2.layouts.1col')
             ->with('header', region('MastheadNews', $news))
             ->with('content', collect()
-                ->push(component('Body')->is('responsive')->with('body', body_filter($news->body)))
+                ->push(component('Body')->is('responsive')->with('body', $news->vars()->body))
                 ->merge($news->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
