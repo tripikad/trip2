@@ -2,13 +2,10 @@
 
 namespace App;
 
-use App\User;
-
 class UserVars
 {
-    
     protected $user;
-   
+
     public function __construct(User $user)
     {
         $this->user = $user;
@@ -30,5 +27,4 @@ class UserVars
     {
         return $this->user->rank * 90;
     }
-
 }

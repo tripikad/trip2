@@ -9,7 +9,6 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Carbon\Carbon;
 
-use App\UserVars;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -77,8 +76,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     // V2
 
-    public function vars() {
-        return (new UserVars($this));
+    public function vars()
+    {
+        return new UserVars($this);
     }
 
     // V1

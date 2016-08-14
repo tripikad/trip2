@@ -25,8 +25,8 @@ class BodyFormatter
             $this->body = $filteredBody;
         }
 
-        if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">',  $this->body)) {
-      //       $this->body = $filteredBody;
+        if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
+            //       $this->body = $filteredBody;
         }
 
         return $this;
@@ -55,7 +55,7 @@ class BodyFormatter
     {
         $this->body = preg_replace(
             "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i",
-            "<iframe width=\"420\" height=\"315\" src=\"//www.youtube.com/embed/$2\" allowfullscreen></iframe>",
+            '<iframe width="420" height="315" src="//www.youtube.com/embed/$2" allowfullscreen></iframe>',
             $this->body
         );
 
@@ -66,9 +66,9 @@ class BodyFormatter
     {
         $pattern = "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i";
 
-        $this->body = preg_replace_callback($pattern, function($matches) {
-                return component('Youtube')->with('id', $matches[2]);
-            },
+        $this->body = preg_replace_callback($pattern, function ($matches) {
+            return component('Youtube')->with('id', $matches[2]);
+        },
             $this->body
         );
 
@@ -78,6 +78,7 @@ class BodyFormatter
     public function newlines()
     {
         $this->body = nl2br($this->body);
+
         return $this;
     }
 

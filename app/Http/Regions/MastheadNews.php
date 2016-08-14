@@ -2,11 +2,10 @@
 
 namespace App\Http\Regions;
 
-class MastheadNews {
-
+class MastheadNews
+{
     public function render($post)
     {
-
         $user = auth()->user();
 
         return component('MastheadNews')
@@ -50,7 +49,7 @@ class MastheadNews {
                             ->with('route', route('content.status', [
                                 $post->type,
                                 $post,
-                                (1 - $post->status)
+                                (1 - $post->status),
                             ]))
                             ->with('method', 'PUT')
                             ->with('fields', collect()
@@ -62,5 +61,4 @@ class MastheadNews {
                 )
             );
     }
-
 }
