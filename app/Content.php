@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 
-use App\ContentVars;
 
 class Content extends Model
 {
@@ -56,8 +55,9 @@ class Content extends Model
 
     // V2
 
-    public function vars() {
-        return (new ContentVars($this));
+    public function vars()
+    {
+        return new ContentVars($this);
     }
 
     // V1

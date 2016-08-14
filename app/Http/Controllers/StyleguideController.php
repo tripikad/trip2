@@ -24,7 +24,7 @@ class StyleguideController extends Controller
 
 
         return view('v2.layouts.1col')
-            
+
             ->with('content', collect()
 
                 ->push(component('Header')
@@ -124,7 +124,6 @@ class StyleguideController extends Controller
 
     public function newsIndex()
     {
-
         $posts = Content::whereType('news')->latest()->whereStatus(1)->take(20)->get();
 
         return view('v2.layouts.1col')
@@ -132,9 +131,7 @@ class StyleguideController extends Controller
                 ->merge($posts->map(function ($post) {
                     return region('NewsItem', $post);
                 }))
-            )
-        ;
-    
+            );
     }
 
     public function newsShow($id)
@@ -145,6 +142,7 @@ class StyleguideController extends Controller
             ->whereStatus(1)
             ->find($id);
 
+
         return view('v2.layouts.1col')
             ->with('header', region('MastheadNews', $news))
             ->with('content', collect()
@@ -154,9 +152,7 @@ class StyleguideController extends Controller
                 }))
                 ->push(region('CommentCreateForm', $news))
             )
-            ->with('footer', region('Footer'))
-        ;
-    
+            ->with('footer', region('Footer'));
     }
 
     public function form()
