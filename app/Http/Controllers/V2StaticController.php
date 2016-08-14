@@ -6,7 +6,6 @@ use App\Content;
 
 class V2StaticController extends Controller
 {
-
     public function index()
     {
         $posts = Content::whereType('static')
@@ -31,7 +30,7 @@ class V2StaticController extends Controller
             ->findOrFail($id);
 
         return view('v2.layouts.1col')
-            
+
             ->with('header', component('Masthead')
                 ->with('header', component('Header')
                     ->with('search', component('HeaderSearch')->is('gray'))
@@ -51,6 +50,5 @@ class V2StaticController extends Controller
             )
 
             ->with('footer', region('FooterLight'));
-
     }
 }
