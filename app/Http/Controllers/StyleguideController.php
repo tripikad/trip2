@@ -25,18 +25,21 @@ class StyleguideController extends Controller
 
         return view('v2.layouts.1col')
 
-            ->with('content', collect()
-
-                ->push(component('Header')
-                    ->with('search', component('HeaderSearch'))
+            ->with('header', component('Masthead')
+                ->with('header', component('Header')
+                    ->with('search', component('HeaderSearch')->is('gray'))
                     ->with('logo', component('Icon')
                         ->with('icon', 'tripee_logo_plain_dark')
                         ->with('width', 80)
                         ->with('height', 30)
                     )
-                    ->with('navbar', region('HeaderNavbar'))
-                    ->with('navbar_mobile', region('HeaderNavbarMobile'))
+                    ->with('navbar', region('Navbar'))
+                    ->with('navbar_mobile', region('NavbarMobile'))
                 )
+                ->with('title', 'I am the big header')
+            )
+
+            ->with('content', collect()
 
                 ->push(component('DestinationBar')
                     ->with('route', route('destination.show', [$destination]))

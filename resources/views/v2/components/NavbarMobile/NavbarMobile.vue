@@ -1,9 +1,9 @@
 <template>
 
-    <div class="HeaderNavbarMobile" :class="isclasses">
+    <div class="NavbarMobile" :class="isclasses">
 
         <div
-            class="HeaderNavbarMobile__menuIcon"
+            class="NavbarMobile__menuIcon"
             v-if="! menuOpen"
             @click="toggle()"
         >
@@ -14,19 +14,19 @@
 
         <div
             v-else
-            class="HeaderNavbarMobile__menu"
+            class="NavbarMobile__menu"
             transition="fadeZoom"
         >
 
-            <div class="HeaderNavbarMobile__header">
+            <div class="NavbarMobile__header">
 
-                <div class="HeaderNavbarMobile__search">
+                <div class="NavbarMobile__search">
                 
                     <component is="headerSearch"></component>
                 
                 </div>
 
-                <div class="HeaderNavbarMobile__closeIcon" @click="toggle()">
+                <div class="NavbarMobile__closeIcon" @click="toggle()">
                     
                     <component is="Icon" icon="icon-close" size="lg"></component>
 
@@ -34,7 +34,7 @@
 
             </div>
 
-            <div class="HeaderNavbarMobile__links">
+            <div class="NavbarMobile__links">
        
                 <a
                     v-for="link in links"
@@ -42,7 +42,7 @@
                     track-by="$index"
                 >
 
-                    <div class="HeaderNavbarMobile__link">
+                    <div class="NavbarMobile__link">
                         
                         {{ link.title }}
                         
@@ -56,7 +56,7 @@
                     track-by="$index"
                 >
 
-                    <div class="HeaderNavbarMobile__link">
+                    <div class="NavbarMobile__link">
                         
                         {{ link.title }}
                         

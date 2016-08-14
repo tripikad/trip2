@@ -28,3 +28,7 @@
 	.HeaderSearch--white .HeaderSearch__input {
 		color: $white;
 	}
+
+.HeaderSearch--gray {
+	fill: $gray-darkest;
+}

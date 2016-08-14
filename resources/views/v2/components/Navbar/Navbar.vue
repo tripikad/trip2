@@ -1,8 +1,8 @@
 <template>
 
-    <nav class="HeaderNavbar" :class="isclasses">
+    <nav class="Navbar" :class="isclasses">
 
-        <div class="HeaderNavbar__links">
+        <div class="Navbar__links">
 
             <a
                 v-for="link in links"
@@ -13,7 +13,7 @@
                 <div
                     @mouseover="toggleSubmenu(link)"
                     v-on-clickaway="submenuOpen = false"
-                    class="HeaderNavbar__link"
+                    class="Navbar__link"
                 >
 
                     {{ link.title }}
@@ -25,19 +25,19 @@
         </div>
 
         <div
-            class="HeaderNavbar__popover"
+            class="Navbar__popover"
             v-if="submenuOpen"
             transition="fadeZoom"
             v-on-clickaway="toggleSubmenu()"
         >
 
-            <div class="HeaderNavbar__arrowWrapper">            
+            <div class="Navbar__arrowWrapper">            
             
-                <div class="HeaderNavbar__arrow"></div>
+                <div class="Navbar__arrow"></div>
             
             </div>
 
-            <div class="HeaderNavbar__sublinks">
+            <div class="Navbar__sublinks">
 
                 <a
                     v-for="link in sublinks"
@@ -45,7 +45,7 @@
                     track-by="$index"
                 >
 
-                    <div class="HeaderNavbar__sublink">
+                    <div class="Navbar__sublink">
 
                         {{ link.title }}
 
