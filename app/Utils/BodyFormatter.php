@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use App\Image;
+use Markdown;
 
 class BodyFormatter
 {
@@ -53,17 +54,6 @@ class BodyFormatter
 
     public function youtube()
     {
-        $this->body = preg_replace(
-            "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i",
-            '<iframe width="420" height="315" src="//www.youtube.com/embed/$2" allowfullscreen></iframe>',
-            $this->body
-        );
-
-        return $this;
-    }
-
-    public function youtube2()
-    {
         $pattern = "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i";
 
         $this->body = preg_replace_callback($pattern, function ($matches) {
@@ -75,9 +65,9 @@ class BodyFormatter
         return $this;
     }
 
-    public function newlines()
+    public function markdown()
     {
-        $this->body = nl2br($this->body);
+        $this->body = Markdown::setBreaksEnabled(true)->text($this->body);
 
         return $this;
     }
@@ -85,10 +75,10 @@ class BodyFormatter
     public function format()
     {
         return $this
+            ->markdown()
             ->links()
             ->images()
-            ->youtube2()
-            ->newlines()
+            // ->youtube()
             ->body;
     }
 }

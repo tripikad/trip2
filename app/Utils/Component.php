@@ -70,7 +70,8 @@ class Component
                 ->render();
         } else {
             $props = collect($with)->map(function ($value, $key) {
-                $value = is_array($value) ? rawurlencode(json_encode($value)) : $value;
+                $value = (is_array($value) || is_object($value)) ?
+                    rawurlencode(json_encode($value)) : $value;
 
                 return $key.'="'.$value.'"';
             })->implode(' ');
