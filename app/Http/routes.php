@@ -22,6 +22,18 @@ Route::get('v2/news/{id}/edit', [
     'as' => 'news.edit',
 ]);
 
+// Flight
+
+Route::get('v2/flight', [
+    'uses' => 'V2FlightController@index',
+    'as' => 'flight.index',
+]);
+
+Route::get('v2/flight/{id}/edit', [
+    'uses' => 'V2FlightController@edit',
+    'as' => 'flight.edit',
+]);
+
 // Forum
 
 Route::get('v2/forum', [

@@ -2,7 +2,7 @@
 
 namespace App\Http\Regions;
 
-class NewsItem
+class NewsRow
 {
     public function render($post)
     {
