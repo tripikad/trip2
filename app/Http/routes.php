@@ -17,6 +17,18 @@ Route::get('v2/news/{id}', [
     'as' => 'news.show',
 ]);
 
+// News
+
+Route::get('v2/forum', [
+    'uses' => 'V2ForumController@index',
+    'as' => 'forum.index',
+]);
+
+Route::get('v2/forum/{id}', [
+    'uses' => 'V2ForumController@show',
+    'as' => 'forum.show',
+]);
+
 // Static
 
 Route::get('v2/static', [

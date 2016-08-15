@@ -2,11 +2,11 @@
 
 namespace App\Http\Regions;
 
-class ForumItemSmall
+class ForumRowSmall
 {
     public function render($post)
     {
-        return component('ForumItemSmall')
+        return component('ForumRowSmall')
             ->with('route', route('content.show', [$post->type, $post]))
             ->with('profile', component('ProfileImage')
                 ->with('route', route('user.show', [$post->user]))

@@ -7,9 +7,9 @@ $badge = $badge ?? '';
 
 @endphp
 
-<div class="ForumItemSmall {{ $isclasses }}">
+<div class="ForumRowSmall {{ $isclasses }}">
 
-	<div class="ForumItemSmall__profile">
+	<div class="ForumRowSmall__profile">
 
     	{!! $profile !!}
 
@@ -17,13 +17,13 @@ $badge = $badge ?? '';
 
     <a href="{!! $route !!}">
 
-	    <div class="ForumItemSmall__title">
+	    <div class="ForumRowSmall__title">
 
 	        {{ $title }}
 
 	    </div>
 
-        <div class="ForumItemSmall__meta">
+        <div class="ForumRowSmall__meta">
 
             {!! $meta !!}
 
@@ -31,7 +31,7 @@ $badge = $badge ?? '';
 
     </a>
 
-    <div class="ForumItemSmall__badge">
+    <div class="ForumRowSmall__badge">
 
     {!! $badge !!}
 
