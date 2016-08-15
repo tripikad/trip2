@@ -17,7 +17,7 @@ Route::get('v2/news/{id}', [
     'as' => 'news.show',
 ]);
 
-Route::get('v2/news/edit', [
+Route::get('v2/news/{id}/edit', [
     'uses' => 'V2NewsController@edit',
     'as' => 'news.edit',
 ]);

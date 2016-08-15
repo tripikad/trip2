@@ -57,16 +57,22 @@
     //      ImageUpload
         },
 
+        props: {
+            body: { default: '' }
+        },
+
         data() {
             return {
-                body: '',
+                // body: '',
                 images: [],
                 editor: {},
                 imagebrowserOpen: false
             }
         },
 
-        ready: function() {
+        ready() {
+            this.body = this.body ? JSON.parse(decodeURIComponent(this.initialBody)) : ''
+
             this.editor = brace.edit(this.$els.writer)
             this.editor.setTheme('ace/theme/chrome')
             this.editor.getSession().setMode('ace/mode/markdown')
