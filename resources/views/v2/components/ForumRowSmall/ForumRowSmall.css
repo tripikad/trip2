@@ -1,14 +1,14 @@
 @import "variables";
 
-.ForumItemSmall {
+.ForumRowSmall {
 	display: flex;
 }
 
-    .ForumItemSmall__profile {
+    .ForumRowSmall__profile {
         margin-right: $margin-sm;
     }
 
-    .ForumItemSmall__title {
+    .ForumRowSmall__title {
         color: $gray-darkest;
         font: $font-heading-md;
         margin-bottom: $margin-xs;

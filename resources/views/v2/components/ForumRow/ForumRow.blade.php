@@ -7,27 +7,27 @@ $meta = $meta ?? collect();
 
 @endphp
 
-<div class="ForumItem {{ $isclasses }}">
+<div class="ForumRow {{ $isclasses }}">
 
-    <div class="ForumItem__left">
+    <div class="ForumRow__left">
 
         {!! $profile !!}
 
     </div>
 
-    <div class="ForumItem__right">
+    <div class="ForumRow__right">
 
         <div>
 
             <a href="{{ $route }}">
 
-            <div class="ForumItem__title">
+            <div class="ForumRow__title">
 
                 {{ $title }}
 
             </div>
 
-            <div class="ForumItem__meta">
+            <div class="ForumRow__meta">
 
                 {!! $meta !!}
             
