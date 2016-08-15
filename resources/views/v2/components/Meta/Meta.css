@@ -7,7 +7,7 @@
 }
 
     .Meta__item {
-        margin-right: $margin-sm;
         margin: $margin-xs ?if $mobile;
+        margin-right: $margin-sm;
     }
 
