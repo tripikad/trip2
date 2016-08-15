@@ -52,18 +52,8 @@ class BodyFormatter
         return $this;
     }
 
+
     public function youtube()
-    {
-        $this->body = preg_replace(
-            "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i",
-            '<iframe width="420" height="315" src="//www.youtube.com/embed/$2" allowfullscreen></iframe>',
-            $this->body
-        );
-
-        return $this;
-    }
-
-    public function youtube2()
     {
         $pattern = "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i";
 
@@ -72,13 +62,6 @@ class BodyFormatter
         },
             $this->body
         );
-
-        return $this;
-    }
-
-    public function newlines()
-    {
-        $this->body = nl2br($this->body);
 
         return $this;
     }
@@ -98,7 +81,7 @@ class BodyFormatter
             ->markdown()
             ->links()
             ->images()
-            ->youtube2()
+            // ->youtube()
             ->body;
     }
 }
