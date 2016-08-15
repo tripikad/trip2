@@ -13,7 +13,7 @@ class V2NewsController extends Controller
         return view('v2.layouts.1col')
             ->with('content', collect()
                 ->merge($posts->map(function ($post) {
-                    return region('NewsItem', $post);
+                    return region('NewsRow', $post);
                 }))
             );
     }
