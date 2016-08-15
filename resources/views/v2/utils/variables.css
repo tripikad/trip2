@@ -38,7 +38,7 @@ $font-family-code: monospace;
 $font-size-xs: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
-$font-size-lg: 18px;
+$font-size-lg: 20px;
 $font-size-xl: 24px;
 $font-size-xxl: 32px;
 $font-size-xxxl: 48px;
@@ -60,7 +60,7 @@ $font-text-lg: $font-weight-normal $font-size-lg / $line-height-xs $font-family,
 $font-heading-xs: $font-weight-semibold $font-size-sm / $line-height-xs $font-family, sans-serif;
 $font-heading-sm: $font-weight-semibold $font-size-md / $line-height-xs $font-family, sans-serif;
 $font-heading-md: $font-weight-semibold $font-size-lg / $line-height-xs $font-family, sans-serif;
-$font-heading-lg: $font-weight-bold $font-size-xl / $line-height-xs $font-family, sans-serif;
+$font-heading-lg: $font-weight-semibold $font-size-xl / $line-height-xs $font-family, sans-serif;
 $font-heading-xl: $font-weight-bold $font-size-xxl / $line-height-xs $font-family, sans-serif;
 $font-heading-xxl: $font-weight-bold $font-size-xxxl / $line-height-xs $font-family, sans-serif;
 $font-heading-xxxl: $font-weight-bold $font-size-xxxxl / $line-height-xs $font-family, sans-serif;
