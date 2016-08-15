@@ -17,9 +17,7 @@ class V2ForumController extends Controller
         return view('v2.layouts.1col')
             ->with('content', collect()
                 ->merge($posts->map(function ($post) {
-                    return component('Link')
-                        ->with('title', $post->vars()->title)
-                        ->with('route', route('forum.show', [$post]));
+                    return region('ForumRow', $post);
                 }))
             );
     }
