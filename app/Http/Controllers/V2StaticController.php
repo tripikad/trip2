@@ -31,19 +31,7 @@ class V2StaticController extends Controller
 
         return view('v2.layouts.1col')
 
-            ->with('header', component('Masthead')
-                ->with('header', component('Header')
-                    ->with('search', component('HeaderSearch')->is('gray'))
-                    ->with('logo', component('Icon')
-                        ->with('icon', 'tripee_logo_plain_dark')
-                        ->with('width', 80)
-                        ->with('height', 30)
-                    )
-                    ->with('navbar', region('Navbar'))
-                    ->with('navbar_mobile', region('NavbarMobile'))
-                )
-                ->with('title', $post->vars()->title)
-            )
+            ->with('header', region('Masthead', $post->vars()->title))
 
             ->with('content', collect()
                 ->push(component('Body')->with('body', $post->vars()->body))

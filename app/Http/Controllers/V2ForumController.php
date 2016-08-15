@@ -35,19 +35,7 @@ class V2ForumController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', component('Masthead')
-                ->with('header', component('Header')
-                    ->with('search', component('HeaderSearch')->is('gray'))
-                    ->with('logo', component('Icon')
-                        ->with('icon', 'tripee_logo_plain_dark')
-                        ->with('width', 80)
-                        ->with('height', 30)
-                    )
-                    ->with('navbar', region('Navbar'))
-                    ->with('navbar_mobile', region('NavbarMobile'))
-                )
-                ->with('title', trans("content.$type.index.title"))
-            )
+            ->with('header', region('Masthead', trans("content.$type.index.title")))
 
             ->with('content', collect()
                 ->push(region('ForumPost', $post))
