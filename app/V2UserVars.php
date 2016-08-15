@@ -18,7 +18,7 @@ class V2UserVars
         }
 
         $message = '%s does not respond to the "%s" property or method.';
-        
+
         throw new Exception(
             sprintf($message, static::class, $property)
         );
