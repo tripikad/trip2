@@ -22,7 +22,7 @@
 
                 <div class="NavbarMobile__search">
                 
-                    <component is="headerSearch" iconSize="lg"></component>
+                    <component is="HeaderSearch" class="HeaderSearch--white"size="lg"></component>
                 
                 </div>
 

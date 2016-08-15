@@ -7,7 +7,7 @@
             <component
                 is="Icon"
                 icon="icon-search"
-                :size="iconsize"
+                :size="size"
                 @click="active = ! active"
             ></component>
 
@@ -44,7 +44,7 @@ export default {
     props: {
         isclasses: { default: '' },
         keywords: { default: '' },
-        iconsize: { default: 'md' }
+        size: { default: 'md' }
     },
 
     data: function() {

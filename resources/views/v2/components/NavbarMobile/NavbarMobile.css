@@ -36,23 +36,22 @@
 
     .NavbarMobile__closeIcon {
         cursor: pointer;
-        padding: $padding-md;
     }
 
     .NavbarMobile__closeIcon svg {
         fill: $white;
     }
 
-        .NavbarMobile__links {
-            padding: $padding-lg;
-        }
+    .NavbarMobile__links {
+        padding: $padding-lg;
+    }
 
-        .NavbarMobile__link {
-            color: $white;
-            font: $font-text-lg;
-            text-align: center;
-            padding: $padding-sm;
-        }
+    .NavbarMobile__link {
+        color: $white;
+        font: $font-text-lg;
+        text-align: center;
+        padding: $padding-sm;
+    }
 
 .NavbarMobile--white .NavbarMobile__menuIcon svg {
     fill: $white;

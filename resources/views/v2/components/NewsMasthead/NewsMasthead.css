@@ -17,7 +17,7 @@
         font: $font-heading-lg ?if $mobile;
         line-height: $line-height-lg;
         line-height: $line-height-lg ?if $mobile;
-        margin-bottom: $margin-md;
+        margin-bottom: $margin-sm;
         margin-right: $margin-xxxl;
         margin-right: 0 ?if $mobile;
     }
