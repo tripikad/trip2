@@ -51,14 +51,14 @@ class V2StyleguideController extends Controller
                 // ->push(component('Map'))
 
                 ->merge($posts->map(function ($post) {
-                    return region('ForumItem', $post);
+                    return region('ForumRow', $post);
                 }))
 
                 ->push(component('Block')
                     ->is('uppercase')
                     ->with('title', 'Tripikad räägivad')
                     ->with('content', $posts->map(function ($post) {
-                        return region('ForumItemSmall', $post);
+                        return region('ForumRowSmall', $post);
                     })
                     )
                 )
