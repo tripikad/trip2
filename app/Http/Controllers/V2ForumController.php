@@ -26,7 +26,10 @@ class V2ForumController extends Controller
 
     public function show($id)
     {
-        $post = Content::whereType('forum')
+        
+        $type = 'forum';
+
+        $post = Content::whereType($type)
             ->whereStatus(1)
             ->findOrFail($id);
 
@@ -43,7 +46,7 @@ class V2ForumController extends Controller
                     ->with('navbar', region('Navbar'))
                     ->with('navbar_mobile', region('NavbarMobile'))
                 )
-                ->with('title', 'Foorum')
+                ->with('title', trans("content.$type.index.title"))
             )
 
             ->with('content', collect()
@@ -51,7 +54,21 @@ class V2ForumController extends Controller
                  ->merge($post->comments->map(function ($comment) {
                      return region('Comment', $comment);
                  }))
-                ->push(region('CommentCreateForm', $post))
+                //->push(region('CommentCreateForm', $post))
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Block')
+                    ->with('content', collect()
+                        ->push(component('Body')
+                            ->with('body', trans("site.description.$type"))
+                        )
+                        ->push(component('Button')
+                            ->with('title', trans("content.$type.create.title"))
+                            ->with('route', route('content.create', [$type]))
+                        )
+                    )
+                )
             )
 
             ->with('footer', region('FooterLight'));

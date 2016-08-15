@@ -45,6 +45,7 @@ class ForumPost
                 )
             )
             ->with('body', component('Body')
+                ->is('responsive')
                 ->with('body', $post->vars()->body)
             );
     }
