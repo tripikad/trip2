@@ -8,7 +8,8 @@
             {{
                 rawurlencode(json_encode([
                     'token' => csrf_token(),
-                    'alertRoute' => route('helpers.alert')
+                    'alertRoute' => route('utils.alert'),
+                    'allowedTags' => config('site.allowedtags')
                 ])) 
             }}
         ">

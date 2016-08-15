@@ -45,4 +45,16 @@ class V2NewsController extends Controller
             )
             ->with('footer', region('Footer'));
     }
+
+    public function edit($id)
+    {
+        $post = Content::whereType('news')
+           ->whereStatus(1)
+           ->findOrFail($id);
+
+        return view('v2.layouts.fullpage')
+            ->with('content', collect()
+                ->push(component('Editor')->with('post', $post))
+            );
+    }
 }

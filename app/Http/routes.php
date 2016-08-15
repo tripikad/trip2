@@ -17,7 +17,12 @@ Route::get('v2/news/{id}', [
     'as' => 'news.show',
 ]);
 
-// News
+Route::get('v2/news/{id}/edit', [
+    'uses' => 'V2NewsController@edit',
+    'as' => 'news.edit',
+]);
+
+// Forum
 
 Route::get('v2/forum', [
     'uses' => 'V2ForumController@index',
@@ -58,11 +63,16 @@ Route::post('v2/styleguide/flag', [
     'as' => 'styleguide.flag',
 ]);
 
-// Alert
+// Utils
 
-Route::get('v2/helpers/alert', [
-    'uses' => 'V2HelpersController@alert',
-    'as' => 'helpers.alert',
+Route::get('v2/utils/alert', [
+    'uses' => 'V2UtilsController@alert',
+    'as' => 'utils.alert',
+]);
+
+Route::post('v2/utils/format', [
+    'uses' => 'V2UtilsController@format',
+    'as' => 'utils.format',
 ]);
 
 
