@@ -2,8 +2,8 @@
 
 namespace App\Http\Regions;
 
-class Masthead {
-
+class Masthead
+{
     public function render($title = '')
     {
         return component('Masthead')
@@ -17,9 +17,6 @@ class Masthead {
                 ->with('navbar', region('Navbar'))
                 ->with('navbar_mobile', region('NavbarMobile'))
             )
-            ->with('title', $title)
-        ;
-
+            ->with('title', $title);
     }
-
 }
