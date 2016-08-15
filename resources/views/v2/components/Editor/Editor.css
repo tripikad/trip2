@@ -26,14 +26,13 @@
     .Editor__writer,
     #writer {
         flex: 1;
-        font-size: $font-size-sm;
+        font-size: $font-size-xs;
         line-height: 180%;
     }
 
     .Editor__preview {
         flex: 1;
         font: $font-text-md;
-        margin-left: $margin-md;
     }
 
     .Editor__imagebrowser {

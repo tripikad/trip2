@@ -9,8 +9,8 @@
                 <div class="Editor__tool" @click="insertBold()">B</div>
                 <div class="Editor__tool" @click="insertItalic()">I</div>
                 <div class="Editor__tool" @click="insertMarkdownLink()">Link</div>
+                <div class="Editor__tool" @click="insertHeading3()">H3</div>
                 <div class="Editor__tool" @click="insertHeading4()">H4</div>
-                <div class="Editor__tool" @click="insertHeading5()">H5</div>
                 <div class="Editor__tool" @click="insertTable()">▦</div>
                 <div class="Editor__tool" @click="toggleImagebrowser()">Image</div>
                 <div class="Editor__tool" @click="cleanMarkup()">Cleanup</div>
@@ -52,6 +52,10 @@
 
     // import ImageUpload from '../ImageUpload/ImageUpload.vue'
 
+    const globalProps = JSON.parse(decodeURIComponent(
+        document.querySelector('#globalprops').getAttribute('content')
+    ))
+
     export default {
 
         components: {
@@ -79,7 +83,7 @@
             this.editor.getSession().setMode('ace/mode/markdown')
             this.editor.renderer.setShowGutter(false)
             this.editor.setHighlightActiveLine(false)
-            this.editor.setOption('wrap', 55)
+            this.editor.setOption('wrap', 70)
             this.editor.$blockScrolling = Infinity
 
             this.editor.getSession().on('change', function() {
@@ -117,6 +121,7 @@
                     this.editor.selection.getRange(),
                     '**' + this.editor.getSelectedText() + '**'
                 )
+                this.updatePreview()
                 this.editor.focus()
             },
 
@@ -125,6 +130,7 @@
                     this.editor.selection.getRange(),
                     '*' + this.editor.getSelectedText() + '*'
                 )
+                this.updatePreview()
                 this.editor.focus()
             },
 
@@ -134,22 +140,25 @@
                     this.editor.selection.getRange(),
                     '[' + this.editor.getSelectedText() + '](' + link + ')'
                 )
+                this.updatePreview()
+                this.editor.focus()
+            },
+
+            insertHeading3: function() {
+                this.editor.getSession().replace(
+                    this.editor.selection.getRange(),
+                    '\n#### ' + this.editor.getSelectedText()
+                )
+                this.updatePreview()
                 this.editor.focus()
             },
 
             insertHeading4: function() {
                 this.editor.getSession().replace(
                     this.editor.selection.getRange(),
-                    '\n#### ' + this.editor.getSelectedText()
-                )
-                this.editor.focus()
-            },
-
-            insertHeading5: function() {
-                this.editor.getSession().replace(
-                    this.editor.selection.getRange(),
                     '\n##### ' + this.editor.getSelectedText()
                 )
+                this.updatePreview()
                 this.editor.focus()
             },
 
@@ -162,17 +171,18 @@
                         '\n'
                     ].join('\n')
                 )
+                this.updatePreview()
                 this.editor.focus()
             },
 
             cleanMarkup: function() {
-                var body = this.body
+                var body = this.editor.getValue()
                 body = body.replace(/&nbsp;/g, ' ')
                 body = _.unescape(body)
-                body = striptags(body,
-                    '<b><i><strong><em><a><br><ul><ol><li><img><iframe><h4><h5><h6><p>'
-                )
+                body = striptags(body, globalProps.allowedTags)
                 body = tomarkdown(body)
+                body = body.replace(/\n\n\*\*/g, '\n\n### ')
+                body = body.replace(/\*\*\n\n/g, '\n\n')
                 this.editor.setValue(body)
                 this.editor.focus()
                 this.updatePreview()
