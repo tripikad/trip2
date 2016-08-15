@@ -24,10 +24,10 @@
         z-index: 10000;
     }
 
-    .NavbarMobile__menuHeader {
+    .NavbarMobile__header {
         display: flex;
         justify-content: space-between;
-        align-content: center;
+        align-items: center;
     }
 
     .NavbarMobile__search svg {
@@ -36,10 +36,7 @@
 
     .NavbarMobile__closeIcon {
         cursor: pointer;
-        padding: $padding-lg;
-        position: absolute;
-        right: 0;
-        top: 0;
+        padding: $padding-md;
     }
 
     .NavbarMobile__closeIcon svg {
