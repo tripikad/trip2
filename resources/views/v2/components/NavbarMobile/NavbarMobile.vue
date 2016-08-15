@@ -22,13 +22,13 @@
 
                 <div class="NavbarMobile__search">
                 
-                    <component is="headerSearch"></component>
+                    <component is="HeaderSearch" class="HeaderSearch--white"size="lg"></component>
                 
                 </div>
 
                 <div class="NavbarMobile__closeIcon" @click="toggle()">
                     
-                    <component is="Icon" icon="icon-close" size="lg"></component>
+                    <component is="Icon" icon="icon-close" size="xl"></component>
 
                 </div>
 
