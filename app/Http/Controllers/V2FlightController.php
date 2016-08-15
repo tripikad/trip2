@@ -8,9 +8,12 @@ class V2FlightController extends Controller
 {
     public function index()
     {
-        $posts = Content::whereType('flight')->latest()->whereStatus(1)->take(20)->get();
+        $type = 'flight';
 
-        return view('v2.layouts.1col')
+        $posts = Content::whereType($type)->latest()->whereStatus(1)->take(20)->get();
+
+        return view('v2.layouts.2col')
+            ->with('header', region('Masthead', trans("content.$type.index.title")))
             ->with('content', collect()
                 ->merge($posts->map(function ($post) {
                     return region('FlightRow', $post);

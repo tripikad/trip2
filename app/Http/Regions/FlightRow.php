@@ -7,7 +7,6 @@ class FlightRow
     public function render($post)
     {
         return component('FlightRow')
-            ->with('route', route('content.show', [$post->type, $post]))
             ->with('icon', component('Icon')
                 ->is('blue')
                 ->with('icon', 'icon-tickets')
@@ -17,6 +16,10 @@ class FlightRow
             ->with('meta', component('Meta')->with('items', collect()
                     ->push(component('Link')
                         ->with('title', $post->vars()->created_at)
+                    )
+                    ->push(component('Link')
+                        ->with('title', trans('comment.action.edit.title'))
+                        ->with('route', route('flight.edit', [$post]))
                     )
                     ->merge($post->destinations->map(function ($tag) {
                         return component('Tag')->is('orange')->with('title', $tag->name);

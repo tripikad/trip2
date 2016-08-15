@@ -13,8 +13,8 @@
 
     .NewsMasthead__title {
         color: $white;
-        font: $font-heading-lg;
-        font: $font-heading-md ?if $mobile;
+        font: $font-heading-xl;
+        font: $font-heading-lg ?if $mobile;
         line-height: $line-height-lg;
         line-height: $line-height-lg ?if $mobile;
         margin-bottom: $margin-md;

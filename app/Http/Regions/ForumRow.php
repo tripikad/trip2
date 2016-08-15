@@ -7,7 +7,7 @@ class ForumRow
     public function render($post)
     {
         return component('ForumRow')
-            ->with('route', route('content.show', [$post->type, $post]))
+            ->with('route', route('forum.show', [$post]))
             ->with('profile', component('ProfileImage')
                 ->with('route', route('user.show', [$post->user]))
                 ->with('image', $post->user->imagePreset('small_square'))

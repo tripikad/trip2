@@ -8,13 +8,16 @@ class V2ForumController extends Controller
 {
     public function index()
     {
-        $posts = Content::whereType('forum')
+        $type = 'forum';
+
+        $posts = Content::whereType($type)
             ->whereStatus(1)
             ->latest()
             ->take(10)
             ->get();
 
         return view('v2.layouts.1col')
+            ->with('header', region('Masthead', trans("content.$type.index.title")))
             ->with('content', collect()
                 ->merge($posts->map(function ($post) {
                     return region('ForumRow', $post);
