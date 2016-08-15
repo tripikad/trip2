@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Request;
 use Response;
-use Markdown;
 
 class V2UtilsController extends Controller
 {
@@ -17,12 +16,10 @@ class V2UtilsController extends Controller
 
     public function format()
     {
-
         $body = Request::input('body');
 
         return Response::json([
-            'body' => format_body($body)
+            'body' => format_body($body),
         ]);
-
     }
 }

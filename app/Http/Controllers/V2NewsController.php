@@ -48,7 +48,6 @@ class V2NewsController extends Controller
 
     public function edit($id)
     {
-       
         $post = Content::whereType('news')
            ->whereStatus(1)
            ->findOrFail($id);
@@ -58,5 +57,4 @@ class V2NewsController extends Controller
                 ->push(component('Editor')->with('post', $post))
             );
     }
-
 }

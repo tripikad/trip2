@@ -52,7 +52,6 @@ class BodyFormatter
         return $this;
     }
 
-
     public function youtube()
     {
         $pattern = "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i";
@@ -68,11 +67,9 @@ class BodyFormatter
 
     public function markdown()
     {
-
         $this->body = Markdown::setBreaksEnabled(true)->text($this->body);
 
         return $this;
-
     }
 
     public function format()
