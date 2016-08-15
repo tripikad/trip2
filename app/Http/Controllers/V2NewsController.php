@@ -55,7 +55,7 @@ class V2NewsController extends Controller
 
         return view('v2.layouts.fullpage')
             ->with('content', collect()
-                ->push(component('Editor')->with('body', $post->body))
+                ->push(component('Editor')->with('post', $post))
             );
     }
 

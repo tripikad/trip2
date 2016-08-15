@@ -58,12 +58,12 @@
         },
 
         props: {
-            body: { default: '' }
+            post: { default: {} }
         },
 
         data() {
             return {
-                // body: '',
+                body: '',
                 images: [],
                 editor: {},
                 imagebrowserOpen: false
@@ -71,8 +71,7 @@
         },
 
         ready() {
-            this.body = this.body ? JSON.parse(decodeURIComponent(this.initialBody)) : ''
-
+            this.body = JSON.parse(decodeURIComponent(this.post)).body
             this.editor = brace.edit(this.$els.writer)
             this.editor.setTheme('ace/theme/chrome')
             this.editor.getSession().setMode('ace/mode/markdown')
