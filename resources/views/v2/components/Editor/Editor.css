@@ -1,16 +1,18 @@
 @import "variables";
 
 .Editor {
+    padding: $padding-md;
 }
 
     .Editor__toolbar {
         height: $height-md;
         display: flex;
         align-items: center;
+        margin-bottom: $margin-md;
     }
 
     .Editor__tool {
-        padding: $padding-sm;
+        margin-right: $margin-lg;
         font-family: $font-family-code;
         font-size: $font-size-xs;
         color: $gray-darkest;
@@ -18,19 +20,20 @@
 
     .Editor__wrapper {
         display: flex;
-        height: 50vh;
+        height: 80vh;
     }
 
     .Editor__writer,
     #writer {
         flex: 1;
         font-size: $font-size-sm;
-        line-height: $line-height-lg;
+        line-height: 180%;
     }
 
     .Editor__preview {
         flex: 1;
         font: $font-text-md;
+        margin-left: $margin-md;
     }
 
     .Editor__imagebrowser {

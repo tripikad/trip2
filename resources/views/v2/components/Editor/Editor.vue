@@ -71,7 +71,9 @@
         },
 
         ready() {
-            this.body = JSON.parse(decodeURIComponent(this.post)).body
+            
+            // Set up the editor
+
             this.editor = brace.edit(this.$els.writer)
             this.editor.setTheme('ace/theme/chrome')
             this.editor.getSession().setMode('ace/mode/markdown')
@@ -79,11 +81,16 @@
             this.editor.setHighlightActiveLine(false)
             this.editor.setOption('wrap', 60)
             this.editor.$blockScrolling = Infinity
-            this.editor.setValue(this.body)
 
             this.editor.getSession().on('change', function() {
                 this.updatePreview()
             }.bind(this))
+
+            // Get the content
+
+            this.body = JSON.parse(decodeURIComponent(this.post)).body
+            this.editor.setValue(this.body)
+            this.updatePreview()
 
             // this.updateImages()
         },
