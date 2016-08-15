@@ -17,12 +17,12 @@ Route::get('v2/news/{id}', [
     'as' => 'news.show',
 ]);
 
-<<<<<<< HEAD
 Route::get('v2/news/{id}/edit', [
     'uses' => 'V2NewsController@edit',
     'as' => 'news.edit',
-=======
-// News
+]);
+
+// Forum
 
 Route::get('v2/forum', [
     'uses' => 'V2ForumController@index',
@@ -32,7 +32,6 @@ Route::get('v2/forum', [
 Route::get('v2/forum/{id}', [
     'uses' => 'V2ForumController@show',
     'as' => 'forum.show',
->>>>>>> master
 ]);
 
 // Static
