@@ -1,25 +1,34 @@
 @import "variables";
 
-.Comment {
-    display: flex;
+.ForumPost {
     border: $border-gray-md;
     border-radius: $border-radius-md;
     padding: $padding-md;
     padding: $padding-sm ?if $mobile;
 }
 
-    .Comment__left {
+    .ForumPost__content {
+        display: flex;
+    }
+
+    .ForumPost__title {
+        color: $gray-darkest;
+        font: $font-heading-xl;
+        margin-bottom: $margin-sm;
+    }
+
+    .ForumPost__left {
         padding-right: $padding-sm;
         display: none ?if $mobile;
         margin-left: calc($spacer * -3.5);
         margin-top: calc($spacer * -0.75);
     }
 
-    .Comment__meta {
+    .ForumPost__meta {
         margin-bottom: $margin-sm;
     }
 
-.Comment--unpublished {
+.ForumPost--unpublished {
     opacity: $opacity-md;
     background: $pink;
 }
