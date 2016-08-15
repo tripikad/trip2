@@ -26,7 +26,6 @@ class V2ForumController extends Controller
 
     public function show($id)
     {
-        
         $type = 'forum';
 
         $post = Content::whereType($type)
