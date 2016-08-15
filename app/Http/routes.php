@@ -17,11 +17,6 @@ Route::get('v2/news/{id}', [
     'as' => 'news.show',
 ]);
 
-Route::get('v2/news/{id}/edit', [
-    'uses' => 'V2NewsController@edit',
-    'as' => 'news.edit',
-]);
-
 // Static
 
 Route::get('v2/static', [
@@ -51,16 +46,11 @@ Route::post('v2/styleguide/flag', [
     'as' => 'styleguide.flag',
 ]);
 
-// Utils
+// Alert
 
-Route::get('v2/utils/alert', [
-    'uses' => 'V2UtilsController@alert',
-    'as' => 'utils.alert',
-]);
-
-Route::post('v2/utils/format', [
-    'uses' => 'V2UtilsController@format',
-    'as' => 'utils.format',
+Route::get('v2/helpers/alert', [
+    'uses' => 'V2HelpersController@alert',
+    'as' => 'helpers.alert',
 ]);
 
 
