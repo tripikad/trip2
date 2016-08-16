@@ -9,7 +9,8 @@
                 rawurlencode(json_encode([
                     'token' => csrf_token(),
                     'alertRoute' => route('utils.alert'),
-                    'allowedTags' => config('site.allowedtags')
+                    'allowedTags' => config('site.allowedtags'),
+                    'promo' => config('promo')
                 ])) 
             }}
         ">
