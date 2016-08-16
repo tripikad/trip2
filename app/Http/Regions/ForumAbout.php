@@ -2,8 +2,8 @@
 
 namespace App\Http\Regions;
 
-class ForumAbout {
-
+class ForumAbout
+{
     public function render()
     {
         $type = 'forum';
@@ -18,8 +18,6 @@ class ForumAbout {
                     ->with('title', trans("content.$type.create.title"))
                     ->with('route', route('content.create', [$type]))
                 )
-            )
-        ;
+            );
     }
-
 }

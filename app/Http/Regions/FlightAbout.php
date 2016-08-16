@@ -2,8 +2,8 @@
 
 namespace App\Http\Regions;
 
-class FlightAbout {
-
+class FlightAbout
+{
     public function render()
     {
         $type = 'flight';
@@ -26,8 +26,6 @@ class FlightAbout {
                     ->with('title', trans("content.$type.create.title"))
                     ->with('route', route('content.create', [$type]))
                 )
-            )
-        ;
+            );
     }
-
 }
