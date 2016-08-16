@@ -8,19 +8,37 @@ class V2NewsController extends Controller
 {
     public function index()
     {
-        $posts = Content::whereType('news')->latest()->whereStatus(1)->take(20)->get();
+        $type = 'news';
 
-        return view('v2.layouts.1col')
+        $posts = Content::whereType($type)
+            ->whereStatus(1)
+            ->take(20)
+            ->latest()
+            ->get();
+
+        return view('v2.layouts.2col')
+
+            ->with('header', region('Masthead', trans("content.$type.index.title")))
+
             ->with('content', collect()
-                ->merge($posts->map(function ($post) {
-                    return region('NewsRow', $post);
-                }))
-            );
+                ->push(component('Grid')
+                    ->with('items', $posts->map(function ($post) {
+                        return region('NewsCard', $post);
+                    })
+                    )
+                )
+            )
+
+            ->with('sidebar', collect()
+                ->push(region('NewsAbout'))
+            )
+
+            ->with('footer', region('Footer'));
     }
 
     public function show($id)
     {
-        $news = Content::
+        $post = Content::
             with(
                 'images',
                 'user',
@@ -35,13 +53,13 @@ class V2NewsController extends Controller
 
 
         return view('v2.layouts.1col')
-            ->with('header', region('NewsMasthead', $news))
+            ->with('header', region('NewsMasthead', $post))
             ->with('content', collect()
-                ->push(component('Body')->is('responsive')->with('body', $news->vars()->body))
-                ->merge($news->comments->map(function ($comment) {
+                ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
+                ->merge($post->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-               // ->push(region('CommentCreateForm', $news))
+               // ->push(region('CommentCreateForm', $post))
             )
             ->with('footer', region('Footer'));
     }

@@ -8,15 +8,15 @@ $icon = $icon ?? 'icon-arrow-right';
 
 <a href="{{ $route }}">
 	
-    <div class="LinkBar {{ $isclasses }}">
+    <div class="LinkBarSmall {{ $isclasses }}">
 
-	    <div class="LinkBar__title">
+	    <div class="LinkBarSmall__title">
 	      
             {{ $title }}
 	        
 	    </div>
 
-        <div class="LinkBar__icon">
+        <div class="LinkBarSmall__icon">
 
             {!! component('Icon')->is('gray')->with('icon', $icon) !!}
 

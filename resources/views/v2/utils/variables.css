@@ -173,7 +173,12 @@ $border-white-md: 2px solid $white;
 $border-radius-md: 3px;
 $border-radius-lg: $spacer;
 
-/* Shadows */
+/* Text shadows */
+
+$text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+
+/* Box shadows */
+
 $box-shadow-left: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
 
 /* Media queries */

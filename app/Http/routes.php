@@ -29,6 +29,11 @@ Route::get('v2/flight', [
     'as' => 'flight.index',
 ]);
 
+Route::get('v2/flight/{id}', [
+    'uses' => 'V2FlightController@show',
+    'as' => 'flight.show',
+]);
+
 Route::get('v2/flight/{id}/edit', [
     'uses' => 'V2FlightController@edit',
     'as' => 'flight.edit',

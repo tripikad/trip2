@@ -39,24 +39,14 @@ class V2ForumController extends Controller
 
             ->with('content', collect()
                 ->push(region('ForumPost', $post))
-                 ->merge($post->comments->map(function ($comment) {
-                     return region('Comment', $comment);
-                 }))
+                ->merge($post->comments->map(function ($comment) {
+                    return region('Comment', $comment);
+                }))
                 //->push(region('CommentCreateForm', $post))
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')
-                    ->with('content', collect()
-                        ->push(component('Body')
-                            ->with('body', trans("site.description.$type"))
-                        )
-                        ->push(component('Button')
-                            ->with('title', trans("content.$type.create.title"))
-                            ->with('route', route('content.create', [$type]))
-                        )
-                    )
-                )
+                ->push(region('ForumAbout'))
             )
 
             ->with('footer', region('FooterLight'));

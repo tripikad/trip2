@@ -7,6 +7,7 @@ class FlightRow
     public function render($post)
     {
         return component('FlightRow')
+            ->with('route', route('flight.show', [$post]))
             ->with('icon', component('Icon')
                 ->is('blue')
                 ->with('icon', 'icon-tickets')

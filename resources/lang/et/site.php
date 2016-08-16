@@ -15,7 +15,7 @@
 
         'description' => [
             'main' => 'Trip.ee koondab kokku kõik reisimiseks vajaliku: reisijate kogemused ja reisisoovitused, reisiideed, odavad piletid, reisikaaslaste otsingu ja reisivarustuse ost ja müük',
-            'flights' => 'Kõik odavad lennupiletid mugavalt ühelt lehel. Vaata soodsaid lennupakkumisi ning alusta oma reisi planeerimist siit',
+            'flight' => 'Kõik odavad lennupiletid mugavalt ühelt lehel. Vaata soodsaid lennupakkumisi ning alusta oma reisi planeerimist siit',
             'news' => 'Uudised reisimisest, reisi- ja lennufirmadest, viisadest ja muust parasjagu aktuaalsest',
             'travelmate' => 'Leia endale reisikaaslane juba planeeritud reisiks või uute plaanide koostamiseks',
             'forum' => 'Eesti suurim reisifoorum. Küsi oma reisimist puudutav küsimus ja jaga häid soovitusi siin',
