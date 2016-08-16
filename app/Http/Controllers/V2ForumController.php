@@ -25,9 +25,17 @@ class V2ForumController extends Controller
             )
             ->with('sidebar', collect()
                 ->push(region('ForumAbout'))
+                ->push(component('Block')->with('content', collect(['3 x LinkBar--large'])))
+                ->push(component('Block')->with('content', collect(['ForumFilter'])))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
+
+            ->with('bottom', collect()
+                ->push(component('Block')->with('content', collect(['FlightBottom'])))
+                ->push(component('Block')->with('content', collect(['Promo footer'])))
+            )
+
             ->with('footer', region('FooterLight'));
     }
 
@@ -64,6 +72,7 @@ class V2ForumController extends Controller
             ->with('bottom', collect()
                 ->push(component('Block')->with('content', collect(['ForumBottom'])))
                 ->push(component('Block')->with('content', collect(['TravelmateBottom'])))
+                ->push(component('Block')->with('content', collect(['Promo footer'])))
             )
 
             ->with('footer', region('FooterLight'));

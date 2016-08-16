@@ -40,6 +40,12 @@ $footer = $footer ?? '';
 
     </div>
 
+    @foreach ($bottom as $bottom_item)
+    
+    {!! $bottom_item !!}
+            
+    @endforeach
+    
 @endsection
 
 @section('footer', $footer)
