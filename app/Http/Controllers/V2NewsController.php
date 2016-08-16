@@ -8,14 +8,33 @@ class V2NewsController extends Controller
 {
     public function index()
     {
-        $posts = Content::whereType('news')->latest()->whereStatus(1)->take(20)->get();
+        $type = 'news';
 
-        return view('v2.layouts.1col')
+        $posts = Content::whereType($type)
+            ->whereStatus(1)
+            ->take(20)
+            ->latest()
+            ->get();
+
+        return view('v2.layouts.2col')
+
+            ->with('header', region('Masthead', trans("content.$type.index.title")))
+
             ->with('content', collect()
-                ->merge($posts->map(function ($post) {
-                    return region('NewsRow', $post);
-                }))
-            );
+                ->push(component('Grid')
+                    ->with('items', $posts->map(function ($post) {
+                            return region('NewsCard', $post);
+                        })
+                    )
+                )
+            )
+
+            ->with('sidebar', collect()
+                ->push(region('NewsAbout'))
+            )
+
+            ->with('footer', region('Footer'))
+        ;
     }
 
     public function show($id)

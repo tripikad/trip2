@@ -2,11 +2,11 @@
 
 namespace App\Http\Regions;
 
-class ForumAbout {
+class NewsAbout {
 
     public function render()
     {
-        $type = 'forum';
+        $type = 'news';
         $user = auth()->user();
 
         return component('Block')
