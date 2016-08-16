@@ -54,6 +54,7 @@ class V2ForumController extends Controller
             ->with('sidebar', collect()
                 ->push(region('ForumAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('footer', region('FooterLight'));
