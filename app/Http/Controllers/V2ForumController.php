@@ -53,6 +53,10 @@ class V2ForumController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('ForumAbout'))
+                ->push(component('Block')->with('content', collect(['3 x LinkBar--large'])))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Block')->with('content', collect(['DestinationBar'])))
+                ->push(component('Block')->with('content', collect(['5 x ForumRowSmall'])))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
