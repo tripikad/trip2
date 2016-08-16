@@ -26,6 +26,19 @@ class V2FlightController extends Controller
                 ->push(region('FlightAbout'))
             )
 
+            ->with('bottom', collect()
+                ->push(component('Block')->with('content', collect(['ForumBottom'])))
+                ->push(component('Block')->with('content', collect(['Promo footer'])))
+            )
+
+            ->with('sidebar', collect()
+                ->push(region('FlightAbout'))
+                ->push(component('Block')->with('content', collect(['FlightFilter'])))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->push(component('Block')->with('content', collect(['region(About)'])))
+            )
+
             ->with('footer', region('Footer'));
     }
 

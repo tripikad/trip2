@@ -3,6 +3,7 @@
 $header = $header ?? '';
 $content = $content ?? collect();
 $sidebar = $sidebar ?? collect();
+$bottom = $bottom ?? collect();
 $footer = $footer ?? '';
 
 @endphp
