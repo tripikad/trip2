@@ -31,7 +31,9 @@ class V2NewsController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('NewsAbout'))
-                ->push(component('Promo'))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Block')->with('content', collect(['NewsFilter'])))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('footer', region('Footer'));
