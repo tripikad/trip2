@@ -20,7 +20,7 @@ class V2NewsController extends Controller
 
     public function show($id)
     {
-        $news = Content::
+        $post = Content::
             with(
                 'images',
                 'user',
@@ -35,13 +35,13 @@ class V2NewsController extends Controller
 
 
         return view('v2.layouts.1col')
-            ->with('header', region('NewsMasthead', $news))
+            ->with('header', region('NewsMasthead', $post))
             ->with('content', collect()
-                ->push(component('Body')->is('responsive')->with('body', $news->vars()->body))
-                ->merge($news->comments->map(function ($comment) {
+                ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
+                ->merge($post->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-               // ->push(region('CommentCreateForm', $news))
+               // ->push(region('CommentCreateForm', $post))
             )
             ->with('footer', region('Footer'));
     }

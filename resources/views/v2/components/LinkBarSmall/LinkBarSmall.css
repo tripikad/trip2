@@ -1,15 +1,15 @@
 @import "variables";
 
-.LinkBar {
+.LinkBarSmall {
 	display: flex;
 }
 
-    .LinkBar__title {
+    .LinkBarSmall__title {
         color: $blue;
         margin-right: $margin-sm;
         font: $font-text-md;
     }
 
-    .LinkBar__icon {
+    .LinkBarSmall__icon {
     	align-self: center;
     }
