@@ -2,7 +2,6 @@
 
 .Masthead {
     padding-top: $padding-md;
-    background: $gray-light;
 }
 
     .Masthead__map {
@@ -10,6 +9,10 @@
         top: 0;
         left: 0;
         overflow: hidden;
+        height: 247px;
+        z-index: -1;
+        background: $gray-light;
+        width: 100%;
     }
 
     .Masthead__content {

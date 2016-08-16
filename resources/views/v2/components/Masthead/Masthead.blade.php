@@ -1,6 +1,5 @@
 @php
 
-$map = $map ?? '';
 $header = $header ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
@@ -11,7 +10,11 @@ $meta = $meta ?? '';
 
     <div class="Masthead__map">
 
-    {!! $map !!}
+    <component is="Map"
+            left="-100"
+            bottom="-30"
+            right="183"
+    ></component>
     
     </div>
 
