@@ -26,7 +26,7 @@
             bottom: {default: '-52'},
             right: {default: '183'},
             top: {default: '87'},
-            points: {default: 3},
+            points: {default: 3}
         },
 
         data() {
