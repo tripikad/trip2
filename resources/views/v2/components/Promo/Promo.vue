@@ -25,13 +25,13 @@
 
         props: {
             isclasses: { default: '' },
-            promoid: { default: 'sidebar_small' }
+            promo: { default: 'sidebar_small' }
         },
 
         computed: {
             ratio: function() {
-                return (globalProps.promo[this.promoid].height /
-                    globalProps.promo[this.promoid].width) * 100
+                return (globalProps.promo[this.promo].height /
+                    globalProps.promo[this.promo].width) * 100
             }
         }
 
