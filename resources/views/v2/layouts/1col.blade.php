@@ -2,6 +2,7 @@
 
 $header = $header ?? '';
 $content = $content ?? collect();
+$bottom = $bottom ?? collect();
 $footer = $footer ?? '';
 
 @endphp
