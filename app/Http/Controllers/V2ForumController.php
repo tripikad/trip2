@@ -41,7 +41,7 @@ class V2ForumController extends Controller
                 ->push(region('ForumPost', $post))
                 ->merge($post->comments->map(function ($comment) {
                     return region('Comment', $comment);
-                 }))
+                }))
                 //->push(region('CommentCreateForm', $post))
             )
 

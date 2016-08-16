@@ -20,7 +20,6 @@ class NewsCard
                         ->with('route', route('news.edit', [$post]))
                     )
                 )
-            )
-        ;
+            );
     }
 }

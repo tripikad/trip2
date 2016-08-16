@@ -23,8 +23,8 @@ class V2NewsController extends Controller
             ->with('content', collect()
                 ->push(component('Grid')
                     ->with('items', $posts->map(function ($post) {
-                            return region('NewsCard', $post);
-                        })
+                        return region('NewsCard', $post);
+                    })
                     )
                 )
             )
@@ -33,8 +33,7 @@ class V2NewsController extends Controller
                 ->push(region('NewsAbout'))
             )
 
-            ->with('footer', region('Footer'))
-        ;
+            ->with('footer', region('Footer'));
     }
 
     public function show($id)

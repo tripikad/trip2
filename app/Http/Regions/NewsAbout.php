@@ -2,8 +2,8 @@
 
 namespace App\Http\Regions;
 
-class NewsAbout {
-
+class NewsAbout
+{
     public function render()
     {
         $type = 'news';
@@ -18,8 +18,6 @@ class NewsAbout {
                     ->with('title', trans("content.$type.create.title"))
                     ->with('route', route('content.create', [$type]))
                 )
-            )
-        ;
+            );
     }
-
 }
