@@ -1,6 +1,6 @@
 @php
 
-$background = $background ?? '';
+$image = $image ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
 
@@ -8,28 +8,27 @@ $meta = $meta ?? '';
 
  <a href="{{ $route }}">
 
-<div class="NewsCard {{ $isclasses }}" 
-    style="background-image: linear-gradient(
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.3)
-    ), url({{ $background }});">
+<div class="NewsCard {{ $isclasses }}"> 
 
-    <div>
+    <div
+        class="NewsCard__image"
+        style="background-image: url({{ $image }});"
+    >
+    
+    </div>
 
-        <div class="NewsCard__title">
+    <div class="NewsCard__title">
 
-            {{ $title }}
-
-        </div>
-
-        <div class="NewsCard__meta">
-
-            {!! $meta !!}
-        
-        </div>
-
-        </a>
+        {{ $title }}
 
     </div>
 
+    <div class="NewsCard__meta">
+
+        {!! $meta !!}
+    
+    </div>
+
 </div>
+
+</a>

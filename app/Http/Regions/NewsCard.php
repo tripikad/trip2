@@ -8,7 +8,7 @@ class NewsCard
     {
         return component('NewsCard')
             ->with('route', route('news.show', [$post]))
-            ->with('background', $post->imagePreset('small'))
+            ->with('image', $post->imagePreset('small'))
             ->with('title', $post->vars()->title)
             ->with('meta', component('Meta')
                 ->with('items', collect()
