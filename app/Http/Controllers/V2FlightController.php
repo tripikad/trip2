@@ -10,7 +10,7 @@ class V2FlightController extends Controller
     {
         $type = 'flight';
 
-        $posts = Content::whereType($type)->latest()->whereStatus(1)->take(20)->get();
+        $posts = Content::whereType($type)->latest()->whereStatus(1)->take(150)->get();
 
         return view('v2.layouts.2col')
 
