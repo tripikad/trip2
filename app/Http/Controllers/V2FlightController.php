@@ -10,7 +10,11 @@ class V2FlightController extends Controller
     {
         $type = 'flight';
 
-        $posts = Content::whereType($type)->latest()->whereStatus(1)->take(150)->get();
+        $posts = Content::whereType($type)
+            ->whereStatus(1)
+            ->take(20)
+            ->latest()
+            ->get();
 
         return view('v2.layouts.2col')
 
@@ -56,6 +60,11 @@ class V2FlightController extends Controller
             ->whereStatus(1)
             ->findOrFail($id);
 
+        $posts = Content::whereType($type)
+            ->whereStatus(1)
+            ->take(3)
+            ->latest()
+            ->get();
 
         return view('v2.layouts.2col')
 
@@ -90,7 +99,8 @@ class V2FlightController extends Controller
                 ->push(component('Block')->with('content', collect(['DestinationBar'])))
                 ->push(component('Block')->with('content', collect(['5 x ForumRowSmall'])))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->push(component('Block')->with('content', collect(['3 x FlightCard'])))
+                ->push(region('FlightCard', $posts->first()))
+                
             )
 
             ->with('bottom', collect()
