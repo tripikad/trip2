@@ -152,6 +152,8 @@ return [
         Jenssegers\Date\DateServiceProvider::class,
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        DraperStudio\Parsedown\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -217,6 +219,8 @@ return [
         'Feed'      => Roumen\Feed\Feed::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Ekko'      => Laravelista\Ekko\Facades\Ekko::class,
+        'Markdown'  => DraperStudio\Parsedown\Facades\Parsedown::class,
+
     ],
 
 ];

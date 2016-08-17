@@ -1,0 +1,31 @@
+@import "variables";
+
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .Header__search {
+        display: block;
+        display: none ?if $tablet;
+    }
+
+    .Header__logo {
+        display: block ?if $tablet;
+        display: none;
+    }
+
+    .Header__logo svg {
+        fill: $white ?if $tablet;
+    }
+
+    .Header__navbar {
+        display: block;
+        display: none ?if $tablet;
+    }
+
+    .Header__navbarMobile {
+        display: block ?if $tablet;
+        display: none;
+    }

@@ -40,12 +40,13 @@
                                     <div class="c-body">
                                         <p>{!! nl2br(trans("content.$type.add.rules")) !!}</p>
 
-                                        @include('component.link', [
+                                        <!--@include('component.link', [
                                             'modifiers' => 'm-icon',
                                             'title' => 'Loe lähemalt',
                                             'route' => '#',
-                                            'icon' => 'icon-arrow-right'
-                                        ])
+                                            'icon' => 'icon-arrow-right',
+                                            'target' => '_blank',
+                                        ])-->
                                     </div>
                                 </div>
                             </div>

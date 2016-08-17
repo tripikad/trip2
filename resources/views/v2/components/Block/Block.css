@@ -11,7 +11,7 @@
 
     .Block__title {
         font: $font-heading-md;
-        margin-bottom: $margin-sm;
+        margin-bottom: $margin-md;
         color: $green;
     }
 
@@ -19,4 +19,10 @@
         font: $font-heading-sm;
         margin-bottom: $margin-sm;
         color: $gray-darkest;
+        line-height: $line-height-xxl;
     }
+
+.Block--uppercase .Block__title {
+    text-transform: uppercase;
+    font: $font-heading-xs;
+}

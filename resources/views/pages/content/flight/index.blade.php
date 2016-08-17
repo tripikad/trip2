@@ -2,7 +2,7 @@
 
 @section('title', trans("content.$type.index.title"))
 
-@section('head_description', trans('site.description.flights'))
+@section('head_description', trans('site.description.flight'))
 
 @section('header')
 

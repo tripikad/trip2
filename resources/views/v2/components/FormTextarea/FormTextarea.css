@@ -1,0 +1,20 @@
+@import "variables";
+
+    .FormTextarea__label {
+        color: $gray-darkest;
+        display: block;
+        font: $font-heading-sm;
+        margin-bottom: $margin-xs;
+    }
+
+    .FormTextarea__textarea {
+        border-radius: $border-radius-md;
+        border: $border-gray-sm;
+        font: $font-text-md;
+        padding: $padding-sm;
+        width: 100%;
+    }
+
+    .FormTextarea__textarea::placeholder {
+        color: $gray;
+    }

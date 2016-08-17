@@ -1,0 +1,23 @@
+@import "variables";
+
+.FlightRow {
+    display: flex;
+}
+
+    .FlightRow__left {
+        display: flex;
+        align-items: center;
+        padding-right: $padding-sm;
+        display: none ?if $mobile;
+    }
+
+    .FlightRow__right {
+        display: flex;
+        align-items: center;
+    }
+
+    .FlightRow__title {
+        color: $blue;
+        font: $font-heading-md;
+        margin-bottom: $margin-xs;
+    }

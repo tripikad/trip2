@@ -63,7 +63,9 @@
                                         'modifiers' => 'm-icon',
                                         'title' => trans('content.action.continue.reading'),
                                         'route' => route('static.25151'),
-                                        'icon' => 'icon-arrow-right'
+                                        'icon' => 'icon-arrow-right',
+                                        'target' => '_blank',
+
                                     ])
                                 </div>
                             </div>

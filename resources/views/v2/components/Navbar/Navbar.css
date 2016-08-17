@@ -1,0 +1,57 @@
+@import "variables";
+
+.Navbar {
+    position: relative;
+}
+
+    .Navbar__links {
+        display: flex;
+    }
+
+    .Navbar__link {
+        padding: $padding-sm;
+        color: $gray-darker;
+        font: $font-heading-sm;
+    }
+
+    .Navbar__popover {
+        width: $width-xxl;
+        position: absolute;
+        right: 0;
+        top: $height-md;
+    }
+
+    .Navbar__arrowWrapper {
+        display: flex;
+        justify-content: center;
+    }
+
+    .Navbar__arrow {
+        width: 0;
+        height: 0;
+        border-left: $width-xxs solid transparent;
+        border-right: $width-xxs solid transparent;
+        border-bottom: $width-xxs solid $green;
+    }
+
+    .Navbar__sublinks {
+        border-radius: $border-radius-md;
+        background: $green;
+        padding: $padding-xs 0;
+    }
+
+    .Navbar__sublink {
+        color: $white;
+        font: $font-heading-sm;
+        padding: $padding-xs $padding-sm;
+    }
+
+    .Navbar__sublink:hover {
+        color: $white;
+        font: $font-heading-sm;
+        background: $green-dark;
+    }
+
+.Navbar--white .Navbar__link {
+    color: $white;
+}

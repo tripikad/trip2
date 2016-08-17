@@ -3,6 +3,98 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\ContentController;
 
+// V2
+
+// News
+
+Route::get('v2/news', [
+    'uses' => 'V2NewsController@index',
+    'as' => 'news.index',
+]);
+
+Route::get('v2/news/{id}', [
+    'uses' => 'V2NewsController@show',
+    'as' => 'news.show',
+]);
+
+Route::get('v2/news/{id}/edit', [
+    'uses' => 'V2NewsController@edit',
+    'as' => 'news.edit',
+]);
+
+// Flight
+
+Route::get('v2/flight', [
+    'uses' => 'V2FlightController@index',
+    'as' => 'flight.index',
+]);
+
+Route::get('v2/flight/{id}', [
+    'uses' => 'V2FlightController@show',
+    'as' => 'flight.show',
+]);
+
+Route::get('v2/flight/{id}/edit', [
+    'uses' => 'V2FlightController@edit',
+    'as' => 'flight.edit',
+]);
+
+// Forum
+
+Route::get('v2/forum', [
+    'uses' => 'V2ForumController@index',
+    'as' => 'forum.index',
+]);
+
+Route::get('v2/forum/{id}', [
+    'uses' => 'V2ForumController@show',
+    'as' => 'forum.show',
+]);
+
+// Static
+
+Route::get('v2/static', [
+    'uses' => 'V2StaticController@index',
+    'as' => 'static.index',
+]);
+
+Route::get('v2/static/{id}', [
+    'uses' => 'V2StaticController@show',
+    'as' => 'static.show',
+]);
+
+// Styleguide
+
+Route::get('v2/styleguide', [
+    'uses' => 'V2StyleguideController@index',
+    'as' => 'styleguide.index',
+]);
+
+Route::post('v2/styleguide/form', [
+    'uses' => 'V2StyleguideController@form',
+    'as' => 'styleguide.form',
+]);
+
+Route::post('v2/styleguide/flag', [
+    'uses' => 'V2StyleguideController@flag',
+    'as' => 'styleguide.flag',
+]);
+
+// Utils
+
+Route::get('v2/utils/alert', [
+    'uses' => 'V2UtilsController@alert',
+    'as' => 'utils.alert',
+]);
+
+Route::post('v2/utils/format', [
+    'uses' => 'V2UtilsController@format',
+    'as' => 'utils.format',
+]);
+
+
+// V1
+
 // Frontpage
 
 Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
@@ -213,10 +305,6 @@ Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 
 Route::get('index.atom', ['uses' => 'FeedController@newsFeed', 'as' => 'news.feed']);
 
 Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightFeed', 'as' => 'flight.feed']);
-
-// Styleguide
-
-Route::get('styleguide', ['uses' => 'StyleguideController@index', 'as' => 'styleguide.index']);
 
 // API
 

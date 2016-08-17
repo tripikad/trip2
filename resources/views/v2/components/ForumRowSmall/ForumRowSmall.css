@@ -1,0 +1,16 @@
+@import "variables";
+
+.ForumRowSmall {
+	display: flex;
+}
+
+    .ForumRowSmall__profile {
+        margin-right: $margin-sm;
+    }
+
+    .ForumRowSmall__title {
+        color: $gray-darkest;
+        font: $font-heading-md;
+        margin-bottom: $margin-xs;
+        margin-right: $margin-xs;
+    }

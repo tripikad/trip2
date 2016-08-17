@@ -1,15 +1,7 @@
 @import "variables";
 
-.Link {
-	display: flex;
-}
-
     .Link__title {
-        color: $blue;
-        margin-right: $margin-sm;
-        font: $font-text-md;
+        font: $font-text-sm;
+        color: $gray-dark;
     }
 
-    .Link__icon {
-    	align-self: center;
-    }

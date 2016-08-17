@@ -1,0 +1,15 @@
+@import "variables";
+
+.LinkBarSmall {
+	display: flex;
+}
+
+    .LinkBarSmall__title {
+        color: $blue;
+        margin-right: $margin-sm;
+        font: $font-text-md;
+    }
+
+    .LinkBarSmall__icon {
+    	align-self: center;
+    }

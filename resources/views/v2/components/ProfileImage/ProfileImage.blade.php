@@ -1,20 +1,27 @@
 @php
 
+$route = $route ?? '';
 $image = $image ?? '';
-$value = $value ?? 0;
+$rank = $rank ?? 0;
+$size = $size ?? 36;
+$border = $border ?? 3;
 
 @endphp
 
-<div class="ProfileImage {{ $isclasses }}">
+<div class="ProfileImage {{ $isclasses }}" style="width: {{ $size }}px; height: {{ $size }}px;">
     
-    <img class="ProfileImage__image" src="{{ $image }}" />
+    <a href="{{ $route }}">
 
-    <div class="ProfileImage__arcValue">
+    <img class="ProfileImage__image" src="{{ $image }}" style="padding: {{ $border / 2 }}px;"/>
+
+    <div class="ProfileImage__arcRank">
 
         {!!
             component('Arc')
                 ->with('startangle', 0) 
-                ->with('endangle', $value) 
+                ->with('endangle', $rank) 
+                ->with('size', $size) 
+                ->with('border', $border) 
         !!}
 
     </div>
@@ -23,10 +30,14 @@ $value = $value ?? 0;
 
         {!!
             component('Arc')
-                ->with('startangle', $value) 
+                ->with('startangle', $rank) 
                 ->with('endangle', 360) 
+                ->with('size', $size) 
+                ->with('border', $border)
         !!}
 
     </div>
+
+    </a>
 
 </div>

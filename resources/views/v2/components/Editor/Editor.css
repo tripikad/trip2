@@ -1,0 +1,53 @@
+@import "variables";
+
+.Editor {
+    padding: $padding-md;
+}
+
+    .Editor__toolbar {
+        height: $height-md;
+        display: flex;
+        align-items: center;
+        margin-bottom: $margin-md;
+    }
+
+    .Editor__tool {
+        margin-right: $margin-lg;
+        font-family: $font-family-code;
+        font-size: $font-size-xs;
+        color: $gray-darkest;
+    }
+
+    .Editor__wrapper {
+        display: flex;
+        height: 1000vh;
+    }
+
+    .Editor__writer,
+    #writer {
+        flex: 1;
+        font-size: $font-size-xs;
+        line-height: 180%;
+    }
+
+    .Editor__preview {
+        flex: 1;
+        font: $font-text-md;
+    }
+
+    .Editor__imagebrowser {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        padding: $padding-md;
+        width: $width-xxxl;
+        background: $white;
+        box-shadow: $box-shadow-left;
+    }
+
+    .Editor__imagebrowser img {
+        width: 100%;
+        margin-top: $margin-sm;
+    }
+
