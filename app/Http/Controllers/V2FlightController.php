@@ -101,7 +101,7 @@ class V2FlightController extends Controller
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->merge($posts->map(function ($post) {
                     return region('FlightCard', $post);
-                }))                
+                }))
             )
 
             ->with('bottom', collect()
