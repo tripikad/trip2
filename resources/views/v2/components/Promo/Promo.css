@@ -1,0 +1,16 @@
+@import "variables";
+
+.Promo {
+    height: 0;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+    .Promo__iframe {
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }

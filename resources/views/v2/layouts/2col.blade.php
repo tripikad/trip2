@@ -3,6 +3,7 @@
 $header = $header ?? '';
 $content = $content ?? collect();
 $sidebar = $sidebar ?? collect();
+$bottom = $bottom ?? collect();
 $footer = $footer ?? '';
 
 @endphp
@@ -60,6 +61,12 @@ $footer = $footer ?? '';
         </div>
 
     </div>
+
+    @foreach ($bottom as $bottom_item)
+    
+    {!! $bottom_item !!}
+            
+    @endforeach
 
 @endsection
 

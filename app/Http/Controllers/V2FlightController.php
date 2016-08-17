@@ -24,6 +24,15 @@ class V2FlightController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
+                ->push(component('Block')->with('content', collect(['FlightFilter'])))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->push(component('Block')->with('content', collect(['About'])))
+            )
+
+            ->with('bottom', collect()
+                ->push(component('Block')->with('content', collect(['ForumBottom'])))
+                ->push(component('Block')->with('content', collect(['Promo footer'])))
             )
 
             ->with('footer', region('Footer'));
@@ -70,10 +79,24 @@ class V2FlightController extends Controller
                     return region('Comment', $comment);
                 }))
                 //->pushWhen(region('CommentCreateForm', $post))
+                ->push(component('Block')->with('content', collect(['FlightShare'])))
+                ->push(component('Block')->with('content', collect(['Promo content'])))
+                ->push(component('Block')->with('content', collect(['FlightRow * 5'])))
+
             )
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
+                ->push(component('Block')->with('content', collect(['DestinationBar'])))
+                ->push(component('Block')->with('content', collect(['5 x ForumRowSmall'])))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Block')->with('content', collect(['3 x FlightCard'])))
+            )
+
+            ->with('bottom', collect()
+                ->push(component('Block')->with('content', collect(['FlightBottom'])))
+                ->push(component('Block')->with('content', collect(['TravelmateBottom'])))
+                ->push(component('Block')->with('content', collect(['Promo footer'])))
             )
 
             ->with('footer', region('Footer'));
