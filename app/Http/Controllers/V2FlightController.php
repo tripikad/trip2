@@ -99,8 +99,9 @@ class V2FlightController extends Controller
                 ->push(component('Block')->with('content', collect(['DestinationBar'])))
                 ->push(component('Block')->with('content', collect(['5 x ForumRowSmall'])))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->push(region('FlightCard', $posts->first()))
-                
+                ->merge($posts->map(function ($post) {
+                    return region('FlightCard', $post);
+                }))                
             )
 
             ->with('bottom', collect()
