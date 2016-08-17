@@ -27,6 +27,11 @@ class V2StyleguideController extends Controller
 
             ->with('content', collect()
 
+                ->push(component('Map')
+                    //->with('left', null)
+                    //->with('top', null)
+                )
+
                 ->push(component('Meta')->with('items', collect()
                         ->push(component('Link')
                             ->with('title', 'News')
