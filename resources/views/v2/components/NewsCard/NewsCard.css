@@ -1,18 +1,15 @@
 @import "variables";
 
-.NewsCard {
-    align-items: flex-end;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    padding: $padding-md;
-    height: $height-xxl;
-}
+    .NewsCard__image {
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: $height-xxl;
+        margin-bottom: $margin-sm;
+    }
 
     .NewsCard__title {
-        color: $white;
+        color: $blue;
         font: $font-heading-lg;
         line-height: $line-height-md;
         margin-bottom: $margin-sm;
-        text-shadow: $text-shadow;
     }
