@@ -23,8 +23,8 @@ class V2NewsController extends Controller
             ->with('content', collect()
                 ->push(component('Grid')
                     ->with('items', $posts->map(function ($post) {
-                            return region('NewsCard', $post);
-                        })
+                        return region('NewsCard', $post);
+                    })
                     )
                 )
             )
