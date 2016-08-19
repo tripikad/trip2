@@ -17,11 +17,11 @@ class ForumRow
             )
             ->with('title', $post->title)
             ->with('meta', component('Meta')->with('items', collect()
-                    ->push(component('Link')
+                    ->push(component('MetaLink')
                         ->with('title', $post->user->vars()->name)
                         ->with('route', route('user.show', [$post->user]))
                     )
-                    ->push(component('Link')
+                    ->push(component('MetaLink')
                         ->with('title', $post->vars()->created_at)
                     )
                     ->merge($post->destinations->map(function ($tag) {
