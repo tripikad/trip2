@@ -1,0 +1,17 @@
+@import "variables";
+
+.TravelmateCard {
+    align-items: center;
+    background: $gray-light;
+    display: flex;
+    flex-direction: column;
+    height: calc($spacer * 18);
+    justify-content: space-between;
+    padding: $padding-sm $padding-md $padding-md $padding-md;
+    text-align: center;
+}
+
+    .TravelmateCard__title {
+        font: $font-heading-md;
+        line-height: $line-height-md;
+    }

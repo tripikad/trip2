@@ -12,6 +12,7 @@
 
     .Tag__title {
         color: $gray-dark;
+        white-space: nowrap;
     }
 
 .Tag--orange {

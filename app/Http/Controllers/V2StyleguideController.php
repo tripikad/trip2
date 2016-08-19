@@ -26,7 +26,7 @@ class V2StyleguideController extends Controller
         return view('v2.layouts.1col')
 
             ->with('content', collect()
-
+                
                 ->push(component('Map')
                     //->with('left', null)
                     //->with('top', null)
@@ -40,6 +40,10 @@ class V2StyleguideController extends Controller
                         ->push(component('MetaLink')
                             ->with('title', 'Forum')
                             ->with('route', route('forum.index'))
+                        )
+                        ->push(component('MetaLink')
+                            ->with('title', 'Travelmate')
+                            ->with('route', route('travelmate.index'))
                         )
                         ->push(component('MetaLink')
                             ->with('title', 'Flight')
