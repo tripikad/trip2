@@ -24,6 +24,6 @@
 	    	padding-bottom: $padding-sm;
 	    }
 
-	.TravelmateCard__info:hover>.TravelmateCard__title {
+	.TravelmateCard__info:hover > .TravelmateCard__title {
 		text-decoration: underline;
 	}
