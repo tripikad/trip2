@@ -16,6 +16,12 @@ class V2ForumController extends Controller
             ->take(10)
             ->get();
 
+        $flights = Content::whereType('flight')
+            ->whereStatus(1)
+            ->latest()
+            ->take(3)
+            ->get();
+
         return view('v2.layouts.2col')
             ->with('header', region('Masthead', trans("content.$type.index.title")))
             ->with('content', collect()
@@ -32,7 +38,10 @@ class V2ForumController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Block')->with('content', collect(['FlightBottom'])))
+                ->push(component('FlightBottom')->with('items', $flights->map(function($flight) {
+                        return region('FlightCard', $flight);
+                    })
+                ))
                 ->push(component('Block')->with('content', collect(['Promo footer'])))
             )
 
