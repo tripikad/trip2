@@ -73,7 +73,7 @@ class V2StyleguideController extends Controller
                         )
                     )
                 )
-                     
+
 
                 ->push(component('DestinationBar')
                     ->with('route', route('destination.show', [$destination]))
