@@ -42,7 +42,7 @@ class V2ForumController extends Controller
                         return region('FlightCard', $flight);
                     })
                 ))
-                ->push(component('Block')->with('content', collect(['Promo footer'])))
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
             ->with('footer', region('FooterLight'));
