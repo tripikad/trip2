@@ -35,7 +35,7 @@ class V2StyleguideController extends Controller
                     })
                     )
                 )
-                
+
                 ->push(component('Map')
                     //->with('left', null)
                     //->with('top', null)
