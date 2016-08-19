@@ -2,5 +2,5 @@
 
 return [
     'date.today' => 'Today',
-    'date.yesterday' => 'yesterday',
+    'date.yesterday' => 'Yesterday',
 ];
