@@ -14,7 +14,7 @@ class TravelmateCard
                 ->with('size', 86)
                 ->with('border', 4))
             ->with('username', $post->user->name)
-            ->with('route', route('content.show', ['travelmate',$post]))
+            ->with('route', route('content.show', ['travelmate', $post]))
             ->with('title', $post->title)
             ->with('meta_bottom', component('Meta')->with('items', collect()
                 ->merge($post->destinations->map(function ($tag) {
