@@ -96,8 +96,14 @@ class V2FlightController extends Controller
                 //->pushWhen(region('CommentCreateForm', $post))
                 ->push(component('Block')->with('content', collect(['FlightShare'])))
                 ->push(component('Promo')->with('promo', 'body'))
-                ->push(component('Block')->with('content', collect(['FlightRow * 5'])))
-
+                ->push(component('Block')
+                    ->is('white')
+                    ->is('uppercase')
+                    ->with('title', trans('frontpage.index.flight.title'))
+                    ->with('content', $posts->map(function ($post) {
+                        return region('FlightRow', $post);
+                    }))
+                )
             )
 
             ->with('sidebar', collect()
