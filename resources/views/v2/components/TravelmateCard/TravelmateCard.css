@@ -1,0 +1,28 @@
+@import "variables";
+
+.TravelmateCard {
+	display: flex;
+	background-color: $gray-lighter;
+}
+
+	.TravelmateCard__info{
+		margin-left: $margin-sm;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+	}
+
+	    .TravelmateCard__user {
+	    	font: $font-heading-sm;
+	    	color: $gray-darker;
+	    	text-decoration: underline;
+	    }
+
+	    .TravelmateCard__title {
+	    	font: $font-heading-md;
+	    	color: $gray-darkest;
+	    }
+
+	    .TravelmateCard__tags {
+
+	    }
