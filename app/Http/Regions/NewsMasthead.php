@@ -28,11 +28,11 @@ class NewsMasthead
                         ->with('image', $post->user->imagePreset('small_square'))
                         ->with('rank', $post->user->vars()->rank)
                     )
-                    ->push(component('Link')
+                    ->push(component('MetaLink')
                         ->with('title', $post->user->vars()->name)
                         ->with('route', route('user.show', [$post->user]))
                     )
-                    ->push(component('Link')
+                    ->push(component('MetaLink')
                         ->with('title', $post->vars()->created_at)
                     )
                     ->merge($post->destinations->map(function ($tag) {
@@ -41,7 +41,7 @@ class NewsMasthead
                     ->merge($post->topics->map(function ($tag) {
                         return component('Tag')->with('title', $tag->name);
                     }))
-                    ->pushWhen($user && $user->hasRole('admin'), component('Link')
+                    ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                         ->with('title', trans('content.action.edit.title'))
                         ->with('route', route('content.edit', [$post->type, $post]))
                     )
