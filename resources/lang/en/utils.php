@@ -1,6 +1,6 @@
 <?php
 
 return [
-	'date.today' => 'Today',
-	'date.yesterday' => 'yesterday'
+    'date.today' => 'Today',
+    'date.yesterday' => 'yesterday',
 ];
