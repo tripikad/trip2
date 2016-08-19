@@ -22,6 +22,8 @@ class V2StyleguideController extends Controller
 
         $destination = Destination::find(4639);
 
+        $travelmates = Content::whereType('travelmate')->latest()->skip(25)->take(6)->get();
+
 
         return view('v2.layouts.1col')
 
@@ -42,6 +44,10 @@ class V2StyleguideController extends Controller
                             ->with('route', route('forum.index'))
                         )
                         ->push(component('MetaLink')
+                            ->with('title', 'Travelmate')
+                            ->with('route', route('travelmate.index'))
+                        )
+                        ->push(component('MetaLink')
                             ->with('title', 'Flight')
                             ->with('route', route('flight.index'))
                         )
@@ -51,6 +57,7 @@ class V2StyleguideController extends Controller
                         )
                     )
                 )
+
 
                 ->push(component('DestinationBar')
                     ->with('route', route('destination.show', [$destination]))

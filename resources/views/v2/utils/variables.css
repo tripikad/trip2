@@ -150,7 +150,7 @@ $width-sm: calc($spacer * 2);
 $width-md: calc($spacer * 4);
 $width-lg: calc($spacer * 6);
 $width-xl: calc($spacer * 12);
-$width-xxl: calc($spacer * 18);
+$width-xxl: calc($spacer * 16);
 $width-xxxl: calc($spacer * 24);
 $width-xxxxl: calc($spacer * 32);
 $height-xxs: $width-xxs;

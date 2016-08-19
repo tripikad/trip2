@@ -39,6 +39,18 @@ Route::get('v2/flight/{id}/edit', [
     'as' => 'flight.edit',
 ]);
 
+// Travelmates
+
+Route::get('v2/travelmate', [
+    'uses' => 'V2TravelmateController@index',
+    'as' => 'travelmate.index',
+]);
+
+Route::get('v2/travelmate/{id}', [
+    'uses' => 'V2TravelmateController@show',
+    'as' => 'travelmate.show',
+]);
+
 // Forum
 
 Route::get('v2/forum', [
