@@ -6,7 +6,6 @@ class ForumLinks
 {
     public function render()
     {
-
         return collect()
             ->push(component('Link')
                 ->is('large')
@@ -23,7 +22,5 @@ class ForumLinks
                 ->with('title', trans('frontpage.index.forum.expat'))
                 ->with('route', route('forum.index'))
             );
-            
-        ;
     }
 }
