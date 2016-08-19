@@ -3,7 +3,7 @@
     <div class="FormSelect" :class="isclasses">
     
         <multiselect
-            :selected="multiValue"
+            :selected="value"
             :multiple="false",
             :searchable="true",
             :options="options",
@@ -13,7 +13,7 @@
             label="name">
         </multiselect>
 
-        <input type="hidden" :name="name" :value="newSelected" />
+        <input type="hidden" :name="name" :value="value" />
 
     </div>
 
@@ -40,8 +40,8 @@
         },
 
         methods: {
-            updateValue(newSelected) {
-                this.selected = newSelected
+            updateValue(value) {
+                this.value = value
             }
         }
 
