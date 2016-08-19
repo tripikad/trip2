@@ -72,7 +72,7 @@ class V2ForumController extends Controller
             ->with('bottom', collect()
                 ->push(component('Block')->with('content', collect(['ForumBottom'])))
                 ->push(component('Block')->with('content', collect(['TravelmateBottom'])))
-                ->push(component('Block')->with('content', collect(['Promo footer'])))
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
             ->with('footer', region('FooterLight'));
