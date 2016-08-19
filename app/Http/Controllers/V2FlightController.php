@@ -10,7 +10,11 @@ class V2FlightController extends Controller
     {
         $type = 'flight';
 
-        $posts = Content::whereType($type)->latest()->whereStatus(1)->take(20)->get();
+        $posts = Content::whereType($type)
+            ->whereStatus(1)
+            ->take(20)
+            ->latest()
+            ->get();
 
         return view('v2.layouts.2col')
 
@@ -24,6 +28,15 @@ class V2FlightController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
+                ->push(component('Block')->with('content', collect(['FlightFilter'])))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->push(component('Block')->with('content', collect(['About'])))
+            )
+
+            ->with('bottom', collect()
+                ->push(component('Block')->with('content', collect(['ForumBottom'])))
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
             ->with('footer', region('Footer'));
@@ -47,6 +60,17 @@ class V2FlightController extends Controller
             ->whereStatus(1)
             ->findOrFail($id);
 
+        $posts = Content::whereType($type)
+            ->whereStatus(1)
+            ->take(3)
+            ->latest()
+            ->get();
+
+        $flights = Content::whereType('flight')
+            ->whereStatus(1)
+            ->latest()
+            ->take(3)
+            ->get();
 
         return view('v2.layouts.2col')
 
@@ -56,10 +80,10 @@ class V2FlightController extends Controller
                 ->push(component('FlightTitle')->with('title', $post->vars()->title))
                 ->push(component('Meta')
                     ->with('items', collect()
-                        ->push(component('Link')
+                        ->push(component('MetaLink')
                             ->with('title', $post->vars()->created_at)
                         )
-                        ->pushWhen($user && $user->hasRole('admin'), component('Link')
+                        ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                             ->with('title', trans('content.action.edit.title'))
                             ->with('route', route('flight.edit', [$post]))
                         )
@@ -70,10 +94,35 @@ class V2FlightController extends Controller
                     return region('Comment', $comment);
                 }))
                 //->pushWhen(region('CommentCreateForm', $post))
+                ->push(component('Block')->with('content', collect(['FlightShare'])))
+                ->push(component('Promo')->with('promo', 'body'))
+                ->push(component('Block')
+                    ->is('white')
+                    ->is('uppercase')
+                    ->with('title', trans('frontpage.index.flight.title'))
+                    ->with('content', $posts->map(function ($post) {
+                        return region('FlightRow', $post);
+                    }))
+                )
             )
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
+                ->push(component('Block')->with('content', collect(['DestinationBar'])))
+                ->push(component('Block')->with('content', collect(['5 x ForumRowSmall'])))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->merge($posts->map(function ($post) {
+                    return region('FlightCard', $post);
+                }))
+            )
+
+            ->with('bottom', collect()
+                ->push(component('FlightBottom')->with('items', $flights->map(function ($flight) {
+                    return region('FlightCard', $flight);
+                })
+                ))
+                ->push(component('Block')->with('content', collect(['TravelmateBottom'])))
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
             ->with('footer', region('Footer'));

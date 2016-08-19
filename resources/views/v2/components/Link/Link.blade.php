@@ -2,19 +2,26 @@
 
 $route = $route ?? '';
 $title = $title ?? '';
+$icon = $icon ?? 'icon-arrow-right';
 
 @endphp
 
-<div class="Link {{ $isclasses }}">
+<a href="{{ $route }}">
+	
+    <div class="Link {{ $isclasses }}">
 
-    @if ($route) <a href="{{ $route }}"> @endif
+	    <div class="Link__title">
+	      
+            {{ $title }}
+	        
+	    </div>
 
-    <div class="Link__title">
+        <div class="Link__icon">
 
-        {{ $title }}
+            {!! component('Icon')->is('gray')->with('icon', $icon) !!}
 
-    </div>
+        </div>
 
-    @if ($route) </a> @endif
+	</div>
 
-</div>
+</a>
