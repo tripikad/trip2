@@ -2,11 +2,10 @@
 
 namespace App\Http\Regions;
 
-class TravelmateCard {
-
+class TravelmateCard
+{
     public function render($post)
     {
-
         return component('TravelmateCard')
             ->with('ProfileImage', component('ProfileImage')
                 ->with('route', route('user.show', [$post->user]))
@@ -25,7 +24,5 @@ class TravelmateCard {
                 }))
                 )
             );
-
     }
-
 }
