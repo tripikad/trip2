@@ -36,7 +36,7 @@ class V2FlightController extends Controller
 
             ->with('bottom', collect()
                 ->push(component('Block')->with('content', collect(['ForumBottom'])))
-                ->push(component('Block')->with('content', collect(['Promo footer'])))
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
             ->with('footer', region('Footer'));
@@ -66,6 +66,12 @@ class V2FlightController extends Controller
             ->latest()
             ->get();
 
+        $flights = Content::whereType('flight')
+            ->whereStatus(1)
+            ->latest()
+            ->take(3)
+            ->get();
+
         return view('v2.layouts.2col')
 
             ->with('header', region('Masthead', trans("content.$type.index.title")))
@@ -89,7 +95,7 @@ class V2FlightController extends Controller
                 }))
                 //->pushWhen(region('CommentCreateForm', $post))
                 ->push(component('Block')->with('content', collect(['FlightShare'])))
-                ->push(component('Block')->with('content', collect(['Promo content'])))
+                ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Block')->with('content', collect(['FlightRow * 5'])))
 
             )
@@ -105,9 +111,12 @@ class V2FlightController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Block')->with('content', collect(['FlightBottom'])))
+                ->push(component('FlightBottom')->with('items', $flights->map(function($flight) {
+                        return region('FlightCard', $flight);
+                    })
+                ))
                 ->push(component('Block')->with('content', collect(['TravelmateBottom'])))
-                ->push(component('Block')->with('content', collect(['Promo footer'])))
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
             ->with('footer', region('Footer'));
