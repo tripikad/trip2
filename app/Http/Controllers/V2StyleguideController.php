@@ -32,6 +32,8 @@ class V2StyleguideController extends Controller
                     //->with('top', null)
                 )
 
+                ->push(component('FormSelect'))
+
                 ->push(component('Meta')->with('items', collect()
                         ->push(component('Link')
                             ->with('title', 'News')

@@ -1,0 +1,17 @@
+@import "variables";
+
+.FormSelect {
+
+}
+
+.multiselect__tags {
+    font: $font-text-sm;
+}
+
+.multiselect__tag {
+    font: $font-text-xs;
+}
+
+.multiselect__content {
+    font: $font-text-sm;
+}
