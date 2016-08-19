@@ -26,7 +26,7 @@ class V2StyleguideController extends Controller
         return view('v2.layouts.1col')
 
             ->with('content', collect()
-                
+
                 ->push(component('Map')
                     //->with('left', null)
                     //->with('top', null)
