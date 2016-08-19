@@ -3,25 +3,24 @@
 $title = $title ?? '';
 $profile = $profile ?? '';
 $route = $route ?? '';
-$username = $username ?? '';
-$meta = $meta ?? '';
+$meta_top = $meta_top ?? '';
+$meta_bottom = $meta_bottom ?? '';
 
 @endphp
 
 <div class="TravelmateCard {{ $isclasses }}">
 
-	<div class="TravelmateCard__image">
+	<div class="TravelmateCard__profile">
 
         {!! $profile !!}
 
-
     </div>
 
-    <a href="{{ $route }}" class="TravelmateCard__info" >
+    <div class="TravelmateCard__content">
 
-    	<div class="TravelmateCard__user" >
+    	<div class="TravelmateCard__metaTop" >
 
-	        {!! $username !!}
+	        {!! $meta_top !!}
 
 	    </div>
 
@@ -31,12 +30,12 @@ $meta = $meta ?? '';
 
 	    </div>
 
-	    <div class="TravelmateCard__meta">
+	    <div class="TravelmateCard__metaBottom">
 
 	        {!! $meta_bottom !!}
 
 	    </div>
 
-    </a>
+    </div>
 
 </div>
