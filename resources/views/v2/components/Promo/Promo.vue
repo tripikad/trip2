@@ -8,7 +8,8 @@
         <iframe
             class="Promo__iframe"
             src="/photos/social.jpg"
-            frameborder='0'
+            frameborder="0"
+            scrolling="no"
         ></iframe>
     
     </div>

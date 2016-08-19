@@ -1,6 +1,6 @@
 @php
 
-$items = $items ?? collect;
+$items = $items ?? collect();
 
 @endphp
 

@@ -21,7 +21,7 @@ class V2NewsController extends Controller
             ->with('header', region('Masthead', trans("content.$type.index.title")))
 
             ->with('content', collect()
-                ->push(component('Grid')
+                ->push(component('NewsGrid')
                     ->with('items', $posts->map(function ($post) {
                         return region('NewsCard', $post);
                     })

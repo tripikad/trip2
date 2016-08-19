@@ -36,7 +36,7 @@ class V2FlightController extends Controller
 
             ->with('bottom', collect()
                 ->push(component('Block')->with('content', collect(['ForumBottom'])))
-                ->push(component('Block')->with('content', collect(['Promo footer'])))
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
             ->with('footer', region('Footer'));
@@ -66,6 +66,12 @@ class V2FlightController extends Controller
             ->latest()
             ->get();
 
+        $flights = Content::whereType('flight')
+            ->whereStatus(1)
+            ->latest()
+            ->take(3)
+            ->get();
+
         return view('v2.layouts.2col')
 
             ->with('header', region('Masthead', trans("content.$type.index.title")))
@@ -74,10 +80,10 @@ class V2FlightController extends Controller
                 ->push(component('FlightTitle')->with('title', $post->vars()->title))
                 ->push(component('Meta')
                     ->with('items', collect()
-                        ->push(component('Link')
+                        ->push(component('MetaLink')
                             ->with('title', $post->vars()->created_at)
                         )
-                        ->pushWhen($user && $user->hasRole('admin'), component('Link')
+                        ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                             ->with('title', trans('content.action.edit.title'))
                             ->with('route', route('flight.edit', [$post]))
                         )
@@ -89,9 +95,15 @@ class V2FlightController extends Controller
                 }))
                 //->pushWhen(region('CommentCreateForm', $post))
                 ->push(component('Block')->with('content', collect(['FlightShare'])))
-                ->push(component('Block')->with('content', collect(['Promo content'])))
-                ->push(component('Block')->with('content', collect(['FlightRow * 5'])))
-
+                ->push(component('Promo')->with('promo', 'body'))
+                ->push(component('Block')
+                    ->is('white')
+                    ->is('uppercase')
+                    ->with('title', trans('frontpage.index.flight.title'))
+                    ->with('content', $posts->map(function ($post) {
+                        return region('FlightRow', $post);
+                    }))
+                )
             )
 
             ->with('sidebar', collect()
@@ -105,9 +117,12 @@ class V2FlightController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Block')->with('content', collect(['FlightBottom'])))
+                ->push(component('FlightBottom')->with('items', $flights->map(function ($flight) {
+                    return region('FlightCard', $flight);
+                })
+                ))
                 ->push(component('Block')->with('content', collect(['TravelmateBottom'])))
-                ->push(component('Block')->with('content', collect(['Promo footer'])))
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
             ->with('footer', region('Footer'));

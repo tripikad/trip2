@@ -16,7 +16,7 @@ class V2StaticController extends Controller
         return view('v2.layouts.1col')
             ->with('content', collect()
                 ->merge($posts->map(function ($post) {
-                    return component('Link')
+                    return component('MetaLink')
                         ->with('title', $post->vars()->title)
                         ->with('route', route('static.show', [$post]));
                 }))
