@@ -22,10 +22,19 @@ class V2StyleguideController extends Controller
 
         $destination = Destination::find(4639);
 
+        $travelmates = Content::whereType('travelmate')->latest()->skip(25)->take(6)->get();
+
 
         return view('v2.layouts.1col')
 
             ->with('content', collect()
+
+                ->push(component('NewsGrid')
+                    ->with('items', $travelmates->map(function ($travelmate) {
+                        return region('TravelmateCard', $travelmate);
+                    })
+                    )
+                )
 
                 ->push(component('Map')
                     //->with('left', null)
@@ -55,6 +64,7 @@ class V2StyleguideController extends Controller
                         )
                     )
                 )
+
 
                 ->push(component('DestinationBar')
                     ->with('route', route('destination.show', [$destination]))
