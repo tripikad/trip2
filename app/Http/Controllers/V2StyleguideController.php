@@ -29,13 +29,6 @@ class V2StyleguideController extends Controller
 
             ->with('content', collect()
 
-                ->push(component('NewsGrid')
-                    ->with('items', $travelmates->map(function ($travelmate) {
-                        return region('TravelmateCard', $travelmate);
-                    })
-                    )
-                )
-
                 ->push(component('Map')
                     //->with('left', null)
                     //->with('top', null)

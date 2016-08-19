@@ -24,14 +24,21 @@ class V2TravelmateController extends Controller
             ->with('content', collect()
                 ->push(component('NewsGrid')
                     ->with('items', $posts->map(function ($post) {
-                        return region('TravelmateCard', $post);
-                    })
+                            return region('TravelmateCard', $post);
+                        })
                     )
                 )
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect(['NewsFilter'])))
+                ->push(component('Block')->with('content', collect(['TravelmateAbout'])))
+                ->push(component('Block')->with('content', collect(['TravelmateFilter'])))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Block')->with('content', collect(['About'])))
+            )
+
+            ->with('bottom', collect()
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
             ->with('footer', region('Footer'));

@@ -24,11 +24,15 @@ $meta_bottom = $meta_bottom ?? '';
 
 	    </div>
 
+        <a href="{{ $route }}">
+
 	    <div  class="TravelmateCard__title">
 
 	        {{ $title }}
 
 	    </div>
+
+        </a>
 
 	    <div class="TravelmateCard__metaBottom">
 
