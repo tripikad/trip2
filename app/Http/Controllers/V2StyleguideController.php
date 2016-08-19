@@ -22,13 +22,20 @@ class V2StyleguideController extends Controller
 
         $destination = Destination::find(4639);
 
-        $travelmate = Content::find(98469);
+        $travelmates = Content::whereType('travelmate')->latest()->skip(25)->take(6)->get();
 
 
         return view('v2.layouts.1col')
 
             ->with('content', collect()
 
+                ->push(component('NewsGrid')
+                    ->with('items', $travelmates->map(function ($travelmate) {
+                        return region('TravelmateCard', $travelmate);
+                    })
+                    )
+                )
+                
                 ->push(component('Map')
                     //->with('left', null)
                     //->with('top', null)
@@ -50,26 +57,6 @@ class V2StyleguideController extends Controller
                         ->push(component('MetaLink')
                             ->with('title', 'Static pages')
                             ->with('route', route('static.index'))
-                        )
-                    )
-                )
-
-                ->push(component('TravelmateCard')
-                    ->with('ProfileImage', component('ProfileImage')
-                        ->with('route', route('user.show', [$travelmate->user]))
-                        ->with('image', $travelmate->user->imagePreset('small_square'))
-                        ->with('rank', $travelmate->user->vars()->rank)
-                        ->with('size', 86)
-                        ->with('border', 4))
-                    ->with('user', $travelmate->user->name)
-                    ->with('title', $travelmate->title)
-                    ->with('meta', component('Meta')->with('items', collect()
-                        ->merge($travelmate->destinations->map(function ($tag) {
-                            return component('Tag')->is('orange')->with('title', $tag->name);
-                        }))
-                        ->merge($travelmate->topics->map(function ($tag) {
-                            return component('Tag')->with('title', $tag->name);
-                        }))
                         )
                     )
                 )
