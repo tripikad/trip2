@@ -1,9 +1,10 @@
 @php
 
 $title = $title ?? '';
-$ProfileImage = $ProfileImage ?? '';
+$profile = $profile ?? '';
 $route = $route ?? '';
-$user = $user ?? '';
+$username = $username ?? '';
+$meta = $meta ?? '';
 
 @endphp
 
@@ -11,16 +12,16 @@ $user = $user ?? '';
 
 	<div class="TravelmateCard__image">
 
-        {!! $ProfileImage !!}
+        {!! $profile !!}
 
 
     </div>
 
-    <a href="#" class="TravelmateCard__info" >
+    <a href="{{ $route }}" class="TravelmateCard__info" >
 
     	<div class="TravelmateCard__user" >
 
-	        {!! $user !!}
+	        {!! $username !!}
 
 	    </div>
 
@@ -30,9 +31,9 @@ $user = $user ?? '';
 
 	    </div>
 
-	    <div class="TravelmateCard__tags">
+	    <div class="TravelmateCard__meta">
 
-	        {!! $meta !!}
+	        {!! $meta_bottom !!}
 
 	    </div>
 

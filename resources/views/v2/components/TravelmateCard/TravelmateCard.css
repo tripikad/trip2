@@ -5,7 +5,7 @@
 	background-color: $gray-lighter;
 }
 
-	.TravelmateCard__info{
+	.TravelmateCard__info {
 		margin-left: $margin-sm;
 		display: flex;
 		flex-direction: column;
@@ -15,14 +15,15 @@
 	    .TravelmateCard__user {
 	    	font: $font-heading-sm;
 	    	color: $gray-darker;
-	    	text-decoration: underline;
+	    	margin-bottom: $margin-sm;
 	    }
 
 	    .TravelmateCard__title {
 	    	font: $font-heading-md;
 	    	color: $gray-darkest;
+	    	padding-bottom: $padding-sm;
 	    }
 
-	    .TravelmateCard__tags {
-
-	    }
+	.TravelmateCard__info:hover>.TravelmateCard__title {
+		text-decoration: underline;
+	}
