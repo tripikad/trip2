@@ -24,8 +24,8 @@ class V2TravelmateController extends Controller
             ->with('content', collect()
                 ->push(component('NewsGrid')
                     ->with('items', $posts->map(function ($post) {
-                            return region('TravelmateCard', $post);
-                        })
+                        return region('TravelmateCard', $post);
+                    })
                     )
                 )
             )
