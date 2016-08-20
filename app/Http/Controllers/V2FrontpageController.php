@@ -23,15 +23,12 @@ class V2FrontpageController extends Controller
             ->with('content_first', collect()
                 ->push(component('FrontpageNews')
                     ->with('items', $posts->map(function ($post) {
-                            return region('NewsCard', $post);
-                        })
+                        return region('NewsCard', $post);
+                    })
                     )
                 )
             )
 
-            ->with('footer', region('Footer'))
-        ;
-    
+            ->with('footer', region('Footer'));
     }
 }
-

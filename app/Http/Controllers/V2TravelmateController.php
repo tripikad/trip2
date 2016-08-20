@@ -24,8 +24,8 @@ class V2TravelmateController extends Controller
             ->with('content', collect()
                 ->push(component('NewsGrid')
                     ->with('items', $posts->map(function ($post) {
-                            return region('TravelmateCard', $post);
-                        })
+                        return region('TravelmateCard', $post);
+                    })
                     )
                 )
             )
@@ -62,7 +62,7 @@ class V2TravelmateController extends Controller
             ->latest()
             ->take(3)
             ->get();
-            
+
         return view('v2.layouts.2col')
 
             ->with('header', region('Masthead', trans("content.$type.index.title")))
@@ -96,8 +96,8 @@ class V2TravelmateController extends Controller
 
             ->with('bottom', collect()
                 ->push(component('FlightBottom')->with('items', $flights->map(function ($flight) {
-                        return region('FlightCard', $flight);
-                    })
+                    return region('FlightCard', $flight);
+                })
                 ))
                 ->push(component('Block')->with('content', collect(['TravelmateBottom'])))
                 ->push(component('Promo')->with('promo', 'footer'))
@@ -105,5 +105,4 @@ class V2TravelmateController extends Controller
 
             ->with('footer', region('Footer'));
     }
-
 }
