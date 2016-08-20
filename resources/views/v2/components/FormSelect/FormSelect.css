@@ -1,0 +1,41 @@
+@import "variables";
+
+.FormSelect {
+
+}
+
+.multiselect__option--highlight {
+    background: $orange !important;
+}
+
+.multiselect__option--highlight::after {
+    background: $orange !important;
+}
+
+.multiselect__tags {
+    font: $font-text-sm;
+}
+
+.multiselect__tag {
+    font: $font-text-xs !important;
+    background: none !important;
+    border: 1px solid $orange !important;
+    border-radius: $border-radius-lg !important;
+    color: $orange !important;
+}
+
+.multiselect__tag span {
+    color: $orange !important;
+}
+
+.multiselect__tag-icon:hover {
+    background: none !important;
+}
+
+.multiselect__tag-icon::after {
+    color: $orange !important;
+}
+
+.multiselect__content {
+    font: $font-text-sm;
+}

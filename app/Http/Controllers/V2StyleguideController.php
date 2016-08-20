@@ -22,8 +22,9 @@ class V2StyleguideController extends Controller
 
         $destination = Destination::find(4639);
 
-        $travelmates = Content::whereType('travelmate')->latest()->skip(25)->take(6)->get();
+        $destinations = Destination::select('id', 'name')->get();
 
+        $travelmates = Content::whereType('travelmate')->latest()->skip(25)->take(6)->get();
 
         return view('v2.layouts.1col')
 
@@ -96,6 +97,12 @@ class V2StyleguideController extends Controller
                             ->with('name', 'check')
                             ->with('label', 'Subscribe to comment')
                         )
+                        ->push(component('FormSelect')
+                            ->with('name', 'destination')
+                            ->with('options', $destinations)
+                            ->with('placeholder', 'Just select')
+                            ->with('helper', 'Press E to select')
+                        )
                         ->push(component('FormButton')
                             ->with('title', trans('comment.create.submit.title'))
                         )
@@ -117,9 +124,7 @@ class V2StyleguideController extends Controller
     {
         dump(request()->all());
 
-        sleep(2);
-
-        return redirect()->route('styleguide.index')->with('info', 'We are back');
+        // return redirect()->route('styleguide.index')->with('info', 'We are back');
     }
 
     public function flag()
