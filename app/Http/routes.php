@@ -5,6 +5,13 @@ use App\Http\Controllers\ContentController;
 
 // V2
 
+// Frontpage
+
+Route::get('v2/front', [
+    'uses' => 'V2FrontpageController@index',
+    'as' => 'front.index',
+]);
+
 // News
 
 Route::get('v2/news', [
