@@ -13,7 +13,7 @@
             label="name">
         </multiselect>
 
-        <input type="hidden" :name="name" :value="selected" />
+        <!--input type="hidden" :name="name" :value="selected" /-->
 
     </div>
 
@@ -29,13 +29,13 @@
 
         props: {
             isclasses: { default: '' },
-            name: { default: 'select' }
+            name: { default: '' },
+            options: { default: [] }
         },
 
         data() {
             return {
-                selected: null,
-                options: [{id: 1, name: 'One'}, {id: 2, name: 'Two'}]
+                selected: null
             }
         },
 
@@ -43,6 +43,12 @@
             updateValue(selected) {
                 this.selected = selected
             }
+        },
+
+        ready() {
+            this.options = this.options
+                ? JSON.parse(decodeURIComponent(this.options))
+                : []
         }
 
     }

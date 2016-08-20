@@ -32,8 +32,6 @@ class V2StyleguideController extends Controller
                     //->with('top', null)
                 )
 
-                ->push(component('FormSelect'))
-
                 ->push(component('Meta')->with('items', collect()
                         ->push(component('MetaLink')
                             ->with('title', 'News')
@@ -91,6 +89,13 @@ class V2StyleguideController extends Controller
                             ->with('name', 'check')
                             ->with('label', 'Subscribe to comment')
                         )
+                        ->push(component('FormSelect')
+                            ->with('name', 'select')
+                            ->with('options', [
+                                ['id' => 1, 'name' => 'Some'],
+                                ['id' => 2, 'name' => 'Stuff']
+                            ])
+                        )
                         ->push(component('FormButton')
                             ->with('title', trans('comment.create.submit.title'))
                         )
@@ -112,9 +117,7 @@ class V2StyleguideController extends Controller
     {
         dump(request()->all());
 
-        sleep(2);
-
-        return redirect()->route('styleguide.index')->with('info', 'We are back');
+        // return redirect()->route('styleguide.index')->with('info', 'We are back');
     }
 
     public function flag()
