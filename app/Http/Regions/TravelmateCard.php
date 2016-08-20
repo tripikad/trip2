@@ -14,7 +14,7 @@ class TravelmateCard
                 ->with('size', 96)
                 ->with('border', 4)
             )
-            ->with('route', route('content.show', ['travelmate', $post]))
+            ->with('route', route('travelmate.show', [$post]))
             ->with('meta_top', component('Meta')->with('items', collect()
                 ->push(component('MetaLink')
                     ->with('title', $post->user->vars()->name)
