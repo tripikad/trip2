@@ -77,7 +77,7 @@ class V2FlightController extends Controller
             ->with('header', region('Masthead', trans("content.$type.index.title")))
 
             ->with('content', collect()
-                ->push(component('FlightTitle')->with('title', $post->vars()->title))
+                ->push(component('Title')->with('title', $post->vars()->title))
                 ->push(component('Meta')
                     ->with('items', collect()
                         ->push(component('MetaLink')
