@@ -5,15 +5,17 @@
         <component
             is="Multiselect"
             :selected="selected"
-            :multiple="false",
+            :multiple="true",
             :searchable="true",
             :options="options",
             @update="updateValue"
             :placeholder="placeholder"
-            label="name">
+            label="name"
+            :select-label="helper"
+        >
         </component>
 
-        <input type="hidden" :name="name" :value="selected.id">
+        <input type="hidden" :name="name" :value="selected | json">
 
     </div>
 
@@ -31,7 +33,8 @@
             isclasses: { default: '' },
             name: { default: '' },
             options: { default: [] },
-            placeholder: { default: '' }
+            placeholder: { default: '' },
+            helper: { default: '' }
         },
 
         data() {
