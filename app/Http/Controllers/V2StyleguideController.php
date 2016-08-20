@@ -22,6 +22,7 @@ class V2StyleguideController extends Controller
 
         $destination = Destination::find(4639);
 
+        $destinations = Destination::select('id', 'name')->get();
 
         return view('v2.layouts.1col')
 
@@ -90,11 +91,9 @@ class V2StyleguideController extends Controller
                             ->with('label', 'Subscribe to comment')
                         )
                         ->push(component('FormSelect')
-                            ->with('name', 'select')
-                            ->with('options', [
-                                ['id' => 1, 'name' => 'Some'],
-                                ['id' => 2, 'name' => 'Stuff']
-                            ])
+                            ->with('name', 'destination')
+                            ->with('options', $destinations)
+                            ->with('placeholder', 'Select...')
                         )
                         ->push(component('FormButton')
                             ->with('title', trans('comment.create.submit.title'))

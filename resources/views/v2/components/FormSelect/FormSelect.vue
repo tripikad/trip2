@@ -2,18 +2,18 @@
 
     <div class="FormSelect" :class="isclasses">
     
-        <multiselect
+        <component
+            is="Multiselect"
             :selected="selected"
             :multiple="false",
             :searchable="true",
             :options="options",
             @update="updateValue"
-            placeholder="Vali"
-            key="name"
+            :placeholder="placeholder"
             label="name">
-        </multiselect>
+        </component>
 
-        <!--input type="hidden" :name="name" :value="selected" /-->
+        <input type="hidden" :name="name" :value="selected.id">
 
     </div>
 
@@ -30,7 +30,8 @@
         props: {
             isclasses: { default: '' },
             name: { default: '' },
-            options: { default: [] }
+            options: { default: [] },
+            placeholder: { default: '' }
         },
 
         data() {
