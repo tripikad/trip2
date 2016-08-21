@@ -128,21 +128,19 @@ class V2StyleguideController extends Controller
         //return abort(404);
     }
 
-    public function store() {
-
+    public function store()
+    {
         $image = Request::file('image');
 
-        $imagename = 'image-' . rand(1,3) . '.' .$image->getClientOriginalExtension();
+        $imagename = 'image-'.rand(1, 3).'.'.$image->getClientOriginalExtension();
 
-        if($image->move(public_path() . '/images/' . $imagename)) {
+        if ($image->move(public_path().'/images/'.$imagename)) {
 
             //unlink(public_path() . '/images/' . $imagename);
 
         return Response::json([
-            'image' => '/images/'. $imagename
+            'image' => '/images/'.$imagename,
         ]);
-
         }
-
     }
 }
