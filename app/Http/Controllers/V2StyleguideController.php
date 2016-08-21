@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Content;
 use App\Destination;
+use Request;
+use Response;
 
 class V2StyleguideController extends Controller
 {
@@ -92,6 +94,7 @@ class V2StyleguideController extends Controller
                         ->push(component('FormButton')
                             ->with('title', trans('comment.create.submit.title'))
                         )
+                        ->push(component('ImageUpload'))
                     )
                 )
 
@@ -123,5 +126,23 @@ class V2StyleguideController extends Controller
             ]);
         }
         //return abort(404);
+    }
+
+    public function store() {
+
+        $image = Request::file('image');
+
+        $imagename = 'image-' . rand(1,3) . '.' .$image->getClientOriginalExtension();
+
+        if($image->move(public_path() . '/images/' . $imagename)) {
+
+            //unlink(public_path() . '/images/' . $imagename);
+
+        return Response::json([
+            'image' => '/images/'. $imagename
+        ]);
+
+        }
+
     }
 }

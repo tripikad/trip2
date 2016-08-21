@@ -92,6 +92,11 @@ Route::post('v2/utils/format', [
     'as' => 'utils.format',
 ]);
 
+Route::post('v2/image/store', [
+    'uses' => 'V2StyleguideController@store',
+    'as' => 'image.store',
+]);
+
 
 // V1
 

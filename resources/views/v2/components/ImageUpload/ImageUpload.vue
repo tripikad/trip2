@@ -23,6 +23,7 @@
             Dropzone.autoDiscover = false
 
             new Dropzone(this.$els.dropzone, {
+                url: '/v2/image/store',
                 paramName: 'image',
                 maxFilesize: 10,
                 uploadMultiple: false,
