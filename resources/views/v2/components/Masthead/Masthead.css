@@ -24,5 +24,7 @@
 
     .Masthead__title {
         font: $font-heading-xxxl;
+        font: $font-heading-xxl ?if $tablet;
+        font: $font-heading-lg ?if $mobile;
         color: $gray-darkest;
     }
