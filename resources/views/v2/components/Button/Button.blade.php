@@ -1,5 +1,5 @@
 @php
-
+$target = $target ?? '';
 $icon = $icon ?? '';
 $route = $route ?? '';
 $title = $title ?? '';
@@ -7,7 +7,7 @@ $title = $title ?? '';
 @endphp
 
 
-<a href="{{ $route }}">
+<a href="{{ $route }}" target="{{$target ? '_blank' : ''}}">
 
     <div class="Button {{ $isclasses }}">
 
