@@ -104,7 +104,7 @@ class V2FlightController extends Controller
                         ->push(component('Button')
                             ->is('twitter')
                             ->with('target', true)
-                            ->with('icon','icon-twitter')
+                            ->with('icon', 'icon-twitter')
                             ->with('title', trans('utils.share.twitter'))
                             ->with('route', route('utils.share.twitter')))))
                 ->push(component('Promo')->with('promo', 'body'))
