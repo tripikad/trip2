@@ -17,3 +17,13 @@
 .Button__title {
     color: $white;
 }
+
+.Button--facebook {
+    background: $facebook;
+    padding: $padding-xs;
+}
+
+.Button--twitter {
+    background: $twitter;
+    padding: $padding-xs;
+}
