@@ -41,12 +41,12 @@ class V2FlightController extends Controller
                     ->with('content', collect()
                         ->push(component('ForumBottom')
                             ->with('left_items', region('ForumLinks'))
-                            ->with('right_items', $forumPosts->map(function($forumPost) {
+                            ->with('right_items', $forumPosts->map(function ($forumPost) {
                                 return region('ForumRow', $forumPost);
                             }))
-                    
+
                         )
-                    )  
+                    )
                 )
             )
                 //->push(component('Promo')->with('promo', 'footer'))
