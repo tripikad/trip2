@@ -20,10 +20,10 @@
 
 .Button--facebook {
     background: $facebook;
-    padding: $padding-xs;
+    ppadding: $padding-xs;
 }
 
 .Button--twitter {
     background: $twitter;
-    padding: $padding-xs;
+    ppadding: $padding-xs;
 }
