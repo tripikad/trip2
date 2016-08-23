@@ -147,8 +147,7 @@ class V2StyleguideController extends Controller
         $imagename = 'image-'.rand(1, 3).'.'.$image->getClientOriginalExtension();
 
         return Response::json([
-            'image' => $imagename
+            'image' => $imagename,
         ]);
-
     }
 }
