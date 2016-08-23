@@ -38,6 +38,10 @@ class V2FlightController extends Controller
 
             ->with('bottom', collect()
                 ->push(component('Block')
+                    ->is('red')
+                    ->is('uppercase')
+                    ->is('white')
+                    ->with('title', trans('content.forum.sidebar.title'))
                     ->with('content', collect()
                         ->push(component('ForumBottom')
                             ->with('left_items', region('ForumLinks'))

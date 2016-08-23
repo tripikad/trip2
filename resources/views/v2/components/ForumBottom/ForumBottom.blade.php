@@ -1,7 +1,7 @@
 @php
 
-$left_items = $left_items ?? '';
-$right_items = $right_items ?? '';
+$left_items = $left_items ?? collect();
+$right_items = $right_items ?? collect();
 
 @endphp
 
@@ -25,7 +25,7 @@ $right_items = $right_items ?? '';
 
     @foreach($right_items as $right_item)
 
-    	<div class="ForumBottom__item">
+        <div class="margin-bottom-md">
     		
     		{!! $right_item !!}
 
