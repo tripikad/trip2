@@ -31,7 +31,7 @@
                 maxFiles: 1,
                 headers: {'X-CSRF-TOKEN': globalProps.token},
                 success: function(file, res) {
-                    this.$dispatch('imageUploaded')
+                    this.$dispatch('showAlert', res.image + ' uploaded')
                 }.bind(this)
 
             }).on('complete', function(file) {

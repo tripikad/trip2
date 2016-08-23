@@ -146,13 +146,9 @@ class V2StyleguideController extends Controller
 
         $imagename = 'image-'.rand(1, 3).'.'.$image->getClientOriginalExtension();
 
-        if ($image->move(public_path().'/images/'.$imagename)) {
-
-            //unlink(public_path() . '/images/' . $imagename);
-
         return Response::json([
-            'image' => '/images/'.$imagename,
+            'image' => $imagename
         ]);
-        }
+
     }
 }
