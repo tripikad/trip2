@@ -16,6 +16,8 @@ class V2FlightController extends Controller
             ->latest()
             ->get();
 
+        $forumPosts = Content::whereType('forum')->latest()->skip(10)->take(5)->get();
+
         return view('v2.layouts.2col')
 
             ->with('header', region('Masthead', trans("content.$type.index.title")))
@@ -35,9 +37,19 @@ class V2FlightController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Block')->with('content', collect(['ForumBottom'])))
-                ->push(component('Promo')->with('promo', 'footer'))
+                ->push(component('Block')
+                    ->with('content', collect()
+                        ->push(component('ForumBottom')
+                            ->with('left_items', region('ForumLinks'))
+                            ->with('right_items', $forumPosts->map(function($forumPost) {
+                                return region('ForumRow', $forumPost);
+                            }))
+                    
+                        )
+                    )  
+                )
             )
+                //->push(component('Promo')->with('promo', 'footer'))
 
             ->with('footer', region('Footer'));
     }

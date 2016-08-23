@@ -1,0 +1,15 @@
+@import "variables";
+
+.ForumBottom {
+
+}
+
+    .ForumBottom__item {
+    	border-left: $border-gray-md;
+    	border-radius: $border-radius-lg;
+    	padding: $padding-xs;
+    }
+
+    .ForumBottom__item:hover {
+    	border:$border-gray-md;
+    }
