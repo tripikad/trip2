@@ -16,6 +16,8 @@ class V2FlightController extends Controller
             ->latest()
             ->get();
 
+        $forumPosts = Content::whereType('forum')->latest()->skip(10)->take(5)->get();
+
         return view('v2.layouts.2col')
 
             ->with('header', region('Masthead', trans("content.$type.index.title")))
@@ -35,9 +37,23 @@ class V2FlightController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Block')->with('content', collect(['ForumBottom'])))
-                ->push(component('Promo')->with('promo', 'footer'))
+                ->push(component('Block')
+                    ->is('red')
+                    ->is('uppercase')
+                    ->is('white')
+                    ->with('title', trans('content.forum.sidebar.title'))
+                    ->with('content', collect()
+                        ->push(component('ForumBottom')
+                            ->with('left_items', region('ForumLinks'))
+                            ->with('right_items', $forumPosts->map(function ($forumPost) {
+                                return region('ForumRow', $forumPost);
+                            }))
+
+                        )
+                    )
+                )
             )
+                //->push(component('Promo')->with('promo', 'footer'))
 
             ->with('footer', region('Footer'));
     }
@@ -94,7 +110,22 @@ class V2FlightController extends Controller
                     return region('Comment', $comment);
                 }))
                 //->pushWhen(region('CommentCreateForm', $post))
-                ->push(component('Block')->with('content', collect(['FlightShare'])))
+                ->push(component('Block')->with('content', collect()
+                    ->push(component('Button')
+                            ->is('facebook')
+                            ->with('external', true)
+                            ->with('icon', 'icon-facebook')
+                            ->with('title', trans('utils.share.facebook'))
+                            ->with('route', route('utils.share.facebook')))
+                        ->push(component('Button')
+                            ->is('twitter')
+                            ->with('external', true)
+                            ->with('icon', 'icon-twitter')
+                            ->with('title', trans('utils.share.twitter'))
+                            ->with('route', route('utils.share.twitter'))
+                        )
+                    )
+                )
                 ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Block')
                     ->is('white')

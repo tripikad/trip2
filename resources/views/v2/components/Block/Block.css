@@ -27,3 +27,7 @@
     text-transform: uppercase;
     font: $font-heading-xs;
 }
+
+.Block--red .Block__title {
+    color: $red;
+}

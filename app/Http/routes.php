@@ -5,6 +5,13 @@ use App\Http\Controllers\ContentController;
 
 // V2
 
+// Frontpage
+
+Route::get('v2/frontpage', [
+    'uses' => 'V2FrontpageController@index',
+    'as' => 'frontpage.index2',
+]);
+
 // News
 
 Route::get('v2/news', [
@@ -98,6 +105,15 @@ Route::get('v2/utils/alert', [
     'uses' => 'V2UtilsController@alert',
     'as' => 'utils.alert',
 ]);
+
+
+Route::get('share/facebook/', ['as' => 'utils.share.facebook', function () {
+    return Redirect::away('https://www.facebook.com/sharer/sharer.php?u='.URL::previous());
+}]);
+
+Route::get('share/twitter/', ['as' => 'utils.share.twitter', function () {
+    return Redirect::away('https://twitter.com/intent/tweet?url='.URL::previous());
+}]);
 
 Route::post('v2/utils/format', [
     'uses' => 'V2UtilsController@format',
