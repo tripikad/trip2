@@ -1,7 +1,7 @@
 @php
 
 $route = $route ?? '';
-$target = $external ? '_blank' : '';
+$target = isset($external) ? '_blank' : '';
 $icon = $icon ?? '';
 $title = $title ?? '';
 
