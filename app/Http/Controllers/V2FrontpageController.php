@@ -24,8 +24,6 @@ class V2FrontpageController extends Controller
                 ->push(component('Block')->with('content', collect(['FrontpageFlightCards'])))
             )
 
-            ->with('footer', region('Footer'))
-        ;
-    
+            ->with('footer', region('Footer'));
     }
 }
