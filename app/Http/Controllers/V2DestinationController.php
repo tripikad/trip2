@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Destination;
+use App\Content;
 
 class V2DestinationController extends Controller
 {
     public function show($id)
     {
         $destination = Destination::findOrFail($id);
+
+        $flights = Content::whereType('flight')
+            ->whereStatus(1)
+            ->latest()
+            ->take(3)
+            ->get();
 
         return view('v2.layouts.2col')
 
@@ -30,7 +37,10 @@ class V2DestinationController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Block')->with('content', collect(['DestinationFlight2'])))
+                ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
+                        return region('FlightCard', $flight);
+                    })
+                ))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
