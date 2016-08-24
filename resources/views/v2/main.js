@@ -12,8 +12,8 @@ import Navbar from './components/Navbar/Navbar.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 import Map from './components/Map/Map.vue'
 import Promo from './components/Promo/Promo.vue'
+import ImageUpload from './components/ImageUpload/ImageUpload.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
-
 
 const globalProps = JSON.parse(decodeURIComponent(
     document.querySelector('#globalprops').getAttribute('content')
@@ -37,6 +37,7 @@ new Vue({
         NavbarMobile,
         Map,
         Promo,
+        ImageUpload,
         FormSelect
     },
 
