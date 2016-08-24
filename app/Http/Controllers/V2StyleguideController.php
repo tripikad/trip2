@@ -7,7 +7,6 @@ use App\Content;
 use App\Destination;
 use Request;
 use Response;
-use Lang;
 
 class V2StyleguideController extends Controller
 {
