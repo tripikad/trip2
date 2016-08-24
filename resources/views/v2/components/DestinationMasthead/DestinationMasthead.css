@@ -28,4 +28,5 @@
         font: $font-text-md;
         line-height: $line-height-xl;
         width: 50%;
+        width: 100% ?if $mobile;
     }
