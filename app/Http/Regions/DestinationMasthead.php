@@ -19,7 +19,6 @@ class DestinationMasthead
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
             ->with('name', $destination->name)
-            ->with('meta', trans("destination.show.description.$destination->id"))
-        ;
+            ->with('meta', trans("destination.show.description.$destination->id"));
     }
 }
