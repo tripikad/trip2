@@ -29,8 +29,7 @@ class ProfileMasthead
             ->with('name', $user->vars()->name)
             ->with('meta', trans('user.show.joined', [
                 'user' => $user->name,
-                'created_at' => $user->vars()->created_at_relative
-            ]))
-        ;
+                'created_at' => $user->vars()->created_at_relative,
+            ]));
     }
 }
