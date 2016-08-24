@@ -4,7 +4,7 @@
 
         <path
             v-for="path in paths"
-            fill="gray"
+            fill=""
             :d="path"
          />
 

@@ -4,13 +4,16 @@
     padding-top: $padding-md;
     padding-bottom: $padding-md;
     background: $cyan;
+    position: relative;
+    overflow: hidden;
 }
 
     .ProfileMasthead__map {
         position: absolute;
-        top: calc($spacer * 5);
-        right: 0;
+        top: calc($spacer * 4);
+        right: calc($spacer * -20);
         opacity: $opacity-md;
+        fill: $cyan-light;
     }
 
     .ProfileMasthead__profile {
