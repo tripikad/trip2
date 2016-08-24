@@ -82,6 +82,13 @@ Route::get('v2/static/{id}', [
     'as' => 'static.show',
 ]);
 
+// Profile
+
+Route::get('v2/profile/{id}', [
+    'uses' => 'V2ProfileController@show',
+    'as' => 'profile.show',
+]);
+
 // Styleguide
 
 Route::get('v2/styleguide', [

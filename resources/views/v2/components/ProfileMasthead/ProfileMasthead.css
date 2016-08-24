@@ -1,0 +1,32 @@
+@import "variables";
+
+.ProfileMasthead {
+    padding-top: $padding-md;
+    padding-bottom: $padding-lg;
+    background: $cyan;
+    position: relative;
+    overflow: hidden;
+}
+
+    .ProfileMasthead__map {
+        position: absolute;
+        top: calc($spacer * 4);
+        right: calc($spacer * -20);
+        opacity: $opacity-md;
+        fill: $cyan-light;
+    }
+
+    .ProfileMasthead__profile {
+        margin-bottom: $margin-md;
+    }
+
+    .ProfileMasthead__name {
+        font: $font-heading-xxl;
+        color: $white;
+        margin-bottom: $margin-md;
+    }
+
+    .ProfileMasthead__meta {
+        font: $font-heading-sm;
+        color: $cyan-dark;
+    }
