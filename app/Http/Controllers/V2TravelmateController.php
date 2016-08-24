@@ -22,10 +22,11 @@ class V2TravelmateController extends Controller
             ->with('header', region('Masthead', trans("content.$type.index.title")))
 
             ->with('content', collect()
-                ->push(component('NewsGrid')
-                    ->with('items', $posts->map(function ($post) {
-                        return region('TravelmateCard', $post);
-                    })
+                ->push(component('Grid2')
+                        ->with('gutter', true)
+                        ->with('items', $posts->map(function ($post) {
+                            return region('TravelmateCard', $post);
+                        })
                     )
                 )
             )

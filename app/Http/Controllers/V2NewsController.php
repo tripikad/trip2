@@ -21,10 +21,11 @@ class V2NewsController extends Controller
             ->with('header', region('Masthead', trans("content.$type.index.title")))
 
             ->with('content', collect()
-                ->push(component('NewsGrid')
+                ->push(component('Grid2')
+                    ->with('gutter', true)
                     ->with('items', $posts->map(function ($post) {
-                        return region('NewsCard', $post);
-                    })
+                            return region('NewsCard', $post);
+                        })
                     )
                 )
             )
