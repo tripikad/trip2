@@ -15,7 +15,9 @@
         >
         </component>
 
-        <input type="hidden" :name="name" :value="selected | json">
+        <select multiple :name="name + '[]'">
+            <option v-for="item in selected" :value="item.id" selected>{{ item.name }}</option>
+        </select>
 
     </div>
 
