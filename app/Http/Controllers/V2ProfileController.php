@@ -8,9 +8,8 @@ class V2ProfileController extends Controller
 {
     public function show($id)
     {
-
         $types = ['forum', 'travelmate', 'buysell'];
-        
+
         $user = User::findOrFail($id);
 
         $comments = $user->comments()
@@ -26,11 +25,10 @@ class V2ProfileController extends Controller
 
             ->with('header', region('ProfileMasthead', $user))
 
-            ->with('content', $comments->map(function($comment) {
+            ->with('content', $comments->map(function ($comment) {
                 return region('Comment', $comment);
             }))
 
             ->with('footer', region('Footer'));
     }
-
 }

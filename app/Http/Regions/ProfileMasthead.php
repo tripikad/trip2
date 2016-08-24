@@ -27,7 +27,6 @@ class ProfileMasthead
                 ->with('border', 10)
             )
             ->with('name', $user->vars()->name)
-            ->with('meta', 'Kasutaja annela on Tripi liige 10 aastat')
-        ;
+            ->with('meta', 'Kasutaja annela on Tripi liige 10 aastat');
     }
 }
