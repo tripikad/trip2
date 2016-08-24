@@ -21,13 +21,20 @@ class V2ProfileController extends Controller
             ->take(10)
             ->get();
 
-        return view('v2.layouts.1col')
+        return view('v2.layouts.2col')
 
             ->with('header', region('ProfileMasthead', $user))
 
-            ->with('content', $comments->map(function ($comment) {
-                return region('Comment', $comment);
-            }))
+            ->with('content', collect()
+                ->push(component('Block')->with('content', collect(['ProfilePhoto'])))
+                ->merge($comments->map(function ($comment) {
+                    return region('Comment', $comment);
+                }))
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Block')->with('content', collect(['ProfileBlog'])))
+            )
 
             ->with('footer', region('Footer'));
     }
