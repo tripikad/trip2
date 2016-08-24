@@ -23,11 +23,14 @@ class ProfileMasthead
                 ->with('route', route('user.show', [$user]))
                 ->with('image', $user->imagePreset('small_square'))
                 ->with('rank', $user->vars()->rank)
-                ->with('size', 192)
-                ->with('border', 10)
+                ->with('size', 168)
+                ->with('border', 8)
             )
             ->with('name', $user->vars()->name)
-            ->with('meta', 'Kasutaja annela on Tripi liige 10 aastat')
+            ->with('meta', trans('user.show.joined', [
+                'user' => $user->name,
+                'created_at' => $user->vars()->created_at_relative
+            ]))
         ;
     }
 }

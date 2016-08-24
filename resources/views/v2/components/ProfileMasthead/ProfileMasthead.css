@@ -2,7 +2,7 @@
 
 .ProfileMasthead {
     padding-top: $padding-md;
-    padding-bottom: $padding-md;
+    padding-bottom: $padding-lg;
     background: $cyan;
     position: relative;
     overflow: hidden;
