@@ -24,8 +24,8 @@ class V2NewsController extends Controller
                 ->push(component('Grid2')
                     ->with('gutter', true)
                     ->with('items', $posts->map(function ($post) {
-                            return region('NewsCard', $post);
-                        })
+                        return region('NewsCard', $post);
+                    })
                     )
                 )
             )
