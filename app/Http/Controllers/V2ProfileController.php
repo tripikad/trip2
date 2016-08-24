@@ -9,7 +9,7 @@ class V2ProfileController extends Controller
     public function show($id)
     {
 
-        $user = User::find(3);
+        $user = User::findOrFail($id);
 
         return view('v2.layouts.2col')
 

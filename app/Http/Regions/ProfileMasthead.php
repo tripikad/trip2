@@ -18,6 +18,7 @@ class ProfileMasthead
                 ->with('navbar_mobile', region('NavbarMobile'))
             )
             ->with('profile', component('ProfileImage')
+                ->is('dark')
                 ->with('route', route('user.show', [$user]))
                 ->with('image', $user->imagePreset('small_square'))
                 ->with('rank', $user->vars()->rank)
@@ -25,6 +26,7 @@ class ProfileMasthead
                 ->with('border', 10)
             )
             ->with('name', $user->vars()->name)
+            ->with('meta', 'Kasutaja annela on Tripi liige 10 aastat')
         ;
     }
 }

@@ -2,14 +2,21 @@
 
 .ProfileMasthead {
     padding-top: $padding-md;
+    padding-bottom: $padding-md;
+    background: $cyan;
 }
 
-    .ProfileMasthead__top {
-        height: calc($spacer * 15);
-        background: $cyan;
-        opacity: $opacity-md;
+    .ProfileMasthead__profile {
+        margin-bottom: $margin-md;
     }
 
-    .ProfileMasthead__profile {
-        margin-top: calc($spacer * -8);
+    .ProfileMasthead__name {
+        font: $font-heading-xxl;
+        color: $white;
+        margin-bottom: $margin-md;
+    }
+
+    .ProfileMasthead__meta {
+        font: $font-heading-sm;
+        color: $cyan-dark;
     }
