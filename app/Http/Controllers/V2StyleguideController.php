@@ -7,6 +7,7 @@ use App\Content;
 use App\Destination;
 use Request;
 use Response;
+use Lang;
 
 class V2StyleguideController extends Controller
 {
@@ -108,7 +109,14 @@ class V2StyleguideController extends Controller
                         ->push(component('FormButton')
                             ->with('title', trans('comment.create.submit.title'))
                         )
-                        ->push(component('ImageUpload'))
+                        ->push(component('ImageUpload')
+                            ->with('msgfallback', trans('site.dropzone.fallback.message'))
+                            ->with('txtfallback', trans('site.dropzone.fallback.text'))
+                            ->with('msgfiles', trans('site.dropzone.max.files.exceeded'))
+                            ->with('msgsize', trans('site.dropzone.file.size.exceeded'))
+                            ->with('msgremove', trans('site.dropzone.file.remove'))
+                            ->with('msgdefault', trans('site.dropzone.default'))
+                        )
                     )
                 )
 
