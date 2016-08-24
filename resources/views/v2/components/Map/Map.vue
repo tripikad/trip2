@@ -26,23 +26,23 @@
             bottom: {default: '-52'},
             right: {default: '183'},
             top: {default: '87'},
-            step: {default: 3}
+            step: {default: 3},
+            radius: {default: 3}
         },
 
         computed: {
             width: function() {
-                return Math.abs(this.left) + Math.abs(this.right) * 2.5
+                return Math.abs(this.left) + Math.abs(this.right) * 5
             },
             height: function() {
-                return Math.abs(this.top) + Math.abs(this.bottom) * 2.5
+                return Math.abs(this.top) + Math.abs(this.bottom) * 5
             }
 
         },
 
         data() {
             return {
-                paths: [],
-                radius: 2
+                paths: []
             }
         },
 

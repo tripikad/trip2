@@ -9,6 +9,12 @@ $meta = $meta ?? '';
 
 <div class="ProfileMasthead {{ $isclasses }}">
 
+    <div class="ProfileMasthead__map">
+
+        {!! $map !!}
+        
+    </div>
+
     <div class="ProfileMasthead__bottom">
 
     <div class="container">
@@ -18,7 +24,7 @@ $meta = $meta ?? '';
             {!! $header !!}
             
         </div>
-        
+
         <div class="ProfileMasthead__profile">
 
             {!! $profile !!}

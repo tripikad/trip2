@@ -6,6 +6,13 @@
     background: $cyan;
 }
 
+    .ProfileMasthead__map {
+        position: absolute;
+        top: calc($spacer * 5);
+        right: 0;
+        opacity: $opacity-md;
+    }
+
     .ProfileMasthead__profile {
         margin-bottom: $margin-md;
     }
