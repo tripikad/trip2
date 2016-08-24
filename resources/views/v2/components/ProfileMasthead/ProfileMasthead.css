@@ -1,0 +1,15 @@
+@import "variables";
+
+.ProfileMasthead {
+    padding-top: $padding-md;
+}
+
+    .ProfileMasthead__top {
+        height: calc($spacer * 15);
+        background: $cyan;
+        opacity: $opacity-md;
+    }
+
+    .ProfileMasthead__profile {
+        margin-top: calc($spacer * -8);
+    }
