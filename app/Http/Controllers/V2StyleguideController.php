@@ -31,10 +31,13 @@ class V2StyleguideController extends Controller
 
         $blog = Content::find(97993);
 
-        $images = Image::select('id', 'filename')->latest()->take(6)->get()
-        ->map(function($image){
-            return ['id' => $image->id, 'name' => $image->filename];
-        });
+        $images = Content::whereType('photo')->latest()->take(6)->get()
+            ->map(function($image) {
+                return [
+                    'id' => $image->id,
+                    'small' => $image->imagePreset('small')
+                ];
+            });
 
         return view('v2.layouts.1col')
 
@@ -45,7 +48,9 @@ class V2StyleguideController extends Controller
                     //->with('top', null)
                 )
 
-                ->push(component('Gallery'))
+                ->push(component('Gallery')
+                    ->with('images', $images)
+                )
 
                 ->push(component('Meta')->with('items', collect()
                         ->push(component('MetaLink')

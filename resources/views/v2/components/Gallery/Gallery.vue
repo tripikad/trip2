@@ -6,7 +6,7 @@
 
             <div class="Gallery__item" v-for="item in images">
 
-                 <img class="Gallery__image" src="../images/{{item}}" @click="render(this.$index)"/>
+                 <img class="Gallery__image" src="../images/{{item.small}}" @click="render(this.$index)"/>
 
             </div
 
@@ -14,7 +14,7 @@
 
         <div class="Gallery__Fullscreen" v-if="active">
 
-            <div class="Gallery__close">
+            <div class="Gallery__close"> 
 
                 <component is="Icon" icon="icon-close" size="xl" fill="white" @click="active = false, activeImage = -1"></component>
 
@@ -57,11 +57,11 @@ import Icon from '../Icon/Icon.vue'
 
         props: {
             isclasses: { default: '' },
+            images: { default: '' }
         },
 
         data() {
             return {
-                images: ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'],
                 active: false,
                 activeImage: -1,
             }
@@ -73,6 +73,12 @@ import Icon from '../Icon/Icon.vue'
                 this.active = true;
             }
         },
+
+        ready() {
+            this.images = this.images
+                ? JSON.parse(decodeURIComponent(this.images))
+                : []
+        }
 
     }
 
