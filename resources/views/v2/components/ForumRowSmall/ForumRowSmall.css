@@ -11,6 +11,7 @@
     .ForumRowSmall__title {
         color: $gray-darkest;
         font: $font-heading-md;
+        line-height: $line-height-md;
         margin-bottom: $margin-xs;
         margin-right: $margin-xs;
     }

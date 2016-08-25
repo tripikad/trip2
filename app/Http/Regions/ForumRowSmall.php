@@ -16,7 +16,7 @@ class ForumRowSmall
             ->with('title', $post->title)
             ->with('meta', component('Meta')->with('items', collect()
                     ->push(component('MetaLink')
-                        ->with('title', $post->created_at->diffForHumans())
+                        ->with('title', $post->vars()->created_at)
                     )
                 )
             )
