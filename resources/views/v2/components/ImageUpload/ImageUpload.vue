@@ -16,12 +16,12 @@
     export default {
 
         props: {
-            msgdefault: { default: '' },
-            msgfallback:  { default: '' },
-            txtfallback: { default: '' },
-            msgfiles: { default: '' },
-            msgsize: { default: '' },
-            msgremove: { default: '' }
+            dictdefaultmessage: { default: '' },
+            dictfallbackmessage: { default: '' },
+            dictfallbacktext: { default: '' },
+            dictmaxfilesexceeded: { default: '' },
+            dictfiletoobig: { default: '' },
+            dictremovefile: { default: '' }
         },
 
         ready: function() {
@@ -38,12 +38,12 @@
                 uploadMultiple: false,
                 acceptedFiles: 'image/*',
                 maxFiles: 1,
-                dictDefaultMessage: this.msgdefault,
-                dictFallbackMessage: this.msgfallback,
-                dictFallbackText: this.txtfallback,
-                dictMaxFilesExceeded: this.msgfiles,
-                dictFileTooBig: this.msgsize,
-                dictRemoveFile: this.msgremove,
+                dictDefaultMessage: this.dictdefaultmessage,
+                dictFallbackMessage: this.dictfallbackmessage,
+                dictFallbackText: this.dictfallbacktext,
+                dictMaxFilesExceeded: this.dictmaxfilesexceeded,
+                dictFileTooBig: this.dictfiletoobig,
+                dictRemoveFile: this.dictremovefile,
                 headers: {'X-CSRF-TOKEN': globalProps.token},
                 success: function(file, res) {
                     this.$dispatch('showAlert', res.image + ' uploaded')
