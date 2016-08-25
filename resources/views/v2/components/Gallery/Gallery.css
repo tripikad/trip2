@@ -1,0 +1,34 @@
+@import "variables";
+
+.Gallery {
+
+}
+
+	.Gallery__wrapper {
+    	display: flex;
+    }
+
+    .Gallery__image {
+    	width: 150px;
+    	height: 150px;
+    }
+
+    .Gallery__Fullscreen {
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    	width: 100vw;
+    	height: 95vh;
+    	background: rgba(0,0,0,0.8);	
+    }
+
+    	.Gallery__Fullitem {
+	    	display: flex;
+	    	justify-content: center;
+	    	align-items: center;
+    	}
+
+	    .Gallery__Fullimage {
+	    	width: 50vh;
+	    	height: 75vh;
+	    }
