@@ -9,9 +9,13 @@ $meta = $meta ?? '';
 
 <div class="BlogCard {{ $isclasses }}">
 
-    <a class="BlogCard__title" href="{{ $route }}" >
+	<a href="{{ $route }}" >
 
-        {{ $title }}
+	    <div class="BlogCard__title">
+
+	        {{ $title }}
+
+	    </div>
 
     </a>
 

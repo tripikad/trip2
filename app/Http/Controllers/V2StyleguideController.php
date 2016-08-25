@@ -28,6 +28,8 @@ class V2StyleguideController extends Controller
 
         $travelmates = Content::whereType('travelmate')->latest()->skip(25)->take(6)->get();
 
+        $blog = Content::find(97993);
+
         return view('v2.layouts.1col')
 
             ->with('content', collect()
@@ -68,6 +70,22 @@ class V2StyleguideController extends Controller
                     ->with('subtitle', collect()
                         ->push('Aasia')
                         ->push('Indoneesia')
+                    )
+                )
+
+                ->push(component('BlogCard')
+                    ->with('title', $blog->title)
+                    ->with('route', route('content.show', ['blog', $blog]))
+                    ->with('profile', component('ProfileImage')
+                        ->with('route', route('user.show', [$blog->user]))
+                        ->with('image', $blog->user->imagePreset('small_square'))
+                        ->with('rank', $blog->user->vars()->rank)
+                    )
+                    ->with('meta', component('Meta')->with('items', collect()
+                        ->push(component('MetaLink')
+                            ->with('title', $blog->user->vars()->name)
+                            ->with('route', route('user.show', [$blog->user]))
+                        ))
                     )
                 )
 
