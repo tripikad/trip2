@@ -74,6 +74,7 @@ class Component
                     if (is_array($value) || is_object($value) || is_bool($value)) {
                         $value = rawurlencode(json_encode($value));
                     }
+
                     return $value;
                 })
                 ->map(function ($value, $key) {
