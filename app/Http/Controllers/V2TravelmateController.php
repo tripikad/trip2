@@ -144,5 +144,4 @@ class V2TravelmateController extends Controller
 
             ->with('footer', region('Footer'));
     }
-
 }
