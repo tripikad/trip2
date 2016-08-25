@@ -39,7 +39,7 @@ class AdminController extends Controller
     public function imageStore(Request $request)
     {
         $this->validate($request, [
-            'image' => 'required|image|size:'.config('site.maxfilesize') * 1024,
+            'image' => 'required|image',
         ]);
 
         $filename = Image::storeImageFile($request->file('image'));
