@@ -18,7 +18,11 @@
 
             <div class="Gallery__Fullitem">
 
+                <component is="Icon" icon="icon-arrow-left" size="lg" fill="white" @click="activeImage--"></component>
+
                  <img class="Gallery__Fullimage" src="../images/{{images[activeImage]}}"/>
+
+                  <component is="Icon" icon="icon-arrow-right" size="lg" fill="white" @click="activeImage++"></component>
 
             </div
 
