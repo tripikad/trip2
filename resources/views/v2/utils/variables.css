@@ -1,5 +1,6 @@
 /* Brand colors */
 $blue: #36a1eb;
+$cyan-light: #a5e4f1;
 $cyan-dark: #0087ae;
 $cyan: #4ac9e3;
 $green-dark: #288f18;
@@ -47,12 +48,10 @@ $font-weight-normal: normal;
 $font-weight-semibold: 600;
 $font-weight-bold: bold;
 $line-height-xs: 100%;
-$line-height-sm: 110%;
-$line-height-md: 120%;
-$line-height-lg: 130%;
-$line-height-xl: 140%;
-$line-height-xxl: 150%;
-$line-height-xxxl: 160%;
+$line-height-sm: 120%;
+$line-height-md: 140%;
+$line-height-lg: 160%;
+$line-height-xl: 200%;
 $font-text-xs: $font-weight-normal $font-size-xs / $line-height-xs $font-family, sans-serif;
 $font-text-sm: $font-weight-normal $font-size-sm / $line-height-xs $font-family, sans-serif;
 $font-text-md: $font-weight-normal $font-size-md / $line-height-xs $font-family, sans-serif;

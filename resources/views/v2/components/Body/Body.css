@@ -2,13 +2,13 @@
 
 .Body {
     font: $font-text-md;
-    line-height: $line-height-xxxl;
+    line-height: $line-height-lg;
 }
 
 .Body--responsive {
     font-family: $font-family;
     font-size: responsive;
-    line-height: $line-height-xxxl;
+    line-height: $line-height-lg;
     max-font-size: $font-size-lg;
     min-font-size: $font-size-md;
 }

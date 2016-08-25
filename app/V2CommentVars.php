@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Exception;
+
 class V2CommentVars
 {
     protected $comment;

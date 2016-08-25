@@ -25,3 +25,7 @@
 .ProfileImage__arcReminder svg {
     stroke: $gray;
 }
+
+.ProfileImage--dark .ProfileImage__arcRank svg {
+    stroke: $cyan-dark;
+}
