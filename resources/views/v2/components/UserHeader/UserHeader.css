@@ -1,6 +1,6 @@
 @import "variables";
 
-.UserMasthead {
+.UserHeader {
     padding-top: $padding-md;
     padding-bottom: $padding-lg;
     background: $cyan;
@@ -8,7 +8,7 @@
     overflow: hidden;
 }
 
-    .UserMasthead__map {
+    .UserHeader__map {
         position: absolute;
         top: calc($spacer * 4);
         right: calc($spacer * -20);
@@ -16,17 +16,17 @@
         fill: $cyan-light;
     }
 
-    .UserMasthead__user {
+    .UserHeader__user {
         margin-bottom: $margin-md;
     }
 
-    .UserMasthead__name {
+    .UserHeader__name {
         font: $font-heading-xxl;
         color: $white;
         margin-bottom: $margin-md;
     }
 
-    .UserMasthead__meta {
+    .UserHeader__meta {
         font: $font-heading-sm;
         color: $cyan-dark;
     }

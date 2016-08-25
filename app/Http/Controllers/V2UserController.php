@@ -23,7 +23,7 @@ class V2UserController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('UserMasthead', $user))
+            ->with('header', region('UserHeader', $user))
 
             ->with('content', collect()
                 ->push(component('Block')->with('content', collect(['UserPhoto'])))

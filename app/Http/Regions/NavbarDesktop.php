@@ -2,7 +2,7 @@
 
 namespace App\Http\Regions;
 
-class Navbar
+class NavbarDesktop
 {
     protected function prepareLinks()
     {
@@ -43,11 +43,11 @@ class Navbar
                 'route' => route('register.form'),
             ])
             ->pushWhen($user, [
-                'title' => trans('menu.user.user'),
+                'title' => trans('menu.user.profile'),
                 'route' => route('user.show', [$user]),
             ])
             ->pushWhen($user, [
-                'title' => trans('menu.user.edit.user'),
+                'title' => trans('menu.user.edit.profile'),
                 'route' => route('user.edit', [$user]),
             ])
             ->pushWhen($user, [
@@ -69,7 +69,7 @@ class Navbar
     public function render($color = '')
     {
         return collect()
-            ->push(component('Navbar')
+            ->push(component('NavbarDesktop')
                 ->is($color)
                 ->with('links', $this->prepareLinks())
                 ->with('sublinks', $this->prepareSublinks())

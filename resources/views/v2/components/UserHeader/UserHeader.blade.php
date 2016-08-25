@@ -7,37 +7,37 @@ $meta = $meta ?? '';
 
 @endphp
 
-<div class="UserMasthead {{ $isclasses }}">
+<div class="UserHeader {{ $isclasses }}">
 
-    <div class="UserMasthead__map">
+    <div class="UserHeader__map">
 
         {!! $map !!}
         
     </div>
 
-    <div class="UserMasthead__bottom">
+    <div class="UserHeader__bottom">
 
     <div class="container">
 
-        <div class="UserMasthead__header">
+        <div class="UserHeader__navbar">
 
-            {!! $header !!}
+            {!! $navbar !!}
             
         </div>
 
-        <div class="UserMasthead__user">
+        <div class="UserHeader__user">
 
             {!! $user !!}
 
         </div>
 
-        <div class="UserMasthead__name">
+        <div class="UserHeader__name">
 
             {!! $name !!}
 
         </div>
 
-        <div class="UserMasthead__meta">
+        <div class="UserHeader__meta">
 
             {!! $meta !!}
 

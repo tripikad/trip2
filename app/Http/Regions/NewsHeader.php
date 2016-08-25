@@ -2,23 +2,23 @@
 
 namespace App\Http\Regions;
 
-class NewsMasthead
+class NewsHeader
 {
     public function render($post)
     {
         $user = auth()->user();
 
-        return component('NewsMasthead')
+        return component('NewsHeader')
             ->with('title', $post->title)
             ->with('background', $post->getHeadImage())
-            ->with('header', component('Header')
-                ->with('search', component('HeaderSearch')->is('white'))
+            ->with('navbar', component('Navbar')
+                ->with('search', component('NavbarSearch')->is('white'))
                 ->with('logo', component('Icon')
                     ->with('icon', 'tripee_logo_plain_dark')
                     ->with('width', 80)
                     ->with('height', 30)
                 )
-                ->with('navbar', region('Navbar', 'white'))
+                ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
             ->with('meta', component('Meta')

@@ -20,7 +20,7 @@ class V2FlightController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Masthead', trans("content.$type.index.title")))
+            ->with('header', region('Header', trans("content.$type.index.title")))
 
             ->with('content', collect()
                 ->merge($posts->map(function ($post) {
@@ -90,7 +90,7 @@ class V2FlightController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Masthead', trans("content.$type.index.title")))
+            ->with('header', region('Header', trans("content.$type.index.title")))
 
             ->with('content', collect()
                 ->push(component('FlightTitle')->with('title', $post->vars()->title))
