@@ -1,7 +1,7 @@
 @php
 
 $id = $id ?? 0;
-$profile = $profile ?? '';
+$user = $user ?? '';
 $title = $title ?? '';
 $meta = $meta ?? collect();
 $body = $body ?? '';
@@ -20,7 +20,7 @@ $body = $body ?? '';
 
         <div class="ForumPost__left">
 
-            {!! $profile !!}
+            {!! $user !!}
 
         </div>
 

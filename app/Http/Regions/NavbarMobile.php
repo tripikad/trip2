@@ -43,11 +43,11 @@ class NavbarMobile
                 'route' => route('register.form'),
             ])
             ->pushWhen($user, [
-                'title' => trans('menu.user.profile'),
+                'title' => trans('menu.user.user'),
                 'route' => route('user.show', [$user]),
             ])
             ->pushWhen($user, [
-                'title' => trans('menu.user.edit.profile'),
+                'title' => trans('menu.user.edit.user'),
                 'route' => route('user.edit', [$user]),
             ])
             ->pushWhen($user, [

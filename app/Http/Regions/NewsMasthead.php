@@ -23,7 +23,7 @@ class NewsMasthead
             )
             ->with('meta', component('Meta')
                 ->with('items', collect()
-                    ->push(component('ProfileImage')
+                    ->push(component('UserImage')
                         ->with('route', route('user.show', [$post->user]))
                         ->with('image', $post->user->imagePreset('small_square'))
                         ->with('rank', $post->user->vars()->rank)

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 
-class V2ProfileController extends Controller
+class V2UserController extends Controller
 {
     public function show($id)
     {
@@ -23,17 +23,17 @@ class V2ProfileController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('ProfileMasthead', $user))
+            ->with('header', region('UserMasthead', $user))
 
             ->with('content', collect()
-                ->push(component('Block')->with('content', collect(['ProfilePhoto'])))
+                ->push(component('Block')->with('content', collect(['UserPhoto'])))
                 ->merge($comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect(['ProfileBlog'])))
+                ->push(component('Block')->with('content', collect(['UserBlog'])))
             )
 
             ->with('footer', region('Footer'));

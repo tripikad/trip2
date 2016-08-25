@@ -2,11 +2,11 @@
 
 namespace App\Http\Regions;
 
-class ProfileMasthead
+class UserMasthead
 {
     public function render($user)
     {
-        return component('ProfileMasthead')
+        return component('UserMasthead')
             ->with('map', component('Map'))
             ->with('header', component('Header')
                 ->with('search', component('HeaderSearch')->is('white'))
@@ -18,7 +18,7 @@ class ProfileMasthead
                 ->with('navbar', region('Navbar', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
-            ->with('profile', component('ProfileImage')
+            ->with('user', component('UserImage')
                 ->is('dark')
                 ->with('route', route('user.show', [$user]))
                 ->with('image', $user->imagePreset('small_square'))

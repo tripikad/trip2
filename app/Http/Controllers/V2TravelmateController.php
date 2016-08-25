@@ -123,7 +123,7 @@ class V2TravelmateController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect(['ProfileCard'])))
+                ->push(component('Block')->with('content', collect(['UserCard'])))
                 ->push(component('Block')->with('content', collect(['DestinationBar'])))
                 ->merge($flights->map(function ($flight) {
                     return region('FlightCard', $flight);
