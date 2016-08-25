@@ -15,6 +15,15 @@
 
     export default {
 
+        props: {
+            dictdefaultmessage: { default: '' },
+            dictfallbackmessage: { default: '' },
+            dictfallbacktext: { default: '' },
+            dictmaxfilesexceeded: { default: '' },
+            dictfiletoobig: { default: '' },
+            dictremovefile: { default: '' }
+        },
+
         ready: function() {
             const globalProps = JSON.parse(decodeURIComponent(
                 document.querySelector('#globalprops').getAttribute('content')
@@ -25,10 +34,16 @@
             new Dropzone(this.$els.dropzone, {
                 url: '/v2/image/store',
                 paramName: 'image',
-                maxFilesize: 10,
+                maxFileSize: globalProps.maxfilesize,
                 uploadMultiple: false,
                 acceptedFiles: 'image/*',
                 maxFiles: 1,
+                dictDefaultMessage: this.dictdefaultmessage,
+                dictFallbackMessage: this.dictfallbackmessage,
+                dictFallbackText: this.dictfallbacktext,
+                dictMaxFilesExceeded: this.dictmaxfilesexceeded,
+                dictFileTooBig: this.dictfiletoobig,
+                dictRemoveFile: this.dictremovefile,
                 headers: {'X-CSRF-TOKEN': globalProps.token},
                 success: function(file, res) {
                     this.$dispatch('showAlert', res.image + ' uploaded')
