@@ -5,7 +5,7 @@
         <component
             is="Multiselect"
             :selected="selected"
-            :multiple="true",
+            :multiple="multiple",
             :searchable="true",
             :options="options",
             @update="updateValue"
@@ -15,7 +15,22 @@
         >
         </component>
 
-        <input type="hidden" :name="name" :value="selected | json">
+        <select
+            v-if="multiple"
+            v-show="false"
+            :name="name + '[]'
+            multiple
+        ">
+            <option v-for="item in selected" :value="item.id" selected>{{ item.name }}</option>
+        </select>
+
+        <input
+            v-if="!multiple"
+            v-show="false"
+            type="text"
+            :name="name"
+            :value="selected ? selected.id : ''
+        ">
 
     </div>
 
@@ -32,9 +47,10 @@
         props: {
             isclasses: { default: '' },
             name: { default: '' },
-            options: { default: [] },
+            options: { default: '' },
             placeholder: { default: '' },
-            helper: { default: '' }
+            helper: { default: '' },
+            multiple: { default: '' }
         },
 
         data() {
@@ -50,6 +66,9 @@
         },
 
         ready() {
+            this.multiple = this.multiple
+                ? JSON.parse(decodeURIComponent(this.multiple))
+                : []
             this.options = this.options
                 ? JSON.parse(decodeURIComponent(this.options))
                 : []
