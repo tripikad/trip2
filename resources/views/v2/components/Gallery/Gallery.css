@@ -14,21 +14,44 @@
     }
 
     .Gallery__Fullscreen {
-    	position: absolute;
+    	position: fixed;
     	top: 0;
     	left: 0;
-    	width: 100vw;
-    	height: 95vh;
-    	background: rgba(0,0,0,0.8);	
+    	width: 99vw;
+    	height: 100vh;
+    	background: rgba(0,0,0,0.8);
+    	z-index: 1;
     }
 
     	.Gallery__Fullitem {
 	    	display: flex;
-	    	justify-content: center;
+	    	justify-content: space-between;
 	    	align-items: center;
     	}
 
-	    .Gallery__Fullimage {
-	    	width: 50vh;
-	    	height: 75vh;
-	    }
+		    .Gallery__Fullimage {
+		    	width: 50vh;
+		    	height: 75vh;
+		    }
+
+			.Gallery__left {
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: $padding-md;
+			}
+
+			.Gallery__right {
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: $padding-md;
+			}
+
+		.Gallery__close {
+			text-align: right;
+			padding: $padding-md;
+		}

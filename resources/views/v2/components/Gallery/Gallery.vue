@@ -14,17 +14,30 @@
 
         <div class="Gallery__Fullscreen" v-if="active">
 
-             <component is="Icon" icon="icon-close" size="lg" fill="white" @click="active = false, activeImage = -1"></component>
+            <div class="Gallery__close">
 
-            <div class="Gallery__Fullitem">
+                <component is="Icon" icon="icon-close" size="xl" fill="white" @click="active = false, activeImage = -1"></component>
 
-                <component is="Icon" icon="icon-arrow-left" size="lg" fill="white" @click="activeImage--"></component>
+            </div>
 
-                 <img class="Gallery__Fullimage" src="../images/{{images[activeImage]}}"/>
 
-                  <component is="Icon" icon="icon-arrow-right" size="lg" fill="white" @click="activeImage++"></component>
+            <div class="Gallery__Fullitem" >
 
-            </div
+                <div class="Gallery__left" @click="activeImage--">
+
+                    <component is="Icon" icon="icon-arrow-left" size="xl" fill="white"></component>
+
+                 </div>
+
+                <img class="Gallery__Fullimage" src="../images/{{images[activeImage]}}"/>
+
+                <div class="Gallery__right" @click="activeImage++">
+
+                    <component is="Icon" icon="icon-arrow-right" size="xl" fill="white"></component>
+
+                </div>
+
+            </div>
 
         </div>
 
