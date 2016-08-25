@@ -104,6 +104,7 @@ class V2StyleguideController extends Controller
                             ->with('options', $destinations)
                             ->with('placeholder', 'Just select')
                             ->with('helper', 'Press E to select')
+                            ->with('multiple', false)
                         )
                         ->push(component('FormButton')
                             ->with('title', trans('comment.create.submit.title'))
