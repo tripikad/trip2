@@ -1,41 +1,41 @@
 @php
 
-$search = $search ?? '';
-$logo = $logo ?? '';
-$navbar = $navbar?? '';
-$navbar_mobile = $navbar_mobile ?? '';
+$map = $map ?? '';
+$header = $header ?? '';
+$title = $title ?? '';
+$meta = $meta ?? '';
 
 @endphp
 
 <div class="Header {{ $isclasses }}">
+
+    <div class="Header__map">
+
+    {!! $map !!}
     
-    <div class="Header__left">
-
-        <div class="Header__search">
-
-            {!! $search !!}
-
-        </div>
-
-        <div class="Header__logo">
-
-            {!! $logo !!}
-
-        </div>
-
     </div>
 
-    <div class="Header__right">
+    <div class="container">
 
         <div class="Header__navbar">
 
             {!! $navbar !!}
-
+            
         </div>
 
-        <div class="Header__navbarMobile">
+        <div class="Header__content">
 
-            {!! $navbar_mobile !!}
+            <div class="Header__title">
+
+            {!! $title !!}
+
+            </div>
+
+            <div class="Header__meta">
+
+            {!! $meta !!}
+
+            </div>
 
         </div>
 

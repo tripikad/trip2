@@ -18,7 +18,7 @@ class V2FrontpageController extends Controller
 
         return view('v2.layouts.frontpage')
 
-            ->with('header', region('Masthead', 'Search'))
+            ->with('header', region('Header', 'Search'))
 
             ->with('content_first', collect()
                 ->push(component('Block')->with('content', collect(['FrontpageFlightCards'])))

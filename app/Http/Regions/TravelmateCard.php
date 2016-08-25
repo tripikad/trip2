@@ -7,7 +7,7 @@ class TravelmateCard
     public function render($post)
     {
         return component('TravelmateCard')
-            ->with('profile', component('ProfileImage')
+            ->with('user', component('UserImage')
                 ->with('route', route('user.show', [$post->user]))
                 ->with('image', $post->user->imagePreset('small_square'))
                 ->with('rank', $post->user->vars()->rank)

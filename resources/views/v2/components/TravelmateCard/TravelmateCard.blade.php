@@ -1,7 +1,7 @@
 @php
 
 $title = $title ?? '';
-$profile = $profile ?? '';
+$user = $user ?? '';
 $route = $route ?? '';
 $meta_top = $meta_top ?? '';
 $meta_bottom = $meta_bottom ?? '';
@@ -10,9 +10,9 @@ $meta_bottom = $meta_bottom ?? '';
 
 <div class="TravelmateCard {{ $isclasses }}">
 
-	<div class="TravelmateCard__profile">
+	<div class="TravelmateCard__user">
 
-        {!! $profile !!}
+        {!! $user !!}
 
     </div>
 

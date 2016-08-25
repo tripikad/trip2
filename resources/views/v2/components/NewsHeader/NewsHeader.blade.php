@@ -7,7 +7,7 @@ $meta = $meta ?? '';
 
 @endphp
 
-<div class="NewsMasthead {{ $isclasses }}" 
+<div class="NewsHeader {{ $isclasses }}" 
 	style="background-image: linear-gradient(
       rgba(0, 0, 0, 0),
       rgba(0, 0, 0, 0.4)
@@ -15,9 +15,9 @@ $meta = $meta ?? '';
 
     <div class="container">
 
-        <div class="NewsMasthead__header">
+        <div class="NewsHeader__navbar">
 
-        	{!! $header !!}
+        	{!! $navbar !!}
         	
         </div>
 
@@ -25,15 +25,15 @@ $meta = $meta ?? '';
 
         <div class="col-9">
 
-        <div class="NewsMasthead__content">
+        <div class="NewsHeader__content">
 
-        	<div class="NewsMasthead__title">
+        	<div class="NewsHeader__title">
 
             {!! $title !!}
 
             </div>
 
-            <div class="NewsMasthead__meta">
+            <div class="NewsHeader__meta">
 
             {!! $meta !!}
 

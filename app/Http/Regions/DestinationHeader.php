@@ -2,20 +2,20 @@
 
 namespace App\Http\Regions;
 
-class DestinationMasthead
+class DestinationHeader
 {
     public function render($destination)
     {
-        return component('DestinationMasthead')
+        return component('DestinationHeader')
             ->with('map', component('Map'))
-            ->with('header', component('Header')
-                ->with('search', component('HeaderSearch')->is('white'))
+            ->with('header', component('Navbar')
+                ->with('search', component('NavbarSearch')->is('white'))
                 ->with('logo', component('Icon')
                     ->with('icon', 'tripee_logo_plain_dark')
                     ->with('width', 80)
                     ->with('height', 30)
                 )
-                ->with('navbar', region('Navbar', 'white'))
+                ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
             ->with('name', $destination->name)

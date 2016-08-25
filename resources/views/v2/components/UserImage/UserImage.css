@@ -1,16 +1,16 @@
 @import "variables";
 
-.ProfileImage {
+.UserImage {
     position: relative;
 }
 
-.ProfileImage__image {
+.UserImage__image {
     border-radius: 50%;
     width: 100%;
 }
 
-.ProfileImage__arcRank,
-.ProfileImage__arcReminder {
+.UserImage__arcRank,
+.UserImage__arcReminder {
     position: absolute;
     top: 0;
     right: 0;
@@ -18,14 +18,14 @@
     left: 0;
 }
 
-.ProfileImage__arcRank svg {
+.UserImage__arcRank svg {
     stroke: $cyan;
 }
 
-.ProfileImage__arcReminder svg {
+.UserImage__arcReminder svg {
     stroke: $gray;
 }
 
-.ProfileImage--dark .ProfileImage__arcRank svg {
+.UserImage--dark .UserImage__arcRank svg {
     stroke: $cyan-dark;
 }

@@ -31,7 +31,7 @@ class V2StaticController extends Controller
 
         return view('v2.layouts.1col')
 
-            ->with('header', region('Masthead', $post->vars()->title))
+            ->with('header', region('Header', $post->vars()->title))
 
             ->with('content', collect()
                 ->push(component('Body')->with('body', $post->vars()->body))

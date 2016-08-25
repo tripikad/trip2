@@ -1,17 +1,17 @@
 @import "variables";
 
-.NewsMasthead {
+.NewsHeader {
     background-repeat: no-repeat;
     background-size: cover;
     padding: $padding-md 0;
 }
 
-    .NewsMasthead__content {
+    .NewsHeader__content {
         margin-top: calc($spacer * 25);
         margin-top: calc($spacer * 15) ?if $mobile;
     }
 
-    .NewsMasthead__title {
+    .NewsHeader__title {
         color: $white;
         font: $font-heading-lg ?if $mobile;
         font: $font-heading-xl;

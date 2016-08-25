@@ -2,19 +2,19 @@
 
 namespace App\Http\Regions;
 
-class Masthead
+class Header
 {
     public function render($title = '')
     {
-        return component('Masthead')
-            ->with('header', component('Header')
-                ->with('search', component('HeaderSearch')->is('gray'))
+        return component('Header')
+            ->with('navbar', component('Navbar')
+                ->with('search', component('NavbarSearch')->is('gray'))
                 ->with('logo', component('Icon')
                     ->with('icon', 'tripee_logo_plain_dark')
                     ->with('width', 80)
                     ->with('height', 30)
                 )
-                ->with('navbar', region('Navbar'))
+                ->with('navbar_desktop', region('NavbarDesktop'))
                 ->with('navbar_mobile', region('NavbarMobile'))
             )
             ->with('title', $title);

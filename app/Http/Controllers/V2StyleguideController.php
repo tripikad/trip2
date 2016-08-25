@@ -76,7 +76,7 @@ class V2StyleguideController extends Controller
                 ->push(component('BlogCard')
                     ->with('title', $blog->title)
                     ->with('route', route('content.show', ['blog', $blog]))
-                    ->with('profile', component('ProfileImage')
+                    ->with('user', component('UserImage')
                         ->with('route', route('user.show', [$blog->user]))
                         ->with('image', $blog->user->imagePreset('small_square'))
                         ->with('rank', $blog->user->vars()->rank)

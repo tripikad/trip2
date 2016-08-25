@@ -9,7 +9,7 @@ use App\Http\Controllers\ContentController;
 
 Route::get('v2/frontpage', [
     'uses' => 'V2FrontpageController@index',
-    'as' => 'frontpage.index2',
+    'as' => 'frontpage.index.2',
 ]);
 
 // News
@@ -82,18 +82,18 @@ Route::get('v2/static/{id}', [
     'as' => 'static.show',
 ]);
 
-// Profile
+// User
 
-Route::get('v2/profile/{id}', [
-    'uses' => 'V2ProfileController@show',
-    'as' => 'profile.show',
+Route::get('v2/user/{id}', [
+    'uses' => 'V2UserController@show',
+    'as' => 'user.show.2',
 ]);
 
 // Destination
 
 Route::get('v2/destination/{id}', [
     'uses' => 'V2DestinationController@show',
-    'as' => 'destination.show',
+    'as' => 'destination.show.2',
 ]);
 
 // Styleguide

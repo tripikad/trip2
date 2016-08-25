@@ -2,7 +2,7 @@
 
 $route = $route ?? '';
 $title = $title ?? '';
-$profile = $profile ?? '';
+$user = $user ?? '';
 $meta = $meta ?? '';
 
 @endphp
@@ -19,9 +19,9 @@ $meta = $meta ?? '';
 
     </a>
 
-    <div class="BlogCard__profile">
+    <div class="BlogCard__user">
 
-        {!! $profile!!}
+        {!! $user!!}
 
         <div class="BlogCard__meta">
 
