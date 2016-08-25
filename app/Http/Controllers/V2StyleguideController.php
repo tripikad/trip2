@@ -95,14 +95,7 @@ class V2StyleguideController extends Controller
                     return region('ForumRow', $post);
                 }))
 
-                ->push(component('Block')
-                    ->is('uppercase')
-                    ->with('title', 'Tripikad räägivad')
-                    ->with('content', $posts->map(function ($post) {
-                        return region('ForumRowSmall', $post);
-                    })
-                    )
-                )
+                ->push(region('ForumSidebar', $posts))
 
                 ->push(component('Alert'))
 

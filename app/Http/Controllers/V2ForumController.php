@@ -56,6 +56,12 @@ class V2ForumController extends Controller
             ->whereStatus(1)
             ->findOrFail($id);
 
+        $posts = Content::whereType($type)
+            ->whereStatus(1)
+            ->latest()
+            ->take(5)
+            ->get();
+
         return view('v2.layouts.2col')
 
             ->with('header', region('Masthead', trans("content.$type.index.title")))
@@ -73,7 +79,7 @@ class V2ForumController extends Controller
                 ->push(region('ForumAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Block')->with('content', collect(['DestinationBar'])))
-                ->push(component('Block')->with('content', collect(['5 x ForumRowSmall'])))
+                ->push(region('ForumSidebar', $posts))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )

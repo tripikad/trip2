@@ -82,6 +82,12 @@ class V2FlightController extends Controller
             ->latest()
             ->get();
 
+        $forums = Content::whereType('forum')
+            ->whereStatus(1)
+            ->take(5)
+            ->latest()
+            ->get();
+
         $flights = Content::whereType('flight')
             ->whereStatus(1)
             ->latest()
@@ -140,7 +146,7 @@ class V2FlightController extends Controller
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
                 ->push(component('Block')->with('content', collect(['DestinationBar'])))
-                ->push(component('Block')->with('content', collect(['5 x ForumRowSmall'])))
+                ->push(region('ForumSidebar', $forums))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->merge($posts->map(function ($post) {
                     return region('FlightCard', $post);
