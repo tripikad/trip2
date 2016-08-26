@@ -40,8 +40,8 @@ class V2StyleguideController extends Controller
                     'title' => $image->title,
                     'user' =>  [
                                 'name' => $image->user->name,
-                                'route' => route('user.show', [$image->user->id])
-                                ]
+                                'route' => route('user.show', [$image->user->id]),
+                                ],
                 ];
             });
 
