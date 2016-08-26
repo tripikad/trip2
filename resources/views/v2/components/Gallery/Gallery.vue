@@ -52,39 +52,39 @@
 
 import Icon from '../Icon/Icon.vue'
 
-    export default {
+export default {
 
-        components: {
-            Icon
-        },
+    components: {
+        Icon
+    },
 
-        props: {
-            isclasses: { default: '' },
-            images: { default: '' },
-            title: { default: '' },
-            tags: { default: '' }
-        },
+    props: {
+        isclasses: { default: '' },
+        images: { default: '' },
+        title: { default: '' },
+        tags: { default: '' }
+    },
 
-        data() {
-            return {
-                active: false,
-                activeImage: false,
-            }
-        },
-
-        methods: {
-            render: function(index) {
-                this.activeImage = index;
-                this.active = true;
-            }
-        },
-
-        ready() {
-            this.images = this.images
-                ? JSON.parse(decodeURIComponent(this.images))
-                : []    
+    data() {
+        return {
+            active: false,
+            activeImage: false
         }
+    },
 
+    methods: {
+        render: function(index) {
+            this.activeImage = index
+            this.active = true
+        }
+    },
+
+    ready() {
+        this.images = this.images
+            ? JSON.parse(decodeURIComponent(this.images))
+            : []
     }
+
+}
 
 </script>
