@@ -38,7 +38,10 @@ class V2StyleguideController extends Controller
                     'small' => $image->imagePreset('small'),
                     'large' => $image->imagePreset('large'),
                     'title' => $image->title,
-                    'user' => $image->user->name,
+                    'user' =>  [
+                                'name' => $image->user->name,
+                                'route' => route('user.show', [$image->user->id])
+                                ]
                 ];
             });
 

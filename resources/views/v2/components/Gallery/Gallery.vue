@@ -4,7 +4,7 @@
 
         <div class="Gallery__wrapper">
 
-                 <img class="Gallery__image"
+                 <img class="Gallery__image col-4"
                     v-for="item in images"
                     track-by="$index"
                     :src="item.small"
@@ -34,9 +34,11 @@
 
                 <div class="Gallery__imageinfo">
 
+                    <div class="meta" ></div>
+
                     <span>{{ images[activeImage].title }}</span>
 
-                    <span>{{ images[activeImage].user }}</span>
+                    <a href="{{ images[activeImage].user.route }}">Lisas: {{ images[activeImage].user.name }}</a>
 
                 </div>
 
@@ -61,8 +63,7 @@ export default {
     props: {
         isclasses: { default: '' },
         images: { default: '' },
-        title: { default: '' },
-        tags: { default: '' }
+        title: { default: '' }
     },
 
     data() {

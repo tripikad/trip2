@@ -40,7 +40,7 @@ new Vue({
         Promo,
         ImageUpload,
         FormSelect,
-        Gallery,
+        Gallery
     },
 
     events: {
