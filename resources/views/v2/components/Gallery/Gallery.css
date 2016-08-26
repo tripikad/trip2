@@ -20,7 +20,7 @@
     	left: 0;
     	width: 99vw;
     	height: 100vh;
-    	background: rgba( 0, 0, 0, 0.8);
+    	background: rgba(0, 0, 0, 0.8);
     	z-index: 1;
     	display: flex;
     	align-items: center;
