@@ -69,6 +69,12 @@ class V2TravelmateController extends Controller
             ->latest()
             ->get();
 
+        $forums = Content::whereType('forum')
+            ->whereStatus(1)
+            ->take(5)
+            ->latest()
+            ->get();
+
         $flights = Content::whereType('flight')
             ->whereStatus(1)
             ->latest()
@@ -128,7 +134,7 @@ class V2TravelmateController extends Controller
                 ->merge($flights->map(function ($flight) {
                     return region('FlightCard', $flight);
                 }))
-                ->push(component('Block')->with('content', collect(['5 x ForumRowSmall'])))
+                ->push(region('ForumSidebar', $forums))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
             )
 
