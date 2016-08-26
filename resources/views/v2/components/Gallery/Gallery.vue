@@ -4,36 +4,39 @@
 
         <div class="Gallery__wrapper">
 
-            <div class="Gallery__item" v-for="item in images">
-
-                 <img class="Gallery__image" src="../images/{{item.small}}" @click="render(this.$index)"/>
-
-            </div
+                 <img class="Gallery__image"
+                    v-for="item in images"
+                    track-by="$index"
+                    :src="item.small"
+                    @click="render(this.$index)"/>
 
         </div>
 
         <div class="Gallery__Fullscreen" v-if="active">
 
-            <div class="Gallery__close"> 
+            <component is="Icon" class="Gallery--close" icon="icon-close" size="xl" fill="white" @click="active = false, activeImage = -1"></component>
 
-                <component is="Icon" icon="icon-close" size="xl" fill="white" @click="active = false, activeImage = -1"></component>
+            <div class="Gallery__left" @click="activeImage--" v-if="activeImage > 0">
+
+                <component is="Icon" icon="icon-arrow-left" size="xl" fill="white"></component>
+
+             </div>
+
+             <div class="Gallery__right" @click="activeImage++" v-if="activeImage < images.length -1">
+
+                    <component is="Icon" icon="icon-arrow-right" size="xl" fill="white"></component>
 
             </div>
 
+            <div class="Gallery__Fullitem">
 
-            <div class="Gallery__Fullitem" >
+                <img class="Gallery__Fullimage" :src="images[activeImage].large"/>
 
-                <div class="Gallery__left" @click="activeImage--">
+                <div class="Gallery__imageinfo">
 
-                    <component is="Icon" icon="icon-arrow-left" size="xl" fill="white"></component>
+                    <span>{{ images[activeImage].title }}</span>
 
-                 </div>
-
-                <img class="Gallery__Fullimage" src="../images/{{images[activeImage]}}"/>
-
-                <div class="Gallery__right" @click="activeImage++">
-
-                    <component is="Icon" icon="icon-arrow-right" size="xl" fill="white"></component>
+                    <span>{{ images[activeImage].user }}</span>
 
                 </div>
 
@@ -57,13 +60,15 @@ import Icon from '../Icon/Icon.vue'
 
         props: {
             isclasses: { default: '' },
-            images: { default: '' }
+            images: { default: '' },
+            title: { default: '' },
+            tags: { default: '' }
         },
 
         data() {
             return {
                 active: false,
-                activeImage: -1,
+                activeImage: false,
             }
         },
 
@@ -77,7 +82,7 @@ import Icon from '../Icon/Icon.vue'
         ready() {
             this.images = this.images
                 ? JSON.parse(decodeURIComponent(this.images))
-                : []
+                : []    
         }
 
     }

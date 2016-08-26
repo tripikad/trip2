@@ -31,11 +31,14 @@ class V2StyleguideController extends Controller
 
         $blog = Content::find(97993);
 
-        $images = Content::whereType('photo')->latest()->take(6)->get()
+        $images = Content::whereType('photo')->latest()->skip(1)->take(6)->get()
             ->map(function($image) {
                 return [
                     'id' => $image->id,
-                    'small' => $image->imagePreset('small')
+                    'small' => $image->imagePreset('small'),
+                    'large' => $image->imagePreset('large'),
+                    'title' => $image->title,
+                    'user' => $image->user->name
                 ];
             });
 
