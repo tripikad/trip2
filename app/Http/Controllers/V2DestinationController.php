@@ -19,7 +19,7 @@ class V2DestinationController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('DestinationMasthead', $destination))
+            ->with('header', region('DestinationHeader', $destination))
 
             ->with('content', collect()
                 ->push(component('Block')->with('content', collect(['DestinationFlight1'])))

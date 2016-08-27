@@ -11,7 +11,7 @@ class ForumPost
         return component('ForumPost')
             ->is($post->status ?: 'unpublished')
             ->with('title', $post->vars()->title)
-            ->with('profile', component('ProfileImage')
+            ->with('user', component('UserImage')
                 ->with('route', route('user.show', [$post->user]))
                 ->with('image', $post->user->imagePreset('small_square'))
                 ->with('rank', $post->user->vars()->rank)

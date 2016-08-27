@@ -17,9 +17,9 @@ $meta = $meta ?? '';
 
     <div class="container">
 
-        <div class="DestinationMasthead__header">
+        <div class="DestinationMasthead__navbar">
 
-            {!! $header !!}
+            {!! $navbar !!}
             
         </div>
 

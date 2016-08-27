@@ -1,8 +1,8 @@
 <template>
 
-    <div class="HeaderSearch" :class="[ isclasses, { 'HeaderSearch--active': active }]">
+    <div class="NavbarSearch" :class="[ isclasses, { 'NavbarSearch--active': active }]">
 
-        <div class="HeaderSearch__icon">
+        <div class="NavbarSearch__icon">
 
             <component
                 is="Icon"
@@ -14,7 +14,7 @@
         </div>
 
         <input
-            class="HeaderSearch__input"
+            class="NavbarSearch__input"
             type="text"
             size="12"
             v-model="keywords"

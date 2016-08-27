@@ -74,7 +74,7 @@
 
 <script>
 
-    import HeaderSearch from '../HeaderSearch/HeaderSearch.vue'
+    import HeaderSearch from '../NavbarSearch/NavbarSearch.vue'
     import Icon from '../Icon/Icon.vue'
 
     export default {

@@ -1,34 +1,34 @@
 @import "variables";
 
-.HeaderSearch {
+.NavbarSearch {
 	display: flex;
 	align-items: center;
 }
 
-	.HeaderSearch__icon {
+	.NavbarSearch__icon {
 		cursor: pointer;
 		margin-right: $margin-sm;
 	}
 
-	.HeaderSearch__input {
+	.NavbarSearch__input {
 		background: none;
 		border: none;
 		font: $font-text-md;
 		padding: $padding-xs;
 	}
 
-	.HeaderSearch__input:focus {
+	.NavbarSearch__input:focus {
 	    outline: none;
 	}
 
-.HeaderSearch--white {
+.NavbarSearch--white {
 	fill: $white;
 }
 
-	.HeaderSearch--white .HeaderSearch__input {
+	.NavbarSearch--white .NavbarSearch__input {
 		color: $white;
 	}
 
-.HeaderSearch--gray {
+.NavbarSearch--gray {
 	fill: $gray-darkest;
 }

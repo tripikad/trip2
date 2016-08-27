@@ -23,7 +23,7 @@ class V2ForumController extends Controller
             ->get();
 
         return view('v2.layouts.2col')
-            ->with('header', region('Masthead', trans("content.$type.index.title")))
+            ->with('header', region('Header', trans("content.$type.index.title")))
             ->with('content', collect()
                 ->merge($posts->map(function ($post) {
                     return region('ForumRow', $post);
@@ -64,7 +64,7 @@ class V2ForumController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Masthead', trans("content.$type.index.title")))
+            ->with('header', region('Header', trans("content.$type.index.title")))
 
             ->with('content', collect()
                 ->push(region('ForumPost', $post))

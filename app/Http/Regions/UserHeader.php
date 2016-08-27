@@ -2,23 +2,23 @@
 
 namespace App\Http\Regions;
 
-class ProfileMasthead
+class UserHeader
 {
     public function render($user)
     {
-        return component('ProfileMasthead')
+        return component('UserHeader')
             ->with('map', component('Map'))
-            ->with('header', component('Header')
-                ->with('search', component('HeaderSearch')->is('white'))
+            ->with('navbar', component('Navbar')
+                ->with('search', component('NavbarSearch')->is('white'))
                 ->with('logo', component('Icon')
                     ->with('icon', 'tripee_logo_plain_dark')
                     ->with('width', 80)
                     ->with('height', 30)
                 )
-                ->with('navbar', region('Navbar', 'white'))
+                ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
-            ->with('profile', component('ProfileImage')
+            ->with('user', component('UserImage')
                 ->is('dark')
                 ->with('route', route('user.show', [$user]))
                 ->with('image', $user->imagePreset('small_square'))
