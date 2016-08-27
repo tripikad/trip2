@@ -16,7 +16,7 @@ class V2FrontpageController extends Controller
             ->latest()
             ->get();
 
-        $latestimages = Content::whereType('photo')->latest()->skip(2)->take(6)->get()
+        $latestimages = Content::whereType('photo')->latest()->take(6)->get()
             ->map(function ($image) {
                 return [
                     'id' => $image->id,

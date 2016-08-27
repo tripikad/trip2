@@ -27,6 +27,7 @@ class V2UserController extends Controller
             ->whereStatus(1)
             ->where('type', 'photo')
             ->latest('created_at')
+            ->take(6)
             ->get()
                 ->map(function ($image) {
                     return [
@@ -49,11 +50,7 @@ class V2UserController extends Controller
             ->with('header', region('UserHeader', $user))
 
             ->with('content', collect()
-                ->push(component('Block')->with('content', collect()
-                        ->push(component('Gallery')
-                            ->with('images', $userimages)
-                        )
-                    ))
+                ->push(component('Gallery')->with('images', $userimages))
                 ->merge($comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
