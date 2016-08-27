@@ -48,7 +48,7 @@ class V2StyleguideController extends Controller
                             ->with('title', $image->user->vars()->name)
                             ->with('route', route('user.show', [$image->user]))
                         )
-                    )->render()
+                    )->render(),
                 ];
             });
 
