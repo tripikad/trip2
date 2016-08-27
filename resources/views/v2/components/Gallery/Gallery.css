@@ -1,13 +1,8 @@
 @import "variables";
 
-    .Gallery__wrapper {
-    	display: flex;
-    	flex-wrap: wrap;
-    }
-
     .Gallery__image {
     	cursor: pointer;
-    	height: auto;
+        width: 100%;
     }
 
     .Gallery__fullscreen {
@@ -31,13 +26,13 @@
         z-index: 10;
 	}
 
-	.Gallery__image {
+	.Gallery__fullImage {
         height: auto;
         max-width: 100%;
         width: auto;
 	}
 
-	.Gallery__meta {
+	.Gallery__fullMeta {
         bottom: $margin-lg;
         display: flex;
         justify-content: center;

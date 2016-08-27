@@ -2,14 +2,21 @@
 
     <div class="Gallery" :class="isclasses">
 
-        <div class="Gallery__wrapper">
+        <div class="row">
 
-            <img class="Gallery__image col-4"
+            <div
+                class="col-2"
                 v-for="item in images"
                 track-by="$index"
-                :src="item.small"
-                @click="render($index)"
-            />
+            >
+
+                <img
+                    class="Gallery__image"
+                    :src="item.small"
+                    @click="render($index)"
+                />
+
+            </div>
 
         </div>
 
@@ -44,18 +51,18 @@
 
             </div>
 
-            <div class="Gallery__imageWrapper">
+            <div class="Gallery__fullImageWrapper">
 
-                <img class="Gallery__image" :src="images[activeImage].large"/>
-
-                <div class="Gallery__meta">
-
-                    {{{ images[activeImage].meta }}}
-
-                </div>
+                <img class="Gallery__fullImage" :src="images[activeImage].large"/>
 
             </div>
 
+            <div class="Gallery__fullMeta">
+
+                {{{ images[activeImage].meta }}}
+
+            </div>
+            
         </div>
 
     </div>
