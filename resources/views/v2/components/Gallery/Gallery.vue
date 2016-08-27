@@ -4,41 +4,53 @@
 
         <div class="Gallery__wrapper">
 
-                 <img class="Gallery__image col-4"
-                    v-for="item in images"
-                    track-by="$index"
-                    :src="item.small"
-                    @click="render(this.$index)"/>
+            <img class="Gallery__image col-4"
+                v-for="item in images"
+                track-by="$index"
+                :src="item.small"
+                @click="render($index)"
+            />
 
         </div>
 
-        <div class="Gallery__Fullscreen" v-if="active">
+        <div class="Gallery__fullscreen" v-if="fullscreen">
 
-            <component is="Icon" class="Gallery--close" icon="icon-close" size="xl" fill="white" @click="active = false, activeImage = -1"></component>
+            <component
+                is="Icon"
+                class="Gallery__close"
+                icon="icon-close"
+                size="xl"
+                fill="white"
+                @click="fullscreen = false, activeImage = -1">
+            </component>
 
-            <div class="Gallery__left" @click="activeImage--" v-if="activeImage > 0">
+            <div
+                class="Gallery__left"
+                @click="activeImage--"
+                v-if="activeImage > 0"
+            >
 
                 <component is="Icon" icon="icon-arrow-left" size="xl" fill="white"></component>
 
              </div>
 
-             <div class="Gallery__right" @click="activeImage++" v-if="activeImage < images.length -1">
+             <div
+                class="Gallery__right"
+                @click="activeImage++"
+                v-if="activeImage < images.length -1"
+            >
 
-                    <component is="Icon" icon="icon-arrow-right" size="xl" fill="white"></component>
+                <component is="Icon" icon="icon-arrow-right" size="xl" fill="white"></component>
 
             </div>
 
-            <div class="Gallery__Fullitem">
+            <div class="Gallery__imageWrapper">
 
-                <img class="Gallery__Fullimage" :src="images[activeImage].large"/>
+                <img class="Gallery__image" :src="images[activeImage].large"/>
 
-                <div class="Gallery__imageinfo">
+                <div class="Gallery__meta">
 
-                    <div class="meta" ></div>
-
-                    <span>{{ images[activeImage].title }}</span>
-
-                    <a href="{{ images[activeImage].user.route }}">Lisas: {{ images[activeImage].user.name }}</a>
+                    {{{ images[activeImage].meta }}}
 
                 </div>
 
@@ -62,13 +74,12 @@ export default {
 
     props: {
         isclasses: { default: '' },
-        images: { default: '' },
-        title: { default: '' }
+        images: { default: '' }
     },
 
     data() {
         return {
-            active: false,
+            fullscreen: false,
             activeImage: false
         }
     },
@@ -76,7 +87,7 @@ export default {
     methods: {
         render: function(index) {
             this.activeImage = index
-            this.active = true
+            this.fullscreen = true
         }
     },
 
