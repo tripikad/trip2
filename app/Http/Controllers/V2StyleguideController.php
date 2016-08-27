@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Image;
 use App\Content;
 use App\Destination;
 use Request;
@@ -30,6 +31,27 @@ class V2StyleguideController extends Controller
 
         $blog = Content::find(97993);
 
+        $images = Content::whereType('photo')->latest()->skip(2)->take(6)->get()
+            ->map(function ($image) {
+                return [
+                    'id' => $image->id,
+                    'small' => $image->imagePreset('small_square'),
+                    'large' => $image->imagePreset('large'),
+                    'meta' => component('Meta')->with('items', collect()
+                        ->push(component('MetaLink')
+                            ->with('title', $image->vars()->title)
+                        )
+                        ->push(component('MetaLink')
+                            ->with('title', $image->vars()->created_at)
+                        )
+                        ->push(component('MetaLink')
+                            ->with('title', $image->user->vars()->name)
+                            ->with('route', route('user.show', [$image->user]))
+                        )
+                    )->render(),
+                ];
+            });
+
         return view('v2.layouts.1col')
 
             ->with('content', collect()
@@ -37,6 +59,10 @@ class V2StyleguideController extends Controller
                 ->push(component('Map')
                     //->with('left', null)
                     //->with('top', null)
+                )
+
+                ->push(component('Gallery')
+                    ->with('images', $images)
                 )
 
                 ->push(component('Meta')->with('items', collect()
