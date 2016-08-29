@@ -62,6 +62,12 @@ class V2ForumController extends Controller
             ->take(5)
             ->get();
 
+        $travelmates = Content::whereType('travelmate')
+            ->whereStatus(1)
+            ->latest()
+            ->take(3)
+            ->get();
+
         return view('v2.layouts.2col')
 
             ->with('header', region('Header', trans("content.$type.index.title")))
@@ -85,8 +91,24 @@ class V2ForumController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Block')->with('content', collect(['ForumBottom'])))
-                ->push(component('Block')->with('content', collect(['TravelmateBottom'])))
+                ->push(component('Block')
+                    ->is('red')
+                    ->is('uppercase')
+                    ->is('white')
+                    ->with('title', trans('content.forum.sidebar.title'))
+                    ->with('content', collect()
+                    ->push(component('ForumBottom')
+                        ->with('left_items', region('ForumLinks'))
+                        ->with('right_items', $posts->map(function ($post) {
+                            return region('ForumRow', $post);
+                        }))
+                    )))
+                ->push(component('Block')->with('content', collect(['ForumBottom'])
+                    ->push(component('Grid3')->with('gutter', true)->with('items', $travelmates->map(function ($post) {
+                        return region('TravelmateCard', $post);
+                        })
+                    ))
+                ))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
