@@ -159,7 +159,7 @@ class V2FlightController extends Controller
                     ->with('content', collect()
                     ->push(component('Grid3')->with('gutter', true)->with('items', $travelmates->map(function ($post) {
                         return region('TravelmateCard', $post);
-                        })
+                    })
                     ))
                 ))
                 ->push(component('Promo')->with('promo', 'footer'))
