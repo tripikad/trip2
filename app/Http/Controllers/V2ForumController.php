@@ -103,7 +103,7 @@ class V2ForumController extends Controller
                             return region('ForumRow', $post);
                         }))
                     )))
-                ->push(component('Block')->with('content', collect(['ForumBottom'])
+                ->push(component('Block')->with('content', collect()
                     ->push(component('Grid3')->with('gutter', true)->with('items', $travelmates->map(function ($post) {
                         return region('TravelmateCard', $post);
                         })

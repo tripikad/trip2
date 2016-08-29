@@ -16,6 +16,7 @@ class UserCard
             )
             ->with('meta', component('Meta')->with('items', collect()
                     ->push(component('MetaLink')
+                        ->is('white')
                         ->with('title', $post->user->vars()->name)
                         ->with('route', route('user.show', [$post->user]))
                     )
