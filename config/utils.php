@@ -8,6 +8,6 @@ return [
 
     'twitter' => 'https://twitter.com/intent/tweet?url=',
 
-    ]
+    ],
 
 ];

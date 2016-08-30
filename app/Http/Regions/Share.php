@@ -2,8 +2,6 @@
 
 namespace App\Http\Regions;
 
-use URL;
-
 class Share
 {
     public function render()
