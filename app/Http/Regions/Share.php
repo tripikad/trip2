@@ -23,6 +23,7 @@ class Share
                     ->with('external', true)
                     ->with('icon', 'icon-twitter')
                     ->with('title', trans('utils.share.twitter'))
+                    ->with('route', route('utils.share', ['twitter']))
                 ));
     }
 }
