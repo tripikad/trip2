@@ -1,20 +1,38 @@
 @php
 
 $profile = $profile ?? '';
+$route = $route ?? '';
+$name = $name ?? '';
+$meta = $meta ?? '';
 
 @endphp
 
 <div class="UserCard {{ $isclasses }}">
 
-    <div class="UserCard__profile">
+    <div class="UserCard__image">
 
-        {!! $profile !!}
-
-    </div>
-
-    <div class="UserCard__meta">
-
-        {!! $meta !!}
+        {!! $image !!}
 
     </div>
+
+    <div class="UserCard__right">
+
+    	<a href="{{ $route }}">
+
+    		<div class="UserCard__name">
+
+		        {!! $name !!}
+
+		    </div>
+
+    	</a>
+
+     	<div class="UserCard__meta">
+
+	        {!! $meta !!}
+
+	    </div>
+
+	</div>
+
 </div>
