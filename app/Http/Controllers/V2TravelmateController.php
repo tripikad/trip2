@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Destination;
+use App\Topic;
 
 class V2TravelmateController extends Controller
 {
     public function index()
     {
         $type = 'travelmate';
+
+        $destinations = Destination::select('id', 'name')->get();
+
+        $topics = Topic::select('id', 'name')->get();
 
         $posts = Content::whereType($type)
             ->whereStatus(1)
@@ -33,7 +39,10 @@ class V2TravelmateController extends Controller
 
             ->with('sidebar', collect()
                 ->push(component('Block')->with('content', collect(['TravelmateAbout'])))
-                ->push(component('Block')->with('content', collect(['TravelmateFilter'])))
+                ->push(component('Block')->with('content', collect()
+                    ->push(region('Filter', $destinations, $topics))
+                    )
+                )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Block')->with('content', collect(['About'])))
             )
@@ -105,10 +114,8 @@ class V2TravelmateController extends Controller
                     )
                 )
                 ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
-                ->push(component('Block')->with('content', collect()
-                    ->push(region('Share'))
-                    )
-                )
+                ->push(region('Share'))
+
                 ->merge($post->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
@@ -117,8 +124,7 @@ class V2TravelmateController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect()
-                    ->push(region('UserCard', $post))))
+                ->push(region('UserCard', $post))
                 ->push(component('Block')->with('content', collect(['DestinationBar'])))
                 ->merge($flights->map(function ($flight) {
                     return region('FlightCard', $flight);

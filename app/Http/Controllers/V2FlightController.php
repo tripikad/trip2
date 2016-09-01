@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Destination;
+use App\Topic;
 
 class V2FlightController extends Controller
 {
@@ -10,27 +12,59 @@ class V2FlightController extends Controller
     {
         $type = 'flight';
 
+        $firstBatch = 3;
+        $secondBatch = 10;
+        $thirdBatch = 10;
+
         $posts = Content::whereType($type)
             ->whereStatus(1)
-            ->take(20)
+            ->take($firstBatch + $secondBatch + $thirdBatch)
             ->latest()
             ->get();
 
         $forumPosts = Content::whereType('forum')->latest()->skip(10)->take(5)->get();
+
+        $destinations = Destination::select('id', 'name')->get();
+
+        $topics = Topic::select('id', 'name')->get();
 
         return view('v2.layouts.2col')
 
             ->with('header', region('Header', trans("content.$type.index.title")))
 
             ->with('content', collect()
-                ->merge($posts->map(function ($post) {
-                    return region('FlightRow', $post);
-                }))
+                ->push(component('Grid3')
+                    ->with('gutter', true)
+                    ->with('items', $posts
+                        ->take($firstBatch)
+                        ->map(function ($post) {
+                            return region('FlightCard', $post);
+                        })
+                    )
+                )
+                ->merge($posts
+                    ->slice($firstBatch)
+                    ->take($secondBatch)
+                    ->map(function ($post) {
+                        return region('FlightRow', $post);
+                    })
+                )
+                ->push(component('Promo', 'content'))
+                ->merge($posts
+                    ->slice($firstBatch + $secondBatch)
+                    ->take($thirdBatch)
+                    ->map(function ($post) {
+                        return region('FlightRow', $post);
+                    })
+                )
             )
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
-                ->push(component('Block')->with('content', collect(['FlightFilter'])))
+                ->push(component('Block')->with('content', collect()
+                    ->push(region('Filter', $destinations, $topics))
+                    )
+                )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('Block')->with('content', collect(['About'])))
@@ -122,9 +156,7 @@ class V2FlightController extends Controller
                     return region('Comment', $comment);
                 }))
                 //->pushWhen(region('CommentCreateForm', $post))
-                ->push(component('Block')->with('content', collect()
-                    ->push(region('Share')))
-                )
+                ->push(region('Share'))
                 ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Block')
                     ->is('white')
