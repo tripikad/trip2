@@ -105,10 +105,8 @@ class V2TravelmateController extends Controller
                     )
                 )
                 ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
-                ->push(component('Block')->with('content', collect()
-                    ->push(region('Share'))
-                    )
-                )
+                ->push(region('Share'))
+    
                 ->merge($post->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
@@ -117,8 +115,7 @@ class V2TravelmateController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect()
-                    ->push(region('UserCard', $post))))
+                ->push(region('UserCard', $post))
                 ->push(component('Block')->with('content', collect(['DestinationBar'])))
                 ->merge($flights->map(function ($flight) {
                     return region('FlightCard', $flight);

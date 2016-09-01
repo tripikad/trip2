@@ -147,9 +147,7 @@ class V2FlightController extends Controller
                     return region('Comment', $comment);
                 }))
                 //->pushWhen(region('CommentCreateForm', $post))
-                ->push(component('Block')->with('content', collect()
-                    ->push(region('Share')))
-                )
+                ->push(region('Share'))
                 ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Block')
                     ->is('white')
