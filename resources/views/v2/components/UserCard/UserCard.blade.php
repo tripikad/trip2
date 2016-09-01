@@ -1,6 +1,6 @@
 @php
 
-$profile = $profile ?? '';
+$image = $image ?? '';
 $route = $route ?? '';
 $name = $name ?? '';
 $meta = $meta ?? '';
