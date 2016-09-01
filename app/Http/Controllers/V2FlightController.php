@@ -94,6 +94,12 @@ class V2FlightController extends Controller
             ->take(3)
             ->get();
 
+        $travelmates = Content::whereType('travelmate')
+            ->whereStatus(1)
+            ->latest()
+            ->take(3)
+            ->get();
+
         return view('v2.layouts.2col')
 
             ->with('header', region('Header', trans("content.$type.index.title")))
@@ -117,20 +123,7 @@ class V2FlightController extends Controller
                 }))
                 //->pushWhen(region('CommentCreateForm', $post))
                 ->push(component('Block')->with('content', collect()
-                    ->push(component('Button')
-                            ->is('facebook')
-                            ->with('external', true)
-                            ->with('icon', 'icon-facebook')
-                            ->with('title', trans('utils.share.facebook'))
-                            ->with('route', route('utils.share.facebook')))
-                        ->push(component('Button')
-                            ->is('twitter')
-                            ->with('external', true)
-                            ->with('icon', 'icon-twitter')
-                            ->with('title', trans('utils.share.twitter'))
-                            ->with('route', route('utils.share.twitter'))
-                        )
-                    )
+                    ->push(region('Share')))
                 )
                 ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Block')
@@ -158,7 +151,17 @@ class V2FlightController extends Controller
                     return region('FlightCard', $flight);
                 })
                 ))
-                ->push(component('Block')->with('content', collect(['TravelmateBottom'])))
+                ->push(component('Block')
+                    ->is('red')
+                    ->is('uppercase')
+                    ->is('white')
+                    ->with('title', trans('content.travelmate.index.title'))
+                    ->with('content', collect()
+                    ->push(component('Grid3')->with('gutter', true)->with('items', $travelmates->map(function ($post) {
+                        return region('TravelmateCard', $post);
+                    })
+                    ))
+                ))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 

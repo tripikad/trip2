@@ -106,19 +106,7 @@ class V2TravelmateController extends Controller
                 )
                 ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
                 ->push(component('Block')->with('content', collect()
-                    ->push(component('Button')
-                            ->is('facebook')
-                            ->with('external', true)
-                            ->with('icon', 'icon-facebook')
-                            ->with('title', trans('utils.share.facebook'))
-                            ->with('route', route('utils.share.facebook')))
-                        ->push(component('Button')
-                            ->is('twitter')
-                            ->with('external', true)
-                            ->with('icon', 'icon-twitter')
-                            ->with('title', trans('utils.share.twitter'))
-                            ->with('route', route('utils.share.twitter'))
-                        )
+                    ->push(region('Share'))
                     )
                 )
                 ->merge($post->comments->map(function ($comment) {
@@ -129,7 +117,8 @@ class V2TravelmateController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect(['UserCard'])))
+                ->push(component('Block')->with('content', collect()
+                    ->push(region('UserCard', $post))))
                 ->push(component('Block')->with('content', collect(['DestinationBar'])))
                 ->merge($flights->map(function ($flight) {
                     return region('FlightCard', $flight);

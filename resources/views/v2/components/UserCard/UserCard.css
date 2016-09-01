@@ -1,0 +1,12 @@
+@import "variables";
+
+.UserCard {
+	display: flex;
+	align-items: center;
+	background: $cyan;
+	padding: $padding-md;
+}
+
+    .UserCard__meta {
+    	margin-left: $margin-sm;
+    }

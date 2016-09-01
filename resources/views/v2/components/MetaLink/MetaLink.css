@@ -5,3 +5,7 @@
         color: $gray-dark;
     }
 
+.MetaLink--white .MetaLink__title {
+	color: $white;
+}
+
