@@ -49,7 +49,7 @@ class V2FlightController extends Controller
                         return region('FlightRow', $post);
                     })
                 )
-                ->push(component('Promo', 'content'))
+                ->push(component('Promo')->with('promo', 'footer'))
                 ->merge($posts
                     ->slice($firstBatch + $secondBatch)
                     ->take($thirdBatch)
