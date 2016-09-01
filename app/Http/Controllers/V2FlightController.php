@@ -10,9 +10,13 @@ class V2FlightController extends Controller
     {
         $type = 'flight';
 
+        $firstBatch = 3;
+        $secondBatch = 10;
+        $thirdBatch = 10;
+
         $posts = Content::whereType($type)
             ->whereStatus(1)
-            ->take(20)
+            ->take($firstBatch + $secondBatch + $thirdBatch)
             ->latest()
             ->get();
 
@@ -23,9 +27,30 @@ class V2FlightController extends Controller
             ->with('header', region('Header', trans("content.$type.index.title")))
 
             ->with('content', collect()
-                ->merge($posts->map(function ($post) {
-                    return region('FlightRow', $post);
-                }))
+                ->push(component('Grid3')
+                    ->with('gutter', true)
+                    ->with('items', $posts
+                        ->take($firstBatch)
+                        ->map(function ($post) {
+                            return region('FlightCard', $post);
+                        })
+                    )
+                )
+                ->merge($posts
+                    ->slice($firstBatch)
+                    ->take($secondBatch)
+                    ->map(function ($post) {
+                        return region('FlightRow', $post);
+                    })
+                )
+                ->push(component('Promo', 'content'))
+                ->merge($posts
+                    ->slice($firstBatch + $secondBatch)
+                    ->take($thirdBatch)
+                    ->map(function ($post) {
+                        return region('FlightRow', $post);
+                    })
+                )
             )
 
             ->with('sidebar', collect()
