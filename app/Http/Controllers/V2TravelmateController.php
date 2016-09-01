@@ -115,7 +115,7 @@ class V2TravelmateController extends Controller
                 )
                 ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
                 ->push(region('Share'))
-    
+
                 ->merge($post->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
