@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->pattern('id', '[0-9]+');
         $router->pattern('id2', '[0-9]+');
         $router->pattern('type', '('.implode('|', config('content.types')).')');
-        $router->pattern('social', '('.collect(config("utils.share"))->keys()->implode('|').')');
+        $router->pattern('social', '('.collect(config('utils.share'))->keys()->implode('|').')');
 
         parent::boot($router);
     }
