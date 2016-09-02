@@ -6,8 +6,6 @@ $subtitle = $subtitle ?? '';
 
 @endphp
 
-<a href="{{ $route }}">
-
 <div class="DestinationBar {{ $isclasses }}">
 
 
@@ -25,14 +23,16 @@ $subtitle = $subtitle ?? '';
 
         </div>
 
-        <div class="DestinationBar__title">
+        <a href="{{ $route }}">
 
-            {{ $title }} ›
+            <div class="DestinationBar__title">
 
-        </div>
+                {{ $title }} ›
+
+            </div>
+
+        </a>
 
     </div>
 
 </div>
-
-</a>
