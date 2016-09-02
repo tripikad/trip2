@@ -6,6 +6,7 @@
     background: $orange;
     position: relative;
     overflow: hidden;
+    z-index: -10;
 }
 
     .DestinationMasthead__map {
@@ -14,6 +15,7 @@
         right: calc($spacer * -20);
         opacity: $opacity-md;
         fill: $orange-dark;
+        z-index: -5;
     }
 
     .DestinationMasthead__name {
