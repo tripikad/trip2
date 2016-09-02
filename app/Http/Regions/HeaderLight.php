@@ -20,7 +20,6 @@ class HeaderLight
                 )
                 ->with('navbar_desktop', region('NavbarDesktop'))
                 ->with('navbar_mobile', region('NavbarMobile'))
-            )
-        ;
+            );
     }
 }
