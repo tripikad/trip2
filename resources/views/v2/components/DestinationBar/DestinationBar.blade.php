@@ -21,11 +21,7 @@ $subtitle = $subtitle ?? '';
         
         <div class="DestinationBar__subtitle">
 
-        @foreach($subtitle as $sub)
-
-            {!! $sub  !!}
-
-        @endforeach
+            {!! $subtitle  !!}
 
         </div>
 

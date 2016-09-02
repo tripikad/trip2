@@ -36,5 +36,5 @@
     }
 
     .DestinationBar__subtitle div {
-        margin-right: calc($spacer/ 6);
+        margin: 0px calc($spacer/ 6);
     }
