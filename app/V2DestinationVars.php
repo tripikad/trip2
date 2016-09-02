@@ -30,5 +30,4 @@ class V2DestinationVars
     {
         return $this->destination->name;
     }
-
 }
