@@ -170,7 +170,11 @@ class V2FlightController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
-                ->push(component('Block')->with('content', collect(['DestinationBar'])))
+                ->push(component('Block')->with('content', collect()
+                    ->merge($post->destinations->map(function($destination) {
+                        return region('DestinationBar', $destination, $destination->getAncestors());
+                    }))
+                ))
                 ->push(region('ForumSidebar', $forums))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->merge($posts->map(function ($post) {

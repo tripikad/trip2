@@ -2,7 +2,7 @@
 
 $route = $route ?? '';
 $title = $title ?? '';
-$subtitle = $subtitle ?? collect();
+$subtitle = $subtitle ?? '';
 
 @endphp
 
@@ -21,7 +21,7 @@ $subtitle = $subtitle ?? collect();
         
         <div class="DestinationBar__subtitle">
 
-            {{ $subtitle->implode(' › ') }}
+            {!! $subtitle !!}
 
         </div>
 
