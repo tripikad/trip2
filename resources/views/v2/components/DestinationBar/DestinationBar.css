@@ -36,5 +36,6 @@
     }
 
     .DestinationBar__subtitle div {
-        margin: 0px 2px;
+        margin-left: 2px;
+        margin-right: 2px;
     }
