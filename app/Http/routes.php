@@ -93,7 +93,7 @@ Route::get('v2/user/{id}', [
 
 Route::get('v2/destination/{id}', [
     'uses' => 'V2DestinationController@show',
-    'as' => 'destination.show.2',
+    'as' => 'destination.show.v2',
 ]);
 
 // Styleguide

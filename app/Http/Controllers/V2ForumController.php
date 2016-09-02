@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Destination;
+use App\Topic;
 
 class V2ForumController extends Controller
 {
@@ -22,6 +24,10 @@ class V2ForumController extends Controller
             ->take(3)
             ->get();
 
+        $destinations = Destination::select('id', 'name')->get();
+
+        $topics = Topic::select('id', 'name')->get();
+
         return view('v2.layouts.2col')
             ->with('header', region('HeaderLight', trans("content.$type.index.title")))
             ->with('content', collect()
@@ -32,7 +38,9 @@ class V2ForumController extends Controller
             ->with('sidebar', collect()
                 ->merge(region('ForumLinks'))
                 ->push(region('ForumAbout'))
-                ->push(component('Block')->with('content', collect(['ForumFilter'])))
+                ->push(component('Block')->with('content', collect()
+                    ->push(region('Filter', $destinations, $topics))
+                ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
@@ -84,7 +92,9 @@ class V2ForumController extends Controller
                 ->merge(region('ForumLinks'))
                 ->push(region('ForumAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->push(component('Block')->with('content', collect(['DestinationBar'])))
+                ->merge($post->destinations->map(function ($destination) {
+                    return region('DestinationBar', $destination, $destination->getAncestors());
+                }))
                 ->push(region('ForumSidebar', $posts))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
