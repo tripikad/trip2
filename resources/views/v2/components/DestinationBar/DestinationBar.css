@@ -27,7 +27,6 @@
 
     .DestinationBar__subtitle {
         display: flex;
-        align-items: center;
         color: $white;
         font: $font-heading-md;
         line-height: 100%;
@@ -36,6 +35,7 @@
     }
 
     .DestinationBar__subtitle div {
+        margin-top: 2.5px;
         margin-left: 2px;
         margin-right: 2px;
     }
