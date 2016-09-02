@@ -1,37 +1,33 @@
 @php
 
-$background = $background ?? '';
+$map = $map ?? '';
 $header = $header ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
 
 @endphp
 
-<div class="Header {{ $isclasses }}" 
-    style="background-image: linear-gradient(
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.2)
-    ), url({{ $background }});
-">
+<div class="HeaderLight {{ $isclasses }}">
+
     <div class="container">
 
-        <div class="Header__navbar">
+        <div class="HeaderLight__navbar">
 
             {!! $navbar !!}
             
         </div>
 
-        <div class="Header__content">
+        <div class="HeaderLight__content">
 
             <div>
                 
-                <div class="Header__title">
+                <div class="HeaderLight__title">
 
                 {!! $title !!}
 
                 </div>
 
-                <div class="Header__meta">
+                <div class="HeaderLight__meta">
 
                 {!! $meta !!}
 
@@ -42,5 +38,8 @@ $meta = $meta ?? '';
         </div>
 
     </div>
+
+        <div class="HeaderLight__background" style="background-image: url({{ $background }})"></div>
+
     
 </div>
