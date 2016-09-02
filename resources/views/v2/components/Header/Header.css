@@ -1,19 +1,12 @@
 @import "variables";
 
 .Header {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: $padding-lg;
     padding-top: $padding-md;
 }
-
-    .Header__map {
-        position: absolute;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        height: 247px;
-        z-index: -1;
-        background: $gray-light;
-        width: 100%;
-    }
 
     .Header__content {
         height: calc($spacer * 15);
@@ -25,6 +18,6 @@
     .Header__title {
         font: $font-heading-xxxl;
         font: $font-heading-xxl ?if $tablet;
-        font: $font-heading-lg ?if $mobile;
-        color: $gray-darkest;
+        font: $font-heading-xl ?if $mobile;
+        color: $white;
     }

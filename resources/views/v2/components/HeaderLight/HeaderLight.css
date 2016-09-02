@@ -1,0 +1,33 @@
+@import "variables";
+
+.HeaderLight {
+    padding-top: $padding-md;
+    padding-bottom: $padding-lg;
+    background: $gray-light;
+    position: relative;
+    overflow: hidden;
+}
+
+    .HeaderLight__background {
+        position: absolute;
+        top: calc($spacer * -5);
+        left: calc($spacer * -5);
+        opacity: $opacity-sm;
+        width: calc($spacer * 100);
+        height: calc($spacer * 60);
+        opacity: $opacity-xs;
+    }
+
+    .HeaderLight__content {
+        height: calc($spacer * 15);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .HeaderLight__title {
+        font: $font-heading-xxxl;
+        font: $font-heading-xxl ?if $tablet;
+        font: $font-heading-xl ?if $mobile;
+        color: $gray-darkest;
+    }
