@@ -44,11 +44,8 @@ class UserDelete extends Command
 
                 });
 
-            }
-
             $user->delete();
 
             $this->line("user: $user->name and all user posts have been deleted");
-        }
     }
 }
