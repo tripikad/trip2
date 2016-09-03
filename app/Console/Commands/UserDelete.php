@@ -18,40 +18,34 @@ class UserDelete extends Command
 
         $user = User::findorfail($id);
 
-        if ($this->confirm('Do you wish to continue? [yes|no]'))
+        if ($this->confirm("Do you wish to delete user: $user->name? [yes|no]"))
         {
-            if($user->comments) {
 
-                $user->comments->map(function ($comment) {
+                $user->comments->each(function ($comment) {
 
                     $comment->delete();
 
                 });
 
-            }
+                $user->contents->each(function ($post) {
 
-            if($user->contents) {
+                    $post->comments->each(function ($comment){
 
-                $user->contents->map(function ($post) {
+                        $comment->delete();
+
+                    });
 
                     $post->delete();
                     
                 });
 
-            }
-
-            if($user->images) {
-
-                $user->images->map(function ($image) {
+                $user->images->each(function ($image) {
 
                     $image->delete();
                     
                 });
 
-            }
-
             $user->delete();
-
 
             $this->line("user: $user->name and all user posts have been deleted");
 
