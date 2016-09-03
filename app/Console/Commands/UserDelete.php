@@ -16,19 +16,14 @@ class UserDelete extends Command
         $id = $this->argument('id');
 
         $user = User::findorfail($id);
- 
+
         if ($this->confirm("Do you wish to delete user: $user->name? [yes|no]")) {
-
             $user->flags->each(function ($flag) {
-
                 $flag->delete();
-                
             });
 
             $user->comments->each(function ($comment) {
-
                 $comment->delete();
-
             });
 
             //remove user contents
@@ -55,17 +50,14 @@ class UserDelete extends Command
                 //remove content comments
 
                 $post->comments->each(function ($comment) {
-                    
                     $comment->delete();
-
                 });
 
                 $post->delete();
             });
 
             $user->images->each(function ($image) {
-
-                if($image->imagePresets('original')){
+                if ($image->imagePresets('original')) {
                     File::delete($image->imagePresets('small'));
                     File::delete($image->imagePresets('small_square'));
                     File::delete($image->imagePresets('xsmall_square'));
