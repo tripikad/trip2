@@ -36,20 +36,19 @@ class UserDelete extends Command
                     });
 
                     $post->delete();
-                    
                 });
 
                 $user->images->each(function ($image) {
 
                     $image->delete();
-                    
+
                 });
+
+            }
 
             $user->delete();
 
             $this->line("user: $user->name and all user posts have been deleted");
-
         }
-
     }
 }
