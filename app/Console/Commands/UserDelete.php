@@ -23,7 +23,6 @@ class UserDelete extends Command
             });
 
             $user->comments->each(function ($comment) {
-
                 $comment->flags->each(function ($flag) {
                     $flag->delete();
                 });
@@ -55,7 +54,6 @@ class UserDelete extends Command
                 //remove content comments
 
                 $post->comments->each(function ($comment) {
-
                     $comment->flags->each(function ($flag) {
                         $flag->delete();
                     });
@@ -73,7 +71,6 @@ class UserDelete extends Command
             });
 
             $user->images->each(function ($image) {
-
                 if ($image->imagePresets('original')) {
                     File::delete($image->imagePresets('small'));
                     File::delete($image->imagePresets('small_square'));
