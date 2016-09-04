@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Exception;
+
 class V2UserVars
 {
     protected $user;
@@ -32,5 +34,10 @@ class V2UserVars
     public function rank()
     {
         return $this->user->rank * 90;
+    }
+
+    public function created_at_relative()
+    {
+        return $this->user->created_at->diffForHumans();
     }
 }

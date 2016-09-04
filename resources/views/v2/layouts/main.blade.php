@@ -10,6 +10,7 @@
                     'token' => csrf_token(),
                     'alertRoute' => route('utils.alert'),
                     'allowedTags' => config('site.allowedtags'),
+                    'maxfilesize' => config('site.maxfilesize'),
                     'promo' => config('promo')
                 ])) 
             }}

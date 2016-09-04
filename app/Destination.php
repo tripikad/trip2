@@ -18,6 +18,11 @@ class Destination extends Baum\Node
         return $this->belongsToMany('App\Content');
     }
 
+    public function vars()
+    {
+        return new V2DestinationVars($this);
+    }
+
     public function flags()
     {
         return $this->morphMany('App\Flag', 'flaggable');

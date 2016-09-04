@@ -1,6 +1,6 @@
 @php
 
-$profile = $profile ?? '';
+$user = $user ?? '';
 $route = $route ?? '';
 $title = $title ?? '';
 $badge = $badge ?? '';
@@ -9,9 +9,9 @@ $badge = $badge ?? '';
 
 <div class="ForumRowSmall {{ $isclasses }}">
 
-	<div class="ForumRowSmall__profile">
+	<div class="ForumRowSmall__user">
 
-    	{!! $profile !!}
+    	{!! $user !!}
 
     </div>
 

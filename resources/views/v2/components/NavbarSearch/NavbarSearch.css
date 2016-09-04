@@ -1,0 +1,34 @@
+@import "variables";
+
+.NavbarSearch {
+	display: flex;
+	align-items: center;
+}
+
+	.NavbarSearch__icon {
+		cursor: pointer;
+		margin-right: $margin-sm;
+	}
+
+	.NavbarSearch__input {
+		background: none;
+		border: none;
+		font: $font-text-md;
+		padding: $padding-xs;
+	}
+
+	.NavbarSearch__input:focus {
+	    outline: none;
+	}
+
+.NavbarSearch--white {
+	fill: $white;
+}
+
+	.NavbarSearch--white .NavbarSearch__input {
+		color: $white;
+	}
+
+.NavbarSearch--gray {
+	fill: $gray-darkest;
+}

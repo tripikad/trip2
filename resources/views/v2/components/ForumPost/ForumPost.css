@@ -2,9 +2,9 @@
 
 .ForumPost {
     border: $border-gray-md;
+    border: none ?if $mobile;
     border-radius: $border-radius-md;
     padding: $padding-md;
-    padding: $padding-sm ?if $mobile;
 }
 
     .ForumPost__content {

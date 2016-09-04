@@ -1,21 +1,22 @@
 @php
 
-$icon = $icon ?? '';
 $route = $route ?? '';
+$target = isset($external) ? '_blank' : '';
+$icon = $icon ?? '';
 $title = $title ?? '';
 
 @endphp
 
 
-<a href="{{ $route }}">
+<a href="{{ $route }}" target="{{ $target }}">
 
     <div class="Button {{ $isclasses }}">
 
-        @if (!empty($icon))
+        @if ($icon)
 
         <div class="Button__icon">
 
-        {!! component('Icon')->is('white')->with('icon', $icon) !!}
+            {!! component('Icon')->is('white')->with('icon', $icon) !!}
 
         </div>
     

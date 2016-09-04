@@ -1,31 +1,23 @@
 @import "variables";
 
 .Header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: $padding-lg;
+    padding-top: $padding-md;
 }
 
-    .Header__search {
-        display: block;
-        display: none ?if $tablet;
+    .Header__content {
+        height: calc($spacer * 15);
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    .Header__logo {
-        display: block ?if $tablet;
-        display: none;
-    }
-
-    .Header__logo svg {
-        fill: $white ?if $tablet;
-    }
-
-    .Header__navbar {
-        display: block;
-        display: none ?if $tablet;
-    }
-
-    .Header__navbarMobile {
-        display: block ?if $tablet;
-        display: none;
+    .Header__title {
+        font: $font-heading-xxxl;
+        font: $font-heading-xxl ?if $tablet;
+        font: $font-heading-xl ?if $mobile;
+        color: $white;
     }

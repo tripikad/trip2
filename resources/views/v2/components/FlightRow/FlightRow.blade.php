@@ -1,7 +1,7 @@
 @php
 
 $route = $route ?? '';
-$profile = $profile ?? '';
+$user = $user ?? '';
 $title = $title ?? '';
 $meta = $meta ?? collect();
 

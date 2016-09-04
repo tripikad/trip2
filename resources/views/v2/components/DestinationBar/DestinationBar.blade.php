@@ -2,11 +2,9 @@
 
 $route = $route ?? '';
 $title = $title ?? '';
-$subtitle = $subtitle ?? collect();
+$subtitle = $subtitle ?? '';
 
 @endphp
-
-<a href="{{ $route }}">
 
 <div class="DestinationBar {{ $isclasses }}">
 
@@ -21,18 +19,20 @@ $subtitle = $subtitle ?? collect();
         
         <div class="DestinationBar__subtitle">
 
-            {{ $subtitle->implode(' › ') }}
+            {!! $subtitle  !!}
 
         </div>
 
-        <div class="DestinationBar__title">
+        <a href="{{ $route }}">
 
-            {{ $title }} ›
+            <div class="DestinationBar__title">
 
-        </div>
+                {{ $title }} ›
+
+            </div>
+
+        </a>
 
     </div>
 
 </div>
-
-</a>

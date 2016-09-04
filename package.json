@@ -9,7 +9,7 @@
     "brace": "^0.8.0",
     "breakpoint-sass": "^2.6.1",
     "del": "^2.2.0",
-    "dropzone": "^4.2.0",
+    "dropzone": "^4.3.0",
     "eslint": "^3.1.1",
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-html": "^1.5.1",
@@ -47,6 +47,7 @@
     "turf": "^3.0.14",
     "vue-clickaway": "^1.1.1",
     "vue-focus": "^0.1.1",
+    "vue-multiselect": "^1.1.2",
     "vue-resource": "^0.7.0"
   }
 }

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Image;
 use App\Content;
 use App\Destination;
+use Request;
+use Response;
 
 class V2StyleguideController extends Controller
 {
@@ -22,6 +25,32 @@ class V2StyleguideController extends Controller
 
         $destination = Destination::find(4639);
 
+        $destinations = Destination::select('id', 'name')->get();
+
+        $travelmates = Content::whereType('travelmate')->latest()->skip(25)->take(6)->get();
+
+        $blog = Content::find(97993);
+
+        $images = Content::whereType('photo')->latest()->skip(2)->take(6)->get()
+            ->map(function ($image) {
+                return [
+                    'id' => $image->id,
+                    'small' => $image->imagePreset('small_square'),
+                    'large' => $image->imagePreset('large'),
+                    'meta' => component('Meta')->with('items', collect()
+                        ->push(component('MetaLink')
+                            ->with('title', $image->vars()->title)
+                        )
+                        ->push(component('MetaLink')
+                            ->with('title', $image->vars()->created_at)
+                        )
+                        ->push(component('MetaLink')
+                            ->with('title', $image->user->vars()->name)
+                            ->with('route', route('user.show', [$image->user]))
+                        )
+                    )->render(),
+                ];
+            });
 
         return view('v2.layouts.1col')
 
@@ -32,25 +61,34 @@ class V2StyleguideController extends Controller
                     //->with('top', null)
                 )
 
+                ->push(component('Gallery')
+                    ->with('images', $images)
+                )
+
                 ->push(component('Meta')->with('items', collect()
-                        ->push(component('Link')
+                        ->push(component('MetaLink')
                             ->with('title', 'News')
                             ->with('route', route('news.index'))
                         )
-                        ->push(component('Link')
+                        ->push(component('MetaLink')
                             ->with('title', 'Forum')
                             ->with('route', route('forum.index'))
                         )
-                        ->push(component('Link')
+                        ->push(component('MetaLink')
+                            ->with('title', 'Travelmate')
+                            ->with('route', route('travelmate.index'))
+                        )
+                        ->push(component('MetaLink')
                             ->with('title', 'Flight')
                             ->with('route', route('flight.index'))
                         )
-                        ->push(component('Link')
+                        ->push(component('MetaLink')
                             ->with('title', 'Static pages')
                             ->with('route', route('static.index'))
                         )
                     )
                 )
+
 
                 ->push(component('DestinationBar')
                     ->with('route', route('destination.show', [$destination]))
@@ -61,20 +99,29 @@ class V2StyleguideController extends Controller
                     )
                 )
 
+                ->push(component('BlogCard')
+                    ->with('title', $blog->title)
+                    ->with('route', route('content.show', ['blog', $blog]))
+                    ->with('user', component('UserImage')
+                        ->with('route', route('user.show', [$blog->user]))
+                        ->with('image', $blog->user->imagePreset('small_square'))
+                        ->with('rank', $blog->user->vars()->rank)
+                    )
+                    ->with('meta', component('Meta')->with('items', collect()
+                        ->push(component('MetaLink')
+                            ->with('title', $blog->user->vars()->name)
+                            ->with('route', route('user.show', [$blog->user]))
+                        ))
+                    )
+                )
+
                 // ->push(component('Map'))
 
                 ->merge($posts->map(function ($post) {
                     return region('ForumRow', $post);
                 }))
 
-                ->push(component('Block')
-                    ->is('uppercase')
-                    ->with('title', 'Tripikad räägivad')
-                    ->with('content', $posts->map(function ($post) {
-                        return region('ForumRowSmall', $post);
-                    })
-                    )
-                )
+                ->push(region('ForumSidebar', $posts))
 
                 ->push(component('Alert'))
 
@@ -89,8 +136,23 @@ class V2StyleguideController extends Controller
                             ->with('name', 'check')
                             ->with('label', 'Subscribe to comment')
                         )
+                        ->push(component('FormSelect')
+                            ->with('name', 'destination')
+                            ->with('options', $destinations)
+                            ->with('placeholder', 'Just select')
+                            ->with('helper', 'Press E to select')
+                            ->with('multiple', false)
+                        )
                         ->push(component('FormButton')
                             ->with('title', trans('comment.create.submit.title'))
+                        )
+                        ->push(component('ImageUpload')
+                            ->with('dictfallbackmessage', trans('site.dropzone.fallback.message'))
+                            ->with('dictfallbacktext', trans('site.dropzone.fallback.text'))
+                            ->with('dictmaxfilesexceeded', trans('site.dropzone.max.files.exceeded'))
+                            ->with('dictfiletoobig', trans('site.dropzone.file.size.exceeded'))
+                            ->with('dictremovefile', trans('site.dropzone.file.remove'))
+                            ->with('dictdefaultmessage', trans('site.dropzone.default'))
                         )
                     )
                 )
@@ -110,9 +172,7 @@ class V2StyleguideController extends Controller
     {
         dump(request()->all());
 
-        sleep(2);
-
-        return redirect()->route('styleguide.index')->with('info', 'We are back');
+        // return redirect()->route('styleguide.index')->with('info', 'We are back');
     }
 
     public function flag()
@@ -123,5 +183,16 @@ class V2StyleguideController extends Controller
             ]);
         }
         //return abort(404);
+    }
+
+    public function store()
+    {
+        $image = Request::file('image');
+
+        $imagename = 'image-'.rand(1, 3).'.'.$image->getClientOriginalExtension();
+
+        return Response::json([
+            'image' => $imagename,
+        ]);
     }
 }

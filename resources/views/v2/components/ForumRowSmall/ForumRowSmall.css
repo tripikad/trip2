@@ -4,13 +4,14 @@
 	display: flex;
 }
 
-    .ForumRowSmall__profile {
+    .ForumRowSmall__user {
         margin-right: $margin-sm;
     }
 
     .ForumRowSmall__title {
         color: $gray-darkest;
         font: $font-heading-md;
+        line-height: $line-height-md;
         margin-bottom: $margin-xs;
         margin-right: $margin-xs;
     }

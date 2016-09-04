@@ -5,6 +5,13 @@ use App\Http\Controllers\ContentController;
 
 // V2
 
+// Frontpage
+
+Route::get('v2/frontpage', [
+    'uses' => 'V2FrontpageController@index',
+    'as' => 'frontpage.index.2',
+]);
+
 // News
 
 Route::get('v2/news', [
@@ -39,6 +46,18 @@ Route::get('v2/flight/{id}/edit', [
     'as' => 'flight.edit',
 ]);
 
+// Travelmates
+
+Route::get('v2/travelmate', [
+    'uses' => 'V2TravelmateController@index',
+    'as' => 'travelmate.index',
+]);
+
+Route::get('v2/travelmate/{id}', [
+    'uses' => 'V2TravelmateController@show',
+    'as' => 'travelmate.show',
+]);
+
 // Forum
 
 Route::get('v2/forum', [
@@ -61,6 +80,20 @@ Route::get('v2/static', [
 Route::get('v2/static/{id}', [
     'uses' => 'V2StaticController@show',
     'as' => 'static.show',
+]);
+
+// User
+
+Route::get('v2/user/{id}', [
+    'uses' => 'V2UserController@show',
+    'as' => 'user.show.2',
+]);
+
+// Destination
+
+Route::get('v2/destination/{id}', [
+    'uses' => 'V2DestinationController@show',
+    'as' => 'destination.show.v2',
 ]);
 
 // Styleguide
@@ -87,9 +120,21 @@ Route::get('v2/utils/alert', [
     'as' => 'utils.alert',
 ]);
 
+
+Route::get('share/{social}', [
+    'uses' => 'V2SocialController@share',
+    'as' => 'utils.share',
+    ]);
+
+
 Route::post('v2/utils/format', [
     'uses' => 'V2UtilsController@format',
     'as' => 'utils.format',
+]);
+
+Route::post('v2/image/store', [
+    'uses' => 'V2StyleguideController@store',
+    'as' => 'image.store',
 ]);
 
 

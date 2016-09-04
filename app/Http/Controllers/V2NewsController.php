@@ -18,10 +18,11 @@ class V2NewsController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Masthead', trans("content.$type.index.title")))
+            ->with('header', region('Header', trans("content.$type.index.title")))
 
             ->with('content', collect()
-                ->push(component('Grid')
+                ->push(component('Grid2')
+                    ->with('gutter', true)
                     ->with('items', $posts->map(function ($post) {
                         return region('NewsCard', $post);
                     })
@@ -56,7 +57,7 @@ class V2NewsController extends Controller
 
 
         return view('v2.layouts.1col')
-            ->with('header', region('NewsMasthead', $post))
+            ->with('header', region('NewsHeader', $post))
             ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
                 ->merge($post->comments->map(function ($comment) {
