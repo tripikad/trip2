@@ -125,7 +125,9 @@ class V2TravelmateController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('UserCard', $post))
-                ->push(component('Block')->with('content', collect(['DestinationBar'])))
+                ->merge($post->destinations->map(function ($destination) {
+                    return region('DestinationBar', $destination, $destination->getAncestors());
+                }))
                 ->merge($flights->map(function ($flight) {
                     return region('FlightCard', $flight);
                 }))
