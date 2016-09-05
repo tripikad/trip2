@@ -1,7 +1,9 @@
 @import "variables";
 
-.FlightTitle {
+.Title {
     font: $font-heading-xxl;
+    font: $font-heading-xl ?if $tablet;
+    font: $font-heading-lg ?if $mobile;
     line-height: $line-height-md;
     color: $gray-darkest;
 }
