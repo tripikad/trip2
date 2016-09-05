@@ -38,7 +38,7 @@ class V2TravelmateController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect(['TravelmateAbout'])))
+                    ->push(region('TravelmateAbout'))
                 ->push(component('Block')->with('content', collect()
                     ->push(region('Filter', $destinations, $topics))
                     )
