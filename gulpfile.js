@@ -1,15 +1,15 @@
 // V1
 
-var gulp = require('gulp')
-var sass = require('gulp-sass')
-var concat = require('gulp-concat')
-var autoprefixer = require('gulp-autoprefixer')
-var svgstore = require('gulp-svgstore')
-var rename = require('gulp-rename')
-var svgmin = require('gulp-svgmin')
-var del = require('del')
-var minifyCSS = require('gulp-clean-css')
-var minifyJS = require('gulp-uglify')
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var concat = require('gulp-concat');
+var autoprefixer = require('gulp-autoprefixer');
+var svgstore = require('gulp-svgstore');
+var rename = require('gulp-rename');
+var svgmin = require('gulp-svgmin');
+var del = require('del');
+var minifyCSS = require('gulp-clean-css');
+var minifyJS = require('gulp-uglify');
 
 gulp.task('del', function() {
     return del([
@@ -17,7 +17,7 @@ gulp.task('del', function() {
         './public/js/**/*.js',
         './public/svg/**/*.svg'
     ])
-})
+});
 
 gulp.task('sass', ['del'], function() {
     gulp.src([
@@ -47,7 +47,7 @@ gulp.task('sass', ['del'], function() {
     }))
     .pipe(minifyCSS())
     .pipe(gulp.dest('./public/css'))
-})
+});
 
 gulp.task('js', ['del'], function() {
     gulp.src([
@@ -62,7 +62,7 @@ gulp.task('js', ['del'], function() {
     .pipe(concat('main.js'))
     .pipe(minifyJS())
     .pipe(gulp.dest('./public/js'))
-})
+});
 
 gulp.task('svg_sprite', ['del'], function() {
     return gulp
@@ -73,36 +73,36 @@ gulp.task('svg_sprite', ['del'], function() {
             path.basename = 'main'
         }))
         .pipe(gulp.dest('public/svg'))
-})
+});
 
 gulp.task('svg_standalone', ['del'], function() {
     return gulp
         .src('resources/assets/svg/standalone/*.svg')
         .pipe(svgmin())
         .pipe(gulp.dest('public/svg'))
-})
+});
 
 gulp.task('watch', function() {
-    gulp.watch('./resources/assets/sass/**/_*.scss', ['sass'])
-    gulp.watch('./resources/assets/js/**/*.js', ['js'])
-    gulp.watch('./resources/assets/svg/**/*.svg', ['svg_sprite', 'svg_standalone'])
-})
+    gulp.watch('./resources/assets/sass/**/_*.scss', ['sass']);
+    gulp.watch('./resources/assets/js/**/*.js', ['js']);
+    gulp.watch('./resources/assets/svg/**/*.svg', ['svg_sprite', 'svg_standalone']);
+});
 
-gulp.task('v1', ['sass', 'js', 'svg_sprite', 'svg_standalone'])
+gulp.task('v1', ['sass', 'js', 'svg_sprite', 'svg_standalone']);
 
 // V2
 
-var elixir = require('laravel-elixir')
+var elixir = require('laravel-elixir');
 
-require('laravel-elixir-vueify')
-require('./elixir/postcss')
-require('./elixir/svg')
+require('laravel-elixir-vueify');
+require('./elixir/postcss');
+require('./elixir/svg');
 
 elixir(function(mix) {
     mix.browserify(
         './resources/views/v2/main.js',
         './public/v2/js'
-    )
+    );
 
     mix.postcss([
         './resources/views/v2/utils/**/*.css',
@@ -110,11 +110,11 @@ elixir(function(mix) {
     ],
         './public/v2/css',
         './resources/views/v2/utils/'
-    )
+    );
 
     mix.svg([
         './resources/views/v2/svg/*.svg'
     ],
         './public/v2/svg'
-    )
-})
+    );
+});
