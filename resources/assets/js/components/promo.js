@@ -1,5 +1,5 @@
 var googletag = googletag || {},
-    slot = null,
+    slot = [],
     index = 0;
 googletag.cmd = googletag.cmd || [];
 (function() {
@@ -55,7 +55,9 @@ function renderEnded (adunitId, width, height, i) {
         $(iFrame).css({'height': newHeight+'px'});
         $(iFrame).parents("#" + adunitId).show();
 
-        clearTimeout(slot[i]);
+        if (slot.length && slot[i]) {
+            clearTimeout(slot[i]);
+        }
     } else {
         slot[i] = setTimeout(function() {
             renderEnded(adunitId, width, height, i);
