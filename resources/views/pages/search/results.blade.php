@@ -70,7 +70,7 @@
                         ],
                         'modifiers' => 'm-image',
                         'title' => $content->title,
-                        'route' => route('content.show', [$content->type, $content->id]),
+                        'route' => route($content->type.'.show', [$content->slug]),
                         'text' => view('component.content.text', ['content' => $content]),
                     ])
 

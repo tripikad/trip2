@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 
 class Content extends Model
 {
+    use Sluggable, SlugHelper;
+
     // Setup
 
     protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image', 'status', 'start_at', 'end_at', 'duration', 'price'];
@@ -188,5 +192,14 @@ class Content extends Model
     public function getHeadImage()
     {
         return config('app.url').$this->imagePreset('large');
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+            ],
+        ];
     }
 }

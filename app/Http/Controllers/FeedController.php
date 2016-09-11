@@ -25,7 +25,7 @@ class FeedController extends Controller
                 $feed->add(
                     $content->title,
                     $content->user->name,
-                    route('content.show', [$content->type, $content->id], true),
+                    route($content->type.'.show', [$content->slug], true),
                     $content->created_at,
                     $content->body_filtered,
                     $content->body_filtered
@@ -54,7 +54,7 @@ class FeedController extends Controller
                 $feed->add(
                     $content->title,
                     $content->user->name,
-                    route('content.show', [$content->type, $content->id], true),
+                    route($content->type.'.show', [$content->slug], true),
                     $content->created_at,
                     $content->body_filtered,
                     $content->body_filtered

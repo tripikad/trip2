@@ -51,7 +51,7 @@ class CommentTest extends TestCase
                 ->visit("content/$content->type/$content->id")
                 ->type("Hello $content->type", 'body')
                 ->press(trans('comment.create.submit.title'))
-                ->seePageIs("content/$content->type/$content->id")
+                ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
                 ->see("Hello $content->type")
                 ->see($regular_user->name)
                 ->seeInDatabase('comments', [
@@ -71,7 +71,7 @@ class CommentTest extends TestCase
                 ->seePageIs("comment/$comment->id/edit")
                 ->type("Hola $content->type", 'body')
                 ->press(trans('comment.edit.submit.title'))
-                ->seePageIs("content/$content->type/$content->id")
+                ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
                 ->see("Hola $content->type")
                 ->seeInDatabase('comments', [
                     'user_id' => $regular_user->id,

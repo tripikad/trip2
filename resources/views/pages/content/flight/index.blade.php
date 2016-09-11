@@ -78,14 +78,14 @@
                                 'title' => trans('content.action.more.about'),
                                 'route' =>
                                     count($about) ?
-                                        route('content.show', [$about->first()->type, $about->first()])
+                                        route('static.'.$about->first()->id)
                                     : null,
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'modifiers' => 'm-icon',
                                 'title' => trans('content.action.price.error'),
-                                'route' => route('content.show', ['static', 97203]),
+                                'route' => route('static.97203'),
                                 'icon' => 'icon-arrow-right'
                             ]
                         ],
@@ -112,7 +112,7 @@
                                 [
                                     'modifiers' => 'm-icon',
                                     'title' => trans('content.action.more.about'),
-                                    'route' => route('content.show', [$about->first()->type, $about->first()]),
+                                    'route' => route('static.'.$about->first()->id),
                                     'icon' => 'icon-arrow-right'
                                 ],
                                 [

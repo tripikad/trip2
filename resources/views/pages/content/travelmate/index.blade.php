@@ -45,7 +45,7 @@
                                 'text' => 'J'
                             ],
                             'name' => $content->user->name,
-                            'route' => route('content.show', [$content->type, $content]),
+                            'route' => route($content->type.'.show', [$content->slug]),
                             'sex_and_age' =>
                                 ($content->user->gender ?
                                     trans('user.gender.'.$content->user->gender).
@@ -80,7 +80,7 @@
                                 'text' => 'J'
                             ],
                             'name' => $content->user->name,
-                            'route' => route('content.show', [$content->type, $content]),
+                            'route' => route($content->type.'.show', [$content->slug]),
                             'sex_and_age' =>
                                 ($content->user->gender ?
                                     trans('user.gender.'.$content->user->gender).
@@ -118,7 +118,7 @@
                             [
                                 'modifiers' => 'm-icon',
                                 'title' => $rules->first()->title,
-                                'route' => route('content.show', [$rules->first()->type, $rules->first()]),
+                                'route' => route('static.'.$rules->first()->id),
                                 'icon' => 'icon-arrow-right'
                             ],
                         ] : null,
@@ -154,7 +154,7 @@
                                 'title' => trans('content.action.more.about'),
                                 'route' =>
                                     count($about) ?
-                                        route('content.show', [$about->first()->type, $about->first()])
+                                        route('static.'.$about->first()->id)
                                     : null,
                                 'icon' => 'icon-arrow-right'
                             ],
