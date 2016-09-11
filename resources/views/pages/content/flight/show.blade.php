@@ -277,7 +277,7 @@
                 </div>
             @endif
 
-            @include('component.promo', ['promo' => 'sidebar_small m-small-margin'])
+            @include('component.promo', ['promo' => 'sidebar_large m-small-margin'])
 
         </div>
     </div>
