@@ -26,7 +26,6 @@ class RegistrationController extends Controller
         ]);
 
         $fields = [
-            'role' => 'regular',
             'password' => Hash::make($request->get('password')),
         ];
 

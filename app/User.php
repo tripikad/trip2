@@ -87,6 +87,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function confirmEmail()
     {
         $this->verified = true;
+        $this->role = 'regular';
         $this->registration_token = null;
         $this->save();
     }
