@@ -18,7 +18,7 @@ $footer = $footer ?? '';
 
         <div class="row-between padding-top-md padding-bottom-md">
 
-            <div class="col-8 padding-right-sm-mobile-none">
+            <div class="col-9 padding-right-sm-mobile-none">
 
                 @foreach ($content->withoutLast() as $content_item)
                 
@@ -38,7 +38,7 @@ $footer = $footer ?? '';
 
             </div>
 
-            <div class="col-4 padding-left-sm-mobile-none">
+            <div class="col-3 padding-left-sm-mobile-none">
 
                 @foreach ($sidebar->withoutLast() as $sidebar_item)
                 

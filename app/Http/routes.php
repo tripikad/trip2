@@ -9,24 +9,24 @@ use App\Http\Controllers\ContentController;
 
 Route::get('v2/frontpage', [
     'uses' => 'V2FrontpageController@index',
-    'as' => 'frontpage.index.2',
+    'as' => 'frontpage.index.v2',
 ]);
 
 // News
 
 Route::get('v2/news', [
     'uses' => 'V2NewsController@index',
-    'as' => 'news.index',
+    'as' => 'news.index.v2',
 ]);
 
 Route::get('v2/news/{id}', [
     'uses' => 'V2NewsController@show',
-    'as' => 'news.show',
+    'as' => 'news.show.v2',
 ]);
 
 Route::get('v2/news/{id}/edit', [
     'uses' => 'V2NewsController@edit',
-    'as' => 'news.edit',
+    'as' => 'news.edit.v2',
 ]);
 
 // Flight

@@ -63,6 +63,26 @@ class Content extends Model
         return new V2ContentVars($this);
     }
 
+    public function scopeGetLatestPagedResults($query, $type, $take = 24)
+    {
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->take($take)
+            ->latest()
+            ->get();
+    }
+
+    public function scopeGetLatestResults($query, $take = 5)
+    {
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->take($take)
+            ->latest()
+            ->get();
+    }
+
     // V1
 
     public function getDestinationParent()

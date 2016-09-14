@@ -19,7 +19,7 @@ $gutter = $gutter ?? false;
     
         @if ($gutter)
         
-        padding-left-sm-mobile-none padding-left-sm-mobile-none padding-bottom-md
+        padding-left-sm-mobile-none padding-right-sm-mobile-none padding-bottom-md
 
         @endif
 
