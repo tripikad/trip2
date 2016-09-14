@@ -31,6 +31,11 @@ class V2ContentVars
         return $this->content->title;
     }
 
+    public function shortTitle()
+    {
+        return str_limit($this->content->title, 60);
+    }
+
     public function body()
     {
         return format_body($this->content->body);

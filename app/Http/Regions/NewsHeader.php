@@ -36,10 +36,10 @@ class NewsHeader
                         ->with('title', $new->vars()->created_at)
                     )
                     ->merge($new->destinations->map(function ($tag) {
-                        return component('Tag')->is('orange')->with('title', $tag->name);
+                        return component('Tag')->is('orange')->with('title', $tag->vars()->shortName);
                     }))
                     ->merge($new->topics->map(function ($tag) {
-                        return component('Tag')->with('title', $tag->name);
+                        return component('Tag')->with('title', $tag->vars()->shortName);
                     }))
                     ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                         ->with('title', trans('content.action.edit.title'))

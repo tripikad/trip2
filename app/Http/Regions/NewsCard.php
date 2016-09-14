@@ -9,7 +9,7 @@ class NewsCard
         return component('NewsCard')
             ->with('route', route('news.show.v2', [$post->slug]))
             ->with('image', $post->imagePreset('small'))
-            ->with('title', $post->vars()->title)
+            ->with('title', $post->vars()->shortTitle)
             ->with('meta', component('Meta')
                 ->with('items', collect()
                     ->push(component('MetaLink')

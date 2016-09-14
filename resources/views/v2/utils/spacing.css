@@ -196,6 +196,26 @@
 
 /* Responsive margins */
 
+.margin-top-xs-mobile-none {
+  margin-top: $margin-xs;
+  margin-top: 0 ?if $mobile;
+}
+
+.margin-right-xs-mobile-none {
+  margin-right: $margin-xs;
+  margin-right: 0 ?if $mobile;
+}
+
+.margin-bottom-xs-mobile-none {
+  margin-bottom: $margin-xs;
+  margin-bottom: 0 ?if $mobile;
+}
+
+.margin-left-xs-mobile-none {
+  margin-left: $margin-xs;
+  margin-left: 0 ?if $mobile;
+}
+
 .margin-top-sm-mobile-none {
   margin-top: $margin-sm;
   margin-top: 0 ?if $mobile;
