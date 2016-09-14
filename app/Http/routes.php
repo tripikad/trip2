@@ -98,7 +98,7 @@ Route::get('v2/destination/{id}', [
 
 // Styleguide
 
-Route::get('v2/styleguide', [
+Route::get('v2/pages', [
     'uses' => 'V2StyleguideController@index',
     'as' => 'styleguide.index',
 ]);
