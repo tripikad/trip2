@@ -19,7 +19,7 @@ Route::get('v2/news', [
     'as' => 'news.index.v2',
 ]);
 
-Route::get('v2/news/{id}', [
+Route::get('v2/news/{slug}', [
     'uses' => 'V2NewsController@show',
     'as' => 'news.show.v2',
 ]);

@@ -7,7 +7,7 @@ class NewsCard
     public function render($post)
     {
         return component('NewsCard')
-            ->with('route', route('news.show.v2', [$post]))
+            ->with('route', route('news.show.v2', [$post->slug]))
             ->with('image', $post->imagePreset('small'))
             ->with('title', $post->vars()->title)
             ->with('meta', component('Meta')

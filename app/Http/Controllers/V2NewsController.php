@@ -11,7 +11,7 @@ class V2NewsController extends Controller
      
         $type = 'news';
 
-        $news = Content::getLatestPagedResults($type);
+        $news = Content::getLatestPagedItems($type);
 
         return view('v2.layouts.2col')
 
@@ -37,43 +37,30 @@ class V2NewsController extends Controller
             ->with('footer', region('Footer'));
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $post = Content::
-            with(
-                'images',
-                'user',
-                'user.images',
-                'comments',
-                'comments.user',
-                'destinations',
-                'topics'
-            )
-            ->whereStatus(1)
-            ->find($id);
-
+        $new = Content::getItemBySlug($slug);
+        $user = auth()->user();
 
         return view('v2.layouts.1col')
-            ->with('header', region('NewsHeader', $post))
+            ->with('header', region('NewsHeader', $new))
             ->with('content', collect()
-                ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
-                ->merge($post->comments->map(function ($comment) {
+                ->push(component('Body')->is('responsive')->with('body', $new->vars()->body))
+                ->merge($new->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-               // ->push(region('CommentCreateForm', $post))
+                ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $new))
             )
             ->with('footer', region('Footer'));
     }
 
     public function edit($id)
     {
-        $post = Content::whereType('news')
-           ->whereStatus(1)
-           ->findOrFail($id);
+        $new = Content::getItemById($id);
 
         return view('v2.layouts.fullpage')
             ->with('content', collect()
-                ->push(component('Editor')->with('post', $post))
+                ->push(component('Editor')->with('item', $new))
             );
     }
 }

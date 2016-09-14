@@ -63,7 +63,7 @@ class Content extends Model
         return new V2ContentVars($this);
     }
 
-    public function scopeGetLatestPagedResults($query, $type, $take = 24)
+    public function scopeGetLatestPagedItems($query, $type, $take = 24)
     {
         return $query
             ->whereType($type)
@@ -73,7 +73,7 @@ class Content extends Model
             ->get();
     }
 
-    public function scopeGetLatestResults($query, $take = 5)
+    public function scopeGetLatestItems($query, $type, $take = 5)
     {
         return $query
             ->whereType($type)
@@ -81,6 +81,40 @@ class Content extends Model
             ->take($take)
             ->latest()
             ->get();
+    }
+
+    public function scopeGetItemById($query, $id) {
+
+        return $query
+            ->whereStatus(1)
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->findOrFail($id);
+    
+    }
+
+    public function scopeGetItemBySlug($query, $slug) {
+
+        return $query
+            ->whereStatus(1)
+            ->whereSlug($slug)
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->first();    
     }
 
     // V1
