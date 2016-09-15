@@ -171,6 +171,7 @@ $border-white-md: 2px solid $white;
 /* Border radiuses */
 $border-radius-md: 3px;
 $border-radius-lg: $spacer;
+$border-radius-xl: calc($spacer * 2);
 
 /* Text shadows */
 

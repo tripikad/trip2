@@ -26,6 +26,10 @@
     color: $red;
 }
 
+.Block--yellow .Block__title {
+    color: $yellow;
+}
+
 .Block--dark .Block__title {
     color: $gray-darkest;
 }

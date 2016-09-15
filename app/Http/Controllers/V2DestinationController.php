@@ -19,6 +19,10 @@ class V2DestinationController extends Controller
         $news = Content::getLatestItems('news', 3);
         $travelmates = Content::getLatestItems('travelmate', 3);
 
+        // TODO: Replace with Destination::getPopular()
+
+        $destinations = Destination::take(5)->get();
+
         return view('v2.layouts.2col')
 
             ->with('header', region('DestinationHeader', $destination))
@@ -49,7 +53,17 @@ class V2DestinationController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect(['DestinationPopular'])))
+                ->push(component('Block')
+                    ->is('uppercase')
+                    ->is('yellow')
+                    ->is('white')
+                    ->with('title', trans('destination.show.popular.title.short'))
+                    ->with('content', $destinations->map(function ($destination) {
+                        return component('DestinationRow')
+                            ->with('name', $destination->vars()->name)
+                            ->with('route', route('v2.destination.show', [$destination]));
+                    })
+                ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
