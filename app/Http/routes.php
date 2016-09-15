@@ -224,13 +224,10 @@ Route::get('sihtkoht/{slug}', ['middleware' => null, 'uses' => 'DestinationContr
 // Content
 
 Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
-
     Route::get('/', ['middleware' => null, 'as' => 'index', function ($type) {
-
         return redirect()->route(
             $type.'.index', [
         ], 301);
-
     }]);
 
     Route::get('create', ['middleware' => 'role:regular', 'as' => 'create', function ($type) {
