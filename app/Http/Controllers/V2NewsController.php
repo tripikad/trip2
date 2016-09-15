@@ -8,7 +8,6 @@ class V2NewsController extends Controller
 {
     public function index()
     {
-     
         $type = 'news';
 
         $news = Content::getLatestPagedItems($type);
@@ -21,8 +20,8 @@ class V2NewsController extends Controller
                 ->push(component('Grid3')
                     ->with('gutter', true)
                     ->with('items', $news->map(function ($new) {
-                            return region('NewsCard', $new);
-                        })
+                        return region('NewsCard', $new);
+                    })
                     )
                 )
             )

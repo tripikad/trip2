@@ -8,7 +8,6 @@ class V2FrontpageController extends Controller
 {
     public function index()
     {
-
         $topFlights = Content::getLatestItems('flight', 3);
         $photos = Content::getLatestItems('photo', 6);
 
