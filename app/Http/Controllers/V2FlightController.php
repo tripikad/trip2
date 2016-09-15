@@ -10,7 +10,6 @@ class V2FlightController extends Controller
 {
     public function index()
     {
-
         $firstBatch = 3;
         $secondBatch = 10;
         $thirdBatch = 10;
