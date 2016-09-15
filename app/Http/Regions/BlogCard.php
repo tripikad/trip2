@@ -2,11 +2,10 @@
 
 namespace App\Http\Regions;
 
-class BlogCard {
-
+class BlogCard
+{
     public function render($blog)
     {
-
         return component('BlogCard')
             ->with('title', $blog->title)
             ->with('route', route('content.show', [$blog->type, $blog]))
@@ -21,7 +20,5 @@ class BlogCard {
                     ->with('route', route('user.show', [$blog->user]))
                 ))
             );
-
     }
-
 }
