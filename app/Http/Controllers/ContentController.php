@@ -182,7 +182,7 @@ class ContentController extends Controller
     {
         $content = Content::findorFail($id);
 
-        if('static' === $type) {
+        if ('static' === $type) {
             return redirect()->route(
                 'static.'.$id, [], 301);
         }
