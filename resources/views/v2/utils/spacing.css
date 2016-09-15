@@ -296,6 +296,6 @@
   margin-left: 0 ?if $mobile;
 }
 
-.margin-top-negative-lg {
-  margin-top: calc($margin-lg * -1) !important;
+.margin-top-negative-md {
+  margin-top: calc($spacer * -3.25);
 }

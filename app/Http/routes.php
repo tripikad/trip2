@@ -26,53 +26,53 @@ Route::post('v2/styleguide/flag', [
 
 Route::get('v2/frontpage', [
     'uses' => 'V2FrontpageController@index',
-    'as' => 'frontpage.index.v2',
+    'as' => 'v2.frontpage.index',
 ]);
 
 // News
 
 Route::get('v2/news', [
     'uses' => 'V2NewsController@index',
-    'as' => 'news.index.v2',
+    'as' => 'v2.news.index',
 ]);
 
 Route::get('v2/news/{slug}', [
     'uses' => 'V2NewsController@show',
-    'as' => 'news.show.v2',
+    'as' => 'v2.news.show',
 ]);
 
 Route::get('v2/news/{id}/edit', [
     'uses' => 'V2NewsController@edit',
-    'as' => 'news.edit.v2',
+    'as' => 'v2.news.edit',
 ]);
 
 // Flight
 
 Route::get('v2/flight', [
     'uses' => 'V2FlightController@index',
-    'as' => 'flight.index.v2',
+    'as' => 'v2.flight.index',
 ]);
 
 Route::get('v2/flight/{slug}', [
     'uses' => 'V2FlightController@show',
-    'as' => 'flight.show.v2',
+    'as' => 'v2.flight.show',
 ]);
 
 Route::get('v2/flight/{id}/edit', [
     'uses' => 'V2FlightController@edit',
-    'as' => 'flight.edit.v2',
+    'as' => 'v2.flight.edit',
 ]);
 
 // Travelmates
 
 Route::get('v2/travelmate', [
     'uses' => 'V2TravelmateController@index',
-    'as' => 'travelmate.index',
+    'as' => 'v2.travelmate.index',
 ]);
 
-Route::get('v2/travelmate/{id}', [
+Route::get('v2/travelmate/{slug}', [
     'uses' => 'V2TravelmateController@show',
-    'as' => 'travelmate.show',
+    'as' => 'v2.travelmate.show',
 ]);
 
 // Forum
@@ -91,26 +91,26 @@ Route::get('v2/forum/{id}', [
 
 Route::get('v2/static', [
     'uses' => 'V2StaticController@index',
-    'as' => 'static.index.v2',
+    'as' => 'v2.static.index',
 ]);
 
 Route::get('v2/static/{id}', [
     'uses' => 'V2StaticController@show',
-    'as' => 'static.show.v2',
+    'as' => 'v2.static.show',
 ]);
 
 // User
 
 Route::get('v2/user/{id}', [
     'uses' => 'V2UserController@show',
-    'as' => 'user.show.2',
+    'as' => 'v2.user.show',
 ]);
 
 // Destination
 
 Route::get('v2/destination/{id}', [
     'uses' => 'V2DestinationController@show',
-    'as' => 'destination.show.v2',
+    'as' => 'v2.destination.show',
 ]);
 
 

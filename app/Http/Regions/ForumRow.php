@@ -9,7 +9,7 @@ class ForumRow
         return component('ForumRow')
             ->with('route', route('forum.show', [$post]))
             ->with('user', component('UserImage')
-                ->with('route', route('user.show.2', [$post->user]))
+                ->with('route', route('v2.user.show', [$post->user]))
                 ->with('image', $post->user->imagePreset('small_square'))
                 ->with('rank', $post->user->vars()->rank)
                 ->with('size', 48)

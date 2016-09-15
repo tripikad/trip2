@@ -42,7 +42,7 @@ class V2FrontpageController extends Controller
                     ->with('content', collect()
                         ->push(component('Link')
                             ->with('title', trans('content.action.more.about'))
-                            ->with('route', route('static.show.v2', [1534]))
+                            ->with('route', route('v2.static.show', [1534]))
                         )
                         ->pushWhen(!$user, component('Button')
                             ->with('title', trans('frontpage.index.about.register'))

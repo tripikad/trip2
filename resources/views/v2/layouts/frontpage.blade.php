@@ -13,7 +13,7 @@ $footer = $footer ?? '';
 
 @section('content')
 
-    <div class="margin-top-negative-lg">
+    <div class="margin-top-negative-md">
         
     <div class="container">
 

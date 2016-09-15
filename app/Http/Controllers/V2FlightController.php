@@ -115,7 +115,7 @@ class V2FlightController extends Controller
                         )
                         ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                             ->with('title', trans('content.action.edit.title'))
-                            ->with('route', route('flight.edit.v2', [$flight]))
+                            ->with('route', route('v2.flight.edit', [$flight]))
                         )
                     )
                 )
