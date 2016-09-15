@@ -30,8 +30,8 @@ class V2DestinationController extends Controller
             ->with('content', collect()
                 ->push(component('Grid3')
                     ->with('items', $flights->map(function ($flight) {
-                            return region('FlightCard', $flight);
-                        })
+                        return region('FlightCard', $flight);
+                    })
                     )
                 )
                 ->push(region('Gallery', $photos))
@@ -40,8 +40,8 @@ class V2DestinationController extends Controller
                 ->push(component('Grid3')
                     ->with('gutter', true)
                     ->with('items', $news->map(function ($new) {
-                            return region('NewsCard', $new);
-                        })
+                        return region('NewsCard', $new);
+                    })
                     )
                 )
                 ->push(component('Grid3')
