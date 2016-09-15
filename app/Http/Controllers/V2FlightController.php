@@ -16,16 +16,14 @@ class V2FlightController extends Controller
         $secondBatch = 10;
         $thirdBatch = 10;
 
-        $posts = Content::whereType($type)
+        $flights = Content::whereType($type)
             ->whereStatus(1)
             ->take($firstBatch + $secondBatch + $thirdBatch)
             ->latest()
             ->get();
 
-        $forumPosts = Content::whereType('forum')->latest()->skip(10)->take(5)->get();
-
+        $forums = Content::getLatestItems('forum', 5);
         $destinations = Destination::select('id', 'name')->get();
-
         $topics = Topic::select('id', 'name')->get();
 
         return view('v2.layouts.2col')
@@ -37,24 +35,24 @@ class V2FlightController extends Controller
                     ->with('gutter', true)
                     ->with('items', $flights
                         ->take($firstBatch)
-                        ->map(function ($post) {
-                            return region('FlightCard', $post);
+                        ->map(function ($flight) {
+                            return region('FlightCard', $flight);
                         })
                     )
                 )
-                ->merge($posts
+                ->merge($flights
                     ->slice($firstBatch)
                     ->take($secondBatch)
-                    ->map(function ($post) {
-                        return region('FlightRow', $post);
+                    ->map(function ($flight) {
+                        return region('FlightRow', $flight);
                     })
                 )
-                ->push(component('Promo')->with('promo', 'footer'))
-                ->merge($posts
+                ->push(component('Promo')->with('promo', 'content'))
+                ->merge($flights
                     ->slice($firstBatch + $secondBatch)
                     ->take($thirdBatch)
-                    ->map(function ($post) {
-                        return region('FlightRow', $post);
+                    ->map(function ($flight) {
+                        return region('FlightRow', $flight);
                     })
                 )
             )
@@ -62,7 +60,7 @@ class V2FlightController extends Controller
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
                 ->push(component('Block')->with('content', collect()
-                    ->push(region('Filter', $destinations, $topics))
+                        ->push(region('Filter', $destinations, $topics))
                     )
                 )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
@@ -79,35 +77,33 @@ class V2FlightController extends Controller
                     ->with('content', collect()
                         ->push(component('ForumBottom')
                             ->with('left_items', region('ForumLinks'))
-                            ->with('right_items', $forumPosts->map(function ($forumPost) {
-                                return region('ForumRow', $forumPost);
+                            ->with('right_items', $forums->map(function ($forum) {
+                                return region('ForumRow', $forum);
                             }))
 
                         )
                     )
                 )
             )
-                //->push(component('Promo')->with('promo', 'footer'))
 
             ->with('footer', region('Footer'));
     }
 
     public function show($slug)
     {
-        $user = auth()->user();
 
         $flight = Content::getItemBySlug($slug);
-
         $flights = Content::getLatestItems('flight', 3);
         $forums = Content::getLatestItems('forum', 5);
         $travelmates = Content::getLatestItems('travelmate', 3);
+        $user = auth()->user();
 
         return view('v2.layouts.2col')
 
             ->with('header', region('Header', trans('content.flight.index.title')))
 
             ->with('content', collect()
-                ->push(component('FlightTitle')->with('title', $flight->vars()->title))
+                ->push(component('Title')->with('title', $flight->vars()->title))
                 ->push(component('Meta')
                     ->with('items', collect()
                         ->push(component('MetaLink')

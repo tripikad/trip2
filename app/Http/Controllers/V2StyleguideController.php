@@ -31,7 +31,7 @@ class V2StyleguideController extends Controller
                 )
                 ->push(component('MetaLink')
                     ->with('title', 'Forum')
-                    ->with('route', route('forum.index'))
+                    ->with('route', route('v2.forum.index'))
                 )
                 ->push(component('MetaLink')
                     ->with('title', 'Travelmate')

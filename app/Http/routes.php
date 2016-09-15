@@ -79,12 +79,12 @@ Route::get('v2/travelmate/{slug}', [
 
 Route::get('v2/forum', [
     'uses' => 'V2ForumController@index',
-    'as' => 'forum.index',
+    'as' => 'v2.forum.index',
 ]);
 
-Route::get('v2/forum/{id}', [
+Route::get('v2/forum/{slug}', [
     'uses' => 'V2ForumController@show',
-    'as' => 'forum.show',
+    'as' => 'v2.forum.show',
 ]);
 
 // Static

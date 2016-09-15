@@ -58,7 +58,7 @@ class V2TravelmateController extends Controller
             ->with('header', region('Header', trans('content.travelmate.index.title')))
 
             ->with('content', collect()
-                ->push(component('FlightTitle')->with('title', $travelmate->vars()->title))
+                ->push(component('Title')->with('title', $travelmate->vars()->title))
                 ->push(component('Meta')
                     ->with('items', collect()
                         ->push(component('MetaLink')
