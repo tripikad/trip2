@@ -8,14 +8,8 @@ class V2NewsController extends Controller
 {
     public function index()
     {
-<<<<<<< HEAD
      
         $news = Content::getLatestPagedItems('news');
-=======
-        $type = 'news';
-
-        $news = Content::getLatestPagedItems($type);
->>>>>>> origin/kika-cusco-fixes-presprint
 
         return view('v2.layouts.2col')
 

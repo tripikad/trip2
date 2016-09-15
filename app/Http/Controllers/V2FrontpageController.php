@@ -8,12 +8,7 @@ class V2FrontpageController extends Controller
 {
     public function index()
     {
-<<<<<<< HEAD
 
-        $user = auth()->check() && auth()->user();
-
-=======
->>>>>>> origin/kika-cusco-fixes-presprint
         $topFlights = Content::getLatestItems('flight', 3);
         $forums = Content::getLatestItems('forum', 24);
         $news = Content::getLatestItems('news', 9);
@@ -21,6 +16,8 @@ class V2FrontpageController extends Controller
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 6);
         $travelmates = Content::getLatestItems('travelmate', 3);
+
+        $user = auth()->check() && auth()->user();
 
         return view('v2.layouts.frontpage')
 
