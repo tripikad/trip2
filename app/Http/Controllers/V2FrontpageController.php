@@ -25,9 +25,14 @@ class V2FrontpageController extends Controller
 
             ->with('content', collect()
 
-                ->push(component('Grid3')->with('items', $topFlights->map(function ($topFlight) {
+                ->push(component('Grid3')->with('items', $topFlights->map(function ($topFlight, $key) {
                     $destination = $topFlight->destinations->first();
-                    return region('DestinationBar', $destination, $destination->getAncestors())
+                    return region(
+                            'DestinationBar',
+                            $destination,
+                            $destination->getAncestors(),
+                            ['','dark',''][$key]
+                        )
                         .region('FlightCard', $topFlight);
                 })))
                 ->push(component('Block')
@@ -56,6 +61,7 @@ class V2FrontpageController extends Controller
                             }))
                         ))
                 )
+                ->push(component('Promo')->with('promo', 'content'))
                 ->push(component('Grid3')
                     ->with('gutter', true)
                     ->with('items', $news->map(function ($new) {
@@ -63,7 +69,6 @@ class V2FrontpageController extends Controller
                         })
                     )
                 )
-                ->push(component('Promo')->with('promo', 'content'))
                 ->push(component('Block')
                     ->is('white')
                     ->is('uppercase')
