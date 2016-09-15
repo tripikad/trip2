@@ -10,13 +10,12 @@ class V2FlightController extends Controller
 {
     public function index()
     {
-        $type = 'flight';
 
         $firstBatch = 3;
         $secondBatch = 10;
         $thirdBatch = 10;
 
-        $flights = Content::whereType($type)
+        $flights = Content::whereType('flight')
             ->whereStatus(1)
             ->take($firstBatch + $secondBatch + $thirdBatch)
             ->latest()
@@ -28,7 +27,7 @@ class V2FlightController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Header', trans("content.$type.index.title")))
+            ->with('header', region('Header', trans('content.flight.index.title')))
 
             ->with('content', collect()
                 ->push(component('Grid3')
@@ -65,7 +64,6 @@ class V2FlightController extends Controller
                 )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
-                ->push(component('Block')->with('content', collect(['About'])))
             )
 
             ->with('bottom', collect()

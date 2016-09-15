@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Destination;
+use App\Topic;
 
 class V2NewsController extends Controller
 {
     public function index()
     {
         $news = Content::getLatestPagedItems('news');
+        $destinations = Destination::select('id', 'name')->get();
+        $topics = Topic::select('id', 'name')->get();
 
         return view('v2.layouts.2col')
 
@@ -26,6 +30,10 @@ class V2NewsController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('NewsAbout'))
+                ->push(component('Block')->with('content', collect()
+                        ->push(region('Filter', $destinations, $topics))
+                    )
+                )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Block')->with('content', collect(['NewsFilter'])))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
