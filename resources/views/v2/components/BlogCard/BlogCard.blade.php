@@ -21,7 +21,7 @@ $meta = $meta ?? '';
 
     <div class="BlogCard__user">
 
-        {!! $user!!}
+        {!! $user !!}
 
         <div class="BlogCard__meta">
 
