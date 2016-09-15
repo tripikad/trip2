@@ -1,8 +1,10 @@
 @php
+
 $header = $header ?? '';
-$content_first = $content_first ?? collect();
+$content = $content ?? collect();
 $bottom = $bottom ?? collect();
 $footer = $footer ?? '';
+
 @endphp
 
 @extends('v2.layouts.main')
@@ -11,30 +13,54 @@ $footer = $footer ?? '';
 
 @section('content')
 
+    <div class="margin-top-negative-lg">
+        
     <div class="container">
 
-        <div class="row row-center">
+        <div class="row row-center padding-bottom-md">
 
-        <div class="col-8">
+            <div class="col-10">
 
-        @foreach ($content_first as $content_first_item)
-        
-        {!! $content_first_item !!}
+                @foreach ($content->withoutLast() as $content_item)
                 
-        @endforeach
-        
-        </div>
+                <div class="margin-bottom-lg">
+
+                    {!! $content_item !!}
+                        
+                </div>
+
+                @endforeach
+
+                <div>
+
+                    {!! $content->last() !!}
+                        
+                </div>
+
+            </div>
 
         </div>
 
     </div>
 
+    <div class="container">
+
     @foreach ($bottom as $bottom_item)
     
-    {!! $bottom_item !!}
+        <div class="margin-bottom-md">
+
+            {!! $bottom_item !!}
+                
+        </div>
             
     @endforeach
+
+    </div>
+    
+    </div>
     
 @endsection
 
 @section('footer', $footer)
+
+

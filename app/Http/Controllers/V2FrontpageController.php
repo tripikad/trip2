@@ -19,7 +19,7 @@ class V2FrontpageController extends Controller
         $photos = Content::getLatestItems('photo', 6);
         $travelmates = Content::getLatestItems('travelmate', 3);
 
-        return view('v2.layouts.1col')
+        return view('v2.layouts.frontpage')
 
             ->with('header', region('Header', trans('frontpage.index.search.title')))
 

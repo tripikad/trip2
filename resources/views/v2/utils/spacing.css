@@ -295,3 +295,7 @@
   margin-left: $margin-lg;
   margin-left: 0 ?if $mobile;
 }
+
+.margin-top-negative-lg {
+  margin-top: calc($margin-lg * -1) !important;
+}
