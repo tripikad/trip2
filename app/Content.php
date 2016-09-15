@@ -71,6 +71,15 @@ class Content extends Model
             ->take($take)
             ->skip(50)
             ->latest()
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
             ->get();
     }
 
@@ -82,6 +91,15 @@ class Content extends Model
             ->take($take)
             ->skip(50)
             ->latest()
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
             ->get();
     }
 

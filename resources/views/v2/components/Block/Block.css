@@ -31,3 +31,7 @@
 .Block--red .Block__title {
     color: $red;
 }
+
+.Block--dark .Block__title {
+    color: $gray-darkest;
+}

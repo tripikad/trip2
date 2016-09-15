@@ -91,12 +91,12 @@ Route::get('v2/forum/{id}', [
 
 Route::get('v2/static', [
     'uses' => 'V2StaticController@index',
-    'as' => 'static.index',
+    'as' => 'static.index.v2',
 ]);
 
 Route::get('v2/static/{id}', [
     'uses' => 'V2StaticController@show',
-    'as' => 'static.show',
+    'as' => 'static.show.v2',
 ]);
 
 // User

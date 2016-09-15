@@ -1,7 +1,6 @@
 @import "variables";
 
 .BlogCard {
-	background: $gray-light;
 	padding: $padding-sm;
 	display: flex;
 	flex-direction: column;
@@ -20,6 +19,6 @@
     	align-items: center;
     }
 
-    	.BlogCard__meta {
-    		padding: $padding-xs;
-    	}
+	.BlogCard__meta {
+		padding: $padding-xs;
+	}
