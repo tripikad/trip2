@@ -150,9 +150,11 @@ class V2FlightController extends Controller
                     ->is('white')
                     ->with('title', trans('content.travelmate.index.title'))
                     ->with('content', collect()
-                        ->push(component('Grid3')->with('gutter', true)->with('items', $travelmates->map(function ($post) {
-                            return region('TravelmateCard', $post);
-                        })
+                        ->push(component('Grid3')
+                            ->with('gutter', true)
+                            ->with('items', $travelmates->map(function ($travelmate) {
+                                return region('TravelmateCard', $travelmate);
+                            })
                         ))
                     )
                 )
