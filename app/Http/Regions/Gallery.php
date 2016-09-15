@@ -2,12 +2,11 @@
 
 namespace App\Http\Regions;
 
-class FrontpageGallery {
+class Gallery {
 
-    public function prepareImages($images)
+    public function render($images)
     {
-        return $images->map(function($image) {
-        
+        return component('Gallery')->with('images', $images->map(function($image) {
             return collect()
                 ->put('id', $image->id)
                 ->put('small', $image->imagePreset('small_square'))
@@ -25,24 +24,8 @@ class FrontpageGallery {
                     )
                     )->render()
                 );
-        });
+        }))->render();
     
-    }
-
-    public function render($images)
-    {
-
-        return component('Block')
-            ->is('red')
-            ->is('uppercase')
-            ->is('white')
-            ->with('title', trans('frontpage.index.photo.title'))
-            ->with('content', collect()
-                ->push(component('Gallery')
-                    ->with('images', $this->prepareImages($images))
-                )
-            );
-
     }
 
 }

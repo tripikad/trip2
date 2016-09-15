@@ -69,6 +69,7 @@ class Content extends Model
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
+            ->skip(50)
             ->latest()
             ->get();
     }
@@ -79,6 +80,7 @@ class Content extends Model
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
+            ->skip(50)
             ->latest()
             ->get();
     }

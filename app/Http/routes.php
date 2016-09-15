@@ -5,6 +5,23 @@ use App\Http\Controllers\ContentController;
 
 // V2
 
+// Styleguide
+
+Route::get('v2/index', [
+    'uses' => 'V2StyleguideController@index',
+    'as' => 'styleguide.index',
+]);
+
+Route::post('v2/styleguide/form', [
+    'uses' => 'V2StyleguideController@form',
+    'as' => 'styleguide.form',
+]);
+
+Route::post('v2/styleguide/flag', [
+    'uses' => 'V2StyleguideController@flag',
+    'as' => 'styleguide.flag',
+]);
+
 // Frontpage
 
 Route::get('v2/frontpage', [
@@ -96,22 +113,6 @@ Route::get('v2/destination/{id}', [
     'as' => 'destination.show.v2',
 ]);
 
-// Styleguide
-
-Route::get('v2/pages', [
-    'uses' => 'V2StyleguideController@index',
-    'as' => 'styleguide.index',
-]);
-
-Route::post('v2/styleguide/form', [
-    'uses' => 'V2StyleguideController@form',
-    'as' => 'styleguide.form',
-]);
-
-Route::post('v2/styleguide/flag', [
-    'uses' => 'V2StyleguideController@flag',
-    'as' => 'styleguide.flag',
-]);
 
 // Utils
 
