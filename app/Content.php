@@ -103,8 +103,8 @@ class Content extends Model
             ->get();
     }
 
-    public function scopeGetItemById($query, $id) {
-
+    public function scopeGetItemById($query, $id)
+    {
         return $query
             ->whereStatus(1)
             ->with(
@@ -117,11 +117,10 @@ class Content extends Model
                 'topics'
             )
             ->findOrFail($id);
-    
     }
 
-    public function scopeGetItemBySlug($query, $slug) {
-
+    public function scopeGetItemBySlug($query, $slug)
+    {
         return $query
             ->whereStatus(1)
             ->whereSlug($slug)
@@ -134,7 +133,7 @@ class Content extends Model
                 'destinations',
                 'topics'
             )
-            ->first();    
+            ->first();
     }
 
     // V1

@@ -2,11 +2,11 @@
 
 namespace App\Http\Regions;
 
-class Gallery {
-
+class Gallery
+{
     public function render($images)
     {
-        return component('Gallery')->with('images', $images->map(function($image) {
+        return component('Gallery')->with('images', $images->map(function ($image) {
             return collect()
                 ->put('id', $image->id)
                 ->put('small', $image->imagePreset('small_square'))
@@ -25,7 +25,5 @@ class Gallery {
                     )->render()
                 );
         }))->render();
-    
     }
-
 }

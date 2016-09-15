@@ -8,8 +8,14 @@ class V2NewsController extends Controller
 {
     public function index()
     {
+<<<<<<< HEAD
      
         $news = Content::getLatestPagedItems('news');
+=======
+        $type = 'news';
+
+        $news = Content::getLatestPagedItems($type);
+>>>>>>> origin/kika-cusco-fixes-presprint
 
         return view('v2.layouts.2col')
 
@@ -19,8 +25,8 @@ class V2NewsController extends Controller
                 ->push(component('Grid3')
                     ->with('gutter', true)
                     ->with('items', $news->map(function ($new) {
-                            return region('NewsCard', $new);
-                        })
+                        return region('NewsCard', $new);
+                    })
                     )
                 )
             )
