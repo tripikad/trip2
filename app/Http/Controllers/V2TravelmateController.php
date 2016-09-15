@@ -10,14 +10,13 @@ class V2TravelmateController extends Controller
 {
     public function index()
     {
-
         $travelmates = Content::getLatestPagedItems('travelmate');
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
-        
+
         return view('v2.layouts.2col')
 
-            ->with('header', region('Header', trans("content.travelmate.index.title")))
+            ->with('header', region('Header', trans('content.travelmate.index.title')))
 
             ->with('content', collect()
                 ->push(component('Grid2')

@@ -104,7 +104,7 @@ class V2FlightController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Header', trans("content.flight.index.title")))
+            ->with('header', region('Header', trans('content.flight.index.title')))
 
             ->with('content', collect()
                 ->push(component('FlightTitle')->with('title', $flight->vars()->title))
@@ -159,8 +159,8 @@ class V2FlightController extends Controller
                     ->with('title', trans('content.travelmate.index.title'))
                     ->with('content', collect()
                         ->push(component('Grid3')->with('gutter', true)->with('items', $travelmates->map(function ($post) {
-                                return region('TravelmateCard', $post);
-                            })
+                            return region('TravelmateCard', $post);
+                        })
                         ))
                     )
                 )

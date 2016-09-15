@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Image;
 use App\Content;
-use App\Destination;
 use Request;
 use Response;
 

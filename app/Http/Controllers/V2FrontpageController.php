@@ -8,7 +8,6 @@ class V2FrontpageController extends Controller
 {
     public function index()
     {
-
         $topFlights = Content::getLatestItems('flight', 3);
         $forums = Content::getLatestItems('forum', 24);
         $news = Content::getLatestItems('news', 9);
@@ -27,11 +26,12 @@ class V2FrontpageController extends Controller
 
                 ->push(component('Grid3')->with('items', $topFlights->map(function ($topFlight, $key) {
                     $destination = $topFlight->destinations->first();
+
                     return region(
                             'DestinationBar',
                             $destination,
                             $destination->getAncestors(),
-                            ['','dark',''][$key]
+                            ['', 'dark', ''][$key]
                         )
                         .region('FlightCard', $topFlight);
                 })))
@@ -44,7 +44,7 @@ class V2FrontpageController extends Controller
                             ->with('title', trans('content.action.more.about'))
                             ->with('route', route('v2.static.show', [1534]))
                         )
-                        ->pushWhen(!$user, component('Button')
+                        ->pushWhen(! $user, component('Button')
                             ->with('title', trans('frontpage.index.about.register'))
                             ->with('route', route('register.form'))
                         )
@@ -65,8 +65,8 @@ class V2FrontpageController extends Controller
                 ->push(component('Grid3')
                     ->with('gutter', true)
                     ->with('items', $news->map(function ($new) {
-                            return region('NewsCard', $new);
-                        })
+                        return region('NewsCard', $new);
+                    })
                     )
                 )
                 ->push(component('Block')
@@ -99,7 +99,7 @@ class V2FrontpageController extends Controller
                         ->push(component('Grid3')
                             ->with('gutter', true)
                             ->with('items', $travelmates->map(function ($post) {
-                                    return region('TravelmateCard', $post);
+                                return region('TravelmateCard', $post);
                             }))
                         )
                     )
