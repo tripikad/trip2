@@ -91,7 +91,6 @@ class V2FlightController extends Controller
 
     public function show($slug)
     {
-
         $flight = Content::getItemBySlug($slug);
         $flights = Content::getLatestItems('flight', 3);
         $forums = Content::getLatestItems('forum', 5);

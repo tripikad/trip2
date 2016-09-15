@@ -10,14 +10,13 @@ class V2ForumController extends Controller
 {
     public function index()
     {
-
         $forums = Content::getLatestPagedItems('forum');
         $flights = Content::getLatestItems('flight', 3);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
         return view('v2.layouts.2col')
-            ->with('header', region('HeaderLight', trans("content.forum.index.title")))
+            ->with('header', region('HeaderLight', trans('content.forum.index.title')))
             ->with('content', collect()
                 ->merge($forums->map(function ($forum) {
                     return region('ForumRow', $forum);
@@ -35,8 +34,8 @@ class V2ForumController extends Controller
 
             ->with('bottom', collect()
                 ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
-                        return region('FlightCard', $flight);
-                    })
+                    return region('FlightCard', $flight);
+                })
                 ))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
@@ -53,7 +52,7 @@ class V2ForumController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('HeaderLight', trans("content.forum.index.title")))
+            ->with('header', region('HeaderLight', trans('content.forum.index.title')))
 
             ->with('content', collect()
                 ->push(region('ForumPost', $forum))
