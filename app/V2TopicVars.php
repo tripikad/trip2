@@ -35,5 +35,4 @@ class V2TopicVars
     {
         return str_limit($this->topic->name, 12);
     }
-
 }

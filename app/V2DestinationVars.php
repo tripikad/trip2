@@ -35,5 +35,4 @@ class V2DestinationVars
     {
         return str_limit($this->destination->name, 30);
     }
-
 }
