@@ -50,17 +50,17 @@ Route::get('v2/news/{id}/edit', [
 
 Route::get('v2/flight', [
     'uses' => 'V2FlightController@index',
-    'as' => 'flight.index',
+    'as' => 'flight.index.v2',
 ]);
 
-Route::get('v2/flight/{id}', [
+Route::get('v2/flight/{slug}', [
     'uses' => 'V2FlightController@show',
-    'as' => 'flight.show',
+    'as' => 'flight.show.v2',
 ]);
 
 Route::get('v2/flight/{id}/edit', [
     'uses' => 'V2FlightController@edit',
-    'as' => 'flight.edit',
+    'as' => 'flight.edit.v2',
 ]);
 
 // Travelmates

@@ -17,11 +17,11 @@ class V2FrontpageController extends Controller
             ->with('header', region('Header', trans('frontpage.index.search.title')))
 
             ->with('content', collect()
-                ->push(component('Grid3')->with('items', $topFlights
-                    ->map(function ($topFlight) {
-                        return region('FlightCard', $topFlight);
-                    })
-                ))
+                ->push(component('Grid3')->with('items', $topFlights->map(function ($topFlight) {
+                    $destination = $topFlight->destinations->first();
+                    return region('DestinationBar', $destination, $destination->getAncestors())
+                        .region('FlightCard', $topFlight);
+                })))
                 ->push(component('Block')->is('white')->with('content', collect(region('Gallery', $photos))))
                 ->push(component('Block')->with('content', collect(['FrontpageFlightCards'])))
             )

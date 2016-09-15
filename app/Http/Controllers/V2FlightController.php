@@ -35,7 +35,7 @@ class V2FlightController extends Controller
             ->with('content', collect()
                 ->push(component('Grid3')
                     ->with('gutter', true)
-                    ->with('items', $posts
+                    ->with('items', $flights
                         ->take($firstBatch)
                         ->map(function ($post) {
                             return region('FlightCard', $post);
@@ -92,110 +92,78 @@ class V2FlightController extends Controller
             ->with('footer', region('Footer'));
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $type = 'flight';
         $user = auth()->user();
 
-        $post = Content::
-            with(
-                'images',
-                'user',
-                'user.images',
-                'comments',
-                'comments.user',
-                'destinations',
-                'topics'
-            )
-            ->whereStatus(1)
-            ->findOrFail($id);
+        $flight = Content::getItemBySlug($slug);
 
-        $posts = Content::whereType($type)
-            ->whereStatus(1)
-            ->take(3)
-            ->latest()
-            ->get();
-
-        $forums = Content::whereType('forum')
-            ->whereStatus(1)
-            ->take(5)
-            ->latest()
-            ->get();
-
-        $flights = Content::whereType('flight')
-            ->whereStatus(1)
-            ->latest()
-            ->take(3)
-            ->get();
-
-        $travelmates = Content::whereType('travelmate')
-            ->whereStatus(1)
-            ->latest()
-            ->take(3)
-            ->get();
+        $flights = Content::getLatestItems('flight', 3);
+        $forums = Content::getLatestItems('forum', 5);
+        $travelmates = Content::getLatestItems('travelmate', 3);
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Header', trans("content.$type.index.title")))
+            ->with('header', region('Header', trans("content.flight.index.title")))
 
             ->with('content', collect()
-                ->push(component('FlightTitle')->with('title', $post->vars()->title))
+                ->push(component('FlightTitle')->with('title', $flight->vars()->title))
                 ->push(component('Meta')
                     ->with('items', collect()
                         ->push(component('MetaLink')
-                            ->with('title', $post->vars()->created_at)
+                            ->with('title', $flight->vars()->created_at)
                         )
                         ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                             ->with('title', trans('content.action.edit.title'))
-                            ->with('route', route('flight.edit', [$post]))
+                            ->with('route', route('flight.edit.v2', [$flight]))
                         )
                     )
                 )
-                ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
-                ->merge($post->comments->map(function ($comment) {
+                ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
+                ->merge($flight->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-                //->pushWhen(region('CommentCreateForm', $post))
                 ->push(region('Share'))
+                ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $flight))
                 ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Block')
                     ->is('white')
                     ->is('uppercase')
                     ->with('title', trans('frontpage.index.flight.title'))
-                    ->with('content', $posts->map(function ($post) {
-                        return region('FlightRow', $post);
+                    ->with('content', $flights->map(function ($flight) {
+                        return region('FlightRow', $flight);
                     }))
                 )
             )
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
-                ->merge($post->destinations->map(function ($destination) {
+                ->merge($flight->destinations->map(function ($destination) {
                     return region('DestinationBar', $destination, $destination->getAncestors());
                 }))
                 ->push(region('ForumSidebar', $forums))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->merge($posts->map(function ($post) {
-                    return region('FlightCard', $post);
+                ->merge($flights->map(function ($flight) {
+                    return region('FlightCard', $flight);
                 }))
             )
 
             ->with('bottom', collect()
                 ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
                     return region('FlightCard', $flight);
-                })
-                ))
+                })))
                 ->push(component('Block')
                     ->is('red')
                     ->is('uppercase')
                     ->is('white')
                     ->with('title', trans('content.travelmate.index.title'))
                     ->with('content', collect()
-                    ->push(component('Grid3')->with('gutter', true)->with('items', $travelmates->map(function ($post) {
-                        return region('TravelmateCard', $post);
-                    })
-                    ))
-                ))
+                        ->push(component('Grid3')->with('gutter', true)->with('items', $travelmates->map(function ($post) {
+                                return region('TravelmateCard', $post);
+                            })
+                        ))
+                    )
+                )
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 

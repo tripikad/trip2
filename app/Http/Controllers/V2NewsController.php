@@ -9,13 +9,11 @@ class V2NewsController extends Controller
     public function index()
     {
      
-        $type = 'news';
-
-        $news = Content::getLatestPagedItems($type);
+        $news = Content::getLatestPagedItems('news');
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Header', trans("content.$type.index.title")))
+            ->with('header', region('Header', trans("content.news.index.title")))
 
             ->with('content', collect()
                 ->push(component('Grid3')
