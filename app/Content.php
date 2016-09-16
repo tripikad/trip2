@@ -63,7 +63,7 @@ class Content extends Model
         return new V2ContentVars($this);
     }
 
-    public function scopeGetLatestPagedItems($query, $type, $take = 24)
+    public function scopeGetLatestPagedItems($query, $type, $take = 24, $destination = false, $topic = false)
     {
         return $query
             ->whereType($type)
@@ -78,6 +78,19 @@ class Content extends Model
                 'destinations',
                 'topics'
             )
+            ->when($destination, function($query) use ($destination) {
+                $destinations = Destination::find($destination)->descendantsAndSelf()->lists('id');
+                return $query
+                    ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
+                    ->select('contents.*')
+                    ->whereIn('content_destination.destination_id', $destinations);
+            })
+            ->when($topic, function($query) use ($topic) {
+                return $query
+                    ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
+                    ->select('contents.*')
+                    ->where('content_topic.topic_id', '=', $topic);
+            })
             ->simplePaginate($take);
     }
 

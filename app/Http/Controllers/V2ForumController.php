@@ -11,13 +11,15 @@ class V2ForumController extends Controller
 {
     public function index()
     {
-        $forums = Content::getLatestPagedItems('forum');
+
+        $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
+
+        $forums = Content::getLatestPagedItems('forum', false, $currentDestination, $currentTopic);
         $flights = Content::getLatestItems('flight', 3);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
-        $currentDestination = Request::get('destination');
-        $currentTopic = Request::get('topic');
 
         return view('v2.layouts.2col')
 
