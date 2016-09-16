@@ -7,8 +7,8 @@ class DestinationHeader
     public function render($destination)
     {
         return component('DestinationHeader')
-            ->with('map', component('Map'))
-            ->with('header', component('Navbar')
+            ->with('background', component('MapBackground'))
+            ->with('navbar', component('Navbar')
                 ->with('search', component('NavbarSearch')->is('white'))
                 ->with('logo', component('Icon')
                     ->with('icon', 'tripee_logo_plain_dark')

@@ -4,20 +4,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: $height-md;
 }
+
+    .Navbar__left {
+        display: flex;
+        align-items: center;
+    }
+
+    .Navbar__logo {
+        opacity: $opacity-lg;
+        margin-right: $margin-sm;
+    }
 
     .Navbar__search {
         display: block;
         display: none ?if $tablet;
-    }
-
-    .Navbar__logo {
-        display: block ?if $tablet;
-        display: none;
-    }
-
-    .Navbar__logo svg {
-        fill: $white ?if $tablet;
     }
 
     .Navbar__desktop {

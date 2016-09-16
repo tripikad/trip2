@@ -7,7 +7,7 @@ class UserHeader
     public function render($user)
     {
         return component('UserHeader')
-            ->with('map', component('Map'))
+            ->with('background', component('MapBackground'))
             ->with('navbar', component('Navbar')
                 ->with('search', component('NavbarSearch')->is('white'))
                 ->with('logo', component('Icon')
