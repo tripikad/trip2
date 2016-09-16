@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Request;
+
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -10,7 +12,11 @@ class V2TravelmateController extends Controller
 {
     public function index()
     {
-        $travelmates = Content::getLatestPagedItems('travelmate');
+        $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
+
+        $travelmates = Content::getLatestPagedItems('travelmate', false, $currentDestination, $currentTopic);
+        $forums = Content::getLatestItems('forum', 5);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
@@ -26,15 +32,28 @@ class V2TravelmateController extends Controller
                         })
                     )
                 )
-                ->push(component('Paginator')->with('links', $travelmates->links()))
+                ->push(component('Paginator')
+                    ->with('links', $travelmates->appends([
+                        'destination' => $currentDestination,
+                        'topic' => $currentTopic,
+                    ])
+                    ->links())
+                )
             )
 
             ->with('sidebar', collect()
                 ->push(region('TravelmateAbout'))
                 ->push(component('Block')->with('content', collect()
-                    ->push(region('Filter', $destinations, $topics))
-                    )
-                )
+                    ->push(region(
+                        'Filter',
+                        $destinations,
+                        $topics,
+                        $currentDestination,
+                        $currentTopic,
+                        $travelmates->currentPage(),
+                        'v2.travelmate.index'
+                    ))
+                ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
             )
 
