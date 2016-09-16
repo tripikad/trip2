@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Request;
-
 use App\Content;
 use App\Destination;
 use App\Topic;
