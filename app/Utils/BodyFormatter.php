@@ -3,7 +3,8 @@
 namespace App\Utils;
 
 use App\Image;
-use Markdown;
+
+// use Markdown;
 
 class BodyFormatter
 {
@@ -67,7 +68,7 @@ class BodyFormatter
 
     public function markdown()
     {
-        $this->body = Markdown::setBreaksEnabled(true)->text($this->body);
+        // $this->body = Markdown::convertToHtml($this->body);
 
         return $this;
     }
