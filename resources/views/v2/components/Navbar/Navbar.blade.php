@@ -16,6 +16,10 @@ $navbar_mobile = $navbar_mobile ?? '';
             {!! $logo !!}
 
         </div>
+        
+    </div>
+
+    <div class="Navbar__right">
 
         <div class="Navbar__search">
 
@@ -23,10 +27,6 @@ $navbar_mobile = $navbar_mobile ?? '';
 
         </div>
         
-    </div>
-
-    <div class="Navbar__right">
-
         <div class="Navbar__desktop">
 
             {!! $navbar_desktop !!}

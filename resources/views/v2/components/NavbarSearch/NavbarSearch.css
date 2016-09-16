@@ -14,7 +14,7 @@
 	.NavbarSearch__input {
 		background: none;
 		border: none;
-		font: $font-text-md;
+        font: $font-heading-sm;
 		padding: $padding-xs;
 	}
 

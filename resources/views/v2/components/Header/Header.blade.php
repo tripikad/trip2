@@ -9,8 +9,8 @@ $meta = $meta ?? '';
 
 <div class="Header {{ $isclasses }}" 
     style="background-image: linear-gradient(
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.2)
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0)
     ), url({{ $background }});
 ">
     <div class="container">
