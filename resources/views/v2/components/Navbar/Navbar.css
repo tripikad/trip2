@@ -7,14 +7,17 @@
     height: $height-md;
 }
 
-    .Navbar__left {
-        display: flex;
-        align-items: center;
+    .Navbar__logo {
+        margin-left: calc($spacer * -4);
     }
 
-    .Navbar__logo {
-        opacity: $opacity-lg;
-        margin-right: $margin-sm;
+    .Navbar--white .Navbar__logo svg {
+        fill: $white;
+    }
+
+    .Navbar__right {
+        display: flex;
+        align-items: center;
     }
 
     .Navbar__search {

@@ -138,6 +138,11 @@ Route::post('v2/image/store', [
     'as' => 'image.store',
 ]);
 
+Route::post('v2/utils/filter', [
+    'uses' => 'V2UtilsController@filter',
+    'as' => 'utils.filter',
+]);
+
 
 // V1
 
