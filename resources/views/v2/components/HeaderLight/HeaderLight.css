@@ -6,6 +6,7 @@
     background: $gray-light;
     position: relative;
     overflow: hidden;
+    z-index: 0;
 }
 
     .HeaderLight__content {
@@ -13,7 +14,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 10;
     }
 
     .HeaderLight__title {
@@ -22,8 +22,4 @@
         font: $font-heading-xl ?if $mobile;
         color: $gray-darkest;
         text-align: center;
-    }
-
-    .HeaderLight__navbar {
-        z-index: 10;
     }

@@ -8,4 +8,5 @@
     height: calc($spacer * 60);
     opacity: $opacity-xs;
     pointer-events: none;
+    z-index: -1;
 }
