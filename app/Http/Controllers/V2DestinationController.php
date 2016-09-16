@@ -11,27 +11,59 @@ class V2DestinationController extends Controller
     {
         $destination = Destination::findOrFail($id);
 
-        $flights = Content::whereType('flight')
-            ->whereStatus(1)
-            ->latest()
-            ->take(3)
-            ->get();
+        // TODO: Replace with $destination->content()->whereType(...+ fallbacks
+
+        $flights = Content::getLatestItems('flight', 3);
+        $photos = Content::getLatestItems('photo', 6);
+        $forums = Content::getLatestItems('forum', 5);
+        $news = Content::getLatestItems('news', 3);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+
+        // TODO: Replace with Destination::getPopular()
+
+        $destinations = Destination::take(5)->get();
 
         return view('v2.layouts.2col')
 
             ->with('header', region('DestinationHeader', $destination))
 
             ->with('content', collect()
-                ->push(component('Block')->with('content', collect(['DestinationFlight1'])))
-                ->push(component('Block')->with('content', collect(['DestinationPhoto'])))
-                ->push(component('Block')->with('content', collect(['DestinationForum'])))
+                ->push(component('Grid3')
+                    ->with('items', $flights->map(function ($flight) {
+                        return region('FlightCard', $flight);
+                    })
+                    )
+                )
+                ->push(region('Gallery', $photos))
+                ->push(region('ForumSidebar', $forums))
                 ->push(component('Promo')->with('promo', 'body'))
-                ->push(component('Block')->with('content', collect(['DestinationNews'])))
-                ->push(component('Block')->with('content', collect(['DestinationTravelmate'])))
+                ->push(component('Grid3')
+                    ->with('gutter', true)
+                    ->with('items', $news->map(function ($new) {
+                        return region('NewsCard', $new);
+                    })
+                    )
+                )
+                ->push(component('Grid3')
+                    ->with('gutter', true)
+                    ->with('items', $travelmates->map(function ($travelmate) {
+                        return region('TravelmateCard', $travelmate);
+                    })
+                ))
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect(['DestinationPopular'])))
+                ->push(component('Block')
+                    ->is('uppercase')
+                    ->is('yellow')
+                    ->is('white')
+                    ->with('title', trans('destination.show.popular.title.short'))
+                    ->with('content', $destinations->map(function ($destination) {
+                        return component('DestinationRow')
+                            ->with('name', $destination->vars()->name)
+                            ->with('route', route('v2.destination.show', [$destination]));
+                    })
+                ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )

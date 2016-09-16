@@ -3,7 +3,7 @@
 .DestinationMasthead {
     padding-top: $padding-md;
     padding-bottom: $padding-lg;
-    background: $orange;
+    background: $yellow;
     position: relative;
     overflow: hidden;
     z-index: -10;

@@ -4,13 +4,13 @@ namespace App;
 
 use Exception;
 
-class V2DestinationVars
+class V2TopicVars
 {
-    protected $destination;
+    protected $topic;
 
-    public function __construct(Destination $destination)
+    public function __construct(Topic $topic)
     {
-        $this->destination = $destination;
+        $this->topic = $topic;
     }
 
     public function __get($property)
@@ -28,11 +28,11 @@ class V2DestinationVars
 
     public function name()
     {
-        return $this->destination->name;
+        return $this->topic->name;
     }
 
     public function shortName()
     {
-        return str_limit($this->destination->name, 30);
+        return str_limit($this->topic->name, 12);
     }
 }

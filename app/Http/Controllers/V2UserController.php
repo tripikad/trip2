@@ -22,42 +22,35 @@ class V2UserController extends Controller
             ->take(10)
             ->get();
 
-        $userimages = $user
+        $blogs = $user
             ->contents()
             ->whereStatus(1)
-            ->where('type', 'photo')
+            ->whereType('blog')
+            ->take(3)
+            ->get();
+
+        $images = $user
+            ->contents()
+            ->whereStatus(1)
+            ->whereType('photo')
             ->latest('created_at')
             ->take(6)
-            ->get()
-                ->map(function ($image) {
-                    return [
-                        'id' => $image->id,
-                        'small' => $image->imagePreset('small_square'),
-                        'large' => $image->imagePreset('large'),
-                        'meta' => component('Meta')->with('items', collect()
-                            ->push(component('MetaLink')
-                                ->with('title', $image->title)
-                            )
-                            ->push(component('MetaLink')
-                                ->with('title', $image->created_at)
-                            )
-                        )->render(),
-                    ];
-                });
+            ->get();
 
-        return view('v2.layouts.2col')
+        return view('v2.layouts.1col')
 
             ->with('header', region('UserHeader', $user))
 
             ->with('content', collect()
-                ->push(component('Gallery')->with('images', $userimages))
+                ->push(region('Gallery', $images))
+                ->push(component('Grid3')
+                    ->with('items', $blogs->map(function ($blog) {
+                        return region('BlogCard', $blog);
+                    })
+                ))
                 ->merge($comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-            )
-
-            ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect(['UserBlog'])))
             )
 
             ->with('footer', region('Footer'));
