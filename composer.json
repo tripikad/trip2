@@ -22,8 +22,7 @@
         "laravelista/ekko": "~1.0",
         "graham-campbell/htmlmin": "^4.3",
         "cviebrock/eloquent-sluggable": "^4.0",
-        "doctrine/dbal": "^2.5",
-        "graham-campbell/markdown": "^6.1"
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
