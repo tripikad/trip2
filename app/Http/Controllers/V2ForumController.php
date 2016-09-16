@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Request;
-
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -31,7 +30,7 @@ class V2ForumController extends Controller
                 ->push(component('Paginator')
                     ->with('links', $forums->appends([
                         'destination' => $currentDestination,
-                        'topic' => $currentTopic
+                        'topic' => $currentTopic,
                     ])
                     ->links())
                 )
@@ -53,8 +52,8 @@ class V2ForumController extends Controller
 
             ->with('bottom', collect()
                 ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
-                        return region('FlightCard', $flight);
-                    })
+                    return region('FlightCard', $flight);
+                })
                 ))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
