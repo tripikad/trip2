@@ -28,7 +28,7 @@ class V2UtilsController extends Controller
         return redirect()->route(Request::get('type'), [
             'destination' => Request::get('destination'),
             'topic' => Request::get('topic'),
-            'page' => Request::get('page')
+            'page' => Request::get('page'),
         ]);
     }
 }

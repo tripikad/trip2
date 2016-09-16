@@ -11,7 +11,6 @@ class V2ForumController extends Controller
 {
     public function index()
     {
-
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
