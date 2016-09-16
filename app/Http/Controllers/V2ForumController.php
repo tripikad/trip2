@@ -30,7 +30,7 @@ class V2ForumController extends Controller
                 ->merge(region('ForumLinks'))
                 ->push(region('ForumAbout'))
                 ->push(component('Block')->with('content', collect()
-                    ->push(region('Filter', $destinations, $topics))
+                    ->push(region('Filter', $destinations, $topics, $forums->currentPage()))
                 ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
