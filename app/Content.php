@@ -4,12 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
-<<<<<<< HEAD
 use Cache;
-=======
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
->>>>>>> master
 
 class Content extends Model
 {
@@ -271,7 +268,6 @@ class Content extends Model
         return config('app.url').$this->imagePreset('large');
     }
 
-<<<<<<< HEAD
     public static function IsNewContent($contents)
     {
         if (auth()->check()) {
@@ -301,7 +297,8 @@ class Content extends Model
         }
 
         return $contents;
-=======
+    }
+
     public function sluggable()
     {
         return [
@@ -309,6 +306,7 @@ class Content extends Model
                 'source' => 'title',
             ],
         ];
->>>>>>> master
+
     }
+    
 }
