@@ -38,7 +38,7 @@ class V2TravelmateController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect(['TravelmateAbout'])))
+                    ->push(region('TravelmateAbout'))
                 ->push(component('Block')->with('content', collect()
                     ->push(region('Filter', $destinations, $topics))
                     )
@@ -95,7 +95,7 @@ class V2TravelmateController extends Controller
             ->with('header', region('Header', trans("content.$type.index.title")))
 
             ->with('content', collect()
-                ->push(component('FlightTitle')->with('title', $post->vars()->title))
+                ->push(component('Title')->with('title', $post->vars()->title))
                 ->push(component('Meta')
                     ->with('items', collect()
                         ->push(component('MetaLink')
@@ -125,7 +125,9 @@ class V2TravelmateController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('UserCard', $post))
-                ->push(component('Block')->with('content', collect(['DestinationBar'])))
+                ->merge($post->destinations->map(function ($destination) {
+                    return region('DestinationBar', $destination, $destination->getAncestors());
+                }))
                 ->merge($flights->map(function ($flight) {
                     return region('FlightCard', $flight);
                 }))
