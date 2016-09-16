@@ -7,18 +7,19 @@
     height: $height-md;
 }
 
-    .Navbar__search {
-        display: block;
-        display: none ?if $tablet;
+    .Navbar__left {
+        display: flex;
+        align-items: center;
     }
 
     .Navbar__logo {
-        display: block ?if $tablet;
-        display: none;
+        opacity: $opacity-lg;
+        margin-right: $margin-sm;
     }
 
-    .Navbar__logo svg {
-        fill: $white ?if $tablet;
+    .Navbar__search {
+        display: block;
+        display: none ?if $tablet;
     }
 
     .Navbar__desktop {

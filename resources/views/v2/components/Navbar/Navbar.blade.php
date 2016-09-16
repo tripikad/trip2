@@ -11,18 +11,18 @@ $navbar_mobile = $navbar_mobile ?? '';
     
     <div class="Navbar__left">
 
-        <div class="Navbar__search">
-
-            {!! $search !!}
-
-        </div>
-
         <div class="Navbar__logo">
 
             {!! $logo !!}
 
         </div>
 
+        <div class="Navbar__search">
+
+            {!! $search !!}
+
+        </div>
+        
     </div>
 
     <div class="Navbar__right">

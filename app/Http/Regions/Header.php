@@ -16,7 +16,7 @@ class Header
                 ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))
                 ->with('logo', component('Icon')
-                    ->with('icon', 'tripee_logo_plain_dark')
+                    ->with('icon', 'tripee_logo_plain')
                     ->with('width', 80)
                     ->with('height', 30)
                 )
