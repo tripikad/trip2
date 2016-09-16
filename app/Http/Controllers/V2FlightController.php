@@ -52,9 +52,8 @@ class V2FlightController extends Controller
                     })
                 )
                 ->push(component('Paginator')
-                    ->with('links', $news->appends([
-                        'destination' => $currentDestination,
-                        'topic' => $currentTopic,
+                    ->with('links', $flights->appends([
+                        'destination' => $currentDestination
                     ])
                     ->links())
                 )

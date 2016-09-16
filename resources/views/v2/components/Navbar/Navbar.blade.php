@@ -1,5 +1,6 @@
 @php
 
+$route = $route ?? route('v2.frontpage.index');
 $search = $search ?? '';
 $logo = $logo ?? '';
 $navbar_desktop = $navbar_desktop ?? '';
@@ -11,11 +12,15 @@ $navbar_mobile = $navbar_mobile ?? '';
     
     <div class="Navbar__left">
 
-        <div class="Navbar__logo">
+        <a href="{{ $route }}">
 
-            {!! $logo !!}
+            <div class="Navbar__logo">
 
-        </div>
+                {!! $logo !!}
+
+            </div>
+
+        </a>
         
     </div>
 
