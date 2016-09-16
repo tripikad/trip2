@@ -191,7 +191,7 @@ class AdminTest extends TestCase
             ->see(trans('content.internal.index.title'))
             ->seeLink('Hello internal')
             ->click('Hello internal')
-            ->seePageIs('content/'.$content1->type.'/'.$content1->id)
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug)
             ->see('Hello internal');
     }
 

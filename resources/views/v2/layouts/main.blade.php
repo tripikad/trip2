@@ -7,7 +7,11 @@
         <meta id="globalprops" name="globalprops" content="
             {{
                 rawurlencode(json_encode([
-                    'token' => csrf_token()
+                    'token' => csrf_token(),
+                    'alertRoute' => route('utils.alert'),
+                    'allowedTags' => config('site.allowedtags'),
+                    'maxfilesize' => config('site.maxfilesize'),
+                    'promo' => config('promo')
                 ])) 
             }}
         ">
@@ -15,8 +19,8 @@
     </head>
     <body>
 
-        <component is="IconLoader" route="/v2/svg/main.svg"></component>
-
+        @include('v2.include.svg')
+        
         @yield('header')
         @yield('content')
         @yield('footer')

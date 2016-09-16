@@ -7,16 +7,29 @@
 
 .Block--white {
     background: $white;
+    padding: 0;
 }
 
     .Block__title {
-        font: $font-heading-md;
-        margin-bottom: $margin-sm;
         color: $green;
+        font: $font-heading-md;
+        line-height: $line-height-md;
+        margin-bottom: $margin-md;
     }
 
-    .Block__subtitle {
-        font: $font-heading-sm;
-        margin-bottom: $margin-sm;
-        color: $gray-darkest;
-    }
+.Block--uppercase .Block__title {
+    text-transform: uppercase;
+    font: $font-heading-xs;
+}
+
+.Block--red .Block__title {
+    color: $red;
+}
+
+.Block--yellow .Block__title {
+    color: $yellow;
+}
+
+.Block--dark .Block__title {
+    color: $gray-darkest;
+}

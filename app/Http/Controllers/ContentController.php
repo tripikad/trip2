@@ -122,6 +122,16 @@ class ContentController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
 
+    public function findBySlugAndType($type, $slug)
+    {
+        $content = Content::where('slug', $slug)->where('type', $type)->firstOrFail();
+        if (! $content) {
+            abort(404);
+        }
+
+        return $this->show($type, $content->id);
+    }
+
     public function show($type, $id)
     {
         if ($type == 'internal'
@@ -143,7 +153,10 @@ class ContentController extends Controller
             $comments->count(),
             config('content_'.$type.'.index.paginate')
         );
-        $comments->setPath(route('content.show', [$type, $id]));
+
+        if ($type !== 'static') {
+            $comments->setPath(route($type.'.show', [$content->slug]));
+        }
 
         if (view()->exists('pages.content.'.$type.'.show')) {
             $view = 'pages.content.'.$type.'.show';
@@ -455,13 +468,13 @@ class ContentController extends Controller
             if (! $request->ajax()) {
                 if (! $id) {
                     return redirect()
-                        ->route('content.index', [$type])
+                        ->route($type.'.index')
                         ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
                             'title' => $content->title,
                         ]));
                 } else {
                     return redirect()
-                        ->route('content.show', [$type, $content])
+                        ->route($type.'.show', [$content->slug])
                         ->with('info', trans('content.update.info', [
                             'title' => $content->title,
                         ]));
@@ -469,7 +482,7 @@ class ContentController extends Controller
             }
         } else {
             return redirect()
-                ->route('content.index', [$type]);
+                ->route($type.'.index');
         }
     }
 
@@ -520,8 +533,8 @@ class ContentController extends Controller
     public function filter(Request $request, $type)
     {
         return redirect()->route(
-            'content.index',
-            [$type,
+            $type.'.index',
+            [
                 'destination' => $request->destination ? $request->destination : null,
                 'topic' => $request->topic ? $request->topic : null,
                 'author' => $request->author ? $request->author : null,

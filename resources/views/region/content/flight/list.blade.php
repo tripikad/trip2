@@ -3,8 +3,8 @@
         @include('component.row', [
             'icon' => 'icon-tickets',
             'modifiers' => 'm-icon',
-            'title' => $item->title.' '.$item->price.config('site.currency.symbol'),
-            'route' => route('content.show', [$item->type, $item]),
+            'title' => $item->title.' '.($item->price != 0 ? $item->price.config('site.currency.symbol') : ''),
+            'route' => route($item->type.'.show', [$item->slug]),
             'list' => [
                 (isset($item->destinations) && count($item->destinations) ?
                 [

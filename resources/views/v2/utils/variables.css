@@ -1,5 +1,6 @@
 /* Brand colors */
 $blue: #36a1eb;
+$cyan-light: #a5e4f1;
 $cyan-dark: #0087ae;
 $cyan: #4ac9e3;
 $green-dark: #288f18;
@@ -14,9 +15,16 @@ $red: #ed6262;
 $yellow-dark: #d67d00;
 $yellow: #f7ba00;
 
+/* Special colors */
+
+$pink: #fff3f3;
+
 /* Neutral colors */
+
 $white: #fff;
 $black: #000;
+
+/* Grays */
 
 $gray-lighter: #fbfcfd;
 $gray-light: #f7f9fa;
@@ -31,36 +39,31 @@ $font-family-code: monospace;
 $font-size-xs: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
-$font-size-lg: 18px;
-$font-size-xl: 24px;
+$font-size-lg: 19px;
+$font-size-xl: 22px;
 $font-size-xxl: 32px;
 $font-size-xxxl: 48px;
 $font-size-xxxxl: 64px;
 $font-weight-normal: normal;
 $font-weight-semibold: 600;
 $font-weight-bold: bold;
-$line-height-md: 160%;
-$line-height-lg: 150%;
-$line-height-xl: 140%;
-$line-height-xxl: 130%;
-$line-height-xxl: 120%;
-$line-height-xxxl: 110%;
-$font-text-xs: $font-weight-normal $font-size-xs / $line-height-md $font-family, sans-serif;
-$font-text-sm: $font-weight-normal $font-size-sm / $line-height-md $font-family, sans-serif;
-$font-text-md: $font-weight-normal $font-size-md / $line-height-md $font-family, sans-serif;
-$font-text-lg: $font-weight-normal $font-size-lg / $line-height-md $font-family, sans-serif;
-$font-text-xl: $font-weight-normal $font-size-xl / $line-height-md $font-family, sans-serif;
-$font-heading-xs: $font-weight-semibold $font-size-sm / $font-family, sans-serif;
-$font-heading-sm: $font-weight-semibold $font-size-md / $line-height-md $font-family, sans-serif;
-$font-heading-md: $font-weight-semibold $font-size-lg / $line-height-md $font-family, sans-serif;
-$font-heading-lg: $font-weight-bold $font-size-xl / $line-height-lg $font-family, sans-serif;
-$font-heading-xl: $font-weight-bold $font-size-xxl / $line-height-xl $font-family, sans-serif;
-$font-heading-xxl: $font-weight-bold $font-size-xxxl / $line-height-xxl $font-family, sans-serif;
-$font-heading-xxxl: $font-weight-bold $font-size-xxxxl / $line-height-xxxl $font-family, sans-serif;
-$font-code-xs: $font-weight-normal $font-size-xs / $line-height-md $font-family-code, monospace;
-$font-code-sm: $font-weight-normal $font-size-sm / $line-height-md $font-family-code, monospace;
+$line-height-xs: 100%;
+$line-height-sm: 120%;
+$line-height-md: 140%;
+$line-height-lg: 160%;
+$line-height-xl: 200%;
+$font-text-xs: $font-weight-normal $font-size-xs / $line-height-xs $font-family, sans-serif;
+$font-text-sm: $font-weight-normal $font-size-sm / $line-height-xs $font-family, sans-serif;
+$font-text-md: $font-weight-normal $font-size-md / $line-height-xs $font-family, sans-serif;
+$font-text-lg: $font-weight-normal $font-size-lg / $line-height-xs $font-family, sans-serif;
+$font-heading-xs: $font-weight-semibold $font-size-sm / $line-height-xs $font-family, sans-serif;
+$font-heading-sm: $font-weight-semibold $font-size-md / $line-height-xs $font-family, sans-serif;
+$font-heading-md: $font-weight-semibold $font-size-lg / $line-height-xs $font-family, sans-serif;
+$font-heading-lg: $font-weight-semibold $font-size-xl / $line-height-xs $font-family, sans-serif;
+$font-heading-xl: $font-weight-bold $font-size-xxl / $line-height-xs $font-family, sans-serif;
+$font-heading-xxl: $font-weight-bold $font-size-xxxl / $line-height-xs $font-family, sans-serif;
+$font-heading-xxxl: $font-weight-bold $font-size-xxxxl / $line-height-xs $font-family, sans-serif;
 $font-code-md: $font-weight-normal $font-size-md / $line-height-md $font-family-code, monospace;
-$font-code-lg: $font-weight-normal $font-size-lg / $line-height-md $font-family-code, monospace;
 
 /* Spacing */
 $spacer: 12px;
@@ -146,7 +149,7 @@ $width-sm: calc($spacer * 2);
 $width-md: calc($spacer * 4);
 $width-lg: calc($spacer * 6);
 $width-xl: calc($spacer * 12);
-$width-xxl: calc($spacer * 18);
+$width-xxl: calc($spacer * 15);
 $width-xxxl: calc($spacer * 24);
 $width-xxxxl: calc($spacer * 32);
 $height-xxs: $width-xxs;
@@ -160,14 +163,22 @@ $height-xxxl: $width-xxxl;
 $height-xxxxl: $width-xxxxl;
 
 /* Borders */
-$border-gray: 2px solid $gray-lighter;
-$border-green: 2px solid $green;
-$border-red: 2px solid $red;
+$border-gray-sm: 1px solid $gray-dark;
+$border-gray-md: 2px solid $gray;
+$border-green-md: 2px solid $green;
+$border-white-md: 2px solid $white;
 
 /* Border radiuses */
 $border-radius-md: 3px;
+$border-radius-lg: $spacer;
+$border-radius-xl: calc($spacer * 2);
 
-/* Shadows */
+/* Text shadows */
+
+$text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+
+/* Box shadows */
+
 $box-shadow-left: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
 
 /* Media queries */
@@ -186,3 +197,8 @@ $opacity-sm: 0.25;
 $opacity-md: 0.5;
 $opacity-lg: 0.75;
 $opacity-xl: 0.9;
+
+/* Social Media Colors */
+$facebook: #3b5998;
+$twitter: #00aced;
+$googleplus: #dd4b39;

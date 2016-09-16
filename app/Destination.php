@@ -4,14 +4,23 @@ namespace App;
 
 use Cache;
 use Baum;
+use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 
 class Destination extends Baum\Node
 {
+    use Sluggable, SlugHelper;
+
     public $timestamps = false;
 
     public function content()
     {
         return $this->belongsToMany('App\Content');
+    }
+
+    public function vars()
+    {
+        return new V2DestinationVars($this);
     }
 
     public function flags()
@@ -62,5 +71,14 @@ class Destination extends Baum\Node
         if ($this) {
             return $this->parent()->first();
         }
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+            ],
+        ];
     }
 }

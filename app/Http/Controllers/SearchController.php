@@ -66,7 +66,7 @@ class SearchController extends Controller
             }
 
             $results[$key]['comments_count'] = count($item->comments);
-            $results[$key]['route'] = route('content.show', [$item->type, $item]);
+            $results[$key]['route'] = route($item->type.'.show', [$item->slug]);
             $results[$key]['user_img'] = $item->user->imagePreset();
         }
     }
@@ -87,7 +87,7 @@ class SearchController extends Controller
                 $results[$key]['destinations'] = $item->destinations;
             }
 
-            $results[$key]['route'] = route('content.show', [$item->type, $item]);
+            $results[$key]['route'] = route($item->type.'.show', [$item->slug]);
         }
     }
 
@@ -95,7 +95,7 @@ class SearchController extends Controller
     {
         foreach ($results as $key => $item) {
             $results[$key]['short_body_text'] = (strlen($item->body) > 300) ? substr($item->body, 0, 300).'...' : $item->body;
-            $results[$key]['route'] = route('content.show', [$item->type, $item]);
+            $results[$key]['route'] = route($item->type.'.show', [$item->slug]);
             $results[$key]['comments_count'] = count($item->comments);
             $results[$key]['content_img'] = $item->imagePreset('small_square');
         }

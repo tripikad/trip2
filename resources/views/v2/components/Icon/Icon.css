@@ -11,3 +11,7 @@
 .Icon--white {
     fill: $white;
 }
+
+.Icon--blue {
+    fill: $blue;
+}

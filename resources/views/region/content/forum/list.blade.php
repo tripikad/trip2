@@ -5,7 +5,7 @@
         'items' => $items->transform(function ($item) use ($modifiers) {
             return [
                 'topic' => str_limit($item->title, 50),
-                'route' => route('content.show', [$item->type, $item]),
+                'route' => route($item->type.'.show', [$item->slug]),
                 'date' => view('component.date.relative', [
                     'date' => $item->updated_at
                 ]),
@@ -26,7 +26,7 @@
                         return [
                             'title' => $topic->name,
                             'modifiers' => 'm-gray',
-                            'route' => route('content.index', [$item->type]).'?topic='.$topic->id,
+                            'route' => route($item->type.'.index').'?topic='.$topic->id,
                         ];
                     })
                 ),

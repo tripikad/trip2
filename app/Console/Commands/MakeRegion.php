@@ -17,10 +17,9 @@ class MakeRegion extends Command
         $php = [
             '<?php',
             "namespace App\Http\Regions;",
-            "use Illuminate\Http\Request;",
             "class $name {",
-            "    public function render(Request \$request, \$content)\n    {",
-            "        return component('Body')\n            ->with('body', \$content->body);",
+            "    public function render(\$post)\n    {",
+            "        return component('Body')\n            ->with('body', \$post->body);",
             '    }',
             "}\n",
         ];

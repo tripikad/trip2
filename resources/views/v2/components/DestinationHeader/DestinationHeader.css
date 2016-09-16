@@ -1,0 +1,34 @@
+@import "variables";
+
+.DestinationMasthead {
+    padding-top: $padding-md;
+    padding-bottom: $padding-lg;
+    background: $yellow;
+    position: relative;
+    overflow: hidden;
+    z-index: -10;
+}
+
+    .DestinationMasthead__map {
+        position: absolute;
+        top: calc($spacer * 4);
+        right: calc($spacer * -20);
+        opacity: $opacity-md;
+        fill: $orange-dark;
+        z-index: -5;
+    }
+
+    .DestinationMasthead__name {
+        font: $font-heading-xxl;
+        color: $white;
+        margin-top: $margin-xxl;
+        margin-bottom: $margin-md;
+    }
+
+    .DestinationMasthead__meta {
+        color: $white;
+        font: $font-text-md;
+        line-height: $line-height-xl;
+        width: 50%;
+        width: 100% ?if $mobile;
+    }

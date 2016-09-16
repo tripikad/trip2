@@ -69,11 +69,18 @@ class Component
                 ->with('isclasses', $this->generateIsClasses())
                 ->render();
         } else {
-            $props = collect($with)->map(function ($value, $key) {
-                $value = is_array($value) ? rawurlencode(json_encode($value)) : $value;
+            $props = collect($with)
+                ->map(function ($value, $key) {
+                    if (is_array($value) || is_object($value) || is_bool($value)) {
+                        $value = rawurlencode(json_encode($value));
+                    }
 
-                return $key.'="'.$value.'"';
-            })->implode(' ');
+                    return $value;
+                })
+                ->map(function ($value, $key) {
+                    return $key.'="'.$value.'"';
+                })
+                ->implode(' ');
 
             return '<component is="'
                 .$this->component
