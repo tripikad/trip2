@@ -7,6 +7,7 @@
     height: $height-md;
 }
 
+<<<<<<< HEAD
     .Navbar__logo {
         margin-left: calc($spacer * -4);
     }
@@ -18,6 +19,16 @@
     .Navbar__right {
         display: flex;
         align-items: center;
+=======
+    .Navbar__left {
+        display: flex;
+        align-items: center;
+    }
+
+    .Navbar__logo {
+        opacity: $opacity-lg;
+        margin-right: $margin-sm;
+>>>>>>> master
     }
 
     .Navbar__search {

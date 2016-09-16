@@ -16,9 +16,15 @@ class Header
                 ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))
                 ->with('logo', component('Icon')
+<<<<<<< HEAD
                     ->with('icon', 'tripee_logo')
                     ->with('width', 200)
                     ->with('height', 150)
+=======
+                    ->with('icon', 'tripee_logo_plain')
+                    ->with('width', 80)
+                    ->with('height', 30)
+>>>>>>> master
                 )
                 ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
