@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Request;
+
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -10,18 +12,16 @@ class V2FlightController extends Controller
 {
     public function index()
     {
+        $currentDestination = Request::get('destination');
+
         $firstBatch = 3;
         $secondBatch = 10;
         $thirdBatch = 10;
+        $pageSize = $firstBatch + $secondBatch + $thirdBatch;
 
-        $flights = Content::whereType('flight')
-            ->whereStatus(1)
-            ->latest()
-            ->simplePaginate($firstBatch + $secondBatch + $thirdBatch);
-
+        $flights = Content::getLatestPagedItems('flight', $pageSize, $currentDestination);
         $forums = Content::getLatestItems('forum', 5);
         $destinations = Destination::select('id', 'name')->get();
-        $topics = Topic::select('id', 'name')->get();
 
         return view('v2.layouts.2col')
 
@@ -52,16 +52,27 @@ class V2FlightController extends Controller
                         return region('FlightRow', $flight);
                     })
                 )
-                ->push(component('Paginator')->with('links', $flights->links()))
-
+                ->push(component('Paginator')
+                    ->with('links', $flights->appends([
+                        'destination' => $currentDestination
+                    ])
+                    ->links())
+                )
             )
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
                 ->push(component('Block')->with('content', collect()
-                        ->push(region('Filter', $destinations, $topics))
-                    )
-                )
+                    ->push(region(
+                        'Filter',
+                        $destinations,
+                        null,
+                        $currentDestination,
+                        null,
+                        $flights->currentPage(),
+                        'v2.flight.index'
+                    ))
+                ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
