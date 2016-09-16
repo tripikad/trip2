@@ -6,7 +6,6 @@ class HeaderLight
 {
     public function render($title = '')
     {
-     
         return component('HeaderLight')
             ->with('background', component('MapBackground'))
             ->with('title', $title)
