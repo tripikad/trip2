@@ -163,6 +163,7 @@ return [
     // Travelmate
 
     'travelmate.index.title' => 'Reisikaaslased',
+    'travelmate.index.eula.title' => 'Kasutustingimused',
 
     'travelmate.view.all.offers' => 'Vaata kõiki pakkumisi',
 

@@ -63,6 +63,79 @@ class Content extends Model
         return new V2ContentVars($this);
     }
 
+    public function scopeGetLatestPagedItems($query, $type, $take = 24)
+    {
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->take($take)
+            ->skip(30)
+            ->latest()
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->get();
+    }
+
+    public function scopeGetLatestItems($query, $type, $take = 5)
+    {
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->take($take)
+            ->skip(30)
+            ->latest()
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->get();
+    }
+
+    public function scopeGetItemById($query, $id)
+    {
+        return $query
+            ->whereStatus(1)
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->findOrFail($id);
+    }
+
+    public function scopeGetItemBySlug($query, $slug)
+    {
+        return $query
+            ->whereStatus(1)
+            ->whereSlug($slug)
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->first();
+    }
+
     // V1
 
     public function getDestinationParent()

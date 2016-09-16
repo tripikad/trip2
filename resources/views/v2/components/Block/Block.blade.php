@@ -1,7 +1,6 @@
 @php
 
 $title = $title ?? false;
-$subtitle = $subtitle ?? false;
 $content = $content ?? collect();
 
 @endphp
@@ -13,16 +12,6 @@ $content = $content ?? collect();
     <div class="Block__title">
 
         {{ $title }}
-
-    </div>
-
-    @endif
-
-    @if ($subtitle)
-
-    <div class="Block__subtitle">
-
-        {{ $subtitle }}
 
     </div>
 
