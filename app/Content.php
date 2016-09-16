@@ -306,7 +306,5 @@ class Content extends Model
                 'source' => 'title',
             ],
         ];
-
     }
-    
 }
