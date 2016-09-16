@@ -8,6 +8,7 @@
     font: $font-heading-sm;
     justify-content: center;
     padding: $padding-sm $padding-lg;
+    text-align: center;
 }
 
 .Button__icon {

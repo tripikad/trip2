@@ -6,7 +6,7 @@
     background-size: cover;
     display: flex;
     padding: $padding-md;
-    height: $height-xl;
+    height: $height-xxl;
 }
 
     .FlightCard__title {

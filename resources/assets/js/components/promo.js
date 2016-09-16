@@ -1,4 +1,6 @@
-var googletag = googletag || {};
+var googletag = googletag || {},
+    slot = [],
+    index = 0;
 googletag.cmd = googletag.cmd || [];
 (function() {
     var gads = document.createElement('script');
@@ -16,14 +18,18 @@ googletag.cmd.push(function() {
     for (var promo in promos) {
         if(promos[promo].id1 && promos[promo].id2) {
             googletag.defineSlot(promos[promo].id1, [promos[promo].width, promos[promo].height], promos[promo].id2).addService(googletag.pubads());
-        } 
+        }
     }
     googletag.pubads().enableSingleRequest();
     googletag.pubads().collapseEmptyDivs();
     googletag.enableServices();
     googletag.pubads().addEventListener('slotRenderEnded', function(e) {
-        if ($('#'+e.slot.m.o).length) {
-            return renderEnded(e.slot.m.o, e.size[0], e.size[1]);
+        if ($('#'+e.slot.o.o).length) {
+            ++index;
+            slot[index] = setTimeout(function(){
+                renderEnded(e.slot.o.o, e.size[0], e.size[1], index);
+            }, 200);
+            return renderEnded(e.slot.o.o, e.size[0], e.size[1], index);
         }
     });
 });
@@ -38,13 +44,24 @@ window.onload = function(){
     }
 }
 
-function renderEnded (adunitId, width, height) {
-    $('#' + adunitId).find('iframe').on('load', function(){
-        var iFrame = this,
+function renderEnded (adunitId, width, height, i) {
+    //$('#' + adunitId).find('iframe').on('load', function(){
+    if ($('#' + adunitId).find('iframe')) {
+        //alert('blah');
+        var iFrame = $('#' + adunitId).find('iframe'),
             newHeight = (($(iFrame).width() * height) / width);
         $(iFrame).contents().find('#google_image_div').css({'max-width': '100%', 'height': 'auto', 'display': 'block'});
-        $(iFrame).contents().find('img').attr('onload', 'alert(\'test\');').css({'max-width': '100%', 'height': 'auto', 'display': 'block'});
+        $(iFrame).contents().find('img').css({'max-width': '100%', 'height': 'auto', 'display': 'block'});
         $(iFrame).css({'height': newHeight+'px'});
         $(iFrame).parents("#" + adunitId).show();
-    });
+
+        if (slot.length && slot[i]) {
+            clearTimeout(slot[i]);
+        }
+    } else {
+        slot[i] = setTimeout(function() {
+            renderEnded(adunitId, width, height, i);
+        }, 200);
+    }
+    //});
 }

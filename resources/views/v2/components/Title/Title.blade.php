@@ -4,7 +4,7 @@ $title = $title ?? '';
 
 @endphp
 
-<div class="FlightTitle {{ $isclasses }}">
+<div class="Title {{ $isclasses }}">
 
     {{ $title }}
 
