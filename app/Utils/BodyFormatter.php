@@ -67,8 +67,7 @@ class BodyFormatter
 
     public function markdown()
     {
-        $this->body = Markdown::setBreaksEnabled(true)->text($this->body);
-
+        $this->body = Markdown::convertToHtml($this->body);
         return $this;
     }
 
