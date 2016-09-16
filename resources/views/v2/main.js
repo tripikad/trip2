@@ -10,7 +10,7 @@ import Editor from './components/Editor/Editor.vue'
 import Flag from './components/Flag/Flag.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
-import Map from './components/Map/Map.vue'
+// import Map from './components/Map/Map.vue'
 import Promo from './components/Promo/Promo.vue'
 import ImageUpload from './components/ImageUpload/ImageUpload.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
@@ -36,7 +36,7 @@ new Vue({
         Flag,
         NavbarDesktop,
         NavbarMobile,
-        Map,
+        // Map,
         Promo,
         ImageUpload,
         FormSelect,

@@ -6,10 +6,9 @@ class HeaderLight
 {
     public function render($title = '')
     {
-        $background = '/photos/map.svg';
-
+     
         return component('HeaderLight')
-            ->with('background', $background)
+            ->with('background', component('MapBackground'))
             ->with('title', $title)
             ->with('navbar', component('Navbar')
                 ->with('search', component('NavbarSearch'))
