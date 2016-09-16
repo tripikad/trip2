@@ -26,6 +26,7 @@ class V2TravelmateController extends Controller
                         })
                     )
                 )
+                ->push(component('Paginator')->with('links', $travelmates->links()))
             )
 
             ->with('sidebar', collect()

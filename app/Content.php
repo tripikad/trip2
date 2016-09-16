@@ -68,8 +68,6 @@ class Content extends Model
         return $query
             ->whereType($type)
             ->whereStatus(1)
-            ->take($take)
-            ->skip(30)
             ->latest()
             ->with(
                 'images',
@@ -80,7 +78,7 @@ class Content extends Model
                 'destinations',
                 'topics'
             )
-            ->get();
+            ->simplePaginate($take);
     }
 
     public function scopeGetLatestItems($query, $type, $take = 5)
@@ -89,7 +87,6 @@ class Content extends Model
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
-            ->skip(30)
             ->latest()
             ->with(
                 'images',

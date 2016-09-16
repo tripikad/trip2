@@ -16,12 +16,16 @@ class V2ForumController extends Controller
         $topics = Topic::select('id', 'name')->get();
 
         return view('v2.layouts.2col')
+            
             ->with('header', region('HeaderLight', trans('content.forum.index.title')))
+            
             ->with('content', collect()
                 ->merge($forums->map(function ($forum) {
                     return region('ForumRow', $forum);
                 }))
+                ->push(component('Paginator')->with('links', $forums->links()))
             )
+            
             ->with('sidebar', collect()
                 ->merge(region('ForumLinks'))
                 ->push(region('ForumAbout'))

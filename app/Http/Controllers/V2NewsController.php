@@ -26,6 +26,7 @@ class V2NewsController extends Controller
                     })
                     )
                 )
+                ->push(component('Paginator')->with('links', $news->links()))
             )
 
             ->with('sidebar', collect()

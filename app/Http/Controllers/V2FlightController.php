@@ -16,9 +16,8 @@ class V2FlightController extends Controller
 
         $flights = Content::whereType('flight')
             ->whereStatus(1)
-            ->take($firstBatch + $secondBatch + $thirdBatch)
             ->latest()
-            ->get();
+            ->simplePaginate($firstBatch + $secondBatch + $thirdBatch);
 
         $forums = Content::getLatestItems('forum', 5);
         $destinations = Destination::select('id', 'name')->get();
@@ -53,6 +52,8 @@ class V2FlightController extends Controller
                         return region('FlightRow', $flight);
                     })
                 )
+                ->push(component('Paginator')->with('links', $flights->links()))
+
             )
 
             ->with('sidebar', collect()
