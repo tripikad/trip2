@@ -9,7 +9,7 @@
 
     .NewsCard__title {
         color: $blue;
-        font: $font-heading-lg;
+        font: $font-heading-md;
         line-height: $line-height-md;
         margin-bottom: $margin-sm;
     }

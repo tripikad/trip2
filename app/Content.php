@@ -92,6 +92,7 @@ class Content extends Model
                     ->select('contents.*')
                     ->where('content_topic.topic_id', '=', $topic);
             })
+            ->distinct()
             ->simplePaginate($take);
     }
 
@@ -111,6 +112,7 @@ class Content extends Model
                 'destinations',
                 'topics'
             )
+            ->distinct()
             ->get();
     }
 
