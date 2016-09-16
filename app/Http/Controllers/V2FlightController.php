@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Request;
 use App\Content;
 use App\Destination;
-use App\Topic;
 
 class V2FlightController extends Controller
 {
@@ -53,7 +52,7 @@ class V2FlightController extends Controller
                 )
                 ->push(component('Paginator')
                     ->with('links', $flights->appends([
-                        'destination' => $currentDestination
+                        'destination' => $currentDestination,
                     ])
                     ->links())
                 )
