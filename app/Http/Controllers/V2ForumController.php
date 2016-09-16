@@ -20,7 +20,6 @@ class V2ForumController extends Controller
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
-
         return view('v2.layouts.2col')
 
             ->with('header', region('HeaderLight', trans('content.forum.index.title')))
@@ -45,7 +44,9 @@ class V2ForumController extends Controller
                     ->push(region(
                         'Filter',
                         $destinations,
-                        $topics
+                        $topics,
+                        $forums->currentPage(),
+                        'v2.forum.index'
                     ))
                 ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))

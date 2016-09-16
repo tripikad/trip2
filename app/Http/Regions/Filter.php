@@ -4,11 +4,13 @@ namespace App\Http\Regions;
 
 class Filter
 {
-    public function render($destinations, $topics)
+    public function render($destinations, $topics, $page = 1, $type = '')
     {
         return component('Form')
-                ->with('route', route('styleguide.form'))
+                ->with('route', route('utils.filter'))
                 ->with('fields', collect()
+                    ->push(component('FormHidden')->with('name', 'type')->with('value', $type))
+                    ->push(component('FormHidden')->with('name', 'page')->with('value', $page))
                     ->pushWhen($destinations, component('FormSelect')
                         ->with('name', 'destination')
                         ->with('options', $destinations)
