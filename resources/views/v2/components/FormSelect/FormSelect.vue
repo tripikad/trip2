@@ -16,9 +16,10 @@
         </component>
 
         <input
+            v-show="false"
             type="text"
             :name="name"
-            :value="selected | json"
+            :value="selected ? selected.id : ''"
         >
 
     </div>
@@ -44,7 +45,7 @@
 
         data() {
             return {
-                selected: null,
+                selected: {},
                 currentOptions: []
             }
         },
