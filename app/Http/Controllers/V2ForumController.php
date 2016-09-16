@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Request;
+
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -15,6 +17,9 @@ class V2ForumController extends Controller
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
+        $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
+
         return view('v2.layouts.2col')
 
             ->with('header', region('HeaderLight', trans('content.forum.index.title')))
@@ -23,14 +28,24 @@ class V2ForumController extends Controller
                 ->merge($forums->map(function ($forum) {
                     return region('ForumRow', $forum);
                 }))
-                ->push(component('Paginator')->with('links', $forums->links()))
+                ->push(component('Paginator')
+                    ->with('links', $forums->appends([
+                        'destination' => $currentDestination,
+                        'topic' => $currentTopic
+                    ])
+                    ->links())
+                )
             )
 
             ->with('sidebar', collect()
                 ->merge(region('ForumLinks'))
                 ->push(region('ForumAbout'))
                 ->push(component('Block')->with('content', collect()
-                    ->push(region('Filter', $destinations, $topics, $forums->currentPage()))
+                    ->push(region(
+                        'Filter',
+                        $destinations,
+                        $topics
+                    ))
                 ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
@@ -38,8 +53,8 @@ class V2ForumController extends Controller
 
             ->with('bottom', collect()
                 ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
-                    return region('FlightCard', $flight);
-                })
+                        return region('FlightCard', $flight);
+                    })
                 ))
                 ->push(component('Promo')->with('promo', 'footer'))
             )

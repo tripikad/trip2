@@ -4,7 +4,7 @@ namespace App\Http\Regions;
 
 class Filter
 {
-    public function render($destinations, $topics, $currentPage = 1)
+    public function render($destinations, $topics)
     {
         return component('Form')
                 ->with('route', route('styleguide.form'))
