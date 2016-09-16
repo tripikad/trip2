@@ -44,6 +44,8 @@ class V2ForumController extends Controller
                         'Filter',
                         $destinations,
                         $topics,
+                        $currentDestination,
+                        $currentTopic,
                         $forums->currentPage(),
                         'v2.forum.index'
                     ))
