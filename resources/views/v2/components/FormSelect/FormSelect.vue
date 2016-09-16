@@ -6,7 +6,7 @@
             is="Multiselect"
             :selected="selected"
             :multiple="false",
-            :searchable="false",
+            :searchable="true",
             :options="currentOptions",
             @update="updateValue"
             :placeholder="placeholder"
