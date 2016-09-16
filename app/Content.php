@@ -4,14 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 
 class Content extends Model
 {
+    use Sluggable, SlugHelper;
+
+    // Setup
+
     protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image', 'status', 'start_at', 'end_at', 'duration', 'price'];
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
     protected $appends = ['body_filtered', 'image_id'];
+
+    // Relations
 
     public function user()
     {
@@ -47,6 +55,88 @@ class Content extends Model
     {
         return $this->morphMany('App\Follow', 'followable');
     }
+
+    // V2
+
+    public function vars()
+    {
+        return new V2ContentVars($this);
+    }
+
+    public function scopeGetLatestPagedItems($query, $type, $take = 24)
+    {
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->take($take)
+            ->skip(30)
+            ->latest()
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->get();
+    }
+
+    public function scopeGetLatestItems($query, $type, $take = 5)
+    {
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->take($take)
+            ->skip(30)
+            ->latest()
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->get();
+    }
+
+    public function scopeGetItemById($query, $id)
+    {
+        return $query
+            ->whereStatus(1)
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->findOrFail($id);
+    }
+
+    public function scopeGetItemBySlug($query, $slug)
+    {
+        return $query
+            ->whereStatus(1)
+            ->whereSlug($slug)
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->first();
+    }
+
+    // V1
 
     public function getDestinationParent()
     {
@@ -175,5 +265,14 @@ class Content extends Model
     public function getHeadImage()
     {
         return config('app.url').$this->imagePreset('large');
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+            ],
+        ];
     }
 }

@@ -9,12 +9,14 @@ class Component
     protected $component;
     protected $is;
     protected $with;
+    protected $show;
 
     public function __construct($component)
     {
         $this->component = $component;
         $this->is = collect();
         $this->with = collect();
+        $this->show = true;
     }
 
     public function is($is)
@@ -27,6 +29,13 @@ class Component
     public function with($key, $value)
     {
         $this->with->push([$key => $value]);
+
+        return $this;
+    }
+
+    public function show($condition)
+    {
+        $this->show = $condition;
 
         return $this;
     }
@@ -47,6 +56,10 @@ class Component
 
     public function render()
     {
+        if (! $this->show) {
+            return '';
+        }
+
         $name = "v2.components.$this->component.$this->component";
 
         $with = $this->with->flatten(1)->all();
@@ -56,11 +69,18 @@ class Component
                 ->with('isclasses', $this->generateIsClasses())
                 ->render();
         } else {
-            $props = collect($with)->map(function ($value, $key) {
-                $value = is_array($value) ? rawurlencode(json_encode($value)) : $value;
+            $props = collect($with)
+                ->map(function ($value, $key) {
+                    if (is_array($value) || is_object($value) || is_bool($value)) {
+                        $value = rawurlencode(json_encode($value));
+                    }
 
-                return $key.'="'.$value.'"';
-            })->implode(' ');
+                    return $value;
+                })
+                ->map(function ($value, $key) {
+                    return $key.'="'.$value.'"';
+                })
+                ->implode(' ');
 
             return '<component is="'
                 .$this->component

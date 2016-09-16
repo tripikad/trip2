@@ -95,7 +95,7 @@
 
                 <p class="c-auth-footer__text">
                     {!! trans('auth.register.field.eula.title', [
-                        'link' => '<a href="' . route('content.show', ['static', 25151]) . '" class="c-auth-footer__link">' . trans('auth.register.field.eula.title.link'). '</a>'
+                        'link' => '<a href="' . route('static.25151') . '" class="c-auth-footer__link">' . trans('auth.register.field.eula.title.link'). '</a>'
                     ]) !!}</p>
 
             </div>

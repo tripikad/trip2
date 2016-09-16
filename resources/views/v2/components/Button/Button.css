@@ -4,16 +4,27 @@
     align-items: center;
     background: $green;
     border-radius: $border-radius-md;
-    display: inline-flex;
-    font: $font-heading-md;
+    display: flex;
+    font: $font-heading-sm;
     justify-content: center;
     padding: $padding-sm $padding-lg;
+    text-align: center;
 }
 
-.Button--wide {
-    display: flex;
+.Button__icon {
+    margin-right: $margin-xs;
 }
 
-    .Button__title {
-        color: $white;
-    }
+.Button__title {
+    color: $white;
+}
+
+.Button--facebook {
+    background: $facebook;
+    ppadding: $padding-xs;
+}
+
+.Button--twitter {
+    background: $twitter;
+    ppadding: $padding-xs;
+}

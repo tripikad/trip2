@@ -2,6 +2,22 @@
 
 /* Paddings */
 
+.padding-top-xs {
+  padding-top: $padding-xs;
+}
+
+.padding-right-xs {
+  padding-right: $padding-xs;
+}
+
+.padding-bottom-xs {
+  padding-bottom: $padding-xs;
+}
+
+.padding-left-xs {
+  padding-left: $padding-xs;
+}
+
 .padding-top-sm {
   padding-top: $padding-sm;
 }
@@ -52,67 +68,83 @@
 
 /* Responsive paddings */
 
-.padding-top-collapse-sm {
+.padding-top-sm-mobile-none {
   padding-top: $padding-sm;
   padding-top: 0 ?if $mobile;
 }
 
-.padding-right-collapse-sm {
+.padding-right-sm-mobile-none {
   padding-right: $padding-sm;
   padding-right: 0 ?if $mobile;
 }
 
-.padding-bottom-collapse-sm {
+.padding-bottom-sm-mobile-none {
   padding-bottom: $padding-sm;
   padding-bottom: 0 ?if $mobile;
 }
 
-.padding-left-collapse-sm {
+.padding-left-sm-mobile-none {
   padding-left: $padding-sm;
   padding-left: 0 ?if $mobile;
 }
 
-.padding-top-collapse-md {
+.padding-top-md-mobile-none {
   padding-top: $padding-md;
   padding-top: 0 ?if $mobile;
 }
 
-.padding-right-collapse-md {
+.padding-right-md-mobile-none {
   padding-right: $padding-md;
   padding-right: 0 ?if $mobile;
 }
 
-.padding-bottom-collapse-md {
+.padding-bottom-md-mobile-none {
   padding-bottom: $padding-md;
   padding-bottom: 0 ?if $mobile;
 }
 
-.padding-left-collapse-md {
+.padding-left-md-mobile-none {
   padding-left: $padding-md;
   padding-left: 0 ?if $mobile;
 }
 
-.padding-top-collapse-lg {
+.padding-top-lg-mobile-none {
   padding-top: $padding-lg;
   padding-top: 0 ?if $mobile;
 }
 
-.padding-right-collapse-lg {
+.padding-right-lg-mobile-none {
   padding-right: $padding-lg;
   padding-right: 0 ?if $mobile;
 }
 
-.padding-bottom-collapse-lg {
+.padding-bottom-lg-mobile-none {
   padding-bottom: $padding-lg;
   padding-bottom: 0 ?if $mobile;
 }
 
-.padding-left-collapse-lg {
+.padding-left-lg-mobile-none {
   padding-left: $padding-lg;
   padding-left: 0 ?if $mobile;
 }
 
 /* Margins */
+
+.margin-top-xs {
+  margin-top: $margin-xs;
+}
+
+.margin-right-xs {
+  margin-right: $margin-xs;
+}
+
+.margin-bottom-xs {
+  margin-bottom: $margin-xs;
+}
+
+.margin-left-xs {
+  margin-left: $margin-xs;
+}
 
 .margin-top-sm {
   margin-top: $margin-sm;
@@ -164,62 +196,106 @@
 
 /* Responsive margins */
 
-.margin-top-collapse-sm {
+.margin-top-xs-mobile-none {
+  margin-top: $margin-xs;
+  margin-top: 0 ?if $mobile;
+}
+
+.margin-right-xs-mobile-none {
+  margin-right: $margin-xs;
+  margin-right: 0 ?if $mobile;
+}
+
+.margin-bottom-xs-mobile-none {
+  margin-bottom: $margin-xs;
+  margin-bottom: 0 ?if $mobile;
+}
+
+.margin-left-xs-mobile-none {
+  margin-left: $margin-xs;
+  margin-left: 0 ?if $mobile;
+}
+
+.margin-top-sm-mobile-none {
   margin-top: $margin-sm;
   margin-top: 0 ?if $mobile;
 }
 
-.margin-right-collapse-sm {
+.margin-right-sm-mobile-none {
   margin-right: $margin-sm;
   margin-right: 0 ?if $mobile;
 }
 
-.margin-bottom-collapse-sm {
+.margin-bottom-sm-mobile-none {
   margin-bottom: $margin-sm;
   margin-bottom: 0 ?if $mobile;
 }
 
-.margin-left-collapse-sm {
+.margin-left-sm-mobile-none {
   margin-left: $margin-sm;
   margin-left: 0 ?if $mobile;
 }
 
-.margin-top-collapse-md {
+.margin-top-md-mobile-none {
   margin-top: $margin-md;
   margin-top: 0 ?if $mobile;
 }
 
-.margin-right-collapse-md {
+.margin-right-md-mobile-none {
   margin-right: $margin-md;
   margin-right: 0 ?if $mobile;
 }
 
-.margin-bottom-collapse-md {
+.margin-bottom-md-mobile-none {
   margin-bottom: $margin-md;
   margin-bottom: 0 ?if $mobile;
 }
 
-.margin-left-collapse-md {
+.margin-left-md-mobile-none {
   margin-left: $margin-md;
   margin-left: 0 ?if $mobile;
 }
 
-.margin-top-collapse-lg {
+.margin-top-md-mobile-sm {
+  margin-top: $margin-md;
+  margin-top: $margin-sm ?if $mobile;
+}
+
+.margin-right-md-mobile-sm {
+  margin-right: $margin-md;
+  margin-right: $margin-sm ?if $mobile;
+}
+
+.margin-bottom-md-mobile-sm {
+  margin-bottom: $margin-md;
+  margin-bottom: $margin-sm ?if $mobile;
+}
+
+.margin-left-md-mobile-sm {
+  margin-left: $margin-md;
+  margin-left: $margin-sm ?if $mobile;
+}
+
+.margin-top-lg-mobile-none {
   margin-top: $margin-lg;
   margin-top: 0 ?if $mobile;
 }
 
-.margin-right-collapse-lg {
+.margin-right-lg-mobile-none {
   margin-right: $margin-lg;
   margin-right: 0 ?if $mobile;
 }
 
-.margin-bottom-collapse-lg {
+.margin-bottom-lg-mobile-none {
   margin-bottom: $margin-lg;
   margin-bottom: 0 ?if $mobile;
 }
 
-.margin-left-collapse-lg {
+.margin-left-lg-mobile-none {
   margin-left: $margin-lg;
   margin-left: 0 ?if $mobile;
+}
+
+.margin-top-negative-md {
+  margin-top: calc($spacer * -3.25);
 }

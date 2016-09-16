@@ -40,12 +40,13 @@
                                     <div class="c-body">
                                         <p>{!! nl2br(trans("content.$type.add.rules")) !!}</p>
 
-                                        @include('component.link', [
+                                        <!--@include('component.link', [
                                             'modifiers' => 'm-icon',
                                             'title' => 'Loe lähemalt',
                                             'route' => '#',
-                                            'icon' => 'icon-arrow-right'
-                                        ])
+                                            'icon' => 'icon-arrow-right',
+                                            'target' => '_blank',
+                                        ])-->
                                     </div>
                                 </div>
                             </div>
@@ -82,13 +83,13 @@
                             <div class="r-block__body">
                                 <div class="c-body">
                                     {!! trans('content.edit.notes.body', [
-                                        'route' => route('content.show', ['static', 22125])
+                                        'route' => route('static.22125')
                                     ]) !!}
 
                                     @include('component.link', [
                                         'modifiers' => 'm-icon',
                                         'title' => trans('content.action.continue.reading'),
-                                        'route' => route('content.show', ['static', 25151]),
+                                        'route' => route('static.25151'),
                                         'icon' => 'icon-arrow-right'
                                     ])
                                 </div>

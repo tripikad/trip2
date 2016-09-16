@@ -2,6 +2,7 @@
 
     $image = $image ?? '';
     $logo = $logo ?? '';
+    $logo_route = $logo_route ?? '';
     $links = $links ?? [];
     $licence = $licence ?? '';
 
@@ -9,12 +10,14 @@
 
 <div
     class="Footer {{ $isclasses }}"
+    @if (!empty($image))
     style="
         background-image: linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
         ),
     url({{ $image }});"
+    @endif
 >    
     <div class="container">
 
@@ -22,7 +25,11 @@
     
             <div class="Footer__col">
                 
+                <a href="{{ $logo_route }}">
+
                 {!! $logo !!}
+
+                </a>
 
             </div>
 
@@ -47,8 +54,11 @@
             @foreach($links['social'] as $link)
             
             <a href="{{ $link->route }}" target="{{ $link->target }}">
-                <component is="Icon" name="{{ $link->icon }}" color="white"></component>
-                <span class="Footer__socialLink">{{ $link->title }}</span>
+                
+                <span class="Footer__socialIcon">{!! $link->icon !!}</span>
+
+                <span class="Footer__socialLink">{!! $link->title !!}</span>
+
             </a>
 
             @endforeach

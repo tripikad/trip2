@@ -1,0 +1,35 @@
+@import "variables";
+
+.Block {
+    background: $gray-light;
+    padding: $padding-md;
+}
+
+.Block--white {
+    background: $white;
+    padding: 0;
+}
+
+    .Block__title {
+        color: $green;
+        font: $font-heading-md;
+        line-height: $line-height-md;
+        margin-bottom: $margin-md;
+    }
+
+.Block--uppercase .Block__title {
+    text-transform: uppercase;
+    font: $font-heading-xs;
+}
+
+.Block--red .Block__title {
+    color: $red;
+}
+
+.Block--yellow .Block__title {
+    color: $yellow;
+}
+
+.Block--dark .Block__title {
+    color: $gray-darkest;
+}

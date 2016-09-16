@@ -1,0 +1,19 @@
+@import "variables";
+
+.Flag {
+    display: flex;
+    align-items: baseline;
+}
+
+    .Flag__icon {
+        margin-right: $margin-xs;
+    }
+
+    .Flag__icon svg {
+        fill: $gray;
+    }
+
+    .Flag__value {
+        font: $font-text-sm;
+        color: $gray-dark;
+    }

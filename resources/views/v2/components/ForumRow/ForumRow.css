@@ -1,0 +1,23 @@
+@import "variables";
+
+.ForumRow {
+    display: flex;
+}
+
+    .ForumRow__left {
+        display: flex;
+        align-items: center;
+        padding-right: $padding-sm;
+        display: none ?if $mobile;
+    }
+
+    .ForumRow__right {
+        display: flex;
+        align-items: center;
+    }
+
+    .ForumRow__title {
+        color: $gray-darkest;
+        font: $font-heading-md;
+        margin-bottom: $margin-xs;
+    }

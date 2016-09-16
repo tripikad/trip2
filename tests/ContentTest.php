@@ -66,7 +66,7 @@ class ContentTest extends TestCase
                     ->type("Hola titulo $type", 'title')
                     ->type("Hola cuerpo $type", 'body')
                     ->press(trans('content.edit.submit.title'))
-                    ->seePageIs("content/$type/$content->id")
+                    ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
                     ->see("Hola titulo $type")
                     ->seeInDatabase('contents', [
                         'user_id' => $regular_user->id,
@@ -115,6 +115,11 @@ class ContentTest extends TestCase
             $this->actingAs($regular_user);
             $response = $this->call('GET', "content/$type/create");
             $this->assertEquals(401, $response->status());
+
+            //skip sponsored and static - we have no index view for them
+            if (in_array($type, ['static', 'sponsored'])) {
+                continue;
+            }
 
             // admin user can create content
             $this->actingAs($creator_user)

@@ -1,0 +1,25 @@
+@import "variables";
+
+.Comment {
+    display: flex;
+    border: $border-gray-md;
+    border-radius: $border-radius-md;
+    padding: $padding-md;
+    padding: $padding-sm ?if $mobile;
+}
+
+    .Comment__left {
+        padding-right: $padding-sm;
+        display: none ?if $mobile;
+        margin-left: calc($spacer * -3.5);
+        margin-top: calc($spacer * -0.75);
+    }
+
+    .Comment__meta {
+        margin-bottom: $margin-sm;
+    }
+
+.Comment--unpublished {
+    opacity: $opacity-md;
+    background: $pink;
+}

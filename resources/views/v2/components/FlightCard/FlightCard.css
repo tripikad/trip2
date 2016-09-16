@@ -1,0 +1,18 @@
+@import "variables";
+
+.FlightCard {
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    padding: $padding-md;
+    height: $height-xxl;
+}
+
+    .FlightCard__title {
+        color: $white;
+        font: $font-heading-lg;
+        line-height: $line-height-md;
+        text-align: center;
+        text-shadow: $text-shadow;
+    }

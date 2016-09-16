@@ -21,6 +21,7 @@ return [
     'show.user.button.dontwanttogo' => 'Ma ei taha sinna minna',
 
     'show.forum.title' => 'Tripikad räägivad',
+    'show.popular.title.short' => 'Populaarsed sihtkohad',
     'show.popular.title' => 'Populaarsed sihtkohad - :destination',
     'show.news.title' => 'Uudised',
     'show.gallery.title' => 'Viimati lisatud pildid',

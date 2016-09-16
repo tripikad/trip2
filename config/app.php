@@ -151,6 +151,9 @@ return [
         Laravelista\Ekko\EkkoServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
+        // GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -216,6 +219,8 @@ return [
         'Feed'      => Roumen\Feed\Feed::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Ekko'      => Laravelista\Ekko\Facades\Ekko::class,
+        // 'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+
     ],
 
 ];

@@ -22,16 +22,16 @@
     export default {
 
         props: {
-            size: { default: 50 },
+            size: { default: 36 },
             border: { default: 4 },
+            startangle: { default: 0 },
             endangle: { default: 270 },
-            color: { default: 'black' }
+            color: { default: '' }
         },
 
         data() {
             return {
-                arc: '',
-                startangle: 0
+                arc: ''
             }
         },
 

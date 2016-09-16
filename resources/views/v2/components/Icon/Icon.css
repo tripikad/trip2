@@ -1,0 +1,17 @@
+@import "variables";
+
+.Icon--gray {
+    fill: $gray;
+}
+
+.Icon--darkGray {
+    fill: $gray-darkest;
+}
+
+.Icon--white {
+    fill: $white;
+}
+
+.Icon--blue {
+    fill: $blue;
+}

@@ -1,0 +1,61 @@
+@import "variables";
+
+    .Gallery__image {
+    	cursor: pointer;
+        width: 100%;
+    }
+
+    .Gallery__fullscreen {
+        align-items: center;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 99vw;
+        z-index: 1;
+    }
+
+	.Gallery__close {
+        cursor: pointer;
+        position: absolute;
+        right: $margin-md;
+        top: $margin-md;
+        z-index: 10;
+	}
+
+	.Gallery__fullImage {
+        height: auto;
+        max-width: 100%;
+        width: auto;
+	}
+
+	.Gallery__fullMeta {
+        bottom: $margin-lg;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+	}
+
+	.Gallery__left,
+    .Gallery__right {
+        align-items: center;
+        cursor: pointer;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        padding: $padding-md;
+        position: absolute;
+        z-index: 5;
+	}
+
+    .Gallery__left {
+        left: 0;
+    }
+
+	.Gallery__right {
+        right: 0;
+	}

@@ -1,0 +1,23 @@
+@import "variables";
+
+.Alert {
+    align-items: center;
+    border-radius: $border-radius-md;
+    border: $border-green-md;
+    display: flex;
+    justify-content: space-between;
+    padding: $padding-md;
+}
+
+    .Alert__title {
+        font: $font-heading-md;
+        color: $green;
+    }
+
+    .Alert__close {
+        cursor: pointer;
+    }
+
+    .Alert__close svg {
+        fill: $green;
+    }

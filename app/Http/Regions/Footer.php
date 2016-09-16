@@ -2,7 +2,6 @@
 
 namespace App\Http\Regions;
 
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class Footer
@@ -14,18 +13,22 @@ class Footer
                 return (object) [
                     'title' => trans("menu.$menuKey.$key"),
                     'route' => $value['route'],
-                    'icon' => $value['icon'] ?? '',
+                    'icon' => isset($value['icon'])
+                        ? component('Icon')->is('white')->with('icon', $value['icon'])
+                        : '',
                     'target' => isset($value['external']) ? '_blank' : '',
                 ];
             });
     }
 
-    public function render(Request $request)
+    public function render()
     {
         return component('Footer')
             ->with('image', '/photos/footer.jpg')
+            ->with('logo_route', route('frontpage.index'))
             ->with('logo', component('Icon')
-                ->with('name', 'tripee_logo_plain')
+                ->is('white')
+                ->with('icon', 'tripee_logo_plain')
                 ->with('width', '100')
                 ->with('height', '25')
                 ->with('color', 'white')

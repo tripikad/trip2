@@ -350,13 +350,13 @@
                             'type' => $photo->type,
                             'image' => $photo->imagePreset('small'),
                             'image_large' => $photo->imagePreset('large'),
-                            'route' => route('content.show', [$photo->type, $photo]),
+                            'route' => route($photo->type.'.show', [$photo->slug]),
                             'alt' => $photo->title,
                             'tags' => $photo->destinations->transform(function($destination) {
                                 return [
                                     'title' => $destination->name,
                                     'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
-                                    'route' => route('destination.show', $destination)
+                                    'route' => route('destination.slug', $destination->slug)
                                 ];
                             })
                         ];
@@ -387,7 +387,7 @@
                             @include('component.link', [
                                 'modifiers' => 'm-icon m-right m-small',
                                 'title' => trans('menu.forum.forum'),
-                                'route' => route('content.index', ['forum']),
+                                'route' => route('forum.index'),
                                 'icon' => 'icon-arrow-right'
                             ])
 
@@ -418,7 +418,7 @@
                             @include('component.link', [
                                 'modifiers' => 'm-icon m-right m-small',
                                 'title' => trans('site.link.read.more'),
-                                'route' => route('content.index', ['blog']),
+                                'route' => route('blog.index'),
                                 'icon' => 'icon-arrow-right'
                             ])
                         </div>
@@ -427,7 +427,7 @@
                     @foreach ($blog_posts as $blog_post)
                         @include('component.blog', [
                             'title' => $blog_post->title,
-                            'route' => route('content.show', [$blog_post->type, $blog_post]),
+                            'route' => route($blog_post->type.'.show', [$blog_post->slug]),
                             'image' => $blog_post->imagePreset(),
                         ])
                     @endforeach
@@ -458,7 +458,7 @@
 
                         <div class="c-columns__item">
                             @include('component.card', [
-                                'route' => route('content.show', [$flight->type, $flight]),
+                                'route' => route($flight->type.'.show', [$flight->slug]),
                                 'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
                                 'image' => $flight->imagePreset()
                             ])

@@ -59,7 +59,7 @@
                     return [
                         'modifiers' => 'm-yellow',
                         'title' => $destination->name,
-                        'route' => route('destination.show', [$destination->id])
+                        'route' => route('destination.slug', $destination->slug)
                     ];
                 }),
                 'tags2' => $content->topics->transform(function ($topic) {
@@ -72,7 +72,7 @@
             ])
 
             @if ($comments->count())
-                <a href="{{ route('content.show', [$content->type, $content]) . ($comments->lastPage() > 1 ? '?page=' . $comments->lastPage() : '') . '#comment-' . $comments->last()->id }}" class="m-center m-medium-offset-bottom">{{ trans('comment.action.latest.comment') }}</a>
+                <a href="{{ route($content->type.'.show', [$content->slug]) . ($comments->lastPage() > 1 ? '?page=' . $comments->lastPage() : '') . '#comment-' . $comments->last()->id }}" class="m-center m-medium-offset-bottom">{{ trans('comment.action.latest.comment') }}</a>
             @endif
 
             @if ($comments->perPage() < $comments->total())
@@ -144,19 +144,19 @@
                     'items' => [
                         [
                             'title' => trans('frontpage.index.forum.general'),
-                            'route' => route('content.index', 'forum'),
+                            'route' => route('forum.index'),
                             'modifiers' => 'm-large m-block m-icon',
                             'icon' => 'icon-arrow-right'
                         ],
                         [
                             'title' => trans('frontpage.index.forum.buysell'),
-                            'route' => route('content.index', 'buysell'),
+                            'route' => route('buysell.index'),
                             'modifiers' => 'm-large m-block m-icon',
                             'icon' => 'icon-arrow-right'
                         ],
                         [
                             'title' => trans('frontpage.index.forum.expat'),
-                            'route' => route('content.index', 'expat'),
+                            'route' => route('expat.index'),
                             'modifiers' => 'm-large m-block m-icon',
                             'icon' => 'icon-arrow-right'
                         ],
@@ -190,12 +190,12 @@
                         @include('component.destination', [
                             'modifiers' => 'm-purple',
                             'title' => $first_destination->name,
-                            'title_route' => route('destination.show', [
-                                $first_destination
+                            'title_route' => route('destination.slug', [
+                                $first_destination->slug
                             ]),
                             'subtitle' => $first_destination_parent ? $first_destination_parent->name : null,
-                            'subtitle_route' => $first_destination_parent ? route('destination.show', [
-                                $first_destination_parent
+                            'subtitle_route' => $first_destination_parent ? route('destination.slug', [
+                                $first_destination_parent->slug
                             ]) : null
                         ])
 
@@ -221,7 +221,7 @@
                                 'items' => $first_relative_posts->transform(function ($post) {
                                     return [
                                         'topic' => str_limit($post->title, 25),
-                                        'route' => route('content.show', [$post->type, $post]),
+                                        'route' => route($post->type.'.show', [$post->slug]),
                                         'profile' => [
                                             'modifiers' => 'm-mini',
                                             'image' => $post->user->imagePreset(),
@@ -258,12 +258,12 @@
                         @include('component.destination', [
                             'modifiers' => 'm-blue',
                             'title' => $second_destination->name,
-                            'title_route' => route('destination.show', [
-                                $second_destination
+                            'title_route' => route('destination.slug', [
+                                $second_destination->slug
                             ]),
                             'subtitle' => $second_destination_parent ? $second_destination_parent->name : null,
-                            'subtitle_route' => $second_destination_parent ? route('destination.show', [
-                                $second_destination_parent
+                            'subtitle_route' => $second_destination_parent ? route('destination.slug', [
+                                $second_destination_parent->slug
                             ]) : null
                         ])
 
@@ -289,7 +289,7 @@
                                 'items' => $second_relative_posts->transform(function ($post) {
                                     return [
                                         'topic' => str_limit($post->title, 25),
-                                        'route' => route('content.show', [$post->type, $post]),
+                                        'route' => route($post->type.'.show', [$post->slug]),
                                         'profile' => [
                                             'modifiers' => 'm-mini',
                                             'image' => $post->user->imagePreset(),
@@ -323,7 +323,7 @@
 
                     @foreach ($relative_flights as $flight)
                         @include('component.card', [
-                            'route' => route('content.show', [$flight->type, $flight]),
+                            'route' => route($flight->type.'.show', [$flight->slug]),
                             'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
                             'image' => $flight->imagePreset()
                         ])
@@ -358,19 +358,19 @@
                                 'items' => [
                                     [
                                         'title' => trans('frontpage.index.forum.general'),
-                                        'route' => route('content.index', 'forum'),
+                                        'route' => route('forum.index'),
                                         'modifiers' => 'm-large m-block m-icon',
                                         'icon' => 'icon-arrow-right'
                                     ],
                                     [
                                         'title' => trans('frontpage.index.forum.buysell'),
-                                        'route' => route('content.index', 'buysell'),
+                                        'route' => route('buysell.index'),
                                         'modifiers' => 'm-large m-block m-icon',
                                         'icon' => 'icon-arrow-right'
                                     ],
                                     [
                                         'title' => trans('frontpage.index.forum.expat'),
-                                        'route' => route('content.index', 'expat'),
+                                        'route' => route('expat.index'),
                                         'modifiers' => 'm-large m-block m-icon',
                                         'icon' => 'icon-arrow-right'
                                     ]
@@ -384,7 +384,7 @@
                                 'items' => $forums->transform(function ($forum) {
                                     return [
                                         'topic' => str_limit($forum->title, 50),
-                                        'route' => route('content.show', [$forum->type, $forum]),
+                                        'route' => route($forum->type.'.show', [$forum->slug]),
                                         'date' => view('component.date.relative', [
                                             'date' => $forum->created_at
                                         ]),
@@ -404,7 +404,7 @@
                                             return [
                                                 'title' => $destination->name,
                                                 'modifiers' => ['m-gray', 'm-green', 'm-blue', 'm-orange', 'm-yellow', 'm-red'][$key],
-                                                'route' => route('content.index', [$forum->type]).'?topic='.$destination->id,
+                                                'route' => route($forum->type.'.index').'?topic='.$destination->id,
                                             ];
                                         })
                                     ];
@@ -425,7 +425,7 @@
                                 <div class="c-columns__item">
 
                                     @include('component.card', [
-                                        'route' => route('content.show', [$flight->type, $flight]),
+                                        'route' => route($flight->type.'.show', [$flight->slug]),
                                         'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
                                         'image' => $flight->imagePreset()
                                     ])
@@ -464,7 +464,7 @@
                                             $travel_mate->user->real_name
                                         :
                                             $travel_mate->user->name,
-                                    'route' => route('content.show', [$travel_mate->type, $travel_mate]),
+                                    'route' => route($travel_mate->type.'.show', [$travel_mate->slug]),
                                     'sex_and_age' =>
                                         ($travel_mate->user->gender ?
                                             trans('user.gender.'.$travel_mate->user->gender).

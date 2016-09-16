@@ -3,6 +3,144 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\ContentController;
 
+// V2
+
+// Styleguide
+
+Route::get('v2/index', [
+    'uses' => 'V2StyleguideController@index',
+    'as' => 'styleguide.index',
+]);
+
+Route::post('v2/styleguide/form', [
+    'uses' => 'V2StyleguideController@form',
+    'as' => 'styleguide.form',
+]);
+
+Route::post('v2/styleguide/flag', [
+    'uses' => 'V2StyleguideController@flag',
+    'as' => 'styleguide.flag',
+]);
+
+// Frontpage
+
+Route::get('v2/frontpage', [
+    'uses' => 'V2FrontpageController@index',
+    'as' => 'v2.frontpage.index',
+]);
+
+// News
+
+Route::get('v2/news', [
+    'uses' => 'V2NewsController@index',
+    'as' => 'v2.news.index',
+]);
+
+Route::get('v2/news/{slug}', [
+    'uses' => 'V2NewsController@show',
+    'as' => 'v2.news.show',
+]);
+
+Route::get('v2/news/{id}/edit', [
+    'uses' => 'V2NewsController@edit',
+    'as' => 'v2.news.edit',
+]);
+
+// Flight
+
+Route::get('v2/flight', [
+    'uses' => 'V2FlightController@index',
+    'as' => 'v2.flight.index',
+]);
+
+Route::get('v2/flight/{slug}', [
+    'uses' => 'V2FlightController@show',
+    'as' => 'v2.flight.show',
+]);
+
+Route::get('v2/flight/{id}/edit', [
+    'uses' => 'V2FlightController@edit',
+    'as' => 'v2.flight.edit',
+]);
+
+// Travelmates
+
+Route::get('v2/travelmate', [
+    'uses' => 'V2TravelmateController@index',
+    'as' => 'v2.travelmate.index',
+]);
+
+Route::get('v2/travelmate/{slug}', [
+    'uses' => 'V2TravelmateController@show',
+    'as' => 'v2.travelmate.show',
+]);
+
+// Forum
+
+Route::get('v2/forum', [
+    'uses' => 'V2ForumController@index',
+    'as' => 'v2.forum.index',
+]);
+
+Route::get('v2/forum/{slug}', [
+    'uses' => 'V2ForumController@show',
+    'as' => 'v2.forum.show',
+]);
+
+// Static
+
+Route::get('v2/static', [
+    'uses' => 'V2StaticController@index',
+    'as' => 'v2.static.index',
+]);
+
+Route::get('v2/static/{id}', [
+    'uses' => 'V2StaticController@show',
+    'as' => 'v2.static.show',
+]);
+
+// User
+
+Route::get('v2/user/{id}', [
+    'uses' => 'V2UserController@show',
+    'as' => 'v2.user.show',
+]);
+
+// Destination
+
+Route::get('v2/destination/{id}', [
+    'uses' => 'V2DestinationController@show',
+    'as' => 'v2.destination.show',
+]);
+
+
+// Utils
+
+Route::get('v2/utils/alert', [
+    'uses' => 'V2UtilsController@alert',
+    'as' => 'utils.alert',
+]);
+
+
+Route::get('share/{social}', [
+    'uses' => 'V2SocialController@share',
+    'as' => 'utils.share',
+    ]);
+
+
+Route::post('v2/utils/format', [
+    'uses' => 'V2UtilsController@format',
+    'as' => 'utils.format',
+]);
+
+Route::post('v2/image/store', [
+    'uses' => 'V2StyleguideController@store',
+    'as' => 'image.store',
+]);
+
+
+// V1
+
 // Frontpage
 
 Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
@@ -51,6 +189,38 @@ Route::post('reset/apply', ['uses' => 'Auth\ResetController@postEmail', 'as' => 
 Route::get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordForm', 'as' => 'reset.password.form']);
 
 Route::post('reset/password', ['uses' => 'Auth\ResetController@postReset', 'as' => 'reset.password.submit']);
+
+//SEO content
+
+foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $type) {
+    Route::group(['prefix' => $slugType, 'as' => $type.'.'], function () use ($type) {
+        Route::get('/', ['middleware' => null, 'as' => 'index', function () use ($type) {
+            $controller = new ContentController;
+
+            return $controller->index(app('request'), $type);
+        }]);
+
+        Route::get('{slug}', ['middleware' => null, 'as' => 'show', function ($slug) use ($type) {
+            $controller = new ContentController;
+
+            return $controller->findBySlugAndType($type, $slug);
+        }]);
+    });
+}
+
+//SEO static
+
+foreach (config('sluggable.staticContentMapping') as $static_id => $slug) {
+    Route::get($slug, ['middleware' => null, 'as' => 'static.'.$static_id, function () use ($static_id) {
+        $controller = new ContentController;
+
+        return $controller->show('static', $static_id);
+    }]);
+}
+
+//SEO destination
+
+Route::get('sihtkoht/{slug}', ['middleware' => null, 'uses' => 'DestinationController@showSlug', 'as' => 'destination.slug']);
 
 // Content
 
@@ -181,10 +351,6 @@ Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 
 Route::get('index.atom', ['uses' => 'FeedController@newsFeed', 'as' => 'news.feed']);
 
 Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightFeed', 'as' => 'flight.feed']);
-
-// Styleguide
-
-Route::get('styleguide', 'StyleguideController@index');
 
 // API
 

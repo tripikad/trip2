@@ -2,19 +2,20 @@
 
 .Body {
     font: $font-text-md;
+    line-height: $line-height-lg;
 }
 
 .Body--responsive {
     font-family: $font-family;
     font-size: responsive;
-    line-height: $line-height-md;
+    line-height: $line-height-lg;
     max-font-size: $font-size-lg;
     min-font-size: $font-size-md;
 }
 
 .Body,
 .Body * {
-    color: $gray;
+    color: $gray-darkest;
 }
 
 .Body p {
@@ -32,7 +33,7 @@
 }
 
 .Body h4 {
-    color: $gray-light;
+    color: $gray-darker;
     font-size: responsive;
     font-weight: $font-weight-semibold;
     margin: $margin-topbottom-xs;
@@ -46,6 +47,7 @@
     color: $blue;
     text-decoration: underline;
     word-wrap: break-word;
+    word-break: break-word;
 }
 
 .Body ul {
@@ -59,55 +61,33 @@
 }
 
 .Body table {
-    border-collapse: collapse;
-    border: 1px solid $gray-lighter;
-    margin: $margin-md 0;
     width: 100%;
+    border: 1px solid $gray;
+    border-collapse: collapse;
+    margin: $margin-md 0;
 }
 
-.Body th {
-    font-weight: $font-weight-semibold;
-    border-bottom: 1px solid $gray-lighter;
-    text-align: left;
-    vertical-align: top;
-}
-
+.Body th,
 .Body tr {
-    border-bottom: 1px solid $gray-lighter;
+    border-bottom: 1px solid $gray;
     text-align: left;
     vertical-align: top;
 }
 
 .Body th {
-    background: $gray-lightest;
+    background: $gray-light;
+    font: $font-heading-md;
 }
 
 .Body th,
 .Body td {
-    border-right: 1px solid #;
     padding: $padding-xs;
+    border-right: 1px solid #;
 }
 
 .Body hr {
-    border-top: 1px solid $gray-light;
+    border-top: 1px solid $gray;
     border: 0;
     height: 0;
     margin: $margin-md 0;
-}
-
-.Body .iframeWrapper {
-    height: 0;
-    max-width: 100%;
-    overflow: hidden;
-    padding-bottom: 56.25%;
-    position: relative;
-    margin-bottom: $margin-md;
-}
-
-.Body .iframeWrapper > iframe {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
 }

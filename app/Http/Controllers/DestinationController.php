@@ -191,4 +191,11 @@ class DestinationController extends Controller
             'destination_info' => $destination_info,
         ])->header('Cache-Control', 'public, s-maxage='.config('cache.destination.header'));
     }
+
+    public function showSlug($slug)
+    {
+        $destination = Destination::findBySlugOrFail($slug);
+
+        return $this->show($destination->id);
+    }
 }
