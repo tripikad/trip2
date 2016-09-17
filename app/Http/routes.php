@@ -138,6 +138,11 @@ Route::post('v2/image/store', [
     'as' => 'image.store',
 ]);
 
+Route::post('v2/utils/filter', [
+    'uses' => 'V2UtilsController@filter',
+    'as' => 'utils.filter',
+]);
+
 
 // V1
 
@@ -225,7 +230,11 @@ Route::get('sihtkoht/{slug}', ['middleware' => null, 'uses' => 'DestinationContr
 // Content
 
 Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
-    Route::get('/', ['middleware' => null, 'uses' => 'ContentController@index', 'as' => 'index']);
+    Route::get('/', ['middleware' => null, 'as' => 'index', function ($type) {
+        return redirect()->route(
+            $type.'.index', [
+        ], 301);
+    }]);
 
     Route::get('create', ['middleware' => 'role:regular', 'as' => 'create', function ($type) {
         $controller = new ContentController;
@@ -253,7 +262,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
         }
     }]);
 
-    Route::get('{id}', ['middleware' => null, 'uses' => 'ContentController@show', 'as' => 'show']);
+    Route::get('{id}', ['middleware' => null, 'uses' => 'ContentController@showWithRedirect', 'as' => 'show']);
 
     Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'as' => 'edit', function ($type, $id) {
         $controller = new ContentController;

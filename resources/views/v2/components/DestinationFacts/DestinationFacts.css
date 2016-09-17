@@ -1,0 +1,7 @@
+@import "variables";
+
+.DestinationFacts__description {
+    font: $font-text-md;
+    color: $white;
+    line-height: $line-height-xl;
+}

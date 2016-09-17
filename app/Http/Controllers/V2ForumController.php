@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Request;
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -11,23 +12,44 @@ class V2ForumController extends Controller
 {
     public function index()
     {
-        $forums = Content::getLatestPagedItems('forum');
+        $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
+
+        $forums = Content::getLatestPagedItems('forum', false, $currentDestination, $currentTopic);
         $flights = Content::getLatestItems('flight', 3);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
         return view('v2.layouts.2col')
+
             ->with('header', region('HeaderLight', trans('content.forum.index.title')))
+
             ->with('content', collect()
                 ->merge($forums->map(function ($forum) {
                     return region('ForumRow', $forum);
                 }))
+                ->push(component('Paginator')
+                    ->with('links', $forums->appends([
+                        'destination' => $currentDestination,
+                        'topic' => $currentTopic,
+                    ])
+                    ->links())
+                )
             )
+
             ->with('sidebar', collect()
                 ->merge(region('ForumLinks'))
                 ->push(region('ForumAbout'))
                 ->push(component('Block')->with('content', collect()
-                    ->push(region('Filter', $destinations, $topics))
+                    ->push(region(
+                        'Filter',
+                        $destinations,
+                        $topics,
+                        $currentDestination,
+                        $currentTopic,
+                        $forums->currentPage(),
+                        'v2.forum.index'
+                    ))
                 ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))

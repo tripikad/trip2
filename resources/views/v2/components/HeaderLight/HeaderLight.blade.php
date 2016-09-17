@@ -40,7 +40,7 @@ $background = $background ?? '';
 
     </div>
 
-        <div class="HeaderLight__background" style="background-image: url({{ $background }})"></div>
-
+    {!! $background !!}
+    
     
 </div>

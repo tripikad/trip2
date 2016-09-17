@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Request;
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -10,7 +11,10 @@ class V2NewsController extends Controller
 {
     public function index()
     {
-        $news = Content::getLatestPagedItems('news');
+        $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
+
+        $news = Content::getLatestPagedItems('news', false, $currentDestination, $currentTopic);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
@@ -26,14 +30,22 @@ class V2NewsController extends Controller
                     })
                     )
                 )
+                ->push(component('Paginator')->with('links', $news->links()))
             )
 
             ->with('sidebar', collect()
                 ->push(region('NewsAbout'))
                 ->push(component('Block')->with('content', collect()
-                        ->push(region('Filter', $destinations, $topics))
-                    )
-                )
+                    ->push(region(
+                        'Filter',
+                        $destinations,
+                        $topics,
+                        $currentDestination,
+                        $currentTopic,
+                        $news->currentPage(),
+                        'v2.news.index'
+                    ))
+                ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
