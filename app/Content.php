@@ -69,7 +69,7 @@ class Content extends Model
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
-            ->skip(30)
+            //->skip(30)
             ->latest()
             ->with(
                 'images',
@@ -89,7 +89,7 @@ class Content extends Model
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
-            ->skip(30)
+            //->skip(30)
             ->latest()
             ->with(
                 'images',

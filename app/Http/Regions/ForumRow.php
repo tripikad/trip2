@@ -6,6 +6,13 @@ class ForumRow
 {
     public function render($forum)
     {
+        $newcomments = $forum->comments->map(function($comment) {
+            if($comment->vars()->isNewComment($comment)){
+                return $comment;
+            }
+        });
+
+
         return component('ForumRow')
             ->with('route', route('v2.forum.show', [$forum->slug]))
             ->with('user', component('UserImage')
@@ -26,6 +33,9 @@ class ForumRow
                     )
                     ->pushWhen($forum->vars()->isNewContent($forum), component('MetaLink')
                         ->with('title', 'unread')
+                        )
+                    ->pushWhen($newcomments->count() > 0, component('MetaLink')
+                        ->with('title', "unread comments ".$newcomments->count())
                         )
                     ->merge($forum->destinations->map(function ($tag) {
                         return component('Tag')->is('orange')->with('title', $tag->name);
