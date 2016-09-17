@@ -174,7 +174,7 @@ class ContentController extends Controller
         $viewVariables['content'] = $content;
         $viewVariables['comments'] = $comments;
         $viewVariables['type'] = $type;
-        
+
 
 
            // We get the current user id if logged in
