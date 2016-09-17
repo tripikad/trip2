@@ -1,7 +1,7 @@
 @import "variables";
 
 .DestinationBar {
-    background: $orange;
+    background: $yellow;
     display: flex;
     height: calc($spacer * 6.5);
     align-items: center;
@@ -13,11 +13,12 @@
 }
 
 .DestinationBar--dark {
-    background: $orange-dark;
+    background: $yellow-dark;
 }
 
     .DestinationBar__icon {
         padding-right: $padding-xs;
+        width: $width-md;
     }
 
     .DestinationBar__icon svg {

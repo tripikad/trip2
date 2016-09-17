@@ -5,9 +5,9 @@
         <component
             is="Multiselect"
             :selected="selected"
-            :multiple="multiple",
+            :multiple="false",
             :searchable="true",
-            :options="options",
+            :options="currentOptions",
             @update="updateValue"
             :placeholder="placeholder"
             label="name"
@@ -15,22 +15,12 @@
         >
         </component>
 
-        <select
-            v-if="multiple"
-            v-show="false"
-            :name="name + '[]'
-            multiple
-        ">
-            <option v-for="item in selected" :value="item.id" selected>{{ item.name }}</option>
-        </select>
-
         <input
-            v-if="!multiple"
             v-show="false"
             type="text"
             :name="name"
-            :value="selected ? selected.id : ''
-        ">
+            :value="selected ? selected.id : ''"
+        >
 
     </div>
 
@@ -50,12 +40,13 @@
             options: { default: '' },
             placeholder: { default: '' },
             helper: { default: '' },
-            multiple: { default: '' }
+            value: { default: '' }
         },
 
         data() {
             return {
-                selected: null
+                selected: {},
+                currentOptions: []
             }
         },
 
@@ -66,14 +57,9 @@
         },
 
         ready() {
-            this.multiple = this.multiple
-                ? JSON.parse(decodeURIComponent(this.multiple))
-                : []
-            this.options = this.options
-                ? JSON.parse(decodeURIComponent(this.options))
-                : []
+            this.currentOptions = JSON.parse(decodeURIComponent(this.options))
+            this.selected = this.currentOptions.find((option) => option.id === parseInt(this.value))
         }
-
     }
 
 </script>

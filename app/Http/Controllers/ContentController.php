@@ -214,6 +214,19 @@ class ContentController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
     }
 
+    public function showWithRedirect($type, $id)
+    {
+        $content = Content::findorFail($id);
+
+        if ('static' === $type) {
+            return redirect()->route(
+                'static.'.$id, [], 301);
+        }
+
+        return redirect()->route(
+            $type.'.show', [$content->slug], 301);
+    }
+
     public function create($type)
     {
         $destinations = Destination::getNames();

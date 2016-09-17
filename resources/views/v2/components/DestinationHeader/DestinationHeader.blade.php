@@ -5,37 +5,34 @@ $header = $header ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
 $navbar = $navbar ?? '';
+$background = $background ?? '';
 
 @endphp
 
-<div class="DestinationMasthead {{ $isclasses }}">
-
-    <div class="DestinationMasthead__map">
-
-        {!! $map !!}
-        
-    </div>
+<div class="DestinationHeader {{ $isclasses }}">
 
     <div class="container">
 
-        <div class="DestinationMasthead__navbar">
+        <div class="DestinationHeader__navbar">
 
             {!! $navbar !!}
             
         </div>
 
-        <div class="DestinationMasthead__name">
+        <div class="DestinationHeader__name">
 
             {!! $name !!}
 
         </div>
 
-        <div class="DestinationMasthead__meta">
+        <div class="DestinationHeader__facts">
 
-            {!! $meta !!}
+            {!! $facts !!}
 
         </div>
 
     </div>
     
+    {!! $background !!}
+
 </div>

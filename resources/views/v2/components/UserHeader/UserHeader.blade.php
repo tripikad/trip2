@@ -4,18 +4,11 @@ $map = $map ?? '';
 $header = $header ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
+$background = $background ?? '';
 
 @endphp
 
 <div class="UserHeader {{ $isclasses }}">
-
-    <div class="UserHeader__map">
-
-        {!! $map !!}
-        
-    </div>
-
-    <div class="UserHeader__bottom">
 
     <div class="container">
 
@@ -45,6 +38,6 @@ $meta = $meta ?? '';
 
     </div>
 
-    </div>
-    
+    {!! $background !!}
+
 </div>

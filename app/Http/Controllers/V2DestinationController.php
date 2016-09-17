@@ -35,7 +35,15 @@ class V2DestinationController extends Controller
                     )
                 )
                 ->push(region('Gallery', $photos))
-                ->push(region('ForumSidebar', $forums))
+                ->push(component('Block')
+                    ->is('uppercase')
+                    ->is('white')
+                    ->with('title', trans('destination.show.forum.title'))
+                    ->with('content', $forums->map(function ($forum) {
+                        return region('ForumRowSmall', $forum);
+                    })
+                    )
+                )
                 ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Grid3')
                     ->with('gutter', true)
