@@ -67,7 +67,7 @@ class CommentController extends Controller
 
                     // For each active user we store the cache key about new added comment
 
-                    $key = 'new_'.$comment->content_id.'_'.$user->id;
+                    $key = 'new_'.$comment->id.'_'.$user->id;
 
                     // We will not overwrite the cache if there are unread comments already
 

@@ -52,7 +52,7 @@ class V2ContentVars
         return format_date($this->content->created_at);
     }
 
-    public static function IsNewContent($content)
+    public static function IsNew($content)
     {
         if (auth()->check()) {
             $userId = auth()->id();

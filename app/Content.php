@@ -102,10 +102,6 @@ class Content extends Model
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
-<<<<<<< HEAD
-            //->skip(30)
-=======
->>>>>>> refs/remotes/origin/master
             ->latest()
             ->with(
                 'images',
