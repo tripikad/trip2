@@ -24,6 +24,9 @@ class ForumRow
                     ->push(component('MetaLink')
                         ->with('title', $forum->vars()->created_at)
                     )
+                    ->pushWhen($forum->vars()->isNewContent($forum), component('MetaLink')
+                        ->with('title', 'unread')
+                        )
                     ->merge($forum->destinations->map(function ($tag) {
                         return component('Tag')->is('orange')->with('title', $tag->name);
                     }))

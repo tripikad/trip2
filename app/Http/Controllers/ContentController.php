@@ -107,9 +107,6 @@ class ContentController extends Controller
             $viewVariables = $this->getFlightIndex($contents, $topics);
         }
 
-            // We get the current user id
-        $contents = Content::IsNewContent($contents);
-
         $viewVariables['contents'] = $contents;
         $viewVariables['type'] = $type;
         $viewVariables['destination'] = $request->destination;
@@ -174,10 +171,10 @@ class ContentController extends Controller
             $viewVariables = $this->getFlightShow($content);
         }
 
-        $viewVariables['forums'] = Content::IsNewContent($viewVariables['forums']);
         $viewVariables['content'] = $content;
         $viewVariables['comments'] = $comments;
         $viewVariables['type'] = $type;
+        
 
 
            // We get the current user id if logged in

@@ -88,8 +88,6 @@ class FrontpageController extends Controller
 
         $viewVariables['destinations'] = $destinations;
 
-        $viewVariables['forums'] = Content::IsNewContent($viewVariables['forums']);
-
         $getParentDestinations = [
             'flights1',
         ];

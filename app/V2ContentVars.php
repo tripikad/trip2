@@ -3,6 +3,7 @@
 namespace App;
 
 use Exception;
+use Cache;
 
 class V2ContentVars
 {
@@ -50,4 +51,28 @@ class V2ContentVars
     {
         return format_date($this->content->created_at);
     }
+
+    public static function IsNewContent($content)
+    {
+        if (auth()->check()) {
+            $userId = auth()->id();
+
+                $key = 'new_'.$content->id.'_'.$userId;
+
+                // If the post is unread by the user or there are new comments
+
+                if (Cache::has($key)) {
+
+                    // Mark post as new so the view can style the post accordingly
+
+                    return true;
+
+                }
+
+                return false;
+        }
+
+        return false;
+    }
+
 }
