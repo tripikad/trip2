@@ -16,10 +16,7 @@
         margin-bottom: $margin-md;
     }
 
-    .DestinationHeader__meta {
-        color: $white;
-        font: $font-text-md;
-        line-height: $line-height-xl;
+    .DestinationHeader__facts {
         width: 50%;
         width: 100% ?if $mobile;
     }

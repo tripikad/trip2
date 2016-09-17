@@ -25,9 +25,9 @@ $background = $background ?? '';
 
         </div>
 
-        <div class="DestinationHeader__meta">
+        <div class="DestinationHeader__facts">
 
-            {!! $meta !!}
+            {!! $facts !!}
 
         </div>
 
