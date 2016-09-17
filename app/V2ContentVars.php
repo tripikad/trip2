@@ -71,9 +71,7 @@ class V2ContentVars
                     // so the user will be redirected to the first new comment
 
                     if ($newId > 0) {
-
                         $content->route = $newId;
-
                     }
                 }
 
