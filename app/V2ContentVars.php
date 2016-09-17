@@ -31,6 +31,12 @@ class V2ContentVars
         return $this->content->title;
     }
 
+    public function titleWithIntro()
+    {
+        return str_limit($this->content->title.
+            ' <span style="opacity:0.1;">'.$this->content->body.'</span>', 100);
+    }
+
     public function shortTitle()
     {
         return str_limit($this->content->title, 60);

@@ -2,6 +2,9 @@
 
 $header = $header ?? '';
 $content = $content ?? collect();
+$content_mid_left = $content_mid_left ?? collect();
+$content_mid_right = $content_mid_right ?? collect();
+$content2 = $content2 ?? collect();
 $bottom = $bottom ?? collect();
 $footer = $footer ?? '';
 
@@ -19,9 +22,51 @@ $footer = $footer ?? '';
 
         <div class="row row-center padding-bottom-md">
 
-            <div class="col-10">
+            <div class="col-12">
 
-                @foreach ($content->withoutLast() as $content_item)
+                @foreach ($content as $content_item)
+                
+                <div class="margin-bottom-md">
+
+                    {!! $content_item !!}
+                        
+                </div>
+
+                @endforeach
+
+                <div class="row row-between">
+
+                    <div class="col-9">
+
+                        @foreach ($content_mid_left as $content_mid_left_item)
+                        
+                        <div class="margin-bottom-md">
+
+                            {!! $content_mid_left_item !!}
+                                
+                        </div>
+
+                        @endforeach
+
+                    </div>
+
+                    <div class="col-3">
+
+                        @foreach ($content_mid_right as $content_mid_right_item)
+                        
+                        <div class="margin-bottom-md">
+
+                            {!! $content_mid_right_item !!}
+                                
+                        </div>
+
+                        @endforeach
+
+                    </div>
+
+                </div>
+
+                @foreach ($content2 as $content_item)
                 
                 <div class="margin-bottom-lg">
 
@@ -30,12 +75,6 @@ $footer = $footer ?? '';
                 </div>
 
                 @endforeach
-
-                <div>
-
-                    {!! $content->last() !!}
-                        
-                </div>
 
             </div>
 
@@ -62,5 +101,3 @@ $footer = $footer ?? '';
 @endsection
 
 @section('footer', $footer)
-
-

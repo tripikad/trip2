@@ -15,7 +15,7 @@ class ForumRow
                 ->with('size', 48)
                 ->with('border', 4)
             )
-            ->with('title', $forum->title)
+            ->with('title', $forum->vars()->titleWithIntro)
             ->with('meta', component('Meta')->with('items', collect()
                     ->push(component('MetaLink')
                         ->with('title', $forum->user->vars()->name)
