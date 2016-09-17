@@ -40,8 +40,8 @@ class V2DestinationController extends Controller
                     ->is('white')
                     ->with('title', trans('destination.show.forum.title'))
                     ->with('content', $forums->map(function ($forum) {
-                            return region('ForumRowSmall', $forum);
-                        })
+                        return region('ForumRowSmall', $forum);
+                    })
                     )
                 )
                 ->push(component('Promo')->with('promo', 'body'))
@@ -78,8 +78,8 @@ class V2DestinationController extends Controller
 
             ->with('bottom', collect()
                 ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
-                        return region('FlightCard', $flight);
-                    })
+                    return region('FlightCard', $flight);
+                })
                 ))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
