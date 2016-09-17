@@ -6,8 +6,8 @@ class ForumRow
 {
     public function render($forum)
     {
-        $newcomments = $forum->comments->filter(function($comment) {
-                return $comment->vars()->isNew == true;
+        $newcomments = $forum->comments->filter(function ($comment) {
+            return $comment->vars()->isNew == true;
         })->count();
 
         return component('ForumRow')
@@ -32,7 +32,7 @@ class ForumRow
                         ->with('title', 'uus')
                         )
                     ->pushWhen($newcomments > 0, component('MetaLink')
-                        ->with('title', "uus komm ".$newcomments)
+                        ->with('title', 'uus komm '.$newcomments)
                         )
                     ->merge($forum->destinations->map(function ($tag) {
                         return component('Tag')->is('orange')->with('title', $tag->name);
