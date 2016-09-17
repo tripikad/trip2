@@ -8,13 +8,29 @@ class NavbarDesktop
     {
         $user = request()->user();
 
-        return collect(config('menu.header'))
-            ->map(function ($value, $key) {
+        return collect()/*config('menu.header'))
+            /*->map(function ($value, $key) {
                 return [
                     'title' => trans("menu.header.$key"),
                     'route' => $value['route'],
                 ];
-            })
+            })*/
+            ->put('flight', [
+                'title' => trans('menu.header.flights'),
+                'route' => route('v2.flight.index'),
+            ])
+            ->put('travelmate', [
+                'title' => trans('menu.header.travelmates'),
+                'route' => route('v2.travelmate.index'),
+            ])
+            ->put('forum', [
+                'title' => trans('menu.header.forum'),
+                'route' => route('v2.forum.index'),
+            ])
+            ->put('news', [
+                'title' => trans('menu.header.news'),
+                'route' => route('v2.news.index'),
+            ])
             ->putWhen(! $user, 'user', [
                 'title' => trans('menu2.header.user'),
                 'route' => route('login.form'),

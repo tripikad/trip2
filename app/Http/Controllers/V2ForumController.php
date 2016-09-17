@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Request;
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -10,36 +11,44 @@ class V2ForumController extends Controller
 {
     public function index()
     {
-        $type = 'forum';
+        $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
 
-        $posts = Content::whereType($type)
-            ->whereStatus(1)
-            ->latest()
-            ->take(10)
-            ->get();
-
-        $flights = Content::whereType('flight')
-            ->whereStatus(1)
-            ->latest()
-            ->take(3)
-            ->get();
-
+        $forums = Content::getLatestPagedItems('forum', false, $currentDestination, $currentTopic);
+        $flights = Content::getLatestItems('flight', 3);
         $destinations = Destination::select('id', 'name')->get();
-
         $topics = Topic::select('id', 'name')->get();
 
         return view('v2.layouts.2col')
-            ->with('header', region('HeaderLight', trans("content.$type.index.title")))
+
+            ->with('header', region('HeaderLight', trans('content.forum.index.title')))
+
             ->with('content', collect()
-                ->merge($posts->map(function ($post) {
-                    return region('ForumRow', $post);
+                ->merge($forums->map(function ($forum) {
+                    return region('ForumRow', $forum);
                 }))
+                ->push(component('Paginator')
+                    ->with('links', $forums->appends([
+                        'destination' => $currentDestination,
+                        'topic' => $currentTopic,
+                    ])
+                    ->links())
+                )
             )
+
             ->with('sidebar', collect()
                 ->merge(region('ForumLinks'))
                 ->push(region('ForumAbout'))
                 ->push(component('Block')->with('content', collect()
-                    ->push(region('Filter', $destinations, $topics))
+                    ->push(region(
+                        'Filter',
+                        $destinations,
+                        $topics,
+                        $currentDestination,
+                        $currentTopic,
+                        $forums->currentPage(),
+                        'v2.forum.index'
+                    ))
                 ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
@@ -56,46 +65,33 @@ class V2ForumController extends Controller
             ->with('footer', region('FooterLight'));
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $type = 'forum';
-
-        $post = Content::whereType($type)
-            ->whereStatus(1)
-            ->findOrFail($id);
-
-        $posts = Content::whereType($type)
-            ->whereStatus(1)
-            ->latest()
-            ->take(5)
-            ->get();
-
-        $travelmates = Content::whereType('travelmate')
-            ->whereStatus(1)
-            ->latest()
-            ->take(3)
-            ->get();
+        $forum = Content::getItemBySlug($slug);
+        $forums = Content::getLatestItems('forum', 5);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $user = auth()->user();
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Header', trans("content.$type.index.title")))
+            ->with('header', region('HeaderLight', trans('content.forum.index.title')))
 
             ->with('content', collect()
-                ->push(region('ForumPost', $post))
-                ->merge($post->comments->map(function ($comment) {
+                ->push(region('ForumPost', $forum))
+                ->merge($forum->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-                //->push(region('CommentCreateForm', $post))
+                ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum))
             )
 
             ->with('sidebar', collect()
                 ->merge(region('ForumLinks'))
                 ->push(region('ForumAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->merge($post->destinations->map(function ($destination) {
+                ->merge($forum->destinations->map(function ($destination) {
                     return region('DestinationBar', $destination, $destination->getAncestors());
                 }))
-                ->push(region('ForumSidebar', $posts))
+                ->push(region('ForumSidebar', $forums))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
@@ -109,14 +105,16 @@ class V2ForumController extends Controller
                     ->with('content', collect()
                     ->push(component('ForumBottom')
                         ->with('left_items', region('ForumLinks'))
-                        ->with('right_items', $posts->map(function ($post) {
-                            return region('ForumRow', $post);
+                        ->with('right_items', $forums->map(function ($forum) {
+                            return region('ForumRow', $forum);
                         }))
                     )))
                 ->push(component('Block')->with('content', collect()
-                    ->push(component('Grid3')->with('gutter', true)->with('items', $travelmates->map(function ($post) {
-                        return region('TravelmateCard', $post);
-                    })
+                    ->push(component('Grid3')
+                        ->with('gutter', true)
+                        ->with('items', $travelmates->map(function ($travelmate) {
+                            return region('TravelmateCard', $travelmate);
+                        })
                     ))
                 ))
                 ->push(component('Promo')->with('promo', 'footer'))

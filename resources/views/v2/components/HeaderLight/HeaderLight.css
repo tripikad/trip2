@@ -6,25 +6,14 @@
     background: $gray-light;
     position: relative;
     overflow: hidden;
+    z-index: 0;
 }
-
-    .HeaderLight__background {
-        position: absolute;
-        top: calc($spacer * -5);
-        left: calc($spacer * -5);
-        opacity: $opacity-sm;
-        width: calc($spacer * 100);
-        height: calc($spacer * 60);
-        opacity: $opacity-xs;
-        pointer-events: none;
-    }
 
     .HeaderLight__content {
         height: calc($spacer * 15);
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: 10;
     }
 
     .HeaderLight__title {
@@ -32,8 +21,5 @@
         font: $font-heading-xxl ?if $tablet;
         font: $font-heading-xl ?if $mobile;
         color: $gray-darkest;
-    }
-
-    .HeaderLight__navbar {
-        z-index: 10;
+        text-align: center;
     }

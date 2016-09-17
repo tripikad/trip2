@@ -30,4 +30,9 @@ class V2DestinationVars
     {
         return $this->destination->name;
     }
+
+    public function shortName()
+    {
+        return str_limit($this->destination->name, 30);
+    }
 }

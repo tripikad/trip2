@@ -63,6 +63,92 @@ class Content extends Model
         return new V2ContentVars($this);
     }
 
+    public function scopeGetLatestPagedItems($query, $type, $take = 24, $destination = false, $topic = false)
+    {
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->latest()
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->when($destination, function ($query) use ($destination) {
+                $destinations = Destination::find($destination)->descendantsAndSelf()->lists('id');
+
+                return $query
+                    ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
+                    ->select('contents.*')
+                    ->whereIn('content_destination.destination_id', $destinations);
+            })
+            ->when($topic, function ($query) use ($topic) {
+                return $query
+                    ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
+                    ->select('contents.*')
+                    ->where('content_topic.topic_id', '=', $topic);
+            })
+            ->distinct()
+            ->simplePaginate($take);
+    }
+
+    public function scopeGetLatestItems($query, $type, $take = 5)
+    {
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->take($take)
+            ->latest()
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->distinct()
+            ->get();
+    }
+
+    public function scopeGetItemById($query, $id)
+    {
+        return $query
+            ->whereStatus(1)
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->findOrFail($id);
+    }
+
+    public function scopeGetItemBySlug($query, $slug)
+    {
+        return $query
+            ->whereStatus(1)
+            ->whereSlug($slug)
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->first();
+    }
+
     // V1
 
     public function getDestinationParent()

@@ -63,7 +63,7 @@
         },
 
         props: {
-            post: { default: {} }
+            item: { default: {} }
         },
 
         data() {
@@ -92,7 +92,7 @@
 
             // Get the content
 
-            this.body = JSON.parse(decodeURIComponent(this.post)).body
+            this.body = JSON.parse(decodeURIComponent(this.item)).body
             this.editor.setValue(this.body)
             this.updatePreview()
 
@@ -110,7 +110,7 @@
         methods: {
 
             updatePreview: function() {
-                this.$http.post('/v2/utils/format', {body: this.editor.getValue()})
+                this.$http.item('/v2/utils/format', {body: this.editor.getValue()})
                     .then(function(res) {
                         this.body = res.data.body
                     })

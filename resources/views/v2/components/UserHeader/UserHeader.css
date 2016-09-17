@@ -6,15 +6,8 @@
     background: $cyan;
     position: relative;
     overflow: hidden;
+    z-index: 0;
 }
-
-    .UserHeader__map {
-        position: absolute;
-        top: calc($spacer * 4);
-        right: calc($spacer * -20);
-        opacity: $opacity-md;
-        fill: $cyan-light;
-    }
 
     .UserHeader__user {
         margin-bottom: $margin-md;
