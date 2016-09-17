@@ -53,13 +53,13 @@ class V2ForumController extends Controller
 
 
         if (auth()->check()) {
-        $userId = auth()->user()->id;
+            $userId = auth()->user()->id;
 
         // We check if user has read the post or its comments
 
         $key = 'new_'.$forum->id.'_'.$userId;
 
-        $newId = Cache::get($key);
+            $newId = Cache::get($key);
 
         // We iterate over post comments
 
