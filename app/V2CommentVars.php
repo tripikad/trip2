@@ -47,9 +47,11 @@ class V2CommentVars
         return format_date($this->comment->created_at);
     }
 
-    public function isNew() {
 
-         if (auth()->check()) {
+    public function isNew()
+    {
+        if (auth()->check()) {
+
             $userId = auth()->id();
 
             $key = 'new_'.$this->comment->id.'_'.$userId;
@@ -68,5 +70,4 @@ class V2CommentVars
 
         return false;
     }
-     
 }
