@@ -6,18 +6,17 @@ class ForumRow
 {
     public function render($forum)
     {
-        
         $forum = $forum->vars()->isNew($forum);
 
-        if(isset($forum->route)){
-        $count = $forum->comments->filter(function($comment) use ($forum) {
-            return  $comment->id >= $forum->route;
-        })->count();
+        if (isset($forum->route)) {
+            $count = $forum->comments->filter(function ($comment) use ($forum) {
+                return  $comment->id >= $forum->route;
+            })->count();
         }
-       
+
 
         return component('ForumRow')
-            ->with('route', route('v2.forum.show', [$forum->slug]). ($forum->isNew ? '#'.$forum->route: ''))
+            ->with('route', route('v2.forum.show', [$forum->slug]).($forum->isNew ? '#'.$forum->route : ''))
             ->with('user', component('UserImage')
                 ->with('route', route('v2.user.show', [$forum->user]))
                 ->with('image', $forum->user->imagePreset('small_square'))
@@ -38,7 +37,7 @@ class ForumRow
                         ->with('title', 'uus')
                         )
                     ->pushWhen(isset($count), component('MetaLink')
-                        ->with('title', 'uus komm '.(isset($count)? $count: '') )
+                        ->with('title', 'uus komm '.(isset($count) ? $count : ''))
                         )
                     ->merge($forum->destinations->map(function ($tag) {
                         return component('Tag')->is('orange')->with('title', $tag->name);
