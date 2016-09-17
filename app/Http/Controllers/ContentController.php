@@ -174,39 +174,6 @@ class ContentController extends Controller
         $viewVariables['content'] = $content;
         $viewVariables['comments'] = $comments;
         $viewVariables['type'] = $type;
-        
-
-
-           // We get the current user id if logged in
-    if (auth()->check()) {
-        $userId = auth()->user()->id;
-
-        // We check if user has read the post or its comments
-
-        $key = 'new_'.$content->id.'_'.$userId;
-
-        $newId = Cache::get($key);
-
-        // We iterate over post comments
-
-        $content->comments->map(function ($comment) use ($newId) {
-
-            // If the comment is the first unread (or newer) comment
-
-            if ($newId > 0 && $comment->id >= $newId) {
-
-                // Mark the comment as new so the view can style the comment accordingly
-
-                $comment->isNew = true;
-            }
-
-            return $comment;
-        });
-
-        // Mark the post and its comments read
-
-        Cache::forget($key);
-    }
 
 
         return response()
