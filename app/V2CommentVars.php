@@ -47,15 +47,13 @@ class V2CommentVars
         return format_date($this->comment->created_at);
     }
 
-
     public function isNew()
     {
         if (auth()->check()) {
-
             $userId = auth()->id();
 
             $key = 'new_'.$this->comment->id.'_'.$userId;
-            
+
                 // If the post is unread by the user or there are new comments
 
                 if (Cache::has($key)) {
