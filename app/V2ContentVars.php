@@ -57,7 +57,7 @@ class V2ContentVars
         if (auth()->check()) {
             $userId = auth()->id();
 
-                $key = 'new_'.$content->id.'_'.$userId;
+            $key = 'new_'.$content->id.'_'.$userId;
 
                 // If the post is unread by the user or there are new comments
 
@@ -66,13 +66,11 @@ class V2ContentVars
                     // Mark post as new so the view can style the post accordingly
 
                     return true;
-
                 }
 
-                return false;
+            return false;
         }
 
         return false;
     }
-
 }
