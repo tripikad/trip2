@@ -7,19 +7,18 @@ use Request;
 
 class V2SpamController extends Controller
 {
-   public function index()
+    public function index()
     {
-
-    $users = User::take(50)
+        $users = User::take(50)
         ->latest()
         ->get();
-    
-    $users = $users->map(function($user){
-        return component('FormCheckbox')
-                    ->with('label', $user->name .' '. $user->email  .' '. $user->verified)
-                    ->with('name' , 'users[]')
+
+        $users = $users->map(function ($user) {
+            return component('FormCheckbox')
+                    ->with('label', $user->name.' '.$user->email.' '.$user->verified)
+                    ->with('name', 'users[]')
                     ->with('value', $user->id);
-    })->push(component('FormButton')
+        })->push(component('FormButton')
             ->with('title', 'submit')
             );
 
@@ -31,7 +30,7 @@ class V2SpamController extends Controller
                     ->with('fields', $users)
                 )
             );
-   } 
+    }
 
     public function submit()
     {
