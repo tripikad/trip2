@@ -75,8 +75,8 @@ class V2TravelmateController extends Controller
                     )
                 )
                 ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
-                        return region('FlightCard', $flight);
-                    })
+                    return region('FlightCard', $flight);
+                })
                 ))
                 ->push(component('Promo')->with('promo', 'footer'))
             )

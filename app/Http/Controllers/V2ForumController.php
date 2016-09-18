@@ -57,8 +57,8 @@ class V2ForumController extends Controller
 
             ->with('bottom', collect()
                 ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
-                        return region('FlightCard', $flight);
-                    })
+                    return region('FlightCard', $flight);
+                })
                 ))
                 ->push(component('Block')
                     ->is('red')
