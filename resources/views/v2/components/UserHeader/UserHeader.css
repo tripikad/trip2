@@ -1,0 +1,25 @@
+@import "variables";
+
+.UserHeader {
+    padding-top: $padding-md;
+    padding-bottom: $padding-lg;
+    background: $cyan;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+    .UserHeader__user {
+        margin-bottom: $margin-md;
+    }
+
+    .UserHeader__name {
+        font: $font-heading-xxl;
+        color: $white;
+        margin-bottom: $margin-md;
+    }
+
+    .UserHeader__meta {
+        font: $font-heading-sm;
+        color: $cyan-dark;
+    }

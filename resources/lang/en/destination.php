@@ -14,6 +14,7 @@ return [
     'show.user.button.dontwanttogo' => 'I don\'t want to go there',
 
     'show.forum.title' => 'Trip.ee users discuss',
+    'show.popular.title.short' => 'Popular destinations',
     'show.popular.title' => 'Popular destinations in :destination',
     'show.news.title' => 'News',
 

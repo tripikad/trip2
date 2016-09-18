@@ -1,0 +1,25 @@
+@import "variables";
+
+.HeaderLight {
+    padding-top: $padding-md;
+    padding-bottom: $padding-lg;
+    background: $gray-light;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+    .HeaderLight__content {
+        height: calc($spacer * 15);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .HeaderLight__title {
+        font: $font-heading-xxxl;
+        font: $font-heading-xxl ?if $tablet;
+        font: $font-heading-xl ?if $mobile;
+        color: $gray-darkest;
+        text-align: center;
+    }

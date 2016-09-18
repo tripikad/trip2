@@ -1,0 +1,20 @@
+@import "variables";
+
+    .FormTextfield__label {
+        color: $gray-darkest;
+        display: block;
+        font: $font-heading-sm;
+        margin-bottom: $margin-xs;
+    }
+
+    .FormTextfield__input {
+        border-radius: $border-radius-md;
+        border: $border-gray-sm;
+        font: $font-text-md;
+        padding: $padding-sm;
+        width: 100%;
+    }
+
+    .FormTextfield__input::placeholder {
+        color: $gray;
+    }

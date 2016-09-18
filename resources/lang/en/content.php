@@ -136,6 +136,7 @@ return [
     // Travelmate
 
     'travelmate.index.title' => 'Travel mates',
+    'travelmate.index.eula.title' => 'EULA',
 
     'travelmate.view.all.offers' => 'View all offers',
 

@@ -78,12 +78,11 @@ class CommentController extends Controller
             $content->comments->count(),
             config('content_'.$type.'.index.paginate')
         );
-        $comments->setPath(route('content.show', [$type, $content_id]));
+        $comments->setPath(route($type.'.show', [$content->slug]));
 
         return redirect()
-            ->route('content.show', [
-                $type,
-                $content_id,
+            ->route($type.'.show', [
+                $content->slug,
                 ($comments->lastPage() > 1 ? 'page='.$comments->lastPage() : '')
                     .'#comment-'.$comment->id,
             ]);
@@ -111,9 +110,8 @@ class CommentController extends Controller
         $comment->update(array_merge($request->all(), $fields));
 
         return redirect()
-            ->route('content.show', [
-                $comment->content->type,
-                $comment->content,
+            ->route($comment->content->type.'.show', [
+                $comment->content->slug,
                 '#comment-'.$comment->id,
             ]);
     }
@@ -127,9 +125,8 @@ class CommentController extends Controller
             $comment->save();
 
             return redirect()
-                ->route('content.show', [
-                    $comment->content->type,
-                    $comment->content,
+                ->route($comment->content->type.'.show', [
+                    $comment->content->slug,
                     '#comment-'.$comment->id,
                 ])
                 ->with('info', trans("comment.action.status.$status.info", [

@@ -1,0 +1,48 @@
+@import "variables";
+
+.DestinationBar {
+    background: $yellow;
+    display: flex;
+    height: calc($spacer * 6.5);
+    align-items: center;
+}
+
+.DestinationBar__wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.DestinationBar--dark {
+    background: $yellow-dark;
+}
+
+    .DestinationBar__icon {
+        padding-right: $padding-xs;
+        width: $width-md;
+    }
+
+    .DestinationBar__icon svg {
+        fill: $white;
+        margin-left: $margin-sm;
+    }
+
+    .DestinationBar__title {
+        color: $white;
+        font: $font-heading-lg;
+        line-height: 100%;
+    }
+
+    .DestinationBar__subtitle {
+        display: flex;
+        color: $white;
+        font: $font-heading-md;
+        line-height: 100%;
+        margin-bottom: $margin-xs;
+        opacity: $opacity-md;
+    }
+
+    .DestinationBar__subtitle div {
+        margin-top: 2.5px;
+        margin-left: 2px;
+        margin-right: 2px;
+    }

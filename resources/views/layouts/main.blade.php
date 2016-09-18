@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="et">
     <head>
+        <title>{{ (trim($__env->yieldContent('title')) ? trim($__env->yieldContent('title')).' - ' : '')  }}{{ config('site.name') }}</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ (trim($__env->yieldContent('title')) ? trim($__env->yieldContent('title')).' - ' : '')  }}{{ config('site.name') }}</title>
         <meta name="description" content="@yield('head_description')">
         <meta property="og:title" content="@yield('head_title')">
         <meta property="og:description" content="@yield('head_description')">

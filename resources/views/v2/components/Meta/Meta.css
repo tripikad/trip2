@@ -1,0 +1,13 @@
+@import "variables";
+
+.Meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap ?if $mobile;
+}
+
+    .Meta__item {
+        margin: $margin-xs ?if $mobile;
+        margin-right: $margin-sm;
+    }
+

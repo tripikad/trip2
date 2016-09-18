@@ -1,0 +1,22 @@
+@import "variables";
+
+.DestinationHeader {
+    padding-top: $padding-md;
+    padding-bottom: $padding-lg;
+    background: $yellow;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+    .DestinationHeader__name {
+        font: $font-heading-xxl;
+        color: $white;
+        margin-top: $margin-xxl;
+        margin-bottom: $margin-md;
+    }
+
+    .DestinationHeader__facts {
+        width: 50%;
+        width: 100% ?if $mobile;
+    }

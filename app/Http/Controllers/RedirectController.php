@@ -12,10 +12,10 @@ class RedirectController extends Controller
     public function redirectNode($node_id)
     {
         if ($content = Content::find($node_id)) {
-            return redirect()->route(
-                'content.show', [
-                    $content->type,
-                    $content,
+            return redirect()
+                ->route(
+                    $content->type.'.show', [
+                    $content->slug,
                 ], 301);
         }
 
@@ -32,9 +32,9 @@ class RedirectController extends Controller
             $content = Content::find($alias->aliasable_id);
 
             return redirect()
-                ->route('content.show', [
-                    $content->type,
-                    $content,
+                ->route(
+                    $content->type.'.show', [
+                    $content->slug,
                 ], 301);
         }
 
@@ -45,33 +45,33 @@ class RedirectController extends Controller
     {
         $pathMap = [
 
-            'content/mis-on-veahind.html' => 'content/static/97203',
-            'kasutustingimused' => 'content/static/25151',
-            'reklaam' => 'content/static/22125',
-            'misontripee' => 'content/static/1534',
-            'kontakt' => 'content/static/972',
+            'content/mis-on-veahind.html' => 'mis-on-veahind',
+            'kasutustingimused' => 'kasutustingimused',
+            'reklaam' => 'reklaam',
+            'misontripee' => 'tripist',
+            'kontakt' => 'kontakt',
 
-            'blog' => 'content/blog',
-            'paevikud' => 'content/blog',
-            'sein/paevikud' => 'content/blog',
+            'blog' => 'reisikirjad',
+            'paevikud' => 'reisikirjad',
+            'sein/paevikud' => 'reisikirjad',
 
-            'eluvalismaal' => 'content/expat',
+            'eluvalismaal' => 'foorum/elu-valimaal',
 
-            'pildid' => 'content/photo',
+            'pildid' => 'reisipildid',
 
-            'uudised' => 'content/news',
-            'sein/uudised' => 'content/news',
+            'uudised' => 'uudised',
+            'sein/uudised' => 'uudised',
 
-            'reisikaaslased' => 'content/travelmate',
-            'sein/reisikaaslased' => 'content/travelmate',
+            'reisikaaslased' => 'reisikaaslased',
+            'sein/reisikaaslased' => 'reisikaaslased',
 
-            'ostmuuk' => 'content/buysell',
+            'ostmuuk' => 'foorum/ost-muuk',
 
-            'soodsad_lennupiletid' => 'content/flight',
-            'lendude_sooduspakkumised' => 'content/flight',
+            'soodsad_lennupiletid' => 'odavad-lennupiletid',
+            'lendude_sooduspakkumised' => 'odavad-lennupiletid',
 
-            'foorum' => 'content/forum',
-            'sein/foorum' => 'content/forum',
+            'foorum' => 'foorum/uldfoorum',
+            'sein/foorum' => 'foorum/uldfoorum',
 
             'reisipakkumised' => '/',
             'sein/reisipakkumised' => '/',
@@ -101,23 +101,21 @@ class RedirectController extends Controller
 
         if ($destination = Destination::find($tid)) {
             return redirect()->route(
-                'destination.show', [
-                    $destination,
+                'destination.slug', [
+                    $destination->slug,
                 ], 301);
         }
 
         if ($topic = Topic::find($tid)) {
             return redirect()->route(
-                'content.index', [
-                    'forum',
+                'forum.index', [
                     'topic' => $topic,
                 ], 301);
         }
 
         if ($carrier = Carrier::find($tid)) {
             return redirect()->route(
-                'content.index', [
-                    'flight',
+                'flight.index', [
                     'carrier' => $carrier,
                 ], 301);
         }
@@ -143,8 +141,8 @@ class RedirectController extends Controller
             $destination = Destination::find($alias->aliasable_id);
 
             return redirect()->route(
-                'destination.show', [
-                    $destination,
+                'destination.slug', [
+                    $destination->slug,
                 ], 301);
         }
 
@@ -176,23 +174,19 @@ class RedirectController extends Controller
         if ($alias) {
             if ($destination = Destination::find($alias->aliasable_id)) {
                 return redirect()->route(
-                    'destination.show', [
-                        $destination,
+                    'destination.slug', [
+                        $destination->slug,
                     ], 301);
             }
 
             if ($topic = Topic::find($alias->aliasable_id)) {
                 return redirect()->route(
-                    'content.index', [
-                        'forum',
+                    'forum.index', [
                         'topic' => $topic,
                     ], 301);
             }
 
-            return redirect()->route(
-                'content.index', [
-                    'forum',
-                ], 301);
+            return redirect()->route('forum.index', 301);
         }
 
         abort(404);

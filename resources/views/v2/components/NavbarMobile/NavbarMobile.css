@@ -1,0 +1,58 @@
+@import "variables";
+
+.NavbarMobile {
+    display: block;
+}
+
+    .NavbarMobile__menuIcon {
+        cursor: pointer;
+    }
+
+    .NavbarMobile__menuIcon svg {
+        fill: $gray-darker;
+    }
+
+    .NavbarMobile__menu {
+        align-items: center;
+        background: $green;
+        bottom: 0;
+        left: 0;
+        padding: $padding-md;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 10000;
+    }
+
+    .NavbarMobile__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .NavbarMobile__search svg {
+        fill: $white;
+    }
+
+    .NavbarMobile__closeIcon {
+        cursor: pointer;
+    }
+
+    .NavbarMobile__closeIcon svg {
+        fill: $white;
+    }
+
+    .NavbarMobile__links {
+        padding: $padding-lg;
+    }
+
+    .NavbarMobile__link {
+        color: $white;
+        font: $font-text-lg;
+        text-align: center;
+        padding: $padding-sm;
+    }
+
+.NavbarMobile--white .NavbarMobile__menuIcon svg {
+    fill: $white;
+}
