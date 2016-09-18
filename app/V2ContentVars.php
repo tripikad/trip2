@@ -61,18 +61,20 @@ class V2ContentVars
 
                 // If the post is unread by the user or there are new comments
 
+                if(Cache::has($key)){
+                    $content->isNew = true;
+                }
+
                 if ($newId = Cache::get($key)) {
 
-                    // Mark post as new so the view can style the post accordingly
+                    $content->NewCommentId = $newId;
 
-                    $content->isNew = true;
-
-                    // If there are new comments in the post, add relative link to the route
-                    // so the user will be redirected to the first new comment
-
-                    if ($newId > 0) {
-                        $content->route = $newId;
-                    }
+                    //New comment counter if needed
+                    /*
+                    $content->NewCommentCount = $content->comments->filter(function ($comment) use ($content) {
+                       return  $comment->id >= $content->NewCommentId;
+                   })->count();
+                   */
                 }
 
             return $content;

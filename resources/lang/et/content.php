@@ -227,6 +227,8 @@ return [
 
     'forum.no.results' => 'Hetkel pole ühtegi foorumi postitust.',
 
+    'forum.is.new' => 'Uus',
+
     // Expat
 
     'expat.index.title' => 'Elu välismaal',
