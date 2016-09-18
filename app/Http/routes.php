@@ -115,6 +115,17 @@ Route::get('v2/destination/{id}', [
 
 
 // Utils
+Route::get('v2/utils/spam', [
+    'uses' => 'V2SpamController@index',
+    'as' => 'utils.spam',
+]);
+
+Route::post('v2/utils/spam/submit', [
+    'uses' => 'V2SpamController@submit',
+    'as' => 'utils.spam.submit',
+]);
+
+
 
 Route::get('v2/utils/alert', [
     'uses' => 'V2UtilsController@alert',
