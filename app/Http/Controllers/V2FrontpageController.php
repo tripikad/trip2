@@ -10,7 +10,7 @@ class V2FrontpageController extends Controller
     {
         $topFlights = Content::getLatestItems('flight', 3);
         $forums = Content::getLatestItems('forum', 24);
-        $news = Content::getLatestItems('news', 9);
+        $news = Content::getLatestItems('news', 6);
         $bottomFlights = Content::getLatestItems('flight', 3);
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 6);
