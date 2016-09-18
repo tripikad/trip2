@@ -3,6 +3,7 @@
 	$name = $name ?? '';
 	$checked = $checked ?? '';
 	$label = $label ?? '';
+    $value = $value ?? '';
 
 @endphp
 <div class="FormCheckbox {{ $isclasses }}">
@@ -11,6 +12,7 @@
         id="{{ $name }}"
         name="{{ $name }}"
         type="checkbox"
+        value="{{ $value }}"
         @if ($checked) checked @endif
         class="FormCheckbox__checkbox" 
     >
