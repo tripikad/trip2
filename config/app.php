@@ -161,6 +161,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
+        'Msurguy\Honeypot\HoneypotServiceProvider',
 
     ],
 
@@ -219,8 +220,8 @@ return [
         'Feed'      => Roumen\Feed\Feed::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Ekko'      => Laravelista\Ekko\Facades\Ekko::class,
+        'Honeypot' => 'Msurguy\Honeypot\HoneypotFacade',
         // 'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
-
     ],
 
 ];

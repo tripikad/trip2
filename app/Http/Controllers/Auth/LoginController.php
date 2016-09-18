@@ -19,6 +19,8 @@ class LoginController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'password' => 'required',
+            'fullname'   => 'honeypot',
+            'time'   => 'required|honeytime:5',
         ]);
 
         if ($this->signIn($request)) {
