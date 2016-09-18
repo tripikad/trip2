@@ -15,6 +15,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\GenerateUserRankings::class,
         \App\Console\Commands\MakeComponent::class,
         \App\Console\Commands\MakeRegion::class,
+        \App\Console\Commands\UserDelete::class,
+
 
     ];
 
