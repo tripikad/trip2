@@ -50,7 +50,7 @@ class ConvertUsers extends ConvertBase
             ->where('uid', '>', 0)
             ->where('uid', '<', 60)
             ->orderBy('uid')
-            ->lists('uid');
+            ->pluck('uid');
 
         $this->info('Converting old users');
 
@@ -100,7 +100,7 @@ class ConvertUsers extends ConvertBase
 
         $i = 0;
 
-        foreach ($users->lists('uid') as $uid) {
+        foreach ($users->pluck('uid') as $uid) {
             if (! User::find($uid)) {
                 $this->convertUser($uid);
 

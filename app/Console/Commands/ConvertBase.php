@@ -413,7 +413,7 @@ class ConvertBase extends Command
         $profile = DB::connection($this->connection)
             ->table('profile_values')
             ->where('uid', '=', $uid)
-            ->lists('value', 'fid');
+            ->pluck('value', 'fid');
 
         return $profile;
     }
@@ -458,7 +458,7 @@ class ConvertBase extends Command
         $role = \DB::connection($this->connection)
             ->table('role')
             ->whereRid($rid)
-            ->lists('name')[0];
+            ->pluck('name')[0];
 
         return $this->roleMap[$role];
     }

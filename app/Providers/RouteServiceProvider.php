@@ -22,7 +22,7 @@ class RouteServiceProvider extends ServiceProvider
      * @param  \Illuminate\Routing\Router  $router
      * @return void
      */
-    public function boot(Router $router)
+    /*public function boot(Router $router)
     {
         $router->pattern('id', '[0-9]+');
         $router->pattern('id2', '[0-9]+');
@@ -30,7 +30,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->pattern('social', '('.collect(config('utils.share'))->keys()->implode('|').')');
 
         parent::boot($router);
-    }
+    }*/
 
     /**
      * Define the routes for the application.

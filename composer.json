@@ -6,10 +6,10 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
+        "laravel/framework": "5.3.*",
         "nikic/php-parser": "2.0.0",
         "guzzlehttp/guzzle": "~5.3|~6.0",
-        "laravelcollective/html": "5.2.*@dev",
+        "laravelcollective/html": "5.3.*@dev",
         "intervention/image": "^2.3@dev",
         "barryvdh/laravel-debugbar": "^2.0@dev",
         "baum/baum": "~1.1",
@@ -22,7 +22,8 @@
         "laravelista/ekko": "~1.0",
         "graham-campbell/htmlmin": "^4.3",
         "cviebrock/eloquent-sluggable": "^4.0",
-        "doctrine/dbal": "^2.5"
+        "doctrine/dbal": "^2.5",
+        "spatie/laravel-sitemap": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

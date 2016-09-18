@@ -6,3 +6,5 @@
 /.idea
 /public/images
 npm-debug.log
+
+public/sitemap.xml

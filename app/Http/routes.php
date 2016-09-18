@@ -193,7 +193,7 @@ Route::post('reset/apply', ['uses' => 'Auth\ResetController@postEmail', 'as' => 
 
 Route::get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordForm', 'as' => 'reset.password.form']);
 
-Route::post('reset/password', ['uses' => 'Auth\ResetController@postReset', 'as' => 'reset.password.submit']);
+Route::post('reset/password', ['uses' => 'Auth\ResetController@reset', 'as' => 'reset.password.submit']);
 
 //SEO content
 

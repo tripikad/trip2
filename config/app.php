@@ -139,6 +139,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
 
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
@@ -153,6 +154,7 @@ return [
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         // GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        Spatie\Sitemap\SitemapServiceProvider::class,
 
         /*
          * Application Service Providers...
