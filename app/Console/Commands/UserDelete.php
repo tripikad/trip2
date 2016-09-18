@@ -17,6 +17,24 @@ class UserDelete extends Command
 
         $user = User::findorfail($id);
 
+        $this->info("this user has posted:");
+
+        $user->contents->each(function($content) {
+            $this->line($content->title);
+        });
+
+        $this->line("\n");
+
+        $this->info("this user has commented these posts:");
+
+        $user->comments->each(function($comment) {
+            $this->line($comment->content->title);
+        });
+
+        $this->line("\n");
+
+
+
         if ($this->confirm("Do you wish to delete user: $user->name? [yes|no]")) {
             $user->flags->each(function ($flag) {
                 $flag->delete();
