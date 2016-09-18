@@ -61,13 +61,12 @@ class V2ContentVars
 
                 // If the post is unread by the user or there are new comments
 
-                if(Cache::has($key)){
+                if (Cache::has($key)) {
                     $content->isNew = true;
                 }
 
-                if ($newId = Cache::get($key)) {
-
-                    $content->NewCommentId = $newId;
+            if ($newId = Cache::get($key)) {
+                $content->NewCommentId = $newId;
 
                     //New comment counter if needed
                     /*
@@ -75,7 +74,7 @@ class V2ContentVars
                        return  $comment->id >= $content->NewCommentId;
                    })->count();
                    */
-                }
+            }
 
             return $content;
         }
