@@ -143,4 +143,36 @@ class CommentTest extends TestCase
                 ->visit("comment/$comment->id/edit"); // 401
         }
     }
+
+    public function test_content_timestamp_does_not_update_when_superuser_is_updating_comment()
+    {
+        $superuser = factory(App\User::class)->create(['role' => 'superuser']);
+
+        $contentTypes = array_merge($this->publicContentTypes, $this->privateContentTypes);
+
+        foreach ($contentTypes as $type) {
+            $content = factory(Content::class)->create([
+                'user_id' => $superuser->id,
+                'type' => $type,
+            ]);
+
+            $comment = factory(Comment::class)->create([
+                'user_id' => $superuser->id,
+                'content_id' => $content->id,
+            ]);
+
+            $first_date = Content::find($content->id)->updated_at;
+
+            sleep(1);
+
+            $this->actingAs($superuser)
+                ->visit("comment/$comment->id/edit")
+                ->type('Hola', 'body')
+                ->press(trans('comment.edit.submit.title'));
+
+            $second_date = Content::find($content->id)->updated_at;
+
+            $this->assertEquals($first_date->timestamp, $second_date->timestamp);
+        }
+    }
 }
