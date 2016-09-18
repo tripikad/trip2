@@ -17,17 +17,17 @@ class UserDelete extends Command
 
         $user = User::findorfail($id);
 
-        $this->info("this user has posted:");
+        $this->info('this user has posted:');
 
-        $user->contents->each(function($content) {
+        $user->contents->each(function ($content) {
             $this->line($content->title);
         });
 
         $this->line("\n");
 
-        $this->info("this user has commented these posts:");
+        $this->info('this user has commented these posts:');
 
-        $user->comments->each(function($comment) {
+        $user->comments->each(function ($comment) {
             $this->line($comment->content->title);
         });
 
