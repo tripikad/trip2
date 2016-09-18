@@ -52,13 +52,13 @@ class GenerateSitemap extends Command
             ->orderBy('created_at', 'desc')
             ->take(50000)
             ->chunk(200, function ($contents) use ($sitemap) {
-            foreach ($contents as $content) {
-                $sitemap->add(Url::create(route($content->type.'.show', $content->slug))
+                foreach ($contents as $content) {
+                    $sitemap->add(Url::create(route($content->type.'.show', $content->slug))
                         ->setLastModificationDate(Carbon::yesterday())
                         ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
                         ->setPriority(0.1));
-            }
-        });
+                }
+            });
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
 
