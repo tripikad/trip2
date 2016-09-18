@@ -9,11 +9,14 @@ class V2FrontpageController extends Controller
     public function index()
     {
         $topFlights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestItems('forum', 24);
+        $forums = Content::getLatestItems('forum', 5);
         $news = Content::getLatestItems('news', 6);
         $bottomFlights = Content::getLatestItems('flight', 3);
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 6);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $flights = Content::getLatestItems('flight', 5);
+        $blogs = Content::getLatestItems('blog', 10);
         $travelmates = Content::getLatestItems('travelmate', 3);
 
         $user = auth()->check() && auth()->user();
@@ -35,7 +38,37 @@ class V2FrontpageController extends Controller
                         )
                         .region('FlightCard', $topFlight);
                 })))
+
                 ->push(component('Block')
+                    ->with('title', 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.')
+                    ->with('content', collect()
+                        ->push(component('Link')
+                            ->with('title', trans('content.action.more.about'))
+                            ->with('route', route('v2.static.show', [1534]))
+                        )
+                        ->pushWhen(! $user, component('Button')
+                            ->with('title', trans('frontpage.index.about.register'))
+                            ->with('route', route('register.form'))
+                        )
+                    ))
+            )
+
+            ->with('content_mid_left', collect()
+                ->merge($forums->map(function ($forum) {
+                    return region('ForumRow', $forum);
+                }))
+            )
+
+            ->with('content_mid_right', collect()
+             //   ->push(region('TravelmateAbout'))
+           //     ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+          //      ->merge($travelmates->map(function ($travelmate) {
+          //          return region('TravelmateCard', $travelmate);
+          //      }))
+            )
+
+                /*->push(component('Block')
                     ->is('dark')
                     ->is('white')
                     ->with('title', 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.')
@@ -60,7 +93,10 @@ class V2FrontpageController extends Controller
                                 return region('ForumRow', $forum);
                             }))
                         ))
-                )
+                )*/
+
+            ->with('content2', collect()
+
                 ->push(component('Promo')->with('promo', 'content'))
                 ->push(component('Grid3')
                     ->with('gutter', true)

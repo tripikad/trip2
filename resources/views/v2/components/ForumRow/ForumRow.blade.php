@@ -23,7 +23,7 @@ $meta = $meta ?? collect();
 
             <div class="ForumRow__title">
 
-                {{ $title }}
+                {!! $title !!}
 
             </div>
 

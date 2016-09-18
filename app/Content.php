@@ -103,6 +103,7 @@ class Content extends Model
             ->whereStatus(1)
             ->take($take)
             ->latest()
+            ->skip(30)
             ->with(
                 'images',
                 'user',
