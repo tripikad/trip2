@@ -23,8 +23,7 @@
         "graham-campbell/htmlmin": "^4.3",
         "msurguy/honeypot": "dev-master",
         "cviebrock/eloquent-sluggable": "^4.0",
-        "doctrine/dbal": "^2.5",
-        "spatie/laravel-sitemap": "^1.0"
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

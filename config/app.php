@@ -154,7 +154,6 @@ return [
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         // GrahamCampbell\Markdown\MarkdownServiceProvider::class,
-        Spatie\Sitemap\SitemapServiceProvider::class,
 
         /*
          * Application Service Providers...
