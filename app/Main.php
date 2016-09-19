@@ -221,7 +221,7 @@ class Main
 
         foreach ($collection as $item) {
             if (isset($item->$relationName) && count($item->$relationName)) {
-                $relationCollection = $relationCollection->merge($item->$relationName->lists('id'));
+                $relationCollection = $relationCollection->merge($item->$relationName->pluck('id'));
             }
         }
 

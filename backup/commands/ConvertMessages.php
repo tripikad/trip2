@@ -36,7 +36,7 @@ class ConvertMessages extends ConvertBase
 
                 // Find first recepient who is not the sender
 
-                $recepient = collect($index->lists('uid'))
+                $recepient = collect($index->pluck('uid'))
                     ->reject(function ($item) use ($node) {
                         return $item == $node->author;
                     })->shift();

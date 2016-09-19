@@ -79,7 +79,7 @@ class Content extends Model
                 'topics'
             )
             ->when($destination, function ($query) use ($destination) {
-                $destinations = Destination::find($destination)->descendantsAndSelf()->lists('id');
+                $destinations = Destination::find($destination)->descendantsAndSelf()->pluck('id');
 
                 return $query
                     ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
@@ -160,11 +160,11 @@ class Content extends Model
 
     public function followersEmails()
     {
-        $followerIds = $this->followers->lists('user_id');
+        $followerIds = $this->followers->pluck('user_id');
 
         return User::whereIn('id', $followerIds)
             ->where('notify_follow', 1)
-            ->lists('email', 'id');
+            ->pluck('email', 'id');
     }
 
     public function imagePath()

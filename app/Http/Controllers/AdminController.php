@@ -18,13 +18,13 @@ class AdminController extends Controller
 
         $user_image_ids = DB::table('imageables')
             ->where('imageable_type', '=', 'App\User')
-            ->lists('image_id');
+            ->pluck('image_id');
 
         $photo_ids = DB::table('imageables')
             ->join('contents', 'contents.id', '=', 'imageables.imageable_id')
             ->where('imageables.imageable_type', '=', 'App\Content')
             ->where('contents.type', '=', 'photo')
-            ->lists('imageables.image_id');
+            ->pluck('imageables.image_id');
 
         $images = Image::whereNotIn('id', $user_image_ids)
             ->whereNotIn('id', $photo_ids)

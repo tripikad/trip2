@@ -16,7 +16,7 @@ class ConvertTerms extends ConvertBase
             ->where('term_data.vid', 6)
             ->where('term_hierarchy.parent', 0)
             ->select('term_data.tid')
-            ->lists('term_data.tid', null);
+            ->pluck('term_data.tid', null);
     }
 
     public function getDestinationChildrens($parents)
@@ -27,7 +27,7 @@ class ConvertTerms extends ConvertBase
             ->where('term_data.vid', 6)
             ->whereIn('term_hierarchy.parent', $parents)
             ->select('term_data.tid')
-            ->lists('term_data.tid', null);
+            ->pluck('term_data.tid', null);
     }
 
     public function createDestination($term)
