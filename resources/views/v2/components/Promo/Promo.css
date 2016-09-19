@@ -5,6 +5,7 @@
     max-width: 100%;
     overflow: hidden;
     position: relative;
+    padding-bottom: 50%;
 }
 
     .Promo__iframe {
