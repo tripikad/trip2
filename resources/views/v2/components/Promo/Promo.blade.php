@@ -7,7 +7,7 @@ $id2 = $config['id2'];
 
 @endphp
 
-<div id="{{ $id2 }}" class="Promo {{ $isclasses }}" padding-bottom: {{ $ratio }}%;'></div>
+<div id="{{ $id2 }}" class="Promo {{ $isclasses }}" style="padding-bottom: {{ $ratio }}%;"></div>
 
 @push('scripts')
     <script type="text/javascript">
