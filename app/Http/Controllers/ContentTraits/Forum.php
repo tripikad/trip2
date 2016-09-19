@@ -37,8 +37,8 @@ trait Forum
             ->take(4)
             ->get();
 
-        $destination_ids = $content->destinations->lists('id')->toArray();
-        $topic_ids = $content->topics->lists('id')->toArray();
+        $destination_ids = $content->destinations->pluck('id')->toArray();
+        $topic_ids = $content->topics->pluck('id')->toArray();
 
         $relation_posts = Content::
         with('destinations')

@@ -14,7 +14,7 @@ class StatsContentCount extends StatsBase
             ->table('node')
             ->select('type')
             ->groupBy('type')
-            ->lists('type');
+            ->pluck('type');
     }
 
     public function contentCount()

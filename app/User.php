@@ -8,10 +8,11 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Carbon\Carbon;
+use Illuminate\Notifications\Notifiable as Notifiable;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword;
+    use Authenticatable, CanResetPassword, Notifiable;
 
     // Setup
 
@@ -91,6 +92,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         $this->verified = true;
         $this->registration_token = null;
+        $this->save();
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->remember_token = $token;
         $this->save();
     }
 

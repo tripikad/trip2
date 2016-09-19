@@ -23,7 +23,7 @@ class StatsProfiles extends StatsBase
             $profile = DB::connection($this->connection)
                 ->table('profile_values')
                 ->where('uid', '=', $user->uid)
-                ->lists('value', 'fid');
+                ->pluck('value', 'fid');
 
             $this->line(implode(',', [
                 $user->name,

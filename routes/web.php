@@ -125,7 +125,7 @@ Route::get('v2/utils/alert', [
 Route::get('share/{social}', [
     'uses' => 'V2SocialController@share',
     'as' => 'utils.share',
-    ]);
+]);
 
 
 Route::post('v2/utils/format', [
@@ -193,19 +193,19 @@ Route::post('reset/apply', ['uses' => 'Auth\ResetController@postEmail', 'as' => 
 
 Route::get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordForm', 'as' => 'reset.password.form']);
 
-Route::post('reset/password', ['uses' => 'Auth\ResetController@postReset', 'as' => 'reset.password.submit']);
+Route::post('reset/password', ['uses' => 'Auth\ResetController@reset', 'as' => 'reset.password.submit']);
 
 //SEO content
 
 foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $type) {
     Route::group(['prefix' => $slugType, 'as' => $type.'.'], function () use ($type) {
-        Route::get('/', ['middleware' => null, 'as' => 'index', function () use ($type) {
+        Route::get('/', ['as' => 'index', function () use ($type) {
             $controller = new ContentController;
 
             return $controller->index(app('request'), $type);
         }]);
 
-        Route::get('{slug}', ['middleware' => null, 'as' => 'show', function ($slug) use ($type) {
+        Route::get('{slug}', ['as' => 'show', function ($slug) use ($type) {
             $controller = new ContentController;
 
             return $controller->findBySlugAndType($type, $slug);
@@ -216,7 +216,7 @@ foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $typ
 //SEO static
 
 foreach (config('sluggable.staticContentMapping') as $static_id => $slug) {
-    Route::get($slug, ['middleware' => null, 'as' => 'static.'.$static_id, function () use ($static_id) {
+    Route::get($slug, ['as' => 'static.'.$static_id, function () use ($static_id) {
         $controller = new ContentController;
 
         return $controller->show('static', $static_id);
@@ -225,12 +225,12 @@ foreach (config('sluggable.staticContentMapping') as $static_id => $slug) {
 
 //SEO destination
 
-Route::get('sihtkoht/{slug}', ['middleware' => null, 'uses' => 'DestinationController@showSlug', 'as' => 'destination.slug']);
+Route::get('sihtkoht/{slug}', ['uses' => 'DestinationController@showSlug', 'as' => 'destination.slug']);
 
 // Content
 
 Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
-    Route::get('/', ['middleware' => null, 'as' => 'index', function ($type) {
+    Route::get('/', ['as' => 'index', function ($type) {
         return redirect()->route(
             $type.'.index', [
         ], 301);
@@ -262,7 +262,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
         }
     }]);
 
-    Route::get('{id}', ['middleware' => null, 'uses' => 'ContentController@showWithRedirect', 'as' => 'show']);
+    Route::get('{id}', ['uses' => 'ContentController@showWithRedirect', 'as' => 'show']);
 
     Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'as' => 'edit', function ($type, $id) {
         $controller = new ContentController;
@@ -281,7 +281,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 
     Route::put('{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'ContentController@status', 'as' => 'status']);
 
-    Route::post('/filter', ['middleware' => null, 'uses' => 'ContentController@filter', 'as' => 'filter']);
+    Route::post('/filter', ['uses' => 'ContentController@filter', 'as' => 'filter']);
 });
 
 // Additional blog (DUMMY)

@@ -38,8 +38,8 @@ trait Travelmate
             ->take(3)
             ->get();
 
-        $destination_ids = $content->destinations->lists('id')->toArray();
-        $topic_ids = $content->topics->lists('id')->toArray();
+        $destination_ids = $content->destinations->pluck('id')->toArray();
+        $topic_ids = $content->topics->pluck('id')->toArray();
 
         $viewVariables['destination'] = null;
         $viewVariables['parent_destination'] = null;
@@ -63,7 +63,7 @@ trait Travelmate
                 $viewVariables['parent_destination'] = $viewVariables['destination']->parent()->first();
             }
 
-            $destinationNotIn = $sidebar_flights->first()->destinations->lists('id')->toArray();
+            $destinationNotIn = $sidebar_flights->first()->destinations->pluck('id')->toArray();
         }
 
         $types = [
