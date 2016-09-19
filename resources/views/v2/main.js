@@ -11,10 +11,10 @@ import Flag from './components/Flag/Flag.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 // import Map from './components/Map/Map.vue'
-import Promo from './components/Promo/Promo.vue'
 import ImageUpload from './components/ImageUpload/ImageUpload.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
 import Gallery from './components/Gallery/Gallery.vue'
+
 
 const globalProps = JSON.parse(decodeURIComponent(
     document.querySelector('#globalprops').getAttribute('content')
@@ -37,7 +37,6 @@ new Vue({
         NavbarDesktop,
         NavbarMobile,
         // Map,
-        Promo,
         ImageUpload,
         FormSelect,
         Gallery
