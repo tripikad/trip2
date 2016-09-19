@@ -8,10 +8,9 @@ class V2FrontpageController extends Controller
 {
     public function index()
     {
-        $topFlights = Content::getLatestItems('flight', 3);
+        $flights = Content::getLatestItems('flight', 8);
         $forums = Content::getLatestItems('forum', 24);
         $news = Content::getLatestItems('news', 6);
-        $bottomFlights = Content::getLatestItems('flight', 3);
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 6);
         $travelmates = Content::getLatestItems('travelmate', 3);
@@ -24,31 +23,45 @@ class V2FrontpageController extends Controller
 
             ->with('content', collect()
 
-                ->push(component('Grid3')->with('items', $topFlights->map(function ($topFlight, $key) {
-                    $destination = $topFlight->destinations->first();
+                ->push(component('Grid3')->with('items', $flights
+                    ->take(3)
+                    ->map(function ($topFlight, $key) {
+                        $destination = $topFlight->destinations->first();
 
-                    return region(
-                            'DestinationBar',
-                            $destination,
-                            $destination->getAncestors(),
-                            ['', 'dark', ''][$key]
-                        )
-                        .region('FlightCard', $topFlight);
-                })))
-                ->push(component('Block')
-                    ->is('dark')
-                    ->is('white')
-                    ->with('title', 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.')
+                        return region(
+                                'DestinationBar',
+                                $destination,
+                                $destination->getAncestors(),
+                                ['', 'dark', ''][$key]
+                            )
+                            .region('FlightCard', $topFlight);
+                    })
+                ))
+                ->push(component('GridSplit')
                     ->with('content', collect()
-                        ->push(component('Link')
-                            ->with('title', trans('content.action.more.about'))
-                            ->with('route', route('v2.static.show', [1534]))
+                        ->push(component('Block')
+                            ->is('dark')
+                            ->is('white')
+                            ->with('title', 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.')
+                            ->with('content', collect()
+                                ->push(component('Link')
+                                    ->with('title', trans('content.action.more.about'))
+                                    ->with('route', route('v2.static.show', [1534]))
+                                )
+                                ->pushWhen(! $user, component('Button')
+                                    ->with('title', trans('frontpage.index.about.register'))
+                                    ->with('route', route('register.form'))
+                                )
+                            )
                         )
-                        ->pushWhen(! $user, component('Button')
+                    )
+                    ->with('sidebar', collect()
+                        ->push(component('Button')
                             ->with('title', trans('frontpage.index.about.register'))
                             ->with('route', route('register.form'))
                         )
-                    ))
+                    )
+                )
                 ->push(component('Block')
                     ->is('uppercase')
                     ->is('white')
@@ -69,21 +82,27 @@ class V2FrontpageController extends Controller
                     })
                     )
                 )
-                ->push(component('Block')
-                    ->is('white')
-                    ->is('uppercase')
-                    ->with('title', trans('frontpage.index.flight.title'))
-                    ->with('content', $bottomFlights->map(function ($bottomFlight) {
-                        return region('FlightRow', $bottomFlight);
-                    }))
-                )
-                ->push(component('Block')
-                    ->is('white')
-                    ->is('uppercase')
-                    ->with('title', trans('frontpage.index.blog.title'))
-                    ->with('content', $blogs->map(function ($blog) {
-                        return region('BlogCard', $blog);
-                    }))
+                ->push(component('GridSplit')
+                    ->with('content', collect()
+                        ->push(component('Block')
+                            ->is('white')
+                            ->is('uppercase')
+                            ->with('title', trans('frontpage.index.flight.title'))
+                            ->with('content', $flights->slice(3)->map(function ($bottomFlight) {
+                                return region('FlightRow', $bottomFlight);
+                            }))
+                        )
+                    )
+                    ->with('sidebar', collect()
+                        ->push(component('Block')
+                            ->is('white')
+                            ->is('uppercase')
+                            ->with('title', trans('frontpage.index.blog.title'))
+                            ->with('content', $blogs->map(function ($blog) {
+                                return region('BlogCard', $blog);
+                            }))
+                        )
+                    )
                 )
                 ->push(component('Block')
                     ->is('white')

@@ -4,10 +4,10 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap ?if $mobile;
+    line-height: $line-height-md;
 }
 
     .Meta__item {
-        margin: $margin-xs ?if $mobile;
         margin-right: $margin-sm;
     }
 

@@ -2,21 +2,20 @@
 
 .TravelmateCard {
 	display: flex;
+    margin-right: $margin-md;
 }
 
-	.TravelmateCard__content {
-		margin-left: $margin-sm;
-		aflex-direction: column;
-		ajustify-content: space-around;
+	.TravelmateCard__user {
+		margin-right: $margin-sm;
 	}
 
     .TravelmateCard__metaTop {
-    	margin-bottom: $margin-sm;
+    	margin-bottom: $margin-xs;
     }
 
     .TravelmateCard__title {
     	color: $gray-darkest;
     	font: $font-heading-md;
-    	margin-bottom: $padding-sm;
-    	line-height: $line-height-lg;
+    	margin-bottom: $padding-xs;
+    	line-height: $line-height-md;
     }
