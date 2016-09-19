@@ -1,13 +1,11 @@
 @php
 
 $promo = $promo ?? '';
-$config = config("promo.$promo");
-$ratio = round(($config['height'] / $config['width']) * 100);
-$id2 = $config['id2'];
+$id2 = config("promo.$promo.id2");
 
 @endphp
 
-<div id="{{ $id2 }}" class="Promo {{ $isclasses }}" style="padding-bottom: {{ $ratio }}%;"></div>
+<div id="{{ $id2 }}" class="Promo {{ $isclasses }}"></div>
 
 @push('scripts')
     <script type="text/javascript">
