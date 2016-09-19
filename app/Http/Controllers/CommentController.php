@@ -22,7 +22,6 @@ class CommentController extends Controller
             'content_id' => $content_id,
             'status' => 1,
         ];
-
         $comment = Auth::user()->comments()->create(array_merge($request->all(), $fields));
 
         /*
@@ -107,7 +106,7 @@ class CommentController extends Controller
             'status' => 1,
         ];
 
-        $comment->update(array_merge($request->all(), $fields));
+        $comment->update(array_merge($request->all(), $fields), ['touch' => false]);
 
         return redirect()
             ->route($comment->content->type.'.show', [
@@ -122,7 +121,7 @@ class CommentController extends Controller
 
         if ($status == 0 || $status == 1) {
             $comment->status = $status;
-            $comment->save();
+            $comment->save(['touch' => false]);
 
             return redirect()
                 ->route($comment->content->type.'.show', [

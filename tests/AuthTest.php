@@ -11,8 +11,6 @@ class AuthTest extends TestCase
     {
         $user = 'test_user_'.date('Ymd');
 
-        Honeypot::disable();
-
         // User can register
 
         $this->visit('/')
