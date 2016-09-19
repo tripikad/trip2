@@ -6,7 +6,7 @@ import Arc from './components/Arc/Arc.vue'
 import NavbarSearch from './components/NavbarSearch/NavbarSearch.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
-import Editor from './components/Editor/Editor.vue'
+// import Editor from './components/Editor/Editor.vue'
 import Flag from './components/Flag/Flag.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
@@ -32,7 +32,7 @@ new Vue({
         NavbarSearch,
         Icon,
         IconLoader,
-        Editor,
+        // Editor,
         Flag,
         NavbarDesktop,
         NavbarMobile,
