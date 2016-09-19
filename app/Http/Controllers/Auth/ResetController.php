@@ -45,7 +45,6 @@ class ResetController extends Controller
         $response = Password::sendResetLink($request->only('email'));
 
         if ($response == Password::INVALID_USER) {
-
             Log::info('User tried to reset password, but e-mail was invalid', [
                 'email' =>  $request->email,
             ]);
@@ -74,8 +73,6 @@ class ResetController extends Controller
                 ];
 
                 $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
-
-
             });
         }
 
