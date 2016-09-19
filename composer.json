@@ -21,7 +21,6 @@
         "laravel/socialite" : "~2.0",
         "laravelista/ekko": "~1.0",
         "graham-campbell/htmlmin": "^4.3",
-        "msurguy/honeypot": "dev-master",
         "cviebrock/eloquent-sluggable": "^4.0",
         "doctrine/dbal": "^2.5"
     },
