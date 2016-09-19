@@ -1,29 +1,11 @@
 @import "variables";
 
-/*
-.Promo > div {
-    height: 0;
-    max-width: 100%;
-    overflow: hidden;
-    position: relative;
-    padding-bottom: 171%;
-}
-
-    .Promo > div > iframe {
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-    }
-*/
-
 .Promo {
     overflow: hidden;
     display: block;
 }
 
-.Promo iframe {
-    display: block;
-    max-width: 100%;
-}
+    .Promo iframe {
+        display: block;
+        max-width: 100%;
+    }
