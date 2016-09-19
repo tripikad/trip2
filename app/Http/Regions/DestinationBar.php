@@ -14,7 +14,7 @@ class DestinationBar
                 ->map(function ($parent) {
                     return component('MetaLink')
                         ->is('white')
-                        ->with('title', $parent->vars()->name . ' › ')
+                        ->with('title', $parent->vars()->name.' › ')
                         ->with('route', route('v2.destination.show', [$parent]));
                 })
                 ->render()

@@ -22,7 +22,7 @@ class V2DestinationController extends Controller
         // TODO: Replace with Destination::getPopular()
 
         $destinations = Destination::inRandomOrder()->take(5)->get();
-                
+
 
         return view('v2.layouts.2col')
 
