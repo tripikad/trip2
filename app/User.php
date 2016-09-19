@@ -95,6 +95,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->save();
     }
 
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->remember_token = $token;
+        $this->save();
+    }
+
     public function unreadMessagesCount()
     {
         if ($this->messages_count === false) {
