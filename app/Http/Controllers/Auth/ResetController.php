@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\User;
 use Log;
+use Mail;
 
 class ResetController extends Controller
 {
@@ -41,41 +42,51 @@ class ResetController extends Controller
     {
         $this->validate($request, ['email' => 'required|email']);
 
+        $response = Password::sendResetLink($request->only('email'));
+
+        if ($response == Password::INVALID_USER) {
+
+            Log::info('User tried to reset password, but e-mail was invalid', [
+                'email' =>  $request->email,
+            ]);
+
+            return redirect()
+                ->back()
+                ->withErrors(['email' => trans($response)]);
+        }
+
         $user = User::where('email', $request->email)->take(1)->first();
 
-        $response = Password::sendResetLink($request->only('email'), function ($message) use ($user) {
-            $message->subject($this->getEmailSubject());
+        if ($user) {
+            Mail::queue('email.auth.reset', ['user' => $user, 'token' => $user->remember_token], function ($mail) use ($user) {
+                $mail->to($user->email, $user->name)->subject(trans('auth.reset.email.subject'));
 
-            $swiftMessage = $message->getSwiftMessage();
-            $headers = $swiftMessage->getHeaders();
+                $swiftMessage = $mail->getSwiftMessage();
+                $headers = $swiftMessage->getHeaders();
 
-            $header = [
-                'category' => [
-                    'auth_reset',
-                ],
-                'unique_args' => [
-                    'user_id' => (string) $user->id,
-                ],
-            ];
+                $header = [
+                    'category' => [
+                        'auth_reset',
+                    ],
+                    'unique_args' => [
+                        'user_id' => (string) $user->id,
+                    ],
+                ];
 
-            $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
-        });
+                $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
+
+
+            });
+        }
 
         Log::info('Password reset request has been submitted', [
             'email' =>  $request->email,
         ]);
 
-        switch ($response) {
-            case Password::RESET_LINK_SENT:
-                return redirect()
-                    ->back()
-                    ->with('info', trans($response));
-
-            case Password::INVALID_USER:
-                return redirect()
-                    ->back()
-                    ->withErrors(['email' => trans($response)]);
-        }
+        //if ($response == Password::RESET_LINK_SENT)
+            return redirect()
+                ->back()
+                ->with('info', trans($response));
     }
 
     protected function getEmailSubject()
