@@ -106,6 +106,7 @@ $padding-topbottom-sm: $padding-sm 0;
 $padding-topbottom-md: $padding-md 0;
 $padding-topbottom-lg: $padding-lg 0;
 $padding-topbottom-xl: $padding-xl 0;
+$margin-xxs: $padding-xxs;
 $margin-xs: $padding-xs;
 $margin-sm: $padding-sm;
 $margin-md: $padding-md;

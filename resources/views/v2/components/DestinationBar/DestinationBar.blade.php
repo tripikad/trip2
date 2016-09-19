@@ -2,25 +2,17 @@
 
 $route = $route ?? '';
 $title = $title ?? '';
-$subtitle = $subtitle ?? '';
+$parents = $parents ?? '';
 
 @endphp
 
 <div class="DestinationBar {{ $isclasses }}">
 
-    <div class="DestinationBar__wrapper">
-        
-        <div class="DestinationBar__icon">
+    <div>
+                    
+            <div class="DestinationBar__parents">
 
-            {!! component('Icon')->with('icon', 'icon-pin')->with('size', 'xl') !!}
-
-        </div>
-
-        <div>
-            
-            <div class="DestinationBar__subtitle">
-
-                {!! $subtitle  !!}
+                {!! $parents  !!}
 
             </div>
 
@@ -33,8 +25,6 @@ $subtitle = $subtitle ?? '';
                 </div>
 
             </a>
-
-        </div>
 
     </div>
 
