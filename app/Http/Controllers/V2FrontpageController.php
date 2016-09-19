@@ -27,6 +27,7 @@ class V2FrontpageController extends Controller
                     ->take(3)
                     ->map(function ($topFlight, $key) {
                         $destination = $topFlight->destinations->first();
+
                         return region(
                                 'DestinationBar',
                                 $destination,
