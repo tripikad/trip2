@@ -12,14 +12,8 @@ class FrontpageForum
             ->with('title', trans('frontpage.index.forum.title'))
             ->with('content', collect()
                 ->push(component('GridSplit')
-                    ->with('right_col', 3)
                     ->with('left_col', 8)
-                    ->with('right_content', collect()
-                        ->push(region('ForumAbout', 'white'))
-                        ->merge(region('ForumLinks'))
-                        ->push(component('Promo')->with('promo', 'sidebar_small'))
-                        ->push(component('Promo')->with('promo', 'sidebar_large'))
-                    )
+                    ->with('right_col', 3)
                     ->with('left_content', collect()
                         ->merge($forums->take($forums->count() / 2)->map(function ($forum) {
                             return region('ForumRow', $forum);
@@ -28,6 +22,12 @@ class FrontpageForum
                         ->merge($forums->slice($forums->count() / 2)->map(function ($forum) {
                             return region('ForumRow', $forum);
                         }))
+                    )
+                    ->with('right_content', collect()
+                        ->merge(region('ForumLinks'))
+                        ->push(region('ForumAbout', 'white'))
+                        ->push(component('Promo')->with('promo', 'sidebar_small'))
+                        ->push(component('Promo')->with('promo', 'sidebar_large'))
                     )
                 ));
     }
