@@ -11,7 +11,7 @@ class V2FrontpageController extends Controller
         $user = auth()->user();
 
         $flights = Content::getLatestItems('flight', 8);
-        $forums = Content::getLatestItems('forum', $user ? 24 : 5);
+        $forums = Content::getLatestItems('forum', $user ? 10 : 8);
         $news = Content::getLatestItems('news', 6);
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 6);
@@ -26,8 +26,10 @@ class V2FrontpageController extends Controller
                 ->push(region('FrontpageFlight', $flights->take(3)))
                 ->pushWhen(! $user, region('FrontpageAbout'))
                 ->push(region('FrontpageForum', $forums))
-                ->push(component('Promo')->with('promo', 'content'))
                 ->push(region('FrontpageNews', $news))
+            )
+
+            ->with('bottom', collect()
                 ->push(region('FrontpageFlightBlog', $flights->slice(3), $blogs))
                 ->push(component('Block')
                     ->is('white')

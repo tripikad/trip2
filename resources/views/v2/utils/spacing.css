@@ -312,6 +312,11 @@
   margin-left: 0 ?if $mobile;
 }
 
+.margin-bottom-none-mobile-sm {
+  margin-bottom: 0;
+  margin-bottom: $margin-sm ?if $mobile;
+}
+
 .margin-top-negative-md {
   margin-top: calc($spacer * -3.5);
 }

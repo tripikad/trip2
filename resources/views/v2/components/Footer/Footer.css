@@ -23,6 +23,7 @@
         color: white;
         font: $font-heading-sm;
         padding: $padding-xs 0;
+        padding: $padding-sm 0 ?if $mobile;
     }
 
     .Footer__social {

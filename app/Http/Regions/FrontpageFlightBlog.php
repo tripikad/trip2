@@ -7,6 +7,8 @@ class FrontpageFlightBlog
     public function render($flights, $blogs)
     {
         return component('GridSplit')
+            ->with('left_col', 8)
+            ->with('right_col', 4)
             ->with('left_content', collect()
                 ->push(component('Block')
                     ->is('white')
