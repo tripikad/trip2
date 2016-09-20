@@ -25,7 +25,6 @@ install:
 
 script:
     - phpunit
-    - npm run test
 
 notifications:
     email: false
