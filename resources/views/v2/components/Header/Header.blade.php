@@ -1,6 +1,7 @@
 @php
 
 $background = $background ?? '';
+$navbar = $navbar ?? '';
 $header = $header ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
