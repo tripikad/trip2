@@ -1,19 +1,21 @@
 @php
 
-$content = $content ?? collect();
-$sidebar = $sidebar ?? collect();
+$left_content = collect($left_content) ?? collect();
+$right_content = collect($right_content) ?? collect();
+$left_col = $left_col ?? 7;
+$right_col = $right_col ?? 4;
 
 @endphp
 
 <div class="row row-between">
 
-    <div class="col-7">
+    <div class="col-{{ $left_col }}">
 
-    @foreach ($content as $content_item)
+    @foreach ($left_content as $left_content_item)
     
-        <div class="margin-bottom-md">
+        <div @if (! $loop->last) class="margin-bottom-md" @endif>
             
-            {!! $content_item !!}
+            {!! $left_content_item !!}
 
         </div>
 
@@ -21,15 +23,15 @@ $sidebar = $sidebar ?? collect();
 
     </div>
 
-    <div class="col-4">
+    <div class="col-{{ $right_col }}">
 
-    @foreach ($sidebar as $sidebar_item)
-
-        <div class="margin-bottom-md">
+    @foreach ($right_content as $right_content_item)
+    
+        <div @if (! $loop->last) class="margin-bottom-md" @endif>
             
-            {!! $sidebar_item !!}
+            {!! $right_content_item !!}
 
-        </div>  
+        </div>
 
     @endforeach
 

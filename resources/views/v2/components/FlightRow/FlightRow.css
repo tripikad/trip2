@@ -6,7 +6,7 @@
 
     .FlightRow__left {
         display: flex;
-        align-items: center;
+        align-items: top;
         padding-right: $padding-sm;
         display: none ?if $mobile;
     }

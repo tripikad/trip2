@@ -14,9 +14,13 @@ $title = $title ?? '';
 
     <a href="{{ $route }}">
 
+    <div class="FlightCard__wrapper">
+
     <div class="FlightCard__title">
 
         {{ $title }}
+
+    </div>
 
     </div>
 

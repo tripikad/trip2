@@ -15,47 +15,41 @@ $footer = $footer ?? '';
 
     <div class="margin-top-negative-md">
         
-    <div class="container">
+        <div class="container">
 
-        <div class="row row-center padding-bottom-md">
+            <div class="row row-center padding-bottom-md">
 
-            <div class="col-10">
+                <div class="col-10">
 
-                @foreach ($content->withoutLast() as $content_item)
-                
-                <div class="margin-bottom-lg">
+                    @foreach ($content as $content_item)
+                    
+                    <div @if (!$loop->last) class="margin-bottom-xl" @endif>
 
-                    {!! $content_item !!}
-                        
-                </div>
+                        {!! $content_item !!}
+                            
+                    </div>
 
-                @endforeach
+                    @endforeach
 
-                <div>
-
-                    {!! $content->last() !!}
-                        
                 </div>
 
             </div>
 
         </div>
 
-    </div>
+        <div class="container">
 
-    <div class="container">
+        @foreach ($bottom as $bottom_item)
+        
+            <div @if (!$loop->last) class="margin-bottom-lg" @endif>
 
-    @foreach ($bottom as $bottom_item)
-    
-        <div class="margin-bottom-md">
-
-            {!! $bottom_item !!}
+                {!! $bottom_item !!}
+                    
+            </div>
                 
-        </div>
-            
-    @endforeach
+        @endforeach
 
-    </div>
+        </div>
     
     </div>
     

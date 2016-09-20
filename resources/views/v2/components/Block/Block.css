@@ -6,7 +6,7 @@
 }
 
 .Block--white {
-    background: $white;
+    background: none;
     padding: 0;
 }
 

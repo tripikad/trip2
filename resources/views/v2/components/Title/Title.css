@@ -2,7 +2,7 @@
 
 .Title {
     font: $font-heading-xxl;
-    line-height: $line-height-md;
+    line-height: $line-height-sm;
     color: $gray-darkest;
 }
 
