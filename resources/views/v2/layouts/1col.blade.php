@@ -21,7 +21,7 @@ $footer = $footer ?? '';
 
                 @foreach ($content as $content_item)
                 
-                <div @if (! $loop->last) class="margin-bottom-md" @endif>
+                <div @if (!$loop->last) class="margin-bottom-md" @endif>
 
                     {!! $content_item !!}
                         
@@ -39,7 +39,7 @@ $footer = $footer ?? '';
 
     @foreach ($bottom as $bottom_item)
     
-        <div @if (! $loop->last) class="margin-bottom-md" @endif>
+        <div @if (!$loop->last) class="margin-bottom-md" @endif>
 
             {!! $bottom_item !!}
                 

@@ -194,6 +194,22 @@
   margin-left: $margin-lg;
 }
 
+.margin-top-xl {
+  margin-top: $margin-xl;
+}
+
+.margin-right-xl {
+  margin-right: $margin-xl;
+}
+
+.margin-bottom-xl {
+  margin-bottom: $margin-xl;
+}
+
+.margin-left-xl {
+  margin-left: $margin-xl;
+}
+
 /* Responsive margins */
 
 .margin-top-xs-mobile-none {
