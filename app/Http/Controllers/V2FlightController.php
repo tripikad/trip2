@@ -5,21 +5,24 @@ namespace App\Http\Controllers;
 use Request;
 use App\Content;
 use App\Destination;
+use App\Topic;
 
 class V2FlightController extends Controller
 {
     public function index()
     {
         $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
 
         $firstBatch = 3;
         $secondBatch = 10;
         $thirdBatch = 10;
         $pageSize = $firstBatch + $secondBatch + $thirdBatch;
 
-        $flights = Content::getLatestPagedItems('flight', $pageSize, $currentDestination);
+        $flights = Content::getLatestPagedItems('flight', $pageSize, $currentDestination, $currentTopic);
         $forums = Content::getLatestItems('forum', 5);
         $destinations = Destination::select('id', 'name')->get();
+        $topics = Topic::select('id', 'name')->get();
 
         return view('v2.layouts.2col')
 
@@ -50,12 +53,7 @@ class V2FlightController extends Controller
                         return region('FlightRow', $flight);
                     })
                 )
-                ->push(component('Paginator')
-                    ->with('links', $flights->appends([
-                        'destination' => $currentDestination,
-                    ])
-                    ->links())
-                )
+                ->push(region('Paginator', $flights, $currentDestination, $currentTopic))
             )
 
             ->with('sidebar', collect()

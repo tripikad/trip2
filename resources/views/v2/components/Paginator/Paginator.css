@@ -1,13 +1,12 @@
 @import "variables";
 
-.Paginator .pager {
+.Paginator {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.Paginator span,
-.Paginator a {
+.Paginator__button {
     padding: $padding-sm $padding-md;
     background: $gray;
     border-radius: $border-radius-md;
@@ -15,10 +14,10 @@
     color: $gray-darker;
 }
 
-.Paginator li:first-child {
+.Paginator__button {
     margin-right: $margin-sm;
 }
 
-.Paginator li.disabled {
+.Paginator__button--disabled {
     opacity: $opacity-sm;
 }
