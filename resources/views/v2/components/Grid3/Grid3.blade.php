@@ -8,7 +8,13 @@ $gutter = $gutter ?? false;
     
 <div class="row">
         
-    <div class="col-4 @if ($gutter) padding-right-xs-mobile-none padding-bottom-sm @endif">
+    <div class="col-4
+
+        @if ($gutter)
+
+            padding-right-sm-mobile-none padding-bottom-sm
+
+        @endif">
 
         {!! $row->shift() !!}
 
@@ -18,7 +24,7 @@ $gutter = $gutter ?? false;
     
         @if ($gutter)
         
-        padding-left-sm-mobile-none padding-right-xs-mobile-none padding-bottom-sm
+            padding-right-sm-mobile-none padding-bottom-sm
 
         @endif
 
@@ -28,7 +34,13 @@ $gutter = $gutter ?? false;
     
     </div>
 
-    <div class="col-4 @if ($gutter) padding-left-sm-mobile-none padding-bottom-md @endif">
+    <div class="col-4
+
+        @if ($gutter)
+
+            padding-right-sm-mobile-none padding-bottom-md
+
+        @endif">
     
         {!! $row->shift() !!}
     

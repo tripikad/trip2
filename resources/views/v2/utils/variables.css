@@ -184,7 +184,7 @@ $box-shadow-left: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
 
 /* Media queries */
 $mobile-width: 34em;
-$tablet-width: 48em;
+$tablet-width: 56em; /* Original was 48em; */
 $desktop-width: 62em;
 $largedesktop-width: 74em;
 $mobile: media (max-width: $mobile-width);
