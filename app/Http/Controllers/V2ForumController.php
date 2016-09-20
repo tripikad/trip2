@@ -27,13 +27,7 @@ class V2ForumController extends Controller
                 ->merge($forums->map(function ($forum) {
                     return region('ForumRow', $forum);
                 }))
-                ->push(component('Paginator')
-                    ->with('links', $forums->appends([
-                        'destination' => $currentDestination,
-                        'topic' => $currentTopic,
-                    ])
-                    ->links())
-                )
+                ->push(region('Paginator', $forums, $currentDestination, $currentTopic))
             )
 
             ->with('sidebar', collect()
