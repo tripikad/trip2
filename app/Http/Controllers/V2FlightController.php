@@ -21,6 +21,7 @@ class V2FlightController extends Controller
 
         $flights = Content::getLatestPagedItems('flight', $pageSize, $currentDestination, $currentTopic);
         $forums = Content::getLatestItems('forum', 5);
+        $travelmates = Content::getLatestItems('travelmate', 3);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
@@ -89,6 +90,20 @@ class V2FlightController extends Controller
                         )
                     )
                 )
+                ->push(component('Block')
+                    ->is('red')
+                    ->is('uppercase')
+                    ->is('white')
+                    ->with('title', trans('content.travelmate.index.title'))
+                    ->with('content', collect()
+                        ->push(component('Grid3')
+                            ->with('gutter', true)
+                            ->with('items', $travelmates->map(function ($travelmate) {
+                                return region('TravelmateCard', $travelmate);
+                            })
+                        ))
+                    )
+                )
             )
 
             ->with('footer', region('Footer'));
@@ -149,9 +164,6 @@ class V2FlightController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
-                    return region('FlightCard', $flight);
-                })))
                 ->push(component('Block')
                     ->is('red')
                     ->is('uppercase')

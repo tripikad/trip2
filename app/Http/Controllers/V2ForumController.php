@@ -16,6 +16,7 @@ class V2ForumController extends Controller
 
         $forums = Content::getLatestPagedItems('forum', false, $currentDestination, $currentTopic);
         $flights = Content::getLatestItems('flight', 3);
+        $travelmates = Content::getLatestItems('travelmate', 3);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
@@ -53,6 +54,20 @@ class V2ForumController extends Controller
                     return region('FlightCard', $flight);
                 })
                 ))
+                ->push(component('Block')
+                    ->is('red')
+                    ->is('uppercase')
+                    ->is('white')
+                    ->with('title', trans('content.travelmate.index.title'))
+                    ->with('content', collect()
+                        ->push(component('Grid3')
+                            ->with('gutter', true)
+                            ->with('items', $travelmates->map(function ($travelmate) {
+                                return region('TravelmateCard', $travelmate);
+                            })
+                        ))
+                    )
+                )
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
