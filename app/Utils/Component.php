@@ -27,8 +27,9 @@ class Component
     }
 
     public function with($key, $value)
-    {   
+    {
         $this->with->put($key, $value);
+
         return $this;
     }
 
