@@ -42,7 +42,6 @@ class V2TravelmateController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(region('TravelmateAbout'))
                 ->push(component('Block')->with('content', collect()
                     ->push(region(
                         'Filter',
@@ -54,6 +53,7 @@ class V2TravelmateController extends Controller
                         'v2.travelmate.index'
                     ))
                 ))
+                ->push(region('TravelmateAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
             )
 

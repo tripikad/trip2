@@ -37,8 +37,6 @@ class V2ForumController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->merge(region('ForumLinks'))
-                ->push(region('ForumAbout'))
                 ->push(component('Block')->with('content', collect()
                     ->push(region(
                         'Filter',
@@ -50,6 +48,8 @@ class V2ForumController extends Controller
                         'v2.forum.index'
                     ))
                 ))
+                ->merge(region('ForumLinks'))
+                ->push(region('ForumAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )

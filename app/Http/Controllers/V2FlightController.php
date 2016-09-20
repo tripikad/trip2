@@ -59,7 +59,6 @@ class V2FlightController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(region('FlightAbout'))
                 ->push(component('Block')->with('content', collect()
                     ->push(region(
                         'Filter',
@@ -71,6 +70,7 @@ class V2FlightController extends Controller
                         'v2.flight.index'
                     ))
                 ))
+                ->push(region('FlightAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
