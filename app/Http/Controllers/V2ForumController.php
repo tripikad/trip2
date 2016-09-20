@@ -55,10 +55,7 @@ class V2ForumController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
-                    return region('FlightCard', $flight);
-                })
-                ))
+                ->push(region('FlightBottom', $flights))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
@@ -97,26 +94,8 @@ class V2ForumController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Block')
-                    ->is('red')
-                    ->is('uppercase')
-                    ->is('white')
-                    ->with('title', trans('content.forum.sidebar.title'))
-                    ->with('content', collect()
-                    ->push(component('ForumBottom')
-                        ->with('left_items', region('ForumLinks'))
-                        ->with('right_items', $forums->map(function ($forum) {
-                            return region('ForumRow', $forum);
-                        }))
-                    )))
-                ->push(component('Block')->with('content', collect()
-                    ->push(component('Grid3')
-                        ->with('gutter', true)
-                        ->with('items', $travelmates->map(function ($travelmate) {
-                            return region('TravelmateCard', $travelmate);
-                        })
-                    ))
-                ))
+                ->push(region('ForumBottom', $forums))
+                ->push(region('TravelmateBottom', $travelmates))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 

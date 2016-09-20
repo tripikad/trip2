@@ -16,6 +16,7 @@ class V2TravelmateController extends Controller
 
         $travelmates = Content::getLatestPagedItems('travelmate', false, $currentDestination, $currentTopic);
         $forums = Content::getLatestItems('forum', 5);
+        $flights = Content::getLatestItems('flight', 3);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
@@ -57,7 +58,8 @@ class V2TravelmateController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Promo')->with('promo', 'footer'))
+                ->push(region('ForumBottom', $forums))
+                ->push(region('FlightBottom', $flights))
             )
 
             ->with('footer', region('Footer'));
@@ -119,12 +121,7 @@ class V2TravelmateController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Grid3')
-                    ->with('gutter', true)
-                    ->with('items', $travelmates->map(function ($travelmate) {
-                        return region('TravelmateCard', $travelmate);
-                    })
-                ))
+                ->push(region('TravelmateBottom', $travelmates))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
