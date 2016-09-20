@@ -32,13 +32,7 @@ class V2TravelmateController extends Controller
                         })
                     )
                 )
-                ->push(component('Paginator')
-                    ->with('links', $travelmates->appends([
-                        'destination' => $currentDestination,
-                        'topic' => $currentTopic,
-                    ])
-                    ->links())
-                )
+                ->push(region('Paginator', $travelmates, $currentDestination, $currentTopic))
             )
 
             ->with('sidebar', collect()
