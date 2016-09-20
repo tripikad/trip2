@@ -37,17 +37,29 @@ $footer = $footer ?? '';
 
         </div>
 
-        <div class="container">
+        <div class="background-gray padding-top-lg padding-bottom-lg">
 
-        @foreach ($bottom as $bottom_item)
-        
-            <div @if (!$loop->last) class="margin-bottom-lg" @endif>
+            <div class="container">
 
-                {!! $bottom_item !!}
+                <div class="row row-center">
+
+                    <div class="col-10">
+
+                    @foreach ($bottom as $bottom_item)
                     
+                        <div @if (!$loop->last) class="margin-bottom-lg" @endif>
+
+                            {!! $bottom_item !!}
+                                
+                        </div>
+                            
+                    @endforeach
+
+                    </div>
+
+                </div>
+
             </div>
-                
-        @endforeach
 
         </div>
     

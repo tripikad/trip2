@@ -27,6 +27,9 @@ class V2FrontpageController extends Controller
                 ->pushWhen(! $user, region('FrontpageAbout'))
                 ->push(region('FrontpageForum', $forums))
                 ->push(region('FrontpageNews', $news))
+            )
+
+            ->with('bottom', collect()
                 ->push(region('FrontpageFlightBlog', $flights->slice(3), $blogs))
                 ->push(component('Block')
                     ->is('white')
