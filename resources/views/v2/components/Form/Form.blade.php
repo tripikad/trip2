@@ -2,7 +2,7 @@
 
 $route = $route ?? '';
 $method = $method ?? 'POST';
-$fields = $fields ?? collect();
+$fields = collect($fields) ?? collect();
 
 @endphp
 

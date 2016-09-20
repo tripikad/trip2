@@ -27,9 +27,8 @@ class Component
     }
 
     public function with($key, $value)
-    {
-        $this->with->push([$key => $value]);
-
+    {   
+        $this->with->put($key, $value);
         return $this;
     }
 
@@ -62,14 +61,13 @@ class Component
 
         $name = "v2.components.$this->component.$this->component";
 
-        $with = $this->with->flatten(1)->all();
-
+        //$with = $this->with->flatten(1)->all();
         if (view()->exists($name)) {
-            return View::make($name, $with)
+            return View::make($name, $this->with)
                 ->with('isclasses', $this->generateIsClasses())
                 ->render();
         } else {
-            $props = collect($with)
+            $props = $this->with
                 ->map(function ($value, $key) {
                     if (is_array($value) || is_object($value) || is_bool($value)) {
                         $value = rawurlencode(json_encode($value));

@@ -1,7 +1,7 @@
 @php
 
-$left_items = $left_items ?? collect();
-$right_items = $right_items ?? collect();
+$left_items = collect($left_items) ?? collect();
+$right_items = collect($right_items) ?? collect();
 
 @endphp
 

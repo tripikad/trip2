@@ -1,7 +1,7 @@
 @php
 
 $title = $title ?? false;
-$content = $content ?? collect();
+$content = collect($content) ?? collect();
 
 @endphp
 
