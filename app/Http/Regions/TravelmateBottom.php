@@ -4,10 +4,8 @@ namespace App\Http\Regions;
 
 class TravelmateBottom
 {
-
     public function render($travelmates)
     {
-
         return component('Block')
             ->is('red')
             ->is('uppercase')
@@ -22,5 +20,4 @@ class TravelmateBottom
                 )
             );
     }
-
 }
