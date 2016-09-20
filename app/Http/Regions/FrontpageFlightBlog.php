@@ -4,10 +4,8 @@ namespace App\Http\Regions;
 
 class FrontpageFlightBlog
 {
-
     public function render($flights, $blogs)
     {
-
         return component('GridSplit')
             ->with('left_content', collect()
                 ->push(component('Block')
@@ -30,5 +28,4 @@ class FrontpageFlightBlog
                 )
             );
     }
-
 }

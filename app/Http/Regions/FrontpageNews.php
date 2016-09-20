@@ -4,10 +4,8 @@ namespace App\Http\Regions;
 
 class FrontpageNews
 {
-
     public function render($news)
     {
-
         return component('Block')
             ->is('white')
             ->is('uppercase')
@@ -18,7 +16,5 @@ class FrontpageNews
                     return region('NewsCard', $new);
                 }))
             ));
-    
     }
-
 }

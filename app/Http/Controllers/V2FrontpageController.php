@@ -24,7 +24,7 @@ class V2FrontpageController extends Controller
             ->with('content', collect()
 
                 ->push(region('FrontpageFlight', $flights->take(3)))
-                ->pushWhen(!$user, region('FrontpageAbout'))
+                ->pushWhen(! $user, region('FrontpageAbout'))
                 ->push(region('FrontpageForum', $forums))
                 ->push(component('Promo')->with('promo', 'content'))
                 ->push(region('FrontpageNews', $news))

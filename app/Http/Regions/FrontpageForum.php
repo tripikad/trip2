@@ -4,10 +4,8 @@ namespace App\Http\Regions;
 
 class FrontpageForum
 {
-
     public function render($forums)
     {
-
         return component('Block')
             ->is('uppercase')
             ->is('white')
@@ -21,7 +19,5 @@ class FrontpageForum
                         return region('ForumRow', $forum);
                     }))
                 ));
-
     }
-
 }
