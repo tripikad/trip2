@@ -10,7 +10,7 @@ class V2FrontpageController extends Controller
     {
         $user = auth()->user();
 
-        $flights = Content::getLatestItems('flight', 8);
+        $flights = Content::getLatestItems('flight', 9);
         $forums = Content::getLatestItems('forum', $user ? 24 : 5);
         $news = Content::getLatestItems('news', 6);
         $blogs = Content::getLatestItems('blog', 3);

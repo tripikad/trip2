@@ -13,8 +13,13 @@ class FrontpageForum
             ->with('content', collect()
                 ->push(component('GridSplit')
                     ->with('left_col', 3)
-                    ->with('right_col', 9)
-                    ->with('left_content', collect()->merge(region('ForumLinks')))
+                    ->with('right_col', 8)
+                    ->with('left_content', collect()
+                        ->push(region('ForumAbout', 'white'))
+                        ->merge(region('ForumLinks'))
+                        ->push(component('Promo')->with('promo', 'sidebar_small'))
+                        ->push(component('Promo')->with('promo', 'sidebar_large'))
+                    )
                     ->with('right_content', $forums->map(function ($forum) {
                         return region('ForumRow', $forum);
                     }))
