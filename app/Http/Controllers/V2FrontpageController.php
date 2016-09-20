@@ -38,6 +38,8 @@ class V2FrontpageController extends Controller
                     })
                 ))
                 ->push(component('GridSplit')
+                    ->with('left_col', 9)
+                    ->with('right_col', 3)
                     ->with('left_content', collect()
                         ->push(component('Block')
                             ->is('dark')
