@@ -45,7 +45,7 @@ class V2FlightController extends Controller
                         return region('FlightRow', $flight);
                     })
                 )
-                ->push(component('Promo')->with('promo', 'content'))
+                ->push(component('Promo')->with('promo', 'body'))
                 ->merge($flights
                     ->slice($firstBatch + $secondBatch)
                     ->take($thirdBatch)

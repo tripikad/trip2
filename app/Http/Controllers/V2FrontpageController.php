@@ -14,8 +14,7 @@ class V2FrontpageController extends Controller
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 6);
         $travelmates = Content::getLatestItems('travelmate', 3);
-
-        $user = auth()->check() && auth()->user();
+        $user = auth()->user();
 
         return view('v2.layouts.frontpage')
 
@@ -37,33 +36,7 @@ class V2FrontpageController extends Controller
                             .region('FlightCard', $topFlight);
                     })
                 ))
-                ->push(component('GridSplit')
-                    ->with('left_col', 9)
-                    ->with('right_col', 3)
-                    ->with('left_content', collect()
-                        ->push(component('Block')
-                            ->is('dark')
-                            ->is('white')
-                            ->with('title', 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.')
-                            ->with('content', collect()
-                                ->push(component('Link')
-                                    ->with('title', trans('content.action.more.about'))
-                                    ->with('route', route('v2.static.show', [1534]))
-                                )
-                                ->pushWhen(! $user, component('Button')
-                                    ->with('title', trans('frontpage.index.about.register'))
-                                    ->with('route', route('register.form'))
-                                )
-                            )
-                        )
-                    )
-                    ->with('right_content', collect()
-                        ->push(component('Button')
-                            ->with('title', trans('frontpage.index.about.register'))
-                            ->with('route', route('register.form'))
-                        )
-                    )
-                )
+                ->pushWhen(!$user, region('FrontpageAbout'))
                 ->push(component('Block')
                     ->is('uppercase')
                     ->is('white')
