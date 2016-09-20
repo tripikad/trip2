@@ -4,10 +4,8 @@ namespace App\Http\Regions;
 
 class ForumBottom
 {
-
     public function render($forums)
     {
-
         return component('Block')
             ->is('red')
             ->is('uppercase')
@@ -23,7 +21,5 @@ class ForumBottom
                     }))
                 )
             );
-    
     }
-
 }
