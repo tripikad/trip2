@@ -16,7 +16,7 @@ class V2TravelmateController extends Controller
 
         $travelmates = Content::getLatestPagedItems('travelmate', false, $currentDestination, $currentTopic);
         $forums = Content::getLatestItems('forum', 5);
-        $flights = Content::getLatestItems('flight', 3);
+        $flights = Content::getLatestItems('flight', 4);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 

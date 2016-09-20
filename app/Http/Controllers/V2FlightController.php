@@ -85,7 +85,7 @@ class V2FlightController extends Controller
     public function show($slug)
     {
         $flight = Content::getItemBySlug($slug);
-        $flights = Content::getLatestItems('flight', 3);
+        $flights = Content::getLatestItems('flight', 4);
         $forums = Content::getLatestItems('forum', 5);
         $travelmates = Content::getLatestItems('travelmate', 3);
         $user = auth()->user();
