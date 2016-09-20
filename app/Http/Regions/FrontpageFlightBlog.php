@@ -14,14 +14,7 @@ class FrontpageFlightBlog
                     ->is('white')
                     ->is('uppercase')
                     ->with('title', trans('frontpage.index.flight.title'))
-                    ->with('content', $flights->take(3)->map(function ($bottomFlight) {
-                        return region('FlightRow', $bottomFlight);
-                    }))
-                )
-                ->push(component('Promo')->with('promo', 'body'))
-                ->push(component('Block')
-                    ->is('white')
-                    ->with('content', $flights->slice(3)->map(function ($bottomFlight) {
+                    ->with('content', $flights->map(function ($bottomFlight) {
                         return region('FlightRow', $bottomFlight);
                     }))
                 )
