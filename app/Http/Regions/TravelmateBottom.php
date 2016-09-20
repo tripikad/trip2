@@ -7,7 +7,6 @@ class TravelmateBottom
     public function render($travelmates)
     {
         return component('Block')
-            ->is('red')
             ->is('uppercase')
             ->is('white')
             ->with('title', trans('frontpage.index.travelmate.title'))
