@@ -40,7 +40,11 @@ class ResetController extends Controller
 
     public function postEmail(Request $request)
     {
-        $this->validate($request, ['email' => 'required|email']);
+        $this->validate($request, [
+            'email' => 'required|email',
+            'full_name'   => 'honeypot',
+            'time'   => 'required|honeytime:2',
+        ]);
 
         $response = Password::sendResetLink($request->only('email'));
 
