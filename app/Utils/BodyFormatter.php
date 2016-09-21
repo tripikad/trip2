@@ -3,7 +3,8 @@
 namespace App\Utils;
 
 use App\Image;
-use Markdown;
+
+// use Markdown;
 
 class BodyFormatter
 {
@@ -52,7 +53,6 @@ class BodyFormatter
         return $this;
     }
 
-    /*
     public function youtube()
     {
         $pattern = "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i";
@@ -65,10 +65,10 @@ class BodyFormatter
 
         return $this;
     }
-    */
+
     public function markdown()
     {
-        $this->body = Markdown::convertToHtml($this->body);
+        // $this->body = Markdown::convertToHtml($this->body);
 
         return $this;
     }
@@ -79,6 +79,7 @@ class BodyFormatter
             ->markdown()
             ->links()
             ->images()
+            // ->youtube()
             ->body;
     }
 }
