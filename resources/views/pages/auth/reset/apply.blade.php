@@ -28,6 +28,9 @@
     <div class="r-auth__content">
         <div class="r-auth__content-inner">
             {!! Form::open(['route' => 'reset.apply.submit']) !!}
+
+                {!! Honeypot::generate('full_name', 'time') !!}
+
                 <div class="c-form__group">
                     {!! Form::label('email', trans('auth.reset.apply.field.email.title'), [
                         'class' => 'c-form__label'

@@ -63,4 +63,7 @@ return [
     'unique'               => ':attribute on juba eelnevalt kasutusel.',
     'url'                  => ':attribute formaat pole lubatud.',
 
+    'honeypot'  => 'Midagi läks väga-väga valesti',
+    'honeytime' => 'Midagi läks valesti, proovi mõne sekundi pärast uuesti',
+
 ];
