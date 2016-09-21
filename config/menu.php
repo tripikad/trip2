@@ -77,10 +77,12 @@ return [
         ],
         'flightfeed' => [
             'route' => '/lendude_sooduspakkumised/rss',
+            'external' => true,
             'icon' => 'icon-rss',
         ],
         'newsfeed' => [
             'route' => '/index.atom',
+            'external' => true,
             'icon' => 'icon-rss',
         ],
     ],
