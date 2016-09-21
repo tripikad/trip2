@@ -31,7 +31,7 @@ googletag.cmd.push(function() {
     googletag.pubads().collapseEmptyDivs();
     googletag.enableServices();
     googletag.pubads().addEventListener('slotRenderEnded', function(e) {
-        if ($('#'+e.slot.o.o).length) {
+        if (document.getElementById(e.slot.o.o)) {
             ++index;
             slot[index] = setTimeout(function(){
                 renderEnded(e.slot.o.o, e.size[0], e.size[1], index);
@@ -44,7 +44,7 @@ googletag.cmd.push(function() {
 window.onload = function(){
     for (var promo in promos) {
         if(promos[promo].id1 && promos[promo].id2) {
-            if ($('#' + promos[promo].id2).length) {
+            if (document.getElementById(promos[promo].id2)) {
                 googletag.display(promos[promo].id2);
             }
         }
@@ -52,13 +52,32 @@ window.onload = function(){
 }
 
 function renderEnded (adunitId, width, height, i) {
-    if ($('#' + adunitId).find('iframe')) {
-        var iFrame = $('#' + adunitId).find('iframe'),
-            newHeight = (($(iFrame).width() * height) / width);
-        $(iFrame).contents().find('#google_image_div').css({'max-width': '100%', 'height': 'auto', 'display': 'block'});
-        $(iFrame).contents().find('img').css({'max-width': '100%', 'height': 'auto', 'display': 'block'});
-        $(iFrame).css({'height': newHeight+'px'});
-        $(iFrame).parents("#" + adunitId).show();
+    var adUnitElement = document.getElementById(adunitId);
+    if (adUnitElement.querySelector('iframe')) {
+        var iFrame = adUnitElement.querySelector('iframe'),
+            newHeight = ((parseInt(window.getComputedStyle(iFrame, null).width) * height) / width),
+            iFrameID = iFrame.getAttribute('id'),
+            goToFrame = document.getElementById(iFrameID).contentWindow,
+            googleImageDiv = goToFrame.document.querySelector('#google_image_div'),
+            imgInIFrame = goToFrame.document.querySelector('img');
+
+        if (googleImageDiv) {
+            googleImageDiv.style.maxWidth = '100%';
+            googleImageDiv.style.height = 'auto';
+            googleImageDiv.style.display = 'block';
+        }
+
+        if (imgInIFrame) {
+            imgInIFrame.style.maxWidth = '100%';
+            imgInIFrame.style.height = 'auto';
+            imgInIFrame.style.display = 'block';
+        }
+
+        iFrame.style.height = newHeight + 'px';
+
+        while (iFrame = iFrame.parentElement.closest('#' + adunitId)) {
+            iFrame.style.display = 'block';
+        }
 
         if (slot.length && slot[i]) {
             clearTimeout(slot[i]);
