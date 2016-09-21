@@ -106,13 +106,6 @@ modifiers:
                         <p class="c-forum-list__date">{{ $item['date'] }}</p>
                     @endif
 
-                    @if(isset($item['new']) && $item['new'])
-                        @include('component.badge', [
-                            'modifiers' => 'm-inverted m-red',
-                            'title' => 'unread'
-                        ])
-                    @endif
-
                 </div>
 
                 @if (isset($item['route']))

@@ -7,7 +7,6 @@ use View;
 use Cache;
 use App\Destination;
 use App\Main;
-use App\Content;
 
 class FrontpageController extends Controller
 {

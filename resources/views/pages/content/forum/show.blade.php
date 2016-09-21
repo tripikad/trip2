@@ -396,7 +396,6 @@
                                                 'text' => 'D'
                                             ],
                                         ],
-                                        'new' => ($forum->isNew ? $forum->isNew : false),
                                         'badge' => [
                                             'modifiers' => 'm-inverted',
                                             'count' => $forum->comments->count()
