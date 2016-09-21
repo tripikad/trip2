@@ -3,7 +3,6 @@
 namespace App\Utils;
 
 use App\Image;
-
 use Markdown;
 
 class BodyFormatter
@@ -52,6 +51,7 @@ class BodyFormatter
 
         return $this;
     }
+
     /*
     public function youtube()
     {
