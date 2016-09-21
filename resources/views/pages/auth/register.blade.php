@@ -44,7 +44,7 @@
 
             {!! Form::open(['route' => 'register.submit']) !!}
 
-                {!! Honeypot::generate('fullname', 'time') !!}
+                {!! Honeypot::generate('full_name', 'time') !!}
 
                 <div class="c-form__group">
                     {!! Form::label('name', trans('auth.register.field.name.title'), [

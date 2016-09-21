@@ -19,21 +19,15 @@ $footer = $footer ?? '';
 
             <div class="col-9">
 
-                @foreach ($content->withoutLast() as $content_item)
+                @foreach ($content as $content_item)
                 
-                <div class="margin-bottom-md">
+                <div @if (!$loop->last) class="margin-bottom-md" @endif>
 
                     {!! $content_item !!}
                         
                 </div>
 
                 @endforeach
-
-                <div>
-
-                    {!! $content->last() !!}
-                        
-                </div>
 
             </div>
 
@@ -45,7 +39,7 @@ $footer = $footer ?? '';
 
     @foreach ($bottom as $bottom_item)
     
-        <div class="margin-bottom-md">
+        <div @if (!$loop->last) class="margin-bottom-md" @endif>
 
             {!! $bottom_item !!}
                 

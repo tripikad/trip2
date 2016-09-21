@@ -39,7 +39,7 @@ $font-family-code: monospace;
 $font-size-xs: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
-$font-size-lg: 19px;
+$font-size-lg: 18px;
 $font-size-xl: 22px;
 $font-size-xxl: 32px;
 $font-size-xxxl: 48px;
@@ -106,6 +106,7 @@ $padding-topbottom-sm: $padding-sm 0;
 $padding-topbottom-md: $padding-md 0;
 $padding-topbottom-lg: $padding-lg 0;
 $padding-topbottom-xl: $padding-xl 0;
+$margin-xxs: $padding-xxs;
 $margin-xs: $padding-xs;
 $margin-sm: $padding-sm;
 $margin-md: $padding-md;
@@ -183,7 +184,7 @@ $box-shadow-left: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
 
 /* Media queries */
 $mobile-width: 34em;
-$tablet-width: 48em;
+$tablet-width: 56em; /* Original was 48em; */
 $desktop-width: 62em;
 $largedesktop-width: 74em;
 $mobile: media (max-width: $mobile-width);

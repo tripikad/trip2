@@ -65,6 +65,8 @@ class AuthTest extends TestCase
 
         // User can request new password
 
+        Honeypot::disable();
+
         $this->visit('/')
             ->click(trans('menu.auth.login'))
             ->click(trans('auth.reset.apply.title.link'))
@@ -96,6 +98,8 @@ class AuthTest extends TestCase
 
     public function test_nonregistered_user_can_not_reset_password()
     {
+        Honeypot::disable();
+
         $this->visit('/')
             ->click(trans('menu.auth.login'))
             ->click(trans('auth.reset.apply.title.link'))

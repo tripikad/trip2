@@ -2,6 +2,29 @@
 
 return [
 
+    /*
+    |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of your application. This value is used when the
+    | framework needs to place the application's name in a notification or
+    | any other location as required by the application or its packages.
+    */
+
+    'name' => 'Trip.ee',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Environment
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the "environment" your application is currently
+    | running in. This may determine how you prefer to configure various
+    | services your application utilizes. Set this in your ".env" file.
+    |
+    */
+
     'env' => env('APP_ENV', 'production'),
 
     /*
@@ -15,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG'),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -99,6 +122,8 @@ return [
 
     'log' => env('LOG', 'single'),
 
+    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -130,6 +155,7 @@ return [
         App\Providers\Md5HashServiceProvider::class,
 
         Illuminate\Mail\MailServiceProvider::class,
+        Illuminate\Notifications\NotificationServiceProvider::class,
         Illuminate\Pagination\PaginationServiceProvider::class,
         Illuminate\Pipeline\PipelineServiceProvider::class,
         Illuminate\Queue\QueueServiceProvider::class,
@@ -154,6 +180,8 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         // GrahamCampbell\Markdown\MarkdownServiceProvider::class,
 
+        Msurguy\Honeypot\HoneypotServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -161,7 +189,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
-        'Msurguy\Honeypot\HoneypotServiceProvider',
 
     ],
 
@@ -220,8 +247,9 @@ return [
         'Feed'      => Roumen\Feed\Feed::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Ekko'      => Laravelista\Ekko\Facades\Ekko::class,
-        'Honeypot' => 'Msurguy\Honeypot\HoneypotFacade',
+        'Honeypot'  => Msurguy\Honeypot\HoneypotFacade::class,
         // 'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+
     ],
 
 ];

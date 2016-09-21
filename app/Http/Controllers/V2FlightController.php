@@ -5,21 +5,24 @@ namespace App\Http\Controllers;
 use Request;
 use App\Content;
 use App\Destination;
+use App\Topic;
 
 class V2FlightController extends Controller
 {
     public function index()
     {
         $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
 
         $firstBatch = 3;
         $secondBatch = 10;
         $thirdBatch = 10;
         $pageSize = $firstBatch + $secondBatch + $thirdBatch;
 
-        $flights = Content::getLatestPagedItems('flight', $pageSize, $currentDestination);
+        $flights = Content::getLatestPagedItems('flight', $pageSize, $currentDestination, $currentTopic);
         $forums = Content::getLatestItems('forum', 5);
         $destinations = Destination::select('id', 'name')->get();
+        $topics = Topic::select('id', 'name')->get();
 
         return view('v2.layouts.2col')
 
@@ -42,7 +45,7 @@ class V2FlightController extends Controller
                         return region('FlightRow', $flight);
                     })
                 )
-                ->push(component('Promo')->with('promo', 'content'))
+                ->push(component('Promo')->with('promo', 'body'))
                 ->merge($flights
                     ->slice($firstBatch + $secondBatch)
                     ->take($thirdBatch)
@@ -50,16 +53,10 @@ class V2FlightController extends Controller
                         return region('FlightRow', $flight);
                     })
                 )
-                ->push(component('Paginator')
-                    ->with('links', $flights->appends([
-                        'destination' => $currentDestination,
-                    ])
-                    ->links())
-                )
+                ->push(region('Paginator', $flights, $currentDestination, $currentTopic))
             )
 
             ->with('sidebar', collect()
-                ->push(region('FlightAbout'))
                 ->push(component('Block')->with('content', collect()
                     ->push(region(
                         'Filter',
@@ -71,26 +68,13 @@ class V2FlightController extends Controller
                         'v2.flight.index'
                     ))
                 ))
+                ->push(region('FlightAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
-                ->push(component('Block')
-                    ->is('red')
-                    ->is('uppercase')
-                    ->is('white')
-                    ->with('title', trans('content.forum.sidebar.title'))
-                    ->with('content', collect()
-                        ->push(component('ForumBottom')
-                            ->with('left_items', region('ForumLinks'))
-                            ->with('right_items', $forums->map(function ($forum) {
-                                return region('ForumRow', $forum);
-                            }))
-
-                        )
-                    )
-                )
+                ->push(region('ForumBottom', $forums))
             )
 
             ->with('footer', region('Footer'));
@@ -99,7 +83,7 @@ class V2FlightController extends Controller
     public function show($slug)
     {
         $flight = Content::getItemBySlug($slug);
-        $flights = Content::getLatestItems('flight', 3);
+        $flights = Content::getLatestItems('flight', 4);
         $forums = Content::getLatestItems('forum', 5);
         $travelmates = Content::getLatestItems('travelmate', 3);
         $user = auth()->user();
@@ -151,23 +135,8 @@ class V2FlightController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
-                    return region('FlightCard', $flight);
-                })))
-                ->push(component('Block')
-                    ->is('red')
-                    ->is('uppercase')
-                    ->is('white')
-                    ->with('title', trans('content.travelmate.index.title'))
-                    ->with('content', collect()
-                        ->push(component('Grid3')
-                            ->with('gutter', true)
-                            ->with('items', $travelmates->map(function ($travelmate) {
-                                return region('TravelmateCard', $travelmate);
-                            })
-                        ))
-                    )
-                )
+                ->push(region('FlightBottom', $flights))
+                ->push(region('TravelmateBottom', $travelmates))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 

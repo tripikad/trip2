@@ -67,7 +67,7 @@ class ContentController extends Controller
         if ($request->destination) {
             $descendants = Destination::find($request->destination)
                 ->descendantsAndSelf()
-                ->lists('id');
+                ->pluck('id');
 
             $contents = $contents
                 ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
@@ -242,10 +242,10 @@ class ContentController extends Controller
         $content = \App\Content::findorFail($id);
 
         $destinations = Destination::getNames();
-        $destination = $content->destinations()->select('destinations.id')->lists('id')->toArray();
+        $destination = $content->destinations()->select('destinations.id')->pluck('id')->toArray();
 
         $topics = Topic::getNames();
-        $topic = $content->topics()->select('topics.id')->lists('id')->toArray();
+        $topic = $content->topics()->select('topics.id')->pluck('id')->toArray();
 
         $viewType = $type;
         foreach (config('menu.forum') as $item) {

@@ -21,7 +21,8 @@ class V2DestinationController extends Controller
 
         // TODO: Replace with Destination::getPopular()
 
-        $destinations = Destination::take(5)->get();
+        $destinations = Destination::inRandomOrder()->take(5)->get();
+
 
         return view('v2.layouts.2col')
 
@@ -67,9 +68,11 @@ class V2DestinationController extends Controller
                     ->is('white')
                     ->with('title', trans('destination.show.popular.title.short'))
                     ->with('content', $destinations->map(function ($destination) {
-                        return component('DestinationRow')
-                            ->with('name', $destination->vars()->name)
-                            ->with('route', route('v2.destination.show', [$destination]));
+                        return region(
+                            'DestinationBar',
+                            $destination,
+                            $destination->getAncestors()
+                        );
                     })
                 ))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))

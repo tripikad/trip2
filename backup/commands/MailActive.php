@@ -20,7 +20,7 @@ class MailActive extends Command
             ->groupBy('users.id')
             ->orderBy('commentsCount', 'desc')
             ->take(650)
-            ->lists('users.id');
+            ->pluck('users.id');
 
         $top_contenters_ids = App\User::leftJoin('contents', 'contents.user_id', '=', 'users.id')
             ->select('users.*', DB::Raw('count(contents.id) as contentsCount'))
@@ -29,7 +29,7 @@ class MailActive extends Command
             ->groupBy('users.id')
             ->orderBy('contentsCount', 'desc')
             ->take(90)
-            ->lists('users.id');
+            ->pluck('users.id');
 
         $top_ids = $top_commenters_ids->merge($top_contenters_ids)->unique();
 

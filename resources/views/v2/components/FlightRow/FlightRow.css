@@ -6,7 +6,7 @@
 
     .FlightRow__left {
         display: flex;
-        align-items: center;
+        align-items: top;
         padding-right: $padding-sm;
         display: none ?if $mobile;
     }
@@ -20,4 +20,5 @@
         color: $blue;
         font: $font-heading-lg;
         margin-bottom: $margin-xs;
+        line-height: $line-height-md;
     }

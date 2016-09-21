@@ -30,11 +30,10 @@ class V2NewsController extends Controller
                     })
                     )
                 )
-                ->push(component('Paginator')->with('links', $news->links()))
+                ->push(region('Paginator', $news, $currentDestination, $currentTopic))
             )
 
             ->with('sidebar', collect()
-                ->push(region('NewsAbout'))
                 ->push(component('Block')->with('content', collect()
                     ->push(region(
                         'Filter',
@@ -46,6 +45,7 @@ class V2NewsController extends Controller
                         'v2.news.index'
                     ))
                 ))
+                ->push(region('NewsAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )

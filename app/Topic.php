@@ -26,6 +26,6 @@ class Topic extends Model
 
     public static function getNames()
     {
-        return self::lists('name', 'id')->sort();
+        return self::pluck('name', 'id')->sort();
     }
 }
