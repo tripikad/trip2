@@ -7,6 +7,11 @@ return [
 
     Alternatiivina, kui soovid minna meie avalehele vajuta Trip.ee logole.',
 
+    '500.title' => 'Nüüd on küll piinlik...',
+    '500.body' => 'Tegemist on tehnilise tõrkega, mistõttu Sa siia lehele sattusid. Proovi mõne aja pärast uuesti.
+    
+    <a href="/">Liigu tagasi Trip.ee avalehele</a>',
+
     '401.ajax.title' => 'Pole piisavalt õiguseid',
 
     '401.title.logged' => 'Õigused puuduvad',
