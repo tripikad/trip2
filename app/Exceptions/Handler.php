@@ -45,12 +45,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-
         if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
             abort(404);
         }
 
-        if (! config('app.debug') && !$e instanceof MaintenanceModeException) {
+        if (! config('app.debug') && ! $e instanceof MaintenanceModeException) {
             return view('errors.500');
         } else {
             return parent::render($request, $e);
