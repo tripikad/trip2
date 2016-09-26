@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +47,8 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
             abort(404);
+        } elseif ($e instanceof MaintenanceModeException) {
+            abort(503);
         }
 
         if (! config('app.debug')) {
