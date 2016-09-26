@@ -8,7 +8,7 @@ return [
     Alternatiivina, kui soovid minna meie avalehele vajuta Trip.ee logole.',
 
     '500.title' => 'Nüüd on küll piinlik...',
-    '500.body' => 'Tegemist on tehnilise tõrkega, mistõttu Sa siia lehele sattusid. Proovi mõne aja pärast uuesti.
+    '500.body' => 'Tegemist on tehnilise tõrkega, mistõttu Sa siia lehele sattusid. Oleme sellest teadlikud ning parandame probleemi võimalikult kiirelt. Proovi mõne aja pärast uuesti.
     
     <a href="/">Liigu tagasi Trip.ee avalehele</a>',
 
