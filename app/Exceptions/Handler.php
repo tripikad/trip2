@@ -5,7 +5,6 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Foundation\Http\Exceptions\MaintenanceModeException;
 
 class Handler extends ExceptionHandler
 {
@@ -49,7 +48,7 @@ class Handler extends ExceptionHandler
             abort(404);
         }
 
-        if (! config('app.debug') && ! $e instanceof MaintenanceModeException) {
+        if (! config('app.debug') && $e instanceof \ErrorException) {
             return view('errors.500');
         } else {
             return parent::render($request, $e);
