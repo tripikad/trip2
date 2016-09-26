@@ -21,14 +21,17 @@ class SearchController extends Controller
 
         $q = trim($request->input('q'));
         $active_search = 'forum';
+
+        foreach (array_keys(config('search.types')) as $type) {
+            $counts[$type] = ($q && ! empty($q) ? $this->getResultsCountByType($type, $q) : 0);
+            $tabs[$type]['cnt'] = $counts[$type];
+            $tabs[$type]['modifier'] = $counts[$type];
+            $tabs[$type]['title'] = trans('search.tab.'.$type);
+            $tabs[$type]['route'] = $counts[$type] ? '/search/'.$type.'?q='.$q : '#';
+        }
+
         if ($q && ! empty($q)) {
-            foreach (array_keys(config('search.types')) as $type) {
-                $counts[$type] = $this->getResultsCountByType($type, $q);
-                $tabs[$type]['cnt'] = $counts[$type];
-                $tabs[$type]['modifier'] = $counts[$type];
-                $tabs[$type]['title'] = trans('search.tab.'.$type);
-                $tabs[$type]['route'] = $counts[$type] ? '/search/'.$type.'?q='.$q : '#';
-            }
+
 
             $active_search = $search_type ? $search_type : 'forum';
 
@@ -45,7 +48,7 @@ class SearchController extends Controller
             $results = $this->getSearchResultsByType($active_search, $q);
             $results = $this->modifyResultsByType($active_search, $results);
         } else {
-            $results = $tabs = null;
+            $results = null;
         }
 
         Log::info('User searched', [
@@ -62,7 +65,7 @@ class SearchController extends Controller
     {
         foreach ($results as $key => $item) {
             if (! $ajax) {
-                $results[$key]['short_body_text'] = (strlen($item->body) > 300) ? substr($item->body, 0, 300).'...' : $item->body;
+                $results[$key]['short_body_text'] = (strlen(strip_tags($item->body)) > 300) ? substr(strip_tags($item->body), 0, 300).'...' : strip_tags($item->body);
             }
 
             $results[$key]['comments_count'] = count($item->comments);
@@ -94,7 +97,7 @@ class SearchController extends Controller
     private function modifyNewsResults($results)
     {
         foreach ($results as $key => $item) {
-            $results[$key]['short_body_text'] = (strlen($item->body) > 300) ? substr($item->body, 0, 300).'...' : $item->body;
+            $results[$key]['short_body_text'] = (strlen(strip_tags($item->body)) > 300) ? substr(strip_tags($item->body), 0, 300).'...' : strip_tags($item->body);
             $results[$key]['route'] = route($item->type.'.show', [$item->slug]);
             $results[$key]['comments_count'] = count($item->comments);
             $results[$key]['content_img'] = $item->imagePreset('small_square');
