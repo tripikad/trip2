@@ -13,7 +13,7 @@ return [
     <a href="/">Liigu tagasi Trip.ee avalehele</a>',
 
     '503.title' => 'Teeme trip.ee veelgi paremaks!',
-    '503.body' => 'Hetkel toimub uuenduste/paranduste üleslaadimine, mistõttu Sa siia lehele sattusid.
+    '503.body' => 'Hetkel toimub uuenduste ja paranduste üleslaadimine.
     
     
     Proovi mõne aja pärast uuesti.',
