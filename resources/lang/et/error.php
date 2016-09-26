@@ -12,6 +12,12 @@ return [
     
     <a href="/">Liigu tagasi Trip.ee avalehele</a>',
 
+    '503.title' => 'Teeme trip.ee veelgi paremaks!',
+    '503.body' => 'Hetkel toimub uuenduste/paranduste üles laadimine, mistõttu Sa siia lehele sattusid.
+    
+    
+    Proovi mõne aja pärast uuesti.',
+
     '401.ajax.title' => 'Pole piisavalt õiguseid',
 
     '401.title.logged' => 'Õigused puuduvad',
