@@ -31,8 +31,6 @@ class SearchController extends Controller
         }
 
         if ($q && ! empty($q)) {
-
-
             $active_search = $search_type ? $search_type : 'forum';
 
             if ($active_search == 'forum' && isset($counts) && $counts['forum'] == 0) {
