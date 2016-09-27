@@ -24,8 +24,5 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('generate:userRankings')
             ->dailyAt('04:00');
-
-        $schedule->command('remove:duplicates')
-            ->dailyAt('18:00');
     }
 }
