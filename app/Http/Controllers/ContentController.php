@@ -37,7 +37,6 @@ class ContentController extends Controller
                     ->on('comments.id', '=',
                         DB::raw('(select id from comments where content_id = comments.content_id order by id desc limit 1)'));
             })
-            //leftJoin('comments', 'contents.id', '=', 'comments.content_id')
                 ->where('contents.type', $type)
                 ->with(config("content_$type.index.with"))
                 ->select(['contents.*', DB::raw('IF(comments.created_at > contents.created_at, comments.created_at, contents.created_at) AS contentOrder')])
