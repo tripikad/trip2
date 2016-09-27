@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\MakeComponent::class,
         \App\Console\Commands\MakeRegion::class,
         \App\Console\Commands\UserDelete::class,
+        \App\Console\Commands\RemoveDuplicates::class,
 
     ];
 
@@ -23,5 +24,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('generate:userRankings')
             ->dailyAt('04:00');
+
+        $schedule->command('remove:duplicates')
+            ->dailyAt('18:00');
     }
 }
