@@ -54,22 +54,6 @@ class ContentController extends Controller
                 );
         }
 
-        //dd($contents->get());
-
-        /*$contents = Content::whereType($type)
-            ->with(config("content_$type.index.with"))
-            ->orderBy(
-                config("content_$type.index.orderBy.field"),
-                config("content_$type.index.orderBy.order")
-            );
-
-        $contents = Content::whereType($type)
-            ->with(config("content_$type.index.with"))
-            ->orderBy(
-                config("content_$type.index.orderBy.field"),
-                config("content_$type.index.orderBy.order")
-            );*/
-
         if (config("content_$type.store.status", 1) == 0 && Auth::check() && Auth::user()->hasRole('admin')) {
             //$contents->whereStatus(0);
         } else {
