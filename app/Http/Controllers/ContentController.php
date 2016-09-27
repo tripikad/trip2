@@ -86,6 +86,23 @@ class ContentController extends Controller
 
         $contents = $contents->simplePaginate(config('content_'.$type.'.index.paginate'));
 
+        $queryParameters = [];
+        $queryString = '';
+
+        if (isset($request->destination) && $request->destination) {
+            $queryParameters[] = 'destination='.$request->destination;
+        }
+
+        if (isset($request->topic) && $request->topic) {
+            $queryParameters[] = 'topic='.$request->topic;
+        }
+
+        if (! empty($queryParameters) && count($queryParameters)) {
+            $queryString = '?'.implode('&', $queryParameters);
+        }
+
+        $contents->setPath(route($type.'.index').$queryString);
+
         $destinations = Destination::getNames($type);
         $topics = Topic::getNames($type);
 
