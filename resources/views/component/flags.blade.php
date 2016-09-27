@@ -9,11 +9,11 @@
                 $flags['good']['flaggable_id'],
                 $flags['good']['flag_type'],
                 isset($flags['good']['return']) ? $flags['good']['return'] : null,
-            ]) }}" class="c-flag__item-link js-flag">
+            ]) }}" class="c-flag__item-link {{ isset($flags['good']['active']) && $flags['good']['active'] ? 'm-active' : '' }} js-flag">
 
         @endif
 
-        <div class="c-flag__item-icon m-active js-icon">
+        <div class="c-flag__item-icon {{ isset($flags['good']['active']) && $flags['good']['active'] ? '' : 'm-active' }} js-icon">
 
             @include('component.svg.sprite', [
                 'name' => 'icon-thumb-up'
@@ -21,7 +21,7 @@
 
         </div>
 
-        <div class="c-flag__item-icon m-filled js-icon-filled">
+        <div class="c-flag__item-icon m-filled {{ isset($flags['good']['active']) && $flags['good']['active'] ? 'm-active' : '' }} js-icon-filled">
 
             @include('component.svg.sprite', [
                 'name' => 'icon-thumb-up-filled'
@@ -52,11 +52,11 @@
                 $flags['bad']['flaggable_id'],
                 $flags['bad']['flag_type'],
                 isset($flags['bad']['return']) ? $flags['bad']['return'] : null,
-            ]) }}" class="c-flag__item-link js-flag">
+            ]) }}" class="c-flag__item-link {{ isset($flags['bad']['active']) && $flags['bad']['active'] ? 'm-active' : '' }} js-flag">
 
         @endif
 
-        <div class="c-flag__item-icon m-active js-icon">
+        <div class="c-flag__item-icon {{ isset($flags['bad']['active']) && $flags['bad']['active'] ? '' : 'm-active' }} js-icon">
 
             @include('component.svg.sprite', [
                 'name' => 'icon-thumb-down'
@@ -64,7 +64,7 @@
 
         </div>
 
-        <div class="c-flag__item-icon m-filled js-icon-filled">
+        <div class="c-flag__item-icon m-filled {{ isset($flags['bad']['active']) && $flags['bad']['active'] ? 'm-active' : '' }} js-icon-filled">
 
             @include('component.svg.sprite', [
                 'name' => 'icon-thumb-down-filled'
