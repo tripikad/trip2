@@ -1,0 +1,25 @@
+@import "variables";
+
+    .ForumPost__content {
+        display: flex;
+    }
+
+    .ForumPost__title {
+        color: $gray-darkest;
+        font: $font-heading-xl;
+        margin-bottom: $margin-sm;
+    }
+
+    .ForumPost__left {
+        padding-right: $padding-md;
+        display: none ?if $mobile;
+    }
+
+    .ForumPost__meta {
+        margin-bottom: $margin-sm;
+    }
+
+.ForumPost--unpublished {
+    opacity: $opacity-md;
+    background: $pink;
+}

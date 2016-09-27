@@ -2,9 +2,6 @@
 
 .NavbarDesktop {
     position: relative;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
 }
 
     .NavbarDesktop__links {
@@ -54,3 +51,7 @@
         font: $font-heading-sm;
         background: $green-dark;
     }
+
+.NavbarDesktop--white .NavbarDesktop__link {
+    color: $white;
+}

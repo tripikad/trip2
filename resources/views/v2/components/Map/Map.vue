@@ -4,9 +4,9 @@
 
         <path
             v-for="path in paths"
-            fill="gray"
+            fill=""
             :d="path"
-        />
+         />
 
     </div>
 
@@ -21,29 +21,42 @@
     export default {
 
         props: {
-            isclasses: {default: ''}
+            isclasses: {default: ''},
+            left: {default: '-162'},
+            bottom: {default: '-52'},
+            right: {default: '183'},
+            top: {default: '87'},
+            step: {default: 3},
+            radius: {default: 3}
+        },
+
+        computed: {
+            width: function() {
+                return Math.abs(this.left) + Math.abs(this.right) * 5
+            },
+            height: function() {
+                return Math.abs(this.top) + Math.abs(this.bottom) * 5
+            }
+
         },
 
         data() {
             return {
-                paths: [],
-                width: 600,
-                height: 300,
-                radius: 2
+                paths: []
             }
         },
 
         ready() {
             var converter = geojson2svg({
                 viewportSize: {width: this.width, height: this.height},
-                mapExtent: {left: -162, bottom: -52, right: 183, top: 87},
+                mapExtent: {left: this.left, bottom: this.bottom, right: this.right, top: this.top},
                 output: 'path',
                 pointAsCircle: true,
                 r: this.radius
             })
 
-            for (var lat = -54; lat < 85; lat += 3) {
-                for (var lon = -159; lon < 181; lon += 3) {
+            for (var lat = -54; lat < 85; lat += this.step) {
+                for (var lon = -159; lon < 181; lon += this.step) {
                     if (this.getPointData(lat, lon)) {
                         var path = converter.convert({
                             type: 'Point', coordinates: [lon, lat]

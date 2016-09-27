@@ -2,37 +2,30 @@
 
 $route = $route ?? '';
 $title = $title ?? '';
-$subtitle = $subtitle ?? collect();
+$parents = $parents ?? '';
 
 @endphp
 
-<a href="{{ $route }}">
-
 <div class="DestinationBar {{ $isclasses }}">
 
-
-    <div class="DestinationBar__icon">
-
-        {!! component('Icon')->with('icon', 'icon-pin')->with('size', 'xl') !!}
-
-    </div>
-
     <div>
-        
-        <div class="DestinationBar__subtitle">
+                    
+            <div class="DestinationBar__parents">
 
-            {{ $subtitle->implode(' › ') }}
+                {!! $parents  !!}
 
-        </div>
+            </div>
 
-        <div class="DestinationBar__title">
+            <a href="{{ $route }}">
 
-            {{ $title }} ›
+                <div class="DestinationBar__title">
 
-        </div>
+                    {{ $title }} ›
+
+                </div>
+
+            </a>
 
     </div>
 
 </div>
-
-</a>

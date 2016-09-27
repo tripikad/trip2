@@ -65,7 +65,7 @@ class ContentController extends Controller
         if ($request->destination) {
             $descendants = Destination::find($request->destination)
                 ->descendantsAndSelf()
-                ->lists('id');
+                ->pluck('id');
 
             $contents = $contents
                 ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
@@ -117,6 +117,16 @@ class ContentController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
 
+    public function findBySlugAndType($type, $slug)
+    {
+        $content = Content::where('slug', $slug)->where('type', $type)->firstOrFail();
+        if (! $content) {
+            abort(404);
+        }
+
+        return $this->show($type, $content->id);
+    }
+
     public function show($type, $id)
     {
         if ($type == 'internal'
@@ -138,7 +148,10 @@ class ContentController extends Controller
             $comments->count(),
             config('content_'.$type.'.index.paginate')
         );
-        $comments->setPath(route('content.show', [$type, $id]));
+
+        if ($type !== 'static') {
+            $comments->setPath(route($type.'.show', [$content->slug]));
+        }
 
         if (view()->exists('pages.content.'.$type.'.show')) {
             $view = 'pages.content.'.$type.'.show';
@@ -163,6 +176,19 @@ class ContentController extends Controller
         return response()
             ->view($view, $viewVariables)
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
+    }
+
+    public function showWithRedirect($type, $id)
+    {
+        $content = Content::findorFail($id);
+
+        if ('static' === $type) {
+            return redirect()->route(
+                'static.'.$id, [], 301);
+        }
+
+        return redirect()->route(
+            $type.'.show', [$content->slug], 301);
     }
 
     public function create($type)
@@ -213,10 +239,10 @@ class ContentController extends Controller
         $content = \App\Content::findorFail($id);
 
         $destinations = Destination::getNames();
-        $destination = $content->destinations()->select('destinations.id')->lists('id')->toArray();
+        $destination = $content->destinations()->select('destinations.id')->pluck('id')->toArray();
 
         $topics = Topic::getNames();
-        $topic = $content->topics()->select('topics.id')->lists('id')->toArray();
+        $topic = $content->topics()->select('topics.id')->pluck('id')->toArray();
 
         $viewType = $type;
         foreach (config('menu.forum') as $item) {
@@ -399,13 +425,13 @@ class ContentController extends Controller
             if (! $request->ajax()) {
                 if (! $id) {
                     return redirect()
-                        ->route('content.index', [$type])
+                        ->route($type.'.index')
                         ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
                             'title' => $content->title,
                         ]));
                 } else {
                     return redirect()
-                        ->route('content.show', [$type, $content])
+                        ->route($type.'.show', [$content->slug])
                         ->with('info', trans('content.update.info', [
                             'title' => $content->title,
                         ]));
@@ -413,7 +439,7 @@ class ContentController extends Controller
             }
         } else {
             return redirect()
-                ->route('content.index', [$type]);
+                ->route($type.'.index');
         }
     }
 
@@ -464,8 +490,8 @@ class ContentController extends Controller
     public function filter(Request $request, $type)
     {
         return redirect()->route(
-            'content.index',
-            [$type,
+            $type.'.index',
+            [
                 'destination' => $request->destination ? $request->destination : null,
                 'topic' => $request->topic ? $request->topic : null,
                 'author' => $request->author ? $request->author : null,

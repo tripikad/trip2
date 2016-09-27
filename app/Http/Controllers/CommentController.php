@@ -22,7 +22,6 @@ class CommentController extends Controller
             'content_id' => $content_id,
             'status' => 1,
         ];
-
         $comment = Auth::user()->comments()->create(array_merge($request->all(), $fields));
 
         /*
@@ -78,12 +77,11 @@ class CommentController extends Controller
             $content->comments->count(),
             config('content_'.$type.'.index.paginate')
         );
-        $comments->setPath(route('content.show', [$type, $content_id]));
+        $comments->setPath(route($type.'.show', [$content->slug]));
 
         return redirect()
-            ->route('content.show', [
-                $type,
-                $content_id,
+            ->route($type.'.show', [
+                $content->slug,
                 ($comments->lastPage() > 1 ? 'page='.$comments->lastPage() : '')
                     .'#comment-'.$comment->id,
             ]);
@@ -108,12 +106,11 @@ class CommentController extends Controller
             'status' => 1,
         ];
 
-        $comment->update(array_merge($request->all(), $fields));
+        $comment->update(array_merge($request->all(), $fields), ['touch' => false]);
 
         return redirect()
-            ->route('content.show', [
-                $comment->content->type,
-                $comment->content,
+            ->route($comment->content->type.'.show', [
+                $comment->content->slug,
                 '#comment-'.$comment->id,
             ]);
     }
@@ -124,12 +121,11 @@ class CommentController extends Controller
 
         if ($status == 0 || $status == 1) {
             $comment->status = $status;
-            $comment->save();
+            $comment->save(['touch' => false]);
 
             return redirect()
-                ->route('content.show', [
-                    $comment->content->type,
-                    $comment->content,
+                ->route($comment->content->type.'.show', [
+                    $comment->content->slug,
                     '#comment-'.$comment->id,
                 ])
                 ->with('info', trans("comment.action.status.$status.info", [

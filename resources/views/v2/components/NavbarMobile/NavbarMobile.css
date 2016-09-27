@@ -16,8 +16,6 @@
         align-items: center;
         background: $green;
         bottom: 0;
-        display: flex;
-        justify-content: center;
         left: 0;
         padding: $padding-md;
         position: fixed;
@@ -26,26 +24,35 @@
         z-index: 10000;
     }
 
-        .NavbarMobile__closeIcon {
-            color: $white;
-            cursor: pointer;
-            padding: $padding-lg;
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
+    .NavbarMobile__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-        .NavbarMobile__closeIcon svg {
-            fill: $gray;
-        }
+    .NavbarMobile__search svg {
+        fill: $white;
+    }
 
-        .NavbarMobile__links {
-            padding: $padding-lg;
-        }
+    .NavbarMobile__closeIcon {
+        cursor: pointer;
+    }
 
-        .NavbarMobile__link {
-            color: $white;
-            font: $font-text-lg;
-            text-align: center;
-            padding: $padding-sm;
-        }
+    .NavbarMobile__closeIcon svg {
+        fill: $white;
+    }
+
+    .NavbarMobile__links {
+        padding: $padding-lg;
+    }
+
+    .NavbarMobile__link {
+        color: $white;
+        font: $font-text-lg;
+        text-align: center;
+        padding: $padding-sm;
+    }
+
+.NavbarMobile--white .NavbarMobile__menuIcon svg {
+    fill: $white;
+}

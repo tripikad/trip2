@@ -13,3 +13,7 @@
     .Link__icon {
     	align-self: center;
     }
+
+.Link--large .Link__title {
+    font: $font-heading-md;
+}

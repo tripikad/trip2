@@ -1,0 +1,13 @@
+@import "variables";
+
+.Meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    line-height: $line-height-lg;
+}
+
+    .Meta__item {
+        margin-right: $margin-xs;
+    }
+

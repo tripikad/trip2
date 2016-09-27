@@ -51,7 +51,7 @@ class CommentTest extends TestCase
                 ->visit("content/$content->type/$content->id")
                 ->type("Hello $content->type", 'body')
                 ->press(trans('comment.create.submit.title'))
-                ->seePageIs("content/$content->type/$content->id")
+                ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
                 ->see("Hello $content->type")
                 ->see($regular_user->name)
                 ->seeInDatabase('comments', [
@@ -71,7 +71,7 @@ class CommentTest extends TestCase
                 ->seePageIs("comment/$comment->id/edit")
                 ->type("Hola $content->type", 'body')
                 ->press(trans('comment.edit.submit.title'))
-                ->seePageIs("content/$content->type/$content->id")
+                ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
                 ->see("Hola $content->type")
                 ->seeInDatabase('comments', [
                     'user_id' => $regular_user->id,
@@ -141,6 +141,40 @@ class CommentTest extends TestCase
                 ->visit("content/$content->type/$content->id")
                 ->dontSee(trans('comment.action.edit.title'))
                 ->visit("comment/$comment->id/edit"); // 401
+        }
+    }
+
+    public function test_content_timestamp_does_not_update_when_superuser_is_updating_comment()
+    {
+        $this->markTestSkipped();
+
+        $superuser = factory(App\User::class)->create(['role' => 'superuser']);
+
+        $contentTypes = array_merge($this->publicContentTypes, $this->privateContentTypes);
+
+        foreach ($contentTypes as $type) {
+            $content = factory(Content::class)->create([
+                'user_id' => $superuser->id,
+                'type' => $type,
+            ]);
+
+            $comment = factory(Comment::class)->create([
+                'user_id' => $superuser->id,
+                'content_id' => $content->id,
+            ]);
+
+            $first_date = Content::find($content->id)->updated_at;
+
+            sleep(1);
+
+            $this->actingAs($superuser)
+                ->visit("comment/$comment->id/edit")
+                ->type('Hola', 'body')
+                ->press(trans('comment.edit.submit.title'));
+
+            $second_date = Content::find($content->id)->updated_at;
+
+            $this->assertEquals($first_date->timestamp, $second_date->timestamp);
         }
     }
 }

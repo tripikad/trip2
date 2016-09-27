@@ -29,18 +29,17 @@
         ])
     </div>
 
-    <div class="r-search__tabs">
-
-        <div class="r-search__tabs-wrap">
-
-            <ul class="c-search-tabs">
-                @foreach ($tabs as $type => $tab)
-                    <li class="c-search-tabs__item"><a href="{{$tab['route']}}" class="c-search-tabs__item-link {{$tab['modifier']}} js-search-tab" data-tab="{{$type}}">{{$tab['title']}} <span>{{$tab['cnt']}}</span></a></li>
-                @endforeach
-            </ul>
-
+    @if (isset($tabs) && count($tabs))
+        <div class="r-search__tabs">
+            <div class="r-search__tabs-wrap">
+                <ul class="c-search-tabs">
+                    @foreach ($tabs as $type => $tab)
+                        <li class="c-search-tabs__item"><a href="{{$tab['route']}}" class="c-search-tabs__item-link {{$tab['modifier']}} js-search-tab" data-tab="{{$type}}">{{$tab['title']}} <span>{{$tab['cnt']}}</span></a></li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
-    </div>
+    @endif
 
     <div class="r-search__content">
 

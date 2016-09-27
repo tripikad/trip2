@@ -1,0 +1,21 @@
+@import "variables";
+
+.TravelmateCard {
+	display: flex;
+    margin-right: $margin-md;
+}
+
+	.TravelmateCard__user {
+		margin-right: $margin-sm;
+	}
+
+    .TravelmateCard__metaTop {
+    	margin-bottom: $margin-xs;
+    }
+
+    .TravelmateCard__title {
+    	color: $gray-darkest;
+    	font: $font-heading-md;
+    	margin-bottom: $padding-xs;
+    	line-height: $line-height-md;
+    }

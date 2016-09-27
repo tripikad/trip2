@@ -1,4 +1,4 @@
-@if (count($errors) > 0)
+@if (isset($errors) && count($errors) > 0)
 
     <div class="c-alert m-error js-alert">
 

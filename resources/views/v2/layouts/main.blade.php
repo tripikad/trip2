@@ -8,21 +8,25 @@
             {{
                 rawurlencode(json_encode([
                     'token' => csrf_token(),
-                    'alertRoute' => route('helpers.alert')
+                    'alertRoute' => route('utils.alert'),
+                    'allowedTags' => config('site.allowedtags'),
+                    'maxfilesize' => config('site.maxfilesize'),
+                    'promo' => config('promo')
                 ])) 
             }}
         ">
         <link rel="stylesheet" href="/v2/css/main.css">
     </head>
     <body>
-
-        <component is="IconLoader" route="/v2/svg/main.svg"></component>
-
+        
         @yield('header')
         @yield('content')
         @yield('footer')
-        
+
         <script src="/v2/js/main.js"></script>
-        
+        @include('v2.loaders.svg')
+        @include('v2.loaders.promo')
+        @stack('scripts')
+
     </body>
 </html>

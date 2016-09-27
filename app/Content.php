@@ -4,14 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 
 class Content extends Model
 {
+    use Sluggable, SlugHelper;
+
+    // Setup
+
     protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image', 'status', 'start_at', 'end_at', 'duration', 'price'];
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
     protected $appends = ['body_filtered', 'image_id'];
+
+    // Relations
 
     public function user()
     {
@@ -48,6 +56,101 @@ class Content extends Model
         return $this->morphMany('App\Follow', 'followable');
     }
 
+    // V2
+
+    public function vars()
+    {
+        return new V2ContentVars($this);
+    }
+
+    public function scopeGetLatestPagedItems($query, $type, $take = 24, $destination = false, $topic = false)
+    {
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->latest()
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->when($destination, function ($query) use ($destination) {
+                $destinations = Destination::find($destination)->descendantsAndSelf()->pluck('id');
+
+                return $query
+                    ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
+                    ->select('contents.*')
+                    ->whereIn('content_destination.destination_id', $destinations);
+            })
+            ->when($topic, function ($query) use ($topic) {
+                return $query
+                    ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
+                    ->select('contents.*')
+                    ->where('content_topic.topic_id', '=', $topic);
+            })
+            ->distinct()
+            ->simplePaginate($take);
+    }
+
+    public function scopeGetLatestItems($query, $type, $take = 5)
+    {
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->take($take)
+            ->latest()
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->distinct()
+            ->get();
+    }
+
+    public function scopeGetItemById($query, $id)
+    {
+        return $query
+            ->whereStatus(1)
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->findOrFail($id);
+    }
+
+    public function scopeGetItemBySlug($query, $slug)
+    {
+        return $query
+            ->whereStatus(1)
+            ->whereSlug($slug)
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics'
+            )
+            ->first();
+    }
+
+    // V1
+
     public function getDestinationParent()
     {
         if ($this->destinations->first()) {
@@ -57,11 +160,11 @@ class Content extends Model
 
     public function followersEmails()
     {
-        $followerIds = $this->followers->lists('user_id');
+        $followerIds = $this->followers->pluck('user_id');
 
         return User::whereIn('id', $followerIds)
             ->where('notify_follow', 1)
-            ->lists('email', 'id');
+            ->pluck('email', 'id');
     }
 
     public function imagePath()
@@ -140,21 +243,43 @@ class Content extends Model
 
     public function getFlags()
     {
+        $goods = $this->flags->where('flag_type', 'good');
+        $bads = $this->flags->where('flag_type', 'bad');
+
+        $good_active = null;
+        $bad_active = null;
+
+        if (Auth::check()) {
+            foreach ($goods as $good) {
+                if ($good->user_id == Auth::user()->id) {
+                    $good_active = 1;
+                }
+            }
+
+            foreach ($bads as $bad) {
+                if ($bad->user_id == Auth::user()->id) {
+                    $bad_active = 1;
+                }
+            }
+        }
+
         return [
 
             'good' => [
-                'value' => count($this->flags->where('flag_type', 'good')),
+                'value' => count($goods),
                 'flaggable' => Auth::check(),
                 'flaggable_type' => 'content',
                 'flaggable_id' => $this->id,
                 'flag_type' => 'good',
+                'active' => $good_active,
             ],
             'bad' => [
-                'value' => count($this->flags->where('flag_type', 'bad')),
+                'value' => count($bads),
                 'flaggable' => Auth::check(),
                 'flaggable_type' => 'content',
                 'flaggable_id' => $this->id,
                 'flag_type' => 'bad',
+                'active' => $bad_active,
             ],
         ];
     }
@@ -175,5 +300,14 @@ class Content extends Model
     public function getHeadImage()
     {
         return config('app.url').$this->imagePreset('large');
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+            ],
+        ];
     }
 }

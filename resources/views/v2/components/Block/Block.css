@@ -6,23 +6,30 @@
 }
 
 .Block--white {
-    background: $white;
+    background: none;
+    padding: 0;
 }
 
     .Block__title {
-        font: $font-heading-md;
-        margin-bottom: $margin-md;
         color: $green;
-    }
-
-    .Block__subtitle {
-        font: $font-heading-sm;
-        margin-bottom: $margin-sm;
-        color: $gray-darkest;
-        line-height: $line-height-xxl;
+        font: $font-heading-md;
+        line-height: $line-height-md;
+        margin-bottom: $margin-md;
     }
 
 .Block--uppercase .Block__title {
     text-transform: uppercase;
     font: $font-heading-xs;
+}
+
+.Block--red .Block__title {
+    color: $red;
+}
+
+.Block--yellow .Block__title {
+    color: $yellow;
+}
+
+.Block--dark .Block__title {
+    color: $gray-darkest;
 }

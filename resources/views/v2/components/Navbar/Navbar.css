@@ -1,0 +1,36 @@
+@import "variables";
+
+.Navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $height-md;
+}
+
+    .Navbar__logo {
+        margin-left: calc($spacer * -4);
+    }
+
+    .Navbar--white .Navbar__logo svg {
+        fill: $white;
+    }
+
+    .Navbar__right {
+        display: flex;
+        align-items: center;
+    }
+
+    .Navbar__search {
+        display: block;
+        display: none ?if $tablet;
+    }
+
+    .Navbar__desktop {
+        display: block;
+        display: none ?if $tablet;
+    }
+
+    .Navbar__mobile {
+        display: block ?if $tablet;
+        display: none;
+    }

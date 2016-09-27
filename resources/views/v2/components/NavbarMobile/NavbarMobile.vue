@@ -8,7 +8,7 @@
             @click="toggle()"
         >
         
-            <component is="Icon" icon="icon-menu"></component>
+            <component is="Icon" icon="icon-menu" size="lg"></component>
         
         </div>
 
@@ -18,9 +18,19 @@
             transition="fadeZoom"
         >
 
-            <div class="NavbarMobile__closeIcon" @click="toggle()">
+            <div class="NavbarMobile__header">
+
+                <div class="NavbarMobile__search">
                 
-                <component is="Icon" icon="icon-close"></component>
+                    <component is="HeaderSearch" class="HeaderSearch--white"size="lg"></component>
+                
+                </div>
+
+                <div class="NavbarMobile__closeIcon" @click="toggle()">
+                    
+                    <component is="Icon" icon="icon-close" size="xl"></component>
+
+                </div>
 
             </div>
 
@@ -64,11 +74,13 @@
 
 <script>
 
+    import HeaderSearch from '../NavbarSearch/NavbarSearch.vue'
     import Icon from '../Icon/Icon.vue'
 
     export default {
     
         components: {
+            HeaderSearch,
             Icon
         },
 

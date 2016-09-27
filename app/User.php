@@ -8,16 +8,22 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Carbon\Carbon;
+use Illuminate\Notifications\Notifiable as Notifiable;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword;
+    use Authenticatable, CanResetPassword, Notifiable;
+
+    // Setup
 
     protected $fillable = [
         'name',
         'email',
         'password',
         'image',
+        'role',
+        'verified',
+        'registration_token',
         'rank',
         'contact_facebook',
         'contact_twitter',
@@ -35,8 +41,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $hidden = ['password', 'remember_token'];
 
-    public $messages_count = false;
-
     public static function boot()
     {
         parent::boot();
@@ -46,10 +50,60 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         });
     }
 
+    // Relations
+
+    public function contents()
+    {
+        return $this->hasMany('App\Content');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
+    public function flags()
+    {
+        return $this->hasMany('App\Flag');
+    }
+
+    public function follows()
+    {
+        return $this->hasMany('App\Follow');
+    }
+
+    public function images()
+    {
+        return $this->morphToMany('App\Image', 'imageable');
+    }
+
+    // V2
+
+    public function vars()
+    {
+        return new V2UserVars($this);
+    }
+
+    // V1
+
+    public $messages_count = false;
+
     public function confirmEmail()
     {
         $this->verified = true;
         $this->registration_token = null;
+        $this->save();
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->remember_token = $token;
         $this->save();
     }
 
@@ -96,31 +150,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $received = $this->hasMany('App\Message', 'user_id_to')->where('user_id_from', $user_id_with)->get();
 
         return $sent->merge($received)->sortBy('created_at');
-    }
-
-    public function contents()
-    {
-        return $this->hasMany('App\Content');
-    }
-
-    public function comments()
-    {
-        return $this->hasMany('App\Comment');
-    }
-
-    public function flags()
-    {
-        return $this->hasMany('App\Flag');
-    }
-
-    public function follows()
-    {
-        return $this->hasMany('App\Follow');
-    }
-
-    public function images()
-    {
-        return $this->morphToMany('App\Image', 'imageable');
     }
 
     public function imagePreset($preset = 'small_square')

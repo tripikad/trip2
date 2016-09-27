@@ -4,11 +4,11 @@
     align-items: center;
     background: $green;
     border-radius: $border-radius-md;
-    display: flex ?if $mobile;
-    display: inline-flex;
+    display: flex;
     font: $font-heading-sm;
     justify-content: center;
     padding: $padding-sm $padding-lg;
+    text-align: center;
 }
 
 .Button__icon {
@@ -17,4 +17,14 @@
 
 .Button__title {
     color: $white;
+}
+
+.Button--facebook {
+    background: $facebook;
+    ppadding: $padding-xs;
+}
+
+.Button--twitter {
+    background: $twitter;
+    ppadding: $padding-xs;
 }

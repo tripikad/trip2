@@ -3,6 +3,7 @@
 $header = $header ?? '';
 $content = $content ?? collect();
 $sidebar = $sidebar ?? collect();
+$bottom = $bottom ?? collect();
 $footer = $footer ?? '';
 
 @endphp
@@ -17,11 +18,11 @@ $footer = $footer ?? '';
 
         <div class="row-between padding-top-md padding-bottom-md">
 
-            <div class="col-8 padding-right-sm-mobile-none">
+            <div class="col-9 padding-right-sm-mobile-none">
 
-                @foreach ($content->withoutLast() as $content_item)
+                @foreach ($content as $content_item)
                 
-                <div class="margin-bottom-md">
+                <div @if (! $loop->last) class="margin-bottom-md" @endif>
 
                     {!! $content_item !!}
                         
@@ -29,19 +30,13 @@ $footer = $footer ?? '';
 
                 @endforeach
 
-                <div>
-
-                    {!! $content->last() !!}
-                        
-                </div>
-
             </div>
 
-            <div class="col-4 padding-left-sm-mobile-none">
+            <div class="col-3 padding-left-sm-mobile-none">
 
-                @foreach ($sidebar->withoutLast() as $sidebar_item)
+                @foreach ($sidebar as $sidebar_item)
                 
-                <div class="margin-bottom-md">
+                <div @if (! $loop->last) class="margin-bottom-md" @endif>
 
                     {!! $sidebar_item !!}
                         
@@ -49,17 +44,33 @@ $footer = $footer ?? '';
 
                 @endforeach
 
-                <div>
-
-                    {!! $sidebar->last() !!}
-                        
-                </div>
-
             </div>
 
         </div>
 
     </div>
+
+    @if ($bottom->count())
+
+    <div class="padding-top-md padding-bottom-md background-gray">
+
+        <div class="container">
+
+        @foreach ($bottom as $bottom_item)
+        
+            <div @if (! $loop->last) class="margin-bottom-md" @endif>
+
+                {!! $bottom_item !!}
+                    
+            </div>
+                
+        @endforeach
+
+        </div>
+
+    </div>
+
+    @endif
 
 @endsection
 

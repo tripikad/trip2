@@ -2,13 +2,13 @@
 
 $route = $route ?? '';
 $method = $method ?? 'POST';
-$fields = $fields ?? collect();
+$fields = collect($fields) ?? collect();
 
 @endphp
 
-<form action="{{ $route }}" method="POST" accept-charset="utf-8">
+<form action="{{ $route }}" method="{{ $method }}" accept-charset="utf-8">
 
-    <input name="_method" type="hidden" value="{{ $method }}">
+    {{ method_field($method) }}
     
     {{ csrf_field() }}
 

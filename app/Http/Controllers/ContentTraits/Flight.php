@@ -76,8 +76,8 @@ trait Flight
     {
         $viewVariables = [];
 
-        $destination_ids = $content->destinations->lists('id')->toArray();
-        $topic_ids = $content->topics->lists('id')->toArray();
+        $destination_ids = $content->destinations->pluck('id')->toArray();
+        $topic_ids = $content->topics->pluck('id')->toArray();
 
         $destination = null;
         $parent_destination = null;
@@ -107,7 +107,7 @@ trait Flight
             }
         }
 
-        $usedIds = $sidebar_flights->lists('id');
+        $usedIds = $sidebar_flights->pluck('id');
         $usedIds[] = $content->id;
 
         $flights_sum = round($flights_take['middle'] + $flights_take['bottom']);
@@ -148,7 +148,7 @@ trait Flight
         }
 
         if (isset($viewVariables['flights']) && count($viewVariables['flights'])) {
-            $usedIds = $usedIds->merge($viewVariables['flights']->lists('id'));
+            $usedIds = $usedIds->merge($viewVariables['flights']->pluck('id'));
         }
 
         $types = [

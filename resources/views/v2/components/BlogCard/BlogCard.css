@@ -1,0 +1,25 @@
+@import "variables";
+
+.BlogCard {
+	padding: $padding-sm;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+    .BlogCard__title {
+    	font: $font-heading-lg;
+    	font: $font-heading-md ?if $mobile;
+    	margin-bottom: $margin-sm;
+    	text-align: center;
+        line-height: $line-height-md;
+    }
+
+    .BlogCard__user {
+    	display: flex;
+    	align-items: center;
+    }
+
+	.BlogCard__meta {
+		padding: $padding-xs;
+	}
