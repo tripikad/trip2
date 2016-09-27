@@ -31,16 +31,12 @@ class ContentController extends Controller
             abort(401);
         }
 
-        /*$contents = Content::whereType($type)
-            ->with(config("content_$type.index.with"));*/
-
         if (in_array('comments', config("content_$type.index.with"))) {
             $contents = Content::leftJoin('comments', function ($query) {
                 $query->on('comments.content_id', '=', 'contents.id')
                     ->on('comments.id', '=',
                         DB::raw('(select id from comments where content_id = comments.content_id order by id desc limit 1)'));
             })
-            //leftJoin('comments', 'contents.id', '=', 'comments.content_id')
                 ->where('contents.type', $type)
                 ->with(config("content_$type.index.with"))
                 ->select(['contents.*', DB::raw('IF(comments.created_at > contents.created_at, comments.created_at, contents.created_at) AS contentOrder')])
