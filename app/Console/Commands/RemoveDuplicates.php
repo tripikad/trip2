@@ -42,8 +42,13 @@ class RemoveDuplicates extends Command
      */
     public function handle()
     {
-        $topics = Topic::select(['id', 'name'])->whereIn('id', function ($query) { $query->select('id')->from('topics')->groupBy('name')->havingRaw('count(*) > 1'); })->get();
-        $destinations = Destination::select(['id', 'name'])->whereIn('id', function ($query) { $query->select('id')->from('destinations')->groupBy('name')->havingRaw('count(*) > 1'); })->get();
+        $topics = Topic::select(['id', 'name'])->whereIn('id', function ($query) {
+            $query->select('id')->from('topics')->groupBy('name')->havingRaw('count(*) > 1');
+        })->get();
+
+        $destinations = Destination::select(['id', 'name'])->whereIn('id', function ($query) {
+            $query->select('id')->from('destinations')->groupBy('name')->havingRaw('count(*) > 1');
+        })->get();
 
 
         $removable = [
@@ -89,7 +94,7 @@ class RemoveDuplicates extends Command
             }
 
             if (Destination::whereIn('id', $removable['destinations'])->delete()) {
-                $this->info('Destinations: ' . implode(', ', $removable['destinations']) . ' removed' . "\n");
+                $this->info('Destinations: '.implode(', ', $removable['destinations']).' removed'."\n");
 
                 Cache::forget('destination.names');
                 $this->info('Cache "destination.names" cleared');
@@ -111,7 +116,7 @@ class RemoveDuplicates extends Command
             }
 
             if (Topic::whereIn('id', $removable['topics'])->delete()) {
-                $this->info('Topics: ' . implode(', ', $removable['topics']) . ' removed');
+                $this->info('Topics: '.implode(', ', $removable['topics']).' removed');
             }
         }
 
