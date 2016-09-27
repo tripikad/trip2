@@ -31,9 +31,6 @@ class ContentController extends Controller
             abort(401);
         }
 
-        /*$contents = Content::whereType($type)
-            ->with(config("content_$type.index.with"));*/
-
         if (in_array('comments', config("content_$type.index.with"))) {
             $contents = Content::leftJoin('comments', function ($query) {
                 $query->on('comments.content_id', '=', 'contents.id')
