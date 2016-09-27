@@ -21,8 +21,8 @@ trait Travelmate
         $viewVariables['activity'] = Content::whereType('travelmate')
             ->whereStatus(1)
             ->whereBetween('created_at', [
+                Carbon::now()->subDays(14),
                 Carbon::now(),
-                Carbon::now()->addDays(14),
             ])
             ->count();
 
