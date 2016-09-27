@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
 use Log;
+use DB;
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -30,17 +31,49 @@ class ContentController extends Controller
             abort(401);
         }
 
-        $contents = Content::whereType($type)
+        /*$contents = Content::whereType($type)
+            ->with(config("content_$type.index.with"));*/
+
+        if (in_array('comments', config("content_$type.index.with"))) {
+            $contents = Content::leftJoin('comments', function ($query) {
+                $query->on('comments.content_id', '=', 'contents.id')
+                    ->on('comments.id', '=',
+                        DB::raw('(select id from comments where content_id = comments.content_id order by id desc limit 1)'));
+            })
+            //leftJoin('comments', 'contents.id', '=', 'comments.content_id')
+                ->where('contents.type', $type)
+                ->with(config("content_$type.index.with"))
+                ->select(['contents.*', DB::raw('IF(comments.created_at > contents.created_at, comments.created_at, contents.created_at) AS contentOrder')])
+                ->orderBy('contentOrder', 'desc');
+        } else {
+            $contents = Content::whereType($type)
+                ->with(config("content_$type.index.with"))
+                ->orderBy(
+                    config("content_$type.index.orderBy.field"),
+                    config("content_$type.index.orderBy.order")
+                );
+        }
+
+        //dd($contents->get());
+
+        /*$contents = Content::whereType($type)
             ->with(config("content_$type.index.with"))
             ->orderBy(
                 config("content_$type.index.orderBy.field"),
                 config("content_$type.index.orderBy.order")
             );
 
+        $contents = Content::whereType($type)
+            ->with(config("content_$type.index.with"))
+            ->orderBy(
+                config("content_$type.index.orderBy.field"),
+                config("content_$type.index.orderBy.order")
+            );*/
+
         if (config("content_$type.store.status", 1) == 0 && Auth::check() && Auth::user()->hasRole('admin')) {
             //$contents->whereStatus(0);
         } else {
-            $contents->whereStatus(1);
+            $contents->where('contents.status', 1);
         }
 
         $expireField = config("content_$type.index.expire.field");
@@ -51,11 +84,11 @@ class ContentController extends Controller
                     unset($expireData[$key]);
                 }
 
-                $contents = $contents->whereRaw('`'.$expireField.'` >= ?', [
+                $contents = $contents->whereRaw('`contents`.`'.$expireField.'` >= ?', [
                     array_values($expireData)[0],
                 ]);
             } else {
-                $contents = $contents->whereBetween($expireField, [
+                $contents = $contents->whereBetween('contents.'.$expireField, [
                     $expireData['daysFrom'],
                     $expireData['daysTo'],
                 ]);
@@ -81,7 +114,7 @@ class ContentController extends Controller
         }
 
         if ($request->author) {
-            $contents = $contents->where('user_id', $request->author);
+            $contents = $contents->where('contents.user_id', $request->author);
         }
 
         $contents = $contents->simplePaginate(config('content_'.$type.'.index.paginate'));

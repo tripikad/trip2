@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use DB;
 
 class Main
 {
@@ -129,7 +130,12 @@ class Main
             if (isset($type['id'])) {
                 $query = Content::where('id', $type['id'])->whereStatus($type['status']);
             } else {
-                $query = Content::whereIn('type', $type['type'])->whereStatus($type['status']);
+                $query = Content::leftJoin('comments', function ($query) {
+                    $query->on('comments.content_id', '=', 'contents.id')
+                        ->on('comments.id', '=',
+                            DB::raw('(select id from comments where content_id = comments.content_id order by id desc limit 1)'));
+                })->whereIn('contents.type', $type['type'])->where('contents.status', $type['status'])
+                    ->select(['contents.*', DB::raw('IF(comments.created_at > contents.created_at, comments.created_at, contents.created_at) AS contentOrder')]);
 
                 if (isset($type['whereBetween']) && ! empty($type['whereBetween'])) {
                     if (! isset($type['whereBetween']['only'])) {
@@ -143,17 +149,17 @@ class Main
                                 unset($expireData[$datakey]);
                             }
 
-                            $query = $query->whereRaw('`'.$type['whereBetween']['field'].'` >= ?', [
+                            $query = $query->whereRaw('`contents`.`'.$type['whereBetween']['field'].'` >= ?', [
                                 array_values($expireData)[0],
                             ]);
                         } else {
-                            $query = $query->whereBetween($type['whereBetween']['field'], [
+                            $query = $query->whereBetween('contents.'.$type['whereBetween']['field'], [
                                 $type['whereBetween']['daysFrom'],
                                 $type['whereBetween']['daysTo'],
                             ]);
                         }
                     } else {
-                        $query = $query->whereRaw('IF(`type` = ?, ?, ?) BETWEEN ? AND ?', [
+                        $query = $query->whereRaw('IF(`contents`.`type` = ?, ?, ?) BETWEEN ? AND ?', [
                             $type['whereBetween']['only'],
                             $type['whereBetween']['field'],
                             $type['whereBetween']['daysTo'],
@@ -164,7 +170,7 @@ class Main
                 }
 
                 if (isset($type['notId']) && count($type['notId'])) {
-                    $query = $query->whereNotIn('id', $type['notId']);
+                    $query = $query->whereNotIn('contents.id', $type['notId']);
                 }
 
                 if (isset($type['with']) && $type['with'] !== null) {
@@ -172,7 +178,8 @@ class Main
                 }
 
                 if (isset($type['latest']) && $type['latest'] !== null) {
-                    $query = $query->latest($type['latest']);
+                    //$query = $query->latest($type['latest']);
+                    $query = $query->orderBy('contentOrder', 'desc');
                 }
 
                 if (isset($type['skip']) && $type['skip'] !== null) {
