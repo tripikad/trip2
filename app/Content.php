@@ -243,21 +243,43 @@ class Content extends Model
 
     public function getFlags()
     {
+        $goods = $this->flags->where('flag_type', 'good');
+        $bads = $this->flags->where('flag_type', 'bad');
+
+        $good_active = null;
+        $bad_active = null;
+
+        if (Auth::check()) {
+            foreach ($goods as $good) {
+                if ($good->user_id == Auth::user()->id) {
+                    $good_active = 1;
+                }
+            }
+
+            foreach ($bads as $bad) {
+                if ($bad->user_id == Auth::user()->id) {
+                    $bad_active = 1;
+                }
+            }
+        }
+
         return [
 
             'good' => [
-                'value' => count($this->flags->where('flag_type', 'good')),
+                'value' => count($goods),
                 'flaggable' => Auth::check(),
                 'flaggable_type' => 'content',
                 'flaggable_id' => $this->id,
                 'flag_type' => 'good',
+                'active' => $good_active,
             ],
             'bad' => [
-                'value' => count($this->flags->where('flag_type', 'bad')),
+                'value' => count($bads),
                 'flaggable' => Auth::check(),
                 'flaggable_type' => 'content',
                 'flaggable_id' => $this->id,
                 'flag_type' => 'bad',
+                'active' => $bad_active,
             ],
         ];
     }
