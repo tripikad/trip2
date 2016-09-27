@@ -151,7 +151,7 @@ return [
     'flight.edit.field.start_at.title' => 'Müük algab',
     'flight.edit.field.start_at.help' => 'Näiteks: :now',
 
-    'flight.edit.field.end_at.title' => 'Müük lõpeb at',
+    'flight.edit.field.end_at.title' => 'Müük lõpeb',
     'flight.edit.field.end_at.help' => 'Näiteks: :now',
 
     'flight.edit.field.price.title' => 'Hind',
