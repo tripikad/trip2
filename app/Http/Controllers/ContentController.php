@@ -35,11 +35,11 @@ class ContentController extends Controller
             $contents = Content::leftJoin('comments', function ($query) {
                 $query->on('comments.content_id', '=', 'contents.id')
                     ->on('comments.id', '=',
-                        DB::raw('(select id from comments where content_id = comments.content_id order by id desc limit 1)'));
+                        DB::raw('(select id from comments where `content_id` = `contents`.`id` order by id desc limit 1)'));
             })
                 ->where('contents.type', $type)
                 ->with(config("content_$type.index.with"))
-                ->select(['contents.*', DB::raw('IF(comments.created_at > contents.created_at, comments.created_at, contents.created_at) AS contentOrder')])
+                ->select(['contents.*', DB::raw('IF(UNIX_TIMESTAMP(comments.created_at) > UNIX_TIMESTAMP(contents.created_at), comments.created_at, contents.created_at) AS contentOrder')])
                 ->orderBy('contentOrder', 'desc');
         } else {
             $contents = Content::whereType($type)
