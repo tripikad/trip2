@@ -32,7 +32,7 @@ class ContentController extends Controller
             abort(401);
         }
 
-        if (in_array('comments', config("content_$type.index.with"))) {
+        if (in_array('comments', config("content_$type.index.with")) && ($type == 'forum' || $type == 'buysell' || $type == 'expat' || $type == 'internal')) {
             $contents = Content::leftJoin('comments', function ($query) {
                 $query->on('comments.content_id', '=', 'contents.id')
                     ->on('comments.id', '=',
