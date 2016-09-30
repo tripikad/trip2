@@ -26,7 +26,7 @@ class ForumRow
                     ->push(component('MetaLink')
                         ->with('title', $forum->vars()->created_at)
                     )
-                    ->pushWhen($forum->isNew && auth()->user()->hasRole('admin'), component('MetaLink')
+                    ->pushWhen($forum->isNew && auth()->user()->hasRole('admin'), component('Tag')->is('red')
                         ->with('title', trans('content.forum.is.new'))
                         )
                     ->merge($forum->destinations->map(function ($tag) {
