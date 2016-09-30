@@ -101,7 +101,6 @@ modifiers:
 
                     <h3 class="c-forum-list__item-topic">{{ $item['topic'] }}</h3>
 
-
                     @if(isset($item['date']))
                         <p class="c-forum-list__date">{{ $item['date'] }}</p>
                     @endif
