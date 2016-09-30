@@ -48,7 +48,11 @@ class Handler extends ExceptionHandler
             abort(404);
         }
 
-        return parent::render($request, $e);
+        if (! config('app.debug') && $e instanceof \ErrorException) {
+            return view('errors.500');
+        } else {
+            return parent::render($request, $e);
+        }
     }
 
     /**

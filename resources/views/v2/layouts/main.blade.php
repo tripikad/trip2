@@ -22,8 +22,7 @@
         @yield('header')
         @yield('content')
         @yield('footer')
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
         <script src="/v2/js/main.js"></script>
         @include('v2.loaders.svg')
         @include('v2.loaders.promo')

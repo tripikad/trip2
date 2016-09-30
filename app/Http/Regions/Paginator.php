@@ -9,7 +9,7 @@ class Paginator
         return $paginator
             ->appends(collect()
                 ->putWhen($currentDestination, 'destination', $currentDestination)
-                ->putWhen($currentTopic, 'destination', $currentTopic)
+                ->putWhen($currentTopic, 'topic', $currentTopic)
                 ->all()
             )
             ->links('v2.components.Paginator.Paginator');

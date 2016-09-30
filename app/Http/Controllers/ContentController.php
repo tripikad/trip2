@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
 use Log;
+use DB;
 use App\Content;
 use App\Destination;
 use App\Topic;
@@ -32,17 +33,29 @@ class ContentController extends Controller
             abort(401);
         }
 
-        $contents = Content::whereType($type)
-            ->with(config("content_$type.index.with"))
-            ->orderBy(
-                config("content_$type.index.orderBy.field"),
-                config("content_$type.index.orderBy.order")
-            );
+        if (in_array('comments', config("content_$type.index.with"))) {
+            $contents = Content::leftJoin('comments', function ($query) {
+                $query->on('comments.content_id', '=', 'contents.id')
+                    ->on('comments.id', '=',
+                        DB::raw('(select id from comments where `content_id` = `contents`.`id` order by id desc limit 1)'));
+            })
+                ->where('contents.type', $type)
+                ->with(config("content_$type.index.with"))
+                ->select(['contents.*', DB::raw('IF(UNIX_TIMESTAMP(comments.created_at) > UNIX_TIMESTAMP(contents.created_at), comments.created_at, contents.created_at) AS contentOrder')])
+                ->orderBy('contentOrder', 'desc');
+        } else {
+            $contents = Content::whereType($type)
+                ->with(config("content_$type.index.with"))
+                ->orderBy(
+                    config("content_$type.index.orderBy.field"),
+                    config("content_$type.index.orderBy.order")
+                );
+        }
 
         if (config("content_$type.store.status", 1) == 0 && Auth::check() && Auth::user()->hasRole('admin')) {
             //$contents->whereStatus(0);
         } else {
-            $contents->whereStatus(1);
+            $contents->where('contents.status', 1);
         }
 
         $expireField = config("content_$type.index.expire.field");
@@ -53,11 +66,11 @@ class ContentController extends Controller
                     unset($expireData[$key]);
                 }
 
-                $contents = $contents->whereRaw('`'.$expireField.'` >= ?', [
+                $contents = $contents->whereRaw('`contents`.`'.$expireField.'` >= ?', [
                     array_values($expireData)[0],
                 ]);
             } else {
-                $contents = $contents->whereBetween($expireField, [
+                $contents = $contents->whereBetween('contents.'.$expireField, [
                     $expireData['daysFrom'],
                     $expireData['daysTo'],
                 ]);
@@ -83,10 +96,27 @@ class ContentController extends Controller
         }
 
         if ($request->author) {
-            $contents = $contents->where('user_id', $request->author);
+            $contents = $contents->where('contents.user_id', $request->author);
         }
 
         $contents = $contents->simplePaginate(config('content_'.$type.'.index.paginate'));
+
+        $queryParameters = [];
+        $queryString = '';
+
+        if (isset($request->destination) && $request->destination) {
+            $queryParameters[] = 'destination='.$request->destination;
+        }
+
+        if (isset($request->topic) && $request->topic) {
+            $queryParameters[] = 'topic='.$request->topic;
+        }
+
+        if (! empty($queryParameters) && count($queryParameters)) {
+            $queryString = '?'.implode('&', $queryParameters);
+        }
+
+        $contents->setPath(route($type.'.index').$queryString);
 
         $destinations = Destination::getNames($type);
         $topics = Topic::getNames($type);

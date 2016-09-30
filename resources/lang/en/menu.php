@@ -31,12 +31,12 @@ return [
     'footer3.contact' => 'Contact',
     'footer3.eula' => 'EULA',
     'footer3.advertising' => 'Advertising',
-    'footer3.flightfeed' => 'Flight RSS',
-    'footer3.newsfeed' => 'News RSS',
     'footer3.styleguide' => 'Styleguide',
 
     'footer-social.facebook' => 'Facebook',
     'footer-social.twitter' => 'Twitter',
+    'footer-social.flightfeed' => 'Flight RSS',
+    'footer-social.newsfeed' => 'News RSS',
 
     'news.news' => 'News',
     'news.shortnews' => 'Short news',

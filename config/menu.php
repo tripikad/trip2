@@ -62,12 +62,6 @@ return [
         'advertising' => [
             'route' => '/reklaam',
         ],
-        'flightfeed' => [
-            'route' => '/lendude_sooduspakkumised/rss',
-        ],
-        'newsfeed' => [
-            'route' => '/index.atom',
-        ],
     ],
 
     'footer-social' => [
@@ -80,6 +74,16 @@ return [
             'route' => 'https://twitter.com/trip_ee',
             'external' => true,
             'icon' => 'icon-twitter',
+        ],
+        'flightfeed' => [
+            'route' => '/lendude_sooduspakkumised/rss',
+            'external' => true,
+            'icon' => 'icon-rss',
+        ],
+        'newsfeed' => [
+            'route' => '/index.atom',
+            'external' => true,
+            'icon' => 'icon-rss',
         ],
     ],
 

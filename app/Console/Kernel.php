@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\MakeComponent::class,
         \App\Console\Commands\MakeRegion::class,
         \App\Console\Commands\UserDelete::class,
+        \App\Console\Commands\RemoveDuplicates::class,
 
     ];
 
