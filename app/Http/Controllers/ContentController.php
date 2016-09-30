@@ -14,7 +14,6 @@ use App\Image;
 use App\Main;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Cache;
-use DB;
 // Traits
 use App\Http\Controllers\ContentTraits\Blog;
 use App\Http\Controllers\ContentTraits\Flight;
