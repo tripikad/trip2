@@ -3,6 +3,7 @@
 namespace App;
 
 use Exception;
+use Cache;
 
 class V2CommentVars
 {
@@ -44,5 +45,27 @@ class V2CommentVars
     public function updated_at()
     {
         return format_date($this->comment->created_at);
+    }
+
+    public function isNew()
+    {
+        if (auth()->check()) {
+            $userId = auth()->id();
+
+            $key = 'new_'.$this->comment->id.'_'.$userId;
+
+                // If the post is unread by the user or there are new comments
+
+                if (Cache::has($key)) {
+
+                    // Mark post as new so the view can style the post accordingly
+
+                    return true;
+                }
+
+            return false;
+        }
+
+        return false;
     }
 }

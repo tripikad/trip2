@@ -3,6 +3,7 @@
 namespace App;
 
 use Exception;
+use Cache;
 
 class V2ContentVars
 {
@@ -49,5 +50,35 @@ class V2ContentVars
     public function updated_at()
     {
         return format_date($this->content->created_at);
+    }
+
+    public function isNew($content)
+    {
+        if (auth()->check()) {
+            $userId = auth()->id();
+
+            $key = 'new_'.$content->id.'_'.$userId;
+
+                // If the post is unread by the user or there are new comments
+
+                if (Cache::has($key)) {
+                    $content->isNew = true;
+                }
+
+            if ($newId = Cache::get($key)) {
+                $content->NewCommentId = $newId;
+
+                    //New comment counter if needed
+                    /*
+                    $content->NewCommentCount = $content->comments->filter(function ($comment) use ($content) {
+                       return  $comment->id >= $content->NewCommentId;
+                   })->count();
+                   */
+            }
+
+            return $content;
+        }
+
+        return $content;
     }
 }

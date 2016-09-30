@@ -7,6 +7,8 @@ use Auth;
 use Mail;
 use Log;
 use Illuminate\Pagination\LengthAwarePaginator;
+use DB;
+use Cache;
 
 class CommentController extends Controller
 {
@@ -58,6 +60,26 @@ class CommentController extends Controller
         }
 
         */
+        if (in_array($comment->content->type, ['forum', 'buysell', 'expat'])) {
+            DB::table('users')->select('id')->chunk(1000, function ($users) use ($comment) {
+                collect($users)->each(function ($user) use ($comment) {
+
+                    // For each active user we store the cache key about new added comment
+
+                    $key = 'new_'.$comment->content_id.'_'.$user->id;
+
+                    // We will not overwrite the cache if there are unread comments already
+
+                    if (! Cache::get($key, 0) > 0) {
+
+                        // The cache value is new comment id, this helps us redirect user
+                        // to the right place later
+
+                        Cache::forever($key, $comment->id);
+                    }
+                });
+            });
+        }
 
         Log::info('New comment added', [
             'user' =>  Auth::user()->name,

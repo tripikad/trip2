@@ -6,8 +6,10 @@ class ForumRow
 {
     public function render($forum)
     {
+        $forum = $forum->vars()->isNew($forum);
+
         return component('ForumRow')
-            ->with('route', route('v2.forum.show', [$forum->slug]))
+            ->with('route', route('v2.forum.show', [$forum->slug]).($forum->NewCommentId ? '#comment-'.$forum->NewCommentId : ''))
             ->with('user', component('UserImage')
                 ->with('route', route('v2.user.show', [$forum->user]))
                 ->with('image', $forum->user->imagePreset('small_square'))
@@ -24,6 +26,9 @@ class ForumRow
                     ->push(component('MetaLink')
                         ->with('title', $forum->vars()->created_at)
                     )
+                    ->pushWhen($forum->isNew && auth()->user()->hasRole('admin'), component('Tag')->is('red')
+                        ->with('title', trans('content.forum.is.new'))
+                        )
                     ->merge($forum->destinations->map(function ($tag) {
                         return component('Tag')->is('orange')->with('title', $tag->name);
                     }))
