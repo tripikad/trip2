@@ -130,7 +130,6 @@ class Main
             if (isset($type['id'])) {
                 $query = Content::where('id', $type['id'])->whereStatus($type['status']);
             } else {
-
                 if (isset($type['latest'])) {
                     $orderBy = $type['latest'];
                 } else {
