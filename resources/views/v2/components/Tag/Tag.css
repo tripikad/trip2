@@ -22,3 +22,11 @@
 .Tag--orange .Tag__title {
     color: $orange;
 }
+
+.Tag--red {
+    border: 1px solid $red;
+}
+
+.Tag--red .Tag__title {
+    color: $red;
+}

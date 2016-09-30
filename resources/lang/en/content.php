@@ -186,6 +186,8 @@ return [
     'forum.edit.field.topics.title' => 'Select topics',
     'forum.edit.field.topics.help' => '',
 
+    'forum.is.new' => 'Unread',
+
     // Expat
 
     'expat.index.title' => 'Expat forum',

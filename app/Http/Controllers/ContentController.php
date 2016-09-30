@@ -13,6 +13,7 @@ use App\Topic;
 use App\Image;
 use App\Main;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Cache;
 // Traits
 use App\Http\Controllers\ContentTraits\Blog;
 use App\Http\Controllers\ContentTraits\Flight;
@@ -202,6 +203,7 @@ class ContentController extends Controller
         $viewVariables['content'] = $content;
         $viewVariables['comments'] = $comments;
         $viewVariables['type'] = $type;
+
 
         return response()
             ->view($view, $viewVariables)
@@ -400,6 +402,23 @@ class ContentController extends Controller
             }
 
             $content->save();
+
+            if (in_array($content->type, ['forum', 'buysell', 'expat'])) {
+                DB::table('users')->select('id')->chunk(1000, function ($users) use ($content) {
+                    collect($users)->each(function ($user) use ($content) {
+
+                    // For user we store the cache key about new content item
+
+                    $key = 'new_'.$content->id.'_'.$user->id;
+
+                    // Cache value is initally 0 (no new comments are added yet)
+                    // Note: not sure about set for x seconds / set forever / auto-expiration yet
+
+                    Cache::forever($key, 0);
+                    });
+                });
+            }
+
 
             Log::info('New content added', [
                 'user' =>  Auth::user()->name,
