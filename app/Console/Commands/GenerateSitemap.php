@@ -13,7 +13,7 @@ class GenerateSitemap extends Command
         $this->line('Generating sitemap');
 
         // create new sitemap object
-        $sitemap = \App::make("sitemap");
+        $sitemap = \App::make('sitemap');
         $sitemapCounter = 0;
 
         $destinations = \App\Destination::get();
@@ -21,7 +21,7 @@ class GenerateSitemap extends Command
             $sitemap->add(route('destination.slug', [$destination->slug]), \Carbon\Carbon::yesterday(), 0.1, 'daily');
         }
 
-        $sitemap->store('xml','sitemap-'.$sitemapCounter);
+        $sitemap->store('xml', 'sitemap-'.$sitemapCounter);
         $sitemap->addSitemap(url('sitemap-'.$sitemapCounter.'.xml'));
         $sitemap->model->resetItems();
 
@@ -36,7 +36,7 @@ class GenerateSitemap extends Command
                 }
 
                 // generate new sitemap file
-                $sitemap->store('xml','sitemap-'.$sitemapCounter);
+                $sitemap->store('xml', 'sitemap-'.$sitemapCounter);
                 // add the file to the sitemaps array
                 $sitemap->addSitemap(url('sitemap-'.$sitemapCounter.'.xml'));
                 // reset items array (clear memory)
@@ -47,7 +47,7 @@ class GenerateSitemap extends Command
             });
 
         // generate new sitemapindex that will contain all generated sitemaps above
-        $sitemap->store('sitemapindex','sitemap');
+        $sitemap->store('sitemapindex', 'sitemap');
 
         $this->line('Sitemap done');
     }
