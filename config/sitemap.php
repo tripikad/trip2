@@ -10,4 +10,5 @@ return [
 	'max_size'			=> 	null,
 	'use_styles'		=> 	false,
 	'styles_location'	=> 	null,
+    'items_per_sitemap' =>  1000
 ];

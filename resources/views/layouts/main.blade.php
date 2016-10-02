@@ -14,6 +14,7 @@
         <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}">
         <meta name="twitter:card" content="summary_large_image">
         <meta property="promos" content="{{ rawurlencode(json_encode(config('promo'))) }}">
+        <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
