@@ -3,6 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use \App;
+use \App\User;
+use \App\Destination;
+use \App\Content;
 
 class GenerateSitemap extends Command
 {
@@ -13,12 +17,52 @@ class GenerateSitemap extends Command
         $this->line('Generating sitemap');
 
         // create new sitemap object
-        $sitemap = \App::make('sitemap');
+        $sitemap = App::make('sitemap');
         $sitemapCounter = 0;
 
-        $destinations = \App\Destination::get();
+        // Generate index pages sitemap
+        $types = [
+            'frontpage.index',
+            'flight.index',
+            'forum.index',
+            'expat.index',
+            'buysell.index',
+            'news.index',
+            'photo.index',
+            'shortnews.index',
+            //'sponsored.index',
+            'travelmate.index',
+            'register.form',
+            'login.form',
+            'reset.apply.form',
+        ];
+
+        foreach ($types as $route) {
+            $sitemap->add(route($route));
+        }
+
+        $sitemap->store('xml', 'sitemap-'.$sitemapCounter);
+        $sitemap->addSitemap(url('sitemap-'.$sitemapCounter.'.xml'));
+        $sitemap->model->resetItems();
+
+        // Generate destinations sitemap
+        //$sitemapCounter++;
+        $destinations = Destination::get();
         foreach ($destinations as $destination) {
-            $sitemap->add(route('destination.slug', [$destination->slug]), \Carbon\Carbon::yesterday(), 0.1, 'daily');
+            $sitemap->add(route('destination.slug', [$destination->slug]));
+        }
+
+        $sitemap->store('xml', 'sitemap-'.$sitemapCounter);
+        $sitemap->addSitemap(url('sitemap-'.$sitemapCounter.'.xml'));
+        $sitemap->model->resetItems();
+
+        // Generate users sitemap
+        $sitemapCounter++;
+        $users = User::where('verified', 1)
+            ->get();
+
+        foreach ($users as $user) {
+            $sitemap->add(route('user.show', [$user->id]));
         }
 
         $sitemap->store('xml', 'sitemap-'.$sitemapCounter);
@@ -27,12 +71,16 @@ class GenerateSitemap extends Command
 
         $sitemapCounter++;
 
-        \App\Content::whereNotIn('type', ['photo', 'static', 'internal'])
-            ->where('status', '=', 1)
-            ->orderBy('created_at', 'desc')
+        Content::whereNotIn('type', ['internal'])
+            ->where('status', 1)
+            ->orderBy('id', 'asc')
             ->chunk(config('sitemap.items_per_sitemap'), function ($contents) use ($sitemap, &$sitemapCounter) {
                 foreach ($contents as $content) {
-                    $sitemap->add(route($content->type.'.show', [$content->slug]), $content->updated_at, 0.1, 'daily');
+                    if ($content->type == 'static') {
+                        $sitemap->add(route($content->type.'.'.$content->id), $content->updated_at);
+                    } else {
+                        $sitemap->add(route($content->type.'.show', [$content->slug]), $content->updated_at);
+                    }
                 }
 
                 // generate new sitemap file
