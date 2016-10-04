@@ -134,6 +134,7 @@ return [
         'shortnews' => 'luhiuudised',
         'photo' => 'reisipildid',
         'internal' => 'toimetus',
+        'sponsored' => 'toimetaja-valik',
     ],
 
     'staticContentMapping' => [
