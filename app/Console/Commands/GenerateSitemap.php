@@ -3,10 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use \App;
-use \App\User;
-use \App\Destination;
-use \App\Content;
+use App;
+use App\User;
+use App\Destination;
+use App\Content;
 
 class GenerateSitemap extends Command
 {
