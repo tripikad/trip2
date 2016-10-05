@@ -8,7 +8,7 @@
         {{trans('search.tab.flight')}}
         <ul class="c-search__results-sublist">
         @foreach ($content as $row)
-            <li class="c-search__results-sublist-item"><a href="{{route('flight.show', [$row->slug])}}" class="c-search__results-link">{{$row['title']}}</a></li>
+            <li class="c-search__results-sublist-item"><a href="{{ route('flight.show', [$row->slug]) }}" class="c-search__results-link">{{ $row->title }}</a></li>
         @endforeach
         </ul>
     </li>

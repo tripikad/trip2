@@ -3,16 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Log;
+use Illuminate\Support\Facades\Log;
 use App\Content;
 use App\User;
 use App\Destination;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Input;
 
 class SearchController extends Controller
 {
+    private $content = null;
+    private $content_results = [];
+    private $content_counts = [];
+    private $content_types = ['news', 'flight', 'forum', 'buysell', 'expat'];
+
     public function search(Request $request, $search_type = false)
     {
+        $this->content_types = config('search.content_types');
+
         if ($search_type) {
             if (! in_array($search_type, array_keys(config('search.types')))) {
                 abort(404);
@@ -21,6 +32,7 @@ class SearchController extends Controller
 
         $q = trim($request->input('q'));
         $active_search = 'forum';
+        $tabs = [];
 
         foreach (array_keys(config('search.types')) as $type) {
             $counts[$type] = ($q && ! empty($q) ? $this->getResultsCountByType($type, $q) : 0);
@@ -61,15 +73,6 @@ class SearchController extends Controller
 
     private function modifyForumResults($results, $ajax)
     {
-        foreach ($results as $key => $item) {
-            if (! $ajax) {
-                $results[$key]['short_body_text'] = (strlen(strip_tags($item->body)) > 300) ? substr(strip_tags($item->body), 0, 300).'...' : strip_tags($item->body);
-            }
-
-            $results[$key]['comments_count'] = count($item->comments);
-            $results[$key]['route'] = route($item->type.'.show', [$item->slug]);
-            $results[$key]['user_img'] = $item->user->imagePreset();
-        }
     }
 
     private function modifyUserResults($results)
@@ -82,24 +85,10 @@ class SearchController extends Controller
 
     private function modifyFlightResults($results, $ajax)
     {
-        foreach ($results as $key => $item) {
-            if (! $ajax) {
-                $results[$key]['content_img'] = $item->imagePreset('small_square');
-                $results[$key]['destinations'] = $item->destinations;
-            }
-
-            $results[$key]['route'] = route($item->type.'.show', [$item->slug]);
-        }
     }
 
     private function modifyNewsResults($results)
     {
-        foreach ($results as $key => $item) {
-            $results[$key]['short_body_text'] = (strlen(strip_tags($item->body)) > 300) ? substr(strip_tags($item->body), 0, 300).'...' : strip_tags($item->body);
-            $results[$key]['route'] = route($item->type.'.show', [$item->slug]);
-            $results[$key]['comments_count'] = count($item->comments);
-            $results[$key]['content_img'] = $item->imagePreset('small_square');
-        }
     }
 
     private function modifyDestinationResults($results, $ajax)
@@ -134,9 +123,9 @@ class SearchController extends Controller
 
     protected function getResultsCountByType($type, $q)
     {
-        $builder = $this->getSearchBuilderByType($type, $q);
+        $this->getSearchResultsByType($type, $q);
 
-        return $builder->count();
+        return $this->content_counts[$type];
     }
 
     protected function getTotalCount($q, $types = [])
@@ -152,51 +141,92 @@ class SearchController extends Controller
 
     protected function getSearchResultsByType($type, $q)
     {
-        $builder = $this->getSearchBuilderByType($type, $q);
-        $res = $builder->simplePaginate(config('search.types.'.$type.'.items_per_page'));
-        $res->setPath(env('FULL_BASE_URL').'search/'.$type);
-        $res->appends(['q' => $q]);
+        $types = $this->content_types;
 
-        return $res;
+        if (in_array($type, $types)) {
+            if (! $this->content) {
+                $this->content = $this->getSearchBuilderByType('content', $q);
+
+                foreach ($this->content as $content) {
+                    if ($content->type == 'expat' || $content->type == 'buysell') {
+                        $content->type = 'forum';
+                    }
+
+                    $this->content_results[$content->type][] = $content;
+                }
+
+                foreach ($types as $t) {
+                    if (isset($this->content_results[$t])) {
+                        $this->content_results[$t] = collect($this->content_results[$t]);
+                    }
+                }
+            }
+        } else {
+            $builder = $this->getSearchBuilderByType($type, $q);
+            $this->content_results[$type] = $builder;
+        }
+
+        if (isset($this->content_results[$type])) {
+            $this->content_counts[$type] = $this->content_results[$type]->count();
+
+            $res = $this->content_results[$type];
+            $perPage = config('search.types.'.$type.'.items_per_page');
+            $currentPage = (int) Input::get('page', 1);
+
+            $res = new LengthAwarePaginator(
+                $res->forPage($currentPage, $perPage), $res->count(), $perPage, $currentPage
+            );
+
+            $res->setPath(env('FULL_BASE_URL').'search/'.$type);
+            $res->appends(['q' => $q]);
+
+            return $res;
+        } else {
+            $this->content_counts[$type] = 0;
+
+            return;
+        }
     }
 
     protected function getSearchBuilderByType($type, $q)
     {
         mb_internal_encoding('UTF-8');
         $order_type = config('search.types.'.$type.'.order_type') ? config('search.types.'.$type.'.order_type') : 'ASC';
-        $order_by = config('search.types.'.$type.'.order') ? config('search.types.'.$type.'.order') : null;
+        $order_by = config('search.types.'.$type.'.order') ? config('search.types.'.$type.'.order') : 'created_at';
 
-        switch ($type) {
-            case 'destination':
-                $res = Destination::whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%']);
-                break;
-            case 'user':
-                $res = User::whereVerified(1)
-                    ->whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%']);
-                break;
-            case 'blog':
-                $res = Content::where(['type' => 'blog', 'status' => 1])
-                    ->whereRaw('LOWER(`title`) LIKE ?', ['%'.mb_strtolower($q).'%']);
-                break;
-            case 'news':
-                $res = Content::where(['type' => 'news', 'status' => 1])
-                    ->whereRaw('LOWER(`title`) LIKE ?', ['%'.mb_strtolower($q).'%']);
-                break;
-            case 'flight':
-                $res = Content::where(['type' => 'flight', 'status' => 1])
-                    ->whereRaw('LOWER(`title`) LIKE ?', ['%'.mb_strtolower($q).'%']);
-                break;
-            case 'forum':
-                $res = Content::whereIn('type', ['forum', 'buysell', 'expat'])
-                    ->whereStatus(1)
-                    ->whereRaw('LOWER(`title`) LIKE ?', ['%'.mb_strtolower($q).'%']);
-                break;
-            default:
-                throw new \Exception('Invalid search type');
-        }
+        $types = $this->content_types;
 
-        if ($order_by) {
-            $res->orderBy($order_by, $order_type);
+        if ($type == 'destination') {
+            $res = Cache::remember('search-destination-'.urlencode($q), 15, function () use ($q, $order_by, $order_type) {
+                return Destination::whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%'])
+                    ->orderBy($order_by, $order_type)
+                    ->get();
+            });
+        } elseif ($type == 'user') {
+            $res = Cache::remember('search-user-'.urlencode($q), 15, function () use ($q, $order_by, $order_type) {
+                return User::whereVerified(1)
+                    ->whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%'])
+                    ->orderBy($order_by, $order_type)
+                    ->get();
+            });
+        } elseif ($type == 'content' || in_array($type, $types)) {
+            $res = Cache::remember('search-content-'.urlencode($q), 15, function () use ($q, $order_by, $order_type, $types) {
+                return Content::leftJoin('comments', function ($query) use ($q) {
+                    $query->on('comments.content_id', '=', 'contents.id')
+                        ->on('comments.id', '=',
+                            DB::raw('(SELECT `id` FROM comments WHERE `content_id` = `contents`.`id` AND LOWER(`body`) LIKE '.DB::getPdo()->quote(mb_strtolower('%'.$q.'%')).' AND `status` = 1 LIMIT 1)'));
+                })
+                    ->select('contents.*')
+                    ->whereIn('contents.type', $types)
+                    ->where('contents.status', 1)
+                    ->whereRaw('IF(`contents`.`type` = \'flight\', `contents`.`end_at` >= UNIX_TIMESTAMP(?), 1=1) AND (LOWER(`contents`.`title`) LIKE ? OR LOWER(`contents`.`body`) LIKE ? OR `comments`.`body` != \'\')', [Carbon::now(), '%'.mb_strtolower($q).'%', '%'.mb_strtolower($q).'%'])
+                    ->orderBy('contents.'.$order_by, $order_type)
+                    ->get();
+            });
+
+            $order_by = null;
+        } else {
+            throw new \Exception('Invalid search type');
         }
 
         return $res;
@@ -213,21 +243,15 @@ class SearchController extends Controller
         }
 
         $header_search = $request->input('header_search');
-        $total_cnt = 0;
 
         if ($q && ! empty($q)) {
-            $total_cnt = $this->getTotalCount($q, $types);
+            $total_cnt = $this->getTotalCount($q);
             $remaining_cnt = config('search.ajax_results');
             foreach ($types as $type) {
                 if ($remaining_cnt > 0) {
-                    $builder = $this->getSearchBuilderByType($type, $q);
+                    $builder = $this->getSearchResultsByType($type, $q);
 
-                    //active flight offers
-                    if ($type == 'flight') {
-                        $builder->where('end_at', '>=', Carbon::now());
-                    }
-
-                    $results[$type] = $builder->take($remaining_cnt)->get();
+                    $results[$type] = $builder->take($remaining_cnt);
                     if (count($results[$type])) {
                         $this->modifyResultsByType($type, $results[$type], true);
                         if (count($results[$type]) == config('search.ajax_results')) {
