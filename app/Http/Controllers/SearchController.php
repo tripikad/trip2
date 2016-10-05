@@ -186,7 +186,6 @@ class SearchController extends Controller
 
             return;
         }
-
     }
 
     protected function getSearchBuilderByType($type, $q)
@@ -198,20 +197,20 @@ class SearchController extends Controller
         $types = $this->content_types;
 
         if ($type == 'destination') {
-            $res = Cache::remember('search-destination-'.urlencode($q), 15, function() use ($q, $order_by, $order_type) {
+            $res = Cache::remember('search-destination-'.urlencode($q), 15, function () use ($q, $order_by, $order_type) {
                 return Destination::whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%'])
                     ->orderBy($order_by, $order_type)
                     ->get();
             });
         } elseif ($type == 'user') {
-            $res = Cache::remember('search-user-'.urlencode($q), 15, function() use ($q, $order_by, $order_type) {
+            $res = Cache::remember('search-user-'.urlencode($q), 15, function () use ($q, $order_by, $order_type) {
                 return User::whereVerified(1)
                     ->whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%'])
                     ->orderBy($order_by, $order_type)
                     ->get();
             });
         } elseif ($type == 'content' || in_array($type, $types)) {
-            $res = Cache::remember('search-content-'.urlencode($q), 15, function() use ($q, $order_by, $order_type, $types) {
+            $res = Cache::remember('search-content-'.urlencode($q), 15, function () use ($q, $order_by, $order_type, $types) {
                 return Content::leftJoin('comments', function ($query) use ($q) {
                     $query->on('comments.content_id', '=', 'contents.id')
                         ->on('comments.id', '=',
