@@ -227,8 +227,7 @@ class SearchController extends Controller
                                 WHEN \'forum\' THEN `contents`.`updated_at`
                                 ELSE `contents`.`created_at`
                             END) '
-                        )
-                    , $order_type)
+                        ), $order_type)
                     ->get();
             });
 
