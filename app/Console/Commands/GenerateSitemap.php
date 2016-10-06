@@ -50,22 +50,23 @@ class GenerateSitemap extends Command
         $sitemap->store('xml', 'sitemap-'.$sitemapCounter);
         $sitemap->addSitemap(url('sitemap-'.$sitemapCounter.'.xml'));
         $sitemap->model->resetItems();
+        $sitemapCounter++;
 
         // Generate users sitemap
-        $sitemapCounter++;
-        $users = User::where('verified', 1)
-            ->get();
+        User::where('verified', 1)
+            ->chunk(config('sitemap.items_per_sitemap'), function ($users) use ($sitemap, &$sitemapCounter) {
 
-        foreach ($users as $user) {
-            $sitemap->add(route('user.show', [$user->id]));
-        }
+                foreach ($users as $user) {
+                    $sitemap->add(route('user.show', [$user->id]));
+                }
 
-        $sitemap->store('xml', 'sitemap-'.$sitemapCounter);
-        $sitemap->addSitemap(url('sitemap-'.$sitemapCounter.'.xml'));
-        $sitemap->model->resetItems();
+                $sitemap->store('xml', 'sitemap-'.$sitemapCounter);
+                $sitemap->addSitemap(url('sitemap-'.$sitemapCounter.'.xml'));
+                $sitemap->model->resetItems();
+                $sitemapCounter++;
+            });
 
-        $sitemapCounter++;
-
+        // Generate content sitemap
         Content::whereNotIn('type', ['internal'])
             ->where('status', 1)
             ->orderBy('id', 'asc')
