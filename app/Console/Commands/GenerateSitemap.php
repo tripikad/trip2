@@ -55,7 +55,6 @@ class GenerateSitemap extends Command
         // Generate users sitemap
         User::where('verified', 1)
             ->chunk(config('sitemap.items_per_sitemap'), function ($users) use ($sitemap, &$sitemapCounter) {
-
                 foreach ($users as $user) {
                     $sitemap->add(route('user.show', [$user->id]));
                 }
