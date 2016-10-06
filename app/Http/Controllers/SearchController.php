@@ -191,7 +191,7 @@ class SearchController extends Controller
     protected function getSearchBuilderByType($type, $q)
     {
         mb_internal_encoding('UTF-8');
-        $order_type = config('search.types.'.$type.'.order_type') ? config('search.types.'.$type.'.order_type') : 'ASC';
+        $order_type = config('search.types.'.$type.'.order_type') ? config('search.types.'.$type.'.order_type') : 'DESC';
         $order_by = config('search.types.'.$type.'.order') ? config('search.types.'.$type.'.order') : 'created_at';
 
         $types = $this->content_types;
@@ -220,7 +220,14 @@ class SearchController extends Controller
                     ->whereIn('contents.type', $types)
                     ->where('contents.status', 1)
                     ->whereRaw('IF(`contents`.`type` = \'flight\', `contents`.`end_at` >= UNIX_TIMESTAMP(?), 1=1) AND (LOWER(`contents`.`title`) LIKE ? OR LOWER(`contents`.`body`) LIKE ? OR `comments`.`body` != \'\')', [Carbon::now(), '%'.mb_strtolower($q).'%', '%'.mb_strtolower($q).'%'])
-                    ->orderBy('contents.'.$order_by, $order_type)
+                    ->orderBy(
+                        DB::raw('IF(LOWER(`contents`.`title`) LIKE '.DB::getPdo()->quote(mb_strtolower('%'.$q.'%')).',
+                            `contents`.`title`,
+                            CASE `contents`.`type`
+                                WHEN \'forum\' THEN `contents`.`updated_at`
+                                ELSE `contents`.`created_at`
+                            END) '
+                        ), $order_type)
                     ->get();
             });
 
