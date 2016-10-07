@@ -72,7 +72,7 @@ class GenerateSitemap extends Command
             ->chunk(config('sitemap.items_per_sitemap'), function ($contents) use ($sitemap, &$sitemapCounter) {
                 foreach ($contents as $content) {
                     $check_updated_at = ! $content->updated_at || $content->updated_at == '0000-00-00 00:00:00' || strstr($content->updated_at, '-0001');
-                    
+
                     if ($content->type == 'static') {
                         $sitemap->add(route($content->type.'.'.$content->id), ($check_updated_at ? $content->created_at : $content->updated_at));
                     } else {
