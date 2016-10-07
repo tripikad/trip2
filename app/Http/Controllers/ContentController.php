@@ -83,14 +83,12 @@ class ContentController extends Controller
 
             $contents = $contents
                 ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
-                ->select('contents.*')
                 ->whereIn('content_destination.destination_id', $descendants);
         }
 
         if ($request->topic) {
             $contents = $contents
                 ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
-                ->select('contents.*')
                 ->where('content_topic.topic_id', '=', $request->topic);
         }
 
