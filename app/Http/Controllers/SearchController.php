@@ -221,7 +221,7 @@ class SearchController extends Controller
                     ->where('contents.status', 1)
                     ->whereRaw('IF(`contents`.`type` = \'flight\', `contents`.`end_at` >= UNIX_TIMESTAMP(?), 1=1) AND (LOWER(`contents`.`title`) LIKE ? OR LOWER(`contents`.`body`) LIKE ? OR `comments`.`body` != \'\')', [Carbon::now(), '%'.mb_strtolower($q).'%', '%'.mb_strtolower($q).'%'])
                     ->orderBy(
-                        DB::raw('IF(LOWER(`contents`.`title`) LIKE '.DB::getPdo()->quote(mb_strtolower('%'.$q.'%')).',
+                        DB::raw('IF(LOWER(`contents`.`title`) LIKE '.DB::getPdo()->quote(mb_strtolower('%'.$q.'%')).' AND `contents`.`type` != \'flight\',
                             `contents`.`title`,
                             CASE `contents`.`type`
                                 WHEN \'forum\' THEN `contents`.`updated_at`
