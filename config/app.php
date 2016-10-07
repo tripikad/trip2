@@ -181,6 +181,7 @@ return [
         // GrahamCampbell\Markdown\MarkdownServiceProvider::class,
 
         Msurguy\Honeypot\HoneypotServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
 
         /*
          * Application Service Providers...
