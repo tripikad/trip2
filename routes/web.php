@@ -195,6 +195,10 @@ Route::get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordFo
 
 Route::post('reset/password', ['uses' => 'Auth\ResetController@reset', 'as' => 'reset.password.submit']);
 
+// Fb campaign
+
+Route::get('tasuta-lennupiletid-maltale', ['uses' => 'CampaignController@index', 'as' => 'index']);
+
 //SEO content
 
 foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $type) {
