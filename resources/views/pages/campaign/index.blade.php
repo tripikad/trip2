@@ -57,8 +57,7 @@
                         </svg>
                     </div>
                     <h2 class="c-row__title">
-                        Aita kasvatada Trip.ee Facebooki fännide arvu ning sul on võimalus võita lennupiletid kahele
-                        Maltale.
+                        Lisaks loosime välja 9 mugavat Trip.ee sümboolikaga päevamatka seljakotti.
                     </h2>
                 </article>
 
