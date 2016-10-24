@@ -198,6 +198,7 @@ Route::post('reset/password', ['uses' => 'Auth\ResetController@reset', 'as' => '
 // Fb campaign
 
 Route::get('tasuta-lennupiletid-maltale', ['uses' => 'CampaignController@index', 'as' => 'index']);
+Route::get('tasuta-lennupiletid-maltale{path}', ['uses' => 'CampaignController@index', 'as' => 'index']);
 
 //SEO content
 

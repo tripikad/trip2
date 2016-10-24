@@ -1,9 +1,28 @@
-var likesResolved = false;
 var totalPageLikes = 30000;
 
-$( document ).ready(function() {
-    //105434916193601
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
 
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length,c.length);
+        }
+    }
+    return "";
+}
+
+$( document ).ready(function() {
     window.fbAsyncInit = function() {
         FB.init({
             appId      : '334251033596544',
@@ -32,17 +51,17 @@ $( document ).ready(function() {
                     } else {
                         stripedLine.css("width", (lineLength-4) + "%");
                     }
-                    //width: 0%;
                 }
             }
         );
     };
-    //
-    //(function(d, s, id){
-    //    var js, fjs = d.getElementsByTagName(s)[0];
-    //    if (d.getElementById(id)) {return;}
-    //    js = d.createElement(s); js.id = id;
-    //    js.src = "//connect.facebook.net/en_US/sdk.js";
-    //    fjs.parentNode.insertBefore(js, fjs);
-    //}(document, 'script', 'facebook-jssdk'));
+
+    $(".malta-promotion__svg-wrap svg").on("click", function(e) {
+        $(".malta-promotion").slideUp();
+        setCookie( "malta-stip-closed", true, 100 );
+    });
+
+    $(".malta-promotion__link").on("click", function(e) {
+        setCookie("malta-stip-closed", true, 100 );
+    })
 });
