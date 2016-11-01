@@ -148,11 +148,14 @@ class SearchController extends Controller
                 $this->content = $this->getSearchBuilderByType('content', $q);
 
                 foreach ($this->content as $content) {
+                    $index_type = $content->type;
                     if ($content->type == 'expat' || $content->type == 'buysell') {
-                        $content->type = 'forum';
+                        $index_type = 'forum';
+                    } else {
+                        $index_type = $content->type;
                     }
 
-                    $this->content_results[$content->type][] = $content;
+                    $this->content_results[$index_type][] = $content;
                 }
 
                 foreach ($types as $t) {
