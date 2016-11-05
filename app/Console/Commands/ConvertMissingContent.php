@@ -139,7 +139,7 @@ class ConvertMissingContent extends ConvertBase
             $nodes = $this->getNodes($type)->get();
 
             foreach ($nodes as $node) {
-                $this->convertNode($node, 'App\Comment', $this->contentTypeMapping[$type]);
+                $this->convertNode($node, 'App\Content', $this->contentTypeMapping[$type]);
             }
         }
 
