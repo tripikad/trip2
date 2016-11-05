@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\UserDelete::class,
         \App\Console\Commands\RemoveDuplicates::class,
         \App\Console\Commands\GenerateSitemap::class,
+        \App\Console\Commands\ConvertMissingContent::class,
 
     ];
 
