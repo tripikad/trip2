@@ -61,6 +61,8 @@ class ConvertMissingContent extends ConvertBase
 
             $model->status = 1;
 
+            //todo: slug also!!!
+
             $model->save();
 
             $this->convertComments($node->nid, 1);
