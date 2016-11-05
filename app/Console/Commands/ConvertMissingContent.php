@@ -2,10 +2,7 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
-use DB;
-use Imageconv;
 use App;
 use App\Content;
 use App\User as User;
@@ -45,7 +42,6 @@ class ConvertMissingContent extends ConvertBase
     public function convertNode($node, $modelname, $type, $route = '')
     {
         if (! $modelname::find($node->nid)) {
-
             $model = new $modelname;
 
             $model->id = $node->nid;
@@ -108,19 +104,18 @@ class ConvertMissingContent extends ConvertBase
             $model->save();
 
             $this->convertFlags($comment->cid, 'App\Comment', 'comment');
-
         }
     }
 
     protected function createTargetUser()
     {
-        $user = User::where('name','=','Tripi külastaja')->first();
-        if(!$user) {
+        $user = User::where('name', '=', 'Tripi külastaja')->first();
+        if (! $user) {
             $model = new User();
             $model->name = 'Tripi külastaja';
             $model->password = Hash::make(str_random(8));
             $model->role = 'regular';
-            $model->created_at = \Carbon\Carbon::createFromDate(1999,5,5);
+            $model->created_at = \Carbon\Carbon::createFromDate(1999, 5, 5);
             $model->timestamps = false;
 
             $model->save();
@@ -135,7 +130,7 @@ class ConvertMissingContent extends ConvertBase
     {
         $this->line('Converting missing content');
 
-        if(!$targetUserId = $this->createTargetUser()) {
+        if (! $targetUserId = $this->createTargetUser()) {
             $this->line('Invalid user');
             exit(0);
         }
