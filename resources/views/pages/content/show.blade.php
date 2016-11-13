@@ -28,7 +28,7 @@
                             'profile' => ($type == 'blog' ? [
                                 'modifiers' => '',
                                 'image' => $content->user->imagePreset(),
-                                'route' => route('user.show', [$content->user])
+                                'route' => ($content->user->name != 'Tripi külastaja' ? route('user.show', [$content->user]) : false)
                             ] : null),
                             'text' => view('component.content.text', ['content' => $content]),
                             'extra' => view('component.flags', ['flags' => $content->getFlags()]),

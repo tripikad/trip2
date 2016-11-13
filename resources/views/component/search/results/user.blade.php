@@ -7,7 +7,7 @@
                 @include('component.profile', [
                     'modifiers' => 'm-full m-status',
                     'image' => $user->imagePreset(),
-                    'route' => route('user.show', [$user]),
+                    'route' => ($user->name != 'Tripi külastaja' ? route('user.show', [$user]) : false),
                     'status' => [
                         'modifiers' => ['m-yellow', 'm-red', 'm-green'][rand(0,2)],
                         'position' => $user->rank,

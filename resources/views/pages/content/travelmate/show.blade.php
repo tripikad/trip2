@@ -85,7 +85,7 @@
                     ],
                     'user' => $content->user,
                     'name' => $content->user->name,
-                    'user_route' => route('user.show', [$content->user]),
+                    'user_route' => ($content->user->name != 'Tripi külastaja' ? route('user.show', [$content->user]) : false),
                     'sex_and_age' =>
                         ($content->user->gender ?
                             trans('user.gender.'.$content->user->gender).

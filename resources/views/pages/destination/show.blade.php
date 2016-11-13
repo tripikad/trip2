@@ -293,7 +293,7 @@
                                         ];
                                     }),
                                     'userName' => $photo->user->name,
-                                    'userRoute' => route('user.show',$photo->user),
+                                    'userRoute' => ($photo->user->name != 'Tripi külastaja' ? route('user.show', [$photo->user]) : false),
                                 ];
                             })
                         ])

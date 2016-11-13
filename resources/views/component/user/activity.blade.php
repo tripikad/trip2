@@ -23,7 +23,7 @@
                         'profile' => [
                             'image' => $item->user->imagePreset(),
                             'title' => $item->user->title,
-                            'route' => route('user.show', [$item->user]),
+                            'route' => ($item->user->name != 'Tripi külastaja' ? route('user.show', [$item->user]) : false),
                             'letter' => [
                                 'modifiers' => 'm-green m-small',
                                 'text' => 'D'

@@ -321,7 +321,7 @@
                         'button' => view('component.button',[
                             'modifiers' => 'm-secondary m-small',
                             'title' => trans('menu.user.activity'),
-                            'route' => route('user.show', [$user])
+                            'route' => ($user->name != 'Tripi külastaja' ? route('user.show', [$user]) : false)
                         ])
                     ],
                     [
