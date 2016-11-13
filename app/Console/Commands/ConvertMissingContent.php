@@ -7,6 +7,7 @@ use App;
 use App\Content;
 use App\User as User;
 use Illuminate\Support\Facades\Hash;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ConvertMissingContent extends ConvertBase
 {
@@ -39,14 +40,19 @@ class ConvertMissingContent extends ConvertBase
         return $query;
     }
 
-    public function convertNode($node, $modelname, $type, $route = '')
+    public function getUniqueSlug($title)
+    {
+        return SlugService::createSlug(Content::class, 'slug', $title);
+    }
+
+    public function convertMissingNode($node, $modelname, $type, $route = '')
     {
         if (! $modelname::find($node->nid)) {
             $model = new $modelname;
 
             $model->id = $node->nid;
             $model->type = $type;
-            $model->user_id = $this->targetUserId;
+            $model->user_id = $this->targetUserId->id;
             $model->title = $this->cleanAll($node->title);
             $model->body = $this->clean($node->body);
 
@@ -54,10 +60,8 @@ class ConvertMissingContent extends ConvertBase
             $model->end_at = isset($node->end_at) ? $node->end_at : null;
             $model->duration = isset($node->duration) ? $this->cleanAll($node->duration) : null;
             $model->price = (isset($node->price) && is_int((int) $node->price)) ? $node->price : null;
-
-            $model->status = 1;
-
-            //todo: slug also!!!
+            $model->slug = $this->getUniqueSlug($this->cleanAll($node->title));
+            $model->status = 78;
 
             $model->save();
 
@@ -90,20 +94,22 @@ class ConvertMissingContent extends ConvertBase
         $comments = $this->getComments($nid)->where('status', '=', $status)->get();
 
         foreach ($comments as $comment) {
-            $model = new \App\Comment;
+            if (! App\Comment::find($comment->cid)) {
+                $model = new \App\Comment;
 
-            $model->id = $comment->cid;
-            $model->user_id = $this->targetUserId;
-            $model->content_id = $comment->nid;
-            $model->body = $this->clean($comment->comment);
-            $model->status = 1 - $comment->status;
-            $model->created_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);
-            $model->updated_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);
-            $model->timestamps = false;
+                $model->id = $comment->cid;
+                $model->user_id = $this->targetUserId->id;
+                $model->content_id = $comment->nid;
+                $model->body = $this->clean($comment->comment);
+                $model->status = 1 - $comment->status;
+                $model->created_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);
+                $model->updated_at = \Carbon\Carbon::createFromTimeStamp($comment->timestamp);
+                $model->timestamps = false;
 
-            $model->save();
+                $model->save();
 
-            $this->convertFlags($comment->cid, 'App\Comment', 'comment');
+                $this->convertFlags($comment->cid, 'App\Comment', 'comment');
+            }
         }
     }
 
@@ -113,10 +119,11 @@ class ConvertMissingContent extends ConvertBase
         if (! $user) {
             $model = new User();
             $model->name = 'Tripi külastaja';
-            $model->password = Hash::make(str_random(8));
+            $model->password = 'none';
             $model->role = 'regular';
             $model->created_at = \Carbon\Carbon::createFromDate(1999, 5, 5);
             $model->timestamps = false;
+            $model->verified = 0;
 
             $model->save();
 
@@ -130,7 +137,7 @@ class ConvertMissingContent extends ConvertBase
     {
         $this->line('Converting missing content');
 
-        if (! $targetUserId = $this->createTargetUser()) {
+        if (! $this->targetUserId = $this->createTargetUser()) {
             $this->line('Invalid user');
             exit(0);
         }
@@ -139,7 +146,7 @@ class ConvertMissingContent extends ConvertBase
             $nodes = $this->getNodes($type)->get();
 
             foreach ($nodes as $node) {
-                $this->convertNode($node, 'App\Content', $this->contentTypeMapping[$type]);
+                $this->convertMissingNode($node, 'App\Content', $this->contentTypeMapping[$type]);
             }
         }
 
