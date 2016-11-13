@@ -272,7 +272,7 @@
                                     'image' => '',
                                     'route' => route($blog->type.'.show', [$blog->slug]),
                                     'profile' => [
-                                        'route' => route('user.show', [$blog->user]),
+                                        'route' => ($blog->user->name != 'Tripi külastaja' ? route('user.show', [$blog->user]) : false),
                                         'title' => $blog->user->name,
                                         'image' => $blog->user->imagePreset()
                                     ]
@@ -314,7 +314,7 @@
                                                 ];
                                             }),
                                     'userName' => $photo->user->name,
-                                    'userRoute' => route('user.show',$photo->user),
+                                    'userRoute' => ($photo->user->name != 'Tripi külastaja' ? route('user.show', [$photo->user]) : false),
                                ];
                             })
                         ])

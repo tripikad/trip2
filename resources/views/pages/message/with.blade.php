@@ -17,7 +17,7 @@
                             'button' => view('component.button',[
                                 'modifiers' => 'm-small',
                                 'title' => trans('menu.user.activity'),
-                                'route' => route('user.show', [$user]),
+                                'route' => ($user->name != 'Tripi külastaja' ? route('user.show', [$user]) : false),
                             ])
                         ],
                         [
@@ -25,7 +25,7 @@
                             'button' => view('component.button',[
                                 'modifiers' => 'm-small m-border',
                                 'title' => trans('menu.user.message'),
-                                'route' => route('message.index', [$user]),
+                                'route' => ($user->name != 'Tripi külastaja' ? route('message.index', [$user]) : false),
                             ])
                         ],
                         [
@@ -33,7 +33,7 @@
                             'button' => view('component.button',[
                                 'modifiers' => 'm-small',
                                 'title' => trans('menu.user.follow'),
-                                'route' => route('follow.index', [$user]),
+                                'route' => ($user->name != 'Tripi külastaja' ? route('follow.index', [$user]) : false),
                             ])
                         ],
                     ]
