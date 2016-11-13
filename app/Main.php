@@ -147,7 +147,7 @@ class Main
                     $query = Content::leftJoin('comments', function ($query) use($comments_status) {
                         $query->on('comments.content_id', '=', 'contents.id')
                             ->on('comments.id', '=',
-                                DB::raw('(select id from comments where content_id = contents.id '.($comments_status != 0 ? 'AND `comments`.`status` = 1 ' : '').'order by id desc limit 1)'));
+                                DB::raw('(select id from comments where content_id = contents.id order by id desc limit 1)'));
                     })->whereIn('contents.type', $type['type'])->where('contents.status', $type['status'])
                         ->select(['contents.*', DB::raw('IF(UNIX_TIMESTAMP(comments.created_at) > UNIX_TIMESTAMP(contents.created_at), comments.created_at, contents.created_at) AS contentOrder')]);
 
