@@ -279,6 +279,24 @@
 
             @include('component.promo', ['promo' => 'sidebar_large m-small-margin'])
 
+
+            <div id="rc-connect-container" class="m-small-margin"></div>
+            <script id='rc-connect' src='http://www.rentalcars.com/partners/integrations/connect/connect.js' data-container='rc-connect-container' data-preflang='ee' data-enable-return-checkbox='true' data-affiliate-code='trip_ee' data-adplat='carpage' data-adcamp='standalone' data-primary='00A3CD'></script>
+
+            <ins class="bookingaff m-small-margin" data-aid="1194911" data-target_aid="1150222" data-prod="nsb" data-width="100%" data-height="275" data-lang="et" data-currency="EUR">
+                <!-- Anything inside will go away once widget is loaded. -->
+                <a href="//www.booking.com?aid=1150222">Booking.com</a>
+            </ins>
+            <script type="text/javascript">
+                (function(d, sc, u) {
+                    var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
+                    s.type = 'text/javascript';
+                    s.async = true;
+                    s.src = u + '?v=' + (+new Date());
+                    p.parentNode.insertBefore(s,p);
+                })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
+            </script>
+
         </div>
     </div>
 
