@@ -42,7 +42,7 @@ class ContentController extends Controller
             $contents = Content::leftJoin('comments', function ($query) use ($comments_status) {
                 $query->on('comments.content_id', '=', 'contents.id')
                     ->on('comments.id', '=',
-                        DB::raw('(select id from comments where `content_id` = `contents`.`id` '.($comments_status != 0 ? 'AND `comments`.`status` = 1 ' : '').'order by id desc limit 1)'));
+                        DB::raw('(select id from comments where `content_id` = `contents`.`id` order by id desc limit 1)'));
             })
                 ->where('contents.type', $type)
                 ->with(config("content_$type.index.with"))
