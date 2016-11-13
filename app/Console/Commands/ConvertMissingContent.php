@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App;
 use App\Content;
 use App\User as User;
-use Illuminate\Support\Facades\Hash;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ConvertMissingContent extends ConvertBase
 {
@@ -61,7 +60,7 @@ class ConvertMissingContent extends ConvertBase
             $model->duration = isset($node->duration) ? $this->cleanAll($node->duration) : null;
             $model->price = (isset($node->price) && is_int((int) $node->price)) ? $node->price : null;
             $model->slug = $this->getUniqueSlug($this->cleanAll($node->title));
-            $model->status = 78;
+            $model->status = 1;
 
             $model->save();
 

@@ -144,7 +144,7 @@ class Main
                 }
 
                 if (in_array('forum', $type['type']) || in_array('buysell', $type['type']) || in_array('expat', $type['type']) || in_array('internal', $type['type'])) {
-                    $query = Content::leftJoin('comments', function ($query) use($comments_status) {
+                    $query = Content::leftJoin('comments', function ($query) use ($comments_status) {
                         $query->on('comments.content_id', '=', 'contents.id')
                             ->on('comments.id', '=',
                                 DB::raw('(select id from comments where content_id = contents.id order by id desc limit 1)'));
