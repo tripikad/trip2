@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App;
 use App\Content;
 use App\User as User;
-use Illuminate\Support\Facades\Hash;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ConvertMissingContent extends ConvertBase
 {
