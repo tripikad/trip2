@@ -60,7 +60,7 @@ class ConvertMissingContent extends ConvertBase
             $model->duration = isset($node->duration) ? $this->cleanAll($node->duration) : null;
             $model->price = (isset($node->price) && is_int((int) $node->price)) ? $node->price : null;
             $model->slug = $this->getUniqueSlug($this->cleanAll($node->title));
-            $model->status = 78;
+            $model->status = 1;
 
             $model->save();
 
