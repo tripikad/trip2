@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use DB;
+use Auth;
 
 class Main
 {
@@ -127,6 +128,12 @@ class Main
 
             $query = null;
 
+            if (Auth::check() && Auth::user()->hasRole('admin')) {
+                $comments_status = 0;
+            } else {
+                $comments_status = 1;
+            }
+
             if (isset($type['id'])) {
                 $query = Content::where('id', $type['id'])->whereStatus($type['status']);
             } else {
@@ -137,10 +144,10 @@ class Main
                 }
 
                 if (in_array('forum', $type['type']) || in_array('buysell', $type['type']) || in_array('expat', $type['type']) || in_array('internal', $type['type'])) {
-                    $query = Content::leftJoin('comments', function ($query) {
+                    $query = Content::leftJoin('comments', function ($query) use($comments_status) {
                         $query->on('comments.content_id', '=', 'contents.id')
                             ->on('comments.id', '=',
-                                DB::raw('(select id from comments where content_id = contents.id order by id desc limit 1)'));
+                                DB::raw('(select id from comments where content_id = contents.id '.($comments_status != 0 ? 'AND `comments`.`status` = 1 ' : '').'order by id desc limit 1)'));
                     })->whereIn('contents.type', $type['type'])->where('contents.status', $type['status'])
                         ->select(['contents.*', DB::raw('IF(UNIX_TIMESTAMP(comments.created_at) > UNIX_TIMESTAMP(contents.created_at), comments.created_at, contents.created_at) AS contentOrder')]);
 

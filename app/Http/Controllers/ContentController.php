@@ -32,11 +32,17 @@ class ContentController extends Controller
             abort(401);
         }
 
+        if (config("content_$type.store.status", 1) == 0 && Auth::check() && Auth::user()->hasRole('admin')) {
+            $comments_status = 0;
+        } else {
+            $comments_status = 1;
+        }
+
         if (in_array('comments', config("content_$type.index.with")) && ($type == 'forum' || $type == 'buysell' || $type == 'expat' || $type == 'internal')) {
-            $contents = Content::leftJoin('comments', function ($query) {
+            $contents = Content::leftJoin('comments', function ($query) use ($comments_status) {
                 $query->on('comments.content_id', '=', 'contents.id')
                     ->on('comments.id', '=',
-                        DB::raw('(select id from comments where `content_id` = `contents`.`id` order by id desc limit 1)'));
+                        DB::raw('(select id from comments where `content_id` = `contents`.`id` '.($comments_status != 0 ? 'AND `comments`.`status` = 1 ' : '').'order by id desc limit 1)'));
             })
                 ->where('contents.type', $type)
                 ->with(config("content_$type.index.with"))
@@ -51,10 +57,8 @@ class ContentController extends Controller
                 );
         }
 
-        if (config("content_$type.store.status", 1) == 0 && Auth::check() && Auth::user()->hasRole('admin')) {
-            //$contents->whereStatus(0);
-        } else {
-            $contents->where('contents.status', 1);
+        if ($comments_status != 0) {
+            $contents->where('contents.status', $comments_status);
         }
 
         $expireField = config("content_$type.index.expire.field");
@@ -409,7 +413,7 @@ class ContentController extends Controller
 
                     $key = 'new_'.$content->id.'_'.$user->id;
 
-                    // Cache value is initally 0 (no new comments are added yet)
+                    // Cache value is initially 0 (no new comments are added yet)
                     // Note: not sure about set for x seconds / set forever / auto-expiration yet
 
                     Cache::forever($key, 0);
