@@ -152,6 +152,10 @@
 
                     @include('component.promo', ['promo' => 'sidebar_small m-small-margin'])
 
+                    <div class="m-medium-offset-bottom" style="width: 100%; display:inline-block;">
+                        <script src="https://www.hotelscombined.ee/SearchBox/364585"></script>
+                    </div>
+
                 </div>
 
                 <div class="r-home__news-column m-last">
