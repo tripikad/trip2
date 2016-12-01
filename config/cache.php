@@ -16,7 +16,7 @@ return [
             'header' => 60 * 10,
         ],
         'show' => [
-            'header' => 60 * 10,
+            'header' => 60 * 5,
         ],
     ],
 
