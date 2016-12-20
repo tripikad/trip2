@@ -37,7 +37,7 @@
             <div class="NavbarMobile__links">
        
                 <a
-                    v-for="(link, index) in links"
+                    v-for="(link, index) in currentLinks"
                     :href="link.route"
                     track-by="index"
                 >
@@ -51,7 +51,7 @@
                 </a>
 
                 <a
-                    v-for="(link, index) in sublinks"
+                    v-for="(link, index) in currentSublinks"
                     :href="link.route"
                     track-by="index"
                 >
@@ -92,7 +92,9 @@
 
         data() {
             return {
-                menuOpen: false
+                menuOpen: false,
+                currentLinks: [],
+                currentSublinks: []
             }
         },
 
@@ -103,8 +105,8 @@
         },
 
         mounted() {
-            this.links = this.links ? JSON.parse(decodeURIComponent(this.links)) : ''
-            this.sublinks = this.sublinks ? JSON.parse(decodeURIComponent(this.sublinks)) : ''
+            this.currentLinks = this.links ? JSON.parse(decodeURIComponent(this.links)) : ''
+            this.currentSublinks = this.sublinks ? JSON.parse(decodeURIComponent(this.sublinks)) : ''
         }
 
     }

@@ -5,7 +5,7 @@
         <div class="NavbarDesktop__links">
 
             <a
-                v-for="(link, index) in links"
+                v-for="(link, index) in currentLinks"
                 :href="link.route"
                 track-by="index"
             >
@@ -40,7 +40,7 @@
             <div class="NavbarDesktop__sublinks">
 
                 <a
-                    v-for="(link, index) in sublinks"
+                    v-for="(link, index) in currentSublinks"
                     :href="link.route"
                     track-by="index"
                 >
@@ -85,15 +85,17 @@
 
         data() {
             return {
-                submenuOpen: false
+                submenuOpen: false,
+                currentLinks: [],
+                currentSublinks: []
             }
         },
 
         mounted() {
-            this.links = this.links
+            this.currentLinks = this.links
                 ? JSON.parse(decodeURIComponent(this.links))
                 : ''
-            this.sublinks = this.sublinks
+            this.currentSublinks = this.sublinks
                 ? JSON.parse(decodeURIComponent(this.sublinks))
                 : ''
         }

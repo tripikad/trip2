@@ -15,8 +15,6 @@ import ImageUpload from './components/ImageUpload/ImageUpload.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
 import Gallery from './components/Gallery/Gallery.vue'
 
-import Test from './components/Test/Test.vue'
-
 const globalProps = JSON.parse(decodeURIComponent(
     document.querySelector('#globalprops').getAttribute('content')
 ))
@@ -43,8 +41,7 @@ new Vue({
 //        Map,
         ImageUpload,
         FormSelect,
-        Gallery,
-        Test
+        Gallery
     },
 
     mounted() {

@@ -6,7 +6,7 @@
 
             <div
                 class="col-2"
-                v-for="(item, index) in images"
+                v-for="(item, index) in currentImages"
                 track-by="index"
             >
 
@@ -87,7 +87,8 @@ export default {
     data() {
         return {
             fullscreen: false,
-            activeImage: false
+            activeImage: false,
+            currentImages: []
         }
     },
 
@@ -99,7 +100,7 @@ export default {
     },
 
     mounted() {
-        this.images = this.images
+        this.currentImages = this.images
             ? JSON.parse(decodeURIComponent(this.images))
             : []
     }
