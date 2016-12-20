@@ -26,7 +26,7 @@ var event = new Vue()
 Vue.prototype.$event = event
 
 new Vue({
-    el: 'body',
+    el: '#app',
 
     components: {
         Alert,
