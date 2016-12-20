@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Content;
-use App\Destination;
 use App\Topic;
 use App\Carrier;
+use App\Content;
+use App\Destination;
 
 class RedirectController extends Controller
 {
@@ -76,7 +76,6 @@ class RedirectController extends Controller
             'reisipakkumised' => '/',
             'sein/reisipakkumised' => '/',
             'sein/turg' => '/',
-
 
             'sein' => '/',
 

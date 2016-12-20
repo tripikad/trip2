@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Auth;
-use Log;
 use DB;
-use App\Content;
-use App\Destination;
-use App\Topic;
-use App\Image;
-use App\Main;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Log;
+use Auth;
 use Cache;
-// Traits
+use App\Main;
+use App\Image;
+use App\Topic;
+use App\Content;
+use Carbon\Carbon;
+use App\Destination;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ContentTraits\Blog;
-use App\Http\Controllers\ContentTraits\Flight;
+// Traits
 use App\Http\Controllers\ContentTraits\Forum;
+use App\Http\Controllers\ContentTraits\Flight;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Controllers\ContentTraits\Travelmate;
 
 class ContentController extends Controller
@@ -205,7 +205,6 @@ class ContentController extends Controller
         $viewVariables['content'] = $content;
         $viewVariables['comments'] = $comments;
         $viewVariables['type'] = $type;
-
 
         return response()
             ->view($view, $viewVariables)
@@ -420,7 +419,6 @@ class ContentController extends Controller
                     });
                 });
             }
-
 
             Log::info('New content added', [
                 'user' =>  Auth::user()->name,

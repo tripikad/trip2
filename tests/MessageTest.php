@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 use App\Message;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class MessageTest extends TestCase
 {

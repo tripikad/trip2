@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Content;
 use App\User;
+use App\Content;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class FeedTest extends TestCase
 {

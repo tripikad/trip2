@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Mail;
+use Illuminate\Console\Command;
 
 class MailTest extends Command
 {

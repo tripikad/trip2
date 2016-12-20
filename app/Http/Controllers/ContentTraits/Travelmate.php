@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\ContentTraits;
 
-use Carbon\Carbon;
-use App\Content;
 use App\Main;
+use App\Content;
+use Carbon\Carbon;
 
 trait Travelmate
 {

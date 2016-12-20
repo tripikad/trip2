@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use DB;
 use Auth;
+use Carbon\Carbon;
 
 class Main
 {

@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Storage;
+use Illuminate\Console\Command;
 
 class MakeComponent extends Command
 {

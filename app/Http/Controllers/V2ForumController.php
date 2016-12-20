@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Cache;
 use Request;
+use App\Topic;
 use App\Content;
 use App\Destination;
-use App\Topic;
-use Cache;
 
 class V2ForumController extends Controller
 {
@@ -63,7 +63,6 @@ class V2ForumController extends Controller
         $forums = Content::getLatestItems('forum', 5);
         $travelmates = Content::getLatestItems('travelmate', 3);
         $user = auth()->user();
-
 
         if (auth()->check()) {
             $userId = auth()->user()->id;

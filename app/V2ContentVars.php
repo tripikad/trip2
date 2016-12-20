@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Exception;
 use Cache;
+use Exception;
 
 class V2ContentVars
 {

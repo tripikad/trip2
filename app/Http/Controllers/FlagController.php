@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App;
-use Request;
 use Log;
+use Auth;
+use Request;
 
 class FlagController extends Controller
 {
