@@ -1,7 +1,7 @@
 <template>
 
     <div
-        v-el:dropzone
+        ref="dropzone"
         class="ImageUpload dropzone"
         :class="isclasses"
     >
@@ -24,14 +24,14 @@
             dictremovefile: { default: '' }
         },
 
-        ready: function() {
+        mounted() {
             const globalProps = JSON.parse(decodeURIComponent(
                 document.querySelector('#globalprops').getAttribute('content')
             ))
 
             Dropzone.autoDiscover = false
 
-            new Dropzone(this.$els.dropzone, {
+            new Dropzone(this.$refs.dropzone, {
                 url: '/v2/image/store',
                 paramName: 'image',
                 maxFileSize: globalProps.maxfilesize,
@@ -46,7 +46,7 @@
                 dictRemoveFile: this.dictremovefile,
                 headers: {'X-CSRF-TOKEN': globalProps.token},
                 success: function(file, res) {
-                    this.$dispatch('showAlert', res.image + ' uploaded')
+                    this.$event.$emit('showAlert', res.image + ' uploaded')
                 }.bind(this)
 
             }).on('complete', function(file) {

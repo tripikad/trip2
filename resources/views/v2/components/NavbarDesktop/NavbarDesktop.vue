@@ -5,9 +5,9 @@
         <div class="NavbarDesktop__links">
 
             <a
-                v-for="link in links"
+                v-for="(link, index) in links"
                 :href="link.route"
-                track-by="$index"
+                track-by="index"
             >
 
                 <div
@@ -40,9 +40,9 @@
             <div class="NavbarDesktop__sublinks">
 
                 <a
-                    v-for="link in sublinks"
+                    v-for="(link, index) in sublinks"
                     :href="link.route"
-                    track-by="$index"
+                    track-by="index"
                 >
 
                     <div class="NavbarDesktop__sublink">
@@ -89,7 +89,7 @@
             }
         },
 
-        ready() {
+        mounted() {
             this.links = this.links
                 ? JSON.parse(decodeURIComponent(this.links))
                 : ''

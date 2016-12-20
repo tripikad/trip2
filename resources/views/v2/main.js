@@ -23,6 +23,9 @@ const globalProps = JSON.parse(decodeURIComponent(
 Vue.use(VueResource)
 Vue.http.headers.common['X-CSRF-TOKEN'] = globalProps.token
 
+var event = new Vue()
+Vue.prototype.$event = event
+
 new Vue({
     el: 'body',
 
@@ -42,16 +45,10 @@ new Vue({
         Gallery
     },
 
-    events: {
-        showAlert: function(alert) {
-            this.$broadcast('showAlert', alert)
-        }
-    },
-
-    ready() {
+    mounted() {
         this.$http.get(globalProps.alertRoute).then(function(res) {
             if (res.data.info) {
-                this.$emit('showAlert', res.data.info)
+                this.$event.$emit('showAlert', res.data.info)
             }
         })
     }

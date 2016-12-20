@@ -8,13 +8,7 @@ class NavbarDesktop
     {
         $user = request()->user();
 
-        return collect()/*config('menu.header'))
-            /*->map(function ($value, $key) {
-                return [
-                    'title' => trans("menu.header.$key"),
-                    'route' => $value['route'],
-                ];
-            })*/
+        return collect()
             ->put('flight', [
                 'title' => trans('menu.header.flights'),
                 'route' => route('v2.flight.index'),

@@ -6,14 +6,14 @@
 
             <div
                 class="col-2"
-                v-for="item in images"
-                track-by="$index"
+                v-for="(item, index) in images"
+                track-by="index"
             >
 
                 <img
                     class="Gallery__image"
                     :src="item.small"
-                    @click="render($index)"
+                    @click="render(index)"
                 />
 
             </div>
@@ -57,10 +57,10 @@
 
             </div>
 
-            <div class="Gallery__fullMeta">
-
-                {{{ images[activeImage].meta }}}
-
+            <div
+                class="Gallery__fullMeta"
+                v-html="images[activeImage].meta"
+            >
             </div>
             
         </div>
@@ -98,7 +98,7 @@ export default {
         }
     },
 
-    ready() {
+    mounted() {
         this.images = this.images
             ? JSON.parse(decodeURIComponent(this.images))
             : []

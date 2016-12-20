@@ -1,21 +1,23 @@
-.fadeCollapse-transition {
+.fadeCollapse-enter-active,
+.fadeCollapse-leave-active {
   transition: all 300ms ease;
   opacity: 1;
 }
 
 .fadeCollapse-enter,
-.fadeCollapse-leave {
+.fadeCollapse-leave-active {
   opacity: 0;
   transform: translateY(0);
 }
 
-.fadeZoom-transition {
+.fadeZoom-enter-active,
+.fadeZoom-leave-active {
   transition: all 300ms ease;
   opacity: 1;
 }
 
 .fadeZoom-enter,
-.fadeZoom-leave {
+.fadeZoom-leave-active {
   opacity: 0;
   transform: scale(0.7);
 }

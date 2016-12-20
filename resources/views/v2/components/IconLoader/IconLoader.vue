@@ -1,6 +1,6 @@
 <template>
 
-    <div v-show="false">{{{ svg }}}</div>
+    <div v-show="false" v-html="svg"></div>
 
 </template>
 
@@ -18,7 +18,7 @@
             }
         },
 
-        ready() {
+        mounted() {
             this.$http.get(this.route).then(function(res) {
                 this.svg = res.data
             })
