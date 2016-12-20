@@ -93,28 +93,26 @@ gulp.task('v1', ['sass', 'js', 'svg_sprite', 'svg_standalone'])
 // V2
 
 var elixir = require('laravel-elixir')
+require('laravel-elixir-vue-2')
 
-require('laravel-elixir-vueify')
-require('./elixir/postcss')
 require('./elixir/svg')
+require('./elixir/postcss')
 
 elixir(function(mix) {
-    mix.browserify(
+    mix.webpack(
         './resources/views/v2/main.js',
-        './public/v2/js'
+        './public/v2/js/'
     )
-
     mix.postcss([
         './resources/views/v2/utils/**/*.css',
         './resources/views/v2/components/**/*.css'
     ],
-        './public/v2/css',
+        './public/css/main.css',
         './resources/views/v2/utils/'
     )
-
     mix.svg([
         './resources/views/v2/svg/*.svg'
     ],
-        './public/v2/svg'
+        './public/svg/main.svg'
     )
 })
