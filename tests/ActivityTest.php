@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
-use App\Content;
 use App\Comment;
+use App\Content;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ActivityTest extends TestCase
 {

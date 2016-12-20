@@ -145,5 +145,4 @@ return [
         25151 => 'kasutustingimused',
     ],
 
-
 ];

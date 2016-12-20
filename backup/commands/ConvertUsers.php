@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use DB;
-use Carbon\Carbon;
 use App\User;
+use Carbon\Carbon;
 
 class ConvertUsers extends ConvertBase
 {

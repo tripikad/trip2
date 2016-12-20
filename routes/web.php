@@ -113,7 +113,6 @@ Route::get('v2/destination/{id}', [
     'as' => 'v2.destination.show',
 ]);
 
-
 // Utils
 
 Route::get('v2/utils/alert', [
@@ -121,12 +120,10 @@ Route::get('v2/utils/alert', [
     'as' => 'utils.alert',
 ]);
 
-
 Route::get('share/{social}', [
     'uses' => 'V2SocialController@share',
     'as' => 'utils.share',
 ]);
-
 
 Route::post('v2/utils/format', [
     'uses' => 'V2UtilsController@format',
@@ -142,7 +139,6 @@ Route::post('v2/utils/filter', [
     'uses' => 'V2UtilsController@filter',
     'as' => 'utils.filter',
 ]);
-
 
 // V1
 

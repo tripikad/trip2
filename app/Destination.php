@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Cache;
 use Baum;
+use Cache;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 

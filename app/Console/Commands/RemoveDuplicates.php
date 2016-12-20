@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Destination;
-use App\Topic;
-use App\Flag;
-use App\Content;
 use Cache;
+use App\Flag;
+use App\Topic;
+use App\Content;
+use App\Destination;
+use Illuminate\Console\Command;
 
 class RemoveDuplicates extends Command
 {
@@ -49,7 +49,6 @@ class RemoveDuplicates extends Command
         $destinations = Destination::select(['id', 'name'])->whereIn('id', function ($query) {
             $query->select('id')->from('destinations')->groupBy('name')->havingRaw('count(*) > 1');
         })->get();
-
 
         $removable = [
             'destinations' => [],

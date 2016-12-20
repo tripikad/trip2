@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Analytics;
-use Illuminate\Contracts\Auth\Guard;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

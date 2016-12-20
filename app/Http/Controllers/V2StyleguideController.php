@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Image;
-use App\Content;
 use Request;
 use Response;
+use App\Image;
+use App\Content;
 
 class V2StyleguideController extends Controller
 {

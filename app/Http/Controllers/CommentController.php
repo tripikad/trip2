@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use DB;
+use Log;
 use Auth;
 use Mail;
-use Log;
-use Illuminate\Pagination\LengthAwarePaginator;
-use DB;
 use Cache;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CommentController extends Controller
 {

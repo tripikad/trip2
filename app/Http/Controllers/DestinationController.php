@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use View;
 use Cache;
-use App\Destination;
-use DB;
 use App\Main;
+use App\Destination;
 
 class DestinationController extends Controller
 {
