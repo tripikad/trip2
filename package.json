@@ -46,6 +46,7 @@
     "susy": "^2.2.6",
     "to-markdown": "^3.0.1",
     "turf": "^3.0.14",
+    "vue": "^2.1.6",
     "vue-clickaway": "^1.2.0",
     "vue-focus": "^0.1.2",
     "vue-multiselect": "^1.1.4",
