@@ -1,5 +1,5 @@
 // V1
-/*
+
 var gulp = require('gulp')
 var sass = require('gulp-sass')
 var concat = require('gulp-concat')
@@ -13,9 +13,9 @@ var minifyJS = require('gulp-uglify')
 
 gulp.task('del', function() {
     return del([
-        './public/css/*#/*.css',
-        './public/js/*#/*.js',
-        './public/svg/*#/*.svg'
+        './public/css/**/*.css',
+        './public/js/**/*.js',
+        './public/svg/**/*.svg'
     ])
 })
 
@@ -31,7 +31,7 @@ gulp.task('sass', ['del'], function() {
         './resources/assets/sass/base/_base.fonts.scss',
         './resources/assets/sass/base/_base.typography.scss',
         './resources/assets/sass/base/_base.scss',
-        './resources/assets/sass/*#/_*.scss'
+        './resources/assets/sass/**/_*.scss'
     ])
     .pipe(concat('main.scss'))
     .pipe(sass({
@@ -53,11 +53,11 @@ gulp.task('js', ['del'], function() {
     gulp.src([
         './node_modules/jquery/dist/jquery.js',
         // './resources/assets/js/jquery-ui/jquery-ui.min.js',
-        './resources/assets/js/helpers/*#/*.js',
+        './resources/assets/js/helpers/**/*.js',
         './node_modules/bootstrap-sass/assets/javascripts/bootstrap.js',
         './node_modules/selectize/dist/js/standalone/selectize.js',
         './node_modules/dropzone/dist/dropzone.js',
-        './resources/assets/js/components/*#/*.js'
+        './resources/assets/js/components/**/*.js'
     ])
     .pipe(concat('main.js'))
     .pipe(minifyJS())
@@ -83,13 +83,13 @@ gulp.task('svg_standalone', ['del'], function() {
 })
 
 gulp.task('watch', function() {
-    gulp.watch('./resources/assets/sass/*#/_*.scss', ['sass'])
-    gulp.watch('./resources/assets/js/*#/*.js', ['js'])
-    gulp.watch('./resources/assets/svg/*#/*.svg', ['svg_sprite', 'svg_standalone'])
+    gulp.watch('./resources/assets/sass/**/_*.scss', ['sass'])
+    gulp.watch('./resources/assets/js/**/*.js', ['js'])
+    gulp.watch('./resources/assets/svg/**/*.svg', ['svg_sprite', 'svg_standalone'])
 })
 
 gulp.task('v1', ['sass', 'js', 'svg_sprite', 'svg_standalone'])
-*/
+
 // V2
 
 var elixir = require('laravel-elixir')
