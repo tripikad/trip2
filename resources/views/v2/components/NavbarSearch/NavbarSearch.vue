@@ -8,7 +8,7 @@
                 is="Icon"
                 icon="icon-search"
                 :size="size"
-                @click="active = ! active"
+                @click.native="active = ! active"
             ></component>
 
         </div>
@@ -43,13 +43,13 @@ export default {
 
     props: {
         isclasses: { default: '' },
-        keywords: { default: '' },
         size: { default: 'md' }
     },
 
     data: function() {
         return {
-            active: false
+            active: false,
+            keywords: ''
         }
     },
 

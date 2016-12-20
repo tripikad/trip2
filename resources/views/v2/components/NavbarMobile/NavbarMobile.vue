@@ -5,7 +5,7 @@
         <div
             class="NavbarMobile__menuIcon"
             v-if="! menuOpen"
-            @click="toggle()"
+            @click.native="toggle()"
         >
         
             <component is="Icon" icon="icon-menu" size="lg"></component>
@@ -22,11 +22,11 @@
 
                 <div class="NavbarMobile__search">
                 
-                    <component is="HeaderSearch" class="HeaderSearch--white"size="lg"></component>
+                    <component is="HeaderSearch" class="HeaderSearch--white" size="lg"></component>
                 
                 </div>
 
-                <div class="NavbarMobile__closeIcon" @click="toggle()">
+                <div class="NavbarMobile__closeIcon" @click.native="menuOpen = false">
                     
                     <component is="Icon" icon="icon-close" size="xl"></component>
 
@@ -39,7 +39,7 @@
                 <a
                     v-for="(link, index) in currentLinks"
                     :href="link.route"
-                    track-by="index"
+                    key="index"
                 >
 
                     <div class="NavbarMobile__link">
@@ -53,7 +53,7 @@
                 <a
                     v-for="(link, index) in currentSublinks"
                     :href="link.route"
-                    track-by="index"
+                    key="index"
                 >
 
                     <div class="NavbarMobile__link">
@@ -100,6 +100,7 @@
 
         methods: {
             toggle: function() {
+                console.log('bla')
                 this.menuOpen = !this.menuOpen
             }
         },
