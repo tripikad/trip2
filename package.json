@@ -47,8 +47,8 @@
     "to-markdown": "^3.0.1",
     "turf": "^3.0.14",
     "vue": "^2.1.6",
-    "vue-clickaway": "^1.2.0",
-    "vue-focus": "^0.1.2",
+    "vue-clickaway": "^2.1.0",
+    "vue-focus": "^2.1.0",
     "vue-multiselect": "^1.1.4",
     "vue-resource": "^0.7.4"
   }

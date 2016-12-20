@@ -83,6 +83,11 @@ class Component
             .' />';
     }
 
+    public function renderVue2($name) {
+        
+        return '<component is="Test"></component>';
+    }
+
     public function render()
     {
         if (! $this->show) {
