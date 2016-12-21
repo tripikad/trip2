@@ -54,13 +54,15 @@ class Component
         return '';
     }
 
-    public function renderBlade($name) {
+    public function renderBlade($name)
+    {
         return View::make($name, $this->with)
             ->with('isclasses', $this->generateIsClasses())
             ->render();
     }
 
-    public function renderVue($name) {
+    public function renderVue($name)
+    {
         $props = $this->with
             ->map(function ($value, $key) {
                 if (is_array($value) || is_object($value) || is_bool($value)) {
@@ -83,8 +85,8 @@ class Component
             .' />';
     }
 
-    public function renderVue2($name) {
-        
+    public function renderVue2($name)
+    {
         return '<component is="Test"></component>';
     }
 
