@@ -13,7 +13,7 @@
 
         <input
             v-model="currentId"
-            v-show="true"
+            v-show="false"
             type="text"
             :name="name"
         >
