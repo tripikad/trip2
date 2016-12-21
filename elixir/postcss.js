@@ -1,4 +1,4 @@
-var Elixir = require('laravel-elixir');
+var Elixir = require('laravel-elixir')
 var gulp = require('gulp')
 var postcss = require('gulp-postcss')
 
@@ -17,8 +17,8 @@ Elixir.extend('postcss', function(src, output, includePath) {
                     require('postcss-simple-vars')(),
                     require('postcss-responsive-type')(),
                     require('postcss-font-magician')(),
-                    require('postcss-if-media')(),
-                ])) 
+                    require('postcss-if-media')()
+                ]))
                 .on('error', this.onError())
                 .pipe(this.concat(paths.output.name))
                 .pipe(this.minify())
