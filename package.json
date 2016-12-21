@@ -5,6 +5,7 @@
     "test": "eslint \"resources/views/v2/**/*.{js,vue}\" \"gulpfile.js\" \"elixir/*.js\" ; stylelint \"resources/views/v2/**/*.css\""
   },
   "dependencies": {
+    "@turf/turf": "^3.7.0",
     "bootstrap-sass": "^3.3.5",
     "brace": "^0.8.0",
     "breakpoint-sass": "^2.6.1",
@@ -45,7 +46,6 @@
     "stylelint-config-standard": "^11.0.0",
     "susy": "^2.2.6",
     "to-markdown": "^3.0.1",
-    "turf": "^3.0.14",
     "vue": "^2.1.6",
     "vue-clickaway": "^2.1.0",
     "vue-focus": "^2.1.0",

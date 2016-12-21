@@ -26,7 +26,7 @@
                 
                 </div>
 
-                <div class="NavbarMobile__closeIcon" @click.native="menuOpen = false">
+                <div class="NavbarMobile__closeIcon" @click.native="toggle()">
                     
                     <component is="Icon" icon="icon-close" size="xl"></component>
 
@@ -100,8 +100,8 @@
 
         methods: {
             toggle: function() {
-                console.log('bla')
                 this.menuOpen = !this.menuOpen
+                console.log(this.menuOpen)
             }
         },
 

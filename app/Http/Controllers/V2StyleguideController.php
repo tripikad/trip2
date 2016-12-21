@@ -17,8 +17,10 @@ class V2StyleguideController extends Controller
 
             ->with('content', collect()
 
-                ->push(component('NavbarSearch'))
-                
+                ->push(component('NavbarMobile')
+                    ->with('links', [])
+                    ->with('sublinks', [])
+                )
                 ->push(component('MetaLink')
                     ->with('title', 'Frontpage')
                     ->with('route', route('v2.frontpage.index'))
