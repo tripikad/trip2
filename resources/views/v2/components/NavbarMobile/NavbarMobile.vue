@@ -4,8 +4,8 @@
 
         <div
             class="NavbarMobile__menuIcon"
-            v-if="! menuOpen"
-            @click.native="toggle()"
+            v-show="! menuOpen"
+            @click="menuOpen = true"
         >
         
             <component is="Icon" icon="icon-menu" size="lg"></component>
@@ -13,7 +13,7 @@
         </div>
 
         <div
-            v-else
+            v-show="menuOpen"
             class="NavbarMobile__menu"
             transition="fadeZoom"
         >
@@ -26,7 +26,10 @@
                 
                 </div>
 
-                <div class="NavbarMobile__closeIcon" @click.native="toggle()">
+                <div
+                    class="NavbarMobile__closeIcon"
+                    @click="menuOpen = false"
+                >
                     
                     <component is="Icon" icon="icon-close" size="xl"></component>
 
@@ -99,6 +102,10 @@
         },
 
         methods: {
+            bla() {
+                this.menuOpen = false
+                console.log(this.menuOpen)
+            },
             toggle: function() {
                 this.menuOpen = !this.menuOpen
                 console.log(this.menuOpen)
