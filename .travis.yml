@@ -7,6 +7,7 @@ env:
   - TRAVIS_NODE_VERSION="6"
 
 cache:
+  yarn: true
   directories:
     - vendor
     - $HOME/.composer/cache
@@ -16,8 +17,14 @@ sudo: false
 
 install:
     - composer install --prefer-dist
-    - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
-    - npm install --no-optional
+    # - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+    - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+    - sudo apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3
+    - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    - sudo apt-get update -qq
+    - sudo apt-get install -y -qq yarn
+    # - npm install --no-optional
+    - yarn
     - cp .env.travis .env
     - chmod -R o+w storage/
     - mysql -e 'create database trip2;'
