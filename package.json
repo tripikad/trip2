@@ -49,7 +49,7 @@
     "vue": "^2.1.6",
     "vue-clickaway": "^2.1.0",
     "vue-focus": "^2.1.0",
-    "vue-multiselect": "^1.1.4",
+    "vue-multiselect": "next",
     "vue-resource": "^0.7.4"
   }
 }

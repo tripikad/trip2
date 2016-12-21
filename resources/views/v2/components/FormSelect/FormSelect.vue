@@ -1,25 +1,21 @@
 <template>
 
     <div class="FormSelect" :class="isclasses">
-    
+        
         <component
             is="Multiselect"
-            :selected="selected"
-            :multiple="false",
-            :searchable="true",
-            :options="currentOptions",
-            @update="updateValue"
-            :placeholder="placeholder"
+            v-model="selected"
+            :options="currentOptions"
+            track-by="name"
             label="name"
-            :select-label="helper"
         >
         </component>
 
         <input
-            v-show="false"
+            v-model="currentId"
+            v-show="true"
             type="text"
             :name="name"
-            :value="selected ? selected.id : ''"
         >
 
     </div>
@@ -50,9 +46,9 @@
             }
         },
 
-        methods: {
-            updateValue(selected) {
-                this.selected = selected
+        computed: {
+            currentId() {
+                return this.selected ? this.selected.id : ''
             }
         },
 
