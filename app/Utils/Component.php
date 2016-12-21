@@ -9,14 +9,14 @@ class Component
     protected $component;
     protected $is;
     protected $with;
-    protected $show;
+    protected $when;
 
     public function __construct($component)
     {
         $this->component = $component;
         $this->is = collect();
         $this->with = collect();
-        $this->show = true;
+        $this->when = true;
     }
 
     public function is($is)
@@ -33,9 +33,9 @@ class Component
         return $this;
     }
 
-    public function show($condition)
+    public function when($condition)
     {
-        $this->show = $condition;
+        $this->when = $condition;
 
         return $this;
     }
@@ -85,14 +85,9 @@ class Component
             .' />';
     }
 
-    public function renderVue2($name)
-    {
-        return '<component is="Test"></component>';
-    }
-
     public function render()
     {
-        if (! $this->show) {
+        if (! $this->when) {
             return '';
         }
 
