@@ -7,7 +7,7 @@
             <div
                 class="col-2"
                 v-for="(item, index) in currentImages"
-                track-by="index"
+                key="index"
             >
 
                 <img
@@ -28,13 +28,13 @@
                 icon="icon-close"
                 size="xl"
                 fill="white"
-                @click="fullscreen = false, activeImage = -1">
+                @click.native="fullscreen = false, activeImage = -1">
             </component>
 
             <div
                 class="Gallery__left"
-                @click="activeImage--"
-                v-if="activeImage > 0"
+                @click="prevImage"
+                v-show="activeImage > 0"
             >
 
                 <component is="Icon" icon="icon-arrow-left" size="xl" fill="white"></component>
@@ -43,8 +43,8 @@
 
              <div
                 class="Gallery__right"
-                @click="activeImage++"
-                v-if="activeImage < images.length -1"
+                @click="nextImage"
+                v-show="activeImage < images.length - 1"
             >
 
                 <component is="Icon" icon="icon-arrow-right" size="xl" fill="white"></component>
@@ -53,13 +53,13 @@
 
             <div class="Gallery__fullImageWrapper">
 
-                <img class="Gallery__fullImage" :src="images[activeImage].large"/>
+                <img class="Gallery__fullImage" :src="currentImages[activeImage].large" />
 
             </div>
 
             <div
                 class="Gallery__fullMeta"
-                v-html="images[activeImage].meta"
+                v-html="currentImages[activeImage].meta"
             >
             </div>
             
@@ -96,6 +96,12 @@ export default {
         render: function(index) {
             this.activeImage = index
             this.fullscreen = true
+        },
+        prevImage: function() {
+            this.activeImage = this.activeImage - 1
+        },
+        nextImage: function() {
+            this.activeImage = this.activeImage + 1
         }
     },
 
