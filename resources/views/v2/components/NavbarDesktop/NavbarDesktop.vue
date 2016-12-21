@@ -26,9 +26,9 @@
 
         <div
             class="NavbarDesktop__popover"
-            v-if="submenuOpen"
+            v-show="submenuOpen"
             transition="fadeZoom"
-            @clickaway="toggleSubmenu()"
+            v-on-clickaway="closeSubmenu"
         >
 
             <div class="NavbarDesktop__arrowWrapper">            
@@ -63,11 +63,11 @@
 
 <script>
 
-    //import { mixin as VueClickaway } from 'vue-clickaway'
+    import { mixin as VueClickaway } from 'vue-clickaway'
 
     export default {
 
-        //mixins: [ VueClickaway ],
+        mixins: [ VueClickaway ],
 
         props: {
             isclasses: { default: '' },
@@ -76,6 +76,9 @@
         },
 
         methods: {
+            closeSubmenu: function() {
+                this.submenuOpen = false
+            },
             toggleSubmenu: function(link) {
                 if (link.menu) {
                     this.submenuOpen = !this.submenuOpen
