@@ -22,7 +22,7 @@
 
                 <div class="NavbarMobile__search">
                 
-                    <component is="HeaderSearch" class="HeaderSearch--white" size="lg"></component>
+                    <component is="NavbarSearch" class="NavbarSearch--white" size="lg"></component>
                 
                 </div>
 
@@ -77,13 +77,13 @@
 
 <script>
 
-    import HeaderSearch from '../NavbarSearch/NavbarSearch.vue'
+    import NavbarSearch from '../NavbarSearch/NavbarSearch.vue'
     import Icon from '../Icon/Icon.vue'
 
     export default {
     
         components: {
-            HeaderSearch,
+            NavbarSearch,
             Icon
         },
 
