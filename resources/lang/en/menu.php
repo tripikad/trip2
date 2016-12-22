@@ -10,6 +10,7 @@ return [
     'header.photos' => 'Photos',
     'header.blogs' => 'Blogs',
     'header.offers' => 'Offers',
+    'header.my' => 'My Trip.ee',
 
     'auth.register' => 'Register',
     'auth.login' => 'Login',

@@ -7,11 +7,10 @@
             <a
                 v-for="(link, index) in currentLinks"
                 :href="link.route"
-                track-by="index"
+                key="index"
             >
 
                 <div
-                    @mouseover="toggleSubmenu(link)"
                     @clickaway="submenuOpen = false"
                     class="NavbarDesktop__link"
                 >
@@ -21,6 +20,30 @@
                 </div>  
 
             </a>
+
+            <a
+                v-if="! currentUser"
+                :href="route"
+                @mouseover="toggleSubmenu()"
+            >
+
+                <div class="NavbarDesktop__link">
+
+                    {{ title }}
+
+                </div>  
+
+            </a>
+
+            <component
+                @mouseover.native="toggleSubmenu()"
+                is="UserImage"
+                v-if="currentUser"
+                :route="currentUser.route"
+                :image="currentUser.image"
+                :rank="currentUser.rank"
+            >
+            </component>
           
         </div>
 
@@ -64,25 +87,29 @@
 <script>
 
     import { mixin as VueClickaway } from 'vue-clickaway'
+    import UserImage from '../UserImage/UserImage.vue'
 
     export default {
+
+        components: { UserImage },
 
         mixins: [ VueClickaway ],
 
         props: {
             isclasses: { default: '' },
             links: { default: '' },
-            sublinks: { default: '' }
+            sublinks: { default: '' },
+            user: { default: '' },
+            route: { default: '' },
+            title: { default: '' }
         },
 
         methods: {
             closeSubmenu: function() {
                 this.submenuOpen = false
             },
-            toggleSubmenu: function(link) {
-                if (link.menu) {
-                    this.submenuOpen = !this.submenuOpen
-                }
+            toggleSubmenu: function() {
+                this.submenuOpen = !this.submenuOpen
             }
         },
 
@@ -90,17 +117,15 @@
             return {
                 submenuOpen: false,
                 currentLinks: [],
-                currentSublinks: []
+                currentSublinks: [],
+                currentUser: {}
             }
         },
 
         mounted() {
-            this.currentLinks = this.links
-                ? JSON.parse(decodeURIComponent(this.links))
-                : ''
-            this.currentSublinks = this.sublinks
-                ? JSON.parse(decodeURIComponent(this.sublinks))
-                : ''
+            this.currentLinks = this.links ? JSON.parse(decodeURIComponent(this.links)) : ''
+            this.currentSublinks = this.sublinks ? JSON.parse(decodeURIComponent(this.sublinks)) : ''
+            this.currentUser = this.user ? JSON.parse(decodeURIComponent(this.user)) : ''
         }
 
     }

@@ -5,11 +5,25 @@
         <div
             class="NavbarMobile__menuIcon"
             v-show="! menuOpen"
-            @click="menuOpen = true"
+            @click.prevent="menuOpen = true"
         >
         
-            <component is="Icon" icon="icon-menu" size="lg"></component>
+            <component
+                is="Icon"
+                v-if="! currentUser"
+                icon="icon-menu"
+                size="lg">
+            </component>
         
+            <component
+                is="UserImage"
+                v-if="currentUser"
+                :route="currentUser.route"
+                :image="currentUser.image"
+                :rank="currentUser.rank"
+            >
+            </component>
+
         </div>
 
         <div
@@ -79,25 +93,29 @@
 
     import NavbarSearch from '../NavbarSearch/NavbarSearch.vue'
     import Icon from '../Icon/Icon.vue'
+    import UserImage from '../UserImage/UserImage.vue'
 
     export default {
     
         components: {
             NavbarSearch,
-            Icon
+            Icon,
+            UserImage
         },
 
         props: {
             isclasses: { default: '' },
             links: { default: '' },
-            sublinks: { default: '' }
+            sublinks: { default: '' },
+            user: { default: '' }
         },
 
         data() {
             return {
                 menuOpen: false,
                 currentLinks: [],
-                currentSublinks: []
+                currentSublinks: [],
+                currentUser: {}
             }
         },
 
@@ -115,6 +133,7 @@
         mounted() {
             this.currentLinks = this.links ? JSON.parse(decodeURIComponent(this.links)) : ''
             this.currentSublinks = this.sublinks ? JSON.parse(decodeURIComponent(this.sublinks)) : ''
+            this.currentUser = this.user ? JSON.parse(decodeURIComponent(this.user)) : ''
         }
 
     }

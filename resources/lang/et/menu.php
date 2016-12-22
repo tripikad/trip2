@@ -10,6 +10,7 @@ return [
     'header.photos' => 'Pildid',
     'header.blogs' => 'Blogi',
     'header.offers' => 'Pakkumised',
+    'header.my' => 'Minu Trip.ee',
 
     'auth.register' => 'Registreeri',
     'auth.login' => 'Logi sisse',

@@ -43,7 +43,7 @@
     .NavbarDesktop__sublink {
         color: $white;
         font: $font-heading-sm;
-        padding: $padding-xs $padding-sm;
+        padding: $padding-sm $padding-md;
     }
 
     .NavbarDesktop__sublink:hover {

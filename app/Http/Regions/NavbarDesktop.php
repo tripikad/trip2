@@ -25,17 +25,6 @@ class NavbarDesktop
                 'title' => trans('menu.header.news'),
                 'route' => route('v2.news.index'),
             ])
-            ->putWhen(! $user, 'user', [
-                'title' => trans('menu2.header.user'),
-                'route' => route('login.form'),
-                'menu' => true,
-            ])
-            ->putWhen($user, 'user', [
-                'title' => $user ? $user->vars()->name : '',
-                'route' => route('user.show', [$user]),
-                'badge' => $user ? $user->unreadMessagesCount() : '',
-                'menu' => true,
-            ])
             ->toArray();
     }
 
@@ -78,11 +67,22 @@ class NavbarDesktop
 
     public function render($color = '')
     {
+        $user = request()->user();
+
         return collect()
             ->push(component('NavbarDesktop')
                 ->is($color)
                 ->with('links', $this->prepareLinks())
                 ->with('sublinks', $this->prepareSublinks())
+                ->with('title', trans('menu.header.my'))
+                ->with('route', route('login.form'))
+                ->with('user', $user ? collect()
+                    ->put('title', $user->vars()->name)
+                    ->put('route', route('user.show', [$user]))
+                    ->put('image', $user->imagePreset('small_square'))
+                    ->put('badge', $user->unreadMessagesCount())
+                    ->put('rank', $user->vars()->rank)
+                : '')
                 ->render()
             )
             ->implode('');
