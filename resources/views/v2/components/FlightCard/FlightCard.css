@@ -24,7 +24,11 @@
 
     .FlightCard__title {
         color: $white;
-        font: $font-heading-lg;
+        font-family: $font-family;
+        font-size: responsive;
+        font-weight: $font-weight-semibold;
+        max-font-size: 20px;
+        min-font-size: 17px;
         line-height: $line-height-md;
         text-align: center;
         text-shadow: $text-shadow;

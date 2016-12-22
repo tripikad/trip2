@@ -184,13 +184,14 @@ $box-shadow-left: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
 
 /* Media queries */
 $mobile-width: 34em;
-$tablet-width: 56em; /* Original was 48em; */
+$tablet-width: 56em; /* Original was 48em; Desktop 62em, Large desktop 74em */
 $desktop-width: 62em;
 $largedesktop-width: 74em;
+
 $mobile: media (max-width: $mobile-width);
 $tablet: media (max-width: $tablet-width);
-$desktop: media (max-width: $tablet-width);
-$largedesktop: media (max-width: $tablet-width);
+$desktop: media (max-width: $desktop-width);
+$largedesktop: media (max-width: $largedesktop-width);
 
 /* Opacities */
 $opacity-xs: 0.1;

@@ -45,6 +45,10 @@ class AppServiceProvider extends ServiceProvider
             return $this->slice(0, $this->count() - 1);
         });
 
+        Collection::macro('withoutLastWhenOdd', function () {
+            return ($this->count() % 2 > 0) ? $this->withoutLast() : $this;
+        });
+
         Collection::macro('withoutFirst', function () {
             return $this->slice(1, $this->count());
         });

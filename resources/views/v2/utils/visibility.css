@@ -1,0 +1,15 @@
+@import "variables";
+
+.show-mobile-desktop {
+    display: block ?if $largedesktop;
+    display: block ?if $desktop;
+    display: none ?if $tablet;
+    display: block ?if $mobile;
+}
+
+.show-tablet {
+    display: none ?if $largedesktop;
+    display: none ?if $desktop;
+    display: block ?if $tablet;
+    display: none ?if $mobile;
+}
