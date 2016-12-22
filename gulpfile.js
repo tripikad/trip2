@@ -107,12 +107,12 @@ elixir(function(mix) {
         './resources/views/v2/utils/**/*.css',
         './resources/views/v2/components/**/*.css'
     ],
-        './public/css/main.css',
+        './public/v2/css/main.css',
         './resources/views/v2/utils/'
     )
     mix.svg([
         './resources/views/v2/svg/*.svg'
     ],
-        './public/svg/main.svg'
+        './public/v2/svg/main.svg'
     )
 })

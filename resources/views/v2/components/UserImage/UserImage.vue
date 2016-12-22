@@ -8,7 +8,6 @@
             height: size + 'px'
         }"
     >
-        
         <a :href="route">
 
         <img
@@ -61,9 +60,9 @@
             isclasses: { default: '' },
             route: { default: '' },
             image: { default: '' },
-            rank: { default: '0' },
-            size: { size: '36' },
-            border: { size: '3' }
+            rank: { default: 0 },
+            size: { default: 36 },
+            border: { default: 3 }
         }
 
     }
