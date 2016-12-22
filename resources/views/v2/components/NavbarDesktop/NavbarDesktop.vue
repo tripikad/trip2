@@ -35,16 +35,19 @@
 
             </a>
 
+            <div v-if="currentUser" class="NavbarDesktop__userImage">
+
             <component
                 @mouseover.native="toggleSubmenu()"
                 is="UserImage"
-                v-if="currentUser"
                 :route="currentUser.route"
                 :image="currentUser.image"
                 :rank="currentUser.rank"
             >
             </component>
           
+            </div>
+
         </div>
 
         <div

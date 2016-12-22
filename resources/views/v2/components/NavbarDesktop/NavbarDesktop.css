@@ -14,6 +14,10 @@
         font: $font-heading-sm;
     }
 
+    .NavbarDesktop__userImage {
+        margin-left: $margin-md;
+    }
+
     .NavbarDesktop__popover {
         width: $width-xxl;
         position: absolute;
