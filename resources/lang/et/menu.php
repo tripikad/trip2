@@ -11,6 +11,8 @@ return [
     'header.blogs' => 'Blogi',
     'header.offers' => 'Pakkumised',
     'header.my' => 'Minu Trip.ee',
+    'header.user' => 'Profiil',
+    'header.edit' => 'Muuda profiili',
 
     'auth.register' => 'Registreeri',
     'auth.login' => 'Logi sisse',

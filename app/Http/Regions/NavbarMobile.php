@@ -25,12 +25,6 @@ class NavbarMobile
                 'title' => trans('menu.header.news'),
                 'route' => route('v2.news.index'),
             ])
-            ->putWhen($user, 'user', [
-                'title' => $user ? $user->vars()->name : '',
-                'route' => route('user.show', [$user]),
-                'badge' => $user ? $user->unreadMessagesCount() : '',
-                'menu' => true,
-            ])
             ->toArray();
     }
 
@@ -48,11 +42,11 @@ class NavbarMobile
                 'route' => route('register.form'),
             ])
             ->pushWhen($user, [
-                'title' => trans('menu.user.user'),
+                'title' => trans('menu.header.user'),
                 'route' => route('user.show', [$user]),
             ])
             ->pushWhen($user, [
-                'title' => trans('menu.user.edit.user'),
+                'title' => trans('menu.header.edit'),
                 'route' => route('user.edit', [$user]),
             ])
             ->pushWhen($user, [
