@@ -13,6 +13,7 @@
     	margin-bottom: $margin-sm;
     	text-align: center;
         line-height: $line-height-md;
+        color: $gray-darkest;
     }
 
     .BlogCard__user {
