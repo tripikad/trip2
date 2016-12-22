@@ -11,6 +11,7 @@ import IconLoader from './components/IconLoader/IconLoader.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 import NavbarSearch from './components/NavbarSearch/NavbarSearch.vue'
+import UserImage from './components/UserImage/UserImage.vue'
 
 const globalProps = JSON.parse(decodeURIComponent(
     document.querySelector('#globalprops').getAttribute('content')
@@ -35,7 +36,8 @@ new Vue({
         IconLoader,
         NavbarDesktop,
         NavbarMobile,
-        NavbarSearch
+        NavbarSearch,
+        UserImage
     },
 
     mounted() {

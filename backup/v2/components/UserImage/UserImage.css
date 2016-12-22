@@ -1,0 +1,31 @@
+@import "variables";
+
+.UserImage {
+    position: relative;
+}
+
+.UserImage__image {
+    border-radius: 50%;
+    width: 100%;
+}
+
+.UserImage__arcRank,
+.UserImage__arcReminder {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.UserImage__arcRank svg {
+    stroke: $cyan;
+}
+
+.UserImage__arcReminder svg {
+    stroke: $gray;
+}
+
+.UserImage--dark .UserImage__arcRank svg {
+    stroke: $cyan-dark;
+}
