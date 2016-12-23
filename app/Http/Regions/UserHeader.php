@@ -6,6 +6,8 @@ class UserHeader
 {
     public function render($user)
     {
+        $loggedUser = request()->user();
+
         return component('UserHeader')
             ->with('background', component('MapBackground'))
             ->with('navbar', component('Navbar')
@@ -27,6 +29,16 @@ class UserHeader
                 ->with('border', 7)
             )
             ->with('name', $user->vars()->name)
+            ->with('actions_with_user', component('BlockHorizontal')
+                ->with('content', collect()
+                    ->pushWhen(
+                        $loggedUser && $loggedUser->hasRole('regular') && $loggedUser->id != $user->id,
+                        component('Button')
+                            ->is('cyan')
+                            ->with('title', trans('user.show.message.create'))
+                    )
+                )
+            )
             ->with('meta', trans('user.show.joined', [
                 'user' => $user->name,
                 'created_at' => $user->vars()->created_at_relative,
@@ -47,15 +59,31 @@ class UserHeader
                     )
                 )
             )
-            ->with('buttons', component('BlockHorizontal')
+            ->with('actions_by_user', component('BlockHorizontal')
                 ->with('content', collect()
-                    ->push(component('Button')
-                        ->is('cyan')
-                        ->with('title', trans('menu.user.edit.profile'))
+                    ->pushWhen(
+                        $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                        component('Button')
+                            ->is('cyan')
+                            ->with('title', trans('menu.user.edit.profile'))
                     )
-                    ->push(component('Button')
+                    ->pushWhen(
+                        $loggedUser && $loggedUser->id == $user->id, // Only the owner can see own messages
+                        component('Button')
+                            ->is('cyan')
+                            ->with('title', trans('menu.user.message'))
+                    )
+                    ->pushWhen(
+                        $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                        component('Button')
                         ->is('cyan')
-                        ->with('title', trans('menu.user.message'))
+                        ->with('title', trans('menu.user.follow'))
+                    )
+                    ->pushWhen(
+                        $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                        component('Button')
+                        ->is('cyan')
+                        ->with('title', trans('menu.user.add.places'))
                     )
                 )
             );

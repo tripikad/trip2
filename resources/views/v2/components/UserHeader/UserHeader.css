@@ -19,13 +19,20 @@
     .UserHeader__nameWrapper {
         display: flex;
         justify-content: left;
+        flex-direction: column ?if $mobile;
         justify-content: center ?if $mobile;
+        align-items: center ?if $mobile;
+        margin-bottom: $margin-md;
     }
 
     .UserHeader__name {
         font: $font-heading-xxl;
         color: $white;
-        margin-bottom: $margin-md;
+    }
+
+    .UserHeader__actionsWithUser {
+        margin: 0 0 0 $margin-sm;
+        margin: $margin-sm 0 $margin-sm 0 ?if $mobile;
     }
 
     .UserHeader__meta {

@@ -4,6 +4,8 @@ $map = $map ?? '';
 $header = $header ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
+$actions_with_user = $actions_with_user ?? '';
+$actions_by_user = $actions_by_user ?? '';
 $background = $background ?? '';
 
 @endphp
@@ -32,6 +34,12 @@ $background = $background ?? '';
 
             </div>
 
+            <div class="UserHeader__actionsWithUser">
+
+                {!! $actions_with_user !!}
+
+            </div>
+
         </div>
 
         <div class="UserHeader__meta">
@@ -46,9 +54,9 @@ $background = $background ?? '';
 
         </div>
 
-        <div class="UserHeader__buttons">
+        <div class="UserHeader__actionsByUser">
 
-            {!! $buttons !!}
+            {!! $actions_by_user !!}
 
         </div>
 

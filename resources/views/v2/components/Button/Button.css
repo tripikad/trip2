@@ -19,14 +19,6 @@
         color: $white;
     }
 
-    .Button--white {
-        background: $white;
-    }
-
-        .Button--white .Button__title {
-            color: $cyan;
-        }
-
     .Button--cyan {
         background: $cyan;
     }
