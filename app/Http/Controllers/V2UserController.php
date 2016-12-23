@@ -28,7 +28,7 @@ class V2UserController extends Controller
             ->with('header', region('UserHeader', $user))
 
             ->with('content', $comments->map(function ($comment) {
-                    return component('UserCommentRow')
+                return component('UserCommentRow')
                         ->with('forum', region('ForumRow', $comment->content))
                         ->with('comment', region('Comment', $comment));
             })
