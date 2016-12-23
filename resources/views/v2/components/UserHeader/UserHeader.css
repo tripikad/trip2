@@ -41,6 +41,12 @@
         margin-bottom: $margin-md;
     }
 
+    .UserHeader__wantstogo {
+        font: $font-heading-sm;
+        color: $white;
+        margin-bottom: $margin-md;
+    }
+
     .UserHeader__stats {
         margin-bottom: $margin-md;
     }

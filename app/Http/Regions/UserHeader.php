@@ -29,6 +29,7 @@ class UserHeader
                 ->with('border', 7)
             )
             ->with('name', $user->vars()->name)
+            ->with('wantstogo', trans('user.show.wantstogo.title'))
             ->with('actions_with_user', component('BlockHorizontal')
                 ->with('content', collect()
                     ->pushWhen(
