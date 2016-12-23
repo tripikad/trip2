@@ -9,14 +9,24 @@
     z-index: 0;
 }
 
-    .DestinationHeader__name {
+    .DestinationHeader__navbar {
+        margin-bottom: $margin-xl;
+    }
+
+    .DestinationHeader__parents {
+        margin-bottom: $margin-sm;
+    }
+
+    .DestinationHeader__title {
         font: $font-heading-xxl;
         color: $white;
-        margin-top: $margin-xxl;
         margin-bottom: $margin-md;
     }
 
-    .DestinationHeader__facts {
-        width: 50%;
+    .DestinationHeader__description {
+        font: $font-text-md;
+        color: $white;
+        line-height: $line-height-xl;
+        width: 75%;
         width: 100% ?if $mobile;
     }

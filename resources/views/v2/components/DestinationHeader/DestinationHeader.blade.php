@@ -1,10 +1,10 @@
 @php
 
-$map = $map ?? '';
-$header = $header ?? '';
-$title = $title ?? '';
-$meta = $meta ?? '';
 $navbar = $navbar ?? '';
+$parents = $parents ?? '';
+$title = $title ?? '';
+$description = $description ?? '';
+$facts = $facts ?? '';
 $background = $background ?? '';
 
 @endphp
@@ -19,9 +19,25 @@ $background = $background ?? '';
             
         </div>
 
-        <div class="DestinationHeader__name">
+        @if ($parents)
 
-            {!! $name !!}
+        <div class="DestinationHeader__parents">
+
+            {!! $parents !!}
+
+        </div>
+
+        @endif
+
+        <div class="DestinationHeader__title">
+
+            {{ $title }}
+
+        </div>
+
+        <div class="DestinationHeader__description">
+
+            {{ $description }}
 
         </div>
 
