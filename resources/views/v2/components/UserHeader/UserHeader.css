@@ -22,4 +22,5 @@
     .UserHeader__meta {
         font: $font-heading-sm;
         color: $cyan;
+        margin-bottom: $margin-md;
     }

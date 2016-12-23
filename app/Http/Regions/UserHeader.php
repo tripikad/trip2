@@ -30,6 +30,22 @@ class UserHeader
             ->with('meta', trans('user.show.joined', [
                 'user' => $user->name,
                 'created_at' => $user->vars()->created_at_relative,
-            ]));
+            ]))
+            ->with('stats', component('BlockHorizontal')
+                ->with('content', collect()
+                    ->push(component('UserStat')
+                        ->with('icon', 'icon-thumb-up')
+                        ->with('title', '26')
+                    )
+                    ->push(component('UserStat')
+                        ->with('title', '134 / 40')
+                        ->with('icon', 'icon-comment')
+                    )
+                    ->push(component('UserStat')
+                        ->with('title', '12 (1.91%)')
+                        ->with('icon', 'icon-pin')
+                    )
+                )
+            );
     }
 }

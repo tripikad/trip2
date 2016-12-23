@@ -36,6 +36,12 @@ $background = $background ?? '';
 
         </div>
 
+        <div class="UserHeader__stats">
+
+            {!! $stats !!}
+
+        </div>
+
     </div>
 
     {!! $background !!}

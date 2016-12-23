@@ -1,0 +1,16 @@
+@import "variables";
+
+.UserStat {
+    display: flex;
+    align-items: center;
+}
+
+    .UserStat__icon {
+        margin-right: $margin-sm;
+    }
+
+    .UserStat__title {
+        font: $font-heading-md;
+        color: $white;
+    }
+
