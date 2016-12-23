@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Exception;
 use Lang;
+use Exception;
 
 class V2DestinationVars
 {
@@ -40,12 +40,14 @@ class V2DestinationVars
     public function description()
     {
         $key = "destination.show.description.{$this->destination->id}";
+
         return Lang::has($key) ? trans($key) : null;
     }
 
     public function facts()
     {
         $config = config("destinations.{$this->destination->id}");
+
         return $config ? collect(config("destinations.{$this->destination->id}")) : null;
     }
 }
