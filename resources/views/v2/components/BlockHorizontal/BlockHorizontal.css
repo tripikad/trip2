@@ -7,7 +7,7 @@
 }
 
 .BlockHorizontal__item {
-    margin-right: $margin-md;
+    margin-right: $margin-sm;
     margin-right: 0 ?if $mobile;
     margin-bottom: $margin-sm ?if $mobile;
 }

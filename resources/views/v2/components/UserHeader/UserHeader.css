@@ -11,6 +11,15 @@
 
     .UserHeader__user {
         margin-bottom: $margin-md;
+        display: flex;
+        justify-content: left;
+        justify-content: center ?if $mobile;
+    }
+
+    .UserHeader__nameWrapper {
+        display: flex;
+        justify-content: left;
+        justify-content: center ?if $mobile;
     }
 
     .UserHeader__name {
@@ -22,5 +31,9 @@
     .UserHeader__meta {
         font: $font-heading-sm;
         color: $cyan;
+        margin-bottom: $margin-md;
+    }
+
+    .UserHeader__stats {
         margin-bottom: $margin-md;
     }

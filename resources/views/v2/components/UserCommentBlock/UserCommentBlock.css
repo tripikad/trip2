@@ -1,9 +1,0 @@
-@import "variables";
-
-    .UserCommentBlock__forum {
-        margin-bottom: $margin-md;
-    }
-
-    .UserCommentBlock__comment {
-        margin-left: calc($spacer * 5);
-    }

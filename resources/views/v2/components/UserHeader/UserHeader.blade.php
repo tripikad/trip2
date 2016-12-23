@@ -24,9 +24,13 @@ $background = $background ?? '';
 
         </div>
 
-        <div class="UserHeader__name">
+        <div class="UserHeader__nameWrapper">
 
-            {!! $name !!}
+            <div class="UserHeader__name">
+
+                {!! $name !!}
+
+            </div>
 
         </div>
 
@@ -39,6 +43,12 @@ $background = $background ?? '';
         <div class="UserHeader__stats">
 
             {!! $stats !!}
+
+        </div>
+
+        <div class="UserHeader__buttons">
+
+            {!! $buttons !!}
 
         </div>
 

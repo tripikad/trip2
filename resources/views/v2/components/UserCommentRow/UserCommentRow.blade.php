@@ -5,15 +5,15 @@ $comment = $comment ?? '';
 
 @endphp
 
-<div class="UserCommentBlock {{ $isclasses }}">
+<div class="UserCommentRow {{ $isclasses }}">
 
-    <div class="UserCommentBlock__forum">
+    <div class="UserCommentRow__forum">
 
         {!! $forum !!}
 
     </div>
 
-    <div class="UserCommentBlock__comment">
+    <div class="UserCommentRow__comment">
 
         {!! $comment !!}
 

@@ -46,6 +46,18 @@ class UserHeader
                         ->with('icon', 'icon-pin')
                     )
                 )
+            )
+            ->with('buttons', component('BlockHorizontal')
+                ->with('content', collect()
+                    ->push(component('Button')
+                        ->is('cyan')
+                        ->with('title', trans('menu.user.edit.profile'))
+                    )
+                    ->push(component('Button')
+                        ->is('cyan')
+                        ->with('title', trans('menu.user.message'))
+                    )
+                )
             );
     }
 }

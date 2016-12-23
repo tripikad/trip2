@@ -11,20 +11,31 @@
     text-align: center;
 }
 
-.Button__icon {
-    margin-right: $margin-xs;
-}
+    .Button__icon {
+        margin-right: $margin-xs;
+    }
 
-.Button__title {
-    color: $white;
-}
+    .Button__title {
+        color: $white;
+    }
 
-.Button--facebook {
-    background: $facebook;
-    ppadding: $padding-xs;
-}
+    .Button--white {
+        background: $white;
+    }
 
-.Button--twitter {
-    background: $twitter;
-    ppadding: $padding-xs;
-}
+        .Button--white .Button__title {
+            color: $cyan;
+        }
+
+    .Button--cyan {
+        background: $cyan;
+    }
+
+    .Button--facebook {
+        background: $facebook;
+    }
+
+    .Button--twitter {
+        background: $twitter;
+    }
+
