@@ -27,6 +27,7 @@
 
     .UserHeader__name {
         font: $font-heading-xxl;
+        font: $font-heading-xl ?if $mobile;
         color: $white;
     }
 
@@ -37,16 +38,14 @@
 
     .UserHeader__meta {
         font: $font-heading-sm;
+        line-height: $line-height-md;
         color: $cyan;
         margin-bottom: $margin-md;
     }
 
     .UserHeader__wantstogo {
         font: $font-heading-sm;
+        line-height: $line-height-md;
         color: $white;
-        margin-bottom: $margin-md;
-    }
-
-    .UserHeader__stats {
         margin-bottom: $margin-md;
     }

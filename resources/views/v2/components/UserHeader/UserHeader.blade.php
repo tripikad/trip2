@@ -49,11 +49,15 @@ $background = $background ?? '';
 
         </div>
 
+        @if ($wantstogo)
+
         <div class="UserHeader__wantstogo">
 
             {!! $wantstogo !!}
 
         </div>
+
+        @endif
 
         <div class="UserHeader__stats">
 
@@ -61,11 +65,15 @@ $background = $background ?? '';
 
         </div>
 
+        @if ($actions_by_user)
+        
         <div class="UserHeader__actionsByUser">
 
             {!! $actions_by_user !!}
 
         </div>
+
+        @endif
 
     </div>
 
