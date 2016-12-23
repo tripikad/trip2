@@ -16,7 +16,6 @@
         color: $white;
         display: flex;
         font: $font-heading-md;
-        opacity: $opacity-md;
         align-items: center;
         margin-bottom: $margin-xxs;
     }

@@ -9,10 +9,6 @@
 	color: $white;
 }
 
-.MetaLink--yellowDark .MetaLink__title {
-    color: $yellow-dark;
-}
-
 .MetaLink--large .MetaLink__title {
     font: $font-text-md;
 }

@@ -13,8 +13,11 @@ $facts = collect($facts) ?? collect();
         @foreach ($facts->slice(0, 3) as $key => $value)
 
         <tr>
+            
             <td class="DestinationFacts__key">{{ $key }}</td>
+            
             <td class="DestinationFacts__value">{{ $value }}</td>
+        
         </tr>
 
         @endforeach

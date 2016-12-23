@@ -15,6 +15,7 @@
 
     .DestinationHeader__parents {
         margin-bottom: $margin-sm;
+        opacity: $opacity-md;
     }
 
     .DestinationHeader__title {
