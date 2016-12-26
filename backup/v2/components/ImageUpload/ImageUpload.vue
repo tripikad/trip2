@@ -46,7 +46,7 @@
                 dictRemoveFile: this.dictremovefile,
                 headers: {'X-CSRF-TOKEN': globalProps.token},
                 success: function(file, res) {
-                    this.$event.$emit('showAlert', res.image + ' uploaded')
+                    this.$events.$emit('showAlert', res.image + ' uploaded')
                 }.bind(this)
 
             }).on('complete', function(file) {

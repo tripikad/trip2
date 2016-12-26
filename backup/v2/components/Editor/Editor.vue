@@ -95,7 +95,7 @@
 
             // this.updateImages()
 
-            this.$event.$on('imageUploaded', function() {
+            this.$events.$on('imageUploaded', function() {
                 // this.updateImages()
             })
         },
