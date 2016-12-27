@@ -2,11 +2,11 @@
 
 .FrontpageSearch {
     align-items: center;
-    background: $white;
+    background: rgba(255, 255, 255, 0.5);
     box-shadow: $box-shadow-bottom;
     display: flex;
-    opacity: $opacity-md;
     padding: $padding-xs $padding-sm;
+    width: 100%;
 }
 
     .FrontpageSearch__icon {
@@ -17,15 +17,18 @@
     }
 
     .FrontpageSearch__icon svg {
-        color: $white;
+        fill: $white;
     }
 
     .FrontpageSearch__input {
+        background: none;
         font: $font-heading-lg;
         font: $font-heading-md ?if $mobile;
         padding: $padding-xs;
         border: none;
         color: $gray-darkest;
+        min-width: 100%;
+        max-width: 100%;
     }
 
     .FrontpageSearch__input::placeholder {
@@ -37,7 +40,7 @@
     }
 
     .FrontpageSearch--active {
-        opacity: 1;
+        background: $white;
     }
 
     .FrontpageSearch--active .FrontpageSearch__icon svg {

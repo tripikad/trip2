@@ -7,7 +7,7 @@ $title = $title ?? '';
 
 @endphp
 
-<div class="Header {{ $isclasses }}" 
+<div class="FrontpageHeader {{ $isclasses }}" 
     style="background-image: linear-gradient(
       rgba(0, 0, 0, 0.2),
       rgba(0, 0, 0, 0)
@@ -15,19 +15,19 @@ $title = $title ?? '';
 ">
     <div class="container">
 
-        <div class="Header__navbar">
+        <div class="FrontpageHeader__navbar">
 
             {!! $navbar !!}
             
         </div>
 
-        <div class="Header__content">
+        <div class="FrontpageHeader__content">
 
             <div class="row row-center">
 
                 <div class="col-10">
                 
-                    <div class="Header__title">
+                    <div class="FrontpageHeader__title">
 
                     {!! $title !!}
 

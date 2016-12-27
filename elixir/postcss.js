@@ -1,6 +1,7 @@
 var Elixir = require('laravel-elixir')
 var gulp = require('gulp')
 var postcss = require('gulp-postcss')
+var autoprefixer = require('gulp-autoprefixer')
 
 Elixir.extend('postcss', function(src, output, includePath) {
     var paths = new Elixir.GulpPaths().src(src).output(output)
@@ -19,6 +20,10 @@ Elixir.extend('postcss', function(src, output, includePath) {
                     require('postcss-font-magician')(),
                     require('postcss-if-media')()
                 ]))
+                .pipe(autoprefixer({
+                    browsers: ['last 2 versions'],
+                    cascade: false
+                }))
                 .on('error', this.onError())
                 .pipe(this.concat(paths.output.name))
                 .pipe(this.minify())

@@ -1,6 +1,8 @@
 <template>
 
-    <div class="FrontpageSearch" :class="[ isclasses, { 'FrontpageSearch--active': active }]">
+    <div
+        class="FrontpageSearch"
+        :class="[ isclasses, { 'FrontpageSearch--active': active }]">
 
         <div class="FrontpageSearch__icon">
 
@@ -16,7 +18,7 @@
         <input
             class="FrontpageSearch__input"
             type="text"
-            size="24"
+            size="28"
             v-model="keywords"
             v-focus="active"
             @keyup.enter="search()"
