@@ -5,6 +5,7 @@ import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
 import Flag from './components/Flag/Flag.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
+import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
 import Gallery from './components/Gallery/Gallery.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
@@ -31,6 +32,7 @@ new Vue({
         Arc,
         Flag,
         FormSelect,
+        FrontpageSearch,
         Gallery,
         Icon,
         IconLoader,

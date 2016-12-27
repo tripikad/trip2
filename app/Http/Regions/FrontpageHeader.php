@@ -4,14 +4,14 @@ namespace App\Http\Regions;
 
 use App\Image;
 
-class Header
+class FrontpageHeader
 {
     public function render($title = '', $background = '')
     {
         $background = $background ?? Image::getHeader();
 
         return component('Header')
-            ->with('background', $background)
+            ->with('background', '/photos/header2.jpg')
             ->with('navbar', component('Navbar')
                 ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))

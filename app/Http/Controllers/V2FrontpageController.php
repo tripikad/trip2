@@ -19,7 +19,10 @@ class V2FrontpageController extends Controller
 
         return view('v2.layouts.frontpage')
 
-            ->with('header', region('Header', trans('frontpage.index.search.title')))
+            ->with('header', region('FrontpageHeader', 
+                component('FrontpageSearch')
+                    ->with('title', trans('frontpage.index.search.title'))
+            ))
 
             ->with('content', collect()
 

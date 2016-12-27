@@ -1,0 +1,45 @@
+@import "variables";
+
+.FrontpageSearch {
+    align-items: center;
+    background: $white;
+    box-shadow: $box-shadow-bottom;
+    display: flex;
+    opacity: $opacity-md;
+    padding: $padding-xs $padding-sm;
+}
+
+    .FrontpageSearch__icon {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        margin-right: $margin-xs;
+    }
+
+    .FrontpageSearch__icon svg {
+        color: $white;
+    }
+
+    .FrontpageSearch__input {
+        font: $font-heading-lg;
+        font: $font-heading-md ?if $mobile;
+        padding: $padding-xs;
+        border: none;
+        color: $gray-darkest;
+    }
+
+    .FrontpageSearch__input::placeholder {
+        color: $white;
+    }
+
+    .FrontpageSearch__input:focus {
+        outline: none;
+    }
+
+    .FrontpageSearch--active {
+        opacity: 1;
+    }
+
+    .FrontpageSearch--active .FrontpageSearch__icon svg {
+        fill: $red;
+    }
