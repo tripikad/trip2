@@ -17,7 +17,7 @@
     .PromoBar__title {
         color: $white;
         margin-right: $margin-sm;
-        margin-bottom: $margin-sm ?if $mobile;
+        margin-bottom: $margin-xs ?if $mobile;
     }
 
     .PromoBar__route {

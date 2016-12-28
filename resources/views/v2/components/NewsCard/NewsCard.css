@@ -15,5 +15,5 @@
         color: $blue;
         font: $font-heading-md;
         line-height: $line-height-md;
-        margin-bottom: $margin-sm;
+        margin-bottom: $margin-xs;
     }
