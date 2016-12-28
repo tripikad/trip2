@@ -19,6 +19,13 @@ class V2FrontpageController extends Controller
 
         return view('v2.layouts.frontpage')
 
+            ->with('promobar', component('PromoBar')
+                ->with('title', 'Osale Trip.ee kampaanias ja võida 2 lennupiletit Maltale')
+                ->with('route_title', 'Vaata lähemalt siit')
+                ->with('route', 'tasuta-lennupiletid-maltale')
+                ->render()
+            )
+
             ->with('header', region('FrontpageHeader',
                 component('FrontpageSearch')
                     ->with('title', trans('frontpage.index.search.title'))

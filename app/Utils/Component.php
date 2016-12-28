@@ -82,7 +82,7 @@ class Component
             .$this->generateIsClasses()
             .'" '
             .$props
-            .' />';
+            .' ></component>';
     }
 
     public function render()

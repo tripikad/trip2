@@ -1,5 +1,6 @@
 @php
 
+$promobar = $promobar ?? '';
 $header = $header ?? '';
 $content = $content ?? collect();
 $bottom = $bottom ?? collect();
@@ -8,6 +9,10 @@ $footer = $footer ?? '';
 @endphp
 
 @extends('v2.layouts.main')
+
+@section('promobar')
+    {!! $promobar !!}
+@endsection
 
 @section('header', $header)
 

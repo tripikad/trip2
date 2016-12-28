@@ -19,6 +19,7 @@
     </head>
     <body>
         <div id="app">
+            @yield('promobar')
             @yield('header')
             @yield('content')
             @yield('footer')
