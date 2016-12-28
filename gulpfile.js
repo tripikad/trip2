@@ -104,11 +104,11 @@ elixir(function(mix) {
         './public/v2/js/'
     )
     mix.postcss([
-        './resources/views/v2/utils/**/*.css',
+        './resources/views/v2/styles/**/*.css',
         './resources/views/v2/components/**/*.css'
     ],
         './public/v2/css/main.css',
-        './resources/views/v2/utils/'
+        './resources/views/v2/styles/'
     )
     mix.svg([
         './resources/views/v2/svg/*.svg'

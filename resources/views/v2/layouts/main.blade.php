@@ -25,8 +25,8 @@
             @yield('footer')
         </div>
         <script src="/v2/js/main.js"></script>
-        @include('v2.loaders.svg')
-        @include('v2.loaders.promo')
+        @include('v2.utils.svg')
+        @include('v2.utils.promo')
         @stack('scripts')
     </body>
 </html>
