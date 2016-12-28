@@ -1,0 +1,16 @@
+@import "variables";
+
+.AffiliateSearch {
+    display: flex;
+    height: calc($spacer * 25);
+    background: $gray-light;
+    align-items: center;
+    justify-content: center;
+    padding: $padding-md;
+    text-align: center;
+}
+
+    .AffiliateSearch__title {
+        font: $font-text-md;
+        color: $gray-dark;
+    }

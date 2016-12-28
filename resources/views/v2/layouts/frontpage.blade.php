@@ -10,9 +10,7 @@ $footer = $footer ?? '';
 
 @extends('v2.layouts.main')
 
-@section('promobar')
-    {!! $promobar !!}
-@endsection
+@section('promobar', $promobar)
 
 @section('header', $header)
 
