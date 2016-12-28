@@ -12,6 +12,7 @@ import IconLoader from './components/IconLoader/IconLoader.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 import NavbarSearch from './components/NavbarSearch/NavbarSearch.vue'
+import PromoBar from './components/PromoBar/PromoBar.vue'
 import UserImage from './components/UserImage/UserImage.vue'
 
 const globalProps = JSON.parse(decodeURIComponent(
@@ -39,6 +40,7 @@ new Vue({
         NavbarDesktop,
         NavbarMobile,
         NavbarSearch,
+        PromoBar,
         UserImage
     },
 
