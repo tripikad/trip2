@@ -2,8 +2,6 @@
 
 namespace App\Http\Regions;
 
-use App\Image;
-
 class Header
 {
     public function render($title = false)
