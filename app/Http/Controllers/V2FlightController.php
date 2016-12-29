@@ -32,13 +32,13 @@ class V2FlightController extends Controller
             ->with('content', collect()
                 ->push(component('AffiliateSearch')->is('wide')->is('purple'))
                 ->merge($flights->slice(0, $sliceSize)->map(function ($flight) {
-                        return region('FlightRow', $flight);
-                    })
+                    return region('FlightRow', $flight);
+                })
                 )
                 ->push(component('Promo')->with('promo', 'body'))
                 ->merge($flights->slice($sliceSize)->map(function ($flight) {
-                        return region('FlightRow', $flight);
-                    })
+                    return region('FlightRow', $flight);
+                })
                 )
                 ->push(region('Paginator', $flights, $currentDestination, $currentTopic))
                 ->push(component('AffiliateSearch')->is('wide'))

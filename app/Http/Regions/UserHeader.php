@@ -4,11 +4,12 @@ namespace App\Http\Regions;
 
 class UserHeader
 {
-    private function prepareActionsForUser($user, $loggedUser) {
+    private function prepareActionsForUser($user, $loggedUser)
+    {
         return collect()
             ->push(
                 // Only owner sees the link, others can access it anyway and button is unneccesary
-                $loggedUser && $loggedUser->id == $user->id,  
+                $loggedUser && $loggedUser->id == $user->id,
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('user.activity'))
@@ -21,7 +22,7 @@ class UserHeader
             )
             ->pushWhen(
                 // Only the owner can see its own messages
-                $loggedUser && $loggedUser->id == $user->id, 
+                $loggedUser && $loggedUser->id == $user->id,
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.message'))
