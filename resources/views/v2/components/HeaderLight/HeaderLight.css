@@ -10,7 +10,7 @@
 }
 
     .HeaderLight__content {
-        height: calc($spacer * 15);
+        height: calc($spacer * 10);
         display: flex;
         justify-content: center;
         align-items: center;

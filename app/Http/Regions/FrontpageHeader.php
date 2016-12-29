@@ -11,6 +11,7 @@ class FrontpageHeader
         $background = $background ?? Image::getHeader();
 
         return component('Header')
+            ->is('large')
             ->with('background', '/photos/header2.jpg')
             ->with('navbar', component('Navbar')
                 ->is('white')

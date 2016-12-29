@@ -1,15 +1,15 @@
 @import "variables";
 
-.UserStat {
+.StatCard {
     display: flex;
     align-items: center;
 }
 
-    .UserStat__icon {
+    .StatCard__icon {
         margin-right: $margin-sm;
     }
 
-    .UserStat__title {
+    .StatCard__title {
         font: $font-heading-md;
         color: $white;
     }

@@ -4,6 +4,42 @@ namespace App\Http\Regions;
 
 class UserHeader
 {
+    private function prepareActionsForUser($user, $loggedUser) {
+        return collect()
+            ->push(
+                // Only owner sees the link, others can access it anyway and button is unneccesary
+                $loggedUser && $loggedUser->id == $user->id,  
+                component('Button')
+                    ->is('cyan')
+                    ->with('title', trans('user.activity'))
+            )
+            ->pushWhen(
+                $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                component('Button')
+                    ->is('cyan')
+                    ->with('title', trans('menu.user.edit.profile'))
+            )
+            ->pushWhen(
+                // Only the owner can see its own messages
+                $loggedUser && $loggedUser->id == $user->id, 
+                component('Button')
+                    ->is('cyan')
+                    ->with('title', trans('menu.user.message'))
+            )
+            ->pushWhen(
+                $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                component('Button')
+                ->is('cyan')
+                ->with('title', trans('menu.user.follow'))
+            )
+            ->pushWhen(
+                $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
+                component('Button')
+                ->is('cyan')
+                ->with('title', trans('menu.user.add.places'))
+            );
+    }
+
     public function render($user)
     {
         $loggedUser = request()->user();
@@ -46,47 +82,22 @@ class UserHeader
             ]))
             ->with('stats', component('BlockHorizontal')
                 ->with('content', collect()
-                    ->push(component('UserStat')
+                    ->push(component('StatCard')
                         ->with('icon', 'icon-thumb-up')
                         ->with('title', '26')
                     )
-                    ->push(component('UserStat')
+                    ->push(component('StatCard')
                         ->with('title', '134 / 40')
                         ->with('icon', 'icon-comment')
                     )
-                    ->push(component('UserStat')
+                    ->push(component('StatCard')
                         ->with('title', '12 (1.91%)')
                         ->with('icon', 'icon-pin')
                     )
                 )
             )
             ->with('actions_by_user', component('BlockHorizontal')
-                ->with('content', collect()
-                    ->pushWhen(
-                        $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
-                        component('Button')
-                            ->is('cyan')
-                            ->with('title', trans('menu.user.edit.profile'))
-                    )
-                    ->pushWhen(
-                        $loggedUser && $loggedUser->id == $user->id, // Only the owner can see own messages
-                        component('Button')
-                            ->is('cyan')
-                            ->with('title', trans('menu.user.message'))
-                    )
-                    ->pushWhen(
-                        $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
-                        component('Button')
-                        ->is('cyan')
-                        ->with('title', trans('menu.user.follow'))
-                    )
-                    ->pushWhen(
-                        $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
-                        component('Button')
-                        ->is('cyan')
-                        ->with('title', trans('menu.user.add.places'))
-                    )
-                )
+                ->with('content', $this->prepareActionsForUser($user, $loggedUser))
             );
     }
 }

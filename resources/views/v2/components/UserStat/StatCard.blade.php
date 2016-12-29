@@ -5,15 +5,15 @@ $title = $title ?? '';
 
 @endphp
 
-<div class="UserStat {{ $isclasses }}">
+<div class="StatCard {{ $isclasses }}">
 
-    <div class="UserStat__icon">
+    <div class="StatCard__icon">
 
         {!! component('Icon')->is('white')->with('size', 'xl')->with('icon', $icon) !!}
 
     </div>
 
-    <div class="UserStat__title">
+    <div class="StatCard__title">
 
         {{ $title }}
 
