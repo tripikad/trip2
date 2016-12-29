@@ -3,7 +3,7 @@
 .DestinationBar {
     background: $yellow;
     display: flex;
-    height: calc($spacer * 6);
+    height: calc($spacer * 4.5);
     align-items: center;
     padding: 0 calc($spacer * 1.5);
 }
