@@ -6,6 +6,8 @@ class DestinationHeader
 {
     public function render($destination)
     {
+        $parents = $destination->getAncestors();
+
         return component('DestinationHeader')
             ->with('background', component('MapBackground'))
             ->with('navbar', component('Navbar')
@@ -19,7 +21,21 @@ class DestinationHeader
                 ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
-            ->with('name', $destination->name)
-            ->with('facts', region('DestinationFacts', $destination));
+            ->with('parents', $parents
+                ->map(function ($parent) {
+                    return component('MetaLink')
+                        ->is('large')
+                        ->is('white')
+                        ->with('title', $parent->vars()->name.' › ')
+                        ->with('route', route('v2.destination.show', [$parent]));
+                })
+                ->render()
+                ->implode('')
+            )
+            ->with('title', $destination->name)
+            ->with('description', $destination->vars()->description)
+            ->with('facts', component('DestinationFacts')
+                ->with('facts', $destination->vars()->facts)
+            );
     }
 }

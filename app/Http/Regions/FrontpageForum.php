@@ -28,6 +28,7 @@ class FrontpageForum
                         ->push(region('ForumAbout', 'white'))
                         ->push(component('Promo')->with('promo', 'sidebar_small'))
                         ->push(component('Promo')->with('promo', 'sidebar_large'))
+                        ->push(component('AffiliateSearch'))
                     )
                 ));
     }

@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App;
 use DB;
+use App;
 use Carbon\Carbon;
+use Illuminate\Console\Command;
 
 class MailActive extends Command
 {

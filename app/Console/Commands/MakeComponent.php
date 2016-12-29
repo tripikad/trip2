@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use Storage;
+use Illuminate\Console\Command;
 
 class MakeComponent extends Command
 {
@@ -84,14 +84,14 @@ class MakeComponent extends Command
             $this->line("    2. In the same file add the following line to components: section\n\n");
             $this->comment("       $name,\n\n");
             $this->line("    3. Run gulp\n");
-            $this->line("    4. Add a following line to app/Http/Controllers/StyleguideController.php\n");
+            $this->line("    4. Add a following line to app/Http/Controllers/V2StyleguideController.php\n");
             $this->comment("       ->push(component('$name')->with('title', 'I am $name'))\n");
         } else {
             Storage::disk('root')->put("$dir/$name.blade.php", implode("\n\n", $blade));
             $this->info("\nBlade component $dir created\n");
             $this->line("Your next steps:\n");
             $this->line("    1. Run gulp\n");
-            $this->line("    2. Add a following line to app/Http/Controllers/StyleguideController.php\n");
+            $this->line("    2. Add a following line to app/Http/Controllers/V2StyleguideController.php\n");
             $this->comment("       ->push(component('$name')->with('title', 'I am $name'))\n");
         }
     }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use DB;
 use App\Image;
 use App\Content;
-use DB;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {

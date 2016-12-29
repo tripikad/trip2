@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\User;
+use Illuminate\Console\Command;
 
 class UserDelete extends Command
 {
@@ -32,8 +32,6 @@ class UserDelete extends Command
         });
 
         $this->line("\n");
-
-
 
         if ($this->confirm("Do you wish to delete user: $user->name? [yes|no]")) {
             $user->flags->each(function ($flag) {

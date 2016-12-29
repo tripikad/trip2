@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Exception;
 use Cache;
+use Exception;
 
 class V2ContentVars
 {
@@ -50,6 +50,11 @@ class V2ContentVars
     public function updated_at()
     {
         return format_date($this->content->created_at);
+    }
+
+    public function commentCount()
+    {
+        return count($this->content->comments);
     }
 
     public function isNew($content)

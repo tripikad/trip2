@@ -11,7 +11,7 @@ class TravelmateCard
                 ->with('route', route('v2.user.show', [$travelmate->user]))
                 ->with('image', $travelmate->user->imagePreset('small_square'))
                 ->with('rank', $travelmate->user->vars()->rank)
-                ->with('size', 84)
+                ->with('size', 72)
                 ->with('border', 4)
             )
             ->with('route', route('v2.travelmate.show', [$travelmate->slug]))

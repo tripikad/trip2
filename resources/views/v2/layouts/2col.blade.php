@@ -16,7 +16,7 @@ $footer = $footer ?? '';
 
     <div class="container">
 
-        <div class="row-between padding-top-md padding-bottom-md">
+        <div class="row-between padding-top-lg padding-bottom-md">
 
             <div class="col-9 padding-right-sm-mobile-none">
 

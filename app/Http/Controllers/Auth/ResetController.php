@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\User;
 use Log;
 use Mail;
+use App\User;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Foundation\Auth\ResetsPasswords;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ResetController extends Controller
 {

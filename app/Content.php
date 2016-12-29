@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 

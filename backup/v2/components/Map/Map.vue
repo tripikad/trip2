@@ -46,7 +46,7 @@
             }
         },
 
-        ready() {
+        mounted() {
             var converter = geojson2svg({
                 viewportSize: {width: this.width, height: this.height},
                 mapExtent: {left: this.left, bottom: this.bottom, right: this.right, top: this.top},

@@ -4,6 +4,9 @@ $map = $map ?? '';
 $header = $header ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
+$wantstogo = $wantstogo ?? '';
+$actions_with_user = $actions_with_user ?? '';
+$actions_by_user = $actions_by_user ?? '';
 $background = $background ?? '';
 
 @endphp
@@ -24,9 +27,19 @@ $background = $background ?? '';
 
         </div>
 
-        <div class="UserHeader__name">
+        <div class="UserHeader__nameWrapper">
 
-            {!! $name !!}
+            <div class="UserHeader__name">
+
+                {!! $name !!}
+
+            </div>
+
+            <div class="UserHeader__actionsWithUser">
+
+                {!! $actions_with_user !!}
+
+            </div>
 
         </div>
 
@@ -35,6 +48,32 @@ $background = $background ?? '';
             {!! $meta !!}
 
         </div>
+
+        @if ($wantstogo)
+
+        <div class="UserHeader__wantstogo">
+
+            {!! $wantstogo !!}
+
+        </div>
+
+        @endif
+
+        <div class="UserHeader__stats">
+
+            {!! $stats !!}
+
+        </div>
+
+        @if ($actions_by_user)
+        
+        <div class="UserHeader__actionsByUser">
+
+            {!! $actions_by_user !!}
+
+        </div>
+
+        @endif
 
     </div>
 

@@ -18,15 +18,15 @@
         <link rel="stylesheet" href="/v2/css/main.css">
     </head>
     <body>
-        
-        @yield('header')
-        @yield('content')
-        @yield('footer')
-
+        <div id="app">
+            @yield('promobar')
+            @yield('header')
+            @yield('content')
+            @yield('footer')
+        </div>
         <script src="/v2/js/main.js"></script>
-        @include('v2.loaders.svg')
-        @include('v2.loaders.promo')
+        @include('v2.utils.svg')
+        @include('v2.utils.promo')
         @stack('scripts')
-
     </body>
 </html>

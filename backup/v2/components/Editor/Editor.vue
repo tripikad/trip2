@@ -19,14 +19,11 @@
 
             <div class="Editor__wrapper">
 
-                <div v-el:writer class="Editor__writer" id="writer"></div>
+                <div ref="writer" class="Editor__writer" id="writer"></div>
                 
                 <div class="Editor__preview">
 
-                    <div class="Body">
-                    
-                    {{{ body }}}
-
+                    <div class="Body" v-html="body">
                     </div>
 
                 </div>
@@ -75,10 +72,10 @@
             }
         },
 
-        ready() {
+        mounted() {
             // Set up the editor
 
-            this.editor = brace.edit(this.$els.writer)
+            this.editor = brace.edit(this.$refs.writer)
             this.editor.setTheme('ace/theme/chrome')
             this.editor.getSession().setMode('ace/mode/markdown')
             this.editor.renderer.setShowGutter(false)
@@ -97,14 +94,10 @@
             this.updatePreview()
 
             // this.updateImages()
-        },
 
-        events: {
-
-            'imageUploaded': function() {
+            this.$events.$on('imageUploaded', function() {
                 // this.updateImages()
-            }
-
+            })
         },
 
         methods: {

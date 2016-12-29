@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Content;
 use App\Comment;
+use App\Content;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CommentTest extends TestCase
 {

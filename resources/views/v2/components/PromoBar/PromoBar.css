@@ -1,0 +1,26 @@
+@import "variables";
+
+.PromoBar {
+    background: $blue;
+    padding: $padding-sm;
+    font: $font-text-md;
+    display: flex;
+    justify-content: space-between;
+}
+
+    .PromoBar__titleWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        line-height: $line-height-md;
+    }
+
+    .PromoBar__title {
+        color: $white;
+        margin-right: $margin-sm;
+        margin-bottom: $margin-xs ?if $mobile;
+    }
+
+    .PromoBar__route {
+        color: $white;
+        text-decoration: underline;
+    }

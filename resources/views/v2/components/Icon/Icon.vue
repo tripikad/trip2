@@ -5,7 +5,7 @@
         :class="isclasses"
         :style="style"
     >
-        <use xlink:href="#{{ icon }}"></use>
+        <use :xlink:href="'#' + icon"></use>
 
     </svg>
 

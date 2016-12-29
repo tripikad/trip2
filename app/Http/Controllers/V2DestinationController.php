@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Destination;
 use App\Content;
+use App\Destination;
 
 class V2DestinationController extends Controller
 {
@@ -22,7 +22,6 @@ class V2DestinationController extends Controller
         // TODO: Replace with Destination::getPopular()
 
         $destinations = Destination::inRandomOrder()->take(5)->get();
-
 
         return view('v2.layouts.2col')
 

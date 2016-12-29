@@ -9,7 +9,7 @@
 }
 
     .Header__content {
-        height: calc($spacer * 15);
+        height: calc($spacer * 10);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -22,3 +22,7 @@
         font: $font-heading-xl ?if $mobile;
         text-align: center;
     }
+
+.Header--large .Header__content {
+    height: calc($spacer * 15);
+}

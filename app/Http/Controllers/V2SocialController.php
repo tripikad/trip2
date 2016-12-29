@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Redirect;
 use URL;
+use Redirect;
 
 class V2SocialController extends Controller
 {

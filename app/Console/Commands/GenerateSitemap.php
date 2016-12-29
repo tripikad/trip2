@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App;
 use App\User;
-use App\Destination;
 use App\Content;
+use App\Destination;
+use Illuminate\Console\Command;
 
 class GenerateSitemap extends Command
 {

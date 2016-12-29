@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    line-height: $line-height-lg;
+    line-height: $line-height-md;
 }
 
     .Meta__item {

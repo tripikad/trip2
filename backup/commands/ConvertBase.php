@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
+use DB;
+use App;
+use Imageconv;
+use App\Content;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
-use DB;
-use Imageconv;
-use App;
-use App\Content;
 
 class ConvertBase extends Command
 {

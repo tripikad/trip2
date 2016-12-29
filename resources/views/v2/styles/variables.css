@@ -40,7 +40,7 @@ $font-size-xs: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
 $font-size-lg: 18px;
-$font-size-xl: 22px;
+$font-size-xl: 20px;
 $font-size-xxl: 32px;
 $font-size-xxxl: 48px;
 $font-size-xxxxl: 64px;
@@ -181,18 +181,21 @@ $text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
 /* Box shadows */
 
 $box-shadow-left: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
+$box-shadow-bottom: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
 
 /* Media queries */
 $mobile-width: 34em;
-$tablet-width: 56em; /* Original was 48em; */
+$tablet-width: 56em; /* Original was 48em; Desktop 62em, Large desktop 74em */
 $desktop-width: 62em;
 $largedesktop-width: 74em;
+
 $mobile: media (max-width: $mobile-width);
 $tablet: media (max-width: $tablet-width);
-$desktop: media (max-width: $tablet-width);
-$largedesktop: media (max-width: $tablet-width);
+$desktop: media (max-width: $desktop-width);
+$largedesktop: media (max-width: $largedesktop-width);
 
 /* Opacities */
+$opacity-xxs: 0.05;
 $opacity-xs: 0.1;
 $opacity-sm: 0.25;
 $opacity-md: 0.5;

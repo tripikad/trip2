@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Log;
 use Mail;
 use View;
-use Log;
-use App\Message;
 use App\User;
+use App\Message;
+use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {

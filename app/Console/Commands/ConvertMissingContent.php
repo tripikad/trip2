@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Database\Eloquent\Model;
 use App;
 use App\Content;
 use App\User as User;
+use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ConvertMissingContent extends ConvertBase

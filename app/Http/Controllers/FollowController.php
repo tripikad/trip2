@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use View;
 use Log;
 use Auth;
+use View;
 use App\User;
 
 class FollowController extends Controller

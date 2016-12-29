@@ -1,25 +1,21 @@
 <template>
 
     <div class="FormSelect" :class="isclasses">
-    
+        
         <component
             is="Multiselect"
-            :selected="selected"
-            :multiple="false",
-            :searchable="true",
-            :options="currentOptions",
-            @update="updateValue"
-            :placeholder="placeholder"
+            v-model="selected"
+            :options="currentOptions"
+            track-by="name"
             label="name"
-            :select-label="helper"
         >
         </component>
 
         <input
+            v-model="currentId"
             v-show="false"
             type="text"
             :name="name"
-            :value="selected ? selected.id : ''"
         >
 
     </div>
@@ -50,13 +46,13 @@
             }
         },
 
-        methods: {
-            updateValue(selected) {
-                this.selected = selected
+        computed: {
+            currentId() {
+                return this.selected ? this.selected.id : ''
             }
         },
 
-        ready() {
+        mounted() {
             this.currentOptions = JSON.parse(decodeURIComponent(this.options))
             this.selected = this.currentOptions.find((option) => option.id === parseInt(this.value))
         }

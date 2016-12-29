@@ -11,7 +11,7 @@ class V2FrontpageController extends Controller
         $user = auth()->user();
 
         $flights = Content::getLatestItems('flight', 8);
-        $forums = Content::getLatestItems('forum', $user ? 10 : 8);
+        $forums = Content::getLatestItems('forum', 16);
         $news = Content::getLatestItems('news', 6);
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 6);
@@ -19,7 +19,17 @@ class V2FrontpageController extends Controller
 
         return view('v2.layouts.frontpage')
 
-            ->with('header', region('Header', trans('frontpage.index.search.title')))
+            ->with('promobar', component('PromoBar')
+                ->with('title', 'Osale Trip.ee kampaanias ja võida 2 lennupiletit Maltale')
+                ->with('route_title', 'Vaata lähemalt siit')
+                ->with('route', 'tasuta-lennupiletid-maltale')
+                ->render()
+            )
+
+            ->with('header', region('Header',
+                component('FrontpageSearch')
+                    ->with('title', trans('frontpage.index.search.title'))
+            ))
 
             ->with('content', collect()
 

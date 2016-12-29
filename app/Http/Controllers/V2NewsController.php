@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Request;
+use App\Topic;
 use App\Content;
 use App\Destination;
-use App\Topic;
 
 class V2NewsController extends Controller
 {

@@ -9,7 +9,7 @@ class Comment
         $user = auth()->user();
 
         return component('Comment')
-            ->show($comment->status || ($user && $user->hasRole('admin')))
+            ->when($comment->status || ($user && $user->hasRole('admin')))
             ->is($comment->status ?: 'unpublished')
             ->with('user', component('UserImage')
                 ->with('route', route('user.show', [$comment->user]))

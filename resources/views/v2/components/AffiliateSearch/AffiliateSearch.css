@@ -1,0 +1,36 @@
+@import "variables";
+
+.AffiliateSearch {
+    display: flex;
+    height: calc($spacer * 24);
+    background: $gray-light;
+    align-items: center;
+    justify-content: center;
+    padding: $padding-md;
+    text-align: center;
+}
+
+    .AffiliateSearch__title {
+        font: $font-text-md;
+        color: $gray-dark;
+    }
+
+.AffiliateSearch--wide {
+    height: calc($spacer * 15);
+}
+
+.AffiliateSearch--purple {
+    background: purple;
+}
+
+    .AffiliateSearch--purple .AffiliateSearch__title {
+        color: $white;
+    }
+
+.AffiliateSearch--orange {
+    background: SandyBrown;
+}
+
+    .AffiliateSearch--orange .AffiliateSearch__title {
+        color: $white;
+    }

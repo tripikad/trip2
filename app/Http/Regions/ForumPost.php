@@ -13,6 +13,7 @@ class ForumPost
             ->with('title', $post->vars()->title)
             ->with('user', component('UserImage')
                 ->with('size', 64)
+                ->with('border', 4)
                 ->with('route', route('user.show', [$post->user]))
                 ->with('image', $post->user->imagePreset('small_square'))
                 ->with('rank', $post->user->vars()->rank)

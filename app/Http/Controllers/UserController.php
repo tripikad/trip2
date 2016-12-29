@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use View;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
+use App\Flag;
 use App\User;
 use App\Image;
-use App\Flag;
+use Carbon\Carbon;
 use App\Destination;
-use Hash;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {

@@ -1,16 +1,27 @@
 @import "variables";
 
 .Badge {
-	background-color: $red;
-	border-radius: $border-radius-lg;
-	display: inline-flex;
-	justify-content: center;
-	min-width: $width-sm;
-	padding: $padding-xxxs $padding-xs;
+	background: $gray-darker;
+    align-items: center;
+    border-radius: $border-radius-lg;
+    border: 1px solid $gray-darker;
+    display: inline-flex;
+    font: $font-text-xs;
+    justify-content: center;
+    padding: calc($spacer / 4) calc($spacer / 2) calc($spacer / 8) calc($spacer / 2);
 }
 
 	.Badge__title {
-		align-items: center;
-		font: $font-heading-xs;
+		font: $font-text-xs;
     	color: $white;
 	}
+
+.Badge--red {
+	 background: $red;
+	 border: 1px solid $red;
+}
+
+.Badge--light {
+	 background: $gray;
+	 border: 1px solid $gray;
+}

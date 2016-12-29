@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Lang;
 use Exception;
 
 class V2DestinationVars
@@ -34,5 +35,19 @@ class V2DestinationVars
     public function shortName()
     {
         return str_limit($this->destination->name, 30);
+    }
+
+    public function description()
+    {
+        $key = "destination.show.description.{$this->destination->id}";
+
+        return Lang::has($key) ? trans($key) : null;
+    }
+
+    public function facts()
+    {
+        $config = config("destinations.{$this->destination->id}");
+
+        return $config ? collect(config("destinations.{$this->destination->id}")) : null;
     }
 }
