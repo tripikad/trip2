@@ -318,5 +318,5 @@
 }
 
 .margin-top-negative-md {
-  margin-top: calc($spacer * -3);
+  margin-top: calc($spacer * -2.25);
 }
