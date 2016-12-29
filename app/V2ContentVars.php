@@ -52,6 +52,11 @@ class V2ContentVars
         return format_date($this->content->created_at);
     }
 
+    public function commentCount()
+    {
+        return count($this->content->comments);
+    }
+
     public function isNew($content)
     {
         if (auth()->check()) {

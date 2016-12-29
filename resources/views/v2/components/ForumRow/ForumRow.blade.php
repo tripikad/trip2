@@ -4,6 +4,7 @@ $route = $route ?? '';
 $user = $user ?? '';
 $title = $title ?? '';
 $meta = $meta ?? collect();
+$badge = $badge ?? '';
 
 @endphp
 

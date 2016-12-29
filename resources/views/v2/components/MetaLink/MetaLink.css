@@ -3,6 +3,7 @@
     .MetaLink__title {
         font: $font-text-sm;
         color: $gray-dark;
+        padding-top: calc($spacer / 2);
     }
 
 .MetaLink--white .MetaLink__title {

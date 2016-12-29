@@ -6,7 +6,8 @@ class ForumRow
 {
     public function render($forum)
     {
-        $forum = $forum->vars()->isNew($forum);
+        // $forum = $forum->vars()->isNew($forum);
+        $commentCount = $forum->vars()->commentCount;
 
         return component('ForumRow')
             ->with('route', route('v2.forum.show', [$forum->slug]).($forum->NewCommentId ? '#comment-'.$forum->NewCommentId : ''))
@@ -14,11 +15,15 @@ class ForumRow
                 ->with('route', route('v2.user.show', [$forum->user]))
                 ->with('image', $forum->user->imagePreset('small_square'))
                 ->with('rank', $forum->user->vars()->rank)
-                ->with('size', 44)
+                ->with('size', 48)
                 ->with('border', 4)
             )
             ->with('title', $forum->title)
             ->with('meta', component('Meta')->with('items', collect()
+                    ->push(component('Badge')
+                        ->is($commentCount == 0 ? 'light' : '')
+                        ->with('title', $commentCount)
+                    )
                     ->push(component('MetaLink')
                         ->with('title', $forum->user->vars()->name)
                         ->with('route', route('v2.user.show', [$forum->user]))
