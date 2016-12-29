@@ -14,12 +14,13 @@ class V2FlightController extends Controller
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
-        $firstBatch = 3;
-        $secondBatch = 10;
-        $thirdBatch = 10;
-        $pageSize = $firstBatch + $secondBatch + $thirdBatch;
-
-        $flights = Content::getLatestPagedItems('flight', $pageSize, $currentDestination, $currentTopic);
+        $sliceSize = 10;
+        $flights = Content::getLatestPagedItems(
+            'flight',
+            2 * $sliceSize,
+            $currentDestination,
+            $currentTopic
+        );
         $forums = Content::getLatestItems('forum', 5);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
@@ -29,31 +30,18 @@ class V2FlightController extends Controller
             ->with('header', region('Header', trans('content.flight.index.title')))
 
             ->with('content', collect()
-                ->push(component('Grid3')
-                    ->with('gutter', true)
-                    ->with('items', $flights
-                        ->take($firstBatch)
-                        ->map(function ($flight) {
-                            return region('FlightCard', $flight);
-                        })
-                    )
-                )
-                ->merge($flights
-                    ->slice($firstBatch)
-                    ->take($secondBatch)
-                    ->map(function ($flight) {
+                ->push(component('AffiliateSearch')->is('wide')->is('purple'))
+                ->merge($flights->slice(0, $sliceSize)->map(function ($flight) {
                         return region('FlightRow', $flight);
                     })
                 )
                 ->push(component('Promo')->with('promo', 'body'))
-                ->merge($flights
-                    ->slice($firstBatch + $secondBatch)
-                    ->take($thirdBatch)
-                    ->map(function ($flight) {
+                ->merge($flights->slice($sliceSize)->map(function ($flight) {
                         return region('FlightRow', $flight);
                     })
                 )
                 ->push(region('Paginator', $flights, $currentDestination, $currentTopic))
+                ->push(component('AffiliateSearch')->is('wide'))
             )
 
             ->with('sidebar', collect()
@@ -105,6 +93,7 @@ class V2FlightController extends Controller
                         )
                     )
                 )
+                ->push(component('AffiliateSearch')->is('wide')->is('orange'))
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
                 ->merge($flight->comments->map(function ($comment) {
                     return region('Comment', $comment);
@@ -128,10 +117,8 @@ class V2FlightController extends Controller
                     return region('DestinationBar', $destination, $destination->getAncestors());
                 }))
                 ->push(region('ForumSidebar', $forums))
-                ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->merge($flights->map(function ($flight) {
-                    return region('FlightCard', $flight);
-                }))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->push(component('AffiliateSearch'))
             )
 
             ->with('bottom', collect()

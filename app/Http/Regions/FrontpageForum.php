@@ -24,11 +24,11 @@ class FrontpageForum
                         }))
                     )
                     ->with('right_content', collect()
-                        ->push(component('AffiliateSearch'))
                         ->merge(region('ForumLinks'))
                         ->push(region('ForumAbout', 'white'))
                         ->push(component('Promo')->with('promo', 'sidebar_small'))
                         ->push(component('Promo')->with('promo', 'sidebar_large'))
+                        ->push(component('AffiliateSearch'))
                     )
                 ));
     }

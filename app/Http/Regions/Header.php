@@ -6,9 +6,9 @@ use App\Image;
 
 class Header
 {
-    public function render($title = '', $background = '')
+    public function render($title = false)
     {
-        $background = $background ?? Image::getHeader();
+        $background = 'http://68.media.tumblr.com/9c7c25deb2d0c7c4e59928de300ca20e/tumblr_nx5c7cX0L01ta0hnbo1_1280.jpg';
 
         return component('Header')
             ->with('background', $background)

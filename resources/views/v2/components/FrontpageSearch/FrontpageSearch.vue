@@ -18,7 +18,7 @@
         <input
             class="FrontpageSearch__input"
             type="text"
-            size="28"
+            size="32"
             v-model="keywords"
             v-focus="active"
             @keyup.enter="search()"

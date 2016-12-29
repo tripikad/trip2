@@ -11,7 +11,7 @@ class V2FrontpageController extends Controller
         $user = auth()->user();
 
         $flights = Content::getLatestItems('flight', 8);
-        $forums = Content::getLatestItems('forum', $user ? 10 : 8);
+        $forums = Content::getLatestItems('forum', 16);
         $news = Content::getLatestItems('news', 6);
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 6);
@@ -26,7 +26,7 @@ class V2FrontpageController extends Controller
                 ->render()
             )
 
-            ->with('header', region('FrontpageHeader',
+            ->with('header', region('Header',
                 component('FrontpageSearch')
                     ->with('title', trans('frontpage.index.search.title'))
             ))
