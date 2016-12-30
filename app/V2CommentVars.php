@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Cache;
 use Exception;
 
 class V2CommentVars

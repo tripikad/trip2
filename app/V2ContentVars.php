@@ -57,35 +57,38 @@ class V2ContentVars
         return count($this->content->comments);
     }
 
-    private function getUnreadCache() {
-        
+    private function getUnreadCache()
+    {
         if ($user = request()->user()) {
-            
             $key = 'new_'.$this->content->id.'_'.$user->id;
-            
-            return Cache::get($key);
 
+            return Cache::get($key);
         }
-        
+
         return false;
-    
     }
 
     public function isNew()
     {
         $cache = $this->getUnreadCache();
-        
-        if ($cache > 0) return false;
-        if ($cache == '0') return true;
-        
+
+        if ($cache > 0) {
+            return false;
+        }
+        if ($cache == '0') {
+            return true;
+        }
+
         return false;
     }
 
     public function firstUnreadCommentId()
     {
         $cache = $this->getUnreadCache();
-        
-        if ($cache > 0) return $cache;
+
+        if ($cache > 0) {
+            return $cache;
+        }
 
         return false;
     }
@@ -98,8 +101,7 @@ class V2ContentVars
             })
             ->count();
         }
-        
+
         return false;
     }
-
 }
