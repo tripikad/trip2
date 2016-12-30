@@ -57,7 +57,7 @@ return [
 
     'show.isnew' => 'New',
     'show.newcomments' => ':count new comment|:count new comments',
-    
+
     // Content types
 
     // News
