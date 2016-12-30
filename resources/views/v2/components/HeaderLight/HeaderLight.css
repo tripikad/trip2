@@ -18,8 +18,8 @@
 
     .HeaderLight__title {
         color: $gray-darkest;
-        font: $font-heading-xl ?if $mobile;
-        font: $font-heading-xxl ?if $tablet;
-        font: $font-heading-xxxl;
+        font: $font-heading-xxl;
+        font: $font-heading-xl ?if $tablet;
+        font: $font-heading-lg ?if $mobile;
         text-align: center;
     }

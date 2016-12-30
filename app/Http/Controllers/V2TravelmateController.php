@@ -53,7 +53,6 @@ class V2TravelmateController extends Controller
 
             ->with('bottom', collect()
                 ->push(region('ForumBottom', $forums))
-                ->push(region('FlightBottom', $flights))
             )
 
             ->with('footer', region('Footer'));
@@ -110,7 +109,6 @@ class V2TravelmateController extends Controller
                 ->merge($flights->map(function ($flight) {
                     return region('FlightCard', $flight);
                 }))
-                ->push(region('ForumSidebar', $forums))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
             )
 

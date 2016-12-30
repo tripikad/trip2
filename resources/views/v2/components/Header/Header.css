@@ -17,9 +17,8 @@
 
     .Header__title {
         color: $white;
-        font: $font-heading-xxxl;
-        font: $font-heading-xxl ?if $tablet;
-        font: $font-heading-xl ?if $mobile;
+        font: $font-heading-xxl;
+        font: $font-heading-xl ?if $tablet;
         text-align: center;
     }
 

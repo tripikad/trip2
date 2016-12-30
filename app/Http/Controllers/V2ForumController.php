@@ -50,7 +50,7 @@ class V2ForumController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(region('FlightBottom', $flights))
+                ->push(region('TravelmateBottom', $travelmates))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
@@ -91,7 +91,6 @@ class V2ForumController extends Controller
                 ->merge($forum->destinations->map(function ($destination) {
                     return region('DestinationBar', $destination, $destination->getAncestors());
                 }))
-                ->push(region('ForumSidebar', $forums))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
