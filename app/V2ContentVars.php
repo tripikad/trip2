@@ -57,33 +57,49 @@ class V2ContentVars
         return count($this->content->comments);
     }
 
-    public function isNew($content)
-    {
-        if (auth()->check()) {
-            $userId = auth()->id();
+    private function getUnreadCache() {
+        
+        if ($user = request()->user()) {
+            
+            $key = 'new_'.$this->content->id.'_'.$user->id;
+            
+            return Cache::get($key);
 
-            $key = 'new_'.$content->id.'_'.$userId;
-
-                // If the post is unread by the user or there are new comments
-
-                if (Cache::has($key)) {
-                    $content->isNew = true;
-                }
-
-            if ($newId = Cache::get($key)) {
-                $content->NewCommentId = $newId;
-
-                    //New comment counter if needed
-                    /*
-                    $content->NewCommentCount = $content->comments->filter(function ($comment) use ($content) {
-                       return  $comment->id >= $content->NewCommentId;
-                   })->count();
-                   */
-            }
-
-            return $content;
         }
-
-        return $content;
+        
+        return false;
+    
     }
+
+    public function isNew()
+    {
+        $cache = $this->getUnreadCache();
+        
+        if ($cache > 0) return false;
+        if ($cache == '0') return true;
+        
+        return false;
+    }
+
+    public function firstUnreadCommentId()
+    {
+        $cache = $this->getUnreadCache();
+        
+        if ($cache > 0) return $cache;
+
+        return false;
+    }
+
+    public function unreadCommentCount()
+    {
+        if ($this->firstUnreadCommentId() > 0) {
+            return $this->content->comments->filter(function ($comment) {
+                return  $comment->id >= $this->firstUnreadCommentId();
+            })
+            ->count();
+        }
+        
+        return false;
+    }
+
 }

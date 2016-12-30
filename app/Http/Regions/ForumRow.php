@@ -20,6 +20,12 @@ class ForumRow
             )
             ->with('title', $forum->title)
             ->with('meta', component('Meta')->with('items', collect()
+                    ->pushWhen($forum->vars()->isNew,
+                        component('Tag')->is('red')->with('title', 'isnew: '. $forum->vars()->isNew)
+                    )
+                    ->pushWhen($forum->vars()->firstUnreadCommentId,
+                        component('Tag')->is('red')->with('title', 'id: '.$forum->vars()->firstUnreadCommentId . ' count: '.$forum->vars()->unreadCommentCount)
+                    )
                     ->push(component('Badge')
                         ->is($commentCount == 0 ? 'light' : '')
                         ->with('title', $commentCount)
