@@ -10,7 +10,7 @@
     }
 
     .Flag__icon svg {
-        fill: $gray;
+        fill: $gray-dark;
     }
 
     .Flag__value {

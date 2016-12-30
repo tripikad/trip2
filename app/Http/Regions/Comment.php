@@ -4,19 +4,28 @@ namespace App\Http\Regions;
 
 class Comment
 {
-    public function render($comment)
+    public function render($comment, $firstUnreadCommentId = false)
     {
         $user = auth()->user();
 
         return component('Comment')
             ->when($comment->status || ($user && $user->hasRole('admin')))
             ->is($comment->status ?: 'unpublished')
+            ->with('id', $comment->id)
             ->with('user', component('UserImage')
                 ->with('route', route('user.show', [$comment->user]))
                 ->with('image', $comment->user->imagePreset('small_square'))
                 ->with('rank', $comment->user->vars()->rank)
             )
             ->with('meta', component('Meta')->with('items', collect()
+                    ->pushWhen($user
+                        && $user->hasRole('admin')
+                        && $firstUnreadCommentId
+                        && $firstUnreadCommentId <= $comment->id,
+                        component('Tag')
+                            ->is('red')
+                            ->with('title', trans('content.show.isnew'))
+                    )
                     ->push(component('MetaLink')
                         ->with('title', $comment->user->vars()->name)
                         ->with('route', route('user.show', [$comment->user]))

@@ -8,12 +8,12 @@
                 is="Icon"
                 :icon="icon"
                 size="sm"
-                @click="toggleFlag"
+                @click.native="toggleFlag"
             ></component>
 
         </div>
 
-        <div class="Flag__value">{{ value }}</div>
+        <div class="Flag__value">{{ currentValue }}</div>
 
     </div>
 
@@ -36,13 +36,19 @@ export default {
         route: { default: '' }
     },
 
+    data: () => ({ currentValue: 0 }),
+
     methods: {
         toggleFlag: function() {
-            this.$http.post(this.route, { value: this.value })
+            this.$http.post(this.route, { value: this.currentValue })
                 .then(function(res) {
-                    this.value = res.data.value
+                    this.currentValue = res.data.value
                 })
         }
+    },
+
+    mounted() {
+        this.currentValue = this.value
     }
 }
 

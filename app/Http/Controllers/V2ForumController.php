@@ -63,34 +63,12 @@ class V2ForumController extends Controller
         $forums = Content::getLatestItems('forum', 5);
         $travelmates = Content::getLatestItems('travelmate', 3);
         $user = auth()->user();
+        $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
-        if (auth()->check()) {
-            $userId = auth()->user()->id;
+        // Clear the unread cache
 
-        // We check if user has read the post or its comments
-
-        $key = 'new_'.$forum->id.'_'.$userId;
-
-            $newId = Cache::get($key);
-
-        // We iterate over post comments
-
-        $forum->comments->map(function ($comment) use ($newId) {
-
-            // If the comment is the first unread (or newer) comment
-
-            if ($newId > 0 && $comment->id >= $newId) {
-
-                // Mark the comment as new so the view can style the comment accordingly
-
-                $comment->isNew = true;
-            }
-
-            return $comment;
-        });
-
-        // Mark the post and its comments read
-
+        if ($user) {
+            $key = 'new_'.$forum->id.'_'.$user->id;
             Cache::forget($key);
         }
 
@@ -100,8 +78,8 @@ class V2ForumController extends Controller
 
             ->with('content', collect()
                 ->push(region('ForumPost', $forum))
-                ->merge($forum->comments->map(function ($comment) {
-                    return region('Comment', $comment);
+                ->merge($forum->comments->map(function ($comment) use ($firstUnreadCommentId) {
+                    return region('Comment', $comment, $firstUnreadCommentId);
                 }))
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum))
             )

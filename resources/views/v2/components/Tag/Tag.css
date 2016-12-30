@@ -2,7 +2,7 @@
 
 .Tag {
     align-items: center;
-    border: 1px solid $gray-dark;
+    border: 1px solid $gray-darker;
     border-radius: $border-radius-lg;
     display: inline-flex;
     font: $font-text-xs;
@@ -11,7 +11,7 @@
 }
 
     .Tag__title {
-        color: $gray-dark;
+        color: $gray-darker;
         white-space: nowrap;
     }
 
@@ -25,8 +25,9 @@
 
 .Tag--red {
     border: 1px solid $red;
+    background: $red;
 }
 
 .Tag--red .Tag__title {
-    color: $red;
+    color: $white;
 }

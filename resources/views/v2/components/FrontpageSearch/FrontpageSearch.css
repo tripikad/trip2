@@ -44,5 +44,5 @@
     }
 
     .FrontpageSearch--active .FrontpageSearch__icon svg {
-        fill: $red;
+        fill: $orange;
     }

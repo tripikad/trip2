@@ -30,7 +30,7 @@ $gray-lighter: #fbfcfd;
 $gray-light: #f7f9fa;
 $gray: #e1e7eb;
 $gray-dark: #d1dae0;
-$gray-darker: #979da1;
+$gray-darker: #a5abaf;
 $gray-darkest: #707477;
 
 /* Fonts */
@@ -190,9 +190,8 @@ $desktop-width: 62em;
 $largedesktop-width: 74em;
 
 $mobile: media (max-width: $mobile-width);
-$tablet: media (max-width: $tablet-width);
-$desktop: media (max-width: $desktop-width);
-$largedesktop: media (max-width: $largedesktop-width);
+$tablet: media (min-width: $mobile-width) and (max-width: $tablet-width);
+$desktop: media (min-width: $tablet-width);
 
 /* Opacities */
 $opacity-xxs: 0.05;
