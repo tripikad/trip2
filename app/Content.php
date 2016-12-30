@@ -63,12 +63,19 @@ class Content extends Model
         return new V2ContentVars($this);
     }
 
-    public function scopeGetLatestPagedItems($query, $type, $take = 24, $destination = false, $topic = false)
+    public function scopeGetLatestPagedItems(
+        $query,
+        $type, 
+        $take = 24,
+        $destination = false,
+        $topic = false,
+        $order = 'created_at'
+    )
     {
         return $query
             ->whereType($type)
             ->whereStatus(1)
-            ->latest()
+            ->orderBy($order, 'desc')
             ->with(
                 'images',
                 'user',
@@ -96,13 +103,13 @@ class Content extends Model
             ->simplePaginate($take);
     }
 
-    public function scopeGetLatestItems($query, $type, $take = 5)
+    public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at')
     {
         return $query
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
-            ->latest()
+            ->orderBy($order, 'desc')
             ->with(
                 'images',
                 'user',
