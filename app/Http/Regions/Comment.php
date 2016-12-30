@@ -11,6 +11,7 @@ class Comment
         return component('Comment')
             ->when($comment->status || ($user && $user->hasRole('admin')))
             ->is($comment->status ?: 'unpublished')
+            ->with('id', $comment->id)
             ->with('user', component('UserImage')
                 ->with('route', route('user.show', [$comment->user]))
                 ->with('image', $comment->user->imagePreset('small_square'))
