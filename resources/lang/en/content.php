@@ -55,6 +55,9 @@ return [
 
     'update.info' => ':title has been updated',
 
+    'show.isnew' => 'Uus',
+    'show.newcomments' => ':count uut kommentaari',
+    
     // Content types
 
     // News

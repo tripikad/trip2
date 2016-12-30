@@ -64,36 +64,15 @@ class V2ForumController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $user = auth()->user();
 
-        if (auth()->check()) {
-            $userId = auth()->user()->id;
-
-        // We check if user has read the post or its comments
-
-        $key = 'new_'.$forum->id.'_'.$userId;
-
-            $newId = Cache::get($key);
-
-        // We iterate over post comments
-
-        $forum->comments->map(function ($comment) use ($newId) {
-
-            // If the comment is the first unread (or newer) comment
-
-            if ($newId > 0 && $comment->id >= $newId) {
-
-                // Mark the comment as new so the view can style the comment accordingly
-
-                $comment->isNew = true;
-            }
-
-            return $comment;
-        });
-
-        // Mark the post and its comments read
-
+        // Clear the unread cache
+        
+        if ($user) {
+            
+            $key = 'new_'.$forum->id.'_'.$user->id;
             Cache::forget($key);
+        
         }
-
+        
         return view('v2.layouts.2col')
 
             ->with('header', region('HeaderLight', trans('content.forum.index.title')))
