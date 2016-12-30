@@ -24,6 +24,7 @@ class V2FlightController extends Controller
         $forums = Content::getLatestItems('forum', 5);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
+        $travelmates = Content::getLatestItems('travelmate', 3);
 
         return view('v2.layouts.2col')
 
@@ -63,6 +64,8 @@ class V2FlightController extends Controller
 
             ->with('bottom', collect()
                 ->push(region('ForumBottom', $forums))
+                ->push(region('TravelmateBottom', $travelmates))
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
             ->with('footer', region('Footer'));
@@ -93,7 +96,6 @@ class V2FlightController extends Controller
                         )
                     )
                 )
-                ->push(component('AffiliateSearch')->is('wide')->is('orange'))
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
                 ->merge($flight->comments->map(function ($comment) {
                     return region('Comment', $comment);
@@ -113,16 +115,12 @@ class V2FlightController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
-                ->merge($flight->destinations->map(function ($destination) {
-                    return region('DestinationBar', $destination, $destination->getAncestors());
-                }))
-                ->push(region('ForumSidebar', $forums))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffiliateSearch'))
             )
 
             ->with('bottom', collect()
-                ->push(region('FlightBottom', $flights))
+                ->push(region('ForumBottom', $forums))
                 ->push(region('TravelmateBottom', $travelmates))
                 ->push(component('Promo')->with('promo', 'footer'))
             )

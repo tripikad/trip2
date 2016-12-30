@@ -1,13 +1,13 @@
 @import "variables";
 
 .show-mobile-desktop {
-    display: block ?if $desktop;
-    display: none ?if $tablet;
-    display: block ?if $mobile;
+    display: block ?if media (min-width: $tablet-width); /* desktop */
+    display: none ?if media (min-width: $mobile-width) and (max-width: $tablet-width); /* tablet */
+    display: block ?if media (max-width: $mobile-width); /* mobile */
 }
 
 .show-tablet {
-    display: none ?if $desktop;
-    display: block ?if $tablet;
-    display: none ?if $mobile;
+    display: none ?if media (min-width: $tablet-width); /* desktop */
+    display: block ?if media (min-width: $mobile-width) and (max-width: $tablet-width); /* tablet */
+    display: none ?if media (max-width: $mobile-width); /* mobile */
 }
