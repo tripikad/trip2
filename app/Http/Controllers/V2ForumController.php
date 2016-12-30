@@ -63,6 +63,7 @@ class V2ForumController extends Controller
         $forums = Content::getLatestItems('forum', 5);
         $travelmates = Content::getLatestItems('travelmate', 3);
         $user = auth()->user();
+        $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
         // Clear the unread cache
 
@@ -77,8 +78,8 @@ class V2ForumController extends Controller
 
             ->with('content', collect()
                 ->push(region('ForumPost', $forum))
-                ->merge($forum->comments->map(function ($comment) {
-                    return region('Comment', $comment);
+                ->merge($forum->comments->map(function ($comment) use ($firstUnreadCommentId) {
+                    return region('Comment', $comment, $firstUnreadCommentId);
                 }))
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum))
             )

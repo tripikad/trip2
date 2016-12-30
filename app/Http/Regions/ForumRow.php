@@ -51,11 +51,14 @@ class ForumRow
                     ->push(component('MetaLink')
                         ->with('title', $forum->vars()->created_at)
                     )
-                    ->merge($forum->destinations->map(function ($tag) {
-                        return component('Tag')->is('orange')->with('title', $tag->name);
+                    ->merge($forum->destinations->map(function ($destination) {
+                        return component('Tag')
+                            ->is('orange')
+                            ->with('title', $destination->name)
+                            ->with('route', route('v2.destination.show', [$destination]));
                     }))
-                    ->merge($forum->topics->map(function ($tag) {
-                        return component('Tag')->with('title', $tag->name);
+                    ->merge($forum->topics->map(function ($destination) {
+                        return component('MetaLink')->with('title', $destination->name);
                     }))
                 )
             );

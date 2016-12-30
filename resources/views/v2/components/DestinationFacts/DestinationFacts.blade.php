@@ -10,7 +10,7 @@ $facts = collect($facts) ?? collect();
 
         <tbody>
 
-        @foreach ($facts->slice(0, 3) as $key => $value)
+        @foreach ($facts as $key => $value)
 
         <tr>
             

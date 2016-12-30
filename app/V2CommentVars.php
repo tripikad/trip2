@@ -45,11 +45,4 @@ class V2CommentVars
     {
         return format_date($this->comment->created_at);
     }
-
-    public function isNew()
-    {
-        return $this->comment->id >= $this->comment->parent->vars()->firstUnreadCommentId();
-
-        return false;
-    }
 }
