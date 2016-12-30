@@ -26,9 +26,10 @@ class ForumPost
                     ->push(component('MetaLink')
                         ->with('title', $post->vars()->created_at)
                     )
-                    ->pushWhen($user && $user->hasRoleOrOwner('admin', $post->user->id), component('MetaLink')
-                        ->with('title', trans('content.action.edit.title'))
-                        ->with('route', route('content.edit', [$post->type, $post]))
+                    ->pushWhen($user && $user->hasRoleOrOwner('admin', $post->user->id),
+                        component('MetaLink')
+                            ->with('title', trans('content.action.edit.title'))
+                            ->with('route', route('content.edit', [$post->type, $post]))
                     )
                     ->pushWhen($user && $user->hasRole('admin'), component('Form')
                             ->with('route', route('content.status', [$post->type, $post, (1 - $post->status)]))
