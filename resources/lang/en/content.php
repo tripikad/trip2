@@ -57,7 +57,7 @@ return [
 
     'show.isnew' => 'Uus',
     'show.newcomments' => ':count uut kommentaari',
-    
+
     // Content types
 
     // News

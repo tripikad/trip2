@@ -65,14 +65,12 @@ class V2ForumController extends Controller
         $user = auth()->user();
 
         // Clear the unread cache
-        
+
         if ($user) {
-            
             $key = 'new_'.$forum->id.'_'.$user->id;
             Cache::forget($key);
-        
         }
-        
+
         return view('v2.layouts.2col')
 
             ->with('header', region('HeaderLight', trans('content.forum.index.title')))
