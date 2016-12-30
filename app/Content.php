@@ -65,13 +65,12 @@ class Content extends Model
 
     public function scopeGetLatestPagedItems(
         $query,
-        $type, 
+        $type,
         $take = 24,
         $destination = false,
         $topic = false,
         $order = 'created_at'
-    )
-    {
+    ) {
         return $query
             ->whereType($type)
             ->whereStatus(1)
