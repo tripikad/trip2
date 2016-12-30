@@ -66,6 +66,9 @@ return [
 
     'update.info' => ':title on uuendatud.',
 
+    'show.isnew' => 'Uus',
+    'show.newcomments' => ':count uus kommentaar|:count uut kommentaari',
+
     // Content types
 
     // News
@@ -226,8 +229,6 @@ return [
     'forum.edit.field.topics.help' => '',
 
     'forum.no.results' => 'Hetkel pole ühtegi foorumi postitust.',
-
-    'forum.is.new' => 'Uus',
 
     // Expat
 

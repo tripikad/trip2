@@ -8,9 +8,11 @@ class ForumRow
     {
         $user = request()->user();
         $commentCount = $forum->vars()->commentCount;
+        $unreadCommentCount = $forum->vars()->unreadCommentCount;
+        $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
         return component('ForumRow')
-            ->with('route', route('v2.forum.show', [$forum->slug]).($forum->NewCommentId ? '#comment-'.$forum->NewCommentId : ''))
+            ->with('route', route('v2.forum.show', [$forum->slug]))
             ->with('user', component('UserImage')
                 ->with('route', route('v2.user.show', [$forum->user]))
                 ->with('image', $forum->user->imagePreset('small_square'))
@@ -25,16 +27,17 @@ class ForumRow
                             ->is('red')
                             ->with('title', trans('content.show.isnew'))
                     )
-                    ->pushWhen($user && $user->hasRole('admin') && $forum->vars()->firstUnreadCommentId,
+                    ->pushWhen($user && $user->hasRole('admin') && $firstUnreadCommentId,
                         component('Tag')
                             ->is('red')
-                            ->with('title', trans(
+                            ->with('title', trans_choice(
                                 'content.show.newcomments',
-                                ['count' => $forum->vars()->unreadCommentCount]
+                                $unreadCommentCount,
+                                ['count' => $unreadCommentCount]
                             ))
                             ->with('route', route(
                                 'v2.forum.show',
-                                [$forum->slug]).'#comment-'.$forum->vars()->firstUnreadCommentId
+                                [$forum->slug]).'#comment-'.$firstUnreadCommentId
                             )
                     )
                     ->push(component('Tag')
