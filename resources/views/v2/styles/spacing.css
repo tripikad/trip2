@@ -317,6 +317,16 @@
   margin-bottom: $margin-sm ?if $mobile;
 }
 
+.margin-bottom-none-mobile-md {
+  margin-bottom: 0;
+  margin-bottom: $margin-md ?if $mobile;
+}
+
+.margin-bottom-none-mobile-lg {
+  margin-bottom: 0;
+  margin-bottom: $margin-lg ?if $mobile;
+}
+
 .margin-top-negative-md {
   margin-top: calc($spacer * -3);
 }

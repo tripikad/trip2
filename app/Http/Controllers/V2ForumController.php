@@ -31,18 +31,19 @@ class V2ForumController extends Controller
         $currentTopic = Request::get('topic');
 
         $forums = Content::getLatestPagedItems($forumType, false, $currentDestination, $currentTopic, 'updated_at');
-        $flights = Content::getLatestItems('flight', 4);
-        $travelmates = Content::getLatestItems('travelmate', 3);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
+        $flights = Content::getLatestItems('flight', 4);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
+        
         return view('v2.layouts.2col')
 
             ->with('header', region(
                 'HeaderLight',
                 trans("content.$forumType.index.title"),
-                component('BlockHorizontal')
-                    ->with('content', region('ForumLinks'))
+                component('BlockHorizontal')->with('content', region('ForumLinks'))
             ))
 
             ->with('content', collect()
@@ -70,7 +71,7 @@ class V2ForumController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(region('TravelmateBottom', $travelmates))
+                ->push(region('ForumBottom', $flights, $travelmates, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
@@ -80,10 +81,12 @@ class V2ForumController extends Controller
     public function show($slug)
     {
         $forum = Content::getItemBySlug($slug);
-        $forums = Content::getLatestItems('forum', 5);
-        $travelmates = Content::getLatestItems('travelmate', 3);
         $user = auth()->user();
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
+
+        $flights = Content::getLatestItems('flight', 4);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
 
         // Clear the unread cache
 
@@ -94,7 +97,11 @@ class V2ForumController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('HeaderLight', trans('content.forum.index.title')))
+            ->with('header', region(
+                'HeaderLight',
+                trans("content.$forum->type.index.title"),
+                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ))
 
             ->with('content', collect()
                 ->push(region('ForumPost', $forum))
@@ -105,19 +112,13 @@ class V2ForumController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->merge(region('ForumLinks'))
                 ->push(region('ForumAbout'))
-                ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->merge($forum->destinations->map(function ($destination) {
-                    return region('DestinationBar', $destination, $destination->getAncestors());
-                }))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
-                ->push(region('ForumBottom', $forums))
-                ->push(region('TravelmateBottom', $travelmates))
+                ->push(region('ForumBottom', $flights, $travelmates, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 

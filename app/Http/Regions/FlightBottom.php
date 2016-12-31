@@ -2,10 +2,10 @@
 
 namespace App\Http\Regions;
 
-class TravelmateBottom
+class FlightBottom
 {
 
-    public function render($flights, $forums, $news)
+    public function render($forums, $travelmates, $news)
     {
 
         return component('Grid3')
@@ -14,17 +14,17 @@ class TravelmateBottom
                 ->push(component('Block')
                     ->is('uppercase')
                     ->is('white')
-                    ->with('title', trans('frontpage.index.flight.title'))
-                    ->with('content', $flights->map(function ($flight) {
-                        return region('FlightRow', $flight);
+                    ->with('title', trans('frontpage.index.forum.title'))
+                    ->with('content', $forums->map(function ($forum) {
+                        return region('ForumRow', $forum);
                     }))
                 )
                 ->push(component('Block')
                     ->is('uppercase')
                     ->is('white')
-                    ->with('title', trans('frontpage.index.forum.title'))
-                    ->with('content', $forums->map(function ($forum) {
-                        return region('ForumRow', $forum);
+                    ->with('title', trans('frontpage.index.travelmate.title'))
+                    ->with('content', $travelmates->map(function ($travelmate) {
+                        return region('TravelmateCard', $travelmate);
                     }))
                 )
                 ->push(component('Block')

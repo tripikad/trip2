@@ -14,11 +14,13 @@ class V2TravelmateController extends Controller
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
-        $travelmates = Content::getLatestPagedItems('travelmate', false, $currentDestination, $currentTopic);
-        $forums = Content::getLatestItems('forum', 5);
-        $flights = Content::getLatestItems('flight', 4);
+        $travelmates = Content::getLatestPagedItems('travelmate', 24, $currentDestination, $currentTopic);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
+
+        $flights = Content::getLatestItems('flight', 3);
+        $forums = Content::getLatestItems('forum', 4);
+        $news = Content::getLatestItems('news', 1);
 
         return view('v2.layouts.2col')
 
@@ -49,10 +51,12 @@ class V2TravelmateController extends Controller
                 ))
                 ->push(region('TravelmateAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
-                ->push(region('ForumBottom', $forums))
+                ->push(region('TravelmateBottom', $flights, $forums, $news))
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
             ->with('footer', region('Footer'));
@@ -64,8 +68,10 @@ class V2TravelmateController extends Controller
         $user = auth()->user();
 
         $travelmates = Content::getLatestItems('travelmate', 3);
-        $forums = Content::getLatestItems('forum', 5);
+        
         $flights = Content::getLatestItems('flight', 3);
+        $forums = Content::getLatestItems('forum', 4);
+        $news = Content::getLatestItems('news', 1);
 
         return view('v2.layouts.2col')
 
@@ -110,10 +116,11 @@ class V2TravelmateController extends Controller
                     return region('FlightCard', $flight);
                 }))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
-                ->push(region('TravelmateBottom', $travelmates))
+                ->push(region('TravelmateBottom', $flights, $forums, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 

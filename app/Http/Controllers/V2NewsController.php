@@ -18,6 +18,10 @@ class V2NewsController extends Controller
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
+        $flights = Content::getLatestItems('flight', 3);
+        $forums = Content::getLatestItems('forum', 4);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+
         return view('v2.layouts.2col')
 
             ->with('header', region('Header', trans('content.news.index.title')))
@@ -50,6 +54,11 @@ class V2NewsController extends Controller
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
+            ->with('bottom', collect()
+                ->push(region('NewsBottom', $flights, $forums, $travelmates))
+                ->push(component('Promo')->with('promo', 'footer'))
+            )
+
             ->with('footer', region('Footer'));
     }
 
@@ -58,8 +67,13 @@ class V2NewsController extends Controller
         $new = Content::getItemBySlug($slug);
         $user = auth()->user();
 
+        $flights = Content::getLatestItems('flight', 3);
+        $forums = Content::getLatestItems('forum', 4);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+
         return view('v2.layouts.1col')
             ->with('header', region('NewsHeader', $new))
+            
             ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $new->vars()->body))
                 ->merge($new->comments->map(function ($comment) {
@@ -67,6 +81,12 @@ class V2NewsController extends Controller
                 }))
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $new))
             )
+
+            ->with('bottom', collect()
+                ->push(region('NewsBottom', $flights, $forums, $travelmates))
+                ->push(component('Promo')->with('promo', 'footer'))
+            )
+
             ->with('footer', region('Footer'));
     }
 
