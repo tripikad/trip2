@@ -16,6 +16,8 @@ $footer = $footer ?? '';
 
 @section('content')
 
+    {{-- Top --}}
+
     <div class="margin-top-negative-md">
         
         <div class="container">
@@ -24,50 +26,122 @@ $footer = $footer ?? '';
 
                 <div class="col-10">
 
-                    @foreach ($content as $content_item)
+                    @foreach ($top as $top_item)
                     
-                    <div @if (!$loop->last) class="margin-bottom-xl" @endif>
+                    <div @if (!$loop->last) class="margin-bottom-lg" @endif>
+
+                        {!! $top_item !!}
+                            
+                    </div>
+
+                    @endforeach
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {{-- Content and sidebar --}}
+
+    <div class="padding-top-lg padding-bottom-lg">
+
+        <div class="container">
+
+            <div class="row row-center">
+
+                <div class="col-7 padding-right-sm-mobile-none">
+
+                @foreach ($content as $content_item)
+                
+                    <div @if (!$loop->last) class="margin-bottom-lg" @endif>
 
                         {!! $content_item !!}
                             
                     </div>
-
-                    @endforeach
+                        
+                @endforeach
 
                 </div>
 
-            </div>
+                <div class="col-3 padding-left-sm-mobile-none">
 
-        </div>
+                @foreach ($sidebar as $sidebar_item)
+                
+                    <div @if (!$loop->last) class="margin-bottom-lg" @endif>
 
-        <div class="background-gray padding-top-lg padding-bottom-lg">
-
-            <div class="container">
-
-                <div class="row row-center">
-
-                    <div class="col-10">
-
-                    @foreach ($bottom as $bottom_item)
-                    
-                        <div @if (!$loop->last) class="margin-bottom-lg" @endif>
-
-                            {!! $bottom_item !!}
-                                
-                        </div>
+                        {!! $sidebar_item !!}
                             
-                    @endforeach
-
                     </div>
+                        
+                @endforeach
 
                 </div>
 
             </div>
 
         </div>
-    
+
     </div>
-    
+
+    {{-- Bottom 1 --}}
+
+    <div class="padding-top-lg padding-bottom-lg">
+
+        <div class="container">
+
+            <div class="row row-center">
+
+                <div class="col-10">
+
+                @foreach ($bottom1 as $bottom_item)
+                
+                    <div @if (!$loop->last) class="margin-bottom-lg" @endif>
+
+                        {!! $bottom_item !!}
+                            
+                    </div>
+                        
+                @endforeach
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {{-- Bottom 2 --}}
+
+    <div class="background-gray padding-top-lg padding-bottom-lg">
+
+        <div class="container">
+
+            <div class="row row-center">
+
+                <div class="col-10">
+
+                @foreach ($bottom2 as $bottom_item)
+                
+                    <div @if (!$loop->last) class="margin-bottom-lg" @endif>
+
+                        {!! $bottom_item !!}
+                            
+                    </div>
+                        
+                @endforeach
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+        
 @endsection
 
 @section('footer', $footer)

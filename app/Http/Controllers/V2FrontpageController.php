@@ -31,14 +31,39 @@ class V2FrontpageController extends Controller
                     ->with('title', trans('frontpage.index.search.title'))
             ))
 
-            ->with('content', collect()
+            ->with('top', collect()
                 ->push(region('FrontpageFlight', $flights->take(3)))
                 ->pushWhen(! $user, region('FrontpageAbout'))
-                ->push(region('FrontpageForum', $forums))
+            )
+
+            ->with('content', collect()
+                ->merge($forums->take($forums->count() / 2)->map(function ($forum) {
+                    return region('ForumRow', $forum);
+                }))
+                ->push(component('Promo')->with('promo', 'body'))
+                ->merge($forums->slice($forums->count() / 2)->map(function ($forum) {
+                    return region('ForumRow', $forum);
+                }))
+            )
+                    
+            ->with('sidebar', collect()
+                ->push(component('Block')
+                    ->is('white')
+                    ->is('uppercase')
+                    ->with('title', trans('frontpage.index.forum.title'))
+                    ->with('content', region('ForumLinks'))
+                )
+                ->push(region('ForumAbout', 'white'))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->push(component('AffiliateSearch'))
+            )
+
+            ->with('bottom1', collect()
                 ->push(region('FrontpageNews', $news))
             )
 
-            ->with('bottom', collect()
+            ->with('bottom2', collect()
                 ->push(region('FrontpageFlightBlog', $flights->slice(3), $blogs))
                 ->push(component('Block')
                     ->is('white')
@@ -46,9 +71,17 @@ class V2FrontpageController extends Controller
                     ->with('title', trans('frontpage.index.photo.title'))
                     ->with('content', collect(region('Gallery', $photos)))
                 )
-                ->push(component('Grid3')->with('items', $travelmates->map(function ($travelmate) {
-                    return region('TravelmateCard', $travelmate);
-                })))
+                ->push(component('Block')
+                    ->is('white')
+                    ->is('uppercase')
+                    ->with('title', trans('frontpage.index.travelmate.title'))
+                    ->with('content', [])
+                )
+                ->push(component('Grid3')
+                    ->with('items', $travelmates->map(function ($travelmate) {
+                        return region('TravelmateCard', $travelmate);
+                    }))
+                )
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
