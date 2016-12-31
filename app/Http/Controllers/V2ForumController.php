@@ -10,28 +10,23 @@ use App\Destination;
 
 class V2ForumController extends Controller
 {
-    
-    public function forumIndex() {
-
+    public function forumIndex()
+    {
         return $this->index('forum');
-    
     }
 
-    public function buysellIndex() {
-
+    public function buysellIndex()
+    {
         return $this->index('buysell');
-    
     }
 
-    public function expatIndex() {
-
+    public function expatIndex()
+    {
         return $this->index('expat');
-    
     }
 
     private function index($forumType)
     {
-
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
