@@ -35,7 +35,7 @@ $footer = $footer ?? '';
 
                     @foreach ($top as $top_item)
                     
-                    <div @if (!$loop->last) class="margin-bottom-lg" @endif>
+                    <div @if (!$loop->last) class="margin-bottom-md-mobile-sm" @endif>
 
                         {!! $top_item !!}
                             
@@ -63,7 +63,7 @@ $footer = $footer ?? '';
 
                 @foreach ($content as $content_item)
                 
-                    <div @if (!$loop->last) class="margin-bottom-lg" @endif>
+                    <div @if (!$loop->last) class="margin-bottom-md" @endif>
 
                         {!! $content_item !!}
                             
@@ -77,7 +77,7 @@ $footer = $footer ?? '';
 
                 @foreach ($sidebar as $sidebar_item)
                 
-                    <div @if (!$loop->last) class="margin-bottom-lg" @endif>
+                    <div @if (!$loop->last) class="margin-bottom-md" @endif>
 
                         {!! $sidebar_item !!}
                             

@@ -3,6 +3,7 @@
 .Block {
     background: $gray-light;
     padding: $padding-md;
+    padding: $padding-sm ?if $mobile;
 }
 
 .Block--white {
