@@ -21,7 +21,7 @@ class V2FlightController extends Controller
             $currentDestination,
             $currentTopic
         );
-        $forums = Content::getLatestItems('forum', 4);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
@@ -76,7 +76,7 @@ class V2FlightController extends Controller
     {
         $flight = Content::getItemBySlug($slug);
         $flights = Content::getLatestItems('flight', 4);
-        $forums = Content::getLatestItems('forum', 4);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
