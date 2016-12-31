@@ -19,7 +19,7 @@ class V2NewsController extends Controller
         $topics = Topic::select('id', 'name')->get();
 
         $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestItems('forum', 4);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
 
         return view('v2.layouts.2col')
@@ -68,7 +68,7 @@ class V2NewsController extends Controller
         $user = auth()->user();
 
         $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestItems('forum', 4);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
 
         return view('v2.layouts.1col')

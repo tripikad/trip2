@@ -34,7 +34,7 @@ class V2ForumController extends Controller
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
-        $flights = Content::getLatestItems('flight', 4);
+        $flights = Content::getLatestItems('flight', 3);
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
@@ -84,7 +84,7 @@ class V2ForumController extends Controller
         $user = auth()->user();
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
-        $flights = Content::getLatestItems('flight', 4);
+        $flights = Content::getLatestItems('flight', 3);
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 

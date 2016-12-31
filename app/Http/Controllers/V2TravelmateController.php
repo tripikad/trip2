@@ -19,7 +19,7 @@ class V2TravelmateController extends Controller
         $topics = Topic::select('id', 'name')->get();
 
         $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestItems('forum', 4);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $news = Content::getLatestItems('news', 1);
 
         return view('v2.layouts.2col')
@@ -70,7 +70,7 @@ class V2TravelmateController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
 
         $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestItems('forum', 4);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $news = Content::getLatestItems('news', 1);
 
         return view('v2.layouts.2col')
@@ -109,12 +109,6 @@ class V2TravelmateController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('UserCard', $travelmate->user))
-                ->merge($travelmate->destinations->map(function ($destination) {
-                    return region('DestinationBar', $destination, $destination->getAncestors());
-                }))
-                ->merge($flights->map(function ($flight) {
-                    return region('FlightCard', $flight);
-                }))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
