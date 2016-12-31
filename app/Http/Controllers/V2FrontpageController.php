@@ -46,7 +46,7 @@ class V2FrontpageController extends Controller
                     ->with('title', trans('frontpage.index.photo.title'))
                     ->with('content', collect(region('Gallery', $photos)))
                 )
-                ->push(component('Grid3')->with('items', $travelmates->map(function($travelmate) {
+                ->push(component('Grid3')->with('items', $travelmates->map(function ($travelmate) {
                     return region('TravelmateCard', $travelmate);
                 })))
                 ->push(component('Promo')->with('promo', 'footer'))
