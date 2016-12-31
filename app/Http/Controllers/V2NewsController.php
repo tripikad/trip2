@@ -73,7 +73,7 @@ class V2NewsController extends Controller
 
         return view('v2.layouts.1col')
             ->with('header', region('NewsHeader', $new))
-            
+
             ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $new->vars()->body))
                 ->merge($new->comments->map(function ($comment) {

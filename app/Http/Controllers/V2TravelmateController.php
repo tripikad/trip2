@@ -68,7 +68,7 @@ class V2TravelmateController extends Controller
         $user = auth()->user();
 
         $travelmates = Content::getLatestItems('travelmate', 3);
-        
+
         $flights = Content::getLatestItems('flight', 3);
         $forums = Content::getLatestItems('forum', 4);
         $news = Content::getLatestItems('news', 1);
