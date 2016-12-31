@@ -6,9 +6,8 @@
 
     .ForumRow__left {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         padding-right: $padding-sm;
-        display: none ?if $mobile;
     }
 
     .ForumRow__right {
@@ -20,4 +19,5 @@
         color: $gray-darkest;
         font: $font-heading-md;
         margin-bottom: $margin-xs;
+        line-height: $line-height-md;
     }

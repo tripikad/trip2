@@ -2,9 +2,9 @@
 
 namespace App\Http\Regions;
 
-class ForumBottom
+class FlightBottom
 {
-    public function render($flights, $travelmates, $news)
+    public function render($forums, $travelmates, $news)
     {
         return component('Grid3')
             ->with('gutter', true)
@@ -12,9 +12,9 @@ class ForumBottom
                 ->push(component('Block')
                     ->is('uppercase')
                     ->is('white')
-                    ->with('title', trans('frontpage.index.flight.title'))
-                    ->with('content', $flights->map(function ($flight) {
-                        return region('FlightRow', $flight);
+                    ->with('title', trans('frontpage.index.forum.title'))
+                    ->with('content', $forums->map(function ($forum) {
+                        return region('ForumRow', $forum);
                     }))
                 )
                 ->push(component('Block')

@@ -15,10 +15,6 @@ class NewsCard
                     ->push(component('MetaLink')
                         ->with('title', $post->vars()->created_at)
                     )
-                    ->push(component('MetaLink')
-                        ->with('title', 'Edit')
-                        ->with('route', route('v2.news.edit', [$post]))
-                    )
                 )
             );
     }

@@ -6,7 +6,7 @@
         height: 0;
         max-width: 100%;
         overflow: hidden;
-        padding-bottom: 58%;
+        padding-bottom: 50%;
         position: relative;
         margin-bottom: $margin-sm;
     }

@@ -22,10 +22,6 @@ class FlightRow
                         ->with('title', trans('comment.action.edit.title'))
                         ->with('route', route('content.edit', [$flight->type, $flight]))
                     )
-                    ->push(component('MetaLink')
-                        ->with('title', trans('comment.action.edit.title').' v2')
-                        ->with('route', route('v2.flight.edit', [$flight]))
-                    )
                     ->merge($flight->destinations->map(function ($tag) {
                         return component('Tag')->is('orange')->with('title', $tag->name);
                     }))

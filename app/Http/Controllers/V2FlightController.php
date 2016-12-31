@@ -21,10 +21,12 @@ class V2FlightController extends Controller
             $currentDestination,
             $currentTopic
         );
-        $forums = Content::getLatestItems('forum', 5);
+        $forums = Content::getLatestItems('forum', 4);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
+
         $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
 
         return view('v2.layouts.2col')
 
@@ -63,8 +65,7 @@ class V2FlightController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(region('ForumBottom', $forums))
-                ->push(region('TravelmateBottom', $travelmates))
+                ->push(region('FlightBottom', $forums, $travelmates, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
@@ -75,8 +76,10 @@ class V2FlightController extends Controller
     {
         $flight = Content::getItemBySlug($slug);
         $flights = Content::getLatestItems('flight', 4);
-        $forums = Content::getLatestItems('forum', 5);
+        $forums = Content::getLatestItems('forum', 4);
         $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
+
         $user = auth()->user();
 
         return view('v2.layouts.2col')
@@ -89,10 +92,6 @@ class V2FlightController extends Controller
                     ->with('items', collect()
                         ->push(component('MetaLink')
                             ->with('title', $flight->vars()->created_at)
-                        )
-                        ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
-                            ->with('title', trans('content.action.edit.title'))
-                            ->with('route', route('v2.flight.edit', [$flight]))
                         )
                     )
                 )
@@ -120,8 +119,7 @@ class V2FlightController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(region('ForumBottom', $forums))
-                ->push(region('TravelmateBottom', $travelmates))
+                ->push(region('FlightBottom', $forums, $travelmates, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 

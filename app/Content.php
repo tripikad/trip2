@@ -66,7 +66,7 @@ class Content extends Model
     public function scopeGetLatestPagedItems(
         $query,
         $type,
-        $take = 24,
+        $take = 36,
         $destination = false,
         $topic = false,
         $order = 'created_at'

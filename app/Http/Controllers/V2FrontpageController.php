@@ -10,7 +10,7 @@ class V2FrontpageController extends Controller
     {
         $user = auth()->user();
 
-        $flights = Content::getLatestItems('flight', 8);
+        $flights = Content::getLatestItems('flight', 9);
         $forums = Content::getLatestItems('forum', 16, 'updated_at');
         $news = Content::getLatestItems('news', 6);
         $blogs = Content::getLatestItems('blog', 3);
@@ -46,7 +46,9 @@ class V2FrontpageController extends Controller
                     ->with('title', trans('frontpage.index.photo.title'))
                     ->with('content', collect(region('Gallery', $photos)))
                 )
-                ->push(region('TravelmateBottom', $travelmates))
+                ->push(component('Grid3')->with('items', $travelmates->map(function ($travelmate) {
+                    return region('TravelmateCard', $travelmate);
+                })))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 

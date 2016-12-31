@@ -52,7 +52,7 @@ $footer = $footer ?? '';
 
     @if ($bottom->count())
 
-    <div class="padding-top-md padding-bottom-md background-gray">
+    <div class="padding-top-lg padding-bottom-lg background-gray">
 
         <div class="container">
 

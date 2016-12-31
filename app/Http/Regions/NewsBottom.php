@@ -2,9 +2,9 @@
 
 namespace App\Http\Regions;
 
-class ForumBottom
+class NewsBottom
 {
-    public function render($flights, $travelmates, $news)
+    public function render($flights, $forums, $travelmates)
     {
         return component('Grid3')
             ->with('gutter', true)
@@ -20,17 +20,17 @@ class ForumBottom
                 ->push(component('Block')
                     ->is('uppercase')
                     ->is('white')
-                    ->with('title', trans('frontpage.index.travelmate.title'))
-                    ->with('content', $travelmates->map(function ($travelmate) {
-                        return region('TravelmateCard', $travelmate);
+                    ->with('title', trans('frontpage.index.forum.title'))
+                    ->with('content', $forums->map(function ($forum) {
+                        return region('ForumRow', $forum);
                     }))
                 )
                 ->push(component('Block')
                     ->is('uppercase')
                     ->is('white')
-                    ->with('title', trans('frontpage.index.news.title'))
-                    ->with('content', $news->map(function ($new) {
-                        return region('NewsCard', $new);
+                    ->with('title', trans('frontpage.index.travelmate.title'))
+                    ->with('content', $travelmates->map(function ($travelmate) {
+                        return region('TravelmateCard', $travelmate);
                     }))
                 )
             );
