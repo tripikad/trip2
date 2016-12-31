@@ -14,7 +14,7 @@ return [
     'action.latest.comment' => 'Mine uusima kommentaari juurde',
 
     'create.title' => 'Lisa kommentaar',
-    'create.field.body.title' => 'Kommentaar',
+    'create.field.body.title' => 'Lisa kommentaar',
     'create.submit.title' => 'Lisa kommentaar',
 
     'edit.title' => 'Muuda kommentaari',
