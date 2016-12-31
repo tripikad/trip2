@@ -39,7 +39,7 @@
         font: $font-heading-sm;
         margin-right: $padding-md;
         padding: $padding-xs;
-        line-height: $line-height-xl;
+        line-height: $line-height-xxl;
     }
 
     .Footer__socialIcon {

@@ -3,6 +3,7 @@
 .HeaderLight {
     padding-top: $padding-md;
     padding-bottom: $padding-lg;
+    padding-bottom: $padding-xs ?if $mobile;
     background: $gray-light;
     position: relative;
     overflow: hidden;
@@ -11,18 +12,17 @@
 
     .HeaderLight__content {
         height: calc($spacer * 12);
-        height: calc($spacer * 13) ?if $mobile;
+        height: calc($spacer * 16) ?if $mobile;
         display: flex;
         justify-content: center;
         justify-content: flex-start ?if $mobile;
         align-items: flex-end;
-        align-items: flex-end ?if $mobile;
     }
 
     .HeaderLight__title {
         color: $gray-darkest;
         font: $font-heading-xxl;
-        font: $font-heading-xl ?if $tablet;
+        font: $font-heading-xl ?if $mobile;
         text-align: center;
     }
 

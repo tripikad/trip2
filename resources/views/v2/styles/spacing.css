@@ -66,6 +66,10 @@
   padding-left: $padding-lg;
 }
 
+.padding-top-xl {
+  padding-top: $padding-xl;
+}
+
 /* Responsive paddings */
 
 .padding-top-sm-mobile-none {
@@ -126,6 +130,16 @@
 .padding-left-lg-mobile-none {
   padding-left: $padding-lg;
   padding-left: 0 ?if $mobile;
+}
+
+.padding-top-xl-mobile-md {
+  padding-top: $padding-xl;
+  padding-top: $padding-md ?if $mobile;
+}
+
+.padding-top-none-mobile-md {
+  padding-top: 0;
+  padding-top: $padding-md ?if $mobile;
 }
 
 /* Margins */
