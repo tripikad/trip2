@@ -16,9 +16,9 @@ $footer = $footer ?? '';
 
     <div class="container">
 
-        <div class="row-between padding-top-lg padding-bottom-md">
+        <div class="row-between padding-top-xl-mobile-md padding-bottom-md">
 
-            <div class="col-9 padding-right-sm-mobile-none">
+            <div class="col-9 padding-right-md-mobile-none">
 
                 @foreach ($content as $content_item)
                 
@@ -32,7 +32,7 @@ $footer = $footer ?? '';
 
             </div>
 
-            <div class="col-3 padding-left-sm-mobile-none">
+            <div class="col-3 padding-left-md-mobile-none padding-top-none-mobile-md">
 
                 @foreach ($sidebar as $sidebar_item)
                 

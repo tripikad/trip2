@@ -53,6 +53,7 @@ $line-height-sm: 120%;
 $line-height-md: 140%;
 $line-height-lg: 160%;
 $line-height-xl: 200%;
+$line-height-xxl: 220%;
 $font-text-xs: $font-weight-normal $font-size-xs / $line-height-xs $font-family, sans-serif;
 $font-text-sm: $font-weight-normal $font-size-sm / $line-height-xs $font-family, sans-serif;
 $font-text-md: $font-weight-normal $font-size-md / $line-height-xs $font-family, sans-serif;

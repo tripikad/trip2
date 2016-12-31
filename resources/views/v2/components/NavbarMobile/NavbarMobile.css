@@ -2,7 +2,7 @@
 
 .NavbarMobile {
     display: block;
-    z-index: 10000;
+    z-index: 100000;
 }
 
     .NavbarMobile__menuIcon {

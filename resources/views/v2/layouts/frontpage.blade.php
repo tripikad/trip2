@@ -66,7 +66,7 @@ $footer = $footer ?? '';
 
                 </div>
 
-                <div class="col-3 padding-left-sm-mobile-none">
+                <div class="col-3 padding-top-none-mobile-md padding-left-sm-mobile-none">
 
                 @foreach ($sidebar as $sidebar_item)
                 
