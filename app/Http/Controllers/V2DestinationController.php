@@ -42,6 +42,12 @@ class V2DestinationController extends Controller
                     })
                     )
                 )
+                ->push(component('Grid3')
+                    ->with('gutter', true)
+                    ->with('items', $travelmates->map(function ($travelmate) {
+                        return region('TravelmateCard', $travelmate);
+                    }))
+                )
             )
 
             ->with('sidebar', collect()
@@ -53,7 +59,6 @@ class V2DestinationController extends Controller
             )
 
             ->with('bottom', collect()
-                ->pushWhen($travelmates->count() > 0, region('TravelmateBottom', $travelmates))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
