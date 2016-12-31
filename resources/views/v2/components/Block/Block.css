@@ -33,3 +33,9 @@
 .Block--dark .Block__title {
     color: $gray-darkest;
 }
+
+.Block--border {
+    border: $border-gray-md;
+    border-radius: $border-radius-md;
+    background: none;
+}

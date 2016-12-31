@@ -7,6 +7,7 @@ class CommentCreateForm
     public function render($content)
     {
         return component('Block')
+            ->is('border')
             ->with('title', trans('comment.create.title'))
             ->with('content', collect()
                 ->push(component('Form')
