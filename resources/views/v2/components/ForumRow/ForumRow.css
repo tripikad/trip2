@@ -6,7 +6,6 @@
 
     .ForumRow__left {
         display: flex;
-        display: none ?if $mobile;
         align-items: flex-start;
         padding-right: $padding-sm;
     }

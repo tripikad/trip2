@@ -9,7 +9,7 @@
             track-by="name"
             label="name"
             :placeholder="placeholder"
-            tag-placeholder="Yo"
+            :tag-placeholder="false"
         >
         </component>
 
