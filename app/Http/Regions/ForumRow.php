@@ -17,7 +17,7 @@ class ForumRow
                 ->with('route', route('v2.user.show', [$forum->user]))
                 ->with('image', $forum->user->imagePreset('small_square'))
                 ->with('rank', $forum->user->vars()->rank)
-                ->with('size', 52)
+                ->with('size', 60)
                 ->with('border', 3)
             )
             ->with('title', $forum->title)

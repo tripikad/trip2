@@ -28,11 +28,15 @@ $background = $background ?? '';
 
                 </div>
 
+                @if ($meta)
+
                 <div class="HeaderLight__meta">
 
                 {!! $meta !!}
 
                 </div>
+
+                @endif
 
             </div>
 

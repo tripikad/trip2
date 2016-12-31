@@ -6,7 +6,7 @@
 
     .Link__title {
         color: $blue;
-        margin-right: $margin-sm;
+        margin-right: $margin-xs;
         font: $font-text-md;
     }
 
@@ -16,4 +16,12 @@
 
 .Link--large .Link__title {
     font: $font-heading-md;
+}
+
+.Link--gray .Link__title {
+    color: $gray-darkest;
+}
+
+.Link--gray .Link__icon svg {
+    fill: $gray-darker;
 }

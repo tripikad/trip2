@@ -9,7 +9,7 @@
 }
 
     .Header__content {
-        height: calc($spacer * 10);
+        height: calc($spacer * 12);
         display: flex;
         justify-content: center;
         align-items: center;

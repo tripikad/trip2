@@ -38,7 +38,12 @@ class V2ForumController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('HeaderLight', trans("content.$forumType.index.title")))
+            ->with('header', region(
+                'HeaderLight',
+                trans("content.$forumType.index.title"),
+                component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+            ))
 
             ->with('content', collect()
                 ->merge($forums->map(function ($forum) {
@@ -59,7 +64,6 @@ class V2ForumController extends Controller
                         'v2.forum.index'
                     ))
                 ))
-                ->merge(region('ForumLinks'))
                 ->push(region('ForumAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
