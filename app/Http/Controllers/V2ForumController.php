@@ -37,7 +37,7 @@ class V2ForumController extends Controller
         $flights = Content::getLatestItems('flight', 4);
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
-        
+
         return view('v2.layouts.2col')
 
             ->with('header', region(

@@ -4,10 +4,8 @@ namespace App\Http\Regions;
 
 class TravelmateBottom
 {
-
     public function render($flights, $forums, $news)
     {
-
         return component('Grid3')
             ->with('gutter', true)
             ->with('items', collect()
@@ -36,7 +34,5 @@ class TravelmateBottom
                     }))
                 )
             );
-
     }
-
 }
