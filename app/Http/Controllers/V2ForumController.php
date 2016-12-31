@@ -35,7 +35,7 @@ class V2ForumController extends Controller
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
-        $forums = Content::getLatestPagedItems($forumType, false, $currentDestination, $currentTopic);
+        $forums = Content::getLatestPagedItems($forumType, false, $currentDestination, $currentTopic, 'updated_at');
         $flights = Content::getLatestItems('flight', 4);
         $travelmates = Content::getLatestItems('travelmate', 3);
         $destinations = Destination::select('id', 'name')->get();
