@@ -63,7 +63,7 @@ class Content extends Model
         return new V2ContentVars($this);
     }
 
-    public function scopeGetLatestPagedItems($query, $type, $take = 24, $destination = false, $topic = false)
+    public function scopeGetLatestPagedItems($query, $type, $take = 36, $destination = false, $topic = false)
     {
         return $query
             ->whereType($type)

@@ -10,19 +10,40 @@ use App\Destination;
 
 class V2ForumController extends Controller
 {
-    public function index()
+    
+    public function forumIndex() {
+
+        return $this->index('forum');
+    
+    }
+
+    public function buysellIndex() {
+
+        return $this->index('buysell');
+    
+    }
+
+    public function expatIndex() {
+
+        return $this->index('expat');
+    
+    }
+
+    private function index($forumType)
     {
+
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
-        $forums = Content::getLatestPagedItems('forum', false, $currentDestination, $currentTopic);
+        $forums = Content::getLatestPagedItems($forumType, false, $currentDestination, $currentTopic);
         $flights = Content::getLatestItems('flight', 4);
+        $travelmates = Content::getLatestItems('travelmate', 3);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('HeaderLight', trans('content.forum.index.title')))
+            ->with('header', region('HeaderLight', trans("content.$forumType.index.title")))
 
             ->with('content', collect()
                 ->merge($forums->map(function ($forum) {

@@ -41,10 +41,12 @@ Route::get('v2/news/{slug}', [
     'as' => 'v2.news.show',
 ]);
 
+/*
 Route::get('v2/news/{id}/edit', [
     'uses' => 'V2NewsController@edit',
     'as' => 'v2.news.edit',
 ]);
+*/
 
 // Flight
 
@@ -58,10 +60,12 @@ Route::get('v2/flight/{slug}', [
     'as' => 'v2.flight.show',
 ]);
 
+/*
 Route::get('v2/flight/{id}/edit', [
     'uses' => 'V2FlightController@edit',
     'as' => 'v2.flight.edit',
 ]);
+*/
 
 // Travelmates
 
@@ -78,8 +82,18 @@ Route::get('v2/travelmate/{slug}', [
 // Forum
 
 Route::get('v2/forum', [
-    'uses' => 'V2ForumController@index',
+    'uses' => 'V2ForumController@forumIndex',
     'as' => 'v2.forum.index',
+]);
+
+Route::get('v2/buysell', [
+    'uses' => 'V2ForumController@buysellIndex',
+    'as' => 'v2.buysell.index',
+]);
+
+Route::get('v2/expat', [
+    'uses' => 'V2ForumController@expatIndex',
+    'as' => 'v2.expat.index',
 ]);
 
 Route::get('v2/forum/{slug}', [
