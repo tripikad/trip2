@@ -40,4 +40,13 @@ class V2UserVars
     {
         return $this->user->created_at->diffForHumans();
     }
+
+    public function imagePreset($preset = 'small_square')
+    {
+        if ($image = $this->user->images->first()) {
+            return $image->preset($preset);
+        }
+
+        return '/v2/svg/picture_none.svg';
+    }
 }

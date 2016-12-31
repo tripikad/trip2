@@ -23,7 +23,7 @@
 }
 
 .UserImage__arcReminder svg {
-    stroke: $gray;
+    stroke: $cyan-light;
 }
 
 .UserImage--dark .UserImage__arcRank svg {

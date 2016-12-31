@@ -8,6 +8,8 @@
             :options="currentOptions"
             track-by="name"
             label="name"
+            :placeholder="placeholder"
+            tag-placeholder="Yo"
         >
         </component>
 
@@ -36,7 +38,9 @@
             options: { default: '' },
             placeholder: { default: '' },
             helper: { default: '' },
-            value: { default: '' }
+            value: { default: '' },
+            placeholder: { default: 'Select yo' },
+            tagplaceholder: { default: 'Yo'}
         },
 
         data() {
