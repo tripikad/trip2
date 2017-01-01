@@ -22,7 +22,7 @@ class V2TravelmateController extends Controller
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $news = Content::getLatestItems('news', 1);
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region('Header', trans('content.travelmate.index.title')))
 
@@ -59,7 +59,9 @@ class V2TravelmateController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
     public function show($slug)

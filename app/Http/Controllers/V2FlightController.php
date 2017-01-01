@@ -28,7 +28,7 @@ class V2FlightController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region('Header', trans('content.flight.index.title')))
 
@@ -69,7 +69,9 @@ class V2FlightController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
     public function show($slug)
@@ -82,7 +84,7 @@ class V2FlightController extends Controller
 
         $user = auth()->user();
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region('Header', trans('content.flight.index.title')))
 
@@ -123,18 +125,9 @@ class V2FlightController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
-    public function edit($id)
-    {
-        $post = Content::whereType('flight')
-           ->whereStatus(1)
-           ->findOrFail($id);
-
-        return view('v2.layouts.fullpage')
-            ->with('content', collect()
-                ->push(component('Editor')->with('post', $post))
-            );
-    }
 }

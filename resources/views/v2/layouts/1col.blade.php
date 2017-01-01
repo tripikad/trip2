@@ -4,8 +4,8 @@ $title = $title ?? '';
 $head_description = $head_description ?? '';
 $head_image = $head_image ?? '';
 $header = $header ?? '';
-$content = $content ?? collect();
-$bottom = $bottom ?? collect();
+$content = $content ? collect($content) : collect();
+$bottom = $bottom ? collect($bottom) : collect();
 $footer = $footer ?? '';
 
 @endphp

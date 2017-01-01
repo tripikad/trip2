@@ -41,12 +41,6 @@ Route::get('v2/news/{slug}', [
     'as' => 'v2.news.show',
 ]);
 
-/*
-Route::get('v2/news/{id}/edit', [
-    'uses' => 'V2NewsController@edit',
-    'as' => 'v2.news.edit',
-]);
-*/
 
 // Flight
 
@@ -59,13 +53,6 @@ Route::get('v2/flight/{slug}', [
     'uses' => 'V2FlightController@show',
     'as' => 'v2.flight.show',
 ]);
-
-/*
-Route::get('v2/flight/{id}/edit', [
-    'uses' => 'V2FlightController@edit',
-    'as' => 'v2.flight.edit',
-]);
-*/
 
 // Travelmates
 

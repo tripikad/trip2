@@ -13,12 +13,12 @@
 
     .NewsHeader__title {
         color: $white;
-        font: $font-heading-lg ?if $mobile;
         font: $font-heading-xl;
+        font: $font-heading-lg ?if $mobile;
+        line-height: $line-height-md;
         line-height: $line-height-lg ?if $mobile;
-        line-height: $line-height-lg;
         margin-bottom: $margin-sm;
-        margin-right: $margin-xxxl;
+        margin-right: calc($spacer * 25);
         margin-right: 0 ?if $mobile;
         text-shadow: $text-shadow;
     }

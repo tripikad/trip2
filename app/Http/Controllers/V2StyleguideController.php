@@ -13,7 +13,7 @@ class V2StyleguideController extends Controller
     {
         session()->keep('info');
 
-        return view('v2.layouts.1col')
+        return layout('1col')
 
             ->with('content', collect()
 
@@ -42,7 +42,9 @@ class V2StyleguideController extends Controller
                     ->with('route', route('v2.static.index'))
                 )
 
-            );
+            )
+
+            ->render();
     }
 
     public function form()

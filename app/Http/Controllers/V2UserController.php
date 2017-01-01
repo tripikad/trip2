@@ -23,7 +23,7 @@ class V2UserController extends Controller
             ->take(10)
             ->get();
 
-        return view('v2.layouts.1col')
+        return layout('1col')
 
             ->with('header', region('UserHeader', $user))
 
@@ -34,6 +34,8 @@ class V2UserController extends Controller
             })
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 }

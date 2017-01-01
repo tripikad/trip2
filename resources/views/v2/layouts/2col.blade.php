@@ -4,9 +4,9 @@ $title = $title ?? '';
 $head_description = $head_description ?? '';
 $head_image = $head_image ?? '';
 $header = $header ?? '';
-$content = $content ?? collect();
-$sidebar = $sidebar ?? collect();
-$bottom = $bottom ?? collect();
+$content = $content ? collect($content) : collect();
+$sidebar = $sidebar ? collect($sidebar) : collect();
+$bottom = $bottom ? collect($bottom) : collect();
 $footer = $footer ?? '';
 
 @endphp

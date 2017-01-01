@@ -22,7 +22,7 @@ class V2NewsController extends Controller
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region('Header', trans('content.news.index.title')))
 
@@ -59,7 +59,9 @@ class V2NewsController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
     public function show($slug)
@@ -71,7 +73,8 @@ class V2NewsController extends Controller
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
 
-        return view('v2.layouts.1col')
+        return layout('1col')
+
             ->with('header', region('NewsHeader', $new))
 
             ->with('content', collect()
@@ -87,16 +90,9 @@ class V2NewsController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
-    public function edit($id)
-    {
-        $new = Content::getItemById($id);
-
-        return view('v2.layouts.fullpage')
-            ->with('content', collect()
-                ->push(component('Editor')->with('item', $new))
-            );
-    }
 }

@@ -5,8 +5,10 @@ $head_description = $head_description ?? '';
 $head_image = $head_image ?? '';
 $promobar = $promobar ?? '';
 $header = $header ?? '';
-$content = $content ?? collect();
-$bottom = $bottom ?? collect();
+$content = $content ? collect($content) : collect();
+$sidebar = $sidebar ? collect($sidebar) : collect();
+$bottom1 = $bottom1 ? collect($bottom1) : collect();
+$bottom2 = $bottom2 ? collect($bottom2) : collect();
 $footer = $footer ?? '';
 
 @endphp

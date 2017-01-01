@@ -38,7 +38,7 @@ class V2ForumController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region(
                 'HeaderLight',
@@ -75,7 +75,9 @@ class V2ForumController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('FooterLight'));
+            ->with('footer', region('FooterLight'))
+
+            ->render();
     }
 
     public function show($slug)
@@ -95,7 +97,7 @@ class V2ForumController extends Controller
             Cache::forget($key);
         }
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region(
                 'HeaderLight',
@@ -122,6 +124,8 @@ class V2ForumController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('FooterLight'));
+            ->with('footer', region('FooterLight'))
+
+            ->render();
     }
 }
