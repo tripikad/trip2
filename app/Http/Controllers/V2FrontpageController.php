@@ -45,7 +45,7 @@ class V2FrontpageController extends Controller
                     return region('ForumRow', $forum);
                 }))
             )
-                    
+
             ->with('sidebar', collect()
                 ->push(component('Block')
                     ->is('white')

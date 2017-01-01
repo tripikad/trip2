@@ -41,7 +41,6 @@ Route::get('v2/news/{slug}', [
     'as' => 'v2.news.show',
 ]);
 
-
 // Flight
 
 Route::get('v2/flight', [

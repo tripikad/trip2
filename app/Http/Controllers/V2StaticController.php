@@ -40,6 +40,5 @@ class V2StaticController extends Controller
             ->with('footer', region('FooterLight'))
 
             ->render();
-            
     }
 }
