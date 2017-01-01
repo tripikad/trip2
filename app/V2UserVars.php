@@ -3,7 +3,6 @@
 namespace App;
 
 use Exception;
-use App\Destination;
 
 class V2UserVars
 {
@@ -74,13 +73,13 @@ class V2UserVars
         return $this->user->destinationHaveBeen()->count();
     }
 
-    public function destinationCountPercentage() {
-        
+    public function destinationCountPercentage()
+    {
         $destinationsCount = Destination::count();
 
         if ($this->destinationCount() > 0 && $destinationsCount > 0) {
             return round(($this->user->destinationHaveBeen()->count() * 100) / $destinationsCount, 1);
-        } 
+        }
 
         return 0;
     }

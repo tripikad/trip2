@@ -27,7 +27,7 @@ class V2InternalController extends Controller
 
             ->with('sidebar', collect()
                 ->push(component('Button')
-                    ->with('title', trans("content.internal.create.title"))
+                    ->with('title', trans('content.internal.create.title'))
                     ->with('route', route('content.create', ['internal']))
                 )
             )
