@@ -7,7 +7,6 @@ use App\Content;
 
 class V2AdminController extends Controller
 {
-
     public function index()
     {
         $forums = Content::getLatestPagedItems('internal', false, false, false, 'updated_at');
@@ -16,7 +15,7 @@ class V2AdminController extends Controller
 
             ->with('header', region(
                 'HeaderLight',
-                trans("content.internal.index.title")
+                trans('content.internal.index.title')
             ))
 
             ->with('content', collect()
@@ -48,7 +47,7 @@ class V2AdminController extends Controller
 
             ->with('header', region(
                 'HeaderLight',
-                trans("content.internal.index.title")
+                trans('content.internal.index.title')
             ))
 
             ->with('content', collect()
