@@ -16,21 +16,21 @@ class Layout
     }
 
     public function with($key, $value)
-    {   
+    {
         $this->with->put($key, $value);
 
         return $this;
     }
 
     public function cached($condition)
-    {   
+    {
         $this->cached = $condition;
 
         return $this;
     }
 
     public function render()
-    {  
+    {
         $response = response()->view("v2.layouts.$this->layout", $this->with);
 
         return $this->cached
@@ -40,5 +40,4 @@ class Layout
             )
             : $response;
     }
-
 }

@@ -94,5 +94,4 @@ class V2NewsController extends Controller
 
             ->render();
     }
-
 }
