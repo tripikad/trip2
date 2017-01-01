@@ -31,7 +31,7 @@ class V2UserController extends Controller
                 return component('UserCommentRow')
                         ->with('forum', region('ForumRow', $comment->content))
                         ->with('comment', region('Comment', $comment));
-            })
+                })
             )
 
             ->with('footer', region('Footer'))
