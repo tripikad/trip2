@@ -49,3 +49,7 @@
         color: $white;
         margin-bottom: $margin-md;
     }
+
+    .UserHeader__actionsByUser {
+        margin-top: $margin-md;
+    }

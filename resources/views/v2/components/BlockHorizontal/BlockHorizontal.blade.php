@@ -1,6 +1,6 @@
 @php
 
-$content = collect($content) ?? collect();
+$content = $content ?? collect();
 
 @endphp
 
@@ -8,11 +8,15 @@ $content = collect($content) ?? collect();
 
     @foreach ($content as $content_item)
 
+        @if ($content_item)
+
         <div class="BlockHorizontal__item">
 
         {!! $content_item !!}
         
         </div>
+
+        @endif
 
     @endforeach
 
