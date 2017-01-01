@@ -103,13 +103,13 @@ Route::get('v2/static/{id}', [
 
 Route::get('v2/internal', [
     'middleware' => 'role:admin',
-    'uses' => 'V2AdminController@index',
+    'uses' => 'V2InternalController@index',
     'as' => 'v2.internal.index',
 ]);
 
 Route::get('v2/internal/{id}', [
     'middleware' => 'role:admin',
-    'uses' => 'V2AdminController@show',
+    'uses' => 'V2InternalController@show',
     'as' => 'v2.internal.show',
 ]);
 

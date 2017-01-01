@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Cache;
 use App\Content;
 
-class V2AdminController extends Controller
+class V2InternalController extends Controller
 {
     public function index()
     {
@@ -23,6 +23,13 @@ class V2AdminController extends Controller
                     return region('ForumRow', $forum, route('v2.internal.show', [$forum]));
                 }))
                 ->push(region('Paginator', $forums))
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Button')
+                    ->with('title', trans("content.internal.create.title"))
+                    ->with('route', route('content.create', ['internal']))
+                )
             )
 
             ->with('footer', region('FooterLight'))

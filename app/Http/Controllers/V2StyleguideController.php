@@ -45,7 +45,7 @@ class V2StyleguideController extends Controller
                 )
                 ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                     ->with('title', 'Internal forum')
-                    ->with('route', route('v2.static.index'))
+                    ->with('route', route('v2.internal.index'))
                 )
 
             )

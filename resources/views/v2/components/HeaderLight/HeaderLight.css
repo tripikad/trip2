@@ -16,7 +16,7 @@
         display: flex;
         justify-content: center;
         justify-content: flex-start ?if $mobile;
-        align-items: flex-end;
+        align-items: center;
     }
 
     .HeaderLight__title {
