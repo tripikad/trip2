@@ -60,7 +60,7 @@ class CommentController extends Controller
         }
 
         */
-        if (in_array($comment->content->type, ['forum', 'buysell', 'expat'])) {
+        if (in_array($comment->content->type, ['forum', 'buysell', 'expat', 'internal'])) {
             DB::table('users')->select('id')->chunk(1000, function ($users) use ($comment) {
                 collect($users)->each(function ($user) use ($comment) {
 

@@ -99,6 +99,20 @@ Route::get('v2/static/{id}', [
     'as' => 'v2.static.show',
 ]);
 
+// Internal
+
+Route::get('v2/internal', [
+    'middleware' => 'role:admin',
+    'uses' => 'V2AdminController@index',
+    'as' => 'v2.internal.index',
+]);
+
+Route::get('v2/internal/{id}', [
+    'middleware' => 'role:admin',
+    'uses' => 'V2AdminController@show',
+    'as' => 'v2.internal.show',
+]);
+
 // User
 
 Route::get('v2/user/{id}', [

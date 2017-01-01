@@ -4,7 +4,7 @@ namespace App\Http\Regions;
 
 class ForumRow
 {
-    public function render($forum)
+    public function render($forum, $route = '')
     {
         $user = request()->user();
         $commentCount = $forum->vars()->commentCount;
@@ -12,7 +12,7 @@ class ForumRow
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
         return component('ForumRow')
-            ->with('route', route('v2.forum.show', [$forum->slug]))
+            ->with('route', $route ? $route : route('v2.forum.show', [$forum->slug]))
             ->with('user', component('UserImage')
                 ->with('route', route('v2.user.show', [$forum->user]))
                 ->with('image', $forum->user->vars()->imagePreset('small_square'))
