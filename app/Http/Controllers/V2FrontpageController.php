@@ -17,7 +17,7 @@ class V2FrontpageController extends Controller
         $photos = Content::getLatestItems('photo', 6);
         $travelmates = Content::getLatestItems('travelmate', 3);
 
-        return view('v2.layouts.frontpage')
+        return layout('frontpage')
 
             ->with('promobar', component('PromoBar')
                 ->with('title', 'Osale Trip.ee kampaanias ja võida 2 lennupiletit Maltale')
@@ -85,6 +85,8 @@ class V2FrontpageController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 }
