@@ -88,7 +88,7 @@ class UserHeader
                         ->with('title', $user->likes()->count())
                     )
                     ->push(component('StatCard')
-                        ->with('title', $user->vars()->contentCount." / ".$user->vars()->commentCount)
+                        ->with('title', $user->vars()->contentCount.' / '.$user->vars()->commentCount)
                         ->with('icon', 'icon-comment')
                     )
                     ->push(component('StatCard')
