@@ -50,9 +50,30 @@ class Comment
                             )
                     )
                     ->push(component('Flag')
-                        ->with('value', 1)
-                        ->with('route', route('styleguide.flag'))
+                        ->is('green')
+                        ->with('route', route(
+                            'flag.toggle',
+                            ['comment', $comment, 'good']
+                        ))
+                        ->with('value', $comment->vars()->flagCount('good'))
+                        ->with('flagged', $user
+                            ? $user->vars()->hasFlaggedComment($comment, 'good')
+                            : false
+                        )
                         ->with('icon', 'icon-thumb-up')
+                    )
+                    ->push(component('Flag')
+                        ->is('red')
+                        ->with('route', route(
+                            'flag.toggle',
+                            ['comment', $comment, 'bad']
+                        ))
+                        ->with('value', $comment->vars()->flagCount('bad'))
+                        ->with('flagged', $user
+                            ? $user->vars()->hasFlaggedComment($comment, 'bad')
+                            : false
+                        )
+                        ->with('icon', 'icon-thumb-down')
                     )
                 )
             )

@@ -6,7 +6,7 @@ $fields = collect($fields) ?? collect();
 
 @endphp
 
-<form action="{{ $route }}" method="{{ $method }}" accept-charset="utf-8">
+<form action="{{ $route }}" method="POST" accept-charset="utf-8">
 
     {{ method_field($method) }}
     
