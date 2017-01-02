@@ -12,7 +12,7 @@ class V2DestinationController extends Controller
         /*
         @section('head_description', trans("site.description.destination", ['name' => $destination->name]))
         */
-        
+
         $destination = Destination::findOrFail($id);
 
         $flights = Content::getLatestPagedItems('flight', 3, $destination->id);
