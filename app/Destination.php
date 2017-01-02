@@ -41,7 +41,7 @@ class Destination extends Baum\Node
     }
 
     // ...
-    
+
     public function getPopular()
     {
         return Cache::remember('popular.destinations.root'.$this->id, config('cache.destination.getPopular'), function () {
