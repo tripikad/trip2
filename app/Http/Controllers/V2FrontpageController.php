@@ -8,6 +8,10 @@ class V2FrontpageController extends Controller
 {
     public function index()
     {
+        /*
+        @section('head_description', trans('site.description.main'))
+        */
+        
         $user = auth()->user();
 
         $flights = Content::getLatestItems('flight', 9);

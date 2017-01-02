@@ -9,9 +9,11 @@ class V2DestinationController extends Controller
 {
     public function show($id)
     {
+        /*
+        @section('head_description', trans("site.description.destination", ['name' => $destination->name]))
+        */
+        
         $destination = Destination::findOrFail($id);
-
-        // TODO: Replace with $destination->content()->whereType(...+ fallbacks
 
         $flights = Content::getLatestPagedItems('flight', 3, $destination->id);
         $photos = Content::getLatestPagedItems('photo', 6, $destination->id);
