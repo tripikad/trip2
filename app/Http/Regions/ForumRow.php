@@ -57,8 +57,8 @@ class ForumRow
                             ->with('title', $destination->name)
                             ->with('route', route('v2.destination.show', [$destination]));
                     }))
-                    ->merge($forum->topics->map(function ($destination) {
-                        return component('MetaLink')->with('title', $destination->name);
+                    ->merge($forum->topics->map(function ($topic) {
+                        return component('MetaLink')->with('title', $topic->name);
                     }))
                 )
             );

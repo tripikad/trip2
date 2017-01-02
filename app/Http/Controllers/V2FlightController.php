@@ -98,6 +98,12 @@ class V2FlightController extends Controller
                         ->push(component('MetaLink')
                             ->with('title', $flight->vars()->created_at)
                         )
+                        ->merge($flight->destinations->map(function ($destination) {
+                            return component('Tag')
+                                ->is('orange')
+                                ->with('title', $destination->name)
+                                ->with('route', route('v2.destination.show', [$destination]));
+                        }))
                     )
                 )
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
