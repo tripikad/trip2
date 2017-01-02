@@ -49,7 +49,7 @@ class Comment
                                 )
                             )
                     )
-                    ->push(component('Flag')
+                    /*->push(component('Flag')
                         ->with('value', 1)
                         ->with('route', route('styleguide.flag'))
                         ->with('icon', 'icon-thumb-up')
@@ -58,7 +58,7 @@ class Comment
                         ->with('value', 1)
                         ->with('route', route('styleguide.flag'))
                         ->with('icon', 'icon-thumb-down')
-                    )
+                    )*/
                 )
             )
             ->with('body', component('Body')

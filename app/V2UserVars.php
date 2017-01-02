@@ -89,6 +89,15 @@ class V2UserVars
         return $this->user->flags->where('flag_type', 'good');
     }
 
+    public function hasFlaggedContent($content, $flagType)
+    {
+        return (boolean) $this->user->flags
+            ->where('flag_type', $flagType)
+            ->where('flaggable_type', 'App\Content')
+            ->where('flaggable_id', $content->id)
+            ->count();
+    }
+
     public function created_at_relative()
     {
         return $this->user->created_at->diffForHumans();

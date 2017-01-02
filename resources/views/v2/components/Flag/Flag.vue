@@ -1,6 +1,6 @@
 <template>
 
-    <div class="Flag" :class="[isclasses, {'Flag--red': flagged}]">
+    <div class="Flag" :class="[isclasses, {'Flag--unflagged': ! currentFlagged}]">
 
         <div class="Flag__icon">
 
@@ -33,12 +33,13 @@ export default {
         isclasses: { default: '' },
         icon: { default: '' },
         value: { default: 0 },
-        route: { default: '' }
+        route: { default: '' },
+        flagged: { default: '' }
     },
 
     data: () => ({
         currentValue: 0,
-        flagged: false
+        currentFlagged: null
     }),
 
     methods: {
@@ -46,13 +47,15 @@ export default {
             this.$http.get(this.route)
                 .then(function(res) {
                     this.currentValue = res.data
-                    this.flagged = ! this.flagged;
+                    this.currentFlagged = ! this.currentFlagged;
                 })
         }
     },
 
     mounted() {
         this.currentValue = this.value
+        this.currentFlagged = (this.flagged == 'true')
+        console.log(this.currentFlagged)
     }
 }
 

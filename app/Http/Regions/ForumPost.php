@@ -13,8 +13,6 @@ class ForumPost
             'followable_type' => 'App\Content',
         ])->first() ? 0 : 1;
 
-        dump($post->flags->where('flag_type', 'good')->count());
-
         return component('ForumPost')
             ->is($post->status ?: 'unpublished')
             ->with('title', $post->vars()->title)
@@ -53,26 +51,31 @@ class ForumPost
                                 )
                             )
                     )
-/*
-            <a href="{{ route('flag.toggle', [
-                $flags['good']['flaggable_type'],
-                $flags['good']['flaggable_id'],
-                $flags['good']['flag_type'],
-                isset($flags['good']['return']) ? $flags['good']['return'] : null,
-            ]) }}" class="c-flag__item-link {{ isset($flags['good']['active']) && $flags['good']['active'] ? 'm-active' : '' }} js-flag">
-*/
                     ->push(component('Flag')
+                        ->is('green')
                         ->with('route', route(
                             'flag.toggle',
                             ['content', $post, 'good']
                         ))
-                        ->with('value', $post->flags->where('flag_type', 'good')->count())
+                        ->with('value', $post->vars()->flagCount('good'))
+                        ->with('flagged', $user
+                            ? $user->vars()->hasFlaggedContent($post, 'good')
+                            : false
+                        )
                         ->with('icon', 'icon-thumb-up')
                     )
                     ->push(component('Flag')
-                        ->with('value', 1)
-                        ->with('route', route('styleguide.flag'))
-                        ->with('icon', 'icon-thumb-down')
+                        ->is('red')
+                        ->with('route', route(
+                            'flag.toggle',
+                            ['content', $post, 'bad']
+                        ))
+                        ->with('value', $post->vars()->flagCount('bad'))
+                        ->with('flagged', $user
+                            ? $user->vars()->hasFlaggedContent($post, 'bad')
+                            : false
+                        )
+                        ->with('icon', 'icon-thumb-up')
                     )
                     ->pushWhen($user, component('Form')
                             ->with('route', route(
