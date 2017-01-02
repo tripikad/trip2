@@ -11,6 +11,11 @@ class V2FlightController extends Controller
 {
     public function index()
     {
+        /*
+        @section('title', trans("content.$type.index.title"))
+        @section('head_description', trans('site.description.flight'))
+        */
+
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
@@ -79,6 +84,13 @@ class V2FlightController extends Controller
 
     public function show($slug)
     {
+        /*
+        @section('title', trans("content.$type.index.title"))
+        @section('head_title',  $content->getHeadTitle())
+        @section('head_description', $content->getHeadDescription())
+        @section('head_image', $content->getHeadImage())
+        */
+
         $flight = Content::getItemBySlug($slug);
         $flights = Content::getLatestItems('flight', 4);
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
@@ -86,6 +98,8 @@ class V2FlightController extends Controller
         $news = Content::getLatestItems('news', 1);
 
         $user = auth()->user();
+
+        dump($flight->getHeadImage());
 
         return layout('2col')
 
