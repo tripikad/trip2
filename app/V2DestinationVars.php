@@ -67,9 +67,9 @@ class V2DestinationVars
 
         return false;
     }
-    
-    public function facts() {
 
+    public function facts()
+    {
         if ($this->isCountry() && $facts = config("destinations.{$this->destination->id}")) {
             return (object) $facts;
         }
@@ -77,11 +77,10 @@ class V2DestinationVars
         if ($this->isPlace() && $facts = config("destinations.{$this->getCountry()->id}")) {
             return (object) $facts;
         }
-
-        return null;
     }
 
-    public function area() {
+    public function area()
+    {
         if ($facts = $this->facts()) {
             if ($facts->area > 1000) {
                 return number_format(round($facts->area, -3), 0, ',', ' ').' km²';
@@ -89,28 +88,27 @@ class V2DestinationVars
                 return $facts->area;
             }
         }
-        return null;
     }
 
-    public function population() {
+    public function population()
+    {
         if ($facts = $this->facts()) {
             return number_format(round($facts->population, -3), 0, ',', ' ');
         }
-        return null;
     }
 
-    public function callingCode() {
+    public function callingCode()
+    {
         if ($facts = $this->facts()) {
             return '+'.$facts->callingCode;
         }
-        return null;
     }
 
-    public function currencyCode() {
+    public function currencyCode()
+    {
         if ($facts = $this->facts()) {
             return $facts->currencyCode;
         }
-        return null;
     }
 
     public function usersHaveBeen()
