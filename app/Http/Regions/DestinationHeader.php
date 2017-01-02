@@ -8,6 +8,15 @@ class DestinationHeader
     {
         $parents = $destination->getAncestors();
 
+        $facts = $destination->vars()->facts
+            ? $destination->vars()->facts
+                ->flip()
+                ->map(function($value, $key) {
+                    return trans("destination.show.about.$value");
+                })
+                ->flip()
+            : null;
+
         return component('DestinationHeader')
             ->with('background', component('MapBackground'))
             ->with('navbar', component('Navbar')
@@ -35,12 +44,18 @@ class DestinationHeader
             ->with('title', $destination->name)
             ->with('description', $destination->vars()->description)
             ->with('facts', component('DestinationFacts')
-                ->with('facts',$destination->vars()->facts
-                        ->flip()
-                        ->map(function($value, $key) {
-                            return trans("destination.show.about.$value");
-                        })
-                        ->flip()
+                ->with('facts', $facts)
+            )
+            ->with('stats', component('BlockHorizontal')
+                ->with('content', collect()
+                    ->push(component('StatCard')
+                        ->with('icon', 'icon-pin')
+                        ->with('title', $destination->vars()->usersWantsToGo()->count())
+                    )
+                    ->push(component('StatCard')
+                        ->with('title', $destination->vars()->usersHaveBeen()->count())
+                        ->with('icon', 'icon-star')
+                    )
                 )
             );
     }

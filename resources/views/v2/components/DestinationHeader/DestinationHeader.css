@@ -10,18 +10,30 @@
 }
 
     .DestinationHeader__navbar {
-        margin-bottom: $margin-xl;
+        margin-bottom: $margin-lg;
     }
 
     .DestinationHeader__parents {
         margin-bottom: $margin-sm;
         opacity: $opacity-md;
+        display: flex;
+    }
+
+    .DestinationHeader__parents > * {
+        margin-right: $margin-xs;
     }
 
     .DestinationHeader__title {
         font: $font-heading-xxl;
         color: $white;
-        margin-bottom: $margin-md;
+        margin-bottom: $margin-sm;
+    }
+
+    .DestinationHeader__contentWrapper {
+        display: flex;
+        display: block ?if $mobile;
+        align-items: flex-end;
+        justify-content: space-between;
     }
 
     .DestinationHeader__description {
@@ -30,4 +42,8 @@
         line-height: $line-height-xl;
         width: 75%;
         width: 100% ?if $mobile;
+    }
+
+    .DestinationHeader__stats {
+        margin-top: $margin-md ?if $mobile;
     }

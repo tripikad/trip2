@@ -5,6 +5,7 @@ $parents = $parents ?? '';
 $title = $title ?? '';
 $description = $description ?? '';
 $facts = $facts ?? '';
+$stats = $stats ?? '';
 $background = $background ?? '';
 
 @endphp
@@ -35,15 +36,29 @@ $background = $background ?? '';
 
         </div>
 
-        <div class="DestinationHeader__description">
+        <div class="DestinationHeader__contentWrapper">
 
-            {{ $description }}
+            <div>
+                
+                <div class="DestinationHeader__description">
 
-        </div>
+                    {{ $description }}
 
-        <div class="DestinationHeader__facts">
+                </div>
 
-            {!! $facts !!}
+                <div class="DestinationHeader__facts">
+
+                    {!! $facts !!}
+
+                </div>
+
+            </div>
+
+            <div class="DestinationHeader__stats">
+
+                {!! $stats !!}
+
+            </div>
 
         </div>
 

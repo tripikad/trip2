@@ -111,4 +111,15 @@ class V2DestinationVars
         
         return false;
     }
+
+    public function usersHaveBeen()
+    {
+        return $this->destination->flags->where('flag_type', 'havebeen');
+    }
+
+    public function usersWantsToGo()
+    {
+        return $this->destination->flags->where('flag_type', 'wantstogo');
+    }
+
 }
