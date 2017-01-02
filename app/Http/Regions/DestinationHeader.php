@@ -71,8 +71,7 @@ class DestinationHeader
                     )
                 )
             )
-            ->with('stats', component('BlockHorizontal')
-                ->with('content', collect()
+            ->with('stats', collect()
                     ->push(component('StatCard')
                         ->with('icon', 'icon-pin')
                         ->with('title', $destination->vars()->usersWantsToGo()->count())
@@ -81,8 +80,8 @@ class DestinationHeader
                         ->with('title', $destination->vars()->usersHaveBeen()->count())
                         ->with('icon', 'icon-star')
                     )
-
-                )
+                    ->render()
+                    ->implode('')
             );
     }
 }

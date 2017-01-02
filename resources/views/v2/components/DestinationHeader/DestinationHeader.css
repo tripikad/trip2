@@ -55,4 +55,9 @@
 
     .DestinationHeader__stats {
         margin-top: $margin-md ?if $tablet;
+        display: flex;
+    }
+
+    .DestinationHeader__stats > * {
+        margin-right: $margin-md;
     }
