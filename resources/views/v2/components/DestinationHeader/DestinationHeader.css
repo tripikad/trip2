@@ -29,6 +29,10 @@
         margin-bottom: $margin-sm;
     }
 
+    .DestinationHeader__children {
+        margin-bottom: $margin-md;
+    }
+
     .DestinationHeader__contentWrapper {
         display: flex;
         display: block ?if $tablet;

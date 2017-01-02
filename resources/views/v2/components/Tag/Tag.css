@@ -31,3 +31,12 @@
 .Tag--red .Tag__title {
     color: $white;
 }
+
+.Tag--white {
+    border: 1px solid $white;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.Tag--white .Tag__title {
+    color: $white;
+}

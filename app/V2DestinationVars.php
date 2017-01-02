@@ -83,14 +83,18 @@ class V2DestinationVars
 
     public function area() {
         if ($facts = $this->facts()) {
-            return number_format(round($facts->area, -3), 0, ',', ' ').' km²';
+            if ($facts->area > 1000) {
+                return number_format(round($facts->area, -3), 0, ',', ' ').' km²';
+            } else {
+                return $facts->area;
+            }
         }
         return null;
     }
 
     public function population() {
         if ($facts = $this->facts()) {
-            return number_format(round($facts->population, -3), 0, ',', ' ').' m';
+            return number_format(round($facts->population, -3), 0, ',', ' ');
         }
         return null;
     }

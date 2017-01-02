@@ -42,6 +42,14 @@ class DestinationHeader
                 ->implode('')
             )
             ->with('title', $destination->name)
+            ->with('children', component('Meta')
+                ->with('items', $destination->getImmediateDescendants()->map(function ($destination) {
+                        return component('Tag')
+                            ->is('white')
+                            ->with('title', $destination->name)
+                            ->with('route', route('v2.destination.show', [$destination]));
+                    }))
+                )
             ->with('description', $destination->vars()->description)
             ->with('facts1', component('DestinationFacts')
                 ->with('facts', collect()

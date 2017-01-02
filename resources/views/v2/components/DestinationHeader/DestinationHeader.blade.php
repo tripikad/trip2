@@ -3,6 +3,7 @@
 $navbar = $navbar ?? '';
 $parents = $parents ?? '';
 $title = $title ?? '';
+$children = $children ?? collect();
 $description = $description ?? '';
 $facts1 = $facts1 ?? '';
 $facts2 = $facts2 ?? '';
@@ -36,6 +37,16 @@ $background = $background ?? '';
             {{ $title }}
 
         </div>
+
+        @if ($children)
+        
+        <div class="DestinationHeader__children">
+
+            {!! $children !!}
+
+        </div>
+        
+        @endif
 
         <div class="DestinationHeader__contentWrapper">
 
