@@ -33,7 +33,7 @@ class V2FlightController extends Controller
             ->with('header', region('Header', trans('content.flight.index.title')))
 
             ->with('content', collect()
-                ->push(component('AffiliateSearch')->is('wide')->is('purple'))
+                ->push(component('AffMomondo'))
                 ->merge($flights->slice(0, $sliceSize)->map(function ($flight) {
                     return region('FlightRow', $flight);
                 })
@@ -43,8 +43,9 @@ class V2FlightController extends Controller
                     return region('FlightRow', $flight);
                 })
                 )
-                ->push(region('Paginator', $flights, $currentDestination, $currentTopic))
-                ->push(component('AffiliateSearch')->is('wide'))
+                ->push(
+                    region('Paginator', $flights, $currentDestination, $currentTopic)
+                )
             )
 
             ->with('sidebar', collect()
@@ -62,6 +63,8 @@ class V2FlightController extends Controller
                 ->push(region('FlightAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->push(component('AffHotelscombined'))
+
             )
 
             ->with('bottom', collect()
@@ -101,6 +104,7 @@ class V2FlightController extends Controller
                 ->merge($flight->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
+                ->push(component('AffBookingInspiration'))
                 ->push(region('Share'))
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $flight))
                 ->push(component('Promo')->with('promo', 'body'))
@@ -118,6 +122,8 @@ class V2FlightController extends Controller
                 ->push(region('FlightAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffiliateSearch'))
+                ->push(component('AffRentalcars'))
+                ->push(component('AffBookingSearch'))
             )
 
             ->with('bottom', collect()
