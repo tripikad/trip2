@@ -35,7 +35,7 @@ class DestinationHeader
             ->with('title', $destination->name)
             ->with('description', $destination->vars()->description)
             ->with('facts', component('DestinationFacts')
-                ->with('facts', $destination->vars()->facts)
+                ->with('facts', $destination->vars()->getCountry()->vars()->facts)
             );
     }
 }

@@ -50,4 +50,29 @@ class V2DestinationVars
 
         return $config ? collect(config("destinations.{$this->destination->id}")) : null;
     }
+
+    public function isContinent()
+    {   
+        return $this->destination->isRoot();
+    }
+
+    public function isCountry()
+    {   
+        return $this->destination->getLevel() == 1;
+    }
+
+    public function getCountry()
+    {   
+        $level = $this->destination->getLevel();
+        
+        if ($level > 1) {
+            return $this->destination->getAncestors()[1];
+        }
+        
+        if ($level == 1) {
+            return $this->destination;
+        }
+        
+        return false;
+    }
 }
