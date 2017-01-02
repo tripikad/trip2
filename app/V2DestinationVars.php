@@ -44,57 +44,6 @@ class V2DestinationVars
         return Lang::has($key) ? trans($key) : null;
     }
 
-    public function facts()
-    {
-        if ($this->isContinent()) {
-            return false;
-        }
-
-        if ($this->isCountry()) {
-            $facts = config("destinations.{$this->destination->id}");
-
-            if ($facts) {
-                return collect($facts)
-                    ->filter(function ($value, $key) {
-                        return $key != 'code' && $key != 'capital';
-                    })
-                    ->map(function ($value, $key) {
-                        if ($key == 'area') {
-                            return number_format(round($value, -3), 0, ',', ' ');
-                        }
-                        if ($key == 'population') {
-                            return number_format(round($value, -3), 0, ',', ' ');
-                        }
-                        if ($key == 'callingCode') {
-                            return '+'.$value;
-                        }
-
-                        return $value;
-                    });
-            }
-        }
-
-        if ($this->isPlace()) {
-            $facts = config("destinations.{$this->getCountry()->id}");
-
-            if ($facts) {
-                return collect($facts)
-                    ->filter(function ($value, $key) {
-                        return $key == 'callingCode' || $key == 'currencyCode';
-                    })
-                    ->map(function ($value, $key) {
-                        if ($key == 'callingCode') {
-                            return '+'.$value;
-                        }
-
-                        return $value;
-                    });
-            }
-        }
-
-        return false;
-    }
-
     public function isContinent()
     {
         return $this->destination->isRoot();
@@ -117,6 +66,47 @@ class V2DestinationVars
         }
 
         return false;
+    }
+    
+    public function facts() {
+
+        if ($this->isCountry() && $facts = config("destinations.{$this->destination->id}")) {
+            return (object) $facts;
+        }
+
+        if ($this->isPlace() && $facts = config("destinations.{$this->getCountry()->id}")) {
+            return (object) $facts;
+        }
+
+        return null;
+    }
+
+    public function area() {
+        if ($facts = $this->facts()) {
+            return number_format(round($facts->area, -3), 0, ',', ' ').' km²';
+        }
+        return null;
+    }
+
+    public function population() {
+        if ($facts = $this->facts()) {
+            return number_format(round($facts->population, -3), 0, ',', ' ').' m';
+        }
+        return null;
+    }
+
+    public function callingCode() {
+        if ($facts = $this->facts()) {
+            return '+'.$facts->callingCode;
+        }
+        return null;
+    }
+
+    public function currencyCode() {
+        if ($facts = $this->facts()) {
+            return $facts->currencyCode;
+        }
+        return null;
     }
 
     public function usersHaveBeen()

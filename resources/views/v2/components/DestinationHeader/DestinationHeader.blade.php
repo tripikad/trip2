@@ -4,7 +4,8 @@ $navbar = $navbar ?? '';
 $parents = $parents ?? '';
 $title = $title ?? '';
 $description = $description ?? '';
-$facts = $facts ?? '';
+$facts1 = $facts1 ?? '';
+$facts2 = $facts2 ?? '';
 $stats = $stats ?? '';
 $background = $background ?? '';
 
@@ -46,9 +47,19 @@ $background = $background ?? '';
 
                 </div>
 
-                <div class="DestinationHeader__facts">
+                <div class="DestinationHeader__factsWrapper">
 
-                    {!! $facts !!}
+                    <div class="DestinationHeader__facts">
+
+                        {!! $facts1 !!}
+
+                    </div>
+
+                    <div class="DestinationHeader__facts">
+
+                        {!! $facts2 !!}
+
+                    </div>
 
                 </div>
 

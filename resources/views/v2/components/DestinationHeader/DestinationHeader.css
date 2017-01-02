@@ -31,7 +31,7 @@
 
     .DestinationHeader__contentWrapper {
         display: flex;
-        display: block ?if $mobile;
+        display: block ?if $tablet;
         align-items: flex-end;
         justify-content: space-between;
     }
@@ -44,6 +44,15 @@
         width: 100% ?if $mobile;
     }
 
+    .DestinationHeader__factsWrapper {
+        display: flex;
+        display: block ?if $mobile;
+    }
+
+    .DestinationHeader__facts {
+        margin-right: $margin-md;
+    }
+
     .DestinationHeader__stats {
-        margin-top: $margin-md ?if $mobile;
+        margin-top: $margin-md ?if $tablet;
     }

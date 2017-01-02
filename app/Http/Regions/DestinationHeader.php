@@ -7,7 +7,7 @@ class DestinationHeader
     public function render($destination)
     {
         $parents = $destination->getAncestors();
-
+        /*
         $facts = $destination->vars()->facts
             ? $destination->vars()->facts
                 ->flip()
@@ -16,7 +16,7 @@ class DestinationHeader
                 })
                 ->flip()
             : null;
-
+        */
         return component('DestinationHeader')
             ->with('background', component('MapBackground'))
             ->with('navbar', component('Navbar')
@@ -43,8 +43,33 @@ class DestinationHeader
             )
             ->with('title', $destination->name)
             ->with('description', $destination->vars()->description)
-            ->with('facts', component('DestinationFacts')
-                ->with('facts', $facts)
+            ->with('facts1', component('DestinationFacts')
+                ->with('facts', collect()
+                    ->putWhen(
+                        $destination->vars()->isCountry || $destination->vars()->isPlace,
+                        trans("destination.show.about.callingCode"),
+                        $destination->vars()->callingCode()
+                    )
+                    ->putWhen(
+                        $destination->vars()->isCountry || $destination->vars()->isPlace,
+                        trans("destination.show.about.currencyCode"),
+                        $destination->vars()->currencyCode()
+                    )
+                )
+            )
+            ->with('facts2', component('DestinationFacts')
+                ->with('facts', collect()
+                    ->putWhen(
+                        $destination->vars()->isCountry,
+                        trans("destination.show.about.area"),
+                        $destination->vars()->area()
+                    )
+                    ->putWhen(
+                        $destination->vars()->isCountry,
+                        trans("destination.show.about.population"),
+                        $destination->vars()->population()
+                    )
+                )
             )
             ->with('stats', component('BlockHorizontal')
                 ->with('content', collect()
