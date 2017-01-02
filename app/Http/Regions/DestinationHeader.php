@@ -11,7 +11,7 @@ class DestinationHeader
         $facts = $destination->vars()->facts
             ? $destination->vars()->facts
                 ->flip()
-                ->map(function($value, $key) {
+                ->map(function ($value, $key) {
                     return trans("destination.show.about.$value");
                 })
                 ->flip()

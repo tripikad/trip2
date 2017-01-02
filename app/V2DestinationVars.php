@@ -128,5 +128,4 @@ class V2DestinationVars
     {
         return $this->destination->flags->where('flag_type', 'wantstogo');
     }
-
 }
