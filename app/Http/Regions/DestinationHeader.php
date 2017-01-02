@@ -35,9 +35,9 @@ class DestinationHeader
             ->with('title', $destination->name)
             ->with('description', $destination->vars()->description)
             ->with('facts', component('DestinationFacts')
-                ->with('facts',$destination->vars()->facts
+                ->with('facts', $destination->vars()->facts
                         ->flip()
-                        ->map(function($value, $key) {
+                        ->map(function ($value, $key) {
                             return trans("destination.show.about.$value");
                         })
                         ->flip()
