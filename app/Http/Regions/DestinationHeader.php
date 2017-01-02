@@ -56,6 +56,7 @@ class DestinationHeader
                         ->with('title', $destination->vars()->usersHaveBeen()->count())
                         ->with('icon', 'icon-star')
                     )
+
                 )
             );
     }

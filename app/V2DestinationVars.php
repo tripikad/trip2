@@ -51,34 +51,42 @@ class V2DestinationVars
         }
 
         if ($this->isCountry()) {
-        
             $facts = config("destinations.{$this->destination->id}");
-            
+
             if ($facts) {
                 return collect($facts)
-                    ->filter(function($value, $key) {
+                    ->filter(function ($value, $key) {
                         return $key != 'code' && $key != 'capital';
                     })
-                    ->map(function($value, $key) {
-                        if ($key == 'area') { return number_format(round($value, -3), 0, ',', ' '); }
-                        if ($key == 'population') { return number_format(round($value, -3), 0, ',', ' '); }
-                        if ($key == 'callingCode') { return '+'.$value; }
+                    ->map(function ($value, $key) {
+                        if ($key == 'area') {
+                            return number_format(round($value, -3), 0, ',', ' ');
+                        }
+                        if ($key == 'population') {
+                            return number_format(round($value, -3), 0, ',', ' ');
+                        }
+                        if ($key == 'callingCode') {
+                            return '+'.$value;
+                        }
+
                         return $value;
                     });
             }
         }
 
         if ($this->isPlace()) {
-
             $facts = config("destinations.{$this->getCountry()->id}");
 
             if ($facts) {
                 return collect($facts)
-                    ->filter(function($value, $key) {
+                    ->filter(function ($value, $key) {
                         return $key == 'callingCode' || $key == 'currencyCode';
                     })
-                    ->map(function($value, $key) {
-                        if ($key == 'callingCode') { return '+'.$value; }
+                    ->map(function ($value, $key) {
+                        if ($key == 'callingCode') {
+                            return '+'.$value;
+                        }
+
                         return $value;
                     });
             }
@@ -88,27 +96,26 @@ class V2DestinationVars
     }
 
     public function isContinent()
-    {   
+    {
         return $this->destination->isRoot();
     }
 
     public function isCountry()
-    {   
+    {
         return $this->destination->getLevel() == 1;
     }
 
     public function isPlace()
-    {   
+    {
         return $this->destination->getLevel() > 1;
     }
 
     public function getCountry()
-    {   
-        
+    {
         if ($this->destination->getLevel() > 1) {
             return $this->destination->getAncestors()[1];
         }
-        
+
         return false;
     }
 
