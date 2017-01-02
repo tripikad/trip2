@@ -44,23 +44,23 @@ class DestinationHeader
             ->with('title', $destination->name)
             ->with('children', component('Meta')
                 ->with('items', $destination->getImmediateDescendants()->map(function ($destination) {
-                        return component('Tag')
+                    return component('Tag')
                             ->is('white')
                             ->with('title', $destination->name)
                             ->with('route', route('v2.destination.show', [$destination]));
-                    }))
+                }))
                 )
             ->with('description', $destination->vars()->description)
             ->with('facts1', component('DestinationFacts')
                 ->with('facts', collect()
                     ->putWhen(
                         $destination->vars()->isCountry || $destination->vars()->isPlace,
-                        trans("destination.show.about.callingCode"),
+                        trans('destination.show.about.callingCode'),
                         $destination->vars()->callingCode()
                     )
                     ->putWhen(
                         $destination->vars()->isCountry || $destination->vars()->isPlace,
-                        trans("destination.show.about.currencyCode"),
+                        trans('destination.show.about.currencyCode'),
                         $destination->vars()->currencyCode()
                     )
                 )
@@ -69,12 +69,12 @@ class DestinationHeader
                 ->with('facts', collect()
                     ->putWhen(
                         $destination->vars()->isCountry,
-                        trans("destination.show.about.area"),
+                        trans('destination.show.about.area'),
                         $destination->vars()->area()
                     )
                     ->putWhen(
                         $destination->vars()->isCountry,
-                        trans("destination.show.about.population"),
+                        trans('destination.show.about.population'),
                         $destination->vars()->population()
                     )
                 )
