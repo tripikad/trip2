@@ -13,6 +13,8 @@ class ForumPost
             'followable_type' => 'App\Content',
         ])->first() ? 0 : 1;
 
+        dump($post->flags->where('flag_type', 'good')->count());
+
         return component('ForumPost')
             ->is($post->status ?: 'unpublished')
             ->with('title', $post->vars()->title)
@@ -51,9 +53,20 @@ class ForumPost
                                 )
                             )
                     )
+/*
+            <a href="{{ route('flag.toggle', [
+                $flags['good']['flaggable_type'],
+                $flags['good']['flaggable_id'],
+                $flags['good']['flag_type'],
+                isset($flags['good']['return']) ? $flags['good']['return'] : null,
+            ]) }}" class="c-flag__item-link {{ isset($flags['good']['active']) && $flags['good']['active'] ? 'm-active' : '' }} js-flag">
+*/
                     ->push(component('Flag')
-                        ->with('value', 1)
-                        ->with('route', route('styleguide.flag'))
+                        ->with('route', route(
+                            'flag.toggle',
+                            ['content', $post, 'good']
+                        ))
+                        ->with('value', $post->flags->where('flag_type', 'good')->count())
                         ->with('icon', 'icon-thumb-up')
                     )
                     ->push(component('Flag')

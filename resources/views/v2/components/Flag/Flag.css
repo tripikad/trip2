@@ -17,3 +17,7 @@
         font: $font-text-sm;
         color: $gray-dark;
     }
+
+.Flag--red .Flag__icon svg {
+    fill: $red;
+}

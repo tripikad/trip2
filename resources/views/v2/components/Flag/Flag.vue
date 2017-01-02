@@ -1,6 +1,6 @@
 <template>
 
-    <div class="Flag" :class="isclasses">
+    <div class="Flag" :class="[isclasses, {'Flag--red': flagged}]">
 
         <div class="Flag__icon">
 
@@ -36,13 +36,17 @@ export default {
         route: { default: '' }
     },
 
-    data: () => ({ currentValue: 0 }),
+    data: () => ({
+        currentValue: 0,
+        flagged: false
+    }),
 
     methods: {
         toggleFlag: function() {
-            this.$http.post(this.route, { value: this.currentValue })
+            this.$http.get(this.route)
                 .then(function(res) {
-                    this.currentValue = res.data.value
+                    this.currentValue = res.data
+                    this.flagged = ! this.flagged;
                 })
         }
     },
