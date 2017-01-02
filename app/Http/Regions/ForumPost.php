@@ -8,6 +8,11 @@ class ForumPost
     {
         $user = auth()->user();
 
+        $followStatus = $user && $user->follows()->where([
+            'followable_id' => $post->id,
+            'followable_type' => 'App\Content',
+        ])->first() ? 0 : 1;
+
         return component('ForumPost')
             ->is($post->status ?: 'unpublished')
             ->with('title', $post->vars()->title)
@@ -32,11 +37,17 @@ class ForumPost
                             ->with('route', route('content.edit', [$post->type, $post]))
                     )
                     ->pushWhen($user && $user->hasRole('admin'), component('Form')
-                            ->with('route', route('content.status', [$post->type, $post, (1 - $post->status)]))
+                            ->with('route', route(
+                                'content.status',
+                                [$post->type, $post, (1 - $post->status)]
+                            ))
                             ->with('method', 'PUT')
                             ->with('fields', collect()
                                 ->push(component('FormLink')
-                                    ->with('title', trans("content.action.status.$post->status.title"))
+                                    ->with(
+                                        'title',
+                                        trans("content.action.status.$post->status.title")
+                                    )
                                 )
                             )
                     )
@@ -49,6 +60,21 @@ class ForumPost
                         ->with('value', 1)
                         ->with('route', route('styleguide.flag'))
                         ->with('icon', 'icon-thumb-down')
+                    )
+                    ->pushWhen($user, component('Form')
+                            ->with('route', route(
+                                'follow.follow.content',
+                                [$post->type, $post, $followStatus]
+                            ))
+                            ->with('method', 'PUT')
+                            ->with('fields', collect()
+                                ->push(component('FormLink')
+                                    ->with(
+                                        'title',
+                                        trans("content.action.follow.$followStatus.title")
+                                    )
+                                )
+                            )
                     )
                 )
             )
