@@ -93,13 +93,11 @@ return [
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',
-            'database' => 0
         ],
 
         'permanent' => [
             'driver' => env('PERMANENT_CACHE_DRIVER', 'array'),
-            'connection' => 'default',
-            'database' => 1
+            'connection' => 'permanent',
         ],
 
     ],
