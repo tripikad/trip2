@@ -19,7 +19,7 @@ class V2DestinationController extends Controller
         $news = Content::getLatestPagedItems('news', 3, $destination->id);
         $travelmates = Content::getLatestPagedItems('travelmate', 3, $destination->id);
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region('DestinationHeader', $destination))
 
@@ -62,6 +62,8 @@ class V2DestinationController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 }

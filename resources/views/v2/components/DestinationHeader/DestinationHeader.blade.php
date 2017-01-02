@@ -3,8 +3,11 @@
 $navbar = $navbar ?? '';
 $parents = $parents ?? '';
 $title = $title ?? '';
+$children = $children ?? collect();
 $description = $description ?? '';
-$facts = $facts ?? '';
+$facts1 = $facts1 ?? '';
+$facts2 = $facts2 ?? '';
+$stats = $stats ?? '';
 $background = $background ?? '';
 
 @endphp
@@ -35,15 +38,49 @@ $background = $background ?? '';
 
         </div>
 
-        <div class="DestinationHeader__description">
+        @if ($children)
+        
+        <div class="DestinationHeader__children">
 
-            {{ $description }}
+            {!! $children !!}
 
         </div>
+        
+        @endif
 
-        <div class="DestinationHeader__facts">
+        <div class="DestinationHeader__contentWrapper">
 
-            {!! $facts !!}
+            <div>
+                
+                <div class="DestinationHeader__description">
+
+                    {{ $description }}
+
+                </div>
+
+                <div class="DestinationHeader__factsWrapper">
+
+                    <div class="DestinationHeader__facts">
+
+                        {!! $facts1 !!}
+
+                    </div>
+
+                    <div class="DestinationHeader__facts">
+
+                        {!! $facts2 !!}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="DestinationHeader__stats">
+
+                {!! $stats !!}
+
+            </div>
 
         </div>
 

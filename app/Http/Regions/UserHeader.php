@@ -7,12 +7,12 @@ class UserHeader
     private function prepareActionsForUser($user, $loggedUser)
     {
         return collect()
-            ->push(
+            ->pushWhen(
                 // Only owner sees the link, others can access it anyway and button is unneccesary
                 $loggedUser && $loggedUser->id == $user->id,
                 component('Button')
                     ->is('cyan')
-                    ->with('title', trans('user.activity'))
+                    ->with('title', trans('menu.user.activity'))
             )
             ->pushWhen(
                 $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
@@ -85,14 +85,16 @@ class UserHeader
                 ->with('content', collect()
                     ->push(component('StatCard')
                         ->with('icon', 'icon-thumb-up')
-                        ->with('title', '26')
+                        ->with('title', $user->likes()->count())
                     )
                     ->push(component('StatCard')
-                        ->with('title', '134 / 40')
+                        ->with('title', $user->vars()->contentCount.' / '.$user->vars()->commentCount)
                         ->with('icon', 'icon-comment')
                     )
                     ->push(component('StatCard')
-                        ->with('title', '12 (1.91%)')
+                        ->with('title', $user->vars()->destinationCount()
+                            .' ( '.$user->vars()->destinationCountPercentage().'% )'
+                        )
                         ->with('icon', 'icon-pin')
                     )
                 )

@@ -3,7 +3,7 @@
 $title = $title ?? '';
 $head_description = $head_description ?? '';
 $head_image = $head_image ?? '';
-$content = $content ?? collect();
+$content = $content ? collect($content) : collect();
 
 @endphp
 

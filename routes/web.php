@@ -41,13 +41,6 @@ Route::get('v2/news/{slug}', [
     'as' => 'v2.news.show',
 ]);
 
-/*
-Route::get('v2/news/{id}/edit', [
-    'uses' => 'V2NewsController@edit',
-    'as' => 'v2.news.edit',
-]);
-*/
-
 // Flight
 
 Route::get('v2/flight', [
@@ -59,13 +52,6 @@ Route::get('v2/flight/{slug}', [
     'uses' => 'V2FlightController@show',
     'as' => 'v2.flight.show',
 ]);
-
-/*
-Route::get('v2/flight/{id}/edit', [
-    'uses' => 'V2FlightController@edit',
-    'as' => 'v2.flight.edit',
-]);
-*/
 
 // Travelmates
 
@@ -111,6 +97,20 @@ Route::get('v2/static', [
 Route::get('v2/static/{id}', [
     'uses' => 'V2StaticController@show',
     'as' => 'v2.static.show',
+]);
+
+// Internal
+
+Route::get('v2/internal', [
+    'middleware' => 'role:admin',
+    'uses' => 'V2InternalController@index',
+    'as' => 'v2.internal.index',
+]);
+
+Route::get('v2/internal/{id}', [
+    'middleware' => 'role:admin',
+    'uses' => 'V2InternalController@show',
+    'as' => 'v2.internal.show',
 ]);
 
 // User

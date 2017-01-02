@@ -28,6 +28,8 @@ class Destination extends Baum\Node
         return $this->morphMany('App\Flag', 'flaggable');
     }
 
+    // Also present in V2DestinationVars
+
     public function usersHaveBeen()
     {
         return $this->flags->where('flag_type', 'havebeen');
@@ -37,6 +39,8 @@ class Destination extends Baum\Node
     {
         return $this->flags->where('flag_type', 'wantstogo');
     }
+
+    // ...
 
     public function getPopular()
     {

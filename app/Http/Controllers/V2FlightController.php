@@ -28,12 +28,12 @@ class V2FlightController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region('Header', trans('content.flight.index.title')))
 
             ->with('content', collect()
-                ->push(component('AffiliateSearch')->is('wide')->is('purple'))
+                ->push(component('AffMomondo'))
                 ->merge($flights->slice(0, $sliceSize)->map(function ($flight) {
                     return region('FlightRow', $flight);
                 })
@@ -43,8 +43,9 @@ class V2FlightController extends Controller
                     return region('FlightRow', $flight);
                 })
                 )
-                ->push(region('Paginator', $flights, $currentDestination, $currentTopic))
-                ->push(component('AffiliateSearch')->is('wide'))
+                ->push(
+                    region('Paginator', $flights, $currentDestination, $currentTopic)
+                )
             )
 
             ->with('sidebar', collect()
@@ -62,6 +63,8 @@ class V2FlightController extends Controller
                 ->push(region('FlightAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->push(component('AffHotelscombined'))
+
             )
 
             ->with('bottom', collect()
@@ -69,7 +72,9 @@ class V2FlightController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
     public function show($slug)
@@ -82,7 +87,7 @@ class V2FlightController extends Controller
 
         $user = auth()->user();
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region('Header', trans('content.flight.index.title')))
 
@@ -93,12 +98,19 @@ class V2FlightController extends Controller
                         ->push(component('MetaLink')
                             ->with('title', $flight->vars()->created_at)
                         )
+                        ->merge($flight->destinations->map(function ($destination) {
+                            return component('Tag')
+                                ->is('orange')
+                                ->with('title', $destination->name)
+                                ->with('route', route('v2.destination.show', [$destination]));
+                        }))
                     )
                 )
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
                 ->merge($flight->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
+                ->push(component('AffBookingInspiration'))
                 ->push(region('Share'))
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $flight))
                 ->push(component('Promo')->with('promo', 'body'))
@@ -116,6 +128,8 @@ class V2FlightController extends Controller
                 ->push(region('FlightAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffiliateSearch'))
+                ->push(component('AffRentalcars'))
+                ->push(component('AffBookingSearch'))
             )
 
             ->with('bottom', collect()
@@ -123,18 +137,8 @@ class V2FlightController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
-    }
+            ->with('footer', region('Footer'))
 
-    public function edit($id)
-    {
-        $post = Content::whereType('flight')
-           ->whereStatus(1)
-           ->findOrFail($id);
-
-        return view('v2.layouts.fullpage')
-            ->with('content', collect()
-                ->push(component('Editor')->with('post', $post))
-            );
+            ->render();
     }
 }

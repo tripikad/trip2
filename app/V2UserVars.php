@@ -36,6 +36,59 @@ class V2UserVars
         return $this->user->rank * 90;
     }
 
+    public function contentCount()
+    {
+        $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
+
+        return $this->user->contents()
+            ->whereStatus(1)
+            ->whereIn('type', $types)
+            ->count();
+    }
+
+    public function commentCount()
+    {
+        $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
+
+        return $this->user->comments()
+            ->whereStatus(1)
+            ->whereHas('content', function ($query) use ($types) {
+                $query->whereIn('type', $types);
+            })
+        ->count();
+    }
+
+    public function destinationHaveBeen()
+    {
+        return $this->user->flags->where('flag_type', 'havebeen');
+    }
+
+    public function destinationWantsToGo()
+    {
+        return $this->user->flags->where('flag_type', 'wantstogo');
+    }
+
+    public function destinationCount()
+    {
+        return $this->user->destinationHaveBeen()->count();
+    }
+
+    public function destinationCountPercentage()
+    {
+        $destinationsCount = Destination::count();
+
+        if ($this->destinationCount() > 0 && $destinationsCount > 0) {
+            return round(($this->user->destinationHaveBeen()->count() * 100) / $destinationsCount, 1);
+        }
+
+        return 0;
+    }
+
+    public function likes()
+    {
+        return $this->user->flags->where('flag_type', 'good');
+    }
+
     public function created_at_relative()
     {
         return $this->user->created_at->diffForHumans();

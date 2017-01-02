@@ -13,7 +13,9 @@ class V2StyleguideController extends Controller
     {
         session()->keep('info');
 
-        return view('v2.layouts.1col')
+        $user = auth()->user();
+
+        return layout('1col')
 
             ->with('content', collect()
 
@@ -41,8 +43,14 @@ class V2StyleguideController extends Controller
                     ->with('title', 'Static pages')
                     ->with('route', route('v2.static.index'))
                 )
+                ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
+                    ->with('title', 'Internal forum')
+                    ->with('route', route('v2.internal.index'))
+                )
 
-            );
+            )
+
+            ->render();
     }
 
     public function form()

@@ -404,7 +404,7 @@ class ContentController extends Controller
 
             $content->save();
 
-            if (in_array($content->type, ['forum', 'buysell', 'expat'])) {
+            if (in_array($content->type, ['forum', 'buysell', 'expat', 'internal'])) {
                 DB::table('users')->select('id')->chunk(1000, function ($users) use ($content) {
                     collect($users)->each(function ($user) use ($content) {
 
