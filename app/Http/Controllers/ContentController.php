@@ -405,19 +405,22 @@ class ContentController extends Controller
             $content->save();
 
             if (in_array($content->type, ['forum', 'buysell', 'expat', 'internal'])) {
+                
                 DB::table('users')->select('id')->chunk(1000, function ($users) use ($content) {
                     collect($users)->each(function ($user) use ($content) {
 
-                    // For user we store the cache key about new content item
+                        // For user we store the cache key about new content item
 
-                    $key = 'new_'.$content->id.'_'.$user->id;
+                        $key = 'new_'.$content->id.'_'.$user->id;
 
-                    // Cache value is initially 0 (no new comments are added yet)
-                    // Note: not sure about set for x seconds / set forever / auto-expiration yet
+                        // Cache value is initially 0 (no new comments are added yet)
+                        // Note: not sure about set for x seconds / set forever / auto-expiration yet
 
-                    Cache::forever($key, 0);
+                        Cache::store('permanent')->forever($key, 0);
+
                     });
                 });
+                
             }
 
             Log::info('New content added', [
