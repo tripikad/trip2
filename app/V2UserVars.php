@@ -98,6 +98,15 @@ class V2UserVars
             ->count();
     }
 
+    public function hasFlaggedComment($comment, $flagType)
+    {
+        return (boolean) $this->user->flags
+            ->where('flag_type', $flagType)
+            ->where('flaggable_type', 'App\Comment')
+            ->where('flaggable_id', $comment->id)
+            ->count();
+    }
+
     public function created_at_relative()
     {
         return $this->user->created_at->diffForHumans();

@@ -55,7 +55,6 @@ export default {
     mounted() {
         this.currentValue = this.value
         this.currentFlagged = (this.flagged == 'true')
-        console.log(this.currentFlagged)
     }
 }
 
