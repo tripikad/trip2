@@ -46,9 +46,45 @@ class V2DestinationVars
 
     public function facts()
     {
-        $config = config("destinations.{$this->destination->id}");
+        if ($this->isContinent()) {
+            return false;
+        }
 
-        return $config ? collect(config("destinations.{$this->destination->id}")) : null;
+        if ($this->isCountry()) {
+        
+            $facts = config("destinations.{$this->destination->id}");
+            
+            if ($facts) {
+                return collect($facts)
+                    ->filter(function($value, $key) {
+                        return $key != 'code' && $key != 'capital';
+                    })
+                    ->map(function($value, $key) {
+                        if ($key == 'area') { return number_format(round($value, -3), 0, ',', ' '); }
+                        if ($key == 'population') { return number_format(round($value, -3), 0, ',', ' '); }
+                        if ($key == 'callingCode') { return '+'.$value; }
+                        return $value;
+                    });
+            }
+        }
+
+        if ($this->isPlace()) {
+
+            $facts = config("destinations.{$this->getCountry()->id}");
+
+            if ($facts) {
+                return collect($facts)
+                    ->filter(function($value, $key) {
+                        return $key == 'callingCode' || $key == 'currencyCode';
+                    })
+                    ->map(function($value, $key) {
+                        if ($key == 'callingCode') { return '+'.$value; }
+                        return $value;
+                    });
+            }
+        }
+
+        return false;
     }
 
     public function isContinent()
@@ -61,16 +97,16 @@ class V2DestinationVars
         return $this->destination->getLevel() == 1;
     }
 
+    public function isPlace()
+    {   
+        return $this->destination->getLevel() > 1;
+    }
+
     public function getCountry()
     {   
-        $level = $this->destination->getLevel();
         
-        if ($level > 1) {
+        if ($this->destination->getLevel() > 1) {
             return $this->destination->getAncestors()[1];
-        }
-        
-        if ($level == 1) {
-            return $this->destination;
         }
         
         return false;
