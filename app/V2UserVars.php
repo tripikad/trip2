@@ -91,7 +91,7 @@ class V2UserVars
 
     public function hasFlaggedContent($content, $flagType)
     {
-        return (boolean) $this->user->flags
+        return (bool) $this->user->flags
             ->where('flag_type', $flagType)
             ->where('flaggable_type', 'App\Content')
             ->where('flaggable_id', $content->id)
@@ -100,7 +100,7 @@ class V2UserVars
 
     public function hasFlaggedComment($comment, $flagType)
     {
-        return (boolean) $this->user->flags
+        return (bool) $this->user->flags
             ->where('flag_type', $flagType)
             ->where('flaggable_type', 'App\Comment')
             ->where('flaggable_id', $comment->id)

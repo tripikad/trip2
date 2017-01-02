@@ -50,5 +50,4 @@ class V2CommentVars
     {
         return $this->comment->flags->where('flag_type', $flagType)->count();
     }
-    
 }
