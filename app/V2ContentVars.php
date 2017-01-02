@@ -62,7 +62,7 @@ class V2ContentVars
         if ($user = request()->user()) {
             $key = 'new_'.$this->content->id.'_'.$user->id;
 
-            return Cache::get($key);
+            return Cache::store('permanent')->get($key);
         }
 
         return false;

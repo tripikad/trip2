@@ -94,7 +94,7 @@ class V2ForumController extends Controller
 
         if ($user) {
             $key = 'new_'.$forum->id.'_'.$user->id;
-            Cache::forget($key);
+            Cache::store('permanent')->forget($key);
         }
 
         return layout('2col')
