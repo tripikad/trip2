@@ -45,4 +45,9 @@ class V2CommentVars
     {
         return format_date($this->comment->created_at);
     }
+
+    public function flagCount($flagType)
+    {
+        return $this->comment->flags->where('flag_type', $flagType)->count();
+    }
 }
