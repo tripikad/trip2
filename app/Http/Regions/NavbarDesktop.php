@@ -51,7 +51,7 @@ class NavbarDesktop
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.user.message'),
-                'route' => route('message.index', [$user]),
+                'route' => route('v2.message.index', [$user]),
                 'badge' => $user ? $user->unreadMessagesCount() : '',
             ])
             ->pushWhen($user && $user->hasRole('admin'), [
