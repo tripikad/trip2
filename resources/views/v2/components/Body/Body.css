@@ -50,14 +50,20 @@
     word-break: break-word;
 }
 
-.Body ul {
+.Body ul,
+.Body ol {
     padding-left: $padding-md;
     margin: $margin-md 0;
 }
 
-.Body li {
-    list-style: disc;
+.Body ul li {
+    list-style-type: disc;
 }
+
+.Body ol li {
+    list-style-type: decimal;
+}
+
 .Body img {
     width: 100%;
     margin-bottom: $margin-md;
