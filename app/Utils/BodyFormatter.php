@@ -2,8 +2,8 @@
 
 namespace App\Utils;
 
-use App\Image;
 use Markdown;
+use App\Image;
 
 class BodyFormatter
 {
@@ -14,16 +14,15 @@ class BodyFormatter
         $this->body = $body;
     }
 
-
     public function markdown()
     {
-        $this->body = preg_replace("/\R{2}/","DOUBLE_BREAK", $this->body);
-        $this->body = preg_replace("/\R{1}/","SINGLE_BREAK", $this->body);
-        $this->body = str_replace("DOUBLE_BREAK","\n\n", $this->body);
+        $this->body = preg_replace("/\R{2}/", 'DOUBLE_BREAK', $this->body);
+        $this->body = preg_replace("/\R{1}/", 'SINGLE_BREAK', $this->body);
+        $this->body = str_replace('DOUBLE_BREAK', "\n\n", $this->body);
 
         $this->body = Markdown::convertToHtml($this->body);
 
-        $this->body = str_replace("SINGLE_BREAK","<br />", $this->body);
+        $this->body = str_replace('SINGLE_BREAK', '<br />', $this->body);
 
         return $this;
     }
