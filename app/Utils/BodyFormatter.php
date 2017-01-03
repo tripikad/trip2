@@ -3,8 +3,7 @@
 namespace App\Utils;
 
 use App\Image;
-
-// use Markdown;
+use Markdown;
 
 class BodyFormatter
 {
@@ -13,6 +12,20 @@ class BodyFormatter
     public function __construct($body)
     {
         $this->body = $body;
+    }
+
+
+    public function markdown()
+    {
+        $this->body = preg_replace("/\R{2}/","DOUBLE_BREAK", $this->body);
+        $this->body = preg_replace("/\R{1}/","SINGLE_BREAK", $this->body);
+        $this->body = str_replace("DOUBLE_BREAK","\n\n\n", $this->body);
+
+        $this->body = Markdown::convertToHtml($this->body);
+
+        $this->body = str_replace("SINGLE_BREAK","<br />", $this->body);
+
+        return $this;
     }
 
     public function links()
@@ -28,7 +41,7 @@ class BodyFormatter
         }
 
         if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
-            //       $this->body = $filteredBody;
+            // $this->body = $filteredBody;
         }
 
         return $this;
@@ -53,33 +66,12 @@ class BodyFormatter
         return $this;
     }
 
-    public function youtube()
-    {
-        $pattern = "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i";
-
-        $this->body = preg_replace_callback($pattern, function ($matches) {
-            return component('Youtube')->with('id', $matches[2]);
-        },
-            $this->body
-        );
-
-        return $this;
-    }
-
-    public function markdown()
-    {
-        // $this->body = Markdown::convertToHtml($this->body);
-
-        return $this;
-    }
-
     public function format()
     {
         return $this
             ->markdown()
             ->links()
             ->images()
-            // ->youtube()
             ->body;
     }
 }
