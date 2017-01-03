@@ -3,8 +3,10 @@
     <svg
         class="Icon"
         :class="isclasses"
-        :style="style"
+        :width="sizeMap.width"
+        :height="sizeMap.height"
     >
+
         <use :xlink:href="'#' + icon"></use>
 
     </svg>
@@ -24,7 +26,7 @@
         },
 
         computed: {
-            style: function() {
+            sizeMap: function() {
                 var sizes = { sm: 14, md: 18, lg: 26, xl: 36 }
 
                 if (this.width && this.height) {
