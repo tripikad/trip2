@@ -120,6 +120,13 @@ Route::get('v2/user/{id}', [
     'as' => 'v2.user.show',
 ]);
 
+// User
+
+Route::get('v2/user/{id}/messages', [
+    'uses' => 'V2MessageController@index',
+    'as' => 'v2.user.messages',
+]);
+
 // Destination
 
 Route::get('v2/destination/{id}', [
