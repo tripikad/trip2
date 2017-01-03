@@ -45,5 +45,4 @@ class V2MessageVars
     {
         return format_date($this->message->created_at);
     }
-
 }

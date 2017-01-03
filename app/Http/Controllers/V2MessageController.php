@@ -30,8 +30,8 @@ class V2MessageController extends Controller
             ->render();
     }
 
-    public function indexWith($user_id, $user_id_with) {
-
+    public function indexWith($user_id, $user_id_with)
+    {
         $user = User::findorFail($user_id);
         $user_with = User::findorFail($user_id_with);
 
@@ -56,7 +56,7 @@ class V2MessageController extends Controller
                 ->push(component('Title')
                     ->with('title', trans('message.index.row.description', [
                         'user' => $user_with->vars()->name,
-                        'created_at' => $messages->last()->vars()->created_at
+                        'created_at' => $messages->last()->vars()->created_at,
                     ]))
                 )
                 ->merge($messages->map(function ($message) use ($user) {
@@ -68,5 +68,4 @@ class V2MessageController extends Controller
 
             ->render();
     }
-
 }

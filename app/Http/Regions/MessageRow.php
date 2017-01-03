@@ -4,14 +4,12 @@ namespace App\Http\Regions;
 
 class MessageRow
 {
-
     public function render($message, $user)
     {
-
         return component('MessageRow')
             ->with('title', trans('message.index.row.description', [
                 'user' => $message->withUser->vars()->name,
-                'created_at' => $message->vars()->created_at
+                'created_at' => $message->vars()->created_at,
             ]))
             ->with('user', component('UserImage')
                 ->with('route', route('v2.user.show', [$message->withUser]))
@@ -24,7 +22,5 @@ class MessageRow
                 'v2.message.index.with',
                 [$user, $message->withUser])
             );
-
     }
-
 }
