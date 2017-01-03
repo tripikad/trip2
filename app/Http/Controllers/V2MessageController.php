@@ -54,9 +54,10 @@ class V2MessageController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('message.index.with.title',
-                        ['user' => $user_with->vars()->name]
-                    ))
+                    ->with('title', trans('message.index.row.description', [
+                        'user' => $user_with->vars()->name,
+                        'created_at' => $messages->last()->vars()->created_at
+                    ]))
                 )
                 ->merge($messages->map(function ($message) use ($user) {
                     return region('MessageWithRow', $message);

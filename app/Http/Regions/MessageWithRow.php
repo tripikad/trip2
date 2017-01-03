@@ -2,7 +2,7 @@
 
 namespace App\Http\Regions;
 
-class MessageRow
+class MessageWithRow
 {
 
     public function render($message)
@@ -16,10 +16,10 @@ class MessageRow
                 ->with('size', 36)
                 ->with('border', 3)
             )
-            ->with('title', trans('message.index.with.row.description', [
-                'user' => $message->fromUser->vars()->name,
-                'created_at' => $message->vars()->created_at
-            ]))
+            ->with(
+                'title',
+                $message->fromUser->vars()->name. ' ' . $message->vars()->created_at
+            )
             ->with('body', component('body')
                 ->with('body', $message->body)
             );

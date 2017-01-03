@@ -123,22 +123,16 @@ Route::get('v2/user/{id}', [
 // Message
 
 Route::get('v2/user/{id}/messages', [
+    'middleware' => 'role:superuser,userowner',
     'uses' => 'V2MessageController@index',
     'as' => 'v2.message.index',
 ]);
 
 Route::get('v2/user/{id}/messages/{id2}', [
+    'middleware' => 'role:superuser,userowner',
     'uses' => 'V2MessageController@indexWith',
     'as' => 'v2.message.index.with',
 ]);
-
-/*
-
-Route::get('user/{id}/messages', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@index', 'as' => 'message.index']);
-
-Route::get('user/{id}/messages/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@indexWith', 'as' => 'message.index.with']);
-
-*/
 
 // Destination
 
