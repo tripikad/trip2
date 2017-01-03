@@ -6,12 +6,12 @@
 
     .Link__title {
         color: $blue;
-        margin-right: $margin-xs;
         font: $font-text-md;
     }
 
     .Link__icon {
     	align-self: center;
+        margin-right: $margin-xs;
     }
 
 .Link--large .Link__title {
