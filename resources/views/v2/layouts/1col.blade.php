@@ -22,9 +22,9 @@ $footer = $footer ?? '';
 
     <div class="container">
 
-        <div class="row row-center padding-top-md padding-bottom-md">
+        <div class="row row-center padding-top-lg padding-bottom-md">
 
-            <div class="col-9">
+            <div class="col-8">
 
                 @foreach ($content as $content_item)
                 

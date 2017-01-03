@@ -120,6 +120,20 @@ Route::get('v2/user/{id}', [
     'as' => 'v2.user.show',
 ]);
 
+// Message
+
+Route::get('v2/user/{id}/messages', [
+    'middleware' => 'role:superuser,userowner',
+    'uses' => 'V2MessageController@index',
+    'as' => 'v2.message.index',
+]);
+
+Route::get('v2/user/{id}/messages/{id2}', [
+    'middleware' => 'role:superuser,userowner',
+    'uses' => 'V2MessageController@indexWith',
+    'as' => 'v2.message.index.with',
+]);
+
 // Destination
 
 Route::get('v2/destination/{id}', [

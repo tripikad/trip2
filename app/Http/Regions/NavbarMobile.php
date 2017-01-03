@@ -51,12 +51,12 @@ class NavbarMobile
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.user.message'),
-                'route' => route('message.index', [$user]),
+                'route' => route('v2.message.index', [$user]),
                 'badge' => $user ? $user->unreadMessagesCount() : '',
             ])
             ->pushWhen($user && $user->hasRole('admin'), [
                 'title' => trans('menu.auth.admin'),
-                'route' => route('content.index', ['internal']),
+                'route' => route('v2.internal.index'),
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.auth.logout'),
