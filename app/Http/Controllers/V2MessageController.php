@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Message;
 
 class V2MessageController extends Controller
 {
@@ -10,14 +11,57 @@ class V2MessageController extends Controller
     {
         $user = User::findorFail($user_id);
         $messages = collect($user->messages());
-        dump($messages);
+
         return layout('1col')
 
             ->with('header', region('UserHeader', $user))
 
-            ->with('content', $messages->map(function ($message) {
-                return component('Message')->with('title', $message->body);
-            }))
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('message.index.title'))
+                )
+                ->merge($messages->map(function ($message) use ($user) {
+                    return region('MessageRow', $message, $user);
+                }))
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
+    public function indexWith($user_id, $user_id_with) {
+
+        $user = User::findorFail($user_id);
+        $user_with = User::findorFail($user_id_with);
+
+        $messages = $user->messagesWith($user_id_with);
+
+        // Mark messages as read
+
+        $messageIds = $user
+            ->messagesWith($user_id_with)
+            ->where('user_id_to', $user->id)
+            ->keyBy('id')
+            ->keys()
+            ->toArray();
+
+        Message::whereIn('id', $messageIds)->update(['read' => 1]);
+
+        return layout('1col')
+
+            ->with('header', region('UserHeader', $user))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('message.index.with.title',
+                        ['user' => $user_with->vars()->name]
+                    ))
+                )
+                ->merge($messages->map(function ($message) use ($user) {
+                    return region('MessageWithRow', $message);
+                }))
+            )
 
             ->with('footer', region('Footer'))
 
