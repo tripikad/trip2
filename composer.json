@@ -24,7 +24,8 @@
         "cviebrock/eloquent-sluggable": "^4.0",
         "doctrine/dbal": "^2.5",
         "msurguy/honeypot": "^1.0",
-        "roumen/sitemap": "^2.6"
+        "roumen/sitemap": "^2.6",
+        "graham-campbell/markdown": "^7.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -42,7 +42,7 @@
 }
 
 .Body a,
-.Body a:link
+.Body a:link,
 .Body a:active {
     color: $blue;
     text-decoration: underline;
@@ -55,6 +55,9 @@
     margin: $margin-md 0;
 }
 
+.Body li {
+    list-style: disc;
+}
 .Body img {
     width: 100%;
     margin-bottom: $margin-md;
