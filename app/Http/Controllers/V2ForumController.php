@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Cache;
 use Request;
+use App\User;
 use App\Topic;
 use App\Content;
 use App\Destination;
-use App\User;
 
 class V2ForumController extends Controller
 {
@@ -81,7 +81,6 @@ class V2ForumController extends Controller
 
     public function followIndex($user_id)
     {
-
         $user = User::findOrFail($user_id);
         $follows = $user->follows;
 
