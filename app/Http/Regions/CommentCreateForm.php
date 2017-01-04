@@ -13,6 +13,7 @@ class CommentCreateForm
                     ->with('route', route('comment.store', [$content->type, $content->id]))
                     ->with('fields', collect()
                         ->push(component('FormTextarea')
+                            ->is('noBorder')
                             ->with('name', 'body')
                             ->with('placeholder', trans('comment.create.field.body.title'))
                         )

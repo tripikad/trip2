@@ -134,6 +134,14 @@ Route::get('v2/user/{id}/messages/{id2}', [
     'as' => 'v2.message.index.with',
 ]);
 
+// Follows
+
+Route::get('v2/user/{id}/follows', [
+    'middleware' => 'role:admin,userowner',
+    'uses' => 'V2ForumController@followIndex',
+    'as' => 'v2.follow.index',
+]);
+
 // Destination
 
 Route::get('v2/destination/{id}', [
