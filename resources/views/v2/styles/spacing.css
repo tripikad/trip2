@@ -132,6 +132,18 @@
   padding-left: 0 ?if $mobile;
 }
 
+/* Special cases */
+
+.padding-left-xl-tablet-none {
+  padding-left: $padding-xl;
+  padding-left: 0 ?if $tablet;
+}
+
+.padding-right-xl-tablet-none {
+  padding-right: $padding-xl;
+  padding-right: 0 ?if $tablet;
+}
+
 .padding-top-xl-mobile-md {
   padding-top: $padding-xl;
   padding-top: $padding-md ?if $mobile;

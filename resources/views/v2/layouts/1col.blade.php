@@ -20,6 +20,8 @@ $footer = $footer ?? '';
 
 @section('content')
 
+<div class="background-white">
+
     <div class="container">
 
         <div class="row row-center padding-top-lg padding-bottom-md">
@@ -64,6 +66,8 @@ $footer = $footer ?? '';
 
     @endif
     
+</div>
+
 @endsection
 
 @section('footer', $footer)

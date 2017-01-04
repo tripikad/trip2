@@ -2,11 +2,11 @@
 
 namespace App\Http\Regions;
 
-class Filter
+class FilterHorizontal
 {
     public function render($destinations, $topics, $currentDestination = null, $currentTopic = null, $currentPage = 1, $type = '')
     {
-        return component('Form')
+        return component('FormHorizontal')
                 ->with('route', route('utils.filter'))
                 ->with('fields', collect()
                     ->pushWhen($destinations, component('FormSelect')

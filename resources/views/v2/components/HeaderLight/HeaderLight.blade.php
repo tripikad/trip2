@@ -40,15 +40,15 @@ $background = $background ?? '';
 
                 <div class="HeaderLight__metaWrapper">
 
-                    <div class="HeaderLight__meta">
-
-                    {!! $meta !!}
-
-                    </div>
-
                     <div class="HeaderLight__meta2">
 
                     {!! $meta2 !!}
+
+                    </div>
+
+                    <div class="HeaderLight__meta">
+
+                    {!! $meta !!}
 
                     </div>
 

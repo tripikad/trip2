@@ -44,7 +44,7 @@ class V2ForumController extends Controller
                 'HeaderLight',
                 trans("content.$forumType.index.title"),
                 region(
-                        'Filter',
+                        'FilterHorizontal',
                         $destinations,
                         $topics,
                         $currentDestination,

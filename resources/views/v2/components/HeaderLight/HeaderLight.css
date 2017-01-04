@@ -7,25 +7,21 @@
 }
 
     .HeaderLight__content {
-        margin-top: $margin-xxl;
-    }
-
-    .HeaderLight__metaWrapper {
-        margin-top: $margin-md;
-        display: flex;
-        flex-direction: column-reverse ?if $tablet;
-        align-items: center;
-        align-items: flex-start ?if $tablet;
-        justify-content: space-between;
+        margin-top: $margin-xl;
+        margin-left: $margin-xl;
+        margin-left: 0 ?if $mobile;
     }
 
     .HeaderLight__meta {
-        margin-top: $margin-md ?if $tablet;
+        margin-top: $margin-md;
+    }
+
+    .HeaderLight__meta2 {
+        margin-top: $margin-md;
     }
 
     .HeaderLight__title {
         color: $gray-darkest;
         font: $font-heading-xxl;
         font: $font-heading-xl ?if $mobile;
-        margin-right: $margin-md;
     }
