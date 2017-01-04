@@ -3,3 +3,7 @@
 .background-gray {
     background-color: $gray-light;
 }
+
+.background-white {
+    background-color: $white;
+}

@@ -4,12 +4,16 @@
 
 }
 
+.multiselect__content {
+    overflow: auto;
+}
+
 .multiselect__option--highlight {
     background: $orange !important;
 }
 
 .multiselect__option--highlight::after {
-    background: $orange !important;
+    content: none !important;
 }
 
 .multiselect__tags {

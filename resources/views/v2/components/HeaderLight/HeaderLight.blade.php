@@ -19,26 +19,42 @@ $background = $background ?? '';
         </div>
 
         <div class="HeaderLight__content">
-
-            <div>
                 
-                <div class="HeaderLight__title">
+                <div class="HeaderLight__titleWrapper">
+                
+                    <div class="HeaderLight__title">
 
-                {!! $title !!}
+                    {!! $title !!}
+
+                    </div>
+                
+                    <div class="HeaderLight__meta2">
+
+                    
+
+                    </div>
 
                 </div>
 
-                @if ($meta)
+                @if ($meta || $meta2)
 
-                <div class="HeaderLight__meta">
+                <div class="HeaderLight__metaWrapper">
 
-                {!! $meta !!}
+                    <div class="HeaderLight__meta2">
+
+                    {!! $meta2 !!}
+
+                    </div>
+
+                    <div class="HeaderLight__meta">
+
+                    {!! $meta !!}
+
+                    </div>
 
                 </div>
 
                 @endif
-
-            </div>
 
         </div>
 
