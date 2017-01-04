@@ -11,7 +11,7 @@ return [
     'header.blogs' => 'Blogi',
     'header.offers' => 'Pakkumised',
     'header.my' => 'Minu Trip.ee',
-    'header.user' => 'Profiil',
+    'header.user' => 'Minu profiil',
     'header.edit' => 'Muuda profiili',
 
     'auth.register' => 'Registreeri',
@@ -54,7 +54,7 @@ return [
     'user.message' => 'Sõnumid',
     'user.follow' => 'Jälgitavad teemad',
     'user.travelmate' => 'Otsid reisikaaslast?',
-    'user.add.places' => 'Lisa riigid, kus oled käinud',
+    'user.add.places' => 'Riigid, kus olen käinud',
     'user.photo' => 'Lisa reisipilt',
 
     'admin.internal' => 'Sisefoorum',

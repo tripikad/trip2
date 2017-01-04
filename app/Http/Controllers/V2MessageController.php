@@ -62,6 +62,7 @@ class V2MessageController extends Controller
                 ->merge($messages->map(function ($message) use ($user) {
                     return region('MessageWithRow', $message);
                 }))
+                ->push(region('MessageCreateForm', $user, $user_with))
             )
 
             ->with('footer', region('Footer'))

@@ -20,7 +20,7 @@ class V2UserController extends Controller
                 $query->whereIn('type', $types);
             })
             ->latest()
-            ->take(10)
+            ->take(24)
             ->get();
 
         return layout('1col')

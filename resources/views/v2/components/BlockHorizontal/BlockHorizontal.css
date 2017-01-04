@@ -4,10 +4,11 @@
     display: flex;
     display: block ?if $mobile;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .BlockHorizontal__item {
     margin-right: $margin-sm;
     margin-right: 0 ?if $mobile;
-    margin-bottom: $margin-sm ?if $mobile;
+    margin-bottom: $margin-sm ?if $tablet;
 }

@@ -19,7 +19,7 @@ class V2FrontpageController extends Controller
         $news = Content::getLatestItems('news', 6);
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 6);
-        $travelmates = Content::getLatestItems('travelmate', 3);
+        $travelmates = Content::getLatestItems('travelmate', 5);
 
         return layout('frontpage')
 
@@ -68,7 +68,7 @@ class V2FrontpageController extends Controller
             )
 
             ->with('bottom2', collect()
-                ->push(region('FrontpageFlightBlog', $flights->slice(3), $blogs))
+                ->push(region('FrontpageBottom', $flights->slice(3), $travelmates))
                 ->push(component('Block')
                     ->is('white')
                     ->is('uppercase')
@@ -78,12 +78,12 @@ class V2FrontpageController extends Controller
                 ->push(component('Block')
                     ->is('white')
                     ->is('uppercase')
-                    ->with('title', trans('frontpage.index.travelmate.title'))
+                    ->with('title', trans('frontpage.index.blog.title'))
                     ->with('content', [])
                 )
                 ->push(component('Grid3')
-                    ->with('items', $travelmates->map(function ($travelmate) {
-                        return region('TravelmateCard', $travelmate);
+                    ->with('items', $blogs->map(function ($blog) {
+                        return region('BlogCard', $blog);
                     }))
                 )
                 ->push(component('Promo')->with('promo', 'footer'))

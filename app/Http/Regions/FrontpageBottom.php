@@ -2,9 +2,9 @@
 
 namespace App\Http\Regions;
 
-class FrontpageFlightBlog
+class FrontpageBottom
 {
-    public function render($flights, $blogs)
+    public function render($flights, $travelmates)
     {
         return component('GridSplit')
             ->with('left_col', 8)
@@ -14,8 +14,8 @@ class FrontpageFlightBlog
                     ->is('white')
                     ->is('uppercase')
                     ->with('title', trans('frontpage.index.flight.title'))
-                    ->with('content', $flights->map(function ($bottomFlight) {
-                        return region('FlightRow', $bottomFlight);
+                    ->with('content', $flights->map(function ($flight) {
+                        return region('FlightRow', $flight);
                     }))
                 )
             )
@@ -23,9 +23,9 @@ class FrontpageFlightBlog
                 ->push(component('Block')
                     ->is('white')
                     ->is('uppercase')
-                    ->with('title', trans('frontpage.index.blog.title'))
-                    ->with('content', $blogs->map(function ($blog) {
-                        return region('BlogCard', $blog);
+                    ->with('title', trans('frontpage.index.travelmate.title'))
+                    ->with('content', $travelmates->map(function ($travelmate) {
+                        return region('TravelmateCard', $travelmate);
                     }))
                 )
             );

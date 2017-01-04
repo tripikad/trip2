@@ -13,12 +13,14 @@ class UserHeader
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.activity'))
+                    ->with('route', route('v2.user.show', [$user]))
             )
             ->pushWhen(
                 $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.edit.profile'))
+                    ->with('route', route('user.edit', [$user]))
             )
             ->pushWhen(
                 // Only the owner can see its own messages
@@ -26,18 +28,14 @@ class UserHeader
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.message'))
+                    ->with('route', route('v2.message.index', [$user]))
             )
             ->pushWhen(
                 $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
                 component('Button')
-                ->is('cyan')
-                ->with('title', trans('menu.user.follow'))
-            )
-            ->pushWhen(
-                $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
-                component('Button')
-                ->is('cyan')
-                ->with('title', trans('menu.user.add.places'))
+                    ->is('cyan')
+                    ->with('title', trans('menu.user.add.places'))
+                    ->with('route', route('user.destinations', [$user]))
             );
     }
 
@@ -62,7 +60,7 @@ class UserHeader
                 ->with('route', route('user.show', [$user]))
                 ->with('image', $user->imagePreset('small_square'))
                 ->with('rank', $user->vars()->rank)
-                ->with('size', 132)
+                ->with('size', 164)
                 ->with('border', 7)
             )
             ->with('name', $user->vars()->name)
