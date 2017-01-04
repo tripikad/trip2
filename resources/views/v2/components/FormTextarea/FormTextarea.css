@@ -18,5 +18,9 @@
     }
 
     .FormTextarea__textarea::placeholder {
-        color: $gray;
+        color: $gray-dark;
     }
+
+.FormTextarea--noBorder .FormTextarea__textarea {
+    border: none;
+}

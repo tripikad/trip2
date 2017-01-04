@@ -39,4 +39,6 @@
     border: $border-gray-md;
     border-radius: $border-radius-md;
     background: none;
+    margin-left: $margin-xxl;
+    margin-left: 0 ?if $tablet;
 }

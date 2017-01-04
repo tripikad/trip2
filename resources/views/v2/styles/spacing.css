@@ -149,6 +149,11 @@
   padding-top: $padding-md ?if $mobile;
 }
 
+.padding-bottom-xl-mobile-md {
+  padding-bottom: $padding-xl;
+  padding-bottom: $padding-md ?if $mobile;
+}
+
 .padding-top-none-mobile-md {
   padding-top: 0;
   padding-top: $padding-md ?if $mobile;
