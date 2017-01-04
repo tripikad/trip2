@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthTest extends TestCase
 {
@@ -9,26 +9,29 @@ class AuthTest extends TestCase
 
     public function test_user_can_register_confirm_and_login()
     {
+        $user = 'test_user_'.date('Ymd');
+
+        Honeypot::disable();
 
         // User can register
 
         $this->visit('/')
             ->see(trans('menu.auth.register'))
             ->click(trans('menu.auth.register'))
-            ->type('user', 'name')
+            ->type($user, 'name')
             ->type('user@example.com', 'email')
             ->type('password', 'password')
             ->type('password', 'password_confirmation')
             ->press(trans('auth.register.submit.title'))
             ->seePageIs('/login')
             ->see(trans('auth.register.sent.info'))
-            ->seeInDatabase('users', ['name' => 'user', 'verified' => 0]);
+            ->seeInDatabase('users', ['name' => $user, 'verified' => 0]);
 
         // User with unconfirmed account can not login
 
         $this->visit('/')
             ->click(trans('menu.auth.login'))
-            ->type('user', 'name')
+            ->type($user, 'name')
             ->type('password', 'password')
             ->press(trans('auth.login.submit.title'))
             ->seePageIs('/login')
@@ -36,9 +39,9 @@ class AuthTest extends TestCase
 
         // User can confirm its account
 
-        $this->visit($this->getVerificationLink('user'))
+        $this->visit($this->getVerificationLink($user))
             ->seeInDatabase('users', [
-                'name' => 'user',
+                'name' => $user,
                 'verified' => 1,
                 'registration_token' => null,
             ])
@@ -49,7 +52,7 @@ class AuthTest extends TestCase
 
         $this->visit('/')
             ->click(trans('menu.auth.login'))
-            ->type('user', 'name')
+            ->type($user, 'name')
             ->type('password', 'password')
             ->press(trans('auth.login.submit.title'))
             ->seePageIs('/')
@@ -61,6 +64,8 @@ class AuthTest extends TestCase
         $user = factory(App\User::class)->create();
 
         // User can request new password
+
+        Honeypot::disable();
 
         $this->visit('/')
             ->click(trans('menu.auth.login'))
@@ -93,6 +98,8 @@ class AuthTest extends TestCase
 
     public function test_nonregistered_user_can_not_reset_password()
     {
+        Honeypot::disable();
+
         $this->visit('/')
             ->click(trans('menu.auth.login'))
             ->click(trans('auth.reset.apply.title.link'))

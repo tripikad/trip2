@@ -4,7 +4,7 @@
         'items' => [
             [
                 'title' => $content->user->name,
-                'route' => route('user.show', [$content->user])
+                'route' => ($content->user->name != 'Tripi külastaja' ? route('user.show', [$content->user]) : false)
             ],
             [
                 'title' => view('component.date.relative', ['date' => $content->created_at])

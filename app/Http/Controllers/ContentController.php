@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Auth;
+use DB;
 use Log;
-use App\Content;
-use App\Destination;
-use App\Topic;
-use App\Image;
+use Auth;
+use Cache;
 use App\Main;
-use Illuminate\Pagination\LengthAwarePaginator;
-// Traits
+use App\Image;
+use App\Topic;
+use App\Content;
+use Carbon\Carbon;
+use App\Destination;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ContentTraits\Blog;
-use App\Http\Controllers\ContentTraits\Flight;
+// Traits
 use App\Http\Controllers\ContentTraits\Forum;
+use App\Http\Controllers\ContentTraits\Flight;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Controllers\ContentTraits\Travelmate;
 
 class ContentController extends Controller
@@ -30,17 +32,33 @@ class ContentController extends Controller
             abort(401);
         }
 
-        $contents = Content::whereType($type)
-            ->with(config("content_$type.index.with"))
-            ->orderBy(
-                config("content_$type.index.orderBy.field"),
-                config("content_$type.index.orderBy.order")
-            );
-
         if (config("content_$type.store.status", 1) == 0 && Auth::check() && Auth::user()->hasRole('admin')) {
-            //$contents->whereStatus(0);
+            $comments_status = 0;
         } else {
-            $contents->whereStatus(1);
+            $comments_status = 1;
+        }
+
+        if (in_array('comments', config("content_$type.index.with")) && ($type == 'forum' || $type == 'buysell' || $type == 'expat' || $type == 'internal')) {
+            $contents = Content::leftJoin('comments', function ($query) use ($comments_status) {
+                $query->on('comments.content_id', '=', 'contents.id')
+                    ->on('comments.id', '=',
+                        DB::raw('(select id from comments where `content_id` = `contents`.`id` order by id desc limit 1)'));
+            })
+                ->where('contents.type', $type)
+                ->with(config("content_$type.index.with"))
+                ->select(['contents.*', DB::raw('IF(UNIX_TIMESTAMP(comments.created_at) > UNIX_TIMESTAMP(contents.created_at), comments.created_at, contents.created_at) AS contentOrder')])
+                ->orderBy('contentOrder', 'desc');
+        } else {
+            $contents = Content::whereType($type)
+                ->with(config("content_$type.index.with"))
+                ->orderBy(
+                    config("content_$type.index.orderBy.field"),
+                    config("content_$type.index.orderBy.order")
+                );
+        }
+
+        if ($comments_status != 0) {
+            $contents->where('contents.status', $comments_status);
         }
 
         $expireField = config("content_$type.index.expire.field");
@@ -51,11 +69,11 @@ class ContentController extends Controller
                     unset($expireData[$key]);
                 }
 
-                $contents = $contents->whereRaw('`'.$expireField.'` >= ?', [
+                $contents = $contents->whereRaw('`contents`.`'.$expireField.'` >= ?', [
                     array_values($expireData)[0],
                 ]);
             } else {
-                $contents = $contents->whereBetween($expireField, [
+                $contents = $contents->whereBetween('contents.'.$expireField, [
                     $expireData['daysFrom'],
                     $expireData['daysTo'],
                 ]);
@@ -65,26 +83,41 @@ class ContentController extends Controller
         if ($request->destination) {
             $descendants = Destination::find($request->destination)
                 ->descendantsAndSelf()
-                ->lists('id');
+                ->pluck('id');
 
             $contents = $contents
                 ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
-                ->select('contents.*')
                 ->whereIn('content_destination.destination_id', $descendants);
         }
 
         if ($request->topic) {
             $contents = $contents
                 ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
-                ->select('contents.*')
                 ->where('content_topic.topic_id', '=', $request->topic);
         }
 
         if ($request->author) {
-            $contents = $contents->where('user_id', $request->author);
+            $contents = $contents->where('contents.user_id', $request->author);
         }
 
         $contents = $contents->simplePaginate(config('content_'.$type.'.index.paginate'));
+
+        $queryParameters = [];
+        $queryString = '';
+
+        if (isset($request->destination) && $request->destination) {
+            $queryParameters[] = 'destination='.$request->destination;
+        }
+
+        if (isset($request->topic) && $request->topic) {
+            $queryParameters[] = 'topic='.$request->topic;
+        }
+
+        if (! empty($queryParameters) && count($queryParameters)) {
+            $queryString = '?'.implode('&', $queryParameters);
+        }
+
+        $contents->setPath(route($type.'.index').$queryString);
 
         $destinations = Destination::getNames($type);
         $topics = Topic::getNames($type);
@@ -117,6 +150,16 @@ class ContentController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
 
+    public function findBySlugAndType($type, $slug)
+    {
+        $content = Content::where('slug', $slug)->where('type', $type)->firstOrFail();
+        if (! $content) {
+            abort(404);
+        }
+
+        return $this->show($type, $content->id);
+    }
+
     public function show($type, $id)
     {
         if ($type == 'internal'
@@ -138,7 +181,10 @@ class ContentController extends Controller
             $comments->count(),
             config('content_'.$type.'.index.paginate')
         );
-        $comments->setPath(route('content.show', [$type, $id]));
+
+        if ($type !== 'static') {
+            $comments->setPath(route($type.'.show', [$content->slug]));
+        }
 
         if (view()->exists('pages.content.'.$type.'.show')) {
             $view = 'pages.content.'.$type.'.show';
@@ -163,6 +209,19 @@ class ContentController extends Controller
         return response()
             ->view($view, $viewVariables)
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
+    }
+
+    public function showWithRedirect($type, $id)
+    {
+        $content = Content::findorFail($id);
+
+        if ('static' === $type) {
+            return redirect()->route(
+                'static.'.$id, [], 301);
+        }
+
+        return redirect()->route(
+            $type.'.show', [$content->slug], 301);
     }
 
     public function create($type)
@@ -213,10 +272,10 @@ class ContentController extends Controller
         $content = \App\Content::findorFail($id);
 
         $destinations = Destination::getNames();
-        $destination = $content->destinations()->select('destinations.id')->lists('id')->toArray();
+        $destination = $content->destinations()->select('destinations.id')->pluck('id')->toArray();
 
         $topics = Topic::getNames();
-        $topic = $content->topics()->select('topics.id')->lists('id')->toArray();
+        $topic = $content->topics()->select('topics.id')->pluck('id')->toArray();
 
         $viewType = $type;
         foreach (config('menu.forum') as $item) {
@@ -345,6 +404,22 @@ class ContentController extends Controller
 
             $content->save();
 
+            if (in_array($content->type, ['forum', 'buysell', 'expat', 'internal'])) {
+                DB::table('users')->select('id')->chunk(1000, function ($users) use ($content) {
+                    collect($users)->each(function ($user) use ($content) {
+
+                        // For user we store the cache key about new content item
+
+                        $key = 'new_'.$content->id.'_'.$user->id;
+
+                        // Cache value is initially 0 (no new comments are added yet)
+                        // Note: not sure about set for x seconds / set forever / auto-expiration yet
+
+                        Cache::store('permanent')->forever($key, 0);
+                    });
+                });
+            }
+
             Log::info('New content added', [
                 'user' =>  Auth::user()->name,
                 'title' =>  $request->get('title'),
@@ -399,13 +474,13 @@ class ContentController extends Controller
             if (! $request->ajax()) {
                 if (! $id) {
                     return redirect()
-                        ->route('content.index', [$type])
+                        ->route($type.'.index')
                         ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
                             'title' => $content->title,
                         ]));
                 } else {
                     return redirect()
-                        ->route('content.show', [$type, $content])
+                        ->route($type.'.show', [$content->slug])
                         ->with('info', trans('content.update.info', [
                             'title' => $content->title,
                         ]));
@@ -413,7 +488,7 @@ class ContentController extends Controller
             }
         } else {
             return redirect()
-                ->route('content.index', [$type]);
+                ->route($type.'.index');
         }
     }
 
@@ -464,8 +539,8 @@ class ContentController extends Controller
     public function filter(Request $request, $type)
     {
         return redirect()->route(
-            'content.index',
-            [$type,
+            $type.'.index',
+            [
                 'destination' => $request->destination ? $request->destination : null,
                 'topic' => $request->topic ? $request->topic : null,
                 'author' => $request->author ? $request->author : null,

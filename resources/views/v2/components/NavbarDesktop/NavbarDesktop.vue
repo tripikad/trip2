@@ -5,14 +5,13 @@
         <div class="NavbarDesktop__links">
 
             <a
-                v-for="link in links"
+                v-for="(link, index) in currentLinks"
                 :href="link.route"
-                track-by="$index"
+                key="index"
             >
 
                 <div
-                    @mouseover="toggleSubmenu(link)"
-                    v-on-clickaway="submenuOpen = false"
+                    @clickaway="submenuOpen = false"
                     class="NavbarDesktop__link"
                 >
 
@@ -21,14 +20,41 @@
                 </div>  
 
             </a>
+
+            <a
+                v-if="! currentUser"
+                :href="route"
+                @mouseover="toggleSubmenu()"
+            >
+
+                <div class="NavbarDesktop__link">
+
+                    {{ title }}
+
+                </div>  
+
+            </a>
+
+            <div v-if="currentUser" class="NavbarDesktop__userImage">
+
+            <component
+                @mouseover.native="toggleSubmenu()"
+                is="UserImage"
+                :route="currentUser.route"
+                :image="currentUser.image"
+                :rank="currentUser.rank"
+            >
+            </component>
           
+            </div>
+
         </div>
 
         <div
             class="NavbarDesktop__popover"
-            v-if="submenuOpen"
+            v-show="submenuOpen"
             transition="fadeZoom"
-            v-on-clickaway="toggleSubmenu()"
+            v-on-clickaway="closeSubmenu"
         >
 
             <div class="NavbarDesktop__arrowWrapper">            
@@ -40,9 +66,9 @@
             <div class="NavbarDesktop__sublinks">
 
                 <a
-                    v-for="link in sublinks"
+                    v-for="(link, index) in currentSublinks"
                     :href="link.route"
-                    track-by="$index"
+                    track-by="index"
                 >
 
                     <div class="NavbarDesktop__sublink">
@@ -64,38 +90,45 @@
 <script>
 
     import { mixin as VueClickaway } from 'vue-clickaway'
+    import UserImage from '../UserImage/UserImage.vue'
 
     export default {
+
+        components: { UserImage },
 
         mixins: [ VueClickaway ],
 
         props: {
             isclasses: { default: '' },
             links: { default: '' },
-            sublinks: { default: '' }
+            sublinks: { default: '' },
+            user: { default: '' },
+            route: { default: '' },
+            title: { default: '' }
         },
 
         methods: {
-            toggleSubmenu: function(link) {
-                if (link.menu) {
-                    this.submenuOpen = !this.submenuOpen
-                }
+            closeSubmenu: function() {
+                this.submenuOpen = false
+            },
+            toggleSubmenu: function() {
+                this.submenuOpen = !this.submenuOpen
             }
         },
 
         data() {
             return {
-                submenuOpen: false
+                submenuOpen: false,
+                currentLinks: [],
+                currentSublinks: [],
+                currentUser: {}
             }
         },
 
-        ready() {
-            this.links = this.links
-                ? JSON.parse(decodeURIComponent(this.links))
-                : ''
-            this.sublinks = this.sublinks
-                ? JSON.parse(decodeURIComponent(this.sublinks))
-                : ''
+        mounted() {
+            this.currentLinks = this.links ? JSON.parse(decodeURIComponent(this.links)) : ''
+            this.currentSublinks = this.sublinks ? JSON.parse(decodeURIComponent(this.sublinks)) : ''
+            this.currentUser = this.user ? JSON.parse(decodeURIComponent(this.user)) : ''
         }
 
     }

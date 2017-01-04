@@ -13,8 +13,14 @@
         font: $font-text-md;
         padding: $padding-sm;
         width: 100%;
+        line-height: $line-height-md;
+        color: $gray-darkest;
     }
 
     .FormTextarea__textarea::placeholder {
-        color: $gray;
+        color: $gray-dark;
     }
+
+.FormTextarea--noBorder .FormTextarea__textarea {
+    border: none;
+}

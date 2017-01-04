@@ -1,12 +1,5 @@
 @import "variables";
 
-.ForumPost {
-    border: $border-gray-md;
-    border: none ?if $mobile;
-    border-radius: $border-radius-md;
-    padding: $padding-md;
-}
-
     .ForumPost__content {
         display: flex;
     }
@@ -15,13 +8,12 @@
         color: $gray-darkest;
         font: $font-heading-xl;
         margin-bottom: $margin-sm;
+        line-height: $line-height-sm;
     }
 
     .ForumPost__left {
-        padding-right: $padding-sm;
+        padding-right: $padding-md;
         display: none ?if $mobile;
-        margin-left: calc($spacer * -3.5);
-        margin-top: calc($spacer * -0.75);
     }
 
     .ForumPost__meta {

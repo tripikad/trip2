@@ -1,7 +1,14 @@
 <?php
 
 return [
-
+    'content_types' => [
+        'forum',
+        'buysell',
+        'expat',
+        'news',
+        'flight',
+        //'blog',
+    ],
     'types' => [
         'forum' => [
             'items_per_page' => 15,

@@ -3,9 +3,19 @@
     .MetaLink__title {
         font: $font-text-sm;
         color: $gray-dark;
+        padding-top: calc($spacer / 2);
     }
 
 .MetaLink--white .MetaLink__title {
 	color: $white;
 }
+
+.MetaLink--large .MetaLink__title {
+    font: $font-text-md;
+}
+
+.MetaLink--orange .MetaLink__title {
+    color: $orange;
+}
+
 

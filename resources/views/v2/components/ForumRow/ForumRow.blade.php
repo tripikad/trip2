@@ -4,6 +4,7 @@ $route = $route ?? '';
 $user = $user ?? '';
 $title = $title ?? '';
 $meta = $meta ?? collect();
+$badge = $badge ?? '';
 
 @endphp
 
@@ -27,13 +28,13 @@ $meta = $meta ?? collect();
 
             </div>
 
+            </a>
+
             <div class="ForumRow__meta">
 
                 {!! $meta !!}
             
             </div>
-
-            </a>
 
         </div>
 

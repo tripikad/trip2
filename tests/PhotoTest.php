@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Content;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PhotoTest extends TestCase
 {
@@ -100,7 +100,7 @@ class PhotoTest extends TestCase
             ->type('Hello photo title', 'title')
             ->attach(storage_path().'/tests/test.jpg', 'file')
             ->press(trans('content.create.submit.title'))
-            ->seePageIs('content/photo')
+            ->seePageIs(config('sluggable.contentTypeMapping')['photo'])
             ->see(trans('content.store.status.1.info', ['title' => 'Hello photo title']))
             ->see('Hello photo title')
             ->seeInDatabase('contents', [
@@ -134,7 +134,7 @@ class PhotoTest extends TestCase
             ->type('New Hello photo title', 'title')
             ->attach(storage_path().'/tests/test2.jpeg', 'file')
             ->press(trans('content.edit.submit.title'))
-            ->seePageIs('content/photo/'.$content->id)
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
             ->see(trans('content.update.info', ['title' => 'New Hello photo title']))
             ->see('New Hello photo title')
             ->seeInDatabase('contents', [

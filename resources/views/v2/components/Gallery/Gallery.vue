@@ -6,14 +6,14 @@
 
             <div
                 class="col-2"
-                v-for="item in images"
-                track-by="$index"
+                v-for="(item, index) in currentImages"
+                key="index"
             >
 
                 <img
                     class="Gallery__image"
                     :src="item.small"
-                    @click="render($index)"
+                    @click="render(index)"
                 />
 
             </div>
@@ -28,13 +28,13 @@
                 icon="icon-close"
                 size="xl"
                 fill="white"
-                @click="fullscreen = false, activeImage = -1">
+                @click.native="fullscreen = false, activeImage = -1">
             </component>
 
             <div
                 class="Gallery__left"
-                @click="activeImage--"
-                v-if="activeImage > 0"
+                @click="prevImage"
+                v-show="activeImage > 0"
             >
 
                 <component is="Icon" icon="icon-arrow-left" size="xl" fill="white"></component>
@@ -43,8 +43,8 @@
 
              <div
                 class="Gallery__right"
-                @click="activeImage++"
-                v-if="activeImage < images.length -1"
+                @click="nextImage"
+                v-show="activeImage < images.length - 1"
             >
 
                 <component is="Icon" icon="icon-arrow-right" size="xl" fill="white"></component>
@@ -53,14 +53,14 @@
 
             <div class="Gallery__fullImageWrapper">
 
-                <img class="Gallery__fullImage" :src="images[activeImage].large"/>
+                <img class="Gallery__fullImage" :src="currentImages[activeImage].large" />
 
             </div>
 
-            <div class="Gallery__fullMeta">
-
-                {{{ images[activeImage].meta }}}
-
+            <div
+                class="Gallery__fullMeta"
+                v-html="currentImages[activeImage].meta"
+            >
             </div>
             
         </div>
@@ -87,7 +87,8 @@ export default {
     data() {
         return {
             fullscreen: false,
-            activeImage: false
+            activeImage: false,
+            currentImages: []
         }
     },
 
@@ -95,11 +96,17 @@ export default {
         render: function(index) {
             this.activeImage = index
             this.fullscreen = true
+        },
+        prevImage: function() {
+            this.activeImage = this.activeImage - 1
+        },
+        nextImage: function() {
+            this.activeImage = this.activeImage + 1
         }
     },
 
-    ready() {
-        this.images = this.images
+    mounted() {
+        this.currentImages = this.images
             ? JSON.parse(decodeURIComponent(this.images))
             : []
     }

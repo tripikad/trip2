@@ -188,7 +188,7 @@
 
                                 @include('component.card', [
                                     'modifiers' => 'm-blue',
-                                    'route' => route('content.show', [$flight->type, $flight]),
+                                    'route' => route($flight->type.'.show', [$flight->slug]),
                                     'title' => $flight->title.' '.$flight->price.config('site.currency.symbol'),
                                     'image' => $flight->imagePreset()
                                 ])

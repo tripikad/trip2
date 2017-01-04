@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
-use App\Content;
 use App\Image;
+use App\Content;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminTest extends TestCase
 {
@@ -141,16 +141,15 @@ class AdminTest extends TestCase
             ->see(trans('admin.content.index.title'))
             ->seeLink('Hello unpublished')
             ->click('Hello unpublished')
-            ->seePageIs('content/'.$content1->type.'/'.$content1->id)
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug)
             ->see('Hello unpublished');
     }
 
     public function test_unlogged_or_regular_user_can_not_see_internal_forum()
     {
-
         // Unlogged user
 
-        $response = $this->call('GET', 'content/internal');
+        $response = $this->call('GET', 'toimetus');
         $this->assertEquals(401, $response->status());
 
         // Regular user
@@ -161,7 +160,7 @@ class AdminTest extends TestCase
         ]);
 
         $response = $this->actingAs($user1)
-            ->call('GET', 'content/internal');
+            ->call('GET', 'toimetus');
         $this->assertEquals(401, $response->status());
     }
 
@@ -187,11 +186,11 @@ class AdminTest extends TestCase
             ->visit('user/'.$user1->id)
             ->seeLink(trans('menu.auth.admin'))
             ->click(trans('menu.auth.admin'))
-            ->seePageIs('content/internal')
+            ->seePageIs('toimetus')
             ->see(trans('content.internal.index.title'))
             ->seeLink('Hello internal')
             ->click('Hello internal')
-            ->seePageIs('content/'.$content1->type.'/'.$content1->id)
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug)
             ->see('Hello internal');
     }
 

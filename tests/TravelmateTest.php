@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Content;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TravelmateTest extends TestCase
 {
@@ -86,7 +86,7 @@ class TravelmateTest extends TestCase
         $day = Carbon::parse($new_datetime)->day;
 
         $this->actingAs($regular_user)
-                ->visit("content/travelmate/$content->id")
+                ->visit(config('sluggable.contentTypeMapping')['travelmate'].'/'.$content->slug)
                 ->press(trans('content.action.edit.title'))
                 ->seePageIs("content/travelmate/$content->id/edit")
                 ->type('Hola titulo', 'title')
@@ -94,7 +94,7 @@ class TravelmateTest extends TestCase
                 ->select($month, 'start_at_month')
                 ->select($day, 'start_at_day')
                 ->press(trans('content.edit.submit.title'))
-                ->seePageIs("content/travelmate/$content->id")
+                ->seePageIs(config('sluggable.contentTypeMapping')['travelmate'].'/'.$content->slug)
                 ->see('Hola titulo')
                 ->seeInDatabase('contents', [
                     'user_id' => $regular_user->id,

@@ -3,6 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\QueryException;
+use Illuminate\Auth\AuthenticationException;
+use Symfony\Component\Debug\Exception\FatalErrorException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -13,7 +16,12 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
         \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Session\TokenMismatchException::class,
+        \Illuminate\Validation\ValidationException::class,
     ];
 
     /**
@@ -26,14 +34,7 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $e)
     {
-        if (config('app.log') == 'syslog') {
-            \Log::error($e->getMessage(), [
-                'file' => $e->getTrace()[0]['file'],
-                'line' => $e->getTrace()[0]['line'],
-            ]);
-        } else {
-            return parent::report($e);
-        }
+        return parent::report($e);
     }
 
     /**
@@ -49,6 +50,41 @@ class Handler extends ExceptionHandler
             abort(404);
         }
 
-        return parent::render($request, $e);
+        if (! config('app.debug') && ($e instanceof \ErrorException || $e instanceof FatalErrorException || $e instanceof QueryException)) {
+            try {
+                return response()->view('errors.500', [], 500);
+            } catch (Exception $e) {
+                echo '<!DOCTYPE html>
+                        <html>
+                            <head>
+                                <meta charset="UTF-8">
+                            </head>
+                            <body style="padding: 15%;">
+                                <h1 style="text-align: center; font-family: Verdana, sans-serif;">Nüüd on küll piinlik...</h1>
+                                <p style="text-align: center; font-family: Verdana, sans-serif;">Tegemist on tehnilise tõrkega, mistõttu Sa siia lehele sattusid. Oleme sellest teadlikud ning parandame probleemi võimalikult kiirelt. Proovi mõne aja pärast uuesti.<br><br>
+                                <a href="/" style="color: green;">Liigu tagasi Trip.ee avalehele</a></p>
+                            </body>
+                        </html>';
+                exit();
+            }
+        } else {
+            return parent::render($request, $e);
+        }
+    }
+
+    /**
+     * Convert an authentication exception into an unauthenticated response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @return \Illuminate\Http\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        return redirect()->guest('login');
     }
 }

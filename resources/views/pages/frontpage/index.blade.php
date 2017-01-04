@@ -40,16 +40,16 @@
                                     'title' =>
                                         $flight1->destination ? $flight1->destination->name : null,
                                     'title_route' =>
-                                        $flight1->destination ? route('destination.show', $flight1->destination) : null,
+                                        $flight1->destination ? route('destination.slug', $flight1->destination->slug) : null,
                                     'subtitle' =>
                                         $flight1->parent_destination ? $flight1->parent_destination->name : null,
                                     'subtitle_route' =>
-                                        $flight1->parent_destination ? route('destination.show', $flight1->parent_destination) : null
+                                        $flight1->parent_destination ? route('destination.slug', $flight1->parent_destination->slug) : null
                                 ])
 
                                 @include('component.card', [
                                     'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
-                                    'route' => route('content.show', [$flight1->type, $flight1]),
+                                    'route' => route($flight1->type.'.show', [$flight1->slug]),
                                     'title' => $flight1->title.' '.$flight1->price.config('site.currency.symbol'),
                                     'image' => $flight1->imagePreset(),
                                 ])
@@ -60,7 +60,7 @@
                         @include('component.link', [
                             'modifiers' => 'm-icon m-right',
                             'title' => trans('frontpage.index.all.offers'),
-                            'route' => route('content.index', ['flight']),
+                            'route' => route('flight.index'),
                             'icon' => 'icon-arrow-right'
                         ])
                     </div>
@@ -78,7 +78,7 @@
                             [
                                 'modifiers' => 'm-icon',
                                 'title' => trans('frontpage.index.about.title'),
-                                'route' => route('content.show', [$content->first()->type, $content->first()]),
+                                'route' => route('static.'.$content->first()->id),
                                 'icon' => 'icon-arrow-right'
                             ]
                         ],
@@ -105,19 +105,19 @@
                         'items' => [
                             [
                                 'title' => trans('frontpage.index.forum.general'),
-                                'route' => route('content.index', 'forum'),
+                                'route' => route('forum.index'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'title' => trans('frontpage.index.forum.buysell'),
-                                'route' => route('content.index', 'buysell'),
+                                'route' => route('buysell.index'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
                             ],
                             [
                                 'title' => trans('frontpage.index.forum.expat'),
-                                'route' => route('content.index', 'expat'),
+                                'route' => route('expat.index'),
                                 'modifiers' => 'm-large m-block m-icon',
                                 'icon' => 'icon-arrow-right'
                             ],
@@ -152,6 +152,10 @@
 
                     @include('component.promo', ['promo' => 'sidebar_small m-small-margin'])
 
+                    <div class="m-medium-offset-bottom" style="width: 100%; display:inline-block;">
+                        <script src="https://www.hotelscombined.ee/SearchBox/364585"></script>
+                    </div>
+
                 </div>
 
                 <div class="r-home__news-column m-last">
@@ -170,7 +174,7 @@
                             <div class="r-home__news-block @if(($key + 1) % 2 == 0) m-last @else m-first @endif">
                                 @include('component.news', [
                                     'title' => $new->title,
-                                    'route' => route('content.show', [$new->type, $new]),
+                                    'route' => route($new->type.'.show', [$new->slug]),
                                     'date' => $new->created_at,
                                     'image' => $new->imagePreset(),
                                     'modifiers' => $key > 3 ? 'm-smaller' : null
@@ -190,7 +194,7 @@
                         <div class="r-block">
                             @include('component.link', [
                                 'title' => trans('frontpage.index.all.news'),
-                                'route' => route('content.index', ['news']),
+                                'route' => route('news.index'),
                                 'modifiers' => 'm-icon m-right',
                                 'icon' => 'icon-arrow-right'
                             ])
@@ -211,7 +215,7 @@
                                 <div class="c-columns__item">
                                     @include('component.news', [
                                         'title' => $featured_new->title,
-                                        'route' => route('content.show', [$featured_new->type, $featured_new]),
+                                        'route' => route($featured_new->type.'.show', [$featured_new->slug]),
                                         'image' => $featured_new->imagePreset(),
                                         'modifiers' => 'm-smaller'
                                     ])
@@ -241,7 +245,7 @@
                                 @include('component.link', [
                                     'modifiers' => 'm-icon',
                                     'title' => trans('frontpage.index.all.offers'),
-                                    'route' => route('content.index', ['flight']),
+                                    'route' => route('flight.index'),
                                     'icon' => 'icon-arrow-right'
                                 ])
                             </div>
@@ -266,9 +270,9 @@
                                 @include('component.blog', [
                                     'title' => $blog->title,
                                     'image' => '',
-                                    'route' => route('content.show', [$blog->type, $blog]),
+                                    'route' => route($blog->type.'.show', [$blog->slug]),
                                     'profile' => [
-                                        'route' => route('user.show', [$blog->user]),
+                                        'route' => ($blog->user->name != 'Tripi külastaja' ? route('user.show', [$blog->user]) : false),
                                         'title' => $blog->user->name,
                                         'image' => $blog->user->imagePreset()
                                     ]
@@ -299,18 +303,18 @@
                                 return [
                                     'image' => $photo->imagePreset('small'),
                                     'image_large' => $photo->imagePreset('large'),
-                                    'route' => route('content.show', [$photo->type, $photo]),
+                                    'route' => route($photo->type.'.show', [$photo->slug]),
                                     'alt' => $photo->title,
                                     'tags' =>$photo->destinations->transform(function($destination) {
                                                 return [
 
                                                         'title' => $destination->name,
                                                         'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
-                                                        'route' => route('destination.show', $destination)
+                                                        'route' => route('destination.slug', $destination->slug)
                                                 ];
                                             }),
                                     'userName' => $photo->user->name,
-                                    'userRoute' => route('user.show',$photo->user),
+                                    'userRoute' => ($photo->user->name != 'Tripi külastaja' ? route('user.show', [$photo->user]) : false),
                                ];
                             })
                         ])

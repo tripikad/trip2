@@ -7,66 +7,60 @@ return [
             'route' => '/',
         ],
        'flights' => [
-            'route' => '/content/flight',
+            'route' => '/odavad-lennupiletid',
         ],
         'travelmates' => [
-            'route' => '/content/travelmate',
+            'route' => '/reisikaaslased',
         ],
         'forum' => [
-            'route' => '/content/forum',
+            'route' => '/foorum/uldfoorum',
         ],
     ],
 
     'footer' => [
         'flights' => [
-            'route' => '/content/flight',
+            'route' => '/odavad-lennupiletid',
         ],
         'travelmates' => [
-            'route' => '/content/travelmate',
+            'route' => '/reisikaaslased',
         ],
         'news' => [
-            'route' => '/content/news',
+            'route' => '/uudised',
         ],
         'blogs' => [
-            'route' => '/content/blog',
+            'route' => '/reisikirjad',
         ],
         'photos' => [
-            'route' => '/content/photo',
+            'route' => '/reisipildid',
         ],
 
     ],
 
     'footer2' => [
         'forum' => [
-            'route' => '/content/forum',
+            'route' => '/foorum/uldfoorum',
         ],
         'expat' => [
-            'route' => '/content/expat',
+            'route' => '/foorum/elu-valimaal',
         ],
         'buysell' => [
-            'route' => '/content/buysell',
+            'route' => '/foorum/ost-muuk',
         ],
 
     ],
 
     'footer3' => [
         'about' => [
-            'route' => '/content/static/1534',
+            'route' => '/tripist',
         ],
         'contact' => [
-            'route' => '/content/static/972',
+            'route' => '/kontakt',
         ],
         'eula' => [
-            'route' => '/content/static/25151',
+            'route' => '/kasutustingimused',
         ],
         'advertising' => [
-            'route' => '/content/static/22125',
-        ],
-        'flightfeed' => [
-            'route' => '/lendude_sooduspakkumised/rss',
-        ],
-        'newsfeed' => [
-            'route' => '/index.atom',
+            'route' => '/reklaam',
         ],
     ],
 
@@ -81,19 +75,29 @@ return [
             'external' => true,
             'icon' => 'icon-twitter',
         ],
+        'flightfeed' => [
+            'route' => '/lendude_sooduspakkumised/rss',
+            'external' => true,
+            'icon' => 'icon-rss',
+        ],
+        'newsfeed' => [
+            'route' => '/index.atom',
+            'external' => true,
+            'icon' => 'icon-rss',
+        ],
     ],
 
     'news' => [
         'news' => [
             'title' => 'menu.news.news',
-            'route' => '/content/news',
+            'route' => '/uudised',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
             'type' => 'news',
         ],
         'shortnews' => [
             'title' => 'menu.news.shortnews',
-            'route' => '/content/shortnews',
+            'route' => '/luhiuudised',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
             'type' => 'shortnews',
@@ -103,21 +107,21 @@ return [
     'forum' => [
         [
             'title' => 'menu.forum.forum',
-            'route' => '/content/forum',
+            'route' => '/foorum/uldfoorum',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
             'type' => 'forum',
         ],
         [
             'title' => 'menu.forum.expat',
-            'route' => '/content/expat',
+            'route' => '/foorum/elu-valimaal',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
             'type' => 'expat',
         ],
         [
             'title' => 'menu.forum.buysell',
-            'route' => '/content/buysell',
+            'route' => '/foorum/ost-muuk',
             'modifiers' => 'm-large m-block m-icon',
             'icon' => 'icon-arrow-right',
             'type' => 'buysell',

@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
-use App\Content;
 use App\Follow;
+use App\Content;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class FollowTest extends TestCase
 {
@@ -56,9 +56,9 @@ class FollowTest extends TestCase
         // Follow a post
 
         $this->actingAs($user2)
-            ->visit("content/$content->type/$content->id")
+            ->visit(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
             ->press(trans('content.action.follow.1.title'))
-            ->seePageIs("content/$content->type/$content->id")
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
             ->see(trans('content.action.follow.1.info', ['title' => $content->title]))
             ->seeInDatabase('follows', [
                 'user_id' => $user2->id,
@@ -73,14 +73,14 @@ class FollowTest extends TestCase
             ->click(trans('menu.user.follow'))
             ->seePageIs("user/$user2->id/follows")
             ->click('Hello')
-            ->seePageIs("content/$content->type/$content->id");
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug);
 
         // Unfollow post
 
         $this->actingAs($user2)
-            ->visit("content/$content->type/$content->id")
+            ->visit(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
             ->press(trans('content.action.follow.0.title'))
-            ->seePageIs("content/$content->type/$content->id")
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
             ->see(trans('content.action.follow.0.info', ['title' => $content->title]))
             ->missingFromDatabase('follows', [
                 'user_id' => $user2->id,

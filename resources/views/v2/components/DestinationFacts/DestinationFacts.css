@@ -1,0 +1,13 @@
+@import "variables";
+
+.DestinationFacts__key {
+    font: $font-text-md;
+    color: $yellow-dark;
+    padding: $padding-xs $padding-xxs $padding-xs 0;
+}
+
+.DestinationFacts__value {
+    font: $font-text-md;
+    color: $white;
+    padding: $padding-xs 0;
+}

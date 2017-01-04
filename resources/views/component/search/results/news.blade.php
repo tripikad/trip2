@@ -7,11 +7,10 @@
         <a href="{{$row->route}}" class="c-search-news__item-image" style="background-image: url({{$row->content_img}});"></a>
         <div class="c-search-news__item-content">
             <h3 class="c-search-news__item-title">
-                <a href="{{$row->route}}" class="c-search-news__item-title-link">{{$row->title}}</a>
-                <span class="c-search-news__item-title-date">{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('d.m.Y H:i')}}</span>
+                <a href="{{ route($row->type.'.show', [$row->slug]) }}" class="c-search-news__item-title-link">{{ $row->title }}</a>
+                <span class="c-search-news__item-title-date">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('d.m.Y H:i') }}</span>
             </h3>
-            <!-- <p>… uudiseid vägivallast ja inimröövidest saabus pidevalt. Kuigi ka praegu leidub Kolumbias piirkondi, kuhu ei soovitata reisida, on üldine olukord turvalisusega <span>Vietnam</span> riigis oluliselt parem, kui paarkümmend aastat tagasi. Kuritegevuse olulise …</p> -->
-            <p>{{$row->short_body_text}}</p>
+            <p>{{ (strlen(strip_tags($row->body)) > 300) ? substr(strip_tags($row->body), 0, 300).'...' : strip_tags($row->body) }}</p>
         </div>
     </li>
 

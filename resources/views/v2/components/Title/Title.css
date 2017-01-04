@@ -1,0 +1,9 @@
+@import "variables";
+
+.Title {
+    font: $font-heading-xl;
+    font: $font-heading-lg ?if $mobile;
+    line-height: $line-height-sm;
+    color: $gray-darkest;
+}
+

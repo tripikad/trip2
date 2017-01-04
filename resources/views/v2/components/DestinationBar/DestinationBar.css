@@ -1,22 +1,27 @@
 @import "variables";
 
 .DestinationBar {
-    background: $orange;
+    background: $yellow;
     display: flex;
-    padding: $padding-md;
+    height: calc($spacer * 6);
+    align-items: center;
+    padding: 0 calc($spacer * 1.5);
 }
 
 .DestinationBar--dark {
-    background: $orange-dark;
+    background: $yellow-dark;
 }
 
-    .DestinationBar__icon {
-        padding-right: $padding-xs;
+    .DestinationBar__parents {
+        color: $white;
+        display: flex;
+        font: $font-heading-md;
+        align-items: center;
+        margin-bottom: $margin-xxs;
     }
 
-    .DestinationBar__icon svg {
-        fill: $white;
-        margin-left: calc($spacer / -2);
+    .DestinationBar__parents > div {
+        margin-right: $margin-xs;
     }
 
     .DestinationBar__title {
@@ -25,17 +30,3 @@
         line-height: 100%;
     }
 
-    .DestinationBar__subtitle {
-        display: flex;
-        color: $white;
-        font: $font-heading-md;
-        line-height: 100%;
-        margin-bottom: $margin-sm;
-        opacity: $opacity-md;
-    }
-
-    .DestinationBar__subtitle div {
-        margin-top: 2.5px;
-        margin-left: 2px;
-        margin-right: 2px;
-    }

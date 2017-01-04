@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
-use App\Content;
 use App\Comment;
+use App\Content;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ActivityTest extends TestCase
 {
@@ -23,8 +23,8 @@ class ActivityTest extends TestCase
         $this->visit("user/$user1->id")
             ->see($user1->name)
             ->see('Hello')
-            ->click(trans('user.activity.view.full.post'), "content/$content1->type/$content1->id")
-            ->seePageIs("content/$content1->type/$content1->id");
+            ->click(trans('user.activity.view.full.post'), config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug)
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug);
 
         // Comment activity
 
@@ -37,6 +37,6 @@ class ActivityTest extends TestCase
         $this->visit("user/$user1->id")
             ->see('World')
             ->click(trans('user.activity.view.full.post'), "content/$comment1->content->type/$comment1->content->id?#comment-$comment1->id")
-            ->seePageIs("content/$content1->type/$content1->id");
+            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug);
     }
 }

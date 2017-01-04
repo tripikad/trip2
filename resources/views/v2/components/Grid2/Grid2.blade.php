@@ -1,6 +1,6 @@
 @php
 
-$items = $items ?? collect();
+$items = collect($items) ?? collect();
 $gutter = $gutter ?? false;
 
 @endphp

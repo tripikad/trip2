@@ -55,6 +55,9 @@ return [
 
     'update.info' => ':title has been updated',
 
+    'show.isnew' => 'New',
+    'show.newcomments' => ':count new comment|:count new comments',
+
     // Content types
 
     // News
@@ -136,6 +139,7 @@ return [
     // Travelmate
 
     'travelmate.index.title' => 'Travel mates',
+    'travelmate.index.eula.title' => 'EULA',
 
     'travelmate.view.all.offers' => 'View all offers',
 
@@ -166,7 +170,7 @@ return [
     'travelmate.filter.text' => 'Kui ei leia sobivat kaaslast, siis ehk aitab sind filter.',
 
     'travelmate.description.title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
-    'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.',
+    'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase.',
 
     // Forum
 
@@ -184,6 +188,8 @@ return [
 
     'forum.edit.field.topics.title' => 'Select topics',
     'forum.edit.field.topics.help' => '',
+
+    'forum.is.new' => 'Unread',
 
     // Expat
 

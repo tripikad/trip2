@@ -3,7 +3,7 @@
     'items' => [
         [
             'title' => $comment->user->name,
-            'route' => route('user.show', [$comment->user])
+            'route' => ($comment->user->name != 'Tripi külastaja' ? route('user.show', [$comment->user]) : false)
         ],
         [
             'title' => view('component.date.relative', ['date' => $comment->created_at]),

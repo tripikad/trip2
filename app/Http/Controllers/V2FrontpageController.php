@@ -8,53 +8,89 @@ class V2FrontpageController extends Controller
 {
     public function index()
     {
-        $type = 'news';
+        /*
+        @section('head_description', trans('site.description.main'))
+        */
 
-        $posts = Content::whereType($type)
-            ->whereStatus(1)
-            ->take(6)
-            ->latest()
-            ->get();
+        $user = auth()->user();
 
-        $latestimages = Content::whereType('photo')->latest()->take(6)->get()
-            ->map(function ($image) {
-                return [
-                    'id' => $image->id,
-                    'small' => $image->imagePreset('small_square'),
-                    'large' => $image->imagePreset('large'),
-                    'meta' => component('Meta')->with('items', collect()
-                        ->push(component('MetaLink')
-                            ->with('title', $image->vars()->title)
-                        )
-                        ->push(component('MetaLink')
-                            ->with('title', $image->vars()->created_at)
-                        )
-                        ->push(component('MetaLink')
-                            ->with('title', $image->user->vars()->name)
-                            ->with('route', route('user.show', [$image->user]))
-                        )
-                    )->render(),
-                ];
-            });
+        $flights = Content::getLatestItems('flight', 9);
+        $forums = Content::getLatestItems('forum', 16, 'updated_at');
+        $news = Content::getLatestItems('news', 6);
+        $blogs = Content::getLatestItems('blog', 3);
+        $photos = Content::getLatestItems('photo', 6);
+        $travelmates = Content::getLatestItems('travelmate', 5);
 
-        return view('v2.layouts.frontpage')
+        return layout('frontpage')
 
-            ->with('header', region('Header', 'Search'))
-
-            ->with('content_first', collect()
-                ->push(component('Block')
-                    ->is('red')
-                    ->is('uppercase')
-                    ->is('white')
-                    ->with('title', 'Viimati lisatud pildid')
-                    ->with('content', collect()
-                        ->push(component('Gallery')
-                            ->with('images', $latestimages)
-                        )
-                    ))
-                    ->push(component('Block')->with('content', collect(['FrontpageFlightCards'])))
+            ->with('promobar', component('PromoBar')
+                ->with('title', 'Osale Trip.ee kampaanias ja võida 2 lennupiletit Maltale')
+                ->with('route_title', 'Vaata lähemalt siit')
+                ->with('route', 'tasuta-lennupiletid-maltale')
+                ->render()
             )
 
-            ->with('footer', region('Footer'));
+            ->with('header', region('Header',
+                component('FrontpageSearch')
+                    ->with('title', trans('frontpage.index.search.title'))
+            ))
+
+            ->with('top', collect()
+                ->push(region('FrontpageFlight', $flights->take(3)))
+                ->pushWhen(! $user, region('FrontpageAbout'))
+            )
+
+            ->with('content', collect()
+                ->merge($forums->take($forums->count() / 2)->map(function ($forum) {
+                    return region('ForumRow', $forum);
+                }))
+                ->push(component('Promo')->with('promo', 'body'))
+                ->merge($forums->slice($forums->count() / 2)->map(function ($forum) {
+                    return region('ForumRow', $forum);
+                }))
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Block')
+                    ->is('white')
+                    ->is('uppercase')
+                    ->with('title', trans('frontpage.index.forum.title'))
+                    ->with('content', region('ForumLinks'))
+                )
+                ->push(region('ForumAbout', 'white'))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->push(component('AffHotelscombined'))
+            )
+
+            ->with('bottom1', collect()
+                ->push(region('FrontpageNews', $news))
+            )
+
+            ->with('bottom2', collect()
+                ->push(region('FrontpageBottom', $flights->slice(3), $travelmates))
+                ->push(component('Block')
+                    ->is('white')
+                    ->is('uppercase')
+                    ->with('title', trans('frontpage.index.photo.title'))
+                    ->with('content', collect(region('Gallery', $photos)))
+                )
+                ->push(component('Block')
+                    ->is('white')
+                    ->is('uppercase')
+                    ->with('title', trans('frontpage.index.blog.title'))
+                    ->with('content', [])
+                )
+                ->push(component('Grid3')
+                    ->with('items', $blogs->map(function ($blog) {
+                        return region('BlogCard', $blog);
+                    }))
+                )
+                ->push(component('Promo')->with('promo', 'footer'))
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 }

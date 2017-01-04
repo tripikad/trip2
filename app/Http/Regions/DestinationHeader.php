@@ -6,19 +6,90 @@ class DestinationHeader
 {
     public function render($destination)
     {
+        $parents = $destination->getAncestors();
+        /*
+        $facts = $destination->vars()->facts
+            ? $destination->vars()->facts
+                ->flip()
+                ->map(function ($value, $key) {
+                    return trans("destination.show.about.$value");
+                })
+                ->flip()
+            : null;
+        */
         return component('DestinationHeader')
-            ->with('map', component('Map'))
-            ->with('header', component('Navbar')
+            ->with('background', component('MapBackground'))
+            ->with('navbar', component('Navbar')
+                ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))
                 ->with('logo', component('Icon')
-                    ->with('icon', 'tripee_logo_plain_dark')
-                    ->with('width', 80)
-                    ->with('height', 30)
+                    ->with('icon', 'tripee_logo')
+                    ->with('width', 200)
+                    ->with('height', 150)
                 )
                 ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
-            ->with('name', $destination->name)
-            ->with('meta', trans("destination.show.description.$destination->id"));
+            ->with('parents', $parents
+                ->map(function ($parent) {
+                    return component('MetaLink')
+                        ->is('large')
+                        ->is('white')
+                        ->with('title', $parent->vars()->name.' › ')
+                        ->with('route', route('v2.destination.show', [$parent]));
+                })
+                ->render()
+                ->implode('')
+            )
+            ->with('title', $destination->name)
+            ->with('children', component('Meta')
+                ->with('items', $destination->getImmediateDescendants()->map(function ($destination) {
+                    return component('Tag')
+                            ->is('white')
+                            ->with('title', $destination->name)
+                            ->with('route', route('v2.destination.show', [$destination]));
+                }))
+                )
+            ->with('description', $destination->vars()->description)
+            ->with('facts1', component('DestinationFacts')
+                ->with('facts', collect()
+                    ->putWhen(
+                        $destination->vars()->isCountry || $destination->vars()->isPlace,
+                        trans('destination.show.about.callingCode'),
+                        $destination->vars()->callingCode()
+                    )
+                    ->putWhen(
+                        $destination->vars()->isCountry || $destination->vars()->isPlace,
+                        trans('destination.show.about.currencyCode'),
+                        $destination->vars()->currencyCode()
+                    )
+                )
+            )
+            ->with('facts2', component('DestinationFacts')
+                ->with('facts', collect()
+                    ->putWhen(
+                        $destination->vars()->isCountry,
+                        trans('destination.show.about.area'),
+                        $destination->vars()->area()
+                    )
+                    ->putWhen(
+                        $destination->vars()->isCountry,
+                        trans('destination.show.about.population'),
+                        $destination->vars()->population()
+                    )
+                )
+            )
+            ->with('stats', collect()
+                    ->push(component('StatCard')
+                        ->with('icon', 'icon-pin')
+                        ->with('title', $destination->vars()->usersWantsToGo()->count())
+                    )
+                    ->push(component('StatCard')
+                        ->with('title', $destination->vars()->usersHaveBeen()->count())
+                        ->with('icon', 'icon-star')
+                    )
+                    ->render()
+                    ->implode('')
+            );
     }
 }

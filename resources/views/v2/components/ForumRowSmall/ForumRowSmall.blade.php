@@ -15,25 +15,23 @@ $badge = $badge ?? '';
 
     </div>
 
-    <a href="{!! $route !!}">
+    <div>
+        
+        <a href="{!! $route !!}">
 
-	    <div class="ForumRowSmall__title">
+    	    <div class="ForumRowSmall__title">
 
-	        {{ $title }}
+    	        {{ $title }}
 
-	    </div>
+    	    </div>
+
+        </a>
 
         <div class="ForumRowSmall__meta">
 
             {!! $meta !!}
 
         </div>
-
-    </a>
-
-    <div class="ForumRowSmall__badge">
-
-    {!! $badge !!}
 
     </div>
 

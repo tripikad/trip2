@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Log;
+use Hash;
+use Mail;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Mail;
-use Hash;
-use Log;
-use App\User;
 
 class RegistrationController extends Controller
 {
@@ -23,6 +23,8 @@ class RegistrationController extends Controller
             'email' => 'required|email|max:64|unique:users',
             'password' => 'required|confirmed|min:6',
             'eula' => 'required',
+            'full_name'   => 'honeypot',
+            'time'   => 'required|honeytime:3',
         ]);
 
         $fields = [

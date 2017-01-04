@@ -18,7 +18,7 @@ class V2StaticController extends Controller
                 ->merge($posts->map(function ($post) {
                     return component('MetaLink')
                         ->with('title', $post->vars()->title)
-                        ->with('route', route('static.show', [$post]));
+                        ->with('route', route('v2.static.show', [$post]));
                 }))
             );
     }
@@ -29,14 +29,16 @@ class V2StaticController extends Controller
             ->whereStatus(1)
             ->findOrFail($id);
 
-        return view('v2.layouts.1col')
+        return layout('1col')
 
-            ->with('header', region('Header', $post->vars()->title))
+            ->with('header', region('HeaderLight', $post->vars()->title))
 
             ->with('content', collect()
                 ->push(component('Body')->with('body', $post->vars()->body))
             )
 
-            ->with('footer', region('FooterLight'));
+            ->with('footer', region('FooterLight'))
+
+            ->render();
     }
 }

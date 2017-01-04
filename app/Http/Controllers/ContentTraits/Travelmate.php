@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\ContentTraits;
 
-use Carbon\Carbon;
-use App\Content;
 use App\Main;
+use App\Content;
+use Carbon\Carbon;
 
 trait Travelmate
 {
@@ -21,8 +21,8 @@ trait Travelmate
         $viewVariables['activity'] = Content::whereType('travelmate')
             ->whereStatus(1)
             ->whereBetween('created_at', [
+                Carbon::now()->subDays(14),
                 Carbon::now(),
-                Carbon::now()->addDays(14),
             ])
             ->count();
 
@@ -38,8 +38,8 @@ trait Travelmate
             ->take(3)
             ->get();
 
-        $destination_ids = $content->destinations->lists('id')->toArray();
-        $topic_ids = $content->topics->lists('id')->toArray();
+        $destination_ids = $content->destinations->pluck('id')->toArray();
+        $topic_ids = $content->topics->pluck('id')->toArray();
 
         $viewVariables['destination'] = null;
         $viewVariables['parent_destination'] = null;
@@ -63,7 +63,7 @@ trait Travelmate
                 $viewVariables['parent_destination'] = $viewVariables['destination']->parent()->first();
             }
 
-            $destinationNotIn = $sidebar_flights->first()->destinations->lists('id')->toArray();
+            $destinationNotIn = $sidebar_flights->first()->destinations->pluck('id')->toArray();
         }
 
         $types = [

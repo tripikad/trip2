@@ -66,11 +66,11 @@
                         'profile' => [
                             'modifiers' => '',
                             'image' => $content->user->imagePreset(),
-                            'route' => route('user.show', [$content->user])
+                            'route' => ($content->user->name != 'Tripi külastaja' ? route('user.show', [$content->user]) : false)
                         ],
                         'modifiers' => 'm-image',
                         'title' => $content->title,
-                        'route' => route('content.show', [$content->type, $content->id]),
+                        'route' => route($content->type.'.show', [$content->slug]),
                         'text' => view('component.content.text', ['content' => $content]),
                     ])
 

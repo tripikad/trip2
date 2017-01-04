@@ -5,9 +5,12 @@ $(document).on('click', function (e) {
    }
 });
 
+/*
 var searchInput = '.c-search__form-input',
     searchRequest = null;
+
 $(searchInput).on('keypress keyup keydown click change', function() {
+
     if($(searchInput).val()) {
         var searchObject = this,
             jsSearchElement = $(searchObject).closest('.js-search'),
@@ -44,4 +47,4 @@ $(searchInput).on('keypress keyup keydown click change', function() {
     else {
         $(this).closest('.js-search').removeClass('m-active');
     }
-});
+});*/

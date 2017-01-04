@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
 {
+    // Setup
+
     public $timestamps = false;
 
     public function content()
@@ -13,8 +15,17 @@ class Topic extends Model
         return $this->belongsToMany('App\Content');
     }
 
+    // V2
+
+    public function vars()
+    {
+        return new V2TopicVars($this);
+    }
+
+    // V1
+
     public static function getNames()
     {
-        return self::lists('name', 'id')->sort();
+        return self::pluck('name', 'id')->sort();
     }
 }

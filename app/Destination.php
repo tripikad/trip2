@@ -2,11 +2,15 @@
 
 namespace App;
 
-use Cache;
 use Baum;
+use Cache;
+use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 
 class Destination extends Baum\Node
 {
+    use Sluggable, SlugHelper;
+
     public $timestamps = false;
 
     public function content()
@@ -24,6 +28,8 @@ class Destination extends Baum\Node
         return $this->morphMany('App\Flag', 'flaggable');
     }
 
+    // Also present in V2DestinationVars
+
     public function usersHaveBeen()
     {
         return $this->flags->where('flag_type', 'havebeen');
@@ -33,6 +39,8 @@ class Destination extends Baum\Node
     {
         return $this->flags->where('flag_type', 'wantstogo');
     }
+
+    // ...
 
     public function getPopular()
     {
@@ -67,5 +75,14 @@ class Destination extends Baum\Node
         if ($this) {
             return $this->parent()->first();
         }
+    }
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+            ],
+        ];
     }
 }

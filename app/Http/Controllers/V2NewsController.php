@@ -2,81 +2,96 @@
 
 namespace App\Http\Controllers;
 
+use Request;
+use App\Topic;
 use App\Content;
+use App\Destination;
 
 class V2NewsController extends Controller
 {
     public function index()
     {
-        $type = 'news';
+        $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
 
-        $posts = Content::whereType($type)
-            ->whereStatus(1)
-            ->take(20)
-            ->latest()
-            ->get();
+        $news = Content::getLatestPagedItems('news', false, $currentDestination, $currentTopic);
+        $destinations = Destination::select('id', 'name')->get();
+        $topics = Topic::select('id', 'name')->get();
 
-        return view('v2.layouts.2col')
+        $flights = Content::getLatestItems('flight', 3);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $travelmates = Content::getLatestItems('travelmate', 3);
 
-            ->with('header', region('Header', trans("content.$type.index.title")))
+        return layout('2col')
+
+            ->with('header', region('Header', trans('content.news.index.title')))
 
             ->with('content', collect()
-                ->push(component('Grid2')
+                ->push(component('Grid3')
                     ->with('gutter', true)
-                    ->with('items', $posts->map(function ($post) {
-                        return region('NewsCard', $post);
+                    ->with('items', $news->map(function ($new) {
+                        return region('NewsCard', $new);
                     })
                     )
                 )
+                ->push(region('Paginator', $news, $currentDestination, $currentTopic))
             )
 
             ->with('sidebar', collect()
+                ->push(component('Block')->with('content', collect()
+                    ->push(region(
+                        'Filter',
+                        $destinations,
+                        $topics,
+                        $currentDestination,
+                        $currentTopic,
+                        $news->currentPage(),
+                        'v2.news.index'
+                    ))
+                ))
                 ->push(region('NewsAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->push(component('Block')->with('content', collect(['NewsFilter'])))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('bottom', collect()
+                ->push(region('NewsBottom', $flights, $forums, $travelmates))
+                ->push(component('Promo')->with('promo', 'footer'))
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $post = Content::
-            with(
-                'images',
-                'user',
-                'user.images',
-                'comments',
-                'comments.user',
-                'destinations',
-                'topics'
-            )
-            ->whereStatus(1)
-            ->find($id);
+        $new = Content::getItemBySlug($slug);
+        $user = auth()->user();
 
+        $flights = Content::getLatestItems('flight', 3);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $travelmates = Content::getLatestItems('travelmate', 3);
 
-        return view('v2.layouts.1col')
-            ->with('header', region('NewsHeader', $post))
+        return layout('1col')
+
+            ->with('header', region('NewsHeader', $new))
+
             ->with('content', collect()
-                ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
-                ->merge($post->comments->map(function ($comment) {
+                ->push(component('Body')->is('responsive')->with('body', $new->vars()->body))
+                ->merge($new->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-               // ->push(region('CommentCreateForm', $post))
+                ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $new))
             )
-            ->with('footer', region('Footer'));
-    }
 
-    public function edit($id)
-    {
-        $post = Content::whereType('news')
-           ->whereStatus(1)
-           ->findOrFail($id);
+            ->with('bottom', collect()
+                ->push(region('NewsBottom', $flights, $forums, $travelmates))
+                ->push(component('Promo')->with('promo', 'footer'))
+            )
 
-        return view('v2.layouts.fullpage')
-            ->with('content', collect()
-                ->push(component('Editor')->with('post', $post))
-            );
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 }

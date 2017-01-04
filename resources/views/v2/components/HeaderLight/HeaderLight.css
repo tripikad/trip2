@@ -2,38 +2,26 @@
 
 .HeaderLight {
     padding-top: $padding-md;
-    padding-bottom: $padding-lg;
-    background: $gray-light;
-    position: relative;
-    overflow: hidden;
+    padding-bottom: $padding-md;
+    padding-bottom: $padding-xs ?if $mobile;
 }
 
-    .HeaderLight__background {
-        position: absolute;
-        top: calc($spacer * -5);
-        left: calc($spacer * -5);
-        opacity: $opacity-sm;
-        width: calc($spacer * 100);
-        height: calc($spacer * 60);
-        opacity: $opacity-xs;
-        pointer-events: none;
+    .HeaderLight__content {
+        margin-top: $margin-xl;
+        margin-left: $margin-xl;
+        margin-left: 0 ?if $tablet;
     }
 
-    .HeaderLight__content {
-        height: calc($spacer * 15);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 10;
+    .HeaderLight__meta {
+        margin-top: $margin-md;
+    }
+
+    .HeaderLight__meta2 {
+        margin-top: $margin-md;
     }
 
     .HeaderLight__title {
-        font: $font-heading-xxxl;
-        font: $font-heading-xxl ?if $tablet;
-        font: $font-heading-xl ?if $mobile;
         color: $gray-darkest;
-    }
-
-    .HeaderLight__navbar {
-        z-index: 10;
+        font: $font-heading-xxl;
+        font: $font-heading-xl ?if $mobile;
     }

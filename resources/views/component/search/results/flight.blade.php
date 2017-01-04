@@ -3,15 +3,15 @@
 @foreach ($content as $row)
 
     <li class="c-search-flights__item">
-        <a href="{{$row->route}}" class="c-search-flights__item-image" style="background-image: url({{$row->content_img}});"></a>
+        <a href="{{ route($row->type.'.show', [$row->slug]) }}" class="c-search-flights__item-image" style="background-image: url({{ $row->imagePreset('small_square') }});"></a>
         <div class="c-search-flights__item-content">
             <h3 class="c-search-flights__item-title">
-                <a href="{{$row->route}}" class="c-search-flights__item-title-link">{{$row->title}}</a>
-                <span class="c-search-flights__item-title-date">{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('d.m.Y H:i')}}</span>
+                <a href="{{ route($row->type.'.show', [$row->slug]) }}" class="c-search-flights__item-title-link">{{ $row->title }}</a>
+                <span class="c-search-flights__item-title-date">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->format('d.m.Y H:i') }}</span>
             </h3>
             <!--<ul class="c-search-flights__item-info">
-                <li>Hanoi, Vietnam</li>
-                <li>Jaanuar – Veebruar 2017</li>
+                <li data-info="countries"></li>
+                <li data-info="time"></li>
             </ul>-->
         </div>
     </li>

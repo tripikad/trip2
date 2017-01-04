@@ -16,7 +16,7 @@
             'modifiers' => 'm-alternative',
             'image' => \App\Image::getHeader(),
             'subtitle' => trans('content.travelmate.view.all.offers'),
-            'subtitle_route' => route('content.index', [$content->type])
+            'subtitle_route' => route($content->type.'.index')
         ])
     </div>
 
@@ -50,7 +50,7 @@
                     (count($content->destinations) ? $content_destinations = $content->destinations->transform(function ($content_destination) {
                         return [
                                 'modifiers' => ['m-purple', 'm-yellow', 'm-red', 'm-green'][rand(0,3)],
-                                'route' => route('destination.show', [$content_destination->id]),
+                                'route' => route('destination.slug', [$content_destination->slug]),
                                 'title' => $content_destination->name
                         ];
                     }) : $content_destinations = collect([]));
@@ -85,7 +85,7 @@
                     ],
                     'user' => $content->user,
                     'name' => $content->user->name,
-                    'user_route' => route('user.show', [$content->user]),
+                    'user_route' => ($content->user->name != 'Tripi külastaja' ? route('user.show', [$content->user]) : false),
                     'sex_and_age' =>
                         ($content->user->gender ?
                             trans('user.gender.'.$content->user->gender).
@@ -185,9 +185,9 @@
                     @include('component.destination', [
                         'modifiers' => 'm-purple',
                         'title' => $destination ? $destination->name : null,
-                        'title_route' => $destination ? route('destination.show', $destination) : null,
+                        'title_route' => $destination ? route('destination.slug', $destination->slug) : null,
                         'subtitle' => $parent_destination ? $parent_destination->name : null,
-                        'subtitle_route' => $parent_destination ? route('destination.show', $parent_destination) : null,
+                        'subtitle_route' => $parent_destination ? route('destination.slug', $parent_destination->slug) : null,
                     ])
                 @endif
 
@@ -195,7 +195,7 @@
                     @foreach ($sidebar_flights as $sidebar_flight)
                         @include('component.card', [
                             'modifiers' => 'm-purple',
-                            'route' => route('content.show', [$sidebar_flight->type, $sidebar_flight]),
+                            'route' => route($sidebar_flight->type.'.show', [$sidebar_flight->slug]),
                             'title' => $sidebar_flight->title.' '.$sidebar_flight->price.config('site.currency.symbol'),
                             'image' => $sidebar_flight->imagePreset()
                         ])

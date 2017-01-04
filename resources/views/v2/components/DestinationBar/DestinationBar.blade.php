@@ -2,36 +2,29 @@
 
 $route = $route ?? '';
 $title = $title ?? '';
-$subtitle = $subtitle ?? '';
+$parents = $parents ?? '';
 
 @endphp
 
 <div class="DestinationBar {{ $isclasses }}">
 
-
-    <div class="DestinationBar__icon">
-
-        {!! component('Icon')->with('icon', 'icon-pin')->with('size', 'xl') !!}
-
-    </div>
-
     <div>
-        
-        <div class="DestinationBar__subtitle">
+                    
+            <div class="DestinationBar__parents">
 
-            {!! $subtitle  !!}
-
-        </div>
-
-        <a href="{{ $route }}">
-
-            <div class="DestinationBar__title">
-
-                {{ $title }} ›
+                {!! $parents  !!}
 
             </div>
 
-        </a>
+            <a href="{{ $route }}">
+
+                <div class="DestinationBar__title">
+
+                    {{ $title }} ›
+
+                </div>
+
+            </a>
 
     </div>
 

@@ -1,6 +1,7 @@
 @php
 
 $background = $background ?? '';
+$navbar = $navbar ?? '';
 $header = $header ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
@@ -9,7 +10,8 @@ $meta = $meta ?? '';
 
 <div class="Header {{ $isclasses }}" 
     style="background-image: linear-gradient(
-      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.1),
       rgba(0, 0, 0, 0.2)
     ), url({{ $background }});
 ">

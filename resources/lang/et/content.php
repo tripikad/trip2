@@ -66,6 +66,9 @@ return [
 
     'update.info' => ':title on uuendatud.',
 
+    'show.isnew' => 'Uus',
+    'show.newcomments' => ':count uus kommentaar|:count uut kommentaari',
+
     // Content types
 
     // News
@@ -151,7 +154,7 @@ return [
     'flight.edit.field.start_at.title' => 'Müük algab',
     'flight.edit.field.start_at.help' => 'Näiteks: :now',
 
-    'flight.edit.field.end_at.title' => 'Müük lõpeb at',
+    'flight.edit.field.end_at.title' => 'Müük lõpeb',
     'flight.edit.field.end_at.help' => 'Näiteks: :now',
 
     'flight.edit.field.price.title' => 'Hind',
@@ -163,6 +166,7 @@ return [
     // Travelmate
 
     'travelmate.index.title' => 'Reisikaaslased',
+    'travelmate.index.eula.title' => 'Kasutustingimused',
 
     'travelmate.view.all.offers' => 'Vaata kõiki pakkumisi',
 
@@ -193,7 +197,7 @@ return [
     'travelmate.filter.text' => 'Kui ei leia sobivat kaaslast, siis ehk aitab sind filter.',
 
     'travelmate.description.title' => 'Soovid kaaslaseks eksperti oma esimesele matkareisile? Lihtsalt seltsilist palmi alla?',
-    'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase. Kasuta ka allpool olevat filtrit soovitud tulemuste saamiseks.',
+    'travelmate.description.text' => 'Siit leiad omale sobiva reisikaaslase.',
 
     'travelmate.about.text' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu',
 

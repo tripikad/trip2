@@ -8,22 +8,26 @@
     font: $font-heading-sm;
     justify-content: center;
     padding: $padding-sm $padding-lg;
+    text-align: center;
 }
 
-.Button__icon {
-    margin-right: $margin-xs;
-}
+    .Button__icon {
+        margin-right: $margin-xs;
+    }
 
-.Button__title {
-    color: $white;
-}
+    .Button__title {
+        color: $white;
+    }
 
-.Button--facebook {
-    background: $facebook;
-    ppadding: $padding-xs;
-}
+    .Button--cyan {
+        background: $cyan;
+    }
 
-.Button--twitter {
-    background: $twitter;
-    ppadding: $padding-xs;
-}
+    .Button--facebook {
+        background: $facebook;
+    }
+
+    .Button--twitter {
+        background: $twitter;
+    }
+

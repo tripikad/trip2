@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use View;
 use Cache;
-use App\Destination;
-use DB;
 use App\Main;
+use App\Destination;
 
 class DestinationController extends Controller
 {
@@ -190,5 +190,12 @@ class DestinationController extends Controller
             'popular_destinations' => $popular_destinations,
             'destination_info' => $destination_info,
         ])->header('Cache-Control', 'public, s-maxage='.config('cache.destination.header'));
+    }
+
+    public function showSlug($slug)
+    {
+        $destination = Destination::findBySlugOrFail($slug);
+
+        return $this->show($destination->id);
     }
 }

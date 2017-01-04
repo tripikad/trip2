@@ -69,7 +69,7 @@ code: |
 
             </li>
 
-            @if (method_exists($collection, 'lastPage'))
+            @if (method_exists($collection, 'lastPage') && isset($numbered))
 
                 @if ($collection->lastPage() > 1)
 
@@ -95,7 +95,7 @@ code: |
 
                 {{ empty($collection->nextPageUrl()) ? ' disabled' : '' }}
 
-                @if (! method_exists($collection, 'lastPage') || $collection->lastPage() <= 1)
+                @if ((! method_exists($collection, 'lastPage') || $collection->lastPage() <= 1) || ! isset($numbered))
 
                     m-last
 

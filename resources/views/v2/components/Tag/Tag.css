@@ -2,16 +2,16 @@
 
 .Tag {
     align-items: center;
-    border: 1px solid $gray-dark;
+    border: 1px solid $gray-darker;
     border-radius: $border-radius-lg;
     display: inline-flex;
     font: $font-text-xs;
     justify-content: center;
-    padding: $padding-xxxs $padding-xs;
+    padding: calc($spacer / 4) calc($spacer / 2) calc($spacer / 8) calc($spacer / 2);
 }
 
     .Tag__title {
-        color: $gray-dark;
+        color: $gray-darker;
         white-space: nowrap;
     }
 
@@ -21,4 +21,22 @@
 
 .Tag--orange .Tag__title {
     color: $orange;
+}
+
+.Tag--red {
+    border: 1px solid $red;
+    background: $red;
+}
+
+.Tag--red .Tag__title {
+    color: $white;
+}
+
+.Tag--white {
+    border: 1px solid $white;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.Tag--white .Tag__title {
+    color: $white;
 }

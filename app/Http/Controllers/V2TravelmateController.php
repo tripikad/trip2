@@ -2,144 +2,121 @@
 
 namespace App\Http\Controllers;
 
+use Request;
+use App\Topic;
 use App\Content;
 use App\Destination;
-use App\Topic;
 
 class V2TravelmateController extends Controller
 {
     public function index()
     {
-        $type = 'travelmate';
+        $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
 
+        $travelmates = Content::getLatestPagedItems('travelmate', 24, $currentDestination, $currentTopic);
         $destinations = Destination::select('id', 'name')->get();
-
         $topics = Topic::select('id', 'name')->get();
 
-        $posts = Content::whereType($type)
-            ->whereStatus(1)
-            ->skip(40)
-            ->take(20)
-            ->latest()
-            ->get();
+        $flights = Content::getLatestItems('flight', 3);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $news = Content::getLatestItems('news', 1);
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
-            ->with('header', region('Header', trans("content.$type.index.title")))
+            ->with('header', region('Header', trans('content.travelmate.index.title')))
 
             ->with('content', collect()
                 ->push(component('Grid2')
                         ->with('gutter', true)
-                        ->with('items', $posts->map(function ($post) {
-                            return region('TravelmateCard', $post);
+                        ->with('items', $travelmates->map(function ($travelmate) {
+                            return region('TravelmateCard', $travelmate);
                         })
                     )
                 )
+                ->push(region('Paginator', $travelmates, $currentDestination, $currentTopic))
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect(['TravelmateAbout'])))
                 ->push(component('Block')->with('content', collect()
-                    ->push(region('Filter', $destinations, $topics))
-                    )
-                )
+                    ->push(region(
+                        'Filter',
+                        $destinations,
+                        $topics,
+                        $currentDestination,
+                        $currentTopic,
+                        $travelmates->currentPage(),
+                        'v2.travelmate.index'
+                    ))
+                ))
+                ->push(region('TravelmateAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->push(component('Block')->with('content', collect(['About'])))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
+                ->push(region('TravelmateBottom', $flights, $forums, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $type = 'travelmate';
+        $travelmate = Content::getItemBySlug($slug);
         $user = auth()->user();
 
-        $post = Content::
-            with(
-                'images',
-                'user',
-                'user.images',
-                'comments',
-                'comments.user',
-                'destinations',
-                'topics'
-            )
-            ->whereStatus(1)
-            ->findOrFail($id);
+        $travelmates = Content::getLatestItems('travelmate', 3);
 
-        $posts = Content::whereType($type)
-            ->whereStatus(1)
-            ->take(3)
-            ->latest()
-            ->get();
-
-        $forums = Content::whereType('forum')
-            ->whereStatus(1)
-            ->take(5)
-            ->latest()
-            ->get();
-
-        $flights = Content::whereType('flight')
-            ->whereStatus(1)
-            ->latest()
-            ->take(3)
-            ->get();
+        $flights = Content::getLatestItems('flight', 3);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $news = Content::getLatestItems('news', 1);
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Header', trans("content.$type.index.title")))
+            ->with('header', region('Header', trans('content.travelmate.index.title')))
 
             ->with('content', collect()
-                ->push(component('FlightTitle')->with('title', $post->vars()->title))
+                ->push(component('Title')->with('title', $travelmate->vars()->title))
                 ->push(component('Meta')
                     ->with('items', collect()
                         ->push(component('MetaLink')
-                            ->with('title', $post->vars()->created_at)
+                            ->with('title', $travelmate->vars()->created_at)
                         )
                         ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                             ->with('title', trans('content.action.edit.title'))
-                            ->with('route', route('flight.edit', [$post]))
+                            ->with('route', route('content.edit', [$travelmate->type, $travelmate]))
                         )
-                        ->merge($post->destinations->map(function ($tag) {
+                        ->merge($travelmate->destinations->map(function ($tag) {
                             return component('Tag')->is('orange')->with('title', $tag->name);
                         }))
-                        ->merge($post->topics->map(function ($tag) {
+                        ->merge($travelmate->topics->map(function ($tag) {
                             return component('Tag')->with('title', $tag->name);
                         }))
                     )
                 )
-                ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
+                ->push(component('Body')->is('responsive')->with('body', $travelmate->vars()->body))
                 ->push(region('Share'))
-
-                ->merge($post->comments->map(function ($comment) {
+                ->merge($travelmate->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-                //->pushWhen(region('CommentCreateForm', $post))
-
+                ->pushWhen(
+                    $user && $user->hasRole('regular'),
+                    region('CommentCreateForm', $travelmate)
+                )
             )
 
             ->with('sidebar', collect()
-                ->push(region('UserCard', $post))
-                ->push(component('Block')->with('content', collect(['DestinationBar'])))
-                ->merge($flights->map(function ($flight) {
-                    return region('FlightCard', $flight);
-                }))
-                ->push(region('ForumSidebar', $forums))
+                ->push(region('UserCard', $travelmate->user))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
-                ->push(component('Grid3')
-                    ->with('gutter', true)
-                    ->with('items', $posts->map(function ($post) {
-                        return region('TravelmateCard', $post);
-                    })
-                ))
+                ->push(region('TravelmateBottom', $flights, $forums, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 

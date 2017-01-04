@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use DB;
+use Log;
 use Auth;
 use Mail;
-use Log;
+use Cache;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class CommentController extends Controller
@@ -22,7 +24,6 @@ class CommentController extends Controller
             'content_id' => $content_id,
             'status' => 1,
         ];
-
         $comment = Auth::user()->comments()->create(array_merge($request->all(), $fields));
 
         /*
@@ -59,6 +60,26 @@ class CommentController extends Controller
         }
 
         */
+        if (in_array($comment->content->type, ['forum', 'buysell', 'expat', 'internal'])) {
+            DB::table('users')->select('id')->chunk(1000, function ($users) use ($comment) {
+                collect($users)->each(function ($user) use ($comment) {
+
+                    // For each active user we store the cache key about new added comment
+
+                    $key = 'new_'.$comment->content_id.'_'.$user->id;
+
+                    // We will not overwrite the cache if there are unread comments already
+
+                    if (! Cache::store('permanent')->get($key, 0) > 0) {
+
+                        // The cache value is new comment id, this helps us redirect user
+                        // to the right place later
+
+                        Cache::store('permanent')->forever($key, $comment->id);
+                    }
+                });
+            });
+        }
 
         Log::info('New comment added', [
             'user' =>  Auth::user()->name,
@@ -78,12 +99,11 @@ class CommentController extends Controller
             $content->comments->count(),
             config('content_'.$type.'.index.paginate')
         );
-        $comments->setPath(route('content.show', [$type, $content_id]));
+        $comments->setPath(route($type.'.show', [$content->slug]));
 
         return redirect()
-            ->route('content.show', [
-                $type,
-                $content_id,
+            ->route($type.'.show', [
+                $content->slug,
                 ($comments->lastPage() > 1 ? 'page='.$comments->lastPage() : '')
                     .'#comment-'.$comment->id,
             ]);
@@ -108,12 +128,11 @@ class CommentController extends Controller
             'status' => 1,
         ];
 
-        $comment->update(array_merge($request->all(), $fields));
+        $comment->update(array_merge($request->all(), $fields), ['touch' => false]);
 
         return redirect()
-            ->route('content.show', [
-                $comment->content->type,
-                $comment->content,
+            ->route($comment->content->type.'.show', [
+                $comment->content->slug,
                 '#comment-'.$comment->id,
             ]);
     }
@@ -124,12 +143,11 @@ class CommentController extends Controller
 
         if ($status == 0 || $status == 1) {
             $comment->status = $status;
-            $comment->save();
+            $comment->save(['touch' => false]);
 
             return redirect()
-                ->route('content.show', [
-                    $comment->content->type,
-                    $comment->content,
+                ->route($comment->content->type.'.show', [
+                    $comment->content->slug,
                     '#comment-'.$comment->id,
                 ])
                 ->with('info', trans("comment.action.status.$status.info", [

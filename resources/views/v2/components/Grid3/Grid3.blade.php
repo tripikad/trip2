@@ -1,6 +1,6 @@
 @php
 
-$items = $items ?? collect();
+$items = collect($items) ?? collect();
 $gutter = $gutter ?? false;
 
 @endphp
@@ -8,32 +8,40 @@ $gutter = $gutter ?? false;
 @foreach ($items->chunk(3) as $row)
     
 <div class="row">
-        
-    <div class="col-4 @if ($gutter) padding-right-sm-mobile-none padding-bottom-md @endif">
-
-        {!! $row->shift() !!}
-
-    </div>
     
-    <div class="col-4
-    
-        @if ($gutter)
-        
-        padding-left-sm-mobile-none padding-left-sm-mobile-none padding-bottom-md
+    @foreach ($row as $item)
 
-        @endif
-
+    <div
+        class="col-4 show-mobile-desktop margin-bottom-none-mobile-lg
+        @if ($gutter) padding-right-sm-mobile-none @endif
     ">
-    
-        {!! $row->shift() !!}
-    
-    </div>
 
-    <div class="col-4 @if ($gutter) padding-left-sm-mobile-none padding-bottom-md @endif">
-    
-        {!! $row->shift() !!}
-    
+        {!! $item !!}
+
     </div>
+    
+    @endforeach
+    
+</div>
+
+@endforeach
+
+@foreach ($items->withoutLastWhenOdd()->chunk(2) as $row)
+    
+<div class="row">
+    
+    @foreach ($row as $item)
+
+    <div
+        class="col-6 show-tablet margin-bottom-none-mobile-sm
+        @if ($gutter) padding-right-sm-mobile-none @endif
+    ">
+
+        {!! $item !!}
+
+    </div>
+    
+    @endforeach
     
 </div>
 

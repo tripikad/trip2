@@ -8,11 +8,16 @@ function component($component)
     return new Utils\Component($component);
 }
 
-function region($component, ...$arguments)
+function region($region, ...$arguments)
 {
-    $class = "\App\Http\Regions\\$component";
+    $class = "\App\Http\Regions\\$region";
 
     return (new $class)->render(...$arguments);
+}
+
+function layout($layout)
+{
+    return new Utils\Layout($layout);
 }
 
 function format_body($body)

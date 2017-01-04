@@ -2,6 +2,14 @@
 
 return [
 
+    // V2
+
+    'headers' => [
+        'default' => 60 * 10,
+    ],
+
+    // V1
+
     'frontpage' => [
         'header' => 60 * 10,
     ],
@@ -85,6 +93,11 @@ return [
         'redis' => [
             'driver' => 'redis',
             'connection' => 'default',
+        ],
+
+        'permanent' => [
+            'driver' => env('PERMANENT_CACHE_DRIVER', 'array'),
+            'connection' => 'permanent',
         ],
 
     ],

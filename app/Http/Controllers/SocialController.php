@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use App\Image;
 use Socialite;
-use Log;
+use Illuminate\Support\Facades\Auth;
 
 class SocialController extends Controller
 {

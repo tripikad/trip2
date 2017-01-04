@@ -6,7 +6,7 @@
 
         <div class="col-xs-1 utils-padding-bottom utils-half-padding-right">
 
-            <a href="{{ route('user.show', [$user->user]) }}">
+            <a @php if ($user->user->name != 'Tripi külastaja') { echo 'href="'.route('user.show', [$user->user]).'"'; } @endphp>
                 
                 @include('component.user.image', [
                     'image' => $user->user->imagePreset('xsmall_square'),

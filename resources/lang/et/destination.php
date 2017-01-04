@@ -7,6 +7,7 @@ return [
     'show.about.population' => 'Rahvaarv',
     'show.about.population.milion' => 'miljonit',
     'show.about.currency' => 'Valuuta',
+    'show.about.currencyCode' => 'Valuuta',
     'show.about.callingCode' => 'Suunakood',
 
     'show.good.offer' => 'Head pakkumised',
@@ -21,6 +22,7 @@ return [
     'show.user.button.dontwanttogo' => 'Ma ei taha sinna minna',
 
     'show.forum.title' => 'Tripikad räägivad',
+    'show.popular.title.short' => 'Populaarsed sihtkohad',
     'show.popular.title' => 'Populaarsed sihtkohad - :destination',
     'show.news.title' => 'Uudised',
     'show.gallery.title' => 'Viimati lisatud pildid',

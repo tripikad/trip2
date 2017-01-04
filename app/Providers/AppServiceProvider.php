@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Analytics;
-use Illuminate\Contracts\Auth\Guard;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -43,6 +43,10 @@ class AppServiceProvider extends ServiceProvider
 
         Collection::macro('withoutLast', function () {
             return $this->slice(0, $this->count() - 1);
+        });
+
+        Collection::macro('withoutLastWhenOdd', function () {
+            return ($this->count() % 2 > 0) ? $this->withoutLast() : $this;
         });
 
         Collection::macro('withoutFirst', function () {

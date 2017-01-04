@@ -1,28 +1,37 @@
 @php
 
+$title = $title ?? '';
+$head_description = $head_description ?? '';
+$head_image = $head_image ?? '';
 $header = $header ?? '';
-$content = $content ?? collect();
-$sidebar = $sidebar ?? collect();
-$bottom = $bottom ?? collect();
+$content = isset($content) ? collect($content) : collect();
+$sidebar = isset($sidebar) ? collect($sidebar) : collect();
+$bottom = isset($bottom) ? collect($bottom) : collect();
 $footer = $footer ?? '';
 
 @endphp
 
 @extends('v2.layouts.main')
 
+@section('title', $title)
+@section('head_description', $head_description)
+@section('head_image', $head_image)
+
 @section('header', $header)
 
 @section('content')
 
+<div class="background-white">
+
     <div class="container">
 
-        <div class="row-between padding-top-md padding-bottom-md">
+        <div class="row-between padding-top-xl-mobile-md padding-left-xl-tablet-none  padding-bottom-xl-mobile-md padding-right-xl-tablet-none">
 
-            <div class="col-8 padding-right-sm-mobile-none">
+            <div class="col-9 padding-right-md-mobile-none">
 
-                @foreach ($content->withoutLast() as $content_item)
+                @foreach ($content as $content_item)
                 
-                <div class="margin-bottom-md">
+                <div @if (! $loop->last) class="margin-bottom-md" @endif>
 
                     {!! $content_item !!}
                         
@@ -30,19 +39,13 @@ $footer = $footer ?? '';
 
                 @endforeach
 
-                <div>
-
-                    {!! $content->last() !!}
-                        
-                </div>
-
             </div>
 
-            <div class="col-4 padding-left-sm-mobile-none">
+            <div class="col-3 padding-left-md-mobile-none padding-top-none-mobile-md">
 
-                @foreach ($sidebar->withoutLast() as $sidebar_item)
+                @foreach ($sidebar as $sidebar_item)
                 
-                <div class="margin-bottom-md">
+                <div @if (! $loop->last) class="margin-bottom-md" @endif>
 
                     {!! $sidebar_item !!}
                         
@@ -50,31 +53,35 @@ $footer = $footer ?? '';
 
                 @endforeach
 
-                <div>
-
-                    {!! $sidebar->last() !!}
-                        
-                </div>
-
             </div>
 
         </div>
 
     </div>
 
-    <div class="container">
+    @if ($bottom->count())
 
-    @foreach ($bottom as $bottom_item)
-    
-        <div class="margin-bottom-md">
+    <div class="padding-top-lg padding-bottom-lg background-gray">
 
-            {!! $bottom_item !!}
+        <div class="container">
+
+        @foreach ($bottom as $bottom_item)
+        
+            <div @if (! $loop->last) class="margin-bottom-md" @endif>
+
+                {!! $bottom_item !!}
+                    
+            </div>
                 
+        @endforeach
+
         </div>
-            
-    @endforeach
 
     </div>
+
+    @endif
+
+</div>
 
 @endsection
 

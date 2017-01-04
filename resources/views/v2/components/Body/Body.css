@@ -42,7 +42,7 @@
 }
 
 .Body a,
-.Body a:link
+.Body a:link,
 .Body a:active {
     color: $blue;
     text-decoration: underline;
@@ -50,9 +50,18 @@
     word-break: break-word;
 }
 
-.Body ul {
+.Body ul,
+.Body ol {
     padding-left: $padding-md;
     margin: $margin-md 0;
+}
+
+.Body ul li {
+    list-style-type: disc;
+}
+
+.Body ol li {
+    list-style-type: decimal;
 }
 
 .Body img {

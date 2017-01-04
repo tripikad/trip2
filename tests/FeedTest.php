@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Content;
 use App\User;
+use App\Content;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class FeedTest extends TestCase
 {
@@ -17,7 +17,7 @@ class FeedTest extends TestCase
 
         $this
             ->visit('/')
-            ->click(trans('menu.footer3.newsfeed'))
+            ->click(trans('menu.footer-social.newsfeed'))
             ->seePageIs('index.atom');
 
         foreach ($contents as $content) {
@@ -34,7 +34,7 @@ class FeedTest extends TestCase
 
         $this
             ->visit('/')
-            ->click(trans('menu.footer3.flightfeed'))
+            ->click(trans('menu.footer-social.flightfeed'))
             ->seePageIs('lendude_sooduspakkumised/rss');
 
         foreach ($contents as $content) {

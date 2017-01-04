@@ -4,30 +4,33 @@ namespace App\Http\Regions;
 
 class TravelmateCard
 {
-    public function render($post)
+    public function render($travelmate)
     {
         return component('TravelmateCard')
             ->with('user', component('UserImage')
-                ->with('route', route('user.show', [$post->user]))
-                ->with('image', $post->user->imagePreset('small_square'))
-                ->with('rank', $post->user->vars()->rank)
-                ->with('size', 96)
+                ->with('route', route('v2.user.show', [$travelmate->user]))
+                ->with('image', $travelmate->user->imagePreset('small_square'))
+                ->with('rank', $travelmate->user->vars()->rank)
+                ->with('size', 72)
                 ->with('border', 4)
             )
-            ->with('route', route('travelmate.show', [$post]))
+            ->with('route', route('v2.travelmate.show', [$travelmate->slug]))
             ->with('meta_top', component('Meta')->with('items', collect()
                 ->push(component('MetaLink')
-                    ->with('title', $post->user->vars()->name)
-                    ->with('route', route('user.show', [$post->user]))
+                    ->with('title', $travelmate->user->vars()->name)
+                    ->with('route', route('v2.user.show', [$travelmate->user]))
                 ))
             )
-            ->with('title', $post->vars()->title)
+            ->with('title', $travelmate->vars()->shortTitle)
             ->with('meta_bottom', component('Meta')->with('items', collect()
-                ->merge($post->destinations->map(function ($tag) {
-                    return component('Tag')->is('orange')->with('title', $tag->name);
+                ->merge($travelmate->destinations->map(function ($destination) {
+                    return component('Tag')
+                        ->is('orange')
+                        ->with('title', $destination->name)
+                        ->with('route', route('v2.destination.show', [$destination]));
                 }))
-                ->merge($post->topics->map(function ($tag) {
-                    return component('Tag')->with('title', $tag->name);
+                ->merge($travelmate->topics->map(function ($topic) {
+                    return component('MetaLink')->with('title', $topic->name);
                 }))
             )
         );

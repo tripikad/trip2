@@ -13,9 +13,9 @@
 @section('masthead.nav')
     @include('component.masthead.nav', [
         'nav_previous_title' => ($previous_destination ? $previous_destination->name : ''),
-        'nav_previous_route' => ($previous_destination ? route('destination.show', [$previous_destination]) : null),
+        'nav_previous_route' => ($previous_destination ? route('destination.slug', [$previous_destination->slug]) : null),
         'nav_next_title' => ($next_destination ? $next_destination->name : ''),
-        'nav_next_route' => ($next_destination ? route('destination.show', [$next_destination]) : null),
+        'nav_next_route' => ($next_destination ? route('destination.slug', [$next_destination->slug]) : null),
         'modifiers' => 'm-yellow'
     ])
 @stop
@@ -102,7 +102,7 @@
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
             'subtitle' => (isset($parent_destination) ? $parent_destination->name : null),
-            'subtitle_route' => (isset($parent_destination) ? route('destination.show', [$parent_destination]) : null),
+            'subtitle_route' => (isset($parent_destination) ? route('destination.slug', [$parent_destination->slug]) : null),
             'image' => \App\Image::getRandom($destination->id)
                 /*(isset($featured['photos']) && count($featured['photos']['contents'])
                     ?
@@ -134,7 +134,7 @@
                     @foreach ($featured['flights']['contents'] as $flight)
                         @include('component.card', [
                             'modifiers' => 'm-yellow m-small',
-                            'route' => route('content.show', [$flight->type, $flight]),
+                            'route' => route($flight->type.'.show', [$flight->slug]),
                             'title' => str_limit($flight->title, 50).' '.$flight->price.' '.config('site.currency.symbol'),
                             'image' => $flight->imagePreset(),
                         ])
@@ -219,7 +219,7 @@
                                     @include('component.link', [
                                         'modifiers' => 'm-icon m-small',
                                         'title' => $destination->name .' '.trans('destination.show.forum.button.title'),
-                                        'route' => route('content.index', 'forum').'?destination='.$destination->id,
+                                        'route' => route('forum.index').'?destination='.$destination->id,
                                         'icon' => 'icon-arrow-right'
                                     ])
                                 </div>
@@ -252,7 +252,7 @@
                                 'items' => $popular_destinations->transform(function($destination) {
                                     return [
                                         'title' => $destination->name,
-                                        'route' => route('destination.show', [$destination])
+                                        'route' => route('destination.slug', [$destination->slug])
                                     ];
                                 })
                             ])
@@ -283,17 +283,17 @@
                                 return [
                                     'image' => $photo->imagePreset(),
                                     'image_large' => $photo->imagePreset('large'),
-                                    'route' => route('content.show', [$photo->type, $photo]),
+                                    'route' => route($photo->type.'.show', [$photo->slug]),
                                     'alt' => $photo->title,
                                     'tags' => $photo->destinations->transform(function($destination) {
                                         return [
                                             'title' => $destination->name,
                                             'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
-                                            'route' => route('destination.show', $destination)
+                                            'route' => route('destination.slug', $destination->slug)
                                         ];
                                     }),
                                     'userName' => $photo->user->name,
-                                    'userRoute' => route('user.show',$photo->user),
+                                    'userRoute' => ($photo->user->name != 'Tripi külastaja' ? route('user.show', [$photo->user]) : false),
                                 ];
                             })
                         ])
@@ -319,7 +319,7 @@
                                         @include('component.news', [
                                             'title' => $new->title,
                                             'modifiers' => 'm-smaller',
-                                            'route' => route('content.show', [$new->type, $new]),
+                                            'route' => route($new->type.'.show', [$new->slug]),
                                             'date' => $new->created_at,
                                             'image' => $new->imagePreset()
                                         ])
@@ -354,14 +354,14 @@
                         @include('component.destination', [
                             'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
                             'title' => $flight->destination ? $flight->destination->name : null,
-                            'title_route' => $flight->destination ? route('destination.show', $flight->destination) : null,
+                            'title_route' => $flight->destination ? route('destination.slug', $flight->destination->slug) : null,
                             'subtitle' => $flight->parent_destination ? $flight->parent_destination->name : null,
-                            'subtitle_route' => $flight->parent_destination ? route('destination.show', $flight->parent_destination) : null
+                            'subtitle_route' => $flight->parent_destination ? route('destination.slug', $flight->parent_destination->slug) : null
                         ])
 
                         @include('component.card', [
                             'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
-                            'route' => route('content.show', [$flight->type, $flight]),
+                            'route' => route($flight->type.'.show', [$flight->slug]),
                             'title' => $flight->title.' '.$flight->price.' '.config('site.currency.symbol'),
                             'image' => $flight->imagePreset(count($featured['flights2']['contents']) == 1 ? 'large' : '')
                         ])

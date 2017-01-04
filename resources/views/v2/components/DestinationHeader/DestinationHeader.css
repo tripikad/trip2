@@ -1,34 +1,67 @@
 @import "variables";
 
-.DestinationMasthead {
+.DestinationHeader {
     padding-top: $padding-md;
     padding-bottom: $padding-lg;
-    background: $orange;
+    background: $yellow;
     position: relative;
     overflow: hidden;
-    z-index: -10;
+    z-index: 0;
 }
 
-    .DestinationMasthead__map {
-        position: absolute;
-        top: calc($spacer * 4);
-        right: calc($spacer * -20);
-        opacity: $opacity-md;
-        fill: $orange-dark;
-        z-index: -5;
+    .DestinationHeader__navbar {
+        margin-bottom: $margin-lg;
     }
 
-    .DestinationMasthead__name {
+    .DestinationHeader__parents {
+        margin-bottom: $margin-sm;
+        opacity: $opacity-md;
+        display: flex;
+    }
+
+    .DestinationHeader__parents > * {
+        margin-right: $margin-xs;
+    }
+
+    .DestinationHeader__title {
         font: $font-heading-xxl;
         color: $white;
-        margin-top: $margin-xxl;
+        margin-bottom: $margin-sm;
+    }
+
+    .DestinationHeader__children {
         margin-bottom: $margin-md;
     }
 
-    .DestinationMasthead__meta {
-        color: $white;
+    .DestinationHeader__contentWrapper {
+        display: flex;
+        display: block ?if $tablet;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+
+    .DestinationHeader__description {
         font: $font-text-md;
+        color: $white;
         line-height: $line-height-xl;
-        width: 50%;
+        width: 75%;
         width: 100% ?if $mobile;
+    }
+
+    .DestinationHeader__factsWrapper {
+        display: flex;
+        display: block ?if $mobile;
+    }
+
+    .DestinationHeader__facts {
+        margin-right: $margin-md;
+    }
+
+    .DestinationHeader__stats {
+        margin-top: $margin-md ?if $tablet;
+        display: flex;
+    }
+
+    .DestinationHeader__stats > * {
+        margin-right: $margin-md;
     }

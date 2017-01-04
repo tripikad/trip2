@@ -11,21 +11,21 @@
 
         @foreach ($content as $row)
         <li class="c-search__results-sublist-item">
-            <a href="{{$row->route}}" class="c-search__results-link">
+            <a href="{{ route($row->type.'.show', [$row->slug]) }}" class="c-search__results-link">
                 <div class="c-search__results-link-profile">
                     <div class="c-profile m-mini">
                         <div class="c-profile__image-wrap">
-                            <img src="{{$row->user_img}}" alt="" class="c-profile__image">
+                            <img src="{{ $row->user->imagePreset() }}" alt="" class="c-profile__image">
                             <div class="c-profile__badge">
                                 <div class="c-badge m-inverted">
-                                    <span class="c-badge__count">{{$row->comments_count}}</span>
+                                    <span class="c-badge__count">{{ $row->comments->count() }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="c-search__results-link-text">
-                    {{$row->title}}
+                    {{ $row->title }}
                 </div>
             </a>
         </li>

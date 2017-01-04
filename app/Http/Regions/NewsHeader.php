@@ -4,19 +4,20 @@ namespace App\Http\Regions;
 
 class NewsHeader
 {
-    public function render($post)
+    public function render($new)
     {
         $user = auth()->user();
 
         return component('NewsHeader')
-            ->with('title', $post->title)
-            ->with('background', $post->getHeadImage())
+            ->with('title', $new->title)
+            ->with('background', $new->getHeadImage())
             ->with('navbar', component('Navbar')
+                ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))
                 ->with('logo', component('Icon')
-                    ->with('icon', 'tripee_logo_plain_dark')
-                    ->with('width', 80)
-                    ->with('height', 30)
+                    ->with('icon', 'tripee_logo')
+                    ->with('width', 200)
+                    ->with('height', 150)
                 )
                 ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
@@ -24,37 +25,37 @@ class NewsHeader
             ->with('meta', component('Meta')
                 ->with('items', collect()
                     ->push(component('UserImage')
-                        ->with('route', route('user.show', [$post->user]))
-                        ->with('image', $post->user->imagePreset('small_square'))
-                        ->with('rank', $post->user->vars()->rank)
+                        ->with('route', route('v2.user.show', [$new->user]))
+                        ->with('image', $new->user->imagePreset('small_square'))
+                        ->with('rank', $new->user->vars()->rank)
                     )
                     ->push(component('MetaLink')
-                        ->with('title', $post->user->vars()->name)
-                        ->with('route', route('user.show', [$post->user]))
+                        ->with('title', $new->user->vars()->name)
+                        ->with('route', route('v2.user.show', [$new->user]))
                     )
                     ->push(component('MetaLink')
-                        ->with('title', $post->vars()->created_at)
+                        ->with('title', $new->vars()->created_at)
                     )
-                    ->merge($post->destinations->map(function ($tag) {
-                        return component('Tag')->is('orange')->with('title', $tag->name);
+                    ->merge($new->destinations->map(function ($tag) {
+                        return component('Tag')->is('orange')->with('title', $tag->vars()->shortName);
                     }))
-                    ->merge($post->topics->map(function ($tag) {
-                        return component('Tag')->with('title', $tag->name);
+                    ->merge($new->topics->map(function ($tag) {
+                        return component('Tag')->with('title', $tag->vars()->shortName);
                     }))
                     ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                         ->with('title', trans('content.action.edit.title'))
-                        ->with('route', route('content.edit', [$post->type, $post]))
+                        ->with('route', route('content.edit', [$new->type, $new]))
                     )
                     ->pushWhen($user && $user->hasRole('admin'), component('Form')
                             ->with('route', route('content.status', [
-                                $post->type,
-                                $post,
-                                (1 - $post->status),
+                                $new->type,
+                                $new,
+                                (1 - $new->status),
                             ]))
                             ->with('method', 'PUT')
                             ->with('fields', collect()
                                 ->push(component('FormLink')
-                                    ->with('title', trans("content.action.status.$post->status.title"))
+                                    ->with('title', trans("content.action.status.$new->status.title"))
                                 )
                             )
                     )

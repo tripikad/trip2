@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use View;
 use Cache;
-use App\Destination;
 use App\Main;
+use App\Destination;
+use Illuminate\Http\Request;
 
 class FrontpageController extends Controller
 {
@@ -100,6 +100,6 @@ class FrontpageController extends Controller
     public function search(Request $request)
     {
         return redirect()
-            ->route('destination.show', [$request->destination]);
+            ->route('destination.slug', [$request->destination->slug]);
     }
 }

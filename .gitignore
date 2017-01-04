@@ -1,8 +1,13 @@
 /vendor
 /node_modules
 .env
-*.lock
 **/.DS_Store
 /.idea
 /public/images
 npm-debug.log
+*.rdb
+
+public/sitemap.xml
+public/sitemap*
+public/vendor/sitemap
+

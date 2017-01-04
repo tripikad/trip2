@@ -14,52 +14,28 @@ class V2UserController extends Controller
         $user = User::findOrFail($id);
 
         $comments = $user->comments()
+            ->with(['content', 'content.user'])
             ->whereStatus(1)
             ->whereHas('content', function ($query) use ($types) {
                 $query->whereIn('type', $types);
             })
             ->latest()
-            ->take(10)
+            ->take(24)
             ->get();
 
-        $userimages = $user
-            ->contents()
-            ->whereStatus(1)
-            ->where('type', 'photo')
-            ->latest('created_at')
-            ->take(6)
-            ->get()
-                ->map(function ($image) {
-                    return [
-                        'id' => $image->id,
-                        'small' => $image->imagePreset('small_square'),
-                        'large' => $image->imagePreset('large'),
-                        'meta' => component('Meta')->with('items', collect()
-                            ->push(component('MetaLink')
-                                ->with('title', $image->title)
-                            )
-                            ->push(component('MetaLink')
-                                ->with('title', $image->created_at)
-                            )
-                        )->render(),
-                    ];
-                });
-
-        return view('v2.layouts.2col')
+        return layout('1col')
 
             ->with('header', region('UserHeader', $user))
 
-            ->with('content', collect()
-                ->push(component('Gallery')->with('images', $userimages))
-                ->merge($comments->map(function ($comment) {
-                    return region('Comment', $comment);
-                }))
+            ->with('content', $comments->map(function ($comment) {
+                return component('UserCommentRow')
+                        ->with('forum', region('ForumRow', $comment->content))
+                        ->with('comment', region('Comment', $comment));
+            })
             )
 
-            ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect(['UserBlog'])))
-            )
+            ->with('footer', region('Footer'))
 
-            ->with('footer', region('Footer'));
+            ->render();
     }
 }

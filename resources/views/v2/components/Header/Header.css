@@ -9,15 +9,19 @@
 }
 
     .Header__content {
-        height: calc($spacer * 15);
+        height: calc($spacer * 12);
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
     .Header__title {
-        font: $font-heading-xxxl;
-        font: $font-heading-xxl ?if $tablet;
-        font: $font-heading-xl ?if $mobile;
         color: $white;
+        font: $font-heading-xxl;
+        font: $font-heading-xl ?if $tablet;
+        text-align: center;
     }
+
+.Header--large .Header__content {
+    height: calc($spacer * 15);
+}

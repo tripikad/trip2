@@ -2,126 +2,172 @@
 
 namespace App\Http\Controllers;
 
+use Cache;
+use Request;
+use App\User;
+use App\Topic;
 use App\Content;
 use App\Destination;
-use App\Topic;
 
 class V2ForumController extends Controller
 {
-    public function index()
+    public function forumIndex()
     {
-        $type = 'forum';
-
-        $posts = Content::whereType($type)
-            ->whereStatus(1)
-            ->latest()
-            ->take(10)
-            ->get();
-
-        $flights = Content::whereType('flight')
-            ->whereStatus(1)
-            ->latest()
-            ->take(3)
-            ->get();
-
-        $destinations = Destination::select('id', 'name')->get();
-
-        $topics = Topic::select('id', 'name')->get();
-
-        return view('v2.layouts.2col')
-            ->with('header', region('HeaderLight', trans("content.$type.index.title")))
-            ->with('content', collect()
-                ->merge($posts->map(function ($post) {
-                    return region('ForumRow', $post);
-                }))
-            )
-            ->with('sidebar', collect()
-                ->merge(region('ForumLinks'))
-                ->push(region('ForumAbout'))
-                ->push(component('Block')->with('content', collect()
-                    ->push(region('Filter', $destinations, $topics))
-                ))
-                ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->push(component('Promo')->with('promo', 'sidebar_large'))
-            )
-
-            ->with('bottom', collect()
-                ->push(component('Grid3')->with('items', $flights->map(function ($flight) {
-                    return region('FlightCard', $flight);
-                })
-                ))
-                ->push(component('Promo')->with('promo', 'footer'))
-            )
-
-            ->with('footer', region('FooterLight'));
+        return $this->index('forum');
     }
 
-    public function show($id)
+    public function buysellIndex()
     {
-        $type = 'forum';
+        return $this->index('buysell');
+    }
 
-        $post = Content::whereType($type)
-            ->whereStatus(1)
-            ->findOrFail($id);
+    public function expatIndex()
+    {
+        return $this->index('expat');
+    }
 
-        $posts = Content::whereType($type)
-            ->whereStatus(1)
-            ->latest()
-            ->take(5)
-            ->get();
+    private function index($forumType)
+    {
+        $currentDestination = Request::get('destination');
+        $currentTopic = Request::get('topic');
 
-        $travelmates = Content::whereType('travelmate')
-            ->whereStatus(1)
-            ->latest()
-            ->take(3)
-            ->get();
+        $forums = Content::getLatestPagedItems($forumType, false, $currentDestination, $currentTopic, 'updated_at');
+        $destinations = Destination::select('id', 'name')->get();
+        $topics = Topic::select('id', 'name')->get();
 
-        return view('v2.layouts.2col')
+        $flights = Content::getLatestItems('flight', 3);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
 
-            ->with('header', region('Header', trans("content.$type.index.title")))
+        return layout('2col')
+
+            ->with('header', region(
+                'HeaderLight',
+                trans("content.$forumType.index.title"),
+                region(
+                        'FilterHorizontal',
+                        $destinations,
+                        $topics,
+                        $currentDestination,
+                        $currentTopic,
+                        $forums->currentPage(),
+                        'v2.forum.index'
+                ),
+                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ))
 
             ->with('content', collect()
-                ->push(region('ForumPost', $post))
-                ->merge($post->comments->map(function ($comment) {
-                    return region('Comment', $comment);
+                ->merge($forums->map(function ($forum) {
+                    return region('ForumRow', $forum);
                 }))
-                //->push(region('CommentCreateForm', $post))
+                ->push(region('Paginator', $forums, $currentDestination, $currentTopic))
             )
 
             ->with('sidebar', collect()
-                ->merge(region('ForumLinks'))
                 ->push(region('ForumAbout'))
-                ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->merge($post->destinations->map(function ($destination) {
-                    return region('DestinationBar', $destination, $destination->getAncestors());
-                }))
-                ->push(region('ForumSidebar', $posts))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
-                ->push(component('Block')
-                    ->is('red')
-                    ->is('uppercase')
-                    ->is('white')
-                    ->with('title', trans('content.forum.sidebar.title'))
-                    ->with('content', collect()
-                    ->push(component('ForumBottom')
-                        ->with('left_items', region('ForumLinks'))
-                        ->with('right_items', $posts->map(function ($post) {
-                            return region('ForumRow', $post);
-                        }))
-                    )))
-                ->push(component('Block')->with('content', collect()
-                    ->push(component('Grid3')->with('gutter', true)->with('items', $travelmates->map(function ($post) {
-                        return region('TravelmateCard', $post);
-                    })
-                    ))
-                ))
+                ->push(region('ForumBottom', $flights, $travelmates, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('FooterLight'));
+            ->with('footer', region('FooterLight'))
+
+            ->render();
+    }
+
+    public function followIndex($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $follows = $user->follows;
+
+        $flights = Content::getLatestItems('flight', 3);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
+
+        return layout('2col')
+
+            ->with('header', region(
+                'HeaderLight',
+                trans('follow.index.title'),
+                '',
+                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ))
+
+            ->with('content', collect()
+                ->pushWhen($follows->count() == 0, component('Title')
+                    ->with('title', trans('follow.index.empty'))
+                )
+                ->merge($user->follows->map(function ($follow) {
+                    return region('ForumRow', $follow->followable);
+                }))
+            )
+
+            ->with('sidebar', collect()
+                ->push(region('ForumAbout'))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+            )
+
+            ->with('bottom', collect()
+                ->push(region('ForumBottom', $flights, $travelmates, $news))
+                ->push(component('Promo')->with('promo', 'footer'))
+            )
+
+            ->with('footer', region('FooterLight'))
+
+            ->render();
+    }
+
+    public function show($slug)
+    {
+        $forum = Content::getItemBySlug($slug);
+        $user = auth()->user();
+        $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
+
+        $flights = Content::getLatestItems('flight', 3);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
+
+        // Clear the unread cache
+
+        if ($user) {
+            $key = 'new_'.$forum->id.'_'.$user->id;
+            Cache::store('permanent')->forget($key);
+        }
+
+        return layout('2col')
+
+            ->with('header', region(
+                'HeaderLight',
+                trans("content.$forum->type.index.title"),
+                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ))
+
+            ->with('content', collect()
+                ->push(region('ForumPost', $forum))
+                ->merge($forum->comments->map(function ($comment) use ($firstUnreadCommentId) {
+                    return region('Comment', $comment, $firstUnreadCommentId);
+                }))
+                ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum))
+            )
+
+            ->with('sidebar', collect()
+                ->push(region('ForumAbout'))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+            )
+
+            ->with('bottom', collect()
+                ->push(region('ForumBottom', $flights, $travelmates, $news))
+                ->push(component('Promo')->with('promo', 'footer'))
+            )
+
+            ->with('footer', region('FooterLight'))
+
+            ->render();
     }
 }

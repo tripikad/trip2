@@ -3,13 +3,17 @@
     .NewsCard__image {
         background-repeat: no-repeat;
         background-size: cover;
-        height: $height-xxl;
+        height: 0;
+        max-width: 100%;
+        overflow: hidden;
+        padding-bottom: 56%;
+        position: relative;
         margin-bottom: $margin-sm;
     }
 
     .NewsCard__title {
         color: $blue;
-        font: $font-heading-lg;
+        font: $font-heading-md;
         line-height: $line-height-md;
-        margin-bottom: $margin-sm;
+        margin-bottom: $margin-xs;
     }

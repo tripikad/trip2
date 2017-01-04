@@ -3,30 +3,53 @@
 .UserHeader {
     padding-top: $padding-md;
     padding-bottom: $padding-lg;
-    background: $cyan;
+    background: $cyan-dark;
     position: relative;
     overflow: hidden;
+    z-index: 0;
 }
 
-    .UserHeader__map {
-        position: absolute;
-        top: calc($spacer * 4);
-        right: calc($spacer * -20);
-        opacity: $opacity-md;
-        fill: $cyan-light;
+    .UserHeader__contentWrapper {
+        display: flex;
+        display: block ? if $mobile;
+        margin-top: $margin-lg;
+        align-items: center;
     }
 
     .UserHeader__user {
-        margin-bottom: $margin-md;
+        margin-right: $margin-md;
+        display: flex;
+        justify-content: left;
+        justify-content: center ?if $mobile;
+    }
+
+    .UserHeader__nameWrapper {
+        display: flex;
+        justify-content: left;
+        justify-content: center ?if $mobile;
+        flex-direction: column ?if $mobile;
+        align-items: center ?if $mobile;
+        margin-bottom: $margin-sm;
     }
 
     .UserHeader__name {
         font: $font-heading-xxl;
+        font: $font-heading-xl ?if $mobile;
         color: $white;
-        margin-bottom: $margin-md;
+    }
+
+    .UserHeader__actionsWithUser {
+        margin: 0 0 0 $margin-md;
+        margin: $margin-sm 0 $margin-sm 0 ?if $mobile;
     }
 
     .UserHeader__meta {
         font: $font-heading-sm;
-        color: $cyan-dark;
+        line-height: $line-height-md;
+        color: $cyan;
+        margin-bottom: $margin-sm;
+    }
+
+    .UserHeader__actionsByUser {
+        margin-top: $margin-md;
     }

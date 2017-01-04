@@ -4,22 +4,22 @@ namespace App\Http\Regions;
 
 class ForumRowSmall
 {
-    public function render($post)
+    public function render($forum)
     {
         return component('ForumRowSmall')
-            ->with('route', route('content.show', [$post->type, $post]))
+            ->with('route', route('v2.forum.show', [$forum]))
             ->with('user', component('UserImage')
-                ->with('route', route('user.show', [$post->user]))
-                ->with('image', $post->user->imagePreset('small_square'))
-                ->with('rank', $post->user->vars()->rank)
+                ->with('route', route('v2.user.show', [$forum->user]))
+                ->with('image', $forum->user->imagePreset('small_square'))
+                ->with('rank', $forum->user->vars()->rank)
             )
-            ->with('title', $post->title)
+            ->with('title', $forum->vars()->shortTitle)
             ->with('meta', component('Meta')->with('items', collect()
+                    ->push(component('Badge')->with('title', $forum->vars()->commentCount))
                     ->push(component('MetaLink')
-                        ->with('title', $post->vars()->created_at)
+                        ->with('title', $forum->vars()->created_at)
                     )
                 )
-            )
-            ->with('badge', component('Badge')->with('title', count($post->comments)));
+            );
     }
 }

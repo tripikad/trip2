@@ -1,36 +1,24 @@
 <template>
 
     <div class="FormSelect" :class="isclasses">
-    
+        
         <component
             is="Multiselect"
-            :selected="selected"
-            :multiple="multiple",
-            :searchable="true",
-            :options="options",
-            @update="updateValue"
-            :placeholder="placeholder"
+            v-model="selected"
+            :options="currentOptions"
+            track-by="name"
             label="name"
-            :select-label="helper"
+            :placeholder="placeholder"
+            :tag-placeholder="false"
         >
         </component>
 
-        <select
-            v-if="multiple"
-            v-show="false"
-            :name="name + '[]'
-            multiple
-        ">
-            <option v-for="item in selected" :value="item.id" selected>{{ item.name }}</option>
-        </select>
-
         <input
-            v-if="!multiple"
+            v-model="currentId"
             v-show="false"
             type="text"
             :name="name"
-            :value="selected ? selected.id : ''
-        ">
+        >
 
     </div>
 
@@ -50,30 +38,28 @@
             options: { default: '' },
             placeholder: { default: '' },
             helper: { default: '' },
-            multiple: { default: '' }
+            value: { default: '' },
+            placeholder: { default: 'Select yo' },
+            tagplaceholder: { default: 'Yo'}
         },
 
         data() {
             return {
-                selected: null
+                selected: {},
+                currentOptions: []
             }
         },
 
-        methods: {
-            updateValue(selected) {
-                this.selected = selected
+        computed: {
+            currentId() {
+                return this.selected ? this.selected.id : ''
             }
         },
 
-        ready() {
-            this.multiple = this.multiple
-                ? JSON.parse(decodeURIComponent(this.multiple))
-                : []
-            this.options = this.options
-                ? JSON.parse(decodeURIComponent(this.options))
-                : []
+        mounted() {
+            this.currentOptions = JSON.parse(decodeURIComponent(this.options))
+            this.selected = this.currentOptions.find((option) => option.id === parseInt(this.value))
         }
-
     }
 
 </script>

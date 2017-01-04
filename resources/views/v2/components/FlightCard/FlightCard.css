@@ -1,17 +1,31 @@
 @import "variables";
 
 .FlightCard {
-    align-items: center;
     background-repeat: no-repeat;
     background-size: cover;
-    display: flex;
-    padding: $padding-md;
-    height: $height-xl;
+    height: 0;
+    max-width: 100%;
+    overflow: hidden;
+    padding-bottom: 58%;
+    position: relative;
 }
+
+    .FlightCard__wrapper {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        padding: $padding-md;
+        padding: $padding-xl ?if $mobile;
+    }
 
     .FlightCard__title {
         color: $white;
-        font: $font-heading-lg;
+        font: $font-heading-md;
         line-height: $line-height-md;
         text-align: center;
         text-shadow: $text-shadow;

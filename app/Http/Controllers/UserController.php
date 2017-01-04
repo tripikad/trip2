@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use View;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
+use App\Flag;
 use App\User;
 use App\Image;
-use App\Flag;
+use Carbon\Carbon;
 use App\Destination;
-use Hash;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
 
-        $user = User::with(['flags.flaggable'])->findorFail($id);
+        $user = User::with(['flags.flaggable'])->where('name', '!=', 'Tripi külastaja')->findorFail($id);
 
         $content_count = $user
             ->contents()
@@ -236,7 +236,7 @@ class UserController extends Controller
     {
         $user = User::with(['flags.flaggable'])->findorFail($id);
 
-        $user_have_been = $user->destinationHaveBeen()->lists('flaggable_id')->toArray();
+        $user_have_been = $user->destinationHaveBeen()->pluck('flaggable_id')->toArray();
         $have_been_destinations = Destination::getNames();
 
         if (count($user_have_been)) {
@@ -245,7 +245,7 @@ class UserController extends Controller
 
         $have_been_destination = [];
 
-        $user_want_to_go = $user->destinationWantsToGo()->lists('flaggable_id')->toArray();
+        $user_want_to_go = $user->destinationWantsToGo()->pluck('flaggable_id')->toArray();
         $want_to_go_destinations = Destination::getNames()->forget($user_want_to_go);
 
         if (count($user_want_to_go)) {
