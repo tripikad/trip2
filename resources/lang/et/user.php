@@ -8,7 +8,7 @@ return [
     'show.stat.dislikes' => ':dislikes_count mittemeeldimist',
     'show.stat.content' => ':content_count postitust / :comment_count kommentaari',
     'show.stat.destination' => ':destination_count (:destination_percentage%) külastatud sihtkohta',
-    
+
     // V1
 
     'gender.1' => 'Naine',

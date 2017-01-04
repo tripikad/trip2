@@ -84,7 +84,7 @@ class UserHeader
                         ->with('icon', 'icon-thumb-up')
                         ->with('title', trans(
                             'user.show.stat.likes', [
-                                'likes_count' => $user->vars()->flagCount('good')
+                                'likes_count' => $user->vars()->flagCount('good'),
                             ]
                         ))
                     )
@@ -94,7 +94,7 @@ class UserHeader
                             ->with('icon', 'icon-thumb-down')
                             ->with('title', trans(
                                 'user.show.stat.dislikes', [
-                                    'dislikes_count' => $user->vars()->flagCount('bad')
+                                    'dislikes_count' => $user->vars()->flagCount('bad'),
                                 ]
                             ))
                     )
@@ -102,7 +102,7 @@ class UserHeader
                         ->with('title', trans(
                             'user.show.stat.content', [
                                 'content_count' => $user->vars()->contentCount,
-                                'comment_count' => $user->vars()->commentCount
+                                'comment_count' => $user->vars()->commentCount,
                             ]
                         ))
                         ->with('icon', 'icon-comment')
@@ -111,7 +111,7 @@ class UserHeader
                         ->with('title', trans(
                             'user.show.stat.destination', [
                                 'destination_count' => $user->vars()->destinationCount(),
-                                'destination_percentage' => $user->vars()->destinationCountPercentage()
+                                'destination_percentage' => $user->vars()->destinationCountPercentage(),
                             ]
                         ))
                         ->with('icon', 'icon-pin')

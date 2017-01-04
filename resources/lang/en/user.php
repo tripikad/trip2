@@ -8,7 +8,7 @@ return [
     'show.stat.dislikes' => ':dislikes_count dislikes',
     'show.stat.content' => ':content_count posts / :comment_count comments',
     'show.stat.destination' => ':destination_count (:destination_percentage%) visited destinations',
-    
+
     // V1
 
     'gender.1' => 'Female',
