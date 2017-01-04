@@ -78,7 +78,7 @@ class V2FrontpageController extends Controller
                 ->push(component('Block')
                     ->is('white')
                     ->is('uppercase')
-                    ->with('title', trans('frontpage.index.travelmate.title'))
+                    ->with('title', trans('frontpage.index.blog.title'))
                     ->with('content', [])
                 )
                 ->push(component('Grid3')

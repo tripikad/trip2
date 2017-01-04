@@ -17,7 +17,7 @@ return [
     'index.forum.title' => 'Tripikad räägivad',
     'index.news.title' => 'Uudised',
     'index.photo.title' => 'Viimati lisatud pildid',
-    'index.blog.title' => 'Blogi',
+    'index.blog.title' => 'Reisiblogid',
     'index.offer.title' => 'Reisipakkumised',
     'index.travelletter.title' => 'Reisikirjad',
 
