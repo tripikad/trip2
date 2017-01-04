@@ -43,6 +43,15 @@ class V2ForumController extends Controller
             ->with('header', region(
                 'HeaderLight',
                 trans("content.$forumType.index.title"),
+                region(
+                        'Filter',
+                        $destinations,
+                        $topics,
+                        $currentDestination,
+                        $currentTopic,
+                        $forums->currentPage(),
+                        'v2.forum.index'
+                ),
                 component('BlockHorizontal')->with('content', region('ForumLinks'))
             ))
 
@@ -54,17 +63,6 @@ class V2ForumController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect()
-                    ->push(region(
-                        'Filter',
-                        $destinations,
-                        $topics,
-                        $currentDestination,
-                        $currentTopic,
-                        $forums->currentPage(),
-                        'v2.forum.index'
-                    ))
-                ))
                 ->push(region('ForumAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))

@@ -21,6 +21,8 @@ $footer = $footer ?? '';
 
 @section('content')
 
+<div class="background-white">
+
     <div class="container">
 
         <div class="row-between padding-top-xl-mobile-md padding-bottom-md">
@@ -78,6 +80,8 @@ $footer = $footer ?? '';
     </div>
 
     @endif
+
+</div>
 
 @endsection
 

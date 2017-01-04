@@ -6,11 +6,9 @@ class Filter
 {
     public function render($destinations, $topics, $currentDestination = null, $currentTopic = null, $currentPage = 1, $type = '')
     {
-        return component('Form')
+        return component('FormHorizontal')
                 ->with('route', route('utils.filter'))
                 ->with('fields', collect()
-                    ->push(component('FormHidden')->with('name', 'type')->with('value', $type))
-                    ->push(component('FormHidden')->with('name', 'page')->with('value', $currentPage))
                     ->pushWhen($destinations, component('FormSelect')
                         ->with('name', 'destination')
                         ->with('options', $destinations)
@@ -29,6 +27,15 @@ class Filter
                     )
                     ->push(component('FormButton')
                         ->with('title', trans('content.index.filter.submit.title'))
-                    ));
+                    )
+                    ->push(component('FormHidden')
+                        ->with('name', 'type')
+                        ->with('value', $type)
+                    )
+                    ->push(component('FormHidden')
+                        ->with('name', 'page')
+                        ->with('value', $currentPage)
+                    )
+                );
     }
 }

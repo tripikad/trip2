@@ -2,30 +2,30 @@
 
 .HeaderLight {
     padding-top: $padding-md;
-    padding-bottom: $padding-lg;
+    padding-bottom: $padding-md;
     padding-bottom: $padding-xs ?if $mobile;
-    background: $gray-light;
-    position: relative;
-    overflow: hidden;
-    z-index: 0;
 }
 
     .HeaderLight__content {
-        height: calc($spacer * 12);
-        height: calc($spacer * 16) ?if $mobile;
+        margin-top: $margin-xxl;
+    }
+
+    .HeaderLight__metaWrapper {
+        margin-top: $margin-md;
         display: flex;
-        justify-content: center;
-        justify-content: flex-start ?if $mobile;
+        flex-direction: column-reverse ?if $tablet;
         align-items: center;
+        align-items: flex-start ?if $tablet;
+        justify-content: space-between;
+    }
+
+    .HeaderLight__meta {
+        margin-top: $margin-md ?if $tablet;
     }
 
     .HeaderLight__title {
         color: $gray-darkest;
         font: $font-heading-xxl;
         font: $font-heading-xl ?if $mobile;
-        text-align: center;
-    }
-
-    .HeaderLight__meta {
-        margin-top: $margin-md;
+        margin-right: $margin-md;
     }
