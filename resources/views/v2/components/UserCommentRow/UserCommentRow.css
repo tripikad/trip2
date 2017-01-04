@@ -1,11 +1,6 @@
 @import "variables";
 
     .UserCommentRow__forum {
-        margin-bottom: $margin-md;
-        opacity: $opacity-lg;
-    }
-
-    .UserCommentRow__comment {
-        margin-left: calc($spacer * 5);
-        margin-left: 0 ?if $mobile;
+        margin: 0 0 $margin-md $margin-sm;
+        opacity: $opacity-md;
     }
