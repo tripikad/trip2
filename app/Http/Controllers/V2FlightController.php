@@ -99,8 +99,6 @@ class V2FlightController extends Controller
 
         $user = auth()->user();
 
-        dump($flight->getHeadImage());
-
         return layout('2col')
 
             ->with('header', region('Header', trans('content.flight.index.title')))
