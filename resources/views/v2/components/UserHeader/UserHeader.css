@@ -9,8 +9,15 @@
     z-index: 0;
 }
 
+    .UserHeader__contentWrapper {
+        display: flex;
+        display: block ? if $mobile;
+        margin-top: $margin-lg;
+        align-items: center;
+    }
+
     .UserHeader__user {
-        margin-bottom: $margin-md;
+        margin-right: $margin-md;
         display: flex;
         justify-content: left;
         justify-content: center ?if $mobile;
@@ -19,10 +26,10 @@
     .UserHeader__nameWrapper {
         display: flex;
         justify-content: left;
-        flex-direction: column ?if $mobile;
         justify-content: center ?if $mobile;
+        flex-direction: column ?if $mobile;
         align-items: center ?if $mobile;
-        margin-bottom: $margin-md;
+        margin-bottom: $margin-sm;
     }
 
     .UserHeader__name {
@@ -32,7 +39,7 @@
     }
 
     .UserHeader__actionsWithUser {
-        margin: 0 0 0 $margin-sm;
+        margin: 0 0 0 $margin-md;
         margin: $margin-sm 0 $margin-sm 0 ?if $mobile;
     }
 
@@ -40,14 +47,7 @@
         font: $font-heading-sm;
         line-height: $line-height-md;
         color: $cyan;
-        margin-bottom: $margin-md;
-    }
-
-    .UserHeader__wantstogo {
-        font: $font-heading-sm;
-        line-height: $line-height-md;
-        color: $white;
-        margin-bottom: $margin-md;
+        margin-bottom: $margin-sm;
     }
 
     .UserHeader__actionsByUser {

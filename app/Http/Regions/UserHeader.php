@@ -60,7 +60,7 @@ class UserHeader
                 ->with('route', route('user.show', [$user]))
                 ->with('image', $user->imagePreset('small_square'))
                 ->with('rank', $user->vars()->rank)
-                ->with('size', 132)
+                ->with('size', 164)
                 ->with('border', 7)
             )
             ->with('name', $user->vars()->name)

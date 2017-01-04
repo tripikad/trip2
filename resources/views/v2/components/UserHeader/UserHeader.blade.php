@@ -4,7 +4,6 @@ $map = $map ?? '';
 $header = $header ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
-$wantstogo = $wantstogo ?? '';
 $actions_with_user = $actions_with_user ?? '';
 $actions_by_user = $actions_by_user ?? '';
 $background = $background ?? '';
@@ -21,47 +20,45 @@ $background = $background ?? '';
             
         </div>
 
-        <div class="UserHeader__user">
+        <div class="UserHeader__contentWrapper">
 
-            {!! $user !!}
+            <div class="UserHeader__user">
 
-        </div>
-
-        <div class="UserHeader__nameWrapper">
-
-            <div class="UserHeader__name">
-
-                {!! $name !!}
+                {!! $user !!}
 
             </div>
 
-            <div class="UserHeader__actionsWithUser">
+            <div>
 
-                {!! $actions_with_user !!}
+                <div class="UserHeader__nameWrapper">
+
+                    <div class="UserHeader__name">
+
+                        {!! $name !!}
+
+                    </div>
+
+                    <div class="UserHeader__actionsWithUser">
+
+                        {!! $actions_with_user !!}
+
+                    </div>
+
+                </div>
+
+                <div class="UserHeader__meta">
+
+                    {!! $meta !!}
+
+                </div>
+
+                <div class="UserHeader__stats">
+
+                    {!! $stats !!}
+
+                </div>
 
             </div>
-
-        </div>
-
-        <div class="UserHeader__meta">
-
-            {!! $meta !!}
-
-        </div>
-
-        @if ($wantstogo)
-
-        <div class="UserHeader__wantstogo">
-
-            {!! $wantstogo !!}
-
-        </div>
-
-        @endif
-
-        <div class="UserHeader__stats">
-
-            {!! $stats !!}
 
         </div>
 
