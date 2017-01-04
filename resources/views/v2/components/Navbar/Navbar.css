@@ -8,7 +8,7 @@
 }
 
     .Navbar__logo {
-        margin-left: calc($spacer * -4);
+        margin-left: calc($spacer * -4.5);
     }
 
     .Navbar--white .Navbar__logo svg {

@@ -9,7 +9,7 @@
     .HeaderLight__content {
         margin-top: $margin-xl;
         margin-left: $margin-xl;
-        margin-left: 0 ?if $mobile;
+        margin-left: 0 ?if $tablet;
     }
 
     .HeaderLight__meta {
