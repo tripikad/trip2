@@ -52,7 +52,7 @@ return [
     'user.profile' => 'Profiil',
     'user.edit.profile' => 'Muuda profiili',
     'user.message' => 'Sõnumid',
-    'user.follow' => 'Jälgimised',
+    'user.follow' => 'Jälgitavad teemad',
     'user.travelmate' => 'Otsid reisikaaslast?',
     'user.add.places' => 'Lisa riigid, kus oled käinud',
     'user.photo' => 'Lisa reisipilt',

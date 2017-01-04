@@ -7,6 +7,7 @@ use Request;
 use App\Topic;
 use App\Content;
 use App\Destination;
+use App\User;
 
 class V2ForumController extends Controller
 {
@@ -60,6 +61,50 @@ class V2ForumController extends Controller
                     return region('ForumRow', $forum);
                 }))
                 ->push(region('Paginator', $forums, $currentDestination, $currentTopic))
+            )
+
+            ->with('sidebar', collect()
+                ->push(region('ForumAbout'))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+            )
+
+            ->with('bottom', collect()
+                ->push(region('ForumBottom', $flights, $travelmates, $news))
+                ->push(component('Promo')->with('promo', 'footer'))
+            )
+
+            ->with('footer', region('FooterLight'))
+
+            ->render();
+    }
+
+    public function followIndex($user_id)
+    {
+
+        $user = User::findOrFail($user_id);
+        $follows = $user->follows;
+
+        $flights = Content::getLatestItems('flight', 3);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
+
+        return layout('2col')
+
+            ->with('header', region(
+                'HeaderLight',
+                trans('follow.index.title'),
+                '',
+                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ))
+
+            ->with('content', collect()
+                ->pushWhen($follows->count() == 0, component('Title')
+                    ->with('title', trans('follow.index.empty'))
+                )
+                ->merge($user->follows->map(function ($follow) {
+                    return region('ForumRow', $follow->followable);
+                }))
             )
 
             ->with('sidebar', collect()

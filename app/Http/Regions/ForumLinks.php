@@ -4,8 +4,10 @@ namespace App\Http\Regions;
 
 class ForumLinks
 {
-    public function render()
+    public function render($user = false)
     {
+        $user = auth()->user();
+
         return collect()
             ->push(component('Link')
                 ->is('large')
@@ -24,6 +26,12 @@ class ForumLinks
                 ->is('gray')
                 ->with('title', trans('frontpage.index.forum.expat'))
                 ->with('route', route('v2.expat.index'))
+            )
+            ->pushWhen($user, component('Link')
+                ->is('large')
+                ->is('gray')
+                ->with('title', trans('menu.user.follow'))
+                ->with('route', route('v2.follow.index', [$user]))
             );
     }
 }
