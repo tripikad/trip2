@@ -11,13 +11,14 @@
 
     .UserHeader__contentWrapper {
         display: flex;
-        display: block ? if $mobile;
+        display: block ?if $mobile;
         margin-top: $margin-lg;
-        align-items: center;
     }
 
     .UserHeader__user {
         margin-right: $margin-md;
+        margin-right: 0 ?if $mobile;
+        margin-bottom: $margin-md ?if $mobile;
         display: flex;
         justify-content: left;
         justify-content: center ?if $mobile;

@@ -64,7 +64,6 @@ class UserHeader
                 ->with('border', 7)
             )
             ->with('name', $user->vars()->name)
-            // ->with('wantstogo', trans('user.show.wantstogo.title'))
             ->with('actions_with_user', component('BlockHorizontal')
                 ->with('content', collect()
                     ->pushWhen(
@@ -83,16 +82,28 @@ class UserHeader
                 ->with('content', collect()
                     ->push(component('StatCard')
                         ->with('icon', 'icon-thumb-up')
-                        ->with('title', $user->likes()->count())
+                        ->with('title', trans(
+                            'user.show.stat.likes', [
+                                'likes_count' => $user->vars()->likesCount()
+                            ]
+                        ))
                     )
                     ->push(component('StatCard')
-                        ->with('title', $user->vars()->contentCount.' / '.$user->vars()->commentCount)
+                        ->with('title', trans(
+                            'user.show.stat.content', [
+                                'content_count' => $user->vars()->contentCount,
+                                'comment_count' => $user->vars()->commentCount
+                            ]
+                        ))
                         ->with('icon', 'icon-comment')
                     )
                     ->push(component('StatCard')
-                        ->with('title', $user->vars()->destinationCount()
-                            .' ( '.$user->vars()->destinationCountPercentage().'% )'
-                        )
+                        ->with('title', trans(
+                            'user.show.stat.destination', [
+                                'destination_count' => $user->vars()->destinationCount(),
+                                'destination_percentage' => $user->vars()->destinationCountPercentage()
+                            ]
+                        ))
                         ->with('icon', 'icon-pin')
                     )
                 )

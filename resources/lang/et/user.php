@@ -2,6 +2,14 @@
 
 return [
 
+    // V2
+
+    'show.stat.likes' => ':likes_count meeldimist',
+    'show.stat.content' => ':content_count postitust / :comment_count kommentaari',
+    'show.stat.destination' => ':destination_count (:destination_percentage%) külastatud sihtkohta',
+    
+    // V1
+
     'gender.1' => 'Naine',
     'gender.2' => 'Mees',
 

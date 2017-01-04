@@ -36,6 +36,11 @@ class V2UserVars
         return $this->user->rank * 90;
     }
 
+    public function likesCount()
+    {
+        return $this->user->likes()->count();
+    }
+
     public function contentCount()
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];

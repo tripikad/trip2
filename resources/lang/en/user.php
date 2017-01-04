@@ -2,6 +2,14 @@
 
 return [
 
+    // V2
+
+    'show.stat.likes' => ':likes_count likes',
+    'show.stat.content' => ':content_count posts / :comment_count comments',
+    'show.stat.destination' => ':destination_count (:destination_percentage%) visited destinations',
+    
+    // V1
+
     'gender.1' => 'Female',
     'gender.2' => 'Male',
 
