@@ -38,27 +38,27 @@ $background = $background ?? '';
 
                     </div>
 
-                    <div class="UserHeader__actionsWithUser">
-
-                        {!! $actions_with_user !!}
-
-                    </div>
-
                 </div>
 
-                <div class="UserHeader__meta">
+                <div class="UserHeader__actionsWithUser">
 
-                    {!! $meta !!}
-
-                </div>
-
-                <div class="UserHeader__stats">
-
-                    {!! $stats !!}
+                    {!! $actions_with_user !!}
 
                 </div>
 
             </div>
+
+        </div>
+
+        <div class="UserHeader__meta">
+
+            {!! $meta !!}
+
+        </div>
+        
+        <div class="UserHeader__stats">
+
+            {!! $stats !!}
 
         </div>
 

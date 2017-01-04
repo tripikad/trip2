@@ -36,6 +36,19 @@ class V2UserVars
         return $this->user->rank * 90;
     }
 
+    public function flagCount($flagType)
+    {
+        $contentLikesCount = $this->user->contents()->whereHas('flags', function ($query) use ($flagType) {
+            $query->where('flag_type', $flagType);
+        })->count();
+
+        $commentLikesCount = $this->user->comments()->whereHas('flags', function ($query) use ($flagType) {
+            $query->where('flag_type', $flagType);
+        })->count();
+
+        return $contentLikesCount + $commentLikesCount;
+    }
+
     public function contentCount()
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
