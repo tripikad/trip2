@@ -60,7 +60,7 @@ class UserHeader
                 ->with('route', route('user.show', [$user]))
                 ->with('image', $user->imagePreset('small_square'))
                 ->with('rank', $user->vars()->rank)
-                ->with('size', 164)
+                ->with('size', 152)
                 ->with('border', 7)
             )
             ->with('name', $user->vars()->name)
@@ -84,9 +84,19 @@ class UserHeader
                         ->with('icon', 'icon-thumb-up')
                         ->with('title', trans(
                             'user.show.stat.likes', [
-                                'likes_count' => $user->vars()->likesCount()
+                                'likes_count' => $user->vars()->flagCount('good')
                             ]
                         ))
+                    )
+                    ->pushWhen(
+                        $loggedUser && $loggedUser->hasRole('admin'),
+                        component('StatCard')
+                            ->with('icon', 'icon-thumb-down')
+                            ->with('title', trans(
+                                'user.show.stat.dislikes', [
+                                    'dislikes_count' => $user->vars()->flagCount('bad')
+                                ]
+                            ))
                     )
                     ->push(component('StatCard')
                         ->with('title', trans(

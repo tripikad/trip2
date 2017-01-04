@@ -36,14 +36,14 @@ class V2UserVars
         return $this->user->rank * 90;
     }
 
-    public function likesCount()
+    public function flagCount($flagType) 
     {
-        $contentLikesCount = $this->user->contents()->whereHas('flags', function($query) {
-            $query->where('flag_type', 'good');
+        $contentLikesCount = $this->user->contents()->whereHas('flags', function($query) use ($flagType) {
+            $query->where('flag_type', $flagType);
         })->count();
 
-        $commentLikesCount = $this->user->comments()->whereHas('flags', function($query) {
-            $query->where('flag_type', 'good');
+        $commentLikesCount = $this->user->comments()->whereHas('flags', function($query) use ($flagType) {
+            $query->where('flag_type', $flagType);
         })->count();
 
         return $contentLikesCount + $commentLikesCount;

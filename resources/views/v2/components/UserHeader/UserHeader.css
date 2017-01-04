@@ -12,7 +12,8 @@
     .UserHeader__contentWrapper {
         display: flex;
         display: block ?if $mobile;
-        margin-top: $margin-lg;
+        margin: $margin-lg 0 $margin-md 0;
+        align-items: center;
     }
 
     .UserHeader__user {
@@ -30,7 +31,6 @@
         justify-content: center ?if $mobile;
         flex-direction: column ?if $mobile;
         align-items: center ?if $mobile;
-        margin-bottom: $margin-sm;
     }
 
     .UserHeader__name {
@@ -40,15 +40,14 @@
     }
 
     .UserHeader__actionsWithUser {
-        margin: 0 0 0 $margin-md;
-        margin: $margin-sm 0 $margin-sm 0 ?if $mobile;
+        margin-top: $margin-sm;
     }
 
     .UserHeader__meta {
         font: $font-heading-sm;
         line-height: $line-height-md;
         color: $cyan;
-        margin-bottom: $margin-sm;
+        margin-bottom: $margin-md;
     }
 
     .UserHeader__actionsByUser {

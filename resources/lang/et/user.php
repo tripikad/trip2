@@ -5,6 +5,7 @@ return [
     // V2
 
     'show.stat.likes' => ':likes_count meeldimist',
+    'show.stat.dislikes' => ':dislikes_count mittemeeldimist',
     'show.stat.content' => ':content_count postitust / :comment_count kommentaari',
     'show.stat.destination' => ':destination_count (:destination_percentage%) külastatud sihtkohta',
     
