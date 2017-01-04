@@ -28,13 +28,13 @@ $badge = $badge ?? '';
 
             </div>
 
+            </a>
+
             <div class="ForumRow__meta">
 
                 {!! $meta !!}
             
             </div>
-
-            </a>
 
         </div>
 

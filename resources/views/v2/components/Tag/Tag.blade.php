@@ -5,24 +5,24 @@ $route = $route ?? '';
 
 @endphp
 
-@if ($route)
-
-<a href="{{ $route }}">
-
-@endif
-
 <div class="Tag {{ $isclasses }}">
 
-    <div class="Tag__title">
+    @if ($route)
 
-        {{ $title }}
+    <a href="{{ $route }}">
 
-    </div>
+    @endif
+
+        <div class="Tag__title">
+
+            {{ $title }}
+
+        </div>
+
+    @if ($route)
+
+    </a>
+
+    @endif
 
 </div>
-
-@if ($route)
-
-</a>
-
-@endif

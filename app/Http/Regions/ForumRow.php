@@ -10,9 +10,10 @@ class ForumRow
         $commentCount = $forum->vars()->commentCount;
         $unreadCommentCount = $forum->vars()->unreadCommentCount;
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
+        $route = $route ? $route : route('v2.forum.show', [$forum->slug]);
 
         return component('ForumRow')
-            ->with('route', $route ? $route : route('v2.forum.show', [$forum->slug]))
+            ->with('route', $route)
             ->with('user', component('UserImage')
                 ->with('route', route('v2.user.show', [$forum->user]))
                 ->with('image', $forum->user->vars()->imagePreset('small_square'))
@@ -26,6 +27,7 @@ class ForumRow
                         component('Tag')
                             ->is('red')
                             ->with('title', trans('content.show.isnew'))
+                            ->with('route', $route)
                     )
                     ->pushWhen($user && $user->hasRole('admin') && $firstUnreadCommentId,
                         component('Tag')
@@ -46,7 +48,6 @@ class ForumRow
                     )
                     ->push(component('MetaLink')
                         ->with('title', $forum->user->vars()->name)
-                        ->with('route', route('v2.user.show', [$forum->user]))
                     )
                     ->push(component('MetaLink')
                         ->with('title', $forum->vars()->created_at)
