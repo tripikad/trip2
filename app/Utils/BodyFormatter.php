@@ -16,19 +16,20 @@ class BodyFormatter
 
     public function markdown()
     {
-        $this->body = preg_replace("/\R{2}/", 'DOUBLE_BREAK', $this->body);
-        $this->body = preg_replace("/\R{1}/", 'SINGLE_BREAK', $this->body);
-        $this->body = str_replace('DOUBLE_BREAK', "\n\n", $this->body);
 
-        $this->body = Markdown::convertToHtml($this->body);
+        // Replacing unordered lists 1) 2) 3) with 1. 2. 3. for Markdown
 
-        $this->body = str_replace('SINGLE_BREAK', '<br />', $this->body);
+        $this->body = preg_replace("\n/([0-9]+)\)/", "$1.", $this->body);
+        
+        $this->body = Markdown::parse($this->body);
 
         return $this;
     }
 
     public function links()
     {
+        $this->body = str_replace(' www.', ' http://', $this->body);
+        
         // Modified version of
         // http://stackoverflow.com/a/5289151
         // and http://stackoverflow.com/a/12590772
@@ -40,7 +41,7 @@ class BodyFormatter
         }
 
         if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
-            // $this->body = $filteredBody;
+            $this->body = $filteredBody;
         }
 
         return $this;
@@ -68,8 +69,8 @@ class BodyFormatter
     public function format()
     {
         return $this
-            //->markdown()
             ->links()
+            ->markdown()
             ->images()
             ->body;
     }
