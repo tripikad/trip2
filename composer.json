@@ -25,7 +25,7 @@
         "doctrine/dbal": "^2.5",
         "msurguy/honeypot": "^1.0",
         "roumen/sitemap": "^2.6",
-        "graham-campbell/markdown": "^7.1"
+        "andreasindal/laravel-markdown": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
