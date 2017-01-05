@@ -19,8 +19,8 @@ class BodyFormatter
 
         // Replacing unordered lists 1) 2) 3) with 1. 2. 3. for Markdown
 
-        $this->body = preg_replace("\n/([0-9]+)\)/", "$1.", $this->body);
-        
+        $this->body = preg_replace("\n/([0-9]+)\)/", '$1.', $this->body);
+
         $this->body = Markdown::parse($this->body);
 
         return $this;
@@ -29,7 +29,7 @@ class BodyFormatter
     public function links()
     {
         $this->body = str_replace(' www.', ' http://', $this->body);
-        
+
         // Modified version of
         // http://stackoverflow.com/a/5289151
         // and http://stackoverflow.com/a/12590772

@@ -180,7 +180,6 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Indal\Markdown\MarkdownServiceProvider::class,
 
-
         Msurguy\Honeypot\HoneypotServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
 
