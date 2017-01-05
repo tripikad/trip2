@@ -50,7 +50,7 @@ class ForumRow
                         ->with('title', $forum->user->vars()->name)
                     )
                     ->push(component('MetaLink')
-                        ->with('title', $forum->vars()->created_at)
+                        ->with('title', $forum->vars()->updated_at)
                     )
                     ->merge($forum->destinations->map(function ($destination) {
                         return component('Tag')

@@ -49,7 +49,7 @@ class V2ContentVars
 
     public function updated_at()
     {
-        return format_date($this->content->created_at);
+        return format_date($this->content->updated_at);
     }
 
     public function commentCount()

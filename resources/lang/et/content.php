@@ -66,8 +66,8 @@ return [
 
     'update.info' => ':title on uuendatud.',
 
-    'show.isnew' => 'Uus',
-    'show.newcomments' => ':count uus kommentaar|:count uut kommentaari',
+    'show.isnew' => 'Uus teema',
+    'show.newcomments' => ':count uus|:count uut',
 
     // Content types
 
