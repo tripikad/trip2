@@ -22,6 +22,10 @@
     margin-bottom: $margin-md;
 }
 
+.Body p:last-child {
+    margin-bottom: 0;
+}
+
 .Body h1,
 .Body h2,
 .Body h3 {

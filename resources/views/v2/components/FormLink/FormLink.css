@@ -3,8 +3,9 @@
 .FormLink {
     background: none;
     border: none;
-    color: $gray-dark;
+    color: $gray-darker;
     cursor: pointer;
     font: $font-text-sm;
+    padding-top: $padding-sm;
 }
 
