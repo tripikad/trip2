@@ -6,15 +6,20 @@ class FrontpageNews
 {
     public function render($news)
     {
-        return component('Block')
-            ->is('white')
-            ->is('uppercase')
-            ->with('title', trans('frontpage.index.news.title'))
-            ->with('content', collect()->push(component('Grid3')
+        return collect()
+            ->push(component('BlockTitle')
+                ->with('title', trans('frontpage.index.news.title'))
+                ->with('route', route('v2.news.index'))
+                ->with('link', component('Link')
+                    ->with('title', trans('frontpage.index.all.news'))
+                    ->with('route', route('v2.news.index'))
+                )
+            )
+            ->push(component('Grid3')
                 ->with('gutter', true)
                 ->with('items', $news->map(function ($new) {
                     return region('NewsCard', $new);
                 }))
-            ));
+            );
     }
 }

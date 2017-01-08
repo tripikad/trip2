@@ -99,6 +99,18 @@ Route::get('v2/static/{id}', [
     'as' => 'v2.static.show',
 ]);
 
+// Blog
+
+Route::get('v2/blog', [
+    'uses' => 'V2BlogController@index',
+    'as' => 'v2.blog.index',
+]);
+
+Route::get('v2/blog/{id}', [
+    'uses' => 'V2BlogController@show',
+    'as' => 'v2.static.show',
+]);
+
 // Internal
 
 Route::get('v2/internal', [

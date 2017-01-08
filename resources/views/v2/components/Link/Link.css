@@ -2,26 +2,22 @@
 
 .Link {
 	display: flex;
+    align-items: center;
 }
 
     .Link__title {
-        color: $blue;
+        color: $gray-darker;
         font: $font-text-md;
     }
 
     .Link__icon {
-    	align-self: center;
-        margin-right: $margin-xs;
+        margin-left: $margin-xs;
+    }
+
+    .Link__icon svg {
+        fill: $gray-darker;
     }
 
 .Link--large .Link__title {
     font: $font-heading-md;
-}
-
-.Link--gray .Link__title {
-    color: $gray-darkest;
-}
-
-.Link--gray .Link__icon svg {
-    fill: $gray-darker;
 }
