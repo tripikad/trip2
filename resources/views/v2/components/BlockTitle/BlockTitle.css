@@ -3,7 +3,6 @@
 .BlockTitle {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 }
 
     .BlockTitle__title {
@@ -13,7 +12,7 @@
     }
 
     .BlockTitle__link {
-        margin-left: $margin-sm;
+        margin-left: $margin-xs;
     }
 
 .BlockTitle--yellow .BlockTitle__title {

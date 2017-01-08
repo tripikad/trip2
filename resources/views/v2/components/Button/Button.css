@@ -7,7 +7,7 @@
     display: flex;
     font: $font-heading-sm;
     justify-content: center;
-    padding: $padding-sm $padding-lg;
+    padding: $padding-sm $padding-sm;
     text-align: center;
 }
 

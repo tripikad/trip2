@@ -21,6 +21,6 @@
         color: $gray-dark;
     }
 
-.FormTextarea--noBorder .FormTextarea__textarea {
+.FormTextarea--borderless .FormTextarea__textarea {
     border: none;
 }

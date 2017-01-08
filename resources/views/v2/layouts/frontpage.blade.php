@@ -125,7 +125,7 @@ $footer = $footer ?? '';
 
     {{-- Bottom 2 --}}
 
-    <div class="background-gray padding-top-lg padding-bottom-lg">
+    <div class="background-gray padding-top-lg padding-bottom-md">
 
         <div class="container">
 

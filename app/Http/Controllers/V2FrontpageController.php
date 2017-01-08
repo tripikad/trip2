@@ -70,18 +70,16 @@ class V2FrontpageController extends Controller
                     ->with('title', trans('frontpage.index.photo.title'))
                 )
                 ->push(region('Gallery', $photos))
-                ->push(component('BlockTitle')
+                ->push(component('Block')
                     ->with('title', trans('frontpage.index.blog.title'))
                     ->with('route', trans('frontpage.index.blog.title'))
-                    ->with('link', component('Link')
-                        ->with('title', trans('frontpage.index.all.blog'))
-                        ->with('route', route('v2.blog.index'))
+                    ->with('content', collect()
+                        ->push(component('Grid3')
+                            ->with('items', $blogs->map(function ($blog) {
+                                return region('BlogCard', $blog);
+                            }))
+                        )
                     )
-                )
-                ->push(component('Grid3')
-                    ->with('items', $blogs->map(function ($blog) {
-                        return region('BlogCard', $blog);
-                    }))
                 )
                 ->push(component('Promo')->with('promo', 'footer'))
             )

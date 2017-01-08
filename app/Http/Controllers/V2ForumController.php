@@ -64,7 +64,7 @@ class V2ForumController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(region('ForumAbout'))
+                ->push(region('ForumAbout', $forumType))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
@@ -107,7 +107,6 @@ class V2ForumController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(region('ForumAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
@@ -125,6 +124,8 @@ class V2ForumController extends Controller
     public function show($slug)
     {
         $forum = Content::getItemBySlug($slug);
+        $forumType = $forum->type;
+
         $user = auth()->user();
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
@@ -156,7 +157,7 @@ class V2ForumController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(region('ForumAbout'))
+                ->push(region('ForumAbout', $forumType))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )

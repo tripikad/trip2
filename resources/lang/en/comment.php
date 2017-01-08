@@ -2,6 +2,8 @@
 
 return [
 
+    'count' => ':count comment|:count comments',
+
     'action.edit.title' => 'Edit',
     'action.status.0.title' => 'Publish',
     'action.status.1.title' => 'Unpublish',

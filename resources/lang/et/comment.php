@@ -2,6 +2,8 @@
 
 return [
 
+    'count' => ':count kommentaar|:count kommentaari',
+
     'action.edit.title' => 'Muuda',
     'action.status.0.title' => 'Avalikusta',
     'action.status.1.title' => 'Peida',

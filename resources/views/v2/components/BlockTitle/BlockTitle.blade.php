@@ -2,7 +2,6 @@
 
 $title = $title ?? '';
 $route = $route ?? '';
-$link = $link ?? '';
 
 @endphp
 
@@ -30,11 +29,11 @@ $link = $link ?? '';
 
     </div>
 
-    @if ($link)
+    @if ($route)
 
     <div class="BlockTitle__link">
     
-        {!! $link !!}    
+        {!! component('Link')->with('route', $route) !!}    
 
     </div>
 

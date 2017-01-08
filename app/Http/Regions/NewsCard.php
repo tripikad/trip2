@@ -6,6 +6,8 @@ class NewsCard
 {
     public function render($post)
     {
+        $commentCount = $post->vars()->commentCount();
+
         return component('NewsCard')
             ->with('route', route('v2.news.show', [$post->slug]))
             ->with('image', $post->imagePreset('small'))
@@ -15,6 +17,13 @@ class NewsCard
                     ->push(component('MetaLink')
                         ->with('title', $post->vars()->created_at)
                     )
+                    ->pushWhen($commentCount > 0, component('Tag')
+                        ->with('title', trans_choice(
+                            'comment.count',
+                            $commentCount,
+                            ['count' => $commentCount]
+                        )
+                    ))
                 )
             );
     }

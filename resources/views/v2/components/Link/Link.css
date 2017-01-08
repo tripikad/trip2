@@ -3,6 +3,7 @@
 .Link {
 	display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
     .Link__title {
@@ -11,7 +12,7 @@
     }
 
     .Link__icon {
-        margin-left: $margin-xs;
+        margin-right: $margin-xs;
     }
 
     .Link__icon svg {
@@ -20,4 +21,8 @@
 
 .Link--large .Link__title {
     font: $font-heading-md;
+}
+
+.Link--blue .Link__title {
+    color: $blue;
 }

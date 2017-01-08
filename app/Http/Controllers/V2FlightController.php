@@ -127,8 +127,6 @@ class V2FlightController extends Controller
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $flight))
                 ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Block')
-                    ->is('white')
-                    ->is('uppercase')
                     ->with('title', trans('frontpage.index.flight.title'))
                     ->with('content', $flights->map(function ($flight) {
                         return region('FlightRow', $flight);

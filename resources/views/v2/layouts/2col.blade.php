@@ -4,6 +4,7 @@ $title = $title ?? '';
 $head_description = $head_description ?? '';
 $head_image = $head_image ?? '';
 $header = $header ?? '';
+$top = isset($top) ? collect($top) : collect();
 $content = isset($content) ? collect($content) : collect();
 $sidebar = isset($sidebar) ? collect($sidebar) : collect();
 $bottom = isset($bottom) ? collect($bottom) : collect();
@@ -20,6 +21,16 @@ $footer = $footer ?? '';
 @section('header', $header)
 
 @section('content')
+
+<div class="container">
+
+@foreach ($top as $top_item)
+
+    {!! $top_item !!}
+        
+@endforeach
+
+</div>
 
 <div class="background-white">
 

@@ -15,52 +15,38 @@ class V2DestinationController extends Controller
 
         $destination = Destination::findOrFail($id);
 
-        $flights = Content::getLatestPagedItems('flight', 3, $destination->id);
         $photos = Content::getLatestPagedItems('photo', 6, $destination->id);
-        $forums = Content::getLatestPagedItems('forum', 10, $destination->id);
-        $news = Content::getLatestPagedItems('news', 3, $destination->id);
-        $travelmates = Content::getLatestPagedItems('travelmate', 3, $destination->id);
+        $forums = Content::getLatestPagedItems('forum', 8, $destination->id);
+
+        $flights = Content::getLatestPagedItems('flight', 6, $destination->id);
+        $travelmates = Content::getLatestPagedItems('travelmate', 6, $destination->id);
+        $news = Content::getLatestPagedItems('news', 2, $destination->id);
 
         return layout('2col')
 
             ->with('header', region('DestinationHeader', $destination))
 
+            ->with('top', region('Gallery', $photos))
+
             ->with('content', collect()
-                ->push(region('Gallery', $photos))
                 ->push(component('Block')
-                    ->is('uppercase')
-                    ->is('white')
                     ->with('title', trans('destination.show.forum.title'))
+                    ->with('route', route('v2.forum.index'))
                     ->with('content', $forums->map(function ($forum) {
                         return region('ForumRow', $forum);
                     })
                     )
                 )
                 ->push(component('Promo')->with('promo', 'body'))
-                ->push(component('Grid3')
-                    ->with('gutter', true)
-                    ->with('items', $news->map(function ($new) {
-                        return region('NewsCard', $new);
-                    })
-                    )
-                )
-                ->push(component('Grid3')
-                    ->with('gutter', true)
-                    ->with('items', $travelmates->map(function ($travelmate) {
-                        return region('TravelmateCard', $travelmate);
-                    }))
-                )
             )
 
             ->with('sidebar', collect()
-                ->merge($flights->map(function ($flight) {
-                    return region('FlightCard', $flight);
-                }))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
+                ->push(region('DestinationBottom', $flights, $travelmates, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 

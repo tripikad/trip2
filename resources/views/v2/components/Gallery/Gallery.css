@@ -1,5 +1,9 @@
 @import "variables";
 
+.Gallery {
+    display: flex;
+}
+
     .Gallery__image {
     	cursor: pointer;
         width: 100%;

@@ -4,13 +4,11 @@ namespace App\Http\Regions;
 
 class ForumAbout
 {
-    public function render($is = '')
+    public function render($type = 'forum')
     {
-        $type = 'forum';
         $user = auth()->user();
 
         return component('Block')
-            ->is($is)
             ->with('content', collect()
                 ->push(component('Body')
                     ->with('body', trans("site.description.$type"))
