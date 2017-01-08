@@ -13,14 +13,14 @@ class FlightBottom
                     ->with('title', trans('frontpage.index.forum.title'))
                     ->with('route', route('v2.forum.index'))
                     ->with('content', $forums->map(function ($forum) {
-                            return region('ForumRow', $forum);
+                        return region('ForumRow', $forum);
                     }))
                 )
                 ->push(component('Block')
                     ->with('title', trans('frontpage.index.travelmate.title'))
                     ->with('route', route('v2.travelmate.index'))
                     ->with('content', $travelmates->map(function ($travelmate) {
-                            return region('TravelmateCard', $travelmate);
+                        return region('TravelmateCard', $travelmate);
                     }))
                 )
                 ->push(component('Block')
