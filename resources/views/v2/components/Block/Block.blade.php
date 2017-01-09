@@ -1,6 +1,7 @@
 @php
 
-$title = $title ?? false;
+$title = $title ?? '';
+$route = $route ?? '';
 $content = isset($content) ? collect($content) : collect();
 
 @endphp
@@ -11,7 +12,7 @@ $content = isset($content) ? collect($content) : collect();
 
     <div class="Block__title">
 
-        {{ $title }}
+    {!! component('BlockTitle')->with('title', $title)->with('route', $route) !!}
 
     </div>
 

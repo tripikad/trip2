@@ -12,7 +12,7 @@ $gutter = $gutter ?? false;
     @foreach ($row as $item)
 
     <div
-        class="col-4 show-mobile-desktop margin-bottom-none-mobile-lg
+        class="col-4 show-mobile-desktop margin-bottom-sm
         @if ($gutter) padding-right-sm-mobile-none @endif
     ">
 
@@ -33,7 +33,7 @@ $gutter = $gutter ?? false;
     @foreach ($row as $item)
 
     <div
-        class="col-6 show-tablet margin-bottom-none-mobile-sm
+        class="col-6 show-tablet margin-bottom-sm
         @if ($gutter) padding-right-sm-mobile-none @endif
     ">
 

@@ -2,11 +2,12 @@
 
 $background = $background ?? '';
 $navbar = $navbar ?? '';
-$content = collect($content) ?? collect();
+$header = $header ?? '';
+$search = $search ?? '';
 
 @endphp
 
-<div class="Header {{ $isclasses }}" 
+<div class="FrontpageHeader {{ $isclasses }}" 
     style="background-image: linear-gradient(
       rgba(0, 0, 0, 0.4),
       rgba(0, 0, 0, 0.1),
@@ -15,23 +16,19 @@ $content = collect($content) ?? collect();
 ">
     <div class="container">
 
-        <div class="Header__navbar">
+        <div class="FrontpageHeader__navbar">
 
             {!! $navbar !!}
             
         </div>
 
-        <div class="Header__content">
-
-        @foreach ($content as $content_item)
-        
-        <div @if (! $loop->last) class="margin-bottom-md" @endif>
-
-            {!! $content_item !!}
+        <div class="FrontpageHeader__content">
                 
-        </div>
+            <div class="FrontpageHeader__search">
 
-        @endforeach
+            {!! $search !!}
+
+            </div>
 
         </div>
 

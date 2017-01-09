@@ -23,6 +23,9 @@ return [
 
     'index.all.news' => 'Kõik uudised',
     'index.all.offers' => 'Vaata kõiki sooduspakkumisi',
+    'index.all.travelmate' => '',
+    'index.all.blog' => '',
+    'index.all.flight' => '',
 
     'index.about.title' => 'Loe täpsemalt, mis on Trip.ee',
     'index.about.register' => 'Liitu Trip.ee-ga',

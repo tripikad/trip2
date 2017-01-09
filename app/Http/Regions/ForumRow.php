@@ -42,8 +42,7 @@ class ForumRow
                                 [$forum->slug]).'#comment-'.$firstUnreadCommentId
                             )
                     )
-                    ->push(component('Tag')
-                        ->is($commentCount == 0 ? 'light' : '')
+                    ->pushWhen($commentCount, component('Tag')
                         ->with('title', $commentCount)
                     )
                     ->push(component('MetaLink')

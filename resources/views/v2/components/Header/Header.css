@@ -4,24 +4,13 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding-bottom: $padding-lg;
     padding-top: $padding-md;
+    padding-bottom: $padding-lg;
+    padding-bottom: $padding-sm ?if $mobile;
 }
 
     .Header__content {
-        height: calc($spacer * 12);
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        margin-top: $margin-xl;
+        margin-left: $margin-xl;
+        margin-left: 0 ?if $tablet;
     }
-
-    .Header__title {
-        color: $white;
-        font: $font-heading-xxl;
-        font: $font-heading-xl ?if $tablet;
-        text-align: center;
-    }
-
-.Header--large .Header__content {
-    height: calc($spacer * 15);
-}

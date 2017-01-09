@@ -10,9 +10,10 @@ class TravelmateAbout
         $user = auth()->user();
 
         return component('Block')
-            ->is('dark')
-            ->with('title', trans('content.travelmate.description.title'))
             ->with('content', collect()
+                ->push(component('Body')
+                    ->with('body', trans('content.travelmate.description.title'))
+                )
                 ->push(component('Body')
                     ->with('body', trans('content.travelmate.description.text'))
                 )

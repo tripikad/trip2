@@ -2,26 +2,35 @@
 
 .Link {
 	display: flex;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
     .Link__title {
-        color: $blue;
+        color: $gray-darker;
         font: $font-text-md;
     }
 
     .Link__icon {
-    	align-self: center;
         margin-right: $margin-xs;
+    }
+
+    .Link__icon svg {
+        fill: $gray-darker;
     }
 
 .Link--large .Link__title {
     font: $font-heading-md;
 }
 
-.Link--gray .Link__title {
-    color: $gray-darkest;
+.Link--blue .Link__title {
+    color: $blue;
 }
 
-.Link--gray .Link__icon svg {
-    fill: $gray-darker;
+.Link--white .Link__title {
+    color: $white;
+}
+
+.Link--white .Link__icon svg {
+    fill: $white;
 }

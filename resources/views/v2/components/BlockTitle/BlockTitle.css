@@ -1,0 +1,20 @@
+@import "variables";
+
+.BlockTitle {
+    display: flex;
+    align-items: center;
+}
+
+    .BlockTitle__title {
+        color: $green;
+        font: $font-heading-xs;
+        text-transform: uppercase;
+    }
+
+    .BlockTitle__link {
+        margin-left: $margin-xs;
+    }
+
+.BlockTitle--yellow .BlockTitle__title {
+    color: $yellow;
+}

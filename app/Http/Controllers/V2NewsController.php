@@ -24,7 +24,23 @@ class V2NewsController extends Controller
 
         return layout('2col')
 
-            ->with('header', region('Header', trans('content.news.index.title')))
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.news.index.title'))
+                    ->with('route', route('v2.news.index'))
+                )
+                ->push(region(
+                    'FilterHorizontal',
+                    $destinations,
+                    $topics,
+                    $currentDestination,
+                    $currentTopic,
+                    $news->currentPage(),
+                    'v2.news.index'
+                ))
+            ))
 
             ->with('content', collect()
                 ->push(component('Grid3')
@@ -38,17 +54,6 @@ class V2NewsController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect()
-                    ->push(region(
-                        'Filter',
-                        $destinations,
-                        $topics,
-                        $currentDestination,
-                        $currentTopic,
-                        $news->currentPage(),
-                        'v2.news.index'
-                    ))
-                ))
                 ->push(region('NewsAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))

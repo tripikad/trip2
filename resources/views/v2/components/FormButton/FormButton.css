@@ -13,4 +13,5 @@
     font: $font-heading-sm;
     justify-content: center;
     padding: $padding-sm $padding-lg;
+    width: 100% ?if $mobile;
 }

@@ -29,6 +29,7 @@
     "laravel-elixir": "^6.0.0-15",
     "laravel-elixir-vue-2": "^0.3.0",
     "laravel-elixir-webpack-official": "^1.0.10",
+    "lodash.chunk": "^4.2.0",
     "normalize.css": "^3.0.3",
     "postcss-font-magician": "^1.4.0",
     "postcss-if-media": "^1.0.1",

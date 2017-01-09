@@ -2,25 +2,27 @@
 
     <div class="Gallery" :class="isclasses">
 
-        <div class="row">
+        <div class="Gallery__images">
 
             <div
-                class="col-2"
-                v-for="(item, index) in currentImages"
-                key="index"
+                class="Gallery__imagesRow"
+                v-for="row in currentImages"
             >
-
-                <img
-                    class="Gallery__image"
-                    :src="item.small"
-                    @click="render(index)"
-                />
+                    <div
+                        v-for="item in row"
+                        class="Gallery__image"
+                        @click="render(0)"
+                        :style="{backgroundImage: 'url(' + item.small + ')'}"
+                    >
+                        
+                    </div>
 
             </div>
 
         </div>
 
-        <div class="Gallery__fullscreen" v-if="fullscreen">
+        <!--
+        <div class="Gallery__fullscreen" v-show="fullscreen">
 
             <component
                 is="Icon"
@@ -64,12 +66,15 @@
             </div>
             
         </div>
-
+        -->
+        
     </div>
 
 </template>
 
 <script>
+
+import chunk from 'lodash.chunk'
 
 import Icon from '../Icon/Icon.vue'
 
@@ -107,7 +112,7 @@ export default {
 
     mounted() {
         this.currentImages = this.images
-            ? JSON.parse(decodeURIComponent(this.images))
+            ? chunk(JSON.parse(decodeURIComponent(this.images)), 3)
             : []
     }
 
