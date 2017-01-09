@@ -22,15 +22,11 @@ $footer = $footer ?? '';
 
 @section('content')
 
-<div class="container">
-
 @foreach ($top as $top_item)
 
     {!! $top_item !!}
         
 @endforeach
-
-</div>
 
 <div class="background-white">
 
