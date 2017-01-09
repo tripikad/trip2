@@ -7,8 +7,9 @@ $promobar = $promobar ?? '';
 $header = $header ?? '';
 $content = $content ? collect($content) : collect();
 $sidebar = $sidebar ? collect($sidebar) : collect();
-$bottom1 = $bottom1 ? collect($bottom1) : collect();
-$bottom2 = $bottom2 ? collect($bottom2) : collect();
+$bottom1 = isset($bottom1) ? collect($bottom1) : collect();
+$bottom2 = isset($bottom2) ? collect($bottom2) : collect();
+$bottom3 = isset($bottom3) ? collect($bottom3) : collect();
 $footer = $footer ?? '';
 
 @endphp
@@ -123,7 +124,16 @@ $footer = $footer ?? '';
 
     </div>
 
+
     {{-- Bottom 2 --}}
+
+    @foreach ($bottom2 as $bottom_item)
+    
+        {!! $bottom_item !!}
+                            
+    @endforeach
+
+    {{-- Bottom 3 --}}
 
     <div class="background-gray padding-top-lg padding-bottom-md">
 
@@ -133,7 +143,7 @@ $footer = $footer ?? '';
 
                 <div class="col-10">
 
-                @foreach ($bottom2 as $bottom_item)
+                @foreach ($bottom3 as $bottom_item)
                 
                     <div @if (!$loop->last) class="margin-bottom-lg" @endif>
 

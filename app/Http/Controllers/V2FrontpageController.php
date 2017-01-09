@@ -59,14 +59,17 @@ class V2FrontpageController extends Controller
                 ->push(component('AffHotelscombined'))
             )
 
-            ->with('bottom1', region('FrontpageNews', $news))
-
-            ->with('bottom2', collect()
-                ->push(region('FrontpageBottom', $flights->slice(3), $travelmates))
+            ->with('bottom1', collect()
+                ->merge(region('FrontpageNews', $news))
                 ->push(component('BlockTitle')
                     ->with('title', trans('frontpage.index.photo.title'))
                 )
-                ->push(region('Gallery', $photos))
+            )
+
+            ->with('bottom2', collect(region('Gallery', $photos)))
+
+            ->with('bottom3', collect()
+                ->push(region('FrontpageBottom', $flights->slice(3), $travelmates))
                 ->push(component('Block')
                     ->with('title', trans('frontpage.index.blog.title'))
                     ->with('route', trans('frontpage.index.blog.title'))
