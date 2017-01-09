@@ -7,7 +7,7 @@ class BlogRow
     public function render($blog)
     {
         $commentCount = $blog->vars()->commentCount();
-        
+
         return component('BlogRow')
             ->with('user', component('UserImage')
                 ->with('route', route('v2.user.show', [$blog->user]))
