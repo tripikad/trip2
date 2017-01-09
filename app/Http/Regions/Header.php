@@ -4,7 +4,7 @@ namespace App\Http\Regions;
 
 class Header
 {
-    public function render($title = false)
+    public function render($content = null)
     {
         $background = '/photos/header3.jpg';
 
@@ -21,6 +21,6 @@ class Header
                 ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
-            ->with('title', $title);
+            ->with('content', $content);
     }
 }

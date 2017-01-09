@@ -26,3 +26,11 @@
 .Link--blue .Link__title {
     color: $blue;
 }
+
+.Link--white .Link__title {
+    color: $white;
+}
+
+.Link--white .Link__icon svg {
+    fill: $white;
+}

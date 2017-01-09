@@ -2,9 +2,7 @@
 
 $background = $background ?? '';
 $navbar = $navbar ?? '';
-$header = $header ?? '';
-$title = $title ?? '';
-$meta = $meta ?? '';
+$content = collect($content) ?? collect();
 
 @endphp
 
@@ -25,21 +23,15 @@ $meta = $meta ?? '';
 
         <div class="Header__content">
 
-            <div>
+        @foreach ($content as $content_item)
+        
+        <div @if (! $loop->last) class="margin-bottom-md" @endif>
+
+            {!! $content_item !!}
                 
-                <div class="Header__title">
+        </div>
 
-                {!! $title !!}
-
-                </div>
-
-                <div class="Header__meta">
-
-                {!! $meta !!}
-
-                </div>
-
-            </div>
+        @endforeach
 
         </div>
 

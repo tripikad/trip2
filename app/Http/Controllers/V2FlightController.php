@@ -26,6 +26,7 @@ class V2FlightController extends Controller
             $currentDestination,
             $currentTopic
         );
+
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
@@ -35,7 +36,23 @@ class V2FlightController extends Controller
 
         return layout('2col')
 
-            ->with('header', region('Header', trans('content.flight.index.title')))
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.flight.index.title'))
+                    ->with('route', route('v2.flight.index'))
+                )
+                ->push(region(
+                    'FilterHorizontal',
+                    $destinations,
+                    null,
+                    $currentDestination,
+                    null,
+                    $flights->currentPage(),
+                    'v2.flight.index'
+                ))
+            ))
 
             ->with('content', collect()
                 ->push(component('AffMomondo'))
@@ -46,25 +63,13 @@ class V2FlightController extends Controller
                 ->push(component('Promo')->with('promo', 'body'))
                 ->merge($flights->slice($sliceSize)->map(function ($flight) {
                     return region('FlightRow', $flight);
-                })
-                )
+                }))
                 ->push(
                     region('Paginator', $flights, $currentDestination, $currentTopic)
                 )
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect()
-                    ->push(region(
-                        'Filter',
-                        $destinations,
-                        null,
-                        $currentDestination,
-                        null,
-                        $flights->currentPage(),
-                        'v2.flight.index'
-                    ))
-                ))
                 ->push(region('FlightAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
@@ -101,7 +106,21 @@ class V2FlightController extends Controller
 
         return layout('2col')
 
-            ->with('header', region('Header', trans('content.flight.index.title')))
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.flight.index.title'))
+                    ->with('route', route('v2.flight.index'))
+                )
+                ->push(component('Link')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.flight.show.action.all'))
+                    ->with('route', route('v2.flight.index'))
+                    ->with('icon', 'icon-arrow-left')
+                )
+            ))
 
             ->with('content', collect()
                 ->push(component('Title')->with('title', $flight->vars()->title))

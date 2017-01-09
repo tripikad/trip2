@@ -24,7 +24,23 @@ class V2TravelmateController extends Controller
 
         return layout('2col')
 
-            ->with('header', region('Header', trans('content.travelmate.index.title')))
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.travelmate.index.title'))
+                    ->with('route', route('v2.travelmate.index'))
+                )
+                ->push(region(
+                    'FilterHorizontal',
+                    $destinations,
+                    $topics,
+                    $currentDestination,
+                    $currentTopic,
+                    $travelmates->currentPage(),
+                    'v2.travelmate.index'
+                ))
+            ))
 
             ->with('content', collect()
                 ->push(component('Grid2')
@@ -38,17 +54,6 @@ class V2TravelmateController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect()
-                    ->push(region(
-                        'Filter',
-                        $destinations,
-                        $topics,
-                        $currentDestination,
-                        $currentTopic,
-                        $travelmates->currentPage(),
-                        'v2.travelmate.index'
-                    ))
-                ))
                 ->push(region('TravelmateAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
@@ -77,7 +82,21 @@ class V2TravelmateController extends Controller
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Header', trans('content.travelmate.index.title')))
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.travelmate.index.title'))
+                    ->with('route', route('v2.travelmate.index'))
+                )
+                ->push(component('Link')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.travelmate.view.all.offers'))
+                    ->with('route', route('v2.travelmate.index'))
+                    ->with('icon', 'icon-arrow-left')
+                )
+            ))
 
             ->with('content', collect()
                 ->push(component('Title')->with('title', $travelmate->vars()->title))
