@@ -304,7 +304,10 @@ return [
 
     'blog.no.results' => 'Hetkel pole ühtegi reisipäevikut veel lisatud.',
 
+    'blog.view.all.offers' => 'Kõik blogid',
+
     // Admin
+
     'admin.sidebar.title' => 'Navigeerimiseks',
 
     // Internal

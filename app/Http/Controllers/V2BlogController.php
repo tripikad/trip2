@@ -58,13 +58,6 @@ class V2BlogController extends Controller
                     ->with('title', trans('content.blog.index.title'))
                     ->with('route', route('v2.blog.index'))
                 )
-                ->push(component('Link')
-                    ->is('white')
-                    ->is('large')
-                    ->with('title', trans('content.blog.view.all.offers'))
-                    ->with('route', route('v2.blog.index'))
-                    ->with('icon', 'icon-arrow-left')
-                )
             ))
 
             ->with('content', collect()

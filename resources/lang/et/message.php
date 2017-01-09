@@ -6,8 +6,7 @@ return [
     'index.title' => 'Sõnumid',
     'index.row.description' => 'Sõnumid kasutajaga :user, viimane :created_at',
 
-//    'index.with.title' => ':user sõnumid kasutajaga :user_with',
-    'index.with.title' => 'Sõnumid',
+    'index.with.title' => 'Sõnumid kasutajaga :user_with',
     'index.with.row.description' => 'Sõnumid kasutajaga :user kuupäeval :created_at',
 
     'create.field.body.title' => 'Sõnum',

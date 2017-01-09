@@ -17,9 +17,6 @@ class MessageWithRow
             ->with(
                 'title',
                 $message->fromUser->vars()->name.' '.$message->vars()->created_at
-            )
-            ->with('body', component('body')
-                ->with('body', $message->body)
             );
     }
 }

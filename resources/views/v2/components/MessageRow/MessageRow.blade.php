@@ -3,7 +3,6 @@
 $user = $user ?? '';
 $title = $title ?? '';
 $route = $route ?? '';
-$body = $body ?? '';
 
 @endphp
 
@@ -38,14 +37,4 @@ $body = $body ?? '';
     </div>
 
 </div>
-
-@if ($body)
-
-    <div class="MessageRow__body">
-
-    {!! $body !!}
-
-    </div>
-
-@endif
 
