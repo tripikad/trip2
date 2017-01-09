@@ -13,6 +13,14 @@ class V2UserController extends Controller
 
         $user = User::findOrFail($id);
 
+        $photos = $user
+            ->contents()
+            ->whereType('photo')
+            ->whereStatus(1)
+            ->take(9)
+            ->latest()
+            ->get();
+        
         $comments = $user->comments()
             ->with(['content', 'content.user'])
             ->whereStatus(1)
@@ -26,6 +34,8 @@ class V2UserController extends Controller
         return layout('1col')
 
             ->with('header', region('UserHeader', $user))
+
+            ->with('top', region('Gallery', $photos))
 
             ->with('content', $comments->map(function ($comment) {
                 return component('UserCommentRow')
