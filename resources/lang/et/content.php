@@ -286,7 +286,7 @@ return [
 
     // Blog
 
-    'blog.index.title' => 'Blogi',
+    'blog.index.title' => 'Blogid',
 
     'blog.create.title' => 'Lisa postitus',
 

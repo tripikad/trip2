@@ -106,9 +106,9 @@ Route::get('v2/blog', [
     'as' => 'v2.blog.index',
 ]);
 
-Route::get('v2/blog/{id}', [
+Route::get('v2/blog/{slug}', [
     'uses' => 'V2BlogController@show',
-    'as' => 'v2.static.show',
+    'as' => 'v2.blog.show',
 ]);
 
 // Internal
