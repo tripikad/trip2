@@ -2,13 +2,10 @@
 
 namespace App\Http\Regions;
 
-use App\Image;
-
 class FrontpageHeader
 {
     public function render()
     {
-
         return component('FrontpageHeader')
             ->with('background', '/photos/header3.jpg')
             ->with('navbar', component('Navbar')
