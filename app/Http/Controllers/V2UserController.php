@@ -20,7 +20,7 @@ class V2UserController extends Controller
             ->take(9)
             ->latest()
             ->get();
-        
+
         $comments = $user->comments()
             ->with(['content', 'content.user'])
             ->whereStatus(1)

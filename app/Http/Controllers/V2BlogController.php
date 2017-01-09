@@ -8,7 +8,6 @@ class V2BlogController extends Controller
 {
     public function index()
     {
-
         $blogs = Content::getLatestPagedItems('blog');
 
         return layout('2col')
@@ -23,7 +22,7 @@ class V2BlogController extends Controller
             ))
 
             ->with('content', collect()
-                ->merge($blogs->flatMap(function($blog) {
+                ->merge($blogs->flatMap(function ($blog) {
                     return collect()
                         ->push(region('BlogRow', $blog))
                         ->push(component('Body')->with('body', $blog->vars()->body));
@@ -50,7 +49,7 @@ class V2BlogController extends Controller
         $blog = Content::getItemBySlug($slug);
         $user = auth()->user();
 
-           return view('v2.layouts.2col')
+        return view('v2.layouts.2col')
 
             ->with('header', region('Header', collect()
                 ->push(component('Title')
