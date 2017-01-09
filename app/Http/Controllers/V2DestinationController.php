@@ -15,7 +15,7 @@ class V2DestinationController extends Controller
 
         $destination = Destination::findOrFail($id);
 
-        $photos = Content::getLatestPagedItems('photo', 6, $destination->id);
+        $photos = Content::getLatestPagedItems('photo', 9, $destination->id);
         $forums = Content::getLatestPagedItems('forum', 8, $destination->id);
 
         $flights = Content::getLatestPagedItems('flight', 6, $destination->id);

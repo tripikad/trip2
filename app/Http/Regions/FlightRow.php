@@ -22,8 +22,11 @@ class FlightRow
                         ->with('title', trans('comment.action.edit.title'))
                         ->with('route', route('content.edit', [$flight->type, $flight]))
                     )
-                    ->merge($flight->destinations->map(function ($tag) {
-                        return component('Tag')->is('orange')->with('title', $tag->name);
+                    ->merge($flight->destinations->map(function ($destination) {
+                        return component('Tag')
+                            ->is('orange')
+                            ->with('title', $destination->name)
+                            ->with('route', route('v2.destination.show', [$destination]));
                     }))
                     ->merge($flight->topics->map(function ($tag) {
                         return component('Tag')->with('title', $tag->name);

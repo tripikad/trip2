@@ -22,11 +22,19 @@ $footer = $footer ?? '';
 
 @section('content')
 
-@foreach ($top as $top_item)
+@if ($top->count())
 
-    {!! $top_item !!}
-        
-@endforeach
+    <div class="background-gray">
+
+    @foreach ($top as $top_item)
+
+        {!! $top_item !!}
+            
+    @endforeach
+
+    </div>
+
+@endif
 
 <div class="background-white">
 

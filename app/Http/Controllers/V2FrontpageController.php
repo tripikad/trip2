@@ -18,7 +18,7 @@ class V2FrontpageController extends Controller
         $forums = Content::getLatestItems('forum', 16, 'updated_at');
         $news = Content::getLatestItems('news', 6);
         $blogs = Content::getLatestItems('blog', 3);
-        $photos = Content::getLatestItems('photo', 6);
+        $photos = Content::getLatestItems('photo', 9);
         $travelmates = Content::getLatestItems('travelmate', 5);
 
         return layout('frontpage')
