@@ -30,10 +30,7 @@ class V2FrontpageController extends Controller
                 ->render()
             )
 
-            ->with('header', region('Header',
-                component('FrontpageSearch')
-                    ->with('title', trans('frontpage.index.search.title'))
-            ))
+            ->with('header', region('FrontpageHeader'))
 
             ->with('top', collect()
                 ->push(region('FrontpageFlight', $flights->take(3)))
