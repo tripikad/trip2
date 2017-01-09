@@ -11,6 +11,7 @@
 
     .Header__content {
         margin-top: $margin-xl;
+        margin-top: $margin-lg ?if $mobile;
         margin-left: $margin-xl;
         margin-left: 0 ?if $tablet;
     }
