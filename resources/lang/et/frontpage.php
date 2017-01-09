@@ -2,6 +2,8 @@
 
 return [
 
+    'index.about' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+    
     'index.search.title' => 'Kuhu sa soovid minna?',
     'index.search.destination.title' => 'Sisesta sihtkoht',
     'index.search.submit.title' => 'Mine',

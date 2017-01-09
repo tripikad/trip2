@@ -2,6 +2,8 @@
 
 return [
 
+    'index.about' => 'Trip.ee is a travel community',
+
     'index.search.title' => 'Where do you want to go today?',
     'index.search.destination.title' => 'Enter a destination',
     'index.search.submit.title' => 'Go',

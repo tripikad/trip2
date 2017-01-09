@@ -25,7 +25,10 @@ class V2BlogController extends Controller
                 ->merge($blogs->flatMap(function ($blog) {
                     return collect()
                         ->push(region('BlogRow', $blog))
-                        ->push(component('Body')->with('body', $blog->vars()->body));
+                        ->push(component('Body')
+                            ->is('responsive')
+                            ->with('body', $blog->vars()->body)
+                        );
                 }))
                 ->push(region('Paginator', $blogs))
             )

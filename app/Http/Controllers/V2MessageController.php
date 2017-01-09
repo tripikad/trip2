@@ -62,7 +62,10 @@ class V2MessageController extends Controller
                 ->merge($messages->flatMap(function ($message) use ($user) {
                     return collect()
                         ->push(region('MessageWithRow', $message))
-                        ->push(component('Body')->with('body', $message->vars()->body));
+                        ->push(component('Body')
+                            ->is('responsive')
+                            ->with('body', $message->vars()->body)
+                        );
                 }))
                 ->push(region('MessageCreateForm', $user, $user_with))
             )
