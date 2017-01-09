@@ -14,3 +14,10 @@
         justify-content: center;
         align-items: center;
     }
+
+    .FrontpageHeader__search {
+        margin-bottom: $margin-md;
+        width: 55%;
+        width: 65% ?if $tablet;
+        width: 100% ?if $mobile;
+    }

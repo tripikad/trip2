@@ -6,9 +6,8 @@ use App\Image;
 
 class FrontpageHeader
 {
-    public function render($title = '', $background = '')
+    public function render()
     {
-        $background = $background ?? Image::getHeader();
 
         return component('FrontpageHeader')
             ->with('background', '/photos/header3.jpg')

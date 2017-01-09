@@ -19,7 +19,7 @@
         </div>
 
         <div
-            class="NavbarMobile__closeIcon"
+            class="PromoBar__closeIcon"
             @click="open = false"
         >
 

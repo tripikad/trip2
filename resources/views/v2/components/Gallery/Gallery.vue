@@ -2,21 +2,20 @@
 
     <div class="Gallery" :class="isclasses">
 
-        <div class="row">
+        <div class="Gallery__images">
 
-            <div
-                class="col-2"
-                v-for="(item, index) in currentImages"
-                key="index"
-            >
-
+        <div
+            class="Gallery__imagesRow"
+            v-for="row in currentImages"
+        >
                 <img
+                    v-for="item in row"
                     class="Gallery__image"
                     :src="item.small"
-                    @click="render(index)"
+                    @click="render(0)"
                 />
 
-            </div>
+        </div>
 
         </div>
 
@@ -71,6 +70,8 @@
 
 <script>
 
+import chunk from 'lodash.chunk'
+
 import Icon from '../Icon/Icon.vue'
 
 export default {
@@ -107,7 +108,7 @@ export default {
 
     mounted() {
         this.currentImages = this.images
-            ? JSON.parse(decodeURIComponent(this.images))
+            ? chunk(JSON.parse(decodeURIComponent(this.images)), 3)
             : []
     }
 

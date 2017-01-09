@@ -24,3 +24,7 @@
         color: $white;
         text-decoration: underline;
     }
+
+    .PromoBar__closeIcon svg {
+        fill: $white;
+    }
