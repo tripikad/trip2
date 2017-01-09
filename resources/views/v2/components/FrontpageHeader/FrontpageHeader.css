@@ -9,10 +9,9 @@
 }
 
     .FrontpageHeader__content {
-        height: calc($spacer * 15);
+        margin-top: $margin-lg;
         display: flex;
         justify-content: center;
-        align-items: center;
     }
 
     .FrontpageHeader__search {
