@@ -8,7 +8,6 @@ class Footer
 {
     protected function prepareCol1Links()
     {
-
         return collect()
             ->push([
                 'title' => trans('menu.footer.flights'),
@@ -26,14 +25,13 @@ class Footer
                 'title' => trans('menu.footer.blogs'),
                 'route' => route('v2.blog.index'),
             ])
-            ->map(function($item) {
+            ->map(function ($item) {
                 return (object) $item;
             });
     }
 
     protected function prepareCol2Links()
     {
-
         return collect()
             ->push([
                 'title' => trans('menu.footer2.forum'),
@@ -47,14 +45,13 @@ class Footer
                 'title' => trans('menu.footer2.expat'),
                 'route' => route('v2.expat.index'),
             ])
-            ->map(function($item) {
+            ->map(function ($item) {
                 return (object) $item;
             });
     }
 
     protected function prepareCol3Links()
     {
-
         return collect()
             ->push([
                 'title' => trans('menu.footer3.about'),
@@ -72,12 +69,10 @@ class Footer
                 'title' => trans('menu.footer3.advertising'),
                 'route' => route('v2.static.show', [22125]),
             ])
-            ->map(function($item) {
+            ->map(function ($item) {
                 return (object) $item;
             });
     }
-
-
 
     protected function prepareSocialLinks()
     {
