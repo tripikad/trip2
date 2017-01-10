@@ -47,7 +47,7 @@ class NavbarMobile
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.header.user'),
-                'route' => route('user.show', [$user]),
+                'route' => route('v2.user.show', [$user]),
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.header.edit'),

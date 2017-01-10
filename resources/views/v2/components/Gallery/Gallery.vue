@@ -111,9 +111,14 @@ export default {
     },
 
     mounted() {
-        this.currentImages = this.images
-            ? chunk(JSON.parse(decodeURIComponent(this.images)), 3)
-            : []
+        //this.currentImages = this.images
+        //    ? chunk(JSON.parse(decodeURIComponent(this.images)), 3)
+        //    : []
+        var images = this.images ? JSON.parse(decodeURIComponent(this.images)) : []
+        images = images.concat(
+            Array(9 - images.length).fill({small: '/v2/svg/image_none.svg'})
+        )
+        this.currentImages = chunk(images, 3)
     }
 
 }

@@ -19,18 +19,29 @@ class ForumPost
             ->with('user', component('UserImage')
                 ->with('size', 64)
                 ->with('border', 4)
-                ->with('route', route('user.show', [$post->user]))
+                ->with('route', route('v2.user.show', [$post->user]))
                 ->with('image', $post->user->imagePreset('small_square'))
                 ->with('rank', $post->user->vars()->rank)
             )
             ->with('meta', component('Meta')->with('items', collect()
                     ->push(component('MetaLink')
                         ->with('title', $post->user->vars()->name)
-                        ->with('route', route('user.show', [$post->user]))
+                        ->with('route', route('v2.user.show', [$post->user]))
                     )
                     ->push(component('MetaLink')
                         ->with('title', $post->vars()->created_at)
                     )
+                    ->merge($post->destinations->map(function ($destination) {
+                        return component('Tag')
+                            ->is('orange')
+                            ->with('title', $destination->name)
+                            ->with('route', route('v2.destination.show', [$destination]));
+                    }))
+                    ->merge($post->topics->map(function ($topic) {
+                        return component('MetaLink')
+                            ->with('title', $topic->name)
+                            ->with('route', route('v2.forum.index', ['topic' => $topic]));
+                    }))
                     ->pushWhen($user && $user->hasRoleOrOwner('admin', $post->user->id),
                         component('MetaLink')
                             ->with('title', trans('content.action.edit.title'))

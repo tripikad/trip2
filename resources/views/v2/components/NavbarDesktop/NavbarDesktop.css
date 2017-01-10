@@ -12,12 +12,7 @@
         padding: $padding-sm;
         color: $gray-darker;
         font: $font-heading-sm;
-    }
-
-    .NavbarDesktop__link {
-        padding: $padding-sm;
-        color: $gray-darker;
-        font: $font-heading-sm;
+        white-space: nowrap;
     }
 
     .NavbarDesktop__userImage {
