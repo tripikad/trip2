@@ -37,6 +37,7 @@ $gray-darkest: #707477;
 /* Fonts */
 $font-family: "Sailec";
 $font-family-code: monospace;
+$font-family-alt: "Bitter";
 $font-size-xs: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
