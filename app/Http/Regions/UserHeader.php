@@ -74,10 +74,39 @@ class UserHeader
                     )
                 )
             )
-            ->with('meta', trans('user.show.joined', [
-                'user' => $user->name,
-                'created_at' => $user->vars()->created_at_relative,
-            ]))
+            ->with('meta', collect()
+                ->push(trans("user.rank.$user->rank"))
+                ->pushWhen(
+                    $user->hasRole('admin') || $user->hasRole('superuser'),
+                    trans('user.show.about.admin')
+                )
+                ->push(
+                    trans('user.show.about.joined', [
+                        'created_at' => $user->vars()->created_at_relative
+                    ])
+                )
+                ->pushWhen(
+                    $user->vars()->destinationWantsToGo()->count(),
+                    trans('user.show.about.wanttogo')
+                )
+                ->implode('')
+            )
+            ->with('wanttogo', $user
+                ->vars()
+                ->destinationWantsToGo()
+                ->map(function ($destination) {
+                    return component('Tag')
+                        ->is('white')
+                        ->is('large')
+                        ->with('title', $destination->flaggable->name)
+                        ->with('route', route(
+                            'v2.destination.show',
+                            [$destination->flaggable]
+                        ));
+                })
+                ->render()
+                ->implode(' ')
+            )
             ->with('stats', component('BlockHorizontal')
                 ->with('content', collect()
                     ->push(component('StatCard')

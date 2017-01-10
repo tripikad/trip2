@@ -4,6 +4,7 @@ $map = $map ?? '';
 $header = $header ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
+$wanttogo = $wanttogo ?? '';
 $actions_with_user = $actions_with_user ?? '';
 $actions_by_user = $actions_by_user ?? '';
 $background = $background ?? '';
@@ -53,6 +54,12 @@ $background = $background ?? '';
         <div class="UserHeader__meta">
 
             {!! $meta !!}
+
+        </div>
+
+        <div class="UserHeader__wanttogo">
+
+            {!! $wanttogo !!}
 
         </div>
         

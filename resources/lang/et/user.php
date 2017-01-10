@@ -9,6 +9,10 @@ return [
     'show.stat.content' => ':content_count postitust / :comment_count kommentaari',
     'show.stat.destination' => ':destination_count (:destination_percentage%) külastatud sihtkohta',
 
+    'show.about.joined' => ', liitus Tripiga :created_at',
+    'show.about.admin' => ' ja toimetuse liige',
+    'show.about.wanttogo' => '. Tahab minna:',
+
     // V1
 
     'gender.1' => 'Naine',

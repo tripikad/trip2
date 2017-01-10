@@ -40,3 +40,8 @@
 .Tag--white .Tag__title {
     color: $white;
 }
+
+.Tag--large {
+    padding: $padding-xs $padding-sm;
+    border-radius: $border-radius-xl;
+}

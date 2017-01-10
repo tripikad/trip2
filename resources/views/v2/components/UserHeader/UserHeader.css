@@ -50,6 +50,10 @@
         margin-bottom: $margin-md;
     }
 
+    .UserHeader__wanttogo {
+        margin-bottom: $margin-md;
+    }
+
     .UserHeader__actionsByUser {
         margin-top: $margin-md;
     }
