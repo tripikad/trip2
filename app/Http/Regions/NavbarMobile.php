@@ -10,8 +10,8 @@ class NavbarMobile
 
         return collect()
             ->put('frontpage', [
-                'title' => config('site.name'),
-                'route' => route('v2.frontpage.index'),
+                'title' => trans('menu.header.oldtrip'),
+                'route' => route('frontpage.index'),
             ])
             ->put('flight', [
                 'title' => trans('menu.header.flights'),
