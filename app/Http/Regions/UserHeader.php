@@ -82,7 +82,7 @@ class UserHeader
                 )
                 ->push(
                     trans('user.show.about.joined', [
-                        'created_at' => $user->vars()->created_at_relative
+                        'created_at' => $user->vars()->created_at_relative,
                     ])
                 )
                 ->pushWhen(
