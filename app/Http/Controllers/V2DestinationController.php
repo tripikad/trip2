@@ -26,7 +26,7 @@ class V2DestinationController extends Controller
 
             ->with('header', region('DestinationHeader', $destination))
 
-            ->with('top', region('Gallery', $photos))
+            ->with('top', $photos->count()? region('Gallery', $photos) : '')
 
             ->with('content', collect()
                 ->push(component('Block')
