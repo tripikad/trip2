@@ -8,10 +8,9 @@ class FrontpageAbout
     {
         return component('GridSplit')
             ->with('left_content', collect()
-                ->push(component('Block')
-                    ->is('dark')
-                    ->is('white')
-                    ->with('title', 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.')
+                ->push(component('Body')
+                    ->is('responsive')
+                    ->with('body', trans('frontpage.index.about'))
                     ->with('content', collect()
                         ->push(component('Link')
                             ->with('title', trans('content.action.more.about'))

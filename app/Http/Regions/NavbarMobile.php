@@ -9,6 +9,10 @@ class NavbarMobile
         $user = request()->user();
 
         return collect()
+            ->put('frontpage', [
+                'title' => trans('menu.header.oldtrip'),
+                'route' => route('frontpage.index'),
+            ])
             ->put('flight', [
                 'title' => trans('menu.header.flights'),
                 'route' => route('v2.flight.index'),

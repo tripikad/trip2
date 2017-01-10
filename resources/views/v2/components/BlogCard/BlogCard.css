@@ -13,6 +13,7 @@
     	margin-bottom: $margin-sm;
     	text-align: center;
         line-height: $line-height-lg;
+        line-height: $line-height-md ?if $mobile;
         color: $gray-darkest;
     }
 

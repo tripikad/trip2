@@ -9,6 +9,10 @@ return [
     'show.stat.content' => ':content_count posts / :comment_count comments',
     'show.stat.destination' => ':destination_count (:destination_percentage%) visited destinations',
 
+    'show.about.joined' => ', joined Trip :created_at',
+    'show.about.admin' => ' and forum moderator',
+    'show.about.wanttogo' => '. Wants to go to:',
+
     // V1
 
     'gender.1' => 'Female',

@@ -257,6 +257,8 @@ return [
     'blog.edit.field.url.title' => 'URL',
     'blog.edit.field.url.help' => '',
 
+    'blog.view.all.offers' => 'All blog posts',
+
     // Internal
 
     'internal.index.title' => 'Internal forum',

@@ -13,7 +13,3 @@
         font: $font-text-md;
         color: $gray-darker;
     }
-
-    .MessageRow__body {
-        margin-top: $margin-sm;
-    }

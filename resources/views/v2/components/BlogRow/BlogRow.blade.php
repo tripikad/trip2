@@ -3,12 +3,13 @@
 $user = $user ?? '';
 $title = $title ?? '';
 $route = $route ?? '';
+$meta = $meta ?? '';
 
 @endphp
 
-<div class="MessageRow {{ $isclasses }}">
+<div class="BlogRow {{ $isclasses }}">
 
-    <div class="MessageRow__user">
+    <div class="BlogRow__user">
 
         {!! $user !!}
 
@@ -22,7 +23,7 @@ $route = $route ?? '';
 
         @endif
 
-            <div class="MessageRow__title">
+            <div class="BlogRow__title">
 
                 {{ $title }}
 
@@ -34,7 +35,12 @@ $route = $route ?? '';
 
         @endif
 
+        <div class="BlogRow__meta">
+
+            {!! $meta !!}
+
+        </div>
+
     </div>
 
 </div>
-

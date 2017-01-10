@@ -9,6 +9,10 @@ class NavbarDesktop
         $user = request()->user();
 
         return collect()
+            ->put('oldtrip', [
+                'title' => trans('menu.header.oldtrip'),
+                'route' => route('frontpage.index'),
+            ])
             ->put('flight', [
                 'title' => trans('menu.header.flights'),
                 'route' => route('v2.flight.index'),

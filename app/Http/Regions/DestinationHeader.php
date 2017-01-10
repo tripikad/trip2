@@ -7,16 +7,7 @@ class DestinationHeader
     public function render($destination)
     {
         $parents = $destination->getAncestors();
-        /*
-        $facts = $destination->vars()->facts
-            ? $destination->vars()->facts
-                ->flip()
-                ->map(function ($value, $key) {
-                    return trans("destination.show.about.$value");
-                })
-                ->flip()
-            : null;
-        */
+
         return component('DestinationHeader')
             ->with('background', component('MapBackground'))
             ->with('navbar', component('Navbar')
@@ -43,12 +34,15 @@ class DestinationHeader
             )
             ->with('title', $destination->name)
             ->with('children', component('Meta')
-                ->with('items', $destination->getImmediateDescendants()->map(function ($destination) {
-                    return component('Tag')
+                ->with('items', $destination
+                    ->getImmediateDescendants()
+                    ->map(function ($destination) {
+                        return component('Tag')
                             ->is('white')
+                            ->is('large')
                             ->with('title', $destination->name)
                             ->with('route', route('v2.destination.show', [$destination]));
-                }))
+                    }))
                 )
             ->with('description', $destination->vars()->description)
             ->with('facts1', component('DestinationFacts')

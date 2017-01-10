@@ -14,6 +14,12 @@
         font: $font-heading-sm;
     }
 
+    .NavbarDesktop__link {
+        padding: $padding-sm;
+        color: $gray-darker;
+        font: $font-heading-sm;
+    }
+
     .NavbarDesktop__userImage {
         margin-left: $margin-md;
     }

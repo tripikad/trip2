@@ -34,7 +34,7 @@ class V2StaticController extends Controller
             ->with('header', region('HeaderLight', $post->vars()->title))
 
             ->with('content', collect()
-                ->push(component('Body')->with('body', $post->vars()->body))
+                ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
             )
 
             ->with('footer', region('FooterLight'))
