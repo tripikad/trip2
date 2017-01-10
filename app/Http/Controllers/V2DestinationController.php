@@ -31,7 +31,7 @@ class V2DestinationController extends Controller
             ->with('content', collect()
                 ->push(component('Block')
                     ->with('title', trans('destination.show.forum.title'))
-                    ->with('route', route('v2.forum.index'))
+                    ->with('route', route('v2.forum.index', ['destination' => $destination]))
                     ->with('content', $forums->map(function ($forum) {
                         return region('ForumRow', $forum);
                     })
@@ -46,7 +46,7 @@ class V2DestinationController extends Controller
             )
 
             ->with('bottom', collect()
-                ->push(region('DestinationBottom', $flights, $travelmates, $news))
+                ->push(region('DestinationBottom', $flights, $travelmates, $news, $destination))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
