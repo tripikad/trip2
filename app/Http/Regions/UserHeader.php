@@ -57,7 +57,7 @@ class UserHeader
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
             ->with('user', component('UserImage')
-                ->with('route', route('user.show', [$user]))
+                ->with('route', route('v2.user.show', [$user]))
                 ->with('image', $user->imagePreset('small_square'))
                 ->with('rank', $user->vars()->rank)
                 ->with('size', 152)
