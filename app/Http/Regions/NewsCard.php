@@ -8,7 +8,7 @@ class NewsCard
     {
         $commentCount = $post->vars()->commentCount();
 
-        return component('NewsCard')
+        return component('NewsCard2')
             ->with('route', route('v2.news.show', [$post->slug]))
             ->with('image', $post->imagePreset('small'))
             ->with('title', $post->vars()->shortTitle)

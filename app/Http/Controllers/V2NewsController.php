@@ -43,7 +43,7 @@ class V2NewsController extends Controller
             ))
 
             ->with('content', collect()
-                ->push(component('Grid3')
+                ->push(component('Grid2')
                     ->with('gutter', true)
                     ->with('items', $news->map(function ($new) {
                         return region('NewsCard', $new);
