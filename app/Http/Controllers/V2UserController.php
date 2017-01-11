@@ -35,7 +35,7 @@ class V2UserController extends Controller
 
             ->with('header', region('UserHeader', $user))
 
-            ->with('top', region('Gallery', $photos))
+            ->with('top', $photos->count() ? region('Gallery', $photos) : '')
 
             ->with('content', $comments->map(function ($comment) {
                 return component('UserCommentRow')

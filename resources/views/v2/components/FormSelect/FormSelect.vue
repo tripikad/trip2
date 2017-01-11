@@ -39,8 +39,7 @@
             placeholder: { default: '' },
             helper: { default: '' },
             value: { default: '' },
-            placeholder: { default: 'Select yo' },
-            tagplaceholder: { default: 'Yo'}
+            tagplaceholder: { default: '' }
         },
 
         data() {

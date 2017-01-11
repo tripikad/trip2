@@ -23,3 +23,8 @@
     opacity: $opacity-md;
     background: $pink;
 }
+
+.Comment--inset {
+    margin-left: $margin-xxl;
+    margin-left: 0 ?if $mobile;
+}

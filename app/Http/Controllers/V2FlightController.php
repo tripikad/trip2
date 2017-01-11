@@ -107,12 +107,6 @@ class V2FlightController extends Controller
         return layout('2col')
 
             ->with('header', region('Header', collect()
-                ->push(component('Title')
-                    ->is('white')
-                    ->is('large')
-                    ->with('title', trans('content.flight.index.title'))
-                    ->with('route', route('v2.flight.index'))
-                )
                 ->push(component('Link')
                     ->is('white')
                     ->is('large')
@@ -120,13 +114,16 @@ class V2FlightController extends Controller
                     ->with('route', route('v2.flight.index'))
                     ->with('icon', 'icon-arrow-left')
                 )
-            ))
-
-            ->with('content', collect()
-                ->push(component('Title')->with('title', $flight->vars()->title))
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->is('shadow')
+                    ->with('title', $flight->vars()->title)
+                )
                 ->push(component('Meta')
                     ->with('items', collect()
                         ->push(component('MetaLink')
+                            ->is('white')
                             ->with('title', $flight->vars()->created_at)
                         )
                         ->merge($flight->destinations->map(function ($destination) {
@@ -136,7 +133,9 @@ class V2FlightController extends Controller
                                 ->with('route', route('v2.destination.show', [$destination]));
                         }))
                     )
-                )
+                ), $flight->getHeadImage(), 'high'))
+
+            ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
                 ->merge($flight->comments->map(function ($comment) {
                     return region('Comment', $comment);

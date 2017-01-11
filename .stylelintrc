@@ -2,6 +2,7 @@
   "extends": "stylelint-config-standard",
   "rules": {
     "indentation": null,
-    "block-no-empty": null
+    "block-no-empty": null,
+    "property-no-unknown": null
   }
 }

@@ -8,8 +8,8 @@
 
 .row {
   display: flex;
-  flex-wrap: wrap;
   display: block ?if $mobile;
+  flex-wrap: wrap;
 }
 
 .row-middle {

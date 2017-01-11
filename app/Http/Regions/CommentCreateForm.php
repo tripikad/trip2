@@ -8,6 +8,7 @@ class CommentCreateForm
     {
         return component('Block')
             ->is('border')
+            ->is('inset')
             ->with('content', collect()
                 ->push(component('Form')
                     ->with('route', route('comment.store', [$content->type, $content->id]))
