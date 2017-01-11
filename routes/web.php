@@ -41,11 +41,6 @@ Route::get('v2/news/{slug}', [
     'as' => 'v2.news.show',
 ]);
 
-Route::get('v2/news/{id}/edit', [
-    'uses' => 'V2NewsController@edit',
-    'as' => 'v2.news.edit',
-]);
-
 // Flight
 
 Route::get('v2/flight', [
@@ -56,11 +51,6 @@ Route::get('v2/flight', [
 Route::get('v2/flight/{slug}', [
     'uses' => 'V2FlightController@show',
     'as' => 'v2.flight.show',
-]);
-
-Route::get('v2/flight/{id}/edit', [
-    'uses' => 'V2FlightController@edit',
-    'as' => 'v2.flight.edit',
 ]);
 
 // Travelmates
@@ -78,8 +68,18 @@ Route::get('v2/travelmate/{slug}', [
 // Forum
 
 Route::get('v2/forum', [
-    'uses' => 'V2ForumController@index',
+    'uses' => 'V2ForumController@forumIndex',
     'as' => 'v2.forum.index',
+]);
+
+Route::get('v2/buysell', [
+    'uses' => 'V2ForumController@buysellIndex',
+    'as' => 'v2.buysell.index',
+]);
+
+Route::get('v2/expat', [
+    'uses' => 'V2ForumController@expatIndex',
+    'as' => 'v2.expat.index',
 ]);
 
 Route::get('v2/forum/{slug}', [
@@ -99,11 +99,59 @@ Route::get('v2/static/{id}', [
     'as' => 'v2.static.show',
 ]);
 
+// Blog
+
+Route::get('v2/blog', [
+    'uses' => 'V2BlogController@index',
+    'as' => 'v2.blog.index',
+]);
+
+Route::get('v2/blog/{slug}', [
+    'uses' => 'V2BlogController@show',
+    'as' => 'v2.blog.show',
+]);
+
+// Internal
+
+Route::get('v2/internal', [
+    'middleware' => 'role:admin',
+    'uses' => 'V2InternalController@index',
+    'as' => 'v2.internal.index',
+]);
+
+Route::get('v2/internal/{id}', [
+    'middleware' => 'role:admin',
+    'uses' => 'V2InternalController@show',
+    'as' => 'v2.internal.show',
+]);
+
 // User
 
 Route::get('v2/user/{id}', [
     'uses' => 'V2UserController@show',
     'as' => 'v2.user.show',
+]);
+
+// Message
+
+Route::get('v2/user/{id}/messages', [
+    'middleware' => 'role:superuser,userowner',
+    'uses' => 'V2MessageController@index',
+    'as' => 'v2.message.index',
+]);
+
+Route::get('v2/user/{id}/messages/{id2}', [
+    'middleware' => 'role:superuser,userowner',
+    'uses' => 'V2MessageController@indexWith',
+    'as' => 'v2.message.index.with',
+]);
+
+// Follows
+
+Route::get('v2/user/{id}/follows', [
+    'middleware' => 'role:admin,userowner',
+    'uses' => 'V2ForumController@followIndex',
+    'as' => 'v2.follow.index',
 ]);
 
 // Destination
@@ -113,7 +161,6 @@ Route::get('v2/destination/{id}', [
     'as' => 'v2.destination.show',
 ]);
 
-
 // Utils
 
 Route::get('v2/utils/alert', [
@@ -121,12 +168,10 @@ Route::get('v2/utils/alert', [
     'as' => 'utils.alert',
 ]);
 
-
 Route::get('share/{social}', [
     'uses' => 'V2SocialController@share',
     'as' => 'utils.share',
 ]);
-
 
 Route::post('v2/utils/format', [
     'uses' => 'V2UtilsController@format',
@@ -142,7 +187,6 @@ Route::post('v2/utils/filter', [
     'uses' => 'V2UtilsController@filter',
     'as' => 'utils.filter',
 ]);
-
 
 // V1
 
@@ -194,6 +238,11 @@ Route::post('reset/apply', ['uses' => 'Auth\ResetController@postEmail', 'as' => 
 Route::get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordForm', 'as' => 'reset.password.form']);
 
 Route::post('reset/password', ['uses' => 'Auth\ResetController@reset', 'as' => 'reset.password.submit']);
+
+// Fb campaign
+
+Route::get('tasuta-lennupiletid-maltale', ['uses' => 'CampaignController@index', 'as' => 'index']);
+Route::get('tasuta-lennupiletid-maltale{path}', ['uses' => 'CampaignController@index', 'as' => 'index']);
 
 //SEO content
 

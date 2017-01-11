@@ -1,24 +1,48 @@
 @php
 
+$title = $title ?? '';
+$head_description = $head_description ?? '';
+$head_image = $head_image ?? '';
 $header = $header ?? '';
-$content = $content ?? collect();
-$sidebar = $sidebar ?? collect();
-$bottom = $bottom ?? collect();
+$top = isset($top) ? collect($top) : collect();
+$content = isset($content) ? collect($content) : collect();
+$sidebar = isset($sidebar) ? collect($sidebar) : collect();
+$bottom = isset($bottom) ? collect($bottom) : collect();
 $footer = $footer ?? '';
 
 @endphp
 
 @extends('v2.layouts.main')
 
+@section('title', $title)
+@section('head_description', $head_description)
+@section('head_image', $head_image)
+
 @section('header', $header)
 
 @section('content')
 
+@if ($top->count())
+
+    <div class="background-gray">
+
+    @foreach ($top as $top_item)
+
+        {!! $top_item !!}
+            
+    @endforeach
+
+    </div>
+
+@endif
+
+<div class="background-white">
+
     <div class="container">
 
-        <div class="row-between padding-top-md padding-bottom-md">
+        <div class="row-between padding-top-xl-mobile-md padding-left-xl-tablet-none  padding-bottom-xl-mobile-md padding-right-xl-tablet-none">
 
-            <div class="col-9 padding-right-sm-mobile-none">
+            <div class="col-9 padding-right-md-mobile-none">
 
                 @foreach ($content as $content_item)
                 
@@ -32,7 +56,7 @@ $footer = $footer ?? '';
 
             </div>
 
-            <div class="col-3 padding-left-sm-mobile-none">
+            <div class="col-3 padding-left-md-mobile-none padding-top-none-mobile-md">
 
                 @foreach ($sidebar as $sidebar_item)
                 
@@ -52,7 +76,7 @@ $footer = $footer ?? '';
 
     @if ($bottom->count())
 
-    <div class="padding-top-md padding-bottom-md background-gray">
+    <div class="padding-top-lg padding-bottom-lg background-gray">
 
         <div class="container">
 
@@ -71,6 +95,8 @@ $footer = $footer ?? '';
     </div>
 
     @endif
+
+</div>
 
 @endsection
 

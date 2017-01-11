@@ -66,7 +66,7 @@
                         'profile' => [
                             'modifiers' => '',
                             'image' => $content->user->imagePreset(),
-                            'route' => route('user.show', [$content->user])
+                            'route' => ($content->user->name != 'Tripi külastaja' ? route('user.show', [$content->user]) : false)
                         ],
                         'modifiers' => 'm-image',
                         'title' => $content->title,

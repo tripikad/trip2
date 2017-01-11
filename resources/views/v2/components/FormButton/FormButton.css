@@ -1,14 +1,17 @@
 @import "variables";
 
 .FormButton {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
     align-items: center;
     background: $green;
     border-radius: $border-radius-md;
-    display: flex ?if $mobile;
+    border: none;
+    color: $white;
     display: inline-flex;
+    display: block ?if $mobile;
     font: $font-heading-sm;
     justify-content: center;
     padding: $padding-sm $padding-lg;
-    border: none;
-    color: $white;
+    width: 100% ?if $mobile;
 }

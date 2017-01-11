@@ -29,14 +29,16 @@ class V2StaticController extends Controller
             ->whereStatus(1)
             ->findOrFail($id);
 
-        return view('v2.layouts.1col')
+        return layout('1col')
 
             ->with('header', region('HeaderLight', $post->vars()->title))
 
             ->with('content', collect()
-                ->push(component('Body')->with('body', $post->vars()->body))
+                ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
             )
 
-            ->with('footer', region('FooterLight'));
+            ->with('footer', region('FooterLight'))
+
+            ->render();
     }
 }

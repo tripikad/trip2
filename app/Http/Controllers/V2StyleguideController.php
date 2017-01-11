@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Image;
-use App\Content;
 use Request;
 use Response;
+use App\Image;
+use App\Content;
 
 class V2StyleguideController extends Controller
 {
@@ -13,36 +13,48 @@ class V2StyleguideController extends Controller
     {
         session()->keep('info');
 
-        return view('v2.layouts.1col')
+        $user = auth()->user();
+
+        return layout('1col')
 
             ->with('content', collect()
 
+                ->push(component('Title')
+                    ->with('title', 'Uue tripi eelvaade')
+                )
+
                 ->push(component('MetaLink')
-                    ->with('title', 'Frontpage')
+                    ->with('title', 'Esikülg')
                     ->with('route', route('v2.frontpage.index'))
                 )
                 ->push(component('MetaLink')
-                    ->with('title', 'News')
+                    ->with('title', 'Uudised')
                     ->with('route', route('v2.news.index'))
                 )
                 ->push(component('MetaLink')
-                    ->with('title', 'Flight')
+                    ->with('title', 'Lennupakkumised')
                     ->with('route', route('v2.flight.index'))
                 )
                 ->push(component('MetaLink')
-                    ->with('title', 'Forum')
+                    ->with('title', 'Foorum')
                     ->with('route', route('v2.forum.index'))
                 )
                 ->push(component('MetaLink')
-                    ->with('title', 'Travelmate')
+                    ->with('title', 'Reisikaaslased')
                     ->with('route', route('v2.travelmate.index'))
                 )
                 ->push(component('MetaLink')
-                    ->with('title', 'Static pages')
+                    ->with('title', 'Staatilised lehed')
                     ->with('route', route('v2.static.index'))
                 )
+                ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
+                    ->with('title', 'Toimetuse foorum')
+                    ->with('route', route('v2.internal.index'))
+                )
 
-            );
+            )
+
+            ->render();
     }
 
     public function form()

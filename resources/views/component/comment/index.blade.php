@@ -8,7 +8,7 @@
                 'modifiers' => 'm-full m-status',
                 'image' => $comment->user->imagePreset('xsmall_square'),
                 'title' => $comment->user->name,
-                'route' => route('user.show', [$comment->user]),
+                'route' => ($comment->user->name != 'Tripi külastaja' ? route('user.show', [$comment->user]) : false),
                 'letter' => [
                     'modifiers' => 'm-blue m-small',
                     'text' =>  $content->user->name[0]

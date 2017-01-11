@@ -44,14 +44,14 @@ export default {
         }
     },
 
-    events: {
-        'showAlert': function(alert) {
+    mounted() {
+        this.$events.$on('showAlert', function(alert) {
             this.title = alert
             this.show = true
             setTimeout(function() {
                 this.show = false
             }.bind(this), 2000)
-        }
+        })
     }
 
 }

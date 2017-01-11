@@ -8,7 +8,7 @@ class BlogCard
     {
         return component('BlogCard')
             ->with('title', $blog->title)
-            ->with('route', route('content.show', [$blog->type, $blog]))
+            ->with('route', route('v2.blog.show', [$blog->slug]))
             ->with('user', component('UserImage')
                 ->with('route', route('v2.user.show', [$blog->user]))
                 ->with('image', $blog->user->imagePreset('small_square'))

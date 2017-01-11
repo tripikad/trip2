@@ -55,6 +55,9 @@ return [
 
     'update.info' => ':title has been updated',
 
+    'show.isnew' => 'New',
+    'show.newcomments' => ':count new comment|:count new comments',
+
     // Content types
 
     // News
@@ -253,6 +256,8 @@ return [
 
     'blog.edit.field.url.title' => 'URL',
     'blog.edit.field.url.help' => '',
+
+    'blog.view.all.offers' => 'All blog posts',
 
     // Internal
 

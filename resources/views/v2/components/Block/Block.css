@@ -1,35 +1,18 @@
 @import "variables";
 
-.Block {
+.Block__title {
+    margin-bottom: $margin-md;
+}
+
+.Block--gray {
     background: $gray-light;
     padding: $padding-md;
+    padding: $padding-sm ?if $mobile;
 }
 
-.Block--white {
-    background: none;
-    padding: 0;
-}
-
-    .Block__title {
-        color: $green;
-        font: $font-heading-md;
-        line-height: $line-height-md;
-        margin-bottom: $margin-md;
-    }
-
-.Block--uppercase .Block__title {
-    text-transform: uppercase;
-    font: $font-heading-xs;
-}
-
-.Block--red .Block__title {
-    color: $red;
-}
-
-.Block--yellow .Block__title {
-    color: $yellow;
-}
-
-.Block--dark .Block__title {
-    color: $gray-darkest;
+.Block--border {
+    border: $border-gray-md;
+    border-radius: $border-radius-md;
+    padding: $padding-md;
+    padding: $padding-sm ?if $mobile;
 }

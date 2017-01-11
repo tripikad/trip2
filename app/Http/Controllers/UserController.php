@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use View;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
+use App\Flag;
 use App\User;
 use App\Image;
-use App\Flag;
+use Carbon\Carbon;
 use App\Destination;
-use Hash;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
 
-        $user = User::with(['flags.flaggable'])->findorFail($id);
+        $user = User::with(['flags.flaggable'])->where('name', '!=', 'Tripi külastaja')->findorFail($id);
 
         $content_count = $user
             ->contents()

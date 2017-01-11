@@ -12,10 +12,10 @@
 */
 
 use App\User;
-use App\Message;
-use App\Content;
-use App\Comment;
 use App\Follow;
+use App\Comment;
+use App\Content;
+use App\Message;
 
 $factory->define(User::class, function ($faker) {
     $name = $faker->name;

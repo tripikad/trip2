@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 
@@ -63,12 +63,18 @@ class Content extends Model
         return new V2ContentVars($this);
     }
 
-    public function scopeGetLatestPagedItems($query, $type, $take = 24, $destination = false, $topic = false)
-    {
+    public function scopeGetLatestPagedItems(
+        $query,
+        $type,
+        $take = 36,
+        $destination = false,
+        $topic = false,
+        $order = 'created_at'
+    ) {
         return $query
             ->whereType($type)
             ->whereStatus(1)
-            ->latest()
+            ->orderBy($order, 'desc')
             ->with(
                 'images',
                 'user',
@@ -96,13 +102,13 @@ class Content extends Model
             ->simplePaginate($take);
     }
 
-    public function scopeGetLatestItems($query, $type, $take = 5)
+    public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at')
     {
         return $query
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
-            ->latest()
+            ->orderBy($order, 'desc')
             ->with(
                 'images',
                 'user',
@@ -299,7 +305,7 @@ class Content extends Model
 
     public function getHeadImage()
     {
-        return config('app.url').$this->imagePreset('large');
+        return $this->imagePreset('large');
     }
 
     public function sluggable()

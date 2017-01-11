@@ -12,6 +12,11 @@
         padding: $padding-sm;
         color: $gray-darker;
         font: $font-heading-sm;
+        white-space: nowrap;
+    }
+
+    .NavbarDesktop__userImage {
+        margin-left: $margin-md;
     }
 
     .NavbarDesktop__popover {
@@ -43,7 +48,7 @@
     .NavbarDesktop__sublink {
         color: $white;
         font: $font-heading-sm;
-        padding: $padding-xs $padding-sm;
+        padding: $padding-sm $padding-md;
     }
 
     .NavbarDesktop__sublink:hover {

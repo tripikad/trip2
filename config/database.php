@@ -106,6 +106,12 @@ return [
             'database' => 0,
         ],
 
+        'permanent' => [
+            'host'     => '127.0.0.1',
+            'port'     => 6379,
+            'database' => 1,
+        ],
+
     ],
 
 ];

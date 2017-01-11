@@ -1,0 +1,15 @@
+@import "variables";
+
+.MessageRow {
+    display: flex;
+    align-items: center;
+}
+
+    .MessageRow__user {
+        margin-right: $margin-sm;
+    }
+
+    .MessageRow__title {
+        font: $font-text-md;
+        color: $gray-darker;
+    }

@@ -2,24 +2,26 @@
 
 .HeaderLight {
     padding-top: $padding-md;
-    padding-bottom: $padding-lg;
-    background: $gray-light;
-    position: relative;
-    overflow: hidden;
-    z-index: 0;
+    padding-bottom: $padding-md;
+    padding-bottom: $padding-xs ?if $mobile;
 }
 
     .HeaderLight__content {
-        height: calc($spacer * 15);
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        margin-top: $margin-xl;
+        margin-left: $margin-xl;
+        margin-left: 0 ?if $tablet;
+    }
+
+    .HeaderLight__meta {
+        margin-top: $margin-md;
+    }
+
+    .HeaderLight__meta2 {
+        margin-top: $margin-md;
     }
 
     .HeaderLight__title {
         color: $gray-darkest;
+        font: $font-heading-xxl;
         font: $font-heading-xl ?if $mobile;
-        font: $font-heading-xxl ?if $tablet;
-        font: $font-heading-xxxl;
-        text-align: center;
     }

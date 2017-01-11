@@ -3,9 +3,9 @@
 .DestinationBar {
     background: $yellow;
     display: flex;
-    height: calc($spacer * 6.75);
+    height: calc($spacer * 6);
     align-items: center;
-    padding: 0 $padding-md;
+    padding: 0 calc($spacer * 1.5);
 }
 
 .DestinationBar--dark {
@@ -16,7 +16,6 @@
         color: $white;
         display: flex;
         font: $font-heading-md;
-        opacity: $opacity-md;
         align-items: center;
         margin-bottom: $margin-xxs;
     }

@@ -35,7 +35,7 @@
                     'modifiers' => 'm-full m-status',
                     'image' => $content->user->imagePreset(),
                     'title' => $content->user->name,
-                    'route' => route('user.show', [$content->user]),
+                    'route' => ($content->user->name != 'Tripi külastaja' ? route('user.show', [$content->user]) : false),
                     'letter' => [
                         'modifiers' => 'm-purple m-small',
                         'text' => $content->user->name[0]

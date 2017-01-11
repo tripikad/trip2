@@ -15,11 +15,11 @@ class ForumRowSmall
             )
             ->with('title', $forum->vars()->shortTitle)
             ->with('meta', component('Meta')->with('items', collect()
+                    ->push(component('Badge')->with('title', $forum->vars()->commentCount))
                     ->push(component('MetaLink')
                         ->with('title', $forum->vars()->created_at)
                     )
                 )
-            )
-            ->with('badge', component('Badge')->with('title', count($forum->comments)));
+            );
     }
 }

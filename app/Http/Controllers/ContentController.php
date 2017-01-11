@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Auth;
-use Log;
 use DB;
-use App\Content;
-use App\Destination;
-use App\Topic;
-use App\Image;
-use App\Main;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Log;
+use Auth;
 use Cache;
-// Traits
+use App\Main;
+use App\Image;
+use App\Topic;
+use App\Content;
+use Carbon\Carbon;
+use App\Destination;
+use Illuminate\Http\Request;
 use App\Http\Controllers\ContentTraits\Blog;
-use App\Http\Controllers\ContentTraits\Flight;
+// Traits
 use App\Http\Controllers\ContentTraits\Forum;
+use App\Http\Controllers\ContentTraits\Flight;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Controllers\ContentTraits\Travelmate;
 
 class ContentController extends Controller
@@ -32,8 +32,14 @@ class ContentController extends Controller
             abort(401);
         }
 
+        if (config("content_$type.store.status", 1) == 0 && Auth::check() && Auth::user()->hasRole('admin')) {
+            $comments_status = 0;
+        } else {
+            $comments_status = 1;
+        }
+
         if (in_array('comments', config("content_$type.index.with")) && ($type == 'forum' || $type == 'buysell' || $type == 'expat' || $type == 'internal')) {
-            $contents = Content::leftJoin('comments', function ($query) {
+            $contents = Content::leftJoin('comments', function ($query) use ($comments_status) {
                 $query->on('comments.content_id', '=', 'contents.id')
                     ->on('comments.id', '=',
                         DB::raw('(select id from comments where `content_id` = `contents`.`id` order by id desc limit 1)'));
@@ -51,10 +57,8 @@ class ContentController extends Controller
                 );
         }
 
-        if (config("content_$type.store.status", 1) == 0 && Auth::check() && Auth::user()->hasRole('admin')) {
-            //$contents->whereStatus(0);
-        } else {
-            $contents->where('contents.status', 1);
+        if ($comments_status != 0) {
+            $contents->where('contents.status', $comments_status);
         }
 
         $expireField = config("content_$type.index.expire.field");
@@ -83,14 +87,12 @@ class ContentController extends Controller
 
             $contents = $contents
                 ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
-                ->select('contents.*')
                 ->whereIn('content_destination.destination_id', $descendants);
         }
 
         if ($request->topic) {
             $contents = $contents
                 ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
-                ->select('contents.*')
                 ->where('content_topic.topic_id', '=', $request->topic);
         }
 
@@ -203,7 +205,6 @@ class ContentController extends Controller
         $viewVariables['content'] = $content;
         $viewVariables['comments'] = $comments;
         $viewVariables['type'] = $type;
-
 
         return response()
             ->view($view, $viewVariables)
@@ -403,22 +404,21 @@ class ContentController extends Controller
 
             $content->save();
 
-            if (in_array($content->type, ['forum', 'buysell', 'expat'])) {
+            if (in_array($content->type, ['forum', 'buysell', 'expat', 'internal'])) {
                 DB::table('users')->select('id')->chunk(1000, function ($users) use ($content) {
                     collect($users)->each(function ($user) use ($content) {
 
-                    // For user we store the cache key about new content item
+                        // For user we store the cache key about new content item
 
-                    $key = 'new_'.$content->id.'_'.$user->id;
+                        $key = 'new_'.$content->id.'_'.$user->id;
 
-                    // Cache value is initally 0 (no new comments are added yet)
-                    // Note: not sure about set for x seconds / set forever / auto-expiration yet
+                        // Cache value is initially 0 (no new comments are added yet)
+                        // Note: not sure about set for x seconds / set forever / auto-expiration yet
 
-                    Cache::forever($key, 0);
+                        Cache::store('permanent')->forever($key, 0);
                     });
                 });
             }
-
 
             Log::info('New content added', [
                 'user' =>  Auth::user()->name,

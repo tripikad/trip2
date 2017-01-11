@@ -3,6 +3,7 @@
 .Flag {
     display: flex;
     align-items: baseline;
+    padding-top: calc($spacer / 2);
 }
 
     .Flag__icon {
@@ -10,10 +11,36 @@
     }
 
     .Flag__icon svg {
-        fill: $gray;
+        fill: $gray-dark;
     }
 
     .Flag__value {
         font: $font-text-sm;
-        color: $gray-dark;
+        color: $gray-darker;
     }
+
+.Flag--green.Flag--unflagged .Flag__icon svg,
+.Flag--red.Flag--unflagged .Flag__icon svg {
+    fill: $gray-darker;
+}
+
+.Flag--green.Flag--unflagged .Flag__value,
+.Flag--red.Flag--unflagged .Flag__value {
+    color: $gray-darker;
+}
+
+.Flag--green .Flag__icon svg {
+    fill: $green;
+}
+
+.Flag--green .Flag__value {
+    color: $green;
+}
+
+.Flag--red .Flag__icon svg {
+    fill: $red;
+}
+
+.Flag--red .Flag__value {
+    color: $red;
+}

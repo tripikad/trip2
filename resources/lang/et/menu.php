@@ -2,6 +2,8 @@
 
 return [
 
+    'header.oldtrip' => 'Vana Trip.ee',
+
     'header.home' => 'Trip.ee',
     'header.news' => 'Uudised',
     'header.flights' => 'Lennupakkumised',
@@ -10,6 +12,9 @@ return [
     'header.photos' => 'Pildid',
     'header.blogs' => 'Blogi',
     'header.offers' => 'Pakkumised',
+    'header.my' => 'Minu Trip.ee',
+    'header.user' => 'Minu profiil',
+    'header.edit' => 'Muuda profiili',
 
     'auth.register' => 'Registreeri',
     'auth.login' => 'Logi sisse',
@@ -49,9 +54,9 @@ return [
     'user.profile' => 'Profiil',
     'user.edit.profile' => 'Muuda profiili',
     'user.message' => 'Sõnumid',
-    'user.follow' => 'Jälgimised',
+    'user.follow' => 'Jälgitavad teemad',
     'user.travelmate' => 'Otsid reisikaaslast?',
-    'user.add.places' => 'Lisa riigid, kus oled käinud',
+    'user.add.places' => 'Riigid, kus olen käinud',
     'user.photo' => 'Lisa reisipilt',
 
     'admin.internal' => 'Sisefoorum',

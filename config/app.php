@@ -178,9 +178,10 @@ return [
         Jenssegers\Date\DateServiceProvider::class,
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
-        // GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        Indal\Markdown\MarkdownServiceProvider::class,
 
         Msurguy\Honeypot\HoneypotServiceProvider::class,
+        Roumen\Sitemap\SitemapServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -248,7 +249,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Ekko'      => Laravelista\Ekko\Facades\Ekko::class,
         'Honeypot'  => Msurguy\Honeypot\HoneypotFacade::class,
-        // 'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+        'Markdown' => Indal\Markdown\Facade::class,
 
     ],
 

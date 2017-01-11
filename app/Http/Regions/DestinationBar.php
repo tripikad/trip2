@@ -11,10 +11,13 @@ class DestinationBar
             ->with('title', $destination->vars()->name)
             ->with('route', route('v2.destination.show', [$destination]))
             ->with('parents', $parents
+                ->reverse()
+                ->slice(0, $parents->count() > 2 ? 2 : null)
+                ->reverse()
                 ->map(function ($parent) {
                     return component('MetaLink')
                         ->is('white')
-                        ->with('title', $parent->vars()->name.' › ')
+                        ->with('title', $parent->vars()->shortName.' › ')
                         ->with('route', route('v2.destination.show', [$parent]));
                 })
                 ->render()

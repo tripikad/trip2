@@ -2,27 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use Cache;
 use Request;
+use App\User;
+use App\Topic;
 use App\Content;
 use App\Destination;
-use App\Topic;
-use Cache;
 
 class V2ForumController extends Controller
 {
-    public function index()
+    public function forumIndex()
+    {
+        return $this->index('forum');
+    }
+
+    public function buysellIndex()
+    {
+        return $this->index('buysell');
+    }
+
+    public function expatIndex()
+    {
+        return $this->index('expat');
+    }
+
+    private function index($forumType)
     {
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
-        $forums = Content::getLatestPagedItems('forum', false, $currentDestination, $currentTopic);
-        $flights = Content::getLatestItems('flight', 4);
+        $forums = Content::getLatestPagedItems($forumType, false, $currentDestination, $currentTopic, 'updated_at');
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
-        return view('v2.layouts.2col')
+        $flights = Content::getLatestItems('flight', 3);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
 
-            ->with('header', region('HeaderLight', trans('content.forum.index.title')))
+        return layout('2col')
+
+            ->with('header', region(
+                'HeaderLight',
+                trans("content.$forumType.index.title"),
+                region(
+                        'FilterHorizontal',
+                        $destinations,
+                        $topics,
+                        $currentDestination,
+                        $currentTopic,
+                        $forums->currentPage(),
+                        'v2.forum.index'
+                ),
+                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ))
 
             ->with('content', collect()
                 ->merge($forums->map(function ($forum) {
@@ -32,99 +64,111 @@ class V2ForumController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect()
-                    ->push(region(
-                        'Filter',
-                        $destinations,
-                        $topics,
-                        $currentDestination,
-                        $currentTopic,
-                        $forums->currentPage(),
-                        'v2.forum.index'
-                    ))
-                ))
-                ->merge(region('ForumLinks'))
-                ->push(region('ForumAbout'))
+                ->push(region('ForumAbout', $forumType))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
-                ->push(region('FlightBottom', $flights))
+                ->push(region('ForumBottom', $flights, $travelmates, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('FooterLight'));
+            ->with('footer', region('FooterLight'))
+
+            ->render();
+    }
+
+    public function followIndex($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $follows = $user->follows;
+
+        $flights = Content::getLatestItems('flight', 3);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
+
+        return layout('2col')
+
+            ->with('header', region(
+                'HeaderLight',
+                trans('follow.index.title'),
+                '',
+                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ))
+
+            ->with('content', collect()
+                ->pushWhen($follows->count() == 0, component('Title')
+                    ->with('title', trans('follow.index.empty'))
+                )
+                ->merge($user->follows->map(function ($follow) {
+                    return region('ForumRow', $follow->followable);
+                }))
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+            )
+
+            ->with('bottom', collect()
+                ->push(region('ForumBottom', $flights, $travelmates, $news))
+                ->push(component('Promo')->with('promo', 'footer'))
+            )
+
+            ->with('footer', region('FooterLight'))
+
+            ->render();
     }
 
     public function show($slug)
     {
         $forum = Content::getItemBySlug($slug);
-        $forums = Content::getLatestItems('forum', 5);
-        $travelmates = Content::getLatestItems('travelmate', 3);
+        $forumType = $forum->type;
+
         $user = auth()->user();
+        $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
+        $flights = Content::getLatestItems('flight', 3);
+        $travelmates = Content::getLatestItems('travelmate', 3);
+        $news = Content::getLatestItems('news', 1);
 
-        if (auth()->check()) {
-            $userId = auth()->user()->id;
+        // Clear the unread cache
 
-        // We check if user has read the post or its comments
-
-        $key = 'new_'.$forum->id.'_'.$userId;
-
-            $newId = Cache::get($key);
-
-        // We iterate over post comments
-
-        $forum->comments->map(function ($comment) use ($newId) {
-
-            // If the comment is the first unread (or newer) comment
-
-            if ($newId > 0 && $comment->id >= $newId) {
-
-                // Mark the comment as new so the view can style the comment accordingly
-
-                $comment->isNew = true;
-            }
-
-            return $comment;
-        });
-
-        // Mark the post and its comments read
-
-            Cache::forget($key);
+        if ($user) {
+            $key = 'new_'.$forum->id.'_'.$user->id;
+            Cache::store('permanent')->forget($key);
         }
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
-            ->with('header', region('HeaderLight', trans('content.forum.index.title')))
+            ->with('header', region(
+                'HeaderLight',
+                trans("content.$forum->type.index.title"),
+                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ))
 
             ->with('content', collect()
                 ->push(region('ForumPost', $forum))
-                ->merge($forum->comments->map(function ($comment) {
-                    return region('Comment', $comment);
+                ->merge($forum->comments->map(function ($comment) use ($firstUnreadCommentId) {
+                    return region('Comment', $comment, $firstUnreadCommentId);
                 }))
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum))
             )
 
             ->with('sidebar', collect()
-                ->merge(region('ForumLinks'))
-                ->push(region('ForumAbout'))
-                ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->merge($forum->destinations->map(function ($destination) {
-                    return region('DestinationBar', $destination, $destination->getAncestors());
-                }))
-                ->push(region('ForumSidebar', $forums))
+                ->push(region('ForumAbout', $forumType))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
-                ->push(region('ForumBottom', $forums))
-                ->push(region('TravelmateBottom', $travelmates))
+                ->push(region('ForumBottom', $flights, $travelmates, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('FooterLight'));
+            ->with('footer', region('FooterLight'))
+
+            ->render();
     }
 }

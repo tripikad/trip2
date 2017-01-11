@@ -66,6 +66,9 @@ return [
 
     'update.info' => ':title on uuendatud.',
 
+    'show.isnew' => 'Uus',
+    'show.newcomments' => ':count|:count',
+
     // Content types
 
     // News
@@ -227,8 +230,6 @@ return [
 
     'forum.no.results' => 'Hetkel pole ühtegi foorumi postitust.',
 
-    'forum.is.new' => 'Uus',
-
     // Expat
 
     'expat.index.title' => 'Elu välismaal',
@@ -285,7 +286,7 @@ return [
 
     // Blog
 
-    'blog.index.title' => 'Blogi',
+    'blog.index.title' => 'Blogid',
 
     'blog.create.title' => 'Lisa postitus',
 
@@ -303,7 +304,10 @@ return [
 
     'blog.no.results' => 'Hetkel pole ühtegi reisipäevikut veel lisatud.',
 
+    'blog.view.all.offers' => 'Kõik blogid',
+
     // Admin
+
     'admin.sidebar.title' => 'Navigeerimiseks',
 
     // Internal

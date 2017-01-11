@@ -1,10 +1,13 @@
 @php
 
-$map = $map ?? '';
-$header = $header ?? '';
-$title = $title ?? '';
-$meta = $meta ?? '';
 $navbar = $navbar ?? '';
+$parents = $parents ?? '';
+$title = $title ?? '';
+$children = $children ?? collect();
+$description = $description ?? '';
+$facts1 = $facts1 ?? '';
+$facts2 = $facts2 ?? '';
+$stats = $stats ?? '';
 $background = $background ?? '';
 
 @endphp
@@ -19,15 +22,65 @@ $background = $background ?? '';
             
         </div>
 
-        <div class="DestinationHeader__name">
+        @if ($parents)
 
-            {!! $name !!}
+        <div class="DestinationHeader__parents">
+
+            {!! $parents !!}
 
         </div>
 
-        <div class="DestinationHeader__facts">
+        @endif
 
-            {!! $facts !!}
+        <div class="DestinationHeader__title">
+
+            {{ $title }}
+
+        </div>
+
+        @if ($children)
+        
+        <div class="DestinationHeader__children">
+
+            {!! $children !!}
+
+        </div>
+        
+        @endif
+
+        <div class="DestinationHeader__contentWrapper">
+
+            <div>
+                
+                <div class="DestinationHeader__description">
+
+                    {{ $description }}
+
+                </div>
+
+                <div class="DestinationHeader__factsWrapper">
+
+                    <div class="DestinationHeader__facts">
+
+                        {!! $facts1 !!}
+
+                    </div>
+
+                    <div class="DestinationHeader__facts">
+
+                        {!! $facts2 !!}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="DestinationHeader__stats">
+
+                {!! $stats !!}
+
+            </div>
 
         </div>
 

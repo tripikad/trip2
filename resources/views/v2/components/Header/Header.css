@@ -4,21 +4,14 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding-bottom: $padding-lg;
     padding-top: $padding-md;
+    padding-bottom: $padding-lg;
+    padding-bottom: $padding-sm ?if $mobile;
 }
 
     .Header__content {
-        height: calc($spacer * 15);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .Header__title {
-        color: $white;
-        font: $font-heading-xxxl;
-        font: $font-heading-xxl ?if $tablet;
-        font: $font-heading-xl ?if $mobile;
-        text-align: center;
+        margin-top: $margin-xl;
+        margin-top: $margin-lg ?if $mobile;
+        margin-left: $margin-xl;
+        margin-left: 0 ?if $tablet;
     }

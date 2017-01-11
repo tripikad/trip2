@@ -134,6 +134,7 @@ return [
         'shortnews' => 'luhiuudised',
         'photo' => 'reisipildid',
         'internal' => 'toimetus',
+        'sponsored' => 'toimetaja-valik',
     ],
 
     'staticContentMapping' => [
@@ -143,6 +144,5 @@ return [
         97203 => 'mis-on-veahind',
         25151 => 'kasutustingimused',
     ],
-
 
 ];

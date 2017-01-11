@@ -1,0 +1,22 @@
+@import "variables";
+
+.FrontpageHeader {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: $padding-lg;
+    padding-top: $padding-md;
+}
+
+    .FrontpageHeader__content {
+        margin-top: $margin-lg;
+        display: flex;
+        justify-content: center;
+    }
+
+    .FrontpageHeader__search {
+        margin-bottom: $margin-lg;
+        margin-bottom: $margin-md ?if $mobile;
+        width: 55%;
+        width: 100% ?if $mobile;
+    }

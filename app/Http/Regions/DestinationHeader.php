@@ -6,6 +6,8 @@ class DestinationHeader
 {
     public function render($destination)
     {
+        $parents = $destination->getAncestors();
+
         return component('DestinationHeader')
             ->with('background', component('MapBackground'))
             ->with('navbar', component('Navbar')
@@ -19,7 +21,69 @@ class DestinationHeader
                 ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
-            ->with('name', $destination->name)
-            ->with('facts', region('DestinationFacts', $destination));
+            ->with('parents', $parents
+                ->map(function ($parent) {
+                    return component('MetaLink')
+                        ->is('large')
+                        ->is('white')
+                        ->with('title', $parent->vars()->name.' › ')
+                        ->with('route', route('v2.destination.show', [$parent]));
+                })
+                ->render()
+                ->implode('')
+            )
+            ->with('title', $destination->name)
+            ->with('children', component('Meta')
+                ->with('items', $destination
+                    ->getImmediateDescendants()
+                    ->map(function ($destination) {
+                        return component('Tag')
+                            ->is('white')
+                            ->is('large')
+                            ->with('title', $destination->name)
+                            ->with('route', route('v2.destination.show', [$destination]));
+                    }))
+                )
+            ->with('description', $destination->vars()->description)
+            ->with('facts1', component('DestinationFacts')
+                ->with('facts', collect()
+                    ->putWhen(
+                        $destination->vars()->isCountry || $destination->vars()->isPlace,
+                        trans('destination.show.about.callingCode'),
+                        $destination->vars()->callingCode()
+                    )
+                    ->putWhen(
+                        $destination->vars()->isCountry || $destination->vars()->isPlace,
+                        trans('destination.show.about.currencyCode'),
+                        $destination->vars()->currencyCode()
+                    )
+                )
+            )
+            ->with('facts2', component('DestinationFacts')
+                ->with('facts', collect()
+                    ->putWhen(
+                        $destination->vars()->isCountry,
+                        trans('destination.show.about.area'),
+                        $destination->vars()->area()
+                    )
+                    ->putWhen(
+                        $destination->vars()->isCountry,
+                        trans('destination.show.about.population'),
+                        $destination->vars()->population()
+                    )
+                )
+            )
+            ->with('stats', collect()
+                    ->push(component('StatCard')
+                        ->with('icon', 'icon-pin')
+                        ->with('title', $destination->vars()->usersWantsToGo()->count())
+                    )
+                    ->push(component('StatCard')
+                        ->with('title', $destination->vars()->usersHaveBeen()->count())
+                        ->with('icon', 'icon-star')
+                    )
+                    ->render()
+                    ->implode('')
+            );
     }
 }

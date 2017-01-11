@@ -2,16 +2,14 @@
 
 namespace App\Http\Regions;
 
-use App\Image;
-
 class Header
 {
-    public function render($title = '', $background = '')
+    public function render($content = null)
     {
-        $background = $background ?? Image::getHeader();
+        $background = '/photos/header3.jpg';
 
         return component('Header')
-            ->with('background', '/photos/header2.jpg')
+            ->with('background', $background)
             ->with('navbar', component('Navbar')
                 ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))
@@ -23,6 +21,6 @@ class Header
                 ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
-            ->with('title', $title);
+            ->with('content', $content);
     }
 }

@@ -1,7 +1,7 @@
 @import "variables";
 
 .BlogCard {
-	padding: $padding-sm;
+	padding: 0 $padding-lg;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -12,7 +12,9 @@
     	font: $font-heading-md ?if $mobile;
     	margin-bottom: $margin-sm;
     	text-align: center;
-        line-height: $line-height-md;
+        line-height: $line-height-lg;
+        line-height: $line-height-md ?if $mobile;
+        color: $gray-darkest;
     }
 
     .BlogCard__user {

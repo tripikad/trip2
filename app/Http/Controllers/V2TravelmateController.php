@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Request;
+use App\Topic;
 use App\Content;
 use App\Destination;
-use App\Topic;
 
 class V2TravelmateController extends Controller
 {
@@ -14,15 +14,33 @@ class V2TravelmateController extends Controller
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
-        $travelmates = Content::getLatestPagedItems('travelmate', false, $currentDestination, $currentTopic);
-        $forums = Content::getLatestItems('forum', 5);
-        $flights = Content::getLatestItems('flight', 4);
+        $travelmates = Content::getLatestPagedItems('travelmate', 24, $currentDestination, $currentTopic);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
-        return view('v2.layouts.2col')
+        $flights = Content::getLatestItems('flight', 3);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $news = Content::getLatestItems('news', 1);
 
-            ->with('header', region('Header', trans('content.travelmate.index.title')))
+        return layout('2col')
+
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.travelmate.index.title'))
+                    ->with('route', route('v2.travelmate.index'))
+                )
+                ->push(region(
+                    'FilterHorizontal',
+                    $destinations,
+                    $topics,
+                    $currentDestination,
+                    $currentTopic,
+                    $travelmates->currentPage(),
+                    'v2.travelmate.index'
+                ))
+            ))
 
             ->with('content', collect()
                 ->push(component('Grid2')
@@ -36,27 +54,19 @@ class V2TravelmateController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('Block')->with('content', collect()
-                    ->push(region(
-                        'Filter',
-                        $destinations,
-                        $topics,
-                        $currentDestination,
-                        $currentTopic,
-                        $travelmates->currentPage(),
-                        'v2.travelmate.index'
-                    ))
-                ))
                 ->push(region('TravelmateAbout'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
-                ->push(region('ForumBottom', $forums))
-                ->push(region('FlightBottom', $flights))
+                ->push(region('TravelmateBottom', $flights, $forums, $news))
+                ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
     public function show($slug)
@@ -65,12 +75,28 @@ class V2TravelmateController extends Controller
         $user = auth()->user();
 
         $travelmates = Content::getLatestItems('travelmate', 3);
-        $forums = Content::getLatestItems('forum', 5);
+
         $flights = Content::getLatestItems('flight', 3);
+        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $news = Content::getLatestItems('news', 1);
 
         return view('v2.layouts.2col')
 
-            ->with('header', region('Header', trans('content.travelmate.index.title')))
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.travelmate.index.title'))
+                    ->with('route', route('v2.travelmate.index'))
+                )
+                ->push(component('Link')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.travelmate.view.all.offers'))
+                    ->with('route', route('v2.travelmate.index'))
+                    ->with('icon', 'icon-arrow-left')
+                )
+            ))
 
             ->with('content', collect()
                 ->push(component('Title')->with('title', $travelmate->vars()->title))
@@ -104,18 +130,12 @@ class V2TravelmateController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('UserCard', $travelmate->user))
-                ->merge($travelmate->destinations->map(function ($destination) {
-                    return region('DestinationBar', $destination, $destination->getAncestors());
-                }))
-                ->merge($flights->map(function ($flight) {
-                    return region('FlightCard', $flight);
-                }))
-                ->push(region('ForumSidebar', $forums))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
-                ->push(region('TravelmateBottom', $travelmates))
+                ->push(region('TravelmateBottom', $flights, $forums, $news))
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 

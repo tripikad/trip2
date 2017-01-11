@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Lang;
 use Exception;
 
 class V2DestinationVars
@@ -33,6 +34,90 @@ class V2DestinationVars
 
     public function shortName()
     {
-        return str_limit($this->destination->name, 30);
+        return str_limit($this->destination->name, 10);
+    }
+
+    public function description()
+    {
+        $key = "destination.show.description.{$this->destination->id}";
+
+        return Lang::has($key) ? trans($key) : null;
+    }
+
+    public function isContinent()
+    {
+        return $this->destination->isRoot();
+    }
+
+    public function isCountry()
+    {
+        return $this->destination->getLevel() == 1;
+    }
+
+    public function isPlace()
+    {
+        return $this->destination->getLevel() > 1;
+    }
+
+    public function getCountry()
+    {
+        if ($this->destination->getLevel() > 1) {
+            return $this->destination->getAncestors()[1];
+        }
+
+        return false;
+    }
+
+    public function facts()
+    {
+        if ($this->isCountry() && $facts = config("destinations.{$this->destination->id}")) {
+            return (object) $facts;
+        }
+
+        if ($this->isPlace() && $facts = config("destinations.{$this->getCountry()->id}")) {
+            return (object) $facts;
+        }
+    }
+
+    public function area()
+    {
+        if ($facts = $this->facts()) {
+            if ($facts->area > 1000) {
+                return number_format(round($facts->area, -3), 0, ',', ' ').' km²';
+            } else {
+                return $facts->area;
+            }
+        }
+    }
+
+    public function population()
+    {
+        if ($facts = $this->facts()) {
+            return number_format(round($facts->population, -3), 0, ',', ' ');
+        }
+    }
+
+    public function callingCode()
+    {
+        if ($facts = $this->facts()) {
+            return '+'.$facts->callingCode;
+        }
+    }
+
+    public function currencyCode()
+    {
+        if ($facts = $this->facts()) {
+            return $facts->currencyCode;
+        }
+    }
+
+    public function usersHaveBeen()
+    {
+        return $this->destination->flags->where('flag_type', 'havebeen');
+    }
+
+    public function usersWantsToGo()
+    {
+        return $this->destination->flags->where('flag_type', 'wantstogo');
     }
 }

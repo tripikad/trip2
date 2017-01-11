@@ -2,25 +2,27 @@
 
     <div class="Gallery" :class="isclasses">
 
-        <div class="row">
+        <div class="Gallery__images">
 
             <div
-                class="col-2"
-                v-for="item in images"
-                track-by="$index"
+                class="Gallery__imagesRow"
+                v-for="row in currentImages"
             >
-
-                <img
-                    class="Gallery__image"
-                    :src="item.small"
-                    @click="render($index)"
-                />
+                    <div
+                        v-for="item in row"
+                        class="Gallery__image"
+                        @click="render(0)"
+                        :style="{backgroundImage: 'url(' + item.small + ')'}"
+                    >
+                        
+                    </div>
 
             </div>
 
         </div>
 
-        <div class="Gallery__fullscreen" v-if="fullscreen">
+        <!--
+        <div class="Gallery__fullscreen" v-show="fullscreen">
 
             <component
                 is="Icon"
@@ -28,13 +30,13 @@
                 icon="icon-close"
                 size="xl"
                 fill="white"
-                @click="fullscreen = false, activeImage = -1">
+                @click.native="fullscreen = false, activeImage = -1">
             </component>
 
             <div
                 class="Gallery__left"
-                @click="activeImage--"
-                v-if="activeImage > 0"
+                @click="prevImage"
+                v-show="activeImage > 0"
             >
 
                 <component is="Icon" icon="icon-arrow-left" size="xl" fill="white"></component>
@@ -43,8 +45,8 @@
 
              <div
                 class="Gallery__right"
-                @click="activeImage++"
-                v-if="activeImage < images.length -1"
+                @click="nextImage"
+                v-show="activeImage < images.length - 1"
             >
 
                 <component is="Icon" icon="icon-arrow-right" size="xl" fill="white"></component>
@@ -53,23 +55,26 @@
 
             <div class="Gallery__fullImageWrapper">
 
-                <img class="Gallery__fullImage" :src="images[activeImage].large"/>
+                <img class="Gallery__fullImage" :src="currentImages[activeImage].large" />
 
             </div>
 
-            <div class="Gallery__fullMeta">
-
-                {{{ images[activeImage].meta }}}
-
+            <div
+                class="Gallery__fullMeta"
+                v-html="currentImages[activeImage].meta"
+            >
             </div>
             
         </div>
-
+        -->
+        
     </div>
 
 </template>
 
 <script>
+
+import chunk from 'lodash.chunk'
 
 import Icon from '../Icon/Icon.vue'
 
@@ -87,7 +92,8 @@ export default {
     data() {
         return {
             fullscreen: false,
-            activeImage: false
+            activeImage: false,
+            currentImages: []
         }
     },
 
@@ -95,13 +101,24 @@ export default {
         render: function(index) {
             this.activeImage = index
             this.fullscreen = true
+        },
+        prevImage: function() {
+            this.activeImage = this.activeImage - 1
+        },
+        nextImage: function() {
+            this.activeImage = this.activeImage + 1
         }
     },
 
-    ready() {
-        this.images = this.images
-            ? JSON.parse(decodeURIComponent(this.images))
-            : []
+    mounted() {
+        //this.currentImages = this.images
+        //    ? chunk(JSON.parse(decodeURIComponent(this.images)), 3)
+        //    : []
+        var images = this.images ? JSON.parse(decodeURIComponent(this.images)) : []
+        images = images.concat(
+            Array(9 - images.length).fill({small: '/v2/svg/image_none.svg'})
+        )
+        this.currentImages = chunk(images, 3)
     }
 
 }

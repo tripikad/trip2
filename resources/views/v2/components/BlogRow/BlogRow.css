@@ -1,0 +1,16 @@
+@import "variables";
+
+.BlogRow {
+    display: flex;
+    align-items: center;
+}
+
+    .BlogRow__user {
+        margin-right: $margin-sm;
+    }
+
+    .BlogRow__title {
+        font: $font-heading-lg;
+        line-height: $line-height-md;
+        color: $gray-darkest;
+    }

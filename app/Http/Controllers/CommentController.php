@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use DB;
+use Log;
 use Auth;
 use Mail;
-use Log;
-use Illuminate\Pagination\LengthAwarePaginator;
-use DB;
 use Cache;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CommentController extends Controller
 {
@@ -60,7 +60,7 @@ class CommentController extends Controller
         }
 
         */
-        if (in_array($comment->content->type, ['forum', 'buysell', 'expat'])) {
+        if (in_array($comment->content->type, ['forum', 'buysell', 'expat', 'internal'])) {
             DB::table('users')->select('id')->chunk(1000, function ($users) use ($comment) {
                 collect($users)->each(function ($user) use ($comment) {
 
@@ -70,12 +70,12 @@ class CommentController extends Controller
 
                     // We will not overwrite the cache if there are unread comments already
 
-                    if (! Cache::get($key, 0) > 0) {
+                    if (! Cache::store('permanent')->get($key, 0) > 0) {
 
                         // The cache value is new comment id, this helps us redirect user
                         // to the right place later
 
-                        Cache::forever($key, $comment->id);
+                        Cache::store('permanent')->forever($key, $comment->id);
                     }
                 });
             });

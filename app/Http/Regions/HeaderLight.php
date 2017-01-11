@@ -4,11 +4,13 @@ namespace App\Http\Regions;
 
 class HeaderLight
 {
-    public function render($title = '')
+    public function render($title = '', $meta = '', $meta2 = '')
     {
         return component('HeaderLight')
             ->with('background', component('MapBackground'))
             ->with('title', $title)
+            ->with('meta', $meta)
+            ->with('meta2', $meta2)
             ->with('navbar', component('Navbar')
                 ->with('search', component('NavbarSearch'))
                 ->with('logo', component('Icon')

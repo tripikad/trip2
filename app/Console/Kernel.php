@@ -17,6 +17,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\MakeRegion::class,
         \App\Console\Commands\UserDelete::class,
         \App\Console\Commands\RemoveDuplicates::class,
+        \App\Console\Commands\GenerateSitemap::class,
+        \App\Console\Commands\ConvertMissingContent::class,
 
     ];
 
@@ -24,5 +26,8 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('generate:userRankings')
             ->dailyAt('04:00');
+
+        $schedule->command('sitemap:generate')
+            ->dailyAt('05:00');
     }
 }

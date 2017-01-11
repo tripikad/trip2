@@ -1,15 +1,29 @@
 @php
 
-$description = $description ?? '';
+$facts = collect($facts) ?? collect();
 
 @endphp
 
 <div class="DestinationFacts {{ $isclasses }}">
 
-    <div class="DestinationFacts__description">
-            
-        {!! $description !!}
+    <table>
 
-    </div>
+        <tbody>
+
+        @foreach ($facts as $key => $value)
+
+        <tr>
+            
+            <td class="DestinationFacts__key">{{ $key }}</td>
+            
+            <td class="DestinationFacts__value">{{ $value }}</td>
+        
+        </tr>
+
+        @endforeach
+
+        </tbody>
+
+    </table>
 
 </div>

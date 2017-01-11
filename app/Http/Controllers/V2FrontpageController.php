@@ -8,39 +8,84 @@ class V2FrontpageController extends Controller
 {
     public function index()
     {
+        /*
+        @section('head_description', trans('site.description.main'))
+        */
+
         $user = auth()->user();
 
-        $flights = Content::getLatestItems('flight', 8);
-        $forums = Content::getLatestItems('forum', $user ? 10 : 8);
+        $flights = Content::getLatestItems('flight', 9);
+        $forums = Content::getLatestItems('forum', 16, 'updated_at');
         $news = Content::getLatestItems('news', 6);
         $blogs = Content::getLatestItems('blog', 3);
-        $photos = Content::getLatestItems('photo', 6);
-        $travelmates = Content::getLatestItems('travelmate', 3);
+        $photos = Content::getLatestItems('photo', 9);
+        $travelmates = Content::getLatestItems('travelmate', 5);
 
-        return view('v2.layouts.frontpage')
+        return layout('frontpage')
 
-            ->with('header', region('Header', trans('frontpage.index.search.title')))
-
-            ->with('content', collect()
-
-                ->push(region('FrontpageFlight', $flights->take(3)))
-                ->pushWhen(! $user, region('FrontpageAbout'))
-                ->push(region('FrontpageForum', $forums))
-                ->push(region('FrontpageNews', $news))
+            ->with('promobar', component('PromoBar')
+                ->with('title', 'Osale Trip.ee kampaanias ja võida 2 lennupiletit Maltale')
+                ->with('route_title', 'Vaata lähemalt siit')
+                ->with('route', 'tasuta-lennupiletid-maltale')
+                ->render()
             )
 
-            ->with('bottom', collect()
-                ->push(region('FrontpageFlightBlog', $flights->slice(3), $blogs))
-                ->push(component('Block')
-                    ->is('white')
-                    ->is('uppercase')
-                    ->with('title', trans('frontpage.index.photo.title'))
-                    ->with('content', collect(region('Gallery', $photos)))
+            ->with('header', region('FrontpageHeader'))
+
+            ->with('top', collect()
+                ->push(region('FrontpageFlight', $flights->take(3)))
+                ->pushWhen(! $user, region('FrontpageAbout'))
+            )
+
+            ->with('content', collect()
+                ->merge($forums->take($forums->count() / 2)->map(function ($forum) {
+                    return region('ForumRow', $forum);
+                }))
+                ->push(component('Promo')->with('promo', 'body'))
+                ->merge($forums->slice($forums->count() / 2)->map(function ($forum) {
+                    return region('ForumRow', $forum);
+                }))
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('BlockTitle')
+                    ->with('title', trans('frontpage.index.forum.title'))
+                    ->with('route', route('v2.forum.index'))
                 )
-                ->push(region('TravelmateBottom', $travelmates))
+                ->push(component('Body')->with('body', trans('site.description.forum')))
+                ->merge(region('ForumLinks'))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->push(component('AffHotelscombined'))
+            )
+
+            ->with('bottom1', collect()
+                ->merge(region('FrontpageNews', $news))
+                ->push(component('BlockTitle')
+                    ->with('title', trans('frontpage.index.photo.title'))
+                )
+            )
+
+            ->with('bottom2', collect(region('Gallery', $photos)))
+
+            ->with('bottom3', collect()
+                ->push(region('FrontpageBottom', $flights->slice(3), $travelmates))
+                ->push(component('Block')
+                    ->with('title', trans('frontpage.index.blog.title'))
+                    ->with('route', trans('frontpage.index.blog.title'))
+                    ->with('content', collect()
+                        ->push(component('Grid3')
+                            ->with('items', $blogs->map(function ($blog) {
+                                return region('BlogCard', $blog);
+                            }))
+                        )
+                    )
+                )
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 }

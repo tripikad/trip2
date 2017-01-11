@@ -2,6 +2,8 @@
 
 return [
 
+    'index.about' => 'Trip.ee on reisihuviliste kogukond, keda ühendab reisipisik ning huvi kaugete maade ja kultuuride vastu.',
+
     'index.search.title' => 'Kuhu sa soovid minna?',
     'index.search.destination.title' => 'Sisesta sihtkoht',
     'index.search.submit.title' => 'Mine',
@@ -17,12 +19,15 @@ return [
     'index.forum.title' => 'Tripikad räägivad',
     'index.news.title' => 'Uudised',
     'index.photo.title' => 'Viimati lisatud pildid',
-    'index.blog.title' => 'Blogi',
+    'index.blog.title' => 'Reisiblogid',
     'index.offer.title' => 'Reisipakkumised',
     'index.travelletter.title' => 'Reisikirjad',
 
     'index.all.news' => 'Kõik uudised',
     'index.all.offers' => 'Vaata kõiki sooduspakkumisi',
+    'index.all.travelmate' => '',
+    'index.all.blog' => '',
+    'index.all.flight' => '',
 
     'index.about.title' => 'Loe täpsemalt, mis on Trip.ee',
     'index.about.register' => 'Liitu Trip.ee-ga',

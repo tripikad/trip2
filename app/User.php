@@ -2,13 +2,13 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Notifications\Notifiable as Notifiable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Carbon\Carbon;
-use Illuminate\Notifications\Notifiable as Notifiable;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {

@@ -2,9 +2,8 @@
 
 namespace App\Utils;
 
+use Markdown;
 use App\Image;
-
-// use Markdown;
 
 class BodyFormatter
 {
@@ -15,8 +14,22 @@ class BodyFormatter
         $this->body = $body;
     }
 
+    public function markdown()
+    {
+
+        // Replacing unordered lists 1) 2) 3) with 1. 2. 3. for Markdown
+
+        $this->body = preg_replace("\n/([0-9]+)\)/", '$1.', $this->body);
+
+        $this->body = Markdown::parse($this->body);
+
+        return $this;
+    }
+
     public function links()
     {
+        $this->body = str_replace(' www.', ' http://', $this->body);
+
         // Modified version of
         // http://stackoverflow.com/a/5289151
         // and http://stackoverflow.com/a/12590772
@@ -28,7 +41,7 @@ class BodyFormatter
         }
 
         if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
-            //       $this->body = $filteredBody;
+            $this->body = $filteredBody;
         }
 
         return $this;
@@ -53,33 +66,12 @@ class BodyFormatter
         return $this;
     }
 
-    public function youtube()
-    {
-        $pattern = "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i";
-
-        $this->body = preg_replace_callback($pattern, function ($matches) {
-            return component('Youtube')->with('id', $matches[2]);
-        },
-            $this->body
-        );
-
-        return $this;
-    }
-
-    public function markdown()
-    {
-        // $this->body = Markdown::convertToHtml($this->body);
-
-        return $this;
-    }
-
     public function format()
     {
         return $this
-            ->markdown()
             ->links()
+            ->markdown()
             ->images()
-            // ->youtube()
             ->body;
     }
 }

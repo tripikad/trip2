@@ -2,14 +2,19 @@
 
 return [
 
+    'header.oldtrip' => 'Old Trip.ee',
+
     'header.home' => 'Trip.ee',
     'header.news' => 'News',
     'header.flights' => 'Flights',
-    'header.travelmates' => 'Travel mates',
+    'header.travelmates' => 'Travelmates',
     'header.forum' => 'Forum',
     'header.photos' => 'Photos',
     'header.blogs' => 'Blogs',
     'header.offers' => 'Offers',
+    'header.my' => 'My Trip.ee',
+    'header.user' => 'My profile',
+    'header.edit' => 'Edit profile',
 
     'auth.register' => 'Register',
     'auth.login' => 'Login',

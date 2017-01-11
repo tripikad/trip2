@@ -7,6 +7,7 @@ return [
     'show.about.population' => 'Rahvaarv',
     'show.about.population.milion' => 'miljonit',
     'show.about.currency' => 'Valuuta',
+    'show.about.currencyCode' => 'Valuuta',
     'show.about.callingCode' => 'Suunakood',
 
     'show.good.offer' => 'Head pakkumised',

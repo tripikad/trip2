@@ -2,6 +2,8 @@
 
 return [
 
+    'count' => ':count comment|:count comments',
+
     'action.edit.title' => 'Edit',
     'action.status.0.title' => 'Publish',
     'action.status.1.title' => 'Unpublish',
@@ -12,7 +14,7 @@ return [
     'index.row.text' => ':user :created_at',
 
     'create.title' => 'Add comment',
-    'create.field.body.title' => 'Comment',
+    'create.field.body.title' => 'Add comment',
     'create.submit.title' => 'Add comment',
 
     'edit.title' => 'Edit comment',

@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Exception;
 use Cache;
+use Exception;
 
 class V2ContentVars
 {
@@ -49,36 +49,64 @@ class V2ContentVars
 
     public function updated_at()
     {
-        return format_date($this->content->created_at);
+        return format_date($this->content->updated_at);
     }
 
-    public function isNew($content)
+    public function commentCount()
     {
-        if (auth()->check()) {
-            $userId = auth()->id();
+        return count($this->content->comments);
+    }
 
-            $key = 'new_'.$content->id.'_'.$userId;
+    private function getUnreadCache()
+    {
+        if ($user = request()->user()) {
+            $key = 'new_'.$this->content->id.'_'.$user->id;
 
-                // If the post is unread by the user or there are new comments
-
-                if (Cache::has($key)) {
-                    $content->isNew = true;
-                }
-
-            if ($newId = Cache::get($key)) {
-                $content->NewCommentId = $newId;
-
-                    //New comment counter if needed
-                    /*
-                    $content->NewCommentCount = $content->comments->filter(function ($comment) use ($content) {
-                       return  $comment->id >= $content->NewCommentId;
-                   })->count();
-                   */
-            }
-
-            return $content;
+            return Cache::store('permanent')->get($key);
         }
 
-        return $content;
+        return false;
+    }
+
+    public function isNew()
+    {
+        $cache = $this->getUnreadCache();
+
+        if ($cache > 0) {
+            return false;
+        }
+        if ($cache == '0') {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function firstUnreadCommentId()
+    {
+        $cache = $this->getUnreadCache();
+
+        if ($cache > 0) {
+            return $cache;
+        }
+
+        return false;
+    }
+
+    public function unreadCommentCount()
+    {
+        if ($this->firstUnreadCommentId() > 0) {
+            return $this->content->comments->filter(function ($comment) {
+                return  $comment->id >= $this->firstUnreadCommentId();
+            })
+            ->count();
+        }
+
+        return false;
+    }
+
+    public function flagCount($flagType)
+    {
+        return $this->content->flags->where('flag_type', $flagType)->count();
     }
 }
