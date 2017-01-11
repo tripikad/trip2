@@ -51,23 +51,15 @@ class V2UserVars
 
     public function contentCount()
     {
-        $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
-
         return $this->user->contents()
             ->whereStatus(1)
-            ->whereIn('type', $types)
             ->count();
     }
 
     public function commentCount()
     {
-        $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
-
         return $this->user->comments()
             ->whereStatus(1)
-            ->whereHas('content', function ($query) use ($types) {
-                $query->whereIn('type', $types);
-            })
         ->count();
     }
 
