@@ -19,21 +19,21 @@ class Main
         if ($processedBody = preg_replace($urlPattern, '<a href="$1">$1</a>', $filteredBody)) {
             $filteredBody = $processedBody;
 
-            if (! strstr($filteredBody, 'href="http://') && ! strstr($filteredBody, 'href="https://') && ! strstr($filteredBody, 'href="//')) {
+            if (! strpos($filteredBody, 'href="http://') && ! strpos($filteredBody, 'href="https://') && ! strpos($filteredBody, 'href="//')) {
                 $filteredBody = str_replace('href="', 'href="//', $filteredBody);
-            } elseif (strstr($filteredBody, 'href="http://')) {
+            } elseif (strpos($filteredBody, 'href="http://')) {
                 $filteredBody = str_replace('">http://', '">', $filteredBody);
-            } elseif (strstr($filteredBody, 'href="https://')) {
+            } elseif (strpos($filteredBody, 'href="https://')) {
                 $filteredBody = str_replace('">https://', '">', $filteredBody);
-            } elseif (strstr($filteredBody, 'href="//')) {
+            } elseif (strpos($filteredBody, 'href="//')) {
                 $filteredBody = str_replace('">//', '">', $filteredBody);
             }
         }
 
         //add _blank if not trip.ee
-        if (! strstr($filteredBody, 'https://trip.ee') && ! strstr($filteredBody, 'https://www.trip.ee') &&
-            ! strstr($filteredBody, 'http://trip.ee') && ! strstr($filteredBody, 'http://www.trip.ee') &&
-            ! strstr($filteredBody, '//trip.ee') && ! strstr($filteredBody, '//www.trip.ee')) {
+        if (! strpos($filteredBody, 'https://trip.ee') && ! strpos($filteredBody, 'https://www.trip.ee') &&
+            ! strpos($filteredBody, 'http://trip.ee') && ! strpos($filteredBody, 'http://www.trip.ee') &&
+            ! strpos($filteredBody, '//trip.ee') && ! strpos($filteredBody, '//www.trip.ee')) {
             $filteredBody = str_replace('">', '" target="_blank">', $filteredBody);
         }
         $imagePattern = '/\[\[([0-9]+)\]\]/';
