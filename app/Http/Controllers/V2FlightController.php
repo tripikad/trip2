@@ -119,7 +119,6 @@ class V2FlightController extends Controller
                     ->is('large')
                     ->is('shadow')
                     ->with('title', $flight->vars()->title)
-                    //->with('route', route('v2.flight.index'))
                 )
                 ->push(component('Meta')
                     ->with('items', collect()
@@ -138,7 +137,6 @@ class V2FlightController extends Controller
             , $flight->getHeadImage(), 'high'))
 
             ->with('content', collect()
-                //->push(component('Title')->with('title', $flight->vars()->title))
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
                 ->merge($flight->comments->map(function ($comment) {
                     return region('Comment', $comment);

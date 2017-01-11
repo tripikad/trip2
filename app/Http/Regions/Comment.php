@@ -32,8 +32,8 @@ class Comment
                     )
                     ->push(component('MetaLink')
                         ->with('title', $comment->vars()->created_at)
-                        ->with('route', route('content.show', [
-                            $comment->content->type, $comment->content, '#comment-'.$comment->id,
+                        ->with('route', route("v2.forum.show", [
+                            $comment->content->slug, '#comment-'.$comment->id,
                         ]))
                     )
                     ->pushWhen($user && $user->hasRoleOrOwner('admin', $comment->user->id), component('MetaLink')
