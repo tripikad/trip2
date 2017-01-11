@@ -31,6 +31,11 @@ class V2UserVars
         return str_limit($this->user->name, 30);
     }
 
+    public function description()
+    {
+        return $this->user->description;
+    }
+
     public function rank()
     {
         return $this->user->rank * 90;

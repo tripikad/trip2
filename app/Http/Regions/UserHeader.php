@@ -75,6 +75,10 @@ class UserHeader
                 )
             )
             ->with('meta', collect()
+                ->pushWhen(
+                    $user->vars()->description,
+                    $user->vars()->description.'. '
+                )
                 ->push(trans("user.rank.$user->rank"))
                 ->pushWhen(
                     $user->hasRole('admin') || $user->hasRole('superuser'),
