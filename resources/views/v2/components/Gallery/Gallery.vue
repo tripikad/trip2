@@ -111,7 +111,7 @@ export default {
     },
 
     mounted() {
-        //this.currentImages = this.images
+        // this.currentImages = this.images
         //    ? chunk(JSON.parse(decodeURIComponent(this.images)), 3)
         //    : []
         var images = this.images ? JSON.parse(decodeURIComponent(this.images)) : []

@@ -43,7 +43,7 @@
 
         props: {
             isclasses: { default: '' },
-            title: { default: ''}
+            title: { default: '' }
         },
 
         data() {

@@ -47,14 +47,14 @@ export default {
             this.$http.get(this.route)
                 .then(function(res) {
                     this.currentValue = res.data
-                    this.currentFlagged = ! this.currentFlagged;
+                    this.currentFlagged = !this.currentFlagged
                 })
         }
     },
 
     mounted() {
         this.currentValue = this.value
-        this.currentFlagged = (this.flagged == 'true')
+        this.currentFlagged = (this.flagged === 'true')
     }
 }
 
