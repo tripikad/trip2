@@ -18,6 +18,16 @@ class Main
 
         if ($processedBody = preg_replace($urlPattern, '<a href="$1">$1</a>', $filteredBody)) {
             $filteredBody = $processedBody;
+
+            if (! strstr($filteredBody, 'href="http://') && ! strstr($filteredBody, 'href="https://') && ! strstr($filteredBody, 'href="//')) {
+                $filteredBody = str_replace('href="', 'href="//', $filteredBody);
+            } elseif (strstr($filteredBody, 'href="http://')) {
+                $filteredBody = str_replace('">http://', '">', $filteredBody);
+            } elseif (strstr($filteredBody, 'href="https://')) {
+                $filteredBody = str_replace('">https://', '">', $filteredBody);
+            } elseif (strstr($filteredBody, 'href="//')) {
+                $filteredBody = str_replace('">//', '">', $filteredBody);
+            }
         }
 
         //add _blank if not trip.ee
