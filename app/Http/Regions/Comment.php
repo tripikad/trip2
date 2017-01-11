@@ -33,7 +33,7 @@ class Comment
                     )
                     ->push(component('MetaLink')
                         ->with('title', $comment->vars()->created_at)
-                        ->with('route', route("v2.forum.show", [
+                        ->with('route', route('v2.forum.show', [
                             $comment->content->slug, '#comment-'.$comment->id,
                         ]))
                     )

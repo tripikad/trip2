@@ -133,8 +133,7 @@ class V2FlightController extends Controller
                                 ->with('route', route('v2.destination.show', [$destination]));
                         }))
                     )
-                )
-            , $flight->getHeadImage(), 'high'))
+                ), $flight->getHeadImage(), 'high'))
 
             ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
