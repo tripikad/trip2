@@ -31,12 +31,12 @@ googletag.cmd.push(function() {
     googletag.pubads().collapseEmptyDivs();
     googletag.enableServices();
     googletag.pubads().addEventListener('slotRenderEnded', function(e) {
-        if (document.getElementById(e.slot.o.o)) {
+        if (document.getElementById(e.slot.m.m)) {
             ++index;
             slot[index] = setTimeout(function(){
-                renderEnded(e.slot.o.o, e.size[0], e.size[1], index);
+                renderEnded(e.slot.m.m, e.size[0], e.size[1], index);
             }, 200);
-            return renderEnded(e.slot.o.o, e.size[0], e.size[1], index);
+            return renderEnded(e.slot.m.m, e.size[0], e.size[1], index);
         }
     });
 });
