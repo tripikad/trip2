@@ -4,11 +4,10 @@ namespace App\Http\Regions;
 
 class Header
 {
-    public function render($content = null)
-    {
-        $background = '/photos/header3.jpg';
-
+    public function render($content = [], $background = '/photos/header3.jpg', $is = '')
+    {   
         return component('Header')
+            ->is($is)
             ->with('background', $background)
             ->with('navbar', component('Navbar')
                 ->is('white')

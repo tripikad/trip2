@@ -15,3 +15,7 @@
 .Title--white .Title__title {
     color: $white;
 }
+
+.Title--shadow .Title__title {
+    text-shadow: $text-shadow;
+}
