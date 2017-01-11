@@ -31,10 +31,11 @@ class Main
         }
 
         //add _blank if not trip.ee
-        if ($processedBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $filteredBody)) {
-            $filteredBody = $processedBody;
+        if (! strstr($filteredBody, 'https://trip.ee') && ! strstr($filteredBody, 'https://www.trip.ee') &&
+            ! strstr($filteredBody, 'http://trip.ee') && ! strstr($filteredBody, 'http://www.trip.ee') &&
+            ! strstr($filteredBody, '//trip.ee') && ! strstr($filteredBody, '//www.trip.ee')) {
+            $filteredBody = str_replace('">', '" target="_blank">', $filteredBody);
         }
-
         $imagePattern = '/\[\[([0-9]+)\]\]/';
 
         if (preg_match_all($imagePattern, $filteredBody, $matches)) {
