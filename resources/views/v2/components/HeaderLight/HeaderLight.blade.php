@@ -20,15 +20,15 @@ $background = $background ?? ''
 
         <div class="HeaderLight__content">
                 
-                @foreach ($content as $content_item)
-                
-                <div @if (!$loop->last) class="margin-bottom-md" @endif>
+            @foreach ($content as $content_item)
+            
+            <div @if (!$loop->last) class="margin-bottom-md" @endif>
 
-                    {!! $content_item !!}
-                        
-                </div>
+                {!! $content_item !!}
+                    
+            </div>
 
-                @endforeach
+            @endforeach
 
         </div>
 

@@ -8,8 +8,8 @@ class DestinationHeader
     {
         $parents = $destination->getAncestors();
 
-        return component('DestinationHeader')
-            ->with('background', component('MapBackground'))
+        return component('HeaderLight')
+            ->with('background', component('BackgroundMap')->is('yellow'))
             ->with('navbar', component('Navbar')
                 ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))
@@ -21,30 +21,39 @@ class DestinationHeader
                 ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
-            ->with('parents', $parents
-                ->map(function ($parent) {
-                    return component('MetaLink')
-                        ->is('large')
-                        ->is('white')
-                        ->with('title', $parent->vars()->name.' › ')
-                        ->with('route', route('v2.destination.show', [$parent]));
-                })
-                ->render()
-                ->implode('')
-            )
-            ->with('title', $destination->name)
-            ->with('children', component('Meta')
-                ->with('items', $destination
-                    ->getImmediateDescendants()
-                    ->map(function ($destination) {
-                        return component('Tag')
-                            ->is('white')
+            ->with('content', collect()
+                ->push(component('Meta')
+                    ->with('items', $parents->map(function ($parent) {
+                        return component('MetaLink')
                             ->is('large')
-                            ->with('title', $destination->name)
-                            ->with('route', route('v2.destination.show', [$destination]));
+                            ->is('white')
+                            ->with('title', $parent->vars()->name.' › ')
+                            ->with('route', route('v2.destination.show', [$parent]));
                     }))
                 )
-            ->with('description', $destination->vars()->description)
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', $destination->name)
+                )
+                ->push(component('Body')
+                    ->is('white')
+                    ->is('responsive')
+                    ->with('body', $destination->vars()->description)
+                )
+                ->push(component('Meta')
+                    ->is('large')
+                    ->with('items', $destination
+                        ->getImmediateDescendants()
+                        ->map(function ($destination) {
+                            return component('Tag')
+                                ->is('white')
+                                ->is('large')
+                                ->with('title', $destination->name)
+                                ->with('route', route('v2.destination.show', [$destination]));
+                    }))
+                )
+            )
             ->with('facts1', component('DestinationFacts')
                 ->with('facts', collect()
                     ->putWhen(

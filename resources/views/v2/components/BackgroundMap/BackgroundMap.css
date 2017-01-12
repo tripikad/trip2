@@ -14,3 +14,11 @@
     .BackgroundMap__image {
         opacity: $opacity-xxs;
     }
+
+.BackgroundMap--yellow {
+    background: $yellow;
+}
+
+.BackgroundMap--cyan {
+    background: $cyan-dark;
+}
