@@ -20,7 +20,7 @@ class V2StyleguideController extends Controller
 
             ->with('content', collect()
 
-                ->merge(Destination::all()->map(function($destination) {
+                ->merge(Destination::all()->map(function ($destination) {
                     return region('DestinationBar', $destination);
                 }))
 
