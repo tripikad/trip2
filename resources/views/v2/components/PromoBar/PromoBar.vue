@@ -20,7 +20,7 @@
 
         <div
             class="PromoBar__closeIcon"
-            @click="open = false"
+            @click="close"
         >
 
             <component
@@ -54,6 +54,19 @@
         data() {
             return {
                 open: true
+            }
+        },
+
+        methods: {
+            close() {
+                this.open = false
+                this.$cookie.set('malta-stip-closed', true, {expires: '3M'})
+            }
+        },
+
+        mounted() {
+            if (this.$cookie.get('malta-stip-closed')) {
+                this.open = false
             }
         }
 

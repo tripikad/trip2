@@ -161,6 +161,13 @@ Route::get('v2/destination/{id}', [
     'as' => 'v2.destination.show',
 ]);
 
+// Errors
+
+Route::get('v2/error/{code}', [
+    'uses' => 'V2ErrorController@show',
+    'as' => 'v2.error.show',
+]);
+
 // Utils
 
 Route::get('v2/utils/alert', [

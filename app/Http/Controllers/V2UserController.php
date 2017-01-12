@@ -12,6 +12,7 @@ class V2UserController extends Controller
         $types = ['forum', 'travelmate', 'buysell'];
 
         $user = User::findOrFail($id);
+        $loggedUser = request()->user();
 
         $photos = $user
             ->contents()
@@ -35,7 +36,30 @@ class V2UserController extends Controller
 
             ->with('header', region('UserHeader', $user))
 
-            ->with('top', $photos->count() ? region('Gallery', $photos) : '')
+            ->with('top',
+                $photos->count() || ($loggedUser && $user->id == $loggedUser->id)
+                ? region('Gallery', $photos, collect()
+                    ->pushWhen(
+                        $loggedUser && $user->id == $loggedUser->id,
+                        component('Button')
+                            ->is('cyan')
+                            ->with('title', trans('content.photo.create.title'))
+                            ->with('route', route('content.create', ['photo']))
+                            ->render()
+                    )
+                )
+                : ''
+            )
+
+            /*
+                $loggedUser && $loggedUser->hasRole('regular')
+                ? [component('Button')
+                    ->is($is)
+                    ->with('title', trans('content.photo.create.title'))
+                    ->with('route', route('content.create', ['photo']))
+                    ->render()]
+                : ''
+            */
 
             ->with('content', $comments->map(function ($comment) {
                 return component('UserCommentRow')

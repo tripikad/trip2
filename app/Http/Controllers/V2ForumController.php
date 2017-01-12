@@ -159,9 +159,9 @@ class V2ForumController extends Controller
             ->with('content', collect()
                 ->push(region('ForumPost', $forum))
                 ->merge($forum->comments->map(function ($comment) use ($firstUnreadCommentId) {
-                    return region('Comment', $comment, $firstUnreadCommentId);
+                    return region('Comment', $comment, $firstUnreadCommentId, 'inset');
                 }))
-                ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum))
+                ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum, 'inset'))
             )
 
             ->with('sidebar', collect()

@@ -272,7 +272,7 @@ return [
     // Photo
 
     'photo.index.title' => 'Reisipildid',
-    'photo.create.title' => 'Lisa pilt',
+    'photo.create.title' => 'Lisa uus reisipilt',
 
     'photo.edit.field.file.help' => '',
 

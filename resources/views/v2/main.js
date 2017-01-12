@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
+import VueCookie from 'vue-cookie'
 
 import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
@@ -21,6 +22,8 @@ const globalProps = JSON.parse(decodeURIComponent(
 
 Vue.use(VueResource)
 Vue.http.headers.common['X-CSRF-TOKEN'] = globalProps.token
+
+Vue.use(VueCookie);
 
 var events = new Vue()
 Vue.prototype.$events = events

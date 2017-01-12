@@ -4,14 +4,14 @@ namespace App\Http\Regions;
 
 class Comment
 {
-    public function render($comment, $firstUnreadCommentId = false)
+    public function render($comment, $firstUnreadCommentId = false, $is = '')
     {
         $user = auth()->user();
 
         return component('Comment')
             ->when($comment->status || ($user && $user->hasRole('admin')))
             ->is($comment->status ?: 'unpublished')
-            ->is('inset')
+            ->is($is)
             ->with('id', $comment->id)
             ->with('user', component('UserImage')
                 ->with('route', route('v2.user.show', [$comment->user]))

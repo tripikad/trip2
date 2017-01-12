@@ -12,7 +12,7 @@ class V2FrontpageController extends Controller
         @section('head_description', trans('site.description.main'))
         */
 
-        $user = auth()->user();
+        $loggedUser = auth()->user();
 
         $flights = Content::getLatestItems('flight', 9);
         $forums = Content::getLatestItems('forum', 16, 'updated_at');
@@ -34,7 +34,7 @@ class V2FrontpageController extends Controller
 
             ->with('top', collect()
                 ->push(region('FrontpageFlight', $flights->take(3)))
-                ->pushWhen(! $user, region('FrontpageAbout'))
+                ->pushWhen(! $loggedUser, region('FrontpageAbout'))
             )
 
             ->with('content', collect()
@@ -66,7 +66,14 @@ class V2FrontpageController extends Controller
                 )
             )
 
-            ->with('bottom2', collect(region('Gallery', $photos)))
+            ->with('bottom2', region('Gallery', $photos, collect()
+                ->pushWhen($loggedUser && $loggedUser->hasRole('regular'),
+                    component('Button')
+                        ->with('title', trans('content.photo.create.title'))
+                        ->with('route', route('content.create', ['photo']))
+                        ->render()
+                )
+            ))
 
             ->with('bottom3', collect()
                 ->push(region('FrontpageBottom', $flights->slice(3), $travelmates))

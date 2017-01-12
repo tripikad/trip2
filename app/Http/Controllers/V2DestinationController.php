@@ -22,11 +22,20 @@ class V2DestinationController extends Controller
         $travelmates = Content::getLatestPagedItems('travelmate', 6, $destination->id);
         $news = Content::getLatestPagedItems('news', 2, $destination->id);
 
+        $loggedUser = request()->user();
+
         return layout('2col')
 
             ->with('header', region('DestinationHeader', $destination))
 
-            ->with('top', $photos->count() ? region('Gallery', $photos) : '')
+            ->with('top', region('Gallery', $photos, collect()
+                ->pushWhen($loggedUser && $loggedUser->hasRole('regular'),
+                    component('Button')
+                        ->with('title', trans('content.photo.create.title'))
+                        ->with('route', route('content.create', ['photo']))
+                        ->render()
+                )
+            ))
 
             ->with('content', collect()
                 ->push(component('Block')

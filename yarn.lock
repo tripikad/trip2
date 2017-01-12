@@ -5113,6 +5113,10 @@ timers-browserify@^2.0.2:
   dependencies:
     setimmediate "^1.0.4"
 
+tiny-cookie@^1.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/tiny-cookie/-/tiny-cookie-1.0.1.tgz#753786079c642a3c3d0b2accad600f8de119ac2a"
+
 to-arraybuffer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"
@@ -5366,6 +5370,12 @@ vue-clickaway@^2.1.0:
   resolved "https://registry.yarnpkg.com/vue-clickaway/-/vue-clickaway-2.1.0.tgz#392de764751f31cd20787e8fb3a6e319825f8d4f"
   dependencies:
     loose-envify "^1.2.0"
+
+vue-cookie@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/vue-cookie/-/vue-cookie-1.1.3.tgz#580b4e9dcf56c0234b5eeec5d52aed3bf6080c97"
+  dependencies:
+    tiny-cookie "^1.0"
 
 vue-focus@^2.1.0:
   version "2.1.0"
