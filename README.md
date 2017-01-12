@@ -1,6 +1,21 @@
 ### Installation
 
-It's recommended to use Laravel Valet for development.
+It's recommended to use Laravel Valet https://laravel.com/docs/master/valet for development.
+
+#### Yarn and npm
+
+It's recommended to use Yarn as frontend package manager
+
+```
+brew install yarn
+yarn
+```
+
+If you still need to use `npm`, run:
+
+```
+npm install --no-optional
+```
 
 #### Redis
 
