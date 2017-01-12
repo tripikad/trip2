@@ -53,46 +53,48 @@ class DestinationHeader
                                 ->with('route', route('v2.destination.show', [$destination]));
                     }))
                 )
-            )
-            ->with('facts1', component('DestinationFacts')
-                ->with('facts', collect()
-                    ->putWhen(
-                        $destination->vars()->isCountry || $destination->vars()->isPlace,
-                        trans('destination.show.about.callingCode'),
-                        $destination->vars()->callingCode()
-                    )
-                    ->putWhen(
-                        $destination->vars()->isCountry || $destination->vars()->isPlace,
-                        trans('destination.show.about.currencyCode'),
-                        $destination->vars()->currencyCode()
-                    )
-                )
-            )
-            ->with('facts2', component('DestinationFacts')
-                ->with('facts', collect()
-                    ->putWhen(
-                        $destination->vars()->isCountry,
-                        trans('destination.show.about.area'),
-                        $destination->vars()->area()
-                    )
-                    ->putWhen(
-                        $destination->vars()->isCountry,
-                        trans('destination.show.about.population'),
-                        $destination->vars()->population()
+                ->push(component('DestinationFacts')
+                    ->with('facts', collect()
+                        ->putWhen(
+                            $destination->vars()->isCountry || $destination->vars()->isPlace,
+                            trans('destination.show.about.callingCode'),
+                            $destination->vars()->callingCode()
+                        )
+                        ->putWhen(
+                            $destination->vars()->isCountry || $destination->vars()->isPlace,
+                            trans('destination.show.about.currencyCode'),
+                            $destination->vars()->currencyCode()
+                        )
                     )
                 )
-            )
-            ->with('stats', collect()
+                ->push(component('DestinationFacts')
+                    ->with('facts', collect()
+                        ->putWhen(
+                            $destination->vars()->isCountry,
+                            trans('destination.show.about.area'),
+                            $destination->vars()->area()
+                        )
+                        ->putWhen(
+                            $destination->vars()->isCountry,
+                            trans('destination.show.about.population'),
+                            $destination->vars()->population()
+                        )
+                    )
+                )
+                ->push(component('BlockHorizontal')->with('content', collect()
                     ->push(component('StatCard')
                         ->with('icon', 'icon-pin')
-                        ->with('title', $destination->vars()->usersWantsToGo()->count())
+                        ->with('title', $destination
+                            ->vars()->usersWantsToGo()->count()
+                        )
                     )
                     ->push(component('StatCard')
-                        ->with('title', $destination->vars()->usersHaveBeen()->count())
                         ->with('icon', 'icon-star')
+                        ->with('title', $destination
+                            ->vars()->usersHaveBeen()->count()
+                        )
                     )
-                    ->render()
-                    ->implode('')
+                ))
             );
     }
 }
