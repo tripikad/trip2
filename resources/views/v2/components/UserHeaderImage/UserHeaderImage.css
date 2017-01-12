@@ -1,0 +1,14 @@
+@import "variables";
+
+.UserHeaderImage {
+    display: flex;
+    align-items: center;
+}
+
+    .UserHeaderImage__user {
+        margin-right: $margin-md;
+    }
+
+    .UserHeaderImage__actions {
+        margin-top: $margin-sm;
+    }
