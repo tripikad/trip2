@@ -15,7 +15,7 @@ class V2InternalController extends Controller
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
-                    ->with('title', trans("content.internal.index.title"))
+                    ->with('title', trans('content.internal.index.title'))
                 )
             ))
 
@@ -55,7 +55,7 @@ class V2InternalController extends Controller
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
-                    ->with('title', trans("content.internal.index.title"))
+                    ->with('title', trans('content.internal.index.title'))
                 )
             ))
 
