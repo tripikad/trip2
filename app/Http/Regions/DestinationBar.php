@@ -9,12 +9,12 @@ class DestinationBar
         $parentLength = mb_strlen($destination
             ->getAncestors()
             ->onlyLast(2)
-            ->map(function($parent) {
+            ->map(function ($parent) {
                 return $parent->vars()->name;
             })
             ->implode('')
         );
-        
+
         return component('DestinationBar')
             ->is($is)
             ->with('title', $destination->vars()->shortName)
@@ -25,6 +25,5 @@ class DestinationBar
                 $short = true
             )
         );
-    
     }
 }
