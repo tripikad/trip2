@@ -7,6 +7,7 @@ class DestinationHeader
     public function render($destination)
     {
         $parents = $destination->getAncestors();
+        $childrens = $destination->getImmediateDescendants();
 
         return component('HeaderLight')
             ->with('background', component('BackgroundMap')->is('yellow'))
@@ -41,60 +42,18 @@ class DestinationHeader
                     ->is('responsive')
                     ->with('body', $destination->vars()->description)
                 )
-                ->push(component('Meta')
+                ->pushWhen($childrens->count(), component('Meta')
                     ->is('large')
-                    ->with('items', $destination
-                        ->getImmediateDescendants()
-                        ->map(function ($destination) {
-                            return component('Tag')
-                                ->is('white')
-                                ->is('large')
-                                ->with('title', $destination->name)
-                                ->with('route', route('v2.destination.show', [$destination]));
+                    ->with('items', $childrens->map(function ($children) {
+                        return component('Tag')
+                            ->is('white')
+                            ->is('large')
+                            ->with('title', $children->name)
+                            ->with('route', route('v2.destination.show', [$children]));
                     }))
                 )
-                ->push(component('DestinationFacts')
-                    ->with('facts', collect()
-                        ->putWhen(
-                            $destination->vars()->isCountry || $destination->vars()->isPlace,
-                            trans('destination.show.about.callingCode'),
-                            $destination->vars()->callingCode()
-                        )
-                        ->putWhen(
-                            $destination->vars()->isCountry || $destination->vars()->isPlace,
-                            trans('destination.show.about.currencyCode'),
-                            $destination->vars()->currencyCode()
-                        )
-                    )
-                )
-                ->push(component('DestinationFacts')
-                    ->with('facts', collect()
-                        ->putWhen(
-                            $destination->vars()->isCountry,
-                            trans('destination.show.about.area'),
-                            $destination->vars()->area()
-                        )
-                        ->putWhen(
-                            $destination->vars()->isCountry,
-                            trans('destination.show.about.population'),
-                            $destination->vars()->population()
-                        )
-                    )
-                )
-                ->push(component('BlockHorizontal')->with('content', collect()
-                    ->push(component('StatCard')
-                        ->with('icon', 'icon-pin')
-                        ->with('title', $destination
-                            ->vars()->usersWantsToGo()->count()
-                        )
-                    )
-                    ->push(component('StatCard')
-                        ->with('icon', 'icon-star')
-                        ->with('title', $destination
-                            ->vars()->usersHaveBeen()->count()
-                        )
-                    )
-                ))
+                ->push(region('DestinationFacts', $destination))
+                ->push(region('DestinationStat', $destination))
             );
     }
 }
