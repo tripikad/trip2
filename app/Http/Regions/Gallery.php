@@ -4,19 +4,12 @@ namespace App\Http\Regions;
 
 class Gallery
 {
-    public function render($images)
+    public function render($images, $button = '')
     {
         $loggedUser = request()->user();
 
         return component('Gallery')
-            ->with('button',
-                $loggedUser && $loggedUser->hasRole('regular')
-                ? [component('Button')
-                    ->with('title', trans('content.photo.create.title'))
-                    ->with('route', route('content.create', ['photo']))
-                    ->render()]
-                : ''
-            )
+            ->with('button', $button)
             ->with('images', $images->map(function ($image) {
                 return collect()
                     ->put('id', $image->id)
