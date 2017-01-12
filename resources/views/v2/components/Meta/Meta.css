@@ -11,3 +11,6 @@
         margin-right: $margin-xs;
     }
 
+.Meta--large {
+    line-height: $line-height-xl;
+}
