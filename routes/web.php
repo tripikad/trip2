@@ -161,7 +161,6 @@ Route::get('v2/destination/{id}', [
     'as' => 'v2.destination.show',
 ]);
 
-
 // Errors
 
 Route::get('v2/error/{code}', [
