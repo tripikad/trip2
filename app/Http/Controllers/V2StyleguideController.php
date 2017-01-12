@@ -6,7 +6,6 @@ use Request;
 use Response;
 use App\Image;
 use App\Content;
-use App\Destination;
 
 class V2StyleguideController extends Controller
 {
