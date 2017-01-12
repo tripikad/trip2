@@ -23,7 +23,7 @@ class V2DestinationController extends Controller
         $news = Content::getLatestPagedItems('news', 2, $destination->id);
 
         $loggedUser = request()->user();
-        
+
         return layout('2col')
 
             ->with('header', region('DestinationHeader', $destination))
