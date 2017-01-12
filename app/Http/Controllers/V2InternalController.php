@@ -13,9 +13,10 @@ class V2InternalController extends Controller
 
         return layout('2col')
 
-            ->with('header', region(
-                'HeaderLight',
-                trans('content.internal.index.title')
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans("content.internal.index.title"))
+                )
             ))
 
             ->with('content', collect()
@@ -52,9 +53,10 @@ class V2InternalController extends Controller
 
         return layout('2col')
 
-            ->with('header', region(
-                'HeaderLight',
-                trans('content.internal.index.title')
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans("content.internal.index.title"))
+                )
             ))
 
             ->with('content', collect()

@@ -12,7 +12,7 @@ return [
 
     '503.title' => 'Teeme trip.ee veelgi paremaks!',
     '503.body' => 'Hetkel toimub uuenduste ja paranduste üleslaadimine.<br>
-    Proovi mõne aja pärast uuesti.',
+    Proovi mõne minuti pärast uuesti.',
 
     '401.ajax.title' => 'Pole piisavalt õiguseid',
 
