@@ -6,24 +6,34 @@ use Auth;
 
 class V2ErrorController extends Controller
 {
-
     public function show($code)
     {
-
         $userIsLogged = Auth::check();
 
         $title = '';
         $body = '';
 
-        if ($code != 401) { $title = "error.$code.title"; }
-        if ($code == 401 && !$userIsLogged) { $title = "error.$code.title.unlogged"; }
-        if ($code == 401 && $userIsLogged) { $title = "error.$code.title.logged"; }
+        if ($code != 401) {
+            $title = "error.$code.title";
+        }
+        if ($code == 401 && ! $userIsLogged) {
+            $title = "error.$code.title.unlogged";
+        }
+        if ($code == 401 && $userIsLogged) {
+            $title = "error.$code.title.logged";
+        }
 
-        if ($code != 401) { $body = "error.$code.body"; }
-        if ($code == 401 && !$userIsLogged) { $body = "error.$code.body.unlogged"; }
-        if ($code == 401 && $userIsLogged) { $body = "error.$code.body.logged"; }
+        if ($code != 401) {
+            $body = "error.$code.body";
+        }
+        if ($code == 401 && ! $userIsLogged) {
+            $body = "error.$code.body.unlogged";
+        }
+        if ($code == 401 && $userIsLogged) {
+            $body = "error.$code.body.logged";
+        }
 
-        $color = ($code != 503) ? 'red' : ''; 
+        $color = ($code != 503) ? 'red' : '';
 
         return layout('1col')
 
