@@ -36,7 +36,7 @@
         @yield('header', view('component.header'))
         @yield('content')
         @yield('footer', view('component.footer'))
-        <script type="text/javascript" src="/js/main.js?v=1.2"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
         @yield('scripts')
         {!! Analytics::render() !!}
         <div id="fb-root"></div>
