@@ -59,6 +59,7 @@ class V2InternalController extends Controller
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->with('title', trans('content.internal.index.title'))
+                    ->with('route', route('v2.internal.index'))
                 )
             ))
 
