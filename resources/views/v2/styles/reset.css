@@ -8,18 +8,3 @@
   box-sizing: border-box;
   list-style: none;
 }
-
-/*
-*[class^="row"] {
-    border: 1px dotted black;
-    padding: 3px;
-}
-*[class^="col"] {
-    border: 1px dotted red;
-    padding: 3px;
-}
-*[class^="col"] > * {
-    border: 1px dotted blue;
-    padding: 3px;
-}
-*/

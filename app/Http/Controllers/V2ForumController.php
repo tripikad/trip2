@@ -42,7 +42,7 @@ class V2ForumController extends Controller
         return layout('2col')
 
             ->with('header', region(
-                'HeaderLight',
+                'ForumHeader',
                 trans("content.$forumType.index.title"),
                 region(
                         'FilterHorizontal',
@@ -91,7 +91,7 @@ class V2ForumController extends Controller
         return layout('2col')
 
             ->with('header', region(
-                'HeaderLight',
+                'ForumHeader',
                 trans('follow.index.title'),
                 '',
                 component('BlockHorizontal')->with('content', region('ForumLinks'))

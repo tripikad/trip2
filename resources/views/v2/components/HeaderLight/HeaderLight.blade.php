@@ -4,6 +4,7 @@ $map = $map ?? '';
 $header = $header ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
+$meta2 = $meta2 ?? '';
 $background = $background ?? '';
 
 @endphp

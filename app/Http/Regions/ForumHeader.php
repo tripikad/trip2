@@ -2,12 +2,12 @@
 
 namespace App\Http\Regions;
 
-class HeaderLight
+class ForumHeader
 {
     public function render($title = '', $meta = '', $meta2 = '')
     {
         return component('HeaderLight')
-            ->with('background', component('MapBackground'))
+            ->with('background', component('BackgroundMap'))
             ->with('title', $title)
             ->with('meta', $meta)
             ->with('meta2', $meta2)
