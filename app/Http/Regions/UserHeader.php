@@ -85,6 +85,5 @@ class UserHeader
                     $this->prepareActionsForUser($user, $loggedUser)
                 ))
             );
-
     }
 }

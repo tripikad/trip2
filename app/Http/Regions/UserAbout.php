@@ -4,10 +4,8 @@ namespace App\Http\Regions;
 
 class UserAbout
 {
-
     public function render($user)
     {
-
         return component('Body')
             ->is('cyan')
             ->is('responsive')
@@ -28,7 +26,5 @@ class UserAbout
                 )
                 ->implode('')
         );
-
     }
-
 }

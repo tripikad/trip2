@@ -4,10 +4,8 @@ namespace App\Http\Regions;
 
 class UserStats
 {
-
     public function render($user, $loggedUser)
     {
-
         return component('BlockHorizontal')
             ->with('content', collect()
                 ->push(component('StatCard')
@@ -48,5 +46,4 @@ class UserStats
                 )
             );
     }
-
 }

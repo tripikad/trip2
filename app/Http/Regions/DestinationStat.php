@@ -4,10 +4,8 @@ namespace App\Http\Regions;
 
 class DestinationStat
 {
-
     public function render($destination)
     {
-
         return component('BlockHorizontal')->with('content', collect()
             ->push(component('StatCard')
                 ->with('icon', 'icon-pin')
@@ -22,7 +20,5 @@ class DestinationStat
                 )
             )
         );
-
     }
-
 }
