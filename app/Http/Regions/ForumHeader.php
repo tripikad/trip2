@@ -4,13 +4,11 @@ namespace App\Http\Regions;
 
 class ForumHeader
 {
-    public function render($title = '', $meta = '', $meta2 = '')
+    public function render($content = [])
     {
         return component('HeaderLight')
             ->with('background', component('BackgroundMap'))
-            ->with('title', $title)
-            ->with('meta', $meta)
-            ->with('meta2', $meta2)
+            ->with('content', $content)
             ->with('navbar', component('Navbar')
                 ->with('search', component('NavbarSearch'))
                 ->with('logo', component('Icon')

@@ -4,10 +4,10 @@ namespace App\Http\Regions;
 
 class StaticHeader
 {
-    public function render($title = '')
+    public function render($content = [])
     {
         return component('HeaderLight')
-            ->with('title', $title)
+            ->with('content', $content)
             ->with('navbar', component('Navbar')
                 ->with('search', component('NavbarSearch'))
                 ->with('logo', component('Icon')

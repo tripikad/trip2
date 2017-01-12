@@ -41,19 +41,22 @@ class V2ForumController extends Controller
 
         return layout('2col')
 
-            ->with('header', region(
-                'ForumHeader',
-                trans("content.$forumType.index.title"),
-                region(
-                        'FilterHorizontal',
-                        $destinations,
-                        $topics,
-                        $currentDestination,
-                        $currentTopic,
-                        $forums->currentPage(),
-                        'v2.forum.index'
-                ),
-                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans("content.$forumType.index.title"))
+                )
+                ->push(region(
+                    'FilterHorizontal',
+                    $destinations,
+                    $topics,
+                    $currentDestination,
+                    $currentTopic,
+                    $forums->currentPage(),
+                    'v2.forum.index'
+                ))
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
             ))
 
             ->with('content', collect()
@@ -90,11 +93,13 @@ class V2ForumController extends Controller
 
         return layout('2col')
 
-            ->with('header', region(
-                'ForumHeader',
-                trans('follow.index.title'),
-                '',
-                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans('follow.index.title'))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
             ))
 
             ->with('content', collect()
@@ -142,10 +147,13 @@ class V2ForumController extends Controller
 
         return layout('2col')
 
-            ->with('header', region(
-                'HeaderLight',
-                trans("content.$forum->type.index.title"),
-                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans("content.$forum->type.index.title"))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
             ))
 
             ->with('content', collect()
