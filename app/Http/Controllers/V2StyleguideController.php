@@ -20,10 +20,6 @@ class V2StyleguideController extends Controller
 
             ->with('content', collect()
 
-                ->merge(Destination::all()->map(function($destination) {
-                    return region('DestinationBar', $destination);
-                }))
-
                 ->push(component('Title')
                     ->with('title', 'Uue tripi eelvaade')
                 )
