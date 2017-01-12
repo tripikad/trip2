@@ -23,15 +23,7 @@ class DestinationHeader
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
             ->with('content', collect()
-                ->push(component('Meta')
-                    ->with('items', $parents->map(function ($parent) {
-                        return component('MetaLink')
-                            ->is('large')
-                            ->is('white')
-                            ->with('title', $parent->vars()->name.' › ')
-                            ->with('route', route('v2.destination.show', [$parent]));
-                    }))
-                )
+                ->push(region('DestinationParents', $parents))
                 ->push(component('Title')
                     ->is('white')
                     ->is('large')

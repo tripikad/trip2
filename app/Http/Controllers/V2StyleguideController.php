@@ -6,6 +6,7 @@ use Request;
 use Response;
 use App\Image;
 use App\Content;
+use App\Destination;
 
 class V2StyleguideController extends Controller
 {
@@ -18,6 +19,10 @@ class V2StyleguideController extends Controller
         return layout('1col')
 
             ->with('content', collect()
+
+                ->merge(Destination::all()->map(function($destination) {
+                    return region('DestinationBar', $destination);
+                }))
 
                 ->push(component('Title')
                     ->with('title', 'Uue tripi eelvaade')
