@@ -16,7 +16,6 @@
 
     .FrontpageHeader__search {
         margin-bottom: $margin-lg;
-        margin-bottom: $margin-md ?if $mobile;
-        width: 55%;
+        width: 70%;
         width: 100% ?if $mobile;
     }
