@@ -22,25 +22,25 @@ class Main
             if (! strpos($filteredBody, 'href="http://') && ! strpos($filteredBody, 'href="https://') && ! strpos($filteredBody, 'href="//')) {
                 $filteredBody = str_replace('href="', 'href="http://', $filteredBody);
             }
-            
+
             if (strpos($filteredBody, 'href="http://')) {
                 $filteredBody = str_replace('">http://', '">', $filteredBody);
             }
-            
+
             if (strpos($filteredBody, 'href="https://')) {
                 $filteredBody = str_replace('">https://', '">', $filteredBody);
             }
-            
+
             if (strpos($filteredBody, 'href="//')) {
                 $filteredBody = str_replace('">//', '">', $filteredBody);
             }
         }
-        
+
         //add _blank if not trip.ee
         if ($processedBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $filteredBody)) {
             $filteredBody = $processedBody;
         }
-        
+
         $imagePattern = '/\[\[([0-9]+)\]\]/';
 
         if (preg_match_all($imagePattern, $filteredBody, $matches)) {
