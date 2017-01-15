@@ -13,6 +13,8 @@ import IconLoader from './components/IconLoader/IconLoader.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 import NavbarSearch from './components/NavbarSearch/NavbarSearch.vue'
+import PhotoCard from './components/PhotoCard/PhotoCard.vue'
+import PhotoFullscreen from './components/PhotoFullscreen/PhotoFullscreen.vue'
 import PromoBar from './components/PromoBar/PromoBar.vue'
 import UserImage from './components/UserImage/UserImage.vue'
 
@@ -43,8 +45,10 @@ new Vue({
         NavbarDesktop,
         NavbarMobile,
         NavbarSearch,
+        PhotoCard,
+        PhotoFullscreen,
         PromoBar,
-        UserImage
+        UserImage,
     },
 
     mounted() {

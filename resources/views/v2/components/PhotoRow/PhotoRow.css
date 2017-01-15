@@ -1,0 +1,9 @@
+@import "variables";
+
+.PhotoRow {
+    display: flex;
+}
+
+    .PhotoRow__photo {
+        width: 10%;
+    }

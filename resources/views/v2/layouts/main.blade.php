@@ -27,6 +27,7 @@
             @yield('header')
             @yield('content')
             @yield('footer')
+            <photo-fullscreen></photo-fullscreen>
         </div>
         <script src="/v2/js/main.js"></script>
         @include('v2.utils.promo')

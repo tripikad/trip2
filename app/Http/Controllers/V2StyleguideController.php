@@ -14,11 +14,15 @@ class V2StyleguideController extends Controller
         session()->keep('info');
 
         $user = auth()->user();
+        
+        $photos = Content::getLatestItems('photo', 4);
 
         return layout('1col')
 
             ->with('content', collect()
 
+                ->push(region('PhotoRow', $photos))
+                
                 ->push(component('Title')
                     ->with('title', 'Uue Trip.ee eelvaade')
                 )

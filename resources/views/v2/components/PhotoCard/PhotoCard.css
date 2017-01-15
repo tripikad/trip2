@@ -1,0 +1,9 @@
+@import "variables";
+
+.PhotoCard {
+
+}
+
+    .PhotoCard__photo img {
+        width: 100%;
+    }
