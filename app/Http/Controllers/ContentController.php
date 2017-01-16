@@ -526,11 +526,18 @@ class ContentController extends Controller
             $content->status = $status;
             $content->save();
 
+            /*
             return redirect()
                 ->route('content.show', [$type, $content])
                 ->with('info', trans("content.action.status.$status.info", [
                     'title' => $content->title,
                 ]));
+            */
+
+            return back()->with('info', trans("content.action.status.$status.info", [
+                'title' => $content->title,
+            ]));
+            
         }
 
         return back();

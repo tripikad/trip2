@@ -145,11 +145,18 @@ class CommentController extends Controller
             $comment->status = $status;
             $comment->save(['touch' => false]);
 
+            /*
             return redirect()
                 ->route($comment->content->type.'.show', [
                     $comment->content->slug,
                     '#comment-'.$comment->id,
                 ])
+                ->with('info', trans("comment.action.status.$status.info", [
+                    'title' => $comment->title,
+                ]));
+            */
+
+            backToAnchor('#comment-'.$comment->id)
                 ->with('info', trans("comment.action.status.$status.info", [
                     'title' => $comment->title,
                 ]));
