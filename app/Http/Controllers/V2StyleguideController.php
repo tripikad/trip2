@@ -15,7 +15,7 @@ class V2StyleguideController extends Controller
 
         $user = auth()->user();
 
-        $photos = Content::getLatestItems('photo', 3)->withoutFirst();
+        $photos = Content::getLatestItems('photo', 9)->withoutFirst();
 
         return layout('1col')
 
@@ -36,6 +36,7 @@ class V2StyleguideController extends Controller
                 ->push(region('PhotoRow', $photos, component('Button')
                     ->is('cyan')
                     ->with('title', 'Buttooon')
+                    ->with('route', route('v2.frontpage.index'))
                 ))
 
                 ->push(component('Title')

@@ -21,14 +21,13 @@
         
         methods: {
             onClick() {
-                /*this.$events.$emit('photoo', {
-                    large: this.large,
-                    meta: this.meta,
-                })
-                */
-                this.$events.$emit('alert', {
-                    title: 'Yo this is alert. Yo this is alert Yo this is alert Yo this is alert Yo this is alert',
-                })
+                console.log('click')
+                if (this.large) {
+                    this.$events.$emit('photo', {
+                        large: this.large,
+                        meta: this.meta,
+                    })
+                }
             }
         },
 

@@ -40,8 +40,12 @@ $button = $button ?? '';
 
     <div class="PhotoRow__buttonWrapper">
         
+        <div class="PhotoRow__button">
+
         {!! $button !!}
     
+        </div>
+        
     </div>
 
 </div>
