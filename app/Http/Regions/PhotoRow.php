@@ -18,13 +18,11 @@ class PhotoRow
             });
 
         if ($content->count() < 9) {
-            $content = $content->merge(
-                collect(array_fill(0, 9 - $content->count(), null))
-                    ->map(function($placeholder) {
-                        return component('PhotoCard')
-                            ->with('small', '/v2/svg/image_none.svg');
-                    })
-            );
+            $content = $content->merge(array_fill(
+                    0,
+                    9 - $content->count(),
+                    component('PhotoCard')->with('small', '/v2/svg/image_none.svg')
+            ));
         }
 
         return component('PhotoRow')

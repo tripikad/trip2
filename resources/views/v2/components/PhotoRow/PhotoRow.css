@@ -2,6 +2,7 @@
 
 .PhotoRow {
     position: relative;
+    background: $gray-light;
 }
 
     .PhotoRow__row {
