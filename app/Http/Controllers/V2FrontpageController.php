@@ -68,7 +68,7 @@ class V2FrontpageController extends Controller
 
             ->with('bottom2', region(
                 'PhotoRow',
-                $photos, 
+                $photos,
                 collect()
                     ->push(
                         component('Button')

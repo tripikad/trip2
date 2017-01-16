@@ -5,7 +5,7 @@ namespace App\Http\Regions;
 class PhotoRow
 {
     public function render($photos, $actions = [])
-    {   
+    {
         $content = $photos->map(function ($photo) {
             return component('PhotoCard')
                         ->with('small', $photo->imagePreset('small_square'))

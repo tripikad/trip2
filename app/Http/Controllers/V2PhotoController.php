@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use Request;
-use Response;
-use App\Destination;
-use App\Content;
 use App\User;
+use App\Content;
+use App\Destination;
 
 class V2PhotoController extends Controller
 {
     public function index()
     {
-
         $loggedUser = request()->user();
 
         $destinationId = Request::get('destination');
@@ -57,7 +55,6 @@ class V2PhotoController extends Controller
 
     public function userIndex($id)
     {
-
         $user = User::findOrFail($id);
         $userTitle = ': '.$user->vars()->name;
 
@@ -92,5 +89,4 @@ class V2PhotoController extends Controller
 
             ->render();
     }
-
 }
