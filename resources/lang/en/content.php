@@ -239,6 +239,8 @@ return [
     'photo.edit.field.destinations.title' => 'Select destinations',
     'photo.edit.field.destinations.help' => '',
 
+    'photo.meta' => ':title. Posted by :username, :created_at',
+
     // Blog
 
     'blog.index.title' => 'Blogs',

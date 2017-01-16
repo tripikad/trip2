@@ -2,7 +2,9 @@
 
 .PhotoRow {
     display: flex;
+    display: block ?if $mobile;
 }
 
-    .PhotoRow__photo {
+    .PhotoRow__row {
+        display: flex;
     }

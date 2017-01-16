@@ -9,6 +9,8 @@
 
         <img class="PhotoFullscreen__photo" :src="large" />
 
+        <div class="PhotoFullscreen__meta" v-html="meta"></div>
+
     </div>
 
 </template>
@@ -24,15 +26,16 @@
         data() {
             return {
                 large: '',
+                meta: '',
                 open: false
             }
         },
 
         mounted() {
             this.$events.$on('photo', (photo) => {
-                this.large = photo
+                this.large = photo.large
+                this.meta = photo.meta
                 this.open = true
-                console.log('Hmm')
             })
         }
 

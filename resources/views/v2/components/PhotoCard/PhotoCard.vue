@@ -15,14 +15,18 @@
         props: {
             isclasses: { default: '' },
             small: { default: '' },
-            large: { default: '' }
+            large: { default: '' },
+            meta: { default: ''},
         },
         
         methods: {
             onClick() {
-                this.$events.$emit('photo', this.large)
+                this.$events.$emit('photo', {
+                    large: this.large,
+                    meta: this.meta,
+                })
             }
-        }
+        },
 
     }
 
