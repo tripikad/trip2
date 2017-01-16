@@ -66,13 +66,14 @@ class V2FrontpageController extends Controller
                 )
             )
 
-            ->with('bottom2', region('PhotoRow', $photos, collect()
-                ->pushWhen($loggedUser && $loggedUser->hasRole('regular'),
-                    component('Button')
-                        ->with('title', trans('content.photo.create.title'))
-                        ->with('route', route('content.create', ['photo']))
-                        ->render()
-                )
+            ->with('bottom2', region(
+                'PhotoRow',
+                $photos, 
+                $loggedUser && $loggedUser->hasRole('regular')
+                ? component('Button')
+                    ->with('title', trans('content.photo.create.title'))
+                    ->with('route', route('content.create', ['photo']))
+                : ''
             ))
 
             ->with('bottom3', collect()
