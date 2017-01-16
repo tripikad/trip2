@@ -38,35 +38,35 @@ class V2UserController extends Controller
 
             ->with('top',
                 $photos->count() || ($loggedUser && $user->id == $loggedUser->id)
-                ? region('Gallery', $photos, collect()
-                    ->pushWhen(
-                        $loggedUser && $user->id == $loggedUser->id,
-                        component('Button')
-                            ->is('cyan')
-                            ->with('title', trans('content.photo.create.title'))
-                            ->with('route', route('content.create', ['photo']))
-                            ->render()
-                    )
+                ? region(
+                    'PhotoRow',
+                    $photos,
+                    collect()
+                        ->push(
+                            component('Button')
+                                ->is('transparent')
+                                ->with('title', trans('content.photo.more'))
+                                ->with('route', route(
+                                    'v2.photo.user',
+                                    [$user]
+                                ))
+                        )
+                        ->pushWhen(
+                            $loggedUser && $user->id == $loggedUser->id,
+                            component('Button')
+                                ->is('transparent')
+                                ->with('title', trans('content.photo.create.title'))
+                                ->with('route', route('content.create', ['photo']))
+                        )
                 )
                 : ''
             )
-
-            /*
-                $loggedUser && $loggedUser->hasRole('regular')
-                ? [component('Button')
-                    ->is($is)
-                    ->with('title', trans('content.photo.create.title'))
-                    ->with('route', route('content.create', ['photo']))
-                    ->render()]
-                : ''
-            */
 
             ->with('content', $comments->map(function ($comment) {
                 return component('UserCommentRow')
                         ->with('forum', region('ForumRow', $comment->content))
                         ->with('comment', region('Comment', $comment));
-            })
-            )
+            }))
 
             ->with('footer', region('Footer'))
 

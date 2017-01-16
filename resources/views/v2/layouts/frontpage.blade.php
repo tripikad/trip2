@@ -128,9 +128,9 @@ $footer = $footer ?? '';
     {{-- Bottom 2 --}}
 
     @foreach ($bottom2 as $bottom_item)
-    
+
         {!! $bottom_item !!}
-                            
+                              
     @endforeach
 
     {{-- Bottom 3 --}}

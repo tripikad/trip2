@@ -62,6 +62,8 @@ class Comment
                             : false
                         )
                         ->with('icon', 'icon-thumb-up')
+                        ->with('flagtitle', trans('flag.comment.good.flag.title'))
+                        ->with('unflagtitle', trans('flag.comment.good.unflag.title'))
                     )
                     ->push(component('Flag')
                         ->is('red')
@@ -75,6 +77,8 @@ class Comment
                             : false
                         )
                         ->with('icon', 'icon-thumb-down')
+                        ->with('flagtitle', trans('flag.comment.bad.flag.title'))
+                        ->with('unflagtitle', trans('flag.comment.bad.unflag.title'))
                     )
                 )
             )

@@ -284,6 +284,9 @@ return [
 
     'photo.no.results' => 'Hetkel pole ühtegi pilti veel lisatud.',
 
+    'photo.meta' => ':title. Postitas :username, :created_at',
+    'photo.more' => 'Kõik pildid',
+
     // Blog
 
     'blog.index.title' => 'Blogid',
@@ -314,7 +317,7 @@ return [
 
     'internal.index.title' => 'Sisefoorum',
 
-    'internal.create.title' => 'Lisa uus',
+    'internal.create.title' => 'Lisa uus postitus',
 
     'internal.edit.field.title.title' => 'Pealkiri',
     'internal.edit.field.title.help' => '',

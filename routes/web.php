@@ -125,6 +125,18 @@ Route::get('v2/internal/{id}', [
     'as' => 'v2.internal.show',
 ]);
 
+// Photo
+
+Route::get('v2/photo', [
+    'uses' => 'V2PhotoController@index',
+    'as' => 'v2.photo.index',
+]);
+
+Route::get('v2/user/{id}/photo', [
+    'uses' => 'V2PhotoController@userIndex',
+    'as' => 'v2.photo.user',
+]);
+
 // User
 
 Route::get('v2/user/{id}', [

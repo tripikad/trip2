@@ -11,14 +11,20 @@ class V2InternalController extends Controller
     {
         $forums = Content::getLatestPagedItems('internal', false, false, false, 'updated_at');
 
-        return layout('2col')
+        $loggedUser = request()->user();
+
+        return layout('1col')
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->with('title', trans('content.internal.index.title'))
                 )
-                ->push(component('BlockHorizontal')
-                    ->with('content', region('ForumLinks'))
+                ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('admin'),
+                    component('Button')
+                        ->is('narrow')
+                        ->with('title', trans('content.internal.create.title'))
+                        ->with('route', route('content.create', ['internal']))
                 )
             ))
 
@@ -27,13 +33,6 @@ class V2InternalController extends Controller
                     return region('ForumRow', $forum, route('v2.internal.show', [$forum]));
                 }))
                 ->push(region('Paginator', $forums))
-            )
-
-            ->with('sidebar', collect()
-                ->push(component('Button')
-                    ->with('title', trans('content.internal.create.title'))
-                    ->with('route', route('content.create', ['internal']))
-                )
             )
 
             ->with('footer', region('FooterLight'))
@@ -54,7 +53,7 @@ class V2InternalController extends Controller
             Cache::store('permanent')->forget($key);
         }
 
-        return layout('2col')
+        return layout('1col')
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')

@@ -1,0 +1,35 @@
+@import "variables";
+
+.PhotoFullscreen {
+    background: rgba(0, 0, 0, 0.8);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.PhotoFullscreen__photo {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.PhotoFullscreen__meta {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    font: $font-text-md;
+    color: $white;
+    text-align: center;
+    margin: 0 $margin-xxxl $margin-md $margin-xxxl;
+    margin: 0 $margin-md $margin-md $margin-md ?if $tablet;
+    line-height: $line-height-lg;
+}
