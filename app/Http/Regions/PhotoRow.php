@@ -13,7 +13,7 @@ class PhotoRow
                 ->with('meta', trans('content.photo.meta', [
                     'title' => $photo->vars()->title,
                     'username' => $photo->user->vars()->name,
-                    'created_at' => $photo->vars()->created_at
+                    'created_at' => $photo->vars()->created_at,
                 ]));
         }));
     }
