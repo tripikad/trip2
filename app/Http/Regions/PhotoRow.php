@@ -7,7 +7,7 @@ class PhotoRow
     public function render($photos, $actions = [])
     {   
         $content = $photos->map(function ($photo) {
-                return component('PhotoCard')
+            return component('PhotoCard')
                         ->with('small', $photo->imagePreset('small_square'))
                         ->with('large', $photo->imagePreset('large'))
                         ->with('meta', trans('content.photo.meta', [
@@ -15,8 +15,8 @@ class PhotoRow
                             'username' => $photo->user->vars()->name,
                             'created_at' => $photo->vars()->created_at,
                         ]));
-            });
-    
+        });
+
         if ($content->count() < 9) {
             $content = $content->merge(array_fill(
                     0,
@@ -29,6 +29,5 @@ class PhotoRow
             ->with('content', $content)
             ->with('actions', $actions)
             ->render();
-
     }
 }
