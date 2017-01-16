@@ -2,11 +2,7 @@
 
     <div class="PhotoCard" :class="isclasses">
 
-        <div class="PhotoCard__photo">
-
-            <img :src="small" @click="onClick" />
-
-        </div>
+        <img class="PhotoCard__photo" :src="small" @click="onClick" />
 
     </div>
 
