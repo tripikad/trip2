@@ -1,13 +1,22 @@
 @import "variables";
 
 .PhotoFullscreen {
-    position: fixed;
-    top: 0;
-    right: 0;
+    background: rgba(0, 0, 0, 0.8);
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.PhotoFullscreen__photo {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
 }

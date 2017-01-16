@@ -7,11 +7,7 @@
         @click="open = false"
     >
 
-        <div class="PhotoFullscreen__photo">
-
-            <img :src="large" />
-
-        </div>
+        <img class="PhotoFullscreen__photo" :src="large" />
 
     </div>
 
