@@ -2,6 +2,7 @@
 
 $title = $title ?? '';
 $content = collect($content) ?? collect();
+$button = $button ?? '';
 
 @endphp
 
@@ -36,5 +37,11 @@ $content = collect($content) ?? collect();
         @endforeach
 
     @endif
+
+    <div class="PhotoRow__buttonWrapper">
+        
+        {!! $button !!}
+    
+    </div>
 
 </div>

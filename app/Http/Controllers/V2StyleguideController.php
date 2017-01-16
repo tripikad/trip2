@@ -15,14 +15,17 @@ class V2StyleguideController extends Controller
 
         $user = auth()->user();
 
-        $photos = Content::getLatestItems('photo', 19)->withoutFirst();
+        $photos = Content::getLatestItems('photo', 10)->withoutFirst();
 
         return layout('1col')
 
             ->with('content', collect()
 
-                ->push(region('PhotoRow', $photos))
-
+                ->push(region('PhotoRow', $photos, component('Button')
+                    ->is('cyan')
+                    ->with('title', 'Buttooon')
+                ))
+                
                 ->push(component('Title')
                     ->with('title', 'Uue Trip.ee eelvaade')
                 )
