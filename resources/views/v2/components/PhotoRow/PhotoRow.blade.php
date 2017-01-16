@@ -9,16 +9,24 @@ $content = collect($content) ?? collect();
 
     @if ($content->count())
 
-        @foreach ($content->chunk(3) as $content_row)
+        @foreach ($content->chunk(9) as $content_row)
 
             <div class="PhotoRow__row">
 
-            @foreach ($content_row as $content_item)
+            @foreach ($content_row->chunk(3) as $content_subrow)
 
-                <div class="PhotoRow__photo">
+                <div class="PhotoRow__subRow">
 
-                {!! $content_item !!}
-                
+                @foreach ($content_subrow as $content_item)
+
+                    <div class="PhotoRow__photo">
+
+                    {!! $content_item !!}
+                    
+                    </div>
+
+                @endforeach
+
                 </div>
 
             @endforeach

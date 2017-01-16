@@ -1,10 +1,13 @@
 @import "variables";
 
 .PhotoRow {
-    display: flex;
-    display: block ?if $mobile;
 }
 
     .PhotoRow__row {
+        display: flex;
+        display: block ?if $mobile;
+    }
+
+    .PhotoRow__subRow {
         display: flex;
     }
