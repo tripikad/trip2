@@ -4,7 +4,7 @@
         v-show="open"
         class="Alert"
         :class="isclasses"
-        transition="fadeZoom"
+        transition="fadeCollapse"
         @click="onClick"
     >
             
