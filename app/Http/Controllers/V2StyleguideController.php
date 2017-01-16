@@ -14,7 +14,7 @@ class V2StyleguideController extends Controller
         session()->keep('info');
 
         $user = auth()->user();
-        
+
         $photos = Content::getLatestItems('photo', 10)->withoutFirst();
 
         return layout('1col')
