@@ -54,7 +54,7 @@ new Vue({
     mounted() {
         this.$http.get(globalProps.alertRoute).then(function(res) {
             if (res.data.info) {
-                this.$events.$emit('showAlert', res.data.info)
+                this.$events.$emit('alert', {title: res.data.info})
             }
         })
     }

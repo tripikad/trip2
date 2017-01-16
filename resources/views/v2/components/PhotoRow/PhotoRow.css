@@ -1,8 +1,5 @@
 @import "variables";
 
-.PhotoRow {
-}
-
     .PhotoRow__row {
         display: flex;
         display: block ?if $mobile;

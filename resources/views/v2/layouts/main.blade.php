@@ -28,6 +28,7 @@
             @yield('content')
             @yield('footer')
             <photo-fullscreen></photo-fullscreen>
+            <alert></alert>
         </div>
         <script src="/v2/js/main.js"></script>
         @include('v2.utils.promo')

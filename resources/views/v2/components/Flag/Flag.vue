@@ -34,7 +34,9 @@ export default {
         icon: { default: '' },
         value: { default: 0 },
         route: { default: '' },
-        flagged: { default: '' }
+        flagged: { default: '' },
+        flagtitle: { default: '' },
+        unflagtitle: { default: '' },
     },
 
     data: () => ({
@@ -48,6 +50,11 @@ export default {
                 .then(function(res) {
                     this.currentValue = res.data
                     this.currentFlagged = !this.currentFlagged
+                    this.$events.$emit('alert', {
+                        title: this.currentFlagged
+                            ? this.flagtitle
+                            : this.unflagtitle
+                    })
                 })
         }
     },
