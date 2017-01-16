@@ -22,7 +22,7 @@ class V2StyleguideController extends Controller
             ->with('content', collect()
 
                 ->push(region('PhotoRow', $photos))
-                
+
                 ->push(component('Title')
                     ->with('title', 'Uue Trip.ee eelvaade')
                 )
