@@ -7,7 +7,7 @@ class PhotoRow
     public function render($photos, $button = '')
     {
         $content = $photos->map(function ($photo) {
-                return component('PhotoCard')
+            return component('PhotoCard')
                     ->with('small', $photo->imagePreset('small_square'))
                     ->with('large', $photo->imagePreset('large'))
                     ->with('meta', trans('content.photo.meta', [
@@ -15,12 +15,12 @@ class PhotoRow
                         'username' => $photo->user->vars()->name,
                         'created_at' => $photo->vars()->created_at,
                     ]));
-            });
+        });
 
         if ($content->count() < 9) {
             $content = $content->merge(
                 collect(array_fill(0, 9 - $content->count(), null))
-                    ->map(function($placeholder) {
+                    ->map(function ($placeholder) {
                         return component('PhotoCard')
                             ->with('small', '/v2/svg/image_none.svg');
                     })
@@ -30,7 +30,6 @@ class PhotoRow
         return component('PhotoRow')
             ->with('content', $content)
             ->with('button', $button);
-
     }
 }
 
@@ -42,4 +41,3 @@ class PhotoRow
         )
 
 */
-
