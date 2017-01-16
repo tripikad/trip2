@@ -3,7 +3,6 @@
 $title = $title ?? '';
 $content = collect($content) ?? collect();
 $button = $button ?? '';
-
 @endphp
 
 <div class="PhotoRow {{ $isclasses }}">
@@ -45,7 +44,7 @@ $button = $button ?? '';
         {!! $button !!}
     
         </div>
-        
+
     </div>
 
 </div>
