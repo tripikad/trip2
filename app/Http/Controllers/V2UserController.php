@@ -38,15 +38,15 @@ class V2UserController extends Controller
 
             ->with('top',
                 $photos->count() || ($loggedUser && $user->id == $loggedUser->id)
-                ? region('Gallery', $photos, collect()
-                    ->pushWhen(
-                        $loggedUser && $user->id == $loggedUser->id,
-                        component('Button')
+                ? region(
+                    'PhotoRow',
+                    $photos,
+                    $loggedUser && $user->id == $loggedUser->id
+                    ? component('Button')
                             ->is('cyan')
                             ->with('title', trans('content.photo.create.title'))
                             ->with('route', route('content.create', ['photo']))
-                            ->render()
-                    )
+                    : ''
                 )
                 : ''
             )

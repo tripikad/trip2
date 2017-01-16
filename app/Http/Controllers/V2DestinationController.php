@@ -28,13 +28,14 @@ class V2DestinationController extends Controller
 
             ->with('header', region('DestinationHeader', $destination))
 
-            ->with('top', region('Gallery', $photos, collect()
-                ->pushWhen($loggedUser && $loggedUser->hasRole('regular'),
-                    component('Button')
-                        ->with('title', trans('content.photo.create.title'))
-                        ->with('route', route('content.create', ['photo']))
-                        ->render()
-                )
+            ->with('top', region(
+                'PhotoRow',
+                $photos,
+                $loggedUser && $loggedUser->hasRole('regular')
+                ? component('Button')
+                    ->with('title', trans('content.photo.create.title'))
+                    ->with('route', route('content.create', ['photo']))
+                : ''
             ))
 
             ->with('content', collect()
