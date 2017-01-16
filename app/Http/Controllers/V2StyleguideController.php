@@ -6,8 +6,6 @@ use Request;
 use Response;
 use App\Image;
 use App\Content;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\URL;
 
 class V2StyleguideController extends Controller
 {

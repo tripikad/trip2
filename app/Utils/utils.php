@@ -2,8 +2,8 @@
 
 use App\Utils;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Redirect;
 
 function component($component)
 {
