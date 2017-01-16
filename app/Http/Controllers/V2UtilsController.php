@@ -7,7 +7,6 @@ use Response;
 
 class V2UtilsController extends Controller
 {
-    
     public function format()
     {
         $body = Request::input('body');

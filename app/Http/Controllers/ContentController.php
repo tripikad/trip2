@@ -537,7 +537,6 @@ class ContentController extends Controller
             return back()->with('info', trans("content.action.status.$status.info", [
                 'title' => $content->title,
             ]));
-            
         }
 
         return back();
