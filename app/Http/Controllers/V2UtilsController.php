@@ -7,13 +7,7 @@ use Response;
 
 class V2UtilsController extends Controller
 {
-    public function alert()
-    {
-        return Response::json([
-            'info' => session('info'),
-        ]);
-    }
-
+    
     public function format()
     {
         $body = Request::input('body');

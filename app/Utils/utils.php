@@ -2,6 +2,8 @@
 
 use App\Utils;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 
 function component($component)
 {
@@ -48,4 +50,9 @@ function format_smtp_header(array $data)
     $str = wordwrap($json, 76, "\n   ");
 
     return $str;
+}
+
+function backToAnchor($anchor)
+{
+    return Redirect::to(URL::previous().$anchor);
 }
