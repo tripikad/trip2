@@ -9,10 +9,12 @@
     pointer-events: none;
     z-index: -1;
     background: $gray-light;
+    height: 1000px;
 }
 
     .BackgroundMap__image {
-        opacity: $opacity-xxs;
+        opacity: $opacity-xs;
+        width: 1000px;
     }
 
 .BackgroundMap--yellow {
