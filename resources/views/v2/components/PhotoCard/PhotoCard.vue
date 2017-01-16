@@ -25,7 +25,7 @@
                 if (this.large) {
                     this.$events.$emit('photo', {
                         large: this.large,
-                        meta: this.meta,
+                        //meta: this.meta,
                     })
                 }
             }

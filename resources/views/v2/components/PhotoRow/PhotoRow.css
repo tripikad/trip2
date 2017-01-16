@@ -14,18 +14,19 @@
         display: flex;
     }
 
-    .PhotoRow__buttonWrapper {
+    .PhotoRow__actions {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        left: 0;
         pointer-events: none;
         position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         top: 0;
-        left: 0;
         width: 100%;
-        height: 100%;
     }
 
-    .PhotoRow__button {
+    .PhotoRow__action {
         pointer-events: auto;
+        margin-right: $margin-sm;
     }

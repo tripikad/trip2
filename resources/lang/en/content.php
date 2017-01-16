@@ -240,6 +240,7 @@ return [
     'photo.edit.field.destinations.help' => '',
 
     'photo.meta' => ':title. Posted by :username, :created_at',
+    'photo.more' => 'All photos',
 
     // Blog
 

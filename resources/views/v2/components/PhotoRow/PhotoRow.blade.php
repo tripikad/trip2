@@ -2,7 +2,8 @@
 
 $title = $title ?? '';
 $content = collect($content) ?? collect();
-$button = $button ?? '';
+$actions = collect($actions) ?? collect();
+
 @endphp
 
 <div class="PhotoRow {{ $isclasses }}">
@@ -37,13 +38,17 @@ $button = $button ?? '';
 
     @endif
 
-    <div class="PhotoRow__buttonWrapper">
+    <div class="PhotoRow__actions">
         
-        <div class="PhotoRow__button">
+        @foreach ($actions as $action)
 
-        {!! $button !!}
+        <div class="PhotoRow__action">
+
+        {!! $action !!}
     
         </div>
+
+        @endforeach
 
     </div>
 

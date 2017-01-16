@@ -41,32 +41,32 @@ class V2UserController extends Controller
                 ? region(
                     'PhotoRow',
                     $photos,
-                    $loggedUser && $user->id == $loggedUser->id
-                    ? component('Button')
-                            ->is('cyan')
-                            ->with('title', trans('content.photo.create.title'))
-                            ->with('route', route('content.create', ['photo']))
-                    : ''
+                    collect()
+                        ->push(
+                            component('Button')
+                                ->is('transparent')
+                                ->with('title', trans('content.photo.more'))
+                                ->with('route', route(
+                                    'v2.photo.user',
+                                    [$user]
+                                ))
+                        )
+                        ->pushWhen(
+                            $loggedUser && $user->id == $loggedUser->id,
+                            component('Button')
+                                ->is('transparent')
+                                ->with('title', trans('content.photo.create.title'))
+                                ->with('route', route('content.create', ['photo']))
+                        )
                 )
                 : ''
             )
-
-            /*
-                $loggedUser && $loggedUser->hasRole('regular')
-                ? [component('Button')
-                    ->is($is)
-                    ->with('title', trans('content.photo.create.title'))
-                    ->with('route', route('content.create', ['photo']))
-                    ->render()]
-                : ''
-            */
 
             ->with('content', $comments->map(function ($comment) {
                 return component('UserCommentRow')
                         ->with('forum', region('ForumRow', $comment->content))
                         ->with('comment', region('Comment', $comment));
-            })
-            )
+            }))
 
             ->with('footer', region('Footer'))
 
