@@ -15,17 +15,29 @@ class V2StyleguideController extends Controller
 
         $user = auth()->user();
 
-        $photos = Content::getLatestItems('photo', 10)->withoutFirst();
+        $photos = Content::getLatestItems('photo', 3)->withoutFirst();
 
         return layout('1col')
 
             ->with('content', collect()
 
+                ->push(component('Form')
+                    ->with('route', route('styleguide.form'))
+                    ->with('fields', collect()
+                        ->push(component('FormTextarea')
+                            ->with('name', 'body')
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('comment.create.submit.title'))
+                        )
+                    )
+                )
+
                 ->push(region('PhotoRow', $photos, component('Button')
                     ->is('cyan')
                     ->with('title', 'Buttooon')
                 ))
-                
+
                 ->push(component('Title')
                     ->with('title', 'Uue Trip.ee eelvaade')
                 )
@@ -82,19 +94,9 @@ class V2StyleguideController extends Controller
 
     public function form()
     {
-        dump(request()->all());
+        // dump(request()->all());
 
-        // return redirect()->route('styleguide.index')->with('info', 'We are back');
-    }
-
-    public function flag()
-    {
-        if (request()->has('value')) {
-            return response()->json([
-                'value' => request()->get('value') + 1,
-            ]);
-        }
-        //return abort(404);
+        return redirect()->route('styleguide.index')->with('info', 'We are back');
     }
 
     public function store()
