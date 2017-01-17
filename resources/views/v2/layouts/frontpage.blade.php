@@ -32,13 +32,13 @@ $footer = $footer ?? '';
         
         <div class="container">
 
-            <div class="row row-center padding-bottom-md">
+            <div class="row row-center padding-bottom-sm">
 
                 <div class="col-10">
 
                     @foreach ($top as $top_item)
                     
-                    <div @if (!$loop->last) class="margin-bottom-md-mobile-sm" @endif>
+                    <div @if (!$loop->last) class="margin-bottom-sm" @endif>
 
                         {!! $top_item !!}
                             
@@ -56,7 +56,7 @@ $footer = $footer ?? '';
 
     {{-- Content and sidebar --}}
 
-    <div class="padding-top-lg padding-bottom-lg">
+    <div class="padding-top-md padding-bottom-lg">
 
         <div class="container">
 

@@ -30,5 +30,6 @@ return [
 
     'index.about.title' => 'Read more about Trip.ee ›',
     'index.about.register' => 'Join with Trip.ee',
+    'index.about.login' => 'Log in',
 
 ];

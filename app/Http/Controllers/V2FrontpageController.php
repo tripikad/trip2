@@ -34,10 +34,23 @@ class V2FrontpageController extends Controller
 
             ->with('top', collect()
                 ->push(region('FrontpageFlight', $flights->take(3)))
+                ->push(component('BlockHorizontal')
+                    ->is('right')
+                    ->with('content', collect()->push(component('Link')
+                        ->is('blue')
+                        ->with('title', trans('frontpage.index.all.offers'))
+                        ->with('route', route('v2.flight.index'))
+                    ))
+                )
+                ->pushWhen(! $loggedUser, '&nbsp;')
                 ->pushWhen(! $loggedUser, region('FrontpageAbout'))
             )
 
             ->with('content', collect()
+                ->push(component('BlockTitle')
+                    ->with('title', trans('frontpage.index.forum.title'))
+                    ->with('route', route('v2.forum.index'))
+                )
                 ->merge($forums->take($forums->count() / 2)->map(function ($forum) {
                     return region('ForumRow', $forum);
                 }))
@@ -48,10 +61,7 @@ class V2FrontpageController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('BlockTitle')
-                    ->with('title', trans('frontpage.index.forum.title'))
-                    ->with('route', route('v2.forum.index'))
-                )
+                ->push('&nbsp;')
                 ->push(component('Body')->with('body', trans('site.description.forum')))
                 ->merge(region('ForumLinks'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
@@ -63,6 +73,7 @@ class V2FrontpageController extends Controller
                 ->merge(region('FrontpageNews', $news))
                 ->push(component('BlockTitle')
                     ->with('title', trans('frontpage.index.photo.title'))
+                    ->with('route', route('v2.photo.index'))
                 )
             )
 
@@ -89,7 +100,7 @@ class V2FrontpageController extends Controller
                 ->push(region('FrontpageBottom', $flights->slice(3), $travelmates))
                 ->push(component('Block')
                     ->with('title', trans('frontpage.index.blog.title'))
-                    ->with('route', trans('frontpage.index.blog.title'))
+                    ->with('route', route('v2.blog.index'))
                     ->with('content', collect()
                         ->push(component('Grid3')
                             ->with('items', $blogs->map(function ($blog) {
