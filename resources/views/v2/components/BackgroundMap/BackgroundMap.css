@@ -13,7 +13,7 @@
 }
 
     .BackgroundMap__image {
-        opacity: $opacity-xs;
+        opacity: $opacity-xxs;
         width: 1000px;
     }
 
