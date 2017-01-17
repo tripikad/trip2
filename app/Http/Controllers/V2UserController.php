@@ -13,6 +13,7 @@ class V2UserController extends Controller
         $types = ['forum', 'travelmate', 'buysell'];
 
         $user = User::findOrFail($id);
+
         $loggedUser = request()->user();
 
         $photos = $user
@@ -24,7 +25,14 @@ class V2UserController extends Controller
             ->get();
 
         $comments = $user->comments()
-            ->with(['content', 'content.user'])
+            ->with(
+                'user',
+                'content',
+                'content.user',
+                'content.comments',
+                'content.destinations',
+                'flags'
+            )
             ->whereStatus(1)
             ->whereHas('content', function ($query) use ($types) {
                 $query->whereIn('type', $types);
@@ -75,8 +83,9 @@ class V2UserController extends Controller
             )
 */
             ->with('content', $comments->map(function ($comment) {
+                //dd(json_encode($comment));
                 return component('UserCommentRow')
-                        ->with('forum', region('ForumRow', $comment->content))
+                        //->with('forum', region('ForumRow', $comment->content))
                         ->with('comment', region('Comment', $comment));
             }))
 
