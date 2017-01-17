@@ -151,7 +151,7 @@ class Content extends Model
                 'destinations',
                 'topics'
             )
-            ->when(!$user || !$user->hasRole('admin'), function ($query) use ($user) {
+            ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
                 return $query->whereStatus(1);
             })
             ->first();

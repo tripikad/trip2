@@ -132,7 +132,7 @@ class V2ForumController extends Controller
 
         $forum = Content::getItemBySlug($slug, $user);
 
-        if (!$forum->first()) {
+        if (! $forum->first()) {
             abort(404);
         }
 
