@@ -21,7 +21,7 @@ class DestinationBar
             ->with('route', route('v2.destination.show', [$destination]))
             ->with('parents', region(
                 'DestinationParents',
-                $destination->getAncestors()->onlyLast($parentLength > 30 ? 1 : 2),
+                $destination->getAncestors()->onlyLast($parentLength > 25 ? 1 : 2),
                 $short = true
             )
         );
