@@ -38,6 +38,7 @@ class V2PhotoController extends Controller
                         ->with('title', trans('content.photo.create.title'))
                         ->with('route', route('content.create', ['photo']))
                 )
+                ->push(' ')
             ))
 
             ->with('top', collect()
@@ -55,6 +56,9 @@ class V2PhotoController extends Controller
 
     public function userIndex($id)
     {
+
+        $loggedUser = request()->user();
+
         $user = User::findOrFail($id);
         $userTitle = ': '.$user->vars()->name;
 
@@ -75,6 +79,14 @@ class V2PhotoController extends Controller
                         trans('content.photo.index.title').$userTitle
                     )
                 )
+                ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('regular'),
+                    component('Button')
+                        ->is('narrow')
+                        ->with('title', trans('content.photo.create.title'))
+                        ->with('route', route('content.create', ['photo']))
+                )
+                ->push(' ')
             ))
 
             ->with('top', collect()
