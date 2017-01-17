@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Content;
 use App\Image;
+use App\Content;
 
 class V2UserController extends Controller
 {
