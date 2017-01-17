@@ -46,22 +46,22 @@ class V2DestinationVars
 
     public function isContinent()
     {
-        return $this->destination->isRoot();
+        return $this->destination->depth == 0;
     }
 
     public function isCountry()
-    {
-        return $this->destination->getLevel() == 1;
+    {   
+        return $this->destination->depth == 1;
     }
 
     public function isPlace()
     {
-        return $this->destination->getLevel() > 1;
+        return $this->destination->depth > 1;
     }
 
     public function getCountry()
     {
-        if ($this->destination->getLevel() > 1) {
+        if ($this->destination->depth > 1) {
             return $this->destination->getAncestors()[1];
         }
 
