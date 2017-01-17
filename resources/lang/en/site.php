@@ -13,6 +13,8 @@
         'dropzone.file.size.exceeded' => 'You tried to upload too big file',
         'dropzone.file.remove' => 'Remove',
 
+        'about' => 'Estonian oldest and most popular travel portal',
+
         'description' => [
             'main' => 'One-stop place for all travel needs',
             'flights' => 'All the cheap tickets from one place',

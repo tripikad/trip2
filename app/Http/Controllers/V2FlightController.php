@@ -11,11 +11,7 @@ class V2FlightController extends Controller
 {
     public function index()
     {
-        /*
-        @section('title', trans("content.$type.index.title"))
-        @section('head_description', trans('site.description.flight'))
-        */
-
+    
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
@@ -35,6 +31,11 @@ class V2FlightController extends Controller
         $news = Content::getLatestItems('news', 1);
 
         return layout('2col')
+
+            ->with('title', trans("content.flight.index.title"))
+            ->with('head_title', trans("content.flight.index.title"))
+            ->with('head_description', trans('site.description.flight'))
+            ->with('head_image', Image::getSocial())
 
             ->with('header', region('Header', collect()
                 ->push(component('Title')
@@ -89,12 +90,6 @@ class V2FlightController extends Controller
 
     public function show($slug)
     {
-        /*
-        @section('title', trans("content.$type.index.title"))
-        @section('head_title',  $content->getHeadTitle())
-        @section('head_description', $content->getHeadDescription())
-        @section('head_image', $content->getHeadImage())
-        */
 
         $flight = Content::getItemBySlug($slug);
         $flights = Content::getLatestItems('flight', 4);
@@ -105,6 +100,11 @@ class V2FlightController extends Controller
         $user = auth()->user();
 
         return layout('2col')
+
+            ->with('title', trans("content.flight.index.title"))
+            ->with('head_title',  $flight->getHeadTitle())
+            ->with('head_description', $flight->getHeadDescription())
+            ->with('head_image', $flight->getHeadImage())
 
             ->with('header', region('Header', collect()
                 ->push(component('Link')

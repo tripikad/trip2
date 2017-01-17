@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Image;
 
 class V2StaticController extends Controller
 {
@@ -30,6 +31,11 @@ class V2StaticController extends Controller
             ->findOrFail($id);
 
         return layout('1col')
+
+            ->with('title', $post->getHeadTitle())
+            ->with('head_title',  $post->getHeadTitle())
+            ->with('head_description', $post->getHeadDescription())
+            ->with('head_image', Image::getSocial())
 
             ->with('header', region('StaticHeader', collect()
                 ->push(component('Title')->with('title', $post->vars()->title))

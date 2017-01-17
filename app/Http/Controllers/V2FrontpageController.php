@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Image;
 
 class V2FrontpageController extends Controller
 {
     public function index()
     {
-        /*
-        @section('head_description', trans('site.description.main'))
-        */
-
+ 
         $loggedUser = auth()->user();
 
         $flights = Content::getLatestItems('flight', 9);
@@ -22,6 +20,11 @@ class V2FrontpageController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 5);
 
         return layout('frontpage')
+
+            ->with('title', trans('site.about'))
+            ->with('head_title', trans('site.about'))
+            ->with('head_description', trans('site.description.main'))
+            ->with('head_image', Image::getSocial())
 
             ->with('promobar', component('PromoBar')
                 ->with('title', 'Osale Trip.ee kampaanias ja võida 2 lennupiletit Maltale')
@@ -61,9 +64,20 @@ class V2FrontpageController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push('&nbsp;')
-                ->push(component('Body')->with('body', trans('site.description.forum')))
-                ->merge(region('ForumLinks'))
+                ->merge(collect(['forum', 'buysell', 'expat'])
+                    ->flatMap(function($type) {
+                        return collect()
+                            ->push(component('Link')
+                                ->is('large')
+                                ->with('title', trans("content.$type.index.title"))
+                                ->with('route', route("v2.$type.index"))
+                            )
+                            ->push(component('Body')
+                                ->is('gray')
+                                ->with('body', trans("site.description.$type"))
+                            );
+                    })
+                )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffHotelscombined'))

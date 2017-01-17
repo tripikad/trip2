@@ -16,3 +16,11 @@
 .BlockHorizontal--right {
     justify-content: flex-end;
 }
+
+.BlockHorizontal--between {
+    justify-content: space-between;
+}
+
+.BlockHorizontal--bottom {
+    align-items: flex-end;
+}

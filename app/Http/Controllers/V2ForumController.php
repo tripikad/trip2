@@ -8,6 +8,7 @@ use App\User;
 use App\Topic;
 use App\Content;
 use App\Destination;
+use App\Image;
 
 class V2ForumController extends Controller
 {
@@ -40,6 +41,11 @@ class V2ForumController extends Controller
         $news = Content::getLatestItems('news', 1);
 
         return layout('2col')
+
+            ->with('title', trans("content.$forumType.index.title"))
+            ->with('head_title', trans("content.$forumType.index.title"))
+            ->with('head_description', trans("site.description.$forumType"))
+            ->with('head_image', Image::getSocial())
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
@@ -152,6 +158,12 @@ class V2ForumController extends Controller
         }
 
         return layout('2col')
+
+            ->with('title', trans("content.forum.index.title"))
+            ->with('head_title',  $forum->getHeadTitle())
+            ->with('head_description', $forum->getHeadDescription())
+            ->with('head_image', Image::getSocial())
+
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Content;
+use App\Image;
 
 class V2UserController extends Controller
 {
@@ -33,6 +34,17 @@ class V2UserController extends Controller
             ->get();
 
         return layout('1col')
+
+            ->with('title', $user->vars()->name())
+            ->with('head_title', $user->vars()->name())
+            ->with(
+                'head_description',
+                trans("user.rank.$user->rank")
+                .trans('user.show.about.joined', [
+                    'created_at' => $user->vars()->created_at_relative,
+                ])
+            )
+            ->with('head_image', Image::getSocial())
 
             ->with('header', region('UserHeader', $user))
 

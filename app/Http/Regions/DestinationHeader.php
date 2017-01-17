@@ -44,8 +44,14 @@ class DestinationHeader
                             ->with('route', route('v2.destination.show', [$children]));
                     }))
                 )
-                ->push(region('DestinationFacts', $destination))
-                ->push(region('DestinationStat', $destination))
+                ->push(component('BlockHorizontal')
+                    ->is('between')
+                    ->is('bottom')
+                    ->with('content', collect()
+                        ->push(region('DestinationFacts', $destination))
+                        ->push(region('DestinationStat', $destination))
+                    )
+                )
             );
     }
 }

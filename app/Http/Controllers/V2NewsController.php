@@ -6,6 +6,7 @@ use Request;
 use App\Topic;
 use App\Content;
 use App\Destination;
+use App\Image;
 
 class V2NewsController extends Controller
 {
@@ -23,6 +24,11 @@ class V2NewsController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
 
         return layout('2col')
+
+            ->with('title', trans("content.news.index.title"))
+            ->with('head_title', trans("content.news.index.title"))
+            ->with('head_description', trans('site.description.news'))
+            ->with('head_image', Image::getSocial())
 
             ->with('header', region('Header', collect()
                 ->push(component('Title')
@@ -79,6 +85,11 @@ class V2NewsController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
 
         return layout('1col')
+
+            ->with('title', trans("content.news.index.title"))
+            ->with('head_title',  $new->getHeadTitle())
+            ->with('head_description', $new->getHeadDescription())
+            ->with('head_image', $new->getHeadImage())
 
             ->with('header', region('NewsHeader', $new))
 
