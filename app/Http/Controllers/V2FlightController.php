@@ -11,7 +11,6 @@ class V2FlightController extends Controller
 {
     public function index()
     {
-    
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
@@ -32,8 +31,8 @@ class V2FlightController extends Controller
 
         return layout('2col')
 
-            ->with('title', trans("content.flight.index.title"))
-            ->with('head_title', trans("content.flight.index.title"))
+            ->with('title', trans('content.flight.index.title'))
+            ->with('head_title', trans('content.flight.index.title'))
             ->with('head_description', trans('site.description.flight'))
             ->with('head_image', Image::getSocial())
 
@@ -90,7 +89,6 @@ class V2FlightController extends Controller
 
     public function show($slug)
     {
-
         $flight = Content::getItemBySlug($slug);
         $flights = Content::getLatestItems('flight', 4);
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
@@ -101,8 +99,8 @@ class V2FlightController extends Controller
 
         return layout('2col')
 
-            ->with('title', trans("content.flight.index.title"))
-            ->with('head_title',  $flight->getHeadTitle())
+            ->with('title', trans('content.flight.index.title'))
+            ->with('head_title', $flight->getHeadTitle())
             ->with('head_description', $flight->getHeadDescription())
             ->with('head_image', $flight->getHeadImage())
 

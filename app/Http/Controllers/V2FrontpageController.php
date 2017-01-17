@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Content;
 use App\Image;
+use App\Content;
 
 class V2FrontpageController extends Controller
 {
     public function index()
     {
- 
         $loggedUser = auth()->user();
 
         $flights = Content::getLatestItems('flight', 9);
@@ -65,7 +64,7 @@ class V2FrontpageController extends Controller
 
             ->with('sidebar', collect()
                 ->merge(collect(['forum', 'buysell', 'expat'])
-                    ->flatMap(function($type) {
+                    ->flatMap(function ($type) {
                         return collect()
                             ->push(component('Link')
                                 ->is('large')
