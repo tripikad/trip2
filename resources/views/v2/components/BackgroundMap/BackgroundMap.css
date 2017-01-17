@@ -2,14 +2,14 @@
 
 .BackgroundMap {
     position: absolute;
-    top: 0;
+    top: calc($spacer * -12);
     right: 0;
-    left: 0;
+    left: calc($spacer * -5);
     bottom: 0;
     pointer-events: none;
     z-index: -1;
     background: $gray-light;
-    height: 1000px;
+    height: calc($spacer * 1000);
 }
 
     .BackgroundMap__image {
