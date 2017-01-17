@@ -9,10 +9,6 @@ class V2DestinationController extends Controller
 {
     public function show($id)
     {
-        /*
-        @section('head_description', trans("site.description.destination", ['name' => $destination->name]))
-        */
-
         $destination = Destination::findOrFail($id);
 
         $photos = Content::getLatestPagedItems('photo', 9, $destination->id);
@@ -25,6 +21,12 @@ class V2DestinationController extends Controller
         $loggedUser = request()->user();
 
         return layout('2col')
+
+            ->with('head_description', trans('site.description.destination', [
+                'name' => $destination->vars()->name,
+            ]))
+
+            ->with('title', $destination->vars()->name)
 
             ->with('header', region('DestinationHeader', $destination))
 

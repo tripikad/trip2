@@ -11,7 +11,7 @@ class V2StyleguideController extends Controller
 {
     public function index()
     {
-        session()->keep('info');
+        // session()->keep('info');
 
         $user = auth()->user();
 
@@ -19,6 +19,7 @@ class V2StyleguideController extends Controller
 
             ->with('content', collect()
 
+                /*
                 ->push(component('Form')
                     ->with('route', route('styleguide.form'))
                     ->with('fields', collect()
@@ -30,6 +31,7 @@ class V2StyleguideController extends Controller
                         )
                     )
                 )
+                */
 
                 ->push(component('Title')
                     ->with('title', 'Uue Trip.ee eelvaade')
@@ -79,7 +81,8 @@ class V2StyleguideController extends Controller
                     ->with('title', 'Toimetuse foorum')
                     ->with('route', route('v2.internal.index'))
                 )
-                ->push('<a id="aaa">AAA</a>')
+
+                // ->push('<a id="aaa"></a>')
 
                 ->push(region('Footer'))
 

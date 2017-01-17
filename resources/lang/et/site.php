@@ -13,6 +13,8 @@
         'dropzone.file.size.exceeded' => 'Sa üritasid lisada liiga mahukat pilti.',
         'dropzone.file.remove' => 'Kustuta',
 
+        'about' => 'Eesti popim reisiportaal',
+
         'description' => [
             'main' => 'Trip.ee koondab kokku kõik reisimiseks vajaliku: reisijate kogemused ja reisisoovitused, reisiideed, odavad piletid, reisikaaslaste otsingu ja reisivarustuse ost ja müük',
             'flight' => 'Kõik odavad lennupiletid mugavalt ühelt lehel. Vaata soodsaid lennupakkumisi ning alusta oma reisi planeerimist siit',

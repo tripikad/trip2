@@ -114,3 +114,8 @@
 .Body--cyan * {
     color: $cyan;
 }
+
+.Body--gray,
+.Body--gray * {
+    color: $gray-darker;
+}

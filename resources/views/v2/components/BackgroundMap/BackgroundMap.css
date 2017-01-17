@@ -9,7 +9,7 @@
     pointer-events: none;
     z-index: -1;
     background: $gray-light;
-    height: calc($spacer * 1000);
+    height: calc($spacer * 80);
 }
 
     .BackgroundMap__image {

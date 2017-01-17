@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Request;
+use App\Image;
 use App\Topic;
 use App\Content;
 use App\Destination;
@@ -23,6 +24,11 @@ class V2TravelmateController extends Controller
         $news = Content::getLatestItems('news', 1);
 
         return layout('2col')
+
+            ->with('title', trans('content.travelmate.index.title'))
+            ->with('head_title', trans('content.travelmate.index.title'))
+            ->with('head_description', trans('site.description.travelmate'))
+            ->with('head_image', Image::getSocial())
 
             ->with('header', region('Header', collect()
                 ->push(component('Title')
@@ -81,6 +87,11 @@ class V2TravelmateController extends Controller
         $news = Content::getLatestItems('news', 1);
 
         return view('v2.layouts.2col')
+
+            ->with('title', trans('content.travelmate.index.title'))
+            ->with('head_title', $travelmate->getHeadTitle())
+            ->with('head_description', $travelmate->getHeadDescription())
+            ->with('head_image', Image::getSocial())
 
             ->with('header', region('Header', collect()
                 ->push(component('Title')

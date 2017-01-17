@@ -32,4 +32,5 @@
     margin: 0 $margin-xxxl $margin-md $margin-xxxl;
     margin: 0 $margin-md $margin-md $margin-md ?if $tablet;
     line-height: $line-height-lg;
+    text-shadow: $text-shadow-md;
 }
