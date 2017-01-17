@@ -81,12 +81,6 @@ class V2FrontpageController extends Controller
                 'PhotoRow',
                 $photos,
                 collect()
-                    ->push(
-                        component('Button')
-                            ->is('transparent')
-                            ->with('title', trans('content.photo.more'))
-                            ->with('route', route('v2.photo.index'))
-                    )
                     ->pushWhen(
                         $loggedUser && $loggedUser->hasRole('regular'),
                         component('Button')

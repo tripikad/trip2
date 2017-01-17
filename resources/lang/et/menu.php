@@ -2,7 +2,7 @@
 
 return [
 
-    'header.oldtrip' => '← Vana Trip.ee',
+    'header.oldtrip' => '↩ Vana Trip',
 
     'header.home' => 'Trip.ee',
     'header.news' => 'Uudised',
