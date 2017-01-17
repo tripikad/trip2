@@ -68,15 +68,18 @@ class CommentController extends Controller
 
                     $key = 'new_'.$comment->content_id.'_'.$user->id;
 
-                    // We will not overwrite the cache if there are unread comments already
-
-                    if (! Cache::store('permanent')->get($key, 0) > 0) {
-
-                        // The cache value is new comment id, this helps us redirect user
-                        // to the right place later
-
-                        Cache::store('permanent')->forever($key, $comment->id);
+                    if (Cache::store('permanent')->has($key))
+                    {
+                        // We will not overwrite the cache if there are unread comments already
+                        if (! Cache::store('permanent')->get($key, 0) > 0) {
+                            Cache::store('permanent')->put($key, $comment->id, config('cache.content.expire.comment'));
+                        } else {
+                            Cache::store('permanent')->put($key, Cache::store('permanent')->get($key), config('cache.content.expire.comment'));
+                        }
+                    } else {
+                        Cache::store('permanent')->put($key, $comment->id, config('cache.content.expire.comment'));
                     }
+
                 });
             });
         }

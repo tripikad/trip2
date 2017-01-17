@@ -26,6 +26,9 @@ return [
         'show' => [
             'header' => 60 * 10,
         ],
+        'expire' => [
+            'comment' => 43200 //30 days
+        ]
     ],
 
     'user' => [
