@@ -51,6 +51,9 @@ class V2ForumController extends Controller
                 ->push(component('Title')
                     ->with('title', trans("content.$forumType.index.title"))
                 )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
                 ->push(region(
                     'FilterHorizontal',
                     $destinations,
@@ -60,9 +63,6 @@ class V2ForumController extends Controller
                     $forums->currentPage(),
                     'v2.forum.index'
                 ))
-                ->push(component('BlockHorizontal')
-                    ->with('content', region('ForumLinks'))
-                )
             ))
 
             ->with('content', collect()
