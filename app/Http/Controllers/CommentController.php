@@ -68,8 +68,7 @@ class CommentController extends Controller
 
                     $key = 'new_'.$comment->content_id.'_'.$user->id;
 
-                    if (Cache::store('permanent')->has($key))
-                    {
+                    if (Cache::store('permanent')->has($key)) {
                         // We will not overwrite the cache if there are unread comments already
                         if (! Cache::store('permanent')->get($key, 0) > 0) {
                             Cache::store('permanent')->put($key, $comment->id, config('cache.content.expire.comment'));
@@ -79,7 +78,6 @@ class CommentController extends Controller
                     } else {
                         Cache::store('permanent')->put($key, $comment->id, config('cache.content.expire.comment'));
                     }
-
                 });
             });
         }
