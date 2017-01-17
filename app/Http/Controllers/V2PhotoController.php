@@ -56,7 +56,6 @@ class V2PhotoController extends Controller
 
     public function userIndex($id)
     {
-
         $loggedUser = request()->user();
 
         $user = User::findOrFail($id);
