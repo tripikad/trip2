@@ -15,14 +15,24 @@
                 size="lg">
             </component>
         
-            <component
-                is="UserImage"
-                v-if="currentUser"
-                :route="currentUser.route"
-                :image="currentUser.image"
-                :rank="currentUser.rank"
-            >
-            </component>
+            <div v-if="currentUser" class="NavbarMobile__userImage">
+
+                <component
+                    v-if="currentUser.badge"
+                    is="Badge"
+                    class="NavbarMobile__badge"
+                    :title="currentUser.badge"
+                ></component>
+
+                <component
+                    is="UserImage"
+                    :route="currentUser.route"
+                    :image="currentUser.image"
+                    :rank="currentUser.rank"
+                >
+                </component>
+
+            </div>
 
         </div>
 
@@ -59,10 +69,14 @@
                     key="index"
                 >
 
-                    <div class="NavbarMobile__link">
-                        
+                    <div class="NavbarMobile__sublinkWrapper">
+
+                        <div class="NavbarMobile__sublinkTitle">
+
                         {{ link.title }}
-                        
+
+                        </div>
+
                     </div>
 
                 </a>
@@ -73,10 +87,27 @@
                     key="index"
                 >
 
-                    <div class="NavbarMobile__link">
-                        
+                    <div class="NavbarMobile__sublinkWrapper">
+
+                        <div class="NavbarMobile__sublinkTitle">
+
                         {{ link.title }}
-                        
+
+                        </div>
+
+                        <div
+                            class="NavbarMobile__sublinkBadge"
+                            v-if="link.badge"
+                        >
+
+                            <component
+                                is="Badge"
+                                isclasses="Badge--white"
+                                :title="link.badge"
+                            ></component>
+
+                        </div>
+
                     </div>
 
                 </a>
@@ -91,15 +122,17 @@
 
 <script>
 
-    import NavbarSearch from '../NavbarSearch/NavbarSearch.vue'
+    import Badge from '../Badge/Badge.vue'
     import Icon from '../Icon/Icon.vue'
+    import NavbarSearch from '../NavbarSearch/NavbarSearch.vue'
     import UserImage from '../UserImage/UserImage.vue'
 
     export default {
     
         components: {
-            NavbarSearch,
+            Badge,
             Icon,
+            NavbarSearch,
             UserImage
         },
 

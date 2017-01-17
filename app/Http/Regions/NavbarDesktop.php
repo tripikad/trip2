@@ -56,7 +56,7 @@ class NavbarDesktop
             ->pushWhen($user, [
                 'title' => trans('menu.user.message'),
                 'route' => route('v2.message.index', [$user]),
-                'badge' => $user ? 2 /*$user->unreadMessagesCount()*/ : '',
+                'badge' => $user ? $user->unreadMessagesCount() : '',
             ])
             ->pushWhen($user && $user->hasRole('admin'), [
                 'title' => trans('menu.auth.admin'),
@@ -83,7 +83,7 @@ class NavbarDesktop
                 ->with('user', $user ? collect()
                     ->put('title', $user->vars()->name)
                     ->put('image', $user->imagePreset('small_square'))
-                    ->put('badge', 2 /*$user->unreadMessagesCount()*/)
+                    ->put('badge', $user->unreadMessagesCount())
                     ->put('rank', $user->vars()->rank)
                 : '')
                 ->render()
