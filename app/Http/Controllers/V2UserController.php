@@ -47,7 +47,7 @@ class V2UserController extends Controller
             ->with('head_image', Image::getSocial())
 
             ->with('header', region('UserHeader', $user))
-
+/*
             ->with('top',
                 $photos->count() || ($loggedUser && $user->id == $loggedUser->id)
                 ? region(
@@ -73,7 +73,7 @@ class V2UserController extends Controller
                 )
                 : ''
             )
-
+*/
             ->with('content', $comments->map(function ($comment) {
                 return component('UserCommentRow')
                         ->with('forum', region('ForumRow', $comment->content))
