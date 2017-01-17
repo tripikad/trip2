@@ -2,8 +2,9 @@
 
 .NavbarMobile {
     display: block;
-    z-index: 100000;
-}
+    position: relative;
+    z-index: 10000;
+}   
 
     .NavbarMobile__menuIcon {
         cursor: pointer;
@@ -14,7 +15,7 @@
     }
 
     .NavbarMobile__menu {
-        align-items: center;
+        align-items: flex-start;
         background: $green;
         bottom: 0;
         left: 0;
