@@ -7,6 +7,11 @@
     line-height: $line-height-lg;
 }
 
+.Meta,
+.Meta > * {
+    display: inline-block ?if $ie;
+}
+
     .Meta__item {
         margin-right: $margin-xs;
     }
