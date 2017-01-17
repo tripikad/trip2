@@ -81,7 +81,7 @@ class V2StyleguideController extends Controller
                     ->with('title', 'Toimetuse foorum')
                     ->with('route', route('v2.internal.index'))
                 )
-                
+
                 // ->push('<a id="aaa"></a>')
 
                 ->push(region('Footer'))

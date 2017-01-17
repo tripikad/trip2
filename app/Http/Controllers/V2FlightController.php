@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Request;
+use App\Image;
 use App\Topic;
 use App\Content;
 use App\Destination;
-use App\Image;
 
 class V2FlightController extends Controller
 {
