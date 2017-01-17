@@ -128,10 +128,16 @@ class V2ForumController extends Controller
 
     public function show($slug)
     {
-        $forum = Content::getItemBySlug($slug);
+        $user = auth()->user();
+
+        $forum = Content::getItemBySlug($slug, $user);
+
+        if (! $forum->first()) {
+            abort(404);
+        }
+
         $forumType = $forum->type;
 
-        $user = auth()->user();
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
         $flights = Content::getLatestItems('flight', 3);

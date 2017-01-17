@@ -60,7 +60,7 @@
             this.$events.$on('alert', (alert) => {
                 this.title = alert.title
                 this.open = true
-                setTimeout(() => this.open = false, 1400)
+                setTimeout(() => this.open = false, 2000)
             })
         }
 

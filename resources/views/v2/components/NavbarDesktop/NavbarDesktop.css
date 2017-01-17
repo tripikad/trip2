@@ -2,6 +2,7 @@
 
 .NavbarDesktop {
     position: relative;
+    z-index: 1000;
 }
 
     .NavbarDesktop__links {
@@ -16,7 +17,13 @@
     }
 
     .NavbarDesktop__userImage {
-        margin-left: $margin-md;
+        margin-left: $margin-sm;
+        display: flex;
+        align-items: center;
+    }
+
+    .NavbarDesktop__badge {
+        margin-right: $margin-xs;
     }
 
     .NavbarDesktop__popover {
@@ -45,16 +52,23 @@
         padding: $padding-xs 0;
     }
 
-    .NavbarDesktop__sublink {
-        color: $white;
-        font: $font-heading-sm;
+    .NavbarDesktop__sublinkWrapper {
         padding: $padding-sm $padding-md;
+        display: flex;
+        align-items: center;
     }
 
-    .NavbarDesktop__sublink:hover {
+    .NavbarDesktop__sublinkWrapper:hover {
+        background: $green-dark;
+    }
+
+    .NavbarDesktop__sublinkTitle {
         color: $white;
         font: $font-heading-sm;
-        background: $green-dark;
+    }
+
+    .NavbarDesktop__sublinkBadge {
+        margin-left: $margin-sm;
     }
 
 .NavbarDesktop--white .NavbarDesktop__link {

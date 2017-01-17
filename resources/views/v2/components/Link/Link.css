@@ -12,7 +12,7 @@
     }
 
     .Link__icon {
-        margin-right: $margin-xs;
+        margin-left: $margin-xs;
     }
 
     .Link__icon svg {

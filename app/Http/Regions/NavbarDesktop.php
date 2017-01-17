@@ -82,7 +82,6 @@ class NavbarDesktop
                 ->with('route', route('login.form'))
                 ->with('user', $user ? collect()
                     ->put('title', $user->vars()->name)
-                    // ->put('route', route('user.show', [$user]))
                     ->put('image', $user->imagePreset('small_square'))
                     ->put('badge', $user->unreadMessagesCount())
                     ->put('rank', $user->vars()->rank)

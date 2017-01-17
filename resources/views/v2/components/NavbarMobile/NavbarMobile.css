@@ -2,7 +2,8 @@
 
 .NavbarMobile {
     display: block;
-    z-index: 100000;
+    position: relative;
+    z-index: 10000;
 }
 
     .NavbarMobile__menuIcon {
@@ -13,8 +14,18 @@
         fill: $gray-darker;
     }
 
-    .NavbarMobile__menu {
+    .NavbarMobile__userImage {
+        margin-left: $margin-sm;
+        display: flex;
         align-items: center;
+    }
+
+    .NavbarMobile__badge {
+        margin-right: $margin-xs;
+    }
+
+    .NavbarMobile__menu {
+        align-items: flex-start;
         background: $green;
         bottom: 0;
         left: 0;
@@ -47,11 +58,21 @@
         padding: $padding-lg;
     }
 
-    .NavbarMobile__link {
+    .NavbarMobile__sublinkWrapper {
+        padding: $padding-sm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .NavbarMobile__sublinkTitle {
         color: $white;
         font: $font-text-lg;
         text-align: center;
-        padding: $padding-sm;
+    }
+
+    .NavbarMobile__sublinkBadge {
+        margin-left: $margin-sm;
     }
 
 .NavbarMobile--white .NavbarMobile__menuIcon svg {

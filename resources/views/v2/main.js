@@ -50,11 +50,10 @@ new Vue({
     },
 
     mounted() {
-        this.$http.get(globalProps.alertRoute).then(function(res) {
-            if (res.data.info) {
-                this.$events.$emit('alert', {title: res.data.info})
-            }
-        })
+        if (globalProps.info) {
+            this.$events.$emit('alert', {title: globalProps.info})
+        }
+
     }
 
 })

@@ -26,7 +26,7 @@
         width: 100%;
     }
 
-    .PhotoRow__action {
+    .PhotoRow__action  {
         pointer-events: auto;
-        margin-right: $margin-sm;
+        margin: 0 $margin-xs;
     }
