@@ -28,6 +28,11 @@ class UserHeaderImage
                         component('Button')
                             ->is('cyan')
                             ->with('title', trans('user.show.message.create'))
+                            ->with('route', route(
+                                'v2.message.index.with',
+                                [$loggedUser, $user]
+                            )
+                        )
                     )
                 )
             );

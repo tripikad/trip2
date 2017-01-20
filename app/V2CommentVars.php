@@ -28,7 +28,7 @@ class V2CommentVars
 
     public function title()
     {
-        return str_limit($this->attributes['body'], 30);
+        return str_limit(strip_tags($this->comment->body), 30);
     }
 
     public function body()

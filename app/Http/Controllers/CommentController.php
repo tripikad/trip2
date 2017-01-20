@@ -101,7 +101,15 @@ class CommentController extends Controller
             config('content_'.$type.'.index.paginate')
         );
         $comments->setPath(route($type.'.show', [$content->slug]));
-
+        
+        if (request()->input('v2') === '') {
+            return backToAnchor('#comment-'.$comment->id)
+                ->with('info', trans(
+                    'comment.created.title',
+                    ['title' => $comment->vars()->title()]
+                ));
+        }
+ 
         return redirect()
             ->route($type.'.show', [
                 $content->slug,
