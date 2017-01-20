@@ -20,7 +20,7 @@ class Comment
             )
             ->with('meta', component('Meta')->with('items', collect()
                     ->pushWhen($user
-                        && $user->hasRole('admin')
+                        && $user->hasRole('regular')
                         && $firstUnreadCommentId
                         && $firstUnreadCommentId <= $comment->id,
                         component('Tag')
