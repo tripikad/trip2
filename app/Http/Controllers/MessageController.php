@@ -84,8 +84,7 @@ class MessageController extends Controller
         }
 
         Log::info('A private message has been sent');
-        
+
         return backToAnchor('#message-'.$message->id);
-        
     }
 }
