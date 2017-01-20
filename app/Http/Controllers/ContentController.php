@@ -415,7 +415,7 @@ class ContentController extends Controller
                         // Cache value is initially 0 (no new comments are added yet)
                         // Note: not sure about set for x seconds / set forever / auto-expiration yet
 
-                        Cache::store('permanent')->forever($key, 0);
+                        Cache::store('permanent')->put($key, 0, config('cache.content.expire.comment'));
                     });
                 });
             }
