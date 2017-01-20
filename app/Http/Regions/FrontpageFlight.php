@@ -9,6 +9,7 @@ class FrontpageFlight
         return component('Grid3')->with('items', $flights
             ->map(function ($flight, $index) {
                 $destination = $flight->destinations->first();
+
                 return region(
                         'DestinationBar',
                         $destination,

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Request;
-use Response;
-use App\Image;
 use App\Content;
 
 class V2ExperimentsController extends Controller
@@ -65,7 +63,7 @@ class V2ExperimentsController extends Controller
     public function form()
     {
         dump(request()->all());
+
         return back()->with('title', 'Submitted a form');
     }
-
 }

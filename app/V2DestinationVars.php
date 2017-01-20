@@ -50,7 +50,7 @@ class V2DestinationVars
     }
 
     public function isCountry()
-    {   
+    {
         return $this->destination->depth == 1;
     }
 
