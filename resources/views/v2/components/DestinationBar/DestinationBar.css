@@ -8,10 +8,6 @@
     padding: 0 calc($spacer * 1.5);
 }
 
-.DestinationBar--dark {
-    background: $yellow-dark;
-}
-
     .DestinationBar__parents {
         color: $white;
         display: flex;
@@ -30,3 +26,10 @@
         line-height: 100%;
     }
 
+.DestinationBar--purple {
+    background: $purple;
+}
+
+.DestinationBar--red {
+    background: $red;
+}
