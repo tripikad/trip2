@@ -58,6 +58,41 @@ CACHE_DRIVER=redis
 PERMANENT_CACHE_DRIVER=redis
 ```
 
+### Nginx cache
+
+To test the local reverse proxy cache, edit `/usr/local/etc/nginx/valet/valet.conf` file:
+
+1. Add the following to the top of the file:
+
+```nginx
+fastcgi_cache_path /tmp/nginx levels=1:2 keys_zone=TRIP2:256m inactive=60m use_temp_path=off; 
+fastcgi_cache_key "$scheme$request_method$host$request_uri";
+```
+
+2. After the
+
+```
+fastcgi_param SCRIPT_FILENAME /.../
+```
+
+line add the following:
+
+```nginx
+fastcgi_cache TRIP2;
+fastcgi_ignore_headers Set-Cookie; 
+fastcgi_hide_header Set-Cookie;
+fastcgi_pass_header Set-Cookie;
+fastcgi_cache_bypass $cookie_logged $is_args;
+fastcgi_no_cache $cookie_logged $is_args;
+add_header X-Cache $upstream_cache_status;
+```
+
+and then run
+
+```
+valet restart
+```
+
 ## Development
 
 ### Watching frontend assets
