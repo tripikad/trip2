@@ -22,11 +22,14 @@ class ContentTest extends TestCase
         ];
 
         $this->privateContentTypes = [
-//          'internal',
-//          'static',
             'flight',
             'news',
             'shortnews',
+        ];
+
+        $this->internalContentTypes = [
+            'internal',
+            'static',
         ];
     }
 
@@ -243,6 +246,47 @@ class ContentTest extends TestCase
                     'body' => "Editor body $type",
                     'type' => $type,
                 ]);
+        }
+    }
+
+    public function test_forum_content_do_not_update_timestamp_when_superuser_updates_content()
+    {
+        $superuser = factory(App\User::class)->create(['role' => 'superuser']);
+
+        $contentTypes = array_merge(
+            $this->publicContentTypes,
+            $this->privateContentTypes,
+            $this->internalContentTypes
+        );
+
+        $notUpdatingTypes = [
+            'forum',
+            'buysell',
+            'expat',
+        ];
+
+        foreach ($contentTypes as $type) {
+            $content = factory(Content::class)->create([
+                'user_id' => $superuser->id,
+                'type' => $type,
+            ]);
+
+            $first_date = Content::find($content->id)->updated_at;
+
+            sleep(1);
+
+            $this->actingAs($superuser)
+                ->visit("content/$type/$content->id/edit")
+                ->type('Hola titulo', 'title')
+                ->press(trans('content.edit.submit.title'));
+
+            $second_date = Content::find($content->id)->updated_at;
+
+            if (in_array($type, $notUpdatingTypes)) {
+                $this->assertEquals($first_date->timestamp, $second_date->timestamp);
+            } else {
+                $this->assertGreaterThan($first_date->timestamp, $second_date->timestamp);
+            }
         }
     }
 
