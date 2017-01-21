@@ -9,6 +9,7 @@ class V2BlogController extends Controller
     public function index()
     {
         $blogs = Content::getLatestPagedItems('blog', 10);
+        $loggedUser = request()->user();
 
         return layout('2col')
 
@@ -34,6 +35,12 @@ class V2BlogController extends Controller
             )
 
             ->with('sidebar', collect()
+                ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('regular'),
+                    component('Button')
+                        ->with('title', trans("content.blog.create.title"))
+                        ->with('route', route('content.create', ['blog']))
+                )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
