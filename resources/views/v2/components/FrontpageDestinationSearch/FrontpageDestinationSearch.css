@@ -28,4 +28,5 @@
         font: $font-heading-md;
         background: none;
         padding: $padding-xxs 0 $padding-xxs $padding-xxs;
+        color: $gray-darkest;
     }
