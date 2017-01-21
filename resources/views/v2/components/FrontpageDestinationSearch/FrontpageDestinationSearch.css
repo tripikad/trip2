@@ -1,12 +1,31 @@
 @import "variables";
 
 .FrontpageSearchDestination {
-
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    align-items: center;
 }
 
-    .FrontpageSearchDestination .multiselect {
+    .FrontpageSearchDestination__icon {
+        display: none ?if $mobile;
+        padding-left: $padding-sm;
+    }
+
+    .FrontpageSearchDestination__icon svg {
+        fill: $red;
+    }
+
+    .FrontpageSearchDestination__search {
+        width: 100%;
+    }
+
+    .FrontpageSearchDestination .multiselect__tags {
+        border: none;
+        background: none;
     }
 
     .FrontpageSearchDestination .multiselect__input {
         font: $font-heading-md;
+        background: none;
+        padding: $padding-xxs 0 $padding-xxs $padding-xxs;
     }

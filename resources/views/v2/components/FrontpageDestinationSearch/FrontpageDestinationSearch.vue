@@ -2,6 +2,18 @@
 
     <div class="FrontpageSearchDestination" :class="isclasses">
 
+        <div class="FrontpageSearchDestination__icon">
+
+            <component
+                is="Icon"
+                icon="icon-search"
+                size="lg"
+            ></component>
+
+        </div>
+
+        <div class="FrontpageSearchDestination__search">
+
         <component
             is="Multiselect"
             v-model="selected"
@@ -14,6 +26,8 @@
         >
         </component>
 
+        </div>
+
     </div>
 
 </template>
@@ -22,9 +36,11 @@
 
     import { Multiselect } from 'vue-multiselect'
 
+    import Icon from '../Icon/Icon.vue'
+
     export default {
 
-        components: { Multiselect },
+        components: { Multiselect, Icon },
 
         props: {
             isclasses: { default: '' },

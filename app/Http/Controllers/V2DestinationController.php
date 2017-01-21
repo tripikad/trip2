@@ -32,7 +32,7 @@ class V2DestinationController extends Controller
 
             ->with('top', region(
                 'PhotoRow',
-                $photos,
+                $photos->count() ? $photos : collect(),
                 collect()
                     ->push(
                         component('Button')
