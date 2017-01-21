@@ -38,7 +38,7 @@ class V2BlogController extends Controller
                 ->pushWhen(
                     $loggedUser && $loggedUser->hasRole('regular'),
                     component('Button')
-                        ->with('title', trans("content.blog.create.title"))
+                        ->with('title', trans('content.blog.create.title'))
                         ->with('route', route('content.create', ['blog']))
                 )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
