@@ -7,6 +7,7 @@ class BlogRow
     public function render($blog)
     {
         $commentCount = $blog->vars()->commentCount();
+        $loggedUser = request()->user();
 
         return component('BlogRow')
             ->with('user', component('UserImage')
@@ -41,6 +42,11 @@ class BlogRow
                 ->merge($blog->topics->map(function ($topic) {
                     return component('MetaLink')->with('title', $topic->name);
                 }))
+                ->pushWhen($loggedUser && $loggedUser->hasRoleOrOwner('regular', $blog->user->id),
+                    component('MetaLink')
+                        ->with('title', trans('content.action.edit.title'))
+                        ->with('route', route('content.edit', ['blog', $blog]))
+                )
             )
         );
     }
