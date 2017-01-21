@@ -23,13 +23,13 @@ class ForumRow
             )
             ->with('title', $forum->title)
             ->with('meta', component('Meta')->with('items', collect()
-                    ->pushWhen($user && $user->hasRole('admin') && $forum->vars()->isNew,
+                    ->pushWhen($user && $user->hasRole('regular') && $forum->vars()->isNew,
                         component('Tag')
                             ->is('red')
                             ->with('title', trans('content.show.isnew'))
                             ->with('route', $route)
                     )
-                    ->pushWhen($user && $user->hasRole('admin') && $firstUnreadCommentId,
+                    ->pushWhen($user && $user->hasRole('regular') && $firstUnreadCommentId,
                         component('Tag')
                             ->is('red')
                             ->with('title', trans_choice(

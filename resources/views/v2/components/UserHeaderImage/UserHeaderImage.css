@@ -1,0 +1,18 @@
+@import "variables";
+
+.UserHeaderImage {
+    display: flex;
+    flex-direction: column ?if $mobile;
+    align-items: center;
+    text-align: center;
+}
+
+    .UserHeaderImage__user {
+        margin-right: $margin-md;
+        margin-right: 0 ?if $mobile;
+        margin-bottom: $margin-sm ?if $mobile;
+    }
+
+    .UserHeaderImage__actions {
+        margin-top: $margin-sm;
+    }

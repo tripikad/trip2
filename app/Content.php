@@ -138,10 +138,9 @@ class Content extends Model
             ->findOrFail($id);
     }
 
-    public function scopeGetItemBySlug($query, $slug)
+    public function scopeGetItemBySlug($query, $slug, $user = false)
     {
         return $query
-            ->whereStatus(1)
             ->whereSlug($slug)
             ->with(
                 'images',
@@ -152,6 +151,9 @@ class Content extends Model
                 'destinations',
                 'topics'
             )
+            ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
+                return $query->whereStatus(1);
+            })
             ->first();
     }
 

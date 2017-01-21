@@ -31,7 +31,7 @@ $( document ).ready(function() {
         });
 
         FB.api(
-            "https://graph.facebook.com/tripeeee?fields=likes,fan_count&summary=true&access_token=EAAEvZCZBIfkoABALLZC61Ng3T4dZA8aJL8lA6MyAaZABZB4KnJCjZBdDm8jwfTVTxVy5zzfZAAU8aa2DZBtUxc5IA3kfRhDnKZBBU9cr8AKpLfgKCJ7sNxxftL8wZB1Rr27mYJoSv3gwVlUJjAIrUJBy1X7J39grkNTklYZD",
+            "https://graph.facebook.com/tripeeee?fields=likes,fan_count&summary=true&access_token=EAAEvZCZBIfkoABAHjunnTtMccASAOSBOnMRGAQjPaOOVHZCL1AMnJZCHdlb2z8cHr58GQ71ufCiAeqw3OXndflEpR8DyF6bmlhuXlt3hALRTcz6iqrt9vx0mIqMGbW0qaZCD7z2WOiFntEZAnOzF5guwaLb2Xv1M0ZD",
             function (response) {
                 if (response && !response.error) {
                     totalPageLikes = response.fan_count;

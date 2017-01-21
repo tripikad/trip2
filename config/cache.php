@@ -26,6 +26,9 @@ return [
         'show' => [
             'header' => 60 * 10,
         ],
+        'expire' => [
+            'comment' => 60 * 24 * 30, // 30 days
+        ],
     ],
 
     'user' => [
@@ -113,6 +116,6 @@ return [
     |
     */
 
-    'prefix' => 'laravel',
+    'prefix' => '',
 
 ];

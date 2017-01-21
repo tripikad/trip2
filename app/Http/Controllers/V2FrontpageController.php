@@ -2,26 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
 use App\Content;
+use App\Destination;
 
 class V2FrontpageController extends Controller
 {
     public function index()
     {
-        /*
-        @section('head_description', trans('site.description.main'))
-        */
-
-        $user = auth()->user();
+        $loggedUser = auth()->user();
 
         $flights = Content::getLatestItems('flight', 9);
-        $forums = Content::getLatestItems('forum', 16, 'updated_at');
+        $forums = Content::getLatestItems('forum', 18, 'updated_at');
         $news = Content::getLatestItems('news', 6);
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 9);
         $travelmates = Content::getLatestItems('travelmate', 5);
 
+        $destinations = Destination::select('id', 'name')->get();
+
         return layout('frontpage')
+
+            ->with('title', trans('site.about'))
+            ->with('head_title', trans('site.about'))
+            ->with('head_description', trans('site.description.main'))
+            ->with('head_image', Image::getSocial())
 
             ->with('promobar', component('PromoBar')
                 ->with('title', 'Osale Trip.ee kampaanias ja võida 2 lennupiletit Maltale')
@@ -30,14 +35,27 @@ class V2FrontpageController extends Controller
                 ->render()
             )
 
-            ->with('header', region('FrontpageHeader'))
+            ->with('header', region('FrontpageHeader', $destinations))
 
             ->with('top', collect()
                 ->push(region('FrontpageFlight', $flights->take(3)))
-                ->pushWhen(! $user, region('FrontpageAbout'))
+                ->push(component('BlockHorizontal')
+                    ->is('right')
+                    ->with('content', collect()->push(component('Link')
+                        ->is('blue')
+                        ->with('title', trans('frontpage.index.all.offers'))
+                        ->with('route', route('v2.flight.index'))
+                    ))
+                )
+                ->pushWhen(! $loggedUser, '&nbsp;')
+                ->pushWhen(! $loggedUser, region('FrontpageAbout'))
             )
 
             ->with('content', collect()
+                ->push(component('BlockTitle')
+                    ->with('title', trans('frontpage.index.forum.title'))
+                    ->with('route', route('v2.forum.index'))
+                )
                 ->merge($forums->take($forums->count() / 2)->map(function ($forum) {
                     return region('ForumRow', $forum);
                 }))
@@ -48,12 +66,35 @@ class V2FrontpageController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(component('BlockTitle')
-                    ->with('title', trans('frontpage.index.forum.title'))
-                    ->with('route', route('v2.forum.index'))
+                ->push('&nbsp')
+                ->merge(collect(['forum', 'buysell', 'expat'])
+                    ->flatMap(function ($type) use ($loggedUser) {
+                        return collect()
+                            ->push(component('Link')
+                                ->is('large')
+                                ->with('title', trans("content.$type.index.title"))
+                                ->with('route', route("v2.$type.index"))
+                            )
+                            ->pushWhen(
+                                ! $loggedUser,
+                                component('Body')
+                                    ->is('gray')
+                                    ->with('body', trans("site.description.$type"))
+                            );
+                    })
                 )
-                ->push(component('Body')->with('body', trans('site.description.forum')))
-                ->merge(region('ForumLinks'))
+                ->pushWhen($loggedUser, component('Link')
+                    ->is('large')
+                    ->with('title', trans('menu.user.follow'))
+                    ->with('route', route('v2.follow.index', [$loggedUser]))
+                )
+                ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('admin'),
+                    component('Link')
+                        ->is('large')
+                        ->with('title', trans('menu.auth.admin'))
+                        ->with('route', route('v2.internal.index'))
+                )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffHotelscombined'))
@@ -63,16 +104,28 @@ class V2FrontpageController extends Controller
                 ->merge(region('FrontpageNews', $news))
                 ->push(component('BlockTitle')
                     ->with('title', trans('frontpage.index.photo.title'))
+                    ->with('route', route('v2.photo.index'))
                 )
             )
 
-            ->with('bottom2', collect(region('Gallery', $photos)))
+            ->with('bottom2', region(
+                'PhotoRow',
+                $photos,
+                collect()
+                    ->pushWhen(
+                        $loggedUser && $loggedUser->hasRole('regular'),
+                        component('Button')
+                            ->is('transparent')
+                            ->with('title', trans('content.photo.create.title'))
+                            ->with('route', route('content.create', ['photo']))
+                    )
+            ))
 
             ->with('bottom3', collect()
                 ->push(region('FrontpageBottom', $flights->slice(3), $travelmates))
                 ->push(component('Block')
                     ->with('title', trans('frontpage.index.blog.title'))
-                    ->with('route', trans('frontpage.index.blog.title'))
+                    ->with('route', route('v2.blog.index'))
                     ->with('content', collect()
                         ->push(component('Grid3')
                             ->with('items', $blogs->map(function ($blog) {

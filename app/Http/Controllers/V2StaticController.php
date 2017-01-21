@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
 use App\Content;
 
 class V2StaticController extends Controller
@@ -31,7 +32,14 @@ class V2StaticController extends Controller
 
         return layout('1col')
 
-            ->with('header', region('HeaderLight', $post->vars()->title))
+            ->with('title', $post->getHeadTitle())
+            ->with('head_title', $post->getHeadTitle())
+            ->with('head_description', $post->getHeadDescription())
+            ->with('head_image', Image::getSocial())
+
+            ->with('header', region('StaticHeader', collect()
+                ->push(component('Title')->with('title', $post->vars()->title))
+            ))
 
             ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))

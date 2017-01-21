@@ -1,6 +1,0 @@
-@import "variables";
-
-    .UserCommentRow__forum {
-        margin: 0 0 $margin-md $margin-sm;
-        opacity: $opacity-md;
-    }

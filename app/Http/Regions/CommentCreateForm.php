@@ -4,13 +4,17 @@ namespace App\Http\Regions;
 
 class CommentCreateForm
 {
-    public function render($content)
+    public function render($content, $is = '')
     {
         return component('Block')
             ->is('border')
+            ->is($is)
             ->with('content', collect()
                 ->push(component('Form')
-                    ->with('route', route('comment.store', [$content->type, $content->id]))
+                    ->with('route', route(
+                        'comment.store',
+                        [$content->type, $content->id, 'v2']
+                    ))
                     ->with('fields', collect()
                         ->push(component('FormTextarea')
                             ->is('borderless')

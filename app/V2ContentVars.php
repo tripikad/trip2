@@ -107,6 +107,8 @@ class V2ContentVars
 
     public function flagCount($flagType)
     {
+        return;
+
         return $this->content->flags->where('flag_type', $flagType)->count();
     }
 }

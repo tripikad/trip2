@@ -5,14 +5,6 @@
     line-height: $line-height-lg;
 }
 
-.Body--responsive {
-    font-family: $font-family;
-    font-size: responsive;
-    line-height: $line-height-lg;
-    max-font-size: $font-size-lg;
-    min-font-size: $font-size-md;
-}
-
 .Body,
 .Body * {
     color: $gray-darkest;
@@ -103,4 +95,27 @@
     border: 0;
     height: 0;
     margin: $margin-md 0;
+}
+
+.Body--responsive {
+    font-family: $font-family;
+    font-size: responsive;
+    line-height: $line-height-lg;
+    max-font-size: $font-size-lg;
+    min-font-size: $font-size-md;
+}
+
+.Body--white,
+.Body--white * {
+    color: $white;
+}
+
+.Body--cyan,
+.Body--cyan * {
+    color: $cyan;
+}
+
+.Body--gray,
+.Body--gray * {
+    color: $gray-darker;
 }

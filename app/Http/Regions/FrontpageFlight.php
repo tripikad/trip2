@@ -7,14 +7,13 @@ class FrontpageFlight
     public function render($flights)
     {
         return component('Grid3')->with('items', $flights
-            ->map(function ($flight, $key) {
+            ->map(function ($flight, $index) {
                 $destination = $flight->destinations->first();
 
                 return region(
                         'DestinationBar',
                         $destination,
-                        $destination->getAncestors(),
-                        ['', 'dark', ''][$key]
+                        ['purple', 'yellow', 'red'][$index]
                     )
                     .region('FlightCard', $flight);
             })

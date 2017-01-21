@@ -1,6 +1,6 @@
-<title>@yield('title')</title>
+<title>{{ config('site.name') }} | @yield('title')</title>
 <meta name="description" content="@yield('head_description')">
-<meta property="og:title" content="@yield('title')">
+<meta property="og:title" content="@yield('head_title')">
 <meta property="og:description" content="@yield('head_description')">
 <meta property="og:image" content="{{ config('app.url') }} @yield('head_image')">
 <meta property="og:url" content="{{ Request::url() }}">

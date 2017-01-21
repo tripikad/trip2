@@ -7,6 +7,7 @@ class MessageRow
     public function render($message, $user)
     {
         return component('MessageRow')
+            ->with('id', $message->id)
             ->with('title', trans('message.index.row.description', [
                 'user' => $message->withUser->vars()->name,
                 'created_at' => $message->vars()->created_at,

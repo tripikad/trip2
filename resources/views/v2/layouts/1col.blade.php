@@ -1,6 +1,7 @@
 @php
 
 $title = $title ?? '';
+$head_title = $head_title ?? '';
 $head_description = $head_description ?? '';
 $head_image = $head_image ?? '';
 $header = $header ?? '';
@@ -14,6 +15,7 @@ $footer = $footer ?? '';
 @extends('v2.layouts.main')
 
 @section('title', $title)
+@section('head_title', $head_title)
 @section('head_description', $head_description)
 @section('head_image', $head_image)
 
@@ -34,6 +36,8 @@ $footer = $footer ?? '';
     </div>
 
 @endif
+
+@if ($content->count())
 
 <div class="background-white">
 
@@ -82,6 +86,8 @@ $footer = $footer ?? '';
     @endif
     
 </div>
+
+@endif
 
 @endsection
 

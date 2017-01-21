@@ -31,5 +31,6 @@ return [
 
     'index.about.title' => 'Loe täpsemalt, mis on Trip.ee',
     'index.about.register' => 'Liitu Trip.ee-ga',
+    'index.about.login' => 'Logi sisse',
 
 ];

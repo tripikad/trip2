@@ -19,7 +19,5 @@
         line-height: $line-height-md;
         line-height: $line-height-lg ?if $mobile;
         margin-bottom: $margin-sm;
-        margin-right: calc($spacer * 25);
-        margin-right: 0 ?if $mobile;
-        text-shadow: $text-shadow;
+        text-shadow: $text-shadow-md;
     }

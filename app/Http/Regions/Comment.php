@@ -4,13 +4,14 @@ namespace App\Http\Regions;
 
 class Comment
 {
-    public function render($comment, $firstUnreadCommentId = false)
+    public function render($comment, $firstUnreadCommentId = false, $is = '')
     {
         $user = auth()->user();
 
         return component('Comment')
             ->when($comment->status || ($user && $user->hasRole('admin')))
             ->is($comment->status ?: 'unpublished')
+            ->is($is)
             ->with('id', $comment->id)
             ->with('user', component('UserImage')
                 ->with('route', route('v2.user.show', [$comment->user]))
@@ -19,7 +20,7 @@ class Comment
             )
             ->with('meta', component('Meta')->with('items', collect()
                     ->pushWhen($user
-                        && $user->hasRole('admin')
+                        && $user->hasRole('regular')
                         && $firstUnreadCommentId
                         && $firstUnreadCommentId <= $comment->id,
                         component('Tag')
@@ -32,8 +33,8 @@ class Comment
                     )
                     ->push(component('MetaLink')
                         ->with('title', $comment->vars()->created_at)
-                        ->with('route', route('content.show', [
-                            $comment->content->type, $comment->content, '#comment-'.$comment->id,
+                        ->with('route', route('v2.forum.show', [
+                            $comment->content->slug, '#comment-'.$comment->id,
                         ]))
                     )
                     ->pushWhen($user && $user->hasRoleOrOwner('admin', $comment->user->id), component('MetaLink')
@@ -61,6 +62,8 @@ class Comment
                             : false
                         )
                         ->with('icon', 'icon-thumb-up')
+                        ->with('flagtitle', trans('flag.comment.good.flag.title'))
+                        ->with('unflagtitle', trans('flag.comment.good.unflag.title'))
                     )
                     ->push(component('Flag')
                         ->is('red')
@@ -74,6 +77,8 @@ class Comment
                             : false
                         )
                         ->with('icon', 'icon-thumb-down')
+                        ->with('flagtitle', trans('flag.comment.bad.flag.title'))
+                        ->with('unflagtitle', trans('flag.comment.bad.unflag.title'))
                     )
                 )
             )

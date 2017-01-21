@@ -5,23 +5,6 @@ use App\Http\Controllers\ContentController;
 
 // V2
 
-// Styleguide
-
-Route::get('v2/index', [
-    'uses' => 'V2StyleguideController@index',
-    'as' => 'styleguide.index',
-]);
-
-Route::post('v2/styleguide/form', [
-    'uses' => 'V2StyleguideController@form',
-    'as' => 'styleguide.form',
-]);
-
-Route::post('v2/styleguide/flag', [
-    'uses' => 'V2StyleguideController@flag',
-    'as' => 'styleguide.flag',
-]);
-
 // Frontpage
 
 Route::get('v2/frontpage', [
@@ -125,6 +108,18 @@ Route::get('v2/internal/{id}', [
     'as' => 'v2.internal.show',
 ]);
 
+// Photo
+
+Route::get('v2/photo', [
+    'uses' => 'V2PhotoController@index',
+    'as' => 'v2.photo.index',
+]);
+
+Route::get('v2/user/{id}/photo', [
+    'uses' => 'V2PhotoController@userIndex',
+    'as' => 'v2.photo.user',
+]);
+
 // User
 
 Route::get('v2/user/{id}', [
@@ -161,6 +156,13 @@ Route::get('v2/destination/{id}', [
     'as' => 'v2.destination.show',
 ]);
 
+// Errors
+
+Route::get('v2/error/{code}', [
+    'uses' => 'V2ErrorController@show',
+    'as' => 'v2.error.show',
+]);
+
 // Utils
 
 Route::get('v2/utils/alert', [
@@ -186,6 +188,18 @@ Route::post('v2/image/store', [
 Route::post('v2/utils/filter', [
     'uses' => 'V2UtilsController@filter',
     'as' => 'utils.filter',
+]);
+
+// Experiments
+
+Route::get('experiments', [
+    'uses' => 'V2ExperimentsController@index',
+    'as' => 'experiments.index',
+]);
+
+Route::post('experiments/form', [
+    'uses' => 'V2ExperimentsController@form',
+    'as' => 'experiments.form',
 ]);
 
 // V1

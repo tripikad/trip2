@@ -9,10 +9,6 @@ class V2DestinationController extends Controller
 {
     public function show($id)
     {
-        /*
-        @section('head_description', trans("site.description.destination", ['name' => $destination->name]))
-        */
-
         $destination = Destination::findOrFail($id);
 
         $photos = Content::getLatestPagedItems('photo', 9, $destination->id);
@@ -22,11 +18,41 @@ class V2DestinationController extends Controller
         $travelmates = Content::getLatestPagedItems('travelmate', 6, $destination->id);
         $news = Content::getLatestPagedItems('news', 2, $destination->id);
 
+        $loggedUser = request()->user();
+
         return layout('2col')
+
+            ->with('head_description', trans('site.description.destination', [
+                'name' => $destination->vars()->name,
+            ]))
+
+            ->with('title', $destination->vars()->name)
 
             ->with('header', region('DestinationHeader', $destination))
 
-            ->with('top', $photos->count() ? region('Gallery', $photos) : '')
+            ->with('top', region(
+                'PhotoRow',
+                $photos->count() ? $photos : collect(),
+                collect()
+                    ->pushWhen(
+                        $photos->count(),
+                        component('Button')
+                            ->is('transparent')
+                            ->with('title', trans('content.photo.more'))
+                            ->with('route', route(
+                                'v2.photo.index',
+                                ['destination' => $destination->id]
+                            ))
+                    )
+                    ->pushWhen(
+                        $loggedUser && $loggedUser->hasRole('regular'),
+                        component('Button')
+                            ->is('transparent')
+                            ->with('title', trans('content.photo.create.title'))
+                            ->with('route', route('content.create', ['photo']))
+                    )
+
+            ))
 
             ->with('content', collect()
                 ->push(component('Block')

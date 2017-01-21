@@ -1,5 +1,6 @@
 @php
 
+$id = $id ?? '';
 $user = $user ?? '';
 $title = $title ?? '';
 $route = $route ?? '';
@@ -7,6 +8,8 @@ $route = $route ?? '';
 @endphp
 
 <div class="MessageRow {{ $isclasses }}">
+
+    <a id="message-{{ $id }}"></a>
 
     <div class="MessageRow__user">
 

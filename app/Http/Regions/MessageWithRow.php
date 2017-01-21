@@ -7,6 +7,7 @@ class MessageWithRow
     public function render($message)
     {
         return component('MessageRow')
+            ->with('id', $message->id)
             ->with('user', component('UserImage')
                 ->with('route', route('v2.user.show', [$message->fromUser]))
                 ->with('image', $message->fromUser->vars()->imagePreset('small_square'))

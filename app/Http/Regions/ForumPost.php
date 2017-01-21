@@ -74,6 +74,8 @@ class ForumPost
                             : false
                         )
                         ->with('icon', 'icon-thumb-up')
+                        ->with('flagtitle', trans('flag.content.good.flag.title'))
+                        ->with('unflagtitle', trans('flag.content.good.unflag.title'))
                     )
                     ->push(component('Flag')
                         ->is('red')
@@ -87,6 +89,8 @@ class ForumPost
                             : false
                         )
                         ->with('icon', 'icon-thumb-up')
+                        ->with('flagtitle', trans('flag.content.bad.flag.title'))
+                        ->with('unflagtitle', trans('flag.content.bad.unflag.title'))
                     )
                     ->pushWhen($user, component('Form')
                             ->with('route', route(

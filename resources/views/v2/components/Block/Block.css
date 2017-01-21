@@ -16,3 +16,8 @@
     padding: $padding-md;
     padding: $padding-sm ?if $mobile;
 }
+
+.Block--inset {
+    margin-left: $margin-xxl;
+    margin-left: 0 ?if $mobile;
+}

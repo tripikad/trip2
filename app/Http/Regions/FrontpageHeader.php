@@ -4,7 +4,7 @@ namespace App\Http\Regions;
 
 class FrontpageHeader
 {
-    public function render()
+    public function render($destinations)
     {
         return component('FrontpageHeader')
             ->with('background', '/photos/header3.jpg')
@@ -19,8 +19,10 @@ class FrontpageHeader
                 ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
-            ->with('search', component('FrontpageSearch')
-                ->with('title', trans('frontpage.index.search.title'))
+            ->with('search', component('FrontpageDestinationSearch')
+                ->with('route', route('v2.destination.show', [0]))
+                ->with('placeholder', trans('frontpage.index.search.title'))
+                ->with('options', $destinations)
             );
     }
 }

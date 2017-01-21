@@ -62,6 +62,8 @@ return [
     'update.image.info' => 'User image has been updated',
     'update.info' => 'User profile has been updated',
 
+    'activity.comments.title' => 'Last comments',
+
     'activity.index.title' => 'Latest activity',
     'activity.index.row.content' => ':user posted :title at :created_at',
     'activity.index.row.comment' => ':user added a comment :comment_title at the post :title at :created_at',

@@ -7,9 +7,10 @@ class DestinationHeader
     public function render($destination)
     {
         $parents = $destination->getAncestors();
+        $childrens = $destination->getImmediateDescendants()->sortBy('name');
 
-        return component('DestinationHeader')
-            ->with('background', component('MapBackground'))
+        return component('HeaderLight')
+            ->with('background', component('BackgroundMap')->is('yellow'))
             ->with('navbar', component('Navbar')
                 ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))
@@ -21,69 +22,36 @@ class DestinationHeader
                 ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
-            ->with('parents', $parents
-                ->map(function ($parent) {
-                    return component('MetaLink')
-                        ->is('large')
-                        ->is('white')
-                        ->with('title', $parent->vars()->name.' › ')
-                        ->with('route', route('v2.destination.show', [$parent]));
-                })
-                ->render()
-                ->implode('')
-            )
-            ->with('title', $destination->name)
-            ->with('children', component('Meta')
-                ->with('items', $destination
-                    ->getImmediateDescendants()
-                    ->map(function ($destination) {
+            ->with('content', collect()
+                ->push(region('DestinationParents', $parents))
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', $destination->name)
+                )
+                ->push(component('Body')
+                    ->is('white')
+                    ->is('responsive')
+                    ->with('body', $destination->vars()->description)
+                )
+                ->pushWhen($childrens->count(), component('Meta')
+                    ->is('large')
+                    ->with('items', $childrens->map(function ($children) {
                         return component('Tag')
                             ->is('white')
                             ->is('large')
-                            ->with('title', $destination->name)
-                            ->with('route', route('v2.destination.show', [$destination]));
+                            ->with('title', $children->name)
+                            ->with('route', route('v2.destination.show', [$children]));
                     }))
                 )
-            ->with('description', $destination->vars()->description)
-            ->with('facts1', component('DestinationFacts')
-                ->with('facts', collect()
-                    ->putWhen(
-                        $destination->vars()->isCountry || $destination->vars()->isPlace,
-                        trans('destination.show.about.callingCode'),
-                        $destination->vars()->callingCode()
-                    )
-                    ->putWhen(
-                        $destination->vars()->isCountry || $destination->vars()->isPlace,
-                        trans('destination.show.about.currencyCode'),
-                        $destination->vars()->currencyCode()
+                ->push(component('BlockHorizontal')
+                    ->is('between')
+                    ->is('bottom')
+                    ->with('content', collect()
+                        ->push(region('DestinationFacts', $destination))
+                        ->push(region('DestinationStat', $destination))
                     )
                 )
-            )
-            ->with('facts2', component('DestinationFacts')
-                ->with('facts', collect()
-                    ->putWhen(
-                        $destination->vars()->isCountry,
-                        trans('destination.show.about.area'),
-                        $destination->vars()->area()
-                    )
-                    ->putWhen(
-                        $destination->vars()->isCountry,
-                        trans('destination.show.about.population'),
-                        $destination->vars()->population()
-                    )
-                )
-            )
-            ->with('stats', collect()
-                    ->push(component('StatCard')
-                        ->with('icon', 'icon-pin')
-                        ->with('title', $destination->vars()->usersWantsToGo()->count())
-                    )
-                    ->push(component('StatCard')
-                        ->with('title', $destination->vars()->usersHaveBeen()->count())
-                        ->with('icon', 'icon-star')
-                    )
-                    ->render()
-                    ->implode('')
             );
     }
 }

@@ -1,6 +1,6 @@
 .fadeCollapse-enter-active,
 .fadeCollapse-leave-active {
-  transition: all 300ms ease;
+  transition: all 500ms ease;
   opacity: 1;
 }
 
@@ -12,7 +12,7 @@
 
 .fadeZoom-enter-active,
 .fadeZoom-leave-active {
-  transition: all 300ms ease;
+  transition: all 500ms ease;
   opacity: 1;
 }
 

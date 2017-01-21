@@ -21,6 +21,13 @@
 
         </div>
 
+        <div class="Gallery__buttonWrapper">
+
+            <div class="Gallery__button" v-html="currentButton">
+            </div>
+
+        </div>
+
         <!--
         <div class="Gallery__fullscreen" v-show="fullscreen">
 
@@ -86,14 +93,16 @@ export default {
 
     props: {
         isclasses: { default: '' },
-        images: { default: '' }
+        images: { default: '' },
+        button: { default: '' }
     },
 
     data() {
         return {
             fullscreen: false,
             activeImage: false,
-            currentImages: []
+            currentImages: [],
+            currentButton: ''
         }
     },
 
@@ -111,7 +120,7 @@ export default {
     },
 
     mounted() {
-        //this.currentImages = this.images
+        // this.currentImages = this.images
         //    ? chunk(JSON.parse(decodeURIComponent(this.images)), 3)
         //    : []
         var images = this.images ? JSON.parse(decodeURIComponent(this.images)) : []
@@ -119,6 +128,9 @@ export default {
             Array(9 - images.length).fill({small: '/v2/svg/image_none.svg'})
         )
         this.currentImages = chunk(images, 3)
+
+        this.currentButton = this.button ? JSON.parse(decodeURIComponent(this.button))[0] : []
+
     }
 
 }

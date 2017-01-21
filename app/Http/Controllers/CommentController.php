@@ -68,14 +68,15 @@ class CommentController extends Controller
 
                     $key = 'new_'.$comment->content_id.'_'.$user->id;
 
-                    // We will not overwrite the cache if there are unread comments already
-
-                    if (! Cache::store('permanent')->get($key, 0) > 0) {
-
-                        // The cache value is new comment id, this helps us redirect user
-                        // to the right place later
-
-                        Cache::store('permanent')->forever($key, $comment->id);
+                    if (Cache::store('permanent')->has($key)) {
+                        // We will not overwrite the cache if there are unread comments already
+                        if (! Cache::store('permanent')->get($key, 0) > 0) {
+                            Cache::store('permanent')->put($key, $comment->id, config('cache.content.expire.comment'));
+                        } else {
+                            Cache::store('permanent')->put($key, Cache::store('permanent')->get($key), config('cache.content.expire.comment'));
+                        }
+                    } else {
+                        Cache::store('permanent')->put($key, $comment->id, config('cache.content.expire.comment'));
                     }
                 });
             });
@@ -100,6 +101,14 @@ class CommentController extends Controller
             config('content_'.$type.'.index.paginate')
         );
         $comments->setPath(route($type.'.show', [$content->slug]));
+
+        if (request()->input('v2') === '') {
+            return backToAnchor('#comment-'.$comment->id)
+                ->with('info', trans(
+                    'comment.created.title',
+                    ['title' => $comment->vars()->title()]
+                ));
+        }
 
         return redirect()
             ->route($type.'.show', [
@@ -145,11 +154,18 @@ class CommentController extends Controller
             $comment->status = $status;
             $comment->save(['touch' => false]);
 
+            /*
             return redirect()
                 ->route($comment->content->type.'.show', [
                     $comment->content->slug,
                     '#comment-'.$comment->id,
                 ])
+                ->with('info', trans("comment.action.status.$status.info", [
+                    'title' => $comment->title,
+                ]));
+            */
+
+            backToAnchor('#comment-'.$comment->id)
                 ->with('info', trans("comment.action.status.$status.info", [
                     'title' => $comment->title,
                 ]));

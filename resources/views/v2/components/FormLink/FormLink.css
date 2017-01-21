@@ -9,3 +9,6 @@
     padding-top: $padding-sm;
 }
 
+.FormLink--white {
+    color: $white;
+}

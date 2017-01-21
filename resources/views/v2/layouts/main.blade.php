@@ -10,7 +10,7 @@
             {{
                 rawurlencode(json_encode([
                     'token' => csrf_token(),
-                    'alertRoute' => route('utils.alert'),
+                    'info' => session('info'),
                     'allowedTags' => config('site.allowedtags'),
                     'maxfilesize' => config('site.maxfilesize'),
                     'promo' => config('promo')
@@ -27,6 +27,8 @@
             @yield('header')
             @yield('content')
             @yield('footer')
+            <photo-fullscreen></photo-fullscreen>
+            <alert></alert>
         </div>
         <script src="/v2/js/main.js"></script>
         @include('v2.utils.promo')

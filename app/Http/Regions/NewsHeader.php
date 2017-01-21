@@ -30,17 +30,19 @@ class NewsHeader
                         ->with('rank', $new->user->vars()->rank)
                     )
                     ->push(component('MetaLink')
+                        ->is('white')
                         ->with('title', $new->user->vars()->name)
                         ->with('route', route('v2.user.show', [$new->user]))
                     )
                     ->push(component('MetaLink')
+                        ->is('white')
                         ->with('title', $new->vars()->created_at)
                     )
                     ->merge($new->destinations->map(function ($tag) {
                         return component('Tag')->is('orange')->with('title', $tag->vars()->shortName);
                     }))
                     ->merge($new->topics->map(function ($tag) {
-                        return component('Tag')->with('title', $tag->vars()->shortName);
+                        return component('MetaLink')->is('white')->with('title', $tag->vars()->shortName);
                     }))
                     ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                         ->with('title', trans('content.action.edit.title'))
@@ -55,6 +57,7 @@ class NewsHeader
                             ->with('method', 'PUT')
                             ->with('fields', collect()
                                 ->push(component('FormLink')
+                                    ->is('white')
                                     ->with('title', trans("content.action.status.$new->status.title"))
                                 )
                             )

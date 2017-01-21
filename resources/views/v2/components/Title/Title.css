@@ -15,3 +15,11 @@
 .Title--white .Title__title {
     color: $white;
 }
+
+.Title--red .Title__title {
+    color: $red;
+}
+
+.Title--shadow .Title__title {
+    text-shadow: $text-shadow-md;
+}

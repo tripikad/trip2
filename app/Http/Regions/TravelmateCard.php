@@ -4,7 +4,7 @@ namespace App\Http\Regions;
 
 class TravelmateCard
 {
-    public function render($travelmate)
+    public function render($travelmate, $tagLimit = 4)
     {
         return component('TravelmateCard')
             ->with('user', component('UserImage')
@@ -23,15 +23,31 @@ class TravelmateCard
             )
             ->with('title', $travelmate->vars()->shortTitle)
             ->with('meta_bottom', component('Meta')->with('items', collect()
-                ->merge($travelmate->destinations->map(function ($destination) {
-                    return component('Tag')
+                ->merge($travelmate->destinations->take($tagLimit)
+                    ->map(function ($destination) {
+                        return component('Tag')
+                            ->is('orange')
+                            ->with('title', $destination->name)
+                            ->with('route', route('v2.destination.show', [$destination]));
+                    }))
+                ->pushWhen(
+                    $travelmate->destinations->count() > $tagLimit,
+                    component('Tag')
                         ->is('orange')
-                        ->with('title', $destination->name)
-                        ->with('route', route('v2.destination.show', [$destination]));
-                }))
-                ->merge($travelmate->topics->map(function ($topic) {
-                    return component('MetaLink')->with('title', $topic->name);
-                }))
+                        ->with('title', '...')
+                )
+                ->merge($travelmate->topics->take($tagLimit)
+                    ->map(function ($topic) {
+                        return component('MetaLink')
+                            ->with('title', $topic->name);
+                    })
+                )
+                ->pushWhen(
+                    $travelmate->topics->count() > $tagLimit,
+                    component('MetaLink')
+                        ->with('title', '...')
+                )
+
             )
         );
     }

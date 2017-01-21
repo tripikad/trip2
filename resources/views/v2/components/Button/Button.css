@@ -31,3 +31,13 @@
         background: $twitter;
     }
 
+    .Button--transparent {
+        background: rgba(0, 0, 0, 0.3);
+        border: $border-white-md;
+    }
+
+.Button--narrow {
+    display: inline-flex;
+    display: flex ?if $mobile;
+}
+

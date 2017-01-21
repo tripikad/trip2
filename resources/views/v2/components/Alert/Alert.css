@@ -1,23 +1,32 @@
 @import "variables";
 
 .Alert {
-    align-items: center;
+    background: $white;
     border-radius: $border-radius-md;
     border: $border-green-md;
+    bottom: $margin-lg;
+    bottom: $margin-sm ?if $mobile;
     display: flex;
     justify-content: space-between;
-    padding: $padding-md;
+    left: $margin-lg;
+    left: $margin-sm ?if $mobile;
+    padding: $padding-sm;
+    position: fixed;
+    right: $margin-sm ?if $mobile;
+    width: calc($spacer * 30);
+    width: inherit ?if $mobile;
 }
 
     .Alert__title {
-        font: $font-heading-md;
-        color: $green;
+        color: $gray-darkest;
+        font: $font-text-md;
+        line-height: $line-height-md;
     }
 
-    .Alert__close {
-        cursor: pointer;
+    .Alert__closeIcon {
+        margin-left: $margin-xs;
     }
 
-    .Alert__close svg {
-        fill: $green;
+    .Alert__closeIcon svg {
+        fill: $gray-darkest;
     }

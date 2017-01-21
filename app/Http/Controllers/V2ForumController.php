@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Cache;
 use Request;
 use App\User;
+use App\Image;
 use App\Topic;
 use App\Content;
 use App\Destination;
@@ -41,19 +42,27 @@ class V2ForumController extends Controller
 
         return layout('2col')
 
-            ->with('header', region(
-                'HeaderLight',
-                trans("content.$forumType.index.title"),
-                region(
-                        'FilterHorizontal',
-                        $destinations,
-                        $topics,
-                        $currentDestination,
-                        $currentTopic,
-                        $forums->currentPage(),
-                        'v2.forum.index'
-                ),
-                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ->with('title', trans("content.$forumType.index.title"))
+            ->with('head_title', trans("content.$forumType.index.title"))
+            ->with('head_description', trans("site.description.$forumType"))
+            ->with('head_image', Image::getSocial())
+
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans("content.$forumType.index.title"))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
+                ->push(region(
+                    'FilterHorizontal',
+                    $destinations,
+                    $topics,
+                    $currentDestination,
+                    $currentTopic,
+                    $forums->currentPage(),
+                    'v2.forum.index'
+                ))
             ))
 
             ->with('content', collect()
@@ -90,11 +99,13 @@ class V2ForumController extends Controller
 
         return layout('2col')
 
-            ->with('header', region(
-                'HeaderLight',
-                trans('follow.index.title'),
-                '',
-                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans('follow.index.title'))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
             ))
 
             ->with('content', collect()
@@ -123,10 +134,16 @@ class V2ForumController extends Controller
 
     public function show($slug)
     {
-        $forum = Content::getItemBySlug($slug);
+        $user = auth()->user();
+
+        $forum = Content::getItemBySlug($slug, $user);
+
+        if (! $forum->first()) {
+            abort(404);
+        }
+
         $forumType = $forum->type;
 
-        $user = auth()->user();
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
         $flights = Content::getLatestItems('flight', 3);
@@ -142,18 +159,26 @@ class V2ForumController extends Controller
 
         return layout('2col')
 
-            ->with('header', region(
-                'HeaderLight',
-                trans("content.$forum->type.index.title"),
-                component('BlockHorizontal')->with('content', region('ForumLinks'))
+            ->with('title', trans('content.forum.index.title'))
+            ->with('head_title', $forum->getHeadTitle())
+            ->with('head_description', $forum->getHeadDescription())
+            ->with('head_image', Image::getSocial())
+
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans("content.$forum->type.index.title"))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
             ))
 
             ->with('content', collect()
                 ->push(region('ForumPost', $forum))
                 ->merge($forum->comments->map(function ($comment) use ($firstUnreadCommentId) {
-                    return region('Comment', $comment, $firstUnreadCommentId);
+                    return region('Comment', $comment, $firstUnreadCommentId, 'inset');
                 }))
-                ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum))
+                ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum, 'inset'))
             )
 
             ->with('sidebar', collect()

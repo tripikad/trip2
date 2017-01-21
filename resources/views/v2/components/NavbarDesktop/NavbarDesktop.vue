@@ -23,8 +23,8 @@
 
             <a
                 v-if="! currentUser"
-                :href="route"
-                @mouseover="toggleSubmenu()"
+                @mouseenter="onMouseenter"
+                @mouseleave="onMouseleave"
             >
 
                 <div class="NavbarDesktop__link">
@@ -37,14 +37,23 @@
 
             <div v-if="currentUser" class="NavbarDesktop__userImage">
 
-            <component
-                @mouseover.native="toggleSubmenu()"
-                is="UserImage"
-                :route="currentUser.route"
-                :image="currentUser.image"
-                :rank="currentUser.rank"
-            >
-            </component>
+                <component
+                    v-if="currentUser.badge"
+                    is="Badge"
+                    class="NavbarDesktop__badge"
+                    :title="currentUser.badge"
+                ></component>
+
+                <component
+                    @touchstart.native.prevent="onTouchstart"
+                    @mouseenter.native="onMouseenter"
+                    @mouseleave.native="onMouseleave"
+                    is="UserImage"
+                    :route="currentUser.route"
+                    :image="currentUser.image"
+                    :rank="currentUser.rank"
+                >
+                </component>
           
             </div>
 
@@ -54,7 +63,9 @@
             class="NavbarDesktop__popover"
             v-show="submenuOpen"
             transition="fadeZoom"
-            v-on-clickaway="closeSubmenu"
+            v-on-clickaway="onClickaway"
+            @mouseenter="onMouseenter"
+            @mouseleave="onMouseleave"
         >
 
             <div class="NavbarDesktop__arrowWrapper">            
@@ -71,9 +82,26 @@
                     track-by="index"
                 >
 
-                    <div class="NavbarDesktop__sublink">
+                    <div class="NavbarDesktop__sublinkWrapper">
+
+                        <div class="NavbarDesktop__sublinkTitle">
 
                         {{ link.title }}
+
+                        </div>
+
+                        <div
+                            class="NavbarDesktop__sublinkBadge"
+                            v-if="link.badge"
+                        >
+
+                            <component
+                                is="Badge"
+                                isclasses="Badge--white"
+                                :title="link.badge"
+                            ></component>
+
+                        </div>
 
                     </div>
               
@@ -90,11 +118,12 @@
 <script>
 
     import { mixin as VueClickaway } from 'vue-clickaway'
+    import Badge from '../Badge/Badge.vue'
     import UserImage from '../UserImage/UserImage.vue'
 
     export default {
 
-        components: { UserImage },
+        components: { Badge, UserImage },
 
         mixins: [ VueClickaway ],
 
@@ -104,16 +133,28 @@
             sublinks: { default: '' },
             user: { default: '' },
             route: { default: '' },
-            title: { default: '' }
+            title: { default: '' },
         },
 
         methods: {
-            closeSubmenu: function() {
-                this.submenuOpen = false
-            },
-            toggleSubmenu: function() {
+            onTouchstart() {
                 this.submenuOpen = !this.submenuOpen
-            }
+                this.touched = !this.touched
+            },
+            onMouseenter() {
+                this.submenuOpen = true
+                clearTimeout(this.leaving)
+            },
+            onMouseleave() {
+                this.leaving = setTimeout(() => {
+                    this.submenuOpen = false
+                }, 1500)
+            },
+            onClickaway: function() {
+                if (! this.touched) {
+                    this.submenuOpen = false
+                }
+            },
         },
 
         data() {
@@ -121,7 +162,9 @@
                 submenuOpen: false,
                 currentLinks: [],
                 currentSublinks: [],
-                currentUser: {}
+                currentUser: {},
+                leaving: null,
+                touched: false
             }
         },
 
