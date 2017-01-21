@@ -289,7 +289,7 @@ return [
 
     // Blog
 
-    'blog.index.title' => 'Blogid',
+    'blog.index.title' => 'Reisiblogid',
 
     'blog.create.title' => 'Lisa postitus',
 
@@ -307,7 +307,7 @@ return [
     'blog.edit.field.url.title' => 'URL',
     'blog.edit.field.url.help' => '',
 
-    'blog.no.results' => 'Hetkel pole ühtegi reisipäevikut veel lisatud.',
+    'blog.no.results' => 'Hetkel pole ühtegi reisiblogi veel lisatud.',
 
     'blog.view.all.offers' => 'Kõik blogid',
 
