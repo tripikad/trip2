@@ -111,7 +111,6 @@ class V2FlightController extends Controller
                     ->is('large')
                     ->with('title', trans('content.flight.show.action.all'))
                     ->with('route', route('v2.flight.index'))
-                    ->with('icon', 'icon-arrow-left')
                 )
                 ->push(component('Title')
                     ->is('white')
