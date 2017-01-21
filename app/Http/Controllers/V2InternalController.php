@@ -19,6 +19,9 @@ class V2InternalController extends Controller
                 ->push(component('Title')
                     ->with('title', trans('content.internal.index.title'))
                 )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
                 ->pushWhen(
                     $loggedUser && $loggedUser->hasRole('admin'),
                     component('Button')
