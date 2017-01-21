@@ -1,6 +1,7 @@
 var googletag = googletag || {},
     slot = [],
-    index = 0;
+    index = 0,
+    elementIndex = [];
 googletag.cmd = googletag.cmd || [];
 (function() {
     var gads = document.createElement('script');
@@ -24,12 +25,19 @@ googletag.cmd.push(function() {
     googletag.pubads().collapseEmptyDivs();
     googletag.enableServices();
     googletag.pubads().addEventListener('slotRenderEnded', function(e) {
-        if ($('#'+e.slot.m.m).length) {
+        if (e.slot.B) {
+            if (elementIndex[e.slot.B]) {
+                ++elementIndex[e.slot.B];
+            } else {
+                elementIndex[e.slot.B] = 0;
+            }
+
+            var i = index;
             ++index;
             slot[index] = setTimeout(function(){
-                renderEnded(e.slot.m.m, e.size[0], e.size[1], index);
+                renderEnded(e.slot.B, e.size[0], e.size[1], i);
             }, 200);
-            return renderEnded(e.slot.m.m, e.size[0], e.size[1], index);
+            return renderEnded(e.slot.B, e.size[0], e.size[1], i);
         }
     });
 });
@@ -42,26 +50,24 @@ window.onload = function(){
             }
         }
     }
-}
+};
 
-function renderEnded (adunitId, width, height, i) {
-    //$('#' + adunitId).find('iframe').on('load', function(){
-    if ($('#' + adunitId).find('iframe')) {
+function renderEnded (element, width, height, i) {
+    var iFrame = $('div[id^="google_ads_iframe_' + element + '"]').eq(elementIndex[element]).find('iframe');
+    
+    if (iFrame.length) {
         //alert('blah');
-        var iFrame = $('#' + adunitId).find('iframe'),
-            newHeight = (($(iFrame).width() * height) / width);
+        var newHeight = (($(iFrame).width() * height) / width);
         $(iFrame).contents().find('#google_image_div').css({'max-width': '100%', 'height': 'auto', 'display': 'block'});
         $(iFrame).contents().find('img').css({'max-width': '100%', 'height': 'auto', 'display': 'block'});
         $(iFrame).css({'height': newHeight+'px'});
-        $(iFrame).parents("#" + adunitId).show();
 
         if (slot.length && slot[i]) {
             clearTimeout(slot[i]);
         }
     } else {
         slot[i] = setTimeout(function() {
-            renderEnded(adunitId, width, height, i);
+            renderEnded(element, width, height, i);
         }, 200);
     }
-    //});
 }

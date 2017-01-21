@@ -1,8 +1,9 @@
 <script type="text/javascript">
+var googletag = googletag || {},
+    slot = [],
+    index = 0,
+    elementIndex = [];
 
-var googletag = googletag || {}
-var slot = []
-var index = 0
 googletag.cmd = googletag.cmd || [];
 
 (function() {
@@ -31,12 +32,19 @@ googletag.cmd.push(function() {
     googletag.pubads().collapseEmptyDivs();
     googletag.enableServices();
     googletag.pubads().addEventListener('slotRenderEnded', function(e) {
-        if (document.getElementById(e.slot.m.m)) {
+        if (e.slot.B) {
+            if (elementIndex[e.slot.B]) {
+                ++elementIndex[e.slot.B];
+            } else {
+                elementIndex[e.slot.B] = 0;
+            }
+
+            var i = index;
             ++index;
             slot[index] = setTimeout(function(){
-                renderEnded(e.slot.m.m, e.size[0], e.size[1], index);
+                renderEnded(e.slot.B, e.size[0], e.size[1], i);
             }, 200);
-            return renderEnded(e.slot.m.m, e.size[0], e.size[1], index);
+            return renderEnded(e.slot.B, e.size[0], e.size[1], i);
         }
     });
 });
@@ -51,42 +59,49 @@ window.onload = function(){
     }
 }
 
-function renderEnded (adunitId, width, height, i) {
-    var adUnitElement = document.getElementById(adunitId);
-    if (adUnitElement.querySelector('iframe')) {
-        var iFrame = adUnitElement.querySelector('iframe'),
-            newHeight = ((parseInt(window.getComputedStyle(iFrame, null).width) * height) / width),
-            iFrameID = iFrame.getAttribute('id'),
-            goToFrame = document.getElementById(iFrameID).contentWindow,
-            googleImageDiv = goToFrame.document.querySelector('#google_image_div'),
-            imgInIFrame = goToFrame.document.querySelector('img');
-
-        if (googleImageDiv) {
-            googleImageDiv.style.maxWidth = '100%';
-            googleImageDiv.style.height = 'auto';
-            googleImageDiv.style.display = 'block';
+function renderEnded (element, width, height, i) {
+    var elements = [];
+    var inputs = document.getElementsByTagName("div");
+    if (inputs.length) {
+        for(var k = 0; k < inputs.length; k++) {
+            if(inputs[k].getAttribute("id") && inputs[k].getAttribute("id").indexOf('google_ads_iframe_' + element) == 0) {
+                elements.push(inputs[k]);
+            }
         }
+    }
 
-        if (imgInIFrame) {
-            imgInIFrame.style.maxWidth = '100%';
-            imgInIFrame.style.height = 'auto';
-            imgInIFrame.style.display = 'block';
+    if (elements[elementIndex[element]]) {
+        var adUnitElement = elements[elementIndex[element]];
+        if (adUnitElement.querySelector('iframe')) {
+            var iFrame = adUnitElement.querySelector('iframe'),
+                    newHeight = ((parseInt(window.getComputedStyle(iFrame, null).width) * height) / width),
+                    iFrameID = iFrame.getAttribute('id'),
+                    goToFrame = document.getElementById(iFrameID).contentWindow,
+                    googleImageDiv = goToFrame.document.querySelector('#google_image_div'),
+                    imgInIFrame = goToFrame.document.querySelector('img');
+
+            if (googleImageDiv) {
+                googleImageDiv.style.maxWidth = '100%';
+                googleImageDiv.style.height = 'auto';
+                googleImageDiv.style.display = 'block';
+            }
+
+            if (imgInIFrame) {
+                imgInIFrame.style.maxWidth = '100%';
+                imgInIFrame.style.height = 'auto';
+                imgInIFrame.style.display = 'block';
+            }
+
+            iFrame.style.height = newHeight + 'px';
+
+            if (slot.length && slot[i]) {
+                clearTimeout(slot[i]);
+            }
+        } else {
+            slot[i] = setTimeout(function() {
+                renderEnded(element, width, height, i);
+            }, 200);
         }
-
-        iFrame.style.height = newHeight + 'px';
-
-        while (iFrame = iFrame.parentElement.closest('#' + adunitId)) {
-            iFrame.style.display = 'block';
-        }
-
-        if (slot.length && slot[i]) {
-            clearTimeout(slot[i]);
-        }
-    } else {
-        slot[i] = setTimeout(function() {
-            renderEnded(adunitId, width, height, i);
-        }, 200);
     }
 }
-
 </script>  
