@@ -96,7 +96,7 @@ class V2FlightController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        $user = auth()->user();
+        $loggedUser = auth()->user();
 
         return layout('2col')
 
@@ -130,6 +130,12 @@ class V2FlightController extends Controller
                                 ->with('title', $destination->name)
                                 ->with('route', route('v2.destination.show', [$destination]));
                         }))
+                        ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
+                            component('MetaLink')
+                                ->is('white')
+                                ->with('title', trans('content.action.edit.title'))
+                                ->with('route', route('content.edit', [$flight->type, $flight]))
+                        )
                     )
                 ), $flight->getHeadImage(), 'high'))
 
@@ -140,7 +146,7 @@ class V2FlightController extends Controller
                 }))
                 ->push(component('AffBookingInspiration'))
                 ->push(region('Share'))
-                ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $flight))
+                ->pushWhen($loggedUser && $loggedUser->hasRole('regular'), region('CommentCreateForm', $flight))
                 ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Block')
                     ->with('title', trans('frontpage.index.flight.title'))

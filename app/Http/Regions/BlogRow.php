@@ -42,10 +42,10 @@ class BlogRow
                 ->merge($blog->topics->map(function ($topic) {
                     return component('MetaLink')->with('title', $topic->name);
                 }))
-                ->pushWhen($loggedUser && $loggedUser->hasRoleOrOwner('regular', $blog->user->id),
+                ->pushWhen($loggedUser && $loggedUser->hasRoleOrOwner('admin', $blog->user->id),
                     component('MetaLink')
                         ->with('title', trans('content.action.edit.title'))
-                        ->with('route', route('content.edit', ['blog', $blog]))
+                        ->with('route', route('content.edit', [$blog->type, $blog]))
                 )
             )
         );
