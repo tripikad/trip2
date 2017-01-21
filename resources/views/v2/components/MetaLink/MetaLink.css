@@ -17,3 +17,7 @@
 .MetaLink--orange .MetaLink__title {
     color: $orange;
 }
+
+.MetaLink--cyan .MetaLink__title {
+    color: $cyan;
+}

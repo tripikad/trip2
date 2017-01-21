@@ -70,6 +70,15 @@ return [
     'update.image.info' => 'Profiilipilt on uuendatud!',
     'update.info' => 'Kasutaja profiil on uuendatud!',
 
+    // V2
+
+    'activity.comments.title' => 'Viimased kommentaarid',
+    'activity.comments.row.1' => 'Lisas',
+    'activity.comments.row.2' => 'kommentaari',
+    'activity.comments.row.3' => 'teemale',
+
+    // V1
+
     'activity.index.title' => 'Viimased postitused',
     'activity.index.row.content' => ':user lisas postituse :title kuupäeval :created_at',
     'activity.index.row.comment' => ':user kirjutas kommentaari :comment_title postitusele :title kuupäeval :created_at',
