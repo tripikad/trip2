@@ -293,6 +293,8 @@ return [
 
     'blog.create.title' => 'Lisa postitus',
 
+    'blog.show.action.all' => 'Kõik blogid',
+
     'blog.edit.field.title.title' => 'Pealkiri',
     'blog.edit.field.title.help' => '',
 
