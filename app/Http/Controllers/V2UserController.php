@@ -55,14 +55,15 @@ class V2UserController extends Controller
             ->with('head_image', Image::getSocial())
 
             ->with('header', region('UserHeader', $user))
-/*
+
             ->with('top',
                 $photos->count() || ($loggedUser && $user->id == $loggedUser->id)
                 ? region(
                     'PhotoRow',
-                    $photos,
+                    $photos->count() ? $photos : collect(),
                     collect()
-                        ->push(
+                        ->pushWhen(
+                            $photos->count(),
                             component('Button')
                                 ->is('transparent')
                                 ->with('title', trans('content.photo.more'))
@@ -74,20 +75,46 @@ class V2UserController extends Controller
                         ->pushWhen(
                             $loggedUser && $user->id == $loggedUser->id,
                             component('Button')
-                                ->is('transparent')
+                                ->is($photos->count() ? 'transparent' : 'cyan')
                                 ->with('title', trans('content.photo.create.title'))
                                 ->with('route', route('content.create', ['photo']))
                         )
                 )
                 : ''
             )
-*/
-            ->with('content', $comments->map(function ($comment) {
-                //dd(json_encode($comment));
-                return component('UserCommentRow')
-                        //->with('forum', region('ForumRow', $comment->content))
-                        ->with('comment', region('Comment', $comment));
-            }))
+
+            ->with('content', collect()
+                ->pushWhen($comments->count(), component('BlockTitle')
+                    ->is('cyan')
+                    ->with('title', trans('user.activity.comments.title'))
+                )
+                ->merge($comments->flatMap(function ($comment) {
+                    return collect()
+                        ->push(component('Meta')->with('items', collect()
+                            ->push(component('MetaLink')
+                                ->with('title', trans('user.activity.comments.row.1'))
+                            )
+                            ->push(component('MetaLink')
+                                ->is('cyan')
+                                ->with('title', trans('user.activity.comments.row.2'))
+                                ->with('route', route('v2.forum.show', [
+                                   $comment->content->slug, '#comment-'.$comment->id,
+                               ]))
+                            )
+                            ->push(component('MetaLink')
+                                ->with('title', trans('user.activity.comments.row.3'))
+                            )
+                            ->push(component('MetaLink')
+                                ->is('cyan')
+                                ->with('title', $comment->content->vars()->title)
+                                 ->with('route', route('v2.forum.show', [
+                                    $comment->content->slug,
+                                ]))
+                            )
+                        ))
+                        ->push(region('Comment', $comment));
+                }))
+            )
 
             ->with('footer', region('Footer'))
 

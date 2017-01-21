@@ -2,7 +2,8 @@
 
 return [
 
-    'header.oldtrip' => 'Vana Trip',
+    'header.v1' => 'Vana Trip',
+    'header.v2' => 'Testi uut Trippi',
 
     'header.home' => 'Trip.ee',
     'header.news' => 'Uudised',

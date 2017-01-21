@@ -18,3 +18,7 @@
 .BlockTitle--yellow .BlockTitle__title {
     color: $yellow;
 }
+
+.BlockTitle--cyan .BlockTitle__title {
+    color: $cyan;
+}

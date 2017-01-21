@@ -3,6 +3,7 @@
 return [
 
     'count' => ':count kommentaar|:count kommentaari',
+    'created.title' => 'Kommentaar :title on nüüd lisatud.',
 
     'action.edit.title' => 'Muuda',
     'action.status.0.title' => 'Avalikusta',

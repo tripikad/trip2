@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Image;
 use App\Content;
+use App\Destination;
 
 class V2FrontpageController extends Controller
 {
@@ -12,11 +13,13 @@ class V2FrontpageController extends Controller
         $loggedUser = auth()->user();
 
         $flights = Content::getLatestItems('flight', 9);
-        $forums = Content::getLatestItems('forum', 16, 'updated_at');
+        $forums = Content::getLatestItems('forum', 18, 'updated_at');
         $news = Content::getLatestItems('news', 6);
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 9);
         $travelmates = Content::getLatestItems('travelmate', 5);
+
+        $destinations = Destination::select('id', 'name')->get();
 
         return layout('frontpage')
 
@@ -32,7 +35,7 @@ class V2FrontpageController extends Controller
                 ->render()
             )
 
-            ->with('header', region('FrontpageHeader'))
+            ->with('header', region('FrontpageHeader', $destinations))
 
             ->with('top', collect()
                 ->push(region('FrontpageFlight', $flights->take(3)))
@@ -63,19 +66,34 @@ class V2FrontpageController extends Controller
             )
 
             ->with('sidebar', collect()
+                ->push('&nbsp')
                 ->merge(collect(['forum', 'buysell', 'expat'])
-                    ->flatMap(function ($type) {
+                    ->flatMap(function ($type) use ($loggedUser) {
                         return collect()
                             ->push(component('Link')
                                 ->is('large')
                                 ->with('title', trans("content.$type.index.title"))
                                 ->with('route', route("v2.$type.index"))
                             )
-                            ->push(component('Body')
-                                ->is('gray')
-                                ->with('body', trans("site.description.$type"))
+                            ->pushWhen(
+                                ! $loggedUser,
+                                component('Body')
+                                    ->is('gray')
+                                    ->with('body', trans("site.description.$type"))
                             );
                     })
+                )
+                ->pushWhen($loggedUser, component('Link')
+                    ->is('large')
+                    ->with('title', trans('menu.user.follow'))
+                    ->with('route', route('v2.follow.index', [$loggedUser]))
+                )
+                ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('admin'),
+                    component('Link')
+                        ->is('large')
+                        ->with('title', trans('menu.auth.admin'))
+                        ->with('route', route('v2.internal.index'))
                 )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))

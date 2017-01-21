@@ -12,4 +12,5 @@
     .MessageRow__title {
         font: $font-text-md;
         color: $gray-darker;
+        line-height: $line-height-md;
     }

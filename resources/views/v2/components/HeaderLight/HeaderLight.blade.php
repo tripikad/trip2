@@ -10,7 +10,7 @@ $background = $background ?? ''
 
 <div class="HeaderLight {{ $isclasses }}">
 
-    <div class="container">
+    <div class="container padding-bottom-none-mobile-sm">
 
         <div class="HeaderLight__navbar">
 

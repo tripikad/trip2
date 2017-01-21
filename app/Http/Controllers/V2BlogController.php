@@ -55,6 +55,12 @@ class V2BlogController extends Controller
         return view('v2.layouts.2col')
 
             ->with('header', region('Header', collect()
+                ->push(component('Link')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.blog.show.action.all'))
+                    ->with('route', route('v2.blog.index'))
+                )
                 ->push(component('Title')
                     ->is('white')
                     ->is('large')

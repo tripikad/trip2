@@ -7,7 +7,7 @@ class DestinationHeader
     public function render($destination)
     {
         $parents = $destination->getAncestors();
-        $childrens = $destination->getImmediateDescendants();
+        $childrens = $destination->getImmediateDescendants()->sortBy('name');
 
         return component('HeaderLight')
             ->with('background', component('BackgroundMap')->is('yellow'))

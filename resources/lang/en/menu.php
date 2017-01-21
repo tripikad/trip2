@@ -2,7 +2,8 @@
 
 return [
 
-    'header.oldtrip' => 'Old Trip.ee',
+    'header.v1' => 'Old Trip.ee',
+    'header.v2' => 'New Trip.ee',
 
     'header.home' => 'Trip.ee',
     'header.news' => 'News',

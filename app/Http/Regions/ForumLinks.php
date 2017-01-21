@@ -28,6 +28,11 @@ class ForumLinks
                 ->is('large')
                 ->with('title', trans('menu.user.follow'))
                 ->with('route', route('v2.follow.index', [$user]))
+            )
+            ->pushWhen($user && $user->hasRole('admin'), component('Link')
+                ->is('large')
+                ->with('title', trans('menu.auth.admin'))
+                ->with('route', route('v2.internal.index'))
             );
     }
 }

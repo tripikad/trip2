@@ -2,7 +2,9 @@
 
     <div
         class="FrontpageSearch"
-        :class="[ isclasses, { 'FrontpageSearch--active': active }]">
+        :class="[ isclasses, { 'FrontpageSearch--active': active }]"
+        v-on-clickaway="toggleActive"
+    >
 
         <div class="FrontpageSearch__icon">
 
@@ -10,7 +12,7 @@
                 is="Icon"
                 icon="icon-search"
                 size="lg"
-                @click.native="active = ! active"
+                @click.native="toggleActive"
             ></component>
 
         </div>
@@ -21,7 +23,7 @@
             size="34"
             v-model="keywords"
             v-focus="active"
-            @keyup.enter="search()"
+            @keyup.enter="search"
             @click="active = true"
             :placeholder="active ? '' : title"
         >
@@ -32,14 +34,18 @@
 
 <script>
 
-    import Icon from '../Icon/Icon.vue'
     import { focus } from 'vue-focus'
+    import { mixin as VueClickaway } from 'vue-clickaway'
+
+    import Icon from '../Icon/Icon.vue'
 
     export default {
 
         components: { Icon },
 
         directives: { focus },
+
+        mixins: [ VueClickaway ],
 
         props: {
             isclasses: { default: '' },
@@ -56,6 +62,9 @@
         methods: {
             search: function() {
                 window.location = '/search?q=' + this.keywords
+            },
+            toggleActive: function() {
+                this.active = ! this.active
             }
         }
 

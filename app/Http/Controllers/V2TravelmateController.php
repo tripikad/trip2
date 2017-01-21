@@ -94,18 +94,17 @@ class V2TravelmateController extends Controller
             ->with('head_image', Image::getSocial())
 
             ->with('header', region('Header', collect()
-                ->push(component('Title')
-                    ->is('white')
-                    ->is('large')
-                    ->with('title', trans('content.travelmate.index.title'))
-                    ->with('route', route('v2.travelmate.index'))
-                )
                 ->push(component('Link')
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.travelmate.view.all.offers'))
                     ->with('route', route('v2.travelmate.index'))
-                    ->with('icon', 'icon-arrow-left')
+                )
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.travelmate.index.title'))
+                    ->with('route', route('v2.travelmate.index'))
                 )
             ))
 
@@ -124,7 +123,7 @@ class V2TravelmateController extends Controller
                             return component('Tag')->is('orange')->with('title', $tag->name);
                         }))
                         ->merge($travelmate->topics->map(function ($tag) {
-                            return component('Tag')->with('title', $tag->name);
+                            return component('MetaLink')->with('title', $tag->name);
                         }))
                     )
                 )

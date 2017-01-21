@@ -9,10 +9,6 @@ class NavbarDesktop
         $user = request()->user();
 
         return collect()
-            ->put('oldtrip', [
-                'title' => trans('menu.header.oldtrip'),
-                'route' => route('frontpage.index'),
-            ])
             ->put('flight', [
                 'title' => trans('menu.header.flights'),
                 'route' => route('v2.flight.index'),
@@ -28,6 +24,10 @@ class NavbarDesktop
             ->put('news', [
                 'title' => trans('menu.header.news'),
                 'route' => route('v2.news.index'),
+            ])
+            ->put('v1', [
+                'title' => trans('menu.header.v1'),
+                'route' => route('frontpage.index'),
             ])
             ->toArray();
     }

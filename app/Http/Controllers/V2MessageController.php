@@ -56,7 +56,7 @@ class V2MessageController extends Controller
                 ->push(component('Title')
                     ->with('title', trans('message.index.with.title', [
                         'user_with' => $user_with->vars()->name,
-                        'created_at' => $messages->last()->vars()->created_at,
+                        'created_at' => $messages->count() ? $messages->last()->created_at : '',
                     ]))
                 )
                 ->merge($messages->flatMap(function ($message) use ($user) {

@@ -23,7 +23,7 @@ $right_col = $right_col ?? 4;
 
     </div>
 
-    <div class="col-{{ $right_col }}">
+    <div class="col-{{ $right_col }} padding-top-none-mobile-md">
 
     @foreach ($right_content as $right_content_item)
     

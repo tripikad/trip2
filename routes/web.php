@@ -5,23 +5,6 @@ use App\Http\Controllers\ContentController;
 
 // V2
 
-// Styleguide
-
-Route::get('v2/index', [
-    'uses' => 'V2StyleguideController@index',
-    'as' => 'styleguide.index',
-]);
-
-Route::post('v2/styleguide/form', [
-    'uses' => 'V2StyleguideController@form',
-    'as' => 'styleguide.form',
-]);
-
-Route::post('v2/styleguide/flag', [
-    'uses' => 'V2StyleguideController@flag',
-    'as' => 'styleguide.flag',
-]);
-
 // Frontpage
 
 Route::get('v2/frontpage', [
@@ -205,6 +188,18 @@ Route::post('v2/image/store', [
 Route::post('v2/utils/filter', [
     'uses' => 'V2UtilsController@filter',
     'as' => 'utils.filter',
+]);
+
+// Experiments
+
+Route::get('experiments', [
+    'uses' => 'V2ExperimentsController@index',
+    'as' => 'experiments.index',
+]);
+
+Route::post('experiments/form', [
+    'uses' => 'V2ExperimentsController@form',
+    'as' => 'experiments.form',
 ]);
 
 // V1

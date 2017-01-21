@@ -85,8 +85,6 @@ class MessageController extends Controller
 
         Log::info('A private message has been sent');
 
-        return redirect()->route('message.index.with', [
-            $user_id_from, $user_id_to, '#message-'.$message->id,
-        ]);
+        return backToAnchor('#message-'.$message->id);
     }
 }

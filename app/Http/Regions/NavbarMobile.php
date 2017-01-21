@@ -10,8 +10,8 @@ class NavbarMobile
 
         return collect()
             ->put('frontpage', [
-                'title' => trans('menu.header.oldtrip'),
-                'route' => route('frontpage.index'),
+                'title' => trans('menu.header.home'),
+                'route' => route('v2.frontpage.index'),
             ])
             ->put('flight', [
                 'title' => trans('menu.header.flights'),
@@ -65,6 +65,10 @@ class NavbarMobile
             ->pushWhen($user, [
                 'title' => trans('menu.auth.logout'),
                 'route' => route('login.logout'),
+            ])
+            ->put('v1', [
+                'title' => trans('menu.header.v1'),
+                'route' => route('frontpage.index'),
             ])
             ->toArray();
     }

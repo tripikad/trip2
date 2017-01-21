@@ -112,6 +112,8 @@ return [
 
     'flight.create.title' => 'Add flight offer',
 
+    'flight.show.action.all' => 'All offers',
+
     'flight.edit.field.title.title' => 'Title',
     'flight.edit.field.title.help' => '',
 
@@ -148,6 +150,8 @@ return [
     'travelmate.activity' => 'Viimase :days päeva jooksul lisatud :posts_count kuulutust',
 
     'travelmate.create.title' => 'Add listing',
+
+    'travelmate.show.action.all' => 'All travelmates',
 
     'travelmate.edit.field.title.title' => 'Title',
     'travelmate.edit.field.title.help' => '',
@@ -247,6 +251,8 @@ return [
     'blog.index.title' => 'Blogs',
 
     'blog.create.title' => 'Add post',
+
+    'blog.show.action.all' => 'All blogs',
 
     'blog.edit.field.title.title' => 'Title',
     'blog.edit.field.title.help' => '',

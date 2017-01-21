@@ -23,8 +23,8 @@
 
             <a
                 v-if="! currentUser"
-                :href="route"
-                @mouseover="toggleSubmenu()"
+                @mouseenter="onMouseenter"
+                @mouseleave="onMouseleave"
             >
 
                 <div class="NavbarDesktop__link">
@@ -45,7 +45,9 @@
                 ></component>
 
                 <component
-                    @mouseover.native="toggleSubmenu()"
+                    @touchstart.native.prevent="onTouchstart"
+                    @mouseenter.native="onMouseenter"
+                    @mouseleave.native="onMouseleave"
                     is="UserImage"
                     :route="currentUser.route"
                     :image="currentUser.image"
@@ -61,7 +63,9 @@
             class="NavbarDesktop__popover"
             v-show="submenuOpen"
             transition="fadeZoom"
-            v-on-clickaway="closeSubmenu"
+            v-on-clickaway="onClickaway"
+            @mouseenter="onMouseenter"
+            @mouseleave="onMouseleave"
         >
 
             <div class="NavbarDesktop__arrowWrapper">            
@@ -133,12 +137,24 @@
         },
 
         methods: {
-            closeSubmenu: function() {
-                this.submenuOpen = false
-            },
-            toggleSubmenu: function() {
+            onTouchstart() {
                 this.submenuOpen = !this.submenuOpen
-            }
+                this.touched = !this.touched
+            },
+            onMouseenter() {
+                this.submenuOpen = true
+                clearTimeout(this.leaving)
+            },
+            onMouseleave() {
+                this.leaving = setTimeout(() => {
+                    this.submenuOpen = false
+                }, 1500)
+            },
+            onClickaway: function() {
+                if (! this.touched) {
+                    this.submenuOpen = false
+                }
+            },
         },
 
         data() {
@@ -146,7 +162,9 @@
                 submenuOpen: false,
                 currentLinks: [],
                 currentSublinks: [],
-                currentUser: {}
+                currentUser: {},
+                leaving: null,
+                touched: false
             }
         },
 

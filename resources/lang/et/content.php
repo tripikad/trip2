@@ -21,7 +21,7 @@ return [
     'action.follow.0.title' => 'Ära jälgi',
 
     'action.follow.1.info' => '":title" on lisatud jälgmiste alla.',
-    'action.follow.0.info' => '":title" on eemldatud jälgimiste alt.',
+    'action.follow.0.info' => '":title" on eemaldatud jälgimiste alt.',
 
     'action.status.1.title' => 'Peida',
     'action.status.0.title' => 'Avalikusta',
@@ -49,7 +49,7 @@ return [
     'index.filter.title' => 'Filtreeri',
     'index.filter.field.destination.title' => 'Vali sihtkoht',
     'index.filter.field.topic.title' => 'Vali valdkond',
-    'index.filter.submit.title' => 'Filtreeri',
+    'index.filter.submit.title' => 'Otsi',
     'index.filter.reset.title' => 'Lähtesta',
     'index.filter.destination.title' => 'Vaata ka meie :destination lehte',
 
@@ -67,7 +67,7 @@ return [
     'update.info' => ':title on uuendatud.',
 
     'show.isnew' => 'Uus',
-    'show.newcomments' => ':count|:count',
+    'show.newcomments' => ':count uus kommentaar|:count uut kommentaari',
 
     // Content types
 
@@ -293,6 +293,8 @@ return [
 
     'blog.create.title' => 'Lisa postitus',
 
+    'blog.show.action.all' => 'Kõik blogid',
+
     'blog.edit.field.title.title' => 'Pealkiri',
     'blog.edit.field.title.help' => '',
 
@@ -315,7 +317,7 @@ return [
 
     // Internal
 
-    'internal.index.title' => 'Sisefoorum',
+    'internal.index.title' => 'Toimetuse foorum',
 
     'internal.create.title' => 'Lisa uus postitus',
 
