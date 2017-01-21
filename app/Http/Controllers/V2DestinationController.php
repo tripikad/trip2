@@ -34,7 +34,8 @@ class V2DestinationController extends Controller
                 'PhotoRow',
                 $photos->count() ? $photos : collect(),
                 collect()
-                    ->push(
+                    ->pushWhen(
+                        $photos->count(),
                         component('Button')
                             ->is('transparent')
                             ->with('title', trans('content.photo.more'))
