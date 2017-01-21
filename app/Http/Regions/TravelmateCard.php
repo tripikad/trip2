@@ -29,12 +29,12 @@ class TravelmateCard
                             ->is('orange')
                             ->with('title', $destination->name)
                             ->with('route', route('v2.destination.show', [$destination]));
-                }))
+                    }))
                 ->pushWhen(
                     $travelmate->destinations->count() > $tagLimit,
                     component('Tag')
                         ->is('orange')
-                        ->with('title','...')
+                        ->with('title', '...')
                 )
                 ->merge($travelmate->topics->take($tagLimit)
                     ->map(function ($topic) {
@@ -45,7 +45,7 @@ class TravelmateCard
                 ->pushWhen(
                     $travelmate->topics->count() > $tagLimit,
                     component('MetaLink')
-                        ->with('title','...')
+                        ->with('title', '...')
                 )
 
             )

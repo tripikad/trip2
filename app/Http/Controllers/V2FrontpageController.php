@@ -76,7 +76,7 @@ class V2FrontpageController extends Controller
                                 ->with('route', route("v2.$type.index"))
                             )
                             ->pushWhen(
-                                !$loggedUser,
+                                ! $loggedUser,
                                 component('Body')
                                     ->is('gray')
                                     ->with('body', trans("site.description.$type"))
