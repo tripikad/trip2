@@ -1,0 +1,12 @@
+@import "variables";
+
+.FrontpageSearchDestination {
+
+}
+
+    .FrontpageSearchDestination .multiselect {
+    }
+
+    .FrontpageSearchDestination .multiselect__input {
+        font: $font-heading-md;
+    }

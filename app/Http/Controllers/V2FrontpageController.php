@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Image;
 use App\Content;
+use App\Destination;
 
 class V2FrontpageController extends Controller
 {
@@ -17,6 +18,8 @@ class V2FrontpageController extends Controller
         $blogs = Content::getLatestItems('blog', 3);
         $photos = Content::getLatestItems('photo', 9);
         $travelmates = Content::getLatestItems('travelmate', 5);
+
+        $destinations = Destination::select('id', 'name')->get();
 
         return layout('frontpage')
 
@@ -32,7 +35,7 @@ class V2FrontpageController extends Controller
                 ->render()
             )
 
-            ->with('header', region('FrontpageHeader'))
+            ->with('header', region('FrontpageHeader', $destinations))
 
             ->with('top', collect()
                 ->push(region('FrontpageFlight', $flights->take(3)))

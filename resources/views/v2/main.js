@@ -16,6 +16,7 @@ import PhotoCard from './components/PhotoCard/PhotoCard.vue'
 import PhotoFullscreen from './components/PhotoFullscreen/PhotoFullscreen.vue'
 import PromoBar from './components/PromoBar/PromoBar.vue'
 import UserImage from './components/UserImage/UserImage.vue'
+import FrontpageDestinationSearch from './components/FrontpageDestinationSearch/FrontpageDestinationSearch.vue'
 
 const globalProps = JSON.parse(decodeURIComponent(
     document.querySelector('#globalprops').getAttribute('content')
@@ -38,6 +39,7 @@ new Vue({
         Flag,
         FormSelect,
         FrontpageSearch,
+        FrontpageDestinationSearch,
         Icon,
         IconLoader,
         NavbarDesktop,

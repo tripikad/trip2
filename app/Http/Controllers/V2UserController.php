@@ -55,14 +55,15 @@ class V2UserController extends Controller
             ->with('head_image', Image::getSocial())
 
             ->with('header', region('UserHeader', $user))
-/*
+
             ->with('top',
                 $photos->count() || ($loggedUser && $user->id == $loggedUser->id)
                 ? region(
                     'PhotoRow',
-                    $photos,
+                    $photos->count() ? $photos : collect(),
                     collect()
-                        ->push(
+                        ->pushWhen(
+                            $photos->count(),
                             component('Button')
                                 ->is('transparent')
                                 ->with('title', trans('content.photo.more'))
@@ -74,14 +75,14 @@ class V2UserController extends Controller
                         ->pushWhen(
                             $loggedUser && $user->id == $loggedUser->id,
                             component('Button')
-                                ->is('transparent')
+                                ->is($photos->count() ? 'transparent' : 'cyan')
                                 ->with('title', trans('content.photo.create.title'))
                                 ->with('route', route('content.create', ['photo']))
                         )
                 )
                 : ''
             )
-*/
+
             ->with('content', collect()
                 ->pushWhen($comments->count(), component('BlockTitle')
                     ->is('cyan')
