@@ -63,19 +63,34 @@ class V2FrontpageController extends Controller
             )
 
             ->with('sidebar', collect()
+                ->push('&nbsp')
                 ->merge(collect(['forum', 'buysell', 'expat'])
-                    ->flatMap(function ($type) {
+                    ->flatMap(function ($type) use ($loggedUser) {
                         return collect()
                             ->push(component('Link')
                                 ->is('large')
                                 ->with('title', trans("content.$type.index.title"))
                                 ->with('route', route("v2.$type.index"))
                             )
-                            ->push(component('Body')
-                                ->is('gray')
-                                ->with('body', trans("site.description.$type"))
+                            ->pushWhen(
+                                !$loggedUser,
+                                component('Body')
+                                    ->is('gray')
+                                    ->with('body', trans("site.description.$type"))
                             );
                     })
+                )
+                ->pushWhen($loggedUser, component('Link')
+                    ->is('large')
+                    ->with('title', trans('menu.user.follow'))
+                    ->with('route', route('v2.follow.index', [$loggedUser]))
+                )
+                ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('admin'),
+                    component('Link')
+                        ->is('large')
+                        ->with('title', trans('menu.auth.admin'))
+                        ->with('route', route('v2.internal.index'))
                 )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))

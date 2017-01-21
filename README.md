@@ -93,6 +93,13 @@ and then run
 valet restart
 ```
 
+To clear the cache, run
+
+```
+rm -R /tmp/nginx/*
+valet restart
+```
+
 ## Development
 
 ### Watching frontend assets

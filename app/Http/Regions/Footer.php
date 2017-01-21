@@ -56,6 +56,8 @@ class Footer
 
     protected function prepareCol3Links()
     {
+        $loggedUser = request()->user();
+
         return collect()
             ->push([
                 'title' => trans('menu.footer3.about'),
@@ -72,6 +74,18 @@ class Footer
             ->push([
                 'title' => trans('menu.footer3.advertising'),
                 'route' => route('v2.static.show', [22125]),
+            ])
+            ->pushWhen(!$loggedUser, [
+                'title' => trans('menu.auth.login'),
+                'route' => route('login.form'),
+            ])
+            ->pushWhen(!$loggedUser, [
+                'title' => trans('menu.auth.register'),
+                'route' => route('register.form'),
+            ])
+            ->pushWhen($loggedUser, [
+                'title' => trans('menu.auth.logout'),
+                'route' => route('login.logout'),
             ])
             ->map(function ($item) {
                 return (object) $item;
