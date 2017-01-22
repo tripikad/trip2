@@ -45,6 +45,7 @@ class NewsHeader
                         return component('MetaLink')->is('white')->with('title', $tag->vars()->shortName);
                     }))
                     ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
+                        ->is('white')
                         ->with('title', trans('content.action.edit.title'))
                         ->with('route', route('content.edit', [$new->type, $new]))
                     )

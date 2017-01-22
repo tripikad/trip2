@@ -157,6 +157,10 @@ class V2ForumController extends Controller
             Cache::store('permanent')->forget($key);
         }
 
+        $anchor = $forum->comments->count()
+            ? '#comment-'.$forum->comments->last()->id
+            : '';
+
         return layout('2col')
 
             ->with('title', trans('content.forum.index.title'))
@@ -167,6 +171,7 @@ class V2ForumController extends Controller
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->with('title', trans("content.$forum->type.index.title"))
+                    ->with('route', route("v2.$forum->type.index"))
                 )
                 ->push(component('BlockHorizontal')
                     ->with('content', region('ForumLinks'))
@@ -175,6 +180,19 @@ class V2ForumController extends Controller
 
             ->with('content', collect()
                 ->push(region('ForumPost', $forum))
+                ->pushWhen(
+                    $forum->comments->count(),
+                    component('BlockHorizontal')
+                        ->is('right')
+                        ->with('content', collect()
+                            ->push(component('Link')
+                                ->with('title', trans('comment.action.latest.comment'))
+                                ->with('route', route(
+                                    'v2.forum.show', [$forum->slug]).$anchor
+                                )
+                            )
+                    )
+                )
                 ->merge($forum->comments->map(function ($comment) use ($firstUnreadCommentId) {
                     return region('Comment', $comment, $firstUnreadCommentId, 'inset');
                 }))
