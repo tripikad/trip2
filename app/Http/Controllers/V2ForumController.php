@@ -156,7 +156,7 @@ class V2ForumController extends Controller
             $key = 'new_'.$forum->id.'_'.$user->id;
             Cache::store('permanent')->forget($key);
         }
-        
+
         $anchor = $forum->comments->count()
             ? '#comment-'.$forum->comments->last()->id
             : '';
