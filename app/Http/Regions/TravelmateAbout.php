@@ -21,7 +21,7 @@ class TravelmateAbout
                     ->with('title', trans('content.travelmate.index.eula.title'))
                     ->with('route', route('v2.static.show', [25151]))
                 )
-                ->pushWhen($user && $user->hasRole('admin'), component('Button')
+                ->pushWhen($user && $user->hasRole('regular'), component('Button')
                     ->with('title', trans("content.$type.create.title"))
                     ->with('route', route('content.create', [$type]))
                 )

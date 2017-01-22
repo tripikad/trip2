@@ -30,6 +30,8 @@ class V2StaticController extends Controller
             ->whereStatus(1)
             ->findOrFail($id);
 
+        $loggedUser = request()->user();
+
         return layout('1col')
 
             ->with('title', $post->getHeadTitle())
@@ -43,6 +45,11 @@ class V2StaticController extends Controller
 
             ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
+                ->pushWhen($loggedUser && $loggedUser->hasRoleOrOwner('admin', $post->user->id),
+                    component('MetaLink')
+                        ->with('title', trans('content.action.edit.title'))
+                        ->with('route', route('content.edit', [$post->type, $post]))
+                )
             )
 
             ->with('footer', region('FooterLight'))

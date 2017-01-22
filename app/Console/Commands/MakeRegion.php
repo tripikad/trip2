@@ -28,7 +28,7 @@ class MakeRegion extends Command
 
         $this->info("\n$dir/$name.php created\n");
         $this->line("Your next steps:\n");
-        $this->line("    1. Add a following line to app/Http/Controllers/StyleguideController.php\n");
+        $this->line("    1. Add a following line to app/Http/Controllers/V2ExperimentsController.php\n");
         $this->comment("       ->push(region('$name', (object) ['body' => 'I am $name region']))\n");
     }
 }

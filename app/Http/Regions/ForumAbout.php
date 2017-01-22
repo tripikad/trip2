@@ -13,7 +13,7 @@ class ForumAbout
                 ->push(component('Body')
                     ->with('body', trans("site.description.$type"))
                 )
-                ->pushWhen($user && $user->hasRole('admin'), component('Button')
+                ->pushWhen($user && $user->hasRole('regular'), component('Button')
                     ->with('title', trans("content.$type.create.title"))
                     ->with('route', route('content.create', [$type]))
                 )
