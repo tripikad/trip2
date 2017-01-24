@@ -101,4 +101,29 @@ class V2BlogController extends Controller
 
             ->render();
     }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('blog');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('blog', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'blog');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'blog', $id);
+    }
+
 }

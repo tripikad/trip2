@@ -100,4 +100,29 @@ class V2PhotoController extends Controller
 
             ->render();
     }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('photo');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('photo', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'photo');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'photo', $id);
+    }
+
 }
