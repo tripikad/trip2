@@ -7,7 +7,6 @@ use App\Content;
 
 class V2StaticController extends Controller
 {
-
     public function show($slug)
     {
         $static = collect([
@@ -15,7 +14,7 @@ class V2StaticController extends Controller
             'kontakt' => 972,
             'reklaam' => 22125,
             'mis-on-veahind' => 97203,
-            'kasutustingimused' => 25151
+            'kasutustingimused' => 25151,
         ]);
 
         $post = Content::whereType('static')
