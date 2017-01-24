@@ -7,22 +7,35 @@ use App\Http\Controllers\ContentController;
 
 // Frontpage
 
-Route::get('v2/frontpage', [
-    'uses' => 'V2FrontpageController@index',
-    'as' => 'v2.frontpage.index',
-]);
+Route::get('/', 'V2FrontpageController@index')
+    ->name('v2.frontpage.index');
 
 // News
 
-Route::get('v2/news', [
-    'uses' => 'V2NewsController@index',
-    'as' => 'v2.news.index',
-]);
+Route::get('uudised', 'V2NewsController@index')
+    ->name('v2.news.index');
 
-Route::get('v2/news/{slug}', [
-    'uses' => 'V2NewsController@show',
-    'as' => 'v2.news.show',
-]);
+Route::get('uudised/{slug}', 'V2NewsController@show')
+    ->name('v2.news.show');
+
+Route::get('content/news/{id}/edit', 'V2NewsController@edit')
+    ->middleware('role:admin')
+    ->name('v2.news.edit');
+
+// Content
+
+Route::get('content/{type}', function($type) {
+    return redirect()->route("v2.$type.index", 301);
+})
+->name('content.index');
+
+Route::get('content/{type}/{id}', function($type, $id) {
+    return redirect()->route("v2.$type.index", [$id], 301);
+})
+->name('content.show');
+
+Route::get('content/{type}/{id}/edit', 'ContentController@edit')
+    ->name('content.edit');
 
 // Flight
 
@@ -180,11 +193,6 @@ Route::post('v2/utils/format', [
     'as' => 'utils.format',
 ]);
 
-Route::post('v2/image/store', [
-    'uses' => 'V2StyleguideController@store',
-    'as' => 'image.store',
-]);
-
 Route::post('v2/utils/filter', [
     'uses' => 'V2UtilsController@filter',
     'as' => 'utils.filter',
@@ -206,7 +214,7 @@ Route::post('experiments/form', [
 
 // Frontpage
 
-Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
+//Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
 
 Route::post('/', ['uses' => 'FrontpageController@search', 'as' => 'frontpage.search']);
 
@@ -262,17 +270,18 @@ Route::get('tasuta-lennupiletid-maltale{path}', ['uses' => 'CampaignController@i
 
 foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $type) {
     Route::group(['prefix' => $slugType, 'as' => $type.'.'], function () use ($type) {
-        Route::get('/', ['as' => 'index', function () use ($type) {
+        /*Route::get('/', ['as' => 'index', function () use ($type) {
             $controller = new ContentController;
 
             return $controller->index(app('request'), $type);
         }]);
-
+        
         Route::get('{slug}', ['as' => 'show', function ($slug) use ($type) {
             $controller = new ContentController;
 
             return $controller->findBySlugAndType($type, $slug);
         }]);
+        */
     });
 }
 
@@ -293,12 +302,13 @@ Route::get('sihtkoht/{slug}', ['uses' => 'DestinationController@showSlug', 'as' 
 // Content
 
 Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
+    /*
     Route::get('/', ['as' => 'index', function ($type) {
         return redirect()->route(
             $type.'.index', [
         ], 301);
     }]);
-
+    */
     Route::get('create', ['middleware' => 'role:regular', 'as' => 'create', function ($type) {
         $controller = new ContentController;
         if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
@@ -325,8 +335,8 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
         }
     }]);
 
-    Route::get('{id}', ['uses' => 'ContentController@showWithRedirect', 'as' => 'show']);
-
+    //Route::get('{id}', ['uses' => 'ContentController@showWithRedirect', 'as' => 'show']);
+    /*
     Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'as' => 'edit', function ($type, $id) {
         $controller = new ContentController;
         if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
@@ -339,6 +349,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
             return false;
         }
     }]);
+    */
 
     Route::put('{id}', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@store', 'as' => 'update']);
 

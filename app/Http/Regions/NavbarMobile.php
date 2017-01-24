@@ -66,10 +66,6 @@ class NavbarMobile
                 'title' => trans('menu.auth.logout'),
                 'route' => route('login.logout'),
             ])
-            ->put('v1', [
-                'title' => trans('menu.header.v1'),
-                'route' => route('frontpage.index'),
-            ])
             ->toArray();
     }
 

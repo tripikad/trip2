@@ -25,10 +25,6 @@ class NavbarDesktop
                 'title' => trans('menu.header.news'),
                 'route' => route('v2.news.index'),
             ])
-            ->put('v1', [
-                'title' => trans('menu.header.v1'),
-                'route' => route('frontpage.index'),
-            ])
             ->toArray();
     }
 

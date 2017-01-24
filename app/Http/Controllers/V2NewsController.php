@@ -110,4 +110,10 @@ class V2NewsController extends Controller
 
             ->render();
     }
+
+    public function edit($id)
+    {
+        return (new ContentController)->edit('news', $id);
+    }
+
 }
