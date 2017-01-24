@@ -251,7 +251,7 @@ class ContentController extends Controller
         $viewVariables = [
             'mode' => 'create',
             'fields' => config("content_$type.edit.fields"),
-            'url' => route('content.store', [$type]),
+            'url' => route("v2.$type.store"),
             'type' => $type,
             'destinations' => $destinations,
             'destination' => $destination,
@@ -474,13 +474,13 @@ class ContentController extends Controller
             if (! $request->ajax()) {
                 if (! $id) {
                     return redirect()
-                        ->route($type.'.index')
+                        ->route('v2.'.$type.'.index')
                         ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
                             'title' => $content->title,
                         ]));
                 } else {
                     return redirect()
-                        ->route($type.'.show', [$content->slug])
+                        ->route('v2.'.$type.'.show', [$content->slug])
                         ->with('info', trans('content.update.info', [
                             'title' => $content->title,
                         ]));
@@ -488,7 +488,7 @@ class ContentController extends Controller
             }
         } else {
             return redirect()
-                ->route($type.'.index');
+                ->route('v2.'.$type.'.index');
         }
     }
 

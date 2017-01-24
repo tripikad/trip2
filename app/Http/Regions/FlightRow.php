@@ -20,7 +20,7 @@ class FlightRow
                     )
                     ->push(component('MetaLink')
                         ->with('title', trans('comment.action.edit.title'))
-                        ->with('route', route('content.edit', [$flight->type, $flight]))
+                        //->with('route', route('content.edit', [$flight->type, $flight]))
                     )
                     ->merge($flight->destinations->map(function ($destination) {
                         return component('Tag')

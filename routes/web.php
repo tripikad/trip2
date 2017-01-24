@@ -18,24 +18,69 @@ Route::get('uudised', 'V2NewsController@index')
 Route::get('uudised/{slug}', 'V2NewsController@show')
     ->name('v2.news.show');
 
-Route::get('content/news/{id}/edit', 'V2NewsController@edit')
-    ->middleware('role:admin')
-    ->name('v2.news.edit');
+/*
+Route::get('content/news/create', 'V2NewsController@create')
+    ->name('v2.news.create')
+    ->middleware('role:superuser');
 
+Route::post('content/news/store', 'V2NewsController@store')
+    ->name('v2.news.store')
+    ->middleware('role:superuser');
+
+Route::get('content/news/{id}/edit', 'V2NewsController@store')
+    ->name('v2.news.edit')
+    ->middleware('role:superuser');
+
+Route::put('content/news/update', 'V2NewsController@store')
+    ->name('v2.news.update')
+    ->middleware('role:superuser');
+
+*/
+    
 // Content
 
 Route::get('content/{type}', function($type) {
     return redirect()->route("v2.$type.index", 301);
 })
-->name('content.index');
+    ->name('content.index');
 
 Route::get('content/{type}/{id}', function($type, $id) {
     return redirect()->route("v2.$type.index", [$id], 301);
 })
-->name('content.show');
+    ->name('content.show');
+
+// Content editing
+
+$middleware = [
+    'news' => 'role:superuser'
+];
+
+/*
+Route::get('content/{type}/create', function($type) {
+        redirect()->route("v2.$type.create");
+    })
+    ->name('content.create');
+
 
 Route::get('content/{type}/{id}/edit', 'ContentController@edit')
     ->name('content.edit');
+    //->middleware($middleware[$type]);
+
+Route::post('content/{type}/store', 'ContentController@store')
+    ->name('content.store');
+    //->middleware($middleware[$type]);
+
+Route::put('content/{type}/{id}/update', 'ContentController@store')
+    ->name('content.update');
+    //->middleware($middleware[$type]);
+*/
+
+
+// Content status
+
+Route::put('{id}/status/{status}', 'ContentController@status')
+    ->name('content.status')
+    ->middleware('role:admin');
 
 // Flight
 
@@ -308,7 +353,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
             $type.'.index', [
         ], 301);
     }]);
-    */
+    
     Route::get('create', ['middleware' => 'role:regular', 'as' => 'create', function ($type) {
         $controller = new ContentController;
         if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
@@ -321,7 +366,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
             return false;
         }
     }]);
-
+    
     Route::post('/', ['middleware' => 'role:regular', 'as' => 'store', function ($type, Request $request) {
         $controller = new ContentController;
         if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
@@ -336,7 +381,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
     }]);
 
     //Route::get('{id}', ['uses' => 'ContentController@showWithRedirect', 'as' => 'show']);
-    /*
+    
     Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'as' => 'edit', function ($type, $id) {
         $controller = new ContentController;
         if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
@@ -350,12 +395,13 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
         }
     }]);
     */
-
+    /*
     Route::put('{id}', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@store', 'as' => 'update']);
 
     Route::put('{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'ContentController@status', 'as' => 'status']);
 
     Route::post('/filter', ['uses' => 'ContentController@filter', 'as' => 'filter']);
+    */
 });
 
 // Additional blog (DUMMY)

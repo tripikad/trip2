@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Request;
 use App\Image;
 use App\Topic;
@@ -10,6 +11,7 @@ use App\Destination;
 
 class V2NewsController extends Controller
 {
+
     public function index()
     {
         $currentDestination = Request::get('destination');
@@ -111,9 +113,28 @@ class V2NewsController extends Controller
             ->render();
     }
 
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('news');
+    }
+
     public function edit($id)
     {
-        return (new ContentController)->edit('news', $id);
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('news', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'news');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'news', $id);
     }
 
 }
