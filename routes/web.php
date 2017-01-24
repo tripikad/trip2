@@ -100,11 +100,7 @@ Route::get('foorum/ost-muuk/{slug}', 'V2ForumController@show')
     ->name('buysell.show');
 
 Route::get('foorum/elu-valimaal/{slug}', 'V2ForumController@show')
-<<<<<<< HEAD
     ->name('expat.show');
-=======
-    ->name('forum.show');
->>>>>>> origin/kika-cusco-launch
 
 Route::get('forum/create', 'V2ForumController@create')
     ->name('forum.create')
