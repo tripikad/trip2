@@ -11,7 +11,6 @@ use App\Destination;
 
 class V2NewsController extends Controller
 {
-
     public function index()
     {
         $currentDestination = Request::get('destination');
@@ -136,5 +135,4 @@ class V2NewsController extends Controller
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'news', $id);
     }
-
 }
