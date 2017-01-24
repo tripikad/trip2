@@ -15,7 +15,7 @@ class ForumAbout
                 )
                 ->pushWhen($user && $user->hasRole('regular'), component('Button')
                     ->with('title', trans("content.$type.create.title"))
-                    ->with('route', route("$type.create"))
+                    ->with('route', route('forum.create'))
                 )
             );
     }

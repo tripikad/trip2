@@ -45,7 +45,7 @@ class ForumPost
                     ->pushWhen($user && $user->hasRoleOrOwner('admin', $post->user->id),
                         component('MetaLink')
                             ->with('title', trans('content.action.edit.title'))
-                            ->with('route', route("$post->type.edit", [$post]))
+                            ->with('route', route('forum.edit', [$post]))
                     )
                     ->pushWhen($user && $user->hasRole('admin'), component('Form')
                             ->with('route', route(

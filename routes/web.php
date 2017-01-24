@@ -129,7 +129,8 @@ $static = collect([
 ]);
 
 Route::get('{slug}', 'V2StaticController@show')
-    ->name('static.show');
+    ->name('static.show')
+    ->where('slug', '('.collect($static)->keys()->implode('|').')');
 
 Route::get('static/{id}/edit', 'V2StaticController@edit')
     ->name('static.edit')
@@ -141,10 +142,10 @@ Route::put('static/{id}/update', 'V2StaticController@update')
 
 // Blog
 
-Route::get('reisiblogid', 'V2BlogController@index')
+Route::get('reisikirjad', 'V2BlogController@index')
     ->name('blog.index');
 
-Route::get('reisiblogid/{slug}', 'V2BlogController@show')
+Route::get('reisikirjad/{slug}', 'V2BlogController@show')
     ->name('blog.show');
 
 Route::get('blog/create', 'V2BlogController@create')
@@ -220,14 +221,6 @@ Route::get('content/{type}/{id}', function ($type, $id) {
     return redirect()->route("$type.show", [$content->slug], 301);
 })
     ->name('content.show');
-
-Route::get('reisikirjad', function ($type) {
-    return redirect()->route('blog.index', 301);
-});
-
-Route::get('reisikirjad/{slug}', function ($slug) {
-    return redirect()->route('blog.show', [$slug], 301);
-});
 
 // User
 
