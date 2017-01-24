@@ -21,7 +21,9 @@
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
     </head>
     <body>
+        {{--
         @include('v2.utils.svg')
+        --}}
         <div id="app">
             @yield('promobar')
             @yield('header')
@@ -31,9 +33,11 @@
             <alert></alert>
         </div>
         <script src="/v2/js/main.js"></script>
+        {{-- 
         @include('v2.utils.promo')
         @include('v2.utils.facebook')
         @include('v2.utils.analytics')
         @stack('scripts')
+        --}}
     </body>
 </html>

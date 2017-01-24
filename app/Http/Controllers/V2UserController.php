@@ -97,9 +97,9 @@ class V2UserController extends Controller
                             ->push(component('MetaLink')
                                 ->is('cyan')
                                 ->with('title', trans('user.activity.comments.row.2'))
-                                ->with('route', route('forum.show', [
-                                   $comment->content->slug, '#comment-'.$comment->id,
-                               ]))
+                                ->with('route', route($comment->content->type.'.show', [
+                                   $comment->content->slug,
+                               ]).'#comment-'.$comment->id)
                             )
                             ->push(component('MetaLink')
                                 ->with('title', trans('user.activity.comments.row.3'))
