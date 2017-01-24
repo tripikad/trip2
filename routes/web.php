@@ -58,7 +58,6 @@ Route::put('flight/{id}/update', 'V2FlightController@update')
     ->name('flight.update')
     ->middleware('role:superuser');
 
-
 // Travelmates
 
 Route::get('reisikaaslased', 'V2TravelmateController@index')
@@ -83,7 +82,6 @@ Route::put('travelmate/{id}/update', 'V2TravelmateController@update')
     ->name('travelmate.update')
     ->middleware('role:admin,userowner');
 
-
 // Forum
 
 Route::get('foorum/uldfoorum', 'V2ForumController@forumIndex')
@@ -103,7 +101,7 @@ Route::get('foorum/ost-muuk/{slug}', 'V2ForumController@show')
 
 Route::get('foorum/elu-valimaal/{slug}', 'V2ForumController@show')
     ->name('forum.show');
-    
+
 Route::get('forum/create', 'V2ForumController@create')
     ->name('forum.create')
     ->middleware('role:regular');
@@ -127,7 +125,7 @@ $static = collect([
     'kontakt' => 972,
     'reklaam' => 22125,
     'mis-on-veahind' => 97203,
-    'kasutustingimused' => 25151
+    'kasutustingimused' => 25151,
 ]);
 
 Route::get('{slug}', 'V2StaticController@show')
@@ -140,7 +138,6 @@ Route::get('static/{id}/edit', 'V2StaticController@edit')
 Route::put('static/{id}/update', 'V2StaticController@update')
     ->name('static.update')
     ->middleware('role:superuser');
-
 
 // Blog
 
@@ -180,7 +177,6 @@ Route::get('v2/internal/{id}', [
     'as' => 'internal.show',
 ]);
 
-
 // Photo
 
 Route::get('reisipildid', 'V2PhotoController@index')
@@ -204,36 +200,34 @@ Route::put('photo/{id}/update', 'V2PhotoController@update')
     ->name('photo.update')
     ->middleware('role:admin,userowner');
 
-
 // Content status
 
 Route::put('{id}/status/{status}', 'ContentController@status')
     ->name('content.status')
     ->middleware('role:admin');
-    
 
 // Content redirects
 // TOOD: move to separate controller
 
-Route::get('content/{type}', function($type) {
-        return redirect()->route("$type.index", 301);
-    })
+Route::get('content/{type}', function ($type) {
+    return redirect()->route("$type.index", 301);
+})
     ->name('content.index');
 
-Route::get('content/{type}/{id}', function($type, $id) {
-        $content = App\Content::findOrFail($id);
-        return redirect()->route("$type.show", [$content->slug], 301);
-    })
+Route::get('content/{type}/{id}', function ($type, $id) {
+    $content = App\Content::findOrFail($id);
+
+    return redirect()->route("$type.show", [$content->slug], 301);
+})
     ->name('content.show');
 
-Route::get('reisikirjad', function($type) {
-        return redirect()->route("blog.index", 301);
-    });
+Route::get('reisikirjad', function ($type) {
+    return redirect()->route('blog.index', 301);
+});
 
-Route::get('reisikirjad/{slug}', function($slug) {
-        return redirect()->route("blog.show", [$slug], 301);
-    });
-
+Route::get('reisikirjad/{slug}', function ($slug) {
+    return redirect()->route('blog.show', [$slug], 301);
+});
 
 // User
 
@@ -259,7 +253,6 @@ Route::post('{id}/destinations', 'UserController@destinationStore')
 Route::get('user/{id}/photo', 'V2PhotoController@userIndex')
     ->name('photo.user');
 
-
 // Messages
 
 Route::get('user/{id}/messages', 'V2MessageController@index')
@@ -274,7 +267,6 @@ Route::post('message/{id}/to/{id2}', 'MessageController@store')
     ->name('message.store')
     ->middleware('role:superuser,userowner');
 
-
 // Follows
 
 Route::get('user/{id}/follows', 'V2ForumController@followIndex')
@@ -285,7 +277,6 @@ Route::put('content/{type}/{id}/follow/{status}', 'FollowController@followConten
     ->name('follow.follow.content')
     ->middleware('role:regular');
 
-
 // Destination
 
 // TODO: both id and slug versions
@@ -294,7 +285,6 @@ Route::get('sihtkoht/{id}', [
     'uses' => 'V2DestinationController@show',
     'as' => 'destination.show',
 ]);
-
 
 // Utils
 
@@ -323,12 +313,10 @@ Route::post('experiments/form', [
     'as' => 'experiments.form',
 ]);
 
-
 Route::get('experiments/error/{code}', [
     'uses' => 'V2ErrorController@show',
     'as' => 'error.show',
 ]);
-
 
 // Search
 
@@ -338,7 +326,6 @@ Route::get('search/ajaxsearch', ['uses' => 'SearchController@ajaxsearch', 'as' =
 
 Route::get('search/{token}', ['uses' => 'SearchController@search', 'as' => 'search.results.type']);
 
-
 // Registration
 
 Route::get('register', ['middleware' => 'guest', 'uses' => 'Auth\RegistrationController@form', 'as' => 'register.form']);
@@ -346,7 +333,6 @@ Route::get('register', ['middleware' => 'guest', 'uses' => 'Auth\RegistrationCon
 Route::post('register', ['middleware' => 'guest', 'uses' => 'Auth\RegistrationController@submit', 'as' => 'register.submit']);
 
 Route::get('register/confirm/{token}', ['uses' => 'Auth\RegistrationController@confirm', 'as' => 'register.confirm']);
-
 
 // Login and logout
 
@@ -356,20 +342,17 @@ Route::post('login', ['middleware' => 'guest', 'uses' => 'Auth\LoginController@s
 
 Route::get('logout', ['middleware' => 'auth', 'uses' => 'Auth\LoginController@logout', 'as' => 'login.logout']);
 
-
 // Facebook login
 
 Route::get('redirect/facebook', ['middleware' => 'guest', 'uses' => 'SocialController@facebookRedirect', 'as' => 'facebook.redirect']);
 
 Route::get('facebook', ['uses' => 'SocialController@facebook', 'as' => 'facebook']);
 
-
 // Google+ login
 
 Route::get('redirect/google', ['middleware' => 'guest', 'uses' => 'SocialController@googleRedirect', 'as' => 'google.redirect']);
 
 Route::get('google', ['uses' => 'SocialController@google', 'as' => 'google']);
-
 
 // Password reset
 
@@ -381,17 +364,14 @@ Route::get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordFo
 
 Route::post('reset/password', ['uses' => 'Auth\ResetController@reset', 'as' => 'reset.password.submit']);
 
-
 // FB campaign
 
 Route::get('tasuta-lennupiletid-maltale', ['uses' => 'CampaignController@index', 'as' => 'index']);
 Route::get('tasuta-lennupiletid-maltale{path}', ['uses' => 'CampaignController@index', 'as' => 'index']);
 
-
 // Flags
 
 Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
-
 
 // Comments
 
@@ -402,7 +382,6 @@ Route::get('comment/{id}/edit', ['middleware' => 'role:admin,commentowner', 'use
 Route::put('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' => 'CommentController@update', 'as' => 'comment.update']);
 
 Route::put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
-
 
 // Admin
 
@@ -422,25 +401,21 @@ Route::get('/experiments/blog/edit', ['middleware' => 'role:admin', 'uses' => 'B
 
 Route::get('/experiments/blog/profile', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@profile', 'as' => 'profile']);
 
-
 // Atom feeds
 
 Route::get('index.atom', ['uses' => 'FeedController@newsFeed', 'as' => 'news.feed']);
 
 Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightFeed', 'as' => 'flight.feed']);
 
-
 // API
 
 Route::get('api/destinations', 'ApiController@destinations');
-
 
 // Legacy user paths
 
 Route::get('user/{id}/forum', 'RedirectController@redirectUser');
 
 Route::get('sein/user/{id}', 'RedirectController@redirectUser');
-
 
 // Legacy term paths
 
@@ -517,12 +492,6 @@ Route::get('content/{path}', 'RedirectController@redirectContent')
 
 Route::get('{part1}/{part2?}', 'RedirectController@redirectAlias');
 
-
-
-
-
-
-
 // V1
 
 // Frontpage
@@ -530,7 +499,6 @@ Route::get('{part1}/{part2?}', 'RedirectController@redirectAlias');
 //Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
 
 //Route::post('/', ['uses' => 'FrontpageController@search', 'as' => 'frontpage.search']);
-
 
 //SEO content
 /*
@@ -541,13 +509,13 @@ foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $typ
 
             return $controller->index(app('request'), $type);
         }]);
-        
+
         Route::get('{slug}', ['as' => 'show', function ($slug) use ($type) {
             $controller = new ContentController;
 
             return $controller->findBySlugAndType($type, $slug);
         }]);
-        
+
     });
 }
 */
@@ -570,13 +538,13 @@ Route::get('sihtkoht/{slug}', ['uses' => 'DestinationController@showSlug', 'as' 
 // Content
 /*
 Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
-    
+
     Route::get('/', ['as' => 'index', function ($type) {
         return redirect()->route(
             $type.'.index', [
         ], 301);
     }]);
-    
+
     Route::get('create', ['middleware' => 'role:regular', 'as' => 'create', function ($type) {
         $controller = new ContentController;
         if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
@@ -589,7 +557,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
             return false;
         }
     }]);
-    
+
     Route::post('/', ['middleware' => 'role:regular', 'as' => 'store', function ($type, Request $request) {
         $controller = new ContentController;
         if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
@@ -604,7 +572,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
     }]);
 
     //Route::get('{id}', ['uses' => 'ContentController@showWithRedirect', 'as' => 'show']);
-    
+
     Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'as' => 'edit', function ($type, $id) {
         $controller = new ContentController;
         if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
@@ -624,7 +592,7 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
     Route::put('{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'ContentController@status', 'as' => 'status']);
 
     Route::post('/filter', ['uses' => 'ContentController@filter', 'as' => 'filter']);
-    
+
 });
 */
 
@@ -632,7 +600,6 @@ Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
 //Route::get('content/blog/profile', ['uses' => 'ContentController@blog_profile', 'as' => 'content.show.profile']);
 
 // Blog test pages
-
 
 // Users
 
@@ -679,4 +646,3 @@ Route::get('destination/{id}', ['uses' => 'DestinationController@show', 'as' => 
 /*
 Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
 */
-
