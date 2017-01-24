@@ -161,6 +161,10 @@ class V2ForumController extends Controller
             ? '#comment-'.$forum->comments->last()->id
             : '';
 
+        $anchor = $forum->comments->count()
+            ? '#comment-'.$forum->comments->last()->id
+            : '';
+
         return layout('2col')
 
             ->with('title', trans('content.forum.index.title'))
