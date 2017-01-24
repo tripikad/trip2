@@ -9,7 +9,7 @@ class MessageWithRow
         return component('MessageRow')
             ->with('id', $message->id)
             ->with('user', component('UserImage')
-                ->with('route', route('v2.user.show', [$message->fromUser]))
+                ->with('route', route('user.show', [$message->fromUser]))
                 ->with('image', $message->fromUser->vars()->imagePreset('small_square'))
                 ->with('rank', $message->fromUser->vars()->rank)
                 ->with('size', 36)

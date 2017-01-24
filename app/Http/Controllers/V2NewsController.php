@@ -37,7 +37,7 @@ class V2NewsController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.news.index.title'))
-                    ->with('route', route('v2.news.index'))
+                    ->with('route', route('news.index'))
                 )
                 ->push(region(
                     'FilterHorizontal',
@@ -46,7 +46,7 @@ class V2NewsController extends Controller
                     $currentDestination,
                     $currentTopic,
                     $news->currentPage(),
-                    'v2.news.index'
+                    'news.index'
                 ))
             ))
 

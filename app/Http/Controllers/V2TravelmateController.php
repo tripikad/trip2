@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Request;
 use App\Image;
 use App\Topic;
@@ -35,7 +36,7 @@ class V2TravelmateController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.travelmate.index.title'))
-                    ->with('route', route('v2.travelmate.index'))
+                    ->with('route', route('travelmate.index'))
                 )
                 ->push(region(
                     'FilterHorizontal',
@@ -44,7 +45,7 @@ class V2TravelmateController extends Controller
                     $currentDestination,
                     $currentTopic,
                     $travelmates->currentPage(),
-                    'v2.travelmate.index'
+                    'travelmate.index'
                 ))
             ))
 
@@ -86,7 +87,7 @@ class V2TravelmateController extends Controller
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $news = Content::getLatestItems('news', 1);
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('title', trans('content.travelmate.index.title'))
             ->with('head_title', $travelmate->getHeadTitle())
@@ -98,13 +99,13 @@ class V2TravelmateController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.travelmate.view.all.offers'))
-                    ->with('route', route('v2.travelmate.index'))
+                    ->with('route', route('travelmate.index'))
                 )
                 ->push(component('Title')
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.travelmate.index.title'))
-                    ->with('route', route('v2.travelmate.index'))
+                    ->with('route', route('travelmate.index'))
                 )
             ))
 
@@ -117,7 +118,7 @@ class V2TravelmateController extends Controller
                         )
                         ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                             ->with('title', trans('content.action.edit.title'))
-                            ->with('route', route('content.edit', [$travelmate->type, $travelmate]))
+                            ->with('route', route('travelmate.edit', [$travelmate]))
                         )
                         ->merge($travelmate->destinations->map(function ($tag) {
                             return component('Tag')->is('orange')->with('title', $tag->name);
@@ -149,6 +150,32 @@ class V2TravelmateController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('travelmate');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('travelmate', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'travelmate');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'travelmate', $id);
     }
 }

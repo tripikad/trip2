@@ -14,7 +14,7 @@ class Comment
             ->is($is)
             ->with('id', $comment->id)
             ->with('user', component('UserImage')
-                ->with('route', route('v2.user.show', [$comment->user]))
+                ->with('route', route('user.show', [$comment->user]))
                 ->with('image', $comment->user->imagePreset('small_square'))
                 ->with('rank', $comment->user->vars()->rank)
             )
@@ -29,11 +29,11 @@ class Comment
                     )
                     ->push(component('MetaLink')
                         ->with('title', $comment->user->vars()->name)
-                        ->with('route', route('v2.user.show', [$comment->user]))
+                        ->with('route', route('user.show', [$comment->user]))
                     )
                     ->push(component('MetaLink')
                         ->with('title', $comment->vars()->created_at)
-                        ->with('route', route('v2.forum.show', [
+                        ->with('route', route('forum.show', [
                             $comment->content->slug, '#comment-'.$comment->id,
                         ]))
                     )

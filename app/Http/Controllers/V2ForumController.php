@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Cache;
 use Request;
 use App\User;
@@ -61,7 +62,7 @@ class V2ForumController extends Controller
                     $currentDestination,
                     $currentTopic,
                     $forums->currentPage(),
-                    'v2.forum.index'
+                    'forum.index'
                 ))
             ))
 
@@ -175,7 +176,7 @@ class V2ForumController extends Controller
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->with('title', trans("content.$forum->type.index.title"))
-                    ->with('route', route("v2.$forum->type.index"))
+                    ->with('route', route("$forum->type.index"))
                 )
                 ->push(component('BlockHorizontal')
                     ->with('content', region('ForumLinks'))
@@ -192,7 +193,7 @@ class V2ForumController extends Controller
                             ->push(component('Link')
                                 ->with('title', trans('comment.action.latest.comment'))
                                 ->with('route', route(
-                                    'v2.forum.show', [$forum->slug]).$anchor
+                                    'forum.show', [$forum->slug]).$anchor
                                 )
                             )
                     )
@@ -217,5 +218,29 @@ class V2ForumController extends Controller
             ->with('footer', region('FooterLight'))
 
             ->render();
+    }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('forum');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('forum', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'forum');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'forum', $id);
     }
 }

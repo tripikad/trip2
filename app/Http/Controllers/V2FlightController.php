@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Request;
 use App\Image;
 use App\Topic;
@@ -42,7 +43,7 @@ class V2FlightController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.flight.index.title'))
-                    ->with('route', route('v2.flight.index'))
+                    ->with('route', route('flight.index'))
                 )
                 ->push(region(
                     'FilterHorizontal',
@@ -51,7 +52,7 @@ class V2FlightController extends Controller
                     $currentDestination,
                     null,
                     $flights->currentPage(),
-                    'v2.flight.index'
+                    'flight.index'
                 ))
             ))
 
@@ -110,7 +111,7 @@ class V2FlightController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.flight.show.action.all'))
-                    ->with('route', route('v2.flight.index'))
+                    ->with('route', route('flight.index'))
                 )
                 ->push(component('Title')
                     ->is('white')
@@ -128,13 +129,13 @@ class V2FlightController extends Controller
                             return component('Tag')
                                 ->is('orange')
                                 ->with('title', $destination->name)
-                                ->with('route', route('v2.destination.show', [$destination]));
+                                ->with('route', route('destination.show', [$destination]));
                         }))
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
                             component('MetaLink')
                                 ->is('white')
                                 ->with('title', trans('content.action.edit.title'))
-                                ->with('route', route('content.edit', [$flight->type, $flight]))
+                                ->with('route', route('flight.edit', [$flight]))
                         )
                     )
                 ), $flight->getHeadImage(), 'high'))
@@ -172,5 +173,29 @@ class V2FlightController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
+    }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('flight');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('flight', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'flight');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'flight', $id);
     }
 }

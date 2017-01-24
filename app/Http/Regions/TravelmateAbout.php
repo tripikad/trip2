@@ -19,11 +19,11 @@ class TravelmateAbout
                 )
                 ->push(component('Link')
                     ->with('title', trans('content.travelmate.index.eula.title'))
-                    ->with('route', route('v2.static.show', [25151]))
+                    ->with('route', route('static.show', [25151]))
                 )
                 ->pushWhen($user && $user->hasRole('regular'), component('Button')
                     ->with('title', trans("content.$type.create.title"))
-                    ->with('route', route('content.create', [$type]))
+                    ->with('route', route("$type.create"))
                 )
             );
     }

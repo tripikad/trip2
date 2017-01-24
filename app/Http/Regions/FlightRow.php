@@ -7,7 +7,7 @@ class FlightRow
     public function render($flight)
     {
         return component('FlightRow')
-            ->with('route', route('v2.flight.show', [$flight->slug]))
+            ->with('route', route('flight.show', [$flight->slug]))
             ->with('icon', component('Icon')
                 ->is('blue')
                 ->with('icon', 'icon-tickets')
@@ -20,13 +20,13 @@ class FlightRow
                     )
                     ->push(component('MetaLink')
                         ->with('title', trans('comment.action.edit.title'))
-                        //->with('route', route('content.edit', [$flight->type, $flight]))
+                        ->with('route', route('flight.edit', [$flight]))
                     )
                     ->merge($flight->destinations->map(function ($destination) {
                         return component('Tag')
                             ->is('orange')
                             ->with('title', $destination->name)
-                            ->with('route', route('v2.destination.show', [$destination]));
+                            ->with('route', route('destination.show', [$destination]));
                     }))
                     ->merge($flight->topics->map(function ($tag) {
                         return component('Tag')->with('title', $tag->name);

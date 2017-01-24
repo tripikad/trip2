@@ -44,7 +44,7 @@ class V2FrontpageController extends Controller
                     ->with('content', collect()->push(component('Link')
                         ->is('blue')
                         ->with('title', trans('frontpage.index.all.offers'))
-                        ->with('route', route('v2.flight.index'))
+                        ->with('route', route('flight.index'))
                     ))
                 )
                 ->pushWhen(! $loggedUser, '&nbsp;')
@@ -54,7 +54,7 @@ class V2FrontpageController extends Controller
             ->with('content', collect()
                 ->push(component('BlockTitle')
                     ->with('title', trans('frontpage.index.forum.title'))
-                    ->with('route', route('v2.forum.index'))
+                    ->with('route', route('forum.index'))
                 )
                 ->merge($forums->take($forums->count() / 2)->map(function ($forum) {
                     return region('ForumRow', $forum);
@@ -73,7 +73,7 @@ class V2FrontpageController extends Controller
                             ->push(component('Link')
                                 ->is('large')
                                 ->with('title', trans("content.$type.index.title"))
-                                ->with('route', route("v2.$type.index"))
+                                ->with('route', route("$type.index"))
                             )
                             ->pushWhen(
                                 ! $loggedUser,
@@ -86,14 +86,14 @@ class V2FrontpageController extends Controller
                 ->pushWhen($loggedUser, component('Link')
                     ->is('large')
                     ->with('title', trans('menu.user.follow'))
-                    ->with('route', route('v2.follow.index', [$loggedUser]))
+                    ->with('route', route('follow.index', [$loggedUser]))
                 )
                 ->pushWhen(
                     $loggedUser && $loggedUser->hasRole('admin'),
                     component('Link')
                         ->is('large')
                         ->with('title', trans('menu.auth.admin'))
-                        ->with('route', route('v2.internal.index'))
+                        ->with('route', route('internal.index'))
                 )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
@@ -104,7 +104,7 @@ class V2FrontpageController extends Controller
                 ->merge(region('FrontpageNews', $news))
                 ->push(component('BlockTitle')
                     ->with('title', trans('frontpage.index.photo.title'))
-                    ->with('route', route('v2.photo.index'))
+                    ->with('route', route('photo.index'))
                 )
             )
 
@@ -117,7 +117,7 @@ class V2FrontpageController extends Controller
                         component('Button')
                             ->is('transparent')
                             ->with('title', trans('content.photo.create.title'))
-                            ->with('route', route('content.create', ['photo']))
+                            ->with('route', route('photo.create'))
                     )
             ))
 
@@ -125,7 +125,7 @@ class V2FrontpageController extends Controller
                 ->push(region('FrontpageBottom', $flights->slice(3), $travelmates))
                 ->push(component('Block')
                     ->with('title', trans('frontpage.index.blog.title'))
-                    ->with('route', route('v2.blog.index'))
+                    ->with('route', route('blog.index'))
                     ->with('content', collect()
                         ->push(component('Grid3')
                             ->with('items', $blogs->map(function ($blog) {

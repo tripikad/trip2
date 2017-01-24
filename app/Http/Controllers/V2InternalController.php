@@ -27,13 +27,13 @@ class V2InternalController extends Controller
                     component('Button')
                         ->is('narrow')
                         ->with('title', trans('content.internal.create.title'))
-                        ->with('route', route('content.create', ['internal']))
+                        ->with('route', route('content.internal.create'))
                 )
             ))
 
             ->with('content', collect()
                 ->merge($forums->map(function ($forum) {
-                    return region('ForumRow', $forum, route('v2.internal.show', [$forum]));
+                    return region('ForumRow', $forum, route('internal.show', [$forum]));
                 }))
                 ->push(region('Paginator', $forums))
             )
@@ -61,7 +61,7 @@ class V2InternalController extends Controller
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->with('title', trans('content.internal.index.title'))
-                    ->with('route', route('v2.internal.index'))
+                    ->with('route', route('internal.index'))
                 )
             ))
 

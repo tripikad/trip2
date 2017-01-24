@@ -12,7 +12,7 @@ class FrontpageBottom
             ->with('left_content', collect()
                 ->push(component('Block')
                     ->with('title', trans('frontpage.index.flight.title'))
-                    ->with('route', route('v2.flight.index'))
+                    ->with('route', route('flight.index'))
                     ->with('content', $flights->map(function ($flight) {
                         return region('FlightRow', $flight);
                     }))
@@ -21,7 +21,7 @@ class FrontpageBottom
             ->with('right_content', collect()
                 ->push(component('Block')
                     ->with('title', trans('frontpage.index.travelmate.title'))
-                    ->with('route', route('v2.travelmate.index'))
+                    ->with('route', route('travelmate.index'))
                     ->with('content', $travelmates->map(function ($travelmate) {
                         return region('TravelmateCard', $travelmate);
                     }))

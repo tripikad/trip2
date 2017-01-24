@@ -7,28 +7,20 @@ use App\Content;
 
 class V2StaticController extends Controller
 {
-    public function index()
-    {
-        $posts = Content::whereType('static')
-            ->whereStatus(1)
-            ->latest()
-            ->get();
 
-        return view('v2.layouts.1col')
-            ->with('content', collect()
-                ->merge($posts->map(function ($post) {
-                    return component('MetaLink')
-                        ->with('title', $post->vars()->title)
-                        ->with('route', route('v2.static.show', [$post]));
-                }))
-            );
-    }
-
-    public function show($id)
+    public function show($slug)
     {
+        $static = collect([
+            'tripist' => 1534,
+            'kontakt' => 972,
+            'reklaam' => 22125,
+            'mis-on-veahind' => 97203,
+            'kasutustingimused' => 25151
+        ]);
+
         $post = Content::whereType('static')
             ->whereStatus(1)
-            ->findOrFail($id);
+            ->findOrFail($static[$slug]);
 
         $loggedUser = request()->user();
 
@@ -48,7 +40,7 @@ class V2StaticController extends Controller
                 ->pushWhen($loggedUser && $loggedUser->hasRoleOrOwner('admin', $post->user->id),
                     component('MetaLink')
                         ->with('title', trans('content.action.edit.title'))
-                        ->with('route', route('content.edit', [$post->type, $post]))
+                        ->with('route', route('static.edit', [$post]))
                 )
             )
 

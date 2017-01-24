@@ -11,14 +11,14 @@ class BlogRow
 
         return component('BlogRow')
             ->with('user', component('UserImage')
-                ->with('route', route('v2.user.show', [$blog->user]))
+                ->with('route', route('user.show', [$blog->user]))
                 ->with('image', $blog->user->imagePreset('small_square'))
                 ->with('rank', $blog->user->vars()->rank)
                 ->with('size', 72)
                 ->with('border', 4)
             )
             ->with('title', $blog->vars()->title)
-            ->with('route', route('v2.blog.show', [$blog->slug]))
+            ->with('route', route('blog.show', [$blog->slug]))
             ->with('meta', component('Meta')->with('items', collect()
                 ->pushWhen($commentCount > 0, component('Tag')
                     ->with('title', trans_choice(
@@ -37,7 +37,7 @@ class BlogRow
                     return component('Tag')
                         ->is('orange')
                         ->with('title', $destination->name)
-                        ->with('route', route('v2.destination.show', [$destination]));
+                        ->with('route', route('destination.show', [$destination]));
                 }))
                 ->merge($blog->topics->map(function ($topic) {
                     return component('MetaLink')->with('title', $topic->name);
@@ -45,7 +45,7 @@ class BlogRow
                 ->pushWhen($loggedUser && $loggedUser->hasRoleOrOwner('admin', $blog->user->id),
                     component('MetaLink')
                         ->with('title', trans('content.action.edit.title'))
-                        ->with('route', route('content.edit', [$blog->type, $blog]))
+                        ->with('route', route('blog.edit', [$blog]))
                 )
             )
         );

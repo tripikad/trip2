@@ -8,72 +8,201 @@ use App\Http\Controllers\ContentController;
 // Frontpage
 
 Route::get('/', 'V2FrontpageController@index')
-    ->name('v2.frontpage.index');
+    ->name('frontpage.index');
 
 // News
 
 Route::get('uudised', 'V2NewsController@index')
-    ->name('v2.news.index');
+    ->name('news.index');
 
 Route::get('uudised/{slug}', 'V2NewsController@show')
-    ->name('v2.news.show');
+    ->name('news.show');
 
-/*
-Route::get('content/news/create', 'V2NewsController@create')
-    ->name('v2.news.create')
+Route::get('news/create', 'V2NewsController@create')
+    ->name('news.create')
     ->middleware('role:superuser');
 
-Route::post('content/news/store', 'V2NewsController@store')
-    ->name('v2.news.store')
+Route::post('news/store', 'V2NewsController@store')
+    ->name('news.store')
     ->middleware('role:superuser');
 
-Route::get('content/news/{id}/edit', 'V2NewsController@store')
-    ->name('v2.news.edit')
+Route::get('news/{id}/edit', 'V2NewsController@edit')
+    ->name('news.edit')
     ->middleware('role:superuser');
 
-Route::put('content/news/update', 'V2NewsController@store')
-    ->name('v2.news.update')
+Route::put('news/{id}/update', 'V2NewsController@update')
+    ->name('news.update')
     ->middleware('role:superuser');
 
-*/
+// Flight
+
+Route::get('odavad-lennupiletid', 'V2FlightController@index')
+    ->name('flight.index');
+
+Route::get('odavad-lennupiletid/{slug}', 'V2FlightController@show')
+    ->name('flight.show');
+
+Route::get('flight/create', 'V2FlightController@create')
+    ->name('flight.create')
+    ->middleware('role:superuser');
+
+Route::post('flight/store', 'V2FlightController@store')
+    ->name('flight.store')
+    ->middleware('role:superuser');
+
+Route::get('flight/{id}/edit', 'V2FlightController@edit')
+    ->name('flight.edit')
+    ->middleware('role:superuser');
+
+Route::put('flight/{id}/update', 'V2FlightController@update')
+    ->name('flight.update')
+    ->middleware('role:superuser');
+
+
+// Travelmates
+
+Route::get('reisikaaslased', 'V2TravelmateController@index')
+    ->name('travelmate.index');
+
+Route::get('reisikaaslased/{slug}', 'V2TravelmateController@show')
+    ->name('travelmate.show');
+
+Route::get('travelmate/create', 'V2TravelmateController@create')
+    ->name('travelmate.create')
+    ->middleware('role:regular');
+
+Route::post('travelmate/store', 'V2TravelmateController@store')
+    ->name('travelmate.store')
+    ->middleware('role:regular');
+
+Route::get('travelmate/{id}/edit', 'V2TravelmateController@edit')
+    ->name('travelmate.edit')
+    ->middleware('role:admin,userowner');
+
+Route::put('travelmate/{id}/update', 'V2TravelmateController@update')
+    ->name('travelmate.update')
+    ->middleware('role:admin,userowner');
+
+
+// Forum
+
+Route::get('foorum/uldfoorum', 'V2ForumController@forumIndex')
+    ->name('forum.index');
+
+Route::get('foorum/ost-muuk', 'V2ForumController@buysellIndex')
+    ->name('buysell.index');
+
+Route::get('foorum/elu-valimaal', 'V2ForumController@expatIndex')
+    ->name('expat.index');
+
+Route::get('foorum/uldfoorum/{slug}', 'V2ForumController@show')
+    ->name('forum.show');
+
+Route::get('foorum/ost-muuk/{slug}', 'V2ForumController@show')
+    ->name('forum.show');
+
+Route::get('foorum/elu-valimaal/{slug}', 'V2ForumController@show')
+    ->name('forum.show');
     
-// Content
+Route::get('forum/create', 'V2ForumController@create')
+    ->name('forum.create')
+    ->middleware('role:regular');
 
-Route::get('content/{type}', function($type) {
-    return redirect()->route("v2.$type.index", 301);
-})
-    ->name('content.index');
+Route::post('forum/store', 'V2ForumController@store')
+    ->name('forum.store')
+    ->middleware('role:regular');
 
-Route::get('content/{type}/{id}', function($type, $id) {
-    return redirect()->route("v2.$type.index", [$id], 301);
-})
-    ->name('content.show');
+Route::get('forum/{id}/edit', 'V2ForumController@edit')
+    ->name('forum.edit')
+    ->middleware('role:admin,userowner');
 
-// Content editing
+Route::put('forum/{id}/update', 'V2ForumController@update')
+    ->name('forum.update')
+    ->middleware('role:admin,userowner');
 
-$middleware = [
-    'news' => 'role:superuser'
-];
+// Static
 
-/*
-Route::get('content/{type}/create', function($type) {
-        redirect()->route("v2.$type.create");
-    })
-    ->name('content.create');
+$static = collect([
+    'tripist' => 1534,
+    'kontakt' => 972,
+    'reklaam' => 22125,
+    'mis-on-veahind' => 97203,
+    'kasutustingimused' => 25151
+]);
+
+Route::get('{slug}', 'V2StaticController@show')
+    ->name('static.show');
+
+Route::get('static/{id}/edit', 'V2StaticController@edit')
+    ->name('static.edit')
+    ->middleware('role:superuser');
+
+Route::put('static/{id}/update', 'V2StaticController@update')
+    ->name('static.update')
+    ->middleware('role:superuser');
 
 
-Route::get('content/{type}/{id}/edit', 'ContentController@edit')
-    ->name('content.edit');
-    //->middleware($middleware[$type]);
+// Blog
 
-Route::post('content/{type}/store', 'ContentController@store')
-    ->name('content.store');
-    //->middleware($middleware[$type]);
+Route::get('reisiblogid', 'V2BlogController@index')
+    ->name('blog.index');
 
-Route::put('content/{type}/{id}/update', 'ContentController@store')
-    ->name('content.update');
-    //->middleware($middleware[$type]);
-*/
+Route::get('reisiblogid/{slug}', 'V2BlogController@show')
+    ->name('blog.show');
+
+Route::get('blog/create', 'V2BlogController@create')
+    ->name('blog.create')
+    ->middleware('role:regular');
+
+Route::post('blog/store', 'V2BlogController@store')
+    ->name('blog.store')
+    ->middleware('role:regular');
+
+Route::get('blog/{id}/edit', 'V2BlogController@edit')
+    ->name('blog.edit')
+    ->middleware('role:admin,userowner');
+
+Route::put('blog/{id}/update', 'V2BlogController@update')
+    ->name('blog.update')
+    ->middleware('role:admin,userowner');
+
+// Internal
+
+Route::get('v2/internal', [
+    'middleware' => 'role:admin',
+    'uses' => 'V2InternalController@index',
+    'as' => 'internal.index',
+]);
+
+Route::get('v2/internal/{id}', [
+    'middleware' => 'role:admin',
+    'uses' => 'V2InternalController@show',
+    'as' => 'internal.show',
+]);
+
+
+// Photo
+
+Route::get('reisipildid', 'V2PhotoController@index')
+    ->name('photo.index');
+
+// TODO: photo show redirect
+
+Route::get('photo/create', 'V2PhotoController@create')
+    ->name('photo.create')
+    ->middleware('role:regular');
+
+Route::post('photo/store', 'V2PhotoController@store')
+    ->name('photo.store')
+    ->middleware('role:regular');
+
+Route::get('photo/{id}/edit', 'V2PhotoController@edit')
+    ->name('photo.edit')
+    ->middleware('role:admin,userowner');
+
+Route::put('photo/{id}/update', 'V2PhotoController@update')
+    ->name('photo.update')
+    ->middleware('role:admin,userowner');
 
 
 // Content status
@@ -81,149 +210,95 @@ Route::put('content/{type}/{id}/update', 'ContentController@store')
 Route::put('{id}/status/{status}', 'ContentController@status')
     ->name('content.status')
     ->middleware('role:admin');
+    
 
-// Flight
+// Content redirects
+// TOOD: move to separate controller
 
-Route::get('v2/flight', [
-    'uses' => 'V2FlightController@index',
-    'as' => 'v2.flight.index',
-]);
+Route::get('content/{type}', function($type) {
+        return redirect()->route("$type.index", 301);
+    })
+    ->name('content.index');
 
-Route::get('v2/flight/{slug}', [
-    'uses' => 'V2FlightController@show',
-    'as' => 'v2.flight.show',
-]);
+Route::get('content/{type}/{id}', function($type, $id) {
+        $content = App\Content::findOrFail($id);
+        return redirect()->route("$type.show", [$content->slug], 301);
+    })
+    ->name('content.show');
 
-// Travelmates
+Route::get('reisikirjad', function($type) {
+        return redirect()->route("blog.index", 301);
+    });
 
-Route::get('v2/travelmate', [
-    'uses' => 'V2TravelmateController@index',
-    'as' => 'v2.travelmate.index',
-]);
+Route::get('reisikirjad/{slug}', function($slug) {
+        return redirect()->route("blog.show", [$slug], 301);
+    });
 
-Route::get('v2/travelmate/{slug}', [
-    'uses' => 'V2TravelmateController@show',
-    'as' => 'v2.travelmate.show',
-]);
-
-// Forum
-
-Route::get('v2/forum', [
-    'uses' => 'V2ForumController@forumIndex',
-    'as' => 'v2.forum.index',
-]);
-
-Route::get('v2/buysell', [
-    'uses' => 'V2ForumController@buysellIndex',
-    'as' => 'v2.buysell.index',
-]);
-
-Route::get('v2/expat', [
-    'uses' => 'V2ForumController@expatIndex',
-    'as' => 'v2.expat.index',
-]);
-
-Route::get('v2/forum/{slug}', [
-    'uses' => 'V2ForumController@show',
-    'as' => 'v2.forum.show',
-]);
-
-// Static
-
-Route::get('v2/static', [
-    'uses' => 'V2StaticController@index',
-    'as' => 'v2.static.index',
-]);
-
-Route::get('v2/static/{id}', [
-    'uses' => 'V2StaticController@show',
-    'as' => 'v2.static.show',
-]);
-
-// Blog
-
-Route::get('v2/blog', [
-    'uses' => 'V2BlogController@index',
-    'as' => 'v2.blog.index',
-]);
-
-Route::get('v2/blog/{slug}', [
-    'uses' => 'V2BlogController@show',
-    'as' => 'v2.blog.show',
-]);
-
-// Internal
-
-Route::get('v2/internal', [
-    'middleware' => 'role:admin',
-    'uses' => 'V2InternalController@index',
-    'as' => 'v2.internal.index',
-]);
-
-Route::get('v2/internal/{id}', [
-    'middleware' => 'role:admin',
-    'uses' => 'V2InternalController@show',
-    'as' => 'v2.internal.show',
-]);
-
-// Photo
-
-Route::get('v2/photo', [
-    'uses' => 'V2PhotoController@index',
-    'as' => 'v2.photo.index',
-]);
-
-Route::get('v2/user/{id}/photo', [
-    'uses' => 'V2PhotoController@userIndex',
-    'as' => 'v2.photo.user',
-]);
 
 // User
 
-Route::get('v2/user/{id}', [
-    'uses' => 'V2UserController@show',
-    'as' => 'v2.user.show',
-]);
+Route::get('user/{id}', 'V2UserController@show')
+    ->name('user.show');
 
-// Message
+Route::get('user/{id}/edit', 'UserController@edit')
+    ->name('user.edit')
+    ->middleware('role:superuser,userowner');
 
-Route::get('v2/user/{id}/messages', [
-    'middleware' => 'role:superuser,userowner',
-    'uses' => 'V2MessageController@index',
-    'as' => 'v2.message.index',
-]);
+Route::put('user/{id}/update', 'UserController@update')
+    ->name('user.update')
+    ->middleware('role:superuser,userowner');
 
-Route::get('v2/user/{id}/messages/{id2}', [
-    'middleware' => 'role:superuser,userowner',
-    'uses' => 'V2MessageController@indexWith',
-    'as' => 'v2.message.index.with',
-]);
+Route::get('{id}/destinations', 'UserController@destinationsIndex')
+    ->middleware('role:admin,userowner')
+    ->name('user.destinations');
+
+Route::post('{id}/destinations', 'UserController@destinationStore')
+    ->middleware('role:admin,userowner')
+    ->name('user.destination.store');
+
+Route::get('user/{id}/photo', 'V2PhotoController@userIndex')
+    ->name('photo.user');
+
+
+// Messages
+
+Route::get('user/{id}/messages', 'V2MessageController@index')
+    ->name('message.index')
+    ->middleware('role:superuser,userowner');
+
+Route::get('user/{id}/messages/{id2}', 'V2MessageController@indexWith')
+    ->name('message.index.with')
+    ->middleware('role:superuser,userowner');
+
+Route::post('message/{id}/to/{id2}', 'MessageController@store')
+    ->name('message.store')
+    ->middleware('role:superuser,userowner');
+
 
 // Follows
 
-Route::get('v2/user/{id}/follows', [
-    'middleware' => 'role:admin,userowner',
-    'uses' => 'V2ForumController@followIndex',
-    'as' => 'v2.follow.index',
-]);
+Route::get('user/{id}/follows', 'V2ForumController@followIndex')
+    ->name('follow.index')
+    ->middleware('role:admin,userowner');
+
+Route::put('content/{type}/{id}/follow/{status}', 'FollowController@followContent')
+    ->name('follow.follow.content')
+    ->middleware('role:regular');
+
 
 // Destination
 
-Route::get('v2/destination/{id}', [
+// TODO: both id and slug versions
+
+Route::get('sihtkoht/{id}', [
     'uses' => 'V2DestinationController@show',
-    'as' => 'v2.destination.show',
+    'as' => 'destination.show',
 ]);
 
-// Errors
-
-Route::get('v2/error/{code}', [
-    'uses' => 'V2ErrorController@show',
-    'as' => 'v2.error.show',
-]);
 
 // Utils
 
-Route::get('v2/utils/alert', [
+Route::get('utils/alert', [
     'uses' => 'V2UtilsController@alert',
     'as' => 'utils.alert',
 ]);
@@ -233,15 +308,8 @@ Route::get('share/{social}', [
     'as' => 'utils.share',
 ]);
 
-Route::post('v2/utils/format', [
-    'uses' => 'V2UtilsController@format',
-    'as' => 'utils.format',
-]);
-
-Route::post('v2/utils/filter', [
-    'uses' => 'V2UtilsController@filter',
-    'as' => 'utils.filter',
-]);
+Route::post('utils/filter', 'V2UtilsController@filter')
+    ->name('utils.filter');
 
 // Experiments
 
@@ -255,18 +323,21 @@ Route::post('experiments/form', [
     'as' => 'experiments.form',
 ]);
 
-// V1
 
-// Frontpage
+Route::get('experiments/error/{code}', [
+    'uses' => 'V2ErrorController@show',
+    'as' => 'error.show',
+]);
 
-//Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
 
-Route::post('/', ['uses' => 'FrontpageController@search', 'as' => 'frontpage.search']);
+// Search
 
-//search
 Route::get('search', ['uses' => 'SearchController@search', 'as' => 'search.results']);
+
 Route::get('search/ajaxsearch', ['uses' => 'SearchController@ajaxsearch', 'as' => 'search.ajax']);
+
 Route::get('search/{token}', ['uses' => 'SearchController@search', 'as' => 'search.results.type']);
+
 
 // Registration
 
@@ -276,6 +347,7 @@ Route::post('register', ['middleware' => 'guest', 'uses' => 'Auth\RegistrationCo
 
 Route::get('register/confirm/{token}', ['uses' => 'Auth\RegistrationController@confirm', 'as' => 'register.confirm']);
 
+
 // Login and logout
 
 Route::get('login', ['middleware' => 'guest', 'uses' => 'Auth\LoginController@form', 'as' => 'login.form']);
@@ -284,17 +356,20 @@ Route::post('login', ['middleware' => 'guest', 'uses' => 'Auth\LoginController@s
 
 Route::get('logout', ['middleware' => 'auth', 'uses' => 'Auth\LoginController@logout', 'as' => 'login.logout']);
 
+
 // Facebook login
 
 Route::get('redirect/facebook', ['middleware' => 'guest', 'uses' => 'SocialController@facebookRedirect', 'as' => 'facebook.redirect']);
 
 Route::get('facebook', ['uses' => 'SocialController@facebook', 'as' => 'facebook']);
 
+
 // Google+ login
 
 Route::get('redirect/google', ['middleware' => 'guest', 'uses' => 'SocialController@googleRedirect', 'as' => 'google.redirect']);
 
 Route::get('google', ['uses' => 'SocialController@google', 'as' => 'google']);
+
 
 // Password reset
 
@@ -306,113 +381,17 @@ Route::get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordFo
 
 Route::post('reset/password', ['uses' => 'Auth\ResetController@reset', 'as' => 'reset.password.submit']);
 
-// Fb campaign
+
+// FB campaign
 
 Route::get('tasuta-lennupiletid-maltale', ['uses' => 'CampaignController@index', 'as' => 'index']);
 Route::get('tasuta-lennupiletid-maltale{path}', ['uses' => 'CampaignController@index', 'as' => 'index']);
 
-//SEO content
 
-foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $type) {
-    Route::group(['prefix' => $slugType, 'as' => $type.'.'], function () use ($type) {
-        /*Route::get('/', ['as' => 'index', function () use ($type) {
-            $controller = new ContentController;
+// Flags
 
-            return $controller->index(app('request'), $type);
-        }]);
-        
-        Route::get('{slug}', ['as' => 'show', function ($slug) use ($type) {
-            $controller = new ContentController;
+Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
 
-            return $controller->findBySlugAndType($type, $slug);
-        }]);
-        */
-    });
-}
-
-//SEO static
-
-foreach (config('sluggable.staticContentMapping') as $static_id => $slug) {
-    Route::get($slug, ['as' => 'static.'.$static_id, function () use ($static_id) {
-        $controller = new ContentController;
-
-        return $controller->show('static', $static_id);
-    }]);
-}
-
-//SEO destination
-
-Route::get('sihtkoht/{slug}', ['uses' => 'DestinationController@showSlug', 'as' => 'destination.slug']);
-
-// Content
-
-Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
-    /*
-    Route::get('/', ['as' => 'index', function ($type) {
-        return redirect()->route(
-            $type.'.index', [
-        ], 301);
-    }]);
-    
-    Route::get('create', ['middleware' => 'role:regular', 'as' => 'create', function ($type) {
-        $controller = new ContentController;
-        if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
-            return $controller->create($type);
-        } elseif (\Auth::user()->hasRole('regular') && in_array($type, config('content.everyone_can_edit'))) {
-            return $controller->create($type);
-        } else {
-            abort(401);
-
-            return false;
-        }
-    }]);
-    
-    Route::post('/', ['middleware' => 'role:regular', 'as' => 'store', function ($type, Request $request) {
-        $controller = new ContentController;
-        if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
-            return $controller->store($request, $type);
-        } elseif (\Auth::user()->hasRole('regular') && in_array($type, config('content.everyone_can_edit'))) {
-            return $controller->store($request, $type);
-        } else {
-            abort(401);
-
-            return false;
-        }
-    }]);
-
-    //Route::get('{id}', ['uses' => 'ContentController@showWithRedirect', 'as' => 'show']);
-    
-    Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'as' => 'edit', function ($type, $id) {
-        $controller = new ContentController;
-        if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
-            return $controller->edit($type, $id);
-        } elseif (\Auth::user()->hasRole('regular') && in_array($type, config('content.everyone_can_edit'))) {
-            return $controller->edit($type, $id);
-        } else {
-            abort(401);
-
-            return false;
-        }
-    }]);
-    */
-    /*
-    Route::put('{id}', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@store', 'as' => 'update']);
-
-    Route::put('{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'ContentController@status', 'as' => 'status']);
-
-    Route::post('/filter', ['uses' => 'ContentController@filter', 'as' => 'filter']);
-    */
-});
-
-// Additional blog (DUMMY)
-//Route::get('content/blog/profile', ['uses' => 'ContentController@blog_profile', 'as' => 'content.show.profile']);
-
-// Blog test pages
-
-Route::get('/blogtest', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@index', 'as' => 'index']);
-Route::get('/blogtest/show', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@show', 'as' => 'show']);
-Route::get('/blogtest/edit', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@edit', 'as' => 'edit']);
-Route::get('/blogtest/profile', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@profile', 'as' => 'profile']);
 
 // Comments
 
@@ -424,40 +403,6 @@ Route::put('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' =>
 
 Route::put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
 
-// Users
-
-Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
-
-    // get('/', ['uses' => 'UserController@index', 'as' => 'index']);
-
-    // get('create', ['middleware' => 'auth', 'uses' => 'UserController@create', 'as' => 'create']);
-
-    // post('/', ['middleware' => 'auth', 'uses' => 'UserController@store', 'as' => 'store']);
-
-    Route::get('{id}', ['uses' => 'UserController@show', 'as' => 'show']);
-
-    Route::get('{id}/edit', ['middleware' => 'role:superuser,userowner', 'uses' => 'UserController@edit', 'as' => 'edit']);
-
-    Route::put('{id}', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@update', 'as' => 'update']);
-
-    Route::get('{id}/destinations', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@destinationsIndex', 'as' => 'destinations']);
-
-    Route::post('{id}/destinations', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@destinationStore', 'as' => 'destination.store']);
-});
-
-// Messages
-
-Route::get('user/{id}/messages', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@index', 'as' => 'message.index']);
-
-Route::get('user/{id}/messages/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@indexWith', 'as' => 'message.index.with']);
-
-Route::post('message/{id}/to/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@store', 'as' => 'message.store']);
-
-// Follows
-
-Route::get('user/{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'FollowController@index', 'as' => 'follow.index']);
-
-Route::put('content/{type}/{id}/follow/{status}', ['middleware' => 'role:regular', 'uses' => 'FollowController@followContent', 'as' => 'follow.follow.content']);
 
 // Admin
 
@@ -467,13 +412,16 @@ Route::post('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminContro
 
 Route::get('admin/content', ['middleware' => 'role:admin', 'uses' => 'AdminController@contentIndex', 'as' => 'admin.content.index']);
 
-// Destinations
+// Experiments
 
-Route::get('destination/{id}', ['uses' => 'DestinationController@show', 'as' => 'destination.show']);
+Route::get('/experiments/blog', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@index', 'as' => 'index']);
 
-// Flags
+Route::get('/experiments/blog/show', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@show', 'as' => 'show']);
 
-Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
+Route::get('/experiments/blog/edit', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@edit', 'as' => 'edit']);
+
+Route::get('/experiments/blog/profile', ['middleware' => 'role:admin', 'uses' => 'BlogTestController@profile', 'as' => 'profile']);
+
 
 // Atom feeds
 
@@ -481,19 +429,18 @@ Route::get('index.atom', ['uses' => 'FeedController@newsFeed', 'as' => 'news.fee
 
 Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightFeed', 'as' => 'flight.feed']);
 
+
 // API
 
 Route::get('api/destinations', 'ApiController@destinations');
 
-/*
- * Redirect old URL-s
- */
 
 // Legacy user paths
 
 Route::get('user/{id}/forum', 'RedirectController@redirectUser');
 
 Route::get('sein/user/{id}', 'RedirectController@redirectUser');
+
 
 // Legacy term paths
 
@@ -569,3 +516,167 @@ Route::get('content/{path}', 'RedirectController@redirectContent')
 // All other legacy aliases
 
 Route::get('{part1}/{part2?}', 'RedirectController@redirectAlias');
+
+
+
+
+
+
+
+// V1
+
+// Frontpage
+
+//Route::get('/', ['uses' => 'FrontpageController@index', 'as' => 'frontpage.index']);
+
+//Route::post('/', ['uses' => 'FrontpageController@search', 'as' => 'frontpage.search']);
+
+
+//SEO content
+/*
+foreach (array_flip(config('sluggable.contentTypeMapping')) as $slugType => $type) {
+    Route::group(['prefix' => $slugType, 'as' => $type.'.'], function () use ($type) {
+        Route::get('/', ['as' => 'index', function () use ($type) {
+            $controller = new ContentController;
+
+            return $controller->index(app('request'), $type);
+        }]);
+        
+        Route::get('{slug}', ['as' => 'show', function ($slug) use ($type) {
+            $controller = new ContentController;
+
+            return $controller->findBySlugAndType($type, $slug);
+        }]);
+        
+    });
+}
+*/
+//SEO static
+/*
+foreach (config('sluggable.staticContentMapping') as $static_id => $slug) {
+    Route::get($slug, ['as' => 'static.'.$static_id, function () use ($static_id) {
+        $controller = new ContentController;
+
+        return $controller->show('static', $static_id);
+    }]);
+}
+*/
+//SEO destination
+
+/*
+Route::get('sihtkoht/{slug}', ['uses' => 'DestinationController@showSlug', 'as' => 'destination.slug']);
+*/
+
+// Content
+/*
+Route::group(['prefix' => 'content/{type}', 'as' => 'content.'], function () {
+    
+    Route::get('/', ['as' => 'index', function ($type) {
+        return redirect()->route(
+            $type.'.index', [
+        ], 301);
+    }]);
+    
+    Route::get('create', ['middleware' => 'role:regular', 'as' => 'create', function ($type) {
+        $controller = new ContentController;
+        if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
+            return $controller->create($type);
+        } elseif (\Auth::user()->hasRole('regular') && in_array($type, config('content.everyone_can_edit'))) {
+            return $controller->create($type);
+        } else {
+            abort(401);
+
+            return false;
+        }
+    }]);
+    
+    Route::post('/', ['middleware' => 'role:regular', 'as' => 'store', function ($type, Request $request) {
+        $controller = new ContentController;
+        if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
+            return $controller->store($request, $type);
+        } elseif (\Auth::user()->hasRole('regular') && in_array($type, config('content.everyone_can_edit'))) {
+            return $controller->store($request, $type);
+        } else {
+            abort(401);
+
+            return false;
+        }
+    }]);
+
+    //Route::get('{id}', ['uses' => 'ContentController@showWithRedirect', 'as' => 'show']);
+    
+    Route::get('{id}/edit', ['middleware' => 'role:admin,contentowner', 'as' => 'edit', function ($type, $id) {
+        $controller = new ContentController;
+        if (\Auth::user()->hasRole('admin') && in_array($type, config('content.admin_only_edit'))) {
+            return $controller->edit($type, $id);
+        } elseif (\Auth::user()->hasRole('regular') && in_array($type, config('content.everyone_can_edit'))) {
+            return $controller->edit($type, $id);
+        } else {
+            abort(401);
+
+            return false;
+        }
+    }]);
+    */
+    /*
+    Route::put('{id}', ['middleware' => 'role:admin,contentowner', 'uses' => 'ContentController@store', 'as' => 'update']);
+
+    Route::put('{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'ContentController@status', 'as' => 'status']);
+
+    Route::post('/filter', ['uses' => 'ContentController@filter', 'as' => 'filter']);
+    
+});
+*/
+
+// Additional blog (DUMMY)
+//Route::get('content/blog/profile', ['uses' => 'ContentController@blog_profile', 'as' => 'content.show.profile']);
+
+// Blog test pages
+
+
+// Users
+
+//Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+
+    // get('/', ['uses' => 'UserController@index', 'as' => 'index']);
+
+    // get('create', ['middleware' => 'auth', 'uses' => 'UserController@create', 'as' => 'create']);
+
+    // post('/', ['middleware' => 'auth', 'uses' => 'UserController@store', 'as' => 'store']);
+/*
+    Route::get('{id}', ['uses' => 'UserController@show', 'as' => 'show']);
+
+    Route::get('{id}/edit', ['middleware' => 'role:superuser,userowner', 'uses' => 'UserController@edit', 'as' => 'edit']);
+
+    Route::put('{id}', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@update', 'as' => 'update']);
+
+    Route::get('{id}/destinations', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@destinationsIndex', 'as' => 'destinations']);
+
+    Route::post('{id}/destinations', ['middleware' => 'role:admin,userowner', 'uses' => 'UserController@destinationStore', 'as' => 'destination.store']);
+    */
+//});
+
+// Messages
+/*
+Route::get('user/{id}/messages', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@index', 'as' => 'message.index']);
+
+Route::get('user/{id}/messages/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@indexWith', 'as' => 'message.index.with']);
+
+Route::post('message/{id}/to/{id2}', ['middleware' => 'role:superuser,userowner', 'uses' => 'MessageController@store', 'as' => 'message.store']);
+*/
+// Follows
+/*
+Route::get('user/{id}/follows', ['middleware' => 'role:admin,userowner', 'uses' => 'FollowController@index', 'as' => 'follow.index']);
+
+Route::put('content/{type}/{id}/follow/{status}', ['middleware' => 'role:regular', 'uses' => 'FollowController@followContent', 'as' => 'follow.follow.content']);
+*/
+
+// Destinations
+/*
+Route::get('destination/{id}', ['uses' => 'DestinationController@show', 'as' => 'destination.show']);
+*/
+// Flags
+/*
+Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
+*/
+

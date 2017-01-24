@@ -18,7 +18,7 @@ class V2BlogController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.blog.index.title'))
-                    ->with('route', route('v2.blog.index'))
+                    ->with('route', route('blog.index'))
                 )
             ))
 
@@ -39,7 +39,7 @@ class V2BlogController extends Controller
                     $loggedUser && $loggedUser->hasRole('regular'),
                     component('Button')
                         ->with('title', trans('content.blog.create.title'))
-                        ->with('route', route('content.create', ['blog']))
+                        ->with('route', route('blog.create'))
                 )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
@@ -59,20 +59,20 @@ class V2BlogController extends Controller
         $blog = Content::getItemBySlug($slug);
         $user = auth()->user();
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region('Header', collect()
                 ->push(component('Link')
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.blog.show.action.all'))
-                    ->with('route', route('v2.blog.index'))
+                    ->with('route', route('blog.index'))
                 )
                 ->push(component('Title')
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.blog.index.title'))
-                    ->with('route', route('v2.blog.index'))
+                    ->with('route', route('blog.index'))
                 )
             ))
 
@@ -97,6 +97,8 @@ class V2BlogController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 }

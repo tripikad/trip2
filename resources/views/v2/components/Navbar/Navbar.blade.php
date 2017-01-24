@@ -1,6 +1,6 @@
 @php
 
-$route = $route ?? route('v2.frontpage.index');
+$route = $route ?? route('frontpage.index');
 $search = $search ?? '';
 $logo = $logo ?? '';
 $navbar_desktop = $navbar_desktop ?? '';
