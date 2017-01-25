@@ -26,7 +26,7 @@ class ContentTest extends TestCase
             //'static',
             'flight',
             //'news',
-        ]; 
+        ];
     }
 
     public function test_regular_user_can_create_and_edit_public_content()
