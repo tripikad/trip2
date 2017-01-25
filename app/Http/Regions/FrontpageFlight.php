@@ -17,10 +17,7 @@ class FrontpageFlight
                             ['purple', 'yellow', 'red'][$index]
                         )
                         .region('FlightCard', $flight);
-
-                    }
-                return;
-
+                }
             })
         );
     }

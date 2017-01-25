@@ -76,13 +76,11 @@ class CommentTest extends TestCase
                     'body' => "Hola chicas de $content->type",
                     'status' => 1,
                 ]);
-            
         }
     }
 
     public function test_regular_user_cannot_edit_other_comments()
     {
-
         $regular_user = factory(App\User::class)->create();
 
         foreach ($this->publicContentTypes as $type) {
@@ -109,7 +107,6 @@ class CommentTest extends TestCase
 
     public function test_regular_user_cannot_comments_on_private_content()
     {
-
         $regular_user = factory(App\User::class)->create();
 
         foreach ($this->privateContentTypes as $type) {
@@ -126,7 +123,7 @@ class CommentTest extends TestCase
             // Can not add private content comments
 
             $response = $this->actingAs($regular_user)
-                ->call('POST', "content/$content->type/$content->id/comment"); 
+                ->call('POST', "content/$content->type/$content->id/comment");
             $this->assertEquals(302, $response->status());
 
             // Can not edit private content comments
@@ -134,7 +131,6 @@ class CommentTest extends TestCase
             $response = $this->actingAs($regular_user)
                 ->call('GET', "comment/$comment->id/edit");
             $this->assertEquals(401, $response->status());
-
         }
     }
 

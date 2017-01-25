@@ -148,7 +148,7 @@ class PhotoTest extends TestCase
         }
 
         // Check if old images are unlinked
-        
+
         $filepath = config('imagepresets.original.path').$filename;
         $this->assertFalse(file_exists($filepath));
 
@@ -158,7 +158,7 @@ class PhotoTest extends TestCase
         }
 
         // Unlink new images
-        
+
         unlink(config('imagepresets.original.path').$filename_new);
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {

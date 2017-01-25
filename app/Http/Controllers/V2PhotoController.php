@@ -125,5 +125,4 @@ class V2PhotoController extends Controller
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'photo', $id);
     }
-
 }
