@@ -10,6 +10,12 @@ use App\Http\Controllers\ContentController;
 Route::get('/', 'V2FrontpageController@index')
     ->name('frontpage.index');
 
+// Content status
+
+Route::post('content/{type}/{id}/status/{status}', 'ContentController@status')
+    ->name('content.status')
+    ->middleware('role:admin');
+    
 // News
 
 Route::get('uudised', 'V2NewsController@index')
@@ -217,12 +223,6 @@ Route::get('photo/{id}/edit', 'V2PhotoController@edit')
 Route::put('photo/{id}/update', 'V2PhotoController@update')
     ->name('photo.update')
     ->middleware('role:admin,contentowner');
-
-// Content status
-
-Route::put('{id}/status/{status}', 'ContentController@status')
-    ->name('content.status')
-    ->middleware('role:admin');
 
 // Content redirects
 // TOOD: move to separate controller

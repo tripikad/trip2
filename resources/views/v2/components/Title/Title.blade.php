@@ -1,5 +1,6 @@
 @php
 
+$isclasses = $isclasses ?? '';
 $title = $title ?? '';
 $route = $route ?? '';
 

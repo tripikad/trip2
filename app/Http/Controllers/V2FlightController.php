@@ -91,13 +91,13 @@ class V2FlightController extends Controller
 
     public function show($slug)
     {
-        $flight = Content::getItemBySlug($slug);
+        $loggedUser = auth()->user();
+
+        $flight = Content::getItemBySlug($slug, $loggedUser);
         $flights = Content::getLatestItems('flight', 4);
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
-
-        $loggedUser = auth()->user();
 
         return layout('2col')
 
@@ -136,6 +136,21 @@ class V2FlightController extends Controller
                                 ->is('white')
                                 ->with('title', trans('content.action.edit.title'))
                                 ->with('route', route('flight.edit', [$flight]))
+                        )
+                        ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Form')
+                                ->with('route', route(
+                                    'content.status',
+                                    [$flight->type, $flight, (1 - $flight->status)]
+                                ))
+                                ->with('fields', collect()
+                                    ->push(component('FormLink')
+                                        ->is('white')
+                                        ->with(
+                                            'title',
+                                            trans("content.action.status.$flight->status.title")
+                                        )
+                                    )
+                                )
                         )
                     )
                 ), $flight->getHeadImage(), 'high'))

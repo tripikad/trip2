@@ -46,8 +46,9 @@ class V2InternalController extends Controller
 
     public function show($slug)
     {
-        $forum = Content::findOrFail($slug);
         $user = auth()->user();
+        $forum = Content::findOrFail($slug, $user);
+        
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
         // Clear the unread cache
@@ -119,7 +120,7 @@ class V2InternalController extends Controller
                 ->merge($contents->map(function ($content) {
                     return component('Title')
                         ->is('small')
-                        ->with('title', $content->vars()->title)
+                        ->with('title', $content->type.': '.$content->vars()->title)
                         ->with('route', route("$content->type.show", [$content->slug]));
                 }))
                 ->push(region('Paginator', $contents))

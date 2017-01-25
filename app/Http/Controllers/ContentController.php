@@ -523,13 +523,12 @@ class ContentController extends Controller
     }
 
     public function status($type, $id, $status)
-    {
+    {   
         $content = \App\Content::findorFail($id);
 
         if ($status == 0 || $status == 1) {
             $content->status = $status;
             $content->save();
-
             return back()->with('info', trans("content.action.status.$status.info", [
                 'title' => $content->title,
             ]));

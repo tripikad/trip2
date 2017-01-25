@@ -57,8 +57,8 @@ class V2BlogController extends Controller
 
     public function show($slug)
     {
-        $blog = Content::getItemBySlug($slug);
         $user = auth()->user();
+        $blog = Content::getItemBySlug($slug, $user);
 
         return layout('2col')
 

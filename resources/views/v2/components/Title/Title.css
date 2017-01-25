@@ -7,9 +7,15 @@
     color: $gray-darkest;
 }
 
+.Title--small .Title__title {
+    font: $font-heading-lg;
+    font: $font-heading-md ?if $tablet;
+}
+
 .Title--large .Title__title {
     font: $font-heading-xxl;
     font: $font-heading-xl ?if $tablet;
+    line-height: $line-height-lg;
 }
 
 .Title--white .Title__title {

@@ -47,6 +47,20 @@ class BlogRow
                         ->with('title', trans('content.action.edit.title'))
                         ->with('route', route('blog.edit', [$blog]))
                 )
+                ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Form')
+                        ->with('route', route(
+                            'content.status',
+                            [$blog->type, $blog, (1 - $blog->status)]
+                        ))
+                        ->with('fields', collect()
+                            ->push(component('FormLink')
+                                ->with(
+                                    'title',
+                                    trans("content.action.status.$blog->status.title")
+                                )
+                            )
+                        )
+                )
             )
         );
     }

@@ -52,7 +52,6 @@ class ForumPost
                                 'content.status',
                                 [$post->type, $post, (1 - $post->status)]
                             ))
-                            ->with('method', 'PUT')
                             ->with('fields', collect()
                                 ->push(component('FormLink')
                                     ->with(
