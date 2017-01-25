@@ -116,9 +116,11 @@ class V2TravelmateController extends Controller
                         ->push(component('MetaLink')
                             ->with('title', $travelmate->vars()->created_at)
                         )
-                        ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
-                            ->with('title', trans('content.action.edit.title'))
-                            ->with('route', route('travelmate.edit', [$travelmate]))
+                        ->pushWhen(
+                            $user && $user->hasRoleOrOwner('admin', $travelmate->user->id),
+                            component('MetaLink')
+                                ->with('title', trans('content.action.edit.title'))
+                                ->with('route', route('travelmate.edit', [$travelmate]))
                         )
                         ->merge($travelmate->destinations->map(function ($tag) {
                             return component('Tag')->is('orange')->with('title', $tag->name);

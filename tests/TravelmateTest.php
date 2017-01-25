@@ -19,17 +19,14 @@ class TravelmateTest extends TestCase
 
         // creator create content
         $this->actingAs($creator_user)
-            ->visit('content/travelmate')
+            ->visit('reisikaaslased')
             ->click(trans('content.travelmate.create.title'))
-            ->seePageIs('content/travelmate/create')
+            ->seePageIs('travelmate/create')
             ->type('Creator title travelmate', 'title')
             ->select($year, 'start_at_year')
             ->select($month, 'start_at_month')
             ->select($day, 'start_at_day')
             ->press(trans('content.create.submit.title'))
-            ->see(trans('content.store.status.'.config('content_travelmate.store.status', 1).'.info', [
-                'title' => 'Creator title travelmate',
-            ]))
             ->see('Creator title travelmate')
             ->seeInDatabase('contents', [
                 'user_id' => $creator_user->id,
@@ -57,7 +54,7 @@ class TravelmateTest extends TestCase
         $day = Carbon::parse($datetime)->day;
 
         $this->actingAs($regular_user)
-            ->visit('content/travelmate')
+            ->visit('reisikaaslased')
             ->click(trans('content.travelmate.create.title'))
             ->seePageIs('content/travelmate/create')
             ->type('Hello title', 'title')
@@ -65,9 +62,6 @@ class TravelmateTest extends TestCase
             ->select($month, 'start_at_month')
             ->select($day, 'start_at_day')
             ->press(trans('content.create.submit.title'))
-            ->see(trans('content.store.status.1.info', [
-                'title' => 'Hello title',
-            ]))
             ->see('Hello title')
             ->see(str_limit($regular_user->name, 24))
             ->seeInDatabase('contents', [
@@ -88,7 +82,7 @@ class TravelmateTest extends TestCase
         $this->actingAs($regular_user)
                 ->visit(config('sluggable.contentTypeMapping')['travelmate'].'/'.$content->slug)
                 ->press(trans('content.action.edit.title'))
-                ->seePageIs("content/travelmate/$content->id/edit")
+                ->seePageIs("travelmate/$content->id/edit")
                 ->type('Hola titulo', 'title')
                 ->select($year, 'start_at_year')
                 ->select($month, 'start_at_month')
@@ -120,18 +114,15 @@ class TravelmateTest extends TestCase
 
         // creator create content
         $this->actingAs($creator_user)
-            ->visit('content/travelmate')
+            ->visit('reisikaaslased')
             ->click(trans('content.travelmate.create.title'))
-            ->seePageIs('content/travelmate/create')
+            ->seePageIs('travelmate/create')
             ->type('Creator title travelmate', 'title')
             ->type('Creator body travelmate', 'body')
             ->select($year, 'start_at_year')
             ->select($month, 'start_at_month')
             ->select($day, 'start_at_day')
             ->press(trans('content.create.submit.title'))
-            ->see(trans('content.store.status.'.config('content_travelmate.store.status', 1).'.info', [
-                'title' => 'Creator title travelmate',
-            ]))
             ->see('Creator title travelmate')
             ->seeInDatabase('contents', [
                 'user_id' => $creator_user->id,
@@ -151,18 +142,14 @@ class TravelmateTest extends TestCase
         $content_id = $this->getContentIdByTitleType('Creator title travelmate');
         $this->actingAs($editor_user)
             ->visit("content/travelmate/$content_id")
-            ->seeInElement('form', trans('content.action.edit.title'))
-            ->press(trans('content.action.edit.title'))
-            ->seePageIs("content/travelmate/$content_id/edit")
+            ->click(trans('content.action.edit.title'))
+            ->seePageIs("travelmate/$content_id/edit")
             ->type('Editor title travelmate', 'title')
             ->type('Editor body travelmate', 'body')
             ->select($year, 'start_at_year')
             ->select($month, 'start_at_month')
             ->select($day, 'start_at_day')
             ->press(trans('content.edit.submit.title'))
-            ->see(trans('content.update.info', [
-                'title' => 'Editor title travelmate',
-            ]))
             ->seeInDatabase('contents', [
                 'user_id' => $creator_user->id,
                 'start_at' => $year.'-'.$month.'-'.$day.' 00:00:00',

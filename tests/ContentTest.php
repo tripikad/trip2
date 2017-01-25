@@ -42,9 +42,6 @@ class ContentTest extends TestCase
                 ->type("Hello title $type", 'title')
                 ->type("Hello body $type", 'body')
                 ->press(trans('content.create.submit.title'))
-                ->see(trans('content.store.status.1.info', [
-                    'title' => "Hello title $type",
-                ]))
                 ->see("Hello title $type")
                 ->seeInDatabase('contents', [
                     'user_id' => $regular_user->id,
@@ -143,9 +140,6 @@ class ContentTest extends TestCase
             }
 
             $this->press(trans('content.create.submit.title'))
-                ->see(trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
-                    'title' => "Admin title $type",
-                ]))
                 ->seeInDatabase('contents', $seeInDatabase);
         }
     }
@@ -168,9 +162,6 @@ class ContentTest extends TestCase
                 ->type("Creator title $type", 'title')
                 ->type("Creator body $type", 'body')
                 ->press(trans('content.create.submit.title'))
-                ->see(trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
-                    'title' => "Creator title $type",
-                ]))
                 ->see("Creator title $type")
                 ->seeInDatabase('contents', [
                     'user_id' => $creator_user->id,
@@ -213,9 +204,6 @@ class ContentTest extends TestCase
                 ->type("Creator title $type", 'title')
                 ->type("Creator body $type", 'body')
                 ->press(trans('content.create.submit.title'))
-                ->see(trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
-                    'title' => "Creator title $type",
-                ]))
                 ->see("Creator title $type")
                 ->seeInDatabase('contents', [
                     'user_id' => $creator_user->id,
@@ -234,9 +222,6 @@ class ContentTest extends TestCase
                 ->type("Editor title $type", 'title')
                 ->type("Editor body $type", 'body')
                 ->press(trans('content.edit.submit.title'))
-                ->see(trans('content.update.info', [
-                    'title' => "Editor title $type",
-                ]))
                 ->seeInDatabase('contents', [
                     'user_id' => $creator_user->id,
                     'title' => "Editor title $type",
