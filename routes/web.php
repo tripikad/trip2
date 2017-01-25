@@ -75,12 +75,12 @@ Route::post('travelmate/store', 'V2TravelmateController@store')
     ->middleware('role:regular');
 
 Route::get('travelmate/{id}/edit', 'V2TravelmateController@edit')
-    ->name('travelmate.edit');
-    //->middleware('role:admin,userowner');
+    ->name('travelmate.edit')
+    ->middleware('role:admin,contentowner');
 
 Route::put('travelmate/{id}/update', 'V2TravelmateController@update')
-    ->name('travelmate.update');
-   //->middleware('role:admin,userowner');
+    ->name('travelmate.update')
+   ->middleware('role:admin,contentowner');
 
 // Forum
 
@@ -111,12 +111,12 @@ Route::post('forum/store', 'V2ForumController@store')
     ->middleware('role:regular');
 
 Route::get('forum/{id}/edit', 'V2ForumController@edit')
-    ->name('forum.edit');
-    //->middleware('role:admin,userowner');
+    ->name('forum.edit')
+    ->middleware('role:admin,contentowner');
 
 Route::put('forum/{id}/update', 'V2ForumController@update')
-    ->name('forum.update');
-    //->middleware('role:admin,userowner');
+    ->name('forum.update')
+    ->middleware('role:admin,contentowner');
 
 // Static
 
@@ -157,12 +157,12 @@ Route::post('blog/store', 'V2BlogController@store')
     ->middleware('role:regular');
 
 Route::get('blog/{id}/edit', 'V2BlogController@edit')
-    ->name('blog.edit');
-    //->middleware('role:admin,userowner');
+    ->name('blog.edit')
+    ->middleware('role:admin,contentowner');
 
 Route::put('blog/{id}/update', 'V2BlogController@update')
-    ->name('blog.update');
-    //->middleware('role:admin,userowner');
+    ->name('blog.update')
+    ->middleware('role:admin,contentowner');
 
 // Internal
 
@@ -211,12 +211,12 @@ Route::post('photo/store', 'V2PhotoController@store')
     ->middleware('role:regular');
 
 Route::get('photo/{id}/edit', 'V2PhotoController@edit')
-    ->name('photo.edit');
-    //->middleware('role:admin,userowner');
+    ->name('photo.edit')
+    ->middleware('role:admin,contentowner');
 
 Route::put('photo/{id}/update', 'V2PhotoController@update')
-    ->name('photo.update');
-    //->middleware('role:admin,userowner');
+    ->name('photo.update')
+    ->middleware('role:admin,contentowner');
 
 // Content status
 
