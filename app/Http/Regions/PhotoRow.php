@@ -17,7 +17,7 @@ class PhotoRow
                         ]));
         });
 
-        if ($content->count() < 9) {
+        if ($content->count() && $content->count() < 9) {
             $content = $content->merge(array_fill(
                     0,
                     9 - $content->count(),
