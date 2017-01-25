@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Request;
 use App\User;
 use App\Content;

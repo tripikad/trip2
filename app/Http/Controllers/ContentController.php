@@ -220,6 +220,10 @@ class ContentController extends Controller
                 'static.'.$id, [], 301);
         }
 
+        if ('photo' === $type) {
+            return redirect()->route('photo.show', [$id]);
+        }
+
         return redirect()->route(
             $type.'.show', [$content->slug], 301);
     }
@@ -425,7 +429,7 @@ class ContentController extends Controller
                 'title' =>  $request->get('title'),
                 'type' =>  $type,
                 'body' =>  $request->get('body'),
-                'link' => route("$type.show", [$content]),
+                'link' => ($type != 'photo') ? route("$type.show", [$content]) : ''
             ]);
 
             if (! $id) {
@@ -472,7 +476,7 @@ class ContentController extends Controller
             }
 
             if (! $request->ajax()) {
-                if (! $id) {
+                if (! $id || $type == 'photo') {
                     return redirect()
                         ->route(''.$type.'.index')
                         ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [

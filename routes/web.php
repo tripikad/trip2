@@ -194,12 +194,12 @@ Route::post('photo/store', 'V2PhotoController@store')
     ->middleware('role:regular');
 
 Route::get('photo/{id}/edit', 'V2PhotoController@edit')
-    ->name('photo.edit')
-    ->middleware('role:admin,userowner');
+    ->name('photo.edit');
+    //->middleware('role:admin,userowner');
 
 Route::put('photo/{id}/update', 'V2PhotoController@update')
-    ->name('photo.update')
-    ->middleware('role:admin,userowner');
+    ->name('photo.update');
+    //->middleware('role:admin,userowner');
 
 // Content status
 

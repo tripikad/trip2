@@ -50,7 +50,7 @@ class FollowTest extends TestCase
 
         $content = factory(Content::class)->create([
             'user_id' => $user1->id,
-            'title' => 'Hello',
+            'title' => 'Buenos dias',
         ]);
 
         // Follow a post
@@ -59,7 +59,6 @@ class FollowTest extends TestCase
             ->visit(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
             ->press(trans('content.action.follow.1.title'))
             ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
-            ->see(trans('content.action.follow.1.info', ['title' => $content->title]))
             ->seeInDatabase('follows', [
                 'user_id' => $user2->id,
                 'followable_id' => $content->id,
@@ -69,10 +68,10 @@ class FollowTest extends TestCase
         // See followed post
 
         $this->actingAs($user2)
-            ->visit("user/$user2->id")
+            ->visit("/")
             ->click(trans('menu.user.follow'))
             ->seePageIs("user/$user2->id/follows")
-            ->click('Hello')
+            ->click('Buenos dias')
             ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug);
 
         // Unfollow post
@@ -81,7 +80,6 @@ class FollowTest extends TestCase
             ->visit(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
             ->press(trans('content.action.follow.0.title'))
             ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
-            ->see(trans('content.action.follow.0.info', ['title' => $content->title]))
             ->missingFromDatabase('follows', [
                 'user_id' => $user2->id,
                 'followable_id' => $content->id,
@@ -92,6 +90,6 @@ class FollowTest extends TestCase
 
         $this->actingAs($user2)
             ->visit("user/$user2->id/follows")
-            ->dontSee('Hello');
+            ->dontSee('Buenos dias');
     }
 }
