@@ -10,12 +10,17 @@ class FrontpageFlight
             ->map(function ($flight, $index) {
                 $destination = $flight->destinations->first();
 
-                return region(
-                        'DestinationBar',
-                        $destination,
-                        ['purple', 'yellow', 'red'][$index]
-                    )
-                    .region('FlightCard', $flight);
+                if ($destination) {
+                    return region(
+                            'DestinationBar',
+                            $destination,
+                            ['purple', 'yellow', 'red'][$index]
+                        )
+                        .region('FlightCard', $flight);
+
+                    }
+                return;
+
             })
         );
     }

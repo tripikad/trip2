@@ -26,7 +26,7 @@ class CommentTest extends TestCase
         ];
 
         $this->privateContentTypes = [
-         //   'internal',
+           'internal',
         ];
     }
 
@@ -46,37 +46,37 @@ class CommentTest extends TestCase
 
             $this->actingAs($regular_user)
                 ->visit("content/$content->type/$content->id")
-                ->type("Hello $content->type", 'body')
+                ->type("Hola chicos de $content->type", 'body')
                 ->press(trans('comment.create.submit.title'))
                 ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
-                ->see("Hello $content->type")
+                ->see("Hola chicos de $content->type")
                 ->see($regular_user->name)
                 ->seeInDatabase('comments', [
                     'user_id' => $regular_user->id,
                     'content_id' => $content->id,
-                    'body' => "Hello $content->type",
+                    'body' => "Hola chicos de $content->type",
                     'status' => 1,
                 ]);
 
-            $comment = Comment::whereBody("Hello $content->type")->first();
+            $comment = Comment::whereBody("Hola chicos de $content->type")->first();
 
             // Can edit own comment
-            /*
+
             $this->actingAs($regular_user)
                 ->visit("content/$content->type/$content->id")
-                ->press(trans('comment.action.edit.title'))
-                ->seePageIs("comment/$comment->id/edit")
-                ->type("Hola $content->type", 'body')
+                ->click(trans('comment.action.edit.title'))
+                ->visit("comment/$comment->id/edit")
+                ->type("Hola chicas de $content->type", 'body')
                 ->press(trans('comment.edit.submit.title'))
                 ->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
-                ->see("Hola $content->type")
+                ->see("Hola chicas de $content->type")
                 ->seeInDatabase('comments', [
                     'user_id' => $regular_user->id,
                     'content_id' => $content->id,
-                    'body' => "Hola $content->type",
+                    'body' => "Hola chicas de $content->type",
                     'status' => 1,
                 ]);
-            */
+            
         }
     }
 
@@ -99,8 +99,8 @@ class CommentTest extends TestCase
             // Can not edit other users comments
 
             $response = $this->actingAs($regular_user)
-                //->visit("content/$content->type/$content->id")
-                //->dontSeeInElement('.c-actions__link', trans('comment.action.edit.title'))
+                ->visit("content/$content->type/$content->id")
+                ->dontSeeInElement('Comment', trans('comment.action.edit.title'))
                 ->call('GET', "comment/$comment->id/edit");
 
             $this->assertEquals(401, $response->status());
@@ -127,15 +127,11 @@ class CommentTest extends TestCase
 
             $response = $this->actingAs($regular_user)
                 ->call('POST', "content/$content->type/$content->id/comment"); 
-            $this->assertEquals(401, $response->status());
+            $this->assertEquals(302, $response->status());
 
             // Can not edit private content comments
 
-            $this->actingAs($regular_user)
-                ->visit("content/$content->type/$content->id")
-                ->dontSee(trans('comment.action.edit.title'));
-
-             $response = $this->actingAs($regular_user)
+            $response = $this->actingAs($regular_user)
                 ->call('GET', "comment/$comment->id/edit");
             $this->assertEquals(401, $response->status());
 
