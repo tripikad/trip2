@@ -6,7 +6,7 @@ use App;
 use Cache;
 use App\Content;
 
-class V2InternalController extends Controller
+class V2AdminController extends Controller
 {
     public function index()
     {

@@ -172,11 +172,11 @@ Route::put('blog/{id}/update', 'V2BlogController@update')
 
 // Internal
 
-Route::get('internal', 'V2InternalController@index')
+Route::get('internal', 'V2AdminController@index')
     ->middleware('role:admin')
     ->name('internal.index');
 
-Route::get('internal/{id}', 'V2InternalController@show')
+Route::get('internal/{id}', 'V2AdminController@show')
     ->middleware('role:admin')
     ->name('internal.show');
 
@@ -196,7 +196,7 @@ Route::put('internal/{id}/update', 'V2BlogController@update')
     ->name('internal.update')
     ->middleware('role:admin');
 
-Route::get('admin/content', ['middleware' => 'role:admin', 'uses' => 'V2InternalController@unpublishedIndex', 'as' => 'admin.content.index']);
+Route::get('admin/content', ['middleware' => 'role:admin', 'uses' => 'V2AdminController@unpublishedIndex', 'as' => 'admin.content.index']);
 
 // Photo
 
