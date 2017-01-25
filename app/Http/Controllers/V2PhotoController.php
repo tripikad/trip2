@@ -102,7 +102,6 @@ class V2PhotoController extends Controller
             ->render();
     }
 
-
     public function show($id)
     {
         return '';

@@ -139,7 +139,7 @@ class Content extends Model
     }
 
     public function scopeGetItemBySlug($query, $slug, $user = false)
-    {   
+    {
         return $query
             ->whereSlug($slug)
             ->with(
