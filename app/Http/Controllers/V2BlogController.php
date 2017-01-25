@@ -125,5 +125,4 @@ class V2BlogController extends Controller
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'blog', $id);
     }
-
 }

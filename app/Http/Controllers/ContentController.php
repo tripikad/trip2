@@ -429,7 +429,7 @@ class ContentController extends Controller
                 'title' =>  $request->get('title'),
                 'type' =>  $type,
                 'body' =>  $request->get('body'),
-                'link' => ($type != 'photo') ? route("$type.show", [$content]) : ''
+                'link' => ($type != 'photo') ? route("$type.show", [$content]) : '',
             ]);
 
             if (! $id) {
