@@ -48,7 +48,7 @@ class V2AdminController extends Controller
     {
         $user = auth()->user();
         $forum = Content::findOrFail($slug);
-        
+
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
         // Clear the unread cache
