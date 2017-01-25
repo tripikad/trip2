@@ -254,3 +254,5 @@ There is no dedicated CSS files for layouts but you can use helper classes found
 
 At the time of writing there is no helper command to create a layout.
 
+.
+
