@@ -20,19 +20,19 @@ Route::get('uudised/{slug}', 'V2NewsController@show')
 
 Route::get('news/create', 'V2NewsController@create')
     ->name('news.create')
-    ->middleware('role:superuser');
+    ->middleware('role:admin');
 
 Route::post('news/store', 'V2NewsController@store')
     ->name('news.store')
-    ->middleware('role:superuser');
+    ->middleware('role:admin');
 
 Route::get('news/{id}/edit', 'V2NewsController@edit')
     ->name('news.edit')
-    ->middleware('role:superuser');
+    ->middleware('role:admin');
 
 Route::put('news/{id}/update', 'V2NewsController@update')
     ->name('news.update')
-    ->middleware('role:superuser');
+    ->middleware('role:admin');
 
 // Flight
 
@@ -44,19 +44,19 @@ Route::get('odavad-lennupiletid/{slug}', 'V2FlightController@show')
 
 Route::get('flight/create', 'V2FlightController@create')
     ->name('flight.create')
-    ->middleware('role:superuser');
+    ->middleware('role:admin');
 
 Route::post('flight/store', 'V2FlightController@store')
     ->name('flight.store')
-    ->middleware('role:superuser');
+    ->middleware('role:admin');
 
 Route::get('flight/{id}/edit', 'V2FlightController@edit')
     ->name('flight.edit')
-    ->middleware('role:superuser');
+    ->middleware('role:admin');
 
 Route::put('flight/{id}/update', 'V2FlightController@update')
     ->name('flight.update')
-    ->middleware('role:superuser');
+    ->middleware('role:admin');
 
 // Travelmates
 

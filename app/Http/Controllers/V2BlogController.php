@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Content;
 
 class V2BlogController extends Controller

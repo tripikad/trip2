@@ -294,7 +294,8 @@ class Content extends Model
 
     public function getHeadTitle()
     {
-        return isset($this->price) ? $this->title.' '.$this->price.'€' : $this->title;
+        return $this->title;
+        //return isset($this->price) ? $this->title.' '.$this->price.'€' : $this->title;
     }
 
     public function getHeadDescription()
