@@ -47,7 +47,7 @@ class ContentTest extends TestCase
                     'title' => "Hello title $type",
                     'body' => "Hello body $type",
                     // 'type' => $type, // TODO: forum support
-                    'status' => 1, 
+                    'status' => 1,
                 ]);
 
             $content = Content::whereTitle("Hello title $type")->first();
@@ -103,9 +103,9 @@ class ContentTest extends TestCase
         $regular_user = factory(App\User::class)->create();
 
         foreach ($this->privateContentTypes as $type) {
-            
+
             // Regular user try to create content
-            
+
             $this->actingAs($regular_user);
             $response = $this->call('GET', "$type/create");
             $this->assertEquals(401, $response->status());
