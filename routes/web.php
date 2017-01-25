@@ -190,7 +190,6 @@ Route::put('internal/{id}/update', 'V2BlogController@update')
     ->name('internal.update')
     ->middleware('role:admin');
 
-
 // Photo
 
 Route::get('reisipildid', 'V2PhotoController@index')

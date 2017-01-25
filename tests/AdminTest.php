@@ -56,7 +56,7 @@ class AdminTest extends TestCase
         ]);
 
         $this->actingAs($user1)
-            ->visit('internal');/*
+            ->visit('internal'); /*
             ->seeLink(trans('menu.admin.image'))
             ->click(trans('menu.admin.image'))
             ->seePageIs('admin/image')
