@@ -42,7 +42,7 @@ class TravelmateTest extends TestCase
         $response = $this->call('GET', "content/travelmate/$content_id/edit");
         $this->visit("content/travelmate/$content_id")
             ->dontSeeInElement('form', trans('content.action.edit.title'))
-            ->assertEquals(401, $response->status());
+            ->assertEquals(404, $response->status());
     }
 
     public function test_regular_user_can_create_content()
@@ -56,7 +56,7 @@ class TravelmateTest extends TestCase
         $this->actingAs($regular_user)
             ->visit('reisikaaslased')
             ->click(trans('content.travelmate.create.title'))
-            ->seePageIs('content/travelmate/create')
+            ->seePageIs('travelmate/create')
             ->type('Hello title', 'title')
             ->select($year, 'start_at_year')
             ->select($month, 'start_at_month')
@@ -81,7 +81,7 @@ class TravelmateTest extends TestCase
 
         $this->actingAs($regular_user)
                 ->visit(config('sluggable.contentTypeMapping')['travelmate'].'/'.$content->slug)
-                ->press(trans('content.action.edit.title'))
+                ->click(trans('content.action.edit.title'))
                 ->seePageIs("travelmate/$content->id/edit")
                 ->type('Hola titulo', 'title')
                 ->select($year, 'start_at_year')

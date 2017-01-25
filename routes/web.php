@@ -75,12 +75,12 @@ Route::post('travelmate/store', 'V2TravelmateController@store')
     ->middleware('role:regular');
 
 Route::get('travelmate/{id}/edit', 'V2TravelmateController@edit')
-    ->name('travelmate.edit')
-    ->middleware('role:admin,userowner');
+    ->name('travelmate.edit');
+    //->middleware('role:admin,userowner');
 
 Route::put('travelmate/{id}/update', 'V2TravelmateController@update')
-    ->name('travelmate.update')
-    ->middleware('role:admin,userowner');
+    ->name('travelmate.update');
+   //->middleware('role:admin,userowner');
 
 // Forum
 
@@ -111,12 +111,12 @@ Route::post('forum/store', 'V2ForumController@store')
     ->middleware('role:regular');
 
 Route::get('forum/{id}/edit', 'V2ForumController@edit')
-    ->name('forum.edit')
-    ->middleware('role:admin,userowner');
+    ->name('forum.edit');
+    //->middleware('role:admin,userowner');
 
 Route::put('forum/{id}/update', 'V2ForumController@update')
-    ->name('forum.update')
-    ->middleware('role:admin,userowner');
+    ->name('forum.update');
+    //->middleware('role:admin,userowner');
 
 // Static
 
@@ -157,12 +157,12 @@ Route::post('blog/store', 'V2BlogController@store')
     ->middleware('role:regular');
 
 Route::get('blog/{id}/edit', 'V2BlogController@edit')
-    ->name('blog.edit')
-    ->middleware('role:admin,userowner');
+    ->name('blog.edit');
+    //->middleware('role:admin,userowner');
 
 Route::put('blog/{id}/update', 'V2BlogController@update')
-    ->name('blog.update')
-    ->middleware('role:admin,userowner');
+    ->name('blog.update');
+    //->middleware('role:admin,userowner');
 
 // Internal
 
