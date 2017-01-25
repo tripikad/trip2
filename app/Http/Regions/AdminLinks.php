@@ -2,7 +2,7 @@
 
 namespace App\Http\Regions;
 
-class ForumLinks
+class AdminLinks
 {
     public function render($user = false)
     {
@@ -28,6 +28,21 @@ class ForumLinks
                 ->is('large')
                 ->with('title', trans('menu.user.follow'))
                 ->with('route', route('follow.index', [$user]))
+            )
+            ->pushWhen($user && $user->hasRole('admin'), component('Link')
+                ->is('large')
+                ->with('title', trans('menu.auth.admin'))
+                ->with('route', route('internal.index'))
+            )
+            ->pushWhen($user && $user->hasRole('admin'), component('Link')
+                ->is('large')
+                ->with('title', trans('menu.admin.image'))
+                ->with('route', route('admin.image.index'))
+            )
+            ->pushWhen($user && $user->hasRole('admin'), component('Link')
+                ->is('large')
+                ->with('title', trans('menu.admin.content'))
+                ->with('route', route('admin.content.index'))
             );
     }
 }

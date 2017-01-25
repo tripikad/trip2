@@ -56,11 +56,11 @@ class AdminTest extends TestCase
         ]);
 
         $this->actingAs($user1)
-            ->visit('internal');/*
+            ->visit('internal')
             ->seeLink(trans('menu.admin.image'))
             ->click(trans('menu.admin.image'))
             ->seePageIs('admin/image')
-            ->see(trans('admin.image.index.title'));*/
+            ->see(trans('admin.image.index.title'));
     }
 
     public function test_admin_user_can_post_photos()
@@ -181,10 +181,7 @@ class AdminTest extends TestCase
         ]);
 
         $this->actingAs($user1)
-            ->visit('content/forum')
-            ->seeLink(trans('menu.auth.admin'))
-            ->click(trans('menu.auth.admin'))
-            ->seePageIs('internal')
+            ->visit('internal')
             ->see(trans('content.internal.index.title'))
             ->seeLink('Hello internal')
             ->click('Hello internal')

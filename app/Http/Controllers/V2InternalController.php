@@ -21,7 +21,7 @@ class V2InternalController extends Controller
                     ->with('title', trans('content.internal.index.title'))
                 )
                 ->push(component('BlockHorizontal')
-                    ->with('content', region('ForumLinks'))
+                    ->with('content', region('AdminLinks'))
                 )
                 ->pushWhen(
                     $loggedUser && $loggedUser->hasRole('admin'),
