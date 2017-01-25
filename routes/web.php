@@ -190,11 +190,15 @@ Route::put('internal/{id}/update', 'V2BlogController@update')
     ->name('internal.update')
     ->middleware('role:admin');
 
+Route::get('admin/content', ['middleware' => 'role:admin', 'uses' => 'V2InternalController@unpublishedIndex', 'as' => 'admin.content.index']);
 
 // Photo
 
 Route::get('reisipildid', 'V2PhotoController@index')
     ->name('photo.index');
+
+Route::get('photo/id/{id}', 'V2PhotoController@show')
+    ->name('photo.show');
 
 // TODO: photo show redirect
 
@@ -230,7 +234,6 @@ Route::get('content/{type}', function ($type) {
 
 Route::get('content/{type}/{id}', function ($type, $id) {
     $content = App\Content::findOrFail($id);
-
     return redirect()->route("$type.show", [$content->slug], 301);
 })
     ->name('content.show');
@@ -394,8 +397,6 @@ Route::put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses'
 Route::get('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageIndex', 'as' => 'admin.image.index']);
 
 Route::post('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageStore', 'as' => 'admin.image.store']);
-
-Route::get('admin/content', ['middleware' => 'role:admin', 'uses' => 'AdminController@contentIndex', 'as' => 'admin.content.index']);
 
 // Experiments
 

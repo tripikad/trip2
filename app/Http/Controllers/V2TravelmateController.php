@@ -77,10 +77,10 @@ class V2TravelmateController extends Controller
     }
 
     public function show($slug)
-    {
-        $travelmate = Content::getItemBySlug($slug);
+    { 
         $user = auth()->user();
-
+        $travelmate = Content::getItemBySlug($slug, $user);
+      
         $travelmates = Content::getLatestItems('travelmate', 3);
 
         $flights = Content::getLatestItems('flight', 3);

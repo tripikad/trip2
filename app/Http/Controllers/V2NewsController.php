@@ -78,8 +78,8 @@ class V2NewsController extends Controller
 
     public function show($slug)
     {
-        $new = Content::getItemBySlug($slug);
         $user = auth()->user();
+        $new = Content::getItemBySlug($slug, $user);
 
         $flights = Content::getLatestItems('flight', 3);
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');

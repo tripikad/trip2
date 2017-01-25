@@ -102,6 +102,12 @@ class V2PhotoController extends Controller
             ->render();
     }
 
+
+    public function show($id)
+    {
+        return '';
+    }
+
     public function create()
     {
         return App::make('App\Http\Controllers\ContentController')

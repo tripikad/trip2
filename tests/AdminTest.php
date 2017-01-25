@@ -129,7 +129,7 @@ class AdminTest extends TestCase
             'status' => 0,
         ]);
 
-        /*
+    
         $this->actingAs($user1)
             ->visit('internal')
             ->seeLink(trans('menu.admin.content'))
@@ -140,7 +140,7 @@ class AdminTest extends TestCase
             ->click('Hello unpublished')
             ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug)
             ->see('Hello unpublished');
-        */
+        
     }
 
     public function test_unlogged_or_regular_user_can_not_see_internal_forum()

@@ -102,4 +102,31 @@ class V2InternalController extends Controller
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'internal', $id);
     }
+
+    public function unpublishedIndex()
+    {
+        $contents = Content::whereStatus(0)->latest()->simplePaginate(50);
+
+        return layout('1col')
+
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans('admin.content.index.title'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->merge($contents->map(function ($content) {
+                    return component('Title')
+                        ->is('small')
+                        ->with('title', $content->vars()->title)
+                        ->with('route', route("$content->type.show", [$content->slug]));
+                }))
+                ->push(region('Paginator', $contents))
+            )
+
+            ->with('footer', region('FooterLight'))
+
+            ->render();
+    }
 }
