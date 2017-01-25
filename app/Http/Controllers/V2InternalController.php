@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Cache;
 use App\Content;
 
@@ -27,7 +28,7 @@ class V2InternalController extends Controller
                     component('Button')
                         ->is('narrow')
                         ->with('title', trans('content.internal.create.title'))
-                        ->with('route', route('content.internal.create'))
+                        ->with('route', route('internal.create'))
                 )
             ))
 
@@ -76,5 +77,29 @@ class V2InternalController extends Controller
             ->with('footer', region('FooterLight'))
 
             ->render();
+    }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('internal');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('internal', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'internal');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'internal', $id);
     }
 }

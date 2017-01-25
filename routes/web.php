@@ -166,17 +166,30 @@ Route::put('blog/{id}/update', 'V2BlogController@update')
 
 // Internal
 
-Route::get('v2/internal', [
-    'middleware' => 'role:admin',
-    'uses' => 'V2InternalController@index',
-    'as' => 'internal.index',
-]);
+Route::get('internal', 'V2InternalController@index')
+    ->middleware('role:admin')
+    ->name('internal.index');
 
-Route::get('v2/internal/{id}', [
-    'middleware' => 'role:admin',
-    'uses' => 'V2InternalController@show',
-    'as' => 'internal.show',
-]);
+Route::get('internal/{id}', 'V2InternalController@show')
+    ->middleware('role:admin')
+    ->name('internal.show');
+
+Route::get('internal/create', 'V2BlogController@create')
+    ->name('internal.create')
+    ->middleware('role:regular');
+
+Route::post('internal/store', 'V2BlogController@store')
+    ->name('internal.store')
+    ->middleware('role:admin');
+
+Route::get('internal/{id}/edit', 'V2BlogController@edit')
+    ->name('internal.edit')
+    ->middleware('role:admin');
+
+Route::put('internal/{id}/update', 'V2BlogController@update')
+    ->name('internal.update')
+    ->middleware('role:admin');
+
 
 // Photo
 
