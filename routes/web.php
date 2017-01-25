@@ -234,6 +234,7 @@ Route::get('content/{type}', function ($type) {
 
 Route::get('content/{type}/{id}', function ($type, $id) {
     $content = App\Content::findOrFail($id);
+
     return redirect()->route("$type.show", [$content->slug], 301);
 })
     ->name('content.show');
