@@ -1,0 +1,11 @@
+@import "variables";
+
+.FormError {
+    background: $red;
+    padding: $padding-md;
+}
+
+    .FormError__title {
+        color: $white;
+        font: $font-heading-sm;
+    }

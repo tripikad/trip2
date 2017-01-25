@@ -25,10 +25,11 @@
         <div id="app">
             @yield('promobar')
             @yield('header')
+            {!! component('FormError') !!}
             @yield('content')
             @yield('footer')
-            <photo-fullscreen></photo-fullscreen>
-            <alert></alert>
+            {!! component('PhotoFullscreen') !!}
+            {!! component('Alert') !!}
         </div>
         <script src="/v2/js/main.js"></script>
         @include('v2.utils.promo')
