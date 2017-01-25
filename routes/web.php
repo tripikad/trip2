@@ -203,10 +203,8 @@ Route::get('admin/content', ['middleware' => 'role:admin', 'uses' => 'V2Internal
 Route::get('reisipildid', 'V2PhotoController@index')
     ->name('photo.index');
 
-Route::get('photo/id/{id}', 'V2PhotoController@show')
+Route::get('photo/id/{id}', 'V2PhotoController@show') // Placeholder
     ->name('photo.show');
-
-// TODO: photo show redirect
 
 Route::get('photo/create', 'V2PhotoController@create')
     ->name('photo.create')
@@ -294,6 +292,11 @@ Route::put('content/{type}/{id}/follow/{status}', 'FollowController@followConten
 Route::get('sihtkoht/{id}', [
     'uses' => 'V2DestinationController@show',
     'as' => 'destination.show',
+]);
+
+Route::get('sihtkoht/{slug}', [
+    'uses' => 'V2DestinationController@showSlug',
+    'as' => 'destination.showSlug',
 ]);
 
 // Utils

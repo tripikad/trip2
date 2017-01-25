@@ -80,4 +80,12 @@ class V2DestinationController extends Controller
 
             ->render();
     }
+
+    public function showSlug($slug)
+    {
+        $destination = Destination::findBySlugOrFail($slug);
+
+        return $this->show($destination->id);
+    }
+    
 }
