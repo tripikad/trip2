@@ -18,7 +18,7 @@ class V2NewsController extends Controller
 
         $news = Content::getLatestPagedItems('news', false, $currentDestination, $currentTopic);
         $destinations = Destination::select('id', 'name')->get();
-        $topics = Topic::select('id', 'name')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name')->get();
 
         $flights = Content::getLatestItems('flight', 3);
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
