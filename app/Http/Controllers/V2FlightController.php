@@ -157,11 +157,11 @@ class V2FlightController extends Controller
 
             ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
+                ->push(component('AffBookingInspiration'))
+                ->push(region('Share'))
                 ->merge($flight->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-                ->push(component('AffBookingInspiration'))
-                ->push(region('Share'))
                 ->pushWhen($loggedUser && $loggedUser->hasRole('regular'), region('CommentCreateForm', $flight))
                 ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Block')

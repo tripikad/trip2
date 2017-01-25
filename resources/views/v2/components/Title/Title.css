@@ -15,7 +15,8 @@
 .Title--large .Title__title {
     font: $font-heading-xxl;
     font: $font-heading-xl ?if $tablet;
-    line-height: $line-height-lg;
+    line-height: $line-height-md;
+    line-height: $line-height-lg ?if $tablet;
 }
 
 .Title--white .Title__title {
