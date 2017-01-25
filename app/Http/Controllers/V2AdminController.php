@@ -47,7 +47,7 @@ class V2AdminController extends Controller
     public function show($slug)
     {
         $user = auth()->user();
-        $forum = Content::findOrFail($slug, $user);
+        $forum = Content::findOrFail($slug);
         
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
@@ -64,9 +64,6 @@ class V2AdminController extends Controller
                 ->push(component('Title')
                     ->with('title', trans('content.internal.index.title'))
                     ->with('route', route('internal.index'))
-                )
-                ->push(component('BlockHorizontal')
-                    ->with('content', region('AdminLinks'))
                 )
             ))
 
