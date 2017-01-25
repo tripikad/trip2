@@ -164,7 +164,7 @@ class V2TravelmateController extends Controller
     }
 
     public function edit($id)
-    {   
+    {
         return App::make('App\Http\Controllers\ContentController')
             ->edit('travelmate', $id);
     }
