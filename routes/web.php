@@ -15,7 +15,7 @@ Route::get('/', 'V2FrontpageController@index')
 Route::post('content/{type}/{id}/status/{status}', 'ContentController@status')
     ->name('content.status')
     ->middleware('role:admin');
-    
+
 // News
 
 Route::get('uudised', 'V2NewsController@index')

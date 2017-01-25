@@ -87,5 +87,4 @@ class V2DestinationController extends Controller
 
         return $this->show($destination->id);
     }
-    
 }

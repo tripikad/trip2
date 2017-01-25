@@ -25,7 +25,7 @@ class PhotoRow
             ));
         }
 
-        if (!$content->count()) {
+        if (! $content->count()) {
             $content = array_fill(
                 0,
                 9 - $content->count(),
