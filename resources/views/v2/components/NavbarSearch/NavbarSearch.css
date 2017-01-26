@@ -8,7 +8,6 @@
 	.NavbarSearch__icon {
 		cursor: pointer;
 		margin-right: $margin-sm;
-		opacity: $opacity-lg;
 	}
 
 	.NavbarSearch__input {
