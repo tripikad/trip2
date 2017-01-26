@@ -94,6 +94,12 @@ class V2NewsController extends Controller
 
             ->with('header', region('NewsHeader', $new))
 
+            ->with('top', collect()->pushWhen(
+                !$new->status,
+                component('HeaderUnpublished')
+                    ->with('title', trans('content.show.unpublished'))
+            ))
+
             ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $new->vars()->body))
                 ->merge($new->comments->map(function ($comment) {

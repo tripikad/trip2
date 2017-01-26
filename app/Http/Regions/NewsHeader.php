@@ -55,7 +55,6 @@ class NewsHeader
                                 $new,
                                 (1 - $new->status),
                             ]))
-                            ->with('method', 'PUT')
                             ->with('fields', collect()
                                 ->push(component('FormLink')
                                     ->is('white')

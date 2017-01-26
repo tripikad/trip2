@@ -77,6 +77,12 @@ class V2BlogController extends Controller
                 )
             ))
 
+            ->with('top', collect()->pushWhen(
+                !$blog->status,
+                component('HeaderUnpublished')
+                    ->with('title', trans('content.show.unpublished'))
+            ))
+
             ->with('content', collect()
                 ->push(region('BlogRow', $blog))
                 ->push(component('Body')->is('responsive')->with('body', $blog->vars()->body))
