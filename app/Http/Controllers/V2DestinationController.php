@@ -40,7 +40,7 @@ class V2DestinationController extends Controller
                             ->is('transparent')
                             ->with('title', trans('content.photo.more'))
                             ->with('route', route(
-                                'v2.photo.index',
+                                'photo.index',
                                 ['destination' => $destination->id]
                             ))
                     )
@@ -49,7 +49,7 @@ class V2DestinationController extends Controller
                         component('Button')
                             ->is('transparent')
                             ->with('title', trans('content.photo.create.title'))
-                            ->with('route', route('content.create', ['photo']))
+                            ->with('route', route('photo.create'))
                     )
 
             ))
@@ -57,7 +57,7 @@ class V2DestinationController extends Controller
             ->with('content', collect()
                 ->push(component('Block')
                     ->with('title', trans('destination.show.forum.title'))
-                    ->with('route', route('v2.forum.index', ['destination' => $destination]))
+                    ->with('route', route('forum.index', ['destination' => $destination]))
                     ->with('content', $forums->map(function ($forum) {
                         return region('ForumRow', $forum);
                     })
@@ -79,5 +79,12 @@ class V2DestinationController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
+    }
+
+    public function showSlug($slug)
+    {
+        $destination = Destination::findBySlugOrFail($slug);
+
+        return $this->show($destination->id);
     }
 }

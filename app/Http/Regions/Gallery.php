@@ -24,7 +24,7 @@ class Gallery
                         )
                         ->push(component('MetaLink')
                             ->with('title', $image->user->vars()->name)
-                            ->with('route', route('v2.user.show', [$image->user]))
+                            ->with('route', route('user.show', [$image->user]))
                         )
                         )->render()
                     );

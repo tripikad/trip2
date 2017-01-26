@@ -14,19 +14,18 @@ class ForumPost
         ])->first() ? 0 : 1;
 
         return component('ForumPost')
-            ->is($post->status ?: 'unpublished')
             ->with('title', $post->vars()->title)
             ->with('user', component('UserImage')
                 ->with('size', 64)
                 ->with('border', 4)
-                ->with('route', route('v2.user.show', [$post->user]))
+                ->with('route', route('user.show', [$post->user]))
                 ->with('image', $post->user->imagePreset('small_square'))
                 ->with('rank', $post->user->vars()->rank)
             )
             ->with('meta', component('Meta')->with('items', collect()
                     ->push(component('MetaLink')
                         ->with('title', $post->user->vars()->name)
-                        ->with('route', route('v2.user.show', [$post->user]))
+                        ->with('route', route('user.show', [$post->user]))
                     )
                     ->push(component('MetaLink')
                         ->with('title', $post->vars()->created_at)
@@ -35,24 +34,23 @@ class ForumPost
                         return component('Tag')
                             ->is('orange')
                             ->with('title', $destination->name)
-                            ->with('route', route('v2.destination.show', [$destination]));
+                            ->with('route', route('destination.show', [$destination]));
                     }))
                     ->merge($post->topics->map(function ($topic) {
                         return component('MetaLink')
                             ->with('title', $topic->name)
-                            ->with('route', route('v2.forum.index', ['topic' => $topic]));
+                            ->with('route', route('forum.index', ['topic' => $topic]));
                     }))
                     ->pushWhen($user && $user->hasRoleOrOwner('admin', $post->user->id),
                         component('MetaLink')
                             ->with('title', trans('content.action.edit.title'))
-                            ->with('route', route('content.edit', [$post->type, $post]))
+                            ->with('route', route('forum.edit', [$post]))
                     )
                     ->pushWhen($user && $user->hasRole('admin'), component('Form')
                             ->with('route', route(
                                 'content.status',
                                 [$post->type, $post, (1 - $post->status)]
                             ))
-                            ->with('method', 'PUT')
                             ->with('fields', collect()
                                 ->push(component('FormLink')
                                     ->with(

@@ -13,14 +13,14 @@ class MessageRow
                 'created_at' => $message->vars()->created_at,
             ]))
             ->with('user', component('UserImage')
-                ->with('route', route('v2.user.show', [$message->withUser]))
+                ->with('route', route('user.show', [$message->withUser]))
                 ->with('image', $message->withUser->vars()->imagePreset('small_square'))
                 ->with('rank', $message->withUser->vars()->rank)
                 ->with('size', 32)
                 ->with('border', 3)
             )
             ->with('route', route(
-                'v2.message.index.with',
+                'message.index.with',
                 [$user, $message->withUser])
             );
     }

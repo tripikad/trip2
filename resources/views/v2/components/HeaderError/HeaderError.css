@@ -1,0 +1,11 @@
+@import "variables";
+
+.HeaderError {
+    background: $red;
+    padding: calc($spacer * 1.5);
+}
+
+    .HeaderError__title {
+        color: $white;
+        font: $font-heading-sm;
+    }

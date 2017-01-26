@@ -9,7 +9,7 @@ class FrontpageNews
         return collect()
             ->push(component('BlockTitle')
                 ->with('title', trans('frontpage.index.news.title'))
-                ->with('route', route('v2.news.index'))
+                ->with('route', route('news.index'))
             )
             ->push(component('Grid3')
                 ->with('gutter', true)

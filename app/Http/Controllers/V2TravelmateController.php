@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Request;
 use App\Image;
 use App\Topic;
@@ -17,7 +18,7 @@ class V2TravelmateController extends Controller
 
         $travelmates = Content::getLatestPagedItems('travelmate', 24, $currentDestination, $currentTopic);
         $destinations = Destination::select('id', 'name')->get();
-        $topics = Topic::select('id', 'name')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name')->get();
 
         $flights = Content::getLatestItems('flight', 3);
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
@@ -35,7 +36,7 @@ class V2TravelmateController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.travelmate.index.title'))
-                    ->with('route', route('v2.travelmate.index'))
+                    ->with('route', route('travelmate.index'))
                 )
                 ->push(region(
                     'FilterHorizontal',
@@ -44,7 +45,7 @@ class V2TravelmateController extends Controller
                     $currentDestination,
                     $currentTopic,
                     $travelmates->currentPage(),
-                    'v2.travelmate.index'
+                    'travelmate.index'
                 ))
             ))
 
@@ -77,8 +78,8 @@ class V2TravelmateController extends Controller
 
     public function show($slug)
     {
-        $travelmate = Content::getItemBySlug($slug);
         $user = auth()->user();
+        $travelmate = Content::getItemBySlug($slug, $user);
 
         $travelmates = Content::getLatestItems('travelmate', 3);
 
@@ -86,7 +87,7 @@ class V2TravelmateController extends Controller
         $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
         $news = Content::getLatestItems('news', 1);
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('title', trans('content.travelmate.index.title'))
             ->with('head_title', $travelmate->getHeadTitle())
@@ -98,14 +99,20 @@ class V2TravelmateController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.travelmate.view.all.offers'))
-                    ->with('route', route('v2.travelmate.index'))
+                    ->with('route', route('travelmate.index'))
                 )
                 ->push(component('Title')
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.travelmate.index.title'))
-                    ->with('route', route('v2.travelmate.index'))
+                    ->with('route', route('travelmate.index'))
                 )
+            ))
+
+            ->with('top', collect()->pushWhen(
+                ! $travelmate->status,
+                component('HeaderUnpublished')
+                    ->with('title', trans('content.show.unpublished'))
             ))
 
             ->with('content', collect()
@@ -115,9 +122,11 @@ class V2TravelmateController extends Controller
                         ->push(component('MetaLink')
                             ->with('title', $travelmate->vars()->created_at)
                         )
-                        ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
-                            ->with('title', trans('content.action.edit.title'))
-                            ->with('route', route('content.edit', [$travelmate->type, $travelmate]))
+                        ->pushWhen(
+                            $user && $user->hasRoleOrOwner('admin', $travelmate->user->id),
+                            component('MetaLink')
+                                ->with('title', trans('content.action.edit.title'))
+                                ->with('route', route('travelmate.edit', [$travelmate]))
                         )
                         ->merge($travelmate->destinations->map(function ($tag) {
                             return component('Tag')->is('orange')->with('title', $tag->name);
@@ -125,6 +134,20 @@ class V2TravelmateController extends Controller
                         ->merge($travelmate->topics->map(function ($tag) {
                             return component('MetaLink')->with('title', $tag->name);
                         }))
+                        ->pushWhen($user && $user->hasRole('admin'), component('Form')
+                                ->with('route', route(
+                                    'content.status',
+                                    [$travelmate->type, $travelmate, (1 - $travelmate->status)]
+                                ))
+                                ->with('fields', collect()
+                                    ->push(component('FormLink')
+                                        ->with(
+                                            'title',
+                                            trans("content.action.status.$travelmate->status.title")
+                                        )
+                                    )
+                                )
+                        )
                     )
                 )
                 ->push(component('Body')->is('responsive')->with('body', $travelmate->vars()->body))
@@ -149,6 +172,32 @@ class V2TravelmateController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('travelmate');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('travelmate', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'travelmate');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'travelmate', $id);
     }
 }

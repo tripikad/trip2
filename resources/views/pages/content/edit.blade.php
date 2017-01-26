@@ -83,13 +83,13 @@
                             <div class="r-block__body">
                                 <div class="c-body">
                                     {!! trans('content.edit.notes.body', [
-                                        'route' => route('static.22125')
+                                        'route' => route('static.show', [22125])
                                     ]) !!}
 
                                     @include('component.link', [
                                         'modifiers' => 'm-icon',
                                         'title' => trans('content.action.continue.reading'),
-                                        'route' => route('static.25151'),
+                                        'route' => route('static.show', [25151]),
                                         'icon' => 'icon-arrow-right'
                                     ])
                                 </div>

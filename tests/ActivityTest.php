@@ -13,30 +13,23 @@ class ActivityTest extends TestCase
     {
         $user1 = factory(App\User::class)->create(['verified' => true]);
 
-        // Content activity
+        // Comment activity
 
         $content1 = factory(Content::class)->create([
             'user_id' => $user1->id,
-            'title' => 'Hello',
+            'title' => 'Bom dia',
+            'type' => 'forum',
         ]);
-
-        $this->visit("user/$user1->id")
-            ->see($user1->name)
-            ->see('Hello')
-            ->click(trans('user.activity.view.full.post'), config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug)
-            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug);
-
-        // Comment activity
 
         $comment1 = factory(Comment::class)->create([
             'user_id' => $user1->id,
             'content_id' => $content1->id,
-            'body' => 'World',
+            'body' => 'Preciosa',
         ]);
 
         $this->visit("user/$user1->id")
-            ->see('World')
-            ->click(trans('user.activity.view.full.post'), "content/$comment1->content->type/$comment1->content->id?#comment-$comment1->id")
-            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug);
+            ->see('Preciosa')
+            ->click(trans('user.activity.comments.row.2'))
+            ->seePageIs("foorum/uldfoorum/$content1->slug");
     }
 }

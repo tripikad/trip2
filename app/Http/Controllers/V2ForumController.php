@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Cache;
 use Request;
 use App\User;
@@ -34,7 +35,7 @@ class V2ForumController extends Controller
 
         $forums = Content::getLatestPagedItems($forumType, false, $currentDestination, $currentTopic, 'updated_at');
         $destinations = Destination::select('id', 'name')->get();
-        $topics = Topic::select('id', 'name')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name')->get();
 
         $flights = Content::getLatestItems('flight', 3);
         $travelmates = Content::getLatestItems('travelmate', 3);
@@ -61,7 +62,7 @@ class V2ForumController extends Controller
                     $currentDestination,
                     $currentTopic,
                     $forums->currentPage(),
-                    'v2.forum.index'
+                    'forum.index'
                 ))
             ))
 
@@ -135,8 +136,9 @@ class V2ForumController extends Controller
     public function show($slug)
     {
         $user = auth()->user();
-
         $forum = Content::getItemBySlug($slug, $user);
+
+        // TODO: Why?
 
         if (! $forum->first()) {
             abort(404);
@@ -161,6 +163,10 @@ class V2ForumController extends Controller
             ? '#comment-'.$forum->comments->last()->id
             : '';
 
+        $anchor = $forum->comments->count()
+            ? '#comment-'.$forum->comments->last()->id
+            : '';
+
         return layout('2col')
 
             ->with('title', trans('content.forum.index.title'))
@@ -171,11 +177,17 @@ class V2ForumController extends Controller
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->with('title', trans("content.$forum->type.index.title"))
-                    ->with('route', route("v2.$forum->type.index"))
+                    ->with('route', route("$forum->type.index"))
                 )
                 ->push(component('BlockHorizontal')
                     ->with('content', region('ForumLinks'))
                 )
+            ))
+
+            ->with('top', collect()->pushWhen(
+                ! $forum->status,
+                component('HeaderUnpublished')
+                    ->with('title', trans('content.show.unpublished'))
             ))
 
             ->with('content', collect()
@@ -188,7 +200,7 @@ class V2ForumController extends Controller
                             ->push(component('Link')
                                 ->with('title', trans('comment.action.latest.comment'))
                                 ->with('route', route(
-                                    'v2.forum.show', [$forum->slug]).$anchor
+                                    'forum.show', [$forum->slug]).$anchor
                                 )
                             )
                     )
@@ -213,5 +225,29 @@ class V2ForumController extends Controller
             ->with('footer', region('FooterLight'))
 
             ->render();
+    }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('forum');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('forum', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'forum');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'forum', $id);
     }
 }

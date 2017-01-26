@@ -11,23 +11,23 @@ class Footer
         return collect()
             ->push([
                 'title' => trans('menu.footer.flights'),
-                'route' => route('v2.flight.index'),
+                'route' => route('flight.index'),
             ])
             ->push([
                 'title' => trans('menu.footer.travelmates'),
-                'route' => route('v2.travelmate.index'),
+                'route' => route('travelmate.index'),
             ])
             ->push([
                 'title' => trans('menu.footer.news'),
-                'route' => route('v2.news.index'),
+                'route' => route('news.index'),
             ])
             ->push([
                 'title' => trans('menu.footer.blogs'),
-                'route' => route('v2.blog.index'),
+                'route' => route('blog.index'),
             ])
             ->push([
                 'title' => trans('menu.footer.photos'),
-                'route' => route('v2.photo.index'),
+                'route' => route('photo.index'),
             ])
             ->map(function ($item) {
                 return (object) $item;
@@ -39,15 +39,15 @@ class Footer
         return collect()
             ->push([
                 'title' => trans('menu.footer2.forum'),
-                'route' => route('v2.forum.index'),
+                'route' => route('forum.index'),
             ])
             ->push([
                 'title' => trans('menu.footer2.buysell'),
-                'route' => route('v2.buysell.index'),
+                'route' => route('buysell.index'),
             ])
             ->push([
                 'title' => trans('menu.footer2.expat'),
-                'route' => route('v2.expat.index'),
+                'route' => route('expat.index'),
             ])
             ->map(function ($item) {
                 return (object) $item;
@@ -61,19 +61,19 @@ class Footer
         return collect()
             ->push([
                 'title' => trans('menu.footer3.about'),
-                'route' => route('v2.static.show', [1534]),
+                'route' => route('static.show', 'tripist'),
             ])
             ->push([
                 'title' => trans('menu.footer3.contact'),
-                'route' => route('v2.static.show', [972]),
+                'route' => route('static.show', 'kontakt'),
             ])
             ->push([
                 'title' => trans('menu.footer3.eula'),
-                'route' => route('v2.static.show', [25151]),
+                'route' => route('static.show', 'kasutustingimused'),
             ])
             ->push([
                 'title' => trans('menu.footer3.advertising'),
-                'route' => route('v2.static.show', [22125]),
+                'route' => route('static.show', 'reklaam'),
             ])
             ->pushWhen(! $loggedUser, [
                 'title' => trans('menu.auth.login'),
@@ -111,7 +111,7 @@ class Footer
     {
         return component('Footer')
             ->with('image', '/photos/footer.jpg')
-            ->with('logo_route', route('v2.frontpage.index'))
+            ->with('logo_route', route('frontpage.index'))
             ->with('logo', component('Icon')
                 ->is('white')
                 ->with('icon', 'tripee_logo_plain')

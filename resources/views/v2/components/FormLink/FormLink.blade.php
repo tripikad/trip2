@@ -1,7 +1,8 @@
 @php
 
+$isclasses = $isclasses ?? '';
 $title = $title ?? ''
 
 @endphp
 
-<input class="FormLink" type="submit" value="{{ $title }}">
+<input class="FormLink {{ $isclasses }}" type="submit" value="{{ $title }}">

@@ -250,7 +250,7 @@
                                 [
                                     'modifiers' => 'm-icon',
                                     'title' => trans('content.action.more.about'),
-                                    'route' => route('static.1534'),
+                                    'route' => route('static.show', [1534]),
                                     'icon' => 'icon-arrow-right'
                                 ],
                                 [

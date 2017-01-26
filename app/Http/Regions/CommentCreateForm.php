@@ -13,7 +13,7 @@ class CommentCreateForm
                 ->push(component('Form')
                     ->with('route', route(
                         'comment.store',
-                        [$content->type, $content->id, 'v2']
+                        [$content->type, $content->id]
                     ))
                     ->with('fields', collect()
                         ->push(component('FormTextarea')

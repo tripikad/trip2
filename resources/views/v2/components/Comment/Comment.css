@@ -19,8 +19,7 @@
         margin-bottom: $margin-sm;
     }
 
-.Comment--unpublished {
-    opacity: $opacity-md;
+.Comment--pink {
     background: $pink;
 }
 

@@ -10,12 +10,12 @@ class ForumRow
         $commentCount = $forum->vars()->commentCount;
         $unreadCommentCount = $forum->vars()->unreadCommentCount;
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
-        $route = $route ? $route : route('v2.forum.show', [$forum->slug]);
+        $route = $route ? $route : route('forum.show', [$forum->slug]);
 
         return component('ForumRow')
             ->with('route', $route)
             ->with('user', component('UserImage')
-                ->with('route', route('v2.user.show', [$forum->user]))
+                ->with('route', route('user.show', [$forum->user]))
                 ->with('image', $forum->user->vars()->imagePreset('small_square'))
                 ->with('rank', $forum->user->vars()->rank)
                 ->with('size', 58)
@@ -38,7 +38,7 @@ class ForumRow
                                 ['count' => $unreadCommentCount]
                             ))
                             ->with('route', route(
-                                'v2.forum.show',
+                                'forum.show',
                                 [$forum->slug]).'#comment-'.$firstUnreadCommentId
                             )
                     )
@@ -55,12 +55,12 @@ class ForumRow
                         return component('Tag')
                             ->is('orange')
                             ->with('title', $destination->name)
-                            ->with('route', route('v2.destination.show', [$destination]));
+                            ->with('route', route('destination.show', [$destination]));
                     }))
                     ->merge($forum->topics->map(function ($topic) {
                         return component('MetaLink')
                             ->with('title', $topic->name)
-                            ->with('route', route('v2.forum.index', ['topic' => $topic]));
+                            ->with('route', route('forum.index', ['topic' => $topic]));
                     }))
                 )
             );

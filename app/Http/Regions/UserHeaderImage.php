@@ -8,7 +8,7 @@ class UserHeaderImage
     {
         return component('UserHeaderImage')
             ->with('user', component('UserImage')
-                ->with('route', route('v2.user.show', [$user]))
+                ->with('route', route('user.show', [$user]))
                 ->with('image', $user->imagePreset('small_square'))
                 ->with('rank', $user->vars()->rank)
                 ->with('size', 152)
@@ -29,7 +29,7 @@ class UserHeaderImage
                             ->is('cyan')
                             ->with('title', trans('user.show.message.create'))
                             ->with('route', route(
-                                'v2.message.index.with',
+                                'message.index.with',
                                 [$loggedUser, $user]
                             )
                         )

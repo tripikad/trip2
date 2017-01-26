@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Content;
 
 class V2BlogController extends Controller
@@ -18,7 +19,7 @@ class V2BlogController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.blog.index.title'))
-                    ->with('route', route('v2.blog.index'))
+                    ->with('route', route('blog.index'))
                 )
             ))
 
@@ -39,7 +40,7 @@ class V2BlogController extends Controller
                     $loggedUser && $loggedUser->hasRole('regular'),
                     component('Button')
                         ->with('title', trans('content.blog.create.title'))
-                        ->with('route', route('content.create', ['blog']))
+                        ->with('route', route('blog.create'))
                 )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
@@ -56,24 +57,30 @@ class V2BlogController extends Controller
 
     public function show($slug)
     {
-        $blog = Content::getItemBySlug($slug);
         $user = auth()->user();
+        $blog = Content::getItemBySlug($slug, $user);
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region('Header', collect()
                 ->push(component('Link')
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.blog.show.action.all'))
-                    ->with('route', route('v2.blog.index'))
+                    ->with('route', route('blog.index'))
                 )
                 ->push(component('Title')
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.blog.index.title'))
-                    ->with('route', route('v2.blog.index'))
+                    ->with('route', route('blog.index'))
                 )
+            ))
+
+            ->with('top', collect()->pushWhen(
+                !$blog->status,
+                component('HeaderUnpublished')
+                    ->with('title', trans('content.show.unpublished'))
             ))
 
             ->with('content', collect()
@@ -97,6 +104,32 @@ class V2BlogController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('blog');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('blog', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'blog');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'blog', $id);
     }
 }

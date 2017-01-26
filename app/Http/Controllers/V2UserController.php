@@ -68,7 +68,7 @@ class V2UserController extends Controller
                                 ->is('transparent')
                                 ->with('title', trans('content.photo.more'))
                                 ->with('route', route(
-                                    'v2.photo.user',
+                                    'photo.user',
                                     [$user]
                                 ))
                         )
@@ -77,7 +77,7 @@ class V2UserController extends Controller
                             component('Button')
                                 ->is($photos->count() ? 'transparent' : 'cyan')
                                 ->with('title', trans('content.photo.create.title'))
-                                ->with('route', route('content.create', ['photo']))
+                                ->with('route', route('photo.create'))
                         )
                 )
                 : ''
@@ -97,9 +97,9 @@ class V2UserController extends Controller
                             ->push(component('MetaLink')
                                 ->is('cyan')
                                 ->with('title', trans('user.activity.comments.row.2'))
-                                ->with('route', route('v2.forum.show', [
-                                   $comment->content->slug, '#comment-'.$comment->id,
-                               ]))
+                                ->with('route', route($comment->content->type.'.show', [
+                                   $comment->content->slug,
+                               ]).'#comment-'.$comment->id)
                             )
                             ->push(component('MetaLink')
                                 ->with('title', trans('user.activity.comments.row.3'))
@@ -107,7 +107,7 @@ class V2UserController extends Controller
                             ->push(component('MetaLink')
                                 ->is('cyan')
                                 ->with('title', $comment->content->vars()->title)
-                                 ->with('route', route('v2.forum.show', [
+                                 ->with('route', route('forum.show', [
                                     $comment->content->slug,
                                 ]))
                             )

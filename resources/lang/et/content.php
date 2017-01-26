@@ -68,6 +68,7 @@ return [
 
     'show.isnew' => 'Uus',
     'show.newcomments' => ':count uus kommentaar|:count uut kommentaari',
+    'show.unpublished' => 'See postitus on peidetud. Vajuta "Avalikusta", et post avalikuks teha',
 
     // Content types
 
