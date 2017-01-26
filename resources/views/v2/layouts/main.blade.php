@@ -25,7 +25,7 @@
         <div id="app">
             @yield('promobar')
             @yield('header')
-            {!! component('FormError') !!}
+            {!! component('HeaderError') !!}
             @yield('content')
             @yield('footer')
             {!! component('PhotoFullscreen') !!}

@@ -10,7 +10,7 @@ class Comment
 
         return component('Comment')
             ->when($comment->status || ($user && $user->hasRole('admin')))
-            ->is($comment->status ?: 'unpublished')
+            ->is($comment->status ?: 'pink')
             ->is($is)
             ->with('id', $comment->id)
             ->with('user', component('UserImage')
@@ -83,6 +83,7 @@ class Comment
                 )
             )
             ->with('body', component('Body')
+                ->is($comment->status ?: 'gray')
                 ->with('body', $comment->vars()->body)
             );
     }

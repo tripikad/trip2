@@ -1,11 +1,11 @@
 @import "variables";
 
-.FormError {
+.HeaderError {
     background: $red;
-    padding: $padding-md;
+    padding: calc($spacer * 1.5);
 }
 
-    .FormError__title {
+    .HeaderError__title {
         color: $white;
         font: $font-heading-sm;
     }

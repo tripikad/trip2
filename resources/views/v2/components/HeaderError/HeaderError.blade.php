@@ -1,10 +1,10 @@
 @if ($errors->count())
 
-<div class="FormError {{ $isclasses }}">
+<div class="HeaderError {{ $isclasses }}">
 
     @foreach ($errors->all() as $error)
 
-    <div class="FormError__title">
+    <div class="HeaderError__title">
 
         {{ $error }}
 
