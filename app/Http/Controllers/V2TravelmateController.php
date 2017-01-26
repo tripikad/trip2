@@ -110,7 +110,7 @@ class V2TravelmateController extends Controller
             ))
 
             ->with('top', collect()->pushWhen(
-                !$travelmate->status,
+                ! $travelmate->status,
                 component('HeaderUnpublished')
                     ->with('title', trans('content.show.unpublished'))
             ))
