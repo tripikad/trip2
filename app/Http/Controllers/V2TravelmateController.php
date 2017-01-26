@@ -109,6 +109,12 @@ class V2TravelmateController extends Controller
                 )
             ))
 
+            ->with('top', collect()->pushWhen(
+                !$travelmate->status,
+                component('HeaderUnpublished')
+                    ->with('title', trans('content.show.unpublished'))
+            ))
+
             ->with('content', collect()
                 ->push(component('Title')->with('title', $travelmate->vars()->title))
                 ->push(component('Meta')
@@ -128,6 +134,20 @@ class V2TravelmateController extends Controller
                         ->merge($travelmate->topics->map(function ($tag) {
                             return component('MetaLink')->with('title', $tag->name);
                         }))
+                        ->pushWhen($user && $user->hasRole('admin'), component('Form')
+                                ->with('route', route(
+                                    'content.status',
+                                    [$travelmate->type, $travelmate, (1 - $travelmate->status)]
+                                ))
+                                ->with('fields', collect()
+                                    ->push(component('FormLink')
+                                        ->with(
+                                            'title',
+                                            trans("content.action.status.$travelmate->status.title")
+                                        )
+                                    )
+                                )
+                        )
                     )
                 )
                 ->push(component('Body')->is('responsive')->with('body', $travelmate->vars()->body))

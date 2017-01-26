@@ -136,8 +136,9 @@ class V2ForumController extends Controller
     public function show($slug)
     {
         $user = auth()->user();
-
         $forum = Content::getItemBySlug($slug, $user);
+
+        // TODO: Why?
 
         if (! $forum->first()) {
             abort(404);
@@ -181,6 +182,12 @@ class V2ForumController extends Controller
                 ->push(component('BlockHorizontal')
                     ->with('content', region('ForumLinks'))
                 )
+            ))
+
+            ->with('top', collect()->pushWhen(
+                !$forum->status,
+                component('HeaderUnpublished')
+                    ->with('title', trans('content.show.unpublished'))
             ))
 
             ->with('content', collect()

@@ -14,7 +14,6 @@ class ForumPost
         ])->first() ? 0 : 1;
 
         return component('ForumPost')
-            ->is($post->status ?: 'unpublished')
             ->with('title', $post->vars()->title)
             ->with('user', component('UserImage')
                 ->with('size', 64)
