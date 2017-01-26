@@ -95,7 +95,7 @@ class V2NewsController extends Controller
             ->with('header', region('NewsHeader', $new))
 
             ->with('top', collect()->pushWhen(
-                !$new->status,
+                ! $new->status,
                 component('HeaderUnpublished')
                     ->with('title', trans('content.show.unpublished'))
             ))

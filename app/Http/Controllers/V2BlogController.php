@@ -78,7 +78,7 @@ class V2BlogController extends Controller
             ))
 
             ->with('top', collect()->pushWhen(
-                !$blog->status,
+                ! $blog->status,
                 component('HeaderUnpublished')
                     ->with('title', trans('content.show.unpublished'))
             ))
