@@ -156,11 +156,11 @@ class V2FlightController extends Controller
                 ), $flight->getHeadImage(), 'high'))
 
             ->with('top', collect()->pushWhen(
-                !$flight->status,
+                ! $flight->status,
                 component('HeaderUnpublished')
                     ->with('title', trans('content.show.unpublished'))
             ))
-            
+
             ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
                 ->push(component('AffBookingInspiration'))
