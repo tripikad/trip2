@@ -185,7 +185,7 @@ class V2ForumController extends Controller
             ))
 
             ->with('top', collect()->pushWhen(
-                !$forum->status,
+                ! $forum->status,
                 component('HeaderUnpublished')
                     ->with('title', trans('content.show.unpublished'))
             ))

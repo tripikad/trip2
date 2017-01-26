@@ -58,7 +58,7 @@ return [
     'show.isnew' => 'New',
     'show.newcomments' => ':count new comment|:count new comments',
     'show.unpublished' => 'This post is unpublished',
-    
+
     // Content types
 
     // News
