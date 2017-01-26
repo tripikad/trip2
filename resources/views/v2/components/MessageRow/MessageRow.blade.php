@@ -7,7 +7,7 @@ $route = $route ?? '';
 
 @endphp
 
-<div class="MessageRow {{ $isclasses }}">
+<h3 class="MessageRow {{ $isclasses }}">
 
     <a id="message-{{ $id }}"></a>
 
@@ -39,5 +39,5 @@ $route = $route ?? '';
 
     </div>
 
-</div>
+</h3>
 

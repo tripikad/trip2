@@ -6,7 +6,7 @@ $title = $title ?? '';
 
 @endphp
 
-<div class="FlightCard {{ $isclasses }}" 
+<h3 class="FlightCard {{ $isclasses }}"
     style="background-image: linear-gradient(
       rgba(0, 0, 0, 0.3),
       rgba(0, 0, 0, 0.3)
@@ -26,4 +26,4 @@ $title = $title ?? '';
 
     </a>
 
-</div>
+</h3>

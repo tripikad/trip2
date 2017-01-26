@@ -7,7 +7,7 @@ $meta = $meta ?? '';
 
 @endphp
 
-<div class="UserCard {{ $isclasses }}">
+<h3 class="UserCard {{ $isclasses }}">
 
     <div class="UserCard__image">
 
@@ -35,4 +35,4 @@ $meta = $meta ?? '';
 
 	</div>
 
-</div>
+</h3>

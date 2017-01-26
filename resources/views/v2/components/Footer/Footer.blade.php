@@ -8,7 +8,7 @@
 
 @endphp
 
-<div
+<footer
     class="Footer {{ $isclasses }}"
     @if (!empty($image))
     style="
@@ -73,4 +73,4 @@
 
     </div>
 
-</div>
+</footer>

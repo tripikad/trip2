@@ -5,7 +5,7 @@ $route = $route ?? '';
 
 @endphp
 
-<div class="Title {{ $isclasses }}">
+<h2 class="Title {{ $isclasses }}">
 
 
     @if ($route)
@@ -26,4 +26,4 @@ $route = $route ?? '';
     
     @endif
 
-</div>
+</h2>

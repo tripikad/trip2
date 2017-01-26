@@ -8,7 +8,7 @@ $meta_bottom = $meta_bottom ?? '';
 
 @endphp
 
-<div class="TravelmateCard {{ $isclasses }}">
+<h3 class="TravelmateCard {{ $isclasses }}">
 
 	<div class="TravelmateCard__user">
 
@@ -42,4 +42,4 @@ $meta_bottom = $meta_bottom ?? '';
 
     </div>
 
-</div>
+</h3>
