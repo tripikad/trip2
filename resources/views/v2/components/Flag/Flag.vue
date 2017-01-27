@@ -1,6 +1,10 @@
 <template>
 
-    <div class="Flag" :class="[isclasses, {'Flag--unflagged': ! currentFlagged}]">
+    <div
+        class="Flag"
+        :class="[isclasses, {'Flag--unflagged': ! currentFlagged}]"
+        @click="toggleFlag"
+    >
 
         <div class="Flag__icon">
 
@@ -8,7 +12,6 @@
                 is="Icon"
                 :icon="icon"
                 size="sm"
-                @click.native="toggleFlag"
             ></component>
 
         </div>
