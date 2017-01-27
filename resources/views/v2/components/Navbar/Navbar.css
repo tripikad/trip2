@@ -25,6 +25,10 @@
         display: none ?if $tablet;
     }
 
+    .Navbar__search svg {
+        fill: $gray-light;
+    }
+
     .Navbar__desktop {
         display: block;
         display: none ?if $tablet;

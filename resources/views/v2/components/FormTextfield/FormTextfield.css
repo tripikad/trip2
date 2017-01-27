@@ -1,7 +1,7 @@
 @import "variables";
 
     .FormTextfield__label {
-        color: $gray-darkest;
+        color: $gray-dark;
         display: block;
         font: $font-heading-sm;
         margin-bottom: $margin-xs;
@@ -16,5 +16,5 @@
     }
 
     .FormTextfield__input::placeholder {
-        color: $gray;
+        color: $gray-light;
     }

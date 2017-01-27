@@ -7,7 +7,7 @@
 }
 
     .Link__title {
-        color: $gray-darker;
+        color: $gray;
         font: $font-text-md;
     }
 
@@ -16,7 +16,7 @@
     }
 
     .Link__icon svg {
-        fill: $gray-darker;
+        fill: $gray;
     }
 
 .Link--large .Link__title {

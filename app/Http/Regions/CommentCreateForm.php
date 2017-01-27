@@ -15,6 +15,7 @@ class CommentCreateForm
                         'comment.store',
                         [$content->type, $content->id]
                     ))
+                    ->with('id', 'CommentCreateForm')
                     ->with('fields', collect()
                         ->push(component('FormTextarea')
                             ->is('borderless')
@@ -22,7 +23,13 @@ class CommentCreateForm
                             ->with('placeholder', trans('comment.create.field.body.title'))
                         )
                         ->push(component('FormButton')
+                            ->is('hidden')
                             ->with('title', trans('comment.create.submit.title'))
+                        )
+                        ->push(component('FormButtonProcess')
+                            ->with('title', trans('comment.create.submit.title'))
+                            ->with('processingtitle', trans('comment.create.submitting.title'))
+                            ->with('id', 'CommentCreateForm')
                         )
                     )
                 )

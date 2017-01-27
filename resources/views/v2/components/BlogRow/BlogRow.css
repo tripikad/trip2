@@ -15,6 +15,6 @@
     .BlogRow__title {
         font: $font-heading-lg;
         line-height: $line-height-md;
-        color: $gray-darkest;
+        color: $gray-dark;
         margin-bottom: $margin-sm ?if $mobile;
     }

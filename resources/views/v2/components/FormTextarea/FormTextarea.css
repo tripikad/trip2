@@ -1,7 +1,7 @@
 @import "variables";
 
     .FormTextarea__label {
-        color: $gray-darkest;
+        color: $gray-dark;
         display: block;
         font: $font-heading-sm;
         margin-bottom: $margin-xs;
@@ -14,11 +14,11 @@
         padding: $padding-sm;
         width: 100%;
         line-height: $line-height-md;
-        color: $gray-darkest;
+        color: $gray-dark;
     }
 
     .FormTextarea__textarea::placeholder {
-        color: $gray-dark;
+        color: $gray-light;
     }
 
 .FormTextarea--borderless .FormTextarea__textarea {

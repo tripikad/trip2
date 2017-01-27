@@ -1,6 +1,6 @@
 @import "variables";
 
-.FormButton {
+.FormButtonProcess {
     -webkit-appearance: none;
     -webkit-border-radius: 0;
     align-items: center;
@@ -16,6 +16,6 @@
     width: 100% ?if $mobile;
 }
 
-.FormButton--hidden {
-    display: none;
+.FormButtonProcess[disabled] {
+    background: $gray-light;
 }

@@ -2,7 +2,7 @@
 
 .Tag {
     align-items: center;
-    border: 1px solid $gray-darker;
+    border: 1px solid $gray;
     border-radius: $border-radius-lg;
     display: inline-flex;
     font: $font-text-xs;
@@ -11,7 +11,7 @@
 }
 
     .Tag__title {
-        color: $gray-darker;
+        color: $gray;
         white-space: nowrap;
     }
 

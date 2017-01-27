@@ -50,6 +50,7 @@ class V2ForumController extends Controller
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
+                    ->is('gray')
                     ->with('title', trans("content.$forumType.index.title"))
                 )
                 ->push(component('BlockHorizontal')
@@ -102,6 +103,7 @@ class V2ForumController extends Controller
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
+                    ->is('gray')
                     ->with('title', trans('follow.index.title'))
                 )
                 ->push(component('BlockHorizontal')
@@ -176,6 +178,7 @@ class V2ForumController extends Controller
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
+                    ->is('gray')
                     ->with('title', trans("content.$forum->type.index.title"))
                     ->with('route', route("$forum->type.index"))
                 )
@@ -193,7 +196,7 @@ class V2ForumController extends Controller
             ->with('content', collect()
                 ->push(region('ForumPost', $forum))
                 ->pushWhen(
-                    $forum->comments->count(),
+                    $forum->comments->count() > 1,
                     component('BlockHorizontal')
                         ->is('right')
                         ->with('content', collect()

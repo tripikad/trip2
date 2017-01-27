@@ -4,6 +4,8 @@
     padding-top: $padding-md;
     padding-bottom: $padding-md;
     padding-bottom: $padding-xs ?if $mobile;
+    position: relative;
+    overflow: hidden;
 }
 
     .HeaderLight__content {
@@ -21,7 +23,7 @@
     }
 
     .HeaderLight__title {
-        color: $gray-darkest;
+        color: $gray-dark;
         font: $font-heading-xxl;
         font: $font-heading-xl ?if $mobile;
     }

@@ -4,4 +4,4 @@ $title = $title ?? ''
 
 @endphp
 
-<input class="FormButton" type="submit" value="{{ $title }}">
+<input class="FormButton {{ $isclasses }}" type="submit" value="{{ $title }}">

@@ -19,6 +19,7 @@ return [
     'create.title' => 'Lisa kommentaar',
     'create.field.body.title' => 'Lisa kommentaar',
     'create.submit.title' => 'Lisa kommentaar',
+    'create.submitting.title' => 'Lisan...',
 
     'edit.title' => 'Muuda kommentaari',
     'edit.body.title' => 'Kommentaar',

@@ -11,7 +11,7 @@
 
     .NavbarDesktop__link {
         padding: $padding-sm;
-        color: $gray-darker;
+        color: $gray;
         font: $font-heading-sm;
         white-space: nowrap;
     }
