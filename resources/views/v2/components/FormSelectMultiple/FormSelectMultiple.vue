@@ -15,12 +15,13 @@
         </component>
 
         <input
-            v-model="currentIds"
-            v-show="true"
+            v-for="select in selected"
             type="text"
-            :name="name"
+            :name="name + '[]'"
+            :value="select.id"
+            v-show="false"
             size="100"
-        >
+        />
 
     </div>
 
@@ -46,15 +47,8 @@
 
         data() {
             return {
-                selected: null,
+                selected: [],
                 currentOptions: [],
-                currentMultiple: false
-            }
-        },
-
-        computed: {
-            currentIds() {
-                return '1,2'
             }
         },
 

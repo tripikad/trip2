@@ -54,6 +54,7 @@ class V2ExperimentsController extends Controller
             'title' => 'min:4|required',
             'body' => 'min:4|required',
         ]);
+        
         dd($request->all());
 
         return back()->with('title', 'Submitted a form');
