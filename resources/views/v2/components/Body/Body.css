@@ -7,7 +7,7 @@
 
 .Body,
 .Body * {
-    color: $gray-darkest;
+    color: $gray-dark;
 }
 
 .Body p {
@@ -29,7 +29,7 @@
 }
 
 .Body h4 {
-    color: $gray-darker;
+    color: $gray;
     font-size: responsive;
     font-weight: $font-weight-semibold;
     margin: $margin-topbottom-xs;
@@ -67,14 +67,14 @@
 
 .Body table {
     width: 100%;
-    border: 1px solid $gray;
+    border: 1px solid $gray-light;
     border-collapse: collapse;
     margin: $margin-md 0;
 }
 
 .Body th,
 .Body tr {
-    border-bottom: 1px solid $gray;
+    border-bottom: 1px solid $gray-light;
     text-align: left;
     vertical-align: top;
 }
@@ -91,7 +91,7 @@
 }
 
 .Body hr {
-    border-top: 1px solid $gray;
+    border-top: 1px solid $gray-light;
     border: 0;
     height: 0;
     margin: $margin-md 0;
@@ -117,5 +117,5 @@
 
 .Body--gray,
 .Body--gray * {
-    color: $gray-darker;
+    color: $gray;
 }

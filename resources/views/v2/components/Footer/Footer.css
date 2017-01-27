@@ -47,7 +47,7 @@
     }
 
     .Footer__licence {
-        color: $gray-dark;
+        color: $gray-light;
         font: $font-text-md;
         height: $height-md;
         margin-top: $margin-lg;
@@ -56,13 +56,13 @@
     }
 
 .Footer--light .Footer__link {
-    color: $gray-darker;
+    color: $gray;
 }
 
 .Footer--light .Footer__socialLink {
-    color: $gray-darker;
+    color: $gray;
 }
 
 .Footer--light .Footer__licence {
-    color: $gray-darker;
+    color: $gray;
 }

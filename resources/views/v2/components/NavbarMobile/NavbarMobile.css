@@ -10,7 +10,7 @@
     }
 
     .NavbarMobile__menuIcon svg {
-        fill: $gray-darker;
+        fill: $gray;
     }
 
     .NavbarMobile__userImage {

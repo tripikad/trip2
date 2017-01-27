@@ -17,5 +17,5 @@
 }
 
 .FormButtonProcess[disabled] {
-    background: $gray;
+    background: $gray-light;
 }

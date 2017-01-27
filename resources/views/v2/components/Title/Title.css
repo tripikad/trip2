@@ -4,7 +4,7 @@
     font: $font-heading-xl;
     font: $font-heading-lg ?if $mobile;
     line-height: $line-height-sm;
-    color: $gray-darkest;
+    color: $gray-dark;
 }
 
 .Title--small .Title__title {
@@ -25,6 +25,10 @@
 
 .Title--red .Title__title {
     color: $red;
+}
+
+.Title--gray .Title__title {
+    color: $gray;
 }
 
 .Title--shadow .Title__title {

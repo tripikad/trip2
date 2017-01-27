@@ -17,7 +17,7 @@
     }
 
     .UserCard__meta {
-    	color: $gray;
+    	color: $gray-light;
     	font: $font-heading-xs;
     	margin-top: $margin-sm;
     }

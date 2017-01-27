@@ -6,6 +6,6 @@
 }
 
     .HeaderUnpublished__title {
-        color: $gray-darker;
+        color: $gray;
         font: $font-heading-sm;
     }

@@ -27,12 +27,10 @@ $black: #000;
 
 /* Grays */
 
-$gray-lighter: #fbfcfd;
-$gray-light: #f7f9fa;
-$gray: #e1e7eb;
-$gray-dark: #d1dae0;
-$gray-darker: #a5abaf;
-$gray-darkest: #707477;
+$gray-lighter: hsl(204, 6%, 97%);
+$gray-light: hsl(204, 6%, 88%);
+$gray: hsl(204, 6%, 55%);
+$gray-dark: hsl(204, 6%, 34%);
 
 /* Fonts */
 $font-family: "Sailec";
@@ -166,8 +164,8 @@ $height-xxxl: $width-xxxl;
 $height-xxxxl: $width-xxxxl;
 
 /* Borders */
-$border-gray-sm: 1px solid $gray-dark;
-$border-gray-md: 2px solid $gray;
+$border-gray-sm: 1px solid $gray-light;
+$border-gray-md: 2px solid $gray-light;
 $border-green-md: 2px solid $green;
 $border-white-md: 2px solid $white;
 
