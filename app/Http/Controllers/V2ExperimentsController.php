@@ -56,15 +56,17 @@ class V2ExperimentsController extends Controller
 
     public function blogStore()
     {
-        $request = request();
-
-        $this->validate($request, [
+        $fields = collect([
             'title' => 'required',
             'body' => 'required',
-            'url' => 'url',
+            'url' => 'url'
         ]);
-        
-        dd($request->all());
+
+        $this->validate(request(), $fields->all());
+
+        Content::create(
+            request($fields->keys()->all())
+        );
 
         return back()->with('title', 'Submitted a form');
     }
