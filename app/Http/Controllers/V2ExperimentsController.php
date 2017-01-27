@@ -7,26 +7,73 @@ use App\Content;
 
 class V2ExperimentsController extends Controller
 {
+
+    public function blogCreate()
+    {
+        $topics = \App\Topic::select('id', 'name')->orderBy('name')->get();
+
+        return layout('1col')
+            ->with('header', region('StaticHeader', collect()
+                ->push(component('Title')
+                    ->is('large')
+                    ->with('title', 'Reisiblogid')
+                )
+            ))
+            ->with('content', collect()
+                ->push(component('Title')->with('title', 'Lisa blogipostitus'))
+                ->push(component('Form')
+                    ->with('route', route('experiments.blog.store'))
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->with('name', 'title')
+                            ->with('value', old('title'))
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('name', 'body')
+                            ->with('value', old('title'))
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'topics')
+                            ->with('options', $topics)
+                            ->with('placeholder', trans('content.index.filter.field.topic.title'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.blog.create.submit.title'))
+                        )
+                    )
+                )
+            )
+            ->render();
+    }
+
+    public function blogStore()
+    {
+        $request = request();
+
+        $this->validate($request, [
+            'title' => 'min:4|required',
+            'body' => 'min:4|required',
+        ]);
+        dd($request->all());
+
+        return back()->with('title', 'Submitted a form');
+    }
+
     public function index()
     {
         $user = auth()->user();
 
         return layout('1col')
 
-            ->with('content', collect()
-                /*
-                ->push(component('Form')
-                    ->with('route', route('experiments.form'))
-                    ->with('fields', collect()
-                        ->push(component('FormTextarea')
-                            ->with('name', 'body')
-                        )
-                        ->push(component('FormButton')
-                            ->with('title', trans('comment.create.submit.title'))
-                        )
-                    )
+            ->with('header', region('StaticHeader', collect()
+                ->push(component('Title')
+                    ->is('large')
+                    ->with('title', 'Reisiblogid')
                 )
-                */
+            ))
+
+            ->with('content', collect()
+
                 ->push(component('Title')
                     ->with('title', 'Vealehed')
                 )
@@ -60,10 +107,4 @@ class V2ExperimentsController extends Controller
             ->render();
     }
 
-    public function form()
-    {
-        dump(request()->all());
-
-        return back()->with('title', 'Submitted a form');
-    }
 }

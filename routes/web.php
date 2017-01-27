@@ -321,9 +321,14 @@ Route::get('experiments', [
     'as' => 'experiments.index',
 ]);
 
-Route::post('experiments/form', [
-    'uses' => 'V2ExperimentsController@form',
-    'as' => 'experiments.form',
+Route::get('experiments/blog/create', [
+    'uses' => 'V2ExperimentsController@blogCreate',
+    'as' => 'experiments.blog.create',
+]);
+
+Route::post('experiments/blog/store', [
+    'uses' => 'V2ExperimentsController@blogStore',
+    'as' => 'experiments.blog.store',
 ]);
 
 Route::get('experiments/error/{code}', [
