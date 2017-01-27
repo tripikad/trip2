@@ -25,20 +25,28 @@ class V2ExperimentsController extends Controller
                     ->with('route', route('experiments.blog.store'))
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
+                            ->with('label', 'Pealkiri')
                             ->with('name', 'title')
                             ->with('value', old('title'))
                         )
                         ->push(component('FormTextarea')
+                            ->with('label', 'Sisu')
                             ->with('name', 'body')
                             ->with('value', old('title'))
                         )
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'topics')
                             ->with('options', $topics)
+                            ->with('value', [484,521])
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
+                        ->push(component('FormTextfield')
+                            ->with('label', 'Link')
+                            ->with('name', 'url')
+                            ->with('value', old('title'))
+                        )
                         ->push(component('FormButton')
-                            ->with('title', trans('content.blog.create.submit.title'))
+                            ->with('title', 'Lisa')
                         )
                     )
                 )
@@ -51,8 +59,9 @@ class V2ExperimentsController extends Controller
         $request = request();
 
         $this->validate($request, [
-            'title' => 'min:4|required',
-            'body' => 'min:4|required',
+            'title' => 'required',
+            'body' => 'required',
+            'url' => 'url',
         ]);
         
         dd($request->all());

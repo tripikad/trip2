@@ -5,12 +5,13 @@
         <component
             is="Multiselect"
             :options="currentOptions"
-            track-by="name"
+            track-by="id"
             label="name"
             :placeholder="placeholder"
             :multiple="true"
             :taggable="true"
             @input="onInput"
+            :value="currentValue"
         >
         </component>
 
@@ -49,18 +50,24 @@
             return {
                 selected: [],
                 currentOptions: [],
+                currentValue: []
             }
         },
 
         methods: {
             onInput(selected) {
                 this.selected = selected
+                console.log(JSON.stringify(selected))
             }
         },
 
         mounted() {
             this.currentOptions = JSON.parse(decodeURIComponent(this.options))
-            this.selected = this.currentOptions.find((option) => option === this.value)
+            this.currentValue = JSON.parse(decodeURIComponent(this.value))
+             this.currentValue = this.currentValue.map(value => {
+                var option = this.currentOptions.find(option => option.id === value)
+                return {id: value, name: option.name}
+             })
         }
     }
 
