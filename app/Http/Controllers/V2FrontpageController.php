@@ -96,7 +96,7 @@ class V2FrontpageController extends Controller
                         ->with('route', route('internal.index'))
                 )
                 ->pushWhen($loggedUser && $loggedUser->hasRole('regular'), component('Button')
-                    ->with('title', trans("content.forum.create.title"))
+                    ->with('title', trans('content.forum.create.title'))
                     ->with('route', route('forum.create'))
                 )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
