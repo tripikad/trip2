@@ -7,7 +7,6 @@ use App\Content;
 
 class V2ExperimentsController extends Controller
 {
-
     public function blogCreate()
     {
         $topics = \App\Topic::select('id', 'name')->orderBy('name')->get();
@@ -37,7 +36,7 @@ class V2ExperimentsController extends Controller
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'topics')
                             ->with('options', $topics)
-                            ->with('value', [484,521])
+                            ->with('value', [484, 521])
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
                         ->push(component('FormTextfield')
@@ -59,7 +58,7 @@ class V2ExperimentsController extends Controller
         $fields = collect([
             'title' => 'required',
             'body' => 'required',
-            'url' => 'url'
+            'url' => 'url',
         ]);
 
         $this->validate(request(), $fields->all());
@@ -118,5 +117,4 @@ class V2ExperimentsController extends Controller
 
             ->render();
     }
-
 }
