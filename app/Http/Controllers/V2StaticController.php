@@ -19,10 +19,9 @@ class V2StaticController extends Controller
             'kasutustingimused' => 25151,
         ]);
     }
-    
+
     public function show($slug)
     {
-
         $post = Content::whereType('static')
             ->whereStatus(1)
             ->findOrFail($this->staticSlugs[$slug]);
@@ -54,13 +53,12 @@ class V2StaticController extends Controller
             ->render();
     }
 
-
     public function edit($id)
     {
         $static = Content::findOrFail($id);
 
         return layout('1col')
-            
+
             ->with('header', region('StaticHeader', collect()
                 ->push(component('Title')
                     ->with('title', $static->vars()->title)
@@ -97,12 +95,11 @@ class V2StaticController extends Controller
 
     public function update($id)
     {
-
         $static = Content::findOrFail($id);
 
         $fields = collect([
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
         ]);
 
         $this->validate(request(), $fields->toArray());
@@ -110,6 +107,5 @@ class V2StaticController extends Controller
         $static->fill(request($fields->keys()->toArray()))->save();
 
         return redirect()->route('static.show', $this->staticSlugs->flip()[$static->id]);
-
     }
 }
