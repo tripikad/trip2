@@ -9,7 +9,7 @@
 
     .FormTextarea__textarea {
         border-radius: $border-radius-md;
-        border: $border-gray-sm;
+        border: $border-gray-md;
         font: $font-text-md;
         padding: $padding-sm;
         width: 100%;

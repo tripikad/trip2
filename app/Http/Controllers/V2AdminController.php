@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App;
 use Cache;
 use App\Content;
+use App\Destination;
+use App\Topic;
 
 class V2AdminController extends Controller
 {
     public function index()
     {
-        $forums = Content::getLatestPagedItems('internal', false, false, false, 'updated_at');
 
+        $forums = Content::getLatestPagedItems('internal', false, false, false, 'updated_at');
         $loggedUser = request()->user();
 
         return layout('1col')
@@ -46,15 +48,15 @@ class V2AdminController extends Controller
 
     public function show($slug)
     {
-        $user = auth()->user();
+        $loggedUser = auth()->user();
         $forum = Content::findOrFail($slug);
 
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
         // Clear the unread cache
 
-        if ($user) {
-            $key = 'new_'.$forum->id.'_'.$user->id;
+        if ($loggedUser) {
+            $key = 'new_'.$forum->id.'_'.$loggedUser->id;
             Cache::store('permanent')->forget($key);
         }
 
@@ -63,16 +65,25 @@ class V2AdminController extends Controller
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->with('title', trans('content.internal.index.title'))
-                    ->with('route', route('internal.index'))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('AdminLinks'))
+                )
+                ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('admin'),
+                    component('Button')
+                        ->is('narrow')
+                        ->with('title', trans('content.internal.create.title'))
+                        ->with('route', route('internal.create'))
                 )
             ))
 
             ->with('content', collect()
-                ->push(region('ForumPost', $forum))
+                ->push(region('ForumPost', $forum, 'internal.edit'))
                 ->merge($forum->comments->map(function ($comment) use ($firstUnreadCommentId) {
                     return region('Comment', $comment, $firstUnreadCommentId, 'inset');
                 }))
-                ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum, 'inset'))
+                ->pushWhen($loggedUser && $loggedUser->hasRole('regular'), region('CommentCreateForm', $forum, 'inset'))
             )
 
             ->with('footer', region('FooterLight'))
@@ -82,26 +93,144 @@ class V2AdminController extends Controller
 
     public function create()
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->create('internal');
-    }
+        // return App::make('App\Http\Controllers\ContentController')
+        //    ->create('blog');
 
-    public function edit($id)
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->edit('internal', $id);
+        return layout('1col')
+
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.internal.index.title'))
+                    ->with('route', route('internal.index'))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('AdminLinks'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.internal.create.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('internal.store'))
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.internal.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title'))
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('title', trans('content.internal.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', old('title'))
+                            ->with('rows', 10)
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.create.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
     public function store()
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'internal');
+        // return App::make('App\Http\Controllers\ContentController')
+        //    ->store(request(), 'internal');
+
+        $loggedUser = request()->user();
+
+        $fields = collect([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $this->validate(request(), $fields->toArray());
+
+        $blog = $loggedUser->contents()->create(
+            collect(request($fields->keys()->toArray()))
+                ->put('type', 'internal')
+                ->put('status', 1)
+                ->toArray()
+        );
+
+        return redirect()->route('internal.index');
+    }
+
+    public function edit($id)
+    {
+        // return App::make('App\Http\Controllers\ContentController')
+        //    ->edit('internal', $id);
+
+        $internal = Content::findOrFail($id);
+
+        return layout('1col')
+            
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.internal.index.title'))
+                    ->with('route', route('internal.index'))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('AdminLinks'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.internal.edit.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('internal.update', [$internal]))
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.blog.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title', $internal->title))
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('title', trans('content.internal.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', old('body', $internal->body))
+                            ->with('rows', 10)
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.edit.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
     public function update($id)
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'internal', $id);
+        // return App::make('App\Http\Controllers\ContentController')
+        //    ->store(request(), 'internal', $id);
+
+        $internal = Content::findOrFail($id);
+
+        $fields = collect([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $this->validate(request(), $fields->toArray());
+
+        $internal->fill(request($fields->keys()->toArray()))->save();
+
+        return redirect()->route('internal.show', [$internal]);
+
     }
 
     public function unpublishedIndex()

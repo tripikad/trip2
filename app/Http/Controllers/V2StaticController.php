@@ -72,6 +72,7 @@ class V2StaticController extends Controller
                     ->with('route', route('static.update', [$static]))
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
+                            ->is('large')
                             ->with('title', trans('content.static.edit.field.title.title'))
                             ->with('name', 'title')
                             ->with('value', old('title', $static->title))

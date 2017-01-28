@@ -9,7 +9,8 @@
 
     .FormTextfield__input {
         border-radius: $border-radius-md;
-        border: $border-gray-sm;
+        border: $border-gray-md;
+        color: $gray-dark;
         font: $font-text-md;
         padding: $padding-sm;
         width: 100%;
@@ -18,3 +19,8 @@
     .FormTextfield__input::placeholder {
         color: $gray-light;
     }
+
+.FormTextfield--large .FormTextfield__input {
+    font: $font-heading-md;
+    padding: $padding-xs $padding-sm;
+}

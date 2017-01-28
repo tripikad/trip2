@@ -325,6 +325,7 @@ return [
     'internal.index.title' => 'Toimetuse foorum',
 
     'internal.create.title' => 'Lisa uus postitus',
+    'internal.edit.title' => 'Muuda postitust',
 
     'internal.edit.field.title.title' => 'Pealkiri',
     'internal.edit.field.title.help' => '',

@@ -17,7 +17,8 @@
 }
 
 .multiselect__tags {
-    font: $font-text-sm;
+    font: $font-text-sm !important;
+    border: $border-gray-md !important;
 }
 
 .multiselect__tag {
