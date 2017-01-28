@@ -7,6 +7,7 @@ import Arc from './components/Arc/Arc.vue'
 import Flag from './components/Flag/Flag.vue'
 import FormButtonProcess from './components/FormButtonProcess/FormButtonProcess.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
+import FormSelectMultiple from './components/FormSelectMultiple/FormSelectMultiple.vue'
 import FrontpageDestinationSearch from './components/FrontpageDestinationSearch/FrontpageDestinationSearch.vue'
 import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
 import Icon from './components/Icon/Icon.vue'
@@ -40,6 +41,7 @@ new Vue({
         Flag,
         FormButtonProcess,
         FormSelect,
+        FormSelectMultiple,
         FrontpageDestinationSearch,
         FrontpageSearch,
         Icon,

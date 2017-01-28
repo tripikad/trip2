@@ -4,7 +4,7 @@ namespace App\Http\Regions;
 
 class ForumPost
 {
-    public function render($post)
+    public function render($post, $editRoute = 'forum.edit')
     {
         $user = auth()->user();
 
@@ -44,7 +44,7 @@ class ForumPost
                     ->pushWhen($user && $user->hasRoleOrOwner('admin', $post->user->id),
                         component('MetaLink')
                             ->with('title', trans('content.action.edit.title'))
-                            ->with('route', route('forum.edit', [$post]))
+                            ->with('route', route($editRoute, [$post]))
                     )
                     ->pushWhen($user && $user->hasRole('admin'), component('Form')
                             ->with('route', route(

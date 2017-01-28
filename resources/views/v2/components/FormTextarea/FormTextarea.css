@@ -1,15 +1,15 @@
 @import "variables";
 
     .FormTextarea__label {
-        color: $gray-dark;
+        color: $gray;
         display: block;
         font: $font-heading-sm;
-        margin-bottom: $margin-xs;
+        margin-bottom: $margin-sm;
     }
 
     .FormTextarea__textarea {
         border-radius: $border-radius-md;
-        border: $border-gray-sm;
+        border: $border-gray-md;
         font: $font-text-md;
         padding: $padding-sm;
         width: 100%;
