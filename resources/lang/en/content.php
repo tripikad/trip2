@@ -287,6 +287,8 @@ return [
 
     // Static
 
+    'static.edit.title' => 'Edit page',
+
     'static.edit.field.title.title' => 'Title',
     'static.edit.field.title.help' => '',
 

@@ -138,11 +138,17 @@ Route::get('{slug}', 'V2StaticController@show')
     ->name('static.show')
     ->where('slug', '('.collect($static)->keys()->implode('|').')');
 
+Route::get('static/{id}', function ($id) use ($static) {
+    $slug = $static->flip()->get($id);
+    return redirect()->route('static.show', [$slug]);
+})
+    ->name('static.show.id');
+
 Route::get('static/{id}/edit', 'V2StaticController@edit')
     ->name('static.edit')
     ->middleware('role:superuser');
 
-Route::put('static/{id}/update', 'V2StaticController@update')
+Route::post('static/{id}/update', 'V2StaticController@update')
     ->name('static.update')
     ->middleware('role:superuser');
 

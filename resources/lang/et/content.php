@@ -338,6 +338,8 @@ return [
 
     'static.index.title' => 'Infoks',
 
+    'static.edit.title' => 'Muuda lehekülge',
+
     'static.edit.field.title.title' => 'Pealkiri',
     'static.edit.field.title.help' => '',
 
