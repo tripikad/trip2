@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Request;
 use App\Content;
 
 class V2ExperimentsController extends Controller
@@ -13,20 +12,15 @@ class V2ExperimentsController extends Controller
 
         return layout('1col')
 
-            ->with('content', collect()
-                /*
-                ->push(component('Form')
-                    ->with('route', route('experiments.form'))
-                    ->with('fields', collect()
-                        ->push(component('FormTextarea')
-                            ->with('name', 'body')
-                        )
-                        ->push(component('FormButton')
-                            ->with('title', trans('comment.create.submit.title'))
-                        )
-                    )
+            ->with('header', region('StaticHeader', collect()
+                ->push(component('Title')
+                    ->is('large')
+                    ->with('title', 'Reisiblogid')
                 )
-                */
+            ))
+
+            ->with('content', collect()
+
                 ->push(component('Title')
                     ->with('title', 'Vealehed')
                 )
@@ -58,12 +52,5 @@ class V2ExperimentsController extends Controller
             )
 
             ->render();
-    }
-
-    public function form()
-    {
-        dump(request()->all());
-
-        return back()->with('title', 'Submitted a form');
     }
 }

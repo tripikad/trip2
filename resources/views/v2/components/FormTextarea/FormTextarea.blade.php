@@ -1,6 +1,6 @@
 @php
 
-$label = $label ?? '';
+$title = $title ?? '';
 $name = $name ?? '';
 $value = $value ?? '';
 $rows = $rows ?? 8;
@@ -11,9 +11,9 @@ $placeholder = $placeholder ?? '';
 
 <div class="FormTextarea {{ $isclasses }}">
 
-    @if ($label)
+    @if ($title)
 
-        <label for="{{ $name }}" class="FormTextarea__label">{{ $label }}</label>
+        <label for="{{ $name }}" class="FormTextarea__label">{{ $title }}</label>
     
     @endif
 
@@ -21,8 +21,8 @@ $placeholder = $placeholder ?? '';
         class="FormTextarea__textarea"
         id={{ $name }}
         name="{{ $name }}"
-        rows="8"
-        cols="50"
+        rows="{{ $rows }}"
+        cols="{{ $cols }} "
         placeholder="{{ $placeholder }}"
     >{{ $value }}</textarea>
 

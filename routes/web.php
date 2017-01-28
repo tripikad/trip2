@@ -138,11 +138,17 @@ Route::get('{slug}', 'V2StaticController@show')
     ->name('static.show')
     ->where('slug', '('.collect($static)->keys()->implode('|').')');
 
+Route::get('static/{id}', function ($id) use ($static) {
+    $slug = $static->flip()->get($id);
+    return redirect()->route('static.show', [$slug]);
+})
+    ->name('static.show.id');
+
 Route::get('static/{id}/edit', 'V2StaticController@edit')
     ->name('static.edit')
     ->middleware('role:superuser');
 
-Route::put('static/{id}/update', 'V2StaticController@update')
+Route::post('static/{id}/update', 'V2StaticController@update')
     ->name('static.update')
     ->middleware('role:superuser');
 
@@ -166,37 +172,39 @@ Route::get('blog/{id}/edit', 'V2BlogController@edit')
     ->name('blog.edit')
     ->middleware('role:admin,contentowner');
 
-Route::put('blog/{id}/update', 'V2BlogController@update')
+Route::post('blog/{id}/update', 'V2BlogController@update')
     ->name('blog.update')
     ->middleware('role:admin,contentowner');
 
 // Internal
 
 Route::get('internal', 'V2AdminController@index')
-    ->middleware('role:admin')
-    ->name('internal.index');
+    ->name('internal.index')
+    ->middleware('role:admin');
 
 Route::get('internal/{id}', 'V2AdminController@show')
-    ->middleware('role:admin')
-    ->name('internal.show');
+    ->name('internal.show')
+    ->middleware('role:admin');
 
-Route::get('internal/create', 'V2BlogController@create')
+Route::get('internal/create', 'V2AdminController@create')
     ->name('internal.create')
-    ->middleware('role:regular');
+    ->middleware('role:admin');
 
-Route::post('internal/store', 'V2BlogController@store')
+Route::post('internal/store', 'V2AdminController@store')
     ->name('internal.store')
     ->middleware('role:admin');
 
-Route::get('internal/{id}/edit', 'V2BlogController@edit')
+Route::get('internal/{id}/edit', 'V2AdminController@edit')
     ->name('internal.edit')
     ->middleware('role:admin');
 
-Route::put('internal/{id}/update', 'V2BlogController@update')
+Route::post('internal/{id}/update', 'V2AdminController@update')
     ->name('internal.update')
     ->middleware('role:admin');
 
-Route::get('admin/content', ['middleware' => 'role:admin', 'uses' => 'V2AdminController@unpublishedIndex', 'as' => 'admin.content.index']);
+Route::get('admin/content', 'V2AdminController@unpublishedIndex')
+    ->name('admin.content.index')
+    ->middleware('role:admin');
 
 // Photo
 
@@ -319,11 +327,6 @@ Route::post('utils/filter', 'V2UtilsController@filter')
 Route::get('experiments', [
     'uses' => 'V2ExperimentsController@index',
     'as' => 'experiments.index',
-]);
-
-Route::post('experiments/form', [
-    'uses' => 'V2ExperimentsController@form',
-    'as' => 'experiments.form',
 ]);
 
 Route::get('experiments/error/{code}', [
