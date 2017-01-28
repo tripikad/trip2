@@ -55,5 +55,4 @@ class V2ExperimentsController extends Controller
 
             ->render();
     }
-
 }
