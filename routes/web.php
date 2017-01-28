@@ -202,7 +202,7 @@ Route::post('internal/{id}/update', 'V2AdminController@update')
     ->name('internal.update')
     ->middleware('role:admin');
 
-Route::put('admin/content', 'V2AdminController@unpublishedIndex')
+Route::get('admin/content', 'V2AdminController@unpublishedIndex')
     ->name('admin.content.index')
     ->middleware('role:admin');
 
