@@ -198,7 +198,7 @@ class V2BlogController extends Controller
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
 
         return layout('1col')
-            
+
             ->with('header', region('Header', collect()
                 ->push(component('Title')
                     ->is('white')
@@ -259,7 +259,7 @@ class V2BlogController extends Controller
         $fields = collect([
             'title' => 'required',
             'body' => 'required',
-            'url' => 'url'
+            'url' => 'url',
         ]);
 
         $this->validate(request(), $fields->toArray());
@@ -273,6 +273,5 @@ class V2BlogController extends Controller
         }
 
         return redirect()->route('blog.show', [$blog->slug]);
-
     }
 }

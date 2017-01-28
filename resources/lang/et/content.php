@@ -63,7 +63,7 @@ return [
 
     'edit.field.destinations.placeholder' => 'Vali sihtkohad',
     'edit.field.topics.placeholder' => 'Vali teemad',
-    
+
     'store.status.1.info' => ':title on edukalt lisatud.',
     'store.status.0.info' => ':title on lisatud, kuid teistele peidetud. Vajuta lingile "Avalikusta", et näidata seda teistele.',
 
