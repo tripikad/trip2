@@ -1,6 +1,6 @@
 @php
 
-$label = $label ?? '';
+$title = $title ?? '';
 $name = $name ?? '';
 $value = $value ?? '';
 $placeholder = $placeholder ?? '';
@@ -9,9 +9,9 @@ $placeholder = $placeholder ?? '';
 
 <div class="FormTextfield {{ $isclasses }}">
 
-    @if ($label)
+    @if ($title)
 
-        <label for="{{ $name }}" class="FormTextfield__label">{{ $label }}</label>
+        <label for="{{ $name }}" class="FormTextfield__label">{{ $title }}</label>
     
     @endif
 

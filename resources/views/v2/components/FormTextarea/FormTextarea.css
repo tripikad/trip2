@@ -1,10 +1,10 @@
 @import "variables";
 
     .FormTextarea__label {
-        color: $gray-dark;
+        color: $gray;
         display: block;
         font: $font-heading-sm;
-        margin-bottom: $margin-xs;
+        margin-bottom: $margin-sm;
     }
 
     .FormTextarea__textarea {

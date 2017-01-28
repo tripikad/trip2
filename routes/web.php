@@ -166,7 +166,7 @@ Route::get('blog/{id}/edit', 'V2BlogController@edit')
     ->name('blog.edit')
     ->middleware('role:admin,contentowner');
 
-Route::put('blog/{id}/update', 'V2BlogController@update')
+Route::post('blog/{id}/update', 'V2BlogController@update')
     ->name('blog.update')
     ->middleware('role:admin,contentowner');
 
@@ -319,16 +319,6 @@ Route::post('utils/filter', 'V2UtilsController@filter')
 Route::get('experiments', [
     'uses' => 'V2ExperimentsController@index',
     'as' => 'experiments.index',
-]);
-
-Route::get('experiments/blog/create', [
-    'uses' => 'V2ExperimentsController@blogCreate',
-    'as' => 'experiments.blog.create',
-]);
-
-Route::post('experiments/blog/store', [
-    'uses' => 'V2ExperimentsController@blogStore',
-    'as' => 'experiments.blog.store',
 ]);
 
 Route::get('experiments/error/{code}', [

@@ -66,6 +66,7 @@
                 var option = this.currentOptions.find(option => option.id === value)
                 return {id: value, name: option.name}
             })
+            this.selected = this.currentValue
         }
     }
 
