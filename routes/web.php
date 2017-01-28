@@ -140,6 +140,7 @@ Route::get('{slug}', 'V2StaticController@show')
 
 Route::get('static/{id}', function ($id) use ($static) {
     $slug = $static->flip()->get($id);
+
     return redirect()->route('static.show', [$slug]);
 })
     ->name('static.show.id');

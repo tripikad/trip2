@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App;
 use Cache;
 use App\Content;
-use App\Destination;
-use App\Topic;
 
 class V2AdminController extends Controller
 {
     public function index()
     {
-
         $forums = Content::getLatestPagedItems('internal', false, false, false, 'updated_at');
         $loggedUser = request()->user();
 
@@ -171,7 +168,7 @@ class V2AdminController extends Controller
         $internal = Content::findOrFail($id);
 
         return layout('1col')
-            
+
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->with('title', trans('content.internal.index.title'))
@@ -230,7 +227,6 @@ class V2AdminController extends Controller
         $internal->fill(request($fields->keys()->toArray()))->save();
 
         return redirect()->route('internal.show', [$internal]);
-
     }
 
     public function unpublishedIndex()
