@@ -46,13 +46,13 @@ return [
 
     'create.title' => 'Add',
     'create.submit.title' => 'Add',
-    
+
     'edit.title' => 'Edit',
     'edit.submit.title' => 'Update',
 
     'edit.field.destinations.placeholder' => 'Select destinations',
     'edit.field.topics.placeholder' => 'Select topics',
-    
+
     'store.status.1.info' => ':title has been added',
     'store.status.0.info' => ':title has been added but its unpublished for now. Publish it to make it visible to everybody.',
 
