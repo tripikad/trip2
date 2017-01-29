@@ -20,7 +20,7 @@
     }
 
 .Comment--pink {
-    background: $pink;
+    background: $pink-light;
 }
 
 .Comment--inset {

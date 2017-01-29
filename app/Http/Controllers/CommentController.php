@@ -108,7 +108,7 @@ class CommentController extends Controller
                 ['title' => $comment->vars()->title()]
             ));
     }
-
+    /*
     public function edit($id)
     {
         $comment = \App\Comment::findorFail($id);
@@ -117,7 +117,7 @@ class CommentController extends Controller
             ->with('comment', $comment)
             ->render();
     }
-
+    */
     public function update(Request $request, $id)
     {
         $this->validate($request, $this->rules);
