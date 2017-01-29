@@ -18,7 +18,9 @@ $yellow: #f7ba00;
 
 /* Special colors */
 
-$pink: #ffd8d8;
+$pink-light: #ffefed;
+$pink: #f7d2cd;
+$pink-dark: #a38682;
 
 /* Neutral colors */
 
