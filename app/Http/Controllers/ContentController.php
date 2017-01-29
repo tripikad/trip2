@@ -23,7 +23,7 @@ use App\Http\Controllers\ContentTraits\Travelmate;
 class ContentController extends Controller
 {
     use Blog, Flight, Forum, Travelmate;
-
+    /*
     public function index(Request $request, $type)
     {
         if ($type == 'internal'
@@ -149,7 +149,7 @@ class ContentController extends Controller
             ->view($view, $viewVariables)
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
-
+    */
     public function findBySlugAndType($type, $slug)
     {
         $content = Content::where('slug', $slug)->where('type', $type)->firstOrFail();
@@ -159,7 +159,7 @@ class ContentController extends Controller
 
         return $this->show($type, $content->id);
     }
-
+    /*
     public function show($type, $id)
     {
         if ($type == 'internal'
@@ -210,7 +210,8 @@ class ContentController extends Controller
             ->view($view, $viewVariables)
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
     }
-
+    */
+    
     public function showWithRedirect($type, $id)
     {
         $content = Content::findorFail($id);
