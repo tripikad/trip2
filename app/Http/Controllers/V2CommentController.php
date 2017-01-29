@@ -38,5 +38,4 @@ class V2CommentController extends Controller
 
             ->render();
     }
-
 }

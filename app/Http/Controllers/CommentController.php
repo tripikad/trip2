@@ -108,6 +108,7 @@ class CommentController extends Controller
                 ['title' => $comment->vars()->title()]
             ));
     }
+
     /*
     public function edit($id)
     {

@@ -23,6 +23,7 @@ use App\Http\Controllers\ContentTraits\Travelmate;
 class ContentController extends Controller
 {
     use Blog, Flight, Forum, Travelmate;
+
     /*
     public function index(Request $request, $type)
     {
@@ -159,6 +160,7 @@ class ContentController extends Controller
 
         return $this->show($type, $content->id);
     }
+
     /*
     public function show($type, $id)
     {
@@ -211,7 +213,7 @@ class ContentController extends Controller
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
     }
     */
-    
+
     public function showWithRedirect($type, $id)
     {
         $content = Content::findorFail($id);
