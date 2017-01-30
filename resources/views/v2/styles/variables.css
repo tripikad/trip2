@@ -197,7 +197,7 @@ $largedesktop-width: 74em;
  $largedesktop: media (max-width: $largedesktop-width);
 
 /* Opacities */
-$opacity-xxs: 0.04;
+$opacity-xxs: 0.03;
 $opacity-xs: 0.1;
 $opacity-sm: 0.25;
 $opacity-md: 0.5;

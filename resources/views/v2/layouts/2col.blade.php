@@ -4,6 +4,8 @@ $title = $title ?? '';
 $head_title = $head_title ?? '';
 $head_description = $head_description ?? '';
 $head_image = $head_image ?? '';
+$color = $color ?? '';
+$background = $background ?? '';
 $header = $header ?? '';
 $top = isset($top) ? collect($top) : collect();
 $content = isset($content) ? collect($content) : collect();
@@ -19,6 +21,9 @@ $footer = $footer ?? '';
 @section('head_title', $head_title)
 @section('head_description', $head_description)
 @section('head_image', $head_image)
+
+@section('color', $color)
+@section('background', $background)
 
 @section('header', $header)
 
@@ -40,7 +45,7 @@ $footer = $footer ?? '';
 
 @if ($content->count())
 
-<div class="background-white">
+<div class="background-white position-relative">
 
     <div class="container">
 

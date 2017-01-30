@@ -53,7 +53,10 @@ class V2UserController extends Controller
                 ])
             )
             ->with('head_image', Image::getSocial())
+            ->with('background', component('BackgroundMap'))
 
+            ->with('color', 'cyan')
+            
             ->with('header', region('UserHeader', $user))
 
             ->with('top',

@@ -7,3 +7,11 @@
 .background-white {
     background-color: $white;
 }
+
+.background-cyan {
+    background-color: $cyan;
+}
+
+.background-yellow {
+    background-color: $yellow;
+}

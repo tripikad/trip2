@@ -6,6 +6,26 @@ use App\Content;
 
 class V2ExperimentsController extends Controller
 {
+    public function test()
+    {
+        return layout('1colnarrow')
+
+            ->with('color', 'orange')
+
+            ->with('background', component('BackgroundMap'))
+
+            ->with('header', collect(range(0, 10))->map(function($i) {
+                return $i;
+            })->implode('<br>'))
+
+
+            ->with('content', collect(range(0, 100))->map(function($i) {
+                return $i;
+            }))
+
+            ->render();
+    }
+
     public function index()
     {
         $user = auth()->user();
