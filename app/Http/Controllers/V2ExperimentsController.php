@@ -9,19 +9,26 @@ class V2ExperimentsController extends Controller
     public function test()
     {
         return layout('1colnarrow')
-
-            ->with('color', 'orange')
-
+            ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
+            ->with('header', region('StaticHeader'))
 
-            ->with('header', collect(range(0, 10))->map(function($i) {
-                return $i;
-            })->implode('<br>'))
+            ->with('top', collect()
+                ->push(component('Title')
+                    ->is('center')
+                    ->is('large')
+                    ->with('title', trans('Logi sisse'))
+            ))
 
-
-            ->with('content', collect(range(0, 100))->map(function($i) {
-                return $i;
+            ->with('content', collect(range(0, 20))->map(function($i) {
+                return '<br>';
             }))
+
+            ->with('bottom', collect(range(0, 3))->map(function($i) {
+                return '<br>';
+            }))
+
+            ->with('footer', region('FooterLight'))
 
             ->render();
     }

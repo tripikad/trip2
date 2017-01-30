@@ -43,3 +43,7 @@
 .Title--shadow .Title__title {
     text-shadow: $text-shadow-md;
 }
+
+.Title--center .Title__title {
+    text-align: center;
+}

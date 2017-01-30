@@ -24,7 +24,15 @@ $footer = $footer ?? '';
 @section('color', $color)
 @section('background', $background)
 
-@section('header', $header)
+@section('header')
+
+<div class="position-relative">
+
+{!! $header !!}
+
+</div>
+
+@endsection
 
 @section('content')
 
