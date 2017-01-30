@@ -1,3 +1,4 @@
 User-Agent: *
 Disallow: 
 Disallow: /v2
+Disallow: /experiments

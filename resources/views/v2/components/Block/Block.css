@@ -5,7 +5,7 @@
 }
 
 .Block--gray {
-    background: $gray-light;
+    background: $gray-lighter;
     padding: $padding-md;
     padding: $padding-sm ?if $mobile;
 }

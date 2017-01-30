@@ -8,7 +8,7 @@
             'items' => [
                 [
                     'title' => trans("content.blog.create.title"),
-                    'route' => route('content.create', ['type' => 'blog']),
+                    'route' => route('blog.create'),
                     'modifiers' => ' m-border'
                 ]
             ]
