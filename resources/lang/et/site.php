@@ -20,7 +20,7 @@
             'flight' => 'Kõik odavad lennupiletid mugavalt ühelt lehel. Vaata soodsaid lennupakkumisi ning alusta oma reisi planeerimist siit',
             'news' => 'Uudised reisimisest, reisi- ja lennufirmadest, viisadest ja muust parasjagu aktuaalsest',
             'travelmate' => 'Leia endale reisikaaslane juba planeeritud reisiks või uute plaanide koostamiseks',
-            'forum' => 'Eesti suurim reisifoorum. Küsi siin oma reisiküsimus või jaga häid soovitusi',
+            'forum' => 'Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi',
             'expat' => 'Soovitused välismaal elavatelt eestlastelt',
             'buysell' => 'Lennupiletite, reisivarustuse ja muu reisimiseks vajaliku ost ja müük',
             'blog' => 'Reisipäevikud, reisijutud ning pikemad reisilood',
