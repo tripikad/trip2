@@ -12,7 +12,6 @@ class V2ExperimentsController extends Controller
 
         return layout('1col')
 
-
             ->with('content', collect()
 
                 ->push(component('Form')->with('fields', collect()

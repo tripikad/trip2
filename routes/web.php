@@ -307,9 +307,6 @@ Route::post('utils/filter', 'V2UtilsController@filter')
 Route::get('experiments', 'V2ExperimentsController@index')
     ->name('experiments.index');
 
-Route::get('experiments/error/{code}',  'V2ExperimentsErrorController@show')
-    ->name('error.show');
-
 // Experiments: Blog
 
 Route::get('/experiments/blog', 'V2ExperimentsBlogController@index')
