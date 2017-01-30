@@ -66,3 +66,7 @@
 .Footer--light .Footer__licence {
     color: $gray;
 }
+
+.Footer--light .Footer__socialIcon svg {
+    fill: $gray;
+}

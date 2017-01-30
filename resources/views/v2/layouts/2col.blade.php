@@ -118,4 +118,12 @@ $footer = $footer ?? '';
 
 @endsection
 
-@section('footer', $footer)
+@section('footer')
+
+<div class="background-white">
+
+{!! $footer !!}
+
+</div>
+
+@endsection

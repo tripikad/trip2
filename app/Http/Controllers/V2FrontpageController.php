@@ -72,7 +72,7 @@ class V2FrontpageController extends Controller
                         ->flatMap(function ($type) use ($loggedUser) {
                             return collect()
                                 ->push(component('Link')
-                                    ->is('blue')
+                                    ->is('large')
                                     ->with('title', trans("content.$type.index.title"))
                                     ->with('route', route("$type.index"))
                                 )
@@ -85,14 +85,14 @@ class V2FrontpageController extends Controller
                         })
                     )
                     ->pushWhen($loggedUser, component('Link')
-                        ->is('blue')
+                        ->is('large')
                         ->with('title', trans('menu.user.follow'))
                         ->with('route', route('follow.index', [$loggedUser]))
                     )
                     ->pushWhen(
                         $loggedUser && $loggedUser->hasRole('admin'),
                         component('Link')
-                            ->is('blue')
+                            ->is('large')
                             ->with('title', trans('menu.auth.admin'))
                             ->with('route', route('internal.index'))
                     )

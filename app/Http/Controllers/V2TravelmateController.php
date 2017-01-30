@@ -21,7 +21,7 @@ class V2TravelmateController extends Controller
         $topics = Topic::select('id', 'name')->orderBy('name')->get();
 
         $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $news = Content::getLatestItems('news', 1);
 
         return layout('2col')
@@ -84,7 +84,7 @@ class V2TravelmateController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
 
         $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $news = Content::getLatestItems('news', 1);
 
         return layout('2col')

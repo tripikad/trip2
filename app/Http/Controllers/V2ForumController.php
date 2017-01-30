@@ -41,7 +41,7 @@ class V2ForumController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        return layout('1col')
+        return layout('2col')
 
             ->with('title', trans("content.$forumType.index.title"))
             ->with('head_title', trans("content.$forumType.index.title"))
@@ -183,7 +183,7 @@ class V2ForumController extends Controller
             ->with('head_image', Image::getSocial())
 
             ->with('background', component('BackgroundMap'))
-            ->with('color', 'cyan')
+            ->with('color', 'gray')
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
