@@ -8,16 +8,21 @@ class V2AdminController extends Controller
 {
     public function unpublishedIndex()
     {
+        $user = auth()->user();
         $contents = Content::whereStatus(0)->latest()->simplePaginate(50);
 
         return layout('1col')
 
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
             ->with('header', region('ForumHeader', collect()
+                ->pushWhen($user && $user->hasRole('admin'), component('Link')
+                    ->with('title', trans('menu.auth.admin'))
+                    ->with('route', route('internal.index'))
+                )
                 ->push(component('Title')
                     ->with('title', trans('admin.content.index.title'))
-                )
-                ->push(component('BlockHorizontal')
-                    ->with('content', region('AdminLinks'))
                 )
             ))
 

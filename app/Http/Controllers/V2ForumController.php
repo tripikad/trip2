@@ -105,8 +105,7 @@ class V2ForumController extends Controller
         return layout('2col')
 
             ->with('background', component('BackgroundMap'))
-
-            ->with('color', 'cyan')
+            ->with('color', 'gray')
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')

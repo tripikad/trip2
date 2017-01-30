@@ -9,10 +9,6 @@
 		margin-right: $margin-sm;
 	}
 
-    .TravelmateCard__metaTop {
-    	margin-bottom: $margin-xs;
-    }
-
     .TravelmateCard__title {
     	color: $gray-dark;
     	font: $font-heading-md;
