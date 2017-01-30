@@ -18,8 +18,7 @@
 
     .FlightRow__title {
         color: $blue;
-        font: $font-heading-lg;
-        font: $font-heading-md ?if $mobile;
+        font: $font-heading-md;
         margin-bottom: $margin-xxs;
         line-height: $line-height-md;
         line-height: $line-height-lg ?if $mobile;

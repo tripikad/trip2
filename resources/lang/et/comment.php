@@ -2,7 +2,7 @@
 
 return [
 
-    'count' => 'kommentaar|kommentaari',
+    'count' => ':count kommentaar|:count kommentaari',
     'created.title' => 'Kommentaar :title on nüüd lisatud.',
 
     'action.edit.title' => 'Muuda',
