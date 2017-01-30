@@ -15,7 +15,7 @@ $fields = collect($fields) ?? collect();
 
     @foreach ($fields->withoutLast() as $field)
     
-        <div class="margin-bottom-sm">
+        <div class="margin-bottom-md">
 
         {!! $field !!}
         

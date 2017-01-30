@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Content;
 
-class BlogTestController extends Controller
+class V2ExperimentsBlogController extends Controller
 {
     public function index()
     {

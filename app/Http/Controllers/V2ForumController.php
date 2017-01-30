@@ -234,18 +234,103 @@ class V2ForumController extends Controller
     {
         return App::make('App\Http\Controllers\ContentController')
             ->create('forum');
-    }
 
-    public function edit($id)
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->edit('forum', $id);
+        /*
+        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
+        $topics = Destination::select('id', 'name')->orderBy('name')->get();
+
+        return layout('2col')
+
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->is('gray')
+                    ->with('title', trans('content.forum.index.title'))
+                    ->with('route', route('forum.index'))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.forum.create.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('forum.store'))
+                    ->with('fields', collect()
+                        ->push(component('FormRadio')
+                            ->with('name', 'type')
+                            ->with('value', 'forum')
+                            ->with('options', collect(['forum','buysell','expat'])
+                                ->map(function($type) {
+                                    return collect()
+                                        ->put('id', $type)
+                                        ->put('name', trans("content.$type.index.title"));
+                                })
+                            )
+                        )
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.forum.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title'))
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('title', trans('content.forum.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', old('title'))
+                            ->with('rows', 20)
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'topics')
+                            ->with('options', $topics)
+                            ->with('placeholder', trans('content.index.filter.field.topic.title'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.create.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Block')
+                    ->is('gray')
+                    ->with('content', collect()
+                        ->push(component('Title')
+                            ->is('smaller')
+                            ->is('red')
+                            ->with('title', trans('content.edit.notes.heading'))
+                            ->with('route', route('forum.index'))
+                        )
+                        ->push(component('Body')
+                            ->with('body', trans('content.edit.notes.body'))
+                        )
+                ))
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+        */
     }
 
     public function store()
     {
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'forum');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('forum', $id);
     }
 
     public function update($id)
