@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\ContentController;
 
 // V2
 
@@ -126,23 +125,14 @@ Route::put('forum/{id}/update', 'V2ForumController@update')
 
 // Static
 
-$static = collect([
-    'tripist' => 1534,
-    'kontakt' => 972,
-    'reklaam' => 22125,
-    'mis-on-veahind' => 97203,
-    'kasutustingimused' => 25151,
-]);
-
 Route::get('{slug}', 'V2StaticController@show')
     ->name('static.show')
-    ->where('slug', '('.collect($static)->keys()->implode('|').')');
+    ->where(
+        'slug',
+        '('.collect(config('v2static.slugs'))->keys()->implode('|').')'
+    );
 
-Route::get('static/{id}', function ($id) use ($static) {
-    $slug = $static->flip()->get($id);
-
-    return redirect()->route('static.show', [$slug]);
-})
+Route::get('static/{id}', 'V2StaticController@showId')
     ->name('static.show.id');
 
 Route::get('static/{id}/edit', 'V2StaticController@edit')
@@ -232,18 +222,11 @@ Route::put('photo/{id}/update', 'V2PhotoController@update')
     ->middleware('role:admin,contentowner');
 
 // Content redirects
-// TOOD: move to separate controller
 
-Route::get('content/{type}', function ($type) {
-    return redirect()->route("$type.index", 301);
-})
+Route::get('content/{type}', 'V2ContentController@redirectIndex')
     ->name('content.index');
 
-Route::get('content/{type}/{id}', function ($type, $id) {
-    $content = App\Content::findOrFail($id);
-
-    return redirect()->route("$type.show", [$content->slug], 301);
-})
+Route::get('content/{type}/{id}', 'V2ContentController@redirectShow')
     ->name('content.show');
 
 // Comments

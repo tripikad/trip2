@@ -7,24 +7,12 @@ use App\Content;
 
 class V2StaticController extends Controller
 {
-    private $staticSlugs;
-
-    public function __construct()
-    {
-        $this->staticSlugs = collect([
-            'tripist' => 1534,
-            'kontakt' => 972,
-            'reklaam' => 22125,
-            'mis-on-veahind' => 97203,
-            'kasutustingimused' => 25151,
-        ]);
-    }
 
     public function show($slug)
     {
         $post = Content::whereType('static')
             ->whereStatus(1)
-            ->findOrFail($this->staticSlugs[$slug]);
+            ->findOrFail(config('v2static.slugs')[$slug]);
 
         $loggedUser = request()->user();
 
@@ -51,6 +39,13 @@ class V2StaticController extends Controller
             ->with('footer', region('FooterLight'))
 
             ->render();
+    }
+
+    public function showId($id)
+    {
+        $slug = collect(config('v2static.slugs'))->flip()->get($id);
+
+        return redirect()->route('static.show', [$slug]);
     }
 
     public function edit($id)
@@ -106,6 +101,6 @@ class V2StaticController extends Controller
 
         $static->fill(request($fields->keys()->toArray()))->save();
 
-        return redirect()->route('static.show', $this->staticSlugs->flip()[$static->id]);
+        return redirect()->route('static.show', collect(config('v2static.slugs'))->flip()[$static->id]);
     }
 }
