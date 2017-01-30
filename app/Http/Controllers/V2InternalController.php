@@ -228,5 +228,4 @@ class V2InternalController extends Controller
 
         return redirect()->route('internal.show', [$internal]);
     }
-
 }
