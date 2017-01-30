@@ -21,7 +21,7 @@ class ForumRow
                 ->with('size', 58)
                 ->with('border', 3)
             )
-            ->with('title', $forum->title)
+            ->with('title', $forum->vars()->title)
             ->with('meta', component('Meta')->with('items', collect()
                     ->pushWhen($user && $user->hasRole('regular') && $forum->vars()->isNew,
                         component('Tag')
