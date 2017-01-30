@@ -7,7 +7,6 @@ use App\Content;
 
 class V2StaticController extends Controller
 {
-
     public function show($slug)
     {
         $post = Content::whereType('static')

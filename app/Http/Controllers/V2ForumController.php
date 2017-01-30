@@ -321,9 +321,8 @@ class V2ForumController extends Controller
         */
     }
 
-
     public function store()
-    {   
+    {
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'forum');
     }

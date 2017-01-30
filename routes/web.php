@@ -288,7 +288,7 @@ Route::get('sihtkoht/{slug}', 'V2DestinationController@showSlug')
     ->name('destination.showSlug');
 
 // Admin
-    
+
 Route::get('admin/content', 'V2AdminController@unpublishedIndex')
     ->name('admin.content.index')
     ->middleware('role:admin');
