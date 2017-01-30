@@ -169,32 +169,28 @@ Route::post('blog/{id}/update', 'V2BlogController@update')
 
 // Internal
 
-Route::get('internal', 'V2AdminController@index')
+Route::get('internal', 'V2InternalController@index')
     ->name('internal.index')
     ->middleware('role:admin');
 
-Route::get('internal/{id}', 'V2AdminController@show')
+Route::get('internal/{id}', 'V2InternalController@show')
     ->name('internal.show')
     ->middleware('role:admin');
 
-Route::get('internal/create', 'V2AdminController@create')
+Route::get('internal/create', 'V2InternalController@create')
     ->name('internal.create')
     ->middleware('role:admin');
 
-Route::post('internal/store', 'V2AdminController@store')
+Route::post('internal/store', 'V2InternalController@store')
     ->name('internal.store')
     ->middleware('role:admin');
 
-Route::get('internal/{id}/edit', 'V2AdminController@edit')
+Route::get('internal/{id}/edit', 'V2InternalController@edit')
     ->name('internal.edit')
     ->middleware('role:admin');
 
-Route::post('internal/{id}/update', 'V2AdminController@update')
+Route::post('internal/{id}/update', 'V2InternalController@update')
     ->name('internal.update')
-    ->middleware('role:admin');
-
-Route::get('admin/content', 'V2AdminController@unpublishedIndex')
-    ->name('admin.content.index')
     ->middleware('role:admin');
 
 // Photo
@@ -290,6 +286,12 @@ Route::get('sihtkoht/{id}', 'V2DestinationController@show')
 
 Route::get('sihtkoht/{slug}', 'V2DestinationController@showSlug')
     ->name('destination.showSlug');
+
+// Admin
+    
+Route::get('admin/content', 'V2AdminController@unpublishedIndex')
+    ->name('admin.content.index')
+    ->middleware('role:admin');
 
 // Utils
 
