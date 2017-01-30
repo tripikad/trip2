@@ -12,6 +12,11 @@
     font: $font-heading-md ?if $tablet;
 }
 
+.Title--smaller .Title__title {
+    font: $font-heading-md;
+    font-weight: $font-weight-bold;
+}
+
 .Title--large .Title__title {
     font: $font-heading-xxl;
     font: $font-heading-xl ?if $tablet;
@@ -29,6 +34,10 @@
 
 .Title--gray .Title__title {
     color: $gray;
+}
+
+.Title--blue .Title__title {
+    color: $blue;
 }
 
 .Title--shadow .Title__title {

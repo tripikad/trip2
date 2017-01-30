@@ -4,8 +4,6 @@
     padding-top: $padding-md;
     padding-bottom: $padding-md;
     padding-bottom: $padding-xs ?if $mobile;
-    position: relative;
-    overflow-x: hidden;
 }
 
     .HeaderLight__content {
