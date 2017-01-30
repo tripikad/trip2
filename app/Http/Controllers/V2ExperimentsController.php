@@ -15,6 +15,17 @@ class V2ExperimentsController extends Controller
 
             ->with('content', collect()
 
+                ->push(component('Form')->with('fields', collect()
+                    ->push(component('FormRadio')
+                        ->with('name', 'type')
+                        ->with('value', 'travelmate')
+                        ->with('options', collect()
+                            ->push(['id' => 'forum', 'name' => 'Foorum'])
+                            ->push(['id' => 'travelmate', 'name' => 'Travelmate'])
+                        )
+                    )
+                ))
+
                 ->push(component('Title')
                     ->with('title', 'Blog')
                 )
