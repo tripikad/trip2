@@ -10,7 +10,6 @@ class DestinationHeader
         $childrens = $destination->getImmediateDescendants()->sortBy('name');
 
         return component('HeaderLight')
-            ->with('background', component('BackgroundMap')->is('yellow'))
             ->with('navbar', component('Navbar')
                 ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))

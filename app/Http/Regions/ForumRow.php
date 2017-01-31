@@ -21,7 +21,7 @@ class ForumRow
                 ->with('size', 58)
                 ->with('border', 3)
             )
-            ->with('title', $forum->title)
+            ->with('title', $forum->vars()->title)
             ->with('meta', component('Meta')->with('items', collect()
                     ->pushWhen($user && $user->hasRole('regular') && $forum->vars()->isNew,
                         component('Tag')
@@ -48,6 +48,7 @@ class ForumRow
                     ->push(component('MetaLink')
                         ->is('cyan')
                         ->with('title', $forum->user->vars()->name)
+                        ->with('route', route('user.show', [$forum->user]))
                     )
                     ->push(component('MetaLink')
                         ->is('gray')

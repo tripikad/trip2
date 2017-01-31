@@ -24,7 +24,7 @@ class V2FlightController extends Controller
             $currentTopic
         );
 
-        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
@@ -95,7 +95,7 @@ class V2FlightController extends Controller
 
         $flight = Content::getItemBySlug($slug, $loggedUser);
         $flights = Content::getLatestItems('flight', 4);
-        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
@@ -109,7 +109,6 @@ class V2FlightController extends Controller
             ->with('header', region('Header', collect()
                 ->push(component('Link')
                     ->is('white')
-                    ->is('large')
                     ->with('title', trans('content.flight.show.action.all'))
                     ->with('route', route('flight.index'))
                 )

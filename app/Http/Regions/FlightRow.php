@@ -13,7 +13,7 @@ class FlightRow
                 ->with('icon', 'icon-tickets')
                 ->with('size', 'xl')
             )
-            ->with('title', $flight->title)
+            ->with('title', $flight->vars()->title)
             ->with('meta', component('Meta')->with('items', collect()
                     ->push(component('MetaLink')
                         ->with('title', $flight->vars()->created_at)

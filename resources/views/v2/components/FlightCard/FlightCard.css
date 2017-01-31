@@ -30,3 +30,7 @@
         text-align: center;
         text-shadow: $text-shadow-md;
     }
+
+    .FlightCard__title:hover {
+        color: $white-hover;
+    }

@@ -3,6 +3,7 @@
 $route = $route ?? route('frontpage.index');
 $search = $search ?? '';
 $logo = $logo ?? '';
+$sitename = $sitename ?? config('site.name');
 $navbar_desktop = $navbar_desktop ?? '';
 $navbar_mobile = $navbar_mobile ?? '';
 
@@ -14,11 +15,13 @@ $navbar_mobile = $navbar_mobile ?? '';
 
         <a href="{{ $route }}">
 
-            <div class="Navbar__logo">
+            <h1 class="Navbar__logo">
 
                 {!! $logo !!}
 
-            </div>
+                <div class="Navbar__sitename">{{ $sitename }}</div>
+
+            </h1>
 
         </a>
         

@@ -17,3 +17,7 @@
         line-height: $line-height-md;
         margin-bottom: $margin-xs;
     }
+
+    .NewsCard__title:hover {
+        color: $blue-hover;
+    }

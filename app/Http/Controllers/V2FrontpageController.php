@@ -40,7 +40,7 @@ class V2FrontpageController extends Controller
             ->with('top', collect()
                 ->push(region('FrontpageFlight', $flights->take(3)))
                 ->push(component('BlockHorizontal')
-                    ->is('right')
+                    ->is('center')
                     ->with('content', collect()->push(component('Link')
                         ->is('blue')
                         ->with('title', trans('frontpage.index.all.offers'))
@@ -67,34 +67,36 @@ class V2FrontpageController extends Controller
 
             ->with('sidebar', collect()
                 ->push('&nbsp')
-                ->merge(collect(['forum', 'buysell', 'expat'])
-                    ->flatMap(function ($type) use ($loggedUser) {
-                        return collect()
-                            ->push(component('Link')
-                                ->is('large')
-                                ->with('title', trans("content.$type.index.title"))
-                                ->with('route', route("$type.index"))
-                            )
-                            ->pushWhen(
-                                ! $loggedUser,
-                                component('Body')
-                                    ->is('gray')
-                                    ->with('body', trans("site.description.$type"))
-                            );
-                    })
-                )
-                ->pushWhen($loggedUser, component('Link')
-                    ->is('large')
-                    ->with('title', trans('menu.user.follow'))
-                    ->with('route', route('follow.index', [$loggedUser]))
-                )
-                ->pushWhen(
-                    $loggedUser && $loggedUser->hasRole('admin'),
-                    component('Link')
+                ->push(component('Block')->with('content', collect()
+                    ->merge(collect(['forum', 'buysell', 'expat'])
+                        ->flatMap(function ($type) use ($loggedUser) {
+                            return collect()
+                                ->push(component('Link')
+                                    ->is('large')
+                                    ->with('title', trans("content.$type.index.title"))
+                                    ->with('route', route("$type.index"))
+                                )
+                                ->pushWhen(
+                                    ! $loggedUser,
+                                    component('Body')
+                                        ->is('gray')
+                                        ->with('body', trans("site.description.$type"))
+                                );
+                        })
+                    )
+                    ->pushWhen($loggedUser, component('Link')
                         ->is('large')
-                        ->with('title', trans('menu.auth.admin'))
-                        ->with('route', route('internal.index'))
-                )
+                        ->with('title', trans('menu.user.follow'))
+                        ->with('route', route('follow.index', [$loggedUser]))
+                    )
+                    ->pushWhen(
+                        $loggedUser && $loggedUser->hasRole('admin'),
+                        component('Link')
+                            ->is('large')
+                            ->with('title', trans('menu.auth.admin'))
+                            ->with('route', route('internal.index'))
+                    )
+                ))
                 ->pushWhen($loggedUser && $loggedUser->hasRole('regular'), component('Button')
                     ->with('title', trans('content.forum.create.title'))
                     ->with('route', route('forum.create'))

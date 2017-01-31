@@ -6,6 +6,33 @@ use App\Content;
 
 class V2ExperimentsController extends Controller
 {
+    public function test()
+    {
+        return layout('1colnarrow')
+            ->with('color', 'gray')
+            ->with('background', component('BackgroundMap'))
+            ->with('header', region('StaticHeader'))
+
+            ->with('top', collect()
+                ->push(component('Title')
+                    ->is('center')
+                    ->is('large')
+                    ->with('title', trans('Logi sisse'))
+            ))
+
+            ->with('content', collect(range(0, 20))->map(function($i) {
+                return '<br>';
+            }))
+
+            ->with('bottom', collect(range(0, 3))->map(function($i) {
+                return '<br>';
+            }))
+
+            ->with('footer', region('FooterLight'))
+
+            ->render();
+    }
+
     public function index()
     {
         $user = auth()->user();

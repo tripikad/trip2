@@ -14,6 +14,10 @@
     color: $gray;
 }
 
+.Paginator__button:hover {
+    background: $gray-light-hover;
+}
+
 .Paginator__button {
     margin-right: $margin-sm;
 }

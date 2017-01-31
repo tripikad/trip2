@@ -45,7 +45,6 @@ class UserHeader
         $wantsToGo = $user->vars()->destinationWantsToGo();
 
         return component('HeaderLight')
-            ->with('background', component('BackgroundMap')->is('cyan'))
             ->with('navbar', component('Navbar')
                 ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))

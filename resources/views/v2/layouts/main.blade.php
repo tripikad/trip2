@@ -22,7 +22,8 @@
     </head>
     <body>
         @include('v2.utils.svg')
-        <div id="app">
+        <div id="app" class="background-{{ $color }}">
+            @yield('background')
             @yield('promobar')
             @yield('header')
             {!! component('HeaderError') !!}

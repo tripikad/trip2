@@ -13,21 +13,17 @@ class V2InternalController extends Controller
         $forums = Content::getLatestPagedItems('internal', false, false, false, 'updated_at');
         $loggedUser = request()->user();
 
-        return layout('1col')
+        return layout('2col')
+
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->with('title', trans('content.internal.index.title'))
                 )
                 ->push(component('BlockHorizontal')
-                    ->with('content', region('AdminLinks'))
-                )
-                ->pushWhen(
-                    $loggedUser && $loggedUser->hasRole('admin'),
-                    component('Button')
-                        ->is('narrow')
-                        ->with('title', trans('content.internal.create.title'))
-                        ->with('route', route('internal.create'))
+                    ->with('content', region('ForumLinks'))
                 )
             ))
 
@@ -36,6 +32,24 @@ class V2InternalController extends Controller
                     return region('ForumRow', $forum, route('internal.show', [$forum]));
                 }))
                 ->push(region('Paginator', $forums))
+            )
+
+            ->with('sidebar', collect()
+                ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('admin'),
+                    component('Button')
+                        ->is('narrow')
+                        ->with('title', trans('content.internal.create.title'))
+                        ->with('route', route('internal.create'))
+                )
+                ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Link')
+                    ->with('title', trans('menu.admin.image'))
+                    ->with('route', route('admin.image.index'))
+                )
+                ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Link')
+                    ->with('title', trans('menu.admin.content'))
+                    ->with('route', route('admin.content.index'))
+                )
             )
 
             ->with('footer', region('FooterLight'))
@@ -57,21 +71,14 @@ class V2InternalController extends Controller
             Cache::store('permanent')->forget($key);
         }
 
-        return layout('1col')
+        return layout('2col')
+
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->with('title', trans('content.internal.index.title'))
-                )
-                ->push(component('BlockHorizontal')
-                    ->with('content', region('AdminLinks'))
-                )
-                ->pushWhen(
-                    $loggedUser && $loggedUser->hasRole('admin'),
-                    component('Button')
-                        ->is('narrow')
-                        ->with('title', trans('content.internal.create.title'))
-                        ->with('route', route('internal.create'))
                 )
             ))
 
@@ -81,6 +88,16 @@ class V2InternalController extends Controller
                     return region('Comment', $comment, $firstUnreadCommentId, 'inset');
                 }))
                 ->pushWhen($loggedUser && $loggedUser->hasRole('regular'), region('CommentCreateForm', $forum, 'inset'))
+            )
+
+            ->with('sidebar', collect()
+                ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('admin'),
+                    component('Button')
+                        ->is('narrow')
+                        ->with('title', trans('content.internal.create.title'))
+                        ->with('route', route('internal.create'))
+                )
             )
 
             ->with('footer', region('FooterLight'))
@@ -95,13 +112,14 @@ class V2InternalController extends Controller
 
         return layout('1col')
 
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
+                    ->is('gray')
                     ->with('title', trans('content.internal.index.title'))
                     ->with('route', route('internal.index'))
-                )
-                ->push(component('BlockHorizontal')
-                    ->with('content', region('AdminLinks'))
                 )
             ))
 
@@ -169,13 +187,14 @@ class V2InternalController extends Controller
 
         return layout('1col')
 
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+            
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
+                    ->is('gray')
                     ->with('title', trans('content.internal.index.title'))
                     ->with('route', route('internal.index'))
-                )
-                ->push(component('BlockHorizontal')
-                    ->with('content', region('AdminLinks'))
                 )
             ))
 

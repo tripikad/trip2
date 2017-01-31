@@ -17,10 +17,5 @@
     }
 
     .ForumPost__meta {
-        margin-bottom: $margin-sm;
+        margin-bottom: $margin-md;
     }
-
-.ForumPost--unpublished {
-    opacity: $opacity-md;
-    background: $pink;
-}

@@ -9,7 +9,7 @@ class NewsHeader
         $user = auth()->user();
 
         return component('NewsHeader')
-            ->with('title', $new->title)
+            ->with('title', $new->vars()->title)
             ->with('background', $new->getHeadImage())
             ->with('navbar', component('Navbar')
                 ->is('white')

@@ -16,6 +16,10 @@
     width: 100% ?if $mobile;
 }
 
+.FormButton:hover {
+    background: $green-hover;
+}
+
 .FormButton--hidden {
     display: none;
 }

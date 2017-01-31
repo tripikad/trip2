@@ -48,6 +48,9 @@ class V2ForumController extends Controller
             ->with('head_description', trans("site.description.$forumType"))
             ->with('head_image', Image::getSocial())
 
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->is('gray')
@@ -100,6 +103,9 @@ class V2ForumController extends Controller
         $news = Content::getLatestItems('news', 1);
 
         return layout('2col')
+
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
@@ -175,6 +181,9 @@ class V2ForumController extends Controller
             ->with('head_title', $forum->getHeadTitle())
             ->with('head_description', $forum->getHeadDescription())
             ->with('head_image', Image::getSocial())
+
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
 
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
