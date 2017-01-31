@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Cache;
 use Request;
 use App\User;
@@ -34,7 +35,7 @@ class V2ForumController extends Controller
 
         $forums = Content::getLatestPagedItems($forumType, false, $currentDestination, $currentTopic, 'updated_at');
         $destinations = Destination::select('id', 'name')->get();
-        $topics = Topic::select('id', 'name')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name')->get();
 
         $flights = Content::getLatestItems('flight', 3);
         $travelmates = Content::getLatestItems('travelmate', 3);
@@ -47,8 +48,12 @@ class V2ForumController extends Controller
             ->with('head_description', trans("site.description.$forumType"))
             ->with('head_image', Image::getSocial())
 
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
+                    ->is('gray')
                     ->with('title', trans("content.$forumType.index.title"))
                 )
                 ->push(component('BlockHorizontal')
@@ -61,7 +66,7 @@ class V2ForumController extends Controller
                     $currentDestination,
                     $currentTopic,
                     $forums->currentPage(),
-                    'v2.forum.index'
+                    'forum.index'
                 ))
             ))
 
@@ -99,8 +104,12 @@ class V2ForumController extends Controller
 
         return layout('2col')
 
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
+                    ->is('gray')
                     ->with('title', trans('follow.index.title'))
                 )
                 ->push(component('BlockHorizontal')
@@ -135,8 +144,9 @@ class V2ForumController extends Controller
     public function show($slug)
     {
         $user = auth()->user();
-
         $forum = Content::getItemBySlug($slug, $user);
+
+        // TODO: Why?
 
         if (! $forum->first()) {
             abort(404);
@@ -161,6 +171,10 @@ class V2ForumController extends Controller
             ? '#comment-'.$forum->comments->last()->id
             : '';
 
+        $anchor = $forum->comments->count()
+            ? '#comment-'.$forum->comments->last()->id
+            : '';
+
         return layout('2col')
 
             ->with('title', trans('content.forum.index.title'))
@@ -168,27 +182,37 @@ class V2ForumController extends Controller
             ->with('head_description', $forum->getHeadDescription())
             ->with('head_image', Image::getSocial())
 
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
+                    ->is('gray')
                     ->with('title', trans("content.$forum->type.index.title"))
-                    ->with('route', route("v2.$forum->type.index"))
+                    ->with('route', route("$forum->type.index"))
                 )
                 ->push(component('BlockHorizontal')
                     ->with('content', region('ForumLinks'))
                 )
             ))
 
+            ->with('top', collect()->pushWhen(
+                ! $forum->status,
+                component('HeaderUnpublished')
+                    ->with('title', trans('content.show.unpublished'))
+            ))
+
             ->with('content', collect()
                 ->push(region('ForumPost', $forum))
                 ->pushWhen(
-                    $forum->comments->count(),
+                    $forum->comments->count() > 1,
                     component('BlockHorizontal')
                         ->is('right')
                         ->with('content', collect()
                             ->push(component('Link')
                                 ->with('title', trans('comment.action.latest.comment'))
                                 ->with('route', route(
-                                    'v2.forum.show', [$forum->slug]).$anchor
+                                    'forum.show', [$forum->slug]).$anchor
                                 )
                             )
                     )
@@ -213,5 +237,114 @@ class V2ForumController extends Controller
             ->with('footer', region('FooterLight'))
 
             ->render();
+    }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('forum');
+
+        /*
+        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
+        $topics = Destination::select('id', 'name')->orderBy('name')->get();
+
+        return layout('2col')
+
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->is('gray')
+                    ->with('title', trans('content.forum.index.title'))
+                    ->with('route', route('forum.index'))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.forum.create.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('forum.store'))
+                    ->with('fields', collect()
+                        ->push(component('FormRadio')
+                            ->with('name', 'type')
+                            ->with('value', 'forum')
+                            ->with('options', collect(['forum','buysell','expat'])
+                                ->map(function($type) {
+                                    return collect()
+                                        ->put('id', $type)
+                                        ->put('name', trans("content.$type.index.title"));
+                                })
+                            )
+                        )
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.forum.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title'))
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('title', trans('content.forum.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', old('title'))
+                            ->with('rows', 20)
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'topics')
+                            ->with('options', $topics)
+                            ->with('placeholder', trans('content.index.filter.field.topic.title'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.create.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Block')
+                    ->is('gray')
+                    ->with('content', collect()
+                        ->push(component('Title')
+                            ->is('smaller')
+                            ->is('red')
+                            ->with('title', trans('content.edit.notes.heading'))
+                            ->with('route', route('forum.index'))
+                        )
+                        ->push(component('Body')
+                            ->with('body', trans('content.edit.notes.body'))
+                        )
+                ))
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+        */
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'forum');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('forum', $id);
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'forum', $id);
     }
 }

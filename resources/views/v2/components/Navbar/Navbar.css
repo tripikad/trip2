@@ -11,6 +11,10 @@
         margin-left: calc($spacer * -4.5);
     }
 
+    .Navbar__sitename {
+        display: none;
+    }
+
     .Navbar--white .Navbar__logo svg {
         fill: $white;
     }
@@ -23,6 +27,10 @@
     .Navbar__search {
         display: block;
         display: none ?if $tablet;
+    }
+
+    .Navbar__search svg {
+        fill: $gray-light;
     }
 
     .Navbar__desktop {

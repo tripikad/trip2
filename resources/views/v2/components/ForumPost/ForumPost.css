@@ -5,7 +5,7 @@
     }
 
     .ForumPost__title {
-        color: $gray-darkest;
+        color: $gray-dark;
         font: $font-heading-xl;
         margin-bottom: $margin-sm;
         line-height: $line-height-sm;
@@ -17,10 +17,5 @@
     }
 
     .ForumPost__meta {
-        margin-bottom: $margin-sm;
+        margin-bottom: $margin-md;
     }
-
-.ForumPost--unpublished {
-    opacity: $opacity-md;
-    background: $pink;
-}

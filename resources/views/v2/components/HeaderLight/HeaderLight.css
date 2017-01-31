@@ -21,7 +21,7 @@
     }
 
     .HeaderLight__title {
-        color: $gray-darkest;
+        color: $gray-dark;
         font: $font-heading-xxl;
         font: $font-heading-xl ?if $mobile;
     }

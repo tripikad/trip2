@@ -18,7 +18,7 @@ class DestinationBar
         return component('DestinationBar')
             ->is($is)
             ->with('title', $destination->vars()->shortName)
-            ->with('route', route('v2.destination.show', [$destination]))
+            ->with('route', route('destination.show', [$destination]))
             ->with('parents', region(
                 'DestinationParents',
                 $destination->getAncestors()->onlyLast($parentLength > 25 ? 1 : 2),

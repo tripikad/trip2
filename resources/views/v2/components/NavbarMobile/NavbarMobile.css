@@ -1,7 +1,6 @@
 @import "variables";
 
 .NavbarMobile {
-    display: block;
     position: relative;
     z-index: 10000;
 }
@@ -11,7 +10,7 @@
     }
 
     .NavbarMobile__menuIcon svg {
-        fill: $gray-darker;
+        fill: $gray;
     }
 
     .NavbarMobile__userImage {
@@ -34,6 +33,7 @@
         right: 0;
         top: 0;
         z-index: 10000;
+        overflow-y: scroll;
     }
 
     .NavbarMobile__header {
@@ -55,7 +55,7 @@
     }
 
     .NavbarMobile__links {
-        padding: $padding-lg;
+        padding: $padding-sm;
     }
 
     .NavbarMobile__sublinkWrapper {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Request;
 use App\Image;
 use App\Topic;
@@ -17,10 +18,10 @@ class V2NewsController extends Controller
 
         $news = Content::getLatestPagedItems('news', false, $currentDestination, $currentTopic);
         $destinations = Destination::select('id', 'name')->get();
-        $topics = Topic::select('id', 'name')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name')->get();
 
         $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
 
         return layout('2col')
@@ -35,7 +36,7 @@ class V2NewsController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.news.index.title'))
-                    ->with('route', route('v2.news.index'))
+                    ->with('route', route('news.index'))
                 )
                 ->push(region(
                     'FilterHorizontal',
@@ -44,7 +45,7 @@ class V2NewsController extends Controller
                     $currentDestination,
                     $currentTopic,
                     $news->currentPage(),
-                    'v2.news.index'
+                    'news.index'
                 ))
             ))
 
@@ -77,11 +78,11 @@ class V2NewsController extends Controller
 
     public function show($slug)
     {
-        $new = Content::getItemBySlug($slug);
         $user = auth()->user();
+        $new = Content::getItemBySlug($slug, $user);
 
         $flights = Content::getLatestItems('flight', 3);
-        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
 
         return layout('1col')
@@ -92,6 +93,12 @@ class V2NewsController extends Controller
             ->with('head_image', $new->getHeadImage())
 
             ->with('header', region('NewsHeader', $new))
+
+            ->with('top', collect()->pushWhen(
+                ! $new->status,
+                component('HeaderUnpublished')
+                    ->with('title', trans('content.show.unpublished'))
+            ))
 
             ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $new->vars()->body))
@@ -109,5 +116,29 @@ class V2NewsController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
+    }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('news');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('news', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'news');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'news', $id);
     }
 }

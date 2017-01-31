@@ -1,12 +1,13 @@
 @php
 
 $route = $route ?? '';
+$id = $id ?? '';
 $method = $method ?? 'POST';
 $fields = collect($fields) ?? collect();
 
 @endphp
 
-<form action="{{ $route }}" method="POST" accept-charset="utf-8">
+<form id="{{ $id }}" action="{{ $route }}" method="POST" accept-charset="utf-8">
 
     {{ method_field($method) }}
     
@@ -14,7 +15,7 @@ $fields = collect($fields) ?? collect();
 
     @foreach ($fields->withoutLast() as $field)
     
-        <div class="margin-bottom-sm">
+        <div class="margin-bottom-md">
 
         {!! $field !!}
         

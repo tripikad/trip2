@@ -3,12 +3,20 @@
 .FormLink {
     background: none;
     border: none;
-    color: $gray-darker;
+    color: $gray;
     cursor: pointer;
     font: $font-text-sm;
     padding-top: $padding-sm;
 }
 
+.FormLink {
+    color: $gray-hover;
+}
+
 .FormLink--white {
     color: $white;
+}
+
+.FormLink--white:hover {
+    color: $white-hover;
 }

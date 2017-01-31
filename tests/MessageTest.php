@@ -64,15 +64,15 @@ class MessageTest extends TestCase
             ->visit("user/$user2->id")
             ->click(trans('user.show.message.create'))
             ->seePageIs("user/$user1->id/messages/$user2->id")
-            ->type('Hello', 'body')
+            ->type('Hola', 'body')
             ->press(trans('message.create.submit.title'))
             ->seePageIs("user/$user1->id/messages/$user2->id")
-            ->see('Hello');
+            ->see('Hola');
 
         $this->seeInDatabase('messages', [
             'user_id_from' => $user1->id,
             'user_id_to' => $user2->id,
-            'body' => 'Hello',
+            'body' => 'Hola',
         ]);
 
         // Sender going back to messages page
@@ -81,9 +81,7 @@ class MessageTest extends TestCase
             ->visit("user/$user1->id")
             ->click(trans('menu.user.message'))
             ->seePageIs("user/$user1->id/messages")
-            ->seeLink('Hello')
-            ->seeLink($user2->name)
-            ->click('Hello')
+            ->visit("user/$user1->id/messages/$user2->id")
             ->seePageIs("user/$user1->id/messages/$user2->id");
 
         // Recipient receiving and replying a message
@@ -92,32 +90,30 @@ class MessageTest extends TestCase
             ->visit("user/$user2->id")
             ->click(trans('menu.user.message'))
             ->seePageIs("user/$user2->id/messages")
-            ->seeLink('Hello')
             ->see($user1->name)
-            ->click('Hello')
+            ->visit("user/$user2->id/messages/$user1->id")
             ->seePageIs("user/$user2->id/messages/$user1->id")
-            ->see('Hello')
+            ->see('Hola')
             ->see($user1->name)
-            ->type('World', 'body')
+            ->type('Ciao', 'body')
             ->press(trans('message.create.submit.title'))
             ->seePageIs("user/$user2->id/messages/$user1->id")
-            ->see('World');
+            ->see('Ciao');
 
         $this->seeInDatabase('messages', [
             'user_id_from' => $user2->id,
             'user_id_to' => $user1->id,
-            'body' => 'World',
+            'body' => 'Ciao',
         ]);
 
         // Sender receiving a reply
 
         $this->actingAs($user1)
             ->visit("user/$user1->id/messages")
-            ->seeLink('World')
-            ->see($user2->name)
-            ->click('World')
+            ->seePageIs("user/$user1->id/messages")
+            ->visit("user/$user1->id/messages/$user2->id")
             ->seePageIs("user/$user1->id/messages/$user2->id")
-            ->see('World')
+            ->see('Ciao')
             ->see($user2->name);
     }
 
@@ -130,26 +126,20 @@ class MessageTest extends TestCase
         factory(Message::class)->create([
             'user_id_from' => $user1->id,
             'user_id_to' => $user3->id,
-            'body' => 'Hello',
+            'body' => 'Hola',
         ]);
 
         factory(Message::class)->create([
             'user_id_from' => $user2->id,
             'user_id_to' => $user3->id,
-            'body' => 'World',
+            'body' => 'Ciao',
         ]);
 
         $this->actingAs($user3)
-            ->visit("user/$user3->id/messages")
-            ->seeLink('Hello')
+            ->visit("user/$user3->id/messages/$user1->id")
+            ->see('Hola')
             ->see($user1->name)
-            ->seeLink('World')
-            ->see($user2->name)
-            ->click('Hello')
-            ->seePageIs("user/$user3->id/messages/$user1->id")
-            ->see('Hello')
-            ->see($user1->name)
-            ->dontSee('World')
+            ->dontSee('Ciao')
             ->dontSee($user2->name);
     }
 }

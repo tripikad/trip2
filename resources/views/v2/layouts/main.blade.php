@@ -22,13 +22,15 @@
     </head>
     <body>
         @include('v2.utils.svg')
-        <div id="app">
+        <div id="app" class="background-{{ $color }}">
+            @yield('background')
             @yield('promobar')
             @yield('header')
+            {!! component('HeaderError') !!}
             @yield('content')
             @yield('footer')
-            <photo-fullscreen></photo-fullscreen>
-            <alert></alert>
+            {!! component('PhotoFullscreen') !!}
+            {!! component('Alert') !!}
         </div>
         <script src="/v2/js/main.js"></script>
         @include('v2.utils.promo')

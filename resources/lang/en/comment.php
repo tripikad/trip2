@@ -2,6 +2,8 @@
 
 return [
 
+    'isnew' => 'New',
+
     'count' => ':count comment|:count comments',
 
     'action.edit.title' => 'Edit',
@@ -16,6 +18,7 @@ return [
     'create.title' => 'Add comment',
     'create.field.body.title' => 'Add comment',
     'create.submit.title' => 'Add comment',
+    'create.submitting.title' => 'Adding...',
 
     'edit.title' => 'Edit comment',
     'edit.body.title' => 'Comment',

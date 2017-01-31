@@ -22,11 +22,11 @@ $badge = $badge ?? '';
 
             <a href="{{ $route }}">
 
-            <div class="ForumRow__title">
+            <h3 class="ForumRow__title">
 
                 {{ $title }}
 
-            </div>
+            </h3>
 
             </a>
 

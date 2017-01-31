@@ -14,7 +14,7 @@ class FrontpageAbout
                     ->with('content', collect()
                         ->push(component('Link')
                             ->with('title', trans('content.action.more.about'))
-                            ->with('route', route('v2.static.show', [1534]))
+                            ->with('route', route('static.show', [1534]))
                         )
                     )
                 )

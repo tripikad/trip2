@@ -4,22 +4,66 @@
     font: $font-heading-xl;
     font: $font-heading-lg ?if $mobile;
     line-height: $line-height-sm;
-    color: $gray-darkest;
+    color: $gray-dark;
+}
+
+a .Title__title:hover {
+    color: $gray-dark-hover;
+}
+
+.Title--small .Title__title {
+    font: $font-heading-lg;
+    font: $font-heading-md ?if $tablet;
+}
+
+.Title--smaller .Title__title {
+    font: $font-heading-md;
+    font-weight: $font-weight-bold;
 }
 
 .Title--large .Title__title {
     font: $font-heading-xxl;
     font: $font-heading-xl ?if $tablet;
+    line-height: $line-height-md;
+    line-height: $line-height-lg ?if $tablet;
 }
 
 .Title--white .Title__title {
     color: $white;
 }
 
+.Title--white a .Title__title:hover {
+    color: $white-hover;
+}
+
 .Title--red .Title__title {
     color: $red;
 }
 
+.Title--red a .Title__title:hover {
+    color: $red-hover;
+}
+
+.Title--gray .Title__title {
+    color: $gray;
+}
+
+.Title--gray a .Title__title:hover {
+    color: $gray-hover;
+}
+
+.Title--blue .Title__title {
+    color: $blue;
+}
+
+.Title--blue a .Title__title:hover {
+    color: $blue-hover;
+}
+
 .Title--shadow .Title__title {
     text-shadow: $text-shadow-md;
+}
+
+.Title--center .Title__title {
+    text-align: center;
 }

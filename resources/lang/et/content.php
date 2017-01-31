@@ -61,13 +61,17 @@ return [
     'edit.notes.heading' => 'Hea teada',
     'edit.notes.body' => '<p>See on reisifoorum kooliharidust nuusutanud inimesele, kes mõistab kirjutada korralikus eesti keeles.</p><p>Ole hea ja uuri enne postitamist Trip.ee otsinguga juba olemasolevaid teemasid ning palun pane postitusele selle sisu avav pealkiri (mitte piirdudes koha või riigi nimega).</p>',
 
+    'edit.field.destinations.placeholder' => 'Vali sihtkohad',
+    'edit.field.topics.placeholder' => 'Vali teemad',
+
     'store.status.1.info' => ':title on edukalt lisatud.',
     'store.status.0.info' => ':title on lisatud, kuid teistele peidetud. Vajuta lingile "Avalikusta", et näidata seda teistele.',
 
     'update.info' => ':title on uuendatud.',
 
-    'show.isnew' => 'Uus',
-    'show.newcomments' => ':count uus kommentaar|:count uut kommentaari',
+    'show.isnew' => 'Uus teema',
+    'show.newcomments' => ':count uus|:count uut',
+    'show.unpublished' => 'See postitus on peidetud. Vajuta "Avalikusta", et post avalikuks teha',
 
     // Content types
 
@@ -92,7 +96,7 @@ return [
     'news.edit.field.topics.title' => 'Vali valdkonnad',
     'news.edit.field.topics.help' => '',
 
-    'news.edit.field.url.title' => 'URL',
+    'news.edit.field.url.title' => 'Link',
     'news.edit.field.url.help' => '',
 
     'news.no.results' => 'Hetkel pole ühtegi uudist.',
@@ -115,7 +119,7 @@ return [
     'shortnews.edit.field.topics.title' => 'Vali valdkonnad',
     'shortnews.edit.field.topics.help' => '',
 
-    'shortnews.edit.field.url.title' => 'URL',
+    'shortnews.edit.field.url.title' => 'Link',
     'shortnews.edit.field.url.help' => '',
 
     'shortnews.no.results' => 'Hetkel pole ühtegi lühiuudist.',
@@ -137,7 +141,7 @@ return [
     'flight.action.previous' => 'Uuemad pakkumised',
     'flight.action.next' => 'Vanemad pakkumised',
 
-    'flight.create.title' => 'Lisa lennupakkumine',
+    'flight.create.title' => 'Lisa pakkumine',
 
     'flight.edit.field.title.title' => 'Pealkiri',
     'flight.edit.field.title.help' => '',
@@ -160,7 +164,7 @@ return [
     'flight.edit.field.price.title' => 'Hind',
     'flight.edit.field.price.help' => '',
 
-    'flight.edit.field.url.title' => 'URL',
+    'flight.edit.field.url.title' => 'Link',
     'flight.edit.field.url.help' => '',
 
     // Travelmate
@@ -292,6 +296,7 @@ return [
     'blog.index.title' => 'Reisiblogid',
 
     'blog.create.title' => 'Lisa postitus',
+    'blog.update.title' => 'Uuenda postitust',
 
     'blog.show.action.all' => 'Kõik blogid',
 
@@ -304,7 +309,7 @@ return [
     'blog.edit.field.destinations.title' => 'Vali sihtkohad',
     'blog.edit.field.destinations.help' => '',
 
-    'blog.edit.field.url.title' => 'URL',
+    'blog.edit.field.url.title' => 'Link',
     'blog.edit.field.url.help' => '',
 
     'blog.no.results' => 'Hetkel pole ühtegi reisiblogi veel lisatud.',
@@ -320,6 +325,7 @@ return [
     'internal.index.title' => 'Toimetuse foorum',
 
     'internal.create.title' => 'Lisa uus postitus',
+    'internal.edit.title' => 'Muuda postitust',
 
     'internal.edit.field.title.title' => 'Pealkiri',
     'internal.edit.field.title.help' => '',
@@ -332,6 +338,8 @@ return [
     // Static
 
     'static.index.title' => 'Infoks',
+
+    'static.edit.title' => 'Muuda lehekülge',
 
     'static.edit.field.title.title' => 'Pealkiri',
     'static.edit.field.title.help' => '',
@@ -360,7 +368,7 @@ return [
     'sponsored.edit.field.topics.title' => 'Vali valdkonnad',
     'sponsored.edit.field.topics.help' => '',
 
-    'sponsored.edit.field.url.title' => 'URL',
+    'sponsored.edit.field.url.title' => 'Link',
     'sponsored.edit.field.url.help' => '',
 
     'sponsored.no.results' => 'Hetkel pole ühtegi artiklit lisatud rubriiki "Toimetaja valik".',

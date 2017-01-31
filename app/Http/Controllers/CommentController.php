@@ -102,22 +102,14 @@ class CommentController extends Controller
         );
         $comments->setPath(route($type.'.show', [$content->slug]));
 
-        if (request()->input('v2') === '') {
-            return backToAnchor('#comment-'.$comment->id)
-                ->with('info', trans(
-                    'comment.created.title',
-                    ['title' => $comment->vars()->title()]
-                ));
-        }
-
-        return redirect()
-            ->route($type.'.show', [
-                $content->slug,
-                ($comments->lastPage() > 1 ? 'page='.$comments->lastPage() : '')
-                    .'#comment-'.$comment->id,
-            ]);
+        return backToAnchor('#comment-'.$comment->id)
+            ->with('info', trans(
+                'comment.created.title',
+                ['title' => $comment->vars()->title()]
+            ));
     }
 
+    /*
     public function edit($id)
     {
         $comment = \App\Comment::findorFail($id);
@@ -126,7 +118,7 @@ class CommentController extends Controller
             ->with('comment', $comment)
             ->render();
     }
-
+    */
     public function update(Request $request, $id)
     {
         $this->validate($request, $this->rules);

@@ -24,6 +24,7 @@ class ContentController extends Controller
 {
     use Blog, Flight, Forum, Travelmate;
 
+    /*
     public function index(Request $request, $type)
     {
         if ($type == 'internal'
@@ -149,7 +150,7 @@ class ContentController extends Controller
             ->view($view, $viewVariables)
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.index.header'));
     }
-
+    */
     public function findBySlugAndType($type, $slug)
     {
         $content = Content::where('slug', $slug)->where('type', $type)->firstOrFail();
@@ -160,6 +161,7 @@ class ContentController extends Controller
         return $this->show($type, $content->id);
     }
 
+    /*
     public function show($type, $id)
     {
         if ($type == 'internal'
@@ -210,6 +212,7 @@ class ContentController extends Controller
             ->view($view, $viewVariables)
             ->header('Cache-Control', 'public, s-maxage='.config('cache.content.show.header'));
     }
+    */
 
     public function showWithRedirect($type, $id)
     {
@@ -218,6 +221,10 @@ class ContentController extends Controller
         if ('static' === $type) {
             return redirect()->route(
                 'static.'.$id, [], 301);
+        }
+
+        if ('photo' === $type) {
+            return redirect()->route('photo.show', [$id]);
         }
 
         return redirect()->route(
@@ -251,7 +258,7 @@ class ContentController extends Controller
         $viewVariables = [
             'mode' => 'create',
             'fields' => config("content_$type.edit.fields"),
-            'url' => route('content.store', [$type]),
+            'url' => route("$type.store"),
             'type' => $type,
             'destinations' => $destinations,
             'destination' => $destination,
@@ -296,7 +303,7 @@ class ContentController extends Controller
             'fields' => config("content_$type.edit.fields"),
             'content' => $content,
             'method' => 'put',
-            'url' => route('content.update', [$content->type, $content]),
+            'url' => route("$content->type.update", [$content]),
             'type' => $type,
             'destinations' => $destinations,
             'destination' => $destination,
@@ -425,7 +432,7 @@ class ContentController extends Controller
                 'title' =>  $request->get('title'),
                 'type' =>  $type,
                 'body' =>  $request->get('body'),
-                'link' => route('content.show', [$type, $content]),
+                'link' => ($type != 'photo') ? route("$type.show", [$content]) : '',
             ]);
 
             if (! $id) {
@@ -472,15 +479,15 @@ class ContentController extends Controller
             }
 
             if (! $request->ajax()) {
-                if (! $id) {
+                if (! $id || $type == 'photo') {
                     return redirect()
-                        ->route($type.'.index')
+                        ->route(''.$type.'.index')
                         ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
                             'title' => $content->title,
                         ]));
                 } else {
                     return redirect()
-                        ->route($type.'.show', [$content->slug])
+                        ->route(''.$type.'.show', [$content->slug])
                         ->with('info', trans('content.update.info', [
                             'title' => $content->title,
                         ]));
@@ -488,7 +495,7 @@ class ContentController extends Controller
             }
         } else {
             return redirect()
-                ->route($type.'.index');
+                ->route(''.$type.'.index');
         }
     }
 
@@ -525,14 +532,6 @@ class ContentController extends Controller
         if ($status == 0 || $status == 1) {
             $content->status = $status;
             $content->save();
-
-            /*
-            return redirect()
-                ->route('content.show', [$type, $content])
-                ->with('info', trans("content.action.status.$status.info", [
-                    'title' => $content->title,
-                ]));
-            */
 
             return back()->with('info', trans("content.action.status.$status.info", [
                 'title' => $content->title,

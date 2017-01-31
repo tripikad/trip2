@@ -18,12 +18,6 @@ $meta_bottom = $meta_bottom ?? '';
 
     <div class="TravelmateCard__content">
 
-    	<div class="TravelmateCard__metaTop" >
-
-	        {!! $meta_top !!}
-
-	    </div>
-
         <a href="{{ $route }}">
 
 	    <div  class="TravelmateCard__title">
@@ -33,8 +27,8 @@ $meta_bottom = $meta_bottom ?? '';
 	    </div>
 
         </a>
-
-	    <div class="TravelmateCard__metaBottom">
+        
+	    <div class="TravelmateCard__meta">
 
 	        {!! $meta_bottom !!}
 

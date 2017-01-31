@@ -56,9 +56,7 @@ class AdminTest extends TestCase
         ]);
 
         $this->actingAs($user1)
-            ->visit('user/'.$user1->id)
-            ->seeLink(trans('menu.auth.admin'))
-            ->click(trans('menu.auth.admin'))
+            ->visit('internal')
             ->seeLink(trans('menu.admin.image'))
             ->click(trans('menu.admin.image'))
             ->seePageIs('admin/image')
@@ -132,9 +130,7 @@ class AdminTest extends TestCase
         ]);
 
         $this->actingAs($user1)
-            ->visit('user/'.$user1->id)
-            ->seeLink(trans('menu.auth.admin'))
-            ->click(trans('menu.auth.admin'))
+            ->visit('internal')
             ->seeLink(trans('menu.admin.content'))
             ->click(trans('menu.admin.content'))
             ->seePageIs('admin/content')
@@ -149,7 +145,7 @@ class AdminTest extends TestCase
     {
         // Unlogged user
 
-        $response = $this->call('GET', 'toimetus');
+        $response = $this->call('GET', 'internal');
         $this->assertEquals(401, $response->status());
 
         // Regular user
@@ -160,7 +156,7 @@ class AdminTest extends TestCase
         ]);
 
         $response = $this->actingAs($user1)
-            ->call('GET', 'toimetus');
+            ->call('GET', 'internal');
         $this->assertEquals(401, $response->status());
     }
 
@@ -183,14 +179,11 @@ class AdminTest extends TestCase
         ]);
 
         $this->actingAs($user1)
-            ->visit('user/'.$user1->id)
-            ->seeLink(trans('menu.auth.admin'))
-            ->click(trans('menu.auth.admin'))
-            ->seePageIs('toimetus')
+            ->visit('internal')
             ->see(trans('content.internal.index.title'))
             ->seeLink('Hello internal')
             ->click('Hello internal')
-            ->seePageIs(config('sluggable.contentTypeMapping')[$content1->type].'/'.$content1->slug)
+            ->seePageIs("internal/$content1->id")
             ->see('Hello internal');
     }
 

@@ -10,11 +10,11 @@ class Comment
 
         return component('Comment')
             ->when($comment->status || ($user && $user->hasRole('admin')))
-            ->is($comment->status ?: 'unpublished')
+            ->is($comment->status ?: 'pink')
             ->is($is)
             ->with('id', $comment->id)
             ->with('user', component('UserImage')
-                ->with('route', route('v2.user.show', [$comment->user]))
+                ->with('route', route('user.show', [$comment->user]))
                 ->with('image', $comment->user->imagePreset('small_square'))
                 ->with('rank', $comment->user->vars()->rank)
             )
@@ -25,15 +25,16 @@ class Comment
                         && $firstUnreadCommentId <= $comment->id,
                         component('Tag')
                             ->is('red')
-                            ->with('title', trans('content.show.isnew'))
+                            ->with('title', trans('comment.isnew'))
                     )
                     ->push(component('MetaLink')
+                        ->is('cyan')
                         ->with('title', $comment->user->vars()->name)
-                        ->with('route', route('v2.user.show', [$comment->user]))
+                        ->with('route', route('user.show', [$comment->user]))
                     )
                     ->push(component('MetaLink')
                         ->with('title', $comment->vars()->created_at)
-                        ->with('route', route('v2.forum.show', [
+                        ->with('route', route('forum.show', [
                             $comment->content->slug, '#comment-'.$comment->id,
                         ]))
                     )
@@ -83,6 +84,7 @@ class Comment
                 )
             )
             ->with('body', component('Body')
+                ->is($comment->status ?: 'gray')
                 ->with('body', $comment->vars()->body)
             );
     }

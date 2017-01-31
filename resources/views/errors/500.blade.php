@@ -1,26 +1,17 @@
-@extends('layouts.main')
-
-@section('title', trans('error.500.title'))
-
-@section('header')
-
-    @include('component.header',[
-        'modifiers' => 'm-alternative'
-    ])
-
-@stop
-
-@section('content')
-    @include('component.masthead', [
-        'modifiers' => 'm-alternative',
-        'image' => \App\Image::getHeader()
-    ])
-
-    <div class="l-one-column">
-        @include('component.card', [
-            'text' => str_replace("\n", "<br>", trans('error.500.body')),
-            'modifiers' => 'm-blue',
-        ])
-    </div>
-
-@stop
+@include('v2.layouts.1col', collect()
+    ->put('header', region('StaticHeader', collect()
+        ->push(component('Title')
+            ->is('red')
+            ->is('large')
+            ->with('title', trans('error.500.title'))
+        )
+    ))
+    ->put('content', collect()
+        ->push(component('Body')
+            ->is('responsive')
+            ->with('body', trans('error.500.body'))
+        )
+        ->push('&nbsp;')
+    )
+    ->put('footer', region('FooterLight'))
+)

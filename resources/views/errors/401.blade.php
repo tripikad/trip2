@@ -1,26 +1,20 @@
-@extends('layouts.main')
-
-@section('title', (Auth::check() ? trans('error.401.title.logged') : trans('error.401.title.unlogged')))
-
-@section('header')
-
-    @include('component.header',[
-        'modifiers' => 'm-alternative'
-    ])
-
-@stop
-
-@section('content')
-    @include('component.masthead', [
-        'modifiers' => 'm-alternative',
-        'image' => \App\Image::getHeader()
-    ])
-
-    <div class="l-one-column">
-        @include('component.card', [
-            'text' => str_replace("\n", "<br>", (Auth::check() ? trans('error.401.body.logged') : trans('error.401.body.unlogged'))),
-            'modifiers' => 'm-blue',
-        ])
-    </div>
-
-@stop
+@include('v2.layouts.1col', collect()
+    ->put('header', region('StaticHeader', collect()
+        ->push(component('Title')
+            ->is('red')
+            ->is('large')
+            ->with('title', trans(auth()->check()
+                ? 'error.401.title.logged' : 'error.401.title.unlogged'
+            ))
+        )
+    ))
+    ->put('content', collect()
+        ->push(component('Body')
+            ->is('responsive')
+            ->with('body', trans(auth()->check()
+                ? 'error.401.body.logged' : 'error.401.body.unlogged'
+            ))        )
+        ->push('&nbsp;')
+    )
+    ->put('footer', region('FooterLight'))
+)

@@ -7,8 +7,12 @@
 }
 
     .Link__title {
-        color: $gray-darker;
+        color: $gray;
         font: $font-text-md;
+    }
+
+    .Link__title:hover {
+        color: $gray-hover;
     }
 
     .Link__icon {
@@ -16,7 +20,7 @@
     }
 
     .Link__icon svg {
-        fill: $gray-darker;
+        fill: $gray;
     }
 
 .Link--large .Link__title {
@@ -27,8 +31,16 @@
     color: $blue;
 }
 
+.Link--blue .Link__title:hover {
+    color: $blue-hover;
+}
+
 .Link--white .Link__title {
     color: $white;
+}
+
+.Link--white .Link__title:hover {
+    color: $white-hover;
 }
 
 .Link--white .Link__icon svg {

@@ -11,23 +11,23 @@ class NavbarMobile
         return collect()
             ->put('frontpage', [
                 'title' => trans('menu.header.home'),
-                'route' => route('v2.frontpage.index'),
+                'route' => route('frontpage.index'),
             ])
             ->put('flight', [
                 'title' => trans('menu.header.flights'),
-                'route' => route('v2.flight.index'),
+                'route' => route('flight.index'),
             ])
             ->put('travelmate', [
                 'title' => trans('menu.header.travelmates'),
-                'route' => route('v2.travelmate.index'),
+                'route' => route('travelmate.index'),
             ])
             ->put('forum', [
                 'title' => trans('menu.header.forum'),
-                'route' => route('v2.forum.index'),
+                'route' => route('forum.index'),
             ])
             ->put('news', [
                 'title' => trans('menu.header.news'),
-                'route' => route('v2.news.index'),
+                'route' => route('news.index'),
             ])
             ->toArray();
     }
@@ -47,7 +47,7 @@ class NavbarMobile
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.header.user'),
-                'route' => route('v2.user.show', [$user]),
+                'route' => route('user.show', [$user]),
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.header.edit'),
@@ -55,20 +55,16 @@ class NavbarMobile
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.user.message'),
-                'route' => route('v2.message.index', [$user]),
+                'route' => route('message.index', [$user]),
                 'badge' => $user ? $user->unreadMessagesCount() : '',
             ])
             ->pushWhen($user && $user->hasRole('admin'), [
                 'title' => trans('menu.auth.admin'),
-                'route' => route('v2.internal.index'),
+                'route' => route('internal.index'),
             ])
             ->pushWhen($user, [
                 'title' => trans('menu.auth.logout'),
                 'route' => route('login.logout'),
-            ])
-            ->put('v1', [
-                'title' => trans('menu.header.v1'),
-                'route' => route('frontpage.index'),
             ])
             ->toArray();
     }

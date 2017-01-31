@@ -19,9 +19,8 @@
         margin-bottom: $margin-sm;
     }
 
-.Comment--unpublished {
-    opacity: $opacity-md;
-    background: $pink;
+.Comment--pink {
+    background: $pink-light;
 }
 
 .Comment--inset {

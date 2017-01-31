@@ -13,7 +13,7 @@ class UserHeader
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.activity'))
-                    ->with('route', route('v2.user.show', [$user]))
+                    ->with('route', route('user.show', [$user]))
             )
             ->pushWhen(
                 $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
@@ -28,7 +28,7 @@ class UserHeader
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.message'))
-                    ->with('route', route('v2.message.index', [$user]))
+                    ->with('route', route('message.index', [$user]))
             )
             ->pushWhen(
                 $loggedUser && $loggedUser->hasRoleOrOwner('superuser', $loggedUser->id),
@@ -45,7 +45,6 @@ class UserHeader
         $wantsToGo = $user->vars()->destinationWantsToGo();
 
         return component('HeaderLight')
-            ->with('background', component('BackgroundMap')->is('cyan'))
             ->with('navbar', component('Navbar')
                 ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))
@@ -74,7 +73,7 @@ class UserHeader
                                 ->is('large')
                                 ->with('title', $destination->flaggable->name)
                                 ->with('route', route(
-                                    'v2.destination.show',
+                                    'destination.show',
                                     [$destination->flaggable]
                                 ));
                         })

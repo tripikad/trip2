@@ -1,5 +1,6 @@
 @php
 
+$isclasses = $isclasses ?? '';
 $title = $title ?? '';
 $route = $route ?? '';
 
@@ -7,18 +8,17 @@ $route = $route ?? '';
 
 <div class="Title {{ $isclasses }}">
 
-
     @if ($route)
 
     <a href="{{ $route }}">
 
     @endif
 
-        <div class="Title__title">
+        <h2 class="Title__title">
 
         {{ $title }}
 
-        </div>
+        </h2>
 
     @if ($route)
     

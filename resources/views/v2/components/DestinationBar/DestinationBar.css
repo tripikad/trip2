@@ -26,6 +26,10 @@
         line-height: 100%;
     }
 
+    .DestinationBar__title:hover {
+        color: $white-hover;
+    }
+
 .DestinationBar--purple {
     background: $purple;
 }

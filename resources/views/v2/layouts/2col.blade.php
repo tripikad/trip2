@@ -4,6 +4,8 @@ $title = $title ?? '';
 $head_title = $head_title ?? '';
 $head_description = $head_description ?? '';
 $head_image = $head_image ?? '';
+$color = $color ?? '';
+$background = $background ?? '';
 $header = $header ?? '';
 $top = isset($top) ? collect($top) : collect();
 $content = isset($content) ? collect($content) : collect();
@@ -20,11 +22,16 @@ $footer = $footer ?? '';
 @section('head_description', $head_description)
 @section('head_image', $head_image)
 
-@section('header', $header)
+@section('color', $color)
+@section('background', $background)
 
-@section('content')
+@section('header')
 
-@if ($top->count())
+<header class="position-relative">
+
+    {!! $header !!}
+
+    @if ($top->count())
 
     <div class="background-gray">
 
@@ -36,74 +43,90 @@ $footer = $footer ?? '';
 
     </div>
 
-@endif
+    @endif
 
-@if ($content->count())
+</header>
 
-<div class="background-white">
+@endsection
 
-    <div class="container">
+@section('content')
 
-        <div class="row-between padding-top-xl-mobile-md padding-left-xl-tablet-none  padding-bottom-xl-mobile-md padding-right-xl-tablet-none">
+<section class="position-relative">
 
-            <div class="col-9 padding-right-md-mobile-none">
+    @if ($content->count())
 
-                @foreach ($content as $content_item)
-                
-                <div @if (! $loop->last) class="margin-bottom-md" @endif>
-
-                    {!! $content_item !!}
-                        
-                </div>
-
-                @endforeach
-
-            </div>
-
-            <div class="col-3 padding-left-md-mobile-none padding-top-none-mobile-md">
-
-                @foreach ($sidebar as $sidebar_item)
-                
-                <div @if (! $loop->last) class="margin-bottom-md" @endif>
-
-                    {!! $sidebar_item !!}
-                        
-                </div>
-
-                @endforeach
-
-            </div>
-
-        </div>
-
-    </div>
-
-    @if ($bottom->count())
-
-    <div class="padding-top-lg padding-bottom-lg background-gray">
+    <div class="background-white">
 
         <div class="container">
 
-        @foreach ($bottom as $bottom_item)
-        
-            <div @if (! $loop->last) class="margin-bottom-md" @endif>
+            <div class="row-between padding-top-xl-mobile-md padding-left-xl-tablet-none  padding-bottom-xl-mobile-md padding-right-xl-tablet-none">
 
-                {!! $bottom_item !!}
+                <div class="col-9 padding-right-md-mobile-none">
+
+                    @foreach ($content as $content_item)
                     
+                    <div @if (! $loop->last) class="margin-bottom-md" @endif>
+
+                        {!! $content_item !!}
+                            
+                    </div>
+
+                    @endforeach
+
+                </div>
+
+                <div class="col-3 padding-left-md-mobile-none padding-top-none-mobile-md">
+
+                    @foreach ($sidebar as $sidebar_item)
+                    
+                    <div @if (! $loop->last) class="margin-bottom-md" @endif>
+
+                        {!! $sidebar_item !!}
+                            
+                    </div>
+
+                    @endforeach
+
+                </div>
+
             </div>
-                
-        @endforeach
 
         </div>
 
-    </div>
+        @if ($bottom->count())
 
-    @endif
+        <div class="padding-top-lg padding-bottom-lg background-gray">
 
-</div>
+            <div class="container">
+
+            @foreach ($bottom as $bottom_item)
+            
+                <div @if (! $loop->last) class="margin-bottom-md" @endif>
+
+                    {!! $bottom_item !!}
+                        
+                </div>
+                    
+            @endforeach
+
+            </div>
+
+        </div>
+
+        @endif
+
+</section>
 
 @endif
 
 @endsection
 
-@section('footer', $footer)
+@section('footer')
+
+    <footer class="background-white">
+
+    {!! $footer !!}
+
+    </footer>
+
+@endsection

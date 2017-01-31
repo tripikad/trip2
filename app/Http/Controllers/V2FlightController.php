@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Request;
 use App\Image;
 use App\Topic;
@@ -23,7 +24,7 @@ class V2FlightController extends Controller
             $currentTopic
         );
 
-        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->get();
 
@@ -42,7 +43,7 @@ class V2FlightController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.flight.index.title'))
-                    ->with('route', route('v2.flight.index'))
+                    ->with('route', route('flight.index'))
                 )
                 ->push(region(
                     'FilterHorizontal',
@@ -51,7 +52,7 @@ class V2FlightController extends Controller
                     $currentDestination,
                     null,
                     $flights->currentPage(),
-                    'v2.flight.index'
+                    'flight.index'
                 ))
             ))
 
@@ -90,13 +91,13 @@ class V2FlightController extends Controller
 
     public function show($slug)
     {
-        $flight = Content::getItemBySlug($slug);
+        $loggedUser = auth()->user();
+
+        $flight = Content::getItemBySlug($slug, $loggedUser);
         $flights = Content::getLatestItems('flight', 4);
-        $forums = Content::getLatestPagedItems('forum', 4, null, null, 'updated_at');
+        $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
-
-        $loggedUser = auth()->user();
 
         return layout('2col')
 
@@ -108,9 +109,8 @@ class V2FlightController extends Controller
             ->with('header', region('Header', collect()
                 ->push(component('Link')
                     ->is('white')
-                    ->is('large')
                     ->with('title', trans('content.flight.show.action.all'))
-                    ->with('route', route('v2.flight.index'))
+                    ->with('route', route('flight.index'))
                 )
                 ->push(component('Title')
                     ->is('white')
@@ -128,24 +128,45 @@ class V2FlightController extends Controller
                             return component('Tag')
                                 ->is('orange')
                                 ->with('title', $destination->name)
-                                ->with('route', route('v2.destination.show', [$destination]));
+                                ->with('route', route('destination.show', [$destination]));
                         }))
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
                             component('MetaLink')
                                 ->is('white')
                                 ->with('title', trans('content.action.edit.title'))
-                                ->with('route', route('content.edit', [$flight->type, $flight]))
+                                ->with('route', route('flight.edit', [$flight]))
+                        )
+                        ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Form')
+                                ->with('route', route(
+                                    'content.status',
+                                    [$flight->type, $flight, (1 - $flight->status)]
+                                ))
+                                ->with('fields', collect()
+                                    ->push(component('FormLink')
+                                        ->is('white')
+                                        ->with(
+                                            'title',
+                                            trans("content.action.status.$flight->status.title")
+                                        )
+                                    )
+                                )
                         )
                     )
                 ), $flight->getHeadImage(), 'high'))
 
+            ->with('top', collect()->pushWhen(
+                ! $flight->status,
+                component('HeaderUnpublished')
+                    ->with('title', trans('content.show.unpublished'))
+            ))
+
             ->with('content', collect()
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
+                ->push(component('AffBookingInspiration'))
+                ->push(region('Share'))
                 ->merge($flight->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
-                ->push(component('AffBookingInspiration'))
-                ->push(region('Share'))
                 ->pushWhen($loggedUser && $loggedUser->hasRole('regular'), region('CommentCreateForm', $flight))
                 ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Block')
@@ -172,5 +193,29 @@ class V2FlightController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
+    }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('flight');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('flight', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'flight');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'flight', $id);
     }
 }

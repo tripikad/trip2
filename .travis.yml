@@ -22,6 +22,8 @@ install:
     - chmod -R o+w storage/
     - mysql -e 'create database trip2;'
     - php artisan migrate:refresh
+    - gulp
+    - gulp v1
 
 script:
     - phpunit

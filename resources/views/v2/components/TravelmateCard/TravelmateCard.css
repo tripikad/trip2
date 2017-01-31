@@ -9,12 +9,12 @@
 		margin-right: $margin-sm;
 	}
 
-    .TravelmateCard__metaTop {
-    	margin-bottom: $margin-xs;
-    }
-
     .TravelmateCard__title {
-    	color: $gray-darkest;
+    	color: $gray-dark;
     	font: $font-heading-md;
     	line-height: $line-height-md;
+    }
+
+    .TravelmateCard__title:hover {
+        color: $gray-dark-hover;
     }

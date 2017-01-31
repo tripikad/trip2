@@ -9,13 +9,13 @@
 }
 
     .FrontpageHeader__content {
-        margin-top: $margin-lg;
+        margin-top: $margin-xl;
         display: flex;
         justify-content: center;
     }
 
     .FrontpageHeader__search {
-        margin-bottom: $margin-lg;
+        margin-bottom: $margin-xl;
         width: 50%;
         width: 60% ?if $tablet;
         width: 100% ?if $mobile;

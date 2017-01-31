@@ -10,7 +10,6 @@ class DestinationHeader
         $childrens = $destination->getImmediateDescendants()->sortBy('name');
 
         return component('HeaderLight')
-            ->with('background', component('BackgroundMap')->is('yellow'))
             ->with('navbar', component('Navbar')
                 ->is('white')
                 ->with('search', component('NavbarSearch')->is('white'))
@@ -41,7 +40,7 @@ class DestinationHeader
                             ->is('white')
                             ->is('large')
                             ->with('title', $children->name)
-                            ->with('route', route('v2.destination.show', [$children]));
+                            ->with('route', route('destination.show', [$children]));
                     }))
                 )
                 ->push(component('BlockHorizontal')

@@ -10,18 +10,18 @@ class ForumRow
         $commentCount = $forum->vars()->commentCount;
         $unreadCommentCount = $forum->vars()->unreadCommentCount;
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
-        $route = $route ? $route : route('v2.forum.show', [$forum->slug]);
+        $route = $route ? $route : route('forum.show', [$forum->slug]);
 
         return component('ForumRow')
             ->with('route', $route)
             ->with('user', component('UserImage')
-                ->with('route', route('v2.user.show', [$forum->user]))
+                ->with('route', route('user.show', [$forum->user]))
                 ->with('image', $forum->user->vars()->imagePreset('small_square'))
                 ->with('rank', $forum->user->vars()->rank)
                 ->with('size', 58)
-                ->with('border', 4)
+                ->with('border', 3)
             )
-            ->with('title', $forum->title)
+            ->with('title', $forum->vars()->title)
             ->with('meta', component('Meta')->with('items', collect()
                     ->pushWhen($user && $user->hasRole('regular') && $forum->vars()->isNew,
                         component('Tag')
@@ -38,7 +38,7 @@ class ForumRow
                                 ['count' => $unreadCommentCount]
                             ))
                             ->with('route', route(
-                                'v2.forum.show',
+                                'forum.show',
                                 [$forum->slug]).'#comment-'.$firstUnreadCommentId
                             )
                     )
@@ -46,21 +46,24 @@ class ForumRow
                         ->with('title', $commentCount)
                     )
                     ->push(component('MetaLink')
+                        ->is('cyan')
                         ->with('title', $forum->user->vars()->name)
+                        ->with('route', route('user.show', [$forum->user]))
                     )
                     ->push(component('MetaLink')
+                        ->is('gray')
                         ->with('title', $forum->vars()->updated_at)
                     )
                     ->merge($forum->destinations->map(function ($destination) {
                         return component('Tag')
                             ->is('orange')
                             ->with('title', $destination->name)
-                            ->with('route', route('v2.destination.show', [$destination]));
+                            ->with('route', route('destination.show', [$destination]));
                     }))
                     ->merge($forum->topics->map(function ($topic) {
                         return component('MetaLink')
                             ->with('title', $topic->name)
-                            ->with('route', route('v2.forum.index', ['topic' => $topic]));
+                            ->with('route', route('forum.index', ['topic' => $topic]));
                     }))
                 )
             );

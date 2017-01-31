@@ -26,7 +26,7 @@
         font: $font-heading-md ?if $mobile;
         padding: $padding-xs;
         border: none;
-        color: $gray-darkest;
+        color: $gray-dark;
         min-width: 100%;
         max-width: 100%;
     }

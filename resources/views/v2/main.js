@@ -5,7 +5,10 @@ import VueCookie from 'vue-cookie'
 import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
 import Flag from './components/Flag/Flag.vue'
+import FormButtonProcess from './components/FormButtonProcess/FormButtonProcess.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
+import FormSelectMultiple from './components/FormSelectMultiple/FormSelectMultiple.vue'
+import FrontpageDestinationSearch from './components/FrontpageDestinationSearch/FrontpageDestinationSearch.vue'
 import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
@@ -16,7 +19,6 @@ import PhotoCard from './components/PhotoCard/PhotoCard.vue'
 import PhotoFullscreen from './components/PhotoFullscreen/PhotoFullscreen.vue'
 import PromoBar from './components/PromoBar/PromoBar.vue'
 import UserImage from './components/UserImage/UserImage.vue'
-import FrontpageDestinationSearch from './components/FrontpageDestinationSearch/FrontpageDestinationSearch.vue'
 
 const globalProps = JSON.parse(decodeURIComponent(
     document.querySelector('#globalprops').getAttribute('content')
@@ -37,9 +39,11 @@ new Vue({
         Alert,
         Arc,
         Flag,
+        FormButtonProcess,
         FormSelect,
-        FrontpageSearch,
+        FormSelectMultiple,
         FrontpageDestinationSearch,
+        FrontpageSearch,
         Icon,
         IconLoader,
         NavbarDesktop,

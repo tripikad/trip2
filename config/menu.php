@@ -15,9 +15,6 @@ return [
         'forum' => [
             'route' => '/foorum/uldfoorum',
         ],
-        'v2' => [
-            'route' => '/v2/frontpage',
-        ],
     ],
 
     'footer' => [

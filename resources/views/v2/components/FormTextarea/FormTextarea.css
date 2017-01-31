@@ -1,24 +1,24 @@
 @import "variables";
 
     .FormTextarea__label {
-        color: $gray-darkest;
+        color: $gray;
         display: block;
         font: $font-heading-sm;
-        margin-bottom: $margin-xs;
+        margin-bottom: $margin-sm;
     }
 
     .FormTextarea__textarea {
         border-radius: $border-radius-md;
-        border: $border-gray-sm;
+        border: $border-gray-md;
         font: $font-text-md;
         padding: $padding-sm;
         width: 100%;
         line-height: $line-height-md;
-        color: $gray-darkest;
+        color: $gray-dark;
     }
 
     .FormTextarea__textarea::placeholder {
-        color: $gray-dark;
+        color: $gray-light;
     }
 
 .FormTextarea--borderless .FormTextarea__textarea {

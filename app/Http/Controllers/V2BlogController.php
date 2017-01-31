@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Content;
+use App\Destination;
 
 class V2BlogController extends Controller
 {
@@ -18,7 +20,7 @@ class V2BlogController extends Controller
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.blog.index.title'))
-                    ->with('route', route('v2.blog.index'))
+                    ->with('route', route('blog.index'))
                 )
             ))
 
@@ -39,7 +41,7 @@ class V2BlogController extends Controller
                     $loggedUser && $loggedUser->hasRole('regular'),
                     component('Button')
                         ->with('title', trans('content.blog.create.title'))
-                        ->with('route', route('content.create', ['blog']))
+                        ->with('route', route('blog.create'))
                 )
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
@@ -56,24 +58,30 @@ class V2BlogController extends Controller
 
     public function show($slug)
     {
-        $blog = Content::getItemBySlug($slug);
         $user = auth()->user();
+        $blog = Content::getItemBySlug($slug, $user);
 
-        return view('v2.layouts.2col')
+        return layout('2col')
 
             ->with('header', region('Header', collect()
                 ->push(component('Link')
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.blog.show.action.all'))
-                    ->with('route', route('v2.blog.index'))
+                    ->with('route', route('blog.index'))
                 )
                 ->push(component('Title')
                     ->is('white')
                     ->is('large')
                     ->with('title', trans('content.blog.index.title'))
-                    ->with('route', route('v2.blog.index'))
+                    ->with('route', route('blog.index'))
                 )
+            ))
+
+            ->with('top', collect()->pushWhen(
+                ! $blog->status,
+                component('HeaderUnpublished')
+                    ->with('title', trans('content.show.unpublished'))
             ))
 
             ->with('content', collect()
@@ -97,6 +105,175 @@ class V2BlogController extends Controller
                 ->push(component('Promo')->with('promo', 'footer'))
             )
 
-            ->with('footer', region('Footer'));
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
+    public function create()
+    {
+        // return App::make('App\Http\Controllers\ContentController')
+        //    ->create('blog');
+
+        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
+
+        return layout('1col')
+
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.blog.index.title'))
+                    ->with('route', route('blog.index'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.blog.create.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('blog.store'))
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.blog.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title'))
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('title', trans('content.blog.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', old('title'))
+                            ->with('rows', 20)
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.create.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
+    public function store()
+    {
+        // return App::make('App\Http\Controllers\ContentController')
+        //    ->store(request(), 'blog');
+
+        $loggedUser = request()->user();
+
+        $fields = collect([
+            'title' => 'required',
+            'body' => 'required',
+        ]);
+
+        $this->validate(request(), $fields->toArray());
+
+        $blog = $loggedUser->contents()->create(
+            collect(request($fields->keys()->toArray()))
+                ->put('type', 'blog')
+                ->put('status', 1)
+                ->toArray()
+        );
+
+        $blog->destinations()->attach(request('destinations'));
+
+        return redirect()->route('blog.index');
+    }
+
+    public function edit($id)
+    {
+        // return App::make('App\Http\Controllers\ContentController')
+        //    ->edit('blog', $id);
+
+        $blog = Content::findOrFail($id);
+        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
+
+        return layout('1col')
+
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', trans('content.blog.index.title'))
+                    ->with('route', route('blog.index'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.blog.update.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('blog.update', [$blog]))
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.blog.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title', $blog->title))
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('title', trans('content.blog.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', old('body', $blog->body))
+                            ->with('rows', 20)
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('value', $blog->destinations->pluck('id'))
+                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
+                        )
+                        ->pushWhen($blog->url, component('FormTextfield')
+                            ->with('title', trans('content.blog.edit.field.url.title'))
+                            ->with('name', 'url')
+                            ->with('value', old('url', $blog->url))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.edit.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
+    public function update($id)
+    {
+        // return App::make('App\Http\Controllers\ContentController')
+        //    ->store(request(), 'blog', $id);
+
+        $blog = Content::findOrFail($id);
+
+        $fields = collect([
+            'title' => 'required',
+            'body' => 'required',
+            'url' => 'url',
+        ]);
+
+        $this->validate(request(), $fields->toArray());
+
+        $blog->fill(request($fields->keys()->toArray()))->save();
+
+        if (request()->has('destinations')) {
+            $blog->destinations()->sync(request('destinations'));
+        } else {
+            $blog->destinations()->detach();
+        }
+
+        return redirect()->route('blog.show', [$blog->slug]);
     }
 }

@@ -5,12 +5,17 @@
     display: block ?if $mobile;
     align-items: center;
     flex-wrap: wrap;
+    line-height: $line-height-md;
 }
 
 .BlockHorizontal__item {
     margin-right: $margin-sm;
     margin-right: 0 ?if $mobile;
     margin-bottom: $margin-sm ?if $tablet;
+}
+
+.BlockHorizontal--center {
+    justify-content: center;
 }
 
 .BlockHorizontal--right {

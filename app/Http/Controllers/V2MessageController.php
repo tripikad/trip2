@@ -14,6 +14,9 @@ class V2MessageController extends Controller
 
         return layout('1col')
 
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'cyan')
+
             ->with('header', region('UserHeader', $user))
 
             ->with('content', collect()
@@ -49,6 +52,9 @@ class V2MessageController extends Controller
         Message::whereIn('id', $messageIds)->update(['read' => 1]);
 
         return layout('1col')
+
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'cyan')
 
             ->with('header', region('UserHeader', $user))
 

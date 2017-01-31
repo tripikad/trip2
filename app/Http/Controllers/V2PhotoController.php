@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use Request;
 use App\User;
 use App\Content;
@@ -36,7 +37,7 @@ class V2PhotoController extends Controller
                     component('Button')
                         ->is('narrow')
                         ->with('title', trans('content.photo.create.title'))
-                        ->with('route', route('content.create', ['photo']))
+                        ->with('route', route('photo.create'))
                 )
                 ->push(' ')
             ))
@@ -83,7 +84,7 @@ class V2PhotoController extends Controller
                     component('Button')
                         ->is('narrow')
                         ->with('title', trans('content.photo.create.title'))
-                        ->with('route', route('content.create', ['photo']))
+                        ->with('route', route('photo.create'))
                 )
                 ->push(' ')
             ))
@@ -99,5 +100,34 @@ class V2PhotoController extends Controller
             ->with('footer', region('FooterLight'))
 
             ->render();
+    }
+
+    public function show($id)
+    {
+        return '';
+    }
+
+    public function create()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->create('photo');
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('photo', $id);
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'photo');
+    }
+
+    public function update($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'photo', $id);
     }
 }

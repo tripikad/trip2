@@ -29,6 +29,10 @@ class V2ContentVars
 
     public function title()
     {
+        if ($this->content->price) {
+            return $this->content->title.' '.$this->content->price.'€';
+        }
+
         return $this->content->title;
     }
 
@@ -107,8 +111,6 @@ class V2ContentVars
 
     public function flagCount($flagType)
     {
-        return;
-
         return $this->content->flags->where('flag_type', $flagType)->count();
     }
 }

@@ -8,10 +8,14 @@
 
 .Paginator__button {
     padding: $padding-sm $padding-md;
-    background: $gray;
+    background: $gray-light;
     border-radius: $border-radius-md;
     font: $font-text-md;
-    color: $gray-darker;
+    color: $gray;
+}
+
+.Paginator__button:hover {
+    background: $gray-light-hover;
 }
 
 .Paginator__button {
