@@ -56,7 +56,7 @@ class V2UserController extends Controller
             ->with('background', component('BackgroundMap'))
 
             ->with('color', 'cyan')
-            
+
             ->with('header', region('UserHeader', $user))
 
             ->with('top',
