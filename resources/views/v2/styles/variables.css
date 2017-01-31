@@ -50,13 +50,13 @@ $black: #000;
 $gray-lighter: hsl(204, 6%, 97%);
 
 $gray-light: hsl(204, 6%, 88%);
-$gray-light-hover: hsl(204, 6%, 78%);
+$gray-light-hover: hsl(204, 6%, 72%);
 
 $gray: hsl(204, 6%, 55%);
-$gray-hover: hsl(204, 6%, 45%);
+$gray-hover: hsl(204, 6%, 40%);
 
 $gray-dark: hsl(204, 6%, 45%);
-$gray-dark-hover: hsl(204, 6%, 35%);
+$gray-dark-hover: hsl(204, 6%, 30%);
 
 /* Fonts */
 

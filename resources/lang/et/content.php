@@ -69,7 +69,7 @@ return [
 
     'update.info' => ':title on uuendatud.',
 
-    'show.isnew' => 'Uus',
+    'show.isnew' => 'Uus teema',
     'show.newcomments' => ':count uus|:count uut',
     'show.unpublished' => 'See postitus on peidetud. Vajuta "Avalikusta", et post avalikuks teha',
 

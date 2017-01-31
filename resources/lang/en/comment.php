@@ -2,6 +2,8 @@
 
 return [
 
+    'isnew' => 'New',
+
     'count' => ':count comment|:count comments',
 
     'action.edit.title' => 'Edit',

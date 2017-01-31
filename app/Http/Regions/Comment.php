@@ -25,7 +25,7 @@ class Comment
                         && $firstUnreadCommentId <= $comment->id,
                         component('Tag')
                             ->is('red')
-                            ->with('title', trans('content.show.isnew'))
+                            ->with('title', trans('comment.isnew'))
                     )
                     ->push(component('MetaLink')
                         ->is('cyan')
