@@ -3,7 +3,7 @@
 return [
 
     'isnew' => 'Uus',
-    
+
     'count' => ':count kommentaar|:count kommentaari',
     'created.title' => 'Kommentaar :title on nüüd lisatud.',
 
