@@ -27,6 +27,10 @@
         background: $cyan;
     }
 
+    .Button--cyan:hover {
+        background: $cyan-hover;
+    }
+
     .Button--facebook {
         background: $facebook;
     }
