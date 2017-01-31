@@ -48,6 +48,7 @@ class ForumRow
                     ->push(component('MetaLink')
                         ->is('cyan')
                         ->with('title', $forum->user->vars()->name)
+                        ->with('route', route('user.show', [$forum->user]))
                     )
                     ->push(component('MetaLink')
                         ->is('gray')

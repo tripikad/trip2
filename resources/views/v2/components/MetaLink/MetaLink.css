@@ -6,7 +6,7 @@
         padding-top: calc($spacer / 2);
     }
 
-    .MetaLink__title:hover {
+    a .MetaLink__title:hover {
         color: $gray-hover;
     }
 
@@ -14,7 +14,7 @@
 	color: $white;
 }
 
-.MetaLink--white .MetaLink__title:hover {
+.MetaLink--white a .MetaLink__title:hover {
     color: $white-hover;
 }
 
@@ -26,7 +26,7 @@
     color: $cyan;
 }
 
-.MetaLink--cyan .MetaLink__title:hover {
+.MetaLink--cyan a .MetaLink__title:hover {
     color: $cyan-hover;
 }
 
