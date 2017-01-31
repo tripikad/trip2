@@ -20,11 +20,11 @@ class V2ExperimentsController extends Controller
                     ->with('title', trans('Logi sisse'))
             ))
 
-            ->with('content', collect(range(0, 20))->map(function($i) {
+            ->with('content', collect(range(0, 20))->map(function ($i) {
                 return '<br>';
             }))
 
-            ->with('bottom', collect(range(0, 3))->map(function($i) {
+            ->with('bottom', collect(range(0, 3))->map(function ($i) {
                 return '<br>';
             }))
 
