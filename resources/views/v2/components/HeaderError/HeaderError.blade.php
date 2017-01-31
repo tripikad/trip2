@@ -1,3 +1,9 @@
+@php 
+
+$errors = $errors ?? collect();
+
+@endphp
+
 @if ($errors->count())
 
 <div class="HeaderError {{ $isclasses }}">

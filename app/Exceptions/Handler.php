@@ -54,17 +54,7 @@ class Handler extends ExceptionHandler
             try {
                 return response()->view('errors.500', [], 500);
             } catch (Exception $e) {
-                echo '<!DOCTYPE html>
-                        <html>
-                            <head>
-                                <meta charset="UTF-8">
-                            </head>
-                            <body style="padding: 15%;">
-                                <h1 style="text-align: center; font-family: Verdana, sans-serif;">Nüüd on küll piinlik...</h1>
-                                <p style="text-align: center; font-family: Verdana, sans-serif;">Tegemist on tehnilise tõrkega, mistõttu Sa siia lehele sattusid. Oleme sellest teadlikud ning parandame probleemi võimalikult kiirelt. Proovi mõne aja pärast uuesti.<br><br>
-                                <a href="/" style="color: green;">Liigu tagasi Trip.ee avalehele</a></p>
-                            </body>
-                        </html>';
+                echo '<h1 style="width: 40vw; padding: 3rem; font-size: 2em; font-family: sans-serif; color: hsl(0, 79%, 66%);">Tripil on tehnilised probleemid. Oleme varsti tagasi.</h1>';
                 exit();
             }
         } else {
