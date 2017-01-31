@@ -17,11 +17,11 @@ $meta = $meta ?? '';
     
     </div>
 
-    <div class="NewsCard__title">
+    <h3 class="NewsCard__title">
 
         {{ $title }}
 
-    </div>
+    </h3>
 
     <div class="NewsCard__meta">
 

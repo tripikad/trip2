@@ -26,91 +26,95 @@ $footer = $footer ?? '';
 
 @section('header')
 
-<div class="position-relative">
+<header class="position-relative">
+    
+    {!! $header !!}
 
-{!! $header !!}
+    @if ($top->count())
 
-</div>
+        <div class="background-gray">
 
-@endsection
+        @foreach ($top as $top_item)
 
-@section('content')
-
-@if ($top->count())
-
-    <div class="background-gray">
-
-    @foreach ($top as $top_item)
-
-        {!! $top_item !!}
-            
-    @endforeach
-
-    </div>
-
-@endif
-
-@if ($content->count())
-
-<div class="background-white position-relative">
-
-    <div class="container">
-
-        <div class="row row-center padding-top-lg padding-bottom-md">
-
-            <div class="col-8">
-
-                @foreach ($content as $content_item)
-                
-                <div @if (!$loop->last) class="margin-bottom-md" @endif>
-
-                    {!! $content_item !!}
-                        
-                </div>
-
-                @endforeach
-
-            </div>
-
-        </div>
-
-    </div>
-
-    @if ($bottom->count())
-
-    <div class="padding-top-lg padding-bottom-lg background-gray">
-
-        <div class="container">
-
-        @foreach ($bottom as $bottom_item)
-        
-            <div @if (!$loop->last) class="margin-bottom-md" @endif>
-
-                {!! $bottom_item !!}
-                    
-            </div>
+            {!! $top_item !!}
                 
         @endforeach
 
         </div>
 
+    @endif
+
+</header>
+
+@endsection
+
+@section('content')
+
+    <section class="position-relative">
+
+    @if ($content->count())
+
+    <div class="background-white">
+
+        <div class="container">
+
+            <div class="row row-center padding-top-lg padding-bottom-md">
+
+                <div class="col-8">
+
+                    @foreach ($content as $content_item)
+                    
+                    <div @if (!$loop->last) class="margin-bottom-md" @endif>
+
+                        {!! $content_item !!}
+                            
+                    </div>
+
+                    @endforeach
+
+                </div>
+
+            </div>
+
+        </div>
+
+        @if ($bottom->count())
+
+        <div class="padding-top-lg padding-bottom-lg background-gray">
+
+            <div class="container">
+
+            @foreach ($bottom as $bottom_item)
+            
+                <div @if (!$loop->last) class="margin-bottom-md" @endif>
+
+                    {!! $bottom_item !!}
+                        
+                </div>
+                    
+            @endforeach
+
+            </div>
+
+        </div>
+
+        @endif
+        
     </div>
 
     @endif
-    
-</div>
 
-@endif
+    </section>
 
 @endsection
 
 @section('footer')
 
-<div class="background-white">
+    <footer class="background-white">
 
-{!! $footer !!}
+    {!! $footer !!}
 
-</div>
+    </footer>
 
 @endsection
 
