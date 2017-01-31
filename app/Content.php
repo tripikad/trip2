@@ -127,11 +127,14 @@ class Content extends Model
         return $query
             ->whereStatus(1)
             ->with(
+                'flags',
                 'images',
                 'user',
                 'user.images',
                 'comments',
-                'comments.user',
+                'comments.user.images',
+                'comments.flags',
+                'comments.content',
                 'destinations',
                 'topics'
             )
@@ -143,11 +146,14 @@ class Content extends Model
         return $query
             ->whereSlug($slug)
             ->with(
+                'flags',
                 'images',
                 'user',
                 'user.images',
                 'comments',
-                'comments.user',
+                'comments.user.images',
+                'comments.flags',
+                'comments.content',
                 'destinations',
                 'topics'
             )
