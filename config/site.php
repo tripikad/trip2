@@ -4,7 +4,7 @@ return [
 
     'name' => 'Trip.ee',
 
-    'allowedtags' => '<b><i><strong><em><a><br><ul><ol><li><img><iframe><h4><h5><h6><p>',
+    'allowedtags' => '<b><i><strong><em><a><br><ul><ol><li><img><iframe><h4><h5><h6><p><script><ins><div>',
 
     'maxfilesize' => 128,
 

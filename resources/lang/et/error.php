@@ -10,7 +10,7 @@ return [
     '500.title' => 'Täitsa tuksis...',
     '500.body' => 'Tripil on tehnilised tõrked. Oleme sellest teadlikud ning parandame probleemi võimalikult kiirelt.<br><br>Proovi mõne aja pärast uuesti.',
 
-    '503.title' => 'Teeme trip.ee veelgi paremaks!',
+    '503.title' => 'Käib töö ja vile koos',
     '503.body' => 'Hetkel toimub uuenduste ja paranduste üleslaadimine.<br>
     Proovi mõne minuti pärast uuesti.',
 
