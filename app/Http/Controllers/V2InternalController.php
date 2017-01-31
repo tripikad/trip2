@@ -189,7 +189,7 @@ class V2InternalController extends Controller
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
-            
+
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->is('gray')
