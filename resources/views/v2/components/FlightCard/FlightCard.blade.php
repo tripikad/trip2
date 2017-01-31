@@ -16,11 +16,11 @@ $title = $title ?? '';
 
     <div class="FlightCard__wrapper">
 
-    <div class="FlightCard__title">
+    <h3 class="FlightCard__title">
 
         {{ $title }}
 
-    </div>
+    </h3>
 
     </div>
 

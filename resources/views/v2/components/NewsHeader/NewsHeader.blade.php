@@ -27,11 +27,11 @@ $meta = $meta ?? '';
 
         <div class="NewsHeader__content">
 
-        	<div class="NewsHeader__title">
+        	<h2 class="NewsHeader__title">
 
             {!! $title !!}
 
-            </div>
+            </h2>
 
             <div class="NewsHeader__meta">
 

@@ -6,18 +6,27 @@
         padding-top: calc($spacer / 2);
     }
 
+    a .MetaLink__title:hover {
+        color: $gray-hover;
+    }
+
 .MetaLink--white .MetaLink__title {
 	color: $white;
+}
+
+.MetaLink--white a .MetaLink__title:hover {
+    color: $white-hover;
 }
 
 .MetaLink--large .MetaLink__title {
     font: $font-text-md;
 }
 
-.MetaLink--orange .MetaLink__title {
-    color: $orange;
-}
-
 .MetaLink--cyan .MetaLink__title {
     color: $cyan;
 }
+
+.MetaLink--cyan a .MetaLink__title:hover {
+    color: $cyan-hover;
+}
+

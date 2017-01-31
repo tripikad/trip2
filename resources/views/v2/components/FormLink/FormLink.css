@@ -9,6 +9,14 @@
     padding-top: $padding-sm;
 }
 
+.FormLink {
+    color: $gray-hover;
+}
+
 .FormLink--white {
     color: $white;
+}
+
+.FormLink--white:hover {
+    color: $white-hover;
 }

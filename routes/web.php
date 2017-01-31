@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 
 // V2
 
+Route::get('/test', 'V2ExperimentsController@test')
+    ->name('test');
+
 // Frontpage
 
 Route::get('/', 'V2FrontpageController@index')

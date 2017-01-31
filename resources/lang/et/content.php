@@ -141,7 +141,7 @@ return [
     'flight.action.previous' => 'Uuemad pakkumised',
     'flight.action.next' => 'Vanemad pakkumised',
 
-    'flight.create.title' => 'Lisa lennupakkumine',
+    'flight.create.title' => 'Lisa pakkumine',
 
     'flight.edit.field.title.title' => 'Pealkiri',
     'flight.edit.field.title.help' => '',

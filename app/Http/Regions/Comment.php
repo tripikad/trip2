@@ -28,6 +28,7 @@ class Comment
                             ->with('title', trans('content.show.isnew'))
                     )
                     ->push(component('MetaLink')
+                        ->is('cyan')
                         ->with('title', $comment->user->vars()->name)
                         ->with('route', route('user.show', [$comment->user]))
                     )

@@ -1,47 +1,72 @@
 /* Brand colors */
-$blue: #36a1eb;
-$cyan-lighter: #e1f1f4;
-$cyan-light: #a5e4f1;
-$cyan-dark: #0087ae;
-$cyan: #4ac9e3;
+$blue: hsl(205, 82%, 57%);
+$blue-hover: hsl(205, 82%, 47%);
+
+$cyan-lighter: hsl(189, 46%, 92%);
+$cyan-light: hsl(190, 73%, 80%);
+
+$cyan: hsl(190, 73%, 59%);
+$cyan-hover: hsl(190, 73%, 49%);
+
+$cyan-dark: hsl(193, 100%, 34%);
+
 $green-dark: #288f18;
-$green: #78cc5c;
-$orange-dark: #d94d00;
-$orange: #ff9a3e;
-$purple-dark: #5147c0;
-$purple: #8b84d7;
-$red-dark: #cb4949;
-$red-darker: #b13636;
-$red: #ed6262;
-$yellow-dark: #d67d00;
-$yellow: #f7ba00;
+$green: hsl(105, 52%, 58%);
+$green-hover: hsl(105, 52%, 48%);
+
+$orange: hsl(29, 100%, 62%);
+$orange-hover: hsl(29, 100%, 52%);
+$orange-dark: hsl(21, 100%, 43%);
+
+$purple: hsl(245, 51%, 68%);
+$purple-dark: hsl(245, 49%, 52%);
+
+$red: hsl(0, 79%, 66%);
+$red-hover: hsl(0, 79%, 56%);
+
+$red-dark: hsl(0, 56%, 54%);
+$red-darker: hsl(0, 53%, 45%);
+
+$yellow: hsl(45, 100%, 48%);
+$yellow-hover: hsl(45, 100%, 38%);
+
+$yellow-dark: hsl(35, 100%, 42%);
 
 /* Special colors */
 
-$pink-light: #ffefed;
-$pink: #f7d2cd;
-$pink-dark: #a38682;
+$pink-light: hsl(7, 100%, 96%);
+$pink: hsl(7, 72%, 89%);
+$pink-dark: hsl(7, 15%, 57%);
 
 /* Neutral colors */
 
-$white: #fff;
+$white: hsl(0, 0%, 100%);
+$white-hover: hsla(0, 0%, 100%, 0.9);
+
 $black: #000;
 
 /* Grays */
 
 $gray-lighter: hsl(204, 6%, 97%);
+
 $gray-light: hsl(204, 6%, 88%);
+$gray-light-hover: hsl(204, 6%, 78%);
+
 $gray: hsl(204, 6%, 55%);
-$gray-dark: hsl(204, 6%, 34%);
+$gray-hover: hsl(204, 6%, 45%);
+
+$gray-dark: hsl(204, 6%, 45%);
+$gray-dark-hover: hsl(204, 6%, 35%);
 
 /* Fonts */
+
 $font-family: "Sailec";
 $font-family-code: monospace;
 $font-size-xs: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
 $font-size-lg: 18px;
-$font-size-xl: 22px;
+$font-size-xl: 20px;
 $font-size-xxl: 30px;
 $font-size-xxxl: 48px;
 $font-size-xxxxl: 64px;
@@ -50,8 +75,8 @@ $font-weight-semibold: 600;
 $font-weight-bold: bold;
 $line-height-xs: 100%;
 $line-height-sm: 120%;
-$line-height-md: 140%;
-$line-height-lg: 150%;
+$line-height-md: 130%;
+$line-height-lg: 140%;
 $line-height-xl: 200%;
 $line-height-xxl: 220%;
 $font-text-xs: $font-weight-normal $font-size-xs / $line-height-xs $font-family, sans-serif;
@@ -197,7 +222,7 @@ $largedesktop-width: 74em;
  $largedesktop: media (max-width: $largedesktop-width);
 
 /* Opacities */
-$opacity-xxs: 0.04;
+$opacity-xxs: 0.05;
 $opacity-xs: 0.1;
 $opacity-sm: 0.25;
 $opacity-md: 0.5;

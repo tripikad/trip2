@@ -14,6 +14,10 @@
     margin-bottom: $margin-sm ?if $tablet;
 }
 
+.BlockHorizontal--center {
+    justify-content: center;
+}
+
 .BlockHorizontal--right {
     justify-content: flex-end;
 }

@@ -29,6 +29,9 @@ class V2ContentVars
 
     public function title()
     {
+        if ($this->content->price) { 
+            return $this->content->title.' '.$this->content->price.'€';
+        }
         return $this->content->title;
     }
 

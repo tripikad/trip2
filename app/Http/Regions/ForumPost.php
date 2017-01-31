@@ -24,6 +24,7 @@ class ForumPost
             )
             ->with('meta', component('Meta')->with('items', collect()
                     ->push(component('MetaLink')
+                        ->is('cyan')
                         ->with('title', $post->user->vars()->name)
                         ->with('route', route('user.show', [$post->user]))
                     )
@@ -41,25 +42,6 @@ class ForumPost
                             ->with('title', $topic->name)
                             ->with('route', route('forum.index', ['topic' => $topic]));
                     }))
-                    ->pushWhen($user && $user->hasRoleOrOwner('admin', $post->user->id),
-                        component('MetaLink')
-                            ->with('title', trans('content.action.edit.title'))
-                            ->with('route', route($editRoute, [$post]))
-                    )
-                    ->pushWhen($user && $user->hasRole('admin'), component('Form')
-                            ->with('route', route(
-                                'content.status',
-                                [$post->type, $post, (1 - $post->status)]
-                            ))
-                            ->with('fields', collect()
-                                ->push(component('FormLink')
-                                    ->with(
-                                        'title',
-                                        trans("content.action.status.$post->status.title")
-                                    )
-                                )
-                            )
-                    )
                     ->push(component('Flag')
                         ->is('green')
                         ->with('route', route(
@@ -89,6 +71,25 @@ class ForumPost
                         ->with('icon', 'icon-thumb-up')
                         ->with('flagtitle', trans('flag.content.bad.flag.title'))
                         ->with('unflagtitle', trans('flag.content.bad.unflag.title'))
+                    )
+                    ->pushWhen($user && $user->hasRoleOrOwner('admin', $post->user->id),
+                        component('MetaLink')
+                            ->with('title', trans('content.action.edit.title'))
+                            ->with('route', route($editRoute, [$post]))
+                    )
+                    ->pushWhen($user && $user->hasRole('admin'), component('Form')
+                            ->with('route', route(
+                                'content.status',
+                                [$post->type, $post, (1 - $post->status)]
+                            ))
+                            ->with('fields', collect()
+                                ->push(component('FormLink')
+                                    ->with(
+                                        'title',
+                                        trans("content.action.status.$post->status.title")
+                                    )
+                                )
+                            )
                     )
                     ->pushWhen($user, component('Form')
                             ->with('route', route(

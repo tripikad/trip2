@@ -21,11 +21,11 @@ $meta = $meta ?? collect();
 
             <a href="{{ $route }}">
 
-            <div class="FlightRow__title">
+            <h3 class="FlightRow__title">
 
                 {{ $title }}
 
-            </div>
+            </h3>
 
             <div class="FlightRow__meta">
 

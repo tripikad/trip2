@@ -9,6 +9,7 @@ class ForumAbout
         $user = auth()->user();
 
         return component('Block')
+            ->with('title', trans('frontpage.index.forum.title'))
             ->with('content', collect()
                 ->push(component('Body')
                     ->with('body', trans("site.description.$type"))
