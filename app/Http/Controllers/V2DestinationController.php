@@ -30,7 +30,7 @@ class V2DestinationController extends Controller
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'yellow')
-            
+
             ->with('header', region('DestinationHeader', $destination))
 
             ->with('top', region(
