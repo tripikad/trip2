@@ -11,6 +11,10 @@
     text-align: center;
 }
 
+.Button:hover {
+    background: $green-hover;
+}
+
     .Button__icon {
         margin-right: $margin-xs;
     }
@@ -32,8 +36,12 @@
     }
 
     .Button--transparent {
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.2);
         border: $border-white-md;
+    }
+
+    .Button--transparent:hover {
+        background: rgba(0, 0, 0, 0.3);
     }
 
 .Button--narrow {

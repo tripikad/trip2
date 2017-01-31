@@ -24,3 +24,7 @@
         line-height: $line-height-lg ?if $mobile;
     }
 
+    .FlightRow__title:hover {
+        color: $blue-hover;
+    }
+

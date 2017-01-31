@@ -16,6 +16,10 @@
         white-space: nowrap;
     }
 
+    .NavbarDesktop__link:hover {
+        color: $gray-hover;
+    }
+
     .NavbarDesktop__userImage {
         margin-left: $margin-sm;
         display: flex;
@@ -74,4 +78,8 @@
 
 .NavbarDesktop--white .NavbarDesktop__link {
     color: $white;
+}
+
+.NavbarDesktop--white .NavbarDesktop__link:hover {
+    color: $white-hover;
 }

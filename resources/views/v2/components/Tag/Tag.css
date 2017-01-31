@@ -15,6 +15,10 @@
         white-space: nowrap;
     }
 
+    .Tag__title:hover {
+        color: $gray-hover;
+    }
+
 .Tag--orange {
     border: 1px solid $orange;
 }
@@ -23,9 +27,17 @@
     color: $orange;
 }
 
+.Tag--orange .Tag__title:hover {
+    color: $orange-hover;
+}
+
 .Tag--red {
     border: 1px solid $red;
     background: $red;
+}
+
+.Tag--red:hover {
+    background: $red-hover;
 }
 
 .Tag--red .Tag__title {
@@ -35,6 +47,11 @@
 .Tag--white {
     border: 1px solid $white;
     background: rgba(0, 0, 0, 0.05);
+}
+
+.Tag--white:hover {
+    border: 1px solid $white;
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .Tag--white .Tag__title {

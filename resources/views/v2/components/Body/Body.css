@@ -46,6 +46,10 @@
     word-break: break-word;
 }
 
+.Body a:hover {
+    color: $blue-hover;
+}
+
 .Body ul,
 .Body ol {
     padding-left: $padding-md;

@@ -11,6 +11,10 @@
         text-transform: uppercase;
     }
 
+    a .BlockTitle__title:hover {
+        color: $green-hover;
+    }
+
     .BlockTitle__link {
         margin-left: $margin-xs;
     }
@@ -19,6 +23,14 @@
     color: $yellow;
 }
 
+.BlockTitle--yellow a .BlockTitle__title:hover {
+    color: $yellow-hover;
+}
+
 .BlockTitle--cyan .BlockTitle__title {
     color: $cyan;
+}
+
+.BlockTitle--cyan a .BlockTitle__title:hover {
+    color: $cyan-hover;
 }

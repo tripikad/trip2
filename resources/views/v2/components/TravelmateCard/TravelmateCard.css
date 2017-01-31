@@ -14,3 +14,7 @@
     	font: $font-heading-md;
     	line-height: $line-height-md;
     }
+
+    .TravelmateCard__title:hover {
+        color: $gray-dark-hover;
+    }

@@ -7,6 +7,10 @@
     color: $gray-dark;
 }
 
+a .Title__title:hover {
+    color: $gray-dark-hover;
+}
+
 .Title--small .Title__title {
     font: $font-heading-lg;
     font: $font-heading-md ?if $tablet;
@@ -28,16 +32,32 @@
     color: $white;
 }
 
+.Title--white a .Title__title:hover {
+    color: $white-hover;
+}
+
 .Title--red .Title__title {
     color: $red;
+}
+
+.Title--red a .Title__title:hover {
+    color: $red-hover;
 }
 
 .Title--gray .Title__title {
     color: $gray;
 }
 
+.Title--gray a .Title__title:hover {
+    color: $gray-hover;
+}
+
 .Title--blue .Title__title {
     color: $blue;
+}
+
+.Title--blue a .Title__title:hover {
+    color: $blue-hover;
 }
 
 .Title--shadow .Title__title {

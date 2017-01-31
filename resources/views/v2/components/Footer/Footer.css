@@ -26,6 +26,10 @@
         padding: $padding-sm 0 ?if $mobile;
     }
 
+    .Footer__link:hover {
+        color: $white-hover;
+    }
+
     .Footer__social {
         display: flex;
         flex-direction: column ?if $mobile;
@@ -40,6 +44,10 @@
         margin-right: $padding-md;
         padding: $padding-xs;
         line-height: $line-height-xxl;
+    }
+
+    .Footer__socialLink:hover {
+        color: $white-hover;
     }
 
     .Footer__socialIcon {
@@ -59,8 +67,16 @@
     color: $gray;
 }
 
+.Footer--light .Footer__link:hover {
+    color: $gray-hover;
+}
+
 .Footer--light .Footer__socialLink {
     color: $gray;
+}
+
+.Footer--light .Footer__socialLink:hover {
+    color: $gray-hover;
 }
 
 .Footer--light .Footer__licence {
