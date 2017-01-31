@@ -14,6 +14,9 @@ class V2MessageController extends Controller
 
         return layout('1col')
 
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'cyan')
+
             ->with('header', region('UserHeader', $user))
 
             ->with('content', collect()
@@ -50,6 +53,9 @@ class V2MessageController extends Controller
 
         return layout('1col')
 
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'cyan')
+            
             ->with('header', region('UserHeader', $user))
 
             ->with('content', collect()
