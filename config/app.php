@@ -253,7 +253,6 @@ return [
         'Markdown' => Indal\Markdown\Facade::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
 
-
     ],
 
 ];

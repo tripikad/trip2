@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use DB;
-use App\Content;
-use App\Comment;
-use App\User;
-use App\Flag;
 use Charts;
+use App\Flag;
+use App\User;
+use App\Comment;
+use App\Content;
 use Carbon\Carbon;
 
 class V2ExperimentsController extends Controller
 {
     public function chart()
     {
-
         $users1 = User::select(
             DB::raw("DATE_FORMAT(created_at, '%M') date"),
             DB::raw('count(users.id) as aggregate')
@@ -27,7 +26,7 @@ class V2ExperimentsController extends Controller
             ]
         )
         ->orderBy('created_at')
-        ->get(); 
+        ->get();
 
         $users2 = User::select(
             DB::raw("DATE_FORMAT(created_at, '%M') date"),
@@ -41,7 +40,7 @@ class V2ExperimentsController extends Controller
             ]
         )
         ->orderBy('created_at')
-        ->get(); 
+        ->get();
 
         $users3 = User::select(
             DB::raw("DATE_FORMAT(created_at, '%M') date"),
@@ -55,9 +54,7 @@ class V2ExperimentsController extends Controller
             ]
         )
         ->orderBy('created_at')
-        ->get(); 
-
-
+        ->get();
 
         $contents1 = Content::select(
             'contents.created_at',
@@ -72,7 +69,7 @@ class V2ExperimentsController extends Controller
             ]
         )
         ->orderBy('created_at')
-        ->get(); 
+        ->get();
 
         $contents2 = Content::select(
             'contents.created_at',
@@ -87,7 +84,7 @@ class V2ExperimentsController extends Controller
             ]
         )
         ->orderBy('created_at')
-        ->get(); 
+        ->get();
 
         $contents3 = Content::select(
             'contents.created_at',
@@ -102,8 +99,7 @@ class V2ExperimentsController extends Controller
             ]
         )
         ->orderBy('created_at')
-        ->get(); 
-
+        ->get();
 
         $comments1 = Comment::select(
             'comments.created_at',
@@ -117,7 +113,7 @@ class V2ExperimentsController extends Controller
             ]
         )
         ->orderBy('created_at')
-        ->get(); 
+        ->get();
 
         $comments2 = Comment::select(
             'comments.created_at',
@@ -131,7 +127,7 @@ class V2ExperimentsController extends Controller
             ]
         )
         ->orderBy('created_at')
-        ->get(); 
+        ->get();
 
         $comments3 = Comment::select(
             'comments.created_at',
@@ -145,8 +141,7 @@ class V2ExperimentsController extends Controller
             ]
         )
         ->orderBy('created_at')
-        ->get(); 
-
+        ->get();
 
         $flags1 = Flag::select(
             'flags.created_at',
@@ -191,49 +186,44 @@ class V2ExperimentsController extends Controller
         ->get();
 
         $userChart = Charts::multi('line', 'google')
-              ->title("New users per month")
-              ->elementLabel("Registrered users per month")
+              ->title('New users per month')
+              ->elementLabel('Registrered users per month')
               ->dimensions(1800, 600)
               ->colors(['#b5c0c9', '#6794bc', '#08f'])
               ->labels($users1->pluck('date'))
-              ->dataset('2014',$users1->pluck('aggregate'))
-              ->dataset('2015',$users2->pluck('aggregate'))
-              ->dataset('2016',$users3->pluck('aggregate'));
-
+              ->dataset('2014', $users1->pluck('aggregate'))
+              ->dataset('2015', $users2->pluck('aggregate'))
+              ->dataset('2016', $users3->pluck('aggregate'));
 
         $contentChart = Charts::multi('line', 'google')
-              ->title("New content per month")
-              ->elementLabel("User created content per month")
+              ->title('New content per month')
+              ->elementLabel('User created content per month')
               ->dimensions(800, 200)
               ->colors(['#c5b8af', '#d99063', '#c24a00'])
               ->labels($contents1->pluck('date'))
-              ->dataset('2014',$contents1->pluck('aggregate'))
-              ->dataset('2015',$contents2->pluck('aggregate'))
-              ->dataset('2016',$contents3->pluck('aggregate'));
-
+              ->dataset('2014', $contents1->pluck('aggregate'))
+              ->dataset('2015', $contents2->pluck('aggregate'))
+              ->dataset('2016', $contents3->pluck('aggregate'));
 
         $commentsChart = Charts::multi('line', 'google')
-              ->title("New comments per month")
-              ->elementLabel("Comments per month")
+              ->title('New comments per month')
+              ->elementLabel('Comments per month')
               ->colors(['#aea1bf', '#8357bc', '#6600eb'])
               ->dimensions(800, 600)
               ->labels($comments1->pluck('date'))
-              ->dataset('2014',$comments1->pluck('aggregate'))
-              ->dataset('2015',$comments2->pluck('aggregate'))
-              ->dataset('2016',$comments3->pluck('aggregate'));
+              ->dataset('2014', $comments1->pluck('aggregate'))
+              ->dataset('2015', $comments2->pluck('aggregate'))
+              ->dataset('2016', $comments3->pluck('aggregate'));
 
         $flagsChart = Charts::multi('line', 'google')
-              ->title("New flags per month")
-              ->elementLabel("Flags per month")
+              ->title('New flags per month')
+              ->elementLabel('Flags per month')
               ->colors(['#ccc', '#888', '#333'])
               ->dimensions(800, 600)
               ->labels($flags1->pluck('date'))
-              ->dataset('2014',$flags1->pluck('aggregate'))
-              ->dataset('2015',$flags2->pluck('aggregate'))
-              ->dataset('2016',$flags3->pluck('aggregate'));
-
-
-
+              ->dataset('2014', $flags1->pluck('aggregate'))
+              ->dataset('2015', $flags2->pluck('aggregate'))
+              ->dataset('2016', $flags3->pluck('aggregate'));
 
         return layout('1col')
             ->with('content', collect()
