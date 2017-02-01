@@ -298,10 +298,15 @@ class Content extends Model
         ];
     }
 
+    // TODO: In V2 vars it's just ->title();
+
     public function getHeadTitle()
     {
+        if ($this->price) {
+            return $this->title.' '.$this->price.'€';
+        }
+
         return $this->title;
-        //return isset($this->price) ? $this->title.' '.$this->price.'€' : $this->title;
     }
 
     public function getHeadDescription()
