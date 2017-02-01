@@ -70,12 +70,24 @@ class V2UserVars
 
     public function destinationHaveBeen()
     {
-        return $this->user->flags->where('flag_type', 'havebeen');
+        return $this
+            ->user
+            ->flags
+            ->where('flag_type', 'havebeen')
+            ->filter(function($flag) {
+                return $flag->flaggable;
+            });
     }
 
     public function destinationWantsToGo()
     {
-        return $this->user->flags->where('flag_type', 'wantstogo');
+        return $this
+            ->user
+            ->flags
+            ->where('flag_type', 'wantstogo')
+            ->filter(function($flag) {
+                return $flag->flaggable;
+            });
     }
 
     public function destinationCount()
