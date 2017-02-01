@@ -9,6 +9,7 @@ $color = $color ?? '';
 $background = $background ?? '';
 $header = $header ?? '';
 $top = isset($top) ? collect($top) : collect();
+$content_top = $content_top ?? '';
 $content = isset($content) ? collect($content) : collect();
 $bottom = isset($bottom) ? collect($bottom) : collect();
 $footer = $footer ?? '';
@@ -43,7 +44,7 @@ $footer = $footer ?? '';
 
         @if ($top->count())
 
-        <div class="row row-center padding-top-md padding-bottom-md">
+        <div class="row row-center padding-bottom-md">
 
             <div class="col-7">
 
@@ -59,12 +60,16 @@ $footer = $footer ?? '';
 
         @endif
 
-        <div class="row row-center padding-top-lg padding-bottom-md">
+        <div class="row row-center padding-top-lg padding-bottom-lg">
 
             <div class="col-5 background-white">
 
+                {!! $content_top !!}
+
                 @if ($content->count())
 
+                <div class="padding-lg-mobile-sm">
+                    
                 @foreach ($content as $content_item)
                     
                     <div>
@@ -75,6 +80,8 @@ $footer = $footer ?? '';
 
                 @endforeach
 
+                </div>
+
                 @endif
                 
             </div>
@@ -83,17 +90,13 @@ $footer = $footer ?? '';
 
         @if ($bottom->count())
 
-        <div class="row row-center padding-top-md padding-bottom-md">
+        <div class="align-center padding-bottom-lg">
 
-            <div class="col-7">
-
-                @foreach ($bottom as $bottom_item)
-                
-                    {!! $bottom_item !!}
-                        
-                @endforeach
-
-            </div>
+            @foreach ($bottom as $bottom_item)
+            
+                {!! $bottom_item !!}
+                    
+            @endforeach
 
         </div>
 

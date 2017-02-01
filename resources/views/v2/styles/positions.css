@@ -1,3 +1,7 @@
 .position-relative {
     position: relative;
 }
+
+.align-center {
+    text-align: center;
+}

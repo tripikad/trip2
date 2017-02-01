@@ -2,7 +2,7 @@
 
 	$name = $name ?? '';
 	$checked = $checked ?? '';
-	$label = $label ?? '';
+	$title = $title ?? '';
 
 @endphp
 <div class="FormCheckbox {{ $isclasses }}">
@@ -15,6 +15,6 @@
         class="FormCheckbox__checkbox" 
     >
 
-    <label for="{{ $name }}" class="FormCheckbox__label">{{ $label }}</label>
+    <label for="{{ $name }}" class="FormCheckbox__label">{{ $title }}</label>
 
 </div>
