@@ -74,7 +74,7 @@ class V2UserVars
             ->user
             ->flags
             ->where('flag_type', 'havebeen')
-            ->filter(function($flag) {
+            ->filter(function ($flag) {
                 return $flag->flaggable;
             });
     }
@@ -85,7 +85,7 @@ class V2UserVars
             ->user
             ->flags
             ->where('flag_type', 'wantstogo')
-            ->filter(function($flag) {
+            ->filter(function ($flag) {
                 return $flag->flaggable;
             });
     }
