@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 Route::get('/test', 'V2ExperimentsController@test')
     ->name('test');
 
+Route::get('/chart', 'V2ExperimentsController@chart')
+    ->name('chart');
+
 // Frontpage
 
 Route::get('/', 'V2FrontpageController@index')
