@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class V2AuthController extends Controller
 {
-    
     public function loginForm()
     {
         return layout('1colnarrow')
@@ -183,5 +180,4 @@ class V2AuthController extends Controller
 
             ->render();
     }
-
 }
