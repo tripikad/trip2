@@ -6,7 +6,6 @@ use App\Content;
 
 class V2ExperimentsController extends Controller
 {
-
     public function index()
     {
         $user = auth()->user();
