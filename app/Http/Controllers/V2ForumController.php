@@ -250,6 +250,11 @@ class V2ForumController extends Controller
 
         return layout('2col')
 
+            ->with('narrow', true)
+
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->is('gray')
@@ -266,6 +271,7 @@ class V2ForumController extends Controller
                     ->with('title', trans('content.forum.create.title'))
                 )
                 ->push(component('Form')
+                    ->with('id', 'ForumCreateForm')
                     ->with('route', route('forum.store'))
                     ->with('fields', collect()
                         ->push(component('FormRadio')
@@ -302,7 +308,13 @@ class V2ForumController extends Controller
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
                         ->push(component('FormButton')
+                            ->is('hidden')
                             ->with('title', trans('content.create.submit.title'))
+                        )
+                        ->push(component('FormButtonProcess')
+                            ->with('id', 'ForumCreateForm')
+                            ->with('title', trans('content.create.submit.title'))
+                            ->with('processingtitle', trans('content.create.submitting.title'))
                         )
                     )
                 )
@@ -327,7 +339,7 @@ class V2ForumController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
-        */
+            */
     }
 
     public function store()

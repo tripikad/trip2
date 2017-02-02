@@ -55,6 +55,7 @@ return [
 
     'create.title' => 'Lisa',
     'create.submit.title' => 'Lisa',
+    'create.submitting.title' => 'Lisan...',
 
     'edit.title' => 'Muuda',
     'edit.submit.title' => 'Uuenda',

@@ -12,6 +12,7 @@ $content = isset($content) ? collect($content) : collect();
 $sidebar = isset($sidebar) ? collect($sidebar) : collect();
 $bottom = isset($bottom) ? collect($bottom) : collect();
 $footer = $footer ?? '';
+$narrow = $narrow ?? false;
 
 @endphp
 
@@ -61,7 +62,7 @@ $footer = $footer ?? '';
 
             <div class="row-between padding-top-xl-mobile-md padding-left-xl-tablet-none  padding-bottom-xl-mobile-md padding-right-xl-tablet-none">
 
-                <div class="col-9 padding-right-md-mobile-none">
+                <div class="@if ($narrow) col-7 @else col-9 @endif padding-right-md-mobile-none">
 
                     @foreach ($content as $content_item)
                     
@@ -75,7 +76,7 @@ $footer = $footer ?? '';
 
                 </div>
 
-                <div class="col-3 padding-left-md-mobile-none padding-top-none-mobile-md">
+                <div class="@if ($narrow) col-5 @else col-3 @endif padding-left-md-mobile-none padding-top-none-mobile-md">
 
                     @foreach ($sidebar as $sidebar_item)
                     
