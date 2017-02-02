@@ -180,7 +180,6 @@ class V2AuthController extends Controller
 
             ->render();
     }
-<<<<<<< HEAD
 
     public function resetForm()
     {
