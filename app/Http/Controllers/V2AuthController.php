@@ -184,4 +184,45 @@ class V2AuthController extends Controller
             ->render();
     }
 
+    public function resetForm()
+    {
+        return layout('1colnarrow')
+            ->with('color', 'gray')
+            ->with('background', component('BackgroundMap'))
+            ->with('header', region('StaticHeader'))
+
+            ->with('top', collect()
+                ->push(component('Title')
+                    ->is('center')
+                    ->is('large')
+                    ->with('title', 'Vali uus parool')
+                )
+            )
+
+            ->with('content', collect()
+                ->push(component('Form')->with('fields', collect()
+                    ->push(component('FormTextfield')
+                        ->is('large')
+                        ->with('title', 'Sinu e-post')
+                    )
+                    ->push(component('FormTextfield')
+                        ->is('large')
+                        ->with('title', 'Uus parool')
+                    )
+                    ->push(component('FormTextfield')
+                        ->is('large')
+                        ->with('title', 'Korda parooli')
+                    )
+                    ->push(component('FormButton')
+                        ->is('wide')
+                        ->with('title', 'Kinnita')
+                    )
+                ))
+            )
+
+            ->with('footer', region('FooterLight'))
+
+            ->render();
+    }
+
 }

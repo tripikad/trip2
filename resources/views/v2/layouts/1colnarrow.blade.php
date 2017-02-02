@@ -68,7 +68,7 @@ $footer = $footer ?? '';
 
                 @if ($content->count())
 
-                <div class="padding-lg-mobile-sm">
+                <div class="padding-lg-mobile-md">
                     
                 @foreach ($content as $content_item)
                     

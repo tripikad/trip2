@@ -134,9 +134,9 @@
 
 /* Special cases */
 
-.padding-lg-mobile-sm {
+.padding-lg-mobile-md {
   padding: $padding-lg;
-  padding: $padding-sm ?if $mobile;
+  padding: $padding-md ?if $mobile;
 }
 
 .padding-left-xl-tablet-none {
