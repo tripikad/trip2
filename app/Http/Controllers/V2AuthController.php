@@ -221,5 +221,4 @@ class V2AuthController extends Controller
 
             ->render();
     }
-
 }
