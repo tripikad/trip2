@@ -4,6 +4,7 @@
 **/.DS_Store
 /.idea
 /public/images
+/public/build
 npm-debug.log
 *.rdb
 
