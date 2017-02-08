@@ -57,7 +57,7 @@ class V2FlightController extends Controller
             ))
 
             ->with('content', collect()
-                ->push(component('AffMomondo'))
+                ->push(component('AffPzu'))
                 ->merge($flights->slice(0, $sliceSize)->map(function ($flight) {
                     return region('FlightRow', $flight);
                 })
