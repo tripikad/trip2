@@ -17,7 +17,7 @@
                 ])) 
             }}
         ">
-        <link rel="stylesheet" href="/v2/css/main.css">
+        <link rel="stylesheet" href="{{ elixir('v2/css/main.css') }}">
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
     </head>
     <body>
@@ -32,7 +32,7 @@
             {!! component('PhotoFullscreen') !!}
             {!! component('Alert') !!}
         </div>
-        <script src="/v2/js/main.js"></script>
+        <script src="{{ elixir('v2/js/main.js') }}"></script>
         @include('v2.utils.promo')
         @include('v2.utils.facebook')
         @include('v2.utils.analytics')
