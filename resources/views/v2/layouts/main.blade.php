@@ -19,6 +19,7 @@
         ">
         <link rel="stylesheet" href="{{ elixir('v2/css/main.css') }}">
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+        {!! Charts::assets() !!}
     </head>
     <body>
         @include('v2.utils.svg')
@@ -37,5 +38,6 @@
         @include('v2.utils.facebook')
         @include('v2.utils.analytics')
         @stack('scripts')
+
     </body>
 </html>

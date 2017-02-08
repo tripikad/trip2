@@ -182,6 +182,7 @@ return [
 
         Msurguy\Honeypot\HoneypotServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -250,6 +251,7 @@ return [
         'Ekko'      => Laravelista\Ekko\Facades\Ekko::class,
         'Honeypot'  => Msurguy\Honeypot\HoneypotFacade::class,
         'Markdown' => Indal\Markdown\Facade::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
 
     ],
 
