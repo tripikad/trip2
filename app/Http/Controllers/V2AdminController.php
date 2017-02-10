@@ -51,4 +51,22 @@ class V2AdminController extends Controller
 
             ->render();
     }
+
+    public function photoIndex()
+    {
+        return response()->json([
+            [
+                "src" => "http://trip.ee/images/small_square/kanada_7mnt.jpeg",
+                "id" => "[[123]]"
+            ],
+            [
+                "src" => "http://trip.ee/images/small_square/Screen-Shot-2017-02-10-at-00.48.55_6wda.png",
+                "id" => "[[456]]"
+            ],
+            [
+                "src" => "http://trip.ee/images/small_square/Tel_Aviv_bb7w.jpeg",
+                "id" => "[[789]]"
+            ]
+        ]);
+    }
 }

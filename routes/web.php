@@ -291,6 +291,9 @@ Route::get('admin/content', 'V2AdminController@unpublishedIndex')
     ->name('admin.content.index')
     ->middleware('role:admin');
 
+Route::get('admin/photos', 'V2AdminController@photoIndex')
+    ->name('admin.photo.index');
+
 // Utils
 
 Route::get('utils/alert', 'V2UtilsController@alert')

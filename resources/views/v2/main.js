@@ -17,6 +17,7 @@ import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 import NavbarSearch from './components/NavbarSearch/NavbarSearch.vue'
 import PhotoCard from './components/PhotoCard/PhotoCard.vue'
 import PhotoFullscreen from './components/PhotoFullscreen/PhotoFullscreen.vue'
+import PhotoPicker from './components/PhotoPicker/PhotoPicker.vue'
 import PromoBar from './components/PromoBar/PromoBar.vue'
 import UserImage from './components/UserImage/UserImage.vue'
 
@@ -51,6 +52,7 @@ new Vue({
         NavbarSearch,
         PhotoCard,
         PhotoFullscreen,
+        PhotoPicker,
         PromoBar,
         UserImage,
     },
