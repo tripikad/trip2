@@ -55,7 +55,8 @@ class V2AdminController extends Controller
 
     public function photoIndex()
     {
-        $images = Image::orderBy('created_at', 'desc')
+        $images = Image::doesntHave('user')
+            ->orderBy('created_at', 'desc')
             ->take(10)
             ->get()
             ->map(function($image) {
