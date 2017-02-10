@@ -6,6 +6,7 @@ import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
 import Flag from './components/Flag/Flag.vue'
 import FormButtonProcess from './components/FormButtonProcess/FormButtonProcess.vue'
+import FormEditor from './components/FormEditor/FormEditor.vue'
 import FormPhotoPicker from './components/FormPhotoPicker/FormPhotoPicker.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
 import FormSelectMultiple from './components/FormSelectMultiple/FormSelectMultiple.vue'
@@ -42,6 +43,7 @@ new Vue({
         Arc,
         Flag,
         FormButtonProcess,
+        FormEditor,
         FormPhotoPicker,
         FormSelect,
         FormSelectMultiple,
