@@ -32,6 +32,9 @@
             {!! component('PhotoPicker')
                 ->with('route', route('admin.photo.index'))
             !!}
+            {!! component('Editor')
+                ->with('route', route('utils.format'))
+            !!}
             {!! component('PhotoFullscreen') !!}
             {!! component('Alert') !!}
 

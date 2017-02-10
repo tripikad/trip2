@@ -9,10 +9,10 @@ class V2UtilsController extends Controller
 {
     public function format()
     {
-        $body = Request::input('body');
+        $value = Request::input('value');
 
         return Response::json([
-            'body' => format_body($body),
+            'value' => format_body($value),
         ]);
     }
 

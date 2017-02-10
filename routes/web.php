@@ -305,6 +305,9 @@ Route::get('share/{social}', 'V2SocialController@share')
 Route::post('utils/filter', 'V2UtilsController@filter')
     ->name('utils.filter');
 
+Route::post('utils/format', 'V2UtilsController@format')
+    ->name('utils.format');
+
 // Experiments
 
 Route::get('experiments', 'V2ExperimentsController@index')

@@ -5,7 +5,7 @@
         <label :for="name" class="FormTextarea__label">{{ title }}</label>
 
         <textarea
-            disabled
+            readonly
             class="FormTextarea__textarea"
             :id="name"
             :name="name"
@@ -13,7 +13,7 @@
             :cols="cols"
             v-model="currentValue"
             :placeholder="placeholder"
-            @focus="$events.$emit('photopicker.show')"
+            @focus="$events.$emit('editor.show')"
         ></textarea>
 
     </div>
