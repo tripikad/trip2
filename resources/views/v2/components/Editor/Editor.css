@@ -30,7 +30,8 @@
     }
 
     .Editor__toolbar {
-        margin-bottom: $margin-sm;
+        display: flex;
+        margin-bottom: $margin-md;
     }
 
     .Editor__tool {
