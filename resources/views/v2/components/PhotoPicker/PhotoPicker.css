@@ -9,20 +9,27 @@
     padding: $padding-md;
     width: calc($spacer * 15);
     overflow-y: scroll;
-    z-index: 1000;
+    z-index: 10000;
 }
 
     .PhotoPicker__close {
         position: fixed;
-        top: $margin-sm;
+        top: $margin-xs;
         right: $margin-sm;
         color: $white;
+        font-size: 2rem;
     }
 
-    .PhotoPicker__photo {
+    .PhotoPicker__card {
         margin-bottom: $margin-sm;
     }
 
-    .PhotoPicker__photo img {
+    .PhotoPicker__photo {
         width: 100%;
+        margin-bottom: $margin-xxs;
+    }
+
+    .PhotoPicker__title {
+        font: $font-text-sm;
+        color: $white;
     }

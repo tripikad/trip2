@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Image;
 
 class V2AdminController extends Controller
 {
@@ -54,19 +55,18 @@ class V2AdminController extends Controller
 
     public function photoIndex()
     {
-        return response()->json([
-            [
-                "src" => "http://trip.ee/images/small_square/kanada_7mnt.jpeg",
-                "id" => "[[123]]"
-            ],
-            [
-                "src" => "http://trip.ee/images/small_square/Screen-Shot-2017-02-10-at-00.48.55_6wda.png",
-                "id" => "[[456]]"
-            ],
-            [
-                "src" => "http://trip.ee/images/small_square/Tel_Aviv_bb7w.jpeg",
-                "id" => "[[789]]"
-            ]
-        ]);
+        $images = Image::orderBy('created_at', 'desc')
+            ->take(10)
+            ->get()
+            ->map(function($image) {
+                return [
+                    'title' => str_limit($image->filename, 20),
+                    'route' => $image->preset('small_square'),
+                    'id' => "[[$image->id]]"
+                ];
+            });
+
+        return $images;
+
     }
 }

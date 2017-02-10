@@ -5,11 +5,15 @@
         <div class="PhotoPicker__close" @click="show = false">×</div>
 
         <div
-            class="PhotoPicker__photo"
+            class="PhotoPicker__card"
             v-for="photo in photos"
             @click="onClick(photo)"
         >
-            <img :src="photo.src" />
+            <img class="PhotoPicker__photo" :src="photo.route" />
+
+            <div class="PhotoPicker__title">
+                {{ photo.title }}
+            </div>
 
         </div>
 
@@ -24,7 +28,7 @@
             route: {default: ''}
         },
         data: () => ({
-            show: true,
+            show: false,
             photos: []
         }),
         methods: {
