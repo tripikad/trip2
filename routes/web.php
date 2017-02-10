@@ -2,11 +2,6 @@
 
 use Illuminate\Http\Request;
 
-// V2
-
-Route::get('/test', 'V2ExperimentsController@test')
-    ->name('test');
-
 // Frontpage
 
 Route::get('/', 'V2FrontpageController@index')
@@ -311,6 +306,20 @@ Route::post('utils/filter', 'V2UtilsController@filter')
 
 Route::get('experiments', 'V2ExperimentsController@index')
     ->name('experiments.index');
+
+// Experiments: Auth
+
+Route::get('experiments/login', 'V2AuthController@loginForm')
+    ->name('experiments.loginform');
+
+Route::get('experiments/register', 'V2AuthController@registerForm')
+    ->name('experiments.registerform');
+
+Route::get('experiments/password', 'V2AuthController@passwordForm')
+    ->name('experiments.passwordform');
+
+Route::get('experiments/reset', 'V2AuthController@resetForm')
+    ->name('experiments.resetform');
 
 // Experiments: Blog
 

@@ -134,6 +134,11 @@
 
 /* Special cases */
 
+.padding-lg-mobile-md {
+  padding: $padding-lg;
+  padding: $padding-md ?if $mobile;
+}
+
 .padding-left-xl-tablet-none {
   padding-left: $padding-xl;
   padding-left: 0 ?if $tablet;

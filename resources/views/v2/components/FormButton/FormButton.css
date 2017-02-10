@@ -23,3 +23,7 @@
 .FormButton--hidden {
     display: none;
 }
+
+.FormButton--wide {
+    width: 100%;
+}

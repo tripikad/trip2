@@ -2,11 +2,14 @@
 
 .FormRadio {
     display: flex;
+    display: block ?if $tablet;
 }
 
     .FormRadio__option {
         display: flex;
         margin-right: $margin-sm;
+        margin-right: 0 ?if $tablet;
+        margin-bottom: $margin-sm ?if $tablet;
     }
 
     .FormRadio__option:last-child {
