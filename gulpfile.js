@@ -115,4 +115,7 @@ elixir(function(mix) {
     ],
         './public/v2/svg/main.svg'
     )
+    mix.version([
+        'v2/css/main.css', 'v2/js/main.js'
+    ])
 })

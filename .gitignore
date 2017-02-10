@@ -10,4 +10,4 @@ npm-debug.log
 public/sitemap.xml
 public/sitemap*
 public/vendor/sitemap
-
+public/build

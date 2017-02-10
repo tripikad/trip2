@@ -171,10 +171,6 @@ class V2ForumController extends Controller
             ? '#comment-'.$forum->comments->last()->id
             : '';
 
-        $anchor = $forum->comments->count()
-            ? '#comment-'.$forum->comments->last()->id
-            : '';
-
         return layout('2col')
 
             ->with('title', trans('content.forum.index.title'))
@@ -221,6 +217,7 @@ class V2ForumController extends Controller
                     return region('Comment', $comment, $firstUnreadCommentId, 'inset');
                 }))
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum, 'inset'))
+                ->push(component('Promo')->with('promo', 'body'))
             )
 
             ->with('sidebar', collect()
