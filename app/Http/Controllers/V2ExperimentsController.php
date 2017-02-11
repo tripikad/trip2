@@ -16,7 +16,7 @@ class V2ExperimentsController extends Controller
 
                 ->push(component('FormEditor')
                     ->with('title', 'Foto ID')
-                    ->with('value', 'Hmm')
+                    ->with('value', 'Starting...')
                 )
 
                 ->push(component('FormPhotoPicker')

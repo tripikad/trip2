@@ -41,7 +41,6 @@
 
         props: {
             isclasses: { default: '' },
-            value: { default: 'Hello world' },
             route: { default: ''}
         },
 
@@ -49,8 +48,8 @@
             show: true,
             preview: 'from Vue',
             editor: null,
-            currentValue: '',
-            preview: ''
+            value: '',
+            preview: '',
         }),
         methods: {
             insertLink() {
@@ -112,28 +111,40 @@
                 })
                 this.editor.focus()
                 this.$events.$emit('photopicker.hide')
+            },
+            updatePreview() {
+                this.$http.post(this.route, { value: this.value })
+                    .then(res => {
+                        this.preview = res.body.value
+                    })
             }
         },
         mounted() {
-            this.currentValue = this.value
+
             this.editor = CodeMirror(this.$refs.source, {
-                value: this.currentValue,
                 mode: 'gfm',
                 theme: 'neo',
                 lineWrapping: true,
                 viewportMargin: Infinity
             })
+
             this.editor.on('change', editor => {
-                this.currentValue = editor.getValue()
-                this.$events.$emit('editor.update', this.currentValue)
-                this.$http.post(this.route, { value: this.currentValue })
-                    .then(res => {
-                        this.preview = res.body.value
-                    })
+                console.log('changed')
+                this.value = editor.getValue()
+                this.$events.$emit('editor.update', this.value)
+                this.updatePreview()
             })
-            this.$events.$on('editor.show', () => {
+
+            this.$events.$on('editor.show', value => {
                 this.show = true
+                this.value = value
+                this.editor.setValue(this.value)
+                setTimeout(() => this.editor.refresh(), 1)
+                this.updatePreview()
             })
+
+            this.show = false
+        
             this.$events.$on('photopicker.insert', id => {
                 this.insertImage(id)
             })

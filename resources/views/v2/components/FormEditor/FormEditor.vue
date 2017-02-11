@@ -13,7 +13,7 @@
             :cols="cols"
             v-model="currentValue"
             :placeholder="placeholder"
-            @focus="$events.$emit('editor.show')"
+            @focus="$events.$emit('editor.show', currentValue)"
         ></textarea>
 
     </div>
