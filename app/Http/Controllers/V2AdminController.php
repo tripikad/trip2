@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Content;
 use App\Image;
+use App\Content;
 
 class V2AdminController extends Controller
 {
@@ -59,15 +59,14 @@ class V2AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(10)
             ->get()
-            ->map(function($image) {
+            ->map(function ($image) {
                 return [
                     'title' => str_limit($image->filename, 20),
                     'route' => $image->preset('small_square'),
-                    'id' => "[[$image->id]]"
+                    'id' => "[[$image->id]]",
                 ];
             });
 
         return $images;
-
     }
 }
