@@ -45,12 +45,13 @@
         },
 
         data: () => ({
-            show: true,
+            show: false,
             preview: 'from Vue',
             editor: null,
             value: '',
             preview: '',
         }),
+        
         methods: {
             insertLink() {
                 var link = window.prompt('Link', 'http://')
@@ -143,7 +144,7 @@
                 this.updatePreview()
             })
 
-            this.show = false
+            //this.show = false
         
             this.$events.$on('photopicker.insert', id => {
                 this.insertImage(id)
