@@ -13,6 +13,7 @@
                 <div class="Editor__tool" @click="insertUl">List</div>
                 <div class="Editor__tool" @click="insertH3">H3</div>
                 <div class="Editor__tool" @click="insertH4">H4</div>
+                <div class="Editor__tool" @click="cleanMarkup">Clean</div>
                 <div class="Editor__tool" @click="openPicker">Image</div>
             </div>
         
@@ -37,6 +38,9 @@
     import CodeMirror from 'codemirror/lib/codemirror.js'
     import gfm from 'codemirror/mode/gfm/gfm.js'
 
+    import unescape from 'lodash.unescape'
+    import tomarkdown from 'to-markdown'
+
     export default {
 
         props: {
@@ -46,12 +50,11 @@
 
         data: () => ({
             show: false,
-            preview: 'from Vue',
             editor: null,
             value: '',
             preview: '',
         }),
-        
+
         methods: {
             insertLink() {
                 var link = window.prompt('Link', 'http://')
@@ -99,6 +102,18 @@
                 })
                 this.editor.focus()
             },
+            cleanMarkup() {
+                var value = this.editor.getValue()
+                value = value.replace(/&nbsp;/g, ' ')
+                value = unescape(value)
+                value = value.replace(/\n\n/g, '</p><p>')
+                value = value.replace(/<br \/>/g, '</p><p>')
+                value = tomarkdown(value)
+                value = value.replace(/\n\n\*\*/g, '\n\n### ')
+                value = value.replace(/\*\*\n\n/g, '\n\n')
+                this.editor.setValue(value)
+                this.editor.focus()
+            },
             openPicker() {
                 this.$events.$emit('photopicker.show')
             },
@@ -130,7 +145,6 @@
             })
 
             this.editor.on('change', editor => {
-                console.log('changed')
                 this.value = editor.getValue()
                 this.$events.$emit('editor.update', this.value)
                 this.updatePreview()
@@ -143,8 +157,6 @@
                 setTimeout(() => this.editor.refresh(), 1)
                 this.updatePreview()
             })
-
-            //this.show = false
         
             this.$events.$on('photopicker.insert', id => {
                 this.insertImage(id)
