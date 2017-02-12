@@ -11,7 +11,7 @@
             type="text"
             v-model="currentValue"
             :placeholder="placeholder"
-            @focus="$events.$emit('photopicker.show')"
+            @focus="$events.$emit('photopicker.show', name)"
         >
 
     </div>
@@ -36,8 +36,10 @@
 
         mounted() {
             this.currentValue = this.value
-            this.$events.$on('photopicker.insert', id => {
-                this.currentValue = id
+            this.$events.$on('photopicker.insert', payload => {
+                if (payload.target === this.name) {
+                    this.currentValue = payload.id
+                }
                 this.$events.$emit('photopicker.hide')
             })
         }

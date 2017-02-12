@@ -29,19 +29,23 @@
         },
         data: () => ({
             show: false,
-            photos: []
+            photos: [],
+            target: ''
         }),
         methods: {
            onClick(image) {
-                this.$events.$emit('photopicker.insert', image.id)
+                this.$events.$emit('photopicker.insert', {
+                    id: image.id, target: this.target
+                })
            } 
         },
         mounted() {
             this.$http.get(this.route).then(res => {
                 this.photos = res.body
             })
-            this.$events.$on('photopicker.show', () => {
+            this.$events.$on('photopicker.show', (target) => {
                 this.show = true
+                this.target = target
 
             })
             this.$events.$on('photopicker.hide', () => {

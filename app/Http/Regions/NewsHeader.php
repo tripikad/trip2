@@ -49,6 +49,11 @@ class NewsHeader
                         ->with('title', trans('content.action.edit.title'))
                         ->with('route', route('news.edit', [$new]))
                     )
+                    ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
+                        ->is('white')
+                        ->with('title', trans('content.action.edit.title').'2')
+                        ->with('route', route('news.edit2', [$new]))
+                    )
                     ->pushWhen($user && $user->hasRole('admin'), component('Form')
                             ->with('route', route('content.status', [
                                 $new->type,

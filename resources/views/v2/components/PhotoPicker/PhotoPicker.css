@@ -9,7 +9,7 @@
     padding: $padding-md;
     width: calc($spacer * 15);
     overflow-y: scroll;
-    z-index: 10000;
+    z-index: 10001;
 }
 
     .PhotoPicker__close {

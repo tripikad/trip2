@@ -53,6 +53,7 @@
             editor: null,
             value: '',
             preview: '',
+            target: 'editor'
         }),
 
         methods: {
@@ -115,7 +116,7 @@
                 this.editor.focus()
             },
             openPicker() {
-                this.$events.$emit('photopicker.show')
+                this.$events.$emit('photopicker.show', this.target)
             },
             insertImage(id) {
                 var doc = this.editor.getDoc()
@@ -126,7 +127,6 @@
                     ch: 0
                 })
                 this.editor.focus()
-                this.$events.$emit('photopicker.hide')
             },
             updatePreview() {
                 this.$http.post(this.route, { value: this.value })
@@ -158,8 +158,11 @@
                 this.updatePreview()
             })
         
-            this.$events.$on('photopicker.insert', id => {
-                this.insertImage(id)
+            this.$events.$on('photopicker.insert', payload => {
+                if (payload.target === this.target) {
+                    this.insertImage(payload.id)
+                }
+                this.$events.$emit('photopicker.hide')
             })
         }
 
