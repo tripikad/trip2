@@ -194,8 +194,8 @@ class V2NewsController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
-
     }
+
     public function store()
     {
         return App::make('App\Http\Controllers\ContentController')
