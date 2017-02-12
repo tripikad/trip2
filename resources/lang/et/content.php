@@ -82,6 +82,8 @@ return [
 
     'news.create.title' => 'Lisa uus uudis',
 
+    'news.edit.title' => 'Muuda uudist',
+
     'news.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Toimetuse pildid all',
     'news.edit.field.image_id.help' => '[[123]]',
 
