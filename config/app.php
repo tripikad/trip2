@@ -183,6 +183,9 @@ return [
         Msurguy\Honeypot\HoneypotServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
 
+        Laravel\Scout\ScoutServiceProvider::class,
+        TeamTNT\Scout\TNTSearchScoutServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

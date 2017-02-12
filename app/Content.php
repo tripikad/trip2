@@ -6,10 +6,11 @@ use Auth;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
+use Laravel\Scout\Searchable;
 
 class Content extends Model
 {
-    use Sluggable, SlugHelper;
+    use Sluggable, SlugHelper, Searchable;
 
     // Setup
 
@@ -18,6 +19,13 @@ class Content extends Model
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
     protected $appends = ['body_filtered', 'image_id'];
+
+    //scout
+
+    public function SearchableAs()
+    {
+        return 'contents_index';
+    }
 
     // Relations
 

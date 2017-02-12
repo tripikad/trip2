@@ -296,4 +296,16 @@ class SearchController extends Controller
                 'footer_modifier' => $footer_modifier,
             ]);
     }
+
+    //scout search trial
+
+    public function scoutsearch(Request $request)
+    {
+        //dd(config('scout.tntsearch'));
+        $searchKey = $request->input('search');
+
+        $search = Content::search($searchKey)->get();
+
+        dd($search);
+    }
 }

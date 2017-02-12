@@ -13,6 +13,11 @@ Route::post('content/{type}/{id}/status/{status}', 'ContentController@status')
     ->name('content.status')
     ->middleware('role:admin');
 
+//scout try
+
+Route::get('scout/search', 'SearchController@scoutsearch')
+    ->name('scout.search');
+
 // News
 
 Route::get('uudised', 'V2NewsController@index')
