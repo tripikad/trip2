@@ -14,15 +14,6 @@ class V2ExperimentsController extends Controller
 
             ->with('content', collect()
 
-                ->push(component('FormEditor')
-                    ->with('title', 'Foto ID')
-                    ->with('value', 'Starting...')
-                )
-
-                ->push(component('FormPhotoPicker')
-                    ->with('title', 'Foto ID')
-                )
-
                 ->push(component('Title')
                     ->with('title', 'Auth forms')
                 )
