@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Content;
 use App\Image;
+use App\Content;
 
 class V2AdminController extends Controller
 {
@@ -91,7 +91,7 @@ class V2AdminController extends Controller
                 )
                 ->merge($images->chunk(6)->map(function ($chunk) {
                     return component('BlockHorizontal')
-                        ->with('content', $chunk->map(function($image) {
+                        ->with('content', $chunk->map(function ($image) {
                             return collect()
                                 ->push(component('PhotoCard')
                                     ->with('small', $image->preset('xsmall_square'))
@@ -111,6 +111,5 @@ class V2AdminController extends Controller
             ->with('footer', region('FooterLight'))
 
             ->render();
-
     }
 }
