@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Image;
 
 class V2AdminController extends Controller
 {
@@ -50,5 +51,44 @@ class V2AdminController extends Controller
             ->with('footer', region('FooterLight'))
 
             ->render();
+    }
+
+    public function imageIndex()
+    {
+        $images = Image::doesntHave('user')
+            ->latest()
+            ->simplePaginate(36);
+
+        return layout('1col')
+
+            ->with('header', region('StaticHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans('admin.image.index.title'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->merge($images->chunk(6)->map(function ($chunk) {
+                    return component('BlockHorizontal')
+                        ->with('content', $chunk->map(function($image) {
+                            return collect()
+                                ->push(component('PhotoCard')
+                                    ->with('small', $image->preset('xsmall_square'))
+                                )
+                                ->push(component('FormTextfield')
+                                    ->with('value', "[[$image->id]]")
+                                    ->with('size', 8)
+                                )
+                                ->render()
+                                ->implode('');
+                        }));
+                }))
+                ->push(region('Paginator', $images))
+            )
+
+            ->with('footer', region('FooterLight'))
+
+            ->render();
+
     }
 }
