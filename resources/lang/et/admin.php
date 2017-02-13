@@ -6,7 +6,9 @@ return [
 
     'image.index.title' => 'Toimetuse pildid',
 
-    'image.create.submit.title' => 'Lisa pilt',
+    'image.create.file.title' => 'Vali pilt mida lisada',
+
+    'image.create.submit.title' => 'Lisa',
 
     'image.store.info' => 'Pilt :filename on lisatud',
 

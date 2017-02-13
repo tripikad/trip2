@@ -55,25 +55,47 @@ class V2AdminController extends Controller
 
     public function imageIndex()
     {
+        $user = auth()->user();
         $images = Image::doesntHave('user')
             ->latest()
             ->simplePaginate(36);
 
         return layout('1col')
 
-            ->with('header', region('StaticHeader', collect()
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
+            ->with('header', region('ForumHeader', collect()
+                ->pushWhen($user && $user->hasRole('admin'), component('Link')
+                    ->with('title', trans('menu.auth.admin'))
+                    ->with('route', route('internal.index'))
+                )
                 ->push(component('Title')
                     ->with('title', trans('admin.image.index.title'))
                 )
             ))
 
             ->with('content', collect()
+                ->push(component('FormHorizontal')
+                    ->with('files', true)
+                    ->with('route', route('admin.image.store'))
+                    ->with('fields', collect()
+                        ->push(component('FormFile')
+                            ->with('title', trans('admin.image.create.file.title'))
+                            ->with('name', 'image')
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('admin.image.create.submit.title'))
+                        )
+                    )
+                )
                 ->merge($images->chunk(6)->map(function ($chunk) {
                     return component('BlockHorizontal')
                         ->with('content', $chunk->map(function($image) {
                             return collect()
                                 ->push(component('PhotoCard')
                                     ->with('small', $image->preset('xsmall_square'))
+                                    ->with('large', $image->preset('large'))
                                 )
                                 ->push(component('FormTextfield')
                                     ->with('value', "[[$image->id]]")

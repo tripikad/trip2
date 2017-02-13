@@ -291,6 +291,10 @@ Route::get('admin/content', 'V2AdminController@unpublishedIndex')
     ->name('admin.content.index')
     ->middleware('role:admin');
 
+Route::get('admin/image', 'V2AdminController@imageIndex')
+    ->name('admin.image.index')
+    ->middleware('role:admin');
+
 // Utils
 
 Route::get('utils/alert', 'V2UtilsController@alert')
@@ -407,10 +411,6 @@ Route::post('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' =
 Route::put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
 
 // Admin
-
-Route::get('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageIndex', 'as' => 'admin.image.index']);
-
-Route::get('admin/image2', ['middleware' => 'role:admin', 'uses' => 'V2AdminController@imageIndex', 'as' => 'admin.image.index2']);
 
 Route::post('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageStore', 'as' => 'admin.image.store']);
 
