@@ -18,23 +18,34 @@
     export default {
 
         props: {
+            isclasses: { default: ''},
+            route: { default: ''},
+            name: { default: ''},
+            title: { default: ''},
+            reload: { default: ''}
         },
 
         mounted() {
 
             new Dropzone(this.$refs.dropzone, {
-                url: '/admin/image',
-                paramName: 'image',
-                maxFileSize: 15,
+                url: this.route,
+                paramName: this.name,
+                maxFileSize: this.$globalProps.maxfilesize,
                 acceptedFiles: 'image/*',
                 maxFiles: 1,
-                headers: {'X-CSRF-TOKEN': globalProps.token},
+                headers: {'X-CSRF-TOKEN': this.$globalProps.token},
+                dictDefaultMessage: this.title,
                 success: (file, res) => {
                     this.$events.$emit('formfiledrop.created')
-                    this.$events.$emit('alert', res.image + ' uploaded')
+                    if (this.reload === 'true') {
+                        //window.location.reload(true)
+                    }
                 }
-
+            }).on('complete', function(file) {
+                // Need to use longer callback syntax to access Dropzone this
+                this.removeFile(file)
             })
+
         }
 
     }

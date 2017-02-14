@@ -285,6 +285,12 @@ Route::get('sihtkoht/{id}', 'V2DestinationController@show')
 Route::get('sihtkoht/{slug}', 'V2DestinationController@showSlug')
     ->name('destination.showSlug');
 
+// Image
+
+Route::post('image', 'V2ImageController@store')
+    ->name('image.store')
+    ->middleware('role:regular');
+
 // Admin
 
 Route::get('admin/content', 'V2AdminController@unpublishedIndex')
@@ -409,10 +415,6 @@ Route::post('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' =
 // comment.edit is in V2
 
 Route::put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
-
-// Admin
-
-Route::post('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageStore', 'as' => 'admin.image.store']);
 
 // Atom feeds
 

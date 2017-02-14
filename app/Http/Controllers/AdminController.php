@@ -37,7 +37,7 @@ class AdminController extends Controller
         ]);
     }
     */
-    public function imageStore(Request $request)
+    /*public function imageStore(Request $request)
     {
         $this->validate($request, [
             'image' => 'required|image',
@@ -53,7 +53,7 @@ class AdminController extends Controller
                     'filename' => $orig_filename,
                 ]));
         }
-    }
+    }*/
     /*
     public function contentIndex()
     {
