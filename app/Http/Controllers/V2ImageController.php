@@ -10,7 +10,8 @@ class V2ImageController extends Controller
 
     public function store(Request $request)
     {
-        // MB to KB
+        // Converting MB to KB
+
         $maxfilesize = config('site.maxfilesize') * 1024; 
         
         $this->validate($request, [
@@ -20,7 +21,11 @@ class V2ImageController extends Controller
         $filename = Image::storeImageFile($request->file('image'));
         $image = Image::create(['filename' => $filename]);
 
-        return $image;
+        if ($request->ajax()) {
+            return $image;
+        }
+
+        return back();
     }
 
 }

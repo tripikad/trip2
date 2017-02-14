@@ -25,3 +25,7 @@
         text-align: right;
         top: 0;
     }
+
+.FormFile--hidden {
+    display: none;
+}
