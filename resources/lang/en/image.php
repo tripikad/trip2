@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'drop.title' => 'Drop an image here'
+    'drop.title' => 'Drop an image here',
 ];
