@@ -18,7 +18,7 @@ class Image extends Model
     {
         return $this->morphedByMany('App\User', 'imageable');
     }
-    
+
     public function preset($preset = 'small')
     {
         return config('imagepresets.presets.'.$preset.'.displaypath').$this->filename;
