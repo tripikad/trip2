@@ -53,20 +53,71 @@ class V2AdminController extends Controller
             ->render();
     }
 
-    public function photoIndex()
+    public function imageIndex()
     {
+        $user = auth()->user();
         $images = Image::doesntHave('user')
-            ->orderBy('created_at', 'desc')
-            ->take(10)
-            ->get()
-            ->map(function ($image) {
-                return [
-                    'title' => str_limit($image->filename, 20),
-                    'route' => $image->preset('small_square'),
-                    'id' => "[[$image->id]]",
-                ];
-            });
+            ->latest()
+            ->simplePaginate(36);
 
-        return $images;
+        return layout('1col')
+
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
+            ->with('header', region('ForumHeader', collect()
+                ->pushWhen($user && $user->hasRole('admin'), component('Link')
+                    ->with('title', trans('menu.auth.admin'))
+                    ->with('route', route('internal.index'))
+                )
+                ->push(component('Title')
+                    ->with('title', trans('admin.image.index.title'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('FormHorizontal')
+                    ->with('files', true)
+                    ->with('route', route('image.store'))
+                    ->with('fields', collect()
+                        ->push(component('FormFile')
+                            ->is('hidden')
+                            ->with('title', trans('admin.image.create.file.title'))
+                            ->with('name', 'image')
+                        )
+                        ->push(component('FormButton')
+                            ->is('hidden')
+                            ->with('title', trans('admin.image.create.submit.title'))
+                        )
+                    )
+                )
+                ->push(component('FormFileDrop')
+                    ->with('route', route('image.store'))
+                    ->with('title', trans('image.drop.title'))
+                    ->with('name', 'image')
+                    ->with('reload', true)
+                )
+                ->merge($images->chunk(6)->map(function ($chunk) {
+                    return component('BlockHorizontal')
+                        ->with('content', $chunk->map(function ($image) {
+                            return collect()
+                                ->push(component('PhotoCard')
+                                    ->with('small', $image->preset('xsmall_square'))
+                                    ->with('large', $image->preset('large'))
+                                )
+                                ->push(component('FormTextfield')
+                                    ->with('value', "[[$image->id]]")
+                                    ->with('size', 8)
+                                )
+                                ->render()
+                                ->implode('');
+                        }));
+                }))
+                ->push(region('Paginator', $images))
+            )
+
+            ->with('footer', region('FooterLight'))
+
+            ->render();
     }
 }
