@@ -92,9 +92,6 @@ class V2AdminController extends Controller
                     )
                 )
                 ->push(component('FormFileDrop')
-                    ->with('route', route('image.store'))
-                    ->with('title', trans('image.drop.title'))
-                    ->with('name', 'image')
                     ->with('reload', true)
                 )
                 ->merge($images->chunk(6)->map(function ($chunk) {

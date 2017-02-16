@@ -46,12 +46,9 @@ new Vue({
         Editor,
         Flag,
         FormButtonProcess,
-<<<<<<< HEAD
         FormEditor,
         FormPhotoPicker,
-=======
         FormFileDrop,
->>>>>>> kika-upload
         FormSelect,
         FormSelectMultiple,
         FrontpageDestinationSearch,

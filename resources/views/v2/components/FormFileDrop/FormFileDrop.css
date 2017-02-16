@@ -1,8 +1,12 @@
 @import "variables";
 @import "dropzone/dist/dropzone.css";
 
+.FormFileDrop {
+    background: transparent;
+}
+
 .FormFileDrop:hover {
-    background: $gray-lighter;
+    background: rgba(0, 0, 0, 0.25);
 }
 
 .dropzone {
@@ -11,7 +15,11 @@
     border-radius: $border-radius-md;
 }
 
-.dz-message span {
+.dropzone .dz-message {
+    margin: $margin-md 0;
+}
+
+.dropzone .dz-message span {
     font: $font-text-md;
     color: $blue;
     line-height: $line-height-lg;

@@ -305,6 +305,10 @@ Route::get('admin/image', 'V2AdminController@imageIndex')
     ->name('admin.image.index')
     ->middleware('role:admin');
 
+Route::get('image/index', 'V2ImageController@index')
+    ->name('image.index')
+    ->middleware('role:admin');
+
 // Utils
 
 Route::get('utils/alert', 'V2UtilsController@alert')

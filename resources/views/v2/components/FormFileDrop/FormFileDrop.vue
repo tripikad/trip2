@@ -19,26 +19,24 @@
 
         props: {
             isclasses: { default: ''},
-            route: { default: ''},
-            name: { default: ''},
-            title: { default: ''},
+            name: { default: 'image'},
             reload: { default: ''}
         },
 
         mounted() {
 
             new Dropzone(this.$refs.dropzone, {
-                url: this.route,
+                url: this.$globalProps.formfiledroproute,
                 paramName: this.name,
                 maxFileSize: this.$globalProps.maxfilesize,
                 acceptedFiles: 'image/*',
                 maxFiles: 1,
                 headers: {'X-CSRF-TOKEN': this.$globalProps.token},
-                dictDefaultMessage: this.title,
+                dictDefaultMessage: this.$globalProps.formfiledroptitle,
                 success: (file, res) => {
                     this.$events.$emit('formfiledrop.created')
                     if (this.reload === 'true') {
-                        //window.location.reload(true)
+                        window.location.reload(true)
                     }
                 }
             }).on('complete', function(file) {

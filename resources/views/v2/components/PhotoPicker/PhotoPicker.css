@@ -21,7 +21,7 @@
     }
 
     .PhotoPicker__card {
-        margin-bottom: $margin-sm;
+        margin-top: $margin-sm;
     }
 
     .PhotoPicker__photo {

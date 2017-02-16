@@ -13,7 +13,9 @@
                     'info' => session('info'),
                     'allowedTags' => config('site.allowedtags'),
                     'maxfilesize' => config('site.maxfilesize'),
-                    'promo' => config('promo')
+                    'promo' => config('promo'),
+                    'formfiledroproute' => route('image.store'),
+                    'formfiledroptitle' => trans('image.drop.title'),
                 ])) 
             }}
         ">
@@ -30,7 +32,7 @@
             @yield('content')
             @yield('footer')
             {!! component('PhotoPicker')
-                ->with('route', route('admin.photo.index'))
+                ->with('route', route('image.index'))
             !!}
             {!! component('Editor')
                 ->with('route', route('utils.format'))
