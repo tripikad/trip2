@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'drop.title' => 'Lohista pilt siia'
+    'drop.title' => 'Lohista pilt siia',
 ];
