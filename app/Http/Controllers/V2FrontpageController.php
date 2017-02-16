@@ -28,13 +28,6 @@ class V2FrontpageController extends Controller
             ->with('head_description', trans('site.description.main'))
             ->with('head_image', Image::getSocial())
 
-            ->with('promobar', component('PromoBar')
-                ->with('title', 'Osale Trip.ee kampaanias ja võida 2 lennupiletit Maltale')
-                ->with('route_title', 'Vaata lähemalt siit')
-                ->with('route', 'tasuta-lennupiletid-maltale')
-                ->render()
-            )
-
             ->with('header', region('FrontpageHeader', $destinations))
 
             ->with('top', collect()
