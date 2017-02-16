@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class V2ImageController extends Controller
 {
-
     public function index()
     {
         $user = auth()->user();
@@ -30,8 +29,8 @@ class V2ImageController extends Controller
     {
         // Converting MB to KB
 
-        $maxfilesize = config('site.maxfilesize') * 1024; 
-        
+        $maxfilesize = config('site.maxfilesize') * 1024;
+
         $this->validate($request, [
             'image' => "required|image|max:$maxfilesize",
         ]);
@@ -45,5 +44,4 @@ class V2ImageController extends Controller
 
         return back();
     }
-
 }
