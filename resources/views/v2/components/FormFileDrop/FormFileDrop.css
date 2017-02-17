@@ -10,14 +10,14 @@
 }
 
 .dropzone {
-    height: calc($spacer * 15);
+    height: calc($spacer * 12);
     border: $border-dotted-gray-md;
     border-radius: $border-radius-md;
     padding: 0 !important;
 }
 
 .dropzone .dz-message {
-    margin: $margin-xl $margin-md;
+    margin: 0;
 }
 
 .dropzone .dz-message span {
