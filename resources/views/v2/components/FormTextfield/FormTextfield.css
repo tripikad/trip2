@@ -22,5 +22,5 @@
 
 .FormTextfield--large .FormTextfield__input {
     font: $font-heading-md;
-    padding: $padding-xs $padding-sm;
+    padding: $padding-sm;
 }

@@ -7,14 +7,14 @@
         <div class="Editor__wrapper">
         
             <div class="Editor__toolbar">
-                <div class="Editor__tool" @click="insertLink">Link</div>
-                <div class="Editor__tool" @click="insertBold">Bold</div>
-                <div class="Editor__tool" @click="insertItalic">Italic</div>
+                <div class="Editor__tool" @click="insertLink">A</div>
+                <div class="Editor__tool" @click="insertBold">B</div>
+                <div class="Editor__tool" @click="insertItalic">I</div>
                 <div class="Editor__tool" @click="insertUl">List</div>
                 <div class="Editor__tool" @click="insertH3">H3</div>
                 <div class="Editor__tool" @click="insertH4">H4</div>
-                <div class="Editor__tool" @click="cleanMarkup">Clean</div>
-                <div class="Editor__tool" @click="openPicker">Image</div>
+                <div class="Editor__tool" @click="cleanMarkup">Cleanup</div>
+                <div class="Editor__tool" @click="openPicker">Img</div>
             </div>
         
             <div class="Editor__content">

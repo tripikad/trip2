@@ -40,8 +40,7 @@
                     }
                 }
             }).on('complete', function(file) {
-                // Need to use longer callback syntax to access Dropzone this
-                //this.removeFile(file)
+                this.removeFile(file)
             })
 
         }

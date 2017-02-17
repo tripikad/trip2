@@ -39,21 +39,31 @@
         font: $font-code-sm;
         color: $gray;
         margin-right: $margin-sm;
+        cursor: pointer;
+    }
+
+    .Editor__tool:hover {
+        color: $gray-dark;
     }
 
     .Editor__content {
         display: flex;
+        display: block ?if $mobile;
     }
 
     .Editor__source {
         width: 50%;
+        width: 100% ?if $mobile;
         margin-right: $margin-sm;
     }
 
     .Editor__target {
         width: 50%;
+        width: 100% ?if $mobile;
         margin-top: $margin-xxs;
+        margin-top: $margin-lg ?if $mobile;
         margin-left: $margin-sm;
+        margin-left: 0 ?if $mobile;
     }
 
     .CodeMirror {
@@ -71,5 +81,15 @@
 
     .cm-s-neo.CodeMirror {
         background-color: transparent !important;
+    }
+
+    .cm-link {
+        text-decoration: none;
+        color: $gray;
+    }
+
+    .cm-string,
+    .cm-url {
+        color: $gray;
     }
 

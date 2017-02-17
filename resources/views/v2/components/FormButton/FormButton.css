@@ -12,7 +12,7 @@
     display: block ?if $mobile;
     font: $font-heading-sm;
     justify-content: center;
-    padding: $padding-sm $padding-lg;
+    padding: calc($spacer * 1.5) $padding-lg;
     width: 100% ?if $mobile;
 }
 
