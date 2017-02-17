@@ -10,17 +10,22 @@
 }
 
 .dropzone {
-    min-height: inherit;
-    border: $border-gray-md;
+    height: calc($spacer * 15);
+    border: $border-dotted-gray-md;
     border-radius: $border-radius-md;
+    padding: 0 !important;
 }
 
 .dropzone .dz-message {
-    margin: $margin-md 0;
+    margin: $margin-xl $margin-md;
 }
 
 .dropzone .dz-message span {
     font: $font-text-md;
     color: $blue;
     line-height: $line-height-lg;
+}
+
+.dropzone .dz-preview.dz-image-preview {
+    background: transparent !important;
 }

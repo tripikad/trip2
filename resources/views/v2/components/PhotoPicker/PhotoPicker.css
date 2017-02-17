@@ -7,7 +7,7 @@
     bottom: 0;
     right: 0;
     padding: $padding-md;
-    width: calc($spacer * 15);
+    width: calc($spacer * 17);
     overflow-y: scroll;
     z-index: 10001;
 }
