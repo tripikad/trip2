@@ -1,6 +1,6 @@
 @import "variables";
 
-.PhotoPicker {
+.ImagePicker {
     position: fixed;
     background: rgba(0, 0, 0, 0.8);
     top: 0;
@@ -12,7 +12,7 @@
     z-index: 10001;
 }
 
-    .PhotoPicker__close {
+    .ImagePicker__close {
         position: fixed;
         top: $margin-xs;
         right: $margin-sm;
@@ -20,16 +20,16 @@
         font-size: 2rem;
     }
 
-    .PhotoPicker__card {
+    .ImagePicker__card {
         margin-top: $margin-sm;
     }
 
-    .PhotoPicker__photo {
+    .ImagePicker__image {
         width: 100%;
         margin-bottom: $margin-xxs;
     }
 
-    .PhotoPicker__title {
+    .ImagePicker__title {
         font: $font-text-sm;
         color: $white;
     }

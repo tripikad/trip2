@@ -116,7 +116,7 @@
                 this.editor.focus()
             },
             openPicker() {
-                this.$events.$emit('photopicker.show', this.target)
+                this.$events.$emit('imagepicker.show', this.target)
             },
             insertImage(id) {
                 var doc = this.editor.getDoc()
@@ -158,11 +158,11 @@
                 this.updatePreview()
             })
         
-            this.$events.$on('photopicker.insert', payload => {
+            this.$events.$on('imagepicker.insert', payload => {
                 if (payload.target === this.target) {
                     this.insertImage(payload.id)
                 }
-                this.$events.$emit('photopicker.hide')
+                this.$events.$emit('imagepicker.hide')
             })
         }
 

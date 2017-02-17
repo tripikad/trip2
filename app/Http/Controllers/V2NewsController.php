@@ -160,7 +160,7 @@ class V2NewsController extends Controller
                             ->with('name', 'title')
                             ->with('value', old('title', $news->title))
                         )
-                        ->push(component('FormPhotoPicker')
+                        ->push(component('FormImageId')
                             ->with('title', trans('content.news.edit.field.image_id.title'))
                             ->with('name', 'image_id')
                             ->with('value', old('image_id', $news->image_id))

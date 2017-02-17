@@ -14,8 +14,8 @@
                     'allowedTags' => config('site.allowedtags'),
                     'maxfilesize' => config('site.maxfilesize'),
                     'promo' => config('promo'),
-                    'formfiledroproute' => route('image.store'),
-                    'formfiledroptitle' => trans('image.drop.title'),
+                    'imageUploadRoute' => route('image.store'),
+                    'imageUploadTitle' => trans('image.drop.title'),
                 ])) 
             }}
         ">
@@ -31,7 +31,7 @@
             {!! component('HeaderError') !!}
             @yield('content')
             @yield('footer')
-            {!! component('PhotoPicker')
+            {!! component('ImagePicker')
                 ->with('route', route('image.index'))
             !!}
             {!! component('Editor')

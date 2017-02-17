@@ -91,7 +91,7 @@ class V2AdminController extends Controller
                         )
                     )
                 )
-                ->push(component('FormFileDrop')
+                ->push(component('ImageUpload')
                     ->with('reload', true)
                 )
                 ->merge($images->chunk(6)->map(function ($chunk) {

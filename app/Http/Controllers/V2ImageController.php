@@ -12,7 +12,7 @@ class V2ImageController extends Controller
         $user = auth()->user();
         $images = Image::doesntHave('user')
             ->orderBy('created_at', 'desc')
-            ->take(10)
+            ->take(25)
             ->get()
             ->map(function ($image) {
                 return [

@@ -1,7 +1,7 @@
 <template>
 
     <div
-        class="FormFileDrop dropzone"
+        class="ImageUpload dropzone"
         ref="dropzone"
         :class="isclasses"
     >
@@ -26,15 +26,15 @@
         mounted() {
 
             new Dropzone(this.$refs.dropzone, {
-                url: this.$globalProps.formfiledroproute,
+                url: this.$globalProps.imageUploadRoute,
                 paramName: this.name,
                 maxFileSize: this.$globalProps.maxfilesize,
                 acceptedFiles: 'image/*',
                 maxFiles: 1,
                 headers: {'X-CSRF-TOKEN': this.$globalProps.token},
-                dictDefaultMessage: this.$globalProps.formfiledroptitle,
+                dictDefaultMessage: this.$globalProps.imageUploadTitle,
                 success: (file, res) => {
-                    this.$events.$emit('formfiledrop.created')
+                    this.$events.$emit('imageupload.created')
                     if (this.reload === 'true') {
                         window.location.reload(true)
                     }

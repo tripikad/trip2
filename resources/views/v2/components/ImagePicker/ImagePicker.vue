@@ -1,22 +1,20 @@
 <template>
 
-    <div class="PhotoPicker" v-if="show">
+    <div class="ImagePicker" v-if="show">
     
-        <div class="PhotoPicker__close" @click="show = false">×</div>
+        <div class="ImagePicker__close" @click="show = false">×</div>
 
-        <component
-            is="FormFileDrop"
-        ></component>
+        <component is="ImageUpload"></component>
 
         <div
-            class="PhotoPicker__card"
-            v-for="photo in photos"
-            @click="onClick(photo)"
+            class="ImagePicker__card"
+            v-for="image in images"
+            @click="onClick(image)"
         >
-            <img class="PhotoPicker__photo" :src="photo.route" />
+            <img class="ImagePicker__image" :src="image.route" />
 
-            <div class="PhotoPicker__title">
-                {{ photo.title }}
+            <div class="ImagePicker__title">
+                {{ image.title }}
             </div>
 
         </div>
@@ -27,45 +25,45 @@
 
 <script>
 
-    import FormFileDrop from '../FormFileDrop/FormFileDrop.vue'
+    import ImageUpload from '../ImageUpload/ImageUpload.vue'
 
     export default {
         components: {
-            FormFileDrop
+            ImageUpload
         },
         props: {
             route: {default: ''}
         },
         data: () => ({
             show: false,
-            photos: [],
+            images: [],
             target: ''
         }),
         methods: {
             onClick(image) {
-                this.$events.$emit('photopicker.insert', {
+                this.$events.$emit('imagepicker.insert', {
                     id: image.id, target: this.target
                 })
             },
             getImages() {
                 this.$http.get(this.route).then(res => {
-                    this.photos = res.body
+                    this.images = res.body
                 })
             }
         },
         mounted() {
             this.getImages()
 
-            this.$events.$on('photopicker.show', (target) => {
+            this.$events.$on('imagepicker.show', (target) => {
                 this.show = true
                 this.target = target
 
             })
-            this.$events.$on('photopicker.hide', () => {
+            this.$events.$on('imagepicker.hide', () => {
                 this.show = false
 
             })
-            this.$events.$on('formfiledrop.created', () => {
+            this.$events.$on('imageupload.created', () => {
                 this.getImages()
             })
         }
