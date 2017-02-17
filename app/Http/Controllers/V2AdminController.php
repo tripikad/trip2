@@ -80,7 +80,7 @@ class V2AdminController extends Controller
                     ->with('files', true)
                     ->with('route', route('image.store'))
                     ->with('fields', collect()
-                        ->push(component('FormFile')
+                        ->push(component('FormUpload')
                             ->is('hidden')
                             ->with('title', trans('admin.image.create.file.title'))
                             ->with('name', 'image')
