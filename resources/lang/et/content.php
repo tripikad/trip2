@@ -84,13 +84,13 @@ return [
 
     'news.edit.title' => 'Muuda uudist',
 
-    'news.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Toimetuse pildid all',
+    'news.edit.field.image_id.title' => 'Põhipildi ID',
     'news.edit.field.image_id.help' => '[[123]]',
 
     'news.edit.field.title.title' => 'Pealkiri',
     'news.edit.field.title.help' => '',
 
-    'news.edit.field.body.title' => 'Sisu. Ka siia saab lisada pildilinke a la [[123]]',
+    'news.edit.field.body.title' => 'Sisu',
     'news.edit.field.body.help' => '',
 
     'news.edit.field.destinations.title' => 'Vali sihtkohad',

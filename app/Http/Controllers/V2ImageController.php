@@ -17,7 +17,8 @@ class V2ImageController extends Controller
             ->map(function ($image) {
                 return [
                     'title' => str_limit($image->filename, 20),
-                    'route' => $image->preset('small_square'),
+                    'small' => $image->preset('small_square'),
+                    'large' => $image->preset('large'),
                     'id' => "[[$image->id]]",
                 ];
             });

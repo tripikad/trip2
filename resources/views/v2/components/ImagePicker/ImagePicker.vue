@@ -11,7 +11,7 @@
             v-for="image in images"
             @click="onClick(image)"
         >
-            <img class="ImagePicker__image" :src="image.route" />
+            <img class="ImagePicker__image" :src="image.small" />
 
             <div class="ImagePicker__title">
                 {{ image.title }}
@@ -42,7 +42,10 @@
         methods: {
             onClick(image) {
                 this.$events.$emit('imagepicker.insert', {
-                    id: image.id, target: this.target
+                    id: image.id,
+                    small: image.small,
+                    large: image.large,
+                    target: this.target
                 })
             },
             getImages() {
