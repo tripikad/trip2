@@ -197,6 +197,8 @@ $border-gray-md: 2px solid $gray-light;
 $border-green-md: 2px solid $green;
 $border-white-md: 2px solid $white;
 
+$border-gray-lg: 4px solid $gray-light;
+
 /* Dashed dotted */
 $border-dotted-gray-md: 2px dotted $gray-light;
 

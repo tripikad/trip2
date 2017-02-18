@@ -6,14 +6,23 @@
 
             <div class="Editor__toolbar">
 
-                <div class="Editor__tool" @click="insertBold()">B</div>
-                <div class="Editor__tool" @click="insertItalic()">I</div>
-                <div class="Editor__tool" @click="insertMarkdownLink()">Link</div>
-                <div class="Editor__tool" @click="insertHeading3()">H3</div>
-                <div class="Editor__tool" @click="insertHeading4()">H4</div>
-                <div class="Editor__tool" @click="insertTable()">▦</div>
-                <div class="Editor__tool" @click="toggleImagebrowser()">Image</div>
-                <div class="Editor__tool" @click="cleanMarkup()">Cleanup</div>
+                <div class="Editor__toolbarLeft">
+
+                    <div class="Editor__tool" @click="insertBold()">B</div>
+                    <div class="Editor__tool" @click="insertItalic()">I</div>
+                    <div class="Editor__tool" @click="insertMarkdownLink()">Link</div>
+                    <div class="Editor__tool" @click="insertHeading3()">H3</div>
+                    <div class="Editor__tool" @click="insertHeading4()">H4</div>
+                    <div class="Editor__tool" @click="insertTable()">▦</div>
+                    <div class="Editor__tool" @click="toggleImagebrowser()">Image</div>
+                    <div class="Editor__tool" @click="cleanMarkup()">Cleanup</div>
+
+                </div>
+
+                <div class="Editor__toolbarRight">
+
+                    
+                </div>
 
             </div>
 

@@ -12,14 +12,6 @@
     z-index: 10000;
 }
 
-    .Editor__close {
-        position: fixed;
-        top: $margin-sm;
-        right: $margin-sm;
-        color: $black;
-        z-index: 1;
-    }
-
     .Editor__wrapper {
         background: $white;
         position: absolute;
@@ -28,11 +20,17 @@
         right: 0;
         height: auto;
         padding: $padding-lg;
+        padding: $padding-md ?if $mobile;
     }
 
     .Editor__toolbar {
         display: flex;
+        justify-content: space-between;
         margin-bottom: $margin-md;
+    }
+
+    .Editor__toolbarLeft {
+        display: flex;
     }
 
     .Editor__tool {

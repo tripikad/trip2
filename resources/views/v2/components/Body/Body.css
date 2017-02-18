@@ -64,6 +64,15 @@
     list-style-type: decimal;
 }
 
+.Body blockquote {
+    padding-left: $padding-md;
+    border-left: $border-gray-lg;
+    font: $font-text-lg;
+    line-height: $line-height-lg;
+    margin-bottom: $margin-md;
+    color: $gray-light;
+}
+
 .Body img {
     width: 100%;
 }

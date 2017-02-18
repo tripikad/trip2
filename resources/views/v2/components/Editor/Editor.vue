@@ -1,20 +1,30 @@
 <template>
 
     <div class="Editor" :class="isclasses" v-show="show">
-        
-        <div class="Editor__close" @click="show = false">×</div>
-        
+                
         <div class="Editor__wrapper">
         
             <div class="Editor__toolbar">
-                <div class="Editor__tool" @click="insertLink">A</div>
-                <div class="Editor__tool" @click="insertBold">B</div>
-                <div class="Editor__tool" @click="insertItalic">I</div>
-                <div class="Editor__tool" @click="insertUl">List</div>
-                <div class="Editor__tool" @click="insertH3">H3</div>
-                <div class="Editor__tool" @click="insertH4">H4</div>
-                <div class="Editor__tool" @click="cleanMarkup">Cleanup</div>
-                <div class="Editor__tool" @click="openPicker">Img</div>
+
+                <div class="Editor__toolbarLeft">
+
+                    <div class="Editor__tool" @click="insertLink">Link</div>
+                    <div class="Editor__tool" @click="insertBold">B</div>
+                    <div class="Editor__tool" @click="insertItalic">I</div>
+                    <div class="Editor__tool" @click="insertUl">*</div>
+                    <div class="Editor__tool" @click="insertH3">H3</div>
+                    <div class="Editor__tool" @click="insertH4">H4</div>
+                    <div class="Editor__tool" @click="cleanMarkup">Clean</div>
+                    <div class="Editor__tool" @click="openPicker">Img</div>
+
+                </div>
+
+                <div class="Editor__toolbarRight">
+
+                    <div class="Editor__tool" @click="show = false">Back</div>
+
+                </div>
+
             </div>
         
             <div class="Editor__content">
@@ -110,6 +120,7 @@
                 value = value.replace(/\n\n/g, '</p><p>')
                 value = value.replace(/<br \/>/g, '</p><p>')
                 value = tomarkdown(value)
+                value = value.replace(/\n[0-9+]\\\./g, '@')
                 value = value.replace(/\n\n\*\*/g, '\n\n### ')
                 value = value.replace(/\*\*\n\n/g, '\n\n')
                 this.editor.setValue(value)
