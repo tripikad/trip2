@@ -4,6 +4,7 @@
         color: $gray;
         display: block;
         font: $font-heading-sm;
+        line-height: $line-height-md;
         margin-bottom: $margin-sm;
     }
 
