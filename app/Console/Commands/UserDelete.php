@@ -15,6 +15,7 @@ class UserDelete extends Command
     {
         $id = $this->argument('id');
 
+        /** @var User $user */
         $user = User::findorfail($id);
 
         $this->info('this user has posted:');
@@ -97,6 +98,11 @@ class UserDelete extends Command
                 }
 
                 $image->delete();
+            });
+
+            //delete messages
+            $user->messages->each(function ($message) {
+                $message->delete();
             });
 
             $user->delete();
