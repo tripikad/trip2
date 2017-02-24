@@ -69,8 +69,8 @@ class BodyFormatter
     public function format()
     {
         return $this
-            ->links()
             ->markdown()
+            ->links()
             ->images()
             ->body;
     }
