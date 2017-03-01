@@ -209,10 +209,10 @@ class SearchController extends Controller
                     ->get();
         } elseif ($type == 'content' || in_array($type, $types)) {
             $res = Content::leftJoin('comments', function ($query) use ($q) {
-                    $query->on('comments.content_id', '=', 'contents.id')
+                $query->on('comments.content_id', '=', 'contents.id')
                         ->on('comments.id', '=',
                             DB::raw('(SELECT `id` FROM comments WHERE `content_id` = `contents`.`id` AND LOWER(`body`) LIKE '.DB::getPdo()->quote(mb_strtolower('%'.$q.'%')).' AND `status` = 1 LIMIT 1)'));
-                })
+            })
                     ->select('contents.*')
                     ->whereIn('contents.type', $types)
                     ->where('contents.status', 1)
