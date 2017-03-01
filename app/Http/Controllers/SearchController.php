@@ -9,7 +9,6 @@ use App\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -200,21 +199,16 @@ class SearchController extends Controller
         $types = $this->content_types;
 
         if ($type == 'destination') {
-            $res = Cache::remember('search-destination-'.urlencode($q), 15, function () use ($q, $order_by, $order_type) {
-                return Destination::whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%'])
+            $res = Destination::whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%'])
                     ->orderBy($order_by, $order_type)
                     ->get();
-            });
         } elseif ($type == 'user') {
-            $res = Cache::remember('search-user-'.urlencode($q), 15, function () use ($q, $order_by, $order_type) {
-                return User::whereVerified(1)
+            $res = User::whereVerified(1)
                     ->whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%'])
                     ->orderBy($order_by, $order_type)
                     ->get();
-            });
         } elseif ($type == 'content' || in_array($type, $types)) {
-            $res = Cache::remember('search-content-'.urlencode($q), 15, function () use ($q, $order_by, $order_type, $types) {
-                return Content::leftJoin('comments', function ($query) use ($q) {
+            $res = Content::leftJoin('comments', function ($query) use ($q) {
                     $query->on('comments.content_id', '=', 'contents.id')
                         ->on('comments.id', '=',
                             DB::raw('(SELECT `id` FROM comments WHERE `content_id` = `contents`.`id` AND LOWER(`body`) LIKE '.DB::getPdo()->quote(mb_strtolower('%'.$q.'%')).' AND `status` = 1 LIMIT 1)'));
@@ -232,7 +226,6 @@ class SearchController extends Controller
                             END) '
                         ), $order_type)
                     ->get();
-            });
 
             $order_by = null;
         } else {
@@ -289,7 +282,7 @@ class SearchController extends Controller
 
         return response()
             ->view('component.searchblock', [
-                'results' => $results,
+                'results' => (isset($results) ? $results : null),
                 'total_cnt' => $total_cnt,
                 'q' => $q,
                 'header_search' => $header_search,
