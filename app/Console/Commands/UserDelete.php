@@ -93,6 +93,7 @@ class UserDelete extends Command
             $received = $user->hasMany('App\Message', 'user_id_to')->get();
             $messages = $sent->merge($received);
 
+            //delete messages
             $messages->each(function ($message) {
                 $message->delete();
             });
@@ -109,11 +110,6 @@ class UserDelete extends Command
                 }
 
                 $image->delete();
-            });
-
-            //delete messages
-            $user->messages->each(function ($message) {
-                $message->delete();
             });
 
             $user->delete();
