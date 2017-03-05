@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class UserDelete extends Command
 {
@@ -15,6 +16,7 @@ class UserDelete extends Command
     {
         $id = $this->argument('id');
 
+        /** @var User $user */
         $user = User::findorfail($id);
 
         $this->info('this user has posted:');
@@ -51,19 +53,19 @@ class UserDelete extends Command
 
                 //get destinations->id as array and then remove relationship
 
-                $destinations = $post->destinations()->select('destinations.id')->lists('id')->toArray();
+                $destinations = $post->destinations()->select('destinations.id')->pluck('id')->toArray();
 
                 $post->destinations()->detach($destinations);
 
                 //get topics->id as array and then remove relationship
 
-                $topics = $post->topics()->select('topics.id')->lists('id')->toArray();
+                $topics = $post->topics()->select('topics.id')->pluck('id')->toArray();
 
                 $post->topics()->detach($topics);
 
                 //get carriers->id as array and then remove relationship
 
-                $carriers = $post->carriers()->select('carriers.id')->lists('id')->toArray();
+                $carriers = $post->carriers()->select('carriers.id')->pluck('id')->toArray();
 
                 $post->carriers()->detach($carriers);
 
@@ -86,14 +88,25 @@ class UserDelete extends Command
                 $post->delete();
             });
 
+            //remove messages
+            $sent = $user->hasMany('App\Message', 'user_id_from')->get();
+            $received = $user->hasMany('App\Message', 'user_id_to')->get();
+            $messages = $sent->merge($received);
+
+            //delete messages
+            $messages->each(function ($message) {
+                $message->delete();
+            });
+
+            //remove images
             $user->images->each(function ($image) {
-                if ($image->imagePresets('original')) {
-                    File::delete($image->imagePresets('small'));
-                    File::delete($image->imagePresets('small_square'));
-                    File::delete($image->imagePresets('xsmall_square'));
-                    File::delete($image->imagePresets('original'));
-                    File::delete($image->imagePresets('medium'));
-                    File::delete($image->imagePresets('large'));
+                if ($image->preset('original')) {
+                    File::delete($image->preset('small'));
+                    File::delete($image->preset('small_square'));
+                    File::delete($image->preset('xsmall_square'));
+                    File::delete($image->preset('original'));
+                    File::delete($image->preset('medium'));
+                    File::delete($image->preset('large'));
                 }
 
                 $image->delete();
