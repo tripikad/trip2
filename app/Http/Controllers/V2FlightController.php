@@ -136,6 +136,12 @@ class V2FlightController extends Controller
                                 ->with('title', trans('content.action.edit.title'))
                                 ->with('route', route('flight.edit', [$flight]))
                         )
+                        ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
+                            component('MetaLink')
+                                ->is('white')
+                                ->with('title', trans('content.action.edit.title').'2')
+                                ->with('route', route('flight.edit2', [$flight]))
+                        )
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Form')
                                 ->with('route', route(
                                     'content.status',
@@ -204,6 +210,64 @@ class V2FlightController extends Controller
     {
         return App::make('App\Http\Controllers\ContentController')
             ->edit('flight', $id);
+    }
+
+    public function edit2($id)
+    {
+        $flight = Content::findOrFail($id);
+        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
+
+        return layout('1col')
+
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->with('title', trans('content.news.index.title'))
+                    ->with('route', route('news.index'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.flight.edit.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('flight.update', [$flight]))
+                    ->with('method', 'PUT')
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.flight.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title', $flight->title))
+                        )
+                        ->push(component('FormImageId')
+                            ->with('title', trans('content.flight.edit.field.image_id.title'))
+                            ->with('name', 'image_id')
+                            ->with('value', old('image_id', $flight->image_id))
+                        )
+                        ->push(component('FormEditor')
+                            ->with('title', trans('content.flight.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', [old('body', $flight->body)])
+                            ->with('rows', 10)
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('value', $flight->destinations)
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.edit.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
     public function store()

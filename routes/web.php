@@ -61,6 +61,10 @@ Route::get('flight/{id}/edit', 'V2FlightController@edit')
     ->name('flight.edit')
     ->middleware('role:admin');
 
+Route::get('flight/{id}/edit2', 'V2FlightController@edit2')
+    ->name('flight.edit2')
+    ->middleware('role:admin');
+
 Route::put('flight/{id}/update', 'V2FlightController@update')
     ->name('flight.update')
     ->middleware('role:admin');

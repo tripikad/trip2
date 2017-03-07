@@ -149,10 +149,10 @@ return [
     'flight.edit.field.title.title' => 'Pealkiri',
     'flight.edit.field.title.help' => '',
 
-    'flight.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Toimetuse pildid all',
+    'flight.edit.field.image_id.title' => 'Põhipildi ID',
     'flight.edit.field.image_id.help' => '[[123]]',
 
-    'flight.edit.field.body.title' => 'Sisu. Ka siia saab lisada pildilinke stiilis [[123]]',
+    'flight.edit.field.body.title' => 'Sisu',
     'flight.edit.field.body.help' => '',
 
     'flight.edit.field.destinations.title' => 'Vali sihtkohad',
