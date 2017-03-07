@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->boolean('notify_message')->default(false);
             $table->boolean('notify_follow')->default(false);
 
-            $table->string('role');
+            $table->string('role')->default('regular');
             $table->integer('rank')->default(0);
             $table->boolean('verified')->default(false);
             $table->string('registration_token')->nullable();
