@@ -64,7 +64,7 @@ class V2ExperimentsController extends Controller
 
     public function map()
     {
-        $userId = request()->get('userid', 12);
+        $userId = request()->get('userid', 3);
         $user = User::find($userId);
 
         $users = User::whereIn('role', ['admin', 'superuser'])->get();

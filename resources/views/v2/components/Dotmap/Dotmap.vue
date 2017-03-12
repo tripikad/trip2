@@ -11,7 +11,7 @@
                     :cx="dot.lon"
                     :cy="dot.lat"
                     :r="radius"
-                    :fill="isActive(dot) ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'"
+                    :fill="isActive(dot) ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.08)'"
                 />
 
                 <circle
