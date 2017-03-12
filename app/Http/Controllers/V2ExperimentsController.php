@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Content;
 use App\User;
+use App\Content;
 
 class V2ExperimentsController extends Controller
 {
@@ -68,18 +68,20 @@ class V2ExperimentsController extends Controller
         $havebeen = $user
             ->vars()
             ->destinationHaveBeen()
-            ->map(function($flag) {
+            ->map(function ($flag) {
                 $destination = $flag->flaggable;
                 if ($destination->vars()->isPlace()
                     && isset(config('cities')[$destination->id])
                 ) {
                     return [
                         'lat' => config('cities')[$destination->id]['lat'],
-                        'lon' => config('cities')[$destination->id]['lon']
+                        'lon' => config('cities')[$destination->id]['lon'],
                     ];
                 }
             })
-            ->reject(function($flag) { return $flag == null; })
+            ->reject(function ($flag) {
+                return $flag == null;
+            })
             ->values();
 
         return layout('1col')
