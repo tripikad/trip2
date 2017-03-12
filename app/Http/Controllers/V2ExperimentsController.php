@@ -60,4 +60,15 @@ class V2ExperimentsController extends Controller
 
             ->render();
     }
+
+    public function map()
+    {
+        return layout('1col')
+            ->with('content', collect()
+                ->push(component('Dotmap')
+                    ->with('dots', config('dots'))
+                )
+            )
+            ->render();
+    }
 }

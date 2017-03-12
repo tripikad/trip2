@@ -307,6 +307,9 @@ Route::post('utils/filter', 'V2UtilsController@filter')
 Route::get('experiments', 'V2ExperimentsController@index')
     ->name('experiments.index');
 
+Route::get('experiments/map', 'V2ExperimentsController@map')
+    ->name('experiments.map');
+
 // Experiments: Auth
 
 Route::get('experiments/login', 'V2AuthController@loginForm')
