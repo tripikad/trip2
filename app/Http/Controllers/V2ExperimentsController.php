@@ -91,13 +91,15 @@ class V2ExperimentsController extends Controller
         $havebeenCountries = $user
             ->vars()
             ->destinationHaveBeen()
-            ->map(function($flag) {
+            ->map(function ($flag) {
                 $destination = $flag->flaggable;
                 if ($destination->vars()->isCountry()) {
                     return $destination->id;
                 }
             })
-            ->reject(function($flag) { return $flag == null; })
+            ->reject(function ($flag) {
+                return $flag == null;
+            })
             ->values();
 
         return layout('1col')
