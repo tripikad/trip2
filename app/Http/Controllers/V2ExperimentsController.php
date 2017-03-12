@@ -65,7 +65,7 @@ class V2ExperimentsController extends Controller
     public function map()
     {
         $user = User::find(12);
-        $havebeen = $user
+        $havebeenCities = $user
             ->vars()
             ->destinationHaveBeen()
             ->map(function ($flag) {
@@ -84,11 +84,26 @@ class V2ExperimentsController extends Controller
             })
             ->values();
 
+        $havebeenCountries = $user
+            ->vars()
+            ->destinationHaveBeen()
+            ->map(function($flag) {
+                $destination = $flag->flaggable;
+                if ($destination->vars()->isCountry()) {
+                    return $destination->id;
+                }
+            })
+            ->reject(function($flag) { return $flag == null; })
+            ->values();
+
+        //dd($havebeenCountries);
+
         return layout('1col')
             ->with('content', collect()
                 ->push(component('Dotmap')
                     ->with('dots', config('dots'))
-                    ->with('countries', $havebeen)
+                    ->with('cities', $havebeenCities)
+                    ->with('countries', $havebeenCountries)
                 )
             )
             ->render();

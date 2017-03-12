@@ -13,11 +13,11 @@
                     :cx="dot.lon"
                     :cy="dot.lat"
                     :r="radius"
-                    :fill="'rgba(0,0,0,0.2)'"
+                    :fill="isActive(dot) ? 'green' : 'rgba(0,0,0,0.2)'"
                 />
 
                 <circle
-                    v-for="city in currentCountries"
+                    v-for="city in currentCities"
                     :cx="city.lon"
                     :cy="city.lat"
                     :r="radius"
@@ -42,13 +42,15 @@
             isclasses: { default: '' },
             dots: { default: '' },
             countries: { default: '' },
+            cities: { default: '' },
             width: { default: 800 },
             height: { default: 800 }
         },
 
         data: () => ({
             currentDots: [],
-            currentCountries: []
+            currentCountries: [],
+            currentCities: []
         }),
 
         computed: {
@@ -70,6 +72,13 @@
                     .range([10, this.width - 10])
                     (value)
             },
+            isActive(dot) {
+                return dot.destination_ids.find(id => {
+                    return this
+                        .currentCountries
+                        .find(country => country === id)
+                })
+            }
         },
 
         mounted() {
@@ -83,6 +92,9 @@
 
             this.currentCountries = JSON
                 .parse(decodeURIComponent(this.countries))
+            
+            this.currentCities = JSON
+                .parse(decodeURIComponent(this.cities))
                 .map(country => {
                     country.lat = this.latScale(country.lat)
                     country.lon = this.lonScale(country.lon)
