@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\User;
 
 class V2ExperimentsController extends Controller
 {
@@ -63,10 +64,29 @@ class V2ExperimentsController extends Controller
 
     public function map()
     {
+        $user = User::find(12);
+        $havebeen = $user
+            ->vars()
+            ->destinationHaveBeen()
+            ->map(function($flag) {
+                $destination = $flag->flaggable;
+                if ($destination->vars()->isPlace()
+                    && isset(config('cities')[$destination->id])
+                ) {
+                    return [
+                        'lat' => config('cities')[$destination->id]['lat'],
+                        'lon' => config('cities')[$destination->id]['lon']
+                    ];
+                }
+            })
+            ->reject(function($flag) { return $flag == null; })
+            ->values();
+
         return layout('1col')
             ->with('content', collect()
                 ->push(component('Dotmap')
                     ->with('dots', config('dots'))
+                    ->with('countries', $havebeen)
                 )
             )
             ->render();

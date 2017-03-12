@@ -2,6 +2,8 @@
 
     <div class="Dotmap" :class="isclasses">
 
+        {{ currentCountries }}
+
         <svg :width="width" :height="height">
 
             <g :transform="'translate(0,' + (height / 4) * -1 + ')'">
@@ -12,6 +14,14 @@
                     :cy="dot.lat"
                     :r="radius"
                     :fill="'rgba(0,0,0,0.2)'"
+                />
+
+                <circle
+                    v-for="city in currentCountries"
+                    :cx="city.lon"
+                    :cy="city.lat"
+                    :r="radius"
+                    fill="black"
                 />
 
             </g>
@@ -31,12 +41,14 @@
         props: {
             isclasses: { default: '' },
             dots: { default: '' },
+            countries: { default: '' },
             width: { default: 800 },
             height: { default: 800 }
         },
 
         data: () => ({
-            currentDots: []
+            currentDots: [],
+            currentCountries: []
         }),
 
         computed: {
@@ -63,12 +75,20 @@
         mounted() {
             this.currentDots = JSON
                 .parse(decodeURIComponent(this.dots))
-                //.slice(0, 3)
                 .map(dot => {
                     dot.lat = this.latScale(dot.lat)
                     dot.lon = this.lonScale(dot.lon)
                     return dot
                 })
+
+            this.currentCountries = JSON
+                .parse(decodeURIComponent(this.countries))
+                .map(country => {
+                    country.lat = this.latScale(country.lat)
+                    country.lon = this.lonScale(country.lon)
+                    return country
+                })
+            
         }
 
     }
