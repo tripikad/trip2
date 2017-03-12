@@ -29,7 +29,7 @@ class V2FrontpageController extends Controller
             ->with('head_image', Image::getSocial())
 
             ->with('promobar', component('PromoBar')
-                ->with('title', 'Kui vaatad Trippi telefonis ja Chromega, siis võib leht katki olla. Proovi ajutiselt Firefoxi')
+                ->with('title', "Kui vaatad Trippi telefonis ja Chrome'iga, siis võib leht katki olla. Proovi ajutiselt Firefoxi")
                 ->render()
              )
 
