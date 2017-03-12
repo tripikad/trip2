@@ -64,7 +64,11 @@ class V2ExperimentsController extends Controller
 
     public function map()
     {
-        $user = User::find(12);
+        $userId = request()->get('userid', 12);
+        $user = User::find($userId);
+
+        $users = User::whereIn('role', ['admin', 'superuser'])->get();
+
         $havebeenCities = $user
             ->vars()
             ->destinationHaveBeen()
@@ -96,10 +100,20 @@ class V2ExperimentsController extends Controller
             ->reject(function($flag) { return $flag == null; })
             ->values();
 
-        //dd($havebeenCountries);
-
         return layout('1col')
-            ->with('content', collect()
+
+            ->with('top', collect()
+                ->push(component('Meta')->with('items', $users
+                    ->map(function ($user) {
+                        return component('MetaLink')
+                            ->is('large')
+                            ->with('title', $user->name)
+                            ->with('route', route(
+                                'experiments.map',
+                                ['userid' => $user->id]
+                            ));
+                    })
+                ))
                 ->push(component('Dotmap')
                     ->with('dots', config('dots'))
                     ->with('cities', $havebeenCities)

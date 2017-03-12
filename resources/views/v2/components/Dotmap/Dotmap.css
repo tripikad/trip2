@@ -1,9 +1,5 @@
 @import "variables";
 
 .Dotmap {
-
+    background: $cyan-dark;
 }
-
-    .Dotmap__title {
-
-    }

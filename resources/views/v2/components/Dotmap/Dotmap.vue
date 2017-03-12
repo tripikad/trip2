@@ -2,8 +2,6 @@
 
     <div class="Dotmap" :class="isclasses">
 
-        {{ currentCountries }}
-
         <svg :width="width" :height="height">
 
             <g :transform="'translate(0,' + (height / 4) * -1 + ')'">
@@ -13,7 +11,7 @@
                     :cx="dot.lon"
                     :cy="dot.lat"
                     :r="radius"
-                    :fill="isActive(dot) ? 'green' : 'rgba(0,0,0,0.2)'"
+                    :fill="isActive(dot) ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'"
                 />
 
                 <circle
@@ -21,7 +19,7 @@
                     :cx="city.lon"
                     :cy="city.lat"
                     :r="radius"
-                    fill="black"
+                    fill="white"
                 />
 
             </g>
@@ -43,8 +41,8 @@
             dots: { default: '' },
             countries: { default: '' },
             cities: { default: '' },
-            width: { default: 800 },
-            height: { default: 800 }
+            width: { default: 1000 },
+            height: { default: 1000 }
         },
 
         data: () => ({
