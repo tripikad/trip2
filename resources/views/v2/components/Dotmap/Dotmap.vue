@@ -11,7 +11,7 @@
                     :cx="dot.lon"
                     :cy="dot.lat"
                     :r="radius"
-                    :fill="isHavebeen(dot) ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.08)'"
+                    :fill="isHavebeen(dot) ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)'"
                 />
 
                 <circle
@@ -27,11 +27,19 @@
                 />
 
                 <circle
-                    v-for="city in currentCities"
+                    v-for="city in currentHavebeenCities"
                     :cx="city.lon"
                     :cy="city.lat"
                     :r="radius"
                     fill="white"
+                />
+
+                <circle
+                    v-for="city in currentWanttogoCities"
+                    :cx="city.lon"
+                    :cy="city.lat"
+                    :r="radius"
+                    fill="orange"
                 />
 
             </g>
@@ -51,17 +59,19 @@
         props: {
             isclasses: { default: '' },
             dots: { default: '' },
-            wanttogo_countries: { default: '' },
             havebeen_countries: { default: '' },
-            cities: { default: '' },
-            width: { default: 700 }
+            wanttogo_countries: { default: '' },
+            havebeen_cities: { default: '' },
+            wanttogo_cities: { default: '' },
+            width: { default: 750 }
         },
 
         data: () => ({
             currentDots: [],
             currentHavebeenCountries: [],
             currentWanttogoCountries: [],
-            currentCities: []
+            currentHavebeenCities: [],
+            currentWanttogoCities: []
         }),
 
         computed: {
@@ -117,8 +127,16 @@
             this.currentWanttogoCountries = JSON
                 .parse(decodeURIComponent(this.wanttogo_countries))
     
-            this.currentCities = JSON
-                .parse(decodeURIComponent(this.cities))
+            this.currentHavebeenCities = JSON
+                .parse(decodeURIComponent(this.havebeen_cities))
+                .map(country => {
+                    country.lat = this.latScale(country.lat)
+                    country.lon = this.lonScale(country.lon)
+                    return country
+                })
+
+            this.currentWanttogoCities = JSON
+                .parse(decodeURIComponent(this.wanttogo_cities))
                 .map(country => {
                     country.lat = this.latScale(country.lat)
                     country.lon = this.lonScale(country.lon)

@@ -88,6 +88,25 @@ class V2ExperimentsController extends Controller
             })
             ->values();
 
+        $wanttogoCities = $user
+            ->vars()
+            ->destinationWantstogo()
+            ->map(function ($flag) {
+                $destination = $flag->flaggable;
+                if ($destination->vars()->isPlace()
+                    && isset(config('cities')[$destination->id])
+                ) {
+                    return [
+                        'lat' => config('cities')[$destination->id]['lat'],
+                        'lon' => config('cities')[$destination->id]['lon'],
+                    ];
+                }
+            })
+            ->reject(function ($flag) {
+                return $flag == null;
+            })
+            ->values();
+
         $havebeenCountries = $user
             ->vars()
             ->destinationHaveBeen()
@@ -119,10 +138,16 @@ class V2ExperimentsController extends Controller
         return layout('1col')
 
             ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', 'Kus oled käinud / kuhu tahad minna')
+                )
+                ->push(component('Body')
+                    ->with('body', 'Vali altpoolt toimetuse liige ja vaata tema kaarti. Vaikimisi näed <b>tom</b>i kaarti. Kui tead mistahes kasutaja IDd, võid selle aadressiribale kirjutada.')
+                )
                 ->push(component('Meta')->with('items', $users
                     ->map(function ($user) {
-                        return component('MetaLink')
-                            ->is('large')
+                        return component('Tag')
+                            ->is('cyan')
                             ->with('title', $user->name)
                             ->with('route', route(
                                 'experiments.map',
@@ -132,7 +157,8 @@ class V2ExperimentsController extends Controller
                 ))
                 ->push(component('Dotmap')
                     ->with('dots', config('dots'))
-                    ->with('cities', $havebeenCities)
+                    ->with('havebeen_cities', $havebeenCities)
+                    ->with('wanttogo_cities', $wanttogoCities)
                     ->with('havebeen_countries', $havebeenCountries)
                     ->with('wanttogo_countries', $wanttogoCountries)
                 )
