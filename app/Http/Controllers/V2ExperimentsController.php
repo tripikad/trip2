@@ -104,7 +104,7 @@ class V2ExperimentsController extends Controller
 
         return layout('1col')
 
-            ->with('top', collect()
+            ->with('content', collect()
                 ->push(component('Meta')->with('items', $users
                     ->map(function ($user) {
                         return component('MetaLink')

@@ -4,7 +4,7 @@
 
         <svg :width="width" :height="height">
 
-            <g :transform="'translate(0,' + (height / 4) * -1 + ')'">
+            <g :transform="'translate(' + (width * -0.03) +',' + (height / -1.5) + ')'">
 
                 <circle
                     v-for="dot in currentDots"
@@ -41,8 +41,7 @@
             dots: { default: '' },
             countries: { default: '' },
             cities: { default: '' },
-            width: { default: 1000 },
-            height: { default: 1000 }
+            width: { default: 700 }
         },
 
         data: () => ({
@@ -54,6 +53,9 @@
         computed: {
             radius() {
                 return this.width / 350
+            },
+            height() {
+                return this.width / 2.5
             }
         },
 
@@ -61,7 +63,7 @@
             latScale(value) {
                 return scaleLinear()
                     .domain([180, -180])
-                    .range([10, this.height - 10])
+                    .range([10, this.width - 10])
                     (value)
             },
             lonScale(value) {
