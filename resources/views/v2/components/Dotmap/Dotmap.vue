@@ -11,7 +11,19 @@
                     :cx="dot.lon"
                     :cy="dot.lat"
                     :r="radius"
-                    :fill="isActive(dot) ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.08)'"
+                    :fill="isHavebeen(dot) ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.08)'"
+                />
+
+                <circle
+                    v-for="dot in currentDots"
+                    v-if="isWanttogo(dot)"
+                    :cx="dot.lon"
+                    :cy="dot.lat"
+                    :r="radius"
+                    stroke="orange"
+                    stroke-width="0"
+                    fill="orange"
+                    opacity="0.4"
                 />
 
                 <circle
@@ -39,14 +51,16 @@
         props: {
             isclasses: { default: '' },
             dots: { default: '' },
-            countries: { default: '' },
+            wanttogo_countries: { default: '' },
+            havebeen_countries: { default: '' },
             cities: { default: '' },
             width: { default: 700 }
         },
 
         data: () => ({
             currentDots: [],
-            currentCountries: [],
+            currentHavebeenCountries: [],
+            currentWanttogoCountries: [],
             currentCities: []
         }),
 
@@ -72,10 +86,17 @@
                     .range([10, this.width - 10])
                     (value)
             },
-            isActive(dot) {
+            isHavebeen(dot) {
                 return dot.destination_ids.find(id => {
                     return this
-                        .currentCountries
+                        .currentHavebeenCountries
+                        .find(country => country === id)
+                })
+            },
+            isWanttogo(dot) {
+                return dot.destination_ids.find(id => {
+                    return this
+                        .currentWanttogoCountries
                         .find(country => country === id)
                 })
             }
@@ -90,9 +111,12 @@
                     return dot
                 })
 
-            this.currentCountries = JSON
-                .parse(decodeURIComponent(this.countries))
-            
+            this.currentHavebeenCountries = JSON
+                .parse(decodeURIComponent(this.havebeen_countries))
+                
+            this.currentWanttogoCountries = JSON
+                .parse(decodeURIComponent(this.wanttogo_countries))
+    
             this.currentCities = JSON
                 .parse(decodeURIComponent(this.cities))
                 .map(country => {

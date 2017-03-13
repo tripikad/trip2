@@ -102,6 +102,20 @@ class V2ExperimentsController extends Controller
             })
             ->values();
 
+        $wanttogoCountries = $user
+            ->vars()
+            ->destinationWantstogo()
+            ->map(function ($flag) {
+                $destination = $flag->flaggable;
+                if ($destination->vars()->isCountry()) {
+                    return $destination->id;
+                }
+            })
+            ->reject(function ($flag) {
+                return $flag == null;
+            })
+            ->values();
+
         return layout('1col')
 
             ->with('content', collect()
@@ -119,7 +133,8 @@ class V2ExperimentsController extends Controller
                 ->push(component('Dotmap')
                     ->with('dots', config('dots'))
                     ->with('cities', $havebeenCities)
-                    ->with('countries', $havebeenCountries)
+                    ->with('havebeen_countries', $havebeenCountries)
+                    ->with('wanttogo_countries', $wanttogoCountries)
                 )
             )
             ->render();
