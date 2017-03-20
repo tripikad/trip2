@@ -6,6 +6,7 @@ use App\User;
 use App\Content;
 use Carbon\Carbon;
 use App\Destination;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -304,8 +305,14 @@ class SearchController extends Controller
         //dd(config('scout.tntsearch'));
         $searchKey = $request->input('search');
 
-        $search = Content::search($searchKey)->get();
+        //$search = Content::search($searchKey)->get();
 
-        dd($search);
+        //$search_2 = Destination::search($searchKey)->get();
+
+        //$search = $search->merge($search_2);
+        $search = Comment::search($searchKey)->get();
+
+        return layout('2col')->with('searchResults', $search)->render();
+        //dd($search);
     }
 }

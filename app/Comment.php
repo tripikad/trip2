@@ -4,16 +4,24 @@ namespace App;
 
 use Auth;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Comment extends Model
 {
+
+  use Searchable;
     // Setup
 
     protected $fillable = ['user_id', 'content_id', 'body', 'status'];
 
-    protected $appends = ['title', 'body_filtered'];
+    //protected $appends = ['title', 'body_filtered'];
 
     protected $touches = ['content'];
+
+     public function SearchableAs()
+    {
+        return 'comments_index';
+    }
 
     // Relations
 

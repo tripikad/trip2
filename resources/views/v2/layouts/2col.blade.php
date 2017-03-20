@@ -48,6 +48,12 @@ $narrow = $narrow ?? false;
 
 </header>
 
+@if ($searchResults)
+
+    @PHP dump($searchResults) @ENDPHP
+
+@endif
+
 @endsection
 
 @section('content')

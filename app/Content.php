@@ -18,13 +18,22 @@ class Content extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-    protected $appends = ['body_filtered', 'image_id'];
+    //protected $appends = ['body_filtered', 'image_id'];
 
     //scout
 
     public function SearchableAs()
     {
-        return 'contents_index';
+        return 'contents';
+    }
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // Customize array...
+
+        return $array;
     }
 
     // Relations

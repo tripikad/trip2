@@ -6,16 +6,22 @@ use Baum;
 use Cache;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
+use Laravel\Scout\Searchable;
 
 class Destination extends Baum\Node
 {
-    use Sluggable, SlugHelper;
+    use Sluggable, SlugHelper, Searchable;
 
     public $timestamps = false;
 
     public function content()
     {
         return $this->belongsToMany('App\Content');
+    }
+
+    public function SearchableAs()
+    {
+        return 'destionations_index';
     }
 
     public function vars()
