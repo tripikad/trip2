@@ -3,10 +3,10 @@
 namespace App;
 
 use Auth;
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
-use Laravel\Scout\Searchable;
 
 class Content extends Model
 {

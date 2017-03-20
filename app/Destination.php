@@ -4,9 +4,9 @@ namespace App;
 
 use Baum;
 use Cache;
+use Laravel\Scout\Searchable;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
-use Laravel\Scout\Searchable;
 
 class Destination extends Baum\Node
 {
