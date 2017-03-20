@@ -87,7 +87,7 @@ return [
         'fuzzy' => [
             'prefix_length' => 2,
             'max_expansions' => 50,
-            'distance' => 2
+            'distance' => 2,
         ],
         'asYouType' => false,
     ],
@@ -98,7 +98,7 @@ return [
         'min_search_length' => 0,
         'min_fulltext_search_length' => 4,
         'min_fulltext_search_fallback' => 'LIKE',
-        'query_expansion' => false
-    ]
+        'query_expansion' => false,
+    ],
 
 ];

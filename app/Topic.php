@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
 {
@@ -21,6 +21,7 @@ class Topic extends Model
     {
         return 'topics_index';
     }
+
     // V2
 
     public function vars()

@@ -3,13 +3,12 @@
 namespace App;
 
 use Auth;
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-
-  use Searchable;
+    use Searchable;
     // Setup
 
     protected $fillable = ['user_id', 'content_id', 'body', 'status'];
@@ -18,7 +17,7 @@ class Comment extends Model
 
     protected $touches = ['content'];
 
-     public function SearchableAs()
+    public function SearchableAs()
     {
         return 'comments_index';
     }

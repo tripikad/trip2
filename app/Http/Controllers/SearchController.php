@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Comment;
 use App\Content;
 use Carbon\Carbon;
 use App\Destination;
-use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
