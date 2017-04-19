@@ -32,20 +32,24 @@ googletag.cmd.push(function() {
     googletag.pubads().collapseEmptyDivs();
     googletag.enableServices();
     googletag.pubads().addEventListener('slotRenderEnded', function(e) {
-        if (e.slot.B) {
+        /*if (e.slot.B) {
             if (elementIndex[e.slot.B]) {
                 ++elementIndex[e.slot.B];
             } else {
                 elementIndex[e.slot.B] = 0;
             }
 
-            var i = index;
+            var i = index,
+                slot_width = e.size[0],
+                slot_height = e.size[1];
+
             ++index;
+
             slot[index] = setTimeout(function(){
-                renderEnded(e.slot.B, e.size[0], e.size[1], i);
+                renderEnded(e.slot.B, slot_width, slot_height, i);
             }, 200);
-            return renderEnded(e.slot.B, e.size[0], e.size[1], i);
-        }
+            return renderEnded(e.slot.B, slot_width, slot_height, i);
+        }*/
     });
 });
 
@@ -59,12 +63,13 @@ window.onload = function(){
     }
 }
 
-function renderEnded (element, width, height, i) {
-    var elements = [];
-    var inputs = document.getElementsByTagName("div");
+/*function renderEnded (element, width, height, i) {
+    var elements = [],
+        inputs = document.getElementsByTagName("div");
+
     if (inputs.length) {
         for(var k = 0; k < inputs.length; k++) {
-            if(inputs[k].getAttribute("id") && inputs[k].getAttribute("id").indexOf('google_ads_iframe_' + element) == 0) {
+            if(inputs[k].getAttribute("id") && inputs[k].getAttribute("id").indexOf('google_ads_iframe_') === 0) {
                 elements.push(inputs[k]);
             }
         }
@@ -74,11 +79,11 @@ function renderEnded (element, width, height, i) {
         var adUnitElement = elements[elementIndex[element]];
         if (adUnitElement.querySelector('iframe')) {
             var iFrame = adUnitElement.querySelector('iframe'),
-                    newHeight = ((parseInt(window.getComputedStyle(iFrame, null).width) * height) / width),
-                    iFrameID = iFrame.getAttribute('id'),
-                    goToFrame = document.getElementById(iFrameID).contentWindow,
-                    googleImageDiv = goToFrame.document.querySelector('#google_image_div'),
-                    imgInIFrame = goToFrame.document.querySelector('img');
+                newHeight = ((parseInt(window.getComputedStyle(iFrame, null).width) * height) / width),
+                iFrameID = iFrame.getAttribute('id'),
+                goToFrame = document.getElementById(iFrameID).contentWindow,
+                googleImageDiv = goToFrame.document.getElementById('google_image_div'),
+                imgInIFrame = goToFrame.document.querySelector('img');
 
             if (googleImageDiv) {
                 googleImageDiv.style.maxWidth = '100%';
@@ -103,5 +108,5 @@ function renderEnded (element, width, height, i) {
             }, 200);
         }
     }
-}
+}*/
 </script>  
