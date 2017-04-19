@@ -106,7 +106,14 @@
                 span {
 
                     font-weight: $font-weight-normal;
-                    padding-left: $spacer;
+                    display: block;
+                    padding: $spacer / 2 0 0;
+
+                    @include respond-to(tablet) {
+
+                        display: inline-block;
+                        padding: 0 0 0 $spacer;
+                    }
                 }
             }
 
@@ -149,5 +156,10 @@
 
             .c-forum-post__thumbs {
 
-                margin-left: auto;
+                margin: $spacer 0 $spacer;
+
+                @include respond-to(tablet) {
+
+                    margin: 0 0 0 auto;
+                }
             }
