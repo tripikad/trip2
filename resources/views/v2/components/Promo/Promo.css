@@ -1,11 +1,11 @@
 @import "variables";
 
 .Promo {
-    /*overflow: hidden;*/
+    overflow: hidden;
     display: block;
 }
 
     .Promo iframe {
         display: block;
-        /*max-width: 100%;*/
+        max-width: 100%;
     }
