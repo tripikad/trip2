@@ -24,7 +24,7 @@ return [
             'header' => 60 * 10,
         ],
         'show' => [
-            'header' => 60 * 10,
+            'header' => 60 * 5,
         ],
         'expire' => [
             'comment' => 60 * 24 * 30, // 30 days
