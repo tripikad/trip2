@@ -6,6 +6,7 @@ import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
 import Flag from './components/Flag/Flag.vue'
 import FormButtonProcess from './components/FormButtonProcess/FormButtonProcess.vue'
+import FormFileDrop from './components/FormFileDrop/FormFileDrop.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
 import FormSelectMultiple from './components/FormSelectMultiple/FormSelectMultiple.vue'
 import FrontpageDestinationSearch from './components/FrontpageDestinationSearch/FrontpageDestinationSearch.vue'
@@ -20,17 +21,17 @@ import PhotoFullscreen from './components/PhotoFullscreen/PhotoFullscreen.vue'
 import PromoBar from './components/PromoBar/PromoBar.vue'
 import UserImage from './components/UserImage/UserImage.vue'
 
-const globalProps = JSON.parse(decodeURIComponent(
-    document.querySelector('#globalprops').getAttribute('content')
-))
-
 Vue.use(VueResource)
-Vue.http.headers.common['X-CSRF-TOKEN'] = globalProps.token
-
 Vue.use(VueCookie);
 
 var events = new Vue()
 Vue.prototype.$events = events
+
+const globalProps = JSON.parse(decodeURIComponent(
+    document.querySelector('#globalprops').getAttribute('content')
+))
+Vue.prototype.$globalProps = globalProps
+Vue.http.headers.common['X-CSRF-TOKEN'] = globalProps.token
 
 new Vue({
     el: '#app',
@@ -40,6 +41,7 @@ new Vue({
         Arc,
         Flag,
         FormButtonProcess,
+        FormFileDrop,
         FormSelect,
         FormSelectMultiple,
         FrontpageDestinationSearch,

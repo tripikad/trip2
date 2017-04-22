@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    /*
     public function imageIndex()
     {
         $exception = [
@@ -35,8 +36,8 @@ class AdminController extends Controller
             'images' => $images,
         ]);
     }
-
-    public function imageStore(Request $request)
+    */
+    /*public function imageStore(Request $request)
     {
         $this->validate($request, [
             'image' => 'required|image',
@@ -52,8 +53,9 @@ class AdminController extends Controller
                     'filename' => $orig_filename,
                 ]));
         }
-    }
+    }*/
 
+    /*
     public function contentIndex()
     {
         $contents = Content::with(['user', 'comments'])
@@ -65,4 +67,5 @@ class AdminController extends Controller
             'contents' => $contents,
         ]);
     }
+    */
 }

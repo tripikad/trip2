@@ -1,0 +1,18 @@
+@import "variables";
+@import "dropzone/dist/dropzone.css";
+
+.FormFileDrop:hover {
+    background: $gray-lighter;
+}
+
+.dropzone {
+    min-height: inherit;
+    border: $border-gray-md;
+    border-radius: $border-radius-md;
+}
+
+.dz-message span {
+    font: $font-text-md;
+    color: $blue;
+    line-height: $line-height-lg;
+}

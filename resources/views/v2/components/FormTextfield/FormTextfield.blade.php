@@ -3,6 +3,7 @@
 $title = $title ?? '';
 $name = $name ?? '';
 $value = $value ?? '';
+$size = $size ?? '';
 $placeholder = $placeholder ?? '';
 
 @endphp
@@ -20,6 +21,7 @@ $placeholder = $placeholder ?? '';
         id="{{ $name }}"
         name="{{ $name }}"
         type="text"
+        size="{{ $size }}"
         value="{{ $value }}"
         placeholder="{{ $placeholder }}"
     >

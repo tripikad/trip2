@@ -3,10 +3,17 @@
 $route = $route ?? '';
 $method = $method ?? 'POST';
 $fields = collect($fields) ?? collect();
+$files = $files ?? false;
 
 @endphp
 
-<form class="FormHorizontal" action="{{ $route }}" method="POST" accept-charset="utf-8">
+<form
+    class="FormHorizontal"
+    action="{{ $route }}"
+    method="POST"
+    accept-charset="utf-8"
+    @if ($files) enctype="multipart/form-data" @endif
+>
 
     {{ method_field($method) }}
     
