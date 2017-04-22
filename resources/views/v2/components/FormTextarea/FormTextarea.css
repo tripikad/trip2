@@ -13,7 +13,7 @@
         font: $font-text-md;
         padding: $padding-sm;
         width: 100%;
-        line-height: $line-height-md;
+        line-height: $line-height-lg;
         color: $gray-dark;
     }
 
@@ -23,4 +23,14 @@
 
 .FormTextarea--borderless .FormTextarea__textarea {
     border: none;
+}
+
+.FormTextarea__textarea[readonly] {
+    background: $gray-lighter;
+    color: $gray;
+    opacity: $opacity-md;
+}
+
+.FormTextarea--hidden {
+    display: none;
 }

@@ -33,6 +33,10 @@ Route::get('news/{id}/edit', 'V2NewsController@edit')
     ->name('news.edit')
     ->middleware('role:admin');
 
+Route::get('news/{id}/edit2', 'V2NewsController@edit2')
+    ->name('news.edit2')
+    ->middleware('role:admin');
+
 Route::put('news/{id}/update', 'V2NewsController@update')
     ->name('news.update')
     ->middleware('role:admin');
@@ -291,6 +295,9 @@ Route::get('admin/content', 'V2AdminController@unpublishedIndex')
     ->name('admin.content.index')
     ->middleware('role:admin');
 
+Route::get('admin/photos', 'V2AdminController@photoIndex')
+    ->name('admin.photo.index');
+
 // Utils
 
 Route::get('utils/alert', 'V2UtilsController@alert')
@@ -301,6 +308,9 @@ Route::get('share/{social}', 'V2SocialController@share')
 
 Route::post('utils/filter', 'V2UtilsController@filter')
     ->name('utils.filter');
+
+Route::post('utils/format', 'V2UtilsController@format')
+    ->name('utils.format');
 
 // Experiments
 

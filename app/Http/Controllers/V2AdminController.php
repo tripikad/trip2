@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
 use App\Content;
 
 class V2AdminController extends Controller
@@ -50,5 +51,22 @@ class V2AdminController extends Controller
             ->with('footer', region('FooterLight'))
 
             ->render();
+    }
+
+    public function photoIndex()
+    {
+        $images = Image::doesntHave('user')
+            ->orderBy('created_at', 'desc')
+            ->take(10)
+            ->get()
+            ->map(function ($image) {
+                return [
+                    'title' => str_limit($image->filename, 20),
+                    'route' => $image->preset('small_square'),
+                    'id' => "[[$image->id]]",
+                ];
+            });
+
+        return $images;
     }
 }

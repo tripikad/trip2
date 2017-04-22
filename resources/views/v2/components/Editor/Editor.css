@@ -1,0 +1,75 @@
+@import "variables";
+@import "codemirror/lib/codemirror.css";
+@import "codemirror/theme/neo.css";
+
+.Editor {
+    background: $white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10000;
+}
+
+    .Editor__close {
+        position: fixed;
+        top: $margin-sm;
+        right: $margin-sm;
+        color: $black;
+        z-index: 1;
+    }
+
+    .Editor__wrapper {
+        background: $white;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        height: auto;
+        padding: $padding-lg;
+    }
+
+    .Editor__toolbar {
+        display: flex;
+        margin-bottom: $margin-md;
+    }
+
+    .Editor__tool {
+        font: $font-code-sm;
+        color: $gray;
+        margin-right: $margin-sm;
+    }
+
+    .Editor__content {
+        display: flex;
+    }
+
+    .Editor__source {
+        width: 50%;
+        margin-right: $margin-sm;
+    }
+
+    .Editor__target {
+        width: 50%;
+        margin-top: $margin-xxs;
+        margin-left: $margin-sm;
+    }
+
+    .CodeMirror {
+        height: auto !important;
+        font: $font-code-sm !important;
+        line-height: $line-height-lg !important;
+    }
+
+    .CodeMirror-cursor {
+      border-left: 1px solid $black !important;
+      border-right: none !important;
+      background: none !important;
+      z-index: 0 !important;
+    }
+
+    .cm-s-neo.CodeMirror {
+        background-color: transparent !important;
+    }
+

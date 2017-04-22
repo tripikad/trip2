@@ -130,6 +130,72 @@ class V2NewsController extends Controller
             ->edit('news', $id);
     }
 
+    public function edit2($id)
+    {
+        $news = Content::findOrFail($id);
+        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
+        $topics = Destination::select('id', 'name')->orderBy('name')->get();
+
+        return layout('1col')
+
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->with('title', trans('content.news.index.title'))
+                    ->with('route', route('news.index'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.news.edit.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('news.update', [$news]))
+                    ->with('method', 'PUT')
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.news.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title', $news->title))
+                        )
+                        ->push(component('FormPhotoPicker')
+                            ->with('title', trans('content.news.edit.field.image_id.title'))
+                            ->with('name', 'image_id')
+                            ->with('value', old('image_id', $news->image_id))
+                        )
+                        ->push(component('FormEditor')
+                            ->with('title', trans('content.news.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', [old('body', $news->body)])
+                            ->with('rows', 10)
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('value', $news->destinations)
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                        )
+                        /*->push(component('FormSelectMultiple')
+                            ->with('name', 'topics')
+                            ->with('options', $topics)
+                            ->with('value', $news->topics)
+                            ->with('placeholder', trans('content.index.filter.field.topic.title'))
+                        )
+                        */
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.edit.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
     public function store()
     {
         return App::make('App\Http\Controllers\ContentController')

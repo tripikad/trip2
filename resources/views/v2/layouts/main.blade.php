@@ -29,8 +29,15 @@
             {!! component('HeaderError') !!}
             @yield('content')
             @yield('footer')
+            {!! component('PhotoPicker')
+                ->with('route', route('admin.photo.index'))
+            !!}
+            {!! component('Editor')
+                ->with('route', route('utils.format'))
+            !!}
             {!! component('PhotoFullscreen') !!}
             {!! component('Alert') !!}
+
         </div>
         <script src="{{ elixir('v2/js/main.js') }}"></script>
         @include('v2.utils.promo')
