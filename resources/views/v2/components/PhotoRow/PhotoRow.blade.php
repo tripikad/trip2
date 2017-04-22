@@ -6,7 +6,7 @@ $actions = collect($actions) ?? collect();
 
 @endphp
 
-<div class="PhotoRow {{ $isclasses }}">
+<h3 class="PhotoRow {{ $isclasses }}">
 
     @if ($content->count())
 
@@ -52,4 +52,4 @@ $actions = collect($actions) ?? collect();
 
     </div>
 
-</div>
+</h3>

@@ -8,7 +8,7 @@ $background = $background ?? ''
 
 @endphp
 
-<div class="HeaderLight {{ $isclasses }}">
+<header class="HeaderLight {{ $isclasses }}">
 
     <div class="container padding-bottom-none-mobile-sm">
 
@@ -36,4 +36,4 @@ $background = $background ?? ''
 
     {!! $background !!}
     
-</div>
+</header>

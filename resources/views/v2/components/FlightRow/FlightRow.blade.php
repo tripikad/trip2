@@ -7,7 +7,7 @@ $meta = $meta ?? collect();
 
 @endphp
 
-<div class="FlightRow {{ $isclasses }}">
+<h3 class="FlightRow {{ $isclasses }}">
 
     <div class="FlightRow__left">
 
@@ -39,4 +39,4 @@ $meta = $meta ?? collect();
 
     </div>
 
-</div>
+</h3>

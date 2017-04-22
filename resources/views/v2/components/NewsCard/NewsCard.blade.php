@@ -8,7 +8,7 @@ $meta = $meta ?? '';
 
  <a href="{{ $route }}">
 
-<div class="NewsCard {{ $isclasses }}"> 
+<h3 class="NewsCard {{ $isclasses }}">
 
     <div
         class="NewsCard__image"
@@ -29,6 +29,6 @@ $meta = $meta ?? '';
     
     </div>
 
-</div>
+</h3>
 
 </a>

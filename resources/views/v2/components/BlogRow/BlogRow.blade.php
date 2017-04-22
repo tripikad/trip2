@@ -7,7 +7,7 @@ $meta = $meta ?? '';
 
 @endphp
 
-<div class="BlogRow {{ $isclasses }}">
+<h3 class="BlogRow {{ $isclasses }}">
 
     <div class="BlogRow__user">
 
@@ -43,4 +43,4 @@ $meta = $meta ?? '';
 
     </div>
 
-</div>
+</h3>

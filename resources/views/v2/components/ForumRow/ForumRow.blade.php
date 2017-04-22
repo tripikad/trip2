@@ -8,7 +8,7 @@ $badge = $badge ?? '';
 
 @endphp
 
-<div class="ForumRow {{ $isclasses }}">
+<h3 class="ForumRow {{ $isclasses }}">
 
     <div class="ForumRow__left">
 
@@ -40,4 +40,4 @@ $badge = $badge ?? '';
 
     </div>
 
-</div>
+</h3>

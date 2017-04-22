@@ -6,7 +6,7 @@ $content = collect($content) ?? collect();
 
 @endphp
 
-<div class="Header {{ $isclasses }}" 
+<header class="Header {{ $isclasses }}"
     style="background-image: linear-gradient(
       rgba(0, 0, 0, 0.4),
       rgba(0, 0, 0, 0.1),
@@ -37,4 +37,4 @@ $content = collect($content) ?? collect();
 
     </div>
     
-</div>
+</header>
