@@ -1,3 +1,3 @@
 User-agent: *
 Disallow:
-Sitemap: http://trip.ee/sitemap.xml
+Sitemap: https://trip.ee/sitemap.xml
