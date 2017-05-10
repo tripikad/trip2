@@ -3,7 +3,6 @@
 namespace App;
 
 use Auth;
-use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model

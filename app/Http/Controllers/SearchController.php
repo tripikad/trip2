@@ -312,7 +312,6 @@ class SearchController extends Controller
             $search = '';
         }
 
-
         return layout('2col')->with('searchResults', $search)->render();
         //dd($search);
     }
