@@ -29,11 +29,9 @@ class V2FrontpageController extends Controller
             ->with('head_image', Image::getSocial())
 
             ->with('promobar', component('PromoBar')
-                ->with('title', 'Osale Trip.ee kampaanias ja võida 2 lennupiletit Maltale')
-                ->with('route_title', 'Vaata lähemalt siit')
-                ->with('route', 'tasuta-lennupiletid-maltale')
+                ->with('title', "Kui vaatad Trippi telefonis ja Chrome'iga, siis võib leht katki olla. Proovi ajutiselt Firefoxi")
                 ->render()
-            )
+             )
 
             ->with('header', region('FrontpageHeader', $destinations))
 

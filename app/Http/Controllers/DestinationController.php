@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use DB;
-use View;
 use Cache;
 use App\Main;
 use App\Destination;
