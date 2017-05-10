@@ -18,7 +18,7 @@ class Content extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-    //protected $appends = ['body_filtered', 'image_id'];
+    protected $appends = ['body_filtered', 'image_id'];
 
     //scout
 
@@ -29,7 +29,25 @@ class Content extends Model
 
     public function toSearchableArray()
     {
-        $array = $this->toArray();
+        //dd($this->comments);
+        $array = $this->getAttributes();
+        $array['comments'] = [];
+
+        $comments = $this->comments;
+
+        if ($comments && count($comments)) {
+            foreach ($comments as $comment) {
+                if ($comment->status === 1) {
+                    $array['comments'][] = $comment->body;
+                }
+            }
+        }
+
+        if (count($array['comments'])) {
+            $array['comments'] = implode("\n", $array['comments']);
+        } else {
+            $array['comments'] = '';
+        }
 
         // Customize array...
 
