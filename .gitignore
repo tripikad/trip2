@@ -11,3 +11,6 @@ public/sitemap.xml
 public/sitemap*
 public/vendor/sitemap
 public/build
+
+storage/*.index
+storage/*.index-journal
