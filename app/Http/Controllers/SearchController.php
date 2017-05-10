@@ -302,8 +302,16 @@ class SearchController extends Controller
 
         //$search_2 = Destination::search($searchKey)->get();
 
+        // $search = Comment::search($searchKey)->get();
+
         //$search = $search->merge($search_2);
-        $search = Comment::search($searchKey)->get();
+
+        if ($request->isMethod('post')) {
+            $search = Content::search($searchKey)->get();
+        } else {
+            $search = '';
+        }
+
 
         return layout('2col')->with('searchResults', $search)->render();
         //dd($search);
