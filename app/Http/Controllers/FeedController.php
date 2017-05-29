@@ -64,6 +64,6 @@ class FeedController extends Controller
             }
         }
 
-        return $feed->render('atom');
+        return $feed->render('rss');
     }
 }
