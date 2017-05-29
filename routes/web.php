@@ -413,9 +413,9 @@ Route::post('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminContro
 
 // Atom feeds
 
-Route::get('index.atom', ['middleware' => 'throttle:15,1', 'uses' => 'FeedController@newsFeed', 'as' => 'news.feed']);
+Route::get('index.atom', ['middleware' => 'throttle:60,1', 'uses' => 'FeedController@newsFeed', 'as' => 'news.feed']);
 
-Route::get('lendude_sooduspakkumised/rss', ['middleware' => 'throttle:15,1', 'uses' => 'FeedController@flightFeed', 'as' => 'flight.feed']);
+Route::get('lendude_sooduspakkumised/rss', ['middleware' => 'throttle:60,1', 'uses' => 'FeedController@flightFeed', 'as' => 'flight.feed']);
 
 // Legacy user paths
 
