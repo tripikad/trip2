@@ -10,7 +10,7 @@ class FeedController extends Controller
     public function newsFeed()
     {
         $feed = App::make('feed');
-        $feed->ctype = "text/xml";
+        $feed->ctype = 'text/xml';
 
         $feed->setCache(config('cache.feed.atom'), 'rssNewsFeed');
 
@@ -40,7 +40,7 @@ class FeedController extends Controller
     public function flightFeed()
     {
         $feed = App::make('feed');
-        $feed->ctype = "text/xml";
+        $feed->ctype = 'text/xml';
 
         $feed->setCache(config('cache.feed.atom'), 'rssFlightsFeed');
 
