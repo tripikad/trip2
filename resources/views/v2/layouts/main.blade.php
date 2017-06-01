@@ -36,6 +36,7 @@
         <script src="{{ elixir('v2/js/main.js') }}"></script>
         @include('v2.utils.promo')
         @include('v2.utils.facebook')
+        @include('v2.utils.googleTag')
         @include('v2.utils.analytics')
         @stack('scripts')
     </body>
