@@ -19,6 +19,7 @@
         ">
         <link rel="stylesheet" href="{{ elixir('v2/css/main.css') }}">
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+        <!-- TradeDoubler site verification 2960089 -->
     </head>
     <body>
         @include('v2.utils.svg')
