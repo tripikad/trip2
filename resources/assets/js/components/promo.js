@@ -15,37 +15,41 @@ googletag.cmd = googletag.cmd || [];
     node.parentNode.insertBefore(gads, node);
 })();
 
-var globalProps = JSON.parse(decodeURIComponent(
-    document.querySelector('#globalprops').getAttribute('content')
-))
 
-var promos = globalProps.promo
+if (document.querySelector('#globalprops') && document.querySelector('#globalprops').getAttribute('content')) {
+    var globalProps = JSON.parse(decodeURIComponent(
+        document.querySelector('#globalprops').getAttribute('content')
+    ));
 
-googletag.cmd.push(function() {
-    for (var promo in promos) {
-        if(promos[promo].id1 && promos[promo].id2) {
-            googletag.defineSlot(promos[promo].id1, [promos[promo].width, promos[promo].height], promos[promo].id2).addService(googletag.pubads());
+    var promos = globalProps.promo;
+
+    googletag.cmd.push(function() {
+        for (var promo in promos) {
+            if(promos[promo].id1 && promos[promo].id2) {
+                googletag.defineSlot(promos[promo].id1, [promos[promo].width, promos[promo].height], promos[promo].id2).addService(googletag.pubads());
+            }
         }
-    }
-    googletag.pubads().enableSingleRequest();
-    googletag.pubads().collapseEmptyDivs();
-    googletag.enableServices();
-    googletag.pubads().addEventListener('slotRenderEnded', function(e) {
-        if (e.slot.B) {
-            var i = index,
-                slot_width = e.size[0],
-                slot_height = e.size[1];
+        googletag.pubads().enableSingleRequest();
+        googletag.pubads().collapseEmptyDivs();
+        googletag.enableServices();
+        googletag.pubads().addEventListener('slotRenderEnded', function(e) {
+            if (e.slot.B) {
+                var i = index,
+                    slot_width = e.size[0],
+                    slot_height = e.size[1];
 
-            ++index;
+                ++index;
 
-            slot[index] = setTimeout(function(){
-                renderEnded(e.slot.B, slot_width, slot_height, i);
-            }, 200);
+                slot[index] = setTimeout(function(){
+                    renderEnded(e.slot.B, slot_width, slot_height, i);
+                }, 200);
 
-            return renderEnded(e.slot.B, slot_width, slot_height, i);
-        }
+                return renderEnded(e.slot.B, slot_width, slot_height, i);
+            }
+        });
     });
-});
+}
+
 
 /*window.onload = function(){
  for (var promo in promos) {
