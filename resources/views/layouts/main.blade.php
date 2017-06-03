@@ -28,7 +28,7 @@
         <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
         <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
         <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
-        <link href="/css/main.css?v=1.7.3" rel="stylesheet" type="text/css">
+        <link href="/css/main.css?v=1.7.4" rel="stylesheet" type="text/css">
     </head>
     <body>
         @include('component.alert.success')
@@ -36,7 +36,7 @@
         @yield('header', view('component.header'))
         @yield('content')
         @yield('footer', view('component.footer'))
-        <script type="text/javascript" src="/js/main.js?v=1.7.3"></script>
+        <script type="text/javascript" src="/js/main.js?v=1.7.4"></script>
         @yield('scripts')
         {!! Analytics::render() !!}
         <div id="fb-root"></div>
