@@ -127,6 +127,35 @@ $footer = $footer ?? '';
     </div>
 
 
+    {{-- shortNews --}}
+
+    <div class="padding-top-md-mobile-none padding-bottom-md">
+
+        <div class="container">
+
+            <div class="row row-center">
+
+                <div class="col-10">
+
+                    @foreach ($shortNews as $news)
+
+                        <div @if (!$loop->last) class="margin-bottom-lg" @endif>
+
+                            {!! $news !!}
+
+                        </div>
+
+                    @endforeach
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
     {{-- Bottom 2 --}}
 
     @foreach ($bottom2 as $bottom_item)

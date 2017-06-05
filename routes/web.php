@@ -37,6 +37,15 @@ Route::put('news/{id}/update', 'V2NewsController@update')
     ->name('news.update')
     ->middleware('role:admin');
 
+// Shortnews
+
+Route::get('luhiuudised', 'V2NewsController@shortnewsIndex')
+    ->name('shortnews.index');
+
+Route::get('luhiuudised/{slug}', 'V2NewsController@show')
+    ->name('shortnews.show');
+
+
 // Flight
 
 Route::get('odavad-lennupiletid', 'V2FlightController@index')

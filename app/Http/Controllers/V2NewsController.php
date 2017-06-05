@@ -11,12 +11,17 @@ use App\Destination;
 
 class V2NewsController extends Controller
 {
-    public function index()
+    public function shortnewsIndex()
+    {
+        return $this->index('shortnews');
+    }
+
+    public function index($type = 'news')
     {
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
-        $news = Content::getLatestPagedItems('news', false, $currentDestination, $currentTopic);
+        $news = Content::getLatestPagedItems($type, false, $currentDestination, $currentTopic);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name')->get();
 
@@ -45,7 +50,7 @@ class V2NewsController extends Controller
                     $currentDestination,
                     $currentTopic,
                     $news->currentPage(),
-                    'news.index'
+                    $type.'.index'
                 ))
             ))
 

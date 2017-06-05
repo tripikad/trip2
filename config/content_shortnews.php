@@ -21,6 +21,10 @@ return [
     'edit' => [
 
         'fields' => [
+            'type' => [
+                'type' => 'radio',
+                'items' => 'menu.news',
+            ],
             'title' => [
                 'type' => 'textarea',
                 'rows' => 3,
