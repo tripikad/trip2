@@ -1,11 +1,16 @@
 @import "variables";
 
 .Promo {
+
+    position: relative;
+    float: left;
+    width: 100%;
+    height: auto;
     overflow: hidden;
-    display: block;
 }
 
     .Promo iframe {
-        display: block;
-        max-width: 100%;
+
+        float: left;
+        width: 100%;
     }
