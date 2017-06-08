@@ -36,7 +36,7 @@ return [
     ],
 
     'feed' => [
-        'atom' => null,
+        'atom' => 60 * 10,
     ],
 
     /*

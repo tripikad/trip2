@@ -10,8 +10,9 @@ class FeedController extends Controller
     public function newsFeed()
     {
         $feed = App::make('feed');
+        $feed->ctype = 'text/xml';
 
-        $feed->setCache(config('cache.feed.atom'));
+        $feed->setCache(config('cache.feed.atom'), 'rssNewsFeed');
 
         if (! $feed->isCached()) {
             $feed->title = config('site.name');
@@ -33,14 +34,15 @@ class FeedController extends Controller
             }
         }
 
-        return $feed->render('atom');
+        return $feed->render('rss');
     }
 
     public function flightFeed()
     {
         $feed = App::make('feed');
+        $feed->ctype = 'text/xml';
 
-        $feed->setCache(config('cache.feed.atom'));
+        $feed->setCache(config('cache.feed.atom'), 'rssFlightsFeed');
 
         if (! $feed->isCached()) {
             $feed->title = config('site.name');
@@ -62,6 +64,6 @@ class FeedController extends Controller
             }
         }
 
-        return $feed->render('atom');
+        return $feed->render('rss');
     }
 }

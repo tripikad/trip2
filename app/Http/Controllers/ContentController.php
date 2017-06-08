@@ -303,7 +303,7 @@ class ContentController extends Controller
             'fields' => config("content_$type.edit.fields"),
             'content' => $content,
             'method' => 'put',
-            'url' => route("$content->type.update", [$content]),
+            'url' => route("$viewType.update", [$content]),
             'type' => $type,
             'destinations' => $destinations,
             'destination' => $destination,
