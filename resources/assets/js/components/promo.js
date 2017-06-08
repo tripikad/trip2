@@ -33,7 +33,7 @@ if (document.querySelector('#globalprops') && document.querySelector('#globalpro
         googletag.pubads().collapseEmptyDivs();
         googletag.enableServices();
         googletag.pubads().addEventListener('slotRenderEnded', function(e) {
-            if (e.slot.B) {
+            if (e.slot.C) {
                 var i = index,
                     slot_width = e.size[0],
                     slot_height = e.size[1];
@@ -41,10 +41,10 @@ if (document.querySelector('#globalprops') && document.querySelector('#globalpro
                 ++index;
 
                 slot[index] = setTimeout(function(){
-                    renderEnded(e.slot.B, slot_width, slot_height, i);
+                    renderEnded(e.slot.C, slot_width, slot_height, i);
                 }, 200);
 
-                return renderEnded(e.slot.B, slot_width, slot_height, i);
+                return renderEnded(e.slot.C, slot_width, slot_height, i);
             }
         });
     });
