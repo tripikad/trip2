@@ -3,7 +3,7 @@
 .Promo {
 
     position: relative;
-    float: left;
+    display: block;
     width: 100%;
     height: auto;
     overflow: hidden;
