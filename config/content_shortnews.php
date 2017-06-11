@@ -26,13 +26,18 @@ return [
                 'items' => 'menu.news',
             ],
             'title' => [
-                'type' => 'textarea',
-                'rows' => 3,
+                'type' => 'text',
+                'title' => 'Title',
+            ],
+            'image_id' => [
+                'type' => 'image_id',
             ],
             'body' => [
                 'type' => 'textarea',
-                'rows' => 2,
+                'title' => 'Body',
+                'rows' => 16,
                 'large' => true,
+                'wysiwyg' => true,
             ],
             'destinations' => [
                 'type' => 'destinations',

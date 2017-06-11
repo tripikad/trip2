@@ -31,8 +31,8 @@ class V2NewsController extends Controller
 
         return layout('2col')
 
-            ->with('title', trans('content.news.index.title'))
-            ->with('head_title', trans('content.news.index.title'))
+            ->with('title', trans('content.'.$type.'.index.title'))
+            ->with('head_title', trans('content.'.$type.'.index.title'))
             ->with('head_description', trans('site.description.news'))
             ->with('head_image', Image::getSocial())
 
@@ -40,7 +40,7 @@ class V2NewsController extends Controller
                 ->push(component('Title')
                     ->is('white')
                     ->is('large')
-                    ->with('title', trans('content.news.index.title'))
+                    ->with('title', trans('content.'.$type.'.index.title'))
                     ->with('route', route('news.index'))
                 )
                 ->push(region(
