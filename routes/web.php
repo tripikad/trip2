@@ -45,7 +45,6 @@ Route::get('luhiuudised', 'V2NewsController@shortnewsIndex')
 Route::get('luhiuudised/{slug}', 'V2NewsController@show')
     ->name('shortnews.show');
 
-
 // Flight
 
 Route::get('odavad-lennupiletid', 'V2FlightController@index')
