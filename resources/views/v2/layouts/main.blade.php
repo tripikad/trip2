@@ -38,6 +38,7 @@
         @include('v2.utils.facebook')
         @include('v2.utils.googleTag')
         @include('v2.utils.analytics')
+        @include('v2.utils.hotjar')
         @stack('scripts')
     </body>
 </html>
