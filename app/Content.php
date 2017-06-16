@@ -3,13 +3,14 @@
 namespace App;
 
 use Auth;
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 
 class Content extends Model
 {
-    use Sluggable, SlugHelper;
+    use Sluggable, SlugHelper, Searchable;
 
     // Setup
 
@@ -18,6 +19,40 @@ class Content extends Model
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
     protected $appends = ['body_filtered', 'image_id'];
+
+    //scout
+
+    public function SearchableAs()
+    {
+        return 'contents';
+    }
+
+    public function toSearchableArray()
+    {
+        //dd($this->comments);
+        $array = $this->getAttributes();
+        $array['comments'] = [];
+
+        $comments = $this->comments;
+
+        if ($comments && count($comments)) {
+            foreach ($comments as $comment) {
+                if ($comment->status === 1) {
+                    $array['comments'][] = $comment->body;
+                }
+            }
+        }
+
+        if (count($array['comments'])) {
+            $array['comments'] = implode("\n", $array['comments']);
+        } else {
+            $array['comments'] = '';
+        }
+
+        // Customize array...
+
+        return $array;
+    }
 
     // Relations
 

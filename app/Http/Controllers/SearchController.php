@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Comment;
 use App\Content;
 use Carbon\Carbon;
 use App\Destination;
@@ -288,5 +289,30 @@ class SearchController extends Controller
                 'header_search' => $header_search,
                 'footer_modifier' => $footer_modifier,
             ]);
+    }
+
+    //scout search trial
+
+    public function scoutsearch(Request $request)
+    {
+        //dd(config('scout.tntsearch'));
+        $searchKey = $request->input('search');
+
+        //$search = Content::search($searchKey)->get();
+
+        //$search_2 = Destination::search($searchKey)->get();
+
+        // $search = Comment::search($searchKey)->get();
+
+        //$search = $search->merge($search_2);
+
+        if ($request->isMethod('post')) {
+            $search = Content::search($searchKey)->get();
+        } else {
+            $search = '';
+        }
+
+        return layout('2col')->with('searchResults', $search)->render();
+        //dd($search);
     }
 }

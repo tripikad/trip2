@@ -25,7 +25,10 @@
         "doctrine/dbal": "^2.5",
         "msurguy/honeypot": "^1.0",
         "roumen/sitemap": "^2.6",
-        "andreasindal/laravel-markdown": "^1.1"
+        "andreasindal/laravel-markdown": "^1.1",
+        "laravel/scout": "2.0",
+        "teamtnt/laravel-scout-tntsearch-driver": "^2.0",
+        "damiantw/laravel-scout-mysql-driver": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

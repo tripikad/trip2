@@ -7,15 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    // Setup
-
     protected $fillable = ['user_id', 'content_id', 'body', 'status'];
 
     protected $appends = ['title', 'body_filtered'];
 
     protected $touches = ['content'];
-
-    // Relations
 
     public function content()
     {

@@ -183,6 +183,10 @@ return [
         Msurguy\Honeypot\HoneypotServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
 
+        Laravel\Scout\ScoutServiceProvider::class,
+        TeamTNT\Scout\TNTSearchScoutServiceProvider::class,
+        DamianTW\MySQLScout\Providers\MySQLScoutServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

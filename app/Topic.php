@@ -2,10 +2,12 @@
 
 namespace App;
 
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
 {
+    use Searchable;
     // Setup
 
     public $timestamps = false;
@@ -13,6 +15,11 @@ class Topic extends Model
     public function content()
     {
         return $this->belongsToMany('App\Content');
+    }
+
+    public function SearchableAs()
+    {
+        return 'topics_index';
     }
 
     // V2

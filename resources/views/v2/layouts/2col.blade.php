@@ -48,6 +48,20 @@ $narrow = $narrow ?? false;
 
 </header>
 
+@if (isset($searchResults))
+    <form action="{{ route('scout_search') }}" method="post">
+        {!! csrf_field() !!}
+        <input type="text" name="search" value="" placeholder="Type your keyword(s)">
+        <input type="submit" value="Search!">
+    </form><br><hr><br>
+
+    @php
+        if ($searchResults) {
+            dd($searchResults);
+        }
+    @endphp
+@endif
+
 @endsection
 
 @section('content')
