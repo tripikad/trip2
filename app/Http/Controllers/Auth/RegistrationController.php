@@ -34,7 +34,7 @@ class RegistrationController extends Controller
 
         $user = User::create(array_merge($request->all(), $fields));
 
-        Mail::queue('email.auth.register', ['user' => $user], function ($mail) use ($user) {
+        Mail::send('email.auth.register', ['user' => $user], function ($mail) use ($user) {
             $mail->to($user->email, $user->name)->subject(trans('auth.register.email.subject'));
 
             $swiftMessage = $mail->getSwiftMessage();

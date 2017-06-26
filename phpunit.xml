@@ -9,22 +9,27 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false">
-    <testsuites>
-        <testsuite name="Application Test Suite">
-            <directory>./tests/</directory>
-        </testsuite>
-    </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">app/</directory>
-        </whitelist>
-    </filter>
-    <php>
-        <env name="APP_ENV" value="testing"/>
-        <env name="APP_DEBUG" value="false"/>
-        <env name="CACHE_DRIVER" value="array"/>
-        <env name="SESSION_DRIVER" value="array"/>
-        <env name="QUEUE_DRIVER" value="sync"/>
-        <env name="IMAGE_DRIVER" value="gd"/>
-    </php>
+<testsuites>
+    <testsuite name="Feature">
+        <directory suffix="Test.php">./tests/Feature</directory>
+    </testsuite>
+
+    <testsuite name="Unit">
+        <directory suffix="Test.php">./tests/Unit</directory>
+    </testsuite>
+</testsuites>
+<filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+        <directory suffix=".php">./app</directory>
+    </whitelist>
+</filter>
+<php>
+    <env name="APP_ENV" value="testing"/>
+    <env name="APP_DEBUG" value="false"/>
+    <env name="CACHE_DRIVER" value="array"/>
+    <env name="SESSION_DRIVER" value="array"/>
+    <env name="QUEUE_DRIVER" value="sync"/>
+    <env name="IMAGE_DRIVER" value="gd"/>
+    <env name="MAIL_DRIVER" value="log"/>
+</php>
 </phpunit>

@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use View;
+use InvalidArgumentException;
 
 class Component
 {
@@ -92,11 +93,22 @@ class Component
         }
 
         $name = "v2.components.$this->component.$this->component";
+        $file_name = $this->exists($name);
+        $path_info = pathinfo($file_name);
 
-        if (view()->exists($name)) {
+        if ($file_name !== false && $path_info['extension'] != 'css') {
             return $this->renderBlade($name);
         } else {
             return $this->renderVue($name);
+        }
+    }
+
+    public function exists($view)
+    {
+        try {
+            return view()->getFinder()->find($view);
+        } catch (InvalidArgumentException $e) {
+            return false;
         }
     }
 
