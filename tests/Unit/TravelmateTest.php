@@ -1,9 +1,9 @@
 <?php
 
-use Tests\BrowserKitTestCase;
+use App\User;
 use App\Content;
 use Carbon\Carbon;
-use App\User;
+use Tests\BrowserKitTestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TravelmateTest extends BrowserKitTestCase
