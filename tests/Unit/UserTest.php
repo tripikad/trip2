@@ -2,10 +2,9 @@
 
 namespace Tests\Unit;
 
-use Tests\BrowserKitTestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
+use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends BrowserKitTestCase
 {

@@ -2,11 +2,10 @@
 
 namespace Tests\Unit;
 
-use Tests\BrowserKitTestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Content;
 use App\User;
+use App\Content;
+use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class FeedTest extends BrowserKitTestCase
 {

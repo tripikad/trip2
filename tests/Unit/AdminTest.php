@@ -2,12 +2,11 @@
 
 namespace Tests\Unit;
 
-use Tests\BrowserKitTestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
-use App\Content;
 use App\Image;
+use App\Content;
+use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AdminTest extends BrowserKitTestCase
 {
