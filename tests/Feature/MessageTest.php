@@ -1,8 +1,8 @@
 <?php
 
-use Tests\BrowserKitTestCase;
 use App\User;
 use App\Message;
+use Tests\BrowserKitTestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class MessageTest extends BrowserKitTestCase

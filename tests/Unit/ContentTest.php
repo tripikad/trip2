@@ -1,8 +1,8 @@
 <?php
 
-use Tests\BrowserKitTestCase;
-use App\Content;
 use App\User;
+use App\Content;
+use Tests\BrowserKitTestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ContentTest extends BrowserKitTestCase

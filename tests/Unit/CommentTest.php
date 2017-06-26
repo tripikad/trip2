@@ -1,10 +1,10 @@
 <?php
 
-use Tests\BrowserKitTestCase;
+use App\User;
 use App\Comment;
 use App\Content;
 use Carbon\Carbon;
-use App\User;
+use Tests\BrowserKitTestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CommentTest extends BrowserKitTestCase
