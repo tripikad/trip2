@@ -1,19 +1,23 @@
 <?php
 
-use App\User;
-use App\Content;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+namespace Tests\Unit;
 
-class FeedTest extends TestCase
+use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\Content;
+use App\User;
+
+class FeedTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
     public function test_unlogged_user_can_access_news_feed()
     {
         $contents = factory(Content::class, 15)->create([
-                'user_id' => factory(User::class)->create()->id,
-                'type' => 'news',
-            ]);
+            'user_id' => factory(User::class)->create()->id,
+            'type' => 'news',
+        ]);
 
         $this
             ->visit('/')

@@ -1,19 +1,23 @@
 <?php
 
-use App\User;
-use App\Image;
-use App\Content;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+namespace Tests\Unit;
 
-class AdminTest extends TestCase
+use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\User;
+use App\Content;
+use App\Image;
+
+class AdminTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
     public function test_unlogged_or_regular_user_can_see_admin_menu()
     {
-        $user1 = factory(App\User::class)->create([
-                'verified' => 'true',
-                'role' => 'regular',
+        $user1 = factory(User::class)->create([
+            'verified' => 'true',
+            'role' => 'regular',
         ]);
 
         // Unlogged user
@@ -38,9 +42,9 @@ class AdminTest extends TestCase
 
         // Regular user
 
-        $user1 = factory(App\User::class)->create([
-                'verified' => 'true',
-                'role' => 'regular',
+        $user1 = factory(User::class)->create([
+            'verified' => 'true',
+            'role' => 'regular',
         ]);
 
         $response = $this->actingAs($user1)
@@ -50,9 +54,9 @@ class AdminTest extends TestCase
 
     public function test_admin_user_can_see_images()
     {
-        $user1 = factory(App\User::class)->create([
-                'verified' => 'true',
-                'role' => 'admin',
+        $user1 = factory(User::class)->create([
+            'verified' => 'true',
+            'role' => 'admin',
         ]);
 
         $this->actingAs($user1)
@@ -65,7 +69,7 @@ class AdminTest extends TestCase
 
     public function test_admin_user_can_post_photos()
     {
-        $user1 = factory(App\User::class)->create(['role' => 'admin']);
+        $user1 = factory(User::class)->create(['role' => 'admin']);
 
         $this->actingAs($user1)
             ->visit('admin/image')
@@ -100,9 +104,9 @@ class AdminTest extends TestCase
 
         // Regular user
 
-        $user1 = factory(App\User::class)->create([
-                'verified' => 'true',
-                'role' => 'regular',
+        $user1 = factory(User::class)->create([
+            'verified' => 'true',
+            'role' => 'regular',
         ]);
 
         $response = $this->actingAs($user1)
@@ -112,17 +116,17 @@ class AdminTest extends TestCase
 
     public function test_admin_user_can_see_unpublished_content()
     {
-        $user1 = factory(App\User::class)->create([
+        $user1 = factory(User::class)->create([
             'verified' => 'true',
             'role' => 'admin',
         ]);
 
-        $user2 = factory(App\User::class)->create([
+        $user2 = factory(User::class)->create([
             'verified' => 'true',
             'role' => 'admin',
         ]);
 
-        $content1 = factory(App\Content::class)->create([
+        $content1 = factory(Content::class)->create([
             'user_id' => $user2->id,
             'title' => 'Hello unpublished',
             'type' => 'forum',
@@ -150,9 +154,9 @@ class AdminTest extends TestCase
 
         // Regular user
 
-        $user1 = factory(App\User::class)->create([
-                'verified' => 'true',
-                'role' => 'regular',
+        $user1 = factory(User::class)->create([
+            'verified' => 'true',
+            'role' => 'regular',
         ]);
 
         $response = $this->actingAs($user1)
@@ -162,17 +166,17 @@ class AdminTest extends TestCase
 
     public function test_admin_user_can_see_internal_forum()
     {
-        $user1 = factory(App\User::class)->create([
-                'verified' => 'true',
-                'role' => 'admin',
-        ]);
-
-        $user2 = factory(App\User::class)->create([
+        $user1 = factory(User::class)->create([
             'verified' => 'true',
             'role' => 'admin',
         ]);
 
-        $content1 = factory(App\Content::class)->create([
+        $user2 = factory(User::class)->create([
+            'verified' => 'true',
+            'role' => 'admin',
+        ]);
+
+        $content1 = factory(Content::class)->create([
             'user_id' => $user2->id,
             'title' => 'Hello internal',
             'type' => 'internal',

@@ -1,38 +1,36 @@
 <?php
 
-use App\User;
-use App\Follow;
-use App\Content;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+namespace Tests\Feature;
 
-class FollowTest extends TestCase
+use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\User;
+use App\Content;
+
+class FollowTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
-    /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessage Received status code [401]
-     */
     public function test_unlogged_user_can_not_access_follows()
     {
-        $user1 = factory(App\User::class)->create(['verified' => true]);
+        $user1 = factory(User::class)->create(['verified' => true]);
 
         $this->visit("user/$user1->id")
             ->dontSee(trans('user.show.menu.follow'));
 
         // Return 401
 
-        $this->visit("user/$user1->id/follows");
+        $response = $this->call('GET', "user/$user1->id/follows");
+
+        $this->assertEquals(401, $response->status());
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_ExpectationFailedException
-     * @expectedExceptionMessage Received status code [401]
-     */
     public function test_user_can_not_access_other_user_follows()
     {
-        $user1 = factory(App\User::class)->create(['verified' => true]);
-        $user2 = factory(App\User::class)->create(['verified' => true]);
+        $user1 = factory(User::class)->create(['verified' => true]);
+        $user2 = factory(User::class)->create(['verified' => true]);
 
         $this->actingAs($user2)
             ->visit("user/$user1->id")
@@ -40,13 +38,15 @@ class FollowTest extends TestCase
 
         // Return 401
 
-        $this->visit("user/$user1->id/follows");
+        $response = $this->call('GET', "user/$user1->id/follows");
+
+        $this->assertEquals(401, $response->status());
     }
 
     public function test_registered_user_can_follow_and_unfollow_content()
     {
-        $user1 = factory(App\User::class)->create(['verified' => true]);
-        $user2 = factory(App\User::class)->create(['verified' => true]);
+        $user1 = factory(User::class)->create(['verified' => true]);
+        $user2 = factory(User::class)->create(['verified' => true]);
 
         $content = factory(Content::class)->create([
             'user_id' => $user1->id,

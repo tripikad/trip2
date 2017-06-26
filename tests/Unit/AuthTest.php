@@ -1,9 +1,15 @@
 <?php
 
-use App\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+namespace Tests\Unit;
 
-class AuthTest extends TestCase
+use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\User;
+use Honeypot;
+use DB;
+
+class AuthTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
@@ -60,7 +66,7 @@ class AuthTest extends TestCase
 
     public function test_registrered_user_can_reset_password()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
 
         // User can request new password
 
