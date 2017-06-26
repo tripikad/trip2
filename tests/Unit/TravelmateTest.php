@@ -1,17 +1,19 @@
 <?php
 
+use Tests\BrowserKitTestCase;
 use App\Content;
 use Carbon\Carbon;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class TravelmateTest extends TestCase
+class TravelmateTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
     public function test_regular_user_cannot_edit_other_user_content()
     {
-        $creator_user = factory(App\User::class)->create();
-        $visitor_user = factory(App\User::class)->create();
+        $creator_user = factory(User::class)->create();
+        $visitor_user = factory(User::class)->create();
         $datetime = Carbon::now()->addMonth(1)->toDateTimeString();
         $year = Carbon::parse($datetime)->year;
         $month = Carbon::parse($datetime)->month;
@@ -47,7 +49,7 @@ class TravelmateTest extends TestCase
 
     public function test_regular_user_can_create_content()
     {
-        $regular_user = factory(App\User::class)->create();
+        $regular_user = factory(User::class)->create();
         $datetime = Carbon::now()->addMonth(1)->toDateTimeString();
         $year = Carbon::parse($datetime)->year;
         $month = Carbon::parse($datetime)->month;
@@ -101,8 +103,8 @@ class TravelmateTest extends TestCase
 
     public function test_admin_user_can_edit_content()
     {
-        $creator_user = factory(App\User::class)->create();
-        $editor_user = factory(App\User::class)->create([
+        $creator_user = factory(User::class)->create();
+        $editor_user = factory(User::class)->create([
             'role' => 'admin',
             'verified' => 1,
         ]);

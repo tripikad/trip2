@@ -35,7 +35,7 @@ class V2ForumController extends Controller
 
         $forums = Content::getLatestPagedItems($forumType, false, $currentDestination, $currentTopic, 'updated_at');
         $destinations = Destination::select('id', 'name')->get();
-        $topics = Topic::select('id', 'name')->orderBy('name')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
 
         $flights = Content::getLatestItems('flight', 3);
         $travelmates = Content::getLatestItems('travelmate', 3);
@@ -242,8 +242,8 @@ class V2ForumController extends Controller
             ->create('forum');
 
         /*
-        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
-        $topics = Destination::select('id', 'name')->orderBy('name')->get();
+        $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+        $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
         return layout('2col')
 

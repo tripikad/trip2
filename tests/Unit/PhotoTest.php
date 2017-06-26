@@ -1,16 +1,18 @@
 <?php
 
+use Tests\BrowserKitTestCase;
 use App\Content;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class PhotoTest extends TestCase
+class PhotoTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
     public function test_regular_user_cannot_edit_other_user_photo()
     {
-        $creator_user = factory(App\User::class)->create();
-        $visitor_user = factory(App\User::class)->create();
+        $creator_user = factory(User::class)->create();
+        $visitor_user = factory(User::class)->create();
 
         // creator create content
         $this->actingAs($creator_user)
@@ -41,8 +43,8 @@ class PhotoTest extends TestCase
 
     public function test_admin_user_can_edit_photo()
     {
-        $creator_user = factory(App\User::class)->create();
-        $editor_user = factory(App\User::class)->create([
+        $creator_user = factory(User::class)->create();
+        $editor_user = factory(User::class)->create([
             'role' => 'admin',
             'verified' => 1,
         ]);
@@ -84,7 +86,7 @@ class PhotoTest extends TestCase
 
     public function test_regular_user_can_post_and_edit_photos()
     {
-        $regular_user = factory(App\User::class)->create();
+        $regular_user = factory(User::class)->create();
 
         $this->actingAs($regular_user)
             ->visit('reisipildid')
