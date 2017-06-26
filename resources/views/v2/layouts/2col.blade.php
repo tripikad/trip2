@@ -24,7 +24,9 @@ $narrow = $narrow ?? false;
 @section('head_image', $head_image)
 
 @section('color', $color)
-@section('background', $background)
+@section('background')
+    {!! $background !!}
+@endsection
 
 @section('header')
 
