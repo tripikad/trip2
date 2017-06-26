@@ -2,12 +2,11 @@
 
 namespace Tests\Unit;
 
-use Tests\BrowserKitTestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use DB;
 use App\User;
 use Honeypot;
-use DB;
+use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthTest extends BrowserKitTestCase
 {
