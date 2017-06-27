@@ -9,8 +9,8 @@ class CreateContentTopicTable extends Migration
     {
         Schema::create('content_topic', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('content_id')->index();
-            $table->integer('topic_id')->index();
+            $table->integer('content_id')->unsigned()->index();
+            $table->integer('topic_id')->unsigned()->index();
         });
     }
 
