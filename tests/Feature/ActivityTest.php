@@ -1,17 +1,20 @@
 <?php
 
+namespace Tests\Feature;
+
 use App\User;
 use App\Comment;
 use App\Content;
+use Tests\BrowserKitTestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ActivityTest extends TestCase
+class ActivityTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
     public function test_unlogged_user_can_see_user_activity()
     {
-        $user1 = factory(App\User::class)->create(['verified' => true]);
+        $user1 = factory(User::class)->create(['verified' => true]);
 
         // Comment activity
 

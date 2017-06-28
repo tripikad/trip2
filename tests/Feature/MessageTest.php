@@ -2,9 +2,10 @@
 
 use App\User;
 use App\Message;
+use Tests\BrowserKitTestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class MessageTest extends TestCase
+class MessageTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
@@ -14,8 +15,8 @@ class MessageTest extends TestCase
      */
     public function test_unlogged_user_can_not_see_messages()
     {
-        $user1 = factory(App\User::class)->create();
-        $user2 = factory(App\User::class)->create();
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
 
         $this->visit("user/$user1->id")
             ->dontSeeLink(trans('user.show.message.create'));
@@ -32,9 +33,9 @@ class MessageTest extends TestCase
      */
     public function test_regular_user_can_not_see_other_user_messages()
     {
-        $user1 = factory(App\User::class)->create();
-        $user2 = factory(App\User::class)->create();
-        $user3 = factory(App\User::class)->create();
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+        $user3 = factory(User::class)->create();
 
         $message = factory(Message::class)->create([
             'user_id_from' => $user1->id,
@@ -54,9 +55,9 @@ class MessageTest extends TestCase
 
     public function test_regular_user_can_send_and_receive_message()
     {
-        $user1 = factory(App\User::class)->create();
-        $user2 = factory(App\User::class)->create();
-        $user3 = factory(App\User::class)->create();
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+        $user3 = factory(User::class)->create();
 
         // Sending a message
 
@@ -119,9 +120,9 @@ class MessageTest extends TestCase
 
     public function test_regular_user_can_receive_messages_from_different_senders()
     {
-        $user1 = factory(App\User::class)->create(['verified' => true]);
-        $user2 = factory(App\User::class)->create(['verified' => true]);
-        $user3 = factory(App\User::class)->create(['verified' => true]);
+        $user1 = factory(User::class)->create(['verified' => true]);
+        $user2 = factory(User::class)->create(['verified' => true]);
+        $user3 = factory(User::class)->create(['verified' => true]);
 
         factory(Message::class)->create([
             'user_id_from' => $user1->id,

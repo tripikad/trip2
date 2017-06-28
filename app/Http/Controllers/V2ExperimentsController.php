@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use App\Destination;
 
 class V2ExperimentsController extends Controller
 {
@@ -56,8 +57,67 @@ class V2ExperimentsController extends Controller
                     ->with('route', route('experiments.blog.profile'))
                 )
 
+                ->push(component('Title')
+                    ->with('title', 'Misc')
+                )
+
+                ->push(component('MetaLink')
+                    ->with('title', 'Selects')
+                    ->with('route', route('experiments.selects'))
+                )
+
             )
 
             ->render();
+    }
+
+    public function selectIndex()
+    {
+        $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+
+        return layout('1col')
+
+            ->with('content', collect()
+
+                ->push(component('Form')
+                    ->with('route', route('experiments.select.create'))
+                    ->with('fields', collect()
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations1')
+                            ->with('options', $destinations)
+                            ->with('value', [1])
+                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations2')
+                            ->with('options', $destinations)
+                            ->with('value', [2, 3])
+                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
+                        )
+                        ->push(component('FormSelect')
+                            ->with('name', 'destination1')
+                            ->with('options', $destinations)
+                            ->with('value', 4)
+                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
+                        )
+                        ->push(component('FormSelect')
+                            ->with('name', 'destination2')
+                            ->with('options', $destinations)
+                            ->with('value', 5)
+                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.edit.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->render();
+    }
+
+    public function selectCreate()
+    {
+        dump(request()->all());
     }
 }

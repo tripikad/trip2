@@ -11,9 +11,9 @@ class CreateContentsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->string('title');
-            $table->text('body');
+            $table->text('body')->nullable();
             $table->string('type')->index();
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->integer('status')->required()->index();
             $table->timestamps();
 

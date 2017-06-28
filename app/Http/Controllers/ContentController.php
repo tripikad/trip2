@@ -303,7 +303,7 @@ class ContentController extends Controller
             'fields' => config("content_$type.edit.fields"),
             'content' => $content,
             'method' => 'put',
-            'url' => route("$content->type.update", [$content]),
+            'url' => route("$viewType.update", [$content]),
             'type' => $type,
             'destinations' => $destinations,
             'destination' => $destination,
@@ -412,7 +412,7 @@ class ContentController extends Controller
             $content->save();
 
             if (in_array($content->type, ['forum', 'buysell', 'expat', 'internal'])) {
-                DB::table('users')->select('id')->chunk(1000, function ($users) use ($content) {
+                DB::table('users')->select('id')->orderBy('id', 'asc')->chunk(1000, function ($users) use ($content) {
                     collect($users)->each(function ($user) use ($content) {
 
                         // For user we store the cache key about new content item

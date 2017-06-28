@@ -1,9 +1,11 @@
 <?php
 
+use App\User;
 use App\Content;
+use Tests\BrowserKitTestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class ContentTest extends TestCase
+class ContentTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
@@ -31,7 +33,7 @@ class ContentTest extends TestCase
 
     public function test_regular_user_can_create_and_edit_public_content()
     {
-        $regular_user = factory(App\User::class)->create();
+        $regular_user = factory(User::class)->create();
 
         foreach ($this->publicContentTypes as $type) {
             $this->actingAs($regular_user)
@@ -77,7 +79,7 @@ class ContentTest extends TestCase
      */
     public function test_regular_user_can_not_create_private_content()
     {
-        $regular_user = factory(App\User::class)->create();
+        $regular_user = factory(User::class)->create();
 
         foreach ($this->privateContentTypes as $type) {
 
@@ -96,11 +98,11 @@ class ContentTest extends TestCase
 
     public function test_regular_user_cannot_create_admin_only_content()
     {
-        $creator_user = factory(App\User::class)->create([
+        $creator_user = factory(User::class)->create([
             'role' => 'admin',
             'verified' => 1,
         ]);
-        $regular_user = factory(App\User::class)->create();
+        $regular_user = factory(User::class)->create();
 
         foreach ($this->privateContentTypes as $type) {
 
@@ -142,11 +144,11 @@ class ContentTest extends TestCase
 
     public function test_regular_user_cannot_edit_other_user_content()
     {
-        $creator_user = factory(App\User::class)->create([
+        $creator_user = factory(User::class)->create([
             'role' => 'admin',
             'verified' => 1,
         ]);
-        $visitor_user = factory(App\User::class)->create();
+        $visitor_user = factory(User::class)->create();
 
         foreach ($this->privateContentTypes as $type) {
 
@@ -184,8 +186,8 @@ class ContentTest extends TestCase
             'buysell',
         ];
 
-        $creator_user = factory(App\User::class)->create();
-        $editor_user = factory(App\User::class)->create([
+        $creator_user = factory(User::class)->create();
+        $editor_user = factory(User::class)->create([
             'role' => 'admin',
             'verified' => 1,
         ]);

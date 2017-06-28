@@ -1,15 +1,18 @@
 <?php
 
+namespace Tests\Unit;
+
 use App\User;
+use Tests\BrowserKitTestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class UserTest extends TestCase
+class UserTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
-    public function test_regular_user_can_upload_profile_image()
+    public function testExample()
     {
-        $user1 = factory(App\User::class)->create();
+        $user1 = factory(User::class)->create();
 
         $this->actingAs($user1)
             ->visit("user/$user1->id/edit")

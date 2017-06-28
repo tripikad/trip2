@@ -17,7 +17,7 @@
         <component
             is="Multiselect"
             v-model="selected"
-            :options="currentOptions"
+            :options="options"
             track-by="name"
             label="name"
             :placeholder="placeholder"
@@ -44,14 +44,13 @@
 
         props: {
             isclasses: { default: '' },
-            options: { default: '' },
+            options: { default: [] },
             placeholder: { default: '' },
             route: { default: '' },
         },
 
         data() {
             return {
-                currentOptions: [],
                 selected: {}
             }
         },
@@ -69,12 +68,7 @@
             onInput() {
                 window.location = this.currentRoute
             }
-        },
-
-        mounted() {
-            this.currentOptions = JSON.parse(decodeURIComponent(this.options))
         }
-
     }
 
 </script>

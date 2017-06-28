@@ -6,32 +6,34 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*",
-        "nikic/php-parser": "2.0.0",
-        "guzzlehttp/guzzle": "~5.3|~6.0",
-        "laravelcollective/html": "5.3.*@dev",
-        "intervention/image": "^2.3@dev",
+        "andreasindal/laravel-markdown": "^1.1",
         "barryvdh/laravel-debugbar": "^2.0@dev",
         "baum/baum": "~1.1",
-        "predis/predis": "~1.0",
-        "wpb/string-blade-compiler": "2.*@dev",
-        "jenssegers/date": "3.*@dev",
-        "ipunkt/laravel-analytics": "~1.1",
-        "roumen/feed": "~2.10",
-        "laravel/socialite" : "~2.0",
-        "laravelista/ekko": "~1.0",
-        "graham-campbell/htmlmin": "^4.3",
         "cviebrock/eloquent-sluggable": "^4.0",
         "doctrine/dbal": "^2.5",
+        "graham-campbell/htmlmin": "^4.3",
+        "guzzlehttp/guzzle": "~5.3|~6.0",
+        "intervention/image": "^2.3@dev",
+        "ipunkt/laravel-analytics": "~1.1",
+        "jenssegers/date": "3.*@dev",
+        "laravel/framework": "5.4.*",
+        "laravel/socialite": "~3.0",
+        "laravel/tinker": "~1.0",
+        "laravelcollective/html": "5.4.*@dev",
+        "laravelista/ekko": "~1.0",
         "msurguy/honeypot": "^1.0",
+        "nikic/php-parser": "2.0.0",
+        "predis/predis": "~1.0",
+        "roumen/feed": "~2.10",
         "roumen/sitemap": "^2.6",
-        "andreasindal/laravel-markdown": "^1.1"
+        "wpb/string-blade-compiler": "2.*@dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
+        "laravel/browser-kit-testing": "^1.0",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.0",
         "phpspec/phpspec": "~2.1",
+        "phpunit/phpunit": "~5.7",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*"
     },
@@ -48,8 +50,12 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/TestCase.php"
-        ]
+            "tests/TestCase.php",
+            "tests/BrowserKitTestCase.php"
+        ],
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "scripts": {
         "post-root-package-install": [
@@ -68,7 +74,9 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true

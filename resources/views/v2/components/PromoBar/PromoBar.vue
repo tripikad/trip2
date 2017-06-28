@@ -18,7 +18,7 @@
 
         </div>
 
-        <div
+        <!--div
             class="PromoBar__closeIcon"
             @click="close"
         >
@@ -30,7 +30,7 @@
             >
             </component>
 
-        </div>
+        </div-->
 
     </div>
 
@@ -65,9 +65,9 @@
         },
 
         mounted() {
-            if (this.$cookie.get('malta-stip-closed')) {
-                this.open = false
-            }
+            // if (this.$cookie.get('malta-stip-closed')) {
+            //    this.open = false
+            // }
         }
 
     }

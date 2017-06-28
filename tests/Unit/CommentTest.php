@@ -1,15 +1,18 @@
 <?php
 
+use App\User;
 use App\Comment;
 use App\Content;
 use Carbon\Carbon;
+use Tests\BrowserKitTestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class CommentTest extends TestCase
+class CommentTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
     protected $publicContentTypes;
+    protected $privateContentTypes;
 
     public function setUp()
     {
@@ -32,11 +35,11 @@ class CommentTest extends TestCase
 
     public function test_regular_user_can_create_and_edit_comment()
     {
-        $regular_user = factory(App\User::class)->create();
+        $regular_user = factory(User::class)->create();
 
         foreach ($this->publicContentTypes as $type) {
             $content = factory(Content::class)->create([
-                'user_id' => factory(App\User::class)->create()->id,
+                'user_id' => factory(User::class)->create()->id,
                 'type' => $type,
                 'end_at' => Carbon::now()->addDays(30),
                 'start_at' => Carbon::now()->addDays(30),
@@ -81,16 +84,16 @@ class CommentTest extends TestCase
 
     public function test_regular_user_cannot_edit_other_comments()
     {
-        $regular_user = factory(App\User::class)->create();
+        $regular_user = factory(User::class)->create();
 
         foreach ($this->publicContentTypes as $type) {
             $content = factory(Content::class)->create([
-                'user_id' => factory(App\User::class)->create()->id,
+                'user_id' => factory(User::class)->create()->id,
                 'type' => 'forum',
             ]);
 
             $comment = factory(Comment::class)->create([
-                'user_id' => factory(App\User::class)->create()->id,
+                'user_id' => factory(User::class)->create()->id,
                 'content_id' => $content->id,
             ]);
 
@@ -107,16 +110,16 @@ class CommentTest extends TestCase
 
     public function test_regular_user_cannot_comments_on_private_content()
     {
-        $regular_user = factory(App\User::class)->create();
+        $regular_user = factory(User::class)->create();
 
         foreach ($this->privateContentTypes as $type) {
             $content = factory(Content::class)->create([
-                'user_id' => factory(App\User::class)->create()->id,
+                'user_id' => factory(User::class)->create()->id,
                 'type' => $type,
             ]);
 
             $comment = factory(Comment::class)->create([
-                'user_id' => factory(App\User::class)->create()->id,
+                'user_id' => factory(User::class)->create()->id,
                 'content_id' => $content->id,
             ]);
 
@@ -138,7 +141,7 @@ class CommentTest extends TestCase
     {
         $this->markTestSkipped();
 
-        $superuser = factory(App\User::class)->create(['role' => 'superuser']);
+        $superuser = factory(User::class)->create(['role' => 'superuser']);
 
         $contentTypes = array_merge($this->publicContentTypes, $this->privateContentTypes);
 

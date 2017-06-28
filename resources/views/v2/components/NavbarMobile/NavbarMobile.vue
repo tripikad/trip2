@@ -10,25 +10,25 @@
         
             <component
                 is="Icon"
-                v-if="! currentUser"
+                v-if="! user"
                 icon="icon-menu"
                 size="lg">
             </component>
         
-            <div v-if="currentUser" class="NavbarMobile__userImage">
+            <div v-if="user" class="NavbarMobile__userImage">
 
                 <component
-                    v-if="currentUser.badge"
+                    v-if="user.badge"
                     is="Badge"
                     class="NavbarMobile__badge"
-                    :title="currentUser.badge"
+                    :title="user.badge"
                 ></component>
 
                 <component
                     is="UserImage"
-                    :route="currentUser.route"
-                    :image="currentUser.image"
-                    :rank="currentUser.rank"
+                    :route="user.route"
+                    :image="user.image"
+                    :rank="user.rank"
                 >
                 </component>
 
@@ -64,7 +64,7 @@
             <div class="NavbarMobile__links">
        
                 <a
-                    v-for="(link, index) in currentLinks"
+                    v-for="(link, index) in links"
                     :href="link.route"
                     key="index"
                 >
@@ -82,7 +82,7 @@
                 </a>
 
                 <a
-                    v-for="(link, index) in currentSublinks"
+                    v-for="(link, index) in sublinks"
                     :href="link.route"
                     key="index"
                 >
@@ -145,28 +145,15 @@
 
         data() {
             return {
-                menuOpen: false,
-                currentLinks: [],
-                currentSublinks: [],
-                currentUser: {}
+                menuOpen: false
             }
         },
 
         methods: {
-            bla() {
-                this.menuOpen = false
-                console.log(this.menuOpen)
-            },
             toggle: function() {
                 this.menuOpen = !this.menuOpen
                 console.log(this.menuOpen)
             }
-        },
-
-        mounted() {
-            this.currentLinks = this.links ? JSON.parse(decodeURIComponent(this.links)) : ''
-            this.currentSublinks = this.sublinks ? JSON.parse(decodeURIComponent(this.sublinks)) : ''
-            this.currentUser = this.user ? JSON.parse(decodeURIComponent(this.user)) : ''
         }
 
     }

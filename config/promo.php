@@ -26,5 +26,17 @@
             'width' => 1152,
             'height' => 144,
         ],
+        'flightoffer_list_top' => [
+            'id1' => env('PROMO_FLIGHTOFFER_LIST_TOP_ID1'),
+            'id2' => env('PROMO_FLIGHTOFFER_LIST_TOP_ID2'),
+            'width' => 720,
+            'height' => 120,
+        ],
+        'flightoffer_list_sidebar' => [
+            'id1' => env('PROMO_FLIGHTOFFER_LIST_SIDEBAR_ID1'),
+            'id2' => env('PROMO_FLIGHTOFFER_LIST_SIDEBAR_ID2'),
+            'width' => 384,
+            'height' => 195,
+        ],
 
     ];

@@ -57,7 +57,7 @@ class V2FlightController extends Controller
             ))
 
             ->with('content', collect()
-                ->push(component('AffPzu'))
+                ->push(component('Promo')->with('promo', 'flightoffer_list_top'))
                 ->merge($flights->slice(0, $sliceSize)->map(function ($flight) {
                     return region('FlightRow', $flight);
                 })
@@ -73,6 +73,7 @@ class V2FlightController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
+                ->push(component('Promo')->with('promo', 'flightoffer_list_sidebar'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffHotelscombined'))
