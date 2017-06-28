@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Content;
 use App\Topic;
+use App\Content;
+use Illuminate\Console\Command;
+
 class ForumMiscTopic extends Command
 {
     /**
@@ -36,7 +37,7 @@ class ForumMiscTopic extends Command
 
         $this->info('Converting content');
 
-        $items->each(function ($item){
+        $items->each(function ($item) {
             $item->type = 'misc';
             $item->save();
             $item->topics()->detach(5000);
