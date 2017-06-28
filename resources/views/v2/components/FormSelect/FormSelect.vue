@@ -4,8 +4,8 @@
         
         <component
             is="Multiselect"
-            v-model="selected"
-            :options="currentOptions"
+            v-model="localValue"
+            :options="options"
             track-by="name"
             label="name"
             :placeholder="placeholder"
@@ -13,7 +13,7 @@
         </component>
 
         <input
-            v-model="currentId"
+            v-model="returnValue"
             v-show="false"
             type="text"
             :name="name"
@@ -36,27 +36,23 @@
             name: { default: '' },
             options: { default: '' },
             placeholder: { default: '' },
-            helper: { default: '' },
-            value: { default: '' },
-            tagplaceholder: { default: '' }
+            value: { default: '' }
         },
 
         data() {
             return {
-                selected: {},
-                currentOptions: []
+                localValue: {}
             }
         },
 
         computed: {
-            currentId() {
-                return this.selected ? this.selected.id : ''
+            returnValue() {
+                return this.localValue ? this.localValue.id : ''
             }
         },
 
         mounted() {
-            this.currentOptions = this.options
-            this.selected = this.currentOptions.find((option) => option.id === parseInt(this.value))
+            this.localValue = this.options.find((option) => option.id === parseInt(this.value))
         }
     }
 
