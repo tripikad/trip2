@@ -52,7 +52,7 @@
         },
 
         mounted() {
-            this.localValue = this.options.find((option) => option.id === parseInt(this.value))
+            this.localValue = this.options.find(option => option.id === parseInt(this.value))
         }
     }
 
