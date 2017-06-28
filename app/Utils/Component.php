@@ -65,8 +65,9 @@ class Component
     public function renderVue($name)
     {
         $props = $this->with
-            ->map(function($value, $key) {
+            ->map(function ($value, $key) {
                 $value = json_encode($value, JSON_HEX_APOS);
+
                 return ":$key='$value'";
             })
             ->implode(' ');
