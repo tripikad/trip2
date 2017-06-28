@@ -307,6 +307,12 @@ Route::post('utils/filter', 'V2UtilsController@filter')
 Route::get('experiments', 'V2ExperimentsController@index')
     ->name('experiments.index');
 
+Route::get('experiments/select', 'V2ExperimentsController@selectIndex')
+    ->name('experiments.select.index');
+
+Route::post('experiments/select', 'V2ExperimentsController@selectCreate')
+    ->name('experiments.select.create');
+
 // Experiments: Auth
 
 Route::get('experiments/login', 'V2AuthController@loginForm')
