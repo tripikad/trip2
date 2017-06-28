@@ -66,7 +66,6 @@ class V2ExperimentsController extends Controller
                     ->with('route', route('experiments.selects'))
                 )
 
-
             )
 
             ->render();
@@ -74,7 +73,6 @@ class V2ExperimentsController extends Controller
 
     public function selectIndex()
     {
-
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
         return layout('1col')
@@ -93,7 +91,7 @@ class V2ExperimentsController extends Controller
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'destinations2')
                             ->with('options', $destinations)
-                            ->with('value', [2,3])
+                            ->with('value', [2, 3])
                             ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
                         )
                         ->push(component('FormSelect')
@@ -122,5 +120,4 @@ class V2ExperimentsController extends Controller
     {
         dump(request()->all());
     }
-
 }
