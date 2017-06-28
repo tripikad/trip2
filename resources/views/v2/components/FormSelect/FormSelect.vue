@@ -56,7 +56,7 @@
         },
 
         mounted() {
-            this.currentOptions = JSON.parse(decodeURIComponent(this.options))
+            this.currentOptions = this.options
             this.selected = this.currentOptions.find((option) => option.id === parseInt(this.value))
         }
     }

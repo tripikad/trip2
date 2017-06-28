@@ -60,8 +60,8 @@
         },
 
         mounted() {
-            this.currentOptions = JSON.parse(decodeURIComponent(this.options))
-            this.currentValue = JSON.parse(decodeURIComponent(this.value))
+            this.currentOptions = this.options
+            this.currentValue = this.value
             this.currentValue = this.currentValue.map(value => {
                 var option = this.currentOptions.find(option => option.id === value)
                 return {id: value, name: option.name}
