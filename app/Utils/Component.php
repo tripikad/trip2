@@ -66,14 +66,9 @@ class Component
     {
         $props = $this->with
             ->map(function ($value, $key) {
-                if (is_array($value) || is_object($value) || is_bool($value)) {
-                    $value = rawurlencode(json_encode($value));
-                }
+                $value = json_encode($value, JSON_HEX_APOS);
 
-                return $value;
-            })
-            ->map(function ($value, $key) {
-                return $key.'="'.$value.'"';
+                return ":$key='$value'";
             })
             ->implode(' ');
 
