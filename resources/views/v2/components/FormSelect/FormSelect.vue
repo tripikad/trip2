@@ -9,7 +9,6 @@
             track-by="name"
             label="name"
             :placeholder="placeholder"
-            :tag-placeholder="false"
         >
         </component>
 
