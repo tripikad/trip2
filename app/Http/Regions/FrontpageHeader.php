@@ -5,7 +5,7 @@ namespace App\Http\Regions;
 class FrontpageHeader
 {
     public function render($destinations)
-    {
+    {   
         return component('FrontpageHeader')
             ->with('background', '/photos/header3.jpg')
             ->with('navbar', component('Navbar')
