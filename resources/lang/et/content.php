@@ -274,6 +274,10 @@ return [
 
     'buysell.no.results' => 'Hetkel pole ühtegi postitust rubriigis "Ost-müük".',
 
+    //Misc
+
+    'misc.index.title' => 'Vaba teema',
+
     // Photo
 
     'photo.index.title' => 'Reisipildid',

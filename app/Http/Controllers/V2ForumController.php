@@ -28,6 +28,11 @@ class V2ForumController extends Controller
         return $this->index('expat');
     }
 
+    public function miscIndex()
+    {
+        return $this->index('misc');
+    }
+
     private function index($forumType)
     {
         $currentDestination = Request::get('destination');

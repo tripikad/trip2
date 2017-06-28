@@ -96,6 +96,9 @@ Route::get('foorum/ost-muuk', 'V2ForumController@buysellIndex')
 Route::get('foorum/elu-valimaal', 'V2ForumController@expatIndex')
     ->name('expat.index');
 
+Route::get('foorum/vaba-teema', 'V2ForumController@miscIndex')
+    ->name('misc.index');
+
 Route::get('foorum/uldfoorum/{slug}', 'V2ForumController@show')
     ->name('forum.show');
 
@@ -104,6 +107,9 @@ Route::get('foorum/ost-muuk/{slug}', 'V2ForumController@show')
 
 Route::get('foorum/elu-valimaal/{slug}', 'V2ForumController@show')
     ->name('expat.show');
+
+Route::get('foorum/vaba-teema/{slug}', 'V2ForumController@show')
+    ->name('misc.show');
 
 Route::get('forum/create', 'V2ForumController@create')
     ->name('forum.create')

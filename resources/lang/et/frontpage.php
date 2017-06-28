@@ -11,6 +11,7 @@ return [
     'index.forum.general' => 'Üldfoorum',
     'index.forum.buysell' => 'Ost-müük',
     'index.forum.expat' => 'Elu välismaal',
+    'index.forum.misc' => 'Vaba teema',
     'index.forum.create' => 'Alusta teemat',
 
     'index.shortnews.title' => 'Lühiuudised',

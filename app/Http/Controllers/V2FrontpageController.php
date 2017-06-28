@@ -66,7 +66,7 @@ class V2FrontpageController extends Controller
             ->with('sidebar', collect()
                 ->push('&nbsp')
                 ->push(component('Block')->with('content', collect()
-                    ->merge(collect(['forum', 'buysell', 'expat'])
+                    ->merge(collect(['forum', 'buysell', 'expat', 'misc'])
                         ->flatMap(function ($type) use ($loggedUser) {
                             return collect()
                                 ->push(component('Link')
