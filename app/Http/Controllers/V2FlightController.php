@@ -207,6 +207,66 @@ class V2FlightController extends Controller
             ->create('flight');
     }
 
+    public function create2()
+    {
+        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
+
+        return layout('1col')
+
+            ->with('header', region('Header', collect()
+                ->push(component('EditorScript'))
+                ->push(component('Title')
+                    ->is('white')
+                    ->with('title', trans('content.flight.index.title'))
+                    ->with('route', route('flight.index'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.flight.edit.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('flight.store'))
+                    ->with('method', 'POST')
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.flight.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title'))
+                        )
+                        ->push(component('FormImageId')
+                            ->with('title', trans('content.flight.edit.field.image_id.title'))
+                            ->with('name', 'image_id')
+                            ->with('value', old('image_id'))
+                        )
+                        ->push(component('FormEditor')
+                            ->with('title', trans('content.flight.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', [old('body')])
+                            ->with('rows', 10)
+                        )
+                        /*
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('value', $flight->destinations)
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                        )
+                        */
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.edit.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
     public function edit($id)
     {
         return App::make('App\Http\Controllers\ContentController')
@@ -225,7 +285,7 @@ class V2FlightController extends Controller
                 ->push(component('Title')
                     ->is('white')
                     ->with('title', trans('content.flight.index.title'))
-                    ->with('route', route('news.index'))
+                    ->with('route', route('flight.index'))
                 )
             ))
 

@@ -25,6 +25,10 @@ Route::get('news/create', 'V2NewsController@create')
     ->name('news.create')
     ->middleware('role:admin');
 
+Route::get('news/create2', 'V2NewsController@create2')
+    ->name('news.create2')
+    ->middleware('role:admin');
+
 Route::post('news/store', 'V2NewsController@store')
     ->name('news.store')
     ->middleware('role:admin');
@@ -51,6 +55,10 @@ Route::get('odavad-lennupiletid/{slug}', 'V2FlightController@show')
 
 Route::get('flight/create', 'V2FlightController@create')
     ->name('flight.create')
+    ->middleware('role:admin');
+
+Route::get('flight/create2', 'V2FlightController@create2')
+    ->name('flight.create2')
     ->middleware('role:admin');
 
 Route::post('flight/store', 'V2FlightController@store')
