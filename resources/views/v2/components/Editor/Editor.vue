@@ -45,7 +45,7 @@
 
 <script>
 
-    import CodeMirror from 'codemirror/lib/codemirror.js'
+    //import CodeMirror from 'codemirror/lib/codemirror.js'
     import gfm from 'codemirror/mode/gfm/gfm.js'
 
     import unescape from 'lodash.unescape'
@@ -147,14 +147,14 @@
             }
         },
         mounted() {
-
+            
             this.editor = CodeMirror(this.$refs.source, {
                 mode: 'gfm',
                 theme: 'neo',
                 lineWrapping: true,
                 viewportMargin: Infinity
             })
-
+            
             this.editor.on('change', editor => {
                 this.value = editor.getValue()
                 this.$events.$emit('editor.update', this.value)

@@ -146,6 +146,8 @@ return [
 
     'flight.create.title' => 'Lisa pakkumine',
 
+    'flight.edit.title' => 'Muuda lennupakkumist',
+
     'flight.edit.field.title.title' => 'Pealkiri',
     'flight.edit.field.title.help' => '',
 

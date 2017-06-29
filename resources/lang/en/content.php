@@ -120,6 +120,8 @@ return [
 
     'flight.show.action.all' => 'All offers',
 
+    'flight.edit.title' => 'Edit flight offer',
+
     'flight.edit.field.title.title' => 'Title',
     'flight.edit.field.title.help' => '',
 

@@ -223,7 +223,7 @@ class V2FlightController extends Controller
             ->with('header', region('Header', collect()
                 ->push(component('Title')
                     ->is('white')
-                    ->with('title', trans('content.news.index.title'))
+                    ->with('title', trans('content.flight.index.title'))
                     ->with('route', route('news.index'))
                 )
             ))
@@ -253,12 +253,14 @@ class V2FlightController extends Controller
                             ->with('value', [old('body', $flight->body)])
                             ->with('rows', 10)
                         )
+                        /*
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'destinations')
                             ->with('options', $destinations)
                             ->with('value', $flight->destinations)
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
                         )
+                        */
                         ->push(component('FormButton')
                             ->with('title', trans('content.edit.submit.title'))
                         )

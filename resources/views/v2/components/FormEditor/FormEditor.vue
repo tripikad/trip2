@@ -39,7 +39,7 @@
         }),
 
         mounted() {
-            this.currentValue = JSON.parse(decodeURIComponent(this.value))[0]
+            this.currentValue = this.value[0]
             this.$events.$on('editor.update', value => {
                 this.currentValue = value
             })
