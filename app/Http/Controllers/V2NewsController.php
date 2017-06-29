@@ -126,7 +126,6 @@ class V2NewsController extends Controller
 
     public function create2()
     {
-
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
         $topics = Destination::select('id', 'name')->orderBy('name')->get();
 
@@ -191,7 +190,6 @@ class V2NewsController extends Controller
 
             ->render();
     }
-
 
     public function edit($id)
     {
