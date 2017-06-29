@@ -14,14 +14,14 @@
                     <div class="Editor__tool" @click="insertUl">*</div>
                     <div class="Editor__tool" @click="insertH3">H3</div>
                     <div class="Editor__tool" @click="insertH4">H4</div>
-                    <div class="Editor__tool" @click="cleanMarkup">Clean</div>
-                    <div class="Editor__tool" @click="openPicker">Img</div>
+                    <div class="Editor__tool" @click="cleanMarkup">Cleanup</div>
+                    <div class="Editor__tool" @click="openPicker">Image</div>
 
                 </div>
 
                 <div class="Editor__toolbarRight">
 
-                    <div class="Editor__tool" @click="show = false">Back</div>
+                    <div class="Editor__tool" @click="show = false">OK</div>
 
                 </div>
 
@@ -148,33 +148,37 @@
         },
         mounted() {
             
-            this.editor = CodeMirror(this.$refs.source, {
-                mode: 'gfm',
-                theme: 'neo',
-                lineWrapping: true,
-                viewportMargin: Infinity
-            })
-            
-            this.editor.on('change', editor => {
-                this.value = editor.getValue()
-                this.$events.$emit('editor.update', this.value)
-                this.updatePreview()
-            })
+            if (window.CodeMirror !== undefined) {
 
-            this.$events.$on('editor.show', value => {
-                this.show = true
-                this.value = value
-                this.editor.setValue(this.value)
-                setTimeout(() => this.editor.refresh(), 1)
-                this.updatePreview()
-            })
-        
-            this.$events.$on('imagepicker.insert', payload => {
-                if (payload.target === this.target) {
-                    this.insertImage(payload.id)
-                }
-                this.$events.$emit('imagepicker.hide')
-            })
+                this.editor = CodeMirror(this.$refs.source, {
+                    mode: 'gfm',
+                    theme: 'neo',
+                    lineWrapping: true,
+                    viewportMargin: Infinity
+                })
+                
+                this.editor.on('change', editor => {
+                    this.value = editor.getValue()
+                    this.$events.$emit('editor.update', this.value)
+                    this.updatePreview()
+                })
+
+                this.$events.$on('editor.show', value => {
+                    this.show = true
+                    this.value = value
+                    this.editor.setValue(this.value)
+                    setTimeout(() => this.editor.refresh(), 1)
+                    this.updatePreview()
+                })
+            
+                this.$events.$on('imagepicker.insert', payload => {
+                    if (payload.target === this.target) {
+                        this.insertImage(payload.id)
+                    }
+                    this.$events.$emit('imagepicker.hide')
+                })
+
+            }
         }
 
     }

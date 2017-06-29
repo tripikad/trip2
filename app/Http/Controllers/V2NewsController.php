@@ -139,6 +139,7 @@ class V2NewsController extends Controller
         return layout('1col')
 
             ->with('header', region('Header', collect()
+                ->push(component('EditorScript'))
                 ->push(component('Title')
                     ->is('white')
                     ->with('title', trans('content.news.index.title'))
@@ -171,13 +172,14 @@ class V2NewsController extends Controller
                             ->with('value', [old('body', $news->body)])
                             ->with('rows', 10)
                         )
+                        /*
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'destinations')
                             ->with('options', $destinations)
                             ->with('value', $news->destinations)
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
                         )
-                        /*->push(component('FormSelectMultiple')
+                        ->push(component('FormSelectMultiple')
                             ->with('name', 'topics')
                             ->with('options', $topics)
                             ->with('value', $news->topics)

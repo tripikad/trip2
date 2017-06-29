@@ -25,6 +25,7 @@
     </head>
     <body>
         @include('v2.utils.svg')
+        @stack('prescripts')
         <div id="app" class="background-{{ $color }}">
             @yield('background')
             @yield('promobar')
@@ -42,7 +43,6 @@
             {!! component('Alert') !!}
 
         </div>
-        <script src="/v2/js/codemirror.js"></script>
         <script src="{{ elixir('v2/js/main.js') }}"></script>
         @include('v2.utils.promo')
         @include('v2.utils.facebook')

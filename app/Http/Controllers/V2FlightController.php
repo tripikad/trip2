@@ -221,6 +221,7 @@ class V2FlightController extends Controller
         return layout('1col')
 
             ->with('header', region('Header', collect()
+                ->push(component('EditorScript'))
                 ->push(component('Title')
                     ->is('white')
                     ->with('title', trans('content.flight.index.title'))
