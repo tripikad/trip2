@@ -19,7 +19,7 @@ class NewsAbout
                     ->with('route', route('news.create'))
                 )
                 ->pushWhen($user && $user->hasRole('admin'), component('Button')
-                    ->with('title', trans("content.$type.create.title")." 2")
+                    ->with('title', trans("content.$type.create.title").' 2')
                     ->with('route', route('news.create2'))
                 )
             );
