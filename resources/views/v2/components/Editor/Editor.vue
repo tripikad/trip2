@@ -166,8 +166,12 @@
                 this.$events.$on('editor.show', value => {
                     this.show = true
                     this.value = value
-                    this.editor.setValue(this.value)
-                    setTimeout(() => this.editor.refresh(), 1)
+                    this.editor.setValue(this.value ? this.value : '')
+                    setTimeout(() => {
+                        this.editor.refresh()
+                        this.editor.focus()
+                        this.editor.setCursor({line: 0, ch: 0})
+                    }, 1)
                     this.updatePreview()
                 })
             

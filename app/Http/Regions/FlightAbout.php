@@ -28,6 +28,10 @@ class FlightAbout
                     ->with('title', trans("content.$type.create.title"))
                     ->with('route', route("$type.create"))
                 )
+                ->pushWhen($user && $user->hasRole('admin'), component('Button')
+                    ->with('title', trans("content.$type.create.title")." 2")
+                    ->with('route', route("$type.create2"))
+                )
             );
     }
 }

@@ -142,7 +142,7 @@ class V2NewsController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.news.edit.title'))
+                    ->with('title', trans('content.news.create.title'))
                 )
                 ->push(component('Form')
                     ->with('route', route('news.store'))
