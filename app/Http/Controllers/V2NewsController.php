@@ -127,7 +127,7 @@ class V2NewsController extends Controller
     public function create2()
     {
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
-        $topics = Destination::select('id', 'name')->orderBy('name')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name')->get();
 
         return layout('1col')
 
@@ -165,20 +165,16 @@ class V2NewsController extends Controller
                             ->with('value', [old('body')])
                             ->with('rows', 10)
                         )
-                        /*
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'destinations')
                             ->with('options', $destinations)
-                            ->with('value', $news->destinations)
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
                         )
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'topics')
                             ->with('options', $topics)
-                            ->with('value', $news->topics)
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
-                        */
                         ->push(component('FormButton')
                             ->with('title', trans('content.edit.submit.title'))
                         )
@@ -201,7 +197,7 @@ class V2NewsController extends Controller
     {
         $news = Content::findOrFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
-        $topics = Destination::select('id', 'name')->orderBy('name')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name')->get();
 
         return layout('1col')
 
@@ -239,20 +235,18 @@ class V2NewsController extends Controller
                             ->with('value', [old('body', $news->body)])
                             ->with('rows', 10)
                         )
-                        /*
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'destinations')
                             ->with('options', $destinations)
-                            ->with('value', $news->destinations)
+                            ->with('value', $news->destinations->pluck('id'))
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
                         )
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'topics')
                             ->with('options', $topics)
-                            ->with('value', $news->topics)
+                            ->with('value', $news->topics->pluck('id'))
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
-                        */
                         ->push(component('FormButton')
                             ->with('title', trans('content.edit.submit.title'))
                         )
