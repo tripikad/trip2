@@ -127,10 +127,12 @@
                 value = value.replace(/\n\n/g, '</p><p>')
                 value = value.replace(/<br \/>/g, '</p><p>')
                 value = tomarkdown(value)
-                //value = value.replace(/\n[0-9+]\\\./g, '@')
                 value = value.replace(/\\./g, '.')
+                value = value.replace(/^\*\*/g, '\n\n### ')
+                value = value.replace(/^\n+?/g, '')
                 value = value.replace(/\n\n\*\*/g, '\n\n### ')
                 value = value.replace(/\*\*\n\n/g, '\n\n')
+                value = value.trim()
                 this.editor.setValue(value)
                 this.editor.focus()
             },
