@@ -65,7 +65,14 @@
             preview: '',
             target: 'editor'
         }),
-
+        watch: {
+            show(value) {
+                // If the editor is showed, scroll to top
+                if (value === true) {
+                    window.scrollTo(0, 0)
+                }
+            }
+        },
         methods: {
             insertLink() {
                 var link = window.prompt('Link', 'http://')

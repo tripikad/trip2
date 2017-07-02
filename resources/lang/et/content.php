@@ -93,6 +93,8 @@ return [
     'news.edit.field.body.title' => 'Sisu',
     'news.edit.field.body.help' => '',
 
+    'news.edit.field.body.title2' => 'Sisu (vajuta hallil kastil et editor avaneks)',
+
     'news.edit.field.destinations.title' => 'Vali sihtkohad',
     'news.edit.field.destinations.help' => '',
 
@@ -156,6 +158,8 @@ return [
 
     'flight.edit.field.body.title' => 'Sisu',
     'flight.edit.field.body.help' => '',
+
+    'flight.edit.field.body.title2' => 'Sisu (vajuta hallil kastil et editor avaneks)',
 
     'flight.edit.field.destinations.title' => 'Vali sihtkohad',
     'flight.edit.field.destinations.help' => '',
