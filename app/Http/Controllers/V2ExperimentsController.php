@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Content;
-use App\Destination;
 
 class V2ExperimentsController extends Controller
 {
@@ -140,7 +139,6 @@ class V2ExperimentsController extends Controller
             })
             ->values();
 
-
         return layout('1col')
 
             ->with('content', collect()
@@ -171,5 +169,4 @@ class V2ExperimentsController extends Controller
             )
             ->render();
     }
-
 }
