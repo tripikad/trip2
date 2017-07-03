@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Cache;
 use App\Image;
 use App\Content;
 use App\Destination;
-use Cache;
 
 class V2FrontpageController extends Controller
 {
