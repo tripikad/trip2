@@ -20,7 +20,7 @@ class CreateContentsTable extends Migration
             $table->dateTime('start_at')->nullable();
             $table->dateTime('end_at')->nullable();
             $table->string('duration')->nullable();
-            $table->tinyInteger('price')->nullable();
+            $table->mediumInteger('price')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
