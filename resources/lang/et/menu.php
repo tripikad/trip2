@@ -50,6 +50,7 @@ return [
     'forum.forum' => 'Üldfoorum',
     'forum.expat' => 'Elu välismaal',
     'forum.buysell' => 'Ost-müük',
+    'forum.misc' => 'Vaba teema',
 
     'user.activity' => 'Minu profiil',
     'user.profile' => 'Profiil',

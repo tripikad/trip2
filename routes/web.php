@@ -115,6 +115,25 @@ Route::get('forum/create', 'V2ForumController@create')
     ->name('forum.create')
     ->middleware('role:regular');
 
+//Misc topic tests
+
+Route::get('forum/create/vaba-teema', 'V2MiscController@create')
+    ->name('forum.create.misc')
+    ->middleware('role:regular');
+
+Route::post('forum/store/vaba-teema', 'V2MiscController@store')
+    ->name('forum.store.misc')
+    ->middleware('role:regular');
+
+Route::get('forum/vaba-teema/{content}/edit', 'V2MiscController@edit')
+    ->name('forum.edit.misc')
+    ->middleware('role:regular');
+
+Route::post('forum/vaba-teema/{content}/update', 'V2MiscController@store')
+    ->name('forum.update.misc')
+    ->middleware('role:regular');
+
+
 Route::post('forum/store', 'V2ForumController@store')
     ->name('forum.store')
     ->middleware('role:regular');

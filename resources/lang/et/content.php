@@ -277,7 +277,7 @@ return [
     //Misc
 
     'misc.index.title' => 'Vaba teema',
-
+    'misc.create.title' => 'Lisa uus teema',
     // Photo
 
     'photo.index.title' => 'Reisipildid',
