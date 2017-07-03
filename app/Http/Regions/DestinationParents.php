@@ -9,6 +9,7 @@ class DestinationParents
         return component('Meta')
             ->with('items', $parents->map(function ($parent) use ($short) {
                 $title = $short ? $parent->vars()->shortName : $parent->vars()->name;
+
                 return component('MetaLink')
                     ->is('large')
                     ->is('white')
