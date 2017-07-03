@@ -391,9 +391,8 @@ Route::get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordFo
 Route::post('reset/password', ['uses' => 'Auth\ResetController@reset', 'as' => 'reset.password.submit']);
 
 // FB campaign
-
-Route::get('tasuta-lennupiletid-maltale', ['uses' => 'CampaignController@index', 'as' => 'index']);
-Route::get('tasuta-lennupiletid-maltale{path}', ['uses' => 'CampaignController@index', 'as' => 'index']);
+/*Route::get('tasuta-lennupiletid-maltale', ['uses' => 'CampaignController@index', 'as' => 'index']);
+Route::get('tasuta-lennupiletid-maltale{path}', ['uses' => 'CampaignController@index', 'as' => 'index']);*/
 
 // Flags
 
@@ -417,9 +416,9 @@ Route::post('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminContro
 
 // Atom feeds
 
-Route::get('index.atom', ['uses' => 'FeedController@newsFeed', 'as' => 'news.feed']);
+Route::get('index.atom', ['middleware' => 'throttle:60,1', 'uses' => 'FeedController@newsFeed', 'as' => 'news.feed']);
 
-Route::get('lendude_sooduspakkumised/rss', ['uses' => 'FeedController@flightFeed', 'as' => 'flight.feed']);
+Route::get('lendude_sooduspakkumised/rss', ['middleware' => 'throttle:60,1', 'uses' => 'FeedController@flightFeed', 'as' => 'flight.feed']);
 
 // Legacy user paths
 

@@ -28,10 +28,10 @@ class V2FrontpageController extends Controller
             ->with('head_description', trans('site.description.main'))
             ->with('head_image', Image::getSocial())
 
-            ->with('promobar', component('PromoBar')
+            /*->with('promobar', component('PromoBar')
                 ->with('title', "Kui vaatad Trippi telefonis ja Chrome'iga, siis võib leht katki olla. Proovi ajutiselt Firefoxi")
                 ->render()
-             )
+             )*/
 
             ->with('header', region('FrontpageHeader', $destinations))
 

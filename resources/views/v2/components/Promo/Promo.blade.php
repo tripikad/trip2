@@ -9,6 +9,8 @@ $id2 = config("promo.$promo.id2");
 
 @push('scripts')
     <script type="text/javascript">
-        googletag.cmd.push(function() { googletag.display('{{ $id2 }}'); });
+        googletag.cmd.push(function() {
+            googletag.display('{{ $id2 }}');
+        });
     </script>
 @endpush

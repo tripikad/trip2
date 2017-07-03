@@ -19,6 +19,7 @@
         ">
         <link rel="stylesheet" href="{{ elixir('v2/css/main.css') }}">
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+        <!-- TradeDoubler site verification 2960089 -->
     </head>
     <body>
         @include('v2.utils.svg')
@@ -35,7 +36,9 @@
         <script src="{{ elixir('v2/js/main.js') }}"></script>
         @include('v2.utils.promo')
         @include('v2.utils.facebook')
+        @include('v2.utils.googleTag')
         @include('v2.utils.analytics')
+        @include('v2.utils.hotjar')
         @stack('scripts')
     </body>
 </html>
