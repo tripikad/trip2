@@ -39,6 +39,7 @@ class ForumMiscTopic extends Command
 
         $items->each(function ($item) {
             $item->type = 'misc';
+            $item->timestamps = false;
             $item->save();
             $item->topics()->detach(5000);
         });

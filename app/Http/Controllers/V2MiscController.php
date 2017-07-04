@@ -37,12 +37,13 @@ class V2MiscController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.forum.create.title'))
+                    ->with('title', trans('content.misc.create.title'))
                 )
                 ->push(component('Form')
                     ->with('id', 'ForumCreateForm')
                     ->with('route', route('forum.store.misc'))
                     ->with('fields', collect()
+                        // TODO: replace with hidden field
                         ->push(component('FormRadio')
                             ->with('name', 'type')
                             ->with('value', 'forum')
@@ -86,11 +87,11 @@ class V2MiscController extends Controller
                         ->push(component('Title')
                             ->is('smaller')
                             ->is('red')
-                            ->with('title', trans('content.edit.notes.heading'))
+                            ->with('title', trans('content.misc.edit.notes.heading'))
                             ->with('route', route('forum.index'))
                         )
                         ->push(component('Body')
-                            ->with('body', trans('content.edit.notes.body'))
+                            ->with('body', trans('content.misc.edit.notes.body'))
                         )
                     ))
             )
@@ -100,7 +101,7 @@ class V2MiscController extends Controller
             ->render();
     }
 
-    public function store(Request $request, Content $content = null)
+    public function store(Request $request)
     {
         $this->validate($request, $this->rules);
 
@@ -124,16 +125,19 @@ class V2MiscController extends Controller
 
         return redirect()
             ->route(''.$type.'.index')
-            ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
-                'title' => $content->title,
-            ]));
+            ->with('info', trans(
+                'content.store.status.'
+                .config("content_$type.store.status", 1)
+                .'.info', [
+                    'title' => $content->title,
+                ]
+            ));
 
-        //return $content->id ? $this->update($request, $content) : $this->newContent($request, $request->type);
     }
 
     public function edit($id)
     {
-        $content = Content::find($id);
+        $content = Content::findOrFail($id);
 
         return layout('2col')
 
@@ -204,11 +208,11 @@ class V2MiscController extends Controller
                         ->push(component('Title')
                             ->is('smaller')
                             ->is('red')
-                            ->with('title', trans('content.edit.notes.heading'))
+                            ->with('title', trans('content.misc.edit.notes.heading'))
                             ->with('route', route('forum.index'))
                         )
                         ->push(component('Body')
-                            ->with('body', trans('content.edit.notes.body'))
+                            ->with('body', trans('content.misc.edit.notes.body'))
                         )
                     ))
             )

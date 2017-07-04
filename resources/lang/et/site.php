@@ -23,6 +23,7 @@
             'forum' => 'Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi',
             'expat' => 'Soovitused välismaal elavatelt eestlastelt',
             'buysell' => 'Lennupiletite, reisivarustuse ja muu reisimiseks vajaliku ost ja müük',
+            'misc' => 'Vaba teema',
             'blog' => 'Reisipäevikud, reisijutud ning pikemad reisilood',
             'photo' => 'Reisifotod igale maitsele',
             'static' => 'Sisulehed',

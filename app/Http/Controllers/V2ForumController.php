@@ -64,7 +64,7 @@ class V2ForumController extends Controller
                 ->push(component('BlockHorizontal')
                     ->with('content', region('ForumLinks'))
                 )
-                ->push(region(
+                ->pushWhen($forumType != 'misc', region(
                     'FilterHorizontal',
                     $destinations,
                     $topics,
