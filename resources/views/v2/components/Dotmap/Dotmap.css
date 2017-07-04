@@ -1,0 +1,5 @@
+@import "variables";
+
+.Dotmap {
+    background: $cyan-dark;
+}

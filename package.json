@@ -7,6 +7,7 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.5",
     "breakpoint-sass": "^2.6.1",
+    "d3": "^4.7.2",
     "del": "^2.2.0",
     "dropzone": "^4.3.0",
     "eslint": "^3.1.1",

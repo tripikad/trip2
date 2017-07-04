@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Content;
-use App\Destination;
 
 class V2ExperimentsController extends Controller
 {
@@ -61,63 +61,112 @@ class V2ExperimentsController extends Controller
                     ->with('title', 'Misc')
                 )
 
-                ->push(component('MetaLink')
-                    ->with('title', 'Selects')
-                    ->with('route', route('experiments.selects'))
-                )
-
             )
 
             ->render();
     }
 
-    public function selectIndex()
+    public function map()
     {
-        $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+        $userId = request()->get('userid', 3);
+        $user = User::find($userId);
+
+        $users = User::whereIn('role', ['admin', 'superuser'])->get();
+
+        $havebeenCities = $user
+            ->vars()
+            ->destinationHaveBeen()
+            ->map(function ($flag) {
+                $destination = $flag->flaggable;
+                if ($destination->vars()->isPlace()
+                    && isset(config('cities')[$destination->id])
+                ) {
+                    return [
+                        'lat' => config('cities')[$destination->id]['lat'],
+                        'lon' => config('cities')[$destination->id]['lon'],
+                    ];
+                }
+            })
+            ->reject(function ($flag) {
+                return $flag == null;
+            })
+            ->values();
+
+        $wanttogoCities = $user
+            ->vars()
+            ->destinationWantstogo()
+            ->map(function ($flag) {
+                $destination = $flag->flaggable;
+                if ($destination->vars()->isPlace()
+                    && isset(config('cities')[$destination->id])
+                ) {
+                    return [
+                        'lat' => config('cities')[$destination->id]['lat'],
+                        'lon' => config('cities')[$destination->id]['lon'],
+                    ];
+                }
+            })
+            ->reject(function ($flag) {
+                return $flag == null;
+            })
+            ->values();
+
+        $havebeenCountries = $user
+            ->vars()
+            ->destinationHaveBeen()
+            ->map(function ($flag) {
+                $destination = $flag->flaggable;
+                if ($destination->vars()->isCountry()) {
+                    return $destination->id;
+                }
+            })
+            ->reject(function ($flag) {
+                return $flag == null;
+            })
+            ->values();
+
+        $wanttogoCountries = $user
+            ->vars()
+            ->destinationWantstogo()
+            ->map(function ($flag) {
+                $destination = $flag->flaggable;
+                if ($destination->vars()->isCountry()) {
+                    return $destination->id;
+                }
+            })
+            ->reject(function ($flag) {
+                return $flag == null;
+            })
+            ->values();
 
         return layout('1col')
 
             ->with('content', collect()
-
-                ->push(component('Form')
-                    ->with('route', route('experiments.select.create'))
-                    ->with('fields', collect()
-                        ->push(component('FormSelectMultiple')
-                            ->with('name', 'destinations1')
-                            ->with('options', $destinations)
-                            ->with('value', [1])
-                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
-                        )
-                        ->push(component('FormSelectMultiple')
-                            ->with('name', 'destinations2')
-                            ->with('options', $destinations)
-                            ->with('value', [2, 3])
-                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
-                        )
-                        ->push(component('FormSelect')
-                            ->with('name', 'destination1')
-                            ->with('options', $destinations)
-                            ->with('value', 4)
-                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
-                        )
-                        ->push(component('FormSelect')
-                            ->with('name', 'destination2')
-                            ->with('options', $destinations)
-                            ->with('value', 5)
-                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
-                        )
-                        ->push(component('FormButton')
-                            ->with('title', trans('content.edit.submit.title'))
-                        )
-                    )
+                ->push(component('Title')
+                    ->with('title', 'Kus oled käinud / kuhu tahad minna')
+                )
+                ->push(component('Body')
+                    ->with('body', 'Vali altpoolt toimetuse liige ja vaata tema kaarti. Vaikimisi näed <b>tom</b>i kaarti. Kui tead mistahes kasutaja IDd, võid selle aadressiribale kirjutada.')
+                )
+                ->push(component('Meta')->with('items', $users
+                    ->map(function ($user) {
+                        return component('Tag')
+                            ->is('cyan')
+                            ->with('title', $user->name)
+                            ->with('route', route(
+                                'experiments.map',
+                                ['userid' => $user->id]
+                            ));
+                    })
+                ))
+                ->push(component('Dotmap')
+                    ->with('dots', config('dots'))
+                    ->with('havebeen_cities', $havebeenCities)
+                    ->with('wanttogo_cities', $wanttogoCities)
+                    ->with('havebeen_countries', $havebeenCountries)
+                    ->with('wanttogo_countries', $wanttogoCountries)
                 )
             )
-
             ->render();
-    }
-
-    public function selectCreate()
-    {
-        dump(request()->all());
     }
 }
