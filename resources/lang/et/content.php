@@ -282,7 +282,7 @@ return [
     'misc.index.title' => 'Vaba teema',
     'misc.create.title' => 'Lisa uus vaba teema',
     'misc.edit.title' => 'Muuda vaba teemat',
-    
+
     // Photo
 
     'photo.index.title' => 'Reisipildid',
