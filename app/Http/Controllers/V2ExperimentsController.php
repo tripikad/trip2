@@ -63,7 +63,7 @@ class V2ExperimentsController extends Controller
 
                 ->push(component('MetaLink')
                     ->with('title', 'Selects')
-                    ->with('route', route('experiments.selects'))
+                    ->with('route', route('experiments.select.index'))
                 )
 
             )
