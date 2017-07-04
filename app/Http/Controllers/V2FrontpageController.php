@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cache;
 use App\Image;
 use App\Content;
 use App\Destination;
@@ -12,14 +13,16 @@ class V2FrontpageController extends Controller
     {
         $loggedUser = auth()->user();
 
-        $flights = Content::getLatestItems('flight', 9);
+        $flights = Content::getLatestItems('flight', 9, 'id');
         $forums = Content::getLatestItems('forum', 18, 'updated_at');
-        $news = Content::getLatestItems('news', 6);
-        $blogs = Content::getLatestItems('blog', 3);
-        $photos = Content::getLatestItems('photo', 9);
-        $travelmates = Content::getLatestItems('travelmate', 5);
+        $news = Content::getLatestItems('news', 6, 'id');
+        $blogs = Content::getLatestItems('blog', 3, 'id');
+        $photos = Content::getLatestItems('photo', 9, 'id');
+        $travelmates = Content::getLatestItems('travelmate', 5, 'id');
 
-        $destinations = Destination::select('id', 'name')->get();
+        $destinations = Cache::remember('destinations_with_slug', 30, function () {
+            return Destination::select('id', 'name', 'slug')->get();
+        });
 
         return layout('frontpage')
 

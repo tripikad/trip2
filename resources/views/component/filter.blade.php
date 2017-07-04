@@ -59,7 +59,7 @@
         <h3>
             {!! trans('content.index.filter.destination.title', [
                 'destination' =>
-                    '<a href="' . route('destination.show', [$destination]) . '">'
+                    '<a href="' . route('destination.showSlug', [$destination->slug]) . '">'
                     . $destinations[$destination]
                     . '</a>'
             ]) !!}

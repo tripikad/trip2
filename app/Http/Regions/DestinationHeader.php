@@ -40,7 +40,7 @@ class DestinationHeader
                             ->is('white')
                             ->is('large')
                             ->with('title', $children->name)
-                            ->with('route', route('destination.show', [$children]));
+                            ->with('route', route('destination.showSlug', [$children->slug]));
                     }))
                 )
                 ->push(component('BlockHorizontal')
