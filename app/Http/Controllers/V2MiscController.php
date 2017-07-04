@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Topic;
 use Log;
 use Auth;
 use App\Content;
@@ -44,16 +45,9 @@ class V2MiscController extends Controller
                     ->with('route', route('forum.store.misc'))
                     ->with('fields', collect()
                         // TODO: replace with hidden field
-                        ->push(component('FormRadio')
+                        ->push(component('FormHidden')
                             ->with('name', 'type')
-                            ->with('value', 'forum')
-                            ->with('options', collect(['misc'])
-                                ->map(function ($type) {
-                                    return collect()
-                                        ->put('id', $type)
-                                        ->put('name', trans("content.$type.index.title"));
-                                })
-                            )
+                            ->with('value', 'misc')
                         )
                         ->push(component('FormTextfield')
                             ->is('large')
@@ -158,22 +152,15 @@ class V2MiscController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.forum.edit.title'))
+                    ->with('title', trans('content.misc.edit.title'))
                 )
                 ->push(component('Form')
                     ->with('id', 'ForumCreateForm')
                     ->with('route', route('forum.update.misc', $content->id))
                     ->with('fields', collect()
-                        ->push(component('FormRadio')
+                        ->push(component('FormHidden')
                             ->with('name', 'type')
                             ->with('value', $content->type)
-                            ->with('options', collect(['misc'])
-                                ->map(function ($type) {
-                                    return collect()
-                                        ->put('id', $type)
-                                        ->put('name', trans("content.$type.index.title"));
-                                })
-                            )
                         )
                         ->push(component('FormTextfield')
                             ->is('large')
@@ -224,8 +211,6 @@ class V2MiscController extends Controller
     public function update(Request $request, $id)
     {
         $content = Content::find($id);
-
-        $type = $request->type;
 
         $content->title = $request->title;
         $content->body = $request->body;

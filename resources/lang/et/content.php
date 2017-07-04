@@ -59,11 +59,12 @@ return [
 
     'edit.title' => 'Muuda',
     'edit.submit.title' => 'Uuenda',
+    'edit.submitting.title' => 'Uuendan...',
     'edit.notes.heading' => 'Hea teada',
     'edit.notes.body' => '<p>See on reisifoorum kooliharidust nuusutanud inimesele, kes mõistab kirjutada korralikus eesti keeles.</p><p>Ole hea ja uuri enne postitamist Trip.ee otsinguga juba olemasolevaid teemasid ning palun pane postitusele selle sisu avav pealkiri (mitte piirdudes koha või riigi nimega).</p>',
 
     'misc.edit.notes.heading' => 'Hea teada',
-    'misc.edit.notes.body' => '<p>Vaba teema</p>',
+    'misc.edit.notes.body' => '<p>Siia postita mõtteid muudel teemadel</p>',
 
     'edit.field.destinations.placeholder' => 'Vali sihtkohad',
     'edit.field.topics.placeholder' => 'Vali teemad',

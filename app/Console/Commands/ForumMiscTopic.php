@@ -41,7 +41,8 @@ class ForumMiscTopic extends Command
             $item->type = 'misc';
             $item->timestamps = false;
             $item->save();
-            $item->topics()->detach(5000);
+            $item->topics()->detach();
+            $item->destinations()->detach();
         });
 
         $this->info('delete the topic misc');
