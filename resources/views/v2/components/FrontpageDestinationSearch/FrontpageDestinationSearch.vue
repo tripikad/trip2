@@ -59,7 +59,7 @@
         computed: {
             currentRoute() {
                 return this.route.replace(
-                    '0', this.selected.id ? this.selected.id : '0'
+                    '0', this.selected.slug ? this.selected.slug : '0'
                 )
             }
         },

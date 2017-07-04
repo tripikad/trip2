@@ -58,7 +58,7 @@ class ForumRow
                         return component('Tag')
                             ->is('orange')
                             ->with('title', $destination->name)
-                            ->with('route', route('destination.show', [$destination]));
+                            ->with('route', route('destination.showSlug', [$destination->slug]));
                     }))
                     ->merge($forum->topics->map(function ($topic) {
                         return component('MetaLink')

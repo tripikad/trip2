@@ -20,8 +20,8 @@ class V2FrontpageController extends Controller
         $photos = Content::getLatestItems('photo', 9, 'id');
         $travelmates = Content::getLatestItems('travelmate', 5, 'id');
 
-        $destinations = Cache::remember('destinations', 30, function () {
-            return Destination::select('id', 'name')->get();
+        $destinations = Cache::remember('destinations_with_slug', 30, function () {
+            return Destination::select('id', 'name', 'slug')->get();
         });
 
         return layout('frontpage')
