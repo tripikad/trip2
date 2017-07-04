@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Topic;
 use Log;
 use Auth;
 use App\Content;
