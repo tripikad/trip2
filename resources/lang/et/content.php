@@ -281,8 +281,8 @@ return [
     // Misc
 
     'misc.index.title' => 'Vaba teema',
-    'misc.create.title' => 'Lisa uus vaba teema',
-    'misc.edit.title' => 'Muuda vaba teemat',
+    'misc.create.title' => 'Lisa uus postitus',
+    'misc.edit.title' => 'Muuda postitust',
 
     // Photo
 
