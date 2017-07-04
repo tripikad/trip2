@@ -24,7 +24,7 @@ class DestinationBar
         return component('DestinationBar')
             ->is($is)
             ->with('title', $destination->vars()->shortName)
-            ->with('route', route('destination.show', [$destination]))
+            ->with('route', route('destination.showSlug', [$destination->slug]))
             ->with('parents', region(
                 'DestinationParents',
                 $destinations,

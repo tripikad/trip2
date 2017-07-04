@@ -356,7 +356,7 @@
                                 return [
                                     'title' => $destination->name,
                                     'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
-                                    'route' => route('destination.slug', $destination->slug)
+                                    'route' => route('destination.showSlug', $destination->slug)
                                 ];
                             })
                         ];
