@@ -133,7 +133,6 @@ Route::post('forum/vaba-teema/{id}/update', 'V2MiscController@update')
     ->name('forum.update.misc')
     ->middleware('role:regular');
 
-
 Route::post('forum/store', 'V2ForumController@store')
     ->name('forum.store')
     ->middleware('role:regular');

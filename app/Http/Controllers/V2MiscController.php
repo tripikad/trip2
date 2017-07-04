@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Content;
-use Auth;
 use Log;
+use Auth;
+use App\Content;
+use Illuminate\Http\Request;
 
 class V2MiscController extends Controller
 {
     protected $rules = [
             'type' => 'required',
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
         ];
 
     public function create()
     {
-
         return layout('2col')
 
             ->with('narrow', true)
@@ -48,7 +47,7 @@ class V2MiscController extends Controller
                             ->with('name', 'type')
                             ->with('value', 'forum')
                             ->with('options', collect(['misc'])
-                                ->map(function($type) {
+                                ->map(function ($type) {
                                     return collect()
                                         ->put('id', $type)
                                         ->put('name', trans("content.$type.index.title"));
@@ -99,7 +98,6 @@ class V2MiscController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
-
     }
 
     public function store(Request $request, Content $content = null)
@@ -113,7 +111,7 @@ class V2MiscController extends Controller
             'title' => $request->title,
             'body' => $request->body,
             'type' => $type,
-            'status' => 1
+            'status' => 1,
         ]);
 
         Log::info('New content added', [
@@ -168,7 +166,7 @@ class V2MiscController extends Controller
                             ->with('name', 'type')
                             ->with('value', $content->type)
                             ->with('options', collect(['misc'])
-                                ->map(function($type) {
+                                ->map(function ($type) {
                                     return collect()
                                         ->put('id', $type)
                                         ->put('name', trans("content.$type.index.title"));
