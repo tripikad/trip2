@@ -31,7 +31,7 @@ class ForumMiscTopic extends Command
     {
         $this->info('finding all content where topic has id of 5000');
 
-        $urls =  collect([
+        $urls = collect([
             'https://trip.ee/foorum/uldfoorum/filmid-dokumentaalfilmid-ja-tv-seriaalid',
             'https://trip.ee/foorum/uldfoorum/eesti-mainimine-filmides',
             'https://trip.ee/foorum/uldfoorum/oleks-vaja-eestis-aatikat',
@@ -42,9 +42,9 @@ class ForumMiscTopic extends Command
             'https://trip.ee/foorum/uldfoorum/asjade-toimetamine-kanaaridelt-eestisse',
             ]);
 
-        $content = $urls->map(function($url) {
-            return collect(explode('/',$url))->last();
-        })->map(function($slug) {
+        $content = $urls->map(function ($url) {
+            return collect(explode('/', $url))->last();
+        })->map(function ($slug) {
             return \App\Content::whereSlug($slug)->first();
         });
 
