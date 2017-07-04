@@ -132,7 +132,6 @@ class V2MiscController extends Controller
                     'title' => $content->title,
                 ]
             ));
-
     }
 
     public function edit($id)
