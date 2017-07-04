@@ -106,11 +106,8 @@ class V2MiscController extends Controller
     {
         $this->validate($request, $this->rules);
 
-        return $content->id ? $this->update($request, $content) : $this->newContent($request, $request->type);
-    }
+        $type = $request->type;
 
-    public function newContent($request, $type)
-    {
         $content = Content::create([
             'user_id' => Auth::user()->id,
             'title' => $request->title,
@@ -132,10 +129,15 @@ class V2MiscController extends Controller
             ->with('info', trans('content.store.status.'.config("content_$type.store.status", 1).'.info', [
                 'title' => $content->title,
             ]));
+
+        //return $content->id ? $this->update($request, $content) : $this->newContent($request, $request->type);
     }
 
-    public function edit(Content $content)
+
+    public function edit($id)
     {
+        $content = Content::find($id);
+
         return layout('2col')
 
             ->with('narrow', true)
@@ -219,9 +221,11 @@ class V2MiscController extends Controller
             ->render();
     }
 
-    public function update($request, $content, $type = null)
+    public function update(Request $request, $id)
     {
-        $type = $type ?? $request->type;
+        $content = Content::find($id);
+
+        $type = $request->type;
 
         $content->title = $request->title;
         $content->body = $request->body;
