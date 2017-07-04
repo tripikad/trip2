@@ -131,7 +131,6 @@ class V2MiscController extends Controller
         //return $content->id ? $this->update($request, $content) : $this->newContent($request, $request->type);
     }
 
-
     public function edit($id)
     {
         $content = Content::find($id);
