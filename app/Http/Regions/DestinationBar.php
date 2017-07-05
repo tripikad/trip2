@@ -6,22 +6,28 @@ class DestinationBar
 {
     public function render($destination, $is = '')
     {
-        $parentLength = mb_strlen($destination
+        $destinations = $destination
             ->getAncestors()
-            ->onlyLast(2)
+            ->onlyLast(2);
+
+        $parentLength = mb_strlen($destinations
             ->map(function ($parent) {
                 return $parent->vars()->name;
             })
             ->implode('')
         );
 
+        if ($parentLength > 25) {
+            $destinations = $destinations->take(1);
+        }
+
         return component('DestinationBar')
             ->is($is)
             ->with('title', $destination->vars()->shortName)
-            ->with('route', route('destination.show', [$destination]))
+            ->with('route', route('destination.showSlug', [$destination->slug]))
             ->with('parents', region(
                     'DestinationParents',
-                    $destination->getAncestors()->onlyLast($parentLength > 25 ? 1 : 2),
+                    $destinations,
                     $short = true
                 )
             );

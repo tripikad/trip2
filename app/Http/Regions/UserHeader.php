@@ -72,10 +72,7 @@ class UserHeader
                                 ->is('white')
                                 ->is('large')
                                 ->with('title', $destination->flaggable->name)
-                                ->with('route', route(
-                                    'destination.show',
-                                    [$destination->flaggable]
-                                ));
+                                ->with('route', route('destination.showSlug', [$destination->flaggable->slug]));
                         })
                 ))
                 ->push(region('UserStats', $user, $loggedUser))
