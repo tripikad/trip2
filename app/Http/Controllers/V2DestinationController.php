@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Content;
 use App\Destination;
 use Illuminate\Http\Request;
-use App\User;
 
 class V2DestinationController extends Controller
 {
@@ -121,7 +121,7 @@ class V2DestinationController extends Controller
                             ->with('value', old('body', $destination->description))
                             ->with('rows', 20)
                         )
-                        ->push( component('FormTextfield')
+                        ->push(component('FormTextfield')
                             ->with('title', trans('content.destination.edit.user'))
                             ->with('name', 'user')
                             ->with('value', ($destination->user ? $destination->user->name : ''))
@@ -141,7 +141,7 @@ class V2DestinationController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'user' => 'required|exists:users,name'
+            'user' => 'required|exists:users,name',
         ];
 
         $this->validate($request, $rules);
@@ -157,6 +157,5 @@ class V2DestinationController extends Controller
         $destination->save();
 
         return redirect(route('destination.show', $destination));
-
     }
 }
