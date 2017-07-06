@@ -285,6 +285,14 @@ Route::get('sihtkoht/{id}', 'V2DestinationController@show')
 Route::get('sihtkoht/{slug}', 'V2DestinationController@showSlug')
     ->name('destination.showSlug');
 
+Route::get('destination/{id}/edit', 'V2DestinationController@edit')
+    ->name('destination.edit')
+    ->middleware('role:admin');
+
+Route::post('destination/{id}/update', 'V2DestinationController@update')
+    ->name('destination.update')
+    ->middleware('role:admin');
+
 // Admin
 
 Route::get('admin/content', 'V2AdminController@unpublishedIndex')

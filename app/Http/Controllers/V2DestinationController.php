@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Content;
 use App\Destination;
+use Illuminate\Http\Request;
+use App\User;
 
 class V2DestinationController extends Controller
 {
@@ -38,7 +40,7 @@ class V2DestinationController extends Controller
             ->with('background', component('BackgroundMap'))
             ->with('color', 'yellow')
 
-            ->with('header', region('DestinationHeader', $destination))
+            ->with('header', region('DestinationHeader', $destination, $loggedUser))
 
             ->with('top', region(
                 'PhotoRow',
@@ -89,5 +91,72 @@ class V2DestinationController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
+    }
+
+    public function edit($id)
+    {
+        $destination = Destination::findOrFail($id);
+
+        return layout('1col')
+
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', $destination->name)
+                    ->with('route', route('destination.show', $destination->id))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.destionation.edit.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('destination.update', [$destination]))
+                    ->with('fields', collect()
+                        ->push(component('FormTextarea')
+                            ->with('title', trans('content.destination.edit.description'))
+                            ->with('name', 'description')
+                            ->with('value', old('body', $destination->description))
+                            ->with('rows', 20)
+                        )
+                        ->push( component('FormTextfield')
+                            ->with('title', trans('content.destination.edit.user'))
+                            ->with('name', 'user')
+                            ->with('value', ($destination->user ? $destination->user->name : ''))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.edit.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $rules = [
+            'user' => 'required|exists:users,name'
+        ];
+
+        $this->validate($request, $rules);
+
+        $destination = Destination::findOrFail($id);
+
+        $destination->description = $request->description;
+
+        $user = User::where('name', $request->user)->get()->first();
+
+        $destination->user_id = $user->id;
+
+        $destination->save();
+
+        return redirect(route('destination.show', $destination));
+
     }
 }

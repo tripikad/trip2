@@ -4,7 +4,7 @@ namespace App\Http\Regions;
 
 class DestinationHeader
 {
-    public function render($destination)
+    public function render($destination, $user)
     {
         $parents = $destination->getAncestors();
         $childrens = $destination->getImmediateDescendants()->sortBy('name');
@@ -28,10 +28,16 @@ class DestinationHeader
                     ->is('large')
                     ->with('title', $destination->name)
                 )
+                ->pushWhen($user && $user->hasRole('admin'),
+                    component('MetaLink')
+                        ->is('white')
+                        ->with('title', trans('content.action.edit.title'))
+                        ->with('route', route('destination.edit', [$destination]))
+                )
                 ->push(component('Body')
                     ->is('white')
                     ->is('responsive')
-                    ->with('body', $destination->vars()->description)
+                    ->with('body', $destination->description ? $destination->description : $destination->vars()->description)
                 )
                 ->pushWhen($childrens->count(), component('Meta')
                     ->is('large')

@@ -374,4 +374,10 @@ return [
 
     'sponsored.no.results' => 'Hetkel pole ühtegi artiklit lisatud rubriiki "Toimetaja valik".',
 
+    // Destination
+
+    'destionation.edit.title' => 'Muuda sihtkohta',
+    'destination.edit.description' => 'Kirjeldus',
+    'destination.edit.user' => 'Kasutaja',
+
 ];
