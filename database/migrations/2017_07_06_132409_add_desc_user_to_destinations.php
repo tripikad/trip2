@@ -17,7 +17,6 @@ class AddDescUserToDestinations extends Migration
             $table->integer('user_id')->nullable();
             $table->text('description')->nullable();
         });
-
     }
 
     /**
