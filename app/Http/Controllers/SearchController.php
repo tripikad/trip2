@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Exception;
 use App\Content;
 use App\Searchable;
-use Carbon\Carbon;
 use App\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Exception;
 
 class SearchController extends Controller
 {
@@ -173,7 +172,7 @@ class SearchController extends Controller
         return $this->searchByKeyword($type, $keyword, 0, true);
     }
 
-    public function findSearchableIds($find = 'content', $types = ['forum', 'buysell', 'expat'], $limit = 30, $keyword_detailed, $keyword, $count_only = false)
+    public function findSearchableIds($find, $types, $limit, $keyword_detailed, $keyword, $count_only = false)
     {
         $data = [
             'items' => null,
@@ -203,14 +202,14 @@ class SearchController extends Controller
 
         $data['paginate'] = Searchable::select([
             $item_id_key,
-            DB::raw('MATCH (`title`, `body`) AGAINST (' . DB::getPdo()->quote($keyword_detailed) . ' IN BOOLEAN MODE) AS `relevance`'),
-            ($rank_higher_where_not ? DB::raw('IF(`'.$rank_higher_where_not.'` IS NULL, 100, 0) AS `sum_up_relevance`') :  DB::raw('0 AS `sum_up_relevance`')),
+            DB::raw('MATCH (`title`, `body`) AGAINST ('.DB::getPdo()->quote($keyword_detailed).' IN BOOLEAN MODE) AS `relevance`'),
+            ($rank_higher_where_not ? DB::raw('IF(`'.$rank_higher_where_not.'` IS NULL, 100, 0) AS `sum_up_relevance`') : DB::raw('0 AS `sum_up_relevance`')),
         ])->distinct()
             ->where(function ($query) use ($keyword_detailed, $keyword) {
-                $query->whereRaw('MATCH (`title`, `body`) AGAINST (' . DB::getPdo()->quote($keyword_detailed) . ' IN BOOLEAN MODE)');
+                $query->whereRaw('MATCH (`title`, `body`) AGAINST ('.DB::getPdo()->quote($keyword_detailed).' IN BOOLEAN MODE)');
 
                 if ($keyword && $keyword != '') {
-                    $query->orWhereRaw('MATCH (`title`, `body`) AGAINST (' . DB::getPdo()->quote($keyword) . ' IN BOOLEAN MODE)');
+                    $query->orWhereRaw('MATCH (`title`, `body`) AGAINST ('.DB::getPdo()->quote($keyword).' IN BOOLEAN MODE)');
                 }
             })->whereNotNull($item_id_key);
 
@@ -237,18 +236,17 @@ class SearchController extends Controller
             if ($find == 'content' && count($data['item_ids'])) {
                 $data['items'] = Content::whereIn('id', $data['item_ids'])
                     ->with('comments')
-                    ->orderBy(DB::raw('FIELD(`id`, ' . implode(',', $data['item_ids']) . ')', 'ASC'))
+                    ->orderBy(DB::raw('FIELD(`id`, '.implode(',', $data['item_ids']).')', 'ASC'))
                     ->get();
             } elseif ($find == 'destination' && count($data['item_ids'])) {
                 $data['items'] = Destination::whereIn('id', $data['item_ids'])
-                    ->orderBy(DB::raw('FIELD(`id`, ' . implode(',', $data['item_ids']) . ')', 'ASC'))
+                    ->orderBy(DB::raw('FIELD(`id`, '.implode(',', $data['item_ids']).')', 'ASC'))
                     ->get();
             } elseif ($find == 'user' && count($data['item_ids'])) {
                 $data['items'] = User::whereIn('id', $data['item_ids'])
-                    ->orderBy(DB::raw('FIELD(`id`, ' . implode(',', $data['item_ids']) . ')', 'ASC'))
+                    ->orderBy(DB::raw('FIELD(`id`, '.implode(',', $data['item_ids']).')', 'ASC'))
                     ->get();
             }
-
         }
 
         if ($count_only) {
@@ -287,8 +285,8 @@ class SearchController extends Controller
                 $keys = rtrim($keys, '+- ');
                 $keys = trim($keys, '+- ');
 
-                $keyword_detailed[] = '' . $detailed_prefix . $keys .($count == count($keyword_array) ? '*' : '') .'';
-                $keyword[] = '('. $prefix . $keys . ($count == count($keyword_array) ? '*' : '') . ')';
+                $keyword_detailed[] = ''.$detailed_prefix.$keys.($count == count($keyword_array) ? '*' : '').'';
+                $keyword[] = '('.$prefix.$keys.($count == count($keyword_array) ? '*' : '').')';
             }
         }
         $keyword = trim(mb_strtolower(implode(' ', $keyword)));
@@ -328,11 +326,9 @@ class SearchController extends Controller
         $destinations = $this->searchByKeyword('destination', $keyword, 5);
 
         $contents = [];
-        foreach (['forum', 'user', 'destinations'] as &$type)
-        {
+        foreach (['forum', 'user', 'destinations'] as &$type) {
             if (isset(${$type}['items']) && ${$type}['items'] && count(${$type}['items'])) {
-                foreach (${$type}['items'] as &$item)
-                {
+                foreach (${$type}['items'] as &$item) {
                     if ($type == 'forum') {
                         $item['category'] = 'forum';
                     } elseif ($type == 'user') {
@@ -355,8 +351,8 @@ class SearchController extends Controller
         return array_merge(
                 ['attributes' => [
                     'total' => round($forum['count'] + $user['count'] + $destinations['count']),
-                    'route' => route('search.results', ['q=' . urlencode($keyword)]),
-                ]
+                    'route' => route('search.results', ['q='.urlencode($keyword)]),
+                ],
             ], $contents);
     }
 }

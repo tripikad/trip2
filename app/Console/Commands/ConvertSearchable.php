@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Searchable;
 use DB;
+use App\Searchable;
+use Illuminate\Console\Command;
 
 class ConvertSearchable extends Command
 {
@@ -46,16 +46,15 @@ class ConvertSearchable extends Command
 
         $this->line(' - 1/2 Comparing data with search index');
         $search_indexes->chunk(2500, function ($indexes) use (&$index_fields, &$delete_ids) {
-            foreach ($indexes as &$index)
-            {
+            foreach ($indexes as &$index) {
                 if ($index->comment_id) {
-                    $key = 'cc' . $index->comment_id;
+                    $key = 'cc'.$index->comment_id;
                 } elseif ($index->content_id) {
-                    $key = 'c' . $index->content_id;
+                    $key = 'c'.$index->content_id;
                 } elseif ($index->destination_id) {
-                    $key = 'd' . $index->destination_id;
+                    $key = 'd'.$index->destination_id;
                 } elseif ($index->user_id) {
-                    $key = 'u' . $index->user_id;
+                    $key = 'u'.$index->user_id;
                 } else {
                     $key = null;
                 }
@@ -89,7 +88,7 @@ class ConvertSearchable extends Command
         $count_delete_ids = count($delete_ids);
         if ($count_delete_ids > 0) {
             Searchable::destroy($delete_ids);
-            $this->error(' + ' . count($delete_ids) . ' items deleted from search index');
+            $this->error(' + '.count($delete_ids).' items deleted from search index');
         } else {
             $this->info(' + 0 items deleted from search index');
         }
@@ -101,7 +100,7 @@ class ConvertSearchable extends Command
             $this->info(' + Nothing to save');
         }
 
-        $this->info('Command finished after ' . round(microtime(true) - $start, 4).' seconds');
+        $this->info('Command finished after '.round(microtime(true) - $start, 4).' seconds');
     }
 
     public function save(array $items, int $index_count)
@@ -111,17 +110,15 @@ class ConvertSearchable extends Command
         $replace_insert = 'REPLACE INTO `searchables` (`id`, `user_id`, `content_id`, `content_type`, `comment_id`, `destination_id`, `title`, `body`, `updated_at`, `created_at`)';
         $items_done = 0;
         $last_round = 0;
-        foreach (array_chunk($items, 100) as &$chucked_items)
-        {
+        foreach (array_chunk($items, 100) as &$chucked_items) {
             $data = [];
-            foreach ($chucked_items as &$item)
-            {
+            foreach ($chucked_items as &$item) {
                 ++$items_done;
                 ++$last_round;
-                $data[] = '(' . implode(', ', $item) . ')';
+                $data[] = '('.implode(', ', $item).')';
             }
 
-            app('db')->select($replace_insert . ' VALUES ' . implode(', ', $data));
+            app('db')->select($replace_insert.' VALUES '.implode(', ', $data));
 
             if ($last_round === 2500) {
                 $last_round = 0;
@@ -138,14 +135,13 @@ class ConvertSearchable extends Command
         $users = app('db')->select('SELECT `id`, `name` FROM `users` WHERE `verified` = 1 ORDER BY `id` ASC');
 
         $this->line(' - 2/3 Adding users to index array...');
-        foreach ($users as &$user)
-        {
+        foreach ($users as &$user) {
             if (! $user->name || $user->name == '') {
                 $user->name = null;
             }
 
             if ($user->name) {
-                $index_fields['u' . $user->id] = [
+                $index_fields['u'.$user->id] = [
                     'id' => 'null',
                     'user_id' => (int) $user->id,
                     'content_id' => 'null',
@@ -172,19 +168,18 @@ class ConvertSearchable extends Command
         $contents = app('db')->select('SELECT `id`, `user_id`, `title`, `type`, `body`, `url`, `price` FROM `contents` WHERE `status` = 1 ORDER BY `id` ASC');
 
         $this->line(' - 2/3 Adding contents to index array...');
-        foreach ($contents as &$content)
-        {
+        foreach ($contents as &$content) {
             if (! $content->title || $content->title == '') {
                 $content->title = null;
             }
 
-            $body = trim($content->url . "\n" . $content->price . "\n" . $content->body);
+            $body = trim($content->url."\n".$content->price."\n".$content->body);
 
             if (! $body || $body == '') {
                 $body = null;
             }
 
-            $index_fields['c' . $content->id] = [
+            $index_fields['c'.$content->id] = [
                 'id' => 'null',
                 'user_id' => (int) $content->user_id,
                 'content_id' => (int) $content->id,
@@ -212,9 +207,8 @@ class ConvertSearchable extends Command
         $destinations = app('db')->select('SELECT `id`, `name` FROM `destinations` ORDER BY `id` ASC');
 
         $this->line(' - 2/3 Adding destinations to index array...');
-        foreach ($destinations as &$destination)
-        {
-            $index_fields['d' . $destination->id] = [
+        foreach ($destinations as &$destination) {
+            $index_fields['d'.$destination->id] = [
                 'id' => 'null',
                 'user_id' => 'null',
                 'content_id' => 'null',
@@ -240,8 +234,7 @@ class ConvertSearchable extends Command
         $comments = app('db')->select('SELECT `id`, `user_id`, `content_id`, `body` FROM `comments` WHERE `status` = 1 AND (`content_id` IN ('.implode(',', $content_ids).') OR `user_id` IN ('.implode(',', $user_ids).'))');
 
         $this->line(' - 2/3 Adding comments to index array...');
-        foreach ($comments as &$comment)
-        {
+        foreach ($comments as &$comment) {
             // Otherwise content is hidden
             if (isset($content_type_by_id[$comment->content_id])) {
                 if (! $comment->body || $comment->body == '') {
@@ -249,7 +242,7 @@ class ConvertSearchable extends Command
                 }
 
                 if ($comment->body) {
-                    $index_fields['cc' . $comment->id] = [
+                    $index_fields['cc'.$comment->id] = [
                         'id' => 'null',
                         'user_id' => (int) $comment->user_id,
                         'content_id' => (int) $comment->content_id,
@@ -281,8 +274,7 @@ class ConvertSearchable extends Command
         $object_ids = [];
 
         if (count($object)) {
-            foreach ($object as &$item)
-            {
+            foreach ($object as &$item) {
                 $object_ids[] = $item->id;
             }
         }
