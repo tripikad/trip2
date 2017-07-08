@@ -19,7 +19,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\RemoveDuplicates::class,
         \App\Console\Commands\GenerateSitemap::class,
         \App\Console\Commands\ConvertMissingContent::class,
-
+        \App\Console\Commands\ConvertSearchable::class,
     ];
 
     protected function schedule(Schedule $schedule)
@@ -29,6 +29,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('sitemap:generate')
             ->dailyAt('05:00');
+
+        $schedule->command('search:index')
+            ->cron('15 * * * *');
     }
 
     /**
