@@ -79,7 +79,7 @@
             @endforeach
 
             @include('component.pagination.default', [
-                    'collection' => $results
+                    'collection' => $paginate
             ])
 
         @else
