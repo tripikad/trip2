@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Content;
+use App\Searchable;
 use Carbon\Carbon;
 use App\Destination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Exception;
 
 class SearchController extends Controller
 {
@@ -33,14 +33,6 @@ class SearchController extends Controller
         $active_search = 'forum';
         $tabs = [];
 
-        foreach (array_keys(config('search.types')) as $type) {
-            $counts[$type] = ($q && ! empty($q) ? $this->getResultsCountByType($type, $q) : 0);
-            $tabs[$type]['cnt'] = $counts[$type];
-            $tabs[$type]['modifier'] = $counts[$type];
-            $tabs[$type]['title'] = trans('search.tab.'.$type);
-            $tabs[$type]['route'] = $counts[$type] ? '/search/'.$type.'?q='.$q : '#';
-        }
-
         if ($q && ! empty($q)) {
             $active_search = $search_type ? $search_type : 'forum';
 
@@ -51,6 +43,14 @@ class SearchController extends Controller
                         break;
                     }
                 }
+            }
+
+            foreach (array_keys(config('search.types')) as $type) {
+                $counts[$type] = ($q && ! empty($q) ? $this->getResultsCountByType($type, $q) : 0);
+                $tabs[$type]['cnt'] = $counts[$type];
+                $tabs[$type]['modifier'] = $counts[$type];
+                $tabs[$type]['title'] = trans('search.tab.'.$type);
+                $tabs[$type]['route'] = $counts[$type] ? '/search/'.$type.'?q='.$q : '#';
             }
 
             $tabs[$active_search]['modifier'] = 'm-active';
@@ -66,7 +66,7 @@ class SearchController extends Controller
         ]);
 
         return response()
-            ->view('pages.search.show', ['request' => $request, 'results' => $results, 'active_search' => $active_search, 'tabs' => $tabs])
+            ->view('pages.search.show', ['request' => $request, 'results' => $results['items'], 'paginate' => $results['paginate'], 'active_search' => $active_search, 'tabs' => $tabs])
             ->header('Cache-Control', 'public, s-maxage='.config('cache.search.header'));
     }
 
@@ -93,13 +93,13 @@ class SearchController extends Controller
     private function modifyDestinationResults($results, $ajax)
     {
         $destinations = Destination::getNames();
-        foreach ($results as $key => $item) {
-            $results[$key]['path'] = $destinations[$item->id];
+        foreach ($results['items'] as $key => &$item) {
+            $results['items'][$key]['path'] = $destinations[$item->id];
             $parent = $item->parent()->first();
-            $results[$key]['parent'] = $parent;
+            $results['items'][$key]['parent'] = $parent;
 
             if ($ajax) {
-                $results[$key]['name'] = $parent ? $item->name.' › '.$parent->name : $item->name;
+                $results['items'][$key]['name'] = $parent ? $item->name.' › '.$parent->name : $item->name;
             }
         }
     }
@@ -140,49 +140,27 @@ class SearchController extends Controller
 
     protected function getSearchResultsByType($type, $q)
     {
-        $types = $this->content_types;
+        $perPage = config('search.types.'.$type.'.items_per_page');
 
-        if (in_array($type, $types)) {
-            if (! $this->content) {
-                $this->content = $this->getSearchBuilderByType('content', $q);
-
-                foreach ($this->content as $content) {
-                    $index_type = $content->type;
-                    if ($content->type == 'expat' || $content->type == 'buysell') {
-                        $index_type = 'forum';
-                    } else {
-                        $index_type = $content->type;
-                    }
-
-                    $this->content_results[$index_type][] = $content;
-                }
-
-                foreach ($types as $t) {
-                    if (isset($this->content_results[$t])) {
-                        $this->content_results[$t] = collect($this->content_results[$t]);
-                    }
-                }
-            }
-        } else {
-            $builder = $this->getSearchBuilderByType($type, $q);
-            $this->content_results[$type] = $builder;
+        $post_type = $type;
+        if ($type == 'forum') {
+            $post_type = ['forum', 'buysell', 'expat'];
         }
 
+        $this->content_results[$type] = $this->searchByKeyword($post_type, $q, $perPage);
+
         if (isset($this->content_results[$type])) {
-            $this->content_counts[$type] = $this->content_results[$type]->count();
+            $this->content_counts[$type] = $this->content_results[$type]['count'];
 
-            $res = $this->content_results[$type];
-            $perPage = config('search.types.'.$type.'.items_per_page');
-            $currentPage = (int) Input::get('page', 1);
+            $res = $this->content_results[$type]['paginate'];
 
-            $res = new LengthAwarePaginator(
-                $res->forPage($currentPage, $perPage), $res->count(), $perPage, $currentPage
-            );
-
-            $res->setPath(env('FULL_BASE_URL').'search/'.$type);
+            $res->withPath(env('FULL_BASE_URL').'search/'.$type);
             $res->appends(['q' => $q]);
 
-            return $res;
+            return [
+                'paginate' => $res,
+                'items' => $this->content_results[$type]['items'],
+            ];
         } else {
             $this->content_counts[$type] = 0;
 
@@ -190,103 +168,195 @@ class SearchController extends Controller
         }
     }
 
-    protected function getSearchBuilderByType($type, $q)
+    public function countByKeyword($type, $keyword)
     {
-        mb_internal_encoding('UTF-8');
-        $order_type = config('search.types.'.$type.'.order_type') ? config('search.types.'.$type.'.order_type') : 'DESC';
-        $order_by = config('search.types.'.$type.'.order') ? config('search.types.'.$type.'.order') : 'created_at';
+        return $this->searchByKeyword($type, $keyword, 0, true);
+    }
 
-        $types = $this->content_types;
+    public function findSearchableIds($find = 'content', $types = ['forum', 'buysell', 'expat'], $limit = 30, $keyword_detailed, $keyword, $count_only = false)
+    {
+        $data = [
+            'items' => null,
+            'paginate' => null,
+            'item_ids' => [],
+            'count' => 0,
+        ];
 
-        if ($type == 'destination') {
-            $res = Destination::whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%'])
-                    ->orderBy($order_by, $order_type)
-                    ->get();
-        } elseif ($type == 'user') {
-            $res = User::whereVerified(1)
-                    ->whereRaw('LOWER(`name`) LIKE ?', ['%'.mb_strtolower($q).'%'])
-                    ->orderBy($order_by, $order_type)
-                    ->get();
-        } elseif ($type == 'content' || in_array($type, $types)) {
-            $res = Content::leftJoin('comments', function ($query) use ($q) {
-                $query->on('comments.content_id', '=', 'contents.id')
-                        ->on('comments.id', '=',
-                            DB::raw('(SELECT `id` FROM comments WHERE `content_id` = `contents`.`id` AND LOWER(`body`) LIKE '.DB::getPdo()->quote(mb_strtolower('%'.$q.'%')).' AND `status` = 1 LIMIT 1)'));
-            })
-                    ->select('contents.*')
-                    ->whereIn('contents.type', $types)
-                    ->where('contents.status', 1)
-                    ->whereRaw('IF(`contents`.`type` = \'flight\', `contents`.`end_at` >= UNIX_TIMESTAMP(?), 1=1) AND (LOWER(`contents`.`title`) LIKE ? OR LOWER(`contents`.`body`) LIKE ? OR `comments`.`body` != \'\')', [Carbon::now(), '%'.mb_strtolower($q).'%', '%'.mb_strtolower($q).'%'])
-                    ->orderBy(
-                        DB::raw('IF(LOWER(`contents`.`title`) LIKE '.DB::getPdo()->quote(mb_strtolower('%'.$q.'%')).' AND `contents`.`type` != \'flight\',
-                            `contents`.`title`,
-                            CASE `contents`.`type`
-                                WHEN \'forum\' THEN `contents`.`updated_at`
-                                ELSE `contents`.`created_at`
-                            END) '
-                        ), $order_type)
-                    ->get();
-
-            $order_by = null;
+        $rank_higher_where_not = null;
+        if ($find == 'content') {
+            $item_id_key = 'content_id';
         } else {
-            throw new \Exception('Invalid search type');
+            $types = null;
+
+            if ($find === 'destination') {
+                $item_id_key = 'destination_id';
+                $rank_higher_where_not = 'content_type';
+            } elseif ($find === 'comment') {
+                $item_id_key = 'comment_id';
+            } elseif ($find === 'user') {
+                $item_id_key = 'user_id';
+                $rank_higher_where_not = 'content_type';
+            } else {
+                $item_id_key = 'content_id';
+            }
         }
 
-        return $res;
+        $data['paginate'] = Searchable::select([
+            $item_id_key,
+            DB::raw('MATCH (`title`, `body`) AGAINST (' . DB::getPdo()->quote($keyword_detailed) . ' IN BOOLEAN MODE) AS `relevance`'),
+            ($rank_higher_where_not ? DB::raw('IF(`'.$rank_higher_where_not.'` IS NULL, 100, 0) AS `sum_up_relevance`') :  DB::raw('0 AS `sum_up_relevance`')),
+        ])->distinct()
+            ->where(function ($query) use ($keyword_detailed, $keyword) {
+                $query->whereRaw('MATCH (`title`, `body`) AGAINST (' . DB::getPdo()->quote($keyword_detailed) . ' IN BOOLEAN MODE)');
+
+                if ($keyword && $keyword != '') {
+                    $query->orWhereRaw('MATCH (`title`, `body`) AGAINST (' . DB::getPdo()->quote($keyword) . ' IN BOOLEAN MODE)');
+                }
+            })->whereNotNull($item_id_key);
+
+        if ($types) {
+            if (is_array($types)) {
+                $data['paginate'] = $data['paginate']->whereIn('content_type', $types);
+            } else {
+                $data['paginate'] = $data['paginate']->where('content_type', $types);
+            }
+        }
+
+        $data['paginate'] = $data['paginate']->orderBy(DB::raw('`relevance` + `sum_up_relevance`'), 'desc')
+            ->paginate($limit);
+
+        $data['count'] = $data['paginate']->total();
+
+        if ($data['count'] && ! $count_only) {
+            foreach ($data['paginate'] as &$item) {
+                if ($item->$item_id_key && ! in_array($item->$item_id_key, $data['item_ids'], true)) {
+                    $data['item_ids'][] = $item->$item_id_key;
+                }
+            }
+
+            if ($find == 'content' && count($data['item_ids'])) {
+                $data['items'] = Content::whereIn('id', $data['item_ids'])
+                    ->with('comments')
+                    ->orderBy(DB::raw('FIELD(`id`, ' . implode(',', $data['item_ids']) . ')', 'ASC'))
+                    ->get();
+            } elseif ($find == 'destination' && count($data['item_ids'])) {
+                $data['items'] = Destination::whereIn('id', $data['item_ids'])
+                    ->orderBy(DB::raw('FIELD(`id`, ' . implode(',', $data['item_ids']) . ')', 'ASC'))
+                    ->get();
+            } elseif ($find == 'user' && count($data['item_ids'])) {
+                $data['items'] = User::whereIn('id', $data['item_ids'])
+                    ->orderBy(DB::raw('FIELD(`id`, ' . implode(',', $data['item_ids']) . ')', 'ASC'))
+                    ->get();
+            }
+
+        }
+
+        if ($count_only) {
+            return $data['count'];
+        } else {
+            return $data;
+        }
+    }
+
+    public function searchByKeyword($type, $keyword, $limit = 30, $count_only = false)
+    {
+        $keyword = trim(preg_replace('/\s+/', ' ', full_text_safe(urldecode($keyword))));
+        $keyword = preg_replace('/[+\-><\(\)~*:,\"@]+/', ' ', $keyword);
+
+        $keyword_array = explode(' ', $keyword);
+        $keyword = [];
+        $keyword_detailed = [];
+
+        if (count($keyword_array) == 1) {
+            $prefix = '*';
+        } else {
+            $prefix = '+';
+        }
+        $count = 0;
+
+        foreach ($keyword_array as &$keys) {
+            ++$count;
+            if (trim($keys) != '') {
+                if ($count > 1) {
+                    $prefix = '-';
+                    $detailed_prefix = '';
+                } else {
+                    $detailed_prefix = $prefix;
+                }
+
+                $keys = rtrim($keys, '+- ');
+                $keys = trim($keys, '+- ');
+
+                $keyword_detailed[] = '' . $detailed_prefix . $keys .($count == count($keyword_array) ? '*' : '') .'';
+                $keyword[] = '('. $prefix . $keys . ($count == count($keyword_array) ? '*' : '') . ')';
+            }
+        }
+        $keyword = trim(mb_strtolower(implode(' ', $keyword)));
+        $keyword_detailed = trim(mb_strtolower(implode(' ', $keyword_detailed)));
+
+        /*if ($add_plus) {
+            $keyword = '+'.$keyword;
+        } else {
+            $keyword = '*'.$keyword;
+        }*/
+
+        if (request()->get('detailed', null) === null) {
+            $keyword = null;
+        }
+
+        if (is_string($type) && $type == 'destination') {
+            $data = $this->findSearchableIds('destination', null, $limit, $keyword_detailed, $keyword, $count_only);
+        } elseif (is_string($type) && $type == 'user') {
+            $data = $this->findSearchableIds('user', null, $limit, $keyword_detailed, $keyword, $count_only);
+        } else {
+            $data = $this->findSearchableIds('content', $type, $limit, $keyword_detailed, $keyword);
+        }
+
+        if ($count_only) {
+            $data = $data['count'];
+        }
+
+        return $data;
     }
 
     public function ajaxsearch(Request $request)
     {
-        $q = trim($request->input('q'));
+        $keyword = trim($request->get('q'));
 
-        if ($request->has('types')) {
-            $types = explode(',', $request->types);
-        } else {
-            $types = ['destination', 'flight', 'forum'];
-        }
+        $forum = $this->searchByKeyword(['forum', 'buysell', 'expat'], $keyword, 5);
+        $user = $this->searchByKeyword('user', $keyword, 5);
+        $destinations = $this->searchByKeyword('destination', $keyword, 5);
 
-        $header_search = $request->input('header_search');
-
-        if ($q && ! empty($q)) {
-            $total_cnt = $this->getTotalCount($q);
-            $remaining_cnt = config('search.ajax_results');
-            foreach ($types as $type) {
-                if ($remaining_cnt > 0) {
-                    $builder = $this->getSearchResultsByType($type, $q);
-
-                    $results[$type] = $builder->take($remaining_cnt);
-                    if (count($results[$type])) {
-                        $this->modifyResultsByType($type, $results[$type], true);
-                        if (count($results[$type]) == config('search.ajax_results')) {
-                            break;
-                        } else {
-                            $remaining_cnt -= count($results[$type]);
-                        }
-                    } else {
-                        unset($results[$type]);
+        $contents = [];
+        foreach (['forum', 'user', 'destinations'] as &$type)
+        {
+            if (isset(${$type}['items']) && ${$type}['items'] && count(${$type}['items'])) {
+                foreach (${$type}['items'] as &$item)
+                {
+                    if ($type == 'forum') {
+                        $item['category'] = 'forum';
+                    } elseif ($type == 'user') {
+                        $item['category'] = 'user';
+                    } elseif ($type == 'destination') {
+                        $item['category'] = 'destination';
                     }
+
+                    $item = $item->getAttributes();
+                    if (! isset($item['title']) && isset($item['name'])) {
+                        $item['title'] = $item['name'];
+                        unset($item['name']);
+                    }
+
+                    $contents[] = $item;
                 }
             }
-        } else {
-            return '';
         }
 
-        if ($total_cnt == 0) {
-            return response()
-                ->view('component.searchblock', [
-                    'not_found' => trans('search.results.noresults'),
-                ]);
-        }
-
-        $footer_modifier = $header_search ? 'm-icon m-small' : 'm-icon';
-
-        return response()
-            ->view('component.searchblock', [
-                'results' => (isset($results) ? $results : null),
-                'total_cnt' => $total_cnt,
-                'q' => $q,
-                'header_search' => $header_search,
-                'footer_modifier' => $footer_modifier,
-            ]);
+        return array_merge(
+                ['attributes' => [
+                    'total' => round($forum['count'] + $user['count'] + $destinations['count']),
+                    'route' => route('search.results', ['q=' . urlencode($keyword)]),
+                ]
+            ], $contents);
     }
 }
