@@ -56,3 +56,11 @@ function backToAnchor($anchor)
 {
     return Redirect::to(URL::previous().$anchor);
 }
+
+function dist($type) {
+                    
+    $path = public_path('dist/manifest.json');
+    $manifest = json_decode(file_get_contents($path), true);
+    return '/dist/' . $manifest[$type];
+
+}

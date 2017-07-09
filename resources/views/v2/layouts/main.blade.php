@@ -17,7 +17,7 @@
                 ])) 
             }}
         ">
-        <link rel="stylesheet" href="{{ elixir('v2/css/main.css') }}">
+        <link rel="stylesheet" href="{{ dist('css') }}">
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
         <!-- TradeDoubler site verification 2960089 -->
     </head>
@@ -33,7 +33,8 @@
             {!! component('PhotoFullscreen') !!}
             {!! component('Alert') !!}
         </div>
-        <script src="{{ elixir('v2/js/main.js') }}"></script>
+        <script src="{{ dist('vendor') }}"></script>
+        <script src="{{ dist('js') }}"></script>
         @include('v2.utils.promo')
         @include('v2.utils.facebook')
         @include('v2.utils.googleTag')

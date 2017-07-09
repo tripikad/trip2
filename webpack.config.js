@@ -68,7 +68,7 @@ module.exports = {
         new ExtractTextPlugin('[name].[chunkhash:6].css'),
         new SpriteLoaderPlugin(),
         new CleanWebpackPlugin('./public/dist', { watch: true }),
-        /*function() {
+        function() {
             this.plugin("done", stats => {
                 var assets = stats.toJson().assetsByChunkName;
                 var manifest = {
@@ -86,7 +86,7 @@ module.exports = {
                     JSON.stringify(manifest)
                 );
             });
-        }*/
+        }
     ],
     resolve: {
         alias: {
