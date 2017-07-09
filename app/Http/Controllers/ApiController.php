@@ -21,6 +21,7 @@ class ApiController extends Controller
         $data = collect(config('destinations'))
         ->map(function ($value, $key) {
             $value['id'] = $key;
+
             return $value;
         })
         ->values();
