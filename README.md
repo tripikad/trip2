@@ -14,9 +14,8 @@ cd trip2
 composer install
 cp .env.example .env
 php artisan key:generate
-yarn
-gulp
-gulp v1 # to build legacy assets
+yarn #or npm install
+npm run dev
 ```
 
 ### Databases
@@ -30,14 +29,6 @@ Optionally use https://www.sequelpro.com to set up the databases. Ask for access
 
 ```
 mysql -uroot trip2 < dump.sql
-```
-
-### What about npm?
-
-If you still want to use npm, run:
-
-```
-npm install --no-optional
 ```
 
 ### Getting production images
@@ -100,43 +91,82 @@ rm -R /tmp/nginx/*
 valet restart
 ```
 
-## Development
-
-### Watching frontend assets
-
-At the time of writing, gulp watching does not work. Its reccomended to use `watch` utility, you will need to run:
-
-```
-brew install watch
-watch gulp
-```
-
-### Testing
+## Testing
 
 ```
 ./vendor/bin/phpunit
 ```
 
-### Linting
 
-Run:
+## Frontend development
+
+### Commands
 
 ```sh
-npm run test
+npm run dev # Unminified and fast dev build
+npm run build # Minified and slow production build
+npm run watch # Watching the assets
 ```
 
-### Sublime Text linters
+### Build process
 
-* https://packagecontrol.io/packages/SublimeLinter
-* https://packagecontrol.io/packages/SublimeLinter-contrib-eslint
-* https://packagecontrol.io/packages/ESLint-Formatter
-* https://packagecontrol.io/packages/SublimeLinter-contrib-stylelint
-* https://github.com/morishitter/stylefmt
+The main entrypoint is `./resources/views/v2/main.js` what boots up a Vue instance and includes all the neccessary assets:
 
-### PHPStorm linters
+#### JS
 
-* https://www.jetbrains.com/help/phpstorm/10.0/eslint.html
-* https://youtrack.jetbrains.com/issue/WEB-19737#comment=27-1744895
+Vue components from
+
+```
+./resources/views/v2/components/**/*.vue
+```
+
+are compiled and minified to
+
+```
+./public/dist/main.hash.js
+```
+
+#### Vendor JS
+
+Vendor libraries specified in `webpack.config.js` are extracted from
+
+```
+./resources/views/v2/components/**/*.vue
+```
+
+are compiled and minified to
+
+```
+./public/dist/vendor.hash.js
+```
+
+#### CSS
+
+Components CSS from
+
+```
+./resources/views/v2/components/**/*.css
+``` 
+
+and helper CSS from
+
+```
+./resources/views/v2/styles/**/*.css
+```
+
+are concatted, processed using PostCSS (the configuration is at `./postcss.config.js`) and saved to
+
+```
+./public/dist/main.hash.css
+```
+
+#### SVG
+
+SVGs from `./resources/views/v2/svg/**/*.svg`
+
+are concat into a SVG sprite, optimized, minified and saved to
+
+`./public/dist/main.svg`
 
 ## Frontend architecture
 
@@ -144,7 +174,7 @@ npm run test
 
 #### API
 
-Components are located at ```resources/views/v2/components``` and are either Blade or Vue components.
+Components are located at ```resources/views/v2/components``` and are either Laravel Blade or VueJS components.
 
 To show a component use a ```component()``` helper:
 
@@ -172,9 +202,11 @@ To make a Vue component run
 php artisan make:component MyComponent --vue
 ```
 
-#### CSS
+#### Component CSS
 
-We use PostCSS with [small set of plugins](https://github.com/tripikad/trip2/blob/master/elixir/postcss.js#L17) and use a hybrid BEM / SUIT naming 
+##### Class naming conventions
+
+We use a hybrid BEM / SUIT naming 
 convention:
 
 Blocks:
@@ -198,7 +230,42 @@ Modifiers:
 .AnotherComponent--anotherModifier {}
 ```
 
-Most of CSS properties use PostCSS variablest that can be found at `resources/views/v2/styles/variables.css`.
+##### PostCSS: Variables and imports
+
+Various PostCSS plugins are available to improve the CSS writing experience.
+
+A Sass-like `$variable` syntax is supported:
+
+```scss
+$foo: 12px;
+.Bar {
+    padding: $foo;
+}
+```
+
+It's recommended to always use global variables from [/resources/views/v2/styles/variables.css](/resources/views/v2/styles/variables.css) by importing them first:
+
+```scss
+@import "variables" // Resolves to "./resources/views/v2/styles/variables.css"
+
+.Bar {
+    padding: $padding-md;
+}
+```
+
+When using third party libraries one can import it's CSS from node_modules directory:
+
+```scss
+@include "somelibrary/dist/somelibrary.css" // Resolves to "./node_modules/somelibrary/dist/somelibrary.css"
+```
+
+##### PostCSS: Responsive type
+
+TBD
+
+##### PostCSS: If media
+
+TDB
 
 ### Regions
 

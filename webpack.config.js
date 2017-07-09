@@ -67,7 +67,7 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('[name].[chunkhash:6].css'),
         new SpriteLoaderPlugin(),
-        new CleanWebpackPlugin('./public/dist', { watch: true }),
+        new CleanWebpackPlugin('./public/dist'),
         function() {
             this.plugin("done", stats => {
                 var assets = stats.toJson().assetsByChunkName;
