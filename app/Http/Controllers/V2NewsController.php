@@ -43,6 +43,9 @@ class V2NewsController extends Controller
                     ->with('title', trans('content.'.$type.'.index.title'))
                     ->with('route', route('news.index'))
                 )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('NewsLinks'))
+                )
                 ->push(region(
                     'FilterHorizontal',
                     $destinations,
