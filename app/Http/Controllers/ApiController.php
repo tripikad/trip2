@@ -10,4 +10,17 @@ class ApiController extends Controller
     {
         return Destination::select('id', 'parent_id', 'name')->get();
     }
+
+    public function destinationsData()
+    {
+        $data = collect(config('destinations'))
+        ->map(function($value, $key) {
+            $value['id'] = $key;
+            return $value;
+        })
+        ->values();
+
+        return response()->json($data);
+    }
+
 }

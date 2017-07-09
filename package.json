@@ -5,8 +5,10 @@
     "test": "eslint \"resources/views/v2/**/*.{js,vue}\" \"gulpfile.js\" \"elixir/*.js\" ; stylelint \"resources/views/v2/**/*.css\""
   },
   "dependencies": {
+    "@turf/turf": "^4.5.2",
     "bootstrap-sass": "^3.3.5",
     "breakpoint-sass": "^2.6.1",
+    "d3-scale": "^1.0.6",
     "del": "^2.2.0",
     "dropzone": "^4.3.0",
     "eslint": "^3.1.1",
