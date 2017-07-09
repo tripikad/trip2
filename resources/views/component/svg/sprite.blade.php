@@ -11,5 +11,5 @@ code: |
 --}}
 
 <svg>
-    <use xlink:href="/svg/main.svg#{{ $name }}"></use>
+    <use xlink:href="/V1dist/main.svg#{{ $name }}"></use>
 </svg>

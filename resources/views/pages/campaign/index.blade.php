@@ -26,7 +26,7 @@
             <div class="c-masthead m-alternative" style="background-image: url(/photos/trip-camp-bgimg.jpg);">
                 <div class="c-masthead__body">
                     <div class="c-masthead__logo"><a href="/" class="c-masthead__logo-link">
-                            <div class="c-logo "><img src="/svg/tripee_logo.svg" alt=""></div>
+                            <div class="c-logo "><img src="/V1dist/tripee_logo.svg" alt=""></div>
                         </a></div>
                     <h1 class="c-masthead__title"> Tripi sõbra või kallimaga Maltale </h1></div>
                 <div class="c-masthead__bottom"></div>
@@ -38,7 +38,7 @@
                 <article class="c-row m-icon">
                     <div class="c-row__icon">
                         <svg>
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/svg/main.svg#icon-tickets">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/V1dist/main.svg#icon-tickets">
 
                             </use>
                         </svg>
@@ -51,7 +51,7 @@
                 <article class="c-row m-icon">
                     <div class="c-row__icon">
                         <svg class="backpack">
-                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/svg/main.svg#trip-bag-blue">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/V1dist/main.svg#trip-bag-blue">
 
                             </use>
                         </svg>
@@ -113,70 +113,70 @@
                                 <p>31000</p>
                                 <svg>
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="/svg/main.svg#trip-bag"></use>
+                                         xlink:href="/V1dist/main.svg#trip-bag"></use>
                                 </svg>
                             </div>
                             <div class="circle">
                                 <p>32000</p>
                                 <svg>
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="/svg/main.svg#trip-bag"></use>
+                                         xlink:href="/V1dist/main.svg#trip-bag"></use>
                                 </svg>
                             </div>
                             <div class="circle">
                                 <p>33000</p>
                                 <svg>
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="/svg/main.svg#trip-bag"></use>
+                                         xlink:href="/V1dist/main.svg#trip-bag"></use>
                                 </svg>
                             </div>
                             <div class="circle">
                                 <p>34000</p>
                                 <svg>
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="/svg/main.svg#trip-bag"></use>
+                                         xlink:href="/V1dist/main.svg#trip-bag"></use>
                                 </svg>
                             </div>
                             <div class="circle">
                                 <p>35000</p>
                                 <svg>
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="/svg/main.svg#trip-bag"></use>
+                                         xlink:href="/V1dist/main.svg#trip-bag"></use>
                                 </svg>
                             </div>
                             <div class="circle">
                                 <p>36000</p>
                                 <svg>
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="/svg/main.svg#trip-bag"></use>
+                                         xlink:href="/V1dist/main.svg#trip-bag"></use>
                                 </svg>
                             </div>
                             <div class="circle">
                                 <p>37000</p>
                                 <svg>
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="/svg/main.svg#trip-bag"></use>
+                                         xlink:href="/V1dist/main.svg#trip-bag"></use>
                                 </svg>
                             </div>
                             <div class="circle">
                                 <p>38000</p>
                                 <svg>
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="/svg/main.svg#trip-bag"></use>
+                                         xlink:href="/V1dist/main.svg#trip-bag"></use>
                                 </svg>
                             </div>
                             <div class="circle">
                                 <p>39000</p>
                                 <svg>
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="/svg/main.svg#trip-bag"></use>
+                                         xlink:href="/V1dist/main.svg#trip-bag"></use>
                                 </svg>
                             </div>
                             <div class="circle last">
                                 <p>40000</p>
                                 <svg>
                                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                         xlink:href="/svg/main.svg#trip-tickets-green"></use>
+                                         xlink:href="/V1dist/main.svg#trip-tickets-green"></use>
                                 </svg>
                             </div>
                         </div>
@@ -235,13 +235,13 @@
                                                                       class="c-forum-list-nav__item-link">Lennupiletite sooduspakkumised
                                         <span class="c-forum-list-nav__item-icon"> <svg>
 											<use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                 xlink:href="/svg/main.svg#icon-arrow-right"></use>
+                                                 xlink:href="/V1dist/main.svg#icon-arrow-right"></use>
 										</svg> </span> </a></li>
                                 <li class="c-forum-list-nav__item "><a href="/foorum/uldfoorum"
                                                                        class="c-forum-list-nav__item-link">Tripikate foorum
                                         <span class="c-forum-list-nav__item-icon"> <svg>
 											<use xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                 xlink:href="/svg/main.svg#icon-arrow-right"></use>
+                                                 xlink:href="/V1dist/main.svg#icon-arrow-right"></use>
 										</svg> </span> </a></li>
 
                             </ul>
@@ -254,7 +254,7 @@
             <div class="extra-info-sidebar">
                 <svg>
                     <use xmlns:xlink="http://www.w3.org/1999/xlink"
-                         xlink:href="/svg/main.svg#trip-campaign-map"></use>
+                         xlink:href="/V1dist/main.svg#trip-campaign-map"></use>
                 </svg>
             </div>
 

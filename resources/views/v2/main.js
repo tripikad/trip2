@@ -1,3 +1,14 @@
+// Require CSS files
+
+require.context('./styles', true, /\.css$/)
+require.context('./components', true, /\.css$/)
+
+// Require SVG files
+
+require.context('./svg', true, /\.svg$/)
+
+// Require Vue et al
+
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 import VueCookie from 'vue-cookie'
