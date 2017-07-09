@@ -14,13 +14,13 @@ class ApiController extends Controller
     public function destinationsData()
     {
         $data = collect(config('destinations'))
-        ->map(function($value, $key) {
+        ->map(function ($value, $key) {
             $value['id'] = $key;
+
             return $value;
         })
         ->values();
 
         return response()->json($data);
     }
-
 }
