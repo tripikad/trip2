@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Image;
 use App\Content;
+use Carbon\Carbon;
 use App\Searchable;
 use App\Destination;
-use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Carbon\Carbon;
 
 class V2SearchController extends Controller
 {
@@ -49,11 +49,9 @@ class V2SearchController extends Controller
             $active_search = $this->default_active_search;
         }
 
-
         $search_type_keys = array_keys($this->search_types);
 
-        foreach ($search_type_keys as $key => $type)
-        {
+        foreach ($search_type_keys as $key => $type) {
             $key_value = array_search($type, $search_type_keys);
 
             if ($q && ! empty($q)) {
@@ -71,7 +69,7 @@ class V2SearchController extends Controller
                     $data['count'] = $this->searchByKeyword($this->search_types[$type], $q, $sort_order, null, true) ?? 0;
                 }
 
-                if ($this->default_active_search == 'forum' && $data['count'] == 0 && !$this->default_found) {
+                if ($this->default_active_search == 'forum' && $data['count'] == 0 && ! $this->default_found) {
                     $next_key = $key_value + 1;
 
                     if (isset($search_type_keys[$next_key])) {
@@ -88,8 +86,7 @@ class V2SearchController extends Controller
         }
 
         $tabs_component = collect();
-        foreach ($tabs as $type => &$tab)
-        {
+        foreach ($tabs as $type => &$tab) {
             $tabs_component->push(
                 component('HeaderTab')->with('title', $tab['title'])
                     ->with('route', $tab['route'])
@@ -109,12 +106,11 @@ class V2SearchController extends Controller
 
         $search_results = collect();
 
-        foreach ($data['items'] as $item)
-        {
+        foreach ($data['items'] as $item) {
             if ($active_search == 'flight') {
                 $search_results->push(
                     component('SearchRow')->with('title', str_limit($item->title, 80))
-                        ->with('route', route($item->type . '.show', [$item->slug]))
+                        ->with('route', route($item->type.'.show', [$item->slug]))
                         ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('d.m.Y H:i'))
                         ->with('image_alt', $item->imagePreset('small_square'))
                         ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
@@ -156,7 +152,6 @@ class V2SearchController extends Controller
                         ->with('badge', $item->comments->count())
                 );
             }
-
         }
 
         $tag = component('Tag')
@@ -259,10 +254,10 @@ class V2SearchController extends Controller
             ),
         ])->distinct()
             ->where(function ($query) use ($keyword_detailed, $keyword) {
-                $query->whereRaw('MATCH (`title`, `body`) AGAINST (' . DB::getPdo()->quote($keyword_detailed) . ' IN BOOLEAN MODE)');
+                $query->whereRaw('MATCH (`title`, `body`) AGAINST ('.DB::getPdo()->quote($keyword_detailed).' IN BOOLEAN MODE)');
 
                 if ($keyword && $keyword != '') {
-                    $query->orWhereRaw('MATCH (`title`, `body`) AGAINST (' . DB::getPdo()->quote($keyword) . ' IN BOOLEAN MODE)');
+                    $query->orWhereRaw('MATCH (`title`, `body`) AGAINST ('.DB::getPdo()->quote($keyword).' IN BOOLEAN MODE)');
                 }
             })->whereNotNull($item_id_key);
 
@@ -330,7 +325,6 @@ class V2SearchController extends Controller
 
                 $data['items'] = $data['items']->get();
             }
-
         }
 
         return $data;
