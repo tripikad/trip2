@@ -1,15 +1,15 @@
 <template>
 
-    <div class="FrontpageAjaxSearchRow" :class="isclasses">
+    <div class="FrontpageSearchRow" :class="isclasses">
 
-        <div v-if="index != 'attributes'" class="FrontpageAjaxSearchRow__item">
-            <div class="FrontpageAjaxSearchRow__title">
+        <div v-if="index != 'attributes'" class="FrontpageSearchRow__item">
+            <div class="FrontpageSearchRow__title">
 
                 {{ result.title }}
 
             </div>
         </div>
-        <a v-else class="FrontpageAjaxSearchRow__footer" :href="result.route">
+        <a v-else class="FrontpageSearchRow__footer" :href="result.route">
             {{ result.total }} Tulemust kokku
         </a>
 
