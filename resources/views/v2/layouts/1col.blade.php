@@ -11,6 +11,9 @@ $top = isset($top) ? collect($top) : collect();
 $content = isset($content) ? collect($content) : collect();
 $bottom = isset($bottom) ? collect($bottom) : collect();
 $footer = $footer ?? '';
+$background_color = $background_color ?? 'background-white';
+$container_background_color = $container_background_color ?? '';
+$column_class = $column_class ?? 'col-8';
 
 @endphp
 
@@ -59,13 +62,13 @@ $footer = $footer ?? '';
 
     @if ($content->count())
 
-    <div class="background-white">
+    <div class="{{ $background_color }}">
 
-        <div class="container">
+        <div class="container {{ $container_background_color }}">
 
             <div class="row row-center padding-top-lg padding-bottom-md">
 
-                <div class="col-8">
+                <div class="{{ $column_class }}">
 
                     @foreach ($content as $content_item)
                     
