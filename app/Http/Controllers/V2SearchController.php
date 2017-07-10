@@ -81,8 +81,8 @@ class V2SearchController extends Controller
             $original_key = $search_type_keys[$key_value];
 
             $tabs[$original_key]['count'] = $data['count'];
-            $tabs[$original_key]['title'] = trans('search.tab.' . $original_key);
-            $tabs[$original_key]['route'] = $data['count'] ? route('search.results.type', [$original_key, 'q=' . $q]) : '#';
+            $tabs[$original_key]['title'] = trans('search.tab.'.$original_key);
+            $tabs[$original_key]['route'] = $data['count'] ? route('search.results.type', [$original_key, 'q='.$q]) : '#';
         }
 
         $tabs_component = collect();
@@ -114,7 +114,7 @@ class V2SearchController extends Controller
                         ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('d.m.Y H:i'))
                         ->with('image_alt', $item->imagePreset('small_square'))
                         ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
-                        ->with('badge', ($item->price ? $item->price . '€' : null))
+                        ->with('badge', ($item->price ? $item->price.'€' : null))
                 );
             } elseif ($active_search == 'news') {
                 $search_results->push(
@@ -128,7 +128,7 @@ class V2SearchController extends Controller
             } elseif ($active_search == 'destination') {
                 $parent = $item->parent()->first();
                 $search_results->push(
-                    component('SearchRow')->with('title', ($parent ? $parent->name .  ' › ' : '') . $item->name)
+                    component('SearchRow')->with('title', ($parent ? $parent->name.' › ' : '').$item->name)
                         ->with('route', route('destination.showSlug', [$item->slug]))
                         ->with('image_alt', Image::getRandom($item->id))
                 );
@@ -158,10 +158,10 @@ class V2SearchController extends Controller
             ->is('white');
 
         if ($sort_order == 'relevance') {
-            $tag->with('route', route('search.results.type', [$active_search, 'q=' . $q . '&sort_order=created_at']))
+            $tag->with('route', route('search.results.type', [$active_search, 'q='.$q.'&sort_order=created_at']))
                 ->with('title', trans('search.results.newest_first'));
         } else {
-            $tag->with('route', route('search.results.type', [$active_search, 'q=' . $q . '&sort_order=relevance']))
+            $tag->with('route', route('search.results.type', [$active_search, 'q='.$q.'&sort_order=relevance']))
                 ->with('title', trans('search.results.relevance_first'));
         }
 
@@ -177,7 +177,7 @@ class V2SearchController extends Controller
                 ->push(
                     component('Form')
                         ->with('method', 'get')
-                        ->with('route', route('search.results.type', [$active_search, 'sort_order=' . $sort_order]))
+                        ->with('route', route('search.results.type', [$active_search, 'sort_order='.$sort_order]))
                         ->with('fields',
                             collect()->push(
                                 component('FormSearchField')->with('name', 'q')
@@ -204,7 +204,7 @@ class V2SearchController extends Controller
             ->render();
     }
 
-    protected function findSearchableIds($find = 'content', $types = ['forum', 'buysell', 'expat'], $limit = 30, $keyword_detailed, $keyword, $sort_order = 'relevance', $count_only = false)
+    protected function findSearchableIds($find, $types, $limit, $keyword_detailed, $keyword, $sort_order = 'relevance', $count_only = false)
     {
         $sort_order_types = [
             'relevance',
@@ -245,7 +245,7 @@ class V2SearchController extends Controller
         $data['paginate'] = Searchable::select([
             $item_id_key,
             ($sort_order == 'relevance' ?
-                DB::raw('MATCH (`title`, `body`) AGAINST (' . DB::getPdo()->quote($keyword_detailed) . ' IN BOOLEAN MODE) AS `relevance`') :
+                DB::raw('MATCH (`title`, `body`) AGAINST ('.DB::getPdo()->quote($keyword_detailed).' IN BOOLEAN MODE) AS `relevance`') :
                 DB::raw('0 AS `relevance`')
             ),
             ($rank_higher_where_not ?
@@ -296,18 +296,17 @@ class V2SearchController extends Controller
                 $data['items'] = $data['items']->with($with);
 
                 if ($sort_order == 'relevance') {
-                    $data['items'] = $data['items']->orderBy(DB::raw('FIELD(`id`, ' . implode(',', $data['item_ids']) . ')', 'ASC'));
+                    $data['items'] = $data['items']->orderBy(DB::raw('FIELD(`id`, '.implode(',', $data['item_ids']).')', 'ASC'));
                 } else {
                     $data['items'] = $data['items']->orderBy($sort_order, 'DESC');
                 }
-
 
                 $data['items'] = $data['items']->get();
             } elseif ($find == 'destination' && count($data['item_ids'])) {
                 $data['items'] = Destination::whereIn('id', $data['item_ids']);
 
                 if ($sort_order == 'relevance') {
-                    $data['items'] = $data['items']->orderBy(DB::raw('FIELD(`id`, ' . implode(',', $data['item_ids']) . ')', 'ASC'));
+                    $data['items'] = $data['items']->orderBy(DB::raw('FIELD(`id`, '.implode(',', $data['item_ids']).')', 'ASC'));
                 } else {
                     $data['items'] = $data['items']->orderBy('id', 'DESC');
                 }
@@ -318,7 +317,7 @@ class V2SearchController extends Controller
                     ->with('images');
 
                 if ($sort_order == 'relevance') {
-                    $data['items'] = $data['items']->orderBy(DB::raw('FIELD(`id`, ' . implode(',', $data['item_ids']) . ')', 'ASC'));
+                    $data['items'] = $data['items']->orderBy(DB::raw('FIELD(`id`, '.implode(',', $data['item_ids']).')', 'ASC'));
                 } else {
                     $data['items'] = $data['items']->orderBy($sort_order, 'DESC');
                 }
@@ -359,8 +358,8 @@ class V2SearchController extends Controller
                 $keys = rtrim($keys, '+- ');
                 $keys = trim($keys, '+- ');
 
-                $keyword_detailed[] = '' . $detailed_prefix . $keys .($count == count($keyword_array) ? '' : '') .'';
-                $keyword[] = '('. $prefix . $keys . ($count == count($keyword_array) ? '*' : '') . ')';
+                $keyword_detailed[] = ''.$detailed_prefix.$keys.($count == count($keyword_array) ? '' : '').'';
+                $keyword[] = '('.$prefix.$keys.($count == count($keyword_array) ? '*' : '').')';
             }
         }
         $keyword = trim(mb_strtolower(implode(' ', $keyword)));
@@ -401,11 +400,9 @@ class V2SearchController extends Controller
         $forum = $this->searchByKeyword(['forum', 'buysell', 'expat'], $keyword, 3, $sort_order);
 
         $contents = [];
-        foreach (['destinations', 'flight', 'forum'] as &$type)
-        {
+        foreach (['destinations', 'flight', 'forum'] as &$type) {
             if (isset(${$type}['items']) && ${$type}['items'] && count(${$type}['items'])) {
-                foreach (${$type}['items'] as &$item)
-                {
+                foreach (${$type}['items'] as &$item) {
                     $response = [];
                     if ($type == 'forum') {
                         $response['category'] = 'forum';
@@ -417,7 +414,7 @@ class V2SearchController extends Controller
 
                     if (! isset($item['title']) && isset($item['name'])) {
                         $parent = $item->parent()->first();
-                        $response['title'] = ($parent ? $parent->name .  ' › ' : '') . $item['name'];
+                        $response['title'] = ($parent ? $parent->name.' › ' : '').$item['name'];
                     } else {
                         $response['title'] = str_limit($item['title'], 65);
                     }
@@ -430,7 +427,7 @@ class V2SearchController extends Controller
                             //$response['badge'] = $item->comments->count();
                             //$response['badge_color'] = 'red';
                         } else {
-                            $response['badge'] = ($item['price'] ? $item['price'] . '€' : null);
+                            $response['badge'] = ($item['price'] ? $item['price'].'€' : null);
                             $response['badge_color'] = 'red';
                         }
                     } elseif ($type == 'destinations') {
@@ -439,7 +436,6 @@ class V2SearchController extends Controller
                         $response['route'] = route('user.show', $item['id']);
                     }
 
-
                     if (! isset($contents[$response['category']])) {
                         $contents[$response['category']] = [
                             'title' => '',
@@ -447,7 +443,7 @@ class V2SearchController extends Controller
                         ];
                     }
 
-                    $contents[$response['category']]['title'] = trans('search.tab.' . $response['category']);
+                    $contents[$response['category']]['title'] = trans('search.tab.'.$response['category']);
                     if ($response['category'] == 'destination') {
                         $contents[$response['category']]['icon'] = 'icon-pin';
                     } elseif ($response['category'] == 'flight') {
@@ -467,8 +463,8 @@ class V2SearchController extends Controller
                 ['attributes' => [
                     'message' => $results_count ? trans('search.results.all') : trans('search.results.noresults'),
                     'total' => $results_count,
-                    'route' => route('search.results', ['q=' . urlencode($keyword)]),
-                ]
+                    'route' => route('search.results', ['q='.urlencode($keyword)]),
+                ],
             ]);
     }
 }
