@@ -11,5 +11,7 @@ return [
 
     'results.noresults' => 'Tulemusi ei leitud',
     'results.all' => 'Kõik tulemused',
+    'results.newest_first' => 'Järjesta: uuemad tulemused esimesena',
+    'results.relevance_first' => 'Järjesta: täpsemad vasted esimesena',
 
 ];
