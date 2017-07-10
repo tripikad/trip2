@@ -8,8 +8,7 @@
 
 @endphp
 
-<div
-    class="Footer {{ $isclasses }}"
+<div class="Footer {{ $isclasses }}"
     @if (!empty($image))
     style="
         background-image: linear-gradient(
@@ -18,7 +17,7 @@
         ),
     url({{ $image }});"
     @endif
->    
+>
     <div class="container">
 
         <div class="Footer__wrapper">

@@ -9,23 +9,23 @@ class NavbarMobile
         $user = request()->user();
 
         return collect()
-            ->put('frontpage', [
+            ->push([
                 'title' => trans('menu.header.home'),
                 'route' => route('frontpage.index'),
             ])
-            ->put('flight', [
+            ->push([
                 'title' => trans('menu.header.flights'),
                 'route' => route('flight.index'),
             ])
-            ->put('travelmate', [
+            ->push([
                 'title' => trans('menu.header.travelmates'),
                 'route' => route('travelmate.index'),
             ])
-            ->put('forum', [
+            ->push([
                 'title' => trans('menu.header.forum'),
                 'route' => route('forum.index'),
             ])
-            ->put('news', [
+            ->push([
                 'title' => trans('menu.header.news'),
                 'route' => route('news.index'),
             ])

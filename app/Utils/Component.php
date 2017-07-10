@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use View;
+use InvalidArgumentException;
 
 class Component
 {
@@ -65,14 +66,9 @@ class Component
     {
         $props = $this->with
             ->map(function ($value, $key) {
-                if (is_array($value) || is_object($value) || is_bool($value)) {
-                    $value = rawurlencode(json_encode($value));
-                }
+                $value = json_encode($value, JSON_HEX_APOS);
 
-                return $value;
-            })
-            ->map(function ($value, $key) {
-                return $key.'="'.$value.'"';
+                return ":$key='$value'";
             })
             ->implode(' ');
 
@@ -92,11 +88,22 @@ class Component
         }
 
         $name = "v2.components.$this->component.$this->component";
+        $file_name = $this->exists($name);
+        $path_info = pathinfo($file_name);
 
-        if (view()->exists($name)) {
+        if ($file_name !== false && $path_info['extension'] != 'css') {
             return $this->renderBlade($name);
         } else {
             return $this->renderVue($name);
+        }
+    }
+
+    public function exists($view)
+    {
+        try {
+            return view()->getFinder()->find($view);
+        } catch (InvalidArgumentException $e) {
+            return false;
         }
     }
 

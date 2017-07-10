@@ -16,7 +16,7 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index();
             $table->integer('content_id')->index();
-            $table->text('body');
+            $table->text('body')->nullable();
             $table->integer('status')->required();
             $table->timestamps();
         });

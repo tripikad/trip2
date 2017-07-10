@@ -61,7 +61,7 @@ class ResetController extends Controller
         $user = User::where('email', $request->email)->take(1)->first();
 
         if ($user) {
-            Mail::queue('email.auth.reset', ['user' => $user, 'token' => $user->remember_token], function ($mail) use ($user) {
+            Mail::send('email.auth.reset', ['user' => $user, 'token' => $user->remember_token], function ($mail) use ($user) {
                 $mail->to($user->email, $user->name)->subject(trans('auth.reset.email.subject'));
 
                 $swiftMessage = $mail->getSwiftMessage();

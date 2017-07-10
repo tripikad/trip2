@@ -24,7 +24,9 @@ $footer = $footer ?? '';
 
 @section('promobar', $promobar)
 
-@section('header', $header)
+@section('header')
+    {!! $header !!}
+@stop
 
 @section('content')
 
@@ -194,6 +196,6 @@ $footer = $footer ?? '';
         
 @endsection
 
-@section('footer', $footer)
-
-
+@section('footer')
+    {!! $footer !!}
+@stop

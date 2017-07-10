@@ -19,10 +19,15 @@ $footer = $footer ?? '';
 @section('title', $title)
 @section('head_title', $head_title)
 @section('head_description', $head_description)
-@section('head_image', $head_image)
+@section('head_image')
+    {!! $head_image !!}
+@endsection
 
 @section('color', $color)
-@section('background', $background)
+
+@section('background')
+    {!! $background !!}
+@endsection
 
 @section('header')
 

@@ -1,19 +1,3 @@
-<?php if( ! isset( $_COOKIE["malta-stip-closed"] ) ) : ?>
-
-<div class="malta-promotion">
-    <div class="malta-promotion__wrap">
-        <div class="malta-promotion__text-container">
-            <p class="malta-promotion__title">Osale Trip.ee kampaanias ja võida 2 lennupiletit Maltale.</p>
-            <a href="/tasuta-lennupiletid-maltale" class="malta-promotion__link">Vaata lähemalt siit</a>
-        </div>
-        <div class="malta-promotion__svg-wrap">
-            @include('component.svg.sprite', ['name' => "trip-x"])
-        </div>
-    </div>
-</div>
-
-<?php endif; ?>
-
 <header class="c-header {{ $modifiers or '' }}">
 
     <div class="c-header__logo">

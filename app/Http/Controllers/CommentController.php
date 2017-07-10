@@ -34,7 +34,7 @@ class CommentController extends Controller
                 ->toArray()
         ) {
             foreach ($followersEmails as $followerId => $followerEmail) {
-                Mail::queue('email.follow.content', ['comment' => $comment], function ($mail) use ($followerEmail, $followerId, $comment) {
+                Mail::send('email.follow.content', ['comment' => $comment], function ($mail) use ($followerEmail, $followerId, $comment) {
                     $mail->to($followerEmail)
                         ->subject(trans('follow.content.email.subject', [
                             'title' => $comment->content->title,
@@ -61,7 +61,7 @@ class CommentController extends Controller
 
         */
         if (in_array($comment->content->type, ['forum', 'buysell', 'expat', 'internal'])) {
-            DB::table('users')->select('id')->chunk(1000, function ($users) use ($comment) {
+            DB::table('users')->select('id')->orderBy('id', 'asc')->chunk(1000, function ($users) use ($comment) {
                 collect($users)->each(function ($user) use ($comment) {
 
                     // For each active user we store the cache key about new added comment

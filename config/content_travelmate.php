@@ -50,6 +50,7 @@ return [
         'validate' => [
 
             'title' => 'required',
+            'body' => 'required',
             'start_at' => 'date|required',
 
         ],

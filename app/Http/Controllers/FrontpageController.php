@@ -99,6 +99,6 @@ class FrontpageController extends Controller
     public function search(Request $request)
     {
         return redirect()
-            ->route('destination.slug', [$request->destination->slug]);
+            ->route('destination.showSlug', [$request->destination->slug]);
     }
 }

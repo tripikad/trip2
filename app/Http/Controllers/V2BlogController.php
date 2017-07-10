@@ -115,7 +115,7 @@ class V2BlogController extends Controller
         // return App::make('App\Http\Controllers\ContentController')
         //    ->create('blog');
 
-        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
+        $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
         return layout('1col')
 
@@ -196,7 +196,7 @@ class V2BlogController extends Controller
         //    ->edit('blog', $id);
 
         $blog = Content::findOrFail($id);
-        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
+        $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
         return layout('1col')
 

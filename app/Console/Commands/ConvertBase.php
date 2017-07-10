@@ -147,7 +147,7 @@ class ConvertBase extends Command
             ->table('term_data')
             ->join('term_hierarchy', 'term_data.tid', '=', 'term_hierarchy.tid')
             ->whereIn('term_data.vid', (array) $vids)
-            ->orderBy('term_data.tid');
+            ->orderBy('term_data.tid', 'asc');
     }
 
     public function getTermById($id)

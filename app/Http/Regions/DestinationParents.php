@@ -14,7 +14,7 @@ class DestinationParents
                     ->is('large')
                     ->is('white')
                     ->with('title', $title.' › ')
-                    ->with('route', route('destination.show', [$parent]));
+                    ->with('route', route('destination.showSlug', [$parent->slug]));
             }));
     }
 }

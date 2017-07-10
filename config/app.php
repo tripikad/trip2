@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Trip.ee',
+    'name' => env('APP_NAME', 'Trip.ee'),
 
     /*
     |--------------------------------------------------------------------------
@@ -151,7 +151,7 @@ return [
         Illuminate\Filesystem\FilesystemServiceProvider::class,
         Illuminate\Foundation\Providers\FoundationServiceProvider::class,
 
-        // Illuminate\Hashing\HashServiceProvider::class,
+        //Illuminate\Hashing\HashServiceProvider::class,
         App\Providers\Md5HashServiceProvider::class,
 
         Illuminate\Mail\MailServiceProvider::class,
@@ -165,7 +165,10 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        /*
+         * Package Service Providers...
+         */
+        Laravel\Tinker\TinkerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
@@ -187,10 +190,11 @@ return [
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider.php
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
-
+        App\Providers\RouteServiceProvider::class,
     ],
 
     /*

@@ -37,7 +37,7 @@ class BlogRow
                     return component('Tag')
                         ->is('orange')
                         ->with('title', $destination->name)
-                        ->with('route', route('destination.show', [$destination]));
+                        ->with('route', route('destination.showSlug', [$destination->slug]));
                 }))
                 ->merge($blog->topics->map(function ($topic) {
                     return component('MetaLink')->with('title', $topic->name);

@@ -5,7 +5,7 @@
         <div class="NavbarDesktop__links">
 
             <a
-                v-for="(link, index) in currentLinks"
+                v-for="(link, index) in links"
                 :href="link.route"
                 key="index"
             >
@@ -22,7 +22,7 @@
             </a>
 
             <a
-                v-if="! currentUser"
+                v-if="! user"
                 @mouseenter="onMouseenter"
                 @mouseleave="onMouseleave"
             >
@@ -35,13 +35,13 @@
 
             </a>
 
-            <div v-if="currentUser" class="NavbarDesktop__userImage">
+            <div v-if="user" class="NavbarDesktop__userImage">
 
                 <component
-                    v-if="currentUser.badge"
+                    v-if="user.badge"
                     is="Badge"
                     class="NavbarDesktop__badge"
-                    :title="currentUser.badge"
+                    :title="user.badge"
                 ></component>
 
                 <component
@@ -49,9 +49,9 @@
                     @mouseenter.native="onMouseenter"
                     @mouseleave.native="onMouseleave"
                     is="UserImage"
-                    :route="currentUser.route"
-                    :image="currentUser.image"
-                    :rank="currentUser.rank"
+                    :route="user.route"
+                    :image="user.image"
+                    :rank="user.rank"
                 >
                 </component>
           
@@ -77,7 +77,7 @@
             <div class="NavbarDesktop__sublinks">
 
                 <a
-                    v-for="(link, index) in currentSublinks"
+                    v-for="(link, index) in sublinks"
                     :href="link.route"
                     track-by="index"
                 >
@@ -160,18 +160,9 @@
         data() {
             return {
                 submenuOpen: false,
-                currentLinks: [],
-                currentSublinks: [],
-                currentUser: {},
                 leaving: null,
                 touched: false
             }
-        },
-
-        mounted() {
-            this.currentLinks = this.links ? JSON.parse(decodeURIComponent(this.links)) : ''
-            this.currentSublinks = this.sublinks ? JSON.parse(decodeURIComponent(this.sublinks)) : ''
-            this.currentUser = this.user ? JSON.parse(decodeURIComponent(this.user)) : ''
         }
 
     }

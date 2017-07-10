@@ -27,3 +27,7 @@
     margin-left: $margin-xxl;
     margin-left: 0 ?if $mobile;
 }
+
+.Comment__right {
+    width: 100%;
+}
