@@ -49,10 +49,7 @@
             keymonitor: function(event) {
                 if (event.key == 'Enter') {
                     this.redirect();
-                } else if (['F1', 'F2', 'F3', 'F4', 'F5',
-                            'F6', 'F7', 'F8', 'F9', 'F10',
-                            'F11', 'F12', 'Shift', 'Alt',
-                            'Meta', 'Control'].indexOf(event.key) === -1) {
+                } else if (this.query != this.lastKeyword) {
                     this.search();
                 }
             },
@@ -75,7 +72,7 @@
                 if (this.query && this.query != '' && String(this.query).length > 2 && ! this.enterPressed) {
                     if (this.query != this.lastKeyword) {
                         this.$http
-                            .get('/search/ajaxsearch/?q=' + this.query, {
+                            .get('/search/ajaxsearch/?q=' + this.query + '&_t=' + Date.now(), {
                                 before: function (xhr) {
                                     if (this.lastRequest) {
                                         this.lastRequest.abort()
@@ -101,6 +98,7 @@
 
                     this.results = []
                     this.loading = false
+                    this.lastKeyword = ''
                 }
             }
         }
