@@ -28,7 +28,7 @@ function iso3toId(iso3) {
 var lat = 0
 var lon = 0
 var step = 2.5
-var halfStep = step / 4
+var halfStep = step / 25
 
 var dots = []
 
