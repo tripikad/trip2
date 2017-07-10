@@ -11,7 +11,7 @@ class ConvertSearchable extends Command
     protected $signature = 'search:index';
 
     /*
-     * Most places we use app('db')->select(..) to avoid Laravel eloquent because it increases processing time
+     * Most places we use app('db')->select(..) to avoid Laravel Eloquent because it increases processing time
      */
 
     public function handle()
@@ -127,6 +127,10 @@ class ConvertSearchable extends Command
                 $this->info(' + '.$items_done.' / '.$index_count.' (100%) items saved');
             }
         }
+
+        $this->line(' - 2/3 Optimizing table');
+        app('db')->select('OPTIMIZE TABLE `searchables`');
+        $this->info(' - 3/3 Done');
     }
 
     public function get_users_for_index(&$index_fields, $void_return = false)
