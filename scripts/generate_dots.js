@@ -28,7 +28,7 @@ function iso3toId(iso3) {
 var lat = 0
 var lon = 0
 var step = 2.5
-var halfStep = step / 2
+var halfStep = step / 4
 
 var dots = []
 
@@ -62,7 +62,7 @@ for (var lat = 80; lat > -80; lat -= step) {
         // the dot.properties.countries array
 
         countries.features
-            .slice(0, 3)
+            //.slice(0, 3)
             .filter(country => country.properties.name !== 'Antarctica')
             .forEach(country => {
             
