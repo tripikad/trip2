@@ -9,9 +9,9 @@ import FormButtonProcess from './components/FormButtonProcess/FormButtonProcess.
 import FormSelect from './components/FormSelect/FormSelect.vue'
 import FormSelectMultiple from './components/FormSelectMultiple/FormSelectMultiple.vue'
 import FrontpageDestinationSearch from './components/FrontpageDestinationSearch/FrontpageDestinationSearch.vue'
-import FrontpageAjaxSearch from './components/FrontpageAjaxSearch/FrontpageAjaxSearch.vue'
-import FrontpageAjaxSearchRow from './components/FrontpageAjaxSearchRow/FrontpageAjaxSearchRow.vue'
 import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
+import FrontpageSearchRow from './components/FrontpageSearchRow/FrontpageSearchRow.vue'
+//import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
@@ -45,9 +45,8 @@ new Vue({
         FormSelect,
         FormSelectMultiple,
         FrontpageDestinationSearch,
-        FrontpageAjaxSearch,
-        FrontpageAjaxSearchRow,
         FrontpageSearch,
+        FrontpageSearchRow,
         Icon,
         IconLoader,
         NavbarDesktop,
