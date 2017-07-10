@@ -1,7 +1,11 @@
+var fs = require('fs')
 var turf = require('@turf/turf')
+var baby = require('babyparse')
+
 var countries = require('./data/countries.json')
-var codes = require('./data/codes.json')
 var destinations = require('./data/destinations_data.json')
+
+var codes = baby.parse(fs.readFileSync('./data/codes.csv', 'utf8'), { header: true }).data
 
 // Utilities
 
@@ -58,7 +62,7 @@ for (var lat = 80; lat > -80; lat -= step) {
         // the dot.properties.countries array
 
         countries.features
-            .slice(0, 2)
+            .slice(0, 3)
             .filter(country => country.properties.name !== 'Antarctica')
             .forEach(country => {
             

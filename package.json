@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@turf/turf": "^4.5.2",
+    "babyparse": "^0.4.6",
     "bootstrap-sass": "^3.3.5",
     "breakpoint-sass": "^2.6.1",
     "d3-scale": "^1.0.6",

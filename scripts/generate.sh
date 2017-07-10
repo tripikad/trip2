@@ -10,7 +10,7 @@ printf "\n\e[0;32mGetting the data...\e[0;37m\n\n"
 
 curl https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json > data/countries.json
 
-curl https://raw.githubusercontent.com/datasets/country-codes/master/data/country-codes.csv | csvjson -i 4 > data/codes.json
+curl https://raw.githubusercontent.com/datasets/country-codes/master/data/country-codes.csv > data/codes.csv
 
 curl $1/api/destinations/data > data/destinations_data.json
 
