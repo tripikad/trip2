@@ -1,0 +1,71 @@
+@import "variables";
+
+.FontExperiment {
+
+}
+
+    .FontExperiment__text:hover {
+        background: yellow;
+    }
+
+    .FontExperiment__text {
+        margin-bottom: $margin-lg;
+    }
+
+    .FontExperiment__textXs {
+        font: $font-text-xs;
+    }
+
+    .FontExperiment__textSm {
+        font: $font-text-sm;
+    }
+
+    .FontExperiment__textMd {
+        font: $font-text-md;
+    }
+
+    .FontExperiment__textLg {
+        font: $font-text-lg;
+    }
+
+    .FontExperiment__heading {
+        margin-bottom: $margin-lg;
+    }
+
+    .FontExperiment__heading:hover {
+        background: yellow;
+    }
+
+    .FontExperiment__headingXs {
+        font: $font-heading-xs;
+    }
+
+    .FontExperiment__headingSm {
+        font: $font-heading-sm;
+    }
+
+    .FontExperiment__headingMd {
+        font: $font-heading-md;
+    }
+
+    .FontExperiment__headingLg {
+        font: $font-heading-lg;
+    }
+
+    .FontExperiment__headingXl {
+        font: $font-heading-xl;
+    }
+
+    .FontExperiment__headingXxl {
+        font: $font-heading-xxl;
+    }
+
+    .FontExperiment__headingXxxl {
+        font: $font-heading-xxxl;
+    }
+
+    .FontExperiment__button {
+        border: 1px solid black;
+        border-radius: 100px;
+        padding: 0 0.5em;
+    }
