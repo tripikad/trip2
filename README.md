@@ -233,7 +233,7 @@ Modifiers:
 A Sass-like `$variable` syntax is supported via [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars). Use global variables from [/resources/views/v2/styles/variables.css](/resources/views/v2/styles/variables.css) by importing them to CSS file:
 
 ```scss
-@import "variables" /* Resolves to "./resources/views/v2/styles/variables.css" */
+@import "variables" // Resolves to "./resources/views/v2/styles/variables.css"
 ```
 
 #### Fonts
@@ -257,8 +257,8 @@ Use the `$font-text-xs | $font-text-sm |  $font-text-md |  $font-text-lg` variab
 
 ```scss
 .Component__description {
-    font: $font-text-md; // the recommended body size
-    color: $gray-dark;
+    font: $font-text-md; // The recommended body size
+    color: $gray-dark; // For reduced contrast
 }  
 ```
 
