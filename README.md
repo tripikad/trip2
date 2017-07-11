@@ -168,11 +168,9 @@ are concat into a SVG sprite, optimized, minified and saved to
 
 `./public/dist/main.svg`
 
-## Frontend architecture
+## Frontend architecture: Components
 
-### Components
-
-#### API
+### API
 
 Components are located at ```resources/views/v2/components``` and are either Laravel Blade or VueJS components.
 
@@ -186,7 +184,7 @@ component('MyComponent')
     ->with('data2', 'World') // Variables can be chained
 ```
 
-#### Making a component
+### Making a component
 
 To make a Blade component, run
 
@@ -202,9 +200,9 @@ To make a Vue component run
 php artisan make:component MyComponent --vue
 ```
 
-#### Component CSS
+### Component CSS
 
-##### Class naming conventions
+#### Class naming conventions
 
 We use a hybrid BEM / SUIT naming 
 convention:
@@ -230,42 +228,55 @@ Modifiers:
 .AnotherComponent--anotherModifier {}
 ```
 
-##### PostCSS: Variables and imports
+#### Variables
 
-Various PostCSS plugins are available to improve the CSS writing experience.
-
-A Sass-like `$variable` syntax is supported:
+A Sass-like `$variable` syntax is supported via [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars). Use global variables from [/resources/views/v2/styles/variables.css](/resources/views/v2/styles/variables.css) by importing them to CSS file:
 
 ```scss
-$foo: 12px;
-.Bar {
-    padding: $foo;
-}
+@import "variables" /* Resolves to "./resources/views/v2/styles/variables.css" */
 ```
 
-It's recommended to always use global variables from [/resources/views/v2/styles/variables.css](/resources/views/v2/styles/variables.css) by importing them first:
+#### Fonts
+
+##### Fonts for headings
+
+Use the `$font-heading-xs | $font-heading-sm |  $font-heading-md |  $font-heading-lg |  $font-heading-xl |  $font-heading-xxl |  $font-heading-xxxl` variables that set most of the font details.
+
+Also, it's recommended to reduce contrast and use lighter font colors:
 
 ```scss
-@import "variables" // Resolves to "./resources/views/v2/styles/variables.css"
-
-.Bar {
-    padding: $padding-md;
-}
+.Component__title {
+    font: $font-heading-lg;
+    color: $gray-dark;
+}  
 ```
+
+##### Fonts for shorter plain texts
+
+Use the `$font-text-xs | $font-text-sm |  $font-text-md |  $font-text-lg` variables.
+
+```scss
+.Component__description {
+    font: $font-text-md; // the recommended body size
+    color: $gray-dark;
+}  
+```
+
+##### Fonts for longer texts with markup
+
+Use the dedicated `Body` component:
+
+```php
+component('Body')->with('body', $your_html_content)
+```
+
+#### Third party CSS
 
 When using third party libraries one can import it's CSS from node_modules directory:
 
 ```scss
 @include "somelibrary/dist/somelibrary.css" // Resolves to "./node_modules/somelibrary/dist/somelibrary.css"
 ```
-
-##### PostCSS: Responsive type
-
-TBD
-
-##### PostCSS: If media
-
-TDB
 
 ### Regions
 

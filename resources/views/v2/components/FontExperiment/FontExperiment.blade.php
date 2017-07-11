@@ -1,7 +1,7 @@
 @php
 
-$textSizes = array_reverse(['Xs','Sm','Md','Lg']);
-$headingSizes = array_reverse(['Xs','Sm','Md','Lg','Xl','Xxl','Xxxl']);
+$textSizes = array_reverse(['xs','sm','md','lg']);
+$headingSizes = array_reverse(['xs','sm','md','lg','xl','xxl','xxxl']);
 
 @endphp
 
@@ -9,9 +9,11 @@ $headingSizes = array_reverse(['Xs','Sm','Md','Lg','Xl','Xxl','Xxxl']);
 
     @foreach ($headingSizes as $size)
 
+    <div class="FontExperiment__label">$font-heading-{{ $size }}</div>
+
     <div class="FontExperiment__heading FontExperiment__heading{{ $size }}">
 
-        Kui Arno {{ $size }} <span class="FontExperiment__button">Isaga</span> koolimajja 
+        Kui Arno <span class="FontExperiment__button">Isaga</span> koolimajja 
 
 
         @if ($loop->index > 1)
@@ -26,6 +28,8 @@ $headingSizes = array_reverse(['Xs','Sm','Md','Lg','Xl','Xxl','Xxxl']);
 
     @foreach ($textSizes as $size)
         
+    <div class="FontExperiment__label">$font-text-{{ $size }}</div>
+
     <div class="FontExperiment__text FontExperiment__text{{ $size }}">
 
         Kui Arno <span class="FontExperiment__button">Isaga</span> koolimajja jõudis {{ $size }}
@@ -35,6 +39,8 @@ $headingSizes = array_reverse(['Xs','Sm','Md','Lg','Xl','Xxl','Xxxl']);
     @endforeach
 
     @foreach ($textSizes as $size)
+
+    <div class="FontExperiment__label">$font-text-{{ $size }}</div>
 
     <div class="FontExperiment__text FontExperiment__text{{ $size }}">
 

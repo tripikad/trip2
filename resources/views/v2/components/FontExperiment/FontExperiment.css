@@ -1,8 +1,10 @@
 @import "variables";
 
-.FontExperiment {
-
-}
+    .FontExperiment__label {
+        font-family: monospace;
+        margin-bottom: $margin-sm;
+        color: $gray-light;
+    }
 
     .FontExperiment__text:hover {
         background: yellow;
@@ -12,19 +14,19 @@
         margin-bottom: $margin-lg;
     }
 
-    .FontExperiment__textXs {
+    .FontExperiment__textxs {
         font: $font-text-xs;
     }
 
-    .FontExperiment__textSm {
+    .FontExperiment__textsm {
         font: $font-text-sm;
     }
 
-    .FontExperiment__textMd {
+    .FontExperiment__textmd {
         font: $font-text-md;
     }
 
-    .FontExperiment__textLg {
+    .FontExperiment__textlg {
         font: $font-text-lg;
     }
 
@@ -36,31 +38,31 @@
         background: yellow;
     }
 
-    .FontExperiment__headingXs {
+    .FontExperiment__headingxs {
         font: $font-heading-xs;
     }
 
-    .FontExperiment__headingSm {
+    .FontExperiment__headingsm {
         font: $font-heading-sm;
     }
 
-    .FontExperiment__headingMd {
+    .FontExperiment__headingmd {
         font: $font-heading-md;
     }
 
-    .FontExperiment__headingLg {
+    .FontExperiment__headinglg {
         font: $font-heading-lg;
     }
 
-    .FontExperiment__headingXl {
+    .FontExperiment__headingxl {
         font: $font-heading-xl;
     }
 
-    .FontExperiment__headingXxl {
+    .FontExperiment__headingxxl {
         font: $font-heading-xxl;
     }
 
-    .FontExperiment__headingXxxl {
+    .FontExperiment__headingxxxl {
         font: $font-heading-xxxl;
     }
 
