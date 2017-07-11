@@ -34,9 +34,6 @@
             width: { default: 750 }
         },
 
-        data: () => ({
-        }),
-
         computed: {
             radius() {
                 return this.width / 350

@@ -39,8 +39,8 @@ var fs = require('fs')
 var baby = require('babyparse')
 var _ = require('lodash')
 
-var routes = baby.parse(fs.readFileSync('./data/routes.csv').toString(), { header: false }).data
-var airports = baby.parse(fs.readFileSync('./data/airports.csv').toString(), { header: false }).data
+var routes = baby.parse(fs.readFileSync(__dirname + '/data/routes.csv').toString(), { header: false }).data
+var airports = baby.parse(fs.readFileSync(__dirname + '/data/airports.csv').toString(), { header: false }).data
 
 // We find all the unique airport codes that exist in the routes database
 // so we can get only the airports there is a airline traffic

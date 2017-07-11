@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 // Destinations exported from Trip's destinations table
 
-var destinations = require('./data/destinations.json')
+var destinations = require(__dirname + '/data/destinations.json')
 
 // Manually edited mapping between destination names and Geoname IDs
 // These are the destinations that can not be queried against Geonames API
