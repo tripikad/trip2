@@ -233,8 +233,7 @@ Modifiers:
 A Sass-like `$variable` syntax is supported via [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars). Use global variables from [/resources/views/v2/styles/variables.css](/resources/views/v2/styles/variables.css) by importing them to CSS file:
 
 ```scss
-@import "variables" 
-// Resolves to ./resources/views/v2/styles/variables.css
+@import "variables" // Resolves to ./resources/views/v2/styles/variables.css
 ```
 
 #### Fonts
@@ -276,7 +275,7 @@ component('Body')->with('body', $your_html_content)
 When using third party libraries one can import it's CSS from node_modules directory:
 
 ```scss
-@include "somelibrary/dist/somelibrary.css" // Resolves to "./node_modules/somelibrary/dist/somelibrary.css"
+@import "somelibrary/dist/somelibrary.css" // Resolves to ./node_modules/somelibrary/dist/somelibrary.css
 ```
 
 ### Regions
