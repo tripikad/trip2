@@ -75,7 +75,7 @@ $font-weight-semibold: 600;
 $font-weight-bold: bold;
 $line-height-xs: 100%;
 $line-height-sm: 120%;
-$line-height-md: 130%;
+$line-height-md: 135%;
 $line-height-lg: 150%;
 $line-height-xl: 200%;
 $line-height-xxl: 220%;
@@ -86,7 +86,7 @@ $font-text-lg: $font-weight-normal $font-size-lg / $line-height-lg $font-family,
 $font-heading-xs: $font-weight-semibold $font-size-sm / $line-height-lg $font-family, sans-serif;
 $font-heading-sm: $font-weight-semibold $font-size-md / $line-height-lg $font-family, sans-serif;
 $font-heading-md: $font-weight-semibold $font-size-lg / $line-height-lg $font-family, sans-serif;
-$font-heading-lg: $font-weight-semibold $font-size-xl / $line-height-lg $font-family, sans-serif;
+$font-heading-lg: $font-weight-semibold $font-size-xl / $line-height-md $font-family, sans-serif;
 $font-heading-xl: $font-weight-bold $font-size-xxl / $line-height-sm $font-family, sans-serif;
 $font-heading-xxl: $font-weight-bold $font-size-xxxl / $line-height-xs $font-family, sans-serif;
 $font-heading-xxxl: $font-weight-bold $font-size-xxxxl / $line-height-xs $font-family, sans-serif;
