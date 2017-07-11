@@ -135,7 +135,7 @@ class V2ExperimentsController extends Controller
                 ->push(component('FontExperiment'))
 
             )
-            
+
         ->render();
     }
 }
