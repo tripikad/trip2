@@ -8,7 +8,6 @@
         color: $gray-dark;
         font: $font-heading-xl;
         margin-bottom: $margin-sm;
-        line-height: $line-height-sm;
     }
 
     .ForumPost__left {
