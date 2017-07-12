@@ -37,6 +37,15 @@ class V2ExperimentsController extends Controller
                 )
 
                 ->push(component('Title')
+                    ->with('title', 'User forms')
+                )
+
+                ->push(component('MetaLink')
+                    ->with('title', 'Edit')
+                    ->with('route', route('experiments.user.edit'))
+                )
+
+                ->push(component('Title')
                     ->with('title', 'Blogs')
                 )
 

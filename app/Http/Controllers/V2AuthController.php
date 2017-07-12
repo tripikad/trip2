@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 class V2AuthController extends Controller
 {
-    public function loginForm()
+    public function loginFormExperiment()
     {
         return layout('1colnarrow')
             ->with('color', 'gray')
@@ -69,7 +69,7 @@ class V2AuthController extends Controller
             ->render();
     }
 
-    public function registerForm()
+    public function registerFormExperiment()
     {
         return layout('1colnarrow')
             ->with('color', 'gray')
@@ -138,7 +138,7 @@ class V2AuthController extends Controller
             ->render();
     }
 
-    public function passwordForm()
+    public function passwordFormExperiment()
     {
         return layout('1colnarrow')
             ->with('color', 'gray')
@@ -181,7 +181,7 @@ class V2AuthController extends Controller
             ->render();
     }
 
-    public function resetForm()
+    public function resetFormExperiment()
     {
         return layout('1colnarrow')
             ->with('color', 'gray')

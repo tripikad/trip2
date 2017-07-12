@@ -361,16 +361,16 @@ Route::get('experiments/map', 'V2ExperimentsController@mapIndex')
 
 // Experiments: Auth
 
-Route::get('experiments/login', 'V2AuthController@loginForm')
+Route::get('experiments/login', 'V2AuthController@loginFormExperiment')
     ->name('experiments.loginform');
 
-Route::get('experiments/register', 'V2AuthController@registerForm')
+Route::get('experiments/register', 'V2AuthController@registerFormExperiment')
     ->name('experiments.registerform');
 
-Route::get('experiments/password', 'V2AuthController@passwordForm')
+Route::get('experiments/password', 'V2AuthController@passwordFormExperiment')
     ->name('experiments.passwordform');
 
-Route::get('experiments/reset', 'V2AuthController@resetForm')
+Route::get('experiments/reset', 'V2AuthController@resetFormExperiment')
     ->name('experiments.resetform');
 
 // Experiments: Blog
@@ -389,6 +389,12 @@ Route::get('/experiments/blog/edit', 'V2ExperimentsBlogController@edit')
 
 Route::get('/experiments/blog/profile', 'V2ExperimentsBlogController@profile')
     ->name('experiments.blog.profile')
+    ->middleware('role:admin');
+
+// Experiments: User
+
+Route::get('/experiments/user', 'V2UserController@editExperiment')
+    ->name('experiments.user.edit')
     ->middleware('role:admin');
 
 // V1
