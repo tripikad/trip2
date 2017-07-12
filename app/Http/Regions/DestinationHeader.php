@@ -37,7 +37,7 @@ class DestinationHeader
                         ->with('title', trans('content.action.edit.title'))
                         ->with('route', route('destination.edit', [$destination]))
                 )
-                ->pushWhen($body ,component('Body')
+                ->pushWhen($body, component('Body')
                     ->is('white')
                     ->is('responsive')
                     ->with('body', $body)
