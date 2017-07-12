@@ -6,6 +6,7 @@
     border-radius: $border-radius-md;
     display: flex;
     font: $font-heading-sm;
+    line-height: $line-height-xs;
     justify-content: center;
     padding: $padding-sm $padding-sm;
     text-align: center;

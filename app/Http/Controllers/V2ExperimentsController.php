@@ -66,6 +66,16 @@ class V2ExperimentsController extends Controller
                     ->with('route', route('experiments.select.index'))
                 )
 
+                ->push(component('MetaLink')
+                    ->with('title', 'Fonts')
+                    ->with('route', route('experiments.fonts.index'))
+                )
+
+                ->push(component('MetaLink')
+                    ->with('title', 'Map')
+                    ->with('route', route('experiments.map.index'))
+                )
+
             )
 
             ->render();
@@ -119,5 +129,29 @@ class V2ExperimentsController extends Controller
     public function selectCreate()
     {
         dump(request()->all());
+    }
+
+    public function mapIndex()
+    {
+        return layout('1col')
+
+            ->with('content', collect()
+                ->push(component('Dotmap')
+                    ->with('dots', config('dots'))
+                )
+            )
+
+        ->render();
+    }
+
+    public function fontsIndex()
+    {
+        return layout('1col')
+
+            ->with('content', collect()
+                ->push(component('FontExperiment'))
+            )
+
+            ->render();
     }
 }

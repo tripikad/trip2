@@ -4,6 +4,7 @@ import VueCookie from 'vue-cookie'
 
 import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
+import Dotmap from './components/Dotmap/Dotmap.vue'
 import Flag from './components/Flag/Flag.vue'
 import FormButtonProcess from './components/FormButtonProcess/FormButtonProcess.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
@@ -38,6 +39,7 @@ new Vue({
     components: {
         Alert,
         Arc,
+        Dotmap,
         Flag,
         FormButtonProcess,
         FormSelect,

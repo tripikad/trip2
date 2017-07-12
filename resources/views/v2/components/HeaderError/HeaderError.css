@@ -3,7 +3,6 @@
 .HeaderError {
     background: $red;
     padding: calc($spacer * 1.5);
-    line-height: $line-height-lg;
 }
 
     .HeaderError__title {
