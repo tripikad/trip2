@@ -67,8 +67,13 @@ class V2ExperimentsController extends Controller
                 )
 
                 ->push(component('MetaLink')
+                    ->with('title', 'Fonts')
+                    ->with('route', route('experiments.fonts.index'))
+                )
+
+                ->push(component('MetaLink')
                     ->with('title', 'Map')
-                    ->with('route', route('experiments.map'))
+                    ->with('route', route('experiments.map.index'))
                 )
 
             )
@@ -126,7 +131,7 @@ class V2ExperimentsController extends Controller
         dump(request()->all());
     }
 
-    public function map()
+    public function mapIndex()
     {
         return layout('1col')
 
@@ -136,6 +141,19 @@ class V2ExperimentsController extends Controller
                 )
             )
 
+        ->render();
+
+    }
+
+    public function fontsIndex()
+    {
+        return layout('1col')
+
+            ->with('content', collect()
+                ->push(component('FontExperiment'))
+            )
+
             ->render();
+
     }
 }
