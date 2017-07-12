@@ -25,12 +25,20 @@ Route::get('news/create', 'V2NewsController@create')
     ->name('news.create')
     ->middleware('role:admin');
 
+Route::get('news/create2', 'V2NewsController@create2')
+    ->name('news.create2')
+    ->middleware('role:admin');
+
 Route::post('news/store', 'V2NewsController@store')
     ->name('news.store')
     ->middleware('role:admin');
 
 Route::get('news/{id}/edit', 'V2NewsController@edit')
     ->name('news.edit')
+    ->middleware('role:admin');
+
+Route::get('news/{id}/edit2', 'V2NewsController@edit2')
+    ->name('news.edit2')
     ->middleware('role:admin');
 
 Route::put('news/{id}/update', 'V2NewsController@update')
@@ -57,12 +65,20 @@ Route::get('flight/create', 'V2FlightController@create')
     ->name('flight.create')
     ->middleware('role:admin');
 
+Route::get('flight/create2', 'V2FlightController@create2')
+    ->name('flight.create2')
+    ->middleware('role:admin');
+
 Route::post('flight/store', 'V2FlightController@store')
     ->name('flight.store')
     ->middleware('role:admin');
 
 Route::get('flight/{id}/edit', 'V2FlightController@edit')
     ->name('flight.edit')
+    ->middleware('role:admin');
+
+Route::get('flight/{id}/edit2', 'V2FlightController@edit2')
+    ->name('flight.edit2')
     ->middleware('role:admin');
 
 Route::put('flight/{id}/update', 'V2FlightController@update')
@@ -317,10 +333,14 @@ Route::get('sihtkoht/{id}', 'V2DestinationController@show')
 Route::get('sihtkoht/{slug}', 'V2DestinationController@showSlug')
     ->name('destination.showSlug');
 
+// Image
+
+Route::post('image', 'V2ImageController@store')
+    ->name('image.store')
+    ->middleware('role:regular');
 Route::get('destination/{id}/edit', 'V2DestinationController@edit')
     ->name('destination.edit')
     ->middleware('role:admin');
-
 Route::post('destination/{id}/update', 'V2DestinationController@update')
     ->name('destination.update')
     ->middleware('role:admin');
@@ -329,6 +349,14 @@ Route::post('destination/{id}/update', 'V2DestinationController@update')
 
 Route::get('admin/content', 'V2AdminController@unpublishedIndex')
     ->name('admin.content.index')
+    ->middleware('role:admin');
+
+Route::get('admin/image', 'V2AdminController@imageIndex')
+    ->name('admin.image.index')
+    ->middleware('role:admin');
+
+Route::get('image/index', 'V2ImageController@index')
+    ->name('image.index')
     ->middleware('role:admin');
 
 // Utils
@@ -341,6 +369,9 @@ Route::get('share/{social}', 'V2SocialController@share')
 
 Route::post('utils/filter', 'V2UtilsController@filter')
     ->name('utils.filter');
+
+Route::post('utils/format', 'V2UtilsController@format')
+    ->name('utils.format');
 
 // Experiments
 
@@ -488,12 +519,6 @@ Route::post('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' =
 // comment.edit is in V2
 
 Route::put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
-
-// Admin
-
-Route::get('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageIndex', 'as' => 'admin.image.index']);
-
-Route::post('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageStore', 'as' => 'admin.image.store']);
 
 // Atom feeds
 

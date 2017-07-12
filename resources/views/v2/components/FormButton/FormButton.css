@@ -28,3 +28,11 @@
 .FormButton--wide {
     width: 100%;
 }
+
+.FormButton[disabled] {
+    opacity: $opacity-md;
+}
+
+.FormButton[disabled]:hover {
+    background: $green;
+}

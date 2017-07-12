@@ -8,7 +8,7 @@
     font: $font-heading-sm;
     line-height: $line-height-xs;
     justify-content: center;
-    padding: $padding-sm $padding-sm;
+    padding: $padding-sm $padding-lg;
     text-align: center;
 }
 

@@ -61,7 +61,7 @@ $gray-dark-hover: hsl(204, 6%, 30%);
 /* Fonts */
 
 $font-family: "Sailec";
-$font-family-code: monospace;
+$font-family-code: "Cousine";
 $font-size-xs: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
@@ -90,6 +90,7 @@ $font-heading-lg: $font-weight-semibold $font-size-xl / $line-height-md $font-fa
 $font-heading-xl: $font-weight-bold $font-size-xxl / $line-height-sm $font-family, sans-serif;
 $font-heading-xxl: $font-weight-bold $font-size-xxxl / $line-height-xs $font-family, sans-serif;
 $font-heading-xxxl: $font-weight-bold $font-size-xxxxl / $line-height-xs $font-family, sans-serif;
+$font-code-sm: $font-weight-normal $font-size-sm / $line-height-md $font-family-code, monospace;
 $font-code-md: $font-weight-normal $font-size-md / $line-height-md $font-family-code, monospace;
 
 /* Spacing */
@@ -195,6 +196,11 @@ $border-gray-sm: 1px solid $gray-light;
 $border-gray-md: 2px solid $gray-light;
 $border-green-md: 2px solid $green;
 $border-white-md: 2px solid $white;
+
+$border-gray-lg: 4px solid $gray-light;
+
+/* Dashed dotted */
+$border-dotted-gray-md: 2px dotted $gray-light;
 
 /* Border radiuses */
 $border-radius-md: 3px;
