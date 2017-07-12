@@ -10,7 +10,14 @@ class DestinationHeader
         $childrens = $destination->getImmediateDescendants()->sortBy('name');
 
         $body = $destination->description ? $destination->description : $destination->vars()->description;
-        $body .= $destination->user ? ' ('.$destination->user->name.')' : '';
+        if ($body && $destination->user) {
+            $body .=
+                ' (<a href="'
+                .route('user.show', [$destination->user])
+                .'">'
+                .$destination->user->name
+                .'</a>)';
+        }
 
         return component('HeaderLight')
             ->with('navbar', component('Navbar')
