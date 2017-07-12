@@ -183,6 +183,98 @@ class V2TravelmateController extends Controller
             ->create('travelmate');
     }
 
+    public function createExperiment()
+    {
+        
+        $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+        $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+
+        return layout('2col')
+
+            ->with('narrow', true)
+
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->is('gray')
+                    ->with('title', trans('content.forum.index.title'))
+                    ->with('route', route('forum.index'))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.forum.create.title'))
+                )
+                ->push(component('Form')
+                    ->with('id', 'ForumCreateForm')
+                    //->with('route', route('travelmate.store'))
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.forum.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title'))
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('title', trans('content.forum.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', old('title'))
+                            ->with('rows', 20)
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'topics')
+                            ->with('options', $topics)
+                            ->with('placeholder', trans('content.index.filter.field.topic.title'))
+                        )
+                        ->push('<div style="border-radius: 4px; opacity: 0.2; height: 3rem; border: 2px dashed black; font-family: Sailec; display: flex; align-items: center; justify-content: center;">Alustan reisi kuupäeval (komponent)</div>')
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.travelmate.edit.field.duration.title'))
+                            ->with('name', 'duration') // Is it correct?
+                            ->with('value', old('duration'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('disabled', true)
+                            ->with('title', trans('content.create.submit.title'))
+                        )
+
+                    )
+                )
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Block')
+                    ->is('gray')
+                    ->with('content', collect()
+                        ->push(component('Title')
+                            ->is('smaller')
+                            ->is('red')
+                            ->with('title', trans('content.edit.notes.heading'))
+                            ->with('route', route('forum.index'))
+                        )
+                        ->push(component('Body')
+                            ->with('body', trans('content.edit.notes.body'))
+                        )
+                ))
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+            
+    }
+
     public function edit($id)
     {
         return App::make('App\Http\Controllers\ContentController')

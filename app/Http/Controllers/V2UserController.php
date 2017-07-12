@@ -147,7 +147,7 @@ class V2UserController extends Controller
                         ->is('blue')
                         ->with('title', 'Profiilipilt')
                     )
-                    ->push('<div style="border-radius: 4px; opacity: 0.2; height: 10rem; border: 2px dashed black; font-family: Sailec; display: flex; align-items: center; justify-content: center;">Kasutajapildi lisamine</div>')
+                    ->push('<div style="border-radius: 4px; opacity: 0.2; height: 10rem; border: 2px dashed black; font-family: Sailec; display: flex; align-items: center; justify-content: center;">Kasutajapildi lisamine (komponent)</div>')
                     ->push(component('Title')
                         ->is('small')
                         ->is('blue')
