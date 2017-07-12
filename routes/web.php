@@ -333,21 +333,17 @@ Route::get('sihtkoht/{id}', 'V2DestinationController@show')
 Route::get('sihtkoht/{slug}', 'V2DestinationController@showSlug')
     ->name('destination.showSlug');
 
-<<<<<<< HEAD
 // Image
 
 Route::post('image', 'V2ImageController@store')
     ->name('image.store')
     ->middleware('role:regular');
-=======
 Route::get('destination/{id}/edit', 'V2DestinationController@edit')
     ->name('destination.edit')
     ->middleware('role:admin');
-
 Route::post('destination/{id}/update', 'V2DestinationController@update')
     ->name('destination.update')
     ->middleware('role:admin');
->>>>>>> master
 
 // Admin
 
