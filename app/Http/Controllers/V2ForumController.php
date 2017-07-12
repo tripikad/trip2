@@ -245,8 +245,11 @@ class V2ForumController extends Controller
     {
         return App::make('App\Http\Controllers\ContentController')
             ->create('forum');
+    }
 
-        /*
+    public function createExperiment()
+    {
+        
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
         $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -274,7 +277,7 @@ class V2ForumController extends Controller
                 )
                 ->push(component('Form')
                     ->with('id', 'ForumCreateForm')
-                    ->with('route', route('forum.store'))
+                    //->with('route', route('forum.store'))
                     ->with('fields', collect()
                         ->push(component('FormRadio')
                             ->with('name', 'type')
@@ -310,14 +313,17 @@ class V2ForumController extends Controller
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
                         ->push(component('FormButton')
-                            ->is('hidden')
+                            ->with('disabled', true)
                             ->with('title', trans('content.create.submit.title'))
                         )
+                        /*
                         ->push(component('FormButtonProcess')
                             ->with('id', 'ForumCreateForm')
                             ->with('title', trans('content.create.submit.title'))
                             ->with('processingtitle', trans('content.create.submitting.title'))
                         )
+                        */
+
                     )
                 )
             )
@@ -341,7 +347,7 @@ class V2ForumController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
-            */
+            
     }
 
     public function store()

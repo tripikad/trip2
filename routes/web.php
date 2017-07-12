@@ -373,32 +373,38 @@ Route::get('experiments/password', 'V2AuthController@passwordFormExperiment')
 Route::get('experiments/reset', 'V2AuthController@resetFormExperiment')
     ->name('experiments.resetform');
 
-// Experiments: Blog
+// Experiments: Forum
 
-Route::get('/experiments/blog', 'V2ExperimentsBlogController@index')
-    ->name('experiments.blog.index')
-    ->middleware('role:admin');
-
-Route::get('/experiments/blog/show', 'V2ExperimentsBlogController@show')
-    ->name('experiments.blog.show')
-    ->middleware('role:admin');
-
-Route::get('/experiments/blog/edit', 'V2ExperimentsBlogController@edit')
-    ->name('experiments.blog.edit')
-    ->middleware('role:admin');
-
-Route::get('/experiments/blog/profile', 'V2ExperimentsBlogController@profile')
-    ->name('experiments.blog.profile')
+Route::get('experiments/forum/create', 'V2ForumController@createExperiment')
+    ->name('experiments.forum.create')
     ->middleware('role:admin');
 
 // Experiments: User
 
-Route::get('/experiments/user', 'V2UserController@editExperiment')
+Route::get('experiments/user', 'V2UserController@editExperiment')
     ->name('experiments.user.edit')
     ->middleware('role:admin');
 
-Route::get('/experiments/user/destinations', 'V2UserController@destinationsExperiment')
+Route::get('experiments/user/destinations', 'V2UserController@destinationsExperiment')
     ->name('experiments.user.destinations')
+    ->middleware('role:admin');
+
+// Experiments: Blog
+
+Route::get('experiments/blog', 'V2ExperimentsBlogController@index')
+    ->name('experiments.blog.index')
+    ->middleware('role:admin');
+
+Route::get('experiments/blog/show', 'V2ExperimentsBlogController@show')
+    ->name('experiments.blog.show')
+    ->middleware('role:admin');
+
+Route::get('experiments/blog/edit', 'V2ExperimentsBlogController@edit')
+    ->name('experiments.blog.edit')
+    ->middleware('role:admin');
+
+Route::get('experiments/blog/profile', 'V2ExperimentsBlogController@profile')
+    ->name('experiments.blog.profile')
     ->middleware('role:admin');
 
 // V1
