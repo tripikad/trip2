@@ -113,7 +113,7 @@ class V2FrontpageController extends Controller
             )
 
             ->with('shortNews', collect()
-                ->merge(region('FrontpageShortNews', $shortNews))
+                ->merge(region('FrontpageShortnews', $shortNews))
                 ->push(component('BlockTitle')
                     ->with('title', trans('frontpage.index.photo.title'))
                     ->with('route', route('photo.index'))
