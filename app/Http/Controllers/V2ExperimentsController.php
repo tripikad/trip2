@@ -142,7 +142,6 @@ class V2ExperimentsController extends Controller
             )
 
         ->render();
-
     }
 
     public function fontsIndex()
@@ -154,6 +153,5 @@ class V2ExperimentsController extends Controller
             )
 
             ->render();
-
     }
 }
