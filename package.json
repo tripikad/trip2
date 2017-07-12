@@ -5,9 +5,16 @@
     "test": "eslint \"resources/views/v2/**/*.{js,vue}\" \"gulpfile.js\" \"elixir/*.js\" ; stylelint \"resources/views/v2/**/*.css\""
   },
   "dependencies": {
+    "@turf/turf": "^4.5.2",
+    "async": "^2.5.0",
+    "babyparse": "^0.4.6",
     "bootstrap-sass": "^3.3.5",
     "breakpoint-sass": "^2.6.1",
+<<<<<<< HEAD
     "codemirror": "^5.23.0",
+=======
+    "d3-scale": "^1.0.6",
+>>>>>>> master
     "del": "^2.2.0",
     "dropzone": "^4.3.0",
     "eslint": "^3.1.1",
@@ -39,6 +46,7 @@
     "postcss-responsive-type": "^0.5.0",
     "postcss-short": "^3.0.1",
     "postcss-simple-vars": "^3.0.0",
+    "request": "^2.81.0",
     "selectize": "^0.12.1",
     "stylelint": "^7.0.3",
     "stylelint-config-standard": "^15.0.1",

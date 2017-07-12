@@ -59,8 +59,12 @@ return [
 
     'edit.title' => 'Muuda',
     'edit.submit.title' => 'Uuenda',
+    'edit.submitting.title' => 'Uuendan...',
     'edit.notes.heading' => 'Hea teada',
     'edit.notes.body' => '<p>See on reisifoorum kooliharidust nuusutanud inimesele, kes mõistab kirjutada korralikus eesti keeles.</p><p>Ole hea ja uuri enne postitamist Trip.ee otsinguga juba olemasolevaid teemasid ning palun pane postitusele selle sisu avav pealkiri (mitte piirdudes koha või riigi nimega).</p>',
+
+    'misc.edit.notes.heading' => 'Hea teada',
+    'misc.edit.notes.body' => '<p>Siia postita mõtteid muudel teemadel</p>',
 
     'edit.field.destinations.placeholder' => 'Vali sihtkohad',
     'edit.field.topics.placeholder' => 'Vali teemad',
@@ -281,6 +285,12 @@ return [
     'buysell.edit.field.topics.help' => '',
 
     'buysell.no.results' => 'Hetkel pole ühtegi postitust rubriigis "Ost-müük".',
+
+    // Misc
+
+    'misc.index.title' => 'Vaba teema',
+    'misc.create.title' => 'Lisa uus postitus',
+    'misc.edit.title' => 'Muuda postitust',
 
     // Photo
 

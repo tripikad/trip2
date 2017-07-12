@@ -67,7 +67,8 @@ class TravelmateTest extends BrowserKitTestCase
             ->select($day, 'start_at_day')
             ->press(trans('content.create.submit.title'))
             ->see('Hello title')
-            ->see(str_limit($regular_user->name, 24))
+            //->see(str_limit($regular_user->name, 24))
+            ->see($regular_user->name)
             ->seeInDatabase('contents', [
                 'user_id' => $regular_user->id,
                 'title' => 'Hello title',

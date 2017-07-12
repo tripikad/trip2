@@ -9,7 +9,7 @@
         {{trans('search.tab.destination')}}
         <ul class="c-search__results-sublist">
         @foreach ($content as $row)
-            <li class="c-search__results-sublist-item"><a href="{{route('destination.slug', $row->slug)}}" class="c-search__results-link">{{$row['name']}}</a></li>
+            <li class="c-search__results-sublist-item"><a href="{{route('destination.showSlug', $row->slug)}}" class="c-search__results-link">{{$row['name']}}</a></li>
         @endforeach
         </ul>
     </li>

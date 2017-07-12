@@ -129,7 +129,7 @@ class V2FlightController extends Controller
                             return component('Tag')
                                 ->is('orange')
                                 ->with('title', $destination->name)
-                                ->with('route', route('destination.show', [$destination]));
+                                ->with('route', route('destination.showSlug', [$destination->slug]));
                         }))
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
                             component('MetaLink')

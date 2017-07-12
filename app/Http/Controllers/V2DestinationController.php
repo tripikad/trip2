@@ -11,6 +11,13 @@ class V2DestinationController extends Controller
     {
         $destination = Destination::findOrFail($id);
 
+        return redirect(route('destination.showSlug', $destination->slug), 301);
+    }
+
+    public function showSlug($slug)
+    {
+        $destination = Destination::findBySlugOrFail($slug);
+
         $photos = Content::getLatestPagedItems('photo', 9, $destination->id);
         $forums = Content::getLatestPagedItems('forum', 8, $destination->id);
 
@@ -82,12 +89,5 @@ class V2DestinationController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
-    }
-
-    public function showSlug($slug)
-    {
-        $destination = Destination::findBySlugOrFail($slug);
-
-        return $this->show($destination->id);
     }
 }

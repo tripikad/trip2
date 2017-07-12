@@ -14,7 +14,6 @@
         font: $font-text-md;
         padding: $padding-sm;
         width: 100%;
-        line-height: $line-height-lg;
         color: $gray-dark;
     }
 
