@@ -28,6 +28,11 @@ class V2ForumController extends Controller
         return $this->index('expat');
     }
 
+    public function miscIndex()
+    {
+        return $this->index('misc');
+    }
+
     private function index($forumType)
     {
         $currentDestination = Request::get('destination');
@@ -59,7 +64,7 @@ class V2ForumController extends Controller
                 ->push(component('BlockHorizontal')
                     ->with('content', region('ForumLinks'))
                 )
-                ->push(region(
+                ->pushWhen($forumType != 'misc', region(
                     'FilterHorizontal',
                     $destinations,
                     $topics,
@@ -199,7 +204,7 @@ class V2ForumController extends Controller
             ))
 
             ->with('content', collect()
-                ->push(region('ForumPost', $forum))
+                ->push(region('ForumPost', $forum, ($forum->type == 'misc' ? 'forum.edit.misc' : 'forum.edit')))
                 ->pushWhen(
                     $forum->comments->count() > 1,
                     component('BlockHorizontal')
