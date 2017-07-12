@@ -340,6 +340,9 @@ Route::post('experiments/select', 'V2ExperimentsController@selectCreate')
 Route::get('experiments/fonts', 'V2ExperimentsController@fontsIndex')
     ->name('experiments.fonts.index');
 
+Route::get('experiments/map', 'V2ExperimentsController@mapIndex')
+    ->name('experiments.map.index');
+
 // Experiments: Auth
 
 Route::get('experiments/login', 'V2AuthController@loginForm')
