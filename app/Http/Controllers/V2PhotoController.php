@@ -115,7 +115,6 @@ class V2PhotoController extends Controller
 
     public function createExperiment()
     {
-        
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
         return layout('2col')
@@ -181,7 +180,6 @@ class V2PhotoController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
-            
     }
 
     public function edit($id)

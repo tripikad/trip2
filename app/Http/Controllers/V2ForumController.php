@@ -249,7 +249,6 @@ class V2ForumController extends Controller
 
     public function createExperiment()
     {
-        
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
         $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -282,8 +281,8 @@ class V2ForumController extends Controller
                         ->push(component('FormRadio')
                             ->with('name', 'type')
                             ->with('value', 'forum')
-                            ->with('options', collect(['forum','buysell','expat'])
-                                ->map(function($type) {
+                            ->with('options', collect(['forum', 'buysell', 'expat'])
+                                ->map(function ($type) {
                                     return collect()
                                         ->put('id', $type)
                                         ->put('name', trans("content.$type.index.title"));
@@ -347,7 +346,6 @@ class V2ForumController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
-            
     }
 
     public function store()

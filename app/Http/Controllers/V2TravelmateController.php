@@ -185,7 +185,6 @@ class V2TravelmateController extends Controller
 
     public function createExperiment()
     {
-        
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
         $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -269,7 +268,6 @@ class V2TravelmateController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
-            
     }
 
     public function edit($id)
