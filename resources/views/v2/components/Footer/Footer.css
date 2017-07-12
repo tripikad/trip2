@@ -60,7 +60,6 @@
         height: $height-md;
         margin-top: $margin-lg;
         text-align: center;
-        line-height: $line-height-md;
     }
 
 .Footer--light .Footer__link {

@@ -104,6 +104,9 @@ Route::get('foorum/ost-muuk', 'V2ForumController@buysellIndex')
 Route::get('foorum/elu-valimaal', 'V2ForumController@expatIndex')
     ->name('expat.index');
 
+Route::get('foorum/vaba-teema', 'V2ForumController@miscIndex')
+    ->name('misc.index');
+
 Route::get('foorum/uldfoorum/{slug}', 'V2ForumController@show')
     ->name('forum.show');
 
@@ -112,6 +115,9 @@ Route::get('foorum/ost-muuk/{slug}', 'V2ForumController@show')
 
 Route::get('foorum/elu-valimaal/{slug}', 'V2ForumController@show')
     ->name('expat.show');
+
+Route::get('foorum/vaba-teema/{slug}', 'V2ForumController@show')
+    ->name('misc.show');
 
 Route::get('forum/create', 'V2ForumController@create')
     ->name('forum.create')
@@ -128,6 +134,24 @@ Route::get('forum/{id}/edit', 'V2ForumController@edit')
 Route::put('forum/{id}/update', 'V2ForumController@update')
     ->name('forum.update')
     ->middleware('role:admin,contentowner');
+
+// Misc forum
+
+Route::get('forum/create/vaba-teema', 'V2MiscController@create')
+    ->name('forum.create.misc')
+    ->middleware('role:regular');
+
+Route::post('forum/store/vaba-teema', 'V2MiscController@store')
+    ->name('forum.store.misc')
+    ->middleware('role:regular');
+
+Route::get('forum/vaba-teema/{id}/edit', 'V2MiscController@edit')
+    ->name('forum.edit.misc')
+    ->middleware('role:regular');
+
+Route::post('forum/vaba-teema/{id}/update', 'V2MiscController@update')
+    ->name('forum.update.misc')
+    ->middleware('role:regular');
 
 // Static
 
@@ -293,6 +317,14 @@ Route::get('sihtkoht/{id}', 'V2DestinationController@show')
 Route::get('sihtkoht/{slug}', 'V2DestinationController@showSlug')
     ->name('destination.showSlug');
 
+Route::get('destination/{id}/edit', 'V2DestinationController@edit')
+    ->name('destination.edit')
+    ->middleware('role:admin');
+
+Route::post('destination/{id}/update', 'V2DestinationController@update')
+    ->name('destination.update')
+    ->middleware('role:admin');
+
 // Admin
 
 Route::get('admin/content', 'V2AdminController@unpublishedIndex')
@@ -320,6 +352,12 @@ Route::get('experiments/select', 'V2ExperimentsController@selectIndex')
 
 Route::post('experiments/select', 'V2ExperimentsController@selectCreate')
     ->name('experiments.select.create');
+
+Route::get('experiments/fonts', 'V2ExperimentsController@fontsIndex')
+    ->name('experiments.fonts.index');
+
+Route::get('experiments/map', 'V2ExperimentsController@mapIndex')
+    ->name('experiments.map.index');
 
 // Experiments: Auth
 

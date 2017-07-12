@@ -13,7 +13,6 @@
         font: $font-text-md;
         padding: $padding-sm;
         width: 100%;
-        line-height: $line-height-md;
         color: $gray-dark;
     }
 

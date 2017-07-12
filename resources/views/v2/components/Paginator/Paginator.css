@@ -11,6 +11,7 @@
     background: $gray-light;
     border-radius: $border-radius-md;
     font: $font-text-md;
+    line-height: $line-height-xs;
     color: $gray;
 }
 

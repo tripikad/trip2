@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\GenerateSitemap::class,
         \App\Console\Commands\ConvertMissingContent::class,
         \App\Console\Commands\DisableOldShortNews::class,
+        \App\Console\Commands\ForumMiscTopic::class,
 
     ];
 

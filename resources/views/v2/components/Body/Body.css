@@ -114,9 +114,10 @@
     color: $white;
 }
 
-.Body--cyan,
-.Body--cyan * {
-    color: $cyan;
+.Body--white a,
+.Body--white a:link,
+.Body--white a:active {
+    color: $white;
 }
 
 .Body--gray,
