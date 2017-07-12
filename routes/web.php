@@ -397,6 +397,10 @@ Route::get('/experiments/user', 'V2UserController@editExperiment')
     ->name('experiments.user.edit')
     ->middleware('role:admin');
 
+Route::get('/experiments/user/destinations', 'V2UserController@destinationsExperiment')
+    ->name('experiments.user.destinations')
+    ->middleware('role:admin');
+
 // V1
 
 // Search

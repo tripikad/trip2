@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Image;
 use App\Content;
+use App\Destination;
 
 class V2UserController extends Controller
 {
@@ -211,6 +212,7 @@ class V2UserController extends Controller
                     )
                     ->push(component('FormButton')
                         ->is('wide')
+                        ->with('disabled', true)
                         ->with('title', 'Uuenda profiili')
                     )
                 ))
@@ -223,6 +225,8 @@ class V2UserController extends Controller
 
     public function destinationsExperiment()
     {
+        $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+
         return layout('1colnarrow')
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
@@ -232,7 +236,7 @@ class V2UserController extends Controller
                 ->push(component('Title')
                     ->is('center')
                     ->is('large')
-                    ->with('title', 'Muuda profiili')
+                    ->with('title', 'Minu sihtkohad')
                 )
             )
 
@@ -241,11 +245,25 @@ class V2UserController extends Controller
                     ->push(component('Title')
                         ->is('small')
                         ->is('blue')
-                        ->with('title', 'Kasutaja andmed')
+                        ->with('title', 'Ma olen käinud')
+                    )
+                    ->push(component('FormSelectMultiple')
+                        ->with('options', $destinations)
+                        ->with('value', $destinations->shuffle()->take(rand(1,30))->pluck('id'))
+                    )
+                    ->push(component('Title')
+                        ->is('small')
+                        ->is('blue')
+                        ->with('title', 'Ma tahan minna')
+                    )
+                    ->push(component('FormSelectMultiple')
+                        ->with('options', $destinations)
+                        ->with('value', $destinations->shuffle()->take(rand(1,30))->pluck('id'))
                     )
                     ->push(component('FormButton')
                         ->is('wide')
-                        ->with('title', 'Registreeri')
+                        ->with('disabled', true)
+                        ->with('title', 'Lisa')
                     )
                 ))
             )
