@@ -141,7 +141,7 @@ class V2DestinationController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'user' => 'required|exists:users,name',
+            'user' => 'exists:users,name',
         ];
 
         $this->validate($request, $rules);
@@ -150,9 +150,10 @@ class V2DestinationController extends Controller
 
         $destination->description = $request->description;
 
-        $user = User::where('name', $request->user)->first();
-
-        $destination->user_id = $user->id;
+        if ($request->user && $request->user != '') {
+            $user = User::where('name', $request->user)->first();
+            $destination->user_id = $user->id;
+        }
 
         $destination->save();
 
