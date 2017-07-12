@@ -392,33 +392,65 @@ Route::get('experiments/map', 'V2ExperimentsController@mapIndex')
 
 // Experiments: Auth
 
-Route::get('experiments/login', 'V2AuthController@loginForm')
-    ->name('experiments.loginform');
+Route::get('experiments/login', 'V2AuthController@loginFormExperiment')
+    ->name('experiments.loginform')
+    ->middleware('role:admin');
 
-Route::get('experiments/register', 'V2AuthController@registerForm')
-    ->name('experiments.registerform');
+Route::get('experiments/register', 'V2AuthController@registerFormExperiment')
+    ->name('experiments.registerform')
+    ->middleware('role:admin');
 
-Route::get('experiments/password', 'V2AuthController@passwordForm')
-    ->name('experiments.passwordform');
+Route::get('experiments/password', 'V2AuthController@passwordFormExperiment')
+    ->name('experiments.passwordform')
+    ->middleware('role:admin');
 
-Route::get('experiments/reset', 'V2AuthController@resetForm')
-    ->name('experiments.resetform');
+Route::get('experiments/reset', 'V2AuthController@resetFormExperiment')
+    ->name('experiments.resetform')
+    ->middleware('role:admin');
+
+// Experiments: Forum
+
+Route::get('experiments/forum/create', 'V2ForumController@createExperiment')
+    ->name('experiments.forum.create')
+    ->middleware('role:admin');
+
+// Experiments: Travelmate
+
+Route::get('experiments/travelmate/create', 'V2TravelmateController@createExperiment')
+    ->name('experiments.travelmate.create')
+    ->middleware('role:admin');
+
+// Experiments: Photo
+
+Route::get('experiments/photo/create', 'V2PhotoController@createExperiment')
+    ->name('experiments.photo.create')
+    ->middleware('role:admin');
+
+// Experiments: User
+
+Route::get('experiments/user', 'V2UserController@editExperiment')
+    ->name('experiments.user.edit')
+    ->middleware('role:admin');
+
+Route::get('experiments/user/destinations', 'V2UserController@destinationsExperiment')
+    ->name('experiments.user.destinations')
+    ->middleware('role:admin');
 
 // Experiments: Blog
 
-Route::get('/experiments/blog', 'V2ExperimentsBlogController@index')
+Route::get('experiments/blog', 'V2ExperimentsBlogController@index')
     ->name('experiments.blog.index')
     ->middleware('role:admin');
 
-Route::get('/experiments/blog/show', 'V2ExperimentsBlogController@show')
+Route::get('experiments/blog/show', 'V2ExperimentsBlogController@show')
     ->name('experiments.blog.show')
     ->middleware('role:admin');
 
-Route::get('/experiments/blog/edit', 'V2ExperimentsBlogController@edit')
+Route::get('experiments/blog/edit', 'V2ExperimentsBlogController@edit')
     ->name('experiments.blog.edit')
     ->middleware('role:admin');
 
-Route::get('/experiments/blog/profile', 'V2ExperimentsBlogController@profile')
+Route::get('experiments/blog/profile', 'V2ExperimentsBlogController@profile')
     ->name('experiments.blog.profile')
     ->middleware('role:admin');
 
