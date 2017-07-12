@@ -379,10 +379,16 @@ Route::get('experiments/forum/create', 'V2ForumController@createExperiment')
     ->name('experiments.forum.create')
     ->middleware('role:admin');
 
-// Experiments: Forum
+// Experiments: Travelmate
 
 Route::get('experiments/travelmate/create', 'V2TravelmateController@createExperiment')
     ->name('experiments.travelmate.create')
+    ->middleware('role:admin');
+
+// Experiments: Photo
+
+Route::get('experiments/photo/create', 'V2PhotoController@createExperiment')
+    ->name('experiments.photo.create')
     ->middleware('role:admin');
 
 // Experiments: User
