@@ -66,6 +66,11 @@ class V2ExperimentsController extends Controller
                     ->with('route', route('experiments.select.index'))
                 )
 
+                ->push(component('MetaLink')
+                    ->with('title', 'Fonts')
+                    ->with('route', route('experiments.fonts.index'))
+                )
+
             )
 
             ->render();
@@ -119,5 +124,18 @@ class V2ExperimentsController extends Controller
     public function selectCreate()
     {
         dump(request()->all());
+    }
+
+    public function fontsIndex()
+    {
+        return layout('1col')
+
+            ->with('content', collect()
+
+                ->push(component('FontExperiment'))
+
+            )
+
+        ->render();
     }
 }

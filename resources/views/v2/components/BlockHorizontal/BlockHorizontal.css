@@ -5,7 +5,6 @@
     display: block ?if $mobile;
     align-items: center;
     flex-wrap: wrap;
-    line-height: $line-height-md;
 }
 
 .BlockHorizontal__item {
