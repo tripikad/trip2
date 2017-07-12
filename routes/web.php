@@ -45,6 +45,14 @@ Route::put('news/{id}/update', 'V2NewsController@update')
     ->name('news.update')
     ->middleware('role:admin');
 
+// Shortnews
+
+Route::get('luhiuudised', 'V2NewsController@shortnewsIndex')
+    ->name('shortnews.index');
+
+Route::get('luhiuudised/{slug}', 'V2NewsController@show')
+    ->name('shortnews.show');
+
 // Flight
 
 Route::get('odavad-lennupiletid', 'V2FlightController@index')
@@ -325,11 +333,21 @@ Route::get('sihtkoht/{id}', 'V2DestinationController@show')
 Route::get('sihtkoht/{slug}', 'V2DestinationController@showSlug')
     ->name('destination.showSlug');
 
+<<<<<<< HEAD
 // Image
 
 Route::post('image', 'V2ImageController@store')
     ->name('image.store')
     ->middleware('role:regular');
+=======
+Route::get('destination/{id}/edit', 'V2DestinationController@edit')
+    ->name('destination.edit')
+    ->middleware('role:admin');
+
+Route::post('destination/{id}/update', 'V2DestinationController@update')
+    ->name('destination.update')
+    ->middleware('role:admin');
+>>>>>>> master
 
 // Admin
 

@@ -323,4 +323,10 @@ return [
     'sponsored.edit.field.url.title' => 'URL',
     'sponsored.edit.field.url.help' => '',
 
+    // Destination
+
+    'destionation.edit.title' => 'Edit destination',
+    'destination.edit.description' => 'Description',
+    'destination.edit.user' => 'Description authors username',
+
 ];
