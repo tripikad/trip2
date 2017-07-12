@@ -9,6 +9,9 @@ class DestinationHeader
         $parents = $destination->getAncestors();
         $childrens = $destination->getImmediateDescendants()->sortBy('name');
 
+        $body = $destination->description ? $destination->description : $destination->vars()->description;
+        $body .= $destination->user ? ' ('.$destination->user->name.')' : '';
+
         return component('HeaderLight')
             ->with('navbar', component('Navbar')
                 ->is('white')
@@ -34,10 +37,10 @@ class DestinationHeader
                         ->with('title', trans('content.action.edit.title'))
                         ->with('route', route('destination.edit', [$destination]))
                 )
-                ->push(component('Body')
+                ->pushWhen($body ,component('Body')
                     ->is('white')
                     ->is('responsive')
-                    ->with('body', $destination->description ? $destination->description : $destination->vars()->description)
+                    ->with('body', $body)
                 )
                 ->pushWhen($childrens->count(), component('Meta')
                     ->is('large')

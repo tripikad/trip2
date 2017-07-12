@@ -77,11 +77,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->morphToMany('App\Image', 'imageable');
     }
 
-    public function destinations()
-    {
-        return $this->hasMany('App\Destination');
-    }
-
     // V2
 
     public function vars()

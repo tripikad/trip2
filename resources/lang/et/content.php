@@ -378,6 +378,6 @@ return [
 
     'destionation.edit.title' => 'Muuda sihtkohta',
     'destination.edit.description' => 'Kirjeldus',
-    'destination.edit.user' => 'Kasutaja',
+    'destination.edit.user' => 'Kirjelduse autori kasutajanimi',
 
 ];

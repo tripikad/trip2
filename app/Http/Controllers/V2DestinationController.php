@@ -118,8 +118,8 @@ class V2DestinationController extends Controller
                         ->push(component('FormTextarea')
                             ->with('title', trans('content.destination.edit.description'))
                             ->with('name', 'description')
-                            ->with('value', old('body', $destination->description))
-                            ->with('rows', 20)
+                            ->with('value', old('description', $destination->description))
+                            ->with('rows', 10)
                         )
                         ->push(component('FormTextfield')
                             ->with('title', trans('content.destination.edit.user'))
@@ -150,7 +150,7 @@ class V2DestinationController extends Controller
 
         $destination->description = $request->description;
 
-        $user = User::where('name', $request->user)->get()->first();
+        $user = User::where('name', $request->user)->first();
 
         $destination->user_id = $user->id;
 
