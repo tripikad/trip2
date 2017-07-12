@@ -140,7 +140,7 @@ class V2FlightController extends Controller
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
                             component('MetaLink')
                                 ->is('white')
-                                ->with('title', trans('content.action.edit.title').'2')
+                                ->with('title', trans('content.action.edit.title').' (beta)')
                                 ->with('route', route('flight.edit2', [$flight]))
                         )
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Form')
@@ -224,7 +224,7 @@ class V2FlightController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.flight.create.title'))
+                    ->with('title', trans('content.flight.create.title').' (beta)')
                 )
                 ->push(component('Form')
                     ->with('route', route('flight.store'))
@@ -266,7 +266,7 @@ class V2FlightController extends Controller
                         )
                         ->push(component('FormButton')
                             ->with('disabled', true)
-                            ->with('title', trans('content.create.title'))
+                            ->with('title', trans('content.create.title').' (pooleli)')
                         )
                     )
                 )
@@ -301,7 +301,7 @@ class V2FlightController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.flight.edit.title'))
+                    ->with('title', trans('content.flight.edit.title').' (beta)')
                 )
                 ->push(component('Form')
                     ->with('route', route('flight.update', [$flight]))
@@ -330,8 +330,21 @@ class V2FlightController extends Controller
                             ->with('value', $flight->destinations->pluck('id'))
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
                         )
+                        ->push(component('FormTextfield')
+                            ->with('disabled', true)
+                            ->with(
+                                'title',
+                                trans('content.flight.edit.field.start_at.title')
+                                .' / '
+                                .trans('content.flight.edit.field.end_at.title')
+                                .' (pooleli)'
+                            )
+                            ->with('name', 'start_at')
+                            ->with('value', old('start_at'))
+                        )
                         ->push(component('FormButton')
-                            ->with('title', trans('content.edit.submit.title'))
+                            ->with('disabled', true)
+                            ->with('title', trans('content.edit.submit.title').' (pooleli)')
                         )
                     )
                 )

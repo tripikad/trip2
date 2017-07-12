@@ -142,7 +142,7 @@ class V2NewsController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.news.create.title'))
+                    ->with('title', trans('content.news.create.title').' (beta)')
                 )
                 ->push(component('Form')
                     ->with('route', route('news.store'))
@@ -176,7 +176,7 @@ class V2NewsController extends Controller
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
                         ->push(component('FormButton')
-                            ->with('title', trans('content.edit.submit.title'))
+                            ->with('title', trans('content.create.title'))
                         )
                     )
                 )
@@ -212,7 +212,7 @@ class V2NewsController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.news.edit.title'))
+                    ->with('title', trans('content.news.edit.title').' (beta)')
                 )
                 ->push(component('Form')
                     ->with('route', route('news.update', [$news]))
