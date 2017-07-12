@@ -4,6 +4,7 @@
         color: $gray;
         display: block;
         font: $font-heading-sm;
+        line-height: $line-height-md;
         margin-bottom: $margin-sm;
     }
 
@@ -22,5 +23,10 @@
 
 .FormTextfield--large .FormTextfield__input {
     font: $font-heading-md;
-    padding: $padding-xs $padding-sm;
+    padding: $padding-sm;
 }
+
+.FormTextfield[disabled] {
+    opacity: $opacity-md;
+}
+

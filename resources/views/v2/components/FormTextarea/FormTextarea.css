@@ -4,6 +4,7 @@
         color: $gray;
         display: block;
         font: $font-heading-sm;
+        line-height: $line-height-md;
         margin-bottom: $margin-sm;
     }
 
@@ -22,4 +23,14 @@
 
 .FormTextarea--borderless .FormTextarea__textarea {
     border: none;
+}
+
+.FormTextarea__textarea[readonly] {
+    background: $gray-lighter;
+    color: $gray;
+    opacity: $opacity-md;
+}
+
+.FormTextarea--hidden {
+    display: none;
 }

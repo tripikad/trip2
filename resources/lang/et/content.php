@@ -86,14 +86,18 @@ return [
 
     'news.create.title' => 'Lisa uus uudis',
 
-    'news.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Toimetuse pildid all',
+    'news.edit.title' => 'Muuda uudist',
+
+    'news.edit.field.image_id.title' => 'Põhipildi ID',
     'news.edit.field.image_id.help' => '[[123]]',
 
     'news.edit.field.title.title' => 'Pealkiri',
     'news.edit.field.title.help' => '',
 
-    'news.edit.field.body.title' => 'Sisu. Ka siia saab lisada pildilinke a la [[123]]',
+    'news.edit.field.body.title' => 'Sisu',
     'news.edit.field.body.help' => '',
+
+    'news.edit.field.body.title2' => 'Sisu (vajuta hallil kastil et editor avaneks)',
 
     'news.edit.field.destinations.title' => 'Vali sihtkohad',
     'news.edit.field.destinations.help' => '',
@@ -148,14 +152,18 @@ return [
 
     'flight.create.title' => 'Lisa pakkumine',
 
+    'flight.edit.title' => 'Muuda lennupakkumist',
+
     'flight.edit.field.title.title' => 'Pealkiri',
     'flight.edit.field.title.help' => '',
 
-    'flight.edit.field.image_id.title' => 'Põhipildi ID, pilte saab lisada Administreeri → Toimetuse pildid all',
+    'flight.edit.field.image_id.title' => 'Põhipildi ID',
     'flight.edit.field.image_id.help' => '[[123]]',
 
-    'flight.edit.field.body.title' => 'Sisu. Ka siia saab lisada pildilinke stiilis [[123]]',
+    'flight.edit.field.body.title' => 'Sisu',
     'flight.edit.field.body.help' => '',
+
+    'flight.edit.field.body.title2' => 'Sisu (vajuta hallil kastil et editor avaneks)',
 
     'flight.edit.field.destinations.title' => 'Vali sihtkohad',
     'flight.edit.field.destinations.help' => '',
