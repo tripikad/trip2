@@ -259,7 +259,7 @@ class V2FlightController extends Controller
                                 trans('content.flight.edit.field.start_at.title')
                                 .' / '
                                 .trans('content.flight.edit.field.end_at.title')
-                                . ' (pooleli)'
+                                .' (pooleli)'
                             )
                             ->with('name', 'start_at')
                             ->with('value', old('start_at'))
