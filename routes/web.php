@@ -333,7 +333,6 @@ Route::get('sihtkoht/{id}', 'V2DestinationController@show')
 Route::get('sihtkoht/{slug}', 'V2DestinationController@showSlug')
     ->name('destination.showSlug');
 
-<<<<<<< HEAD
 // Search
 
 Route::get('search', 'V2SearchController@search')
@@ -344,19 +343,21 @@ Route::get('search/ajaxsearch', 'V2SearchController@ajaxsearch')
 
 Route::get('search/{token}', 'V2SearchController@search')
     ->name('search.results.type');
-=======
+
 // Image
 
 Route::post('image', 'V2ImageController@store')
     ->name('image.store')
     ->middleware('role:regular');
+
+// Destination
+    
 Route::get('destination/{id}/edit', 'V2DestinationController@edit')
     ->name('destination.edit')
     ->middleware('role:admin');
 Route::post('destination/{id}/update', 'V2DestinationController@update')
     ->name('destination.update')
     ->middleware('role:admin');
->>>>>>> master
 
 // Admin
 
