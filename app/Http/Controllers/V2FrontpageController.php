@@ -16,6 +16,7 @@ class V2FrontpageController extends Controller
         $flights = Content::getLatestItems('flight', 9, 'id');
         $forums = Content::getLatestItems('forum', 18, 'updated_at');
         $news = Content::getLatestItems('news', 6, 'id');
+        $shortNews = Content::getLatestItems('shortnews', 4, 'id');
         $blogs = Content::getLatestItems('blog', 3, 'id');
         $photos = Content::getLatestItems('photo', 9, 'id');
         $travelmates = Content::getLatestItems('travelmate', 5, 'id');
@@ -109,6 +110,10 @@ class V2FrontpageController extends Controller
 
             ->with('bottom1', collect()
                 ->merge(region('FrontpageNews', $news))
+            )
+
+            ->with('shortNews', collect()
+                ->merge(region('FrontpageShortnews', $shortNews))
                 ->push(component('BlockTitle')
                     ->with('title', trans('frontpage.index.photo.title'))
                     ->with('route', route('photo.index'))

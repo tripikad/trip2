@@ -11,12 +11,17 @@ use App\Destination;
 
 class V2NewsController extends Controller
 {
-    public function index()
+    public function shortnewsIndex()
+    {
+        return $this->index('shortnews');
+    }
+
+    public function index($type = 'news')
     {
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
-        $news = Content::getLatestPagedItems('news', false, $currentDestination, $currentTopic);
+        $news = Content::getLatestPagedItems($type, false, $currentDestination, $currentTopic);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -26,8 +31,8 @@ class V2NewsController extends Controller
 
         return layout('2col')
 
-            ->with('title', trans('content.news.index.title'))
-            ->with('head_title', trans('content.news.index.title'))
+            ->with('title', trans('content.'.$type.'.index.title'))
+            ->with('head_title', trans('content.'.$type.'.index.title'))
             ->with('head_description', trans('site.description.news'))
             ->with('head_image', Image::getSocial())
 
@@ -35,8 +40,11 @@ class V2NewsController extends Controller
                 ->push(component('Title')
                     ->is('white')
                     ->is('large')
-                    ->with('title', trans('content.news.index.title'))
+                    ->with('title', trans('content.'.$type.'.index.title'))
                     ->with('route', route('news.index'))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('NewsLinks'))
                 )
                 ->push(region(
                     'FilterHorizontal',
@@ -45,7 +53,7 @@ class V2NewsController extends Controller
                     $currentDestination,
                     $currentTopic,
                     $news->currentPage(),
-                    'news.index'
+                    $type.'.index'
                 ))
             ))
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Regions;
 
-class NewsCard
+class ShortnewsCard
 {
     public function render($post)
     {
@@ -19,11 +19,11 @@ class NewsCard
                     )
                     ->pushWhen($commentCount > 0, component('Tag')
                         ->with('title', trans_choice(
-                            'comment.count',
-                            $commentCount,
-                            ['count' => $commentCount]
-                        )
-                    ))
+                                'comment.count',
+                                $commentCount,
+                                ['count' => $commentCount]
+                            )
+                        ))
                 )
             );
     }
