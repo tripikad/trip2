@@ -351,7 +351,7 @@ Route::post('image', 'V2ImageController@store')
     ->middleware('role:regular');
 
 // Destination
-    
+
 Route::get('destination/{id}/edit', 'V2DestinationController@edit')
     ->name('destination.edit')
     ->middleware('role:admin');
