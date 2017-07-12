@@ -10,11 +10,8 @@
     "babyparse": "^0.4.6",
     "bootstrap-sass": "^3.3.5",
     "breakpoint-sass": "^2.6.1",
-<<<<<<< HEAD
     "codemirror": "^5.23.0",
-=======
     "d3-scale": "^1.0.6",
->>>>>>> master
     "del": "^2.2.0",
     "dropzone": "^4.3.0",
     "eslint": "^3.1.1",

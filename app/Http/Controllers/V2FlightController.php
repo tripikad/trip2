@@ -252,7 +252,20 @@ class V2FlightController extends Controller
                             ->with('options', $destinations)
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
                         )
+                        ->push(component('FormTextfield')
+                            ->with('disabled', true)
+                            ->with(
+                                'title',
+                                trans('content.flight.edit.field.start_at.title')
+                                .' / '
+                                .trans('content.flight.edit.field.end_at.title')
+                                . ' (pooleli)'
+                            )
+                            ->with('name', 'start_at')
+                            ->with('value', old('start_at'))
+                        )
                         ->push(component('FormButton')
+                            ->with('disabled', true)
                             ->with('title', trans('content.create.title'))
                         )
                     )

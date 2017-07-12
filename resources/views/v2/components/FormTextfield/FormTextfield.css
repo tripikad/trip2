@@ -25,3 +25,8 @@
     font: $font-heading-md;
     padding: $padding-sm;
 }
+
+.FormTextfield[disabled] {
+    opacity: $opacity-md;
+}
+

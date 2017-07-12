@@ -4,11 +4,8 @@ import VueCookie from 'vue-cookie'
 
 import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
-<<<<<<< HEAD
 import Editor from './components/Editor/Editor.vue'
-=======
 import Dotmap from './components/Dotmap/Dotmap.vue'
->>>>>>> master
 import Flag from './components/Flag/Flag.vue'
 import FormButtonProcess from './components/FormButtonProcess/FormButtonProcess.vue'
 import FormEditor from './components/FormEditor/FormEditor.vue'
@@ -47,11 +44,8 @@ new Vue({
     components: {
         Alert,
         Arc,
-<<<<<<< HEAD
         Editor,
-=======
         Dotmap,
->>>>>>> master
         Flag,
         FormButtonProcess,
         FormEditor,

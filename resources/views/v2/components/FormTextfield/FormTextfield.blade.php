@@ -5,6 +5,7 @@ $name = $name ?? '';
 $value = $value ?? '';
 $size = $size ?? '';
 $placeholder = $placeholder ?? '';
+$disabled = $disabled ?? false;
 
 @endphp
 
@@ -24,6 +25,9 @@ $placeholder = $placeholder ?? '';
         size="{{ $size }}"
         value="{{ $value }}"
         placeholder="{{ $placeholder }}"
+        @if($disabled)
+        disabled
+        @endif
     >
 
 </div>
