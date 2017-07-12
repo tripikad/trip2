@@ -3,7 +3,9 @@
 $title = $title ?? '';
 $name = $name ?? '';
 $value = $value ?? '';
+$size = $size ?? '';
 $placeholder = $placeholder ?? '';
+$disabled = $disabled ?? false;
 
 @endphp
 
@@ -20,8 +22,12 @@ $placeholder = $placeholder ?? '';
         id="{{ $name }}"
         name="{{ $name }}"
         type="text"
+        size="{{ $size }}"
         value="{{ $value }}"
         placeholder="{{ $placeholder }}"
+        @if($disabled)
+        disabled
+        @endif
     >
 
 </div>

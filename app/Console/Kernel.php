@@ -19,7 +19,13 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\RemoveDuplicates::class,
         \App\Console\Commands\GenerateSitemap::class,
         \App\Console\Commands\ConvertMissingContent::class,
+<<<<<<< HEAD
         \App\Console\Commands\ConvertSearchable::class,
+=======
+        \App\Console\Commands\DisableOldShortNews::class,
+        \App\Console\Commands\ForumMiscTopic::class,
+
+>>>>>>> master
     ];
 
     protected function schedule(Schedule $schedule)

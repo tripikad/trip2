@@ -12,7 +12,6 @@
     .TravelmateCard__title {
     	color: $gray-dark;
     	font: $font-heading-md;
-    	line-height: $line-height-md;
     }
 
     .TravelmateCard__title:hover {

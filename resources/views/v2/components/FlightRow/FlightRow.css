@@ -20,8 +20,6 @@
         color: $blue;
         font: $font-heading-lg;
         margin-bottom: $margin-xxs;
-        line-height: $line-height-md;
-        line-height: $line-height-lg ?if $mobile;
     }
 
     .FlightRow__title:hover {

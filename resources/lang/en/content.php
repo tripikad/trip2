@@ -70,6 +70,8 @@ return [
 
     'news.create.title' => 'Add news post',
 
+    'news.edit.title' => 'Edit news post',
+
     'news.edit.field.image_id.title' => 'Primary image shortcut, for example [[123]]',
     'news.edit.field.image_id.help' => 'You can use image shortcuts, for example: [[456]]',
 
@@ -117,6 +119,8 @@ return [
     'flight.create.title' => 'Add flight offer',
 
     'flight.show.action.all' => 'All offers',
+
+    'flight.edit.title' => 'Edit flight offer',
 
     'flight.edit.field.title.title' => 'Title',
     'flight.edit.field.title.help' => '',
@@ -318,5 +322,11 @@ return [
 
     'sponsored.edit.field.url.title' => 'URL',
     'sponsored.edit.field.url.help' => '',
+
+    // Destination
+
+    'destionation.edit.title' => 'Edit destination',
+    'destination.edit.description' => 'Description',
+    'destination.edit.user' => 'Description authors username',
 
 ];

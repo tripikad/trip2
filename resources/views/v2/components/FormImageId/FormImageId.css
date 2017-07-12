@@ -1,0 +1,6 @@
+@import "variables";
+
+    .FormImageId__image {
+        display: block;
+        margin-top: $margin-sm;
+    }
