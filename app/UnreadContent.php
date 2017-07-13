@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class UnreadContent extends Model
 {
-
     protected $appends = [
         'unread',
     ];
@@ -23,8 +22,7 @@ class UnreadContent extends Model
 
         if ($this->content) {
             if ($this->content->comments) {
-                foreach ($this->content->comments as $comment)
-                {
+                foreach ($this->content->comments as $comment) {
                     if (strtotime($comment->created_at) > $unread_timestamp) {
                         ++$unread_count;
                     }
@@ -34,5 +32,4 @@ class UnreadContent extends Model
 
         return (int) $unread_count;
     }
-
 }

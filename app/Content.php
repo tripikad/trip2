@@ -23,7 +23,7 @@ class Content extends Model
 
     public function unread_content()
     {
-         return $this->hasOne('App\UnreadContent', 'content_id', 'id');
+        return $this->hasOne('App\UnreadContent', 'content_id', 'id');
     }
 
     public function user()
