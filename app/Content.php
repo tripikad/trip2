@@ -21,6 +21,11 @@ class Content extends Model
 
     // Relations
 
+    public function unread_content()
+    {
+         return $this->hasOne('App\UnreadContent', 'content_id', 'id');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
