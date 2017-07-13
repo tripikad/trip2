@@ -21,6 +21,10 @@ class UnreadContent extends Model
         $unread_count = 0;
 
         if ($this->content) {
+            if (strtotime($this->content->created_at) > $unread_timestamp) {
+                $unread_count += 1;
+            }
+
             if ($this->content->comments) {
                 foreach ($this->content->comments as $comment) {
                     if (strtotime($comment->created_at) > $unread_timestamp) {
