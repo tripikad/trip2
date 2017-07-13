@@ -29,6 +29,19 @@
         <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
         <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
         <link href="/css/main.css?v=1.7.4" rel="stylesheet" type="text/css">
+        <meta id="globalprops" name="globalprops" content="
+            {{
+                rawurlencode(json_encode([
+                    'token' => csrf_token(),
+                    'info' => session('info'),
+                    'allowedTags' => config('site.allowedtags'),
+                    'maxfilesize' => config('site.maxfilesize'),
+                    'promo' => config('promo'),
+                    'imageUploadRoute' => route('image.store'),
+                    'imageUploadTitle' => trans('image.drop.title'),
+                ]))
+            }}
+                ">
     </head>
     <body>
         @include('component.alert.success')
@@ -36,7 +49,7 @@
         @yield('header', view('component.header'))
         @yield('content')
         @yield('footer', view('component.footer'))
-        <script type="text/javascript" src="/js/main.js?v=1.7.4"></script>
+        <script type="text/javascript" src="/js/main.js?v=1.7.5"></script>
         @yield('scripts')
         {!! Analytics::render() !!}
         <div id="fb-root"></div>
