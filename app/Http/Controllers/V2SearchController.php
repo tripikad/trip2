@@ -34,7 +34,7 @@ class V2SearchController extends Controller
         }
 
         $q = trim($request->input('q'));
-        $sort_order = $request->get('sort_order', 'relevance');
+        $sort_order = $request->get('sort_order', 'updated_at');
         $tabs = [];
         $data = [
             'items' => null,
@@ -111,7 +111,7 @@ class V2SearchController extends Controller
                 $search_results->push(
                     component('SearchRow')->with('title', str_limit($item->title, 80))
                         ->with('route', route($item->type.'.show', [$item->slug]))
-                        ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('d.m.Y H:i'))
+                        ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
                         ->with('image_alt', $item->imagePreset('small_square'))
                         ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
                         ->with('badge', ($item->price ? $item->price.'€' : null))
@@ -120,7 +120,7 @@ class V2SearchController extends Controller
                 $search_results->push(
                     component('SearchRow')->with('title', str_limit($item->title, 80))
                         ->with('route', route($item->type.'.show', [$item->slug]))
-                        ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('d.m.Y H:i'))
+                        ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
                         ->with('image_alt', $item->imagePreset('small_square'))
                         ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
                         ->with('badge', $item->comments->count())
@@ -145,7 +145,7 @@ class V2SearchController extends Controller
                 $search_results->push(
                     component('SearchRow')->with('title', str_limit($item->title, 80))
                         ->with('route', route($item->type.'.show', [$item->slug]))
-                        ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->created_at)->format('d.m.Y H:i'))
+                        ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
                         ->with('image', $item->user->imagePreset('small_square'))
                         ->with('image_title', $item->user->name)
                         ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
@@ -157,12 +157,12 @@ class V2SearchController extends Controller
         $tag = component('Tag')
             ->is('white');
 
-        if ($sort_order == 'relevance') {
-            $tag->with('route', route('search.results.type', [$active_search, 'q='.$q.'&sort_order=created_at']))
-                ->with('title', trans('search.results.newest_first'));
-        } else {
+        if ($sort_order == 'updated_at') {
             $tag->with('route', route('search.results.type', [$active_search, 'q='.$q.'&sort_order=relevance']))
                 ->with('title', trans('search.results.relevance_first'));
+        } else {
+            $tag->with('route', route('search.results.type', [$active_search, 'q='.$q.'&sort_order=updated_at']))
+                ->with('title', trans('search.results.newest_first'));
         }
 
         return layout('1col')
@@ -209,6 +209,7 @@ class V2SearchController extends Controller
         $sort_order_types = [
             'relevance',
             'created_at',
+            'updated_at',
             'id',
         ];
 
