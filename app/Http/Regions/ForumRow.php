@@ -8,8 +8,10 @@ class ForumRow
     {
         $user = request()->user();
         $commentCount = $forum->vars()->commentCount;
-        $unreadCommentCount = $forum->vars()->unreadCommentCount;
-        $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
+        //$unreadCommentCount = $forum->vars()->unreadCommentCount;
+        $unreadCommentCount = $forum->unread;
+        //$firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
+        $firstUnreadCommentId = $forum->first_unread_comment_id;
         $route = $route ? $route : route($forum->type.'.show', [$forum->slug]);
 
         return component('ForumRow')
@@ -29,7 +31,7 @@ class ForumRow
                             ->with('title', trans('content.show.isnew'))
                             ->with('route', $route)
                     )
-                    ->pushWhen($user && $user->hasRole('regular') && $firstUnreadCommentId,
+                    ->pushWhen($user && $user->hasRole('regular') && $unreadCommentCount,
                         component('Tag')
                             ->is('red')
                             ->with('title', trans_choice(
@@ -39,7 +41,7 @@ class ForumRow
                             ))
                             ->with('route', route(
                                 'forum.show',
-                                [$forum->slug]).'#comment-'.$firstUnreadCommentId
+                                [$forum->slug]).($firstUnreadCommentId ? '#comment-'.$firstUnreadCommentId : '')
                             )
                     )
                     ->pushWhen($commentCount, component('Tag')

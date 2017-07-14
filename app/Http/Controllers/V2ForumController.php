@@ -10,6 +10,8 @@ use App\Image;
 use App\Topic;
 use App\Content;
 use App\Destination;
+use App\UnreadContent;
+use Carbon\Carbon;
 
 class V2ForumController extends Controller
 {
@@ -41,6 +43,8 @@ class V2ForumController extends Controller
         $forums = Content::getLatestPagedItems($forumType, false, $currentDestination, $currentTopic, 'updated_at');
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
+
+        //dd($forums->first()->unread);
 
         $flights = Content::getLatestItems('flight', 3);
         $travelmates = Content::getLatestItems('travelmate', 3);
@@ -165,11 +169,18 @@ class V2ForumController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        // Clear the unread cache
-
+        // Update unread datetime
         if ($user) {
-            $key = 'new_'.$forum->id.'_'.$user->id;
-            Cache::store('permanent')->forget($key);
+            $unreadContent = UnreadContent::where('content_id', $forum->id)->where('user_id', $user->id)->first();
+
+            if (! $unreadContent) {
+                $unreadContent = new UnreadContent;
+                $unreadContent->content_id = $forum->id;
+                $unreadContent->user_id = $user->id;
+            }
+
+            $unreadContent->read_at = Carbon::now()->toDateTimeString();
+            $unreadContent->save();
         }
 
         $anchor = $forum->comments->count()
