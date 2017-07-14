@@ -17,13 +17,22 @@ class Content extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-    protected $appends = ['body_filtered', 'image_id'];
+    protected $appends = ['body_filtered', 'image_id', 'unread', 'first_unread_comment_id'];
 
     // Relations
 
+    public function getUnreadAttribute()
+    {
+        $unread_data = UnreadContent::getUnreadContent($this);
+
+        $this->attributes['first_unread_comment_id'] = $unread_data['first_comment_id'];
+        
+        return $unread_data['count'];
+    }
+
     public function unread_content()
     {
-        return $this->hasOne('App\UnreadContent', 'content_id', 'id');
+        return $this->hasOne('App\UnreadContent', 'content_id', 'id')->where('user_id', auth()->user()->id);
     }
 
     public function user()
@@ -87,7 +96,8 @@ class Content extends Model
                 'comments',
                 'comments.user',
                 'destinations',
-                'topics'
+                'topics',
+                'unread_content'
             )
             ->when($destination, function ($query) use ($destination) {
                 $destinations = Destination::find($destination)->descendantsAndSelf()->pluck('id');
