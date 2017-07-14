@@ -28,6 +28,7 @@
 .Body h4 {
     margin: $margin-sm 0 $margin-sm 0;
     font: $font-heading-md;
+    color: $gray;
 }
 
 .Body a,

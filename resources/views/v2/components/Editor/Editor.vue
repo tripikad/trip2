@@ -124,10 +124,10 @@
             insertTable() {
                 var doc = this.editor.getDoc()
                 var cursor = doc.getCursor();
-                doc.replaceRange('\n\n| Veerg 1 | Veerg 2 | Veerg 3 |\n|---------|---------|---------|\n| Sisu 1  | Sisu 2  | Sisu 3  |\n\n', cursor);
+                doc.replaceRange('\n\nKuupäev | Hind\n--------|-----\nKuupäev | Hind\n\n', cursor);
                 doc.setCursor({
-                    line: cursor.line + 2,
-                    ch: 9
+                    line: cursor.line + 4,
+                    ch: 7
                 })
                 this.editor.focus()
             },
