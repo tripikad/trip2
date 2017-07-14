@@ -26,7 +26,7 @@ class Content extends Model
         $unread_data = UnreadContent::getUnreadContent($this);
 
         $this->attributes['first_unread_comment_id'] = $unread_data['first_comment_id'];
-        
+
         return $unread_data['count'];
     }
 
