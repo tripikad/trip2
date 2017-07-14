@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
 
 class UnreadContent extends Model
 {
@@ -18,7 +17,7 @@ class UnreadContent extends Model
     public function getUnread(Content $content)
     {
         $unread_timestamp = strtotime($this->read_at);
-        $except_timestamp = strtotime(UnreadContent::$except_timestamp_to);
+        $except_timestamp = strtotime(self::$except_timestamp_to);
         $unread_data = [
             'count' => 0,
             'first_comment_id' => null,
@@ -58,7 +57,7 @@ class UnreadContent extends Model
         if ($unread_content && auth()->check()) {
             return (int) $unread_content->getUnread($content);
         } elseif (auth()->check()) {
-            $except_timestamp = strtotime(UnreadContent::$except_timestamp_to);
+            $except_timestamp = strtotime(self::$except_timestamp_to);
             $content_created_at_timestamp = strtotime($content->created_at);
 
             if ($except_timestamp < $content_created_at_timestamp) {
