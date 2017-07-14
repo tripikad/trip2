@@ -26,13 +26,21 @@ class Content extends Model
         $unread_data = UnreadContent::getUnreadContent($this);
 
         $this->attributes['first_unread_comment_id'] = $unread_data['first_comment_id'];
-
+        
         return $unread_data['count'];
     }
 
     public function unread_content()
     {
-        return $this->hasOne('App\UnreadContent', 'content_id', 'id')->where('user_id', auth()->user()->id);
+        $user = auth()->user();
+
+        $eager = $this->hasOne('App\UnreadContent', 'content_id', 'id');
+
+        if ($user) {
+            return $eager->where('user_id', $user->id);
+        }
+
+        return $eager;
     }
 
     public function user()
