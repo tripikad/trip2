@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App;
-use Cache;
 use Request;
 use App\User;
 use App\Image;
 use App\Topic;
 use App\Content;
+use Carbon\Carbon;
 use App\Destination;
 use App\UnreadContent;
-use Carbon\Carbon;
 
 class V2ForumController extends Controller
 {

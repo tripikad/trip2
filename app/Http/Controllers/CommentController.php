@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use Log;
 use Auth;
 use Mail;
-use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
