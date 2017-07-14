@@ -14,6 +14,7 @@
                     <div class="Editor__tool" @click="insertUl">*</div>
                     <div class="Editor__tool" @click="insertH3">H3</div>
                     <div class="Editor__tool" @click="insertH4">H4</div>
+                    <div class="Editor__tool" @click="insertTable">Table</div>
                     <div class="Editor__tool" @click="cleanMarkup">Cleanup</div>
                     <div class="Editor__tool" @click="openPicker">Image</div>
 
@@ -117,6 +118,16 @@
                 doc.setCursor({
                     line: cursor.line + 2,
                     ch: 3
+                })
+                this.editor.focus()
+            },
+            insertTable() {
+                var doc = this.editor.getDoc()
+                var cursor = doc.getCursor();
+                doc.replaceRange('\n\n| Veerg 1 | Veerg 2 | Veerg 3 |\n|---------|---------|---------|\n| Sisu 1  | Sisu 2  | Sisu 3  |\n\n', cursor);
+                doc.setCursor({
+                    line: cursor.line + 2,
+                    ch: 9
                 })
                 this.editor.focus()
             },

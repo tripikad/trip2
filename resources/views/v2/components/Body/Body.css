@@ -21,20 +21,13 @@
 .Body h1,
 .Body h2,
 .Body h3 {
-    font-size: responsive;
-    font-weight: $font-weight-semibold;
-    margin: $margin-topbottom-sm;
-    max-font-size: $font-size-lg;
-    min-font-size: $font-size-md;
+    margin: $margin-sm 0 $margin-sm 0;
+    font: $font-heading-lg;
 }
 
 .Body h4 {
-    color: $gray;
-    font-size: responsive;
-    font-weight: $font-weight-semibold;
-    margin: $margin-topbottom-xs;
-    max-font-size: $font-size-lg;
-    min-font-size: $font-size-md;
+    margin: $margin-sm 0 $margin-sm 0;
+    font: $font-heading-md;
 }
 
 .Body a,
