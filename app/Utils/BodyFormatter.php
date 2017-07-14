@@ -16,11 +16,6 @@ class BodyFormatter
 
     public function markdown()
     {
-
-        // Replacing unordered lists 1) 2) 3) with 1. 2. 3. for Markdown
-
-        $this->body = preg_replace("\n/([0-9]+)\)/", '$1.', $this->body);
-
         $this->body = Markdown::parse($this->body);
 
         return $this;
