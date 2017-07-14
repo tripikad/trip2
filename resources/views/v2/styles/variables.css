@@ -65,8 +65,8 @@ $font-family-code: "Cousine";
 $font-size-xs: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
-$font-size-lg: 18px;
-$font-size-xl: 20px;
+$font-size-lg: 19px;
+$font-size-xl: 21px;
 $font-size-xxl: 30px;
 $font-size-xxxl: 48px;
 $font-size-xxxxl: 64px;
@@ -206,6 +206,7 @@ $border-dotted-gray-md: 2px dotted $gray-light;
 $border-radius-md: 3px;
 $border-radius-lg: $spacer;
 $border-radius-xl: calc($spacer * 1.5);
+$border-radius-xxl: calc($spacer * 100);
 
 /* Text shadows */
 
