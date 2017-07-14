@@ -43,8 +43,6 @@ class V2ForumController extends Controller
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
 
-        //dd($forums->first()->unread);
-
         $flights = Content::getLatestItems('flight', 3);
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
