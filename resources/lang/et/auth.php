@@ -33,6 +33,7 @@ return [
     'login.field.password.title' => 'Parool',
     'login.field.remember.title' => 'Pea mu logimine meeles',
     'login.submit.title' => 'Logi sisse',
+    'login.not.registered' => 'Pole veel kasutaja? Registreeri siin',
 
     'reset.apply.title' => 'Ei mäleta oma parooli?',
     'reset.apply.title.link' => 'Taasta oma parool siin',

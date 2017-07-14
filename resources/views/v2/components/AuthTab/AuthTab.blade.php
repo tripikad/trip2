@@ -2,14 +2,23 @@
 
 $title = $title ?? '';
 
+$route = $route ?? '';
+
 @endphp
 
-<div class="AuthTab {{ $isclasses }}">
+@if($route)
+<a href="{{ $route }}">
+@endif
 
-    <div class="AuthTab__title">
+    <div class="AuthTab {{ $isclasses }}">
 
-        {{ $title }}
+        <div class="AuthTab__title">
+
+            {{ $title }}
+
+        </div>
 
     </div>
-
-</div>
+@if($route)
+</a>
+@endif
