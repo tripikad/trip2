@@ -161,9 +161,9 @@
                 this.editor.focus()
             },
             updatePreview() {
-                this.$http.post(this.route, { value: this.value })
+                this.$http.post(this.route, { body: this.value })
                     .then(res => {
-                        this.preview = res.body.value
+                        this.preview = res.body.body
                     })
             }
         },
