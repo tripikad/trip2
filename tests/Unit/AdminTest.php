@@ -73,7 +73,7 @@ class AdminTest extends BrowserKitTestCase
         $this->actingAs($user1)
             ->visit('admin/image')
             ->attach(storage_path().'/tests/test.jpg', 'image')
-            ->press('Submit')
+            ->press(trans('admin.image.create.submit.title'))
             ->seePageIs('admin/image');
 
         $filename = $this->getLatestImageFilename($user1->user_id);

@@ -16,24 +16,44 @@ class V2ExperimentsController extends Controller
             ->with('content', collect()
 
                 ->push(component('Title')
-                    ->with('title', 'Auth forms')
+                    ->with('title', 'New forms')
                 )
 
                 ->push(component('MetaLink')
-                    ->with('title', 'Login')
+                    ->with('title', 'Auth: Login')
                     ->with('route', route('experiments.loginform'))
                 )
                 ->push(component('MetaLink')
-                    ->with('title', 'Register')
+                    ->with('title', 'Auth: Register')
                     ->with('route', route('experiments.registerform'))
                 )
                 ->push(component('MetaLink')
-                    ->with('title', 'Remember password')
+                    ->with('title', 'Auth: Remember password')
                     ->with('route', route('experiments.passwordform'))
                 )
                 ->push(component('MetaLink')
-                    ->with('title', 'Reset password')
+                    ->with('title', 'Auth: Reset password')
                     ->with('route', route('experiments.resetform'))
+                )
+                ->push(component('MetaLink')
+                    ->with('title', 'Forum: Create')
+                    ->with('route', route('experiments.forum.create'))
+                )
+                ->push(component('MetaLink')
+                    ->with('title', 'Travelmate: Create')
+                    ->with('route', route('experiments.travelmate.create'))
+                )
+                ->push(component('MetaLink')
+                    ->with('title', 'Photo: Create')
+                    ->with('route', route('experiments.photo.create'))
+                )
+                ->push(component('MetaLink')
+                    ->with('title', 'User: Edit')
+                    ->with('route', route('experiments.user.edit'))
+                )
+                ->push(component('MetaLink')
+                    ->with('title', 'User: Destinations')
+                    ->with('route', route('experiments.user.destinations'))
                 )
 
                 ->push(component('Title')
@@ -63,7 +83,17 @@ class V2ExperimentsController extends Controller
 
                 ->push(component('MetaLink')
                     ->with('title', 'Selects')
-                    ->with('route', route('experiments.selects'))
+                    ->with('route', route('experiments.select.index'))
+                )
+
+                ->push(component('MetaLink')
+                    ->with('title', 'Fonts')
+                    ->with('route', route('experiments.fonts.index'))
+                )
+
+                ->push(component('MetaLink')
+                    ->with('title', 'Map')
+                    ->with('route', route('experiments.map.index'))
                 )
 
             )
@@ -119,5 +149,29 @@ class V2ExperimentsController extends Controller
     public function selectCreate()
     {
         dump(request()->all());
+    }
+
+    public function mapIndex()
+    {
+        return layout('1col')
+
+            ->with('content', collect()
+                ->push(component('Dotmap')
+                    ->with('dots', config('dots'))
+                )
+            )
+
+        ->render();
+    }
+
+    public function fontsIndex()
+    {
+        return layout('1col')
+
+            ->with('content', collect()
+                ->push(component('FontExperiment'))
+            )
+
+            ->render();
     }
 }

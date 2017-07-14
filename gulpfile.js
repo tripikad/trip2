@@ -118,4 +118,8 @@ elixir(function(mix) {
     mix.version([
         'v2/css/main.css', 'v2/js/main.js'
     ])
+    mix.copy(
+        'node_modules/codemirror/lib/codemirror.js',
+        './public/v2/js/codemirror.js'
+    )
 })

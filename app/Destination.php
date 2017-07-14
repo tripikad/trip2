@@ -18,6 +18,11 @@ class Destination extends Baum\Node
         return $this->belongsToMany('App\Content');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
     public function vars()
     {
         return new V2DestinationVars($this);

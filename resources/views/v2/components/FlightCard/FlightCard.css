@@ -26,7 +26,6 @@
     .FlightCard__title {
         color: $white;
         font: $font-heading-md;
-        line-height: $line-height-md;
         text-align: center;
         text-shadow: $text-shadow-md;
     }

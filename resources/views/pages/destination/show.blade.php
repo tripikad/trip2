@@ -13,9 +13,9 @@
 @section('masthead.nav')
     @include('component.masthead.nav', [
         'nav_previous_title' => ($previous_destination ? $previous_destination->name : ''),
-        'nav_previous_route' => ($previous_destination ? route('destination.slug', [$previous_destination->slug]) : null),
+        'nav_previous_route' => ($previous_destination ? route('destination.showSlug', [$previous_destination->slug]) : null),
         'nav_next_title' => ($next_destination ? $next_destination->name : ''),
-        'nav_next_route' => ($next_destination ? route('destination.slug', [$next_destination->slug]) : null),
+        'nav_next_route' => ($next_destination ? route('destination.showSlug', [$next_destination->slug]) : null),
         'modifiers' => 'm-yellow'
     ])
 @stop
@@ -102,7 +102,7 @@
         @include('component.masthead', [
             'modifiers' => 'm-alternative',
             'subtitle' => (isset($parent_destination) ? $parent_destination->name : null),
-            'subtitle_route' => (isset($parent_destination) ? route('destination.slug', [$parent_destination->slug]) : null),
+            'subtitle_route' => (isset($parent_destination) ? route('destination.showSlug', [$parent_destination->slug]) : null),
             'image' => \App\Image::getRandom($destination->id)
                 /*(isset($featured['photos']) && count($featured['photos']['contents'])
                     ?
@@ -252,7 +252,7 @@
                                 'items' => $popular_destinations->transform(function($destination) {
                                     return [
                                         'title' => $destination->name,
-                                        'route' => route('destination.slug', [$destination->slug])
+                                        'route' => route('destination.showSlug', [$destination->slug])
                                     ];
                                 })
                             ])
@@ -289,7 +289,7 @@
                                         return [
                                             'title' => $destination->name,
                                             'modifiers' => ['m-orange', 'm-red', 'm-yellow', 'm-blue'][rand(0,3)],
-                                            'route' => route('destination.slug', $destination->slug)
+                                            'route' => route('destination.showSlug', $destination->slug)
                                         ];
                                     }),
                                     'userName' => $photo->user->name,
@@ -354,9 +354,9 @@
                         @include('component.destination', [
                             'modifiers' => ['m-purple', 'm-yellow', 'm-red'][$key],
                             'title' => $flight->destination ? $flight->destination->name : null,
-                            'title_route' => $flight->destination ? route('destination.slug', $flight->destination->slug) : null,
+                            'title_route' => $flight->destination ? route('destination.showSlug', $flight->destination->slug) : null,
                             'subtitle' => $flight->parent_destination ? $flight->parent_destination->name : null,
-                            'subtitle_route' => $flight->parent_destination ? route('destination.slug', $flight->parent_destination->slug) : null
+                            'subtitle_route' => $flight->parent_destination ? route('destination.showSlug', $flight->parent_destination->slug) : null
                         ])
 
                         @include('component.card', [
