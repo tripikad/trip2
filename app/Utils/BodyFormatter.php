@@ -16,7 +16,6 @@ class BodyFormatter
 
     public function markdown()
     {
-
         $this->body = Markdown::parse($this->body);
 
         return $this;
