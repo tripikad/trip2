@@ -43,8 +43,7 @@
     color: $blue-hover;
 }
 
-.Body ul,
-.Body ol {
+.Body ul {
     padding-left: $padding-md;
     margin: $margin-md 0;
 }
@@ -53,8 +52,34 @@
     list-style-type: disc;
 }
 
+/*
 .Body ol li {
     list-style-type: decimal;
+}
+*/
+.Body ol {
+    list-style-type: none;
+    position: relative;
+    margin: $margin-md 0;
+}
+
+.Body ol li {
+    counter-increment: step-counter;
+    margin: 0 0 calc($spacer / 1.5) calc($spacer * 2.25);
+}
+
+.Body ol li::before {
+    padding-top: calc($spacer * 0.2);
+    background-color: $gray;
+    border-radius: $border-radius-xxl;
+    color: $white;
+    content: counter(step-counter);
+    font: $font-text-sm;
+    height: calc($spacer * 1.75);
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: calc($spacer * 1.75);
 }
 
 .Body blockquote {
