@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 
 class ConvertSearchable extends Command
 {
-    protected $signature = 'search:index';
+    protected $signature = 'search:index {--optimize}';
 
     /*
      * Most places we use app('db')->select(..) to avoid Laravel Eloquent because it increases processing time
@@ -16,91 +16,97 @@ class ConvertSearchable extends Command
 
     public function handle()
     {
-        $start = microtime(true);
+        if ($this->option('optimize')) {
+            $this->line(' - Optimizing table');
+            app('db')->select('OPTIMIZE TABLE `searchables`');
+            $this->info(' + Done');
+        } else {
+            $start = microtime(true);
 
-        $search_indexes = Searchable::select([
-            'id',
-            'user_id',
-            'content_id',
-            'comment_id',
-            'destination_id',
-            'title',
-            'body',
-            'created_at',
-        ])->orderBy('id', 'asc');
+            $search_indexes = Searchable::select([
+                'id',
+                'user_id',
+                'content_id',
+                'comment_id',
+                'destination_id',
+                'title',
+                'body',
+                'created_at',
+            ])->orderBy('id', 'asc');
 
-        $index_fields = [];
+            $index_fields = [];
 
-        $users = $this->get_users_for_index($index_fields);
-        $user_ids = $this->get_object_ids($users);
+            $users = $this->get_users_for_index($index_fields);
+            $user_ids = $this->get_object_ids($users);
 
-        $content_type_by_id = [];
-        $contents = $this->get_content_for_index($index_fields, $content_type_by_id);
-        $content_ids = $this->get_object_ids($contents);
+            $content_type_by_id = [];
+            $contents = $this->get_content_for_index($index_fields, $content_type_by_id);
+            $content_ids = $this->get_object_ids($contents);
 
-        $this->get_comments_for_index($index_fields, $content_ids, $user_ids, $content_type_by_id, true);
+            $this->get_comments_for_index($index_fields, $content_ids, $user_ids, $content_type_by_id, true);
 
-        $this->get_destinations_for_index($index_fields, true);
+            $this->get_destinations_for_index($index_fields, true);
 
-        $delete_ids = [];
+            $delete_ids = [];
 
-        $this->line(' - 1/2 Comparing data with search index');
-        $search_indexes->chunk(2500, function ($indexes) use (&$index_fields, &$delete_ids) {
-            foreach ($indexes as &$index) {
-                if ($index->comment_id) {
-                    $key = 'cc'.$index->comment_id;
-                } elseif ($index->content_id) {
-                    $key = 'c'.$index->content_id;
-                } elseif ($index->destination_id) {
-                    $key = 'd'.$index->destination_id;
-                } elseif ($index->user_id) {
-                    $key = 'u'.$index->user_id;
-                } else {
-                    $key = null;
+            $this->line(' - 1/2 Comparing data with search index');
+            $search_indexes->chunk(2500, function ($indexes) use (&$index_fields, &$delete_ids) {
+                foreach ($indexes as &$index) {
+                    if ($index->comment_id) {
+                        $key = 'cc'.$index->comment_id;
+                    } elseif ($index->content_id) {
+                        $key = 'c'.$index->content_id;
+                    } elseif ($index->destination_id) {
+                        $key = 'd'.$index->destination_id;
+                    } elseif ($index->user_id) {
+                        $key = 'u'.$index->user_id;
+                    } else {
+                        $key = null;
+                    }
+
+                    if ($key && isset($index_fields[$key])) {
+                        if (! $index->title) {
+                            $index->title = 'null';
+                        } else {
+                            $index->title = DB::getPdo()->quote($index->title);
+                        }
+
+                        if (! $index->body) {
+                            $index->body = 'null';
+                        } else {
+                            $index->body = DB::getPdo()->quote($index->body);
+                        }
+
+                        if ($index->title == $index_fields[$key]['title'] && $index->body == $index_fields[$key]['body']) {
+                            unset($index_fields[$key]);
+                        } else {
+                            $index_fields[$key]['id'] = (int) $index->id;
+                            $index_fields[$key]['created_at'] = DB::getPdo()->quote($index->created_at);
+                        }
+                    } else {
+                        $delete_ids[] = $index->id;
+                    }
                 }
+            });
 
-                if ($key && isset($index_fields[$key])) {
-                    if (! $index->title) {
-                        $index->title = 'null';
-                    } else {
-                        $index->title = DB::getPdo()->quote($index->title);
-                    }
-
-                    if (! $index->body) {
-                        $index->body = 'null';
-                    } else {
-                        $index->body = DB::getPdo()->quote($index->body);
-                    }
-
-                    if ($index->title == $index_fields[$key]['title'] && $index->body == $index_fields[$key]['body']) {
-                        unset($index_fields[$key]);
-                    } else {
-                        $index_fields[$key]['id'] = (int) $index->id;
-                        $index_fields[$key]['created_at'] = DB::getPdo()->quote($index->created_at);
-                    }
-                } else {
-                    $delete_ids[] = $index->id;
-                }
+            $this->info(' + 2/2 Comparing completed!');
+            $count_delete_ids = count($delete_ids);
+            if ($count_delete_ids > 0) {
+                Searchable::destroy($delete_ids);
+                $this->error(' + '.count($delete_ids).' items deleted from search index');
+            } else {
+                $this->info(' + 0 items deleted from search index');
             }
-        });
 
-        $this->info(' + 2/2 Comparing completed!');
-        $count_delete_ids = count($delete_ids);
-        if ($count_delete_ids > 0) {
-            Searchable::destroy($delete_ids);
-            $this->error(' + '.count($delete_ids).' items deleted from search index');
-        } else {
-            $this->info(' + 0 items deleted from search index');
+            $index_count = count($index_fields);
+            if ($index_count > 0) {
+                $this->save($index_fields, $index_count);
+            } else {
+                $this->info(' + Nothing to save');
+            }
+
+            $this->info('Command finished after '.round(microtime(true) - $start, 4).' seconds');
         }
-
-        $index_count = count($index_fields);
-        if ($index_count > 0) {
-            $this->save($index_fields, $index_count);
-        } else {
-            $this->info(' + Nothing to save');
-        }
-
-        $this->info('Command finished after '.round(microtime(true) - $start, 4).' seconds');
     }
 
     public function save(array $items, int $index_count)
@@ -127,10 +133,6 @@ class ConvertSearchable extends Command
                 $this->info(' + '.$items_done.' / '.$index_count.' (100%) items saved');
             }
         }
-
-        $this->line(' - 2/3 Optimizing table');
-        app('db')->select('OPTIMIZE TABLE `searchables`');
-        $this->info(' - 3/3 Done');
     }
 
     public function get_users_for_index(&$index_fields, $void_return = false)
