@@ -91,8 +91,6 @@ class V2ContentVars
         if (isset($this->unreadData['first_comment_id'])) {
             return $this->unreadData['first_comment_id'];
         }
-
-        return null;
     }
 
     // Unread content post (1) + comments (x)
