@@ -21,6 +21,19 @@ class Content extends Model
 
     // Relations
 
+    public function unread_content()
+    {
+        $user = auth()->user();
+
+        $eager = $this->hasOne('App\UnreadContent', 'content_id', 'id');
+
+        if ($user) {
+            return $eager->where('user_id', $user->id);
+        }
+
+        return $eager;
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -82,7 +95,8 @@ class Content extends Model
                 'comments',
                 'comments.user',
                 'destinations',
-                'topics'
+                'topics',
+                'unread_content'
             )
             ->when($destination, function ($query) use ($destination) {
                 $destinations = Destination::find($destination)->descendantsAndSelf()->pluck('id');

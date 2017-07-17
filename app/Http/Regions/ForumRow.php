@@ -29,7 +29,7 @@ class ForumRow
                             ->with('title', trans('content.show.isnew'))
                             ->with('route', $route)
                     )
-                    ->pushWhen($user && $user->hasRole('regular') && $firstUnreadCommentId,
+                    ->pushWhen($user && $user->hasRole('regular') && $unreadCommentCount,
                         component('Tag')
                             ->is('red')
                             ->with('title', trans_choice(
@@ -39,7 +39,7 @@ class ForumRow
                             ))
                             ->with('route', route(
                                 'forum.show',
-                                [$forum->slug]).'#comment-'.$firstUnreadCommentId
+                                [$forum->slug]).($firstUnreadCommentId ? '#comment-'.$firstUnreadCommentId : '')
                             )
                     )
                     ->pushWhen($commentCount, component('Tag')
