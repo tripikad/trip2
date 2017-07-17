@@ -106,51 +106,53 @@ class V2SearchController extends Controller
 
         $search_results = collect();
 
-        foreach ($data['items'] as $item) {
-            if ($active_search == 'flight') {
-                $search_results->push(
-                    component('SearchRow')->with('title', str_limit($item->title, 80))
-                        ->with('route', route($item->type.'.show', [$item->slug]))
-                        ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
-                        ->with('image_alt', $item->imagePreset('small_square'))
-                        ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
-                        ->with('badge', ($item->price ? $item->price.'€' : null))
-                );
-            } elseif ($active_search == 'news') {
-                $search_results->push(
-                    component('SearchRow')->with('title', str_limit($item->title, 80))
-                        ->with('route', route($item->type.'.show', [$item->slug]))
-                        ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
-                        ->with('image_alt', $item->imagePreset('small_square'))
-                        ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
-                        ->with('badge', $item->comments->count())
-                );
-            } elseif ($active_search == 'destination') {
-                $parent = $item->parent()->first();
-                $search_results->push(
-                    component('SearchRow')->with('title', ($parent ? $parent->name.' › ' : '').$item->name)
-                        ->with('route', route('destination.showSlug', [$item->slug]))
-                        ->with('image_alt', Image::getRandom($item->id))
-                );
-            } elseif ($active_search == 'user') {
-                $search_results->push(
-                    component('SearchRow')->with('title', str_limit($item->name, 80))
-                        ->with('route', ($item->name != 'Tripi külastaja' ? route('user.show', [$item]) : false))
-                        ->with('arc', component('UserImage')
-                            ->with('rank', $item->rank * 90)
-                            ->with('image', $item->imagePreset('small_square'))
-                        )
-                );
-            } else {
-                $search_results->push(
-                    component('SearchRow')->with('title', str_limit($item->title, 80))
-                        ->with('route', route($item->type.'.show', [$item->slug]))
-                        ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
-                        ->with('image', $item->user->imagePreset('small_square'))
-                        ->with('image_title', $item->user->name)
-                        ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
-                        ->with('badge', $item->comments->count())
-                );
+        if ($data['items']) {
+            foreach ($data['items'] as $item) {
+                if ($active_search == 'flight') {
+                    $search_results->push(
+                        component('SearchRow')->with('title', str_limit($item->title, 80))
+                            ->with('route', route($item->type.'.show', [$item->slug]))
+                            ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
+                            ->with('image_alt', $item->imagePreset('small_square'))
+                            ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
+                            ->with('badge', ($item->price ? $item->price.'€' : null))
+                    );
+                } elseif ($active_search == 'news') {
+                    $search_results->push(
+                        component('SearchRow')->with('title', str_limit($item->title, 80))
+                            ->with('route', route($item->type.'.show', [$item->slug]))
+                            ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
+                            ->with('image_alt', $item->imagePreset('small_square'))
+                            ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
+                            ->with('badge', $item->comments->count())
+                    );
+                } elseif ($active_search == 'destination') {
+                    $parent = $item->parent()->first();
+                    $search_results->push(
+                        component('SearchRow')->with('title', ($parent ? $parent->name.' › ' : '').$item->name)
+                            ->with('route', route('destination.showSlug', [$item->slug]))
+                            ->with('image_alt', Image::getRandom($item->id))
+                    );
+                } elseif ($active_search == 'user') {
+                    $search_results->push(
+                        component('SearchRow')->with('title', str_limit($item->name, 80))
+                            ->with('route', ($item->name != 'Tripi külastaja' ? route('user.show', [$item]) : false))
+                            ->with('arc', component('UserImage')
+                                ->with('rank', $item->rank * 90)
+                                ->with('image', $item->imagePreset('small_square'))
+                            )
+                    );
+                } else {
+                    $search_results->push(
+                        component('SearchRow')->with('title', str_limit($item->title, 80))
+                            ->with('route', route($item->type.'.show', [$item->slug]))
+                            ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
+                            ->with('image', $item->user->imagePreset('small_square'))
+                            ->with('image_title', $item->user->name)
+                            ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
+                            ->with('badge', $item->comments->count())
+                    );
+                }
             }
         }
 
@@ -262,11 +264,15 @@ class V2SearchController extends Controller
                 }
             })->whereNotNull($item_id_key);
 
-        if ($types) {
-            if (is_array($types)) {
-                $data['paginate'] = $data['paginate']->whereIn('content_type', $types);
-            } else {
-                $data['paginate'] = $data['paginate']->where('content_type', $types);
+        if ($find == 'user') {
+            $data['paginate'] = $data['paginate']->whereNull('content_type')->whereNull('destination_id');
+        } else {
+            if ($types) {
+                if (is_array($types)) {
+                    $data['paginate'] = $data['paginate']->whereIn('content_type', $types);
+                } else {
+                    $data['paginate'] = $data['paginate']->where('content_type', $types);
+                }
             }
         }
 
@@ -359,7 +365,7 @@ class V2SearchController extends Controller
                 $keys = rtrim($keys, '+- ');
                 $keys = trim($keys, '+- ');
 
-                $keyword_detailed[] = ''.$detailed_prefix.$keys.($count == count($keyword_array) ? '' : '').'';
+                $keyword_detailed[] = ''.$detailed_prefix.$keys.($count == count($keyword_array) ? '*' : '').'';
                 $keyword[] = '('.$prefix.$keys.($count == count($keyword_array) ? '*' : '').')';
             }
         }
@@ -462,7 +468,7 @@ class V2SearchController extends Controller
 
         return array_merge($contents,
                 ['attributes' => [
-                    'message' => $results_count ? trans('search.results.all') : trans('search.results.noresults'),
+                    'message' => $results_count ? trans('search.results.all') : trans('search.results.noresults_frontpage'),
                     'total' => $results_count,
                     'route' => route('search.results', ['q='.urlencode($keyword)]),
                 ],
