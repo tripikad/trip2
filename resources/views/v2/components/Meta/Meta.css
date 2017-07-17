@@ -7,6 +7,10 @@
     line-height: $line-height-md;
 }
 
+.Meta--center {
+    justify-content: center;
+}
+
 .Meta,
 .Meta > * {
     display: inline-block ?if $ie;
@@ -14,6 +18,10 @@
 
     .Meta__item {
         margin-right: $margin-xs;
+    }
+
+    .Meta__item:last-child {
+        margin-right: 0;
     }
 
 .Meta--large {

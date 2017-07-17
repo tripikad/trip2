@@ -14,6 +14,9 @@ import FormSelect from './components/FormSelect/FormSelect.vue'
 import FormSelectMultiple from './components/FormSelectMultiple/FormSelectMultiple.vue'
 import FrontpageDestinationSearch from './components/FrontpageDestinationSearch/FrontpageDestinationSearch.vue'
 import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
+import FrontpageSearchRow from './components/FrontpageSearchRow/FrontpageSearchRow.vue'
+import FrontpageSearchItem from './components/FrontpageSearchItem/FrontpageSearchItem.vue'
+//import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import ImagePicker from './components/ImagePicker/ImagePicker.vue'
@@ -54,6 +57,8 @@ new Vue({
         FormSelectMultiple,
         FrontpageDestinationSearch,
         FrontpageSearch,
+        FrontpageSearchRow,
+        FrontpageSearchItem,
         Icon,
         IconLoader,
         ImagePicker,
