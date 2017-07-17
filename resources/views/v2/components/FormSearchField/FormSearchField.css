@@ -8,9 +8,6 @@
 }
 
     .FormSearchField .FormSearchField__input {
-        -webkit-transition: all 0.15s linear;
-        -moz-transition: all 0.15s linear;
-        -o-transition: all 0.15s linear;
         transition: all 0.15s linear;
     }
 
@@ -35,7 +32,7 @@
 
         .FormSearchField:hover .FormSearchField__input,
         .FormSearchField__input:focus {
-            background: rgb(255, 255, 255);
+            background: $white;
         }
 
         .FormSearchField ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
