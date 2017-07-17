@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class UnreadContent extends Model
 {
     public $timestamps = false;
+    protected $dates = [
+        'read_at',
+    ];
 
     public function content()
     {
@@ -27,6 +30,7 @@ class UnreadContent extends Model
 
         if ($this->content) {
             $content_created_at_timestamp = $content->created_at->timestamp;
+
             if ($content_created_at_timestamp > $unread_timestamp && $except_timestamp < $content_created_at_timestamp) {
                 $unread_data['count'] += 1;
             }
