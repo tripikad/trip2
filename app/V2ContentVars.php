@@ -8,6 +8,7 @@ use Exception;
 class V2ContentVars
 {
     protected $content;
+    protected $unreadData;
 
     public function __construct(Content $content)
     {
@@ -74,12 +75,7 @@ class V2ContentVars
 
     public function isNew()
     {
-        $cache = $this->getUnreadCache();
-
-        if ($cache > 0) {
-            return false;
-        }
-        if ($cache == '0') {
+        if ($this->content->comments->count() == 0 && $this->unreadCommentCount() == 1) {
             return true;
         }
 
@@ -88,25 +84,29 @@ class V2ContentVars
 
     public function firstUnreadCommentId()
     {
-        $cache = $this->getUnreadCache();
-
-        if ($cache > 0) {
-            return $cache;
+        if (! $this->unreadData) {
+            $this->unreadData = UnreadContent::getUnreadContent($this->content);
         }
 
-        return false;
+        if (isset($this->unreadData['first_comment_id'])) {
+            return $this->unreadData['first_comment_id'];
+        }
+
+        return null;
     }
 
+    // Unread content post (1) + comments (x)
     public function unreadCommentCount()
     {
-        if ($this->firstUnreadCommentId() > 0) {
-            return $this->content->comments->filter(function ($comment) {
-                return  $comment->id >= $this->firstUnreadCommentId();
-            })
-            ->count();
+        if (! $this->unreadData) {
+            $this->unreadData = UnreadContent::getUnreadContent($this->content);
         }
 
-        return false;
+        if (isset($this->unreadData['count'])) {
+            return $this->unreadData['count'];
+        }
+
+        return 0;
     }
 
     public function flagCount($flagType)

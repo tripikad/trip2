@@ -17,18 +17,9 @@ class Content extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-    protected $appends = ['body_filtered', 'image_id', 'unread', 'first_unread_comment_id'];
+    protected $appends = ['body_filtered', 'image_id'];
 
     // Relations
-
-    public function getUnreadAttribute()
-    {
-        $unread_data = UnreadContent::getUnreadContent($this);
-
-        $this->attributes['first_unread_comment_id'] = $unread_data['first_comment_id'];
-
-        return $unread_data['count'];
-    }
 
     public function unread_content()
     {

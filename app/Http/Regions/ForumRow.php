@@ -8,10 +8,8 @@ class ForumRow
     {
         $user = request()->user();
         $commentCount = $forum->vars()->commentCount;
-        //$unreadCommentCount = $forum->vars()->unreadCommentCount;
-        $unreadCommentCount = $forum->unread;
-        //$firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
-        $firstUnreadCommentId = $forum->first_unread_comment_id;
+        $unreadCommentCount = $forum->vars()->unreadCommentCount;
+        $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
         $route = $route ? $route : route($forum->type.'.show', [$forum->slug]);
 
         return component('ForumRow')
