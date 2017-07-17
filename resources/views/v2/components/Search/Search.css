@@ -1,0 +1,6 @@
+@import "variables";
+
+.Search {
+
+    font-family: $font-family, 'sans-serif';
+}

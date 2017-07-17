@@ -14,8 +14,8 @@ class CreateContentCarrierTable extends Migration
     {
         Schema::create('content_carrier', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('content_id')->index();
-            $table->integer('carrier_id')->index();
+            $table->integer('content_id')->unsigned()->index();
+            $table->integer('carrier_id')->unsigned()->index();
         });
     }
 
