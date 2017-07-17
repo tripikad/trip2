@@ -59,7 +59,7 @@ class UnreadContent extends Model
         if ($unread_content && auth()->check()) {
             return (int) $unread_content->getUnread($content);
         } elseif (auth()->check()) {
-            $except_timestamp =  Carbon::now()->subDays(2)->timestamp;;
+            $except_timestamp = Carbon::now()->subDays(2)->timestamp;
             $content_created_at_timestamp = $content->created_at->timestamp;
 
             if ($except_timestamp < $content_created_at_timestamp) {
