@@ -75,7 +75,16 @@ class V2ContentVars
 
     public function isNew()
     {
-        if ($this->content->comments->count() == 0 && $this->unreadCommentCount() == 1) {
+        if (! $this->unreadData) {
+            $this->unreadData = UnreadContent::getUnreadContent($this->content);
+        }
+
+        $comments_count = 0;
+        if (isset($this->unreadData['count'])) {
+            $comments_count = $this->unreadData['count'];
+        }
+
+        if ($this->content->comments->count() == 0 && $comments_count == 1) {
             return true;
         }
 
@@ -93,14 +102,13 @@ class V2ContentVars
         }
     }
 
-    // Unread content post (1) + comments (x)
     public function unreadCommentCount()
     {
         if (! $this->unreadData) {
             $this->unreadData = UnreadContent::getUnreadContent($this->content);
         }
 
-        if (isset($this->unreadData['count'])) {
+        if (isset($this->unreadData['count']) && $this->content->comments->count() !== 0) {
             return $this->unreadData['count'];
         }
 
