@@ -1,23 +1,19 @@
-/*jslint browser: true*/
-
-window.CKEDITOR_BASEPATH = '/vendor/ckeditor/';
-
-var selector = $('.js-ckeditor'),
-    script = window.CKEDITOR_BASEPATH + 'ckeditor.js',
-    adapter = window.CKEDITOR_BASEPATH + 'adapters/jquery.js',
+var CKEDITOR_BASEPATH = '/vendor/ckeditor/',
+    selector = $('.js-ckeditor'),
+    script = CKEDITOR_BASEPATH + 'ckeditor.js?t_=13072017221300',
+    adapter = CKEDITOR_BASEPATH + 'adapters/jquery.js?t_=13072017221300',
     k = 0;
 
 if (selector.length > 0) {
     $.cachedScript(script).done(function() {
-
         $.cachedScript(adapter).done(function() {
             $.each(selector, function () {
                 ++k;
                 if ($(this).attr('id')) {
-                    $(this).ckeditor();
+                    CKEDITOR.replace($(this).attr('id'));
                 } else {
                     $(this).attr('id', 'js-ckeditor-' + k);
-                    $(this).ckeditor();
+                    CKEDITOR.replace('js-ckeditor-' + k);
                 }
             });
         });

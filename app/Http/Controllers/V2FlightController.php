@@ -25,7 +25,9 @@ class V2FlightController extends Controller
         );
 
         $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
-        $destinations = Destination::select('id', 'name')->get();
+        $destinations = Destination::select('id', 'name')
+            ->havingRaw('`id` IN (SELECT DISTINCT `destination_id` FROM `content_destination` WHERE `content_id` IN (SELECT DISTINCT `id` FROM `contents` WHERE `type` = \'flight\'))')
+            ->get();
         $topics = Topic::select('id', 'name')->get();
 
         $travelmates = Content::getLatestItems('travelmate', 3);
@@ -252,21 +254,8 @@ class V2FlightController extends Controller
                             ->with('options', $destinations)
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
                         )
-                        ->push(component('FormTextfield')
-                            ->with('disabled', true)
-                            ->with(
-                                'title',
-                                trans('content.flight.edit.field.start_at.title')
-                                .' / '
-                                .trans('content.flight.edit.field.end_at.title')
-                                .' (pooleli)'
-                            )
-                            ->with('name', 'start_at')
-                            ->with('value', old('start_at'))
-                        )
                         ->push(component('FormButton')
-                            ->with('disabled', true)
-                            ->with('title', trans('content.create.title').' (pooleli)')
+                            ->with('title', trans('content.create.title'))
                         )
                     )
                 )
@@ -330,21 +319,8 @@ class V2FlightController extends Controller
                             ->with('value', $flight->destinations->pluck('id'))
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
                         )
-                        ->push(component('FormTextfield')
-                            ->with('disabled', true)
-                            ->with(
-                                'title',
-                                trans('content.flight.edit.field.start_at.title')
-                                .' / '
-                                .trans('content.flight.edit.field.end_at.title')
-                                .' (pooleli)'
-                            )
-                            ->with('name', 'start_at')
-                            ->with('value', old('start_at'))
-                        )
                         ->push(component('FormButton')
-                            ->with('disabled', true)
-                            ->with('title', trans('content.edit.submit.title').' (pooleli)')
+                            ->with('title', trans('content.edit.submit.title'))
                         )
                     )
                 )

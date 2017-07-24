@@ -26,10 +26,10 @@ class DestinationBar
             ->with('title', $destination->vars()->shortName)
             ->with('route', route('destination.showSlug', [$destination->slug]))
             ->with('parents', region(
-                'DestinationParents',
-                $destinations,
-                $short = true
-            )
-        );
+                    'DestinationParents',
+                    $destinations,
+                    $short = true
+                )
+            );
     }
 }

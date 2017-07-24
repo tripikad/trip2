@@ -15,8 +15,8 @@ class CreateAliasesTable extends Migration
         Schema::create('aliases', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('aliasable_id')->index();
-            $table->string('aliasable_type')->index();
-            $table->string('route_type')->nullable()->index();
+            $table->string('aliasable_type', 25)->index();
+            $table->string('route_type', 20)->nullable()->index();
             $table->string('path');
         });
     }

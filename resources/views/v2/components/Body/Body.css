@@ -21,20 +21,14 @@
 .Body h1,
 .Body h2,
 .Body h3 {
-    font-size: responsive;
-    font-weight: $font-weight-semibold;
-    margin: $margin-topbottom-sm;
-    max-font-size: $font-size-lg;
-    min-font-size: $font-size-md;
+    margin: $margin-sm 0 $margin-sm 0;
+    font: $font-heading-lg;
 }
 
 .Body h4 {
+    margin: $margin-sm 0 $margin-sm 0;
+    font: $font-heading-md;
     color: $gray;
-    font-size: responsive;
-    font-weight: $font-weight-semibold;
-    margin: $margin-topbottom-xs;
-    max-font-size: $font-size-lg;
-    min-font-size: $font-size-md;
 }
 
 .Body a,
@@ -50,8 +44,7 @@
     color: $blue-hover;
 }
 
-.Body ul,
-.Body ol {
+.Body ul {
     padding-left: $padding-md;
     margin: $margin-md 0;
 }
@@ -60,8 +53,34 @@
     list-style-type: disc;
 }
 
+/*
 .Body ol li {
     list-style-type: decimal;
+}
+*/
+.Body ol {
+    list-style-type: none;
+    position: relative;
+    margin: $margin-md 0;
+}
+
+.Body ol li {
+    counter-increment: step-counter;
+    margin: 0 0 calc($spacer / 1.5) calc($spacer * 2.25);
+}
+
+.Body ol li::before {
+    padding-top: calc($spacer * 0.2);
+    background-color: $gray;
+    border-radius: $border-radius-xxl;
+    color: $white;
+    content: counter(step-counter);
+    font: $font-text-sm;
+    height: calc($spacer * 1.75);
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: calc($spacer * 1.75);
 }
 
 .Body blockquote {
@@ -97,7 +116,7 @@
 
 .Body th {
     background: $gray-light;
-    font: $font-heading-md;
+    font: $font-heading-sm;
 }
 
 .Body th,

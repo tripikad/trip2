@@ -1,0 +1,24 @@
+@import "variables";
+
+ul.HeaderTabs {
+    font: $font-text-md;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+    position: relative;
+    top: $padding-lg;
+    top: $padding-sm ?if $mobile;
+}
+
+    ul.HeaderTabs * {
+        transition: all 0.15s linear;
+    }
+
+    li.HeaderTabs__item {
+        width: auto;
+        display: inline-flex;
+    }

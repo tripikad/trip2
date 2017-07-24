@@ -14,6 +14,7 @@
                     <div class="Editor__tool" @click="insertUl">*</div>
                     <div class="Editor__tool" @click="insertH3">H3</div>
                     <div class="Editor__tool" @click="insertH4">H4</div>
+                    <div class="Editor__tool" @click="insertTable">Table</div>
                     <div class="Editor__tool" @click="cleanMarkup">Cleanup</div>
                     <div class="Editor__tool" @click="openPicker">Image</div>
 
@@ -120,6 +121,16 @@
                 })
                 this.editor.focus()
             },
+            insertTable() {
+                var doc = this.editor.getDoc()
+                var cursor = doc.getCursor();
+                doc.replaceRange('\n\nKuupäev | Hind\n--------|-----\nKuupäev | Hind\n\n', cursor);
+                doc.setCursor({
+                    line: cursor.line + 4,
+                    ch: 7
+                })
+                this.editor.focus()
+            },
             cleanMarkup() {
                 var value = this.editor.getValue()
                 value = value.replace(/&nbsp;/g, ' ')
@@ -150,9 +161,9 @@
                 this.editor.focus()
             },
             updatePreview() {
-                this.$http.post(this.route, { value: this.value })
+                this.$http.post(this.route, { body: this.value })
                     .then(res => {
-                        this.preview = res.body.value
+                        this.preview = res.body.body
                     })
             }
         },
