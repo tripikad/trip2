@@ -76,3 +76,17 @@ function createlink($route, $title, $blank = false )
 
     return '<a href="'.$route.'" '.$target.'>'.$title.'</a>';
 }
+
+function getSeason($date) {
+    $season_names = trans('date.seasons');
+    $year = date('Y', strtotime($date));
+    if (strtotime($date) < strtotime($year.'-03-01') || strtotime($date) >= strtotime($year.'-12-01')) {
+        return $season_names[0].' '. date('Y').'/'.date('y', strtotime('+1 year')); // Must be in Winter
+    } elseif (strtotime($date) >= strtotime($year.'-09-01')) {
+        return $season_names[3].' '. $year; // Must be in Fall
+    } elseif (strtotime($date) >= strtotime($year.'-06-01')) {
+        return $season_names[2].' '. $year; // Must be in Summer
+    } elseif (strtotime($date) >= strtotime($year.'-03-01')) {
+        return $season_names[1].' '. $year; // Must be in Spring
+    }
+}

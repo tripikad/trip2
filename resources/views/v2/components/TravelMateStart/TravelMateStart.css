@@ -1,0 +1,27 @@
+@import "variables";
+
+.TravelMateStart {
+
+}
+
+.TravelMateStart__fields {
+    display: flex;
+}
+
+
+    .TravelMateStart__fields > div {
+        padding: 12px;
+        color: hsl(204, 6%, 55%);
+        border: 1px solid hsl(204, 6%, 88%);
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+
+    .TravelMateStart__fields div.active {
+        background-color: $green;
+        color: $white;
+    }
