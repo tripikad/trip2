@@ -76,10 +76,8 @@ class BodyFormatter
         return $this;
     }
 
-
     public function format()
     {
         return $this->body;
     }
-
 }

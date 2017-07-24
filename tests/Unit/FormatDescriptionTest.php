@@ -6,35 +6,34 @@ use Tests\TestCase;
 
 class FormatDescriptionTest extends TestCase
 {
-
     public function test_description_is_sanitized_and_cleaned()
     {
         $cases = [
             [
                 ' Hello ',
                 'Hello',
-                'Output should be trimmed from extra spacing in the beginning and the end'
+                'Output should be trimmed from extra spacing in the beginning and the end',
             ],
             [
                 'Hello [[123]]',
                 'Hello',
-                'Image references should be removed'
+                'Image references should be removed',
             ],
             [
                 'Hello <a href="http://google.com">Google</a>',
                 'Hello Google',
-                'HTML links should be removed'
+                'HTML links should be removed',
             ],
             [
                 'Hello [Google](http://google.com)',
                 'Hello Google',
-                'Markdown links should be removed'
+                'Markdown links should be removed',
             ],
             [
                 "\nHello\rGoogle\t",
                 'Hello Google',
-                'Newlines and tabs should be removed'
-            ]
+                'Newlines and tabs should be removed',
+            ],
         ];
 
         foreach ($cases as $case) {
