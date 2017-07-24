@@ -37,7 +37,22 @@ function layout($layout)
 
 function format_body($body)
 {
-    return (new Utils\BodyFormatter($body))->format();
+    return (new Utils\BodyFormatter($body))
+        ->markdown()
+        ->links()
+        ->images()
+        ->format();
+}
+
+function format_description($body)
+{
+    return (new Utils\BodyFormatter($body))
+        ->markdown()
+        ->links()
+        ->images()
+        ->plain()
+        ->trim()
+        ->format();
 }
 
 function format_date($date)

@@ -61,12 +61,25 @@ class BodyFormatter
         return $this;
     }
 
+    public function plain()
+    {
+        $this->body = strip_tags($this->body);
+        $this->body = str_replace(["\n", "\t", "\r"], ' ', ($this->body));
+
+        return $this;
+    }
+
+    public function trim()
+    {
+        $this->body = trim($this->body);
+
+        return $this;
+    }
+
+
     public function format()
     {
-        return $this
-            ->markdown()
-            ->links()
-            ->images()
-            ->body;
+        return $this->body;
     }
+
 }
