@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 
-class FormatDescription extends TestCase
+class FormatDescriptionTest extends TestCase
 {
 
     public function test_description_is_sanitized_and_cleaned()

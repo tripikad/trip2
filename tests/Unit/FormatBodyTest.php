@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 
-class FormatBody extends TestCase
+class FormatBodyTest extends TestCase
 {
 
     public function test_body_is_formatted()
