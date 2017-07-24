@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Feature;
+
 use App\User;
 use App\Content;
 use Tests\BrowserKitTestCase;
