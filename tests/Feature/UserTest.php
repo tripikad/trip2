@@ -10,7 +10,7 @@ class UserTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
-    public function testExample()
+    public function test_user_can_upload_profile_image()
     {
         $user1 = factory(User::class)->create();
 
