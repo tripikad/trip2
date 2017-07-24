@@ -51,7 +51,7 @@ class FormatDescriptionTest extends TestCase
 
         $cases = [
             [
-                'Hello [['.$image->id.']]',
+                'Hello [['. $image->id .']]',
                 'Hello',
                 'Image references should be removed',
             ],
