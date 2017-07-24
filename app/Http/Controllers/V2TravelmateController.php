@@ -197,8 +197,6 @@ class V2TravelmateController extends Controller
         }
         $dates[] = ['name' =>getSeason(date('Y-m', strtotime('+6 month'))), 'output' => date('Y-m', strtotime('+5 month'))];
 
-        dump($dates);
-
         return layout('2col')
 
             ->with('narrow', true)
@@ -246,6 +244,7 @@ class V2TravelmateController extends Controller
                         )
                         ->push('<div style="border-radius: 4px; opacity: 0.2; height: 3rem; border: 2px dashed black; font-family: Sailec; display: flex; align-items: center; justify-content: center;">Alustan reisi kuupäeval (komponent)</div>')
                         ->push(component('TravelMateStart')
+                            ->with('title', 'Millal plaanid reisile minna?')
                             ->with('dates', $dates)
                         )
                         ->push(component('FormTextfield')

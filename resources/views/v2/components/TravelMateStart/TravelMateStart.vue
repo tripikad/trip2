@@ -1,7 +1,7 @@
 <template>
 
     <div class="TravelMateStart" :class="isclasses">
-
+        <div class="TravelMateStart__heading">{{ title }}</div>
         <div class="TravelMateStart__fields">
 
             <div v-for="(date, index) in dates" v-on:click="changeActive(index)" v-bind:class="{ active: isActive == index }">
@@ -22,7 +22,7 @@
 
         props: {
             isclasses: { default: '' },
-            title: { default: 'TravelMateStart' },
+            title: { default: '' },
             dates: { default: ''}
         },
 
