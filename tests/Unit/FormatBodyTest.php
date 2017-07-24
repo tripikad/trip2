@@ -4,8 +4,11 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 class FormatBodyTest extends TestCase
 {
+    use DatabaseTransactions;
 
     public function test_body_is_formatted()
     {

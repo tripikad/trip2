@@ -3,11 +3,16 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use App\Image;
+
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class FormatDescriptionTest extends TestCase
 {
 
-    public function test_description_is_sanitized_and_cleaned()
+    use DatabaseTransactions;
+
+    public function test_description_formatting_is_removed()
     {
         $cases = [
             [
@@ -34,6 +39,23 @@ class FormatDescriptionTest extends TestCase
                 "\nHello\rGoogle\t",
                 'Hello Google',
                 'Newlines and tabs should be removed'
+            ]
+        ];
+
+        foreach ($cases as $case) {
+            $this->assertEquals($case[1], format_description($case[0]), $case[2]);
+        }
+    }
+
+    public function test_description_images_are_removed()
+    {
+        $image = Image::create(['filename' => str_random(6).'.jpg']);
+        
+        $cases = [
+            [
+                'Hello [['.$image->id.']]',
+                'Hello',
+                'Image references should be removed'
             ]
         ];
 
