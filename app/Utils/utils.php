@@ -70,7 +70,7 @@ function backToAnchor($anchor)
     return Redirect::to(URL::previous().$anchor);
 }
 
-function createlink($route, $title, $blank = false )
+function createlink($route, $title, $blank = false)
 {
     $target = $blank ? 'target="_blank"' : '';
 

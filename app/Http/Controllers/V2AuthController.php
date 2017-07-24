@@ -138,7 +138,7 @@ class V2AuthController extends Controller
 
             ->with('bottom', collect()->push(component('MetaLink')
                 ->with('title', trans('auth.register.field.eula.title', [
-                    'link' => createlink(route('static.show.id', [25151]), trans('auth.register.field.eula.title.link'))
+                    'link' => createlink(route('static.show.id', [25151]), trans('auth.register.field.eula.title.link')),
                 ]))
             ))
 
@@ -183,7 +183,7 @@ class V2AuthController extends Controller
 
             ->with('bottom', collect()->push(component('MetaLink')
                 ->with('title', trans('auth.reset.login.title', [
-                    'link' => createlink(route('login.form'), trans('auth.reset.login.link.title'))
+                    'link' => createlink(route('login.form'), trans('auth.reset.login.link.title')),
                 ]))
             ))
 
