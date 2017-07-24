@@ -19,6 +19,6 @@ return [
         'Talv',
         'Kevad',
         'Suvi',
-        'Sügis'
-    ]
+        'Sügis',
+    ],
 ];

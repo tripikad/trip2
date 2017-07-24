@@ -188,11 +188,11 @@ class V2TravelmateController extends Controller
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
         $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
-        for($i = 0; $i <= 4; $i++) {
+        for ($i = 0; $i <= 4; $i++) {
             $date = strtotime('+'.$i.' month');
             $dates[] = [
                 'name' => trans('date.month.'.date('m', $date)).' '.date('Y', $date),
-                'output' => date('Y-m', $date)
+                'output' => date('Y-m', $date),
             ];
         }
         $dates[] = ['name' =>getSeason(date('Y-m', strtotime('+6 month'))), 'output' => date('Y-m', strtotime('+5 month'))];
