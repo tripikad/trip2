@@ -2,14 +2,12 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
 use App\Image;
-
+use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class FormatDescriptionTest extends TestCase
 {
-
     use DatabaseTransactions;
 
     public function test_description_formatting_is_removed()
@@ -50,13 +48,13 @@ class FormatDescriptionTest extends TestCase
     public function test_description_images_are_removed()
     {
         $image = Image::create(['filename' => str_random(6).'.jpg']);
-        
+
         $cases = [
             [
                 'Hello [['.$image->id.']]',
                 'Hello',
-                'Image references should be removed'
-            ]
+                'Image references should be removed',
+            ],
         ];
 
         foreach ($cases as $case) {
