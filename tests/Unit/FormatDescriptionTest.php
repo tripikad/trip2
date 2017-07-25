@@ -16,12 +16,7 @@ class FormatDescriptionTest extends TestCase
             [
                 ' Hello ',
                 'Hello',
-                'Output should be trimmed from extra spacing in the beginning and the end',
-            ],
-            [
-                'Hello [[123]]',
-                'Hello',
-                'Image references should be removed',
+                'Output should be trimmed from extra spacing in the beginning and in the end',
             ],
             [
                 'Hello <a href="http://google.com">Google</a>',
@@ -53,7 +48,17 @@ class FormatDescriptionTest extends TestCase
             [
                 'Hello [['.$image->id.']]',
                 'Hello',
-                'Image references should be removed',
+                'Existing image references should be removed',
+            ],
+            [
+                'Hello [[['. $image->id .']]](http://google.com)',
+                'Hello',
+                'Existing linked image references should be removed',
+            ],
+            [
+                'Hello [[0]]',
+                'Hello [[0]]',
+                'Non-existing image references should be kept',
             ],
         ];
 
