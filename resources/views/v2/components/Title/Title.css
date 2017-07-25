@@ -6,6 +6,10 @@
     color: $gray-dark;
 }
 
+.Title__title > a {
+    color: $blue;
+}
+
 a .Title__title:hover {
     color: $gray-dark-hover;
 }

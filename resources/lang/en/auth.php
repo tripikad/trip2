@@ -10,6 +10,7 @@ return [
     'register.field.eula.title' => 'I agree with the :link',
     'register.field.eula.title.link' => 'End-user license agreement',
     'register.submit.title' => 'Register',
+    'register.subhead.title' => 'Connect with trip.ee',
 
     'register.email.subject' => 'Confirm your registration',
     'register.email.body.line1' => 'Thanks for signing up',
@@ -33,10 +34,16 @@ return [
     'login.field.password.title' => 'Password',
     'login.field.remember.title' => 'Remember me',
     'login.submit.title' => 'Login',
+    'login.not.registered' => 'Not a user? :link',
+    'login.not.registered.link.title' => 'Register here',
+    'login.not.rembeber.pw' => 'Does not rembember password? :link',
 
     'reset.apply.title' => 'Reset password',
+    'reset.apply.subtitle' => 'Enter your email and we will send you a confirmation link',
     'reset.apply.field.email.title' => 'Your E-mail',
     'reset.apply.submit.title' => 'Send me password reset link',
+    'reset.login.title' => 'rembembered? :link',
+    'reset.login.link.title' => 'Log-in here',
 
     'reset.password.title' => 'Pick a new password',
     'reset.password.field.email.title' => 'E-mail',
