@@ -23,7 +23,7 @@ class BodyFormatter
 
     public function links()
     {
-        // $this->body = str_replace(' www.', ' http://', $this->body);
+        $this->body = str_replace(' www.', ' http://', $this->body);
 
         if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
             $this->body = $filteredBody;
