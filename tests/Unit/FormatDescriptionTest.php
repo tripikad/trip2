@@ -51,7 +51,7 @@ class FormatDescriptionTest extends TestCase
                 'Existing image references should be removed',
             ],
             [
-                'Hello [[['. $image->id .']]](http://google.com)',
+                'Hello [[['.$image->id.']]](http://google.com)',
                 'Hello',
                 'Existing linked image references should be removed',
             ],
