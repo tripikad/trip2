@@ -27,7 +27,7 @@ class FormatBodyTest extends TestCase
                 "* Hello\n* World",
                 "<ul>\n<li>Hello</li>\n<li>World</li>\n</ul>",
                 '* are converted to unordered lists',
-            ]
+            ],
         ];
 
         foreach ($cases as $case) {
