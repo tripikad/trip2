@@ -187,7 +187,7 @@ class V2ForumController extends Controller
         return layout('2col')
 
             ->with('title', trans('content.forum.index.title'))
-            ->with('head_title', $forum->getHeadTitle())
+            ->with('head_title', $forum->vars()->title)
             ->with('head_description', $forum->vars()->description)
             ->with('head_image', Image::getSocial())
 

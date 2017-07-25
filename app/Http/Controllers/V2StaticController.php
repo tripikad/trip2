@@ -17,8 +17,8 @@ class V2StaticController extends Controller
 
         return layout('1col')
 
-            ->with('title', $post->getHeadTitle())
-            ->with('head_title', $post->getHeadTitle())
+            ->with('title', $post->vars()->title)
+            ->with('head_title', $post->vars()->title)
             ->with('head_description', $post->vars()->description)
             ->with('head_image', Image::getSocial())
 

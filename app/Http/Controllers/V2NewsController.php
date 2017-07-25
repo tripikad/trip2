@@ -96,7 +96,7 @@ class V2NewsController extends Controller
         return layout('1col')
 
             ->with('title', trans('content.news.index.title'))
-            ->with('head_title', $new->getHeadTitle())
+            ->with('head_title', $new->vars()->title)
             ->with('head_description', $new->vars()->description)
             ->with('head_image', $new->getHeadImage())
 

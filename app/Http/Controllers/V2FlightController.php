@@ -105,7 +105,7 @@ class V2FlightController extends Controller
         return layout('2col')
 
             ->with('title', trans('content.flight.index.title'))
-            ->with('head_title', $flight->getHeadTitle())
+            ->with('head_title', $flight->vars()->title)
             ->with('head_description', $flight->vars()->description)
             ->with('head_image', $flight->getHeadImage())
 

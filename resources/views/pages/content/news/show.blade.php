@@ -8,8 +8,6 @@
     ])
 @stop
 
-@section('head_title',  $content->getHeadTitle())
-
 @section('head_image', $content->getHeadImage())
 
 @section('content')

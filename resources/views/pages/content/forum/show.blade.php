@@ -2,8 +2,6 @@
 
 @section('title', trans("content.$type.index.title"))
 
-@section('head_title',  $content->getHeadTitle())
-
 @section('head_image', \App\Image::getSocial())
 
 @section('content')
