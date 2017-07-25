@@ -27,6 +27,36 @@ class FormatBodyTest extends TestCase
                 "* Hello\n* World",
                 "<ul>\n<li>Hello</li>\n<li>World</li>\n</ul>",
                 '* are converted to unordered lists',
+            ]
+        ];
+
+        foreach ($cases as $case) {
+            $this->assertEquals($case[1], format_body($case[0]), $case[2]);
+        }
+    }
+
+    public function test_body_links_are_formatted()
+    {
+        $cases = [
+            [
+                'Hello http://google.com',
+                '<p>Hello <a href="http://google.com" target="_blank">http://google.com</a></p>',
+                'External URLs are converted to HTML link tags opening in new windoww',
+            ],
+            [
+                'Hello <a href="http://google.com">Google</a>',
+                '<p>Hello <a href="http://google.com" target="_blank">Google</a></p>',
+                'External HTML link tags are kept as is, opening in a new window',
+            ],
+            [
+                'Hello http://trip.ee',
+                '<p>Hello <a href="http://trip.ee">http://trip.ee</a></p>',
+                'Internal URLs are converted to HTML link tags',
+            ],
+            [
+                'Hello <a href="http://trip.ee">Trip</a>',
+                '<p>Hello <a href="http://trip.ee">Trip</a></p>',
+                'Internal HTML link tags are kept as is',
             ],
             [
                 'Hello [Google](http://google.com)',

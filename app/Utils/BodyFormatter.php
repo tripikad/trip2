@@ -23,17 +23,7 @@ class BodyFormatter
 
     public function links()
     {
-        $this->body = str_replace(' www.', ' http://', $this->body);
-
-        // Modified version of
-        // http://stackoverflow.com/a/5289151
-        // and http://stackoverflow.com/a/12590772
-
-        $pattern = "/(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))(?![^<>]*>)/i";
-
-        if ($filteredBody = preg_replace($pattern, '<a href="$1">$1</a>', $this->body)) {
-            $this->body = $filteredBody;
-        }
+        // $this->body = str_replace(' www.', ' http://', $this->body);
 
         if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
             $this->body = $filteredBody;
