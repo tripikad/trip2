@@ -91,7 +91,7 @@ class V2TravelmateController extends Controller
 
             ->with('title', trans('content.travelmate.index.title'))
             ->with('head_title', $travelmate->getHeadTitle())
-            ->with('head_description', $travelmate->getHeadDescription())
+            ->with('head_description', $travelmate->vars()->description)
             ->with('head_image', Image::getSocial())
 
             ->with('header', region('Header', collect()

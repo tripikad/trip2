@@ -188,7 +188,7 @@ class V2ForumController extends Controller
 
             ->with('title', trans('content.forum.index.title'))
             ->with('head_title', $forum->getHeadTitle())
-            ->with('head_description', $forum->getHeadDescription())
+            ->with('head_description', $forum->vars()->description)
             ->with('head_image', Image::getSocial())
 
             ->with('background', component('BackgroundMap'))

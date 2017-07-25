@@ -47,6 +47,11 @@ class V2ContentVars
         return format_body($this->content->body);
     }
 
+    public function description()
+    {
+        return str_limit(format_description($this->content->body), 200);
+    }
+
     public function created_at()
     {
         return format_date($this->content->created_at);

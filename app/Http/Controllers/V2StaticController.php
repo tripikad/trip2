@@ -19,7 +19,7 @@ class V2StaticController extends Controller
 
             ->with('title', $post->getHeadTitle())
             ->with('head_title', $post->getHeadTitle())
-            ->with('head_description', $post->getHeadDescription())
+            ->with('head_description', $post->vars()->description)
             ->with('head_image', Image::getSocial())
 
             ->with('background', component('BackgroundMap'))
