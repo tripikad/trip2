@@ -14,13 +14,13 @@ class FormatBodyTest extends TestCase
     {
         $cases = [
             [
-                "**Hello** World",
-                "<p><strong>Hello</strong> World</p>",
+                '**Hello** World',
+                '<p><strong>Hello</strong> World</p>',
                 'Double asterisks are converted to HTML strong tag',
             ],
             [
-                "_Hello_ World",
-                "<p><em>Hello</em> World</p>",
+                '_Hello_ World',
+                '<p><em>Hello</em> World</p>',
                 'Underlines are converted to HTML em tag',
             ],
             [
