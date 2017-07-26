@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use Carbon\Carbon;
 use Request;
 use App\Image;
 use App\Topic;
@@ -188,6 +189,17 @@ class V2TravelmateController extends Controller
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
         $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
+        $dates = collect();
+
+        foreach(range(0,6) as $i){
+            $start = Carbon::now();
+            $next = $start->addMonths($i)->startOfMonth();
+            $dates->push([
+                'datetime' => $next, // 2017-08-01 00:00:00.000000
+                'title' => $start->format('M Y') . ($i > 5 ? ' ja edasi' : '')// Oct 2017
+            ]);
+        }
+
         return layout('2col')
 
             ->with('narrow', true)
@@ -234,6 +246,10 @@ class V2TravelmateController extends Controller
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
                         ->push('<div style="border-radius: 4px; opacity: 0.2; height: 3rem; border: 2px dashed black; font-family: Sailec; display: flex; align-items: center; justify-content: center;">Alustan reisi kuupäeval (komponent)</div>')
+                        ->push(component('TravelMateStart')
+                            ->with('dates', $dates)
+                            ->with('value', $active)
+                        )
                         ->push(component('FormTextfield')
                             ->is('large')
                             ->with('title', trans('content.travelmate.edit.field.duration.title'))
