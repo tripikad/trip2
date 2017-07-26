@@ -71,8 +71,8 @@ function backToAnchor($anchor)
 }
 
 function createlink($route, $title, $blank = false)
- {
+{
     $target = $blank ? 'target="_blank"' : '';
 
     return '<a href="'.$route.'" '.$target.'>'.$title.'</a>';
- }
+}
