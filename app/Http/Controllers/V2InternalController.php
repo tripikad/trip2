@@ -107,8 +107,6 @@ class V2InternalController extends Controller
 
     public function create()
     {
-        // return App::make('App\Http\Controllers\ContentController')
-        //    ->create('blog');
 
         return layout('1col')
 
@@ -156,32 +154,32 @@ class V2InternalController extends Controller
 
     public function store()
     {
-        // return App::make('App\Http\Controllers\ContentController')
-        //    ->store(request(), 'internal');
 
         $loggedUser = request()->user();
 
-        $fields = collect([
+        $rules = [
             'title' => 'required',
-            'body' => 'required',
+            'body' => 'required'
+        ];
+
+        $this->validate(request(), $rules);
+
+        $internal = $loggedUser->contents()->create([
+            'title' => request()->title,
+            'body' => request()->body,
+            'type' => 'internal',
+            'status' => '1',
         ]);
 
-        $this->validate(request(), $fields->toArray());
-
-        $blog = $loggedUser->contents()->create(
-            collect(request($fields->keys()->toArray()))
-                ->put('type', 'internal')
-                ->put('status', 1)
-                ->toArray()
-        );
-
-        return redirect()->route('internal.index');
+        return redirect()
+            ->route('internal.index')
+            ->with('info', trans('content.store.info', [
+                'title' => $internal->title,
+            ]));
     }
 
     public function edit($id)
     {
-        // return App::make('App\Http\Controllers\ContentController')
-        //    ->edit('internal', $id);
 
         $internal = Content::findOrFail($id);
 
@@ -231,20 +229,26 @@ class V2InternalController extends Controller
 
     public function update($id)
     {
-        // return App::make('App\Http\Controllers\ContentController')
-        //    ->store(request(), 'internal', $id);
 
         $internal = Content::findOrFail($id);
 
-        $fields = collect([
+        $rules = [
             'title' => 'required',
-            'body' => 'required',
-        ]);
+            'body' => 'required'
+        ];
 
-        $this->validate(request(), $fields->toArray());
+        $this->validate(request(), $rules);
 
-        $internal->fill(request($fields->keys()->toArray()))->save();
+        $internal->fill([
+            'title' => request()->title,
+            'body' => request()->body
+        ])
+        ->save();
 
-        return redirect()->route('internal.show', [$internal]);
+        return redirect()
+            ->route('internal.show', [$internal])
+            ->with('info', trans('content.update.info', [
+                'title' => $internal->title,
+            ]));
     }
 }
