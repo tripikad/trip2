@@ -112,7 +112,6 @@ class V2BlogController extends Controller
 
     public function create()
     {
-
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
         return layout('1col')
@@ -164,7 +163,6 @@ class V2BlogController extends Controller
 
     public function store()
     {
-
         $loggedUser = request()->user();
 
         $rules = [
@@ -178,7 +176,7 @@ class V2BlogController extends Controller
             'title' => request()->title,
             'body' => request()->body,
             'type' => 'blog',
-            'status' => 1
+            'status' => 1,
         ]);
 
         $blog->destinations()->attach(request()->destinations);
@@ -188,7 +186,7 @@ class V2BlogController extends Controller
             'title' =>  $blog->title,
             'type' =>  $blog->type,
             'body' =>  $blog->body,
-            'link' => route('blog.show', [$blog])
+            'link' => route('blog.show', [$blog]),
         ]);
 
         return redirect()
@@ -200,7 +198,6 @@ class V2BlogController extends Controller
 
     public function edit($id)
     {
-
         $blog = Content::findOrFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -259,19 +256,18 @@ class V2BlogController extends Controller
 
     public function update($id)
     {
-     
         $blog = Content::findOrFail($id);
 
         $rules = [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
         ];
 
         $this->validate(request(), $rules);
 
         $blog->fill([
             'title' => request()->title,
-            'body' => request()->body
+            'body' => request()->body,
         ])
         ->save();
 
@@ -282,7 +278,7 @@ class V2BlogController extends Controller
             'title' =>  $blog->title,
             'type' =>  $blog->type,
             'body' =>  $blog->body,
-            'link' => route('blog.show', [$blog])
+            'link' => route('blog.show', [$blog]),
         ]);
 
         return redirect()
