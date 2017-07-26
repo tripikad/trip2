@@ -2,10 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\User;
-use App\Content;
 use Tests\BrowserKitTestCase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+use Auth;
+use App\User;
+use App\Content;
 
 class BlogTest extends BrowserKitTestCase
 {
@@ -53,7 +55,7 @@ class BlogTest extends BrowserKitTestCase
                 ]);
     }
 
-    public function test_regular_user_can_see_but_cannot_edit_other_blogs()
+    public function test_regular_user_can_see_but_can_not_edit_other_blogs()
     {
         $regular_user_creating_blog = factory(User::class)->create();
         $regular_user_viewing_blog = factory(User::class)->create();
@@ -78,8 +80,8 @@ class BlogTest extends BrowserKitTestCase
         $this->assertEquals(401, $response->status());
     }
 
-    /*
-    public function test_nonlogged_user_can_see_but_cannot_edit_other_blogs()
+    
+    public function test_nonlogged_user_can_see_but_can_not_edit_other_blogs()
     {
 
         $regular_user_creating_blog = factory(User::class)->create();
@@ -101,9 +103,8 @@ class BlogTest extends BrowserKitTestCase
             ->dontSeeInElement('form', trans('content.action.edit.title'));
 
         $response = $this->call('GET', "blog/$content->id/edit");
-        dd("blog/$content->id/edit");
         $this->assertEquals(401, $response->status());
 
     }
-    */
+
 }
