@@ -2,12 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\BrowserKitTestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
 use Auth;
 use App\User;
 use App\Content;
+use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class InternalTest extends BrowserKitTestCase
 {
@@ -52,9 +51,8 @@ class InternalTest extends BrowserKitTestCase
                     'type' => 'internal',
                     'status' => 1,
                 ]);
-        
     }
-    
+
     public function test_regular_users_can_not_see_and_edit_internal()
     {
         $admin_user_creating_internal = factory(User::class)->create(['role' => 'admin']);
@@ -71,10 +69,10 @@ class InternalTest extends BrowserKitTestCase
         $content = Content::whereTitle('Hello internal title')->first();
 
         $this->actingAs($regular_user_viewing_internal);
-        
+
         $view_response = $this->call('GET', "internal/$content->id");
         $this->assertEquals(401, $view_response->status());
-        
+
         $edit_response = $this->call('GET', "internal/$content->id/edit");
         $this->assertEquals(401, $edit_response->status());
 
@@ -82,10 +80,9 @@ class InternalTest extends BrowserKitTestCase
 
         $view_response = $this->call('GET', "internal/$content->id");
         $this->assertEquals(401, $view_response->status());
-        
+
         $edit_response = $this->call('GET', "internal/$content->id/edit");
         $this->assertEquals(401, $edit_response->status());
-
     }
 
     public function test_nonlogged_users_can_not_see_and_edit_internal()
@@ -106,10 +103,8 @@ class InternalTest extends BrowserKitTestCase
 
         $view_response = $this->call('GET', "internal/$content->id");
         $this->assertEquals(401, $view_response->status());
-        
+
         $edit_response = $this->call('GET', "internal/$content->id/edit");
         $this->assertEquals(401, $edit_response->status());
-
     }
-
 }
