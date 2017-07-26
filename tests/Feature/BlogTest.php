@@ -15,7 +15,7 @@ class BlogTest extends BrowserKitTestCase
     {
         $regular_user_creating_blog = factory(User::class)->create();
 
-            $this->actingAs($regular_user_creating_blog)
+        $this->actingAs($regular_user_creating_blog)
                 ->visit('content/blog')
                 ->click(trans('content.blog.create.title'))
                 // ->seePageIs('$type/$content->id/create')
@@ -32,9 +32,9 @@ class BlogTest extends BrowserKitTestCase
                     'status' => 1,
                 ]);
 
-            $content = Content::whereTitle('Hello blog title')->first();
+        $content = Content::whereTitle('Hello blog title')->first();
 
-            $this->actingAs($regular_user_creating_blog)
+        $this->actingAs($regular_user_creating_blog)
                 ->visit("content/blog/$content->id")
                 ->click(trans('content.action.edit.title'))
                 // ->seePageIs('$type/$content->id/edit')
@@ -55,7 +55,6 @@ class BlogTest extends BrowserKitTestCase
 
     public function test_regular_user_can_see_but_cannot_edit_other_blogs()
     {
-
         $regular_user_creating_blog = factory(User::class)->create();
         $regular_user_viewing_blog = factory(User::class)->create();
 
@@ -67,7 +66,7 @@ class BlogTest extends BrowserKitTestCase
             ->press(trans('content.create.submit.title'));
 
         $content = Content::whereTitle('Hello blog title')->first();
-        
+
         $this->actingAs($regular_user_viewing_blog)
             ->visit("content/blog/$content->id")
             ->see('Hello blog title')
@@ -75,9 +74,8 @@ class BlogTest extends BrowserKitTestCase
             ->dontSeeInElement('form', trans('content.action.edit.title'));
 
         $response = $this->call('GET', "blog/$content->id/edit");
-        
-        $this->assertEquals(401, $response->status());
 
+        $this->assertEquals(401, $response->status());
     }
 
     /*
@@ -94,7 +92,7 @@ class BlogTest extends BrowserKitTestCase
             ->press(trans('content.create.submit.title'));
 
         $content = Content::whereTitle('Hello blog title')->first();
-        
+
         Auth::logout();
 
         $this->visit("content/blog/$content->id")
