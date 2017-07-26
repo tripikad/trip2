@@ -72,6 +72,7 @@ return [
     'store.status.1.info' => ':title on edukalt lisatud.',
     'store.status.0.info' => ':title on lisatud, kuid teistele peidetud. Vajuta lingile "Avalikusta", et näidata seda teistele.',
 
+    'create.info' => ':title on lisatud.',
     'update.info' => ':title on uuendatud.',
 
     'show.isnew' => 'Uus teema',
