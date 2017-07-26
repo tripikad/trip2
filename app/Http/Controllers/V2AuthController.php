@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers;
+
 class V2AuthController extends Controller
 {
     public function loginFormExperiment()
@@ -66,6 +68,7 @@ class V2AuthController extends Controller
             ->with('footer', region('FooterLight'))
             ->render();
     }
+
     public function registerFormExperiment()
     {
         return layout('1colnarrow')
@@ -131,6 +134,7 @@ class V2AuthController extends Controller
             ->with('footer', region('FooterLight'))
             ->render();
     }
+
     public function passwordFormExperiment()
     {
         return layout('1colnarrow')
@@ -170,6 +174,7 @@ class V2AuthController extends Controller
             ->with('footer', region('FooterLight'))
             ->render();
     }
+
     public function resetFormExperiment()
     {
         return layout('1colnarrow')
