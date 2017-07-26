@@ -10,6 +10,7 @@ return [
     'register.field.eula.title' => 'Trip.ee keskkonnaga liitudes nõustun ma :link.',
     'register.field.eula.title.link' => 'kasutajatingimustega',
     'register.submit.title' => 'Registreeri',
+    'register.subhead.title' => 'Liitu Trip.ee reisihuviliste seltskonnaga',
 
     'register.email.subject' => 'Kinnita oma konto',
     'register.email.body.line1' => 'Täname, et liitusid Eesti suurima reisikogukonnaga',
@@ -33,11 +34,17 @@ return [
     'login.field.password.title' => 'Parool',
     'login.field.remember.title' => 'Pea mu logimine meeles',
     'login.submit.title' => 'Logi sisse',
+    'login.not.registered' => 'Pole veel kasutaja? :link',
+    'login.not.registered.link.title' => 'Registreeri siin',
+    'login.not.rembeber.pw' => 'Ei mäleta oma parooli? :link',
 
     'reset.apply.title' => 'Ei mäleta oma parooli?',
+    'reset.apply.subtitle' => 'Sisesta oma e-mail ja me saadame sulle kinnituslingi',
     'reset.apply.title.link' => 'Taasta oma parool siin',
     'reset.apply.field.email.title' => 'Sinu e-post',
     'reset.apply.submit.title' => 'Saada',
+    'reset.login.title' => 'Tuli meelde? :link',
+    'reset.login.link.title' => 'Logi sisse siit',
 
     'reset.password.title' => 'Vali uus parool',
     'reset.password.field.email.title' => 'E-post',
