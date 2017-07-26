@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App;
-use Carbon\Carbon;
 use Request;
 use App\Image;
 use App\Topic;
 use App\Content;
+use Carbon\Carbon;
 use App\Destination;
 
 class V2TravelmateController extends Controller
@@ -191,12 +191,12 @@ class V2TravelmateController extends Controller
 
         $dates = collect();
 
-        foreach(range(0,6) as $i){
+        foreach (range(0, 6) as $i) {
             $start = Carbon::now();
             $next = $start->addMonths($i)->startOfMonth();
             $dates->push([
                 'datetime' => $next, // 2017-08-01 00:00:00.000000
-                'title' => $start->format('M Y') . ($i > 5 ? ' ja edasi' : '')// Oct 2017
+                'title' => $start->format('M Y').($i > 5 ? ' ja edasi' : ''), // Oct 2017
             ]);
         }
 
