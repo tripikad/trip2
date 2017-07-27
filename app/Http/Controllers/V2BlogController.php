@@ -188,7 +188,7 @@ class V2BlogController extends Controller
             'title' =>  $blog->title,
             'type' =>  $blog->type,
             'body' =>  $blog->body,
-            'link' => route('blog.show', [$blog])
+            'link' => route('blog.show', [$blog->slug])
         ]);
 
         return redirect()
@@ -275,7 +275,7 @@ class V2BlogController extends Controller
         ])
         ->save();
 
-        $blog->destinations()->sync(request()->get('destinations', []));
+        $blog->destinations()->sync(request()->destinations ?: []);
 
         Log::info('New content added', [
             'user' =>  $blog->user->name,
