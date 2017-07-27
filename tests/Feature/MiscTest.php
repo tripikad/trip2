@@ -42,7 +42,7 @@ class MiscTest extends BrowserKitTestCase
             ->type('Hola misc titulo', 'title')
             ->type('Hola misc cuerpo', 'body')
             ->press(trans('content.edit.submit.title'))
-            ->seePageIs("foorum/uldfoorum/$content->slug")
+            ->seePageIs("foorum/uldfoorum/$content->slug") // FIXME
             ->see('Hola misc titulo')
             ->see('Hola misc cuerpo')
             ->seeInDatabase('contents', [
