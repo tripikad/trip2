@@ -100,7 +100,7 @@ class ExpatTest extends BrowserKitTestCase
             ->dontSeeInElement('.MetaLink__title', trans('content.action.edit.title'));
 
         $response = $this->call('GET', "forum/$content->id/edit");
-        
+
         $this->assertEquals(401, $response->status());
     }
 }
