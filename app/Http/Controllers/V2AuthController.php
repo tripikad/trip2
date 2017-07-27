@@ -24,7 +24,7 @@ class V2AuthController extends Controller
                         'link' => format_link(
                             route('register.form'),
                             trans('auth.login.not.registered.link.title')
-                        )
+                        ),
                     ]))
                 )
             )
@@ -69,7 +69,7 @@ class V2AuthController extends Controller
                     'link' => format_link(
                         route('reset.apply.form'),
                         trans('auth.reset.apply.title.link')
-                    )
+                    ),
                 ]))
             ))
             ->with('footer', region('FooterLight'))
@@ -140,7 +140,7 @@ class V2AuthController extends Controller
                     'link' => format_link(
                         route('static.show.id', [25151]),
                         trans('auth.register.field.eula.title.link')
-                    )
+                    ),
                 ]))
             ))
             ->with('footer', region('FooterLight'))
