@@ -186,7 +186,7 @@ class V2BlogController extends Controller
             'title' =>  $blog->title,
             'type' =>  $blog->type,
             'body' =>  $blog->body,
-            'link' => route('blog.show', [$blog->slug])
+            'link' => route('blog.show', [$blog->slug]),
         ]);
 
         return redirect()
