@@ -18,41 +18,41 @@ class InternalTest extends BrowserKitTestCase
         $admin_user_creating_internal = factory(User::class)->create(['role' => 'admin']);
 
         $this->actingAs($admin_user_creating_internal)
-                ->visit('internal')
-                ->click(trans('content.internal.create.title'))
-                ->seePageIs('internal/create')
-                ->type('Hello internal title', 'title')
-                ->type('Hello internal body', 'body')
-                ->press(trans('content.create.submit.title'))
-                ->seePageIs('internal/create')
-                ->see('Hello internal title')
-                ->seeInDatabase('contents', [
-                    'user_id' => $admin_user_creating_internal->id,
-                    'title' => 'Hello internal title',
-                    'body' => 'Hello internal body',
-                    'type' => 'internal',
-                    'status' => 1,
-                ]);
+            ->visit('internal')
+            ->click(trans('content.internal.create.title'))
+            ->seePageIs('internal/create')
+            ->type('Hello internal title', 'title')
+            ->type('Hello internal body', 'body')
+            ->press(trans('content.create.submit.title'))
+            ->seePageIs('internal/create')
+            ->see('Hello internal title')
+            ->seeInDatabase('contents', [
+                'user_id' => $admin_user_creating_internal->id,
+                'title' => 'Hello internal title',
+                'body' => 'Hello internal body',
+                'type' => 'internal',
+                'status' => 1,
+            ]);
 
         $content = Content::whereTitle('Hello internal title')->first();
 
         $this->actingAs($admin_user_creating_internal)
-                ->visit("internal/$content->id")
-                ->click(trans('content.action.edit.title'))
-                ->seePageIs("internal/$content->id/edit")
-                ->type('Hola blog titulo', 'title')
-                ->type('Hola blog cuerpo', 'body')
-                ->press(trans('content.edit.submit.title'))
-                ->seePageIs("internal/$content->id")
-                ->see('Hola blog titulo')
-                ->see('Hola blog cuerpo')
-                ->seeInDatabase('contents', [
-                    'user_id' => $admin_user_creating_internal->id,
-                    'title' => 'Hola blog titulo',
-                    'body' => 'Hola blog cuerpo',
-                    'type' => 'internal',
-                    'status' => 1,
-                ]);
+            ->visit("internal/$content->id")
+            ->click(trans('content.action.edit.title'))
+            ->seePageIs("internal/$content->id/edit")
+            ->type('Hola blog titulo', 'title')
+            ->type('Hola blog cuerpo', 'body')
+            ->press(trans('content.edit.submit.title'))
+            ->seePageIs("internal/$content->id")
+            ->see('Hola blog titulo')
+            ->see('Hola blog cuerpo')
+            ->seeInDatabase('contents', [
+                'user_id' => $admin_user_creating_internal->id,
+                'title' => 'Hola blog titulo',
+                'body' => 'Hola blog cuerpo',
+                'type' => 'internal',
+                'status' => 1,
+            ]);
         
     }
     
