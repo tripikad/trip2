@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App;
 use Cache;
 use App\Content;
 
@@ -107,7 +106,6 @@ class V2InternalController extends Controller
 
     public function create()
     {
-
         return layout('1col')
 
             ->with('background', component('BackgroundMap'))
@@ -154,12 +152,11 @@ class V2InternalController extends Controller
 
     public function store()
     {
-
         $loggedUser = request()->user();
 
         $rules = [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
         ];
 
         $this->validate(request(), $rules);
@@ -180,7 +177,6 @@ class V2InternalController extends Controller
 
     public function edit($id)
     {
-
         $internal = Content::findOrFail($id);
 
         return layout('1col')
@@ -229,19 +225,18 @@ class V2InternalController extends Controller
 
     public function update($id)
     {
-
         $internal = Content::findOrFail($id);
 
         $rules = [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
         ];
 
         $this->validate(request(), $rules);
 
         $internal->fill([
             'title' => request()->title,
-            'body' => request()->body
+            'body' => request()->body,
         ])
         ->save();
 
