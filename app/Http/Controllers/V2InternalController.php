@@ -2,11 +2,6 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-use Cache;
-=======
-use App;
->>>>>>> master
 use App\Content;
 
 class V2InternalController extends Controller

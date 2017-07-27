@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Auth;
 use App\User;
 use App\Content;
 use Tests\BrowserKitTestCase;
@@ -51,5 +52,58 @@ class ForumTest extends BrowserKitTestCase
                 'type' => 'forum',
                 'status' => 1,
             ]);
+
     }
+
+    /*
+    public function test_regular_user_can_see_but_can_not_edit_other_forum_posts()
+    {
+        $regular_user_creating_forum = factory(User::class)->create();
+        $regular_user_viewing_forum = factory(User::class)->create();
+
+        $this->actingAs($regular_user_creating_forum)
+            ->visit('foorum/uldfoorum')
+            ->click(trans('content.blog.create.title'))
+            ->type('Hello blog title', 'title')
+            ->type('Hello blog body', 'body')
+            ->press(trans('content.create.submit.title'));
+
+        $content = Content::whereTitle('Hello blog title')->first();
+
+        $this->actingAs($regular_user_viewing_blog)
+            ->visit("reisikirjad/$content->slug")
+            ->see('Hello blog title')
+            ->see('Hello blog body')
+            ->dontSeeInElement('.MetaLink__title', trans('content.action.edit.title'));
+
+        $response = $this->call('GET', "blog/$content->id/edit");
+
+        $this->assertEquals(401, $response->status());
+    }
+    */
+
+    public function test_nonlogged_user_can_see_but_can_not_edit_other_blogs()
+    {
+        $regular_user_creating_blog = factory(User::class)->create();
+
+        $this->actingAs($regular_user_creating_blog)
+            ->visit('foorum/uldfoorum')
+            ->click(trans('content.forum.create.title'))
+            ->type('Hello forum title', 'title')
+            ->type('Hello forum body', 'body')
+            ->press(trans('content.create.submit.title'));
+
+        $content = Content::whereTitle('Hello forum title')->first();
+
+        Auth::logout();
+
+        $this->visit("foorum/uldfoorum/$content->slug")
+            ->see('Hello forum title')
+            ->see('Hello forum body')
+            ->dontSeeInElement('.MetaLink__title', trans('content.action.edit.title'));
+
+        $response = $this->call('GET', "forum/$content->id/edit");
+        $this->assertEquals(401, $response->status());
+    }
+
 }
