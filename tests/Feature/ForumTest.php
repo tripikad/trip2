@@ -52,10 +52,8 @@ class ForumTest extends BrowserKitTestCase
                 'type' => 'forum',
                 'status' => 1,
             ]);
-
     }
 
-    
     public function test_regular_user_can_see_but_can_not_edit_other_forum_posts()
     {
         $regular_user_creating_forum = factory(User::class)->create();
@@ -80,7 +78,6 @@ class ForumTest extends BrowserKitTestCase
 
         $this->assertEquals(401, $response->status());
     }
-    
 
     public function test_nonlogged_user_can_see_but_can_not_edit_other_blogs()
     {
@@ -105,5 +102,4 @@ class ForumTest extends BrowserKitTestCase
         $response = $this->call('GET', "forum/$content->id/edit");
         $this->assertEquals(401, $response->status());
     }
-
 }
