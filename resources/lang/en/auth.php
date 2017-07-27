@@ -36,7 +36,7 @@ return [
     'login.submit.title' => 'Login',
     'login.not.registered' => 'Not a user? :link',
     'login.not.registered.link.title' => 'Register here',
-    'login.not.rembeber.pw' => 'Does not rembember password? :link',
+    'login.forgot.password' => 'Does not rembember password? :link',
 
     'reset.apply.title' => 'Reset password',
     'reset.apply.subtitle' => 'Enter your email and we will send you a confirmation link',

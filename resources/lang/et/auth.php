@@ -36,7 +36,7 @@ return [
     'login.submit.title' => 'Logi sisse',
     'login.not.registered' => 'Pole veel kasutaja? :link',
     'login.not.registered.link.title' => 'Registreeri siin',
-    'login.not.rembeber.pw' => 'Ei mäleta oma parooli? :link',
+    'login.forgot.password' => 'Ei mäleta oma parooli? :link',
 
     'reset.apply.title' => 'Ei mäleta oma parooli?',
     'reset.apply.subtitle' => 'Sisesta oma e-mail ja me saadame sulle kinnituslingi',

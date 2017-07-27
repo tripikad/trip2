@@ -21,7 +21,7 @@ class V2AuthController extends Controller
                     ->is('center')
                     ->is('small')
                     ->with('title', trans('auth.login.not.registered',
-                        ['link' => createlink(route('register.form'), trans('auth.login.not.registered.link.title'))]
+                        ['link' => format_link(route('register.form'), trans('auth.login.not.registered.link.title'))]
                     ))
                 )
             )
@@ -61,8 +61,8 @@ class V2AuthController extends Controller
                 ))
             )
             ->with('bottom', collect()->push(component('MetaLink')
-                ->with('title', trans('auth.login.not.rembeber.pw',
-                        ['link' => createlink(route('reset.apply.form'), trans('auth.reset.apply.title.link'))])
+                ->with('title', trans('auth.login.forgot.password',
+                        ['link' => format_link(route('reset.apply.form'), trans('auth.reset.apply.title.link'))])
                 )
             ))
             ->with('footer', region('FooterLight'))
@@ -128,7 +128,7 @@ class V2AuthController extends Controller
             )
             ->with('bottom', collect()->push(component('MetaLink')
                 ->with('title', trans('auth.register.field.eula.title', [
-                    'link' => createlink(route('static.show.id', [25151]), trans('auth.register.field.eula.title.link')),
+                    'link' => format_link(route('static.show.id', [25151]), trans('auth.register.field.eula.title.link')),
                 ]))
             ))
             ->with('footer', region('FooterLight'))
@@ -168,7 +168,7 @@ class V2AuthController extends Controller
             )
             ->with('bottom', collect()->push(component('MetaLink')
                 ->with('title', trans('auth.reset.login.title', [
-                    'link' => createlink(route('login.form'), trans('auth.reset.login.link.title')),
+                    'link' => format_link(route('login.form'), trans('auth.reset.login.link.title')),
                 ]))
             ))
             ->with('footer', region('FooterLight'))
