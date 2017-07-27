@@ -329,14 +329,6 @@ class Content extends Model
         return $this->title;
     }
 
-    public function getHeadDescription()
-    {
-        $description = str_replace(["\n", "\t", "\r"], '', strip_tags($this->body));
-        $description = preg_replace("/\[\[([0-9]+)\]\]/", '', $description);
-
-        return str_limit(trim($description), 200);
-    }
-
     public function getHeadImage()
     {
         return $this->imagePreset('large');

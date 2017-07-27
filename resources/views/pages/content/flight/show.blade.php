@@ -2,10 +2,6 @@
 
 @section('title', trans("content.$type.index.title"))
 
-@section('head_title',  $content->getHeadTitle())
-
-@section('head_description', $content->getHeadDescription())
-
 @section('head_image', $content->getHeadImage())
 
 @section('header')
