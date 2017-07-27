@@ -125,7 +125,7 @@ class Content extends Model
             'comments',
             'comments.user',
             'destinations',
-            'topics'
+            'topics',
         ];
 
         if (count($additional_eager)) {
