@@ -20,6 +20,7 @@ class UnreadContent extends Model
     public function getUnread(Content $content)
     {
         $unread_timestamp = $this->read_at->timestamp;
+        $content_unread = false;
 
         // To avoid 99999 unread issue - quick fix - can be removed 2-3 weeks after live merge
         $except_timestamp = Carbon::now()->subDays(2)->timestamp;
@@ -33,11 +34,17 @@ class UnreadContent extends Model
 
             if ($content_created_at_timestamp > $unread_timestamp && $except_timestamp < $content_created_at_timestamp) {
                 $unread_data['count'] += 1;
+                $content_unread = true;
             }
 
             if ($content->comments) {
                 foreach ($content->comments as &$comment) {
                     if ($comment->created_at->timestamp > $unread_timestamp && $except_timestamp < $comment->created_at->timestamp) {
+                        if ($content_unread) {
+                            --$unread_data['count'];
+                            $content_unread = false;
+                        }
+
                         if (! $unread_data['first_comment_id']) {
                             $unread_data['first_comment_id'] = $comment->id;
                         }
@@ -54,6 +61,7 @@ class UnreadContent extends Model
     public static function getUnreadContent(Content $content)
     {
         $unread_content = $content->unread_content;
+        $content_unread = false;
 
         $unread_data = [
             'count' => 0,
@@ -68,11 +76,17 @@ class UnreadContent extends Model
 
             if ($except_timestamp < $content_created_at_timestamp) {
                 $unread_data['count'] += 1;
+                $content_unread = true;
             }
 
             if ($content->comments) {
                 foreach ($content->comments as &$comment) {
                     if ($except_timestamp < $comment->created_at->timestamp) {
+                        if ($content_unread) {
+                            --$unread_data['count'];
+                            $content_unread = false;
+                        }
+
                         if (! $unread_data['first_comment_id']) {
                             $unread_data['first_comment_id'] = $comment->id;
                         }
