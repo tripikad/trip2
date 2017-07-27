@@ -98,11 +98,6 @@ return [
             'connection' => 'default',
         ],
 
-        'permanent' => [
-            'driver' => env('PERMANENT_CACHE_DRIVER', 'array'),
-            'connection' => 'permanent',
-        ],
-
     ],
 
     /*

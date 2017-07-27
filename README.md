@@ -46,7 +46,6 @@ add this to `.env` files:
 
 ```
 CACHE_DRIVER=redis
-PERMANENT_CACHE_DRIVER=redis
 ```
 
 ### Nginx cache

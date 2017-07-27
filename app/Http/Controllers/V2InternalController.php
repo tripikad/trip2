@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App;
-use Cache;
 use App\Content;
 
 class V2InternalController extends Controller
@@ -63,13 +62,6 @@ class V2InternalController extends Controller
         $forum = Content::findOrFail($slug);
 
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
-
-        // Clear the unread cache
-
-        if ($loggedUser) {
-            $key = 'new_'.$forum->id.'_'.$loggedUser->id;
-            Cache::store('permanent')->forget($key);
-        }
 
         return layout('2col')
 
