@@ -196,7 +196,8 @@ class V2TravelmateController extends Controller
             $nextDate = $now->addMonths($i)->startOfMonth();
             $dates->push([
                 'datetime' => $nextDate, // 2017-08-01 00:00:00.000000
-                'title' => $nextDate->format('M Y').($i > 5 ? ' ja edasi' : ''), // Oct 2017
+                'title' => $nextDate->format('M Y')
+                    .($i > 5 ? ' '.trans('content.travelmate.edit.field.start_at.suffix') : ''), // Oct 2017
             ]);
         }
 
@@ -245,7 +246,6 @@ class V2TravelmateController extends Controller
                             ->with('options', $topics)
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
-                        ->push('<div style="border-radius: 4px; opacity: 0.2; height: 3rem; border: 2px dashed black; font-family: Sailec; display: flex; align-items: center; justify-content: center;">Alustan reisi kuupäeval (komponent)</div>')
                         ->push(component('TravelmateStart')
                             ->with('dates', $dates)
                         )

@@ -48,6 +48,7 @@ $black: #000;
 /* Grays */
 
 $gray-lighter: hsl(204, 6%, 97%);
+$gray-lighter-hover: hsl(204, 6%, 72%);
 
 $gray-light: hsl(204, 6%, 88%);
 $gray-light-hover: hsl(204, 6%, 72%);

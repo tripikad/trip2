@@ -1,7 +1,6 @@
 <template>
 
     <div class="TravelmateStart" :class="isclasses">
-        <div class="TravelmateStart__heading">{{ title }}</div>
         <div class="TravelmateStart__fields">
 
             <div class="TravelmateStart__field"
