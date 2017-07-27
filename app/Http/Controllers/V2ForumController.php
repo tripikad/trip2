@@ -212,7 +212,7 @@ class V2ForumController extends Controller
             ))
 
             ->with('content', collect()
-                ->push(region('ForumPost', $forum, ($forum->type == 'misc' ? 'forum.edit.misc' : 'forum.edit')))
+                ->push(region('ForumPost', $forum, 'forum.edit'))
                 ->pushWhen(
                     $forum->comments->count() > 1,
                     component('BlockHorizontal')

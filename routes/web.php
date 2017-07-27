@@ -151,24 +151,6 @@ Route::put('forum/{id}/update', 'V2ForumController@update')
     ->name('forum.update')
     ->middleware('role:admin,contentowner');
 
-// Misc forum
-
-Route::get('forum/create/vaba-teema', 'V2MiscController@create')
-    ->name('forum.create.misc')
-    ->middleware('role:regular');
-
-Route::post('forum/store/vaba-teema', 'V2MiscController@store')
-    ->name('forum.store.misc')
-    ->middleware('role:regular');
-
-Route::get('forum/vaba-teema/{id}/edit', 'V2MiscController@edit')
-    ->name('forum.edit.misc')
-    ->middleware('role:regular');
-
-Route::post('forum/vaba-teema/{id}/update', 'V2MiscController@update')
-    ->name('forum.update.misc')
-    ->middleware('role:regular');
-
 // Static
 
 Route::get('{slug}', 'V2StaticController@show')
