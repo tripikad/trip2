@@ -69,3 +69,10 @@ function backToAnchor($anchor)
 {
     return Redirect::to(URL::previous().$anchor);
 }
+
+function format_link($route, $title, $blank = false)
+{
+    $target = $blank ? 'target="_blank"' : '';
+
+    return '<a href="'.$route.'" '.$target.'>'.$title.'</a>';
+}
