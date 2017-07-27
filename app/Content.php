@@ -116,22 +116,28 @@ class Content extends Model
             ->simplePaginate($take);
     }
 
-    public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at')
+    public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at', array $additional_eager = [])
     {
+        $eager = [
+            'images',
+            'user',
+            'user.images',
+            'comments',
+            'comments.user',
+            'destinations',
+            'topics',
+        ];
+
+        if (count($additional_eager)) {
+            $eager = array_merge($eager, $additional_eager);
+        }
+
         return $query
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
             ->orderBy($order, 'desc')
-            ->with(
-                'images',
-                'user',
-                'user.images',
-                'comments',
-                'comments.user',
-                'destinations',
-                'topics'
-            )
+            ->with($eager)
             ->distinct()
             ->get();
     }

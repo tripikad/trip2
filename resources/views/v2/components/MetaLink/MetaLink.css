@@ -14,6 +14,10 @@
 	color: $white;
 }
 
+.MetaLink__title  a {
+    color: $blue;
+}
+
 .MetaLink--white a .MetaLink__title:hover {
     color: $white-hover;
 }

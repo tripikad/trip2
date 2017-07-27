@@ -177,6 +177,8 @@ return [
     'travelmate.edit.field.start_at.title' => 'Starting the trip at',
     'travelmate.edit.field.start_at.help' => '',
 
+    'travelmate.edit.field.start_at.suffix' => 'ja beyond',
+
     'travelmate.edit.field.duration.title' => 'Trip duration',
     'travelmate.edit.field.duration.help' => '',
 

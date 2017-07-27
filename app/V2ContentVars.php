@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Cache;
 use Exception;
 
 class V2ContentVars
@@ -60,17 +59,6 @@ class V2ContentVars
     public function commentCount()
     {
         return count($this->content->comments);
-    }
-
-    private function getUnreadCache()
-    {
-        if ($user = request()->user()) {
-            $key = 'new_'.$this->content->id.'_'.$user->id;
-
-            return Cache::store('permanent')->get($key);
-        }
-
-        return false;
     }
 
     public function isNew()
