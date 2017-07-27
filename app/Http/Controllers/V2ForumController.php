@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use Log;
 use Request;
 use App\User;
 use App\Image;
@@ -34,12 +35,12 @@ class V2ForumController extends Controller
         return $this->index('misc');
     }
 
-    private function index($forumType)
+    private function index($type)
     {
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
-        $forums = Content::getLatestPagedItems($forumType, false, $currentDestination, $currentTopic, 'updated_at');
+        $forums = Content::getLatestPagedItems($type, false, $currentDestination, $currentTopic, 'updated_at');
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -49,9 +50,9 @@ class V2ForumController extends Controller
 
         return layout('2col')
 
-            ->with('title', trans("content.$forumType.index.title"))
-            ->with('head_title', trans("content.$forumType.index.title"))
-            ->with('head_description', trans("site.description.$forumType"))
+            ->with('title', trans("content.$type.index.title"))
+            ->with('head_title', trans("content.$type.index.title"))
+            ->with('head_description', trans("site.description.$type"))
             ->with('head_image', Image::getSocial())
 
             ->with('background', component('BackgroundMap'))
@@ -60,12 +61,12 @@ class V2ForumController extends Controller
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
                     ->is('gray')
-                    ->with('title', trans("content.$forumType.index.title"))
+                    ->with('title', trans("content.$type.index.title"))
                 )
                 ->push(component('BlockHorizontal')
                     ->with('content', region('ForumLinks'))
                 )
-                ->pushWhen($forumType != 'misc', region(
+                ->pushWhen($type != 'misc', region(
                     'FilterHorizontal',
                     $destinations,
                     $topics,
@@ -84,7 +85,7 @@ class V2ForumController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(region('ForumAbout', $forumType))
+                ->push(region('ForumAbout', $type))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
@@ -158,7 +159,7 @@ class V2ForumController extends Controller
             abort(404);
         }
 
-        $forumType = $forum->type;
+        $type = $forum->type;
 
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
@@ -234,7 +235,7 @@ class V2ForumController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->push(region('ForumAbout', $forumType))
+                ->push(region('ForumAbout', $type))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
@@ -249,13 +250,7 @@ class V2ForumController extends Controller
             ->render();
     }
 
-    public function create()
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->create('forum');
-    }
-
-    public function createExperiment()
+    public function create($type = 'forum')
     {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
         $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
@@ -284,12 +279,12 @@ class V2ForumController extends Controller
                 )
                 ->push(component('Form')
                     ->with('id', 'ForumCreateForm')
-                    //->with('route', route('forum.store'))
+                    ->with('route', route('forum.store'))
                     ->with('fields', collect()
                         ->push(component('FormRadio')
                             ->with('name', 'type')
-                            ->with('value', 'forum')
-                            ->with('options', collect(['forum', 'buysell', 'expat'])
+                            ->with('value', $type)
+                            ->with('options', collect(['forum', 'buysell', 'expat', 'misc'])
                                 ->map(function ($type) {
                                     return collect()
                                         ->put('id', $type)
@@ -309,27 +304,19 @@ class V2ForumController extends Controller
                             ->with('value', old('title'))
                             ->with('rows', 20)
                         )
-                        ->push(component('FormSelectMultiple')
+                        ->pushWhen($type != 'misc', component('FormSelectMultiple')
                             ->with('name', 'destinations')
                             ->with('options', $destinations)
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
                         )
-                        ->push(component('FormSelectMultiple')
+                        ->pushWhen($type != 'misc', component('FormSelectMultiple')
                             ->with('name', 'topics')
                             ->with('options', $topics)
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
                         ->push(component('FormButton')
-                            ->with('disabled', true)
                             ->with('title', trans('content.create.submit.title'))
                         )
-                        /*
-                        ->push(component('FormButtonProcess')
-                            ->with('id', 'ForumCreateForm')
-                            ->with('title', trans('content.create.submit.title'))
-                            ->with('processingtitle', trans('content.create.submitting.title'))
-                        )
-                        */
 
                     )
                 )
@@ -358,8 +345,42 @@ class V2ForumController extends Controller
 
     public function store()
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'forum');
+    
+        $loggedUser = request()->user();
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+            'type' => 'in:forum,buysell,expat,misc',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $forum = $loggedUser->contents()->create([
+            'title' => request()->title,
+            'body' => request()->body,
+            'type' => request()->type,
+            'status' => 1,
+        ]);
+
+        if ($forum->type != 'misc') {
+            $forum->destinations()->attach(request()->destinations);
+            $forum->topics()->attach(request()->topics);
+        }
+        
+        Log::info('New content added', [
+            'user' =>  $forum->user->name,
+            'title' =>  $forum->title,
+            'type' =>  $forum->type,
+            'body' =>  $forum->body,
+            'link' => route("$forum->type.show", [$forum->slug]),
+        ]);
+
+        return redirect()
+            ->route("$forum->type.index")
+            ->with('info', trans('content.store.info', [
+                'title' => $forum->title,
+            ]));
     }
 
     public function edit($id)

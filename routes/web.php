@@ -135,7 +135,7 @@ Route::get('foorum/elu-valimaal/{slug}', 'V2ForumController@show')
 Route::get('foorum/vaba-teema/{slug}', 'V2ForumController@show')
     ->name('misc.show');
 
-Route::get('forum/create', 'V2ForumController@create')
+Route::get('forum/create/{type}', 'V2ForumController@create')
     ->name('forum.create')
     ->middleware('role:regular');
 

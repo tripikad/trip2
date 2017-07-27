@@ -19,7 +19,7 @@ class ForumTest extends BrowserKitTestCase
         $this->actingAs($regular_user_creating_forum)
             ->visit('foorum/uldfoorum')
             ->click(trans('content.forum.create.title'))
-            ->seePageIs('forum/create')
+            ->seePageIs('forum/create/forum')
             ->type('Hello forum title', 'title')
             ->type('Hello forum body', 'body')
             ->press(trans('content.create.submit.title'))
