@@ -209,7 +209,7 @@ Route::get('blog/{id}/edit', 'V2BlogController@edit')
     ->name('blog.edit')
     ->middleware('role:admin,contentowner');
 
-Route::post('blog/{id}/update', 'V2BlogController@update')
+Route::put('blog/{id}/update', 'V2BlogController@update')
     ->name('blog.update')
     ->middleware('role:admin,contentowner');
 
