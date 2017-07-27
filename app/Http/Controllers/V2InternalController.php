@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App;
-use Cache;
 use App\Content;
 
 class V2InternalController extends Controller
