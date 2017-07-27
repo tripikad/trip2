@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Auth;
 use App\User;
 use App\Content;
 use Tests\BrowserKitTestCase;
@@ -14,7 +13,6 @@ class ForumTest extends BrowserKitTestCase
 
     public function test_regular_user_can_create_forum_post()
     {
-
         $regular_user_creating_forum = factory(User::class)->create();
 
         $this->actingAs($regular_user_creating_forum)

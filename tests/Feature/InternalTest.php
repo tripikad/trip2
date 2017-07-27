@@ -52,7 +52,6 @@ class InternalTest extends BrowserKitTestCase
                 'type' => 'internal',
                 'status' => 1,
             ]);
-        
     }
 
     public function test_regular_users_can_not_see_and_edit_internal()
