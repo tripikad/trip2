@@ -1,13 +1,13 @@
 <template>
 
-    <div class="TravelMateStart" :class="isclasses">
-        <div class="TravelMateStart__heading">{{ title }}</div>
-        <div class="TravelMateStart__fields">
+    <div class="TravelmateStart" :class="isclasses">
+        <div class="TravelmateStart__heading">{{ title }}</div>
+        <div class="TravelmateStart__fields">
 
-            <div class="TravelMateStart__field"
+            <div class="TravelmateStart__field"
                     v-for="(date, index) in dates"
                     @click="atClick(index)"
-                    :class="{ 'TravelMateStart--active': activeIndex === index }">
+                    :class="{ 'TravelmateStart--active': activeIndex === index }">
                 {{ date.title }}
             </div>
 
@@ -45,7 +45,9 @@
 
         mounted() {
             this.activeIndex = this.value;
-            return this.localValue = this.value ?  this.dates[this.value].datetime.date : this.dates[0].datetime.date;
+            return this.localValue = this.value
+                ?  this.dates[this.value].datetime.date
+                : this.dates[0].datetime.date;
         }
 
     }
