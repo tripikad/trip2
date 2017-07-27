@@ -56,6 +56,7 @@ return [
     'store.status.1.info' => ':title has been added',
     'store.status.0.info' => ':title has been added but its unpublished for now. Publish it to make it visible to everybody.',
 
+    'create.info' => ':title has been created',
     'update.info' => ':title has been updated',
 
     'show.isnew' => 'New',

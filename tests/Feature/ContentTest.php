@@ -19,7 +19,7 @@ class ContentTest extends BrowserKitTestCase
         parent::setUp();
 
         $this->publicContentTypes = [
-            'blog',
+            //'blog',
             'forum',
             'expat',
             'buysell',
