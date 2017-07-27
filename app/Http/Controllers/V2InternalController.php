@@ -64,13 +64,6 @@ class V2InternalController extends Controller
 
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
-        // Clear the unread cache
-
-        if ($loggedUser) {
-            $key = 'new_'.$forum->id.'_'.$loggedUser->id;
-            Cache::store('permanent')->forget($key);
-        }
-
         return layout('2col')
 
             ->with('background', component('BackgroundMap'))

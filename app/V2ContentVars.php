@@ -62,17 +62,6 @@ class V2ContentVars
         return count($this->content->comments);
     }
 
-    private function getUnreadCache()
-    {
-        if ($user = request()->user()) {
-            $key = 'new_'.$this->content->id.'_'.$user->id;
-
-            return Cache::store('permanent')->get($key);
-        }
-
-        return false;
-    }
-
     public function isNew()
     {
         if (! $this->unreadData) {
