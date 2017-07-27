@@ -17,12 +17,13 @@ class BlogTest extends BrowserKitTestCase
         $regular_user_creating_blog = factory(User::class)->create();
 
         $this->actingAs($regular_user_creating_blog)
-                ->visit('content/blog')
+                ->visit('reisikirjad')
                 ->click(trans('content.blog.create.title'))
-                // ->seePageIs('$type/$content->id/create')
+                ->seePageIs('blog/create')
                 ->type('Hello blog title', 'title')
                 ->type('Hello blog body', 'body')
                 ->press(trans('content.create.submit.title'))
+                ->seePageIs('reisikirjad')
                 ->see('Hello blog title')
                 ->see('Hello blog body')
                 ->seeInDatabase('contents', [
@@ -36,13 +37,13 @@ class BlogTest extends BrowserKitTestCase
         $content = Content::whereTitle('Hello blog title')->first();
 
         $this->actingAs($regular_user_creating_blog)
-                ->visit("content/blog/$content->id")
+                ->visit("reisikirjad/$content->slug")
                 ->click(trans('content.action.edit.title'))
-                // ->seePageIs('$type/$content->id/edit')
+                ->seePageIs("blog/$content->id/edit")
                 ->type('Hola blog titulo', 'title')
                 ->type('Hola blog cuerpo', 'body')
                 ->press(trans('content.edit.submit.title'))
-                //->seePageIs(config('sluggable.contentTypeMapping')[$content->type].'/'.$content->slug)
+                ->seePageIs("reisikirjad/$content->slug")
                 ->see('Hola blog titulo')
                 ->see('Hola blog cuerpo')
                 ->seeInDatabase('contents', [
@@ -60,7 +61,7 @@ class BlogTest extends BrowserKitTestCase
         $regular_user_viewing_blog = factory(User::class)->create();
 
         $this->actingAs($regular_user_creating_blog)
-            ->visit('content/blog')
+            ->visit('reisikirjad')
             ->click(trans('content.blog.create.title'))
             ->type('Hello blog title', 'title')
             ->type('Hello blog body', 'body')
@@ -69,10 +70,10 @@ class BlogTest extends BrowserKitTestCase
         $content = Content::whereTitle('Hello blog title')->first();
 
         $this->actingAs($regular_user_viewing_blog)
-            ->visit("content/blog/$content->id")
+            ->visit("reisikirjad/$content->slug")
             ->see('Hello blog title')
             ->see('Hello blog body')
-            ->dontSeeInElement('form', trans('content.action.edit.title'));
+            ->dontSeeInElement('.MetaLink__title', trans('content.action.edit.title'));
 
         $response = $this->call('GET', "blog/$content->id/edit");
 
@@ -97,7 +98,7 @@ class BlogTest extends BrowserKitTestCase
         $this->visit("content/blog/$content->id")
             ->see('Hello blog title')
             ->see('Hello blog body')
-            ->dontSeeInElement('form', trans('content.action.edit.title'));
+            ->dontSeeInElement('.MetaLink__title', trans('content.action.edit.title'));
 
         $response = $this->call('GET', "blog/$content->id/edit");
         $this->assertEquals(401, $response->status());
