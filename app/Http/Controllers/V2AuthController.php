@@ -20,9 +20,12 @@ class V2AuthController extends Controller
                 ->push(component('Title')
                     ->is('center')
                     ->is('small')
-                    ->with('title', trans('auth.login.not.registered',
-                        ['link' => format_link(route('register.form'), trans('auth.login.not.registered.link.title'))]
-                    ))
+                    ->with('title', trans('auth.login.not.registered', [
+                        'link' => format_link(
+                            route('register.form'),
+                            trans('auth.login.not.registered.link.title')
+                        )
+                    ]))
                 )
             )
             ->with('content_top', component('Grid3')->with('items', collect()
@@ -56,14 +59,18 @@ class V2AuthController extends Controller
                     )
                     ->push(component('FormButton')
                         ->is('wide')
+                        ->is('large')
                         ->with('title', trans('auth.login.submit.title'))
                     )
                 ))
             )
             ->with('bottom', collect()->push(component('MetaLink')
-                ->with('title', trans('auth.login.forgot.password',
-                        ['link' => format_link(route('reset.apply.form'), trans('auth.reset.apply.title.link'))])
-                )
+                ->with('title', trans('auth.login.forgot.password', [
+                    'link' => format_link(
+                        route('reset.apply.form'),
+                        trans('auth.reset.apply.title.link')
+                    )
+                ]))
             ))
             ->with('footer', region('FooterLight'))
             ->render();
@@ -114,6 +121,7 @@ class V2AuthController extends Controller
                         ->with('title', trans('auth.register.field.email.title'))
                     )
                     ->push(component('FormPassword')
+                        ->is('large')
                         ->with('title', trans('auth.register.field.password.title'))
                     )
                     ->push(component('FormPassword')
@@ -122,13 +130,17 @@ class V2AuthController extends Controller
                     )
                     ->push(component('FormButton')
                         ->is('wide')
+                        ->is('large')
                         ->with('title', trans('auth.register.submit.title'))
                     )
                 ))
             )
             ->with('bottom', collect()->push(component('MetaLink')
                 ->with('title', trans('auth.register.field.eula.title', [
-                    'link' => format_link(route('static.show.id', [25151]), trans('auth.register.field.eula.title.link')),
+                    'link' => format_link(
+                        route('static.show.id', [25151]),
+                        trans('auth.register.field.eula.title.link')
+                    )
                 ]))
             ))
             ->with('footer', region('FooterLight'))
@@ -162,13 +174,17 @@ class V2AuthController extends Controller
                     )
                     ->push(component('FormButton')
                         ->is('wide')
+                        ->is('large')
                         ->with('title', trans('auth.reset.apply.submit.title'))
                     )
                 ))
             )
             ->with('bottom', collect()->push(component('MetaLink')
                 ->with('title', trans('auth.reset.login.title', [
-                    'link' => format_link(route('login.form'), trans('auth.reset.login.link.title')),
+                    'link' => format_link(
+                        route('login.form'),
+                        trans('auth.reset.login.link.title')
+                    ),
                 ]))
             ))
             ->with('footer', region('FooterLight'))
@@ -204,6 +220,7 @@ class V2AuthController extends Controller
                     )
                     ->push(component('FormButton')
                         ->is('wide')
+                        ->is('large')
                         ->with('title', trans('auth.reset.password.submit.title'))
                     )
                 ))
