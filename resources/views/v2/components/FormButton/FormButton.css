@@ -29,6 +29,11 @@
     width: 100%;
 }
 
+.FormButton--large {
+    font: $font-heading-md;
+    padding: calc($padding-sm * 1.25) $padding-lg;
+}
+
 .FormButton[disabled] {
     opacity: $opacity-md;
 }
