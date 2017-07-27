@@ -345,7 +345,6 @@ class V2ForumController extends Controller
 
     public function store()
     {
-    
         $loggedUser = request()->user();
 
         $rules = [
@@ -367,7 +366,7 @@ class V2ForumController extends Controller
             $forum->destinations()->attach(request()->destinations);
             $forum->topics()->attach(request()->topics);
         }
-        
+
         Log::info('New content added', [
             'user' =>  $forum->user->name,
             'title' =>  $forum->title,
