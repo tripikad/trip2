@@ -301,7 +301,7 @@ class V2ForumController extends Controller
                         ->push(component('FormTextarea')
                             ->with('title', trans('content.forum.edit.field.body.title'))
                             ->with('name', 'body')
-                            ->with('value', old('title'))
+                            ->with('value', old('body'))
                             ->with('rows', 20)
                         )
                         ->pushWhen($type != 'misc', component('FormSelectMultiple')
@@ -384,13 +384,129 @@ class V2ForumController extends Controller
 
     public function edit($id)
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->edit('forum', $id);
+        $forum = Content::findOrFail($id);
+
+        $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+        $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+
+        return layout('2col')
+
+            ->with('narrow', true)
+
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->is('gray')
+                    ->with('title', trans('content.forum.index.title'))
+                    ->with('route', route('forum.index'))
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.forum.edit.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('forum.update', [$forum]))
+                    ->with('method', 'PUT')
+                    ->with('fields', collect()
+                        ->push(component('FormRadio')
+                            ->with('name', 'type')
+                            ->with('value', $forum->type)
+                            ->with('options', collect(['forum', 'buysell', 'expat', 'misc'])
+                                ->map(function ($type) {
+                                    return collect()
+                                        ->put('id', $type)
+                                        ->put('name', trans("content.$type.index.title"));
+                                })
+                            )
+                        )
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.forum.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title', $forum->title))
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('title', trans('content.forum.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', old('body', $forum->body))
+                            ->with('rows', 20)
+                        )
+                        ->pushWhen($forum->type != 'misc', component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('value', $forum->destinations->pluck('id'))
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                        )
+                        ->pushWhen($forum->type != 'misc', component('FormSelectMultiple')
+                            ->with('name', 'topics')
+                            ->with('options', $topics)
+                            ->with('value', $forum->topics->pluck('id'))
+                            ->with('placeholder', trans('content.index.filter.field.topic.title'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.edit.submit.title'))
+                        )
+
+                    )
+                )
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Block')
+                    ->is('gray')
+                    ->with('content', collect()
+                        ->push(component('Title')
+                            ->is('smaller')
+                            ->is('red')
+                            ->with('title', trans('content.edit.notes.heading'))
+                            ->with('route', route('forum.index'))
+                        )
+                        ->push(component('Body')
+                            ->with('body', trans('content.edit.notes.body'))
+                        )
+                ))
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
     public function update($id)
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'forum', $id);
+        $forum = Content::findOrFail($id);
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+            'type' => 'in:forum,buysell,expat,misc',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $forum->fill([
+            'title' => request()->title,
+            'body' => request()->body,
+            'type' => request()->type,
+        ])
+        ->save();
+
+        if ($forum->type != 'misc') {
+            $forum->destinations()->sync(request()->destinations ?: []);
+            $forum->topics()->sync(request()->topics ?: []);
+        }
+
+        return redirect()
+            ->route('forum.show', [$forum->slug])
+            ->with('info', trans('content.update.info', [
+                'title' => $forum->title,
+            ]));
     }
 }
