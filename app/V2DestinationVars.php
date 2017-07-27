@@ -39,9 +39,11 @@ class V2DestinationVars
 
     public function description()
     {
-        $key = "destination.show.description.{$this->destination->id}";
+        return format_body($this->destination->description);
 
-        return Lang::has($key) ? trans($key) : null;
+        /*$key = "destination.show.description.{$this->destination->id}";
+
+        return Lang::has($key) ? trans($key) : null;*/
     }
 
     public function isContinent()
