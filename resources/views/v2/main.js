@@ -16,7 +16,7 @@ import FrontpageDestinationSearch from './components/FrontpageDestinationSearch/
 import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
 import FrontpageSearchRow from './components/FrontpageSearchRow/FrontpageSearchRow.vue'
 import FrontpageSearchItem from './components/FrontpageSearchItem/FrontpageSearchItem.vue'
-import TravelMateStart from './components/TravelMateStart/TravelMateStart.vue'
+import TravelmateStart from './components/TravelmateStart/TravelmateStart.vue'
 //import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
@@ -71,7 +71,7 @@ new Vue({
         PhotoFullscreen,
         PromoBar,
         UserImage,
-        TravelMateStart,
+        TravelmateStart,
     },
 
     mounted() {

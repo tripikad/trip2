@@ -4,10 +4,10 @@
     display: flex;
 }
 
-.TravelMateStart__fields > div {
+.TravelMateStart__field {
     padding: 12px;
-    color: hsl(204, 6%, 55%);
-    border: 1px solid hsl(204, 6%, 88%);
+    color: $gray;
+    border: 1px solid $gray-light;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -15,7 +15,7 @@
     width: 100%;
 }
 
-.TravelMateStart__fields div.active {
+.TravelMateStart__fields .TravelMateStart--active {
     background-color: $green;
     color: $white;
 }
@@ -23,7 +23,7 @@
 .TravelMateStart__heading {
     color: hsl(204, 6%, 55%);
     display: block;
-    font: 600 16px / 150% "Sailec", sans-serif;
+    font: $font-heading-md;
     line-height: 135%;
     margin-bottom: 12px;
 }

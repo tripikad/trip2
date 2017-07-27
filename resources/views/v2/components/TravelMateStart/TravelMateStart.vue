@@ -4,10 +4,10 @@
         <div class="TravelMateStart__heading">{{ title }}</div>
         <div class="TravelMateStart__fields">
 
-            <div
+            <div class="TravelMateStart__field"
                     v-for="(date, index) in dates"
                     @click="atClick(index)"
-                    :class="{ active: activeIndex === index }">
+                    :class="{ 'TravelMateStart--active': activeIndex === index }">
                 {{ date.title }}
             </div>
 
