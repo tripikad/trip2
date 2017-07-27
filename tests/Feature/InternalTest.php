@@ -24,7 +24,7 @@ class InternalTest extends BrowserKitTestCase
             ->type('Hello internal title', 'title')
             ->type('Hello internal body', 'body')
             ->press(trans('content.create.submit.title'))
-            ->seePageIs('internal/create')
+            ->seePageIs('internal')
             ->see('Hello internal title')
             ->seeInDatabase('contents', [
                 'user_id' => $admin_user_creating_internal->id,
