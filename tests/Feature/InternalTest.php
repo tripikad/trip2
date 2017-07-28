@@ -62,7 +62,6 @@ class InternalTest extends BrowserKitTestCase
         $this->actingAs($admin_user_creating_internal)
                 ->visit('internal')
                 ->click(trans('content.internal.create.title'))
-                ->seePageIs('internal/create')
                 ->type('Hello internal title', 'title')
                 ->type('Hello internal body', 'body')
                 ->press(trans('content.create.submit.title'));
@@ -77,13 +76,6 @@ class InternalTest extends BrowserKitTestCase
         $edit_response = $this->call('GET', "internal/$content->id/edit");
         $this->assertEquals(401, $edit_response->status());
 
-        Auth::logout();
-
-        $view_response = $this->call('GET', "internal/$content->id");
-        $this->assertEquals(401, $view_response->status());
-
-        $edit_response = $this->call('GET', "internal/$content->id/edit");
-        $this->assertEquals(401, $edit_response->status());
     }
 
     public function test_nonlogged_users_can_not_see_and_edit_internal()
@@ -93,7 +85,6 @@ class InternalTest extends BrowserKitTestCase
         $this->actingAs($admin_user_creating_internal)
                 ->visit('internal')
                 ->click(trans('content.internal.create.title'))
-                ->seePageIs('internal/create')
                 ->type('Hello internal title', 'title')
                 ->type('Hello internal body', 'body')
                 ->press(trans('content.create.submit.title'));
