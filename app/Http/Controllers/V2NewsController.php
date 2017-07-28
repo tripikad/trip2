@@ -133,7 +133,7 @@ class V2NewsController extends Controller
             ->create('news');
     }
 
-    public function create2()
+    public function create2($type = 'news')
     {
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name')->get();
@@ -156,6 +156,17 @@ class V2NewsController extends Controller
                 ->push(component('Form')
                     ->with('route', route('news.store2'))
                     ->with('fields', collect()
+                        ->push(component('FormRadio')
+                            ->with('name', 'type')
+                            ->with('value', $type)
+                            ->with('options', collect(['news', 'shortnews'])
+                                ->map(function ($type) {
+                                    return collect()
+                                        ->put('id', $type)
+                                        ->put('name', trans("content.$type.index.title"));
+                                })
+                            )
+                        )
                         ->push(component('FormTextfield')
                             ->is('large')
                             ->with('title', trans('content.news.edit.field.title.title'))
@@ -213,6 +224,7 @@ class V2NewsController extends Controller
         $rules = [
             'title' => 'required',
             'body' => 'required',
+            'type' => 'in:news,shortnews'
         ];
 
         $this->validate(request(), $rules);
@@ -220,7 +232,7 @@ class V2NewsController extends Controller
         $news = $loggedUser->contents()->create([
             'title' => request()->title,
             'body' => request()->body,
-            'type' => 'news',
+            'type' => request()->type,
             'status' => 0,
         ]);
 
@@ -278,6 +290,17 @@ class V2NewsController extends Controller
                     ->with('route', route('news.update2', [$news]))
                     ->with('method', 'PUT')
                     ->with('fields', collect()
+                        ->push(component('FormRadio')
+                            ->with('name', 'type')
+                            ->with('value', old('type', $news->type))
+                            ->with('options', collect(['news', 'shortnews'])
+                                ->map(function ($type) {
+                                    return collect()
+                                        ->put('id', $type)
+                                        ->put('name', trans("content.$type.index.title"));
+                                })
+                            )
+                        )
                         ->push(component('FormTextfield')
                             ->is('large')
                             ->with('title', trans('content.news.edit.field.title.title'))
@@ -337,6 +360,7 @@ class V2NewsController extends Controller
         $rules = [
             'title' => 'required',
             'body' => 'required',
+            'type' => 'in:news,shortnews'
         ];
 
         $this->validate(request(), $rules);
@@ -344,6 +368,7 @@ class V2NewsController extends Controller
         $news->fill([
             'title' => request()->title,
             'body' => request()->body,
+            'type' => request()->type
         ])
         ->save();
 
