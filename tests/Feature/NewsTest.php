@@ -23,8 +23,6 @@ class NewsTest extends BrowserKitTestCase
             ->type('Hello news title', 'title')
             ->type('Hello news body', 'body')
             ->press(trans('content.create.submit.title'))
-            ->seePageIs('uudised')
-            ->dontSee('Hello news title')
             ->seeInDatabase('contents', [
                 'user_id' => $admin_user_creating_news->id,
                 'title' => 'Hello news title',
@@ -34,6 +32,8 @@ class NewsTest extends BrowserKitTestCase
             ]);
 
         $content = Content::whereTitle('Hello news title')->first();
+
+        $this->seePageIs("uudised/$content->slug");
 
         $this->actingAs($admin_user_creating_news)
             ->visit("uudised/$content->slug")

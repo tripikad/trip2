@@ -33,6 +33,10 @@ Route::post('news/store', 'V2NewsController@store')
     ->name('news.store')
     ->middleware('role:admin');
 
+Route::post('news/store', 'V2NewsController@store2')
+    ->name('news.store2')
+    ->middleware('role:admin');
+
 Route::get('news/{id}/edit', 'V2NewsController@edit')
     ->name('news.edit')
     ->middleware('role:admin');

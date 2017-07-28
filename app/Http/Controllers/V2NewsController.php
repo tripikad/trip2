@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use Log;
 use Request;
 use App\Image;
 use App\Topic;
@@ -153,8 +154,7 @@ class V2NewsController extends Controller
                     ->with('title', trans('content.news.create.title').' (beta)')
                 )
                 ->push(component('Form')
-                    ->with('route', route('news.store'))
-                    ->with('method', 'POST')
+                    ->with('route', route('news.store2'))
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
                             ->is('large')
@@ -198,6 +198,49 @@ class V2NewsController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
+    }
+
+    public function store2()
+    {
+
+        $loggedUser = request()->user();
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $news = $loggedUser->contents()->create([
+            'title' => request()->title,
+            'body' => request()->body,
+            'type' => 'news',
+            'status' => 0,
+        ]);
+
+        $news->destinations()->attach(request()->destinations);
+        $news->topics()->attach(request()->topics);
+
+
+        if ($imageToken = request()->image_id) {
+            $imageId = str_replace(['[[', ']]'], '', $imageToken);
+            $news->images()->attach([$imageId]);
+        }
+
+        Log::info('New content added', [
+            'user' =>  $news->user->name,
+            'title' =>  $news->title,
+            'type' =>  $news->type,
+            'body' =>  $news->body,
+            'link' => route('news.show', [$news->slug]),
+        ]);
+
+        return redirect()
+            ->route('news.show', [$news->slug])
+            ->with('info', trans('content.store.info', [
+                'title' => $news->title,
+            ]));
     }
 
     public function edit($id)
