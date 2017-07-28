@@ -23,7 +23,7 @@ class UnreadContent extends Model
         $content_unread = false;
 
         // To avoid 99999 unread issue - quick fix - can be removed 2-3 weeks after live merge
-        $except_timestamp = Carbon::now()->subDays(2)->timestamp;
+        $except_timestamp = Carbon::now()->subDays(7)->timestamp;
         $unread_data = [
             'count' => 0,
             'first_comment_id' => null,
