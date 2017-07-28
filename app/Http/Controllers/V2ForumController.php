@@ -252,7 +252,7 @@ class V2ForumController extends Controller
     public function create($type = 'forum')
     {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
-        $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
 
         return layout('2col')
 
@@ -386,7 +386,7 @@ class V2ForumController extends Controller
         $forum = Content::findOrFail($id);
 
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
-        $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
 
         return layout('2col')
 
