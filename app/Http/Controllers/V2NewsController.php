@@ -208,7 +208,6 @@ class V2NewsController extends Controller
 
     public function store2()
     {
-
         $loggedUser = request()->user();
 
         $rules = [
@@ -227,7 +226,6 @@ class V2NewsController extends Controller
 
         $news->destinations()->attach(request()->destinations);
         $news->topics()->attach(request()->topics);
-
 
         if ($imageToken = request()->image_id) {
             $imageId = str_replace(['[[', ']]'], '', $imageToken);
@@ -363,5 +361,4 @@ class V2NewsController extends Controller
                 'title' => $news->title,
             ]));
     }
-
 }
