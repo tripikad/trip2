@@ -33,7 +33,7 @@ Route::post('news/store', 'V2NewsController@store')
     ->name('news.store')
     ->middleware('role:admin');
 
-Route::post('news/store', 'V2NewsController@store2')
+Route::post('news/store2', 'V2NewsController@store2')
     ->name('news.store2')
     ->middleware('role:admin');
 
@@ -81,7 +81,7 @@ Route::post('flight/store', 'V2FlightController@store')
     ->name('flight.store')
     ->middleware('role:admin');
 
-Route::post('flight/store', 'V2FlightController@store2')
+Route::post('flight/store2', 'V2FlightController@store2')
     ->name('flight.store2')
     ->middleware('role:admin');
 
@@ -253,7 +253,7 @@ Route::post('photo/store', 'V2PhotoController@store')
     ->name('photo.store')
     ->middleware('role:regular');
 
-Route::post('photo/store', 'V2PhotoController@store2')
+Route::post('photo/store2', 'V2PhotoController@store2')
     ->name('photo.store2')
     ->middleware('role:regular');
 
