@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use Log;
 use Request;
 use App\Image;
 use App\Topic;
@@ -132,7 +133,7 @@ class V2NewsController extends Controller
             ->create('news');
     }
 
-    public function create2()
+    public function create2($type = 'news')
     {
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name')->get();
@@ -153,9 +154,19 @@ class V2NewsController extends Controller
                     ->with('title', trans('content.news.create.title').' (beta)')
                 )
                 ->push(component('Form')
-                    ->with('route', route('news.store'))
-                    ->with('method', 'POST')
+                    ->with('route', route('news.store2'))
                     ->with('fields', collect()
+                        ->push(component('FormRadio')
+                            ->with('name', 'type')
+                            ->with('value', $type)
+                            ->with('options', collect(['news', 'shortnews'])
+                                ->map(function ($type) {
+                                    return collect()
+                                        ->put('id', $type)
+                                        ->put('name', trans("content.$type.index.title"));
+                                })
+                            )
+                        )
                         ->push(component('FormTextfield')
                             ->is('large')
                             ->with('title', trans('content.news.edit.field.title.title'))
@@ -166,6 +177,11 @@ class V2NewsController extends Controller
                             ->with('title', trans('content.news.edit.field.image_id.title'))
                             ->with('name', 'image_id')
                             ->with('value', old('image_id'))
+                        )
+                        ->push(component('FormTextarea')
+                            ->is('hidden')
+                            ->with('name', 'body')
+                            ->with('value', old('body'))
                         )
                         ->push(component('FormEditor')
                             ->with('title', trans('content.news.edit.field.body.title2'))
@@ -193,6 +209,54 @@ class V2NewsController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'news');
+    }
+
+    public function store2()
+    {
+        $loggedUser = request()->user();
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+            'type' => 'in:news,shortnews',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $news = $loggedUser->contents()->create([
+            'title' => request()->title,
+            'body' => request()->body,
+            'type' => request()->type,
+            'status' => 0,
+        ]);
+
+        $news->destinations()->attach(request()->destinations);
+        $news->topics()->attach(request()->topics);
+
+        if ($imageToken = request()->image_id) {
+            $imageId = str_replace(['[[', ']]'], '', $imageToken);
+            $news->images()->attach([$imageId]);
+        }
+
+        Log::info('New content added', [
+            'user' =>  $news->user->name,
+            'title' =>  $news->title,
+            'type' =>  $news->type,
+            'body' =>  $news->body,
+            'link' => route('news.show', [$news->slug]),
+        ]);
+
+        return redirect()
+            ->route('news.show', [$news->slug])
+            ->with('info', trans('content.store.info', [
+                'title' => $news->title,
+            ]));
     }
 
     public function edit($id)
@@ -223,9 +287,20 @@ class V2NewsController extends Controller
                     ->with('title', trans('content.news.edit.title').' (beta)')
                 )
                 ->push(component('Form')
-                    ->with('route', route('news.update', [$news]))
+                    ->with('route', route('news.update2', [$news]))
                     ->with('method', 'PUT')
                     ->with('fields', collect()
+                        ->push(component('FormRadio')
+                            ->with('name', 'type')
+                            ->with('value', old('type', $news->type))
+                            ->with('options', collect(['news', 'shortnews'])
+                                ->map(function ($type) {
+                                    return collect()
+                                        ->put('id', $type)
+                                        ->put('name', trans("content.$type.index.title"));
+                                })
+                            )
+                        )
                         ->push(component('FormTextfield')
                             ->is('large')
                             ->with('title', trans('content.news.edit.field.title.title'))
@@ -236,6 +311,11 @@ class V2NewsController extends Controller
                             ->with('title', trans('content.news.edit.field.image_id.title'))
                             ->with('name', 'image_id')
                             ->with('value', old('image_id', $news->image_id))
+                        )
+                        ->push(component('FormTextarea')
+                            ->is('hidden')
+                            ->with('name', 'body')
+                            ->with('value', old('body', $news->body))
                         )
                         ->push(component('FormEditor')
                             ->with('title', trans('content.news.edit.field.body.title2'))
@@ -267,15 +347,43 @@ class V2NewsController extends Controller
             ->render();
     }
 
-    public function store()
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'news');
-    }
-
     public function update($id)
     {
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'news', $id);
+    }
+
+    public function update2($id)
+    {
+        $news = Content::findOrFail($id);
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+            'type' => 'in:news,shortnews',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $news->fill([
+            'title' => request()->title,
+            'body' => request()->body,
+            'type' => request()->type,
+        ])
+        ->save();
+
+        $news->destinations()->sync(request()->destinations ?: []);
+        $news->topics()->sync(request()->topics ?: []);
+
+        if ($imageToken = request()->image_id) {
+            $imageId = str_replace(['[[', ']]'], '', $imageToken);
+            $news->images()->sync([$imageId] ?: []);
+        }
+
+        return redirect()
+            ->route('news.show', [$news->slug])
+            ->with('info', trans('content.update.info', [
+                'title' => $news->title,
+            ]));
     }
 }

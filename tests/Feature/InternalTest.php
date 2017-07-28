@@ -62,7 +62,6 @@ class InternalTest extends BrowserKitTestCase
         $this->actingAs($admin_user_creating_internal)
                 ->visit('internal')
                 ->click(trans('content.internal.create.title'))
-                ->seePageIs('internal/create')
                 ->type('Hello internal title', 'title')
                 ->type('Hello internal body', 'body')
                 ->press(trans('content.create.submit.title'));
@@ -70,14 +69,6 @@ class InternalTest extends BrowserKitTestCase
         $content = Content::whereTitle('Hello internal title')->first();
 
         $this->actingAs($regular_user_viewing_internal);
-
-        $view_response = $this->call('GET', "internal/$content->id");
-        $this->assertEquals(401, $view_response->status());
-
-        $edit_response = $this->call('GET', "internal/$content->id/edit");
-        $this->assertEquals(401, $edit_response->status());
-
-        Auth::logout();
 
         $view_response = $this->call('GET', "internal/$content->id");
         $this->assertEquals(401, $view_response->status());
@@ -93,7 +84,6 @@ class InternalTest extends BrowserKitTestCase
         $this->actingAs($admin_user_creating_internal)
                 ->visit('internal')
                 ->click(trans('content.internal.create.title'))
-                ->seePageIs('internal/create')
                 ->type('Hello internal title', 'title')
                 ->type('Hello internal body', 'body')
                 ->press(trans('content.create.submit.title'));

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use Log;
 use Request;
 use App\Image;
 use App\Topic;
@@ -229,8 +230,7 @@ class V2FlightController extends Controller
                     ->with('title', trans('content.flight.create.title').' (beta)')
                 )
                 ->push(component('Form')
-                    ->with('route', route('flight.store'))
-                    ->with('method', 'POST')
+                    ->with('route', route('flight.store2'))
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
                             ->is('large')
@@ -242,6 +242,11 @@ class V2FlightController extends Controller
                             ->with('title', trans('content.flight.edit.field.image_id.title'))
                             ->with('name', 'image_id')
                             ->with('value', old('image_id'))
+                        )
+                        ->push(component('FormTextarea')
+                            ->is('hidden')
+                            ->with('name', 'body')
+                            ->with('value', old('body'))
                         )
                         ->push(component('FormEditor')
                             ->with('title', trans('content.flight.edit.field.body.title2'))
@@ -264,6 +269,52 @@ class V2FlightController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
+    }
+
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'flight');
+    }
+
+    public function store2()
+    {
+        $loggedUser = request()->user();
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $flight = $loggedUser->contents()->create([
+            'title' => request()->title,
+            'body' => request()->body,
+            'type' => 'flight',
+            'status' => 1,
+        ]);
+
+        $flight->destinations()->attach(request()->destinations);
+
+        if ($imageToken = request()->image_id) {
+            $imageId = str_replace(['[[', ']]'], '', $imageToken);
+            $flight->images()->attach([$imageId]);
+        }
+
+        Log::info('New content added', [
+            'user' =>  $flight->user->name,
+            'title' =>  $flight->title,
+            'type' =>  $flight->type,
+            'body' =>  $flight->body,
+            'link' => route('news.show', [$flight->slug]),
+        ]);
+
+        return redirect()
+            ->route('flight.index')
+            ->with('info', trans('content.store.info', [
+                'title' => $flight->title,
+            ]));
     }
 
     public function edit($id)
@@ -293,7 +344,7 @@ class V2FlightController extends Controller
                     ->with('title', trans('content.flight.edit.title').' (beta)')
                 )
                 ->push(component('Form')
-                    ->with('route', route('flight.update', [$flight]))
+                    ->with('route', route('flight.update2', [$flight]))
                     ->with('method', 'PUT')
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
@@ -306,6 +357,11 @@ class V2FlightController extends Controller
                             ->with('title', trans('content.flight.edit.field.image_id.title'))
                             ->with('name', 'image_id')
                             ->with('value', old('image_id', $flight->image_id))
+                        )
+                        ->push(component('FormTextarea')
+                            ->is('hidden')
+                            ->with('name', 'body')
+                            ->with('value', old('body', $flight->body))
                         )
                         ->push(component('FormEditor')
                             ->with('title', trans('content.flight.edit.field.body.title2'))
@@ -331,15 +387,40 @@ class V2FlightController extends Controller
             ->render();
     }
 
-    public function store()
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'flight');
-    }
-
     public function update($id)
     {
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'flight', $id);
+    }
+
+    public function update2($id)
+    {
+        $flight = Content::findOrFail($id);
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $flight->fill([
+            'title' => request()->title,
+            'body' => request()->body,
+        ])
+        ->save();
+
+        $flight->destinations()->sync(request()->destinations ?: []);
+
+        if ($imageToken = request()->image_id) {
+            $imageId = str_replace(['[[', ']]'], '', $imageToken);
+            $flight->images()->sync([$imageId] ?: []);
+        }
+
+        return redirect()
+            ->route('flight.show', [$flight->slug])
+            ->with('info', trans('content.update.info', [
+                'title' => $flight->title,
+            ]));
     }
 }
