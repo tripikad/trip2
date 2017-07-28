@@ -298,6 +298,7 @@ return [
     'photo.index.title' => 'Reisipildid',
     'photo.create.title' => 'Lisa uus reisipilt',
 
+    'photo.edit.field.file.title' => 'Lisa pilt',
     'photo.edit.field.file.help' => '',
 
     'photo.edit.field.title.title' => 'Kirjeldus',

@@ -253,6 +253,10 @@ Route::post('photo/store', 'V2PhotoController@store')
     ->name('photo.store')
     ->middleware('role:regular');
 
+Route::post('photo/store', 'V2PhotoController@store2')
+    ->name('photo.store2')
+    ->middleware('role:regular');
+
 Route::get('photo/{id}/edit', 'V2PhotoController@edit')
     ->name('photo.edit')
     ->middleware('role:admin,contentowner');
