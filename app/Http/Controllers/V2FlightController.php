@@ -279,7 +279,6 @@ class V2FlightController extends Controller
 
     public function store2()
     {
-
         $loggedUser = request()->user();
 
         $rules = [
@@ -424,5 +423,4 @@ class V2FlightController extends Controller
                 'title' => $flight->title,
             ]));
     }
-
 }
