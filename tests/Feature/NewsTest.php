@@ -18,7 +18,7 @@ class NewsTest extends BrowserKitTestCase
 
         $this->actingAs($admin_user_creating_news)
             ->visit('uudised')
-            ->click(trans("content.news.create.title").' (beta)') // FIXME
+            ->click(trans('content.news.create.title').' (beta)') // FIXME
             ->seePageIs('news/create2') // FIXME
             ->type('Hello news title', 'title')
             ->type('Hello news body', 'body')
@@ -53,7 +53,7 @@ class NewsTest extends BrowserKitTestCase
                 'status' => 0,
             ]);
     }
-    
+
     public function test_regular_users_can_not_see_and_edit_unpublished_news()
     {
         $admin_user_creating_news = factory(User::class)->create(['role' => 'admin']);
@@ -61,7 +61,7 @@ class NewsTest extends BrowserKitTestCase
 
         $this->actingAs($admin_user_creating_news)
                 ->visit('uudised')
-                ->click(trans("content.news.create.title").' (beta)') // FIXME
+                ->click(trans('content.news.create.title').' (beta)') // FIXME
                 ->type('Hello news title', 'title')
                 ->type('Hello news body', 'body')
                 ->press(trans('content.create.submit.title'));
@@ -75,7 +75,6 @@ class NewsTest extends BrowserKitTestCase
 
         $edit_response = $this->call('GET', "news/$content->id/edit");
         $this->assertEquals(401, $edit_response->status());
-
     }
 
     public function test_nonlogged_users_can_not_see_and_edit_unpublished_news()
@@ -84,7 +83,7 @@ class NewsTest extends BrowserKitTestCase
 
         $this->actingAs($admin_user_creating_news)
                 ->visit('uudised')
-                ->click(trans("content.news.create.title").' (beta)') // FIXME
+                ->click(trans('content.news.create.title').' (beta)') // FIXME
                 ->type('Hello news title', 'title')
                 ->type('Hello news body', 'body')
                 ->press(trans('content.create.submit.title'));
@@ -99,5 +98,4 @@ class NewsTest extends BrowserKitTestCase
         $edit_response = $this->call('GET', "news/$content->id/edit");
         $this->assertEquals(401, $edit_response->status());
     }
-    
 }

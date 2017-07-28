@@ -75,7 +75,6 @@ class InternalTest extends BrowserKitTestCase
 
         $edit_response = $this->call('GET', "internal/$content->id/edit");
         $this->assertEquals(401, $edit_response->status());
-
     }
 
     public function test_nonlogged_users_can_not_see_and_edit_internal()

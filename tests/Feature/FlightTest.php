@@ -18,7 +18,7 @@ class FlightTest extends BrowserKitTestCase
 
         $this->actingAs($admin_user_creating_flight)
             ->visit('odavad-lennupiletid')
-            ->click(trans("content.flight.create.title").' (beta)') // FIXME
+            ->click(trans('content.flight.create.title').' (beta)') // FIXME
             ->seePageIs('flight/create2') // FIXME
             ->type('Hello flight title', 'title')
             ->type('Hello flight body', 'body')
@@ -28,7 +28,7 @@ class FlightTest extends BrowserKitTestCase
             ->seeInDatabase('contents', [
                 'user_id' => $admin_user_creating_flight->id,
                 'title' => 'Hello flight title',
-                'body' => 'Hello flight body', 
+                'body' => 'Hello flight body',
                 'type' => 'flight',
                 'status' => 1,
             ]);
@@ -53,7 +53,7 @@ class FlightTest extends BrowserKitTestCase
                 'status' => 1,
             ]);
     }
-    
+
     public function test_regular_users_can_not_see_and_edit_unpublished_flight()
     {
         $admin_user_creating_flight = factory(User::class)->create(['role' => 'admin']);
@@ -61,7 +61,7 @@ class FlightTest extends BrowserKitTestCase
 
         $this->actingAs($admin_user_creating_flight)
                 ->visit('odavad-lennupiletid')
-                ->click(trans("content.flight.create.title").' (beta)') // FIXME
+                ->click(trans('content.flight.create.title').' (beta)') // FIXME
                 ->type('Hello flight title', 'title')
                 ->type('Hello flight body', 'body')
                 ->press(trans('content.create.submit.title'));
@@ -75,7 +75,6 @@ class FlightTest extends BrowserKitTestCase
 
         $edit_response = $this->call('GET', "flight/$content->id/edit");
         $this->assertEquals(401, $edit_response->status());
-
     }
 
     public function test_nonlogged_users_can_not_see_and_edit_unpublished_flight()
@@ -84,7 +83,7 @@ class FlightTest extends BrowserKitTestCase
 
         $this->actingAs($admin_user_creating_flight)
                 ->visit('odavad-lennupiletid')
-                ->click(trans("content.flight.create.title").' (beta)') // FIXME
+                ->click(trans('content.flight.create.title').' (beta)') // FIXME
                 ->type('Hello flight title', 'title')
                 ->type('Hello flight body', 'body')
                 ->press(trans('content.create.submit.title'));
@@ -100,5 +99,4 @@ class FlightTest extends BrowserKitTestCase
         $edit_response = $this->call('GET', "flight/$content->id/edit");
         $this->assertEquals(401, $edit_response->status());
     }
-    
 }
