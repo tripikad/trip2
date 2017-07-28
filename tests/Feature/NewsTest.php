@@ -21,14 +21,14 @@ class NewsTest extends BrowserKitTestCase
             ->click(trans("content.news.create.title").' (beta)') // FIXME
             ->seePageIs('news/create2') // FIXME
             ->type('Hello news title', 'title')
-            // ->type('Hello news body', 'body') // FIXME
+            ->type('Hello news body', 'body')
             ->press(trans('content.create.submit.title'))
             ->seePageIs('uudised')
             ->dontSee('Hello news title')
             ->seeInDatabase('contents', [
                 'user_id' => $admin_user_creating_news->id,
                 'title' => 'Hello news title',
-                // 'body' => 'Hello news body', // FIXME
+                'body' => 'Hello news body',
                 'type' => 'news',
                 'status' => 0,
             ]);
@@ -63,7 +63,7 @@ class NewsTest extends BrowserKitTestCase
                 ->visit('uudised')
                 ->click(trans("content.news.create.title").' (beta)') // FIXME
                 ->type('Hello news title', 'title')
-                // ->type('Hello news body', 'body') // FIXME
+                ->type('Hello news body', 'body')
                 ->press(trans('content.create.submit.title'));
 
         $content = Content::whereTitle('Hello news title')->first();
@@ -86,7 +86,7 @@ class NewsTest extends BrowserKitTestCase
                 ->visit('uudised')
                 ->click(trans("content.news.create.title").' (beta)') // FIXME
                 ->type('Hello news title', 'title')
-                // ->type('Hello news body', 'body') // FIXME
+                ->type('Hello news body', 'body')
                 ->press(trans('content.create.submit.title'));
 
         $content = Content::whereTitle('Hello news title')->first();
