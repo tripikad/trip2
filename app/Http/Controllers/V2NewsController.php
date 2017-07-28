@@ -200,6 +200,12 @@ class V2NewsController extends Controller
             ->render();
     }
 
+    public function store()
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->store(request(), 'news');
+    }
+
     public function store2()
     {
 
@@ -271,7 +277,7 @@ class V2NewsController extends Controller
                     ->with('title', trans('content.news.edit.title').' (beta)')
                 )
                 ->push(component('Form')
-                    ->with('route', route('news.update', [$news]))
+                    ->with('route', route('news.update2', [$news]))
                     ->with('method', 'PUT')
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
@@ -320,15 +326,42 @@ class V2NewsController extends Controller
             ->render();
     }
 
-    public function store()
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'news');
-    }
-
     public function update($id)
     {
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'news', $id);
     }
+
+    public function update2($id)
+    {
+        $news = Content::findOrFail($id);
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $news->fill([
+            'title' => request()->title,
+            'body' => request()->body,
+        ])
+        ->save();
+
+        $news->destinations()->sync(request()->destinations ?: []);
+        $news->topics()->sync(request()->topics ?: []);
+
+        if ($imageToken = request()->image_id) {
+            $imageId = str_replace(['[[', ']]'], '', $imageToken);
+            $news->images()->sync([$imageId] ?: []);
+        }
+
+        return redirect()
+            ->route('blog.show', [$news->slug])
+            ->with('info', trans('content.update.info', [
+                'title' => $news->title,
+            ]));
+    }
+
 }
