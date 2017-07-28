@@ -224,7 +224,7 @@ class V2NewsController extends Controller
         $rules = [
             'title' => 'required',
             'body' => 'required',
-            'type' => 'in:news,shortnews'
+            'type' => 'in:news,shortnews',
         ];
 
         $this->validate(request(), $rules);
@@ -360,7 +360,7 @@ class V2NewsController extends Controller
         $rules = [
             'title' => 'required',
             'body' => 'required',
-            'type' => 'in:news,shortnews'
+            'type' => 'in:news,shortnews',
         ];
 
         $this->validate(request(), $rules);
@@ -368,7 +368,7 @@ class V2NewsController extends Controller
         $news->fill([
             'title' => request()->title,
             'body' => request()->body,
-            'type' => request()->type
+            'type' => request()->type,
         ])
         ->save();
 
