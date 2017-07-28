@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\RemoveDuplicates::class,
         \App\Console\Commands\GenerateSitemap::class,
         \App\Console\Commands\ConvertMissingContent::class,
+        \App\Console\Commands\ConvertSearchable::class,
         \App\Console\Commands\DisableOldShortNews::class,
         \App\Console\Commands\ForumMiscTopic::class,
 
@@ -31,6 +32,12 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('sitemap:generate')
             ->dailyAt('05:00');
+
+        $schedule->command('search:index')
+            ->cron('15 * * * *');
+
+        $schedule->command('search:index --optimize')
+            ->dailyAt('05:55');
     }
 
     /**

@@ -7,6 +7,7 @@ use Request;
 use App\Image;
 use App\Topic;
 use App\Content;
+use Carbon\Carbon;
 use App\Destination;
 
 class V2TravelmateController extends Controller
@@ -90,8 +91,8 @@ class V2TravelmateController extends Controller
         return layout('2col')
 
             ->with('title', trans('content.travelmate.index.title'))
-            ->with('head_title', $travelmate->getHeadTitle())
-            ->with('head_description', $travelmate->getHeadDescription())
+            ->with('head_title', $travelmate->vars()->title)
+            ->with('head_description', $travelmate->vars()->description)
             ->with('head_image', Image::getSocial())
 
             ->with('header', region('Header', collect()
@@ -188,6 +189,18 @@ class V2TravelmateController extends Controller
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
         $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
+        $dates = collect();
+
+        foreach (range(0, 6) as $i) {
+            $now = Carbon::now();
+            $nextDate = $now->addMonths($i)->startOfMonth();
+            $dates->push([
+                'datetime' => $nextDate, // 2017-08-01 00:00:00.000000
+                'title' => $nextDate->format('M Y')
+                    .($i > 5 ? ' '.trans('content.travelmate.edit.field.start_at.suffix') : ''), // Oct 2017
+            ]);
+        }
+
         return layout('2col')
 
             ->with('narrow', true)
@@ -233,7 +246,9 @@ class V2TravelmateController extends Controller
                             ->with('options', $topics)
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
-                        ->push('<div style="border-radius: 4px; opacity: 0.2; height: 3rem; border: 2px dashed black; font-family: Sailec; display: flex; align-items: center; justify-content: center;">Alustan reisi kuupäeval (komponent)</div>')
+                        ->push(component('TravelmateStart')
+                            ->with('dates', $dates)
+                        )
                         ->push(component('FormTextfield')
                             ->is('large')
                             ->with('title', trans('content.travelmate.edit.field.duration.title'))

@@ -333,11 +333,25 @@ Route::get('sihtkoht/{id}', 'V2DestinationController@show')
 Route::get('sihtkoht/{slug}', 'V2DestinationController@showSlug')
     ->name('destination.showSlug');
 
+// Search
+
+Route::get('search', 'V2SearchController@search')
+    ->name('search.results');
+
+Route::get('search/ajaxsearch', 'V2SearchController@ajaxsearch')
+    ->name('search.ajax');
+
+Route::get('search/{token}', 'V2SearchController@search')
+    ->name('search.results.type');
+
 // Image
 
 Route::post('image', 'V2ImageController@store')
     ->name('image.store')
     ->middleware('role:regular');
+
+// Destination
+
 Route::get('destination/{id}/edit', 'V2DestinationController@edit')
     ->name('destination.edit')
     ->middleware('role:admin');
@@ -455,14 +469,6 @@ Route::get('experiments/blog/profile', 'V2ExperimentsBlogController@profile')
     ->middleware('role:admin');
 
 // V1
-
-// Search
-
-Route::get('search', ['uses' => 'SearchController@search', 'as' => 'search.results']);
-
-Route::get('search/ajaxsearch', ['uses' => 'SearchController@ajaxsearch', 'as' => 'search.ajax']);
-
-Route::get('search/{token}', ['uses' => 'SearchController@search', 'as' => 'search.results.type']);
 
 // Registration
 

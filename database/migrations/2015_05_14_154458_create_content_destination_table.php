@@ -14,8 +14,8 @@ class CreateContentDestinationTable extends Migration
     {
         Schema::create('content_destination', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('content_id')->index();
-            $table->integer('destination_id')->index();
+            $table->integer('content_id')->unsigned()->index();
+            $table->integer('destination_id')->unsigned()->index();
         });
     }
 

@@ -56,6 +56,7 @@ return [
     'store.status.1.info' => ':title has been added',
     'store.status.0.info' => ':title has been added but its unpublished for now. Publish it to make it visible to everybody.',
 
+    'create.info' => ':title has been created',
     'update.info' => ':title has been updated',
 
     'show.isnew' => 'New',
@@ -175,6 +176,8 @@ return [
 
     'travelmate.edit.field.start_at.title' => 'Starting the trip at',
     'travelmate.edit.field.start_at.help' => '',
+
+    'travelmate.edit.field.start_at.suffix' => 'ja beyond',
 
     'travelmate.edit.field.duration.title' => 'Trip duration',
     'travelmate.edit.field.duration.help' => '',

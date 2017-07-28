@@ -57,7 +57,7 @@
                         <br/>
                 
                         @include('component.pagination.default', [
-                            'collection' => $results
+                            'collection' => $paginate
                         ])
                     @else
                         {{ trans('search.results.noresults') }}

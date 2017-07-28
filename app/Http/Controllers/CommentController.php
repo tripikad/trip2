@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use DB;
 use Log;
 use Auth;
 use Mail;
-use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -60,27 +58,6 @@ class CommentController extends Controller
         }
 
         */
-        if (in_array($comment->content->type, ['forum', 'buysell', 'expat', 'internal'])) {
-            DB::table('users')->select('id')->orderBy('id', 'asc')->chunk(1000, function ($users) use ($comment) {
-                collect($users)->each(function ($user) use ($comment) {
-
-                    // For each active user we store the cache key about new added comment
-
-                    $key = 'new_'.$comment->content_id.'_'.$user->id;
-
-                    if (Cache::store('permanent')->has($key)) {
-                        // We will not overwrite the cache if there are unread comments already
-                        if (! Cache::store('permanent')->get($key, 0) > 0) {
-                            Cache::store('permanent')->put($key, $comment->id, config('cache.content.expire.comment'));
-                        } else {
-                            Cache::store('permanent')->put($key, Cache::store('permanent')->get($key), config('cache.content.expire.comment'));
-                        }
-                    } else {
-                        Cache::store('permanent')->put($key, $comment->id, config('cache.content.expire.comment'));
-                    }
-                });
-            });
-        }
 
         Log::info('New comment added', [
             'user' =>  Auth::user()->name,

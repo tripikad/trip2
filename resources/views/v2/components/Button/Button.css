@@ -54,3 +54,8 @@
     display: flex ?if $mobile;
 }
 
+.Button--large {
+    font: $font-heading-md;
+    padding: calc($padding-sm * 1.25) $padding-lg;
+}
+

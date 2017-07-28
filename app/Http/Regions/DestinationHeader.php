@@ -9,7 +9,7 @@ class DestinationHeader
         $parents = $destination->getAncestors();
         $childrens = $destination->getImmediateDescendants()->sortBy('name');
 
-        $body = $destination->description ? $destination->description : $destination->vars()->description;
+        $body = $destination->description ? $destination->vars()->description : '';
         if ($body && $destination->user) {
             $body .=
                 ' (<a href="'
