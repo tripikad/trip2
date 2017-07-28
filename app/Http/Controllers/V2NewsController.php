@@ -356,7 +356,7 @@ class V2NewsController extends Controller
         }
 
         return redirect()
-            ->route('blog.show', [$news->slug])
+            ->route('news.show', [$news->slug])
             ->with('info', trans('content.update.info', [
                 'title' => $news->title,
             ]));
