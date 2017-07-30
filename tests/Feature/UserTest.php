@@ -24,7 +24,7 @@ class UserTest extends BrowserKitTestCase
             ->type('calavera', 'password')
             ->type('calavera', 'password_confirmation')
             ->type('Manny Calavera', 'real_name')
-            ->check('real_name_show')
+            ->uncheck('real_name_show')
             ->type('A travel agent at afterworld', 'description')
             ->check('notify_message')
             ->type('http://facebook.com', 'contact_facebook')
@@ -34,12 +34,15 @@ class UserTest extends BrowserKitTestCase
             ->press(trans('user.edit.submit'))
             ->seePageIs("user/$user_editing_profile->id") 
             ->see('manny')
+            ->see('A travel agent at afterworld')
             ->seeInDatabase('users', [
                 'id' => $user_editing_profile->id,
                 'name' => 'manny',
                 'email' => 'manny@calavera.com',
                 //'password' => Hash::make('calavera'), // FIXME
                 'real_name' => 'Manny Calavera',
+                'real_name_show' => 1,
+                'notify_message' => 1,
                 'contact_facebook' => 'http://facebook.com',
                 'contact_instagram' => 'http://instagram.com',
                 'contact_twitter' => 'http://twitter.com',
