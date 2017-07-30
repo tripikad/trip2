@@ -18,7 +18,7 @@ class UserTest extends BrowserKitTestCase
         $this->actingAs($user_editing_profile)
             ->visit("user/$user_editing_profile->id")
             ->click(trans('menu.user.edit.profile'))
-            ->seePageIs("user/$user_editing_profile->id/edit") 
+            ->seePageIs("user/$user_editing_profile->id/edit")
             ->type('manny', 'name')
             ->type('manny@calavera.com', 'email')
             ->type('calavera', 'password')
@@ -32,7 +32,7 @@ class UserTest extends BrowserKitTestCase
             ->type('http://twitter.com', 'contact_twitter')
             ->type('http://calavera.com', 'contact_homepage')
             ->press(trans('user.edit.submit'))
-            ->seePageIs("user/$user_editing_profile->id") 
+            ->seePageIs("user/$user_editing_profile->id")
             ->see('manny')
             ->see('A travel agent at afterworld')
             ->seeInDatabase('users', [
@@ -46,9 +46,8 @@ class UserTest extends BrowserKitTestCase
                 'contact_facebook' => 'http://facebook.com',
                 'contact_instagram' => 'http://instagram.com',
                 'contact_twitter' => 'http://twitter.com',
-                'contact_homepage' => 'http://calavera.com'
+                'contact_homepage' => 'http://calavera.com',
             ]);
-
     }
 
     public function test_user_can_upload_profile_image()
