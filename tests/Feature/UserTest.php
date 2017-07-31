@@ -18,7 +18,7 @@ class UserTest extends BrowserKitTestCase
         $this->actingAs($user_editing_profile)
             //->visit("user/$user_editing_profile->id")
             //->click(trans('menu.user.edit.profile'))
-            //->seePageIs("user/$user_editing_profile->id/edit") 
+            //->seePageIs("user/$user_editing_profile->id/edit")
             ->visit("user/$user_editing_profile->id/edit2")
             ->type('manny', 'name')
             ->type('manny@calavera.com', 'email')
@@ -62,7 +62,7 @@ class UserTest extends BrowserKitTestCase
             ->seePageIs("user/$user_editing_profile->id");
 
         $filename = $user_editing_profile->images()->first()->filename;
-        
+
         // Check original file exists and clean up
 
         $filepath = config('imagepresets.original.path').$filename;
@@ -77,5 +77,4 @@ class UserTest extends BrowserKitTestCase
             unlink($filepath);
         }
     }
-
 }

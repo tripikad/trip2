@@ -201,7 +201,7 @@ class V2UserController extends Controller
                         ->push(component('FormCheckbox')
                             ->with('title', trans('user.edit.field.real.name.show.title'))
                             ->with('name', 'real_name_show')
-                            ->with('value', old('real_name_show', !$user->real_name_show))
+                            ->with('value', old('real_name_show', ! $user->real_name_show))
                         )
                         ->push(component('FormTextarea')
                             ->with('rows', 4)
@@ -258,7 +258,6 @@ class V2UserController extends Controller
             ->render();
     }
 
-    
     public function update2($id)
     {
         $user = User::findorFail($id);
@@ -274,7 +273,7 @@ class V2UserController extends Controller
             'contact_twitter' => 'url',
             'contact_instagram' => 'url',
             'contact_homepage' => 'url',
-            'file' => "image|max:$maxfilesize"
+            'file' => "image|max:$maxfilesize",
         ];
 
         $this->validate(request(), $rules);
@@ -290,11 +289,10 @@ class V2UserController extends Controller
             'contact_facebook' => request()->contact_facebook,
             'contact_instagram' => request()->contact_instagram,
             'contact_twitter' => request()->contact_twitter,
-            'contact_homepage' => request()->contact_homepage
+            'contact_homepage' => request()->contact_homepage,
         ]);
 
         if (request()->hasFile('file')) {
-
             $filename = 'picture-'
                 .$user->id
                 .'.'
@@ -304,10 +302,9 @@ class V2UserController extends Controller
             $filename = Image::storeImageFile(request()->file('file'), $filename);
 
             dump($filename);
-            
+
             $user->images()->delete();
             $user->images()->create(['filename' => $filename]);
-
         }
 
         return redirect()
@@ -322,14 +319,14 @@ class V2UserController extends Controller
 
         $havebeen = $user
             ->destinationHaveBeen()
-            ->filter(function($flag) use ($destinations) {
+            ->filter(function ($flag) use ($destinations) {
                 return $destinations->contains('id', $flag->flaggable_id);
             })
             ->pluck('flaggable_id');
 
         $wantstogo = $user
             ->destinationWantsToGo()
-            ->filter(function($flag) use ($destinations) {
+            ->filter(function ($flag) use ($destinations) {
                 return $destinations->contains('id', $flag->flaggable_id);
             })
             ->pluck('flaggable_id');
@@ -385,10 +382,9 @@ class V2UserController extends Controller
 
     public function destinationsStore2($id)
     {
-        
         $rules = [
             'havebeen.*' => 'exists:destinations,id',
-            'wantstogo.*' => 'exists:destinations,id'
+            'wantstogo.*' => 'exists:destinations,id',
         ];
 
         $this->validate(request(), $rules);
@@ -401,25 +397,25 @@ class V2UserController extends Controller
             ->where('flaggable_type', 'App\Destination')
             ->where('flag_type', 'havebeen')
             ->delete();
-        
+
         collect(request()->havebeen)
-            ->each(function($id) use ($user) {
+            ->each(function ($id) use ($user) {
                 $user->flags()->create([
                     'flaggable_type' => 'App\Destination',
                     'flaggable_id' => $id,
                     'flag_type' => 'havebeen',
                 ]);
             });
-            
+
         // Updating wantstogo
 
         $user->flags()
             ->where('flaggable_type', 'App\Destination')
             ->where('flag_type', 'wantstogo')
             ->delete();
-        
+
         collect(request()->wantstogo)
-            ->each(function($id) use ($user) {
+            ->each(function ($id) use ($user) {
                 $user->flags()->create([
                     'flaggable_type' => 'App\Destination',
                     'flaggable_id' => $id,
