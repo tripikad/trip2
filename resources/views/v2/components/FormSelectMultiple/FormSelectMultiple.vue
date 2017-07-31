@@ -63,7 +63,6 @@
                 // We convert the id's from the input value prop
                 // to full collection, this is what Vue-Multiselect expects
                 var option = this.options.find(option => option.id === value)
-                console.log(value, option);
                 return { id: value, name: option.name }
             })
             // We assign the local collection to return value
