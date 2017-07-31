@@ -147,6 +147,7 @@ class V2UserController extends Controller
                 ->push(component('Form')
                     ->with('route', route('user.update2', [$user]))
                     ->with('method', 'PUT')
+                    ->with('files', true)
                     ->with('fields', collect()
                         ->push(component('Title')
                             ->is('small')
@@ -261,6 +262,8 @@ class V2UserController extends Controller
     public function update2($id)
     {
         $user = User::findorFail($id);
+        $maxfilesize = config('site.maxfilesize') * 1024;
+
         $rules = [
             'name' => 'required|unique:users,name,'.$user->id,
             'email' => 'required|unique:users,email,'.$user->id,
@@ -270,7 +273,8 @@ class V2UserController extends Controller
             'contact_facebook' => 'url',
             'contact_twitter' => 'url',
             'contact_instagram' => 'url',
-            'contact_homepage' => 'url'
+            'contact_homepage' => 'url',
+            'file' => "image|max:$maxfilesize"
         ];
 
         $this->validate(request(), $rules);
@@ -288,6 +292,23 @@ class V2UserController extends Controller
             'contact_twitter' => request()->contact_twitter,
             'contact_homepage' => request()->contact_homepage
         ]);
+
+        if (request()->hasFile('file')) {
+
+            $filename = 'picture-'
+                .$user->id
+                .'.'
+                .request()->file('file')->getClientOriginalExtension();
+            dump($filename);
+
+            $filename = Image::storeImageFile(request()->file('file'), $filename);
+
+            dump($filename);
+            
+            $user->images()->delete();
+            $user->images()->create(['filename' => $filename]);
+
+        }
 
         return redirect()
             ->route('user.show', [$user])
