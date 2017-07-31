@@ -35,7 +35,7 @@ class UserTest extends BrowserKitTestCase
             ->press(trans('user.edit.submit'))
             ->seePageIs("user/$user_editing_profile->id")
             ->see('manny')
-            ->see('A travel agent at afterworld')
+            ->see('A travel agent in afterworld')
             ->seeInDatabase('users', [
                 'id' => $user_editing_profile->id,
                 'name' => 'manny',
@@ -53,23 +53,23 @@ class UserTest extends BrowserKitTestCase
 
     public function test_user_can_upload_profile_image()
     {
-        $user1 = factory(User::class)->create();
+        $user_editing_profile = factory(User::class)->create();
 
-        $this->actingAs($user1)
-            ->visit("user/$user1->id/edit")
-            ->attach(storage_path().'/tests/test.jpg', 'image')
-            ->press('Submit')
-            ->seePageIs("user/$user1->id/edit");
+        $this->actingAs($user_editing_profile)
+            ->visit("user/$user_editing_profile->id/edit2")
+            ->attach(storage_path().'/tests/test.jpg', 'file')
+            ->press(trans('user.edit.submit'))
+            ->seePageIs("user/$user_editing_profile->id");
 
-        $filename = $this->getImageFilenameByUserId($user1->id);
-
-        // Check original file exists
+        $filename = $user_editing_profile->images()->first()->filename;
+        
+        // Check original file exists and clean up
 
         $filepath = config('imagepresets.original.path').$filename;
         $this->assertTrue(file_exists($filepath));
         unlink($filepath);
 
-        // See thumbnails exist
+        // See thumbnails exist and clean up
 
         foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
             $filepath = config("imagepresets.presets.$preset.path").$filename;
@@ -78,8 +78,4 @@ class UserTest extends BrowserKitTestCase
         }
     }
 
-    public function getImageFilenameByUserId($id)
-    {
-        return User::whereId($id)->first()->images[0]->filename;
-    }
 }
