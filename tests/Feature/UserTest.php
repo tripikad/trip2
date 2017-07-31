@@ -16,9 +16,10 @@ class UserTest extends BrowserKitTestCase
         $user_editing_profile = factory(User::class)->create();
 
         $this->actingAs($user_editing_profile)
-            ->visit("user/$user_editing_profile->id")
-            ->click(trans('menu.user.edit.profile'))
-            ->seePageIs("user/$user_editing_profile->id/edit") 
+            //->visit("user/$user_editing_profile->id")
+            //->click(trans('menu.user.edit.profile'))
+            //->seePageIs("user/$user_editing_profile->id/edit") 
+            ->visit("user/$user_editing_profile->id/edit2")
             ->type('manny', 'name')
             ->type('manny@calavera.com', 'email')
             ->type('calavera', 'password')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Hash;
 use App\User;
 use App\Image;
 use App\Content;
@@ -274,7 +275,7 @@ class V2UserController extends Controller
         $user->update([
             'name' => request()->name,
             'email' => request()->email,
-            //'password' => Hash::make(request()->password),
+            'password' => Hash::make(request()->password),
             'real_name' => request()->real_name,
             'real_name_show' => request()->dreal_name_show ? 0 : 1,
             'notify_message' => request()->notify_message ? 1 : 0,
@@ -282,7 +283,7 @@ class V2UserController extends Controller
             'contact_facebook' => request()->contact_facebook,
             'contact_instagram' => request()->contact_instagram,
             'contact_twitter' => request()->contact_twitter,
-            'contact_twitter' => request()->contact_homepage
+            'contact_homepage' => request()->contact_homepage
         ]);
 
         return redirect()
@@ -348,7 +349,7 @@ class V2UserController extends Controller
         $user = User::findorFail($id);
 
         // TODO
-        
+
         return redirect()
             ->route('user.show', [$user])
             ->with('info', trans('user.update.info'));
