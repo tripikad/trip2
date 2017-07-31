@@ -11,7 +11,7 @@ class PhotoTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 
-    function test_regular_user_can_upload_photo()
+    public function test_regular_user_can_upload_photo()
     {
         $regular_user_uploading_photo = factory(User::class)->create();
 
@@ -31,15 +31,15 @@ class PhotoTest extends BrowserKitTestCase
                 'status' => 1,
             ]);
 
-            $photo = Content::whereTitle('Hello photo title')->first();
-            $filename = $photo->images()->first()->filename;
+        $photo = Content::whereTitle('Hello photo title')->first();
+        $filename = $photo->images()->first()->filename;
 
             // Check original file exists and clean up
 
             $filepath = config('imagepresets.original.path').$filename;
 
-            $this->assertTrue(file_exists($filepath));
-            unlink($filepath);
+        $this->assertTrue(file_exists($filepath));
+        unlink($filepath);
 
             // Check thumbnails exist and clean up
 
@@ -48,7 +48,6 @@ class PhotoTest extends BrowserKitTestCase
                 $this->assertTrue(file_exists($filepath));
                 unlink($filepath);
             }
-    
     }
 
     /*
