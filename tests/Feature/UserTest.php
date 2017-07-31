@@ -40,7 +40,7 @@ class UserTest extends BrowserKitTestCase
                 'id' => $user_editing_profile->id,
                 'name' => 'manny',
                 'email' => 'manny@calavera.com',
-                //'password' => Hash::make('calavera'), // FIXME
+                'password' => Hash::make('calavera'), // FIXME
                 'real_name' => 'Manny Calavera',
                 'real_name_show' => 1,
                 'notify_message' => 1,

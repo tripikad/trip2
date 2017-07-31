@@ -296,6 +296,20 @@ class V2UserController extends Controller
         $user = User::findorFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
+        $havebeen = $user
+            ->destinationHaveBeen()
+            ->filter(function($flag) use ($destinations) {
+                return $destinations->contains('id', $flag->flaggable_id);
+            })
+            ->pluck('flaggable_id');
+
+        $wantstogo = $user
+            ->destinationWantsToGo()
+            ->filter(function($flag) use ($destinations) {
+                return $destinations->contains('id', $flag->flaggable_id);
+            })
+            ->pluck('flaggable_id');
+
         return layout('1colnarrow')
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
@@ -308,7 +322,6 @@ class V2UserController extends Controller
                     ->with('title', 'Minu sihtkohad')
                 )
             )
-
             ->with('content', collect()
                 ->push(component('Form')
                     ->with('route', route('user.destinations.store2', [$user]))
@@ -321,7 +334,8 @@ class V2UserController extends Controller
                         )
                         ->push(component('FormSelectMultiple')
                             ->with('options', $destinations)
-                            ->with('value', $destinations->shuffle()->take(rand(1, 30))->pluck('id'))
+                            ->with('name', 'havebeen')
+                            ->with('value', $havebeen)
                         )
                         ->push(component('Title')
                             ->is('small')
@@ -330,7 +344,8 @@ class V2UserController extends Controller
                         )
                         ->push(component('FormSelectMultiple')
                             ->with('options', $destinations)
-                            ->with('value', $destinations->shuffle()->take(rand(1, 30))->pluck('id'))
+                            ->with('name', 'wantstogo')
+                            ->with('value', $wantstogo)
                         )
                         ->push(component('FormButton')
                             ->is('wide')
@@ -346,9 +361,47 @@ class V2UserController extends Controller
 
     public function destinationsStore2($id)
     {
+        
+        $rules = [
+            'havebeen.*' => 'exists:destinations,id',
+            'wantstogo.*' => 'exists:destinations,id'
+        ];
+
+        $this->validate(request(), $rules);
+
         $user = User::findorFail($id);
 
-        // TODO
+        // Updating havebeen
+
+        $user->flags()
+            ->where('flaggable_type', 'App\Destination')
+            ->where('flag_type', 'havebeen')
+            ->delete();
+        
+        collect(request()->havebeen)
+            ->each(function($id) use ($user) {
+                $user->flags()->create([
+                    'flaggable_type' => 'App\Destination',
+                    'flaggable_id' => $id,
+                    'flag_type' => 'havebeen',
+                ]);
+            });
+            
+        // Updating wantstogo
+
+        $user->flags()
+            ->where('flaggable_type', 'App\Destination')
+            ->where('flag_type', 'wantstogo')
+            ->delete();
+        
+        collect(request()->wantstogo)
+            ->each(function($id) use ($user) {
+                $user->flags()->create([
+                    'flaggable_type' => 'App\Destination',
+                    'flaggable_id' => $id,
+                    'flag_type' => 'wantstogo',
+                ]);
+            });
 
         return redirect()
             ->route('user.show', [$user])
