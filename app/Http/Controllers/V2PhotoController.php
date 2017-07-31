@@ -142,7 +142,7 @@ class V2PhotoController extends Controller
                     ->with('fields', collect()
                         ->push(component('FormUpload')
                             ->with('title', trans('content.photo.edit.field.file.title'))
-                            ->with('name', 'image')
+                            ->with('name', 'file')
                         )
                         ->push(component('FormTextarea')
                             ->with('title', trans('content.photo.edit.field.title.title'))
