@@ -113,8 +113,16 @@ Route::get('travelmate/create', 'V2TravelmateController@create')
     ->name('travelmate.create')
     ->middleware('role:regular');
 
+Route::get('travelmate/create2', 'V2TravelmateController@create2')
+    ->name('travelmate.create2')
+    ->middleware('role:regular');
+
 Route::post('travelmate/store', 'V2TravelmateController@store')
     ->name('travelmate.store')
+    ->middleware('role:regular');
+
+Route::post('travelmate/store2', 'V2TravelmateController@store2')
+    ->name('travelmate.store2')
     ->middleware('role:regular');
 
 Route::get('travelmate/{id}/edit', 'V2TravelmateController@edit')
@@ -446,12 +454,6 @@ Route::get('experiments/password', 'V2AuthController@passwordFormExperiment')
 
 Route::get('experiments/reset', 'V2AuthController@resetFormExperiment')
     ->name('experiments.resetform')
-    ->middleware('role:admin');
-
-// Experiments: Travelmate
-
-Route::get('experiments/travelmate/create', 'V2TravelmateController@createExperiment')
-    ->name('experiments.travelmate.create')
     ->middleware('role:admin');
 
 // Experiments: Blog

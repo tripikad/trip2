@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App;
 use Request;
+use Log;
+
 use App\Image;
 use App\Topic;
 use App\Content;
@@ -184,10 +186,10 @@ class V2TravelmateController extends Controller
             ->create('travelmate');
     }
 
-    public function createExperiment()
+    public function create2()
     {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
-        $topics = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
 
         $dates = collect();
 
@@ -221,8 +223,7 @@ class V2TravelmateController extends Controller
                     ->with('title', trans('content.travelmate.create.title'))
                 )
                 ->push(component('Form')
-                    ->with('id', 'ForumCreateForm')
-                    //->with('route', route('travelmate.store'))
+                    ->with('route', route('travelmate.store2'))
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
                             ->is('large')
@@ -233,7 +234,7 @@ class V2TravelmateController extends Controller
                         ->push(component('FormTextarea')
                             ->with('title', trans('content.forum.edit.field.body.title'))
                             ->with('name', 'body')
-                            ->with('value', old('title'))
+                            ->with('value', old('body'))
                             ->with('rows', 20)
                         )
                         ->push(component('FormSelectMultiple')
@@ -247,16 +248,16 @@ class V2TravelmateController extends Controller
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
                         ->push(component('TravelmateStart')
+                            ->with('name', 'start_at')
                             ->with('dates', $dates)
                         )
                         ->push(component('FormTextfield')
                             ->is('large')
                             ->with('title', trans('content.travelmate.edit.field.duration.title'))
-                            ->with('name', 'duration') // Is it correct?
+                            ->with('name', 'duration')
                             ->with('value', old('duration'))
                         )
                         ->push(component('FormButton')
-                            ->with('disabled', true)
                             ->with('title', trans('content.create.submit.title'))
                         )
 
@@ -295,6 +296,45 @@ class V2TravelmateController extends Controller
     {
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'travelmate');
+    }
+
+    public function store2()
+    {
+        $loggedUser = request()->user();
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+            'start_at' => 'date'
+        ];
+
+        $this->validate(request(), $rules);
+
+        $travelmate = $loggedUser->contents()->create([
+            'title' => request()->title,
+            'body' => request()->body,
+            'type' => 'travelmate',
+            'status' => 1,
+            'start_at' => Carbon::parse(request()->start_at),
+            'duration' => request()->duration
+        ]);
+
+        $travelmate->destinations()->attach(request()->destinations);
+        $travelmate->topics()->attach(request()->topics);
+
+        Log::info('New content added', [
+            'user' =>  $travelmate->user->name,
+            'title' =>  $travelmate->title,
+            'type' =>  $travelmate->type,
+            'body' =>  $travelmate->body,
+            'link' => route('travelmate.show', [$travelmate->slug]),
+        ]);
+
+        return redirect()
+            ->route('travelmate.index')
+            ->with('info', trans('content.store.info', [
+                'title' => $travelmate->title,
+            ]));
     }
 
     public function update($id)
