@@ -235,7 +235,7 @@ class V2TravelmateController extends Controller
                             ->with('title', trans('content.forum.edit.field.body.title'))
                             ->with('name', 'body')
                             ->with('value', old('body'))
-                            ->with('rows', 20)
+                            ->with('rows', 15)
                         )
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'destinations')
@@ -247,9 +247,13 @@ class V2TravelmateController extends Controller
                             ->with('options', $topics)
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
-                        ->push(component('TravelmateStart')
+                        //->push(component('TravelmateStart')
+                        //    ->with('name', 'start_at')
+                        //    ->with('dates', $dates)
+                        //)
+                        ->push(component('FormTextfield')
                             ->with('name', 'start_at')
-                            ->with('dates', $dates)
+                            ->with('value', old('start_at'))
                         )
                         ->push(component('FormTextfield')
                             ->is('large')
@@ -290,6 +294,115 @@ class V2TravelmateController extends Controller
     {
         return App::make('App\Http\Controllers\ContentController')
             ->edit('travelmate', $id);
+    }
+
+    public function edit2($id)
+    {
+        $travelmate = Content::findOrFail($id);
+        $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+        $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
+
+        $dates = collect();
+
+        foreach (range(0, 6) as $i) {
+            $now = Carbon::now();
+            $nextDate = $now->addMonths($i)->startOfMonth();
+            $dates->push([
+                'datetime' => $nextDate, // 2017-08-01 00:00:00.000000
+                'title' => $nextDate->format('M Y')
+                    .($i > 5 ? ' '.trans('content.travelmate.edit.field.start_at.suffix') : ''), // Oct 2017
+            ]);
+        }
+
+        return layout('2col')
+
+            ->with('narrow', true)
+
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->with('title', trans('content.travelmate.index.title'))
+                    ->with('route', route('forum.index'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.travelmate.edit.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('travelmate.update2', [$travelmate]))
+                    ->with('method', 'PUT')
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.forum.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title', $travelmate->title))
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('title', trans('content.forum.edit.field.body.title'))
+                            ->with('name', 'body')
+                            ->with('value', old('body', $travelmate->body))
+                            ->with('rows', 15)
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('value', $travelmate->destinations->pluck('id'))
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'topics')
+                            ->with('options', $topics)
+                            ->with('value', $travelmate->topics->pluck('id'))
+                            ->with('placeholder', trans('content.index.filter.field.topic.title'))
+                        )
+                        //->push(component('TravelmateStart')
+                        //    ->with('name', 'start_at')
+                        //    ->with('dates', $dates)
+                        //    ->with('value', old('start_at', $travelmate->start_at))
+                        //)
+                        ->push(component('FormTextfield')
+                            ->with('name', 'start_at')
+                            ->with('value', old('start_at', $travelmate->start_at))
+                        )
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.travelmate.edit.field.duration.title'))
+                            ->with('name', 'duration')
+                            ->with('value', old('duration', $travelmate->duration))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.edit.submit.title'))
+                        )
+
+                    )
+                )
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Block')
+                    ->is('gray')
+                    ->with('content', collect()
+                        ->push(component('Title')
+                            ->is('smaller')
+                            ->is('red')
+                            ->with('title', trans('content.edit.notes.heading'))
+                            ->with('route', route('forum.index'))
+                        )
+                        ->push(component('Body')
+                            ->with('body', trans('content.edit.notes.body'))
+                        )
+                ))
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
     public function store()
@@ -341,5 +454,35 @@ class V2TravelmateController extends Controller
     {
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'travelmate', $id);
+    }
+
+    public function update2($id)
+    {
+        $travelmate = Content::findOrFail($id);
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+            'start_at' => 'date'
+        ];
+
+        $this->validate(request(), $rules);
+
+        $travelmate->fill([
+            'title' => request()->title,
+            'body' => request()->body,
+            'start_at' => Carbon::parse(request()->start_at),
+            'duration' => request()->duration
+        ])
+        ->save();
+
+        $travelmate->destinations()->sync(request()->destinations ?: []);
+        $travelmate->topics()->sync(request()->topics ?: []);
+
+        return redirect()
+            ->route('travelmate.show', [$travelmate->slug])
+            ->with('info', trans('content.update.info', [
+                'title' => $travelmate->title,
+            ]));
     }
 }

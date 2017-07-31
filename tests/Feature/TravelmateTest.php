@@ -37,14 +37,15 @@ class TravelmateTest extends BrowserKitTestCase
             ]);
 
         $content = Content::whereTitle('Hello travelmate title')->first();
-        /*
+        
         $this->actingAs($regular_user_creating_travelmate)
             //->visit("reisikaaslased/$content->slug")
             //->click(trans('content.action.edit.title'))
             //->seePageIs("travelmate/$content->id/edit")
-            ->vist("travelmate/$content->id/edit2")
+            ->visit("travelmate/$content->id/edit2")
             ->type('Hola travelmate titulo', 'title')
             ->type('Hola travelmate cuerpo', 'body')
+            ->type('Hasta la eternidad', 'duration')
             ->press(trans('content.edit.submit.title'))
             ->seePageIs("reisikaaslased/$content->slug")
             ->see('Hola travelmate titulo')
@@ -54,8 +55,9 @@ class TravelmateTest extends BrowserKitTestCase
                 'body' => 'Hola travelmate cuerpo',
                 'type' => 'travelmate',
                 'status' => 1,
+                'duration' => 'Hasta la eternidad'
             ]);
-        */
+        
     }
     /*
     public function test_regular_user_cannot_edit_other_user_content()

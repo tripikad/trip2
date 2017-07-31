@@ -129,9 +129,17 @@ Route::get('travelmate/{id}/edit', 'V2TravelmateController@edit')
     ->name('travelmate.edit')
     ->middleware('role:admin,contentowner');
 
+Route::get('travelmate/{id}/edit2', 'V2TravelmateController@edit2')
+    ->name('travelmate.edit2')
+    ->middleware('role:admin,contentowner');
+
 Route::put('travelmate/{id}/update', 'V2TravelmateController@update')
     ->name('travelmate.update')
-   ->middleware('role:admin,contentowner');
+    ->middleware('role:admin,contentowner');
+
+Route::put('travelmate/{id}/update2', 'V2TravelmateController@update2')
+    ->name('travelmate.update2')
+    ->middleware('role:admin,contentowner');
 
 // Forum
 
