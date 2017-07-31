@@ -6,9 +6,9 @@ use App;
 use Log;
 use Request;
 use App\User;
+use App\Image;
 use App\Content;
 use App\Destination;
-use App\Image;
 
 class V2PhotoController extends Controller
 {
@@ -199,7 +199,7 @@ class V2PhotoController extends Controller
 
         $rules = [
             'title' => 'required',
-            'file' => "required|image|max:$maxfilesize"
+            'file' => "required|image|max:$maxfilesize",
         ];
 
         $this->validate(request(), $rules);
@@ -219,7 +219,7 @@ class V2PhotoController extends Controller
             'user' =>  $photo->user->name,
             'title' =>  $photo->title,
             'type' =>  $photo->type,
-            'body' =>  $photo->body
+            'body' =>  $photo->body,
         ]);
 
         return redirect()
