@@ -288,8 +288,16 @@ Route::get('user/{id}/edit', 'UserController@edit')
     ->name('user.edit')
     ->middleware('role:superuser,userowner');
 
+Route::get('user/{id}/edit2', 'V2UserController@edit2')
+    ->name('user.edit2')
+    ->middleware('role:superuser,userowner');
+
 Route::put('user/{id}/update', 'UserController@update')
     ->name('user.update')
+    ->middleware('role:superuser,userowner');
+
+Route::put('user/{id}/update2', 'V2UserController@update2')
+    ->name('user.update2')
     ->middleware('role:superuser,userowner');
 
 Route::get('{id}/destinations', 'UserController@destinationsIndex')
@@ -299,6 +307,18 @@ Route::get('{id}/destinations', 'UserController@destinationsIndex')
 Route::post('{id}/destinations', 'UserController@destinationStore')
     ->middleware('role:admin,userowner')
     ->name('user.destination.store');
+
+// V2
+
+Route::get('user/{id}/destinations2', 'V2UserController@destinationsEdit2')
+    ->middleware('role:superuser,userowner')
+    ->name('user.destinations.edit2');
+
+Route::put('user/{id}/destinations2', 'V2UserController@destinationsStore2')
+    ->middleware('role:superuser,userowner')
+    ->name('user.destinations.store2');
+
+// User photos
 
 Route::get('user/{id}/photo', 'V2PhotoController@userIndex')
     ->name('photo.user');
@@ -440,16 +460,6 @@ Route::get('experiments/travelmate/create', 'V2TravelmateController@createExperi
 
 Route::get('experiments/photo/create', 'V2PhotoController@createExperiment')
     ->name('experiments.photo.create')
-    ->middleware('role:admin');
-
-// Experiments: User
-
-Route::get('experiments/user', 'V2UserController@editExperiment')
-    ->name('experiments.user.edit')
-    ->middleware('role:admin');
-
-Route::get('experiments/user/destinations', 'V2UserController@destinationsExperiment')
-    ->name('experiments.user.destinations')
     ->middleware('role:admin');
 
 // Experiments: Blog

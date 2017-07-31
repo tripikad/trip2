@@ -49,11 +49,11 @@ class V2ExperimentsController extends Controller
                 )
                 ->push(component('MetaLink')
                     ->with('title', 'User: Edit')
-                    ->with('route', route('experiments.user.edit'))
+                    ->with('route', route('user.edit2', [$user]))
                 )
                 ->push(component('MetaLink')
                     ->with('title', 'User: Destinations')
-                    ->with('route', route('experiments.user.destinations'))
+                    ->with('route', route('user.destinations.edit2', [$user]))
                 )
 
                 ->push(component('Title')

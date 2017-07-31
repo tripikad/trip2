@@ -125,8 +125,10 @@ class V2UserController extends Controller
             ->render();
     }
 
-    public function editExperiment()
+    public function edit2($id)
     {
+        $user = User::findOrFail($id);
+
         return layout('1colnarrow')
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
@@ -141,80 +143,108 @@ class V2UserController extends Controller
             )
 
             ->with('content', collect()
-                ->push(component('Form')->with('fields', collect()
-                    ->push(component('Title')
-                        ->is('small')
-                        ->is('blue')
-                        ->with('title', 'Profiilipilt')
-                    )
-                    ->push('<div style="border-radius: 4px; opacity: 0.2; height: 10rem; border: 2px dashed black; font-family: Sailec; display: flex; align-items: center; justify-content: center;">Kasutajapildi lisamine (komponent)</div>')
-                    ->push(component('Title')
-                        ->is('small')
-                        ->is('blue')
-                        ->with('title', 'Kasutaja andmed')
-                    )
-                    ->push(component('FormTextfield')
-                        ->is('large')
-                        ->with('title', 'Kasutajanimi')
-                    )
-                    ->push(component('FormTextfield')
-                        ->is('large')
-                        ->with('title', 'E-mail')
-                    )
-                    ->push(component('FormPassword')
-                        ->is('large')
-                        ->with('title', 'Uus parool')
-                    )
-                    ->push(component('FormPassword')
-                        ->is('large')
-                        ->with('title', 'Korda parooli')
-                    )
-                    ->push(component('Title')
-                        ->is('small')
-                        ->is('blue')
-                        ->with('title', 'Üldinfo')
-                    )
-                    ->push(component('FormTextfield')
-                        ->is('large')
-                        ->with('title', 'Sinu nimi')
-                    )
-                    ->push(component('FormCheckbox')
-                        ->with('title', 'Ei soovi avalikustada oma nime')
-                    )
-                    ->push(component('Title')
-                        ->is('small')
-                        ->is('blue')
-                        ->with('title', 'E-posti teavitused')
-                    )
-                    ->push(component('FormCheckbox')
-                        ->with('title', 'Teavita mind, kui keegi on saatnud mulle sõnumi')
-                    )
-                    ->push(component('Title')
-                        ->is('small')
-                        ->is('blue')
-                        ->with('title', 'Kontaktandmed')
-                    )
-                    ->push(component('FormTextfield')
-                        ->is('large')
-                        ->with('title', 'Facebooki link')
-                    )
-                    ->push(component('FormTextfield')
-                        ->is('large')
-                        ->with('title', 'Instagrami link')
-                    )
-                    ->push(component('FormTextfield')
-                        ->is('large')
-                        ->with('title', 'Twitteri link')
-                    )
-                    ->push(component('FormTextfield')
-                        ->is('large')
-                        ->with('title', 'Kodulehekülje link')
-                    )
-                    ->push(component('FormButton')
-                        ->is('wide')
-                        ->with('disabled', true)
-                        ->with('title', 'Uuenda profiili')
-                    )
+                ->push(component('Form')
+                    ->with('route', route('user.update2', [$user]))
+                    ->with('method', 'PUT')
+                    ->with('fields', collect()
+                        ->push(component('Title')
+                            ->is('small')
+                            ->is('blue')
+                            ->with('title', 'Profiilipilt')
+                        )
+                        ->push('<div style="border-radius: 4px; opacity: 0.2; height: 10rem; border: 2px dashed black; font-family: Sailec; display: flex; align-items: center; justify-content: center;">Kasutajapildi lisamine (komponent)</div>')
+                        ->push(component('Title')
+                            ->is('small')
+                            ->is('blue')
+                            ->with('title', 'Kasutaja andmed')
+                        )
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', 'Kasutajanimi')
+                            ->with('name', 'name')
+                            ->with('value', old('name', $user->name))
+                        )
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', 'E-mail')
+                            ->with('name', 'email')
+                            ->with('value', old('email', $user->email))
+                        )
+                        ->push(component('FormPassword')
+                            ->is('large')
+                            ->with('title', 'Uus parool')
+                            ->with('name', 'password')
+                            ->with('value', '')
+                        )
+                        ->push(component('FormPassword')
+                            ->is('large')
+                            ->with('title', 'Korda parooli')
+                            ->with('name', 'password_confirmation')
+                            ->with('value', '')
+                        )
+                        ->push(component('Title')
+                            ->is('small')
+                            ->is('blue')
+                            ->with('title', 'Üldinfo')
+                        )
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', 'Sinu nimi')
+                            ->with('name', 'real_name')
+                            ->with('value', old('real_name', $user->real_name))
+                        )
+                        ->push(component('FormCheckbox')
+                            ->with('title', 'Ei soovi avalikustada oma nime')
+                            ->with('name', 'real_name_show')
+                            ->with('value', old('real_name_show', !$user->real_name_show))
+                        )
+                        ->push(component('FormTextarea')
+                            ->with('rows', 4)
+                            ->with('title', 'Lühikirjeldus')
+                            ->with('placeholder', 'Kirjelda tripikatele ennast ja oma reisikogemusi...')
+                            ->with('name', 'description')
+                            ->with('value', old('description', $user->description))
+                        )
+                        ->push(component('Title')
+                            ->is('small')
+                            ->is('blue')
+                            ->with('title', 'E-posti teavitused')
+                        )
+                        ->push(component('FormCheckbox')
+                            ->with('title', 'Teavita mind, kui keegi on saatnud mulle sõnumi')
+                            ->with('name', 'notify_message')
+                            ->with('value', old('notify_message', $user->notify_message))
+                        )
+                        ->push(component('Title')
+                            ->is('small')
+                            ->is('blue')
+                            ->with('title', 'Kontaktandmed')
+                        )
+                        ->push(component('FormTextfield')
+                            ->with('title', 'Facebooki link')
+                            ->with('name', 'contact_facebook')
+                            ->with('value', old('contact_facebook', $user->contact_facebook))
+                        )
+                        ->push(component('FormTextfield')
+                            ->with('title', 'Instagrami link')
+                            ->with('name', 'contact_instagram')
+                            ->with('value', old('contact_instagram', $user->contact_instagram))
+                        )
+                        ->push(component('FormTextfield')
+                            ->with('title', 'Twitteri link')
+                            ->with('name', 'contact_twitter')
+                            ->with('value', old('contact_twitter', $user->contact_twitter))
+                        )
+                        ->push(component('FormTextfield')
+                            ->with('title', 'Kodulehekülje link')
+                            ->with('name', 'contact_homepage')
+                            ->with('value', old('contact_homepage', $user->contact_homepage))
+                        )
+                        ->push(component('FormButton')
+                            ->is('wide')
+                            ->is('large')
+                            ->with('title', 'Uuenda profiili')
+                        )
                 ))
             )
 
@@ -223,8 +253,46 @@ class V2UserController extends Controller
             ->render();
     }
 
-    public function destinationsExperiment()
+    
+    public function update2($id)
     {
+        $user = User::findorFail($id);
+        $rules = [
+            'name' => 'required|unique:users,name,'.$user->id,
+            'email' => 'required|unique:users,email,'.$user->id,
+            'password' => 'sometimes|confirmed|min:6',
+            'password_confirmation' => 'required_with:password|same:password',
+            'description' => 'min:2',
+            'contact_facebook' => 'url',
+            'contact_twitter' => 'url',
+            'contact_instagram' => 'url',
+            'contact_homepage' => 'url'
+        ];
+
+        $this->validate(request(), $rules);
+
+        $user->update([
+            'name' => request()->name,
+            'email' => request()->email,
+            //'password' => Hash::make(request()->password),
+            'real_name' => request()->real_name,
+            'real_name_show' => request()->dreal_name_show ? 0 : 1,
+            'notify_message' => request()->notify_message ? 1 : 0,
+            'description' => request()->description,
+            'contact_facebook' => request()->contact_facebook,
+            'contact_instagram' => request()->contact_instagram,
+            'contact_twitter' => request()->contact_twitter,
+            'contact_twitter' => request()->contact_homepage
+        ]);
+
+        return redirect()
+            ->route('user.show', [$user])
+            ->with('info', trans('user.update.info'));
+    }
+
+    public function destinationsEdit2($id)
+    {
+        $user = User::findorFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
         return layout('1colnarrow')
@@ -241,35 +309,48 @@ class V2UserController extends Controller
             )
 
             ->with('content', collect()
-                ->push(component('Form')->with('fields', collect()
-                    ->push(component('Title')
-                        ->is('small')
-                        ->is('blue')
-                        ->with('title', 'Ma olen käinud')
-                    )
-                    ->push(component('FormSelectMultiple')
-                        ->with('options', $destinations)
-                        ->with('value', $destinations->shuffle()->take(rand(1, 30))->pluck('id'))
-                    )
-                    ->push(component('Title')
-                        ->is('small')
-                        ->is('blue')
-                        ->with('title', 'Ma tahan minna')
-                    )
-                    ->push(component('FormSelectMultiple')
-                        ->with('options', $destinations)
-                        ->with('value', $destinations->shuffle()->take(rand(1, 30))->pluck('id'))
-                    )
-                    ->push(component('FormButton')
-                        ->is('wide')
-                        ->with('disabled', true)
-                        ->with('title', 'Lisa')
-                    )
+                ->push(component('Form')
+                    ->with('route', route('user.destinations.store2', [$user]))
+                    ->with('method', 'PUT')
+                    ->with('fields', collect()
+                        ->push(component('Title')
+                            ->is('small')
+                            ->is('blue')
+                            ->with('title', 'Ma olen käinud')
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('options', $destinations)
+                            ->with('value', $destinations->shuffle()->take(rand(1, 30))->pluck('id'))
+                        )
+                        ->push(component('Title')
+                            ->is('small')
+                            ->is('blue')
+                            ->with('title', 'Ma tahan minna')
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('options', $destinations)
+                            ->with('value', $destinations->shuffle()->take(rand(1, 30))->pluck('id'))
+                        )
+                        ->push(component('FormButton')
+                            ->is('wide')
+                            ->with('title', 'Lisa')
+                        )
                 ))
             )
 
             ->with('footer', region('FooterLight'))
 
             ->render();
+    }
+
+    public function destinationsStore2($id)
+    {
+        $user = User::findorFail($id);
+
+        // TODO
+        
+        return redirect()
+            ->route('user.show', [$user])
+            ->with('info', trans('user.update.info'));
     }
 }
