@@ -16,9 +16,10 @@ class PhotoTest extends BrowserKitTestCase
         $regular_user_uploading_photo = factory(User::class)->create();
 
         $this->actingAs($regular_user_uploading_photo)
-            ->visit('reisipildid')
-            ->click(trans('content.photo.create.title'))
-            ->seePageIs('photo/create')
+            //->visit('reisipildid')
+            //->click(trans('content.photo.create.title'))
+            //->seePageIs('photo/create')
+            ->visit('photo/create2')
             ->attach(storage_path().'/tests/test.jpg', 'file')
             ->type('Hello photo title', 'title')
             ->press(trans('content.create.submit.title'))

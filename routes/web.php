@@ -249,6 +249,10 @@ Route::get('photo/create', 'V2PhotoController@create')
     ->name('photo.create')
     ->middleware('role:regular');
 
+Route::get('photo/create2', 'V2PhotoController@create2')
+    ->name('photo.create2')
+    ->middleware('role:regular');
+
 Route::post('photo/store', 'V2PhotoController@store')
     ->name('photo.store')
     ->middleware('role:regular');
@@ -444,22 +448,10 @@ Route::get('experiments/reset', 'V2AuthController@resetFormExperiment')
     ->name('experiments.resetform')
     ->middleware('role:admin');
 
-// Experiments: Forum
-
-Route::get('experiments/forum/create', 'V2ForumController@createExperiment')
-    ->name('experiments.forum.create')
-    ->middleware('role:admin');
-
 // Experiments: Travelmate
 
 Route::get('experiments/travelmate/create', 'V2TravelmateController@createExperiment')
     ->name('experiments.travelmate.create')
-    ->middleware('role:admin');
-
-// Experiments: Photo
-
-Route::get('experiments/photo/create', 'V2PhotoController@createExperiment')
-    ->name('experiments.photo.create')
     ->middleware('role:admin');
 
 // Experiments: Blog

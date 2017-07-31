@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App;
+use Log;
 use Request;
 use App\User;
 use App\Content;
 use App\Destination;
+use App\Image;
 
 class V2PhotoController extends Controller
 {
@@ -113,7 +115,7 @@ class V2PhotoController extends Controller
             ->create('photo');
     }
 
-    public function createExperiment()
+    public function create2()
     {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -137,8 +139,8 @@ class V2PhotoController extends Controller
                     ->with('title', trans('content.photo.create.title'))
                 )
                 ->push(component('Form')
-                    ->with('id', 'ForumCreateForm')
                     ->with('route', route('photo.store2'))
+                    ->with('files', true)
                     ->with('fields', collect()
                         ->push(component('FormUpload')
                             ->with('title', trans('content.photo.edit.field.file.title'))
@@ -146,8 +148,8 @@ class V2PhotoController extends Controller
                         )
                         ->push(component('FormTextarea')
                             ->with('title', trans('content.photo.edit.field.title.title'))
-                            ->with('name', 'body')
-                            ->with('value', old('body'))
+                            ->with('name', 'title')
+                            ->with('value', old('title'))
                             ->with('rows', 2)
                         )
                         ->push(component('FormSelectMultiple')
@@ -184,12 +186,6 @@ class V2PhotoController extends Controller
             ->render();
     }
 
-    public function edit($id)
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->edit('photo', $id);
-    }
-
     public function store()
     {
         return App::make('App\Http\Controllers\ContentController')
@@ -198,7 +194,47 @@ class V2PhotoController extends Controller
 
     public function store2()
     {
-        dd(request()->all());
+        $loggedUser = request()->user();
+        $maxfilesize = config('site.maxfilesize') * 1024;
+
+        $rules = [
+            'title' => 'required',
+            'file' => "required|image|max:$maxfilesize"
+        ];
+
+        $this->validate(request(), $rules);
+
+        $photo = $loggedUser->contents()->create([
+            'title' => request()->title,
+            'type' => 'photo',
+            'status' => 1,
+        ]);
+
+        $filename = Image::storeImageFile(request()->file('file'));
+        $photo->images()->create(['filename' => $filename]);
+
+        $photo->destinations()->attach(request()->destinations);
+
+        Log::info('New content added', [
+            'user' =>  $photo->user->name,
+            'title' =>  $photo->title,
+            'type' =>  $photo->type,
+            'body' =>  $photo->body
+        ]);
+
+        return redirect()
+            ->route('photo.index')
+            ->with('info', trans('content.store.info', [
+                'title' => $photo->title,
+            ]));
+    }
+
+    // FIXME
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('photo', $id);
     }
 
     public function update($id)
