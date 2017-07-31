@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App;
-use Request;
 use Log;
-
+use Request;
 use App\Image;
 use App\Topic;
 use App\Content;
@@ -418,7 +417,7 @@ class V2TravelmateController extends Controller
         $rules = [
             'title' => 'required',
             'body' => 'required',
-            'start_at' => 'date'
+            'start_at' => 'date',
         ];
 
         $this->validate(request(), $rules);
@@ -429,7 +428,7 @@ class V2TravelmateController extends Controller
             'type' => 'travelmate',
             'status' => 1,
             'start_at' => Carbon::parse(request()->start_at),
-            'duration' => request()->duration
+            'duration' => request()->duration,
         ]);
 
         $travelmate->destinations()->attach(request()->destinations);
@@ -463,7 +462,7 @@ class V2TravelmateController extends Controller
         $rules = [
             'title' => 'required',
             'body' => 'required',
-            'start_at' => 'date'
+            'start_at' => 'date',
         ];
 
         $this->validate(request(), $rules);
@@ -472,7 +471,7 @@ class V2TravelmateController extends Controller
             'title' => request()->title,
             'body' => request()->body,
             'start_at' => Carbon::parse(request()->start_at),
-            'duration' => request()->duration
+            'duration' => request()->duration,
         ])
         ->save();
 

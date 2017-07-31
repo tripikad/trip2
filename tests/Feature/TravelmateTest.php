@@ -33,11 +33,11 @@ class TravelmateTest extends BrowserKitTestCase
                 'body' => 'Hello travelmate body',
                 'type' => 'travelmate',
                 'status' => 1,
-                'duration' => 'From here to eternity'
+                'duration' => 'From here to eternity',
             ]);
 
         $content = Content::whereTitle('Hello travelmate title')->first();
-        
+
         $this->actingAs($regular_user_creating_travelmate)
             //->visit("reisikaaslased/$content->slug")
             //->click(trans('content.action.edit.title'))
@@ -55,10 +55,10 @@ class TravelmateTest extends BrowserKitTestCase
                 'body' => 'Hola travelmate cuerpo',
                 'type' => 'travelmate',
                 'status' => 1,
-                'duration' => 'Hasta la eternidad'
+                'duration' => 'Hasta la eternidad',
             ]);
-        
     }
+
     /*
     public function test_regular_user_cannot_edit_other_user_content()
     {
