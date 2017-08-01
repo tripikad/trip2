@@ -193,7 +193,7 @@ class V2TravelmateController extends Controller
         $dates = collect();
 
         foreach (range(0, 6) as $i) {
-            $now = Carbon::now();
+            $now = Carbon::now()->startOfDay();
             $nextDate = $now->addMonths($i)->startOfMonth();
             $dates->push([
                 'datetime' => $nextDate, // 2017-08-01 00:00:00.000000
@@ -246,16 +246,16 @@ class V2TravelmateController extends Controller
                             ->with('options', $topics)
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
-                        //->push(component('TravelmateStart')
-                        //    ->with('name', 'start_at')
-                        //    ->with('dates', $dates)
-                        //)
                         ->push(component('FormTextfield')
+                            ->is('hidden')
                             ->with('name', 'start_at')
                             ->with('value', old('start_at'))
                         )
+                        ->push(component('TravelmateStart')
+                            ->with('name', 'start_at')
+                            ->with('dates', $dates)
+                        )
                         ->push(component('FormTextfield')
-                            ->is('large')
                             ->with('title', trans('content.travelmate.edit.field.duration.title'))
                             ->with('name', 'duration')
                             ->with('value', old('duration'))
@@ -304,7 +304,7 @@ class V2TravelmateController extends Controller
         $dates = collect();
 
         foreach (range(0, 6) as $i) {
-            $now = Carbon::now();
+            $now = Carbon::now()->startOfDay();;
             $nextDate = $now->addMonths($i)->startOfMonth();
             $dates->push([
                 'datetime' => $nextDate, // 2017-08-01 00:00:00.000000
@@ -360,17 +360,17 @@ class V2TravelmateController extends Controller
                             ->with('value', $travelmate->topics->pluck('id'))
                             ->with('placeholder', trans('content.index.filter.field.topic.title'))
                         )
-                        //->push(component('TravelmateStart')
-                        //    ->with('name', 'start_at')
-                        //    ->with('dates', $dates)
-                        //    ->with('value', old('start_at', $travelmate->start_at))
-                        //)
                         ->push(component('FormTextfield')
+                            ->is('hidden')
                             ->with('name', 'start_at')
                             ->with('value', old('start_at', $travelmate->start_at))
                         )
+                        ->push(component('TravelmateStart')
+                            ->with('name', 'start_at')
+                            ->with('dates', $dates)
+                            ->with('value', old('start_at', $travelmate->start_at))
+                        )
                         ->push(component('FormTextfield')
-                            ->is('large')
                             ->with('title', trans('content.travelmate.edit.field.duration.title'))
                             ->with('name', 'duration')
                             ->with('value', old('duration', $travelmate->duration))
@@ -427,7 +427,7 @@ class V2TravelmateController extends Controller
             'body' => request()->body,
             'type' => 'travelmate',
             'status' => 1,
-            'start_at' => Carbon::parse(request()->start_at),
+            'start_at' => Carbon::parse(request()->start_at)->startOfDay(),
             'duration' => request()->duration,
         ]);
 
