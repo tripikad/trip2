@@ -196,7 +196,7 @@ class V2TravelmateController extends Controller
             $now = Carbon::now()->startOfDay();
             $nextDate = $now->addMonths($i)->startOfMonth();
             $dates->push([
-                'datetime' => $nextDate, // 2017-08-01 00:00:00.000000
+                'datetime' => $nextDate, // 2017-08-01 00:00:00
                 'title' => $nextDate->format('M Y')
                     .($i > 5 ? ' '.trans('content.travelmate.edit.field.start_at.suffix') : ''), // Oct 2017
             ]);
@@ -249,7 +249,6 @@ class V2TravelmateController extends Controller
                         ->push(component('FormTextfield')
                             ->is('hidden')
                             ->with('name', 'start_at')
-                            ->with('value', old('start_at'))
                         )
                         ->push(component('TravelmateStart')
                             ->with('name', 'start_at')
@@ -307,7 +306,7 @@ class V2TravelmateController extends Controller
             $now = Carbon::now()->startOfDay();
             $nextDate = $now->addMonths($i)->startOfMonth();
             $dates->push([
-                'datetime' => $nextDate, // 2017-08-01 00:00:00.000000
+                'datetime' => $nextDate, // 2017-08-01 00:00:00
                 'title' => $nextDate->format('M Y')
                     .($i > 5 ? ' '.trans('content.travelmate.edit.field.start_at.suffix') : ''), // Oct 2017
             ]);
@@ -363,7 +362,7 @@ class V2TravelmateController extends Controller
                         ->push(component('FormTextfield')
                             ->is('hidden')
                             ->with('name', 'start_at')
-                            ->with('value', old('start_at', $travelmate->start_at))
+                            ->with('value', $travelmate->start_at)
                         )
                         ->push(component('TravelmateStart')
                             ->with('name', 'start_at')
