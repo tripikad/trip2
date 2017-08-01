@@ -99,7 +99,9 @@ class V2NewsController extends Controller
             ->with('title', trans('content.news.index.title'))
             ->with('head_title', $new->vars()->title)
             ->with('head_description', $new->vars()->description)
-            ->with('head_image', $new->getHeadImage())
+            
+            // Temporarily disabled since og:image tag does not allow to select custom images in FB
+            //->with('head_image', $new->getHeadImage())
 
             ->with('header', region('NewsHeader', $new))
 
