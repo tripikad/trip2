@@ -297,11 +297,8 @@ class V2UserController extends Controller
                 .$user->id
                 .'.'
                 .request()->file('file')->getClientOriginalExtension();
-            dump($filename);
 
             $filename = Image::storeImageFile(request()->file('file'), $filename);
-
-            dump($filename);
 
             $user->images()->delete();
             $user->images()->create(['filename' => $filename]);
