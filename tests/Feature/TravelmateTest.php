@@ -16,6 +16,8 @@ class TravelmateTest extends BrowserKitTestCase
     {
         $regular_user_creating_travelmate = factory(User::class)->create();
 
+        $start_at = Carbon::now()->addMonths(1)->startOfMonth()->toDateTimeString();
+
         $this->actingAs($regular_user_creating_travelmate)
             //->visit('reisikaaslased')
             //->click(trans('content.travelmate.create.title'))
@@ -23,6 +25,7 @@ class TravelmateTest extends BrowserKitTestCase
             ->visit('travelmate/create2')
             ->type('Hello travelmate title', 'title')
             ->type('Hello travelmate body', 'body')
+            ->type($start_at, 'start_at')
             ->type('From here to eternity', 'duration')
             ->press(trans('content.create.submit.title'))
             ->seePageIs('reisikaaslased')
@@ -33,10 +36,12 @@ class TravelmateTest extends BrowserKitTestCase
                 'body' => 'Hello travelmate body',
                 'type' => 'travelmate',
                 'status' => 1,
+                'start_at' => $start_at,
                 'duration' => 'From here to eternity',
             ]);
 
         $content = Content::whereTitle('Hello travelmate title')->first();
+        $edited_start_at = Carbon::now()->addMonths(2)->startOfMonth()->toDateTimeString();
 
         $this->actingAs($regular_user_creating_travelmate)
             //->visit("reisikaaslased/$content->slug")
@@ -46,6 +51,7 @@ class TravelmateTest extends BrowserKitTestCase
             ->type('Hola travelmate titulo', 'title')
             ->type('Hola travelmate cuerpo', 'body')
             ->type('Hasta la eternidad', 'duration')
+            ->type($edited_start_at, 'start_at')
             ->press(trans('content.edit.submit.title'))
             ->seePageIs("reisikaaslased/$content->slug")
             ->see('Hola travelmate titulo')
@@ -55,6 +61,7 @@ class TravelmateTest extends BrowserKitTestCase
                 'body' => 'Hola travelmate cuerpo',
                 'type' => 'travelmate',
                 'status' => 1,
+                'start_at' => $edited_start_at,
                 'duration' => 'Hasta la eternidad',
             ]);
     }
