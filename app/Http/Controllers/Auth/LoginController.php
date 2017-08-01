@@ -10,11 +10,10 @@ use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
-
     public function form()
     {
         //return view('pages.auth.login');
-        
+
         return layout('1colnarrow')
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
