@@ -108,7 +108,9 @@ class V2FlightController extends Controller
             ->with('title', trans('content.flight.index.title'))
             ->with('head_title', $flight->vars()->title)
             ->with('head_description', $flight->vars()->description)
-            ->with('head_image', $flight->getHeadImage())
+
+            // Temporarily disabled since og:image tag does not allow to select custom images in FB
+            //->with('head_image', $flight->getHeadImage())
 
             ->with('header', region('Header', collect()
                 ->push(component('Link')
