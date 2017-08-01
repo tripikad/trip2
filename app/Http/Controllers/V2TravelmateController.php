@@ -304,7 +304,7 @@ class V2TravelmateController extends Controller
         $dates = collect();
 
         foreach (range(0, 6) as $i) {
-            $now = Carbon::now()->startOfDay();;
+            $now = Carbon::now()->startOfDay();
             $nextDate = $now->addMonths($i)->startOfMonth();
             $dates->push([
                 'datetime' => $nextDate, // 2017-08-01 00:00:00.000000
