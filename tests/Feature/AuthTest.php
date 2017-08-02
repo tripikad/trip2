@@ -80,7 +80,7 @@ class AuthTest extends BrowserKitTestCase
             //->see(trans('passwords.sent')) // FIXME
             ->seeInDatabase('password_resets', ['email' => $user->email]);
 
-        // FIXME: Laravel 5.4 changed reset token behaviour so it can not be 
+        // FIXME: Laravel 5.4 changed reset token behaviour so it can not be
         // easily tested
 
         // User can confirm new password
