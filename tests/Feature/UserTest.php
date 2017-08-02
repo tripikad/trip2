@@ -25,7 +25,7 @@ class UserTest extends BrowserKitTestCase
             ->type('calavera', 'password')
             ->type('calavera', 'password_confirmation')
             ->type('Manny Calavera', 'real_name')
-            ->uncheck('real_name_show')
+            ->check('real_name_show')
             ->type('A travel agent', 'description')
             ->check('notify_message')
             ->type('http://facebook.com', 'contact_facebook')
@@ -42,7 +42,7 @@ class UserTest extends BrowserKitTestCase
                 'email' => 'manny@calavera.com',
                 //'password' => Hash::make('calavera'), // FIXME
                 'real_name' => 'Manny Calavera',
-                'real_name_show' => 1,
+                'real_name_show' => 0,
                 'notify_message' => 1,
                 'description' => 'A travel agent',
                 'contact_facebook' => 'http://facebook.com',

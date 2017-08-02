@@ -201,7 +201,7 @@ class V2UserController extends Controller
                         ->push(component('FormCheckbox')
                             ->with('title', trans('user.edit.field.real.name.show.title'))
                             ->with('name', 'real_name_show')
-                            ->with('value', old('real_name_show', ! $user->real_name_show))
+                            ->with('value', !$user->real_name_show)
                         )
                         ->push(component('FormTextarea')
                             ->with('rows', 4)
@@ -283,7 +283,7 @@ class V2UserController extends Controller
             'email' => request()->email,
             'password' => Hash::make(request()->password),
             'real_name' => request()->real_name,
-            'real_name_show' => request()->dreal_name_show ? 0 : 1,
+            'real_name_show' => request()->real_name_show ? 0 : 1,
             'notify_message' => request()->notify_message ? 1 : 0,
             'description' => request()->description,
             'contact_facebook' => request()->contact_facebook,
