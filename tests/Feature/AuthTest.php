@@ -81,7 +81,8 @@ class AuthTest extends BrowserKitTestCase
             ->seeInDatabase('password_resets', ['email' => $user->email]);
 
         // User can confirm new password
-        /*$token = $this->getResetToken($user->email);
+        /*
+        $token = $this->getResetToken($user->email);
         $password = str_random(10);
 
         $this->visit('/reset/password/'.$token)
@@ -96,7 +97,8 @@ class AuthTest extends BrowserKitTestCase
             ])
             //->seeLink(str_limit($user->name, 15), 'user/'.$user->id)
             ->visit('/user/'.$user->id)
-            ->seeLink(trans('menu.user.edit.profile'), 'user/'.$user->id.'/edit');*/
+            ->seeLink(trans('menu.user.edit.profile'), 'user/'.$user->id.'/edit');
+            */
     }
 
     public function test_nonregistered_user_can_not_reset_password()

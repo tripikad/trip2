@@ -15,6 +15,7 @@ class LoginController extends Controller
         //return view('pages.auth.login');
 
         return layout('1colnarrow')
+            ->cached(false)
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
             ->with('header', region('StaticHeader'))
@@ -67,6 +68,10 @@ class LoginController extends Controller
                     ->push(component('FormCheckbox')
                         ->with('title', trans('auth.login.field.remember.title'))
                         ->with('name', 'remember')
+                    )
+                    ->push(component('FormHidden')
+                        ->with('name', 'eula')
+                        ->with('value', 1)
                     )
                     ->push(component('FormButton')
                         ->is('wide')
