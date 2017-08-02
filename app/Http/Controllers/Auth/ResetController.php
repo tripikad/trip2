@@ -80,7 +80,50 @@ class ResetController extends Controller
             throw new NotFoundHttpException;
         }
 
-        return view('pages.auth.reset.password')->with('token', $token);
+        // return view('pages.auth.reset.password')->with('token', $token);
+
+        return layout('1colnarrow')
+            ->cached(false)
+            ->with('color', 'gray')
+            ->with('background', component('BackgroundMap'))
+            ->with('header', region('StaticHeader'))
+            ->with('top', collect()
+                ->push(component('Title')
+                    ->is('center')
+                    ->is('large')
+                    ->with('title', trans('auth.reset.password.title'))
+                )
+            )
+            ->with('content', collect()
+                ->push(component('Form')->with('fields', collect()
+                    ->push(component('FormTextfield')
+                        ->is('large')
+                        ->with('title', trans('auth.reset.password.field.email.title'))
+                        ->with('name', 'email')
+                    )
+                    ->push(component('FormPassword')
+                        ->is('large')
+                        ->with('title', trans('auth.reset.password.field.password.title'))
+                        ->with('name', 'password')
+                    )
+                    ->push(component('FormPassword')
+                        ->is('large')
+                        ->with('title', trans('auth.reset.password.field.password_confirmation.title'))
+                        ->with('name', 'password_confirmation')
+                    )
+                    ->push(component('FormHidden')
+                        ->with('name', 'token')
+                        ->with('value', $token)
+                    )
+                    ->push(component('FormButton')
+                        ->is('wide')
+                        ->is('large')
+                        ->with('title', trans('auth.reset.password.submit.title'))
+                    )
+                ))
+            )
+            ->with('footer', region('FooterLight'))
+            ->render();
     }
 
     public function postEmail(Request $request)
