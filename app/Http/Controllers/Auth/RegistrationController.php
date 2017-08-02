@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use Log;
 use Hash;
 use Mail;
-use Honeypot;
 use App\User;
+use Honeypot;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
