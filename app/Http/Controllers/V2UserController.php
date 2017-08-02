@@ -201,7 +201,7 @@ class V2UserController extends Controller
                         ->push(component('FormCheckbox')
                             ->with('title', trans('user.edit.field.real.name.show.title'))
                             ->with('name', 'real_name_show')
-                            ->with('value', !$user->real_name_show)
+                            ->with('value', ! $user->real_name_show)
                         )
                         ->push(component('FormTextarea')
                             ->with('rows', 4)
