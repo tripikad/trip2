@@ -193,6 +193,7 @@ return [
     'travelmate.activity' => 'Viimase :days päeva jooksul lisatud :posts_count kuulutust',
 
     'travelmate.create.title' => 'Lisa kuulutus',
+    'travelmate.edit.title' => 'Muuda kuulutust',
 
     'travelmate.edit.field.title.title' => 'Pealkiri',
     'travelmate.edit.field.title.help' => '',
