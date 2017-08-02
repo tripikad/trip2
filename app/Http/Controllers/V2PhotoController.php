@@ -138,14 +138,17 @@ class V2PhotoController extends Controller
                 )
                 ->push(component('Form')
                     ->with('id', 'ForumCreateForm')
-                    //->with('route', route('photo.store'))
+                    ->with('route', route('photo.store2'))
                     ->with('fields', collect()
-                        ->push('<div style="border-radius: 4px; opacity: 0.2; height: 10rem; border: 2px dashed black; font-family: Sailec; display: flex; align-items: center; justify-content: center;">Pildi lisamine (komponent)</div>')
+                        ->push(component('FormUpload')
+                            ->with('title', trans('content.photo.edit.field.file.title'))
+                            ->with('name', 'image')
+                        )
                         ->push(component('FormTextarea')
                             ->with('title', trans('content.photo.edit.field.title.title'))
                             ->with('name', 'body')
                             ->with('value', old('body'))
-                            ->with('rows', 8)
+                            ->with('rows', 2)
                         )
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'destinations')
@@ -153,7 +156,6 @@ class V2PhotoController extends Controller
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
                         )
                         ->push(component('FormButton')
-                            ->with('disabled', true)
                             ->with('title', trans('content.create.submit.title'))
                         )
 
@@ -192,6 +194,11 @@ class V2PhotoController extends Controller
     {
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'photo');
+    }
+
+    public function store2()
+    {
+        dd(request()->all());
     }
 
     public function update($id)

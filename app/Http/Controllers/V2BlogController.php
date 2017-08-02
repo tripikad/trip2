@@ -218,6 +218,7 @@ class V2BlogController extends Controller
                 )
                 ->push(component('Form')
                     ->with('route', route('blog.update', [$blog]))
+                    ->with('method', 'PUT')
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
                             ->is('large')
@@ -272,14 +273,6 @@ class V2BlogController extends Controller
         ->save();
 
         $blog->destinations()->sync(request()->destinations ?: []);
-
-        Log::info('New content added', [
-            'user' =>  $blog->user->name,
-            'title' =>  $blog->title,
-            'type' =>  $blog->type,
-            'body' =>  $blog->body,
-            'link' => route('blog.show', [$blog]),
-        ]);
 
         return redirect()
             ->route('blog.show', [$blog->slug])

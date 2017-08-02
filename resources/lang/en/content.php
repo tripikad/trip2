@@ -246,6 +246,7 @@ return [
     'photo.index.title' => 'Photos',
     'photo.create.title' => 'Add photo',
 
+    'photo.edit.field.file.title' => 'Add photo',
     'photo.edit.field.file.help' => '',
 
     'photo.edit.field.title.title' => 'Description',

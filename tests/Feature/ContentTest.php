@@ -20,9 +20,9 @@ class ContentTest extends BrowserKitTestCase
 
         $this->publicContentTypes = [
             //'blog',
-            'forum',
-            'expat',
-            'buysell',
+            //'forum',
+            //'expat',
+            //'buysell',
         ];
 
         $this->privateContentTypes = [
