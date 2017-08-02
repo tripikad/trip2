@@ -3,7 +3,6 @@
 $title = $title ?? '';
 $name = $name ?? '';
 $value = $value ?? '';
-$placeholder = $placeholder ?? '';
 
 @endphp
 
@@ -21,7 +20,6 @@ $placeholder = $placeholder ?? '';
         name="{{ $name }}"
         type="password"
         value="{{ $value }}"
-        placeholder="{{ $placeholder }}"
     >
 
 </div>

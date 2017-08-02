@@ -12,7 +12,7 @@
 
         </div>
 
-        <input type="hidden" :value="localValue" :name="name">
+        <input type="text" :value="localValue" :name="name">
 
     </div>
 
@@ -32,21 +32,21 @@
 
         data: () => ({
             activeIndex: 0,
-            localValue: false,
         }),
 
         methods: {
             atClick: function(id) {
                 this.activeIndex = id;
-                return this.localValue = this.dates[id].datetime.date;
             }
         },
-
+        computed: {
+            localValue() {
+                return this.dates[this.activeIndex].datetime.date
+            }
+        },
         mounted() {
-            this.activeIndex = this.value;
-            return this.localValue = this.value
-                ?  this.dates[this.value].datetime.date
-                : this.dates[0].datetime.date;
+            var index = this.dates.findIndex(date => date.datetime.date == this.value.date)
+            this.activeIndex = index ? index : 0;
         }
 
     }
