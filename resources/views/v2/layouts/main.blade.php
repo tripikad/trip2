@@ -43,8 +43,8 @@
             {!! component('Alert') !!}
 
         </div>
-        <script src="{{ dist('vendor') }}"></script>
-        <script src="{{ dist('js') }}"></script>
+        <script defer src="{{ dist('vendor') }}"></script>
+        <script defer src="{{ dist('js') }}"></script>
         @include('v2.utils.promo')
         @include('v2.utils.facebook')
         @include('v2.utils.googleTag')

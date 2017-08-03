@@ -24,12 +24,7 @@ install:
     - chmod -R o+w storage/
     - mysql -e 'create database trip2;'
     - php artisan migrate:refresh
-<<<<<<< HEAD
     - npm run build
-=======
-    - ./node_modules/.bin/gulp
-    - ./node_modules/.bin/gulp v1
->>>>>>> master
 
 script:
     - ./vendor/bin/phpunit

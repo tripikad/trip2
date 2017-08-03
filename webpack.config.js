@@ -9,6 +9,8 @@ module.exports = {
     entry: {
         main: "./resources/views/v2/main.js",
         vendor: [
+            "codemirror",
+            "dropzone",
             "vue",
             "vue-clickaway",
             "vue-cookie",
@@ -65,6 +67,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin('vendor'),
         new ExtractTextPlugin('[name].[chunkhash:6].css'),
         new SpriteLoaderPlugin(),
         new CleanWebpackPlugin('./public/dist'),

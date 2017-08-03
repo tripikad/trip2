@@ -46,7 +46,7 @@
 
 <script>
 
-    //import CodeMirror from 'codemirror/lib/codemirror.js'
+    import CodeMirror from 'codemirror/lib/codemirror.js'
     import gfm from 'codemirror/mode/gfm/gfm.js'
 
     import unescape from 'lodash.unescape'
@@ -169,41 +169,38 @@
         },
         mounted() {
             
-            if (window.CodeMirror !== undefined) {
-
-                this.editor = CodeMirror(this.$refs.source, {
-                    mode: 'gfm',
-                    theme: 'neo',
-                    lineWrapping: true,
-                    viewportMargin: Infinity
-                })
-                
-                this.editor.on('change', editor => {
-                    this.value = editor.getValue()
-                    this.$events.$emit('editor.update', this.value)
-                    this.updatePreview()
-                })
-
-                this.$events.$on('editor.show', value => {
-                    this.show = true
-                    this.value = value
-                    this.editor.setValue(this.value ? this.value : '')
-                    setTimeout(() => {
-                        this.editor.refresh()
-                        this.editor.focus()
-                        this.editor.setCursor({line: 0, ch: 0})
-                    }, 1)
-                    this.updatePreview()
-                })
+            this.editor = CodeMirror(this.$refs.source, {
+                mode: 'gfm',
+                theme: 'neo',
+                lineWrapping: true,
+                viewportMargin: Infinity
+            })
             
-                this.$events.$on('imagepicker.insert', payload => {
-                    if (payload.target === this.target) {
-                        this.insertImage(payload.id)
-                    }
-                    this.$events.$emit('imagepicker.hide')
-                })
+            this.editor.on('change', editor => {
+                this.value = editor.getValue()
+                this.$events.$emit('editor.update', this.value)
+                this.updatePreview()
+            })
 
-            }
+            this.$events.$on('editor.show', value => {
+                this.show = true
+                this.value = value
+                this.editor.setValue(this.value ? this.value : '')
+                setTimeout(() => {
+                    this.editor.refresh()
+                    this.editor.focus()
+                    this.editor.setCursor({line: 0, ch: 0})
+                }, 1)
+                this.updatePreview()
+            })
+        
+            this.$events.$on('imagepicker.insert', payload => {
+                if (payload.target === this.target) {
+                    this.insertImage(payload.id)
+                }
+                this.$events.$emit('imagepicker.hide')
+            })
+
         }
 
     }
