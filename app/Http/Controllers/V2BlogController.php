@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App;
+use Log;
 use App\Content;
 use App\Destination;
 
@@ -112,9 +112,6 @@ class V2BlogController extends Controller
 
     public function create()
     {
-        // return App::make('App\Http\Controllers\ContentController')
-        //    ->create('blog');
-
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
         return layout('1col')
@@ -166,35 +163,41 @@ class V2BlogController extends Controller
 
     public function store()
     {
-        // return App::make('App\Http\Controllers\ContentController')
-        //    ->store(request(), 'blog');
-
         $loggedUser = request()->user();
 
-        $fields = collect([
+        $rules = [
             'title' => 'required',
             'body' => 'required',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $blog = $loggedUser->contents()->create([
+            'title' => request()->title,
+            'body' => request()->body,
+            'type' => 'blog',
+            'status' => 1,
         ]);
 
-        $this->validate(request(), $fields->toArray());
+        $blog->destinations()->attach(request()->destinations);
 
-        $blog = $loggedUser->contents()->create(
-            collect(request($fields->keys()->toArray()))
-                ->put('type', 'blog')
-                ->put('status', 1)
-                ->toArray()
-        );
+        Log::info('New content added', [
+            'user' =>  $blog->user->name,
+            'title' =>  $blog->title,
+            'type' =>  $blog->type,
+            'body' =>  $blog->body,
+            'link' => route('blog.show', [$blog->slug]),
+        ]);
 
-        $blog->destinations()->attach(request('destinations'));
-
-        return redirect()->route('blog.index');
+        return redirect()
+            ->route('blog.index')
+            ->with('info', trans('content.store.info', [
+                'title' => $blog->title,
+            ]));
     }
 
     public function edit($id)
     {
-        // return App::make('App\Http\Controllers\ContentController')
-        //    ->edit('blog', $id);
-
         $blog = Content::findOrFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -215,6 +218,7 @@ class V2BlogController extends Controller
                 )
                 ->push(component('Form')
                     ->with('route', route('blog.update', [$blog]))
+                    ->with('method', 'PUT')
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
                             ->is('large')
@@ -253,27 +257,27 @@ class V2BlogController extends Controller
 
     public function update($id)
     {
-        // return App::make('App\Http\Controllers\ContentController')
-        //    ->store(request(), 'blog', $id);
-
         $blog = Content::findOrFail($id);
 
-        $fields = collect([
+        $rules = [
             'title' => 'required',
             'body' => 'required',
-            'url' => 'url',
-        ]);
+        ];
 
-        $this->validate(request(), $fields->toArray());
+        $this->validate(request(), $rules);
 
-        $blog->fill(request($fields->keys()->toArray()))->save();
+        $blog->fill([
+            'title' => request()->title,
+            'body' => request()->body,
+        ])
+        ->save();
 
-        if (request()->has('destinations')) {
-            $blog->destinations()->sync(request('destinations'));
-        } else {
-            $blog->destinations()->detach();
-        }
+        $blog->destinations()->sync(request()->destinations ?: []);
 
-        return redirect()->route('blog.show', [$blog->slug]);
+        return redirect()
+            ->route('blog.show', [$blog->slug])
+            ->with('info', trans('content.update.info', [
+                'title' => $blog->title,
+            ]));
     }
 }

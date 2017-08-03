@@ -16,11 +16,6 @@ class BodyFormatter
 
     public function markdown()
     {
-
-        // Replacing unordered lists 1) 2) 3) with 1. 2. 3. for Markdown
-
-        $this->body = preg_replace("\n/([0-9]+)\)/", '$1.', $this->body);
-
         $this->body = Markdown::parse($this->body);
 
         return $this;
@@ -29,16 +24,6 @@ class BodyFormatter
     public function links()
     {
         $this->body = str_replace(' www.', ' http://', $this->body);
-
-        // Modified version of
-        // http://stackoverflow.com/a/5289151
-        // and http://stackoverflow.com/a/12590772
-
-        $pattern = "/(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))(?![^<>]*>)/i";
-
-        if ($filteredBody = preg_replace($pattern, '<a href="$1">$1</a>', $this->body)) {
-            $this->body = $filteredBody;
-        }
 
         if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
             $this->body = $filteredBody;
@@ -66,12 +51,23 @@ class BodyFormatter
         return $this;
     }
 
+    public function plain()
+    {
+        $this->body = strip_tags($this->body);
+        $this->body = str_replace(["\n", "\t", "\r"], ' ', ($this->body));
+
+        return $this;
+    }
+
+    public function trim()
+    {
+        $this->body = trim($this->body);
+
+        return $this;
+    }
+
     public function format()
     {
-        return $this
-            ->markdown()
-            ->links()
-            ->images()
-            ->body;
+        return $this->body;
     }
 }

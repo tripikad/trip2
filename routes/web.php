@@ -25,17 +25,41 @@ Route::get('news/create', 'V2NewsController@create')
     ->name('news.create')
     ->middleware('role:admin');
 
+Route::get('news/create2', 'V2NewsController@create2')
+    ->name('news.create2')
+    ->middleware('role:admin');
+
 Route::post('news/store', 'V2NewsController@store')
     ->name('news.store')
+    ->middleware('role:admin');
+
+Route::post('news/store2', 'V2NewsController@store2')
+    ->name('news.store2')
     ->middleware('role:admin');
 
 Route::get('news/{id}/edit', 'V2NewsController@edit')
     ->name('news.edit')
     ->middleware('role:admin');
 
+Route::get('news/{id}/edit2', 'V2NewsController@edit2')
+    ->name('news.edit2')
+    ->middleware('role:admin');
+
 Route::put('news/{id}/update', 'V2NewsController@update')
     ->name('news.update')
     ->middleware('role:admin');
+
+Route::put('news/{id}/update2', 'V2NewsController@update2')
+    ->name('news.update2')
+    ->middleware('role:admin');
+
+// Shortnews
+
+Route::get('luhiuudised', 'V2NewsController@shortnewsIndex')
+    ->name('shortnews.index');
+
+Route::get('luhiuudised/{slug}', 'V2NewsController@show')
+    ->name('shortnews.show');
 
 // Flight
 
@@ -49,16 +73,32 @@ Route::get('flight/create', 'V2FlightController@create')
     ->name('flight.create')
     ->middleware('role:admin');
 
+Route::get('flight/create2', 'V2FlightController@create2')
+    ->name('flight.create2')
+    ->middleware('role:admin');
+
 Route::post('flight/store', 'V2FlightController@store')
     ->name('flight.store')
+    ->middleware('role:admin');
+
+Route::post('flight/store2', 'V2FlightController@store2')
+    ->name('flight.store2')
     ->middleware('role:admin');
 
 Route::get('flight/{id}/edit', 'V2FlightController@edit')
     ->name('flight.edit')
     ->middleware('role:admin');
 
+Route::get('flight/{id}/edit2', 'V2FlightController@edit2')
+    ->name('flight.edit2')
+    ->middleware('role:admin');
+
 Route::put('flight/{id}/update', 'V2FlightController@update')
     ->name('flight.update')
+    ->middleware('role:admin');
+
+Route::put('flight/{id}/update2', 'V2FlightController@update2')
+    ->name('flight.update2')
     ->middleware('role:admin');
 
 // Travelmates
@@ -73,17 +113,33 @@ Route::get('travelmate/create', 'V2TravelmateController@create')
     ->name('travelmate.create')
     ->middleware('role:regular');
 
+Route::get('travelmate/create2', 'V2TravelmateController@create2')
+    ->name('travelmate.create2')
+    ->middleware('role:regular');
+
 Route::post('travelmate/store', 'V2TravelmateController@store')
     ->name('travelmate.store')
+    ->middleware('role:regular');
+
+Route::post('travelmate/store2', 'V2TravelmateController@store2')
+    ->name('travelmate.store2')
     ->middleware('role:regular');
 
 Route::get('travelmate/{id}/edit', 'V2TravelmateController@edit')
     ->name('travelmate.edit')
     ->middleware('role:admin,contentowner');
 
+Route::get('travelmate/{id}/edit2', 'V2TravelmateController@edit2')
+    ->name('travelmate.edit2')
+    ->middleware('role:admin,contentowner');
+
 Route::put('travelmate/{id}/update', 'V2TravelmateController@update')
     ->name('travelmate.update')
-   ->middleware('role:admin,contentowner');
+    ->middleware('role:admin,contentowner');
+
+Route::put('travelmate/{id}/update2', 'V2TravelmateController@update2')
+    ->name('travelmate.update2')
+    ->middleware('role:admin,contentowner');
 
 // Forum
 
@@ -96,6 +152,9 @@ Route::get('foorum/ost-muuk', 'V2ForumController@buysellIndex')
 Route::get('foorum/elu-valimaal', 'V2ForumController@expatIndex')
     ->name('expat.index');
 
+Route::get('foorum/vaba-teema', 'V2ForumController@miscIndex')
+    ->name('misc.index');
+
 Route::get('foorum/uldfoorum/{slug}', 'V2ForumController@show')
     ->name('forum.show');
 
@@ -105,7 +164,10 @@ Route::get('foorum/ost-muuk/{slug}', 'V2ForumController@show')
 Route::get('foorum/elu-valimaal/{slug}', 'V2ForumController@show')
     ->name('expat.show');
 
-Route::get('forum/create', 'V2ForumController@create')
+Route::get('foorum/vaba-teema/{slug}', 'V2ForumController@show')
+    ->name('misc.show');
+
+Route::get('forum/create/{type}', 'V2ForumController@create')
     ->name('forum.create')
     ->middleware('role:regular');
 
@@ -161,7 +223,7 @@ Route::get('blog/{id}/edit', 'V2BlogController@edit')
     ->name('blog.edit')
     ->middleware('role:admin,contentowner');
 
-Route::post('blog/{id}/update', 'V2BlogController@update')
+Route::put('blog/{id}/update', 'V2BlogController@update')
     ->name('blog.update')
     ->middleware('role:admin,contentowner');
 
@@ -203,8 +265,16 @@ Route::get('photo/create', 'V2PhotoController@create')
     ->name('photo.create')
     ->middleware('role:regular');
 
+Route::get('photo/create2', 'V2PhotoController@create2')
+    ->name('photo.create2')
+    ->middleware('role:regular');
+
 Route::post('photo/store', 'V2PhotoController@store')
     ->name('photo.store')
+    ->middleware('role:regular');
+
+Route::post('photo/store2', 'V2PhotoController@store2')
+    ->name('photo.store2')
     ->middleware('role:regular');
 
 Route::get('photo/{id}/edit', 'V2PhotoController@edit')
@@ -238,8 +308,16 @@ Route::get('user/{id}/edit', 'UserController@edit')
     ->name('user.edit')
     ->middleware('role:superuser,userowner');
 
+Route::get('user/{id}/edit2', 'V2UserController@edit2')
+    ->name('user.edit2')
+    ->middleware('role:superuser,userowner');
+
 Route::put('user/{id}/update', 'UserController@update')
     ->name('user.update')
+    ->middleware('role:superuser,userowner');
+
+Route::put('user/{id}/update2', 'V2UserController@update2')
+    ->name('user.update2')
     ->middleware('role:superuser,userowner');
 
 Route::get('{id}/destinations', 'UserController@destinationsIndex')
@@ -249,6 +327,18 @@ Route::get('{id}/destinations', 'UserController@destinationsIndex')
 Route::post('{id}/destinations', 'UserController@destinationStore')
     ->middleware('role:admin,userowner')
     ->name('user.destination.store');
+
+// V2
+
+Route::get('user/{id}/destinations2', 'V2UserController@destinationsEdit2')
+    ->middleware('role:superuser,userowner')
+    ->name('user.destinations.edit2');
+
+Route::put('user/{id}/destinations2', 'V2UserController@destinationsStore2')
+    ->middleware('role:superuser,userowner')
+    ->name('user.destinations.store2');
+
+// User photos
 
 Route::get('user/{id}/photo', 'V2PhotoController@userIndex')
     ->name('photo.user');
@@ -285,10 +375,44 @@ Route::get('sihtkoht/{id}', 'V2DestinationController@show')
 Route::get('sihtkoht/{slug}', 'V2DestinationController@showSlug')
     ->name('destination.showSlug');
 
+// Search
+
+Route::get('search', 'V2SearchController@search')
+    ->name('search.results');
+
+Route::get('search/ajaxsearch', 'V2SearchController@ajaxsearch')
+    ->name('search.ajax');
+
+Route::get('search/{token}', 'V2SearchController@search')
+    ->name('search.results.type');
+
+// Image
+
+Route::post('image', 'V2ImageController@store')
+    ->name('image.store')
+    ->middleware('role:regular');
+
+// Destination
+
+Route::get('destination/{id}/edit', 'V2DestinationController@edit')
+    ->name('destination.edit')
+    ->middleware('role:admin');
+Route::post('destination/{id}/update', 'V2DestinationController@update')
+    ->name('destination.update')
+    ->middleware('role:admin');
+
 // Admin
 
 Route::get('admin/content', 'V2AdminController@unpublishedIndex')
     ->name('admin.content.index')
+    ->middleware('role:admin');
+
+Route::get('admin/image', 'V2AdminController@imageIndex')
+    ->name('admin.image.index')
+    ->middleware('role:admin');
+
+Route::get('image/index', 'V2ImageController@index')
+    ->name('image.index')
     ->middleware('role:admin');
 
 // Utils
@@ -302,6 +426,9 @@ Route::get('share/{social}', 'V2SocialController@share')
 Route::post('utils/filter', 'V2UtilsController@filter')
     ->name('utils.filter');
 
+Route::post('utils/format', 'V2UtilsController@format')
+    ->name('utils.format');
+
 // Experiments
 
 Route::get('experiments', 'V2ExperimentsController@index')
@@ -313,47 +440,49 @@ Route::get('experiments/select', 'V2ExperimentsController@selectIndex')
 Route::post('experiments/select', 'V2ExperimentsController@selectCreate')
     ->name('experiments.select.create');
 
+Route::get('experiments/fonts', 'V2ExperimentsController@fontsIndex')
+    ->name('experiments.fonts.index');
+
+Route::get('experiments/map', 'V2ExperimentsController@mapIndex')
+    ->name('experiments.map.index');
+
 // Experiments: Auth
 
-Route::get('experiments/login', 'V2AuthController@loginForm')
-    ->name('experiments.loginform');
+Route::get('experiments/login', 'V2AuthController@loginFormExperiment')
+    ->name('experiments.loginform')
+    ->middleware('role:admin');
 
-Route::get('experiments/register', 'V2AuthController@registerForm')
-    ->name('experiments.registerform');
+Route::get('experiments/register', 'V2AuthController@registerFormExperiment')
+    ->name('experiments.registerform')
+    ->middleware('role:admin');
 
-Route::get('experiments/password', 'V2AuthController@passwordForm')
-    ->name('experiments.passwordform');
+Route::get('experiments/password', 'V2AuthController@passwordFormExperiment')
+    ->name('experiments.passwordform')
+    ->middleware('role:admin');
 
-Route::get('experiments/reset', 'V2AuthController@resetForm')
-    ->name('experiments.resetform');
+Route::get('experiments/reset', 'V2AuthController@resetFormExperiment')
+    ->name('experiments.resetform')
+    ->middleware('role:admin');
 
 // Experiments: Blog
 
-Route::get('/experiments/blog', 'V2ExperimentsBlogController@index')
+Route::get('experiments/blog', 'V2ExperimentsBlogController@index')
     ->name('experiments.blog.index')
     ->middleware('role:admin');
 
-Route::get('/experiments/blog/show', 'V2ExperimentsBlogController@show')
+Route::get('experiments/blog/show', 'V2ExperimentsBlogController@show')
     ->name('experiments.blog.show')
     ->middleware('role:admin');
 
-Route::get('/experiments/blog/edit', 'V2ExperimentsBlogController@edit')
+Route::get('experiments/blog/edit', 'V2ExperimentsBlogController@edit')
     ->name('experiments.blog.edit')
     ->middleware('role:admin');
 
-Route::get('/experiments/blog/profile', 'V2ExperimentsBlogController@profile')
+Route::get('experiments/blog/profile', 'V2ExperimentsBlogController@profile')
     ->name('experiments.blog.profile')
     ->middleware('role:admin');
 
 // V1
-
-// Search
-
-Route::get('search', ['uses' => 'SearchController@search', 'as' => 'search.results']);
-
-Route::get('search/ajaxsearch', ['uses' => 'SearchController@ajaxsearch', 'as' => 'search.ajax']);
-
-Route::get('search/{token}', ['uses' => 'SearchController@search', 'as' => 'search.results.type']);
 
 // Registration
 
@@ -410,12 +539,6 @@ Route::post('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' =
 // comment.edit is in V2
 
 Route::put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
-
-// Admin
-
-Route::get('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageIndex', 'as' => 'admin.image.index']);
-
-Route::post('admin/image', ['middleware' => 'role:admin', 'uses' => 'AdminController@imageStore', 'as' => 'admin.image.store']);
 
 // Atom feeds
 

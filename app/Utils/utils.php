@@ -5,6 +5,19 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
 
+function full_text_safe($string)
+{
+    $string = trim($string);
+
+    $string = str_replace(
+        ['-', '+', '%', '(', ')', '*', '@', '<', '>', '~', '"'],
+        ['_minus_', '_plus_', '_percent_', '_bracket_o_', '_bracket_c_', '_multiply_', '_at_', '_a_bracket_l_', '_a_bracket_r_', '_about_', '_quote_'],
+        $string
+    );
+
+    return $string;
+}
+
 function component($component)
 {
     return new Utils\Component($component);
@@ -24,7 +37,22 @@ function layout($layout)
 
 function format_body($body)
 {
-    return (new Utils\BodyFormatter($body))->format();
+    return (new Utils\BodyFormatter($body))
+        ->markdown()
+        ->links()
+        ->images()
+        ->format();
+}
+
+function format_description($body)
+{
+    return (new Utils\BodyFormatter($body))
+        ->markdown()
+        ->links()
+        ->images()
+        ->plain()
+        ->trim()
+        ->format();
 }
 
 function format_date($date)
@@ -57,10 +85,18 @@ function backToAnchor($anchor)
     return Redirect::to(URL::previous().$anchor);
 }
 
+<<<<<<< HEAD
 function dist($type)
 {
     $path = public_path('dist/manifest.json');
     $manifest = json_decode(file_get_contents($path), true);
 
     return '/dist/'.$manifest[$type];
+=======
+function format_link($route, $title, $blank = false)
+{
+    $target = $blank ? 'target="_blank"' : '';
+
+    return '<a href="'.$route.'" '.$target.'>'.$title.'</a>';
+>>>>>>> master
 }

@@ -1,3 +1,7 @@
+dist: trusty
+
+sudo: true
+
 language: php
 
 php:
@@ -12,8 +16,6 @@ cache:
     - $HOME/.composer/cache
     - node_modules
 
-sudo: false
-
 install:
     - composer install --prefer-dist
     - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
@@ -22,7 +24,12 @@ install:
     - chmod -R o+w storage/
     - mysql -e 'create database trip2;'
     - php artisan migrate:refresh
+<<<<<<< HEAD
     - npm run build
+=======
+    - ./node_modules/.bin/gulp
+    - ./node_modules/.bin/gulp v1
+>>>>>>> master
 
 script:
     - ./vendor/bin/phpunit

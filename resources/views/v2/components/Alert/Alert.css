@@ -20,7 +20,6 @@
     .Alert__title {
         color: $gray-dark;
         font: $font-text-md;
-        line-height: $line-height-md;
     }
 
     .Alert__closeIcon {

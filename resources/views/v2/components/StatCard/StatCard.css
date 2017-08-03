@@ -12,6 +12,5 @@
     .StatCard__title {
         font: $font-heading-md;
         color: $white;
-        line-height: $line-height-md;
     }
 

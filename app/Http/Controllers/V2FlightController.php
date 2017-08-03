@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use Log;
 use Request;
 use App\Image;
 use App\Topic;
@@ -25,7 +26,9 @@ class V2FlightController extends Controller
         );
 
         $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
-        $destinations = Destination::select('id', 'name')->get();
+        $destinations = Destination::select('id', 'name')
+            ->havingRaw('`id` IN (SELECT DISTINCT `destination_id` FROM `content_destination` WHERE `content_id` IN (SELECT DISTINCT `id` FROM `contents` WHERE `type` = \'flight\'))')
+            ->get();
         $topics = Topic::select('id', 'name')->get();
 
         $travelmates = Content::getLatestItems('travelmate', 3);
@@ -103,9 +106,11 @@ class V2FlightController extends Controller
         return layout('2col')
 
             ->with('title', trans('content.flight.index.title'))
-            ->with('head_title', $flight->getHeadTitle())
-            ->with('head_description', $flight->getHeadDescription())
-            ->with('head_image', $flight->getHeadImage())
+            ->with('head_title', $flight->vars()->title)
+            ->with('head_description', $flight->vars()->description)
+
+            // Temporarily disabled since og:image tag does not allow to select custom images in FB
+            //->with('head_image', $flight->getHeadImage())
 
             ->with('header', region('Header', collect()
                 ->push(component('Link')
@@ -136,6 +141,12 @@ class V2FlightController extends Controller
                                 ->is('white')
                                 ->with('title', trans('content.action.edit.title'))
                                 ->with('route', route('flight.edit', [$flight]))
+                        )
+                        ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
+                            component('MetaLink')
+                                ->is('white')
+                                ->with('title', trans('content.action.edit.title').' (beta)')
+                                ->with('route', route('flight.edit2', [$flight]))
                         )
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Form')
                                 ->with('route', route(
@@ -201,10 +212,65 @@ class V2FlightController extends Controller
             ->create('flight');
     }
 
-    public function edit($id)
+    public function create2()
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->edit('flight', $id);
+        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
+
+        return layout('1col')
+
+            ->with('header', region('Header', collect()
+                ->push(component('EditorScript'))
+                ->push(component('Title')
+                    ->is('white')
+                    ->with('title', trans('content.flight.index.title'))
+                    ->with('route', route('flight.index'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.flight.create.title').' (beta)')
+                )
+                ->push(component('Form')
+                    ->with('route', route('flight.store2'))
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.flight.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title'))
+                        )
+                        ->push(component('FormImageId')
+                            ->with('title', trans('content.flight.edit.field.image_id.title'))
+                            ->with('name', 'image_id')
+                            ->with('value', old('image_id'))
+                        )
+                        ->push(component('FormTextarea')
+                            ->is('hidden')
+                            ->with('name', 'body')
+                            ->with('value', old('body'))
+                        )
+                        ->push(component('FormEditor')
+                            ->with('title', trans('content.flight.edit.field.body.title2'))
+                            ->with('name', 'body')
+                            ->with('value', [old('body')])
+                            ->with('rows', 10)
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.create.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
     }
 
     public function store()
@@ -213,9 +279,150 @@ class V2FlightController extends Controller
             ->store(request(), 'flight');
     }
 
+    public function store2()
+    {
+        $loggedUser = request()->user();
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $flight = $loggedUser->contents()->create([
+            'title' => request()->title,
+            'body' => request()->body,
+            'type' => 'flight',
+            'status' => 1,
+        ]);
+
+        $flight->destinations()->attach(request()->destinations);
+
+        if ($imageToken = request()->image_id) {
+            $imageId = str_replace(['[[', ']]'], '', $imageToken);
+            $flight->images()->attach([$imageId]);
+        }
+
+        Log::info('New content added', [
+            'user' =>  $flight->user->name,
+            'title' =>  $flight->title,
+            'type' =>  $flight->type,
+            'body' =>  $flight->body,
+            'link' => route('news.show', [$flight->slug]),
+        ]);
+
+        return redirect()
+            ->route('flight.index')
+            ->with('info', trans('content.store.info', [
+                'title' => $flight->title,
+            ]));
+    }
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('flight', $id);
+    }
+
+    public function edit2($id)
+    {
+        $flight = Content::findOrFail($id);
+        $destinations = Destination::select('id', 'name')->orderBy('name')->get();
+
+        return layout('1col')
+
+            ->with('header', region('Header', collect()
+                ->push(component('EditorScript'))
+                ->push(component('Title')
+                    ->is('white')
+                    ->with('title', trans('content.flight.index.title'))
+                    ->with('route', route('flight.index'))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.flight.edit.title').' (beta)')
+                )
+                ->push(component('Form')
+                    ->with('route', route('flight.update2', [$flight]))
+                    ->with('method', 'PUT')
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('content.flight.edit.field.title.title'))
+                            ->with('name', 'title')
+                            ->with('value', old('title', $flight->title))
+                        )
+                        ->push(component('FormImageId')
+                            ->with('title', trans('content.flight.edit.field.image_id.title'))
+                            ->with('name', 'image_id')
+                            ->with('value', old('image_id', $flight->image_id))
+                        )
+                        ->push(component('FormTextarea')
+                            ->is('hidden')
+                            ->with('name', 'body')
+                            ->with('value', old('body', $flight->body))
+                        )
+                        ->push(component('FormEditor')
+                            ->with('title', trans('content.flight.edit.field.body.title2'))
+                            ->with('name', 'body')
+                            ->with('value', [old('body', $flight->body)])
+                            ->with('rows', 10)
+                        )
+                        ->push(component('FormSelectMultiple')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('value', $flight->destinations->pluck('id'))
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.edit.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
     public function update($id)
     {
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'flight', $id);
+    }
+
+    public function update2($id)
+    {
+        $flight = Content::findOrFail($id);
+
+        $rules = [
+            'title' => 'required',
+            'body' => 'required',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $flight->fill([
+            'title' => request()->title,
+            'body' => request()->body,
+        ])
+        ->save();
+
+        $flight->destinations()->sync(request()->destinations ?: []);
+
+        if ($imageToken = request()->image_id) {
+            $imageId = str_replace(['[[', ']]'], '', $imageToken);
+            $flight->images()->sync([$imageId] ?: []);
+        }
+
+        return redirect()
+            ->route('flight.show', [$flight->slug])
+            ->with('info', trans('content.update.info', [
+                'title' => $flight->title,
+            ]));
     }
 }

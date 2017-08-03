@@ -11,7 +11,7 @@ $title = $title ?? '';
 
     <div class="MetaLink__title">
 
-        {{ $title }}
+        {!! $title !!}
 
     </div>
 

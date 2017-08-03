@@ -18,7 +18,6 @@
     .ForumRow__title {
         color: $gray-dark;
         font: $font-heading-md;
-        line-height: $line-height-md;
     }
 
     .ForumRow__title:hover {

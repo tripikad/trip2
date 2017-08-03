@@ -38,10 +38,10 @@
         props: {
             isclasses: { default: '' },
             name: { default: '' },
-            options: { default: '' },
+            options: { default: () => [] },
             placeholder: { default: '' },
             helper: { default: '' },
-            value: { default: '' }
+            value: { default: () => [] }
         },
 
         data() {
