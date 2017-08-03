@@ -30,3 +30,7 @@
     opacity: $opacity-md;
 }
 
+.FormTextfield--hidden {
+    display: none;
+}
+
