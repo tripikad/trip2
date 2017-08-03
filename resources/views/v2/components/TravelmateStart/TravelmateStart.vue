@@ -12,7 +12,7 @@
 
         </div>
 
-        <input type="text" :value="localValue" :name="name">
+        <input v-show="false" type="text" :value="localValue" :name="name">
 
     </div>
 
