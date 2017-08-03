@@ -374,4 +374,16 @@ return [
 
     'sponsored.no.results' => 'Hetkel pole ühtegi artiklit lisatud rubriiki "Toimetaja valik".',
 
+	// Poll
+	'poll.edit.field.destinations.title' => 'Vali sihtkohad',
+	'poll.edit.field.destinations.help' => '',
+	
+	'poll.index.title' => 'Küsitlused',
+	'poll.index.help' => '',
+	
+	'poll.edit.field.start.title' => 'Alguse aeg',
+	'poll.edit.field.start.help' => '',
+	
+	'poll.edit.field.end.title' => 'Lõppemise aeg',
+	'poll.edit.field.end.help' => '',
 ];

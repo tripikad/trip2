@@ -149,4 +149,14 @@ return [
         ],
     ],
 
+	'poll' => [
+		[
+			'title' => 'Küsitlus',
+			'type' => 'poll',
+		],
+		[
+			'title' => 'Viktoriin',
+			'type' => 'quiz',
+		],
+	],
 ];
