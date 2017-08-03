@@ -22,8 +22,7 @@ Route::get('uudised/{slug}', 'V2NewsController@show')
     ->name('news.show');
 
 Route::get('news/create', 'V2NewsController@create')
-    ->name('news.create')
-    ;//->middleware('role:admin');
+    ->name('news.create'); //->middleware('role:admin');
 
 Route::get('news/create2', 'V2NewsController@create2')
     ->name('news.create2')
@@ -262,8 +261,7 @@ Route::get('photo/id/{id}', 'V2PhotoController@show') // Placeholder
     ->name('photo.show');
 
 Route::get('photo/create', 'V2PhotoController@create')
-    ->name('photo.create')
-    ;//->middleware('role:regular');
+    ->name('photo.create'); //->middleware('role:regular');
 
 Route::get('photo/create2', 'V2PhotoController@create2')
     ->name('photo.create2')
@@ -288,16 +286,13 @@ Route::put('photo/{id}/update', 'V2PhotoController@update')
 // Polls
 
 Route::get('poll', 'PollController@index')
-    ->name('poll.index')
-	;//->middleware('role:admin');
+    ->name('poll.index'); //->middleware('role:admin');
 
 Route::get('poll/create', 'PollController@create')
-    ->name('poll.create')
-	;//->middleware('role:admin');
+    ->name('poll.create'); //->middleware('role:admin');
 
 Route::post('poll/store', 'PollController@store')
-    ->name('poll.store')
-	;//->middleware('role:admin');
+    ->name('poll.store'); //->middleware('role:admin');
 
 // Content redirects
 

@@ -36,7 +36,6 @@ class PollController extends Controller
      */
     public function store(Request $request)
     {
-        
     }
 
     /**

@@ -15,10 +15,10 @@ class CreatePollResultsTable extends Migration
     {
         Schema::create('poll_results', function (Blueprint $table) {
             $table->increments('poll_result_id');
-			$table->foreign('poll_id')->references('id')->on('poll');
-			$table->foreign('field_id')->references('field_id')->on('poll_fields');
-			$table->foreign('user_id')->references('id')->on('users');
-			$table->json('result');
+            $table->foreign('poll_id')->references('id')->on('poll');
+            $table->foreign('field_id')->references('field_id')->on('poll_fields');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->json('result');
         });
     }
 
