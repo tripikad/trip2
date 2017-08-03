@@ -13,7 +13,9 @@
                     'info' => session('info'),
                     'allowedTags' => config('site.allowedtags'),
                     'maxfilesize' => config('site.maxfilesize'),
-                    'promo' => config('promo')
+                    'promo' => config('promo'),
+                    'imageUploadRoute' => route('image.store'),
+                    'imageUploadTitle' => trans('image.drop.title'),
                 ])) 
             }}
         ">
@@ -23,6 +25,7 @@
     </head>
     <body>
         @include('v2.utils.svg')
+        @stack('prescripts')
         <div id="app" class="background-{{ $color }}">
             @yield('background')
             @yield('promobar')
@@ -30,8 +33,15 @@
             {!! component('HeaderError') !!}
             @yield('content')
             @yield('footer')
+            {!! component('ImagePicker')
+                ->with('route', route('image.index'))
+            !!}
+            {!! component('Editor')
+                ->with('route', route('utils.format'))
+            !!}
             {!! component('PhotoFullscreen') !!}
             {!! component('Alert') !!}
+
         </div>
         <script src="{{ elixir('v2/js/main.js') }}"></script>
         @include('v2.utils.promo')

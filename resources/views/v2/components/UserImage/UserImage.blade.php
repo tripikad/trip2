@@ -9,8 +9,10 @@ $border = $border ?? 3;
 @endphp
 
 <div class="UserImage {{ $isclasses }}" style="width: {{ $size }}px; height: {{ $size }}px;">
-    
-    <a href="{{ $route }}">
+
+    @if ($route)
+        <a href="{{ $route }}">
+    @endif
 
     <img class="UserImage__image" src="{{ $image }}" style="padding: {{ $border / 2 }}px;"/>
 
@@ -38,6 +40,8 @@ $border = $border ?? 3;
 
     </div>
 
-    </a>
+    @if ($route)
+        </a>
+    @endif
 
 </div>

@@ -6,6 +6,7 @@ $value = $value ?? '';
 $rows = $rows ?? 8;
 $cols = $cols ?? 50;
 $placeholder = $placeholder ?? '';
+$disabled = $disabled ?? false;
 
 @endphp
 
@@ -24,6 +25,9 @@ $placeholder = $placeholder ?? '';
         rows="{{ $rows }}"
         cols="{{ $cols }} "
         placeholder="{{ $placeholder }}"
+        @if($disabled)
+        disabled
+        @endif
     >{{ $value }}</textarea>
 
 </div>

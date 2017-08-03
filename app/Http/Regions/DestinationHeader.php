@@ -4,10 +4,20 @@ namespace App\Http\Regions;
 
 class DestinationHeader
 {
-    public function render($destination)
+    public function render($destination, $user)
     {
         $parents = $destination->getAncestors();
         $childrens = $destination->getImmediateDescendants()->sortBy('name');
+
+        $body = $destination->description ? $destination->vars()->description : '';
+        if ($body && $destination->user) {
+            $body .=
+                ' (<a href="'
+                .route('user.show', [$destination->user])
+                .'">'
+                .$destination->user->name
+                .'</a>)';
+        }
 
         return component('HeaderLight')
             ->with('navbar', component('Navbar')
@@ -28,10 +38,16 @@ class DestinationHeader
                     ->is('large')
                     ->with('title', $destination->name)
                 )
-                ->push(component('Body')
+                ->pushWhen($user && $user->hasRole('admin'),
+                    component('MetaLink')
+                        ->is('white')
+                        ->with('title', trans('content.action.edit.title'))
+                        ->with('route', route('destination.edit', [$destination]))
+                )
+                ->pushWhen($body, component('Body')
                     ->is('white')
                     ->is('responsive')
-                    ->with('body', $destination->vars()->description)
+                    ->with('body', $body)
                 )
                 ->pushWhen($childrens->count(), component('Meta')
                     ->is('large')
@@ -40,7 +56,7 @@ class DestinationHeader
                             ->is('white')
                             ->is('large')
                             ->with('title', $children->name)
-                            ->with('route', route('destination.show', [$children]));
+                            ->with('route', route('destination.showSlug', [$children->slug]));
                     }))
                 )
                 ->push(component('BlockHorizontal')

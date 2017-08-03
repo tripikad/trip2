@@ -19,8 +19,8 @@ class FrontpageHeader
                 ->with('navbar_desktop', region('NavbarDesktop', 'white'))
                 ->with('navbar_mobile', region('NavbarMobile', 'white'))
             )
-            ->with('search', component('FrontpageDestinationSearch')
-                ->with('route', route('destination.show', [0]))
+            ->with('search', component('FrontpageSearch')
+                ->with('route', route('destination.showSlug', [0]))
                 ->with('placeholder', trans('frontpage.index.search.title'))
                 ->with('options', $destinations)
             );

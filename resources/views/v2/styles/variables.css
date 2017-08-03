@@ -48,6 +48,7 @@ $black: #000;
 /* Grays */
 
 $gray-lighter: hsl(204, 6%, 97%);
+$gray-lighter-hover: hsl(204, 6%, 72%);
 
 $gray-light: hsl(204, 6%, 88%);
 $gray-light-hover: hsl(204, 6%, 72%);
@@ -61,12 +62,12 @@ $gray-dark-hover: hsl(204, 6%, 30%);
 /* Fonts */
 
 $font-family: "Sailec";
-$font-family-code: monospace;
+$font-family-code: "Cousine";
 $font-size-xs: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
-$font-size-lg: 18px;
-$font-size-xl: 20px;
+$font-size-lg: 19px;
+$font-size-xl: 21px;
 $font-size-xxl: 30px;
 $font-size-xxxl: 48px;
 $font-size-xxxxl: 64px;
@@ -75,21 +76,22 @@ $font-weight-semibold: 600;
 $font-weight-bold: bold;
 $line-height-xs: 100%;
 $line-height-sm: 120%;
-$line-height-md: 130%;
+$line-height-md: 135%;
 $line-height-lg: 150%;
 $line-height-xl: 200%;
 $line-height-xxl: 220%;
-$font-text-xs: $font-weight-normal $font-size-xs / $line-height-xs $font-family, sans-serif;
-$font-text-sm: $font-weight-normal $font-size-sm / $line-height-xs $font-family, sans-serif;
-$font-text-md: $font-weight-normal $font-size-md / $line-height-xs $font-family, sans-serif;
-$font-text-lg: $font-weight-normal $font-size-lg / $line-height-xs $font-family, sans-serif;
-$font-heading-xs: $font-weight-semibold $font-size-sm / $line-height-xs $font-family, sans-serif;
-$font-heading-sm: $font-weight-semibold $font-size-md / $line-height-xs $font-family, sans-serif;
-$font-heading-md: $font-weight-semibold $font-size-lg / $line-height-xs $font-family, sans-serif;
-$font-heading-lg: $font-weight-semibold $font-size-xl / $line-height-xs $font-family, sans-serif;
-$font-heading-xl: $font-weight-bold $font-size-xxl / $line-height-xs $font-family, sans-serif;
+$font-text-xs: $font-weight-normal $font-size-xs / $line-height-lg $font-family, sans-serif;
+$font-text-sm: $font-weight-normal $font-size-sm / $line-height-lg $font-family, sans-serif;
+$font-text-md: $font-weight-normal $font-size-md / $line-height-lg $font-family, sans-serif;
+$font-text-lg: $font-weight-normal $font-size-lg / $line-height-lg $font-family, sans-serif;
+$font-heading-xs: $font-weight-semibold $font-size-sm / $line-height-lg $font-family, sans-serif;
+$font-heading-sm: $font-weight-semibold $font-size-md / $line-height-lg $font-family, sans-serif;
+$font-heading-md: $font-weight-semibold $font-size-lg / $line-height-lg $font-family, sans-serif;
+$font-heading-lg: $font-weight-semibold $font-size-xl / $line-height-md $font-family, sans-serif;
+$font-heading-xl: $font-weight-bold $font-size-xxl / $line-height-sm $font-family, sans-serif;
 $font-heading-xxl: $font-weight-bold $font-size-xxxl / $line-height-xs $font-family, sans-serif;
 $font-heading-xxxl: $font-weight-bold $font-size-xxxxl / $line-height-xs $font-family, sans-serif;
+$font-code-sm: $font-weight-normal $font-size-sm / $line-height-md $font-family-code, monospace;
 $font-code-md: $font-weight-normal $font-size-md / $line-height-md $font-family-code, monospace;
 
 /* Spacing */
@@ -196,10 +198,16 @@ $border-gray-md: 2px solid $gray-light;
 $border-green-md: 2px solid $green;
 $border-white-md: 2px solid $white;
 
+$border-gray-lg: 4px solid $gray-light;
+
+/* Dashed dotted */
+$border-dotted-gray-md: 2px dotted $gray-light;
+
 /* Border radiuses */
 $border-radius-md: 3px;
 $border-radius-lg: $spacer;
 $border-radius-xl: calc($spacer * 1.5);
+$border-radius-xxl: calc($spacer * 100);
 
 /* Text shadows */
 

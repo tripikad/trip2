@@ -6,8 +6,9 @@
     border-radius: $border-radius-md;
     display: flex;
     font: $font-heading-sm;
+    line-height: $line-height-xs;
     justify-content: center;
-    padding: $padding-sm $padding-sm;
+    padding: $padding-sm $padding-lg;
     text-align: center;
 }
 
@@ -51,5 +52,10 @@
 .Button--narrow {
     display: inline-flex;
     display: flex ?if $mobile;
+}
+
+.Button--large {
+    font: $font-heading-md;
+    padding: calc($padding-sm * 1.25) $padding-lg;
 }
 

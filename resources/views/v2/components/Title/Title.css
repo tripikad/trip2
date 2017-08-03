@@ -3,12 +3,15 @@
 .Title__title {
     font: $font-heading-xl;
     font: $font-heading-lg ?if $mobile;
-    line-height: $line-height-sm;
     color: $gray-dark;
 }
 
 a .Title__title:hover {
     color: $gray-dark-hover;
+}
+
+.Title__title > a {
+    color: $blue;
 }
 
 .Title--small .Title__title {
@@ -24,8 +27,6 @@ a .Title__title:hover {
 .Title--large .Title__title {
     font: $font-heading-xxl;
     font: $font-heading-xl ?if $tablet;
-    line-height: $line-height-md;
-    line-height: $line-height-lg ?if $tablet;
 }
 
 .Title--white .Title__title {

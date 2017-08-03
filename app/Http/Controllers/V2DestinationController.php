@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Content;
 use App\Destination;
+use Illuminate\Http\Request;
 
 class V2DestinationController extends Controller
 {
     public function show($id)
     {
         $destination = Destination::findOrFail($id);
+
+        return redirect(route('destination.showSlug', $destination->slug), 301);
+    }
+
+    public function showSlug($slug)
+    {
+        $destination = Destination::findBySlugOrFail($slug);
 
         $photos = Content::getLatestPagedItems('photo', 9, $destination->id);
         $forums = Content::getLatestPagedItems('forum', 8, $destination->id);
@@ -31,7 +40,7 @@ class V2DestinationController extends Controller
             ->with('background', component('BackgroundMap'))
             ->with('color', 'yellow')
 
-            ->with('header', region('DestinationHeader', $destination))
+            ->with('header', region('DestinationHeader', $destination, $loggedUser))
 
             ->with('top', region(
                 'PhotoRow',
@@ -84,10 +93,71 @@ class V2DestinationController extends Controller
             ->render();
     }
 
-    public function showSlug($slug)
+    public function edit($id)
     {
-        $destination = Destination::findBySlugOrFail($slug);
+        $destination = Destination::findOrFail($id);
 
-        return $this->show($destination->id);
+        return layout('1col')
+
+            ->with('header', region('Header', collect()
+                ->push(component('EditorScript'))
+                ->push(component('Title')
+                    ->is('white')
+                    ->is('large')
+                    ->with('title', $destination->name)
+                    ->with('route', route('destination.show', $destination->id))
+                )
+            ))
+
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.destionation.edit.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('destination.update', [$destination]))
+                    ->with('fields', collect()
+                        ->push(component('FormEditor')
+                            ->with('title', trans('content.destination.edit.description'))
+                            ->with('name', 'description')
+                            ->with('value', [old('description', $destination->description)])
+                            ->with('rows', 10)
+                        )
+                        ->push(component('FormTextfield')
+                            ->with('title', trans('content.destination.edit.user'))
+                            ->with('name', 'user')
+                            ->with('value', ($destination->user ? $destination->user->name : ''))
+                        )
+                        ->push(component('FormButton')
+                            ->with('title', trans('content.edit.submit.title'))
+                        )
+                    )
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $rules = [
+            'user' => 'exists:users,name',
+        ];
+
+        $this->validate($request, $rules);
+
+        $destination = Destination::findOrFail($id);
+
+        $destination->description = $request->description;
+
+        if ($request->user && $request->user != '') {
+            $user = User::where('name', $request->user)->first();
+            $destination->user_id = $user->id;
+        }
+
+        $destination->save();
+
+        return redirect(route('destination.show', $destination));
     }
 }

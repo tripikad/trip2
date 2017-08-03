@@ -1,7 +1,7 @@
 @php
 
 	$name = $name ?? '';
-	$checked = $checked ?? '';
+	$value = $value ?? '';
 	$title = $title ?? '';
 
 @endphp
@@ -11,7 +11,7 @@
         id="{{ $name }}"
         name="{{ $name }}"
         type="checkbox"
-        @if ($checked) checked @endif
+        @if ($value) checked @endif
         class="FormCheckbox__checkbox" 
     >
 

@@ -52,6 +52,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     // Relations
 
+    public function unread_contents()
+    {
+        return $this->hasMany('App\UnreadContent');
+    }
+
     public function contents()
     {
         return $this->hasMany('App\Content');

@@ -44,7 +44,7 @@ class GenerateSitemap extends Command
         // Generate destinations sitemap
         $destinations = Destination::get();
         foreach ($destinations as $destination) {
-            $sitemap->add(route('destination.slug', [$destination->slug]));
+            $sitemap->add(route('destination.showSlug', [$destination->slug]));
         }
 
         $sitemap->store('xml', 'sitemap-'.$sitemapCounter);

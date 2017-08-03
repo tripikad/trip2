@@ -6,6 +6,8 @@ class FlightRow
 {
     public function render($flight)
     {
+        $user = auth()->user();
+
         return component('FlightRow')
             ->with('route', route('flight.show', [$flight->slug]))
             ->with('icon', component('Icon')
@@ -18,7 +20,7 @@ class FlightRow
                     ->push(component('MetaLink')
                         ->with('title', $flight->vars()->created_at)
                     )
-                    ->push(component('MetaLink')
+                    ->pushWhen($user && $user->hasRole('admin'), component('MetaLink')
                         ->with('title', trans('comment.action.edit.title'))
                         ->with('route', route('flight.edit', [$flight]))
                     )
@@ -26,7 +28,7 @@ class FlightRow
                         return component('Tag')
                             ->is('orange')
                             ->with('title', $destination->name)
-                            ->with('route', route('destination.show', [$destination]));
+                            ->with('route', route('destination.showSlug', [$destination->slug]));
                     }))
                     ->merge($flight->topics->map(function ($tag) {
                         return component('Tag')->with('title', $tag->name);
