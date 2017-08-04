@@ -81,12 +81,25 @@ class BodyFormatter
         $this->body = preg_replace_callback($pattern, function ($matches) {
             return component('Youtube')->with('id', $matches[2]);
         },
-            $this->body
-        );
+        $this->body);
 
         return $this;
     }
-    
+
+    public function vimeo()
+    {
+        // From https://github.com/regexhq/vimeo-regex
+
+        $pattern = "/(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/i";
+
+        $this->body = preg_replace_callback($pattern, function ($matches) {
+            return component('Vimeo')->with('id', $matches[4]);
+        },
+        $this->body);
+
+        return $this;
+    }
+
     public function plain()
     {
         $this->body = strip_tags($this->body);

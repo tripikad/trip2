@@ -140,6 +140,10 @@
     margin-bottom: $margin-md;
 }
 
+.Body > .Vimeo {
+    margin-bottom: $margin-md;
+}
+
 .Body--responsive {
     font-family: $font-family;
     font-size: responsive;
