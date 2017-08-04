@@ -15,6 +15,7 @@
                     <div class="Editor__tool" @click="insertH3">H3</div>
                     <div class="Editor__tool" @click="insertH4">H4</div>
                     <div class="Editor__tool" @click="insertTable">Table</div>
+                    <div class="Editor__tool" @click="insertCalendar">Calendar</div>
                     <div class="Editor__tool" @click="cleanMarkup">Cleanup</div>
                     <div class="Editor__tool" @click="openPicker">Image</div>
 
@@ -127,6 +128,16 @@
                 doc.replaceRange('\n\nKuupäev | Hind\n--------|-----\nKuupäev | Hind\n\n', cursor);
                 doc.setCursor({
                     line: cursor.line + 4,
+                    ch: 7
+                })
+                this.editor.focus()
+            },
+            insertCalendar() {
+                var doc = this.editor.getDoc()
+                var cursor = doc.getCursor();
+                doc.replaceRange('\n[[\nJaanuar:\n- Date link\n- Date link\nVeebruar:\n- Date link\n- Date link\n]]\n\n', cursor);
+                doc.setCursor({
+                    line: cursor.line + 2,
                     ch: 7
                 })
                 this.editor.focus()

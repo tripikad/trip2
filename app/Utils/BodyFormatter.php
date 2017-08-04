@@ -54,11 +54,12 @@ class BodyFormatter
 
     public function calendar()
     {
-        $yamlPattern = '/\[\[[\r\n](.*)[\r\n]\]\]/s';
+        $yamlPattern = '/(\[\[[\r\n].*[\r\n]\]\])/s';
 
         if (preg_match_all($yamlPattern, $this->body, $matches)) {
             foreach ($matches[1] as $match) {
-                if ($months = Yaml::parse($match)) {
+                $cleanedMatch = str_replace(['[[',']]'], '', $match);
+                if ($months = Yaml::parse($cleanedMatch)) {
                     $this->body = str_replace(
                         $match,
                         component('FlightCalendar')
