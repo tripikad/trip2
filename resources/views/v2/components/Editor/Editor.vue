@@ -180,42 +180,13 @@
         },
         mounted() {
             
-<<<<<<< HEAD
             this.editor = CodeMirror(this.$refs.source, {
                 mode: 'gfm',
                 theme: 'neo',
                 lineWrapping: true,
-                viewportMargin: Infinity
+                viewportMargin: Infinity,
+                indentWithTabs: true
             })
-=======
-            if (window.CodeMirror !== undefined) {
-
-                this.editor = CodeMirror(this.$refs.source, {
-                    mode: 'gfm',
-                    theme: 'neo',
-                    lineWrapping: true,
-                    viewportMargin: Infinity,
-                    indentWithTabs: true
-                })
-                
-                this.editor.on('change', editor => {
-                    this.value = editor.getValue()
-                    this.$events.$emit('editor.update', this.value)
-                    this.updatePreview()
-                })
-
-                this.$events.$on('editor.show', value => {
-                    this.show = true
-                    this.value = value
-                    this.editor.setValue(this.value ? this.value : '')
-                    setTimeout(() => {
-                        this.editor.refresh()
-                        this.editor.focus()
-                        this.editor.setCursor({line: 0, ch: 0})
-                    }, 1)
-                    this.updatePreview()
-                })
->>>>>>> master
             
             this.editor.on('change', editor => {
                 this.value = editor.getValue()
