@@ -20,14 +20,22 @@
         top: 0;
         right: 0;
         height: auto;
-        padding: $padding-lg;
-        padding: $padding-md ?if $mobile;
+        padding: $padding-xxl $padding-lg $padding-lg $padding-lg;
+        padding: $padding-xl $padding-md $padding-md $padding-md ?if $mobile;
     }
 
     .Editor__toolbar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
         display: flex;
         justify-content: space-between;
         margin-bottom: $margin-md;
+        padding: $padding-md $padding-lg;
+        box-shadow: $box-shadow-bottom;
+        z-index: 10000;
+        background: $white;
     }
 
     .Editor__toolbarLeft {
