@@ -3,8 +3,8 @@
 namespace App\Utils;
 
 use Markdown;
-use Symfony\Component\Yaml\Yaml;
 use App\Image;
+use Symfony\Component\Yaml\Yaml;
 
 class BodyFormatter
 {
@@ -58,7 +58,7 @@ class BodyFormatter
 
         if (preg_match_all($yamlPattern, $this->body, $matches)) {
             foreach ($matches[1] as $match) {
-                $cleanedMatch = str_replace(['[[',']]'], '', $match);
+                $cleanedMatch = str_replace(['[[', ']]'], '', $match);
                 if ($months = Yaml::parse($cleanedMatch)) {
                     $this->body = str_replace(
                         $match,
