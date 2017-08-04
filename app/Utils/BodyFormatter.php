@@ -4,6 +4,7 @@ namespace App\Utils;
 
 use Markdown;
 use App\Image;
+use Symfony\Component\Yaml\Yaml;
 
 class BodyFormatter
 {
@@ -42,6 +43,28 @@ class BodyFormatter
                     $this->body = str_replace(
                         "[[$image->id]]",
                         '<img src="'.$image->preset('large').'" />',
+                        $this->body
+                    );
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    public function calendar()
+    {
+        $yamlPattern = '/(\[\[[\r\n].*[\r\n]\]\])/s';
+
+        if (preg_match_all($yamlPattern, $this->body, $matches)) {
+            foreach ($matches[1] as $match) {
+                $cleanedMatch = str_replace(['[[', ']]'], '', $match);
+                if ($months = Yaml::parse($cleanedMatch)) {
+                    $this->body = str_replace(
+                        $match,
+                        component('FlightCalendar')
+                            ->with('months', $months)
+                            ->render(),
                         $this->body
                     );
                 }

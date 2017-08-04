@@ -38,6 +38,7 @@ function layout($layout)
 function format_body($body)
 {
     return (new Utils\BodyFormatter($body))
+        ->calendar()
         ->markdown()
         ->links()
         ->images()
