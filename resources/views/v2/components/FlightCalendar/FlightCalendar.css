@@ -7,8 +7,8 @@
 }
 
     .FlightCalendar__month {
-        width: 33%;
         margin-right: $margin-xs;
+        flex: 1;
     }
 
     .FlightCalendar__month:last-child {

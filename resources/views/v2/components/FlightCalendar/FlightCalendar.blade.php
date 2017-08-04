@@ -16,6 +16,7 @@ $months = $months ?? [];
 
         </div>
 
+        <div class="FlightCalendar__cards">
 
         @foreach($dates as $date)
             
@@ -26,6 +27,8 @@ $months = $months ?? [];
             </div>
 
         @endforeach
+
+        </div>
 
     </div>
 
