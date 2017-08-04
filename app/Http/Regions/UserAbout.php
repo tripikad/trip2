@@ -7,7 +7,7 @@ class UserAbout
     public function render($user)
     {
         return component('Body')
-            ->is('cyan')
+            ->is('white')
             ->is('responsive')
             ->with('body', collect()
                 ->push(trans("user.rank.$user->rank"))

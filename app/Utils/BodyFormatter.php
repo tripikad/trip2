@@ -4,6 +4,7 @@ namespace App\Utils;
 
 use Markdown;
 use App\Image;
+use Symfony\Component\Yaml\Yaml;
 
 class BodyFormatter
 {
@@ -47,6 +48,54 @@ class BodyFormatter
                 }
             }
         }
+
+        return $this;
+    }
+
+    public function calendar()
+    {
+        $yamlPattern = '/(\[\[[\r\n].*[\r\n]\]\])/s';
+
+        if (preg_match_all($yamlPattern, $this->body, $matches)) {
+            foreach ($matches[1] as $match) {
+                $cleanedMatch = str_replace(['[[', ']]'], '', $match);
+                if ($months = Yaml::parse($cleanedMatch)) {
+                    $this->body = str_replace(
+                        $match,
+                        component('FlightCalendar')
+                            ->with('months', $months)
+                            ->render(),
+                        $this->body
+                    );
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    public function youtube()
+    {
+        $pattern = "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i";
+
+        $this->body = preg_replace_callback($pattern, function ($matches) {
+            return component('Youtube')->with('id', $matches[2]);
+        },
+        $this->body);
+
+        return $this;
+    }
+
+    public function vimeo()
+    {
+        // From https://github.com/regexhq/vimeo-regex
+
+        $pattern = "/(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/i";
+
+        $this->body = preg_replace_callback($pattern, function ($matches) {
+            return component('Vimeo')->with('id', $matches[4]);
+        },
+        $this->body);
 
         return $this;
     }
