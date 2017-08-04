@@ -7,7 +7,7 @@
 }
 
     .FlightCalendar__month {
-        margin-right: $margin-sm;
+        margin-right: $margin-xs;
         flex: 1;
     }
 
@@ -16,7 +16,8 @@
     }
 
     .FlightCalendar__monthTitle {
-        font: $font-text-md;
+        font: $font-text-xs;
+        text-transform: uppercase;
         margin-bottom: $margin-xs;
         text-align: center;
         color: $gray-dark;
