@@ -74,6 +74,19 @@ class BodyFormatter
         return $this;
     }
 
+    public function youtube()
+    {
+        $pattern = "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i";
+
+        $this->body = preg_replace_callback($pattern, function ($matches) {
+            return component('Youtube')->with('id', $matches[2]);
+        },
+            $this->body
+        );
+
+        return $this;
+    }
+    
     public function plain()
     {
         $this->body = strip_tags($this->body);

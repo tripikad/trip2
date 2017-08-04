@@ -132,6 +132,14 @@
     margin: $margin-md 0;
 }
 
+.Body > .FlightCalendar {
+    margin-bottom: $margin-md;
+}
+
+.Body > .Youtube {
+    margin-bottom: $margin-md;
+}
+
 .Body--responsive {
     font-family: $font-family;
     font-size: responsive;
