@@ -38,7 +38,7 @@ function layout($layout)
 function format_body($body)
 {
     return (new Utils\BodyFormatter($body))
-        ->yaml()
+        ->calendar()
         ->markdown()
         ->links()
         ->images()

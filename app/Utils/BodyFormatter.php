@@ -52,7 +52,7 @@ class BodyFormatter
         return $this;
     }
 
-    public function yaml()
+    public function calendar()
     {
         $yamlPattern = '/\[\[[\r\n](.*)[\r\n]\]\]/s';
 

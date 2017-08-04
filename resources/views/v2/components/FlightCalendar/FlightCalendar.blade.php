@@ -12,7 +12,7 @@ $months = $months ?? [];
 
         <div class="FlightCalendar__monthTitle">
         
-        {{ $month }}
+            {{ $month }}
 
         </div>
 
