@@ -1,0 +1,31 @@
+@import "variables";
+
+.FlightCalendar {
+    display: flex;
+    width: 100%;
+    background: $gray-light;
+}
+
+    .FlightCalendar__month {
+        width: 33%;
+        margin-right: $margin-xs;
+    }
+
+    .FlightCalendar__month:last-child {
+        margin-right: 0;
+    }
+
+    .FlightCalendar__card {
+        width: 100%;
+        background: $yellow;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: $margin-xs;
+        height: $height-lg;
+    }
+
+    .FlightCalendar__card:last-child {
+        margin-bottom: 0;
+    }

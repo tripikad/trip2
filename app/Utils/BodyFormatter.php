@@ -58,10 +58,12 @@ class BodyFormatter
 
         if (preg_match_all($yamlPattern, $this->body, $matches)) {
             foreach ($matches[1] as $match) {
-                if ($data = Yaml::parse($match)) {
+                if ($months = Yaml::parse($match)) {
                     $this->body = str_replace(
                         $match,
-                        '<pre>'.json_encode($data).'</pre>',
+                        component('FlightCalendar')
+                            ->with('months', $months)
+                            ->render(),
                         $this->body
                     );
                 }
