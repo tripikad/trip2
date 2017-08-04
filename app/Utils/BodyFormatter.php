@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use Markdown;
+use Symfony\Component\Yaml\Yaml;
 use App\Image;
 
 class BodyFormatter
@@ -42,6 +43,25 @@ class BodyFormatter
                     $this->body = str_replace(
                         "[[$image->id]]",
                         '<img src="'.$image->preset('large').'" />',
+                        $this->body
+                    );
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    public function yaml()
+    {
+        $yamlPattern = '/\[\[[\r\n](.*)[\r\n]\]\]/s';
+
+        if (preg_match_all($yamlPattern, $this->body, $matches)) {
+            foreach ($matches[1] as $match) {
+                if ($data = Yaml::parse($match)) {
+                    $this->body = str_replace(
+                        $match,
+                        '<pre>'.json_encode($data).'</pre>',
                         $this->body
                     );
                 }

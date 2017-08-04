@@ -175,7 +175,8 @@
                     mode: 'gfm',
                     theme: 'neo',
                     lineWrapping: true,
-                    viewportMargin: Infinity
+                    viewportMargin: Infinity,
+                    indentWithTabs: true
                 })
                 
                 this.editor.on('change', editor => {
