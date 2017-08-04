@@ -39,6 +39,8 @@ function format_body($body)
 {
     return (new Utils\BodyFormatter($body))
         ->calendar()
+        ->youtube()
+        ->vimeo()
         ->markdown()
         ->links()
         ->images()
