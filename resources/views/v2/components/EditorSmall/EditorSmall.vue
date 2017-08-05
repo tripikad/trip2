@@ -9,14 +9,13 @@
             <div class="EditorSmall__toolbar">
                 <div
                     class="EditorSmall__button"
-                    @click="showSource = false"
+                    @click="showSource = false; editor.content.innerHTML = localValue"
                 >Back</div> 
             </div>
             
             <textarea
                 class="EditorSmall__source"
-                :value="localValue"
-                @blur="editor.content.innerHTML = $event.target.value"
+                v-model="localValue"
             ></textarea>
         
         </div>
