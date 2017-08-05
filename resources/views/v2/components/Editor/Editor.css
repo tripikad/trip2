@@ -21,7 +21,7 @@
         right: 0;
         height: auto;
         padding: $padding-xxl $padding-lg $padding-lg $padding-lg;
-        padding: $padding-xl $padding-md $padding-md $padding-md ?if $mobile;
+        padding: $padding-xxl $padding-md $padding-md $padding-md ?if $mobile;
     }
 
     .Editor__toolbar {
@@ -33,6 +33,7 @@
         justify-content: space-between;
         margin-bottom: $margin-md;
         padding: $padding-md $padding-lg;
+        padding: $padding-md ?if $mobile;
         box-shadow: $box-shadow-bottom;
         z-index: 10000;
         background: $white;
@@ -40,6 +41,8 @@
 
     .Editor__toolbarLeft {
         display: flex;
+        overflow-x: scroll;
+        margin-right: $margin-sm;
     }
 
     .Editor__tool {
