@@ -59,6 +59,7 @@ class BodyFormatter
         if (preg_match_all($yamlPattern, $this->body, $matches)) {
             foreach ($matches[1] as $match) {
                 $cleanedMatch = str_replace(['[[', ']]'], '', $match);
+                $cleanedMatch = preg_replace("/-\s+(.+)/", "- '$1'", $cleanedMatch);
                 if ($months = Yaml::parse($cleanedMatch)) {
                     $this->body = str_replace(
                         $match,
