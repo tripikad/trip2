@@ -8,7 +8,7 @@ $id = $id ?? '';
 
     <iframe
         class="Vimeo__iframe"
-        src="http://player.vimeo.com/video/{{ $id }}"
+        src="//player.vimeo.com/video/{{ $id }}"
         frameborder="0"
         allowfullscreen
     ></iframe>
