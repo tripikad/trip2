@@ -28,8 +28,8 @@ class FeedController extends Controller
                     $content->user->name,
                     route($content->type.'.show', [$content->slug], true),
                     $content->created_at,
-                    $content->body_filtered,
-                    $content->body_filtered
+                    $content->vars()->body,
+                    $content->vars()->body
                 );
             }
         }
@@ -58,8 +58,8 @@ class FeedController extends Controller
                     $content->user->name,
                     route($content->type.'.show', [$content->slug], true),
                     $content->created_at,
-                    $content->body_filtered,
-                    $content->body_filtered
+                    $content->vars()->body,
+                    $content->vars()->body
                 );
             }
         }
