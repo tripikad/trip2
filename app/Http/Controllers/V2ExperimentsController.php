@@ -15,6 +15,10 @@ class V2ExperimentsController extends Controller
 
             ->with('content', collect()
 
+                ->push(component('EditorSmall')
+                    ->with('body', 'Testing it out')
+                )
+
                 ->push(component('Title')
                     ->with('title', 'New forms')
                 )

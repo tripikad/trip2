@@ -1,0 +1,41 @@
+@import "variables";
+@import "pell/dist/pell.css";
+
+.EditorSmall {
+
+}
+
+    .EditorSmall__toolbar {
+        margin-bottom: $margin-xs;
+    }
+
+    .EditorSmall__button {
+        background: none;
+        border: none;
+        font: $font-text-xs;
+        justify-content: center;
+        padding: $padding-xs;
+        color: $gray;
+        cursor: pointer;
+    }
+
+    .EditorSmall__button:hover {
+        color: $gray-hover;
+    }
+
+    .EditorSmall__body {
+        border-radius: $border-radius-md;
+        border: $border-gray-md;
+        padding: $padding-sm;
+        outline: none;
+    }
+
+    .EditorSmall__source {
+        font: $font-code-sm;
+        line-height: $line-height-lg;
+        border-radius: $border-radius-md;
+        border: $border-gray-md;
+        padding: $padding-sm;
+        outline: none;
+    }
+
