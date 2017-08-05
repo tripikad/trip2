@@ -22,7 +22,7 @@ $months = $months ?? [];
             
             <div class="FlightCalendar__card">
 
-                {!! format_body($date) !!}
+                {!! $date !!}
 
             </div>
 
