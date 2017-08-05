@@ -1,9 +1,4 @@
 @import "variables";
-@import "pell/dist/pell.css";
-
-.EditorSmall {
-
-}
 
     .EditorSmall__toolbar {
         margin-bottom: $margin-xs;
@@ -26,8 +21,11 @@
     .EditorSmall__body {
         border-radius: $border-radius-md;
         border: $border-gray-md;
-        padding: $padding-sm;
+        padding: $padding-md;
         outline: none;
+        width: 100%;
+        height: calc($spacer * 30);
+        overflow-y: scroll;
     }
 
     .EditorSmall__source {
@@ -35,7 +33,10 @@
         line-height: $line-height-lg;
         border-radius: $border-radius-md;
         border: $border-gray-md;
-        padding: $padding-sm;
+        padding: $padding-md;
         outline: none;
+        width: 100%;
+        height: calc($spacer * 30);
+        overflow-y: scroll;
     }
 

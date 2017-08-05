@@ -5,10 +5,20 @@
         <div v-show="!showSource" ref="EditorSmall"></div>
 
         <div v-show="showSource">
+            
             <div class="EditorSmall__toolbar">
-                <div class="EditorSmall__button" @click="showSource = false">Back</div> 
+                <div
+                    class="EditorSmall__button"
+                    @click="showSource = false"
+                >Back</div> 
             </div>
-            <textarea class="EditorSmall__source" :value="localValue" @blur="editor.content.innerHTML = $event.target.value"></textarea>
+            
+            <textarea
+                class="EditorSmall__source"
+                :value="localValue"
+                @blur="editor.content.innerHTML = $event.target.value"
+            ></textarea>
+        
         </div>
 
     </div>
@@ -32,12 +42,6 @@
             showSource: false
         }),
 
-        watch: {
-            localValue(value) {
-                //this.editor.content.innerHTML = value
-            }
-        },
-
         mounted() {
 
             this.editor = pell.init({
@@ -45,22 +49,18 @@
                 onChange: value => this.localValue = value,
                 actions: [
                     {
-                        name: 'bold',
                         icon: 'B',
                         result: () => pell.exec('bold')
                     },
                     {
-                        name: 'italic',
                         icon: 'I',
                         result: () => pell.exec('italic')
                     },
                     {
-                        name: 'ulist',
                         icon: '•',
                         result: () => pell.exec('insertUnorderedList')
                     },
                     {
-                        name: 'link',
                         icon: 'Link',
                         result: () => {
                             var url = window.prompt('Enter the link URL')
@@ -68,8 +68,7 @@
                         }
                     },
                     {
-                        name: 'link',
-                        icon: 'Link',
+                        icon: 'Source',
                         result: () => {
                             this.showSource = !this.showSource
                         }
