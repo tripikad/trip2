@@ -61,7 +61,9 @@ class BodyFormatter
                 $cleanedMatch = str_replace(['[[', ']]'], '', $match);
                 $cleanedMatch = preg_replace_callback(
                     "/-\s+(.+)/",
-                    function($matches) { return "- '".format_body($matches[1])."'"; },
+                    function ($matches) {
+                        return "- '".format_body($matches[1])."'";
+                    },
                     $cleanedMatch
                 );
                 if ($months = Yaml::parse($cleanedMatch)) {
