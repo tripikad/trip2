@@ -9,7 +9,7 @@ Route::get('/', 'V2FrontpageController@index')
 
 // Content status
 
-Route::post('content/{type}/{id}/status/{status}', 'ContentController@status')
+Route::post('content/{type}/{id}/status/{status}', 'V2ContentController@status')
     ->name('content.status')
     ->middleware('role:admin');
 
