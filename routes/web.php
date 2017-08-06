@@ -422,10 +422,6 @@ Route::get('reset/password/{token}', ['uses' => 'Auth\ResetController@passwordFo
 
 Route::post('reset/password', ['uses' => 'Auth\ResetController@reset', 'as' => 'reset.password.submit']);
 
-// FB campaign
-/*Route::get('tasuta-lennupiletid-maltale', ['uses' => 'CampaignController@index', 'as' => 'index']);
-Route::get('tasuta-lennupiletid-maltale{path}', ['uses' => 'CampaignController@index', 'as' => 'index']);*/
-
 // Flags
 
 Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 'role:regular', 'uses' => 'FlagController@toggle', 'as' => 'flag.toggle']);
@@ -526,3 +522,8 @@ Route::get('content/{path}', 'RedirectController@redirectContent')
 // All other legacy aliases
 
 Route::get('{part1}/{part2?}', 'RedirectController@redirectAlias');
+
+// FB campaign
+
+// Route::get('tasuta-lennupiletid-maltale', ['uses' => 'CampaignController@index', 'as' => 'index']);
+// Route::get('tasuta-lennupiletid-maltale{path}', ['uses' => 'CampaignController@index', 'as' => 'index']);*/
