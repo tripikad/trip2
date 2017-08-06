@@ -363,24 +363,6 @@ Route::get('experiments/fonts', 'V2ExperimentsController@fontsIndex')
 Route::get('experiments/map', 'V2ExperimentsController@mapIndex')
     ->name('experiments.map.index');
 
-// Experiments: Blog
-
-Route::get('experiments/blog', 'V2ExperimentsBlogController@index')
-    ->name('experiments.blog.index')
-    ->middleware('role:admin');
-
-Route::get('experiments/blog/show', 'V2ExperimentsBlogController@show')
-    ->name('experiments.blog.show')
-    ->middleware('role:admin');
-
-Route::get('experiments/blog/edit', 'V2ExperimentsBlogController@edit')
-    ->name('experiments.blog.edit')
-    ->middleware('role:admin');
-
-Route::get('experiments/blog/profile', 'V2ExperimentsBlogController@profile')
-    ->name('experiments.blog.profile')
-    ->middleware('role:admin');
-
 // V1
 
 // Registration
