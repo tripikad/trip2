@@ -113,32 +113,16 @@ Route::get('travelmate/create', 'V2TravelmateController@create')
     ->name('travelmate.create')
     ->middleware('role:regular');
 
-Route::get('travelmate/create2', 'V2TravelmateController@create2')
-    ->name('travelmate.create2')
-    ->middleware('role:regular');
-
 Route::post('travelmate/store', 'V2TravelmateController@store')
     ->name('travelmate.store')
-    ->middleware('role:regular');
-
-Route::post('travelmate/store2', 'V2TravelmateController@store2')
-    ->name('travelmate.store2')
     ->middleware('role:regular');
 
 Route::get('travelmate/{id}/edit', 'V2TravelmateController@edit')
     ->name('travelmate.edit')
     ->middleware('role:admin,contentowner');
 
-Route::get('travelmate/{id}/edit2', 'V2TravelmateController@edit2')
-    ->name('travelmate.edit2')
-    ->middleware('role:admin,contentowner');
-
 Route::put('travelmate/{id}/update', 'V2TravelmateController@update')
     ->name('travelmate.update')
-    ->middleware('role:admin,contentowner');
-
-Route::put('travelmate/{id}/update2', 'V2TravelmateController@update2')
-    ->name('travelmate.update2')
     ->middleware('role:admin,contentowner');
 
 // Forum
