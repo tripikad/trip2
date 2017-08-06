@@ -20,12 +20,13 @@ class CommentTest extends BrowserKitTestCase
 
         $this->publicContentTypes = [
             'blog',
+            'buysell',
+            'expat',
             'flight',
             'forum',
-            'expat',
-            'buysell',
             'news',
-            'travelmate',
+            'shortnews',
+            'travelmate'
         ];
 
         $this->privateContentTypes = [
