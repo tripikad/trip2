@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Log;
 use Mail;
 use App\User;
+use Honeypot;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
@@ -26,7 +27,53 @@ class ResetController extends Controller
 
     public function applyForm()
     {
-        return view('pages.auth.reset.apply');
+        // return view('pages.auth.reset.apply');
+
+        return layout('1colnarrow')
+            ->cached(false)
+            ->with('color', 'gray')
+            ->with('background', component('BackgroundMap'))
+            ->with('header', region('StaticHeader'))
+            ->with('top', collect()
+                ->push(component('Title')
+                    ->is('center')
+                    ->is('large')
+                    ->with('title', trans('auth.reset.apply.title'))
+                )
+                ->push('&nbsp;')
+                ->push(component('Title')
+                    ->is('center')
+                    ->is('small')
+                    ->with('title', trans('auth.reset.apply.subtitle'))
+                )
+            )
+            ->with('content', collect()
+                ->push(component('Form')
+                    ->with('route', route('reset.apply.submit'))
+                    ->with('fields', collect()
+                        ->push(Honeypot::generate('full_name', 'time'))
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('auth.reset.apply.field.email.title'))
+                            ->with('name', 'email')
+                        )
+                        ->push(component('FormButton')
+                            ->is('wide')
+                            ->is('large')
+                            ->with('title', trans('auth.reset.apply.submit.title'))
+                        )
+                ))
+            )
+            ->with('bottom', collect()->push(component('MetaLink')
+                ->with('title', trans('auth.reset.login.title', [
+                    'link' => format_link(
+                        route('login.form'),
+                        trans('auth.reset.login.link.title')
+                    ),
+                ]))
+            ))
+            ->with('footer', region('FooterLight'))
+            ->render();
     }
 
     public function passwordForm($token = null)
@@ -35,7 +82,52 @@ class ResetController extends Controller
             throw new NotFoundHttpException;
         }
 
-        return view('pages.auth.reset.password')->with('token', $token);
+        // return view('pages.auth.reset.password')->with('token', $token);
+
+        return layout('1colnarrow')
+            ->cached(false)
+            ->with('color', 'gray')
+            ->with('background', component('BackgroundMap'))
+            ->with('header', region('StaticHeader'))
+            ->with('top', collect()
+                ->push(component('Title')
+                    ->is('center')
+                    ->is('large')
+                    ->with('title', trans('auth.reset.password.title'))
+                )
+            )
+            ->with('content', collect()
+                ->push(component('Form')
+                    ->with('route', route('reset.password.submit'))
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('auth.reset.password.field.email.title'))
+                            ->with('name', 'email')
+                        )
+                        ->push(component('FormPassword')
+                            ->is('large')
+                            ->with('title', trans('auth.reset.password.field.password.title'))
+                            ->with('name', 'password')
+                        )
+                        ->push(component('FormPassword')
+                            ->is('large')
+                            ->with('title', trans('auth.reset.password.field.password_confirmation.title'))
+                            ->with('name', 'password_confirmation')
+                        )
+                        ->push(component('FormHidden')
+                            ->with('name', 'token')
+                            ->with('value', $token)
+                        )
+                        ->push(component('FormButton')
+                            ->is('wide')
+                            ->is('large')
+                            ->with('title', trans('auth.reset.password.submit.title'))
+                        )
+                ))
+            )
+            ->with('footer', region('FooterLight'))
+            ->render();
     }
 
     public function postEmail(Request $request)
