@@ -523,7 +523,3 @@ Route::get('content/{path}', 'RedirectController@redirectContent')
 
 Route::get('{part1}/{part2?}', 'RedirectController@redirectAlias');
 
-// FB campaign
-
-// Route::get('tasuta-lennupiletid-maltale', ['uses' => 'CampaignController@index', 'as' => 'index']);
-// Route::get('tasuta-lennupiletid-maltale{path}', ['uses' => 'CampaignController@index', 'as' => 'index']);*/
