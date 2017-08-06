@@ -15,6 +15,7 @@
             
             <textarea
                 class="EditorSmall__source"
+                :name="name"
                 v-model="localValue"
             ></textarea>
         
@@ -32,6 +33,7 @@
 
         props: {
             isclasses: { default: '' },
+            name: { default: '' },
             value: { default: '' }
         },
 
