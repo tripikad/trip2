@@ -37,6 +37,7 @@
     "lodash.chunk": "^4.2.0",
     "lodash.unescape": "^4.0.1",
     "normalize.css": "^3.0.3",
+    "pell": "^0.7.0",
     "postcss-font-magician": "^1.4.0",
     "postcss-if-media": "^1.0.1",
     "postcss-import": "^9.0.0",
