@@ -142,12 +142,6 @@ class V2FlightController extends Controller
                                 ->with('title', trans('content.action.edit.title'))
                                 ->with('route', route('flight.edit', [$flight]))
                         )
-                        ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
-                            component('MetaLink')
-                                ->is('white')
-                                ->with('title', trans('content.action.edit.title').' (beta)')
-                                ->with('route', route('flight.edit2', [$flight]))
-                        )
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Form')
                                 ->with('route', route(
                                     'content.status',
@@ -208,12 +202,6 @@ class V2FlightController extends Controller
 
     public function create()
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->create('flight');
-    }
-
-    public function create2()
-    {
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
 
         return layout('1col')
@@ -232,7 +220,7 @@ class V2FlightController extends Controller
                     ->with('title', trans('content.flight.create.title').' (beta)')
                 )
                 ->push(component('Form')
-                    ->with('route', route('flight.store2'))
+                    ->with('route', route('flight.store'))
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
                             ->is('large')
@@ -275,12 +263,6 @@ class V2FlightController extends Controller
 
     public function store()
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'flight');
-    }
-
-    public function store2()
-    {
         $loggedUser = request()->user();
 
         $rules = [
@@ -321,12 +303,6 @@ class V2FlightController extends Controller
 
     public function edit($id)
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->edit('flight', $id);
-    }
-
-    public function edit2($id)
-    {
         $flight = Content::findOrFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
 
@@ -346,7 +322,7 @@ class V2FlightController extends Controller
                     ->with('title', trans('content.flight.edit.title').' (beta)')
                 )
                 ->push(component('Form')
-                    ->with('route', route('flight.update2', [$flight]))
+                    ->with('route', route('flight.update', [$flight]))
                     ->with('method', 'PUT')
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
@@ -390,12 +366,6 @@ class V2FlightController extends Controller
     }
 
     public function update($id)
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'flight', $id);
-    }
-
-    public function update2($id)
     {
         $flight = Content::findOrFail($id);
 
