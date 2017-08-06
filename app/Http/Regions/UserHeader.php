@@ -35,7 +35,7 @@ class UserHeader
                 component('Button')
                     ->is('cyan')
                     ->with('title', trans('menu.user.add.places'))
-                    ->with('route', route('user.destinations', [$user]))
+                    ->with('route', route('user.destinations.edit', [$user]))
             );
     }
 

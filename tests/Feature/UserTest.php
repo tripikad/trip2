@@ -16,10 +16,9 @@ class UserTest extends BrowserKitTestCase
         $user_editing_profile = factory(User::class)->create();
 
         $this->actingAs($user_editing_profile)
-            //->visit("user/$user_editing_profile->id")
-            //->click(trans('menu.user.edit.profile'))
-            //->seePageIs("user/$user_editing_profile->id/edit")
-            ->visit("user/$user_editing_profile->id/edit2")
+            ->visit("user/$user_editing_profile->id")
+            ->click(trans('menu.user.edit.profile'))
+            ->seePageIs("user/$user_editing_profile->id/edit")
             ->type('manny', 'name')
             ->type('manny@calavera.com', 'email')
             ->type('calavera', 'password')
@@ -57,7 +56,7 @@ class UserTest extends BrowserKitTestCase
         $user_editing_profile = factory(User::class)->create();
 
         $this->actingAs($user_editing_profile)
-            ->visit("user/$user_editing_profile->id/edit2")
+            ->visit("user/$user_editing_profile->id/edit")
             ->attach(storage_path().'/tests/test.jpg', 'file')
             ->press(trans('user.edit.submit'))
             ->seePageIs("user/$user_editing_profile->id");

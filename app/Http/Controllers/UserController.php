@@ -12,7 +12,7 @@ use App\Destination;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
-{
+{   /*
     public function show($id)
     {
         $types = ['forum', 'travelmate', 'photo', 'blog', 'news', 'flights'];
@@ -307,4 +307,5 @@ class UserController extends Controller
             ->route('user.destinations', [$user])
             ->with('info', trans('user.destinations.update.info'));
     }
+    */
 }

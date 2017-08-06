@@ -304,39 +304,21 @@ Route::get('comment/{id}/edit', 'V2CommentController@edit')
 Route::get('user/{id}', 'V2UserController@show')
     ->name('user.show');
 
-Route::get('user/{id}/edit', 'UserController@edit')
+Route::get('user/{id}/edit', 'V2UserController@edit')
     ->name('user.edit')
     ->middleware('role:superuser,userowner');
 
-Route::get('user/{id}/edit2', 'V2UserController@edit2')
-    ->name('user.edit2')
-    ->middleware('role:superuser,userowner');
-
-Route::put('user/{id}/update', 'UserController@update')
+Route::put('user/{id}/update', 'V2UserController@update')
     ->name('user.update')
     ->middleware('role:superuser,userowner');
 
-Route::put('user/{id}/update2', 'V2UserController@update2')
-    ->name('user.update2')
-    ->middleware('role:superuser,userowner');
-
-Route::get('{id}/destinations', 'UserController@destinationsIndex')
-    ->middleware('role:admin,userowner')
-    ->name('user.destinations');
-
-Route::post('{id}/destinations', 'UserController@destinationStore')
-    ->middleware('role:admin,userowner')
-    ->name('user.destination.store');
-
-// V2
-
-Route::get('user/{id}/destinations2', 'V2UserController@destinationsEdit2')
+Route::get('user/{id}/destinations', 'V2UserController@destinationsEdit')
     ->middleware('role:superuser,userowner')
-    ->name('user.destinations.edit2');
+    ->name('user.destinations.edit');
 
-Route::put('user/{id}/destinations2', 'V2UserController@destinationsStore2')
+Route::put('user/{id}/destinations', 'V2UserController@destinationsStore')
     ->middleware('role:superuser,userowner')
-    ->name('user.destinations.store2');
+    ->name('user.destinations.store');
 
 // User photos
 
