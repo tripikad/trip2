@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App;
 use Log;
 use Request;
 use App\Image;
