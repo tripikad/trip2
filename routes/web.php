@@ -242,32 +242,16 @@ Route::post('internal/{id}/update', 'V2InternalController@update')
 Route::get('reisipildid', 'V2PhotoController@index')
     ->name('photo.index');
 
-Route::get('photo/id/{id}', 'V2PhotoController@show') // Placeholder
+Route::get('photo/id/{id}', 'V2PhotoController@show')
     ->name('photo.show');
 
 Route::get('photo/create', 'V2PhotoController@create')
     ->name('photo.create')
     ->middleware('role:regular');
 
-Route::get('photo/create2', 'V2PhotoController@create2')
-    ->name('photo.create2')
-    ->middleware('role:regular');
-
 Route::post('photo/store', 'V2PhotoController@store')
     ->name('photo.store')
     ->middleware('role:regular');
-
-Route::post('photo/store2', 'V2PhotoController@store2')
-    ->name('photo.store2')
-    ->middleware('role:regular');
-
-Route::get('photo/{id}/edit', 'V2PhotoController@edit')
-    ->name('photo.edit')
-    ->middleware('role:admin,contentowner');
-
-Route::put('photo/{id}/update', 'V2PhotoController@update')
-    ->name('photo.update')
-    ->middleware('role:admin,contentowner');
 
 // Content redirects
 

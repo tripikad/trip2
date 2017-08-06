@@ -109,13 +109,8 @@ class V2PhotoController extends Controller
         return '';
     }
 
-    public function create()
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->create('photo');
-    }
 
-    public function create2()
+    public function create()
     {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -139,7 +134,7 @@ class V2PhotoController extends Controller
                     ->with('title', trans('content.photo.create.title'))
                 )
                 ->push(component('Form')
-                    ->with('route', route('photo.store2'))
+                    ->with('route', route('photo.store'))
                     ->with('files', true)
                     ->with('fields', collect()
                         ->push(component('FormUpload')
@@ -188,12 +183,6 @@ class V2PhotoController extends Controller
 
     public function store()
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'photo');
-    }
-
-    public function store2()
-    {
         $loggedUser = request()->user();
         $maxfilesize = config('site.maxfilesize') * 1024;
 
@@ -229,17 +218,4 @@ class V2PhotoController extends Controller
             ]));
     }
 
-    // FIXME
-
-    public function edit($id)
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->edit('photo', $id);
-    }
-
-    public function update($id)
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'photo', $id);
-    }
 }
