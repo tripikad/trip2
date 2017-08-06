@@ -29,9 +29,9 @@ modifiers:
 
                 <a href="/" class="c-footer__nav-logo">
                     @if (isset($image))
-                        <img src="/svg/tripee_logo_plain.svg" alt="">
+                        <img src="/V1dist/tripee_logo_plain.svg" alt="">
                     @else
-                        <img src="/svg/tripee_logo_plain_dark.svg" alt="">
+                        <img src="/V1dist/tripee_logo_plain_dark.svg" alt="">
                     @endif
                 </a>
             </div>
