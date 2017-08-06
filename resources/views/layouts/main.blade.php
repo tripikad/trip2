@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        @include('v2.utils.sharing')
-        @include('v2.utils.favicons')
+        @include('utils.sharing')
+        @include('utils.favicons')
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,7 +24,7 @@
         <!-- TradeDoubler site verification 2960089 -->
     </head>
     <body>
-        @include('v2.utils.svg')
+        @include('utils.svg')
         @stack('prescripts')
         <div id="app" class="background-{{ $color }}">
             @yield('background')
@@ -45,11 +45,11 @@
         </div>
         <script defer src="{{ dist('vendor') }}"></script>
         <script defer src="{{ dist('js') }}"></script>
-        @include('v2.utils.promo')
-        @include('v2.utils.facebook')
-        @include('v2.utils.googleTag')
-        @include('v2.utils.analytics')
-        @include('v2.utils.hotjar')
+        @include('utils.promo')
+        @include('utils.facebook')
+        @include('utils.googleTag')
+        @include('utils.analytics')
+        @include('utils.hotjar')
         @stack('scripts')
     </body>
 </html>

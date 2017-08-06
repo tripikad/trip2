@@ -17,7 +17,7 @@ $column_class = $column_class ?? 'col-8';
 
 @endphp
 
-@extends('v2.layouts.main')
+@extends('layouts.main')
 
 @section('title', $title)
 @section('head_title', $head_title)

@@ -16,7 +16,7 @@ $footer = $footer ?? '';
 
 @endphp
 
-@extends('v2.layouts.main')
+@extends('layouts.main')
 
 @section('title', $title)
 @section('head_title', $head_title)
