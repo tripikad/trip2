@@ -271,7 +271,7 @@ Route::get('user/{id}/messages/{id2}', 'V2MessageController@indexWith')
     ->name('message.index.with')
     ->middleware('role:superuser,userowner');
 
-Route::post('message/{id}/to/{id2}', 'MessageController@store')
+Route::post('message/{id}/to/{id2}', 'V2MessageController@store')
     ->name('message.store')
     ->middleware('role:superuser,userowner');
 
@@ -402,15 +402,15 @@ Route::get('logout', ['middleware' => 'auth', 'uses' => 'Auth\LoginController@lo
 
 // Facebook login
 
-Route::get('redirect/facebook', ['middleware' => 'guest', 'uses' => 'SocialController@facebookRedirect', 'as' => 'facebook.redirect']);
+Route::get('redirect/facebook', ['middleware' => 'guest', 'uses' => 'V2SocialController@facebookRedirect', 'as' => 'facebook.redirect']);
 
-Route::get('facebook', ['uses' => 'SocialController@facebook', 'as' => 'facebook']);
+Route::get('facebook', ['uses' => 'V2SocialController@facebook', 'as' => 'facebook']);
 
 // Google+ login
 
-Route::get('redirect/google', ['middleware' => 'guest', 'uses' => 'SocialController@googleRedirect', 'as' => 'google.redirect']);
+Route::get('redirect/google', ['middleware' => 'guest', 'uses' => 'V2SocialController@googleRedirect', 'as' => 'google.redirect']);
 
-Route::get('google', ['uses' => 'SocialController@google', 'as' => 'google']);
+Route::get('google', ['uses' => 'V2SocialController@google', 'as' => 'google']);
 
 // Password reset
 
@@ -428,13 +428,11 @@ Route::get('flag/{flaggable_type}/{flaggable_id}/{flag_type}', ['middleware' => 
 
 // Comments
 
-Route::post('content/{type}/{id}/comment', ['middleware' => 'role:regular', 'uses' => 'CommentController@store', 'as' => 'comment.store']);
+Route::post('content/{type}/{id}/comment', ['middleware' => 'role:regular', 'uses' => 'V2CommentController@store', 'as' => 'comment.store']);
 
-Route::post('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' => 'CommentController@update', 'as' => 'comment.update']);
+Route::post('comment/{id}', ['middleware' => 'role:admin,commentowner', 'uses' => 'V2CommentController@update', 'as' => 'comment.update']);
 
-// comment.edit is in V2
-
-Route::put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'CommentController@status', 'as' => 'comment.status']);
+Route::put('comment/{id}/status/{status}', ['middleware' => 'role:admin', 'uses' => 'V2CommentController@status', 'as' => 'comment.status']);
 
 // Atom feeds
 
