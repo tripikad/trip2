@@ -25,32 +25,16 @@ Route::get('news/create', 'V2NewsController@create')
     ->name('news.create')
     ->middleware('role:admin');
 
-Route::get('news/create2', 'V2NewsController@create2')
-    ->name('news.create2')
-    ->middleware('role:admin');
-
 Route::post('news/store', 'V2NewsController@store')
     ->name('news.store')
-    ->middleware('role:admin');
-
-Route::post('news/store2', 'V2NewsController@store2')
-    ->name('news.store2')
     ->middleware('role:admin');
 
 Route::get('news/{id}/edit', 'V2NewsController@edit')
     ->name('news.edit')
     ->middleware('role:admin');
 
-Route::get('news/{id}/edit2', 'V2NewsController@edit2')
-    ->name('news.edit2')
-    ->middleware('role:admin');
-
 Route::put('news/{id}/update', 'V2NewsController@update')
     ->name('news.update')
-    ->middleware('role:admin');
-
-Route::put('news/{id}/update2', 'V2NewsController@update2')
-    ->name('news.update2')
     ->middleware('role:admin');
 
 // Shortnews
