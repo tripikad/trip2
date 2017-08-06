@@ -2,7 +2,7 @@ module.exports = {
     plugins: [
         require('postcss-import')({
             path: [
-                './resources/views/v2/styles',
+                './resources/views/styles',
                 './node_modules'
             ]
         }),

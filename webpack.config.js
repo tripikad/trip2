@@ -7,7 +7,7 @@ var CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
     entry: {
-        main: "./resources/views/v2/main.js",
+        main: "./resources/views/main.js",
         vendor: [
             "codemirror",
             "dropzone",
