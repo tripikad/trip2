@@ -26,7 +26,7 @@ class CommentTest extends BrowserKitTestCase
             'forum',
             'news',
             'shortnews',
-            'travelmate'
+            'travelmate',
         ];
 
         $this->privateContentTypes = [
@@ -140,7 +140,6 @@ class CommentTest extends BrowserKitTestCase
 
     public function test_content_timestamp_does_not_update_when_superuser_updating_comment()
     {
-
         $superuser = factory(User::class)->create(['role' => 'superuser']);
 
         $contentTypes = array_merge($this->publicContentTypes, $this->privateContentTypes);
