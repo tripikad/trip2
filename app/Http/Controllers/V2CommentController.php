@@ -89,6 +89,14 @@ class V2CommentController extends Controller
 
         $comment->update(array_merge($request->all(), $fields), ['touch' => false]);
 
+        if ($comment->content->type == 'internal') {
+            return redirect()
+                ->route($comment->content->type.'.show', [
+                    $comment->content,
+                    '#comment-'.$comment->id,
+                ]);
+        }
+
         return redirect()
             ->route($comment->content->type.'.show', [
                 $comment->content->slug,
