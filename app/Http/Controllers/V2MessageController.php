@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Message;
 use Log;
 use Mail;
+use App\User;
+use App\Message;
 use Illuminate\Http\Request;
 
 class V2MessageController extends Controller
@@ -127,6 +127,5 @@ class V2MessageController extends Controller
         Log::info('A private message has been sent');
 
         return backToAnchor('#message-'.$message->id);
-    
     }
 }

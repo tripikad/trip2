@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App;
 use Log;
 use Request;
 use App\Image;
@@ -128,7 +127,6 @@ class V2NewsController extends Controller
 
             ->render();
     }
-
 
     public function create($type = 'news')
     {
