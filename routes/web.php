@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 // Frontpage
 
@@ -520,4 +519,3 @@ Route::get('content/{path}', 'RedirectController@redirectContent')
 // All other legacy aliases
 
 Route::get('{part1}/{part2?}', 'RedirectController@redirectAlias');
-

@@ -33,5 +33,4 @@ class V2ContentController extends Controller
 
         return back();
     }
-
 }

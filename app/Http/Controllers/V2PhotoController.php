@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App;
 use Log;
 use Request;
 use App\User;
@@ -108,7 +107,6 @@ class V2PhotoController extends Controller
     {
         return '';
     }
-
 
     public function create()
     {
@@ -217,5 +215,4 @@ class V2PhotoController extends Controller
                 'title' => $photo->title,
             ]));
     }
-
 }

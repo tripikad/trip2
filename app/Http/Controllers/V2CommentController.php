@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use Log;
+use Auth;
 use App\Comment;
 use Illuminate\Http\Request;
 
@@ -43,7 +43,6 @@ class V2CommentController extends Controller
                 ['title' => $comment->vars()->title()]
             ));
     }
-
 
     public function edit($id)
     {
@@ -105,7 +104,6 @@ class V2CommentController extends Controller
             $comment->status = $status;
             $comment->save(['touch' => false]);
 
-
             backToAnchor('#comment-'.$comment->id)
                 ->with('info', trans("comment.action.status.$status.info", [
                     'title' => $comment->title,
@@ -114,5 +112,4 @@ class V2CommentController extends Controller
 
         return back();
     }
-
 }

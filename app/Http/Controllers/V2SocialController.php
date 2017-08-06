@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use URL;
-use Redirect;
 use Log;
-use Socialite;
-
+use URL;
+use Auth;
 use App\User;
+use Redirect;
 use App\Image;
+use Socialite;
 
 class V2SocialController extends Controller
 {
