@@ -140,7 +140,7 @@ Route::get('{slug}', 'V2StaticController@show')
     ->name('static.show')
     ->where(
         'slug',
-        '('.collect(config('v2static.slugs'))->keys()->implode('|').')'
+        '('.collect(config('static.slugs'))->keys()->implode('|').')'
     );
 
 Route::get('static/{id}', 'V2StaticController@showId')

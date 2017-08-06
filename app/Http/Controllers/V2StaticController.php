@@ -11,7 +11,7 @@ class V2StaticController extends Controller
     {
         $post = Content::whereType('static')
             ->whereStatus(1)
-            ->findOrFail(config('v2static.slugs')[$slug]);
+            ->findOrFail(config('static.slugs')[$slug]);
 
         $loggedUser = request()->user();
 
@@ -45,7 +45,7 @@ class V2StaticController extends Controller
 
     public function showId($id)
     {
-        $slug = collect(config('v2static.slugs'))->flip()->get($id);
+        $slug = collect(config('static.slugs'))->flip()->get($id);
 
         return redirect()->route('static.show', [$slug]);
     }
@@ -103,6 +103,6 @@ class V2StaticController extends Controller
 
         $static->fill(request($fields->keys()->toArray()))->save();
 
-        return redirect()->route('static.show', collect(config('v2static.slugs'))->flip()[$static->id]);
+        return redirect()->route('static.show', collect(config('static.slugs'))->flip()[$static->id]);
     }
 }
