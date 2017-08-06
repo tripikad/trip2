@@ -9,33 +9,30 @@ use Illuminate\Http\Request;
 
 class V2CommentController extends Controller
 {
-    protected $rules = [
-        'body' => 'required',
-    ];
 
-    public function store(Request $request, $type, $content_id)
+    public function store($type, $content_id)
     {
-        $this->validate($request, $this->rules);
-
-        $fields = [
-            'content_id' => $content_id,
-            'status' => 1,
+        $rules = [
+            'body' => 'required'
         ];
 
-        $comment = Auth::user()->comments()->create(array_merge($request->all(), $fields));
+        $this->validate(request(), $rules);
 
-        Log::info('New comment added', [
-            'user' =>  Auth::user()->name,
-            'body' =>  $request->get('body'),
-            'link' => route('content.show', [$type, $content_id, '#comment-'.$comment->id]),
-            'followers' => $comment
-                ->content
-                ->followersEmails()
-                ->forget(Auth::user()->id)
-                ->count(),
+        $comment = Auth::user()->comments()->create([
+            'body' => request()->body,
+            'content_id' => $content_id,
+            'status' => 1
         ]);
 
-        $content = $comment->content;
+        Log::info('New comment added', [
+            'user' =>  $comment->user->name,
+            'body' =>  $comment->body,
+            'link' => route('content.show', [
+                $type,
+                $comment->content->id,
+                '#comment-'.$comment->id
+            ])
+        ]);
 
         return backToAnchor('#comment-'.$comment->id)
             ->with('info', trans(
@@ -77,17 +74,17 @@ class V2CommentController extends Controller
             ->render();
     }
 
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        $this->validate($request, $this->rules);
-
-        $comment = \App\Comment::findorFail($id);
-
-        $fields = [
-            'status' => 1,
+        $rules = [
+            'body' => 'required'
         ];
 
-        $comment->update(array_merge($request->all(), $fields), ['touch' => false]);
+        $this->validate(request(), $rules);
+
+        $comment = Comment::findorFail($id);
+
+        $comment->update(['body' => request()->body], ['touch' => false]);
 
         if ($comment->content->type == 'internal') {
             return redirect()
