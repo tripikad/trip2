@@ -94,15 +94,19 @@ class V2StaticController extends Controller
     {
         $static = Content::findOrFail($id);
 
-        $fields = collect([
+        $rules = [
             'title' => 'required',
             'body' => 'required',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $static->update([
+            'title' => request()->title,
+            'body' => request()->body
         ]);
 
-        $this->validate(request(), $fields->toArray());
-
-        $static->fill(request($fields->keys()->toArray()))->save();
-
-        return redirect()->route('static.show', collect(config('static.slugs'))->flip()[$static->id]);
+        return redirect()
+            ->route('static.show', collect(config('static.slugs'))->flip()[$static->id]);
     }
 }
