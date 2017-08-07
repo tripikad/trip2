@@ -495,7 +495,7 @@ class V2ForumController extends Controller
             'body' => request()->body,
             'type' => request()->type,
         ]);
-        
+
         if ($forum->type != 'misc') {
             $forum->destinations()->sync(request()->destinations ?: []);
             $forum->topics()->sync(request()->topics ?: []);

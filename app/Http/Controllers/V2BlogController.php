@@ -270,7 +270,7 @@ class V2BlogController extends Controller
             'title' => request()->title,
             'body' => request()->body,
         ]);
-        
+
         $blog->destinations()->sync(request()->destinations ?: []);
 
         return redirect()

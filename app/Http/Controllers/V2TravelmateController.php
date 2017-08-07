@@ -447,7 +447,7 @@ class V2TravelmateController extends Controller
             'start_at' => Carbon::parse(request()->start_at),
             'duration' => request()->duration,
         ]);
-        
+
         $travelmate->destinations()->sync(request()->destinations ?: []);
         $travelmate->topics()->sync(request()->topics ?: []);
 
