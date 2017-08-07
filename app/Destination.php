@@ -3,7 +3,6 @@
 namespace App;
 
 use Baum;
-use Cache;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
 
@@ -38,7 +37,7 @@ class Destination extends Baum\Node
     }
 
     // V2
-    
+
     public function vars()
     {
         return new V2DestinationVars($this);

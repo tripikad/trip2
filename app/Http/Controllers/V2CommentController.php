@@ -9,11 +9,10 @@ use Illuminate\Http\Request;
 
 class V2CommentController extends Controller
 {
-
     public function store($type, $content_id)
     {
         $rules = [
-            'body' => 'required'
+            'body' => 'required',
         ];
 
         $this->validate(request(), $rules);
@@ -21,7 +20,7 @@ class V2CommentController extends Controller
         $comment = Auth::user()->comments()->create([
             'body' => request()->body,
             'content_id' => $content_id,
-            'status' => 1
+            'status' => 1,
         ]);
 
         Log::info('New comment added', [
@@ -30,8 +29,8 @@ class V2CommentController extends Controller
             'link' => route('content.show', [
                 $type,
                 $comment->content->id,
-                '#comment-'.$comment->id
-            ])
+                '#comment-'.$comment->id,
+            ]),
         ]);
 
         return backToAnchor('#comment-'.$comment->id)
@@ -77,7 +76,7 @@ class V2CommentController extends Controller
     public function update($id)
     {
         $rules = [
-            'body' => 'required'
+            'body' => 'required',
         ];
 
         $this->validate(request(), $rules);

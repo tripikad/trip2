@@ -103,7 +103,7 @@ class V2StaticController extends Controller
 
         $static->update([
             'title' => request()->title,
-            'body' => request()->body
+            'body' => request()->body,
         ]);
 
         return redirect()
