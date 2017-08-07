@@ -9,7 +9,7 @@
             <div class="FrontpageSearchRow__title">
                 {{ result.title }}
             </div>
-            <component v-for="(result, index) in result.items" is="SearchItem" :result="result" :index="index"></component>
+            <component v-for="(result, index) in result.items" is="SearchItem" :result="result" :key="index" :index="index"></component>
         </div>
         <a v-else-if="index == 'attributes' && result.total > 0" class="FrontpageSearchRow__footer" :href="result.route">
             {{ result.message }} ({{ result.total }})

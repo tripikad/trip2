@@ -15,7 +15,7 @@
         </div>
 
         <div class="FrontpageSearch__results">
-            <component v-for="(result, index) in results" is="SearchRow" :result="result" :index="index"></component>
+            <component v-for="(result, index) in results" is="SearchRow" :result="result" :key="index" :index="index"></component>
         </div>
 
     </div>
