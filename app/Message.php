@@ -35,5 +35,4 @@ class Message extends Model
     {
         return new V2MessageVars($this);
     }
-
 }
