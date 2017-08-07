@@ -441,14 +441,13 @@ class V2TravelmateController extends Controller
 
         $this->validate(request(), $rules);
 
-        $travelmate->fill([
+        $travelmate->update([
             'title' => request()->title,
             'body' => request()->body,
             'start_at' => Carbon::parse(request()->start_at),
             'duration' => request()->duration,
-        ])
-        ->save();
-
+        ]);
+        
         $travelmate->destinations()->sync(request()->destinations ?: []);
         $travelmate->topics()->sync(request()->topics ?: []);
 

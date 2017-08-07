@@ -375,12 +375,11 @@ class V2FlightController extends Controller
 
         $this->validate(request(), $rules);
 
-        $flight->fill([
+        $flight->update([
             'title' => request()->title,
             'body' => request()->body,
-        ])
-        ->save();
-
+        ]);
+        
         $flight->destinations()->sync(request()->destinations ?: []);
 
         if ($imageToken = request()->image_id) {

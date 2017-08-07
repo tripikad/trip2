@@ -342,13 +342,12 @@ class V2NewsController extends Controller
 
         $this->validate(request(), $rules);
 
-        $news->fill([
+        $news->update([
             'title' => request()->title,
             'body' => request()->body,
             'type' => request()->type,
-        ])
-        ->save();
-
+        ]);
+        
         $news->destinations()->sync(request()->destinations ?: []);
         $news->topics()->sync(request()->topics ?: []);
 
