@@ -230,7 +230,7 @@ class V2InternalController extends Controller
             'title' => request()->title,
             'body' => request()->body,
         ]);
-        
+
         return redirect()
             ->route('internal.show', [$internal])
             ->with('info', trans('content.update.info', [

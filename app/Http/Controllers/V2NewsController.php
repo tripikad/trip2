@@ -347,7 +347,7 @@ class V2NewsController extends Controller
             'body' => request()->body,
             'type' => request()->type,
         ]);
-        
+
         $news->destinations()->sync(request()->destinations ?: []);
         $news->topics()->sync(request()->topics ?: []);
 

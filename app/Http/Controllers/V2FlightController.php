@@ -379,7 +379,7 @@ class V2FlightController extends Controller
             'title' => request()->title,
             'body' => request()->body,
         ]);
-        
+
         $flight->destinations()->sync(request()->destinations ?: []);
 
         if ($imageToken = request()->image_id) {
