@@ -11,6 +11,7 @@ module.exports = {
         vendor: [
             "codemirror",
             "dropzone",
+            "pell",
             "vue",
             "vue-clickaway",
             "vue-cookie",
