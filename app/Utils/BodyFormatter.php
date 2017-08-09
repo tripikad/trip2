@@ -26,9 +26,12 @@ class BodyFormatter
         $linksPattern = '/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(\/.*)?/';
 
         if (preg_match_all($linksPattern, $this->body, $matches)) {
-            dump($match);
+            foreach ($matches[0] as $match) {
+                $this->body = preg_replace('/https?:\/\//', '', $this->body);
+                $this->body = str_replace($match, 'http://'.$match, $this->body);
+            }
         }
-
+        return $this;
     }
 
     public function externalLinks()
