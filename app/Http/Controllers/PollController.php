@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App;
 use Request;
-
 use App\Destination;
 
 class PollController extends Controller
