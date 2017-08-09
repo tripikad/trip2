@@ -148,15 +148,4 @@ return [
             'icon' => 'icon-arrow-right',
         ],
     ],
-
-	'poll' => [
-		[
-			'title' => 'Küsitlus',
-			'type' => 'poll',
-		],
-		[
-			'title' => 'Viktoriin',
-			'type' => 'quiz',
-		],
-	],
 ];

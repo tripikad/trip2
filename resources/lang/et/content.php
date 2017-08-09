@@ -408,6 +408,10 @@ return [
 	'poll.edit.field.end.title' => 'Lõppemise aeg',
 	'poll.edit.field.end.help' => '',
 
+    'poll.create.title' => 'Lisa küsitlus',
+
+    'poll.edit.add.field.title' => 'Lisa väljad',
+
     // Destination
 
     'destionation.edit.title' => 'Muuda sihtkohta',

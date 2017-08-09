@@ -23,7 +23,7 @@ Route::get('uudised/{slug}', 'V2NewsController@show')
 
 Route::get('news/create', 'V2NewsController@create')
     ->name('news.create')
-    ;//->middleware('role:admin');
+    ->middleware('role:admin');
 
 Route::get('news/create2', 'V2NewsController@create2')
     ->name('news.create2')
@@ -263,7 +263,7 @@ Route::get('photo/id/{id}', 'V2PhotoController@show') // Placeholder
 
 Route::get('photo/create', 'V2PhotoController@create')
     ->name('photo.create')
-    ;//->middleware('role:regular');
+    ->middleware('role:regular');
 
 Route::get('photo/create2', 'V2PhotoController@create2')
     ->name('photo.create2')

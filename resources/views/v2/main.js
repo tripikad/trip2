@@ -27,6 +27,9 @@ import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 import NavbarSearch from './components/NavbarSearch/NavbarSearch.vue'
 import PhotoCard from './components/PhotoCard/PhotoCard.vue'
 import PhotoFullscreen from './components/PhotoFullscreen/PhotoFullscreen.vue'
+import PollAddFields from './components/PollAddFields/PollAddFields.vue'
+import PollFields from './components/PollFields/PollFields.vue'
+import QuizFields from './components/QuizFields/QuizFields.vue'
 import PromoBar from './components/PromoBar/PromoBar.vue'
 import UserImage from './components/UserImage/UserImage.vue'
 
@@ -69,6 +72,9 @@ new Vue({
         NavbarSearch,
         PhotoCard,
         PhotoFullscreen,
+        PollAddFields,
+        PollFields,
+        QuizFields,
         PromoBar,
         UserImage,
         TravelmateStart,
