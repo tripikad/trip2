@@ -86,7 +86,7 @@ class FormatBodyTest extends TestCase
             [
                 'Hello [Trip](trip.ee)',
                 '<p>Hello <a href="http://trip.ee">Trip</a></p>',
-                'External Markdown links without http(s) should be converted to HTML links opening in a new window',
+                'Internal Markdown links without http(s) should be converted to HTML links opening in a new window',
             ],
             [
                 'Hello [Google](google.com)',
