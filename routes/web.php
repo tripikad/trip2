@@ -288,16 +288,13 @@ Route::put('photo/{id}/update', 'V2PhotoController@update')
 // Polls
 
 Route::get('poll', 'PollController@index')
-    ->name('poll.index')
-	;//->middleware('role:admin');
+    ->name('poll.index'); //->middleware('role:admin');
 
 Route::get('poll/create', 'PollController@create')
-    ->name('poll.create')
-	;//->middleware('role:admin');
+    ->name('poll.create'); //->middleware('role:admin');
 
 Route::post('poll/store', 'PollController@store')
-    ->name('poll.store')
-	;//->middleware('role:admin');
+    ->name('poll.store'); //->middleware('role:admin');
 
 // Content redirects
 
