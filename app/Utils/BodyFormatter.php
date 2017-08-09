@@ -21,10 +21,18 @@ class BodyFormatter
 
         return $this;
     }
-
-    public function links()
+    public function fixLinks()
     {
-        $this->body = str_replace(' www.', ' http://', $this->body);
+        $linksPattern = '/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(\/.*)?/';
+
+        if (preg_match_all($linksPattern, $this->body, $matches)) {
+            dump($match);
+        }
+
+    }
+
+    public function externalLinks()
+    {
 
         if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
             $this->body = $filteredBody;

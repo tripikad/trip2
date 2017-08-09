@@ -63,6 +63,12 @@ class FormatBodyTest extends TestCase
                 '<p>Hello <a href="http://google.com" target="_blank">Google</a></p>',
                 'External Markdown links should be converted to HTML links opening in a new window',
             ],
+            [
+                'Hello google.com',
+                '<p>Hello <a href="http://google.com">google.com</a></p>',
+                'Links without http(s) and www are converted into HTML links',
+            ],
+
         ];
 
         foreach ($cases as $case) {
