@@ -91,4 +91,19 @@ class FormatBodyTest extends TestCase
             $this->assertEquals($case[1], format_body($case[0]), $case[2]);
         }
     }
+
+    public function test_calendar_is_formatted()
+    {
+        $cases = [
+            [
+                "[[\nJanuary:\n- First\n- Second\n]]",
+                'aa',
+                'Calendar is formatted',
+            ]
+        ];
+
+        foreach ($cases as $case) {
+            $this->assertEquals($case[1], format_body($case[0]), $case[2]);
+        }
+    }
 }

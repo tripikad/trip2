@@ -54,10 +54,10 @@ class BodyFormatter
 
     public function calendar()
     {
-        $yamlPattern = '/(\[\[[\r\n].*[\r\n]\]\])/s';
+        $yamlPattern = '/(\[\[[\r\n].*[\r\n]\]\])/sU';
 
         if (preg_match_all($yamlPattern, $this->body, $matches)) {
-            foreach ($matches[1] as $match) {
+            foreach ($matches[0] as $match) {
                 $cleanedMatch = str_replace(['[[', ']]'], '', $match);
                 $cleanedMatch = preg_replace_callback(
                     "/-\s+(.+)/",
