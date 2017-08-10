@@ -91,4 +91,33 @@ class FormatBodyTest extends TestCase
             $this->assertEquals($case[1], format_body($case[0]), $case[2]);
         }
     }
+
+    public function test_calendar_is_formatted()
+    {
+        $cases = [
+            [
+                "[[\nJanuary:\n- First\n]]",
+                component('FlightCalendar')
+                    ->with('months', ['January' => [format_body('First')]])
+                    ->render(),
+                'Single calendar is formatted',
+            ],
+            [
+                "[[\nJanuary:\n- First\n]]\n[[\nFebruary:\n- Second\n]]",
+                component('FlightCalendar')
+                    ->with('months', ['January' => [format_body('First')]])
+                    ->render()
+                ."\n"
+                .component('FlightCalendar')
+                    ->with('months', ['February' => [format_body('Second')]])
+                    ->render(),
+                'Multiple calendars are formatted',
+            ],
+
+        ];
+
+        foreach ($cases as $case) {
+            $this->assertEquals($case[1], format_body($case[0]), $case[2]);
+        }
+    }
 }
