@@ -21,6 +21,7 @@ class BodyFormatter
 
         return $this;
     }
+
     public function fixLinks()
     {
         $linksPattern = '/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(\/.*)?/';
@@ -31,12 +32,12 @@ class BodyFormatter
                 $this->body = str_replace($match, 'http://'.$match, $this->body);
             }
         }
+
         return $this;
     }
 
     public function externalLinks()
     {
-
         if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
             $this->body = $filteredBody;
         }
