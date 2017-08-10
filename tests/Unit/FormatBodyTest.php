@@ -143,7 +143,7 @@ class FormatBodyTest extends TestCase
                     ->with('months', ['February' => [format_body('Second')]])
                     ->render(),
                 'Multiple calendars are formatted',
-            ]
+            ],
 
         ];
 
