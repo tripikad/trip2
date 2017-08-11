@@ -18,6 +18,11 @@ class Destination extends Baum\Node
         return $this->belongsToMany('App\Content');
     }
 
+    public function content_flights()
+    {
+        return $this->content()->where('type', 'flight');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
