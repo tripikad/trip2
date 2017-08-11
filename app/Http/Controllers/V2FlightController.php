@@ -27,9 +27,9 @@ class V2FlightController extends Controller
 
         $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $destinations = Destination::select('id', 'name')
-            ->havingRaw('`id` IN (SELECT DISTINCT `destination_id` FROM `content_destination` WHERE `content_id` IN (SELECT DISTINCT `id` FROM `contents` WHERE `type` = \'flight\'))')
+            ->has('content_flights')
             ->get();
-        $topics = Topic::select('id', 'name')->get();
+        //$topics = Topic::select('id', 'name')->get();
 
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
