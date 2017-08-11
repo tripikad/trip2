@@ -290,7 +290,6 @@ class V2SearchController extends Controller
                 $data['paginate'] = $data['paginate']->orderBy($sort_order, 'desc');
             }
 
-
             $data['paginate'] = $data['paginate']->paginate($limit);
 
             $data['count'] = $data['paginate']->total();
