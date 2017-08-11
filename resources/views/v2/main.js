@@ -4,6 +4,7 @@ import VueCookie from 'vue-cookie'
 
 import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
+import Button from './components/Button/Button.vue'
 import Editor from './components/Editor/Editor.vue'
 import Dotmap from './components/Dotmap/Dotmap.vue'
 import Flag from './components/Flag/Flag.vue'
@@ -12,6 +13,9 @@ import FormEditor from './components/FormEditor/FormEditor.vue'
 import FormImageId from './components/FormImageId/FormImageId.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
 import FormSelectMultiple from './components/FormSelectMultiple/FormSelectMultiple.vue'
+import FormRadio from './components/FormRadio/FormRadio.vue'
+import FormTextfield from './components/FormTextfield/FormTextfield.vue'
+import FormUpload from './components/FormUpload/FormUpload.vue'
 import FrontpageDestinationSearch from './components/FrontpageDestinationSearch/FrontpageDestinationSearch.vue'
 import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
 import FrontpageSearchRow from './components/FrontpageSearchRow/FrontpageSearchRow.vue'
@@ -29,6 +33,7 @@ import PhotoCard from './components/PhotoCard/PhotoCard.vue'
 import PhotoFullscreen from './components/PhotoFullscreen/PhotoFullscreen.vue'
 import PollAddFields from './components/PollAddFields/PollAddFields.vue'
 import PollFields from './components/PollFields/PollFields.vue'
+import PollOption from './components/PollOption/PollOption.vue'
 import QuizFields from './components/QuizFields/QuizFields.vue'
 import PromoBar from './components/PromoBar/PromoBar.vue'
 import UserImage from './components/UserImage/UserImage.vue'
@@ -51,14 +56,18 @@ new Vue({
     components: {
         Alert,
         Arc,
+        Button,
         Editor,
         Dotmap,
         Flag,
         FormButtonProcess,
         FormEditor,
         FormImageId,
+        FormRadio,
         FormSelect,
         FormSelectMultiple,
+        FormTextfield,
+        FormUpload,
         FrontpageDestinationSearch,
         FrontpageSearch,
         FrontpageSearchRow,
@@ -74,6 +83,7 @@ new Vue({
         PhotoFullscreen,
         PollAddFields,
         PollFields,
+        PollOption,
         QuizFields,
         PromoBar,
         UserImage,

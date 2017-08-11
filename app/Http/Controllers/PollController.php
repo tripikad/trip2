@@ -41,15 +41,6 @@ class PollController extends Controller
                 ->push(component('Form')
                     ->with('route', route('poll.store'))
                     ->with('fields', collect()
-                        /*->push(component('FormRadio')
-                            ->is('large')
-                            ->with('name', 'poll_type')
-                            ->with('value', old('type', 'poll'))
-                            ->with('options', [
-                                ['id' => 'poll', 'name' => 'Küsitlus'],
-                                ['id' => 'qiuz', 'name' => 'Viktoriin']
-                            ])
-                        )*/
                         ->push(component('FormTextfield')
                             ->with('title', trans('content.poll.edit.field.start.title'))
                             ->with('name', 'start')
@@ -71,9 +62,12 @@ class PollController extends Controller
                         )
                         ->push(component('PollAddFields')
                             ->with('value', old('poll_type', 'poll'))
+                            ->with('question_trans', trans('content.poll.edit.question'))
+                            ->with('option_trans', trans('content.poll.edit.option'))
                         )
                         ->push(component('FormButton')
-                            ->with('title', trans('content.create.submit.title'))
+                            ->is('large')
+                            ->with('title', trans('content.poll.create.title'))
                         )
 
                     )

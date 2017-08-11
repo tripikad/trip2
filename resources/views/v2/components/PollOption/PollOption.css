@@ -1,0 +1,11 @@
+@import "variables";
+
+    .PollFields__option {
+        display: flex;
+        display: block ?if $mobile;
+        align-items: center;
+    }
+    .PollFields__delete {
+        margin: 0 $margin-sm 0 $margin-sm;
+        margin: 0 0 $margin-sm 0 ?if $mobile;
+    }

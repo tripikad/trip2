@@ -412,6 +412,9 @@ return [
 
     'poll.edit.add.field.title' => 'Lisa väljad',
 
+    'poll.edit.question' => 'Küsimus',
+    'poll.edit.option' => 'Valik',
+
     // Destination
 
     'destionation.edit.title' => 'Muuda sihtkohta',

@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <div class="FormRadio">
+        <div class="FormRadio margin-bottom-md">
 
             <div class="FormRadio__option" v-for="opt in options">
 
@@ -27,7 +27,11 @@
 
         </div>
 
-        <component :is="pollType">
+        <component
+            :is="pollType"
+            :question_trans="question_trans"
+            :option_trans="option_trans"
+        >
         </component>
     </div>
 </template>
@@ -38,7 +42,9 @@
 
 	export default {
         props : {
-            value : {default : ''}
+            value : {default : ''},
+            question_trans : {default : 'Question'},
+            option_trans : {default : 'Option'}
         },
         
         components : {
@@ -52,8 +58,7 @@
                     {'id' : 'poll', 'name' : 'Küsitlus'},
                     {'id' : 'quiz', 'name' : 'Viktoriin'}
                 ],
-                pollType: null,
-                val : null
+                pollType: null
             };
         },
         
