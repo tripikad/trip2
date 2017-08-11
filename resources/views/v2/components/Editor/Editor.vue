@@ -15,8 +15,9 @@
                     <div class="Editor__tool" @click="insertH3">H3</div>
                     <div class="Editor__tool" @click="insertH4">H4</div>
                     <div class="Editor__tool" @click="insertTable">Table</div>
-                    <div class="Editor__tool" @click="cleanMarkup">Cleanup</div>
+                    <div class="Editor__tool" @click="insertCalendar">Calendar</div>
                     <div class="Editor__tool" @click="openPicker">Image</div>
+                    <div class="Editor__tool" @click="cleanMarkup">✿</div>
 
                 </div>
 
@@ -124,9 +125,19 @@
             insertTable() {
                 var doc = this.editor.getDoc()
                 var cursor = doc.getCursor();
-                doc.replaceRange('\n\nKuupäev | Hind\n--------|-----\nKuupäev | Hind\n\n', cursor);
+                doc.replaceRange('\nEsimene | Teine\n---|---\nEsimene | Teine\n\n', cursor);
                 doc.setCursor({
                     line: cursor.line + 4,
+                    ch: 7
+                })
+                this.editor.focus()
+            },
+            insertCalendar() {
+                var doc = this.editor.getDoc()
+                var cursor = doc.getCursor();
+                doc.replaceRange('\n[[\n\nJaanuar:\n\n- Date link\n\n- Date link\n\nVeebruar:\n\n- Date link\n\n- Date link\n\n]]\n\n', cursor);
+                doc.setCursor({
+                    line: cursor.line + 3,
                     ch: 7
                 })
                 this.editor.focus()
@@ -175,7 +186,8 @@
                     mode: 'gfm',
                     theme: 'neo',
                     lineWrapping: true,
-                    viewportMargin: Infinity
+                    viewportMargin: Infinity,
+                    indentWithTabs: true
                 })
                 
                 this.editor.on('change', editor => {

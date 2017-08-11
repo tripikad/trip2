@@ -61,7 +61,7 @@ return [
     'edit.submit.title' => 'Uuenda',
     'edit.submitting.title' => 'Uuendan...',
     'edit.notes.heading' => 'Hea teada',
-    'edit.notes.body' => '<p>See on reisifoorum kooliharidust nuusutanud inimesele, kes mõistab kirjutada korralikus eesti keeles.</p><p>Ole hea ja uuri enne postitamist Trip.ee otsinguga juba olemasolevaid teemasid ning palun pane postitusele selle sisu avav pealkiri (mitte piirdudes koha või riigi nimega).</p>',
+    'edit.notes.body' => 'Ole hea ja uuri enne postitamist Trip.ee otsinguga juba olemasolevaid teemasid ning palun pane postitusele selle sisu avav pealkiri (mitte piirdudes koha või riigi nimega).</p>',
 
     'misc.edit.notes.heading' => 'Hea teada',
     'misc.edit.notes.body' => '<p>Siia postita mõtteid muudel teemadel</p>',
@@ -72,6 +72,7 @@ return [
     'store.status.1.info' => ':title on edukalt lisatud.',
     'store.status.0.info' => ':title on lisatud, kuid teistele peidetud. Vajuta lingile "Avalikusta", et näidata seda teistele.',
 
+    'store.info' => ':title on lisatud.',
     'update.info' => ':title on uuendatud.',
 
     'show.isnew' => 'Uus teema',
@@ -192,6 +193,7 @@ return [
     'travelmate.activity' => 'Viimase :days päeva jooksul lisatud :posts_count kuulutust',
 
     'travelmate.create.title' => 'Lisa kuulutus',
+    'travelmate.edit.title' => 'Muuda kuulutust',
 
     'travelmate.edit.field.title.title' => 'Pealkiri',
     'travelmate.edit.field.title.help' => '',
@@ -297,6 +299,7 @@ return [
     'photo.index.title' => 'Reisipildid',
     'photo.create.title' => 'Lisa uus reisipilt',
 
+    'photo.edit.field.file.title' => 'Lisa pilt',
     'photo.edit.field.file.help' => '',
 
     'photo.edit.field.title.title' => 'Kirjeldus',

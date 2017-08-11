@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Feature;
+
 use App\User;
 use App\Content;
 use Tests\BrowserKitTestCase;
@@ -17,10 +19,10 @@ class ContentTest extends BrowserKitTestCase
         parent::setUp();
 
         $this->publicContentTypes = [
-            'blog',
-            'forum',
-            'expat',
-            'buysell',
+            //'blog',
+            //'forum',
+            //'expat',
+            //'buysell',
         ];
 
         $this->privateContentTypes = [

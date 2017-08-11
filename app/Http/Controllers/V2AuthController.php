@@ -10,62 +10,69 @@ class V2AuthController extends Controller
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
             ->with('header', region('StaticHeader'))
-
             ->with('top', collect()
                 ->push(component('Title')
                     ->is('center')
                     ->is('large')
-                    ->with('title', trans('Logi sisse'))
+                    ->with('title', trans('auth.login.title'))
                 )
                 ->push('&nbsp;')
                 ->push(component('Title')
                     ->is('center')
                     ->is('small')
-                    ->with('title', trans('Pole veel kasutaja? Registreeri siin'))
+                    ->with('title', trans('auth.login.not.registered', [
+                        'link' => format_link(
+                            route('register.form'),
+                            trans('auth.login.not.registered.link.title')
+                        ),
+                    ]))
                 )
             )
-
             ->with('content_top', component('Grid3')->with('items', collect()
                 ->push(component('AuthTab')
-                    ->with('title', 'Kasutajanimi')
+                    ->with('title', trans('auth.login.field.name.title'))
                 )
                 ->push(component('AuthTab')
                     ->is('facebook')
+                    ->with('route', route('facebook.redirect'))
                     ->with('title', 'Facebook')
                 )
                 ->push(component('AuthTab')
                     ->is('google')
+                    ->with('route', route('google.redirect'))
                     ->with('title', 'Google')
                 )
             ))
-
             ->with('content', collect()
                 ->push(component('Form')->with('fields', collect()
                     ->push(component('FormTextfield')
                         ->is('large')
-                        ->with('title', 'Kasutajanimi')
+                        ->with('title', trans('auth.login.field.name.title'))
                     )
                     ->push(component('FormPassword')
                         ->is('large')
-                        ->with('title', 'Parool')
+                        ->with('title', trans('auth.login.field.password.title'))
                     )
                     ->push(component('FormCheckbox')
                         ->with('name', 'remember')
-                        ->with('title', 'Jäta mind meelde')
+                        ->with('title', trans('auth.login.field.remember.title'))
                     )
                     ->push(component('FormButton')
                         ->is('wide')
-                        ->with('title', 'Logi sisse')
+                        ->is('large')
+                        ->with('title', trans('auth.login.submit.title'))
                     )
                 ))
             )
-
             ->with('bottom', collect()->push(component('MetaLink')
-                ->with('title', 'Ei mäleta parooli? Taasta parool siin')
+                ->with('title', trans('auth.login.forgot.password', [
+                    'link' => format_link(
+                        route('reset.apply.form'),
+                        trans('auth.reset.apply.title.link')
+                    ),
+                ]))
             ))
-
             ->with('footer', region('FooterLight'))
-
             ->render();
     }
 
@@ -75,66 +82,68 @@ class V2AuthController extends Controller
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
             ->with('header', region('StaticHeader'))
-
             ->with('top', collect()
                 ->push(component('Title')
                     ->is('center')
                     ->is('large')
-                    ->with('title', trans('Registreeri'))
+                    ->with('title', trans('auth.register.title'))
                 )
                 ->push('&nbsp;')
                 ->push(component('Title')
                     ->is('center')
                     ->is('small')
-                    ->with('title', trans('Liitu Trip.ee reisihuviliste seltskonnaga'))
+                    ->with('title', trans('auth.register.subhead.title'))
                 )
             )
-
             ->with('content_top', component('Grid3')->with('items', collect()
                 ->push(component('AuthTab')
                     ->with('title', 'E-mailiga')
                 )
                 ->push(component('AuthTab')
                     ->is('facebook')
+                    ->with('route', route('facebook.redirect'))
                     ->with('title', 'Facebook')
                 )
                 ->push(component('AuthTab')
                     ->is('google')
+                    ->with('route', route('google.redirect'))
                     ->with('title', 'Google')
                 )
             ))
-
             ->with('content', collect()
                 ->push(component('Form')->with('fields', collect()
                     ->push(component('FormTextfield')
                         ->is('large')
-                        ->with('title', 'Kasutajanimi')
+                        ->with('title', trans('auth.register.field.name.title'))
                     )
                     ->push(component('FormTextfield')
                         ->is('large')
-                        ->with('title', 'E-mail')
+                        ->with('title', trans('auth.register.field.email.title'))
                     )
                     ->push(component('FormPassword')
                         ->is('large')
-                        ->with('title', 'Parool')
+                        ->with('title', trans('auth.register.field.password.title'))
                     )
                     ->push(component('FormPassword')
                         ->is('large')
-                        ->with('title', 'Parool uuesti')
+                        ->with('title', trans('auth.register.field.password_confirmation.title'))
                     )
                     ->push(component('FormButton')
                         ->is('wide')
-                        ->with('title', 'Registreeri')
+                        ->is('large')
+                        ->with('title', trans('auth.register.submit.title'))
                     )
                 ))
             )
-
             ->with('bottom', collect()->push(component('MetaLink')
-                ->with('title', 'Trip.ee keskkonnaga liitudes nõustun ma kasutajatingimustega')
+                ->with('title', trans('auth.register.field.eula.title', [
+                    'link' => format_link(
+                        route('static.show.id', [25151]),
+                        trans('auth.register.field.eula.title.link')
+                    ),
+                ]))
             ))
-
             ->with('footer', region('FooterLight'))
-
             ->render();
     }
 
@@ -144,40 +153,41 @@ class V2AuthController extends Controller
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
             ->with('header', region('StaticHeader'))
-
             ->with('top', collect()
                 ->push(component('Title')
                     ->is('center')
                     ->is('large')
-                    ->with('title', 'Ei mäleta oma parooli?')
+                    ->with('title', trans('auth.reset.apply.title'))
                 )
                 ->push('&nbsp;')
                 ->push(component('Title')
                     ->is('center')
                     ->is('small')
-                    ->with('title', 'Sisesta oma e-mail ja me saadame sulle kinnituslingi')
+                    ->with('title', trans('auth.reset.apply.subtitle'))
                 )
             )
-
             ->with('content', collect()
                 ->push(component('Form')->with('fields', collect()
                     ->push(component('FormTextfield')
                         ->is('large')
-                        ->with('title', 'Sinu e-post')
+                        ->with('title', trans('auth.reset.apply.field.email.title'))
                     )
                     ->push(component('FormButton')
                         ->is('wide')
-                        ->with('title', 'Saada')
+                        ->is('large')
+                        ->with('title', trans('auth.reset.apply.submit.title'))
                     )
                 ))
             )
-
             ->with('bottom', collect()->push(component('MetaLink')
-                ->with('title', 'Tuli meelde? Logi sisse siit.')
+                ->with('title', trans('auth.reset.login.title', [
+                    'link' => format_link(
+                        route('login.form'),
+                        trans('auth.reset.login.link.title')
+                    ),
+                ]))
             ))
-
             ->with('footer', region('FooterLight'))
-
             ->render();
     }
 
@@ -187,38 +197,35 @@ class V2AuthController extends Controller
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
             ->with('header', region('StaticHeader'))
-
             ->with('top', collect()
                 ->push(component('Title')
                     ->is('center')
                     ->is('large')
-                    ->with('title', 'Vali uus parool')
+                    ->with('title', trans('auth.reset.password.title'))
                 )
             )
-
             ->with('content', collect()
                 ->push(component('Form')->with('fields', collect()
                     ->push(component('FormTextfield')
                         ->is('large')
-                        ->with('title', 'Sinu e-post')
+                        ->with('title', trans('auth.reset.password.field.email.title'))
                     )
                     ->push(component('FormPassword')
                         ->is('large')
-                        ->with('title', 'Uus parool')
+                        ->with('title', trans('auth.reset.password.field.password.title'))
                     )
                     ->push(component('FormPassword')
                         ->is('large')
-                        ->with('title', 'Korda parooli')
+                        ->with('title', trans('auth.reset.password.field.password_confirmation.title'))
                     )
                     ->push(component('FormButton')
                         ->is('wide')
-                        ->with('title', 'Kinnita')
+                        ->is('large')
+                        ->with('title', trans('auth.reset.password.submit.title'))
                     )
                 ))
             )
-
             ->with('footer', region('FooterLight'))
-
             ->render();
     }
 }

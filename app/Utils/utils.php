@@ -37,7 +37,25 @@ function layout($layout)
 
 function format_body($body)
 {
-    return (new Utils\BodyFormatter($body))->format();
+    return (new Utils\BodyFormatter($body))
+        ->calendar()
+        ->youtube()
+        ->vimeo()
+        ->markdown()
+        ->links()
+        ->images()
+        ->format();
+}
+
+function format_description($body)
+{
+    return (new Utils\BodyFormatter($body))
+        ->markdown()
+        ->links()
+        ->images()
+        ->plain()
+        ->trim()
+        ->format();
 }
 
 function format_date($date)
@@ -68,4 +86,11 @@ function format_smtp_header(array $data)
 function backToAnchor($anchor)
 {
     return Redirect::to(URL::previous().$anchor);
+}
+
+function format_link($route, $title, $blank = false)
+{
+    $target = $blank ? 'target="_blank"' : '';
+
+    return '<a href="'.$route.'" '.$target.'>'.$title.'</a>';
 }

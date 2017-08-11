@@ -56,6 +56,7 @@ return [
     'store.status.1.info' => ':title has been added',
     'store.status.0.info' => ':title has been added but its unpublished for now. Publish it to make it visible to everybody.',
 
+    'create.info' => ':title has been created',
     'update.info' => ':title has been updated',
 
     'show.isnew' => 'New',
@@ -158,6 +159,7 @@ return [
     'travelmate.activity' => 'Viimase :days päeva jooksul lisatud :posts_count kuulutust',
 
     'travelmate.create.title' => 'Add listing',
+    'travelmate.edit.title' => 'Edit listing',
 
     'travelmate.show.action.all' => 'All travelmates',
 
@@ -175,6 +177,8 @@ return [
 
     'travelmate.edit.field.start_at.title' => 'Starting the trip at',
     'travelmate.edit.field.start_at.help' => '',
+
+    'travelmate.edit.field.start_at.suffix' => 'ja beyond',
 
     'travelmate.edit.field.duration.title' => 'Trip duration',
     'travelmate.edit.field.duration.help' => '',
@@ -243,6 +247,7 @@ return [
     'photo.index.title' => 'Photos',
     'photo.create.title' => 'Add photo',
 
+    'photo.edit.field.file.title' => 'Add photo',
     'photo.edit.field.file.help' => '',
 
     'photo.edit.field.title.title' => 'Description',

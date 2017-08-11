@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App;
+use Log;
 use Request;
 use App\User;
+use App\Image;
 use App\Content;
 use App\Destination;
 
@@ -113,7 +115,7 @@ class V2PhotoController extends Controller
             ->create('photo');
     }
 
-    public function createExperiment()
+    public function create2()
     {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -137,15 +139,18 @@ class V2PhotoController extends Controller
                     ->with('title', trans('content.photo.create.title'))
                 )
                 ->push(component('Form')
-                    ->with('id', 'ForumCreateForm')
-                    //->with('route', route('photo.store'))
+                    ->with('route', route('photo.store2'))
+                    ->with('files', true)
                     ->with('fields', collect()
-                        ->push('<div style="border-radius: 4px; opacity: 0.2; height: 10rem; border: 2px dashed black; font-family: Sailec; display: flex; align-items: center; justify-content: center;">Pildi lisamine (komponent)</div>')
+                        ->push(component('FormUpload')
+                            ->with('title', trans('content.photo.edit.field.file.title'))
+                            ->with('name', 'file')
+                        )
                         ->push(component('FormTextarea')
                             ->with('title', trans('content.photo.edit.field.title.title'))
-                            ->with('name', 'body')
-                            ->with('value', old('body'))
-                            ->with('rows', 8)
+                            ->with('name', 'title')
+                            ->with('value', old('title'))
+                            ->with('rows', 2)
                         )
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'destinations')
@@ -153,7 +158,6 @@ class V2PhotoController extends Controller
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
                         )
                         ->push(component('FormButton')
-                            ->with('disabled', true)
                             ->with('title', trans('content.create.submit.title'))
                         )
 
@@ -182,16 +186,55 @@ class V2PhotoController extends Controller
             ->render();
     }
 
-    public function edit($id)
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->edit('photo', $id);
-    }
-
     public function store()
     {
         return App::make('App\Http\Controllers\ContentController')
             ->store(request(), 'photo');
+    }
+
+    public function store2()
+    {
+        $loggedUser = request()->user();
+        $maxfilesize = config('site.maxfilesize') * 1024;
+
+        $rules = [
+            'title' => 'required',
+            'file' => "required|image|max:$maxfilesize",
+        ];
+
+        $this->validate(request(), $rules);
+
+        $photo = $loggedUser->contents()->create([
+            'title' => request()->title,
+            'type' => 'photo',
+            'status' => 1,
+        ]);
+
+        $filename = Image::storeImageFile(request()->file('file'));
+        $photo->images()->create(['filename' => $filename]);
+
+        $photo->destinations()->attach(request()->destinations);
+
+        Log::info('New content added', [
+            'user' =>  $photo->user->name,
+            'title' =>  $photo->title,
+            'type' =>  $photo->type,
+            'body' =>  $photo->body,
+        ]);
+
+        return redirect()
+            ->route('photo.index')
+            ->with('info', trans('content.store.info', [
+                'title' => $photo->title,
+            ]));
+    }
+
+    // FIXME
+
+    public function edit($id)
+    {
+        return App::make('App\Http\Controllers\ContentController')
+            ->edit('photo', $id);
     }
 
     public function update($id)

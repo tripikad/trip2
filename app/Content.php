@@ -21,6 +21,19 @@ class Content extends Model
 
     // Relations
 
+    public function unread_content()
+    {
+        $user = auth()->user();
+
+        $eager = $this->hasOne('App\UnreadContent', 'content_id', 'id');
+
+        if ($user) {
+            return $eager->where('user_id', $user->id);
+        }
+
+        return $eager;
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -82,7 +95,8 @@ class Content extends Model
                 'comments',
                 'comments.user',
                 'destinations',
-                'topics'
+                'topics',
+                'unread_content'
             )
             ->when($destination, function ($query) use ($destination) {
                 $destinations = Destination::find($destination)->descendantsAndSelf()->pluck('id');
@@ -102,22 +116,28 @@ class Content extends Model
             ->simplePaginate($take);
     }
 
-    public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at')
+    public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at', array $additional_eager = [])
     {
+        $eager = [
+            'images',
+            'user',
+            'user.images',
+            'comments',
+            'comments.user',
+            'destinations',
+            'topics',
+        ];
+
+        if (count($additional_eager)) {
+            $eager = array_merge($eager, $additional_eager);
+        }
+
         return $query
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
             ->orderBy($order, 'desc')
-            ->with(
-                'images',
-                'user',
-                'user.images',
-                'comments',
-                'comments.user',
-                'destinations',
-                'topics'
-            )
+            ->with($eager)
             ->distinct()
             ->get();
     }
@@ -307,14 +327,6 @@ class Content extends Model
         }
 
         return $this->title;
-    }
-
-    public function getHeadDescription()
-    {
-        $description = str_replace(["\n", "\t", "\r"], '', strip_tags($this->body));
-        $description = preg_replace("/\[\[([0-9]+)\]\]/", '', $description);
-
-        return str_limit(trim($description), 200);
     }
 
     public function getHeadImage()

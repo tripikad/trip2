@@ -4,6 +4,7 @@ namespace App\Utils;
 
 use Markdown;
 use App\Image;
+use Symfony\Component\Yaml\Yaml;
 
 class BodyFormatter
 {
@@ -24,16 +25,6 @@ class BodyFormatter
     public function links()
     {
         $this->body = str_replace(' www.', ' http://', $this->body);
-
-        // Modified version of
-        // http://stackoverflow.com/a/5289151
-        // and http://stackoverflow.com/a/12590772
-
-        $pattern = "/(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))(?![^<>]*>)/i";
-
-        if ($filteredBody = preg_replace($pattern, '<a href="$1">$1</a>', $this->body)) {
-            $this->body = $filteredBody;
-        }
 
         if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
             $this->body = $filteredBody;
@@ -61,12 +52,78 @@ class BodyFormatter
         return $this;
     }
 
+    public function calendar()
+    {
+        $yamlPattern = '/(\[\[[\r\n].*[\r\n]\]\])/sU';
+
+        if (preg_match_all($yamlPattern, $this->body, $matches)) {
+            foreach ($matches[0] as $match) {
+                $cleanedMatch = str_replace(['[[', ']]'], '', $match);
+                $cleanedMatch = preg_replace_callback(
+                    "/-\s+(.+)/",
+                    function ($matches) {
+                        return "- '".format_body($matches[1])."'";
+                    },
+                    $cleanedMatch
+                );
+                if ($months = Yaml::parse($cleanedMatch)) {
+                    $this->body = str_replace(
+                        $match,
+                        component('FlightCalendar')
+                            ->with('months', $months)
+                            ->render(),
+                        $this->body
+                    );
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    public function youtube()
+    {
+        $pattern = "/\s*[a-zA-Z\/\/:\.]*youtu(be.com\/watch\?v=|.be\/)([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i";
+
+        $this->body = preg_replace_callback($pattern, function ($matches) {
+            return component('Youtube')->with('id', $matches[2]);
+        },
+        $this->body);
+
+        return $this;
+    }
+
+    public function vimeo()
+    {
+        // From https://github.com/regexhq/vimeo-regex
+
+        $pattern = "/(http|https)?:\/\/(www\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|)(\d+)(?:|\/\?)/i";
+
+        $this->body = preg_replace_callback($pattern, function ($matches) {
+            return component('Vimeo')->with('id', $matches[4]);
+        },
+        $this->body);
+
+        return $this;
+    }
+
+    public function plain()
+    {
+        $this->body = strip_tags($this->body);
+        $this->body = str_replace(["\n", "\t", "\r"], ' ', ($this->body));
+
+        return $this;
+    }
+
+    public function trim()
+    {
+        $this->body = trim($this->body);
+
+        return $this;
+    }
+
     public function format()
     {
-        return $this
-            ->markdown()
-            ->links()
-            ->images()
-            ->body;
+        return $this->body;
     }
 }
