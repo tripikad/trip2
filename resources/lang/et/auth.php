@@ -14,7 +14,8 @@ return [
 
     'register.email.subject' => 'Kinnita oma konto',
     'register.email.body.line1' => 'Täname, et liitusid Eesti suurima reisikogukonnaga',
-    'register.email.body.line2' => 'Palun kinnita oma e-posti aadress külastades allolevat linki',
+    'register.email.body.line2' => 'Palun kinnita oma e-posti aadress vajutades allolevat nuppu',
+    'register.email.button.text' => 'Kinnitan oma konto ja liigun Trip.ee keskkonda',
 
     'register.sent.info' => 'Sinu e-postile saadeti kinnituskiri',
     'register.confirmed.info' => 'Sinu e-post on nüüd kinnitatud. Nüüd saad oma kasutajaga sisse logida.',
@@ -53,7 +54,8 @@ return [
     'reset.password.submit.title' => 'Kinnita',
 
     'reset.email.subject' => 'Taasta oma parool',
-    'reset.email.body.line1' => 'Palun külasta allolevat linki, et taastada oma parool:',
+    'reset.email.body.line1' => 'Vajuta allolevat nuppu parooli taastamiseks:',
     'reset.email.body.line2' => 'Märkuseks: kui sina ise pole uut parooli taastanud, siis võid selle kirja rahulikult kustutada.',
+    'reset.email.button.text' => 'Vajuta siia oma kasutaja parooli muutmiseks',
 
 ];
