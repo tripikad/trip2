@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Log;
 use Mail;
 use App\User;
+use App\Mail\ResetPassword;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
@@ -61,23 +62,7 @@ class ResetController extends Controller
         $user = User::where('email', $request->email)->take(1)->first();
 
         if ($user) {
-            Mail::send('email.auth.reset', ['user' => $user, 'token' => $user->remember_token], function ($mail) use ($user) {
-                $mail->to($user->email, $user->name)->subject(trans('auth.reset.email.subject'));
-
-                $swiftMessage = $mail->getSwiftMessage();
-                $headers = $swiftMessage->getHeaders();
-
-                $header = [
-                    'category' => [
-                        'auth_reset',
-                    ],
-                    'unique_args' => [
-                        'user_id' => (string) $user->id,
-                    ],
-                ];
-
-                $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
-            });
+            Mail::to($user->email, $user->name)->queue(new ResetPassword($user));
         }
 
         Log::info('Password reset request has been submitted', [

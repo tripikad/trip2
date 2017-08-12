@@ -155,7 +155,6 @@
                      'class' => 'c-form__label m-checkbox'
                  ]) !!}
              </div>
-             {{--
              <div class="c-form__group">
                  {{ Form::checkbox('notify_follow', 1, null, [
                      'class' => 'c-form__input m-checkbox',
@@ -166,7 +165,6 @@
                      'class' => 'c-form__label m-checkbox'
                  ]) !!}
              </div>
-            --}}
              <h3 class="c-auth-title m-margin">{{ trans('user.edit.contact.title') }}</h3>
 
              <div class="c-form__group m-small-margin">

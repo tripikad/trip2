@@ -7,6 +7,7 @@ use Hash;
 use Mail;
 use App\User;
 use Illuminate\Http\Request;
+use App\Mail\ConfirmRegistration;
 use App\Http\Controllers\Controller;
 
 class RegistrationController extends Controller
@@ -34,23 +35,7 @@ class RegistrationController extends Controller
 
         $user = User::create(array_merge($request->all(), $fields));
 
-        Mail::send('email.auth.register', ['user' => $user], function ($mail) use ($user) {
-            $mail->to($user->email, $user->name)->subject(trans('auth.register.email.subject'));
-
-            $swiftMessage = $mail->getSwiftMessage();
-            $headers = $swiftMessage->getHeaders();
-
-            $header = [
-                'category' => [
-                    'auth_register',
-                ],
-                'unique_args' => [
-                    'user_id' => (string) $user->id,
-                ],
-            ];
-
-            $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
-        });
+        Mail::to($user->email, $user->name)->queue(new ConfirmRegistration($user));
 
         Log::info('New user registered', [
             'name' =>  $user->name,

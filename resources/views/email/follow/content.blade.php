@@ -1,11 +1,15 @@
-{{ trans('follow.email.content.body', [
+@component('mail::message')
+# {{ trans('follow.email.content.body') }}
+
+@component('mail::button', [
     'url' => route('content.show', [
         $comment->content->type,
         $comment->content,
         '#comment-' . $comment->id
-    ])
-]) }}
-<br /><br />
---
-<br />
-{{ config('site.name') }}
+    ]),
+    'color' => 'green'
+])
+{{ trans('follow.email.button.text') }}
+@endcomponent
+
+@endcomponent

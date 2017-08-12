@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "853deaf08825675ef9fd491a2b224e18",
-    "content-hash": "44ec52a45b8e0f8c6f3d4067b078633c",
+    "hash": "f8ba0270c8b1421ee4a769db6534473a",
+    "content-hash": "38a41e1105e988a1171f6b407e993845",
     "packages": [
         {
             "name": "andreasindal/laravel-markdown",
@@ -787,6 +787,57 @@
             "time": "2014-09-09 13:34:57"
         },
         {
+            "name": "eduardokum/laravel-mail-auto-embed",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eduardokum/laravel-mail-auto-embed.git",
+                "reference": "64852471a06f17ea74c8ac8edf5106c87a97fd39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eduardokum/laravel-mail-auto-embed/zipball/64852471a06f17ea74c8ac8edf5106c87a97fd39",
+                "reference": "64852471a06f17ea74c8ac8edf5106c87a97fd39",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "~5.3.0|~5.4.0",
+                "illuminate/mail": "~5.3.0|~5.4.0",
+                "illuminate/support": "~5.3.0|~5.4.0",
+                "php": ">=5.5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Eduardokum\\LaravelMailAutoEmbed\\Providers\\LaravelMailAutoEmbedServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Eduardokum\\LaravelMailAutoEmbed\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eduardo Gusmão",
+                    "email": "eduguscontra3@hotmail.com"
+                }
+            ],
+            "description": "Library for embed images in emails automatically",
+            "homepage": "https://github.com/eduardokum/laravel-mail-auto-embed",
+            "keywords": [
+                "eduardokum",
+                "laravel-mail-auto-embed"
+            ],
+            "time": "2017-06-23 18:30:07"
+        },
+        {
             "name": "erusev/parsedown",
             "version": "1.6.2",
             "source": {
@@ -891,6 +942,7 @@
                 "laravel",
                 "minifier"
             ],
+            "abandoned": "htmlmin/htmlmin",
             "time": "2017-01-01 13:22:51"
         },
         {

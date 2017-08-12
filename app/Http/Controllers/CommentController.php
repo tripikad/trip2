@@ -6,6 +6,7 @@ use Log;
 use Auth;
 use Mail;
 use Illuminate\Http\Request;
+use App\Mail\NewCommentFollow;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class CommentController extends Controller
@@ -24,40 +25,12 @@ class CommentController extends Controller
         ];
         $comment = Auth::user()->comments()->create(array_merge($request->all(), $fields));
 
-        /*
-        if ($followersEmails = $comment
-                ->content
-                ->followersEmails()
-                ->forget(Auth::user()->id)
-                ->toArray()
-        ) {
-            foreach ($followersEmails as $followerId => $followerEmail) {
-                Mail::send('email.follow.content', ['comment' => $comment], function ($mail) use ($followerEmail, $followerId, $comment) {
-                    $mail->to($followerEmail)
-                        ->subject(trans('follow.content.email.subject', [
-                            'title' => $comment->content->title,
-                        ]));
-
-                    $swiftMessage = $mail->getSwiftMessage();
-                    $headers = $swiftMessage->getHeaders();
-
-                    $header = [
-                        'category' => [
-                            'follow_content',
-                        ],
-                        'unique_args' => [
-                            'user_id' => (string) $followerId,
-                            'content_id' => (string) $comment->content->id,
-                            'content_type' => (string) $comment->content->type,
-                        ],
-                    ];
-
-                    $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
-                });
+        $follower_emails = $comment->content->followersEmails()->forget(Auth::user()->id)->toArray();
+        if ($follower_emails) {
+            foreach ($follower_emails as $follower_id => &$follower_email) {
+                Mail::to($follower_email)->queue(new NewCommentFollow($follower_id, $comment));
             }
         }
-
-        */
 
         Log::info('New comment added', [
             'user' =>  Auth::user()->name,

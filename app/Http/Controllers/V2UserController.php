@@ -220,6 +220,11 @@ class V2UserController extends Controller
                             ->with('name', 'notify_message')
                             ->with('value', old('notify_message', $user->notify_message))
                         )
+                        ->push(component('FormCheckbox')
+                            ->with('title', trans('user.edit.field.notify_follow.title'))
+                            ->with('name', 'notify_follow')
+                            ->with('value', old('notify_follow', $user->notify_follow))
+                        )
                         ->push(component('Title')
                             ->is('small')
                             ->is('blue')
@@ -285,6 +290,7 @@ class V2UserController extends Controller
             'real_name' => request()->real_name,
             'real_name_show' => request()->real_name_show ? 0 : 1,
             'notify_message' => request()->notify_message ? 1 : 0,
+            'notify_follow' => request()->notify_follow ? 1 : 0,
             'description' => request()->description,
             'contact_facebook' => request()->contact_facebook,
             'contact_instagram' => request()->contact_instagram,
