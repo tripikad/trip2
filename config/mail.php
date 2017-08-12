@@ -56,7 +56,7 @@ return [
 
     'from' => [
         'address' => 'trip@trip.ee',
-        'name' => 'Trip.ee'
+        'name' => 'Trip.ee',
     ],
 
     /*
