@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewCommentFollow;
 use Log;
 use Auth;
 use Mail;
@@ -24,7 +25,6 @@ class CommentController extends Controller
         ];
         $comment = Auth::user()->comments()->create(array_merge($request->all(), $fields));
 
-        /*
         $follower_emails = $comment->content->followersEmails()->forget(Auth::user()->id)->toArray();
         if ($follower_emails) {
             foreach ($follower_emails as $follower_id => &$follower_email)
@@ -32,7 +32,6 @@ class CommentController extends Controller
                 Mail::to($follower_email)->queue(new NewCommentFollow($follower_id, $comment));
             }
         }
-        */
 
         Log::info('New comment added', [
             'user' =>  Auth::user()->name,
