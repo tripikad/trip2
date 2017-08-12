@@ -85,7 +85,7 @@ class ResetController extends Controller
         ]);
 
         //if ($response == Password::RESET_LINK_SENT)
-            return redirect()
+        return redirect()
                 ->back()
                 ->with('info', trans($response));
     }
