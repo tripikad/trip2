@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\NewCommentFollow;
 use Log;
 use Auth;
 use Mail;
 use Illuminate\Http\Request;
+use App\Mail\NewCommentFollow;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class CommentController extends Controller
@@ -27,8 +27,7 @@ class CommentController extends Controller
 
         $follower_emails = $comment->content->followersEmails()->forget(Auth::user()->id)->toArray();
         if ($follower_emails) {
-            foreach ($follower_emails as $follower_id => &$follower_email)
-            {
+            foreach ($follower_emails as $follower_id => &$follower_email) {
                 Mail::to($follower_email)->queue(new NewCommentFollow($follower_id, $comment));
             }
         }
