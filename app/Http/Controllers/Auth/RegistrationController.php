@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\ConfirmRegistration;
 use Log;
 use Hash;
 use Mail;
@@ -34,23 +35,7 @@ class RegistrationController extends Controller
 
         $user = User::create(array_merge($request->all(), $fields));
 
-        Mail::send('email.auth.register', ['user' => $user], function ($mail) use ($user) {
-            $mail->to($user->email, $user->name)->subject(trans('auth.register.email.subject'));
-
-            $swiftMessage = $mail->getSwiftMessage();
-            $headers = $swiftMessage->getHeaders();
-
-            $header = [
-                'category' => [
-                    'auth_register',
-                ],
-                'unique_args' => [
-                    'user_id' => (string) $user->id,
-                ],
-            ];
-
-            $headers->addTextHeader('X-SMTPAPI', format_smtp_header($header));
-        });
+        Mail::to($user->email, $user->name)->queue(new ConfirmRegistration($user));
 
         Log::info('New user registered', [
             'name' =>  $user->name,
