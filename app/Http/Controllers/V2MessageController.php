@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\NewMessage;
 use Log;
 use Mail;
 use App\User;
 use App\Message;
+use App\Mail\NewMessage;
 use Illuminate\Http\Request;
 
 class V2MessageController extends Controller

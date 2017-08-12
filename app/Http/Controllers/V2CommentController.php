@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\NewCommentFollow;
-use Mail;
 use Log;
 use Auth;
+use Mail;
 use App\Comment;
 use Illuminate\Http\Request;
+use App\Mail\NewCommentFollow;
 
 class V2CommentController extends Controller
 {
