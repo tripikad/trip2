@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Mail\ConfirmRegistration;
 use Log;
 use Hash;
 use Mail;
 use App\User;
 use Illuminate\Http\Request;
+use App\Mail\ConfirmRegistration;
 use App\Http\Controllers\Controller;
 
 class RegistrationController extends Controller
