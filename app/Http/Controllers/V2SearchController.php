@@ -114,7 +114,7 @@ class V2SearchController extends Controller
                             ->with('route', route($item->type.'.show', [$item->slug]))
                             ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
                             ->with('image_alt', $item->imagePreset('small_square'))
-                            ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
+                            ->with('body', str_limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
                             ->with('badge', ($item->price ? $item->price.'€' : null))
                     );
                 } elseif ($active_search == 'news') {
@@ -123,7 +123,7 @@ class V2SearchController extends Controller
                             ->with('route', route($item->type.'.show', [$item->slug]))
                             ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
                             ->with('image_alt', $item->imagePreset('small_square'))
-                            ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
+                            ->with('body', str_limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
                             ->with('badge', $item->comments->count())
                     );
                 } elseif ($active_search == 'destination') {
@@ -149,7 +149,7 @@ class V2SearchController extends Controller
                             ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
                             ->with('image', $item->user->imagePreset('small_square'))
                             ->with('image_title', $item->user->name)
-                            ->with('body', str_limit(strip_tags($item->body ?? '&nbsp;'), 300))
+                            ->with('body', str_limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
                             ->with('badge', $item->comments->count())
                     );
                 }
@@ -235,6 +235,10 @@ class V2SearchController extends Controller
             if ($find === 'destination') {
                 $item_id_key = 'destination_id';
                 $rank_higher_where_not = 'content_type';
+
+                if ($sort_order == 'created_at' || $sort_order == 'updated_at') {
+                    $sort_order = 'id';
+                }
             } elseif ($find === 'comment') {
                 $item_id_key = 'comment_id';
             } elseif ($find === 'user') {
@@ -279,8 +283,14 @@ class V2SearchController extends Controller
         if ($count_only) {
             $data['count'] = $data['paginate']->count();
         } else {
-            $data['paginate'] = $data['paginate']->orderBy(DB::raw('`relevance` + `sum_up_relevance`'), 'desc')
-                ->paginate($limit);
+            if ($sort_order == 'relevance') {
+                $data['paginate'] = $data['paginate']->orderBy(DB::raw('`relevance` + `sum_up_relevance`'), 'desc');
+            } else {
+                // if destination then by id desc
+                $data['paginate'] = $data['paginate']->orderBy($sort_order, 'desc');
+            }
+
+            $data['paginate'] = $data['paginate']->paginate($limit);
 
             $data['count'] = $data['paginate']->total();
         }
@@ -301,35 +311,17 @@ class V2SearchController extends Controller
                 }
 
                 $data['items'] = $data['items']->with($with);
-
-                if ($sort_order == 'relevance') {
-                    $data['items'] = $data['items']->orderBy(DB::raw('FIELD(`id`, '.implode(',', $data['item_ids']).')', 'ASC'));
-                } else {
-                    $data['items'] = $data['items']->orderBy($sort_order, 'DESC');
-                }
-
-                $data['items'] = $data['items']->get();
             } elseif ($find == 'destination' && count($data['item_ids'])) {
                 $data['items'] = Destination::whereIn('id', $data['item_ids']);
-
-                if ($sort_order == 'relevance') {
-                    $data['items'] = $data['items']->orderBy(DB::raw('FIELD(`id`, '.implode(',', $data['item_ids']).')', 'ASC'));
-                } else {
-                    $data['items'] = $data['items']->orderBy('id', 'DESC');
-                }
-
-                $data['items'] = $data['items']->get();
             } elseif ($find == 'user' && count($data['item_ids'])) {
                 $data['items'] = User::whereIn('id', $data['item_ids'])
                     ->with('images');
+            }
 
-                if ($sort_order == 'relevance') {
-                    $data['items'] = $data['items']->orderBy(DB::raw('FIELD(`id`, '.implode(',', $data['item_ids']).')', 'ASC'));
-                } else {
-                    $data['items'] = $data['items']->orderBy($sort_order, 'DESC');
-                }
-
-                $data['items'] = $data['items']->get();
+            if (isset($data['items']) && $data['items']) {
+                $data['items'] = $data['items']
+                    ->orderBy(DB::raw('FIELD(`id`, '.implode(',', $data['item_ids']).')', 'ASC'))
+                    ->get();
             }
         }
 

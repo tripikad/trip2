@@ -33,20 +33,20 @@ class PhotoTest extends BrowserKitTestCase
         $photo = Content::whereTitle('Hello photo title')->first();
         $filename = $photo->images()->first()->filename;
 
-            // Check original file exists and clean up
+        // Check original file exists and clean up
 
-            $filepath = config('imagepresets.original.path').$filename;
+        $filepath = config('imagepresets.original.path').$filename;
 
         $this->assertTrue(file_exists($filepath));
         unlink($filepath);
 
-            // Check thumbnails exist and clean up
+        // Check thumbnails exist and clean up
 
-            foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                $filepath = config("imagepresets.presets.$preset.path").$filename;
-                $this->assertTrue(file_exists($filepath));
-                unlink($filepath);
-            }
+        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+            $filepath = config("imagepresets.presets.$preset.path").$filename;
+            $this->assertTrue(file_exists($filepath));
+            unlink($filepath);
+        }
     }
 
     /*

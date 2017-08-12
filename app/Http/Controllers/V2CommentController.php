@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewCommentFollow;
+use Mail;
 use Log;
 use Auth;
 use App\Comment;
@@ -22,6 +24,13 @@ class V2CommentController extends Controller
             'content_id' => $content_id,
             'status' => 1,
         ]);
+
+        $follower_emails = $comment->content->followersEmails()->forget(Auth::user()->id)->toArray();
+        if ($follower_emails) {
+            foreach ($follower_emails as $follower_id => &$follower_email) {
+                Mail::to($follower_email)->queue(new NewCommentFollow($follower_id, $comment));
+            }
+        }
 
         Log::info('New comment added', [
             'user' =>  $comment->user->name,

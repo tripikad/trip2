@@ -17,9 +17,9 @@ class ConvertSearchable extends Command
     public function handle()
     {
         if ($this->option('optimize')) {
-            //$this->line(' - Optimizing table');
+            $this->line(' - Optimizing table');
             app('db')->select('OPTIMIZE TABLE `searchables`');
-            //$this->info(' + Done');
+            $this->info(' + Done');
         } else {
             $start = microtime(true);
 
@@ -31,6 +31,7 @@ class ConvertSearchable extends Command
                 'destination_id',
                 'title',
                 'body',
+                'updated_at',
                 'created_at',
             ])->orderBy('id', 'asc');
 
@@ -49,7 +50,7 @@ class ConvertSearchable extends Command
 
             $delete_ids = [];
 
-            //$this->line(' - 1/2 Comparing data with search index');
+            $this->line(' - 1/2 Comparing data with search index');
             $search_indexes->chunk(2500, function ($indexes) use (&$index_fields, &$delete_ids) {
                 foreach ($indexes as &$index) {
                     if ($index->comment_id) {
@@ -77,11 +78,17 @@ class ConvertSearchable extends Command
                             $index->body = DB::getPdo()->quote($index->body);
                         }
 
-                        if ($index->title == $index_fields[$key]['title'] && $index->body == $index_fields[$key]['body']) {
+                        if (($index_fields[$key]['updated_at'] == 'NOW()' || DB::getPdo()->quote($index->updated_at) == $index_fields[$key]['updated_at']) &&
+                            ($index_fields[$key]['created_at'] == 'NOW()' || DB::getPdo()->quote($index->created_at) == $index_fields[$key]['created_at'])) {
+                            unset($index_fields[$key]);
+                        } elseif ($index_fields[$key]['created_at'] == 'NOW()' && $index_fields[$key]['updated_at'] == 'NOW()' && $index->title == $index_fields[$key]['title'] && $index->body == $index_fields[$key]['body']) {
                             unset($index_fields[$key]);
                         } else {
                             $index_fields[$key]['id'] = (int) $index->id;
-                            $index_fields[$key]['created_at'] = DB::getPdo()->quote($index->created_at);
+
+                            if ($index_fields[$key]['created_at'] == 'NOW()') {
+                                $index_fields[$key]['created_at'] = DB::getPdo()->quote($index->created_at);
+                            }
                         }
                     } else {
                         $delete_ids[] = $index->id;
@@ -89,29 +96,29 @@ class ConvertSearchable extends Command
                 }
             });
 
-            //$this->info(' + 2/2 Comparing completed!');
+            $this->info(' + 2/2 Comparing completed!');
             $count_delete_ids = count($delete_ids);
             if ($count_delete_ids > 0) {
                 Searchable::destroy($delete_ids);
-                //$this->error(' + '.count($delete_ids).' items deleted from search index');
+                $this->error(' + '.count($delete_ids).' items deleted from search index');
             } else {
-                //$this->info(' + 0 items deleted from search index');
+                $this->info(' + 0 items deleted from search index');
             }
 
             $index_count = count($index_fields);
             if ($index_count > 0) {
                 $this->save($index_fields, $index_count);
             } else {
-                //$this->info(' + Nothing to save');
+                $this->info(' + Nothing to save');
             }
 
-            //$this->info('Command finished after '.round(microtime(true) - $start, 4).' seconds');
+            $this->info('Command finished after '.round(microtime(true) - $start, 4).' seconds');
         }
     }
 
     public function save(array $items, int $index_count)
     {
-        //$this->line(' - 1/3 Preparation for save ('.$index_count.' items)...');
+        $this->line(' - 1/3 Preparation for save ('.$index_count.' items)...');
 
         $replace_insert = 'REPLACE INTO `searchables` (`id`, `user_id`, `content_id`, `content_type`, `comment_id`, `destination_id`, `title`, `body`, `updated_at`, `created_at`)';
         $items_done = 0;
@@ -128,19 +135,19 @@ class ConvertSearchable extends Command
 
             if ($last_round === 2500) {
                 $last_round = 0;
-                //$this->info(' - '.$items_done.' / '.$index_count.' ('.round($items_done * 100 / $index_count, 2).'%) items saved');
+                $this->info(' - '.$items_done.' / '.$index_count.' ('.round($items_done * 100 / $index_count, 2).'%) items saved');
             } elseif ($items_done == $index_count) {
-                //$this->info(' + '.$items_done.' / '.$index_count.' (100%) items saved');
+                $this->info(' + '.$items_done.' / '.$index_count.' (100%) items saved');
             }
         }
     }
 
     public function get_users_for_index(&$index_fields, $void_return = false)
     {
-        //$this->line(' - 1/3 Fetching users from database...');
-        $users = app('db')->select('SELECT `id`, `name` FROM `users` WHERE `verified` = 1 ORDER BY `id` ASC');
+        $this->line(' - 1/3 Fetching users from database...');
+        $users = app('db')->select('SELECT `id`, `name`, `created_at`, `updated_at` FROM `users` WHERE `verified` = 1 ORDER BY `id` ASC');
 
-        //$this->line(' - 2/3 Adding users to index array...');
+        $this->line(' - 2/3 Adding users to index array...');
         foreach ($users as &$user) {
             if (! $user->name || $user->name == '') {
                 $user->name = null;
@@ -156,12 +163,12 @@ class ConvertSearchable extends Command
                     'destination_id' => 'null',
                     'title' => DB::getPdo()->quote($this->safe($user->name)),
                     'body' => 'null',
-                    'updated_at' => 'NOW()',
-                    'created_at' => 'NOW()',
+                    'updated_at' => DB::getPdo()->quote($user->updated_at),
+                    'created_at' => DB::getPdo()->quote($user->created_at),
                 ];
             }
         }
-        //$this->info(' + 3/3 Users are ready');
+        $this->info(' + 3/3 Users are ready');
 
         if (! $void_return) {
             return $users;
@@ -170,10 +177,10 @@ class ConvertSearchable extends Command
 
     public function get_content_for_index(&$index_fields, &$content_type_by_id, $void_return = false)
     {
-        //$this->line(' - 1/3 Fetching contents from database...');
-        $contents = app('db')->select('SELECT `id`, `user_id`, `title`, `type`, `body`, `url`, `price` FROM `contents` WHERE `status` = 1 ORDER BY `id` ASC');
+        $this->line(' - 1/3 Fetching contents from database...');
+        $contents = app('db')->select('SELECT `id`, `user_id`, `title`, `type`, `body`, `url`, `price`, `created_at`, `updated_at` FROM `contents` WHERE `status` = 1 ORDER BY `id` ASC');
 
-        //$this->line(' - 2/3 Adding contents to index array...');
+        $this->line(' - 2/3 Adding contents to index array...');
         foreach ($contents as &$content) {
             if (! $content->title || $content->title == '') {
                 $content->title = null;
@@ -194,13 +201,13 @@ class ConvertSearchable extends Command
                 'destination_id' => 'null',
                 'title' => ($content->title ? DB::getPdo()->quote($this->safe($content->title)) : 'null'),
                 'body' => ($body ? DB::getPdo()->quote($this->safe($body)) : 'null'),
-                'updated_at' => 'NOW()',
-                'created_at' => 'NOW()',
+                'updated_at' => DB::getPdo()->quote($content->updated_at),
+                'created_at' => DB::getPdo()->quote($content->created_at),
             ];
 
             $content_type_by_id[$content->id] = $content->type;
         }
-        //$this->info(' + 3/3 Contents are ready');
+        $this->info(' + 3/3 Contents are ready');
 
         if (! $void_return) {
             return $contents;
@@ -209,10 +216,10 @@ class ConvertSearchable extends Command
 
     public function get_destinations_for_index(&$index_fields, $void_return = false)
     {
-        //$this->line(' - 1/3 Fetching destinations from database...');
+        $this->line(' - 1/3 Fetching destinations from database...');
         $destinations = app('db')->select('SELECT `id`, `name` FROM `destinations` ORDER BY `id` ASC');
 
-        //$this->line(' - 2/3 Adding destinations to index array...');
+        $this->line(' - 2/3 Adding destinations to index array...');
         foreach ($destinations as &$destination) {
             $index_fields['d'.$destination->id] = [
                 'id' => 'null',
@@ -227,7 +234,7 @@ class ConvertSearchable extends Command
                 'created_at' => 'NOW()',
             ];
         }
-        //$this->info(' + 3/3 Destinations are ready');
+        $this->info(' + 3/3 Destinations are ready');
 
         if (! $void_return) {
             return $destinations;
@@ -236,10 +243,10 @@ class ConvertSearchable extends Command
 
     public function get_comments_for_index(&$index_fields, $content_ids, $user_ids, $content_type_by_id, $void_return = false)
     {
-        //$this->line(' - 1/3 Fetching comments from database...');
-        $comments = app('db')->select('SELECT `id`, `user_id`, `content_id`, `body` FROM `comments` WHERE `status` = 1 AND (`content_id` IN ('.implode(',', $content_ids).') OR `user_id` IN ('.implode(',', $user_ids).'))');
+        $this->line(' - 1/3 Fetching comments from database...');
+        $comments = app('db')->select('SELECT `id`, `user_id`, `content_id`, `body`, `created_at`, `updated_at` FROM `comments` WHERE `status` = 1 AND (`content_id` IN ('.implode(',', $content_ids).') OR `user_id` IN ('.implode(',', $user_ids).'))');
 
-        //$this->line(' - 2/3 Adding comments to index array...');
+        $this->line(' - 2/3 Adding comments to index array...');
         foreach ($comments as &$comment) {
             // Otherwise content is hidden
             if (isset($content_type_by_id[$comment->content_id])) {
@@ -257,13 +264,13 @@ class ConvertSearchable extends Command
                         'destination_id' => 'null',
                         'title' => 'null',
                         'body' => ($comment->body ? DB::getPdo()->quote($this->safe($comment->body)) : 'null'),
-                        'updated_at' => 'NOW()',
-                        'created_at' => 'NOW()',
+                        'updated_at' => DB::getPdo()->quote($comment->updated_at),
+                        'created_at' => DB::getPdo()->quote($comment->created_at),
                     ];
                 }
             }
         }
-        //$this->info(' + 3/3 Comments are ready');
+        $this->info(' + 3/3 Comments are ready');
 
         if (! $void_return) {
             return $comments;

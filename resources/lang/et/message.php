@@ -13,6 +13,7 @@ return [
     'create.submit.title' => 'Saada sõnum',
 
     'store.email.subject' => ':user on saatnud sulle sõnumi',
-    'store.email.body' => 'Loe täispikka sõnumit siit: :url',
+    'store.email.body' => 'Täispika sõnumi lugemiseks vajuta allolevat nuppu:',
+    'store.email.button.text' => 'Sõnumi lugemiseks vajuta siia',
 
 ];

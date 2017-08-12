@@ -11,6 +11,7 @@
         "baum/baum": "~1.1",
         "cviebrock/eloquent-sluggable": "^4.0",
         "doctrine/dbal": "^2.5",
+        "eduardokum/laravel-mail-auto-embed": "^1.0",
         "graham-campbell/htmlmin": "^4.3",
         "guzzlehttp/guzzle": "~5.3|~6.0",
         "intervention/image": "^2.3@dev",
