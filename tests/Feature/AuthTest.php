@@ -40,7 +40,7 @@ class AuthTest extends BrowserKitTestCase
             ->type('password', 'password')
             ->press(trans('auth.login.submit.title'))
             ->seePageIs('/login');
-            //->see(trans('auth.login.failed.info')); // FIXME
+        //->see(trans('auth.login.failed.info')); // FIXME
 
         // User can confirm its account
 
@@ -51,7 +51,7 @@ class AuthTest extends BrowserKitTestCase
                 'registration_token' => null,
             ])
             ->seePageIs('login');
-            //->see(trans('auth.register.confirmed.info')); // FIXME
+        //->see(trans('auth.register.confirmed.info')); // FIXME
 
         // User can log in after confirmation
 
@@ -114,7 +114,7 @@ class AuthTest extends BrowserKitTestCase
             ->type('manny@calavera.com', 'email')
             ->press(trans('auth.reset.apply.submit.title'))
             ->seePageIs('/reset/apply');
-            //->see(trans('passwords.user')); // FIXME
+        //->see(trans('passwords.user')); // FIXME
     }
 
     public function getVerificationLink($name)
