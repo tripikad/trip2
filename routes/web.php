@@ -203,6 +203,12 @@ Route::post('static/{id}/update', 'V2StaticController@update')
     ->name('static.update')
     ->middleware('role:superuser');
 
+// Newsletter
+
+Route::get('newsletter/list', 'V2NewsletterController@index')
+    ->name('newsletter.index')
+    ->middleware('role:superuser');
+
 // Blog
 
 Route::get('reisikirjad', 'V2BlogController@index')
