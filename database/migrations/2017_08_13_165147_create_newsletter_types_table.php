@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\Artisan;
 
 class CreateNewsletterTypesTable extends Migration
 {
@@ -26,7 +26,7 @@ class CreateNewsletterTypesTable extends Migration
             $table->timestamps();
         });
 
-        Artisan::call('db:seed', array('--class' => 'NewsletterTypesSeeder'));
+        Artisan::call('db:seed', ['--class' => 'NewsletterTypesSeeder']);
     }
 
     /**
