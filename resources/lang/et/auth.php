@@ -14,7 +14,7 @@ return [
 
     'register.email.subject' => 'Kinnita oma konto',
     'register.email.body.line1' => 'Täname, et liitusid Eesti suurima reisikogukonnaga',
-    'register.email.body.line2' => 'Palun kinnita oma e-posti aadress vajutades allolevat nuppu',
+    'register.email.body.line2' => 'Palun kinnita oma e-posti aadress vajutades allolevat nuppu:',
     'register.email.button.text' => 'Kinnitan oma konto ja liigun Trip.ee keskkonda',
 
     'register.sent.info' => 'Sinu e-postile saadeti kinnituskiri',
