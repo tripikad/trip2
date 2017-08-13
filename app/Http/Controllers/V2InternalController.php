@@ -9,7 +9,40 @@ class V2InternalController extends Controller
     public function index()
     {
         $forums = Content::getLatestPagedItems('internal', false, false, false, 'updated_at');
+
         $loggedUser = request()->user();
+
+        $navBar = collect()->pushWhen(
+            $loggedUser && $loggedUser->hasRole('admin'),
+            component('Button')
+                ->is('narrow')
+                ->with('title', trans('content.internal.create.title'))
+                ->with('route', route('internal.create'))
+        )
+            ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Link')
+                ->with('title', trans('menu.admin.image'))
+                ->with('route', route('admin.image.index'))
+            )
+            ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Link')
+                ->with('title', trans('menu.admin.content'))
+                ->with('route', route('admin.content.index'))
+            );
+
+        if ($loggedUser && $loggedUser->hasRole('superuser')) {
+            $static_contents = Content::select('id', 'title')->whereType('static')->get();
+            foreach ($static_contents as &$static_content)
+            {
+                $navBar->push(component('Link')
+                    ->with('title', trans('menu.admin.static', ['title' => $static_content->title]))
+                    ->with('route', route('static.edit', [$static_content->id]))
+                );
+            }
+
+            $navBar->push(component('Link')
+                ->with('title', trans('menu.admin.newsletter'))
+                ->with('route', route('newsletter.index'))
+            );
+        }
 
         return layout('2col')
 
@@ -32,23 +65,7 @@ class V2InternalController extends Controller
                 ->push(region('Paginator', $forums))
             )
 
-            ->with('sidebar', collect()
-                ->pushWhen(
-                    $loggedUser && $loggedUser->hasRole('admin'),
-                    component('Button')
-                        ->is('narrow')
-                        ->with('title', trans('content.internal.create.title'))
-                        ->with('route', route('internal.create'))
-                )
-                ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Link')
-                    ->with('title', trans('menu.admin.image'))
-                    ->with('route', route('admin.image.index'))
-                )
-                ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Link')
-                    ->with('title', trans('menu.admin.content'))
-                    ->with('route', route('admin.content.index'))
-                )
-            )
+            ->with('sidebar', $navBar)
 
             ->with('footer', region('FooterLight'))
 
