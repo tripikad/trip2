@@ -20,6 +20,7 @@ class CreateNewsletterSubscriptionsTable extends Migration
             $table->integer('destination_id')->nullable()->unsigned()->index();
             $table->string('email');
             $table->boolean('active')->default(true);
+            $table->timestamp('last_sent_at')->nullable();
             $table->timestamps();
 
             $table->foreign('newsletter_type_id')->references('id')->on('newsletter_types')
