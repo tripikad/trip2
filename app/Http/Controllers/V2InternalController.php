@@ -30,8 +30,7 @@ class V2InternalController extends Controller
 
         if ($loggedUser && $loggedUser->hasRole('superuser')) {
             $static_contents = Content::select('id', 'title')->whereType('static')->get();
-            foreach ($static_contents as &$static_content)
-            {
+            foreach ($static_contents as &$static_content) {
                 $navBar->push(component('Link')
                     ->with('title', trans('menu.admin.static', ['title' => $static_content->title]))
                     ->with('route', route('static.edit', [$static_content->id]))
