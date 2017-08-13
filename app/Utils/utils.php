@@ -88,6 +88,14 @@ function backToAnchor($anchor)
     return Redirect::to(URL::previous().$anchor);
 }
 
+function dist($type)
+{
+    $path = public_path('dist/manifest.json');
+    $manifest = json_decode(file_get_contents($path), true);
+
+    return '/dist/'.(is_array($manifest[$type]) ? $manifest[$type][0] : $manifest[$type]);
+}
+
 function format_link($route, $title, $blank = false)
 {
     $target = $blank ? 'target="_blank"' : '';
