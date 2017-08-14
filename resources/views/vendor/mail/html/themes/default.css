@@ -7,7 +7,7 @@ body, body *:not(html):not(style):not(br):not(tr):not(code) {
 
 body {
     background-color: #f5f8fa;
-    color: #74787E;
+    color: #444444;
     height: 100%;
     hyphens: auto;
     line-height: 1.4;
@@ -30,7 +30,7 @@ blockquote {
 }
 
 a {
-    color: #3869D4;
+    color: #4ac9e3;
 }
 
 a img {
@@ -41,23 +41,24 @@ a img {
 
 h1 {
     color: #2F3133;
-    font-size: 19px;
+    font-size: 20px;
     font-weight: bold;
     margin-top: 0;
     text-align: left;
 }
 
 h2 {
-    color: #2F3133;
+    color: #78cb5c;
     font-size: 16px;
     font-weight: bold;
-    margin-top: 0;
+    margin-top: 20px;
     text-align: left;
+    text-transform: uppercase;
 }
 
 h3 {
     color: #2F3133;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     margin-top: 0;
     text-align: left;
@@ -73,6 +74,10 @@ p {
 
 p.sub {
     font-size: 12px;
+}
+
+p.center {
+    text-align: center;
 }
 
 img {
@@ -139,6 +144,24 @@ img {
     -premailer-width: 570px;
 }
 
+.inner-body-newsletter {
+    background-color: #FFFFFF;
+    margin: 0 auto;
+    padding: 0;
+    width: 600px;
+    -premailer-cellpadding: 0;
+    -premailer-cellspacing: 0;
+    -premailer-width: 600px;
+}
+
+.offset-top {
+    margin-top: 50px;
+}
+
+.offset-bottom {
+    margin-bottom: 50px;
+}
+
 /* Subcopy */
 
 .subcopy {
@@ -195,6 +218,84 @@ img {
     padding: 35px;
 }
 
+/* User */
+
+img.user_image {
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+
+/* News */
+
+.news-wrapper {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.news_image {
+    padding-right: 10px;
+}
+
+/* Flight */
+
+.flight-wrapper {
+
+}
+
+.flight_image {
+    padding-right: 10px;
+}
+
+.flight_title {
+    font-size: 16px;
+    color: #000;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Forum */
+
+.forum-wrapper {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+a.title {
+    font-size: 18px;
+    color: #6b7479;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.gray {
+    color: #858d93;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+a.destination {
+    color: #ff9a3d;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #ff9a3d;
+    border-radius: 12px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    padding: 0 5px;
+    margin-right: 8px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+a.gray,
+a.destination,
+a.user {
+    display: inline-block;
+    margin-right: 8px;
+}
+
 /* Buttons */
 
 .action {
@@ -207,6 +308,10 @@ img {
     -premailer-width: 100%;
 }
 
+.action.narrow {
+    margin: 15px auto 0;
+}
+
 .button {
     border-radius: 3px;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.16);
@@ -215,30 +320,31 @@ img {
     text-decoration: none;
     -webkit-text-size-adjust: none;
     font-size: 16px;
+    font-weight: normal;
 }
 
 .button-blue {
-    background-color: #3097D1;
-    border-top: 10px solid #3097D1;
-    border-right: 18px solid #3097D1;
-    border-bottom: 10px solid #3097D1;
-    border-left: 18px solid #3097D1;
+    background-color: #0087ae;
+    border-top: 10px solid #0087ae;
+    border-right: 18px solid #0087ae;
+    border-bottom: 10px solid #0087ae;
+    border-left: 18px solid #0087ae;
 }
 
 .button-green {
-    background-color: #2ab27b;
-    border-top: 10px solid #2ab27b;
-    border-right: 18px solid #2ab27b;
-    border-bottom: 10px solid #2ab27b;
-    border-left: 18px solid #2ab27b;
+    background-color: #288f18;
+    border-top: 10px solid #288f18;
+    border-right: 18px solid #288f18;
+    border-bottom: 10px solid #288f18;
+    border-left: 18px solid #288f18;
 }
 
 .button-red {
-    background-color: #bf5329;
-    border-top: 10px solid #bf5329;
-    border-right: 18px solid #bf5329;
-    border-bottom: 10px solid #bf5329;
-    border-left: 18px solid #bf5329;
+    background-color: #cb4949;
+    border-top: 10px solid #cb4949;
+    border-right: 18px solid #cb4949;
+    border-bottom: 10px solid #cb4949;
+    border-left: 18px solid #cb4949;
 }
 
 /* Panels */
