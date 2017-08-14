@@ -14,6 +14,9 @@ class CreateNewsletterSubscriptionsTable extends Migration
     public function up()
     {
         Schema::create('newsletter_subscriptions', function (Blueprint $table) {
+            /*
+             * (user_id == NULL && destination_id == NULL).then=>(general_newsletter_subscriber )
+             */
             $table->increments('id');
             $table->integer('newsletter_type_id')->unsigned()->index();
             $table->integer('user_id')->nullable()->unsigned()->index();
