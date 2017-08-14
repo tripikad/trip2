@@ -209,6 +209,22 @@ Route::get('newsletter/list', 'V2NewsletterController@index')
     ->name('newsletter.index')
     ->middleware('role:superuser');
 
+Route::get('newsletter/view/{id}', 'V2NewsletterController@view')
+    ->name('newsletter.view')
+    ->middleware('role:superuser');
+
+Route::get('newsletter/edit/{id}', 'V2NewsletterController@edit')
+    ->name('newsletter.edit')
+    ->middleware('role:superuser');
+
+Route::post('newsletter/store/{id}', 'V2NewsletterController@store')
+    ->name('newsletter.store')
+    ->middleware('role:superuser');
+
+Route::get('newsletter/preview/{id}', 'V2NewsletterController@preview')
+    ->name('newsletter.preview')
+    ->middleware('role:superuser');
+
 // Blog
 
 Route::get('reisikirjad', 'V2BlogController@index')
