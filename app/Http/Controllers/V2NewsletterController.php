@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\NewsletterType;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 
@@ -68,7 +67,7 @@ class V2NewsletterController extends Controller
             ->with('color', 'gray')
             ->with('header', region('ForumHeader', collect()
                 ->push(component('Title')
-                    ->with('title', trans('newsletter.title') . ': ' . $newsletter->subject)
+                    ->with('title', trans('newsletter.title').': '.$newsletter->subject)
                 )
                 ->push(component('BlockHorizontal')
                     ->with('content', region('ForumLinks'))
@@ -82,12 +81,10 @@ class V2NewsletterController extends Controller
 
     public function edit($id)
     {
-
     }
 
     public function store(Request $request, $id)
     {
-        
     }
 
     public function preview($id)

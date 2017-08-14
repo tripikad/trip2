@@ -11,5 +11,4 @@ class NewsletterType extends Model
     protected $dates = ['last_sent_at', 'send_at', 'created_at', 'updated_at'];
 
     // Relations
-
 }
