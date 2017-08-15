@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Artisan;
 
 class CreateNewsletterLetterContents extends Migration
 {
@@ -16,29 +17,30 @@ class CreateNewsletterLetterContents extends Migration
         Schema::create('newsletter_letter_contents', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('newsletter_type_id')->unsigned()->index();
-            $table->integer('newsletter_letter_id')->unsigned()->index();
             /*
-             * %last_1_flight% - first flight from the end
-             * %last_2_flight% - second flight from the end
-             * %first_1_flight% - first flight from the beginning
-             * %last_1_forum% - first forum post from the end
+             * %last_0_flight(3)% - latest 3 flights
+             * %last_1_flight% - skip 1 flight and after that latest 1 flight
+             * %last_1_flight(2)% - skip 1 flight and after that latest 2 flights
+             * %first_forum|buysell|expat(5)% - first 5 forum, buysell and expat posts
+             * %pop_0_forum|buysell|expat(5)% - 5 popular forum, buysell and expat posts
+             * %pop_3_forum|buysell|expat(5)% - Skip 3 first popular posts and after these take 5 popular forum, buysell and expat posts
              */
             $table->string('dynamic_content')->nullable();
             $table->integer('content_id')->unsigned()->index()->nullable();
             $table->text('content')->nullable();
-            $table->string('location_area')->default('left_sidebar'); // left_sidebar, right_sidebar, left_sidebar_3_col_1, etc.
             $table->integer('sort_order')->default(1);
+            $table->date('visible_from')->nullable();
+            $table->date('visible_to')->nullable();
             $table->timestamps();
 
             $table->foreign('newsletter_type_id')->references('id')->on('newsletter_types')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->foreign('newsletter_letter_id')->references('id')->on('newsletter_letters')
-                ->onUpdate('cascade')->onDelete('cascade');
-
             $table->foreign('content_id')->references('id')->on('contents')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
+
+        Artisan::call('db:seed', ['--class' => 'NewsletterLetterContentsSeeder']);
     }
 
     /**
