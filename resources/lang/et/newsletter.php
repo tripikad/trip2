@@ -13,6 +13,7 @@ return [
     'subscribe.field.destinations' => 'Vali kuni :max sihtkohta',
     'subscribe.field.price_error' => 'Soovin kõiki veahinna pakkumisi',
     'button.subscribe_flight' => 'Kinnitan',
+    'subscribe.field.newsletter_notify' => 'Soovin saada nädala uudiskirja',
 
     'button.subscribe_processing' => 'Palun oota...',
 
