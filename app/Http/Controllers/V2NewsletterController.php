@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\NewsletterType;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 use App\NewsletterSubscription;
-use Carbon\Carbon;
 
 class V2NewsletterController extends Controller
 {
@@ -118,9 +118,9 @@ class V2NewsletterController extends Controller
                 }
 
                 if ($previous_subscription->active) {
-                    if ($previous_subscription->destination_id && !in_array($previous_subscription->destination_id, $destination_ids)) {
+                    if ($previous_subscription->destination_id && ! in_array($previous_subscription->destination_id, $destination_ids)) {
                         $deactivate_subscription_ids[] = $previous_subscription->id;
-                    } elseif ($previous_subscription->price_error && !$price_error) {
+                    } elseif ($previous_subscription->price_error && ! $price_error) {
                         $deactivate_subscription_ids[] = $previous_subscription->id;
                     }
                 } else {
@@ -181,7 +181,7 @@ class V2NewsletterController extends Controller
             $info = trans('newsletter.subscribed.flight.detailed.successfully');
         } elseif ($newsletter_type->type == 'flight_general' && ! $user) {
             $this->validate($request, [
-                'e-post' => 'required|email'
+                'e-post' => 'required|email',
             ]);
 
             $subscription = NewsletterSubscription::where('email', $request->input('e-post'))

@@ -47,7 +47,7 @@ class NewsletterTypesSeeder extends Seeder
                 'last_sent_at' => null,
                 'send_at' => null,
                 'active' => true,
-            ]
+            ],
         ]);
     }
 }
