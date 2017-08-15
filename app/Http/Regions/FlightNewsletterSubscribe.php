@@ -31,8 +31,27 @@ class FlightNewsletterSubscribe
                 $subscriptions = collect([]);
             }
 
-            $destinations = Cache::remember('continents_and_countries', 30, function () {
+            /*$destinations = Cache::remember('continents_and_countries', 30, function () {
                 return Destination::select('id', 'name')->get();
+            });*/
+
+            $destinations = Cache::remember('continents_and_countries', 30, function() {
+                $destinations = Destination::select(['id', 'name', 'parent_id'])->where('depth', '<=', 1)->get();
+
+                /*$parent_destinations = [];
+                foreach ($destinations as &$destination) {
+                    if (! $destination->parent_id) {
+                        $parent_destinations[$destination->id] = $destination->name;
+                    }
+                }
+
+                foreach ($destinations as &$destination) {
+                    if ($destination->parent_id && isset($parent_destinations[$destination->parent_id])) {
+                        $destination->name = $parent_destinations[$destination->parent_id] . ' › ' . $destination->name;
+                    }
+                }*/
+
+                return $destinations;
             });
 
             if ($request->old('destinations')) {
