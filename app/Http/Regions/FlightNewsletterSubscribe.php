@@ -8,7 +8,7 @@ use App\NewsletterType;
 
 class FlightNewsletterSubscribe
 {
-    public $max = 5;
+    public static $max = 5;
 
     public function render()
     {
@@ -31,7 +31,7 @@ class FlightNewsletterSubscribe
                 $subscriptions = collect([]);
             }
 
-            $destinations = Cache::remember('destinations', 30, function () {
+            $destinations = Cache::remember('continents_and_countries', 30, function () {
                 return Destination::select('id', 'name')->get();
             });
 
@@ -61,8 +61,8 @@ class FlightNewsletterSubscribe
                         ->with('name', 'destinations')
                         ->with('options', $destinations)
                         ->with('value', $selected_values)
-                        ->with('placeholder', trans('newsletter.subscribe.field.destinations', ['max' => $this->max]))
-                        ->with('max', $this->max)
+                        ->with('placeholder', trans('newsletter.subscribe.field.destinations', ['max' => FlightNewsletterSubscribe::$max]))
+                        ->with('max', FlightNewsletterSubscribe::$max)
                         ->with('max_limit_text', trans('error.max_limit'))
                         ->with('close_on_select', false)
                 )->push(
