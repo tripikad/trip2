@@ -21,7 +21,8 @@ class CreateNewsletterSubscriptionsTable extends Migration
             $table->integer('newsletter_type_id')->unsigned()->index();
             $table->integer('user_id')->nullable()->unsigned()->index();
             $table->integer('destination_id')->nullable()->unsigned()->index();
-            $table->string('email');
+            $table->boolean('price_error')->default(false)->index();
+            $table->string('email')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamp('last_sent_at')->nullable();
             $table->timestamps();
