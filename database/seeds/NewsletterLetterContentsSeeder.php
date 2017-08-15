@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\NewsletterType;
 use Carbon\Carbon;
+use App\NewsletterType;
+use Illuminate\Database\Seeder;
 
 class NewsletterLetterContentsSeeder extends Seeder
 {
