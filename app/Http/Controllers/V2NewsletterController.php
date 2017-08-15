@@ -107,7 +107,7 @@ class V2NewsletterController extends Controller
 
             $destination_ids = $request->input('destinations') ?? [];
             $price_error = $request->input('price_error') ? 1 : 0;
-            
+
             if (count($destination_ids) > FlightNewsletterSubscribe::$max) {
                 $errors[] = trans('newsletter.max_limit_exceeded', ['max' => FlightNewsletterSubscribe::$max]);
             }
