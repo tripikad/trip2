@@ -17,6 +17,7 @@ return [
     'button.subscribe_processing' => 'Palun oota...',
 
     'error.already_subscribed' => 'Oled juba liitunud lennupakkumiste uudiskirjaga!',
+    'error.max_limit_exceeded' => 'Viga! :max sihtkohta on lubatud kokku sisestada!',
 
     'subscribed.flight.successfully' => 'Oled lennupakkumiste teavituste saajate nimekirja lisatud!',
     'subscribed.flight.detailed.successfully' => 'Sinu lennupakkumiste teavituste muudatused on salvestatud!',
