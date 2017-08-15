@@ -93,7 +93,6 @@ class V2NewsletterController extends Controller
     public function subscribe(Request $request, $id)
     {
         $newsletter_type = NewsLetterType::findOrFail($id);
-
         $user = $request->user();
         $errors = [];
 
@@ -213,6 +212,21 @@ class V2NewsletterController extends Controller
             }
 
             $info = trans('newsletter.subscribed.flight.successfully');
+        } elseif ($newsletter_type->type == 'weekly' && $user) {
+            $subscription = NewsletterSubscription::where('user_id', $user->id)
+                ->where('newsletter_type_id', $id)
+                ->first();
+
+            if ($subscription) {
+                $subscription->active = $request->newsletter_subscribe ? 1 : 0;
+            } else {
+                $subscription = new NewsletterSubscription;
+                $subscription->user_id = $user->id;
+                $subscription->newsletter_type_id = $id;
+                $subscription->active = $request->newsletter_subscribe ? 1 : 0;
+            }
+
+            $subscription->save();
         }
 
         if (isset($errors) && count($errors)) {

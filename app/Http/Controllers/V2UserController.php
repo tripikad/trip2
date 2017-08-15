@@ -7,6 +7,7 @@ use App\User;
 use App\Image;
 use App\Content;
 use App\Destination;
+use App\NewsletterType;
 
 class V2UserController extends Controller
 {
@@ -129,6 +130,20 @@ class V2UserController extends Controller
     public function edit2($id)
     {
         $user = User::findOrFail($id);
+        $weekly_newsletter = NewsletterType::where('type', 'weekly')
+            ->with('user_subscriptions')
+            ->where('active', 1)
+            ->first();
+
+        if ($weekly_newsletter) {
+            $weekly_subscription = $weekly_newsletter->user_subscriptions->first();
+
+            if ($weekly_subscription && $weekly_subscription->active) {
+                $weekly_subscription = 1;
+            } else {
+                $weekly_subscription = 0;
+            }
+        }
 
         return layout('1colnarrow')
             ->with('color', 'gray')
@@ -225,6 +240,11 @@ class V2UserController extends Controller
                             ->with('name', 'notify_follow')
                             ->with('value', old('notify_follow', $user->notify_follow))
                         )
+                        ->pushWhen($weekly_newsletter, component('FormCheckbox')
+                            ->with('title', trans('newsletter.subscribe.field.newsletter_notify'))
+                            ->with('name', 'newsletter_subscribe')
+                            ->with('value', old('newsletter_subscribe', $weekly_subscription ?? 0))
+                        )
                         ->push(component('Title')
                             ->is('small')
                             ->is('blue')
@@ -282,6 +302,14 @@ class V2UserController extends Controller
         ];
 
         $this->validate(request(), $rules);
+
+        $weekly_newsletter = NewsletterType::where('type', 'weekly')
+            ->where('active', 1)
+            ->first();
+
+        if ($weekly_newsletter) {
+            (new V2NewsletterController)->subscribe(request(), $weekly_newsletter->id);
+        }
 
         $user->update([
             'name' => request()->name,
