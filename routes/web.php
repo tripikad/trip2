@@ -225,6 +225,9 @@ Route::get('newsletter/preview/{id}', 'V2NewsletterController@preview')
     ->name('newsletter.preview')
     ->middleware('role:superuser');
 
+Route::post('newsletter/subscribe/{id}', 'V2NewsletterController@subscribe')
+    ->name('newsletter.subscribe');
+
 // Blog
 
 Route::get('reisikirjad', 'V2BlogController@index')
