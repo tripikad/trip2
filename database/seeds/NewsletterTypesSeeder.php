@@ -31,7 +31,7 @@ class NewsletterTypesSeeder extends Seeder
                 'active' => true,
             ],
             [
-                'subject' => 'Leidsime Sulle sobiva Lennupakkumise sihtkohta %destination_name',
+                'subject' => 'Leidsime Sulle sobiva lennupakkumise sihtkohta %destination_name',
                 'type' => 'flight',
                 'send_days_after' => null,
                 'check_user_active_at' => false,
@@ -39,6 +39,15 @@ class NewsletterTypesSeeder extends Seeder
                 'send_at' => null,
                 'active' => true,
             ],
+            [
+                'subject' => 'Siin on kõige uuemad lennupakkumised!',
+                'type' => 'flight_general',
+                'send_days_after' => 3,
+                'check_user_active_at' => false,
+                'last_sent_at' => null,
+                'send_at' => null,
+                'active' => true,
+            ]
         ]);
     }
 }
