@@ -35,7 +35,7 @@ class FlightNewsletterSubscribe
                 return Destination::select('id', 'name')->get();
             });*/
 
-            $destinations = Cache::remember('continents_and_countries', 30, function() {
+            $destinations = Cache::remember('continents_and_countries', 30, function () {
                 $destinations = Destination::select(['id', 'name', 'parent_id'])->where('depth', '<=', 1)->get();
 
                 /*$parent_destinations = [];
@@ -80,8 +80,8 @@ class FlightNewsletterSubscribe
                         ->with('name', 'destinations')
                         ->with('options', $destinations)
                         ->with('value', $selected_values)
-                        ->with('placeholder', trans('newsletter.subscribe.field.destinations', ['max' => FlightNewsletterSubscribe::$max]))
-                        ->with('max', FlightNewsletterSubscribe::$max)
+                        ->with('placeholder', trans('newsletter.subscribe.field.destinations', ['max' => self::$max]))
+                        ->with('max', self::$max)
                         ->with('max_limit_text', trans('error.max_limit'))
                         ->with('close_on_select', false)
                 )->push(
