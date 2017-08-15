@@ -96,7 +96,7 @@ class FlightNewsletterSubscribe
                     ->with('fields', $fields)
                 );
         } else {
-            return null;
+            return;
         }
     }
 }
