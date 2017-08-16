@@ -166,19 +166,7 @@ class V2ForumController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        // Update unread datetime
-        if ($user) {
-            $unreadContent = UnreadContent::where('content_id', $forum->id)->where('user_id', $user->id)->first();
-
-            if (! $unreadContent) {
-                $unreadContent = new UnreadContent;
-                $unreadContent->content_id = $forum->id;
-                $unreadContent->user_id = $user->id;
-            }
-
-            $unreadContent->read_at = Carbon::now()->toDateTimeString();
-            $unreadContent->save();
-        }
+        $forum->vars()->content_read;
 
         $anchor = $forum->comments->count()
             ? '#comment-'.$forum->comments->last()->id
