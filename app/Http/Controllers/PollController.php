@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Destination;
 use App\Poll;
+use App\Destination;
+use Illuminate\Http\Request;
 
 class PollController extends Controller
 {
@@ -121,15 +121,14 @@ class PollController extends Controller
             'name' => $request->poll_name,
             'start_date' => $request->start,
             'end_date' => $request->end,
-            'type' => $poll_type
+            'type' => $poll_type,
         ]);
 
         $poll->id = $content->id;
 
-        if($poll_type == 'poll') {
+        if ($poll_type == 'poll') {
             $this->addPollFields($request, $poll);
-        }
-        else if($poll_type == 'quiz') {
+        } elseif ($poll_type == 'quiz') {
             $this->addQuizFields($request, $poll);
         }
 
@@ -140,12 +139,13 @@ class PollController extends Controller
     protected function parseOptions(Request $request, $prefix)
     {
         $options = [];
-        $cnt = $prefix . '_cnt';
+        $cnt = $prefix.'_cnt';
 
-        for($i = 1; $i <= $request->$cnt; $i++) {
-            $opt = $prefix . '_' . $i;
-            if(isset($request->$opt) && !empty($request->$opt))
+        for ($i = 1; $i <= $request->$cnt; $i++) {
+            $opt = $prefix.'_'.$i;
+            if (isset($request->$opt) && ! empty($request->$opt)) {
                 $options[] = $request->$opt;
+            }
         }
 
         return $options;
@@ -171,13 +171,14 @@ class PollController extends Controller
     {
         $fields = [];
 
-        for($i = 1; $i <= $request->quiz_question_cnt; $i++) {
-            $type_field = 'quiz_question_' . $i;
-            $answer_field = $type_field . '_answer';
-            $question_field = $type_field . '_question';
+        for ($i = 1; $i <= $request->quiz_question_cnt; $i++) {
+            $type_field = 'quiz_question_'.$i;
+            $answer_field = $type_field.'_answer';
+            $question_field = $type_field.'_question';
 
-            if(!isset($request->$type_field) || empty($request->$question_field) || empty($request->$answer_field))
+            if (! isset($request->$type_field) || empty($request->$question_field) || empty($request->$answer_field)) {
                 continue;
+            }
 
             $options = [
                 'question' => $request->$question_field,
@@ -186,8 +187,8 @@ class PollController extends Controller
             ];
 
             $type = $request->$type_field;
-            if($type == 'options') {
-                $select_type = $type_field . '_select_type';
+            if ($type == 'options') {
+                $select_type = $type_field.'_select_type';
                 $type = $request->$select_type == 'select_one' ? 'radio' : 'checkbox';
 
                 $options['options'] = $this->parseOptions($request, $type_field);
