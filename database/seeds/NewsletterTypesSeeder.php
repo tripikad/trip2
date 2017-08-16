@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class NewsletterTypesSeeder extends Seeder
 {
@@ -18,7 +19,7 @@ class NewsletterTypesSeeder extends Seeder
                 'send_days_after' => 7,
                 'check_user_active_at' => false,
                 'last_sent_at' => null,
-                'send_at' => '2017-08-13 22:00:00',
+                'send_at' => Carbon::now()->addDays(3),
                 'active' => true,
             ],
             [
@@ -31,7 +32,7 @@ class NewsletterTypesSeeder extends Seeder
                 'active' => true,
             ],
             [
-                'subject' => 'Leidsime Sulle sobiva lennupakkumise sihtkohta %destination_name',
+                'subject' => 'Leidsime Sulle sobiva lennupakkumise sihtkohta [[destination_name]]',
                 'type' => 'flight',
                 'send_days_after' => null,
                 'check_user_active_at' => false,
@@ -45,7 +46,7 @@ class NewsletterTypesSeeder extends Seeder
                 'send_days_after' => 3,
                 'check_user_active_at' => false,
                 'last_sent_at' => null,
-                'send_at' => null,
+                'send_at' => Carbon::now()->addDays(3),
                 'active' => true,
             ],
         ]);
