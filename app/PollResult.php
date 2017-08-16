@@ -15,6 +15,6 @@ class PollResult extends Model
     
     public function poll_field()
     {
-        return $this->belongsTo('App\PollField', 'field_id', 'field_id')
+        return $this->belongsTo('App\PollField', 'field_id', 'field_id');
     }
 }
