@@ -1,6 +1,7 @@
 <template>
 
     <div>
+
         <div class="FormRadio margin-bottom-md">
 
             <div class="FormRadio__option" v-for="opt in options">
@@ -31,9 +32,17 @@
             :is="pollType"
             :question_trans="question_trans"
             :option_trans="option_trans"
+            :picture_trans="picture_trans"
+            :select_type_trans="select_type_trans"
+            :select_one_trans="select_one_trans"
+            :select_multiple_trans="select_multiple_trans"
+            :answer_options_trans="answer_options_trans"
+            :add_option_trans="add_option_trans"
         >
         </component>
+
     </div>
+
 </template>
 
 <script>
@@ -44,7 +53,15 @@
         props : {
             value : {default : ''},
             question_trans : {default : 'Question'},
-            option_trans : {default : 'Option'}
+            option_trans : {default : 'Option'},
+            poll_trans : {default : 'Poll'},
+            quiz_trans : {default : 'Quiz'},
+            picture_trans : {default : 'Photo'},
+            select_type_trans : {default: 'Select type'},
+            select_one_trans : {default: 'Select one'},
+            select_multiple_trans : {default: 'Select multiple'},
+            answer_options_trans : {default: 'Answer options'},
+            add_option_trans : {default: 'Add option'}
         },
         
         components : {
@@ -55,8 +72,8 @@
         data : function() {
             return {
                 options: [
-                    {'id' : 'poll', 'name' : 'Küsitlus'},
-                    {'id' : 'quiz', 'name' : 'Viktoriin'}
+                    {'id' : 'poll', 'name' : this.poll_trans},
+                    {'id' : 'quiz', 'name' : this.quiz_trans}
                 ],
                 pollType: null
             };

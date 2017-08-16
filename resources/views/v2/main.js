@@ -10,10 +10,12 @@ import Dotmap from './components/Dotmap/Dotmap.vue'
 import Flag from './components/Flag/Flag.vue'
 import FormButtonProcess from './components/FormButtonProcess/FormButtonProcess.vue'
 import FormEditor from './components/FormEditor/FormEditor.vue'
+import FormHidden from './components/FormHidden/FormHidden.vue'
 import FormImageId from './components/FormImageId/FormImageId.vue'
 import FormSelect from './components/FormSelect/FormSelect.vue'
 import FormSelectMultiple from './components/FormSelectMultiple/FormSelectMultiple.vue'
 import FormRadio from './components/FormRadio/FormRadio.vue'
+import FormTextarea from './components/FormTextarea/FormTextarea.vue'
 import FormTextfield from './components/FormTextfield/FormTextfield.vue'
 import FormUpload from './components/FormUpload/FormUpload.vue'
 import FrontpageDestinationSearch from './components/FrontpageDestinationSearch/FrontpageDestinationSearch.vue'
@@ -36,6 +38,7 @@ import PollFields from './components/PollFields/PollFields.vue'
 import PollOption from './components/PollOption/PollOption.vue'
 import QuizFields from './components/QuizFields/QuizFields.vue'
 import PromoBar from './components/PromoBar/PromoBar.vue'
+import Title from './components/Title/Title.vue'
 import UserImage from './components/UserImage/UserImage.vue'
 
 Vue.use(VueResource)
@@ -62,10 +65,12 @@ new Vue({
         Flag,
         FormButtonProcess,
         FormEditor,
+        FormHidden,
         FormImageId,
         FormRadio,
         FormSelect,
         FormSelectMultiple,
+        FormTextarea,
         FormTextfield,
         FormUpload,
         FrontpageDestinationSearch,
@@ -87,6 +92,7 @@ new Vue({
         QuizFields,
         PromoBar,
         UserImage,
+        Title,
         TravelmateStart,
     },
 

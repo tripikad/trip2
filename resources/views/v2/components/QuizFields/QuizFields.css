@@ -1,0 +1,11 @@
+@import "variables";
+
+    .QuizFields__question {
+        display: flex;
+        display: block ?if $mobile;
+        align-items: center;
+    }
+    .QuizFields__delete {
+        margin: 0 $margin-sm 0 $margin-sm;
+        margin: 0 0 $margin-sm 0 ?if $mobile;
+    }

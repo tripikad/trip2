@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
 use App\Destination;
+use App\Poll;
 
 class PollController extends Controller
 {
@@ -40,28 +41,41 @@ class PollController extends Controller
                     ->with('route', route('poll.store'))
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
+                            ->with('title', trans('content.poll.edit.name'))
+                            ->with('name', 'poll_name')
+                            ->with('value', old('poll_name', 'test_name'))
+                        )
+                        ->push(component('FormTextfield')
                             ->with('title', trans('content.poll.edit.field.start.title'))
                             ->with('name', 'start')
-                            ->with('value', old('start'))
+                            ->with('value', old('start', '2017-01-07'))
                         )
                         ->push(component('FormTextfield')
                             ->with('title', trans('content.poll.edit.field.end.title'))
                             ->with('name', 'end')
-                            ->with('value', old('end'))
+                            ->with('value', old('end', '2017-01-08'))
                         )
-                        ->push(component('FormSelectMultiple')
+                        ->push(component('FormSelect')
                             ->with('name', 'destinations')
                             ->with('options', $destinations)
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                            ->with('value', 1033)
                         )
                         ->push(component('Title')
-                            ->is('small')
                             ->with('title', trans('content.poll.edit.add.field.title'))
                         )
                         ->push(component('PollAddFields')
-                            ->with('value', old('poll_type', 'poll'))
+                            ->with('value', old('poll_type', 'quiz'))
                             ->with('question_trans', trans('content.poll.edit.question'))
                             ->with('option_trans', trans('content.poll.edit.option'))
+                            ->with('poll_trans', trans('content.poll.edit.poll'))
+                            ->with('quiz_trans', trans('content.poll.edit.quiz'))
+                            ->with('picture_trans', trans('content.poll.edit.fields.picture'))
+                            ->with('select_type_trans', trans('content.poll.edit.option.select.type'))
+                            ->with('select_one_trans', trans('content.poll.edit.option.select.one'))
+                            ->with('select_multiple_trans', trans('content.poll.edit.option.select.multiple'))
+                            ->with('answer_options_trans', trans('content.poll.edit.option.answer.options'))
+                            ->with('add_option_trans', trans('content.poll.edit.option.add'))
                         )
                         ->push(component('FormButton')
                             ->is('large')
@@ -90,14 +104,104 @@ class PollController extends Controller
             ->render();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        $logged_user = $request->user();
+        $poll_type = $request->poll_type;
+
+        $content = $logged_user->contents()->create([
+            'title' => $request->poll_name,
+            'type' => $poll_type,
+            'status' => 0,
+        ]);
+
+        $content->destinations()->attach(request()->destinations);
+
+        $poll = $content->poll()->create([
+            'name' => $request->poll_name,
+            'start_date' => $request->start,
+            'end_date' => $request->end,
+            'type' => $poll_type
+        ]);
+
+        $poll->id = $content->id;
+
+        if($poll_type == 'poll') {
+            $this->addPollFields($request, $poll);
+        }
+        else if($poll_type == 'quiz') {
+            $this->addQuizFields($request, $poll);
+        }
+
+        return redirect()
+            ->route('poll.index');
+    }
+
+    protected function parseOptions(Request $request, $prefix)
+    {
+        $options = [];
+        $cnt = $prefix . '_cnt';
+
+        for($i = 1; $i <= $request->$cnt; $i++) {
+            $opt = $prefix . '_' . $i;
+            if(isset($request->$opt) && !empty($request->$opt))
+                $options[] = $request->$opt;
+        }
+
+        return $options;
+    }
+
+    protected function addPollFields(Request $request, Poll $poll)
+    {
+        $type = $request->poll_fields_select_type == 'select_one' ? 'radio' : 'checkbox';
+
+        $options = [
+            'question' => $request->poll_question,
+            'options' => $this->parseOptions($request, 'poll_fields'),
+            'image_id' => 0,
+        ];
+
+        $poll->poll_fields()->create([
+            'type' => $type,
+            'options' => json_encode($options),
+        ]);
+    }
+
+    protected function addQuizFields(Request $request, Poll $poll)
+    {
+        $fields = [];
+
+        for($i = 1; $i <= $request->quiz_question_cnt; $i++) {
+            $type_field = 'quiz_question_' . $i;
+            $answer_field = $type_field . '_answer';
+            $question_field = $type_field . '_question';
+
+            if(!isset($request->$type_field) || empty($request->$question_field) || empty($request->$answer_field))
+                continue;
+
+            $options = [
+                'question' => $request->$question_field,
+                'answer' => $request->$answer_field,
+                'image_id' => 0,
+            ];
+
+            $type = $request->$type_field;
+            if($type == 'options') {
+                $select_type = $type_field . '_select_type';
+                $type = $request->$select_type == 'select_one' ? 'radio' : 'checkbox';
+
+                $options['options'] = $this->parseOptions($request, $type_field);
+            } else {
+                $type = 'text';
+            }
+
+            $fields[] = [
+                'type' => $type,
+                'options' => json_encode($options),
+            ];
+        }
+
+        $poll->poll_fields()->createMany($fields);
     }
 
     /**

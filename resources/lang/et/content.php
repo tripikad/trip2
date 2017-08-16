@@ -397,23 +397,29 @@ return [
 
     // Poll
     'poll.edit.field.destinations.title' => 'Vali sihtkohad',
-    'poll.edit.field.destinations.help' => '',
 
     'poll.index.title' => 'Küsitlused',
-    'poll.index.help' => '',
 
     'poll.edit.field.start.title' => 'Alguse aeg',
-    'poll.edit.field.start.help' => '',
 
     'poll.edit.field.end.title' => 'Lõppemise aeg',
-    'poll.edit.field.end.help' => '',
 
     'poll.create.title' => 'Lisa küsitlus',
 
     'poll.edit.add.field.title' => 'Lisa väljad',
 
+    'poll.edit.name' => 'Küsitluse nimi',
+
     'poll.edit.question' => 'Küsimus',
     'poll.edit.option' => 'Valik',
+    'poll.edit.poll' => 'Küsitlus',
+    'poll.edit.quiz' => 'Viktoriin',
+    'poll.edit.fields.picture' => 'Pilt',
+    'poll.edit.option.select.type' => 'Valiku tüüp',
+    'poll.edit.option.select.one' => 'Vali üks',
+    'poll.edit.option.select.multiple' => 'Vali mitu',
+    'poll.edit.option.answer.options' => 'Vastuse valikud',
+    'poll.edit.option.add' => 'Lisa valik',
 
     // Destination
 
