@@ -166,7 +166,7 @@ class V2ForumController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        $forum->vars()->content_read;
+        $forum->vars()->update_content_read;
 
         $anchor = $forum->comments->count()
             ? '#comment-'.$forum->comments->last()->id
