@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\NewsletterLetterContent;
 use Carbon\Carbon;
 use App\NewsletterType;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 use App\NewsletterSubscription;
 use App\Http\Regions\FlightNewsletterSubscribe;
+use App\Content;
+use App\NewsletterSent;
+use App\NewsletterSentSubscriber;
 
 class V2NewsletterController extends Controller
 {
@@ -59,7 +63,8 @@ class V2NewsletterController extends Controller
                 $newsletter_type->subject = str_replace('%destination_name', '...', $newsletter_type->subject);
             }
 
-            $navBar->push(component('Button')
+            $navBar->push(component('Link')
+                ->with('icon', false)
                 ->with('title', $newsletter_type->subject)
                 ->with('route', route('newsletter.view', [$newsletter_type]))
             );
@@ -76,7 +81,50 @@ class V2NewsletterController extends Controller
                     ->with('content', region('ForumLinks'))
                 )
             ))
-            ->with('content', 'To-do: Uudiskirjade nimekiri koos infoga tuleb siia')
+            ->with('content', collect()
+                ->push(component('Grid2')
+                    ->with('gutter', true)
+                    ->with('items', [
+                        component('Button')
+                            ->with('title', trans('newsletter.button.edit'))
+                            ->with('route', route('newsletter.edit', [$newsletter])),
+                        component('Button')
+                            ->is('cyan')
+                            ->with('external', true)
+                            ->with('title', trans('newsletter.button.preview'))
+                            ->with('route', route('newsletter.preview', [$newsletter])),
+                    ])
+                )->push(component('GridSplit')
+                    ->with('left_col', 9)
+                    ->with('right_col', 3)
+                    ->with('left_content', collect()->push(
+                        component('Meta')
+                            ->with('items', collect()
+                                ->push(
+                                    component('Body')
+                                        ->with('body', 'Uudiskiri saadeti välja 20.07.2017.')
+                                )
+                                ->push(
+                                    component('Body')
+                                        ->with('body', 'Saatmine lõppes 21.07.2017.')
+                                )
+                                ->push(
+                                    component('Body')
+                                        ->with('body', 'Saadetud 7 / 2010')
+                                )
+                            )
+                        )
+                    )
+                    ->with('right_content', collect()->push(
+                            component('Button')
+                                ->with('external', true)
+                                ->with('title', trans('newsletter.button.view.sent'))
+                                ->with('route', route('newsletter.preview_sent', [0]))
+                        )
+                    )
+                )
+                //->push(region('Paginator', $forums, $currentDestination, $currentTopic))
+            )
             ->with('sidebar', $navBar)
             ->with('footer', region('FooterLight'))
             ->render();
@@ -84,10 +132,127 @@ class V2NewsletterController extends Controller
 
     public function edit($id)
     {
+        $request = request();
+        $newsletter = NewsLetterType::findOrFail($id);
+        if (strpos($newsletter->subject, '%destination_name') !== false) {
+            $newsletter->subject = str_replace('%destination_name', '...', $newsletter->subject);
+        }
+
+        $letter_contents = [];
+        if ($request->old('body')) {
+            foreach ($request->old('body') as $key => &$body) {
+                $letter_contents[$key] = [
+                    'body' => $body,
+                    'visible_from' => $request->old('visible_from')[$key],
+                    'visible_to' => $request->old('visible_to')[$key],
+                ];
+            }
+        } else {
+            $letter_contents = NewsletterLetterContent::select('body', 'visible_from', 'visible_to')->where('newsletter_type_id', $newsletter->id)
+                ->orderBy('sort_order', 'asc')
+                ->get()
+                ->toArray();
+
+            foreach ($letter_contents as &$letter_content) {
+                if ($letter_content['visible_from']) {
+                    $letter_content['visible_from'] = Carbon::createFromFormat('Y-m-d', $letter_content['visible_from'])->format('d.m.Y');
+                }
+
+                if ($letter_content['visible_to']) {
+                    $letter_content['visible_to'] = Carbon::createFromFormat('Y-m-d', $letter_content['visible_to'])->format('d.m.Y');
+                }
+            }
+        }
+
+        return layout('1col')
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+            ->with('header', region('ForumHeader', collect()
+                ->push(component('Title')
+                    ->with('title', trans('newsletter.title').': '.$newsletter->subject)
+                )
+                ->push(component('BlockHorizontal')
+                    ->with('content', region('ForumLinks'))
+                )
+            ))
+            ->with('column_class', 'col-11')
+            ->with('content', collect()
+                ->push(
+                    component('Form')
+                        ->with('route', route('newsletter.store', [$newsletter]))
+                        ->with('id', 'FlightNewsletterSubscribeForm')
+                        ->with('fields', collect()->push(
+                            component('NewsletterComposer')
+                                ->with('content_placeholder', trans('newsletter.field.content'))
+                                ->with('visible_from_placeholder', trans('newsletter.field.visible_from'))
+                                ->with('visible_to_placeholder', trans('newsletter.field.visible_to'))
+                                ->with('cheatsheet', trans('newsletter.cheatsheet.content'))
+                                ->with('letter_contents', $letter_contents)
+                        )->push(
+                            component('FormButtonProcess')
+                                ->with('title', trans('newsletter.button.edit'))
+                                ->with('processingtitle', trans('newsletter.button.subscribe_processing'))
+                                ->with('id', 'FlightNewsletterSubscribeForm')
+                        ))
+                )
+            )
+            ->with('footer', region('FooterLight'))
+            ->render();
     }
 
     public function store(Request $request, $id)
     {
+        $newsletter = NewsLetterType::findOrFail($id);
+        $insert = [];
+        $errors = [];
+        if ($request->input('body') == null) {
+            $errors[] = trans('newsletter.error.empty');
+        } else {
+            $sort_order = 0;
+            foreach ($request->input('body') as $key => &$body) {
+                ++$sort_order;
+
+                $date_from = $request->input('visible_from')[$key] == '' ? null : $request->input('visible_from')[$key];
+                $date_to = $request->input('visible_to')[$key] == '' ? null : $request->input('visible_to')[$key];
+
+                foreach (['date_from', 'date_to'] as $date) {
+                    if ($$date) {
+                        $date_from_arr = explode('.', $$date);
+
+                        if (count($date_from_arr) == 3) {
+                            if (! checkdate($date_from_arr[1], $date_from_arr[0], $date_from_arr[2])) {
+                                $errors[] = trans('newsletter.error.wrong_date_format', ['date' => $$date]);
+                            } else {
+                                $$date = Carbon::createFromDate($date_from_arr[2], $date_from_arr[1], $date_from_arr[0])->format('Y-m-d');
+                            }
+                        } else {
+                            $errors[] = trans('newsletter.error.wrong_date_format', ['date' => $$date]);
+                        }
+                    }
+                }
+
+                $insert[] = [
+                    'newsletter_type_id' => $newsletter->id,
+                    'body' => $body,
+                    'visible_from' => $date_from,
+                    'visible_to' => $date_to,
+                    'sort_order' => $sort_order,
+                ];
+            }
+        }
+
+        if (count($errors)) {
+            return redirect()->back()->withInput($request->input())->withErrors($errors);
+        } else {
+            NewsletterLetterContent::where('newsletter_type_id', $newsletter->id)
+                ->delete();
+
+            NewsletterLetterContent::insert($insert);
+
+            return redirect()
+                ->route('newsletter.view', [$newsletter])
+                ->with('info', trans('newsletter.content.modified.successfully'));
+        }
     }
 
     public function subscribe(Request $request, $id)
@@ -237,6 +402,46 @@ class V2NewsletterController extends Controller
     }
 
     public function preview($id)
+    {
+        $markdown = new Markdown(view(), config('mail.markdown'));
+
+        $newsletter = NewsletterTYpe::findOrFail($id);
+        $contents = NewsletterLetterContent::where('newsletter_type_id', $id)->orderBy('sort_order', 'asc')->get();
+
+        $body = '';
+
+        $the_flight = null;
+        if ($newsletter->type == 'flight') {
+            $the_flight = Content::where('type', 'flight')->with(['destinations', 'images'])
+                ->has('destinations')
+                ->has('images')
+                ->take(1)
+                ->inRandomOrder()
+                ->first();
+
+            $destination_names = $the_flight->destinations->pluck('name')->first();
+            $newsletter->subject = str_replace('[[destination_name]]', $destination_names, $newsletter->subject);
+        }
+
+        foreach ($contents as &$content) {
+            $content->vars()->compose($the_flight);
+            $body .= $content->body;
+        }
+        /*echo mail_component('mail::promotion.button', [
+            'url' => '#',
+            'slot' => 'test',
+        ]);
+
+        exit();*/
+        return $markdown->render('email.newsletter.weekly_test', [
+            'subject' => $newsletter->subject,
+            'body' => $body,
+            'unsubscribe_id' => 4,
+        ]);
+        //exit();
+    }
+
+    public function preview_sent($id)
     {
         $markdown = new Markdown(view(), config('mail.markdown'));
 
