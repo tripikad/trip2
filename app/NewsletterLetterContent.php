@@ -10,5 +10,10 @@ class NewsletterLetterContent extends Model
 
     protected $dates = ['created_at', 'updated_at'];
 
+    public function vars()
+    {
+        return new NewsletterLetterContentVars($this);
+    }
+
     // Relations
 }
