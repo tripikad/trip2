@@ -8,6 +8,7 @@ class NewsletterSent extends Model
 {
     // Setup
 
+    public $timestamps = false;
     protected $dates = ['started_at', 'ended_at'];
 
     // Relations
@@ -20,5 +21,15 @@ class NewsletterSent extends Model
     public function sent()
     {
         return $this->hasMany('App\NewsletterSentSubscriber', 'sent_id', 'id');
+    }
+
+    public function newsletter_type()
+    {
+        return $this->hasOne('App\NewsletterType', 'id', 'newsletter_type_id');
+    }
+
+    public function destination()
+    {
+        return $this->hasOne('App\Destination', 'id', 'destination_id');
     }
 }
