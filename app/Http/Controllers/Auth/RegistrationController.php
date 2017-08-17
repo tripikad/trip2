@@ -9,6 +9,8 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Mail\ConfirmRegistration;
 use App\Http\Controllers\Controller;
+use App\NewsletterType;
+use App\Http\Controllers\V2NewsletterController;
 
 class RegistrationController extends Controller
 {
@@ -56,6 +58,14 @@ class RegistrationController extends Controller
             'name' =>  $user->name,
             'link' =>  route('user.show', [$user]),
         ]);
+
+        $weekly_newsletter = NewsletterType::where('type', 'weekly')
+            ->where('active', 1)
+            ->first();
+
+        if ($weekly_newsletter) {
+            (new V2NewsletterController)->subscribe(request(), $weekly_newsletter->id, $user, true);
+        }
 
         return redirect()
             ->route('login.form')
