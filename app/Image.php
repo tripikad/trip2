@@ -112,20 +112,25 @@ class Image extends Model
 
     public static function createPresetFromOriginal($original, $image, $preset)
     {
-        if (filter_var($original, FILTER_VALIDATE_URL) && ! file_exists(config('imagepresets.original.path').$image)) {
-            self::storeImageFromUrl($original, pathinfo($image, PATHINFO_FILENAME), true);
+        try {
+            if (filter_var($original, FILTER_VALIDATE_URL) && ! file_exists(config('imagepresets.original.path').$image)) {
+                self::storeImageFromUrl($original, pathinfo($image, PATHINFO_FILENAME), true);
+            }
+
+            $path = config('imagepresets.original.path');
+
+            Imageconv::make($path.$image)
+                ->{config("imagepresets.presets.$preset.operation")}(
+                    config("imagepresets.presets.$preset.width"),
+                    config("imagepresets.presets.$preset.height"))
+                ->save(
+                    config("imagepresets.presets.$preset.path").$image,
+                    config("imagepresets.presets.$preset.quality")
+                );
+        } catch (\Exception $e) {
+            
         }
 
-        $path = config('imagepresets.original.path');
-
-        Imageconv::make($path.$image)
-            ->{config("imagepresets.presets.$preset.operation")}(
-                config("imagepresets.presets.$preset.width"),
-                config("imagepresets.presets.$preset.height"))
-            ->save(
-                config("imagepresets.presets.$preset.path").$image,
-                config("imagepresets.presets.$preset.quality")
-            );
     }
 
     public static function checkIfExists($path, $filename, $ext, $i = 0)
