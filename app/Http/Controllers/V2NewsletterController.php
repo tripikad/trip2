@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\NewsletterLetterContent;
+use App\Content;
 use Carbon\Carbon;
 use App\NewsletterType;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 use App\NewsletterSubscription;
+use App\NewsletterLetterContent;
 use App\Http\Regions\FlightNewsletterSubscribe;
-use App\Content;
-use App\NewsletterSent;
-use App\NewsletterSentSubscriber;
 
 class V2NewsletterController extends Controller
 {

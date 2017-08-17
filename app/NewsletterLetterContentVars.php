@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Exception;
 use DB;
+use Exception;
 use Carbon\Carbon;
 
 class NewsletterLetterContentVars
@@ -79,7 +79,7 @@ class NewsletterLetterContentVars
         if ($this->tags == 'the_flight') {
             $skip_element = false;
 
-            if (!$the_flight) {
+            if (! $the_flight) {
                 $sql_options['order_by'] = [
                     'column' => 'RAND()',
                 ];
@@ -168,7 +168,7 @@ class NewsletterLetterContentVars
                     'image' => $contents->imagePreset('small_fit'),
                     'url' => route('flight.show', $contents->slug),
                     'button_color' => 'green',
-                    'slot' => $contents->vars()->title
+                    'slot' => $contents->vars()->title,
                 ]);
             } elseif (isset($sql_options['where']) && count($sql_options['where'])) {
                 $contents = Content::with([
@@ -245,7 +245,7 @@ class NewsletterLetterContentVars
                             'image' => $item->imagePreset('small_fit'),
                             'url' => route('flight.show', $item->slug),
                             'button_color' => ['blue', 'red', 'green'][$flights_count],
-                            'slot' => $item->vars()->title
+                            'slot' => $item->vars()->title,
                         ]);
 
                         ++$flights_count;
@@ -279,7 +279,7 @@ class NewsletterLetterContentVars
 
                         $user_image = $item->user->imagePreset('small_square');
 
-                        if(strpos($user_image, '.svg') !== false) {
+                        if (strpos($user_image, '.svg') !== false) {
                             $pos = (int) round(mb_strlen($user_image) - strrpos($user_image, '.svg') - 4);
 
                             if ($pos == 0) {
@@ -296,13 +296,10 @@ class NewsletterLetterContentVars
                             'url' => route($item->type.'.show', [$item->slug]),
                         ]);
                     }
-
                 }
             }
 
             $this->item->body = str_replace('[['.$this->tags.']]', $content, $this->item->body);
         }
-
     }
-
 }
