@@ -10,6 +10,7 @@ class NewsletterLetterContentVars
 {
     protected $item;
     protected $tags;
+    protected $temp_body;
 
     protected $allowed_order_by_columns = [
         'id',
@@ -51,23 +52,26 @@ class NewsletterLetterContentVars
         );
     }
 
-    public function compose(Content $the_flight = null, User $user = null)
+    public function compose(Content $the_flight = null, NewsletterType $newsletterType = null)
     {
+        $this->temp_body = $this->item->body;
         $matches = [];
         $pattern = '#\[\[(.*?)\]\]#';
 
-        preg_match_all($pattern, $this->item->body, $matches);
+        preg_match_all($pattern, $this->temp_body, $matches);
 
         if (count($matches)) {
             foreach ($matches[1] as &$tags) {
                 $this->tags = mb_strtolower($tags);
 
-                $this->replace_if_matches($the_flight, $user);
+                $this->replace_if_matches($the_flight, $newsletterType);
             }
         }
+
+        return $this->temp_body;
     }
 
-    protected function replace_if_matches(Content $the_flight = null, User $user = null)
+    protected function replace_if_matches(Content $the_flight = null, NewsletterType $newsletterType = null)
     {
         $contents = null;
         $sql_options = [
@@ -101,8 +105,8 @@ class NewsletterLetterContentVars
                             $col_values = explode(',', $column_values);
 
                             $column_values = [];
-                            foreach ($col_values as $column_value) {
-                                if (trim($column_value) != '' && in_array($column_values, $this->allowed_types)) {
+                            foreach ($col_values as &$column_value) {
+                                if (trim($column_value) != '' && in_array($column_value, $this->allowed_types)) {
                                     $column_values[] = $column_value;
                                 }
                             }
@@ -161,11 +165,12 @@ class NewsletterLetterContentVars
         }
 
         if ($skip_element) {
-            $this->item->body = str_replace('[['.$this->tags.']]', '', $this->item->body);
+            $this->temp_body = str_replace('[['.$this->tags.']]', '', $this->temp_body);
         } else {
             if ($contents) {
+                $image = $contents->imagePreset('small_fit');
                 $content .= mail_component('mail::flight', [
-                    'image' => $contents->imagePreset('small_fit'),
+                    'image' => (filter_var($image, FILTER_VALIDATE_URL) ? $image : asset($image)),
                     'url' => route('flight.show', $contents->slug),
                     'button_color' => 'green',
                     'slot' => $contents->vars()->title,
@@ -188,8 +193,14 @@ class NewsletterLetterContentVars
 
                 if (isset($sql_options['where']) && count($sql_options['where'])) {
                     foreach ($sql_options['where'] as $column_name => &$value) {
-                        $contents = $contents->where($column_name, $value);
-                        $check_contents = $check_contents->where($column_name, $value);
+                        if (is_array($value)) {
+                            $contents = $contents->whereIn($column_name, $value);
+                            $check_contents = $check_contents->whereIn($column_name, $value);
+                        } else {
+                            $contents = $contents->where($column_name, $value);
+                            $check_contents = $check_contents->where($column_name, $value);
+                        }
+
                     }
                 }
 
@@ -205,9 +216,8 @@ class NewsletterLetterContentVars
 
                 if (isset($sql_options['order_by']) && isset($sql_options['order_by']['column']) && isset($sql_options['order_by']['option'])) {
                     if ($sql_options['order_by']['column'] == 'pop') {
-                        $user = request()->user();
-                        if ($user && $user->active_at) {
-                            $interval = Carbon::now()->diffInDays($user->active_at);
+                        if ($newsletterType && $newsletterType->send_days_after) {
+                            $interval = $newsletterType->send_days_after;
                         } else {
                             $interval = 30;
                         }
@@ -241,8 +251,9 @@ class NewsletterLetterContentVars
                             $flights_count = 0;
                         }
 
+                        $image = $item->imagePreset('small_fit');
                         $content .= mail_component('mail::flight', [
-                            'image' => $item->imagePreset('small_fit'),
+                            'image' => (filter_var($image, FILTER_VALIDATE_URL) ? $image : asset($image)),
                             'url' => route('flight.show', $item->slug),
                             'button_color' => ['blue', 'red', 'green'][$flights_count],
                             'slot' => $item->vars()->title,
@@ -250,8 +261,9 @@ class NewsletterLetterContentVars
 
                         ++$flights_count;
                     } elseif (in_array($item->type, ['news', 'shortnews'])) {
+                        $image = $item->imagePreset('small_fit');
                         $content .= mail_component('mail::news', [
-                            'image' => $item->imagePreset('small_fit'),
+                            'image' => (filter_var($image, FILTER_VALIDATE_URL) ? $image : asset($image)),
                             'date' => $item->vars()->created_at,
                             'url' => route($item->type.'.show', [$item->slug]),
                             'slot' => $item->vars()->title,
@@ -288,7 +300,7 @@ class NewsletterLetterContentVars
                         }
 
                         $content .= mail_component('mail::list', [
-                            'image' => $user_image,
+                            'image' => (filter_var($user_image, FILTER_VALIDATE_URL) ? $user_image : ($user_image ? asset($user_image) : null)),
                             'user' => $item->user->name,
                             'slot' => $item->vars()->title,
                             'destinations' => (count($destinations) ? $destinations : null),
@@ -299,7 +311,7 @@ class NewsletterLetterContentVars
                 }
             }
 
-            $this->item->body = str_replace('[['.$this->tags.']]', $content, $this->item->body);
+            $this->temp_body = str_replace('[['.$this->tags.']]', $content, $this->temp_body);
         }
     }
 }
