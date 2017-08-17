@@ -91,7 +91,7 @@ class NewsletterLetterContentsSeeder extends Seeder
 
                 $content[] = [
                     'newsletter_type_id' => $newsletter_type->id,
-                    'body' => '[[type:forum,buysqll,expat|take:5]]',
+                    'body' => '[[type:forum,buysell,expat|take:5]]',
                     'sort_order' => 4,
                     'visible_from' => null,
                     'visible_to' => null,
@@ -181,7 +181,7 @@ class NewsletterLetterContentsSeeder extends Seeder
 
                 $content[] = [
                     'newsletter_type_id' => $newsletter_type->id,
-                    'body' => '<h2>Populaarsemad teemad foorumid</h2>',
+                    'body' => '<h2>Populaarsemad teemad foorumis</h2>',
                     'sort_order' => 3,
                     'visible_from' => null,
                     'visible_to' => null,
