@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 use App\NewsletterSubscription;
 use App\NewsletterLetterContent;
-use App\Http\Regions\FlightNewsletterSubscribe;
+use App\NewsletterSent;
+use App\User;
 
 class V2NewsletterController extends Controller
 {
@@ -20,8 +21,8 @@ class V2NewsletterController extends Controller
         $navBar = collect();
 
         foreach ($newsletter_types as &$newsletter_type) {
-            if (strpos($newsletter_type->subject, '%destination_name') !== false) {
-                $newsletter_type->subject = str_replace('%destination_name', '...', $newsletter_type->subject);
+            if (strpos($newsletter_type->subject, '[[destination_name]]') !== false) {
+                $newsletter_type->subject = str_replace('[[destination_name]]', '...', $newsletter_type->subject);
             }
 
             $navBar->push(component('Button')
@@ -49,16 +50,16 @@ class V2NewsletterController extends Controller
     public function view($id)
     {
         $newsletter = NewsLetterType::findOrFail($id);
-        if (strpos($newsletter->subject, '%destination_name') !== false) {
-            $newsletter->subject = str_replace('%destination_name', '...', $newsletter->subject);
+        if (strpos($newsletter->subject, '[[destination_name]]') !== false) {
+            $newsletter->subject = str_replace('[[destination_name]]', '...', $newsletter->subject);
         }
 
         $newsletter_types = NewsletterType::all();
         $navBar = collect();
 
         foreach ($newsletter_types as &$newsletter_type) {
-            if (strpos($newsletter_type->subject, '%destination_name') !== false) {
-                $newsletter_type->subject = str_replace('%destination_name', '...', $newsletter_type->subject);
+            if (strpos($newsletter_type->subject, '[[destination_name]]') !== false) {
+                $newsletter_type->subject = str_replace('[[destination_name]]', '...', $newsletter_type->subject);
             }
 
             $navBar->push(component('Link')
@@ -67,6 +68,49 @@ class V2NewsletterController extends Controller
                 ->with('route', route('newsletter.view', [$newsletter_type]))
             );
         }
+
+        $sents = NewsletterSent::where('newsletter_type_id', $id)
+            ->with([
+                'newsletter_type',
+                'destination',
+                'subscriptions',
+                'sent',
+            ])
+            ->orderBy('id', 'asc')
+            ->paginate(15);
+
+        $left_content = collect();
+        $right_content = collect();
+        $sents->each(function ($sent) use (&$left_content, &$right_content) {
+            $sent->newsletter_type->subject = str_replace('[[destination_name]]', ($sent->destination ? $sent->destination->name : ''), $sent->newsletter_type->subject);
+            $left_content->push(component('Meta')
+                ->with('items', collect()
+                    ->push(
+                        component('Body')
+                            ->with('body', $sent->newsletter_type->subject)
+                    )
+                    ->push(
+                        component('Tag')
+                            ->with('title', trans('newsletter.started_at').' ' . format_date($sent->started_at))
+                    )
+                    ->push(
+                        component('Tag')
+                            ->with('title', trans('newsletter.ended_at').' ' . ($sent->ended_at ? format_date($sent->started_at) : trans('newsletter.tag.future')))
+                    )
+                    ->push(
+                        component('Tag')
+                            ->with('title', trans('newsletter.sent').' '.$sent->sent->where('sending', 0)->count().' / '.$sent->sent->count())
+                    )
+                )
+            );
+
+            $right_content->push(
+                component('Button')
+                    ->with('external', true)
+                    ->with('title', trans('newsletter.button.view.sent'))
+                    ->with('route', route('newsletter.preview_sent', [$sent]))
+            );
+        });
 
         return layout('2col')
             ->with('background', component('BackgroundMap'))
@@ -92,36 +136,14 @@ class V2NewsletterController extends Controller
                             ->with('title', trans('newsletter.button.preview'))
                             ->with('route', route('newsletter.preview', [$newsletter])),
                     ])
-                )->push(component('GridSplit')
+                )
+                ->push(component('GridSplit')
                     ->with('left_col', 9)
                     ->with('right_col', 3)
-                    ->with('left_content', collect()->push(
-                        component('Meta')
-                            ->with('items', collect()
-                                ->push(
-                                    component('Body')
-                                        ->with('body', 'Uudiskiri saadeti välja 20.07.2017.')
-                                )
-                                ->push(
-                                    component('Body')
-                                        ->with('body', 'Saatmine lõppes 21.07.2017.')
-                                )
-                                ->push(
-                                    component('Body')
-                                        ->with('body', 'Saadetud 7 / 2010')
-                                )
-                            )
-                        )
-                    )
-                    ->with('right_content', collect()->push(
-                            component('Button')
-                                ->with('external', true)
-                                ->with('title', trans('newsletter.button.view.sent'))
-                                ->with('route', route('newsletter.preview_sent', [0]))
-                        )
-                    )
+                    ->with('left_content', $left_content)
+                    ->with('right_content', $right_content)
                 )
-                //->push(region('Paginator', $forums, $currentDestination, $currentTopic))
+                ->push(region('Paginator', $sents))
             )
             ->with('sidebar', $navBar)
             ->with('footer', region('FooterLight'))
@@ -132,8 +154,8 @@ class V2NewsletterController extends Controller
     {
         $request = request();
         $newsletter = NewsLetterType::findOrFail($id);
-        if (strpos($newsletter->subject, '%destination_name') !== false) {
-            $newsletter->subject = str_replace('%destination_name', '...', $newsletter->subject);
+        if (strpos($newsletter->subject, '[[destination_name]]') !== false) {
+            $newsletter->subject = str_replace('[[destination_name]]', '...', $newsletter->subject);
         }
 
         $letter_contents = [];
@@ -253,10 +275,14 @@ class V2NewsletterController extends Controller
         }
     }
 
-    public function subscribe(Request $request, $id)
+    public function subscribe(Request $request, $id, User $user = null, $skip_request = false)
     {
         $newsletter_type = NewsLetterType::findOrFail($id);
-        $user = $request->user();
+
+        if (! $user) {
+            $user = $request->user();
+        }
+
         $errors = [];
 
         if ($newsletter_type->type == 'flight' && $user) {
@@ -380,13 +406,15 @@ class V2NewsletterController extends Controller
                 ->where('newsletter_type_id', $id)
                 ->first();
 
+            $newsletter_subscribe = ($skip_request ? 1 : $request->newsletter_subscribe ? 1 : 0);
+
             if ($subscription) {
-                $subscription->active = $request->newsletter_subscribe ? 1 : 0;
+                $subscription->active = $newsletter_subscribe;
             } else {
                 $subscription = new NewsletterSubscription;
                 $subscription->user_id = $user->id;
                 $subscription->newsletter_type_id = $id;
-                $subscription->active = $request->newsletter_subscribe ? 1 : 0;
+                $subscription->active = $newsletter_subscribe;
             }
 
             $subscription->save();
@@ -399,11 +427,44 @@ class V2NewsletterController extends Controller
         }
     }
 
+    public function unsubscribe($hash, $id)
+    {
+        $subscription = NewsletterSubscription::where('active', 1)->findOrFail($id);
+        
+        if (sha1($subscription->id . $subscription->email . $subscription->user_id . $subscription->created_at) == $hash) {
+            $title = trans('newsletter.unsubscribed.successfully.title');
+            $body = trans('newsletter.unsubscribed.successfully.body');
+
+            $subscription->active = 0;
+            $subscription->save();
+
+            return layout('1col')
+                ->with('header', region('StaticHeader', collect()
+                    ->push(component('Title')
+                        ->is('red')
+                        ->is('large')
+                        ->with('title', $title)
+                    )
+                ))
+                ->with('content', collect()
+                    ->push(component('Body')
+                        ->is('responsive')
+                        ->with('body', $body)
+                    )
+                    ->push('&nbsp;')
+                )
+                ->with('footer', region('FooterLight'))
+                ->render();
+        } else {
+            return abort(404);
+        }
+    }
+
     public function preview($id)
     {
         $markdown = new Markdown(view(), config('mail.markdown'));
 
-        $newsletter = NewsletterTYpe::findOrFail($id);
+        $newsletter = NewsletterType::findOrFail($id);
         $contents = NewsletterLetterContent::where('newsletter_type_id', $id)->orderBy('sort_order', 'asc')->get();
 
         $body = '';
@@ -422,29 +483,30 @@ class V2NewsletterController extends Controller
         }
 
         foreach ($contents as &$content) {
-            $content->vars()->compose($the_flight);
-            $body .= $content->body;
+            $body .= $content->vars()->compose($the_flight);
         }
-        /*echo mail_component('mail::promotion.button', [
-            'url' => '#',
-            'slot' => 'test',
-        ]);
 
-        exit();*/
-        return $markdown->render('email.newsletter.weekly_test', [
-            'subject' => $newsletter->subject,
+        return $markdown->render('email.newsletter.newsletter', [
+            'heading' => $newsletter->subject,
             'body' => $body,
-            'unsubscribe_id' => 4,
+            'unsubscribe_route' => '#',
         ]);
-        //exit();
     }
 
     public function preview_sent($id)
     {
         $markdown = new Markdown(view(), config('mail.markdown'));
 
-        return $markdown->render('email.newsletter.long_time_ago', [
-            'unsubscribe_id' => 4,
+        $newsletter = NewsletterSent::with([
+            'newsletter_type',
+            'destination',
+        ])->findOrFail($id);
+
+
+        return $markdown->render('email.newsletter.newsletter', [
+            'heading' => str_replace('[[destination_name]]', ($newsletter->destination ? $newsletter->destination->name : ''), $newsletter->newsletter_type->subject),
+            'body' => $newsletter->composed_content,
+            'unsubscribe_route' => '#',
         ]);
     }
 }
