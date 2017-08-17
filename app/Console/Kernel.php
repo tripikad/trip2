@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel
             ->dailyAt('05:55');
 
         $schedule->command('newsletter:send')
-            ->cron('0 * * * *');
+            ->cron('* * * * *');
     }
 
     /**
