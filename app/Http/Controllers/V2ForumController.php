@@ -8,9 +8,7 @@ use App\User;
 use App\Image;
 use App\Topic;
 use App\Content;
-use Carbon\Carbon;
 use App\Destination;
-use App\UnreadContent;
 
 class V2ForumController extends Controller
 {

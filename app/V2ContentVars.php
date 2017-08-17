@@ -83,7 +83,6 @@ class V2ContentVars
             $unreadContent->read_at = Carbon::now()->toDateTimeString();
             $unreadContent->save();
         }
-
     }
 
     public function isNew()

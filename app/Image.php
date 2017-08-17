@@ -55,7 +55,6 @@ class Image extends Model
                         config("imagepresets.presets.$preset.quality")
                     );
             }
-
         }
     }
 
@@ -110,10 +109,10 @@ class Image extends Model
 
         return $filename;
     }
-    
+
     public static function createPresetFromOriginal($original, $image, $preset)
     {
-        if (filter_var($original, FILTER_VALIDATE_URL) && ! file_exists(config('imagepresets.original.path') . $image)) {
+        if (filter_var($original, FILTER_VALIDATE_URL) && ! file_exists(config('imagepresets.original.path').$image)) {
             self::storeImageFromUrl($original, pathinfo($image, PATHINFO_FILENAME), true);
         }
 
