@@ -85,7 +85,7 @@ return [
             'path' => $images_path.'small_fit/',
             'displaypath' => $images_displaypath.'small_fit/',
             'alt_displaypath' => $images_alt_displaypath.'small_fit/',
-            'quality' => 75,
+            'quality' => 100,
         ],
 
     ],
