@@ -21,8 +21,8 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            @if (isset($unsubscribe_id))
-                Uudiskirjast loobumiseks <a href="{{ $unsubscribe_id }}">vajuta siia</a><br /><br />
+            @if (isset($unsubscribe_route) && $unsubscribe_route)
+                Uudiskirjast loobumiseks <a href="{{ $unsubscribe_route }}">vajuta siia</a><br /><br />
             @endif
             {{ trans('site.footer.copyright', ['current_year' =>  \Carbon\Carbon::now()->year]) }}
         @endcomponent
