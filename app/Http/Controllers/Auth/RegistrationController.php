@@ -6,10 +6,10 @@ use Log;
 use Hash;
 use Mail;
 use App\User;
+use App\NewsletterType;
 use Illuminate\Http\Request;
 use App\Mail\ConfirmRegistration;
 use App\Http\Controllers\Controller;
-use App\NewsletterType;
 use App\Http\Controllers\V2NewsletterController;
 
 class RegistrationController extends Controller

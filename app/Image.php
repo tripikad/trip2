@@ -128,9 +128,7 @@ class Image extends Model
                     config("imagepresets.presets.$preset.quality")
                 );
         } catch (\Exception $e) {
-            
         }
-
     }
 
     public static function checkIfExists($path, $filename, $ext, $i = 0)
