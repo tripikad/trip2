@@ -232,6 +232,9 @@ Route::get('newsletter/preview_sent/{id}', 'V2NewsletterController@preview_sent'
 Route::post('newsletter/subscribe/{id}', 'V2NewsletterController@subscribe')
     ->name('newsletter.subscribe');
 
+Route::get('newsletter/unsubscribe/{hash}-{id}', 'V2NewsletterController@unsubscribe')
+    ->name('newsletter.unsubscribe');
+
 // Blog
 
 Route::get('reisikirjad', 'V2BlogController@index')
