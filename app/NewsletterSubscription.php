@@ -11,7 +11,7 @@ class NewsletterSubscription extends Model
     protected $dates = ['last_sent_at', 'created_at', 'updated_at'];
 
     // Relations
-    
+
     public function sents()
     {
         return $this->hasMany('App\NewsletterSentSubscriber', 'subscription_id', 'id');

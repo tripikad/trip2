@@ -4,7 +4,6 @@ namespace App;
 
 use DB;
 use Exception;
-use Carbon\Carbon;
 
 class NewsletterLetterContentVars
 {
@@ -200,7 +199,6 @@ class NewsletterLetterContentVars
                             $contents = $contents->where($column_name, $value);
                             $check_contents = $check_contents->where($column_name, $value);
                         }
-
                     }
                 }
 

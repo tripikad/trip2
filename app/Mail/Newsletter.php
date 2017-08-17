@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -10,13 +9,13 @@ use Illuminate\Queue\SerializesModels;
 class Newsletter extends Mailable
 {
     use Queueable, SerializesModels;
-    
+
     public $body;
     public $heading;
     public $category;
     public $user_id;
     public $unsubscribe_route;
-    
+
     public function __construct($body, $heading, $category, $user_id, $unsubscribe_route)
     {
         $this->body = $body;

@@ -35,7 +35,7 @@ return [
     'field.content' => 'Sisu (HTML, tekst, [[token]] viited)',
     'field.visible_from' => 'Kuva kuupäevast alates (N: '.Carbon\Carbon::now()->format('d.m.Y').')',
     'field.visible_to' => 'Ära kuva enam kuupäevast (N: '.Carbon\Carbon::now()->addDays(14)->format('d.m.Y').')',
-    
+
     'unsubscribed.successfully.title' => 'Oled uudiskirjast lahkunud.',
     'unsubscribed.successfully.body' => 'Oled seda tüüpi uudiskirjade nimekirjast nüüd kustutatud.<br><br>Kui sind häirivad veel mingit tüüpi uudiskirjad siis neid saad lihtsasti tühistada logides sisse oma kontosse.',
 

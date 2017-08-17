@@ -2,18 +2,18 @@
 
 namespace App\Console\Commands;
 
+use DB;
+use Mail;
+use Cache;
+use App\User;
+use App\Content;
+use Carbon\Carbon;
+use App\Destination;
+use App\NewsletterSent;
+use App\NewsletterType;
 use App\NewsletterSubscription;
 use Illuminate\Console\Command;
-use Carbon\Carbon;
-use App\NewsletterType;
-use App\User;
-use DB;
-use App\NewsletterSent;
 use App\NewsletterSentSubscriber;
-use App\Content;
-use Cache;
-use App\Destination;
-use Mail;
 use App\Mail\Newsletter as NewsletterMail;
 
 class Newsletter extends Command
@@ -69,7 +69,7 @@ class Newsletter extends Command
                     if (count($insert)) {
                         NewsletterSubscription::insert($insert);
 
-                        $this->info($total_count . ' Kasutajat lisatud uudiskirjaga liitujate alla.');
+                        $this->info($total_count.' Kasutajat lisatud uudiskirjaga liitujate alla.');
                     }
                 });
             }
@@ -184,7 +184,7 @@ class Newsletter extends Command
                                 }
 
                                 if ($mail_receiver->sent->newsletter_type->type == 'flight') {
-                                    $category = 'Lennupakkumine_' . $destination_name;
+                                    $category = 'Lennupakkumine_'.$destination_name;
                                 } else {
                                     $category = $mail_receiver->sent->newsletter_type->type;
                                 }
@@ -213,7 +213,7 @@ class Newsletter extends Command
             }
         }
 
-        $this->info('Task lõpetatud praeguseks. Aega kulus kokku: ' . $this->time_spent() .' sekundit (millest uneaega '.(float) $sleep_time.' sekundit).');
+        $this->info('Task lõpetatud praeguseks. Aega kulus kokku: '.$this->time_spent().' sekundit (millest uneaega '.(float) $sleep_time.' sekundit).');
     }
 
     protected function time_spent()
@@ -248,7 +248,6 @@ class Newsletter extends Command
             ]);
         }
 
-
         $count_added = 0;
         $chunk_count = 0;
         $chunk_rounds = 0;
@@ -275,7 +274,7 @@ class Newsletter extends Command
 
                 if ($count_added == $subscriptions_count || $chunk_rounds == 10) {
                     $chunk_rounds = 0;
-                    $this->line($count_added . ' liitujat lisatud kirja saajate ootelisti.');
+                    $this->line($count_added.' liitujat lisatud kirja saajate ootelisti.');
                 }
 
                 $insert_to_queue = [];
@@ -320,7 +319,7 @@ class Newsletter extends Command
                 ]);
             }
 
-            $this->info($users_count . ' kasutajat pole sisse loginud vähemalt ' . $newsletter->send_days_after . ' päeva');
+            $this->info($users_count.' kasutajat pole sisse loginud vähemalt '.$newsletter->send_days_after.' päeva');
             $count_added = 0;
 
             $chunk_count = 0;
@@ -347,13 +346,12 @@ class Newsletter extends Command
 
                     if ($count_added == $users_count || $chunk_rounds == 10) {
                         $chunk_rounds = 0;
-                        $this->line($count_added . ' kasutajat lisatud "Pole ammu sind näinud" kirja saajate ootelisti.');
+                        $this->line($count_added.' kasutajat lisatud "Pole ammu sind näinud" kirja saajate ootelisti.');
                     }
 
                     $insert_to_queue = [];
                 }
             }
-
         }
     }
 
@@ -521,7 +519,7 @@ class Newsletter extends Command
                 ++$count_processed;
 
                 foreach ($sents as &$sent) {
-                    if ($sent->destination_id == $subscription->destination_id || ($sent->price_error == 1 &&  $subscription->price_error == 1)) {
+                    if ($sent->destination_id == $subscription->destination_id || ($sent->price_error == 1 && $subscription->price_error == 1)) {
                         $existing_sent_ids = [];
                         if ($subscription->sents->count()) {
                             $existing_sent_ids = $subscription->sents->pluck('sent_id')->toArray();
@@ -563,11 +561,11 @@ class Newsletter extends Command
 
             return $sent;
         } else {
-            throw new \Exception("Please provide data for NewsletterSent model.");
+            throw new \Exception('Please provide data for NewsletterSent model.');
         }
     }
 
-    protected function getDestinations($check_subs=true)
+    protected function getDestinations($check_subs = true)
     {
         $this->destinations = Cache::remember('mail_destinations', 60, function () {
             $destinations = Destination::select(['id', 'name', 'parent_id'])->get();
@@ -576,7 +574,7 @@ class Newsletter extends Command
         });
 
         if ($check_subs) {
-            $this->sub_destinations = Cache::remember('newsletter_sub_destinations', $this->cache_time, function() {
+            $this->sub_destinations = Cache::remember('newsletter_sub_destinations', $this->cache_time, function () {
                 $subs = [];
 
                 foreach ($this->destinations as &$destination) {
@@ -586,7 +584,7 @@ class Newsletter extends Command
                 return $subs;
             });
 
-            $this->parent_destinations = Cache::remember('newsletter_parent_destinations', $this->cache_time, function() {
+            $this->parent_destinations = Cache::remember('newsletter_parent_destinations', $this->cache_time, function () {
                 $parents = [];
 
                 $destinations_by_id = $this->destinations->keyBy('id');
@@ -602,7 +600,7 @@ class Newsletter extends Command
         return $this->destinations;
     }
 
-    protected function getParents($id, $data=[], $parents=[])
+    protected function getParents($id, $data = [], $parents = [])
     {
         $parent_id = isset($data[$id]) ? $data[$id]->parent_id : 0;
 
@@ -615,7 +613,7 @@ class Newsletter extends Command
         return $parents;
     }
 
-    protected function getChild($id, $data=[], $child=[])
+    protected function getChild($id, $data = [], $child = [])
     {
         foreach ($data as &$item) {
             if ($item->parent_id == $id) {

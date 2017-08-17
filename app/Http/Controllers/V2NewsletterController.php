@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Content;
 use Carbon\Carbon;
+use App\NewsletterSent;
 use App\NewsletterType;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 use App\NewsletterSubscription;
 use App\NewsletterLetterContent;
-use App\NewsletterSent;
-use App\User;
 
 class V2NewsletterController extends Controller
 {
@@ -91,11 +91,11 @@ class V2NewsletterController extends Controller
                     )
                     ->push(
                         component('Tag')
-                            ->with('title', trans('newsletter.started_at').' ' . format_date($sent->started_at))
+                            ->with('title', trans('newsletter.started_at').' '.format_date($sent->started_at))
                     )
                     ->push(
                         component('Tag')
-                            ->with('title', trans('newsletter.ended_at').' ' . ($sent->ended_at ? format_date($sent->started_at) : trans('newsletter.tag.future')))
+                            ->with('title', trans('newsletter.ended_at').' '.($sent->ended_at ? format_date($sent->started_at) : trans('newsletter.tag.future')))
                     )
                     ->push(
                         component('Tag')
@@ -430,8 +430,8 @@ class V2NewsletterController extends Controller
     public function unsubscribe($hash, $id)
     {
         $subscription = NewsletterSubscription::where('active', 1)->findOrFail($id);
-        
-        if (sha1($subscription->id . $subscription->email . $subscription->user_id . $subscription->created_at) == $hash) {
+
+        if (sha1($subscription->id.$subscription->email.$subscription->user_id.$subscription->created_at) == $hash) {
             $title = trans('newsletter.unsubscribed.successfully.title');
             $body = trans('newsletter.unsubscribed.successfully.body');
 
@@ -501,7 +501,6 @@ class V2NewsletterController extends Controller
             'newsletter_type',
             'destination',
         ])->findOrFail($id);
-
 
         return $markdown->render('email.newsletter.newsletter', [
             'heading' => str_replace('[[destination_name]]', ($newsletter->destination ? $newsletter->destination->name : ''), $newsletter->newsletter_type->subject),
