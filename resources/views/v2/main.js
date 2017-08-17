@@ -17,6 +17,7 @@ import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
 import FrontpageSearchRow from './components/FrontpageSearchRow/FrontpageSearchRow.vue'
 import FrontpageSearchItem from './components/FrontpageSearchItem/FrontpageSearchItem.vue'
 import TravelmateStart from './components/TravelmateStart/TravelmateStart.vue'
+import NewsletterComposer from './components/NewsletterComposer/NewsletterComposer.vue'
 //import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
@@ -72,6 +73,7 @@ new Vue({
         PromoBar,
         UserImage,
         TravelmateStart,
+        NewsletterComposer
     },
 
     mounted() {
