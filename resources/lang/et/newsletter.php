@@ -3,6 +3,11 @@
 return [
     'title' => 'Uudiskiri',
 
+    'started_at' => 'Algus:',
+    'ended_at' => 'Lõpetatud: ',
+    'sent' => 'Saadetud: ',
+    'tag.future' => 'ootel',
+
     'button.preview' => 'Vaata eelvaadet',
     'button.view.sent' => 'Vaata kirja',
     'button.edit' => 'Muuda kirja',
@@ -30,6 +35,9 @@ return [
     'field.content' => 'Sisu (HTML, tekst, [[token]] viited)',
     'field.visible_from' => 'Kuva kuupäevast alates (N: '.Carbon\Carbon::now()->format('d.m.Y').')',
     'field.visible_to' => 'Ära kuva enam kuupäevast (N: '.Carbon\Carbon::now()->addDays(14)->format('d.m.Y').')',
+    
+    'unsubscribed.successfully.title' => 'Oled uudiskirjast lahkunud.',
+    'unsubscribed.successfully.body' => 'Oled seda tüüpi uudiskirjade nimekirjast nüüd kustutatud.<br><br>Kui sind häirivad veel mingit tüüpi uudiskirjad siis neid saad lihtsasti tühistada logides sisse oma kontosse.',
 
     'cheatsheet.content' => '
         <b>[[the_flight]]</b> - Kindel lennupakkumine (toimib sihtkoha järgi lennupakkumise uudiskirjaga ainult)<br>
