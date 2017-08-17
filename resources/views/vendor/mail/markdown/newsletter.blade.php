@@ -1,4 +1,4 @@
-@component('mail::layout')
+@component('mail::newsletter_layout')
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
@@ -21,7 +21,13 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
+            @if (isset($unsubscribe_route) && $unsubscribe_route)
+                [Loobun uudiskirjast]({{ $unsubscribe_route }})
+
+
+            @endif
             {{ trans('site.footer.copyright', ['current_year' =>  \Carbon\Carbon::now()->year]) }}
         @endcomponent
     @endslot
 @endcomponent
+
