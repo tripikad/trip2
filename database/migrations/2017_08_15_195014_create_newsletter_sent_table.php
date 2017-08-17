@@ -17,10 +17,19 @@ class CreateNewsletterSentTable extends Migration
             $table->increments('id');
             $table->integer('newsletter_type_id')->unsigned()->index();
             $table->longText('composed_content');
-            $table->timestamp('started_at');
-            $table->timestamp('ended_at');
+            $table->integer('destination_id')->nullable()->unsigned()->index();
+            $table->boolean('price_error')->default(0)->index();
+            $table->integer('content_id')->nullable()->unsigned()->index();
+            $table->timestamp('started_at')->nullable();
+            $table->timestamp('ended_at')->nullable();
 
             $table->foreign('newsletter_type_id')->references('id')->on('newsletter_types')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->foreign('destination_id')->references('id')->on('destinations')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->foreign('content_id')->references('id')->on('contents')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
     }
