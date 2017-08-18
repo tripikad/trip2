@@ -16,10 +16,9 @@ class PhotoTest extends BrowserKitTestCase
         $regular_user_uploading_photo = factory(User::class)->create();
 
         $this->actingAs($regular_user_uploading_photo)
-            //->visit('reisipildid')
-            //->click(trans('content.photo.create.title'))
-            //->seePageIs('photo/create')
-            ->visit('photo/create2')
+            ->visit('reisipildid')
+            ->click(trans('content.photo.create.title'))
+            ->seePageIs('photo/create')
             ->attach(storage_path().'/tests/test.jpg', 'file')
             ->type('Hello photo title', 'title')
             ->press(trans('content.create.submit.title'))
@@ -34,20 +33,20 @@ class PhotoTest extends BrowserKitTestCase
         $photo = Content::whereTitle('Hello photo title')->first();
         $filename = $photo->images()->first()->filename;
 
-            // Check original file exists and clean up
+        // Check original file exists and clean up
 
-            $filepath = config('imagepresets.original.path').$filename;
+        $filepath = config('imagepresets.original.path').$filename;
 
         $this->assertTrue(file_exists($filepath));
         unlink($filepath);
 
-            // Check thumbnails exist and clean up
+        // Check thumbnails exist and clean up
 
-            foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                $filepath = config("imagepresets.presets.$preset.path").$filename;
-                $this->assertTrue(file_exists($filepath));
-                unlink($filepath);
-            }
+        foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+            $filepath = config("imagepresets.presets.$preset.path").$filename;
+            $this->assertTrue(file_exists($filepath));
+            unlink($filepath);
+        }
     }
 
     /*

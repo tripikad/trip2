@@ -32,10 +32,10 @@ class Filter
                         ->with('name', 'type')
                         ->with('value', $type)
                     )
-                    ->push(component('FormHidden')
+                    /*->push(component('FormHidden')
                         ->with('name', 'page')
                         ->with('value', $currentPage)
-                    )
+                    )*/
                 );
     }
 }

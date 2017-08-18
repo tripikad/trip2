@@ -14,7 +14,7 @@ cd trip2
 composer install
 cp .env.example .env
 php artisan key:generate
-yarn #or npm install
+yarn # or npm install
 npm run dev
 ```
 
@@ -109,14 +109,14 @@ npm run watch # Watching the assets
 
 ### Build process
 
-The main entrypoint is `./resources/views/v2/main.js` what boots up a Vue instance and includes all the neccessary assets:
+The main entrypoint is `./resources/views/main.js` what boots up a Vue instance and includes all the neccessary assets:
 
 #### JS
 
 Vue components from
 
 ```
-./resources/views/v2/components/**/*.vue
+./resources/views/components/**/*.vue
 ```
 
 are compiled and minified to
@@ -130,7 +130,7 @@ are compiled and minified to
 Vendor libraries specified in `webpack.config.js` are extracted from
 
 ```
-./resources/views/v2/components/**/*.vue
+./resources/views/components/**/*.vue
 ```
 
 are compiled and minified to
@@ -144,13 +144,13 @@ are compiled and minified to
 Components CSS from
 
 ```
-./resources/views/v2/components/**/*.css
+./resources/views/components/**/*.css
 ``` 
 
 and helper CSS from
 
 ```
-./resources/views/v2/styles/**/*.css
+./resources/views/styles/**/*.css
 ```
 
 are concatted, processed using PostCSS (the configuration is at `./postcss.config.js`) and saved to
@@ -161,7 +161,7 @@ are concatted, processed using PostCSS (the configuration is at `./postcss.confi
 
 #### SVG
 
-SVGs from `./resources/views/v2/svg/**/*.svg`
+SVGs from `./resources/views/svg/**/*.svg`
 
 are concat into a SVG sprite, optimized, minified and saved to
 
@@ -171,7 +171,7 @@ are concat into a SVG sprite, optimized, minified and saved to
 
 ### API
 
-Components are located at ```resources/views/v2/components``` and are either Laravel Blade or VueJS components.
+Components are located at ```resources/views/components``` and are either Laravel Blade or VueJS components.
 
 To show a component use a ```component()``` helper:
 
@@ -229,10 +229,10 @@ Modifiers:
 
 #### Variables
 
-A Sass-like `$variable` syntax is supported via [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars). Use global variables from [/resources/views/v2/styles/variables.css](/resources/views/v2/styles/variables.css) by importing them to CSS file:
+A Sass-like `$variable` syntax is supported via [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars). Use global variables from [/resources/views/styles/variables.css](/resources/views/styles/variables.css) by importing them to CSS file:
 
 ```scss
-@import "variables" // Resolves to ./resources/views/v2/styles/variables.css
+@import "variables" // Resolves to ./resources/views/styles/variables.css
 ```
 
 #### Fonts
@@ -305,7 +305,7 @@ and follow the directions.
 
 #### API
 
-Layouts are located at ```resources/views/v2/layouts``` and are simple wrappers around top-level ```view()```.
+Layouts are located at ```resources/views/layouts``` and are simple wrappers around top-level ```view()```.
 
 To show a component use a ```layout()``` helper:
 
@@ -325,7 +325,7 @@ layout('1col')
 
 #### CSS
 
-There is no dedicated CSS files for layouts but you can use helper classes found in `resources/views/v2/styles/` folder.
+There is no dedicated CSS files for layouts but you can use helper classes found in `resources/views/styles/` folder.
 
 #### Making a layout
 

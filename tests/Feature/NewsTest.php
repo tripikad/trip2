@@ -17,9 +17,9 @@ class NewsTest extends BrowserKitTestCase
         $admin_user_creating_news = factory(User::class)->create(['role' => 'admin']);
 
         $this->actingAs($admin_user_creating_news)
-            ->visit('uudised')
-            ->click(trans('content.news.create.title').' (beta)') // FIXME
-            ->seePageIs('news/create2') // FIXME
+            ->visit('uudised') // FIXME
+            ->click(trans('content.news.create.title'))
+            ->seePageIs('news/create')
             ->type('Hello news title', 'title')
             ->type('Hello news body', 'body')
             ->press(trans('content.create.submit.title'))
@@ -61,7 +61,7 @@ class NewsTest extends BrowserKitTestCase
 
         $this->actingAs($admin_user_creating_news)
                 ->visit('uudised')
-                ->click(trans('content.news.create.title').' (beta)') // FIXME
+                ->click(trans('content.news.create.title'))
                 ->type('Hello news title', 'title')
                 ->type('Hello news body', 'body')
                 ->press(trans('content.create.submit.title'));
@@ -83,7 +83,7 @@ class NewsTest extends BrowserKitTestCase
 
         $this->actingAs($admin_user_creating_news)
                 ->visit('uudised')
-                ->click(trans('content.news.create.title').' (beta)') // FIXME
+                ->click(trans('content.news.create.title'))
                 ->type('Hello news title', 'title')
                 ->type('Hello news body', 'body')
                 ->press(trans('content.create.submit.title'));

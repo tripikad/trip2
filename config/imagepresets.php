@@ -2,7 +2,7 @@
 
 $images_path = storage_path().'/app/images/';
 $images_displaypath = env('IMAGE_PATH', '/images/');
-$svg_path = '/svg/';
+$svg_path = '/photos/';
 
 return [
 
