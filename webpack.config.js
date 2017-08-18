@@ -83,7 +83,7 @@ module.exports = {
                     css: assets.main.find(
                         asset => path.extname(asset) === '.css'
                     ),
-                    svg: assets["main.svg"]
+                    svg: "main.svg"
                 };
                 fs.writeFileSync(
                     path.join(__dirname, 'public/dist/manifest.json'),
