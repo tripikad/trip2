@@ -82,12 +82,13 @@ class V2NewsletterController extends Controller
         $left_content = collect();
         $right_content = collect();
         $sents->each(function ($sent) use (&$left_content, &$right_content) {
-            $sent->newsletter_type->subject = str_replace('[[destination_name]]', ($sent->destination ? $sent->destination->name : ''), $sent->newsletter_type->subject);
+            $subject = $sent->newsletter_type->subject;
+            $subject = str_replace('[[destination_name]]', ($sent->destination ? $sent->destination->name : ''), $subject);
             $left_content->push(component('Meta')
                 ->with('items', collect()
                     ->push(
                         component('Body')
-                            ->with('body', $sent->newsletter_type->subject)
+                            ->with('body', $subject)
                     )
                     ->push(
                         component('Tag')
