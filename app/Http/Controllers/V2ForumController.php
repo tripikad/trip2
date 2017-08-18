@@ -476,12 +476,11 @@ class V2ForumController extends Controller
 
         $this->validate(request(), $rules);
 
-        $forum->fill([
+        $forum->update([
             'title' => request()->title,
             'body' => request()->body,
             'type' => request()->type,
-        ])
-        ->save();
+        ]);
 
         if ($forum->type != 'misc') {
             $forum->destinations()->sync(request()->destinations ?: []);

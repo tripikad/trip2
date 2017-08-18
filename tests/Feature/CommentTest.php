@@ -20,11 +20,12 @@ class CommentTest extends BrowserKitTestCase
 
         $this->publicContentTypes = [
             'blog',
+            'buysell',
+            'expat',
             'flight',
             'forum',
-            'expat',
-            'buysell',
             'news',
+            'shortnews',
             'travelmate',
         ];
 
@@ -139,8 +140,6 @@ class CommentTest extends BrowserKitTestCase
 
     public function test_content_timestamp_does_not_update_when_superuser_updating_comment()
     {
-        $this->markTestSkipped();
-
         $superuser = factory(User::class)->create(['role' => 'superuser']);
 
         $contentTypes = array_merge($this->publicContentTypes, $this->privateContentTypes);

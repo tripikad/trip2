@@ -7,6 +7,7 @@ use Hash;
 use Mail;
 use App\User;
 use App\NewsletterType;
+use Honeypot;
 use Illuminate\Http\Request;
 use App\Mail\ConfirmRegistration;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,83 @@ class RegistrationController extends Controller
 {
     public function form()
     {
-        return view('pages.auth.register');
+        //return view('pages.auth.register');
+
+        return layout('1colnarrow')
+            ->cached(false)
+            ->with('color', 'gray')
+            ->with('background', component('BackgroundMap'))
+            ->with('header', region('StaticHeader'))
+            ->with('top', collect()
+                ->push(component('Title')
+                    ->is('center')
+                    ->is('large')
+                    ->with('title', trans('auth.register.title'))
+                )
+                ->push('&nbsp;')
+                ->push(component('Title')
+                    ->is('center')
+                    ->is('small')
+                    ->with('title', trans('auth.register.subhead.title'))
+                )
+            )
+            ->with('content_top', component('Grid3')->with('items', collect()
+                ->push(component('AuthTab')
+                    ->with('title', 'E-mailiga')
+                )
+                ->push(component('AuthTab')
+                    ->is('facebook')
+                    ->with('route', route('facebook.redirect'))
+                    ->with('title', 'Facebook')
+                )
+                ->push(component('AuthTab')
+                    ->is('google')
+                    ->with('route', route('google.redirect'))
+                    ->with('title', 'Google')
+                )
+            ))
+            ->with('content', collect()
+                ->push(component('Form')
+                    ->with('route', route('register.submit'))
+                    ->with('fields', collect()
+                        ->push(Honeypot::generate('full_name', 'time'))
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('auth.register.field.name.title'))
+                            ->with('name', 'name')
+                        )
+                        ->push(component('FormTextfield')
+                            ->is('large')
+                            ->with('title', trans('auth.register.field.email.title'))
+                            ->with('name', 'email')
+                        )
+                        ->push(component('FormPassword')
+                            ->is('large')
+                            ->with('title', trans('auth.register.field.password.title'))
+                            ->with('name', 'password')
+                        )
+                        ->push(component('FormPassword')
+                            ->is('large')
+                            ->with('title', trans('auth.register.field.password_confirmation.title'))
+                            ->with('name', 'password_confirmation')
+                        )
+                        ->push(component('FormButton')
+                            ->is('wide')
+                            ->is('large')
+                            ->with('title', trans('auth.register.submit.title'))
+                        )
+                ))
+            )
+            ->with('bottom', collect()->push(component('MetaLink')
+                ->with('title', trans('auth.register.field.eula.title', [
+                    'link' => format_link(
+                        route('static.show.id', [25151]),
+                        trans('auth.register.field.eula.title.link')
+                    ),
+                ]))
+            ))
+            ->with('footer', region('FooterLight'))
+            ->render();
     }
 
     public function submit(Request $request)
@@ -25,7 +102,7 @@ class RegistrationController extends Controller
             'name' => 'required|max:64|unique:users',
             'email' => 'required|email|max:64|unique:users',
             'password' => 'required|confirmed|min:6',
-            'eula' => 'required',
+            'eula' => 'boolean',
             'full_name'   => 'honeypot',
             'time'   => 'required|honeytime:3',
         ]);

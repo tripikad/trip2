@@ -2,37 +2,12 @@
 
 return [
 
-    // V2
-
     'headers' => [
         'default' => 60 * 10,
     ],
 
-    // V1
-
-    'frontpage' => [
-        'header' => 60 * 10,
-    ],
-
     'destination' => [
-        'header' => 60 * 10,
         'getPopular' => 30, // minutes
-    ],
-
-    'content' => [
-        'index' => [
-            'header' => 60 * 10,
-        ],
-        'show' => [
-            'header' => 60 * 10,
-        ],
-        'expire' => [
-            'comment' => 60 * 24 * 30, // 30 days
-        ],
-    ],
-
-    'user' => [
-        'header' => 60 * 10,
     ],
 
     'feed' => [

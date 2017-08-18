@@ -2,10 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use Log;
+use Auth;
+use Mail;
 use App\Comment;
+use Illuminate\Http\Request;
+use App\Mail\NewCommentFollow;
 
 class V2CommentController extends Controller
 {
+    public function store($type, $content_id)
+    {
+        $rules = [
+            'body' => 'required',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $comment = Auth::user()->comments()->create([
+            'body' => request()->body,
+            'content_id' => $content_id,
+            'status' => 1,
+        ]);
+
+        $follower_emails = $comment->content->followersEmails()->forget(Auth::user()->id)->toArray();
+        if ($follower_emails) {
+            foreach ($follower_emails as $follower_id => &$follower_email) {
+                Mail::to($follower_email)->queue(new NewCommentFollow($follower_id, $comment));
+            }
+        }
+
+        Log::info('New comment added', [
+            'user' =>  $comment->user->name,
+            'body' =>  $comment->body,
+            'link' => route('content.show', [
+                $type,
+                $comment->content->id,
+                '#comment-'.$comment->id,
+            ]),
+        ]);
+
+        return backToAnchor('#comment-'.$comment->id)
+            ->with('info', trans(
+                'comment.created.title',
+                ['title' => $comment->vars()->title()]
+            ));
+    }
+
     public function edit($id)
     {
         $comment = Comment::findOrFail($id);
@@ -37,5 +80,49 @@ class V2CommentController extends Controller
             ->with('footer', region('FooterLight'))
 
             ->render();
+    }
+
+    public function update($id)
+    {
+        $rules = [
+            'body' => 'required',
+        ];
+
+        $this->validate(request(), $rules);
+
+        $comment = Comment::findorFail($id);
+
+        $comment->update(['body' => request()->body], ['touch' => false]);
+
+        if ($comment->content->type == 'internal') {
+            return redirect()
+                ->route($comment->content->type.'.show', [
+                    $comment->content,
+                    '#comment-'.$comment->id,
+                ]);
+        }
+
+        return redirect()
+            ->route($comment->content->type.'.show', [
+                $comment->content->slug,
+                '#comment-'.$comment->id,
+            ]);
+    }
+
+    public function status($id, $status)
+    {
+        $comment = \App\Comment::findorFail($id);
+
+        if ($status == 0 || $status == 1) {
+            $comment->status = $status;
+            $comment->save(['touch' => false]);
+
+            backToAnchor('#comment-'.$comment->id)
+                ->with('info', trans("comment.action.status.$status.info", [
+                    'title' => $comment->title,
+                ]));
+        }
+
+        return back();
     }
 }

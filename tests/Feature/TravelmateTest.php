@@ -19,10 +19,9 @@ class TravelmateTest extends BrowserKitTestCase
         $start_at = Carbon::now()->addMonths(1)->startOfMonth()->toDateTimeString();
 
         $this->actingAs($regular_user_creating_travelmate)
-            //->visit('reisikaaslased')
-            //->click(trans('content.travelmate.create.title'))
-            //->seePageIs('travelmate/create')
-            ->visit('travelmate/create2')
+            ->visit('reisikaaslased')
+            ->click(trans('content.travelmate.create.title'))
+            ->seePageIs('travelmate/create')
             ->type('Hello travelmate title', 'title')
             ->type('Hello travelmate body', 'body')
             ->type($start_at, 'start_at')
@@ -44,10 +43,9 @@ class TravelmateTest extends BrowserKitTestCase
         $edited_start_at = Carbon::now()->addMonths(2)->startOfMonth()->toDateTimeString();
 
         $this->actingAs($regular_user_creating_travelmate)
-            //->visit("reisikaaslased/$content->slug")
-            //->click(trans('content.action.edit.title'))
-            //->seePageIs("travelmate/$content->id/edit")
-            ->visit("travelmate/$content->id/edit2")
+            ->visit("reisikaaslased/$content->slug")
+            ->click(trans('content.action.edit.title'))
+            ->seePageIs("travelmate/$content->id/edit")
             ->type('Hola travelmate titulo', 'title')
             ->type('Hola travelmate cuerpo', 'body')
             ->type('Hasta la eternidad', 'duration')
