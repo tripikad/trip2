@@ -9,7 +9,7 @@
         @if (isset($image))
             <a href="{{ $url }}"><img src="{!! $image !!}" class="user_image"></a>
         @else
-            <a href="{{ $url }}"><img src="{{ asset('mail/picture_none.png') }}" class="user_image"></a>
+            <a href="{{ $url }}"><img src="{{ asset('photos/picture_none.png') }}" class="user_image"></a>
         @endif
         </td>
         <td>
