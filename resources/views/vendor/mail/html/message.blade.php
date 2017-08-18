@@ -2,7 +2,7 @@
     {{-- Header --}}
     @slot('header')
         @component('mail::header', ['url' => config('app.url')])
-            <img src="{{ asset('mail/tripee_logo_dark.png') }}" width="200" height="96" class="img-header">
+            <img src="{{ asset('mail/tripee_logo_dark.png') }}" width="200" height="96" class="img-logo">
         @endcomponent
     @endslot
 

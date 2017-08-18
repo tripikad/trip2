@@ -286,6 +286,6 @@ img {
 }
 
 .img-logo {
-    height: 100px;
+    max-height: 96px;
     max-width: 100%;
 }
