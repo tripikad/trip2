@@ -2,8 +2,22 @@
 
 use App\Utils;
 use Carbon\Carbon;
+use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
+
+function mail_component($component, $data = [])
+{
+    $view = view();
+
+    $view->flushFinderCache();
+
+    $contents = $view->replaceNamespace(
+        'mail', resource_path('views/vendor/mail/html')
+    )->make($component, $data)->render();
+
+    return $contents;
+}
 
 function full_text_safe($string)
 {
@@ -38,7 +52,7 @@ function layout($layout)
 function format_body($body)
 {
     return (new Utils\BodyFormatter($body))
-        ->fixLinks()
+        //->fixLinks()
         ->calendar()
         ->youtube()
         ->vimeo()
@@ -51,7 +65,7 @@ function format_body($body)
 function format_description($body)
 {
     return (new Utils\BodyFormatter($body))
-        ->fixLinks()
+        //->fixLinks()
         ->markdown()
         ->externalLinks()
         ->images()
@@ -69,10 +83,10 @@ function format_date($date)
         return trans('utils.date.yesterday').' '.$date->format('H:i');
     }
     if ($date->year == Carbon::now()->year) {
-        return $date->format('j. M H:i');
+        return Date::parse($date)->format('j. M H:i');
     }
 
-    return $date->format('j. M Y H:i');
+    return Date::parse($date)->format('j. M Y H:i');
 }
 
 function format_smtp_header(array $data)

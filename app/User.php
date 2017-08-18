@@ -47,7 +47,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     /**
      * @var int in minutes
      */
-    public $update_active_at_interval = 5;
+    public $update_active_at_minutes = 5;
 
     public static function boot()
     {

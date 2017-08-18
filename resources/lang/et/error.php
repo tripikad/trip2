@@ -24,4 +24,6 @@ return [
 
      Sisse logimiseks või registreerimiseks vajuta menüüs "Minu Trip.ee"',
 
+    'max_limit' => 'Maksimaalsed valikud tehtud',
+
 ];

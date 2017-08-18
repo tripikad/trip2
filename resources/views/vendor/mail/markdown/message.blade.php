@@ -21,7 +21,7 @@
     {{-- Footer --}}
     @slot('footer')
         @component('mail::footer')
-            © {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+            {{ trans('site.footer.copyright', ['current_year' =>  \Carbon\Carbon::now()->year]) }}
         @endcomponent
     @endslot
 @endcomponent

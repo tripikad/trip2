@@ -20,7 +20,7 @@ class XssProtection
 
         $request->merge($input);
 
-        if ($request->has('body')) {
+        if ($request->has('body') && ! is_array($request->input('body'))) {
             if (! preg_match('#('.implode('|', config('site.allowAllTags')).')#', $request->path())) {
                 $request->merge(['body' => strip_tags($request->body, config('site.allowedtags'))]);
             } else {

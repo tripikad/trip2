@@ -12,7 +12,10 @@
             :taggable="true"
             @input="onInput"
             :value="localValue"
+            :max="max"
+            :close-on-select="close_on_select"
         >
+            <span slot="maxElements">{{ max_limit_text }}</span>
         </component>
 
         <input
@@ -41,7 +44,10 @@
             options: { default: () => [] },
             placeholder: { default: '' },
             helper: { default: '' },
-            value: { default: () => [] }
+            value: { default: () => [] },
+            max: { default: false },
+            close_on_select: { default: true },
+            max_limit_text: { default: 'Maksimaalsed valikud tehtud' }
         },
 
         data() {
