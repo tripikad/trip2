@@ -2,20 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
 use App\Poll;
 use App\Destination;
 use Illuminate\Http\Request;
 
 class PollController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return layout('2col')->with('background', component('BackgroundMap'))->render();
+        return layout('2col')
+            ->with('background', component('BackgroundMap'))
+            ->with('color', 'gray')
+
+            ->with('header', region('Header', collect()
+                ->push(component('Title')
+                    ->is('white')
+                    ->with('title', trans('content.poll.index.title'))
+                    ->with('route', route('poll.index'))
+                )
+            ))
+            ->with('sidebar', collect()
+                ->push(component('Block')
+                    ->is('gray')
+                    ->with('content', collect()
+                        ->push(component('Title')
+                            ->is('smaller')
+                            ->is('red')
+                            ->with('title', trans('content.edit.notes.heading'))
+                            ->with('route', route('forum.index'))
+                        )
+                        ->push(component('Body')
+                            ->with('body', trans('content.edit.notes.body'))
+                        )
+                ))
+            )
+            ->with('footer', region('Footer'))
+            ->render();
     }
 
     public function create()
@@ -39,6 +62,7 @@ class PollController extends Controller
                 )
                 ->push(component('Form')
                     ->with('route', route('poll.store'))
+                    ->with('files', true)
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
                             ->with('title', trans('content.poll.edit.name'))
@@ -65,7 +89,7 @@ class PollController extends Controller
                             ->with('title', trans('content.poll.edit.add.field.title'))
                         )
                         ->push(component('PollAddFields')
-                            ->with('value', old('poll_type', 'quiz'))
+                            ->with('value', old('poll_type', 'poll'))
                             ->with('question_trans', trans('content.poll.edit.question'))
                             ->with('option_trans', trans('content.poll.edit.option'))
                             ->with('poll_trans', trans('content.poll.edit.poll'))
@@ -77,6 +101,10 @@ class PollController extends Controller
                             ->with('answer_options_trans', trans('content.poll.edit.option.answer.options'))
                             ->with('add_option_trans', trans('content.poll.edit.option.add'))
                         )
+                        ->push(component('FormCheckbox')
+                            ->with('title', trans('content.poll.create.active'))
+                            ->with('name', 'poll_active')
+                        )
                         ->push(component('FormButton')
                             ->is('large')
                             ->with('title', trans('content.poll.create.title'))
@@ -84,21 +112,6 @@ class PollController extends Controller
 
                     )
                 )
-            )
-            ->with('sidebar', collect()
-                ->push(component('Block')
-                    ->is('gray')
-                    ->with('content', collect()
-                        ->push(component('Title')
-                            ->is('smaller')
-                            ->is('red')
-                            ->with('title', trans('content.edit.notes.heading'))
-                            ->with('route', route('forum.index'))
-                        )
-                        ->push(component('Body')
-                            ->with('body', trans('content.edit.notes.body'))
-                        )
-                ))
             )
             ->with('footer', region('Footer'))
             ->render();
@@ -112,7 +125,7 @@ class PollController extends Controller
         $content = $logged_user->contents()->create([
             'title' => $request->poll_name,
             'type' => $poll_type,
-            'status' => 0,
+            'status' => $request->has('poll_active') ? 1 : 0,
         ]);
 
         $content->destinations()->attach(request()->destinations);
@@ -158,8 +171,14 @@ class PollController extends Controller
         $options = [
             'question' => $request->poll_question,
             'options' => $this->parseOptions($request, 'poll_fields'),
-            'image_id' => 0,
         ];
+
+        if($request->hasFile('poll_photo'))
+        {
+            $filename = Image::storeImageFile($request->file('poll_photo'));
+            $image = Image::create(['filename' => $filename]);
+            $options['image_id'] = $image->id;
+        }
 
         $poll->poll_fields()->create([
             'type' => $type,
@@ -183,8 +202,15 @@ class PollController extends Controller
             $options = [
                 'question' => $request->$question_field,
                 'answer' => $request->$answer_field,
-                'image_id' => 0,
             ];
+
+            $photo_field = $type_field . '_photo';
+            if($request->hasFile($photo_field))
+            {
+                $filename = Image::storeImageFile($request->file($photo_field));
+                $image = Image::create(['filename' => $filename]);
+                $options['image_id'] = $image->id;
+            }
 
             $type = $request->$type_field;
             if ($type == 'options') {

@@ -76,8 +76,8 @@
                 <label class="FormTextfield__label">{{ picture_trans }}</label>
 
                 <component
-                    is="ImageUpload"
-                    name="poll_photo"
+                    is="FormUpload"
+                    :name="field.id + '_photo'"
                 >
                 </component>
 
@@ -125,7 +125,7 @@
     import FormTextfield from '../FormTextfield/FormTextfield.vue'
     import PollOption from '../PollOption/PollOption.vue'
     import Title from '../Title/Title.vue'
-    import ImageUpload from '../ImageUpload/ImageUpload.vue'
+    import FormUpload from '../FormUpload/FormUpload.vue'
     import Icon from '../Icon/Icon.vue'
     import FormHidden from '../FormHidden/FormHidden.vue'
 
@@ -147,7 +147,7 @@
             PollOption,
             FormTextfield,
             Title,
-            ImageUpload,
+            FormUpload,
             Icon,
             FormHidden,
             'options' : FormTextfield,

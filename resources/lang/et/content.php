@@ -420,6 +420,7 @@ return [
     'poll.edit.option.select.multiple' => 'Vali mitu',
     'poll.edit.option.answer.options' => 'Vastuse valikud',
     'poll.edit.option.add' => 'Lisa valik',
+    'poll.create.active' => 'Küsitlus aktiivne',
 
     // Destination
 

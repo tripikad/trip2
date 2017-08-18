@@ -44,7 +44,7 @@
             <label class="FormTextfield__label">{{ picture_trans }}</label>
 
             <component
-                is="ImageUpload"
+                is="FormUpload"
                 name="poll_photo"
             >
             </component>
@@ -58,7 +58,7 @@
 <script>
 
     import FormTextfield from '../FormTextfield/FormTextfield.vue'
-    import ImageUpload from '../ImageUpload/ImageUpload.vue'
+    import FormUpload from '../FormUpload/FormUpload.vue'
     import PollOption from '../PollOption/PollOption.vue'
     import Title from '../Title/Title.vue'
 
@@ -67,7 +67,7 @@
         
         components : {
             FormTextfield,
-            ImageUpload,
+            FormUpload,
             PollOption,
             Title
         },
