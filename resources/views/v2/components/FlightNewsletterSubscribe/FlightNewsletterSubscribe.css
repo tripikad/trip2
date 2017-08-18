@@ -1,0 +1,11 @@
+@import "variables";
+
+.FlightNewsletterSubscribe {
+    background-color: $gray-lighter;
+    padding: $spacer;
+    width: 100%;
+}
+
+.FlightNewsletterSubscribe__info {
+    font-size: $font-size-xs;
+}

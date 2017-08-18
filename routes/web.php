@@ -154,6 +154,38 @@ Route::post('static/{id}/update', 'V2StaticController@update')
     ->name('static.update')
     ->middleware('role:superuser');
 
+// Newsletter
+
+Route::get('newsletter/list', 'V2NewsletterController@index')
+    ->name('newsletter.index')
+    ->middleware('role:superuser');
+
+Route::get('newsletter/view/{id}', 'V2NewsletterController@view')
+    ->name('newsletter.view')
+    ->middleware('role:superuser');
+
+Route::get('newsletter/edit/{id}', 'V2NewsletterController@edit')
+    ->name('newsletter.edit')
+    ->middleware('role:superuser');
+
+Route::post('newsletter/store/{id}', 'V2NewsletterController@store')
+    ->name('newsletter.store')
+    ->middleware('role:superuser');
+
+Route::get('newsletter/preview/{id}', 'V2NewsletterController@preview')
+    ->name('newsletter.preview')
+    ->middleware('role:superuser');
+
+Route::get('newsletter/preview_sent/{id}', 'V2NewsletterController@preview_sent')
+    ->name('newsletter.preview_sent')
+    ->middleware('role:superuser');
+
+Route::post('newsletter/subscribe/{id}', 'V2NewsletterController@subscribe')
+    ->name('newsletter.subscribe');
+
+Route::get('newsletter/unsubscribe/{hash}-{id}', 'V2NewsletterController@unsubscribe')
+    ->name('newsletter.unsubscribe');
+
 // Blog
 
 Route::get('reisikirjad', 'V2BlogController@index')

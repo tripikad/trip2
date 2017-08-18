@@ -3,6 +3,7 @@
 namespace App;
 
 use Exception;
+use Carbon\Carbon;
 
 class V2ContentVars
 {
@@ -64,6 +65,24 @@ class V2ContentVars
     public function commentCount()
     {
         return count($this->content->comments);
+    }
+
+    public function update_content_read()
+    {
+        $user = auth()->user();
+
+        if ($user) {
+            $unreadContent = UnreadContent::where('content_id', $this->content->id)->where('user_id', $user->id)->first();
+
+            if (! $unreadContent) {
+                $unreadContent = new UnreadContent;
+                $unreadContent->content_id = $this->content->id;
+                $unreadContent->user_id = $user->id;
+            }
+
+            $unreadContent->read_at = Carbon::now()->toDateTimeString();
+            $unreadContent->save();
+        }
     }
 
     public function isNew()

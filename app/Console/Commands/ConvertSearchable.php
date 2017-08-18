@@ -16,6 +16,8 @@ class ConvertSearchable extends Command
 
     public function handle()
     {
+        DB::disableQueryLog();
+
         if ($this->option('optimize')) {
             $this->line(' - Optimizing table');
             app('db')->select('OPTIMIZE TABLE `searchables`');
