@@ -18,8 +18,8 @@ class FlightTest extends BrowserKitTestCase
 
         $this->actingAs($admin_user_creating_flight)
             ->visit('odavad-lennupiletid')
-            ->click(trans('content.flight.create.title').' (beta)') // FIXME
-            ->seePageIs('flight/create2') // FIXME
+            ->click(trans('content.flight.create.title'))
+            ->seePageIs('flight/create')
             ->type('Hello flight title', 'title')
             ->type('Hello flight body', 'body')
             ->press(trans('content.create.submit.title'))
@@ -61,7 +61,7 @@ class FlightTest extends BrowserKitTestCase
 
         $this->actingAs($admin_user_creating_flight)
                 ->visit('odavad-lennupiletid')
-                ->click(trans('content.flight.create.title').' (beta)') // FIXME
+                ->click(trans('content.flight.create.title'))
                 ->type('Hello flight title', 'title')
                 ->type('Hello flight body', 'body')
                 ->press(trans('content.create.submit.title'));
@@ -83,7 +83,7 @@ class FlightTest extends BrowserKitTestCase
 
         $this->actingAs($admin_user_creating_flight)
                 ->visit('odavad-lennupiletid')
-                ->click(trans('content.flight.create.title').' (beta)') // FIXME
+                ->click(trans('content.flight.create.title'))
                 ->type('Hello flight title', 'title')
                 ->type('Hello flight body', 'body')
                 ->press(trans('content.create.submit.title'));

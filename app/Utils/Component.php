@@ -87,7 +87,7 @@ class Component
             return '';
         }
 
-        $name = "v2.components.$this->component.$this->component";
+        $name = "components.$this->component.$this->component";
         $file_name = $this->exists($name);
         $path_info = pathinfo($file_name);
 

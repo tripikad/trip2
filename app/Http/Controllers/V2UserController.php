@@ -126,7 +126,7 @@ class V2UserController extends Controller
             ->render();
     }
 
-    public function edit2($id)
+    public function edit($id)
     {
         $user = User::findOrFail($id);
 
@@ -145,7 +145,7 @@ class V2UserController extends Controller
 
             ->with('content', collect()
                 ->push(component('Form')
-                    ->with('route', route('user.update2', [$user]))
+                    ->with('route', route('user.update', [$user]))
                     ->with('method', 'PUT')
                     ->with('files', true)
                     ->with('fields', collect()
@@ -263,7 +263,7 @@ class V2UserController extends Controller
             ->render();
     }
 
-    public function update2($id)
+    public function update($id)
     {
         $user = User::findorFail($id);
         $maxfilesize = config('site.maxfilesize') * 1024;
@@ -315,7 +315,7 @@ class V2UserController extends Controller
             ->with('info', trans('user.update.info'));
     }
 
-    public function destinationsEdit2($id)
+    public function destinationsEdit($id)
     {
         $user = User::findorFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
@@ -348,7 +348,7 @@ class V2UserController extends Controller
             )
             ->with('content', collect()
                 ->push(component('Form')
-                    ->with('route', route('user.destinations.store2', [$user]))
+                    ->with('route', route('user.destinations.store', [$user]))
                     ->with('method', 'PUT')
                     ->with('fields', collect()
                         ->push(component('Title')
@@ -383,7 +383,7 @@ class V2UserController extends Controller
             ->render();
     }
 
-    public function destinationsStore2($id)
+    public function destinationsStore($id)
     {
         $rules = [
             'havebeen.*' => 'exists:destinations,id',

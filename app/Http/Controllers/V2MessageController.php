@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Log;
+use Mail;
 use App\User;
 use App\Message;
+use App\Mail\NewMessage;
+use Illuminate\Http\Request;
 
 class V2MessageController extends Controller
 {
@@ -79,5 +83,26 @@ class V2MessageController extends Controller
             ->with('footer', region('Footer'))
 
             ->render();
+    }
+
+    public function store(Request $request, $user_id_from, $user_id_to)
+    {
+        $this->validate($request, ['body' => 'required']);
+
+        $fields = ['user_id_from' => $user_id_from, 'user_id_to' => $user_id_to];
+
+        $message = Message::create(array_merge($request->all(), $fields));
+
+        $user_to = User::find($user_id_to);
+
+        if ($user_to->notify_message) {
+            $user_from = User::find($user_id_from);
+
+            Mail::to($user_to->email)->queue(new NewMessage($user_from, $user_to, $message));
+        }
+
+        Log::info('A private message has been sent');
+
+        return backToAnchor('#message-'.$message->id);
     }
 }

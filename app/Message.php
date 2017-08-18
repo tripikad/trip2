@@ -35,21 +35,4 @@ class Message extends Model
     {
         return new V2MessageVars($this);
     }
-
-    // V1
-
-    public function getTitleAttribute()
-    {
-        return str_limit($this->attributes['body'], 70);
-    }
-
-    public function getBodyAttribute($value)
-    {
-        return $value;
-    }
-
-    public function getBodyFilteredAttribute()
-    {
-        return Main::getBodyFilteredAttribute($this);
-    }
 }

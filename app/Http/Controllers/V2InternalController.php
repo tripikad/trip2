@@ -226,11 +226,10 @@ class V2InternalController extends Controller
 
         $this->validate(request(), $rules);
 
-        $internal->fill([
+        $internal->update([
             'title' => request()->title,
             'body' => request()->body,
-        ])
-        ->save();
+        ]);
 
         return redirect()
             ->route('internal.show', [$internal])
