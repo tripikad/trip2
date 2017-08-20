@@ -19,26 +19,16 @@
 <script>
 
     import { scaleLinear } from 'd3-scale'
-
+ 
     export default {
 
         props: {
             isclasses: { default: '' },
-            width: { default: 600 }
-            //rows: { default: [] }
+            width: { default: 600 },
+            rows: { default: [] }
         },
 
         data: () => ({
-            rows: [
-                {
-                    title: 'First',
-                    value: 23
-                },
-                {
-                    title: 'Second',
-                    value: 11
-                }
-            ]
         }),
 
         methods: {

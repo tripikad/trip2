@@ -15,7 +15,7 @@ import VueCookie from 'vue-cookie'
 
 import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
-import BarChart from './components/BarChart/BarChart.vue'
+import Barchart from './components/Barchart/Barchart.vue'
 import Editor from './components/Editor/Editor.vue'
 import EditorSmall from './components/EditorSmall/EditorSmall.vue'
 import Dotmap from './components/Dotmap/Dotmap.vue'
@@ -35,6 +35,7 @@ import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import ImagePicker from './components/ImagePicker/ImagePicker.vue'
 import ImageUpload from './components/ImageUpload/ImageUpload.vue'
+import Linechart from './components/Linechart/Linechart.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 import NavbarSearch from './components/NavbarSearch/NavbarSearch.vue'
@@ -61,7 +62,7 @@ new Vue({
     components: {
         Alert,
         Arc,
-        BarChart,
+        Barchart,
         Editor,
         EditorSmall,
         Dotmap,
@@ -79,6 +80,7 @@ new Vue({
         IconLoader,
         ImagePicker,
         ImageUpload,
+        Linechart,
         NavbarDesktop,
         NavbarMobile,
         NavbarSearch,

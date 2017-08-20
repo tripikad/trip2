@@ -16,21 +16,38 @@ class V2ExperimentsController extends Controller
             ->with('content', collect()
 
                 ->push(component('Title')
+                    ->with('title', 'Linechart')
+                )
+
+                ->push(component('Linechart')
+                    ->with('rows', collect()
+                        ->push(['title' => 'One', 'value' => 12])
+                        ->push(['title' => 'Two', 'value' => 34])
+                        ->push(['title' => 'Three', 'value' => 0])
+                        ->push(['title' => 'Four', 'value' => 8])
+                    )
+                )
+
+                ->push(component('Title')
                     ->with('title', 'Barchart')
                 )
 
-                ->push(component('BarChart')
-                    ->with('rows', [])
+                ->push(component('Barchart')
+                    ->with('rows', collect()
+                        ->push(['title' => 'One', 'value' => 12])
+                        ->push(['title' => 'Two', 'value' => 34])
+                    )
                 )
 
                 ->push('&nbsp;')
-                //->push(component('Title')
-                //    ->with('title', 'Small editor')
-                //)
 
-                //->push(component('EditorSmall')
-                //    ->with('value', 'Testing it out')
-                //)
+                ->push(component('Title')
+                    ->with('title', 'Small editor')
+                )
+
+                ->push(component('EditorSmall')
+                    ->with('value', 'Testing it out')
+                )
 
                 ->push(component('Title')
                     ->with('title', 'Misc')
