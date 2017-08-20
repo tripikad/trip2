@@ -16,12 +16,21 @@ class V2ExperimentsController extends Controller
             ->with('content', collect()
 
                 ->push(component('Title')
-                    ->with('title', 'Small editor')
+                    ->with('title', 'Barchart')
                 )
 
-                ->push(component('EditorSmall')
-                    ->with('value', 'Testing it out')
+                ->push(component('BarChart')
+                    ->with('rows', [])
                 )
+
+                ->push('&nbsp;')
+                //->push(component('Title')
+                //    ->with('title', 'Small editor')
+                //)
+
+                //->push(component('EditorSmall')
+                //    ->with('value', 'Testing it out')
+                //)
 
                 ->push(component('Title')
                     ->with('title', 'Misc')

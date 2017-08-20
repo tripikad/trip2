@@ -1,0 +1,36 @@
+@import "variables";
+
+.Barchart {
+
+}
+
+    .Barchart__row {
+        margin-bottom: $margin-sm;
+        display: flex;
+    }
+
+    .Barchart__title {
+        width: 20%;
+        text-align: right;
+        margin-right: $margin-sm;
+        font: $font-text-md;
+        color: $gray;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .Barchart__row:last-child {
+        margin-bottom: 0;
+    }
+
+    .Barchart__bar {
+        background: $blue;
+        padding-left: $padding-sm;
+        height: $height-md;
+        display: flex;
+        align-items: center;
+        font: $font-heading-sm;
+        color: $white;
+        border-radius: $border-radius-md;
+    }

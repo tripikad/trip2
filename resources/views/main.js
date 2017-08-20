@@ -15,6 +15,7 @@ import VueCookie from 'vue-cookie'
 
 import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
+import BarChart from './components/BarChart/BarChart.vue'
 import Editor from './components/Editor/Editor.vue'
 import EditorSmall from './components/EditorSmall/EditorSmall.vue'
 import Dotmap from './components/Dotmap/Dotmap.vue'
@@ -30,7 +31,6 @@ import FrontpageSearchRow from './components/FrontpageSearchRow/FrontpageSearchR
 import FrontpageSearchItem from './components/FrontpageSearchItem/FrontpageSearchItem.vue'
 import TravelmateStart from './components/TravelmateStart/TravelmateStart.vue'
 import NewsletterComposer from './components/NewsletterComposer/NewsletterComposer.vue'
-//import FrontpageSearch from './components/FrontpageSearch/FrontpageSearch.vue'
 import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import ImagePicker from './components/ImagePicker/ImagePicker.vue'
@@ -61,6 +61,7 @@ new Vue({
     components: {
         Alert,
         Arc,
+        BarChart,
         Editor,
         EditorSmall,
         Dotmap,
