@@ -10,7 +10,7 @@
                 is="FormRadio"
                 :options="options"
                 :value="options[0].id"
-                :name="name + '_select_type'"
+                :name="name + '[select_type]'"
             >
             </component>
 
@@ -25,13 +25,14 @@
                 <input
                     class="FormTextfield__input"
                     :id="opt.id"
-                    :name="opt.id"
+                    :name="name + '[]'"
                     type="text"
                     :placeholder="option_trans + ' ' + (index + 1)"
                     v-model="opt.value"
+                    v-on:input="$emit('input', answer_options)"
                 >
 
-                <a v-if="answer_options.length > 2" v-on:click="deleteField(opt.id)" class="PollFields__delete">
+                <a v-if="answer_options.length > 2" v-on:click="deleteField(index)" class="PollFields__delete">
 
                     <component 
                         is="Icon"
@@ -46,13 +47,6 @@
             </div>
 
         </div>
-
-        <component
-            is="FormHidden"
-            :name="name + '_cnt'"
-            :value="cnt"
-        >
-        </component>
 
         <div class="margin-bottom-md">
 
@@ -76,7 +70,6 @@
     import Button from '../Button/Button.vue'
     import Icon from '../Icon/Icon.vue'
     import FormRadio from '../FormRadio/FormRadio.vue'
-    import FormHidden from '../FormHidden/FormHidden.vue'
 
 	export default {
 
@@ -87,20 +80,19 @@
             select_one_trans : {default: 'Select one'},
             select_multiple_trans : {default: 'Select multiple'},
             answer_options_trans : {default: 'Answer options'},
-            add_option_trans : {default: 'Add option'}
+            add_option_trans : {default: 'Add option'},
+            answer_options_json : {default : '[]'}
         },
         
         components : {
             Button,
             Icon,
-            FormRadio,
-            FormHidden
+            FormRadio
         },
         
         data : function() {
             return {
-                'answer_options': [],
-                'cnt' : 0,
+                answer_options : [],
                 options: [
                     {'id' : 'select_one', 'name': this.select_one_trans},
                     {'id' : 'select_multiple', 'name': this.select_multiple_trans}
@@ -113,17 +105,17 @@
                 this.cnt++;
                 this.answer_options.push(
                     {
-                        'value' : '',
-                        'id' : this.name + '_' + this.cnt
+                        'value' : ''
                     }
                 );
+                this.$emit('input', this.answer_options)
             },
             
             deleteField: function(id, event){
                 var new_arr = [];
                 for(var i = 0; i < this.answer_options.length; i++){
                     var elem = this.answer_options[i];
-                    if(elem.id != id) {
+                    if(i != id) {
                         new_arr.push(elem);
                     }
                 }
@@ -135,6 +127,12 @@
         mounted() {
             this.addField();
             this.addField();
+        },
+
+        watch : {
+            answer_options_json : function(new_answer_options_json){
+                this.answer_options = JSON.parse(this.answer_options_json);
+            }
         }
     }
     

@@ -67,23 +67,22 @@ class PollController extends Controller
                         ->push(component('FormTextfield')
                             ->with('title', trans('content.poll.edit.name'))
                             ->with('name', 'poll_name')
-                            ->with('value', old('poll_name', 'test_name'))
+                            ->with('value', old('poll_name'))
                         )
                         ->push(component('FormTextfield')
                             ->with('title', trans('content.poll.edit.field.start.title'))
                             ->with('name', 'start')
-                            ->with('value', old('start', '2017-01-07'))
+                            ->with('value', old('start'))
                         )
                         ->push(component('FormTextfield')
                             ->with('title', trans('content.poll.edit.field.end.title'))
                             ->with('name', 'end')
-                            ->with('value', old('end', '2017-01-08'))
+                            ->with('value', old('end'))
                         )
                         ->push(component('FormSelect')
                             ->with('name', 'destinations')
                             ->with('options', $destinations)
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
-                            ->with('value', 1033)
                         )
                         ->push(component('Title')
                             ->with('title', trans('content.poll.edit.add.field.title'))
@@ -119,6 +118,38 @@ class PollController extends Controller
 
     public function store(Request $request)
     {
+        $rules = [
+            'poll_name' => 'required',
+            'start' => ['required', 'regex:/^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])$/'],
+            'end' => ['required', 'regex:/^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])$/'],
+            'destinations' => 'required',
+            'poll_type' => 'in:poll,quiz',
+        ];
+
+        if($request->poll_type == 'poll'){
+            $rules['poll_question'] = 'required';
+            $rules['poll_fields.*'] = 'required';
+            $rules['poll_fields'] = 'min:2';
+            $rules['poll_fields.select_type'] = 'in:select_multiple,select_one';
+        } else {
+            $rules['quiz_question'] = 'required|min:1';
+            $rules['quiz_question.*.type'] = 'required|in:options,textareafield';
+            $rules['quiz_question.*.question'] = 'required';
+            $rules['quiz_question.*.answer'] = 'required';
+
+            if($request->has('quiz_question')) {
+                foreach($request->quiz_question as $index => $arr){
+                    if($arr['type'] == 'options'){
+                        $rules['quiz_question.' . $index . '.options.*'] = 'required';
+                        $rules['quiz_question.' . $index . '.options'] = 'required|min:2';
+                        $rules['quiz_question.' . $index . '.select_type'] = 'in:select_multiple,select_one';
+                    }
+                }
+            }
+        }
+
+        $this->validate(request(), $rules);
+
         $logged_user = $request->user();
         $poll_type = $request->poll_type;
 
@@ -149,32 +180,18 @@ class PollController extends Controller
             ->route('poll.index');
     }
 
-    protected function parseOptions(Request $request, $prefix)
-    {
-        $options = [];
-        $cnt = $prefix.'_cnt';
-
-        for ($i = 1; $i <= $request->$cnt; $i++) {
-            $opt = $prefix.'_'.$i;
-            if (isset($request->$opt) && ! empty($request->$opt)) {
-                $options[] = $request->$opt;
-            }
-        }
-
-        return $options;
-    }
-
     protected function addPollFields(Request $request, Poll $poll)
     {
-        $type = $request->poll_fields_select_type == 'select_one' ? 'radio' : 'checkbox';
+        $options = $request->input('poll_fields');
+        $type = $options['select_type'] == 'select_one' ? 'radio' : 'checkbox';
+        unset($options['select_type']);
 
         $options = [
             'question' => $request->poll_question,
-            'options' => $this->parseOptions($request, 'poll_fields'),
+            'options' => $options,
         ];
 
-        if($request->hasFile('poll_photo'))
-        {
+        if($request->hasFile('poll_photo')) {
             $filename = Image::storeImageFile($request->file('poll_photo'));
             $image = Image::create(['filename' => $filename]);
             $options['image_id'] = $image->id;
@@ -190,34 +207,26 @@ class PollController extends Controller
     {
         $fields = [];
 
-        for ($i = 1; $i <= $request->quiz_question_cnt; $i++) {
-            $type_field = 'quiz_question_'.$i;
-            $answer_field = $type_field.'_answer';
-            $question_field = $type_field.'_question';
-
-            if (! isset($request->$type_field) || empty($request->$question_field) || empty($request->$answer_field)) {
-                continue;
-            }
-
+        foreach ($request->quiz_question as $index => $question) {
             $options = [
-                'question' => $request->$question_field,
-                'answer' => $request->$answer_field,
+                'question' => $question['question'],
+                'answer' => $question['answer'],
             ];
 
-            $photo_field = $type_field . '_photo';
-            if($request->hasFile($photo_field))
-            {
+            $photo_field = 'quiz_photo_' . $index;
+            if($request->hasFile($photo_field)) {
                 $filename = Image::storeImageFile($request->file($photo_field));
                 $image = Image::create(['filename' => $filename]);
                 $options['image_id'] = $image->id;
             }
 
-            $type = $request->$type_field;
+            $type = $question['type'];
             if ($type == 'options') {
-                $select_type = $type_field.'_select_type';
-                $type = $request->$select_type == 'select_one' ? 'radio' : 'checkbox';
+                $opts = $question['options'];
+                $type = $opts['select_type'] == 'select_one' ? 'radio' : 'checkbox';
+                unset($opts['select_type']);
 
-                $options['options'] = $this->parseOptions($request, $type_field);
+                $options['options'] = $opts;
             } else {
                 $type = 'text';
             }

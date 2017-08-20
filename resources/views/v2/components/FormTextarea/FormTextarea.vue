@@ -12,6 +12,7 @@
             :cols="cols"
             :placeholder="placeholder"
             :disabled="disabled"
+            v-on:input="$emit('input', $event.target.value)"
         >{{ value }}</textarea>
 
     </div>

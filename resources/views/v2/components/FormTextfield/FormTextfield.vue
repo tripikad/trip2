@@ -18,6 +18,7 @@
             :value="value"
             :placeholder="placeholder"
             :disabled="disabled"
+            v-on:input="$emit('input', $event.target.value)"
         >
 
     </div>

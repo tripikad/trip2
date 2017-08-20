@@ -6,7 +6,7 @@
 
             <component
                 is="FormHidden"
-                :name="field.id"
+                :name="'quiz_question[' + index + '][type]'"
                 :value="field.type"
             >
             </component>
@@ -20,7 +20,7 @@
                 >
                 </component>
 
-                <a v-on:click="deleteField(field.id)" class="QuizFields__delete">
+                <a v-on:click="deleteField(index)" class="QuizFields__delete">
 
                     <component
                         is="Icon"
@@ -38,7 +38,8 @@
 
                 <component
                     :is="field.type"
-                    :name="field.id + '_question'"
+                    :name="'quiz_question[' + index + '][question]'"
+                    v-model="field.question"
                 >
                 </component>
 
@@ -47,7 +48,7 @@
             <component
                 v-if="field.type == 'options'"
                 is="PollOption"
-                :name="field.id"
+                :name="'quiz_question[' + index + '][options]'"
                 :question_trans="question_trans"
                 :option_trans="option_trans"
                 :picture_trans="picture_trans"
@@ -56,6 +57,8 @@
                 :select_multiple_trans="select_multiple_trans"
                 :answer_options_trans="answer_options_trans"
                 :add_option_trans="add_option_trans"
+                :answer_options_json="field.poll_opt_val"
+                v-on:input="field.poll_opt_val = JSON.stringify($event)"
             >
             </component>
 
@@ -63,7 +66,7 @@
 
                 <component
                     is="FormTextfield"
-                    :name="field.id + '_answer'"
+                    :name="'quiz_question[' + index + '][answer]'"
                     :title="'Vastus ' + (index + 1)"
                     v-model="field.answer"
                 >
@@ -77,7 +80,7 @@
 
                 <component
                     is="FormUpload"
-                    :name="field.id + '_photo'"
+                    :name="'quiz_photo_' + index"
                 >
                 </component>
 
@@ -85,13 +88,6 @@
 
             <br>
         </div>
-
-        <component
-            is="FormHidden"
-            name="quiz_question_cnt"
-            :value="cnt"
-        >
-        </component>
 
         <div class="margin-bottom-md">
 
@@ -156,7 +152,6 @@
 
         data : function() {
             return {
-                cnt : 0,
                 fields : []
             };
         },
@@ -166,8 +161,7 @@
                 this.cnt++;
                 this.fields.push(
                     {
-                        'type' : type,
-                        'id' : 'quiz_question_' + this.cnt
+                        'type' : type
                     }
                 );
             },
@@ -176,7 +170,7 @@
                 var new_arr = [];
                 for(var i = 0; i < this.fields.length; i++){
                     var elem = this.fields[i];
-                    if(elem.id != id) {
+                    if(i != id) {
                         new_arr.push(elem);
                     }
                 }
