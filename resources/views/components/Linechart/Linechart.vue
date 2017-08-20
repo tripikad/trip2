@@ -8,7 +8,7 @@
                 fill="none"
                 stroke-width="2"
                 stroke="hsl(205, 82%, 57%)"
-                :d="line(indexedRows)"
+                :d="line(indexedItems)"
             />
             <line
                 :x1="xScale(0)"
@@ -20,7 +20,7 @@
             <line
                 :x1="xScale(0)"
                 :y1="yScale(100)"
-                :x2="xScale(rows.length - 1)"
+                :x2="xScale(items.length - 1)"
                 :y2="yScale(100)"
                 stroke="hsl(204, 6%, 55%)"
             />
@@ -40,17 +40,19 @@
         props: {
             isclasses: { default: '' },
             width: { default: 600 },
-            rows: { default: [] }
+            items: { default: [] }
         },
+
+        data: () => ({ padding: 5 }),
 
         computed: {
             height() {
                 return this.width / 4
             },
-            indexedRows() {
-                return this.rows.map((row, index) => {
-                    row.index = index
-                    return row
+            indexedItems() {
+                return this.items.map((item, index) => {
+                    item.index = index
+                    return item
                 })
             }
         },
@@ -58,21 +60,21 @@
         methods: {
             xScale(index) {
                 return scaleLinear()
-                    .domain([0, this.rows.length - 1])
-                    .range([0, this.width])
+                    .domain([0, this.items.length - 1])
+                    .range([this.padding, this.width - this.padding])
                     (index)
             },
             yScale(value) {
                 return scaleLinear()
                     .domain([0, 100])
-                    .range([0, this.height])
+                    .range([this.padding, this.height - this.padding])
                     (value)
             },
-            line(rows) {
+            line(items) {
                 return line()
                     .x(d => this.xScale(d.index))
                     .y(d => this.yScale(d.value))
-                    (rows)
+                    (items)
             },
         }
     }

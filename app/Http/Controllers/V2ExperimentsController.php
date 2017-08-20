@@ -20,7 +20,7 @@ class V2ExperimentsController extends Controller
                 )
 
                 ->push(component('Linechart')
-                    ->with('rows', collect()
+                    ->with('items', collect()
                         ->push(['title' => 'One', 'value' => 12])
                         ->push(['title' => 'Two', 'value' => 34])
                         ->push(['title' => 'Three', 'value' => 0])
@@ -33,7 +33,7 @@ class V2ExperimentsController extends Controller
                 )
 
                 ->push(component('Barchart')
-                    ->with('rows', collect()
+                    ->with('items', collect()
                         ->push(['title' => 'One', 'value' => 12])
                         ->push(['title' => 'Two', 'value' => 34])
                     )

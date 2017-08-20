@@ -1,10 +1,6 @@
 @import "variables";
 
-.Barchart {
-
-}
-
-    .Barchart__row {
+    .Barchart__item {
         margin-bottom: $margin-sm;
         display: flex;
     }

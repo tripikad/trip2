@@ -2,12 +2,12 @@
 
     <div class="Barchart" :class="isclasses">
 
-        <div class="Barchart__row" v-for="row in rows">
+        <div class="Barchart__item" v-for="item in items">
 
-            <div class="Barchart__title">{{ row.title }}</div>
+            <div class="Barchart__title">{{ item.title }}</div>
             
-            <div class="Barchart__bar" :style="{width: xScale(row.value) + 'px'}">
-                {{ row.value }} %
+            <div class="Barchart__bar" :style="{width: xScale(item.value) + 'px'}">
+                {{ item.value }} %
             </div>
 
         </div>
@@ -25,11 +25,8 @@
         props: {
             isclasses: { default: '' },
             width: { default: 600 },
-            rows: { default: [] }
+            items: { default: [] }
         },
-
-        data: () => ({
-        }),
 
         methods: {
             xScale(value) {
