@@ -16,7 +16,7 @@ class CreatePollFieldsTable extends Migration
         Schema::create('poll_fields', function (Blueprint $table) {
             $table->increments('field_id');
             $table->unsignedInteger('poll_id');
-            $table->foreign('poll_id')->references('id')->on('poll');
+            $table->foreign('poll_id')->references('id')->on('poll')->onDelete('cascade');
             $table->string('type');
             $table->json('options');
         });
