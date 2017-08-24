@@ -397,19 +397,12 @@ return [
 
     // Poll
     'poll.edit.field.destinations.title' => 'Vali sihtkohad',
-
     'poll.index.title' => 'Küsitlused',
-
     'poll.edit.field.start.title' => 'Alguse aeg',
-
     'poll.edit.field.end.title' => 'Lõppemise aeg',
-
     'poll.create.title' => 'Lisa küsitlus',
-
     'poll.edit.add.field.title' => 'Lisa väljad',
-
     'poll.edit.name' => 'Küsitluse nimi',
-
     'poll.edit.question' => 'Küsimus',
     'poll.edit.option' => 'Valik',
     'poll.edit.poll' => 'Küsitlus',
@@ -421,6 +414,13 @@ return [
     'poll.edit.option.answer.options' => 'Vastuse valikud',
     'poll.edit.option.add' => 'Lisa valik',
     'poll.create.active' => 'Küsitlus aktiivne',
+    'poll.table.name' => 'Nimetus',
+    'poll.table.start' => 'Algus',
+    'poll.table.end' => 'Lõpp',
+    'poll.table.active' => 'Aktiivne',
+    'poll.table.active.not' => 'Mitte aktiivne',
+    'poll.table.search' => 'Otsi',
+    'poll.table.search.empty' => 'Tühjenda otsing',
 
     // Destination
 

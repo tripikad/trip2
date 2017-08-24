@@ -291,6 +291,10 @@ Route::get('poll', 'PollController@index')
     ->name('poll.index')
     ->middleware('role:admin');
 
+Route::post('poll', 'PollController@search')
+    ->name('poll.search')
+    ->middleware('role:admin');
+
 Route::get('poll/create', 'PollController@create')
     ->name('poll.create')
     ->middleware('role:admin');
