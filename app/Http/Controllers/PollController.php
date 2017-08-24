@@ -45,7 +45,7 @@ class PollController extends Controller
             }
 
             $title = trans('content.poll.table.'.str_replace('_date', '', $name));
-            if($name == 'id') {
+            if ($name == 'id') {
                 $title = 'ID';
             }
 
