@@ -382,24 +382,89 @@ class PollController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
+
+        $poll = Poll::getPollById($id);
+
+        $content_rels = $poll->content->getRelations();
+        $destinations = $content_rels['destinations'];
+        $destination_id = $destinations->first()->id;
+
+        return layout('1col')
+            ->with('background', component('BackgroundMap'))
+                ->with('color', 'gray')
+
+                ->with('header', region('Header', collect()
+                    ->push(component('Title')
+                        ->is('white')
+                        ->with('title', trans('content.poll.index.title'))
+                        ->with('route', route('poll.index'))
+                    )
+                ))
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.poll.create.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('poll.update', ['id' => $poll->id]))
+                    ->with('files', true)
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->with('title', trans('content.poll.edit.name'))
+                            ->with('name', 'poll_name')
+                            ->with('value', $poll->name)
+                        )
+                        ->push(component('FormTextfield')
+                            ->with('title', trans('content.poll.edit.field.start.title'))
+                            ->with('name', 'start')
+                            ->with('value', $poll->start_date)
+                        )
+                        ->push(component('FormTextfield')
+                            ->with('title', trans('content.poll.edit.field.end.title'))
+                            ->with('name', 'end')
+                            ->with('value', $poll->end_date)
+                        )
+                        ->push(component('FormSelect')
+                            ->with('name', 'destinations')
+                            ->with('options', $destinations)
+                            ->with('placeholder', trans('content.index.filter.field.destination.title'))
+                            ->with('value', $destination_id)
+                        )
+                        ->push(component('Title')
+                            ->with('title', trans('content.poll.edit.add.field.title'))
+                        )
+                        ->push(component('PollAddFields')
+                            ->with('value', old('poll_type', 'poll'))
+                            ->with('question_trans', trans('content.poll.edit.question'))
+                            ->with('option_trans', trans('content.poll.edit.option'))
+                            ->with('poll_trans', trans('content.poll.edit.poll'))
+                            ->with('quiz_trans', trans('content.poll.edit.quiz'))
+                            ->with('picture_trans', trans('content.poll.edit.fields.picture'))
+                            ->with('select_type_trans', trans('content.poll.edit.option.select.type'))
+                            ->with('select_one_trans', trans('content.poll.edit.option.select.one'))
+                            ->with('select_multiple_trans', trans('content.poll.edit.option.select.multiple'))
+                            ->with('answer_options_trans', trans('content.poll.edit.option.answer.options'))
+                            ->with('add_option_trans', trans('content.poll.edit.option.add'))
+                        )
+                        ->push(component('FormCheckbox')
+                            ->with('title', trans('content.poll.create.active'))
+                            ->with('name', 'poll_active')
+                            ->with('value', $poll->content->status)
+                        )
+                        ->push(component('FormButton')
+                            ->is('large')
+                            ->with('title', trans('content.poll.create.title'))
+                        )
+
+                    )
+                )
+            )
+            ->with('footer', region('FooterLight'))
+            ->render();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //

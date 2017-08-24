@@ -307,6 +307,10 @@ Route::get('poll/edit/{id}', 'PollController@edit')
     ->name('poll.edit')
     ->middleware('role:admin');
 
+Route::put('poll/update/{id}', 'PollController@update')
+    ->name('poll.update')
+    ->middleware('role:admin');
+
 // Content redirects
 
 Route::get('content/{type}', 'V2ContentController@redirectIndex')

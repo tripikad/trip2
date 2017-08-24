@@ -71,4 +71,17 @@ class Poll extends Model
             ->distinct()
             ->simplePaginate($take);
     }
+
+    public function scopeGetPollById($query, $id)
+    {
+        return $query
+            //->join('content_destination', 'poll.id', '=', 'content_destination.content_id')
+            ->with(
+                'content',
+                'content.destinations',
+                'poll_fields',
+                'poll_results'
+            )
+            ->findOrFail($id);
+    }
 }
