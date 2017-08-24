@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Image;
 use App\Poll;
+use App\Image;
 use App\Destination;
 use Illuminate\Http\Request;
 
@@ -257,7 +257,7 @@ class PollController extends Controller
             'poll_type' => 'in:poll,quiz',
         ];
 
-        if($request->poll_type == 'poll'){
+        if ($request->poll_type == 'poll') {
             $rules['poll_question'] = 'required';
             $rules['poll_fields.*'] = 'required';
             $rules['poll_fields'] = 'min:2';
@@ -268,12 +268,12 @@ class PollController extends Controller
             $rules['quiz_question.*.question'] = 'required';
             $rules['quiz_question.*.answer'] = 'required';
 
-            if($request->has('quiz_question')) {
-                foreach($request->quiz_question as $index => $arr){
-                    if($arr['type'] == 'options'){
-                        $rules['quiz_question.' . $index . '.options.*'] = 'required';
-                        $rules['quiz_question.' . $index . '.options'] = 'required|min:2';
-                        $rules['quiz_question.' . $index . '.select_type'] = 'in:select_multiple,select_one';
+            if ($request->has('quiz_question')) {
+                foreach ($request->quiz_question as $index => $arr) {
+                    if ($arr['type'] == 'options') {
+                        $rules['quiz_question.'.$index.'.options.*'] = 'required';
+                        $rules['quiz_question.'.$index.'.options'] = 'required|min:2';
+                        $rules['quiz_question.'.$index.'.select_type'] = 'in:select_multiple,select_one';
                     }
                 }
             }
@@ -322,7 +322,7 @@ class PollController extends Controller
             'options' => $options,
         ];
 
-        if($request->hasFile('poll_photo')) {
+        if ($request->hasFile('poll_photo')) {
             $filename = Image::storeImageFile($request->file('poll_photo'));
             $image = Image::create(['filename' => $filename]);
             $options['image_id'] = $image->id;
@@ -344,8 +344,8 @@ class PollController extends Controller
                 'answer' => $question['answer'],
             ];
 
-            $photo_field = 'quiz_photo_' . $index;
-            if($request->hasFile($photo_field)) {
+            $photo_field = 'quiz_photo_'.$index;
+            if ($request->hasFile($photo_field)) {
                 $filename = Image::storeImageFile($request->file($photo_field));
                 $image = Image::create(['filename' => $filename]);
                 $options['image_id'] = $image->id;
