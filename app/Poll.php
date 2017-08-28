@@ -75,7 +75,6 @@ class Poll extends Model
     public function scopeGetPollById($query, $id)
     {
         return $query
-            //->join('content_destination', 'poll.id', '=', 'content_destination.content_id')
             ->with(
                 'content',
                 'content.destinations',

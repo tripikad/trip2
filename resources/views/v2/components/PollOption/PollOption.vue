@@ -9,7 +9,7 @@
             <component 
                 is="FormRadio"
                 :options="options"
-                :value="options[0].id"
+                :value="type + '_' + this.name"
                 :name="name + '[select_type]'"
             >
             </component>
@@ -75,6 +75,7 @@
 
         props : {
             name : {default : ''},
+            type : {default : ''},
             option_trans : {default: 'Option'},
             select_type_trans : {default: 'Select type'},
             select_one_trans : {default: 'Select one'},
@@ -94,8 +95,8 @@
             return {
                 answer_options : [],
                 options: [
-                    {'id' : 'select_one', 'name': this.select_one_trans},
-                    {'id' : 'select_multiple', 'name': this.select_multiple_trans}
+                    {'id' : 'radio_' + this.name, 'name': this.select_one_trans},
+                    {'id' : 'checkbox_' + this.name, 'name': this.select_multiple_trans}
                 ]
             };
         },
@@ -121,17 +122,33 @@
                 }
                 
                 this.answer_options = new_arr;
+            },
+
+            populateFields: function(){
+                var options = JSON.parse(this.answer_options_json);
+                if (options.length > 0 && typeof options[0] != 'object') {
+                    this.answer_options = [];
+                    for(var i = 0; i < options.length; i++) {
+                        this.answer_options.push({'value' : options[i]});
+                    }
+                } else {
+                    this.answer_options = options;
+                }
             }
         },
 
         mounted() {
-            this.addField();
-            this.addField();
+            if (this.answer_options_json == '[]') {
+                this.addField();
+                this.addField();
+            } else {
+                this.populateFields();
+            }
         },
 
         watch : {
             answer_options_json : function(new_answer_options_json){
-                this.answer_options = JSON.parse(this.answer_options_json);
+                this.populateFields();
             }
         }
     }

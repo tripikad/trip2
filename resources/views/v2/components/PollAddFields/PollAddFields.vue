@@ -30,6 +30,7 @@
 
         <component
             :is="pollType"
+            :fields_json="fields_json"
             :question_trans="question_trans"
             :option_trans="option_trans"
             :picture_trans="picture_trans"
@@ -52,6 +53,7 @@
 	export default {
         props : {
             value : {default : ''},
+            fields_json : {default : '[]'},
             question_trans : {default : 'Question'},
             option_trans : {default : 'Option'},
             poll_trans : {default : 'Poll'},

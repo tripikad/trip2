@@ -307,8 +307,12 @@ Route::get('poll/edit/{id}', 'PollController@edit')
     ->name('poll.edit')
     ->middleware('role:admin');
 
-Route::put('poll/update/{id}', 'PollController@update')
+Route::post('poll/update/{id}', 'PollController@update')
     ->name('poll.update')
+    ->middleware('role:admin');
+
+Route::get('poll/id/{id}', 'PollController@show')
+    ->name('poll.show')
     ->middleware('role:admin');
 
 // Content redirects

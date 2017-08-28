@@ -57,6 +57,7 @@
                 :select_multiple_trans="select_multiple_trans"
                 :answer_options_trans="answer_options_trans"
                 :add_option_trans="add_option_trans"
+                :type="field.poll_opt_type"
                 :answer_options_json="field.poll_opt_val"
                 v-on:input="field.poll_opt_val = JSON.stringify($event)"
             >
@@ -69,6 +70,24 @@
                     :name="'quiz_question[' + index + '][answer]'"
                     :title="'Vastus ' + (index + 1)"
                     v-model="field.answer"
+                >
+                </component>
+
+            </div>
+
+            <div class="margin-bottom-md col-2" v-if="field.image_small && field.image_large">
+
+                <component
+                    is="PhotoCard"
+                    :small="field.image_small"
+                    :large="field.image_large"
+                >
+                </component>
+
+                <component
+                    is="FormHidden"
+                    :name="'old_quiz_photo_' + index"
+                    :value="field.image_id"
                 >
                 </component>
 
@@ -119,6 +138,7 @@
     import Button from '../Button/Button.vue'
     import FormTextarea from '../FormTextarea/FormTextarea.vue'
     import FormTextfield from '../FormTextfield/FormTextfield.vue'
+    import PhotoCard from '../PhotoCard/PhotoCard.vue'
     import PollOption from '../PollOption/PollOption.vue'
     import Title from '../Title/Title.vue'
     import FormUpload from '../FormUpload/FormUpload.vue'
@@ -128,6 +148,7 @@
 	export default {
         
         props : {
+            fields_json : {default : '[]'},
             question_trans : {default: 'Question'},
             option_trans : {default : 'Option'},
             picture_trans : {default : 'Photo'},
@@ -140,6 +161,7 @@
 
         components : {
             Button,
+            PhotoCard,
             PollOption,
             FormTextfield,
             Title,
@@ -176,6 +198,34 @@
                 }
 
                 this.fields = new_arr;
+            }
+        },
+
+        mounted() {
+            var fields = JSON.parse(this.fields_json);
+            for (var i = 0; i < fields.length; i++) {
+                var field = fields[i];
+                var type = field.type == 'text' ? 'textareafield' : 'options';
+
+                var quiz_field = {
+                    'type' : type,
+                    'answer' : field.options.answer,
+                    'question' : field.options.question,
+                    'poll_opt_type' : field.type,
+                    'poll_opt_val' : JSON.stringify(field.options.options),
+                };
+
+                if (field.image_small != undefined && field.image_large != undefined) {
+                    quiz_field.image_small = field.image_small;
+                    quiz_field.image_large = field.image_large;
+                    quiz_field.image_id = field.image_id;
+                } else {
+                    quiz_field.image_small = false;
+                    quiz_field.image_large = false;
+                    quiz_field.image_id = false;
+                }
+
+                this.fields.push(quiz_field);
             }
         }
 	}

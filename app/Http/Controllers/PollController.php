@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\PollField;
 use App\Poll;
 use App\Image;
 use App\Destination;
+use App\Content;
 use Illuminate\Http\Request;
 
 class PollController extends Controller
@@ -247,21 +249,23 @@ class PollController extends Controller
             ->render();
     }
 
-    public function store(Request $request)
+    protected function getSaveValidationRules()
     {
+        $request = request();
+
         $rules = [
             'poll_name' => 'required',
             'start' => 'required|date_format:Y-m-d|before_or_equal:end',
             'end' => 'required|date_format:Y-m-d',
             'destinations' => 'required',
-            'poll_type' => 'in:poll,quiz',
+            'poll_type' => 'required|in:poll,quiz',
         ];
 
         if ($request->poll_type == 'poll') {
             $rules['poll_question'] = 'required';
             $rules['poll_fields.*'] = 'required';
             $rules['poll_fields'] = 'min:2';
-            $rules['poll_fields.select_type'] = 'in:select_multiple,select_one';
+            $rules['poll_fields.select_type'] = 'required';
         } else {
             $rules['quiz_question'] = 'required|min:1';
             $rules['quiz_question.*.type'] = 'required|in:options,textareafield';
@@ -273,11 +277,18 @@ class PollController extends Controller
                     if ($arr['type'] == 'options') {
                         $rules['quiz_question.'.$index.'.options.*'] = 'required';
                         $rules['quiz_question.'.$index.'.options'] = 'required|min:2';
-                        $rules['quiz_question.'.$index.'.select_type'] = 'in:select_multiple,select_one';
+                        $rules['quiz_question.'.$index.'.options.select_type'] = 'required';
                     }
                 }
             }
         }
+
+        return $rules;
+    }
+
+    public function store(Request $request)
+    {
+        $rules = $this->getSaveValidationRules();
 
         $this->validate(request(), $rules);
 
@@ -302,19 +313,22 @@ class PollController extends Controller
         $poll->id = $content->id;
 
         if ($poll_type == 'poll') {
-            $this->addPollFields($request, $poll);
+            $this->addPollFields($poll);
         } elseif ($poll_type == 'quiz') {
-            $this->addQuizFields($request, $poll);
+            $this->addQuizFields($poll);
         }
 
         return redirect()
             ->route('poll.index');
     }
 
-    protected function addPollFields(Request $request, Poll $poll)
+    protected function addPollFields(Poll $poll)
     {
+        $request = request();
+
         $options = $request->input('poll_fields');
-        $type = $options['select_type'] == 'select_one' ? 'radio' : 'checkbox';
+        $type_p = explode('_', $options['select_type']);
+        $type = reset($type_p);
         unset($options['select_type']);
 
         $options = [
@@ -326,6 +340,8 @@ class PollController extends Controller
             $filename = Image::storeImageFile($request->file('poll_photo'));
             $image = Image::create(['filename' => $filename]);
             $options['image_id'] = $image->id;
+        } else if ($request->has('old_poll_photo')) {
+            $options['image_id'] = $request->old_poll_photo;
         }
 
         $poll->poll_fields()->create([
@@ -334,8 +350,9 @@ class PollController extends Controller
         ]);
     }
 
-    protected function addQuizFields(Request $request, Poll $poll)
+    protected function addQuizFields(Poll $poll)
     {
+        $request = request();
         $fields = [];
 
         foreach ($request->quiz_question as $index => $question) {
@@ -349,12 +366,16 @@ class PollController extends Controller
                 $filename = Image::storeImageFile($request->file($photo_field));
                 $image = Image::create(['filename' => $filename]);
                 $options['image_id'] = $image->id;
+            } else if ($request->has('old_'.$photo_field)) {
+                $old_photo_field = 'old_'.$photo_field;
+                $options['image_id'] = $request->$old_photo_field;
             }
 
             $type = $question['type'];
             if ($type == 'options') {
                 $opts = $question['options'];
-                $type = $opts['select_type'] == 'select_one' ? 'radio' : 'checkbox';
+                $type_p = explode('_', $opts['select_type']);
+                $type = reset($type_p);
                 unset($opts['select_type']);
 
                 $options['options'] = $opts;
@@ -371,15 +392,9 @@ class PollController extends Controller
         $poll->poll_fields()->createMany($fields);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return '';
     }
 
     public function edit($id)
@@ -391,6 +406,27 @@ class PollController extends Controller
         $content_rels = $poll->content->getRelations();
         $destinations = $content_rels['destinations'];
         $destination_id = $destinations->first()->id;
+
+        $poll_fields = [];
+
+        foreach ($poll->poll_fields->all() as $field) {
+            $options = json_decode($field->options, true);
+
+            $poll_field = [
+                'type' => $field->type,
+                'field_id' => $field->field_id,
+                'options' => $options,
+            ];
+
+            if(isset($options['image_id'])) {
+                $image = Image::findOrFail($options['image_id']);
+                $poll_field['image_small'] = $image->preset('xsmall_square');
+                $poll_field['image_large'] = $image->preset('large');
+                $poll_field['image_id'] = $options['image_id'];
+            }
+
+            $poll_fields[] = $poll_field;
+        }
 
         return layout('1col')
             ->with('background', component('BackgroundMap'))
@@ -405,7 +441,7 @@ class PollController extends Controller
                 ))
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.poll.create.title'))
+                    ->with('title', trans('content.poll.edit.title'))
                 )
                 ->push(component('Form')
                     ->with('route', route('poll.update', ['id' => $poll->id]))
@@ -436,7 +472,8 @@ class PollController extends Controller
                             ->with('title', trans('content.poll.edit.add.field.title'))
                         )
                         ->push(component('PollAddFields')
-                            ->with('value', old('poll_type', 'poll'))
+                            ->with('value', $poll->type)
+                            ->with('fields_json', json_encode($poll_fields, JSON_UNESCAPED_UNICODE))
                             ->with('question_trans', trans('content.poll.edit.question'))
                             ->with('option_trans', trans('content.poll.edit.option'))
                             ->with('poll_trans', trans('content.poll.edit.poll'))
@@ -455,7 +492,7 @@ class PollController extends Controller
                         )
                         ->push(component('FormButton')
                             ->is('large')
-                            ->with('title', trans('content.poll.create.title'))
+                            ->with('title', trans('content.poll.edit.title'))
                         )
 
                     )
@@ -467,7 +504,40 @@ class PollController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $rules = $this->getSaveValidationRules();
+
+        $this->validate(request(), $rules);
+
+        $poll_type = $request->poll_type;
+
+        $content = Content::findOrFail($id);
+        $poll = Poll::findOrFail($id);
+
+        $content->fill([
+            'title' => $request->poll_name,
+            'type' => 'poll',
+            'status' => $request->has('poll_active') ? 1 : 0,
+        ])
+        ->save();
+
+        $poll->fill([
+            'name' => $request->poll_name,
+            'start_date' => $request->start,
+            'end_date' => $request->end,
+            'type' => $poll_type,
+        ])
+        ->save();
+
+        PollField::where('poll_id', $id)->delete();
+
+        if ($poll_type == 'poll') {
+            $this->addPollFields($poll);
+        } elseif ($poll_type == 'quiz') {
+            $this->addQuizFields($poll);
+        }
+
+        return redirect()
+            ->route('poll.index');
     }
 
     /**

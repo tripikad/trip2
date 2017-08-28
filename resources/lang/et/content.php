@@ -401,6 +401,7 @@ return [
     'poll.edit.field.start.title' => 'Alguse aeg',
     'poll.edit.field.end.title' => 'Lõppemise aeg',
     'poll.create.title' => 'Lisa küsitlus',
+    'poll.edit.title' => 'Muuda küsitlust',
     'poll.edit.add.field.title' => 'Lisa väljad',
     'poll.edit.name' => 'Küsitluse nimi',
     'poll.edit.question' => 'Küsimus',
