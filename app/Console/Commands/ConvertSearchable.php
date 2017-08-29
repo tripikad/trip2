@@ -3,11 +3,11 @@
 namespace App\Console\Commands;
 
 use DB;
+use App\User;
+use App\Comment;
+use App\Content;
 use App\Searchable;
 use Illuminate\Console\Command;
-use App\Content;
-use App\Comment;
-use App\User;
 
 class ConvertSearchable extends Command
 {
@@ -134,7 +134,7 @@ class ConvertSearchable extends Command
                 $data[] = '('.implode(', ', $item).')';
             }
 
-            app('db')->select($replace_insert.' VALUES '.implode(', ', $data) . ' ON DUPLICATE KEY UPDATE `title`=VALUES(`title`), `body`=VALUES(`body`), `updated_at`=VALUES(`updated_at`), `created_at`=VALUES(`created_at`)');
+            app('db')->select($replace_insert.' VALUES '.implode(', ', $data).' ON DUPLICATE KEY UPDATE `title`=VALUES(`title`), `body`=VALUES(`body`), `updated_at`=VALUES(`updated_at`), `created_at`=VALUES(`created_at`)');
 
             if ($last_round === 2500) {
                 $last_round = 0;
