@@ -53,7 +53,7 @@ class UnreadContent extends Model
             }
         }
 
-        return (int) $unread_data;
+        return $unread_data;
     }
 
     public static function getUnreadContent(Content $content)
