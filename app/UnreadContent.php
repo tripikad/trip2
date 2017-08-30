@@ -59,7 +59,6 @@ class UnreadContent extends Model
     public static function getUnreadContent(Content $content)
     {
         $unread_content = $content->unread_content;
-        $content_unread = false;
 
         $unread_data = [
             'count' => 0,
@@ -67,7 +66,7 @@ class UnreadContent extends Model
         ];
 
         if ($unread_content && auth()->check()) {
-            return (int) $unread_content->getUnread($content);
+            return $unread_content->getUnread($content);
         } elseif (auth()->check()) {
             $unread_data['count'] += 1;
             $content_unread = true;
