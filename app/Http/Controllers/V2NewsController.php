@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App;
 use Log;
 use Request;
 use App\Image;
@@ -129,13 +128,7 @@ class V2NewsController extends Controller
             ->render();
     }
 
-    public function create()
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->create('news');
-    }
-
-    public function create2($type = 'news')
+    public function create($type = 'news')
     {
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name')->get();
@@ -153,10 +146,10 @@ class V2NewsController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.news.create.title').' (beta)')
+                    ->with('title', trans('content.news.create.title'))
                 )
                 ->push(component('Form')
-                    ->with('route', route('news.store2'))
+                    ->with('route', route('news.store'))
                     ->with('fields', collect()
                         ->push(component('FormRadio')
                             ->with('name', 'type')
@@ -215,12 +208,6 @@ class V2NewsController extends Controller
 
     public function store()
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'news');
-    }
-
-    public function store2()
-    {
         $loggedUser = request()->user();
 
         $rules = [
@@ -263,12 +250,6 @@ class V2NewsController extends Controller
 
     public function edit($id)
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->edit('news', $id);
-    }
-
-    public function edit2($id)
-    {
         $news = Content::findOrFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name')->get();
@@ -286,10 +267,10 @@ class V2NewsController extends Controller
 
             ->with('content', collect()
                 ->push(component('Title')
-                    ->with('title', trans('content.news.edit.title').' (beta)')
+                    ->with('title', trans('content.news.edit.title'))
                 )
                 ->push(component('Form')
-                    ->with('route', route('news.update2', [$news]))
+                    ->with('route', route('news.update', [$news]))
                     ->with('method', 'PUT')
                     ->with('fields', collect()
                         ->push(component('FormRadio')
@@ -351,12 +332,6 @@ class V2NewsController extends Controller
 
     public function update($id)
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'news', $id);
-    }
-
-    public function update2($id)
-    {
         $news = Content::findOrFail($id);
 
         $rules = [
@@ -367,12 +342,11 @@ class V2NewsController extends Controller
 
         $this->validate(request(), $rules);
 
-        $news->fill([
+        $news->update([
             'title' => request()->title,
             'body' => request()->body,
             'type' => request()->type,
-        ])
-        ->save();
+        ]);
 
         $news->destinations()->sync(request()->destinations ?: []);
         $news->topics()->sync(request()->topics ?: []);

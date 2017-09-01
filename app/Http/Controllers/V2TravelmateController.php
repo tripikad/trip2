@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App;
 use Log;
 use Request;
 use App\Image;
@@ -181,12 +180,6 @@ class V2TravelmateController extends Controller
 
     public function create()
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->create('travelmate');
-    }
-
-    public function create2()
-    {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
         $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -222,7 +215,7 @@ class V2TravelmateController extends Controller
                     ->with('title', trans('content.travelmate.create.title'))
                 )
                 ->push(component('Form')
-                    ->with('route', route('travelmate.store2'))
+                    ->with('route', route('travelmate.store'))
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
                             ->is('large')
@@ -290,12 +283,6 @@ class V2TravelmateController extends Controller
 
     public function edit($id)
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->edit('travelmate', $id);
-    }
-
-    public function edit2($id)
-    {
         $travelmate = Content::findOrFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
         $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
@@ -332,7 +319,7 @@ class V2TravelmateController extends Controller
                     ->with('title', trans('content.travelmate.edit.title'))
                 )
                 ->push(component('Form')
-                    ->with('route', route('travelmate.update2', [$travelmate]))
+                    ->with('route', route('travelmate.update', [$travelmate]))
                     ->with('method', 'PUT')
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
@@ -405,12 +392,6 @@ class V2TravelmateController extends Controller
 
     public function store()
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'travelmate');
-    }
-
-    public function store2()
-    {
         $loggedUser = request()->user();
 
         $rules = [
@@ -450,12 +431,6 @@ class V2TravelmateController extends Controller
 
     public function update($id)
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'travelmate', $id);
-    }
-
-    public function update2($id)
-    {
         $travelmate = Content::findOrFail($id);
 
         $rules = [
@@ -466,13 +441,12 @@ class V2TravelmateController extends Controller
 
         $this->validate(request(), $rules);
 
-        $travelmate->fill([
+        $travelmate->update([
             'title' => request()->title,
             'body' => request()->body,
             'start_at' => Carbon::parse(request()->start_at),
             'duration' => request()->duration,
-        ])
-        ->save();
+        ]);
 
         $travelmate->destinations()->sync(request()->destinations ?: []);
         $travelmate->topics()->sync(request()->topics ?: []);

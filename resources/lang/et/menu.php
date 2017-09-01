@@ -65,5 +65,7 @@ return [
     'admin.image' => 'Toimetuse pildid',
     'admin.content' => 'Peidetud sisu',
     'admin.sponsored' => 'Sponsorite artiklid',
+    'admin.newsletter' => 'Uudiskirjad',
+    'admin.static' => 'Muuda - :title',
 
 ];

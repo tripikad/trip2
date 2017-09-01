@@ -7,6 +7,7 @@ use App\User;
 use App\Image;
 use App\Content;
 use App\Destination;
+use App\NewsletterType;
 
 class V2UserController extends Controller
 {
@@ -126,9 +127,23 @@ class V2UserController extends Controller
             ->render();
     }
 
-    public function edit2($id)
+    public function edit($id)
     {
         $user = User::findOrFail($id);
+        $weekly_newsletter = NewsletterType::where('type', 'weekly')
+            ->with('user_subscriptions')
+            ->where('active', 1)
+            ->first();
+
+        if ($weekly_newsletter) {
+            $weekly_subscription = $weekly_newsletter->user_subscriptions->first();
+
+            if ($weekly_subscription && $weekly_subscription->active) {
+                $weekly_subscription = 1;
+            } else {
+                $weekly_subscription = 0;
+            }
+        }
 
         return layout('1colnarrow')
             ->with('color', 'gray')
@@ -145,7 +160,7 @@ class V2UserController extends Controller
 
             ->with('content', collect()
                 ->push(component('Form')
-                    ->with('route', route('user.update2', [$user]))
+                    ->with('route', route('user.update', [$user]))
                     ->with('method', 'PUT')
                     ->with('files', true)
                     ->with('fields', collect()
@@ -220,6 +235,16 @@ class V2UserController extends Controller
                             ->with('name', 'notify_message')
                             ->with('value', old('notify_message', $user->notify_message))
                         )
+                        ->push(component('FormCheckbox')
+                            ->with('title', trans('user.edit.field.notify_follow.title'))
+                            ->with('name', 'notify_follow')
+                            ->with('value', old('notify_follow', $user->notify_follow))
+                        )
+                        ->pushWhen($weekly_newsletter, component('FormCheckbox')
+                            ->with('title', trans('newsletter.subscribe.field.newsletter_notify'))
+                            ->with('name', 'newsletter_subscribe')
+                            ->with('value', old('newsletter_subscribe', $weekly_subscription ?? 0))
+                        )
                         ->push(component('Title')
                             ->is('small')
                             ->is('blue')
@@ -258,7 +283,7 @@ class V2UserController extends Controller
             ->render();
     }
 
-    public function update2($id)
+    public function update($id)
     {
         $user = User::findorFail($id);
         $maxfilesize = config('site.maxfilesize') * 1024;
@@ -278,6 +303,14 @@ class V2UserController extends Controller
 
         $this->validate(request(), $rules);
 
+        $weekly_newsletter = NewsletterType::where('type', 'weekly')
+            ->where('active', 1)
+            ->first();
+
+        if ($weekly_newsletter) {
+            (new V2NewsletterController)->subscribe(request(), $weekly_newsletter->id);
+        }
+
         $user->update([
             'name' => request()->name,
             'email' => request()->email,
@@ -285,6 +318,7 @@ class V2UserController extends Controller
             'real_name' => request()->real_name,
             'real_name_show' => request()->real_name_show ? 0 : 1,
             'notify_message' => request()->notify_message ? 1 : 0,
+            'notify_follow' => request()->notify_follow ? 1 : 0,
             'description' => request()->description,
             'contact_facebook' => request()->contact_facebook,
             'contact_instagram' => request()->contact_instagram,
@@ -309,7 +343,7 @@ class V2UserController extends Controller
             ->with('info', trans('user.update.info'));
     }
 
-    public function destinationsEdit2($id)
+    public function destinationsEdit($id)
     {
         $user = User::findorFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
@@ -342,7 +376,7 @@ class V2UserController extends Controller
             )
             ->with('content', collect()
                 ->push(component('Form')
-                    ->with('route', route('user.destinations.store2', [$user]))
+                    ->with('route', route('user.destinations.store', [$user]))
                     ->with('method', 'PUT')
                     ->with('fields', collect()
                         ->push(component('Title')
@@ -377,7 +411,7 @@ class V2UserController extends Controller
             ->render();
     }
 
-    public function destinationsStore2($id)
+    public function destinationsStore($id)
     {
         $rules = [
             'havebeen.*' => 'exists:destinations,id',

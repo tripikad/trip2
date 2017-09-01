@@ -12,6 +12,6 @@ class Paginator
                 ->putWhen($currentTopic, 'topic', $currentTopic)
                 ->all()
             )
-            ->links('v2.components.Paginator.Paginator');
+            ->links('components.Paginator.Paginator');
     }
 }

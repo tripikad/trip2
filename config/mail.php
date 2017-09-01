@@ -54,7 +54,10 @@ return [
     |
     */
 
-    'from' => ['address' => 'trip@trip.ee', 'name' => 'Trip.ee'],
+    'from' => [
+        'address' => 'trip@trip.ee',
+        'name' => 'Trip.ee',
+    ],
 
     /*
     |--------------------------------------------------------------------------

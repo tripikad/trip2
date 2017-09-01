@@ -9,6 +9,7 @@ return [
 
     'content.email.subject' => 'Postitusele ":title" on lisatud uus kommentaar',
 
-    'email.content.body' => 'Loe täispikka kommentaari siit: :url',
+    'email.content.body' => 'Täispika kommentaari lugemiseks vajuta allolevat nuppu:',
+    'email.button.text' => 'Suundun Trip.ee keskkonda kommentaari lugema',
 
 ];

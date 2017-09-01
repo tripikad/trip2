@@ -21,7 +21,7 @@ class PhotoRow
             $content = $content->merge(array_fill(
                 0,
                 9 - $content->count(),
-                component('PhotoCard')->with('small', '/v2/svg/image_none.svg')
+                component('PhotoCard')->with('small', '/photos/image_none.svg')
             ));
         }
 
@@ -29,7 +29,7 @@ class PhotoRow
             $content = array_fill(
                 0,
                 9 - $content->count(),
-                component('PhotoCard')->with('small', '/v2/svg/image_none.svg')
+                component('PhotoCard')->with('small', '/photos/image_none.svg')
             );
         }
 

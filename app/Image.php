@@ -21,32 +21,53 @@ class Image extends Model
 
     public function preset($preset = 'small')
     {
-        return config('imagepresets.presets.'.$preset.'.displaypath').$this->filename;
+        $original = config('imagepresets.original.displaypath').$this->filename;
+        $image = config('imagepresets.presets.'.$preset.'.displaypath').$this->filename;
+        $alt_image_real = config('imagepresets.presets.'.$preset.'.path').$this->filename;
+        $alt_image = config('imagepresets.presets.'.$preset.'.alt_displaypath').$this->filename;
+
+        if (filter_var($image, FILTER_VALIDATE_URL) && ! config("imagepresets.presets.$preset.on_the_fly")) {
+            return $image;
+        } elseif (file_exists($alt_image_real)) {
+            return $alt_image;
+        } elseif (filter_var($image, FILTER_VALIDATE_URL) && config("imagepresets.presets.$preset.on_the_fly")) {
+            self::createPresetFromOriginal($original, $this->filename, $preset);
+
+            return $alt_image;
+        } else {
+            return $image;
+        }
     }
 
     public static function createImagePresets($path, $filename)
     {
         foreach (array_keys(config('imagepresets.presets')) as $preset) {
-            Imageconv::make($path.$filename)
-                ->{config("imagepresets.presets.$preset.operation")}(
-                    config("imagepresets.presets.$preset.width"),
-                    config("imagepresets.presets.$preset.height"),
-                    function ($constraint) {
-                        $constraint->aspectRatio();
-                    })
-                ->save(
-                    config("imagepresets.presets.$preset.path").$filename,
-                    config("imagepresets.presets.$preset.quality")
-                );
+            if (! config("imagepresets.presets.$preset.on_the_fly")) {
+                Imageconv::make($path.$filename)
+                    ->{config("imagepresets.presets.$preset.operation")}(
+                        config("imagepresets.presets.$preset.width"),
+                        config("imagepresets.presets.$preset.height"),
+                        function ($constraint) {
+                            $constraint->aspectRatio();
+                        })
+                    ->save(
+                        config("imagepresets.presets.$preset.path").$filename,
+                        config("imagepresets.presets.$preset.quality")
+                    );
+            }
         }
     }
 
-    public static function storeImageFromUrl($url, $filename = null)
+    public static function storeImageFromUrl($url, $filename = null, $trusted = false)
     {
         $path = config('imagepresets.original.path');
 
-        $info = getimagesize($url);
-        $ext = image_type_to_extension($info[2], false);
+        if (! $trusted) {
+            $info = getimagesize($url);
+            $ext = image_type_to_extension($info[2], false);
+        } else {
+            $ext = pathinfo($url, PATHINFO_EXTENSION);
+        }
 
         //create random name
         if (! $filename) {
@@ -57,8 +78,8 @@ class Image extends Model
 
         try {
             copy($url, $path.$filename);
-        } catch (Exception $e) {
-            throw new Exception('Image copy failed: '.$e);
+        } catch (\Exception $e) {
+            throw new \Exception('Image copy failed: '.$e);
         }
 
         self::createImagePresets($path, $filename);
@@ -89,18 +110,41 @@ class Image extends Model
         return $filename;
     }
 
+    public static function createPresetFromOriginal($original, $image, $preset)
+    {
+        try {
+            if (filter_var($original, FILTER_VALIDATE_URL) && ! file_exists(config('imagepresets.original.path').$image)) {
+                self::storeImageFromUrl($original, pathinfo($image, PATHINFO_FILENAME), true);
+            }
+
+            $path = config('imagepresets.original.path');
+
+            Imageconv::make($path.$image)
+                ->{config("imagepresets.presets.$preset.operation")}(
+                    config("imagepresets.presets.$preset.width"),
+                    config("imagepresets.presets.$preset.height"))
+                ->save(
+                    config("imagepresets.presets.$preset.path").$image,
+                    config("imagepresets.presets.$preset.quality")
+                );
+        } catch (\Exception $e) {
+        }
+    }
+
     public static function checkIfExists($path, $filename, $ext, $i = 0)
     {
+        $new_filename = $filename;
+
         if ($i > 0) {
-            $filename = $filename.'-'.$i;
+            $new_filename = $filename.'-'.$i;
         }
 
-        if (file_exists($path.$filename.'.'.$ext)) {
+        if (file_exists($path.$new_filename.'.'.$ext)) {
             ++$i;
 
             return self::checkIfExists($path, $filename, $ext, $i);
         } else {
-            return $filename.'.'.$ext;
+            return $new_filename.'.'.$ext;
         }
     }
 

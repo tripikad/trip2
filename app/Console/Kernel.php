@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\ConvertSearchable::class,
         \App\Console\Commands\DisableOldShortNews::class,
         \App\Console\Commands\ForumMiscTopic::class,
+        \App\Console\Commands\Newsletter::class,
 
     ];
 
@@ -38,6 +39,9 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('search:index --optimize')
             ->dailyAt('05:55');
+
+        $schedule->command('newsletter:send')
+            ->everyMinute();
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Cache;
 use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -40,6 +41,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
     protected $hidden = ['password', 'remember_token'];
+
+    protected $dates = ['created_at', 'updated_at', 'active_at'];
+
+    /**
+     * @var int in minutes
+     */
+    public $update_active_at_minutes = 5;
 
     public static function boot()
     {
@@ -87,6 +95,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function vars()
     {
         return new V2UserVars($this);
+    }
+
+    public function update_active_at($force = false, $return = false)
+    {
+        $last_online = Cache::get('uio-'.$this->id, '0000-00-00 00:00:00');
+
+        if ($last_online == '0000-00-00 00:00:00' || $force) {
+            $expires_at = Carbon::now()->addMinutes($this->update_active_at_minutes);
+
+            // uio - user is online :)
+            $now = Carbon::now();
+            Cache::put('uio-'.$this->id, $now, $expires_at);
+            $this->active_at = $now;
+            $this->save();
+        }
+
+        if ($return) {
+            return $this->active_at;
+        }
     }
 
     // V1

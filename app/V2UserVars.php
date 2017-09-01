@@ -140,6 +140,6 @@ class V2UserVars
             return $image->preset($preset);
         }
 
-        return '/v2/svg/picture_none.svg';
+        return '/photos/picture_none.svg';
     }
 }

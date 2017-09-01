@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App;
 use Log;
 use Request;
 use App\Image;
@@ -27,9 +26,9 @@ class V2FlightController extends Controller
 
         $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $destinations = Destination::select('id', 'name')
-            ->havingRaw('`id` IN (SELECT DISTINCT `destination_id` FROM `content_destination` WHERE `content_id` IN (SELECT DISTINCT `id` FROM `contents` WHERE `type` = \'flight\'))')
+            ->has('content_flights')
             ->get();
-        $topics = Topic::select('id', 'name')->get();
+        //$topics = Topic::select('id', 'name')->get();
 
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
@@ -76,6 +75,7 @@ class V2FlightController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
+                ->push(region('FlightNewsletterSubscribe'))
                 ->push(component('Promo')->with('promo', 'flightoffer_list_sidebar'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
@@ -142,12 +142,6 @@ class V2FlightController extends Controller
                                 ->with('title', trans('content.action.edit.title'))
                                 ->with('route', route('flight.edit', [$flight]))
                         )
-                        ->pushWhen($loggedUser && $loggedUser->hasRole('admin', $flight->user->id),
-                            component('MetaLink')
-                                ->is('white')
-                                ->with('title', trans('content.action.edit.title').' (beta)')
-                                ->with('route', route('flight.edit2', [$flight]))
-                        )
                         ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Form')
                                 ->with('route', route(
                                     'content.status',
@@ -190,6 +184,7 @@ class V2FlightController extends Controller
 
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
+                ->push(region('FlightNewsletterSubscribe'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffiliateSearch'))
                 ->push(component('AffRentalcars'))
@@ -207,12 +202,6 @@ class V2FlightController extends Controller
     }
 
     public function create()
-    {
-        return App::make('App\Http\Controllers\ContentController')
-            ->create('flight');
-    }
-
-    public function create2()
     {
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
 
@@ -232,7 +221,7 @@ class V2FlightController extends Controller
                     ->with('title', trans('content.flight.create.title').' (beta)')
                 )
                 ->push(component('Form')
-                    ->with('route', route('flight.store2'))
+                    ->with('route', route('flight.store'))
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
                             ->is('large')
@@ -275,12 +264,6 @@ class V2FlightController extends Controller
 
     public function store()
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'flight');
-    }
-
-    public function store2()
-    {
         $loggedUser = request()->user();
 
         $rules = [
@@ -321,12 +304,6 @@ class V2FlightController extends Controller
 
     public function edit($id)
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->edit('flight', $id);
-    }
-
-    public function edit2($id)
-    {
         $flight = Content::findOrFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
 
@@ -346,7 +323,7 @@ class V2FlightController extends Controller
                     ->with('title', trans('content.flight.edit.title').' (beta)')
                 )
                 ->push(component('Form')
-                    ->with('route', route('flight.update2', [$flight]))
+                    ->with('route', route('flight.update', [$flight]))
                     ->with('method', 'PUT')
                     ->with('fields', collect()
                         ->push(component('FormTextfield')
@@ -391,12 +368,6 @@ class V2FlightController extends Controller
 
     public function update($id)
     {
-        return App::make('App\Http\Controllers\ContentController')
-            ->store(request(), 'flight', $id);
-    }
-
-    public function update2($id)
-    {
         $flight = Content::findOrFail($id);
 
         $rules = [
@@ -406,11 +377,10 @@ class V2FlightController extends Controller
 
         $this->validate(request(), $rules);
 
-        $flight->fill([
+        $flight->update([
             'title' => request()->title,
             'body' => request()->body,
-        ])
-        ->save();
+        ]);
 
         $flight->destinations()->sync(request()->destinations ?: []);
 

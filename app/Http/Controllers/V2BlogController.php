@@ -266,11 +266,10 @@ class V2BlogController extends Controller
 
         $this->validate(request(), $rules);
 
-        $blog->fill([
+        $blog->update([
             'title' => request()->title,
             'body' => request()->body,
-        ])
-        ->save();
+        ]);
 
         $blog->destinations()->sync(request()->destinations ?: []);
 

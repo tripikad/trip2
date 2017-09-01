@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\XssProtection::class,
             \App\Http\Middleware\LoggedCookie::class,
+            \App\Http\Middleware\UserActivity::class,
         ],
         'api' => [
             'throttle:60,1',

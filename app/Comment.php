@@ -32,19 +32,7 @@ class Comment extends Model
         return $this->morphMany('App\Flag', 'flaggable');
     }
 
-    // V2
-
-    public function vars()
-    {
-        return new V2CommentVars($this);
-    }
-
     // V1
-
-    public function getTitleAttribute()
-    {
-        return str_limit($this->attributes['body'], 30);
-    }
 
     public function getActions()
     {
@@ -66,11 +54,6 @@ class Comment extends Model
         }
 
         return $actions;
-    }
-
-    public function getBodyFilteredAttribute()
-    {
-        return Main::getBodyFilteredAttribute($this);
     }
 
     public function getFlags()
@@ -117,5 +100,12 @@ class Comment extends Model
           ],
 
        ];
+    }
+
+    // V2
+
+    public function vars()
+    {
+        return new V2CommentVars($this);
     }
 }

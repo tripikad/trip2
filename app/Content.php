@@ -221,11 +221,6 @@ class Content extends Model
         return $image;
     }
 
-    public function getBodyFilteredAttribute()
-    {
-        return Main::getBodyFilteredAttribute($this);
-    }
-
     public function images()
     {
         return $this->morphToMany('App\Image', 'imageable');
@@ -323,17 +318,6 @@ class Content extends Model
         ];
     }
 
-    // TODO: In V2 vars it's just ->title();
-
-    public function getHeadTitle()
-    {
-        if ($this->price) {
-            return $this->title.' '.$this->price.'€';
-        }
-
-        return $this->title;
-    }
-
     public function getHeadImage()
     {
         return $this->imagePreset('large');
@@ -346,5 +330,119 @@ class Content extends Model
                 'source' => 'title',
             ],
         ];
+    }
+
+    // V2
+
+    public function vars()
+    {
+        return new V2ContentVars($this);
+    }
+
+    public function scopeGetLatestPagedItems(
+        $query,
+        $type,
+        $take = 36,
+        $destination = false,
+        $topic = false,
+        $order = 'created_at'
+    ) {
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->orderBy($order, 'desc')
+            ->with(
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user',
+                'destinations',
+                'topics',
+                'unread_content'
+            )
+            ->when($destination, function ($query) use ($destination) {
+                $destinations = Destination::find($destination)->descendantsAndSelf()->pluck('id');
+
+                return $query
+                    ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
+                    ->select('contents.*')
+                    ->whereIn('content_destination.destination_id', $destinations);
+            })
+            ->when($topic, function ($query) use ($topic) {
+                return $query
+                    ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
+                    ->select('contents.*')
+                    ->where('content_topic.topic_id', '=', $topic);
+            })
+            ->distinct()
+            ->simplePaginate($take);
+    }
+
+    public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at', array $additional_eager = [])
+    {
+        $eager = [
+            'images',
+            'user',
+            'user.images',
+            'comments',
+            'comments.user',
+            'destinations',
+            'topics',
+        ];
+
+        if (count($additional_eager)) {
+            $eager = array_merge($eager, $additional_eager);
+        }
+
+        return $query
+            ->whereType($type)
+            ->whereStatus(1)
+            ->take($take)
+            ->orderBy($order, 'desc')
+            ->with($eager)
+            ->distinct()
+            ->get();
+    }
+
+    public function scopeGetItemById($query, $id)
+    {
+        return $query
+            ->whereStatus(1)
+            ->with(
+                'flags',
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user.images',
+                'comments.flags',
+                'comments.content',
+                'destinations',
+                'topics'
+            )
+            ->findOrFail($id);
+    }
+
+    public function scopeGetItemBySlug($query, $slug, $user = false)
+    {
+        return $query
+            ->whereSlug($slug)
+            ->with(
+                'flags',
+                'images',
+                'user',
+                'user.images',
+                'comments',
+                'comments.user.images',
+                'comments.flags',
+                'comments.content',
+                'destinations',
+                'topics'
+            )
+            ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
+                return $query->whereStatus(1);
+            })
+            ->first();
     }
 }

@@ -22,10 +22,22 @@ class BodyFormatter
         return $this;
     }
 
-    public function links()
+    public function fixLinks()
     {
-        $this->body = str_replace(' www.', ' http://', $this->body);
+        $linksPattern = '/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(\/.*)?/';
 
+        if (preg_match_all($linksPattern, $this->body, $matches)) {
+            foreach ($matches[0] as $match) {
+                $this->body = preg_replace('/https?:\/\//', '', $this->body);
+                $this->body = str_replace($match, 'http://'.$match, $this->body);
+            }
+        }
+
+        return $this;
+    }
+
+    public function externalLinks()
+    {
         if ($filteredBody = preg_replace('/(<a href="(http|https):(?!\/\/(?:www\.)?trip\.ee)[^"]+")>/is', '\\1 target="_blank">', $this->body)) {
             $this->body = $filteredBody;
         }
@@ -54,10 +66,10 @@ class BodyFormatter
 
     public function calendar()
     {
-        $yamlPattern = '/(\[\[[\r\n].*[\r\n]\]\])/s';
+        $yamlPattern = '/(\[\[[\r\n].*[\r\n]\]\])/sU';
 
         if (preg_match_all($yamlPattern, $this->body, $matches)) {
-            foreach ($matches[1] as $match) {
+            foreach ($matches[0] as $match) {
                 $cleanedMatch = str_replace(['[[', ']]'], '', $match);
                 $cleanedMatch = preg_replace_callback(
                     "/-\s+(.+)/",
