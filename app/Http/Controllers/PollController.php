@@ -550,4 +550,18 @@ class PollController extends Controller
     {
         //
     }
+
+    public function answerPoll(Request $request)
+    {
+        $rules = [
+            'id' => 'required',
+            'values' => 'required|min:1',
+        ];
+
+        $this->validate($request, $rules);
+
+        $poll = Poll::getPollById($request->id);
+
+        return $request->id;
+    }
 }

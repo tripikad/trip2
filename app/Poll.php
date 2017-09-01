@@ -83,4 +83,29 @@ class Poll extends Model
             )
             ->findOrFail($id);
     }
+
+    public function scopeGetPollsByDestinationId($query, $destination_id)
+    {
+        return $query
+            ->with(
+                'poll_fields'
+            )
+            ->whereHas('content', function ($query) {
+                $query->where('status', 1);
+            })
+            ->whereHas('content.destinations', function ($query) use($destination_id) {
+                $query->where('destinations.id', $destination_id);
+            })
+            ->whereDoesntHave('poll_results', function ($query) {
+                $logged_user = request()->user();
+                $query->where('poll_results.user_id', $logged_user->id);
+            })
+            ->where('type', 'poll')
+            ->where('start_date', '<=', date('Y-m-d'))
+            ->where('end_date', '>=', date('Y-m-d'))
+            ->withCount('poll_results')
+            ->orderBy('poll_results_count', 'ASC')
+            ->orderBy('start_date', 'DESC')
+            ->get();
+    }
 }

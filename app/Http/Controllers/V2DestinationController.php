@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Poll;
 use App\User;
 use App\Content;
 use App\Destination;
@@ -26,6 +27,13 @@ class V2DestinationController extends Controller
         $flights = Content::getLatestPagedItems('flight', 6, $destination->id);
         $travelmates = Content::getLatestPagedItems('travelmate', 6, $destination->id);
         $news = Content::getLatestPagedItems('news', 2, $destination->id);
+
+        $polls = Poll::getPollsByDestinationId($destination->id);
+        $poll_field = null;
+        if ($polls->isNotEmpty()) {
+            $poll =  $polls->first();
+            $poll_field = $poll->poll_fields->first();
+        }
 
         $loggedUser = request()->user();
 
@@ -79,6 +87,23 @@ class V2DestinationController extends Controller
             )
 
             ->with('sidebar', collect()
+                ->when($poll_field, function ($collection) use($poll_field, $poll) {
+                    return $collection->push(component('Block')
+                        ->is('gray')
+                        ->with('content', collect()
+                            ->push(component('Title')
+                                ->with('title', trans('content.poll.edit.poll'))
+                                ->is('small')
+                            )
+                            ->push(component('PollAnswer')
+                                ->with('options', json_decode($poll_field->options, true))
+                                ->with('type', $poll_field->type)
+                                ->with('id', $poll->id)
+                                ->with('answer_trans', trans('content.poll.answer'))
+                            )
+                        )
+                    );
+                })
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )

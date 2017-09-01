@@ -422,6 +422,7 @@ return [
     'poll.table.active.not' => 'Mitte aktiivne',
     'poll.table.search' => 'Otsi',
     'poll.table.search.empty' => 'Tühjenda otsing',
+    'poll.answer' => 'Vasta',
 
     // Destination
 

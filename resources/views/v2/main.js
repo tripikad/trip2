@@ -34,6 +34,7 @@ import NavbarSearch from './components/NavbarSearch/NavbarSearch.vue'
 import PhotoCard from './components/PhotoCard/PhotoCard.vue'
 import PhotoFullscreen from './components/PhotoFullscreen/PhotoFullscreen.vue'
 import PollAddFields from './components/PollAddFields/PollAddFields.vue'
+import PollAnswer from './components/PollAnswer/PollAnswer.vue'
 import PollFields from './components/PollFields/PollFields.vue'
 import PollOption from './components/PollOption/PollOption.vue'
 import QuizFields from './components/QuizFields/QuizFields.vue'
@@ -87,6 +88,7 @@ new Vue({
         PhotoCard,
         PhotoFullscreen,
         PollAddFields,
+        PollAnswer,
         PollFields,
         PollOption,
         QuizFields,

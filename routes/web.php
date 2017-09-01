@@ -315,6 +315,10 @@ Route::get('poll/id/{id}', 'PollController@show')
     ->name('poll.show')
     ->middleware('role:admin');
 
+Route::post('poll/answer', 'PollController@answerPoll')
+    ->name('poll.answer')
+    ->middleware('role:regular');
+
 // Content redirects
 
 Route::get('content/{type}', 'V2ContentController@redirectIndex')
