@@ -94,7 +94,7 @@ class Poll extends Model
             ->whereHas('content', function ($query) {
                 $query->where('status', 1);
             })
-            ->whereHas('content.destinations', function ($query) use($destination_id) {
+            ->whereHas('content.destinations', function ($query) use ($destination_id) {
                 $query->where('destinations.id', $destination_id);
             })
             ->where('type', 'poll')
@@ -113,7 +113,7 @@ class Poll extends Model
             ->whereHas('content', function ($query) {
                 $query->where('status', 1);
             })
-            ->whereHas('content.destinations', function ($query) use($destination_id) {
+            ->whereHas('content.destinations', function ($query) use ($destination_id) {
                 $query->where('destinations.id', $destination_id);
             })
             ->whereDoesntHave('poll_results', function ($query) {
