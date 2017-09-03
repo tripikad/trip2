@@ -1,13 +1,24 @@
 <template>
 
-    <div>
+    <div ref="answer_div">
 
         <div class="margin-bottom-md PollAnswer__title">
             {{question}}
         </div>
 
-        <div class="margin-bottom-md">
-            <div class="PollAnswer__radio">
+        <div class="margin-bottom-md PollAnswer__title">
+            <component
+                is="PhotoCard"
+                v-if="image_small && image_large"
+                :small="image_small"
+                :large="image_large"
+            >
+            </component>
+        </div>
+    
+        <div v-if="displayed_results.length == 0">
+
+            <div class="margin-bottom-md PollAnswer__radio">
 
                 <div class="PollAnswer__option" v-for="opt in answer_options">
 
@@ -45,15 +56,31 @@
                 </div>
 
             </div>
-        </div>
 
-        <div class="margin-bottom-md">
+            <div class="margin-bottom-md PollAnswer__error" v-if="error">
+                {{ error }}
+            </div>
+
+            <div class="margin-bottom-md">
+
+                <component
+                    v-on:click.native.once="answer"
+                    is="Button"
+                    :title="answer_trans"
+                    route="javascript:;"
+                >
+                </component>
+
+            </div>
+
+        </div>
+        
+        <div v-else>
 
             <component
-                v-on:click.native="answer"
-                is="Button"
-                :title="answer_trans"
-                route="javascript:;"
+                is="Barchart"
+                :items="displayed_results"
+                :width="result_width"
             >
             </component>
 
@@ -65,41 +92,60 @@
 
 <script>
 
-    import Alert from '../Alert/Alert.vue'
+    import Barchart from '../Barchart/Barchart.vue'
     import Button from '../Button/Button.vue'
+    import PhotoCard from '../PhotoCard/PhotoCard.vue'
 
     export default {
 
         components : {
-            Alert,
-            Button
+            Barchart,
+            Button,
+            PhotoCard
         },
 
         props : {
             options : {default : ''},
             type : {default : ''},
             answer_trans : {default : ''},
-            id : {default : 0}
+            id : {default : 0},
+            select_error : {default : ''},
+            save_error : {default : ''},
+            image_small : {default : ''},
+            image_large : {default : ''},
+            results : {default : []}
         },
         
         data : function() {
             return {
                 answer_options : [],
                 question : '',
-                checked : []
+                checked : [],
+                error : '',
+                displayed_results : [],
+                result_width : 0
             };
         },
 
         methods: {
             answer: function () {
+                if (this.checked.length == 0) {
+                    this.error = this.select_error;
+                    return;
+                }
+                
                 this.$http.post('/poll/answer', {'id' : this.id, 'values' : this.checked})
-                    .then(res => {
-                        console.log(res);
+                    .then(function(res) {                    
+                        this.displayed_results = res.body;
+                    },function (res) {
+                        this.error = this.save_error;
                     })
             }
         },
 
         mounted() {
+            this.result_width = (this.$refs.answer_div.clientWidth * 0.8) - 12;
+            this.displayed_results = this.results;
             this.question = this.options.question;
             var opts = this.options.options;
             for (var i = 0; i < opts.length; i++) {

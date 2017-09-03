@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
 use App\Poll;
 use App\User;
 use App\Content;
@@ -28,11 +29,22 @@ class V2DestinationController extends Controller
         $travelmates = Content::getLatestPagedItems('travelmate', 6, $destination->id);
         $news = Content::getLatestPagedItems('news', 2, $destination->id);
 
-        $polls = Poll::getPollsByDestinationId($destination->id);
+        $polls = Poll::getUnansweredPollsByDestinationId($destination->id);
         $poll_field = null;
-        if ($polls->isNotEmpty()) {
+        $poll_results = [];
+        $poll = null;
+
+        if ($polls->isNotEmpty() && request()->user()) {
             $poll =  $polls->first();
             $poll_field = $poll->poll_fields->first();
+        } else {
+            $polls = Poll::getPollsByDestinationId($destination->id);
+
+            if ($polls->isNotEmpty()) {
+                $poll = $polls->first();
+                $poll_field = $poll->poll_fields->first();
+                $poll_results = $poll_field->getParsedResults();
+            }
         }
 
         $loggedUser = request()->user();
@@ -87,7 +99,15 @@ class V2DestinationController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->when($poll_field, function ($collection) use($poll_field, $poll) {
+                ->when($poll_field && $poll, function ($collection) use($poll_field, $poll_results, $poll) {
+                    $options = json_decode($poll_field->options, true);
+
+                    if (isset($options['image_id'])) {
+                        $image = Image::findOrFail($options['image_id']);
+                        $image_small = $image->preset('xsmall_square');
+                        $image_large = $image->preset('large');
+                    }
+
                     return $collection->push(component('Block')
                         ->is('gray')
                         ->with('content', collect()
@@ -99,7 +119,15 @@ class V2DestinationController extends Controller
                                 ->with('options', json_decode($poll_field->options, true))
                                 ->with('type', $poll_field->type)
                                 ->with('id', $poll->id)
+                                ->with('results', $poll_results)
+                                ->with('image_small', isset($image_small) ? $image_small : '')
+                                ->with('image_large', isset($image_large) ? $image_large : '')
                                 ->with('answer_trans', trans('content.poll.answer'))
+                                ->with('select_error', $poll_field->type == 'radio' ?
+                                    trans('content.poll.answer.error.select.one') :
+                                    trans('content.poll.answer.error.select.multiple')
+                                )
+                                ->with('save_error', trans('content.poll.answer.error.save'))
                             )
                         )
                     );

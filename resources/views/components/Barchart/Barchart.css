@@ -29,4 +29,5 @@
         font: $font-heading-sm;
         color: $white;
         border-radius: $border-radius-md;
+        white-space: nowrap;
     }

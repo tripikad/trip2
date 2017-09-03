@@ -423,6 +423,9 @@ return [
     'poll.table.search' => 'Otsi',
     'poll.table.search.empty' => 'Tühjenda otsing',
     'poll.answer' => 'Vasta',
+    'poll.answer.error.select.one' => 'Palun valige vastus enne vastamist',
+    'poll.answer.error.select.multiple' => 'Palun valige üks või enam vastust enne vastamist',
+    'poll.answer.error.save' => 'Vastamisel tekkis viga! Proovige uuesti.',
 
     // Destination
 

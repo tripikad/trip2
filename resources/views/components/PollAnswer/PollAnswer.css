@@ -5,7 +5,7 @@
 
     .PollAnswer__title {
         font: $font-heading-sm;
-        color: $blue;
+        color: $gray;
     }
     
     .PollAnswer__error {

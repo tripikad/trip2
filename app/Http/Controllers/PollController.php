@@ -561,7 +561,19 @@ class PollController extends Controller
         $this->validate($request, $rules);
 
         $poll = Poll::getPollById($request->id);
+        $poll_field = $poll->poll_fields->first();
 
-        return $request->id;
+        $values = $request->values;
+        if (!is_array($values)) {
+            $values = [$values];
+        }
+
+        $poll_result = $poll->poll_results()->create([
+            'field_id' => $poll_field->field_id,
+            'user_id' => request()->user()->id,
+            'result' => json_encode($values),
+        ]);
+
+        return $poll_field->getParsedResults();
     }
 }
