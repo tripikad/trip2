@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Image;
 use App\Poll;
 use App\User;
+use App\Image;
 use App\Content;
 use App\Destination;
 use Illuminate\Http\Request;
@@ -35,7 +35,7 @@ class V2DestinationController extends Controller
         $poll = null;
 
         if ($polls->isNotEmpty() && request()->user()) {
-            $poll =  $polls->first();
+            $poll = $polls->first();
             $poll_field = $poll->poll_fields->first();
         } else {
             $polls = Poll::getPollsByDestinationId($destination->id);
@@ -99,7 +99,7 @@ class V2DestinationController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->when($poll_field && $poll, function ($collection) use($poll_field, $poll_results, $poll) {
+                ->when($poll_field && $poll, function ($collection) use ($poll_field, $poll_results, $poll) {
                     $options = json_decode($poll_field->options, true);
 
                     if (isset($options['image_id'])) {

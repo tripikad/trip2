@@ -73,7 +73,7 @@ class PollField extends Model
         //To avoid that rounded values to not add up to 100%
         if ($last_not_zero && $total_percent > 100) {
             $results[$last_not_zero] -= ($total_percent - 100);
-        } else if ($last_not_zero && $total_percent < 100) {
+        } elseif ($last_not_zero && $total_percent < 100) {
             $results[$last_not_zero] += (100 - $total_percent);
         }
 

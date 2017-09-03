@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\PollField;
 use App\Poll;
 use App\Image;
-use App\Destination;
 use App\Content;
+use App\PollField;
+use App\Destination;
 use Illuminate\Http\Request;
 
 class PollController extends Controller
@@ -340,7 +340,7 @@ class PollController extends Controller
             $filename = Image::storeImageFile($request->file('poll_photo'));
             $image = Image::create(['filename' => $filename]);
             $options['image_id'] = $image->id;
-        } else if ($request->has('old_poll_photo')) {
+        } elseif ($request->has('old_poll_photo')) {
             $options['image_id'] = $request->old_poll_photo;
         }
 
@@ -366,7 +366,7 @@ class PollController extends Controller
                 $filename = Image::storeImageFile($request->file($photo_field));
                 $image = Image::create(['filename' => $filename]);
                 $options['image_id'] = $image->id;
-            } else if ($request->has('old_'.$photo_field)) {
+            } elseif ($request->has('old_'.$photo_field)) {
                 $old_photo_field = 'old_'.$photo_field;
                 $options['image_id'] = $request->$old_photo_field;
             }
@@ -418,7 +418,7 @@ class PollController extends Controller
                 'options' => $options,
             ];
 
-            if(isset($options['image_id'])) {
+            if (isset($options['image_id'])) {
                 $image = Image::findOrFail($options['image_id']);
                 $poll_field['image_small'] = $image->preset('xsmall_square');
                 $poll_field['image_large'] = $image->preset('large');
@@ -564,7 +564,7 @@ class PollController extends Controller
         $poll_field = $poll->poll_fields->first();
 
         $values = $request->values;
-        if (!is_array($values)) {
+        if (! is_array($values)) {
             $values = [$values];
         }
 
