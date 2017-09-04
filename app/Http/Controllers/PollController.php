@@ -6,8 +6,10 @@ use App\Poll;
 use App\Image;
 use App\Content;
 use App\PollField;
+use App\PollResult;
 use App\Destination;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PollController extends Controller
 {
@@ -562,17 +564,24 @@ class PollController extends Controller
 
         $poll = Poll::getPollById($request->id);
         $poll_field = $poll->poll_fields->first();
+        $logged_user = request()->user();
 
         $values = $request->values;
         if (! is_array($values)) {
             $values = [$values];
         }
 
-        $poll_result = $poll->poll_results()->create([
-            'field_id' => $poll_field->field_id,
-            'user_id' => request()->user()->id,
-            'result' => json_encode($values),
-        ]);
+        try {
+            PollResult::where('field_id', 30)
+                ->where('user_id', $logged_user->id)
+                ->firstOrFail();
+        } catch (ModelNotFoundException $ex) {
+            $poll_result = $poll->poll_results()->create([
+                'field_id' => $poll_field->field_id,
+                'user_id' => $logged_user->id,
+                'result' => json_encode($values),
+            ]);
+        }
 
         return $poll_field->getParsedResults();
     }
