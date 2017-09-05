@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 use App\NewsletterSubscription;
 use App\NewsletterLetterContent;
+use App\Http\Regions\FlightNewsletterSubscribe;
 
 class V2NewsletterController extends Controller
 {
@@ -276,11 +277,11 @@ class V2NewsletterController extends Controller
         }
     }
 
-    public function subscribe(Request $request, $id, User $user = null, $skip_request = false)
+    public function subscribe(Request $request, $id, $user = null, $skip_request = false)
     {
         $newsletter_type = NewsLetterType::findOrFail($id);
 
-        if (! $user) {
+        if ($user === null) {
             $user = $request->user();
         }
 
