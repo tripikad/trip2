@@ -68,7 +68,7 @@
                 <component
                     is="FormTextfield"
                     :name="'quiz_question[' + index + '][answer]'"
-                    :title="'Vastus ' + (index + 1)"
+                    :title="answer_trans + ' ' + (index + 1)"
                     v-model="field.answer"
                 >
                 </component>
@@ -114,7 +114,7 @@
                 v-on:click.native="addField('options')"
                 is="Button"
                 isclasses="Button--narrow"
-                title="Valikud"
+                :title="option_button_trans"
                 route="javascript:;"
             >
             </component>
@@ -123,7 +123,7 @@
                 v-on:click.native="addField('textareafield')"
                 is="Button"
                 isclasses="Button--narrow"
-                title="Teksti väli"
+                :title="textfield_button_trans"
                 route="javascript:;"
             >
             </component>
@@ -156,7 +156,10 @@
             select_one_trans : {default: 'Select one'},
             select_multiple_trans : {default: 'Select multiple'},
             answer_options_trans : {default: 'Answer options'},
-            add_option_trans : {default: 'Add option'}
+            add_option_trans : {default: 'Add option'},
+            answer_trans : {default: 'Answer'},
+            option_button_trans : {default: 'Options'},
+            textfield_button_trans : {default: 'Text field'}
         },
 
         components : {

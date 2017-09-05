@@ -1,0 +1,16 @@
+@import "variables";
+
+    .QuizTextRow__input {
+        border-radius: $border-radius-md;
+        border: $border-gray-md;
+        color: $black;
+        font: $font-heading-md;
+        padding: $padding-sm;
+        width: 100%;
+        opacity: $opacity-md;
+        background: $red;
+    }
+
+.QuizTextRow--green .QuizTextRow__input {
+    background: $green;
+}

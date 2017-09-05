@@ -286,6 +286,14 @@ Route::post('poll/answer', 'PollController@answerPoll')
     ->name('poll.answer')
     ->middleware('role:regular');
 
+Route::get('quiz/answer/{id}', 'PollController@showQuiz')
+    ->name('quiz.answer')
+    ->middleware('role:regular');
+
+Route::post('quiz/answer/{id}', 'PollController@answerQuiz')
+    ->name('quiz.answer')
+    ->middleware('role:regular');
+
 // Content redirects
 
 Route::get('content/{type}', 'V2ContentController@redirectIndex')

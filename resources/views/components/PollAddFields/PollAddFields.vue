@@ -39,6 +39,9 @@
             :select_multiple_trans="select_multiple_trans"
             :answer_options_trans="answer_options_trans"
             :add_option_trans="add_option_trans"
+            :answer_trans="answer_trans"
+            :option_button_trans="option_button_trans"
+            :textfield_button_trans="textfield_button_trans"
         >
         </component>
 
@@ -63,7 +66,10 @@
             select_one_trans : {default: 'Select one'},
             select_multiple_trans : {default: 'Select multiple'},
             answer_options_trans : {default: 'Answer options'},
-            add_option_trans : {default: 'Add option'}
+            add_option_trans : {default: 'Add option'},
+            answer_trans : {default: 'Answer'},
+            option_button_trans : {default: 'Options'},
+            textfield_button_trans : {default: 'Text field'}
         },
         
         components : {

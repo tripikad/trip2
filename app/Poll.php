@@ -75,12 +75,12 @@ class Poll extends Model
     public function scopeGetPollById($query, $id)
     {
         return $query
-            ->with(
+            ->with([
                 'content',
                 'content.destinations',
                 'poll_fields',
                 'poll_results'
-            )
+            ])
             ->findOrFail($id);
     }
 

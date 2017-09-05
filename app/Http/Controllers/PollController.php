@@ -233,6 +233,9 @@ class PollController extends Controller
                             ->with('select_multiple_trans', trans('content.poll.edit.option.select.multiple'))
                             ->with('answer_options_trans', trans('content.poll.edit.option.answer.options'))
                             ->with('add_option_trans', trans('content.poll.edit.option.add'))
+                            ->with('answer_trans', trans('content.poll.answer.noun'))
+                            ->with('option_button_trans', trans('content.poll.edit.options'))
+                            ->with('textfield_button_trans', trans('content.poll.edit.textfield'))
                         )
                         ->push(component('FormCheckbox')
                             ->with('title', trans('content.poll.create.active'))
@@ -486,6 +489,9 @@ class PollController extends Controller
                             ->with('select_multiple_trans', trans('content.poll.edit.option.select.multiple'))
                             ->with('answer_options_trans', trans('content.poll.edit.option.answer.options'))
                             ->with('add_option_trans', trans('content.poll.edit.option.add'))
+                            ->with('answer_trans', trans('content.poll.answer.noun'))
+                            ->with('option_button_trans', trans('content.poll.edit.options'))
+                            ->with('textfield_button_trans', trans('content.poll.edit.textfield'))
                         )
                         ->push(component('FormCheckbox')
                             ->with('title', trans('content.poll.create.active'))
@@ -584,5 +590,185 @@ class PollController extends Controller
         }
 
         return $poll_field->getParsedResults();
+    }
+
+    public function showQuiz($id)
+    {
+        $quiz = Poll::getPollById($id);
+        $logged_user = request()->user();
+
+        $quiz_result = $quiz->poll_results()->where('user_id', $logged_user->id)->get();
+
+        $content = collect()
+            ->push(component('Title')
+                ->with('title', $quiz->name)
+            );
+
+        if ($quiz_result->isEmpty()) {
+            $content->push($this->getQuizAnswerFormComponent($quiz));
+        } else {
+            $content = $content->merge($this->getQuizAnswerResultComponent($quiz));
+        }
+
+        return layout('1col')
+            ->with('background', component('BackgroundMap'))
+                ->with('color', 'gray')
+
+                ->with('header', region('Header', collect()
+                    ->push(component('Title')
+                        ->is('white')
+                        ->with('title', trans('content.poll.edit.quiz'))
+                    )
+                ))
+            ->with('content', $content)
+            ->with('footer', region('FooterLight'))
+            ->render();
+    }
+
+    public function getQuizAnswerFormComponent(Poll $quiz)
+    {
+        $fields = collect();
+
+        foreach ($quiz->poll_fields->getIterator() as $index => $field) {
+            $options = json_decode($field->options, true);
+            $question = $options['question'];
+            $type = $field->type;
+
+            $fields->push(
+                component('Title')
+                    ->is('small')
+                    ->with('title', ($index + 1).'. '.$question)
+            );
+
+            if (isset($options['image_id'])) {
+                $image = Image::findOrFail($options['image_id']);
+                $fields->push(
+                    component('PhotoCard')
+                        ->with('small', $image->preset('large'))
+                        ->with('large', $image->preset('large'))
+                );
+            }
+
+            if ($type == 'text') {
+                $fields->push(
+                    component('FormTextfield')
+                        ->with('name', sprintf('quiz_answer[%d]', $field->field_id))
+                        ->with('placeholder', trans('content.poll.answer.noun'))
+                );
+            } elseif ($type == 'radio') {
+                foreach ($options['options'] as $opt) {
+                    $fields->push(
+                        component('FormRadio')
+                            ->with('name', sprintf('quiz_answer[%d]', $field->field_id))
+                            ->with('options', [['id' => $opt, 'name' => $opt]])
+                    );
+                }
+            } elseif ($type == 'checkbox') {
+                foreach ($options['options'] as $opt) {
+                    $fields->push(
+                        component('FormCheckbox')
+                            ->with('name', sprintf('quiz_answer[%d][%s]', $field->field_id, $opt))
+                            ->with('title', $opt)
+                    );
+                }
+            }
+        }
+
+        return component('Form')
+                    ->with('route', route('quiz.answer', ['id' => $quiz->id]))
+                    ->with('fields', $fields
+                        ->push(component('FormButton')
+                            ->is('large')
+                            ->with('title', trans('content.poll.answer'))
+                        )
+                    );
+    }
+
+    public function getQuizAnswerResultComponent(Poll $quiz)
+    {
+        $fields = collect();
+
+        foreach ($quiz->poll_fields->getIterator() as $index => $field) {
+            $options = json_decode($field->options, true);
+            $question = $options['question'];
+            $type = $field->type;
+
+            $fields->push(
+                component('Title')
+                    ->is('small')
+                    ->with('title', ($index + 1).'. '.$question)
+            );
+
+            if (isset($options['image_id'])) {
+                $image = Image::findOrFail($options['image_id']);
+                $fields->push(
+                    component('PhotoCard')
+                        ->with('small', $image->preset('large'))
+                        ->with('large', $image->preset('large'))
+                );
+            }
+
+            $poll_result = $field->poll_results()
+                ->where('user_id', request()->user()->id)
+                ->get()
+                ->first();
+            $user_answer = json_decode($poll_result->result, true);
+
+            if ($type == 'checkbox' || $type == 'radio') {
+                $fields->push(component('QuizOptionRow')
+                    ->with('type', $type)
+                    ->with('answer', is_array($options['answer']) ? $options['answer'] : [$options['answer']])
+                    ->with('user_answer', is_array($user_answer) ? $user_answer : [$user_answer])
+                    ->with('options', $options['options'])
+                );
+            } elseif ($type == 'text') {
+                $fields->push(component('QuizTextRow')
+                    ->with('answer', mb_strtolower($options['answer']))
+                    ->with('user_answer', mb_strtolower($user_answer))
+                    ->with('value', $user_answer)
+                );
+            }
+        }
+
+        return $fields;
+    }
+
+    public function answerQuiz(Request $request, $id)
+    {
+        $quiz = Poll::getPollById($id);
+
+        $logged_user = $request->user();
+        $results = [];
+        $rules = [
+            'quiz_answer' => 'required',
+            'quiz_answer.*' => 'required'
+        ];
+
+        foreach ($quiz->poll_fields->getIterator() as $index => $field) {
+            $result = [
+                'field_id' => $field->field_id,
+                'user_id' => $logged_user->id
+            ];
+
+            if ($field->type == 'checkbox') {
+                $rules['quiz_answer.'.$field->field_id] = 'min:1';
+                $rules['quiz_answer.'.$field->field_id.'.*'] = 'required';
+
+                $lowercase_asnwer = array_map("mb_strtolower", array_keys($request->input('quiz_answer.'.$field->field_id)));
+                $result['result'] = json_encode($lowercase_asnwer);
+            } else {
+                $lowercase_asnwer = array_map("mb_strtolower", $request->input('quiz_answer.'.$field->field_id));
+                $result['result'] = json_encode($lowercase_asnwer);
+            }
+
+            $results[] = $result;
+        }
+
+        $this->validate(request(), $rules);
+
+        $quiz->poll_results()->createMany($results);
+
+        return redirect()
+            ->route('quiz.answer', ['id' => $quiz->id]);
     }
 }
