@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Content;
 use Carbon\Carbon;
 use App\NewsletterSent;
