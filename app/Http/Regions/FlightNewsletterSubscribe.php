@@ -27,6 +27,10 @@ class FlightNewsletterSubscribe
         if ($newsletter_type) {
             if ($user) {
                 $subscriptions = $newsletter_type->user_subscriptions;
+
+                if ($subscriptions) {
+                    $subscriptions = $subscriptions->where('active', 1);
+                }
             } else {
                 $subscriptions = collect([]);
             }
