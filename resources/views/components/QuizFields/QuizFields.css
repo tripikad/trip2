@@ -5,6 +5,13 @@
         display: block ?if $mobile;
         align-items: center;
     }
+
+    .QuizFields__label {
+        color: $gray;
+        font: $font-heading-sm;
+        margin-left: $margin-xs;
+    }
+
     .QuizFields__delete {
         margin: 0 $margin-sm 0 $margin-sm;
         margin: 0 0 $margin-sm 0 ?if $mobile;

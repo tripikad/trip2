@@ -90,7 +90,8 @@ class PollController extends Controller
         $items = $this->getPollTableHeaderItems();
 
         foreach ($polls->items() as $item) {
-            $route = route('poll.edit', ['id' => $item->id]);
+            $url_name = $item->poll_results_count == 0 ? 'poll.edit' : 'poll.show';
+            $route = route($url_name, ['id' => $item->id]);
 
             $items[] = $this->getPollTableCellItem($item->id, $route);
             $items[] = $this->getPollTableCellItem($item->name, $route);
@@ -222,7 +223,7 @@ class PollController extends Controller
                             ->with('title', trans('content.poll.edit.add.field.title'))
                         )
                         ->push(component('PollAddFields')
-                            ->with('value', old('poll_type', 'poll'))
+                            ->with('value', old('poll_type', 'quiz'))
                             ->with('question_trans', trans('content.poll.edit.question'))
                             ->with('option_trans', trans('content.poll.edit.option'))
                             ->with('poll_trans', trans('content.poll.edit.poll'))
@@ -283,6 +284,7 @@ class PollController extends Controller
                         $rules['quiz_question.'.$index.'.options.*'] = 'required';
                         $rules['quiz_question.'.$index.'.options'] = 'required|min:2';
                         $rules['quiz_question.'.$index.'.options.select_type'] = 'required';
+                        $rules['quiz_question.'.$index.'.answer'] = 'required|min:1';
                     }
                 }
             }
@@ -366,6 +368,10 @@ class PollController extends Controller
                 'answer' => $question['answer'],
             ];
 
+            if (is_array($question['answer'])) {
+                $options['answer'] = array_keys($question['answer']);
+            }
+
             $photo_field = 'quiz_photo_'.$index;
             if ($request->hasFile($photo_field)) {
                 $filename = Image::storeImageFile($request->file($photo_field));
@@ -399,7 +405,53 @@ class PollController extends Controller
 
     public function show($id)
     {
-        return '';
+        $poll = Poll::getPollById($id);
+
+        $total_people_ans = $poll->poll_results_count / $poll->poll_fields_count;
+
+        $content = collect()
+            ->push(component('Title')
+                ->with('title', $poll->name)
+            )
+            ->push(
+                component('Title')
+                    ->is('small')
+                    ->with('title', sprintf("%s: %d", trans('content.poll.show.user.count'), $total_people_ans))
+            );
+
+        if ($total_people_ans > 0) {
+            foreach ($poll->poll_fields->getIterator() as $index => $field) {
+                $options = json_decode($field->options, true);
+                $question = $options['question'];
+                $type = $field->type;
+
+                $content->push(
+                    component('Title')
+                        ->is('small')
+                        ->with('title', ($index + 1).'. '.$question)
+                );
+
+                $parsed_results = $field->getParsedResults();
+
+                $content->push(
+                    component('Barchart')->with('items', $parsed_results)
+                );
+            }
+        }
+
+        return layout('1col')
+            ->with('background', component('BackgroundMap'))
+                ->with('color', 'gray')
+
+                ->with('header', region('Header', collect()
+                    ->push(component('Title')
+                        ->is('white')
+                        ->with('title', trans('content.poll.show.title'))
+                    )
+                ))
+            ->with('content', $content)
+            ->with('footer', region('FooterLight'))
+            ->render();
     }
 
     public function edit($id)
@@ -546,17 +598,6 @@ class PollController extends Controller
 
         return redirect()
             ->route('poll.index');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function answerPoll(Request $request)
@@ -757,8 +798,15 @@ class PollController extends Controller
                 $lowercase_asnwer = array_map("mb_strtolower", array_keys($request->input('quiz_answer.'.$field->field_id)));
                 $result['result'] = json_encode($lowercase_asnwer);
             } else {
-                $lowercase_asnwer = array_map("mb_strtolower", $request->input('quiz_answer.'.$field->field_id));
-                $result['result'] = json_encode($lowercase_asnwer);
+                $answer = $request->input('quiz_answer.'.$field->field_id);
+
+                if (is_array($answer)) {
+                    $lowercase_answer = array_map("mb_strtolower", $answer);
+                } else {
+                    $lowercase_answer = mb_strtolower($answer);
+                }
+
+                $result['result'] = json_encode($lowercase_answer);
             }
 
             $results[] = $result;

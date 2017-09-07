@@ -126,14 +126,7 @@
 
             populateFields: function(){
                 var options = JSON.parse(this.answer_options_json);
-                if (options.length > 0 && typeof options[0] != 'object') {
-                    this.answer_options = [];
-                    for(var i = 0; i < options.length; i++) {
-                        this.answer_options.push({'value' : options[i]});
-                    }
-                } else {
-                    this.answer_options = options;
-                }
+                this.answer_options = options;
             }
         },
 

@@ -58,21 +58,38 @@
                 :answer_options_trans="answer_options_trans"
                 :add_option_trans="add_option_trans"
                 :type="field.poll_opt_type"
-                :answer_options_json="field.poll_opt_val"
-                v-on:input="field.poll_opt_val = JSON.stringify($event)"
+                :answer_options_json="JSON.stringify(field.poll_opt_val)"
+                v-on:input="field.poll_opt_val = $event; $forceUpdate();"
             >
             </component>
 
-            <div class="margin-bottom-md">
+            <div class="margin-bottom-md QuizFields__label">
+                {{ answer_trans }} {{ (index + 1) }}
+            </div>
+
+            <div class="margin-bottom-md" v-if="field.type == 'textareafield'">
 
                 <component
                     is="FormTextfield"
                     :name="'quiz_question[' + index + '][answer]'"
-                    :title="answer_trans + ' ' + (index + 1)"
                     v-model="field.answer"
                 >
                 </component>
 
+            </div>
+
+            <div class="margin-bottom-md"
+                v-if="field.type == 'options'"
+                v-for="opt in parseOptions(field)"
+            >
+                <component
+                    is="FormCheckbox"
+                    :name="'quiz_question[' + index + '][answer][' + opt + ']'"
+                    :title="opt"
+                    :val="field.answer.includes(opt)"
+                    v-model="field.answer_opts[opt]"
+                >
+                </component>
             </div>
 
             <div class="margin-bottom-md col-2" v-if="field.image_small && field.image_large">
@@ -144,6 +161,7 @@
     import FormUpload from '../FormUpload/FormUpload.vue'
     import Icon from '../Icon/Icon.vue'
     import FormHidden from '../FormHidden/FormHidden.vue'
+    import FormCheckbox from '../FormCheckbox/FormCheckbox.vue'
 
 	export default {
         
@@ -171,6 +189,7 @@
             FormUpload,
             Icon,
             FormHidden,
+            FormCheckbox,
             'options' : FormTextfield,
             'textareafield' : FormTextarea
         },
@@ -186,7 +205,8 @@
                 this.cnt++;
                 this.fields.push(
                     {
-                        'type' : type
+                        'type' : type,
+                        'answer_opts' : {}
                     }
                 );
             },
@@ -201,6 +221,24 @@
                 }
 
                 this.fields = new_arr;
+            },
+
+            parseOptions: function(options) {
+                var new_opts = [];
+                console.log(options);
+                options = options.poll_opt_val
+
+                if (options == undefined) {
+                    return new_opts;
+                }
+
+                for (var i = 0; i < options.length; i++) {
+                    if (options[i]['value'] != "") {
+                        new_opts.push(options[i]['value']);
+                    }
+                }
+
+                return new_opts;
             }
         },
 
@@ -210,12 +248,21 @@
                 var field = fields[i];
                 var type = field.type == 'text' ? 'textareafield' : 'options';
 
+                var poll_opt_val = [];
+                if (field.options.options != undefined) {
+                    for(var j = 0; j < field.options.options.length; j++) {
+                        poll_opt_val.push({'value' : field.options.options[j]});
+                        console.log(field.options.answer.includes(field.options.options[j]));
+                    }
+                }
+
                 var quiz_field = {
                     'type' : type,
                     'answer' : field.options.answer,
                     'question' : field.options.question,
                     'poll_opt_type' : field.type,
-                    'poll_opt_val' : JSON.stringify(field.options.options),
+                    'poll_opt_val' : poll_opt_val,
+                    'answer_opts' : {}
                 };
 
                 if (field.image_small != undefined && field.image_large != undefined) {

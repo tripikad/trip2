@@ -54,6 +54,7 @@ class Poll extends Model
 
         return $query
             ->with('content')
+            ->withCount('poll_results')
             ->when($name, function ($query) use ($name) {
                 return $query->where('poll.name', $name);
             })
@@ -81,6 +82,7 @@ class Poll extends Model
                 'poll_fields',
                 'poll_results'
             ])
+            ->withCount(['poll_fields', 'poll_results'])
             ->findOrFail($id);
     }
 

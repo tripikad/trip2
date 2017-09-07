@@ -22,6 +22,7 @@ import EditorSmall from './components/EditorSmall/EditorSmall.vue'
 import Dotmap from './components/Dotmap/Dotmap.vue'
 import Flag from './components/Flag/Flag.vue'
 import FormButtonProcess from './components/FormButtonProcess/FormButtonProcess.vue'
+import FormCheckbox from './components/FormCheckbox/FormCheckbox.vue'
 import FormEditor from './components/FormEditor/FormEditor.vue'
 import FormHidden from './components/FormHidden/FormHidden.vue'
 import FormImageId from './components/FormImageId/FormImageId.vue'
@@ -81,6 +82,7 @@ new Vue({
         Dotmap,
         Flag,
         FormButtonProcess,
+        FormCheckbox,
         FormEditor,
         FormHidden,
         FormImageId,

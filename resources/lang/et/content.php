@@ -429,6 +429,8 @@ return [
     'poll.answer.error.select.one' => 'Palun valige vastus enne vastamist',
     'poll.answer.error.select.multiple' => 'Palun valige üks või enam vastust enne vastamist',
     'poll.answer.error.save' => 'Vastamisel tekkis viga! Proovige uuesti.',
+    'poll.show.title' => 'Tulemused',
+    'poll.show.user.count' => 'Vastanud kasutajate arv',
 
     // Destination
 

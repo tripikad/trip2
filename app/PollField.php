@@ -42,14 +42,19 @@ class PollField extends Model
             return [];
         }
 
-        $options = json_decode($poll_field->options, true);
-        $options = array_flip($options['options']);
-        $results = array_fill_keys(array_keys($options), 0);
+        $options_arr = json_decode($poll_field->options, true);
+        $options_lower = array_map("mb_strtolower", $options_arr['options']);
+        $results = array_fill_keys($options_lower, 0);
         $total_results = 0;
 
         foreach ($poll_results->getIterator() as $result) {
             $answer_opts = json_decode($result->result, true);
-            foreach ($answer_opts as $single_opt) {
+
+            if(! is_array($answer_opts))
+                $answer_opts = [$answer_opts];
+            $answer_opts_lower = array_map("mb_strtolower", $answer_opts);
+
+            foreach ($answer_opts_lower as $single_opt) {
                 if (isset($results[$single_opt])) {
                     $results[$single_opt]++;
                     $total_results++;
@@ -57,6 +62,45 @@ class PollField extends Model
             }
         }
 
+        $results = PollField::calculateOccurancesToPercents($results, $total_results);
+
+        $results = array_map(function ($k, $v) {
+            return ['title' => $k, 'value' => $v];
+        }, array_keys($results), $results);
+
+        return $results;
+    }
+
+    protected function getParsedTextResults()
+    {
+        $poll_field = $this->fresh(['poll_results']);
+        $poll_results = $poll_field->relations['poll_results'];
+
+        $all_results = [];
+        $total_answers = $poll_results->count();
+
+        foreach ($poll_results->getIterator() as $result) {
+            $answer = mb_strtolower(json_decode($result->result));
+            if (isset($all_results[$answer])) {
+                $all_results[$answer]++;
+            } else {
+                $all_results[$answer] = 1;
+            }
+        }
+
+        arsort($all_results);
+
+        $results = PollField::calculateOccurancesToPercents($all_results, $total_answers);
+
+        $results = array_map(function ($k, $v) {
+            return ['title' => $k, 'value' => $v];
+        }, array_keys($results), $results);
+
+        return $results;
+    }
+
+    static protected function calculateOccurancesToPercents($results, $total_results)
+    {
         $total_percent = 0;
         $last_not_zero = null;
 
@@ -77,15 +121,6 @@ class PollField extends Model
             $results[$last_not_zero] += (100 - $total_percent);
         }
 
-        $results = array_map(function ($k, $v) {
-            return ['title' => $k, 'value' => $v];
-        }, array_keys($results), $results);
-
         return $results;
-    }
-
-    protected function getParsedTextResults()
-    {
-        //
     }
 }
