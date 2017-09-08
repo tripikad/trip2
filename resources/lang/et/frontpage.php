@@ -34,4 +34,7 @@ return [
     'index.about.register' => 'Liitu Trip.ee-ga',
     'index.about.login' => 'Logi sisse',
 
+    'index.poll.promo' => 'Viktoriin \':title\' ootab täitmist!',
+    'index.poll.promo.route' => 'Vastama',
+
 ];

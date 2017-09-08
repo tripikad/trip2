@@ -58,10 +58,14 @@ class Poll extends Model
             ->when($name, function ($query) use ($name) {
                 return $query->where('poll.name', $name);
             })
-            ->when($start, function ($query) use ($start) {
+            ->when($start && $end, function ($query) use($start, $end) {
+                return $query->where('poll.start_date', '>=', $start)
+                    ->where('poll.end_date', '<=', $end);
+            })
+            ->when($start && !$end, function ($query) use ($start) {
                 return $query->where('poll.start_date', $start);
             })
-            ->when($end, function ($query) use ($end) {
+            ->when($end && !$start, function ($query) use ($end) {
                 return $query->where('poll.end_date', $end);
             })
             ->when(($active == 1 || $active == 0) && $active !== false, function ($query) use ($active) {
@@ -129,5 +133,25 @@ class Poll extends Model
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
             ->get();
+    }
+
+    public function scopeGetUnansweredQuiz($query)
+    {
+        $query->whereHas('content', function ($query) {
+                $query->where('status', 1);
+            })
+            ->where('type', 'quiz')
+            ->where('start_date', '<=', date('Y-m-d'))
+            ->where('end_date', '>=', date('Y-m-d'))
+            ->orderBy('start_date', 'DESC')
+            ->limit(1);
+
+        if(request()->user()) {
+            $query->whereDoesntHave('poll_results', function ($query) {
+                $query->where('poll_results.user_id', request()->user()->id);
+            });
+        }
+
+        return $query->get();
     }
 }

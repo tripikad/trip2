@@ -6,6 +6,7 @@ use Cache;
 use App\Image;
 use App\Content;
 use App\Destination;
+use App\Poll;
 
 class V2FrontpageController extends Controller
 {
@@ -25,17 +26,26 @@ class V2FrontpageController extends Controller
             return Destination::select('id', 'name', 'slug')->get();
         });
 
-        return layout('frontpage')
+        $quiz = Poll::getUnansweredQuiz();
+
+        $layout = layout('frontpage');
+
+        if ($quiz->isNotEmpty()) {
+            $quiz = $quiz->first();
+            $route = $loggedUser ? route('quiz.answer', ['id' => $quiz->id]) : route('login.form');
+            $layout->with('promobar', component('PromoBar')
+                ->with('title', trans('frontpage.index.poll.promo', ['title' => $quiz->name]))
+                ->with('route_title', trans('frontpage.index.poll.promo.route'))
+                ->with('route', $route)
+            );
+        }
+
+        return $layout
 
             ->with('title', trans('site.about'))
             ->with('head_title', trans('site.about'))
             ->with('head_description', trans('site.description.main'))
             ->with('head_image', Image::getSocial())
-
-            /*->with('promobar', component('PromoBar')
-                ->with('title', "Kui vaatad Trippi telefonis ja Chrome'iga, siis võib leht katki olla. Proovi ajutiselt Firefoxi")
-                ->render()
-             )*/
 
             ->with('header', region('FrontpageHeader', $destinations))
 
