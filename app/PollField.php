@@ -43,16 +43,17 @@ class PollField extends Model
         }
 
         $options_arr = json_decode($poll_field->options, true);
-        $options_lower = array_map("mb_strtolower", $options_arr['options']);
+        $options_lower = array_map('mb_strtolower', $options_arr['options']);
         $results = array_fill_keys($options_lower, 0);
         $total_results = 0;
 
         foreach ($poll_results->getIterator() as $result) {
             $answer_opts = json_decode($result->result, true);
 
-            if(! is_array($answer_opts))
+            if (! is_array($answer_opts)) {
                 $answer_opts = [$answer_opts];
-            $answer_opts_lower = array_map("mb_strtolower", $answer_opts);
+            }
+            $answer_opts_lower = array_map('mb_strtolower', $answer_opts);
 
             foreach ($answer_opts_lower as $single_opt) {
                 if (isset($results[$single_opt])) {
@@ -62,7 +63,7 @@ class PollField extends Model
             }
         }
 
-        $results = PollField::calculateOccurancesToPercents($results, $total_results);
+        $results = self::calculateOccurancesToPercents($results, $total_results);
 
         $results = array_map(function ($k, $v) {
             return ['title' => $k, 'value' => $v];
@@ -90,7 +91,7 @@ class PollField extends Model
 
         arsort($all_results);
 
-        $results = PollField::calculateOccurancesToPercents($all_results, $total_answers);
+        $results = self::calculateOccurancesToPercents($all_results, $total_answers);
 
         $results = array_map(function ($k, $v) {
             return ['title' => $k, 'value' => $v];
@@ -99,7 +100,7 @@ class PollField extends Model
         return $results;
     }
 
-    static protected function calculateOccurancesToPercents($results, $total_results)
+    protected static function calculateOccurancesToPercents($results, $total_results)
     {
         $total_percent = 0;
         $last_not_zero = null;

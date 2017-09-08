@@ -407,7 +407,7 @@ class PollController extends Controller
     {
         $grid_items = collect();
 
-        foreach($parsed_results as $index => $result) {
+        foreach ($parsed_results as $index => $result) {
             if ($result['value'] < 10) {
                 $grid_items->push(component('MetaLink')->is('smaller')->with('title', $result['title']));
                 $grid_items->push(component('MetaLink')->is('smaller')->with('title', $result['value'].'%'));
@@ -821,26 +821,26 @@ class PollController extends Controller
         $results = [];
         $rules = [
             'quiz_answer' => 'required',
-            'quiz_answer.*' => 'required'
+            'quiz_answer.*' => 'required',
         ];
 
         foreach ($quiz->poll_fields->getIterator() as $index => $field) {
             $result = [
                 'field_id' => $field->field_id,
-                'user_id' => $logged_user->id
+                'user_id' => $logged_user->id,
             ];
 
             if ($field->type == 'checkbox') {
                 $rules['quiz_answer.'.$field->field_id] = 'min:1';
                 $rules['quiz_answer.'.$field->field_id.'.*'] = 'required';
 
-                $lowercase_asnwer = array_map("mb_strtolower", array_keys($request->input('quiz_answer.'.$field->field_id)));
+                $lowercase_asnwer = array_map('mb_strtolower', array_keys($request->input('quiz_answer.'.$field->field_id)));
                 $result['result'] = json_encode($lowercase_asnwer);
             } else {
                 $answer = $request->input('quiz_answer.'.$field->field_id);
 
                 if (is_array($answer)) {
-                    $lowercase_answer = array_map("mb_strtolower", $answer);
+                    $lowercase_answer = array_map('mb_strtolower', $answer);
                 } else {
                     $lowercase_answer = mb_strtolower($answer);
                 }

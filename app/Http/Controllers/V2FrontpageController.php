@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Cache;
+use App\Poll;
 use App\Image;
 use App\Content;
 use App\Destination;
-use App\Poll;
 
 class V2FrontpageController extends Controller
 {
