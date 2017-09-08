@@ -42,7 +42,13 @@
 
         </div>
 
-        <div class="margin-bottom-md col-2" v-if="image_small && image_large">
+        <div class="margin-bottom-md">
+
+            <label class="PollFields__label">{{ picture_trans }}</label>
+
+        </div>
+
+        <div class="margin-bottom-md col-2 PollFields__picture" v-if="image_small && image_large">
 
             <component
                 is="PhotoCard"
@@ -58,11 +64,21 @@
             >
             </component>
 
+            <a v-on:click="deletePicture()">
+
+                <component
+                    is="Icon"
+                    isclasses="white"
+                    icon="icon-close"
+                    size="lg"
+                >
+                </component>
+
+            </a>
+
         </div>
 
         <div class="margin-bottom-md">
-
-            <label class="FormTextfield__label">{{ picture_trans }}</label>
 
             <component
                 is="FormUpload"
@@ -92,7 +108,7 @@
     import PhotoCard from '../PhotoCard/PhotoCard.vue'
     import PollOption from '../PollOption/PollOption.vue'
     import Title from '../Title/Title.vue'
-
+    import Icon from '../Icon/Icon.vue'
 
 	export default {
 
@@ -102,7 +118,8 @@
             FormUpload,
             PhotoCard,
             PollOption,
-            Title
+            Title,
+            Icon
         },
 
         props : {
@@ -129,6 +146,13 @@
             };
         },
 
+        methods: {
+            deletePicture: function () {
+                this.image_small = '';
+                this.image_large = '';
+            }
+        },
+
         mounted() {
             var field = JSON.parse(this.fields_json);
             if (field.length == 1) {
@@ -136,7 +160,16 @@
                 this.type = field.type;
                 this.field_id = field.field_id;
                 this.question = field.options.question;
-                this.answer_options_json = JSON.stringify(field.options.options);
+
+                var answer_options = [];
+
+                if (field.options.options != undefined) {
+                    for(var j = 0; j < field.options.options.length; j++) {
+                        answer_options.push({'value' : field.options.options[j]});
+                    }
+                }
+
+                this.answer_options_json = JSON.stringify(answer_options);
 
                 if (field.image_small != undefined && field.image_large != undefined) {
                     this.image_small = field.image_small;

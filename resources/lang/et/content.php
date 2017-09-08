@@ -430,7 +430,7 @@ return [
     'poll.answer.error.select.multiple' => 'Palun valige üks või enam vastust enne vastamist',
     'poll.answer.error.save' => 'Vastamisel tekkis viga! Proovige uuesti.',
     'poll.show.title' => 'Tulemused',
-    'poll.show.user.count' => 'Vastanud kasutajate arv',
+    'poll.show.user.count' => 'Vastanud kasutajate arv: :count',
 
     // Destination
 

@@ -4,7 +4,7 @@
 
         <div class="margin-bottom-md">
 
-            <label class="FormTextfield__label">{{ select_type_trans }}</label>
+            <label class="PollOption__label">{{ select_type_trans }}</label>
 
             <component 
                 is="FormRadio"
@@ -18,9 +18,9 @@
 
         <div class="margin-bottom-md">
 
-            <label class="FormTextfield__label">{{ answer_options_trans }}</label>
+            <label class="PollOption__label">{{ answer_options_trans }}</label>
 
-            <div class="FormTextfield margin-bottom-md PollFields__option" v-for="(opt, index) in answer_options">
+            <div class="FormTextfield margin-bottom-md PollOption__option" v-for="(opt, index) in answer_options">
 
                 <input
                     class="FormTextfield__input"
@@ -32,7 +32,7 @@
                     v-on:input="$emit('input', answer_options)"
                 >
 
-                <a v-if="answer_options.length > 2" v-on:click="deleteField(index)" class="PollFields__delete">
+                <a v-if="answer_options.length > 2" v-on:click="deleteField(index)" class="PollOption__delete">
 
                     <component 
                         is="Icon"

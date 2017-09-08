@@ -223,7 +223,7 @@ class PollController extends Controller
                             ->with('title', trans('content.poll.edit.add.field.title'))
                         )
                         ->push(component('PollAddFields')
-                            ->with('value', old('poll_type', 'quiz'))
+                            ->with('value', old('poll_type', 'poll'))
                             ->with('question_trans', trans('content.poll.edit.question'))
                             ->with('option_trans', trans('content.poll.edit.option'))
                             ->with('poll_trans', trans('content.poll.edit.poll'))
@@ -403,6 +403,32 @@ class PollController extends Controller
         $poll->poll_fields()->createMany($fields);
     }
 
+    protected function makeTextResultGrid(&$parsed_results)
+    {
+        $grid_items = collect();
+
+        foreach($parsed_results as $index => $result) {
+            if ($result['value'] < 10) {
+                $grid_items->push(component('MetaLink')->is('smaller')->with('title', $result['title']));
+                $grid_items->push(component('MetaLink')->is('smaller')->with('title', $result['value'].'%'));
+
+                unset($parsed_results[$index]);
+            }
+        }
+
+        if ($grid_items->count() >= 10) {
+            $grid_items->prepend(component('Title')->is('smaller')->with('title', 'Vastus'));
+            $grid_items->prepend(component('Title')->is('smaller')->with('title', 'Protsent'));
+        }
+
+        if ($grid_items->isNotEmpty()) {
+            $grid_items->prepend(component('Title')->is('smaller')->with('title', 'Vastus'));
+            $grid_items->prepend(component('Title')->is('smaller')->with('title', 'Protsent'));
+        }
+
+        return $grid_items;
+    }
+
     public function show($id)
     {
         $poll = Poll::getPollById($id);
@@ -416,7 +442,7 @@ class PollController extends Controller
             ->push(
                 component('Title')
                     ->is('small')
-                    ->with('title', sprintf("%s: %d", trans('content.poll.show.user.count'), $total_people_ans))
+                    ->with('title', trans('content.poll.show.user.count', ['count' => $total_people_ans]))
             );
 
         if ($total_people_ans > 0) {
@@ -433,9 +459,22 @@ class PollController extends Controller
 
                 $parsed_results = $field->getParsedResults();
 
+                if ($type == 'text') {
+                    $grid_items = $this->makeTextResultGrid($parsed_results);
+                }
+
                 $content->push(
                     component('Barchart')->with('items', $parsed_results)
                 );
+
+                if (isset($grid_items) && $grid_items->isNotEmpty()) {
+                    $component = $grid_items->count() >= 14 ? 'Grid4' : 'Grid2';
+
+                    $content->push(
+                        component($component)
+                            ->with('items', $grid_items)
+                    );
+                }
             }
         }
 

@@ -92,7 +92,13 @@
                 </component>
             </div>
 
-            <div class="margin-bottom-md col-2" v-if="field.image_small && field.image_large">
+            <div class="margin-bottom-md">
+
+                <label class="QuizFields__label">{{ picture_trans }}</label>
+
+            </div>
+
+            <div class="margin-bottom-md col-2 QuizFields__picture" v-if="field.image_small && field.image_large">
 
                 <component
                     is="PhotoCard"
@@ -108,11 +114,21 @@
                 >
                 </component>
 
+                <a v-on:click="deletePicture(field)">
+
+                    <component
+                        is="Icon"
+                        isclasses="white"
+                        icon="icon-close"
+                        size="lg"
+                    >
+                    </component>
+
+                </a>
+
             </div>
 
             <div class="margin-bottom-md">
-
-                <label class="FormTextfield__label">{{ picture_trans }}</label>
 
                 <component
                     is="FormUpload"
@@ -239,6 +255,11 @@
                 }
 
                 return new_opts;
+            },
+
+            deletePicture: function(field) {
+                field.image_small = '';
+                field.image_large = '';
             }
         },
 
@@ -252,7 +273,6 @@
                 if (field.options.options != undefined) {
                     for(var j = 0; j < field.options.options.length; j++) {
                         poll_opt_val.push({'value' : field.options.options[j]});
-                        console.log(field.options.answer.includes(field.options.options[j]));
                     }
                 }
 

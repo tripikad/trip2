@@ -1,0 +1,15 @@
+@import "variables";
+
+    .PollFields__picture {
+        display: flex;
+        display: block ?if $mobile;
+        align-items: center;
+    }
+    
+    .PollFields__label {
+        color: $gray;
+        display: block;
+        font: $font-heading-sm;
+        line-height: $line-height-md;
+        margin-bottom: $margin-sm;
+    }

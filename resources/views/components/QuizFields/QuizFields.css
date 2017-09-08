@@ -1,6 +1,6 @@
 @import "variables";
 
-    .QuizFields__question {
+    .QuizFields__question , .QuizFields__picture{
         display: flex;
         display: block ?if $mobile;
         align-items: center;
