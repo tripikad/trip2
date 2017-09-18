@@ -58,14 +58,14 @@ class Poll extends Model
             ->when($name, function ($query) use ($name) {
                 return $query->where('poll.name', $name);
             })
-            ->when($start && $end, function ($query) use($start, $end) {
+            ->when($start && $end, function ($query) use ($start, $end) {
                 return $query->where('poll.start_date', '>=', $start)
                     ->where('poll.end_date', '<=', $end);
             })
-            ->when($start && !$end, function ($query) use ($start) {
+            ->when($start && ! $end, function ($query) use ($start) {
                 return $query->where('poll.start_date', $start);
             })
-            ->when($end && !$start, function ($query) use ($end) {
+            ->when($end && ! $start, function ($query) use ($end) {
                 return $query->where('poll.end_date', $end);
             })
             ->when(($active == 1 || $active == 0) && $active !== false, function ($query) use ($active) {
@@ -84,7 +84,7 @@ class Poll extends Model
                 'content',
                 'content.destinations',
                 'poll_fields',
-                'poll_results'
+                'poll_results',
             ])
             ->withCount(['poll_fields', 'poll_results'])
             ->findOrFail($id);
@@ -138,15 +138,15 @@ class Poll extends Model
     public function scopeGetUnansweredQuiz($query)
     {
         $query->whereHas('content', function ($query) {
-                $query->where('status', 1);
-            })
+            $query->where('status', 1);
+        })
             ->where('type', 'quiz')
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
             ->limit(1);
 
-        if(request()->user()) {
+        if (request()->user()) {
             $query->whereDoesntHave('poll_results', function ($query) {
                 $query->where('poll_results.user_id', request()->user()->id);
             });
