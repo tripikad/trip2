@@ -154,9 +154,10 @@
         },
 
         mounted() {
-            var field = JSON.parse(this.fields_json);
-            if (field.length == 1) {
-                field = field[0];
+            var fields = JSON.parse(this.fields_json);
+            console.log(fields);
+            if (fields.length == 1) {
+                var field = fields[0];
                 this.type = field.type;
                 this.field_id = field.field_id;
                 this.question = field.options.question;

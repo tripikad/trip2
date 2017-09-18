@@ -222,7 +222,8 @@
                 this.fields.push(
                     {
                         'type' : type,
-                        'answer_opts' : {}
+                        'answer_opts' : {},
+                        'answer' : []
                     }
                 );
             },
@@ -241,7 +242,6 @@
 
             parseOptions: function(options) {
                 var new_opts = [];
-                console.log(options);
                 options = options.poll_opt_val
 
                 if (options == undefined) {

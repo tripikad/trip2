@@ -122,6 +122,8 @@
                 }
                 
                 this.answer_options = new_arr;
+
+                this.$emit('input', this.answer_options);
             },
 
             populateFields: function(){
