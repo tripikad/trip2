@@ -180,6 +180,23 @@ class PollController extends Controller
     {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
+        $fields = [];
+        $old_poll_type = old('poll_type', '');
+        if (old('poll_fields', false) && $old_poll_type == 'poll') {
+            $poll_fields = old('poll_fields');
+            $type_p = explode('_', $poll_fields['select_type']);
+            unset($poll_fields['select_type']);
+
+            $fields[] = [
+                'field_id' => 0,
+                'type' => reset($type_p),
+                'options' => [
+                    'question' => old('poll_question'),
+                    'options' => $poll_fields
+                ],
+            ];
+        }
+
         return layout('1col')
             ->with('background', component('BackgroundMap'))
                 ->with('color', 'gray')
@@ -224,6 +241,7 @@ class PollController extends Controller
                         )
                         ->push(component('PollAddFields')
                             ->with('value', old('poll_type', 'poll'))
+                            ->with('fields_json', json_encode($fields, JSON_UNESCAPED_UNICODE))
                             ->with('question_trans', trans('content.poll.edit.question'))
                             ->with('option_trans', trans('content.poll.edit.option'))
                             ->with('poll_trans', trans('content.poll.edit.poll'))
