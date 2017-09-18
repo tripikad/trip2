@@ -192,7 +192,7 @@ class PollController extends Controller
                 'type' => reset($type_p),
                 'options' => [
                     'question' => old('poll_question'),
-                    'options' => $poll_fields
+                    'options' => $poll_fields,
                 ],
             ];
         }
