@@ -573,8 +573,8 @@ class PollController extends Controller
         $poll = Poll::getPollById($id);
 
         $content_rels = $poll->content->getRelations();
-        $destinations = $content_rels['destinations'];
-        $destination_id = $destinations->first()->id;
+        $dests = $content_rels['destinations'];
+        $dest_id = $dests->first()->id;
 
         $poll_fields = [];
 
@@ -641,7 +641,7 @@ class PollController extends Controller
                             ->with('name', 'destinations')
                             ->with('options', $destinations)
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
-                            ->with('value', old('destinations', $destination_id))
+                            ->with('value', old('destinations', $dest_id))
                         )
                         ->push(component('Title')
                             ->with('title', trans('content.poll.edit.add.field.title'))
