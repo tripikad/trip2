@@ -397,6 +397,7 @@ return [
 
     // Poll
     'poll.edit.field.destinations.title' => 'Vali sihtkohad',
+    'poll.edit.field.destinations' => 'Sihtkohad',
     'poll.index.title' => 'Küsitlused',
     'poll.edit.field.start.title' => 'Alguse aeg',
     'poll.edit.field.end.title' => 'Lõppemise aeg',
@@ -431,6 +432,10 @@ return [
     'poll.answer.error.save' => 'Vastamisel tekkis viga! Proovige uuesti.',
     'poll.show.title' => 'Tulemused',
     'poll.show.user.count' => 'Vastanud kasutajate arv: :count',
+    'poll.attribute.poll.fields' => 'Kõik küsitluse valikute',
+    'poll.attribute.poll.fields.type' => 'Küsitluse tüüp',
+    'poll.attribute.quiz.questions' => 'Viktoriini küsimused',
+    'poll.attribute.quiz.answer' => 'Viktoriini küsimuste vastused',
 
     // Destination
 

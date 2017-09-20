@@ -186,16 +186,21 @@ class PollController extends Controller
                 'field_id' => 0,
                 'options' => [
                     'question' => $question['question'],
-                    'answer' => is_array($question['answer']) ? array_keys($question['answer']) : $question['answer'],
                 ],
             ];
 
+            if (isset($question['answer'])) {
+                $field['options']['answer'] = is_array($question['answer']) ? array_keys($question['answer']) : $question['answer'];
+            }
+
             if (isset($question['options'])) {
                 $options = $question['options'];
-                $type_p = explode('_', $options['select_type']);
-                unset($options['select_type']);
+                if (isset($options['select_type'])) {
+                    $type_p = explode('_', $options['select_type']);
+                    unset($options['select_type']);
 
-                $field['type'] =  reset($type_p);
+                    $field['type'] =  reset($type_p);
+                }
                 $field['options']['options'] = $options;
             } else {
                 $field['type'] = 'text';
@@ -218,17 +223,19 @@ class PollController extends Controller
     {
         $poll_fields = old('poll_fields');
 
-        $type_p = explode('_', $poll_fields['select_type']);
-        unset($poll_fields['select_type']);
-
         $field = [
             'field_id' => 0,
-            'type' => reset($type_p),
             'options' => [
                 'question' => old('poll_question'),
                 'options' => $poll_fields
             ],
         ];
+
+        if (isset($poll_fields['select_type'])) {
+            $type_p = explode('_', $poll_fields['select_type']);
+            unset($poll_fields['select_type']);
+            $field['type'] = reset($type_p);
+        }
 
         if (old('old_image_id', false)) {
             $image = Image::findOrFail(old('old_image_id'));
@@ -328,7 +335,7 @@ class PollController extends Controller
             ->render();
     }
 
-    protected function getSaveValidationRules()
+    protected function validateSaveRequest()
     {
         $request = request();
 
@@ -340,16 +347,32 @@ class PollController extends Controller
             'poll_type' => 'required|in:poll,quiz',
         ];
 
+        $attribute_names = [
+            'poll_name' => trans('content.poll.edit.name'),
+            'start' => trans('content.poll.edit.field.start.title'),
+            'end' => trans('content.poll.edit.field.end.title'),
+            'destinations' => trans('content.poll.edit.field.destinations'),
+        ];
+
         if ($request->poll_type == 'poll') {
             $rules['poll_question'] = 'required';
             $rules['poll_fields.*'] = 'required';
             $rules['poll_fields'] = 'min:2';
             $rules['poll_fields.select_type'] = 'required';
+
+            $attribute_names['poll_question'] = trans('content.poll.edit.question');
+            $attribute_names['poll_fields.*'] = trans('content.poll.attribute.poll.fields');
+            $attribute_names['poll_fields'] = trans('content.poll.attribute.poll.fields');
+            $attribute_names['poll_fields.select_type'] = trans('content.poll.attribute.poll.fields.type');
         } else {
             $rules['quiz_question'] = 'required|min:1';
             $rules['quiz_question.*.type'] = 'required|in:options,textareafield';
             $rules['quiz_question.*.question'] = 'required';
             $rules['quiz_question.*.answer'] = 'required';
+
+            $attribute_names['quiz_question'] = trans('content.poll.attribute.quiz.questions');
+            $attribute_names['quiz_question.*.question'] = trans('content.poll.attribute.quiz.questions');
+            $attribute_names['quiz_question.*.answer'] = trans('content.poll.attribute.quiz.answer');
 
             if ($request->has('quiz_question')) {
                 foreach ($request->quiz_question as $index => $arr) {
@@ -358,19 +381,24 @@ class PollController extends Controller
                         $rules['quiz_question.'.$index.'.options'] = 'required|min:2';
                         $rules['quiz_question.'.$index.'.options.select_type'] = 'required';
                         $rules['quiz_question.'.$index.'.answer'] = 'required|min:1';
+
+                        $attribute_names['quiz_question.'.$index.'.options'] = trans('content.poll.edit.question');
+                        $attribute_names['quiz_question.'.$index.'.options.*'] = trans('content.poll.attribute.poll.fields');
+                        $attribute_names['quiz_question.'.$index.'.options.select_type'] = trans('content.poll.attribute.poll.fields.type');
+                        $attribute_names['quiz_question.'.$index.'.answer'] = trans('content.poll.attribute.quiz.answer');
                     }
                 }
             }
         }
 
-        return $rules;
+        $validator = \Validator::make($request->all(), $rules);
+        $validator->setAttributeNames($attribute_names);
+        $validator->validate();
     }
 
     public function store(Request $request)
     {
-        $rules = $this->getSaveValidationRules();
-
-        $this->validate(request(), $rules);
+        $rules = $this->validateSaveRequest();
 
         $logged_user = $request->user();
         $poll_type = $request->poll_type;
@@ -682,9 +710,7 @@ class PollController extends Controller
 
     public function update(Request $request, $id)
     {
-        $rules = $this->getSaveValidationRules();
-
-        $this->validate(request(), $rules);
+        $this->validateSaveRequest();
 
         $poll_type = $request->poll_type;
 
