@@ -176,25 +176,80 @@ class PollController extends Controller
             ->render();
     }
 
+    protected function makeFieldsFromOldQuizRequest()
+    {
+        $fields = [];
+        $quiz_question = old('quiz_question');
+
+        foreach ($quiz_question as $ind => $question) {
+            $field = [
+                'field_id' => 0,
+                'options' => [
+                    'question' => $question['question'],
+                    'answer' => is_array($question['answer']) ? array_keys($question['answer']) : $question['answer'],
+                ],
+            ];
+
+            if (isset($question['options'])) {
+                $options = $question['options'];
+                $type_p = explode('_', $options['select_type']);
+                unset($options['select_type']);
+
+                $field['type'] =  reset($type_p);
+                $field['options']['options'] = $options;
+            } else {
+                $field['type'] = 'text';
+            }
+
+            if (old('old_quiz_photo_'.$ind, false)) {
+                $image = Image::findOrFail(old('old_quiz_photo_'.$ind));
+                $field['image_small'] = $image->preset('xsmall_square');
+                $field['image_large'] = $image->preset('large');
+                $field['image_id'] = old('old_quiz_photo_'.$ind);
+            }
+
+            $fields[] = $field;
+        }
+
+        return $fields;
+    }
+
+    protected function makeFieldsFromOldPollRequest()
+    {
+        $poll_fields = old('poll_fields');
+
+        $type_p = explode('_', $poll_fields['select_type']);
+        unset($poll_fields['select_type']);
+
+        $field = [
+            'field_id' => 0,
+            'type' => reset($type_p),
+            'options' => [
+                'question' => old('poll_question'),
+                'options' => $poll_fields
+            ],
+        ];
+
+        if (old('old_image_id', false)) {
+            $image = Image::findOrFail(old('old_image_id'));
+            $field['image_small'] = $image->preset('xsmall_square');
+            $field['image_large'] = $image->preset('large');
+            $field['image_id'] = old('old_image_id');
+        }
+
+        return [$field];
+    }
+
     public function create()
     {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
         $fields = [];
         $old_poll_type = old('poll_type', '');
-        if (old('poll_fields', false) && $old_poll_type == 'poll') {
-            $poll_fields = old('poll_fields');
-            $type_p = explode('_', $poll_fields['select_type']);
-            unset($poll_fields['select_type']);
-
-            $fields[] = [
-                'field_id' => 0,
-                'type' => reset($type_p),
-                'options' => [
-                    'question' => old('poll_question'),
-                    'options' => $poll_fields
-                ],
-            ];
+        if (old('poll_fields', false)) {
+            $fields = $this->makeFieldsFromOldPollRequest();
+        } elseif (old('quiz_question', false)) {
+            $fields = $this->makeFieldsFromOldQuizRequest();
         }
 
         return layout('1col')
@@ -365,8 +420,8 @@ class PollController extends Controller
             $filename = Image::storeImageFile($request->file('poll_photo'));
             $image = Image::create(['filename' => $filename]);
             $options['image_id'] = $image->id;
-        } elseif ($request->has('old_poll_photo')) {
-            $options['image_id'] = $request->old_poll_photo;
+        } elseif ($request->has('old_image_id')) {
+            $options['image_id'] = $request->old_image_id;
         }
 
         $poll->poll_fields()->create([
@@ -523,23 +578,29 @@ class PollController extends Controller
 
         $poll_fields = [];
 
-        foreach ($poll->poll_fields->all() as $field) {
-            $options = json_decode($field->options, true);
+        if (old('poll_fields', false)) {
+            $poll_fields = $this->makeFieldsFromOldPollRequest();
+        } elseif (old('quiz_question', false)) {
+            $poll_fields = $this->makeFieldsFromOldQuizRequest();
+        } else {
+            foreach ($poll->poll_fields->all() as $field) {
+                $options = json_decode($field->options, true);
 
-            $poll_field = [
-                'type' => $field->type,
-                'field_id' => $field->field_id,
-                'options' => $options,
-            ];
+                $poll_field = [
+                    'type' => $field->type,
+                    'field_id' => $field->field_id,
+                    'options' => $options,
+                ];
 
-            if (isset($options['image_id'])) {
-                $image = Image::findOrFail($options['image_id']);
-                $poll_field['image_small'] = $image->preset('xsmall_square');
-                $poll_field['image_large'] = $image->preset('large');
-                $poll_field['image_id'] = $options['image_id'];
+                if (isset($options['image_id'])) {
+                    $image = Image::findOrFail($options['image_id']);
+                    $poll_field['image_small'] = $image->preset('xsmall_square');
+                    $poll_field['image_large'] = $image->preset('large');
+                    $poll_field['image_id'] = $options['image_id'];
+                }
+
+                $poll_fields[] = $poll_field;
             }
-
-            $poll_fields[] = $poll_field;
         }
 
         return layout('1col')
@@ -564,23 +625,23 @@ class PollController extends Controller
                         ->push(component('FormTextfield')
                             ->with('title', trans('content.poll.edit.name'))
                             ->with('name', 'poll_name')
-                            ->with('value', $poll->name)
+                            ->with('value', old('poll_name', $poll->name))
                         )
                         ->push(component('FormTextfield')
                             ->with('title', trans('content.poll.edit.field.start.title'))
                             ->with('name', 'start')
-                            ->with('value', $poll->start_date)
+                            ->with('value', old('start', $poll->start_date))
                         )
                         ->push(component('FormTextfield')
                             ->with('title', trans('content.poll.edit.field.end.title'))
                             ->with('name', 'end')
-                            ->with('value', $poll->end_date)
+                            ->with('value', old('end', $poll->end_date))
                         )
                         ->push(component('FormSelect')
                             ->with('name', 'destinations')
                             ->with('options', $destinations)
                             ->with('placeholder', trans('content.index.filter.field.destination.title'))
-                            ->with('value', $destination_id)
+                            ->with('value', old('destinations', $destination_id))
                         )
                         ->push(component('Title')
                             ->with('title', trans('content.poll.edit.add.field.title'))
@@ -605,7 +666,7 @@ class PollController extends Controller
                         ->push(component('FormCheckbox')
                             ->with('title', trans('content.poll.create.active'))
                             ->with('name', 'poll_active')
-                            ->with('value', $poll->content->status)
+                            ->with('value', old('poll_active', $poll->content->status))
                         )
                         ->push(component('FormButton')
                             ->is('large')
