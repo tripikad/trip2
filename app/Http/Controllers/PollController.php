@@ -199,7 +199,7 @@ class PollController extends Controller
                     $type_p = explode('_', $options['select_type']);
                     unset($options['select_type']);
 
-                    $field['type'] =  reset($type_p);
+                    $field['type'] = reset($type_p);
                 }
                 $field['options']['options'] = $options;
             } else {
@@ -227,7 +227,7 @@ class PollController extends Controller
             'field_id' => 0,
             'options' => [
                 'question' => old('poll_question'),
-                'options' => $poll_fields
+                'options' => $poll_fields,
             ],
         ];
 
