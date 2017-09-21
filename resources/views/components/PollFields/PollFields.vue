@@ -155,7 +155,6 @@
 
         mounted() {
             var fields = JSON.parse(this.fields_json);
-            console.log(fields);
             if (fields.length == 1) {
                 var field = fields[0];
                 this.type = field.type;
