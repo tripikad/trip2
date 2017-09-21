@@ -395,7 +395,14 @@ return [
 
     'sponsored.no.results' => 'Hetkel pole ühtegi artiklit lisatud rubriiki "Toimetaja valik".',
 
+    // Destination
+
+    'destionation.edit.title' => 'Muuda sihtkohta',
+    'destination.edit.description' => 'Kirjeldus',
+    'destination.edit.user' => 'Kirjelduse autori kasutajanimi',
+
     // Poll
+
     'poll.edit.field.destinations.title' => 'Vali sihtkohad',
     'poll.edit.field.destinations' => 'Sihtkohad',
     'poll.index.title' => 'Küsitlused',
@@ -417,7 +424,7 @@ return [
     'poll.edit.option.add' => 'Lisa valik',
     'poll.edit.options' => 'Valikud',
     'poll.edit.textfield' => 'Teksti väli',
-    'poll.create.active' => 'Küsitlus aktiivne',
+    'poll.create.active' => 'Aktiivne',
     'poll.table.name' => 'Nimetus',
     'poll.table.start' => 'Algus',
     'poll.table.end' => 'Lõpp',
@@ -436,10 +443,4 @@ return [
     'poll.attribute.poll.fields.type' => 'Küsitluse tüüp',
     'poll.attribute.quiz.questions' => 'Viktoriini küsimused',
     'poll.attribute.quiz.answer' => 'Viktoriini küsimuste vastused',
-
-    // Destination
-
-    'destionation.edit.title' => 'Muuda sihtkohta',
-    'destination.edit.description' => 'Kirjeldus',
-    'destination.edit.user' => 'Kirjelduse autori kasutajanimi',
 ];
