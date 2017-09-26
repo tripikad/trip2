@@ -565,7 +565,10 @@ class PollController extends Controller
                 }
 
                 $content->push(
-                    component('Barchart')->with('items', $parsed_results)
+                    component('Barchart')
+                        ->is('black')
+                        ->is('flex')
+                        ->with('items', $parsed_results)
                 );
 
                 if (isset($grid_items) && $grid_items->isNotEmpty()) {

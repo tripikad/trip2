@@ -81,6 +81,7 @@
                 is="Barchart"
                 :items="displayed_results"
                 :width="result_width"
+                isclasses="Barchart--black"
             >
             </component>
 
@@ -144,7 +145,7 @@
         },
 
         mounted() {
-            this.result_width = (this.$refs.answer_div.clientWidth * 0.8) - 12;
+            this.result_width = this.$refs.answer_div.clientWidth - 12;
             this.displayed_results = this.results;
             this.question = this.options.question;
             var opts = this.options.options;

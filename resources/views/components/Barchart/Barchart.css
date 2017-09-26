@@ -1,8 +1,10 @@
 @import "variables";
 
+.Barchart {
+}
+
     .Barchart__item {
         margin-bottom: $margin-sm;
-        display: flex;
     }
 
     .Barchart__title {
@@ -11,9 +13,6 @@
         margin-right: $margin-sm;
         font: $font-text-md;
         color: $gray;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
     }
 
     .Barchart__row:last-child {
@@ -31,3 +30,17 @@
         border-radius: $border-radius-md;
         white-space: nowrap;
     }
+
+.Barchart--black .Barchart__bar {
+    color: $black;
+}
+
+.Barchart--flex .Barchart__item {
+    display: flex;
+}
+
+.Barchart--flex .Barchart__title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
