@@ -567,7 +567,6 @@ class PollController extends Controller
                 $content->push(
                     component('Barchart')
                         ->is('black')
-                        ->is('flex')
                         ->with('items', $parsed_results)
                 );
 

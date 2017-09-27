@@ -81,7 +81,7 @@
                 is="Barchart"
                 :items="displayed_results"
                 :width="result_width"
-                isclasses="Barchart--black"
+                isclasses="Barchart--black Barchart--block"
             >
             </component>
 

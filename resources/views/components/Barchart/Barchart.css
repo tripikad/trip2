@@ -5,6 +5,7 @@
 
     .Barchart__item {
         margin-bottom: $margin-sm;
+        display: flex;
     }
 
     .Barchart__title {
@@ -13,6 +14,9 @@
         margin-right: $margin-sm;
         font: $font-text-md;
         color: $gray;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
     }
 
     .Barchart__row:last-child {
@@ -35,12 +39,11 @@
     color: $black;
 }
 
-.Barchart--flex .Barchart__item {
-    display: flex;
+.Barchart--block .Barchart__item {
+    display: block;
 }
 
-.Barchart--flex .Barchart__title {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+.Barchart--block .Barchart__title {
+    display: block;
+    width: 100%;
 }
