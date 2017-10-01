@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Comment;
-use App\Content;
 use App\User;
+use App\Content;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
