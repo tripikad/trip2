@@ -82,6 +82,8 @@ class V2InternalController extends Controller
 
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
 
+        $forum->vars()->update_content_read;
+
         return layout('2col')
 
             ->with('background', component('BackgroundMap'))

@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class UnreadContent extends Model
@@ -23,7 +22,6 @@ class UnreadContent extends Model
         $content_unread = false;
 
         // To avoid 99999 unread issue - quick fix - can be removed 2-3 weeks after live merge
-        $except_timestamp = Carbon::now()->subDays(7)->timestamp;
         $unread_data = [
             'count' => 0,
             'first_comment_id' => null,
@@ -32,14 +30,14 @@ class UnreadContent extends Model
         if ($this->content) {
             $content_created_at_timestamp = $content->created_at->timestamp;
 
-            if ($content_created_at_timestamp > $unread_timestamp && $except_timestamp < $content_created_at_timestamp) {
+            if ($content_created_at_timestamp > $unread_timestamp) {
                 $unread_data['count'] += 1;
                 $content_unread = true;
             }
 
             if ($content->comments) {
                 foreach ($content->comments as &$comment) {
-                    if ($comment->created_at->timestamp > $unread_timestamp && $except_timestamp < $comment->created_at->timestamp) {
+                    if ($comment->created_at->timestamp > $unread_timestamp) {
                         if ($content_unread) {
                             --$unread_data['count'];
                             $content_unread = false;
@@ -55,13 +53,12 @@ class UnreadContent extends Model
             }
         }
 
-        return (int) $unread_data;
+        return $unread_data;
     }
 
     public static function getUnreadContent(Content $content)
     {
         $unread_content = $content->unread_content;
-        $content_unread = false;
 
         $unread_data = [
             'count' => 0,
@@ -69,30 +66,23 @@ class UnreadContent extends Model
         ];
 
         if ($unread_content && auth()->check()) {
-            return (int) $unread_content->getUnread($content);
+            return $unread_content->getUnread($content);
         } elseif (auth()->check()) {
-            $except_timestamp = Carbon::now()->subDays(2)->timestamp;
-            $content_created_at_timestamp = $content->created_at->timestamp;
-
-            if ($except_timestamp < $content_created_at_timestamp) {
-                $unread_data['count'] += 1;
-                $content_unread = true;
-            }
+            $unread_data['count'] += 1;
+            $content_unread = true;
 
             if ($content->comments) {
                 foreach ($content->comments as &$comment) {
-                    if ($except_timestamp < $comment->created_at->timestamp) {
-                        if ($content_unread) {
-                            --$unread_data['count'];
-                            $content_unread = false;
-                        }
-
-                        if (! $unread_data['first_comment_id']) {
-                            $unread_data['first_comment_id'] = $comment->id;
-                        }
-
-                        ++$unread_data['count'];
+                    if ($content_unread) {
+                        --$unread_data['count'];
+                        $content_unread = false;
                     }
+
+                    if (! $unread_data['first_comment_id']) {
+                        $unread_data['first_comment_id'] = $comment->id;
+                    }
+
+                    ++$unread_data['count'];
                 }
             }
         }
