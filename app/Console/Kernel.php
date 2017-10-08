@@ -35,13 +35,13 @@ class Kernel extends ConsoleKernel
             ->dailyAt('05:00');
 
         $schedule->command('search:index')
-            ->cron('15 * * * *');
+            ->cron('59 * * * *');
 
         $schedule->command('search:index --optimize')
             ->dailyAt('05:55');
 
         $schedule->command('newsletter:send')
-            ->everyMinute();
+            ->cron('2 * * * *');
     }
 
     /**

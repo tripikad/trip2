@@ -43,6 +43,7 @@ class UserHeader
     {
         $loggedUser = request()->user();
         $wantsToGo = $user->vars()->destinationWantsToGo();
+        $hasBeen = $user->vars()->destinationHaveBeen();
 
         return component('HeaderLight')
             ->with('navbar', component('Navbar')
@@ -76,6 +77,17 @@ class UserHeader
                         })
                 ))
                 ->push(region('UserStats', $user, $loggedUser))
+                ->pushWhen(
+                    $hasBeen->count(),
+                    component('Meta')->is('large')->with('items', $hasBeen
+                        ->map(function ($destination) {
+                            return component('Tag')
+                                ->is('white')
+                                ->is('large')
+                                ->with('title', $destination->flaggable->name)
+                                ->with('route', route('destination.showSlug', [$destination->flaggable->slug]));
+                        })
+                    ))
                 ->push(component('BlockHorizontal')->with(
                     'content',
                     $this->prepareActionsForUser($user, $loggedUser)
