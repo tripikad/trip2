@@ -20,7 +20,7 @@ class Newsletter extends Command
 {
     protected $signature = 'newsletter:send {--import-subscribers}';
 
-    protected $mails_per_hour = 3600;
+    protected $mails_per_hour = 32000;
     protected $mails_per_minute = null;
     protected $first_active_at = '2017-08-17 17:00:00';
     protected $chunk_max = 750;
@@ -124,7 +124,7 @@ class Newsletter extends Command
                 }
             }
 
-            if ($this->time_spent() < 50) {
+            if ($this->time_spent() < 290) {
                 $this->line('Alustan kirjade välja saatmisega');
 
                 $mail_receivers = NewsletterSentSubscriber::with([
@@ -147,7 +147,9 @@ class Newsletter extends Command
                     $this->destinations = $this->getDestinations(false);
                 }
 
-                $destination_names = $this->destinations->pluck('name', 'id')->toArray();
+                $destination_names = Cache::remember('mail_destinations_pluck', $this->cache_time, function () {
+                    return $this->destinations->pluck('name', 'id')->toArray();
+                });
 
                 foreach ($mail_receivers as &$mail_receiver) {
                     if ($mail_receiver->sent) {
@@ -567,7 +569,7 @@ class Newsletter extends Command
 
     protected function getDestinations($check_subs = true)
     {
-        $this->destinations = Cache::remember('mail_destinations', 60, function () {
+        $this->destinations = Cache::remember('mail_destinations', $this->cache_time, function () {
             $destinations = Destination::select(['id', 'name', 'parent_id'])->get();
 
             return $destinations;
