@@ -44,6 +44,7 @@
 }
 
 .Barchart--block .Barchart__title {
+    text-align: left;
     display: block;
     width: 100%;
 }
