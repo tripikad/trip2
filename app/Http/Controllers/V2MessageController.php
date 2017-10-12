@@ -29,7 +29,7 @@ class V2MessageController extends Controller
                 )
                 ->merge($messages->map(function ($message) use ($user) {
                     if (get_class($message->fromUser) != User::class) {
-                        return null;
+                        return;
                     }
 
                     return region('MessageRow', $message, $user);
