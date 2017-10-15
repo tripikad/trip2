@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Poll;
+use App\User;
 use App\Image;
 use App\Content;
 use App\PollField;
@@ -475,7 +475,7 @@ class PollController extends Controller
         foreach ($request->quiz_question as $index => $question) {
             $options = [
                 'question' => $question['question'],
-                'show_answers' => $request->has('quiz_show_answers') ? 1 : 0
+                'show_answers' => $request->has('quiz_show_answers') ? 1 : 0,
             ];
 
             if (isset($question['answer']) && is_array($question['answer'])) {
@@ -563,17 +563,17 @@ class PollController extends Controller
             $user_id = $result->user_id;
             $answer = $field_answers[$result->field_id];
 
-            if (is_array($answer) && !is_array($user_answer)) {
+            if (is_array($answer) && ! is_array($user_answer)) {
                 $user_answer = [$user_answer];
             }
 
-            if (!isset($users[$user_id])) {
+            if (! isset($users[$user_id])) {
                 $users[$user_id] = 0;
             }
 
-            if(is_array($answer) && count(array_intersect($user_answer, $answer)) == count($answer)) {
+            if (is_array($answer) && count(array_intersect($user_answer, $answer)) == count($answer)) {
                 $users[$user_id]++;
-            } elseif (!is_array($answer) && $answer == mb_strtolower($user_answer)) {
+            } elseif (! is_array($answer) && $answer == mb_strtolower($user_answer)) {
                 $users[$user_id]++;
             }
         }
@@ -871,7 +871,7 @@ class PollController extends Controller
             $content->push($this->getQuizOrQuestionnaireAnswerFormComponent($quiz));
         } elseif ($quiz->type == Poll::Quiz) {
             $content = $content->merge($this->getQuizAnswerResultComponent($quiz));
-        } elseif($quiz->type == Poll::Questionnaire) {
+        } elseif ($quiz->type == Poll::Questionnaire) {
             return redirect()
                 ->route('frontpage.index');
         }
@@ -971,15 +971,14 @@ class PollController extends Controller
                 $answers = is_array($options['answer']) ? $options['answer'] : [$options['answer']];
                 $user_answer = is_array($user_answer) ? $user_answer : [$user_answer];
 
-                if(count(array_intersect($user_answer, $answers)) == count($answers)) {
+                if (count(array_intersect($user_answer, $answers)) == count($answers)) {
                     $correct++;
                 }
-
             } elseif ($type == 'text' && mb_strtolower($options['answer']) == mb_strtolower($user_answer)) {
                 $correct++;
             }
 
-            if (!$show_answers) {
+            if (! $show_answers) {
                 continue;
             }
 
@@ -1073,7 +1072,7 @@ class PollController extends Controller
 
         $quiz->poll_results()->createMany($results);
 
-        if($quiz->type == Poll::Questionnaire) {
+        if ($quiz->type == Poll::Questionnaire) {
             return redirect()
                 ->route('frontpage.index');
         }

@@ -123,7 +123,7 @@ class Poll extends Model
             ->whereHas('content.destinations', function ($query) use ($destination_id) {
                 $query->where('destinations.id', $destination_id);
             })
-            ->where('type', Poll::Poll)
+            ->where('type', self::Poll)
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
@@ -148,7 +148,7 @@ class Poll extends Model
                     $query->where('poll_results.user_id', $logged_user->id);
                 }
             })
-            ->where('type', Poll::Poll)
+            ->where('type', self::Poll)
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
@@ -171,7 +171,7 @@ class Poll extends Model
                     $query->where('poll_results.user_id', $logged_user->id);
                 }
             })
-            ->where('type', Poll::Poll)
+            ->where('type', self::Poll)
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
@@ -189,7 +189,7 @@ class Poll extends Model
                 $query->where('status', 1);
             })
             ->doesntHave('content.destinations')
-            ->where('type', Poll::Poll)
+            ->where('type', self::Poll)
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
@@ -202,7 +202,7 @@ class Poll extends Model
             $query->where('status', 1);
         })
             ->with('content')
-            ->whereIn('type', [Poll::Quiz, Poll::Questionnaire])
+            ->whereIn('type', [self::Quiz, self::Questionnaire])
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
