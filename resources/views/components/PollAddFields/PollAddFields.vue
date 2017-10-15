@@ -42,6 +42,8 @@
             :answer_trans="answer_trans"
             :option_button_trans="option_button_trans"
             :textfield_button_trans="textfield_button_trans"
+            :answer_enabled="pollType == 'quiz'"
+            :show_answers_trans="show_answers_trans"
         >
         </component>
 
@@ -61,6 +63,7 @@
             option_trans : {default : 'Option'},
             poll_trans : {default : 'Poll'},
             quiz_trans : {default : 'Quiz'},
+            questionnaire_trans : {default : 'Questionnaire'},
             picture_trans : {default : 'Photo'},
             select_type_trans : {default: 'Select type'},
             select_one_trans : {default: 'Select one'},
@@ -69,19 +72,22 @@
             add_option_trans : {default: 'Add option'},
             answer_trans : {default: 'Answer'},
             option_button_trans : {default: 'Options'},
-            textfield_button_trans : {default: 'Text field'}
+            textfield_button_trans : {default: 'Text field'},
+            show_answers_trans : {default: 'Show answers to users'}
         },
         
         components : {
             'poll' : PollFields,
-            'quiz' : QuizFields
+            'quiz' : QuizFields,
+            'questionnaire' : QuizFields
         },
         
         data : function() {
             return {
                 options: [
                     {'id' : 'poll', 'name' : this.poll_trans},
-                    {'id' : 'quiz', 'name' : this.quiz_trans}
+                    {'id' : 'quiz', 'name' : this.quiz_trans},
+                    {'id' : 'questionnaire', 'name' : this.questionnaire_trans}
                 ],
                 pollType: null
             };

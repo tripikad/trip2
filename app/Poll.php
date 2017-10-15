@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Poll extends Model
 {
+    const Poll = 'poll';
+    const Quiz = 'quiz';
+    const Questionnaire = 'questionnaire';
+
     protected $table = 'poll';
 
     protected $fillable = ['name', 'start_date', 'end_date', 'type'];
@@ -90,6 +94,22 @@ class Poll extends Model
             ->findOrFail($id);
     }
 
+    public function scopeGetPollBySlug($query, $slug)
+    {
+        return $query
+            ->with([
+                'content',
+                'content.destinations',
+                'poll_fields',
+                'poll_results',
+            ])
+            ->withCount(['poll_fields', 'poll_results'])
+            ->whereHas('content', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            })
+            ->first();
+    }
+
     public function scopeGetPollsByDestinationId($query, $destination_id)
     {
         return $query
@@ -103,7 +123,7 @@ class Poll extends Model
             ->whereHas('content.destinations', function ($query) use ($destination_id) {
                 $query->where('destinations.id', $destination_id);
             })
-            ->where('type', 'poll')
+            ->where('type', Poll::Poll)
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
@@ -128,19 +148,61 @@ class Poll extends Model
                     $query->where('poll_results.user_id', $logged_user->id);
                 }
             })
-            ->where('type', 'poll')
+            ->where('type', Poll::Poll)
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
             ->get();
     }
 
-    public function scopeGetUnansweredQuiz($query)
+    public function scopeGetUnansweredPollsWoDestination($query)
+    {
+        return $query
+            ->with(
+                'poll_fields'
+            )
+            ->whereHas('content', function ($query) {
+                $query->where('status', 1);
+            })
+            ->doesntHave('content.destinations')
+            ->whereDoesntHave('poll_results', function ($query) {
+                $logged_user = request()->user();
+                if ($logged_user) {
+                    $query->where('poll_results.user_id', $logged_user->id);
+                }
+            })
+            ->where('type', Poll::Poll)
+            ->where('start_date', '<=', date('Y-m-d'))
+            ->where('end_date', '>=', date('Y-m-d'))
+            ->orderBy('start_date', 'DESC')
+            ->get();
+    }
+
+    public function scopeGetPollsWoDestination($query)
+    {
+        return $query
+            ->with(
+                'poll_fields',
+                'poll_results'
+            )
+            ->whereHas('content', function ($query) {
+                $query->where('status', 1);
+            })
+            ->doesntHave('content.destinations')
+            ->where('type', Poll::Poll)
+            ->where('start_date', '<=', date('Y-m-d'))
+            ->where('end_date', '>=', date('Y-m-d'))
+            ->orderBy('start_date', 'DESC')
+            ->get();
+    }
+
+    public function scopeGetUnansweredQuizOrQuestionnaire($query)
     {
         $query->whereHas('content', function ($query) {
             $query->where('status', 1);
         })
-            ->where('type', 'quiz')
+            ->with('content')
+            ->whereIn('type', [Poll::Quiz, Poll::Questionnaire])
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')

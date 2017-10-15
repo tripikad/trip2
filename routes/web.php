@@ -286,11 +286,11 @@ Route::post('poll/answer', 'PollController@answerPoll')
     ->name('poll.answer')
     ->middleware('role:regular');
 
-Route::get('quiz/answer/{id}', 'PollController@showQuiz')
+Route::get('quiz/answer/{slug}', 'PollController@showQuizOrQuestionnaire')
     ->name('quiz.answer')
     ->middleware('role:regular');
 
-Route::post('quiz/answer/{id}', 'PollController@answerQuiz')
+Route::post('quiz/answer/{slug}', 'PollController@answerQuiz')
     ->name('quiz.answer')
     ->middleware('role:regular');
 

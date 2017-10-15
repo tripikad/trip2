@@ -26,18 +26,41 @@ class V2FrontpageController extends Controller
             return Destination::select('id', 'name', 'slug')->get();
         });
 
-        $quiz = Poll::getUnansweredQuiz();
-
         $layout = layout('frontpage');
+
+        $quiz = Poll::getUnansweredQuizOrQuestionnaire();
 
         if ($quiz->isNotEmpty()) {
             $quiz = $quiz->first();
-            $route = $loggedUser ? route('quiz.answer', ['id' => $quiz->id]) : route('login.form');
+            $route = $loggedUser ? route('quiz.answer', ['slug' => $quiz->content->slug]) : route('login.form');
             $layout->with('promobar', component('PromoBar')
                 ->with('title', trans('frontpage.index.poll.promo', ['title' => $quiz->name]))
                 ->with('route_title', trans('frontpage.index.poll.promo.route'))
                 ->with('route', $route)
             );
+        }
+
+        $poll_cache_minutes = 15;
+        $polls = collect();
+        $poll_field = null;
+        $poll_results = [];
+        $poll = null;
+
+        if (request()->user()) {
+            $polls = Poll::getUnansweredPollsWoDestination();
+        }
+
+        if ($polls->isNotEmpty()) {
+            $poll = $polls->first();
+            $poll_field = $poll->poll_fields->first();
+        } else {
+            $polls = Poll::getPollsWoDestination();
+
+            if ($polls->isNotEmpty()) {
+                $poll = $polls->first();
+                $poll_field = $poll->poll_fields->first();
+                $poll_results = $poll_field->getParsedResults();
+            }
         }
 
         return $layout
@@ -116,6 +139,39 @@ class V2FrontpageController extends Controller
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffHotelscombined'))
+                ->when($poll_field && $poll, function ($collection) use ($poll_field, $poll_results, $poll) {
+                    $options = json_decode($poll_field->options, true);
+
+                    if (isset($options['image_id'])) {
+                        $image = Image::findOrFail($options['image_id']);
+                        $image_small = $image->preset('xsmall_square');
+                        $image_large = $image->preset('large');
+                    }
+
+                    return $collection->push(component('Block')
+                        ->is('gray')
+                        ->with('content', collect()
+                            ->push(component('Title')
+                                ->with('title', trans('content.poll.edit.poll'))
+                                ->is('small')
+                            )
+                            ->push(component('PollAnswer')
+                                ->with('options', json_decode($poll_field->options, true))
+                                ->with('type', $poll_field->type)
+                                ->with('id', $poll->id)
+                                ->with('results', $poll_results)
+                                ->with('image_small', isset($image_small) ? $image_small : '')
+                                ->with('image_large', isset($image_large) ? $image_large : '')
+                                ->with('answer_trans', trans('content.poll.answer'))
+                                ->with('select_error', $poll_field->type == 'radio' ?
+                                    trans('content.poll.answer.error.select.one') :
+                                    trans('content.poll.answer.error.select.multiple')
+                                )
+                                ->with('save_error', trans('content.poll.answer.error.save'))
+                            )
+                        )
+                    );
+                })
             )
 
             ->with('bottom1', collect()

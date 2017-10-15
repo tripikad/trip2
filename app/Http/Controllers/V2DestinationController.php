@@ -29,12 +29,16 @@ class V2DestinationController extends Controller
         $travelmates = Content::getLatestPagedItems('travelmate', 6, $destination->id);
         $news = Content::getLatestPagedItems('news', 2, $destination->id);
 
-        $polls = Poll::getUnansweredPollsByDestinationId($destination->id);
+        $polls = collect();
         $poll_field = null;
         $poll_results = [];
         $poll = null;
 
-        if ($polls->isNotEmpty() && request()->user()) {
+        if (request()->user()) {
+            $polls = Poll::getUnansweredPollsByDestinationId($destination->id);
+        }
+
+        if ($polls->isNotEmpty()) {
             $poll = $polls->first();
             $poll_field = $poll->poll_fields->first();
         } else {
@@ -99,6 +103,8 @@ class V2DestinationController extends Controller
             )
 
             ->with('sidebar', collect()
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->when($poll_field && $poll, function ($collection) use ($poll_field, $poll_results, $poll) {
                     $options = json_decode($poll_field->options, true);
 
@@ -132,8 +138,6 @@ class V2DestinationController extends Controller
                         )
                     );
                 })
-                ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()

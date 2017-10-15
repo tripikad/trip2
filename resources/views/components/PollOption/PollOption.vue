@@ -11,6 +11,7 @@
                 :options="options"
                 :value="type + '_' + this.name"
                 :name="name + '[select_type]'"
+                v-on:change="parseTypeAndEmit($event)"
             >
             </component>
 
@@ -124,6 +125,15 @@
                 this.answer_options = new_arr;
 
                 this.$emit('input', this.answer_options);
+            },
+
+            parseTypeAndEmit: function(event){
+                var type_p = event.split('_');
+                var type = type_p[0];
+
+                if(type == 'checkbox' || type == 'radio') {
+                    this.$emit('poll_type', type);
+                }
             },
 
             populateFields: function(){

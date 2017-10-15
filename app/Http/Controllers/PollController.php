@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Poll;
 use App\Image;
 use App\Content;
@@ -302,12 +303,13 @@ class PollController extends Controller
                             ->with('title', trans('content.poll.edit.add.field.title'))
                         )
                         ->push(component('PollAddFields')
-                            ->with('value', old('poll_type', 'poll'))
+                            ->with('value', old('poll_type', Poll::Poll))
                             ->with('fields_json', json_encode($fields, JSON_UNESCAPED_UNICODE))
                             ->with('question_trans', trans('content.poll.edit.question'))
                             ->with('option_trans', trans('content.poll.edit.option'))
                             ->with('poll_trans', trans('content.poll.edit.poll'))
                             ->with('quiz_trans', trans('content.poll.edit.quiz'))
+                            ->with('questionnaire_trans', trans('content.poll.edit.questionnaire'))
                             ->with('picture_trans', trans('content.poll.edit.fields.picture'))
                             ->with('select_type_trans', trans('content.poll.edit.option.select.type'))
                             ->with('select_one_trans', trans('content.poll.edit.option.select.one'))
@@ -317,6 +319,7 @@ class PollController extends Controller
                             ->with('answer_trans', trans('content.poll.answer.noun'))
                             ->with('option_button_trans', trans('content.poll.edit.options'))
                             ->with('textfield_button_trans', trans('content.poll.edit.textfield'))
+                            ->with('show_answers_trans', trans('content.poll.edit.answers'))
                         )
                         ->push(component('FormCheckbox')
                             ->with('title', trans('content.poll.create.active'))
@@ -343,18 +346,16 @@ class PollController extends Controller
             'poll_name' => 'required',
             'start' => 'required|date_format:Y-m-d|before_or_equal:end',
             'end' => 'required|date_format:Y-m-d',
-            'destinations' => 'required',
-            'poll_type' => 'required|in:poll,quiz',
+            'poll_type' => 'required|in:poll,quiz,questionnaire',
         ];
 
         $attribute_names = [
             'poll_name' => trans('content.poll.edit.name'),
             'start' => trans('content.poll.edit.field.start.title'),
             'end' => trans('content.poll.edit.field.end.title'),
-            'destinations' => trans('content.poll.edit.field.destinations'),
         ];
 
-        if ($request->poll_type == 'poll') {
+        if ($request->poll_type == Poll::Poll) {
             $rules['poll_question'] = 'required';
             $rules['poll_fields.*'] = 'required';
             $rules['poll_fields'] = 'min:2';
@@ -368,11 +369,14 @@ class PollController extends Controller
             $rules['quiz_question'] = 'required|min:1';
             $rules['quiz_question.*.type'] = 'required|in:options,textareafield';
             $rules['quiz_question.*.question'] = 'required';
-            $rules['quiz_question.*.answer'] = 'required';
 
             $attribute_names['quiz_question'] = trans('content.poll.attribute.quiz.questions');
             $attribute_names['quiz_question.*.question'] = trans('content.poll.attribute.quiz.questions');
-            $attribute_names['quiz_question.*.answer'] = trans('content.poll.attribute.quiz.answer');
+
+            if ($request->poll_type == Poll::Quiz) {
+                $rules['quiz_question.*.answer'] = 'required';
+                $attribute_names['quiz_question.*.answer'] = trans('content.poll.attribute.quiz.answer');
+            }
 
             if ($request->has('quiz_question')) {
                 foreach ($request->quiz_question as $index => $arr) {
@@ -380,11 +384,14 @@ class PollController extends Controller
                         $rules['quiz_question.'.$index.'.options.*'] = 'required';
                         $rules['quiz_question.'.$index.'.options'] = 'required|min:2';
                         $rules['quiz_question.'.$index.'.options.select_type'] = 'required';
-                        $rules['quiz_question.'.$index.'.answer'] = 'required|min:1';
 
                         $attribute_names['quiz_question.'.$index.'.options'] = trans('content.poll.edit.question');
                         $attribute_names['quiz_question.'.$index.'.options.*'] = trans('content.poll.attribute.poll.fields');
                         $attribute_names['quiz_question.'.$index.'.options.select_type'] = trans('content.poll.attribute.poll.fields.type');
+                    }
+
+                    if ($arr['type'] == 'options' && $request->poll_type == Poll::Quiz) {
+                        $rules['quiz_question.'.$index.'.answer'] = 'required|min:1';
                         $attribute_names['quiz_question.'.$index.'.answer'] = trans('content.poll.attribute.quiz.answer');
                     }
                 }
@@ -405,11 +412,13 @@ class PollController extends Controller
 
         $content = $logged_user->contents()->create([
             'title' => $request->poll_name,
-            'type' => 'poll',
+            'type' => Poll::Poll,
             'status' => $request->has('poll_active') ? 1 : 0,
         ]);
 
-        $content->destinations()->attach(request()->destinations);
+        if ($request->has('destinations')) {
+            $content->destinations()->attach($request->destinations);
+        }
 
         $poll = $content->poll()->create([
             'name' => $request->poll_name,
@@ -420,9 +429,9 @@ class PollController extends Controller
 
         $poll->id = $content->id;
 
-        if ($poll_type == 'poll') {
+        if ($poll_type == Poll::Poll) {
             $this->addPollFields($poll);
-        } elseif ($poll_type == 'quiz') {
+        } elseif ($poll_type == Poll::Quiz || $poll_type == Poll::Questionnaire) {
             $this->addQuizFields($poll);
         }
 
@@ -466,11 +475,13 @@ class PollController extends Controller
         foreach ($request->quiz_question as $index => $question) {
             $options = [
                 'question' => $question['question'],
-                'answer' => $question['answer'],
+                'show_answers' => $request->has('quiz_show_answers') ? 1 : 0
             ];
 
-            if (is_array($question['answer'])) {
+            if (isset($question['answer']) && is_array($question['answer'])) {
                 $options['answer'] = array_keys($question['answer']);
+            } elseif (isset($question['answer'])) {
+                $options['answer'] = $question['answer'];
             }
 
             $photo_field = 'quiz_photo_'.$index;
@@ -530,6 +541,57 @@ class PollController extends Controller
         return $grid_items;
     }
 
+    protected function makeUserScoreGrid(Poll $poll)
+    {
+        $users = [];
+        $field_answers = [];
+
+        foreach ($poll->poll_fields->getIterator() as $index => $field) {
+            $options = json_decode($field->options, true);
+            $id = $field->field_id;
+            $type = $field->type;
+
+            if ($type == 'text') {
+                $field_answers[$id] = mb_strtolower($options['answer']);
+            } else {
+                $field_answers[$id] = is_array($options['answer']) ? $options['answer'] : [$options['answer']];
+            }
+        }
+
+        foreach ($poll->poll_results->getIterator() as $index => $result) {
+            $user_answer = json_decode($field->result, true);
+            $user_id = $result->user_id;
+            $answer = $field_answers[$result->field_id];
+
+            if (is_array($answer) && !is_array($user_answer)) {
+                $user_answer = [$user_answer];
+            }
+
+            if (!isset($users[$user_id])) {
+                $users[$user_id] = 0;
+            }
+
+            if(is_array($answer) && count(array_intersect($user_answer, $answer)) == count($answer)) {
+                $users[$user_id]++;
+            } elseif (!is_array($answer) && $answer == mb_strtolower($user_answer)) {
+                $users[$user_id]++;
+            }
+        }
+
+        asort($users, SORT_NUMERIC);
+        $user_scores = collect();
+
+        $index = 0;
+        foreach ($users as $user_id => $score) {
+            $user = User::find($user_id);
+
+            $user_scores->push(component('MetaLink')->is('smaller')->with('title', ++$index.'. '.$user->name));
+            $user_scores->push(component('MetaLink')->is('smaller')->with('title', $score));
+        }
+
+        return $user_scores;
+    }
+
     public function show($id)
     {
         $poll = Poll::getPollById($id);
@@ -539,11 +601,6 @@ class PollController extends Controller
         $content = collect()
             ->push(component('Title')
                 ->with('title', $poll->name)
-            )
-            ->push(
-                component('Title')
-                    ->is('small')
-                    ->with('title', trans('content.poll.show.user.count', ['count' => $total_people_ans]))
             );
 
         if ($total_people_ans > 0) {
@@ -581,6 +638,19 @@ class PollController extends Controller
             }
         }
 
+        $content->push(
+                component('Title')
+                    ->is('small')
+                    ->with('title', trans('content.poll.show.user.count', ['count' => $total_people_ans]))
+            );
+
+        if ($total_people_ans > 0 && $poll->type == Poll::Quiz) {
+            $content->push(
+                component('Grid4')
+                    ->with('items', $this->makeUserScoreGrid($poll))
+            );
+        }
+
         return layout('1col')
             ->with('background', component('BackgroundMap'))
                 ->with('color', 'gray')
@@ -604,7 +674,10 @@ class PollController extends Controller
 
         $content_rels = $poll->content->getRelations();
         $dests = $content_rels['destinations'];
-        $dest_id = $dests->first()->id;
+        $dest_id = null;
+        if ($dests->isNotEmpty()) {
+            $dest_id = $dests->first()->id;
+        }
 
         $poll_fields = [];
 
@@ -683,6 +756,7 @@ class PollController extends Controller
                             ->with('option_trans', trans('content.poll.edit.option'))
                             ->with('poll_trans', trans('content.poll.edit.poll'))
                             ->with('quiz_trans', trans('content.poll.edit.quiz'))
+                            ->with('questionnaire_trans', trans('content.poll.edit.questionnaire'))
                             ->with('picture_trans', trans('content.poll.edit.fields.picture'))
                             ->with('select_type_trans', trans('content.poll.edit.option.select.type'))
                             ->with('select_one_trans', trans('content.poll.edit.option.select.one'))
@@ -692,6 +766,7 @@ class PollController extends Controller
                             ->with('answer_trans', trans('content.poll.answer.noun'))
                             ->with('option_button_trans', trans('content.poll.edit.options'))
                             ->with('textfield_button_trans', trans('content.poll.edit.textfield'))
+                            ->with('show_answers_trans', trans('content.poll.edit.answers'))
                         )
                         ->push(component('FormCheckbox')
                             ->with('title', trans('content.poll.create.active'))
@@ -721,7 +796,7 @@ class PollController extends Controller
 
         $content->fill([
             'title' => $request->poll_name,
-            'type' => 'poll',
+            'type' => Poll::Poll,
             'status' => $request->has('poll_active') ? 1 : 0,
         ])
         ->save();
@@ -736,9 +811,9 @@ class PollController extends Controller
 
         PollField::where('poll_id', $id)->delete();
 
-        if ($poll_type == 'poll') {
+        if ($poll_type == Poll::Poll) {
             $this->addPollFields($poll);
-        } elseif ($poll_type == 'quiz') {
+        } elseif ($poll_type == Poll::Quiz || $poll_type == Poll::Questionnaire) {
             $this->addQuizFields($poll);
         }
 
@@ -765,7 +840,7 @@ class PollController extends Controller
         }
 
         try {
-            PollResult::where('field_id', 30)
+            PollResult::where('field_id', $poll_field->field_id)
                 ->where('user_id', $logged_user->id)
                 ->firstOrFail();
         } catch (ModelNotFoundException $ex) {
@@ -779,9 +854,10 @@ class PollController extends Controller
         return $poll_field->getParsedResults();
     }
 
-    public function showQuiz($id)
+    public function showQuizOrQuestionnaire($slug)
     {
-        $quiz = Poll::getPollById($id);
+        $quiz = Poll::getPollBySlug($slug);
+
         $logged_user = request()->user();
 
         $quiz_result = $quiz->poll_results()->where('user_id', $logged_user->id)->get();
@@ -792,9 +868,12 @@ class PollController extends Controller
             );
 
         if ($quiz_result->isEmpty()) {
-            $content->push($this->getQuizAnswerFormComponent($quiz));
-        } else {
+            $content->push($this->getQuizOrQuestionnaireAnswerFormComponent($quiz));
+        } elseif ($quiz->type == Poll::Quiz) {
             $content = $content->merge($this->getQuizAnswerResultComponent($quiz));
+        } elseif($quiz->type == Poll::Questionnaire) {
+            return redirect()
+                ->route('frontpage.index');
         }
 
         return layout('1col')
@@ -812,7 +891,7 @@ class PollController extends Controller
             ->render();
     }
 
-    public function getQuizAnswerFormComponent(Poll $quiz)
+    public function getQuizOrQuestionnaireAnswerFormComponent(Poll $quiz)
     {
         $fields = collect();
 
@@ -862,7 +941,7 @@ class PollController extends Controller
         }
 
         return component('Form')
-                    ->with('route', route('quiz.answer', ['id' => $quiz->id]))
+                    ->with('route', route('quiz.answer', ['slug' => $quiz->content->slug]))
                     ->with('fields', $fields
                         ->push(component('FormButton')
                             ->is('large')
@@ -875,10 +954,36 @@ class PollController extends Controller
     {
         $fields = collect();
 
+        $correct = 0;
+
         foreach ($quiz->poll_fields->getIterator() as $index => $field) {
             $options = json_decode($field->options, true);
-            $question = $options['question'];
             $type = $field->type;
+            $show_answers = isset($options['show_answers']) && $options['show_answers'];
+
+            $poll_result = $field->poll_results()
+                ->where('user_id', request()->user()->id)
+                ->get()
+                ->first();
+            $user_answer = json_decode($poll_result->result, true);
+
+            if ($type == 'checkbox' || $type == 'radio') {
+                $answers = is_array($options['answer']) ? $options['answer'] : [$options['answer']];
+                $user_answer = is_array($user_answer) ? $user_answer : [$user_answer];
+
+                if(count(array_intersect($user_answer, $answers)) == count($answers)) {
+                    $correct++;
+                }
+
+            } elseif ($type == 'text' && mb_strtolower($options['answer']) == mb_strtolower($user_answer)) {
+                $correct++;
+            }
+
+            if (!$show_answers) {
+                continue;
+            }
+
+            $question = $options['question'];
 
             $fields->push(
                 component('Title')
@@ -895,17 +1000,11 @@ class PollController extends Controller
                 );
             }
 
-            $poll_result = $field->poll_results()
-                ->where('user_id', request()->user()->id)
-                ->get()
-                ->first();
-            $user_answer = json_decode($poll_result->result, true);
-
             if ($type == 'checkbox' || $type == 'radio') {
                 $fields->push(component('QuizOptionRow')
                     ->with('type', $type)
-                    ->with('answer', is_array($options['answer']) ? $options['answer'] : [$options['answer']])
-                    ->with('user_answer', is_array($user_answer) ? $user_answer : [$user_answer])
+                    ->with('answer', $answers)
+                    ->with('user_answer', $user_answer)
                     ->with('options', $options['options'])
                 );
             } elseif ($type == 'text') {
@@ -917,12 +1016,24 @@ class PollController extends Controller
             }
         }
 
+        $fields->prepend(
+            component('Title')
+                ->is('small')
+                ->with('title', trans('content.poll.show.user.correct', ['correct' => $correct, 'all' => $quiz->poll_fields->count()]))
+        );
+
+        $fields->push(component('Button')
+            ->is('large')
+            ->with('title', trans('content.poll.show.redirect.index'))
+            ->with('route', route('frontpage.index'))
+        );
+
         return $fields;
     }
 
-    public function answerQuiz(Request $request, $id)
+    public function answerQuiz(Request $request, $slug)
     {
-        $quiz = Poll::getPollById($id);
+        $quiz = Poll::getPollBySlug($slug);
 
         $logged_user = $request->user();
         $results = [];
@@ -961,6 +1072,11 @@ class PollController extends Controller
         $this->validate(request(), $rules);
 
         $quiz->poll_results()->createMany($results);
+
+        if($quiz->type == Poll::Questionnaire) {
+            return redirect()
+                ->route('frontpage.index');
+        }
 
         return redirect()
             ->route('quiz.answer', ['id' => $quiz->id]);

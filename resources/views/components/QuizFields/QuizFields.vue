@@ -60,36 +60,54 @@
                 :type="field.poll_opt_type"
                 :answer_options_json="JSON.stringify(field.poll_opt_val)"
                 v-on:input="field.poll_opt_val = $event; $forceUpdate();"
+                v-on:poll_type="field.poll_type = $event; $forceUpdate();"
             >
             </component>
 
-            <div class="margin-bottom-md QuizFields__label">
-                {{ answer_trans }} {{ (index + 1) }}
-            </div>
+            <div v-if="answer_enabled">
 
-            <div class="margin-bottom-md" v-if="field.type == 'textareafield'">
+                <div class="margin-bottom-md QuizFields__label">
+                    {{ answer_trans }} {{ (index + 1) }}
+                </div>
 
-                <component
-                    is="FormTextfield"
-                    :name="'quiz_question[' + index + '][answer]'"
-                    v-model="field.answer"
+                <div class="margin-bottom-md" v-if="field.type == 'textareafield'">
+
+                    <component
+                        is="FormTextfield"
+                        :name="'quiz_question[' + index + '][answer]'"
+                        v-model="field.answer"
+                    >
+                    </component>
+
+                </div>
+
+                <div class="margin-bottom-md"
+                    v-if="field.type == 'options' && field.poll_type == 'checkbox'"
+                    v-for="opt in parseOptionsForCheckbox(field)"
                 >
-                </component>
+                    <component
+                        is="FormCheckbox"
+                        :name="'quiz_question[' + index + '][answer][' + opt + ']'"
+                        :title="opt"
+                        :val="field.answer.includes(opt)"
+                        v-model="field.answer_opts[opt]"
+                    >
+                    </component>
+                </div>
 
-            </div>
-
-            <div class="margin-bottom-md"
-                v-if="field.type == 'options'"
-                v-for="opt in parseOptions(field)"
-            >
-                <component
-                    is="FormCheckbox"
-                    :name="'quiz_question[' + index + '][answer][' + opt + ']'"
-                    :title="opt"
-                    :val="field.answer.includes(opt)"
-                    v-model="field.answer_opts[opt]"
+                <div class="margin-bottom-md"
+                    v-if="field.type == 'options' && field.poll_type == 'radio'"
                 >
-                </component>
+                    <component
+                        is="FormRadio"
+                        :name="'quiz_question[' + index + '][answer]'"
+                        :options="parseOptionsForRadio(field)"
+                        :value="field.answer[0]"
+                        v-on:change="field.answer[0] = $event"
+                    >
+                    </component>
+                </div>
+
             </div>
 
             <div class="margin-bottom-md">
@@ -163,6 +181,18 @@
 
         </div>
 
+        <div class="margin-bottom-md" v-if="answer_enabled">
+
+            <component
+                is="FormCheckbox"
+                name="quiz_show_answers"
+                :title="show_answers_trans"
+                :val="show_answers"
+            >
+            </component>
+
+        </div>
+
     </div>
 
 </template>
@@ -178,6 +208,7 @@
     import Icon from '../Icon/Icon.vue'
     import FormHidden from '../FormHidden/FormHidden.vue'
     import FormCheckbox from '../FormCheckbox/FormCheckbox.vue'
+    import FormRadio from '../FormRadio/FormRadio.vue'
 
 	export default {
         
@@ -193,7 +224,9 @@
             add_option_trans : {default: 'Add option'},
             answer_trans : {default: 'Answer'},
             option_button_trans : {default: 'Options'},
-            textfield_button_trans : {default: 'Text field'}
+            textfield_button_trans : {default: 'Text field'},
+            answer_enabled : {default: false},
+            show_answers_trans : {default: 'Show answers to users'}
         },
 
         components : {
@@ -206,13 +239,15 @@
             Icon,
             FormHidden,
             FormCheckbox,
+            FormRadio,
             'options' : FormTextfield,
             'textareafield' : FormTextarea
         },
 
         data : function() {
             return {
-                fields : []
+                fields : [],
+                show_answers : false
             };
         },
 
@@ -240,7 +275,7 @@
                 this.fields = new_arr;
             },
 
-            parseOptions: function(options) {
+            parseOptionsForCheckbox: function(options) {
                 var new_opts = [];
                 options = options.poll_opt_val
 
@@ -251,6 +286,23 @@
                 for (var i = 0; i < options.length; i++) {
                     if (options[i]['value'] != "") {
                         new_opts.push(options[i]['value']);
+                    }
+                }
+
+                return new_opts;
+            },
+
+            parseOptionsForRadio: function(options) {
+                var new_opts = [];
+                options = options.poll_opt_val
+
+                if (options == undefined) {
+                    return new_opts;
+                }
+
+                for (var i = 0; i < options.length; i++) {
+                    if (options[i]['value'] != "") {
+                        new_opts.push({'id' : options[i]['value'], 'name': options[i]['value']});
                     }
                 }
 
@@ -269,6 +321,8 @@
                 var field = fields[i];
                 var type = field.type == 'text' ? 'textareafield' : 'options';
 
+                this.show_answers = field.options.show_answers;
+
                 var poll_opt_val = [];
                 if (field.options.options != undefined) {
                     for(var j = 0; j < field.options.options.length; j++) {
@@ -276,11 +330,16 @@
                     }
                 }
 
+                if(!(field.options.answer instanceof Array)) {
+                    field.options.answer = [field.options.answer];
+                }
+
                 var quiz_field = {
                     'type' : type,
-                    'answer' : field.options.answer,
+                    'answer' : field.options.answer.map(function (val) { return val+'' }),
                     'question' : field.options.question,
                     'poll_opt_type' : field.type,
+                    'poll_type' : field.type,
                     'poll_opt_val' : poll_opt_val,
                     'answer_opts' : {}
                 };
