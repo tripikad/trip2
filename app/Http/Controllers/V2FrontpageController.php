@@ -46,7 +46,7 @@ class V2FrontpageController extends Controller
         $poll_results = [];
         $poll = null;
 
-        if (request()->user()) {
+        if ($loggedUser) {
             $polls = Poll::getUnansweredPollsWoDestination();
         }
 

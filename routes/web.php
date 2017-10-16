@@ -278,6 +278,14 @@ Route::post('poll/update/{id}', 'PollController@update')
     ->name('poll.update')
     ->middleware('role:admin');
 
+Route::get('poll/edit/limited/{id}', 'PollController@limitedEdit')
+    ->name('poll.edit.limited')
+    ->middleware('role:admin');
+
+Route::post('poll/update/limited/{id}', 'PollController@limitedUpdate')
+    ->name('poll.update.limited')
+    ->middleware('role:admin');
+
 Route::get('poll/id/{id}', 'PollController@show')
     ->name('poll.show')
     ->middleware('role:admin');

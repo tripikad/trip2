@@ -64,15 +64,38 @@ class PollController extends Controller
                         ->is('small')
                         ->with('title', trans('content.poll.table.active'));
 
+        $headers[] = component('Title')
+                        ->is('small')
+                        ->with('title', trans('content.poll.table.actions'));
+
         return $headers;
     }
 
-    public function getPollTableCellItem($title, $route)
+    protected function getPollTableCellItem($title, $route=null)
     {
-        return component('MetaLink')
-                    ->is('large')
-                    ->with('route', $route)
-                    ->with('title', $title);
+        $component = component('MetaLink')
+                        ->is('large')
+                        ->with('title', $title);
+
+        if ($route !== null) {
+            $component->with('route', $route);
+        }
+
+        return $component;
+    }
+
+    protected function getActionsComponent(Poll $poll)
+    {
+        $url_name = $poll->poll_results_count == 0 ? 'poll.edit' : 'poll.edit.limited';
+        $edit_route = route($url_name, ['id' => $poll->id]);
+        $view_route = route('poll.show', ['id' => $poll->id]);
+
+        $meta_items = collect()
+            ->push($this->getPollTableCellItem(trans('content.poll.table.view'), $view_route))
+            ->push($this->getPollTableCellItem(' / '))
+            ->push($this->getPollTableCellItem(trans('content.poll.table.edit'), $edit_route));
+
+        return component('Meta')->with('items', $meta_items);
     }
 
     public function index()
@@ -91,16 +114,14 @@ class PollController extends Controller
         $items = $this->getPollTableHeaderItems();
 
         foreach ($polls->items() as $item) {
-            $url_name = $item->poll_results_count == 0 ? 'poll.edit' : 'poll.show';
-            $route = route($url_name, ['id' => $item->id]);
-
-            $items[] = $this->getPollTableCellItem($item->id, $route);
-            $items[] = $this->getPollTableCellItem($item->name, $route);
-            $items[] = $this->getPollTableCellItem($item->start_date, $route);
-            $items[] = $this->getPollTableCellItem($item->end_date, $route);
+            $items[] = $this->getPollTableCellItem($item->id);
+            $items[] = $this->getPollTableCellItem($item->name);
+            $items[] = $this->getPollTableCellItem($item->start_date);
+            $items[] = $this->getPollTableCellItem($item->end_date);
 
             $active = $item->content->status == 1 ? trans('content.poll.table.active') : trans('content.poll.table.active.not');
-            $items[] = $this->getPollTableCellItem($active, $route);
+            $items[] = $this->getPollTableCellItem($active);
+            $items[] = $this->getActionsComponent($item);
         }
 
         return layout('2col')
@@ -118,7 +139,7 @@ class PollController extends Controller
             ->with('content', collect()
 
                 ->push(
-                    component('Grid5')
+                    component('Grid6')
                         ->with('items', $items)
                 )
 
@@ -672,6 +693,10 @@ class PollController extends Controller
 
         $poll = Poll::getPollById($id);
 
+        if ($poll->poll_results_count != 0) {
+            return redirect()->route('poll.index');
+        }
+
         $content_rels = $poll->content->getRelations();
         $dests = $content_rels['destinations'];
         $dest_id = null;
@@ -794,6 +819,10 @@ class PollController extends Controller
         $content = Content::findOrFail($id);
         $poll = Poll::findOrFail($id);
 
+        if ($poll->poll_results()->get()->count() != 0) {
+            return redirect()->route('poll.index');
+        }
+
         $content->fill([
             'title' => $request->poll_name,
             'type' => Poll::Poll,
@@ -816,6 +845,162 @@ class PollController extends Controller
         } elseif ($poll_type == Poll::Quiz || $poll_type == Poll::Questionnaire) {
             $this->addQuizFields($poll);
         }
+
+        return redirect()
+            ->route('poll.index');
+    }
+
+    public function limitedEdit($id)
+    {
+        $poll = Poll::getPollById($id);
+
+        $content_rels = $poll->content->getRelations();
+        $dests = $content_rels['destinations'];
+        $dest_id = null;
+        $dest_name = '';
+        if ($dests->isNotEmpty()) {
+            $dest_id = $dests->first()->id;
+            $dest_name = $dests->first()->name;
+        }
+
+        $fields = collect();
+
+        foreach ($poll->poll_fields->getIterator() as $index => $field) {
+            $options = json_decode($field->options, true);
+            $type = $field->type;
+
+            $fields->push(
+                component('Title')
+                    ->is('small')
+                    ->with('title', ($index + 1).'. '.$options['question'])
+            );
+
+            if (isset($options['image_id'])) {
+                $image = Image::findOrFail($options['image_id']);
+                $fields->push(
+                    component('PhotoCard')
+                        ->with('small', $image->preset('large'))
+                        ->with('large', $image->preset('large'))
+                );
+            }
+
+            if (! isset($options['answer'])) {
+                continue;
+            }
+
+            $answer = $options['answer'];
+
+            if ($type == 'checkbox' || $type == 'radio') {
+                $fields->push(component('QuizOptionRow')
+                    ->with('type', $type)
+                    ->with('answer', $answer)
+                    ->with('user_answer', $answer)
+                    ->with('options', $options['options'])
+                );
+            } elseif ($type == 'text') {
+                $fields->push(component('QuizTextRow')
+                    ->with('answer', mb_strtolower($answer))
+                    ->with('user_answer', mb_strtolower($answer))
+                    ->with('value', $answer)
+                );
+            }
+        }
+
+        return layout('1col')
+            ->with('background', component('BackgroundMap'))
+                ->with('color', 'gray')
+
+                ->with('header', region('Header', collect()
+                    ->push(component('Title')
+                        ->is('white')
+                        ->with('title', trans('content.poll.index.title'))
+                        ->with('route', route('poll.index'))
+                    )
+                ))
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->with('title', trans('content.poll.edit.title'))
+                )
+                ->push(component('Form')
+                    ->with('route', route('poll.update.limited', ['id' => $poll->id]))
+                    ->with('files', true)
+                    ->with('fields', collect()
+                        ->push(component('FormTextfield')
+                            ->with('title', trans('content.poll.edit.name'))
+                            ->with('name', 'poll_name')
+                            ->with('value', old('poll_name', $poll->name))
+                            ->with('disabled', true)
+                        )
+                        ->push(component('FormTextfield')
+                            ->with('title', trans('content.poll.edit.field.start.title'))
+                            ->with('name', 'start')
+                            ->with('value', old('start', $poll->start_date))
+                        )
+                        ->push(component('FormTextfield')
+                            ->with('title', trans('content.poll.edit.field.end.title'))
+                            ->with('name', 'end')
+                            ->with('value', old('end', $poll->end_date))
+                        )
+                        ->pushWhen($dest_id, component('FormTextfield')
+                            ->with('title', trans('content.poll.edit.field.destination'))
+                            ->with('name', 'destinations')
+                            ->with('value', $dest_name)
+                            ->with('disabled', true)
+                        )
+                        ->push(component('FormCheckbox')
+                            ->with('title', trans('content.poll.create.active'))
+                            ->with('name', 'poll_active')
+                            ->with('value', old('poll_active', $poll->content->status))
+                        )
+                        ->push(component('FormButton')
+                            ->is('large')
+                            ->with('title', trans('content.poll.edit.title'))
+                        )
+
+                    )
+                )
+                ->push(component('Title')
+                    ->with('title', trans('content.poll.edit.limited.fields'))
+                )
+                ->merge($fields)
+            )
+            ->with('footer', region('FooterLight'))
+            ->render();
+    }
+
+    public function limitedUpdate(Request $request, $id)
+    {
+        $request = request();
+
+        $rules = [
+            'start' => 'required|date_format:Y-m-d|before_or_equal:end',
+            'end' => 'required|date_format:Y-m-d',
+        ];
+
+        $attribute_names = [
+            'start' => trans('content.poll.edit.field.start.title'),
+            'end' => trans('content.poll.edit.field.end.title'),
+        ];
+
+        $validator = \Validator::make($request->all(), $rules);
+        $validator->setAttributeNames($attribute_names);
+        $validator->validate();
+
+        $poll_type = $request->poll_type;
+
+        $content = Content::findOrFail($id);
+        $poll = Poll::findOrFail($id);
+
+        $content->fill([
+            'status' => $request->has('poll_active') ? 1 : 0,
+        ])
+        ->save();
+
+        $poll->fill([
+            'start_date' => $request->start,
+            'end_date' => $request->end,
+        ])
+        ->save();
 
         return redirect()
             ->route('poll.index');
