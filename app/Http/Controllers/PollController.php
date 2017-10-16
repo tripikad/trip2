@@ -71,7 +71,7 @@ class PollController extends Controller
         return $headers;
     }
 
-    protected function getPollTableCellItem($title, $route=null)
+    protected function getPollTableCellItem($title, $route = null)
     {
         $component = component('MetaLink')
                         ->is('large')
