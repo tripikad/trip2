@@ -41,7 +41,7 @@ class UserStats
                             'destination_count' => $user->vars()->destinationCount(),
                             'destination_percentage' => $user->vars()->destinationCountPercentage(),
                         ]
-                    ))
+                    ).':')
                     ->with('icon', 'icon-pin')
                 )
             );

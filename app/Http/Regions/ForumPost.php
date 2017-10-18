@@ -68,7 +68,7 @@ class ForumPost
                             ? $user->vars()->hasFlaggedContent($post, 'bad')
                             : false
                         )
-                        ->with('icon', 'icon-thumb-up')
+                        ->with('icon', 'icon-thumb-down')
                         ->with('flagtitle', trans('flag.content.bad.flag.title'))
                         ->with('unflagtitle', trans('flag.content.bad.unflag.title'))
                     )
