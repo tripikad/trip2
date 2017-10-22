@@ -193,7 +193,7 @@ class Poll extends Model
 
         if (! request()->user() && isset($poll_info->results) && count($poll_info->results) == 0) {
             return collect();
-        } else if ($poll_info->count() == 7) {
+        } elseif ($poll_info->count() == 7) {
             return $poll_info;
         }
 
@@ -205,7 +205,7 @@ class Poll extends Model
 
         $poll = $polls->first();
 
-        Cache::put('dest_'.$dest_id.'_poll_id', $poll->id, Poll::CacheTTL);
+        Cache::put('dest_'.$dest_id.'_poll_id', $poll->id, self::CacheTTL);
 
         return self::getPollInfo($poll);
     }
@@ -216,11 +216,11 @@ class Poll extends Model
 
         if (! request()->user() && isset($poll_info->results) && count($poll_info->results) == 0) {
             return collect();
-        } else if ($poll_info->count() == 7) {
+        } elseif ($poll_info->count() == 7) {
             return $poll_info;
         }
 
-        $polls = Poll::getPollsWoDestination();
+        $polls = self::getPollsWoDestination();
 
         if ($polls->isEmpty()) {
             return collect();
@@ -228,7 +228,7 @@ class Poll extends Model
 
         $poll = $polls->first();
 
-        Cache::put('poll_id', $poll->id, Poll::CacheTTL);
+        Cache::put('poll_id', $poll->id, self::CacheTTL);
 
         return self::getPollInfo($poll);
     }
@@ -266,7 +266,7 @@ class Poll extends Model
         $results = Cache::get('poll_'.$poll_id.'_results');
         if ($results === null || request()->user() && self::getUserAnswers($poll_id)->isEmpty()) {
             $info['results'] = [];
-        } else if ($results !== null) {
+        } elseif ($results !== null) {
             $info['results'] = json_decode($results, true);
         }
 
@@ -295,12 +295,12 @@ class Poll extends Model
 
         $count = $poll->poll_results_count / $poll->poll_fields_count;
 
-        Cache::put('poll_'.$poll->id.'_field_type', $poll_field->type, Poll::CacheTTL);
-        Cache::put('poll_'.$poll->id.'_options', $poll_field->options, Poll::CacheTTL);
-        Cache::put('poll_'.$poll->id.'_image_small', $image_small, Poll::CacheTTL);
-        Cache::put('poll_'.$poll->id.'_image_large', $image_large, Poll::CacheTTL);
-        Cache::put('poll_'.$poll->id.'_results', json_encode($poll_results), Poll::CacheTTL);
-        Cache::put('poll_'.$poll->id.'_count', $count, Poll::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_field_type', $poll_field->type, self::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_options', $poll_field->options, self::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_image_small', $image_small, self::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_image_large', $image_large, self::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_results', json_encode($poll_results), self::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_count', $count, self::CacheTTL);
 
         if (request()->user() && self::getUserAnswers($poll->id)->isEmpty()) {
             $poll_results = [];
@@ -317,7 +317,7 @@ class Poll extends Model
             'image_small' => '',
             'image_large' => '',
             'results' => $poll_results,
-            'count' => $count
+            'count' => $count,
         ]);
     }
 }
