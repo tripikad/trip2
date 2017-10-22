@@ -875,7 +875,6 @@ class PollController extends Controller
             }
 
             if ($type == 'checkbox' || $type == 'radio') {
-
                 if (isset($options['answer'])) {
                     $answer = is_array($options['answer']) ? $options['answer'] : [$options['answer']];
                 } else {
@@ -888,7 +887,6 @@ class PollController extends Controller
                     ->with('user_answer', $answer)
                     ->with('options', $options['options'])
                 );
-
             } elseif (isset($options['answer']) && $type == 'text') {
                 $answer = $options['answer'];
 

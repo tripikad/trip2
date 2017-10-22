@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Poll;
 use App\User;
-use App\Image;
 use App\Content;
 use App\Destination;
 use Illuminate\Http\Request;
