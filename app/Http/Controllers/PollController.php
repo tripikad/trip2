@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cache;
 use App\Poll;
 use App\User;
 use App\Image;
@@ -850,22 +851,11 @@ class PollController extends Controller
             ->route('poll.index');
     }
 
-    public function limitedEdit($id)
+    protected function limitedEditFields($poll_fields)
     {
-        $poll = Poll::getPollById($id);
-
-        $content_rels = $poll->content->getRelations();
-        $dests = $content_rels['destinations'];
-        $dest_id = null;
-        $dest_name = '';
-        if ($dests->isNotEmpty()) {
-            $dest_id = $dests->first()->id;
-            $dest_name = $dests->first()->name;
-        }
-
         $fields = collect();
 
-        foreach ($poll->poll_fields->getIterator() as $index => $field) {
+        foreach ($poll_fields->getIterator() as $index => $field) {
             $options = json_decode($field->options, true);
             $type = $field->type;
 
@@ -884,26 +874,46 @@ class PollController extends Controller
                 );
             }
 
-            if (! isset($options['answer'])) {
-                continue;
-            }
-
-            $answer = $options['answer'];
-
             if ($type == 'checkbox' || $type == 'radio') {
+
+                if (isset($options['answer'])) {
+                    $answer = is_array($options['answer']) ? $options['answer'] : [$options['answer']];
+                } else {
+                    $answer = [];
+                }
+
                 $fields->push(component('QuizOptionRow')
                     ->with('type', $type)
                     ->with('answer', $answer)
                     ->with('user_answer', $answer)
                     ->with('options', $options['options'])
                 );
-            } elseif ($type == 'text') {
+
+            } elseif (isset($options['answer']) && $type == 'text') {
+                $answer = $options['answer'];
+
                 $fields->push(component('QuizTextRow')
                     ->with('answer', mb_strtolower($answer))
                     ->with('user_answer', mb_strtolower($answer))
                     ->with('value', $answer)
                 );
             }
+        }
+
+        return $fields;
+    }
+
+    public function limitedEdit($id)
+    {
+        $poll = Poll::getPollById($id);
+
+        $content_rels = $poll->content->getRelations();
+        $dests = $content_rels['destinations'];
+        $dest_id = null;
+        $dest_name = '';
+        if ($dests->isNotEmpty()) {
+            $dest_id = $dests->first()->id;
+            $dest_name = $dests->first()->name;
         }
 
         return layout('1col')
@@ -962,7 +972,7 @@ class PollController extends Controller
                 ->push(component('Title')
                     ->with('title', trans('content.poll.edit.limited.fields'))
                 )
-                ->merge($fields)
+                ->merge($this->limitedEditFields($poll->poll_fields))
             )
             ->with('footer', region('FooterLight'))
             ->render();
@@ -1036,7 +1046,15 @@ class PollController extends Controller
             ]);
         }
 
-        return $poll_field->getParsedResults();
+        $results = $poll_field->getParsedResults();
+
+        $poll = Poll::getPollById($request->id);
+        $count = $poll->poll_results_count / $poll->poll_fields_count;
+
+        Cache::put('poll_'.$poll->id.'_results', json_encode($results), Poll::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_count', $count, Poll::CacheTTL);
+
+        return ['result' => $results, 'count' => $count];
     }
 
     public function showQuizOrQuestionnaire($slug)
