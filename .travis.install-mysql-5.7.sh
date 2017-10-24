@@ -1,6 +1,6 @@
-echo mysql-apt-config mysql-apt-config/select-server select mysql-5.7 | sudo debconf-set-selections
-wget https://dev.mysql.com/get/mysql-apt-config_0.7.3-1_all.deb
-sudo dpkg --install mysql-apt-config_0.7.3-1_all.deb
+echo "TEST123"
+wget http://dev.mysql.com/get/mysql-apt-config_0.3.2-1ubuntu14.04_all.deb
+sudo dpkg -i mysql-apt-config_0.3.2-1ubuntu14.04_all.deb
 sudo apt-get update -q
-sudo apt-get install -q -y --allow-unauthenticated -o Dpkg::Options::=--force-confnew mysql-server
+sudo apt-get install mysql-server-5.7
 sudo mysql_upgrade
