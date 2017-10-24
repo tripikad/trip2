@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Poll;
 use App\User;
-use App\Image;
 use App\Content;
 use App\Destination;
 use Illuminate\Http\Request;
@@ -29,23 +28,7 @@ class V2DestinationController extends Controller
         $travelmates = Content::getLatestPagedItems('travelmate', 6, $destination->id);
         $news = Content::getLatestPagedItems('news', 2, $destination->id);
 
-        $polls = Poll::getUnansweredPollsByDestinationId($destination->id);
-        $poll_field = null;
-        $poll_results = [];
-        $poll = null;
-
-        if ($polls->isNotEmpty() && request()->user()) {
-            $poll = $polls->first();
-            $poll_field = $poll->poll_fields->first();
-        } else {
-            $polls = Poll::getPollsByDestinationId($destination->id);
-
-            if ($polls->isNotEmpty()) {
-                $poll = $polls->first();
-                $poll_field = $poll->poll_fields->first();
-                $poll_results = $poll_field->getParsedResults();
-            }
-        }
+        $poll_info = Poll::getPollInfoDestination($destination->id);
 
         $loggedUser = request()->user();
 
@@ -99,15 +82,9 @@ class V2DestinationController extends Controller
             )
 
             ->with('sidebar', collect()
-                ->when($poll_field && $poll, function ($collection) use ($poll_field, $poll_results, $poll) {
-                    $options = json_decode($poll_field->options, true);
-
-                    if (isset($options['image_id'])) {
-                        $image = Image::findOrFail($options['image_id']);
-                        $image_small = $image->preset('xsmall_square');
-                        $image_large = $image->preset('large');
-                    }
-
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->when($poll_info->isNotEmpty(), function ($collection) use ($poll_info) {
                     return $collection->push(component('Block')
                         ->is('gray')
                         ->with('content', collect()
@@ -116,24 +93,24 @@ class V2DestinationController extends Controller
                                 ->is('small')
                             )
                             ->push(component('PollAnswer')
-                                ->with('options', json_decode($poll_field->options, true))
-                                ->with('type', $poll_field->type)
-                                ->with('id', $poll->id)
-                                ->with('results', $poll_results)
-                                ->with('image_small', isset($image_small) ? $image_small : '')
-                                ->with('image_large', isset($image_large) ? $image_large : '')
+                                ->with('options', $poll_info['options'])
+                                ->with('type', $poll_info['type'])
+                                ->with('id', $poll_info['id'])
+                                ->with('results', $poll_info['results'])
+                                ->with('image_small', $poll_info['image_small'])
+                                ->with('image_large', $poll_info['image_large'])
                                 ->with('answer_trans', trans('content.poll.answer'))
-                                ->with('select_error', $poll_field->type == 'radio' ?
+                                ->with('select_error', $poll_info['type'] == 'radio' ?
                                     trans('content.poll.answer.error.select.one') :
                                     trans('content.poll.answer.error.select.multiple')
                                 )
                                 ->with('save_error', trans('content.poll.answer.error.save'))
+                                ->with('count_trans', trans('content.poll.answer.count'))
+                                ->with('count', $poll_info['count'])
                             )
                         )
                     );
                 })
-                ->push(component('Promo')->with('promo', 'sidebar_small'))
-                ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()

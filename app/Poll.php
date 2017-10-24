@@ -2,10 +2,16 @@
 
 namespace App;
 
+use Cache;
 use Illuminate\Database\Eloquent\Model;
 
 class Poll extends Model
 {
+    const Poll = 'poll';
+    const Quiz = 'quiz';
+    const Questionnaire = 'questionnaire';
+    const CacheTTL = 15;
+
     protected $table = 'poll';
 
     protected $fillable = ['name', 'start_date', 'end_date', 'type'];
@@ -54,7 +60,9 @@ class Poll extends Model
 
         return $query
             ->with('content')
-            ->withCount('poll_results')
+            ->withCount(['poll_results' => function ($query) {
+                $query->limit(1); // We only need confirmation that there is atleast one
+            }])
             ->when($name, function ($query) use ($name) {
                 return $query->where('poll.name', $name);
             })
@@ -90,6 +98,34 @@ class Poll extends Model
             ->findOrFail($id);
     }
 
+    public function scopeGetPollBySlug($query, $slug)
+    {
+        return $query
+            ->with([
+                'content',
+                'content.destinations',
+                'poll_fields',
+                'poll_results',
+            ])
+            ->whereHas('content', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            })
+            ->first();
+    }
+
+    public function scopeGetUserAnswers($query, $poll_id)
+    {
+        return $query
+            ->whereHas('poll_results', function ($query) {
+                $logged_user = request()->user();
+                if ($logged_user) {
+                    $query->where('poll_results.user_id', $logged_user->id);
+                }
+            })
+            ->where('id', $poll_id)
+            ->get();
+    }
+
     public function scopeGetPollsByDestinationId($query, $destination_id)
     {
         return $query
@@ -97,50 +133,46 @@ class Poll extends Model
                 'poll_fields',
                 'poll_results'
             )
+            ->withCount(['poll_fields', 'poll_results'])
             ->whereHas('content', function ($query) {
                 $query->where('status', 1);
             })
             ->whereHas('content.destinations', function ($query) use ($destination_id) {
                 $query->where('destinations.id', $destination_id);
             })
-            ->where('type', 'poll')
+            ->where('type', self::Poll)
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
             ->get();
     }
 
-    public function scopeGetUnansweredPollsByDestinationId($query, $destination_id)
+    public function scopeGetPollsWoDestination($query)
     {
         return $query
             ->with(
-                'poll_fields'
+                'poll_fields',
+                'poll_results'
             )
+            ->withCount(['poll_fields', 'poll_results'])
             ->whereHas('content', function ($query) {
                 $query->where('status', 1);
             })
-            ->whereHas('content.destinations', function ($query) use ($destination_id) {
-                $query->where('destinations.id', $destination_id);
-            })
-            ->whereDoesntHave('poll_results', function ($query) {
-                $logged_user = request()->user();
-                if ($logged_user) {
-                    $query->where('poll_results.user_id', $logged_user->id);
-                }
-            })
-            ->where('type', 'poll')
+            ->doesntHave('content.destinations')
+            ->where('type', self::Poll)
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
             ->get();
     }
 
-    public function scopeGetUnansweredQuiz($query)
+    public function scopeGetUnansweredQuizOrQuestionnaire($query)
     {
         $query->whereHas('content', function ($query) {
             $query->where('status', 1);
         })
-            ->where('type', 'quiz')
+            ->with('content')
+            ->whereIn('type', [self::Quiz, self::Questionnaire])
             ->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
             ->orderBy('start_date', 'DESC')
@@ -153,5 +185,139 @@ class Poll extends Model
         }
 
         return $query->get();
+    }
+
+    public static function getPollInfoDestination($dest_id)
+    {
+        $poll_info = self::getPollInfoFromCache(Cache::get('dest_'.$dest_id.'_poll_id'));
+
+        if (! request()->user() && isset($poll_info->results) && count($poll_info->results) == 0) {
+            return collect();
+        } elseif ($poll_info->count() == 7) {
+            return $poll_info;
+        }
+
+        $polls = self::getPollsByDestinationId($dest_id);
+
+        if ($polls->isEmpty()) {
+            return collect();
+        }
+
+        $poll = $polls->first();
+
+        Cache::put('dest_'.$dest_id.'_poll_id', $poll->id, self::CacheTTL);
+
+        return self::getPollInfo($poll);
+    }
+
+    public static function getPollInfoWoDestination()
+    {
+        $poll_info = self::getPollInfoFromCache(Cache::get('poll_id'));
+
+        if (! request()->user() && isset($poll_info->results) && count($poll_info->results) == 0) {
+            return collect();
+        } elseif ($poll_info->count() == 7) {
+            return $poll_info;
+        }
+
+        $polls = self::getPollsWoDestination();
+
+        if ($polls->isEmpty()) {
+            return collect();
+        }
+
+        $poll = $polls->first();
+
+        Cache::put('poll_id', $poll->id, self::CacheTTL);
+
+        return self::getPollInfo($poll);
+    }
+
+    protected static function getPollInfoFromCache($poll_id)
+    {
+        $info = [];
+
+        if ($poll_id !== null) {
+            $info['id'] = $poll_id;
+        } else {
+            return collect();
+        }
+
+        $poll_type = Cache::get('poll_'.$poll_id.'_field_type');
+        if ($poll_type !== null) {
+            $info['type'] = $poll_type;
+        }
+
+        $poll_options = Cache::get('poll_'.$poll_id.'_options');
+        if ($poll_options !== null) {
+            $info['options'] = json_decode($poll_options, true);
+        }
+
+        $image_small = Cache::get('poll_'.$poll_id.'_image_small');
+        if ($image_small !== null) {
+            $info['image_small'] = $image_small;
+        }
+
+        $image_large = Cache::get('poll_'.$poll_id.'_image_large');
+        if ($image_large !== null) {
+            $info['image_large'] = $image_large;
+        }
+
+        $results = Cache::get('poll_'.$poll_id.'_results');
+        if ($results === null || request()->user() && self::getUserAnswers($poll_id)->isEmpty()) {
+            $info['results'] = [];
+        } elseif ($results !== null) {
+            $info['results'] = json_decode($results, true);
+        }
+
+        $count = Cache::get('poll_'.$poll_id.'_count');
+        if ($count !== null) {
+            $info['count'] = $count;
+        }
+
+        return collect($info);
+    }
+
+    protected static function getPollInfo(Poll $poll)
+    {
+        $poll_field = $poll->poll_fields->first();
+        $poll_results = $poll_field->getParsedResults();
+
+        $options = json_decode($poll_field->options, true);
+        $image_small = '';
+        $image_large = '';
+
+        if (isset($options['image_id'])) {
+            $image = Image::findOrFail($options['image_id']);
+            $image_small = $image->preset('xsmall_square');
+            $image_large = $image->preset('large');
+        }
+
+        $count = $poll->poll_results_count / $poll->poll_fields_count;
+
+        Cache::put('poll_'.$poll->id.'_field_type', $poll_field->type, self::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_options', $poll_field->options, self::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_image_small', $image_small, self::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_image_large', $image_large, self::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_results', json_encode($poll_results), self::CacheTTL);
+        Cache::put('poll_'.$poll->id.'_count', $count, self::CacheTTL);
+
+        if (request()->user() && self::getUserAnswers($poll->id)->isEmpty()) {
+            $poll_results = [];
+        }
+
+        if (! request()->user() && count($poll_results) == 0) {
+            return collect();
+        }
+
+        return collect([
+            'id' => $poll->id,
+            'type' => $poll_field->type,
+            'options' => json_decode($poll_field->options, true),
+            'image_small' => '',
+            'image_large' => '',
+            'results' => $poll_results,
+            'count' => $count,
+        ]);
     }
 }

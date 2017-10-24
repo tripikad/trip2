@@ -278,6 +278,14 @@ Route::post('poll/update/{id}', 'PollController@update')
     ->name('poll.update')
     ->middleware('role:admin');
 
+Route::get('poll/edit/limited/{id}', 'PollController@limitedEdit')
+    ->name('poll.edit.limited')
+    ->middleware('role:admin');
+
+Route::post('poll/update/limited/{id}', 'PollController@limitedUpdate')
+    ->name('poll.update.limited')
+    ->middleware('role:admin');
+
 Route::get('poll/id/{id}', 'PollController@show')
     ->name('poll.show')
     ->middleware('role:admin');
@@ -286,11 +294,11 @@ Route::post('poll/answer', 'PollController@answerPoll')
     ->name('poll.answer')
     ->middleware('role:regular');
 
-Route::get('quiz/answer/{id}', 'PollController@showQuiz')
+Route::get('quiz/answer/{slug}', 'PollController@showQuizOrQuestionnaire')
     ->name('quiz.answer')
     ->middleware('role:regular');
 
-Route::post('quiz/answer/{id}', 'PollController@answerQuiz')
+Route::post('quiz/answer/{slug}', 'PollController@answerQuiz')
     ->name('quiz.answer')
     ->middleware('role:regular');
 

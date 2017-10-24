@@ -11,6 +11,7 @@
                 :name="name"
                 :value="opt.id"
                 :checked="opt.id == value"
+                v-on:change="$emit('change', $event.target.value)"
             />
 
             <label

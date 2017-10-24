@@ -75,7 +75,7 @@
 
         </div>
         
-        <div v-else>
+        <div class="margin-bottom-md" v-else>
 
             <component
                 is="Barchart"
@@ -84,6 +84,12 @@
                 isclasses="Barchart--black Barchart--block"
             >
             </component>
+
+        </div>
+
+        <div class="PollAnswer__count">
+
+            {{ count_trans }}: {{ displayed_count }}
 
         </div>
 
@@ -114,7 +120,9 @@
             save_error : {default : ''},
             image_small : {default : ''},
             image_large : {default : ''},
-            results : {default : []}
+            results : {default : []},
+            count_trans : {default : ''},
+            count : {default: ''}
         },
         
         data : function() {
@@ -124,6 +132,7 @@
                 checked : [],
                 error : '',
                 displayed_results : [],
+                displayed_count : 0,
                 result_width : 0
             };
         },
@@ -136,8 +145,9 @@
                 }
                 
                 this.$http.post('/poll/answer', {'id' : this.id, 'values' : this.checked})
-                    .then(function(res) {                    
-                        this.displayed_results = res.body;
+                    .then(function(res) {
+                        this.displayed_count = res.body.count;
+                        this.displayed_results = res.body.result;
                     },function (res) {
                         this.error = this.save_error;
                     })
@@ -147,6 +157,7 @@
         mounted() {
             this.result_width = this.$refs.answer_div.clientWidth - 12;
             this.displayed_results = this.results;
+            this.displayed_count = this.count;
             this.question = this.options.question;
             var opts = this.options.options;
             for (var i = 0; i < opts.length; i++) {
