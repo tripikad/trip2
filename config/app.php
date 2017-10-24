@@ -185,7 +185,8 @@ return [
 
         Msurguy\Honeypot\HoneypotServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
-        Eduardokum\LaravelMailAutoEmbed\Providers\LaravelMailAutoEmbedServiceProvider::class,
+        //Eduardokum\LaravelMailAutoEmbed\Providers\LaravelMailAutoEmbedServiceProvider::class,
+        Eduardokum\LaravelMailAutoEmbed\ServiceProvider::class,
 
         /*
          * Application Service Providers...
