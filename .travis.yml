@@ -20,7 +20,7 @@ install:
     - sudo apt-get update && sudo apt-get dist-upgrade
     - wget http://dev.mysql.com/get/mysql-apt-config_0.3.2-1ubuntu14.04_all.deb
     - sudo dpkg -i mysql-apt-config_0.3.2-1ubuntu14.04_all.deb
-    - sudo apt-get install mysql-server-5.7
+    - sudo apt-get install mysql-server
     - sudo mysql_upgrade
     - composer install --prefer-dist
     - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
