@@ -18,9 +18,10 @@ cache:
 
 services:
     - mysql
-sudo: true
+
 sudo: required
-before_script:
+
+before_install:
     - bash .travis.install-mysql-5.7.sh
 
 install:
