@@ -257,7 +257,7 @@ class NewsletterLetterContentVars
                             'slot' => $item->vars()->title,
                         ]);
 
-                        ++$flights_count;
+                        $flights_count++;
                     } elseif (in_array($item->type, ['news', 'shortnews'])) {
                         $image = $item->imagePreset('small_fit');
                         $content .= mail_component('mail::news', [

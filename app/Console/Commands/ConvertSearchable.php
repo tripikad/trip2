@@ -129,8 +129,8 @@ class ConvertSearchable extends Command
         foreach (array_chunk($items, 10000) as &$chucked_items) {
             $data = [];
             foreach ($chucked_items as &$item) {
-                ++$items_done;
-                ++$last_round;
+                $items_done++;
+                $last_round++;
                 $data[] = '('.implode(', ', $item).')';
             }
 

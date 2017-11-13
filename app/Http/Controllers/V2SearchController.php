@@ -345,7 +345,7 @@ class V2SearchController extends Controller
         $count = 0;
 
         foreach ($keyword_array as &$keys) {
-            ++$count;
+            $count++;
             if (trim($keys) != '') {
                 if ($count > 1) {
                     $prefix = '-';
