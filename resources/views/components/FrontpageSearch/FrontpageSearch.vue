@@ -5,7 +5,8 @@
         <div class="FrontpageSearch__search">
             <input type="text" autocomplete="off" :placeholder="placeholder" class="FrontpageSearch__input"
                 v-model="query"
-                v-on:keyup="keymonitor">
+                v-on:keyup="keymonitor"
+                v-on:blur="blurmonitor">
 
             <div class="FrontpageSearch__icon" @click="redirect">
                 <component is="Icon" icon="icon-search" size="lg"></component>
@@ -14,7 +15,7 @@
             <div class="FrontpageSearch__loading" v-show="loading"></div>
         </div>
 
-        <div class="FrontpageSearch__results">
+        <div class="FrontpageSearch__results" v-if="showResultContainer">
             <component v-for="(result, index) in results" is="SearchRow" :result="result" :key="index" :index="index"></component>
         </div>
 
@@ -43,6 +44,7 @@
                 enterPressed: false,
                 lastKeyword: '',
                 searchTimeout: null,
+                showResultContainer: true
             }
         ),
         methods: {
@@ -53,6 +55,9 @@
                     this.search();
                 }
             },
+            blurmonitor: function(event) {
+                this.showResultContainer = false;
+            },
             redirect: function() {
                 this.loading = true
                 this.enterPressed = true
@@ -60,6 +65,7 @@
                 return false
             },
             search: function() {
+                this.showResultContainer = true;
                 this.loading = true
                 if (this.searchTimeout) {
                     clearTimeout(this.searchTimeout)
