@@ -39,7 +39,7 @@ class UnreadContent extends Model
                 foreach ($content->comments as &$comment) {
                     if ($comment->created_at->timestamp > $unread_timestamp) {
                         if ($content_unread) {
-                            --$unread_data['count'];
+                            $unread_data['count']--;
                             $content_unread = false;
                         }
 
@@ -47,7 +47,7 @@ class UnreadContent extends Model
                             $unread_data['first_comment_id'] = $comment->id;
                         }
 
-                        ++$unread_data['count'];
+                        $unread_data['count']++;
                     }
                 }
             }
@@ -74,7 +74,7 @@ class UnreadContent extends Model
             if ($content->comments) {
                 foreach ($content->comments as &$comment) {
                     if ($content_unread) {
-                        --$unread_data['count'];
+                        $unread_data['count']--;
                         $content_unread = false;
                     }
 
@@ -82,7 +82,7 @@ class UnreadContent extends Model
                         $unread_data['first_comment_id'] = $comment->id;
                     }
 
-                    ++$unread_data['count'];
+                    $unread_data['count']++;
                 }
             }
         }

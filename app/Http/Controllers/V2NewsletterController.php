@@ -231,7 +231,7 @@ class V2NewsletterController extends Controller
         } else {
             $sort_order = 0;
             foreach ($request->input('body') as $key => &$body) {
-                ++$sort_order;
+                $sort_order++;
 
                 $date_from = $request->input('visible_from')[$key] == '' ? null : $request->input('visible_from')[$key];
                 $date_to = $request->input('visible_to')[$key] == '' ? null : $request->input('visible_to')[$key];

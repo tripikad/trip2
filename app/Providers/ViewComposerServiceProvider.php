@@ -20,7 +20,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             if (isset($data['month'])) {
                 $months = [];
                 $year = Date::now()->format('Y');
-                for ($i = 1; $i <= 12; ++$i) {
+                for ($i = 1; $i <= 12; $i++) {
                     $months[$i] = Date::parse("01.$i.$year")->format('F');
                 }
 
@@ -28,7 +28,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             } else {
                 $numbers = [];
 
-                for ($i = $data['from']; $i <= $data['to']; ++$i) {
+                for ($i = $data['from']; $i <= $data['to']; $i++) {
                     $numbers[$i] = (strlen($i) == 1 ? '0' : '').
                         $i;
                 }
