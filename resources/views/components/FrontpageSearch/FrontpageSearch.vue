@@ -6,7 +6,7 @@
             <input type="text" autocomplete="off" :placeholder="placeholder" class="FrontpageSearch__input"
                 v-model="query"
                 v-on:keyup="keymonitor"
-                v-on:blur="blurmonitor">
+                v-on:blur="blurMonitor">
 
             <div class="FrontpageSearch__icon" @click="redirect">
                 <component is="Icon" icon="icon-search" size="lg"></component>
@@ -15,7 +15,7 @@
             <div class="FrontpageSearch__loading" v-show="loading"></div>
         </div>
 
-        <div class="FrontpageSearch__results" v-if="showResultContainer">
+        <div class="FrontpageSearch__results" v-if="showResultContainer" v-on:mousedown="blurMonitorPrevent">
             <component v-for="(result, index) in results" is="SearchRow" :result="result" :key="index" :index="index"></component>
         </div>
 
@@ -55,8 +55,11 @@
                     this.search();
                 }
             },
-            blurmonitor: function(event) {
+            blurMonitor: function(event) {
                 this.showResultContainer = false;
+            },
+            blurMonitorPrevent: function(event) {
+                event.preventDefault();
             },
             redirect: function() {
                 this.loading = true
