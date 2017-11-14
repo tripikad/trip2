@@ -55,7 +55,7 @@ class Newsletter extends Command
                     $insert = [];
                     foreach ($users_chunk as &$user) {
                         if (! in_array($user->id, $subscription_ids)) {
-                            ++$total_count;
+                            $total_count++;
                             $insert[] = [
                                 'newsletter_type_id' => $newsletter->id,
                                 'user_id' => $user->id,
@@ -258,8 +258,8 @@ class Newsletter extends Command
         $subscriptions_count = $newsletter->subscriptions->count();
 
         foreach ($newsletter->subscriptions as &$subscription) {
-            ++$chunk_count;
-            ++$count_added;
+            $chunk_count++;
+            $count_added++;
             $insert_to_queue[] = [
                 'subscription_id' => $subscription->id,
                 'sent_id' => $sent->id,
@@ -269,7 +269,7 @@ class Newsletter extends Command
             ];
 
             if ($chunk_count == $chunk_max || $count_added == $subscriptions_count) {
-                ++$chunk_rounds;
+                $chunk_rounds++;
                 $chunk_count = 0;
 
                 NewsletterSentSubscriber::insert($insert_to_queue);
@@ -329,8 +329,8 @@ class Newsletter extends Command
             $chunk_max = $this->chunk_max;
             $insert_to_queue = [];
             foreach ($users->get() as &$user) {
-                ++$chunk_count;
-                ++$count_added;
+                $chunk_count++;
+                $count_added++;
                 $insert_to_queue[] = [
                     'subscription_id' => null,
                     'sent_id' => $sent->id,
@@ -341,7 +341,7 @@ class Newsletter extends Command
                 ];
 
                 if ($chunk_count == $chunk_max || $count_added == $users_count) {
-                    ++$chunk_rounds;
+                    $chunk_rounds++;
                     $chunk_count = 0;
 
                     NewsletterSentSubscriber::insert($insert_to_queue);
@@ -374,8 +374,8 @@ class Newsletter extends Command
 
         $find_by_destinations = [];
         foreach ($destination_ids as &$destination_id) {
-            ++$chunk_count;
-            ++$count_processed;
+            $chunk_count++;
+            $count_processed++;
 
             $find_by_destinations[] = $destination_id;
 
@@ -462,8 +462,8 @@ class Newsletter extends Command
                     }
                 }
 
-                ++$chunk_count;
-                ++$count_processed;
+                $chunk_count++;
+                $count_processed++;
                 if (! in_array($flight->id, $flight_ids)) {
                     $flight_ids[] = $flight->id;
                 }
@@ -517,8 +517,8 @@ class Newsletter extends Command
             $insert = [];
 
             foreach ($newsletter->subscriptions as &$subscription) {
-                ++$chunk_count;
-                ++$count_processed;
+                $chunk_count++;
+                $count_processed++;
 
                 foreach ($sents as &$sent) {
                     if ($sent->destination_id == $subscription->destination_id || ($sent->price_error == 1 && $subscription->price_error == 1)) {
