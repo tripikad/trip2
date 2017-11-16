@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use DB;
-use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use App\User;
 use App\Content;
+use Carbon\Carbon;
 use App\Destination;
+use Illuminate\Support\Collection;
 
 class V2ExperimentsController extends Controller
 {
     public function getMonthlyStat($model)
     {
-        return Collection::times(3, function($year) use ($model) {
+        return Collection::times(3, function ($year) use ($model) {
             $model = 'App\\'.$model;
             $table = (new $model)->getTable();
+
             return $model::select(
                     DB::raw("DATE_FORMAT(created_at, '%M') date"),
                     DB::raw('count('.$table.'.id) as aggregate')
@@ -25,30 +26,30 @@ class V2ExperimentsController extends Controller
                     'created_at',
                     $year - 1 == 0 ? [
                         Carbon::now()->startOfYear(),
-                        Carbon::now()->startOfMonth()
+                        Carbon::now()->startOfMonth(),
                     ] : [
                         Carbon::now()->subYears($year - 1)->startOfYear(),
-                        Carbon::now()->subYears($year - 1)->endOfYear()
+                        Carbon::now()->subYears($year - 1)->endOfYear(),
                     ]
                 )
                 ->orderBy('created_at')
                 ->pluck('aggregate');
         })
-        ->map(function($values, $year) {
+        ->map(function ($values, $year) {
             return collect()
                 // Replace with ->pad in Laravel 5.5
                 ->put('values', array_pad($values->all(), 12, 0))
                 ->put('title', Carbon::now()
                     ->subYears($year)
                     ->format('Y')
-                ); 
+                );
         });
     }
 
     public function index()
     {
         $user = auth()->user();
-        
+
         return layout('1col')
 
             ->with('content', collect()
@@ -58,7 +59,7 @@ class V2ExperimentsController extends Controller
                 )
 
                 ->merge(collect(['User', 'Content', 'Comment', 'Flag'])
-                    ->flatMap(function($model) {
+                    ->flatMap(function ($model) {
                         return collect()
                             ->push(component('Title')
                                 ->is('small')
@@ -69,7 +70,7 @@ class V2ExperimentsController extends Controller
                             );
                     })
                 )
- 
+
                 ->push(component('Title')
                     ->with('title', 'Barchart')
                 )
