@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use App\User;
-
 class V2ExperimentsController extends Controller
 {
-
     public function index()
     {
         $user = auth()->user();
