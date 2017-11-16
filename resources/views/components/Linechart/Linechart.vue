@@ -8,20 +8,20 @@
                 fill="none"
                 stroke-width="2"
                 stroke="hsl(205, 82%, 57%)"
-                :d="line(indexedItems)"
+                :d="line(items)"
             />
             <line
-                :x1="xScale(0)"
-                :y1="yScale(0)"
-                :x2="xScale(0)"
-                :y2="yScale(100)"
+                :x1="0"
+                :y1="0"
+                :x2="0"
+                :y2="height"
                 stroke="hsl(204, 6%, 55%)"
             />
             <line
-                :x1="xScale(0)"
-                :y1="yScale(100)"
-                :x2="xScale(items.length - 1)"
-                :y2="yScale(100)"
+                :x1="0"
+                :y1="height"
+                :x2="width"
+                :y2="height"
                 stroke="hsl(204, 6%, 55%)"
             />
         </svg>  
@@ -34,6 +34,7 @@
 
     import { scaleLinear } from 'd3-scale'
     import { line } from 'd3-shape'
+    import { extent } from 'd3-array'
  
     export default {
 
@@ -43,20 +44,13 @@
             items: { default: [] }
         },
 
-        data: () => ({ padding: 5 }),
+        data: () => ({ padding: 1 }),
 
         computed: {
             height() {
                 return this.width / 4
-            },
-            indexedItems() {
-                return this.items.map((item, index) => {
-                    item.index = index
-                    return item
-                })
             }
         },
-
         methods: {
             xScale(index) {
                 return scaleLinear()
@@ -66,13 +60,13 @@
             },
             yScale(value) {
                 return scaleLinear()
-                    .domain([0, 100])
-                    .range([this.padding, this.height - this.padding])
+                    .domain(extent(this.items, item => item.value))
+                    .range([this.height - this.padding, this.padding])
                     (value)
             },
             line(items) {
                 return line()
-                    .x(d => this.xScale(d.index))
+                    .x((d, index) => this.xScale(index))
                     .y(d => this.yScale(d.value))
                     (items)
             },

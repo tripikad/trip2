@@ -21,7 +21,7 @@ class V2ExperimentsController extends Controller
 
                 ->push(component('Linechart')
                     ->with('items', collect()
-                        ->push(['title' => 'One', 'value' => 12])
+                        ->push(['title' => 'One', 'value' => 0])
                         ->push(['title' => 'Two', 'value' => 34])
                         ->push(['title' => 'Three', 'value' => 0])
                         ->push(['title' => 'Four', 'value' => 8])
