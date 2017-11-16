@@ -2,20 +2,85 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
+=======
+use DB;
+use App\User;
+>>>>>>> origin/kika-charts-2
 use App\Content;
+use Carbon\Carbon;
 use App\Destination;
+use Illuminate\Support\Collection;
 
 class V2ExperimentsController extends Controller
 {
+<<<<<<< HEAD
+=======
+    public function getMonthlyStat($model)
+    {
+        return Collection::times(3, function ($year) use ($model) {
+            $model = 'App\\'.$model;
+            $table = (new $model)->getTable();
+
+            return $model::select(
+                    DB::raw("DATE_FORMAT(created_at, '%M') date"),
+                    DB::raw('count('.$table.'.id) as aggregate')
+                )
+                ->groupBy(DB::raw('MONTH('.$table.'.created_at)'))
+                ->whereBetween(
+                    'created_at',
+                    $year - 1 == 0 ? [
+                        Carbon::now()->startOfYear(),
+                        Carbon::now()->startOfMonth(),
+                    ] : [
+                        Carbon::now()->subYears($year - 1)->startOfYear(),
+                        Carbon::now()->subYears($year - 1)->endOfYear(),
+                    ]
+                )
+                ->orderBy('created_at')
+                ->pluck('aggregate');
+        })
+        ->map(function ($values, $year) {
+            return collect()
+                // Replace with ->pad in Laravel 5.5
+                ->put('values', array_pad($values->all(), 12, 0))
+                ->put('title', Carbon::now()
+                    ->subYears($year)
+                    ->format('Y')
+                );
+        });
+    }
+>>>>>>> origin/kika-charts-2
 
     public function index()
     {
         $user = auth()->user();
-        
+
         return layout('1col')
 
             ->with('content', collect()
+<<<<<<< HEAD
  
+=======
+
+                ->push(component('Title')
+                    ->with('title', 'Linecart')
+                )
+
+                ->merge(collect(['User', 'Content', 'Comment', 'Flag'])
+                    ->flatMap(function ($model) {
+                        return collect()
+                            ->push(component('Title')
+                                ->is('small')
+                                ->with('title', $model)
+                            )
+                            ->push(component('Linechart')
+                                ->with('items', $this->getMonthlyStat($model))
+                            );
+                    })
+                )
+
+>>>>>>> origin/kika-charts-2
                 ->push(component('Title')
                     ->with('title', 'Barchart')
                 )
