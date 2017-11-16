@@ -5,10 +5,12 @@
         <svg :width="width" :height="height">
 
             <path
+                v-for="(item, index) in items"
                 fill="none"
                 stroke-width="2"
                 stroke="hsl(205, 82%, 57%)"
-                :d="line(items)"
+                :d="line(item.values)"
+                :opacity="1 - (index * 0.4)"
             />
             <line
                 :x1="0"
@@ -34,7 +36,7 @@
 
     import { scaleLinear } from 'd3-scale'
     import { line } from 'd3-shape'
-    import { extent } from 'd3-array'
+    import { extent, merge } from 'd3-array'
  
     export default {
 
@@ -54,20 +56,23 @@
         methods: {
             xScale(index) {
                 return scaleLinear()
-                    .domain([0, this.items.length - 1])
+                    .domain([0, this.items[0].values.length - 1])
                     .range([this.padding, this.width - this.padding])
                     (index)
             },
             yScale(value) {
                 return scaleLinear()
-                    .domain(extent(this.items, item => item.value))
+                    .domain(
+                        extent(merge(this.items.map(item => item.values)))
+                    )
                     .range([this.height - this.padding, this.padding])
                     (value)
             },
             line(items) {
                 return line()
                     .x((d, index) => this.xScale(index))
-                    .y(d => this.yScale(d.value))
+                    .y(d => this.yScale(d))
+                    .defined(d => d > 0)
                     (items)
             },
         }
