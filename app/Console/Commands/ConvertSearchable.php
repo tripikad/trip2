@@ -3,6 +3,9 @@
 namespace App\Console\Commands;
 
 use DB;
+use App\User;
+use App\Comment;
+use App\Content;
 use App\Searchable;
 use Illuminate\Console\Command;
 
@@ -39,21 +42,21 @@ class ConvertSearchable extends Command
 
             $index_fields = [];
 
-            $users = $this->get_users_for_index($index_fields);
-            $user_ids = $this->get_object_ids($users);
+            $user_ids = [];
+            $this->get_users_for_index($index_fields, $user_ids);
 
             $content_type_by_id = [];
-            $contents = $this->get_content_for_index($index_fields, $content_type_by_id);
-            $content_ids = $this->get_object_ids($contents);
+            $content_ids = [];
+            $this->get_content_for_index($index_fields, $content_type_by_id, $content_ids);
 
-            $this->get_comments_for_index($index_fields, $content_ids, $user_ids, $content_type_by_id, true);
+            $this->get_comments_for_index($index_fields, $content_ids, $user_ids, $content_type_by_id);
 
-            $this->get_destinations_for_index($index_fields, true);
+            $this->get_destinations_for_index($index_fields);
 
             $delete_ids = [];
 
             $this->line(' - 1/2 Comparing data with search index');
-            $search_indexes->chunk(2500, function ($indexes) use (&$index_fields, &$delete_ids) {
+            $search_indexes->chunk(10000, function ($indexes) use (&$index_fields, &$delete_ids) {
                 foreach ($indexes as &$index) {
                     if ($index->comment_id) {
                         $key = 'cc'.$index->comment_id;
@@ -82,8 +85,6 @@ class ConvertSearchable extends Command
 
                         if (($index_fields[$key]['updated_at'] == 'NOW()' || DB::getPdo()->quote($index->updated_at) == $index_fields[$key]['updated_at']) &&
                             ($index_fields[$key]['created_at'] == 'NOW()' || DB::getPdo()->quote($index->created_at) == $index_fields[$key]['created_at'])) {
-                            unset($index_fields[$key]);
-                        } elseif ($index_fields[$key]['created_at'] == 'NOW()' && $index_fields[$key]['updated_at'] == 'NOW()' && $index->title == $index_fields[$key]['title'] && $index->body == $index_fields[$key]['body']) {
                             unset($index_fields[$key]);
                         } else {
                             $index_fields[$key]['id'] = (int) $index->id;
@@ -122,18 +123,18 @@ class ConvertSearchable extends Command
     {
         $this->line(' - 1/3 Preparation for save ('.$index_count.' items)...');
 
-        $replace_insert = 'REPLACE INTO `searchables` (`id`, `user_id`, `content_id`, `content_type`, `comment_id`, `destination_id`, `title`, `body`, `updated_at`, `created_at`)';
+        $replace_insert = 'INSERT INTO `searchables` (`id`, `user_id`, `content_id`, `content_type`, `comment_id`, `destination_id`, `title`, `body`, `updated_at`, `created_at`)';
         $items_done = 0;
         $last_round = 0;
-        foreach (array_chunk($items, 100) as &$chucked_items) {
+        foreach (array_chunk($items, 10000) as &$chucked_items) {
             $data = [];
             foreach ($chucked_items as &$item) {
-                ++$items_done;
-                ++$last_round;
+                $items_done++;
+                $last_round++;
                 $data[] = '('.implode(', ', $item).')';
             }
 
-            app('db')->select($replace_insert.' VALUES '.implode(', ', $data));
+            app('db')->select($replace_insert.' VALUES '.implode(', ', $data).' ON DUPLICATE KEY UPDATE `title`=VALUES(`title`), `body`=VALUES(`body`), `updated_at`=VALUES(`updated_at`), `created_at`=VALUES(`created_at`)');
 
             if ($last_round === 2500) {
                 $last_round = 0;
@@ -144,79 +145,83 @@ class ConvertSearchable extends Command
         }
     }
 
-    public function get_users_for_index(&$index_fields, $void_return = false)
+    public function get_users_for_index(&$index_fields, &$user_ids)
     {
         $this->line(' - 1/3 Fetching users from database...');
-        $users = app('db')->select('SELECT `id`, `name`, `created_at`, `updated_at` FROM `users` WHERE `verified` = 1 ORDER BY `id` ASC');
+        //$users = app('db')->select('SELECT `id`, `name`, `created_at`, `updated_at` FROM `users` WHERE `verified` = 1 ORDER BY `id` ASC');
+        $users_chunk = User::select(['id', 'name', 'created_at', 'updated_at'])->where('verified', 1)->orderBy('id', 'asc');
 
         $this->line(' - 2/3 Adding users to index array...');
-        foreach ($users as &$user) {
-            if (! $user->name || $user->name == '') {
-                $user->name = null;
-            }
+        $users_chunk->chunk(10000, function ($users) use (&$index_fields, &$user_ids) {
+            foreach ($users as &$user) {
+                $user_ids[] = $user->id;
 
-            if ($user->name) {
-                $index_fields['u'.$user->id] = [
-                    'id' => 'null',
-                    'user_id' => (int) $user->id,
-                    'content_id' => 'null',
-                    'content_type' => 'null',
-                    'comment_id' => 'null',
-                    'destination_id' => 'null',
-                    'title' => DB::getPdo()->quote($this->safe($user->name)),
-                    'body' => 'null',
-                    'updated_at' => DB::getPdo()->quote($user->updated_at),
-                    'created_at' => DB::getPdo()->quote($user->created_at),
-                ];
+                if (! $user->name || $user->name == '') {
+                    $user->name = null;
+                }
+
+                if ($user->name) {
+                    $index_fields['u'.$user->id] = [
+                        'id' => 'null',
+                        'user_id' => (int) $user->id,
+                        'content_id' => 'null',
+                        'content_type' => 'null',
+                        'comment_id' => 'null',
+                        'destination_id' => 'null',
+                        'title' => DB::getPdo()->quote($this->safe($user->name)),
+                        'body' => 'null',
+                        'updated_at' => DB::getPdo()->quote($user->updated_at),
+                        'created_at' => DB::getPdo()->quote($user->created_at),
+                    ];
+                }
             }
-        }
+        });
+
         $this->info(' + 3/3 Users are ready');
-
-        if (! $void_return) {
-            return $users;
-        }
     }
 
-    public function get_content_for_index(&$index_fields, &$content_type_by_id, $void_return = false)
+    public function get_content_for_index(&$index_fields, &$content_type_by_id, &$content_ids)
     {
         $this->line(' - 1/3 Fetching contents from database...');
-        $contents = app('db')->select('SELECT `id`, `user_id`, `title`, `type`, `body`, `url`, `price`, `created_at`, `updated_at` FROM `contents` WHERE `status` = 1 ORDER BY `id` ASC');
+        //$contents = app('db')->select('SELECT `id`, `user_id`, `title`, `type`, `body`, `url`, `price`, `created_at`, `updated_at` FROM `contents` WHERE `status` = 1 ORDER BY `id` ASC');
+        $contents_chunk = Content::select(['id', 'user_id', 'title', 'type', 'body', 'url', 'price', 'created_at', 'updated_at'])->where('status', 1)->orderBy('id', 'asc');
 
         $this->line(' - 2/3 Adding contents to index array...');
-        foreach ($contents as &$content) {
-            if (! $content->title || $content->title == '') {
-                $content->title = null;
+        $contents_chunk->chunk(10000, function ($contents) use (&$index_fields, &$content_type_by_id, &$content_ids) {
+            foreach ($contents as &$content) {
+                $content_ids[] = $content->id;
+
+                if (! $content->title || $content->title == '') {
+                    $content->title = null;
+                }
+
+                $body = trim($content->url."\n".$content->price."\n".$content->body);
+
+                if (! $body || $body == '') {
+                    $body = null;
+                }
+
+                $index_fields['c'.$content->id] = [
+                    'id' => 'null',
+                    'user_id' => (int) $content->user_id,
+                    'content_id' => (int) $content->id,
+                    'content_type' => DB::getPdo()->quote($content->type),
+                    'comment_id' => 'null',
+                    'destination_id' => 'null',
+                    'title' => ($content->title ? DB::getPdo()->quote($this->safe($content->title)) : 'null'),
+                    'body' => ($body ? DB::getPdo()->quote($this->safe($body)) : 'null'),
+                    'updated_at' => DB::getPdo()->quote($content->updated_at),
+                    'created_at' => DB::getPdo()->quote($content->created_at),
+                ];
+
+                $content_type_by_id[$content->id] = $content->type;
             }
+        });
 
-            $body = trim($content->url."\n".$content->price."\n".$content->body);
-
-            if (! $body || $body == '') {
-                $body = null;
-            }
-
-            $index_fields['c'.$content->id] = [
-                'id' => 'null',
-                'user_id' => (int) $content->user_id,
-                'content_id' => (int) $content->id,
-                'content_type' => DB::getPdo()->quote($content->type),
-                'comment_id' => 'null',
-                'destination_id' => 'null',
-                'title' => ($content->title ? DB::getPdo()->quote($this->safe($content->title)) : 'null'),
-                'body' => ($body ? DB::getPdo()->quote($this->safe($body)) : 'null'),
-                'updated_at' => DB::getPdo()->quote($content->updated_at),
-                'created_at' => DB::getPdo()->quote($content->created_at),
-            ];
-
-            $content_type_by_id[$content->id] = $content->type;
-        }
         $this->info(' + 3/3 Contents are ready');
-
-        if (! $void_return) {
-            return $contents;
-        }
     }
 
-    public function get_destinations_for_index(&$index_fields, $void_return = false)
+    public function get_destinations_for_index(&$index_fields)
     {
         $this->line(' - 1/3 Fetching destinations from database...');
         $destinations = app('db')->select('SELECT `id`, `name` FROM `destinations` ORDER BY `id` ASC');
@@ -237,46 +242,42 @@ class ConvertSearchable extends Command
             ];
         }
         $this->info(' + 3/3 Destinations are ready');
-
-        if (! $void_return) {
-            return $destinations;
-        }
     }
 
-    public function get_comments_for_index(&$index_fields, $content_ids, $user_ids, $content_type_by_id, $void_return = false)
+    public function get_comments_for_index(&$index_fields, $content_ids, $user_ids, $content_type_by_id)
     {
         $this->line(' - 1/3 Fetching comments from database...');
-        $comments = app('db')->select('SELECT `id`, `user_id`, `content_id`, `body`, `created_at`, `updated_at` FROM `comments` WHERE `status` = 1 AND (`content_id` IN ('.implode(',', $content_ids).') OR `user_id` IN ('.implode(',', $user_ids).'))');
+        //$comments = app('db')->select('SELECT `id`, `user_id`, `content_id`, `body`, `created_at`, `updated_at` FROM `comments` WHERE `status` = 1 AND (`content_id` IN ('.implode(',', $content_ids).') OR `user_id` IN ('.implode(',', $user_ids).'))');
+        $comments_chunk = Comment::select(['id', 'user_id', 'content_id', 'body', 'created_at', 'updated_at'])->where('status', 1)->orderBy('id', 'asc');
 
         $this->line(' - 2/3 Adding comments to index array...');
-        foreach ($comments as &$comment) {
-            // Otherwise content is hidden
-            if (isset($content_type_by_id[$comment->content_id])) {
-                if (! $comment->body || $comment->body == '') {
-                    $comment->body = null;
-                }
+        $comments_chunk->chunk(10000, function ($comments) use (&$index_fields, $content_ids, $user_ids, $content_type_by_id) {
+            foreach ($comments as &$comment) {
+                if (in_array($comment->content_id, $content_ids) && in_array($comment->user_id, $user_ids)) {
+                    if (isset($content_type_by_id[$comment->content_id])) {
+                        if (! $comment->body || $comment->body == '') {
+                            $comment->body = null;
+                        }
 
-                if ($comment->body) {
-                    $index_fields['cc'.$comment->id] = [
-                        'id' => 'null',
-                        'user_id' => (int) $comment->user_id,
-                        'content_id' => (int) $comment->content_id,
-                        'content_type' => DB::getPdo()->quote($content_type_by_id[$comment->content_id]),
-                        'comment_id' => (int) $comment->id,
-                        'destination_id' => 'null',
-                        'title' => 'null',
-                        'body' => ($comment->body ? DB::getPdo()->quote($this->safe($comment->body)) : 'null'),
-                        'updated_at' => DB::getPdo()->quote($comment->updated_at),
-                        'created_at' => DB::getPdo()->quote($comment->created_at),
-                    ];
+                        if ($comment->body) {
+                            $index_fields['cc'.$comment->id] = [
+                                'id' => 'null',
+                                'user_id' => (int) $comment->user_id,
+                                'content_id' => (int) $comment->content_id,
+                                'content_type' => DB::getPdo()->quote($content_type_by_id[$comment->content_id]),
+                                'comment_id' => (int) $comment->id,
+                                'destination_id' => 'null',
+                                'title' => 'null',
+                                'body' => ($comment->body ? DB::getPdo()->quote($this->safe($comment->body)) : 'null'),
+                                'updated_at' => DB::getPdo()->quote($comment->updated_at),
+                                'created_at' => DB::getPdo()->quote($comment->created_at),
+                            ];
+                        }
+                    }
                 }
             }
-        }
+        });
         $this->info(' + 3/3 Comments are ready');
-
-        if (! $void_return) {
-            return $comments;
-        }
     }
 
     protected function safe($string)

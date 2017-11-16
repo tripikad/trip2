@@ -185,6 +185,7 @@ class V2FlightController extends Controller
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
                 ->push(region('FlightNewsletterSubscribe'))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffiliateSearch'))
                 ->push(component('AffRentalcars'))

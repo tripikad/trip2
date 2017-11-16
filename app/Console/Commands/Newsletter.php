@@ -20,7 +20,7 @@ class Newsletter extends Command
 {
     protected $signature = 'newsletter:send {--import-subscribers}';
 
-    protected $mails_per_hour = 3600;
+    protected $mails_per_hour = 32000;
     protected $mails_per_minute = null;
     protected $first_active_at = '2017-08-17 17:00:00';
     protected $chunk_max = 750;
@@ -55,7 +55,7 @@ class Newsletter extends Command
                     $insert = [];
                     foreach ($users_chunk as &$user) {
                         if (! in_array($user->id, $subscription_ids)) {
-                            ++$total_count;
+                            $total_count++;
                             $insert[] = [
                                 'newsletter_type_id' => $newsletter->id,
                                 'user_id' => $user->id,
@@ -124,7 +124,7 @@ class Newsletter extends Command
                 }
             }
 
-            if ($this->time_spent() < 50) {
+            if ($this->time_spent() < 290) {
                 $this->line('Alustan kirjade välja saatmisega');
 
                 $mail_receivers = NewsletterSentSubscriber::with([
@@ -147,7 +147,9 @@ class Newsletter extends Command
                     $this->destinations = $this->getDestinations(false);
                 }
 
-                $destination_names = $this->destinations->pluck('name', 'id')->toArray();
+                $destination_names = Cache::remember('mail_destinations_pluck', $this->cache_time, function () {
+                    return $this->destinations->pluck('name', 'id')->toArray();
+                });
 
                 foreach ($mail_receivers as &$mail_receiver) {
                     if ($mail_receiver->sent) {
@@ -256,8 +258,8 @@ class Newsletter extends Command
         $subscriptions_count = $newsletter->subscriptions->count();
 
         foreach ($newsletter->subscriptions as &$subscription) {
-            ++$chunk_count;
-            ++$count_added;
+            $chunk_count++;
+            $count_added++;
             $insert_to_queue[] = [
                 'subscription_id' => $subscription->id,
                 'sent_id' => $sent->id,
@@ -267,7 +269,7 @@ class Newsletter extends Command
             ];
 
             if ($chunk_count == $chunk_max || $count_added == $subscriptions_count) {
-                ++$chunk_rounds;
+                $chunk_rounds++;
                 $chunk_count = 0;
 
                 NewsletterSentSubscriber::insert($insert_to_queue);
@@ -327,8 +329,8 @@ class Newsletter extends Command
             $chunk_max = $this->chunk_max;
             $insert_to_queue = [];
             foreach ($users->get() as &$user) {
-                ++$chunk_count;
-                ++$count_added;
+                $chunk_count++;
+                $count_added++;
                 $insert_to_queue[] = [
                     'subscription_id' => null,
                     'sent_id' => $sent->id,
@@ -339,7 +341,7 @@ class Newsletter extends Command
                 ];
 
                 if ($chunk_count == $chunk_max || $count_added == $users_count) {
-                    ++$chunk_rounds;
+                    $chunk_rounds++;
                     $chunk_count = 0;
 
                     NewsletterSentSubscriber::insert($insert_to_queue);
@@ -372,8 +374,8 @@ class Newsletter extends Command
 
         $find_by_destinations = [];
         foreach ($destination_ids as &$destination_id) {
-            ++$chunk_count;
-            ++$count_processed;
+            $chunk_count++;
+            $count_processed++;
 
             $find_by_destinations[] = $destination_id;
 
@@ -460,8 +462,8 @@ class Newsletter extends Command
                     }
                 }
 
-                ++$chunk_count;
-                ++$count_processed;
+                $chunk_count++;
+                $count_processed++;
                 if (! in_array($flight->id, $flight_ids)) {
                     $flight_ids[] = $flight->id;
                 }
@@ -515,8 +517,8 @@ class Newsletter extends Command
             $insert = [];
 
             foreach ($newsletter->subscriptions as &$subscription) {
-                ++$chunk_count;
-                ++$count_processed;
+                $chunk_count++;
+                $count_processed++;
 
                 foreach ($sents as &$sent) {
                     if ($sent->destination_id == $subscription->destination_id || ($sent->price_error == 1 && $subscription->price_error == 1)) {
@@ -567,7 +569,7 @@ class Newsletter extends Command
 
     protected function getDestinations($check_subs = true)
     {
-        $this->destinations = Cache::remember('mail_destinations', 60, function () {
+        $this->destinations = Cache::remember('mail_destinations', $this->cache_time, function () {
             $destinations = Destination::select(['id', 'name', 'parent_id'])->get();
 
             return $destinations;

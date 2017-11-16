@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\User;
+use App\Content;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -41,10 +42,15 @@ class UserDelete extends Command
             });
 
             $user->comments->each(function ($comment) {
+                //todo: doesn't work this way
+                //$content = $comment->content;
+                //$content->timestamps = 0;
+                //$comment->touches = [];
                 $comment->flags->each(function ($flag) {
                     $flag->delete();
                 });
 
+                //$comment->timestamps = false;
                 $comment->delete();
             });
 
