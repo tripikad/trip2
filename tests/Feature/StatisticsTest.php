@@ -39,7 +39,6 @@ class StatisticsTest extends BrowserKitTestCase
         $response = $this->actingAs($admin_user)
             ->call('GET', 'statistics');
         $this->assertEquals(401, $response->status());
-
     }
 
     public function test_superuser_can_see_statistics()
@@ -53,5 +52,4 @@ class StatisticsTest extends BrowserKitTestCase
             ->visit('/statistics')
             ->see(trans('statistics.index.title'));
     }
-
 }

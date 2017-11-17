@@ -73,7 +73,7 @@ class V2StatisticsController extends Controller
                     // 1 for previous year
                     // ..etc
                     $year - 1 == 0 ? [
-                        Carbon::now()->startOfYear(), 
+                        Carbon::now()->startOfYear(),
                         Carbon::now()->startOfMonth(), // = End of last month
                     ] : [
                         Carbon::now()->subYears($year - 1)->startOfYear(),
@@ -105,7 +105,6 @@ class V2StatisticsController extends Controller
     public function getWeeklyStat($model)
     {
         return Collection::times(3, function ($year) use ($model) {
-            
             $model = 'App\\'.$model;
             $table = (new $model)->getTable();
 
@@ -119,9 +118,9 @@ class V2StatisticsController extends Controller
                     $year - 1 == 0 ? [
                         Carbon::now()->startOfYear(),
                         // We subtract one week so we will be
-                        // not get caught on issues with 
+                        // not get caught on issues with
                         // weeks starting with Sunday
-                        Carbon::now()->subWeek(1)->endOfWeek()
+                        Carbon::now()->subWeek(1)->endOfWeek(),
                     ] : [
                         Carbon::now()->subYears($year - 1)->startOfYear(),
                         Carbon::now()->subYears($year - 1)->endOfYear(),
