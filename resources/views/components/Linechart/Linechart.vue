@@ -24,7 +24,7 @@
                 @mouseenter="currentIndex = index"
             />
 
-            <line
+            <!--line
                 v-for="(value, index) in items[0].values"
                 :x1="xScale(index)"
                 :y1="0"
@@ -34,8 +34,18 @@
                 stroke-width="12"
                 @mouseenter="currentIndex = index"
                 @mouseleave="currentIndex = false"
-            />
+            /-->
 
+            <rect
+                v-for="(value, index) in items[0].values"
+                :x="xScale(index - 0.5)"
+                :y="0"
+                :width="xScale(1)"
+                :height="height"
+                fill="rgba(0,0,0,0)"
+                @mouseenter="currentIndex = index"
+                @mouseleave="currentIndex = false"
+            />
 
             <line
                 :x1="0"
