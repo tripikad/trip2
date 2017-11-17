@@ -12,17 +12,6 @@ class V2ExperimentsController extends Controller
 
             ->with('content', collect()
 
-                ->push(component('Title')
-                    ->with('title', 'Barchart')
-                )
-
-                ->push(component('Barchart')
-                    ->with('items', collect()
-                        ->push(['title' => 'One', 'value' => 12])
-                        ->push(['title' => 'Two', 'value' => 34])
-                    )
-                )
-
                 ->push('&nbsp;')
 
                 ->push(component('Title')
