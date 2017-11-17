@@ -12,6 +12,31 @@
                 :d="line(item.values)"
                 :opacity="1 - (index * 0.4)"
             />
+
+            <line
+                v-show="currentIndex"
+                :x1="xScale(currentIndex)"
+                :y1="0"
+                :x2="xScale(currentIndex)"
+                :y2="height"
+                stroke="rgba(0,0,0,0.2)"
+                stroke-width="1"
+                @mouseenter="currentIndex = index"
+            />
+
+            <line
+                v-for="(value, index) in items[0].values"
+                :x1="xScale(index)"
+                :y1="0"
+                :x2="xScale(index)"
+                :y2="height"
+                stroke="rgba(0,0,0,0)"
+                stroke-width="12"
+                @mouseenter="currentIndex = index"
+                @mouseleave="currentIndex = false"
+            />
+
+
             <line
                 :x1="0"
                 :y1="0"
@@ -26,6 +51,22 @@
                 :y2="height"
                 stroke="hsl(204, 6%, 55%)"
             />
+
+            <g
+                v-for="(line, index) in legend"
+                :transform="'translate(0,'+ (index * 20) + ')'"
+                :opacity="1 - (index * 0.3)"
+            >
+                <text
+                    x="15"
+                    y="20"
+                    font-family="Sailec"
+                    font-size="14px"
+                    fill="hsl(205, 82%, 57%)"
+                >
+                    {{ line.title }}: {{ line.value }}
+                </text> 
+            </g>
         </svg>  
 
     </div>
@@ -46,11 +87,20 @@
             items: { default: [] }
         },
 
-        data: () => ({ padding: 3 }),
+        data: () => ({ padding: 3, currentIndex: false }),
 
         computed: {
             height() {
                 return this.width / 4
+            },
+            legend() {
+                if (this.currentIndex) {
+                    return this.items.map(item => ({
+                        title: item.title,
+                        value: item.values[this.currentIndex]
+                    }))
+                }
+                return null
             }
         },
         methods: {
