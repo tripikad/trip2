@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Content;
+use App\Destination;
+
 class V2ExperimentsController extends Controller
 {
     public function index()
@@ -11,8 +14,6 @@ class V2ExperimentsController extends Controller
         return layout('1col')
 
             ->with('content', collect()
-
-                ->push('&nbsp;')
 
                 ->push(component('Title')
                     ->with('title', 'Small editor')

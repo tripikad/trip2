@@ -35,7 +35,7 @@
 <script>
 
     import { scaleLinear } from 'd3-scale'
-    import { line, curveCardinalOpen } from 'd3-shape'
+    import { line } from 'd3-shape'
     import { extent, merge } from 'd3-array'
  
     export default {
@@ -73,7 +73,6 @@
                     .x((d, index) => this.xScale(index))
                     .y(d => this.yScale(d))
                     .defined(d => d > 0)
-                    .curve(curveCardinalOpen.tension(0.5))
                     (items)
             },
         }
