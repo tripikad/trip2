@@ -144,7 +144,7 @@ class Image extends Model
         }
 
         if (file_exists($path.$new_filename.'.'.$ext)) {
-            ++$i;
+            $i++;
 
             return self::checkIfExists($path, $filename, $ext, $i);
         } else {
