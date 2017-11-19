@@ -278,7 +278,7 @@ class Poll extends Model
         return collect($info);
     }
 
-    protected static function getPollInfo(Poll $poll)
+    protected static function getPollInfo(self $poll)
     {
         $poll_field = $poll->poll_fields->first();
         $poll_results = $poll_field->getParsedResults();
