@@ -1088,7 +1088,7 @@ class PollController extends Controller
                     )
                 ))
             ->with('content', $content)
-            ->with('footer', region('FooterLight'))
+            ->with('footer', region('Footer'))
             ->render();
     }
 
@@ -1279,6 +1279,6 @@ class PollController extends Controller
         }
 
         return redirect()
-            ->route('quiz.answer', ['id' => $quiz->id]);
+            ->route('quiz.answer', ['slug' => $quiz->content->slug]);
     }
 }

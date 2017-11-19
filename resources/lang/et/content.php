@@ -415,7 +415,7 @@ return [
     'poll.edit.name' => 'Küsitluse nimi',
     'poll.edit.question' => 'Küsimus',
     'poll.edit.option' => 'Valik',
-    'poll.edit.poll' => 'Küsitlus',
+    'poll.edit.poll' => 'Poll',
     'poll.edit.quiz' => 'Viktoriin',
     'poll.edit.questionnaire' => 'Küsimustik',
     'poll.edit.fields.picture' => 'Pilt',

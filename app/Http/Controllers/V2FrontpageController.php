@@ -118,12 +118,12 @@ class V2FrontpageController extends Controller
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffHotelscombined'))
-                ->when($poll_info->isNotEmpty(), function ($collection) use ($poll_info) {
+                ->when($poll_info->isNotEmpty(), function ($collection) use ($poll_info, $loggedUser) {
                     return $collection->push(component('Block')
                         ->is('gray')
                         ->with('content', collect()
                             ->push(component('Title')
-                                ->with('title', trans('content.poll.edit.poll'))
+                                ->with('title', $poll_info['options']['question'])
                                 ->is('small')
                             )
                             ->push(component('PollAnswer')
@@ -141,6 +141,7 @@ class V2FrontpageController extends Controller
                                 ->with('save_error', trans('content.poll.answer.error.save'))
                                 ->with('count_trans', trans('content.poll.answer.count'))
                                 ->with('count', $poll_info['count'])
+                                ->with('user_is_authenticated', $loggedUser ? true : false)
                             )
                         )
                     );

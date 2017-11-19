@@ -3,10 +3,6 @@
     <div ref="answer_div">
 
         <div class="margin-bottom-md PollAnswer__title">
-            {{question}}
-        </div>
-
-        <div class="margin-bottom-md PollAnswer__title">
             <component
                 is="PhotoCard"
                 v-if="image_small && image_large"
@@ -122,7 +118,8 @@
             image_large : {default : ''},
             results : {default : []},
             count_trans : {default : ''},
-            count : {default: ''}
+            count : {default: ''},
+            user_is_authenticated : {default: false}
         },
         
         data : function() {
@@ -139,6 +136,11 @@
 
         methods: {
             answer: function () {
+                if (!this.user_is_authenticated) {
+                    window.location = '/login';
+                    return false;
+                }
+
                 if (this.checked.length == 0) {
                     this.error = this.select_error;
                     return;
