@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Poll;
 use App\User;
 use App\Content;
 use App\Destination;
@@ -26,6 +27,8 @@ class V2DestinationController extends Controller
         $flights = Content::getLatestPagedItems('flight', 6, $destination->id);
         $travelmates = Content::getLatestPagedItems('travelmate', 6, $destination->id);
         $news = Content::getLatestPagedItems('news', 2, $destination->id);
+
+        $poll_info = Poll::getPollInfoDestination($destination->id);
 
         $loggedUser = request()->user();
 
@@ -81,6 +84,34 @@ class V2DestinationController extends Controller
             ->with('sidebar', collect()
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->when($poll_info->isNotEmpty(), function ($collection) use ($poll_info, $loggedUser) {
+                    return $collection->push(component('Block')
+                        ->is('gray')
+                        ->with('content', collect()
+                            ->push(component('Title')
+                                ->with('title', $poll_info['options']['question'])
+                                ->is('small')
+                            )
+                            ->push(component('PollAnswer')
+                                ->with('options', $poll_info['options'])
+                                ->with('type', $poll_info['type'])
+                                ->with('id', $poll_info['id'])
+                                ->with('results', $poll_info['results'])
+                                ->with('image_small', $poll_info['image_small'])
+                                ->with('image_large', $poll_info['image_large'])
+                                ->with('answer_trans', trans('content.poll.answer'))
+                                ->with('select_error', $poll_info['type'] == 'radio' ?
+                                    trans('content.poll.answer.error.select.one') :
+                                    trans('content.poll.answer.error.select.multiple')
+                                )
+                                ->with('save_error', trans('content.poll.answer.error.save'))
+                                ->with('count_trans', trans('content.poll.answer.count'))
+                                ->with('count', $poll_info['count'])
+                                ->with('user_is_authenticated', $loggedUser ? true : false)
+                            )
+                        )
+                    );
+                })
             )
 
             ->with('bottom', collect()

@@ -67,5 +67,6 @@ return [
     'admin.sponsored' => 'Sponsorite artiklid',
     'admin.newsletter' => 'Uudiskirjad',
     'admin.static' => 'Muuda - :title',
+    'admin.poll' => 'Küsitlused',
 
 ];

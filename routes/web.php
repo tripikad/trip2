@@ -252,6 +252,56 @@ Route::post('photo/store', 'V2PhotoController@store')
     ->name('photo.store')
     ->middleware('role:regular');
 
+// Polls
+
+Route::get('poll', 'PollController@index')
+    ->name('poll.index')
+    ->middleware('role:admin');
+
+Route::post('poll', 'PollController@search')
+    ->name('poll.search')
+    ->middleware('role:admin');
+
+Route::get('poll/create', 'PollController@create')
+    ->name('poll.create')
+    ->middleware('role:admin');
+
+Route::post('poll/store', 'PollController@store')
+    ->name('poll.store')
+    ->middleware('role:admin');
+
+Route::get('poll/edit/{id}', 'PollController@edit')
+    ->name('poll.edit')
+    ->middleware('role:admin');
+
+Route::post('poll/update/{id}', 'PollController@update')
+    ->name('poll.update')
+    ->middleware('role:admin');
+
+Route::get('poll/edit/limited/{id}', 'PollController@limitedEdit')
+    ->name('poll.edit.limited')
+    ->middleware('role:admin');
+
+Route::post('poll/update/limited/{id}', 'PollController@limitedUpdate')
+    ->name('poll.update.limited')
+    ->middleware('role:admin');
+
+Route::get('poll/id/{id}', 'PollController@show')
+    ->name('poll.show')
+    ->middleware('role:admin');
+
+Route::post('poll/answer', 'PollController@answerPoll')
+    ->name('poll.answer')
+    ->middleware('role:regular');
+
+Route::get('quiz/answer/{slug}', 'PollController@showQuizOrQuestionnaire')
+    ->name('quiz.answer')
+    ->middleware('role:regular');
+
+Route::post('quiz/answer/{slug}', 'PollController@answerQuiz')
+    ->name('quiz.answer')
+    ->middleware('role:regular');
+
 // Content redirects
 
 Route::get('content/{type}', 'V2ContentController@redirectIndex')

@@ -69,6 +69,11 @@ class Content extends Model
         return $this->morphMany('App\Follow', 'followable');
     }
 
+    public function poll()
+    {
+        return $this->hasOne('App\Poll', 'id', 'id');
+    }
+
     // V1
 
     public function getDestinationParent()

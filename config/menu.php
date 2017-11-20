@@ -148,5 +148,4 @@ return [
             'icon' => 'icon-arrow-right',
         ],
     ],
-
 ];
