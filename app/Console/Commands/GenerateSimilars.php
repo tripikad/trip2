@@ -24,24 +24,24 @@ class GenerateSimilars extends Command
 
     public function handle()
     {
-        $maxCount = $this->totalsize;
-        $chunkSize = $this->chunksize;
-        $chunkCount = $maxCount / $chunkSize;
+        $totalsize = $this->totalsize;
+        $chunksize = $this->chunksize;
+        $chunkcount = $totalsize / $chunksize;
 
         $count = 0;
 
-        $progress = $this->output->createProgressBar($maxCount);
+        $progress = $this->output->createProgressBar($totalsize);
 
         $this->info("\nGenerating similar content\n");
 
-        Content::orderBy('updated_at', 'desc')->chunk($chunkSize, function($contentChunk)
-            use (&$count, $chunkCount, $progress) {
+        Content::orderBy('updated_at', 'desc')->chunk($chunksize, function($contentChunk)
+            use (&$count, $chunkcount, $progress) {
                 $contentChunk->each(function($content) use ($progress) {
                     $this->generateSimilars($content);
                     $progress->advance();
                 });
                 $count++;
-                if ($count >= $chunkCount) return false;
+                if ($count >= $chunkcount) return false;
             });
 
         $this->info("\n\nDone\n");
@@ -69,16 +69,16 @@ class GenerateSimilars extends Command
     {   
         $similars = collect();
 
-        $maxCount = $this->totalsize;
-        $chunkSize = $this->chunksize;
-        $chunkCount = $maxCount / $chunkSize;
+        $totalsize = $this->totalsize;
+        $chunksize = $this->chunksize;
+        $chunkcount = $totalsize / $chunksize;
 
         $count = 0;
 
         Content::orderBy('updated_at', 'desc')->whereNotIn('id', [$sourceContent->id])
             ->whereType($type)
-            ->chunk($chunkSize, function($targetContentChunk)
-                use ($sourceContent, &$similars, &$count, $chunkCount) {
+            ->chunk($chunksize, function($targetContentChunk)
+                use ($sourceContent, &$similars, &$count, $chunkcount) {
 
                 $targetContentChunk->each(
                     function($targetContent) use ($sourceContent, &$similars) {
@@ -100,7 +100,7 @@ class GenerateSimilars extends Command
 
                 $count++;
 
-                if ($similars->count() >= 3 || $count >= $chunkCount) { return false;
+                if ($similars->count() >= 3 || $count >= $chunkcount) { return false;
                 }
 
             });
