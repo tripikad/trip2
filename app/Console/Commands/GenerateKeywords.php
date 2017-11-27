@@ -111,7 +111,7 @@ class GenerateKeywords extends Command
 
     public function handle()
     {
-        $maxCount = 100;
+        $maxCount = 1000;
         $chunkSize = 10;
         $chunkCount = $maxCount / $chunkSize;
 
