@@ -396,7 +396,8 @@ Route::get('experiments/map', 'V2ExperimentsController@mapIndex')
     ->name('experiments.map.index');
 
 Route::get('experiments/similars', 'V2ExperimentsSimilarsController@index')
-    ->name('experiments.similars');
+    ->name('experiments.similars')
+    ->middleware('role:admin');
 
 // V1
 
