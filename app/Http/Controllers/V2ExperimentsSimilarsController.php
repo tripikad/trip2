@@ -37,7 +37,7 @@ class V2ExperimentsSimilarsController extends Controller
                         font-family: 'Cousine', monospace;
                         margin: 2rem;
                         line-height: 1.75em;
-                        font-size: 0.8em;
+                        font-size: 0.75em;
                     }
                     a {
                         color: inherit;

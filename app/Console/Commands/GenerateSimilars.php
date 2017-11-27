@@ -57,10 +57,16 @@ class GenerateSimilars extends Command
     {   
         $similars = collect();
 
+        $maxCount = 100;
+        $chunkSize = 10;
+        $chunkCount = $maxCount / $chunkSize;
+
+        $count = 0;
+
         Content::orderBy('updated_at', 'desc')->whereNotIn('id', [$sourceContent->id])
             ->whereType($type)
             ->chunk(100, function($targetContentChunk)
-                use ($sourceContent, &$similars) {
+                use ($sourceContent, &$similars, &$count, $chunkCount) {
 
                 $targetContentChunk->each(
                     function($targetContent) use ($sourceContent, &$similars) {
@@ -76,11 +82,14 @@ class GenerateSimilars extends Command
                 );
 
                 $similars = $similars->filter(function($s) {
-                    return $s['score'] >= 0;
+                    return $s['score'] >= 0.3;
                 })
                 ->take(3);
 
-                if ($similars->count() >= 3) { return false; }
+                $count++;
+
+                if ($similars->count() >= 3 || $count >= $chunkCount) { return false;
+                }
 
             });
         
