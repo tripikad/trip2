@@ -22,7 +22,7 @@ class Content extends Model
     protected $casts = [
         'meta' => 'array',
     ];
-
+    
     // Relations
 
     public function unread_content()
