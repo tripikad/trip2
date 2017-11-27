@@ -12,13 +12,13 @@ return [
             'Pai',
             'Are',
             'Euroopa',
-            'Riia'
+            'Riia',
         ],
         'parentfilter' => [
             'Euroopa',
-            'Aasia'
+            'Aasia',
         ],
-        'add' => [    
+        'add' => [
             'Niagra',
             'Maroco',
             'Qatar',
@@ -42,13 +42,13 @@ return [
             'Yukatan',
             'Stansted',
             'Gatwick',
-            'Doha'
+            'Doha',
         ],
     ],
 
     'topic' => [
         'filter' => [
-            'Töö'
+            'Töö',
         ],
         'add' => [
             'Päike',
@@ -74,12 +74,12 @@ return [
             'Pangakaart',
             'Juhilu',
             'Juhilo',
-        ]
+        ],
     ],
 
     'carrier' => [
         'filter' => [
-            'Delta'
+            'Delta',
         ],
         'add' => [
             'Wizzair',
@@ -90,6 +90,6 @@ return [
             'Albamare',
             'Airbnb',
             'Eckerö Line',
-        ]
-    ]
+        ],
+    ],
 ];
