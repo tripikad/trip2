@@ -17,6 +17,9 @@ class GenerateKeywords extends Command
     protected $topics;
     protected $carriers;
 
+    protected $totalsize;
+    protected $chunksize;
+
     public function __construct()
     {
         parent::__construct();
@@ -24,95 +27,38 @@ class GenerateKeywords extends Command
         $this->destinations = Destination::pluck('name')
             ->filter(function($destination) {
                 return !in_array($destination, [
-                    'Eesti', 'Tallinn', 'Pai', 'Are', 'Euroopa'
+                    config('similars.destination.filter')
                 ]);
             })
-            ->merge([
-                // Misspellings
-                'Niagra',
-                'Maroco',
-                'Qatar',
-                // Additions
-                'Douro',
-                'Las Palmas',
-                'Los Gigantes',
-                'Krabi',
-                'Sharm',
-                'Mekong',
-                'Busuanga',
-                'Panglao',
-                'Serengeti',
-                'Vantaa',
-                'Caymani saared',
-                'Fort Lauderdale',
-                'Warsaw',
-                'Phi Phi',
-                'Belek',
-                'Nassau',
-                'Pokhara',
-                'Yukatan',
-                'Stansted',
-                'Gatwick',
-                'Doha'
-            ])
+            ->merge(config('similars.destination.add'))
         ;
 
         $this->topics = Topic::pluck('name')
             ->filter(function($topic) {
                 return !in_array($topic, [
-                    'Töö'
+                    config('similars.topic.filter')
                 ]);
             })
-            ->merge([
-                'Päike',
-                'Alkohol',
-                'Voodi',
-                'Beebi',
-                'Shoppam',
-                'Majutus',
-                'Hotell',
-                'Apartment',
-                'Vaktsi',
-                'Vaksi',
-                'Viisa',
-                'Söök',
-                'Autoren',
-                'Lennujaam',
-                'Safari',
-                'Lapse',
-                'Rannapuhkus',
-                'Passi',
-                'Lennupilet',
-                'Krediitkaart',
-                'Pangakaart',
-                'Juhilu',
-                'Juhilo',
-            ])
+            ->merge(config('similars.topic.add'))
         ;
         $this->carriers = Carrier::pluck('name')
             ->filter(function($topic) {
                 return !in_array($topic, [
-                    'Delta'
+                    config('similars.carrier.filter')
                 ]);
             })
-            ->merge([
-                'Wizzair',
-                'Aeromexico',
-                'Ethiopian Airlines',
-                'Expedia',
-                'Novatours',
-                'Albamare',
-                'Airbnb',
-                'Eckerö Line'
-
-            ])
+            ->merge(config('similars.carrier.add'))
         ;
+
+        $this->totalsize = config('similars.totalsize');
+        $this->chunksize = config('similars.chunksize');
+
     }
 
     public function handle()
     {
-        $maxCount = 1000;
-        $chunkSize = 10;
+        $maxCount = $this->totalsize;
+        $chunkSize = $this->chunksize;
         $chunkCount = $maxCount / $chunkSize;
 
         $count = 0;
@@ -284,7 +230,10 @@ class GenerateKeywords extends Command
                 $parent = Destination::find($destination->parent_id);
                 if (
                     $parent
-                    && !in_array($parent->name, ['Euroopa', 'Aasia'])
+                    && !in_array(
+                        $parent->name,
+                        config('similars.destination.parentfilter')
+                    )
                 ) {
                     $parents->push([
                         'name' => $parent->name,
