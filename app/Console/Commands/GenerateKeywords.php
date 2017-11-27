@@ -2,15 +2,14 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Content;
-use App\Destination;
 use App\Topic;
 use App\Carrier;
+use App\Content;
+use App\Destination;
+use Illuminate\Console\Command;
 
 class GenerateKeywords extends Command
 {
-
     protected $signature = 'generate:keywords';
 
     protected $destinations;
@@ -52,7 +51,6 @@ class GenerateKeywords extends Command
 
         $this->totalsize = config('similars.totalsize');
         $this->chunksize = config('similars.chunksize');
-
     }
 
     public function handle()
@@ -67,37 +65,37 @@ class GenerateKeywords extends Command
 
         $this->info("\nGenerating keywords\n");
 
-        Content::orderBy('updated_at', 'desc')->chunk($chunkSize, function($content)
-            use (&$count, $chunkCount, $progress) {
-                $content->each(function($content) use ($progress) {
-                    $this->generateKeywords($content);
-                    $progress->advance();
-                });
-                $count++;
-                if ($count >= $chunkCount) return false;
+        Content::orderBy('updated_at', 'desc')->chunk($chunkSize, function ($content) use (&$count, $chunkCount, $progress) {
+            $content->each(function ($content) use ($progress) {
+                $this->generateKeywords($content);
+                $progress->advance();
             });
+            $count++;
+            if ($count >= $chunkCount) {
+                return false;
+            }
+        });
 
         $this->info("\n\nDone\n");
-
     }
 
-    protected function generateKeywords($content) {
+    protected function generateKeywords($content)
+    {
         $tokens = $this->getTokens(
             $content->title.' '.$content->body
         );
         $keywords = $this
             ->getKeywords($tokens)
-            ->pipe(function($keywords) use ($content) {
+            ->pipe(function ($keywords) use ($content) {
                 return $this->getManualKeywords($keywords, $content);
             })
-            ->pipe(function($keywords) {
+            ->pipe(function ($keywords) {
                 return $this->getParentKeywords($keywords);
             })
-            ->pipe(function($keywords) {
+            ->pipe(function ($keywords) {
                 return $this->cleanupKeywords($keywords);
             })
-            ->values()
-        ;
+            ->values();
 
         if ($keywords) {
             // $this->line($keywords->toJSON(JSON_PRETTY_PRINT));
@@ -109,29 +107,32 @@ class GenerateKeywords extends Command
 
     protected function getTokens($text)
     {
-        
         $pattern = "/[\.\,\:\;\-\(\)\*\!\?\s+\\n\r]/";
-        
+
         $splitText = collect(preg_split($pattern, $text))
-            ->reject(function($token) { return empty($token); })
+            ->reject(function ($token) {
+                return empty($token);
+            })
             ->values();
 
         return $splitText
-            ->map(function($token, $index) use ($splitText) {
+            ->map(function ($token, $index) use ($splitText) {
                 $string = clone $splitText;
+
                 return [
                     'token' => $token,
-                    'token_double' => $string->splice($index, 2)
+                    'token_double' => $string->splice($index, 2),
                 ];
             })
-            ->map(function($token) {
+            ->map(function ($token) {
                 $match = $this->destinations
-                    ->filter(function($destination) use ($token) {
+                    ->filter(function ($destination) use ($token) {
                         $destination = collect(explode(' ', $destination))
                             ->take(2)
                             ->implode('');
+
                         return preg_match(
-                            "/^".$destination."/",
+                            '/^'.$destination.'/',
                             $token['token_double']->implode('')
                         );
                     });
@@ -139,56 +140,60 @@ class GenerateKeywords extends Command
                     $token['match'] = $match->first();
                     $token['type'] = 'destination';
                 }
+
                 return $token;
             })
-            ->map(function($token) {
+            ->map(function ($token) {
                 $match = $this->topics
-                    ->filter(function($topic) use ($token) {
-                        return preg_match("/^".$topic."/i", $token['token']);
+                    ->filter(function ($topic) use ($token) {
+                        return preg_match('/^'.$topic.'/i', $token['token']);
                     });
                 if ($match->isNotEmpty()) {
                     $token['match'] = $match->first();
                     $token['type'] = 'topic';
                 }
+
                 return $token;
             })
-            ->map(function($token) {
+            ->map(function ($token) {
                 $match = $this->carriers
-                    ->filter(function($carrier) use ($token) {
-                        return preg_match("/^".$carrier."/i", $token['token']);
+                    ->filter(function ($carrier) use ($token) {
+                        return preg_match('/^'.$carrier.'/i', $token['token']);
                     });
                 if ($match->isNotEmpty()) {
                     $token['match'] = $match->first();
                     $token['type'] = 'carrier';
                 }
+
                 return $token;
             });
     }
 
     protected function getKeywords($tokens)
-    {   
+    {
         return $tokens
-            ->filter(function($token) {
+            ->filter(function ($token) {
                 return array_key_exists('match', $token);
             })
-            ->map(function($token, $index) use ($tokens) {
+            ->map(function ($token, $index) use ($tokens) {
                 $token['score'] = $this->calculateDecay($index, $tokens->count() - 1);
+
                 return $token;
             })
-            ->groupBy(function($token) {
+            ->groupBy(function ($token) {
                 return $token['match'];
             })
-            ->map(function($tokens, $keyword) {
+            ->map(function ($tokens, $keyword) {
                 return [
                     'name' => $keyword,
-                    // Score is the highest score among 
+                    // Score is the highest score among
                     // all keyword ocurrences in text
                     // TODO: Consider also the number of occurrences:
                     //   'countScore' => min([$tokens->count() * 0.34, 1])
-                    'score' => $tokens->max(function($token) {
+                    'score' => $tokens->max(function ($token) {
                         return $token['score'];
                     }),
-                    'type' => $tokens->pluck('type')->first()
+                    'type' => $tokens->pluck('type')->first(),
                 ];
             });
     }
@@ -197,7 +202,7 @@ class GenerateKeywords extends Command
     {
         return $keywords
             ->merge($content->topics
-                ->map(function($topic) {
+                ->map(function ($topic) {
                     return [
                         'name' => $topic->name,
                         'score' => 0.6,
@@ -207,24 +212,23 @@ class GenerateKeywords extends Command
                 })
             )
             ->merge($content->destinations
-                ->map(function($destination) {
+                ->map(function ($destination) {
                     return [
                         'name' => $destination->name,
                         //'score' => ($destination->depth + 1) * 0.33,
                         'score' => 1,
                         'type' => 'destination',
-                        'manual' => true
+                        'manual' => true,
                     ];
                 })
-            )
-        ;
+            );
     }
 
     protected function getParentKeywords($keywords)
     {
         $parents = collect();
 
-        $keywords->each(function($keyword) use (&$parents) {
+        $keywords->each(function ($keyword) use (&$parents) {
             $destination = Destination::whereName($keyword['name'])->first();
             if ($destination) {
                 $parent = Destination::find($destination->parent_id);
@@ -258,11 +262,11 @@ class GenerateKeywords extends Command
             //     unset($keyword['name']);
             //     return $keyword;
             // })
-        ;
+;
     }
 
-    public function calculateDecay($value, $sourceMax, $floor = 0.1, $ceil = 0.9) {
-        
+    public function calculateDecay($value, $sourceMax, $floor = 0.1, $ceil = 0.9)
+    {
         $scaledSourceValue = $this->scale($value, 0, $sourceMax, 0, 1);
         $decay = pow($scaledSourceValue - 1, 4);
         $scaledTargetValue = $this->scale($decay, 0, 1, $floor, $ceil);
@@ -276,10 +280,10 @@ class GenerateKeywords extends Command
         if ($sourceMax - $sourceMin == 0) {
             return $value;
         }
-        return ($targetMax -$targetMin)
+
+        return ($targetMax - $targetMin)
             / ($sourceMax - $sourceMin)
             * ($value - $sourceMin)
             + $targetMin;
     }
-    
 }
