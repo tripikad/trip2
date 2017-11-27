@@ -2,7 +2,7 @@
 
 return [
 
-    'totalsize' => env('SIMILARS_TOTAL_SIZE', 500),
+    'totalsize' => env('SIMILARS_TOTAL_SIZE', 200),
     'chunksize' => env('SIMILARS_CHUNK_SIZE', 10),
 
     'destination' => [

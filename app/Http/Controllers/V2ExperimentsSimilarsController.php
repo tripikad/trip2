@@ -8,12 +8,17 @@ use App\Topic;
 use App\Carrier;
 use App\Comment;
 
+// This is a temporary file that bypasses our theme
+// system and component workflow
+//
+// TODO: Refactor to components or remove when not needed
+
 class V2ExperimentsSimilarsController extends Controller
 {
     public function index()
     {
         $contents = Content::orderBy('updated_at', 'desc')
-            ->take(10)
+            ->take(50)
             ->skip(request()->get('skip', 0))
             ->whereType(request()->get('type', 'forum'))
             ->get();
@@ -146,7 +151,7 @@ C;
         public function Heading()
         {
             $skip = request()->get('skip', 0);
-            $nextSkip = $skip + 100;
+            $nextSkip = $skip + 50;
 
             $type = request()->get('type', 'forum');
 

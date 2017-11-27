@@ -17,8 +17,8 @@ class GenerateKeywords extends Command
     protected $topics;
     protected $carriers;
 
-    protected $totalsize;
-    protected $chunksize;
+    protected $totalSize;
+    protected $chunkSize;
 
     public function __construct()
     {
@@ -50,22 +50,26 @@ class GenerateKeywords extends Command
             ->merge(config('similars.carrier.add'))
         ;
 
-        $this->totalsize = config('similars.totalsize');
-        $this->chunksize = config('similars.chunksize');
+        $this->totalSize = config('similars.totalsize');
+        $this->chunkSize = config('similars.chunksize');
 
     }
 
     public function handle()
     {
-        $maxCount = $this->totalsize;
-        $chunkSize = $this->chunksize;
-        $chunkCount = $maxCount / $chunkSize;
+        $this->info("\nCleaning up previous keywords and similars");
+
+        $this->cleanupMeta();
+
+        $totalSize = $this->totalSize;
+        $chunkSize = $this->chunkSize;
+        $chunkCount = $totalSize / $chunkSize;
 
         $count = 0;
 
-        $progress = $this->output->createProgressBar($maxCount);
+        $progress = $this->output->createProgressBar($totalSize);
 
-        $this->info("\nGenerating keywords\n");
+        $this->info("Generating keywords\n");
 
         Content::orderBy('updated_at', 'desc')->chunk($chunkSize, function($content)
             use (&$count, $chunkCount, $progress) {
@@ -79,6 +83,18 @@ class GenerateKeywords extends Command
 
         $this->info("\n\nDone\n");
 
+    }
+
+    protected function cleanupMeta() {
+
+        $keys = Content::whereNotNull('meta')->pluck('id');
+        $keys->chunk($this->chunkSize)->each(function($chunk) {
+            Content::whereIn('id', $chunk)->each(function($content) {
+                $content->meta = null;
+                $content->timestamps = false;
+                $content->save();
+            });
+        });
     }
 
     protected function generateKeywords($content) {
