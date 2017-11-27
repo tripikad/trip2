@@ -10,10 +10,22 @@ class GenerateSimilars extends Command
 
     protected $signature = 'generate:similars';
 
+    protected $totalsize;
+    protected $chunksize;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->totalsize = config('similars.totalsize');
+        $this->chunksize = config('similars.chunksize');
+    }
+
+
     public function handle()
     {
-        $maxCount = 100;
-        $chunkSize = 10;
+        $maxCount = $this->totalsize;
+        $chunkSize = $this->chunksize;
         $chunkCount = $maxCount / $chunkSize;
 
         $count = 0;
@@ -57,15 +69,15 @@ class GenerateSimilars extends Command
     {   
         $similars = collect();
 
-        $maxCount = 100;
-        $chunkSize = 10;
+        $maxCount = $this->totalsize;
+        $chunkSize = $this->chunksize;
         $chunkCount = $maxCount / $chunkSize;
 
         $count = 0;
 
         Content::orderBy('updated_at', 'desc')->whereNotIn('id', [$sourceContent->id])
             ->whereType($type)
-            ->chunk(100, function($targetContentChunk)
+            ->chunk($chunkSize, function($targetContentChunk)
                 use ($sourceContent, &$similars, &$count, $chunkCount) {
 
                 $targetContentChunk->each(

@@ -319,7 +319,7 @@ C;
 
         $output = preg_replace("/(\"manual\":\strue)/m", "<span class=manual>$1</span>", $output);
         $output = preg_replace("/(parent\":\strue)/m", "<span class=parent>$1</span>", $output);
-        $output = preg_replace("/(title\":\s.*\")/m", "<span style=\"color:black; text-decoration: underline;\">$1</span>", $output);
+        $output = preg_replace("/(title\":\s.*\")/m", "<span style=\"color:black; text-decoration: none;\">$1</span>", $output);
         $output = preg_replace("/(forum|news|flight)/m", "<span class=type>$1</span>", $output);
 
         $output = preg_replace(
