@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Content;
-use App\Destination;
 use App\Topic;
 use App\Carrier;
-use App\Comment;
+use App\Content;
+use App\Destination;
 
 class V2ExperimentsSimilarsController extends Controller
 {
@@ -19,14 +18,14 @@ class V2ExperimentsSimilarsController extends Controller
             ->get();
 
         return response(
-            $this->Html($this->Heading().$contents->map(function($c) {
+            $this->Html($this->Heading().$contents->map(function ($c) {
                 return $this->Content($c);
             })->implode(''))
         );
-
     }
 
-    public function Html($body) {
+    public function Html($body)
+    {
         return <<<C
             <html>
                 <head>
@@ -101,11 +100,11 @@ class V2ExperimentsSimilarsController extends Controller
 C;
     }
 
-    function Content($content) {
-        
+    public function Content($content)
+    {
         $text = $this->Text($content);
         $keywords = $this->Keywords(collect($content->meta['keywords']));
-        
+
         $similarsForum = '';
         $similarsNews = '';
         $similarsFlight = '';
@@ -143,21 +142,21 @@ C;
 C;
     }
 
-        public function Heading()
-        {
-            $skip = request()->get('skip', 0);
-            $nextSkip = $skip + 100;
+    public function Heading()
+    {
+        $skip = request()->get('skip', 0);
+        $nextSkip = $skip + 100;
 
-            $type = request()->get('type', 'forum');
+        $type = request()->get('type', 'forum');
 
-            $heading = collect(['forum', 'flight', 'news'])
-                ->map(function($type) use ($skip) {
+        $heading = collect(['forum', 'flight', 'news'])
+                ->map(function ($type) use ($skip) {
                     return "<a href=\"?type=$type&skip=$skip\">$type</a>";
                 })->implode(' ');
 
-            $heading .= "&nbsp;&nbsp;&nbsp;<a href=\"?type=$type&skip={$nextSkip}\">Next →</a>";
+        $heading .= "&nbsp;&nbsp;&nbsp;<a href=\"?type=$type&skip={$nextSkip}\">Next →</a>";
 
-            return <<<C
+        return <<<C
                 <div style="
                     color: rgba(0,0,0,0.7);
                     margin-bottom: 1rem;
@@ -204,7 +203,7 @@ C;
 
                 </div>
 C;
-        }
+    }
 
     public function Text($content)
     {
@@ -212,7 +211,7 @@ C;
         $body = strip_tags($content->body);
         $tags = $content->destinations->pluck('name')
                 ->merge($content->topics->pluck('name'))
-                ->map(function($tag) {
+                ->map(function ($tag) {
                     return "<span class=\"manu\">$tag</span>";
                 })
                 ->implode(' ');
@@ -233,24 +232,24 @@ C;
             $tags
             <p />
 C;
-        
-        collect(['destination','topic','carrier'])
-            ->each(function($type) use ($keywords, &$output) {
-                $typeKeywords = $keywords->filter(function($d) use ($type) {
+
+        collect(['destination', 'topic', 'carrier'])
+            ->each(function ($type) use ($keywords, &$output) {
+                $typeKeywords = $keywords->filter(function ($d) use ($type) {
                     return $d['type'] == $type;
                 });
                 if ($typeKeywords->isNotEmpty()) {
                     $case = ($type == 'topic') ? 'i' : '';
                     $output = preg_replace(
-                        "/("
+                        '/('
                             .$typeKeywords->pluck('name')->implode('|')
                         .")/m$case",
                         "<span class=\"$type\">$1</span>",
                         $output
                     );
                 }
-        });
-           
+            });
+
         return <<<C
             <div style="
                 overflow: scroll;
@@ -260,31 +259,29 @@ C;
 C;
     }
 
-    public function Keywords($keywords) {
-
-        $output = $keywords->toJson(JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+    public function Keywords($keywords)
+    {
+        $output = $keywords->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         $output = preg_replace('/^(  +?)\\1(?=[^ ])/m', '$1', $output);
         $output = str_replace('  ', ' ', $output);
 
-        collect(['destination','topic','carrier'])->each(function($type)
-            use ($keywords, &$output) {
-            
-            $typeKeywords = $keywords->filter(function($d) use ($type) {
+        collect(['destination', 'topic', 'carrier'])->each(function ($type) use ($keywords, &$output) {
+            $typeKeywords = $keywords->filter(function ($d) use ($type) {
                 return $d['type'] == $type;
             });
             if ($typeKeywords->isNotEmpty()) {
                 $output = preg_replace(
-                    "/("
+                    '/('
                         .$typeKeywords->pluck('name')->implode('|')
-                    .")/m",
+                    .')/m',
                     "<span class=\"$type\">$1</span>",
                     $output
                 );
             }
         });
 
-        $output = preg_replace("/(\"manual\":\strue)/m", "<span class=manual>$1</span>", $output);
-        $output = preg_replace("/(parent\":\strue)/m", "<span class=parent>$1</span>", $output);
+        $output = preg_replace("/(\"manual\":\strue)/m", '<span class=manual>$1</span>', $output);
+        $output = preg_replace("/(parent\":\strue)/m", '<span class=parent>$1</span>', $output);
 
         return <<<C
             <div style="
@@ -296,43 +293,44 @@ C;
 C;
     }
 
-    public function Similars($data, $keywords) {
-        
-        $output = $data->toJson(JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+    public function Similars($data, $keywords)
+    {
+        $output = $data->toJson(JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
         $output = preg_replace('/^(  +?)\\1(?=[^ ])/m', '$1', $output);
         $output = str_replace('  ', ' ', $output);
 
-        collect(['destination','topic','carrier'])->each(function($type) use ($keywords, &$output) {
-            $typeKeywords = $keywords->filter(function($d) use ($type) {
+        collect(['destination', 'topic', 'carrier'])->each(function ($type) use ($keywords, &$output) {
+            $typeKeywords = $keywords->filter(function ($d) use ($type) {
                 return $d['type'] == $type;
             });
             if ($typeKeywords->isNotEmpty()) {
                 $output = preg_replace(
-                    "/("
+                    '/('
                         .$typeKeywords->pluck('name')->implode('|')
-                    .")/m",
+                    .')/m',
                     "<span class=\"$type light\">$1</span>",
                     $output
                 );
             }
         });
 
-        $output = preg_replace("/(\"manual\":\strue)/m", "<span class=manual>$1</span>", $output);
-        $output = preg_replace("/(parent\":\strue)/m", "<span class=parent>$1</span>", $output);
-        $output = preg_replace("/(title\":\s.*\")/m", "<span style=\"color:black; text-decoration: underline;\">$1</span>", $output);
-        $output = preg_replace("/(forum|news|flight)/m", "<span class=type>$1</span>", $output);
+        $output = preg_replace("/(\"manual\":\strue)/m", '<span class=manual>$1</span>', $output);
+        $output = preg_replace("/(parent\":\strue)/m", '<span class=parent>$1</span>', $output);
+        $output = preg_replace("/(title\":\s.*\")/m", '<span style="color:black; text-decoration: underline;">$1</span>', $output);
+        $output = preg_replace('/(forum|news|flight)/m', '<span class=type>$1</span>', $output);
 
         $output = preg_replace(
-            "/("
-            .$keywords->filter(function($d) {
-                    return $d['type'] == 'destination';
-                })
+            '/('
+            .$keywords->filter(function ($d) {
+                return $d['type'] == 'destination';
+            })
                 ->pluck('name')
                 ->implode('|')
-            .")/m",
-            "<span class=\"destination\">$1</span>",
+            .')/m',
+            '<span class="destination">$1</span>',
             $output
         );
+
         return <<<C
             <div style="
                 white-space: pre-wrap;
@@ -344,5 +342,4 @@ C;
             ">$output</div>
 C;
     }
-
 }
