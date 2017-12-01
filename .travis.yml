@@ -1,21 +1,11 @@
 dist: trusty
 
-sudo: required
+sudo: true
 
 language: php
 
 php:
   - 7.0
-
-services:
-- mysql
-
-addons:
-apt:
-  sources:
-    - mysql-5.7-trusty
-  packages:
-    - mysql-server
 
 env:
   - TRAVIS_NODE_VERSION="6"
@@ -37,7 +27,7 @@ install:
     - npm run build
 
 script:
-    - ./vendor/bin/phpunit --verbose
+    - ./vendor/bin/phpunit
 
 notifications:
     email: false
