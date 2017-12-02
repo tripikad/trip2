@@ -16,6 +16,20 @@ class AddMetaToContentsTable extends Migration
         Schema::table('contents', function (Blueprint $table) {
             $table->json('meta')->nullable();
         });
+
+        User::create([
+            'name' => 'test',
+        ]);
+
+        Content::create([
+            'title' => 'test121212',
+            'body' => 'test',
+            'type' => 'forum',
+            'user_id' => 1,
+            'meta' => collect()->put('hello', 'world'),
+        ]);
+
+        dump(Content::whereTitle('test121212')->first()->meta);
     }
 
     /**
@@ -25,8 +39,8 @@ class AddMetaToContentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('contents', function (Blueprint $table) {
-            $table->dropColumn('meta');
-        });
+        // Schema::table('contents', function (Blueprint $table) {
+        //     $table->dropColumn('meta');
+        // });
     }
 }
