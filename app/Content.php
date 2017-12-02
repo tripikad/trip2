@@ -19,10 +19,6 @@ class Content extends Model
 
     protected $appends = ['body_filtered', 'image_id'];
 
-    protected $casts = [
-        'meta' => 'array',
-    ];
-    
     // Relations
 
     public function unread_content()
