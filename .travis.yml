@@ -1,19 +1,20 @@
 dist: trusty
 
-sudo: true
+#sudo: true
 
 language: php
 
 php:
   - 7.0
 
-services:
-  - mysql
+#services:
+#  - mysql
 
 env:
   - TRAVIS_NODE_VERSION="8"
 
 cache:
+  apt: true
   directories:
     - $HOME/.composer/cache
     - $HOME/.yarn-cache
@@ -23,7 +24,6 @@ cache:
 install:
     - bash .travis.install-mysql-5.7.sh
     - composer install --no-interaction
-    - npm install --no-optional
     - cp .env.travis .env
     - chmod -R o+w storage/
     - chmod -R o+w bootstrap/cache/
