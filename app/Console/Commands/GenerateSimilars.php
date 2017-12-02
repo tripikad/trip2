@@ -34,7 +34,7 @@ class GenerateSimilars extends Command
 
         Content::orderBy('updated_at', 'desc')->chunk($chunkSize, function ($contentChunk) use (&$count, $chunkCount, $progress) {
             $contentChunk->each(function ($content) use ($progress) {
-                //$this->generateSimilars($content);
+                $this->generateSimilars($content);
                 $progress->advance();
             });
             $count++;
@@ -100,44 +100,44 @@ class GenerateSimilars extends Command
         return $similars->values();
     }
 
-    protected function getSimilar($sourceContent, $targetContent)
-    {
-        $sourceMeta = $sourceContent->meta['keywords'];
-        $targetMeta = $targetContent->meta['keywords'];
+    // protected function getSimilar($sourceContent, $targetContent)
+    // {
+    //     $sourceMeta = $sourceContent->meta['keywords'];
+    //     $targetMeta = $targetContent->meta['keywords'];
 
-        if (! $sourceMeta || ! $targetMeta) {
-            return false;
-        }
+    //     if (! $sourceMeta || ! $targetMeta) {
+    //         return false;
+    //     }
 
-        $sourceKeywords = collect($sourceMeta)
-            ->filter(function ($keyword) {
-                return $keyword['score'] >= 0.35;
-            })
-            ->keyBy('name');
+    //     $sourceKeywords = collect($sourceMeta)
+    //         ->filter(function ($keyword) {
+    //             return $keyword['score'] >= 0.35;
+    //         })
+    //         ->keyBy('name');
 
-        $targetKeywords = collect($targetMeta)
-            ->filter(function ($keyword) {
-                return $keyword['score'] >= 0.35;
-            })
-            ->keyBy('name');
+    //     $targetKeywords = collect($targetMeta)
+    //         ->filter(function ($keyword) {
+    //             return $keyword['score'] >= 0.35;
+    //         })
+    //         ->keyBy('name');
 
-        $similar = $sourceKeywords->keys()
-            ->intersect($targetKeywords->keys())
-            ->map(function ($key) use ($sourceKeywords, $targetKeywords, $targetContent) {
-                return [
-                    'title' => $targetContent->title,
-                    'id' => $targetContent->id,
-                    'source' => $sourceKeywords[$key],
-                    'target' => $targetKeywords[$key],
-                    'created' => $targetContent->created_at->diffForHumans(null, true),
-                    'updated' => $targetContent->updated_at->diffForHumans(null, true),
-                ];
-            })
-            ->values()
-            ->unique('id');
+    //     $similar = $sourceKeywords->keys()
+    //         ->intersect($targetKeywords->keys())
+    //         ->map(function ($key) use ($sourceKeywords, $targetKeywords, $targetContent) {
+    //             return [
+    //                 'title' => $targetContent->title,
+    //                 'id' => $targetContent->id,
+    //                 'source' => $sourceKeywords[$key],
+    //                 'target' => $targetKeywords[$key],
+    //                 'created' => $targetContent->created_at->diffForHumans(null, true),
+    //                 'updated' => $targetContent->updated_at->diffForHumans(null, true),
+    //             ];
+    //         })
+    //         ->values()
+    //         ->unique('id');
 
-        return $similar->isNotEmpty() ? $similar : false;
-    }
+    //     return $similar->isNotEmpty() ? $similar : false;
+    // }
 
     protected function getSimilarScore($similar)
     {
