@@ -34,7 +34,7 @@ class GenerateSimilars extends Command
 
         Content::orderBy('updated_at', 'desc')->chunk($chunkSize, function ($contentChunk) use (&$count, $chunkCount, $progress) {
             $contentChunk->each(function ($content) use ($progress) {
-                $this->generateSimilars($content);
+                //$this->generateSimilars($content);
                 $progress->advance();
             });
             $count++;
