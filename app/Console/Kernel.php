@@ -23,8 +23,8 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\DisableOldShortNews::class,
         \App\Console\Commands\ForumMiscTopic::class,
         \App\Console\Commands\Newsletter::class,
-        \App\Console\Commands\GenerateKeywords::class,
-        //\App\Console\Commands\GenerateSimilars::class,
+        //\App\Console\Commands\GenerateKeywords::class,
+        \App\Console\Commands\GenerateSimilars::class,
     ];
 
     protected function schedule(Schedule $schedule)
