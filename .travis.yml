@@ -1,14 +1,9 @@
 dist: trusty
 
-#sudo: true
-
 language: php
 
 php:
   - 7.0
-
-#services:
-#  - mysql
 
 env:
   - TRAVIS_NODE_VERSION="8"
