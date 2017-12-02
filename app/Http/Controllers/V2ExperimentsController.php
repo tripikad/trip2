@@ -18,7 +18,7 @@ class V2ExperimentsController extends Controller
                 ->push(component('Title')
                     ->with('title', 'Related content')
                 )
-                
+
                 ->push(component('Link')
                     ->with('title', 'Similars')
                     ->with('route', route('experiments.similars'))
