@@ -1,11 +1,10 @@
 <?php
 
+use App\User;
+use App\Content;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
-use App\Content;
-use App\User;
 
 class AddMetaToContentsTable extends Migration
 {
@@ -21,7 +20,7 @@ class AddMetaToContentsTable extends Migration
         });
 
         User::create([
-            'name' => 'test'
+            'name' => 'test',
         ]);
 
         Content::create([
@@ -29,9 +28,9 @@ class AddMetaToContentsTable extends Migration
             'title' => 'test',
             'body' => 'test',
             'user_id' => 1,
-            'meta' => collect()->put('hello', 'world')
+            'meta' => collect()->put('hello', 'world'),
         ]);
-        
+
         dump(Content::findOrFail(10000000)->meta);
     }
 
