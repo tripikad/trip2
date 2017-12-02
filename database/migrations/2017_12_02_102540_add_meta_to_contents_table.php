@@ -1,7 +1,5 @@
 <?php
 
-use App\User;
-use App\Content;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -18,7 +16,6 @@ class AddMetaToContentsTable extends Migration
         Schema::table('contents', function (Blueprint $table) {
             $table->json('meta')->nullable();
         });
-
     }
 
     /**
