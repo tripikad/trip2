@@ -19,17 +19,10 @@ class Content extends Model
 
     protected $appends = ['body_filtered', 'image_id'];
 
-<<<<<<< HEAD
     // protected $casts = [
     //     'meta' => 'array',
     // ];
     
-=======
-    protected $casts = [
-        'meta' => 'array',
-    ];
-
->>>>>>> origin/kika-similar-1a
     // Relations
 
     public function unread_content()
