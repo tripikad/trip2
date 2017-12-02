@@ -18,20 +18,6 @@ class AddMetaToContentsTable extends Migration
         Schema::table('contents', function (Blueprint $table) {
             $table->json('meta')->nullable();
         });
-
-        User::create([
-            'name' => 'test',
-        ]);
-
-        Content::create([
-            'id' => '10000000',
-            'title' => 'test',
-            'body' => 'test',
-            'user_id' => 1,
-            'meta' => collect()->put('hello', 'world'),
-        ]);
-
-        dump(Content::findOrFail(10000000)->meta);
     }
 
     /**
