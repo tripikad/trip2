@@ -19,9 +19,9 @@ class Content extends Model
 
     protected $appends = ['body_filtered', 'image_id'];
 
-    // protected $casts = [
-    //     'meta' => 'array',
-    // ];
+    protected $casts = [
+        'meta' => 'array',
+    ];
     
     // Relations
 
