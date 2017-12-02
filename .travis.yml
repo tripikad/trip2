@@ -11,23 +11,28 @@ services:
   - mysql
 
 env:
-  - TRAVIS_NODE_VERSION="6"
+  - TRAVIS_NODE_VERSION="8"
 
 cache:
   directories:
-    - vendor
     - $HOME/.composer/cache
+    - $HOME/.yarn-cache
     - node_modules
+    - vendor
 
 install:
     - bash .travis.install-mysql-5.7.sh
-    - composer install --prefer-dist
-    - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
+    - composer install --no-interaction
     - npm install --no-optional
     - cp .env.travis .env
     - chmod -R o+w storage/
+    - chmod -R o+w bootstrap/cache/
     - mysql -e 'create database trip2;'
     - php artisan migrate:refresh
+    - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+    - sudo apt-get install -y nodejs
+    - npm install --global yarn
+    - yarn
     - npm run build
 
 script:
