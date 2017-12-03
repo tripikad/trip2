@@ -8,19 +8,26 @@
     background: $gray;
 }
 
-.Two__wrapper {
+.Two__mainOuter {
+    background: $white;
+    width: 100%;
+}
+
+.Two__mainInner {
+    max-width: $largedesktop-width;
     width: 100%;
     display: flex;
     display: block ?if $tablet;
+    background: $white;
 }
 
 .Two__content {
-    position: relative;
     background: $white;
+    position: relative;
     width: 80%;
     width: 100% ?if $tablet;
-    margin-top: $margin-xl;
-    margin-top: $margin-md ?if $tablet;
+    padding-top: $margin-xl;
+    padding-top: $margin-md ?if $tablet;
 }
 
 .Two__contentItem {
@@ -32,14 +39,15 @@
 }
 
 .Two__sidebar {
-    margin-bottom: $margin-md ?if $tablet;
-    margin-bottom: $margin-xl;
-    margin-left: $margin-xl;
-    margin-left: 0 ?if $tablet;
-    margin-top: $margin-md ?if $tablet;
-    margin-top: $margin-xl;
+    background: white;
+    padding-bottom: $margin-xl;
+    padding-bottom: $margin-md ?if $tablet;
+    padding-left: $margin-xl;
+    padding-left: 0 ?if $tablet;
+    padding-top: $margin-xl;
+    padding-top: $margin-md ?if $tablet;
     width: 100% ?if $tablet;
-    width: 25%;
+    width: $width-xxxl;
 }
 
 .Two__sidebarItem {
@@ -51,7 +59,9 @@
 }
 
 .Two__bottom {
-    background: $gray;
+    background: $gray-lighter;
+    padding: $padding-lg;
+    padding: $padding-md ?if $tablet;
 }
 
 .Two__footer {

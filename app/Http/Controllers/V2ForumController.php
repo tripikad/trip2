@@ -45,7 +45,7 @@ class V2ForumController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('title', trans("content.$type.index.title"))
             ->with('head_title', trans("content.$type.index.title"))

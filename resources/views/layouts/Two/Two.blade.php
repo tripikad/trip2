@@ -54,39 +54,39 @@ $narrow = $narrow ?? false;
 
 @section('content')
 
-<div class="container">
+<div class="Two__mainOuter">
 
-<section class="Two__wrapper">
+    <div class="Two__mainInner">
 
-    <main class="Two__content">
+        <main class="Two__content">
 
-        @foreach ($content as $content_item)
-        
-        <div class="Two__contentItem">
+            @foreach ($content as $content_item)
+            
+            <div class="Two__contentItem">
 
-            {!! $content_item !!}
-                
-        </div>
-
-        @endforeach
-
-    </main>
-
-    <aside class="Two__sidebar">
-
-        @foreach ($sidebar as $sidebar_item)
+                {!! $content_item !!}
                     
-        <div class="Two__sidebarItem">
+            </div>
 
-            {!! $sidebar_item !!}
-                
-        </div>
+            @endforeach
 
-        @endforeach
+        </main>
 
-    </aside>
+        <aside class="Two__sidebar">
 
-</section>
+            @foreach ($sidebar as $sidebar_item)
+                        
+            <div class="Two__sidebarItem">
+
+                {!! $sidebar_item !!}
+                    
+            </div>
+
+            @endforeach
+
+        </aside>
+
+    </div>
 
 </div>
 
@@ -94,16 +94,20 @@ $narrow = $narrow ?? false;
 
 <section class="Two__bottom">
 
-    @foreach ($bottom as $bottom_item)
-    
-        <div class="Two__bottomItem">
+    <div class="container">
 
-            {!! $bottom_item !!}
+        @foreach ($bottom as $bottom_item)
+        
+            <div class="Two__bottomItem">
+
+                {!! $bottom_item !!}
+                    
+            </div>
                 
-        </div>
-            
-    @endforeach
+        @endforeach
 
+    </div>
+    
 </section>
 
 @endif 
