@@ -23,35 +23,17 @@ class GenerateKeywords extends Command
     {
         parent::__construct();
 
-        $this->destinations = Destination::pluck('name')
-            ->filter(function ($destination) {
-                return ! in_array($destination, [
-                    config('similars.destination.filter'),
-                ]);
-            })
-            ->merge(config('similars.destination.add'));
-
-        $this->topics = Topic::pluck('name')
-            ->filter(function ($topic) {
-                return ! in_array($topic, [
-                    config('similars.topic.filter'),
-                ]);
-            })
-            ->merge(config('similars.topic.add'));
-        $this->carriers = Carrier::pluck('name')
-            ->filter(function ($topic) {
-                return ! in_array($topic, [
-                    config('similars.carrier.filter'),
-                ]);
-            })
-            ->merge(config('similars.carrier.add'));
-
         $this->totalSize = config('similars.totalsize');
         $this->chunkSize = config('similars.chunksize');
     }
 
     public function handle()
     {
+
+        $this->destinations = $this->getDestinations();
+        $this->topics = $this->getTopics();
+        $this->carriers = $this->getCarriers();
+
         $this->info("\nCleaning up previous keywords and similars");
 
         $this->cleanupMeta();
@@ -299,4 +281,35 @@ class GenerateKeywords extends Command
             * ($value - $sourceMin)
             + $targetMin;
     }
+
+    protected function getDestinations() {
+        return Destination::pluck('name')
+            ->filter(function ($destination) {
+                return ! in_array($destination, [
+                    config('similars.destination.filter'),
+                ]);
+            })
+            ->merge(config('similars.destination.add'));
+    }
+
+    protected function getTopics() {
+        return Topic::pluck('name')
+            ->filter(function ($topic) {
+                return ! in_array($topic, [
+                    config('similars.topic.filter'),
+                ]);
+            })
+            ->merge(config('similars.topic.add'));
+    }
+
+    protected function getCarriers() {
+        return Carrier::pluck('name')
+            ->filter(function ($topic) {
+                return ! in_array($topic, [
+                    config('similars.carrier.filter'),
+                ]);
+            })
+            ->merge(config('similars.carrier.add'));
+    }
+
 }
