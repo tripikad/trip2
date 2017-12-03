@@ -27,7 +27,8 @@ class GenerateKeywords extends Command
         $this->chunkSize = config('similars.chunksize');
     }
 
-    public function getDestinations() {
+    public function getDestinations()
+    {
         return Destination::pluck('name')
             ->filter(function ($destination) {
                 return ! in_array($destination, [
@@ -37,7 +38,8 @@ class GenerateKeywords extends Command
             ->merge(config('similars.destination.add'));
     }
 
-    public function getTopics() {
+    public function getTopics()
+    {
         return Topic::pluck('name')
             ->filter(function ($topic) {
                 return ! in_array($topic, [
@@ -47,7 +49,8 @@ class GenerateKeywords extends Command
             ->merge(config('similars.topic.add'));
     }
 
-    public function getCarriers() {
+    public function getCarriers()
+    {
         return Carrier::pluck('name')
             ->filter(function ($topic) {
                 return ! in_array($topic, [
