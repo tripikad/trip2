@@ -23,31 +23,31 @@ class GenerateKeywords extends Command
     {
         parent::__construct();
 
-        $this->destinations = Destination::pluck('name')
-            ->filter(function ($destination) {
-                return ! in_array($destination, [
-                    config('similars.destination.filter'),
-                ]);
-            })
-            ->merge(config('similars.destination.add'));
+        // $this->destinations = Destination::pluck('name')
+        //     ->filter(function ($destination) {
+        //         return ! in_array($destination, [
+        //             config('similars.destination.filter'),
+        //         ]);
+        //     })
+        //     ->merge(config('similars.destination.add'));
 
-        $this->topics = Topic::pluck('name')
-            ->filter(function ($topic) {
-                return ! in_array($topic, [
-                    config('similars.topic.filter'),
-                ]);
-            })
-            ->merge(config('similars.topic.add'));
-        $this->carriers = Carrier::pluck('name')
-            ->filter(function ($topic) {
-                return ! in_array($topic, [
-                    config('similars.carrier.filter'),
-                ]);
-            })
-            ->merge(config('similars.carrier.add'));
+        // $this->topics = Topic::pluck('name')
+        //     ->filter(function ($topic) {
+        //         return ! in_array($topic, [
+        //             config('similars.topic.filter'),
+        //         ]);
+        //     })
+        //     ->merge(config('similars.topic.add'));
+        // $this->carriers = Carrier::pluck('name')
+        //     ->filter(function ($topic) {
+        //         return ! in_array($topic, [
+        //             config('similars.carrier.filter'),
+        //         ]);
+        //     })
+        //     ->merge(config('similars.carrier.add'));
 
-        $this->totalSize = config('similars.totalsize');
-        $this->chunkSize = config('similars.chunksize');
+        // $this->totalSize = config('similars.totalsize');
+        // $this->chunkSize = config('similars.chunksize');
     }
 
 //     public function handle()
