@@ -54,7 +54,9 @@ $narrow = $narrow ?? false;
 
 @section('content')
 
-<section class="Two__contentSidebar">
+<div class="container">
+
+<section class="Two__wrapper">
 
     <main class="Two__content">
 
@@ -85,6 +87,8 @@ $narrow = $narrow ?? false;
     </aside>
 
 </section>
+
+</div>
 
 @if ($bottom->count())
 

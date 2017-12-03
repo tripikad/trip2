@@ -8,10 +8,10 @@
     background: $gray;
 }
 
-.Two__contentSidebar {
+.Two__wrapper {
+    width: 100%;
     display: flex;
     display: block ?if $tablet;
-    max-width: $mobile-width ?if $tablet;
 }
 
 .Two__content {
@@ -19,13 +19,35 @@
     background: $white;
     width: 80%;
     width: 100% ?if $tablet;
+    margin-top: $margin-xl;
+    margin-top: $margin-md ?if $tablet;
+}
+
+.Two__contentItem {
+    margin-bottom: $margin-md;
+}
+
+.Two__contentItem:last-child {
+    margin-bottom: 0;
 }
 
 .Two__sidebar {
-    width: 25%;
-    width: 100% ?if $tablet;
-    margin-left: $margin-md;
+    margin-bottom: $margin-md ?if $tablet;
+    margin-bottom: $margin-xl;
+    margin-left: $margin-xl;
     margin-left: 0 ?if $tablet;
+    margin-top: $margin-md ?if $tablet;
+    margin-top: $margin-xl;
+    width: 100% ?if $tablet;
+    width: 25%;
+}
+
+.Two__sidebarItem {
+    margin-bottom: $margin-md;
+}
+
+.Two__sidebarItem:last-child {
+    margin-bottom: 0;
 }
 
 .Two__bottom {

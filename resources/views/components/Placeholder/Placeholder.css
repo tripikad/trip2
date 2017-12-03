@@ -5,7 +5,9 @@
     align-items: center;
     justify-content: center;
     height: $height-xl;
-    border: 1px dashed $gray-light;
+    border: 1px dashed $gray;
+    opacity: $opacity-lg;
+    background: $pink;
 }
 
     .Placeholder__title {

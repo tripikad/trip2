@@ -4,6 +4,7 @@
   margin: 0 auto;
   max-width: $largedesktop-width;
   width: 90%;
+  width: $mobile-width ?if $tablet;
 }
 
 .row {
