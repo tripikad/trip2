@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Content;
 use Carbon\Carbon;
 use App\NewsletterSent;
@@ -11,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Mail\Markdown;
 use App\NewsletterSubscription;
 use App\NewsletterLetterContent;
+use App\Http\Regions\FlightNewsletterSubscribe;
 
 class V2NewsletterController extends Controller
 {
@@ -231,7 +231,7 @@ class V2NewsletterController extends Controller
         } else {
             $sort_order = 0;
             foreach ($request->input('body') as $key => &$body) {
-                ++$sort_order;
+                $sort_order++;
 
                 $date_from = $request->input('visible_from')[$key] == '' ? null : $request->input('visible_from')[$key];
                 $date_to = $request->input('visible_to')[$key] == '' ? null : $request->input('visible_to')[$key];
@@ -276,11 +276,11 @@ class V2NewsletterController extends Controller
         }
     }
 
-    public function subscribe(Request $request, $id, User $user = null, $skip_request = false)
+    public function subscribe(Request $request, $id, $user = null, $skip_request = false)
     {
         $newsletter_type = NewsLetterType::findOrFail($id);
 
-        if (! $user) {
+        if ($user === null) {
             $user = $request->user();
         }
 

@@ -34,6 +34,10 @@ class Image extends Model
             self::createPresetFromOriginal($original, $this->filename, $preset);
 
             return $alt_image;
+        } elseif (! filter_var($image, FILTER_VALIDATE_URL) && config("imagepresets.presets.$preset.on_the_fly")) {
+            self::createPresetFromOriginal($original, $this->filename, $preset);
+
+            return $alt_image;
         } else {
             return $image;
         }
@@ -140,7 +144,7 @@ class Image extends Model
         }
 
         if (file_exists($path.$new_filename.'.'.$ext)) {
-            ++$i;
+            $i++;
 
             return self::checkIfExists($path, $filename, $ext, $i);
         } else {
