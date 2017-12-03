@@ -26,7 +26,7 @@ class GenerateKeywords extends Command
         $this->destinations = [];
         $this->topics = [];
         $this->carriers = [];
-        
+
         // $this->destinations = Destination::pluck('name')
         //     ->filter(function ($destination) {
         //         return ! in_array($destination, [
