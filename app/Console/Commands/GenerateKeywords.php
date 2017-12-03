@@ -28,8 +28,8 @@ class GenerateKeywords extends Command
                 return ! in_array($destination, [
                     config('similars.destination.filter'),
                 ]);
-            })
-            ->merge(config('similars.destination.add'));
+            });
+            //->merge(config('similars.destination.add'));
 
         // $this->topics = Topic::pluck('name')
         //     ->filter(function ($topic) {
