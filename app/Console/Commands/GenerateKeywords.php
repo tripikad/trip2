@@ -94,27 +94,27 @@ class GenerateKeywords extends Command
 
     protected function generateKeywords($content)
     {
-        // $tokens = $this->getTokens(
-        //     $content->title.' '.$content->body
-        // );
-        // $keywords = $this
-        //     ->getKeywords($tokens)
-        //     ->pipe(function ($keywords) use ($content) {
-        //         return $this->getManualKeywords($keywords, $content);
-        //     })
-        //     ->pipe(function ($keywords) {
-        //         return $this->getParentKeywords($keywords);
-        //     })
-        //     ->pipe(function ($keywords) {
-        //         return $this->cleanupKeywords($keywords);
-        //     })
-        //     ->values();
+        $tokens = $this->getTokens(
+            $content->title.' '.$content->body
+        );
+        $keywords = $this
+            ->getKeywords($tokens)
+            ->pipe(function ($keywords) use ($content) {
+                return $this->getManualKeywords($keywords, $content);
+            })
+            ->pipe(function ($keywords) {
+                return $this->getParentKeywords($keywords);
+            })
+            ->pipe(function ($keywords) {
+                return $this->cleanupKeywords($keywords);
+            })
+            ->values();
 
-        // if ($keywords) {
-        //     $content['meta->keywords'] = $keywords;
-        //     $content->timestamps = false;
-        //     $content->save();
-        // }
+        if ($keywords) {
+            //$content['meta->keywords'] = $keywords;
+            $content->timestamps = false;
+            $content->save();
+        }
     }
 
     protected function getTokens($text)
