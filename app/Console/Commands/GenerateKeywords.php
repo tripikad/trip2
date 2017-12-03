@@ -23,13 +23,13 @@ class GenerateKeywords extends Command
     {
         parent::__construct();
 
-        // $this->destinations = Destination::pluck('name')
-        //     ->filter(function ($destination) {
-        //         return ! in_array($destination, [
-        //             config('similars.destination.filter'),
-        //         ]);
-        //     })
-        //     ->merge(config('similars.destination.add'));
+        $this->destinations = Destination::pluck('name')
+            ->filter(function ($destination) {
+                return ! in_array($destination, [
+                    config('similars.destination.filter'),
+                ]);
+            })
+            ->merge(config('similars.destination.add'));
 
         // $this->topics = Topic::pluck('name')
         //     ->filter(function ($topic) {
