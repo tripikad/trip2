@@ -29,7 +29,6 @@ class GenerateKeywords extends Command
 
     public function handle()
     {
-
         $this->destinations = $this->getDestinations();
         $this->topics = $this->getTopics();
         $this->carriers = $this->getCarriers();
@@ -282,7 +281,8 @@ class GenerateKeywords extends Command
             + $targetMin;
     }
 
-    protected function getDestinations() {
+    protected function getDestinations()
+    {
         return Destination::pluck('name')
             ->filter(function ($destination) {
                 return ! in_array($destination, [
@@ -292,7 +292,8 @@ class GenerateKeywords extends Command
             ->merge(config('similars.destination.add'));
     }
 
-    protected function getTopics() {
+    protected function getTopics()
+    {
         return Topic::pluck('name')
             ->filter(function ($topic) {
                 return ! in_array($topic, [
@@ -302,7 +303,8 @@ class GenerateKeywords extends Command
             ->merge(config('similars.topic.add'));
     }
 
-    protected function getCarriers() {
+    protected function getCarriers()
+    {
         return Carrier::pluck('name')
             ->filter(function ($topic) {
                 return ! in_array($topic, [
@@ -311,5 +313,4 @@ class GenerateKeywords extends Command
             })
             ->merge(config('similars.carrier.add'));
     }
-
 }
