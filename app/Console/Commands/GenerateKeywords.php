@@ -29,7 +29,7 @@ class GenerateKeywords extends Command
                     config('similars.destination.filter'),
                 ]);
             });
-            //->merge(config('similars.destination.add'));
+        //->merge(config('similars.destination.add'));
 
         // $this->topics = Topic::pluck('name')
         //     ->filter(function ($topic) {
