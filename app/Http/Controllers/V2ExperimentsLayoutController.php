@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class V2ExperimentsLayoutController extends Controller
 {
-    public function indexTwo() {
-
+    public function indexTwo()
+    {
         return layout('Two')
 
             ->with('header', component('Placeholder')
