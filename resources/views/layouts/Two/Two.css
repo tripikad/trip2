@@ -1,0 +1,37 @@
+@import "variables";
+
+.Two__header {
+    position: relative;
+}
+
+.Two__top {
+    background: $gray;
+}
+
+.Two__contentSidebar {
+    display: flex;
+    display: block ?if $tablet;
+    max-width: $mobile-width ?if $tablet;
+}
+
+.Two__content {
+    position: relative;
+    background: $white;
+    width: 80%;
+    width: 100% ?if $tablet;
+}
+
+.Two__sidebar {
+    width: 25%;
+    width: 100% ?if $tablet;
+    margin-left: $margin-md;
+    margin-left: 0 ?if $tablet;
+}
+
+.Two__bottom {
+    background: $gray;
+}
+
+.Two__footer {
+    background: $white;
+}

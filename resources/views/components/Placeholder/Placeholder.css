@@ -1,0 +1,22 @@
+@import "variables";
+
+.Placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $height-xl;
+    border: 1px dashed $gray-light;
+}
+
+    .Placeholder__title {
+        font: $font-text-md;
+        color: $gray-dark;
+    }
+
+.Placeholder--ad {
+    background: $gray-dark;
+}
+
+    .Placeholder--ad .Placeholder__title {
+        color: $white;
+    }
