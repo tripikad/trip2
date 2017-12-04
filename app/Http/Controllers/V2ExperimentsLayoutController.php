@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class V2ExperimentsLayoutController extends Controller
 {
+
     public function indexOne() {
 
         return layout('One')
