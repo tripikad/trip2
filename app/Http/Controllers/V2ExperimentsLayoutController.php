@@ -112,4 +112,87 @@ class V2ExperimentsLayoutController extends Controller
 
             ->render();
     }
+
+    public function indexFrontpage()
+    {
+        return layout('Frontpage2')
+
+            ->with('header', region('FrontpageHeader', collect()))
+
+            ->with('top', collect()
+                ->push(component('Placeholder')
+                    ->with('title', 'Top')
+                )
+                ->push(component('BlockHorizontal')
+                    ->is('center')
+                    ->with('content', collect()->push(component('Link')
+                        ->is('blue')
+                        ->with('title', trans('frontpage.index.all.offers'))
+                        ->with('route', route('flight.index'))
+                    ))
+                )
+                ->push(region('FrontpageAbout'))
+            )
+
+            ->with('content', collect()
+                ->push(component('Placeholder')
+                    ->with('title', 'Content1')
+                )
+                ->push(component('Placeholder')
+                    ->is('ad')
+                    ->with('title', 'Ad')
+                )
+                // ->push(component('Promo')->with('promo', 'body'))
+                ->push(component('Placeholder')
+                    ->with('title', 'Content2')
+                )
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Placeholder')
+                    ->with('title', 'Content2')
+                )
+                //->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Placeholder')
+                    ->is('ad')
+                    ->with('title', 'Ad')
+                )
+                ->push(component('Placeholder')
+                    ->with('title', 'Sidebar2')
+                )
+                //->push(component('Promo')->with('promo', 'sidebar_large'))
+                ->push(component('Placeholder')
+                    ->is('ad')
+                    ->with('title', 'Ad')
+                )
+            )
+
+            ->with('bottom1', collect()
+                ->push(component('Placeholder')
+                    ->with('title', 'Bottom1.1')
+                )
+                ->push(component('Placeholder')
+                    ->with('title', 'Bottom1.2')
+                )
+            )
+
+            ->with('bottom2', collect()
+                ->push(component('Placeholder')
+                    ->with('title', 'Bottom2')
+                )
+            )
+
+            ->with('bottom3', collect()
+                ->push(component('Placeholder')
+                    ->with('title', 'Bottom3.1')
+                )
+                ->push(component('Placeholder')
+                    ->with('title', 'Bottom3.2')
+                )
+            )
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
 }
