@@ -5,6 +5,7 @@
   max-width: $largedesktop-width;
   width: 90%;
   width: $mobile-width ?if $tablet;
+  width: 80% ?if $mobile;
 }
 
 .row {

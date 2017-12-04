@@ -10,12 +10,16 @@
 
 .Two__mainOuter {
     background: $white;
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
 }
 
 .Two__mainInner {
     max-width: $largedesktop-width;
-    width: 100%;
+    width: 90%;
+    width: $mobile-width ?if $tablet;
+    width: 80% ?if $mobile;
     display: flex;
     display: block ?if $tablet;
     background: $white;
@@ -26,8 +30,12 @@
     position: relative;
     width: 80%;
     width: 100% ?if $tablet;
-    padding-top: $margin-xl;
+    padding-top: $margin-lg;
     padding-top: $margin-md ?if $tablet;
+    padding-bottom: $margin-lg;
+    padding-bottom: $margin-md ?if $tablet;
+    padding-left: $margin-xl;
+    padding-left: 0 ?if $tablet;
 }
 
 .Two__contentItem {
@@ -40,12 +48,12 @@
 
 .Two__sidebar {
     background: white;
-    padding-bottom: $margin-xl;
+    padding-bottom: $margin-lg;
     padding-bottom: $margin-md ?if $tablet;
     padding-left: $margin-xl;
     padding-left: 0 ?if $tablet;
-    padding-top: $margin-xl;
-    padding-top: $margin-md ?if $tablet;
+    padding-top: $margin-lg;
+    padding-top: 0 ?if $tablet;
     width: 100% ?if $tablet;
     width: $width-xxxl;
 }
@@ -62,6 +70,7 @@
     background: $gray-lighter;
     padding: $padding-lg;
     padding: $padding-md ?if $tablet;
+    padding: $padding-md 0 ?if $mobile;
 }
 
 .Two__footer {

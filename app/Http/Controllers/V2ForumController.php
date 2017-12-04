@@ -47,6 +47,7 @@ class V2ForumController extends Controller
 
         return layout('Two')
 
+            ->with('narrow', true)
             ->with('title', trans("content.$type.index.title"))
             ->with('head_title', trans("content.$type.index.title"))
             ->with('head_description', trans("site.description.$type"))

@@ -10,15 +10,23 @@ class V2ExperimentsLayoutController extends Controller
 
         return layout('Two')
 
-            ->with('header', component('Placeholder')
-                    ->with('title', 'header')
-            )
+            // ->with('header', component('Placeholder')
+            //         ->with('title', 'header')
+            // )
 
-            ->with('top', collect()
-                ->push(component('Placeholder')
-                    ->with('title', 'Top')
-                )
-            )
+            ->with('background', component('BackgroundMap'))
+            
+            ->with('color', 'gray')
+
+            ->with('header', region('StaticHeader', collect()
+                ->push(component('Title')->with('title', 'Header'))
+            ))
+
+            // ->with('top', collect()
+            //     ->push(component('Placeholder')
+            //         ->with('title', 'Top')
+            //     )
+            // )
 
             ->with('content', collect()
                 ->push(component('Placeholder')

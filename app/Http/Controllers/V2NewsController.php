@@ -29,7 +29,7 @@ class V2NewsController extends Controller
         $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('title', trans('content.'.$type.'.index.title'))
             ->with('head_title', trans('content.'.$type.'.index.title'))
