@@ -33,7 +33,7 @@ class V2FlightController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        return layout('Two')
+        return layout('2col')
 
             ->with('title', trans('content.flight.index.title'))
             ->with('head_title', trans('content.flight.index.title'))
