@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 class V2ExperimentsLayoutController extends Controller
 {
-
-    public function indexOne() {
-
+    public function indexOne()
+    {
         return layout('One')
 
             ->with('color', 'gray')
-        
+
             ->with('background', component('BackgroundMap'))
-        
+
             ->with('header', region('StaticHeader'))
 
             ->with('top', collect()
@@ -48,7 +47,7 @@ class V2ExperimentsLayoutController extends Controller
                     ->with('title', 'Google')
                 )
             ))
-            
+
             ->with('content', collect()
                 ->push(component('Placeholder')
                     ->with('title', 'Content1')
@@ -66,19 +65,18 @@ class V2ExperimentsLayoutController extends Controller
                     ),
                 ]))
             ))
-            
+
             ->with('footer', region('FooterLight'))
 
-            ->render()
-        ;
+            ->render();
     }
 
-    public function indexTwo() {
-
+    public function indexTwo()
+    {
         return layout('Two')
 
             ->with('background', component('BackgroundMap'))
-            
+
             ->with('color', 'gray')
 
             ->with('header', region('StaticHeader', collect()
