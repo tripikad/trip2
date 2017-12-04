@@ -45,9 +45,8 @@ class V2ForumController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        return layout('2col')
+        return layout('Two')
 
-            ->with('narrow', true)
             ->with('title', trans("content.$type.index.title"))
             ->with('head_title', trans("content.$type.index.title"))
             ->with('head_description', trans("site.description.$type"))
@@ -107,7 +106,7 @@ class V2ForumController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
@@ -171,7 +170,7 @@ class V2ForumController extends Controller
             ? '#comment-'.$forum->comments->last()->id
             : '';
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('title', trans('content.forum.index.title'))
             ->with('head_title', $forum->vars()->title)
@@ -241,9 +240,7 @@ class V2ForumController extends Controller
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
         $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
 
-        return layout('2col')
-
-            ->with('narrow', true)
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
@@ -375,9 +372,7 @@ class V2ForumController extends Controller
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
         $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
 
-        return layout('2col')
-
-            ->with('narrow', true)
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')

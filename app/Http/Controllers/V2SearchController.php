@@ -167,7 +167,7 @@ class V2SearchController extends Controller
                 ->with('title', trans('search.results.newest_first'));
         }
 
-        return layout('1col')
+        return layout('Two')
             ->with('title', $q)
             ->with('head_title', trans('site.about'))
             ->with('head_description', '')

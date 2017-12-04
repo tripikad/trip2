@@ -114,7 +114,7 @@ class V2BlogController extends Controller
     {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('Header', collect()
                 ->push(component('Title')
@@ -201,7 +201,7 @@ class V2BlogController extends Controller
         $blog = Content::findOrFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('Header', collect()
                 ->push(component('Title')

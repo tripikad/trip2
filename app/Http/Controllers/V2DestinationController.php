@@ -97,7 +97,7 @@ class V2DestinationController extends Controller
     {
         $destination = Destination::findOrFail($id);
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('Header', collect()
                 ->push(component('EditorScript'))

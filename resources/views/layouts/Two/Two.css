@@ -28,8 +28,7 @@
 .Two__content {
     background: $white;
     position: relative;
-    width: 80%;
-    width: 100% ?if $tablet;
+    width: 100%;
     padding-top: $margin-lg;
     padding-top: $margin-md ?if $tablet;
     padding-bottom: $margin-lg;

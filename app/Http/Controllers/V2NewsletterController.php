@@ -31,7 +31,7 @@ class V2NewsletterController extends Controller
             );
         }
 
-        return layout('1col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
             ->with('header', region('ForumHeader', collect()
@@ -113,7 +113,7 @@ class V2NewsletterController extends Controller
             );
         });
 
-        return layout('2col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
             ->with('header', region('ForumHeader', collect()
@@ -185,7 +185,7 @@ class V2NewsletterController extends Controller
             }
         }
 
-        return layout('1col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
             ->with('header', region('ForumHeader', collect()
@@ -439,7 +439,7 @@ class V2NewsletterController extends Controller
             $subscription->active = 0;
             $subscription->save();
 
-            return layout('1col')
+            return layout('Two')
                 ->with('header', region('StaticHeader', collect()
                     ->push(component('Title')
                         ->is('red')

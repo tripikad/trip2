@@ -29,7 +29,7 @@ class V2NewsController extends Controller
         $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('title', trans('content.'.$type.'.index.title'))
             ->with('head_title', trans('content.'.$type.'.index.title'))
@@ -93,7 +93,7 @@ class V2NewsController extends Controller
         $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('title', trans('content.news.index.title'))
             ->with('head_title', $new->vars()->title)
@@ -133,7 +133,7 @@ class V2NewsController extends Controller
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name')->get();
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('Header', collect()
                 ->push(component('EditorScript'))
@@ -254,7 +254,7 @@ class V2NewsController extends Controller
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name')->get();
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('Header', collect()
                 ->push(component('EditorScript'))
