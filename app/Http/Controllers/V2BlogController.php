@@ -13,7 +13,7 @@ class V2BlogController extends Controller
         $blogs = Content::getLatestPagedItems('blog', 10);
         $loggedUser = request()->user();
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('header', region('Header', collect()
                 ->push(component('Title')
@@ -61,7 +61,7 @@ class V2BlogController extends Controller
         $user = auth()->user();
         $blog = Content::getItemBySlug($slug, $user);
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('header', region('Header', collect()
                 ->push(component('Link')
