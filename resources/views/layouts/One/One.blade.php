@@ -9,10 +9,8 @@ $background = $background ?? '';
 $header = $header ?? '';
 $top = isset($top) ? collect($top) : collect();
 $content = isset($content) ? collect($content) : collect();
-$sidebar = isset($sidebar) ? collect($sidebar) : collect();
 $bottom = isset($bottom) ? collect($bottom) : collect();
 $footer = $footer ?? '';
-$narrow = $narrow ?? false;
 
 @endphp
 
@@ -30,19 +28,23 @@ $narrow = $narrow ?? false;
 
 @section('header')
 
-<header class="Two__header">
+<header class="One__header">
 
     {!! $header !!}
 
     @if ($top->count())
 
-    <div class="Two__top">
+    <div class="One__top">
 
-    @foreach ($top as $top_item)
+        @foreach ($top as $top_item)
 
-        {!! $top_item !!}
-            
-    @endforeach
+            <div class="One__topItem">
+
+                {!! $top_item !!}
+                    
+            </div>
+
+        @endforeach
 
     </div>
 
@@ -54,51 +56,33 @@ $narrow = $narrow ?? false;
 
 @section('content')
 
-<div class="Two__wrapperOuter">
+<div class="One__wrapper">
 
-    <div class="Two__wrapperInner">
+    <main class="One__content">
 
-        <main class="Two__content">
+        @foreach ($content as $content_item)
+        
+        <div class="One__contentItem">
 
-            @foreach ($content as $content_item)
-            
-            <div class="Two__contentItem">
+            {!! $content_item !!}
+                
+        </div>
 
-                {!! $content_item !!}
-                    
-            </div>
+        @endforeach
 
-            @endforeach
-
-        </main>
-
-        <aside class="Two__sidebar">
-
-            @foreach ($sidebar as $sidebar_item)
-                        
-            <div class="Two__sidebarItem">
-
-                {!! $sidebar_item !!}
-                    
-            </div>
-
-            @endforeach
-
-        </aside>
-
-    </div>
+    </main>
 
 </div>
 
 @if ($bottom->count())
 
-<section class="Two__bottom">
+<section class="One__bottom">
 
     <div class="container">
 
         @foreach ($bottom as $bottom_item)
         
-            <div class="Two__bottomItem">
+            <div class="One__bottomItem">
 
                 {!! $bottom_item !!}
                     
@@ -116,7 +100,7 @@ $narrow = $narrow ?? false;
 
 @section('footer')
 
-    <footer class="Two__footer">
+    <footer class="One__footer">
 
     {!! $footer !!}
 

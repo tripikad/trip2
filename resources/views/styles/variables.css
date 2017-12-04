@@ -219,7 +219,8 @@ $box-shadow-left: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
 $box-shadow-bottom: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
 
 /* Media queries */
-$mobile-width: 22em; /* Was 34em */
+$mobile-width: 22em;
+$mobile-large-width: 34em;
 $tablet-width: 56em; 
 $desktop-width: 62em;
 $largedesktop-width: 74em;

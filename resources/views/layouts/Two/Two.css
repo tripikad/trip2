@@ -8,14 +8,14 @@
     background: $gray;
 }
 
-.Two__mainOuter {
+.Two__wrapperOuter {
     background: $white;
     display: flex;
     justify-content: center;
     position: relative;
 }
 
-.Two__mainInner {
+.Two__wrapperInner {
     max-width: $largedesktop-width;
     width: 90%;
     width: $mobile-width ?if $tablet;
