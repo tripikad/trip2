@@ -56,7 +56,9 @@ $footer = $footer ?? '';
 
 @section('content')
 
-<div class="One__wrapper">
+<div class="One__outerWrapper">
+
+    <div class="One__innerWrapper">
 
     <main class="One__content">
 
@@ -71,6 +73,8 @@ $footer = $footer ?? '';
         @endforeach
 
     </main>
+
+    </div>
 
 </div>
 
