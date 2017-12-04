@@ -61,35 +61,29 @@ $footer = $footer ?? '';
 
     <div class="One__innerWrapper">
 
-    <div class="One__contentTop">
+        <div class="One__contentTop">
 
-        {!! $content_top !!}
+            {!! $content_top !!}
 
-    </div>
-
-    <main class="One__content">
-
-        @foreach ($content as $content_item)
-        
-        <div class="One__contentItem">
-
-            {!! $content_item !!}
-                
         </div>
 
-        @endforeach
+        <main class="One__content">
 
-    </main>
+            @foreach ($content as $content_item)
+            
+            <div class="One__contentItem">
 
-    </div>
+                {!! $content_item !!}
+                    
+            </div>
 
-</div>
+            @endforeach
 
-@if ($bottom->count())
+        </main>
 
-<section class="One__bottom">
+    @if ($bottom->count())
 
-    <div class="container">
+    <section class="One__bottom">
 
         @foreach ($bottom as $bottom_item)
         
@@ -100,12 +94,14 @@ $footer = $footer ?? '';
             </div>
                 
         @endforeach
+        
+    </section>
+
+    @endif 
 
     </div>
-    
-</section>
 
-@endif 
+</div>
 
 @endsection
 

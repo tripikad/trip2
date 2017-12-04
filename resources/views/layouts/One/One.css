@@ -39,9 +39,10 @@
 }
 
 .One__bottom {
+    display: flex;
+    justify-content: center;
     background: $gray-lighter;
-    padding: $padding-lg;
-    padding: $padding-md ?if $tablet;
+    padding: $padding-lg 0 0 0;
     padding: $padding-md 0 ?if $mobile;
 }
 
