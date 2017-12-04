@@ -33,7 +33,7 @@ class V2ExperimentsLayoutController extends Controller
                     ]))
                 )
             )
-            /*
+
             ->with('content_top', component('Grid3')->with('items', collect()
                 ->push(component('AuthTab')
                     ->with('title', trans('auth.login.field.name.title'))
@@ -49,7 +49,7 @@ class V2ExperimentsLayoutController extends Controller
                     ->with('title', 'Google')
                 )
             ))
-            */
+            
             ->with('content', collect()
                 ->push(component('Placeholder')
                     ->with('title', 'Content1')
@@ -59,6 +59,15 @@ class V2ExperimentsLayoutController extends Controller
                 )
             )
 
+            ->with('bottom', collect()->push(component('MetaLink')
+                ->with('title', trans('auth.login.forgot.password', [
+                    'link' => format_link(
+                        route('reset.apply.form'),
+                        trans('auth.reset.apply.title.link')
+                    ),
+                ]))
+            ))
+            
             ->with('footer', region('FooterLight'))
 
             ->render()

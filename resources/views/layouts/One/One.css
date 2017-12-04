@@ -19,6 +19,7 @@
 }
 
 .One__innerWrapper {
+    background: $white;
     max-width: $largedesktop-width;
     width: $mobile-large-width;
     width: $mobile-width ?if $tablet;
@@ -26,7 +27,6 @@
 }
 
 .One__content {
-    background: $white;
     padding: $margin-md;
 }
 

@@ -8,6 +8,7 @@ $color = $color ?? '';
 $background = $background ?? '';
 $header = $header ?? '';
 $top = isset($top) ? collect($top) : collect();
+$content_top = $content_top ?? '';
 $content = isset($content) ? collect($content) : collect();
 $bottom = isset($bottom) ? collect($bottom) : collect();
 $footer = $footer ?? '';
@@ -59,6 +60,12 @@ $footer = $footer ?? '';
 <div class="One__outerWrapper">
 
     <div class="One__innerWrapper">
+
+    <div class="One__contentTop">
+
+        {!! $content_top !!}
+
+    </div>
 
     <main class="One__content">
 
