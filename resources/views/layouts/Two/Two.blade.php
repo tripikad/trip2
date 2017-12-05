@@ -68,6 +68,24 @@ $narrow = $narrow ?? false;
 
             <main class="Two__content">
 
+                @if($sidebar_top->isNotEmpty())
+
+                    <div class="Two__sidebarTop">
+
+                        @foreach ($sidebar_top as $sidebar_top_item)
+                        
+                            <div class="Two__sidebarItem">
+
+                                {!! $sidebar_top_item !!}
+                                    
+                            </div>
+
+                        @endforeach
+
+                    </div>
+
+                @endif
+
                 @foreach ($content as $content_item)
                 
                 <div class="Two__contentItem">
