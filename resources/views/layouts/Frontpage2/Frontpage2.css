@@ -50,8 +50,6 @@
     padding-top: $margin-md ?if $tablet;
     padding-bottom: $margin-lg;
     padding-bottom: $margin-md ?if $tablet;
-    /*padding-left: $margin-xl;*/
-    /*padding-left: 0 ?if $tablet;*/
 }
 
 .Frontpage__contentItem {

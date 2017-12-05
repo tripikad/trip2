@@ -8,21 +8,16 @@
     background: $gray-light;
 }
 
-.Two__wrapperOuter {
+.Two__contentOuterContainer {
     background: $white;
     display: flex;
     justify-content: center;
     position: relative;
 }
 
-.Two__wrapperInner {
-    max-width: $largedesktop-width;
-    width: 90%;
-    width: $mobile-width ?if $tablet;
-    width: 80% ?if $mobile;
+.Two__contentInnerContainer {
     display: flex;
     display: block ?if $tablet;
-    background: $white;
 }
 
 .Two__content {
@@ -65,11 +60,10 @@
     margin-bottom: 0;
 }
 
-.Two__bottom {
+.Two__bottomOuterContainer {
     background: $gray-lighter;
-    padding: $padding-lg;
-    padding: $padding-md ?if $tablet;
-    padding: $padding-md 0 ?if $mobile;
+    padding: $padding-lg 0;
+    padding: $padding-md 0 ?if $tablet;
 }
 
 .Two__footer {
