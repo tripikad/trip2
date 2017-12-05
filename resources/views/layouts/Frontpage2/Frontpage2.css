@@ -11,12 +11,9 @@
 
 .Frontpage__top {
     margin-top: calc($spacer * -3);
-    /*padding: 0 $margin-xxl $margin-lg $margin-xxl;*/
-    /*padding: 0 0 $margin-md 0 ?if $tablet;*/
     padding-bottom: $margin-lg;
     padding-bottom: $margin-md ?if $tablet;
     max-width: $largedesktop-width;
-    /*max-width: $desktop-width;*/
     width: 90%;
     width: $mobile-width ?if $tablet;
     width: 80% ?if $mobile;
@@ -83,7 +80,6 @@
 /* Bottom */
 
 .Frontpage__bottom1 {
-    /*padding: $margin-lg $margin-xxl;*/
     padding-bottom: $margin-lg;
     padding-bottom: $margin-md ?if $tablet;
 }
@@ -98,7 +94,6 @@
 
 .Frontpage__bottom3 {
     background: $gray-lighter;
-    /*padding: $margin-lg $margin-xxl;*/
     padding: $margin-md;
     padding-bottom: $margin-md ?if $tablet;
 }
