@@ -11,9 +11,12 @@
 
 .Frontpage__top {
     margin-top: calc($spacer * -3);
-    padding: 0 $margin-xxl $margin-lg $margin-xxl;
-    padding: 0 0 $margin-md 0 ?if $tablet;
+    /*padding: 0 $margin-xxl $margin-lg $margin-xxl;*/
+    /*padding: 0 0 $margin-md 0 ?if $tablet;*/
+    padding-bottom: $margin-lg ?if $tablet;
+    padding-bottom: $margin-md ?if $tablet;
     max-width: $largedesktop-width;
+    /*max-width: $desktop-width;*/
     width: 90%;
     width: $mobile-width ?if $tablet;
     width: 80% ?if $mobile;
@@ -35,8 +38,10 @@
 }
 
 .Frontpage__wrapperInner {
-    max-width: $desktop-width;
-    width: 90%;
+    /*max-width: $desktop-width;*/
+    max-width: $largedesktop-width;
+    /*width: 90%;*/
+    width: 100%;
     width: $mobile-width ?if $tablet;
     width: 80% ?if $mobile;
     display: flex;
@@ -52,8 +57,8 @@
     padding-top: $margin-md ?if $tablet;
     padding-bottom: $margin-lg;
     padding-bottom: $margin-md ?if $tablet;
-    padding-left: $margin-xl;
-    padding-left: 0 ?if $tablet;
+    /*padding-left: $margin-xl;*/
+    /*padding-left: 0 ?if $tablet;*/
 }
 
 .Frontpage__contentItem {
@@ -67,13 +72,13 @@
 .Frontpage__sidebar {
     background: white;
     padding-bottom: $margin-lg;
-    padding-bottom: $margin-md ?if $tablet;
+    padding-bottom: 0 ?if $tablet;
     padding-left: $margin-xl;
     padding-left: 0 ?if $tablet;
     padding-top: $margin-lg;
     padding-top: 0 ?if $tablet;
     width: 100% ?if $tablet;
-    width: calc($spacer * 28);
+    width: calc($spacer * 31);
 }
 
 .Frontpage__sidebarItem {

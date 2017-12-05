@@ -8,10 +8,16 @@
     height: 0;
     overflow: hidden;
     padding-top: calc(2.5 / 4 * 100%);
+    background-color: #gray-dark;
 }
 
 .PlaceholderPromo--sm {
-    padding-top: calc(0.5 / 4 * 100%);
+    padding-top: calc(0.6 / 4 * 100%);
+    padding-top: calc(2.5 / 4 * 100%) ?if $tablet;
+}
+
+.PlaceholderPromo--lg {
+    padding-top: calc(0.7 / 4 * 100%);
     padding-top: calc(2.5 / 4 * 100%) ?if $tablet;
 }
 

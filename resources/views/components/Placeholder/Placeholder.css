@@ -4,9 +4,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: $height-xl;
     border: 1px dashed $gray;
     opacity: $opacity-lg;
+    height: calc($spacer * 12);
 }
 
 .Placeholder:hover {
@@ -14,11 +14,11 @@
 }
 
 .Placeholder--lg {
-    height: $height-xxxl;
+    height: calc($spacer * 20);
 }
 
 .Placeholder--xl {
-    height: calc($spacer * 50);
+    height: calc($spacer * 35);
 }
 
     .Placeholder__title {
