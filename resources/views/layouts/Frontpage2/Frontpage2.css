@@ -79,6 +79,16 @@
 
 /* Bottom */
 
+.Frontpage__bottom0 {
+    background: $gray-lighter;
+    padding-top: $margin-lg;
+    padding-top: $margin-md ?if $tablet;
+    padding-bottom: $margin-lg;
+    padding-bottom: $margin-md ?if $tablet;
+    margin-bottom: $margin-lg;
+    margin-bottom: $margin-md ?if $tablet;
+}
+
 .Frontpage__bottom1 {
     padding-bottom: $margin-lg;
     padding-bottom: $margin-md ?if $tablet;

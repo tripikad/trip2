@@ -16,7 +16,7 @@ $gap = isset($gap) ? 'calc('.$gap.' * 12px)' : '0';
     
     @foreach ($items as $item)
 
-        <div class="Grid__item">
+        <div class="ExperimentGrid__item">
 
             {!! $item !!}
 

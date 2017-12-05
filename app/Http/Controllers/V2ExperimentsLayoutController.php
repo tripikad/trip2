@@ -147,6 +147,7 @@ class V2ExperimentsLayoutController extends Controller
         $buysells = Content::getLatestItems('buysell', 4);
         $expats = Content::getLatestItems('expat', 4);
         $miscs = Content::getLatestItems('misc', 4);
+        $news = Content::getLatestItems('news', 4);
 
         return layout('Frontpage2')
 
@@ -209,13 +210,28 @@ class V2ExperimentsLayoutController extends Controller
             ->with('content', collect())
             ->with('sidebar', collect())
 
-            ->with('bottom1', collect()
-
+            ->with('bottom0', collect()
                 ->push(component('ExperimentGrid')
                     ->with('rows', '20% 40% 40%')
-                    ->with('gap', '3')
+                    ->with('gap', '4')
                     ->with('items', collect()
-                        ->push(region('ForumAbout'))
+                        ->push(collect()
+                            ->push(component('Title')
+                                ->is('gray')
+                                ->with('title', 'Foorum')
+                            )
+                            ->push('&nbsp;')
+                            ->push(component('Body')
+                                ->is('gray')
+                                ->with('body', 'Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi. Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi.')
+                            )
+                            ->push('&nbsp;')
+                            ->push(component('PlaceholderPromo')
+                                ->with('title', 'SIDEBAR_SMALL')
+                            )
+                            ->render()
+                            ->implode('')
+                        )
                         ->push(component('Block')
                             ->with('title', trans('General forum'))
                             ->with('content', $forums->map(function ($forum) {
@@ -228,7 +244,7 @@ class V2ExperimentsLayoutController extends Controller
                                 return region('ForumRow', $buysell);
                             }))
                         )
-                        ->push(component('Placeholder'))
+                        ->push('')
                         ->push(component('Block')
                             ->with('title', trans('Expat'))
                             ->with('content', $expats->map(function ($expat) {
@@ -243,9 +259,14 @@ class V2ExperimentsLayoutController extends Controller
                         )
                     )
                 )
+            )
 
-                ->push(component('Placeholder')
-                    ->with('title', 'Bottom1, part 2')
+            ->with('bottom1', collect()
+                ->push(component('ExperimentGrid')
+                    ->with('gap', '2')
+                    ->with('items', $news->map(function ($new) {
+                        return region('NewsCard', $new);
+                    }))
                 )
                 ->push(component('Placeholder')
                     ->with('title', 'Bottom1, part 2')

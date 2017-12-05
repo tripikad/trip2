@@ -4,3 +4,11 @@
     display: grid;
     display: block ?if $tablet;
 }
+
+.ExperimentGrid__item {
+    margin-bottom: $margin-md ?if $tablet;
+}
+
+.ExperimentGrid__item:last-child {
+    margin-bottom: 0;
+}

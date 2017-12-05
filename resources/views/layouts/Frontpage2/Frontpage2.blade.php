@@ -11,6 +11,7 @@ $head_title = $head_title ?? ''; // ?
 $top = $top ? collect($top) : collect();
 $content = $content ? collect($content) : collect();
 $sidebar = $sidebar ? collect($sidebar) : collect();
+$bottom0 = isset($bottom0) ? collect($bottom0) : collect();
 $bottom1 = isset($bottom1) ? collect($bottom1) : collect();
 $bottom2 = isset($bottom2) ? collect($bottom2) : collect();
 $bottom3 = isset($bottom3) ? collect($bottom3) : collect();
@@ -103,6 +104,24 @@ $footer = $footer ?? '';
     </div>
 
 </div>
+
+<section class="Frontpage__bottom0">
+
+    <div class="container">
+
+        @foreach ($bottom0 as $bottom0_item)
+        
+            <div class="Frontpage__bottom0Item">
+
+                {!! $bottom0_item !!}
+                    
+            </div>
+                
+        @endforeach
+
+    </div>
+    
+</section>
 
 <section class="Frontpage__bottom1">
 
