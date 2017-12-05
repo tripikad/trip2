@@ -10,12 +10,14 @@
     padding-top: calc(2.5 / 4 * 100%);
 }
 
-.PlaceholderPromo--body {
+.PlaceholderPromo--sm {
     padding-top: calc(0.5 / 4 * 100%);
+    padding-top: calc(2.5 / 4 * 100%) ?if $tablet;
 }
 
-.PlaceholderPromo--large {
+.PlaceholderPromo--xl {
     padding-top: calc(4 / 3 * 100%);
+    padding-top: calc(2.5 / 4 * 100%) ?if $tablet;
 }
 
     .PlaceholderPromo .PlaceholderPromo__title {

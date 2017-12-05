@@ -13,8 +13,12 @@
     background: $pink;
 }
 
-.Placeholder--large {
+.Placeholder--lg {
     height: $height-xxxl;
+}
+
+.Placeholder--xl {
+    height: calc($spacer * 50);
 }
 
     .Placeholder__title {
