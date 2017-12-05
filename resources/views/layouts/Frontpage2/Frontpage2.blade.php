@@ -64,37 +64,41 @@ $footer = $footer ?? '';
 
 @section('content')
 
-<div class="Frontpage__wrapperOuter">
+<div class="Frontpage_outerContainer">
 
-    <div class="Frontpage__wrapperInner">
+    <div class="container">
 
-        <main class="Frontpage__content">
+        <div class="Frontpage__innerContainer">
 
-            @foreach ($content as $content_item)
-            
-            <div class="Frontpage__contentItem">
+            <main class="Frontpage__content">
 
-                {!! $content_item !!}
-                    
-            </div>
+                @foreach ($content as $content_item)
+                
+                <div class="Frontpage__contentItem">
 
-            @endforeach
-
-        </main>
-
-        <aside class="Frontpage__sidebar">
-
-            @foreach ($sidebar as $sidebar_item)
+                    {!! $content_item !!}
                         
-            <div class="Frontpage__sidebarItem">
+                </div>
 
-                {!! $sidebar_item !!}
-                    
-            </div>
+                @endforeach
 
-            @endforeach
+            </main>
 
-        </aside>
+            <aside class="Frontpage__sidebar">
+
+                @foreach ($sidebar as $sidebar_item)
+                            
+                <div class="Frontpage__sidebarItem">
+
+                    {!! $sidebar_item !!}
+                        
+                </div>
+
+                @endforeach
+
+            </aside>
+
+        </div>
 
     </div>
 

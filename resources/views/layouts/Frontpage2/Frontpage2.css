@@ -13,7 +13,7 @@
     margin-top: calc($spacer * -3);
     /*padding: 0 $margin-xxl $margin-lg $margin-xxl;*/
     /*padding: 0 0 $margin-md 0 ?if $tablet;*/
-    padding-bottom: $margin-lg ?if $tablet;
+    padding-bottom: $margin-lg;
     padding-bottom: $margin-md ?if $tablet;
     max-width: $largedesktop-width;
     /*max-width: $desktop-width;*/
@@ -23,30 +23,23 @@
 }
 
 .Frontpage__topItem {
-    margin-bottom: $margin-md;
+    margin-bottom: $margin-lg;
 }
 
 .Frontpage__topItem:last-child {
     margin-bottom: 0;
 }
 
-.Frontpage__wrapperOuter {
+.Frontpage__outerContainer {
     background: $white;
     display: flex;
     justify-content: center;
     position: relative;
 }
 
-.Frontpage__wrapperInner {
-    /*max-width: $desktop-width;*/
-    max-width: $largedesktop-width;
-    /*width: 90%;*/
-    width: 100%;
-    width: $mobile-width ?if $tablet;
-    width: 80% ?if $mobile;
+.Frontpage__innerContainer {
     display: flex;
     display: block ?if $tablet;
-    background: $white;
 }
 
 .Frontpage__content {
@@ -72,7 +65,7 @@
 .Frontpage__sidebar {
     background: white;
     padding-bottom: $margin-lg;
-    padding-bottom: 0 ?if $tablet;
+    padding-bottom: $margin-md ?if $tablet;
     padding-left: $margin-xl;
     padding-left: 0 ?if $tablet;
     padding-top: $margin-lg;
@@ -92,8 +85,9 @@
 /* Bottom */
 
 .Frontpage__bottom1 {
-    padding: $margin-lg $margin-xxl;
-    padding: $margin-md 0 ?if $tablet;
+    /*padding: $margin-lg $margin-xxl;*/
+    padding-bottom: $margin-lg;
+    padding-bottom: $margin-md ?if $tablet;
 }
 
 .Frontpage__bottom1Item {
@@ -106,8 +100,9 @@
 
 .Frontpage__bottom3 {
     background: $gray-lighter;
-    padding: $margin-lg $margin-xxl;
-    padding: $margin-md 0 ?if $tablet;
+    /*padding: $margin-lg $margin-xxl;*/
+    padding: $margin-md;
+    padding-bottom: $margin-md ?if $tablet;
 }
 
 .Frontpage__bottom3Item {
