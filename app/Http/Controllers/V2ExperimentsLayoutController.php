@@ -158,6 +158,7 @@ class V2ExperimentsLayoutController extends Controller
             )
 
             ->with('content', collect()
+
                 ->push(component('Placeholder')
                     ->is('xl')
                     ->with('title', 'Content1')
