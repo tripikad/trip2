@@ -54,7 +54,12 @@ $narrow = $narrow ?? false;
 
 @section('content')
 
-<div class="Two__contentOuterContainer">
+<div class="
+    Two__contentOuterContainer
+    @if($sidebar->isEmpty())
+        Two--noSidebar
+    @endif
+">
 
     <div class="container">
 
@@ -74,6 +79,8 @@ $narrow = $narrow ?? false;
 
             </main>
 
+            @if($sidebar->isNotEmpty())
+
             <aside class="Two__sidebar">
 
                 @foreach ($sidebar as $sidebar_item)
@@ -87,6 +94,8 @@ $narrow = $narrow ?? false;
                 @endforeach
 
             </aside>
+
+            @endif
 
         </div>
 

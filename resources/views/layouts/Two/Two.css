@@ -20,16 +20,26 @@
     display: block ?if $tablet;
 }
 
+.Two--noSidebar .Two__contentInnerContainer {
+    justify-content: center;
+} 
+
 .Two__content {
     background: $white;
     position: relative;
     width: 100%;
-    padding-top: $margin-lg;
-    padding-top: $margin-md ?if $tablet;
-    padding-bottom: $margin-lg;
-    padding-bottom: $margin-md ?if $tablet;
+    padding-top: $margin-xl;
+    padding-top: $margin-lg ?if $tablet;
+    padding-bottom: $margin-xl;
+    padding-bottom: $margin-lg ?if $tablet;
     padding-left: $margin-xl;
     padding-left: 0 ?if $tablet;
+}
+
+.Two--noSidebar .Two__content {
+    width: $tablet-width;
+    width: 100% ?if $tablet;
+    padding-left: 0;
 }
 
 .Two__contentItem {
@@ -49,7 +59,7 @@
     padding-top: $margin-lg;
     padding-top: 0 ?if $tablet;
     width: 100% ?if $tablet;
-    width: calc($spacer * 31);
+    width: calc($spacer * 32);
 }
 
 .Two__sidebarItem {
