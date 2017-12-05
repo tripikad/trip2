@@ -148,7 +148,8 @@ class V2ExperimentsLayoutController extends Controller
         $buysells = Content::getLatestItems('buysell', 4);
         $expats = Content::getLatestItems('expat', 4);
         $miscs = Content::getLatestItems('misc', 4);
-        $news = Content::getLatestItems('news', 4);
+        $news = Content::getLatestItems('news', 7);
+        $photos = Content::getLatestItems('photo', 9);
 
         return layout('Frontpage2')
 
@@ -173,7 +174,40 @@ class V2ExperimentsLayoutController extends Controller
                         ->with('route', route('flight.index'))
                     ))
                 )
+                ->push('&nbsp;')
                 ->push(region('FrontpageAbout'))
+                ->push('&nbsp;')
+                ->push(component('ExperimentGrid')
+                    ->with('cols', '50% 25% 25%')
+                    ->with('gap', 2)
+                    ->with('items', collect()
+                        ->push(region('NewsCard', $news->first()))
+                        ->push(component('ExperimentGrid')
+                            ->with('gap', 1.5)
+                            ->with('cols', '100%%')
+                            ->with('items', $news->take(2)->map(function ($new) {
+                                return region('NewsCard', $new);
+                            }))
+                        )
+                        ->push(collect()
+                            ->push(component('Title')
+                                ->is('gray')
+                                ->with('title', 'Foorum')
+                            )
+                            ->push('&nbsp;')
+                            ->push(component('Body')
+                                ->is('gray')
+                                ->with('body', 'Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi. Eesti suurim reisifoorum. Küsi siin oma küsimus või jaga häid soovitusi.')
+                            )
+                            ->push('&nbsp;')
+                            ->push(component('PlaceholderPromo')
+                                ->with('title', 'SIDEBAR_SMALL')
+                            )
+                            ->render()
+                            ->implode('')
+                        )
+                    )
+                )
             )
 
             ->with('content', collect()
@@ -215,7 +249,7 @@ class V2ExperimentsLayoutController extends Controller
 
             ->with('bottom0', collect()
                 ->push(component('ExperimentGrid')
-                    ->with('rows', '20% 40% 40%')
+                    ->with('cols', '20% 40% 40%')
                     ->with('gap', '4')
                     ->with('items', collect()
                         ->push(collect()
@@ -267,7 +301,7 @@ class V2ExperimentsLayoutController extends Controller
             ->with('bottom1', collect()
                 ->push(component('ExperimentGrid')
                     ->with('gap', '2')
-                    ->with('items', $news->map(function ($new) {
+                    ->with('items', $news->take(4)->map(function ($new) {
                         return region('NewsCard', $new);
                     }))
                 )
@@ -276,10 +310,10 @@ class V2ExperimentsLayoutController extends Controller
                 )
             )
 
+            ->with('bottom1', collect())
+            
             ->with('bottom2', collect()
-                ->push(component('Placeholder')
-                    ->with('title', 'Bottom2')
-                )
+                ->push(region('PhotoRow', $photos))
             )
 
             ->with('bottom3', collect()

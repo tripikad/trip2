@@ -85,8 +85,6 @@
     padding-top: $margin-md ?if $tablet;
     padding-bottom: $margin-lg;
     padding-bottom: $margin-md ?if $tablet;
-    margin-bottom: $margin-lg;
-    margin-bottom: $margin-md ?if $tablet;
 }
 
 .Frontpage__bottom1 {
