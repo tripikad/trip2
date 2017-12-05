@@ -311,7 +311,7 @@ class V2ExperimentsLayoutController extends Controller
             )
 
             ->with('bottom1', collect())
-            
+
             ->with('bottom2', collect()
                 ->push(region('PhotoRow', $photos))
             )
