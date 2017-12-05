@@ -8,6 +8,7 @@ $color = $color ?? '';
 $background = $background ?? '';
 $header = $header ?? '';
 $top = isset($top) ? collect($top) : collect();
+$sidebar_top = isset($sidebar_top) ? collect($sidebar_top) : collect();
 $content = isset($content) ? collect($content) : collect();
 $sidebar = isset($sidebar) ? collect($sidebar) : collect();
 $bottom = isset($bottom) ? collect($bottom) : collect();
@@ -79,19 +80,37 @@ $narrow = $narrow ?? false;
 
             </main>
 
-            @if($sidebar->isNotEmpty())
+            @if($sidebar_top->isNotEmpty() || $sidebar->isNotEmpty())
 
             <aside class="Two__sidebar">
 
-                @foreach ($sidebar as $sidebar_item)
-                            
-                <div class="Two__sidebarItem">
+                <div class="Two__sidebarTop">
 
-                    {!! $sidebar_item !!}
-                        
-                </div>
+                @foreach ($sidebar_top as $sidebar_top_item)
+                
+                    <div class="Two__sidebarItem">
+
+                        {!! $sidebar_top_item !!}
+                            
+                    </div>
 
                 @endforeach
+
+                </div>
+
+                <div class="Two__sidebarBottom">
+
+                @foreach ($sidebar as $sidebar_item)
+                            
+                    <div class="Two__sidebarItem">
+
+                        {!! $sidebar_item !!}
+                            
+                    </div>
+
+                @endforeach
+
+                </div>
 
             </aside>
 

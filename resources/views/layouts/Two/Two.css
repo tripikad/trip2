@@ -58,6 +58,10 @@
     width: calc($spacer * 32);
 }
 
+.Two__sidebar > .Two__sidebarTop {
+    margin-bottom: $margin-md;
+}
+
 .Two__sidebarItem {
     margin-bottom: $margin-md;
 }
