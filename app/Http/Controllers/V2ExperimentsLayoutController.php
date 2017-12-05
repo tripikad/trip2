@@ -127,6 +127,10 @@ class V2ExperimentsLayoutController extends Controller
 
             ->with('bottom', collect()
                 ->push(component('Placeholder')->with('title', 'Bottom'))
+                ->push(component('PlaceholderPromo')
+                    ->is('lg')
+                    ->with('title', 'FOOTER')
+                )
             )
 
             ->with('footer', region('Footer'))
