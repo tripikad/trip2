@@ -2,7 +2,7 @@
 
 $items = collect($items) ?? collect();
 $rows = $rows ?? 'repeat('.$items->count().', 1fr)';
-$gap = 'calc('.$gap.' * 12px)' ?? '0';
+$gap = isset($gap) ? 'calc('.$gap.' * 12px)' : '0';
 
 @endphp
 
