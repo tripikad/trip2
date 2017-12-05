@@ -69,7 +69,7 @@
     padding-top: $margin-lg;
     padding-top: 0 ?if $tablet;
     width: 100% ?if $tablet;
-    width: calc($spacer * 32);
+    width: calc($spacer * 33);
 }
 
 .Frontpage__sidebarItem {

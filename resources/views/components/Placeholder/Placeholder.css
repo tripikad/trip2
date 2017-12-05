@@ -22,6 +22,6 @@
 }
 
     .Placeholder__title {
-        font: $font-text-md;
+        font: $font-code-md;
         color: $gray-dark;
     }

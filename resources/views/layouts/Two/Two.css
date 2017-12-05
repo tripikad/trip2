@@ -28,8 +28,13 @@
     padding-top: $margin-lg ?if $tablet;
     padding-bottom: $margin-xl;
     padding-bottom: $margin-lg ?if $tablet;
-    padding-left: $margin-xl;
-    padding-left: 0 ?if $tablet;
+}
+
+
+.Two__content > .Two__sidebarTop {
+    display: none;
+    display: block ?if $tablet;
+    margin-bottom: $margin-md;
 }
 
 .Two--noSidebar .Two__content {
@@ -40,6 +45,8 @@
 
 .Two__contentItem {
     margin-bottom: $margin-md;
+    padding-left: $margin-xl;
+    padding-left: 0 ?if $tablet;
 }
 
 .Two__contentItem:last-child {
@@ -55,7 +62,13 @@
     padding-top: $margin-xl;
     padding-top: 0 ?if $tablet;
     width: 100% ?if $tablet;
-    width: calc($spacer * 32);
+    width: calc($spacer * 33);
+}
+
+.Two__sidebar > .Two__sidebarTop {
+    display: block;
+    display: none ?if $tablet;
+    margin-bottom: $margin-md;
 }
 
 .Two__sidebarItem {
@@ -70,6 +83,14 @@
     background: $gray-lighter;
     padding: $padding-lg 0;
     padding: $padding-md 0 ?if $tablet;
+}
+
+.Two__bottomItem {
+    margin-bottom: $margin-md;
+}
+
+.Two__bottomItem:last-child {
+    margin-bottom: 0;
 }
 
 .Two__footer {

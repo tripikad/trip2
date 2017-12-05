@@ -104,13 +104,14 @@ class V2ExperimentsLayoutController extends Controller
                 )
             )
 
-            ->with('sidebar', collect()
+            ->with('sidebar_top', collect()
                 ->push(region('FlightAbout'))
-                //->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('PlaceholderPromo')
                     ->with('title', 'SIDEBAR_SMALL')
                 )
-                //->push(component('Promo')->with('promo', 'sidebar_large'))
+            )
+
+            ->with('sidebar', collect()
                 ->push(component('Placeholder')
                     ->is('lg')
                     ->with('title', 'Sidebar1')
