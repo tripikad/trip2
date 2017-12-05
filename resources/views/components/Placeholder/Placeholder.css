@@ -7,18 +7,17 @@
     height: $height-xl;
     border: 1px dashed $gray;
     opacity: $opacity-lg;
+}
+
+.Placeholder:hover {
     background: $pink;
+}
+
+.Placeholder--large {
+    height: $height-xxxl;
 }
 
     .Placeholder__title {
         font: $font-text-md;
         color: $gray-dark;
-    }
-
-.Placeholder--ad {
-    background: $gray-dark;
-}
-
-    .Placeholder--ad .Placeholder__title {
-        color: $white;
     }

@@ -1,0 +1,32 @@
+@import "variables";
+
+.PlaceholderPromo {
+    height: $height-xl;
+    opacity: $opacity-lg;
+    background: $gray-dark;
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    padding-top: calc(2.5 / 4 * 100%);
+}
+
+.PlaceholderPromo--body {
+    padding-top: calc(0.5 / 4 * 100%);
+}
+
+.PlaceholderPromo--large {
+    padding-top: calc(4 / 3 * 100%);
+}
+
+    .PlaceholderPromo .PlaceholderPromo__title {
+        color: $white;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        font: $font-text-md;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }

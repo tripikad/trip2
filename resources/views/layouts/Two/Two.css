@@ -54,7 +54,7 @@
     padding-top: $margin-lg;
     padding-top: 0 ?if $tablet;
     width: 100% ?if $tablet;
-    width: calc($spacer * 28);
+    width: calc($spacer * 30);
 }
 
 .Two__sidebarItem {
