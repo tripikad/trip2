@@ -143,6 +143,7 @@ class V2ExperimentsLayoutController extends Controller
 
     public function indexFrontpage()
     {
+        $flights = Content::getLatestItems('flight', 4);
         $forums = Content::getLatestItems('forum', 4);
         $buysells = Content::getLatestItems('buysell', 4);
         $expats = Content::getLatestItems('expat', 4);
@@ -155,12 +156,14 @@ class V2ExperimentsLayoutController extends Controller
 
             ->with('top', collect()
                 ->push(component('ExperimentGrid')
-                    ->with('items', collect()
-                        ->push(component('Placeholder')->is('lg'))
-                        ->push(component('Placeholder')->is('lg'))
-                        ->push(component('Placeholder')->is('lg'))
-                        ->push(component('Placeholder')->is('lg'))
-                    )
+                    ->with('items', $flights->map(function ($flight, $index) {
+                        return region(
+                            'DestinationBar',
+                            $flight->destinations()->first(),
+                            ['purple', 'yellow', 'red', 'orange'][$index]
+                        ).
+                        region('FlightCard', $flight);
+                    }))
                 )
                 ->push(component('BlockHorizontal')
                     ->is('center')
