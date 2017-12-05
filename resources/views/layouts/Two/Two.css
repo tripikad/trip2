@@ -4,10 +4,6 @@
     position: relative;
 }
 
-.Two__top {
-    background: $gray-light;
-}
-
 .Two__contentOuterContainer {
     background: $white;
     display: flex;
@@ -56,7 +52,7 @@
     padding-bottom: $margin-md ?if $tablet;
     padding-left: $margin-xl;
     padding-left: 0 ?if $tablet;
-    padding-top: $margin-lg;
+    padding-top: $margin-xl;
     padding-top: 0 ?if $tablet;
     width: 100% ?if $tablet;
     width: calc($spacer * 32);
