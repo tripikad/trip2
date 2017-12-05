@@ -1,0 +1,6 @@
+@import "variables";
+
+.ExperimentGrid {
+    display: grid;
+    display: block ?if $tablet;
+}

@@ -221,7 +221,7 @@ $box-shadow-bottom: 0 0 $padding-md 0 rgba(0, 0, 0, 0.1);
 /* Media queries */
 $mobile-width: 22em;
 $mobile-large-width: 32em;
-$tablet-width: 46em; /* was 56em; */
+$tablet-width: 48em; /* was 56em; */
 $desktop-width: 62em;
 $largedesktop-width: 74em;
 

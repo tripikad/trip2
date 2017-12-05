@@ -1,6 +1,6 @@
 @php
 
-$title = $title ?? '';
+$title = $title ?? 'Placeholder';
 
 @endphp
 

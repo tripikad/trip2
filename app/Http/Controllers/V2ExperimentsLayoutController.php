@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Content;
+
 class V2ExperimentsLayoutController extends Controller
 {
     public function indexOne()
@@ -141,6 +143,11 @@ class V2ExperimentsLayoutController extends Controller
 
     public function indexFrontpage()
     {
+        $forums = Content::getLatestItems('forum', 4);
+        $buysells = Content::getLatestItems('buysell', 4);
+        $expats = Content::getLatestItems('expat', 4);
+        $miscs = Content::getLatestItems('misc', 4);
+
         return layout('Frontpage2')
 
             ->with('header', region('FrontpageHeader', collect()))
@@ -195,7 +202,44 @@ class V2ExperimentsLayoutController extends Controller
                 )
             )
 
+            ->with('content', collect())
+            ->with('sidebar', collect())
+
             ->with('bottom1', collect()
+
+                ->push(component('ExperimentGrid')
+                    ->with('rows', '20% 40% 40%')
+                    ->with('gap', '3')
+                    ->with('items', collect()
+                        ->push(region('ForumAbout'))
+                        ->push(component('Block')
+                            ->with('title', trans('General forum'))
+                            ->with('content', $forums->map(function ($forum) {
+                                return region('ForumRow', $forum);
+                            }))
+                        )
+                        ->push(component('Block')
+                            ->with('title', trans('Buysell'))
+                            ->with('content', $buysells->map(function ($buysell) {
+                                return region('ForumRow', $buysell);
+                            }))
+                        )
+                        ->push(component('Placeholder'))
+                        ->push(component('Block')
+                            ->with('title', trans('Expat'))
+                            ->with('content', $expats->map(function ($expat) {
+                                return region('ForumRow', $expat);
+                            }))
+                        )
+                        ->push(component('Block')
+                            ->with('title', trans('Misc'))
+                            ->with('content', $miscs->map(function ($misc) {
+                                return region('ForumRow', $misc);
+                            }))
+                        )
+                    )
+                )
+
                 ->push(component('Placeholder')
                     ->with('title', 'Bottom1, part 2')
                 )
