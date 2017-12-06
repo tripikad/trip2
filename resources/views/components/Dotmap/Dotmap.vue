@@ -11,7 +11,8 @@
                     :cx="xScale(dot.lon)"
                     :cy="yScale(dot.lat)"
                     :r="radius"
-                    fill="gray"
+                    fill="black"
+                    :opacity="opacity"
                 />
 
             </g>
@@ -31,7 +32,8 @@
         props: {
             isclasses: { default: '' },
             dots: { default: [] },
-            width: { default: 750 }
+            width: { default: 750 },
+            opacity: { default: 0.5 }
         },
 
         computed: {

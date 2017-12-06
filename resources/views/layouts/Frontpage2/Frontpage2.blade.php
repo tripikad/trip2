@@ -9,8 +9,8 @@ $background = $background ?? '';
 $header = $header ?? '';
 $head_title = $head_title ?? ''; // ?
 $top = $top ? collect($top) : collect();
-$content = $content ? collect($content) : collect();
-$sidebar = $sidebar ? collect($sidebar) : collect();
+$content = isset($content) ? collect($content) : collect();
+$sidebar = isset($sidebar) ? collect($sidebar) : collect();
 $bottom0 = isset($bottom0) ? collect($bottom0) : collect();
 $bottom1 = isset($bottom1) ? collect($bottom1) : collect();
 $bottom2 = isset($bottom2) ? collect($bottom2) : collect();
@@ -65,6 +65,8 @@ $footer = $footer ?? '';
 
 @section('content')
 
+{{--
+
 <div class="Frontpage_outerContainer">
 
     <div class="container">
@@ -105,15 +107,35 @@ $footer = $footer ?? '';
 
 </div>
 
-<section class="Frontpage__bottom0">
+--}}
+
+<section class="Frontpage__contentA">
 
     <div class="container">
 
-        @foreach ($bottom0 as $bottom0_item)
+        @foreach ($contentA as $contentA_item)
         
-            <div class="Frontpage__bottom0Item">
+            <div class="Frontpage__contentAItem">
 
-                {!! $bottom0_item !!}
+                {!! $contentA_item !!}
+                    
+            </div>
+                
+        @endforeach
+
+    </div>
+    
+</section>
+
+<section class="Frontpage__contentB">
+
+    <div class="container">
+
+        @foreach ($contentB as $contentB_item)
+        
+            <div class="Frontpage__contentBItem">
+
+                {!! $contentB_item !!}
                     
             </div>
                 
