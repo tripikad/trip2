@@ -168,8 +168,7 @@ class V2ExperimentsLayoutController extends Controller
                             ->with('opacity', 0.5)
                             ->with('height', 18)
                             ->with('background', $flight->imagePreset('medium'))
-                            ->with('title', $flight->vars()->title)
-                        ;
+                            ->with('title', $flight->vars()->title);
                     }))
                 )
                 ->push(component('BlockHorizontal')
@@ -182,7 +181,7 @@ class V2ExperimentsLayoutController extends Controller
                 )
                 ->push(component('Dotmap')
                     ->with('dots', config('dots'))
-                    ->with('opacity',0.3)
+                    ->with('opacity', 0.3)
                     ->with('width', 500)
                 )
                 ->push(component('Title')
@@ -191,7 +190,6 @@ class V2ExperimentsLayoutController extends Controller
                     ->with('title', 'Trip.ee on Eesti vanim ja suurim reisikogukond.')
                 )
             )
-
 
             ->with('contentA', collect()
                 ->push(component('ExperimentGrid')
