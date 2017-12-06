@@ -165,8 +165,8 @@ class V2ExperimentsLayoutController extends Controller
                         )
                         .component('ExperimentCard')
                             ->is('center')
-                            ->with('opacity', 0.5)
-                            ->with('height', 18)
+                            ->with('opacity', 0.4)
+                            ->with('height', 16)
                             ->with('background', $flight->imagePreset('medium'))
                             ->with('title', $flight->vars()->title);
                     }))
