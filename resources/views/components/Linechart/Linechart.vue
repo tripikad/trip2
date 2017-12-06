@@ -4,6 +4,28 @@
 
         <svg :width="width" :height="height">
 
+            <!-- X Axis -->
+
+            <line
+                :x1="0"
+                :y1="height"
+                :x2="width"
+                :y2="height"
+                stroke="rgba(0,0,0,0.2)"
+            />
+
+            <!-- Y Axis -->
+
+            <line
+                :x1="0"
+                :y1="0"
+                :x2="0"
+                :y2="height"
+                stroke="rgba(0,0,0,0.2)"
+            />
+            
+            <!-- Line graphs -->
+
             <path
                 v-for="(item, index) in items"
                 fill="none"
@@ -12,6 +34,8 @@
                 :d="line(item.values)"
                 :opacity="1 - (index * 0.4)"
             />
+
+            <!-- Vertical cursor -->
 
             <line
                 v-show="currentIndex"
@@ -24,17 +48,7 @@
                 @mouseenter="currentIndex = index"
             />
 
-            <!--line
-                v-for="(value, index) in items[0].values"
-                :x1="xScale(index)"
-                :y1="0"
-                :x2="xScale(index)"
-                :y2="height"
-                stroke="rgba(0,0,0,0)"
-                stroke-width="12"
-                @mouseenter="currentIndex = index"
-                @mouseleave="currentIndex = false"
-            /-->
+            <!-- Hover hotspots to enable vertical cursor -->
 
             <rect
                 v-for="(value, index) in items[0].values"
@@ -47,20 +61,7 @@
                 @mouseleave="currentIndex = false"
             />
 
-            <line
-                :x1="0"
-                :y1="0"
-                :x2="0"
-                :y2="height"
-                stroke="hsl(204, 6%, 55%)"
-            />
-            <line
-                :x1="0"
-                :y1="height"
-                :x2="width"
-                :y2="height"
-                stroke="hsl(204, 6%, 55%)"
-            />
+            <!-- Legend --> 
 
             <g
                 v-for="(line, index) in legend"
