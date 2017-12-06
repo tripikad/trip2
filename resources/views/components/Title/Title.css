@@ -53,14 +53,6 @@ a .Title__title:hover {
     color: $gray-hover;
 }
 
-.Title--gray-light .Title__title {
-    color: $gray-light;
-}
-
-.Title--gray-light a .Title__title:hover {
-    color: $gray-light-hover;
-}
-
 .Title--blue .Title__title {
     color: $blue;
 }
