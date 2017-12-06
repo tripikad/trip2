@@ -140,5 +140,4 @@ class V2ExperimentsLayoutController extends Controller
 
             ->render();
     }
-
 }
