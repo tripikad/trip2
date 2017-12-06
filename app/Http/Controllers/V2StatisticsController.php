@@ -92,7 +92,7 @@ class V2StatisticsController extends Controller
                 // TODO: Replace with ->pad() in Laravel 5.5
                 ->put('values', array_pad($values->all(), 12, 0))
                 ->put('title', Carbon::now()
-                    // map() starts with 0 so we instantly get
+                    // map() starts with 0, so it means
                     // 0 - this year
                     // 1 - previous year
                     // ...etc
@@ -117,10 +117,8 @@ class V2StatisticsController extends Controller
                     'created_at',
                     $year - 1 == 0 ? [
                         Carbon::now()->startOfYear(),
-                        // We subtract one week so we will be
-                        // not get caught on issues with
-                        // weeks starting with Sunday
-                        Carbon::now()->subWeek(1)->endOfWeek(),
+                        // We subtract one week
+                        Carbon::now()->subWeek(2)->startOfWeek(),
                     ] : [
                         Carbon::now()->subYears($year - 1)->startOfYear(),
                         Carbon::now()->subYears($year - 1)->endOfYear(),
