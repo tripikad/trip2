@@ -140,4 +140,25 @@ class V2ExperimentsLayoutController extends Controller
 
             ->render();
     }
+
+    public function indexGrid()
+    {
+        $photos = Content::getLatestItems('photo', 4);
+
+        return layout('Two')
+            ->with('content', collect()
+                ->push(component('ExperimentalGrid')
+                    ->is('debug')
+                    ->with('cols', '1fr 2fr')
+                    ->with('gap', 1)
+                    ->with('items', $photos->map(function($photo) {
+                        return component('ExperimentalCard')
+                            ->with('title', $photo->vars()->shortTitle)
+                            ->with('background', $photo->imagePreset('medium'))
+                        ;
+                    }))
+                )
+            )
+            ->render();
+    }
 }

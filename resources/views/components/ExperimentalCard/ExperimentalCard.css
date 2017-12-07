@@ -1,0 +1,39 @@
+@import "variables";
+
+.ExperimentalCard {
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+    .ExperimentalCard__wrapper {
+        padding: $padding-md;
+        padding: $padding-xl ?if $mobile;
+        display: flex;
+        align-items: flex-end;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+.ExperimentalCard--center .ExperimentalCard__wrapper {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+    .ExperimentalCard__title {
+        color: $white;
+        font: $font-heading-md;
+        text-shadow: $text-shadow-md;
+    }
+
+    .ExperimentalCard__title:hover {
+        color: $white-hover;
+    }
+
+    .ExperimentalCard--large .ExperimentalCard__title {
+        font: $font-heading-xl;
+        ffont: $font-heading-lg ?if $tablet;
+    }
