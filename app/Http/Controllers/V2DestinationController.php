@@ -29,7 +29,7 @@ class V2DestinationController extends Controller
 
         $loggedUser = request()->user();
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('head_description', trans('site.description.destination', [
                 'name' => $destination->vars()->name,
@@ -97,7 +97,7 @@ class V2DestinationController extends Controller
     {
         $destination = Destination::findOrFail($id);
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('Header', collect()
                 ->push(component('EditorScript'))

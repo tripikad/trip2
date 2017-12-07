@@ -11,7 +11,7 @@ class V2ExperimentsController extends Controller
     {
         $user = auth()->user();
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('content', collect()
 
@@ -51,7 +51,7 @@ class V2ExperimentsController extends Controller
     {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('content', collect()
 
@@ -99,7 +99,7 @@ class V2ExperimentsController extends Controller
 
     public function mapIndex()
     {
-        return layout('1col')
+        return layout('Two')
 
             ->with('content', collect()
                 ->push(component('Dotmap')
@@ -112,7 +112,7 @@ class V2ExperimentsController extends Controller
 
     public function fontsIndex()
     {
-        return layout('1col')
+        return layout('Two')
 
             ->with('content', collect()
                 ->push(component('ExperimentalFont'))

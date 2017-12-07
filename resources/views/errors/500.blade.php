@@ -1,4 +1,4 @@
-@include('layouts.1col', collect()
+@include('layouts.Two.Two', collect()
     ->put('header', region('StaticHeader', collect()
         ->push(component('Title')
             ->is('red')

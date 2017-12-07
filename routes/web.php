@@ -399,6 +399,12 @@ Route::get('experiments/fonts', 'V2ExperimentsController@fontsIndex')
 Route::get('experiments/map', 'V2ExperimentsController@mapIndex')
     ->name('experiments.map.index');
 
+Route::get('experiments/one', 'V2ExperimentsLayoutController@indexOne')
+    ->name('experiments.layouts.one');
+
+Route::get('experiments/two', 'V2ExperimentsLayoutController@indexTwo')
+    ->name('experiments.layouts.two');
+
 // V1
 
 // Registration
