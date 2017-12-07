@@ -6,7 +6,7 @@
     }
 
     .Grid__item {
-        flex: 1;
+        --flex: 1;
     }
 
     .Grid__row .Grid__item:last-child {

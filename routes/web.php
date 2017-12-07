@@ -408,6 +408,9 @@ Route::get('experiments/two', 'V2ExperimentsLayoutController@indexTwo')
 Route::get('experiments/grid', 'V2ExperimentsLayoutController@indexGrid')
     ->name('experiments.layouts.grid');
 
+Route::get('experiments/frontpage', 'V2ExperimentsLayoutController@indexFrontpage')
+    ->name('experiments.layouts.frontpage');
+
 // V1
 
 // Registration

@@ -4,7 +4,8 @@ $background = $background ?? '';
 $route = $route ?? '';
 $title = $title ?? '';
 $height = $height ?? 15;
-$opacity = $opacity ?? 0.3
+$opacity = $opacity ?? 0.3;
+
 @endphp
 
 <div class="ExperimentalCard {{ $isclasses }}" 
@@ -19,15 +20,15 @@ $opacity = $opacity ?? 0.3
 
     <a href="{{ $route }}">
 
-    <div class="ExperimentalCard__wrapper">
+        <div class="ExperimentalCard__wrapper">
 
-    <h3 class="ExperimentalCard__title">
+            <h3 class="ExperimentalCard__title">
 
-        {{ $title }}
+                {{ $title }}
 
-    </h3>
+            </h3>
 
-    </div>
+        </div>
 
     </a>
 

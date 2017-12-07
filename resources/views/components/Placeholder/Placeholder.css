@@ -6,7 +6,6 @@
     justify-content: center;
     border: 1px dashed $gray;
     opacity: $opacity-lg;
-    height: calc($spacer * 12);
 }
 
 .Placeholder:hover {
@@ -22,6 +21,6 @@
 }
 
     .Placeholder__title {
-        font: $font-code-md;
+        font: $font-text-md;
         color: $gray-dark;
     }

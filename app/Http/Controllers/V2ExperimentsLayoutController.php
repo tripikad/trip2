@@ -179,4 +179,61 @@ class V2ExperimentsLayoutController extends Controller
             )
             ->render();
     }
+
+    public function indexFrontpage()
+    {
+        $contentA = collect()
+            ->push(component('Grid')
+                ->with('items', collect()
+                    ->push(component('Placeholder')->with('title', 'Offer'))
+                    ->push(component('Placeholder')->with('title', 'Offer'))
+                    ->push(component('Placeholder')->with('title', 'Offer'))
+                )
+            )
+            ->push('<br>')
+            ->push(component('Grid')
+                ->with('widths', '1 3 1')
+                ->with('items', collect()
+                    ->push('')
+                    ->push(component('Placeholder')
+                        ->with('title', 'More offers')
+                        ->with('height', 3)
+                    )
+                    ->push('')
+                )
+            )
+            ->push('<br><br><br>')
+            ->push(component('Grid')
+                ->is('gutter')
+                ->with('widths', '4 1')
+                ->with('items', collect()
+                    ->push(component('Placeholder')
+                        ->with('title', 'About')
+                    )
+                    ->push(component('Placeholder')
+                        ->with('title', 'Register')
+                    )
+                )
+            )
+        ;
+
+        $contentB = collect()
+            ->push(component('Grid')
+                ->with('items', collect()
+                    ->push(component('Placeholder')->with('title', 'News'))
+                    ->push(component('Placeholder')->with('title', 'News'))
+                    ->push(component('Placeholder')->with('title', 'News'))
+                )
+            )
+        ;
+
+        return layout('Frontpage2')
+
+            ->with('header', region('FrontpageHeader', collect()))
+
+            ->with('contentA', $contentA)
+            ->with('contentB', $contentB)
+
+            ->render();
+    }
 }

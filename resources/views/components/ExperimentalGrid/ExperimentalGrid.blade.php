@@ -1,8 +1,8 @@
 @php
 
 $items = collect($items) ?? collect();
-$cols = $cols ?? 'repeat('.$items->count().', 1fr)';
-$rows = $rows ?? 'repeat('.$items->count().', auto)';
+$widths = $widths ?? 'repeat('.$items->count().', 1fr)';
+$heights = $heights ?? 'repeat('.$items->count().', auto)';
 $gap = isset($gap) ? 'calc('.$gap.' * 12px)' : '0';
 
 @endphp
@@ -10,8 +10,8 @@ $gap = isset($gap) ? 'calc('.$gap.' * 12px)' : '0';
 <div
     class="ExperimentalGrid {{ $isclasses }}"
     style="
-        grid-template-columns: {{ $cols }};
-        grid-template-rows: {{ $rows }};
+        grid-template-columns: {{ $widths }};
+        grid-template-rows: {{ $heights }};
         grid-gap: {{ $gap }}
     "
 >

@@ -8,6 +8,14 @@
   width: 80% ?if $mobile;
 }
 
+.container-narrow {
+  margin: 0 auto;
+  max-width: $tablet-width;
+  width: 90%;
+  width: $mobile-width ?if $tablet;
+  width: 80% ?if $mobile;
+}
+
 .row {
   display: flex;
   display: block ?if $mobile;
