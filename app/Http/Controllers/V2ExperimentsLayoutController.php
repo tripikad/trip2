@@ -150,21 +150,19 @@ class V2ExperimentsLayoutController extends Controller
                 ->push(component('Title')->is('small')->with('title', 'Flexbox grid'))
                 ->push(component('Grid')
                     ->with('cols', 2)
-                    ->with('items', $photos->take(4)->map(function($photo) {
+                    ->with('items', $photos->take(4)->map(function ($photo) {
                         return component('ExperimentalCard')
                             ->with('title', $photo->vars()->shortTitle)
-                            ->with('background', $photo->imagePreset('medium'))
-                        ;
+                            ->with('background', $photo->imagePreset('medium'));
                     }))
                 )
                 ->push(component('Title')->is('small')->with('title', 'Flexbox grid II'))
                 ->push(component('Grid')
                     ->is('gutter')
-                    ->with('items', $photos->take(6)->map(function($photo) {
+                    ->with('items', $photos->take(6)->map(function ($photo) {
                         return component('ExperimentalCard')
                             ->with('title', $photo->vars()->shortTitle)
-                            ->with('background', $photo->imagePreset('medium'))
-                        ;
+                            ->with('background', $photo->imagePreset('medium'));
                     }))
                 )
                 ->push(component('Title')->is('small')->with('title', 'CSS grid'))
@@ -172,11 +170,10 @@ class V2ExperimentsLayoutController extends Controller
                     ->is('debug')
                     ->with('cols', '1fr 2fr')
                     ->with('gap', 1)
-                    ->with('items', $photos->map(function($photo) {
+                    ->with('items', $photos->map(function ($photo) {
                         return component('ExperimentalCard')
                             ->with('title', $photo->vars()->shortTitle)
-                            ->with('background', $photo->imagePreset('medium'))
-                        ;
+                            ->with('background', $photo->imagePreset('medium'));
                     }))
                 )
             )
