@@ -1,72 +1,72 @@
 @import "variables";
 
-    .FontExperiment__label {
+    .ExperimentalFont__label {
         font-family: monospace;
         margin-bottom: $margin-sm;
-        color: $gray-light;
+        color: $gray;
     }
 
-    .FontExperiment__text:hover {
+    .ExperimentalFont__text:hover {
         background: yellow;
     }
 
-    .FontExperiment__text {
+    .ExperimentalFont__text {
         margin-bottom: $margin-lg;
     }
 
-    .FontExperiment__textxs {
+    .ExperimentalFont__textxs {
         font: $font-text-xs;
     }
 
-    .FontExperiment__textsm {
+    .ExperimentalFont__textsm {
         font: $font-text-sm;
     }
 
-    .FontExperiment__textmd {
+    .ExperimentalFont__textmd {
         font: $font-text-md;
     }
 
-    .FontExperiment__textlg {
+    .ExperimentalFont__textlg {
         font: $font-text-lg;
     }
 
-    .FontExperiment__heading {
+    .ExperimentalFont__heading {
         margin-bottom: $margin-lg;
     }
 
-    .FontExperiment__heading:hover {
+    .ExperimentalFont__heading:hover {
         background: yellow;
     }
 
-    .FontExperiment__headingxs {
+    .ExperimentalFont__headingxs {
         font: $font-heading-xs;
     }
 
-    .FontExperiment__headingsm {
+    .ExperimentalFont__headingsm {
         font: $font-heading-sm;
     }
 
-    .FontExperiment__headingmd {
+    .ExperimentalFont__headingmd {
         font: $font-heading-md;
     }
 
-    .FontExperiment__headinglg {
+    .ExperimentalFont__headinglg {
         font: $font-heading-lg;
     }
 
-    .FontExperiment__headingxl {
+    .ExperimentalFont__headingxl {
         font: $font-heading-xl;
     }
 
-    .FontExperiment__headingxxl {
+    .ExperimentalFont__headingxxl {
         font: $font-heading-xxl;
     }
 
-    .FontExperiment__headingxxxl {
+    .ExperimentalFont__headingxxxl {
         font: $font-heading-xxxl;
     }
 
-    .FontExperiment__button {
+    .ExperimentalFont__button {
         border: 1px solid black;
         border-radius: 100px;
         padding: 0 0.5em;
