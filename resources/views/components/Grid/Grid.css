@@ -9,10 +9,6 @@
         --flex: 1;
     }
 
-    .Grid__row .Grid__item:last-child {
-        display: none ?if $tablet-large;
-    }
-
     .Grid--gutter .Grid__row {
         margin-bottom: $margin-sm;
     }
