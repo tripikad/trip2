@@ -6,7 +6,7 @@ class FrontpageFlight
 {
     public function render($flights)
     {
-        return component('Grid3')->with('items', $flights
+        return component('Grid')->with('items', $flights
             ->map(function ($flight, $index) {
                 $destination = $flight->destinations->first();
 
