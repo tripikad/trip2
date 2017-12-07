@@ -186,7 +186,7 @@ class V2ExperimentsLayoutController extends Controller
 
         $contentA = collect()
             ->push(component('Grid')
-                ->with('items', $flights->take(3)->map(function($flight) {
+                ->with('items', $flights->take(3)->map(function ($flight) {
                     return component('Placeholder')
                         ->with('title', $flight->vars()->title);
                 }))
@@ -243,8 +243,7 @@ class V2ExperimentsLayoutController extends Controller
                 ->is('lg')
                 ->with('title', 'FOOTER')
             )
-            ->push('<br><br>')
-        ;
+            ->push('<br><br>');
 
         return layout('Frontpage2')
 
