@@ -125,7 +125,7 @@ class PollController extends Controller
             $items[] = $this->getActionsComponent($item);
         }
 
-        return layout('2col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
 
@@ -282,7 +282,7 @@ class PollController extends Controller
             $fields = $this->makeFieldsFromOldQuizRequest();
         }
 
-        return layout('1col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
                 ->with('color', 'gray')
 
@@ -673,7 +673,7 @@ class PollController extends Controller
             );
         }
 
-        return layout('1col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
                 ->with('color', 'gray')
 
@@ -732,7 +732,7 @@ class PollController extends Controller
             }
         }
 
-        return layout('1col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
                 ->with('color', 'gray')
 
@@ -914,7 +914,7 @@ class PollController extends Controller
             $dest_name = $dests->first()->name;
         }
 
-        return layout('1col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
                 ->with('color', 'gray')
 
@@ -1077,7 +1077,7 @@ class PollController extends Controller
                 ->route('frontpage.index');
         }
 
-        return layout('1col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
                 ->with('color', 'gray')
 
