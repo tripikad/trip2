@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Cache;
+use App\Poll;
 use App\Image;
 use App\Content;
 use App\Destination;
@@ -25,17 +26,28 @@ class V2FrontpageController extends Controller
             return Destination::select('id', 'name', 'slug')->get();
         });
 
-        return layout('frontpage')
+        $layout = layout('frontpage');
+
+        $quiz = Poll::getUnansweredQuizOrQuestionnaire();
+
+        if ($quiz->isNotEmpty()) {
+            $quiz = $quiz->first();
+            $route = $loggedUser ? route('quiz.answer', ['slug' => $quiz->content->slug]) : route('login.form');
+            $layout->with('promobar', component('PromoBar')
+                ->with('title', trans('frontpage.index.poll.promo', ['title' => $quiz->name]))
+                ->with('route_title', trans('frontpage.index.poll.promo.route'))
+                ->with('route', $route)
+            );
+        }
+
+        $poll_info = Poll::getPollInfoWoDestination();
+
+        return $layout
 
             ->with('title', trans('site.about'))
             ->with('head_title', trans('site.about'))
             ->with('head_description', trans('site.description.main'))
             ->with('head_image', Image::getSocial())
-
-            /*->with('promobar', component('PromoBar')
-                ->with('title', "Kui vaatad Trippi telefonis ja Chrome'iga, siis võib leht katki olla. Proovi ajutiselt Firefoxi")
-                ->render()
-             )*/
 
             ->with('header', region('FrontpageHeader', $destinations))
 
@@ -106,6 +118,34 @@ class V2FrontpageController extends Controller
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffHotelscombined'))
+                ->when($poll_info->isNotEmpty(), function ($collection) use ($poll_info, $loggedUser) {
+                    return $collection->push(component('Block')
+                        ->is('gray')
+                        ->with('content', collect()
+                            ->push(component('Title')
+                                ->with('title', $poll_info['options']['question'])
+                                ->is('small')
+                            )
+                            ->push(component('PollAnswer')
+                                ->with('options', $poll_info['options'])
+                                ->with('type', $poll_info['type'])
+                                ->with('id', $poll_info['id'])
+                                ->with('results', $poll_info['results'])
+                                ->with('image_small', $poll_info['image_small'])
+                                ->with('image_large', $poll_info['image_large'])
+                                ->with('answer_trans', trans('content.poll.answer'))
+                                ->with('select_error', $poll_info['type'] == 'radio' ?
+                                    trans('content.poll.answer.error.select.one') :
+                                    trans('content.poll.answer.error.select.multiple')
+                                )
+                                ->with('save_error', trans('content.poll.answer.error.save'))
+                                ->with('count_trans', trans('content.poll.answer.count'))
+                                ->with('count', $poll_info['count'])
+                                ->with('user_is_authenticated', $loggedUser ? true : false)
+                            )
+                        )
+                    );
+                })
             )
 
             ->with('bottom1', collect()

@@ -18,7 +18,7 @@
 
         </div>
 
-        <!--div
+        <div
             class="PromoBar__closeIcon"
             @click="close"
         >
@@ -30,7 +30,7 @@
             >
             </component>
 
-        </div-->
+        </div>
 
     </div>
 

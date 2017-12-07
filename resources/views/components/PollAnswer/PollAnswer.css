@@ -1,0 +1,41 @@
+@import "variables";
+
+.PollAnswer {
+}
+
+    .PollAnswer__title {
+        font: $font-heading-sm;
+        color: $gray;
+    }
+    
+    .PollAnswer__error {
+        font: $font-heading-sm;
+        color: $red;
+    }
+
+    .PollAnswer__radio {
+        display: block;
+    }
+
+    .PollAnswer__option {
+        display: flex;
+        align-items:center;
+        margin-right: 0;
+        margin-bottom: $margin-sm;
+    }
+
+    .PollAnswer__input {
+        display: block;
+        margin-right: $margin-xs;
+    }
+
+    .PollAnswer__label {
+        font: $font-heading-sm;
+        color: $gray;
+    }
+
+    .PollAnswer__count {
+        font: $font-text-sm;
+        color: $gray;
+        text-align:center;
+    }

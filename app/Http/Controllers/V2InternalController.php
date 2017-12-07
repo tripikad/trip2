@@ -26,6 +26,10 @@ class V2InternalController extends Controller
             ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Link')
                 ->with('title', trans('menu.admin.content'))
                 ->with('route', route('admin.content.index'))
+            )
+            ->pushWhen($loggedUser && $loggedUser->hasRole('admin'), component('Link')
+                ->with('title', trans('menu.admin.poll'))
+                ->with('route', route('poll.index'))
             );
 
         if ($loggedUser && $loggedUser->hasRole('superuser')) {

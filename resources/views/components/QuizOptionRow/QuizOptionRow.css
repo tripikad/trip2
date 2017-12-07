@@ -1,0 +1,22 @@
+@import "variables";
+
+.QuizOptionRow {
+    align-items: center;
+    font: $font-text-md;
+    line-height: $line-height-md;
+    justify-content: center;
+}
+
+    .QuizOptionRow__label {
+        color: $gray;
+        font: $font-heading-sm;
+        margin-left: $margin-xs;
+    }
+
+.QuizOptionRow--red .QuizOptionRow__label {
+    color: $red;
+}
+
+.QuizOptionRow--green .QuizOptionRow__label {
+    color: $green;
+}

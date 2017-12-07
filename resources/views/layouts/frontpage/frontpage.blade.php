@@ -22,7 +22,9 @@ $footer = $footer ?? '';
 @section('head_description', $head_description)
 @section('head_image', $head_image)
 
-@section('promobar', $promobar)
+@section('promobar')
+    {!! $promobar !!}
+@stop
 
 @section('header')
     {!! $header !!}
