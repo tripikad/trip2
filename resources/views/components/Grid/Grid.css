@@ -5,23 +5,30 @@
         display: block ?if $tablet;
     }
 
-    .Grid__item {
-        --flex: 1;
-    }
-
-    .Grid--gutter .Grid__row {
+    .Grid--gap-1 .Grid__row {
         margin-bottom: $margin-sm;
     }
 
-    .Grid--gutter .Grid__row:last-child {
+    .Grid--gap-2 .Grid__row {
+        margin-bottom: $margin-md;
+    }
+
+    .Grid--gap-1 .Grid__row:last-child,
+    .Grid--gap-2 .Grid__row:last-child {
         margin-bottom: 0;
     }
 
-    .Grid--gutter .Grid__item {
+    .Grid--gap-1 .Grid__item {
         margin-right: $margin-sm;
         margin-right: 0 ?if $tablet;
     }
 
-    .Grid--gutter .Grid__item:last-child {
+    .Grid--gap-2 .Grid__item {
+        margin-right: $margin-md;
+        margin-right: 0 ?if $tablet;
+    }
+
+    .Grid--gap-1 .Grid__item:last-child,
+    .Grid--gap-2 .Grid__item:last-child {
         margin-right: 0;
     }

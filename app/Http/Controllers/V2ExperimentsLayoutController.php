@@ -147,7 +147,10 @@ class V2ExperimentsLayoutController extends Controller
 
         return layout('Two')
             ->with('content', collect()
-                ->push(component('Title')->is('small')->with('title', 'Flexbox grid'))
+                ->push(component('Title')
+                    ->is('small')
+                    ->with('title', 'Flexbox grid')
+                )
                 ->push(component('Grid')
                     ->with('cols', 2)
                     ->with('items', $photos->take(4)->map(function ($photo) {
@@ -156,9 +159,12 @@ class V2ExperimentsLayoutController extends Controller
                             ->with('background', $photo->imagePreset('medium'));
                     }))
                 )
-                ->push(component('Title')->is('small')->with('title', 'Flexbox grid II'))
+                ->push(component('Title')
+                    ->is('small')
+                    ->with('title', 'Flexbox grid II')
+                )
                 ->push(component('Grid')
-                    ->is('gutter')
+                    ->with('gap', 1)
                     ->with('items', $photos->take(6)->map(function ($photo) {
                         return component('ExperimentalCard')
                             ->with('title', $photo->vars()->shortTitle)
@@ -167,8 +173,7 @@ class V2ExperimentsLayoutController extends Controller
                 )
                 ->push(component('Title')->is('small')->with('title', 'CSS grid'))
                 ->push(component('ExperimentalGrid')
-                    ->is('debug')
-                    ->with('cols', '1fr 2fr')
+                    ->with('widths', '1fr 2fr')
                     ->with('gap', 1)
                     ->with('items', $photos->map(function ($photo) {
                         return component('ExperimentalCard')

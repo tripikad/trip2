@@ -2,12 +2,13 @@
 
 $items = collect($items) ?? collect();
 $cols = $cols ?? 3;
+//$gapclass = isset($gap) ? 'Grid--gap--'.$gap : '';
 $widths = isset($widths) ? preg_split('/\s+/', $widths) : array_fill(0, $cols, 1);
 
 @endphp
 
 
-<div class="Grid {{ $isclasses }}">
+<div class="Grid {{ $isclasses }} ">
 
     @foreach ($items->chunk($cols) as $row)
 
@@ -15,7 +16,7 @@ $widths = isset($widths) ? preg_split('/\s+/', $widths) : array_fill(0, $cols, 1
 
             @foreach ($row as $key => $item)
 
-                <div class="Grid__item" style="flex: {{ $widths[$key] }}">
+                <div class="Grid__item" style="flex: 1">
 
                     {!! $item !!}
 
