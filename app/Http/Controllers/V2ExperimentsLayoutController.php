@@ -214,8 +214,7 @@ class V2ExperimentsLayoutController extends Controller
                         ->with('title', 'Register')
                     )
                 )
-            )
-        ;
+            );
 
         $contentB = collect()
             ->push('<br><br><br>')
@@ -225,10 +224,7 @@ class V2ExperimentsLayoutController extends Controller
                     ->push(component('Placeholder')->with('title', 'News'))
                     ->push(component('Placeholder')->with('title', 'News'))
                 )
-            )
-            ->push('<br><br><br>')
-
-        ;
+            );
 
         return layout('Frontpage2')
 
