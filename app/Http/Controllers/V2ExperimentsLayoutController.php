@@ -143,10 +143,31 @@ class V2ExperimentsLayoutController extends Controller
 
     public function indexGrid()
     {
-        $photos = Content::getLatestItems('photo', 4);
+        $photos = Content::getLatestItems('photo', 12);
 
         return layout('Two')
             ->with('content', collect()
+                ->push(component('Title')->is('small')->with('title', 'Flexbox grid'))
+                ->push(component('Grid')
+                    ->with('cols', 2)
+                    ->with('items', $photos->take(4)->map(function($photo) {
+                        return component('ExperimentalCard')
+                            ->with('title', $photo->vars()->shortTitle)
+                            ->with('background', $photo->imagePreset('medium'))
+                        ;
+                    }))
+                )
+                ->push(component('Title')->is('small')->with('title', 'Flexbox grid II'))
+                ->push(component('Grid')
+                    ->is('gutter')
+                    ->with('items', $photos->take(6)->map(function($photo) {
+                        return component('ExperimentalCard')
+                            ->with('title', $photo->vars()->shortTitle)
+                            ->with('background', $photo->imagePreset('medium'))
+                        ;
+                    }))
+                )
+                ->push(component('Title')->is('small')->with('title', 'CSS grid'))
                 ->push(component('ExperimentalGrid')
                     ->is('debug')
                     ->with('cols', '1fr 2fr')
