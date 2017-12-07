@@ -6,6 +6,7 @@
     justify-content: center;
     border: 1px dashed $gray;
     opacity: $opacity-lg;
+    padding: $padding-sm;
 }
 
 .Placeholder:hover {
@@ -23,4 +24,5 @@
     .Placeholder__title {
         font: $font-text-md;
         color: $gray-dark;
+        text-align: center;
     }

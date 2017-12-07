@@ -187,11 +187,8 @@ class V2ExperimentsLayoutController extends Controller
         $contentA = collect()
             ->push(component('Grid')
                 ->with('items', $flights->take(3)->map(function($flight) {
-                    return component('ExperimentalCard')
-                        ->is('responsive')
-                        ->is('center')
-                        ->with('title', $flight->vars()->title)
-                        ->with('background', $flight->imagePreset('medium'));
+                    return component('Placeholder')
+                        ->with('title', $flight->vars()->title);
                 }))
             )
             ->push('<br>')
@@ -221,14 +218,33 @@ class V2ExperimentsLayoutController extends Controller
             );
 
         $contentB = collect()
-            ->push('<br><br><br>')
-            ->push(component('Grid')
-                ->with('items', collect()
-                    ->push(component('Placeholder')->with('title', 'News'))
-                    ->push(component('Placeholder')->with('title', 'News'))
-                    ->push(component('Placeholder')->with('title', 'News'))
-                )
-            );
+            ->push('<br><br>')
+            ->push(component('Placeholder')
+                ->with('height', 20)
+                ->with('title', 'News')
+            )
+            ->push('<br><br>')
+            ->push(component('Placeholder')
+                ->with('height', 30)
+                ->with('title', 'Forum')
+            )
+            ->push('<br><br>')
+            ->push(component('Placeholder')
+                ->with('height', 8)
+                ->with('title', 'Photos')
+            )
+            ->push('<br><br>')
+            ->push(component('Placeholder')
+                ->with('height', 8)
+                ->with('title', 'Travelmates + Blogs')
+            )
+            ->push('<br><br>')
+            ->push(component('PlaceholderPromo')
+                ->is('lg')
+                ->with('title', 'FOOTER')
+            )
+            ->push('<br><br>')
+        ;
 
         return layout('Frontpage2')
 
@@ -236,6 +252,8 @@ class V2ExperimentsLayoutController extends Controller
 
             ->with('contentA', $contentA)
             ->with('contentB', $contentB)
+
+            ->with('footer', region('Footer'))
 
             ->render();
     }

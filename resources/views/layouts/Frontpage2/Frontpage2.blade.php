@@ -31,7 +31,7 @@ $footer = $footer ?? '';
 
     {!! $header !!}
 
-@stop
+@endsection
 
 @section('content')
 
@@ -86,5 +86,11 @@ $footer = $footer ?? '';
         </div>
     
     </div>
+
+@endsection
+
+@section('footer')
+
+    {!! $footer !!}
 
 @stop
