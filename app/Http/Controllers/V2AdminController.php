@@ -12,7 +12,7 @@ class V2AdminController extends Controller
         $user = auth()->user();
         $contents = Content::whereStatus(0)->latest()->simplePaginate(50);
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
@@ -60,7 +60,7 @@ class V2AdminController extends Controller
             ->latest()
             ->simplePaginate(36);
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')

@@ -47,7 +47,7 @@ class V2InternalController extends Controller
             );
         }
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
@@ -84,7 +84,7 @@ class V2InternalController extends Controller
 
         $forum->vars()->update_content_read;
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
@@ -120,7 +120,7 @@ class V2InternalController extends Controller
 
     public function create()
     {
-        return layout('1col')
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
@@ -193,7 +193,7 @@ class V2InternalController extends Controller
     {
         $internal = Content::findOrFail($id);
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')

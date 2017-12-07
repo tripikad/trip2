@@ -25,7 +25,7 @@ class V2TravelmateController extends Controller
         $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $news = Content::getLatestItems('news', 1);
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('title', trans('content.travelmate.index.title'))
             ->with('head_title', trans('content.travelmate.index.title'))
@@ -88,7 +88,7 @@ class V2TravelmateController extends Controller
         $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $news = Content::getLatestItems('news', 1);
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('title', trans('content.travelmate.index.title'))
             ->with('head_title', $travelmate->vars()->title)
@@ -195,9 +195,7 @@ class V2TravelmateController extends Controller
             ]);
         }
 
-        return layout('2col')
-
-            ->with('narrow', true)
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
@@ -299,9 +297,7 @@ class V2TravelmateController extends Controller
             ]);
         }
 
-        return layout('2col')
-
-            ->with('narrow', true)
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')

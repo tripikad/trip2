@@ -15,7 +15,7 @@ class V2StaticController extends Controller
 
         $loggedUser = request()->user();
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('title', $post->vars()->title)
             ->with('head_title', $post->vars()->title)
@@ -54,7 +54,7 @@ class V2StaticController extends Controller
     {
         $static = Content::findOrFail($id);
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('StaticHeader', collect()
                 ->push(component('Title')

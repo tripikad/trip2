@@ -30,7 +30,7 @@ class ResetController extends Controller
     {
         // return view('pages.auth.reset.apply');
 
-        return layout('1colnarrow')
+        return layout('One')
             ->cached(false)
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
@@ -85,7 +85,7 @@ class ResetController extends Controller
 
         // return view('pages.auth.reset.password')->with('token', $token);
 
-        return layout('1colnarrow')
+        return layout('One')
             ->cached(false)
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
