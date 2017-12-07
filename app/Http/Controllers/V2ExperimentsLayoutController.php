@@ -182,13 +182,17 @@ class V2ExperimentsLayoutController extends Controller
 
     public function indexFrontpage()
     {
+        $flights = Content::getLatestItems('flight', 12);
+
         $contentA = collect()
             ->push(component('Grid')
-                ->with('items', collect()
-                    ->push(component('Placeholder')->with('title', 'Offer'))
-                    ->push(component('Placeholder')->with('title', 'Offer'))
-                    ->push(component('Placeholder')->with('title', 'Offer'))
-                )
+                ->with('items', $flights->take(3)->map(function($flight) {
+                    return component('ExperimentalCard')
+                        ->is('responsive')
+                        ->is('center')
+                        ->with('title', $flight->vars()->title)
+                        ->with('background', $flight->imagePreset('medium'));
+                }))
             )
             ->push('<br>')
             ->push(component('Grid')
