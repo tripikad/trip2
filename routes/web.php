@@ -414,6 +414,10 @@ Route::get('image/index', 'V2ImageController@index')
     ->name('image.index')
     ->middleware('role:admin');
 
+Route::get('statistics', 'V2StatisticsController@index')
+    ->name('statistics.index')
+    ->middleware('role:superuser');
+
 // Utils
 
 Route::get('utils/alert', 'V2UtilsController@alert')
