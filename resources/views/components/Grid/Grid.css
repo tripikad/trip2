@@ -23,6 +23,7 @@
 
     .Grid--gutter .Grid__item {
         margin-right: $margin-sm;
+        margin-right: 0 ?if $tablet;
     }
 
     .Grid--gutter .Grid__item:last-child {

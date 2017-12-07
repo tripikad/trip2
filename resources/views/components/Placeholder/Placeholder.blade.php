@@ -1,7 +1,7 @@
 @php
 
 $title = $title ?? 'Placeholder';
-$height = $height ?? 12;
+$height = $height ?? 14;
 
 @endphp
 

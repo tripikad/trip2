@@ -205,7 +205,7 @@ class V2ExperimentsLayoutController extends Controller
             ->push('<br><br><br>')
             ->push(component('Grid')
                 ->is('gutter')
-                ->with('widths', '4 1')
+                ->with('widths', '3 1')
                 ->with('items', collect()
                     ->push(component('Placeholder')
                         ->with('title', 'About')
@@ -218,6 +218,7 @@ class V2ExperimentsLayoutController extends Controller
         ;
 
         $contentB = collect()
+            ->push('<br><br><br>')
             ->push(component('Grid')
                 ->with('items', collect()
                     ->push(component('Placeholder')->with('title', 'News'))
@@ -225,6 +226,8 @@ class V2ExperimentsLayoutController extends Controller
                     ->push(component('Placeholder')->with('title', 'News'))
                 )
             )
+            ->push('<br><br><br>')
+
         ;
 
         return layout('Frontpage2')
