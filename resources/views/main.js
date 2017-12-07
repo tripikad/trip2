@@ -15,6 +15,7 @@ import VueCookie from 'vue-cookie'
 
 import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
+import Barchart from './components/Barchart/Barchart.vue'
 import Editor from './components/Editor/Editor.vue'
 import EditorSmall from './components/EditorSmall/EditorSmall.vue'
 import Dotmap from './components/Dotmap/Dotmap.vue'
@@ -62,6 +63,7 @@ new Vue({
     components: {
         Alert,
         Arc,
+        Barchart,
         Editor,
         EditorSmall,
         Dotmap,
