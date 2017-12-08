@@ -5,30 +5,30 @@
         display: block ?if $tablet;
     }
 
-    .Grid--gap-1 .Grid__row {
+    .Grid--gap1 .Grid__row {
         margin-bottom: $margin-sm;
     }
 
-    .Grid--gap-2 .Grid__row {
+    .Grid--gap2 .Grid__row {
         margin-bottom: $margin-md;
     }
 
-    .Grid--gap-1 .Grid__row:last-child,
-    .Grid--gap-2 .Grid__row:last-child {
+    .Grid--gap1 .Grid__row:last-child,
+    .Grid--gap2 .Grid__row:last-child {
         margin-bottom: 0;
     }
 
-    .Grid--gap-1 .Grid__item {
+    .Grid--gap1 .Grid__item {
         margin-right: $margin-sm;
         margin-right: 0 ?if $tablet;
     }
 
-    .Grid--gap-2 .Grid__item {
+    .Grid--gap2 .Grid__item {
         margin-right: $margin-md;
         margin-right: 0 ?if $tablet;
     }
 
-    .Grid--gap-1 .Grid__item:last-child,
-    .Grid--gap-2 .Grid__item:last-child {
+    .Grid--gap1 .Grid__item:last-child,
+    .Grid--gap2 .Grid__item:last-child {
         margin-right: 0;
     }

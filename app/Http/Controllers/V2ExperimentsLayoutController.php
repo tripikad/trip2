@@ -165,6 +165,7 @@ class V2ExperimentsLayoutController extends Controller
                 )
                 ->push(component('Grid')
                     ->with('gap', 1)
+                    ->with('widths', '1 2 3')
                     ->with('items', $photos->take(6)->map(function ($photo) {
                         return component('ExperimentalCard')
                             ->with('title', $photo->vars()->shortTitle)
