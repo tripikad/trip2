@@ -11,9 +11,19 @@ class V2ExperimentsController extends Controller
     {
         $user = auth()->user();
 
+
         return layout('Two')
 
             ->with('content', collect()
+
+                ->push(component('Title')
+                    ->with('title', 'Code')
+                )
+
+                ->push(component('Code')
+                    ->is('gray')
+                    ->with('code',"Hello\nworld")
+                )
 
                 ->push(component('Title')
                     ->with('title', 'Small editor')

@@ -1,0 +1,15 @@
+@import "variables";
+
+.Code {
+    white-space: pre-wrap;
+    word-wrap: normal;
+    line-height: $line-height-md;
+    color: $gray;
+    font-family: $font-family-code;
+    font-size: $font-size-sm;
+}
+
+    .Code--gray {
+        background: $gray-light;
+        padding: calc($spacer * 1.5);
+    }
