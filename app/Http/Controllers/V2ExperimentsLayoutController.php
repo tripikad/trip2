@@ -143,7 +143,7 @@ class V2ExperimentsLayoutController extends Controller
 
     public function indexGrid()
     {
-        $photos = Content::getLatestItems('photo', 12);
+        $photos = Content::getLatestItems('photo', 6);
 
         return layout('Two')
             ->with('content', collect()
@@ -151,6 +151,12 @@ class V2ExperimentsLayoutController extends Controller
                     ->is('small')
                     ->with('title', 'Flexbox grid')
                 )
+                ->push(component('Code')
+                    ->is('gray')
+                    ->with('code', "component('Grid')
+    ->with('cols', 2) // Default is 3
+    ->with('items', \$photos->take(4)->...)"
+                ))
                 ->push(component('Grid')
                     ->with('cols', 2)
                     ->with('items', $photos->take(4)->map(function ($photo) {
@@ -163,19 +169,33 @@ class V2ExperimentsLayoutController extends Controller
                     ->is('small')
                     ->with('title', 'Flexbox grid II')
                 )
+                ->push(component('Code')
+                    ->is('gray')
+                    ->with('code', "component('Grid')
+    ->with('gap', 1) // \$spacer * 1 || 2
+    ->with('widths', '2 3 2') // maps to flex:2, flex:3, flex:2 on columns
+    ->with('items', \$photos->take(6)->...)"
+                ))
                 ->push(component('Grid')
                     ->with('gap', 1)
-                    ->with('widths', '1 2 3')
+                    ->with('widths', '2 3 2')
                     ->with('items', $photos->take(6)->map(function ($photo) {
                         return component('ExperimentalCard')
-                            ->with('title', $photo->vars()->shortTitle)
                             ->with('background', $photo->imagePreset('medium'));
                     }))
                 )
                 ->push(component('Title')->is('small')->with('title', 'CSS grid'))
+                ->push(component('Body')->with('body', 'Only supported in <a href="https://caniuse.com/css-grid">latest browsers</a>'))
+                ->push(component('Code')
+                    ->is('gray')
+                    ->with('code', "component('Grid')
+    ->with('gap', 1) // \$spacer * anything
+    ->with('widths', '2fr 3fr 2fr') // maps to grid-template-columns
+    ->with('items', \$photos->take(6)->...)"
+                ))
                 ->push(component('ExperimentalGrid')
-                    ->with('widths', '1fr 2fr')
                     ->with('gap', 1)
+                    ->with('widths', '1fr 2fr')
                     ->with('items', $photos->map(function ($photo) {
                         return component('ExperimentalCard')
                             ->with('title', $photo->vars()->shortTitle)
