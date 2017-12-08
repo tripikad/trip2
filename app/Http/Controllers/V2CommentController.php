@@ -53,7 +53,7 @@ class V2CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('StaticHeader', collect()
                 ->push(component('Title')

@@ -1,0 +1,18 @@
+@import "variables";
+
+.ExperimentalGrid {
+    display: grid;
+    display: block ?if $tablet;
+}
+
+.ExperimentalGrid__item {
+    margin-bottom: $margin-md ?if $tablet;
+}
+
+.ExperimentalGrid__item:last-child {
+    margin-bottom: 0;
+}
+
+.ExperimentalGrid--debug .ExperimentalGrid__item {
+    border: 1px solid $red;
+}

@@ -1,0 +1,28 @@
+@import "variables";
+
+.Placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed $gray;
+    opacity: $opacity-lg;
+    padding: $padding-sm;
+}
+
+.Placeholder:hover {
+    background: $pink;
+}
+
+.Placeholder--lg {
+    height: calc($spacer * 20);
+}
+
+.Placeholder--xl {
+    height: calc($spacer * 35);
+}
+
+    .Placeholder__title {
+        font: $font-text-md;
+        color: $gray-dark;
+        text-align: center;
+    }

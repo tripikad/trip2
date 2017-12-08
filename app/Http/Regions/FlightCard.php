@@ -9,6 +9,7 @@ class FlightCard
         return component('FlightCard')
             ->with('route', route('flight.show', [$post->slug]))
             ->with('background', $post->imagePreset('large'))
-            ->with('title', $post->vars()->title);
+            ->with('title', $post->vars()->title)
+            ->with('shorttitle', $post->vars()->shortTitle);
     }
 }

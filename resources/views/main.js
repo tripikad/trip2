@@ -2,6 +2,7 @@
 
 require.context('./styles', true, /\.css$/)
 require.context('./components', true, /\.css$/)
+require.context('./layouts', true, /\.css$/)
 
 // Require SVG files
 
@@ -35,6 +36,7 @@ import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import ImagePicker from './components/ImagePicker/ImagePicker.vue'
 import ImageUpload from './components/ImageUpload/ImageUpload.vue'
+import Linechart from './components/Linechart/Linechart.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 import NavbarSearch from './components/NavbarSearch/NavbarSearch.vue'
@@ -78,6 +80,7 @@ new Vue({
         IconLoader,
         ImagePicker,
         ImageUpload,
+        Linechart,
         NavbarDesktop,
         NavbarMobile,
         NavbarSearch,

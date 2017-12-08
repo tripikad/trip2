@@ -10,6 +10,9 @@ module.exports = {
         main: "./resources/views/main.js",
         vendor: [
             "codemirror",
+            "d3-array",
+            "d3-scale",
+            "d3-shape",
             "dropzone",
             "pell",
             "vue",
