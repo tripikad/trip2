@@ -140,4 +140,126 @@ class V2ExperimentsLayoutController extends Controller
 
             ->render();
     }
+
+    public function indexGrid()
+    {
+        $photos = Content::getLatestItems('photo', 12);
+
+        return layout('Two')
+            ->with('content', collect()
+                ->push(component('Title')
+                    ->is('small')
+                    ->with('title', 'Flexbox grid')
+                )
+                ->push(component('Grid')
+                    ->with('cols', 2)
+                    ->with('items', $photos->take(4)->map(function ($photo) {
+                        return component('ExperimentalCard')
+                            ->with('title', $photo->vars()->shortTitle)
+                            ->with('background', $photo->imagePreset('medium'));
+                    }))
+                )
+                ->push(component('Title')
+                    ->is('small')
+                    ->with('title', 'Flexbox grid II')
+                )
+                ->push(component('Grid')
+                    ->with('gap', 1)
+                    ->with('widths', '1 2 3')
+                    ->with('items', $photos->take(6)->map(function ($photo) {
+                        return component('ExperimentalCard')
+                            ->with('title', $photo->vars()->shortTitle)
+                            ->with('background', $photo->imagePreset('medium'));
+                    }))
+                )
+                ->push(component('Title')->is('small')->with('title', 'CSS grid'))
+                ->push(component('ExperimentalGrid')
+                    ->with('widths', '1fr 2fr')
+                    ->with('gap', 1)
+                    ->with('items', $photos->map(function ($photo) {
+                        return component('ExperimentalCard')
+                            ->with('title', $photo->vars()->shortTitle)
+                            ->with('background', $photo->imagePreset('medium'));
+                    }))
+                )
+            )
+            ->render();
+    }
+
+    public function indexFrontpage()
+    {
+        $flights = Content::getLatestItems('flight', 12);
+
+        $contentA = collect()
+            ->push(component('Grid')
+                ->with('items', $flights->take(3)->map(function ($flight) {
+                    return component('Placeholder')
+                        ->with('title', $flight->vars()->title);
+                }))
+            )
+            ->push('<br>')
+            ->push(component('Grid')
+                ->with('widths', '1 3 1')
+                ->with('items', collect()
+                    ->push('')
+                    ->push(component('Placeholder')
+                        ->with('title', 'More offers')
+                        ->with('height', 3)
+                    )
+                    ->push('')
+                )
+            )
+            ->push('<br><br><br>')
+            ->push(component('Grid')
+                ->is('gutter')
+                ->with('widths', '3 1')
+                ->with('items', collect()
+                    ->push(component('Placeholder')
+                        ->with('title', 'About')
+                    )
+                    ->push(component('Placeholder')
+                        ->with('title', 'Register')
+                    )
+                )
+            );
+
+        $contentB = collect()
+            ->push('<br><br>')
+            ->push(component('Placeholder')
+                ->with('height', 20)
+                ->with('title', 'News')
+            )
+            ->push('<br><br>')
+            ->push(component('Placeholder')
+                ->with('height', 30)
+                ->with('title', 'Forum')
+            )
+            ->push('<br><br>')
+            ->push(component('Placeholder')
+                ->with('height', 8)
+                ->with('title', 'Photos')
+            )
+            ->push('<br><br>')
+            ->push(component('Placeholder')
+                ->with('height', 8)
+                ->with('title', 'Travelmates + Blogs')
+            )
+            ->push('<br><br>')
+            ->push(component('PlaceholderPromo')
+                ->is('lg')
+                ->with('title', 'FOOTER')
+            )
+            ->push('<br><br>');
+
+        return layout('Frontpage2')
+
+            ->with('header', region('FrontpageHeader', collect()))
+
+            ->with('contentA', $contentA)
+            ->with('contentB', $contentB)
+
+            ->with('footer', region('Footer'))
+
+            ->render();
+    }
 }

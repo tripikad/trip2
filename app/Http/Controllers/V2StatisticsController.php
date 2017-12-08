@@ -11,7 +11,7 @@ class V2StatisticsController extends Controller
 {
     public function index()
     {
-        return layout('1col')
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
 
