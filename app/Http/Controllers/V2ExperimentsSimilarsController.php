@@ -229,8 +229,9 @@ C;
              </div>
             <br>
             <b>$content->title</b>
-            <br>
-            <br>
+            <br><br>
+            <b>$content->id</b>
+            <br><br>
             $body
             <br>
             <br>

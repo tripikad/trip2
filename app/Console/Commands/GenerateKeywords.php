@@ -92,7 +92,6 @@ class GenerateKeywords extends Command
             ->values();
 
         if ($keywords) {
-            // $this->line($keywords->toJSON(JSON_PRETTY_PRINT));
             $content['meta->keywords'] = $keywords;
             $content->timestamps = false;
             $content->save();
