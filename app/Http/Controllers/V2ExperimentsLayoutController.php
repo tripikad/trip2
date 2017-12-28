@@ -188,7 +188,7 @@ class V2ExperimentsLayoutController extends Controller
                 ->push(component('Body')->with('body', 'Only supported in <a href="https://caniuse.com/css-grid">latest browsers</a>'))
                 ->push(component('Code')
                     ->is('gray')
-                    ->with('code', "component('Grid')
+                    ->with('code', "component('ExperimentalGrid')
     ->with('gap', 1) // \$spacer * anything
     ->with('widths', '2fr 3fr 2fr') // maps to grid-template-columns
     ->with('items', \$photos->take(6)->...)"
