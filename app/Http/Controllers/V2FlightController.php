@@ -103,6 +103,8 @@ class V2FlightController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
+        $similarForums = $flight->vars()->similars('forum');
+
         return layout('Two')
 
             ->with('title', trans('content.flight.index.title'))
@@ -186,6 +188,15 @@ class V2FlightController extends Controller
                 ->push(region('FlightAbout'))
                 ->push(region('FlightNewsletterSubscribe'))
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->pushWhen(
+                    $similarForums && $loggedUser && $loggedUser->hasRole('admin'),
+                    component('Block')
+                        ->with('title', trans('frontpage.index.forum.title'))
+                        ->with('route', route('forum.index'))
+                        ->with('content', $similarForums->map(function ($forum) {
+                            return region('ForumRow', $forum);
+                        }))
+                )
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffiliateSearch'))
                 ->push(component('AffRentalcars'))

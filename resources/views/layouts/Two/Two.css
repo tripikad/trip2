@@ -62,7 +62,7 @@
     padding-top: $margin-xl;
     padding-top: 0 ?if $tablet;
     width: 100% ?if $tablet;
-    width: calc($spacer * 33);
+    width: calc($spacer * 35);
 }
 
 .Two__sidebar > .Two__sidebarTop {

@@ -16,12 +16,13 @@ class V2ExperimentsController extends Controller
             ->with('content', collect()
 
                 ->push(component('Title')
-                    ->with('title', 'Code')
+                    ->with('title', 'Related content')
                 )
 
-                ->push(component('Code')
-                    ->is('gray')
-                    ->with('code', "Hello\nworld")
+                ->push(component('Link')
+                    ->with('title', 'Similars')
+                    ->with('route', route('experiments.similars'))
+                    ->is('blue')
                 )
 
                 ->push(component('Title')
