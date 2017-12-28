@@ -70,7 +70,11 @@ class GenerateSimilars extends Command
 
         $count = 0;
 
-        Content::orderBy('updated_at', 'desc')->whereNotIn('id', [$sourceContent->id])
+        // We iterate over the content latest modified, going back in time
+        // until we hit config('similars.totalsize') / env('SIMILARS_TOTAL_SIZE')
+
+        Content::orderBy('updated_at', 'desc')
+            ->whereNotIn('id', [$sourceContent->id])
             ->whereType($type)
             ->chunk($chunkSize, function ($targetContentChunk) use ($sourceContent, &$similars, &$count, $chunkCount) {
                 $targetContentChunk->each(
@@ -85,12 +89,18 @@ class GenerateSimilars extends Command
                     }
                 );
 
+                // We only accept the results that exceed
+                // minimal baseline score
+
                 $similars = $similars->filter(function ($s) {
                     return $s['score'] >= 0.3;
                 })
                 ->take(3);
 
                 $count++;
+
+                // We take the next chunk until we have
+                // at least three similar content items
 
                 if ($similars->count() >= 3 || $count >= $chunkCount) {
                     return false;
@@ -120,6 +130,10 @@ class GenerateSimilars extends Command
                 return $keyword['score'] >= 0.35;
             })
             ->keyBy('name');
+
+        // We find similar content by intersecting the source
+        // and target content keywords. If there is an overlap,
+        // we have similar content
 
         $similar = $sourceKeywords->keys()
             ->intersect($targetKeywords->keys())
@@ -151,6 +165,8 @@ class GenerateSimilars extends Command
         })
         ->count();
 
+        // We prefer destination matches over topic matches
+        
         $scoreMap = [
         //   destinations
         //   0   1   2+

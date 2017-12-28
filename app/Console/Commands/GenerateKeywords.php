@@ -93,9 +93,6 @@ class GenerateKeywords extends Command
             ->pipe(function ($keywords) {
                 return $this->getParentKeywords($keywords);
             })
-            ->pipe(function ($keywords) {
-                return $this->cleanupKeywords($keywords);
-            })
             ->values();
 
         if ($keywords) {
@@ -182,9 +179,14 @@ class GenerateKeywords extends Command
     protected function getKeywords($tokens)
     {
         return $tokens
+            // Get all the tokens that have matches
             ->filter(function ($token) {
                 return array_key_exists('match', $token);
             })
+            // Based on the location of the match assign
+            // the score. The ealier the keyword match is in
+            // the text, the higher it is scored. The decay
+            // is nonlinear, see calculateDecay() function
             ->map(function ($token, $index) use ($tokens) {
                 $token['score'] = $this->calculateDecay($index, $tokens->count() - 1);
 
@@ -199,7 +201,7 @@ class GenerateKeywords extends Command
                     // Score is the highest score among
                     // all keyword ocurrences in text
                     // TODO: Consider also the number of occurrences:
-                    //   'countScore' => min([$tokens->count() * 0.34, 1])
+                    // 'countScore' => min([$tokens->count() * 0.34, 1])
                     'score' => $tokens->max(function ($token) {
                         return $token['score'];
                     }),
@@ -225,8 +227,7 @@ class GenerateKeywords extends Command
                 ->map(function ($destination) {
                     return [
                         'name' => $destination->name,
-                        //'score' => ($destination->depth + 1) * 0.33,
-                        'score' => 1,
+                        'score' => ($destination->depth + 1) * 0.33,
                         'type' => 'destination',
                         'manual' => true,
                     ];
@@ -262,19 +263,6 @@ class GenerateKeywords extends Command
         return $parents->isNotEmpty() ? $keywords->merge($parents) : $keywords;
     }
 
-    protected function cleanupKeywords($keywords)
-    {
-        return $keywords
-            //->sortByDesc('score')
-            //->unique('name')
-            //->keyBy('name')
-            // ->map(function($keyword) {
-            //     unset($keyword['name']);
-            //     return $keyword;
-            // })
-;
-    }
-
     public function calculateDecay($value, $sourceMax, $floor = 0.1, $ceil = 0.9)
     {
         $scaledSourceValue = $this->scale($value, 0, $sourceMax, 0, 1);
@@ -284,6 +272,8 @@ class GenerateKeywords extends Command
         return round($scaledTargetValue, 3);
     }
 
+    // Misc utils
+    
     public function scale($value, $sourceMin, $sourceMax, $targetMin, $targetMax)
     {
         // See https://stats.stackexchange.com/a/70808
