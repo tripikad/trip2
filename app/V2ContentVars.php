@@ -134,7 +134,9 @@ class V2ContentVars
 
     public function similars($type)
     {
-        if (array_key_exists('similars', $this->content->meta)) {
+        if ($this->content->meta
+            && array_key_exists('similars', $this->content->meta)
+        ) {
             $ids = collect($this->content->meta['similars'][$type])
                 ->map(function ($item) {
                     return $item['items'][0]['id'];
