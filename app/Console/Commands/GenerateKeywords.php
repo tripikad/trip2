@@ -47,6 +47,13 @@ class GenerateKeywords extends Command
 
         $this->info("Generating keywords\n");
 
+        // We iterate over the content latest modified, going back in time
+        // until we hit config('similars.totalsize') / env('SIMILARS_TOTAL_SIZE') 
+
+        // This order suits the best for forum* content types but it's also 
+        // OK for news and flights where created_at and updated_at
+        // timestaps are usually same (or differ just a little)
+
         Content::orderBy('updated_at', 'desc')->chunk($chunkSize, function ($content) use (&$count, $chunkCount, $progress) {
             $content->each(function ($content) use ($progress) {
                 $this->generateKeywords($content);
@@ -100,6 +107,11 @@ class GenerateKeywords extends Command
 
     protected function getTokens($text)
     {
+        // We tokenize the content title and body
+        // by first replacing all the punctuation
+        // with spaces and then split the string into
+        // array by space
+
         $pattern = "/[\.\,\:\;\-\(\)\*\!\?\s+\\n\r]/";
 
         $splitText = collect(preg_split($pattern, $text))
@@ -111,12 +123,14 @@ class GenerateKeywords extends Command
         return $splitText
             ->map(function ($token, $index) use ($splitText) {
                 $string = clone $splitText;
-
                 return [
                     'token' => $token,
+                    // For keywords containg spaces (Saudi Araabia etc)
+                    // we keep also the token doubles
                     'token_double' => $string->splice($index, 2),
                 ];
             })
+            // Find destinations
             ->map(function ($token) {
                 $match = $this->destinations
                     ->filter(function ($destination) use ($token) {
@@ -136,6 +150,7 @@ class GenerateKeywords extends Command
 
                 return $token;
             })
+            // Find topics
             ->map(function ($token) {
                 $match = $this->topics
                     ->filter(function ($topic) use ($token) {
@@ -148,6 +163,7 @@ class GenerateKeywords extends Command
 
                 return $token;
             })
+            // Find carriers
             ->map(function ($token) {
                 $match = $this->carriers
                     ->filter(function ($carrier) use ($token) {

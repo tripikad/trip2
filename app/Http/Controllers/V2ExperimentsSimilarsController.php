@@ -7,10 +7,11 @@ use App\Carrier;
 use App\Content;
 use App\Destination;
 
-// This is a temporary file that bypasses our theme
+// This is a temporary view that bypasses our theme
 // system and component workflow
 //
-// TODO: Refactor to components or remove when not needed
+// TODO: Refactor this view to proper components
+// or remove when not needed
 
 class V2ExperimentsSimilarsController extends Controller
 {
