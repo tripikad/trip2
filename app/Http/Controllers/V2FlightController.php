@@ -193,9 +193,9 @@ class V2FlightController extends Controller
                     component('Block')
                         ->with('title', trans('frontpage.index.forum.title'))
                         ->with('route', route('forum.index'))
-                        ->with('content',  $similarForums->map(function ($forum) {
-                                return region('ForumRow', $forum);
-                            }))
+                        ->with('content', $similarForums->map(function ($forum) {
+                            return region('ForumRow', $forum);
+                        }))
                 )
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffiliateSearch'))

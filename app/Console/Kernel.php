@@ -44,7 +44,6 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('newsletter:send')
             ->cron('*/5 * * * *');
-
     }
 
     /**
