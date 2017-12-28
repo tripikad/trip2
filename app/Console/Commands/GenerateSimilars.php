@@ -166,7 +166,7 @@ class GenerateSimilars extends Command
         ->count();
 
         // We prefer destination matches over topic matches
-        
+
         $scoreMap = [
         //   destinations
         //   0   1   2+

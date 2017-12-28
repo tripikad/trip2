@@ -273,7 +273,7 @@ class GenerateKeywords extends Command
     }
 
     // Misc utils
-    
+
     public function scale($value, $sourceMin, $sourceMax, $targetMin, $targetMax)
     {
         // See https://stats.stackexchange.com/a/70808
