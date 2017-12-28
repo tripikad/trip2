@@ -31,7 +31,7 @@ class Layout
 
     public function render()
     {
-        $response = response()->view("layouts.$this->layout", $this->with);
+        $response = response()->view("layouts.$this->layout.$this->layout", $this->with);
 
         return $this->cached
             ? $response->header(

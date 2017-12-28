@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "codemirror": "^5.28.0",
+    "d3-array": "^1.2.1",
     "d3-scale": "^1.0.6",
+    "d3-shape": "^1.2.0",
     "dropzone": "^5.1.1",
     "lodash.unescape": "^4.0.1",
     "pell": "^0.7.0",

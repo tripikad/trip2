@@ -14,7 +14,7 @@ class LoginController extends Controller
     {
         //return view('pages.auth.login');
 
-        return layout('1colnarrow')
+        return layout('One')
             ->cached(false)
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))

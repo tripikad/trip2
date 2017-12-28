@@ -23,13 +23,25 @@
         padding: $padding-xl ?if $mobile;
     }
 
-    .FlightCard__title {
+    .FlightCard__title,
+    .FlightCard__shortTitle {
         color: $white;
         font: $font-heading-md;
         text-align: center;
         text-shadow: $text-shadow-md;
     }
 
-    .FlightCard__title:hover {
+    .FlightCard__title:hover,
+    .FlightCard__shortTitle:hover {
         color: $white-hover;
+    }
+
+    .FlightCard__title {
+        display: block;
+        display: none ?if $desktop;
+    }
+
+    .FlightCard__shortTitle {
+        display: none;
+        display: block ?if $desktop;
     }

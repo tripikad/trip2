@@ -44,7 +44,7 @@ class V2UserController extends Controller
             ->take(24)
             ->get();
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('title', $user->vars()->name())
             ->with('head_title', $user->vars()->name())
@@ -145,7 +145,7 @@ class V2UserController extends Controller
             }
         }
 
-        return layout('1colnarrow')
+        return layout('One')
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
             ->with('header', region('StaticHeader'))
@@ -362,7 +362,7 @@ class V2UserController extends Controller
             })
             ->pluck('flaggable_id');
 
-        return layout('1colnarrow')
+        return layout('One')
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))
             ->with('header', region('StaticHeader'))

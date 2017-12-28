@@ -16,7 +16,7 @@ class V2MessageController extends Controller
         $user = User::findorFail($user_id);
         $messages = collect($user->messages());
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'cyan')
@@ -59,7 +59,7 @@ class V2MessageController extends Controller
 
         Message::whereIn('id', $messageIds)->update(['read' => 1]);
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'cyan')

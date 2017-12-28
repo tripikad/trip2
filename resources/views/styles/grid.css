@@ -4,6 +4,16 @@
   margin: 0 auto;
   max-width: $largedesktop-width;
   width: 90%;
+  width: $mobile-width ?if $tablet;
+  width: 80% ?if $mobile;
+}
+
+.container-narrow {
+  margin: 0 auto;
+  max-width: $tablet-width;
+  width: 90%;
+  width: $mobile-width ?if $tablet;
+  width: 80% ?if $mobile;
 }
 
 .row {
@@ -80,9 +90,23 @@
   flex-shrink: 0;
 }
 
+/* TODO: Remove this when columns are out */
+
+.col-3-tablet {
+  width: calc(100% * 3 / 12);
+  width: 100% ?if $tablet;
+  flex-shrink: 0;
+}
+
 .col-4 {
   width: calc(100% * 4 / 12);
   width: 100% ?if $mobile;
+  flex-shrink: 0;
+}
+
+.col-4-tablet {
+  width: calc(100% * 4 / 12);
+  width: 100% ?if $tablet;
   flex-shrink: 0;
 }
 
@@ -99,6 +123,14 @@
 }
 
 .col-7 {
+  width: calc(100% * 7 / 12);
+  width: 100% ?if $mobile;
+  flex-shrink: 0;
+}
+
+/* TODO: Remove this when columns are out */
+
+.col-7-tablet {
   width: calc(100% * 7 / 12);
   width: 100% ?if $mobile;
   flex-shrink: 0;
