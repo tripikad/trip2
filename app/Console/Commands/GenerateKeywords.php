@@ -48,9 +48,9 @@ class GenerateKeywords extends Command
         $this->info("Generating keywords\n");
 
         // We iterate over the content latest modified, going back in time
-        // until we hit config('similars.totalsize') / env('SIMILARS_TOTAL_SIZE') 
+        // until we hit config('similars.totalsize') / env('SIMILARS_TOTAL_SIZE')
 
-        // This order suits the best for forum* content types but it's also 
+        // This order suits the best for forum* content types but it's also
         // OK for news and flights where created_at and updated_at
         // timestaps are usually same (or differ just a little)
 
@@ -123,6 +123,7 @@ class GenerateKeywords extends Command
         return $splitText
             ->map(function ($token, $index) use ($splitText) {
                 $string = clone $splitText;
+
                 return [
                     'token' => $token,
                     // For keywords containg spaces (Saudi Araabia etc)
