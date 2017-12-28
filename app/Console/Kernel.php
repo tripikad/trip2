@@ -45,11 +45,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('newsletter:send')
             ->cron('*/5 * * * *');
 
-        $schedule->command('generate:keywords')
-            ->cron('15 * * * *');
-
-        $schedule->command('generate:similars')
-            ->cron('25 * * * *');
     }
 
     /**
