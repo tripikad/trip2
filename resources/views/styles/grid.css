@@ -4,7 +4,7 @@
   margin: 0 auto;
   max-width: $largedesktop-width;
   width: 90%;
-  width: $mobile-width ?if $tablet;
+  width: $mobile-width ?if media (min-width: $mobile-width) and (max-width: $tablet-width);
   width: 80% ?if $mobile;
 }
 
@@ -12,7 +12,7 @@
   margin: 0 auto;
   max-width: $tablet-width;
   width: 90%;
-  width: $mobile-width ?if $tablet;
+  width: $mobile-width ?if media (min-width: $mobile-width) and (max-width: $tablet-width);
   width: 80% ?if $mobile;
 }
 
