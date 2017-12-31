@@ -3,9 +3,13 @@
 .container {
   margin: 0 auto;
   max-width: $largedesktop-width;
+  /*
   width: 90%;
   width: $mobile-width ?if media (min-width: $mobile-width) and (max-width: $tablet-width);
   width: 80% ?if $mobile;
+  */
+  width: 100%;
+  padding: 0 $padding-md;
 }
 
 .container-narrow {
@@ -132,13 +136,19 @@
 
 .col-7-tablet {
   width: calc(100% * 7 / 12);
-  width: 100% ?if $mobile;
+  width: 100% ?if $tablet;
   flex-shrink: 0;
 }
 
 .col-8 {
   width: calc(100% * 8 / 12);
   width: 100% ?if $mobile;
+  flex-shrink: 0;
+}
+
+.col-8-tablet {
+  width: calc(100% * 8 / 12);
+  width: 100% ?if $tablet;
   flex-shrink: 0;
 }
 
