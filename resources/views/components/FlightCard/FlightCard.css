@@ -36,6 +36,7 @@
         color: $white-hover;
     }
 
+    /*
     .FlightCard__title {
         display: block;
         display: none ?if $desktop;
@@ -45,3 +46,4 @@
         display: none;
         display: block ?if $desktop;
     }
+    */

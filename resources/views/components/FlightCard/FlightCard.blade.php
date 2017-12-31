@@ -23,12 +23,14 @@ $shorttitle = $shorttitle ?? '';
 
     </h3>
 
+    {{--
     <h3 class="FlightCard__shortTitle">
 
         {{ $shorttitle }}
 
     </h3>
-
+    --}}
+    
     </div>
 
     </a>
