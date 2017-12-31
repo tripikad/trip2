@@ -146,7 +146,7 @@
   flex-shrink: 0;
 }
 
-.col-8 {
+.col-8-tablet {
   width: calc(100% * 8 / 12);
   width: 100% ?if $tablet;
   flex-shrink: 0;
