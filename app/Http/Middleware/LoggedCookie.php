@@ -26,7 +26,7 @@ class LoggedCookie
             if (Auth::check()) {
                 $response->withCookie(Cookie::forever('logged', 'true'));
 
-                // If user is not logged in, remove the cookie
+            // If user is not logged in, remove the cookie
             } else {
                 $response->withCookie(Cookie::forget('logged'));
             }
