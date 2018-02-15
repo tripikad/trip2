@@ -1,6 +1,4 @@
-@component('mail::newsletter', [
-    'unsubscribe_route' => $unsubscribe_route,
-])
+@component('mail::newsletter', ['unsubscribe_route' => $unsubscribe_route])
 
 <table width="100%" cellpadding="5" cellspacing="3">
     <tr>

@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ConvertBase extends Command
 {
+    protected $signature = 'covert:base_old';
+
     protected $connection = 'trip';
 
     protected $take;

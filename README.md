@@ -36,7 +36,7 @@ mysql -uroot trip2 < dump.sql
 In your `.env` file set the following parameter:
 
 ```
-IMAGE_PATH=http://trip.ee/images/
+IMAGE_PATH=https://trip.ee/images/
 ```
 
 ### Redis
