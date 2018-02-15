@@ -135,7 +135,7 @@ class Newsletter extends Command
                     'sent.newsletter_type',
                 ])->where('sending', 1)
                     ->take($this->mails_per_minute)
-                    ->orderBy('id', 'asc')
+                    ->orderBy('id', 'desc')
                     ->get();
 
                 // To avoid double mails
