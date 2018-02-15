@@ -56,7 +56,6 @@ class NewsletterSent extends Model
             ->where('sending', 0);
     }
 
-
     public function newsletter_type_count()
     {
         return $this->newsletter_type()->selectRaw('count(*) as aggregate');
@@ -84,8 +83,9 @@ class NewsletterSent extends Model
 
     private function getCountRelation($relation)
     {
-        if ( ! array_key_exists($relation, $this->relations))
+        if (! array_key_exists($relation, $this->relations)) {
             $this->load($relation);
+        }
 
         $related = $this->getRelation($relation);
 
