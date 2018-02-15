@@ -179,7 +179,8 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laravelista\Ekko\EkkoServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
-        GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
+        //GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
+        HTMLMin\HTMLMin\HTMLMinServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Indal\Markdown\MarkdownServiceProvider::class,
 

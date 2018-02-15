@@ -12,13 +12,9 @@
 
                 <p class="flight_title">{{ $slot }}</p>
 
-                @component('mail::button', [
-                    'is' => 'narrow',
-                    'url' =>  $url ?? '#',
-                    'color' => $button_color ?? 'red'
-                ])
-                    Vaata pakkumist
-                @endcomponent
+@component('mail::button', ['is' => 'narrow','url' =>  $url ?? '#','color' => $button_color ?? 'red'])
+Vaata pakkumist
+@endcomponent
             </th>
         </tr>
     </table>
