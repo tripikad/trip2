@@ -206,9 +206,9 @@ class Newsletter extends Command
                             Mail::to($email, $name)->send(new NewsletterMail($body, $subject, $category, $user_id, $unsubscribe_route));
 
                             // sleep for 500 ms - don't know if necessary but maybe there is spam risk without that
-                            /*$sleep_seconds = 0.5;
+                            $sleep_seconds = 1;
                             $sleep_time += $sleep_seconds;
-                            usleep((int) ($sleep_seconds * 1000000));*/
+                            usleep((int) ($sleep_seconds * 1000000));
                         }
                     }
                 }
@@ -532,6 +532,8 @@ class Newsletter extends Command
                                 'subscription_id' => $subscription->id,
                                 'sent_id' => $sent->id,
                                 'sending' => 1,
+                                'created_at' => Carbon::now(),
+                                'updated_at' => Carbon::now(),
                             ];
                         }
                     }
