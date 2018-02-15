@@ -89,10 +89,14 @@ class NewsletterSent extends Model
 
         $related = $this->getRelation($relation);
 
+
+
         if ($related->count()) {
             $related = $related->first();
+        } else {
+            $related = null;
         }
 
-        return ($related) ? (int) $related->aggregate : 0;
+        return (($related) ? (int) $related->aggregate : 0);
     }
 }

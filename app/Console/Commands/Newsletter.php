@@ -18,9 +18,9 @@ use App\Mail\Newsletter as NewsletterMail;
 
 class Newsletter extends Command
 {
-    protected $signature = 'newsletter:send {--import-subscribers}';
+    protected $signature = 'newsletter:send {--import-subscribers} {--check-newsletters}';
 
-    protected $mails_per_hour = 32000;
+    protected $mails_per_hour = 24000;
     protected $mails_per_minute = null;
     protected $first_active_at = '2017-08-17 17:00:00';
     protected $chunk_max = 750;
@@ -78,53 +78,53 @@ class Newsletter extends Command
 
             $check_active_at = Carbon::createFromFormat('Y-m-d H:i:s', $this->first_active_at);
 
-            $newsletters = NewsletterType::where('active', 1)->with([
-                'newsletter_visible_content',
-                'subscriptions',
-                //'subscriptions.sents',
-            ])->get();
+            if ($this->option('check-newsletters')) {
+                $newsletters = NewsletterType::where('active', 1)->with([
+                    'newsletter_visible_content',
+                    'subscriptions',
+                    //'subscriptions.sents',
+                ])->get();
 
-            foreach ($newsletters as &$newsletter) {
-                if ($newsletter->check_user_active_at && $check_active_at->addDays($newsletter->send_days_after)->timestamp <= Carbon::now()->timestamp) {
-                    $this->info('Tegelen mitte aktiivsete kasutaja kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.');
+                foreach ($newsletters as &$newsletter) {
+                    if ($newsletter->check_user_active_at && $check_active_at->addDays($newsletter->send_days_after)->timestamp <= Carbon::now()->timestamp) {
+                        $this->info('Tegelen mitte aktiivsete kasutaja kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.');
 
-                    $newsletter->last_sent_at = Carbon::now();
-                    $newsletter->save();
+                        $newsletter->last_sent_at = Carbon::now();
+                        $newsletter->save();
 
-                    $this->queueLongTimeAgo($newsletter);
-                } elseif ($newsletter->type == 'flight' && $newsletter->subscriptions && $newsletter->subscriptions->count()) {
-                    $this->info('Tegelen lennupakkumiste kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.');
+                        $this->queueLongTimeAgo($newsletter);
+                    } elseif ($newsletter->type == 'flight' && $newsletter->subscriptions->count()) {
+                        $this->info('Tegelen lennupakkumiste kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.');
 
-                    $newsletter->last_sent_at = Carbon::now();
-                    $newsletter->save();
+                        $newsletter->last_sent_at = Carbon::now();
+                        $newsletter->save();
 
-                    $this->getDestinations();
+                        $this->getDestinations();
 
-                    $this->queueFlights($newsletter);
-                } elseif ($newsletter->type == 'flight_general' &&
-                    (! $newsletter->send_at || ($newsletter->send_at->timestamp <= Carbon::now()->timestamp)) &&
-                    $newsletter->subscriptions && $newsletter->subscriptions->count()) {
-                    $this->info('Tegelen külalistele lennupakkumiste kontrollimise ja vajadusel ootenimirja lisamisega.');
+                        $this->queueFlights($newsletter);
+                    } elseif ($newsletter->type == 'flight_general' &&
+                        (! $newsletter->send_at || ($newsletter->send_at->timestamp <= Carbon::now()->timestamp)) &&
+                        $newsletter->subscriptions->count()) {
+                        $this->info('Tegelen külalistele lennupakkumiste kontrollimise ja vajadusel ootenimirja lisamisega.');
 
-                    $newsletter->last_sent_at = Carbon::now();
-                    $newsletter->send_at = Carbon::now()->addDays($newsletter->send_days_after);
-                    $newsletter->save();
+                        $newsletter->last_sent_at = Carbon::now();
+                        $newsletter->send_at = Carbon::now()->addDays($newsletter->send_days_after);
+                        $newsletter->save();
 
-                    $this->queueNewsletter($newsletter);
-                } elseif ($newsletter->type == 'weekly' &&
-                    (! $newsletter->send_at || ($newsletter->send_at->timestamp <= Carbon::now()->timestamp)) &&
-                    $newsletter->subscriptions && $newsletter->subscriptions->count()) {
-                    $this->info('Tegelen nädalauudiskirja kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.');
+                        $this->queueNewsletter($newsletter);
+                    } elseif ($newsletter->type == 'weekly' &&
+                        (! $newsletter->send_at || ($newsletter->send_at->timestamp <= Carbon::now()->timestamp)) &&
+                        $newsletter->subscriptions->count()) {
+                        $this->info('Tegelen nädalauudiskirja kontrollimise ja vajadusel uudiskirja ootenimekirja lisamisega.');
 
-                    $newsletter->last_sent_at = Carbon::now();
-                    $newsletter->send_at = Carbon::now()->addDays($newsletter->send_days_after);
-                    $newsletter->save();
+                        $newsletter->last_sent_at = Carbon::now();
+                        $newsletter->send_at = Carbon::now()->addDays($newsletter->send_days_after);
+                        $newsletter->save();
 
-                    $this->queueNewsletter($newsletter);
+                        $this->queueNewsletter($newsletter);
+                    }
                 }
-            }
-
-            if ($this->time_spent() < 290) {
+            } elseif ($this->time_spent() < 290) {
                 $this->line('Alustan kirjade välja saatmisega');
 
                 $mail_receivers = NewsletterSentSubscriber::with([
@@ -151,7 +151,13 @@ class Newsletter extends Command
                     return $this->destinations->pluck('name', 'id')->toArray();
                 });
 
+                $k = 0;
+                $total = 0;
+                $receivers_total = $mail_receivers->count();
                 foreach ($mail_receivers as &$mail_receiver) {
+                    ++$k;
+                    ++$total;
+
                     if ($mail_receiver->sent) {
                         $body = $mail_receiver->sent->composed_content;
 
@@ -203,13 +209,17 @@ class Newsletter extends Command
                         }
 
                         if ($email && $subject && $body/* && $user_id && $unsubscribe_route*/) {
-                            $this->line('Sending to '.$email.' - '.$name);
                             Mail::to($email, $name)->send(new NewsletterMail($body, $subject, $category, $user_id, $unsubscribe_route));
 
+                            if ($k == 50 || $receivers_total == $total) {
+                                $k = 0;
+                                $this->line('Sending.. ' . $total . '/' . $receivers_total);
+                            }
+
                         // sleep for 500 ms - don't know if necessary but maybe there is spam risk without that
-                            /*$sleep_seconds = 1;
+                            $sleep_seconds = 1;
                             $sleep_time += $sleep_seconds;
-                            usleep((int) ($sleep_seconds * 1000000));*/
+                            usleep((int) ($sleep_seconds * 1000000));
                         } else {
                             $this->error('Unable to send. Missing e-mail, subject, body, user_id or unsubscribe_route');
                         }
