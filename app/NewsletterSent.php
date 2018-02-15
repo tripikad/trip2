@@ -91,6 +91,8 @@ class NewsletterSent extends Model
 
         if ($related->count()) {
             $related = $related->first();
+        } else {
+            $related = null;
         }
 
         return ($related) ? (int) $related->aggregate : 0;
