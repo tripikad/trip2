@@ -203,10 +203,10 @@ class Newsletter extends Command
                         }
 
                         if ($email && $subject && $body/* && $user_id && $unsubscribe_route*/) {
-                            $this->line('Sending to ' . $email . ' - ' . $name);
+                            $this->line('Sending to '.$email.' - '.$name);
                             Mail::to($email, $name)->send(new NewsletterMail($body, $subject, $category, $user_id, $unsubscribe_route));
 
-                            // sleep for 500 ms - don't know if necessary but maybe there is spam risk without that
+                        // sleep for 500 ms - don't know if necessary but maybe there is spam risk without that
                             /*$sleep_seconds = 1;
                             $sleep_time += $sleep_seconds;
                             usleep((int) ($sleep_seconds * 1000000));*/
