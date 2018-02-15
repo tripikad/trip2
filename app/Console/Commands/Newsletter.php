@@ -81,7 +81,7 @@ class Newsletter extends Command
             $newsletters = NewsletterType::where('active', 1)->with([
                 'newsletter_visible_content',
                 'subscriptions',
-                'subscriptions.sents',
+                //'subscriptions.sents',
             ])->get();
 
             foreach ($newsletters as &$newsletter) {
@@ -202,13 +202,16 @@ class Newsletter extends Command
                             $unsubscribe_route = null;
                         }
 
-                        if ($email && $subject && $body && $user_id && $unsubscribe_route) {
+                        if ($email && $subject && $body/* && $user_id && $unsubscribe_route*/) {
+                            $this->line('Sending to '.$email.' - '.$name);
                             Mail::to($email, $name)->send(new NewsletterMail($body, $subject, $category, $user_id, $unsubscribe_route));
 
-                            // sleep for 500 ms - don't know if necessary but maybe there is spam risk without that
-                            /*$sleep_seconds = 0.5;
+                        // sleep for 500 ms - don't know if necessary but maybe there is spam risk without that
+                            /*$sleep_seconds = 1;
                             $sleep_time += $sleep_seconds;
                             usleep((int) ($sleep_seconds * 1000000));*/
+                        } else {
+                            $this->error('Unable to send. Missing e-mail, subject, body, user_id or unsubscribe_route');
                         }
                     }
                 }
@@ -263,6 +266,7 @@ class Newsletter extends Command
             $insert_to_queue[] = [
                 'subscription_id' => $subscription->id,
                 'sent_id' => $sent->id,
+                'user_id' => $sent->user_id,
                 'sending' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -531,7 +535,10 @@ class Newsletter extends Command
                             $insert[] = [
                                 'subscription_id' => $subscription->id,
                                 'sent_id' => $sent->id,
+                                'user_id' => $subscription->user_id,
                                 'sending' => 1,
+                                'created_at' => Carbon::now(),
+                                'updated_at' => Carbon::now(),
                             ];
                         }
                     }

@@ -73,10 +73,8 @@ class V2NewsletterController extends Controller
             ->with([
                 'newsletter_type',
                 'destination',
-                'subscriptions',
-                'sent',
             ])
-            ->orderBy('id', 'asc')
+            ->orderBy('id', 'desc')
             ->paginate(15);
 
         $left_content = collect();
@@ -100,7 +98,7 @@ class V2NewsletterController extends Controller
                     )
                     ->push(
                         component('Tag')
-                            ->with('title', trans('newsletter.sent').' '.$sent->sent->where('sending', 0)->count().' / '.$sent->sent->count())
+                            ->with('title', trans('newsletter.sent').' '.$sent->sending_num.' / '.$sent->sent_num)
                     )
                 )
             );
