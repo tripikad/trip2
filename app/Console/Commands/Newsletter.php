@@ -155,8 +155,8 @@ class Newsletter extends Command
                 $total = 0;
                 $receivers_total = $mail_receivers->count();
                 foreach ($mail_receivers as &$mail_receiver) {
-                    ++$k;
-                    ++$total;
+                    $k++;
+                    $total++;
 
                     if ($mail_receiver->sent) {
                         $body = $mail_receiver->sent->composed_content;
@@ -213,10 +213,10 @@ class Newsletter extends Command
 
                             if ($k == 50 || $receivers_total == $total) {
                                 $k = 0;
-                                $this->line('Sending.. ' . $total . '/' . $receivers_total);
+                                $this->line('Sending.. '.$total.'/'.$receivers_total);
                             }
 
-                        // sleep for 500 ms - don't know if necessary but maybe there is spam risk without that
+                            // sleep for 500 ms - don't know if necessary but maybe there is spam risk without that
                             $sleep_seconds = 1;
                             $sleep_time += $sleep_seconds;
                             usleep((int) ($sleep_seconds * 1000000));
