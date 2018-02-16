@@ -7,6 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Auth\AuthenticationException;
 use Symfony\Component\Debug\Exception\FatalErrorException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Config;
 
 class Handler extends ExceptionHandler
 {
@@ -58,6 +59,16 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
             abort(404);
+        }
+
+        if (strpos(config('app.debug_ips'), ',') !== false) {
+            $ips = explode(',', config('app.debug_ips'));
+        } else {
+            $ips = [];
+        }
+
+        if (in_array(request()->ip(), $ips)) {
+            Config::set('app.debug', true);
         }
 
         if (! config('app.debug') && ($e instanceof \ErrorException || $e instanceof FatalErrorException || $e instanceof QueryException)) {
