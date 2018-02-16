@@ -1,19 +1,19 @@
 @component('mail::newsletter_layout')
-    {{-- Header --}}
+{{-- Header --}}
 @slot('header')
 @component('mail::header', ['url' => config('app.url')])
 <img src="{{ asset('photos/tripee_logo_dark.png') }}" width="200" height="96" class="img-logo">
 @endcomponent
 @endslot
 
-    {{-- Body --}}
-    {{ $slot }}
+{{-- Body --}}
+{{ $slot }}
 
-    {{-- Subcopy --}}
+{{-- Subcopy --}}
 @isset($subcopy)
 @slot('subcopy')
 @component('mail::subcopy')
-{{ $subcopy }}
+{{ trim($subcopy, ' \t') }}
 @endcomponent
 @endslot
 @endisset
