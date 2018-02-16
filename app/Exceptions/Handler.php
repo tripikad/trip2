@@ -3,11 +3,11 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Database\QueryException;
 use Illuminate\Auth\AuthenticationException;
 use Symfony\Component\Debug\Exception\FatalErrorException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Support\Facades\Config;
 
 class Handler extends ExceptionHandler
 {
