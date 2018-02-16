@@ -78,6 +78,9 @@ class BodyFormatter
                     },
                     $cleanedMatch
                 );
+
+                $cleanedMatch = preg_replace('/^[ \t]*[\r\n]+/m', '', $cleanedMatch);
+
                 if ($months = Yaml::parse($cleanedMatch)) {
                     $this->body = str_replace(
                         $match,
