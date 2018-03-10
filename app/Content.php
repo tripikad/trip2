@@ -232,8 +232,8 @@ class Content extends Model
         $destination = false,
         $topic = false,
         $order = 'created_at',
-        $additional_withs = [],
-        $additional_count_withs = []
+        array $additional_eager = [],
+        array $additional_count_eager = []
     ) {
         $withs = [
             'images',
@@ -245,16 +245,17 @@ class Content extends Model
             'topics',
             'unread_content',
         ];
+
         $count_withs = [];
 
-        $count_withs = array_merge($count_withs, $additional_count_withs);
+        $count_withs = array_merge($count_withs, $additional_count_eager);
 
         $query = $query
             ->whereType($type)
             ->whereStatus(1)
             ->orderBy($order, 'desc')
             ->with(
-                array_merge($withs, $additional_withs)
+                array_merge($withs, $additional_eager)
             );
 
         if (count($count_withs)) {
@@ -280,7 +281,7 @@ class Content extends Model
             ->simplePaginate($take);
     }
 
-    public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at', array $additional_eager = [])
+    public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at', array $additional_eager = [], array $additional_count_eager = [])
     {
         $eager = [
             'images',
@@ -292,16 +293,26 @@ class Content extends Model
             'topics',
         ];
 
+        $count_withs = [];
+
+        $count_withs = array_merge($count_withs, $additional_count_eager);
+
         if (count($additional_eager)) {
             $eager = array_merge($eager, $additional_eager);
         }
 
-        return $query
+        $query = $query
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
             ->orderBy($order, 'desc')
-            ->with($eager)
+            ->with($eager);
+
+        if (count($count_withs)) {
+            $query = $query->withCount($count_withs);
+        }
+
+        return $query
             ->distinct()
             ->get();
     }
