@@ -1,20 +1,20 @@
 <template>
 
-    <div class="EditorSmall" :class="isclasses">
+    <div class="EditorComment" :class="isclasses">
 
-        <div v-show="!showSource" ref="EditorSmall"></div>
+        <div v-show="!showSource" ref="EditorComment"></div>
 
         <div v-show="showSource">
 
-            <div class="EditorSmall__toolbar">
+            <div class="EditorComment__toolbar">
                 <div
-                    class="EditorSmall__button"
+                    class="EditorComment__button"
                     @click="showSource = false; editor.content.innerHTML = localValue"
                 >Back</div>
             </div>
 
             <textarea
-                class="EditorSmall__source"
+                class="EditorComment__source"
                 :name="name"
                 v-model="localValue"
             ></textarea>
@@ -47,7 +47,7 @@
         methods: {
 
             setFocus() {
-                var el = this.editor.getElementsByClassName('Body EditorSmall__body')[0]
+                var el = this.editor.getElementsByClassName('Body EditorComment__body')[0]
                 var focused = document.activeElement
 
                 if (! focused || focused == el) {
@@ -79,7 +79,7 @@
         mounted() {
 
             this.editor = pell.init({
-                element: this.$refs.EditorSmall,
+                element: this.$refs.EditorComment,
                 onChange: value => this.localValue = value,
                 actions: [
                     {
@@ -133,9 +133,9 @@
                     }
                 ],
                 classes: {
-                    actionbar: 'EditorSmall__toolbar',
-                    button: 'EditorSmall__button',
-                    content: 'Body EditorSmall__body'
+                    actionbar: 'EditorComment__toolbar',
+                    button: 'EditorComment__button',
+                    content: 'Body EditorComment__body'
                 }
             })
 

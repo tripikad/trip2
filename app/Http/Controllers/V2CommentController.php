@@ -83,7 +83,7 @@ class V2CommentController extends Controller
                 ->push(component('Form')
                     ->with('route', route('comment.update', [$comment]))
                     ->with('fields', collect()
-                        ->push(component('FormTextarea')
+                        ->push(component('EditorComment')
                             ->with('title', trans('comment.edit.body.title'))
                             ->with('name', 'body')
                             ->with('value', old('body', $comment->body))
