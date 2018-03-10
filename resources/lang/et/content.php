@@ -4,6 +4,9 @@ return [
 
     // General
 
+    'post.view' => 'loetud :number kord',
+    'post.views' => 'loetud :number korda',
+
     'post.status.unpublished' => 'Peidetud',
 
     'post.updated.at' => 'Muudetud: :updated_at',

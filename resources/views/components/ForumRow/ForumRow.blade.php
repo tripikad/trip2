@@ -5,6 +5,7 @@ $user = $user ?? '';
 $title = $title ?? '';
 $meta = $meta ?? collect();
 $badge = $badge ?? '';
+$views = $views ?? '';
 
 @endphp
 
@@ -25,6 +26,8 @@ $badge = $badge ?? '';
             <h3 class="ForumRow__title">
 
                 {{ $title }}
+
+                {!! $views !!}
 
             </h3>
 

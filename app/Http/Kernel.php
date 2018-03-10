@@ -35,6 +35,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\XssProtection::class,
+            \App\Http\Middleware\LastPageExceptAuth::class,
             \App\Http\Middleware\LoggedCookie::class,
             \App\Http\Middleware\UserActivity::class,
         ],
