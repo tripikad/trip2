@@ -6,7 +6,14 @@
     justify-content: center;
 }
 
+.Paginator__item {
+
+    display: inline-block;
+    margin-right: $margin-sm;
+}
+
 .Paginator__button {
+    display: inline-block;
     padding: $padding-sm $padding-md;
     background: $gray-light;
     border-radius: $border-radius-md;
@@ -19,8 +26,8 @@
     background: $gray-light-hover;
 }
 
-.Paginator__button {
-    margin-right: $margin-sm;
+.Paginator__item:last-child {
+    margin-right: 0;
 }
 
 .Paginator__button--disabled {

@@ -8,6 +8,7 @@ use App\User;
 use App\Image;
 use App\Topic;
 use App\Content;
+use App\Comment;
 use App\Destination;
 
 class V2ForumController extends Controller
@@ -148,14 +149,35 @@ class V2ForumController extends Controller
     public function show($slug)
     {
         $user = auth()->user();
-        $forum = Content::getItemBySlug($slug, $user);
-
-        // TODO: Why?
-
-        if (! $forum->first()) {
+        $forum = Content::whereSlug($slug)
+            ->with(
+                'flags',
+                'images',
+                'user',
+                'user.images',
+                'destinations',
+                'topics'
+            )->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
+                return $query->whereStatus(1);
+            })
+            ->first();
+        if (! $forum) {
             abort(404);
         }
 
+        $comments = Comment::where('content_id', $forum->id)
+            ->with(
+                'user',
+                'user.images',
+                'flags',
+                'content'
+            )
+            ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
+                return $query->whereStatus(1);
+            })
+            ->paginate();
+
+        $anchor = '';
         $type = $forum->type;
 
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
@@ -166,9 +188,18 @@ class V2ForumController extends Controller
 
         $forum->vars()->update_content_read;
 
-        $anchor = $forum->comments->count()
-            ? '#comment-'.$forum->comments->last()->id
-            : '';
+        if ($comments->total()) {
+
+            $last_comment = Comment::select('id')
+                ->where('content_id', $forum->id)
+                ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
+                    return $query->whereStatus(1);
+                })
+                ->orderBy('id', 'desc')
+                ->first();
+
+            $anchor = '?page=' . $comments->lastPage() . '#comment-' . $last_comment->id;
+        }
 
         return layout('Two')
 
@@ -200,7 +231,7 @@ class V2ForumController extends Controller
             ->with('content', collect()
                 ->push(region('ForumPost', $forum, 'forum.edit'))
                 ->pushWhen(
-                    $forum->comments->count() > 1,
+                    $comments->total() > 1,
                     component('BlockHorizontal')
                         ->is('right')
                         ->with('content', collect()
@@ -212,10 +243,11 @@ class V2ForumController extends Controller
                             )
                     )
                 )
-                ->merge($forum->comments->map(function ($comment) use ($firstUnreadCommentId) {
+                ->merge($comments->map(function ($comment) use ($firstUnreadCommentId) {
                     return region('Comment', $comment, $firstUnreadCommentId, 'inset');
                 }))
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum, 'inset'))
+                ->push(region('PaginatorExtended', $comments))
                 ->push(component('Promo')->with('promo', 'body'))
             )
 
