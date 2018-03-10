@@ -178,7 +178,7 @@ class V2ForumController extends Controller
             ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
                 return $query->whereStatus(1);
             })
-            ->paginate();
+            ->paginate(config('content.forum.paginate'));
 
         $anchor = '';
         $type = $forum->type;

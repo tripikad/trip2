@@ -21,7 +21,15 @@ class XssProtection
         $request->merge($input);
 
         if ($request->has('body') && ! is_array($request->input('body'))) {
-            if (! preg_match('#('.implode('|', config('site.allowAllTags')).')#', $request->path())) {
+            $user = auth()->user();
+            $role = false;
+            if ($user) {
+                if ($user->hasRole('admin')) {
+                    $role = true;
+                }
+            }
+
+            if (! $role) {
                 $request->merge(['body' => strip_tags($request->body, config('site.allowedtags'))]);
             } else {
                 $request->merge(['body' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", '', $request->body)))]);
