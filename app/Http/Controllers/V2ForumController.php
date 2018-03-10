@@ -7,8 +7,8 @@ use Request;
 use App\User;
 use App\Image;
 use App\Topic;
-use App\Content;
 use App\Comment;
+use App\Content;
 use App\Destination;
 
 class V2ForumController extends Controller
@@ -189,7 +189,6 @@ class V2ForumController extends Controller
         $forum->vars()->update_content_read;
 
         if ($comments->total()) {
-
             $last_comment = Comment::select('id')
                 ->where('content_id', $forum->id)
                 ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
@@ -198,7 +197,7 @@ class V2ForumController extends Controller
                 ->orderBy('id', 'desc')
                 ->first();
 
-            $anchor = '?page=' . $comments->lastPage() . '#comment-' . $last_comment->id;
+            $anchor = '?page='.$comments->lastPage().'#comment-'.$last_comment->id;
         }
 
         return layout('Two')
