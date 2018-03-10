@@ -18,3 +18,13 @@
     .ForumPost__meta {
         margin-bottom: $margin-md;
     }
+
+    .ForumPost__body .Body img {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+    }
+
+    .ForumPost__body .Body p {
+        margin-bottom: $spacer;
+    }

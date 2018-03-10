@@ -1,0 +1,48 @@
+@import "variables";
+
+    .EditorComment__toolbar {
+        margin-bottom: $margin-xs;
+    }
+
+    .EditorComment__button {
+        background: none;
+        border: none;
+        font: $font-text-xs;
+        justify-content: center;
+        padding: $padding-xs;
+        color: $gray;
+        cursor: pointer;
+    }
+
+    .EditorComment__button:hover {
+        color: $gray-hover;
+    }
+
+    .EditorComment__body {
+        border-radius: $border-radius-md;
+        border: $border-gray-md;
+        padding: $padding-md;
+        outline: none;
+        width: 100%;
+        height: calc($spacer * 30);
+        overflow-y: scroll;
+    }
+
+    .EditorComment__body img {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .EditorComment__source {
+        font: $font-code-sm;
+        line-height: $line-height-lg;
+        border-radius: $border-radius-md;
+        border: $border-gray-md;
+        padding: $padding-md;
+        outline: none;
+        width: 100%;
+        height: calc($spacer * 30);
+        overflow-y: scroll;
+    }
+
