@@ -98,6 +98,8 @@ class V2FlightController extends Controller
         $loggedUser = auth()->user();
 
         $flight = Content::getItemBySlug($slug, $loggedUser);
+        $flight->vars()->add_view;
+
         $flights = Content::getLatestItems('flight', 4);
         $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
