@@ -243,7 +243,7 @@ class Content extends Model
             'comments.user',
             'destinations',
             'topics',
-            'unread_content'
+            'unread_content',
         ];
         $count_withs = [];
 
