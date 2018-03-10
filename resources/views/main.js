@@ -18,6 +18,7 @@ import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
 import Editor from './components/Editor/Editor.vue'
 import EditorSmall from './components/EditorSmall/EditorSmall.vue'
+import EditorComment from './components/EditorComment/EditorComment.vue'
 import Dotmap from './components/Dotmap/Dotmap.vue'
 import Flag from './components/Flag/Flag.vue'
 import FormButtonProcess from './components/FormButtonProcess/FormButtonProcess.vue'
@@ -65,6 +66,7 @@ new Vue({
         Arc,
         Editor,
         EditorSmall,
+        EditorComment,
         Dotmap,
         Flag,
         FormButtonProcess,

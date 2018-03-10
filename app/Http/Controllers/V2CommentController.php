@@ -42,8 +42,26 @@ class V2CommentController extends Controller
             ]),
         ]);
 
-        return backToAnchor('#comment-'.$comment->id)
-            ->with('info', trans(
+        $append = '';
+
+        if ($comment->content->type == 'forum' || $comment->content->type == 'expat' || $comment->content->type == 'buysell' || $comment->content->type == 'misc') {
+            $user = auth()->user();
+            $comments = Comment::where('content_id', $comment->content->id)
+                ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
+                    return $query->whereStatus(1);
+                })
+                ->count();
+
+            $last_page = ceil($comments / config('content.forum.paginate'));
+
+            $append = 'page='.$last_page;
+        }
+
+        return redirect()
+            ->route($comment->content->type.'.show', [
+                $comment->content->slug,
+                $append.'#comment-'.$comment->id,
+            ])->with('info', trans(
                 'comment.created.title',
                 ['title' => $comment->vars()->title()]
             ));
@@ -65,7 +83,7 @@ class V2CommentController extends Controller
                 ->push(component('Form')
                     ->with('route', route('comment.update', [$comment]))
                     ->with('fields', collect()
-                        ->push(component('FormTextarea')
+                        ->push(component('EditorComment')
                             ->with('title', trans('comment.edit.body.title'))
                             ->with('name', 'body')
                             ->with('value', old('body', $comment->body))
@@ -102,10 +120,25 @@ class V2CommentController extends Controller
                 ]);
         }
 
+        $append = '';
+
+        if ($comment->content->type == 'forum' || $comment->content->type == 'expat' || $comment->content->type == 'buysell' || $comment->content->type == 'misc') {
+            $user = auth()->user();
+            $comments = Comment::where('content_id', $comment->content->id)
+                ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
+                    return $query->whereStatus(1);
+                })
+                ->count();
+
+            $last_page = ceil($comments / config('content.forum.paginate'));
+
+            $append = 'page='.$last_page;
+        }
+
         return redirect()
             ->route($comment->content->type.'.show', [
                 $comment->content->slug,
-                '#comment-'.$comment->id,
+                $append.'#comment-'.$comment->id,
             ]);
     }
 

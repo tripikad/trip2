@@ -1,10 +1,10 @@
 @import "variables";
 
-    .EditorSmall__toolbar {
+    .EditorComment__toolbar {
         margin-bottom: $margin-xs;
     }
 
-    .EditorSmall__button {
+    .EditorComment__button {
         background: none;
         border: none;
         font: $font-text-xs;
@@ -14,11 +14,11 @@
         cursor: pointer;
     }
 
-    .EditorSmall__button:hover {
+    .EditorComment__button:hover {
         color: $gray-hover;
     }
 
-    .EditorSmall__body {
+    .EditorComment__body {
         border-radius: $border-radius-md;
         border: $border-gray-md;
         padding: $padding-md;
@@ -28,13 +28,13 @@
         overflow-y: scroll;
     }
 
-    .EditorSmall__body img {
+    .EditorComment__body img {
         width: auto;
         max-width: 100%;
         height: auto;
     }
 
-    .EditorSmall__source {
+    .EditorComment__source {
         font: $font-code-sm;
         line-height: $line-height-lg;
         border-radius: $border-radius-md;

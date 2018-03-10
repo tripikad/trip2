@@ -178,7 +178,7 @@ class V2ForumController extends Controller
             ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
                 return $query->whereStatus(1);
             })
-            ->paginate();
+            ->paginate(config('content.forum.paginate'));
 
         $anchor = '';
         $type = $forum->type;
@@ -315,7 +315,7 @@ class V2ForumController extends Controller
                             ->with('name', 'title')
                             ->with('value', old('title'))
                         )
-                        ->push(component('FormTextarea')
+                        ->push(component('EditorComment')
                             ->with('title', trans('content.forum.edit.field.body.title'))
                             ->with('name', 'body')
                             ->with('value', old('body'))

@@ -17,7 +17,7 @@ class CommentCreateForm
                     ))
                     ->with('id', 'CommentCreateForm')
                     ->with('fields', collect()
-                        ->push(component('FormTextarea')
+                        ->push(component('EditorComment')
                             ->is('borderless')
                             ->with('name', 'body')
                             ->with('placeholder', trans('comment.create.field.body.title'))
