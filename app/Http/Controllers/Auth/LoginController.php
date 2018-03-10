@@ -108,7 +108,13 @@ class LoginController extends Controller
                 'name' =>  $request->name,
             ]);
 
-            return redirect('/')
+            $url = '/';
+
+            if (session('last_active_page', null)) {
+                $url = session('last_active_page');
+            }
+
+            return redirect($url)
                 ->with('info', trans('auth.login.login.info'));
         }
 
@@ -122,7 +128,7 @@ class LoginController extends Controller
         Auth::logout();
 
         return redirect()
-            ->route('login.form')
+            ->back()
             ->with('info', trans('auth.login.logout.info'));
     }
 
