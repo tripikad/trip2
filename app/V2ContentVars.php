@@ -4,6 +4,7 @@ namespace App;
 
 use Exception;
 use Carbon\Carbon;
+use DB;
 
 class V2ContentVars
 {
@@ -65,6 +66,34 @@ class V2ContentVars
     public function commentCount()
     {
         return count($this->content->comments);
+    }
+    
+    public function add_view()
+    {
+        $user = auth()->user();
+
+        $table_name = with(new Activity)->getTable();
+        $ip = DB::getPdo()->quote(request()->ip());
+        $activity_id = (int) $this->content->id;
+        $activity_type = DB::getPdo()->quote('App\Content');
+        $type = DB::getPdo()->quote('view');
+        $value = 1;
+
+        if ($user) {
+            $user_id = (int) $user->id;
+        } else {
+            $user_id = null;
+        }
+
+        $created_at = DB::getPdo()->quote(Carbon::now()->format('Y-m-d H:i:s'));
+        $updated_at = DB::getPdo()->quote(Carbon::now()->format('Y-m-d H:i:s'));
+
+        app('db')->select("INSERT INTO `$table_name` (`ip`, `activity_id`, `activity_type`, `type`, `value`, `user_id`, `created_at`, `updated_at`) 
+        VALUES ($ip, $activity_id, $activity_type, $type, $value, ".($user_id ?? 'null').", $created_at, $updated_at) 
+        ON DUPLICATE KEY UPDATE 
+        `value`=`value` + 1,
+        " . ($user_id ? "`user_id`=VALUES(`user_id`), " : "") . "
+        `updated_at`=VALUES(`updated_at`)");
     }
 
     public function update_content_read()

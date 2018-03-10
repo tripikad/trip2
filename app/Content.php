@@ -34,6 +34,11 @@ class Content extends Model
         return $eager;
     }
 
+    public function views()
+    {
+        return $this->morphMany('App\Activity', 'activity')->where('type', 'view');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -226,22 +231,37 @@ class Content extends Model
         $take = 36,
         $destination = false,
         $topic = false,
-        $order = 'created_at'
+        $order = 'created_at',
+        $additional_withs = [],
+        $additional_count_withs = []
     ) {
-        return $query
+        $withs = [
+            'images',
+            'user',
+            'user.images',
+            'comments',
+            'comments.user',
+            'destinations',
+            'topics',
+            'unread_content'
+        ];
+        $count_withs = [];
+
+        $count_withs = array_merge($count_withs, $additional_count_withs);
+
+        $query = $query
             ->whereType($type)
             ->whereStatus(1)
             ->orderBy($order, 'desc')
             ->with(
-                'images',
-                'user',
-                'user.images',
-                'comments',
-                'comments.user',
-                'destinations',
-                'topics',
-                'unread_content'
-            )
+                array_merge($withs, $additional_withs)
+            );
+
+        if (count($count_withs)) {
+            $query = $query->withCount($count_withs);
+        }
+
+        return $query
             ->when($destination, function ($query) use ($destination) {
                 $destinations = Destination::find($destination)->descendantsAndSelf()->pluck('id');
 

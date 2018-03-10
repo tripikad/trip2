@@ -38,7 +38,7 @@ class V2ForumController extends Controller
         $currentDestination = Request::get('destination');
         $currentTopic = Request::get('topic');
 
-        $forums = Content::getLatestPagedItems($type, false, $currentDestination, $currentTopic, 'updated_at');
+        $forums = Content::getLatestPagedItems($type, false, $currentDestination, $currentTopic, 'updated_at', [], ['views']);
         $destinations = Destination::select('id', 'name')->get();
         $topics = Topic::select('id', 'name')->orderBy('name', 'asc')->get();
 
@@ -157,13 +157,16 @@ class V2ForumController extends Controller
                 'user.images',
                 'destinations',
                 'topics'
-            )->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
+            )
+            ->withCount('views')
+            ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
                 return $query->whereStatus(1);
             })
             ->first();
         if (! $forum) {
             abort(404);
         }
+        $forum->vars()->add_view;
 
         $comments = Comment::where('content_id', $forum->id)
             ->with(

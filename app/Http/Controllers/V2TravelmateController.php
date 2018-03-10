@@ -81,6 +81,7 @@ class V2TravelmateController extends Controller
     {
         $user = auth()->user();
         $travelmate = Content::getItemBySlug($slug, $user);
+        $travelmate->vars()->add_view;
 
         $travelmates = Content::getLatestItems('travelmate', 3);
 
