@@ -20,7 +20,6 @@ class XssProtection
 
         $request->merge($input);
 
-
         if ($request->has('body') && ! is_array($request->input('body'))) {
             $user = auth()->user();
             $role = false;
@@ -35,7 +34,6 @@ class XssProtection
             } else {
                 $request->merge(['body' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", '', $request->body)))]);
             }
-
         }
 
         return $next($request);

@@ -54,13 +54,13 @@ class V2CommentController extends Controller
 
             $last_page = ceil($comments / config('content.forum.paginate'));
 
-            $append = 'page=' . $last_page;
+            $append = 'page='.$last_page;
         }
 
         return redirect()
             ->route($comment->content->type.'.show', [
                 $comment->content->slug,
-                $append . '#comment-'.$comment->id,
+                $append.'#comment-'.$comment->id,
             ])->with('info', trans(
                 'comment.created.title',
                 ['title' => $comment->vars()->title()]
@@ -132,13 +132,13 @@ class V2CommentController extends Controller
 
             $last_page = ceil($comments / config('content.forum.paginate'));
 
-            $append = 'page=' . $last_page;
+            $append = 'page='.$last_page;
         }
 
         return redirect()
             ->route($comment->content->type.'.show', [
                 $comment->content->slug,
-                $append . '#comment-'.$comment->id,
+                $append.'#comment-'.$comment->id,
             ]);
     }
 
