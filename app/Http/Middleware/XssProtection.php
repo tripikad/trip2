@@ -31,6 +31,8 @@ class XssProtection
 
             if (! $role) {
                 $request->merge(['body' => strip_tags($request->body, config('site.allowedtags'))]);
+            } elseif (! preg_match('#('.implode('|', config('site.allowAllTags')).')#', $request->path())) {
+                $request->merge(['body' => strip_tags($request->body, config('site.allowedtags_flight_news'))]);
             } else {
                 $request->merge(['body' => trim(preg_replace('/\s\s+/', ' ', str_replace("\n", '', $request->body)))]);
             }
