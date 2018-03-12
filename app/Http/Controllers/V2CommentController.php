@@ -42,6 +42,14 @@ class V2CommentController extends Controller
             ]),
         ]);
 
+        if ($comment->content->type == 'internal') {
+            return redirect()
+                ->route($comment->content->type.'.show', [
+                    $comment->content,
+                    '#comment-'.$comment->id,
+                ]);
+        }
+
         $append = '';
 
         if ($comment->content->type == 'forum' || $comment->content->type == 'expat' || $comment->content->type == 'buysell' || $comment->content->type == 'misc') {
