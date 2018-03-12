@@ -447,7 +447,7 @@ class V2ForumController extends Controller
                             ->with('name', 'title')
                             ->with('value', old('title', $forum->title))
                         )
-                        ->push(component('FormTextarea')
+                        ->push(component('EditorComment')
                             ->with('title', trans('content.forum.edit.field.body.title'))
                             ->with('name', 'body')
                             ->with('value', old('body', $forum->body))

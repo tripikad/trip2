@@ -73,7 +73,14 @@ class V2ContentVars
         $user = auth()->user();
 
         $table_name = with(new Activity)->getTable();
-        $ip = DB::getPdo()->quote(request()->ip());
+        $ip = request()->ip();
+
+        if (mb_strlen($ip) == 0) {
+            $ip = 'N/A';
+        }
+
+        $ip = DB::getPdo()->quote($ip);
+
         $activity_id = (int) $this->content->id;
         $activity_type = DB::getPdo()->quote('App\Content');
         $type = DB::getPdo()->quote('view');
