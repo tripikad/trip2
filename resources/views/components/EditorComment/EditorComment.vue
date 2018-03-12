@@ -139,6 +139,7 @@
                 }
             })
 
+            this.editor.content.innerHTML = this.value
             this.localValue = this.value
 
         }
