@@ -17,7 +17,7 @@ class Content extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-    protected $appends = ['body_filtered', 'image_id'];
+    protected $appends = ['body_filtered', 'image_id', 'views_count'];
 
     // Relations
 
@@ -36,7 +36,16 @@ class Content extends Model
 
     public function views()
     {
-        return $this->morphMany('App\Activity', 'activity')->where('type', 'view');
+        return $this->morphMany('App\Activity', 'activity')->selectRaw('activity_id, count(*) as count')->where('type', 'view')->groupBy('activity_id');
+    }
+
+    public function getViewsCountAttribute()
+    {
+        if (! $this->views->count()) {
+            return 0;
+        } else {
+            return $this->views->first()->count;
+        }
     }
 
     public function user()
@@ -232,8 +241,7 @@ class Content extends Model
         $destination = false,
         $topic = false,
         $order = 'created_at',
-        array $additional_eager = [],
-        array $additional_count_eager = []
+        array $additional_eager = []
     ) {
         $withs = [
             'images',
@@ -246,23 +254,13 @@ class Content extends Model
             'unread_content',
         ];
 
-        $count_withs = [];
-
-        $count_withs = array_merge($count_withs, $additional_count_eager);
-
-        $query = $query
+        return $query
             ->whereType($type)
             ->whereStatus(1)
             ->orderBy($order, 'desc')
             ->with(
                 array_merge($withs, $additional_eager)
-            );
-
-        if (count($count_withs)) {
-            $query = $query->withCount($count_withs);
-        }
-
-        return $query
+            )
             ->when($destination, function ($query) use ($destination) {
                 $destinations = Destination::find($destination)->descendantsAndSelf()->pluck('id');
 
@@ -281,7 +279,7 @@ class Content extends Model
             ->simplePaginate($take);
     }
 
-    public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at', array $additional_eager = [], array $additional_count_eager = [])
+    public function scopeGetLatestItems($query, $type, $take = 5, $order = 'created_at', array $additional_eager = [])
     {
         $eager = [
             'images',
@@ -293,26 +291,16 @@ class Content extends Model
             'topics',
         ];
 
-        $count_withs = [];
-
-        $count_withs = array_merge($count_withs, $additional_count_eager);
-
         if (count($additional_eager)) {
             $eager = array_merge($eager, $additional_eager);
         }
 
-        $query = $query
+        return $query
             ->whereType($type)
             ->whereStatus(1)
             ->take($take)
             ->orderBy($order, 'desc')
-            ->with($eager);
-
-        if (count($count_withs)) {
-            $query = $query->withCount($count_withs);
-        }
-
-        return $query
+            ->with($eager)
             ->distinct()
             ->get();
     }
