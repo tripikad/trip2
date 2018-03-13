@@ -268,13 +268,13 @@ class Content extends Model
 
                 return $query
                     ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
-                    ->select('contents.*')
+                    //->addSelect('contents.*')
                     ->whereIn('content_destination.destination_id', $destinations);
             })
             ->when($topic, function ($query) use ($topic) {
                 return $query
                     ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
-                    ->select('contents.*')
+                    //->addSelect('contents.*')
                     ->where('content_topic.topic_id', '=', $topic);
             })
             ->distinct()
