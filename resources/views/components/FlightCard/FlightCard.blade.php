@@ -3,6 +3,7 @@
 $background = $background ?? '';
 $route = $route ?? '';
 $title = $title ?? '';
+$shorttitle = $shorttitle ?? '';
 
 @endphp
 
@@ -22,6 +23,14 @@ $title = $title ?? '';
 
     </h3>
 
+    {{--
+    <h3 class="FlightCard__shortTitle">
+
+        {{ $shorttitle }}
+
+    </h3>
+    --}}
+    
     </div>
 
     </a>

@@ -19,7 +19,7 @@ class RegistrationController extends Controller
     {
         //return view('pages.auth.register');
 
-        return layout('1colnarrow')
+        return layout('One')
             ->cached(false)
             ->with('color', 'gray')
             ->with('background', component('BackgroundMap'))

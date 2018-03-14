@@ -12,7 +12,7 @@ class MakeComponent extends Command
     public function handle()
     {
         $name = $this->argument('name');
-        $dir = "resources/views/v2/components/$name";
+        $dir = "resources/views/components/$name";
 
         Storage::disk('root')->makeDirectory($dir);
 
@@ -81,14 +81,14 @@ class MakeComponent extends Command
             $this->comment("       import $name from './components/$name/$name.vue'\n\n");
             $this->line("    2. In the same file add the following line to components: section\n\n");
             $this->comment("       $name,\n\n");
-            $this->line("    3. Run gulp\n");
+            $this->line("    3. Run npm run build\n");
             $this->line("    4. Add a following line to app/Http/Controllers/V2ExperimentsController.php\n");
             $this->comment("       ->push(component('$name')->with('title', 'I am $name'))\n");
         } else {
             Storage::disk('root')->put("$dir/$name.blade.php", implode("\n\n", $blade));
             $this->info("\nBlade component $dir created\n");
             $this->line("Your next steps:\n");
-            $this->line("    1. Run gulp\n");
+            $this->line("    1. Run npm run build\n");
             $this->line("    2. Add a following line to app/Http/Controllers/V2ExperimentsController.php\n");
             $this->comment("       ->push(component('$name')->with('title', 'I am $name'))\n");
         }

@@ -31,7 +31,7 @@ class V2NewsletterController extends Controller
             );
         }
 
-        return layout('1col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
             ->with('header', region('ForumHeader', collect()
@@ -73,10 +73,8 @@ class V2NewsletterController extends Controller
             ->with([
                 'newsletter_type',
                 'destination',
-                'subscriptions',
-                'sent',
             ])
-            ->orderBy('id', 'asc')
+            ->orderBy('id', 'desc')
             ->paginate(15);
 
         $left_content = collect();
@@ -100,7 +98,7 @@ class V2NewsletterController extends Controller
                     )
                     ->push(
                         component('Tag')
-                            ->with('title', trans('newsletter.sent').' '.$sent->sent->where('sending', 0)->count().' / '.$sent->sent->count())
+                            ->with('title', trans('newsletter.sent').' '.$sent->sending_num.' / '.$sent->sent_num)
                     )
                 )
             );
@@ -113,7 +111,7 @@ class V2NewsletterController extends Controller
             );
         });
 
-        return layout('2col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
             ->with('header', region('ForumHeader', collect()
@@ -185,7 +183,7 @@ class V2NewsletterController extends Controller
             }
         }
 
-        return layout('1col')
+        return layout('Two')
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
             ->with('header', region('ForumHeader', collect()
@@ -231,7 +229,7 @@ class V2NewsletterController extends Controller
         } else {
             $sort_order = 0;
             foreach ($request->input('body') as $key => &$body) {
-                ++$sort_order;
+                $sort_order++;
 
                 $date_from = $request->input('visible_from')[$key] == '' ? null : $request->input('visible_from')[$key];
                 $date_to = $request->input('visible_to')[$key] == '' ? null : $request->input('visible_to')[$key];
@@ -439,7 +437,7 @@ class V2NewsletterController extends Controller
             $subscription->active = 0;
             $subscription->save();
 
-            return layout('1col')
+            return layout('Two')
                 ->with('header', region('StaticHeader', collect()
                     ->push(component('Title')
                         ->is('red')

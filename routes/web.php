@@ -364,6 +364,10 @@ Route::get('image/index', 'V2ImageController@index')
     ->name('image.index')
     ->middleware('role:admin');
 
+Route::get('statistics', 'V2StatisticsController@index')
+    ->name('statistics.index')
+    ->middleware('role:superuser');
+
 // Utils
 
 Route::get('utils/alert', 'V2UtilsController@alert')
@@ -394,6 +398,18 @@ Route::get('experiments/fonts', 'V2ExperimentsController@fontsIndex')
 
 Route::get('experiments/map', 'V2ExperimentsController@mapIndex')
     ->name('experiments.map.index');
+
+Route::get('experiments/one', 'V2ExperimentsLayoutController@indexOne')
+    ->name('experiments.layouts.one');
+
+Route::get('experiments/two', 'V2ExperimentsLayoutController@indexTwo')
+    ->name('experiments.layouts.two');
+
+Route::get('experiments/grid', 'V2ExperimentsLayoutController@indexGrid')
+    ->name('experiments.layouts.grid');
+
+Route::get('experiments/frontpage', 'V2ExperimentsLayoutController@indexFrontpage')
+    ->name('experiments.layouts.frontpage');
 
 // V1
 

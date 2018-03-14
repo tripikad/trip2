@@ -7,24 +7,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    protected $commands = [
-
-        \App\Console\Commands\ConvertOldUser::class,
-        \App\Console\Commands\ConvertUrl::class,
-        \App\Console\Commands\ConvertUrlTest::class,
-        \App\Console\Commands\GenerateUserRankings::class,
-        \App\Console\Commands\MakeComponent::class,
-        \App\Console\Commands\MakeRegion::class,
-        \App\Console\Commands\UserDelete::class,
-        \App\Console\Commands\RemoveDuplicates::class,
-        \App\Console\Commands\GenerateSitemap::class,
-        \App\Console\Commands\ConvertMissingContent::class,
-        \App\Console\Commands\ConvertSearchable::class,
-        \App\Console\Commands\DisableOldShortNews::class,
-        \App\Console\Commands\ForumMiscTopic::class,
-        \App\Console\Commands\Newsletter::class,
-
-    ];
+    protected $commands = [];
 
     protected function schedule(Schedule $schedule)
     {
@@ -35,10 +18,13 @@ class Kernel extends ConsoleKernel
             ->dailyAt('05:00');
 
         $schedule->command('search:index')
-            ->cron('59 * * * *');
+            ->cron('0 */4 * * *');
 
         $schedule->command('search:index --optimize')
             ->dailyAt('05:55');
+
+        $schedule->command('newsletter:send --check-newsletters')
+            ->cron('*/10 * * * *');
 
         $schedule->command('newsletter:send')
             ->cron('*/5 * * * *');
@@ -51,6 +37,8 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
+        $this->load(__DIR__.'/Commands');
+
         require base_path('routes/console.php');
     }
 }

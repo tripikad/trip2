@@ -5,22 +5,22 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.6.4",
+        "php": "^7.0.0",
         "andreasindal/laravel-markdown": "^1.1",
         "barryvdh/laravel-debugbar": "^2.0@dev",
         "baum/baum": "~1.1",
         "cviebrock/eloquent-sluggable": "^4.0",
         "doctrine/dbal": "^2.5",
         "eduardokum/laravel-mail-auto-embed": "^1.0",
-        "htmlmin/htmlmin": "^4.5",
+        "htmlmin/htmlmin": "^5.0",
         "guzzlehttp/guzzle": "~5.3|~6.0",
         "intervention/image": "^2.3@dev",
         "ipunkt/laravel-analytics": "~1.1",
         "jenssegers/date": "3.*@dev",
-        "laravel/framework": "5.4.*",
+        "laravel/framework": "5.5.*",
         "laravel/socialite": "~3.0",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "5.4.*@dev",
+        "laravelcollective/html": "5.5.*",
         "laravelista/ekko": "~1.0",
         "msurguy/honeypot": "^1.0",
         "nikic/php-parser": "2.0.0",
@@ -30,11 +30,13 @@
         "wpb/string-blade-compiler": "2.*@dev"
     },
     "require-dev": {
+        "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
-        "laravel/browser-kit-testing": "^1.0",
-        "mockery/mockery": "0.9.*",
+        "laravel/browser-kit-testing": "^2.0",
+        "mockery/mockery": "~1.0",
         "phpspec/phpspec": "~2.1",
-        "phpunit/phpunit": "~5.7",
+        "phpunit/phpunit": "~6.0",
+        "symfony/thanks": "~1.0",
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*"
     },
@@ -72,6 +74,10 @@
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan optimize"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
         ]
     },
     "config": {

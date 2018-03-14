@@ -2,6 +2,7 @@
 
 require.context('./styles', true, /\.css$/)
 require.context('./components', true, /\.css$/)
+require.context('./layouts', true, /\.css$/)
 
 // Require SVG files
 
@@ -17,6 +18,7 @@ import Alert from './components/Alert/Alert.vue'
 import Arc from './components/Arc/Arc.vue'
 import Editor from './components/Editor/Editor.vue'
 import EditorSmall from './components/EditorSmall/EditorSmall.vue'
+import EditorComment from './components/EditorComment/EditorComment.vue'
 import Dotmap from './components/Dotmap/Dotmap.vue'
 import Flag from './components/Flag/Flag.vue'
 import FormButtonProcess from './components/FormButtonProcess/FormButtonProcess.vue'
@@ -35,6 +37,7 @@ import Icon from './components/Icon/Icon.vue'
 import IconLoader from './components/IconLoader/IconLoader.vue'
 import ImagePicker from './components/ImagePicker/ImagePicker.vue'
 import ImageUpload from './components/ImageUpload/ImageUpload.vue'
+import Linechart from './components/Linechart/Linechart.vue'
 import NavbarDesktop from './components/NavbarDesktop/NavbarDesktop.vue'
 import NavbarMobile from './components/NavbarMobile/NavbarMobile.vue'
 import NavbarSearch from './components/NavbarSearch/NavbarSearch.vue'
@@ -63,6 +66,7 @@ new Vue({
         Arc,
         Editor,
         EditorSmall,
+        EditorComment,
         Dotmap,
         Flag,
         FormButtonProcess,
@@ -78,6 +82,7 @@ new Vue({
         IconLoader,
         ImagePicker,
         ImageUpload,
+        Linechart,
         NavbarDesktop,
         NavbarMobile,
         NavbarSearch,

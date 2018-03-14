@@ -28,6 +28,12 @@
         overflow-y: scroll;
     }
 
+    .EditorSmall__body img {
+        width: auto;
+        max-width: 100%;
+        height: auto;
+    }
+
     .EditorSmall__source {
         font: $font-code-sm;
         line-height: $line-height-lg;

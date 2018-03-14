@@ -23,7 +23,7 @@ class V2PhotoController extends Controller
 
         $photos = Content::getLatestPagedItems('photo', 89, $destinationId);
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('StaticHeader', collect()
                 ->push(component('Title')
@@ -70,7 +70,7 @@ class V2PhotoController extends Controller
             ->latest()
             ->simplePaginate(89);
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('StaticHeader', collect()
                 ->push(component('Title')
@@ -112,9 +112,7 @@ class V2PhotoController extends Controller
     {
         $destinations = Destination::select('id', 'name')->orderBy('name', 'asc')->get();
 
-        return layout('2col')
-
-            ->with('narrow', true)
+        return layout('Two')
 
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')

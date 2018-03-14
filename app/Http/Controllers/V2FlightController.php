@@ -33,7 +33,7 @@ class V2FlightController extends Controller
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('title', trans('content.flight.index.title'))
             ->with('head_title', trans('content.flight.index.title'))
@@ -98,12 +98,14 @@ class V2FlightController extends Controller
         $loggedUser = auth()->user();
 
         $flight = Content::getItemBySlug($slug, $loggedUser);
+        $flight->vars()->add_view;
+
         $flights = Content::getLatestItems('flight', 4);
         $forums = Content::getLatestPagedItems('forum', 3, null, null, 'updated_at');
         $travelmates = Content::getLatestItems('travelmate', 3);
         $news = Content::getLatestItems('news', 1);
 
-        return layout('2col')
+        return layout('Two')
 
             ->with('title', trans('content.flight.index.title'))
             ->with('head_title', $flight->vars()->title)
@@ -185,6 +187,7 @@ class V2FlightController extends Controller
             ->with('sidebar', collect()
                 ->push(region('FlightAbout'))
                 ->push(region('FlightNewsletterSubscribe'))
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
                 ->push(component('AffiliateSearch'))
                 ->push(component('AffRentalcars'))
@@ -205,7 +208,7 @@ class V2FlightController extends Controller
     {
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('Header', collect()
                 ->push(component('EditorScript'))
@@ -307,7 +310,7 @@ class V2FlightController extends Controller
         $flight = Content::findOrFail($id);
         $destinations = Destination::select('id', 'name')->orderBy('name')->get();
 
-        return layout('1col')
+        return layout('Two')
 
             ->with('header', region('Header', collect()
                 ->push(component('EditorScript'))

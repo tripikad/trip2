@@ -167,7 +167,7 @@ class V2SearchController extends Controller
                 ->with('title', trans('search.results.newest_first'));
         }
 
-        return layout('1col')
+        return layout('Two')
             ->with('title', $q)
             ->with('head_title', trans('site.about'))
             ->with('head_description', '')
@@ -345,7 +345,7 @@ class V2SearchController extends Controller
         $count = 0;
 
         foreach ($keyword_array as &$keys) {
-            ++$count;
+            $count++;
             if (trim($keys) != '') {
                 if ($count > 1) {
                     $prefix = '-';

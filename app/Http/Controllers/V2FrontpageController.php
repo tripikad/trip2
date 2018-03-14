@@ -14,7 +14,7 @@ class V2FrontpageController extends Controller
         $loggedUser = auth()->user();
 
         $flights = Content::getLatestItems('flight', 9, 'id');
-        $forums = Content::getLatestItems('forum', 18, 'updated_at', ['unread_content']);
+        $forums = Content::getLatestItems('forum', 18, 'updated_at', ['unread_content', 'views']);
         $news = Content::getLatestItems('news', 6, 'id');
         $shortNews = Content::getLatestItems('shortnews', 4, 'id');
         $blogs = Content::getLatestItems('blog', 3, 'id');

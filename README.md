@@ -36,7 +36,7 @@ mysql -uroot trip2 < dump.sql
 In your `.env` file set the following parameter:
 
 ```
-IMAGE_PATH=http://trip.ee/images/
+IMAGE_PATH=https://trip.ee/images/
 ```
 
 ### Redis
@@ -310,7 +310,7 @@ Layouts are located at ```resources/views/layouts``` and are simple wrappers aro
 To show a component use a ```layout()``` helper:
 
 ```php
-layout('1col')
+layout('One')
     ->with('data1', 'Hello') // Passing a variable
     ->with('data2', 'World') // Variables can be chained
     ->render() // At the time of writing the final render() is required
@@ -319,13 +319,9 @@ layout('1col')
 By default layout() adds HTTP cache headers for 10 minutes. To disable this, add
 
 ```php
-layout('1col')
+layout('One')
     ->cached(false)
 ```
-
-#### CSS
-
-There is no dedicated CSS files for layouts but you can use helper classes found in `resources/views/styles/` folder.
 
 #### Making a layout
 

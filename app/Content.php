@@ -17,7 +17,7 @@ class Content extends Model
 
     protected $dates = ['created_at', 'updated_at', 'start_at', 'end_at'];
 
-    protected $appends = ['body_filtered', 'image_id'];
+    protected $appends = ['body_filtered', 'image_id', 'views_count'];
 
     // Relations
 
@@ -32,6 +32,20 @@ class Content extends Model
         }
 
         return $eager;
+    }
+
+    public function views()
+    {
+        return $this->morphMany('App\Activity', 'activity')->selectRaw('activity_id, count(*) as count')->where('type', 'view')->groupBy('activity_id');
+    }
+
+    public function getViewsCountAttribute()
+    {
+        if (! $this->views->count()) {
+            return 0;
+        } else {
+            return $this->views->first()->count;
+        }
     }
 
     public function user()
@@ -226,34 +240,39 @@ class Content extends Model
         $take = 36,
         $destination = false,
         $topic = false,
-        $order = 'created_at'
+        $order = 'created_at',
+        array $additional_eager = []
     ) {
+        $withs = [
+            'images',
+            'user',
+            'user.images',
+            'comments',
+            'comments.user',
+            'destinations',
+            'topics',
+            'unread_content',
+        ];
+
         return $query
             ->whereType($type)
             ->whereStatus(1)
             ->orderBy($order, 'desc')
             ->with(
-                'images',
-                'user',
-                'user.images',
-                'comments',
-                'comments.user',
-                'destinations',
-                'topics',
-                'unread_content'
+                array_merge($withs, $additional_eager)
             )
             ->when($destination, function ($query) use ($destination) {
                 $destinations = Destination::find($destination)->descendantsAndSelf()->pluck('id');
 
                 return $query
                     ->join('content_destination', 'content_destination.content_id', '=', 'contents.id')
-                    ->select('contents.*')
+                    //->addSelect('contents.*')
                     ->whereIn('content_destination.destination_id', $destinations);
             })
             ->when($topic, function ($query) use ($topic) {
                 return $query
                     ->join('content_topic', 'content_topic.content_id', '=', 'contents.id')
-                    ->select('contents.*')
+                    //->addSelect('contents.*')
                     ->where('content_topic.topic_id', '=', $topic);
             })
             ->distinct()

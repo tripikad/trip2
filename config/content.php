@@ -18,4 +18,8 @@ return [
         'sponsored',
     ],
 
+    'forum' => [
+        'paginate' => 20,
+    ],
+
 ];
