@@ -248,7 +248,7 @@ class V2ForumController extends Controller
                 ->merge($comments->map(function ($comment) use ($firstUnreadCommentId) {
                     return region('Comment', $comment, $firstUnreadCommentId, 'inset');
                 }))
-                ->push(region('PaginatorExtended', $comments))
+                ->push(component('CommentInset')->with('content', region('PaginatorExtended', $comments)))
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $forum, 'inset'))
                 ->push(component('Promo')->with('promo', 'body'))
             )
