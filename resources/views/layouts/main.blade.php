@@ -30,6 +30,7 @@
         <div id="app" class="background-{{ $color }}">
             @yield('background')
             @yield('promobar')
+            {!! component('PhotoFullscreen') !!}
             @yield('header')
             {!! component('HeaderError') !!}
             @yield('content')
@@ -40,7 +41,6 @@
             {!! component('Editor')
                 ->with('route', route('utils.format'))
             !!}
-            {!! component('PhotoFullscreen') !!}
             {!! component('Alert') !!}
 
         </div>
