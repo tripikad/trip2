@@ -7,6 +7,7 @@
     position: fixed;
     right: 0;
     top: 0;
+    z-index: 7;
 }
 
 .PhotoFullscreen__photo {
@@ -19,6 +20,7 @@
     position: fixed;
     right: 0;
     top: 0;
+    z-index: 7;
 }
 
 .PhotoFullscreen__meta {
