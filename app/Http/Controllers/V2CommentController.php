@@ -52,7 +52,7 @@ class V2CommentController extends Controller
 
         $append = '';
 
-        if ($comment->content->type == 'forum' || $comment->content->type == 'expat' || $comment->content->type == 'buysell' || $comment->content->type == 'misc') {
+        if (in_array($comment->content->type, ['forum', 'expat', 'buysell', 'misc'])) {
             $user = auth()->user();
             $comments = Comment::where('content_id', $comment->content->id)
                 ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
@@ -130,7 +130,7 @@ class V2CommentController extends Controller
 
         $append = '';
 
-        if ($comment->content->type == 'forum' || $comment->content->type == 'expat' || $comment->content->type == 'buysell' || $comment->content->type == 'misc') {
+        if (in_array($comment->content->type, ['forum', 'expat', 'buysell', 'misc'])) {
             $user = auth()->user();
             $comments = Comment::where('content_id', $comment->content->id)
                 ->when(! $user || ! $user->hasRole('admin'), function ($query) use ($user) {
