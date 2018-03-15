@@ -15,7 +15,7 @@
         @endif
 
         @if ($paginator->hasMorePages())
-            <li class="paginator__item">
+            <li class="Paginator__item">
                 <a  href="{{ $paginator->nextPageUrl() }}" rel="next" class="Paginator__button">
                     {{ trans('pagination.next') }} ›
                 </a>
