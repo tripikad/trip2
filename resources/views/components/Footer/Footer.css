@@ -52,6 +52,11 @@
 
     .Footer__socialIcon {
         display: none ?if $mobile;
+        margin-right: $margin-sm;
+    }
+
+    .Footer__socialIcon:last-child {
+        margin-right: 0;
     }
 
     .Footer__licence {
