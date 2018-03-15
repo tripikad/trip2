@@ -67,7 +67,9 @@ class NewsletterLetterContentVars
             }
         }
 
-        return $this->temp_body;
+        return preg_replace('/(\>)\s*(\<)/m', '$1$2',
+            preg_replace(['/\s{2,}/', '/[\t\n]/'], ' ', $this->temp_body)
+        );
     }
 
     protected function replace_if_matches(Content $the_flight = null, NewsletterType $newsletterType = null)

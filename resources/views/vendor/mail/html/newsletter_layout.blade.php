@@ -16,13 +16,15 @@
             }
         }
 
-        @media only screen and (max-width: 500px) {
+        @media only screen and (max-width: 640px) {
             .button {
                 width: 100% !important;
             }
 
             .flight_col {
                 display: block !important;
+                width: 100% !important;
+                text-align: center !important;
                 margin-top: 30px !important;
             }
 
@@ -35,6 +37,8 @@
             }
 
             .news_col {
+                width: 100% !important;
+                text-align: center !important;
                 display: block !important;
                 margin-top: 30px !important;
             }
