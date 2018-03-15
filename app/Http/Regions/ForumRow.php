@@ -12,6 +12,16 @@ class ForumRow
         $firstUnreadCommentId = $forum->vars()->firstUnreadCommentId;
         $route = $route ? $route : route($forum->type.'.show', [$forum->slug]);
 
+        $append = '';
+
+        if (in_array($forum->type, ['forum', 'expat', 'buysell', 'misc'])) {
+            $last_page = ceil(($commentCount - $unreadCommentCount) / config('content.forum.paginate'));
+
+            if ($last_page > 0) {
+                $append = '?page='.$last_page;
+            }
+        }
+
         return component('ForumRow')
             ->with('route', $route)
             ->with('user', component('UserImage')
@@ -39,7 +49,7 @@ class ForumRow
                             ))
                             ->with('route', route(
                                 'forum.show',
-                                [$forum->slug]).($firstUnreadCommentId ? '#comment-'.$firstUnreadCommentId : '')
+                                [$forum->slug]).($firstUnreadCommentId ? $append.'#comment-'.$firstUnreadCommentId : '')
                             )
                     )
                     ->pushWhen($commentCount, component('Tag')
