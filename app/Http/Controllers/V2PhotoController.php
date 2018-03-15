@@ -105,7 +105,56 @@ class V2PhotoController extends Controller
 
     public function show($id)
     {
-        return '';
+        $photo = Content::whereType('photo')
+            ->whereId($id)
+            ->whereStatus(1)
+            ->first();
+
+        $loggedUser = request()->user();
+
+        if (! $photo) {
+            return abort(404);
+        }
+
+        return layout('Two')
+            ->with('header', region('StaticHeader', collect()
+                ->push(component('Title')
+                    ->is('large')
+                    ->with(
+                        'title',
+                        $photo->title
+                    )
+                )
+                ->pushWhen(
+                    $loggedUser && $loggedUser->hasRole('regular'),
+                    component('Button')
+                        ->is('narrow')
+                        ->with('title', trans('content.photo.create.title'))
+                        ->with('route', route('photo.create'))
+                )
+                ->push(' ')
+            ))
+
+            ->with('top', collect()
+                ->push(
+                    component('PhotoResponsive')
+                        ->with('content',
+                            component('PhotoCard')
+                                ->with('small', $photo->imagePreset('large'))
+                                ->with('large', $photo->imagePreset('large'))
+                                ->with('meta', trans('content.photo.meta', [
+                                    'title' => $photo->vars()->title,
+                                    'username' => $photo->user->vars()->name,
+                                    'created_at' => $photo->vars()->created_at,
+                                ]))
+                                ->with('auto_show', true)
+                    )
+                )
+            )
+
+            ->with('footer', region('FooterLight'))
+
+            ->render();
     }
 
     public function create()
