@@ -45,6 +45,7 @@ import PhotoCard from './components/PhotoCard/PhotoCard.vue'
 import PhotoFullscreen from './components/PhotoFullscreen/PhotoFullscreen.vue'
 import PromoBar from './components/PromoBar/PromoBar.vue'
 import UserImage from './components/UserImage/UserImage.vue'
+import FbBackpackWidget from './components/Campaign/FbBackpackWidget.vue'
 
 Vue.use(VueResource)
 Vue.use(VueCookie);
@@ -91,7 +92,8 @@ new Vue({
         PromoBar,
         UserImage,
         TravelmateStart,
-        NewsletterComposer
+        NewsletterComposer,
+        FbBackpackWidget
     },
 
     mounted() {

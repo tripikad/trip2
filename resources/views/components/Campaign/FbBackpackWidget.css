@@ -1,0 +1,142 @@
+.promotion-slider {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    clear: both;
+    margin-top: 50px;
+    max-width: 100%;
+    padding: 0 18px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.promotion-slider .promotion-counter-container {
+    min-width: 1152px;
+    height: 160px;
+    padding-top: 48px;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background-color: darkgray;
+    border-radius: 4px;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .promotion-line-striped {
+    width: 0%;
+    height: 10px;
+    float: left;
+    border-radius: 4px;
+    background: blue;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container {
+    position: absolute;
+    height: 26px;
+    width: 100%;
+    top: 50%;
+    transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
+    -webkit-transform: translate(0%, -50%);
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle {
+    position: absolute;
+    background-color: blue;
+    width: 26px;
+    height: 26px;
+    border-radius: 26px;
+    -moz-border-radius: 26px;
+    -webkit-border-radius: 26px;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle p {
+    font-weight: 600;
+    position: absolute;
+    top: -24px;
+    transform: translate(-50%, -100%);
+    -ms-transform: translate(-50%, 100%);
+    -webkit-transform: translate(-50%, -100%);
+    left: 50%;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle svg {
+    fill: blue;
+    width: 52px;
+    height: 60px;
+    position: absolute;
+    top: 48px;
+    left: -12.5px;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle.bordered {
+    background-color: green;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle.bordered svg {
+    fill: #36a1eb;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle.last {
+    background-color: green;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle.last svg {
+    padding: 6px 0 0 6px;
+    fill: #36a1eb;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle:after {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    -moz-border-radius: 18px;
+    -webkit-border-radius: 18px;
+    border-radius: 18px;
+    background-color: white;
+    margin-left: 4px;
+    margin-top: 4px;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle:nth-of-type(1) {
+    left: 5%;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle:nth-of-type(2) {
+    left: 15%;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle:nth-of-type(3) {
+    left: 25%;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle:nth-of-type(4) {
+    left: 35%;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle:nth-of-type(5) {
+    left: 45%;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle:nth-of-type(6) {
+    left: 55%;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle:nth-of-type(7) {
+    left: 65%;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle:nth-of-type(8) {
+    left: 75%;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle:nth-of-type(9) {
+    left: 85%;
+}
+
+.promotion-slider .promotion-counter-container .promotion-line-background .circle-container .circle:nth-of-type(10) {
+    left: 95%;
+}

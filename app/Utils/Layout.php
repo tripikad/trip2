@@ -13,6 +13,7 @@ class Layout
         $this->layout = $layout;
         $this->with = collect();
         $this->cached = true;
+        $this->name = null;
     }
 
     public function with($key, $value)
@@ -29,9 +30,17 @@ class Layout
         return $this;
     }
 
+    public function setLayoutName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     public function render()
     {
-        $response = response()->view("layouts.$this->layout.$this->layout", $this->with);
+        $layoutName = $this->name ? $this->name : "layouts.$this->layout.$this->layout";
+        $response = response()->view($layoutName, $this->with);
 
         return $this->cached
             ? $response->header(

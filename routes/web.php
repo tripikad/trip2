@@ -368,6 +368,10 @@ Route::get('statistics', 'V2StatisticsController@index')
     ->name('statistics.index')
     ->middleware('role:superuser');
 
+// Campaigns
+Route::get('kampaania', 'CampaignController@index')
+    ->name('campaign.index');
+
 // Utils
 
 Route::get('utils/alert', 'V2UtilsController@alert')
