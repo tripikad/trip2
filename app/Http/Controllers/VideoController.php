@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Log;
-use Request;
 use App\Image;
 use App\Topic;
 use App\Content;
@@ -93,7 +91,7 @@ class VideoController extends Controller
                                         ->with('title', '...')
                                 )
                             ));
-                        })
+                    })
                     )
                 )
                 ->push(region('Paginator', $photos))
@@ -119,6 +117,4 @@ class VideoController extends Controller
 
             ->render();
     }
-
-
 }
