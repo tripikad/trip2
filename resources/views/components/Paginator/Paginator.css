@@ -2,14 +2,16 @@
 
 .Paginator {
     width: 100%;
-    display: flex;
-    justify-content: center;
+    display: block;
+    text-align: center;
+    margin-top: -$margin-sm;
 }
 
 .Paginator__item {
 
     display: inline-block;
     margin-right: $margin-sm;
+    margin-top: $margin-sm;
 }
 
 .Paginator__button {

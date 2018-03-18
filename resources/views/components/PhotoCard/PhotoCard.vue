@@ -17,6 +17,7 @@
             small: { default: '' },
             large: { default: '' },
             meta: { default: ''},
+            auto_show: { default: '' },
         },
         
         methods: {
@@ -29,6 +30,12 @@
                 }
             }
         },
+
+        mounted() {
+            if (this.auto_show) {
+                this.onClick()
+            }
+        }
 
     }
 

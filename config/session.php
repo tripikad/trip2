@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'lifetime' => 120,
+    'lifetime' => 1440,
 
     'expire_on_close' => false,
 
@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'connection' => null,
+    'connection' => 'session',
 
     /*
     |--------------------------------------------------------------------------
@@ -109,7 +109,7 @@ return [
     |
     */
 
-    'cookie' => 'laravel_session',
+    'cookie' => 'trip_session',
 
     /*
     |--------------------------------------------------------------------------
