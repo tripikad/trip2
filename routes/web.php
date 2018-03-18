@@ -252,6 +252,11 @@ Route::post('photo/store', 'V2PhotoController@store')
     ->name('photo.store')
     ->middleware('role:regular');
 
+// Video
+
+Route::get('reisivideod', 'VideoController@index')
+    ->name('video.index');
+
 // Content redirects
 
 Route::get('content/{type}', 'V2ContentController@redirectIndex')
