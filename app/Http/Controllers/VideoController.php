@@ -36,7 +36,12 @@ class VideoController extends Controller
                 )
             ))
 
+            ->with('top', collect()
+                ->push(component('MediaMap'))
+            )
+
             ->with('content', collect()
+
                 ->push(region(
                     'FilterHorizontal',
                     $destinations,
