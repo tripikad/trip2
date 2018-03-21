@@ -468,13 +468,14 @@ class Newsletter extends Command
                     $possible_destinations = array_merge($possible_destinations, $this->parent_destinations[$flight->destination_id]);
                 }
 
+                /* Don't override
                 foreach ($newsletter->subscriptions as &$subscription) {
                     if (in_array($subscription->destination_id, $possible_destinations)) {
-                        $flight->destination_id = $subscription->destination_id;
+                        //$flight->destination_id = $subscription->destination_id;
 
                         break;
                     }
-                }
+                }*/
 
                 $chunk_count++;
                 $count_processed++;
