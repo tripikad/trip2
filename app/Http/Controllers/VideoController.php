@@ -123,7 +123,6 @@ class VideoController extends Controller
             ->render();
     }
 
-
     public function show($slug)
     {
         $user = auth()->user();
@@ -248,7 +247,6 @@ class VideoController extends Controller
                 ->push(component('Promo')->with('promo', 'sidebar_small'))
                 ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
-
 
             ->with('footer', region('Footer'))
 
