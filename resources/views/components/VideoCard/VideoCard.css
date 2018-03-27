@@ -9,6 +9,11 @@
     width: 100%;
 }
 
+.VideoCard__image iframe {
+    width: 100%;
+    height: 400px;
+}
+
 .VideoCard__title {
     color: $blue;
     font: $font-heading-md;
