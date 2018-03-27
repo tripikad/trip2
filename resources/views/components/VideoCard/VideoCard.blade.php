@@ -8,7 +8,6 @@
 
 @endphp
 
-
     <div class="VideoCard {{ $isclasses }}">
 
         <div class="VideoCard__metaContainer padding-bottom-md">
