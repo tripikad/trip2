@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use Illuminate\Http\JsonResponse;
 
 class V2ContentController extends Controller
 {
@@ -26,11 +27,19 @@ class V2ContentController extends Controller
             $content->status = $status;
             $content->save();
 
-            return back()->with('info', trans("content.action.status.$status.info", [
-                'title' => $content->title,
-            ]));
+            if(request()->ajax()) {
+                return new JsonResponse(trans("content.action.status.$status.info", ['title' => $content->title]));
+            } else {
+                return back()->with('info', trans("content.action.status.$status.info", [
+                    'title' => $content->title,
+                ]));
+            }
         }
 
-        return back();
+        if(request()->ajax()){
+            return new JsonResponse('Invalid status', 403);
+        } else {
+            return back();
+        }
     }
 }
