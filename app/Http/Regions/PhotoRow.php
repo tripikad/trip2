@@ -16,15 +16,15 @@ class PhotoRow
                     'created_at' => $photo->vars()->created_at,
                 ]));
 
-                if (request()->user() && request()->user()->hasRole('admin')) {
-                    $component
+            if (request()->user() && request()->user()->hasRole('admin')) {
+                $component
                         ->with('edit_status', true)
                         ->with('photo_id', $photo->id)
                         ->with('status', $photo->status)
-                        ->with('button_title', trans("content.action.status.1.title"));
-                }
+                        ->with('button_title', trans('content.action.status.1.title'));
+            }
 
-                return $component;
+            return $component;
         });
 
         if ($content->count() && $content->count() < 9) {
