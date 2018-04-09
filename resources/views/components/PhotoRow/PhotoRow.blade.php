@@ -24,10 +24,6 @@ $actions = collect($actions) ?? collect();
 
                         {!! $content_item !!}
 
-                        {{--<div>
-                            {!! $statusForm !!}
-                        </div>--}}
-
                     </div>
 
                 @endforeach
