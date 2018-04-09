@@ -1,6 +1,25 @@
 @import "variables";
 
-    .PhotoCard__photo {
-        width: 100%;
-        display: block;
-    }
+.PhotoCard {
+    position: relative;
+}
+
+.PhotoCard .Tag {
+    border: 1px solid #FFF;
+}
+
+.PhotoCard__photo {
+    width: 100%;
+    display: block;
+}
+
+.PhotoCard__status {
+    position: absolute;
+    bottom: 8px;left: 8px;
+    border: 1px solid #FFF;
+}
+
+.PhotoCard__status-button {
+    color: #FFF;
+    white-space: nowrap;
+}

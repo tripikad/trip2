@@ -22,8 +22,8 @@ $actions = collect($actions) ?? collect();
 
                     <div class="PhotoRow__photo">
 
-                    {!! $content_item !!}
-                    
+                        {!! $content_item !!}
+
                     </div>
 
                 @endforeach
