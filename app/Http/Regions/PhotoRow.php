@@ -7,14 +7,24 @@ class PhotoRow
     public function render($photos, $actions = [])
     {
         $content = $photos->map(function ($photo) {
-            return component('PhotoCard')
-                        ->with('small', $photo->imagePreset('small_square'))
-                        ->with('large', $photo->imagePreset('large'))
-                        ->with('meta', trans('content.photo.meta', [
-                            'title' => $photo->vars()->title,
-                            'username' => $photo->user->vars()->name,
-                            'created_at' => $photo->vars()->created_at,
-                        ]));
+            $component = component('PhotoCard')
+                ->with('small', $photo->imagePreset('small_square'))
+                ->with('large', $photo->imagePreset('large'))
+                ->with('meta', trans('content.photo.meta', [
+                    'title' => $photo->vars()->title,
+                    'username' => $photo->user->vars()->name,
+                    'created_at' => $photo->vars()->created_at,
+                ]));
+
+            if (request()->user() && request()->user()->hasRole('admin')) {
+                $component
+                        ->with('edit_status', true)
+                        ->with('photo_id', $photo->id)
+                        ->with('status', $photo->status)
+                        ->with('button_title', trans('content.action.status.1.title'));
+            }
+
+            return $component;
         });
 
         if ($content->count() && $content->count() < 9) {
