@@ -12,7 +12,7 @@ class FrontpageTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             //dump($browser);
             $browser->visit('/')
-                ->assertSourceHas('Autoriõigused');
+                ->assertSourceHas('Autoriõigused')
                 ->dump();
         });
     }
