@@ -11,7 +11,7 @@ class FrontpageTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->assertSourceHas('Autoriõigused')
+                ->assertSourceHas('Autoriõigused');
         });
     }
 
@@ -21,7 +21,7 @@ class FrontpageTest extends DuskTestCase
             $browser->visit('/')
                 ->whenAvailable('.FrontpageSearch__input', function ($search) {
                     $search->assertSourceHas('Kuhu sa soovid minna?');
-                }, 10);
+                });
         });
     }
 }
