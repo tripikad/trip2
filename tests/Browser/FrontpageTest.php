@@ -9,6 +9,7 @@ class FrontpageTest extends DuskTestCase
 {
     public function testFrontpage()
     {
+        dd(env('APP_URL'));
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                 //->assertSourceHas('Autoriõigused');
