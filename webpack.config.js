@@ -58,9 +58,9 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin("[name].[chunkhash:6].css"),
+        new ExtractTextPlugin('[name].[chunkhash:6].css'),
         new SpriteLoaderPlugin(),
-        new CleanWebpackPlugin("./public/dist"),
+        new CleanWebpackPlugin('./public/dist'),
         function() {
             this.plugin("done", stats => {
                 var assets = stats.toJson().assetsByChunkName;
@@ -70,7 +70,7 @@ module.exports = {
                     svg: "main.svg"
                 };
                 fs.writeFileSync(
-                    path.join(__dirname, "public/dist/manifest.json"),
+                    path.join(__dirname, 'public/dist/manifest.json'),
                     JSON.stringify(manifest)
                 );
             });
