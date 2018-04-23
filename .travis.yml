@@ -36,11 +36,7 @@ install:
     - php artisan serve -vvv &
     - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 
-script:
-    - curl http://localhost
-    - curl https://localhost
-    - curl http://localhost:8000
-    - curl https://localhost:8000    
+script:  
     - php artisan dusk
 #   - ./vendor/bin/phpunit
 
