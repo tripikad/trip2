@@ -9,11 +9,10 @@ class FrontpageTest extends DuskTestCase
 {
     public function testFrontpage()
     {
-        dump(env('APP_URL'));
         $this->browse(function (Browser $browser) {
-            dump($browser);
+            //dump($browser);
             $browser->visit('/')
-                //->assertSourceHas('Autoriõigused');
+                ->assertSourceHas('Autoriõigused');
                 ->dump();
         });
     }
