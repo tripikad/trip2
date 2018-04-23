@@ -38,8 +38,6 @@ install:
 
 script:
     - ./vendor/bin/phpunit
-    - curl http://localhost
-    - curl http://127.0.0.1
     - php artisan dusk
 
 notifications:

@@ -11,6 +11,7 @@ class FrontpageTest extends DuskTestCase
     {
         dump(env('APP_URL'));
         $this->browse(function (Browser $browser) {
+            dump($browser)
             $browser->visit('/')
                 //->assertSourceHas('Autoriõigused');
                 ->dump();
