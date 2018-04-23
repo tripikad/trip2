@@ -10,7 +10,6 @@ class FrontpageTest extends DuskTestCase
     public function testFrontpage()
     {
         $this->browse(function (Browser $browser) {
-            //dump($browser);
             $browser->visit('/')
                 ->assertSourceHas('Autoriõigused')
                 ->dump();

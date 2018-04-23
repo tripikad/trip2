@@ -37,9 +37,8 @@ install:
     - php artisan serve &
 
 script:
-    - curl http://127.0.0.1:8000
-    - ./vendor/bin/phpunit
     - php artisan dusk
+#   - ./vendor/bin/phpunit
 
 notifications:
     email: false
