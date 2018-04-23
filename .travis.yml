@@ -33,8 +33,8 @@ install:
     - npm install --global yarn
     - yarn
     - npm run build
-    - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
     - php artisan serve &
+    - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 
 script:
     - php artisan dusk
