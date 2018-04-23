@@ -22,8 +22,8 @@ cache:
 
 install:
     - bash .travis.install-mysql-5.7.sh
-    - composer install --no-interaction
     - cp .env.travis .env
+    - composer install --no-interaction
     - chmod -R o+w storage/
     - chmod -R o+w bootstrap/cache/
     - mysql -e 'create database trip2;'
