@@ -1,0 +1,38 @@
+@import "variables";
+
+.VideoCard {
+    /*display: flex;*/
+    margin-right: $margin-md;
+}
+
+.VideoCard__image img {
+    width: 100%;
+}
+
+.VideoCard__image iframe {
+    width: 100%;
+    height: 400px;
+}
+
+.VideoCard__title {
+    color: $blue;
+    font: $font-heading-md;
+}
+
+.VideoCard__title:hover {
+    color: $blue-hover;
+}
+
+.VideoCard__user {
+    margin-right: $margin-sm;
+    display: inline-block;
+}
+
+.VideoCard__content {
+    display: inline-block;
+}
+
+.VideoCard__metaContainer {
+    display: flex;
+}
+

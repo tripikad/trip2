@@ -316,6 +316,11 @@ return [
     'photo.meta' => ':title. Postitas :username, :created_at',
     'photo.more' => 'Kõik pildid',
 
+    // Video
+
+    'video.index.title' => 'Reisivideod',
+    'video.description.text' => 'Lae üles video ja ole KJUUL XOXO',
+
     // Blog
 
     'blog.index.title' => 'Reisiblogid',
