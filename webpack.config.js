@@ -8,25 +8,12 @@ var CleanWebpackPlugin = require("clean-webpack-plugin");
 module.exports = {
     entry: {
         main: "./resources/views/main.js",
-        vendor: [
-            "codemirror",
-            "d3-array",
-            "d3-scale",
-            "d3-shape",
-            "dropzone",
-            "pell",
-            "vue",
-            "vue-clickaway",
-            "vue-cookie",
-            "vue-focus",
-            "vue-multiselect",
-            "vue-resource"
-        ]
     },
     output: {
         path: path.resolve(__dirname, "./public/dist"),
         publicPath: "/dist/",
-        filename: "[name].[chunkhash:6].js"
+        filename: "[name].[chunkhash:6].js",
+        chunkFilename: "main.[name].[chunkhash:6].js"
     },
     module: {
         rules: [
@@ -71,25 +58,19 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('vendor'),
-        new ExtractTextPlugin('[name].[chunkhash:6].css'),
+        new ExtractTextPlugin("[name].[chunkhash:6].css"),
         new SpriteLoaderPlugin(),
-        new CleanWebpackPlugin('./public/dist'),
+        new CleanWebpackPlugin("./public/dist"),
         function() {
             this.plugin("done", stats => {
                 var assets = stats.toJson().assetsByChunkName;
                 var manifest = {
-                    js: assets.main.find(
-                        asset => path.extname(asset) === '.js'
-                    ),
-                    vendor: assets.vendor,
-                    css: assets.main.find(
-                        asset => path.extname(asset) === '.css'
-                    ),
+                    js: assets.main.find(asset => path.extname(asset) === ".js"),
+                    css: assets.main.find(asset => path.extname(asset) === ".css"),
                     svg: "main.svg"
                 };
                 fs.writeFileSync(
-                    path.join(__dirname, 'public/dist/manifest.json'),
+                    path.join(__dirname, "public/dist/manifest.json"),
                     JSON.stringify(manifest)
                 );
             });
@@ -107,21 +88,8 @@ module.exports = {
 };
 
 if (process.env.NODE_ENV === "production") {
-    module.exports.devtool = "#source-map";
-    module.exports.plugins = (module.exports.plugins || []).concat([
-        new webpack.DefinePlugin({
-            "process.env": {
-                NODE_ENV: '"production"'
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress: {
-                warnings: false
-            }
-        }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true
-        })
+    module.exports.devtool = "";
+    module.exports.plugins = module.exports.plugins.concat([
+        new webpack.optimize.UglifyJsPlugin()
     ]);
 }

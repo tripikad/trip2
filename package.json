@@ -25,7 +25,8 @@
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
-    "babel-preset-latest": "^6.0.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-1": "^6.24.1",
     "clean-webpack-plugin": "^0.1.16",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
