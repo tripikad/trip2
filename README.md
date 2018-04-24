@@ -125,19 +125,40 @@ are compiled and minified to
 ./public/dist/main.hash.js
 ```
 
-#### Vendor JS
+### Lazy component loading
 
-Vendor libraries specified in `webpack.config.js` are extracted from
+Vue components can also be lazy-loaded, most useful for components that have large dependecies.
 
-```
-./resources/views/components/**/*.vue
+```vue
+// FormEditor.vue
+// ...
+<script>
+
+export default {
+  components: {
+    Editor: () =>
+      import("../../components_lazy/Editor/Editor.vue")
+  },
+// ...
 ```
 
-are compiled and minified to
+This creates an extra package `main.0.hash.js` that is loaded on demand via ajax when `FormEditor` component is on the page.
 
+Optionally one can add a comment that gives a bit clearer package name:
+
+```vue
+// FormEditor.vue
+// ...
+<script>
+export default {
+  components: {
+    Editor: () =>
+      import(/* webpackChunkName: "editor" */ "../../components_lazy/Editor/Editor.vue")
+  },
+// ...
 ```
-./public/dist/vendor.hash.js
-```
+
+This creates an named extra package `main.editor.hash.js`
 
 #### CSS
 
