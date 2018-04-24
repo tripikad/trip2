@@ -46,8 +46,9 @@ class CommentTest extends DuskTestCase
                 $browser
                     ->loginAs($regular_user)
                     ->visit("content/$content->type/$content->id")
-                    ->pause(5000)
-                    ->type('.EditorComment__body', "Hola chicos de $content->type")
+                    ->whenAvailable('.EditorComment', function ($editorComment) use ($content) {
+                        $editorComment->type('.EditorComment__body', "Hola chicos de $content->type");
+                    })
                     ->click('.FormButtonProcess')
                     ->assertSee("Hola chicos de $content->type")
                     ->assertSee($regular_user->name);
