@@ -1,4 +1,8 @@
 dist: trusty
+sudo: required
+
+addons:
+   chrome: beta
 
 language: php
 
@@ -18,8 +22,8 @@ cache:
 
 install:
     - bash .travis.install-mysql-5.7.sh
-    - composer install --no-interaction
     - cp .env.travis .env
+    - composer install --no-interaction
     - chmod -R o+w storage/
     - chmod -R o+w bootstrap/cache/
     - mysql -e 'create database trip2;'
@@ -29,9 +33,12 @@ install:
     - npm install --global yarn
     - yarn
     - npm run build
+    - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+    - php artisan serve &
 
-script:
+script:  
     - ./vendor/bin/phpunit
+    - php artisan dusk
 
 notifications:
     email: false
