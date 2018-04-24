@@ -7,7 +7,7 @@ use Laravel\Dusk\Browser;
 
 class FrontpageTest extends DuskTestCase
 {
-    public function testFrontpage()
+    public function test_frontpage_html_content_is_displayed()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
@@ -15,7 +15,7 @@ class FrontpageTest extends DuskTestCase
         });
     }
 
-    public function testFrontpageJS()
+    public function test_frontpage_js_content_is_displayed()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
