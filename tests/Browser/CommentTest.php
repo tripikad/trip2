@@ -44,11 +44,12 @@ class CommentTest extends DuskTestCase
 
             $this->browse(function ($browser) use ($regular_user, $content) {
                 $browser
-                    ->visit('/login')
-                    ->type('name', $regular_user->name)
-                    ->type('password', 'password')
-                    ->pause(3000)
-                    ->press('Logi sisse')
+                    // ->visit('/login')
+                    // ->type('name', $regular_user->name)
+                    // ->type('password', 'password')
+                    // ->pause(3000)
+                    // ->press('Logi sisse')
+                    ->loginAs($regular_user)
                     ->visit("content/$content->type/$content->id")
                     ->type('.EditorComment__body', "Hola chicos de $content->type")
                     ->click('.FormButtonProcess')
