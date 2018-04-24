@@ -16,13 +16,13 @@ class CommentTest extends DuskTestCase
 
         $this->publicContentTypes = [
             'blog',
-            'buysell',
-            'expat',
-            'flight',
-            'forum',
-            'news',
-            'shortnews',
-            'travelmate',
+            // 'buysell',
+            // 'expat',
+            // 'flight',
+            // 'forum',
+            // 'news',
+            // 'shortnews',
+            // 'travelmate',
         ];
 
         $this->privateContentTypes = [
@@ -46,6 +46,7 @@ class CommentTest extends DuskTestCase
                 $browser
                     ->loginAs($regular_user)
                     ->visit("content/$content->type/$content->id")
+                    ->pause(5000)
                     ->type('.EditorComment__body', "Hola chicos de $content->type")
                     ->click('.FormButtonProcess')
                     ->assertSee("Hola chicos de $content->type")
