@@ -8,11 +8,9 @@ use App\User;
 use App\Content;
 use App\Comment;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class CommentTest extends DuskTestCase
 {
-    //use DatabaseMigrations;
 
     public function setUp()
     {
@@ -57,9 +55,18 @@ class CommentTest extends DuskTestCase
                     ->assertSee($regular_user->name);
             });
 
-            //$comment = Comment::whereBody("Hola chicos de $content->type")->first();
+            // Cleanup
 
+            $comment = Comment::whereBody("Hola chicos de $content->type")
+                ->whereUserId($regular_user->id)
+                ->first()
+                ->delete();
+            $content->delete();
+            
         }
+
+        $regular_user->delete();
+
     }
 }
 
