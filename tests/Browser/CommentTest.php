@@ -11,7 +11,6 @@ use Carbon\Carbon;
 
 class CommentTest extends DuskTestCase
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -37,7 +36,6 @@ class CommentTest extends DuskTestCase
         $regular_user = factory(User::class)->create();
 
         foreach ($this->publicContentTypes as $type) {
-
             $content = factory(Content::class)->create([
                 'user_id' => factory(User::class)->create()->id,
                 'type' => $type,
@@ -62,20 +60,8 @@ class CommentTest extends DuskTestCase
                 ->first()
                 ->delete();
             $content->delete();
-            
         }
 
         $regular_user->delete();
-
     }
 }
-
-/*
-
-actingAs -> loginAs
-type <>
-press press
-pause
-assertSee
-
-*/
