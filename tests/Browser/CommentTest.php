@@ -55,8 +55,9 @@ class CommentTest extends DuskTestCase
                     ->click('.FormButtonProcess')
                     ->assertSee("Hola chicos de $content->type")
                     ->assertSee($regular_user->name);
-            
             });
+
+            //$comment = Comment::whereBody("Hola chicos de $content->type")->first();
 
         }
     }
