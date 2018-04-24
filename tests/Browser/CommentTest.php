@@ -2,12 +2,11 @@
 
 namespace Tests\Browser;
 
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
 use App\User;
-use App\Content;
 use App\Comment;
+use App\Content;
 use Carbon\Carbon;
+use Tests\DuskTestCase;
 
 class CommentTest extends DuskTestCase
 {
