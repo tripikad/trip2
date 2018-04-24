@@ -15,11 +15,11 @@ class CommentTest extends DuskTestCase
         parent::setUp();
 
         $this->publicContentTypes = [
-            'blog',
+            //'blog',
             // 'buysell',
             // 'expat',
             // 'flight',
-            // 'forum',
+            'forum',
             // 'news',
             // 'shortnews',
             // 'travelmate',
@@ -32,7 +32,7 @@ class CommentTest extends DuskTestCase
 
     public function test_regular_user_can_add_comment()
     {
-        $regular_user = factory(User::class)->create();
+        $regular_user = factory(User::class)->create(['password' => bcrypt('password')]);
 
         foreach ($this->publicContentTypes as $type) {
             $content = factory(Content::class)->create([
@@ -44,15 +44,17 @@ class CommentTest extends DuskTestCase
 
             $this->browse(function ($browser) use ($regular_user, $content) {
                 $browser
-                    ->loginAs($regular_user)
+                    ->visit('/login')
+                    ->type('name', $regular_user->name)
+                    ->type('password', 'password')
+                    ->pause(3000)
+                    ->press('Logi sisse')
                     ->visit("content/$content->type/$content->id")
-                    ->dump()
-                    ->whenAvailable('.EditorComment', function ($editorComment) use ($content) {
-                        $editorComment->type('.EditorComment__body', "Hola chicos de $content->type");
-                    })
+                    ->type('.EditorComment__body', "Hola chicos de $content->type")
                     ->click('.FormButtonProcess')
                     ->assertSee("Hola chicos de $content->type")
-                    ->assertSee($regular_user->name);
+                    ->assertSee($regular_user->name)
+                    ->visit('/');
             });
 
             // Cleanup
