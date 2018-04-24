@@ -46,6 +46,7 @@ class CommentTest extends DuskTestCase
                 $browser
                     ->loginAs($regular_user)
                     ->visit("content/$content->type/$content->id")
+                    ->dump()
                     ->whenAvailable('.EditorComment', function ($editorComment) use ($content) {
                         $editorComment->type('.EditorComment__body', "Hola chicos de $content->type");
                     })
