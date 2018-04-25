@@ -15,17 +15,15 @@ class EditorTest extends DuskTestCase
         foreach (['flight', 'news'] as $type) {
             $this->browse(function ($browser) use ($super_user, $type) {
                 $browser
-                //->resize(1200, 10)
                 ->loginAs($super_user)
                 ->visit("$type/create")
                 ->type('title', "Hola editores de titulo de $type")
-                ->click('textarea[readonly=readonly]')
+                ->click('textarea[readonly=readonly]') // @todo rework click target
                 ->pause(1000) // Loading the editor
                 ->keys('.Editor__source textarea', "Hola editores de cuerpo de $type")
                 ->pause(2000) // Waiting for ajax-based preview
                 ->assertSeeIn('.Editor__target', "Hola editores de cuerpo de $type")
-                ->screenshot($type)
-                ->click('.Editor__toolbarRight > .Editor__tool')
+                ->click('.Editor__toolbarRight > .Editor__tool') // @todo rework click target
                 ->press('Lisa')
                 ->assertSee("Hola editores de titulo de $type");
             });
