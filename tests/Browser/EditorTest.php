@@ -2,10 +2,9 @@
 
 namespace Tests\Browser;
 
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
 use App\User;
 use App\Content;
+use Tests\DuskTestCase;
 
 class EditorTest extends DuskTestCase
 {
@@ -13,7 +12,7 @@ class EditorTest extends DuskTestCase
     {
         $super_user = factory(User::class)->create(['role' => 'superuser']);
 
-        foreach (['flight', 'news',] as $type) {
+        foreach (['flight', 'news'] as $type) {
             $this->browse(function ($browser) use ($super_user, $type) {
                 $browser
                 //->resize(1200, 10)
@@ -28,8 +27,7 @@ class EditorTest extends DuskTestCase
                 ->screenshot($type)
                 ->click('.Editor__toolbarRight > .Editor__tool')
                 ->press('Lisa')
-                ->assertSee("Hola editores de titulo de $type")
-            ;
+                ->assertSee("Hola editores de titulo de $type");
             });
 
             // Cleanup
