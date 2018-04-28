@@ -44,7 +44,6 @@
             {!! component('Alert') !!}
 
         </div>
-        <script defer src="{{ dist('vendor') }}"></script>
         <script defer src="{{ dist('js') }}"></script>
         @include('utils.promo')
         @include('utils.facebook')
