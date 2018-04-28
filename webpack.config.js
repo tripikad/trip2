@@ -66,21 +66,21 @@ module.exports = {
       filename: "[name].[contenthash:6].css"
     }),
     new SpriteLoaderPlugin(),
-    new CleanWebpackPlugin("./public/dist")
-    // function() {
-    //     this.plugin("done", stats => {
-    //         var assets = stats.toJson().assetsByChunkName;
-    //         var manifest = {
-    //             js: assets.main.find(asset => path.extname(asset) === ".js"),
-    //             css: assets.main.find(asset => path.extname(asset) === ".css"),
-    //             svg: "main.svg"
-    //         };
-    //         fs.writeFileSync(
-    //             path.join(__dirname, 'public/dist/manifest.json'),
-    //             JSON.stringify(manifest)
-    //         );
-    //     });
-    // }
+    new CleanWebpackPlugin("./public/dist"),
+    function() {
+        this.plugin("done", stats => {
+            var assets = stats.toJson().assetsByChunkName;
+            var manifest = {
+                js: assets.main.find(asset => path.extname(asset) === ".js"),
+                css: assets.main.find(asset => path.extname(asset) === ".css"),
+                svg: "main.svg"
+            };
+            fs.writeFileSync(
+                path.join(__dirname, 'public/dist/manifest.json'),
+                JSON.stringify(manifest)
+            );
+        });
+    }
   ],
   resolve: {
     alias: {
