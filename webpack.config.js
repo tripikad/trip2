@@ -6,6 +6,7 @@ var SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
 var CleanWebpackPlugin = require("clean-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -103,7 +104,8 @@ if (process.env.NODE_ENV === "production") {
         sourceMap: false,
         cache: true,
         parallel: true
-      })
+      }),
+      new OptimizeCSSAssetsPlugin()
     ]
   };
 }
