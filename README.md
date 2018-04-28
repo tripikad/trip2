@@ -52,14 +52,14 @@ CACHE_DRIVER=redis
 
 To test the local reverse proxy cache, edit `/usr/local/etc/nginx/valet/valet.conf` file:
 
-1. Add the following to the top of the file:
+1.  Add the following to the top of the file:
 
 ```nginx
-fastcgi_cache_path /tmp/nginx levels=1:2 keys_zone=TRIP2:256m inactive=60m use_temp_path=off; 
+fastcgi_cache_path /tmp/nginx levels=1:2 keys_zone=TRIP2:256m inactive=60m use_temp_path=off;
 fastcgi_cache_key "$scheme$request_method$host$request_uri";
 ```
 
-2. After the
+2.  After the
 
 ```
 fastcgi_param SCRIPT_FILENAME /.../
@@ -69,7 +69,7 @@ line add the following:
 
 ```nginx
 fastcgi_cache TRIP2;
-fastcgi_ignore_headers Set-Cookie; 
+fastcgi_ignore_headers Set-Cookie;
 fastcgi_hide_header Set-Cookie;
 fastcgi_pass_header Set-Cookie;
 fastcgi_cache_bypass $cookie_logged $is_args;
@@ -94,6 +94,29 @@ valet restart
 
 ```
 ./vendor/bin/phpunit
+php artisan dusk
+```
+
+## Linting
+
+### Running linter
+
+```
+npm run lint
+```
+
+### Recommended settings for Visual Studio Code
+
+Install **ESLint**, **Prettier** and **Vetur** plugins and 
+adjust user configuration as follows:
+
+```json
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "vue"
+    ],
+    "editor.formatOnSave": true,
 ```
 
 
@@ -134,6 +157,7 @@ Vue components can also be lazy-loaded, most useful for components that have lar
 // ...
 <script>
 
+
 export default {
   components: {
     Editor: () =>
@@ -150,6 +174,7 @@ Optionally one can add a comment that gives a bit clearer package name:
 // FormEditor.vue
 // ...
 <script>
+
 export default {
   components: {
     Editor: () =>
@@ -166,7 +191,7 @@ Components CSS from
 
 ```
 ./resources/views/components/**/*.css
-``` 
+```
 
 and helper CSS from
 
@@ -192,9 +217,9 @@ are concat into a SVG sprite, optimized, minified and saved to
 
 ### API
 
-Components are located at ```resources/views/components``` and are either Laravel Blade or VueJS components.
+Components are located at `resources/views/components` and are either Laravel Blade or VueJS components.
 
-To show a component use a ```component()``` helper:
+To show a component use a `component()` helper:
 
 ```php
 component('MyComponent')
@@ -224,28 +249,34 @@ php artisan make:component MyComponent --vue
 
 #### Class naming conventions
 
-We use a hybrid BEM / SUIT naming 
+We use a hybrid BEM / SUIT naming
 convention:
 
 Blocks:
 
 ```css
-.Component {}
-.AnotherComponent {}
+.Component {
+}
+.AnotherComponent {
+}
 ```
 
 Elements:
 
 ```css
-.Component__element {}
-.AnotherComponent__anotherElement {}
+.Component__element {
+}
+.AnotherComponent__anotherElement {
+}
 ```
 
 Modifiers:
 
 ```css
-.Component--modifier {}
-.AnotherComponent--anotherModifier {}
+.Component--modifier {
+}
+.AnotherComponent--anotherModifier {
+}
 ```
 
 #### Variables
@@ -253,14 +284,14 @@ Modifiers:
 A Sass-like `$variable` syntax is supported via [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars). Use global variables from [/resources/views/styles/variables.css](/resources/views/styles/variables.css) by importing them to CSS file:
 
 ```scss
-@import "variables" // Resolves to ./resources/views/styles/variables.css
+@import "variables";
 ```
 
 #### Fonts
 
 ##### Fonts for headings
 
-Use the `$font-heading-xs | $font-heading-sm |  $font-heading-md |  $font-heading-lg |  $font-heading-xl |  $font-heading-xxl |  $font-heading-xxxl` variables that set most of the font details.
+Use the `$font-heading-xs | $font-heading-sm | $font-heading-md | $font-heading-lg | $font-heading-xl | $font-heading-xxl | $font-heading-xxxl` variables that set most of the font details.
 
 Also, it's recommended to reduce contrast and use lighter font colors:
 
@@ -268,18 +299,18 @@ Also, it's recommended to reduce contrast and use lighter font colors:
 .Component__title {
     font: $font-heading-lg;
     color: $gray-dark;
-}  
+}
 ```
 
 ##### Fonts for shorter plain texts
 
-Use the `$font-text-xs | $font-text-sm |  $font-text-md |  $font-text-lg` variables.
+Use the `$font-text-xs | $font-text-sm | $font-text-md | $font-text-lg` variables.
 
 ```scss
 .Component__description {
     font: $font-text-md; // The recommended body size
     color: $gray-dark; // For reduced contrast
-}  
+}
 ```
 
 ##### Fonts for longer texts with markup
@@ -295,17 +326,16 @@ component('Body')->with('body', $your_html_content)
 When using third party libraries one can import it's CSS from node_modules directory:
 
 ```scss
-@import "somelibrary/dist/somelibrary.css" // Resolves to ./node_modules/somelibrary/dist/somelibrary.css
+@import "somelibrary/dist/somelibrary.css";
 ```
 
 ### Regions
 
 #### API
 
-Regions are located at ```app/Http/Regions``` and are simple PHP classes to extract rendering specific code chunks out of controllers.
+Regions are located at `app/Http/Regions` and are simple PHP classes to extract rendering specific code chunks out of controllers.
 
-
-To show a component use a ```region()``` helper:
+To show a component use a `region()` helper:
 
 ```php
 region('MyComponent', $parameter1, $parameter2) // etc
@@ -321,14 +351,13 @@ php artisan make:region MyRegion
 
 and follow the directions.
 
-
 ### Layouts
 
 #### API
 
-Layouts are located at ```resources/views/layouts``` and are simple wrappers around top-level ```view()```.
+Layouts are located at `resources/views/layouts` and are simple wrappers around top-level `view()`.
 
-To show a component use a ```layout()``` helper:
+To show a component use a `layout()` helper:
 
 ```php
 layout('One')
