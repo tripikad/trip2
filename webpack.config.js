@@ -5,6 +5,7 @@ var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
 var CleanWebpackPlugin = require("clean-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -68,18 +69,18 @@ module.exports = {
     new SpriteLoaderPlugin(),
     new CleanWebpackPlugin("./public/dist"),
     function() {
-        this.plugin("done", stats => {
-            var assets = stats.toJson().assetsByChunkName;
-            var manifest = {
-                js: assets.main.find(asset => path.extname(asset) === ".js"),
-                css: assets.main.find(asset => path.extname(asset) === ".css"),
-                svg: "main.svg"
-            };
-            fs.writeFileSync(
-                path.join(__dirname, 'public/dist/manifest.json'),
-                JSON.stringify(manifest)
-            );
-        });
+      this.plugin("done", stats => {
+        var assets = stats.toJson().assetsByChunkName;
+        var manifest = {
+          js: assets.main.find(asset => path.extname(asset) === ".js"),
+          css: assets.main.find(asset => path.extname(asset) === ".css"),
+          svg: "main.svg"
+        };
+        fs.writeFileSync(
+          path.join(__dirname, "public/dist/manifest.json"),
+          JSON.stringify(manifest)
+        );
+      });
     }
   ],
   resolve: {
@@ -95,8 +96,14 @@ module.exports = {
 };
 
 if (process.env.NODE_ENV === "production") {
-    module.exports.devtool = "";
-    module.exports.plugins = module.exports.plugins.concat([
-        new webpack.optimize.UglifyJsPlugin()
-    ]);
+  module.exports.devtool = "";
+  module.exports.optimization = {
+    minimizer: [
+      new UglifyJsPlugin({
+        sourceMap: false,
+        cache: true,
+        parallel: true
+      })
+    ]
+  };
 }
