@@ -2,12 +2,10 @@
 
 namespace Tests\Browser;
 
-use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
-
+use App\Flag;
 use App\User;
 use App\Content;
-use App\Flag;
+use Tests\DuskTestCase;
 
 class FlagTest extends DuskTestCase
 {
@@ -17,7 +15,7 @@ class FlagTest extends DuskTestCase
 
         $content = factory(Content::class)->create([
             'user_id' => factory(User::class)->create()->id,
-            'type' => 'forum'
+            'type' => 'forum',
         ]);
 
         $this->browse(function ($browser) use ($regular_user, $content) {
