@@ -353,7 +353,7 @@ At the time of writing there is no helper command to create a layout.
 ### Running linter
 
 ```
-npm run lint
+npm run eslint
 ```
 
 ### Settings for Visual Studio Code
@@ -374,4 +374,4 @@ adjust user configuration as follows:
 }
 ```
 
-To invoke fixing manually, run `Cmd+Shift+P` and `ESLint: Fix all auto-fixable problems`.
+To invoke fixing manually, push `Cmd+Shift+P` and select `ESLint: Fix all auto-fixable problems`.

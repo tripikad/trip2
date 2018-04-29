@@ -5,7 +5,7 @@
         <div class="FrontpageSearchDestination__icon">
 
             <component
-                is="Icon"
+                :is="Icon"
                 icon="icon-search"
                 size="lg"
             ></component>
@@ -14,17 +14,17 @@
 
         <div class="FrontpageSearchDestination__search">
 
-        <component
-            is="Multiselect"
-            v-model="selected"
-            :options="options"
-            track-by="name"
-            label="name"
-            :placeholder="placeholder"
-            tag-placeholder=""
-            @input="onInput"
-        >
-        </component>
+            <component
+                :is="Multiselect"
+                v-model="selected"
+                :options="options"
+                track-by="name"
+                label="name"
+                :placeholder="placeholder"
+                tag-placeholder=""
+                @input="onInput"
+            >
+            </component>
 
         </div>
 
@@ -33,42 +33,41 @@
 </template>
 
 <script>
+import { Multiselect } from 'vue-multiselect'
 
-    import { Multiselect } from 'vue-multiselect'
+import Icon from '../Icon/Icon.vue'
 
-    import Icon from '../Icon/Icon.vue'
+export default {
+    components: { Multiselect, Icon },
 
-    export default {
+    props: {
+        isclasses: { default: '' },
+        options: { default: [] },
+        placeholder: { default: '' },
+        route: { default: '' }
+    },
 
-        components: { Multiselect, Icon },
+    data() {
+        return {
+            selected: {}
+        }
+    },
 
-        props: {
-            isclasses: { default: '' },
-            options: { default: [] },
-            placeholder: { default: '' },
-            route: { default: '' },
-        },
+    computed: {
+        currentRoute() {
+            return this.route.replace(
+                '0',
+                this.selected.slug
+                    ? this.selected.slug
+                    : '0'
+            )
+        }
+    },
 
-        data() {
-            return {
-                selected: {}
-            }
-        },
-
-
-        computed: {
-            currentRoute() {
-                return this.route.replace(
-                    '0', this.selected.slug ? this.selected.slug : '0'
-                )
-            }
-        },
-
-        methods: {
-            onInput() {
-                window.location = this.currentRoute
-            }
+    methods: {
+        onInput() {
+            window.location = this.currentRoute
         }
     }
-
+}
 </script>

@@ -19,7 +19,7 @@
         >
 
             <component
-                is="Icon"
+                :is="Icon"
                 icon="icon-close"
                 size="md"
             >
@@ -32,38 +32,34 @@
 </template>
 
 <script>
+import Icon from '../Icon/Icon.vue'
 
-    import Icon from '../Icon/Icon.vue'
+export default {
+    components: { Icon },
 
-    export default {
+    props: {
+        isclasses: { default: '' }
+    },
 
-        components: { Icon },
-
-        props: {
-            isclasses: { default: '' },
-        },
-
-        data() {
-            return {
-                open: false,
-                title: ''
-            }
-        },
-
-        methods: {
-            onClick() {
-                this.open = false
-            }
-        },
-
-        mounted() {
-            this.$events.$on('alert', (alert) => {
-                this.title = alert.title
-                this.open = true
-                setTimeout(() => this.open = false, 3000)
-            })
+    data() {
+        return {
+            open: false,
+            title: ''
         }
+    },
 
+    methods: {
+        onClick() {
+            this.open = false
+        }
+    },
+
+    mounted() {
+        this.$events.$on('alert', alert => {
+            this.title = alert.title
+            this.open = true
+            setTimeout(() => (this.open = false), 3000)
+        })
     }
-
+}
 </script>

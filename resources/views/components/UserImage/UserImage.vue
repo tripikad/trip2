@@ -10,37 +10,37 @@
     >
         <a :href="route">
 
-        <img
-            class="UserImage__image"
-            :src="image"
-            :style="{
-                padding: border / 2 + 'px'
-            }"
-        />
+            <img
+                class="UserImage__image"
+                :src="image"
+                :style="{
+                    padding: border / 2 + 'px'
+                }"
+            />
 
-        <div class="UserImage__arcRank">
+            <div class="UserImage__arcRank">
 
-            <component
-                is="Arc"
-                startangle="0"
-                :endangle="rank"
-                :size="size"
-                :border="border"
-            ></component>
+                <component
+                    :is="Arc"
+                    startangle="0"
+                    :endangle="rank"
+                    :size="size"
+                    :border="border"
+                ></component>
 
-        </div>
+            </div>
 
-        <div class="UserImage__arcReminder">
+            <div class="UserImage__arcReminder">
 
-            <component
-                is="Arc"
-                :startangle="rank"
-                endangle="360"
-                :size="size"
-                :border="border"
-            ></component>
+                <component
+                    :is="Arc"
+                    :startangle="rank"
+                    endangle="360"
+                    :size="size"
+                    :border="border"
+                ></component>
 
-        </div>
+            </div>
 
         </a>
 
@@ -49,22 +49,18 @@
 </template>
 
 <script>
+import Arc from '../Arc/Arc.vue'
 
-    import Arc from '../Arc/Arc.vue'
+export default {
+    components: { Arc },
 
-    export default {
-
-        components: { Arc },
-
-        props: {
-            isclasses: { default: '' },
-            route: { default: '' },
-            image: { default: '' },
-            rank: { default: 0 },
-            size: { default: 36 },
-            border: { default: 3 }
-        }
-
+    props: {
+        isclasses: { default: '' },
+        route: { default: '' },
+        image: { default: '' },
+        rank: { default: 0 },
+        size: { default: 36 },
+        border: { default: 3 }
     }
-
+}
 </script>

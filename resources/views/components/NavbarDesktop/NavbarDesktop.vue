@@ -6,8 +6,8 @@
 
             <a
                 v-for="(link, index) in links"
+                :key="index"
                 :href="link.route"
-                key="index"
             >
 
                 <div
@@ -27,8 +27,8 @@
                 <a
                     href="javascript:;"
                     v-if="! user"
-                    v-bind:class="{ active: isActive }"
-                    v-on:click="onClick"
+                    :class="{ active: isActive }"
+                    @click="onClick"
                 >
 
                     <div class="NavbarDesktop__link">
@@ -40,20 +40,20 @@
                 </a>
 
                 <div v-if="user"
-                    v-bind:class="{ active: isActive }"
-                    v-on:click="onClick"
+                    :class="{ active: isActive }"
+                    @click="onClick"
                     class="NavbarDesktop__userImage"
                 >
 
                     <component
                         v-if="user.badge"
-                        is="Badge"
+                        :is="Badge"
                         class="NavbarDesktop__badge"
                         :title="user.badge"
                     ></component>
 
                     <component
-                        is="UserImage"
+                        :is="UserImage"
                         route="javascript:;"
                         :image="user.image"
                         :rank="user.rank"
@@ -80,6 +80,7 @@
 
                     <a
                         v-for="(link, index) in sublinks"
+                        :key="index"
                         :href="link.route"
                         track-by="index"
                     >
@@ -88,7 +89,7 @@
 
                             <div class="NavbarDesktop__sublinkTitle">
 
-                            {{ link.title }}
+                                {{ link.title }}
 
                             </div>
 
@@ -98,7 +99,7 @@
                             >
 
                                 <component
-                                    is="Badge"
+                                    :is="Badge"
                                     isclasses="Badge--white"
                                     :title="link.badge"
                                 ></component>
@@ -119,49 +120,45 @@
 </template>
 
 <script>
+import { mixin as VueClickaway } from 'vue-clickaway'
+import Badge from '../Badge/Badge.vue'
+import UserImage from '../UserImage/UserImage.vue'
 
-    import { mixin as VueClickaway } from 'vue-clickaway'
-    import Badge from '../Badge/Badge.vue'
-    import UserImage from '../UserImage/UserImage.vue'
+export default {
+    components: { Badge, UserImage },
 
-    export default {
+    mixins: [VueClickaway],
 
-        components: { Badge, UserImage },
+    props: {
+        isclasses: { default: '' },
+        links: { default: '' },
+        sublinks: { default: '' },
+        user: { default: '' },
+        route: { default: '' },
+        title: { default: '' }
+    },
 
-        mixins: [ VueClickaway ],
-
-        props: {
-            isclasses: { default: '' },
-            links: { default: '' },
-            sublinks: { default: '' },
-            user: { default: '' },
-            route: { default: '' },
-            title: { default: '' },
+    methods: {
+        onClickaway: function() {
+            this.submenuOpen = false
+            this.isActive = false
         },
+        onClick: function() {
+            this.isActive = !this.isActive
 
-        methods: {
-            onClickaway: function() {
+            if (this.isActive) {
+                this.submenuOpen = true
+            } else {
                 this.submenuOpen = false
-                this.isActive = false
-            },
-            onClick: function() {
-                this.isActive = !this.isActive
-
-                if (this.isActive) {
-                    this.submenuOpen = true
-                } else {
-                    this.submenuOpen = false
-                }
-            }
-        },
-
-        data() {
-            return {
-                submenuOpen: false,
-                isActive: false,
             }
         }
+    },
 
+    data() {
+        return {
+            submenuOpen: false,
+            isActive: false
+        }
     }
-
+}
 </script>

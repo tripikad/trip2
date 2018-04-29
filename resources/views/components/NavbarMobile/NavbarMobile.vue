@@ -9,7 +9,7 @@
         >
         
             <component
-                is="Icon"
+                :is="Icon"
                 v-if="! user"
                 icon="icon-menu"
                 size="lg">
@@ -19,13 +19,13 @@
 
                 <component
                     v-if="user.badge"
-                    is="Badge"
+                    :is="Badge"
                     class="NavbarMobile__badge"
                     :title="user.badge"
                 ></component>
 
                 <component
-                    is="UserImage"
+                    :is="UserImage"
                     :route="user.route"
                     :image="user.image"
                     :rank="user.rank"
@@ -46,7 +46,7 @@
 
                 <div class="NavbarMobile__search">
                 
-                    <component is="NavbarSearch" class="NavbarSearch--white" size="lg"></component>
+                    <component :is="NavbarSearch" class="NavbarSearch--white" size="lg"></component>
                 
                 </div>
 
@@ -55,7 +55,7 @@
                     @click="menuOpen = false"
                 >
                     
-                    <component is="Icon" icon="icon-close" size="xl"></component>
+                    <component :is="Icon" icon="icon-close" size="xl"></component>
 
                 </div>
 
@@ -65,15 +65,15 @@
        
                 <a
                     v-for="(link, index) in links"
+                    :key="index"
                     :href="link.route"
-                    key="index"
                 >
 
                     <div class="NavbarMobile__sublinkWrapper">
 
                         <div class="NavbarMobile__sublinkTitle">
 
-                        {{ link.title }}
+                            {{ link.title }}
 
                         </div>
 
@@ -83,15 +83,15 @@
 
                 <a
                     v-for="(link, index) in sublinks"
+                    :key="index"
                     :href="link.route"
-                    key="index"
                 >
 
                     <div class="NavbarMobile__sublinkWrapper">
 
                         <div class="NavbarMobile__sublinkTitle">
 
-                        {{ link.title }}
+                            {{ link.title }}
 
                         </div>
 
@@ -101,7 +101,7 @@
                         >
 
                             <component
-                                is="Badge"
+                                :is="Badge"
                                 isclasses="Badge--white"
                                 :title="link.badge"
                             ></component>
@@ -114,48 +114,43 @@
 
             </div>
 
-       </div>
+        </div>
 
-   </div>
+    </div>
 
 </template>
 
 <script>
+import Badge from '../Badge/Badge.vue'
+import Icon from '../Icon/Icon.vue'
+import NavbarSearch from '../NavbarSearch/NavbarSearch.vue'
+import UserImage from '../UserImage/UserImage.vue'
 
-    import Badge from '../Badge/Badge.vue'
-    import Icon from '../Icon/Icon.vue'
-    import NavbarSearch from '../NavbarSearch/NavbarSearch.vue'
-    import UserImage from '../UserImage/UserImage.vue'
+export default {
+    components: {
+        Badge,
+        Icon,
+        NavbarSearch,
+        UserImage
+    },
 
-    export default {
-    
-        components: {
-            Badge,
-            Icon,
-            NavbarSearch,
-            UserImage
-        },
+    props: {
+        isclasses: { default: '' },
+        links: { default: '' },
+        sublinks: { default: '' },
+        user: { default: '' }
+    },
 
-        props: {
-            isclasses: { default: '' },
-            links: { default: '' },
-            sublinks: { default: '' },
-            user: { default: '' }
-        },
-
-        data() {
-            return {
-                menuOpen: false
-            }
-        },
-
-        methods: {
-            toggle: function() {
-                this.menuOpen = !this.menuOpen
-                console.log(this.menuOpen)
-            }
+    data() {
+        return {
+            menuOpen: false
         }
+    },
 
+    methods: {
+        toggle: function() {
+            this.menuOpen = !this.menuOpen
+        }
     }
-
+}
 </script>
