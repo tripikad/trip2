@@ -5,7 +5,7 @@
     "dev": "cross-env NODE_ENV=development webpack --mode=development --progress --hide-modules",
     "watch": "cross-env NODE_ENV=development webpack --mode=development --progress --hide-modules --watch",
     "build": "cross-env NODE_ENV=production webpack --mode=production --progress --hide-modules",
-    "lint": "eslint resources/views/**/*.{js,vue}"
+    "eslint": "eslint resources/views/**/*.{js,vue}"
   },
   "dependencies": {
     "codemirror": "^5.28.0",
