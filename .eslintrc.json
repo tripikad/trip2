@@ -1,6 +1,6 @@
 {
   "extends": ["eslint:recommended", "plugin:vue/recommended"],
-  "plugins": ["prettier"],
+  "plugins": ["vue","prettier"],
   "rules": {
     "no-undef": "off",
     "prettier/prettier": [
