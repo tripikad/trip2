@@ -13,14 +13,10 @@
 </template>
 
 <script>
-
-    export default {
-
-        props: {
-            isclasses: { default: '' },
-            title: { default: '' }
-        },
-
+export default {
+    props: {
+        isclasses: { default: '' },
+        title: { default: '' }
     }
-
+}
 </script>
