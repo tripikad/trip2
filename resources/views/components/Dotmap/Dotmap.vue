@@ -23,41 +23,35 @@
 </template>
 
 <script>
+import { scaleLinear } from 'd3-scale'
 
-    import { scaleLinear } from 'd3-scale'
+export default {
+    props: {
+        isclasses: { default: '' },
+        dots: { default: [] },
+        width: { default: 750 }
+    },
 
-    export default {
-
-        props: {
-            isclasses: { default: '' },
-            dots: { default: [] },
-            width: { default: 750 }
+    computed: {
+        radius() {
+            return this.width / 350
         },
-
-        computed: {
-            radius() {
-                return this.width / 350
-            },
-            height() {
-                return this.width / 2.5
-            }
-        },
-
-        methods: {
-            xScale(value) {
-                return scaleLinear()
-                    .domain([-180, 180])
-                    .range([10, this.width - 10])
-                    (value)
-            },
-            yScale(value) {
-                return scaleLinear()
-                    .domain([180, -180])
-                    .range([10, this.width - 10])
-                    (value)
-            }
+        height() {
+            return this.width / 2.5
         }
+    },
 
+    methods: {
+        xScale(value) {
+            return scaleLinear()
+                .domain([-180, 180])
+                .range([10, this.width - 10])(value)
+        },
+        yScale(value) {
+            return scaleLinear()
+                .domain([180, -180])
+                .range([10, this.width - 10])(value)
+        }
     }
-
+}
 </script>

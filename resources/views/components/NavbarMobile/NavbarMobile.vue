@@ -73,7 +73,7 @@
 
                         <div class="NavbarMobile__sublinkTitle">
 
-                        {{ link.title }}
+                            {{ link.title }}
 
                         </div>
 
@@ -91,7 +91,7 @@
 
                         <div class="NavbarMobile__sublinkTitle">
 
-                        {{ link.title }}
+                            {{ link.title }}
 
                         </div>
 
@@ -114,48 +114,44 @@
 
             </div>
 
-       </div>
+        </div>
 
-   </div>
+    </div>
 
 </template>
 
 <script>
+import Badge from '../Badge/Badge.vue'
+import Icon from '../Icon/Icon.vue'
+import NavbarSearch from '../NavbarSearch/NavbarSearch.vue'
+import UserImage from '../UserImage/UserImage.vue'
 
-    import Badge from '../Badge/Badge.vue'
-    import Icon from '../Icon/Icon.vue'
-    import NavbarSearch from '../NavbarSearch/NavbarSearch.vue'
-    import UserImage from '../UserImage/UserImage.vue'
+export default {
+    components: {
+        Badge,
+        Icon,
+        NavbarSearch,
+        UserImage
+    },
 
-    export default {
-    
-        components: {
-            Badge,
-            Icon,
-            NavbarSearch,
-            UserImage
-        },
+    props: {
+        isclasses: { default: '' },
+        links: { default: '' },
+        sublinks: { default: '' },
+        user: { default: '' }
+    },
 
-        props: {
-            isclasses: { default: '' },
-            links: { default: '' },
-            sublinks: { default: '' },
-            user: { default: '' }
-        },
-
-        data() {
-            return {
-                menuOpen: false
-            }
-        },
-
-        methods: {
-            toggle: function() {
-                this.menuOpen = !this.menuOpen
-                console.log(this.menuOpen)
-            }
+    data() {
+        return {
+            menuOpen: false
         }
+    },
 
+    methods: {
+        toggle: function() {
+            this.menuOpen = !this.menuOpen
+            console.log(this.menuOpen)
+        }
     }
-
+}
 </script>

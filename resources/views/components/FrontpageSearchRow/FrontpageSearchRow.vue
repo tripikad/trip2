@@ -24,18 +24,15 @@
 </template>
 
 <script>
-    import Icon from '../Icon/Icon.vue'
-    import SearchItem from '../FrontpageSearchItem/FrontpageSearchItem.vue'
+import Icon from '../Icon/Icon.vue'
+import SearchItem from '../FrontpageSearchItem/FrontpageSearchItem.vue'
 
-    export default {
-
-        props: {
-            isclasses: { default: '' },
-            result: { default: [] },
-            index: { default: '' }
-        },
-        components: { Icon, SearchItem },
-
-    }
-
+export default {
+    props: {
+        isclasses: { default: '' },
+        result: { default: [] },
+        index: { default: '' }
+    },
+    components: { Icon, SearchItem }
+}
 </script>

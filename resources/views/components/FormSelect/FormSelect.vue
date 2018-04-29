@@ -24,36 +24,35 @@
 </template>
 
 <script>
+import { Multiselect } from 'vue-multiselect'
 
-    import { Multiselect } from 'vue-multiselect'
+export default {
+    components: { Multiselect },
 
-    export default {
+    props: {
+        isclasses: { default: '' },
+        name: { default: '' },
+        options: { default: '' },
+        placeholder: { default: '' },
+        value: { default: '' }
+    },
 
-        components: { Multiselect },
-
-        props: {
-            isclasses: { default: '' },
-            name: { default: '' },
-            options: { default: '' },
-            placeholder: { default: '' },
-            value: { default: '' }
-        },
-
-        data() {
-            return {
-                localValue: {}
-            }
-        },
-
-        computed: {
-            returnValue() {
-                return this.localValue ? this.localValue.id : ''
-            }
-        },
-
-        mounted() {
-            this.localValue = this.options.find(option => option.id === parseInt(this.value))
+    data() {
+        return {
+            localValue: {}
         }
-    }
+    },
 
+    computed: {
+        returnValue() {
+            return this.localValue ? this.localValue.id : ''
+        }
+    },
+
+    mounted() {
+        this.localValue = this.options.find(
+            option => option.id === parseInt(this.value)
+        )
+    }
+}
 </script>

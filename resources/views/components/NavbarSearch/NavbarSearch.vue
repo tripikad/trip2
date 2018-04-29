@@ -29,12 +29,10 @@
 </template>
 
 <script>
-
 import Icon from '../Icon/Icon.vue'
 import { focus } from 'vue-focus'
 
 export default {
-
     components: {
         Icon
     },
@@ -58,7 +56,5 @@ export default {
             window.location = '/search?q=' + this.keywords
         }
     }
-
 }
-
 </script>

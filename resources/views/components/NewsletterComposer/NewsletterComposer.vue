@@ -26,38 +26,39 @@
 </template>
 
 <script>
+export default {
+    props: {
+        isclasses: { default: '' },
+        letter_contents: { default: [] },
+        content_placeholder: { default: '' },
+        visible_from_placeholder: { default: '' },
+        visible_to_placeholder: { default: '' },
+        cheatsheet: { default: '' }
+    },
 
-    export default {
+    data() {
+        return {
+            items: this.letter_contents
+        }
+    },
 
-        props: {
-            isclasses: { default: '' },
-            letter_contents: { default: [] },
-            content_placeholder: { default: '' },
-            visible_from_placeholder: { default: '' },
-            visible_to_placeholder: { default: '' },
-            cheatsheet: { default: '' }
+    methods: {
+        cloneItem: function(item, key) {
+            var new_item = {}
+            new_item.body = ''
+            new_item.visible_from = ''
+            new_item.visible_to = ''
+
+            this.items.splice(
+                parseInt(key + 1),
+                0,
+                new_item
+            )
         },
 
-        data() {
-          	return {
-            	items: this.letter_contents
-            }
-        },
-
-        methods: {
-            cloneItem: function(item, key) {
-                var new_item = {};
-                new_item.body = '';
-                new_item.visible_from = '';
-                new_item.visible_to = '';
-
-                this.items.splice(parseInt(key + 1), 0, new_item);
-            },
-
-            removeItem: function(key) {
-                this.items.splice(key, 1);
-            }
+        removeItem: function(key) {
+            this.items.splice(key, 1)
         }
     }
-
+}
 </script>

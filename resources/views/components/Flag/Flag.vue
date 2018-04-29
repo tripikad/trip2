@@ -23,11 +23,9 @@
 </template>
 
 <script>
-
 import Icon from '../Icon/Icon.vue'
 
 export default {
-
     components: {
         Icon
     },
@@ -39,7 +37,7 @@ export default {
         route: { default: '' },
         flagged: { default: '' },
         flagtitle: { default: '' },
-        unflagtitle: { default: '' },
+        unflagtitle: { default: '' }
     },
 
     data: () => ({
@@ -49,23 +47,21 @@ export default {
 
     methods: {
         toggleFlag: function() {
-            this.$http.get(this.route)
-                .then(function(res) {
-                    this.currentValue = res.data
-                    this.currentFlagged = !this.currentFlagged
-                    this.$events.$emit('alert', {
-                        title: this.currentFlagged
-                            ? this.flagtitle
-                            : this.unflagtitle
-                    })
+            this.$http.get(this.route).then(function(res) {
+                this.currentValue = res.data
+                this.currentFlagged = !this.currentFlagged
+                this.$events.$emit('alert', {
+                    title: this.currentFlagged
+                        ? this.flagtitle
+                        : this.unflagtitle
                 })
+            })
         }
     },
 
     mounted() {
         this.currentValue = this.value
-        this.currentFlagged = (this.flagged === 'true')
+        this.currentFlagged = this.flagged === 'true'
     }
 }
-
 </script>
