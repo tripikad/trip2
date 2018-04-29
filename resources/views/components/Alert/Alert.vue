@@ -19,7 +19,7 @@
         >
 
             <component
-                is="Icon"
+                :is="Icon"
                 icon="icon-close"
                 size="md"
             >

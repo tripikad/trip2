@@ -3,7 +3,7 @@
     <div class="FormSelect" :class="isclasses">
         
         <component
-            is="Multiselect"
+            :is="Multiselect"
             v-model="localValue"
             :options="options"
             track-by="name"

@@ -28,6 +28,7 @@
 
             <path
                 v-for="(item, index) in items"
+                :key="index"
                 fill="none"
                 stroke-width="2"
                 stroke="hsl(205, 82%, 57%)"
@@ -52,6 +53,7 @@
 
             <rect
                 v-for="(value, index) in items[0].values"
+                :key="index"
                 :x="xScale(index - 0.5)"
                 :y="0"
                 :width="xScale(1)"
@@ -65,6 +67,7 @@
 
             <g
                 v-for="(line, index) in legend"
+                :key="index"
                 :transform="'translate(0,'+ (index * 20) + ')'"
                 :opacity="1 - (index * 0.3)"
             >

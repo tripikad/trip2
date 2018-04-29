@@ -33,7 +33,7 @@ export default {
             },
             dictDefaultMessage: this.$globalProps
                 .imageUploadTitle,
-            success: (file, res) => {
+            success: () => {
                 this.$events.$emit('imageupload.created')
                 if (this.reload === 'true') {
                     window.location.reload(true)

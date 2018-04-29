@@ -5,7 +5,7 @@
         <div class="NavbarSearch__icon">
 
             <component
-                is="Icon"
+                :is="Icon"
                 icon="icon-search"
                 :size="size"
                 @click.native="active = ! active"

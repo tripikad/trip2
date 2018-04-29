@@ -1,10 +1,10 @@
 <template>
 
-    <div class="PhotoCard" :class="isclasses" v-show="this.status_value">
+    <div class="PhotoCard" :class="isclasses" v-show="status_value">
 
         <img class="PhotoCard__photo" :src="small" @click="onClick" />
 
-        <div class="PhotoCard__status Tag" v-show="this.edit_status" @click="onStatusChange">
+        <div class="PhotoCard__status Tag" v-show="edit_status" @click="onStatusChange">
             <a href="#"><div class="PhotoCard__status-button"> {{ button_title }} </div></a>
         </div>
     </div>
@@ -51,10 +51,10 @@ export default {
                         new_status
                 )
                 .then(
-                    res => {
+                    () => {
                         this.status_value = 0
                     },
-                    function(error) {}
+                    function() {}
                 )
         }
     },

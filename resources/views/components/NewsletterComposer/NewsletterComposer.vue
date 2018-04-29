@@ -4,7 +4,7 @@
             <p class="Body" v-html="cheatsheet"></p>
         </div>
 
-        <div class="NewsletterComposer__item margin-bottom-md" v-for="(item, key) in items">
+        <div class="NewsletterComposer__item margin-bottom-md" v-for="(item, key) in items" :key="key">
             <div class="NewsletterComposer__item-left">
                 <textarea name="body[]" class="FormTextarea__textarea" :placeholder="content_placeholder">{{ item.body }}</textarea>
 

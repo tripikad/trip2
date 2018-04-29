@@ -9,14 +9,14 @@
                 @blur="blurMonitor">
 
             <div class="FrontpageSearch__icon" @click="redirect">
-                <component is="Icon" icon="icon-search" size="lg"></component>
+                <component :is="Icon" icon="icon-search" size="lg"></component>
             </div>
 
             <div class="FrontpageSearch__loading" v-show="loading"></div>
         </div>
 
         <div class="FrontpageSearch__results" v-if="showResultContainer" @mousedown="blurMonitorPrevent">
-            <component v-for="(result, index) in results" is="SearchRow" :result="result" :key="index" :index="index"></component>
+            <component v-for="(result, index) in results" :is="SearchRow" :result="result" :key="index" :index="index"></component>
         </div>
 
     </div>
@@ -53,7 +53,7 @@ export default {
                 this.search()
             }
         },
-        blurMonitor: function(event) {
+        blurMonitor: function() {
             this.showResultContainer = false
         },
         blurMonitorPrevent: function(event) {
@@ -106,7 +106,7 @@ export default {
                                 this.results = res.data
                                 this.loading = false
                             },
-                            function(error) {
+                            function() {
                                 this.results = []
                                 this.loading = false
                             }

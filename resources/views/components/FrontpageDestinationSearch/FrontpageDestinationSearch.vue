@@ -5,7 +5,7 @@
         <div class="FrontpageSearchDestination__icon">
 
             <component
-                is="Icon"
+                :is="Icon"
                 icon="icon-search"
                 size="lg"
             ></component>
@@ -15,7 +15,7 @@
         <div class="FrontpageSearchDestination__search">
 
             <component
-                is="Multiselect"
+                :is="Multiselect"
                 v-model="selected"
                 :options="options"
                 track-by="name"

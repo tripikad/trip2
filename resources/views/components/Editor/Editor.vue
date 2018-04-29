@@ -47,7 +47,6 @@
 
 <script>
 import CodeMirror from 'codemirror/lib/codemirror.js'
-import gfm from 'codemirror/mode/gfm/gfm.js'
 
 import unescape from 'lodash.unescape'
 import tomarkdown from 'to-markdown'

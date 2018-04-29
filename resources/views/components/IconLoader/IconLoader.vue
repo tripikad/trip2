@@ -7,7 +7,7 @@
 <script>
 export default {
     props: {
-        route: {}
+        route: { default: '' }
     },
 
     data: function() {

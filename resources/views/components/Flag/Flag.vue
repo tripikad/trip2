@@ -9,7 +9,7 @@
         <div class="Flag__icon">
 
             <component
-                is="Icon"
+                :is="Icon"
                 :icon="icon"
                 size="sm"
             ></component>

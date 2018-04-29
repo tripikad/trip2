@@ -21,7 +21,7 @@
             <div class="UserImage__arcRank">
 
                 <component
-                    is="Arc"
+                    :is="Arc"
                     startangle="0"
                     :endangle="rank"
                     :size="size"
@@ -33,7 +33,7 @@
             <div class="UserImage__arcReminder">
 
                 <component
-                    is="Arc"
+                    :is="Arc"
                     :startangle="rank"
                     endangle="360"
                     :size="size"

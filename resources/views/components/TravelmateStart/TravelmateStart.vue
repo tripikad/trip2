@@ -5,6 +5,7 @@
 
             <div class="TravelmateStart__field"
                 v-for="(date, index) in dates"
+                :key="index"
                 @click="atClick(index)"
                 :class="{ 'TravelmateStart--active': activeIndex === index }">
                 {{ date.title }}

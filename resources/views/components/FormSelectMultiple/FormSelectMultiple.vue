@@ -3,7 +3,7 @@
     <div class="FormSelectMultiple" :class="isclasses">
         
         <component
-            is="Multiselect"
+            :is="Multiselect"
             :options="options"
             track-by="id"
             label="name"
@@ -19,7 +19,8 @@
         </component>
 
         <input
-            v-for="value in returnValue"
+            v-for="(value, index) in returnValue"
+            :key="index"
             type="text"
             :name="name + '[]'"
             :value="value.id"

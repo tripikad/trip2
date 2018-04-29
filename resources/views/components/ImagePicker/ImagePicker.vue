@@ -4,11 +4,12 @@
     
         <div class="ImagePicker__close" @click="show = false">×</div>
 
-        <component is="ImageUpload"></component>
+        <component :is="ImageUpload"></component>
 
         <div
             class="ImagePicker__card"
-            v-for="image in images"
+            v-for="(image, index) in images"
+            :key="index"
             @click="onClick(image)"
         >
             <img class="ImagePicker__image" :src="image.small" />

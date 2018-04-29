@@ -9,7 +9,7 @@
         >
         
             <component
-                is="Icon"
+                :is="Icon"
                 v-if="! user"
                 icon="icon-menu"
                 size="lg">
@@ -19,13 +19,13 @@
 
                 <component
                     v-if="user.badge"
-                    is="Badge"
+                    :is="Badge"
                     class="NavbarMobile__badge"
                     :title="user.badge"
                 ></component>
 
                 <component
-                    is="UserImage"
+                    :is="UserImage"
                     :route="user.route"
                     :image="user.image"
                     :rank="user.rank"
@@ -46,7 +46,7 @@
 
                 <div class="NavbarMobile__search">
                 
-                    <component is="NavbarSearch" class="NavbarSearch--white" size="lg"></component>
+                    <component :is="NavbarSearch" class="NavbarSearch--white" size="lg"></component>
                 
                 </div>
 
@@ -55,7 +55,7 @@
                     @click="menuOpen = false"
                 >
                     
-                    <component is="Icon" icon="icon-close" size="xl"></component>
+                    <component :is="Icon" icon="icon-close" size="xl"></component>
 
                 </div>
 
@@ -65,8 +65,8 @@
        
                 <a
                     v-for="(link, index) in links"
+                    :key="index"
                     :href="link.route"
-                    key="index"
                 >
 
                     <div class="NavbarMobile__sublinkWrapper">
@@ -83,8 +83,8 @@
 
                 <a
                     v-for="(link, index) in sublinks"
+                    :key="index"
                     :href="link.route"
-                    key="index"
                 >
 
                     <div class="NavbarMobile__sublinkWrapper">
@@ -101,7 +101,7 @@
                         >
 
                             <component
-                                is="Badge"
+                                :is="Badge"
                                 isclasses="Badge--white"
                                 :title="link.badge"
                             ></component>
@@ -150,7 +150,6 @@ export default {
     methods: {
         toggle: function() {
             this.menuOpen = !this.menuOpen
-            console.log(this.menuOpen)
         }
     }
 }

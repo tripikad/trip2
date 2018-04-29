@@ -7,7 +7,8 @@
             <g :transform="'translate(' + (width * -0.03) +',' + (height / -1.5) + ')'">
 
                 <circle
-                    v-for="dot in dots"
+                    v-for="(dot, index) in dots"
+                    :key="index"
                     :cx="xScale(dot.lon)"
                     :cy="yScale(dot.lat)"
                     :r="radius"
