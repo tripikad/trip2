@@ -1,17 +1,21 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:vue/recommended"
-  ],
-  "plugins": ["prettier"],
-  "rules": {
-    "no-undef": "off",
-    "prettier/prettier": "error",
-    "vue/html-indent": ["error", 4],
-    "vue/require-prop-types": "off",
-    "vue/order-in-components": "off",
-    "vue/attributes-order": "off",
-    "vue/max-attributes-per-line": "off",
-    "vue/html-self-closing": "off"
-  }
+    "extends": [
+        "eslint:recommended",
+        "plugin:vue/recommended"
+    ],
+    "plugins": ["prettier"],
+    "rules": {
+        "no-undef": "off",
+        "prettier/prettier": "error",
+        "vue/html-indent": [
+            "error",
+            4,
+            { "alignAttributesVertically" : false }
+        ],
+        "vue/require-prop-types": "off",
+        "vue/order-in-components": "off",
+        "vue/attributes-order": "off",
+        "vue/max-attributes-per-line": "off",
+        "vue/html-self-closing": "off"
+    }
 }
