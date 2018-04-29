@@ -356,16 +356,22 @@ At the time of writing there is no helper command to create a layout.
 npm run lint
 ```
 
-### Recommended settings for Visual Studio Code
+### Settings for Visual Studio Code
 
-Install **ESLint**, **Prettier** and **Vetur** plugins and 
+Install **ESLint** (and optionally **Vetur**) plugin and 
 adjust user configuration as follows:
 
 ```json
     "eslint.validate": [
         "javascript",
         "javascriptreact",
-        "vue"
+        {
+            "language": "vue",
+            "autoFix": true
+        }
     ],
-    "editor.formatOnSave": true,
+    "eslint.autoFixOnSave": true,
+}
 ```
+
+To invoke fixing manually, run `Cmd+Shift+P` and `ESLint: Fix all auto-fixable problems`.
