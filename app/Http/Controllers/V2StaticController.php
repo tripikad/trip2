@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Content;
 use App\Image;
+use App\Content;
 
 class V2StaticController extends Controller
 {
