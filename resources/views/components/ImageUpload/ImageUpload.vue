@@ -10,41 +10,38 @@
 </template>
 
 <script>
+import Dropzone from 'dropzone'
 
-    import Dropzone from 'dropzone'
+Dropzone.autoDiscover = false
 
-    Dropzone.autoDiscover = false
+export default {
+    props: {
+        isclasses: { default: '' },
+        name: { default: 'image' },
+        reload: { default: '' }
+    },
 
-    export default {
-
-        props: {
-            isclasses: { default: ''},
-            name: { default: 'image'},
-            reload: { default: ''}
-        },
-
-        mounted() {
-
-            new Dropzone(this.$refs.dropzone, {
-                url: this.$globalProps.imageUploadRoute,
-                paramName: this.name,
-                maxFileSize: this.$globalProps.maxfilesize,
-                acceptedFiles: 'image/*',
-                maxFiles: 1,
-                headers: {'X-CSRF-TOKEN': this.$globalProps.token},
-                dictDefaultMessage: this.$globalProps.imageUploadTitle,
-                success: (file, res) => {
-                    this.$events.$emit('imageupload.created')
-                    if (this.reload === 'true') {
-                        window.location.reload(true)
-                    }
+    mounted() {
+        new Dropzone(this.$refs.dropzone, {
+            url: this.$globalProps.imageUploadRoute,
+            paramName: this.name,
+            maxFileSize: this.$globalProps.maxfilesize,
+            acceptedFiles: 'image/*',
+            maxFiles: 1,
+            headers: {
+                'X-CSRF-TOKEN': this.$globalProps.token
+            },
+            dictDefaultMessage: this.$globalProps
+                .imageUploadTitle,
+            success: (file, res) => {
+                this.$events.$emit('imageupload.created')
+                if (this.reload === 'true') {
+                    window.location.reload(true)
                 }
-            }).on('complete', function(file) {
-                this.removeFile(file)
-            })
-
-        }
-
+            }
+        }).on('complete', function(file) {
+            this.removeFile(file)
+        })
     }
-
+}
 </script>
