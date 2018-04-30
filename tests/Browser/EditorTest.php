@@ -2,9 +2,9 @@
 
 namespace Tests\Browser;
 
-use App\User;
-use App\Image;
 use App\Content;
+use App\Image;
+use App\User;
 use Tests\DuskTestCase;
 
 class EditorTest extends DuskTestCase
@@ -22,12 +22,12 @@ class EditorTest extends DuskTestCase
                     ->click('textarea[readonly=readonly]') // @todo rework click target
                     ->pause(200) // Loading the editor
                     ->keys('.Editor__source textarea', "Hola editores de cuerpo de $type")
-                    ->pause(2000) // Waiting for ajax-based preview
+                    ->pause(5000) // Waiting for ajax-based preview
                     ->assertSeeIn('.Editor__target', "Hola editores de cuerpo de $type")
                     ->click('.Editor__toolPicker')
                     ->pause(200) // Loading the image picker
                     ->assertSeeIn('.ImagePicker', 'Lohista pilt siia')
-                    ->attach('.dz-hidden-input', storage_path().'/tests/test.jpg')
+                    ->attach('.dz-hidden-input', storage_path() . '/tests/test.jpg')
                     ->pause(5000) // Uploading image
 
                     // @todo make image insertion test work
@@ -48,13 +48,13 @@ class EditorTest extends DuskTestCase
 
             $image = Image::latest()->first();
 
-            $filepath = config('imagepresets.original.path').$image->filename;
+            $filepath = config('imagepresets.original.path') . $image->filename;
 
             $this->assertTrue(file_exists($filepath));
             unlink($filepath);
 
             foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                $filepath = config("imagepresets.presets.$preset.path").$image->filename;
+                $filepath = config("imagepresets.presets.$preset.path") . $image->filename;
                 $this->assertTrue(file_exists($filepath));
                 unlink($filepath);
             }
