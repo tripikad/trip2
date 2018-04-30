@@ -2,9 +2,9 @@
 
 namespace Tests\Browser;
 
+use App\User;
 use App\Comment;
 use App\Content;
-use App\User;
 use Carbon\Carbon;
 use Tests\DuskTestCase;
 
