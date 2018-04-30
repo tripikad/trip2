@@ -2,9 +2,9 @@
 
 namespace Tests\Browser;
 
-use App\Content;
-use App\Image;
 use App\User;
+use App\Image;
+use App\Content;
 use Tests\DuskTestCase;
 
 class EditorTest extends DuskTestCase
@@ -27,7 +27,7 @@ class EditorTest extends DuskTestCase
                     ->click('.Editor__toolPicker')
                     ->pause(200) // Loading the image picker
                     ->assertSeeIn('.ImagePicker', 'Lohista pilt siia')
-                    ->attach('.dz-hidden-input', storage_path() . '/tests/test.jpg')
+                    ->attach('.dz-hidden-input', storage_path().'/tests/test.jpg')
                     ->pause(1000) // Uploading image
                     ->click('.ImagePicker__card .ImagePicker__image');
 
@@ -44,13 +44,13 @@ class EditorTest extends DuskTestCase
 
             $image = Image::latest()->first();
 
-            $filepath = config('imagepresets.original.path') . $image->filename;
+            $filepath = config('imagepresets.original.path').$image->filename;
 
             $this->assertTrue(file_exists($filepath));
             unlink($filepath);
 
             foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                $filepath = config("imagepresets.presets.$preset.path") . $image->filename;
+                $filepath = config("imagepresets.presets.$preset.path").$image->filename;
                 $this->assertTrue(file_exists($filepath));
                 unlink($filepath);
             }
