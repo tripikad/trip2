@@ -79,11 +79,11 @@ class Footer
                 'title' => trans('menu.footer3.advertising'),
                 'route' => route('static.show', 'reklaam'),
             ])
-            ->pushWhen(!$loggedUser, [
+            ->pushWhen(! $loggedUser, [
                 'title' => trans('menu.auth.login'),
                 'route' => route('login.form'),
             ])
-            ->pushWhen(!$loggedUser, [
+            ->pushWhen(! $loggedUser, [
                 'title' => trans('menu.auth.register'),
                 'route' => route('register.form'),
             ])
