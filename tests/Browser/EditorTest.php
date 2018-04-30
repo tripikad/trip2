@@ -34,6 +34,7 @@ class EditorTest extends DuskTestCase
                 $image = Image::latest()->first();
 
                 $browser
+                    ->pause(1000)
                     ->assertSeeIn('.Editor__source', $image->id)
                     ->click('.Editor__toolOk')
                     ->press('Lisa')
