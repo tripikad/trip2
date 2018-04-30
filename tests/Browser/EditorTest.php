@@ -28,7 +28,7 @@ class EditorTest extends DuskTestCase
                     ->pause(200) // Loading the image picker
                     ->assertSeeIn('.ImagePicker', 'Lohista pilt siia')
                     ->attach('.dz-hidden-input', storage_path() . '/tests/test.jpg')
-                    ->pause(1000) // Uploading image
+                    ->pause(3000) // Uploading image
                     ->click('.ImagePicker__card .ImagePicker__image');
 
                 $image = Image::latest()->first();
