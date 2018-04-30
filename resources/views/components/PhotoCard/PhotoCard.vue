@@ -50,12 +50,9 @@ export default {
                         '/status/' +
                         new_status
                 )
-                .then(
-                    res => {
-                        this.status_value = 0
-                    },
-                    function(error) {}
-                )
+                .then(res => {
+                    this.status_value = 0
+                })
         }
     },
 
