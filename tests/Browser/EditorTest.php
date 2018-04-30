@@ -3,6 +3,7 @@
 namespace Tests\Browser;
 
 use App\Content;
+use App\Image;
 use App\User;
 use Tests\DuskTestCase;
 
@@ -12,7 +13,7 @@ class EditorTest extends DuskTestCase
     {
         $super_user = factory(User::class)->create(['role' => 'superuser']);
 
-        foreach (['flight', 'news'] as $type) {
+        foreach (['news', 'flight'] as $type) {
             $this->browse(function ($browser) use ($super_user, $type) {
                 $browser
                     ->loginAs($super_user)
@@ -26,7 +27,14 @@ class EditorTest extends DuskTestCase
                     ->click('.Editor__toolPicker')
                     ->pause(200) // Loading the image picker
                     ->assertSeeIn('.ImagePicker', 'Lohista pilt siia')
-                    ->click('.ImagePicker__close')
+                    ->attach('.dz-hidden-input', storage_path() . '/tests/test.jpg')
+                    ->pause(1000) // Uploading image
+                    ->click('.ImagePicker__card .ImagePicker__image');
+
+                $image = Image::latest()->first();
+
+                $browser
+                    ->assertSeeIn('.Editor__source', $image->id)
                     ->click('.Editor__toolOk')
                     ->press('Lisa')
                     ->assertSee("Hola editores de titulo de $type");
@@ -34,8 +42,20 @@ class EditorTest extends DuskTestCase
 
             // Cleanup
 
+            $image = Image::latest()->first();
+
+            $filepath = config('imagepresets.original.path') . $image->filename;
+
+            $this->assertTrue(file_exists($filepath));
+            unlink($filepath);
+
+            foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
+                $filepath = config("imagepresets.presets.$preset.path") . $image->filename;
+                $this->assertTrue(file_exists($filepath));
+                unlink($filepath);
+            }
+
             $content = Content::whereTitle("Hola editores de titulo de $type")
-                ->whereBody("Hola editores de cuerpo de $type")
                 ->whereType($type)
                 ->whereUserId($super_user->id)
                 ->first()
