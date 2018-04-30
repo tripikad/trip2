@@ -49,73 +49,51 @@ export default {
         keymonitor: function(event) {
             if (event.key == 'Enter') {
                 this.redirect()
-            } else if (
-                this.query !=
-                this.lastKeyword
-            ) {
+            } else if (this.query != this.lastKeyword) {
                 this.search()
             }
         },
         blurMonitor: function(event) {
             this.showResultContainer = false
         },
-        blurMonitorPrevent: function(
-            event
-        ) {
+        blurMonitorPrevent: function(event) {
             event.preventDefault()
         },
         redirect: function() {
             this.loading = true
             this.enterPressed = true
-            window.location =
-                '/search?q=' +
-                this.query
+            window.location = '/search?q=' + this.query
             return false
         },
         search: function() {
             this.showResultContainer = true
             this.loading = true
             if (this.searchTimeout) {
-                clearTimeout(
-                    this.searchTimeout
-                )
+                clearTimeout(this.searchTimeout)
                 this.searchTimeout = null
             }
 
-            this.searchTimeout = setTimeout(
-                () => {
-                    this.performSearch()
-                },
-                150
-            )
+            this.searchTimeout = setTimeout(() => {
+                this.performSearch()
+            }, 150)
         },
         performSearch: function() {
             if (
                 this.query &&
                 this.query != '' &&
-                String(this.query)
-                    .length > 2 &&
+                String(this.query).length > 2 &&
                 !this.enterPressed
             ) {
-                if (
-                    this.query !=
-                    this.lastKeyword
-                ) {
+                if (this.query != this.lastKeyword) {
                     this.$http
                         .get(
                             '/search/ajaxsearch/?q=' +
-                                this
-                                    .query +
+                                this.query +
                                 '&_t=' +
                                 Date.now(),
                             {
-                                before: function(
-                                    xhr
-                                ) {
-                                    if (
-                                        this
-                                            .lastRequest
-                                    ) {
+                                before: function(xhr) {
+                                    if (this.lastRequest) {
                                         this.lastRequest.abort()
                                     }
 
@@ -125,13 +103,10 @@ export default {
                         )
                         .then(
                             res => {
-                                this.results =
-                                    res.data
+                                this.results = res.data
                                 this.loading = false
                             },
-                            function(
-                                error
-                            ) {
+                            function(error) {
                                 this.results = []
                                 this.loading = false
                             }
