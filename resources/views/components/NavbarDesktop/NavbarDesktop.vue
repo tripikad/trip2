@@ -6,8 +6,8 @@
 
             <a
                 v-for="(link, index) in links"
+                :key="index"
                 :href="link.route"
-                key="index"
             >
 
                 <div
@@ -46,13 +46,13 @@
 
                     <component
                         v-if="user.badge"
-                        is="Badge"
+                        :is="'Badge'"
                         class="NavbarDesktop__badge"
                         :title="user.badge"
                     ></component>
 
                     <component
-                        is="UserImage"
+                        :is="'UserImage'"
                         route="javascript:;"
                         :image="user.image"
                         :rank="user.rank"
@@ -80,7 +80,7 @@
                     <a
                         v-for="(link, index) in sublinks"
                         :href="link.route"
-                        track-by="index"
+                        :key="index"
                     >
 
                         <div class="NavbarDesktop__sublinkWrapper">
@@ -97,7 +97,7 @@
                             >
 
                                 <component
-                                    is="Badge"
+                                    :is="'Badge'"
                                     isclasses="Badge--white"
                                     :title="link.badge"
                                 ></component>
