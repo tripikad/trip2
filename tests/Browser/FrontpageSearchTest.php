@@ -2,11 +2,11 @@
 
 namespace Tests\Browser;
 
+use App\User;
 use App\Content;
 use App\Searchable;
-use App\User;
-use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use Laravel\Dusk\Browser;
 
 class FrontpageSearchTest extends DuskTestCase
 {
