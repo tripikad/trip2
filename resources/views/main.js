@@ -55,9 +55,12 @@ Vue.prototype.$globalProps = globalProps
 
 Vue.prototype.$http = axios.create({
     headers: {
-        'X-CSRF-TOKEN': globalProps.token
+        'X-CSRF-TOKEN': globalProps.token,
+        'X-Requested-With': 'XMLHttpRequest'
     }
 })
+
+// Create a Vue instance
 
 new Vue({
     el: '#app',
