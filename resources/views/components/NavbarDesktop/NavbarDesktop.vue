@@ -25,13 +25,12 @@
                 v-on-clickaway="onClickaway"
             >
                 <a
-                    href="javascript:;"
                     v-if="! user"
-                    v-bind:class="{ active: isActive }"
-                    v-on:click="onClick"
+                    :class="{ active: isActive }"
+                    @click="onClick"
                 >
 
-                    <div class="NavbarDesktop__link">
+                    <div class="NavbarDesktop__link NavbarDesktop__linkMytrip">
 
                         {{ title }}
 
@@ -40,8 +39,8 @@
                 </a>
 
                 <div v-if="user"
-                    v-bind:class="{ active: isActive }"
-                    v-on:click="onClick"
+                    :class="{ active: isActive }"
+                    @click="onClick"
                     class="NavbarDesktop__userImage"
                 >
 
@@ -88,7 +87,7 @@
 
                             <div class="NavbarDesktop__sublinkTitle">
 
-                            {{ link.title }}
+                                {{ link.title }}
 
                             </div>
 
@@ -119,49 +118,45 @@
 </template>
 
 <script>
+import { mixin as VueClickaway } from 'vue-clickaway'
+import Badge from '../Badge/Badge.vue'
+import UserImage from '../UserImage/UserImage.vue'
 
-    import { mixin as VueClickaway } from 'vue-clickaway'
-    import Badge from '../Badge/Badge.vue'
-    import UserImage from '../UserImage/UserImage.vue'
+export default {
+    components: { Badge, UserImage },
 
-    export default {
+    mixins: [VueClickaway],
 
-        components: { Badge, UserImage },
+    props: {
+        isclasses: { default: '' },
+        links: { default: '' },
+        sublinks: { default: '' },
+        user: { default: '' },
+        route: { default: '' },
+        title: { default: '' }
+    },
 
-        mixins: [ VueClickaway ],
-
-        props: {
-            isclasses: { default: '' },
-            links: { default: '' },
-            sublinks: { default: '' },
-            user: { default: '' },
-            route: { default: '' },
-            title: { default: '' },
+    methods: {
+        onClickaway: function() {
+            this.submenuOpen = false
+            this.isActive = false
         },
+        onClick: function() {
+            this.isActive = !this.isActive
 
-        methods: {
-            onClickaway: function() {
+            if (this.isActive) {
+                this.submenuOpen = true
+            } else {
                 this.submenuOpen = false
-                this.isActive = false
-            },
-            onClick: function() {
-                this.isActive = !this.isActive
-
-                if (this.isActive) {
-                    this.submenuOpen = true
-                } else {
-                    this.submenuOpen = false
-                }
-            }
-        },
-
-        data() {
-            return {
-                submenuOpen: false,
-                isActive: false,
             }
         }
+    },
 
+    data() {
+        return {
+            submenuOpen: false,
+            isActive: false
+        }
     }
-
+}
 </script>
