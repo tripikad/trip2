@@ -8,22 +8,22 @@
 
                 <div class="Editor__toolbarLeft">
 
-                    <div class="Editor__tool" @click="insertLink">Link</div>
-                    <div class="Editor__tool" @click="insertBold">B</div>
-                    <div class="Editor__tool" @click="insertItalic">I</div>
-                    <div class="Editor__tool" @click="insertUl">*</div>
-                    <div class="Editor__tool" @click="insertH3">H3</div>
-                    <div class="Editor__tool" @click="insertH4">H4</div>
-                    <div class="Editor__tool" @click="insertTable">Table</div>
-                    <div class="Editor__tool" @click="insertCalendar">Calendar</div>
-                    <div class="Editor__tool" @click="openPicker">Image</div>
-                    <div class="Editor__tool" @click="cleanMarkup">✿</div>
+                    <div class="Editor__tool Editor__toolLink" @click="insertLink">Link</div>
+                    <div class="Editor__tool Editor__toolBold" @click="insertBold">B</div>
+                    <div class="Editor__tool Editor__toolItalic" @click="insertItalic">I</div>
+                    <div class="Editor__tool Editor__toolUl" @click="insertUl">*</div>
+                    <div class="Editor__tool Editor__toolH3" @click="insertH3">H3</div>
+                    <div class="Editor__tool Editor__toolH4" @click="insertH4">H4</div>
+                    <div class="Editor__tool Editor__toolTable" @click="insertTable">Table</div>
+                    <div class="Editor__tool Editor__toolCalendar" @click="insertCalendar">Calendar</div>
+                    <div class="Editor__tool Editor__toolPicker" @click="openPicker">Image</div>
+                    <div class="Editor__tool Editor__toolClean" @click="cleanMarkup">✿</div>
 
                 </div>
 
                 <div class="Editor__toolbarRight">
 
-                    <div class="Editor__tool" @click="show = false">OK</div>
+                    <div class="Editor__tool Editor__toolOk" @click="show = false">OK</div>
 
                 </div>
 

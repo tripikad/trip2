@@ -2,8 +2,8 @@
 
 namespace Tests\Browser;
 
-use App\User;
 use App\Content;
+use App\User;
 use Tests\DuskTestCase;
 
 class EditorTest extends DuskTestCase
@@ -15,17 +15,21 @@ class EditorTest extends DuskTestCase
         foreach (['flight', 'news'] as $type) {
             $this->browse(function ($browser) use ($super_user, $type) {
                 $browser
-                ->loginAs($super_user)
-                ->visit("$type/create")
-                ->type('title', "Hola editores de titulo de $type")
-                ->click('textarea[readonly=readonly]') // @todo rework click target
-                ->pause(500) // Loading the editor
-                ->keys('.Editor__source textarea', "Hola editores de cuerpo de $type")
-                ->pause(2000) // Waiting for ajax-based preview
-                ->assertSeeIn('.Editor__target', "Hola editores de cuerpo de $type")
-                ->click('.Editor__toolbarRight > .Editor__tool') // @todo rework click target
-                ->press('Lisa')
-                ->assertSee("Hola editores de titulo de $type");
+                    ->loginAs($super_user)
+                    ->visit("$type/create")
+                    ->type('title', "Hola editores de titulo de $type")
+                    ->click('textarea[readonly=readonly]') // @todo rework click target
+                    ->pause(200) // Loading the editor
+                    ->keys('.Editor__source textarea', "Hola editores de cuerpo de $type")
+                    ->pause(1000) // Waiting for ajax-based preview
+                    ->assertSeeIn('.Editor__target', "Hola editores de cuerpo de $type")
+                    ->click('.Editor__toolPicker')
+                    ->pause(200) // Loading the image picker
+                    ->assertSeeIn('.ImagePicker', 'Lohista pilt siia')
+                    ->click('.ImagePicker__close')
+                    ->click('.Editor__toolOk')
+                    ->press('Lisa')
+                    ->assertSee("Hola editores de titulo de $type");
             });
 
             // Cleanup
