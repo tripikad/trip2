@@ -2,11 +2,11 @@
 
 namespace Tests\Browser;
 
-use App\User;
 use App\Content;
 use App\Searchable;
-use Tests\DuskTestCase;
+use App\User;
 use Laravel\Dusk\Browser;
+use Tests\DuskTestCase;
 
 class FrontpageSearchTest extends DuskTestCase
 {
@@ -17,7 +17,7 @@ class FrontpageSearchTest extends DuskTestCase
         $content = factory(Content::class)->create([
             'user_id' => factory(User::class)->create()->id,
             'type' => 'forum',
-            'title' => 'Donde esta nuesta playa',
+            'title' => 'Donde esta nuestra playa',
         ]);
 
         Searchable::unguard();
@@ -40,9 +40,9 @@ class FrontpageSearchTest extends DuskTestCase
             $browser->visit('/')
                 ->pause(100)
                 ->assertSourceHas('Kuhu sa soovid minna?')
-                ->type('.FrontpageSearch__input', 'Donde esta nuesta playa')
+                ->type('.FrontpageSearch__input', 'Donde esta nuestra playa')
                 ->pause(500)
-                ->assertSeeIn('.FrontpageSearch__results', 'Donde esta nuesta playa')
+                ->assertSeeIn('.FrontpageSearch__results', 'Donde esta nuestra playa')
                 ->click('.FrontpageSearchItem')
                 ->assertPathBeginsWith('/foorum/uldfoorum/');
         });
