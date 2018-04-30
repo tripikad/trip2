@@ -11,10 +11,12 @@ class NavbarTest extends DuskTestCase
     public function test_unlogged_user_can_see_login_menu()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+            $browser
+                ->visit('/')
                 ->click('.NavbarDesktop__linkMytrip')
+                ->pause(500)
                 ->assertSeeIn('.NavbarDesktop__popover', 'Logi sisse')
-                ->clickLink('Logi sisse')
+                ->clickLink('Logi sisse') // @todo make sure it's JS link
                 ->assertPathIs('/login');
         });
     }
@@ -22,10 +24,13 @@ class NavbarTest extends DuskTestCase
     public function test_unlogged_user_can_see_register_menu()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+            $browser
+                ->visit('/')
+                ->pause(500)
                 ->click('.NavbarDesktop__linkMytrip')
+                ->pause(500)
                 ->assertSeeIn('.NavbarDesktop__popover', 'Registreeri')
-                ->clickLink('Registreeri')
+                ->clickLink('Registreeri') // @todo make sure it's JS link
                 ->assertPathIs('/register');
         });
     }
@@ -38,9 +43,12 @@ class NavbarTest extends DuskTestCase
             $browser
                 ->loginAs($regular_user) // @todo replace with browser login
                 ->visit('/')
+                ->pause(500)
+                ->screenshot('a')
                 ->click('.NavbarDesktop__userImage')
+                ->pause(500)
                 ->assertSeeIn('.NavbarDesktop__popover', 'Profiil')
-                ->clickLink('Profiil')
+                ->clickLink('Profiil') // @todo make sure it's JS link
                 ->assertPathIs("/user/$regular_user->id");
         });
 
