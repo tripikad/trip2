@@ -72,14 +72,18 @@ class Footer
                 'route' => route('static.show', 'kasutustingimused'),
             ])
             ->push([
+                'title' => trans('menu.footer3.privacy'),
+                'route' => route('static.show', 'privaatsustingimused'),
+            ])
+            ->push([
                 'title' => trans('menu.footer3.advertising'),
                 'route' => route('static.show', 'reklaam'),
             ])
-            ->pushWhen(! $loggedUser, [
+            ->pushWhen(!$loggedUser, [
                 'title' => trans('menu.auth.login'),
                 'route' => route('login.form'),
             ])
-            ->pushWhen(! $loggedUser, [
+            ->pushWhen(!$loggedUser, [
                 'title' => trans('menu.auth.register'),
                 'route' => route('register.form'),
             ])
@@ -100,8 +104,8 @@ class Footer
                     'title' => trans("menu.footer-social.$key"),
                     'route' => $value['route'],
                     'icon' => isset($value['icon'])
-                        ? component('Icon')->is('white')->with('icon', $value['icon'])
-                        : '',
+                    ? component('Icon')->is('white')->with('icon', $value['icon'])
+                    : '',
                     'target' => isset($value['external']) ? '_blank' : '',
                 ];
             });
@@ -112,12 +116,14 @@ class Footer
         return component('Footer')
             ->with('image', '/photos/footer.jpg')
             ->with('logo_route', route('frontpage.index'))
-            ->with('logo', component('Icon')
-                ->is('white')
-                ->with('icon', 'tripee_logo_plain')
-                ->with('width', '100')
-                ->with('height', '25')
-                ->with('color', 'white')
+            ->with(
+                'logo',
+                component('Icon')
+                    ->is('white')
+                    ->with('icon', 'tripee_logo_plain')
+                    ->with('width', '100')
+                    ->with('height', '25')
+                    ->with('color', 'white')
             )
             ->with('links', [
                 'col1' => $this->prepareCol1Links(),
