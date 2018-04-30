@@ -190,7 +190,7 @@ export default {
             this.$http
                 .post(this.route, { body: this.value })
                 .then(res => {
-                    this.preview = res.body.body
+                    this.preview = res.data.body
                 })
         }
     },

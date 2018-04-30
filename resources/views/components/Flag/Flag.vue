@@ -15,7 +15,6 @@
             ></component>
 
         </div>
-
         <div class="Flag__value">{{ currentValue }}</div>
 
     </div>
@@ -47,7 +46,7 @@ export default {
 
     methods: {
         toggleFlag: function() {
-            this.$http.get(this.route).then(function(res) {
+            this.$http.get(this.route).then(res => {
                 this.currentValue = res.data
                 this.currentFlagged = !this.currentFlagged
                 this.$events.$emit('alert', {

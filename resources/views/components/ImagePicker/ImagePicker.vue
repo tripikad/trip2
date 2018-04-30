@@ -50,7 +50,7 @@ export default {
         },
         getImages() {
             this.$http.get(this.route).then(res => {
-                this.images = res.body
+                this.images = res.data
             })
         }
     },

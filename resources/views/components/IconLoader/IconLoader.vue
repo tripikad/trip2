@@ -17,7 +17,7 @@ export default {
     },
 
     mounted() {
-        this.$http.get(this.route).then(function(res) {
+        this.$http.get(this.route).then(res => {
             this.svg = res.data
         })
     }
