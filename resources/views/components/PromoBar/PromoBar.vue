@@ -37,39 +37,37 @@
 </template>
 
 <script>
+import Icon from '../Icon/Icon.vue'
 
-    import Icon from '../Icon/Icon.vue'
+export default {
+    components: { Icon },
 
-    export default {
+    props: {
+        isclasses: { default: '' },
+        title: { default: '' },
+        route_title: { default: '' },
+        route: { default: '' }
+    },
 
-        components: { Icon },
-
-        props: {
-            isclasses: { default: '' },
-            title: { default: '' },
-            route_title: { default: '' },
-            route: { default: '' }
-        },
-
-        data() {
-            return {
-                open: true
-            }
-        },
-
-        methods: {
-            close() {
-                this.open = false
-                this.$cookie.set('malta-stip-closed', true, {expires: '3M'})
-            }
-        },
-
-        mounted() {
-            // if (this.$cookie.get('malta-stip-closed')) {
-            //    this.open = false
-            // }
+    data() {
+        return {
+            open: true
         }
+    },
 
+    methods: {
+        close() {
+            this.open = false
+            this.$cookie.set('malta-stip-closed', true, {
+                expires: '3M'
+            })
+        }
+    },
+
+    mounted() {
+        // if (this.$cookie.get('malta-stip-closed')) {
+        //    this.open = false
+        // }
     }
-
+}
 </script>

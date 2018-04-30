@@ -15,18 +15,15 @@ class CommentTest extends DuskTestCase
         parent::setUp();
 
         $this->publicContentTypes = [
-            'blog',
-            'buysell',
-            'expat',
-            'flight',
+            // @todo test all types + 'internal'
+            // 'blog',
+            // 'buysell',
+            // 'expat',
+            // 'flight',
             'forum',
-            'news',
-            'shortnews',
-            'travelmate',
-        ];
-
-        $this->privateContentTypes = [
-           'internal',
+            // 'news',
+            // 'shortnews',
+            // 'travelmate',
         ];
     }
 
@@ -48,6 +45,7 @@ class CommentTest extends DuskTestCase
                     ->visit("content/$content->type/$content->id")
                     ->type('.EditorComment__body', "Hola chicos de $content->type")
                     ->click('.FormButtonProcess')
+                    ->assertSeeIn('.Alert', "Hola chicos de $content->type on nüüd lisatud")
                     ->assertSee("Hola chicos de $content->type")
                     ->assertSee($regular_user->name)
                     ->visit('/');
