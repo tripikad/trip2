@@ -8,6 +8,7 @@ return [
         'reklaam' => 22125,
         'mis-on-veahind' => 97203,
         'kasutustingimused' => 25151,
+        'privaatsustingimused' => 106740,
     ],
 
 ];

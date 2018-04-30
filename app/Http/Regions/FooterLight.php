@@ -72,6 +72,10 @@ class FooterLight
                 'route' => route('static.show', 'kasutustingimused'),
             ])
             ->push([
+                'title' => trans('menu.footer3.privacy'),
+                'route' => route('static.show', 'privaatsustingimused'),
+            ])
+            ->push([
                 'title' => trans('menu.footer3.advertising'),
                 'route' => route('static.show', 'reklaam'),
             ])
@@ -100,8 +104,8 @@ class FooterLight
                     'title' => trans("menu.footer-social.$key"),
                     'route' => $value['route'],
                     'icon' => isset($value['icon'])
-                        ? component('Icon')->is('white')->with('icon', $value['icon'])
-                        : '',
+                    ? component('Icon')->is('white')->with('icon', $value['icon'])
+                    : '',
                     'target' => isset($value['external']) ? '_blank' : '',
                 ];
             });
@@ -112,12 +116,14 @@ class FooterLight
         return component('Footer')
             ->is('light')
             ->with('logo_route', route('frontpage.index'))
-            ->with('logo', component('Icon')
-                ->is('darkGray')
-                ->with('icon', 'tripee_logo_plain')
-                ->with('width', '100')
-                ->with('height', '25')
-                ->with('color', 'white')
+            ->with(
+                'logo',
+                component('Icon')
+                    ->is('darkGray')
+                    ->with('icon', 'tripee_logo_plain')
+                    ->with('width', '100')
+                    ->with('height', '25')
+                    ->with('color', 'white')
             )
             ->with('links', [
                 'col1' => $this->prepareCol1Links(),

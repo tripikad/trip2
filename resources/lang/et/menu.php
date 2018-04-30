@@ -36,6 +36,7 @@ return [
     'footer3.about' => 'Mis on Trip.ee',
     'footer3.contact' => 'Kontakt',
     'footer3.eula' => 'Kasutustingimused',
+    'footer3.privacy' => 'Privaatsustingimused',
     'footer3.advertising' => 'Reklaam',
     'footer3.styleguide' => 'Styleguide',
 
