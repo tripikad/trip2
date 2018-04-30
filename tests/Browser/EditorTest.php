@@ -2,9 +2,9 @@
 
 namespace Tests\Browser;
 
-use App\User;
-use App\Image;
 use App\Content;
+use App\Image;
+use App\User;
 use Tests\DuskTestCase;
 
 class EditorTest extends DuskTestCase
@@ -22,19 +22,19 @@ class EditorTest extends DuskTestCase
                     ->click('textarea[readonly=readonly]') // @todo rework click target
                     ->pause(200) // Loading the editor
                     ->keys('.Editor__source textarea', "Hola editores de cuerpo de $type")
-                    ->pause(1000) // Waiting for ajax-based preview
+                    ->pause(2000) // Waiting for ajax-based preview
                     ->assertSeeIn('.Editor__target', "Hola editores de cuerpo de $type")
                     ->click('.Editor__toolPicker')
                     ->pause(200) // Loading the image picker
                     ->assertSeeIn('.ImagePicker', 'Lohista pilt siia')
-                    ->attach('.dz-hidden-input', storage_path().'/tests/test.jpg')
+                    ->attach('.dz-hidden-input', storage_path() . '/tests/test.jpg')
                     ->pause(1000) // Uploading image
                     ->click('.ImagePicker__card .ImagePicker__image');
 
                 $image = Image::latest()->first();
 
                 $browser
-                    ->pause(1000)
+                    ->pause(2000)
                     ->assertSeeIn('.Editor__source', $image->id)
                     ->click('.Editor__toolOk')
                     ->press('Lisa')
@@ -45,13 +45,13 @@ class EditorTest extends DuskTestCase
 
             $image = Image::latest()->first();
 
-            $filepath = config('imagepresets.original.path').$image->filename;
+            $filepath = config('imagepresets.original.path') . $image->filename;
 
             $this->assertTrue(file_exists($filepath));
             unlink($filepath);
 
             foreach (['large', 'medium', 'small', 'small_square', 'xsmall_square'] as $preset) {
-                $filepath = config("imagepresets.presets.$preset.path").$image->filename;
+                $filepath = config("imagepresets.presets.$preset.path") . $image->filename;
                 $this->assertTrue(file_exists($filepath));
                 unlink($filepath);
             }

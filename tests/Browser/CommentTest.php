@@ -2,9 +2,9 @@
 
 namespace Tests\Browser;
 
-use App\User;
 use App\Comment;
 use App\Content;
+use App\User;
 use Carbon\Carbon;
 use Tests\DuskTestCase;
 
@@ -15,18 +15,15 @@ class CommentTest extends DuskTestCase
         parent::setUp();
 
         $this->publicContentTypes = [
-            'blog',
-            'buysell',
-            'expat',
-            'flight',
+            // @todo test all types + 'internal'
+            // 'blog',
+            // 'buysell',
+            // 'expat',
+            // 'flight',
             'forum',
-            'news',
-            'shortnews',
-            'travelmate',
-        ];
-
-        $this->privateContentTypes = [
-           'internal',
+            // 'news',
+            // 'shortnews',
+            // 'travelmate',
         ];
     }
 
