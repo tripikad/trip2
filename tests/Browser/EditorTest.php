@@ -2,8 +2,8 @@
 
 namespace Tests\Browser;
 
-use App\Content;
 use App\User;
+use App\Content;
 use Tests\DuskTestCase;
 
 class EditorTest extends DuskTestCase
