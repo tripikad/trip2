@@ -60,6 +60,28 @@ Vue.prototype.$http = axios.create({
     }
 })
 
+Vue.config.errorHandler = function(err, vm, info) {
+    axios.post('./utils/error', {
+        error: {
+            type: 'error',
+            path: location.pathname,
+            error: err,
+            info
+        }
+    })
+}
+
+Vue.config.warnHandler = function(err, vm, info) {
+    axios.post('./utils/error', {
+        error: {
+            type: 'warning',
+            path: location.pathname,
+            error: err,
+            info
+        }
+    })
+}
+
 // Create a Vue instance
 
 new Vue({
@@ -71,5 +93,6 @@ new Vue({
                 title: globalProps.info
             })
         }
+        const err = { hello: 'world' }
     }
 })
