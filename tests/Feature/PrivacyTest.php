@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Content;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PrivacyTest extends BrowserKitTestCase
 {
@@ -14,7 +14,7 @@ class PrivacyTest extends BrowserKitTestCase
     {
         $content = Content::whereSlug('/privaatsustingimused');
 
-        if (!$content) {
+        if (! $content) {
             $content = factory(Content::class)->create([
                 'id' => 106740,
                 'user_id' => factory(User::class)->create(['role' => 'superuser'])->id,
