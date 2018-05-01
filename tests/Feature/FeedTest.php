@@ -29,12 +29,6 @@ class FeedTest extends BrowserKitTestCase
             $this->see($content->title);
         }
 
-        // Testing FooterLight
-
-        $this
-            ->visit('/tripist')
-            ->click(trans('menu.footer-social.newsfeed'))
-            ->seePageIs('index.atom');
     }
 
     public function test_unlogged_user_can_access_flight_feed()
@@ -55,11 +49,5 @@ class FeedTest extends BrowserKitTestCase
             $this->see($content->title);
         }
 
-        // Testing FooterLight
-
-        $this
-            ->visit('/tripist')
-            ->click(trans('menu.footer-social.flightfeed'))
-            ->seePageIs('lendude_sooduspakkumised/rss');
     }
 }
