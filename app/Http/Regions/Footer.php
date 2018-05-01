@@ -89,7 +89,8 @@ class Footer
             ])
             ->pushWhen($loggedUser, [
                 'title' => trans('menu.auth.logout'),
-                'route' => route('login.logout'),
+                'route' => 'https://facebook.com/tripeeee',
+
             ])
             ->map(function ($item) {
                 return (object) $item;
@@ -98,16 +99,33 @@ class Footer
 
     protected function prepareSocialLinks()
     {
-        return collect(config('menu.footer-social'))
-            ->map(function ($value, $key) {
-                return (object) [
-                    'title' => trans("menu.footer-social.$key"),
-                    'route' => $value['route'],
-                    'icon' => isset($value['icon'])
-                        ? component('Icon')->is('white')->with('icon', $value['icon'])
-                        : '',
-                    'target' => isset($value['external']) ? '_blank' : '',
-                ];
+        return collect()
+            ->push([
+                'title' => trans('menu.footer-social.facebook'),
+                'route' => 'https://facebook.com/tripeeee',
+                'icon' => component('Icon')->is('white')->with('icon', 'icon-facebook'),
+                'target' => '_blank',
+            ])
+            ->push([
+                'title' => trans('menu.footer-social.twitter'),
+                'route' => 'https://twitter.com/trip_ee',
+                'icon' => component('Icon')->is('white')->with('icon', 'icon-twitter'),
+                'target' => '_blank',
+            ])
+            ->push([
+                'title' => trans('menu.footer-social.flightfeed'),
+                'route' => '/lendude_sooduspakkumised/rss',
+                'icon' => component('Icon')->is('white')->with('icon', 'icon-rss'),
+                'target' => '',
+            ])
+            ->push([
+                'title' => trans('menu.footer-social.newsfeed'),
+                'route' => '/index.atom',
+                'icon' => component('Icon')->is('white')->with('icon', 'icon-rss'),
+                'target' => '',
+            ])
+            ->map(function ($item) {
+                return (object) $item;
             });
     }
 
@@ -119,11 +137,11 @@ class Footer
             ->with(
                 'logo',
                 component('Icon')
-                ->is('white')
-                ->with('icon', 'tripee_logo_plain')
-                ->with('width', '100')
-                ->with('height', '25')
-                ->with('color', 'white')
+                    ->is('white')
+                    ->with('icon', 'tripee_logo_plain')
+                    ->with('width', '100')
+                    ->with('height', '25')
+                    ->with('color', 'white')
             )
             ->with('links', [
                 'col1' => $this->prepareCol1Links(),

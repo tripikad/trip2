@@ -65,7 +65,7 @@
        
                 <a
                     v-for="(link, index) in links"
-                    :key="index"
+                    :key="'link' + index"
                     :href="link.route"
                 >
 
@@ -83,7 +83,7 @@
 
                 <a
                     v-for="(link, index) in sublinks"
-                    :key="index"
+                    :key="'sublink' + index"
                     :href="link.route"
                 >
 
