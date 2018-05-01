@@ -9,9 +9,7 @@ class V2StaticController extends Controller
 {
     public function show($slug)
     {
-        $post = Content::whereType('static')
-            ->whereStatus(1)
-            ->findOrFail(config('static.slugs')[$slug]);
+        $post = Content::findOrFail(config('static.slugs')[$slug]);
 
         $loggedUser = request()->user();
 
@@ -25,13 +23,18 @@ class V2StaticController extends Controller
             ->with('background', component('BackgroundMap'))
             ->with('color', 'gray')
 
-            ->with('header', region('StaticHeader', collect()
+            ->with('header', region(
+                'StaticHeader',
+                collect()
                 ->push(component('Title')->with('title', $post->vars()->title))
             ))
 
-            ->with('content', collect()
+            ->with(
+                'content',
+                collect()
                 ->push(component('Body')->is('responsive')->with('body', $post->vars()->body))
-                ->pushWhen($loggedUser && $loggedUser->hasRoleOrOwner('admin', $post->user->id),
+                ->pushWhen(
+                    $loggedUser && $loggedUser->hasRoleOrOwner('admin', $post->user->id),
                     component('MetaLink')
                         ->with('title', trans('content.action.edit.title'))
                         ->with('route', route('static.edit', [$post]))
@@ -56,29 +59,40 @@ class V2StaticController extends Controller
 
         return layout('Two')
 
-            ->with('header', region('StaticHeader', collect()
-                ->push(component('Title')
+            ->with('header', region(
+                'StaticHeader',
+                collect()
+                ->push(
+                    component('Title')
                     ->with('title', $static->vars()->title)
                 )
             ))
 
-            ->with('content', collect()
-                ->push(component('Form')
+            ->with(
+                'content',
+                collect()
+                ->push(
+                    component('Form')
                     ->with('route', route('static.update', [$static]))
-                    ->with('fields', collect()
-                        ->push(component('FormTextfield')
+                    ->with(
+                        'fields',
+                        collect()
+                        ->push(
+                            component('FormTextfield')
                             ->is('large')
                             ->with('title', trans('content.static.edit.field.title.title'))
                             ->with('name', 'title')
                             ->with('value', old('title', $static->title))
                         )
-                        ->push(component('FormTextarea')
+                        ->push(
+                            component('FormTextarea')
                             ->with('title', trans('content.static.edit.field.body.title'))
                             ->with('name', 'body')
                             ->with('value', old('body', $static->body))
                             ->with('rows', 20)
                         )
-                        ->push(component('FormButton')
+                        ->push(
+                            component('FormButton')
                             ->with('title', trans('content.edit.submit.title'))
                         )
                     )

@@ -72,6 +72,10 @@ class Footer
                 'route' => route('static.show', 'kasutustingimused'),
             ])
             ->push([
+                'title' => trans('menu.footer3.privacy'),
+                'route' => route('static.show', 'privaatsustingimused'),
+            ])
+            ->push([
                 'title' => trans('menu.footer3.advertising'),
                 'route' => route('static.show', 'reklaam'),
             ])
@@ -112,7 +116,9 @@ class Footer
         return component('Footer')
             ->with('image', '/photos/footer.jpg')
             ->with('logo_route', route('frontpage.index'))
-            ->with('logo', component('Icon')
+            ->with(
+                'logo',
+                component('Icon')
                 ->is('white')
                 ->with('icon', 'tripee_logo_plain')
                 ->with('width', '100')

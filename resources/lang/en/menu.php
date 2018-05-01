@@ -36,6 +36,7 @@ return [
     'footer3.about' => 'What is Trip.ee',
     'footer3.contact' => 'Contact',
     'footer3.eula' => 'EULA',
+    'footer3.privacy' => 'Privacy'
     'footer3.advertising' => 'Advertising',
     'footer3.styleguide' => 'Styleguide',
 
