@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use Request;
 use Response;
 
@@ -24,4 +25,5 @@ class V2UtilsController extends Controller
             'page' => Request::get('page'),
         ]);
     }
+
 }
