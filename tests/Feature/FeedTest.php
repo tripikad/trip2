@@ -28,7 +28,6 @@ class FeedTest extends BrowserKitTestCase
         foreach ($contents as $content) {
             $this->see($content->title);
         }
-
     }
 
     public function test_unlogged_user_can_access_flight_feed()
@@ -48,6 +47,5 @@ class FeedTest extends BrowserKitTestCase
         foreach ($contents as $content) {
             $this->see($content->title);
         }
-
     }
 }
