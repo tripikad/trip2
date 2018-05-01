@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Storage;
 use Illuminate\Console\Command;
+use Storage;
 
 class MakeComponent extends Command
 {
@@ -22,7 +22,7 @@ class MakeComponent extends Command
             '@import "variables";',
             ".$name {",
             '}',
-            "    .$name".'__'."$element {",
+            "    .$name" . '__' . "$element {",
             "    }\n",
         ];
 
@@ -33,7 +33,7 @@ class MakeComponent extends Command
             '',
             "    <div class=\"$name\" :class=\"isclasses\">",
             '',
-            "        <div class=\"$name".'__'."$element\">",
+            "        <div class=\"$name" . '__' . "$element\">",
             '',
             '            {{ title }} {{ message }}',
             '',
@@ -44,20 +44,15 @@ class MakeComponent extends Command
             '</template>',
             '',
             '<script>',
-            '',
-            '    export default {',
-            '',
-            '        props: {',
-            "            isclasses: { default: '' },",
-            "            title: { default: '$name' }",
-            '        },',
-            '',
-            '        data: () => ({',
-            "            message: 'from Vue'",
-            '        })',
-            '',
-            '    }',
-            '',
+            'export default {',
+            '    props: {',
+            "        isclasses: { default: '' },",
+            "        title: { default: '$name' }",
+            '    },',
+            '    data: () => ({',
+            "        message: 'from Vue'",
+            '    })',
+            '}',
             "</script>\n",
         ];
 
@@ -66,7 +61,7 @@ class MakeComponent extends Command
             "\$title = \$title ?? '';",
             '@endphp',
             "<div class=\"$name {{ \$isclasses }}\">",
-            "    <div class=\"$name".'__'."$element\">",
+            "    <div class=\"$name" . '__' . "$element\">",
             '        {{ $title }}',
             '    </div>',
             "</div>\n",
