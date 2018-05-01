@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use Request;
 use Response;
-use Log;
 
 class V2UtilsController extends Controller
 {
@@ -26,7 +26,8 @@ class V2UtilsController extends Controller
         ]);
     }
 
-    public function error() {
+    public function error()
+    {
         $error = Request::get('error');
         if ($error) {
             $error['error'] = preg_replace('/[\s+|\n+]/', ' ', $error['error']);
