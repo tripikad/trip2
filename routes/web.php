@@ -382,9 +382,6 @@ Route::post('utils/filter', 'V2UtilsController@filter')
 Route::post('utils/format', 'V2UtilsController@format')
     ->name('utils.format');
 
-Route::post('utils/error', 'V2UtilsController@error')
-    ->name('utils.error');
-
 // Experiments
 
 Route::get('experiments', 'V2ExperimentsController@index')

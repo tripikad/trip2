@@ -15,15 +15,15 @@ class CommentTest extends DuskTestCase
         parent::setUp();
 
         $this->publicContentTypes = [
-            'blog',
-            'buysell',
-            'expat',
-            'flight',
+            // @todo test all types + 'internal'
+            // 'blog',
+            // 'buysell',
+            // 'expat',
+            // 'flight',
             'forum',
-            'news',
-            'shortnews',
-            'travelmate',
-            // @todo test 'internal' type
+            // 'news',
+            // 'shortnews',
+            // 'travelmate',
         ];
     }
 
@@ -42,7 +42,6 @@ class CommentTest extends DuskTestCase
             $this->browse(function ($browser) use ($regular_user, $content) {
                 $browser
                     ->loginAs($regular_user)
-                    ->visit("content/$content->type")
                     ->visit("content/$content->type/$content->id")
                     ->type('.EditorComment__body', "Hola chicos de $content->type")
                     ->click('.FormButtonProcess')
