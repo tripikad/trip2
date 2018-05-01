@@ -18,6 +18,8 @@ class FeedTest extends BrowserKitTestCase
             'type' => 'news',
         ]);
 
+        // Testing Footer
+
         $this
             ->visit('/')
             ->click(trans('menu.footer-social.newsfeed'))
@@ -26,6 +28,13 @@ class FeedTest extends BrowserKitTestCase
         foreach ($contents as $content) {
             $this->see($content->title);
         }
+
+        // Testing FooterLight
+
+        $this
+            ->visit('/tripist')
+            ->click(trans('menu.footer-social.newsfeed'))
+            ->seePageIs('index.atom');
     }
 
     public function test_unlogged_user_can_access_flight_feed()
@@ -35,6 +44,8 @@ class FeedTest extends BrowserKitTestCase
             'type' => 'flight',
         ]);
 
+        // Testing Footer
+
         $this
             ->visit('/')
             ->click(trans('menu.footer-social.flightfeed'))
@@ -43,5 +54,12 @@ class FeedTest extends BrowserKitTestCase
         foreach ($contents as $content) {
             $this->see($content->title);
         }
+
+        // Testing FooterLight
+
+        $this
+            ->visit('/tripist')
+            ->click(trans('menu.footer-social.flightfeed'))
+            ->seePageIs('lendude_sooduspakkumised/rss');
     }
 }
