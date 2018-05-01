@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Content;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\BrowserKitTestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PrivacyTest extends BrowserKitTestCase
 {
@@ -12,7 +12,7 @@ class PrivacyTest extends BrowserKitTestCase
 
     public function test_unlogged_user_can_access_privacy_page()
     {
-        if (!Content::whereSlug('privaatsustingimused')->first()) {
+        if (! Content::whereSlug('privaatsustingimused')->first()) {
             factory(Content::class)->create([
                 'id' => 106740,
                 'user_id' => factory(User::class)->create(['role' => 'superuser'])->id,
