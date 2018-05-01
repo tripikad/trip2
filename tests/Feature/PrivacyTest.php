@@ -12,10 +12,8 @@ class PrivacyTest extends BrowserKitTestCase
 
     public function test_unlogged_user_can_access_privacy_page()
     {
-        $content = Content::whereSlug('/privaatsustingimused');
-
-        if (!$content) {
-            $content = factory(Content::class)->create([
+        if (Content::whereSlug('privaatsustingimused')->first()) {
+            factory(Content::class)->create([
                 'id' => 106740,
                 'user_id' => factory(User::class)->create(['role' => 'superuser'])->id,
                 'type' => 'page',
