@@ -18,7 +18,6 @@ class Md5HashServiceProvider extends HashServiceProvider
         $this->app->singleton('hash.driver', function ($app) {
             return $app['hash']->driver();
         });
-
     }
 
     public function provides()
