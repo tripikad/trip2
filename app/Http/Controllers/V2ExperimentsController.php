@@ -15,10 +15,8 @@ class V2ExperimentsController extends Controller
 
             ->with('content', collect()
 
-                ->push(component('Block')
-                    ->is('gray')
-                    ->with('content', ['AAA','BBB'])
-                )
+                ->push(region('FlightNewsletterSubscribe'))
+                
                 ->push(component('Title')
                     ->with('title', 'Code')
                 )
