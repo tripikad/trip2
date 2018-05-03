@@ -35,9 +35,9 @@ $footer = $footer ?? '';
 
 @section('content')
 
-    <div class="Frontpage__outerWrapper">
+    <div class="V2Frontpage__outerWrapper">
 
-        <div class="Frontpage__innerWrapper">
+        <div class="V2Frontpage__innerWrapper">
 
         @if ($contentA->isNotEmpty())
 

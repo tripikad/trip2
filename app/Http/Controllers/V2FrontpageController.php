@@ -25,7 +25,7 @@ class V2FrontpageController extends Controller
             return Destination::select('id', 'name', 'slug')->get();
         });
 
-        return layout('frontpage')
+        return layout('Frontpage')
 
             ->with('title', trans('site.about'))
             ->with('head_title', trans('site.about'))
