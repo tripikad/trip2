@@ -15,6 +15,10 @@ class V2ExperimentsController extends Controller
 
             ->with('content', collect()
 
+                ->push(component('Block')
+                    ->is('gray')
+                    ->with('content', ['AAA','BBB'])
+                )
                 ->push(component('Title')
                     ->with('title', 'Code')
                 )
