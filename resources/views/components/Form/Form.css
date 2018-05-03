@@ -1,0 +1,9 @@
+@import "variables";
+
+    .Form__field {
+        margin-bottom: $margin-md;
+    }
+
+    .Form__field:last-child {
+        margin-bottom: 0;
+    }

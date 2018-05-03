@@ -4,8 +4,8 @@
 
         <img class="PhotoCard__photo" :src="small" @click="onClick" />
 
-        <div class="PhotoCard__status Tag" v-show="edit_status" @click="onStatusChange">
-            <a href="#"><div class="PhotoCard__status-button"> {{ button_title }} </div></a>
+        <div class="PhotoCard__status" v-show="edit_status" @click="onStatusChange">
+            <a href="#"><div class="PhotoCard__statusButton"> {{ button_title }} </div></a>
         </div>
     </div>
 

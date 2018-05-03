@@ -4,6 +4,14 @@
     margin-bottom: $margin-md;
 }
 
+    .Block__contentItem {
+        margin-bottom: $margin-sm;
+    }
+
+    .Block__contentItem:last-child {
+        margin-bottom: 0;
+    }
+
 .Block--gray {
     background: $gray-lighter;
     padding: $padding-md;

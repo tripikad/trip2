@@ -11,7 +11,7 @@ use App\NewsletterType;
 use Illuminate\Http\Request;
 use App\Mail\ConfirmRegistration;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\V2NewsletterController;
+use App\Http\Controllers\NewsletterController;
 
 class RegistrationController extends Controller
 {
@@ -140,8 +140,10 @@ class RegistrationController extends Controller
             ->where('active', 1)
             ->first();
 
+        // @todo Avoid direct controller method call
+
         if ($weekly_newsletter) {
-            (new V2NewsletterController)->subscribe(request(), $weekly_newsletter->id, $user, true);
+            (new NewsletterController)->subscribe(request(), $weekly_newsletter->id, $user, true);
         }
 
         return redirect()
