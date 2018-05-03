@@ -6,7 +6,7 @@ use DB;
 use Exception;
 use Carbon\Carbon;
 
-class V2ContentVars
+class ContentVars
 {
     protected $content;
     protected $unreadData;

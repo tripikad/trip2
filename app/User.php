@@ -90,13 +90,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->morphToMany('App\Image', 'imageable');
     }
 
-    // V2
-
-    public function vars()
-    {
-        return new V2UserVars($this);
-    }
-
     public function update_active_at($force = false, $return = false)
     {
         $last_online = Cache::get('uio-'.$this->id, '0000-00-00 00:00:00');
@@ -115,8 +108,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return $this->active_at;
         }
     }
-
-    // V1
 
     public $messages_count = false;
 
@@ -298,5 +289,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (isset($ranking[$new_level])) {
             $level = $new_level;
         }
+    }
+
+    public function vars()
+    {
+        return new UserVars($this);
     }
 }

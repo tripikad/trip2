@@ -227,13 +227,6 @@ class Content extends Model
         ];
     }
 
-    // V2
-
-    public function vars()
-    {
-        return new V2ContentVars($this);
-    }
-
     public function scopeGetLatestPagedItems(
         $query,
         $type,
@@ -344,5 +337,10 @@ class Content extends Model
                 return $query->whereStatus(1);
             })
             ->first();
+    }
+
+    public function vars()
+    {
+        return new ContentVars($this);
     }
 }

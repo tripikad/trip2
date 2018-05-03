@@ -4,7 +4,7 @@ namespace App;
 
 use Exception;
 
-class V2UserVars
+class UserVars
 {
     protected $user;
 
