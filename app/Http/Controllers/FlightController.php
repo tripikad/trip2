@@ -9,7 +9,7 @@ use App\Topic;
 use App\Content;
 use App\Destination;
 
-class V2FlightController extends Controller
+class FlightController extends Controller
 {
     public function index()
     {

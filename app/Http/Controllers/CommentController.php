@@ -9,7 +9,7 @@ use App\Comment;
 use Illuminate\Http\Request;
 use App\Mail\NewCommentFollow;
 
-class V2CommentController extends Controller
+class CommentController extends Controller
 {
     public function store($type, $content_id)
     {

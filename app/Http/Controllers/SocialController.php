@@ -10,7 +10,7 @@ use Redirect;
 use App\Image;
 use Socialite;
 
-class V2SocialController extends Controller
+class SocialController extends Controller
 {
     public function facebookRedirect()
     {

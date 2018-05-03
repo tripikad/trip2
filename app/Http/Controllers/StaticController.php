@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Image;
 use App\Content;
 
-class V2StaticController extends Controller
+class StaticController extends Controller
 {
     public function show($slug)
     {

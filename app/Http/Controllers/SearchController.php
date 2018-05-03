@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class V2SearchController extends Controller
+class SearchController extends Controller
 {
     private $search_types = [
         'forum' => ['forum', 'buysell', 'expat'],

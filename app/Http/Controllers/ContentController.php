@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Content;
 use Illuminate\Http\JsonResponse;
 
-class V2ContentController extends Controller
+class ContentController extends Controller
 {
     public function redirectIndex($type)
     {

@@ -9,7 +9,7 @@ use App\Message;
 use App\Mail\NewMessage;
 use Illuminate\Http\Request;
 
-class V2MessageController extends Controller
+class MessageController extends Controller
 {
     public function index($user_id)
     {

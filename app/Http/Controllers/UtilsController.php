@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Request;
 use Response;
 
-class V2UtilsController extends Controller
+class UtilsController extends Controller
 {
     public function format()
     {

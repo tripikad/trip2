@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Content;
 use App\Destination;
 
-class V2ExperimentsController extends Controller
+class ExperimentsController extends Controller
 {
     public function index()
     {

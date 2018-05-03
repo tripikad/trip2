@@ -9,7 +9,7 @@ use App\Topic;
 use App\Content;
 use App\Destination;
 
-class V2NewsController extends Controller
+class NewsController extends Controller
 {
     public function shortnewsIndex()
     {

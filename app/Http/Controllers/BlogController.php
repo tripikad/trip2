@@ -6,7 +6,7 @@ use Log;
 use App\Content;
 use App\Destination;
 
-class V2BlogController extends Controller
+class BlogController extends Controller
 {
     public function index()
     {

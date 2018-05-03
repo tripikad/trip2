@@ -7,7 +7,7 @@ use App\Image;
 use App\Content;
 use App\Destination;
 
-class V2FrontpageController extends Controller
+class FrontpageController extends Controller
 {
     public function index()
     {

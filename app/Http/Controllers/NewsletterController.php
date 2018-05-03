@@ -12,7 +12,7 @@ use App\NewsletterSubscription;
 use App\NewsletterLetterContent;
 use App\Http\Regions\FlightNewsletterSubscribe;
 
-class V2NewsletterController extends Controller
+class NewsletterController extends Controller
 {
     public function index()
     {
