@@ -12,8 +12,9 @@
         "cviebrock/eloquent-sluggable": "^4.0",
         "doctrine/dbal": "^2.5",
         "eduardokum/laravel-mail-auto-embed": "^1.0",
-        "htmlmin/htmlmin": "^5.0",
+        "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "~5.3|~6.0",
+        "htmlmin/htmlmin": "^5.0",
         "intervention/image": "^2.3@dev",
         "ipunkt/laravel-analytics": "~1.1",
         "jenssegers/date": "3.*@dev",
@@ -27,9 +28,8 @@
         "predis/predis": "~1.0",
         "roumen/feed": "~2.10",
         "roumen/sitemap": "^2.6",
-        "wpb/string-blade-compiler": "2.*@dev",
-        "fideloper/proxy": "^4.0"
-
+        "symfony/yaml": "^4.0",
+        "wpb/string-blade-compiler": "2.*@dev"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
