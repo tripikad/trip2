@@ -15,12 +15,7 @@ class V2ExperimentsController extends Controller
 
             ->with('content', collect()
 
-                ->push(component('HeaderLight')
-                    ->with('content', collect()
-                        ->push(component('Title')->with('title', 'Hello'))
-                        ->push(component('Title')->with('title', 'Hello'))
-                    )
-                )
+                
                 ->push(component('Title')
                     ->with('title', 'Code')
                 )

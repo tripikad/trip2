@@ -2,6 +2,7 @@
 
 .NewsletterComposer {
     width: 100%;
+    margin-bottom: $margin-md;
 }
 
 .NewsletterComposer__cheatsheet {
@@ -9,6 +10,7 @@
     padding: $spacer;
     background: $gray-light;
     color: $white;
+    margin-bottom: $margin-md;
 }
 
 .NewsletterComposer__cheatsheet .Body b {
@@ -20,6 +22,7 @@
     display: flex;
     padding: $spacer;
     justify-content: space-between;
+    margin-bottom: $margin-md;
 }
 
 .NewsletterComposer__item:nth-child(even) {
@@ -43,6 +46,15 @@
     min-width: 80px;
 }
 
+.NewsletterComposer__visible {
+    display: flex;
+}
+
+.NewsletterComposer__visibleLeft,
+.NewsletterComposer__visibleRight,
+{
+    flex: 1;
+}
 .NewsletterComposer__button {
     width: 100%;
     color: $white;
