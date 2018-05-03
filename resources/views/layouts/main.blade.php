@@ -20,7 +20,7 @@
                 ])) 
             }}
         ">
-        <link rel="stylesheet" href="{{ dist('css') }}">
+        @include('utils.css')
         <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
         <!-- TradeDoubler site verification 2960089 -->
     </head>
