@@ -17,6 +17,8 @@
                     'promo' => config('promo'),
                     'imageUploadRoute' => route('image.store'),
                     'imageUploadTitle' => trans('image.drop.title'),
+                    'imagePickerRoute' => route('image.index'),
+                    'formatRoute' => route('utils.format')
                 ])) 
             }}
         ">
@@ -35,14 +37,16 @@
             {!! component('HeaderError') !!}
             @yield('content')
             @yield('footer')
+            {{--
             {!! component('ImagePicker')
                 ->with('route', route('image.index'))
             !!}
             {!! component('Editor')
                 ->with('route', route('utils.format'))
             !!}
+            --}}
             {!! component('Alert') !!}
-
+            
         </div>
         <script defer src="{{ dist('js') }}"></script>
         @include('utils.promo')

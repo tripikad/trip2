@@ -16,6 +16,10 @@
             @focus="$events.$emit('editor.show', currentValue)"
         ></textarea>
 
+        <editor />
+        
+        <image-picker />
+    
     </div>
 
 </template>

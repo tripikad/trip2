@@ -137,7 +137,6 @@ class V2NewsController extends Controller
         return layout('Two')
 
             ->with('header', region('Header', collect()
-                ->push(component('EditorScript'))
                 ->push(component('Title')
                     ->is('white')
                     ->with('title', trans('content.news.index.title'))
@@ -258,7 +257,6 @@ class V2NewsController extends Controller
         return layout('Two')
 
             ->with('header', region('Header', collect()
-                ->push(component('EditorScript'))
                 ->push(component('Title')
                     ->is('white')
                     ->with('title', trans('content.news.index.title'))
