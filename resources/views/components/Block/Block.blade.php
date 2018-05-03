@@ -20,21 +20,15 @@ $content = isset($content) ? collect($content) : collect();
 
     <div class="Block__content">
 
-        @foreach ($content->withoutLast() as $content_item)
+        @foreach ($content as $content_item)
     
-            <div class="margin-bottom-sm">
+            <div class="Block__contentItem">
 
             {!! $content_item !!}
             
             </div>
 
         @endforeach
-
-        <div>
-
-            {!! $content->last() !!}
-            
-        </div>
 
     </div>
 

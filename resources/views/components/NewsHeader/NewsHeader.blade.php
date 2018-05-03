@@ -1,7 +1,7 @@
 @php
 
 $background = $background ?? '';
-$header = $header ?? '';
+$navbar = $navbar ?? '';
 $title = $title ?? '';
 $meta = $meta ?? '';
 
@@ -21,10 +21,6 @@ $meta = $meta ?? '';
         	
         </div>
 
-        <div class="row row-center">
-
-        <div class="col-9">
-
         <div class="NewsHeader__content">
 
         	<h2 class="NewsHeader__title">
@@ -40,10 +36,6 @@ $meta = $meta ?? '';
         	</div>
 
         </div>
-
-        </div>
-
-        </div>  
 
     </div>
 
