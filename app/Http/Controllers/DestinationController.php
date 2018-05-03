@@ -7,7 +7,7 @@ use App\Content;
 use App\Destination;
 use Illuminate\Http\Request;
 
-class V2DestinationController extends Controller
+class DestinationController extends Controller
 {
     public function show($id)
     {

@@ -10,7 +10,7 @@ use App\Content;
 use Carbon\Carbon;
 use App\Destination;
 
-class V2TravelmateController extends Controller
+class TravelmateController extends Controller
 {
     public function index()
     {

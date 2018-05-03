@@ -11,7 +11,7 @@ use App\Comment;
 use App\Content;
 use App\Destination;
 
-class V2ForumController extends Controller
+class ForumController extends Controller
 {
     public function forumIndex()
     {

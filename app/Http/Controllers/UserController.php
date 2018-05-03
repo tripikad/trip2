@@ -9,7 +9,7 @@ use App\Content;
 use App\Destination;
 use App\NewsletterType;
 
-class V2UserController extends Controller
+class UserController extends Controller
 {
     public function show($id)
     {
@@ -307,8 +307,10 @@ class V2UserController extends Controller
             ->where('active', 1)
             ->first();
 
+        // @todo Avoid direct controller method call
+
         if ($weekly_newsletter) {
-            (new V2NewsletterController)->subscribe(request(), $weekly_newsletter->id);
+            (new NewsletterController)->subscribe(request(), $weekly_newsletter->id);
         }
 
         $user->update([

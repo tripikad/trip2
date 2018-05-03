@@ -5,7 +5,7 @@ namespace App;
 use Lang;
 use Exception;
 
-class V2DestinationVars
+class DestinationVars
 {
     protected $destination;
 

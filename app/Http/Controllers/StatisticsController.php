@@ -7,7 +7,7 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
-class V2StatisticsController extends Controller
+class StatisticsController extends Controller
 {
     public function index()
     {

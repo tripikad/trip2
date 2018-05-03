@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Content;
 
-class V2ExperimentsLayoutController extends Controller
+class ExperimentsLayoutController extends Controller
 {
     public function indexOne()
     {

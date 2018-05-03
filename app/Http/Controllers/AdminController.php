@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Image;
 use App\Content;
 
-class V2AdminController extends Controller
+class AdminController extends Controller
 {
     public function unpublishedIndex()
     {

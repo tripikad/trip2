@@ -9,7 +9,7 @@ use App\Image;
 use App\Content;
 use App\Destination;
 
-class V2PhotoController extends Controller
+class PhotoController extends Controller
 {
     public function index()
     {

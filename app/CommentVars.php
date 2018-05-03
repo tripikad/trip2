@@ -4,13 +4,13 @@ namespace App;
 
 use Exception;
 
-class V2MessageVars
+class CommentVars
 {
-    protected $message;
+    protected $comment;
 
-    public function __construct(Message $message)
+    public function __construct(Comment $comment)
     {
-        $this->message = $message;
+        $this->comment = $comment;
     }
 
     public function __get($property)
@@ -28,21 +28,26 @@ class V2MessageVars
 
     public function title()
     {
-        return str_limit($this->attributes['body'], 30);
+        return str_limit(strip_tags($this->comment->body), 30);
     }
 
     public function body()
     {
-        return format_body($this->message->body);
+        return format_body($this->comment->body);
     }
 
     public function created_at()
     {
-        return format_date($this->message->created_at);
+        return format_date($this->comment->created_at);
     }
 
     public function updated_at()
     {
-        return format_date($this->message->created_at);
+        return format_date($this->comment->created_at);
+    }
+
+    public function flagCount($flagType)
+    {
+        return $this->comment->flags->where('flag_type', $flagType)->count();
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Content;
 
-class V2InternalController extends Controller
+class InternalController extends Controller
 {
     public function index()
     {
