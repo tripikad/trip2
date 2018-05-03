@@ -12,6 +12,14 @@
         margin-left: 0 ?if $tablet;
     }
 
+    .HeaderLight__contentItem {
+        margin-bottom: $margin-md;
+    }
+
+    .HeaderLight__contentItem:last-child {
+        margin-bottom: 0;
+    }
+
     .HeaderLight__meta {
         margin-top: $margin-md;
     }

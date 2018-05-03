@@ -15,11 +15,10 @@ class V2ExperimentsController extends Controller
 
             ->with('content', collect()
 
-                ->push(component('Header')
-                    ->with('background', './photos/header3.jpg')
+                ->push(component('HeaderLight')
                     ->with('content', collect()
-                        ->push(component('Title')->is('white')->with('title', 'Hello'))
-                        ->push(component('Title')->is('white')->with('title', 'Hello'))
+                        ->push(component('Title')->with('title', 'Hello'))
+                        ->push(component('Title')->with('title', 'Hello'))
                     )
                 )
                 ->push(component('Title')
