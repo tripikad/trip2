@@ -23,15 +23,15 @@ $content = collect($content) ?? collect();
 
         <div class="Header__content">
 
-        @foreach ($content as $content_item)
+            @foreach ($content as $content_item)
         
-        <div @if (! $loop->last) class="margin-bottom-md" @endif>
+            <div class="Header__contentItem">
 
-            {!! $content_item !!}
-                
-        </div>
+                {!! $content_item !!}
+                    
+            </div>
 
-        @endforeach
+            @endforeach
 
         </div>
 

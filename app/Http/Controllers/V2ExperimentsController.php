@@ -15,8 +15,13 @@ class V2ExperimentsController extends Controller
 
             ->with('content', collect()
 
-                ->push(region('FlightNewsletterSubscribe'))
-                
+                ->push(component('Header')
+                    ->with('background', './photos/header3.jpg')
+                    ->with('content', collect()
+                        ->push(component('Title')->is('white')->with('title', 'Hello'))
+                        ->push(component('Title')->is('white')->with('title', 'Hello'))
+                    )
+                )
                 ->push(component('Title')
                     ->with('title', 'Code')
                 )
