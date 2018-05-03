@@ -59,7 +59,7 @@ class V2ExperimentsController extends Controller
                     ->with('title', 'One')
                     ->with('route', route('experiments.layouts.one'))
                 )
-                
+
                 ->push(component('MetaLink')
                     ->with('title', 'Two')
                     ->with('route', route('experiments.layouts.two'))
