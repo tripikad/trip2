@@ -126,7 +126,6 @@ class FlightNewsletterSubscribe
                         ->with('body', $info)
                     )
                 );
-
         } else {
             return;
         }
