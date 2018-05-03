@@ -48,10 +48,15 @@
 
 .NewsletterComposer__visible {
     display: flex;
+    width: 100%;
 }
 
-.NewsletterComposer__visibleLeft,
-.NewsletterComposer__visibleRight,
+.NewsletterComposer__visibleLeft
+{
+    flex: 1;
+}
+
+.NewsletterComposer__visibleRight
 {
     flex: 1;
 }
