@@ -1,19 +1,31 @@
 <template>
-    <div class="NewsletterComposer margin-bottom-md" :class="isclasses">
-        <div class="NewsletterComposer__cheatsheet margin-bottom-md">
+    <div class="NewsletterComposer" :class="isclasses">
+        <div class="NewsletterComposer__cheatsheet">
             <p class="Body" v-html="cheatsheet"></p>
         </div>
 
-        <div class="NewsletterComposer__item margin-bottom-md" v-for="(item, key) in items" :key="key">
+        <div class="NewsletterComposer__item" v-for="(item, key) in items" :key="key">
             <div class="NewsletterComposer__item-left">
                 <textarea name="body[]" class="FormTextarea__textarea" :placeholder="content_placeholder" v-model="item.body"></textarea>
 
-                <div class="row">
-                    <div class="col-6">
-                        <input type="text" :value="item.visible_from" name="visible_from[]" class="FormTextfield__input" :placeholder="visible_from_placeholder">
+                <div class="NewsletterComposer__visible">
+                    <div class="NewsletterComposer__visibleLeft">
+                        <input
+                            type="text"
+                            :value="item.visible_from"
+                            name="visible_from[]"
+                            class="FormTextfield__input"
+                            :placeholder="visible_from_placeholder"
+                        >
                     </div>
-                    <div class="col-6">
-                        <input type="text" :value="item.visible_to" name="visible_to[]" class="FormTextfield__input" :placeholder="visible_to_placeholder">
+                    <div class="NewsletterComposer__visibleRight">
+                        <input
+                            type="text"
+                            :value="item.visible_to"
+                            name="visible_to[]"
+                            class="FormTextfield__input"
+                            :placeholder="visible_to_placeholder"
+                        >
                     </div>
                 </div>
             </div>

@@ -51,6 +51,30 @@ class ExperimentsController extends Controller
                     ->with('route', route('experiments.map.index'))
                 )
 
+                ->push(component('Title')
+                    ->with('title', 'Layouts')
+                )
+
+                ->push(component('MetaLink')
+                    ->with('title', 'One')
+                    ->with('route', route('experiments.layouts.one'))
+                )
+
+                ->push(component('MetaLink')
+                    ->with('title', 'Two')
+                    ->with('route', route('experiments.layouts.two'))
+                )
+
+                ->push(component('MetaLink')
+                    ->with('title', 'Grid')
+                    ->with('route', route('experiments.layouts.grid'))
+                )
+
+                ->push(component('MetaLink')
+                    ->with('title', 'Frontpage')
+                    ->with('route', route('experiments.layouts.frontpage'))
+                )
+
             )
 
             ->render();

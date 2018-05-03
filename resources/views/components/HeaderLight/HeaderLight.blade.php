@@ -1,10 +1,7 @@
 @php
 
-$map = $map ?? '';
-$header = $header ?? '';
-$title = $title ?? '';
-$content = $content ?? collect();
-$background = $background ?? ''
+$navbar = $navbar ?? '';
+$content = collect($content) ?? collect();
 
 @endphp
 
@@ -19,10 +16,10 @@ $background = $background ?? ''
         </div>
 
         <div class="HeaderLight__content">
-                
+
             @foreach ($content as $content_item)
-            
-            <div @if (!$loop->last) class="margin-bottom-md" @endif>
+        
+            <div class="HeaderLight__contentItem">
 
                 {!! $content_item !!}
                     
@@ -33,7 +30,5 @@ $background = $background ?? ''
         </div>
 
     </div>
-
-    {!! $background !!}
     
 </div>
