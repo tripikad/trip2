@@ -271,7 +271,7 @@ class V2ExperimentsLayoutController extends Controller
             )
             ->push('<br><br>');
 
-        return layout('Frontpage2')
+        return layout('V2Frontpage')
 
             ->with('header', region('FrontpageHeader', collect()))
 
