@@ -54,9 +54,8 @@ export default {
         }
     },
     mounted() {
-        this.getImages()
-
         this.$events.$on('imagepicker.show', target => {
+            this.getImages()
             this.show = true
             this.target = target
         })

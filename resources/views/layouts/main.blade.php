@@ -37,10 +37,8 @@
             {!! component('HeaderError') !!}
             @yield('content')
             @yield('footer')
+            {!! component('ImagePicker') !!}
             {{--
-            {!! component('ImagePicker')
-                ->with('route', route('image.index'))
-            !!}
             {!! component('Editor')
                 ->with('route', route('utils.format'))
             !!}

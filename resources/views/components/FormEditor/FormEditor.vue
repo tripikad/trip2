@@ -16,16 +16,20 @@
             @focus="$events.$emit('editor.show', currentValue)"
         ></textarea>
 
-        <editor />
-        
-        <image-picker />
-    
+        <component :is="'Editor'" />
+            
     </div>
 
 </template>
 
 <script>
 export default {
+
+    components: {
+        Editor: () =>
+            import("../../components_lazy/Editor/Editor.vue")
+    },
+
     props: {
         isclasses: { default: '' },
         name: { default: '' },

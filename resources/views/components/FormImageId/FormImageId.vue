@@ -14,8 +14,6 @@
             @focus="$events.$emit('imagepicker.show', name)"
         >
 
-        <image-picker />
-
     </div>
 
 </template>

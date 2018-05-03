@@ -142,23 +142,8 @@ export default {
 // ...
 ```
 
-This creates an extra package `main.0.hash.js` that is loaded on demand via ajax when `FormEditor` component is on the page.
+This creates an extra packages `main.0.hash.js`, `main.1.hash.js` etc which are loaded on demand via ajax when `Editor` component is on the page.
 
-Optionally one can add a comment that gives a bit clearer package name:
-
-```vue
-// FormEditor.vue
-// ...
-<script>
-export default {
-  components: {
-    Editor: () =>
-      import(/* webpackChunkName: "editor" */ "../../components_lazy/Editor/Editor.vue")
-  },
-// ...
-```
-
-This creates an named extra package `main.editor.hash.js`
 
 #### CSS
 
