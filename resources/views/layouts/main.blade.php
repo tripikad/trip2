@@ -28,7 +28,6 @@
     </head>
     <body>
         @include('utils.svg')
-        @stack('prescripts')
         <div id="app" class="background-{{ $color }}">
             @yield('background')
             @yield('promobar')
@@ -38,13 +37,7 @@
             @yield('content')
             @yield('footer')
             {!! component('ImagePicker') !!}
-            {{--
-            {!! component('Editor')
-                ->with('route', route('utils.format'))
-            !!}
-            --}}
             {!! component('Alert') !!}
-            
         </div>
         <script defer src="{{ dist('js') }}"></script>
         @include('utils.promo')
