@@ -41,12 +41,21 @@ IMAGE_PATH=https://trip.ee/images/
 
 ### Redis
 
-To get production-level caching experience, install Redis using Homebrew and then
-add this to `.env` files:
+To get production-level caching experience, [install](https://medium.com/@petehouston/install-and-config-redis-on-mac-os-x-via-homebrew-eb8df9a4f298) Redis using Homebrew:
 
+```sh
+brew install redis
 ```
+
+and then add these to `.env` files:
+
+```env
 CACHE_DRIVER=redis
+SESSION_DRIVER=redis
+QUEUE_DRIVER=redis
 ```
+
+It's also recommended to get the [Medis](http://getmedis.com/) visual client for Redis.
 
 ### Nginx cache
 
