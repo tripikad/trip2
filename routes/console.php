@@ -10,7 +10,7 @@ function formatBytes($size, $precision = 3)
 
 
 function filepath($name, $width, $quality = 75, $step1 = null, $step2 = null) {
-    $filename = collect([$name,'w'.$width,'q'.$quality,$step1,$step2])
+    $filename = collect([$name,'w'.($width < 100 ? '0'.$width : $width),'q'.$quality,$step1,$step2])
         ->reject(function ($name) {
             return empty($name);
         })
@@ -23,25 +23,56 @@ Artisan::command('image:list {name}', function ($name) {
         ->filter(function($filepath) use ($name) {
             return starts_with(basename($filepath), $name);
         })
+        ->splice(1)
+        ->reverse()
+        ->values()
         ->map(function($filepath) {
             $filename = basename($filepath);
+            $size = Storage::disk('root')->size($filepath);
             return [
                 'name' => basename($filepath),
-                'size' => formatBytes(Storage::disk('root')->size($filepath))
+                'formattedSize' => formatBytes($size),
+                'ratio' => $size,
             ];
+        })
+        ->sortByDesc('ratio');
+
+    
+    $baseSize = $files->first()['ratio'];
+
+    $files = $files->map(function($fileData) use ($baseSize) {
+            $fileData['ratio'] =  round($fileData['ratio'] / $baseSize * 100,1);
+            return $fileData;
+        })
+        ->map(function($fileData) {
+            if (!strstr($fileData['name'], 'w900') && !strstr($fileData['name'], 'w700') && !strstr($fileData['name'], 'w300') && !strstr($fileData['name'], 'w180') && !strstr($fileData['name'], 'w075')) {
+                return collect($fileData)->map(function ($data) {
+                    return '<comment>'.$data.'</comment>';
+                });
+            }
+            return $fileData;
         });
-    $this->table(['name', 'size'], $files->reverse());
+
+    $this->table(['name', 'formattedSize','ratio %'], $files);
+
 });
 
 Artisan::command('image:resize {name}', function ($name) {
     
     $presets = [
+        ['w' => 1200, 'h' => null, 'op' => 'resize'],
         ['w' => 900, 'h' => null, 'op' => 'resize'],
+        ['w' => 800, 'h' => null, 'op' => 'resize'],
         ['w' => 700, 'h' => null, 'op' => 'resize'],
+        ['w' => 600, 'h' => null, 'op' => 'resize'],
+        ['w' => 400, 'h' => null, 'op' => 'resize'],
         ['w' => 300, 'h' => null, 'op' => 'resize'],
         ['w' => 180, 'h' => null, 'op' => 'fit'],
-        ['w' => 75, 'h' => null, 'op' => 'fit'],
-        ['w' => 420, 'h' => 260, 'op' => 'fit'],
+        ['w' => 160, 'h' => null, 'op' => 'fit'], // 180
+        ['w' => 80, 'h' => null, 'op' => 'fit'],  // 90
+        ['w' => 75, 'h' => null, 'op' => 'fit'], // 
+        ['w' => 40, 'h' => null, 'op' => 'fit'], // 45
+      //['w' => 420, 'h' => 260, 'op' => 'fit'],
     ];
 
     collect($presets)->each(function($preset) use ($name) {
@@ -55,13 +86,13 @@ Artisan::command('image:resize {name}', function ($name) {
         $image->save(filepath($name, $preset['w'], 75), 75);
 
         ImageOptimizer::optimize(
-            filepath($name, $preset['w']),
-            filepath($name, $preset['w'], 75, 'opt')
+            filepath($name, $preset['w'])
+        //    filepath($name, $preset['w'], 75, 'optimized')
         );
 
-        Imageconv::make(filepath($name, $preset['w'], 75, 'opt'))
-            ->sharpen(3)
-            ->save(filepath($name, $preset['w'], 75, 'opt','sharp'));
+        // Imageconv::make(filepath($name, $preset['w'], 75, 'opt'))
+        //     ->sharpen(3)
+        //     ->save(filepath($name, $preset['w'], 75, 'opt','sharp'));
 
     });
 
