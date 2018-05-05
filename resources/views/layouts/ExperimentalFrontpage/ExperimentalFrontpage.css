@@ -1,0 +1,11 @@
+@import "variables";
+
+.ExperimentalFrontpage__outerWrapper {
+    margin-top: calc($spacer * -3);
+    display: flex;
+    justify-content: center;
+}
+
+.ExperimentalFrontpage__innerWrapper {
+    width: 100%;
+}

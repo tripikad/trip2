@@ -14,35 +14,31 @@
 </template>
 
 <script>
+export default {
+    props: {
+        isclasses: { default: '' },
+        size: { default: 'md' },
+        width: { default: 0 },
+        height: { default: 0 },
+        icon: { default: '' }
+    },
 
-    export default {
+    computed: {
+        sizeMap: function() {
+            var sizes = { sm: 14, md: 18, lg: 26, xl: 36 }
 
-        props: {
-            isclasses: { default: '' },
-            size: { default: 'md' },
-            width: { default: 0 },
-            height: { default: 0 },
-            icon: { default: '' }
-        },
-
-        computed: {
-            sizeMap: function() {
-                var sizes = { sm: 14, md: 18, lg: 26, xl: 36 }
-
-                if (this.width && this.height) {
-                    return {
-                        width: this.width,
-                        height: this.height
-                    }
-                }
-
+            if (this.width && this.height) {
                 return {
-                    width: sizes[this.size],
-                    height: sizes[this.size]
+                    width: this.width,
+                    height: this.height
                 }
             }
+
+            return {
+                width: sizes[this.size],
+                height: sizes[this.size]
+            }
         }
-
     }
-
+}
 </script>

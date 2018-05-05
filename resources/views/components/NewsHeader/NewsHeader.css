@@ -10,6 +10,10 @@
     .NewsHeader__content {
         margin-top: calc($spacer * 25);
         margin-top: calc($spacer * 15) ?if $mobile;
+        margin-left: $margin-xl;
+        margin-left: 0 ?if $tablet;
+        margin-right: $margin-xxl;
+        margin-right: $margin-sm ?if $tablet;
     }
 
     .NewsHeader__title {

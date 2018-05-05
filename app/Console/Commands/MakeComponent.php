@@ -44,20 +44,15 @@ class MakeComponent extends Command
             '</template>',
             '',
             '<script>',
-            '',
-            '    export default {',
-            '',
-            '        props: {',
-            "            isclasses: { default: '' },",
-            "            title: { default: '$name' }",
-            '        },',
-            '',
-            '        data: () => ({',
-            "            message: 'from Vue'",
-            '        })',
-            '',
-            '    }',
-            '',
+            'export default {',
+            '    props: {',
+            "        isclasses: { default: '' },",
+            "        title: { default: '$name' }",
+            '    },',
+            '    data: () => ({',
+            "        message: 'from Vue'",
+            '    })',
+            '}',
             "</script>\n",
         ];
 
@@ -77,13 +72,13 @@ class MakeComponent extends Command
             $this->info("\nVue component $dir created\n");
             $this->line("Your next steps:\n");
             $this->line("    1. Run npm run build\n");
-            $this->line("    2. Add a following line to app/Http/Controllers/V2ExperimentsController.php\n");
+            $this->line("    2. Add a following line to app/Http/Controllers/ExperimentsController.php\n");
             $this->comment("       ->push(component('$name')->with('title', 'I am $name'))\n");
         } else {
             Storage::disk('root')->put("$dir/$name.blade.php", implode("\n\n", $blade));
             $this->info("\nBlade component $dir created\n");
             $this->line("Your next steps:\n");
-            $this->line("    1. Add a following line to app/Http/Controllers/V2ExperimentsController.php\n");
+            $this->line("    1. Add a following line to app/Http/Controllers/ExperimentsController.php\n");
             $this->comment("       ->push(component('$name')->with('title', 'I am $name'))\n");
         }
     }

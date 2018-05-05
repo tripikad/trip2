@@ -20,20 +20,14 @@ $files = $files ?? false;
     
     {{ csrf_field() }}
 
-    @foreach ($fields->withoutLast() as $field)
+    @foreach ($fields as $field)
     
-        <div class="margin-bottom-md">
+        <div class="Form__field">
 
         {!! $field !!}
         
         </div>
 
     @endforeach
-
-    <div>
-
-        {!! $fields->last() !!}
-        
-    </div>
 
 </form>

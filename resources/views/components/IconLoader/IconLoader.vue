@@ -5,25 +5,21 @@
 </template>
 
 <script>
+export default {
+    props: {
+        route: { default: '' }
+    },
 
-    export default {
-
-        props: {
-            route: {}
-        },
-
-        data: function() {
-            return {
-                svg: {}
-            }
-        },
-
-        mounted() {
-            this.$http.get(this.route).then(function(res) {
-                this.svg = res.data
-            })
+    data: function() {
+        return {
+            svg: {}
         }
+    },
 
+    mounted() {
+        this.$http.get(this.route).then(res => {
+            this.svg = res.data
+        })
     }
-
+}
 </script>

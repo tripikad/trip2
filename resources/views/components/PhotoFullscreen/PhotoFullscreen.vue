@@ -16,29 +16,25 @@
 </template>
 
 <script>
+export default {
+    props: {
+        isclasses: { default: '' }
+    },
 
-    export default {
-
-        props: {
-            isclasses: { default: '' },
-        },
-
-        data() {
-            return {
-                large: '',
-                meta: '',
-                open: false
-            }
-        },
-
-        mounted() {
-            this.$events.$on('photo', (photo) => {
-                this.large = photo.large
-                this.meta = photo.meta
-                this.open = true
-            })
+    data() {
+        return {
+            large: '',
+            meta: '',
+            open: false
         }
+    },
 
+    mounted() {
+        this.$events.$on('photo', photo => {
+            this.large = photo.large
+            this.meta = photo.meta
+            this.open = true
+        })
     }
-
+}
 </script>

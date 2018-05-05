@@ -18,6 +18,8 @@ class FeedTest extends BrowserKitTestCase
             'type' => 'news',
         ]);
 
+        // Testing Footer
+
         $this
             ->visit('/')
             ->click(trans('menu.footer-social.newsfeed'))
@@ -34,6 +36,8 @@ class FeedTest extends BrowserKitTestCase
             'user_id' => factory(User::class)->create()->id,
             'type' => 'flight',
         ]);
+
+        // Testing Footer
 
         $this
             ->visit('/')

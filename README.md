@@ -347,3 +347,31 @@ layout('One')
 #### Making a layout
 
 At the time of writing there is no helper command to create a layout.
+
+## Linting
+
+### Running linter
+
+```
+npm run lint
+```
+
+### Settings for Visual Studio Code
+
+Install **ESLint** (and optionally **Vetur**) plugin and 
+adjust user configuration as follows:
+
+```json
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        {
+            "language": "vue",
+            "autoFix": true
+        }
+    ],
+    "eslint.autoFixOnSave": true,
+}
+```
+
+To invoke fixing manually, run `Cmd+Shift+P` and `ESLint: Fix all auto-fixable problems`.

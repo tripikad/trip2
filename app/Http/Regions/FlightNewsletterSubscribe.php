@@ -111,12 +111,20 @@ class FlightNewsletterSubscribe
                     ->with('id', 'FlightNewsletterSubscribeForm')
             );
 
-            return component('FlightNewsletterSubscribe')
-                ->with('info', $info)
-                ->with('form', component('Form')
-                    ->with('route', route('newsletter.subscribe', [$newsletter_type]))
-                    ->with('id', 'FlightNewsletterSubscribeForm')
-                    ->with('fields', $fields)
+            return component('Block')
+                ->is('gray')
+                ->with('title', trans('newsletter.subscribe.flight.heading'))
+                ->with('content', collect()
+                    ->push(
+                        component('Form')
+                        ->with('route', route('newsletter.subscribe', [$newsletter_type]))
+                        ->with('id', 'FlightNewsletterSubscribeForm')
+                        ->with('fields', $fields)
+                    )
+                    ->pushWhen($info, component('Body')
+                        ->is('small')
+                        ->with('body', $info)
+                    )
                 );
         } else {
             return;
