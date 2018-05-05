@@ -15,14 +15,10 @@ class Topic extends Model
         return $this->belongsToMany('App\Content');
     }
 
-    // V2
-
     public function vars()
     {
-        return new V2TopicVars($this);
+        return new TopicVars($this);
     }
-
-    // V1
 
     public static function getNames()
     {
