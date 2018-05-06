@@ -15,8 +15,6 @@
             :placeholder="placeholder"
             @focus="$events.$emit('editor.show', currentValue)"
         ></textarea>
-
-        <component :is="'Editor'" />
             
     </div>
 
@@ -24,12 +22,6 @@
 
 <script>
 export default {
-
-    components: {
-        Editor: () =>
-            import("../../components_lazy/Editor/Editor.vue")
-    },
-
     props: {
         isclasses: { default: '' },
         name: { default: '' },

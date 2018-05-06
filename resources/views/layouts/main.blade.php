@@ -36,6 +36,7 @@
             {!! component('HeaderError') !!}
             @yield('content')
             @yield('footer')
+            {!! component('Editor')!!}
             {!! component('ImagePicker') !!}
             {!! component('Alert') !!}
         </div>
