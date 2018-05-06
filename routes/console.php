@@ -70,7 +70,7 @@ Artisan::command('image:resize {name}', function ($name) {
         ['w' => 300, 'h' => null, 'op' => 'resize'],
         ['w' => 180, 'h' => null, 'op' => 'fit'],
         ['w' => 160, 'h' => null, 'op' => 'fit'],
-        ['w' => 80, 'h' => null, 'op' => 'fit'], 
+        ['w' => 80, 'h' => null, 'op' => 'fit'],
         ['w' => 75, 'h' => null, 'op' => 'fit'],
         ['w' => 40, 'h' => null, 'op' => 'fit'],
       //['w' => 420, 'h' => 260, 'op' => 'fit'],
