@@ -15,7 +15,7 @@
             :placeholder="placeholder"
             @focus="$events.$emit('editor.show', currentValue)"
         ></textarea>
-
+            
     </div>
 
 </template>
