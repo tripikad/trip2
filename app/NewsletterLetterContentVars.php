@@ -289,7 +289,7 @@ class NewsletterLetterContentVars
                             }
                         }
 
-                        $user_image = $item->user->imagePreset('small_square');
+                        $user_image = $item->user->imagePreset('xsmall_square');
 
                         if (strpos($user_image, '.svg') !== false) {
                             $pos = (int) round(mb_strlen($user_image) - strrpos($user_image, '.svg') - 4);
