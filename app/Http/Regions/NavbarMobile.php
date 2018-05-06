@@ -80,7 +80,7 @@ class NavbarMobile
                 ->with('sublinks', $this->prepareSublinks())
                 ->with('user', $user ? collect()
                     ->put('title', $user->vars()->name)
-                    ->put('image', $user->imagePreset('small_square'))
+                    ->put('image', $user->imagePreset('xsmall_square'))
                     ->put('badge', $user->unreadMessagesCount())
                     ->put('rank', $user->vars()->rank)
                 : '')

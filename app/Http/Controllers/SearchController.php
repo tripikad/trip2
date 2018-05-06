@@ -139,7 +139,7 @@ class SearchController extends Controller
                             ->with('route', ($item->name != 'Tripi külastaja' ? route('user.show', [$item]) : false))
                             ->with('arc', component('UserImage')
                                 ->with('rank', $item->rank * 90)
-                                ->with('image', $item->imagePreset('small_square'))
+                                ->with('image', $item->imagePreset('xsmall_square'))
                             )
                     );
                 } else {
@@ -147,7 +147,7 @@ class SearchController extends Controller
                         component('SearchRow')->with('title', str_limit($item->title, 80))
                             ->with('route', route($item->type.'.show', [$item->slug]))
                             ->with('date', Carbon::createFromFormat('Y-m-d H:i:s', $item->updated_at)->format('d.m.Y H:i'))
-                            ->with('image', $item->user->imagePreset('small_square'))
+                            ->with('image', $item->user->imagePreset('xsmall_square'))
                             ->with('image_title', $item->user->name)
                             ->with('body', str_limit(strip_tags($item->vars()->body() ?? '&nbsp;'), 300))
                             ->with('badge', $item->comments->count())

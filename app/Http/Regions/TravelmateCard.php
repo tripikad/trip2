@@ -9,7 +9,7 @@ class TravelmateCard
         return component('TravelmateCard')
             ->with('user', component('UserImage')
                 ->with('route', route('user.show', [$travelmate->user]))
-                ->with('image', $travelmate->user->imagePreset('small_square'))
+                ->with('image', $travelmate->user->imagePreset('xsmall_square'))
                 ->with('rank', $travelmate->user->vars()->rank)
                 ->with('size', 74)
                 ->with('border', 3)

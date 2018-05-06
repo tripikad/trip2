@@ -11,7 +11,7 @@ class BlogCard
             ->with('route', route('blog.show', [$blog->slug]))
             ->with('user', component('UserImage')
                 ->with('route', route('user.show', [$blog->user]))
-                ->with('image', $blog->user->imagePreset('small_square'))
+                ->with('image', $blog->user->imagePreset('xsmall_square'))
                 ->with('rank', $blog->user->vars()->rank)
             )
             ->with('meta', component('Meta')->with('items', collect()
