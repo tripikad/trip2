@@ -104,12 +104,12 @@ valet restart
 ```sh
 npm run dev # Unminified and fast dev build
 npm run build # Minified and slow production build
-npm run watch # Watching the assets
+npm run watch # Unminified and fast dev build, recompiling on file change
 ```
 
 ### Build process
 
-The main entrypoint is `./resources/views/main.js` what boots up a Vue instance and includes all the neccessary assets:
+The main entrypoint is `./resources/views/main.js` what boots up a Vue instance and includes all the neccessary assets.
 
 #### JS
 
@@ -130,10 +130,11 @@ are compiled and minified to
 Vue components can also be lazy-loaded, most useful for components that have large dependecies.
 
 ```vue
-// FormEditor.vue
-// ...
+<template>
+    // ...
+    <component :is="'Editor'" />
+</template>
 <script>
-
 export default {
   components: {
     Editor: () =>
@@ -219,14 +220,14 @@ Blocks:
 .AnotherComponent {}
 ```
 
-Elements:
+Elements (note the spacing):
 
 ```css
-.Component__element {}
-.AnotherComponent__anotherElement {}
+    .Component__element {}
+    .AnotherComponent__anotherElement {}
 ```
 
-Modifiers:
+Modifiers
 
 ```css
 .Component--modifier {}
@@ -349,7 +350,6 @@ adjust user configuration as follows:
 ```json
     "eslint.validate": [
         "javascript",
-        "javascriptreact",
         {
             "language": "vue",
             "autoFix": true
