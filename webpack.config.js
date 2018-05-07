@@ -64,12 +64,12 @@ module.exports = {
         ]
     },
     plugins: [
+        new CleanWebpackPlugin('./public/dist'),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash:6].css'
         }),
         new SpriteLoaderPlugin(),
-        new CleanWebpackPlugin('./public/dist'),
         function() {
             this.plugin('done', stats => {
                 var assets = stats.toJson()
@@ -113,8 +113,8 @@ if (process.env.NODE_ENV === 'production') {
         minimizer: [
             new UglifyJsPlugin({
                 sourceMap: false,
-                cache: false,
-                parallel: false
+                cache: true,
+                parallel: true
             }),
             new OptimizeCSSAssetsPlugin()
         ]

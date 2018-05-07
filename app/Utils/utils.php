@@ -118,3 +118,9 @@ function format_link($route, $title, $blank = false)
 
     return '<a href="'.$route.'" '.$target.'>'.$title.'</a>';
 }
+
+function styleVars()
+{
+    $json = Storage::disk('root')->get('resources/views/styles/variables.json');
+    return json_decode($json);
+}

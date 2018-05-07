@@ -4,8 +4,21 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    height: 100%;
+    padding: $padding-md;
 }
 
+    .ExperimentalCard__title {
+        color: $white;
+        font: $font-heading-md;
+        text-shadow: $text-shadow-md;
+    }
+
+    .ExperimentalCard__title:hover {
+        color: $white-hover;
+    }
+
+    /*
     .ExperimentalCard__wrapper {
         padding: $padding-md;
         padding: $padding-xl ?if $mobile;
@@ -23,16 +36,8 @@
     justify-content: center;
     text-align: center;
 }
-    .ExperimentalCard__title {
-        color: $white;
-        font: $font-heading-md;
-        text-shadow: $text-shadow-md;
-    }
-
-    .ExperimentalCard__title:hover {
-        color: $white-hover;
-    }
-
+*/
+    /*
     .ExperimentalCard--large .ExperimentalCard__title {
         font: $font-heading-xl;
     }
@@ -44,3 +49,4 @@
         min-font-size: $font-size-md;
 
     }
+    */
