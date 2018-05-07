@@ -211,7 +211,7 @@ class ExperimentsLayoutController extends Controller
 
     public function indexFrontpage()
     {
-        $flights = Content::getLatestItems('flight', 4);
+        $flights = Content::getLatestItems('flight', 3);
 
         $contentA = collect()
             ->push(component('Grid')
