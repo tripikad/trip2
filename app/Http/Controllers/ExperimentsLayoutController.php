@@ -181,6 +181,7 @@ class ExperimentsLayoutController extends Controller
                     ->with('widths', '2 3 2')
                     ->with('items', $photos->take(6)->map(function ($photo) {
                         return component('ExperimentalCard')
+                            ->with('title', $photo->vars()->shortTitle)
                             ->with('background', $photo->imagePreset('medium'));
                     }))
                 )
@@ -190,12 +191,14 @@ class ExperimentsLayoutController extends Controller
                     ->is('gray')
                     ->with('code', "component('ExperimentalGrid')
     ->with('gap', 1) // \$spacer * anything
-    ->with('widths', '2fr 3fr 2fr') // maps to grid-template-columns
+    ->with('widths', '1fr 2fr') // maps to grid-template-columns
+    ->with('heights', '2fr 1fr 2fr') // maps to grid-template-rows
     ->with('items', \$photos->take(6)->...)"
                 ))
                 ->push(component('ExperimentalGrid')
                     ->with('gap', 1)
                     ->with('widths', '1fr 2fr')
+                    ->with('heights', '2fr 1fr 2fr')
                     ->with('items', $photos->map(function ($photo) {
                         return component('ExperimentalCard')
                             ->with('title', $photo->vars()->shortTitle)
