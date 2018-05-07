@@ -300,7 +300,7 @@ class ExperimentsLayoutController extends Controller
 
     public function indexList()
     {
-        $flights = Content::getLatestItems('flight', 3);
+        $flights = Content::getLatestItems('flight', 4);
 
         $header = collect()
             ->push(component('Grid')
@@ -323,10 +323,14 @@ class ExperimentsLayoutController extends Controller
             );
 
         return layout('ExperimentalList')
+            ->with('background', component('BackgroundMap'))
             ->with('content', collect()
-                ->push(component('ExperimentalContainer')
-                    ->is('wide')
-                    ->with('content', $header)
+                ->push('<br />')
+                ->push(component('Container')
+                    ->with('content', $header->merge(collect()
+                        ->push('<br />')
+                        ->push(component('Placeholder'))
+                    ))
                 )
             )
             ->render();
