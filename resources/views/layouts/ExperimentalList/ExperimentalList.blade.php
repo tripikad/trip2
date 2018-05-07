@@ -29,22 +29,14 @@ $footer = $footer ?? '';
 
 @section('content')
 
-    @foreach ($content_groups as $content_group)
+    @foreach ($content as $content_item)
                     
-        <div class="ExperimentalList__contentGroup">
+        <div class="ExperimentalList__contentItem">
 
-            @foreach ($content_group as $content_item)
-                    
-                <div class="ExperimentalList__contentItem">
+            {!! $content_item !!}
 
-                    {!! $content_item !!}
-
-                </div>
-            
-            @endforeach
-                
         </div>
-
-    @endforeach   
+            
+    @endforeach
                                     
 @stop

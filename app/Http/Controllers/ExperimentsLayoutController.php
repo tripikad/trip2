@@ -297,4 +297,39 @@ class ExperimentsLayoutController extends Controller
 
             ->render();
     }
+
+    public function indexList()
+    {
+        $flights = Content::getLatestItems('flight', 3);
+
+        $header = collect()
+            ->push(component('Grid')
+                ->with('cols', $flights->count())
+                ->with('items', $flights->map(function ($flight, $index) {
+                    return region(
+                        'DestinationBar',
+                        $flight->destinations()->first(),
+                        ['purple', 'yellow', 'red', 'green'][$index]
+                    );
+                }))
+            )
+            ->push(component('Grid')
+                ->with('cols', $flights->count())
+                ->with('items', $flights->map(function ($flight, $index) {
+                    return component('ExperimentalCard')
+                        ->with('background', $flight->imagePreset('medium'))
+                        ->with('title', ($index == 1 ? 'See on nüüd küll päris eriline pakkumine, kas sa ei leia? ' : '').$flight->vars()->title);
+                }))
+            );
+
+        return layout('ExperimentalList')
+            ->with('content', collect()
+                ->push(component('ExperimentalContainer')
+                    ->is('wide')
+                    ->with('content', $header)
+                )
+            )
+            ->render();
+    }
+
 }
