@@ -211,20 +211,22 @@ class ExperimentsLayoutController extends Controller
 
     public function indexFrontpage()
     {
-        $flights = Content::getLatestItems('flight', 12);
+        $flights = Content::getLatestItems('flight', 4);
 
         $contentA = collect()
             ->push(component('Grid')
-                ->with('items', $flights->take(3)->map(function ($flight, $index) {
+                ->with('cols', $flights->count())
+                ->with('items', $flights->map(function ($flight, $index) {
                     return region(
                         'DestinationBar',
                         $flight->destinations()->first(),
-                        ['purple', 'yellow', 'red'][$index]
+                        ['purple', 'yellow', 'red', 'green'][$index]
                     );
                 }))
             )
             ->push(component('Grid')
-                ->with('items', $flights->take(3)->map(function ($flight, $index) {
+                ->with('cols', $flights->count())
+                ->with('items', $flights->map(function ($flight, $index) {
                     return component('ExperimentalCard')
                         ->with('background', $flight->imagePreset('medium'))
                         ->with('title', ($index == 1 ? 'See on nüüd küll päris eriline pakkumine, kas sa ei leia? ' : '').$flight->vars()->title);

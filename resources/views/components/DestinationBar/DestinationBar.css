@@ -30,10 +30,18 @@
         color: $white-hover;
     }
 
+.DestinationBar--yellow {
+    background: $yellow; /* default; */
+}
+
 .DestinationBar--purple {
     background: $purple;
 }
 
 .DestinationBar--red {
     background: $red;
+}
+
+.DestinationBar--green {
+    background: $green;
 }
