@@ -215,7 +215,7 @@ class ExperimentsLayoutController extends Controller
                 ->with('items', $flights->take(3)->map(function ($flight, $index) {
                     return component('ExperimentalCard')
                         ->with('background', $flight->imagePreset('medium'))
-                        ->with('title', ($index == 1 ? 'See on nüüd küll päris eriline pakkumine, kas sa ei leia? ': '').$flight->vars()->title);
+                        ->with('title', ($index == 1 ? 'See on nüüd küll päris eriline pakkumine, kas sa ei leia? ' : '').$flight->vars()->title);
                 }))
             )
             ->push('<br>')

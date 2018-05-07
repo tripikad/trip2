@@ -122,5 +122,6 @@ function format_link($route, $title, $blank = false)
 function styleVars()
 {
     $json = Storage::disk('root')->get('resources/views/styles/variables.json');
+
     return json_decode($json);
 }
