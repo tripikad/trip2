@@ -3,7 +3,7 @@
 .DestinationBar {
     background: $yellow;
     display: flex;
-    height: calc($spacer * 6.5);
+    height: calc($spacer * 6);
     align-items: center;
     padding: 0 calc($spacer * 1.5);
 }
@@ -13,6 +13,7 @@
         display: flex;
         font: $font-heading-md;
         align-items: center;
+        opacity: $opacity-md;
     }
 
     .DestinationBar__parents > div {
@@ -22,7 +23,7 @@
     .DestinationBar__title {
         color: $white;
         font: $font-heading-lg;
-        margin-top: calc($margin-xs * -1);
+        margin-top: calc($margin-xxs * -1);
     }
 
     .DestinationBar__title:hover {

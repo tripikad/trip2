@@ -248,7 +248,7 @@ Variables are located in `/resources/views/styles/variables.json` and `/resource
 
 #### Style variables in PHP
 
-Some base styling variables are available in PHP, `/resources/views/styles/variables.json` can be used in Blade templates:
+Variables in `/resources/views/styles/variables.json` can be used in Blade templates:
 
 ```blade
 {{ styleVars()->spacer }} 
@@ -256,7 +256,7 @@ Some base styling variables are available in PHP, `/resources/views/styles/varia
 
 #### Style variables in Vue
 
-Some base styling variables are available in VueJS, `/resources/views/styles/variables.json` can be used in Laravel Blade templates:
+Variables in `/resources/views/styles/variables.json` can be used in Vue templates:
 
 ```js
 this.$styleVars.spacer
