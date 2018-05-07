@@ -3,9 +3,9 @@
 .DestinationBar {
     background: $yellow;
     display: flex;
-    height: calc($spacer * 6);
+    height: calc($spacer * 6.5);
     align-items: center;
-    padding: 0 calc($spacer * 1.5) 0 calc($spacer * 1.5);
+    padding: 0 calc($spacer * 1.5);
 }
 
     .DestinationBar__parents {
@@ -13,7 +13,6 @@
         display: flex;
         font: $font-heading-md;
         align-items: center;
-        --background: black;
     }
 
     .DestinationBar__parents > div {
@@ -23,7 +22,7 @@
     .DestinationBar__title {
         color: $white;
         font: $font-heading-lg;
-        --background: red;
+        margin-top: calc($margin-xs * -1);
     }
 
     .DestinationBar__title:hover {

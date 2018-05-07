@@ -234,12 +234,32 @@ Modifiers
 .AnotherComponent--anotherModifier {}
 ```
 
-#### Variables
+#### Style variables in CSS
 
-A Sass-like `$variable` syntax is supported via [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars). Use global variables from [/resources/views/styles/variables.css](/resources/views/styles/variables.css) by importing them to CSS file:
+Variables are located in `/resources/views/styles/variables.json` and `/resources/views/styles/variables.css` and can be imported as
 
 ```scss
-@import "variables" // Resolves to ./resources/views/styles/variables.css
+@import "variables" // Resolves to ./resources/views/styles/variables.json|css
+
+.Component {
+    height: $spacer;
+}
+```
+
+#### Style variables in PHP
+
+Some base styling variables are available in PHP, `/resources/views/styles/variables.json` can be used in Blade templates:
+
+```blade
+{{ styleVars()->spacer }} 
+```
+
+#### Style variables in Vue
+
+Some base styling variables are available in VueJS, `/resources/views/styles/variables.json` can be used in Laravel Blade templates:
+
+```js
+this.$styleVars.spacer
 ```
 
 #### Fonts
