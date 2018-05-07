@@ -13,7 +13,6 @@
         display: flex;
         font: $font-heading-md;
         align-items: center;
-        --background: black;
     }
 
     .DestinationBar__parents > div {
@@ -23,7 +22,6 @@
     .DestinationBar__title {
         color: $white;
         font: $font-heading-lg;
-        --background: red;
     }
 
     .DestinationBar__title:hover {
