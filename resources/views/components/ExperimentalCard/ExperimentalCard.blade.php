@@ -3,8 +3,8 @@
 $background = $background ?? '';
 $route = $route ?? '';
 $title = $title ?? '';
-$height = $height ?? 15;
-$opacity = $opacity ?? 0.3;
+$height = $height ?? 12;
+$opacity = $opacity ?? 0.25;
 
 @endphp
 

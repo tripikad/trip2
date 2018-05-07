@@ -15,41 +15,9 @@
         color: $white;
         font: $font-heading-md;
         text-shadow: $text-shadow-md;
+        text-align: center;
     }
 
     .ExperimentalCard__title:hover {
         color: $white-hover;
     }
-
-    /*
-    .ExperimentalCard__wrapper {
-        padding: $padding-md;
-        padding: $padding-xl ?if $mobile;
-        display: flex;
-        align-items: flex-end;
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-
-.ExperimentalCard--center .ExperimentalCard__wrapper {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-*/
-    /*
-    .ExperimentalCard--large .ExperimentalCard__title {
-        font: $font-heading-xl;
-    }
-
-    .ExperimentalCard--responsive .ExperimentalCard__title {
-        font-family: $font-family;
-        font-size: responsive;
-        max-font-size: $font-size-lg;
-        min-font-size: $font-size-md;
-
-    }
-    */
