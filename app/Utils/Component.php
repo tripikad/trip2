@@ -27,7 +27,21 @@ class Component
         return $this;
     }
 
+    public function i($is)
+    {
+        $this->is->push($is);
+
+        return $this;
+    }
+
     public function with($key, $value)
+    {
+        $this->with->put($key, $value);
+
+        return $this;
+    }
+
+    public function w($key, $value)
     {
         $this->with->put($key, $value);
 

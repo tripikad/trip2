@@ -37,6 +37,12 @@ function component($component)
     return new Utils\Component($component);
 }
 
+function c($component)
+{
+    return component($component);
+}
+
+
 function region($region, ...$arguments)
 {
     $class = "\App\Http\Regions\\$region";
@@ -44,9 +50,19 @@ function region($region, ...$arguments)
     return (new $class)->render(...$arguments);
 }
 
+function r($component, ...$arguments)
+{
+    return region($component, ...$arguments);
+}
+
 function layout($layout)
 {
     return new Utils\Layout($layout);
+}
+
+function l($layout)
+{
+    return layout($layout);
 }
 
 function format_body($body)

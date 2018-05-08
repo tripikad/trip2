@@ -4,20 +4,16 @@ $content = $content ?? collect();
 
 @endphp
 
-<div class="Container {{ $isclasses }}">
-
-    <div class="Container__wrapper">
-
+<div class="Bar {{ $isclasses }}">
+    
     @foreach ($content as $content_item)
                     
-        <div class="Container__contentItem">
+        <div class="Bar__item">
 
             {!! $content_item !!}
 
         </div>
             
     @endforeach
-
-    </div>
 
 </div>

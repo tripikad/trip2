@@ -298,11 +298,77 @@ class ExperimentsLayoutController extends Controller
             ->render();
     }
 
+    public function titleBar($title, $icon) {
+        return c('Bar')
+            ->w('content', collect()
+                ->push(c('Icon')->w('size','xxl')->w('icon', $icon))
+                ->push(c('Title')->i('large')->w('title', $title))
+            )
+        ;
+    }
+
     public function indexList()
     {
-        $flights = Content::getLatestItems('flight', 4);
+        $forums = Content::getLatestItems('forum', 8);
 
-        $header = collect()
+        $titles = c('Grid')
+            ->w('cols', 2)
+            ->w('items', collect() // content!
+                ->push($this->titleBar('Üldfoorum','icon-comment'))
+                ->push($this->titleBar('Reisikaaslased','icon-comment'))
+            )
+        ;
+
+        $forums = c('Grid')
+            ->w('cols', 2)
+            ->w('items', collect() // content!
+                ->push($forums
+                    ->map(function($forum) {
+                        return region('ForumRow', $forum);
+                    })
+                    ->render()
+                    ->implode('<br>')
+                )
+                ->push($forums
+                    ->map(function($forum) {
+                        return region('ForumRow', $forum);
+                    })
+                    ->render()
+                    ->implode('<br>')
+                )
+            )
+        ;
+
+        return layout('ExperimentalList')
+            ->w('background', c('BackgroundMap'))
+            ->w('content', collect()
+                ->push(c('Container')
+                    ->i('wide')
+                    ->i('gray')
+                    ->with('content', collect()  
+                        ->push('<br><br><br>')
+                        ->push($titles)
+                        ->push('<br>')
+                        ->push($forums)
+                    )
+                )
+            )
+            ->render()
+        ;
+    }
+
+    public function indexList2()
+    {
+        $flights = Content::getLatestItems('flight', 4);
+        $news = Content::getLatestItems('shortnews', 5);
+        $forums = Content::getLatestItems('forum', 24);
+        $buysells = Content::getLatestItems('buysell', 4);
+        $expats = Content::getLatestItems('expat', 4);
+        $miscs = Content::getLatestItems('misc', 4);
+        $travelmates = Content::getLatestItems('misc', 4);
+        $photos = Content::getLatestItems('photo', 16);
+
+        $flightContent = collect()
             ->push(component('Grid')
                 ->with('cols', $flights->count())
                 ->with('items', $flights->map(function ($flight, $index) {
@@ -317,18 +383,155 @@ class ExperimentsLayoutController extends Controller
                 ->with('cols', $flights->count())
                 ->with('items', $flights->map(function ($flight, $index) {
                     return component('ExperimentalCard')
+                        ->is('stretched')
+                        ->is('darkened')
                         ->with('background', $flight->imagePreset('medium'))
                         ->with('title', ($index == 1 ? 'See on nüüd küll päris eriline pakkumine, kas sa ei leia? ' : '').$flight->vars()->title);
                 }))
             );
 
+        $newsContent = component('Grid')
+            ->with('cols', 5)
+            ->with('gap', 1)
+            ->with('items', $news->map(function ($new) {
+                return collect()
+                    ->push(component('ExperimentalCard')
+                        ->with('height', 8)
+                        ->with('background', $new->imagePreset('medium'))
+                    )
+                    ->push('<br>')
+                    ->push(component('Title')
+                        ->is('small')
+                        //->is('blue')
+                        ->with('title', $new->vars()->shortTitle)
+                    )
+                    ->push(component('MetaLink')
+                        ->with('title', 'Some text comes here')
+                    )
+                    //->push('<br>')
+                    ->render()
+                    ->implode('')
+                ;
+            }));
+
+        $forumContent = component('Grid')
+            ->with('cols', 3)
+            ->with('widths', '6 1 3')
+            ->with('items', collect()
+                ->push(collect()
+                    ->push(component('Title')
+                        ->is('gray')
+                        ->is('large')
+                        ->with('title', 'Üldfoorum')
+                    )
+                    ->push(component('Body')
+                        ->is('gray')
+                        ->with('body', trans("site.description.forum"))
+                    )
+                    ->merge($forums->map(function($forum) {
+                        return '<br><br>'.region('ForumRow', $forum);
+                    }))
+                    ->push('<br>')
+                    ->render()
+                    ->implode('')
+                )
+                ->push('')
+                ->push(collect()
+                    ->push(component('Title')
+                        ->is('gray')
+                        ->is('large')
+                        ->with('title', 'Ost-müük')
+                    )
+                    ->push(component('Body')
+                        ->is('gray')
+                        ->with('body', trans("site.description.buysell"))
+                    )
+                    ->merge($buysells->map(function($buysell) {
+                        return '<br><br>'.region('ForumRow', $buysell);
+                    }))
+                    ->push('<br><br>')
+                    ->push(component('Title')
+                        ->is('gray')
+                        ->is('large')
+                        ->with('title', 'Expat')
+                    )
+                    ->push(component('Body')
+                        ->is('gray')
+                        ->with('body', trans("site.description.expat"))
+                    )
+                    ->merge($expats->map(function($expat) {
+                        return '<br>'.region('ForumRow', $expat);
+                    }))
+                    ->push('<br><br>')
+                    ->push(component('Title')
+                        ->is('gray')
+                        ->is('large')
+                        ->with('title', 'Vaba teema')
+                    )
+                    ->push(component('Body')
+                        ->is('gray')
+                        ->with('body', trans("site.description.misc"))
+                    )
+                    ->merge($miscs->map(function($misc) {
+                        return '<br>'.region('ForumRow', $misc);
+                    }))
+                    ->push('<br><br>')
+                    ->push(component('Title')
+                        ->is('gray')
+                        ->is('large')
+                        ->with('title', 'Reisikaaslased')
+                    )
+                    ->push(component('Body')
+                        ->is('gray')
+                    )
+                    ->merge($travelmates->map(function($travelmate) {
+                        return '<br>'.region('ForumRow', $travelmate);
+                    }))
+                    ->render()
+                    ->implode('')
+                )
+            )
+        ;
+
+        $photoContent = component('Grid')
+            ->with('cols', 8)
+            ->with('items', $photos->map(function ($photo, $index) {
+                return component('ExperimentalCard')
+                    ->with('height', 14)
+                    ->with('background', $photo->imagePreset('medium'))
+                ;
+            }))
+        ;
+
         return layout('ExperimentalList')
             ->with('background', component('BackgroundMap'))
             ->with('content', collect()
                 ->push(component('Container')
-                    ->with('content', $header->merge(collect()
-                        ->push(component('Placeholder'))
-                    ))
+                    ->with('content', $flightContent)
+                )
+                ->push(component('Container')
+                    ->is('wide')
+                    ->is('verticallyPadded')
+                    ->with('content', collect()
+                        ->push('<br><br>')
+                        ->push(component('Title')
+                            ->is('blue')
+                            ->is('large')
+                            ->with('title', 'Uudised')
+                        )
+                        ->push('<br>')
+                        ->push($newsContent)
+                    )
+                )
+                ->push('<br>')
+                ->push($photoContent)
+                ->push(component('Container')
+                    ->is('wide')
+                    ->is('gray')
+                    ->with('content', collect()
+                        ->push('<br><br><br>')
+                        ->push($forumContent)
+                    )
                 )
             )
             ->render();

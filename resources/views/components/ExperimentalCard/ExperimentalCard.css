@@ -4,7 +4,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    height: 100%;
     padding: $padding-md;
     display: flex;
     align-items: center;
@@ -21,3 +20,7 @@
     .ExperimentalCard__title:hover {
         color: $white-hover;
     }
+
+.ExperimentalCard--stretched {
+    height: 100%;
+}

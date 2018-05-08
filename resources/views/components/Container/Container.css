@@ -1,7 +1,15 @@
 @import "variables";
 
-.Container--wide {
+.Container--wide .Container__wrapper {
     margin: 0 auto;
     max-width: $desktop-width;
     width: 100%;
+}
+
+.Container--white {
+    background: $white;
+}
+
+.Container--gray {
+    background: $gray-lighter;
 }

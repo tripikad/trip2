@@ -25,7 +25,13 @@ export default {
 
     computed: {
         sizeMap: function() {
-            var sizes = { sm: 14, md: 18, lg: 26, xl: 36 }
+            var sizes = {
+                sm: 14,
+                md: 18,
+                lg: 26,
+                xl: 36,
+                xxl: 48
+            }
 
             if (this.width && this.height) {
                 return {

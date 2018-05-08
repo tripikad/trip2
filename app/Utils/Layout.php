@@ -22,6 +22,13 @@ class Layout
         return $this;
     }
 
+    public function w($key, $value)
+    {
+        $this->with->put($key, $value);
+
+        return $this;
+    }
+
     public function cached($condition)
     {
         $this->cached = $condition;

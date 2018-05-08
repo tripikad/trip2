@@ -1,0 +1,18 @@
+@import "variables";
+
+.Bar {
+    display: flex;
+    align-items: center;
+}
+
+    .Bar__item {
+        margin-right: $margin-sm;
+    }
+
+    .Bar__item:last-child {
+        margin-right: 0;
+    }
+
+.Bar--spaceBetween {
+    justify-content: space-between;
+}
