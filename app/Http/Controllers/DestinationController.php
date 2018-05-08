@@ -100,7 +100,6 @@ class DestinationController extends Controller
         return layout('Two')
 
             ->with('header', region('Header', collect()
-                ->push(component('EditorScript'))
                 ->push(component('Title')
                     ->is('white')
                     ->is('large')

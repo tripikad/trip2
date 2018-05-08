@@ -211,7 +211,6 @@ class FlightController extends Controller
         return layout('Two')
 
             ->with('header', region('Header', collect()
-                ->push(component('EditorScript'))
                 ->push(component('Title')
                     ->is('white')
                     ->with('title', trans('content.flight.index.title'))
@@ -313,7 +312,6 @@ class FlightController extends Controller
         return layout('Two')
 
             ->with('header', region('Header', collect()
-                ->push(component('EditorScript'))
                 ->push(component('Title')
                     ->is('white')
                     ->with('title', trans('content.flight.index.title'))

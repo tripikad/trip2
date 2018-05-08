@@ -42,6 +42,8 @@ Vue.use(VueCookie)
 var events = new Vue()
 Vue.prototype.$events = events
 
+// Set up global props
+
 const globalProps = JSON.parse(
     decodeURIComponent(
         document
@@ -50,6 +52,10 @@ const globalProps = JSON.parse(
     )
 )
 Vue.prototype.$globalProps = globalProps
+
+// Set up style variables
+
+Vue.prototype.$styleVars = require('./styles/variables.json')
 
 // Set up Axios
 
@@ -66,7 +72,7 @@ new Vue({
     el: '#app',
 
     mounted() {
-        if (globalProps.info) {
+        if (this.$globalProps.info) {
             this.$events.$emit('alert', {
                 title: globalProps.info
             })

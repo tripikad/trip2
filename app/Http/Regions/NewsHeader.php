@@ -26,7 +26,7 @@ class NewsHeader
                 ->with('items', collect()
                     ->push(component('UserImage')
                         ->with('route', route('user.show', [$new->user]))
-                        ->with('image', $new->user->imagePreset('small_square'))
+                        ->with('image', $new->user->imagePreset('xsmall_square'))
                         ->with('rank', $new->user->vars()->rank)
                     )
                     ->push(component('MetaLink')

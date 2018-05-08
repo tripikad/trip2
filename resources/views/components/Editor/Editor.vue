@@ -54,10 +54,8 @@ import tomarkdown from 'to-markdown'
 
 export default {
     props: {
-        isclasses: { default: '' },
-        route: { default: '' }
+        isclasses: { default: '' }
     },
-
     data: () => ({
         show: false,
         editor: null,
@@ -188,7 +186,9 @@ export default {
         },
         updatePreview() {
             this.$http
-                .post(this.route, { body: this.value })
+                .post(this.$globalProps.formatRoute, {
+                    body: this.value
+                })
                 .then(res => {
                     this.preview = res.data.body
                 })

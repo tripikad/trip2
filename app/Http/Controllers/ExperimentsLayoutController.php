@@ -212,9 +212,19 @@ class ExperimentsLayoutController extends Controller
 
         $contentA = collect()
             ->push(component('Grid')
-                ->with('items', $flights->take(3)->map(function ($flight) {
-                    return component('Placeholder')
-                        ->with('title', $flight->vars()->title);
+                ->with('items', $flights->take(3)->map(function ($flight, $index) {
+                    return region(
+                        'DestinationBar',
+                        $flight->destinations()->first(),
+                        ['purple', 'yellow', 'red'][$index]
+                    );
+                }))
+            )
+            ->push(component('Grid')
+                ->with('items', $flights->take(3)->map(function ($flight, $index) {
+                    return component('ExperimentalCard')
+                        ->with('background', $flight->imagePreset('medium'))
+                        ->with('title', ($index == 1 ? 'See on nüüd küll päris eriline pakkumine, kas sa ei leia? ' : '').$flight->vars()->title);
                 }))
             )
             ->push('<br>')
