@@ -181,6 +181,7 @@ class ExperimentsLayoutController extends Controller
                     ->with('widths', '2 3 2')
                     ->with('items', $photos->take(6)->map(function ($photo) {
                         return component('ExperimentalCard')
+                            ->with('title', $photo->vars()->shortTitle)
                             ->with('background', $photo->imagePreset('medium'));
                     }))
                 )
@@ -190,12 +191,14 @@ class ExperimentsLayoutController extends Controller
                     ->is('gray')
                     ->with('code', "component('ExperimentalGrid')
     ->with('gap', 1) // \$spacer * anything
-    ->with('widths', '2fr 3fr 2fr') // maps to grid-template-columns
+    ->with('widths', '1fr 2fr') // maps to grid-template-columns
+    ->with('heights', '2fr 1fr 2fr') // maps to grid-template-rows
     ->with('items', \$photos->take(6)->...)"
                 ))
                 ->push(component('ExperimentalGrid')
                     ->with('gap', 1)
                     ->with('widths', '1fr 2fr')
+                    ->with('heights', '2fr 1fr 2fr')
                     ->with('items', $photos->map(function ($photo) {
                         return component('ExperimentalCard')
                             ->with('title', $photo->vars()->shortTitle)
@@ -208,20 +211,22 @@ class ExperimentsLayoutController extends Controller
 
     public function indexFrontpage()
     {
-        $flights = Content::getLatestItems('flight', 12);
+        $flights = Content::getLatestItems('flight', 3);
 
         $contentA = collect()
             ->push(component('Grid')
-                ->with('items', $flights->take(3)->map(function ($flight, $index) {
+                ->with('cols', $flights->count())
+                ->with('items', $flights->map(function ($flight, $index) {
                     return region(
                         'DestinationBar',
                         $flight->destinations()->first(),
-                        ['purple', 'yellow', 'red'][$index]
+                        ['purple', 'yellow', 'red', 'green'][$index]
                     );
                 }))
             )
             ->push(component('Grid')
-                ->with('items', $flights->take(3)->map(function ($flight, $index) {
+                ->with('cols', $flights->count())
+                ->with('items', $flights->map(function ($flight, $index) {
                     return component('ExperimentalCard')
                         ->with('background', $flight->imagePreset('medium'))
                         ->with('title', ($index == 1 ? 'See on nüüd küll päris eriline pakkumine, kas sa ei leia? ' : '').$flight->vars()->title);
@@ -290,6 +295,42 @@ class ExperimentsLayoutController extends Controller
 
             ->with('footer', region('Footer'))
 
+            ->render();
+    }
+
+    public function indexList()
+    {
+        $flights = Content::getLatestItems('flight', 4);
+
+        $header = collect()
+            ->push(component('Grid')
+                ->with('cols', $flights->count())
+                ->with('items', $flights->map(function ($flight, $index) {
+                    return region(
+                        'DestinationBar',
+                        $flight->destinations()->first(),
+                        ['purple', 'yellow', 'red', 'green'][$index]
+                    );
+                }))
+            )
+            ->push(component('Grid')
+                ->with('cols', $flights->count())
+                ->with('items', $flights->map(function ($flight, $index) {
+                    return component('ExperimentalCard')
+                        ->with('background', $flight->imagePreset('medium'))
+                        ->with('title', ($index == 1 ? 'See on nüüd küll päris eriline pakkumine, kas sa ei leia? ' : '').$flight->vars()->title);
+                }))
+            );
+
+        return layout('ExperimentalList')
+            ->with('background', component('BackgroundMap'))
+            ->with('content', collect()
+                ->push(component('Container')
+                    ->with('content', $header->merge(collect()
+                        ->push(component('Placeholder'))
+                    ))
+                )
+            )
             ->render();
     }
 }
