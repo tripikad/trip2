@@ -298,13 +298,13 @@ class ExperimentsLayoutController extends Controller
             ->render();
     }
 
-    public function titleBar($title, $icon) {
+    public function titleBar($title, $icon)
+    {
         return c('Bar')
             ->w('content', collect()
-                ->push(c('Icon')->w('size','xxl')->w('icon', $icon))
+                ->push(c('Icon')->w('size', 'xxl')->w('icon', $icon))
                 ->push(c('Title')->i('large')->w('title', $title))
-            )
-        ;
+            );
     }
 
     public function indexList()
@@ -314,30 +314,28 @@ class ExperimentsLayoutController extends Controller
         $titles = c('Grid')
             ->w('cols', 2)
             ->w('items', collect() // content!
-                ->push($this->titleBar('Üldfoorum','icon-comment'))
-                ->push($this->titleBar('Reisikaaslased','icon-comment'))
-            )
-        ;
+                ->push($this->titleBar('Üldfoorum', 'icon-comment'))
+                ->push($this->titleBar('Reisikaaslased', 'icon-comment'))
+            );
 
         $forums = c('Grid')
             ->w('cols', 2)
             ->w('items', collect() // content!
                 ->push($forums
-                    ->map(function($forum) {
+                    ->map(function ($forum) {
                         return region('ForumRow', $forum);
                     })
                     ->render()
                     ->implode('<br>')
                 )
                 ->push($forums
-                    ->map(function($forum) {
+                    ->map(function ($forum) {
                         return region('ForumRow', $forum);
                     })
                     ->render()
                     ->implode('<br>')
                 )
-            )
-        ;
+            );
 
         return layout('ExperimentalList')
             ->w('background', c('BackgroundMap'))
@@ -345,7 +343,7 @@ class ExperimentsLayoutController extends Controller
                 ->push(c('Container')
                     ->i('wide')
                     ->i('gray')
-                    ->with('content', collect()  
+                    ->with('content', collect()
                         ->push('<br><br><br>')
                         ->push($titles)
                         ->push('<br>')
@@ -353,8 +351,7 @@ class ExperimentsLayoutController extends Controller
                     )
                 )
             )
-            ->render()
-        ;
+            ->render();
     }
 
     public function indexList2()
@@ -410,8 +407,7 @@ class ExperimentsLayoutController extends Controller
                     )
                     //->push('<br>')
                     ->render()
-                    ->implode('')
-                ;
+                    ->implode('');
             }));
 
         $forumContent = component('Grid')
@@ -426,9 +422,9 @@ class ExperimentsLayoutController extends Controller
                     )
                     ->push(component('Body')
                         ->is('gray')
-                        ->with('body', trans("site.description.forum"))
+                        ->with('body', trans('site.description.forum'))
                     )
-                    ->merge($forums->map(function($forum) {
+                    ->merge($forums->map(function ($forum) {
                         return '<br><br>'.region('ForumRow', $forum);
                     }))
                     ->push('<br>')
@@ -444,9 +440,9 @@ class ExperimentsLayoutController extends Controller
                     )
                     ->push(component('Body')
                         ->is('gray')
-                        ->with('body', trans("site.description.buysell"))
+                        ->with('body', trans('site.description.buysell'))
                     )
-                    ->merge($buysells->map(function($buysell) {
+                    ->merge($buysells->map(function ($buysell) {
                         return '<br><br>'.region('ForumRow', $buysell);
                     }))
                     ->push('<br><br>')
@@ -457,9 +453,9 @@ class ExperimentsLayoutController extends Controller
                     )
                     ->push(component('Body')
                         ->is('gray')
-                        ->with('body', trans("site.description.expat"))
+                        ->with('body', trans('site.description.expat'))
                     )
-                    ->merge($expats->map(function($expat) {
+                    ->merge($expats->map(function ($expat) {
                         return '<br>'.region('ForumRow', $expat);
                     }))
                     ->push('<br><br>')
@@ -470,9 +466,9 @@ class ExperimentsLayoutController extends Controller
                     )
                     ->push(component('Body')
                         ->is('gray')
-                        ->with('body', trans("site.description.misc"))
+                        ->with('body', trans('site.description.misc'))
                     )
-                    ->merge($miscs->map(function($misc) {
+                    ->merge($miscs->map(function ($misc) {
                         return '<br>'.region('ForumRow', $misc);
                     }))
                     ->push('<br><br>')
@@ -484,24 +480,21 @@ class ExperimentsLayoutController extends Controller
                     ->push(component('Body')
                         ->is('gray')
                     )
-                    ->merge($travelmates->map(function($travelmate) {
+                    ->merge($travelmates->map(function ($travelmate) {
                         return '<br>'.region('ForumRow', $travelmate);
                     }))
                     ->render()
                     ->implode('')
                 )
-            )
-        ;
+            );
 
         $photoContent = component('Grid')
             ->with('cols', 8)
             ->with('items', $photos->map(function ($photo, $index) {
                 return component('ExperimentalCard')
                     ->with('height', 14)
-                    ->with('background', $photo->imagePreset('medium'))
-                ;
-            }))
-        ;
+                    ->with('background', $photo->imagePreset('medium'));
+            }));
 
         return layout('ExperimentalList')
             ->with('background', component('BackgroundMap'))

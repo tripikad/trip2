@@ -42,7 +42,6 @@ function c($component)
     return component($component);
 }
 
-
 function region($region, ...$arguments)
 {
     $class = "\App\Http\Regions\\$region";
