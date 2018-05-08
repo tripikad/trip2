@@ -6,13 +6,9 @@ $head_image = $head_image ?? '';
 $promobar = $promobar ?? '';
 $color = $color ?? '';
 $background = $background ?? '';
-$header = $header ?? '';
 $head_title = $head_title ?? '';
 
-$contentA = isset($contentA) ? collect($contentA) : collect();
-$contentB = isset($contentB) ? collect($contentB) : collect();
-
-$footer = $footer ?? '';
+$content = $content ?? collect();
 
 @endphp
 
