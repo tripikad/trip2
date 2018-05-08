@@ -411,6 +411,9 @@ Route::get('experiments/grid', 'ExperimentsLayoutController@indexGrid')
 Route::get('experiments/frontpage', 'ExperimentsLayoutController@indexFrontpage')
     ->name('experiments.layouts.frontpage');
 
+Route::get('experiments/list', 'ExperimentsLayoutController@indexList')
+    ->name('experiments.layouts.list');
+
 // Registration
 
 Route::get('register', ['middleware' => 'guest', 'uses' => 'Auth\RegistrationController@form', 'as' => 'register.form']);
