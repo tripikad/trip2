@@ -19,8 +19,8 @@ class UserDelete extends Command
         /** @var User $user */
         $user = User::findorfail($id);
 
-        $this->info('this user has posted ' . $user->contents->count() . ' times');
-        $this->info('this user has commented on ' . $user->comments->count() . ' posts');
+        $this->info('this user has posted '.$user->contents->count().' times');
+        $this->info('this user has commented on '.$user->comments->count().' posts');
 
         if ($this->confirm("Do you wish to delete user: $user->name? [yes|no]")) {
             $user->follows->each(function ($follow) {
@@ -73,7 +73,6 @@ class UserDelete extends Command
                 $post->followers->each(function ($follower) {
                     $follower->delete();
                 });
-
             });
 
             //remove messages
