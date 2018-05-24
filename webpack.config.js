@@ -1,127 +1,122 @@
-var fs = require("fs");
-var path = require("path");
-var webpack = require("webpack");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
-var CleanWebpackPlugin = require("clean-webpack-plugin");
+var fs = require('fs')
+var path = require('path')
+var webpack = require('webpack')
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
+var SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
+var CleanWebpackPlugin = require('clean-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
     entry: {
-        main: "./resources/views/main.js",
-        vendor: [
-            "codemirror",
-            "d3-array",
-            "d3-scale",
-            "d3-shape",
-            "dropzone",
-            "pell",
-            "vue",
-            "vue-clickaway",
-            "vue-cookie",
-            "vue-focus",
-            "vue-multiselect",
-            "vue-resource"
-        ]
+        main: './resources/views/main.js'
     },
     output: {
-        path: path.resolve(__dirname, "./public/dist"),
-        publicPath: "/dist/",
-        filename: "[name].[chunkhash:6].js"
+        path: path.resolve(__dirname, './public/dist'),
+        publicPath: '/dist/',
+        filename: '[name].[chunkhash:6].js',
+        chunkFilename: 'main.[name].[chunkhash:6].js'
     },
     module: {
         rules: [
             {
                 test: /\.vue$/,
-                loader: "vue-loader"
+                loader: 'vue-loader'
             },
             {
                 test: /\.js$/,
-                loader: "babel-loader",
+                loader: 'babel-loader',
                 exclude: /node_modules/
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    use: [
-                        { loader: "css-loader", options: { importLoaders: 1 } },
-                        "postcss-loader"
-                    ]
-                })
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: { importLoaders: 1 }
+                    },
+                    'postcss-loader'
+                ]
             },
             {
                 test: /\.svg$/,
                 use: [
                     {
-                        loader: "svg-sprite-loader",
+                        loader: 'svg-sprite-loader',
                         options: {
                             extract: true,
-                            spriteFilename: "[chunkname].svg"
+                            spriteFilename:
+                                '[chunkname].svg'
                         }
                     },
-                    "svgo-loader"
+                    'svgo-loader'
                 ]
             },
             {
                 test: /\.(ttf|woff|woff2|eot)$/,
-                loader: "file-loader",
+                loader: 'file-loader',
                 options: {
-                    name: "[name].[ext]"
+                    name: '[name].[ext]'
                 }
             }
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('vendor'),
-        new ExtractTextPlugin('[name].[chunkhash:6].css'),
-        new SpriteLoaderPlugin(),
         new CleanWebpackPlugin('./public/dist'),
+        new VueLoaderPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash:6].css'
+        }),
+        new SpriteLoaderPlugin(),
         function() {
-            this.plugin("done", stats => {
-                var assets = stats.toJson().assetsByChunkName;
+            this.plugin('done', stats => {
+                var assets = stats.toJson()
+                    .assetsByChunkName
                 var manifest = {
                     js: assets.main.find(
-                        asset => path.extname(asset) === '.js'
+                        asset =>
+                            path.extname(asset) === '.js'
                     ),
-                    vendor: assets.vendor,
                     css: assets.main.find(
-                        asset => path.extname(asset) === '.css'
+                        asset =>
+                            path.extname(asset) === '.css'
                     ),
-                    svg: "main.svg"
-                };
+                    svg: 'main.svg'
+                }
                 fs.writeFileSync(
-                    path.join(__dirname, 'public/dist/manifest.json'),
+                    path.join(
+                        __dirname,
+                        'public/dist/manifest.json'
+                    ),
                     JSON.stringify(manifest)
-                );
-            });
+                )
+            })
         }
     ],
     resolve: {
         alias: {
-            vue$: "vue/dist/vue.esm.js"
+            vue$: 'vue/dist/vue.esm.js'
         }
     },
     performance: {
         hints: false
     },
-    devtool: "#eval-source-map"
-};
+    devtool: '#eval-source-map',
+    stats: { entrypoints: false }
+}
 
-if (process.env.NODE_ENV === "production") {
-    module.exports.devtool = "#source-map";
-    module.exports.plugins = (module.exports.plugins || []).concat([
-        new webpack.DefinePlugin({
-            "process.env": {
-                NODE_ENV: '"production"'
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress: {
-                warnings: false
-            }
-        }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true
-        })
-    ]);
+if (process.env.NODE_ENV === 'production') {
+    module.exports.devtool = ''
+    module.exports.optimization = {
+        minimizer: [
+            new UglifyJsPlugin({
+                sourceMap: false,
+                cache: true,
+                parallel: true
+            }),
+            new OptimizeCSSAssetsPlugin()
+        ]
+    }
 }

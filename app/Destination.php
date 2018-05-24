@@ -41,10 +41,8 @@ class Destination extends Baum\Node
         ];
     }
 
-    // V2
-
     public function vars()
     {
-        return new V2DestinationVars($this);
+        return new DestinationVars($this);
     }
 }

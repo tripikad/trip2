@@ -95,7 +95,9 @@ $font-code-sm: $font-weight-normal $font-size-sm / $line-height-md $font-family-
 $font-code-md: $font-weight-normal $font-size-md / $line-height-md $font-family-code, monospace;
 
 /* Spacing */
-$spacer: 12px;
+
+/* $spacer is defined in variables.css */
+
 $padding-xxxs: calc($spacer / 4);
 $padding-xxs: calc($spacer / 3);
 $padding-xs: calc($spacer / 2);

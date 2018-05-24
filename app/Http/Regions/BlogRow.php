@@ -12,7 +12,7 @@ class BlogRow
         return component('BlogRow')
             ->with('user', component('UserImage')
                 ->with('route', route('user.show', [$blog->user]))
-                ->with('image', $blog->user->imagePreset('small_square'))
+                ->with('image', $blog->user->imagePreset('xsmall_square'))
                 ->with('rank', $blog->user->vars()->rank)
                 ->with('size', 72)
                 ->with('border', 4)

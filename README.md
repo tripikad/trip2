@@ -104,12 +104,12 @@ valet restart
 ```sh
 npm run dev # Unminified and fast dev build
 npm run build # Minified and slow production build
-npm run watch # Watching the assets
+npm run watch # Unminified and fast dev build, recompiling on file change
 ```
 
 ### Build process
 
-The main entrypoint is `./resources/views/main.js` what boots up a Vue instance and includes all the neccessary assets:
+The main entrypoint is `./resources/views/main.js` what boots up a Vue instance and includes all the neccessary assets.
 
 #### JS
 
@@ -125,19 +125,26 @@ are compiled and minified to
 ./public/dist/main.hash.js
 ```
 
-#### Vendor JS
+### Lazy component loading
 
-Vendor libraries specified in `webpack.config.js` are extracted from
+Vue components can also be lazy-loaded, most useful for components that have large dependecies.
 
-```
-./resources/views/components/**/*.vue
+```vue
+<template>
+    // ...
+    <component :is="'Editor'" />
+</template>
+<script>
+export default {
+  components: {
+    Editor: () =>
+      import("../../components_lazy/Editor/Editor.vue")
+  },
+// ...
 ```
 
-are compiled and minified to
+This creates an extra packages `main.0.hash.js`, `main.1.hash.js` etc which are loaded on demand via ajax when `Editor` component is on the page.
 
-```
-./public/dist/vendor.hash.js
-```
 
 #### CSS
 
@@ -213,26 +220,46 @@ Blocks:
 .AnotherComponent {}
 ```
 
-Elements:
+Elements (note the spacing):
 
 ```css
-.Component__element {}
-.AnotherComponent__anotherElement {}
+    .Component__element {}
+    .AnotherComponent__anotherElement {}
 ```
 
-Modifiers:
+Modifiers
 
 ```css
 .Component--modifier {}
 .AnotherComponent--anotherModifier {}
 ```
 
-#### Variables
+#### Style variables in CSS
 
-A Sass-like `$variable` syntax is supported via [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars). Use global variables from [/resources/views/styles/variables.css](/resources/views/styles/variables.css) by importing them to CSS file:
+Variables are located in `/resources/views/styles/variables.json` and `/resources/views/styles/variables.css` and can be imported as
 
 ```scss
-@import "variables" // Resolves to ./resources/views/styles/variables.css
+@import "variables" // Resolves to ./resources/views/styles/variables.json|css
+
+.Component {
+    height: $spacer;
+}
+```
+
+#### Style variables in PHP
+
+Variables in `/resources/views/styles/variables.json` can be used in Blade templates:
+
+```blade
+{{ styleVars()->spacer }} 
+```
+
+#### Style variables in Vue
+
+Variables in `/resources/views/styles/variables.json` can be used in Vue templates:
+
+```js
+this.$styleVars.spacer
 ```
 
 #### Fonts
@@ -326,3 +353,30 @@ layout('One')
 #### Making a layout
 
 At the time of writing there is no helper command to create a layout.
+
+## Linting
+
+### Running linter
+
+```
+npm run lint
+```
+
+### Settings for Visual Studio Code
+
+Install **ESLint** (and optionally **Vetur**) plugin and 
+adjust user configuration as follows:
+
+```json
+    "eslint.validate": [
+        "javascript",
+        {
+            "language": "vue",
+            "autoFix": true
+        }
+    ],
+    "eslint.autoFixOnSave": true,
+}
+```
+
+To invoke fixing manually, run `Cmd+Shift+P` and `ESLint: Fix all auto-fixable problems`.

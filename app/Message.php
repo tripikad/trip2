@@ -29,10 +29,8 @@ class Message extends Model
         return $this->belongsTo('App\User', 'user_id_with');
     }
 
-    // V2
-
     public function vars()
     {
-        return new V2MessageVars($this);
+        return new MessageVars($this);
     }
 }

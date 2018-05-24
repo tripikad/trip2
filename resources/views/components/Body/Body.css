@@ -152,6 +152,10 @@
     min-font-size: $font-size-md;
 }
 
+.Body--small {
+    font-size: $font-size-sm;
+}
+
 .Body--white,
 .Body--white * {
     color: $white;

@@ -15,36 +15,32 @@
             :placeholder="placeholder"
             @focus="$events.$emit('editor.show', currentValue)"
         ></textarea>
-
+            
     </div>
 
 </template>
 
 <script>
+export default {
+    props: {
+        isclasses: { default: '' },
+        name: { default: '' },
+        title: { default: '' },
+        value: { default: '' },
+        rows: { default: 8 },
+        cols: { default: 50 },
+        placeholder: { default: '' }
+    },
 
-    export default {
+    data: () => ({
+        currentValue: ''
+    }),
 
-        props: {
-            isclasses: { default: '' },
-            name: { default: '' },
-            title: { default: '' },
-            value: { default: '' },
-            rows: { default: 8 },
-            cols: { default: 50 },
-            placeholder: { default: '' }
-        },
-
-        data: () => ({
-            currentValue: ''
-        }),
-
-        mounted() {
-            this.currentValue = this.value[0]
-            this.$events.$on('editor.update', value => {
-                this.currentValue = value
-            })
-        }
-
+    mounted() {
+        this.currentValue = this.value[0]
+        this.$events.$on('editor.update', value => {
+            this.currentValue = value
+        })
     }
-
+}
 </script>

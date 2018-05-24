@@ -16,6 +16,14 @@
         margin-left: 0 ?if $tablet;
     }
 
+    .Header__contentItem {
+        margin-bottom: $margin-md;
+    }
+
+    .Header__contentItem:last-child {
+        margin-bottom: 0;
+    }
+
 .Header--high .Header__content {
      margin-top: $margin-xxxl;
 }

@@ -102,10 +102,8 @@ class Comment extends Model
        ];
     }
 
-    // V2
-
     public function vars()
     {
-        return new V2CommentVars($this);
+        return new CommentVars($this);
     }
 }
