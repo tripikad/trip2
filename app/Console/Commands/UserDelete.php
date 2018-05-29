@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\User;
-use App\Content;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -11,7 +10,7 @@ class UserDelete extends Command
 {
     protected $signature = 'user:delete { id } ';
 
-    protected $description = 'Deletes user and all related posts to this user.';
+    protected $description = 'Deletes user and all related data.';
 
     public function handle()
     {
@@ -20,38 +19,18 @@ class UserDelete extends Command
         /** @var User $user */
         $user = User::findorfail($id);
 
-        $this->info('this user has posted:');
-
-        $user->contents->each(function ($content) {
-            $this->line($content->title);
-        });
-
-        $this->line("\n");
-
-        $this->info('this user has commented these posts:');
-
-        $user->comments->each(function ($comment) {
-            $this->line($comment->content->title);
-        });
-
-        $this->line("\n");
+        $this->info('this user has posted '.$user->contents->count().' times');
+        $this->info('this user has commented on '.$user->comments->count().' posts');
 
         if ($this->confirm("Do you wish to delete user: $user->name? [yes|no]")) {
-            $user->flags->each(function ($flag) {
-                $flag->delete();
+            $user->follows->each(function ($follow) {
+                $follow->delete();
             });
 
             $user->comments->each(function ($comment) {
-                //todo: doesn't work this way
-                //$content = $comment->content;
-                //$content->timestamps = 0;
-                //$comment->touches = [];
                 $comment->flags->each(function ($flag) {
                     $flag->delete();
                 });
-
-                //$comment->timestamps = false;
-                $comment->delete();
             });
 
             //remove user contents
@@ -81,8 +60,6 @@ class UserDelete extends Command
                     $comment->flags->each(function ($flag) {
                         $flag->delete();
                     });
-
-                    $comment->delete();
                 });
 
                 //remove content flags
@@ -91,7 +68,11 @@ class UserDelete extends Command
                     $flag->delete();
                 });
 
-                $post->delete();
+                //remove content followers
+
+                $post->followers->each(function ($follower) {
+                    $follower->delete();
+                });
             });
 
             //remove messages
@@ -120,7 +101,7 @@ class UserDelete extends Command
 
             $user->delete();
 
-            $this->line("user: $user->name and all user posts have been deleted");
+            $this->line("user: $user->name and all user data has been deleted");
         }
     }
 }
