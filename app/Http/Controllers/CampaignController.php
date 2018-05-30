@@ -12,7 +12,7 @@ class CampaignController extends Controller
 
         return layout('constanta_campaign')
 
-            ->setLayoutName('layouts.campaign.Constanta.campaign')
+            ->setLayoutName('layouts.custom.campaign.campaign')
 
             ->with('color', 'gray')
 

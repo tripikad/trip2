@@ -6,7 +6,24 @@
                 <div class="promotion-line-striped"></div>
 
                 <div class="circle-container">
-                    <div class="circle">
+
+                    <div class="circle" v-for="count in getCircleValues()">
+                        <p>{{ count }}</p>
+                        <svg>
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 xlink:href="#icon-backpack"></use>
+                        </svg>
+                    </div>
+
+                    <div class="circle last">
+                        <p>52000</p>
+                        <svg>
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 xlink:href="#icon-tickets"></use>
+                        </svg>
+                    </div>
+
+                    <!--<div class="circle">
                         <p>44000</p>
                         <svg>
                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -68,7 +85,7 @@
                             <use xmlns:xlink="http://www.w3.org/1999/xlink"
                                  xlink:href="#icon-tickets"></use>
                         </svg>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -90,16 +107,17 @@
                 startValue: 44000,
                 endValue: 52000,
                 step: 1000,
-                values: []
+                //values: []
             }
         ),
         methods: {
             getCircleValues: function (event) {
-                for (var i = this.startValue; i <= this.endValue; i+=this.step) {
-                    this.values.push(i);
+                let values = [];
+                for (let i = this.startValue; i <= this.endValue; i+=this.step) {
+                    values.push(i);
                 }
 
-                return this.values;
+                return values;
             }
         },
         mounted: function() {
@@ -129,9 +147,9 @@
                                 }
                             });
 
-                            var like2go = self.endValue - self.totalPageLikes;
+                            var likes2go = self.endValue - self.totalPageLikes;
                             var diff = self.endValue - self.startValue;
-                            var res = 100 - ((like2go / diff) * 100);
+                            var res = 100 - ((likes2go / diff) * 100);
                             var progressBar = document.querySelector('.promotion-line-striped');
                             progressBar.style.width = res+"%";
                         }

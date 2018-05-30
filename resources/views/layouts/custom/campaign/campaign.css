@@ -1,0 +1,167 @@
+@import "spacing";
+
+.constanta-container {
+    background: $white;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+section.campaign {
+    overflow: hidden;
+    counter-reset: list-counter;
+    /*margin-top: 15px;
+    margin-left: 50px;
+    margin-right: 50px;*/
+}
+
+section.campaign .introduction {
+    width:90%;
+    /*clear: both;*/
+}
+
+/*
+section.campaign .introduction .introduction-left-content {
+    padding-left: 72px;
+    width: 60%;
+    float: left;
+}
+*/
+
+section.campaign .introduction article {
+    min-height: 48px;
+    display: flex;
+    margin-top: 10px;
+}
+
+section.campaign .introduction article .backpack-icon svg.backpack {
+    width: 52px;
+    height: 60px;
+}
+
+section.campaign .introduction article h2 {
+    position: relative;
+    color: #36a1eb;
+    font-size: 22px;
+    line-height: 1.4;
+    margin-left: 10px;
+}
+
+section.campaign .introduction .how-to-win {
+    min-height: 48px;
+    display: flex;
+    margin-top: 30px;
+}
+
+section.campaign .introduction .how-to-win .list-item {
+    position: relative;
+    padding-left: 16px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    font-family: Sailec,"Helvetica Neue",helvetica,arial,sans-serif;
+    margin-bottom: 2px;
+}
+
+section.campaign .introduction .how-to-win .list-item:not(.last):before {
+    counter-increment: list-counter;
+    content: counter(list-counter) ".";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #444;
+    font-family: Sailec,"Helvetica Neue",helvetica,arial,sans-serif;
+}
+
+section.campaign .introduction .how-to-win .list-item.last {
+    margin-top: 30px;
+    counter-increment: none;
+    padding-left: 0px;
+}
+
+section.campaign .introduction .how-to-win h2 {
+    margin-bottom:10px;
+}
+
+
+section.campaign .introduction .fb {
+    width: 100%;
+    margin-top: 30px;
+}
+
+
+section.campaign .introduction-trip-bag {
+    background-repeat: no-repeat;
+    width: 635px;
+    height: 440px;
+}
+
+/*@media (min-width: 1000px) {
+    section.campaign .introduction-right-content {
+        width: 35%;
+        float: left;
+    }
+}
+
+@media (max-width: 999px) {
+    section.campaign .introduction-right-content {
+        display: none !important;
+    }
+}*/
+
+/*section.campaign .extra-info-content {
+    padding-left: 72px;
+    width: 60%;
+    float: left;
+}*/
+
+/*section.campaign .extra-info .extra-info-content h2 {
+    margin-top: $margin-top-md;
+}*/
+
+section.campaign .extra-info {
+    margin-top: 24px;
+}
+
+section.campaign .extra-info .extra-info-content p {
+    position: relative;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    font-family: Sailec, "Helvetica Neue", helvetica, arial, sans-serif;
+    margin-top: 10px;
+}
+
+/*section.campaign .extra-info-sidebar {
+    width: 35%;
+    float: left;
+    margin-right: 40px;
+}*/
+
+section.campaign .extra-info-sidebar svg {
+    width: 100%;
+    min-height: 350px;
+}
+
+/*section.campaign .view-more {
+    clear: both;
+}*/
+
+
+/*section.campaign .view-more-flights {
+    padding-left: 72px;
+    width: 60%;
+    float: left;
+}*/
+
+section.campaign .view-more-flights h2 {
+    margin-bottom: 20px;
+}
+
+/*section.campaign .view-more-hotels {
+    width: 35%;
+    float: left;
+    margin-top: 35px;
+    margin-left: 20px;
+}*/
+
