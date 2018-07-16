@@ -4,9 +4,76 @@ namespace App\Http\Controllers;
 
 use App\Content;
 use App\Destination;
+use DB;
+use Carbon\Carbon;
 
 class ExperimentsController extends Controller
 {
+
+
+    public function trip20Index()
+    {
+        $weblinks = DB::connection('trip')
+            ->table('node')
+            ->join('node_revisions', 'node_revisions.nid', '=', 'node.nid')
+            ->join('weblink', 'weblink.nid', '=', 'node.nid')
+            ->select('node.*', 'weblink.*')
+            ->where('node.created', '<', Carbon::create(1999, 1, 1, 0, 0, 0)->timestamp)
+            ->where('node.type', '=', 'weblink')
+            ->take(100)
+            ->get()
+            ->map(function ($link) {
+                $link->created = $link->created < 1 ? Carbon::create(1998, 1, 1, 0, 0, 0)->timestamp : $link->created;               
+                return $link;
+            })
+            ->sortBy('created')
+            ->map(function ($link) {
+                $link->created = Carbon::createFromTimestamp($link->created)->format('j. M Y');
+                $link->changed = Carbon::createFromTimestamp($link->changed)->format('j. M Y');
+                $link->archivelink = 'https://web.archive.org/web/*/' . $link->weblink;
+                return $link;
+            });
+
+            $images = Content::whereType('photo')
+                ->orderBy('created_at', 'asc')
+                ->take(100)
+                ->skip(1600)
+                ->get();
+                //
+                //->take(10)
+                //->get()
+            
+
+            return layout('Two')
+                ->with('content', $images->map(function($image) {
+                    return component('Body')->with('body', format_body(collect()
+                        ->push('####' . $image->title . ' ')
+                        ->push('<img src=' . $image->imagePreset('medium') . ' />')
+                        ->push('Original published at: ' . $image->created_at)
+                        ->push('Added to Trip: ' . $image->updated_at)
+                        ->implode("\n")));
+                    }))
+                ->render();
+
+            return layout('Two')
+                ->with('content', collect()
+                    ->push(
+                        component('Title')->with('title', 'Reisiartiklid Eesti ajalehtedes 1995-1998')
+                    )
+                    ->merge($weblinks->map(function($q) {
+                        return component('Body')->with('body', format_body(collect()
+                            ->push('####' .$q->title.' ')
+                            ->push('['.$q->weblink.']('. $q->archivelink .')')
+                            ->push('Original published at: '.$q->created)
+                            ->push('Added to Trip: '.$q->changed)
+                            ->implode("\n")
+                        ));
+                    }))
+                )
+                ->render();
+
+    }
+
     public function index()
     {
         $user = auth()->user();

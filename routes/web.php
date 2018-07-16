@@ -384,6 +384,9 @@ Route::post('utils/format', 'UtilsController@format')
 
 // Experiments
 
+Route::get('trip20', 'ExperimentsController@trip20Index')
+    ->name('experiments.trip20.index');
+
 Route::get('experiments', 'ExperimentsController@index')
     ->name('experiments.index');
 
