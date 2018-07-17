@@ -53,9 +53,16 @@ class ExperimentsController extends Controller
             ->map(function($user) use ($pictureMap, $friendMap) {
                 $u1 = explode('@', $user->mail)[0];
                 $u2 = explode('.', explode('@', $user->mail)[1])[0];
-                $user->mail = json_encode([$u1,$u2]);
+                if ($u1 == $u2) {
+                    $user->mail = '-';
+                }
+                $u3 = explode('@', $user->init)[0];
+                $u4 = explode('.', explode('@', $user->init)[1])[0];
+                if ($u3 == $u4) {
+                    $user->init = '-';
+                }
                 $limit = Carbon::create(2015, 1, 1, 0, 0, 0)->timestamp;
-                $user->created = $user->created > 654732000 ? Carbon::createFromTimestamp($user->created)->format('j. M Y') : '-';
+                $user->created = $user->created > 654732000 && $user->created != 946677600 && $user->created != 936306000 ? Carbon::createFromTimestamp($user->created)->format('j. M Y') : '-';
                 $user->access = $user->access > 654732000 && $user->access < $limit ? Carbon::createFromTimestamp($user->access)->format('j. M Y') : '-';
                 $user->login = $user->login > 654732000 && $user->access < $limit ? Carbon::createFromTimestamp($user->login)->format('j. M Y') : '-';
                 $user->image = null;
@@ -97,7 +104,7 @@ class ExperimentsController extends Controller
                     ->join('node_revisions', 'node_revisions.nid', '=', 'node.nid')
                     ->select('node.*')
                     ->where('node.uid', '=', $user->uid == 1 ? 12 : $user->uid)
-                    ->orderBy('node.nid')
+                    ->orderBy('node.created')
                     ->take(5)
                     ->get()
                     ->map(function ($link) {
@@ -108,6 +115,9 @@ class ExperimentsController extends Controller
                     });
                 if ($user->uid == 12) {
                     $user->content = [];
+                }
+                if ($user->created == '-' && collect($user->content)->count()) {
+                    $user->created = '~' . $user->content[0]->created;
                 }
                 return $user;
             });
@@ -124,8 +134,8 @@ class ExperimentsController extends Controller
                         ->push('Created: ' . $user->created)
                         ->push('Access: ' . $user->access)
                         ->push('Login: ' . $user->login)
-                        ->push('Email: ' . $user->mail)
                         ->push('Init email: ' . $user->init)
+                        ->push('Email: ' . $user->mail)
                         ->push('Signature: ' . $user->signature)
                         ->push('#### Postitused')
                         ->push(collect($user->content)->map(function($c) {
