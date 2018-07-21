@@ -393,6 +393,10 @@ Route::get('trip20/kasutajad', 'Trip20Controller@usersIndex')
 Route::get('trip20/lingid', 'Trip20Controller@linksIndex')
     ->name('trip20.links');
 
+Route::get('trip20/fotod', 'Trip20Controller@imagesIndex')
+    ->name('trip20.images');
+
+
 
 // Experiments
 

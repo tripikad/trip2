@@ -54,6 +54,7 @@ class Trip20Controller extends Controller
             ->put('trip20.users', 'Kasutajad')
             ->put('trip20.forums', 'Foorum')
             ->put('trip20.links', 'Lingid')
+            ->put('trip20.images', 'Pildid')
             ->map(function($title, $route) {
                 return component('Title')
                     ->is('gray')
@@ -351,6 +352,7 @@ class Trip20Controller extends Controller
             ->where('node.created', '<', Carbon::create(1999, 1, 1, 0, 0, 0)->timestamp)
             ->where('node.type', '=', 'weblink')
             ->take(100)
+            ->skip(request()->get('from', 0))
             ->get()
             ->map(function ($link) {
                 $link->created = $link->created < 1 ? Carbon::create(1998, 1, 1, 0, 0, 0)->timestamp : $link->created;
@@ -367,6 +369,12 @@ class Trip20Controller extends Controller
         return layout('Two')
             ->with('content', collect()
                 ->push($this->links())
+                ->push(component('Grid')->with('inline', true)->with('cols', 5)->with('gap', 2)->with('items', collect([0, 100, 200, 300, 400])->map(function ($from) {
+                    return component('Title')
+                        ->with('title', ($from + 1) . '-' . ($from + 100))
+                        ->is('smallest')
+                        ->with('route', route('trip20.links', ['from' => $from]));
+                })))
                 ->push('<br>')
                 ->push(
                     component('Title')->is('small')->with('title', 'Reisiartiklid Eesti ajalehtedes 1995-1998')
@@ -382,5 +390,77 @@ class Trip20Controller extends Controller
             ->render();
     }
 
-   
+    public function imagesIndex()
+    {
+        $imageMap = [
+            801 => 'https://web.archive.org/web/20070715103929im_/http://trip.ee/files/images/801.jpg',
+            3841 => 'https://web.archive.org/web/20070701215242im_/http://www.trip.ee/files/images//tripi_kokkutulek_vallamael_006.preview.jpg',
+            3842 => 'https://web.archive.org/web/20070701215436im_/http://www.trip.ee/files/images//tripi_kokkutulek_vallamael_016.preview.jpg',
+            3850 => 'https://web.archive.org/web/20080313031838im_/http://trip.ee/files/images//tripi_kokkutulek_vallamael_055.thumbnail.jpg',
+            // Tom Mariliis Portugalis
+            1390 => 'https://web.archive.org/web/20070701220708im_/http://www.trip.ee/files/images//1390.jpg',
+            826 => 'https://web.archive.org/web/20070701220058im_/http://www.trip.ee/files/images//826.jpg',
+            827 => 'https://web.archive.org/web/20070701220749im_/http://www.trip.ee/files/images//827.jpg',
+            829 => 'https://web.archive.org/web/20070610041813im_/http://www.trip.ee/files/images//829.jpg',
+            830 => 'https://web.archive.org/web/20070610042336im_/http://www.trip.ee/files/images//830.jpg',
+            831 => 'https://web.archive.org/web/20070701220514im_/http://www.trip.ee/files/images//831.jpg',
+            1389 => 'https://web.archive.org/web/20070701220854im_/http://www.trip.ee/files/images//1389.jpg',
+            // Immu
+            1376 => 'https://web.archive.org/web/20070715134909im_/http://www.trip.ee/files/images//1376.jpg',
+        ];
+
+        $images = DB::connection('trip')
+            ->table('node')
+            ->join('node_revisions', 'node_revisions.nid', '=', 'node.nid')
+            ->join('content_field_image', 'content_field_image.nid', '=', 'node.nid')
+            ->join('files', 'files.fid', '=', 'content_field_image.field_image_fid')
+            ->select('node.*', 'files.*')
+            ->where('node.type', '=', 'trip_image')
+            //->where('node.uid', 12)
+            ->take(100)
+            ->skip(request()->get('from', 0))
+            ->orderBy('nid')
+            ->get()
+            ->map(function($image) use ($imageMap) {
+                $image->link = '';
+                if ($newImage = Content::find($image->nid)) {
+                    $image->link = $newImage->imagePreset('medium');
+                }
+                if (array_key_exists($image->nid, $imageMap)) { 
+                    $image->link = $imageMap[$image->nid];
+                }
+                $image->nodelink = 'https://trip.ee/node/'.$image->nid;
+                $image->imagelink = 'https://trip.ee/images/original/'.basename($image->filepath);
+                $image->nodearchivelink = 'https://web.archive.org/web/*/http://trip.ee/node/'.$image->nid;
+                $image->imagearchivelink = 'https://web.archive.org/web/*/http://trip.ee/files/imagecache/trip_image_big/images/'.basename($image->filepath);
+                return $image;
+            })
+        ;
+        // /return $images;
+
+        return layout('Two')
+            ->with('content', collect()
+                ->push($this->links())
+                ->push(component('Grid')->with('inline', true)->with('cols', 5)->with('gap', 2)->with('items', collect([0, 100, 200, 300, 400])->map(function ($from) {
+                    return component('Title')
+                        ->with('title', ($from + 1) . '-' . ($from + 100))
+                        ->is('smallest')
+                        ->with('route', route('trip20.images', ['from' => $from]));
+                })))
+                ->push('<br>')
+            ->merge($images->map(function ($image) {
+                return component('Grid')->with('gap',2)->with('items', collect()
+                    ->push($this->card(collect()
+                        ->put('Title', $image->title)
+                        ->put('Created', $image->created)
+                        ->put('Archive page', $image->nodearchivelink)
+                    ))
+                    ->push('<img width="300" src="'.$image->link.'" />')
+                );
+            }))
+        )
+        ->render();
+
+
+    }
 }
