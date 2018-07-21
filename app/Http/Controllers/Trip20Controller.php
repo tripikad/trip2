@@ -51,10 +51,11 @@ class Trip20Controller extends Controller
 
     public function links() {
         $links = collect()
-            ->put('trip20.forums','Foorum')
             ->put('trip20.users', 'Kasutajad')
+            ->put('trip20.forums', 'Foorum')
             ->map(function($title, $route) {
-                return component('MetaLink')
+                return component('Title')
+                    ->is('gray')
                     ->with('title', $title)
                     ->with('route', route($route))
                 ;
@@ -62,7 +63,7 @@ class Trip20Controller extends Controller
         
         return component('Grid')
             ->with('items', collect()
-                ->push(component('Title')->with('title', 'Trip20'))
+                ->push(component('Title')->is('green')->with('title', 'Trip20:'))
                 ->merge($links)
             )
             ->with('gap', 2)
@@ -103,10 +104,6 @@ class Trip20Controller extends Controller
                 $comment->archivelink = 'https://web.archive.org/web/*/' . $comment->link;
                 return $comment;
             });
-
-        $dateMap = [
-            1240 => Carbon::create(1999, 1, 1, 0, 0, 0)->timestamp
-        ];
 
         $nodes = $nodes->map(function ($node) use ($comments) {
             $node->comments = $comments->where('nid', $node->nid);
@@ -172,8 +169,6 @@ class Trip20Controller extends Controller
 
     public function usersIndex()
     {
-        //return [Carbon::create(2009, 1, 1, 0, 0, 0)->timestamp, Carbon::create(2010, 1, 31, 0, 0, 0)->timestamp];
-        //return $this->getMonthlyStat();
 
         $pictureMap = [
             1 => 'https://web.archive.org/web/20070609230611if_/http://trip.ee/files/pictures/picture-1.jpg',
@@ -181,7 +176,6 @@ class Trip20Controller extends Controller
             7 => 'https://web.archive.org/web/20070218154753if_/http://trip.ee:80/files/pictures/picture-7.jpg',
             23 => 'http://www.bluemoon.ee/~ahti/nepal/photos/ahti-holi-500x338.jpg',
             28 => 'https://www.photo.net/avatar/785095',
-            // 55 => 'https: //web.archive.org/web/20070609220650if_/http://www.trip.ee/files/pictures/picture-55.jpg'
         ];
 
         $friendMap = [
@@ -207,7 +201,8 @@ class Trip20Controller extends Controller
             ->table('users')
             ->where('uid', '>', 0)
             //->take(227)
-            ->take(83)
+            ->take(100)
+            ->skip(request()->get('from', 0))
             ->orderBy('uid', 'asc')
             ->get()
             //->filter(function ($user) { return $user->picture; })
@@ -228,10 +223,7 @@ class Trip20Controller extends Controller
                 $user->access = $user->access > 654732000 && $user->access < $limit ? Carbon::createFromTimestamp($user->access)->format('j. M Y') : '-';
                 $user->login = $user->login > 654732000 && $user->access < $limit ? Carbon::createFromTimestamp($user->login)->format('j. M Y') : '-';
                 $user->image = null;
-                // if ($user->data) {
-                //     $user->data = unserialize($user->data);
-                //     $user->homepage = array_key_exists('homepage', $user->data) ? 'ho' : null;
-                // }
+
                 $user->archivepicture = null;
                 if ($user->picture) {
                     $user->archivepicture = 'https://web.archive.org/web/*/trip.ee/' . $user->picture;
@@ -285,34 +277,85 @@ class Trip20Controller extends Controller
                 return $user;
             });
 
-        //return $users2;
-
         return layout('Two')
             ->with('content', collect()
                 ->push($this->links())
-                ->merge($users2->map(function ($user) {
-                    return collect()
-                        ->push('<div style="opacity: ' . ($user->uid == 6 ? 0.5 : 1) . '">')
-                        ->push(component('Body')->with('body', format_body(collect()
-                            ->push($user->image ? '<img style="display: block; width: 128px;" src=' . $user->image . ' />' : '')
-                            ->push('#' . $user->uid . ' ' . $user->name . ' ')
-                            ->push('Created: ' . $user->created)
-                            ->push('Access: ' . $user->access)
-                            ->push('Login: ' . $user->login)
-                            ->push('Init email: ' . $user->init)
-                            ->push('Email: ' . $user->mail)
-                            ->push('Signature: ' . $user->signature)
-                            ->push('#### Postitused')
-                            ->push(collect($user->content)->map(function ($c) {
-                                return collect(['[' . $c->title . '](' . $c->archivelink . ') ', $c->created, $c->changed, $c->type])->implode(' · ');
-                            })->implode("\n"))
-                            ->implode("\n"))))
-                        ->push('</div>')
-                        ->render()
-                        ->implode('');
-                }))
+                ->push(component('Grid')->with('inline', true)->with('cols',5)->with('gap', 2)->with('items', collect([0,100,200,300,400])->map(function($from) {
+                    return component('Title')
+                        ->with('title',($from+1).'-'.($from+100))
+                        ->is('smallest')
+                        ->with('route',route('trip20.users',['from' => $from]))
+                    ;
+                })))
+                ->push(component('Grid')
+                    ->with('cols', 4)
+                    ->with('gap', 2)
+                    ->with('widths','6 2 9 9')
+                    ->with('items', $users2->flatMap(function($user) {
+                        return collect()
+                            ->push(component('Title')
+                                ->is('larger')
+                                ->is('gray')
+                                ->is('center')
+                                ->with('title', $user->uid)
+                            )
+                            ->push($user->image ? '<img style="display: block; width: 128px;" src=' . $user->image . ' />' : '<div style="width: 128px;height: 128px;background:#ddd;"></div>')
+                            ->push(collect()
+                                ->push(component('Title')->is('small')->with('title', $user->name))
+                                ->push($this->card(collect()
+                                    ->put('Created', $user->created)
+                                    ->put('Access', $user->access)
+                                    ->put('Login', $user->login)
+                                    ->put('Init email', $user->init)
+                                    ->put('Email', $user->mail)
+                                    ->put('Signature', "<br>".$user->signature)
+                                ))
+                                ->render()
+                                ->implode('')
+                            )
+                            ->push(collect()
+                                ->push(component('Title')->is('smallest')->with('title', 'Forum posts'))
+                                ->push(collect($user->content)->map(function($content) {
+                                    return component('MetaLink')
+                                        ->with('title', $content->title. '<br>'.$content->created)
+                                        ->with('route', $content->archivelink)
+                                    ;
+                                })->render()->implode(''))
+                                ->render()
+                                ->implode('')
+                            )
+                        ;
+                    }))
+                )
             )
             ->render();
+
+        // return layout('Two')
+        //     ->with('content', collect()
+        //         ->push($this->links())
+        //         ->merge($users2->map(function ($user) {
+        //             return collect()
+        //                 ->push('<div style="opacity: ' . ($user->uid == 6 ? 0.5 : 1) . '">')
+        //                 ->push(component('Body')->with('body', format_body(collect()
+        //                     ->push($user->image ? '<img style="display: block; width: 128px;" src=' . $user->image . ' />' : '')
+        //                     ->push('#' . $user->uid . ' ' . $user->name . ' ')
+        //                     ->push('Created: ' . $user->created)
+        //                     ->push('Access: ' . $user->access)
+        //                     ->push('Login: ' . $user->login)
+        //                     ->push('Init email: ' . $user->init)
+        //                     ->push('Email: ' . $user->mail)
+        //                     ->push('Signature: ' . $user->signature)
+        //                     ->push('#### Postitused')
+        //                     ->push(collect($user->content)->map(function ($c) {
+        //                         return collect(['[' . $c->title . '](' . $c->archivelink . ') ', $c->created, $c->changed, $c->type])->implode(' · ');
+        //                     })->implode("\n"))
+        //                     ->implode("\n"))))
+        //                 ->push('</div>')
+        //                 ->render()
+        //                 ->implode('');
+        //         }))
+        //     )
+        //     ->render();
 
         return layout('Two')
             ->with('content', $images->map(function ($image) {
