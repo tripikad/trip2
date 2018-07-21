@@ -35,13 +35,27 @@ class ExperimentsController extends Controller
         $items = $items->map(function($value, $key) {
             $value = $value ?? ' - ';
             if ($key == 'Title') {
-                return '#### '.$value;
+                return '### '.$value;
+            }
+            if ($key == 'Subject') {
+                return '**'.$value.'**';
+            }
+            if ($key == 'Body') {
+                return '<br>'.$value;
             }
             return $key . ': ' . $value;
         });
 
         return component('Body')
             ->with('body', format_body($items->implode("\n")));
+    }
+
+    public function formatAuthor($item)
+    {
+        return collect()
+            ->push($item->name ? $item->name : ($item->author_name ? $item->author_name : '-'))
+            ->push($item->mail ? $item->mail : ($item->author_email ? $item->author_email : '-'))
+            ->implode(' / ');
     }
 
     public function trip20Index()
@@ -53,64 +67,102 @@ class ExperimentsController extends Controller
             ->join('node_revisions', 'node_revisions.nid', '=', 'node.nid')
             ->join('users', 'users.uid', '=', 'node.uid')
             ->join('trip_forum', 'trip_forum.nid', '=', 'node.nid')
-            //->where('node.created', '<', Carbon::create(2000, 1, 1, 0, 0, 0)->timestamp)
             ->where('node.type', '=', 'trip_forum')
             ->take(100)
             ->get()
             ->sortBy('created')
-            ->map(function ($link) use (&$commentIds) {
-                $commentIds->push($link->nid);
-                $link->month = Carbon::createFromTimestamp($link->created)->format('Y.m');
-                $link->created = Carbon::createFromTimestamp($link->created)->format('j. M Y');
-                $link->changed = Carbon::createFromTimestamp($link->changed)->format('j. M Y');
-                $link->link = 'https://trip.ee/node/'. $link->nid;
-                $link->archivelink = 'https://web.archive.org/web/*/trip.ee/node/' . $link->nid;
-                return $link;
+            ->map(function ($node) use (&$commentIds) {
+                $commentIds->push($node->nid);
+                return $node;
             });
 
         $comments = DB::connection('trip')
             ->table('comments')
-            ->whereIn('comments.cid', $commentIds->all())
+            ->whereIn('comments.nid', $commentIds->all())
             ->join('users', 'users.uid', '=', 'comments.uid')
             ->join('trip_comments', 'trip_comments.cid', '=', 'comments.cid')
             ->orderBy('created')
-            ->get();
+            ->get()
+            ->map(function ($comment) {
+                $comment->created_at = Carbon::createFromTimestamp($comment->timestamp)->format('j. M Y');
+                $comment->link = 'http://trip.ee/node/' . $comment->nid .'#comment-'.$comment->cid;
+                $comment->link2 = 'http://trip2.test/node/' . $comment->nid . '#comment-' . $comment->cid;
+                $comment->archivelink = 'https://web.archive.org/web/*/' . $comment->link;
+                return $comment;
+            });
 
-            // $nodes = $nodes->map(function($node) use ($comments) {
-            //     $node->c = $comments->w
-            //     return $node;
-            // });
-            //->sortBy('month')
-            //->groupBy('month');
+        $dateMap = [
+            1240 => Carbon::create(1999, 1, 1, 0, 0, 0)->timestamp
+        ];
 
+        $nodes = $nodes->map(function ($node) use ($comments) {
+                $node->comments = $comments->where('nid', $node->nid);
+                return $node;
+            })
+            ->map(function ($node) {
+                if ($node->created <= 654732000) { // 1. Oct 1990
+                    if ($forum = Content::find($node->nid)) {
+                        $node->created_at = $forum->created_at;
+                    } else {
+                        $node->created_at = Carbon::create(2001, 1, 1, 0, 0, 0);
+                    }
+                } else {
+                    $node->created_at = Carbon::createFromTimestamp($node->created);
+                }
+                return $node;
+            })
+            ->map(function ($node) {
+                $node->month = $node->created_at->format('Y.m');
+                $node->monthTitle = $node->created_at->format('M Y');
+                $node->created_at = $node->created_at->format('j. M Y');
+                $node->changed_at = Carbon::createFromTimestamp($node->changed)->format('j. M Y');
+                $node->link = 'http://trip.ee/node/' . $node->nid;
+                $node->link2 = 'http://trip2.test/node/' . $node->nid;
+                $node->archivelink = 'https://web.archive.org/web/*/' . $node->link;
+                return $node;
+            })
+        ->sortBy('month')
+        ->groupBy('month');
 
         return layout('Two')
             ->with('content', collect()
                 ->push(
                     component('Title')->with('title', 'Trip forum')
                 )
-                // ->merge($nodes->flatMap(function ($monthNodes, $month) {
-                //         return collect()
-                //             ->push(component('Title')->is('small')->with('title', $month))
-                ->merge($nodes->flatMap(function ($n) use ($comments) {
-                    return collect()
-                        ->push($this->card(collect()
-                            ->put('Title', $n->nid .' '.$n->title)
-                            ->put('Author', $n->name ? $n->name : $n->author_name)
-                            ->put('E-mail', $n->mail ? $n->mail : $n->author_email)
-                            ->put('Created', $n->created)
-                        ))
-                        ->merge($comments->where('nid',$n->nid)
-                            ->map(function($c) {
-                                return $this->card(
-                                    collect()
-                                    ->put('Subject', $c->subject)
-                                );
-                            })
-                        );
-                })))
-              //  })))
-            
+                ->merge($nodes->flatMap(function ($monthNodes, $month) {
+                        return collect()
+                            ->push(component('Title')->with('title', $monthNodes->first()->monthTitle.' ('. $monthNodes->count().' posts)'))
+                            ->merge($monthNodes->flatMap(function ($n) {
+                                return collect()
+                                    ->push($this->card(collect()
+                                        ->put('Title', $n->title)
+                                        ->put('Author', $n->name ? $n->name : $n->author_name)
+                                        ->put('E-mail', $n->mail ? $n->mail : $n->author_email)
+                                        ->put('Created at', $n->created_at)
+                                        ->put('Link', $n->link2)
+                                        ->put('Archive link', $n->archivelink)
+                                        ->put('Body', $n->body)
+                                    ))
+                                    ->merge($n->comments->map(function($c) {
+                                            return component('Grid')
+                                                ->with('cols',2)
+                                                ->with('widths', '1 10')
+                                                ->with('items', collect()
+                                                    ->push('')
+                                                    ->push($this->card(
+                                                        collect()
+                                                            ->put('Subject', $c->subject)
+                                                            ->put('Created', $c->created_at)
+                                                            ->put('Author', $this->formatAuthor($c))
+                                                            ->put('Body', $c->comment)
+                                                    ))
+                                            );
+                                        })
+                                    )
+                                ;
+                            }))
+                        ;
+            })))
             ->render();
     }
 
