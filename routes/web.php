@@ -390,6 +390,9 @@ Route::get('trip20/foorum', 'Trip20Controller@forumsIndex')
 Route::get('trip20/kasutajad', 'Trip20Controller@usersIndex')
     ->name('trip20.users');
 
+Route::get('trip20/lingid', 'Trip20Controller@linksIndex')
+    ->name('trip20.links');
+
 
 // Experiments
 

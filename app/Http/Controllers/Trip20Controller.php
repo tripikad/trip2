@@ -53,6 +53,7 @@ class Trip20Controller extends Controller
         $links = collect()
             ->put('trip20.users', 'Kasutajad')
             ->put('trip20.forums', 'Foorum')
+            ->put('trip20.links', 'Lingid')
             ->map(function($title, $route) {
                 return component('Title')
                     ->is('gray')
@@ -167,7 +168,7 @@ class Trip20Controller extends Controller
             ->render();
     }
 
-    public function usersIndex()
+  public function usersIndex()
     {
 
         $pictureMap = [
@@ -205,7 +206,6 @@ class Trip20Controller extends Controller
             ->skip(request()->get('from', 0))
             ->orderBy('uid', 'asc')
             ->get()
-            //->filter(function ($user) { return $user->picture; })
             ->map(function ($user) use ($pictureMap, $friendMap) {
                 $u1 = explode('@', $user->mail)[0];
                 $u2 = explode('.', explode('@', $user->mail)[1])[0];
@@ -271,9 +271,6 @@ class Trip20Controller extends Controller
                 if ($user->uid == 12) {
                     $user->content = [];
                 }
-                if ($user->created == '-' && collect($user->content)->count()) {
-                    //$user->created = '~' . $user->content[0]->created;
-                }
                 return $user;
             });
 
@@ -287,10 +284,11 @@ class Trip20Controller extends Controller
                         ->with('route',route('trip20.users',['from' => $from]))
                     ;
                 })))
+                ->push('<br>')
                 ->push(component('Grid')
                     ->with('cols', 4)
                     ->with('gap', 2)
-                    ->with('widths','6 2 9 9')
+                    ->with('widths','6 2 10 9')
                     ->with('items', $users2->flatMap(function($user) {
                         return collect()
                             ->push(component('Title')
@@ -314,7 +312,7 @@ class Trip20Controller extends Controller
                                 ->implode('')
                             )
                             ->push(collect()
-                                ->push(component('Title')->is('smallest')->with('title', 'Forum posts'))
+                                ->push(component('Title')->is('smallest')->with('title', count($user->content) > 0 ? 'Forum posts' : ''))
                                 ->push(collect($user->content)->map(function($content) {
                                     return component('MetaLink')
                                         ->with('title', $content->title. '<br>'.$content->created)
@@ -331,43 +329,20 @@ class Trip20Controller extends Controller
             ->render();
 
         // return layout('Two')
-        //     ->with('content', collect()
-        //         ->push($this->links())
-        //         ->merge($users2->map(function ($user) {
-        //             return collect()
-        //                 ->push('<div style="opacity: ' . ($user->uid == 6 ? 0.5 : 1) . '">')
-        //                 ->push(component('Body')->with('body', format_body(collect()
-        //                     ->push($user->image ? '<img style="display: block; width: 128px;" src=' . $user->image . ' />' : '')
-        //                     ->push('#' . $user->uid . ' ' . $user->name . ' ')
-        //                     ->push('Created: ' . $user->created)
-        //                     ->push('Access: ' . $user->access)
-        //                     ->push('Login: ' . $user->login)
-        //                     ->push('Init email: ' . $user->init)
-        //                     ->push('Email: ' . $user->mail)
-        //                     ->push('Signature: ' . $user->signature)
-        //                     ->push('#### Postitused')
-        //                     ->push(collect($user->content)->map(function ($c) {
-        //                         return collect(['[' . $c->title . '](' . $c->archivelink . ') ', $c->created, $c->changed, $c->type])->implode(' · ');
-        //                     })->implode("\n"))
-        //                     ->implode("\n"))))
-        //                 ->push('</div>')
-        //                 ->render()
-        //                 ->implode('');
-        //         }))
-        //     )
+        //     ->with('content', $images->map(function ($image) {
+        //         return component('Body')->with('body', format_body(collect()
+        //             ->push('####' . $image->title . ' ')
+        //             ->push('<img src=' . $image->imagePreset('medium') . ' />')
+        //             ->push('Original published at: ' . $image->created_at)
+        //             ->push('Added to Trip: ' . $image->updated_at)
+        //             ->implode("\n")));
+        //     }))
         //     ->render();
 
-        return layout('Two')
-            ->with('content', $images->map(function ($image) {
-                return component('Body')->with('body', format_body(collect()
-                    ->push('####' . $image->title . ' ')
-                    ->push('<img src=' . $image->imagePreset('medium') . ' />')
-                    ->push('Original published at: ' . $image->created_at)
-                    ->push('Added to Trip: ' . $image->updated_at)
-                    ->implode("\n")));
-            }))
-            ->render();
+    }
 
+    public function linksIndex()
+    {
         $weblinks = DB::connection('trip')
             ->table('node')
             ->join('node_revisions', 'node_revisions.nid', '=', 'node.nid')
@@ -391,8 +366,10 @@ class Trip20Controller extends Controller
 
         return layout('Two')
             ->with('content', collect()
+                ->push($this->links())
+                ->push('<br>')
                 ->push(
-                    component('Title')->with('title', 'Reisiartiklid Eesti ajalehtedes 1995-1998')
+                    component('Title')->is('small')->with('title', 'Reisiartiklid Eesti ajalehtedes 1995-1998')
                 )
                 ->merge($weblinks->map(function ($q) {
                     return component('Body')->with('body', format_body(collect()
@@ -403,6 +380,7 @@ class Trip20Controller extends Controller
                         ->implode("\n")));
                 })))
             ->render();
-
     }
+
+   
 }
