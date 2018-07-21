@@ -2,18 +2,123 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Collection;
 use App\Content;
 use App\Destination;
 use App\User;
 use DB;
 use Carbon\Carbon;
 
+
 class ExperimentsController extends Controller
 {
 
+    public function getMonthlyStat()
+    {
+            return DB::connection('trip')
+                ->table('node')
+                ->where('type', '=', 'trip_forum')
+                ->select(DB::raw("DATE_FORMAT(FROM_UNIXTIME(created), '%M') date"))
+                ->select(DB::raw('count(node.nid) as aggregate'))
+                ->groupBy(DB::raw ('MONTH(FROM_UNIXTIME(node.created))'))
+                ->whereBetween ('node.created', [
+                    Carbon::create(2009, 1, 1, 0, 0, 0)->timestamp,
+                    Carbon::create(2010, 1, 31, 0, 0, 0)->timestamp
+                ])
+                ->orderBy ('created')
+                ->pluck('aggregate');
     
+    }
+
+    public function card($items)
+    {
+        $items = $items->map(function($value, $key) {
+            $value = $value ?? ' - ';
+            if ($key == 'Title') {
+                return '#### '.$value;
+            }
+            return $key . ': ' . $value;
+        });
+
+        return component('Body')
+            ->with('body', format_body($items->implode("\n")));
+    }
+
     public function trip20Index()
     {
+        $commentIds = collect();
+
+        $nodes = DB::connection('trip')
+            ->table('node')
+            ->join('node_revisions', 'node_revisions.nid', '=', 'node.nid')
+            ->join('users', 'users.uid', '=', 'node.uid')
+            ->join('trip_forum', 'trip_forum.nid', '=', 'node.nid')
+            //->where('node.created', '<', Carbon::create(2000, 1, 1, 0, 0, 0)->timestamp)
+            ->where('node.type', '=', 'trip_forum')
+            ->take(100)
+            ->get()
+            ->sortBy('created')
+            ->map(function ($link) use (&$commentIds) {
+                $commentIds->push($link->nid);
+                $link->month = Carbon::createFromTimestamp($link->created)->format('Y.m');
+                $link->created = Carbon::createFromTimestamp($link->created)->format('j. M Y');
+                $link->changed = Carbon::createFromTimestamp($link->changed)->format('j. M Y');
+                $link->link = 'https://trip.ee/node/'. $link->nid;
+                $link->archivelink = 'https://web.archive.org/web/*/trip.ee/node/' . $link->nid;
+                return $link;
+            });
+
+        $comments = DB::connection('trip')
+            ->table('comments')
+            ->whereIn('comments.cid', $commentIds->all())
+            ->join('users', 'users.uid', '=', 'comments.uid')
+            ->join('trip_comments', 'trip_comments.cid', '=', 'comments.cid')
+            ->orderBy('created')
+            ->get();
+
+            // $nodes = $nodes->map(function($node) use ($comments) {
+            //     $node->c = $comments->w
+            //     return $node;
+            // });
+            //->sortBy('month')
+            //->groupBy('month');
+
+
+        return layout('Two')
+            ->with('content', collect()
+                ->push(
+                    component('Title')->with('title', 'Trip forum')
+                )
+                // ->merge($nodes->flatMap(function ($monthNodes, $month) {
+                //         return collect()
+                //             ->push(component('Title')->is('small')->with('title', $month))
+                ->merge($nodes->flatMap(function ($n) use ($comments) {
+                    return collect()
+                        ->push($this->card(collect()
+                            ->put('Title', $n->nid .' '.$n->title)
+                            ->put('Author', $n->name ? $n->name : $n->author_name)
+                            ->put('E-mail', $n->mail ? $n->mail : $n->author_email)
+                            ->put('Created', $n->created)
+                        ))
+                        ->merge($comments->where('nid',$n->nid)
+                            ->map(function($c) {
+                                return $this->card(
+                                    collect()
+                                    ->put('Subject', $c->subject)
+                                );
+                            })
+                        );
+                })))
+              //  })))
+            
+            ->render();
+    }
+
+    public function trip20Index2()
+    {
+        return [Carbon::create(2009, 1, 1, 0, 0, 0)->timestamp, Carbon::create(2010, 1, 31, 0, 0, 0)->timestamp];
+        return $this->getMonthlyStat();
+
         $pictureMap = [
             1 => 'https://web.archive.org/web/20070609230611if_/http://trip.ee/files/pictures/picture-1.jpg',
             2 => 'https://web.archive.org/web/20070609212559if_/http://www.trip.ee/files/pictures/picture-2.jpg',
@@ -44,13 +149,13 @@ class ExperimentsController extends Controller
 
         $users2 = DB::connection('trip')
             ->table('users')
-            ->where('uid','>',0)
+            ->where('uid', '>', 0)
             //->take(227)
             ->take(83)
-            ->orderBy('uid','asc')
+            ->orderBy('uid', 'asc')
             ->get()
             //->filter(function ($user) { return $user->picture; })
-            ->map(function($user) use ($pictureMap, $friendMap) {
+            ->map(function ($user) use ($pictureMap, $friendMap) {
                 $u1 = explode('@', $user->mail)[0];
                 $u2 = explode('.', explode('@', $user->mail)[1])[0];
                 if ($u1 == $u2) {
@@ -63,6 +168,7 @@ class ExperimentsController extends Controller
                 }
                 $limit = Carbon::create(2015, 1, 1, 0, 0, 0)->timestamp;
                 $user->created = $user->created > 654732000 && $user->created != 946677600 && $user->created != 936306000 ? Carbon::createFromTimestamp($user->created)->format('j. M Y') : '-';
+                $user->created = $user->created == 946677600 || $user->created == 936306000 ? Carbon::createFromTimestamp($user->created)->format('Y') : $user->created;
                 $user->access = $user->access > 654732000 && $user->access < $limit ? Carbon::createFromTimestamp($user->access)->format('j. M Y') : '-';
                 $user->login = $user->login > 654732000 && $user->access < $limit ? Carbon::createFromTimestamp($user->login)->format('j. M Y') : '-';
                 $user->image = null;
@@ -72,14 +178,14 @@ class ExperimentsController extends Controller
                 // }
                 $user->archivepicture = null;
                 if ($user->picture) {
-                    $user->archivepicture = 'https://web.archive.org/web/*/trip.ee/'.$user->picture;
+                    $user->archivepicture = 'https://web.archive.org/web/*/trip.ee/' . $user->picture;
                 }
                 $newUser = User::find($user->uid);
                 if ($newUser && $newUser->images->first()) {
-                   $user->image = 'https:/trip.ee/images/small_square/' . $newUser->images->first()['filename'];
+                    $user->image = 'https:/trip.ee/images/small_square/' . $newUser->images->first()['filename'];
                 }
                 if (array_key_exists($user->uid, $pictureMap)) {
-                    $user->image = $pictureMap[$user->uid];  
+                    $user->image = $pictureMap[$user->uid];
                 };
                 if ($user->uid == 1) {
                     $user->name = 'kika';
@@ -97,13 +203,14 @@ class ExperimentsController extends Controller
                     $user->created = '-';
                 }
                 if (array_key_exists($user->uid, $friendMap)) {
-                    $user->name = $user->name . ' ('.$friendMap[$user->uid].')';
+                    $user->name = $user->name . ' (' . $friendMap[$user->uid] . ')';
                 }
                 $user->content = DB::connection('trip')
                     ->table('node')
                     ->join('node_revisions', 'node_revisions.nid', '=', 'node.nid')
                     ->select('node.*')
                     ->where('node.uid', '=', $user->uid == 1 ? 12 : $user->uid)
+                    ->where('type', '=', 'trip_forum')
                     ->orderBy('node.created')
                     ->take(5)
                     ->get()
@@ -117,7 +224,7 @@ class ExperimentsController extends Controller
                     $user->content = [];
                 }
                 if ($user->created == '-' && collect($user->content)->count()) {
-                    $user->created = '~' . $user->content[0]->created;
+                    //$user->created = '~' . $user->content[0]->created;
                 }
                 return $user;
             });
@@ -127,10 +234,10 @@ class ExperimentsController extends Controller
         return layout('Two')
             ->with('content', $users2->map(function ($user) {
                 return collect()
-                    ->push('<div style="opacity: '. ($user->uid == 6 ? 0.5 : 1).'">')
+                    ->push('<div style="opacity: ' . ($user->uid == 6 ? 0.5 : 1) . '">')
                     ->push(component('Body')->with('body', format_body(collect()
                         ->push($user->image ? '<img style="display: block; width: 128px;" src=' . $user->image . ' />' : '')
-                        ->push('#' . $user->uid . ' '.$user->name . ' ')
+                        ->push('#' . $user->uid . ' ' . $user->name . ' ')
                         ->push('Created: ' . $user->created)
                         ->push('Access: ' . $user->access)
                         ->push('Login: ' . $user->login)
@@ -138,11 +245,10 @@ class ExperimentsController extends Controller
                         ->push('Email: ' . $user->mail)
                         ->push('Signature: ' . $user->signature)
                         ->push('#### Postitused')
-                        ->push(collect($user->content)->map(function($c) {
-                            return collect(['[' . $c->title . '](' . $c->archivelink . ') ', $c->created,$c->changed,$c->type])->implode(' · ');
+                        ->push(collect($user->content)->map(function ($c) {
+                            return collect(['[' . $c->title . '](' . $c->archivelink . ') ', $c->created, $c->changed, $c->type])->implode(' · ');
                         })->implode("\n"))
-                        ->implode("\n")))
-                    )
+                        ->implode("\n"))))
                     ->push('</div>')
                     ->render()
                     ->implode('');
@@ -170,7 +276,7 @@ class ExperimentsController extends Controller
             ->take(100)
             ->get()
             ->map(function ($link) {
-                $link->created = $link->created < 1 ? Carbon::create(1998, 1, 1, 0, 0, 0)->timestamp : $link->created;               
+                $link->created = $link->created < 1 ? Carbon::create(1998, 1, 1, 0, 0, 0)->timestamp : $link->created;
                 return $link;
             })
             ->sortBy('created')
@@ -181,22 +287,20 @@ class ExperimentsController extends Controller
                 return $link;
             });
 
-            return layout('Two')
-                ->with('content', collect()
-                    ->push(
-                        component('Title')->with('title', 'Reisiartiklid Eesti ajalehtedes 1995-1998')
-                    )
-                    ->merge($weblinks->map(function($q) {
-                        return component('Body')->with('body', format_body(collect()
-                            ->push('####' .$q->title.' ')
-                            ->push('['.$q->weblink.']('. $q->archivelink .')')
-                            ->push('Original published at: '.$q->created)
-                            ->push('Added to Trip: '.$q->changed)
-                            ->implode("\n")
-                        ));
-                    }))
+        return layout('Two')
+            ->with('content', collect()
+                ->push(
+                    component('Title')->with('title', 'Reisiartiklid Eesti ajalehtedes 1995-1998')
                 )
-                ->render();
+                ->merge($weblinks->map(function ($q) {
+                    return component('Body')->with('body', format_body(collect()
+                        ->push('####' . $q->title . ' ')
+                        ->push('[' . $q->weblink . '](' . $q->archivelink . ')')
+                        ->push('Original published at: ' . $q->created)
+                        ->push('Added to Trip: ' . $q->changed)
+                        ->implode("\n")));
+                })))
+            ->render();
 
     }
 
@@ -209,66 +313,51 @@ class ExperimentsController extends Controller
             ->with('content', collect()
 
                 ->push(component('Title')
-                    ->with('title', 'Code')
-                )
+                    ->with('title', 'Code'))
 
                 ->push(component('Code')
                     ->is('gray')
-                    ->with('code', "Hello\nworld")
-                )
+                    ->with('code', "Hello\nworld"))
 
                 ->push(component('Title')
-                    ->with('title', 'Small editor')
-                )
+                    ->with('title', 'Small editor'))
 
                 ->push(component('EditorSmall')
-                    ->with('value', 'Testing it out')
-                )
+                    ->with('value', 'Testing it out'))
 
                 ->push(component('Title')
-                    ->with('title', 'Misc')
-                )
+                    ->with('title', 'Misc'))
 
                 ->push(component('MetaLink')
                     ->with('title', 'Selects')
-                    ->with('route', route('experiments.select.index'))
-                )
+                    ->with('route', route('experiments.select.index')))
 
                 ->push(component('MetaLink')
                     ->with('title', 'Fonts')
-                    ->with('route', route('experiments.fonts.index'))
-                )
+                    ->with('route', route('experiments.fonts.index')))
 
                 ->push(component('MetaLink')
                     ->with('title', 'Map')
-                    ->with('route', route('experiments.map.index'))
-                )
+                    ->with('route', route('experiments.map.index')))
 
                 ->push(component('Title')
-                    ->with('title', 'Layouts')
-                )
+                    ->with('title', 'Layouts'))
 
                 ->push(component('MetaLink')
                     ->with('title', 'One')
-                    ->with('route', route('experiments.layouts.one'))
-                )
+                    ->with('route', route('experiments.layouts.one')))
 
                 ->push(component('MetaLink')
                     ->with('title', 'Two')
-                    ->with('route', route('experiments.layouts.two'))
-                )
+                    ->with('route', route('experiments.layouts.two')))
 
                 ->push(component('MetaLink')
                     ->with('title', 'Grid')
-                    ->with('route', route('experiments.layouts.grid'))
-                )
+                    ->with('route', route('experiments.layouts.grid')))
 
                 ->push(component('MetaLink')
                     ->with('title', 'Frontpage')
-                    ->with('route', route('experiments.layouts.frontpage'))
-                )
-
-            )
+                    ->with('route', route('experiments.layouts.frontpage'))))
 
             ->render();
     }
@@ -288,32 +377,24 @@ class ExperimentsController extends Controller
                             ->with('name', 'destinations1')
                             ->with('options', $destinations)
                             ->with('value', [1])
-                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
-                        )
+                            ->with('placeholder', trans('content.edit.field.destinations.placeholder')))
                         ->push(component('FormSelectMultiple')
                             ->with('name', 'destinations2')
                             ->with('options', $destinations)
                             ->with('value', [2, 3])
-                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
-                        )
+                            ->with('placeholder', trans('content.edit.field.destinations.placeholder')))
                         ->push(component('FormSelect')
                             ->with('name', 'destination1')
                             ->with('options', $destinations)
                             ->with('value', 4)
-                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
-                        )
+                            ->with('placeholder', trans('content.edit.field.destinations.placeholder')))
                         ->push(component('FormSelect')
                             ->with('name', 'destination2')
                             ->with('options', $destinations)
                             ->with('value', 5)
-                            ->with('placeholder', trans('content.edit.field.destinations.placeholder'))
-                        )
+                            ->with('placeholder', trans('content.edit.field.destinations.placeholder')))
                         ->push(component('FormButton')
-                            ->with('title', trans('content.edit.submit.title'))
-                        )
-                    )
-                )
-            )
+                            ->with('title', trans('content.edit.submit.title'))))))
 
             ->render();
     }
@@ -329,11 +410,9 @@ class ExperimentsController extends Controller
 
             ->with('content', collect()
                 ->push(component('Dotmap')
-                    ->with('dots', config('dots'))
-                )
-            )
+                    ->with('dots', config('dots'))))
 
-        ->render();
+            ->render();
     }
 
     public function fontsIndex()
@@ -341,8 +420,7 @@ class ExperimentsController extends Controller
         return layout('Two')
 
             ->with('content', collect()
-                ->push(component('ExperimentalFont'))
-            )
+                ->push(component('ExperimentalFont')))
 
             ->render();
     }
