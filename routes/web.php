@@ -382,10 +382,16 @@ Route::post('utils/filter', 'UtilsController@filter')
 Route::post('utils/format', 'UtilsController@format')
     ->name('utils.format');
 
-// Experiments
+// Trip20
 
-Route::get('trip20', 'ExperimentsController@trip20Index')
-    ->name('experiments.trip20.index');
+Route::get('trip20/foorum', 'Trip20Controller@forumsIndex')
+    ->name('trip20.forums');
+
+Route::get('trip20/kasutajad', 'Trip20Controller@usersIndex')
+    ->name('trip20.users');
+
+
+// Experiments
 
 Route::get('experiments', 'ExperimentsController@index')
     ->name('experiments.index');
