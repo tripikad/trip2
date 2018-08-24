@@ -188,7 +188,7 @@ return [
         Roumen\Sitemap\SitemapServiceProvider::class,
         //Eduardokum\LaravelMailAutoEmbed\Providers\LaravelMailAutoEmbedServiceProvider::class,
         Eduardokum\LaravelMailAutoEmbed\ServiceProvider::class,
-	    Clockwork\Support\Laravel\ClockworkServiceProvider::class,
+        Clockwork\Support\Laravel\ClockworkServiceProvider::class,
 
         /*
          * Application Service Providers...
