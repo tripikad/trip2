@@ -37,8 +37,7 @@ class ApiController extends Controller
                 return collect()
                     ->put('title', $f->title)
                     ->put('image', $f->imagePreset('medium'))
-                    ->put('body', format_body($f->body))
-                ;
+                    ->put('body', format_body($f->body));
             });
 
         return response()
