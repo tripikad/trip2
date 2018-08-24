@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Destination;
 use App\Content;
+use App\Destination;
 
 class ApiController extends Controller
 {
@@ -33,12 +33,12 @@ class ApiController extends Controller
     public function flights()
     {
         $flights = Content::getLatestItems('flight', 24);
-        return $flights->map(function($f) {
+
+        return $flights->map(function ($f) {
             return collect()
                 ->put('title', $f->title)
                 ->put('image', $f->getHeadImage())
-                ->put('body', format_body($f->body))
-            ;
+                ->put('body', format_body($f->body));
         });
     }
 }
