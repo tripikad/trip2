@@ -33,6 +33,23 @@ class Trip20Controller extends Controller
             ->with('body', format_body($items->implode("\n")));
     }
 
+    public function pager($route)
+    {
+        $steps = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+        return component('Grid')
+            ->with('inline', true)
+            ->with('cols', count($steps))
+            ->with('gap', 2)
+            ->with('items', collect($steps)
+                ->map(function($from) use ($route) {
+                    return component('Title')
+                        ->with('title', ($from + 1) . '-' . ($from + 100))
+                        ->is('smallest')
+                        ->with('route', route($route, ['from' => $from]));
+                })
+            );
+    }
+
     public function formatAuthor($item)
     {
         return collect()
@@ -51,6 +68,7 @@ class Trip20Controller extends Controller
 
     public function links() {
         $links = collect()
+            ->put('trip20.about', 'Ajalugu')
             ->put('trip20.users', 'Kasutajad')
             ->put('trip20.forums', 'Foorum')
             ->put('trip20.links', 'Lingid')
@@ -58,6 +76,7 @@ class Trip20Controller extends Controller
             ->map(function($title, $route) {
                 return component('Title')
                     ->is('gray')
+                    ->is('small')
                     ->with('title', $title)
                     ->with('route', route($route))
                 ;
@@ -65,12 +84,56 @@ class Trip20Controller extends Controller
         
         return component('Grid')
             ->with('items', collect()
-                ->push(component('Title')->is('green')->with('title', 'Trip20:'))
+                ->push(component('Title')->is('green')->with('title', 'Trip20'))
                 ->merge($links)
             )
             ->with('gap', 2)
             ->with('inline', true)
             ->with('cols', $links->count() + 1)
+        ;
+    }
+
+    public function aboutIndex()
+    {
+        $md = <<<MD
+
+> Eesti vanim ja suurim reisiportaal Trip.ee nägi ilmavalgust 1998. aastal, kui kaks reisihuvilisest sõpra Kristjan ja Tom otsustasid püsti panna lehe, kus reisisellid saavad kogemusi vahetada.
+
+![](photos/trip20_829.jpg)
+
+Tartu Ülikooli viimastel kursustel, kus õpihimu raugema ning kodumaised rabamatkad ammenduma  ammenduma hakkasid, otsustasid klassivennad Kristjan Jansen ja Toomas Toots Euroopasse sõita ja kohe müstilisse Portugali välja.
+
+![](photos/trip20_viisa.jpg)
+
+Üks keerukaimaid asju reisimise juures oli Schengeni viisa jaoks küllakutse saamine, tollal lõppes eestlase jaoks viisavabadus Tšehhi-Saksamaa ja Ungari-Saksamaa piiri ääres. Enamus tutvusringkonnast lahends olukorra Taize kloostri  poolfiktiivse külastusega, koos vagade tõsiusklikega sõideti Pransusmaale ja sealt "hüpati ära", Schengeni viisa taskus. Teine, kindlam, kuid kallim oli astuda **rahvusvahelise autoklubi** liikmeks, kes siis küllakutse vormistas.
+
+Järgmine küsimus oli transport - odavlende poldud veel leiutatud, **Interaili** üleeuroopaline rongipileti tudengile valus laks - enamus kevadistel Toomemäel sumisejatest tudengitest kallas Tõmmu Hiiu Coca-Cola pudelisse ja läks Riia maanteele hääletama, silme ees Praha Karli sild ja kohatult odav õlu.
+
+![](photos/trip20_tomkika.jpg)
+
+Kristjan ja Toomas polnud Pirogovi-mehed ning Liivimaa Kroonikas ning Tartu Ölletehases teenitud säästud läksid autoklubi ning Interraili pileti peale ning 1997. suvel võis poolpõlenud Tartu vaksalis Balti Ekspressi peale istuda.
+
+![](photos/trip20_830.jpg)
+
+Portugali jõudsid küll ainult Toomas ja tema kaaslanna Mariliis, Kristjan pöördus Barcelonas palavikku jäädes tagasi, kuid reisipisik oli kamraade nüüdseks tugevalt nakatanud. Sarnase reisi tegid sõbrad ka 1998. aastal -- Kristjan jõudis isegi seljakotirändureid ja liisunud veini täis Itaalia-Kreeka praamile -- ning siis 1998. aasta suve lõpul tundus et kõike seda tahaks jagada. Kuid kus seda teha? Eestis polnud midagi LP Thorn Three,Virtualtouristi ega Sleepinginairports sarnast ning sotsiaalvõrke polnud veel leiutatud.
+
+![](photos/trip20_kavandid.jpg)
+
+Aeg oli teha esimene eestikeelne reisifoorum, Trip. Esimene lehe versioon käivitus septembris 1998, tänaseks obskuursusesse vajunud Lotus Notesi platvormil ning aadressil **trip.magnum.ee**, Toomase tollase  töökoha, Magnum Medicali alamdomeenina. .ee domeeni saamine polnud tollal lihtne, neid väljastati vaid ettevõtetele ning firmal tohtis olla vaid üks domeen. Toomase firma i-Süsteem'il oli omanimeline domeen juba võetud ja nii oli Trip lühikest aega ka **trip.nu** aadressil. Umbes 2000. aastal sai **trip.ee** lõpuks oma domeeni.
+
+Peale erinevaid sisuhaldussüsteemide katsetusi kirjutas Kristjan Tripi ümber http://drupal.org platvormile, kus see püsis järgmine 17. aastat. Praguseks on Trip.ee liikunud omakirjutatud platvormile.
+
+> Suurema hoo sai Trip.ee sisse 2000-ndate algul, kui värskelt Eesti turule sisenenud Lufthansa pakkus supersoodsaid pileteid lendudele Lõuna-Ameerikasse. Ühtäkki avastasid paljud, et Tšiilisse või Kolumbiasse reisimisest pole pääsu. Kuna infot nappis, tundus sel ajal iga infokild kulla hinnaga.
+
+> 2004\. aastal hakkas Trip.ee reisifoorum samm-sammult võtma sellist ilmet, nagu seda täna võib näha. Samal ajal said hoo sisse paketireisid Egiptusesse ja foorumisse tekkisid esimesed asukohaeksperdid. Sellesse aega jäävad ka mitmed tulised verbaalsed võitlused.
+MD;
+        return layout('Two')
+            ->with('content', collect()
+                ->push($this->links())
+                ->push('<br>')
+                ->push(component('Body')->with('body', format_body($md)))
+            )
+            ->render()
         ;
     }
 
@@ -85,6 +148,7 @@ class Trip20Controller extends Controller
             ->join('trip_forum', 'trip_forum.nid', '=', 'node.nid')
             ->where('node.type', '=', 'trip_forum')
             ->take(100)
+            ->skip(request()->get('from', 0))
             ->get()
             ->sortBy('created')
             ->map(function ($node) use (&$commentIds) {
@@ -139,6 +203,8 @@ class Trip20Controller extends Controller
         return layout('Two')
             ->with('content', collect()
                 ->push($this->links())
+                //->push($this->pager('trip20.forums'))
+                ->push('<br>')
                 ->merge($nodes->flatMap(function ($monthNodes, $month) {
                     return collect()
                         ->push(component('Title')->is('small')->with('title', $monthNodes->first()->monthTitle . ' (' . $monthNodes->count() . ' posts)'))
@@ -278,13 +344,7 @@ class Trip20Controller extends Controller
         return layout('Two')
             ->with('content', collect()
                 ->push($this->links())
-                ->push(component('Grid')->with('inline', true)->with('cols',5)->with('gap', 2)->with('items', collect([0,100,200,300,400])->map(function($from) {
-                    return component('Title')
-                        ->with('title',($from+1).'-'.($from+100))
-                        ->is('smallest')
-                        ->with('route',route('trip20.users',['from' => $from]))
-                    ;
-                })))
+                ->push($this->pager('trip20.users'))
                 ->push('<br>')
                 ->push(component('Grid')
                     ->with('cols', 4)
@@ -329,17 +389,6 @@ class Trip20Controller extends Controller
             )
             ->render();
 
-        // return layout('Two')
-        //     ->with('content', $images->map(function ($image) {
-        //         return component('Body')->with('body', format_body(collect()
-        //             ->push('####' . $image->title . ' ')
-        //             ->push('<img src=' . $image->imagePreset('medium') . ' />')
-        //             ->push('Original published at: ' . $image->created_at)
-        //             ->push('Added to Trip: ' . $image->updated_at)
-        //             ->implode("\n")));
-        //     }))
-        //     ->render();
-
     }
 
     public function linksIndex()
@@ -369,12 +418,7 @@ class Trip20Controller extends Controller
         return layout('Two')
             ->with('content', collect()
                 ->push($this->links())
-                ->push(component('Grid')->with('inline', true)->with('cols', 5)->with('gap', 2)->with('items', collect([0, 100, 200, 300, 400])->map(function ($from) {
-                    return component('Title')
-                        ->with('title', ($from + 1) . '-' . ($from + 100))
-                        ->is('smallest')
-                        ->with('route', route('trip20.links', ['from' => $from]));
-                })))
+                ->push($this->pager('trip20.links'))
                 ->push('<br>')
                 ->push(
                     component('Title')->is('small')->with('title', 'Reisiartiklid Eesti ajalehtedes 1995-1998')
@@ -441,12 +485,7 @@ class Trip20Controller extends Controller
         return layout('Two')
             ->with('content', collect()
                 ->push($this->links())
-                ->push(component('Grid')->with('inline', true)->with('cols', 5)->with('gap', 2)->with('items', collect([0, 100, 200, 300, 400])->map(function ($from) {
-                    return component('Title')
-                        ->with('title', ($from + 1) . '-' . ($from + 100))
-                        ->is('smallest')
-                        ->with('route', route('trip20.images', ['from' => $from]));
-                })))
+                ->push($this->pager('trip20.images'))
                 ->push('<br>')
             ->merge($images->map(function ($image) {
                 return component('Grid')->with('gap',2)->with('items', collect()
