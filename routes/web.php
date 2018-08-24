@@ -382,6 +382,23 @@ Route::post('utils/filter', 'UtilsController@filter')
 Route::post('utils/format', 'UtilsController@format')
     ->name('utils.format');
 
+// Trip20
+
+Route::get('trip20', 'Trip20Controller@aboutIndex')
+    ->name('trip20.about');
+
+Route::get('trip20/kasutajad', 'Trip20Controller@usersIndex')
+    ->name('trip20.users');
+
+Route::get('trip20/foorum', 'Trip20Controller@forumsIndex')
+    ->name('trip20.forums');
+
+Route::get('trip20/lingid', 'Trip20Controller@linksIndex')
+    ->name('trip20.links');
+
+Route::get('trip20/fotod', 'Trip20Controller@imagesIndex')
+    ->name('trip20.images');
+
 // Experiments
 
 Route::get('experiments', 'ExperimentsController@index')

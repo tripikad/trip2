@@ -4,6 +4,7 @@ $items = collect($items) ?? collect();
 $cols = $cols ?? 3;
 $gapclass = isset($gap) ? 'Grid--gap'.$gap : '';
 $widths = isset($widths) ? preg_split('/\s+/', $widths) : array_fill(0, $cols, 1);
+$inline = $inline ?? false;
 
 @endphp
 
@@ -15,7 +16,7 @@ $widths = isset($widths) ? preg_split('/\s+/', $widths) : array_fill(0, $cols, 1
 
             @foreach ($row->values() as $colIndex => $item)
 
-                <div class="Grid__item" style="flex: {{ $widths[$colIndex] }}">
+                <div class="Grid__item" style="{{ !$inline ? 'flex:'.$widths[$colIndex] : '' }}">
 
                     {!! $item !!}
 

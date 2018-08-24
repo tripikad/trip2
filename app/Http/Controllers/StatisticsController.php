@@ -56,7 +56,7 @@ class StatisticsController extends Controller
 
     public function getMonthlyStat($model)
     {
-        return Collection::times(3, function ($year) use ($model) {
+        return Collection::times(5, function ($year) use ($model) {
             $model = 'App\\'.$model;
             $table = (new $model)->getTable();
 

@@ -24,9 +24,18 @@ a .Title__title:hover {
     font-weight: $font-weight-bold;
 }
 
+.Title--smallest .Title__title {
+    font: $font-heading-sm;
+}
+
 .Title--large .Title__title {
     font: $font-heading-xxl;
     font: $font-heading-xl ?if $tablet;
+}
+
+.Title--larger .Title__title {
+    font: $font-heading-xxxl;
+    font: $font-heading-xxl ?if $tablet;
 }
 
 .Title--white .Title__title {
@@ -59,6 +68,14 @@ a .Title__title:hover {
 
 .Title--blue a .Title__title:hover {
     color: $blue-hover;
+}
+
+.Title--green .Title__title {
+    color: $green;
+}
+
+.Title--green a .Title__title:hover {
+    color: $green-hover;
 }
 
 .Title--shadow .Title__title {

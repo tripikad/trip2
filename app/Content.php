@@ -343,4 +343,9 @@ class Content extends Model
     {
         return new ContentVars($this);
     }
+
+    public function getBodyFilteredAttribute()
+    {
+        return $this->body;
+    }
 }
