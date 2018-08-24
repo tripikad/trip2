@@ -37,15 +37,13 @@ class ApiController extends Controller
                 return collect()
                     ->put('title', $f->title)
                     ->put('image', $f->getHeadImage())
-                    ->put('body', format_body($f->body))
-                ;
+                    ->put('body', format_body($f->body));
             });
-        
+
         return response()
             ->json($flights)
             ->withHeaders([
-                'Access-Control-Allow-Origin' => '*'
+                'Access-Control-Allow-Origin' => '*',
             ]);
-            
     }
 }
