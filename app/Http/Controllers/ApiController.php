@@ -40,12 +40,11 @@ class ApiController extends Controller
                     ->put('body', format_body($f->body))
                 ;
             });
-        
+
         return response()
             ->json($flights)
             ->withHeaders([
-                'Access-Control-Allow-Origin' => '*'
+                'Access-Control-Allow-Origin' => '*',
             ]);
-            
     }
 }
