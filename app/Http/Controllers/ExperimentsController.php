@@ -2,37 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Collection;
-use App\Content;
-use App\Destination;
-use App\User;
 use DB;
+use App\User;
+use App\Content;
 use Carbon\Carbon;
-
+use App\Destination;
 
 class ExperimentsController extends Controller
 {
-
     public function getMonthlyStat()
     {
-            return DB::connection('trip')
+        return DB::connection('trip')
                 ->table('node')
                 ->where('type', '=', 'trip_forum')
                 ->select(DB::raw("DATE_FORMAT(FROM_UNIXTIME(created), '%M') date"))
                 ->select(DB::raw('count(node.nid) as aggregate'))
-                ->groupBy(DB::raw ('MONTH(FROM_UNIXTIME(node.created))'))
-                ->whereBetween ('node.created', [
+                ->groupBy(DB::raw('MONTH(FROM_UNIXTIME(node.created))'))
+                ->whereBetween('node.created', [
                     Carbon::create(2009, 1, 1, 0, 0, 0)->timestamp,
-                    Carbon::create(2010, 1, 31, 0, 0, 0)->timestamp
+                    Carbon::create(2010, 1, 31, 0, 0, 0)->timestamp,
                 ])
-                ->orderBy ('created')
+                ->orderBy('created')
                 ->pluck('aggregate');
-    
     }
 
     public function card($items)
     {
-        $items = $items->map(function($value, $key) {
+        $items = $items->map(function ($value, $key) {
             $value = $value ?? ' - ';
             if ($key == 'Title') {
                 return '### '.$value;
@@ -43,7 +39,8 @@ class ExperimentsController extends Controller
             if ($key == 'Body') {
                 return '<br>'.$value;
             }
-            return $key . ': ' . $value;
+
+            return $key.': '.$value;
         });
 
         return component('Body')
@@ -73,6 +70,7 @@ class ExperimentsController extends Controller
             ->sortBy('created')
             ->map(function ($node) use (&$commentIds) {
                 $commentIds->push($node->nid);
+
                 return $node;
             });
 
@@ -85,20 +83,22 @@ class ExperimentsController extends Controller
             ->get()
             ->map(function ($comment) {
                 $comment->created_at = Carbon::createFromTimestamp($comment->timestamp)->format('j. M Y');
-                $comment->link = 'http://trip.ee/node/' . $comment->nid .'#comment-'.$comment->cid;
-                $comment->link2 = 'http://trip2.test/node/' . $comment->nid . '#comment-' . $comment->cid;
-                $comment->archivelink = 'https://web.archive.org/web/*/' . $comment->link;
+                $comment->link = 'http://trip.ee/node/'.$comment->nid.'#comment-'.$comment->cid;
+                $comment->link2 = 'http://trip2.test/node/'.$comment->nid.'#comment-'.$comment->cid;
+                $comment->archivelink = 'https://web.archive.org/web/*/'.$comment->link;
+
                 return $comment;
             });
 
         $dateMap = [
-            1240 => Carbon::create(1999, 1, 1, 0, 0, 0)->timestamp
+            1240 => Carbon::create(1999, 1, 1, 0, 0, 0)->timestamp,
         ];
 
         $nodes = $nodes->map(function ($node) use ($comments) {
-                $node->comments = $comments->where('nid', $node->nid);
-                return $node;
-            })
+            $node->comments = $comments->where('nid', $node->nid);
+
+            return $node;
+        })
             ->map(function ($node) {
                 if ($node->created <= 654732000) { // 1. Oct 1990
                     if ($forum = Content::find($node->nid)) {
@@ -109,6 +109,7 @@ class ExperimentsController extends Controller
                 } else {
                     $node->created_at = Carbon::createFromTimestamp($node->created);
                 }
+
                 return $node;
             })
             ->map(function ($node) {
@@ -116,9 +117,10 @@ class ExperimentsController extends Controller
                 $node->monthTitle = $node->created_at->format('M Y');
                 $node->created_at = $node->created_at->format('j. M Y');
                 $node->changed_at = Carbon::createFromTimestamp($node->changed)->format('j. M Y');
-                $node->link = 'http://trip.ee/node/' . $node->nid;
-                $node->link2 = 'http://trip2.test/node/' . $node->nid;
-                $node->archivelink = 'https://web.archive.org/web/*/' . $node->link;
+                $node->link = 'http://trip.ee/node/'.$node->nid;
+                $node->link2 = 'http://trip2.test/node/'.$node->nid;
+                $node->archivelink = 'https://web.archive.org/web/*/'.$node->link;
+
                 return $node;
             })
         ->sortBy('month')
@@ -130,8 +132,8 @@ class ExperimentsController extends Controller
                     component('Title')->with('title', 'Trip forum')
                 )
                 ->merge($nodes->flatMap(function ($monthNodes, $month) {
-                        return collect()
-                            ->push(component('Title')->with('title', $monthNodes->first()->monthTitle.' ('. $monthNodes->count().' posts)'))
+                    return collect()
+                            ->push(component('Title')->with('title', $monthNodes->first()->monthTitle.' ('.$monthNodes->count().' posts)'))
                             ->merge($monthNodes->flatMap(function ($n) {
                                 return collect()
                                     ->push($this->card(collect()
@@ -143,9 +145,9 @@ class ExperimentsController extends Controller
                                         ->put('Archive link', $n->archivelink)
                                         ->put('Body', $n->body)
                                     ))
-                                    ->merge($n->comments->map(function($c) {
-                                            return component('Grid')
-                                                ->with('cols',2)
+                                    ->merge($n->comments->map(function ($c) {
+                                        return component('Grid')
+                                                ->with('cols', 2)
                                                 ->with('widths', '1 10')
                                                 ->with('items', collect()
                                                     ->push('')
@@ -157,18 +159,17 @@ class ExperimentsController extends Controller
                                                             ->put('Body', $c->comment)
                                                     ))
                                             );
-                                        })
-                                    )
-                                ;
-                            }))
-                        ;
-            })))
+                                    })
+                                    );
+                            }));
+                })))
             ->render();
     }
 
     public function trip20Index2()
     {
         return [Carbon::create(2009, 1, 1, 0, 0, 0)->timestamp, Carbon::create(2010, 1, 31, 0, 0, 0)->timestamp];
+
         return $this->getMonthlyStat();
 
         $pictureMap = [
@@ -230,15 +231,15 @@ class ExperimentsController extends Controller
                 // }
                 $user->archivepicture = null;
                 if ($user->picture) {
-                    $user->archivepicture = 'https://web.archive.org/web/*/trip.ee/' . $user->picture;
+                    $user->archivepicture = 'https://web.archive.org/web/*/trip.ee/'.$user->picture;
                 }
                 $newUser = User::find($user->uid);
                 if ($newUser && $newUser->images->first()) {
-                    $user->image = 'https:/trip.ee/images/small_square/' . $newUser->images->first()['filename'];
+                    $user->image = 'https:/trip.ee/images/small_square/'.$newUser->images->first()['filename'];
                 }
                 if (array_key_exists($user->uid, $pictureMap)) {
                     $user->image = $pictureMap[$user->uid];
-                };
+                }
                 if ($user->uid == 1) {
                     $user->name = 'kika';
                     $user->access = '-';
@@ -255,7 +256,7 @@ class ExperimentsController extends Controller
                     $user->created = '-';
                 }
                 if (array_key_exists($user->uid, $friendMap)) {
-                    $user->name = $user->name . ' (' . $friendMap[$user->uid] . ')';
+                    $user->name = $user->name.' ('.$friendMap[$user->uid].')';
                 }
                 $user->content = DB::connection('trip')
                     ->table('node')
@@ -269,7 +270,8 @@ class ExperimentsController extends Controller
                     ->map(function ($link) {
                         $link->created = Carbon::createFromTimestamp($link->created)->format('j. M Y');
                         $link->changed = Carbon::createFromTimestamp($link->changed)->format('j. M Y');
-                        $link->archivelink = 'https://web.archive.org/web/*/trip.ee/node/' . $link->nid;
+                        $link->archivelink = 'https://web.archive.org/web/*/trip.ee/node/'.$link->nid;
+
                         return $link;
                     });
                 if ($user->uid == 12) {
@@ -278,6 +280,7 @@ class ExperimentsController extends Controller
                 if ($user->created == '-' && collect($user->content)->count()) {
                     //$user->created = '~' . $user->content[0]->created;
                 }
+
                 return $user;
             });
 
@@ -286,19 +289,19 @@ class ExperimentsController extends Controller
         return layout('Two')
             ->with('content', $users2->map(function ($user) {
                 return collect()
-                    ->push('<div style="opacity: ' . ($user->uid == 6 ? 0.5 : 1) . '">')
+                    ->push('<div style="opacity: '.($user->uid == 6 ? 0.5 : 1).'">')
                     ->push(component('Body')->with('body', format_body(collect()
-                        ->push($user->image ? '<img style="display: block; width: 128px;" src=' . $user->image . ' />' : '')
-                        ->push('#' . $user->uid . ' ' . $user->name . ' ')
-                        ->push('Created: ' . $user->created)
-                        ->push('Access: ' . $user->access)
-                        ->push('Login: ' . $user->login)
-                        ->push('Init email: ' . $user->init)
-                        ->push('Email: ' . $user->mail)
-                        ->push('Signature: ' . $user->signature)
+                        ->push($user->image ? '<img style="display: block; width: 128px;" src='.$user->image.' />' : '')
+                        ->push('#'.$user->uid.' '.$user->name.' ')
+                        ->push('Created: '.$user->created)
+                        ->push('Access: '.$user->access)
+                        ->push('Login: '.$user->login)
+                        ->push('Init email: '.$user->init)
+                        ->push('Email: '.$user->mail)
+                        ->push('Signature: '.$user->signature)
                         ->push('#### Postitused')
                         ->push(collect($user->content)->map(function ($c) {
-                            return collect(['[' . $c->title . '](' . $c->archivelink . ') ', $c->created, $c->changed, $c->type])->implode(' · ');
+                            return collect(['['.$c->title.']('.$c->archivelink.') ', $c->created, $c->changed, $c->type])->implode(' · ');
                         })->implode("\n"))
                         ->implode("\n"))))
                     ->push('</div>')
@@ -310,10 +313,10 @@ class ExperimentsController extends Controller
         return layout('Two')
             ->with('content', $images->map(function ($image) {
                 return component('Body')->with('body', format_body(collect()
-                    ->push('####' . $image->title . ' ')
-                    ->push('<img src=' . $image->imagePreset('medium') . ' />')
-                    ->push('Original published at: ' . $image->created_at)
-                    ->push('Added to Trip: ' . $image->updated_at)
+                    ->push('####'.$image->title.' ')
+                    ->push('<img src='.$image->imagePreset('medium').' />')
+                    ->push('Original published at: '.$image->created_at)
+                    ->push('Added to Trip: '.$image->updated_at)
                     ->implode("\n")));
             }))
             ->render();
@@ -329,13 +332,15 @@ class ExperimentsController extends Controller
             ->get()
             ->map(function ($link) {
                 $link->created = $link->created < 1 ? Carbon::create(1998, 1, 1, 0, 0, 0)->timestamp : $link->created;
+
                 return $link;
             })
             ->sortBy('created')
             ->map(function ($link) {
                 $link->created = Carbon::createFromTimestamp($link->created)->format('j. M Y');
                 $link->changed = Carbon::createFromTimestamp($link->changed)->format('j. M Y');
-                $link->archivelink = 'https://web.archive.org/web/*/' . $link->weblink;
+                $link->archivelink = 'https://web.archive.org/web/*/'.$link->weblink;
+
                 return $link;
             });
 
@@ -346,14 +351,13 @@ class ExperimentsController extends Controller
                 )
                 ->merge($weblinks->map(function ($q) {
                     return component('Body')->with('body', format_body(collect()
-                        ->push('####' . $q->title . ' ')
-                        ->push('[' . $q->weblink . '](' . $q->archivelink . ')')
-                        ->push('Original published at: ' . $q->created)
-                        ->push('Added to Trip: ' . $q->changed)
+                        ->push('####'.$q->title.' ')
+                        ->push('['.$q->weblink.']('.$q->archivelink.')')
+                        ->push('Original published at: '.$q->created)
+                        ->push('Added to Trip: '.$q->changed)
                         ->implode("\n")));
                 })))
             ->render();
-
     }
 
     public function index()

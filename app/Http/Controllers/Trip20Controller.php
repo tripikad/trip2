@@ -2,31 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Collection;
-use App\Content;
-use App\Destination;
-use App\User;
 use DB;
+use App\User;
+use App\Content;
 use Carbon\Carbon;
-
 
 class Trip20Controller extends Controller
 {
-
     public function card($items)
     {
         $items = $items->map(function ($value, $key) {
             $value = $value ?? ' - ';
             if ($key == 'Title') {
-                return '#### ' . $value;
+                return '#### '.$value;
             }
             if ($key == 'Subject') {
-                return '**' . $value . '**';
+                return '**'.$value.'**';
             }
             if ($key == 'Body') {
-                return '<br>' . $value;
+                return '<br>'.$value;
             }
-            return $key . ': ' . $value;
+
+            return $key.': '.$value;
         });
 
         return component('Body')
@@ -36,14 +33,15 @@ class Trip20Controller extends Controller
     public function pager($route)
     {
         $steps = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+
         return component('Grid')
             ->with('inline', true)
             ->with('cols', count($steps))
             ->with('gap', 2)
             ->with('items', collect($steps)
-                ->map(function($from) use ($route) {
+                ->map(function ($from) use ($route) {
                     return component('Title')
-                        ->with('title', ($from + 1) . '-' . ($from + 100))
+                        ->with('title', ($from + 1).'-'.($from + 100))
                         ->is('smallest')
                         ->with('route', route($route, ['from' => $from]));
                 })
@@ -62,26 +60,26 @@ class Trip20Controller extends Controller
     {
         return collect()
             ->push('<a href="'.$item->link.'">trip.ee</a>')
-            ->push('<a href="' . $item->archivelink . '">archive.org</a>')
+            ->push('<a href="'.$item->archivelink.'">archive.org</a>')
             ->implode(' / ');
     }
 
-    public function links() {
+    public function links()
+    {
         $links = collect()
             ->put('trip20.about', 'Ajalugu')
             ->put('trip20.users', 'Kasutajad')
             ->put('trip20.forums', 'Foorum')
             ->put('trip20.links', 'Lingid')
             ->put('trip20.images', 'Pildid')
-            ->map(function($title, $route) {
+            ->map(function ($title, $route) {
                 return component('Title')
                     ->is('gray')
                     ->is('small')
                     ->with('title', $title)
-                    ->with('route', route($route))
-                ;
+                    ->with('route', route($route));
             });
-        
+
         return component('Grid')
             ->with('items', collect()
                 ->push(component('Title')->is('green')->with('title', 'Trip20'))
@@ -89,8 +87,7 @@ class Trip20Controller extends Controller
             )
             ->with('gap', 2)
             ->with('inline', true)
-            ->with('cols', $links->count() + 1)
-        ;
+            ->with('cols', $links->count() + 1);
     }
 
     public function aboutIndex()
@@ -127,14 +124,14 @@ Peale erinevaid sisuhaldussüsteemide katsetusi kirjutas Kristjan Tripi ümber h
 
 > 2004\. aastal hakkas Trip.ee reisifoorum samm-sammult võtma sellist ilmet, nagu seda täna võib näha. Samal ajal said hoo sisse paketireisid Egiptusesse ja foorumisse tekkisid esimesed asukohaeksperdid. Sellesse aega jäävad ka mitmed tulised verbaalsed võitlused.
 MD;
+
         return layout('Two')
             ->with('content', collect()
                 ->push($this->links())
                 ->push('<br>')
                 ->push(component('Body')->with('body', format_body($md)))
             )
-            ->render()
-        ;
+            ->render();
     }
 
     public function forumsIndex()
@@ -153,6 +150,7 @@ MD;
             ->sortBy('created')
             ->map(function ($node) use (&$commentIds) {
                 $commentIds->push($node->nid);
+
                 return $node;
             });
 
@@ -165,14 +163,16 @@ MD;
             ->get()
             ->map(function ($comment) {
                 $comment->created_at = Carbon::createFromTimestamp($comment->timestamp)->format('j. M Y');
-                $comment->link = 'http://trip.ee/node/' . $comment->nid . '#comment-' . $comment->cid;
-                $comment->link2 = 'http://trip2.test/node/' . $comment->nid . '#comment-' . $comment->cid;
-                $comment->archivelink = 'https://web.archive.org/web/*/' . $comment->link;
+                $comment->link = 'http://trip.ee/node/'.$comment->nid.'#comment-'.$comment->cid;
+                $comment->link2 = 'http://trip2.test/node/'.$comment->nid.'#comment-'.$comment->cid;
+                $comment->archivelink = 'https://web.archive.org/web/*/'.$comment->link;
+
                 return $comment;
             });
 
         $nodes = $nodes->map(function ($node) use ($comments) {
             $node->comments = $comments->where('nid', $node->nid);
+
             return $node;
         })
             ->map(function ($node) {
@@ -185,6 +185,7 @@ MD;
                 } else {
                     $node->created_at = Carbon::createFromTimestamp($node->created);
                 }
+
                 return $node;
             })
             ->map(function ($node) {
@@ -192,9 +193,10 @@ MD;
                 $node->monthTitle = $node->created_at->format('M Y');
                 $node->created_at = $node->created_at->format('j. M Y');
                 $node->changed_at = Carbon::createFromTimestamp($node->changed)->format('j. M Y');
-                $node->link = 'http://trip.ee/node/' . $node->nid;
-                $node->link2 = 'http://trip2.test/node/' . $node->nid;
-                $node->archivelink = 'https://web.archive.org/web/*/' . $node->link;
+                $node->link = 'http://trip.ee/node/'.$node->nid;
+                $node->link2 = 'http://trip2.test/node/'.$node->nid;
+                $node->archivelink = 'https://web.archive.org/web/*/'.$node->link;
+
                 return $node;
             })
             ->sortBy('month')
@@ -207,7 +209,7 @@ MD;
                 ->push('<br>')
                 ->merge($nodes->flatMap(function ($monthNodes, $month) {
                     return collect()
-                        ->push(component('Title')->is('small')->with('title', $monthNodes->first()->monthTitle . ' (' . $monthNodes->count() . ' posts)'))
+                        ->push(component('Title')->is('small')->with('title', $monthNodes->first()->monthTitle.' ('.$monthNodes->count().' posts)'))
                         ->merge($monthNodes->flatMap(function ($n) {
                             return collect()
                                 ->push($this->card(collect()
@@ -235,9 +237,8 @@ MD;
             ->render();
     }
 
-  public function usersIndex()
+    public function usersIndex()
     {
-
         $pictureMap = [
             1 => 'https://web.archive.org/web/20070609230611if_/http://trip.ee/files/pictures/picture-1.jpg',
             2 => 'https://web.archive.org/web/20070609212559if_/http://www.trip.ee/files/pictures/picture-2.jpg',
@@ -293,15 +294,15 @@ MD;
 
                 $user->archivepicture = null;
                 if ($user->picture) {
-                    $user->archivepicture = 'https://web.archive.org/web/*/trip.ee/' . $user->picture;
+                    $user->archivepicture = 'https://web.archive.org/web/*/trip.ee/'.$user->picture;
                 }
                 $newUser = User::find($user->uid);
                 if ($newUser && $newUser->images->first()) {
-                    $user->image = 'https:/trip.ee/images/small_square/' . $newUser->images->first()['filename'];
+                    $user->image = 'https:/trip.ee/images/small_square/'.$newUser->images->first()['filename'];
                 }
                 if (array_key_exists($user->uid, $pictureMap)) {
                     $user->image = $pictureMap[$user->uid];
-                };
+                }
                 if ($user->uid == 1) {
                     $user->name = 'kika';
                     $user->access = '-';
@@ -318,7 +319,7 @@ MD;
                     $user->created = '-';
                 }
                 if (array_key_exists($user->uid, $friendMap)) {
-                    $user->name = $user->name . ' (' . $friendMap[$user->uid] . ')';
+                    $user->name = $user->name.' ('.$friendMap[$user->uid].')';
                 }
                 $user->content = DB::connection('trip')
                     ->table('node')
@@ -332,12 +333,14 @@ MD;
                     ->map(function ($link) {
                         $link->created = Carbon::createFromTimestamp($link->created)->format('j. M Y');
                         $link->changed = Carbon::createFromTimestamp($link->changed)->format('j. M Y');
-                        $link->archivelink = 'https://web.archive.org/web/*/trip.ee/node/' . $link->nid;
+                        $link->archivelink = 'https://web.archive.org/web/*/trip.ee/node/'.$link->nid;
+
                         return $link;
                     });
                 if ($user->uid == 12) {
                     $user->content = [];
                 }
+
                 return $user;
             });
 
@@ -349,8 +352,8 @@ MD;
                 ->push(component('Grid')
                     ->with('cols', 4)
                     ->with('gap', 2)
-                    ->with('widths','6 2 10 9')
-                    ->with('items', $users2->flatMap(function($user) {
+                    ->with('widths', '6 2 10 9')
+                    ->with('items', $users2->flatMap(function ($user) {
                         return collect()
                             ->push(component('Title')
                                 ->is('larger')
@@ -358,7 +361,7 @@ MD;
                                 ->is('center')
                                 ->with('title', $user->uid)
                             )
-                            ->push($user->image ? '<img style="display: block; width: 128px;" src=' . $user->image . ' />' : '<div style="width: 128px;height: 128px;background:#ddd;"></div>')
+                            ->push($user->image ? '<img style="display: block; width: 128px;" src='.$user->image.' />' : '<div style="width: 128px;height: 128px;background:#ddd;"></div>')
                             ->push(collect()
                                 ->push(component('Title')->is('small')->with('title', $user->name))
                                 ->push($this->card(collect()
@@ -367,28 +370,25 @@ MD;
                                     ->put('Login', $user->login)
                                     ->put('Init email', $user->init)
                                     ->put('Email', $user->mail)
-                                    ->put('Signature', "<br>".$user->signature)
+                                    ->put('Signature', '<br>'.$user->signature)
                                 ))
                                 ->render()
                                 ->implode('')
                             )
                             ->push(collect()
                                 ->push(component('Title')->is('smallest')->with('title', count($user->content) > 0 ? 'Forum posts' : ''))
-                                ->push(collect($user->content)->map(function($content) {
+                                ->push(collect($user->content)->map(function ($content) {
                                     return component('MetaLink')
-                                        ->with('title', $content->title. '<br>'.$content->created)
-                                        ->with('route', $content->archivelink)
-                                    ;
+                                        ->with('title', $content->title.'<br>'.$content->created)
+                                        ->with('route', $content->archivelink);
                                 })->render()->implode(''))
                                 ->render()
                                 ->implode('')
-                            )
-                        ;
+                            );
                     }))
                 )
             )
             ->render();
-
     }
 
     public function linksIndex()
@@ -405,13 +405,15 @@ MD;
             ->get()
             ->map(function ($link) {
                 $link->created = $link->created < 1 ? Carbon::create(1998, 1, 1, 0, 0, 0)->timestamp : $link->created;
+
                 return $link;
             })
             ->sortBy('created')
             ->map(function ($link) {
                 $link->created = Carbon::createFromTimestamp($link->created)->format('j. M Y');
                 $link->changed = Carbon::createFromTimestamp($link->changed)->format('j. M Y');
-                $link->archivelink = 'https://web.archive.org/web/*/' . $link->weblink;
+                $link->archivelink = 'https://web.archive.org/web/*/'.$link->weblink;
+
                 return $link;
             });
 
@@ -425,10 +427,10 @@ MD;
                 )
                 ->merge($weblinks->map(function ($q) {
                     return component('Body')->with('body', format_body(collect()
-                        ->push('####' . $q->title . ' ')
-                        ->push('[' . $q->weblink . '](' . $q->archivelink . ')')
-                        ->push('Original published at: ' . $q->created)
-                        ->push('Added to Trip: ' . $q->changed)
+                        ->push('####'.$q->title.' ')
+                        ->push('['.$q->weblink.']('.$q->archivelink.')')
+                        ->push('Original published at: '.$q->created)
+                        ->push('Added to Trip: '.$q->changed)
                         ->implode("\n")));
                 })))
             ->render();
@@ -465,21 +467,21 @@ MD;
             ->skip(request()->get('from', 0))
             ->orderBy('nid')
             ->get()
-            ->map(function($image) use ($imageMap) {
+            ->map(function ($image) use ($imageMap) {
                 $image->link = '';
                 if ($newImage = Content::find($image->nid)) {
                     $image->link = $newImage->imagePreset('medium');
                 }
-                if (array_key_exists($image->nid, $imageMap)) { 
+                if (array_key_exists($image->nid, $imageMap)) {
                     $image->link = $imageMap[$image->nid];
                 }
                 $image->nodelink = 'https://trip.ee/node/'.$image->nid;
                 $image->imagelink = 'https://trip.ee/images/original/'.basename($image->filepath);
                 $image->nodearchivelink = 'https://web.archive.org/web/*/http://trip.ee/node/'.$image->nid;
                 $image->imagearchivelink = 'https://web.archive.org/web/*/http://trip.ee/files/imagecache/trip_image_big/images/'.basename($image->filepath);
+
                 return $image;
-            })
-        ;
+            });
         // /return $images;
 
         return layout('Two')
@@ -488,7 +490,7 @@ MD;
                 ->push($this->pager('trip20.images'))
                 ->push('<br>')
             ->merge($images->map(function ($image) {
-                return component('Grid')->with('gap',2)->with('items', collect()
+                return component('Grid')->with('gap', 2)->with('items', collect()
                     ->push($this->card(collect()
                         ->put('Title', $image->title)
                         ->put('Created', $image->created)
@@ -499,7 +501,5 @@ MD;
             }))
         )
         ->render();
-
-
     }
 }

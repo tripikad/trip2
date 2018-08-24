@@ -384,7 +384,6 @@ Route::post('utils/format', 'UtilsController@format')
 
 // Trip20
 
-
 Route::get('trip20', 'Trip20Controller@aboutIndex')
     ->name('trip20.about');
 
@@ -399,8 +398,6 @@ Route::get('trip20/lingid', 'Trip20Controller@linksIndex')
 
 Route::get('trip20/fotod', 'Trip20Controller@imagesIndex')
     ->name('trip20.images');
-
-
 
 // Experiments
 
