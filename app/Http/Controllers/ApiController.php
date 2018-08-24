@@ -36,7 +36,7 @@ class ApiController extends Controller
             ->map(function ($f) {
                 return collect()
                     ->put('title', $f->title)
-                    ->put('image', $f->getHeadImage())
+                    ->put('image', $f->imagePreset('medium'))
                     ->put('body', format_body($f->body))
                 ;
             });
