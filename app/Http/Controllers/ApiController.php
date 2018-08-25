@@ -32,11 +32,11 @@ class ApiController extends Controller
 
     public function flights()
     {
-        $flights = Content::getLatestItems('flight', 24)
+        $flights = Content::getLatestItems('photo', 24)
             ->map(function ($f) {
                 return collect()
                     ->put('title', $f->title)
-                    ->put('image', $f->imagePreset('medium'))
+                    ->put('image', $f->imagePreset('original'))
                     ->put('body', format_body($f->body))
                 ;
             });
