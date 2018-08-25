@@ -2,7 +2,7 @@ var fs = require('fs')
 var path = require('path')
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
-var CleanWebpackPlugin = require('clean-webpack-plugin')
+//var CleanWebpackPlugin = require('clean-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -64,7 +64,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin('./public/dist'),
+        //new CleanWebpackPlugin('./public/dist'),
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash:6].css'
