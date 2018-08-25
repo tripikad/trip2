@@ -1,12 +1,12 @@
 var fs = require('fs')
 var path = require('path')
-var webpack = require('webpack')
 var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var SpriteLoaderPlugin = require('svg-sprite-loader/plugin')
 var CleanWebpackPlugin = require('clean-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin; // eslint-disable-line
 
 module.exports = {
     entry: {
@@ -70,11 +70,10 @@ module.exports = {
             filename: '[name].[contenthash:6].css'
         }),
         new SpriteLoaderPlugin(),
-        function() {
-            this.plugin('done', stats => {
-                var assets = stats.toJson()
-                    .assetsByChunkName
-                var manifest = {
+        new StatsWriterPlugin({
+            transform(data, opts) {
+                const assets = data.assetsByChunkName
+                const manifest = {
                     js: assets.main.find(
                         asset =>
                             path.extname(asset) === '.js'
@@ -92,8 +91,9 @@ module.exports = {
                     ),
                     JSON.stringify(manifest)
                 )
-            })
-        }
+                return ''
+            }
+        })
     ],
     resolve: {
         alias: {
