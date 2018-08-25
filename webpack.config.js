@@ -88,7 +88,7 @@ module.exports = {
                 fs.writeFileSync(
                     path.join(
                         __dirname,
-                        'public/dist/manifest.json'
+                        'public/manifest.json'
                     ),
                     JSON.stringify(manifest)
                 )

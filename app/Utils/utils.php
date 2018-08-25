@@ -106,7 +106,7 @@ function backToAnchor($anchor)
 
 function dist($type)
 {
-    $path = public_path('dist/manifest.json');
+    $path = public_path('manifest.json');
     $manifest = json_decode(file_get_contents($path), true);
 
     return '/dist/'.(is_array($manifest[$type]) ? $manifest[$type][0] : $manifest[$type]);
