@@ -120,29 +120,3 @@ if (process.env.NODE_ENV === 'production') {
         ]
     }
 }
-
-/*
-
-}, (err, stats) => {
-    const assets = stats.toJson().assetsByChunkName
-    const manifest = {
-        js: assets.main.find(
-            asset =>
-                path.extname(asset) === '.js'
-        ),
-        css: assets.main.find(
-            asset =>
-                path.extname(asset) === '.css'
-        ),
-        svg: 'main.svg'
-    }
-    fs.writeFileSync(
-        path.join(
-            __dirname,
-            'public/manifest.json'
-        ),
-        JSON.stringify(manifest)
-    )
-})
-
-*/
