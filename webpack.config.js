@@ -72,7 +72,6 @@ module.exports = {
         new SpriteLoaderPlugin(),
         new StatsWriterPlugin({
             transform(data, opts) {
-                console.log(data)
                 const assets = data.assetsByChunkName
                 const manifest = {
                     js: assets.main.find(
