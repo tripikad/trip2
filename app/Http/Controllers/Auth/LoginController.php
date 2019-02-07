@@ -56,7 +56,7 @@ class LoginController extends Controller
                 ->push(component('Form')
                     ->with('route', route('login.submit'))
                     ->with('fields', collect()
-                        ->push(Honeypot::generate('full_name', 'time'))
+                        //->push(Honeypot::generate('full_name', 'time'))
                         ->push(component('FormTextfield')
                             ->is('large')
                             ->with('title', trans('auth.login.field.name.title'))
@@ -99,8 +99,8 @@ class LoginController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'password' => 'required',
-            'full_name'   => 'honeypot',
-            'time'   => 'required|honeytime:2',
+            //'full_name'   => 'honeypot',
+            //'time'   => 'required|honeytime:2',
         ]);
 
         if ($this->signIn($request)) {
