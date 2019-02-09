@@ -46,7 +46,7 @@
         @include('utils.googleTag')
         @include('utils.analytics')
         {{--@include('utils.hotjar')--}}
-        @include('utils.viglink')
+        {{--@include('utils.viglink')--}}
         @stack('scripts')
     </body>
 </html>
