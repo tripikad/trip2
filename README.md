@@ -33,7 +33,7 @@ mysql -uroot trip2 < dump.sql
 
 ### Getting production images
 
-In your `.env` file set the following parameter:
+In your `.env` file set the uncomment the following parameter:
 
 ```
 IMAGE_PATH=https://trip.ee/images/
