@@ -45,7 +45,6 @@
         @include('utils.facebook')
         @include('utils.googleTag')
         @include('utils.analytics')
-
         {{--@include('utils.hotjar')--}}
         {{--@include('utils.viglink')--}}
         @stack('scripts')
