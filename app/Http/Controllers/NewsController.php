@@ -119,6 +119,11 @@ class NewsController extends Controller
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $new))
             )
 
+            ->with('sidebar', collect()
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
+            )
+
             ->with('bottom', collect()
                 ->push(region('NewsBottom', $flights, $forums, $travelmates))
                 ->push(component('Promo')->with('promo', 'footer'))
