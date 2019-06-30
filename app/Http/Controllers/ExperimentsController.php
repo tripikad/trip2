@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Content;
 use App\Destination;
 
 class ExperimentsController extends Controller

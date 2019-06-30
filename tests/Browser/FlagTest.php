@@ -2,7 +2,6 @@
 
 namespace Tests\Browser;
 
-use App\Flag;
 use App\User;
 use App\Content;
 use Tests\DuskTestCase;

@@ -169,6 +169,7 @@ class FlightController extends Controller
             ))
 
             ->with('content', collect()
+                ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
                 ->push(region('Share'))
                 ->merge($flight->comments->map(function ($comment) {
