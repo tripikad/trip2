@@ -1,6 +1,5 @@
 <?php
 
-
 // Frontpage
 
 Route::get('/', 'FrontpageController@index')
