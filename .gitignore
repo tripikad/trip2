@@ -10,8 +10,7 @@ npm-debug.log
 public/sitemap.xml
 public/sitemap*
 public/vendor/sitemap
-public/build
 
 _ide_helper.php
 public/dist
-
+public/manifest.json

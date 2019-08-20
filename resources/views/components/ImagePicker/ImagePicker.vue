@@ -31,9 +31,6 @@ export default {
     components: {
         ImageUpload
     },
-    props: {
-        route: { default: '' }
-    },
     data: () => ({
         show: false,
         images: [],
@@ -49,15 +46,16 @@ export default {
             })
         },
         getImages() {
-            this.$http.get(this.route).then(res => {
-                this.images = res.data
-            })
+            this.$http
+                .get(this.$globalProps.imagePickerRoute)
+                .then(res => {
+                    this.images = res.data
+                })
         }
     },
     mounted() {
-        this.getImages()
-
         this.$events.$on('imagepicker.show', target => {
+            this.getImages()
             this.show = true
             this.target = target
         })

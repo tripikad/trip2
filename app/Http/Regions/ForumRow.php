@@ -26,7 +26,7 @@ class ForumRow
             ->with('route', $route)
             ->with('user', component('UserImage')
                 ->with('route', route('user.show', [$forum->user]))
-                ->with('image', $forum->user->vars()->imagePreset('small_square'))
+                ->with('image', $forum->user->vars()->imagePreset('xsmall_square'))
                 ->with('rank', $forum->user->vars()->rank)
                 ->with('size', 58)
                 ->with('border', 3)

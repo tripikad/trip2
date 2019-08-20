@@ -27,6 +27,9 @@
 
 <script>
 import pell from 'pell'
+import TurndownService from 'turndown'
+
+let turndownService = new TurndownService({ headingStyle: 'atx' })
 
 export default {
     props: {
@@ -88,7 +91,7 @@ export default {
     mounted() {
         this.editor = pell.init({
             element: this.$refs.EditorComment,
-            onChange: value => (this.localValue = value),
+            onChange: value => (this.localValue = turndownService.turndown(value)),
             actions: [
                 {
                     icon: 'Rõhutatud',

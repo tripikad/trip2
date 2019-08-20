@@ -104,12 +104,12 @@ valet restart
 ```sh
 npm run dev # Unminified and fast dev build
 npm run build # Minified and slow production build
-npm run watch # Watching the assets
+npm run watch # Unminified and fast dev build, recompiling on file change
 ```
 
 ### Build process
 
-The main entrypoint is `./resources/views/main.js` what boots up a Vue instance and includes all the neccessary assets:
+The main entrypoint is `./resources/views/main.js` what boots up a Vue instance and includes all the neccessary assets.
 
 #### JS
 
@@ -130,10 +130,11 @@ are compiled and minified to
 Vue components can also be lazy-loaded, most useful for components that have large dependecies.
 
 ```vue
-// FormEditor.vue
-// ...
+<template>
+    // ...
+    <component :is="'Editor'" />
+</template>
 <script>
-
 export default {
   components: {
     Editor: () =>
@@ -142,23 +143,8 @@ export default {
 // ...
 ```
 
-This creates an extra package `main.0.hash.js` that is loaded on demand via ajax when `FormEditor` component is on the page.
+This creates an extra packages `main.0.hash.js`, `main.1.hash.js` etc which are loaded on demand via ajax when `Editor` component is on the page.
 
-Optionally one can add a comment that gives a bit clearer package name:
-
-```vue
-// FormEditor.vue
-// ...
-<script>
-export default {
-  components: {
-    Editor: () =>
-      import(/* webpackChunkName: "editor" */ "../../components_lazy/Editor/Editor.vue")
-  },
-// ...
-```
-
-This creates an named extra package `main.editor.hash.js`
 
 #### CSS
 
@@ -234,26 +220,46 @@ Blocks:
 .AnotherComponent {}
 ```
 
-Elements:
+Elements (note the spacing):
 
 ```css
-.Component__element {}
-.AnotherComponent__anotherElement {}
+    .Component__element {}
+    .AnotherComponent__anotherElement {}
 ```
 
-Modifiers:
+Modifiers
 
 ```css
 .Component--modifier {}
 .AnotherComponent--anotherModifier {}
 ```
 
-#### Variables
+#### Style variables in CSS
 
-A Sass-like `$variable` syntax is supported via [postcss-simple-vars](https://github.com/postcss/postcss-simple-vars). Use global variables from [/resources/views/styles/variables.css](/resources/views/styles/variables.css) by importing them to CSS file:
+Variables are located in `/resources/views/styles/variables.json` and `/resources/views/styles/variables.css` and can be imported as
 
 ```scss
-@import "variables" // Resolves to ./resources/views/styles/variables.css
+@import "variables" // Resolves to ./resources/views/styles/variables.json|css
+
+.Component {
+    height: $spacer;
+}
+```
+
+#### Style variables in PHP
+
+Variables in `/resources/views/styles/variables.json` can be used in Blade templates:
+
+```blade
+{{ styleVars()->spacer }} 
+```
+
+#### Style variables in Vue
+
+Variables in `/resources/views/styles/variables.json` can be used in Vue templates:
+
+```js
+this.$styleVars.spacer
 ```
 
 #### Fonts
@@ -364,7 +370,6 @@ adjust user configuration as follows:
 ```json
     "eslint.validate": [
         "javascript",
-        "javascriptreact",
         {
             "language": "vue",
             "autoFix": true

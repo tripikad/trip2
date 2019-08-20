@@ -5,7 +5,7 @@
     display: flex;
     height: calc($spacer * 6);
     align-items: center;
-    padding: 0 calc($spacer * 1.5) 0 calc($spacer * 1.5);
+    padding: 0 calc($spacer * 1.5);
 }
 
     .DestinationBar__parents {
@@ -13,7 +13,7 @@
         display: flex;
         font: $font-heading-md;
         align-items: center;
-        --background: black;
+        opacity: $opacity-md;
     }
 
     .DestinationBar__parents > div {
@@ -23,12 +23,16 @@
     .DestinationBar__title {
         color: $white;
         font: $font-heading-lg;
-        --background: red;
+        margin-top: calc($margin-xxs * -1);
     }
 
     .DestinationBar__title:hover {
         color: $white-hover;
     }
+
+.DestinationBar--yellow {
+    background: $yellow; /* default; */
+}
 
 .DestinationBar--purple {
     background: $purple;
@@ -36,4 +40,8 @@
 
 .DestinationBar--red {
     background: $red;
+}
+
+.DestinationBar--green {
+    background: $green;
 }

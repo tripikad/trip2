@@ -169,6 +169,7 @@ class FlightController extends Controller
             ))
 
             ->with('content', collect()
+                ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Body')->is('responsive')->with('body', $flight->vars()->body))
                 ->push(region('Share'))
                 ->merge($flight->comments->map(function ($comment) {
@@ -211,7 +212,6 @@ class FlightController extends Controller
         return layout('Two')
 
             ->with('header', region('Header', collect()
-                ->push(component('EditorScript'))
                 ->push(component('Title')
                     ->is('white')
                     ->with('title', trans('content.flight.index.title'))
@@ -313,7 +313,6 @@ class FlightController extends Controller
         return layout('Two')
 
             ->with('header', region('Header', collect()
-                ->push(component('EditorScript'))
                 ->push(component('Title')
                     ->is('white')
                     ->with('title', trans('content.flight.index.title'))

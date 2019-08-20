@@ -3,14 +3,14 @@
 $background = $background ?? '';
 $route = $route ?? '';
 $title = $title ?? '';
-$height = $height ?? 15;
-$opacity = $opacity ?? 0.3;
+$height = $height ?? 12;
+$opacity = $opacity ?? 0.25;
 
 @endphp
 
 <div class="ExperimentalCard {{ $isclasses }}" 
     style="
-        height: calc({{ $height}} * 12px);
+        min-height: calc({{ $height}} * {{ styleVars()->spacer }});
         background-image: linear-gradient(
             rgba(0, 0, 0, {{ $opacity }}),
             rgba(0, 0, 0, {{ $opacity }})

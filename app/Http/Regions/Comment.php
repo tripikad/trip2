@@ -15,7 +15,7 @@ class Comment
             ->with('id', $comment->id)
             ->with('user', component('UserImage')
                 ->with('route', route('user.show', [$comment->user]))
-                ->with('image', $comment->user->imagePreset('small_square'))
+                ->with('image', $comment->user->imagePreset('xsmall_square'))
                 ->with('rank', $comment->user->vars()->rank)
             )
             ->with('meta', component('Meta')->with('items', collect()

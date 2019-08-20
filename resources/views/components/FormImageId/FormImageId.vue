@@ -14,10 +14,6 @@
             @focus="$events.$emit('imagepicker.show', name)"
         >
 
-        <!--div v-if="image">
-            <img class="FormImageId__image" :src="image" />
-        </div-->
-
     </div>
 
 </template>

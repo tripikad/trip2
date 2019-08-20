@@ -17,6 +17,8 @@
                     'promo' => config('promo'),
                     'imageUploadRoute' => route('image.store'),
                     'imageUploadTitle' => trans('image.drop.title'),
+                    'imagePickerRoute' => route('image.index'),
+                    'formatRoute' => route('utils.format')
                 ])) 
             }}
         ">
@@ -26,7 +28,6 @@
     </head>
     <body>
         @include('utils.svg')
-        @stack('prescripts')
         <div id="app" class="background-{{ $color }}">
             @yield('background')
             @yield('promobar')
@@ -35,21 +36,17 @@
             {!! component('HeaderError') !!}
             @yield('content')
             @yield('footer')
-            {!! component('ImagePicker')
-                ->with('route', route('image.index'))
-            !!}
-            {!! component('Editor')
-                ->with('route', route('utils.format'))
-            !!}
+            {!! component('Editor')!!}
+            {!! component('ImagePicker') !!}
             {!! component('Alert') !!}
-
         </div>
         <script defer src="{{ dist('js') }}"></script>
         @include('utils.promo')
         @include('utils.facebook')
         @include('utils.googleTag')
         @include('utils.analytics')
-        @include('utils.hotjar')
+        {{--@include('utils.hotjar')--}}
+        {{--@include('utils.viglink')--}}
         @stack('scripts')
     </body>
 </html>

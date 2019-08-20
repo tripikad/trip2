@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Hash;
 use App\User;
 use App\Image;
-use App\Content;
 use App\Destination;
 use App\NewsletterType;
 

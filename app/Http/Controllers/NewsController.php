@@ -112,11 +112,17 @@ class NewsController extends Controller
             ))
 
             ->with('content', collect()
+                ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Body')->is('responsive')->with('body', $new->vars()->body))
                 ->merge($new->comments->map(function ($comment) {
                     return region('Comment', $comment);
                 }))
                 ->pushWhen($user && $user->hasRole('regular'), region('CommentCreateForm', $new))
+            )
+
+            ->with('sidebar', collect()
+                ->push(component('Promo')->with('promo', 'sidebar_small'))
+                ->push(component('Promo')->with('promo', 'sidebar_large'))
             )
 
             ->with('bottom', collect()
@@ -137,7 +143,6 @@ class NewsController extends Controller
         return layout('Two')
 
             ->with('header', region('Header', collect()
-                ->push(component('EditorScript'))
                 ->push(component('Title')
                     ->is('white')
                     ->with('title', trans('content.news.index.title'))
@@ -258,7 +263,6 @@ class NewsController extends Controller
         return layout('Two')
 
             ->with('header', region('Header', collect()
-                ->push(component('EditorScript'))
                 ->push(component('Title')
                     ->is('white')
                     ->with('title', trans('content.news.index.title'))
