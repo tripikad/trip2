@@ -30,6 +30,7 @@
     <env name="SESSION_DRIVER" value="array"/>
     <env name="QUEUE_DRIVER" value="sync"/>
     <env name="IMAGE_DRIVER" value="gd"/>
-    <env name="MAIL_DRIVER" value="log"/>
+    <env name="MAIL_DRIVER" value="array"/>
+    <env name="BCRYPT_ROUNDS" value="4"/>
 </php>
 </phpunit>

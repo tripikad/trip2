@@ -268,6 +268,7 @@ class Content extends Model
                     //->addSelect('contents.*')
                     ->where('content_topic.topic_id', '=', $topic);
             })
+            ->select('contents.*')
             ->distinct()
             ->simplePaginate($take);
     }

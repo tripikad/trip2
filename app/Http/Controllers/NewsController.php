@@ -112,6 +112,7 @@ class NewsController extends Controller
             ))
 
             ->with('content', collect()
+                ->push(component('Promo')->with('promo', 'body'))
                 ->push(component('Body')->is('responsive')->with('body', $new->vars()->body))
                 ->merge($new->comments->map(function ($comment) {
                     return region('Comment', $comment);
