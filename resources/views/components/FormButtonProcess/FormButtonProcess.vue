@@ -25,9 +25,14 @@ export default {
     }),
 
     methods: {
-        onClick() {
-            this.processing = true
-            document.getElementById(this.id).submit()
+        onClick(e) {
+            e.preventDefault();
+            if (this.processing === false) {
+                this.processing = true;
+                document.getElementById(this.id).submit();
+            }
+
+            return false;
         }
     }
 }
