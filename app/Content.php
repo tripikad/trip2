@@ -3,7 +3,6 @@
 namespace App;
 
 use Auth;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable as Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers as SlugHelper;
@@ -219,7 +218,7 @@ class Content extends Model
     public function getHeadImage()
     {
         //fix for using copyrighted images
-        if ($this->type === 'flight' && $this->created_at->format('YYYY-MM-DD')  <= $this::FLIGHT_IMAGE_DATE) {
+        if ($this->type === 'flight' && $this->created_at->format('YYYY-MM-DD') <= $this::FLIGHT_IMAGE_DATE) {
             return Image::getFlightHeader();
         }
 
