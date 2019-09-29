@@ -11,6 +11,8 @@ class Content extends Model
 {
     use Sluggable, SlugHelper;
 
+    const FLIGHT_IMAGE_DATE = '2019-08-15';
+
     // Setup
 
     protected $fillable = ['user_id', 'type', 'title', 'body', 'url', 'image', 'status', 'start_at', 'end_at', 'duration', 'price'];
@@ -215,6 +217,11 @@ class Content extends Model
 
     public function getHeadImage()
     {
+        //fix for using copyrighted images
+        if ($this->type === 'flight' && $this->created_at->format('YYYY-MM-DD') <= $this::FLIGHT_IMAGE_DATE) {
+            return Image::getFlightHeader();
+        }
+
         return $this->imagePreset('large');
     }
 
