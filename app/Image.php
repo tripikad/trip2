@@ -189,4 +189,9 @@ class Image extends Model
     {
         return config('app.url').'photos/social.jpg';
     }
+
+    public static function getFlightHeader()
+    {
+        return config('app.url').'photos/flight_header.jpg';
+    }
 }
