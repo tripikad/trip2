@@ -218,7 +218,7 @@ class Content extends Model
     public function getHeadImage()
     {
         //fix for using copyrighted images
-        if ($this->type === 'flight' && $this->created_at->format('YYYY-MM-DD') <= $this::FLIGHT_IMAGE_DATE) {
+        if ($this->type === 'flight' && $this->created_at->format('Y-m-d') <= $this::FLIGHT_IMAGE_DATE) {
             return Image::getFlightHeader();
         }
 
