@@ -28,8 +28,8 @@ class MessageController extends Controller
                     ->with('title', trans('message.index.title'))
                 )
                 ->merge($messages->map(function ($message) use ($user) {
-                    if (get_class($message->fromUser) != User::class) {
-                        return;
+                    if (!$message->fromUser || get_class($message->fromUser) !== User::class) {
+                        return null;
                     }
 
                     return region('MessageRow', $message, $user);
