@@ -70,6 +70,19 @@ return [
             'strict'    => false,
         ],
 
+        'remote_staging' => [
+            'driver'    => 'mysql',
+            'host'      => env('REMOTE_STAGING_DB_HOST', ''),
+            'port'      => env('REMOTE_STAGING_DB_PORT', ''),
+            'database'  => env('REMOTE_STAGING_DB_DATABASE', ''),
+            'username'  => env('REMOTE_STAGING_DB_USERNAME', ''),
+            'password'  => env('REMOTE_STAGING_DB_PASSWORD', ''),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
     ],
 
     /*
