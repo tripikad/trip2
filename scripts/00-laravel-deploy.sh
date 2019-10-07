@@ -11,3 +11,7 @@ php artisan route:cache
 
 echo "Running migrations..."
 php artisan migrate --force
+
+echo "Running frontend build"
+npm install
+npm run build
