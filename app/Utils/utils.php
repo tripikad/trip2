@@ -118,7 +118,6 @@ function dist($type)
     ];
 
     return $manifest[$type];
-
 }
 
 function format_link($route, $title, $blank = false)
