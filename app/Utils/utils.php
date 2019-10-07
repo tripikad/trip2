@@ -106,10 +106,19 @@ function backToAnchor($anchor)
 
 function dist($type)
 {
-    $path = public_path('manifest.json');
-    $manifest = json_decode(file_get_contents($path), true);
+    //$path = public_path('manifest.json');
+    //$manifest = json_decode(file_get_contents($path), true);
 
-    return '/dist/'.(is_array($manifest[$type]) ? $manifest[$type][0] : $manifest[$type]);
+    // return '/dist/'.(is_array($manifest[$type]) ? $manifest[$type][0] : $manifest[$type]);
+
+    $manifest = [
+        'js' => 'https://trip-staging-static.onrender.com/main.f2c1d4.js',
+        'css' => 'https://trip-staging-static.onrender.com/main.c2aa21.css',
+        'svg' => 'https://trip-staging-static.onrender.com/main.svg',
+    ];
+
+    return $manifest[$type];
+
 }
 
 function format_link($route, $title, $blank = false)
