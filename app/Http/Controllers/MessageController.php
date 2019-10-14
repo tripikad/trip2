@@ -102,7 +102,8 @@ class MessageController extends Controller
         if ($user_to->notify_message) {
             $user_from = User::find($user_id_from);
 
-            Mail::to($user_to->email)->queue(new NewMessage($user_from, $user_to, $message));
+            //todo: fix sendgrid authentication && uncomment
+            //Mail::to($user_to->email)->queue(new NewMessage($user_from, $user_to, $message));
         }
 
         Log::info('A private message has been sent');
