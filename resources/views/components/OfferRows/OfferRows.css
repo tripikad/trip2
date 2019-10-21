@@ -1,0 +1,31 @@
+@import "variables";
+
+.OfferRows {
+    border: 3px solid $red;
+}
+
+/*
+
+.Paginator {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: -$margin-sm;
+}
+
+.Paginator__item {
+
+    display: inline-block;
+    margin-right: $margin-sm;
+    margin-top: $margin-sm;
+}
+
+.Paginator__button {
+    display: inline-block;
+    padding: $padding-sm $padding-md;
+    background: $gray-light;
+    border-radius: $border-radius-md;
+    font: $font-text-md;
+    line-height: $line-height-xs;
+    color: $gray;
+}*/

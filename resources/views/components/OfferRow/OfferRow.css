@@ -1,0 +1,10 @@
+@import "variables";
+
+.OfferRow {
+    border: 3px solid $blue;
+}
+
+.OfferRow__title {
+  font: $font-text-lg;
+  color: $gray;
+}

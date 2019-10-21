@@ -10,8 +10,8 @@
       {
         "tabWidth": 4,
         "printWidth": 60,
-        "semi": false,
-        "singleQuote": true
+        "semi": true,
+        "singleQuote": false
       }
     ],
     "vue/html-indent": ["error", 4, { "alignAttributesVertically": false }],
