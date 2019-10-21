@@ -1,10 +1,60 @@
 @import "variables";
 
 .OfferRow {
-    border: 3px solid $blue;
+  display: flex;
 }
 
+.OfferRow__image {
+  width: $width-md !important;
+  height: $height-md;
+  object-fit: cover;
+  margin-right: $margin-md;
+}
 .OfferRow__title {
   font: $font-text-lg;
-  color: $gray;
+  color: $blue;
+  font: $font-heading-lg;
+  margin-bottom: $margin-xxs;
 }
+
+.OfferRow__meta {
+  font: $font-text-sm;
+  color: $gray;
+  display: flex;
+}
+
+.OfferRow__meta > * {
+  margin-right: $margin-xl;
+}
+/*
+
+@import "variables";
+
+.FlightRow {
+    display: flex;
+}
+
+    .FlightRow__left {
+        display: flex;
+        display: none ?if $mobile;
+        align-items: top;
+        padding-right: $padding-sm;
+    }
+
+    .FlightRow__right {
+        display: flex;
+        align-items: center;
+    }
+
+    .FlightRow__title {
+        color: $blue;
+        font: $font-heading-lg;
+        margin-bottom: $margin-xxs;
+    }
+
+    .FlightRow__title:hover {
+        color: $blue-hover;
+    }
+
+
+    */

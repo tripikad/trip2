@@ -1,7 +1,10 @@
 @import "variables";
 
 .OfferRows {
-    border: 3px solid $red;
+}
+
+.OfferRows > * {
+    margin-bottom: $margin-md;
 }
 
 /*

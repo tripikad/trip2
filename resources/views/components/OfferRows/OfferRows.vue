@@ -13,7 +13,7 @@ export default {
     isclasses: { default: "" }
   },
   data: () => ({
-    offers: ["hello", "world"],
+    offers: [],
     id: '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE'
   }),
   mounted() {
