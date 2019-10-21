@@ -469,6 +469,11 @@ Route::get('index.atom', ['middleware' => 'throttle:60,1', 'uses' => 'FeedContro
 
 Route::get('lendude_sooduspakkumised/rss', ['middleware' => 'throttle:60,1', 'uses' => 'FeedController@flightFeed', 'as' => 'flight.feed']);
 
+// Offers
+
+Route::get('offers', 'OfferController@index')
+    ->middleware('role:admin');
+
 // Legacy user paths
 
 Route::get('user/{id}/forum', 'RedirectController@redirectUser');

@@ -1,0 +1,8 @@
+@import "variables";
+
+.OfferRows {
+}
+
+.OfferRows > * {
+    margin-bottom: $margin-md;
+}

@@ -1,0 +1,28 @@
+@import "variables";
+
+.OfferRow {
+  display: flex;
+}
+
+.OfferRow__image {
+  width: $width-md !important;
+  height: $height-md;
+  object-fit: cover;
+  margin-right: $margin-md;
+}
+.OfferRow__title {
+  font: $font-text-lg;
+  color: $blue;
+  font: $font-heading-lg;
+  margin-bottom: $margin-xxs;
+}
+
+.OfferRow__meta {
+  font: $font-text-sm;
+  color: $gray;
+  display: flex;
+}
+
+.OfferRow__meta > * {
+  margin-right: $margin-xl;
+}
