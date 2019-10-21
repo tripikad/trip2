@@ -1,5 +1,5 @@
 <?php
 
 return [
-  'index.title' => 'Offers'
+  'index.title' => 'Offers',
 ];

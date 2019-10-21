@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 class OfferController extends Controller
 {
-  public function index()
-  {
-    return layout('Two')
+    public function index()
+    {
+        return layout('Two')
       ->with(
         'header',
         region(
@@ -23,5 +23,5 @@ class OfferController extends Controller
         collect()->push(component('OfferRows')->with('title', 'I am Offers'))
       )
       ->render();
-  }
+    }
 }
