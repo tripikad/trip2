@@ -8,6 +8,7 @@
                 v-model="activeDestination"
             />
             <form-select placeholder="Style" :options="styles" v-model="activeStyle" />
+            <a v-if="!notFiltered" @click="handleClearFilters" class="Button Button--gray">Show all</a>
         </div>
         <!--
         <form-select-multiple :options="options" v-model="activeOptions" />
@@ -34,6 +35,13 @@ export default {
         activeStyle: -1
     }),
     computed: {
+        notFiltered() {
+            return (
+                this.activeCompany == -1 &&
+                this.activeDestination == -1 &&
+                this.activeStyle == -1
+            )
+        },
         companies() {
             return unique(
                 this.offers.map(o => o.company)
@@ -107,6 +115,11 @@ export default {
                 return data.filter(d => d.id == id)[0][key]
             }
             return null
+        },
+        handleClearFilters() {
+            this.activeCompany = -1
+            this.activeDestination = -1
+            this.activeStyle = -1
         }
     },
     mounted() {
