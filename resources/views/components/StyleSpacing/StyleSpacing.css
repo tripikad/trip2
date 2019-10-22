@@ -1,0 +1,21 @@
+@import "variables";
+
+.StyleSpacing {
+    display: flex;
+}
+
+.StyleSpacing__example {
+    width: $padding-xxxl;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: $padding-sm;
+}
+
+.StyleSpacing__example > div {
+    border: 1px solid $gray;
+}
+
+.StyleSpacing__title {
+    font: $font-code-sm;
+    color: $gray;
+}

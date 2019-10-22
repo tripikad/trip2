@@ -1,4 +1,4 @@
-module.exports = {
+{
     "spacer": "12px",
 
     "blue": "hsl(205, 82%, 57%)",
@@ -42,8 +42,6 @@ module.exports = {
     "white": "hsl(0, 0%, 100%)",
     "white-hover": "hsla(0, 0%, 100%, 0.9)",
 
-    "black": "#000",
-
     "gray-lighter": "hsl(204, 6%, 97%)",
     "gray-lighter-hover": "hsl(204, 6%, 72%)",
 
@@ -54,5 +52,17 @@ module.exports = {
     "gray-hover": "hsl(204, 6%, 40%)",
 
     "gray-dark": "hsl(204, 6%, 45%)",
-    "gray-dark-hover": "hsl(204, 6%, 30%)"
+    "gray-dark-hover": "hsl(204, 6%, 30%)",
+
+    "black": "hsl(0,0%,0%)",
+
+    "padding-xxxs": "calc($spacer / 4)",
+    "padding-xxs": "calc($spacer / 3)",
+    "padding-xs": "calc($spacer / 2)",
+    "padding-sm": "$spacer",
+    "padding-md": "calc($spacer * 2)",
+    "padding-lg": "calc($spacer * 3)",
+    "padding-xl": "calc($spacer * 5)",
+    "padding-xxl": "calc($spacer * 7)",
+    "padding-xxxl": "calc($spacer * 16)"
 }

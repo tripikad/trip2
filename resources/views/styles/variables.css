@@ -93,7 +93,7 @@ $font-code-md: $font-weight-normal $font-size-md / $line-height-md $font-family-
 
 /* Spacing */
 
-/* $spacer is defined in variables.css */
+/* $spacer is defined in variables.json */
 
 $padding-xxxs: calc($spacer / 4);
 $padding-xxs: calc($spacer / 3);
@@ -104,6 +104,7 @@ $padding-lg: calc($spacer * 3);
 $padding-xl: calc($spacer * 5);
 $padding-xxl: calc($spacer * 7);
 $padding-xxxl: calc($spacer * 16);
+
 $padding-top-xs: $padding-xs 0 0 0;
 $padding-top-sm: $padding-sm 0 0 0;
 $padding-top-md: $padding-md 0 0 0;
