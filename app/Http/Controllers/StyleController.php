@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-<<<<<<< HEAD
 use App\Content;
-=======
->>>>>>> origin/kika-offers-2
 
 class StyleController extends Controller
 {
