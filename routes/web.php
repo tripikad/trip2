@@ -525,11 +525,6 @@ Route::post(
 )->name('experiments.select.create');
 
 Route::get(
-    'experiments/fonts',
-    'ExperimentsController@fontsIndex'
-)->name('experiments.fonts.index');
-
-Route::get(
     'experiments/map',
     'ExperimentsController@mapIndex'
 )->name('experiments.map.index');
@@ -543,11 +538,6 @@ Route::get(
     'experiments/two',
     'ExperimentsLayoutController@indexTwo'
 )->name('experiments.layouts.two');
-
-Route::get(
-    'experiments/grid',
-    'ExperimentsLayoutController@indexGrid'
-)->name('experiments.layouts.grid');
 
 Route::get(
     'experiments/frontpage',
@@ -697,7 +687,7 @@ Route::get('offers', 'OfferController@index')->middleware(
     'role:admin'
 );
 
-Route::get('style', 'StyleController@index');
+Route::get('styles', 'StyleController@index');
 
 // Legacy user paths
 

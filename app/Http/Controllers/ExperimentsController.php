@@ -41,11 +41,6 @@ class ExperimentsController extends Controller
                 )
 
                 ->push(component('MetaLink')
-                    ->with('title', 'Fonts')
-                    ->with('route', route('experiments.fonts.index'))
-                )
-
-                ->push(component('MetaLink')
                     ->with('title', 'Map')
                     ->with('route', route('experiments.map.index'))
                 )
@@ -62,11 +57,6 @@ class ExperimentsController extends Controller
                 ->push(component('MetaLink')
                     ->with('title', 'Two')
                     ->with('route', route('experiments.layouts.two'))
-                )
-
-                ->push(component('MetaLink')
-                    ->with('title', 'Grid')
-                    ->with('route', route('experiments.layouts.grid'))
                 )
 
                 ->push(component('MetaLink')
@@ -142,14 +132,4 @@ class ExperimentsController extends Controller
         ->render();
     }
 
-    public function fontsIndex()
-    {
-        return layout('Two')
-
-            ->with('content', collect()
-                ->push(component('ExperimentalFont'))
-            )
-
-            ->render();
-    }
 }

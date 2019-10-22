@@ -2,15 +2,15 @@
 
 .StyleSpacing {
     display: flex;
-    height: calc($spacer * 10);
-    overflow: auto;
+    min-height: calc($spacer * 10);
 }
 
 .StyleSpacing__example {
-    width: calc($padding-xxxl * 1.3);
     display: flex;
     justify-content: flex-end;
     padding-right: $padding-sm;
+    overflow: auto;
+    width: calc($spacer * 10);
 }
 
 .StyleSpacing__example > div {
