@@ -7,7 +7,7 @@ module.exports = {
             ]
         }),
         require('postcss-simple-vars')({
-            variables: require('./resources/views/styles/variables.json'),
+            variables: () => require('./resources/views/styles/variables.js'),
             silent: true
         }),
         require('postcss-responsive-type')(),

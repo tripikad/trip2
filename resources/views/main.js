@@ -55,7 +55,7 @@ Vue.prototype.$globalProps = globalProps
 
 // Set up style variables
 
-Vue.prototype.$styleVars = require('./styles/variables.json')
+Vue.prototype.$styleVars = require('./styles/variables.js')
 
 // Set up Axios
 
