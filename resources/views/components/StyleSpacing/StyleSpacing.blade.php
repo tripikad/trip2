@@ -18,7 +18,7 @@ $value = $value ?? '';
 
     <div class="StyleSpacing__title">
 
-        {{ $key }} / {{ $value }}
+        {{ $key }} <br> {{ $value }}
 
     </div>
 

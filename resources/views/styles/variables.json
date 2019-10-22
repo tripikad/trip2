@@ -64,5 +64,15 @@
     "padding-lg": "calc($spacer * 3)",
     "padding-xl": "calc($spacer * 5)",
     "padding-xxl": "calc($spacer * 7)",
-    "padding-xxxl": "calc($spacer * 16)"
+    "padding-xxxl": "calc($spacer * 16)",
+
+    "width-xxs": "calc($spacer / 2)",
+    "width-xs": "calc($spacer)",
+    "width-sm": "calc($spacer * 2)",
+    "width-md": "calc($spacer * 4)",
+    "width-lg": "calc($spacer * 6)",
+    "width-xl": "calc($spacer * 12)",
+    "width-xxl": "calc($spacer * 15)",
+    "width-xxxl": "calc($spacer * 24)",
+    "width-xxxxl": "calc($spacer * 32)"
 }

@@ -32,6 +32,25 @@ class StyleController extends Controller
                     ->with('key', $key)
                     ->with(
                         'value',
+                        str_replace('$spacer', $spacer, $value)
+                    );
+            });
+    }
+
+    public function widths()
+    {
+        $spacer = styleVars()->spacer;
+
+        return collect(styleVars())
+            ->filter(function ($value, $key) {
+                return starts_with($key, 'width-');
+            })
+            ->dump()
+            ->map(function ($value, $key) use ($spacer) {
+                return component('StyleSpacing')
+                    ->with('key', $key)
+                    ->with(
+                        'value',
                         str_replace(
                             '$spacer',
                             $spacer,
@@ -52,7 +71,23 @@ class StyleController extends Controller
                             ->is('large')
                             ->with('title', 'Styles')
                     )
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->with('title', 'Spacings')
+                    )
                     ->merge($this->spacings())
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->with('title', 'Widths')
+                    )
+                    ->merge($this->widths())
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->with('title', 'Colors')
+                    )
                     ->merge($this->colors())
             )
             ->render();
