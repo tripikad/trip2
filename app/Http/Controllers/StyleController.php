@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+<<<<<<< HEAD
 use App\Content;
+=======
+>>>>>>> origin/kika-offers-2
 
 class StyleController extends Controller
 {
@@ -9,7 +12,7 @@ class StyleController extends Controller
     {
         return collect(styleVars())
             ->filter(function ($value, $key) {
-                return !ends_with($key, '-hover') &&
+                return ! ends_with($key, '-hover') &&
                     starts_with($value, 'hsl');
             })
             ->map(function ($value, $key) {
