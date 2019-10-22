@@ -1,6 +1,10 @@
 <template>
-    <div class="OfferRows" :class="isclasses">
-        <OfferRow v-for="(offer, i) in offers" :key="i" :offer="offer" />
+    <div class="Offers" :class="isclasses">
+        <form-select-multiple :options="options" />
+        {{ activeOptions }}
+        <div class="Offers__offers">
+            <OfferRow v-for="(offer, i) in offers" :key="i" :offer="offer" />
+        </div>
     </div>
 </template>
 
@@ -13,7 +17,12 @@ export default {
     },
     data: () => ({
         offers: [],
-        id: '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE'
+        id: '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE',
+        options: [
+            { id: 1, name: 'hello' },
+            { id: 2, name: 'wold' }
+        ],
+        activeOptions: []
     }),
     mounted() {
         fetch(

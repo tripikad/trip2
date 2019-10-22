@@ -381,6 +381,7 @@ class StyleController extends Controller
                     ->merge($this->colors2())
                     ->push('&nbsp;')
                     ->merge($this->colors())
+                    ->push('&nbsp;')
                     ->push(
                         component('Title')
                             ->is('medium')

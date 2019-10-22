@@ -8,7 +8,7 @@
     width: $width-md !important;
     height: $height-md;
     object-fit: cover;
-    margin-right: $margin-md;
+    margin-right: $margin-sm;
 }
 .OfferRow__title {
     font: $font-text-lg;

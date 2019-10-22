@@ -19,5 +19,5 @@
     width: $width-md;
     height: $height-md;
     margin-right: $margin-md;
-    border-radius: 50%;
+    border-radius: $border-radius-md;
 }

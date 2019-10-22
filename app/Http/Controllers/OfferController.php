@@ -7,6 +7,8 @@ class OfferController extends Controller
     public function index()
     {
         return layout('Two')
+            ->with('background', component('BackgroundMap'))
+
             ->with(
                 'header',
                 region(
@@ -23,19 +25,14 @@ class OfferController extends Controller
             )
             ->with(
                 'content',
-                collect()->push(
-                    component('OfferRows')->with(
-                        'title',
-                        'I am Offers'
-                    )
-                )
+                collect()->push(component('Offers'))
             )
             ->with(
                 'sidebar',
                 collect()->push(
                     component('Title')
                         ->is('small')
-                        ->with('title', 'Sample title')
+                        ->with('title', '')
                 )
             )
             ->render();
