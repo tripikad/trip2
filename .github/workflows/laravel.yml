@@ -11,7 +11,7 @@ jobs:
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: false
           MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: trip2
+          MYSQL_DATABASE: laravel
         ports:
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -26,12 +26,8 @@ jobs:
     - name: Run Migration
       run: php artisan migrate -v
       env:
-        DB_USERNAME2: root
-        DB_PASSWORD2: password
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
     - name: Run PHPUnit
       run: php vendor/bin/phpunit
       env:
-        DB_USERNAME2: root
-        DB_PASSWORD2: password
         DB_PORT: ${{ job.services.mysql.ports[3306] }}
