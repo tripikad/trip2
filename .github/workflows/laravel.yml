@@ -1,10 +1,20 @@
 name: Laravel
 
-on: [push]
+on: [push,pull_request]
 
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: laravel
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
     - uses: actions/checkout@v1
     - name: Copy .env
@@ -13,12 +23,11 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
     - name: Generate key
       run: php artisan key:generate
-    - name: Create Database
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
+    - name: Run Migration
+      run: php artisan migrate -v
       env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
-      run: vendor/bin/phpunit
+        DB_PORT: ${{ job.services.mysql.ports[3306] }}
+    - name: Run PHPUnit
+      run: php vendor/bin/phpunit
+      env:
+        DB_PORT: ${{ job.services.mysql.ports[3306] }}
