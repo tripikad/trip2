@@ -1,0 +1,76 @@
+@import 'variables';
+
+.StyleFont {
+    display: flex;
+}
+
+.StyleFont__title {
+    width: 250px;
+    margin-left: $margin-sm;
+    font: $font-code-sm;
+    color: $gray;
+}
+
+.StyleFont__font {
+    flex: 1;
+}
+
+.StyleFont__font > * {
+    border: 1px solid $gray;
+}
+
+.StyleFont__font > *::first-line {
+    border: 1px solid $red;
+}
+
+.font-text-xs {
+    font: $font-text-xs;
+}
+
+.font-text-sm {
+    font: $font-text-sm;
+}
+
+.font-text-md {
+    font: $font-text-md;
+}
+
+.font-text-lg {
+    font: $font-text-lg;
+}
+
+.font-heading-xs {
+    font: $font-heading-xs;
+}
+
+.font-heading-sm {
+    font: $font-heading-sm;
+}
+
+.font-heading-md {
+    font: $font-heading-md;
+}
+
+.font-heading-lg {
+    font: $font-heading-lg;
+}
+
+.font-heading-xl {
+    font: $font-heading-xl;
+}
+
+.font-heading-xxl {
+    font: $font-heading-xxl;
+}
+
+.font-heading-xxxl {
+    font: $font-heading-xxxl;
+}
+
+.font-code-sm {
+    font: $font-code-sm;
+}
+
+.font-code-md {
+    font: $font-code-md;
+}

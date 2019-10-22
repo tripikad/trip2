@@ -2,10 +2,12 @@
 
 .StyleSpacing {
     display: flex;
+    height: calc($spacer * 10);
+    overflow: auto;
 }
 
 .StyleSpacing__example {
-    width: $padding-xxxl;
+    width: calc($padding-xxxl * 1.3);
     display: flex;
     justify-content: flex-end;
     padding-right: $padding-sm;
@@ -13,6 +15,7 @@
 
 .StyleSpacing__example > div {
     border: 1px solid $gray;
+    background: $gray-lighter;
 }
 
 .StyleSpacing__title {

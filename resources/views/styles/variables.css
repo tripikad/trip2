@@ -60,6 +60,7 @@ $gray-dark-hover: hsl(204, 6%, 30%);
 
 $font-family: "Sailec";
 $font-family-code: "Cousine";
+
 $font-size-xs: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
@@ -68,6 +69,7 @@ $font-size-xl: 21px;
 $font-size-xxl: 30px;
 $font-size-xxxl: 48px;
 $font-size-xxxxl: 64px;
+
 $font-weight-normal: normal;
 $font-weight-semibold: 600;
 $font-weight-bold: bold;
