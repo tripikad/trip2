@@ -185,10 +185,10 @@ Route::get('{slug}', 'StaticController@show')
     ->name('static.show')
     ->where(
         'slug',
-        '(' .
+        '('.
             collect(config('static.slugs'))
                 ->keys()
-                ->implode('|') .
+                ->implode('|').
             ')'
     );
 
@@ -564,18 +564,18 @@ Route::get(
 Route::get('register', [
     'middleware' => 'guest',
     'uses' => 'Auth\RegistrationController@form',
-    'as' => 'register.form'
+    'as' => 'register.form',
 ]);
 
 Route::post('register', [
     'middleware' => 'guest',
     'uses' => 'Auth\RegistrationController@submit',
-    'as' => 'register.submit'
+    'as' => 'register.submit',
 ]);
 
 Route::get('register/confirm/{token}', [
     'uses' => 'Auth\RegistrationController@confirm',
-    'as' => 'register.confirm'
+    'as' => 'register.confirm',
 ]);
 
 // Login and logout
@@ -583,19 +583,19 @@ Route::get('register/confirm/{token}', [
 Route::get('login', [
     'middleware' => 'guest',
     'uses' => 'Auth\LoginController@form',
-    'as' => 'login.form'
+    'as' => 'login.form',
 ]);
 
 Route::post('login', [
     'middleware' => 'guest',
     'uses' => 'Auth\LoginController@submit',
-    'as' => 'login.submit'
+    'as' => 'login.submit',
 ]);
 
 Route::get('logout', [
     'middleware' => 'auth',
     'uses' => 'Auth\LoginController@logout',
-    'as' => 'login.logout'
+    'as' => 'login.logout',
 ]);
 
 // Facebook login
@@ -603,12 +603,12 @@ Route::get('logout', [
 Route::get('redirect/facebook', [
     'middleware' => 'guest',
     'uses' => 'SocialController@facebookRedirect',
-    'as' => 'facebook.redirect'
+    'as' => 'facebook.redirect',
 ]);
 
 Route::get('facebook', [
     'uses' => 'SocialController@facebook',
-    'as' => 'facebook'
+    'as' => 'facebook',
 ]);
 
 // Google+ login
@@ -616,34 +616,34 @@ Route::get('facebook', [
 Route::get('redirect/google', [
     'middleware' => 'guest',
     'uses' => 'SocialController@googleRedirect',
-    'as' => 'google.redirect'
+    'as' => 'google.redirect',
 ]);
 
 Route::get('google', [
     'uses' => 'SocialController@google',
-    'as' => 'google'
+    'as' => 'google',
 ]);
 
 // Password reset
 
 Route::get('reset/apply', [
     'uses' => 'Auth\ResetController@applyForm',
-    'as' => 'reset.apply.form'
+    'as' => 'reset.apply.form',
 ]);
 
 Route::post('reset/apply', [
     'uses' => 'Auth\ResetController@postEmail',
-    'as' => 'reset.apply.submit'
+    'as' => 'reset.apply.submit',
 ]);
 
 Route::get('reset/password/{token}', [
     'uses' => 'Auth\ResetController@passwordForm',
-    'as' => 'reset.password.form'
+    'as' => 'reset.password.form',
 ]);
 
 Route::post('reset/password', [
     'uses' => 'Auth\ResetController@reset',
-    'as' => 'reset.password.submit'
+    'as' => 'reset.password.submit',
 ]);
 
 // Flags
@@ -653,7 +653,7 @@ Route::get(
     [
         'middleware' => 'role:regular',
         'uses' => 'FlagController@toggle',
-        'as' => 'flag.toggle'
+        'as' => 'flag.toggle',
     ]
 );
 
@@ -662,19 +662,19 @@ Route::get(
 Route::post('content/{type}/{id}/comment', [
     'middleware' => 'role:regular',
     'uses' => 'CommentController@store',
-    'as' => 'comment.store'
+    'as' => 'comment.store',
 ]);
 
 Route::post('comment/{id}', [
     'middleware' => 'role:admin,commentowner',
     'uses' => 'CommentController@update',
-    'as' => 'comment.update'
+    'as' => 'comment.update',
 ]);
 
 Route::put('comment/{id}/status/{status}', [
     'middleware' => 'role:admin',
     'uses' => 'CommentController@status',
-    'as' => 'comment.status'
+    'as' => 'comment.status',
 ]);
 
 // Atom feeds
@@ -682,13 +682,13 @@ Route::put('comment/{id}/status/{status}', [
 Route::get('index.atom', [
     'middleware' => 'throttle:60,1',
     'uses' => 'FeedController@newsFeed',
-    'as' => 'news.feed'
+    'as' => 'news.feed',
 ]);
 
 Route::get('lendude_sooduspakkumised/rss', [
     'middleware' => 'throttle:60,1',
     'uses' => 'FeedController@flightFeed',
-    'as' => 'flight.feed'
+    'as' => 'flight.feed',
 ]);
 
 // Offers

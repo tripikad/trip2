@@ -22,8 +22,8 @@ class MakeComponent extends Command
             '@import "variables";',
             ".$name {",
             '}',
-            ".$name" . '__' . "$element {",
-            "}\n"
+            ".$name".'__'."$element {",
+            "}\n",
         ];
 
         Storage::disk('root')->put(
@@ -36,8 +36,8 @@ class MakeComponent extends Command
             '',
             "    <div class=\"$name\" :class=\"isclasses\">",
             '',
-            "        <div class=\"$name" .
-                '__' .
+            "        <div class=\"$name".
+                '__'.
                 "$element\">",
             '',
             '            {{ title }} {{ message }}',
@@ -58,7 +58,7 @@ class MakeComponent extends Command
             "        message: 'from Vue'",
             '    })',
             '}',
-            "</script>\n"
+            "</script>\n",
         ];
 
         $blade = [
@@ -66,10 +66,10 @@ class MakeComponent extends Command
             "\$title = \$title ?? '';",
             '@endphp',
             "<div class=\"$name {{ \$isclasses }}\">",
-            "    <div class=\"$name" . '__' . "$element\">",
+            "    <div class=\"$name".'__'."$element\">",
             '        {{ $title }}',
             '    </div>',
-            "</div>\n"
+            "</div>\n",
         ];
 
         if ($this->option('vue')) {

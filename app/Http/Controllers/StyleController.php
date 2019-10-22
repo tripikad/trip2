@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Str;
 
 class StyleController extends Controller
 {
@@ -9,7 +8,7 @@ class StyleController extends Controller
     {
         return collect(styleVars())
             ->filter(function ($value, $key) {
-                return !ends_with($key, '-hover') &&
+                return ! ends_with($key, '-hover') &&
                     starts_with($value, 'hsl');
             })
             ->map(function ($value, $key) {
