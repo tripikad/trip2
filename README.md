@@ -252,7 +252,7 @@ Variables are located in `/resources/views/styles/variables.json` and `/resource
 
 #### Style variables in PHP
 
-Variables in `/resources/views/styles/variables.js` can be used in Blade templates:
+Variables in `/resources/views/styles/variables.json` can be used in Blade templates:
 
 ```blade
 {{ styleVars()->spacer }}
@@ -260,7 +260,7 @@ Variables in `/resources/views/styles/variables.js` can be used in Blade templat
 
 #### Style variables in Vue
 
-Variables in `/resources/views/styles/variables.js` can be used in Vue templates:
+Variables in `/resources/views/styles/variables.json` can be used in Vue templates:
 
 ```js
 this.$styleVars.spacer
@@ -354,30 +354,3 @@ layout('One')->cached(false);
 #### Making a layout
 
 At the time of writing there is no helper command to create a layout.
-
-## Linting
-
-### Running linter
-
-```
-npm run lint
-```
-
-### Settings for Visual Studio Code
-
-Install **ESLint** (and optionally **Vetur**) plugin and
-adjust user configuration as follows:
-
-```json
-    "eslint.validate": [
-        "javascript",
-        {
-            "language": "vue",
-            "autoFix": true
-        }
-    ],
-    "eslint.autoFixOnSave": true,
-}
-```
-
-To invoke fixing manually, run `Cmd+Shift+P` and `ESLint: Fix all auto-fixable problems`.
