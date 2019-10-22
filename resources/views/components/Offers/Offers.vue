@@ -7,6 +7,7 @@
                 :options="destinations"
                 v-model="activeDestination"
             />
+            <form-select placeholder="Style" :options="styles" v-model="activeStyle" />
         </div>
         <!--
         <form-select-multiple :options="options" v-model="activeOptions" />
@@ -29,7 +30,8 @@ export default {
         offers: [],
         id: '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE',
         activeCompany: -1,
-        activeDestination: -1
+        activeDestination: -1,
+        activeStyle: -1
     }),
     computed: {
         companies() {
@@ -43,6 +45,14 @@ export default {
         destinations() {
             return unique(
                 this.offers.map(o => o.destination)
+            ).map((name, id) => ({
+                id,
+                name
+            }))
+        },
+        styles() {
+            return unique(
+                this.offers.map(o => o.style)
             ).map((name, id) => ({
                 id,
                 name
@@ -70,6 +80,19 @@ export default {
                             this.getById(
                                 this.destinations,
                                 this.activeDestination,
+                                'name'
+                            )
+                        )
+                    }
+                    return true
+                })
+                .filter(o => {
+                    if (this.activeStyle > -1) {
+                        return (
+                            o.style ==
+                            this.getById(
+                                this.styles,
+                                this.activeStyle,
                                 'name'
                             )
                         )
