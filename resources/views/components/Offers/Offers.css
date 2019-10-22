@@ -3,3 +3,15 @@
 .Offers > *, .Offers__offers > * {
     margin-bottom: $margin-md;
 }
+
+.Offers__filters {
+    display: flex;
+}
+
+.Offers__filters > * {
+    margin-right: $margin-sm;
+}
+
+.Offers__filters > *:last-child  {
+    margin: 0;
+}

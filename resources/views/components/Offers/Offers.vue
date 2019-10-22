@@ -1,15 +1,20 @@
 <template>
     <div class="Offers" :class="isclasses">
+        <div class="Offers__filters">
+            <form-select placeholder="Company" :options="companies" v-model="activeCompany" />
+        </div>
+        <!--
         <form-select-multiple :options="options" v-model="activeOptions" />
         {{ activeOptions }}
+        -->
         <div class="Offers__offers">
-            <OfferRow v-for="(offer, i) in offers" :key="i" :offer="offer" />
+            <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" />
         </div>
     </div>
 </template>
 
 <script>
-import { parseSheets } from '../../utils/utils'
+import { parseSheets, unique } from '../../utils/utils'
 
 export default {
     props: {
@@ -22,8 +27,40 @@ export default {
             { id: 1, name: 'hello' },
             { id: 2, name: 'wold' }
         ],
-        activeOptions: []
+        activeOptions: [],
+        activeCompany: -1
     }),
+    computed: {
+        companies() {
+            return unique(
+                this.offers.map(o => o.company)
+            ).map((name, id) => ({ id, name }))
+        },
+        filteredOffers() {
+            return this.offers.filter(o => {
+                //console.log(o.company, this.activeCompany)
+                if (this.activeCompany > -1) {
+                    return (
+                        o.company ==
+                        this.getById(
+                            this.companies,
+                            this.activeCompany,
+                            'name'
+                        )
+                    )
+                }
+                return true
+            })
+        }
+    },
+    methods: {
+        getById(data, id, key) {
+            if (data.length) {
+                return data.filter(d => d.id == id)[0][key]
+            }
+            return null
+        }
+    },
     mounted() {
         fetch(
             `https://spreadsheets.google.com/feeds/list/${this.id}/od6/public/values?alt=json`
