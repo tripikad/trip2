@@ -10,7 +10,7 @@ class StyleController extends Controller
     {
         return collect(styleVars())
             ->filter(function ($value, $key) {
-                return ! ends_with($key, '-hover') &&
+                return !ends_with($key, '-hover') &&
                     starts_with($value, 'hsl');
             })
             ->map(function ($value, $key) {
@@ -24,14 +24,19 @@ class StyleController extends Controller
     {
         $colors = collect(styleVars())
             ->filter(function ($value, $key) {
-                return ! ends_with($key, '-hover') &&
+                return !ends_with($key, '-hover') &&
                     starts_with($value, 'hsl');
             })
             ->map(function ($value, $key) {
-                return '<div style="background: '.$value.'"><br><br><br></div>';
+                return '<div style="background: ' .
+                    $value .
+                    '"><br><br><br></div>';
             });
 
-        return component('ExperimentalGrid')->with('cols', 12)->with('items', $colors)->render();
+        return component('ExperimentalGrid')
+            ->with('cols', 12)
+            ->with('items', $colors)
+            ->render();
     }
 
     public function grid($photos)
@@ -231,7 +236,7 @@ class StyleController extends Controller
                 return starts_with($key, [
                     'font-text',
                     'font-heading',
-                    'font-code',
+                    'font-code'
                 ]);
             })
             ->map(function ($value, $key) use (
@@ -277,36 +282,36 @@ class StyleController extends Controller
                                 '-code',
                                 'sans-serif',
                                 '/ ',
-                                ',',
+                                ','
                             ],
                             [
-                                $fontSizeXs.
+                                $fontSizeXs .
                                     ' (font-size-xs)',
-                                $fontSizeSm.
+                                $fontSizeSm .
                                     ' (font-size-sm)',
-                                $fontSizeMd.
+                                $fontSizeMd .
                                     ' (font-size-md)',
-                                $fontSizeLg.
+                                $fontSizeLg .
                                     ' (font-size-lg)',
-                                $fontSizeXl.
+                                $fontSizeXl .
                                     ' (font-size-xl)',
-                                $fontSizeXxl.
+                                $fontSizeXxl .
                                     ' (font-size-xxl)',
-                                $fontSizeXxxl.
+                                $fontSizeXxxl .
                                     ' (font-size-xxxl)',
-                                $fontSizeXxxxl.
+                                $fontSizeXxxxl .
                                     ' (font-size-xxxx;)',
-                                $lineHeightXs.
+                                $lineHeightXs .
                                     ' (line-height-xs)',
-                                $lineHeightSm.
+                                $lineHeightSm .
                                     ' (line-height-sm)',
-                                $lineHeightMd.
+                                $lineHeightMd .
                                     ' (line-height-md)',
-                                $lineHeightLg.
+                                $lineHeightLg .
                                     ' (line-height-lg)',
-                                $lineHeightXl.
+                                $lineHeightXl .
                                     ' (line-height-xl)',
-                                $lineHeightXXl.
+                                $lineHeightXXl .
                                     ' (line-height-xxl)',
                                 'normal',
                                 'semibold',
@@ -315,7 +320,7 @@ class StyleController extends Controller
                                 '',
                                 '',
                                 '',
-                                '',
+                                ''
                             ],
                             $value
                         )
@@ -365,7 +370,7 @@ class StyleController extends Controller
                                             )
                                     )
                                     ->push(
-                                        '<div style="height: calc(12px * 11.5);">&nbsp</div>'.
+                                        '<div style="height: calc(12px * 11.5);">&nbsp</div>' .
                                             $this->widths()
                                                 ->render()
                                                 ->implode(
