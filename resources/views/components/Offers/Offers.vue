@@ -1,6 +1,6 @@
 <template>
     <div class="Offers" :class="isclasses">
-        <form-select-multiple :options="options" />
+        <form-select-multiple :options="options" v-model="activeOptions" />
         {{ activeOptions }}
         <div class="Offers__offers">
             <OfferRow v-for="(offer, i) in offers" :key="i" :offer="offer" />

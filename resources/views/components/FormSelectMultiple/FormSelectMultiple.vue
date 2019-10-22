@@ -61,7 +61,7 @@ export default {
     methods: {
         onInput(value) {
             this.returnValue = value
-            this.$emit('input', returnValue)
+            this.$emit('input', this.returnValue)
         }
     },
 
