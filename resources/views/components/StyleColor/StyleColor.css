@@ -1,0 +1,23 @@
+@import 'variables';
+
+.StyleColor {
+    display: flex;
+    align-items: center;
+}
+
+.StyleColor__title {
+    font: $font-code-sm;
+    color: $gray;
+}
+
+.StyleColor__subtitle {
+    font: $font-code-sm;
+    color: $gray-light;
+}
+
+.StyleColor__color {
+    width: $width-md;
+    height: $height-md;
+    margin-right: $margin-md;
+    border-radius: $border-radius-md;
+}

@@ -1,7 +1,5 @@
 <template>
-
     <div class="FormSelect" :class="isclasses">
-        
         <component
             :is="'Multiselect'"
             v-model="localValue"
@@ -9,18 +7,10 @@
             track-by="name"
             label="name"
             :placeholder="placeholder"
-        >
-        </component>
+        ></component>
 
-        <input
-            v-model="returnValue"
-            v-show="false"
-            type="text"
-            :name="name"
-        >
-
+        <input v-model="returnValue" v-show="false" type="text" :name="name" />
     </div>
-
 </template>
 
 <script>
@@ -52,6 +42,9 @@ export default {
     mounted() {
         this.localValue = this.options.find(
             option => option.id === parseInt(this.value)
+        )
+        this.$watch('localValue', localValue =>
+            this.$emit('input', this.localValue ? this.localValue.id: '')
         )
     }
 }

@@ -32,6 +32,14 @@
         background: $cyan-hover;
     }
 
+    .Button--gray {
+        background: $gray-light;
+    }
+
+    .Button--gray:hover {
+        background: $gray-light-hover;
+    }
+
     .Button--facebook {
         background: $facebook;
     }

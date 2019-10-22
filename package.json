@@ -8,6 +8,7 @@
     "eslint": "eslint resources/views/**/*.{js,vue}"
   },
   "dependencies": {
+    "@prettier/plugin-php": "^0.11.2",
     "axios": "^0.18.0",
     "codemirror": "^5.28.0",
     "d3-array": "^1.2.1",

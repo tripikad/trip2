@@ -55,7 +55,7 @@ To test the local reverse proxy cache, edit `/usr/local/etc/nginx/valet/valet.co
 1. Add the following to the top of the file:
 
 ```nginx
-fastcgi_cache_path /tmp/nginx levels=1:2 keys_zone=TRIP2:256m inactive=60m use_temp_path=off; 
+fastcgi_cache_path /tmp/nginx levels=1:2 keys_zone=TRIP2:256m inactive=60m use_temp_path=off;
 fastcgi_cache_key "$scheme$request_method$host$request_uri";
 ```
 
@@ -69,7 +69,7 @@ line add the following:
 
 ```nginx
 fastcgi_cache TRIP2;
-fastcgi_ignore_headers Set-Cookie; 
+fastcgi_ignore_headers Set-Cookie;
 fastcgi_hide_header Set-Cookie;
 fastcgi_pass_header Set-Cookie;
 fastcgi_cache_bypass $cookie_logged $is_args;
@@ -95,7 +95,6 @@ valet restart
 ```
 ./vendor/bin/phpunit
 ```
-
 
 ## Frontend development
 
@@ -145,14 +144,13 @@ export default {
 
 This creates an extra packages `main.0.hash.js`, `main.1.hash.js` etc which are loaded on demand via ajax when `Editor` component is on the page.
 
-
 #### CSS
 
 Components CSS from
 
 ```
 ./resources/views/components/**/*.css
-``` 
+```
 
 and helper CSS from
 
@@ -178,16 +176,16 @@ are concat into a SVG sprite, optimized, minified and saved to
 
 ### API
 
-Components are located at ```resources/views/components``` and are either Laravel Blade or VueJS components.
+Components are located at `resources/views/components` and are either Laravel Blade or VueJS components.
 
-To show a component use a ```component()``` helper:
+To show a component use a `component()` helper:
 
 ```php
 component('MyComponent')
     ->is('small') // Optional CSS modifier, adds a MyComponent--small class
     ->is('red') // Modifiers can be chained
     ->with('data1', 'Hello') // Passing a variable, similar to view()->with()
-    ->with('data2', 'World') // Variables can be chained
+    ->with('data2', 'World'); // Variables can be chained
 ```
 
 ### Making a component
@@ -210,28 +208,34 @@ php artisan make:component MyComponent --vue
 
 #### Class naming conventions
 
-We use a hybrid BEM / SUIT naming 
+We use a hybrid BEM / SUIT naming
 convention:
 
 Blocks:
 
 ```css
-.Component {}
-.AnotherComponent {}
+.Component {
+}
+.AnotherComponent {
+}
 ```
 
 Elements (note the spacing):
 
 ```css
-    .Component__element {}
-    .AnotherComponent__anotherElement {}
+.Component__element {
+}
+.AnotherComponent__anotherElement {
+}
 ```
 
 Modifiers
 
 ```css
-.Component--modifier {}
-.AnotherComponent--anotherModifier {}
+.Component--modifier {
+}
+.AnotherComponent--anotherModifier {
+}
 ```
 
 #### Style variables in CSS
@@ -239,9 +243,9 @@ Modifiers
 Variables are located in `/resources/views/styles/variables.json` and `/resources/views/styles/variables.css` and can be imported as
 
 ```scss
-@import "variables" // Resolves to ./resources/views/styles/variables.json|css
-
-.Component {
+@import 'variables'
+    // Resolves to ./resources/views/styles/variables.json|css
+    .Component {
     height: $spacer;
 }
 ```
@@ -251,7 +255,7 @@ Variables are located in `/resources/views/styles/variables.json` and `/resource
 Variables in `/resources/views/styles/variables.json` can be used in Blade templates:
 
 ```blade
-{{ styleVars()->spacer }} 
+{{ styleVars()->spacer }}
 ```
 
 #### Style variables in Vue
@@ -266,7 +270,7 @@ this.$styleVars.spacer
 
 ##### Fonts for headings
 
-Use the `$font-heading-xs | $font-heading-sm |  $font-heading-md |  $font-heading-lg |  $font-heading-xl |  $font-heading-xxl |  $font-heading-xxxl` variables that set most of the font details.
+Use the `$font-heading-xs | $font-heading-sm | $font-heading-md | $font-heading-lg | $font-heading-xl | $font-heading-xxl | $font-heading-xxxl` variables that set most of the font details.
 
 Also, it's recommended to reduce contrast and use lighter font colors:
 
@@ -274,18 +278,18 @@ Also, it's recommended to reduce contrast and use lighter font colors:
 .Component__title {
     font: $font-heading-lg;
     color: $gray-dark;
-}  
+}
 ```
 
 ##### Fonts for shorter plain texts
 
-Use the `$font-text-xs | $font-text-sm |  $font-text-md |  $font-text-lg` variables.
+Use the `$font-text-xs | $font-text-sm | $font-text-md | $font-text-lg` variables.
 
 ```scss
 .Component__description {
     font: $font-text-md; // The recommended body size
     color: $gray-dark; // For reduced contrast
-}  
+}
 ```
 
 ##### Fonts for longer texts with markup
@@ -293,7 +297,7 @@ Use the `$font-text-xs | $font-text-sm |  $font-text-md |  $font-text-lg` variab
 Use the dedicated `Body` component:
 
 ```php
-component('Body')->with('body', $your_html_content)
+component('Body')->with('body', $your_html_content);
 ```
 
 #### Third party CSS
@@ -301,20 +305,19 @@ component('Body')->with('body', $your_html_content)
 When using third party libraries one can import it's CSS from node_modules directory:
 
 ```scss
-@import "somelibrary/dist/somelibrary.css" // Resolves to ./node_modules/somelibrary/dist/somelibrary.css
+@import 'somelibrary/dist/somelibrary.css';
 ```
 
 ### Regions
 
 #### API
 
-Regions are located at ```app/Http/Regions``` and are simple PHP classes to extract rendering specific code chunks out of controllers.
+Regions are located at `app/Http/Regions` and are simple PHP classes to extract rendering specific code chunks out of controllers.
 
-
-To show a component use a ```region()``` helper:
+To show a component use a `region()` helper:
 
 ```php
-region('MyComponent', $parameter1, $parameter2) // etc
+region('MyComponent', $parameter1, $parameter2); // etc
 ```
 
 #### Making a region
@@ -327,56 +330,27 @@ php artisan make:region MyRegion
 
 and follow the directions.
 
-
 ### Layouts
 
 #### API
 
-Layouts are located at ```resources/views/layouts``` and are simple wrappers around top-level ```view()```.
+Layouts are located at `resources/views/layouts` and are simple wrappers around top-level `view()`.
 
-To show a component use a ```layout()``` helper:
+To show a component use a `layout()` helper:
 
 ```php
 layout('One')
     ->with('data1', 'Hello') // Passing a variable
     ->with('data2', 'World') // Variables can be chained
-    ->render() // At the time of writing the final render() is required
+    ->render(); // At the time of writing the final render() is required
 ```
 
 By default layout() adds HTTP cache headers for 10 minutes. To disable this, add
 
 ```php
-layout('One')
-    ->cached(false)
+layout('One')->cached(false);
 ```
 
 #### Making a layout
 
 At the time of writing there is no helper command to create a layout.
-
-## Linting
-
-### Running linter
-
-```
-npm run lint
-```
-
-### Settings for Visual Studio Code
-
-Install **ESLint** (and optionally **Vetur**) plugin and 
-adjust user configuration as follows:
-
-```json
-    "eslint.validate": [
-        "javascript",
-        {
-            "language": "vue",
-            "autoFix": true
-        }
-    ],
-    "eslint.autoFixOnSave": true,
-}
-```
-
-To invoke fixing manually, run `Cmd+Shift+P` and `ESLint: Fix all auto-fixable problems`.

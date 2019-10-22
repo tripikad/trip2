@@ -3,7 +3,7 @@
 .Code {
     white-space: pre-wrap;
     word-wrap: normal;
-    line-height: $line-height-md;
+    line-height: $line-height-lg;
     color: $gray;
     font-family: $font-family-code;
     font-size: $font-size-sm;
