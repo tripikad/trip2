@@ -1,9 +1,9 @@
-name: Laravel Feature
+name: Feature tests
 
 on: [push]
 
 jobs:
-  laravel-feature-tests:
+  feature-tests:
     runs-on: ubuntu-latest
     services:
       mysql:
