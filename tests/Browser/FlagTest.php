@@ -23,11 +23,11 @@ class FlagTest extends DuskTestCase
                 ->visit("node/$content->id") // @todo Use non-legacy ID-based alias
                 ->assertSeeIn('.Flag--green .Flag__value', '0')
                 ->click('.Flag--green .Flag__icon')
-                ->pause(200)
+                ->pause(1000)
                 ->assertSeeIn('.Flag--green .Flag__value', '1')
                 ->assertSeeIn('.Alert', 'Märkisid postituse meeldivaks')
                 ->click('.Flag--green .Flag__icon')
-                ->pause(200)
+                ->pause(1000)
                 ->assertSeeIn('.Flag--green .Flag__value', '0')
                 ->assertSeeIn('.Alert', 'Mõtlesid ringi');
         });
