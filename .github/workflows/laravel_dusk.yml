@@ -19,8 +19,10 @@ jobs:
     steps:
     - name: Verify MySQL connection
       run: |
-        sudo apt-get install -y mysql-client
-        mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
+        apt-get update
+        apt-get install -y mysql-client
+        mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
+        # mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
         echo mysql port: ${{ job.services.mysql.ports['3306'] }}
     - uses: actions/checkout@v1
     - name: Copy .env
@@ -33,7 +35,7 @@ jobs:
       run: php artisan migrate -v
       env:
         DB_DATABASE2: trip2
-        DB_HOSTNAME2: 127.0.0.1
+        DB_HOSTNAME2: mysql
         DB_USERNAME2: root
         DB_PASSWORD2: password
         DB_PORT2: ${{ job.services.mysql.ports[3306] }}
@@ -43,7 +45,18 @@ jobs:
       run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
     - name: Run Laravel Server
       run: php artisan serve > /dev/null 2>&1 &
+      env:
+        DB_DATABASE2: trip2
+        DB_HOSTNAME2: mysql
+        DB_USERNAME2: root
+        DB_PASSWORD2: password
+        DB_PORT2: ${{ job.services.mysql.ports[3306] }}
     - name: Run dusk tests
       run: php artisan dusk
       env:
         FULL_BASE_URL: http://127.0.0.1:8000
+        DB_DATABASE2: trip2
+        DB_HOSTNAME2: mysql
+        DB_USERNAME2: root
+        DB_PASSWORD2: password
+        DB_PORT2: ${{ job.services.mysql.ports[3306] }}:  
