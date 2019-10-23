@@ -5,7 +5,7 @@ on: [push]
 jobs:
   laravel-dusk-tests:
     runs-on: ubuntu-latest
-    container: docker://zaherg/laravel-dusk:latest
+    container: docker://zaherg/laravel-dusk:7.3
     services:
       mysql:
         image: mysql:5.7
@@ -19,10 +19,9 @@ jobs:
     steps:
     - name: Verify MySQL connection
       run: |
-        # apt-get update
+        apt-get update
         apt-get install -y default-mysql-client
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
-        # mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
         echo mysql port: ${{ job.services.mysql.ports['3306'] }}
     - uses: actions/checkout@v1
     - name: Copy .env
