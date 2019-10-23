@@ -34,7 +34,7 @@ jobs:
       run: php artisan migrate -v
       env:
         DB_DATABASE2: trip2
-        DB_HOSTNAME2: mysql
+        DB_HOST2: mysql
         DB_USERNAME2: root
         DB_PASSWORD2: password
     - name: Upgrade chrome driver
@@ -45,14 +45,14 @@ jobs:
       run: php artisan serve > /dev/null 2>&1 &
       env:
         DB_DATABASE2: trip2
-        DB_HOSTNAME2: mysql
+        DB_HOST2: mysql
         DB_USERNAME2: root
         DB_PASSWORD2: password
     - name: Run dusk tests
       run: php artisan dusk
       env:
         DB_DATABASE2: trip2
-        DB_HOSTNAME2: mysql
+        DB_HOST2: mysql
         DB_USERNAME2: root
         DB_PASSWORD2: password
         FULL_BASE_URL: http://127.0.0.1:8000
