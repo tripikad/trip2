@@ -19,7 +19,7 @@ jobs:
     steps:
     - name: Verify MySQL connection
       run: |
-        apt-get update
+        # apt-get update
         apt-get install -y default-mysql-client
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
         # mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
@@ -35,7 +35,7 @@ jobs:
       run: php artisan migrate -v
       env:
         DB_DATABASE2: trip2
-        DB_HOSTNAME2: mysql
+        DB_HOSTNAME2: 127.0.0.1
         DB_USERNAME2: root
         DB_PASSWORD2: password
         DB_PORT2: ${{ job.services.mysql.ports[3306] }}
@@ -47,7 +47,7 @@ jobs:
       run: php artisan serve > /dev/null 2>&1 &
       env:
         DB_DATABASE2: trip2
-        DB_HOSTNAME2: mysql
+        DB_HOSTNAME2: 127.0.0.1
         DB_USERNAME2: root
         DB_PASSWORD2: password
         DB_PORT2: ${{ job.services.mysql.ports[3306] }}
@@ -56,7 +56,7 @@ jobs:
       env:
         FULL_BASE_URL: http://127.0.0.1:8000
         DB_DATABASE2: trip2
-        DB_HOSTNAME2: mysql
+        DB_HOSTNAME2: 127.0.0.1
         DB_USERNAME2: root
         DB_PASSWORD2: password
         DB_PORT2: ${{ job.services.mysql.ports[3306] }}
