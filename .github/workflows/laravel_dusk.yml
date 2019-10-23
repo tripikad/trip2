@@ -59,4 +59,4 @@ jobs:
         DB_HOSTNAME2: mysql
         DB_USERNAME2: root
         DB_PASSWORD2: password
-        DB_PORT2: ${{ job.services.mysql.ports[3306] }}:  
+        DB_PORT2: ${{ job.services.mysql.ports[3306] }}
