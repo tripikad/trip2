@@ -4,8 +4,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --mode=development --progress --hide-modules",
     "watch": "cross-env NODE_ENV=development webpack --mode=development --progress --hide-modules --watch",
-    "build": "cross-env NODE_ENV=production webpack --mode=production --progress --hide-modules",
-    "eslint": "eslint resources/views/**/*.{js,vue}"
+    "build": "cross-env NODE_ENV=production webpack --mode=production --hide-modules",
+    "test": "./vendor/bin/phpunit && php artisan dusk"
   },
   "dependencies": {
     "@prettier/plugin-php": "^0.11.2",

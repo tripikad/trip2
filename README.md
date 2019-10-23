@@ -90,15 +90,7 @@ rm -R /tmp/nginx/*
 valet restart
 ```
 
-## Unit and feature testing
-
-### Running tests
-
-```
-./vendor/bin/phpunit
-```
-
-## Browser testing
+## Testing
 
 ### Preparation
 
@@ -114,9 +106,16 @@ valet restart
 
 3. Make sure the `FULL_BASE_URL` in `.env` file points to the local Laravel URL of your development environment
 
-### Running tests
+### Running all tests
 
 ```
+npm run test
+```
+
+### Running feature and browser tests separately
+
+```
+./vendor/bin/phpunit
 php artisan dusk
 ```
 
