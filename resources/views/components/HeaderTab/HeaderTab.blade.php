@@ -1,5 +1,6 @@
 @php
     $route = $route ?? '#';
+    $active = $route ?? '';
     $title = $title ?? '';
     $count = $count ?? 0;
     $active = $active ? 'HeaderTab__active' : '';

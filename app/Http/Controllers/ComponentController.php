@@ -57,25 +57,25 @@ class ComponentController extends Controller
     public function isFiltered($c)
     {
         return in_array($c, [
-            'DestinationFacts',
-            'ExperimentalGrid',
-            'Form',
-            'FormHorizontal',
-            'ForumRowSmall',
-            'Grid',
-            'Grid2',
-            'Grid3',
-            'Grid4',
-            'GridSplit',
-            'Header',
-            'HeaderLight',
-            'HeaderTab',
-            'HeaderTabs',
-            'NewsCard',
-            'Paginator',
-            'PaginatorExtended',
-            'PhotoResponsive',
-            'PhotoRow'
+            //'DestinationFacts',
+            //'ExperimentalGrid',
+            //'Form',
+            //'FormHorizontal',
+            //'ForumRowSmall',
+            //'Grid',
+            //'Grid2',
+            //'Grid3',
+            //'Grid4',
+            //'GridSplit',
+            //'Header',
+            //'HeaderLight',
+            //'HeaderTab',
+            //'HeaderTabs',
+            //'NewsCard',
+            //'Paginator',
+            //'PaginatorExtended',
+            //'PhotoResponsive',
+            //'PhotoRow'
         ]);
     }
 
@@ -102,23 +102,14 @@ class ComponentController extends Controller
                                 return collect()
                                     ->push('&nbsp;')
                                     ->push(
-                                        component(
-                                            'Code'
-                                        )->is('gray')->with(
-                                            'code',
-                                            $this->componentCode(
-                                                $c
+                                        component('Code')
+                                            ->is('gray')
+                                            ->with(
+                                                'code',
+                                                $this->componentCode(
+                                                    $c
+                                                )
                                             )
-                                        )
-                                    )
-                                    ->pushWhen(
-                                        !$this->isFiltered(
-                                            $c
-                                        ),
-                                        component($c)->with(
-                                            'title',
-                                            $c
-                                        )
                                     )
                                     ->pushWhen(
                                         !$this->isFiltered(
@@ -129,7 +120,52 @@ class ComponentController extends Controller
                                                 'title',
                                                 $c
                                             )
+                                            // ->with(
+                                            //     'content',
+                                            //     $c
+                                            // )
+                                            // ->with(
+                                            //     'items',
+                                            //     []
+                                            // )
+                                            // ->with(
+                                            //     'facts',
+                                            //     []
+                                            // )
+                                            // ->with(
+                                            //     'fields',
+                                            //     []
+                                            // )
+                                            // ->with(
+                                            //     'meta',
+                                            //     ''
+                                            // )
+                                            // ->with(
+                                            //     'left_content',
+                                            //     []
+                                            // )
+                                            // ->with(
+                                            //     'right_content',
+                                            //     []
+                                            // )
+                                            
+                                            
+                                    )
+                                    ->pushWhen(
+                                        !$this->isFiltered(
+                                            $c
+                                        ),
+                                        component($c)
+                                            ->with(
+                                                'title',
+                                                $c
+                                            )
+                                            ->with(
+                                                'content',
+                                                ''
+                                            )
                                             ->vue()
+                                            
                                     );
                             })
                     )

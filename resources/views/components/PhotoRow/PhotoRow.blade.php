@@ -1,16 +1,16 @@
 @php
 
 $title = $title ?? '';
-$content = collect($content) ?? collect();
-$actions = collect($actions) ?? collect();
+$content = $content ?? [];
+$actions = $actions ?? [];
 
 @endphp
 
 <div class="PhotoRow {{ $isclasses }}">
 
-    @if ($content->count())
+    @if (collect($content)->count())
 
-        @foreach ($content->chunk(9) as $content_row)
+        @foreach (collect($content)->chunk(9) as $content_row)
 
             <div class="PhotoRow__row">
 

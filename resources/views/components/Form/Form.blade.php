@@ -3,7 +3,7 @@
 $route = $route ?? '';
 $id = $id ?? '';
 $method = $method ?? 'POST';
-$fields = collect($fields) ?? collect();
+$fields = $fields ?? [];
 $files = $files ?? false;
 
 @endphp

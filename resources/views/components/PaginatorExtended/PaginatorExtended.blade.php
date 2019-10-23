@@ -1,4 +1,10 @@
-@if ($paginator->hasPages())
+@php
+
+$paginator = $paginator ?? null
+
+@endphp
+
+@if ($paginator && $paginator->hasPages())
 
     <ul class="Paginator">
 
