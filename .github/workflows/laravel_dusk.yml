@@ -22,7 +22,7 @@ jobs:
         apt-get update
         apt-get install -y default-mysql-client
         mysql --host mysql -uroot -ppassword -e "SHOW DATABASES"
-        echo mysql port: ${{ job.services.mysql.ports['3306'] }}
+        chromium --version
     - uses: actions/checkout@v1
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
