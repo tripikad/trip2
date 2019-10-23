@@ -90,10 +90,34 @@ rm -R /tmp/nginx/*
 valet restart
 ```
 
-## Testing
+## Unit and feature testing
+
+### Running tests
 
 ```
 ./vendor/bin/phpunit
+```
+
+## Browser testing
+
+### Preparation
+
+1. Make sure you use latest Chrome.
+
+2. Run
+
+    ```
+    php artisan dusk:update
+    ```
+
+    If you want to run Dusk tests with previous version of Chrome you will need specify a version of Dusk update. Read more here https://github.com/staudenmeir/dusk-updater
+
+3. Make sure the `FULL_BASE_URL` in `.env` file points to the local Laravel URL of your development environment
+
+### Running tests
+
+```
+php artisan dusk
 ```
 
 ## Frontend development
