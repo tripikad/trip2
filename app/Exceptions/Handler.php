@@ -57,10 +57,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($e) {
-            dump($e);
-            abort(1);
-        }
 
         if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
             abort(404);
