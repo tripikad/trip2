@@ -38,7 +38,7 @@ jobs:
         DB_USERNAME2: root
         DB_PASSWORD2: password
     - name: Upgrade chrome driver
-      run: php artisan dusk:update --detect
+      run: php artisan dusk:update 76
     - name: Start chrome driver
       run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
     - name: Run Laravel Server
