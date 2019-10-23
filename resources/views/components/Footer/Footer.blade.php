@@ -3,7 +3,7 @@
     $image = $image ?? '';
     $logo = $logo ?? '';
     $logo_route = $logo_route ?? '';
-    $links = $links ?? [];
+    $links = $links ?? ['col1' => [],'col2' => [],'col3' => [],'social' => []];
     $licence = $licence ?? '';
 
 @endphp

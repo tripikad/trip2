@@ -687,7 +687,10 @@ Route::get('offers', 'OfferController@index')->middleware(
     'role:admin'
 );
 
+// Style guide
+
 Route::get('styles', 'StyleController@index');
+Route::get('components', 'ComponentController@index');
 
 // Legacy user paths
 

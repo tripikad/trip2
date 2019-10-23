@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use Illuminate\Support\Facades\Storage;
 
 class StyleController extends Controller
 {

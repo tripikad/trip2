@@ -1,5 +1,6 @@
 @php
 
+$icon = $icon ?? '';
 $route = $route ?? '';
 $user = $user ?? '';
 $title = $title ?? '';
