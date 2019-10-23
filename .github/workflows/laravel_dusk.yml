@@ -34,10 +34,9 @@ jobs:
       run: php artisan migrate -v
       env:
         DB_DATABASE2: trip2
-        DB_HOSTNAME2: 127.0.0.1
+        DB_HOSTNAME2: mysql
         DB_USERNAME2: root
         DB_PASSWORD2: password
-        DB_PORT2: ${{ job.services.mysql.ports[3306] }}
     - name: Upgrade chrome driver
       run: php artisan dusk:update
     - name: Start chrome driver
@@ -46,16 +45,14 @@ jobs:
       run: php artisan serve > /dev/null 2>&1 &
       env:
         DB_DATABASE2: trip2
-        DB_HOSTNAME2: 127.0.0.1
+        DB_HOSTNAME2: mysql
         DB_USERNAME2: root
         DB_PASSWORD2: password
-        DB_PORT2: ${{ job.services.mysql.ports[3306] }}
     - name: Run dusk tests
       run: php artisan dusk
       env:
-        FULL_BASE_URL: http://127.0.0.1:8000
         DB_DATABASE2: trip2
-        DB_HOSTNAME2: 127.0.0.1
+        DB_HOSTNAME2: mysql
         DB_USERNAME2: root
         DB_PASSWORD2: password
-        DB_PORT2: ${{ job.services.mysql.ports[3306] }}
+        FULL_BASE_URL: http://127.0.0.1:8000
