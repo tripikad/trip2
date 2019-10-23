@@ -46,8 +46,7 @@ jobs:
     - name: Start chrome driver
       run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
     - name: Run Laravel Server
-      #run: php artisan serve > /dev/null 2>&1 &
-      run: php artisan serve &
+      run: php artisan serve > /dev/null 2>&1 &
       env:
         DB_DATABASE2: trip2
         DB_HOSTNAME2: 127.0.0.1
@@ -62,4 +61,5 @@ jobs:
         DB_USERNAME2: root
         DB_PASSWORD2: password
         DB_PORT2: ${{ job.services.mysql.ports[3306] }}
+        FULL_BASE_URL: http://127.0.0.1:8000
  
