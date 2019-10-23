@@ -1,9 +1,9 @@
-name: Laravel Dusk
+name: Dusk tests
 
 on: [push]
 
 jobs:
-  laravel-dusk-tests:
+  dusk-tests:
     runs-on: ubuntu-latest
     container: docker://zaherg/laravel-dusk:7.3
     services:
@@ -38,7 +38,7 @@ jobs:
         DB_USERNAME2: root
         DB_PASSWORD2: password
     - name: Upgrade chrome driver
-      run: php artisan dusk:update
+      run: php artisan dusk:update --detect
     - name: Start chrome driver
       run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
     - name: Run Laravel Server
