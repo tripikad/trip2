@@ -35,12 +35,61 @@ class ComponentController extends Controller
         );
     }
 
+    public function isCss($c)
+    {
+        return Storage::disk('resources')->exists(
+            '/views/components/' . $c . '/' . $c . '.css'
+        );
+    }
+
+    public function componentCode($c)
+    {
+        return str_pad($c, 30, ' ') .
+            ($this->isBladeComponent($c)
+                ? 'blade   '
+                : '        ') .
+            ($this->isVueComponent($c)
+                ? '   vue'
+                : '      ') .
+            ($this->isCss($c) ? '   css' : '      ');
+    }
+
+    public function isFiltered($c)
+    {
+        return in_array($c, [
+            'DestinationFacts',
+            'ExperimentalGrid',
+            'Form',
+            'FormHorizontal',
+            'ForumRowSmall',
+            'Grid',
+            'Grid2',
+            'Grid3',
+            'Grid4',
+            'GridSplit',
+            'Header',
+            'HeaderLight',
+            'HeaderTab',
+            'HeaderTabs',
+            'NewsCard',
+            'Paginator',
+            'PaginatorExtended',
+            'PhotoResponsive',
+            'PhotoRow'
+        ]);
+    }
+
     public function index()
     {
         return layout('Two')
             ->with(
                 'content',
                 collect()
+                    ->push(
+                        component('Title')
+                            ->is('large')
+                            ->with('title', 'Components')
+                    )
                     ->merge(
                         $this->components()
                             ->filter(function ($c) {
@@ -49,53 +98,43 @@ class ComponentController extends Controller
                                     'Aff'
                                 );
                             })
-                            // ->filter(function ($c) {
-                            //     return !in_array($c, [
-                            //         'DestinationFacts',
-                            //         'ExperimentalGrid',
-                            //         'Form',
-                            //         'FormHorizontal',
-                            //         'ForumRowSmall',
-                            //         'Grid',
-                            //         'Grid2',
-                            //         'Grid3',
-                            //         'Grid4',
-                            //         'GridSplit',
-                            //         'Header',
-                            //         'HeaderLight',
-                            //         'HeaderTab',
-                            //         'HeaderTabs',
-                            //         'NewsCard',
-                            //         'Paginator'
-                            //     ]);
-                            // })
-                            // ->slice(0, 20)
                             ->map(function ($c) {
-                                return collect()->push(
-                                    component('Code')->with(
-                                        'code',
-                                        str_pad(
-                                            $c,
-                                            30,
-                                            ' '
-                                        ) .
-                                            ($this->isBladeComponent(
+                                return collect()
+                                    ->push('&nbsp;')
+                                    ->push(
+                                        component(
+                                            'Code'
+                                        )->is('gray')->with(
+                                            'code',
+                                            $this->componentCode(
                                                 $c
                                             )
-                                                ? 'blade '
-                                                : '        ') .
-                                            ($this->isVueComponent(
-                                                $c
-                                            )
-                                                ? '   vue'
-                                                : '      ')
+                                        )
                                     )
-                                );
+                                    ->pushWhen(
+                                        !$this->isFiltered(
+                                            $c
+                                        ),
+                                        component($c)->with(
+                                            'title',
+                                            $c
+                                        )
+                                    )
+                                    ->pushWhen(
+                                        !$this->isFiltered(
+                                            $c
+                                        ),
+                                        component($c)
+                                            ->with(
+                                                'title',
+                                                $c
+                                            )
+                                            ->vue()
+                                    );
                             })
                     )
                     ->flatten()
             )
-            ->with('sidebar', ['&nbsp;'])
             ->render();
     }
 }
