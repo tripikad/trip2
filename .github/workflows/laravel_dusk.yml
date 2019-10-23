@@ -46,7 +46,8 @@ jobs:
     - name: Start chrome driver
       run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
     - name: Run Laravel Server
-      run: php artisan serve > /dev/null 2>&1 &
+      #run: php artisan serve > /dev/null 2>&1 &
+      run: php artisan serve &
       env:
         DB_DATABASE2: trip2
         DB_HOSTNAME2: 127.0.0.1
