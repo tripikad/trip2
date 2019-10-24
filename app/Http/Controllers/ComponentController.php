@@ -50,52 +50,45 @@ class ComponentController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->pushWhen(!request()->has('c'),
+                    ->push(
                         component('Title')
                             ->is('large')
                             ->with('title', 'Components')
                     )
                     ->pushWhen(
-                        !request()->has('list') && !request()->has('c'),
+                        !request()->has('preview'),
                         component('Link')
-                            ->with('title', 'Show list')
-                            ->with('route', route('components', ['list']))
+                            ->with('title', 'Show preview')
+                            ->with('route', route('components', ['preview']))
                     )
                     ->pushWhen(
-                        request()->has('list') && !request()->has('c'),
+                        request()->has('preview'),
                         component('Link')
-                            ->with('title', 'Show previews')
+                            ->with('title', 'Show list')
                             ->with('route', route('components'))
                     )
+
                     ->merge(
                         $this->components()
                             ->filter(function ($c) {
-                                if (request()->has('c')) {
-                                    return $c == request()->get('c');
-                                }
                                 return !starts_with($c, 'Aff');
                             })
                             ->map(function ($c) {
                                 return collect()
-                                    ->pushWhen(!request()->has('c'),
+                                    ->push(
                                         component('Code')
                                             ->is('gray')
-                                            ->with(
-                                                'route',
-                                                route('components', ['c' => $c])
-                                            )
                                             ->with(
                                                 'code',
                                                 $this->componentCode($c)
                                             )
                                     )
                                     ->pushWhen(
-                                        !request()->has('list') ||
-                                            request()->has('c'),
+                                        request()->has('preview'),
                                         component($c)->with('title', $c)
                                     )
                                     ->pushWhen(
-                                        !request()->has('list'),
+                                        request()->has('preview'),
                                         component($c)
                                             ->with('title', $c)
                                             ->vue()

@@ -395,40 +395,13 @@ Route::post('utils/filter', 'UtilsController@filter')->name('utils.filter');
 
 Route::post('utils/format', 'UtilsController@format')->name('utils.format');
 
-// Experiments
+// Experiments and style guides
 
-Route::get('experiments', 'ExperimentsController@index')->name(
-    'experiments.index'
-);
+Route::get('experiments', 'ExperimentsController@index');
 
-Route::get('experiments/select', 'ExperimentsController@selectIndex')->name(
-    'experiments.select.index'
-);
+Route::get('styles', 'StyleController@index');
 
-Route::post('experiments/select', 'ExperimentsController@selectCreate')->name(
-    'experiments.select.create'
-);
-
-Route::get('experiments/map', 'ExperimentsController@mapIndex')->name(
-    'experiments.map.index'
-);
-
-Route::get('experiments/one', 'ExperimentsLayoutController@indexOne')->name(
-    'experiments.layouts.one'
-);
-
-Route::get('experiments/two', 'ExperimentsLayoutController@indexTwo')->name(
-    'experiments.layouts.two'
-);
-
-Route::get(
-    'experiments/frontpage',
-    'ExperimentsLayoutController@indexFrontpage'
-)->name('experiments.layouts.frontpage');
-
-Route::get('experiments/list', 'ExperimentsLayoutController@indexList')->name(
-    'experiments.layouts.list'
-);
+Route::get('components', 'ComponentController@index')->name('components');
 
 // Registration
 
@@ -562,11 +535,6 @@ Route::get('lendude_sooduspakkumised/rss', [
 // Offers
 
 Route::get('offers', 'OfferController@index')->middleware('role:admin');
-
-// Style guide
-
-Route::get('styles', 'StyleController@index');
-Route::get('components', 'ComponentController@index')->name('components');
 
 // Legacy user paths
 
