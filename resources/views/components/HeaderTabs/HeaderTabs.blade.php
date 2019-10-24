@@ -1,5 +1,5 @@
 @php
-    $tabs = collect($tabs) ?? collect();
+    $tabs = $tabs ?? [];
 @endphp
 
 <ul class="HeaderTabs">

@@ -1,8 +1,8 @@
 @php
 
-$items = collect($items) ?? collect();
+$items = $items ?? [];
 $cols = $cols ?? 3;
-$rows = round($items->count() / $cols, PHP_ROUND_HALF_DOWN);
+$rows = round(collect($items)->count() / $cols, PHP_ROUND_HALF_DOWN);
 $widths = $widths ?? 'repeat('. $cols .', 1fr)';
 $heights = $heights ?? 'repeat('. $rows .', auto)';
 $gap = isset($gap) ? 'calc('.$gap.' * 12px)' : '0';

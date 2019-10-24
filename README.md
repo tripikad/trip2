@@ -211,6 +211,8 @@ component('MyComponent')
     ->with('data2', 'World'); // Variables can be chained
 ```
 
+If there are both Blade and Vue components with the same name, Blade is preferred. You can request a Vue template by chaining a `->vue()` method.
+
 ### Making a component
 
 To make a Blade component, run

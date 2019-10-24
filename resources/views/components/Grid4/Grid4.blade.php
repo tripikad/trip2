@@ -1,10 +1,10 @@
 @php
 
-$items = collect($items) ?? collect();
+$items = $items ?? [];
 $gutter = $gutter ?? false;
 @endphp
 
-@foreach ($items->chunk(4) as $row)
+@foreach (collect($items)->chunk(4) as $row)
     
 <div class="row">
         

@@ -11,6 +11,7 @@ class Component
     protected $is;
     protected $with;
     protected $when;
+    protected $vue;
 
     public function __construct($component)
     {
@@ -18,6 +19,7 @@ class Component
         $this->is = collect();
         $this->with = collect();
         $this->when = true;
+        $this->vue = false;
     }
 
     public function is($is)
@@ -37,6 +39,13 @@ class Component
     public function when($condition)
     {
         $this->when = $condition;
+
+        return $this;
+    }
+
+    public function vue()
+    {
+        $this->vue = true;
 
         return $this;
     }
@@ -86,25 +95,27 @@ class Component
         if (! $this->when) {
             return '';
         }
-
+       
         $name = "components.$this->component.$this->component";
-        $file_name = $this->exists($name);
-        $path_info = pathinfo($file_name);
-
-        if ($file_name !== false && $path_info['extension'] != 'css') {
-            return $this->renderBlade($name);
-        } else {
+        $bladeName = resource_path("views/components/$this->component/$this->component.blade.php");
+        $vueName = resource_path("views/components/$this->component/$this->component.vue");
+        
+        if ($this->vue && is_file($vueName)) {
             return $this->renderVue($name);
         }
-    }
-
-    public function exists($view)
-    {
-        try {
-            return view()->getFinder()->find($view);
-        } catch (InvalidArgumentException $e) {
-            return false;
+        if ($this->vue && !is_file($vueName)) {
+            return '';
         }
+        if (is_file($vueName) && is_file($bladeName)) {
+            return $this->renderBlade($name);
+        }
+        if (!is_file($vueName) && is_file($bladeName)) {
+            return $this->renderBlade($name);
+        }
+        if (is_file($vueName) && !is_file($bladeName)) {
+            return $this->renderVue($name);
+        }
+        return '';
     }
 
     public function __toString()

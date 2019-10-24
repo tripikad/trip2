@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Content;
+use Illuminate\Support\Facades\Storage;
 
 class StyleController extends Controller
 {
@@ -10,8 +11,7 @@ class StyleController extends Controller
     {
         return collect(styleVars())
             ->filter(function ($value, $key) {
-                return !ends_with($key, '-hover') &&
-                    starts_with($value, 'hsl');
+                return !ends_with($key, '-hover') && starts_with($value, 'hsl');
             })
             ->map(function ($value, $key) {
                 return component('StyleColor')
@@ -24,8 +24,7 @@ class StyleController extends Controller
     {
         $colors = collect(styleVars())
             ->filter(function ($value, $key) {
-                return !ends_with($key, '-hover') &&
-                    starts_with($value, 'hsl');
+                return !ends_with($key, '-hover') && starts_with($value, 'hsl');
             })
             ->map(function ($value, $key) {
                 return '<div style="background: ' .
@@ -57,24 +56,14 @@ class StyleController extends Controller
                     ->with('cols', 2)
                     ->with(
                         'items',
-                        $photos
-                            ->take(4)
-                            ->map(function ($photo) {
-                                return component(
-                                    'ExperimentalCard'
-                                )
-                                    ->with(
-                                        'title',
-                                        $photo->vars()
-                                            ->shortTitle
-                                    )
-                                    ->with(
-                                        'background',
-                                        $photo->imagePreset(
-                                            'medium'
-                                        )
-                                    );
-                            })
+                        $photos->take(4)->map(function ($photo) {
+                            return component('ExperimentalCard')
+                                ->with('title', $photo->vars()->shortTitle)
+                                ->with(
+                                    'background',
+                                    $photo->imagePreset('medium')
+                                );
+                        })
                     )
             );
     }
@@ -99,24 +88,14 @@ class StyleController extends Controller
                     ->with('widths', '2 3 2')
                     ->with(
                         'items',
-                        $photos
-                            ->take(6)
-                            ->map(function ($photo) {
-                                return component(
-                                    'ExperimentalCard'
-                                )
-                                    ->with(
-                                        'title',
-                                        $photo->vars()
-                                            ->shortTitle
-                                    )
-                                    ->with(
-                                        'background',
-                                        $photo->imagePreset(
-                                            'medium'
-                                        )
-                                    );
-                            })
+                        $photos->take(6)->map(function ($photo) {
+                            return component('ExperimentalCard')
+                                ->with('title', $photo->vars()->shortTitle)
+                                ->with(
+                                    'background',
+                                    $photo->imagePreset('medium')
+                                );
+                        })
                     )
             );
     }
@@ -150,19 +129,11 @@ class StyleController extends Controller
                     ->with(
                         'items',
                         $photos->map(function ($photo) {
-                            return component(
-                                'ExperimentalCard'
-                            )
-                                ->with(
-                                    'title',
-                                    $photo->vars()
-                                        ->shortTitle
-                                )
+                            return component('ExperimentalCard')
+                                ->with('title', $photo->vars()->shortTitle)
                                 ->with(
                                     'background',
-                                    $photo->imagePreset(
-                                        'medium'
-                                    )
+                                    $photo->imagePreset('medium')
                                 );
                         })
                     )
@@ -180,14 +151,7 @@ class StyleController extends Controller
             ->map(function ($value, $key) use ($spacer) {
                 return component('StyleSpacing')
                     ->with('key', $key)
-                    ->with(
-                        'value',
-                        str_replace(
-                            '$spacer',
-                            $spacer,
-                            $value
-                        )
-                    );
+                    ->with('value', str_replace('$spacer', $spacer, $value));
             });
     }
 
@@ -202,14 +166,7 @@ class StyleController extends Controller
             ->map(function ($value, $key) use ($spacer) {
                 return component('StyleSpacing')
                     ->with('key', $key)
-                    ->with(
-                        'value',
-                        str_replace(
-                            '$spacer',
-                            $spacer,
-                            $value
-                        )
-                    );
+                    ->with('value', str_replace('$spacer', $spacer, $value));
             });
     }
 
@@ -285,34 +242,20 @@ class StyleController extends Controller
                                 ','
                             ],
                             [
-                                $fontSizeXs .
-                                    ' (font-size-xs)',
-                                $fontSizeSm .
-                                    ' (font-size-sm)',
-                                $fontSizeMd .
-                                    ' (font-size-md)',
-                                $fontSizeLg .
-                                    ' (font-size-lg)',
-                                $fontSizeXl .
-                                    ' (font-size-xl)',
-                                $fontSizeXxl .
-                                    ' (font-size-xxl)',
-                                $fontSizeXxxl .
-                                    ' (font-size-xxxl)',
-                                $fontSizeXxxxl .
-                                    ' (font-size-xxxx;)',
-                                $lineHeightXs .
-                                    ' (line-height-xs)',
-                                $lineHeightSm .
-                                    ' (line-height-sm)',
-                                $lineHeightMd .
-                                    ' (line-height-md)',
-                                $lineHeightLg .
-                                    ' (line-height-lg)',
-                                $lineHeightXl .
-                                    ' (line-height-xl)',
-                                $lineHeightXXl .
-                                    ' (line-height-xxl)',
+                                $fontSizeXs . ' (font-size-xs)',
+                                $fontSizeSm . ' (font-size-sm)',
+                                $fontSizeMd . ' (font-size-md)',
+                                $fontSizeLg . ' (font-size-lg)',
+                                $fontSizeXl . ' (font-size-xl)',
+                                $fontSizeXxl . ' (font-size-xxl)',
+                                $fontSizeXxxl . ' (font-size-xxxl)',
+                                $fontSizeXxxxl . ' (font-size-xxxx;)',
+                                $lineHeightXs . ' (line-height-xs)',
+                                $lineHeightSm . ' (line-height-sm)',
+                                $lineHeightMd . ' (line-height-md)',
+                                $lineHeightLg . ' (line-height-lg)',
+                                $lineHeightXl . ' (line-height-xl)',
+                                $lineHeightXXl . ' (line-height-xxl)',
                                 'normal',
                                 'semibold',
                                 'bold',
@@ -351,10 +294,7 @@ class StyleController extends Controller
                     ->push(
                         component('Title')
                             ->is('medium')
-                            ->with(
-                                'title',
-                                'Spacings and paddings'
-                            )
+                            ->with('title', 'Spacings and paddings')
                     )
                     ->push(
                         component('Grid')
@@ -365,17 +305,13 @@ class StyleController extends Controller
                                     ->push(
                                         $this->spacings()
                                             ->render()
-                                            ->implode(
-                                                '<br>'
-                                            )
+                                            ->implode('<br>')
                                     )
                                     ->push(
                                         '<div style="height: calc(12px * 11.5);">&nbsp</div>' .
                                             $this->widths()
                                                 ->render()
-                                                ->implode(
-                                                    '<br>'
-                                                )
+                                                ->implode('<br>')
                                     )
                             )
                     )
@@ -391,30 +327,21 @@ class StyleController extends Controller
                     ->push(
                         component('Title')
                             ->is('medium')
-                            ->with(
-                                'title',
-                                'Flexbox grid I'
-                            )
+                            ->with('title', 'Flexbox grid I')
                     )
                     ->merge($this->grid($photos))
                     ->push('&nbsp;')
                     ->push(
                         component('Title')
                             ->is('medium')
-                            ->with(
-                                'title',
-                                'Flexbox grid II'
-                            )
+                            ->with('title', 'Flexbox grid II')
                     )
                     ->merge($this->grid2($photos))
                     ->push('&nbsp;')
                     ->push(
                         component('Title')
                             ->is('medium')
-                            ->with(
-                                'title',
-                                'Experimental CSS grid'
-                            )
+                            ->with('title', 'Experimental CSS grid')
                     )
                     ->merge($this->grid3($photos))
             )

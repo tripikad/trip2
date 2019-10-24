@@ -1,11 +1,11 @@
 @php
 
-$items = collect($items) ?? collect();
+$items = $items ?? [];
 $gutter = $gutter ?? false;
 
 @endphp
 
-@foreach ($items->chunk(3) as $row)
+@foreach (collect($items)->chunk(3) as $row)
     
 <div class="row">
     
@@ -26,7 +26,7 @@ $gutter = $gutter ?? false;
 
 @endforeach
 
-@foreach ($items->withoutLastWhenOdd()->chunk(2) as $row)
+@foreach (collect($items)->withoutLastWhenOdd()->chunk(2) as $row)
     
 <div class="row">
     
