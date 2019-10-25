@@ -9,11 +9,7 @@ class ExperimentsController extends Controller
         return layout('Two')
             ->with(
                 'content',
-                collect()->push(
-                    component('Title')
-                        ->is('large')
-                        ->with('title', 'Components')
-                )
+                collect()->push(component('Button')->with('title', 'Button'))
             )
             ->render();
     }

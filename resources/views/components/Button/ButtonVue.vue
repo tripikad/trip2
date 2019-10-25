@@ -1,11 +1,11 @@
 <template>
     <a :href="route" :target="external ? '_blank' : ''">
-        <div class="Btn" :class="isclasses">
-            <div v-if="icon" class="Btn__icon">
+        <div class="Button" :class="isclasses">
+            <div v-if="icon" class="Button__icon">
                 <!-- component('Icon')->is('white')->with('icon', $icon) !!} -->
             </div>
 
-            <div class="Btn__title">{{ title }}</div>
+            <div class="Button__title">{{ title }}</div>
         </div>
     </a>
 </template>
