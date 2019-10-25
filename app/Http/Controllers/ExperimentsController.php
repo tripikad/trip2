@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Destination;
-
 class ExperimentsController extends Controller
 {
     public function index()
     {
-        return 'Experiments';
+        return layout('Two')
+            ->with(
+                'content',
+                collect()->push(
+                    component('Title')
+                        ->is('large')
+                        ->with('title', 'Components')
+                )
+            )
+            ->render();
     }
 }
