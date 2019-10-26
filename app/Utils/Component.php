@@ -54,11 +54,12 @@ class Component
     {
         $component = $this->component;
 
-        if (! $this->is->isEmpty()) {
-            return $this->is->map(function ($item) use ($component) {
-                return $component.'--'.$item;
-            })
-            ->implode(' ');
+        if (!$this->is->isEmpty()) {
+            return $this->is
+                ->map(function ($item) use ($component) {
+                    return $component . '--' . $item;
+                })
+                ->implode(' ');
         }
 
         return '';
@@ -71,7 +72,7 @@ class Component
             ->render();
     }
 
-    public function renderVue($name)
+    public function renderVue($vueComponent)
     {
         $props = $this->with
             ->map(function ($value, $key) {
@@ -81,29 +82,47 @@ class Component
             })
             ->implode(' ');
 
-        return '<component is="'
-            .$this->component
-            .'" isclasses="'
-            .$this->generateIsClasses()
-            .'" '
-            .$props
-            .' ></component>';
+        return '<component is="' .
+            $vueComponent .
+            '" isclasses="' .
+            $this->generateIsClasses() .
+            '" ' .
+            $props .
+            ' ></component>';
     }
 
     public function render()
     {
-        if (! $this->when) {
+        if (!$this->when) {
             return '';
         }
-       
+
         $name = "components.$this->component.$this->component";
-        $bladeName = resource_path("views/components/$this->component/$this->component.blade.php");
-        $vueName = resource_path("views/components/$this->component/$this->component.vue");
-        
-        if ($this->vue && is_file($vueName)) {
-            return $this->renderVue($name);
+        $bladeName = resource_path(
+            "views/components/$this->component/$this->component.blade.php"
+        );
+        $vueName = resource_path(
+            "views/components/$this->component/$this->component.vue"
+        );
+        $suffixedVueName = resource_path(
+            'views/components/' .
+                $this->component .
+                '/' .
+                $this->component .
+                'Vue.vue'
+        );
+
+        if ($this->vue && is_file($suffixedVueName)) {
+            return $this->renderVue($this->component . 'Vue');
         }
-        if ($this->vue && !is_file($vueName)) {
+        if (!is_file($bladeName) && is_file($suffixedVueName)) {
+            return $this->renderVue($this->component . 'Vue');
+        }
+
+        if ($this->vue && is_file($vueName)) {
+            return $this->renderVue($this->component);
+        }
+        if ($this->vue && !is_file($this->component)) {
             return '';
         }
         if (is_file($vueName) && is_file($bladeName)) {
@@ -113,7 +132,7 @@ class Component
             return $this->renderBlade($name);
         }
         if (is_file($vueName) && !is_file($bladeName)) {
-            return $this->renderVue($name);
+            return $this->renderVue($this->component);
         }
         return '';
     }

@@ -22,30 +22,19 @@ class MakeComponent extends Command
             '@import "variables";',
             ".$name {",
             '}',
-            ".$name".'__'."$element {",
-            "}\n",
+            ".$name" . '__' . "$element {",
+            "}\n"
         ];
 
-        Storage::disk('root')->put(
-            "$dir/$name.css",
-            implode("\n\n", $css)
-        );
+        Storage::disk('root')->put("$dir/$name.css", implode("\n\n", $css));
 
         $vue = [
             '<template>',
-            '',
             "    <div class=\"$name\" :class=\"isclasses\">",
-            '',
-            "        <div class=\"$name".
-                '__'.
-                "$element\">",
-            '',
-            '            {{ title }} {{ message }}',
-            '',
-            '        </div>',
-            '',
+            "        <div class=\"$name" .
+                '__' .
+                "$element\">{{ title }} {{ message }}</div>",
             '    </div>',
-            '',
             '</template>',
             '',
             '<script>',
@@ -58,7 +47,7 @@ class MakeComponent extends Command
             "        message: 'from Vue'",
             '    })',
             '}',
-            "</script>\n",
+            "</script>\n"
         ];
 
         $blade = [
@@ -66,15 +55,15 @@ class MakeComponent extends Command
             "\$title = \$title ?? '';",
             '@endphp',
             "<div class=\"$name {{ \$isclasses }}\">",
-            "    <div class=\"$name".'__'."$element\">",
+            "    <div class=\"$name" . '__' . "$element\">",
             '        {{ $title }}',
             '    </div>',
-            "</div>\n",
+            "</div>\n"
         ];
 
         if ($this->option('vue')) {
             Storage::disk('root')->put(
-                "$dir/$name.vue",
+                $dir . '/' . $name . '.vue',
                 implode("\n", $vue)
             );
             $this->info("\nVue component $dir created\n");

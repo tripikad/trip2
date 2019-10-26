@@ -1,21 +1,21 @@
 <template>
     <div class="Offers" :class="isclasses">
+        <!--div class="Offers__filters">
+            <form-buttons :items="['Kõik','Seiklusreisid','Bussireisid','Pakettreisid']" />
+        </div-->
         <div class="Offers__filters">
-            <form-select placeholder="Company" :options="companies" v-model="activeCompany" />
-            <form-select
-                placeholder="Destination"
-                :options="destinations"
-                v-model="activeDestination"
-            />
-            <form-select placeholder="Style" :options="styles" v-model="activeStyle" />
+            <form-select placeholder="Firma" :options="companies" v-model="activeCompany" />
+            <form-select placeholder="Sihkoht" :options="destinations" v-model="activeDestination" />
+            <form-select placeholder="Reisistiil" :options="styles" v-model="activeStyle" />
             <a v-if="!notFiltered" @click="handleClearFilters" class="Button Button--gray">Show all</a>
         </div>
-        <!--
-        <form-select-multiple :options="options" v-model="activeOptions" />
-        {{ activeOptions }}
-        -->
         <div class="Offers__offers">
-            <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" />
+            <OfferRow
+                v-for="(offer, i) in filteredOffers"
+                :key="i"
+                :offer="offer"
+                @click.native="$events.$emit('offer', offer)"
+            />
         </div>
     </div>
 </template>
@@ -43,25 +43,21 @@ export default {
             )
         },
         companies() {
-            return unique(
-                this.offers.map(o => o.company)
-            ).map((name, id) => ({
+            return unique(this.offers.map(o => o.company)).map((name, id) => ({
                 id,
                 name
             }))
         },
         destinations() {
-            return unique(
-                this.offers.map(o => o.destination)
-            ).map((name, id) => ({
-                id,
-                name
-            }))
+            return unique(this.offers.map(o => o.destination)).map(
+                (name, id) => ({
+                    id,
+                    name
+                })
+            )
         },
         styles() {
-            return unique(
-                this.offers.map(o => o.style)
-            ).map((name, id) => ({
+            return unique(this.offers.map(o => o.style)).map((name, id) => ({
                 id,
                 name
             }))
@@ -98,11 +94,7 @@ export default {
                     if (this.activeStyle > -1) {
                         return (
                             o.style ==
-                            this.getById(
-                                this.styles,
-                                this.activeStyle,
-                                'name'
-                            )
+                            this.getById(this.styles, this.activeStyle, 'name')
                         )
                     }
                     return true

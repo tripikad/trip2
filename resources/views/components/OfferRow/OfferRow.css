@@ -2,10 +2,11 @@
 
 .OfferRow {
     display: flex;
+    cursor: pointer;
 }
 
 .OfferRow__image {
-    width: $width-md !important;
+    width: $width-md;
     height: $height-md;
     object-fit: cover;
     margin-right: $margin-sm;
@@ -21,6 +22,8 @@
     font: $font-text-sm;
     color: $gray;
     display: flex;
+    flex-wrap: wrap;
+    flex: 1;
 }
 
 .OfferRow__meta > * {
