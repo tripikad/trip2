@@ -1,0 +1,31 @@
+@import 'variables';
+
+.FormButtons {
+    display: inline-flex;
+    align-items: center;
+    border-radius: $border-radius-md;
+    border: 1px solid $gray;
+    overflow: hidden;
+}
+
+.FormButtons__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: $font-heading-sm;
+    line-height: $line-height-xs;
+    padding: 0 $padding-md;
+    text-align: center;
+    border-right: 1px solid $gray;
+    color: $gray-dark;
+    cursor: pointer;
+    height: calc($spacer * 3.2);
+}
+
+.FormButtons__button:last-child {
+    border: none;
+}
+
+.FormButtons__button--active {
+    background: $gray-light;
+}

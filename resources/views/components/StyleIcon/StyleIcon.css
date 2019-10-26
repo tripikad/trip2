@@ -1,0 +1,10 @@
+@import 'variables';
+
+.StyleIcon .Icon {
+    border: 1px solid $gray !important;
+}
+.StyleIcon .Icon * {
+    stroke: $black;
+    stroke-width: 0.5px;
+    fill: $red;
+}
