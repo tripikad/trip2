@@ -1,8 +1,8 @@
 <template>
     <div class="Offers" :class="isclasses">
-        <div class="Offers__filters">
+        <!--div class="Offers__filters">
             <form-buttons :items="['Kõik','Seiklusreisid','Bussireisid','Pakettreisid']" />
-        </div>
+        </div-->
         <div class="Offers__filters">
             <form-select placeholder="Firma" :options="companies" v-model="activeCompany" />
             <form-select placeholder="Sihkoht" :options="destinations" v-model="activeDestination" />
@@ -10,7 +10,12 @@
             <a v-if="!notFiltered" @click="handleClearFilters" class="Button Button--gray">Show all</a>
         </div>
         <div class="Offers__offers">
-            <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" />
+            <OfferRow
+                v-for="(offer, i) in filteredOffers"
+                :key="i"
+                :offer="offer"
+                @click.native="$events.$emit('offer', offer)"
+            />
         </div>
     </div>
 </template>

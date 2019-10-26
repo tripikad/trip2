@@ -2,6 +2,7 @@
 
 .OfferRow {
     display: flex;
+    cursor: pointer;
 }
 
 .OfferRow__image {

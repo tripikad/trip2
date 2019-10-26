@@ -1,0 +1,11 @@
+@import 'variables';
+
+.OfferDetails {
+    position: fixed;
+    bottom: $margin-md;
+    right: $margin-md;
+    width: $width-xxxl;
+}
+
+.OfferDetails__title {
+}

@@ -16,25 +16,12 @@ class OfferController extends Controller
                     collect()->push(
                         component('Title')
                             ->is('large')
-                            ->with(
-                                'title',
-                                trans('offers.index.title')
-                            )
+                            ->with('title', trans('offers.index.title'))
                     )
                 )
             )
-            ->with(
-                'content',
-                collect()->push(component('Offers'))
-            )
-            ->with(
-                'sidebar',
-                collect()->push(
-                    component('Title')
-                        ->is('small')
-                        ->with('title', '')
-                )
-            )
+            ->with('content', collect()->push(component('Offers')))
+            ->with('sidebar', collect()->push(component('OfferDetails')))
             ->render();
     }
 }
