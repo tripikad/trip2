@@ -1,10 +1,6 @@
 <template>
     <div>
         <div class="FormSliderMultiple" :class="isclasses">
-            <div class="FormSliderMultiple__labels">
-                <div class="FormSliderMultiple__label">{{ min }}</div>
-                <div class="FormSliderMultiple__label">{{ max }}</div>
-            </div>
             <vue-slider
                 v-model="values"
                 :min="min"
@@ -15,10 +11,11 @@
                 :tooltip-formatter="formatter"
                 :lazy="true"
                 :tooltip="tooltip ? 'always' : 'focus'"
+                :contained="true"
             />
         </div>
-        <input v-show="true" :value="values[0]" type="text" :name="name" />
-        <input v-show="true" :value="values[1]" type="text" :name="name2" />
+        <input v-show="false" :value="values[0]" type="text" :name="name" />
+        <input v-show="false" :value="values[1]" type="text" :name="name2" />
     </div>
 </template>
 
@@ -53,21 +50,17 @@ export default {
         }
     },
     created() {
-        //     this.$watch(
-        // 'values',
-        //     )
         this.$watch(
             vm => [vm.value, vm.value2, vm.min, vm.max],
-            _ => {
-                console.log(this.value, this.value2, this.min, this.max)
+            ([value, value2, min, max]) => {
+                this.values = [
+                    value < min ? min : value,
+                    value2 > max ? max : value2
+                ]
             },
             { immediate: true }
         )
 
-        this.values = [
-            this.value < this.min ? this.min : this.value,
-            this.value2 > this.max ? this.max : this.value2
-        ]
         this.$watch(
             'values',
             ([first, second]) => {
