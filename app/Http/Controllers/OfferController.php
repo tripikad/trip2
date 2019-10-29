@@ -7,6 +7,7 @@ class OfferController extends Controller
     public function index()
     {
         return layout('Two')
+            ->with('head_robots', 'noindex')
             ->with('background', component('BackgroundMap'))
 
             ->with(
@@ -21,7 +22,7 @@ class OfferController extends Controller
                 )
             )
             ->with('content', collect()->push(component('Offers')))
-            ->with('sidebar', collect()->push(component('OfferDetails')))
+            //->with('sidebar', collect()->push(component('OfferDetails')))
             ->render();
     }
 }

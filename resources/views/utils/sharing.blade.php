@@ -8,3 +8,4 @@
 <meta property="og:locale" content="et_EE">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="fb:app_id" content="{{ config('services.facebook.client_id') }}">
+<meta name="robots" content="@yield('head_robots')">
