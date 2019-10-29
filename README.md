@@ -129,6 +129,14 @@ npm run build # Minified and slow production build
 npm run watch # Unminified and fast dev build, recompiling on file change
 ```
 
+### Live reload
+
+First make sure `FULL_BASE_URL` refers to local development URL. Then run
+
+```sh
+./scripts/bs.sh
+```
+
 ### Build process
 
 The main entrypoint is `./resources/views/main.js` what boots up a Vue instance and includes all the neccessary assets.
@@ -268,8 +276,7 @@ Modifiers
 Variables are located in `/resources/views/styles/variables.json` and `/resources/views/styles/variables.css` and can be imported as
 
 ```scss
-@import 'variables'
-    // Resolves to ./resources/views/styles/variables.json|css
+@import 'variables' // Resolves to ./resources/views/styles/variables.json|css
     .Component {
     height: $spacer;
 }

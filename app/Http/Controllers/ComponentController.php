@@ -47,6 +47,7 @@ class ComponentController extends Controller
     public function index()
     {
         return layout('Two')
+            ->with('title', 'Components')
             ->with(
                 'content',
                 collect()
