@@ -1,12 +1,12 @@
 @import 'variables';
 @import 'vue-slider-component/theme/default.css';
 
-.FormSlider__labels {
+.FormSliderMultiple__labels {
     display: flex;
     justify-content: space-between;
 }
 
-.FormSlider__label {
+.FormSliderMultiple__label {
     font: $font-text-sm;
     color: $gray;
 }

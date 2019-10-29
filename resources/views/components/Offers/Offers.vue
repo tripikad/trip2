@@ -1,8 +1,16 @@
 <template>
     <div class="Offers" :class="isclasses">
-        <!--div class="Offers__filters">
-            <form-buttons :items="['Kõik','Seiklusreisid','Bussireisid','Pakettreisid']" />
-        </div-->
+        <!--form-buttons :items="['Kõik','Seiklusreisid','Bussireisid','Pakettreisid']" /-->
+        <form-slider-multiple
+            :value="activePriceFrom"
+            @input="value => activePriceFrom = value"
+            :value2="activePriceTo"
+            @input2="value2 => activePriceTo = value2"
+            :min="100"
+            :max="10000"
+            :step="50"
+        />
+        {{ activePriceFrom }} / {{ activePriceTo }}
         <div class="Offers__filters">
             <form-select placeholder="Firma" :options="companies" v-model="activeCompany" />
             <form-select placeholder="Sihkoht" :options="destinations" v-model="activeDestination" />
@@ -32,7 +40,9 @@ export default {
         id: '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE',
         activeCompany: -1,
         activeDestination: -1,
-        activeStyle: -1
+        activeStyle: -1,
+        activePriceFrom: 200,
+        activePriceTo: 1000
     }),
     computed: {
         notFiltered() {

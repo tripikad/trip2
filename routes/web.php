@@ -399,6 +399,10 @@ Route::post('utils/format', 'UtilsController@format')->name('utils.format');
 
 Route::get('experiments', 'ExperimentsController@index');
 
+Route::post('experiments/store', 'ExperimentsController@store')->name(
+    'experiments.store'
+);
+
 Route::get('styles', 'StyleController@index');
 
 Route::get('components', 'ComponentController@index')->name('components');

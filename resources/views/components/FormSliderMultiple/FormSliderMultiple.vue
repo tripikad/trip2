@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="FormSlider" :class="isclasses">
-            <div class="FormSlider__labels">
-                <div class="FormSlider__label">{{ values[0] }}</div>
-                <div class="FormSlider__label">{{ values[1] }}</div>
+        <div class="FormSliderMultiple" :class="isclasses">
+            <div class="FormSliderMultiple__labels">
+                <div class="FormSliderMultiple__label">{{ values[0] }}</div>
+                <div class="FormSliderMultiple__label">{{ values[1] }}</div>
             </div>
             <vue-slider
                 v-model="values"
@@ -14,6 +14,7 @@
                 :enable-cross="false"
                 :tooltip-formatter="formatter"
                 :lazy="true"
+                :tooltip="tooltip ? 'always' : 'focus'"
             />
         </div>
         <input v-show="false" :value="values[0]" type="text" :name="name" />
@@ -30,24 +31,40 @@ export default {
         isclasses: { default: '' },
         name: { default: '' },
         name2: { default: '' },
+        value: { default: 0 },
+        value2: { default: 100 },
         min: { default: 0 },
         max: { default: 100 },
         minRange: { default: 0 },
         step: { default: 1 },
         prefix: { default: '' },
         suffix: { default: '' },
-        suffix: { lazy: true }
+        lazy: { default: true },
+        tooltip: { default: true }
     },
     data() {
         return {
-            values: [this.min, this.max]
+            values: [0, 100]
         }
     },
     methods: {
         formatter(value) {
-            return `${this.prefix}${value}${this.suffix}`
+            return `${this.prefix || ''}${value}${this.suffix || ''}`
         }
     },
-    mounted() {}
+    created() {
+        this.values = [
+            this.value < this.min ? this.min : this.value,
+            this.value2 > this.max ? this.max : this.value2
+        ]
+        this.$watch(
+            'values',
+            ([first, second]) => {
+                this.$emit('input', first)
+                this.$emit('input2', second)
+            },
+            { immediate: true }
+        )
+    }
 }
 </script>
