@@ -399,6 +399,10 @@ Route::post('utils/format', 'UtilsController@format')->name('utils.format');
 
 Route::get('experiments', 'ExperimentsController@index');
 
+Route::post('experiments/store', 'ExperimentsController@store')->name(
+    'experiments.store'
+);
+
 Route::get('styles', 'StyleController@index');
 
 Route::get('components', 'ComponentController@index')->name('components');
@@ -534,7 +538,7 @@ Route::get('lendude_sooduspakkumised/rss', [
 
 // Offers
 
-Route::get('offers', 'OfferController@index')->middleware('role:admin');
+Route::get('offers', 'OfferController@index');
 
 // Legacy user paths
 
