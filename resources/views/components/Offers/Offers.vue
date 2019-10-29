@@ -2,15 +2,13 @@
     <div class="Offers" :class="isclasses">
         <!--form-buttons :items="['Kõik','Seiklusreisid','Bussireisid','Pakettreisid']" /-->
         <form-slider-multiple
-            :value="activePriceFrom"
-            @input="value => activePriceFrom = value"
-            :value2="activePriceTo"
-            @input2="value2 => activePriceTo = value2"
-            :min="100"
-            :max="10000"
-            :step="50"
+            :value="1"
+            @inputt="value => activePriceFrom = value"
+            :value2="50"
+            @inputt2="value2 => activePriceTo = value2"
+            :min="0"
+            :max="maxPrice"
         />
-        {{ activePriceFrom }} / {{ activePriceTo }}
         <div class="Offers__filters">
             <form-select placeholder="Firma" :options="companies" v-model="activeCompany" />
             <form-select placeholder="Sihkoht" :options="destinations" v-model="activeDestination" />
@@ -45,6 +43,22 @@ export default {
         activePriceTo: 1000
     }),
     computed: {
+        minPrice() {
+            if (this.offers.length) {
+                return Math.min(
+                    ...this.offers.map(o => this.convertToNumber(o.price))
+                )
+            }
+            return 0
+        },
+        maxPrice() {
+            if (this.offers.length) {
+                return Math.max(
+                    ...this.offers.map(o => this.convertToNumber(o.price))
+                )
+            }
+            return 100
+        },
         notFiltered() {
             return (
                 this.activeCompany == -1 &&
@@ -112,6 +126,9 @@ export default {
         }
     },
     methods: {
+        convertToNumber(num) {
+            return parseFloat(num.replace(/[^0-9.]/g, ''))
+        },
         getById(data, id, key) {
             if (data.length) {
                 return data.filter(d => d.id == id)[0][key]

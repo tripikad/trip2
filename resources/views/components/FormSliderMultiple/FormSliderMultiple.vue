@@ -2,8 +2,8 @@
     <div>
         <div class="FormSliderMultiple" :class="isclasses">
             <div class="FormSliderMultiple__labels">
-                <div class="FormSliderMultiple__label">{{ values[0] }}</div>
-                <div class="FormSliderMultiple__label">{{ values[1] }}</div>
+                <div class="FormSliderMultiple__label">{{ min }}</div>
+                <div class="FormSliderMultiple__label">{{ max }}</div>
             </div>
             <vue-slider
                 v-model="values"
@@ -17,8 +17,8 @@
                 :tooltip="tooltip ? 'always' : 'focus'"
             />
         </div>
-        <input v-show="false" :value="values[0]" type="text" :name="name" />
-        <input v-show="false" :value="values[1]" type="text" :name="name2" />
+        <input v-show="true" :value="values[0]" type="text" :name="name" />
+        <input v-show="true" :value="values[1]" type="text" :name="name2" />
     </div>
 </template>
 
@@ -53,6 +53,17 @@ export default {
         }
     },
     created() {
+        //     this.$watch(
+        // 'values',
+        //     )
+        this.$watch(
+            vm => [vm.value, vm.value2, vm.min, vm.max],
+            _ => {
+                console.log(this.value, this.value2, this.min, this.max)
+            },
+            { immediate: true }
+        )
+
         this.values = [
             this.value < this.min ? this.min : this.value,
             this.value2 > this.max ? this.max : this.value2
