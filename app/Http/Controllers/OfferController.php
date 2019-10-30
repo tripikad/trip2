@@ -50,6 +50,7 @@ class OfferController extends Controller
         $offer = $this->getSheet()[$id];
 
         return layout('Two')
+            ->with('head_robots', 'noindex')
             ->with('title', 'Offer')
             ->with(
                 'header',
@@ -88,13 +89,146 @@ class OfferController extends Controller
             ->with(
                 'sidebar',
                 collect()->push(
-                    component('Button')->with(
-                        'title',
-                        trans('offers.show.book')
-                    )
+                    component('Button')
+                        ->with('title', trans('offers.show.book'))
+                        ->with('route', route('offers.book', $id))
                 )
             )
             ->render();
+    }
+
+    public function book($id)
+    {
+        $offer = $this->getSheet()[$id];
+
+        $user = auth()->user();
+        $email = $user ? $user->email : '';
+        $name = $user && $user->real_name ? $user->real_name : '';
+
+        return layout('Two')
+            ->with('head_robots', 'noindex')
+            ->with('background', component('BackgroundMap'))
+            ->with(
+                'header',
+                region(
+                    'StaticHeader',
+                    collect()
+                        ->push(
+                            component('Link')
+                                ->with('title', trans('offers.book.back'))
+                                ->with('route', route('offers.show', $id))
+                        )
+                        ->push(
+                            component('Title')
+                                ->is('large')
+                                ->with('title', trans('offers.book.title'))
+                        )
+                )
+            )
+            ->with(
+                'content',
+                collect()
+                    ->push(component('OfferRow')->with('offer', $offer))
+                    ->push(
+                        component('Form')
+                            ->with('route', route('offers.send', $id))
+                            ->with(
+                                'fields',
+                                collect()
+                                    ->push(
+                                        component('FormTextfield')
+                                            ->with('name', 'name')
+                                            ->with('title', 'Name')
+                                            ->with('value', $name)
+                                    )
+                                    ->push(
+                                        component('FormTextfield')
+                                            ->with('name', 'email')
+                                            ->with('title', 'E-mail')
+                                            ->with('value', $email)
+                                    )
+                                    ->push(
+                                        component('FormTextfield')
+                                            ->with('name', 'phone')
+                                            ->with('title', 'Phone')
+                                    )
+                                    ->push(
+                                        component('FormTextfield')
+                                            ->with('name', 'adults')
+                                            ->with('title', 'Number of adults')
+                                    )
+                                    ->push(
+                                        component('FormTextfield')
+                                            ->with('name', 'children')
+                                            ->with(
+                                                'title',
+                                                'Number of children'
+                                            )
+                                    )
+                                    ->push(
+                                        component('FormTextarea')
+                                            ->with('name', 'notes')
+                                            ->with('title', 'Notes')
+                                    )
+                                    ->push(
+                                        component('FormCheckbox')
+                                            ->with('name', 'insurance')
+                                            ->with(
+                                                'title',
+                                                'I need an insurance'
+                                            )
+                                    )
+                                    ->push(
+                                        component('FormCheckbox')
+                                            ->with('name', 'installments')
+                                            ->with(
+                                                'title',
+                                                'I want to pay by installments'
+                                            )
+                                    )
+                                    ->push(
+                                        component('FormCheckbox')
+                                            ->with('name', 'flexible')
+                                            ->with(
+                                                'title',
+                                                'I am flexible with dates (+-3 days)'
+                                            )
+                                    )
+                                    ->push(
+                                        component('FormButton')->with(
+                                            'title',
+                                            'Book an offer'
+                                        )
+                                    )
+                            )
+                    )
+            )
+            ->with('sidebar', '&nbsp;')
+            ->render();
+    }
+
+    public function send($id)
+    {
+        return redirect()
+            ->route('offers.index')
+            ->with(
+                'info',
+                component('Code')
+                    ->with(
+                        'code',
+                        json_encode(
+                            collect(request()->all())->filter(function (
+                                $value,
+                                $key
+                            ) {
+                                return true;
+                                return !starts_with($key, '_');
+                            }),
+                            JSON_PRETTY_PRINT
+                        )
+                    )
+                    ->render()
+            );
     }
 
     private function getSheet()
