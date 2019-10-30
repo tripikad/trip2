@@ -534,7 +534,13 @@ Route::get('lendude_sooduspakkumised/rss', [
 
 // Offers
 
-Route::get('offers', 'OfferController@index')->middleware('role:admin');
+Route::get('offers', 'OfferController@index')->name('offers.index');
+
+Route::get('offers/json', 'OfferController@indexJson')->name(
+    'offers.index.json'
+);
+
+Route::get('offers/{id}', 'OfferController@show')->name('offers.show');
 
 // Legacy user paths
 

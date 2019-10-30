@@ -10,12 +10,7 @@
             <a v-if="!notFiltered" @click="handleClearFilters" class="Button Button--gray">Show all</a>
         </div>
         <div class="Offers__offers">
-            <OfferRow
-                v-for="(offer, i) in filteredOffers"
-                :key="i"
-                :offer="offer"
-                @click.native="$events.$emit('offer', offer)"
-            />
+            <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" />
         </div>
     </div>
 </template>
@@ -25,7 +20,8 @@ import { parseSheets, unique } from '../../utils/utils'
 
 export default {
     props: {
-        isclasses: { default: '' }
+        isclasses: { default: '' },
+        route: { default: '' }
     },
     data: () => ({
         offers: [],
@@ -115,13 +111,19 @@ export default {
         }
     },
     mounted() {
-        fetch(
-            `https://spreadsheets.google.com/feeds/list/${this.id}/od6/public/values?alt=json`
-        )
-            .then(res => res.json())
-            .then(res => {
-                this.offers = parseSheets(res)
-            })
+        if (this.route) {
+            fetch(this.route)
+                .then(res => res.json())
+                .then(res => (this.offers = res))
+        }
+
+        // fetch(
+        //     `https://spreadsheets.google.com/feeds/list/${this.id}/od6/public/values?alt=json`
+        // )
+        //     .then(res => res.json())
+        //     .then(res => {
+        //         this.offers = parseSheets(res)
+        //     })
     }
 }
 </script>

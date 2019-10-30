@@ -54,4 +54,20 @@ class ExperimentsController extends Controller
             )
             ->render();
     }
+
+    public function show($id)
+    {
+        return layout('Two')
+            ->with('title', 'Experiments')
+            ->with(
+                'content',
+                collect()->push(
+                    component('Code')->with(
+                        'code',
+                        json_encode($this->getSheet()[$id], JSON_PRETTY_PRINT)
+                    )
+                )
+            )
+            ->render();
+    }
 }
