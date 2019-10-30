@@ -1,13 +1,21 @@
 <template>
     <div class="Offers" :class="isclasses">
-        <!--div class="Offers__filters">
-            <form-buttons :items="['Kõik','Seiklusreisid','Bussireisid','Pakettreisid']" />
-        </div-->
+        <!--form-buttons :items="['Kõik','Seiklusreisid','Bussireisid','Pakettreisid']" /-->
+        <form-slider-multiple
+            :value="activePriceFrom"
+            @input="value => activePriceFrom = value"
+            :value2="activePriceTo"
+            @input2="value2 => activePriceTo = value2"
+            :min="minPrice"
+            :max="maxPrice"
+            :step="step"
+            suffix="€"
+        />
         <div class="Offers__filters">
-            <form-select placeholder="Firma" :options="companies" v-model="activeCompany" />
-            <form-select placeholder="Sihkoht" :options="destinations" v-model="activeDestination" />
             <form-select placeholder="Reisistiil" :options="styles" v-model="activeStyle" />
-            <a v-if="!notFiltered" @click="handleClearFilters" class="Button Button--gray">Show all</a>
+            <form-select placeholder="Sihkoht" :options="destinations" v-model="activeDestination" />
+            <form-select placeholder="Firma" :options="companies" v-model="activeCompany" />
+            <a v-if="!notFiltered" @click="handleClearFilters" class="Button Button--gray">Kõik</a>
         </div>
         <div class="Offers__offers">
             <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" />
@@ -28,14 +36,39 @@ export default {
         id: '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE',
         activeCompany: -1,
         activeDestination: -1,
-        activeStyle: -1
+        activeStyle: -1,
+        activePriceFrom: 0,
+        activePriceTo: 0,
+        priceRange: 500,
+        round: 10,
+        step: 50
     }),
     computed: {
+        minPrice() {
+            if (this.offers.length) {
+                const price = Math.min(
+                    ...this.offers.map(o => this.convertToNumber(o.price))
+                )
+                return Math.floor(price / this.round) * this.round
+            }
+            return 0
+        },
+        maxPrice() {
+            if (this.offers.length) {
+                const price = Math.max(
+                    ...this.offers.map(o => this.convertToNumber(o.price))
+                )
+                return Math.ceil(price / this.round) * this.round
+            }
+            return 100
+        },
         notFiltered() {
             return (
                 this.activeCompany == -1 &&
                 this.activeDestination == -1 &&
-                this.activeStyle == -1
+                this.activeStyle == -1 &&
+                this.activePriceFrom == this.minPrice &&
+                this.activePriceTo == this.maxPrice
             )
         },
         companies() {
@@ -95,9 +128,18 @@ export default {
                     }
                     return true
                 })
+                .filter(o => {
+                    return (
+                        this.convertToNumber(o.price) >= this.activePriceFrom &&
+                        this.convertToNumber(o.price) <= this.activePriceTo
+                    )
+                })
         }
     },
     methods: {
+        convertToNumber(num) {
+            return parseFloat(num.replace(/[^0-9.]/g, ''))
+        },
         getById(data, id, key) {
             if (data.length) {
                 return data.filter(d => d.id == id)[0][key]
@@ -108,6 +150,8 @@ export default {
             this.activeCompany = -1
             this.activeDestination = -1
             this.activeStyle = -1
+            this.activePriceFrom = this.minPrice
+            this.activePriceTo = this.maxPrice
         }
     },
     mounted() {

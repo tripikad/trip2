@@ -9,6 +9,7 @@ class OfferController extends Controller
     public function index()
     {
         return layout('Two')
+            ->with('head_robots', 'noindex')
             ->with('background', component('BackgroundMap'))
 
             ->with(

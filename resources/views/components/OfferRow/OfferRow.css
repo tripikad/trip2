@@ -11,6 +11,11 @@
     object-fit: cover;
     margin-right: $margin-sm;
 }
+
+.OfferRow__content {
+    flex: 1;
+}
+
 .OfferRow__title {
     font: $font-text-lg;
     color: $blue;

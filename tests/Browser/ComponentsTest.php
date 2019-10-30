@@ -11,8 +11,6 @@ class ComponentsTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser
-                ->visit('/components')
-                ->assertSourceHas('Components')
                 ->visit('/components?preview')
                 ->assertSourceHas('Components');
         });
