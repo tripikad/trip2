@@ -4,58 +4,43 @@ namespace App\Http\Controllers;
 
 class ExperimentsController extends Controller
 {
-    /*
-    export const parseSheets = data => {
-    return data.feed.entry.map(entry => {
-        return Object.keys(entry)
-            .map(field => {
-                if (field.startsWith('gsx$')) {
-                    return [
-                        field.split('$')[1],
-                        entry[field].$t
-                    ]
-                }
-            })
-            .filter(field => field)
-            .reduce((field, item) => {
-                field[item[0]] = item[1]
-                return field
-            }, {})
-    })
-}
-    */
-    private function parse($data)
+    private function parseSheet($data)
     {
-        $d = collect($data->feed->entry)->map(function ($entry) {
+        return collect($data->feed->entry)->map(function ($entry) {
             return collect($entry)
                 ->keys()
                 ->map(function ($field) use ($entry) {
                     if (starts_with($field, 'gsx$')) {
-                        return [$field, $entry->{$field}->{'$t'}];
+                        return [
+                            str_replace('gsx$', '', $field),
+                            $entry->{$field}->{'$t'}
+                        ];
                     } else {
                         return false;
                     }
-                });
+                })
+                ->filter(function ($field) {
+                    return $field;
+                })
+                ->reduce(function ($carry, $field) {
+                    return $carry->put($field[0], $field[1]);
+                }, collect());
         });
-
-        dd($d);
     }
 
-    private function code()
+    private function getSheet()
     {
         $id = '1TLEDlvDC_06gy75IhNAyXaUjt-9oOT2XOqW2LEpycHE';
+
         $url =
             'https://spreadsheets.google.com/feeds/list/' .
             $id .
             '/od6/public/values?alt=json';
-        $this->parse(json_decode(file_get_contents($url)));
-        //return $data;
+        return $this->parseSheet(json_decode(file_get_contents($url)));
     }
 
     public function index()
     {
-        $this->code();
-
         return layout('Two')
             ->with('title', 'Experiments')
             ->with(
@@ -63,7 +48,7 @@ class ExperimentsController extends Controller
                 collect()->push(
                     component('Code')->with(
                         'code',
-                        json_encode($this->code(), JSON_PRETTY_PRINT)
+                        json_encode($this->getSheet(), JSON_PRETTY_PRINT)
                     )
                 )
             )
