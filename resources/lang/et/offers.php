@@ -1,5 +1,7 @@
 <?php
 
 return [
-  'index.title' => 'Reisipakkumised',
+    'index.title' => 'Reisipakkumised',
+    'show.back' => 'Kõik reisipakkumised',
+    'show.book' => 'Broneeri reis'
 ];
