@@ -11,7 +11,6 @@
             :step="step"
             suffix="€"
         />
-        {{ minPrice }} / {{ maxPrice }} / {{ activePriceFrom }} / {{ activePriceTo }}
         <div class="Offers__filters">
             <form-select placeholder="Reisistiil" :options="styles" v-model="activeStyle" />
             <form-select placeholder="Sihkoht" :options="destinations" v-model="activeDestination" />
@@ -129,12 +128,12 @@ export default {
                     }
                     return true
                 })
-            // .filter(o => {
-            //     return (
-            //         this.convertToNumber(o.price) >= this.activePriceFrom &&
-            //         this.convertToNumber(o.price) <= this.activePriceTo
-            //     )
-            // })
+                .filter(o => {
+                    return (
+                        this.convertToNumber(o.price) >= this.activePriceFrom &&
+                        this.convertToNumber(o.price) <= this.activePriceTo
+                    )
+                })
         }
     },
     methods: {
@@ -159,7 +158,14 @@ export default {
         if (this.route) {
             fetch(this.route)
                 .then(res => res.json())
-                .then(res => (this.offers = res.slice(0, 10)))
+                .then(res => {
+                    this.offers = res
+                    this.activePriceFrom = this.minPrice
+                    this.activePriceTo =
+                        this.maxPrice < this.minPrice + this.priceRange
+                            ? this.minPrice + this.priceRange
+                            : this.maxPrice
+                })
         }
     }
 }

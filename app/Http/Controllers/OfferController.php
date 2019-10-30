@@ -211,24 +211,7 @@ class OfferController extends Controller
     {
         return redirect()
             ->route('offers.index')
-            ->with(
-                'info',
-                component('Code')
-                    ->with(
-                        'code',
-                        json_encode(
-                            collect(request()->all())->filter(function (
-                                $value,
-                                $key
-                            ) {
-                                return true;
-                                return !starts_with($key, '_');
-                            }),
-                            JSON_PRETTY_PRINT
-                        )
-                    )
-                    ->render()
-            );
+            ->with('info', 'The booking was sent');
     }
 
     private function getSheet()
