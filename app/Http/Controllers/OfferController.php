@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
+
 class OfferController extends Controller
 {
     public function index()
@@ -35,7 +37,12 @@ class OfferController extends Controller
 
     public function indexJson()
     {
-        return response()->json($this->getSheet());
+        $data = $this->getSheet()->map(function ($item, $index) {
+            $item->put('route', route('offers.show', $index));
+            return $item;
+        });
+
+        return response()->json($data);
     }
 
     public function show($id)
@@ -63,7 +70,10 @@ class OfferController extends Controller
             'https://spreadsheets.google.com/feeds/list/' .
             $id .
             '/od6/public/values?alt=json';
-        return $this->parseSheet(json_decode(file_get_contents($url)));
+
+        return Cache::remember('sheet', 1, function () use ($url) {
+            return $this->parseSheet(json_decode(file_get_contents($url)));
+        });
     }
 
     private function parseSheet($data)

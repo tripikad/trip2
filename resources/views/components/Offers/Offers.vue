@@ -116,14 +116,6 @@ export default {
                 .then(res => res.json())
                 .then(res => (this.offers = res))
         }
-
-        // fetch(
-        //     `https://spreadsheets.google.com/feeds/list/${this.id}/od6/public/values?alt=json`
-        // )
-        //     .then(res => res.json())
-        //     .then(res => {
-        //         this.offers = parseSheets(res)
-        //     })
     }
 }
 </script>

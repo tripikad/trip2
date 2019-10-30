@@ -21,11 +21,10 @@
 .OfferRow__meta {
     font: $font-text-sm;
     color: $gray;
-    display: flex;
-    flex-wrap: wrap;
     flex: 1;
 }
 
 .OfferRow__meta > * {
     margin-right: $margin-xl;
+    display: inline;
 }
