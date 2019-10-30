@@ -26,10 +26,8 @@
 .OfferRow__meta {
     font: $font-text-sm;
     color: $gray;
-    flex: 1;
 }
 
 .OfferRow__meta > * {
     margin-right: $margin-xl;
-    display: inline;
 }

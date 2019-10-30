@@ -80,9 +80,13 @@ class OfferController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Code')->with(
-                        'code',
-                        json_encode($offer, JSON_PRETTY_PRINT)
+                    component('Body')->with(
+                        'body',
+                        collect($offer)
+                            ->map(function ($value, $key) {
+                                return $key . ' : ' . $value;
+                            })
+                            ->implode('<br>')
                     )
                 )
             )
