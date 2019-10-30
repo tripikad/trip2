@@ -1,11 +1,11 @@
 <template>
-    <div class="OfferRow" :class="isclasses">
+    <a :href="offer.route" class="OfferRow" :class="isclasses">
         <img class="OfferRow__image" :src="offer.image || './photos/image_blank.png'" />
         <div class="OfferRow__content">
             <div class="OfferRow__title">{{ offer.title }} al. {{ offer.price }}</div>
             <div class="OfferRow__meta">{{ meta.join(' ') }}</div>
         </div>
-    </div>
+    </a>
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
             return Object.entries(this.offer)
                 .filter(
                     ([key]) =>
-                        key !== 'title' && key !== 'image' && key !== 'price'
+                        !['title', 'image', 'price', 'route'].includes(key)
                 )
                 .map(([key, value]) => value)
         }

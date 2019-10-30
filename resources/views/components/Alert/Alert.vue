@@ -1,34 +1,11 @@
 <template>
+    <div v-show="open" class="Alert" :class="isclasses" transition="fadeCollapse" @click="onClick">
+        <div class="Alert__title" v-html="title" />
 
-    <div
-        v-show="open"
-        class="Alert"
-        :class="isclasses"
-        transition="fadeCollapse"
-        @click="onClick"
-    >
-            
-        <div class="Alert__title">
-
-            {{ title }}
-
+        <div class="Alert__closeIcon">
+            <component :is="'Icon'" icon="icon-close" size="md"></component>
         </div>
-
-        <div
-            class="Alert__closeIcon"
-        >
-
-            <component
-                :is="'Icon'"
-                icon="icon-close"
-                size="md"
-            >
-            </component>
-
-        </div>
-
     </div>
-
 </template>
 
 <script>

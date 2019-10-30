@@ -18,12 +18,7 @@
             <a v-if="!notFiltered" @click="handleClearFilters" class="Button Button--gray">Kõik</a>
         </div>
         <div class="Offers__offers">
-            <OfferRow
-                v-for="(offer, i) in filteredOffers"
-                :key="i"
-                :offer="offer"
-                @click.native="$events.$emit('offer', offer)"
-            />
+            <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" />
         </div>
     </div>
 </template>
@@ -33,7 +28,8 @@ import { parseSheets, unique } from '../../utils/utils'
 
 export default {
     props: {
-        isclasses: { default: '' }
+        isclasses: { default: '' },
+        route: { default: '' }
     },
     data: () => ({
         offers: [],
@@ -43,7 +39,7 @@ export default {
         activeStyle: -1,
         activePriceFrom: 0,
         activePriceTo: 0,
-        priceRange: 500,
+        priceRange: 1000,
         round: 10,
         step: 50
     }),
@@ -159,18 +155,18 @@ export default {
         }
     },
     mounted() {
-        fetch(
-            `https://spreadsheets.google.com/feeds/list/${this.id}/od6/public/values?alt=json`
-        )
-            .then(res => res.json())
-            .then(res => {
-                this.offers = parseSheets(res)
-                this.activePriceFrom = this.minPrice
-                this.activePriceTo =
-                    this.maxPrice < this.minPrice + this.priceRange
-                        ? this.minPrice + this.priceRange
-                        : this.maxPrice
-            })
+        if (this.route) {
+            fetch(this.route)
+                .then(res => res.json())
+                .then(res => {
+                    this.offers = res
+                    this.activePriceFrom = this.minPrice
+                    this.activePriceTo =
+                        this.maxPrice < this.minPrice + this.priceRange
+                            ? this.minPrice + this.priceRange
+                            : this.maxPrice
+                })
+        }
     }
 }
 </script>
