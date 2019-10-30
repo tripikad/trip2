@@ -72,7 +72,7 @@ class OfferController extends Controller
             $id .
             '/od6/public/values?alt=json';
 
-        return Cache::remember('sheet', 1, function () use ($url) {
+        return Cache::remember('sheet', 0, function () use ($url) {
             return $this->parseSheet(json_decode(file_get_contents($url)));
         });
     }

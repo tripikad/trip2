@@ -128,12 +128,12 @@ export default {
                     }
                     return true
                 })
-                .filter(o => {
-                    return (
-                        this.convertToNumber(o.price) >= this.activePriceFrom &&
-                        this.convertToNumber(o.price) <= this.activePriceTo
-                    )
-                })
+            // .filter(o => {
+            //     return (
+            //         this.convertToNumber(o.price) >= this.activePriceFrom &&
+            //         this.convertToNumber(o.price) <= this.activePriceTo
+            //     )
+            // })
         }
     },
     methods: {
@@ -158,7 +158,7 @@ export default {
         if (this.route) {
             fetch(this.route)
                 .then(res => res.json())
-                .then(res => (this.offers = res))
+                .then(res => (this.offers = res.slice(0, 10)))
         }
     }
 }
