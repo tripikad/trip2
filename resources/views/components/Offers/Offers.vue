@@ -11,6 +11,7 @@
             :step="step"
             suffix="€"
         />
+        {{ minPrice }} / {{ maxPrice }} / {{ activePriceFrom }} / {{ activePriceTo }}
         <div class="Offers__filters">
             <form-select placeholder="Reisistiil" :options="styles" v-model="activeStyle" />
             <form-select placeholder="Sihkoht" :options="destinations" v-model="activeDestination" />
@@ -39,7 +40,7 @@ export default {
         activeStyle: -1,
         activePriceFrom: 0,
         activePriceTo: 0,
-        priceRange: 500,
+        priceRange: 1000,
         round: 10,
         step: 50
     }),
