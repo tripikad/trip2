@@ -2,12 +2,25 @@
 
 .StyleFont {
     display: flex;
+    display: block ?if $mobile;
 }
 
-.StyleFont__title {
+.StyleFont__code {
     width: 250px;
     margin-left: $margin-sm;
+    margin-top: $margin-md ?if $mobile;
+}
+
+.StyleFont__key {
     font: $font-code-sm;
+    line-height: $line-height-lg;
+    color: $gray;
+    margin-bottom: $margin-sm;
+}
+
+.StyleFont__value {
+    font: $font-code-sm;
+    line-height: $line-height-lg;
     color: $gray;
 }
 
@@ -16,11 +29,19 @@
 }
 
 .StyleFont__font > * {
+    border: 1px solid transparent;
+}
+
+.StyleFont__font:hover > * {
     border: 1px solid $gray;
 }
 
 .StyleFont__font > *::first-line {
-    border: 1px solid $red;
+    border: 1px solid transparent;
+}
+
+.StyleFont__font:hover > *::first-line {
+    border: 1px solid $gray;
 }
 
 .font-text-xs {

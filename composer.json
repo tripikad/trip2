@@ -28,6 +28,7 @@
         "predis/predis": "~1.0",
         "roumen/feed": "~2.10",
         "roumen/sitemap": "^2.6",
+        "scrivo/highlight.php": "^9.15",
         "symfony/yaml": "^4.0",
         "wpb/string-blade-compiler": "2.*@dev"
     },

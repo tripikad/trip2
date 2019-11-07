@@ -10,17 +10,16 @@ $value = $value ?? '';
     <div class="StyleFont__font">
         <div class="{{ $key }}">
 
-            Kui Arno isaga koolimajja jõudis, olid tunnid juba alanud. Arno roomas vargsi mööda klassitoa seinaäärt
-            suure
+After the absence of twenty-six years, Marco Polo and his father Nicolo and his uncle Maffeo returned from the spectacular court of Kublai Khan to their old home in Venice. 
 
         </div>
     </div>
 
-    <div class="StyleFont__title">
+    <div class="StyleFont__code">
 
-        {{ $key }}:
-        <br>
-        {{ $value }}
+        <div class="StyleFont__key">font: <span class="hljs-string">${!! $key !!}</span></div>
+        
+        <div class="StyleFont__value">{!!  highlight($value,'js') !!}</div>
 
     </div>
 
