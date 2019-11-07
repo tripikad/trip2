@@ -397,6 +397,8 @@ Route::post('utils/format', 'UtilsController@format')->name('utils.format');
 
 // Experiments and style guides
 
+Route::get('styleguide', 'StyleguideController@index');
+
 Route::get('experiments', 'ExperimentsController@index');
 
 Route::post('experiments/store', 'ExperimentsController@store')->name(
