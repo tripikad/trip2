@@ -19,7 +19,7 @@ After the absence of twenty-six years, Marco Polo and his father Nicolo and his 
 
         <div class="StyleFont__key">font: <span class="hljs-string">${!! $key !!}</span></div>
         
-        <div class="StyleFont__value">{!!  highlight($value,'js') !!}</div>
+        <div class="StyleFont__value">{!! $value !!}</div>
 
     </div>
 

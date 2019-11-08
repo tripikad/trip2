@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .Body {
     font: $font-text-md;
@@ -126,10 +126,27 @@
 }
 
 .Body hr {
-    border-top: 1px solid $gray-light;
-    border: 0;
+    border-top: 3px solid $gray-light;
     height: 0;
     margin: $margin-md 0;
+}
+
+.Body pre {
+    white-space: pre-wrap;
+    word-wrap: normal;
+    line-height: $line-height-lg;
+    color: $gray;
+    font-family: $font-family-code;
+    font-size: $font-size-sm;
+    background: $gray-light;
+    padding: calc($spacer * 1.5);
+    margin-bottom: $margin-md;
+}
+
+.Body mark {
+    background: $yellow;
+    padding: $padding-xs $padding-xxs 0 $padding-xxs;
+    font-size: $font-size-md;
 }
 
 .Body > .FlightCalendar {

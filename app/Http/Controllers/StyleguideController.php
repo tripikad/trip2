@@ -34,8 +34,22 @@ class StyleguideController extends Controller
                     ->merge($this->iconComponents())
                     ->push(
                         component('Title')
-                            ->is('small')
+                            ->is('large')
                             ->with('title', 'Fonts')
+                    )
+                    ->push(
+                        component('Body')
+                            ->is('large')
+                            ->with(
+                                'body',
+                                format_body(
+                                    file_get_contents(
+                                        Storage::disk('resources')->path(
+                                            '/views/texts/fonts.md'
+                                        )
+                                    )
+                                )
+                            )
                     )
                     ->merge($this->fonts())
                     ->push('&nbsp;')
@@ -401,20 +415,34 @@ class StyleguideController extends Controller
                                 ','
                             ],
                             [
-                                $fontSizeXs . ' ($font-size-xs)',
-                                $fontSizeSm . ' ($font-size-sm)',
-                                $fontSizeMd . ' (font-size-md)',
-                                $fontSizeLg . ' (font-size-lg)',
-                                $fontSizeXl . ' (font-size-xl)',
-                                $fontSizeXxl . ' (font-size-xxl)',
-                                $fontSizeXxxl . ' (font-size-xxxl)',
-                                $fontSizeXxxxl . ' (font-size-xxxx;)',
-                                $lineHeightXs . ' (line-height-xs)',
-                                $lineHeightSm . ' (line-height-sm)',
-                                $lineHeightMd . ' (line-height-md)',
-                                $lineHeightLg . ' (line-height-lg)',
-                                $lineHeightXl . ' (line-height-xl)',
-                                $lineHeightXXl . ' (line-height-xxl)',
+                                $fontSizeXs .
+                                    ' (<span class="hljs-string">$font-size-xs</span>)',
+                                $fontSizeSm .
+                                    ' (<span class="hljs-string">$font-size-sm</span>)',
+                                $fontSizeMd .
+                                    ' (<span class="hljs-string">font-size-md</span>)',
+                                $fontSizeLg .
+                                    ' (<span class="hljs-string">font-size-lg</span>)',
+                                $fontSizeXl .
+                                    ' (<span class="hljs-string">font-size-xl</span>)',
+                                $fontSizeXxl .
+                                    ' (<span class="hljs-string">font-size-xxl</span>)',
+                                $fontSizeXxxl .
+                                    ' (<span class="hljs-string">font-size-xxxl</span>)',
+                                $fontSizeXxxxl .
+                                    ' (<span class="hljs-string">font-size-xxxx</span>)',
+                                $lineHeightXs .
+                                    ' (<span class="hljs-string">line-height-xs</span>)',
+                                $lineHeightSm .
+                                    ' (<span class="hljs-string">line-height-sm</span>)',
+                                $lineHeightMd .
+                                    ' (<span class="hljs-string">line-height-md</span>)',
+                                $lineHeightLg .
+                                    ' (<span class="hljs-string">line-height-lg</span>)',
+                                $lineHeightXl .
+                                    ' (<span class="hljs-string">line-height-xl</span>)',
+                                $lineHeightXXl .
+                                    ' (<span class="hljs-string">line-height-xxl)',
                                 'normal',
                                 'semibold',
                                 'bold',
