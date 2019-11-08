@@ -10,7 +10,7 @@
 }
 
 .Code--gray {
-    background: $gray-light;
+    background: $gray-lighter;
     padding: calc($spacer * 1.5);
 }
 
@@ -42,7 +42,7 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 .hljs-meta-keyword,
 .hljs-doctag,
 .hljs-name {
-    font-weight: bold;
+    color: $green;
 }
 
 /* User color: hue: 0 */
@@ -51,11 +51,14 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 .hljs-string,
 .hljs-number,
 .hljs-selector-id,
-.hljs-selector-class,
 .hljs-quote,
 .hljs-template-tag,
 .hljs-deletion {
     color: $blue;
+}
+
+.hljs-selector-class {
+    color: $purple;
 }
 
 .hljs-title,

@@ -7,20 +7,144 @@ use Illuminate\Support\Facades\Storage;
 
 class StyleguideController extends Controller
 {
+    protected function mdfile($filename)
+    {
+        return $this->md(
+            file_get_contents(
+                Storage::disk('resources')->path(
+                    '/views/md/' . $filename . '.md'
+                )
+            )
+        );
+    }
+
+    protected function md($md)
+    {
+        return component('Body')->with('body', format_body($md));
+    }
+
     public function index()
     {
         $photos = Content::getLatestItems('photo', 6);
 
         return layout('Two')
-            ->with('title', 'Styles')
+            ->with('title', 'Cusco')
             ->with(
                 'content',
                 collect()
+                    ->push(component('StyleTitle')->with('title', 'Cusco'))
+                    ->push(
+                        component('Body')
+                            ->is('larger')
+                            ->with(
+                                'body',
+                                format_body(
+                                    'Component library and CSS styleguide for Trip.ee. Shouldn\'t it be called a *design system*?'
+                                )
+                            )
+                    )
                     ->push(
                         component('Title')
                             ->is('large')
-                            ->with('title', 'Styleguide')
+                            ->with('title', 'Making a component')
                     )
+                    ->push($this->mdfile('makingcomponent'))
+                    ->push(
+                        component('Title')
+                            ->is('large')
+                            ->with('title', 'Typopgraphy')
+                    )
+                    ->push(
+                        $this->md('
+                        For headings and body texts we use [Sailec](https://www.myfonts.com/fonts/typedynamic/sailec) by Nico Inosanto . For code snippets we use [Cousine](https://fonts.google.com/specimen/Cousine) by Steve Matteson. The typefaces are picked for optimum legibility and also for standing out from regular web font choices.
+
+                        # Text
+
+                        ## Default text size
+
+                        In most cases, you can rely on default body text size `$font-text-md`. 
+
+                        <!--
+                        Do not use full black on text color, the darkest shade of gray should be `$gray-dark`.
+                        -->
+
+                        ```
+                        .SomeComponent__text {
+                          font: $font-text-md;
+                        }
+                        ```
+
+                        ## Larger text size
+
+                        Go **one size up** `$font-text-lg` when you need to emphasize the text (citations).
+
+                        ## Small text size
+
+                        Go iate **one size down** `$font-text-sm` when you need to de-emphasize the text (impressum in the footer) or make the text more compact (secondary UI elements).
+
+                        ## All text sizes
+
+                        Text CSS variables are defined as following:
+
+                        ---
+                        ')
+                    )
+                    ->merge($this->fonts('font-text'))
+                    ->push(
+                        $this->md('
+                        ---
+
+                        <ins>TODO</ins> Reduce number of font size variations. `$font-text-xs` can likely be unified with `$font-text-sm`?
+                    
+                        # Headings
+
+                        The smallest heading size for particular text size has the same size modifier `sm` / `md` / `lg` etc.
+
+                        ```
+                        .SomeComponent__heading {
+                          font: $font-heading-md;
+                        }
+                        .SomeComponent__text {
+                          font: $font-text-md;
+                        }
+                        ```
+
+                        <mark>Tip</mark> The optimal heading size for particular text size is actually **one size up**.
+
+                        ```
+                        .SomeComponent__heading {
+                          font: $font-heading-lg; /* Better */
+                        }
+                        .SomeComponent__text {
+                          font: $font-text-md;
+                        }
+                        ```
+
+                        Below are all the heading sizes:
+
+                        ---
+                    ')
+                    )
+                    ->merge($this->fonts('font-heading'))
+                    ->push(
+                        $this->md('
+                        ---
+
+                        # Code 
+
+                        Usually the monospaced typography for code snippets is kept for internal usage and is not exposed to a general user but can be usefult in admin interfaces (Markdown editor, code experiments etc).
+
+                        <mark>Tip</mark> Use `$font-code-sm` for lables and code snippets.
+
+                        <mark>Tip</mark> Use `$font-code-md` for code editors.
+
+                        Below are all the code sizes:
+
+                        ---
+                      ')
+                    )
+                    ->merge($this->fonts('font-code'))
+                    ->push('&nbsp;')
                     ->push(
                         component('Title')
                             ->is('small')
@@ -32,27 +156,6 @@ class StyleguideController extends Controller
                             ->with('code', '{ sm: 14, md: 18, lg: 26, xl: 36 }')
                     )
                     ->merge($this->iconComponents())
-                    ->push(
-                        component('Title')
-                            ->is('large')
-                            ->with('title', 'Fonts')
-                    )
-                    ->push(
-                        component('Body')
-                            ->is('large')
-                            ->with(
-                                'body',
-                                format_body(
-                                    file_get_contents(
-                                        Storage::disk('resources')->path(
-                                            '/views/texts/fonts.md'
-                                        )
-                                    )
-                                )
-                            )
-                    )
-                    ->merge($this->fonts())
-                    ->push('&nbsp;')
                     ->push(
                         component('Title')
                             ->is('medium')
@@ -139,14 +242,6 @@ class StyleguideController extends Controller
                                 str_replace(['-', 'icon'], ' ', $file)
                             )
                     )
-                    // ->push(
-                    //     component('Code')
-                    //         ->is('gray')
-                    //         ->with(
-                    //             'code',
-                    //             $file . "\n\n" . $this->svgFiles()[$index]
-                    //         )
-                    // )
                     ->merge(
                         collect($this->iconSizes)
                             ->map(function ($size) use ($file) {
@@ -343,7 +438,7 @@ class StyleguideController extends Controller
             });
     }
 
-    public function fonts()
+    public function fonts($type)
     {
         $fontSizeXs = styleVars()->{'font-size-xs'};
         $fontSizeSm = styleVars()->{'font-size-sm'};
@@ -362,12 +457,15 @@ class StyleguideController extends Controller
         $lineHeightXXl = styleVars()->{'line-height-xxl'};
 
         return collect(styleVars())
-            ->filter(function ($value, $key) {
-                return starts_with($key, [
+            ->filter(function ($value, $key) use ($type) {
+                return starts_with(
+                    $key,
+                    $type /*[
                     'font-text',
                     'font-heading',
                     'font-code'
-                ]);
+                ]*/
+                );
             })
             ->map(function ($value, $key) use (
                 $fontSizeXs,

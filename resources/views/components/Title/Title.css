@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .Title__title {
     font: $font-heading-xl;

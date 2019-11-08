@@ -10,8 +10,7 @@ $value = $value ?? '';
     <div class="StyleFont__font">
         <div class="{{ $key }}">
 
-After the absence of twenty-six years, Marco Polo and his father Nicolo and his uncle Maffeo returned from the spectacular court of Kublai Khan to their old home in Venice. 
-
+        Because of its antiquity and importance, the city center retains many buildings, plazas, streets and churches from colonial times, and even some pre-Columbian structures.
         </div>
     </div>
 
