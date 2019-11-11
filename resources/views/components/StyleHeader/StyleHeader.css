@@ -1,0 +1,16 @@
+@import 'variables';
+
+.StyleHeader {
+    font-size: calc($spacer * 9);
+    font-size: calc($spacer * 6) ?if $mobile;
+    font-family: $font-family;
+    font-weight: bold;
+    color: $gray-light;
+    letter-spacing: -0.03em;
+    line-height: 70%;
+}
+
+.StyleHeader--large {
+    font-size: calc($spacer * 16);
+    font-size: calc($spacer * 12) ?if $mobile;
+}

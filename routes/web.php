@@ -397,7 +397,22 @@ Route::post('utils/format', 'UtilsController@format')->name('utils.format');
 
 // Experiments and style guides
 
-Route::get('styleguide', 'StyleguideController@index');
+Route::get('styleguide', 'Styleguide\StyleguideController@index')->name(
+    'styleguide.index'
+);
+
+Route::get(
+    'styleguide/creating',
+    'Styleguide\StyleguideController@creatingIndex'
+)->name('styleguide.creating');
+
+Route::get('styleguide/fonts', 'Styleguide\FontsController@index')->name(
+    'styleguide.fonts'
+);
+
+Route::get('styleguide/grid', 'Styleguide\GridController@index')->name(
+    'styleguide.grid'
+);
 
 Route::get('experiments', 'ExperimentsController@index');
 
