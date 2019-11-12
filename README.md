@@ -121,20 +121,16 @@ php artisan dusk
 
 ## Frontend development
 
-### Commands
+### NPM commands
+
+First make sure `FULL_BASE_URL` refers to local development URL.
 
 ```sh
-npm run dev # Unminified and fast dev build
-npm run build # Minified and slow production build
+npm run dev # runs watch + live
 npm run watch # Unminified and fast dev build, recompiling on file change
-```
-
-### Live reload
-
-First make sure `FULL_BASE_URL` refers to local development URL. Then run
-
-```sh
-./scripts/bs.sh
+npm run live # Live reload in browser
+npm run devbuild # Unminified and fast dev build
+npm run build # Minified and slow production build
 ```
 
 ### Build process
