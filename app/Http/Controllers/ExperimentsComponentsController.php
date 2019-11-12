@@ -4,8 +4,73 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
 
-class ComponentController extends Controller
+class ExperimentsComponentsController extends Controller
 {
+    public function index()
+    {
+        return layout('Two')
+            ->with('title', 'Components')
+            ->with(
+                'content',
+                collect()
+                    ->push(
+                        component('Title')
+                            ->is('large')
+                            ->with('title', 'Components')
+                    )
+                    ->pushWhen(
+                        !request()->has('preview'),
+                        component('Link')
+                            ->with('title', 'Show preview')
+                            ->with(
+                                'route',
+                                route('experiments.components.index', [
+                                    'preview'
+                                ])
+                            )
+                    )
+                    ->pushWhen(
+                        request()->has('preview'),
+                        component('Link')
+                            ->with('title', 'Show list')
+                            ->with(
+                                'route',
+                                route('experiments.components.index')
+                            )
+                    )
+
+                    ->merge(
+                        $this->components()
+                            ->filter(function ($c) {
+                                return !starts_with($c, 'Aff');
+                            })
+                            ->map(function ($c) {
+                                return collect()
+                                    ->push(
+                                        component('Code')
+                                            ->is('gray')
+                                            ->with(
+                                                'code',
+                                                $this->componentCode($c)
+                                            )
+                                    )
+                                    ->pushWhen(
+                                        request()->has('preview'),
+                                        component($c)->with('title', $c)
+                                    )
+                                    ->pushWhen(
+                                        request()->has('preview'),
+                                        component($c)
+                                            ->with('title', $c)
+                                            ->vue()
+                                    );
+                            })
+                    )
+                    ->flatten()
+            )
+            ->render();
+    }
+
     public function components()
     {
         return collect(
@@ -42,62 +107,5 @@ class ComponentController extends Controller
             ($this->isBladeComponent($c) ? 'blade   ' : '        ') .
             ($this->isVueComponent($c) ? '   vue' : '      ') .
             ($this->isCss($c) ? '   css' : '      ');
-    }
-
-    public function index()
-    {
-        return layout('Two')
-            ->with('title', 'Components')
-            ->with(
-                'content',
-                collect()
-                    ->push(
-                        component('Title')
-                            ->is('large')
-                            ->with('title', 'Components')
-                    )
-                    ->pushWhen(
-                        !request()->has('preview'),
-                        component('Link')
-                            ->with('title', 'Show preview')
-                            ->with('route', route('components', ['preview']))
-                    )
-                    ->pushWhen(
-                        request()->has('preview'),
-                        component('Link')
-                            ->with('title', 'Show list')
-                            ->with('route', route('components'))
-                    )
-
-                    ->merge(
-                        $this->components()
-                            ->filter(function ($c) {
-                                return !starts_with($c, 'Aff');
-                            })
-                            ->map(function ($c) {
-                                return collect()
-                                    ->push(
-                                        component('Code')
-                                            ->is('gray')
-                                            ->with(
-                                                'code',
-                                                $this->componentCode($c)
-                                            )
-                                    )
-                                    ->pushWhen(
-                                        request()->has('preview'),
-                                        component($c)->with('title', $c)
-                                    )
-                                    ->pushWhen(
-                                        request()->has('preview'),
-                                        component($c)
-                                            ->with('title', $c)
-                                            ->vue()
-                                    );
-                            })
-                    )
-                    ->flatten()
-            )
-            ->render();
     }
 }

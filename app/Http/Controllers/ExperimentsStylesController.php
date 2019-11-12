@@ -5,52 +5,84 @@ namespace App\Http\Controllers;
 use App\Content;
 use Illuminate\Support\Facades\Storage;
 
-class StyleController extends Controller
+class ExperimentsStylesController extends Controller
 {
-    private function svgFiles()
+    public function index()
     {
-        return collect(Storage::disk('resources')->files('/views/svg'))->map(
-            function ($file) {
-                return str_limit(
-                    file_get_contents(Storage::disk('resources')->path($file)),
-                    200
-                );
-            }
-        );
-    }
+        $photos = Content::getLatestItems('photo', 6);
 
-    private function svgComponents()
-    {
-        return collect(Storage::disk('resources')->files('/views/svg'))
-            ->map(function ($file) {
-                return str_replace(['.svg'], '', basename($file));
-            })
-            ->map(function ($file, $index) {
-                return collect()
+        return layout('Two')
+            ->with('title', 'Styles')
+            ->with(
+                'content',
+                collect()
                     ->push(
-                        component('Code')
-                            ->is('gray')
+                        component('Title')
+                            ->is('large')
+                            ->with('title', 'Styles')
+                    )
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->with('title', 'Fonts')
+                    )
+                    ->merge($this->fonts())
+                    ->push('&nbsp;')
+                    ->push(
+                        component('Title')
+                            ->is('medium')
+                            ->with('title', 'Spacings and paddings')
+                    )
+                    ->push(
+                        component('Grid')
+                            ->with('cols', 2)
                             ->with(
-                                'code',
-                                $file . "\n\n" . $this->svgFiles()[$index]
+                                'items',
+                                collect()
+                                    ->push(
+                                        $this->spacings()
+                                            ->render()
+                                            ->implode('<br>')
+                                    )
+                                    ->push(
+                                        '<div style="height: calc(12px * 11.5);">&nbsp</div>' .
+                                            $this->widths()
+                                                ->render()
+                                                ->implode('<br>')
+                                    )
                             )
                     )
-                    ->merge(
-                        collect(['sm', 'md', 'lg', 'xl', ''])->map(function (
-                            $size
-                        ) use ($file) {
-                            return '<div class="StyleIcon">' .
-                                component('Icon')
-                                    ->with('size', $size)
-                                    ->with('icon', $file)
-                                    ->render() .
-                                '</div>';
-                        })
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->with('title', 'Colors')
                     )
-                    ->flatten();
-            })
-            ->flatten()
-            ->push(component('StyleIcon'));
+                    ->merge($this->colors2())
+                    ->push('&nbsp;')
+                    ->merge($this->colors())
+                    ->push('&nbsp;')
+                    ->push(
+                        component('Title')
+                            ->is('medium')
+                            ->with('title', 'Flexbox grid I')
+                    )
+                    ->merge($this->grid($photos))
+                    ->push('&nbsp;')
+                    ->push(
+                        component('Title')
+                            ->is('medium')
+                            ->with('title', 'Flexbox grid II')
+                    )
+                    ->merge($this->grid2($photos))
+                    ->push('&nbsp;')
+                    ->push(
+                        component('Title')
+                            ->is('medium')
+                            ->with('title', 'Experimental CSS grid')
+                    )
+                    ->merge($this->grid3($photos))
+            )
+            ->render();
     }
 
     public function colors()
@@ -315,94 +347,5 @@ class StyleController extends Controller
                         )
                     );
             });
-    }
-
-    public function index()
-    {
-        $photos = Content::getLatestItems('photo', 6);
-
-        return layout('Two')
-            ->with('title', 'Styles')
-            ->with(
-                'content',
-                collect()
-                    ->push(
-                        component('Title')
-                            ->is('large')
-                            ->with('title', 'Styles')
-                    )
-                    ->push(
-                        component('Title')
-                            ->is('small')
-                            ->with('title', 'Icons')
-                    )
-                    ->push(
-                        component('Code')
-                            ->is('gray')
-                            ->with('code', '{ sm: 14, md: 18, lg: 26, xl: 36 }')
-                    )
-                    ->merge($this->svgComponents())
-                    ->push(
-                        component('Title')
-                            ->is('small')
-                            ->with('title', 'Fonts')
-                    )
-                    ->merge($this->fonts())
-                    ->push('&nbsp;')
-                    ->push(
-                        component('Title')
-                            ->is('medium')
-                            ->with('title', 'Spacings and paddings')
-                    )
-                    ->push(
-                        component('Grid')
-                            ->with('cols', 2)
-                            ->with(
-                                'items',
-                                collect()
-                                    ->push(
-                                        $this->spacings()
-                                            ->render()
-                                            ->implode('<br>')
-                                    )
-                                    ->push(
-                                        '<div style="height: calc(12px * 11.5);">&nbsp</div>' .
-                                            $this->widths()
-                                                ->render()
-                                                ->implode('<br>')
-                                    )
-                            )
-                    )
-                    ->push(
-                        component('Title')
-                            ->is('small')
-                            ->with('title', 'Colors')
-                    )
-                    ->merge($this->colors2())
-                    ->push('&nbsp;')
-                    ->merge($this->colors())
-                    ->push('&nbsp;')
-                    ->push(
-                        component('Title')
-                            ->is('medium')
-                            ->with('title', 'Flexbox grid I')
-                    )
-                    ->merge($this->grid($photos))
-                    ->push('&nbsp;')
-                    ->push(
-                        component('Title')
-                            ->is('medium')
-                            ->with('title', 'Flexbox grid II')
-                    )
-                    ->merge($this->grid2($photos))
-                    ->push('&nbsp;')
-                    ->push(
-                        component('Title')
-                            ->is('medium')
-                            ->with('title', 'Experimental CSS grid')
-                    )
-                    ->merge($this->grid3($photos))
-            )
-            ->render();
     }
 }
