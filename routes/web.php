@@ -413,6 +413,10 @@ Route::get('experiments/icons', 'ExperimentsIconsController@index')->name(
     'experiments.icons.index'
 );
 
+Route::get('experiments/grid', 'ExperimentsGridController@index')->name(
+    'experiments.grid.index'
+);
+
 Route::get(
     'experiments/components',
     'ExperimentsComponentsController@index'

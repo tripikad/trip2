@@ -15,22 +15,13 @@ require.context('./svg', true, /\.svg$/)
 // Require Vue files
 // See https://vuejs.org/v2/guide/components-registration.html
 
-const requireComponent = require.context(
-    './components',
-    true,
-    /\.vue$/
-)
+const requireComponent = require.context('./components', true, /\.vue$/)
 
 requireComponent.keys().forEach(filePath => {
     const componentConfig = requireComponent(filePath)
     // Get the filename from full file path and strip the .vue extension
-    const componentName = filePath
-        .match(/[-_\w]+[.][\w]+$/i)[0]
-        .split('.')[0]
-    Vue.component(
-        componentName,
-        componentConfig.default || componentConfig
-    )
+    const componentName = filePath.match(/[-_\w]+[.][\w]+$/i)[0].split('.')[0]
+    Vue.component(componentName, componentConfig.default || componentConfig)
 })
 
 // Set up cookies
@@ -46,9 +37,7 @@ Vue.prototype.$events = events
 
 const globalProps = JSON.parse(
     decodeURIComponent(
-        document
-            .querySelector('#globalprops')
-            .getAttribute('content')
+        document.querySelector('#globalprops').getAttribute('content')
     )
 )
 Vue.prototype.$globalProps = globalProps

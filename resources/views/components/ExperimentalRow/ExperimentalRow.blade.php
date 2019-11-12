@@ -1,10 +1,7 @@
 @php
-
 $items = $items ?? [];
-$cols = $cols ?? 3;
-$rows = round(collect($items)->count() / $cols, PHP_ROUND_HALF_DOWN);
-$widths = $widths ?? 'repeat('. $cols .', 1fr)';
-$heights = $heights ?? 'repeat('. $rows .', auto)';
+
+$cols = 'repeat(' . (collect($items)->count() - 1) . ', auto) 1fr';
 
 $spacer = style_vars()->spacer;
 
@@ -16,20 +13,18 @@ if (isset($gap) && is_string($gap) && $gap_map[$gap]) {
 else if (isset($gap) && !is_string($gap)) {
   $gap_string = 'calc('. $gap .' * '. $spacer .')';
 } else {
-  $gap_string = '';
+  $gap_string = 'calc('. $gap_map['md'] .' * '. $spacer .')';
 }
-
 @endphp
 
-<div class="ExperimentalGrid {{ $isclasses }}" style="
-        grid-template-columns: {{ $widths }};
-        grid-template-rows: {{ $heights }};
-        grid-gap: {{ $gap_string }}
+<div class="ExperimentalRow {{ $isclasses }}" style="
+        grid-template-columns: {{ $cols }};
+        grid-gap: {{ $gap_string }};
     ">
 
     @foreach ($items as $item)
 
-    <div class="ExperimentalGrid__item">
+    <div class="ExperimentalRow__item">
 
         {!! $item !!}
 

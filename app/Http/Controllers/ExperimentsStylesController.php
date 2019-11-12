@@ -9,8 +9,6 @@ class ExperimentsStylesController extends Controller
 {
     public function index()
     {
-        $photos = Content::getLatestItems('photo', 6);
-
         return layout('Two')
             ->with('title', 'Styles')
             ->with(
@@ -60,34 +58,13 @@ class ExperimentsStylesController extends Controller
                     ->merge($this->colors2())
                     ->push('&nbsp;')
                     ->merge($this->colors())
-                    ->push('&nbsp;')
-                    ->push(
-                        component('Title')
-                            ->is('medium')
-                            ->with('title', 'Flexbox grid I')
-                    )
-                    ->merge($this->grid($photos))
-                    ->push('&nbsp;')
-                    ->push(
-                        component('Title')
-                            ->is('medium')
-                            ->with('title', 'Flexbox grid II')
-                    )
-                    ->merge($this->grid2($photos))
-                    ->push('&nbsp;')
-                    ->push(
-                        component('Title')
-                            ->is('medium')
-                            ->with('title', 'Experimental CSS grid')
-                    )
-                    ->merge($this->grid3($photos))
             )
             ->render();
     }
 
     public function colors()
     {
-        return collect(styleVars())
+        return collect(style_vars())
             ->filter(function ($value, $key) {
                 return !ends_with($key, '-hover') && starts_with($value, 'hsl');
             })
@@ -100,7 +77,7 @@ class ExperimentsStylesController extends Controller
 
     public function colors2()
     {
-        $colors = collect(styleVars())
+        $colors = collect(style_vars())
             ->filter(function ($value, $key) {
                 return !ends_with($key, '-hover') && starts_with($value, 'hsl');
             })
@@ -116,113 +93,11 @@ class ExperimentsStylesController extends Controller
             ->render();
     }
 
-    public function grid($photos)
-    {
-        return collect()
-            ->push(
-                component('Code')
-                    ->is('gray')
-                    ->with(
-                        'code',
-                        "component('Grid')
-    ->with('cols', 2) // Default is 3
-    ->with('items', \$photos->take(4)->...)"
-                    )
-            )
-            ->push(
-                component('Grid')
-                    ->with('cols', 2)
-                    ->with(
-                        'items',
-                        $photos->take(4)->map(function ($photo) {
-                            return component('ExperimentalCard')
-                                ->with('title', $photo->vars()->shortTitle)
-                                ->with(
-                                    'background',
-                                    $photo->imagePreset('medium')
-                                );
-                        })
-                    )
-            );
-    }
-
-    public function grid2($photos)
-    {
-        return collect()
-            ->push(
-                component('Code')
-                    ->is('gray')
-                    ->with(
-                        'code',
-                        "component('Grid')
-    ->with('gap', 1) // \$spacer * 1 || 2
-    ->with('widths', '2 3 2') // maps to flex:2, flex:3, flex:2 on columns
-    ->with('items', \$photos->take(6)->...)"
-                    )
-            )
-            ->push(
-                component('Grid')
-                    ->with('gap', 1)
-                    ->with('widths', '2 3 2')
-                    ->with(
-                        'items',
-                        $photos->take(6)->map(function ($photo) {
-                            return component('ExperimentalCard')
-                                ->with('title', $photo->vars()->shortTitle)
-                                ->with(
-                                    'background',
-                                    $photo->imagePreset('medium')
-                                );
-                        })
-                    )
-            );
-    }
-
-    public function grid3($photos)
-    {
-        return collect()
-            ->push(
-                component('Body')->with(
-                    'body',
-                    'Only supported in <a href="https://caniuse.com/css-grid">latest browsers</a>'
-                )
-            )
-            ->push(
-                component('Code')
-                    ->is('gray')
-                    ->with(
-                        'code',
-                        "component('ExperimentalGrid')
-    ->with('gap', 1) // \$spacer * anything
-    ->with('widths', '1fr 2fr') // maps to grid-template-columns
-    ->with('heights', '2fr 1fr 2fr') // maps to grid-template-rows
-    ->with('items', \$photos->take(6)->...)"
-                    )
-            )
-            ->push(
-                component('ExperimentalGrid')
-                    ->with('gap', 1)
-                    ->with('widths', '1fr 2fr')
-                    ->with('heights', '2fr 1fr 2fr')
-                    ->with(
-                        'items',
-                        $photos->map(function ($photo) {
-                            return component('ExperimentalCard')
-                                ->with('title', $photo->vars()->shortTitle)
-                                ->with(
-                                    'background',
-                                    $photo->imagePreset('medium')
-                                );
-                        })
-                    )
-            );
-    }
-
     public function spacings()
     {
-        $spacer = styleVars()->spacer;
+        $spacer = style_vars()->spacer;
 
-        return collect(styleVars())
+        return collect(style_vars())
             ->filter(function ($value, $key) {
                 return starts_with($key, 'padding-');
             })
@@ -235,9 +110,9 @@ class ExperimentsStylesController extends Controller
 
     public function widths()
     {
-        $spacer = styleVars()->spacer;
+        $spacer = style_vars()->spacer;
 
-        return collect(styleVars())
+        return collect(style_vars())
             ->filter(function ($value, $key) {
                 return starts_with($key, 'width-');
             })
@@ -250,23 +125,23 @@ class ExperimentsStylesController extends Controller
 
     public function fonts()
     {
-        $fontSizeXs = styleVars()->{'font-size-xs'};
-        $fontSizeSm = styleVars()->{'font-size-sm'};
-        $fontSizeMd = styleVars()->{'font-size-md'};
-        $fontSizeLg = styleVars()->{'font-size-lg'};
-        $fontSizeXl = styleVars()->{'font-size-xl'};
-        $fontSizeXxl = styleVars()->{'font-size-xxl'};
-        $fontSizeXxxl = styleVars()->{'font-size-xxxl'};
-        $fontSizeXxxxl = styleVars()->{'font-size-xxxxl'};
+        $fontSizeXs = style_vars()->{'font-size-xs'};
+        $fontSizeSm = style_vars()->{'font-size-sm'};
+        $fontSizeMd = style_vars()->{'font-size-md'};
+        $fontSizeLg = style_vars()->{'font-size-lg'};
+        $fontSizeXl = style_vars()->{'font-size-xl'};
+        $fontSizeXxl = style_vars()->{'font-size-xxl'};
+        $fontSizeXxxl = style_vars()->{'font-size-xxxl'};
+        $fontSizeXxxxl = style_vars()->{'font-size-xxxxl'};
 
-        $lineHeightXs = styleVars()->{'line-height-xs'};
-        $lineHeightSm = styleVars()->{'line-height-sm'};
-        $lineHeightMd = styleVars()->{'line-height-md'};
-        $lineHeightLg = styleVars()->{'line-height-lg'};
-        $lineHeightXl = styleVars()->{'line-height-xl'};
-        $lineHeightXXl = styleVars()->{'line-height-xxl'};
+        $lineHeightXs = style_vars()->{'line-height-xs'};
+        $lineHeightSm = style_vars()->{'line-height-sm'};
+        $lineHeightMd = style_vars()->{'line-height-md'};
+        $lineHeightLg = style_vars()->{'line-height-lg'};
+        $lineHeightXl = style_vars()->{'line-height-xl'};
+        $lineHeightXXl = style_vars()->{'line-height-xxl'};
 
-        return collect(styleVars())
+        return collect(style_vars())
             ->filter(function ($value, $key) {
                 return starts_with($key, [
                     'font-text',
