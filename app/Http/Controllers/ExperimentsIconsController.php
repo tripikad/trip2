@@ -7,6 +7,27 @@ use Illuminate\Support\Facades\Storage;
 
 class ExperimentsIconsController extends Controller
 {
+    public function index()
+    {
+        $photos = Content::getLatestItems('photo', 6);
+
+        return layout('Two')
+            ->with('title', 'Styles')
+            ->with(
+                'content',
+                collect()
+                    ->push(region('ExperimentalMenu'))
+                    ->push(component('Title')->with('title', 'Icons'))
+                    ->push(
+                        component('Code')
+                            ->is('gray')
+                            ->with('code', '{ sm: 14, md: 18, lg: 26, xl: 36 }')
+                    )
+                    ->merge($this->svgComponents())
+            )
+            ->render();
+    }
+
     private function svgFiles()
     {
         return collect(Storage::disk('resources')->files('/views/svg'))->map(
@@ -51,34 +72,5 @@ class ExperimentsIconsController extends Controller
             })
             ->flatten()
             ->push(component('StyleIcon'));
-    }
-
-    public function index()
-    {
-        $photos = Content::getLatestItems('photo', 6);
-
-        return layout('Two')
-            ->with('title', 'Styles')
-            ->with(
-                'content',
-                collect()
-                    ->push(
-                        component('Title')
-                            ->is('large')
-                            ->with('title', 'Styles')
-                    )
-                    ->push(
-                        component('Title')
-                            ->is('small')
-                            ->with('title', 'Icons')
-                    )
-                    ->push(
-                        component('Code')
-                            ->is('gray')
-                            ->with('code', '{ sm: 14, md: 18, lg: 26, xl: 36 }')
-                    )
-                    ->merge($this->svgComponents())
-            )
-            ->render();
     }
 }

@@ -14,10 +14,9 @@ class ExperimentsStylesController extends Controller
             ->with(
                 'content',
                 collect()
+                    ->push(region('ExperimentalMenu'))
                     ->push(
-                        component('Title')
-                            ->is('large')
-                            ->with('title', 'Styles')
+                        component('Title')->with('title', 'Fonts and spacing')
                     )
                     ->push(
                         component('Title')

@@ -16,41 +16,32 @@ class ExperimentsGridController extends Controller
             ->with(
                 'content',
                 collect()
-                    ->push(
-                        region(
-                            'ExperimentalMenu',
-                            (object) ['body' => 'I am StyleMenu region']
-                        )
-                    )
+                    ->push(region('ExperimentalMenu'))
+                    ->push(component('Title')->with('title', 'Grids'))
                     ->push(
                         component('Title')
-                            ->is('large')
-                            ->with('title', 'Grids')
-                    )
-                    ->push(
-                        component('Title')
-                            ->is('medium')
+                            ->is('small')
                             ->with('title', 'Row')
                     )
                     ->merge($this->row($photos))
                     ->br()
                     ->push(
                         component('Title')
-                            ->is('medium')
+                            ->is('small')
                             ->with('title', 'Flexbox grid I')
                     )
                     ->merge($this->grid($photos))
                     ->br()
                     ->push(
                         component('Title')
-                            ->is('medium')
+                            ->is('small')
                             ->with('title', 'Flexbox grid II')
                     )
                     ->merge($this->grid2($photos))
                     ->br()
                     ->push(
                         component('Title')
-                            ->is('medium')
+                            ->is('small')
                             ->with('title', 'Experimental CSS grid')
                     )
                     ->merge($this->grid3($photos))
@@ -128,15 +119,15 @@ class ExperimentsGridController extends Controller
                     ->with(
                         'code',
                         "component('Grid')
-    ->with('gap', 1) // \$spacer * 1 || 2
-    ->with('widths', '2 3 2') // maps to flex:2, flex:3, flex:2 on columns
+    ->with('gap', 'sm') // Resolves to 1 * \$spacer. Can be a number
+    ->with('widths', '2fr 3fr 2fr') // maps to flex:2, flex:3, flex:2 columns
     ->with('items', \$photos->take(6)->...)"
                     )
             )
             ->push(
                 component('Grid')
                     ->with('gap', 1)
-                    ->with('widths', '2 3 2')
+                    ->with('widths', '2fr 3fr 2fr')
                     ->with(
                         'items',
                         $photos->take(6)->map(function ($photo) {

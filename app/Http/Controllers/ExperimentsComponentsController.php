@@ -13,32 +13,12 @@ class ExperimentsComponentsController extends Controller
             ->with(
                 'content',
                 collect()
+                    ->push(region('ExperimentalMenu'))
                     ->push(
                         component('Title')
                             ->is('large')
                             ->with('title', 'Components')
                     )
-                    ->pushWhen(
-                        !request()->has('preview'),
-                        component('Link')
-                            ->with('title', 'Show preview')
-                            ->with(
-                                'route',
-                                route('experiments.components.index', [
-                                    'preview'
-                                ])
-                            )
-                    )
-                    ->pushWhen(
-                        request()->has('preview'),
-                        component('Link')
-                            ->with('title', 'Show list')
-                            ->with(
-                                'route',
-                                route('experiments.components.index')
-                            )
-                    )
-
                     ->merge(
                         $this->components()
                             ->filter(function ($c) {
