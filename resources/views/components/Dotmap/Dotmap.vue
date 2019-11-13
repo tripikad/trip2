@@ -12,9 +12,9 @@
                     opacity="0.25"
                 />
             </g>
-            <g v-if="countriesDots.length">
+            <g v-if="activeCountriesDots.length">
                 <circle
-                    v-for="(c, i) in countriesDots"
+                    v-for="(c, i) in activeCountriesDots"
                     :key="i"
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
@@ -23,7 +23,7 @@
                     opacity="0.25"
                 />
             </g>
-            <path
+            <!-- <path
                 v-if="activeLine"
                 :d="line(activeLine)"
                 stroke="white"
@@ -39,16 +39,19 @@
                 stroke="white"
                 stroke-width="2"
                 :fill="$styleVars.blue"
-            />
-            <circle
-                v-if="activeCity"
-                :cx="xScale(activeCity[0])"
-                :cy="yScale(activeCity[1])"
-                :r="radius * 3"
-                stroke="white"
-                stroke-width="2"
-                :fill="$styleVars.orange"
-            />
+            /> -->
+            <g v-if="activeCitiesCircles.length">
+                <circle
+                    v-for="(c, i) in activeCitiesCircles"
+                    :key="i"
+                    :cx="xScale(c.lon)"
+                    :cy="yScale(c.lat)"
+                    :r="radius * 2"
+                    stroke="white"
+                    stroke-width="2"
+                    :fill="$styleVars.orange"
+                />
+            </g>
         </svg>
     </div>
 </template>
@@ -62,9 +65,9 @@ export default {
         isclasses: { default: '' },
         dots: { default: () => [] },
         country: { default: null },
-        countries: { default: () => [] },
+        activecountries: { default: () => [] },
+        activecities: { default: () => [] },
         cities: { default: () => [] },
-        cities2: { default: () => [] },
         startcity: { default: null },
         city: { default: null },
         width: { default: 750 },
@@ -87,24 +90,33 @@ export default {
         radius() {
             return this.width / 350
         },
-        countriesDots() {
+        activeCountriesDots() {
             return this.dots.filter(
-                d => intersection(d.destination_ids, this.countries).length
+                d =>
+                    intersection(d.destination_ids, this.activecountries).length
             )
         },
+        activeCitiesCircles() {
+            return this.activecities
+                .map(c => (this.cities[c] ? this.cities[c] : null))
+                .filter(c => c)
+        },
         activeCity() {
-            return this.cities2[this.city]
-                ? [this.cities2[this.city].lon, this.cities2[this.city].lat]
+            return this.allcities[this.city]
+                ? [this.allcities[this.city].lon, this.allcities[this.city].lat]
                 : null
         },
         activeLine() {
-            return this.cities2[this.city] && this.cities2[this.city]
+            return this.allcities[this.city] && this.allcities[this.city]
                 ? [
                       [
-                          this.cities2[this.startcity].lon,
-                          this.cities2[this.startcity].lat
+                          this.allcities[this.startcity].lon,
+                          this.allcities[this.startcity].lat
                       ],
-                      [this.cities2[this.city].lon, this.cities2[this.city].lat]
+                      [
+                          this.allcities[this.city].lon,
+                          this.allcities[this.city].lat
+                      ]
                   ]
                 : null
         }

@@ -121,8 +121,14 @@ class ExperimentsController extends Controller
                                     // )
                                     ->push(
                                         component('Dotmap')
-                                            ->with('countries', [411, 357, 311])
                                             ->with('dots', config('dots'))
+                                            ->with('cities', config('cities'))
+                                            ->with('activecountries', [
+                                                411,
+                                                357,
+                                                311
+                                            ])
+                                            ->with('activecities', [4654, 566])
                                     )
                                     ->push(
                                         component('Flex')->with(
