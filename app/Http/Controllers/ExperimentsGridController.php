@@ -67,7 +67,7 @@ class ExperimentsGridController extends Controller
                     )
             )
             ->push(
-                component('ExperimentalRow')
+                component('Row')
                     ->with('gap', 'md')
                     ->with(
                         'items',
