@@ -111,7 +111,7 @@ class ExperimentsGridController extends Controller
                     ->is('gray')
                     ->with(
                         'code',
-                        "component('Grid')
+                        "component('FlexGrid')
     ->with('cols', 2) // Default is 3
     ->with('items', \$photos->take(4)->...)"
                     )
@@ -136,7 +136,7 @@ class ExperimentsGridController extends Controller
                     ->is('gray')
                     ->with(
                         'code',
-                        "component('Grid')
+                        "component('FlexGrid')
   ->is('debug')                   // Debug mode
   ->with('gap', 'sm')             // Resolves to 1 * \$spacer. Can be a number
   ->with('widths', '2fr 3fr 2fr') // 5/2 5/3 5/2 column widths 

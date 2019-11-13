@@ -32,18 +32,27 @@ class ApiController extends Controller
 
     public function flights()
     {
-        $flights = Content::getLatestItems('flight', 16)
-            ->map(function ($f) {
-                return collect()
-                    ->put('title', $f->title)
-                    ->put('image', $f->imagePreset('original'))
-                    ->put('body', format_body($f->body));
-            });
+        $flights = Content::getLatestItems('flight', 16)->map(function ($f) {
+            return collect()
+                ->put('title', $f->title)
+                ->put('image', $f->imagePreset('original'))
+                ->put('body', format_body($f->body));
+        });
 
         return response()
             ->json($flights)
             ->withHeaders([
-                'Access-Control-Allow-Origin' => '*',
+                'Access-Control-Allow-Origin' => '*'
             ]);
+    }
+
+    public function dots()
+    {
+        return response()->json(config('dots'));
+    }
+
+    public function airports()
+    {
+        return response()->json(config('airports'));
     }
 }

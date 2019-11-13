@@ -21,8 +21,8 @@
                         :key="i"
                         :cx="xScale(c.lon)"
                         :cy="yScale(c.lat)"
-                        :r="radius * 2"
-                        fill="orange"
+                        :r="radius"
+                        fill="white"
                         opacity="0.5"
                     />
                 </g>
@@ -31,7 +31,7 @@
                     :cx="xScale(activeCity.lon)"
                     :cy="yScale(activeCity.lat)"
                     :r="radius * 3"
-                    stroke="red"
+                    stroke="white"
                     stroke-width="3"
                     fill="none"
                 />
