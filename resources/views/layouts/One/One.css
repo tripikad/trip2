@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .One__header {
     position: relative;
@@ -15,7 +15,7 @@
     display: flex;
     justify-content: center;
     position: relative;
-    margin: $margin-lg 0;
+    padding: $margin-lg 0;
 }
 
 .One__innerWrapper {

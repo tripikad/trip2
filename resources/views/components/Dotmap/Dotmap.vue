@@ -12,7 +12,8 @@
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius"
-                    fill="gray"
+                    fill="black"
+                    opacity="0.25"
                 />
                 <g v-if="activeCountries.length">
                     <circle

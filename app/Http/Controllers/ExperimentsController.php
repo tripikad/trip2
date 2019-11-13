@@ -8,16 +8,20 @@ class ExperimentsController extends Controller
     {
         return layout('One')
             ->with('title', 'Experiments')
-            ->with('color', 'cyan')
+            ->with('color', 'blue')
             ->with(
-                'content',
-                collect()->push(
-                    component('Dotmap')
-                        ->with('city', 551)
-                        ->with('country', 332)
-                        ->with('countries', config('dots'))
-                        ->with('cities', config('cities'))
-                )
+                'header',
+                collect()
+                    ->push(
+                        component('Dotmap')
+                            ->with('city', 551)
+                            ->with('country', 332)
+                            ->with('countries', config('dots'))
+                            ->with('cities', config('cities'))
+                    )
+
+                    ->render()
+                    ->implode('')
             )
             ->render();
     }
