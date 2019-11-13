@@ -12,15 +12,15 @@
                     opacity="0.25"
                 />
             </g>
-            <g v-if="activedots.length">
+            <g v-if="countriesDots.length">
                 <circle
-                    v-for="(c, i) in activedots"
+                    v-for="(c, i) in countriesDots"
                     :key="i"
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
                     :r="radius"
-                    fill="white"
-                    opacity="0.5"
+                    fill="black"
+                    opacity="0.25"
                 />
             </g>
             <path
@@ -55,13 +55,16 @@
 
 <script>
 import { geoEquirectangular, geoPath } from 'd3-geo'
+import { intersection } from '../../utils/utils'
 
 export default {
     props: {
         isclasses: { default: '' },
         dots: { default: () => [] },
         country: { default: null },
+        countries: { default: () => [] },
         cities: { default: () => [] },
+        cities2: { default: () => [] },
         startcity: { default: null },
         city: { default: null },
         width: { default: 750 },
@@ -84,24 +87,24 @@ export default {
         radius() {
             return this.width / 350
         },
-        activedots() {
-            return this.dots.filter(d =>
-                d.destination_ids.includes(this.country)
+        countriesDots() {
+            return this.dots.filter(
+                d => intersection(d.destination_ids, this.countries).length
             )
         },
         activeCity() {
-            return this.cities[this.city]
-                ? [this.cities[this.city].lon, this.cities[this.city].lat]
+            return this.cities2[this.city]
+                ? [this.cities2[this.city].lon, this.cities2[this.city].lat]
                 : null
         },
         activeLine() {
-            return this.cities[this.city] && this.cities[this.city]
+            return this.cities2[this.city] && this.cities2[this.city]
                 ? [
                       [
-                          this.cities[this.startcity].lon,
-                          this.cities[this.startcity].lat
+                          this.cities2[this.startcity].lon,
+                          this.cities2[this.startcity].lat
                       ],
-                      [this.cities[this.city].lon, this.cities[this.city].lat]
+                      [this.cities2[this.city].lon, this.cities2[this.city].lat]
                   ]
                 : null
         }
@@ -130,7 +133,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.dots)
+        console.log(this.countriesDots)
     }
 }
 </script>

@@ -4,8 +4,7 @@
     position: relative;
 }
 
-.One__headerItem {
-    margin-bottom: $margin-md;
+.One__top {
 }
 
 .One__topItem {
@@ -16,7 +15,7 @@
     display: flex;
     justify-content: center;
     position: relative;
-    padding: $margin-lg 0;
+    margin: $margin-lg 0;
 }
 
 .One__innerWrapper {
@@ -45,4 +44,8 @@
     background: $gray-lighter;
     padding: $padding-lg 0 0 0;
     padding: $padding-md 0 ?if $mobile;
+}
+
+.One__footer {
+    background: $white;
 }

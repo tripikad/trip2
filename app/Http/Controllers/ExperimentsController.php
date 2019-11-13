@@ -111,13 +111,18 @@ class ExperimentsController extends Controller
                             ->with(
                                 'items',
                                 collect()
+                                    // ->push(
+                                    //     component('Dotmap')
+                                    //         ->with('startcity', 829)
+                                    //         ->with('city', 4654)
+                                    //         ->with('country', 411)
+                                    //         ->with('dots', config('dots'))
+                                    //         ->with('cities', config('cities'))
+                                    // )
                                     ->push(
                                         component('Dotmap')
-                                            ->with('startcity', 829)
-                                            ->with('city', 4654)
-                                            ->with('country', 411)
+                                            ->with('countries', [411, 357, 311])
                                             ->with('dots', config('dots'))
-                                            ->with('cities', config('cities'))
                                     )
                                     ->push(
                                         component('Flex')->with(
