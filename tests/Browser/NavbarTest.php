@@ -44,7 +44,6 @@ class NavbarTest extends DuskTestCase
                 ->loginAs($regular_user) // @todo replace with browser login
                 ->visit('/')
                 ->pause(500)
-                ->screenshot('a')
                 ->click('.NavbarDesktop__userImage')
                 ->pause(500)
                 ->assertSeeIn('.NavbarDesktop__popover', 'Profiil')

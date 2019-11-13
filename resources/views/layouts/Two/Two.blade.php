@@ -4,6 +4,7 @@ $title = $title ?? '';
 $head_title = $head_title ?? '';
 $head_description = $head_description ?? '';
 $head_image = $head_image ?? '';
+$head_robots = $head_robots ?? '';
 $color = $color ?? '';
 $background = $background ?? '';
 $header = $header ?? '';
@@ -23,6 +24,7 @@ $narrow = $narrow ?? false;
 @section('head_title', $head_title)
 @section('head_description', $head_description)
 @section('head_image', $head_image)
+@section('head_robots', $head_robots)
 
 @section('color', $color)
 @section('background')

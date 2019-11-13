@@ -21,9 +21,9 @@ class EditorTest extends DuskTestCase
                     ->type('title', "Hola editores de titulo de $type")
                     ->click('textarea[readonly=readonly]') // @todo rework click target
                     ->pause(200) // Loading the editor
-                    ->keys('.Editor__source textarea', "Hola editores de cuerpo de $type")
-                    ->pause(5000) // Waiting for ajax-based preview
-                    ->assertSeeIn('.Editor__target', "Hola editores de cuerpo de $type")
+                    ->keys('.Editor__source textarea', "Hola")
+                    ->pause(2000) // Waiting for ajax-based preview
+                    ->assertSeeIn('.Editor__target', "Hola")
                     ->click('.Editor__toolPicker')
                     ->pause(200) // Loading the image picker
                     ->assertSeeIn('.ImagePicker', 'Lohista pilt siia')

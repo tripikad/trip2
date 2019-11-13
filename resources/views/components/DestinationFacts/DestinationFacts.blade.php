@@ -1,6 +1,6 @@
 @php
 
-$facts = collect($facts) ?? collect();
+$facts = $facts ?? [];
 
 @endphp
 

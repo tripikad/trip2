@@ -4,10 +4,11 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --mode=development --progress --hide-modules",
     "watch": "cross-env NODE_ENV=development webpack --mode=development --progress --hide-modules --watch",
-    "build": "cross-env NODE_ENV=production webpack --mode=production --progress --hide-modules",
-    "eslint": "eslint resources/views/**/*.{js,vue}"
+    "build": "cross-env NODE_ENV=production webpack --mode=production --hide-modules",
+    "test": "./vendor/bin/phpunit && php artisan dusk"
   },
   "dependencies": {
+    "@prettier/plugin-php": "^0.11.2",
     "axios": "^0.18.0",
     "codemirror": "^5.28.0",
     "d3-array": "^1.2.1",
@@ -22,7 +23,8 @@
     "vue-clickaway": "^2.1.0",
     "vue-cookie": "^1.1.4",
     "vue-focus": "^2.1.0",
-    "vue-multiselect": "2.0.0-beta.13"
+    "vue-multiselect": "2.0.0-beta.13",
+    "vue-slider-component": "^3.0.41"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

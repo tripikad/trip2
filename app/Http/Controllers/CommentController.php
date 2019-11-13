@@ -17,7 +17,7 @@ class CommentController extends Controller
             'body' => 'required',
         ];
 
-        $this->validate(request(), $rules);
+        $this->validate(request(), $rules, ['body.required' => 'Kommentaari sisu on kohustuslik']);
 
         $comment = Auth::user()->comments()->create([
             'body' => request()->body,

@@ -1,7 +1,7 @@
 @php
 
 $navbar = $navbar ?? '';
-$content = collect($content) ?? collect();
+$content = $content ?? [];
 
 @endphp
 

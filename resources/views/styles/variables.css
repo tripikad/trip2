@@ -1,4 +1,5 @@
-/* Brand colors */
+/*
+
 $blue: hsl(205, 82%, 57%);
 $blue-hover: hsl(205, 82%, 47%);
 
@@ -32,20 +33,14 @@ $yellow-hover: hsl(45, 100%, 38%);
 
 $yellow-dark: hsl(35, 100%, 42%);
 
-/* Special colors */
-
 $pink-light: hsl(7, 100%, 96%);
 $pink: hsl(7, 72%, 89%);
 $pink-dark: hsl(7, 15%, 57%);
-
-/* Neutral colors */
 
 $white: hsl(0, 0%, 100%);
 $white-hover: hsla(0, 0%, 100%, 0.9);
 
 $black: #000;
-
-/* Grays */
 
 $gray-lighter: hsl(204, 6%, 97%);
 $gray-lighter-hover: hsl(204, 6%, 72%);
@@ -59,10 +54,13 @@ $gray-hover: hsl(204, 6%, 40%);
 $gray-dark: hsl(204, 6%, 45%);
 $gray-dark-hover: hsl(204, 6%, 30%);
 
+*/
+
 /* Fonts */
 
 $font-family: "Sailec";
 $font-family-code: "Cousine";
+
 $font-size-xs: 13px;
 $font-size-sm: 14px;
 $font-size-md: 16px;
@@ -71,6 +69,7 @@ $font-size-xl: 21px;
 $font-size-xxl: 30px;
 $font-size-xxxl: 48px;
 $font-size-xxxxl: 64px;
+
 $font-weight-normal: normal;
 $font-weight-semibold: 600;
 $font-weight-bold: bold;
@@ -96,7 +95,7 @@ $font-code-md: $font-weight-normal $font-size-md / $line-height-md $font-family-
 
 /* Spacing */
 
-/* $spacer is defined in variables.css */
+/* $spacer is defined in variables.json */
 
 $padding-xxxs: calc($spacer / 4);
 $padding-xxs: calc($spacer / 3);
@@ -107,6 +106,7 @@ $padding-lg: calc($spacer * 3);
 $padding-xl: calc($spacer * 5);
 $padding-xxl: calc($spacer * 7);
 $padding-xxxl: calc($spacer * 16);
+
 $padding-top-xs: $padding-xs 0 0 0;
 $padding-top-sm: $padding-sm 0 0 0;
 $padding-top-md: $padding-md 0 0 0;

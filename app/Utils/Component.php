@@ -11,6 +11,7 @@ class Component
     protected $is;
     protected $with;
     protected $when;
+    protected $vue;
 
     public function __construct($component)
     {
@@ -18,6 +19,7 @@ class Component
         $this->is = collect();
         $this->with = collect();
         $this->when = true;
+        $this->vue = false;
     }
 
     public function is($is)
@@ -41,15 +43,23 @@ class Component
         return $this;
     }
 
+    public function vue()
+    {
+        $this->vue = true;
+
+        return $this;
+    }
+
     public function generateIsClasses()
     {
         $component = $this->component;
 
-        if (! $this->is->isEmpty()) {
-            return $this->is->map(function ($item) use ($component) {
-                return $component.'--'.$item;
-            })
-            ->implode(' ');
+        if (!$this->is->isEmpty()) {
+            return $this->is
+                ->map(function ($item) use ($component) {
+                    return $component . '--' . $item;
+                })
+                ->implode(' ');
         }
 
         return '';
@@ -62,7 +72,7 @@ class Component
             ->render();
     }
 
-    public function renderVue($name)
+    public function renderVue($vueComponent)
     {
         $props = $this->with
             ->map(function ($value, $key) {
@@ -72,39 +82,59 @@ class Component
             })
             ->implode(' ');
 
-        return '<component is="'
-            .$this->component
-            .'" isclasses="'
-            .$this->generateIsClasses()
-            .'" '
-            .$props
-            .' ></component>';
+        return '<component is="' .
+            $vueComponent .
+            '" isclasses="' .
+            $this->generateIsClasses() .
+            '" ' .
+            $props .
+            ' ></component>';
     }
 
     public function render()
     {
-        if (! $this->when) {
+        if (!$this->when) {
             return '';
         }
 
         $name = "components.$this->component.$this->component";
-        $file_name = $this->exists($name);
-        $path_info = pathinfo($file_name);
+        $bladeName = resource_path(
+            "views/components/$this->component/$this->component.blade.php"
+        );
+        $vueName = resource_path(
+            "views/components/$this->component/$this->component.vue"
+        );
+        $suffixedVueName = resource_path(
+            'views/components/' .
+                $this->component .
+                '/' .
+                $this->component .
+                'Vue.vue'
+        );
 
-        if ($file_name !== false && $path_info['extension'] != 'css') {
+        if ($this->vue && is_file($suffixedVueName)) {
+            return $this->renderVue($this->component . 'Vue');
+        }
+        if (!is_file($bladeName) && is_file($suffixedVueName)) {
+            return $this->renderVue($this->component . 'Vue');
+        }
+
+        if ($this->vue && is_file($vueName)) {
+            return $this->renderVue($this->component);
+        }
+        if ($this->vue && !is_file($this->component)) {
+            return '';
+        }
+        if (is_file($vueName) && is_file($bladeName)) {
             return $this->renderBlade($name);
-        } else {
-            return $this->renderVue($name);
         }
-    }
-
-    public function exists($view)
-    {
-        try {
-            return view()->getFinder()->find($view);
-        } catch (InvalidArgumentException $e) {
-            return false;
+        if (!is_file($vueName) && is_file($bladeName)) {
+            return $this->renderBlade($name);
         }
+        if (is_file($vueName) && !is_file($bladeName)) {
+            return $this->renderVue($this->component);
+        }
+        return '';
     }
 
     public function __toString()

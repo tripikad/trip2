@@ -1,7 +1,7 @@
 @php
 
-$left_content = collect($left_content) ?? collect();
-$right_content = collect($right_content) ?? collect();
+$left_content = $left_content ?? [];
+$right_content = $right_content ?? [];
 $left_col = $left_col ?? 7;
 $right_col = $right_col ?? 4;
 
