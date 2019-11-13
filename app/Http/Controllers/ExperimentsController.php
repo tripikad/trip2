@@ -6,6 +6,70 @@ use App\Content;
 
 class ExperimentsController extends Controller
 {
+    protected function form()
+    {
+        return collect()->push(
+            component('Form')->with(
+                'fields',
+                collect()
+                    ->push(
+                        component('FormTextfield')
+                            ->is('white')
+                            ->with('name', 'name')
+                            ->with('title', 'Name')
+                            ->with('value', '')
+                    )
+                    ->push(
+                        component('FormTextfield')
+                            ->with('name', 'email')
+                            ->with('title', 'E-mail')
+                            ->with('value', '')
+                    )
+                    ->push(
+                        component('FormTextfield')
+                            ->with('name', 'phone')
+                            ->with('title', 'Phone')
+                    )
+                    ->push(
+                        component('FormTextfield')
+                            ->with('name', 'adults')
+                            ->with('title', 'Number of adults')
+                    )
+                    ->push(
+                        component('FormTextfield')
+                            ->with('name', 'children')
+                            ->with('title', 'Number of children')
+                    )
+                    ->push(
+                        component('FormTextarea')
+                            ->with('name', 'notes')
+                            ->with('title', 'Notes')
+                    )
+                    ->push(
+                        component('FormCheckbox')
+                            ->with('name', 'insurance')
+                            ->with('title', 'I need an insurance')
+                    )
+                    ->push(
+                        component('FormCheckbox')
+                            ->with('name', 'installments')
+                            ->with('title', 'I want to pay by installments')
+                    )
+                    ->push(
+                        component('FormCheckbox')
+                            ->with('name', 'flexible')
+                            ->with(
+                                'title',
+                                'I am flexible with dates (+-3 days)'
+                            )
+                    )
+                    ->push(
+                        component('FormButton')->with('title', 'Book an offer')
+                    )
+            )
+        );
+    }
+
     public function index()
     {
         $photos = Content::getLatestPagedItems('photo', 9, 411);
@@ -52,7 +116,7 @@ class ExperimentsController extends Controller
                                             ->with('startcity', 829)
                                             ->with('city', 4654)
                                             ->with('country', 411)
-                                            ->with('countries', config('dots'))
+                                            ->with('dots', config('dots'))
                                             ->with('cities', config('cities'))
                                     )
                                     ->push(
@@ -130,7 +194,15 @@ class ExperimentsController extends Controller
                             )
                     )
                     ->push(region('PhotoRow', $photos))
+                    ->br()
+                    ->push(
+                        component('Title')
+                            ->is('center')
+                            ->is('white')
+                            ->with('title', 'Broneeri reis')
+                    )
             )
+            ->with('content', $this->form())
             ->with('footer', region('FooterLight', ''))
             ->render();
     }

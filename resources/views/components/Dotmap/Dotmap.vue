@@ -1,9 +1,9 @@
 <template>
     <div class="Dotmap" :class="isclasses">
         <svg :width="width" :height="height">
-            <g>
+            <g v-if="dots.length">
                 <circle
-                    v-for="(c, i) in countries"
+                    v-for="(c, i) in dots"
                     :key="i"
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
@@ -11,43 +11,44 @@
                     fill="black"
                     opacity="0.25"
                 />
-                <g v-if="activeCountries.length">
-                    <circle
-                        v-for="(c, i) in activeCountries"
-                        :key="i"
-                        :cx="xScale(c.lon)"
-                        :cy="yScale(c.lat)"
-                        :r="radius"
-                        fill="white"
-                        opacity="0.5"
-                    />
-                </g>
-                <path
-                    :d="line(activeLine)"
-                    stroke="white"
-                    stroke-width="2"
-                    fill="none"
-                    opacity="0.7"
-                />
+            </g>
+            <g v-if="activedots.length">
                 <circle
-                    v-if="activeCity"
-                    :cx="xScale(activeLine[0][0])"
-                    :cy="yScale(activeLine[0][1])"
-                    :r="radius * 2"
-                    stroke="white"
-                    stroke-width="2"
-                    :fill="$styleVars.blue"
-                />
-                <circle
-                    v-if="activeCity"
-                    :cx="xScale(activeCity[0])"
-                    :cy="yScale(activeCity[1])"
-                    :r="radius * 3"
-                    stroke="white"
-                    stroke-width="2"
-                    :fill="$styleVars.orange"
+                    v-for="(c, i) in activedots"
+                    :key="i"
+                    :cx="xScale(c.lon)"
+                    :cy="yScale(c.lat)"
+                    :r="radius"
+                    fill="white"
+                    opacity="0.5"
                 />
             </g>
+            <path
+                v-if="activeLine"
+                :d="line(activeLine)"
+                stroke="white"
+                stroke-width="2"
+                fill="none"
+                opacity="0.7"
+            />
+            <circle
+                v-if="activeCity"
+                :cx="xScale(activeLine[0][0])"
+                :cy="yScale(activeLine[0][1])"
+                :r="radius * 2"
+                stroke="white"
+                stroke-width="2"
+                :fill="$styleVars.blue"
+            />
+            <circle
+                v-if="activeCity"
+                :cx="xScale(activeCity[0])"
+                :cy="yScale(activeCity[1])"
+                :r="radius * 3"
+                stroke="white"
+                stroke-width="2"
+                :fill="$styleVars.orange"
+            />
         </svg>
     </div>
 </template>
@@ -58,7 +59,7 @@ import { geoEquirectangular, geoPath } from 'd3-geo'
 export default {
     props: {
         isclasses: { default: '' },
-        countries: { default: () => [] },
+        dots: { default: () => [] },
         country: { default: null },
         cities: { default: () => [] },
         startcity: { default: null },
@@ -83,22 +84,26 @@ export default {
         radius() {
             return this.width / 350
         },
-        activeCountries() {
-            return this.countries.filter(d =>
+        activedots() {
+            return this.dots.filter(d =>
                 d.destination_ids.includes(this.country)
             )
         },
         activeCity() {
-            return [this.cities[this.city].lon, this.cities[this.city].lat]
+            return this.cities[this.city]
+                ? [this.cities[this.city].lon, this.cities[this.city].lat]
+                : null
         },
         activeLine() {
-            return [
-                [
-                    this.cities[this.startcity].lon,
-                    this.cities[this.startcity].lat
-                ],
-                this.activeCity
-            ]
+            return this.cities[this.city] && this.cities[this.city]
+                ? [
+                      [
+                          this.cities[this.startcity].lon,
+                          this.cities[this.startcity].lat
+                      ],
+                      [this.cities[this.city].lon, this.cities[this.city].lat]
+                  ]
+                : null
         }
     },
 
@@ -125,7 +130,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.$styleVars.blue)
+        console.log(this.dots)
     }
 }
 </script>

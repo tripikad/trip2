@@ -8,16 +8,18 @@ class OfferController extends Controller
 {
     public function index()
     {
-        return layout('Two')
+        return layout('Offer')
+            ->with('color', 'blue')
             ->with('head_robots', 'noindex')
-            ->with('background', component('BackgroundMap'))
             ->with(
                 'header',
                 region(
-                    'StaticHeader',
+                    'OfferHeader',
                     collect()->push(
                         component('Title')
                             ->is('large')
+                            ->is('white')
+                            ->is('center')
                             ->with('title', trans('offers.index.title'))
                     )
                 )
@@ -25,10 +27,9 @@ class OfferController extends Controller
             ->with(
                 'content',
                 collect()->push(
-                    component('Offers')->with(
-                        'route',
-                        route('offers.index.json')
-                    )
+                    component('OfferList')
+                        ->with('dots', config('dots'))
+                        ->with('route', route('offers.index.json'))
                 )
             )
             ->with('sidebar', '&nbsp;')
@@ -49,32 +50,21 @@ class OfferController extends Controller
     {
         $offer = $this->getSheet()[$id];
 
-        return layout('Two')
+        return layout('Offer')
             ->with('head_robots', 'noindex')
             ->with('title', 'Offer')
+            ->with('color', 'blue')
             ->with(
                 'header',
                 region(
-                    'Header',
-                    collect()
-                        ->push(
-                            component('Link')
-                                ->is('white')
-                                ->with('title', trans('offers.show.back'))
-                                ->with('route', route('offers.index'))
-                        )
-                        ->push(
-                            component('Title')
-                                ->is('white')
-                                ->is('large')
-                                ->is('shadow')
-                                ->with(
-                                    'title',
-                                    $offer->title . ' ' . $offer->price
-                                )
-                        ),
-                    $offer->image,
-                    'high'
+                    'OfferHeader',
+                    collect()->push(
+                        component('Title')
+                            ->is('large')
+                            ->is('white')
+                            ->is('center')
+                            ->with('title', trans('offers.index.title'))
+                    )
                 )
             )
             ->with(

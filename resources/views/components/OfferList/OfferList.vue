@@ -1,24 +1,46 @@
 <template>
-    <div class="Offers" :class="isclasses">
+    <div class="OfferList" :class="isclasses">
+        <dotmap :dots="dots" />
         <!--form-buttons :items="['Kõik','Seiklusreisid','Bussireisid','Pakettreisid']" /-->
         <form-slider-multiple
             :value="activePriceFrom"
-            @input="value => activePriceFrom = value"
+            @input="value => (activePriceFrom = value)"
             :value2="activePriceTo"
-            @input2="value2 => activePriceTo = value2"
+            @input2="value2 => (activePriceTo = value2)"
             :min="minPrice"
             :max="maxPrice"
             :step="step"
             suffix="€"
         />
-        <div class="Offers__filters">
-            <form-select placeholder="Reisistiil" :options="styles" v-model="activeStyle" />
-            <form-select placeholder="Sihkoht" :options="destinations" v-model="activeDestination" />
-            <form-select placeholder="Firma" :options="companies" v-model="activeCompany" />
-            <a v-if="!notFiltered" @click="handleClearFilters" class="Button Button--gray">Kõik</a>
+        <div class="OfferList__filters">
+            <form-select
+                placeholder="Reisistiil"
+                :options="styles"
+                v-model="activeStyle"
+            />
+            <form-select
+                placeholder="Sihkoht"
+                :options="destinations"
+                v-model="activeDestination"
+            />
+            <form-select
+                placeholder="Firma"
+                :options="companies"
+                v-model="activeCompany"
+            />
+            <a
+                v-if="!notFiltered"
+                @click="handleClearFilters"
+                class="Button Button--gray"
+                >Kõik</a
+            >
         </div>
-        <div class="Offers__offers">
-            <OfferRow v-for="(offer, i) in filteredOffers" :key="i" :offer="offer" />
+        <div class="OfferList__offers">
+            <OfferRow
+                v-for="(offer, i) in filteredOfferList"
+                :key="i"
+                :offer="offer"
+            />
         </div>
     </div>
 </template>
@@ -26,10 +48,21 @@
 <script>
 import { parseSheets, unique } from '../../utils/utils'
 
+/*
+->push(
+    component('Dotmap')
+        ->with('startcity', 829)
+        ->with('city', 4654)
+        ->with('country', 411)
+        ->with('countries', config('dots'))
+        ->with('cities', config('cities'))
+)
+*/
 export default {
     props: {
         isclasses: { default: '' },
-        route: { default: '' }
+        route: { default: '' },
+        dots: { default: () => [] }
     },
     data: () => ({
         offers: [],
@@ -91,7 +124,7 @@ export default {
                 name
             }))
         },
-        filteredOffers() {
+        filteredOfferList() {
             return this.offers
                 .filter(o => {
                     if (this.activeCompany > -1) {

@@ -5,6 +5,10 @@
     cursor: pointer;
 }
 
+.OfferRow:hover {
+    opacity: $opacity-lg;
+}
+
 .OfferRow__image {
     width: $width-md;
     height: $height-md;
@@ -17,17 +21,16 @@
 }
 
 .OfferRow__title {
-    font: $font-text-lg;
-    color: $blue;
+    color: $white;
     font: $font-heading-lg;
     margin-bottom: $margin-xxs;
 }
 
 .OfferRow__meta {
     font: $font-text-sm;
-    color: $gray;
+    color: $white;
+    opacity: $opacity-md;
 }
-
 .OfferRow__meta > * {
     margin-right: $margin-xl;
 }

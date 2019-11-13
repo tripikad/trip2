@@ -1,0 +1,18 @@
+@import 'variables';
+
+.OfferList > *,
+.OfferList__offers > * {
+    margin-bottom: $margin-md;
+}
+
+.OfferList__filters {
+    display: flex;
+}
+
+.OfferList__filters > * {
+    margin-right: $margin-sm;
+}
+
+.OfferList__filters > *:last-child {
+    margin: 0;
+}
