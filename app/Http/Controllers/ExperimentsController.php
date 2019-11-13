@@ -6,13 +6,18 @@ class ExperimentsController extends Controller
 {
     public function index()
     {
-        return layout('Two')
+        return layout('One')
             ->with('title', 'Experiments')
+            ->with('color', 'cyan')
             ->with(
                 'content',
-                collect()
-                    ->push(region('ExperimentalMenu'))
-                    ->push('Hi')
+                collect()->push(
+                    component('Dotmap')
+                        ->with('city', 551)
+                        ->with('country', 332)
+                        ->with('countries', config('dots'))
+                        ->with('cities', config('cities'))
+                )
             )
             ->render();
     }
