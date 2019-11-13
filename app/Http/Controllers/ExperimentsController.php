@@ -128,10 +128,16 @@ class ExperimentsController extends Controller
                                                 357,
                                                 311
                                             ])
-                                            //->with('activecities', [4654, 566])
+                                            ->with('passivecities', [510, 450])
+                                            ->with('activecities', [
+                                                [
+                                                    'lat' => 55.75222,
+                                                    'lon' => 37.61556
+                                                ]
+                                            ])
                                             ->with('activelines', [
-                                                829,
-                                                578,
+                                                510,
+                                                450,
                                                 566
                                             ])
                                     )

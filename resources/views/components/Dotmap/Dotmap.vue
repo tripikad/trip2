@@ -23,18 +23,6 @@
                     opacity="0.25"
                 />
             </g>
-            <g v-if="activeCitiesCircles.length">
-                <circle
-                    v-for="(c, i) in activeCitiesCircles"
-                    :key="i"
-                    :cx="xScale(c.lon)"
-                    :cy="yScale(c.lat)"
-                    :r="radius * 2"
-                    stroke="white"
-                    stroke-width="2"
-                    :fill="$styleVars.orange"
-                />
-            </g>
             <path
                 v-if="activeLinesCoordinates.length"
                 :d="line(activeLinesCoordinates)"
@@ -43,13 +31,25 @@
                 fill="none"
                 opacity="0.7"
             />
-            <g v-if="activeLinesCoordinates.length">
+            <g v-if="passiveCitiesCircles.length">
                 <circle
-                    v-for="(c, i) in activeLinesCoordinates"
+                    v-for="(c, i) in passiveCitiesCircles"
                     :key="i"
-                    :cx="xScale(c[0])"
-                    :cy="yScale(c[1])"
+                    :cx="xScale(c.lon)"
+                    :cy="yScale(c.lat)"
                     :r="radius * 2"
+                    stroke="white"
+                    stroke-width="2"
+                    :fill="$styleVars.blue"
+                />
+            </g>
+            <g v-if="activeCitiesCircles.length">
+                <circle
+                    v-for="(c, i) in activeCitiesCircles"
+                    :key="i"
+                    :cx="xScale(c.lon)"
+                    :cy="yScale(c.lat)"
+                    :r="radius * 3"
                     stroke="white"
                     stroke-width="2"
                     :fill="$styleVars.orange"
@@ -70,11 +70,9 @@ export default {
         dots: { default: () => [] },
         cities: { default: () => [] },
         activecountries: { default: () => [] },
+        passivecities: { default: () => [] },
         activecities: { default: () => [] },
         activelines: { default: () => [] }
-        // startcity: { default: null },
-        // city: { default: null },
-        //destination: { default: null }
     },
 
     computed: {
@@ -100,14 +98,37 @@ export default {
                     intersection(d.destination_ids, this.activecountries).length
             )
         },
+        passiveCitiesCircles() {
+            return this.passivecities
+                .map(c =>
+                    typeof c == 'object'
+                        ? c
+                        : this.cities[c]
+                        ? this.cities[c]
+                        : null
+                )
+                .filter(c => c)
+        },
         activeCitiesCircles() {
             return this.activecities
-                .map(c => (this.cities[c] ? this.cities[c] : null))
+                .map(c =>
+                    typeof c == 'object'
+                        ? c
+                        : this.cities[c]
+                        ? this.cities[c]
+                        : null
+                )
                 .filter(c => c)
         },
         activeLinesCoordinates() {
             return this.activelines
-                .map(c => (this.cities[c] ? this.cities[c] : null))
+                .map(c =>
+                    typeof c == 'object'
+                        ? c
+                        : this.cities[c]
+                        ? this.cities[c]
+                        : null
+                )
                 .filter(c => c)
                 .map(c => [c.lon, c.lat])
         }
@@ -136,7 +157,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.activeLinesCoordinates)
+        console.log(this.passiveCitiesCircles)
     }
 }
 </script>
