@@ -1,6 +1,18 @@
 @import 'variables';
 
-.Grid__row {
-    display: flex;
+.Grid {
+    display: grid;
     display: block ?if $tablet;
+}
+
+.Grid__item {
+    margin-bottom: $margin-md ?if $tablet;
+}
+
+.Grid__item:last-child {
+    margin-bottom: 0;
+}
+
+.Grid--debug .Grid__item {
+    border: 1px dashed $red;
 }

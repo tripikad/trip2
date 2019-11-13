@@ -4,7 +4,7 @@ $items = $items ?? [];
 
 $justify = $justify ?? 'flex-start';
 
-$align = $align ?? 'flex-start';
+$align = $align ?? 'center';
 
 $spacer = style_vars()->spacer;
 
@@ -20,11 +20,11 @@ $gap_string = 'calc('. $gap_map['md'] .' * '. $spacer .')';
 
 @endphp
 
-<div class="Row {{ $isclasses }}" style="justify-content: {{ $justify }}; align-items: {{ $align }}">
+<div class="Flex {{ $isclasses }}" style="justify-content: {{ $justify }}; align-items: {{ $align }}">
 
   @foreach ($items as $item)
 
-  <div class="Row__item" style="marginRight: {{ $loop->last ? '' : $gap_string }}">
+  <div class="Flex__item" style="marginRight: {{ $loop->last ? '' : $gap_string }}">
 
     {!! $item !!}
 

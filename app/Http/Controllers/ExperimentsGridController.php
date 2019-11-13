@@ -21,30 +21,23 @@ class ExperimentsGridController extends Controller
                     ->push(
                         component('Title')
                             ->is('small')
-                            ->with('title', 'Row')
+                            ->with('title', 'Flex')
                     )
                     ->merge($this->row($photos))
                     ->br()
                     ->push(
                         component('Title')
                             ->is('small')
-                            ->with('title', 'Flexbox grid I')
+                            ->with('title', 'FlexGrid')
+                    )
+                    ->merge($this->flexGrid($photos))
+                    ->br()
+                    ->push(
+                        component('Title')
+                            ->is('small')
+                            ->with('title', 'Grid')
                     )
                     ->merge($this->grid($photos))
-                    ->br()
-                    ->push(
-                        component('Title')
-                            ->is('small')
-                            ->with('title', 'Flexbox grid II')
-                    )
-                    ->merge($this->grid2($photos))
-                    ->br()
-                    ->push(
-                        component('Title')
-                            ->is('small')
-                            ->with('title', 'Experimental CSS grid')
-                    )
-                    ->merge($this->grid3($photos))
             )
             ->render();
     }
@@ -57,7 +50,7 @@ class ExperimentsGridController extends Controller
                     ->is('gray')
                     ->with(
                         'code',
-                        "component('ExperimentalRow')
+                        "component('Flex')
     ->with('gap', 'md') // resolves to 2 * \$spacer. Can also be a number
     ->with('items', \$photos->take(4)->map(function (\$photo) {
       return component('Title')
@@ -67,7 +60,7 @@ class ExperimentsGridController extends Controller
                     )
             )
             ->push(
-                component('Row')
+                component('Flex')
                     ->with('gap', 'md')
                     ->with(
                         'items',
@@ -77,10 +70,40 @@ class ExperimentsGridController extends Controller
                                 ->with('title', $photo->vars()->shortTitle);
                         })
                     )
+            )
+            ->push(
+                component('Code')
+                    ->is('gray')
+                    ->with(
+                        'code',
+                        "component('Flex')
+  ->is('debug')                              // Debug mode
+  ->with('justify-content', 'space-between') // flex-start is default
+  ->with('align-items', 'flex-start')        // center is default
+  ->with('items', \$photos->take(2)->map(function (\$photo) {
+    return component('Title')
+        ->is('smallest')
+        ->with('title', \$photo->vars()->shortTitle);
+}))"
+                    )
+            )
+            ->push(
+                component('Flex')
+                    ->is('debug')
+                    ->with('gap', 'md')
+                    ->with('justify', 'space-between')
+                    ->with(
+                        'items',
+                        $photos->take(2)->map(function ($photo) {
+                            return component('Title')
+                                ->is('smallest')
+                                ->with('title', $photo->vars()->shortTitle);
+                        })
+                    )
             );
     }
 
-    public function grid($photos)
+    public function flexGrid($photos)
     {
         return collect()
             ->push(
@@ -94,7 +117,7 @@ class ExperimentsGridController extends Controller
                     )
             )
             ->push(
-                component('Grid')
+                component('FlexGrid')
                     ->with('cols', 2)
                     ->with(
                         'items',
@@ -107,25 +130,22 @@ class ExperimentsGridController extends Controller
                                 );
                         })
                     )
-            );
-    }
-
-    public function grid2($photos)
-    {
-        return collect()
+            )
             ->push(
                 component('Code')
                     ->is('gray')
                     ->with(
                         'code',
                         "component('Grid')
-    ->with('gap', 'sm') // Resolves to 1 * \$spacer. Can be a number
-    ->with('widths', '2fr 3fr 2fr') // maps to flex:2, flex:3, flex:2 columns
-    ->with('items', \$photos->take(6)->...)"
+  ->is('debug')                   // Debug mode
+  ->with('gap', 'sm')             // Resolves to 1 * \$spacer. Can be a number
+  ->with('widths', '2fr 3fr 2fr') // 5/2 5/3 5/2 column widths 
+  ->with('items', \$photos->take(6)->...)"
                     )
             )
             ->push(
-                component('Grid')
+                component('FlexGrid')
+                    ->is('debug')
                     ->with('gap', 1)
                     ->with('widths', '2fr 3fr 2fr')
                     ->with(
@@ -142,7 +162,7 @@ class ExperimentsGridController extends Controller
             );
     }
 
-    public function grid3($photos)
+    public function grid($photos)
     {
         return collect()
             ->push(
@@ -156,7 +176,7 @@ class ExperimentsGridController extends Controller
                     ->is('gray')
                     ->with(
                         'code',
-                        "component('ExperimentalGrid')
+                        "component('Grid')
     ->with('gap', 'sm') // Resolves to 1 * \$spacer. Can be a number
     ->with('widths', '1fr 2fr') // maps to grid-template-columns
     ->with('heights', '2fr 1fr 2fr') // maps to grid-template-rows
@@ -164,7 +184,7 @@ class ExperimentsGridController extends Controller
                     )
             )
             ->push(
-                component('ExperimentalGrid')
+                component('Grid')
                     ->with('gap', 'sm')
                     ->with('widths', '1fr 2fr')
                     ->with('heights', '2fr 1fr 2fr')

@@ -1,18 +1,18 @@
 @import 'variables';
 
-.Row {
+.Flex {
     display: flex;
     display: block ?if $tablet;
 }
 
-.Row__item {
+.Flex__item {
     margin-bottom: $margin-md ?if $tablet;
 }
 
-.Row__item:last-child {
+.Flex__item:last-child {
     margin-bottom: 0;
 }
 
-.Row--debug .Row__item {
+.Flex--debug .Flex__item {
     border: 1px dashed $red;
 }

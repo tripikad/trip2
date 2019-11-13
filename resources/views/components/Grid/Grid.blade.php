@@ -2,8 +2,9 @@
 
 $items = $items ?? [];
 $cols = $cols ?? 3;
-$gapclass = isset($gap) ? 'Grid--gap'.$gap : '';
-$widths = isset($widths) ? preg_split('/\s+/', preg_replace('/[^0-9\s]/','',$widths)) : array_fill(0, $cols, 1);
+$rows = round(collect($items)->count() / $cols, PHP_ROUND_HALF_DOWN);
+$widths = $widths ?? 'repeat('. $cols .', 1fr)';
+$heights = $heights ?? 'repeat('. $rows .', auto)';
 
 $spacer = style_vars()->spacer;
 
@@ -20,23 +21,19 @@ else if (isset($gap) && !is_string($gap)) {
 
 @endphp
 
-<div class="Grid {{ $isclasses }}">
+<div class="Grid {{ $isclasses }}" style="
+        grid-template-columns: {{ $widths }};
+        grid-template-rows: {{ $heights }};
+        grid-gap: {{ $gap_string }}
+    ">
 
-    @foreach (collect($items)->chunk($cols) as $row)
+    @foreach ($items as $item)
 
-        <div class="Grid__row" style="marginBottom: {{ $loop->last ? '' : $gap_string }}">
+    <div class="Grid__item">
 
-            @foreach ($row->values() as $colIndex => $item)
+        {!! $item !!}
 
-                <div class="Grid__item" style="flex: {{ $widths[$colIndex] }}; marginRight: {{ $loop->last ? '' : $gap_string }}">
-
-                    {!! $item !!}
-
-                </div>
-            
-            @endforeach
-
-        </div>
+    </div>
 
     @endforeach
 
