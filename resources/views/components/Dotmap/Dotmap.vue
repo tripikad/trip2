@@ -157,7 +157,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.passiveCitiesCircles)
+        console.log(this.activecities)
     }
 }
 </script>

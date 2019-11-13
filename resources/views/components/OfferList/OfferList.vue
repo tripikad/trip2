@@ -1,6 +1,9 @@
 <template>
     <div class="OfferList" :class="isclasses">
-        <dotmap :dots="dots" />
+        <dotmap
+            :dots="dots"
+            :activecities="filteredOfferList.map(o => ({lon: parseFloat(o.longitude),lat: parseFloat(o.latitude)}))"
+        />
         <!--form-buttons :items="['Kõik','Seiklusreisid','Bussireisid','Pakettreisid']" /-->
         <form-slider-multiple
             :value="activePriceFrom"
@@ -13,34 +16,13 @@
             suffix="€"
         />
         <div class="OfferList__filters">
-            <form-select
-                placeholder="Reisistiil"
-                :options="styles"
-                v-model="activeStyle"
-            />
-            <form-select
-                placeholder="Sihkoht"
-                :options="destinations"
-                v-model="activeDestination"
-            />
-            <form-select
-                placeholder="Firma"
-                :options="companies"
-                v-model="activeCompany"
-            />
-            <a
-                v-if="!notFiltered"
-                @click="handleClearFilters"
-                class="Button Button--gray"
-                >Kõik</a
-            >
+            <form-select placeholder="Reisistiil" :options="styles" v-model="activeStyle" />
+            <form-select placeholder="Sihkoht" :options="destinations" v-model="activeDestination" />
+            <form-select placeholder="Firma" :options="companies" v-model="activeCompany" />
+            <a v-if="!notFiltered" @click="handleClearFilters" class="Button Button--gray">Kõik</a>
         </div>
         <div class="OfferList__offers">
-            <OfferRow
-                v-for="(offer, i) in filteredOfferList"
-                :key="i"
-                :offer="offer"
-            />
+            <OfferRow v-for="(offer, i) in filteredOfferList" :key="i" :offer="offer" />
         </div>
     </div>
 </template>
