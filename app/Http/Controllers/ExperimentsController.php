@@ -27,6 +27,7 @@ class ExperimentsController extends Controller
                                 collect()
                                     ->push(
                                         component('Dotmap')
+                                            ->with('startcity', 829)
                                             ->with('city', 4654)
                                             ->with('country', 411)
                                             ->with('countries', config('dots'))

@@ -22,26 +22,30 @@
                         opacity="0.5"
                     />
                 </g>
-                <circle
-                    v-if="activeCity"
-                    :cx="xScale(activeCity.lon)"
-                    :cy="yScale(activeCity.lat)"
-                    :r="radius * 3"
-                    stroke="white"
-                    stroke-width="3"
-                    fill="none"
-                />
                 <path
-                    :d="
-                        line([
-                            [23.027343749999996, 58.81374171570782],
-                            [98.61328125, 20.632784250388028]
-                        ])
-                    "
+                    :d="line(activeLine)"
                     stroke="white"
                     stroke-width="2"
                     fill="none"
                     opacity="0.7"
+                />
+                <circle
+                    v-if="activeCity"
+                    :cx="xScale(activeLine[0][0])"
+                    :cy="yScale(activeLine[0][1])"
+                    :r="radius * 2"
+                    stroke="white"
+                    stroke-width="2"
+                    :fill="$styleVars.blue"
+                />
+                <circle
+                    v-if="activeCity"
+                    :cx="xScale(activeCity[0])"
+                    :cy="yScale(activeCity[1])"
+                    :r="radius * 3"
+                    stroke="white"
+                    stroke-width="2"
+                    :fill="$styleVars.orange"
                 />
             </g>
         </svg>
@@ -57,6 +61,7 @@ export default {
         countries: { default: () => [] },
         country: { default: null },
         cities: { default: () => [] },
+        startcity: { default: null },
         city: { default: null },
         width: { default: 750 },
         destination: { default: null }
@@ -84,7 +89,16 @@ export default {
             )
         },
         activeCity() {
-            return this.cities[this.city]
+            return [this.cities[this.city].lon, this.cities[this.city].lat]
+        },
+        activeLine() {
+            return [
+                [
+                    this.cities[this.startcity].lon,
+                    this.cities[this.startcity].lat
+                ],
+                this.activeCity
+            ]
         }
     },
 
@@ -109,19 +123,9 @@ export default {
         yScale(lat) {
             return this.projection([0, lat])[1]
         }
-        // xScale(value) {
-        //     return scaleLinear()
-        //         .domain([-180, 180])
-        //         .range([10, this.width - 10])(value)
-        // },
-        // yScale(value) {
-        //     return scaleLinear()
-        //         .domain([180, -180])
-        //         .range([10, this.width - 10])(value)
-        // }
     },
     mounted() {
-        console.log(this.activeCountries)
+        console.log(this.$styleVars.blue)
     }
 }
 </script>
