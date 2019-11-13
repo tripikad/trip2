@@ -72,3 +72,7 @@ a .Title__title:hover {
 .Title--center .Title__title {
     text-align: center;
 }
+
+.Title--disabled .Title__title {
+    opacity: 0.5;
+}

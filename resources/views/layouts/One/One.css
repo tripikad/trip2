@@ -4,7 +4,8 @@
     position: relative;
 }
 
-.One__top {
+.One__headerItem {
+    margin-bottom: $margin-md;
 }
 
 .One__topItem {
@@ -44,8 +45,4 @@
     background: $gray-lighter;
     padding: $padding-lg 0 0 0;
     padding: $padding-md 0 ?if $mobile;
-}
-
-.One__footer {
-    background: $white;
 }

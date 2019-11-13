@@ -79,6 +79,27 @@ class AppServiceProvider extends ServiceProvider
             return $this->merge(collect(array_fill(0, $count, '<br />')));
             return $this;
         });
+
+        Collection::macro('pushXY', function ($x = 0, $y = 0, $item) {
+            $spacer = style_vars()->spacer;
+            $this->push(
+                '<div style="
+                  margin-left: calc(' .
+                    $x .
+                    ' * ' .
+                    $spacer .
+                    ');
+                  margin-top: calc(' .
+                    $x .
+                    ' * ' .
+                    $spacer .
+                    ')
+                ">' .
+                    $item .
+                    '</div>'
+            );
+            return $this;
+        });
     }
 
     protected function google_analytics_track($auth)

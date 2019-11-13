@@ -24,7 +24,7 @@ $footer = $footer ?? '';
 
 @section('color', $color)
 @section('background')
-    {!! $background !!}
+{!! $background !!}
 @endsection
 
 @section('header')
@@ -39,11 +39,11 @@ $footer = $footer ?? '';
 
         @foreach ($top as $top_item)
 
-            <div class="One__topItem">
+        <div class="One__topItem">
 
-                {!! $top_item !!}
-                    
-            </div>
+            {!! $top_item !!}
+
+        </div>
 
         @endforeach
 
@@ -67,37 +67,41 @@ $footer = $footer ?? '';
 
         </div>
 
+        @if ($content->count())
+
         <main class="One__content">
 
             @foreach ($content as $content_item)
-            
+
             <div class="One__contentItem">
 
                 {!! $content_item !!}
-                    
+
             </div>
 
             @endforeach
 
         </main>
 
-    @if ($bottom->count())
+        @endif
 
-    <section class="One__bottom">
+        @if ($bottom->count())
 
-        @foreach ($bottom as $bottom_item)
-        
+        <section class="One__bottom">
+
+            @foreach ($bottom as $bottom_item)
+
             <div class="One__bottomItem">
 
                 {!! $bottom_item !!}
-                    
-            </div>
-                
-        @endforeach
-        
-    </section>
 
-    @endif 
+            </div>
+
+            @endforeach
+
+        </section>
+
+        @endif
 
     </div>
 
@@ -107,10 +111,10 @@ $footer = $footer ?? '';
 
 @section('footer')
 
-    <footer class="One__footer">
+<footer class="One__footer">
 
     {!! $footer !!}
 
-    </footer>
+</footer>
 
 @endsection
