@@ -23,29 +23,32 @@
                     opacity="0.25"
                 />
             </g>
-            <!-- <path
-                v-if="activeLine"
-                :d="line(activeLine)"
-                stroke="white"
-                stroke-width="2"
-                fill="none"
-                opacity="0.7"
-            />
-            <circle
-                v-if="activeCity"
-                :cx="xScale(activeLine[0][0])"
-                :cy="yScale(activeLine[0][1])"
-                :r="radius * 2"
-                stroke="white"
-                stroke-width="2"
-                :fill="$styleVars.blue"
-            /> -->
             <g v-if="activeCitiesCircles.length">
                 <circle
                     v-for="(c, i) in activeCitiesCircles"
                     :key="i"
                     :cx="xScale(c.lon)"
                     :cy="yScale(c.lat)"
+                    :r="radius * 2"
+                    stroke="white"
+                    stroke-width="2"
+                    :fill="$styleVars.orange"
+                />
+            </g>
+            <path
+                v-if="activeLinesCoordinates.length"
+                :d="line(activeLinesCoordinates)"
+                stroke="white"
+                stroke-width="2"
+                fill="none"
+                opacity="0.7"
+            />
+            <g v-if="activeLinesCoordinates.length">
+                <circle
+                    v-for="(c, i) in activeLinesCoordinates"
+                    :key="i"
+                    :cx="xScale(c[0])"
+                    :cy="yScale(c[1])"
                     :r="radius * 2"
                     stroke="white"
                     stroke-width="2"
@@ -63,15 +66,15 @@ import { intersection } from '../../utils/utils'
 export default {
     props: {
         isclasses: { default: '' },
+        width: { default: 750 },
         dots: { default: () => [] },
-        country: { default: null },
+        cities: { default: () => [] },
         activecountries: { default: () => [] },
         activecities: { default: () => [] },
-        cities: { default: () => [] },
-        startcity: { default: null },
-        city: { default: null },
-        width: { default: 750 },
-        destination: { default: null }
+        activelines: { default: () => [] }
+        // startcity: { default: null },
+        // city: { default: null },
+        //destination: { default: null }
     },
 
     computed: {
@@ -83,6 +86,7 @@ export default {
             return geoEquirectangular()
                 .scale(this.width / 6.75)
                 .translate([this.width / 2, this.height / (2 + yOffset)])
+                .precision(0.1)
         },
         geopath() {
             return geoPath().projection(projection)
@@ -101,24 +105,11 @@ export default {
                 .map(c => (this.cities[c] ? this.cities[c] : null))
                 .filter(c => c)
         },
-        activeCity() {
-            return this.allcities[this.city]
-                ? [this.allcities[this.city].lon, this.allcities[this.city].lat]
-                : null
-        },
-        activeLine() {
-            return this.allcities[this.city] && this.allcities[this.city]
-                ? [
-                      [
-                          this.allcities[this.startcity].lon,
-                          this.allcities[this.startcity].lat
-                      ],
-                      [
-                          this.allcities[this.city].lon,
-                          this.allcities[this.city].lat
-                      ]
-                  ]
-                : null
+        activeLinesCoordinates() {
+            return this.activelines
+                .map(c => (this.cities[c] ? this.cities[c] : null))
+                .filter(c => c)
+                .map(c => [c.lon, c.lat])
         }
     },
 
@@ -145,7 +136,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.countriesDots)
+        console.log(this.activeLinesCoordinates)
     }
 }
 </script>

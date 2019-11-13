@@ -128,7 +128,12 @@ class ExperimentsController extends Controller
                                                 357,
                                                 311
                                             ])
-                                            ->with('activecities', [4654, 566])
+                                            //->with('activecities', [4654, 566])
+                                            ->with('activelines', [
+                                                829,
+                                                578,
+                                                566
+                                            ])
                                     )
                                     ->push(
                                         component('Flex')->with(
