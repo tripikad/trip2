@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .background-gray {
     background-color: $gray-lighter;
@@ -14,4 +14,8 @@
 
 .background-yellow {
     background-color: $yellow;
+}
+
+.background-blue {
+    background-color: $blue;
 }

@@ -1,18 +1,22 @@
 @import 'variables';
 
-.Grid {
-    display: grid;
+.Flex {
+    display: flex;
     display: block ?if $tablet;
 }
 
-.Grid__item {
+.Flex__item {
     margin-bottom: $margin-md ?if $tablet;
 }
 
-.Grid__item:last-child {
+.Flex__item:last-child {
     margin-bottom: 0;
 }
 
-.Grid--debug .Grid__item {
+.Flex--center {
+    justify-content: center;
+}
+
+.Flex--debug .Flex__item {
     border: 1px dashed $red;
 }

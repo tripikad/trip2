@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .FormButton {
     -webkit-appearance: none;
@@ -40,4 +40,12 @@
 
 .FormButton[disabled]:hover {
     background: $green;
+}
+
+.FormButton--orange {
+    background: $orange;
+}
+
+.FormButton--orange:hover {
+    background: $orange-hover;
 }

@@ -28,7 +28,11 @@
     </head>
     <body>
         @include('utils.svg')
-        <div id="app" class="background-{{ $color }}">
+        <div
+          id="app"
+          class="background-{{ $color }}"
+          style="position: relative; min-height: 100vh;"
+        >
             @yield('background')
             @yield('promobar')
             {!! component('PhotoFullscreen') !!}

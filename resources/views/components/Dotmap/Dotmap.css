@@ -1,0 +1,9 @@
+@import 'variables';
+
+.Dotmap {
+    display: flex;
+}
+
+.Dotmap--center {
+    justify-content: center;
+}

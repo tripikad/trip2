@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .One__header {
     position: relative;
@@ -27,7 +27,7 @@
 }
 
 .One__content {
-    padding: $margin-md;
+    padding: $padding-md;
 }
 
 .One__contentItem {

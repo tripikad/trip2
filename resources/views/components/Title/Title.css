@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .Title__title {
     font: $font-heading-xl;
@@ -22,6 +22,10 @@ a .Title__title:hover {
 .Title--smaller .Title__title {
     font: $font-heading-md;
     font-weight: $font-weight-bold;
+}
+
+.Title--smallest .Title__title {
+    font: $font-heading-sm;
 }
 
 .Title--large .Title__title {
@@ -67,4 +71,8 @@ a .Title__title:hover {
 
 .Title--center .Title__title {
     text-align: center;
+}
+
+.Title--disabled .Title__title {
+    opacity: 0.5;
 }

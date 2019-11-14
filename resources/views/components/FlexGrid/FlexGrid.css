@@ -1,0 +1,10 @@
+@import 'variables';
+
+.FlexGrid__row {
+    display: flex;
+    display: block ?if $tablet;
+}
+
+.FlexGrid--debug .FlexGrid__item {
+    border: 1px dashed $red;
+}

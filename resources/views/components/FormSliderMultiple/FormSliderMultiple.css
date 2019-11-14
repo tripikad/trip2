@@ -15,3 +15,21 @@
     color: $white;
     line-height: 0;
 }
+
+.FormSliderMultiple--yellow .vue-slider-dot-tooltip-text {
+    color: $black;
+    opacity: 0.5;
+}
+
+.FormSliderMultiple--yellow .vue-slider-dot-tooltip-inner {
+    background-color: $yellow-light;
+    border-color: $yellow-light;
+}
+
+.FormSliderMultiple--yellow .vue-slider-process {
+    background-color: $yellow;
+}
+
+.FormSliderMultiple--yellow .vue-slider-rail {
+    background-color: $gray-light;
+}

@@ -46,11 +46,13 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Collection::macro('onlyLast', function ($count = 1) {
-            return $this->reverse()->slice(0, $count)->reverse();
+            return $this->reverse()
+                ->slice(0, $count)
+                ->reverse();
         });
 
         Collection::macro('withoutLastWhenOdd', function () {
-            return ($this->count() % 2 > 0) ? $this->withoutLast() : $this;
+            return $this->count() % 2 > 0 ? $this->withoutLast() : $this;
         });
 
         Collection::macro('withoutFirst', function () {
@@ -72,6 +74,32 @@ class AppServiceProvider extends ServiceProvider
 
             return $this;
         });
+
+        Collection::macro('br', function ($count = 1) {
+            return $this->merge(collect(array_fill(0, $count, '<br />')));
+            return $this;
+        });
+
+        Collection::macro('pushXY', function ($x = 0, $y = 0, $item) {
+            $spacer = style_vars()->spacer;
+            $this->push(
+                '<div style="
+                  margin-left: calc(' .
+                    $x .
+                    ' * ' .
+                    $spacer .
+                    ');
+                  margin-top: calc(' .
+                    $x .
+                    ' * ' .
+                    $spacer .
+                    ')
+                ">' .
+                    $item .
+                    '</div>'
+            );
+            return $this;
+        });
     }
 
     protected function google_analytics_track($auth)
@@ -79,7 +107,9 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.main', function () use ($auth) {
             if ($auth->check()) {
                 Analytics::setUserId($auth->user()->id);
-                Analytics::trackCustom("ga('set', 'user_role', '".$auth->user()->role."');");
+                Analytics::trackCustom(
+                    "ga('set', 'user_role', '" . $auth->user()->role . "');"
+                );
             }
         });
     }

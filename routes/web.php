@@ -397,15 +397,30 @@ Route::post('utils/format', 'UtilsController@format')->name('utils.format');
 
 // Experiments and style guides
 
-Route::get('experiments', 'ExperimentsController@index');
+Route::get('experiments', 'ExperimentsController@index')->name(
+    'experiments.index'
+);
 
 Route::post('experiments/store', 'ExperimentsController@store')->name(
     'experiments.store'
 );
 
-Route::get('styles', 'StyleController@index');
+Route::get('experiments/styles', 'ExperimentsStylesController@index')->name(
+    'experiments.styles.index'
+);
 
-Route::get('components', 'ComponentController@index')->name('components');
+Route::get('experiments/icons', 'ExperimentsIconsController@index')->name(
+    'experiments.icons.index'
+);
+
+Route::get('experiments/grid', 'ExperimentsGridController@index')->name(
+    'experiments.grid.index'
+);
+
+Route::get(
+    'experiments/components',
+    'ExperimentsComponentsController@index'
+)->name('experiments.components.index');
 
 // Registration
 

@@ -5,9 +5,13 @@
     cursor: pointer;
 }
 
+.OfferRow:hover {
+    opacity: $opacity-lg;
+}
+
 .OfferRow__image {
-    width: $width-md;
-    height: $height-md;
+    width: calc($spacer * 5);
+    height: calc($spacer * 5);
     object-fit: cover;
     margin-right: $margin-sm;
 }
@@ -17,17 +21,32 @@
 }
 
 .OfferRow__title {
-    font: $font-text-lg;
-    color: $blue;
+    color: $white;
     font: $font-heading-lg;
+    font-size: calc($spacer * 2);
+    font-weight: bold;
     margin-bottom: $margin-xxs;
 }
 
-.OfferRow__meta {
-    font: $font-text-sm;
-    color: $gray;
+.OfferRow__price {
+    color: $yellow-light;
 }
 
+.OfferRow__meta {
+    display: flex;
+    opacity: 0.75;
+}
 .OfferRow__meta > * {
-    margin-right: $margin-xl;
+    margin-right: $margin-sm;
+}
+
+.OfferRow__metaPrimary {
+    color: $white;
+    font: $font-text-md;
+}
+
+.OfferRow__metaSecondary {
+    color: $white;
+    font: $font-text-md;
+    opacity: 0.5;
 }

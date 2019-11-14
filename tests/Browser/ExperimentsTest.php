@@ -5,13 +5,15 @@ namespace Tests\Browser;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 
-class ComponentsTest extends DuskTestCase
+class ExperimentsTest extends DuskTestCase
 {
     public function test_anybody_can_see_components_page()
     {
         $this->browse(function (Browser $browser) {
             $browser
-                ->visit('/components?preview')
+                ->visit('/experiments/components')
+                ->assertSourceHas('Components')
+                ->visit('/experiments/components?preview')
                 ->assertSourceHas('Components');
         });
     }

@@ -1,0 +1,42 @@
+@import 'variables';
+
+.Offer__header {
+    position: relative;
+}
+
+.Offer__headerItem {
+    margin-bottom: $margin-md;
+}
+
+.Offer__topItem {
+    margin-bottom: $margin-md;
+}
+
+.Offer__outerWrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.Offer__innerWrapper {
+    width: calc($desktop-width * 0.75);
+    width: $mobile-width ?if $tablet;
+}
+
+.Offer__content {
+    padding: $margin-md;
+}
+
+.Offer__contentItem {
+    margin-bottom: $margin-md;
+}
+
+.Offer__contentItem:last-child {
+    margin-bottom: 0;
+}
+
+.Offer__bottom {
+    background: $white;
+    padding: $padding-md;
+    padding: $padding-sm 0 ?if $mobile;
+}

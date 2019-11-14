@@ -26,26 +26,26 @@ $footer = $footer ?? '';
 
 @section('color', $color)
 @section('background')
-    {!! $background !!}
+{!! $background !!}
 @endsection
 
 @section('header')
 
-<header class="One__header">
+<header class="Offer__header">
 
     {!! $header !!}
 
     @if ($top->count())
 
-    <div class="One__top">
+    <div class="Offer__top">
 
         @foreach ($top as $top_item)
 
-            <div class="One__topItem">
+        <div class="Offer__topItem">
 
-                {!! $top_item !!}
-                    
-            </div>
+            {!! $top_item !!}
+
+        </div>
 
         @endforeach
 
@@ -59,47 +59,51 @@ $footer = $footer ?? '';
 
 @section('content')
 
-<div class="One__outerWrapper">
+<div class="Offer__outerWrapper">
 
-    <div class="One__innerWrapper">
+    <div class="Offer__innerWrapper">
 
-        <div class="One__contentTop">
+        <div class="Offer__contentTop">
 
             {!! $content_top !!}
 
         </div>
 
-        <main class="One__content">
+        @if ($content->count())
+
+        <main class="Offer__content">
 
             @foreach ($content as $content_item)
-            
-            <div class="One__contentItem">
+
+            <div class="Offer__contentItem">
 
                 {!! $content_item !!}
-                    
+
             </div>
 
             @endforeach
 
         </main>
 
-    @if ($bottom->count())
+        @endif
 
-    <section class="One__bottom">
+        @if ($bottom->count())
 
-        @foreach ($bottom as $bottom_item)
-        
-            <div class="One__bottomItem">
+        <section class="Offer__bottom">
+
+            @foreach ($bottom as $bottom_item)
+
+            <div class="Offer__bottomItem">
 
                 {!! $bottom_item !!}
-                    
-            </div>
-                
-        @endforeach
-        
-    </section>
 
-    @endif 
+            </div>
+
+            @endforeach
+
+        </section>
+
+        @endif
 
     </div>
 
@@ -109,10 +113,10 @@ $footer = $footer ?? '';
 
 @section('footer')
 
-    <footer class="One__footer">
+<footer class="Offer__footer">
 
     {!! $footer !!}
 
-    </footer>
+</footer>
 
 @endsection

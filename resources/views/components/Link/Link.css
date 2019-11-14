@@ -1,27 +1,27 @@
-@import "variables";
+@import 'variables';
 
 .Link {
-	display: flex;
+    display: flex;
     align-items: center;
     flex-wrap: wrap;
 }
 
-    .Link__title {
-        color: $gray;
-        font: $font-text-md;
-    }
+.Link__title {
+    color: $gray;
+    font: $font-text-md;
+}
 
-    .Link__title:hover {
-        color: $gray-hover;
-    }
+.Link__title:hover {
+    color: $gray-hover;
+}
 
-    .Link__icon {
-        margin-left: $margin-xs;
-    }
+.Link__icon {
+    margin-left: $margin-xs;
+}
 
-    .Link__icon svg {
-        fill: $gray;
-    }
+.Link__icon svg {
+    fill: $gray;
+}
 
 .Link--large .Link__title {
     font: $font-heading-md;
@@ -45,4 +45,8 @@
 
 .Link--white .Link__icon svg {
     fill: $white;
+}
+
+.Link--semitransparent {
+    opacity: $opacity-md;
 }
