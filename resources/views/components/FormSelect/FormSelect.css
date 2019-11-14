@@ -67,5 +67,9 @@
 
 .FormSelect--blue .multiselect__input::placeholder {
     color: $white !important;
-    opacity: $opacity-md;
+    opacity: $opacity-md !important;
+}
+
+.FormSelect--blue .multiselect__select:before {
+    border-color: $white transparent transparent !important;
 }
