@@ -2,7 +2,7 @@
 
 $items = $items ?? [];
 
-$justify = $justify ?? 'flex-start';
+$justify = $justify ?? '';
 
 $align = $align ?? 'center';
 

@@ -2,7 +2,7 @@
     <div class="OfferList" :class="isclasses">
         <dotmap
             :dots="dots"
-            :activecities="filteredOfferList.map(o => ({lon: parseFloat(o.longitude),lat: parseFloat(o.latitude)}))"
+            :passivecities="filteredOfferList.map(o => ({lon: parseFloat(o.longitude),lat: parseFloat(o.latitude)}))"
         />
         <!--form-buttons :items="['Kõik','Seiklusreisid','Bussireisid','Pakettreisid']" /-->
         <form-slider-multiple

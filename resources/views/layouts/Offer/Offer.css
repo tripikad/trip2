@@ -21,7 +21,6 @@
 .Offer__innerWrapper {
     width: calc($desktop-width * 0.75);
     width: $mobile-width ?if $tablet;
-    width: 80% ?if $mobile;
 }
 
 .Offer__content {
@@ -37,9 +36,7 @@
 }
 
 .Offer__bottom {
-    display: flex;
-    justify-content: center;
-    background: $gray-lighter;
-    padding: $padding-lg 0 0 0;
-    padding: $padding-md 0 ?if $mobile;
+    background: $white;
+    padding: $padding-md;
+    padding: $padding-sm 0 ?if $mobile;
 }

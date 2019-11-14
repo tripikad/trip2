@@ -142,17 +142,20 @@ class ExperimentsController extends Controller
                                             ])
                                     )
                                     ->push(
-                                        component('Flex')->with(
-                                            'items',
-                                            collect()->push(
-                                                component('Tag')
-                                                    ->is('white')
-                                                    ->with(
-                                                        'title',
-                                                        'Seiklusreis'
-                                                    )
+                                        component('Flex')
+                                            ->is('center')
+                                            ->is('debug')
+                                            ->with(
+                                                'items',
+                                                collect()->push(
+                                                    component('Tag')
+                                                        ->is('white')
+                                                        ->with(
+                                                            'title',
+                                                            'Seiklusreis'
+                                                        )
+                                                )
                                             )
-                                        )
                                     )
                                     ->br(2)
                                     ->push(
