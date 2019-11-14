@@ -2,11 +2,12 @@
 
 .OfferList > *,
 .OfferList__offers > * {
-    margin-bottom: $margin-md;
+    margin-bottom: $margin-lg;
 }
 
 .OfferList__filters {
     display: flex;
+    margin-bottom: $margin-xl;
 }
 
 .OfferList__filters > * {

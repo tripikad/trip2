@@ -64,6 +64,20 @@ class OfferController extends Controller
                 'top',
                 collect()
                     ->push(
+                        component('Flex')
+                            ->is('center')
+                            ->with(
+                                'items',
+                                collect()->push(
+                                    component('Link')
+                                        ->is('white')
+                                        ->is('semitransparent')
+                                        ->with('title', 'Kõik reisipakkumised')
+                                        ->with('route', route('offers.index'))
+                                )
+                            )
+                    )
+                    ->push(
                         component('Dotmap')
                             ->is('center')
                             ->with('dots', config('dots'))
@@ -111,21 +125,21 @@ class OfferController extends Controller
                                 collect()
                                     ->push(
                                         component('Title')
-                                            ->is('smaller')
+                                            ->is('small')
                                             ->is('center')
                                             ->is('white')
                                             ->with('title', $offer->duration)
                                     )
                                     ->push(
                                         component('Title')
-                                            ->is('smaller')
+                                            ->is('small')
                                             ->is('center')
                                             ->is('white')
                                             ->is('disabled')
                                             ->with(
                                                 'title',
                                                 $offer->from .
-                                                    ' - ' .
+                                                    ' → ' .
                                                     $offer->to
                                             )
                                     )
@@ -194,6 +208,7 @@ class OfferController extends Controller
                                     component('Button')
                                         ->is('orange')
                                         ->is('center')
+                                        ->is('large')
                                         ->with('title', 'Broneeri reis')
                                         ->with(
                                             'route',
@@ -205,8 +220,8 @@ class OfferController extends Controller
                     )
                     ->br()
                     ->push(region('PhotoRow', $photos))
-                    ->br()
                     ->push('<a id="book"></a>')
+                    ->br()
                     ->push(
                         component('Title')
                             ->is('center')
@@ -276,10 +291,11 @@ class OfferController extends Controller
                                         )
                                 )
                                 ->push(
-                                    component('FormButton')->with(
-                                        'title',
-                                        'Book an offer'
-                                    )
+                                    component('FormButton')
+                                        ->is('orange')
+                                        ->is('wide')
+                                        ->is('large')
+                                        ->with('title', 'Book an offer')
                                 )
                         )
                 )

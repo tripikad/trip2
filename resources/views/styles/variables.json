@@ -30,6 +30,7 @@
     "red-dark": "hsl(0, 56%, 54%)",
     "red-darker": "hsl(0, 53%, 45%)",
 
+    "yellow-light": "hsl(45, 100%, 68%)",
     "yellow": "hsl(45, 100%, 48%)",
     "yellow-hover": "hsl(45, 100%, 38%)",
 

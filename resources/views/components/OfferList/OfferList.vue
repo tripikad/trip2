@@ -2,10 +2,10 @@
     <div class="OfferList" :class="isclasses">
         <dotmap
             :dots="dots"
-            :passivecities="filteredOfferList.map(o => ({lon: parseFloat(o.longitude),lat: parseFloat(o.latitude)}))"
+            :activecities="filteredOfferList.map(o => ({lon: parseFloat(o.longitude),lat: parseFloat(o.latitude)}))"
         />
-        <!--form-buttons :items="['Kõik','Seiklusreisid','Bussireisid','Pakettreisid']" /-->
         <form-slider-multiple
+            isclasses="FormSliderMultiple--yellow"
             :value="activePriceFrom"
             @input="value => (activePriceFrom = value)"
             :value2="activePriceTo"
@@ -16,10 +16,29 @@
             suffix="€"
         />
         <div class="OfferList__filters">
-            <form-select placeholder="Reisistiil" :options="styles" v-model="activeStyle" />
-            <form-select placeholder="Sihkoht" :options="destinations" v-model="activeDestination" />
-            <form-select placeholder="Firma" :options="companies" v-model="activeCompany" />
-            <a v-if="!notFiltered" @click="handleClearFilters" class="Button Button--gray">Kõik</a>
+            <form-select
+                placeholder="Reisistiil"
+                :options="styles"
+                v-model="activeStyle"
+                isclasses="FormSelect--blue"
+            />
+            <form-select
+                placeholder="Sihkoht"
+                :options="destinations"
+                v-model="activeDestination"
+                isclasses="FormSelect--blue"
+            />
+            <form-select
+                placeholder="Firma"
+                :options="companies"
+                v-model="activeCompany"
+                isclasses="FormSelect--blue"
+            />
+            <a
+                :style="{opacity: !notFiltered ? 1 : 0.25}"
+                @click="handleClearFilters"
+                class="Button Button--cyan"
+            >Kõik</a>
         </div>
         <div class="OfferList__offers">
             <OfferRow v-for="(offer, i) in filteredOfferList" :key="i" :offer="offer" />
