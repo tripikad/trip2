@@ -17,7 +17,7 @@
 
 .multiselect__tags {
     font: $font-text-sm !important;
-    border: 2px solid $gray !important;
+    border: 2px solid $gray-light !important;
 }
 
 .FormSelect--blue .multiselect__tags {
@@ -52,7 +52,7 @@
 
 .multiselect__content {
     font: $font-text-sm;
-    border: 2px solid $gray !important;
+    border: 2px solid $gray-light !important;
 }
 
 .FormSelect--blue .multiselect__content {
