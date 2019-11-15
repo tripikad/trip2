@@ -7,7 +7,6 @@
 
 .Flex__item {
     margin-bottom: $margin-md ?if $tablet;
-    border: 2px solid red;
 }
 
 .Flex__item:last-child {

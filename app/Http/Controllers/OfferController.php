@@ -28,6 +28,7 @@ class OfferController extends Controller
                 'content',
                 collect()->push(
                     component('OfferList')
+                        ->with('height', '200vh')
                         ->with('dots', config('dots'))
                         ->with('route', route('offers.index.json'))
                 )
@@ -229,6 +230,7 @@ class OfferController extends Controller
                             ->is('white')
                             ->with('title', 'Broneeri reis')
                     )
+                    ->br()
             )
             ->with(
                 'bottom',
