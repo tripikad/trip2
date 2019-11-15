@@ -38,6 +38,6 @@
         url('../fonts/Medium.woff2') format('woff2'),
         url('../fonts/Medium.woff') format('woff'),
         url('../fonts/Medium.ttf') format('truetype');
-    font-weight: 500;
+    font-weight: 600;
     font-style: normal;
 }

@@ -82,13 +82,23 @@ class Component
             })
             ->implode(' ');
 
-        return '<component is="' .
+        $component =
+            '<fade><component is="' .
             $vueComponent .
             '" isclasses="' .
             $this->generateIsClasses() .
             '" ' .
             $props .
-            ' ></component>';
+            ' ></component></fade>';
+
+        if ($this->with->has('height')) {
+            return '<div style="min-height:' .
+                $this->with->get('height') .
+                '">' .
+                $component .
+                '</div>';
+        }
+        return $component;
     }
 
     public function render()
