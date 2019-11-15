@@ -3,7 +3,7 @@
 return [
 
     46 => [
-        'name' => "Sevilla",
+        'name' => 'Sevilla',
         'lat' => 37.38283,
         'lon' => -5.97317,
         'capital' => false,
@@ -11,7 +11,7 @@ return [
         'geoname' => 2510911,
     ],
     279 => [
-        'name' => "Sydney",
+        'name' => 'Sydney',
         'lat' => -33.86785,
         'lon' => 151.20732,
         'capital' => false,
@@ -19,7 +19,7 @@ return [
         'geoname' => 2147714,
     ],
     283 => [
-        'name' => "Ibiza",
+        'name' => 'Ibiza',
         'lat' => 38.90883,
         'lon' => 1.43296,
         'capital' => false,
@@ -27,7 +27,7 @@ return [
         'geoname' => 2516479,
     ],
     292 => [
-        'name' => "Amsterdam",
+        'name' => 'Amsterdam',
         'lat' => 52.37403,
         'lon' => 4.88969,
         'capital' => true,
@@ -35,7 +35,7 @@ return [
         'geoname' => 2759794,
     ],
     383 => [
-        'name' => "Fääri saared",
+        'name' => 'Faroe Islands',
         'lat' => 62,
         'lon' => -7,
         'capital' => false,
@@ -43,7 +43,7 @@ return [
         'geoname' => 2622320,
     ],
     424 => [
-        'name' => "Tasmaania",
+        'name' => 'Tasmania',
         'lat' => -42,
         'lon' => 147,
         'capital' => false,
@@ -51,7 +51,7 @@ return [
         'geoname' => 2147291,
     ],
     425 => [
-        'name' => "Sitsiilia",
+        'name' => 'Sicily',
         'lat' => 37.62304,
         'lon' => 13.93457,
         'capital' => false,
@@ -59,7 +59,7 @@ return [
         'geoname' => 2523118,
     ],
     426 => [
-        'name' => "Berliin",
+        'name' => 'Berliin',
         'lat' => 52.52437,
         'lon' => 13.41053,
         'capital' => true,
@@ -67,7 +67,7 @@ return [
         'geoname' => 2950159,
     ],
     427 => [
-        'name' => "Alpid",
+        'name' => 'Lõuna-Alpid',
         'lat' => -43.5,
         'lon' => 170.5,
         'capital' => false,
@@ -75,7 +75,7 @@ return [
         'geoname' => 2182515,
     ],
     428 => [
-        'name' => "Pariis",
+        'name' => 'Pariis',
         'lat' => 48.85341,
         'lon' => 2.3488,
         'capital' => true,
@@ -83,7 +83,7 @@ return [
         'geoname' => 2988507,
     ],
     429 => [
-        'name' => "Angkor",
+        'name' => 'Angkor Wat',
         'lat' => 13.41237,
         'lon' => 103.86661,
         'capital' => false,
@@ -91,7 +91,7 @@ return [
         'geoname' => 1831948,
     ],
     430 => [
-        'name' => "Ateena",
+        'name' => 'Ateena',
         'lat' => 37.98376,
         'lon' => 23.72784,
         'capital' => true,
@@ -99,7 +99,7 @@ return [
         'geoname' => 264371,
     ],
     431 => [
-        'name' => "Korfu",
+        'name' => 'Kérkyra saar',
         'lat' => 39.59828,
         'lon' => 19.85231,
         'capital' => false,
@@ -107,7 +107,7 @@ return [
         'geoname' => 2463678,
     ],
     432 => [
-        'name' => "Olümpos",
+        'name' => 'Mount Olympus',
         'lat' => 40.08175,
         'lon' => 22.34954,
         'capital' => false,
@@ -115,7 +115,7 @@ return [
         'geoname' => 734890,
     ],
     433 => [
-        'name' => "Meteora",
+        'name' => 'Meteora',
         'lat' => 39.71417,
         'lon' => 21.63111,
         'capital' => false,
@@ -123,7 +123,7 @@ return [
         'geoname' => 6941098,
     ],
     434 => [
-        'name' => "Kreeta",
+        'name' => 'Crete',
         'lat' => 35.15585,
         'lon' => 24.89502,
         'capital' => false,
@@ -131,7 +131,7 @@ return [
         'geoname' => 6697802,
     ],
     435 => [
-        'name' => "Milos",
+        'name' => 'Mílos',
         'lat' => 36.74536,
         'lon' => 24.4265,
         'capital' => false,
@@ -139,7 +139,7 @@ return [
         'geoname' => 256952,
     ],
     436 => [
-        'name' => "Lissabon",
+        'name' => 'Lissabon',
         'lat' => 38.71667,
         'lon' => -9.13333,
         'capital' => true,
@@ -147,7 +147,7 @@ return [
         'geoname' => 2267057,
     ],
     437 => [
-        'name' => "Madeira",
+        'name' => 'Madeira',
         'lat' => 32.76737,
         'lon' => -16.94699,
         'capital' => false,
@@ -155,7 +155,7 @@ return [
         'geoname' => 2593105,
     ],
     438 => [
-        'name' => "Tenerife",
+        'name' => 'Santa Cruz de Tenerife',
         'lat' => 28.46824,
         'lon' => -16.25462,
         'capital' => false,
@@ -163,7 +163,7 @@ return [
         'geoname' => 2511174,
     ],
     439 => [
-        'name' => "La Gomera",
+        'name' => 'Peñón de Vélez de la Gomera',
         'lat' => 35.17204,
         'lon' => -4.29959,
         'capital' => false,
@@ -171,7 +171,7 @@ return [
         'geoname' => 2509770,
     ],
     440 => [
-        'name' => "El Hierro",
+        'name' => 'Hierro',
         'lat' => 27.74196,
         'lon' => -17.9993,
         'capital' => false,
@@ -179,7 +179,7 @@ return [
         'geoname' => 2516747,
     ],
     441 => [
-        'name' => "Gran Canaria",
+        'name' => 'Las Palmas de Gran Canaria',
         'lat' => 28.09973,
         'lon' => -15.41343,
         'capital' => false,
@@ -187,7 +187,7 @@ return [
         'geoname' => 2515270,
     ],
     442 => [
-        'name' => "Bangkok",
+        'name' => 'Bangkok',
         'lat' => 13.75398,
         'lon' => 100.50144,
         'capital' => true,
@@ -195,7 +195,7 @@ return [
         'geoname' => 1609350,
     ],
     443 => [
-        'name' => "Phuket",
+        'name' => 'Phuket',
         'lat' => 7.89059,
         'lon' => 98.3981,
         'capital' => false,
@@ -203,7 +203,7 @@ return [
         'geoname' => 1151254,
     ],
     444 => [
-        'name' => "Moskva",
+        'name' => 'Moskva',
         'lat' => 55.75222,
         'lon' => 37.61556,
         'capital' => true,
@@ -211,7 +211,7 @@ return [
         'geoname' => 524901,
     ],
     446 => [
-        'name' => "Kamtshatka",
+        'name' => 'Kamchatka Peninsula',
         'lat' => 56,
         'lon' => 160,
         'capital' => false,
@@ -219,7 +219,7 @@ return [
         'geoname' => 2125073,
     ],
     447 => [
-        'name' => "Lapimaa",
+        'name' => 'Lapland',
         'lat' => 67.75,
         'lon' => 26.5,
         'capital' => false,
@@ -227,7 +227,7 @@ return [
         'geoname' => 830603,
     ],
     448 => [
-        'name' => "Helsingi",
+        'name' => 'Helsingi',
         'lat' => 60.16952,
         'lon' => 24.93545,
         'capital' => true,
@@ -235,7 +235,7 @@ return [
         'geoname' => 658225,
     ],
     449 => [
-        'name' => "Ahvenamaa",
+        'name' => 'Ahvenamaa',
         'lat' => 60.25,
         'lon' => 20,
         'capital' => false,
@@ -243,7 +243,7 @@ return [
         'geoname' => 661882,
     ],
     450 => [
-        'name' => "Las Vegas",
+        'name' => 'Las Vegas',
         'lat' => 36.17497,
         'lon' => -115.13722,
         'capital' => false,
@@ -251,7 +251,7 @@ return [
         'geoname' => 5506956,
     ],
     451 => [
-        'name' => "New York",
+        'name' => 'New York',
         'lat' => 40.71427,
         'lon' => -74.00597,
         'capital' => false,
@@ -259,7 +259,7 @@ return [
         'geoname' => 5128581,
     ],
     452 => [
-        'name' => "Florida",
+        'name' => 'Florida',
         'lat' => 28.75054,
         'lon' => -82.5001,
         'capital' => false,
@@ -267,7 +267,7 @@ return [
         'geoname' => 4155751,
     ],
     453 => [
-        'name' => "Seattle",
+        'name' => 'Seattle',
         'lat' => 47.60621,
         'lon' => -122.33207,
         'capital' => false,
@@ -275,7 +275,7 @@ return [
         'geoname' => 5809844,
     ],
     454 => [
-        'name' => "Mallorca",
+        'name' => 'Palma',
         'lat' => 39.56939,
         'lon' => 2.65024,
         'capital' => false,
@@ -283,7 +283,7 @@ return [
         'geoname' => 2512989,
     ],
     457 => [
-        'name' => "Madriid",
+        'name' => 'Madrid',
         'lat' => 40.42526,
         'lon' => -3.69063,
         'capital' => false,
@@ -291,7 +291,7 @@ return [
         'geoname' => 3117732,
     ],
     459 => [
-        'name' => "London",
+        'name' => 'London',
         'lat' => 51.50853,
         'lon' => -0.12574,
         'capital' => true,
@@ -299,7 +299,7 @@ return [
         'geoname' => 2643743,
     ],
     460 => [
-        'name' => "Šotimaa",
+        'name' => 'Scotland',
         'lat' => 56,
         'lon' => -4,
         'capital' => false,
@@ -307,7 +307,7 @@ return [
         'geoname' => 2638360,
     ],
     461 => [
-        'name' => "Stockholm",
+        'name' => 'Stockholm',
         'lat' => 59.33258,
         'lon' => 18.0649,
         'capital' => true,
@@ -315,7 +315,7 @@ return [
         'geoname' => 2673730,
     ],
     462 => [
-        'name' => "Gotland",
+        'name' => 'Ojamaa',
         'lat' => 57.5,
         'lon' => 18.55,
         'capital' => false,
@@ -323,7 +323,7 @@ return [
         'geoname' => 2711511,
     ],
     463 => [
-        'name' => "Machu Picchu",
+        'name' => 'Ruinas Machupicchu',
         'lat' => -13.16357,
         'lon' => -72.54574,
         'capital' => false,
@@ -331,7 +331,7 @@ return [
         'geoname' => 3935634,
     ],
     464 => [
-        'name' => "Titicaca",
+        'name' => 'Lago Titicaca',
         'lat' => -15.8,
         'lon' => -69.4,
         'capital' => false,
@@ -339,7 +339,7 @@ return [
         'geoname' => 3927364,
     ],
     465 => [
-        'name' => "Goa",
+        'name' => 'Goa osariik',
         'lat' => 15.33333,
         'lon' => 74.08333,
         'capital' => false,
@@ -347,7 +347,7 @@ return [
         'geoname' => 1271157,
     ],
     467 => [
-        'name' => "Pompei",
+        'name' => 'Pompei',
         'lat' => 40.75,
         'lon' => 14.48333,
         'capital' => false,
@@ -355,7 +355,7 @@ return [
         'geoname' => 3170336,
     ],
     468 => [
-        'name' => "Capri",
+        'name' => 'Capri',
         'lat' => 40.55073,
         'lon' => 14.24263,
         'capital' => false,
@@ -363,7 +363,7 @@ return [
         'geoname' => 3180630,
     ],
     469 => [
-        'name' => "Istanbul",
+        'name' => 'Istanbul',
         'lat' => 41.01384,
         'lon' => 28.94966,
         'capital' => false,
@@ -371,7 +371,7 @@ return [
         'geoname' => 745044,
     ],
     494 => [
-        'name' => "Sofia",
+        'name' => 'Sofia',
         'lat' => 42.69751,
         'lon' => 23.32415,
         'capital' => true,
@@ -379,7 +379,7 @@ return [
         'geoname' => 727011,
     ],
     496 => [
-        'name' => "Wales",
+        'name' => 'Sydney',
         'lat' => -33.86785,
         'lon' => 151.20732,
         'capital' => false,
@@ -387,7 +387,7 @@ return [
         'geoname' => 2147714,
     ],
     497 => [
-        'name' => "Lyon",
+        'name' => 'Lyon',
         'lat' => 45.74846,
         'lon' => 4.84671,
         'capital' => false,
@@ -395,7 +395,7 @@ return [
         'geoname' => 2996944,
     ],
     498 => [
-        'name' => "Brüssel",
+        'name' => 'City of Brussels',
         'lat' => 50.85115,
         'lon' => 4.34526,
         'capital' => false,
@@ -403,7 +403,7 @@ return [
         'geoname' => 3337389,
     ],
     499 => [
-        'name' => "Yellowstone",
+        'name' => 'Billings',
         'lat' => 45.78329,
         'lon' => -108.50069,
         'capital' => false,
@@ -411,7 +411,7 @@ return [
         'geoname' => 5640350,
     ],
     500 => [
-        'name' => "Praha",
+        'name' => 'Praha',
         'lat' => 50.08804,
         'lon' => 14.42076,
         'capital' => true,
@@ -419,7 +419,7 @@ return [
         'geoname' => 3067696,
     ],
     501 => [
-        'name' => "Rio de Janeiro",
+        'name' => 'Rio de Janeiro',
         'lat' => -22.90642,
         'lon' => -43.18223,
         'capital' => false,
@@ -427,7 +427,7 @@ return [
         'geoname' => 3451190,
     ],
     502 => [
-        'name' => "Dublin",
+        'name' => 'Dublin',
         'lat' => 53.33306,
         'lon' => -6.24889,
         'capital' => true,
@@ -435,7 +435,7 @@ return [
         'geoname' => 2964574,
     ],
     503 => [
-        'name' => "Rooma",
+        'name' => 'Rooma',
         'lat' => 41.89193,
         'lon' => 12.51133,
         'capital' => true,
@@ -443,7 +443,7 @@ return [
         'geoname' => 3169070,
     ],
     504 => [
-        'name' => "Kopenhaagen",
+        'name' => 'Kopenhaagen',
         'lat' => 55.67594,
         'lon' => 12.56553,
         'capital' => true,
@@ -451,7 +451,7 @@ return [
         'geoname' => 2618425,
     ],
     505 => [
-        'name' => "Bukarest",
+        'name' => 'Bukarest',
         'lat' => 44.43225,
         'lon' => 26.10626,
         'capital' => true,
@@ -459,7 +459,7 @@ return [
         'geoname' => 683506,
     ],
     508 => [
-        'name' => "Surmaorg",
+        'name' => 'Surmaorg',
         'lat' => 36.24662,
         'lon' => -116.817,
         'capital' => false,
@@ -467,7 +467,7 @@ return [
         'geoname' => 5342045,
     ],
     509 => [
-        'name' => "Iguassu",
+        'name' => 'Foz do Iguaçu',
         'lat' => -25.54778,
         'lon' => -54.58806,
         'capital' => false,
@@ -475,7 +475,7 @@ return [
         'geoname' => 3463030,
     ],
     510 => [
-        'name' => "Öland",
+        'name' => 'Öland',
         'lat' => 56.751,
         'lon' => 16.63333,
         'capital' => false,
@@ -483,7 +483,7 @@ return [
         'geoname' => 2687204,
     ],
     519 => [
-        'name' => "Viin",
+        'name' => 'Viin',
         'lat' => 48.20849,
         'lon' => 16.37208,
         'capital' => true,
@@ -491,7 +491,7 @@ return [
         'geoname' => 2761369,
     ],
     523 => [
-        'name' => "Budapest",
+        'name' => 'Budapest',
         'lat' => 47.49835,
         'lon' => 19.04045,
         'capital' => true,
@@ -499,7 +499,7 @@ return [
         'geoname' => 3054643,
     ],
     524 => [
-        'name' => "Rhodos",
+        'name' => 'Rhodos',
         'lat' => 36.19613,
         'lon' => 27.96081,
         'capital' => false,
@@ -507,7 +507,7 @@ return [
         'geoname' => 400665,
     ],
     525 => [
-        'name' => "Bali",
+        'name' => 'Bali',
         'lat' => -8.33333,
         'lon' => 115,
         'capital' => false,
@@ -515,7 +515,7 @@ return [
         'geoname' => 1650534,
     ],
     526 => [
-        'name' => "Chicago",
+        'name' => 'Chicago',
         'lat' => 41.85003,
         'lon' => -87.65005,
         'capital' => false,
@@ -523,7 +523,7 @@ return [
         'geoname' => 4887398,
     ],
     531 => [
-        'name' => "Tokyo",
+        'name' => 'Tōkyō',
         'lat' => 35.6895,
         'lon' => 139.69171,
         'capital' => true,
@@ -531,7 +531,7 @@ return [
         'geoname' => 1850147,
     ],
     532 => [
-        'name' => "Riia",
+        'name' => 'Riia',
         'lat' => 56.946,
         'lon' => 24.10589,
         'capital' => true,
@@ -539,7 +539,7 @@ return [
         'geoname' => 456172,
     ],
     533 => [
-        'name' => "Uyuni",
+        'name' => 'Uyuni',
         'lat' => -20.45967,
         'lon' => -66.82503,
         'capital' => false,
@@ -547,7 +547,7 @@ return [
         'geoname' => 3901903,
     ],
     537 => [
-        'name' => "Lofoodid",
+        'name' => 'Lofoten',
         'lat' => 68.20483,
         'lon' => 12.79496,
         'capital' => false,
@@ -555,7 +555,7 @@ return [
         'geoname' => 3147088,
     ],
     540 => [
-        'name' => "Veneetsia",
+        'name' => 'Venice',
         'lat' => 45.44045,
         'lon' => 12.32632,
         'capital' => false,
@@ -563,7 +563,7 @@ return [
         'geoname' => 3164600,
     ],
     541 => [
-        'name' => "Surnumeri",
+        'name' => 'Surnumeri',
         'lat' => 31.55747,
         'lon' => 35.49545,
         'capital' => false,
@@ -571,7 +571,7 @@ return [
         'geoname' => 295347,
     ],
     542 => [
-        'name' => "Kaukaasia",
+        'name' => 'Kaukaasia',
         'lat' => 42.5,
         'lon' => 45,
         'capital' => false,
@@ -579,7 +579,7 @@ return [
         'geoname' => 573081,
     ],
     543 => [
-        'name' => "Tahiti",
+        'name' => 'Tahiti',
         'lat' => -17.6486,
         'lon' => -149.42951,
         'capital' => false,
@@ -587,7 +587,7 @@ return [
         'geoname' => 4033649,
     ],
     546 => [
-        'name' => "Korsika",
+        'name' => 'Corse',
         'lat' => 42.06153,
         'lon' => 8.9542,
         'capital' => false,
@@ -595,7 +595,7 @@ return [
         'geoname' => 3023519,
     ],
     551 => [
-        'name' => "Tulemaa",
+        'name' => 'Tulemaa saared',
         'lat' => -54,
         'lon' => -70,
         'capital' => false,
@@ -603,7 +603,7 @@ return [
         'geoname' => 3834451,
     ],
     553 => [
-        'name' => "San Sebastian",
+        'name' => 'San Sebastián Municipio',
         'lat' => 18.32912,
         'lon' => -66.97462,
         'capital' => false,
@@ -611,7 +611,7 @@ return [
         'geoname' => 4568177,
     ],
     554 => [
-        'name' => "Sardiinia",
+        'name' => 'Sardiinia',
         'lat' => 40,
         'lon' => 9,
         'capital' => false,
@@ -619,7 +619,7 @@ return [
         'geoname' => 2523227,
     ],
     558 => [
-        'name' => "Sikkim",
+        'name' => 'Sikkim',
         'lat' => 27.75,
         'lon' => 88.5,
         'capital' => false,
@@ -627,7 +627,7 @@ return [
         'geoname' => 1256312,
     ],
     566 => [
-        'name' => "Phnom Penh",
+        'name' => 'Phnom Penh',
         'lat' => 11.56245,
         'lon' => 104.91601,
         'capital' => true,
@@ -635,7 +635,7 @@ return [
         'geoname' => 1821306,
     ],
     571 => [
-        'name' => "Lanzarote",
+        'name' => 'Lanzarote Airport',
         'lat' => 28.95027,
         'lon' => -13.60556,
         'capital' => false,
@@ -643,7 +643,7 @@ return [
         'geoname' => 6297189,
     ],
     573 => [
-        'name' => "Himaalaja",
+        'name' => 'Himalayas',
         'lat' => 28,
         'lon' => 84,
         'capital' => false,
@@ -651,7 +651,7 @@ return [
         'geoname' => 1252558,
     ],
     578 => [
-        'name' => "Fuerteventura",
+        'name' => 'Fuerteventura Airport',
         'lat' => 28.45272,
         'lon' => -13.86376,
         'capital' => false,
@@ -659,7 +659,7 @@ return [
         'geoname' => 6297185,
     ],
     580 => [
-        'name' => "Mykonos",
+        'name' => 'Mykonos',
         'lat' => 37.45,
         'lon' => 25.38333,
         'capital' => false,
@@ -667,7 +667,7 @@ return [
         'geoname' => 257055,
     ],
     581 => [
-        'name' => "Sansibar",
+        'name' => 'Zanzibar',
         'lat' => -6.16394,
         'lon' => 39.19793,
         'capital' => false,
@@ -675,7 +675,7 @@ return [
         'geoname' => 148730,
     ],
     582 => [
-        'name' => "Sahara",
+        'name' => 'Sahara',
         'lat' => 26,
         'lon' => 13,
         'capital' => false,
@@ -683,7 +683,7 @@ return [
         'geoname' => 2212709,
     ],
     585 => [
-        'name' => "Borneo",
+        'name' => 'Borneo',
         'lat' => 1,
         'lon' => 114,
         'capital' => false,
@@ -691,7 +691,7 @@ return [
         'geoname' => 1648148,
     ],
     590 => [
-        'name' => "Suur Kanjon",
+        'name' => 'Great West Canyon',
         'lat' => 37.2722,
         'lon' => -113.09522,
         'capital' => false,
@@ -699,7 +699,7 @@ return [
         'geoname' => 5539912,
     ],
     622 => [
-        'name' => "Niagara",
+        'name' => 'Niagara Falls',
         'lat' => 43.0945,
         'lon' => -79.05671,
         'capital' => false,
@@ -707,7 +707,7 @@ return [
         'geoname' => 5128723,
     ],
     624 => [
-        'name' => "Marmaris",
+        'name' => 'Marmaris',
         'lat' => 36.855,
         'lon' => 28.27417,
         'capital' => false,
@@ -715,7 +715,7 @@ return [
         'geoname' => 304782,
     ],
     636 => [
-        'name' => "Victoria juga",
+        'name' => 'Victoria Falls',
         'lat' => -17.93285,
         'lon' => 25.83066,
         'capital' => false,
@@ -723,7 +723,7 @@ return [
         'geoname' => 879431,
     ],
     663 => [
-        'name' => "Dalmaatsia",
+        'name' => 'Dalmatia',
         'lat' => 43,
         'lon' => 17,
         'capital' => false,
@@ -731,7 +731,7 @@ return [
         'geoname' => 3202210,
     ],
     664 => [
-        'name' => "Zagreb",
+        'name' => 'Zagreb',
         'lat' => 45.81444,
         'lon' => 15.97798,
         'capital' => true,
@@ -739,7 +739,7 @@ return [
         'geoname' => 3186886,
     ],
     665 => [
-        'name' => "San Diego",
+        'name' => 'San Diego',
         'lat' => 32.71571,
         'lon' => -117.16472,
         'capital' => false,
@@ -747,7 +747,7 @@ return [
         'geoname' => 5391811,
     ],
     667 => [
-        'name' => "Soomaa",
+        'name' => 'Soomaa Rahvuspark',
         'lat' => 58.33333,
         'lon' => 25,
         'capital' => false,
@@ -755,7 +755,7 @@ return [
         'geoname' => 796121,
     ],
     669 => [
-        'name' => "Lihavõttesaar",
+        'name' => 'Easter Island',
         'lat' => -27.11667,
         'lon' => -109.36667,
         'capital' => false,
@@ -763,7 +763,7 @@ return [
         'geoname' => 4030726,
     ],
     670 => [
-        'name' => "Frankfurt",
+        'name' => 'Frankfurt',
         'lat' => 50.11552,
         'lon' => 8.68417,
         'capital' => false,
@@ -771,7 +771,7 @@ return [
         'geoname' => 2925533,
     ],
     678 => [
-        'name' => "Hsipaw",
+        'name' => 'Hsipaw',
         'lat' => 22.61659,
         'lon' => 97.30033,
         'capital' => false,
@@ -779,7 +779,7 @@ return [
         'geoname' => 1323082,
     ],
     733 => [
-        'name' => "Tiibet",
+        'name' => 'Tibet',
         'lat' => 31.66667,
         'lon' => 88,
         'capital' => false,
@@ -787,7 +787,7 @@ return [
         'geoname' => 1279685,
     ],
     760 => [
-        'name' => "Bogota",
+        'name' => 'Bogotá',
         'lat' => 4.60971,
         'lon' => -74.08175,
         'capital' => true,
@@ -795,7 +795,7 @@ return [
         'geoname' => 3688689,
     ],
     771 => [
-        'name' => "München",
+        'name' => 'Munich',
         'lat' => 48.13452,
         'lon' => 11.571,
         'capital' => false,
@@ -803,7 +803,7 @@ return [
         'geoname' => 6559171,
     ],
     775 => [
-        'name' => "Dubai",
+        'name' => 'Dubai emiraat',
         'lat' => 25.07725,
         'lon' => 55.30927,
         'capital' => false,
@@ -811,7 +811,7 @@ return [
         'geoname' => 292223,
     ],
     776 => [
-        'name' => "Abu Dhabi",
+        'name' => 'Abu Dhabi emiraat',
         'lat' => 24.45118,
         'lon' => 54.39696,
         'capital' => true,
@@ -819,7 +819,7 @@ return [
         'geoname' => 292968,
     ],
     777 => [
-        'name' => "Sharjah",
+        'name' => 'Ash-Shāriqah emiraat',
         'lat' => 25.33737,
         'lon' => 55.41206,
         'capital' => false,
@@ -827,7 +827,7 @@ return [
         'geoname' => 292672,
     ],
     778 => [
-        'name' => "Ajman",
+        'name' => 'Ajman City',
         'lat' => 25.40177,
         'lon' => 55.47878,
         'capital' => false,
@@ -835,7 +835,7 @@ return [
         'geoname' => 292932,
     ],
     779 => [
-        'name' => "Fujairah",
+        'name' => 'Al-Fujayrah emiraat',
         'lat' => 25.11641,
         'lon' => 56.34141,
         'capital' => false,
@@ -843,7 +843,7 @@ return [
         'geoname' => 292878,
     ],
     780 => [
-        'name' => "Umm Al Quwain",
+        'name' => 'Umm Al Quwain City',
         'lat' => 25.56473,
         'lon' => 55.55517,
         'capital' => false,
@@ -851,7 +851,7 @@ return [
         'geoname' => 290594,
     ],
     781 => [
-        'name' => "Ras Al Khaimah",
+        'name' => 'Ras Al Khaimah City',
         'lat' => 25.78953,
         'lon' => 55.9432,
         'capital' => false,
@@ -859,7 +859,7 @@ return [
         'geoname' => 291074,
     ],
     823 => [
-        'name' => "Krimm",
+        'name' => 'Krimm',
         'lat' => 54.30736,
         'lon' => 8.734,
         'capital' => false,
@@ -867,7 +867,7 @@ return [
         'geoname' => 2883908,
     ],
     829 => [
-        'name' => "Tallinn",
+        'name' => 'Tallinn',
         'lat' => 59.43696,
         'lon' => 24.75353,
         'capital' => true,
@@ -875,7 +875,7 @@ return [
         'geoname' => 588409,
     ],
     849 => [
-        'name' => "Sao Paulo",
+        'name' => 'São Paulo',
         'lat' => -23.5475,
         'lon' => -46.63611,
         'capital' => false,
@@ -883,7 +883,7 @@ return [
         'geoname' => 3448439,
     ],
     852 => [
-        'name' => "Sulawesi",
+        'name' => 'Sulawesi',
         'lat' => -2.13154,
         'lon' => 120.28888,
         'capital' => false,
@@ -891,7 +891,7 @@ return [
         'geoname' => 9062340,
     ],
     864 => [
-        'name' => "Inglismaa",
+        'name' => 'London',
         'lat' => 51.50853,
         'lon' => -0.12574,
         'capital' => true,
@@ -899,7 +899,7 @@ return [
         'geoname' => 2643743,
     ],
     944 => [
-        'name' => "Alaska",
+        'name' => 'Alaska',
         'lat' => 64.00028,
         'lon' => -150.00028,
         'capital' => false,
@@ -907,7 +907,7 @@ return [
         'geoname' => 5879092,
     ],
     963 => [
-        'name' => "Hamburg",
+        'name' => 'Hamburg',
         'lat' => 53.57532,
         'lon' => 10.01534,
         'capital' => false,
@@ -915,7 +915,7 @@ return [
         'geoname' => 2911298,
     ],
     975 => [
-        'name' => "Santorini",
+        'name' => 'Santorini Island',
         'lat' => 36.40572,
         'lon' => 25.45682,
         'capital' => false,
@@ -923,7 +923,7 @@ return [
         'geoname' => 252919,
     ],
     985 => [
-        'name' => "Delhi",
+        'name' => 'Delhi',
         'lat' => 28.65195,
         'lon' => 77.23149,
         'capital' => false,
@@ -931,7 +931,7 @@ return [
         'geoname' => 1273294,
     ],
     990 => [
-        'name' => "Siber",
+        'name' => 'Aït Siber',
         'lat' => 33.85578,
         'lon' => -5.89035,
         'capital' => false,
@@ -939,7 +939,7 @@ return [
         'geoname' => 2559069,
     ],
     1003 => [
-        'name' => "Dubrovnik",
+        'name' => 'Dubrovnik',
         'lat' => 42.64125,
         'lon' => 18.10909,
         'capital' => false,
@@ -947,7 +947,7 @@ return [
         'geoname' => 3201047,
     ],
     1004 => [
-        'name' => "Vancouver",
+        'name' => 'Vancouver',
         'lat' => 49.24966,
         'lon' => -123.11934,
         'capital' => false,
@@ -955,7 +955,7 @@ return [
         'geoname' => 6173331,
     ],
     1030 => [
-        'name' => "Hurghada",
+        'name' => 'Hurghada',
         'lat' => 27.25738,
         'lon' => 33.81291,
         'capital' => false,
@@ -963,7 +963,7 @@ return [
         'geoname' => 361291,
     ],
     1033 => [
-        'name' => "Dresden",
+        'name' => 'Dresden',
         'lat' => 51.05089,
         'lon' => 13.73832,
         'capital' => false,
@@ -971,7 +971,7 @@ return [
         'geoname' => 2935022,
     ],
     1053 => [
-        'name' => "Sharm el Sheikh",
+        'name' => 'Sharm el-Sheikh',
         'lat' => 27.91582,
         'lon' => 34.32995,
         'capital' => false,
@@ -979,7 +979,7 @@ return [
         'geoname' => 349340,
     ],
     1066 => [
-        'name' => "Cozumel",
+        'name' => 'Cozumel',
         'lat' => 20.50038,
         'lon' => -86.94272,
         'capital' => false,
@@ -987,7 +987,7 @@ return [
         'geoname' => 3530103,
     ],
     1103 => [
-        'name' => "Teravmäed",
+        'name' => 'Spitsbergen',
         'lat' => 78.0529,
         'lon' => 17.70996,
         'capital' => false,
@@ -995,7 +995,7 @@ return [
         'geoname' => 7535696,
     ],
     1161 => [
-        'name' => "Dahab",
+        'name' => 'Dahab',
         'lat' => 28.48208,
         'lon' => 34.49505,
         'capital' => false,
@@ -1003,7 +1003,7 @@ return [
         'geoname' => 358245,
     ],
     1168 => [
-        'name' => "Brisbane",
+        'name' => 'Brisbane',
         'lat' => -27.46794,
         'lon' => 153.02809,
         'capital' => false,
@@ -1011,7 +1011,7 @@ return [
         'geoname' => 2174003,
     ],
     1169 => [
-        'name' => "Auckland",
+        'name' => 'Auckland',
         'lat' => -36.84853,
         'lon' => 174.76349,
         'capital' => false,
@@ -1019,7 +1019,7 @@ return [
         'geoname' => 2193733,
     ],
     1173 => [
-        'name' => "Vilnius",
+        'name' => 'Vilnius',
         'lat' => 54.68916,
         'lon' => 25.2798,
         'capital' => true,
@@ -1027,7 +1027,7 @@ return [
         'geoname' => 593116,
     ],
     1216 => [
-        'name' => "Kemer",
+        'name' => 'Kemer',
         'lat' => 50.23295,
         'lon' => 65.26191,
         'capital' => false,
@@ -1035,7 +1035,7 @@ return [
         'geoname' => 1530324,
     ],
     1244 => [
-        'name' => "Milaano",
+        'name' => 'Milan',
         'lat' => 45.46416,
         'lon' => 9.19199,
         'capital' => false,
@@ -1043,7 +1043,7 @@ return [
         'geoname' => 6542283,
     ],
     1266 => [
-        'name' => "California",
+        'name' => 'Southern California',
         'lat' => 34.68743,
         'lon' => -116.78467,
         'capital' => false,
@@ -1051,7 +1051,7 @@ return [
         'geoname' => 11071615,
     ],
     1267 => [
-        'name' => "Strasbourg",
+        'name' => 'Strasbourg',
         'lat' => 48.58392,
         'lon' => 7.74553,
         'capital' => false,
@@ -1059,7 +1059,7 @@ return [
         'geoname' => 2973783,
     ],
     1272 => [
-        'name' => "Altai",
+        'name' => 'Altayskiy Kray',
         'lat' => 52.5,
         'lon' => 83,
         'capital' => false,
@@ -1067,7 +1067,7 @@ return [
         'geoname' => 1511732,
     ],
     1280 => [
-        'name' => "Dolomiidid",
+        'name' => 'Dolomiidid',
         'lat' => 46.38333,
         'lon' => 11.85,
         'capital' => false,
@@ -1075,7 +1075,7 @@ return [
         'geoname' => 3177545,
     ],
     1288 => [
-        'name' => "Salzburg",
+        'name' => 'Salzburg',
         'lat' => 47.79941,
         'lon' => 13.04399,
         'capital' => false,
@@ -1083,7 +1083,7 @@ return [
         'geoname' => 2766824,
     ],
     1300 => [
-        'name' => "Baierimaa",
+        'name' => 'Bavaria',
         'lat' => 49,
         'lon' => 11.5,
         'capital' => false,
@@ -1091,7 +1091,7 @@ return [
         'geoname' => 2951839,
     ],
     1307 => [
-        'name' => "Manchester",
+        'name' => 'Suur-Manchester',
         'lat' => 53.45,
         'lon' => -2.23333,
         'capital' => false,
@@ -1099,7 +1099,7 @@ return [
         'geoname' => 2648108,
     ],
     1310 => [
-        'name' => "Melbourne",
+        'name' => 'Melbourne',
         'lat' => -37.814,
         'lon' => 144.96332,
         'capital' => false,
@@ -1107,7 +1107,7 @@ return [
         'geoname' => 2158177,
     ],
     1332 => [
-        'name' => "Lima",
+        'name' => 'Lima',
         'lat' => -12.04318,
         'lon' => -77.02824,
         'capital' => true,
@@ -1115,7 +1115,7 @@ return [
         'geoname' => 3936456,
     ],
     1335 => [
-        'name' => "Nazca",
+        'name' => 'Nazca',
         'lat' => -14.83098,
         'lon' => -74.93895,
         'capital' => false,
@@ -1123,7 +1123,7 @@ return [
         'geoname' => 3934356,
     ],
     1343 => [
-        'name' => "Nuweiba",
+        'name' => 'Nuwaybi‘a',
         'lat' => 29.04681,
         'lon' => 34.6634,
         'capital' => false,
@@ -1131,7 +1131,7 @@ return [
         'geoname' => 350893,
     ],
     1352 => [
-        'name' => "Jurmala",
+        'name' => 'Jūrmala',
         'lat' => 56.968,
         'lon' => 23.77038,
         'capital' => false,
@@ -1139,7 +1139,7 @@ return [
         'geoname' => 459201,
     ],
     1363 => [
-        'name' => "Toskaana",
+        'name' => 'Florence',
         'lat' => 43.77925,
         'lon' => 11.24626,
         'capital' => false,
@@ -1147,7 +1147,7 @@ return [
         'geoname' => 3176959,
     ],
     1405 => [
-        'name' => "Genf",
+        'name' => 'Genf',
         'lat' => 46.20222,
         'lon' => 6.14569,
         'capital' => false,
@@ -1155,7 +1155,7 @@ return [
         'geoname' => 2660646,
     ],
     1412 => [
-        'name' => "Are",
+        'name' => 'Åre kommun',
         'lat' => 63.38305,
         'lon' => 13.12616,
         'capital' => false,
@@ -1163,7 +1163,7 @@ return [
         'geoname' => 2725422,
     ],
     1435 => [
-        'name' => "Shanghai",
+        'name' => 'Shanghai',
         'lat' => 31.22222,
         'lon' => 121.45806,
         'capital' => false,
@@ -1171,7 +1171,7 @@ return [
         'geoname' => 1796236,
     ],
     1497 => [
-        'name' => "Rimini",
+        'name' => 'Rimini',
         'lat' => 44.05755,
         'lon' => 12.56528,
         'capital' => false,
@@ -1179,7 +1179,7 @@ return [
         'geoname' => 3169361,
     ],
     1511 => [
-        'name' => "Karjala",
+        'name' => 'Etelä-Karjala',
         'lat' => 60.96667,
         'lon' => 28.16667,
         'capital' => false,
@@ -1187,7 +1187,7 @@ return [
         'geoname' => 830699,
     ],
     1522 => [
-        'name' => "Santiago de Compostela",
+        'name' => 'Santiago de Compostela',
         'lat' => 42.88052,
         'lon' => -8.54569,
         'capital' => false,
@@ -1195,7 +1195,7 @@ return [
         'geoname' => 3109642,
     ],
     1547 => [
-        'name' => "Oslo",
+        'name' => 'Oslo',
         'lat' => 59.91273,
         'lon' => 10.74609,
         'capital' => true,
@@ -1203,7 +1203,7 @@ return [
         'geoname' => 3143244,
     ],
     1554 => [
-        'name' => "Köln",
+        'name' => 'Cologne',
         'lat' => 50.93835,
         'lon' => 6.95427,
         'capital' => false,
@@ -1211,7 +1211,7 @@ return [
         'geoname' => 6553049,
     ],
     1585 => [
-        'name' => "Brighton",
+        'name' => 'Brighton',
         'lat' => 50.82838,
         'lon' => -0.13947,
         'capital' => false,
@@ -1219,7 +1219,7 @@ return [
         'geoname' => 2654710,
     ],
     1586 => [
-        'name' => "Bremen",
+        'name' => 'Bremen',
         'lat' => 53.07516,
         'lon' => 8.80777,
         'capital' => false,
@@ -1227,7 +1227,7 @@ return [
         'geoname' => 2944388,
     ],
     1607 => [
-        'name' => "Bergen",
+        'name' => 'Bergen',
         'lat' => 60.39299,
         'lon' => 5.32415,
         'capital' => false,
@@ -1235,7 +1235,7 @@ return [
         'geoname' => 3161732,
     ],
     1609 => [
-        'name' => "Agra",
+        'name' => 'Agra',
         'lat' => 27.18333,
         'lon' => 78.01667,
         'capital' => false,
@@ -1243,7 +1243,7 @@ return [
         'geoname' => 1279259,
     ],
     1610 => [
-        'name' => "Mumbai",
+        'name' => 'Mumbai',
         'lat' => 19.07283,
         'lon' => 72.88261,
         'capital' => false,
@@ -1251,7 +1251,7 @@ return [
         'geoname' => 1275339,
     ],
     1625 => [
-        'name' => "Alanya",
+        'name' => 'Alanya',
         'lat' => 36.54375,
         'lon' => 31.99982,
         'capital' => false,
@@ -1259,7 +1259,7 @@ return [
         'geoname' => 324190,
     ],
     1642 => [
-        'name' => "Bora Bora",
+        'name' => 'Bora-Bora',
         'lat' => -16.49667,
         'lon' => -151.74067,
         'capital' => false,
@@ -1267,7 +1267,7 @@ return [
         'geoname' => 4034582,
     ],
     1678 => [
-        'name' => "Tatrad",
+        'name' => 'Tatra Mountains',
         'lat' => 49.16846,
         'lon' => 20.14275,
         'capital' => false,
@@ -1275,7 +1275,7 @@ return [
         'geoname' => 11102654,
     ],
     1715 => [
-        'name' => "Valencia",
+        'name' => 'Valencia',
         'lat' => 39.46975,
         'lon' => -0.37739,
         'capital' => false,
@@ -1283,7 +1283,7 @@ return [
         'geoname' => 2509954,
     ],
     1742 => [
-        'name' => "Andaluusia",
+        'name' => 'Sevilla',
         'lat' => 37.38283,
         'lon' => -5.97317,
         'capital' => false,
@@ -1291,7 +1291,7 @@ return [
         'geoname' => 2510911,
     ],
     1743 => [
-        'name' => "Kataloonia",
+        'name' => 'Catalonia',
         'lat' => 41.82046,
         'lon' => 1.86768,
         'capital' => false,
@@ -1299,7 +1299,7 @@ return [
         'geoname' => 3336901,
     ],
     1751 => [
-        'name' => "Birmingham",
+        'name' => 'Birmingham',
         'lat' => 52.48142,
         'lon' => -1.89983,
         'capital' => false,
@@ -1307,7 +1307,7 @@ return [
         'geoname' => 2655603,
     ],
     1769 => [
-        'name' => "Pattaya",
+        'name' => 'Pattaya',
         'lat' => 12.93333,
         'lon' => 100.88333,
         'capital' => false,
@@ -1315,7 +1315,7 @@ return [
         'geoname' => 1614295,
     ],
     1778 => [
-        'name' => "Texas",
+        'name' => 'Texas',
         'lat' => 31.25044,
         'lon' => -99.25061,
         'capital' => false,
@@ -1323,7 +1323,7 @@ return [
         'geoname' => 4736286,
     ],
     1832 => [
-        'name' => "Washington DC",
+        'name' => 'Washington, D.C.',
         'lat' => 38.89511,
         'lon' => -77.03637,
         'capital' => true,
@@ -1331,7 +1331,7 @@ return [
         'geoname' => 4140963,
     ],
     1833 => [
-        'name' => "Kuala Lumpur",
+        'name' => 'Kuala Lumpur',
         'lat' => 3.1412,
         'lon' => 101.68653,
         'capital' => true,
@@ -1339,7 +1339,7 @@ return [
         'geoname' => 1735161,
     ],
     1841 => [
-        'name' => "Baikal",
+        'name' => 'Lake Baikal',
         'lat' => 54,
         'lon' => 109,
         'capital' => false,
@@ -1347,7 +1347,7 @@ return [
         'geoname' => 2026982,
     ],
     1992 => [
-        'name' => "Ayers Rock",
+        'name' => 'Ayers Rock Airport',
         'lat' => -25.1891,
         'lon' => 130.97754,
         'capital' => false,
@@ -1355,7 +1355,7 @@ return [
         'geoname' => 6301288,
     ],
     1999 => [
-        'name' => "Kaunas",
+        'name' => 'Kaunas',
         'lat' => 54.90272,
         'lon' => 23.90961,
         'capital' => false,
@@ -1363,7 +1363,7 @@ return [
         'geoname' => 598316,
     ],
     2033 => [
-        'name' => "Rovaniemi",
+        'name' => 'Rovaniemi linn',
         'lat' => 66.5,
         'lon' => 25.71667,
         'capital' => false,
@@ -1371,7 +1371,7 @@ return [
         'geoname' => 638936,
     ],
     2059 => [
-        'name' => "Rostock",
+        'name' => 'Rostock',
         'lat' => 54.0887,
         'lon' => 12.14049,
         'capital' => false,
@@ -1379,7 +1379,7 @@ return [
         'geoname' => 2844588,
     ],
     2089 => [
-        'name' => "Kiiev",
+        'name' => 'Kiiev',
         'lat' => 50.45466,
         'lon' => 30.5238,
         'capital' => true,
@@ -1387,7 +1387,7 @@ return [
         'geoname' => 703448,
     ],
     2095 => [
-        'name' => "Düsseldorf",
+        'name' => 'Düsseldorf',
         'lat' => 51.22492,
         'lon' => 6.77425,
         'capital' => false,
@@ -1395,7 +1395,7 @@ return [
         'geoname' => 6553022,
     ],
     2101 => [
-        'name' => "Koh Samui",
+        'name' => 'Samui',
         'lat' => 9.50376,
         'lon' => 99.99357,
         'capital' => false,
@@ -1403,7 +1403,7 @@ return [
         'geoname' => 1606595,
     ],
     2107 => [
-        'name' => "Kairo",
+        'name' => 'Kairo',
         'lat' => 30.06263,
         'lon' => 31.24967,
         'capital' => true,
@@ -1411,7 +1411,7 @@ return [
         'geoname' => 360630,
     ],
     2160 => [
-        'name' => "Antalya",
+        'name' => 'Antalya',
         'lat' => 36.90812,
         'lon' => 30.69556,
         'capital' => false,
@@ -1419,7 +1419,7 @@ return [
         'geoname' => 323777,
     ],
     2240 => [
-        'name' => "Sousse",
+        'name' => 'Sousse',
         'lat' => 35.82539,
         'lon' => 10.63699,
         'capital' => false,
@@ -1427,7 +1427,7 @@ return [
         'geoname' => 2464915,
     ],
     2242 => [
-        'name' => "Taba",
+        'name' => 'Taba',
         'lat' => 29.49199,
         'lon' => 34.89572,
         'capital' => false,
@@ -1435,7 +1435,7 @@ return [
         'geoname' => 347702,
     ],
     2249 => [
-        'name' => "Glasgow",
+        'name' => 'Glasgow',
         'lat' => 55.86515,
         'lon' => -4.25763,
         'capital' => false,
@@ -1443,7 +1443,7 @@ return [
         'geoname' => 2648579,
     ],
     2350 => [
-        'name' => "Innsbruck",
+        'name' => 'Innsbruck',
         'lat' => 47.26266,
         'lon' => 11.39454,
         'capital' => false,
@@ -1451,7 +1451,7 @@ return [
         'geoname' => 2775220,
     ],
     2356 => [
-        'name' => "Palanga",
+        'name' => 'Palanga',
         'lat' => 55.91667,
         'lon' => 21.05,
         'capital' => false,
@@ -1459,7 +1459,7 @@ return [
         'geoname' => 596240,
     ],
     2482 => [
-        'name' => "Calgary",
+        'name' => 'Calgary',
         'lat' => 51.05011,
         'lon' => -114.08529,
         'capital' => false,
@@ -1467,7 +1467,7 @@ return [
         'geoname' => 5913490,
     ],
     2489 => [
-        'name' => "Acapulco",
+        'name' => 'Acapulco',
         'lat' => 16.84942,
         'lon' => -99.90891,
         'capital' => false,
@@ -1475,7 +1475,7 @@ return [
         'geoname' => 3533462,
     ],
     2511 => [
-        'name' => "Kilimandžaaro",
+        'name' => 'Mount Kilimanjaro',
         'lat' => -3.07583,
         'lon' => 37.35333,
         'capital' => false,
@@ -1483,7 +1483,7 @@ return [
         'geoname' => 157452,
     ],
     2594 => [
-        'name' => "Normandia",
+        'name' => 'Normandie',
         'lat' => 49.19906,
         'lon' => 0.49988,
         'capital' => false,
@@ -1491,7 +1491,7 @@ return [
         'geoname' => 11071621,
     ],
     2595 => [
-        'name' => "Cote d'Azur",
+        'name' => 'Nice',
         'lat' => 43.70313,
         'lon' => 7.26608,
         'capital' => false,
@@ -1499,7 +1499,7 @@ return [
         'geoname' => 2990440,
     ],
     2625 => [
-        'name' => "Liguuria",
+        'name' => 'Genova',
         'lat' => 44.40478,
         'lon' => 8.94439,
         'capital' => false,
@@ -1507,7 +1507,7 @@ return [
         'geoname' => 3176219,
     ],
     2635 => [
-        'name' => "Jakarta",
+        'name' => 'Jakarta',
         'lat' => -6.21462,
         'lon' => 106.84513,
         'capital' => true,
@@ -1515,7 +1515,7 @@ return [
         'geoname' => 1642911,
     ],
     2718 => [
-        'name' => "Algarve",
+        'name' => 'Costa del Algarve',
         'lat' => 37.08367,
         'lon' => -8.24902,
         'capital' => false,
@@ -1523,7 +1523,7 @@ return [
         'geoname' => 10227214,
     ],
     2775 => [
-        'name' => "Quebec",
+        'name' => 'Québec',
         'lat' => 46.81228,
         'lon' => -71.21454,
         'capital' => false,
@@ -1531,7 +1531,7 @@ return [
         'geoname' => 6325494,
     ],
     2800 => [
-        'name' => "Stonehenge",
+        'name' => 'Stonehenge',
         'lat' => 51.17889,
         'lon' => -1.82622,
         'capital' => false,
@@ -1539,7 +1539,7 @@ return [
         'geoname' => 2636812,
     ],
     2834 => [
-        'name' => "Karpaadid",
+        'name' => 'Karpaadid',
         'lat' => 47,
         'lon' => 25.5,
         'capital' => false,
@@ -1547,7 +1547,7 @@ return [
         'geoname' => 682674,
     ],
     2899 => [
-        'name' => "Marrakech",
+        'name' => 'Marrakesh',
         'lat' => 31.63416,
         'lon' => -7.99994,
         'capital' => false,
@@ -1555,7 +1555,7 @@ return [
         'geoname' => 2542997,
     ],
     2908 => [
-        'name' => "Oxford",
+        'name' => 'Oxford',
         'lat' => 51.75222,
         'lon' => -1.25596,
         'capital' => false,
@@ -1563,7 +1563,7 @@ return [
         'geoname' => 2640729,
     ],
     2910 => [
-        'name' => "Moorea",
+        'name' => 'Moorea',
         'lat' => -17.53333,
         'lon' => -149.83333,
         'capital' => false,
@@ -1571,7 +1571,7 @@ return [
         'geoname' => 4034185,
     ],
     2916 => [
-        'name' => "Agadir",
+        'name' => 'Agadir',
         'lat' => 30.42018,
         'lon' => -9.59815,
         'capital' => false,
@@ -1579,7 +1579,7 @@ return [
         'geoname' => 2561668,
     ],
     2952 => [
-        'name' => "El Gouna",
+        'name' => 'El Gouna',
         'lat' => 27.39417,
         'lon' => 33.67825,
         'capital' => false,
@@ -1587,7 +1587,7 @@ return [
         'geoname' => 6692512,
     ],
     3024 => [
-        'name' => "Nordkap",
+        'name' => 'Nordkapi vald',
         'lat' => 70.97808,
         'lon' => 25.97473,
         'capital' => false,
@@ -1595,7 +1595,7 @@ return [
         'geoname' => 778459,
     ],
     3066 => [
-        'name' => "Kerala",
+        'name' => 'State of Kerala',
         'lat' => 10.41667,
         'lon' => 76.5,
         'capital' => false,
@@ -1603,7 +1603,7 @@ return [
         'geoname' => 1267254,
     ],
     3072 => [
-        'name' => "Margarita",
+        'name' => 'Isla de Margarita',
         'lat' => 10.98705,
         'lon' => -63.93568,
         'capital' => false,
@@ -1611,7 +1611,7 @@ return [
         'geoname' => 3632949,
     ],
     3096 => [
-        'name' => "Fortaleza",
+        'name' => 'Fortaleza',
         'lat' => -3.71722,
         'lon' => -38.54306,
         'capital' => false,
@@ -1619,7 +1619,7 @@ return [
         'geoname' => 3399415,
     ],
     3130 => [
-        'name' => "Kuldsed liivad",
+        'name' => 'Golden Sands',
         'lat' => 43.285,
         'lon' => 28.0418,
         'capital' => false,
@@ -1627,7 +1627,7 @@ return [
         'geoname' => 6355004,
     ],
     3222 => [
-        'name' => "Playa del Carmen",
+        'name' => 'Playa del Carmen',
         'lat' => 20.6274,
         'lon' => -87.07987,
         'capital' => false,
@@ -1635,7 +1635,7 @@ return [
         'geoname' => 3521342,
     ],
     3346 => [
-        'name' => "Guangzhou",
+        'name' => 'Guangzhou',
         'lat' => 23.11667,
         'lon' => 113.25,
         'capital' => false,
@@ -1643,7 +1643,7 @@ return [
         'geoname' => 1809858,
     ],
     3366 => [
-        'name' => "Toronto",
+        'name' => 'Toronto',
         'lat' => 43.70011,
         'lon' => -79.4163,
         'capital' => false,
@@ -1651,7 +1651,7 @@ return [
         'geoname' => 6167865,
     ],
     3370 => [
-        'name' => "Montreal",
+        'name' => 'Montréal',
         'lat' => 45.50884,
         'lon' => -73.58781,
         'capital' => false,
@@ -1659,7 +1659,7 @@ return [
         'geoname' => 6077243,
     ],
     3430 => [
-        'name' => "Turku",
+        'name' => 'Turu',
         'lat' => 60.45148,
         'lon' => 22.26869,
         'capital' => false,
@@ -1667,7 +1667,7 @@ return [
         'geoname' => 633679,
     ],
     3448 => [
-        'name' => "Stavanger",
+        'name' => 'Stavanger',
         'lat' => 58.97005,
         'lon' => 5.73332,
         'capital' => false,
@@ -1675,7 +1675,7 @@ return [
         'geoname' => 3137115,
     ],
     3513 => [
-        'name' => "Porto",
+        'name' => 'Porto',
         'lat' => 41.14961,
         'lon' => -8.61099,
         'capital' => false,
@@ -1683,7 +1683,7 @@ return [
         'geoname' => 2735943,
     ],
     3594 => [
-        'name' => "Mexico City",
+        'name' => 'México',
         'lat' => 19.42847,
         'lon' => -99.12766,
         'capital' => true,
@@ -1691,7 +1691,7 @@ return [
         'geoname' => 3530597,
     ],
     3729 => [
-        'name' => "Patagoonia",
+        'name' => 'Patagonia',
         'lat' => -44,
         'lon' => -68,
         'capital' => false,
@@ -1699,7 +1699,7 @@ return [
         'geoname' => 3841798,
     ],
     3754 => [
-        'name' => "Bordeaux",
+        'name' => 'Bordeaux',
         'lat' => 44.84044,
         'lon' => -0.5805,
         'capital' => false,
@@ -1707,7 +1707,7 @@ return [
         'geoname' => 3031582,
     ],
     3755 => [
-        'name' => "Stuttgart",
+        'name' => 'Stuttgart',
         'lat' => 48.78232,
         'lon' => 9.17702,
         'capital' => false,
@@ -1715,7 +1715,7 @@ return [
         'geoname' => 2825297,
     ],
     3766 => [
-        'name' => "Buenos Aires",
+        'name' => 'Buenos Aires',
         'lat' => -34.61315,
         'lon' => -58.37723,
         'capital' => true,
@@ -1723,7 +1723,7 @@ return [
         'geoname' => 3435910,
     ],
     3964 => [
-        'name' => "Tampere",
+        'name' => 'Tampere',
         'lat' => 61.49911,
         'lon' => 23.78712,
         'capital' => false,
@@ -1731,7 +1731,7 @@ return [
         'geoname' => 634963,
     ],
     3988 => [
-        'name' => "Langkawi",
+        'name' => 'Langkawi International Airport',
         'lat' => 6.32973,
         'lon' => 99.72867,
         'capital' => false,
@@ -1739,7 +1739,7 @@ return [
         'geoname' => 6301256,
     ],
     3989 => [
-        'name' => "Penang",
+        'name' => 'Penang International Airport',
         'lat' => 5.29714,
         'lon' => 100.27686,
         'capital' => false,
@@ -1747,7 +1747,7 @@ return [
         'geoname' => 6301257,
     ],
     4031 => [
-        'name' => "Izmir",
+        'name' => 'İzmir',
         'lat' => 38.41273,
         'lon' => 27.13838,
         'capital' => false,
@@ -1755,7 +1755,7 @@ return [
         'geoname' => 311046,
     ],
     4036 => [
-        'name' => "Cancun",
+        'name' => 'Cancún',
         'lat' => 21.17429,
         'lon' => -86.84656,
         'capital' => false,
@@ -1763,7 +1763,7 @@ return [
         'geoname' => 3531673,
     ],
     4044 => [
-        'name' => "Peking",
+        'name' => 'Peking',
         'lat' => 39.9075,
         'lon' => 116.39723,
         'capital' => true,
@@ -1771,7 +1771,7 @@ return [
         'geoname' => 1816670,
     ],
     4098 => [
-        'name' => "Amazonas",
+        'name' => 'Amazonas',
         'lat' => -1.16667,
         'lon' => -71.5,
         'capital' => false,
@@ -1779,7 +1779,7 @@ return [
         'geoname' => 3689982,
     ],
     4296 => [
-        'name' => "Assoorid",
+        'name' => 'Assoorid',
         'lat' => 37.74058,
         'lon' => -25.67282,
         'capital' => false,
@@ -1787,7 +1787,7 @@ return [
         'geoname' => 3373385,
     ],
     4337 => [
-        'name' => "Kolkata",
+        'name' => 'Kolkata',
         'lat' => 22.56263,
         'lon' => 88.36304,
         'capital' => false,
@@ -1795,7 +1795,7 @@ return [
         'geoname' => 1275004,
     ],
     4338 => [
-        'name' => "Sabah",
+        'name' => 'Şabāḩ as Sālim',
         'lat' => 29.25722,
         'lon' => 48.05722,
         'capital' => false,
@@ -1803,7 +1803,7 @@ return [
         'geoname' => 412800,
     ],
     4339 => [
-        'name' => "Sarawak",
+        'name' => 'Sarawak',
         'lat' => 2.5,
         'lon' => 113.5,
         'capital' => false,
@@ -1811,7 +1811,7 @@ return [
         'geoname' => 1733038,
     ],
     4340 => [
-        'name' => "Cuzco",
+        'name' => 'Cusco',
         'lat' => -13.52264,
         'lon' => -71.96734,
         'capital' => false,
@@ -1819,7 +1819,7 @@ return [
         'geoname' => 3941584,
     ],
     4341 => [
-        'name' => "Alicante",
+        'name' => 'Alicante',
         'lat' => 38.34517,
         'lon' => -0.48149,
         'capital' => false,
@@ -1827,7 +1827,7 @@ return [
         'geoname' => 2521978,
     ],
     4342 => [
-        'name' => "Provence",
+        'name' => 'Aix-en-Provence',
         'lat' => 43.5283,
         'lon' => 5.44973,
         'capital' => false,
@@ -1835,7 +1835,7 @@ return [
         'geoname' => 3038354,
     ],
     4344 => [
-        'name' => "Päikeserannik",
+        'name' => 'Costa del Sol',
         'lat' => 36.67613,
         'lon' => -4.42474,
         'capital' => false,
@@ -1843,7 +1843,7 @@ return [
         'geoname' => 2510850,
     ],
     4345 => [
-        'name' => "Krk",
+        'name' => 'Krki saar',
         'lat' => 45.07528,
         'lon' => 14.61694,
         'capital' => false,
@@ -1851,7 +1851,7 @@ return [
         'geoname' => 3197206,
     ],
     4346 => [
-        'name' => "Leeds",
+        'name' => 'Leeds',
         'lat' => 53.79648,
         'lon' => -1.54785,
         'capital' => false,
@@ -1859,7 +1859,7 @@ return [
         'geoname' => 2644688,
     ],
     4347 => [
-        'name' => "Newcastle",
+        'name' => 'Newcastle',
         'lat' => -32.92953,
         'lon' => 151.7801,
         'capital' => false,
@@ -1867,7 +1867,7 @@ return [
         'geoname' => 2155472,
     ],
     4348 => [
-        'name' => "Zürich",
+        'name' => 'Zurich',
         'lat' => 47.41667,
         'lon' => 8.66667,
         'capital' => false,
@@ -1875,7 +1875,7 @@ return [
         'geoname' => 2657895,
     ],
     4349 => [
-        'name' => "Markiisisaared",
+        'name' => 'Marquesas Islands',
         'lat' => -9.31899,
         'lon' => -139.61426,
         'capital' => false,
@@ -1883,7 +1883,7 @@ return [
         'geoname' => 4019977,
     ],
     4350 => [
-        'name' => "Tuamotu",
+        'name' => 'Mont Duff',
         'lat' => -23.12889,
         'lon' => -134.97391,
         'capital' => false,
@@ -1891,7 +1891,7 @@ return [
         'geoname' => 4030664,
     ],
     4352 => [
-        'name' => "Sumatra",
+        'name' => 'Medan',
         'lat' => 3.58333,
         'lon' => 98.66667,
         'capital' => false,
@@ -1899,7 +1899,7 @@ return [
         'geoname' => 1214520,
     ],
     4353 => [
-        'name' => "Java",
+        'name' => 'Java',
         'lat' => -7.49167,
         'lon' => 110.00444,
         'capital' => false,
@@ -1907,7 +1907,7 @@ return [
         'geoname' => 1642673,
     ],
     4354 => [
-        'name' => "Kapadookia",
+        'name' => 'Cappadocia (Roman province)',
         'lat' => 38.73199,
         'lon' => 35.47863,
         'capital' => false,
@@ -1915,7 +1915,7 @@ return [
         'geoname' => 8378488,
     ],
     4355 => [
-        'name' => "Mombasa",
+        'name' => 'Mombasa',
         'lat' => -4.05466,
         'lon' => 39.66359,
         'capital' => false,
@@ -1923,7 +1923,7 @@ return [
         'geoname' => 186301,
     ],
     4356 => [
-        'name' => "Nairobi",
+        'name' => 'Nairobi',
         'lat' => -1.28333,
         'lon' => 36.81667,
         'capital' => true,
@@ -1931,7 +1931,7 @@ return [
         'geoname' => 184745,
     ],
     4357 => [
-        'name' => "Masai Mara",
+        'name' => 'Maasai Mara Game Reserve',
         'lat' => -1.41667,
         'lon' => 34.91667,
         'capital' => false,
@@ -1939,7 +1939,7 @@ return [
         'geoname' => 187536,
     ],
     4358 => [
-        'name' => "Tangier",
+        'name' => 'Tangier',
         'lat' => 35.76727,
         'lon' => -5.79975,
         'capital' => false,
@@ -1947,7 +1947,7 @@ return [
         'geoname' => 2530335,
     ],
     4359 => [
-        'name' => "Casablanca",
+        'name' => 'Casablanca',
         'lat' => 33.58831,
         'lon' => -7.61138,
         'capital' => false,
@@ -1955,7 +1955,7 @@ return [
         'geoname' => 2553604,
     ],
     4360 => [
-        'name' => "Chichen-Itza",
+        'name' => 'Chichén-Itzá',
         'lat' => 20.68346,
         'lon' => -88.56912,
         'capital' => false,
@@ -1963,7 +1963,7 @@ return [
         'geoname' => 3530977,
     ],
     4361 => [
-        'name' => "Puerto Vallarta",
+        'name' => 'Puerto Vallarta',
         'lat' => 20.617,
         'lon' => -105.23018,
         'capital' => false,
@@ -1971,7 +1971,7 @@ return [
         'geoname' => 3991328,
     ],
     4362 => [
-        'name' => "Varadero",
+        'name' => 'Varadero',
         'lat' => 23.15678,
         'lon' => -81.24441,
         'capital' => false,
@@ -1979,7 +1979,7 @@ return [
         'geoname' => 3534632,
     ],
     4363 => [
-        'name' => "Havanna",
+        'name' => 'Havanna',
         'lat' => 23.13302,
         'lon' => -82.38304,
         'capital' => true,
@@ -1987,7 +1987,7 @@ return [
         'geoname' => 3553478,
     ],
     4364 => [
-        'name' => "Aconcagua",
+        'name' => 'Aconcagua',
         'lat' => -32.65383,
         'lon' => -70.01141,
         'capital' => false,
@@ -1995,7 +1995,7 @@ return [
         'geoname' => 3866949,
     ],
     4365 => [
-        'name' => "Angeli juga",
+        'name' => 'Angel Falls',
         'lat' => 5.96754,
         'lon' => -62.53554,
         'capital' => false,
@@ -2003,7 +2003,7 @@ return [
         'geoname' => 9957305,
     ],
     4366 => [
-        'name' => "Wellington",
+        'name' => 'Wellington',
         'lat' => -41.28664,
         'lon' => 174.77557,
         'capital' => true,
@@ -2011,7 +2011,7 @@ return [
         'geoname' => 2179537,
     ],
     4601 => [
-        'name' => "Tirana",
+        'name' => 'Tirana',
         'lat' => 41.3275,
         'lon' => 19.81889,
         'capital' => true,
@@ -2019,7 +2019,7 @@ return [
         'geoname' => 3183875,
     ],
     4602 => [
-        'name' => "Jerevan",
+        'name' => 'Jerevan',
         'lat' => 40.18111,
         'lon' => 44.51361,
         'capital' => true,
@@ -2027,7 +2027,7 @@ return [
         'geoname' => 616052,
     ],
     4603 => [
-        'name' => "Bakuu",
+        'name' => 'Bakuu',
         'lat' => 40.37767,
         'lon' => 49.89201,
         'capital' => true,
@@ -2035,7 +2035,7 @@ return [
         'geoname' => 587084,
     ],
     4604 => [
-        'name' => "Sarajevo",
+        'name' => 'Sarajevo',
         'lat' => 43.84864,
         'lon' => 18.35644,
         'capital' => true,
@@ -2043,7 +2043,7 @@ return [
         'geoname' => 3191281,
     ],
     4605 => [
-        'name' => "Tbilisi",
+        'name' => 'Thbilisi',
         'lat' => 41.69411,
         'lon' => 44.83368,
         'capital' => true,
@@ -2051,7 +2051,7 @@ return [
         'geoname' => 611717,
     ],
     4606 => [
-        'name' => "Batumi",
+        'name' => 'Bathumi',
         'lat' => 41.64228,
         'lon' => 41.63392,
         'capital' => false,
@@ -2059,7 +2059,7 @@ return [
         'geoname' => 615532,
     ],
     4607 => [
-        'name' => "Kutaisi",
+        'name' => 'Khuthaisi',
         'lat' => 42.26791,
         'lon' => 42.69459,
         'capital' => false,
@@ -2067,7 +2067,7 @@ return [
         'geoname' => 613607,
     ],
     4608 => [
-        'name' => "Rijeka",
+        'name' => 'Rijeka',
         'lat' => 45.32673,
         'lon' => 14.44241,
         'capital' => false,
@@ -2075,7 +2075,7 @@ return [
         'geoname' => 3191648,
     ],
     4609 => [
-        'name' => "Split",
+        'name' => 'Split',
         'lat' => 43.50891,
         'lon' => 16.43915,
         'capital' => false,
@@ -2083,7 +2083,7 @@ return [
         'geoname' => 3190261,
     ],
     4610 => [
-        'name' => "Reykjavik",
+        'name' => 'Reykjavík',
         'lat' => 64.13548,
         'lon' => -21.89541,
         'capital' => true,
@@ -2091,7 +2091,7 @@ return [
         'geoname' => 3413829,
     ],
     4611 => [
-        'name' => "Napoli",
+        'name' => 'Napoli',
         'lat' => 40.85216,
         'lon' => 14.26811,
         'capital' => false,
@@ -2099,7 +2099,7 @@ return [
         'geoname' => 3172394,
     ],
     4612 => [
-        'name' => "Thessaloniki",
+        'name' => 'Thessaloníki',
         'lat' => 40.64361,
         'lon' => 22.93086,
         'capital' => false,
@@ -2107,7 +2107,7 @@ return [
         'geoname' => 734077,
     ],
     4613 => [
-        'name' => "Kos",
+        'name' => 'Kos',
         'lat' => 36.84452,
         'lon' => 27.14665,
         'capital' => false,
@@ -2115,7 +2115,7 @@ return [
         'geoname' => 259244,
     ],
     4614 => [
-        'name' => "Skopje",
+        'name' => 'Skopje',
         'lat' => 41.99646,
         'lon' => 21.43141,
         'capital' => true,
@@ -2123,7 +2123,7 @@ return [
         'geoname' => 785842,
     ],
     4615 => [
-        'name' => "Valletta",
+        'name' => 'Valletta',
         'lat' => 35.89972,
         'lon' => 14.51472,
         'capital' => true,
@@ -2131,7 +2131,7 @@ return [
         'geoname' => 2562305,
     ],
     4616 => [
-        'name' => "Chisinau",
+        'name' => 'Chişinău',
         'lat' => 47.00556,
         'lon' => 28.8575,
         'capital' => true,
@@ -2139,7 +2139,7 @@ return [
         'geoname' => 618426,
     ],
     4617 => [
-        'name' => "Podgorica",
+        'name' => 'Podgorica',
         'lat' => 42.44111,
         'lon' => 19.26361,
         'capital' => true,
@@ -2147,7 +2147,7 @@ return [
         'geoname' => 3193044,
     ],
     4618 => [
-        'name' => "Varssavi",
+        'name' => 'Varssavi',
         'lat' => 52.22977,
         'lon' => 21.01178,
         'capital' => true,
@@ -2155,7 +2155,7 @@ return [
         'geoname' => 756135,
     ],
     4619 => [
-        'name' => "Krakow",
+        'name' => 'Kraków',
         'lat' => 50.06143,
         'lon' => 19.93658,
         'capital' => false,
@@ -2163,7 +2163,7 @@ return [
         'geoname' => 3094802,
     ],
     4621 => [
-        'name' => "Göteborg",
+        'name' => 'Gothenburg',
         'lat' => 57.70716,
         'lon' => 11.96679,
         'capital' => false,
@@ -2171,7 +2171,7 @@ return [
         'geoname' => 2711537,
     ],
     4622 => [
-        'name' => "Belgrad",
+        'name' => 'Belgrad',
         'lat' => 44.80401,
         'lon' => 20.46513,
         'capital' => true,
@@ -2179,7 +2179,7 @@ return [
         'geoname' => 792680,
     ],
     4623 => [
-        'name' => "Bratislava",
+        'name' => 'Bratislava',
         'lat' => 48.14816,
         'lon' => 17.10674,
         'capital' => true,
@@ -2187,7 +2187,7 @@ return [
         'geoname' => 3060972,
     ],
     4624 => [
-        'name' => "Ljubljana",
+        'name' => 'Ljubljana',
         'lat' => 46.05108,
         'lon' => 14.50513,
         'capital' => true,
@@ -2195,7 +2195,7 @@ return [
         'geoname' => 3196359,
     ],
     4625 => [
-        'name' => "Odessa",
+        'name' => 'Odessa',
         'lat' => 46.47747,
         'lon' => 30.73262,
         'capital' => false,
@@ -2203,7 +2203,7 @@ return [
         'geoname' => 698740,
     ],
     4626 => [
-        'name' => "Minsk",
+        'name' => 'Minsk',
         'lat' => 53.9,
         'lon' => 27.56667,
         'capital' => true,
@@ -2211,7 +2211,7 @@ return [
         'geoname' => 625144,
     ],
     4627 => [
-        'name' => "Vladivostok",
+        'name' => 'Vladivostok',
         'lat' => 43.10562,
         'lon' => 131.87353,
         'capital' => false,
@@ -2219,7 +2219,7 @@ return [
         'geoname' => 2013348,
     ],
     4628 => [
-        'name' => "Kabul",
+        'name' => 'Kabul',
         'lat' => 34.52813,
         'lon' => 69.17233,
         'capital' => true,
@@ -2227,7 +2227,7 @@ return [
         'geoname' => 1138958,
     ],
     4629 => [
-        'name' => "Dhaka",
+        'name' => 'Dhaka',
         'lat' => 23.7104,
         'lon' => 90.40744,
         'capital' => true,
@@ -2235,7 +2235,7 @@ return [
         'geoname' => 1185241,
     ],
     4630 => [
-        'name' => "Thimphu",
+        'name' => 'Thimphu',
         'lat' => 27.46609,
         'lon' => 89.64191,
         'capital' => true,
@@ -2243,7 +2243,7 @@ return [
         'geoname' => 1252416,
     ],
     4631 => [
-        'name' => "Manila",
+        'name' => 'Manila',
         'lat' => 14.6042,
         'lon' => 120.9822,
         'capital' => true,
@@ -2251,7 +2251,7 @@ return [
         'geoname' => 1701668,
     ],
     4632 => [
-        'name' => "Boracay",
+        'name' => 'Boracay Island',
         'lat' => 11.98013,
         'lon' => 121.91932,
         'capital' => false,
@@ -2259,7 +2259,7 @@ return [
         'geoname' => 7302402,
     ],
     4633 => [
-        'name' => "Cebu",
+        'name' => 'Cebu City',
         'lat' => 10.31672,
         'lon' => 123.89071,
         'capital' => false,
@@ -2267,7 +2267,7 @@ return [
         'geoname' => 1717512,
     ],
     4634 => [
-        'name' => "Bohol",
+        'name' => 'Bohol',
         'lat' => 9.83333,
         'lon' => 124.16667,
         'capital' => false,
@@ -2275,7 +2275,7 @@ return [
         'geoname' => 1724399,
     ],
     4635 => [
-        'name' => "Palawan",
+        'name' => 'Province of Palawan',
         'lat' => 10,
         'lon' => 118.75,
         'capital' => false,
@@ -2283,7 +2283,7 @@ return [
         'geoname' => 1696177,
     ],
     4636 => [
-        'name' => "Andamani saared",
+        'name' => 'Andamani saared',
         'lat' => 12.50029,
         'lon' => 92.75004,
         'capital' => false,
@@ -2291,7 +2291,7 @@ return [
         'geoname' => 1278646,
     ],
     4637 => [
-        'name' => "Madurai",
+        'name' => 'Madurai',
         'lat' => 9.919,
         'lon' => 78.11953,
         'capital' => false,
@@ -2299,7 +2299,7 @@ return [
         'geoname' => 1264521,
     ],
     4639 => [
-        'name' => "Lombok",
+        'name' => 'Lombok Island',
         'lat' => -8.67697,
         'lon' => 116.33286,
         'capital' => false,
@@ -2307,7 +2307,7 @@ return [
         'geoname' => 7869837,
     ],
     4640 => [
-        'name' => "Gili saared",
+        'name' => 'Gili Larot',
         'lat' => -8.89868,
         'lon' => 116.56083,
         'capital' => false,
@@ -2315,7 +2315,7 @@ return [
         'geoname' => 1631161,
     ],
     4641 => [
-        'name' => "Okinawa",
+        'name' => 'Okinawa prefektuur',
         'lat' => 26.5,
         'lon' => 127.93333,
         'capital' => false,
@@ -2323,7 +2323,7 @@ return [
         'geoname' => 1854345,
     ],
     4642 => [
-        'name' => "Osaka",
+        'name' => 'Ōsaka',
         'lat' => 34.69374,
         'lon' => 135.50218,
         'capital' => false,
@@ -2331,7 +2331,7 @@ return [
         'geoname' => 1853909,
     ],
     4643 => [
-        'name' => "Sapporo",
+        'name' => 'Sapporo',
         'lat' => 43.06667,
         'lon' => 141.35,
         'capital' => false,
@@ -2339,7 +2339,7 @@ return [
         'geoname' => 2128295,
     ],
     4644 => [
-        'name' => "Siem Reap",
+        'name' => 'Siĕm Réab',
         'lat' => 13.36179,
         'lon' => 103.86056,
         'capital' => false,
@@ -2347,7 +2347,7 @@ return [
         'geoname' => 1822214,
     ],
     4645 => [
-        'name' => "Sihanoukville",
+        'name' => 'Sihanoukville',
         'lat' => 10.60932,
         'lon' => 103.52958,
         'capital' => false,
@@ -2355,7 +2355,7 @@ return [
         'geoname' => 1831142,
     ],
     4646 => [
-        'name' => "Astana",
+        'name' => 'Nur-Sultan',
         'lat' => 51.1801,
         'lon' => 71.44598,
         'capital' => true,
@@ -2363,7 +2363,7 @@ return [
         'geoname' => 1526273,
     ],
     4647 => [
-        'name' => "Biškek",
+        'name' => 'Gorod Bishkek',
         'lat' => 42.86667,
         'lon' => 74.6,
         'capital' => false,
@@ -2371,7 +2371,7 @@ return [
         'geoname' => 1528334,
     ],
     4648 => [
-        'name' => "Vientiane",
+        'name' => 'Viangchan',
         'lat' => 17.96667,
         'lon' => 102.6,
         'capital' => true,
@@ -2379,7 +2379,7 @@ return [
         'geoname' => 1651944,
     ],
     4649 => [
-        'name' => "Luang Prabang",
+        'name' => 'Luang Prabang',
         'lat' => 19.88601,
         'lon' => 102.13503,
         'capital' => false,
@@ -2387,7 +2387,7 @@ return [
         'geoname' => 1655559,
     ],
     4651 => [
-        'name' => "Seoul",
+        'name' => 'Sŏul',
         'lat' => 37.566,
         'lon' => 126.9784,
         'capital' => true,
@@ -2395,7 +2395,7 @@ return [
         'geoname' => 1835848,
     ],
     4652 => [
-        'name' => "Male",
+        'name' => 'Male',
         'lat' => 4.17521,
         'lon' => 73.50916,
         'capital' => true,
@@ -2403,7 +2403,7 @@ return [
         'geoname' => 1282027,
     ],
     4653 => [
-        'name' => "Ulaanbaatar",
+        'name' => 'Ulaanbaatar',
         'lat' => 47.90771,
         'lon' => 106.88324,
         'capital' => true,
@@ -2411,7 +2411,7 @@ return [
         'geoname' => 2028462,
     ],
     4654 => [
-        'name' => "Yangon",
+        'name' => 'Yangon',
         'lat' => 16.80528,
         'lon' => 96.15611,
         'capital' => false,
@@ -2419,7 +2419,7 @@ return [
         'geoname' => 1298824,
     ],
     4655 => [
-        'name' => "Mandalay",
+        'name' => 'Mandalay piirkond',
         'lat' => 21.97473,
         'lon' => 96.08359,
         'capital' => false,
@@ -2427,7 +2427,7 @@ return [
         'geoname' => 1311874,
     ],
     4656 => [
-        'name' => "Katmandu",
+        'name' => 'Katmandu',
         'lat' => 27.70169,
         'lon' => 85.3206,
         'capital' => true,
@@ -2435,7 +2435,7 @@ return [
         'geoname' => 1283240,
     ],
     4657 => [
-        'name' => "Islamabad",
+        'name' => 'Islamabad',
         'lat' => 33.72148,
         'lon' => 73.04329,
         'capital' => true,
@@ -2443,7 +2443,7 @@ return [
         'geoname' => 1176615,
     ],
     4658 => [
-        'name' => "Pyongyang",
+        'name' => 'Pyŏngyang',
         'lat' => 39.03385,
         'lon' => 125.75432,
         'capital' => true,
@@ -2451,7 +2451,7 @@ return [
         'geoname' => 1871859,
     ],
     4659 => [
-        'name' => "Colombo",
+        'name' => 'Colombo',
         'lat' => 6.93548,
         'lon' => 79.84868,
         'capital' => true,
@@ -2459,7 +2459,7 @@ return [
         'geoname' => 1248991,
     ],
     4660 => [
-        'name' => "Kandy",
+        'name' => 'Kandy',
         'lat' => 7.2906,
         'lon' => 80.6336,
         'capital' => false,
@@ -2467,7 +2467,7 @@ return [
         'geoname' => 1241622,
     ],
     4661 => [
-        'name' => "Galle",
+        'name' => 'Galle',
         'lat' => 6.0461,
         'lon' => 80.2103,
         'capital' => false,
@@ -2475,7 +2475,7 @@ return [
         'geoname' => 1246294,
     ],
     4662 => [
-        'name' => "Hikkaduwa",
+        'name' => 'Hikkaduwa',
         'lat' => 6.1407,
         'lon' => 80.1012,
         'capital' => false,
@@ -2483,7 +2483,7 @@ return [
         'geoname' => 1244178,
     ],
     4663 => [
-        'name' => "Nuwara Eliya",
+        'name' => 'Pidurutalagala',
         'lat' => 7.001,
         'lon' => 80.7715,
         'capital' => false,
@@ -2491,7 +2491,7 @@ return [
         'geoname' => 1230277,
     ],
     4664 => [
-        'name' => "Dušanbe",
+        'name' => 'Dushanbe',
         'lat' => 38.53575,
         'lon' => 68.77905,
         'capital' => true,
@@ -2499,7 +2499,7 @@ return [
         'geoname' => 1221874,
     ],
     4665 => [
-        'name' => "Chiang Mai",
+        'name' => 'Chiang Mai',
         'lat' => 18.79038,
         'lon' => 98.98468,
         'capital' => false,
@@ -2507,7 +2507,7 @@ return [
         'geoname' => 1153671,
     ],
     4666 => [
-        'name' => "Koh Phangan",
+        'name' => 'Koh Phangan',
         'lat' => 9.74512,
         'lon' => 100.02489,
         'capital' => false,
@@ -2515,7 +2515,7 @@ return [
         'geoname' => 1607830,
     ],
     4667 => [
-        'name' => "Koh Tao",
+        'name' => 'Ko Tao',
         'lat' => 10.09166,
         'lon' => 99.83774,
         'capital' => false,
@@ -2523,7 +2523,7 @@ return [
         'geoname' => 1150389,
     ],
     4668 => [
-        'name' => "Koh Lanta",
+        'name' => 'Ko Lanta',
         'lat' => 7.53362,
         'lon' => 99.08647,
         'capital' => false,
@@ -2531,7 +2531,7 @@ return [
         'geoname' => 1152670,
     ],
     4669 => [
-        'name' => "Koh Chang",
+        'name' => 'Ko Chang',
         'lat' => 12.04888,
         'lon' => 102.29947,
         'capital' => false,
@@ -2539,7 +2539,7 @@ return [
         'geoname' => 1611309,
     ],
     4670 => [
-        'name' => "Chiang Rai",
+        'name' => 'Chiang Rai',
         'lat' => 19.90858,
         'lon' => 99.8325,
         'capital' => false,
@@ -2547,7 +2547,7 @@ return [
         'geoname' => 1153669,
     ],
     4671 => [
-        'name' => "Pai",
+        'name' => 'Baicheng',
         'lat' => 45.60746,
         'lon' => 122.82076,
         'capital' => false,
@@ -2555,7 +2555,7 @@ return [
         'geoname' => 2038569,
     ],
     4672 => [
-        'name' => "Koh Phi Phi",
+        'name' => 'Ko Phi Phi Don',
         'lat' => 7.74433,
         'lon' => 98.78112,
         'capital' => false,
@@ -2563,7 +2563,7 @@ return [
         'geoname' => 1151399,
     ],
     4676 => [
-        'name' => "Taipei",
+        'name' => 'Taipei',
         'lat' => 25.04776,
         'lon' => 121.53185,
         'capital' => true,
@@ -2571,7 +2571,7 @@ return [
         'geoname' => 1668341,
     ],
     4677 => [
-        'name' => "Ashgabat",
+        'name' => 'Aşgabat',
         'lat' => 37.95,
         'lon' => 58.38333,
         'capital' => true,
@@ -2579,7 +2579,7 @@ return [
         'geoname' => 162183,
     ],
     4678 => [
-        'name' => "Tashkent",
+        'name' => 'Toshkent',
         'lat' => 41.26465,
         'lon' => 69.21627,
         'capital' => true,
@@ -2587,7 +2587,7 @@ return [
         'geoname' => 1512569,
     ],
     4679 => [
-        'name' => "Hanoi",
+        'name' => 'Hanoi',
         'lat' => 21.0245,
         'lon' => 105.84117,
         'capital' => true,
@@ -2595,7 +2595,7 @@ return [
         'geoname' => 1581130,
     ],
     4680 => [
-        'name' => "Ho Chi Minh",
+        'name' => 'Ho Chi Minh City',
         'lat' => 10.82302,
         'lon' => 106.62965,
         'capital' => false,
@@ -2603,7 +2603,7 @@ return [
         'geoname' => 1566083,
     ],
     4681 => [
-        'name' => "Hoi An",
+        'name' => 'Hội An',
         'lat' => 15.87944,
         'lon' => 108.335,
         'capital' => false,
@@ -2611,7 +2611,7 @@ return [
         'geoname' => 1580541,
     ],
     4682 => [
-        'name' => "Phu Quoc",
+        'name' => 'Phu Quoc International Airport',
         'lat' => 10.17032,
         'lon' => 103.99384,
         'capital' => false,
@@ -2619,7 +2619,7 @@ return [
         'geoname' => 11287523,
     ],
     4683 => [
-        'name' => "La PAz",
+        'name' => 'La Paz',
         'lat' => -16.5,
         'lon' => -68.15,
         'capital' => false,
@@ -2627,7 +2627,7 @@ return [
         'geoname' => 3911925,
     ],
     4684 => [
-        'name' => "Salvador",
+        'name' => 'El Salvador',
         'lat' => 13.83333,
         'lon' => -88.91667,
         'capital' => false,
@@ -2635,7 +2635,7 @@ return [
         'geoname' => 3585968,
     ],
     4685 => [
-        'name' => "Asuncion",
+        'name' => 'Asunción',
         'lat' => -25.28646,
         'lon' => -57.647,
         'capital' => true,
@@ -2643,7 +2643,7 @@ return [
         'geoname' => 3439389,
     ],
     4686 => [
-        'name' => "Santiago",
+        'name' => 'Santiago',
         'lat' => -33.45694,
         'lon' => -70.64827,
         'capital' => true,
@@ -2651,7 +2651,7 @@ return [
         'geoname' => 3871336,
     ],
     4687 => [
-        'name' => "Addis Abeba",
+        'name' => 'Addis Abeba',
         'lat' => 9.02497,
         'lon' => 38.74689,
         'capital' => true,
@@ -2659,7 +2659,7 @@ return [
         'geoname' => 344979,
     ],
     4688 => [
-        'name' => "Kampala",
+        'name' => 'Kampala',
         'lat' => 0.31628,
         'lon' => 32.58219,
         'capital' => true,
@@ -2667,7 +2667,7 @@ return [
         'geoname' => 232422,
     ],
     4689 => [
-        'name' => "Johannesburg",
+        'name' => 'Johannesburg',
         'lat' => -26.20227,
         'lon' => 28.04363,
         'capital' => false,
@@ -2675,7 +2675,7 @@ return [
         'geoname' => 993800,
     ],
     4690 => [
-        'name' => "Kaplinn",
+        'name' => 'Kaplinn',
         'lat' => -33.92584,
         'lon' => 18.42322,
         'capital' => false,
@@ -2683,7 +2683,7 @@ return [
         'geoname' => 3369157,
     ],
     4691 => [
-        'name' => "Windhoek",
+        'name' => 'Windhoek',
         'lat' => -22.55941,
         'lon' => 17.08323,
         'capital' => true,
@@ -2691,7 +2691,7 @@ return [
         'geoname' => 3352136,
     ],
     4692 => [
-        'name' => "Lusaka",
+        'name' => 'Lusaka',
         'lat' => -15.40669,
         'lon' => 28.28713,
         'capital' => true,
@@ -2699,7 +2699,7 @@ return [
         'geoname' => 909137,
     ],
     4693 => [
-        'name' => "Kigali",
+        'name' => 'Kigali',
         'lat' => -1.94995,
         'lon' => 30.05885,
         'capital' => true,
@@ -2707,7 +2707,7 @@ return [
         'geoname' => 202061,
     ],
     4694 => [
-        'name' => "Accra",
+        'name' => 'Accra',
         'lat' => 5.55602,
         'lon' => -0.1969,
         'capital' => true,
@@ -2715,7 +2715,7 @@ return [
         'geoname' => 2306104,
     ],
     4695 => [
-        'name' => "Beirut",
+        'name' => 'Beirut',
         'lat' => 33.89332,
         'lon' => 35.50157,
         'capital' => true,
@@ -2723,7 +2723,7 @@ return [
         'geoname' => 276781,
     ],
     4696 => [
-        'name' => "Amman",
+        'name' => '‘Ammān',
         'lat' => 31.95522,
         'lon' => 35.94503,
         'capital' => true,
@@ -2731,7 +2731,7 @@ return [
         'geoname' => 250441,
     ],
     4697 => [
-        'name' => "Tel Aviv",
+        'name' => 'Tel Aviv',
         'lat' => 32.08088,
         'lon' => 34.78057,
         'capital' => false,
@@ -2739,7 +2739,7 @@ return [
         'geoname' => 293397,
     ],
     4698 => [
-        'name' => "Eilat",
+        'name' => 'Eilat',
         'lat' => 29.55805,
         'lon' => 34.94821,
         'capital' => false,
@@ -2747,7 +2747,7 @@ return [
         'geoname' => 295277,
     ],
     4699 => [
-        'name' => "Teheran",
+        'name' => 'Teheran',
         'lat' => 35.69439,
         'lon' => 51.42151,
         'capital' => true,
@@ -2755,7 +2755,7 @@ return [
         'geoname' => 112931,
     ],
     4700 => [
-        'name' => "Dar es Salaam",
+        'name' => 'Dar es Salaam',
         'lat' => -6.82349,
         'lon' => 39.26951,
         'capital' => false,
@@ -2763,7 +2763,7 @@ return [
         'geoname' => 160263,
     ],
     4701 => [
-        'name' => "Douala",
+        'name' => 'Douala',
         'lat' => 4.04827,
         'lon' => 9.70428,
         'capital' => false,
@@ -2771,7 +2771,7 @@ return [
         'geoname' => 2232593,
     ],
     4702 => [
-        'name' => "Yaounde",
+        'name' => 'Yaoundé',
         'lat' => 3.86667,
         'lon' => 11.51667,
         'capital' => true,
@@ -2779,7 +2779,7 @@ return [
         'geoname' => 2220957,
     ],
     4703 => [
-        'name' => "Dakar",
+        'name' => 'Dakar',
         'lat' => 14.6937,
         'lon' => -17.44406,
         'capital' => true,
@@ -2787,7 +2787,7 @@ return [
         'geoname' => 2253354,
     ],
     4704 => [
-        'name' => "Maputo",
+        'name' => 'Maputo',
         'lat' => -25.96553,
         'lon' => 32.58322,
         'capital' => true,
@@ -2795,7 +2795,7 @@ return [
         'geoname' => 1040652,
     ],
     4705 => [
-        'name' => "Kinshasa",
+        'name' => 'Kinshasa',
         'lat' => -4.32758,
         'lon' => 15.31357,
         'capital' => true,
@@ -2803,7 +2803,7 @@ return [
         'geoname' => 2314302,
     ],
     4706 => [
-        'name' => "Harare",
+        'name' => 'Harare',
         'lat' => -17.82772,
         'lon' => 31.05337,
         'capital' => true,
@@ -2811,7 +2811,7 @@ return [
         'geoname' => 890299,
     ],
     4707 => [
-        'name' => "Banjul",
+        'name' => 'Banjul',
         'lat' => 13.45274,
         'lon' => -16.57803,
         'capital' => true,
@@ -2819,7 +2819,7 @@ return [
         'geoname' => 2413876,
     ],
     4708 => [
-        'name' => "Antananarivo",
+        'name' => 'Antananarivo',
         'lat' => -18.91368,
         'lon' => 47.53613,
         'capital' => true,
@@ -2827,7 +2827,7 @@ return [
         'geoname' => 1070940,
     ],
     4709 => [
-        'name' => "Nosy Be",
+        'name' => 'Be saar',
         'lat' => -13.31421,
         'lon' => 48.25899,
         'capital' => false,
@@ -2835,7 +2835,7 @@ return [
         'geoname' => 1058090,
     ],
     4710 => [
-        'name' => "Gaborone",
+        'name' => 'Gaborone',
         'lat' => -24.65451,
         'lon' => 25.90859,
         'capital' => true,
@@ -2843,7 +2843,7 @@ return [
         'geoname' => 933773,
     ],
     4711 => [
-        'name' => "Tunis",
+        'name' => 'Tunis',
         'lat' => 36.81897,
         'lon' => 10.16579,
         'capital' => true,
@@ -2851,7 +2851,7 @@ return [
         'geoname' => 2464470,
     ],
     4712 => [
-        'name' => "Abuja",
+        'name' => 'Abuja',
         'lat' => 9.05785,
         'lon' => 7.49508,
         'capital' => true,
@@ -2859,7 +2859,7 @@ return [
         'geoname' => 2352778,
     ],
     4713 => [
-        'name' => "Lagos",
+        'name' => 'Lagos',
         'lat' => 6.45407,
         'lon' => 3.39467,
         'capital' => false,
@@ -2867,7 +2867,7 @@ return [
         'geoname' => 2332459,
     ],
     4714 => [
-        'name' => "N'Djamena",
+        'name' => 'N’Djamena',
         'lat' => 12.10672,
         'lon' => 15.0444,
         'capital' => true,
@@ -2875,7 +2875,7 @@ return [
         'geoname' => 2427123,
     ],
     4715 => [
-        'name' => "Asmara",
+        'name' => 'Asmara',
         'lat' => 15.33805,
         'lon' => 38.93184,
         'capital' => true,
@@ -2883,7 +2883,7 @@ return [
         'geoname' => 343300,
     ],
     4717 => [
-        'name' => "Hartum",
+        'name' => 'Hartum',
         'lat' => 15.55177,
         'lon' => 32.53241,
         'capital' => true,
@@ -2891,7 +2891,7 @@ return [
         'geoname' => 379252,
     ],
     4718 => [
-        'name' => "Luanda",
+        'name' => 'Luanda',
         'lat' => -8.83682,
         'lon' => 13.23432,
         'capital' => true,
@@ -2899,7 +2899,7 @@ return [
         'geoname' => 2240449,
     ],
     4719 => [
-        'name' => "Alžiir",
+        'name' => 'Algiers',
         'lat' => 36.73225,
         'lon' => 3.08746,
         'capital' => true,
@@ -2907,7 +2907,7 @@ return [
         'geoname' => 2507480,
     ],
     4720 => [
-        'name' => "Kaliningrad",
+        'name' => 'Kaliningrad',
         'lat' => 54.70649,
         'lon' => 20.51095,
         'capital' => false,
@@ -2915,7 +2915,7 @@ return [
         'geoname' => 554234,
     ],
     4721 => [
-        'name' => "Hainan",
+        'name' => 'Hainan Dao',
         'lat' => 19.2,
         'lon' => 109.7,
         'capital' => false,
@@ -2923,7 +2923,7 @@ return [
         'geoname' => 1809055,
     ],
     4722 => [
-        'name' => "Paphos",
+        'name' => 'Paphos',
         'lat' => 34.77679,
         'lon' => 32.42451,
         'capital' => false,
@@ -2931,7 +2931,7 @@ return [
         'geoname' => 146214,
     ],
     4723 => [
-        'name' => "Bari",
+        'name' => 'Bari',
         'lat' => 41.12066,
         'lon' => 16.86982,
         'capital' => false,
@@ -2939,7 +2939,7 @@ return [
         'geoname' => 3182351,
     ],
     4724 => [
-        'name' => "Krabi",
+        'name' => 'Krabi',
         'lat' => 8.07257,
         'lon' => 98.91052,
         'capital' => false,
@@ -2947,7 +2947,7 @@ return [
         'geoname' => 1152633,
     ],
     4725 => [
-        'name' => "Menorca",
+        'name' => 'Menorca Airport',
         'lat' => 39.8626,
         'lon' => 4.21865,
         'capital' => false,
@@ -2955,7 +2955,7 @@ return [
         'geoname' => 6299347,
     ],
     4726 => [
-        'name' => "Bilbao",
+        'name' => 'Bilbao',
         'lat' => 43.26271,
         'lon' => -2.92528,
         'capital' => false,
@@ -2963,7 +2963,7 @@ return [
         'geoname' => 3128026,
     ],
     4727 => [
-        'name' => "Bologna",
+        'name' => 'Bologna',
         'lat' => 44.49381,
         'lon' => 11.33875,
         'capital' => false,
@@ -2971,7 +2971,7 @@ return [
         'geoname' => 3181928,
     ],
     4728 => [
-        'name' => "Burgas",
+        'name' => 'Burgas',
         'lat' => 42.50606,
         'lon' => 27.46781,
         'capital' => false,

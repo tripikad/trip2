@@ -5,7 +5,7 @@ const turf = { point, polygon, intersect }
 var baby = require('babyparse')
 
 var countries = require(__dirname + '/data/countries.json')
-var destinations = require(__dirname + '/data/destinations_data.json')
+var destinations = require(__dirname + '/data/trip_destinations_data.json')
 
 var codes = baby.parse(fs.readFileSync(__dirname + '/data/codes.csv', 'utf8'), {
     header: true
