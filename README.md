@@ -381,4 +381,4 @@ layout('One')->cached(false);
 
 #### Making a layout
 
-At the time of writing there is no helper command to create a layout.
+At the time of writing there is no helper command to create a layout .
